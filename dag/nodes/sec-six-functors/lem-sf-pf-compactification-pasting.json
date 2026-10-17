@@ -2,11 +2,93 @@
  "id": "lem-sf-pf-compactification-pasting",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-pf-coherence",
- "status": "unsplit",
+ "status": "split",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the supplied domains and retain all notation of the statement. Set $T=j_!(K\\otimes JFL)$, $t=\\theta_L^{-1}:HFL\\to F'GL$, $b=\\beta_K:HM\\to j'_!AK$, $c=\\gamma_{j;K,FL}:Q\\to T$, and $c'=\\gamma_{j';AK,F'GL}$. The definition [def-exchange-projection] gives $\\operatorname{PF}^c=R(c)\\pi_{p;M,L}$. All subsequent compositions use right-to-left notation, and functors preserve these compositions. These are abbreviations and an expansion of the given composite, not new comparison assertions.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Formal pasting: expand the compactification projection composite"
+   }
+  },
+  {
+   "text": "Put $s=j'_!(1\\otimes J't)$, so $v=s z_K$. Since the open tensor comparison of [def-exchange-projection] is natural in its ambient tensor variable, its naturality square at $t$ is\n$$s\\gamma_{j';AK,HFL}=c'(1\\otimes t).$$\nPostcompose the assumed open-factor identity by $s$. Substitution of this naturality equation and bifunctoriality of tensor give\n$$vH(c)=c'(1\\otimes t)(b\\otimes1)\\mu_{H;M,FL}=c'(b\\otimes1)d.$$\nHere $(1\\otimes t)(b\\otimes1)=(b\\otimes1)(1\\otimes t)$, with the intermediate objects determined by the displayed sources. This is the two-variable functor law, and the last equality is exactly the definition of $d$.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Formal pasting: open-factor target identification via tensor naturality"
+   }
+  },
+  {
+   "text": "The exchange $e:GR\\to R'H$ is a natural transformation [def-exchange-projection]. Its naturality at the single morphism $c:Q\\to T$ reads\n$$e_T\\,G(R(c))=R'(H(c))e_Q.$$\nExpand $G(\\operatorname{PF}^c)$ using step 1, apply this equality, and use the functor law for $R'$ followed by step 2. The left side in the desired conclusion becomes\n$$R'(v)e_TG(\\operatorname{PF}^c)=R'(c')R'(b\\otimes1)R'(d)e_QG(\\pi_{p;M,L}).$$\nEvery equality here is either the displayed naturality square, preservation of composition, or substitution of the preceding step.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Formal pasting: naturality of proper exchange"
+   }
+  },
+  {
+   "text": "Apply the proper-factor identity assumed in the statement, exactly with $M=j_!K$ and $Q=M\\otimes FL$ already fixed. It replaces the final three factors in step 3 by\n$$R'(d)e_QG(\\pi_{p;M,L})=\\pi_{p';HM,GL}(e_M\\otimes1)\\mu_{G;RM,L}.$$\nConsequently that expression is\n$$R'(c')R'(b\\otimes1)\\pi_{p';HM,GL}(e_M\\otimes1)\\mu_{G;RM,L}.$$\nThis step is substitution of a hypothesis; it neither proves nor assumes any invertibility of $e$ or $\\pi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Formal pasting: substitute the assumed proper-factor identity"
+   }
+  },
+  {
+   "text": "The counit projection in [def-exchange-projection] is natural in its first variable. Apply its naturality square at $b:HM\\to j'_!AK$, holding $GL$ fixed:\n$$R'(b\\otimes1)\\pi_{p';HM,GL}=\\pi_{p';j'_!AK,GL}(R'(b)\\otimes1).$$\nInsert this into step 4. Tensor functoriality gives $(R'(b)\\otimes1)(e_M\\otimes1)=(R'(b)e_M\\otimes1)$. Replacing $b$ and $c'$ by their abbreviations now yields exactly\n$$R'(\\gamma_{j';AK,F'GL})\\pi_{p';j'_!AK,GL}(R'(\\beta_K)e_M\\otimes1)\\mu_{G;RM,L},$$\nwhich is the required right side. No cancellation or inversion of an exchange or projection occurred.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Formal pasting: naturality of the proper projection and conclude"
+   }
+  },
+  {
+   "text": "The preceding calculation is natural wherever the diagram maps intertwine the specified component transformations. To see this directly, for successive arrows $x_i:U_{i-1}\\to U_i$ and their counterparts $\\widetilde x_i$, suppose the comparison components satisfy $u_ix_i=\\widetilde x_i u_{i-1}$. Substituting these equalities successively gives $u_r(x_r\\cdots x_1)=(\\widetilde x_r\\cdots\\widetilde x_1)u_0$. The maps in [def-exchange-projection] are natural transformations and the tensor comparisons are natural in both variables [lem-pur-derived-pullback-tensor-iso]; functoriality and the tensor bifunctor law give this same intertwining equation for every whiskered or tensored factor used above. Apply the displayed substitution to the two composites. This proves the asserted naturality in maps of the supplied diagram data; it is not an existence claim for extra comparison maps.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Formal pasting: naturality in the supplied diagram maps"
+   }
+  },
+  {
+   "text": "For natural compactification comparisons that intertwine the component maps, let $u$ and $w$ be their components at the common source and target of the proved equality, and denote the two paths by $P_1,P_2$. The intertwining just expanded in step 6 identifies the new paths as $wP_1u^{-1}$ and $wP_2u^{-1}$. Since $P_1=P_2$, composing on the left by $w$ and on the right by $u^{-1}$ proves their equality. Only the supplied comparison isomorphisms are inverted. The argument is valid at each coefficient stage in its supplied closed domain, with completed tensors at the integral stage; it uses no finite-level equality detection or further base-change theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Formal pasting: conjugation by intertwining compactification comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph; elementary pasting after the open and proper factor identities, with target identification and comparison naturality written out."
+ },
  "mathlib_match": null,
  "title": "Pasting the open and proper factors for compact-support projection/base change",
  "statement": "Use a six-functor datum [def-sf-datum] and its chosen-compactification maps [def-exchange-projection], at one coefficient stage with all displayed composites defined. Let $f:X\\to Y$ be separated of finite type, $g:Y'\\to Y$, $f=pj$ a compactification, and $h:\\overline X'\\to\\overline X$, $a:X'\\to X$, $p'$, $j'$ the pulled-back diagram. Set $F=Lp^*$, $F'=Lp'^*$, $G=Lg^*$, $H=Lh^*$, $A=La^*$, $J=Lj^*$, $J'=Lj'^*$, $R=Rp_*$, $R'=Rp'_*$. Let $\\theta:F'G\\cong HF$ be the canonical square comparison and $\\sigma:A J\\cong J'H$ the open square comparison. Write $e:GR\\to R'H$ for proper exchange, $\\pi$ for the proper counit projection, $\\beta: Hj_!\\to j'_!A$, $\\gamma:j_!K\\otimes P\\to j_!(K\\otimes JP)$ for the open tensor map, and $\\mu$ for pullback-tensor comparison, with the coherent identifications of [lem-pur-derived-pullback-tensor-iso]. Composition is right to left; all tensors are derived, completed at the integral stage.\n\nFor $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$ in these domains, set $M=j_!K$, $Q=M\\otimes FL$,\n$$d=(1\\otimes\\theta_L^{-1})\\mu_{H;M,FL}:HQ\\to HM\\otimes F'GL,$$\n$$z_K=j'_!\\bigl((1\\otimes\\sigma_{FL})\\mu_{A;K,JFL}\\bigr)\\beta_{K\\otimes JFL},$$\nThe following hypotheses imply the pasted identity below:\n$$z_K H(\\gamma_{j;K,FL})=\\gamma_{j';AK,HFL}(\\beta_K\\otimes1)\\mu_{H;M,FL},$$\n$$R'(d)e_Q G(\\pi_{p;M,L})=\\pi_{p';HM,GL}(e_M\\otimes1)\\mu_{G;RM,L}.$$\nWith target comparison\n$$v=j'_!\\bigl(1\\otimes J'(\\theta_L^{-1})\\bigr)z_K$$\nand $\\operatorname{PF}^c=R(\\gamma_j)\\pi_p$, one has\n$$R'(v)e_{j_!(K\\otimes JFL)}G(\\operatorname{PF}^c)\n=R'(\\gamma_{j';AK,F'GL})\\pi_{p';j'_!AK,GL}(R'(\\beta_K)e_M\\otimes1)\\mu_{G;RM,L}.$$\nThis is an identity of the specified compactification composites conditional on the two factor identities; no invertibility of proper exchange or projection is assumed. It is natural in maps of this diagram and is preserved by conjugation with natural compactification comparisons that intertwine its component maps.",
@@ -21,32 +103,46 @@
  ],
  "mathlib_searches": [
   {
+   "tool": "grep",
+   "query": "projection.*baseChange|projection.*base_change|projection.*pasting|compactification",
+   "results": "Mathlib/Combinatorics/Hindman.lean; Mathlib/NumberTheory/ModularForms/Cusps.lean; Mathlib/Topology/Separation/CompletelyRegular.lean; Mathlib/Topology/Separation/CompletelyRegular.lean; Mathlib/Tactic/Linter/DirectoryDependency.lean; Mathlib/Topology/Maps/Proper/UniversallyClosed.lean; Mathlib/Topology/Compactness/CompactlyGeneratedSpace.lean; Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic functor-square constructions or unrelated compactifications, not this conditional identity with the displayed open/proper maps and target comparisons"
+  },
+  {
    "tool": "leansearch",
    "query": "compactification projection formula base change pasting and refinement comparison compatibility",
    "results": "CategoryTheory.Limits.piComparison_comp_π; CategoryTheory.Limits.piComparison_comp_π_assoc; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.universallyClosed_isStableUnderBaseChange; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; LightProfinite.proj_comp_transitionMap; CompHausLike.pullback.cone_π",
    "date": "2026-10-17",
-   "verdict": "no match: generic composition and pullback identities do not state this typed pasting identity with the two tensor/square target comparisons"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "If open tensor exchange and proper projection exchange squares commute their compactification composite projection exchange square commutes",
-   "results": "Profinite.NobelingProof.GoodProducts.square_commutes; CompHausLike.pullback.condition_assoc; CompHausLike.pullback.condition; Profinite.lift_lifts_assoc; CompHaus.lift_lifts_assoc; LightProfinite.proj_comp_transitionMap'; CompHausLike.pullback.lift_snd_assoc; CompHausLike.pullback.lift_fst_assoc",
-   "date": "2026-10-17",
-   "verdict": "no match: generic composition and pullback identities do not state this typed pasting identity with the two tensor/square target comparisons"
+   "verdict": "no match: these are generic functor-square constructions or unrelated compactifications, not this conditional identity with the displayed open/proper maps and target comparisons"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.NatTrans, CategoryTheory.Functor",
    "results": "CategoryTheory.NatTrans; CategoryTheory.NatTrans.id; CategoryTheory.NatTrans.instInhabited; CategoryTheory.NatTrans.vcomp; CategoryTheory.NatTrans.app; CategoryTheory.NatTrans.ext; CategoryTheory.NatTrans.ext_iff; CategoryTheory.congr_app",
    "date": "2026-10-17",
-   "verdict": "no match: generic composition and pullback identities do not state this typed pasting identity with the two tensor/square target comparisons"
+   "verdict": "no match: these are generic functor-square constructions or unrelated compactifications, not this conditional identity with the displayed open/proper maps and target comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If open tensor exchange and proper projection exchange squares commute their compactification composite projection exchange square commutes",
+   "results": "Profinite.NobelingProof.GoodProducts.square_commutes; CompHausLike.pullback.condition_assoc; CompHausLike.pullback.condition; Profinite.lift_lifts_assoc; CompHaus.lift_lifts_assoc; LightProfinite.proj_comp_transitionMap'; CompHausLike.pullback.lift_snd_assoc; CompHausLike.pullback.lift_fst_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic functor-square constructions or unrelated compactifications, not this conditional identity with the displayed open/proper maps and target comparisons"
   },
   {
    "tool": "grep",
-   "query": "projection.*baseChange|projection.*base_change|projection.*pasting|compactification",
+   "query": "projection.*[Bb]ase[Cc]hange|projection.*base_change|compactification.*projection",
    "results": "No hits",
    "date": "2026-10-17",
-   "verdict": "no match: generic composition and pullback identities do not state this typed pasting identity with the two tensor/square target comparisons"
+   "verdict": "no match: these are generic functor-square constructions or unrelated compactifications, not this conditional identity with the displayed open/proper maps and target comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composing two commuting squares of natural transformations with a tensor bifunctor gives a commuting outside rectangle by naturality and associativity",
+   "results": "CategoryTheory.CatCommSq.hComp; CategoryTheory.CatCommSq.vComp; CategoryTheory.CatCommSq.hComp'; CategoryTheory.CatCommSq.hComp_iso_hom_app; CategoryTheory.CatCommSq.iso_hom_naturality_assoc; CategoryTheory.CatCommSq.vComp'; CategoryTheory.TwoSquare.hCompVCompHComp; CategoryTheory.TwoSquare.hComp_app",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic functor-square constructions or unrelated compactifications, not this conditional identity with the displayed open/proper maps and target comparisons"
   }
  ],
  "created": {
@@ -63,5 +159,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-pf-compactification-pasting",
+  "worker": "stage1",
+  "summary": "Expanded the conditional compactification identity into seven elementary substitutions and naturality calculations; retained the statement and supplied coefficient domains. No new nodes: the factor identities are hypotheses, not unproved lemmas. Checked exact Lean attachment candidates and both target comparisons.",
+  "blueprint": "Realizes the formal pasting after the open-factor and proper-factor calculations in prop-sf-pf-coherence, base-change paragraph, followed by the stated conditional conjugation argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic tool from sk-def-purity-conv used as a black box in step 6: only its stated naturality in M,N of the canonical pullback-tensor comparison mu, which also types the statement (stmt_dep). No node of the sk-prop-sf-pf-coherence route states this comparison; the parent prop-sf-pf-coherence already has it in its accepted tool_uses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-be1862f6d",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-be1862f6d (reviewer sub-agent of L); spot-checked: I read everything in full: the item, all 7 steps, the cited statements (def-exchange-projection, def-sf-datum, lem-pur-derived-pullback-tensor-iso, and lem-cbc-extension-zero-projection-formula for gamma), the unit sk-prop-sf-pf-coherence, the main-20261015 prop-sf-pf-coherence.proof.md base-change paragraph (lines 18-40) and the parent's step 5, which is the only citer and uses the same notation. Types: I checked by hand the sources and targets of z_K, d and v and of both hypotheses and the conclusion. v gives the correct target identification La^*JFL to J'F'GL (sigma, then J' theta_L^{-1}). The statement is not weakened: the two factor identities are proved in the parent's steps 3 and 4, nothing is assumed invertible, and the higher-stage domain restriction is kept. Proof: I redid steps 2-5 myself. Naturality of gamma_{j'} at t=theta_L^{-1} plus the bifunctor law gives vH(c)=c'(b x 1)d. Naturality of e at c:Q->T, the proper hypothesis and first-variable naturality of pi_{p'} at b then give exactly the right side. Steps 6 and 7 (composites of intertwined arrows; conjugating an equality) are elementary. Minor points I accept: step 1 says the definition gives PF^c=R(gamma_j)pi_p, but def-exchange-projection's gamma also includes Lj^*Lp^*=Lf^*; the item itself fixes the bare-gamma convention, so this is harmless. Naturality of gamma in a general second variable is part of the canonical open tensor map (stated outright at the higher stages). Edge cases checked: g=id, K=0 or L=0, j=id, non-invertible e and pi. No new nodes. No duplicates: I checked lem-cbc-proper-open-interchange-coherence and lem-fix-projection-compactification-comparison. FIX: step 6 cites lem-pur-derived-pullback-tensor-iso, which belongs to unit sk-def-purity-conv; that unit is not in the transitive route of sk-prop-sf-pf-coherence, and the worker did not declare it. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors/lem-sf-pf-compactification-pasting.json; nothing else changed. Accepted tool_use: lem-pur-derived-pullback-tensor-iso (generic naturality of the pullback-tensor comparison, already accepted on the parent).; 1 file(s) fixed by the reviewer"
  }
 }

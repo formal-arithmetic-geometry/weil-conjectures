@@ -1,0 +1,80 @@
+{
+ "id": "lem-coef-rational-scalar-transpose-compatibility",
+ "kind": "statement",
+ "title": "Scalar extension transports pairing transposes and retract formulas",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, a separated finite-type $k$-scheme $X$ [def-weil-proper-morphism, def-weil-finite-type-morphism], and finite extensions $E\\subset F$ of $\\mathbf Q_\\ell$ inside a fixed algebraic closure. Use the raw rational constructible categories $\\mathcal C_E=D^b_c(X,E)$ and $\\mathcal C_F=D^b_c(X,F)$ [def-weil-rationalization-karoubi], with coefficient-passage tensor and internal Hom [def-weil-derived-pullback-tensor-hom]. Write $D_E=R\\mathcal Hom_E(-,\\omega_{X,E})$ and $D_F=R\\mathcal Hom_F(-,\\omega_{X,F})$ [thm-coef-rational-verdier]. Let $T=-\\otimes_E F$, let $c_{A,B}:TA\\otimes_FTB\\xrightarrow{\\sim}T(A\\otimes_E B)$ be its tensor comparison, and let $u:T\\omega_{X,E}\\xrightarrow{\\sim}\\omega_{X,F}$ and $\\beta_A:T(D_EA)\\xrightarrow{\\sim}D_F(TA)$ be the natural evaluation-compatible comparisons obtained by rationalizing [lem-coef-integral-finite-extension, lem-pur-integral-operations-scalar-extension]. For any pairing $b:K\\otimes_E L\\to\\omega_{X,E}$ with transposes $a:K\\to D_E L$ and $c:L\\to D_E K$ under the rational tensor–Hom bijection of [lem-coef-completed-tensor-hom-transpose] (and likewise over $F$), the transposes of $b_F=uT(b)c_{K,L}$ are exactly $a_F=\\beta_L T(a)$ and $c_F=\\beta_K T(c)$. If $i:P\\to K$, $p:K\\to P$, $j:Q\\to L$, $q:L\\to Q$ satisfy $pi=1_P$ and $qj=1_Q$, then\n$$\\beta_QT(D_E(j)ai)=D_F(Tj)a_F(Ti).$$\nIf $a$ is invertible, the associated candidate inverse formula is transported by\n$$T(pa^{-1}D_E(q))\\beta_Q^{-1}=T(p)T(a^{-1})\\beta_L^{-1}D_F(Tq).$$\nThe same assertions hold for $c$ with $(K,P,i,p)$ and $(L,Q,j,q)$ interchanged. These are identities of the specified maps; no invertibility of the restricted transpose is assumed or asserted.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-retract-evaluation.md",
+  "place": "Proof, paragraph 2: finite scalar-extension comparison and its effect on every displayed map"
+ },
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-coef-rational-verdier",
+  "lem-coef-integral-finite-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-coef-completed-tensor-hom-transpose"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor with evaluation compatible natural comparison between duality functors transports the transpose of a pairing and commutes with restriction to split retracts",
+   "results": "Eight hits: CategoryTheory.coev_expComparison, frobeniusMorphism_mate, tensorRightHomEquiv, tensorLeftHomEquiv, tensorRightHomEquiv_whiskerLeft_comp_evaluation, leftAdjointMate_comp_evaluation, ExactPairing.coevaluation_evaluation'', and rightAdjointMate_comp_evaluation. Read Closed/Functor.lean lines 42–105: the exponential comparison is for cartesian monoidal categories, not the coefficient tensor category. Rigid tensor-Hom equivalences likewise do not state rational coefficient transport.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Functor",
+   "results": "12 hits including CategoryTheory.MonoidalClosed.internalHom and ofEquiv; no declaration states the scalar-extension transpose assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison_ev|curry_natural_right|ev_naturality",
+   "results": "15 hits in Mathlib/CategoryTheory/Monoidal/Closed; generic evaluation and curry naturality only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal scalar extension functor commuting with duality evaluation transports the transpose of a pairing and its retract inverse formulas",
+   "results": "Eight rigid tensor-Hom equivalence hits; none states transport through a rational coefficient comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural internal Hom comparison commuting with evaluation carries adjoints of bilinear pairings to adjoints after a monoidal functor",
+   "results": "Eight hits including CategoryTheory.expComparison_ev and expComparison. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean lines 42–105: both categories must be cartesian monoidal. The other hits are generic curry/evaluation naturality, not the specified rational pairing and comparison identities.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-rational-retract-evaluation",
+  "date": "2026-10-17",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-rational-retract-evaluation",
+   "place": "Proof, paragraph 2: “The evaluation compatibility ... its first adjoint is ...”; the naturality equations carry the restricted transpose and inverse formulas through scalar extension",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

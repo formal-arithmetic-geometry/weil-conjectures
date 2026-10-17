@@ -1,9 +1,108 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Fix $j$. Define a simplicial set $T(j)$ [def-weil-pbc-simplicial-set] whose $q$-simplices are strings $i_0\\to\\cdots\\to i_q\\to j$. For $f:[m]\\to[q]$, retain vertices $i_{f(0)},\\ldots,i_{f(m)}$, use the composite along the original string between successive retained vertices, and use the composite from $i_{f(m)}$ to $j$ as final arrow. An empty composite is an identity. Associativity and the identity laws show $T(f)T(g)=T(gf)$ for composable ordinal maps, and $T(1)=1$: both sides use precisely the same consecutive composites. For a surjection $f$, this is exactly the chain insertion in the statement, and $f(0)=0$, so it preserves the first vertex and its label object. All sets of strings are small because $I$ is small.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  },
+  {
+   "text": "A chain of $T(j)_q$ is degenerate exactly when one of its $q$ internal arrows is an identity. Indeed, if the arrow at $k<q$ is an identity, delete the repeated vertex and this identity to obtain a $(q-1)$-chain whose image under the surjection repeating $k$ is the original chain. Conversely, if $x=T(f)y$ for $f:[q]\\to[m]$ with $m<q$, then $f$ is not injective. Monotonicity gives adjacent $k,k+1$ with $f(k)=f(k+1)$, and the corresponding arrow in $T(f)y$ is an empty composite, hence an identity. These are exactly the definition's degenerate simplices [def-weil-pbc-simplicial-set]. The final arrow to $j$ is never an internal arrow and is not tested.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], each $x\\in T(j)_q$ has a unique normal form $x=T(\\tau)z$ with $\\tau:[q]\\twoheadrightarrow[r]$ and $z$ nondegenerate. Step 2 shows that $z$ has no identity internal arrows. A surjection preserves the first vertex, so $x$ and $z$ have the same first vertex. If $x$ is degenerate, then $r<q$: otherwise $r=q$, the monotone surjection is the identity, and $x=z$ would be nondegenerate. Conversely $r<q$ makes $x$ degenerate by definition. In particular, for every degenerate $n$-chain its normal-form surjection is an object of $D_n$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  },
+  {
+   "text": "Put $B_n(j)=\\coprod_{x\\in T(j)_n\\text{ degenerate}}V(i_0(x))$, which exists by the assumed small coproducts. Write $e_y$ for the injection labelled by a chain $y$ into the relevant $S_aV(j)$, and $b_x$ for the injection into $B_n(j)$. For each $\\theta:[n]\\twoheadrightarrow[a]$ with $a<n$, define $k_\\theta:S_aV(j)\\to B_n(j)$ by $k_\\theta e_y=b_{T(\\theta)y}$; the source objects agree since $\\theta(0)=0$. For an arrow $\\theta\\to\\theta'$ represented by $\\rho$ with $\\theta=\\rho\\theta'$, we have $T(\\theta')T(\\rho)y=T(\\theta)y$. Thus $k_{\\theta'}S(\\rho)=k_\\theta$, tested on each coproduct injection. This is a cocone [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  },
+  {
+   "text": "Take any cocone $(M,(c_\\theta))$. For each degenerate $x\\in T(j)_n$ with normal form $(r,\\tau,z)$ from step 3, prescribe $h b_x=c_\\tau e_z$, a map from the same object $V(i_0(x))$ to $M$. The coproduct property gives $h:B_n(j)\\to M$. To check $h k_\\theta=c_\\theta$, take any $a$-chain $y$ and use [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to write $y=T(\\rho)z$ with $\\rho:[a]\\twoheadrightarrow[r]$ and $z$ nondegenerate. Then $T(\\theta)y=T(\\rho\\theta)z$ is its unique normal form. Put $\\tau=\\rho\\theta$; since $r\\leq a<n$, $\\tau\\in D_n$, and $\\rho$ represents an arrow $\\tau\\to\\theta$. The cocone equation [def-weil-pbc-category-colimit] gives\n$$h k_\\theta e_y=c_\\tau e_z=c_\\theta S(\\rho)e_z=c_\\theta e_y.$$\nEvery equality is an equality of morphisms out of $V(i_0(y))$; no element or image of an object of $\\mathcal M$ is used.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  },
+  {
+   "text": "If $h'$ is another factorization, every degenerate $x$ has the normal form $(\\tau,z)$ of step 3, and $b_x=k_\\tau e_z$. Therefore $h'b_x=c_\\tau e_z=hb_x$, and the coproduct property implies $h'=h$. Thus $(B_n(j),(k_\\theta))$ is a colimit [def-weil-pbc-category-colimit]. Define $u:B_n(j)\\to S_nV(j)$ by $ub_x=e_x$. Then $u k_\\theta$ is the stipulated insertion map, on each injection $e_y$. Colimit uniqueness identifies any chosen $L_nS(j)$ canonically with $B_n(j)$ and its canonical map with $u$. This proves existence using only small coproducts, rather than assuming arbitrary colimits in $\\mathcal M$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  },
+  {
+   "text": "Partition $T(j)_n$ into its degenerate and nondegenerate chains, characterized in step 2. The maps from $B_n(j)$ and $N_nV(j)$ to $S_nV(j)$ are given by $b_x\\mapsto e_x$ and the corresponding injections for nondegenerate $x$. In the other direction, send $e_x$ to its injection into the appropriate one of these two coproducts, followed by its binary coproduct injection. Both composites are identities by their equations on every injection. This gives $S_nV(j)\\cong B_n(j)\\amalg N_nV(j)$ and then the asserted decomposition using step 6. For $n=0$ there is no proper surjection and no internal arrow, so $B_0(j)$ is the empty coproduct. Its unique map to each object proves it initial, exactly the empty-diagram colimit of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  },
+  {
+   "text": "For $v:j\\to j'$, postcompose only the final arrow of each chain with $v$, retaining every internal arrow and the label object. For a natural transformation $\\eta:V\\to W$, retain the chain and use $\\eta_{i_0}$ on its label. These operations preserve degenerate and nondegenerate indexing subsets and commute with all insertion maps: after each injection, both orders have the same chain and the same label morphism. They consequently define maps of the latching diagrams, of $B_n$ and $N_n$, and of the canonical cocones. The map on latching colimits is the unique one with these structure-map equations [def-weil-pbc-category-colimit], so the identification in step 6 commutes with both operations. The decomposition maps of step 7 also commute, checked on each injection. Identity and composition equations hold on injections too. This proves both requested naturalities, including $n=0$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion to labelled chains and the colimit universal property of Tag 002F, categories.tex, definition-colimit."
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -59,6 +158,48 @@
    "results": "{\"t\": \"2026-10-17T09:20:48Z\", \"tool\": \"leansearch\", \"query\": \"Nondegenerate chain decomposition of the simplicial bar construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.nondegComplex\", \"SimplicialObject.Split.nondegComplexFunctor\", \"SimplicialObject.Split.nondegComplexFunctor_obj\", \"SSet.nonDegenerate\", \"SSet.N\", \"SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁\", \"SSet.N.recOn\", \"SSet.mem_degenerate_iff_notMem_nonDegenerate\"], \"digest\": \"51117a73384d052c\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, especially Splitting and its cofan, and the Dold-Kan candidates. These assume a splitting or concern additive chain complexes; they do not construct the latching colimit of this arbitrary coproduct-valued forward-chain bar."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The latching colimit of the simplicial replacement indexed by category chains is the coproduct over chains containing an identity arrow",
+   "results": "{\"t\": \"2026-10-17T12:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"The latching colimit of the simplicial replacement indexed by category chains is the coproduct over chains containing an identity arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimits\", \"SimplicialObject.Splitting.isColimit'\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"SimplicialObject.Splitting.isColimit\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"CategoryTheory.CosimplicialObject.cechConerve\", \"SSet.horn.isColimit\"], \"digest\": \"f2a1ef98d9c46e5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:212-233 assumes the splitting/cofan colimit as data. It does not construct the proper-surjection latching colimit for labelled category chains. Dold-Kan hits require a preadditive category and a chain complex; the other hits give degreewise colimits, horns, or projections of already supplied splittings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject.Splitting\"",
+   "results": "{\"t\": \"2026-10-17T12:03:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject.Splitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Splitting.IndexSet\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.id\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.EqId\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.instFintype\", \"CategoryTheory.SimplicialObject.Splitting.IndexSet.instInhabited\", \"CategoryTheory.SimplicialObject.Splitting\", \"CategoryTheory.SimplicialObject.Splitting.summand\", \"CategoryTheory.SimplicialObject.Splitting.N\"], \"digest\": \"611011639f9a6857\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:212-233 assumes the splitting/cofan colimit as data. It does not construct the proper-surjection latching colimit for labelled category chains. Dold-Kan hits require a preadditive category and a chain complex; the other hits give degreewise colimits, horns, or projections of already supplied splittings."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|Latching",
+   "results": "{\"t\": \"2026-10-17T12:03:44Z\", \"tool\": \"grep\", \"query\": \"latching|Latching\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:212-233 assumes the splitting/cofan colimit as data. It does not construct the proper-surjection latching colimit for labelled category chains. Dold-Kan hits require a preadditive category and a chain complex; the other hits give degreewise colimits, horns, or projections of already supplied splittings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Latching object of a split simplicial object is the coproduct of its degenerate summands",
+   "results": "{\"t\": \"2026-10-17T12:03:44Z\", \"tool\": \"leansearch\", \"query\": \"Latching object of a split simplicial object is the coproduct of its degenerate summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.mk.inj\", \"SimplicialObject.Split.mk'_X\", \"SimplicialObject.Split.nondegComplexFunctor_obj\", \"SimplicialObject.Split.mk'_s\", \"SimplicialObject.Split.mk\", \"SimplicialObject.Splitting.cofan'\", \"SimplicialObject.Splitting.nondegComplex_X\", \"SimplicialObject.Splitting.σ_comp_πSummand_id_eq_zero_assoc\"], \"digest\": \"50dec39230b98130\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:212-233 assumes the splitting/cofan colimit as data. It does not construct the proper-surjection latching colimit for labelled category chains. Dold-Kan hits require a preadditive category and a chain complex; the other hits give degreewise colimits, horns, or projections of already supplied splittings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial replacement with arbitrary category valued coproducts the colimit over proper degeneracy surjections is the sum of degenerate category chains",
+   "results": "{\"t\": \"2026-10-17T12:05:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial replacement with arbitrary category valued coproducts the colimit over proper degeneracy surjections is the sum of degenerate category chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"SimplicialObject.Splitting.isColimit'\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\", \"SimplicialObject.Splitting.isColimit\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"CategoryTheory.SimplicialObject.instHasColimits\"], \"digest\": \"485efb904b0574d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:212-233 assumes the splitting/cofan colimit as data. It does not construct the proper-surjection latching colimit for labelled category chains. Dold-Kan hits require a preadditive category and a chain complex; the other hits give degreewise colimits, horns, or projections of already supplied splittings."
+  },
+  {
+   "tool": "grep",
+   "query": "structure Splitting|def isColimit|latching|Latching",
+   "results": "{\"t\": \"2026-10-17T12:06:19Z\", \"tool\": \"grep\", \"query\": \"structure Splitting|def isColimit|latching|Latching\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\"], \"digest\": \"541dbe01646a9db8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:212-233 assumes the splitting/cofan colimit as data. It does not construct the proper-surjection latching colimit for labelled category chains. Dold-Kan hits require a preadditive category and a chain complex; the other hits give degreewise colimits, horns, or projections of already supplied splittings."
   }
  ],
  "blueprint": {
@@ -71,5 +212,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-bar-latching-decomposition",
+  "worker": "stage1",
+  "summary": "Q42: statement unchanged. Proved the arbitrary-category latching formula by the universal property of the coproduct of degenerate chains. Reused the existing Mathlib unique-nondegenerate-decomposition leaf; no new nodes. Checked label preservation, orientation, naturality, degree zero and overlap cases.",
+  "blueprint": "The historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K, middle finite-level mapping-complex adjunction; this split supplies the latching calculation called by steps 2 and 4 of lem-coef-simplicial-bar-projective-resolution."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-ded3cc886",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-ded3cc886 (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, 8 steps, no new nodes. I checked all three cited statements: def-weil-pbc-simplicial-set, the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition (Degenerate.lean, lines 114/217/225/233 confirmed) and def-weil-pbc-category-colimit. I read Stacks simplicial.tex lemma-splitting-simplicial-sets (017R) with its proof and categories.tex definition-colimit (002F), and both tags match the tags file. D_n has the standard Reedy latching orientation, and the cocone equation S(theta')S(rho)=S(theta) holds. Step 5's overlap argument is correct for chains that are already degenerate: the normal form of T(theta)y is T(rho theta)z, and rho is an arrow tau->theta. Uniqueness is tested on coproduct injections and never assumes they are monic. I tested n=0, I=* with n=2, the case of one arrow a->b, and mutually inverse arrows; all agree with the formulas. Off-unit citations are only definitions and a Mathlib leaf, so no tool_uses are needed. lem-coef-simplicial-latching-degenerate-subset is only the set-valued special case, so the item is not a duplicate. No cycle, no SGA citation, TeX and proof_deps are correct, and the blueprint fields are present. The parent's steps 2 and 4 use exactly what the item states. No fixes."
  }
 }

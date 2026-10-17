@@ -14,9 +14,93 @@
   "def-pc-module-pullback",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an open cover $(U_i)$ of $T$ on which $\\mathcal I_D=f_i\\mathcal O_{U_i}$ with $f_i$ a non-zero-divisor, using [def-nagata-effective-cartier-ideal]. Multiplication by $f_i$ identifies $\\mathcal O_{U_i}$ with $\\mathcal I_D|_{U_i}$: its inverse sends $a f_i$ to $a$, uniquely since $f_i$ is regular. Write $e_i$ for the dual basis, so $e_i(f_i)=1$. By [def-pc-divisor-line-bundle], $\\mathcal O_T(D)|_{U_i}=\\mathcal O_{U_i}e_i$. The canonical section, which is the inclusion $\\mathcal I_D\\hookrightarrow\\mathcal O_T$ viewed in its dual, is $f_i e_i$.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4U, lemma-pullback-effective-Cartier-divisors (proof omitted); explicit local-equation proof using definition-invertible-sheaf-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "Put $V_i=h^{-1}U_i$ and $g_i=h^\\sharp(f_i)$. The tensor formula of [def-pc-module-pullback] and the structure-sheaf identification of [lem-weil-pbc-module-pullback-structure-sheaf] give bases $1\\otimes f_i$ of $h^*\\mathcal I_D|_{V_i}$ and $E_i=1\\otimes e_i$ of $h^*\\mathcal O_T(D)|_{V_i}$. Explicitly, on a trivializing open the coefficient isomorphism is $b\\otimes a\\mapsto b h^\\sharp(a)$, with inverse $b\\mapsto b\\otimes1$; the tensor balancing relation proves they are inverses. The pulled-back ideal inclusion sends $1\\otimes f_i$ to $g_i$. Apply [lem-pc-closed-subscheme-base-change-ideal-image] to $D\\hookrightarrow T$ and $h$. It identifies $\\mathcal I_{D'}|_{V_i}$ with the image of this map, hence with $g_i\\mathcal O_{V_i}$. This identifies the actual ideal of the scheme-theoretic fibre product, without assuming $h$ flat.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-pc-closed-subscheme-base-change-ideal-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4U, lemma-pullback-effective-Cartier-divisors (proof omitted); explicit local-equation proof using definition-invertible-sheaf-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "The Cartier hypothesis on $D'$ ensures that $g_i$ is a free generator of its ideal, not merely a generator with a possible annihilator. Indeed refine $V_i$ by opens on which $\\mathcal I_{D'}=(a)$ with $a$ regular. Since $(g_i)=(a)$, locally write $g_i=u a$ and $a=v g_i$. Then $(1-vu)a=0$, so $vu=1$. Thus $u$ is a unit and $g_i$ is regular. Multiplication by $g_i$ identifies $\\mathcal O$ with $\\mathcal I_{D'}$ on these opens, and these coefficient inverses agree wherever defined because their composites with the ideal inclusion do. Consequently $g_i$ is a basis on $V_i$ itself. Its dual $e'_i$ with $e'_i(g_i)=1$ is a basis of $\\mathcal O_{T'}(D')|_{V_i}$, and the canonical section is $g_i e'_i$. This uses only the local-generator definition [def-nagata-effective-cartier-ideal] and the dual definition [def-pc-divisor-line-bundle].",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4U, lemma-pullback-effective-Cartier-divisors (proof omitted); explicit local-equation proof using definition-invertible-sheaf-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "Define an isomorphism on $V_i$ by $\\theta_i(b E_i)=b e'_i$; its inverse sends $b e'_i$ to $b E_i$. Check overlaps explicitly. On $U_i\\cap U_j$ the two ideal bases satisfy $f_i=u_{ij}f_j$ for a unique unit $u_{ij}$: write each basis in the other and cancel the regular generator to see the two coefficients multiply to $1$. Their dual bases satisfy $e_i=u_{ij}^{-1}e_j$. After pullback $E_i=h^\\sharp(u_{ij})^{-1}E_j$ and $g_i=h^\\sharp(u_{ij})g_j$, so $e'_i=h^\\sharp(u_{ij})^{-1}e'_j$. Therefore $\\theta_i$ and $\\theta_j$ agree on the basis $E_i$ of their common restriction, and their inverses agree as well. These are direct changes of basis in the modules defined by [def-pc-divisor-line-bundle, def-pc-module-pullback].",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4U, lemma-pullback-effective-Cartier-divisors (proof omitted); explicit local-equation proof using definition-invertible-sheaf-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "The opens $V_i$ cover $T'$. Apply clause (1) of [lem-weil-pbc-glue-sheaves-of-modules] to the two global $\\mathcal O_{T'}$-modules and the compatible maps $\\theta_i$, and again to their inverses. This gives global maps $\\theta$ and $\\psi$. Their composites restrict to the identity on every $V_i$, so the uniqueness clause of the same lemma gives $\\psi\\theta=1$ and $\\theta\\psi=1$. Thus $\\theta:h^*\\mathcal O_T(D)\\xrightarrow{\\sim}\\mathcal O_{T'}(D')$. For any other choice of local equations or any refinement, the overlap calculation of step 4 applies to the old and new bases on their common refinement. Hence the glued isomorphism is independent of these choices, by the same uniqueness clause. This proves canonicity, rather than merely existence of some isomorphism.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 04TN, lemma-glue-maps; module form and uniqueness as in lem-weil-pbc-glue-sheaves-of-modules"
+   }
+  },
+  {
+   "text": "On $V_i$ the pullback of the canonical section $f_i e_i$ is $g_i E_i$ by the tensor balancing relation in [def-pc-module-pullback]. The defining formula for $\\theta_i$ sends it to $g_i e'_i$, exactly the canonical section of $D'$ computed in step 3 using [def-pc-divisor-line-bundle]. Equality on this covering implies equality of the global sections, since these modules are sheaves. On $U_i\\setminus D$ the function $f_i$ is a unit, and its pullback $g_i$ is a unit on $V_i\\setminus D'$: the closed subscheme on $V_i$ has ideal $(g_i)$ by step 2, so this complement is the locus where $g_i$ is invertible. Thus both canonical sections are bases there. Their preservation says explicitly that the trivializations $a\\mapsto a\\,1_D$ and $b\\mapsto b\\,1_{D'}$ commute with $\\theta$ and pullback. This proves the final clause, including the empty-divisor and empty-complement cases.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4U, lemma-pullback-effective-Cartier-divisors (proof omitted); explicit local-equation proof using definition-invertible-sheaf-effective-Cartier-divisor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0C4U, lemma-pullback-effective-Cartier-divisors (proof omitted); explicit local-equation proof using definition-invertible-sheaf-effective-Cartier-divisor"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +143,45 @@
    "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; logged at 2026-10-17T08:38:48Z; the successful retry is recorded separately above",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|divisor.*pullback|pullback.*divisor",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of line bundle and canonical section of an effective Cartier divisor",
+   "results": "Returned Bundle.Pullback, VectorBundle.pullback, Scheme.Modules.pullback, IdealSheafData.comapIso, Scheme.Hom.appLE, pullbackRestrictIsoRestrict, canonicallyOverPullback, VectorField.mpullback; none includes the Cartier dual line and canonical section.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"divisor\", \"pullback\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a scheme theoretic pullback of an effective Cartier divisor remains Cartier, its line bundle and canonical section pull back compatibly",
+   "results": "Returned AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst, AlgebraicGeometry.Scheme.IdealSheafData.comap, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.comapIso; these concern closed-subscheme comap or fractional ideals, not the full Cartier line bundle and its canonical section.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a locally principal regular ideal commutes with extension of scalars when its image ideal is again regular, and preserves the inclusion section",
+   "results": "Returned FractionalIdeal.le_dual_inv_aux, FractionalIdeal.coe_dual, FractionalIdeal.dual_inv, FractionalIdeal.dual_eq_dual_mul_dual, FractionalIdeal.mem_dual, FractionalIdeal.dual_inv_le, FractionalIdeal.smul_mem_dual_one, FractionalIdeal.dual_mul_self; these concern closed-subscheme comap or fractional ideals, not the full Cartier line bundle and its canonical section.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-asd-ordinary-supported-kummer",
@@ -82,5 +201,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-supported-kummer-cartier-pullback",
+  "worker": "stage1",
+  "summary": "Expanded the omitted proof of Stacks 0C4U by local ideal and dual bases, proved regularity of the pulled-back equation using the Cartier hypothesis, glued actual maps and their inverses, and checked the canonical section and complement trivialization. Reused existing ideal-image and module-gluing nodes; no new nodes. The project Lean proves only the underlying isomorphism, so it does not attach this full item.",
+  "blueprint": "thm-asd-smooth-tensor, through lem-asd-ordinary-finite-p1-adjunction and lem-asd-ordinary-supported-kummer: the Cartier-pair pullback compatibility supplying the supported diagonal Kummer class. More explicitly the final paragraph of current lem-amb-cartier-kummer-map.proof.md, “All the cone maps and Kummer boundaries commute with pullback of the pair and its trivialized line bundle.”",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Identifies the actual pullback closed-subscheme ideal as the image of the pulled-back ideal inclusion; this is a generic scheme-theoretic tool absent from the compact-support base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Glues maps between the two already defined Zariski modules and their local inverses. This elementary sheaf-theoretic tool realizes the local Cartier calculation and does not replace a unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-a6e706327",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-a6e706327 (reviewer sub-agent of L); spot-checked: I read the item, the statement of every cited node, the citer, the unit record and the sources in full. The statement matches Stacks Tag 0C4U (divisors.tex lemma-pullback-effective-Cartier-divisors, l.2764; proof omitted there), and the canonical section matches definition-invertible-sheaf-effective-Cartier-divisor (l.2659). The morphism h is arbitrary and the only extra condition is that D' is Cartier. The complement-trivialization clause follows from the canonical-section clause. I checked each step. Step 1: s=f e. Step 2: lem-pc-closed-subscheme-base-change-ideal-image needs only a closed immersion and an arbitrary map, and gives I_{D'}=g_i O. Step 3: g=ua and a=vg give vu=1, so g_i is regular; this needs the Cartier hypothesis on D' and fails for k[t]->k. Step 4: e_i=u^{-1}e_j, so the local maps agree on overlaps. Step 5: only clause (1) of the gluing node (glued morphisms and their uniqueness) is used. Step 6: the pullback of the canonical section is sent to the canonical section of D'. I recomputed every calculation. Edge cases checked: D empty, T' empty, and a non-flat map Z[t]->F_p[t]. Duplicate candidates (flat-pullback, divisor-line-bundle-properties, recd-pullback) all assume flatness or a relative divisor, so none is a duplicate. There are no new nodes and no cycle. The blueprint place quote in lem-amb-cartier-kummer-map.proof.md, final paragraph, matches word for word. I accept two tool_uses: lem-pc-closed-subscheme-base-change-ideal-image and lem-weil-pbc-glue-sheaves-of-modules. One remark, not a fault of this delivery: the item's unit binding sk-prop-sf-cbc is maintainer-owned. No fixes were needed."
  }
 }

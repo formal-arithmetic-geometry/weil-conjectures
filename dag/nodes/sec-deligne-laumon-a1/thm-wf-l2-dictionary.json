@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-wf-l2-dictionary",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Fourier-analytic weight of a pure real sheaf equals its weight",
@@ -14,76 +14,173 @@
  },
  "stmt_deps": [
   "def-wf-l2-norm",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-wf-iota-real"
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal T=\\mathcal G\\otimes\\mathcal G$.\nAt every point over every finite extension, the trace of $\\mathcal G$\nis real by [def-wf-iota-real]. Hence the trace of $\\mathcal T$\nis its square, equal to the squared absolute value of that trace.\nThe logarithm of the Frobenius determinant\n[lem-zl-log-det-identity] (applied to each local factor, with\n$T\\mapsto t^{d(x)}$, and transported to $\\mathbf C[[t]]$ by the field\nisomorphism $\\iota$, exactly as in the proof of\n[lem-wf-conjugate-tensor-traces]) and the Euler product\n[cor-rp-euler-product] therefore give\n\n$$\n\\varphi_{\\mathcal G}(t)=L'(t)/L(t),\\qquad\nL(t)=\\frac{\\iota\\det(1-Ft,H_c^1(X,\\mathcal T))}\n{\\iota\\det(1-Ft,H_c^2(X,\\mathcal T))}.\n$$",
+   "text": "Put $X=X_0\\times_{k_0}k$ and $\\mathcal T=\\mathcal G\\otimes\\mathcal G$, with the tensor descent automorphism. The tensor equivalence of [cor-galois-lisse-representations], clause (2), shows that the underlying tensor is lisse and that its stalk is the tensor of the stalks. Here $X$ is connected, Noetherian and separated, and $\\ell$ is invertible, as required by that clause. The tensor action on a stalk is the diagonal action of [def-real-weil-representation-operations]. By [p-linear-spectra], its local eigenvalues at a closed point $x$ are all $\\alpha_i\\alpha_j$, with multiplicity, where the $\\alpha_i$ are those of $\\mathcal G$. By [def-weil-punctual-weights] each product has realized absolute value $q_x^w$, so $\\mathcal T$ is punctually pure of weight $2w$.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "def-real-weil-representation-operations",
+    "p-linear-spectra",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Paragraphs 1 and 3: tensor construction and punctual weight."
+   }
+  },
+  {
+   "text": "Reality in [def-wf-iota-real] says that the realized local eigenvalue multiset of $\\mathcal G$ is its own complex conjugate. Thus $\\mathcal G$ itself may serve as the second sheaf with conjugate local spectra in [lem-wf-conjugate-tensor-traces]; no conjugate coefficient-field functor is needed. Apply that lemma to obtain, for the Euler series $L(t)=L(X_0,\\mathcal T,t)$, the formal identity $\\varphi_{\\mathcal G}L=L'$, where $\\varphi_{\\mathcal G}(t)=\\sum_{m\\geq1}S_m t^{m-1}$ and $S_m=\\|f_{\\mathcal G}\\|_m^2$ are the nonnegative real trace energies of [def-wf-l2-series]. Since $L(0)=1$, this is $\\varphi_{\\mathcal G}=L'/L$ in $\\mathbf C[[t]]$.",
    "uses": [
     "def-wf-iota-real",
-    "lem-zl-log-det-identity",
     "lem-wf-conjugate-tensor-traces",
-    "cor-rp-euler-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Here $\\varphi_{\\mathcal G}$ is the series of\n[def-wf-l2-series].",
-   "uses": [
     "def-wf-l2-series"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Paragraphs 1–2: logarithmic derivative of the Euler series."
+   }
   },
   {
-   "text": "The tensor $\\mathcal T$ is lisse and punctually pure of weight $2w$:\nits local eigenvalues are products of two eigenvalues of weight $w$ ([p-linear-spectra]).\nThe endpoint lemma [lem-a1-middle-extension-endpoints], applied with\n$j$ the identity of $X_0$ (so that $j_*\\mathcal T=\\mathcal T$), shows\nthat $H_c^2(X,\\mathcal T)$ is $\\iota$-pure of weight $2w+2$ in the\nsense of [def-weil-frobenius-module-weights]: its Frobenius\neigenvalues $\\alpha$ have $\\iota$-modulus $q^{w+1}$. Hence every\ndenominator root $\\alpha^{-1}$ of $L$, if there are any, has modulus\n\n$$\nR=q^{-w-1}.\n$$",
+   "text": "Apply [cor-rp-euler-product] to the lisse sheaf $\\mathcal T$ on $X_0$ and transport its polynomial coefficients by $\\iota$. It gives $L=A_0/B_0$, where $A_0(t)=\\iota\\det(1-tF\\mid H_c^1(X,\\mathcal T))$ and $B_0(t)=\\iota\\det(1-tF\\mid H_c^2(X,\\mathcal T))$, both with constant term one. Thus $L$ is rational. The cited corollary already states the two-term cohomological formula, so no additional vanishing assertion is being inferred from a definition.",
    "uses": [
-    "p-linear-spectra",
+    "cor-rp-euler-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Paragraph 1: cohomological rational expression."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-middle-extension-endpoints] with $U_0=C_0=X_0$, $j=\\mathrm{id}$ and $\\mathcal F=\\mathcal T$. This verifies its dense-open and lissity hypotheses and gives purity of $H_c^2(X,\\mathcal T)$ of weight $2w+2$. By [def-weil-frobenius-module-weights], each eigenvalue $\\alpha$ of its Frobenius has $|\\iota\\alpha|=q^{w+1}$. Hence every root of $B_0$ has absolute value $R=q^{-w-1}>0$. This assertion permits $H_c^2=0$ and $B_0=1$ at this stage; existence of a surviving denominator root will be proved below.",
+   "uses": [
     "lem-a1-middle-extension-endpoints",
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Paragraph 3: all possible denominator roots lie on one circle."
+   }
   },
   {
-   "text": "At least one of these roots remains a pole after cancellation.\nIndeed [lem-rp-even-tensor-positivity], applied to\n$\\mathcal G$ with tensor exponent two, says that every local Euler\nfactor of $L$ has nonnegative real Taylor coefficients and constant\nterm one. Thus the coefficients of $L$ dominate those of any one\nlocal factor. Choose a closed point $x$ of the nonempty curve.\nSince $\\mathcal G$ is nonzero lisse, its rank at $x$ is positive,\nand the local factor for $\\mathcal T$ is the reciprocal of a\nnonconstant polynomial with nonzero leading coefficient.\nSuch a reciprocal has infinitely many nonzero Taylor coefficients:\nif it were a polynomial, its product with the denominator would be\none, contradicting degrees. It follows that $L$ cannot be a\npolynomial. As its denominator has all its roots on $|t|=R$,\nits reduced rational expression has a pole on that circle.",
+   "text": "The nonempty affine scheme $X_0$ is quasi-compact and Kolmogorov; [lem-sc-quasi-compact-kolmogorov-closed-point] supplies a closed point $x$. Its degree $d\\geq1$ is finite by [def-weil-closed-point-degree]. Choose a geometric point above $x$. Clause (2) of [cor-galois-lisse-representations], now using that point as base point of the connected scheme $X$, makes the stalk functor an equivalence. A zero stalk would therefore make the underlying sheaf zero, and then its Weil object zero, contrary to the hypothesis. Write $r=\\dim\\mathcal G_{\\bar x}>0$. The tensor stalk has dimension $r^2$ and invertible Frobenius. Its local denominator $P_x(t)=\\iota\\det(1-F_xt^d\\mid\\mathcal T_{\\bar x})$ consequently has degree $dr^2>0$, nonzero leading coefficient and constant term one. Its inverse series cannot be a polynomial: otherwise the polynomial product $P_xP_x^{-1}=1$ would have positive degree.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "def-weil-closed-point-degree",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Paragraph 4: a closed point with a nonzero stalk and a nonpolynomial local factor."
+   }
+  },
+  {
+   "text": "By [lem-rp-even-tensor-positivity], clause (ii) with tensor exponent $2$, every local inverse characteristic polynomial of $\\mathcal T$ has nonnegative real coefficients and constant term one. Substitution $t\\mapsto t^{d(y)}$ preserves both properties. For a fixed degree $n$, the Euler product of step 3 involves only finitely many factors contributing a nonconstant term in degrees at most $n$. In its coefficient of degree $n$, choosing the term from the factor at $x$ and constant terms from all other factors shows $[t^n]L\\geq[t^n]P_x^{-1}\\geq0$. The local inverse of step 5 has infinitely many nonzero coefficients, so $L$ does too. In particular $L$ is not a polynomial. Cancel common factors in $A_0/B_0$ to write $L=A/B$ with $A,B$ coprime. Then $B$ is nonconstant, has a complex root $a$, and $A(a)\\ne0$. Because $B$ divides $B_0$, step 4 gives $|a|=R$; also $A(0)B(0)\\ne0$.",
    "uses": [
     "lem-rp-even-tensor-positivity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Paragraph 4: positivity prevents complete cancellation."
+   }
   },
   {
-   "text": "The logarithmic derivative has a pole at every pole of $L$:\nlocally $L=(t-t_0)^{-a}u$, $a>0$, $u(t_0)\\neq0$, gives\n$L'/L=-a/(t-t_0)+u'/u$.\nConsequently the Taylor radius of $\\varphi_{\\mathcal G}$ is at most\n$R$. On the other hand [lem-wf-l2-upper], applied to the\npunctually pure sheaf, bounds that radius below by $R$.\nIt is therefore exactly $q^{-w-1}$, and\n[def-wf-l2-series], [def-wf-l2-norm], [lem-wf-l2-radius] gives\n$\\|\\mathcal G\\|=w$.",
+   "text": "Let $m\\geq1$ be the multiplicity of $a$ as a root of $B$, and write $B=(t-a)^m b$ with $b(a)\\ne0$. Logarithmic differentiation of the rational identity $L=A/B$ gives\n$$\\varphi_{\\mathcal G}=\\frac{A'}A-\\frac m{t-a}-\\frac{b'}b=\\frac{C}{D},\\qquad C=(t-a)(A'b-Ab')-mAb,\\quad D=(t-a)Ab.$$\nHere $D(0)\\ne0$ since $a\\ne0$, $A(0)\\ne0$ and $B(0)\\ne0$. Moreover $D(a)=0$ and $C(a)=-mA(a)b(a)\\ne0$, since the coefficients have characteristic zero. The identity is also the formal identity $D\\varphi_{\\mathcal G}=C$ at zero, by [def-weil-polynomial-as-power-series]. Apply [lem-wf-rational-series-pole-radius] to these explicitly given polynomials to obtain $r_{\\mathcal G}\\leq |a|=R$. This calculation requires no weight bound on $H_c^1$.",
    "uses": [
+    "def-weil-polynomial-as-power-series",
+    "lem-wf-rational-series-pole-radius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Final paragraph: an explicit uncancelled denominator for the logarithmic derivative, then its radius bound."
+   }
+  },
+  {
+   "text": "Punctual purity of weight $w$ implies mixedness of weights at most $w$ by the one-step filtration $0\\subset\\mathcal G$ in [def-weil-punctual-weights]. Hence [lem-wf-l2-upper] gives $\\|\\mathcal G\\|\\leq w$. By [lem-wf-l2-radius], $r_{\\mathcal G}=q^{-\\|\\mathcal G\\|-1}\\geq q^{-w-1}=R$ since $q>1$. Together with step 7 this gives $r_{\\mathcal G}=R$, a finite positive radius. The same radius identity, or its logarithmic form, now yields $\\|\\mathcal G\\|=-1-\\log_q(R)=w$.",
+   "uses": [
+    "def-weil-punctual-weights",
     "lem-wf-l2-upper",
-    "def-wf-l2-series",
-    "def-wf-l2-norm",
     "lem-wf-l2-radius"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Final paragraph: the upper weight estimate and radius identity give equality."
+   }
   }
  ],
  "proof_deps": [
-  "def-wf-iota-real",
-  "lem-zl-log-det-identity",
-  "lem-wf-conjugate-tensor-traces",
-  "cor-rp-euler-product",
-  "def-wf-l2-series",
+  "cor-galois-lisse-representations",
+  "def-real-weil-representation-operations",
   "p-linear-spectra",
+  "def-weil-punctual-weights",
+  "def-wf-iota-real",
+  "lem-wf-conjugate-tensor-traces",
+  "def-wf-l2-series",
+  "cor-rp-euler-product",
   "lem-a1-middle-extension-endpoints",
   "def-weil-frobenius-module-weights",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "def-weil-closed-point-degree",
   "lem-rp-even-tensor-positivity",
+  "def-weil-polynomial-as-power-series",
+  "lem-wf-rational-series-pole-radius",
   "lem-wf-l2-upper",
-  "def-wf-l2-norm",
-  "lem-wf-l2-radius",
-  "lem-a1-affine-hc0"
+  "lem-wf-l2-radius"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+  "place": "Entire proof; polynomial identity spelling out the final pole calculation."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf L2-weight equality; returned Lie weights, analytic growth and number-field asymptotics concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "l2Weight|traceEnergy|WeilSheaf",
+   "results": "0 hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf L2-weight equality; returned Lie weights, analytic growth and number-field asymptotics concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The growth rate of squared Frobenius traces of a pure real sheaf equals its weight",
+   "results": "8 hits: ExpGrowth.expGrowthSup, LieModule.trace_comp_toEnd_genWeightSpace_eq, qExpansion_coeff_isBigO_of_norm_isBigO, ModularFormClass.qExpansion_isBigO, LieModule.trace_toEnd_genWeightSpace, LieModule.traceForm_genWeightSpace_eq, StrongFEPair.hf_top', Function.hasTemperateGrowth_norm_sq. ",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf L2-weight equality; returned Lie weights, analytic growth and number-field asymptotics concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The L2 trace energy weight of a nonzero pure real lisse Weil sheaf on a smooth affine curve equals its punctual weight",
+   "results": "8 hits: LieModule.traceForm_eq_sum_finrank_nsmul, LieModule.traceForm_eq_sum_finrank_nsmul', LieModule.traceForm_genWeightSpace_eq, LieModule.trace_toEnd_genWeightSpace, NumberField.dedekindZeta_residue, LieModule.traceForm_eq_sum_finrank_nsmul_mul, NumberField.dedekindZeta_residue_def, LieModule.trace_comp_toEnd_genWeightSpace_eq. ",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf L2-weight equality; returned Lie weights, analytic growth and number-field asymptotics concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero pure lisse l-adic sheaf on a curve has trace energy of exponential growth q to the weight plus one",
+   "results": "8 hits: NumberField.Ideal.tendsto_norm_le_div_atTop, NumberField.Ideal.tendsto_norm_le_div_atTop₀, NumberField.Ideal.tendsto_norm_le_and_mk_eq_div_atTop, ArithmeticFunction.vonMangoldt.LSeries_residueClass_lower_bound, NumberField.dedekindZeta_residue, NumberField.dedekindZeta_residue_def, NumberField.dedekindZeta_residue_ne_zero, NumberField.dedekindZeta_residue_pos. ",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil sheaf L2-weight equality; returned Lie weights, analytic growth and number-field asymptotics concern different objects."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -149,5 +246,29 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-wf-l2-dictionary",
+  "worker": "stage1",
+  "summary": "Retained the pure real sheaf statement and the positivity/surviving-pole route. Verified the sorry-containing Lean declaration is no attachment. Added the missing reality statement dependency; used the conjugate-trace lemma directly; verified nonzero stalk and finite closed-point degree; wrote coefficient domination and the explicit logarithmic-derivative numerator and denominator. Isolated only the general analytic polynomial-identity radius obstruction in one statement-only node. Removed redundant proof dependencies.",
+  "blueprint": "Current main-20261015 proof paragraphs 1–2 are steps 1–3; paragraph 3 is steps 1 and 4; paragraph 4 is steps 5–6; final paragraph is steps 7–8. The source unit energy argument remains positivity, a surviving pole, endpoint purity and a growth/radius bound. This item is not the unit key node, so no unit realization record is changed.",
+  "tool_uses": [
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Generic tensor and conservative fibre equivalence on the connected geometric curve establishes tensor lissity and a nonzero stalk; it supplies no alternative weight argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-galois-lisse-representations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-5e5a8c666",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-5e5a8c666 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-wf-rational-series-pole-radius, every cited node's statement (the 2026-10-15 blueprint_update text where a node has one), the unit sk-l-dl-a1-energy, the blueprint main-20261015 statement and proof (identical to master; main-20261017 adds only Lean names), and the slopmaster2 l2Weight_eq_of_isReal, which has the same hypotheses but a sorry proof, so nothing is attached. The item statement is unchanged and not weakened. The weight convention |ια|=q^{w/2} is consistent throughout: T=G⊗G has weight 2w, H_c^2 has weight 2w+2, and the denominator roots have modulus R=q^{-w-1}. Steps 1–8 check. cor-galois clause (2) applies because X is Noetherian, separated and connected with ℓ invertible. The current conjugate-tensor lemma applies with the second sheaf equal to G, since G is ι-real. The Euler product is transported by ι. The endpoint lemma is applied with j=id. A closed point (Mathlib leaf; quasi-compact and T0 are instances) with finite degree gives a nonzero stalk; F_x is invertible, so P_x^{-1} is not a polynomial. Coefficient domination with nonnegative factors (even-tensor positivity (ii), k=2) shows L is not a polynomial. The reduced denominator root a has |a|=R. I recomputed C=(t-a)(A'b-Ab')-mAb and D=(t-a)Ab: D(0)≠0, D(a)=0, C(a)≠0. lem-wf-l2-upper with the one-step filtration and lem-wf-l2-radius (q>1, which also covers ‖G‖=-∞) give ‖G‖=w. The new lemma is true: if |a|<R(f), evaluating Qf=P at a gives 0=P(a). It was tested on the sharp case 1/(1-T), a cancelled root, a=0 and polynomial f. It is self-contained, statement-only, has correct blueprint from/same_as, and has 8 recorded searches. No DAG duplicate: rg for radius/pole/converge, against lem-rp-positive-product-radius, lem-zl-root-radius-separation, lem-wf-l2-radius and lem-rp-taylor-sum-on-disc. It does not restate a clause of the item. No cycle; no SGA. Accepted tool_uses: cor-rp-euler-product and lem-rp-even-tensor-positivity (unit sk-p-real-rankin, off-route but cited by the blueprint proof itself; generic tool lemmas used as black boxes), plus cor-galois-lisse-representations (actually inside the route). Minor and not faults: j_*T=T is left implicit, as in the blueprint, and Q(0)≠0 is an unnecessary hypothesis. No fixes written."
  }
 }

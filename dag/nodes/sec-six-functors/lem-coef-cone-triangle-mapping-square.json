@@ -2,18 +2,86 @@
  "id": "lem-coef-cone-triangle-mapping-square",
  "kind": "statement",
  "title": "Triangle squares in coherent cone mapping simplicial sets",
- "statement": "Use small simplicial sets, joins and simplicial categories with subset-poset coherent realization $\\mathfrak C$ of [lem-coef-coherent-nerve-comparison], and marked simplicial sets of [lem-coef-marked-point-cartesian-model]. Let $K$ be any small simplicial set, let $v$ be a new cone vertex, put $P=\\mathfrak C[K\\star\\Delta^0]$ and $X_x=P(x,v)$ for each vertex $x$ of $K$. For an edge $e:x\\to y$, write $e^*:X_y\\to X_x$ for precomposition by its coherent-realization vertex and $\\widetilde e:\\widetilde x\\to e^*\\widetilde y$ for the edge induced by its coning triangle. Here $\\widetilde x\\in X_x$ is the cone arrow from $x$ to $v$. Give $X_x$ the marking $E_x$ consisting of all degenerate edges and all $g^*\\widetilde d$ with $d$ a degenerate edge of $K$ and $g\\in\\mathfrak C[K](x,\\operatorname{source}(d))_1$; the star means the diagonal simplicial precomposition action. For every $2$-simplex $\\sigma$ of $K$ with edges $e:x\\to y$, $f:y\\to z$, $k:x\\to z$, let $\\rho_\\sigma$ be the edge from $k$ to the coherent composite $fe$ in $\\mathfrak C[K](x,z)$ obtained from $\\{0,2\\}\\subseteq\\{0,1,2\\}$. There is a simplicial square $H_\\sigma:\\Delta^1\\times\\Delta^1\\to X_x$ with vertices $\\widetilde x,e^*\\widetilde y,k^*\\widetilde z,e^*f^*\\widetilde z$ at $(0,0),(1,0),(0,1),(1,1)$ respectively, whose edges at the second coordinate $0$ and $1$ are $\\widetilde e$ and $\\rho_\\sigma^*\\widetilde z$, and whose edges at the first coordinate $0$ and $1$ are $\\widetilde k$ and $e^*\\widetilde f$. The edge $\\rho_\\sigma^*\\widetilde z$ is marked in $E_x$. If $k$ is degenerate then $\\widetilde k$ is marked as well. Precomposition by any vertex of $\\mathfrak C[K](w,x)$ carries $E_x$ into $E_w$ and carries this square to a square with the corresponding four precomposed edges. These assertions hold for degenerate $\\sigma$ as well and require neither $K$ nor its coherent mapping simplicial sets to be Kan.",
+ "statement": "Use small simplicial sets with the ordered join $\\star$ of [def-coef-infinity-relative-cone], small simplicial categories with subset-poset coherent realization $\\mathfrak C$ of [lem-coef-coherent-nerve-comparison], and marked simplicial sets of [lem-coef-marked-point-cartesian-model]. Let $K$ be any small simplicial set, let $v$ be a new cone vertex, put $P=\\mathfrak C[K\\star\\Delta^0]$ and $X_x=P(x,v)$ for each vertex $x$ of $K$. For an edge $e:x\\to y$, write $e^*:X_y\\to X_x$ for precomposition by its coherent-realization vertex and $\\widetilde e:\\widetilde x\\to e^*\\widetilde y$ for the edge induced by its coning triangle. Here $\\widetilde x\\in X_x$ is the cone arrow from $x$ to $v$. Give $X_x$ the marking $E_x$ consisting of all degenerate edges and all $g^*\\widetilde d$ with $d$ a degenerate edge of $K$ and $g\\in\\mathfrak C[K](x,\\operatorname{source}(d))_1$; the star means the diagonal simplicial precomposition action. For every $2$-simplex $\\sigma$ of $K$ with edges $e:x\\to y$, $f:y\\to z$, $k:x\\to z$, let $\\rho_\\sigma$ be the edge from $k$ to the coherent composite $fe$ in $\\mathfrak C[K](x,z)$ obtained from $\\{0,2\\}\\subseteq\\{0,1,2\\}$. There is a simplicial square $H_\\sigma:\\Delta^1\\times\\Delta^1\\to X_x$ with vertices $\\widetilde x,e^*\\widetilde y,k^*\\widetilde z,e^*f^*\\widetilde z$ at $(0,0),(1,0),(0,1),(1,1)$ respectively, whose edges at the second coordinate $0$ and $1$ are $\\widetilde e$ and $\\rho_\\sigma^*\\widetilde z$, and whose edges at the first coordinate $0$ and $1$ are $\\widetilde k$ and $e^*\\widetilde f$. The edge $\\rho_\\sigma^*\\widetilde z$ is marked in $E_x$. If $k$ is degenerate then $\\widetilde k$ is marked as well. Precomposition by any vertex of $\\mathfrak C[K](w,x)$ carries $E_x$ into $E_w$ and carries this square to a square with the corresponding four precomposed edges. These assertions hold for degenerate $\\sigma$ as well and require neither $K$ nor its coherent mapping simplicial sets to be Kan.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Definition 3.2.1.2 and the first displayed square in Proposition 3.2.1.11(4), printed p.175, expanded to arbitrary triangles using the subset cube of the coned 2-simplex. Read online 2026-10-17. No Stacks tag states this marked simplicial result; HTT is not archived under literature/."
  },
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
+  "def-coef-infinity-relative-cone",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $[1]=\\{0<1\\}$. By the subset-poset definition in [lem-coef-coherent-nerve-comparison], an $m$-simplex of $\\mathfrak C[\\Delta^3](0,3)$ is a chain of subsets containing $0,3$. For an $m$-simplex $(a,b)$ of $\\Delta^1\\times\\Delta^1$, that is, monotone maps $a,b:[m]\\to[1]$, put\n$$S_j=\\{0,3\\}\\cup\\{1:a(j)=1\\}\\cup\\{2:b(j)=1\\},\\quad 0\\leq j\\leq m.$$\nThese subsets are increasing, and restriction along any monotone map replaces $S_j$ by the correspondingly indexed subset. This defines a simplicial map $q:\\Delta^1\\times\\Delta^1\\to\\mathfrak C[\\Delta^3](0,3)$. The ordered join of [def-coef-infinity-relative-cone] with $\\Delta^0$ appends a last vertex, so $\\Delta^2\\star\\Delta^0=\\Delta^3$, and $\\sigma\\star\\mathrm{id}$ induces a simplicial functor $F:\\mathfrak C[\\Delta^3]\\to P$ taking $0,1,2,3$ to $x,y,z,v$. Set $H_\\sigma=F_{0,3}q$. No injectivity of $\\sigma$ is used.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, subset-poset coherent realization; explicit cube underlying Proposition 3.2.1.11(4), printed p.175."
+   }
+  },
+  {
+   "text": "The four vertices of $q$ are $\\{0,3\\},\\{0,1,3\\},\\{0,2,3\\},\\{0,1,2,3\\}$, in the order $(0,0),(1,0),(0,1),(1,1)$. Union composition in [lem-coef-coherent-nerve-comparison] sends them under $F$ to $\\widetilde x,e^*\\widetilde y,k^*\\widetilde z,e^*f^*\\widetilde z$. On the bottom and left boundaries the subset chains are respectively $\\{0,3\\}\\subseteq\\{0,1,3\\}$ and $\\{0,3\\}\\subseteq\\{0,2,3\\}$: the coning triangles of $e$ and $k$ give precisely these chains. Thus their images are $\\widetilde e,\\widetilde k$. The right boundary is $\\{0,1,3\\}\\subseteq\\{0,1,2,3\\}$, the union of the constant subset $\\{0,1\\}$ with $\\{1,3\\}\\subseteq\\{1,2,3\\}$; its image is $e^*\\widetilde f$. The top boundary is $\\{0,2,3\\}\\subseteq\\{0,1,2,3\\}$, the union of $\\{0,2\\}\\subseteq\\{0,1,2\\}$ with the constant subset $\\{2,3\\}$; its image is $\\rho_\\sigma^*\\widetilde z$. These are equalities of edges, since the entire two-element chains, not just their endpoints, have been computed.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 3.2.1.1 and the first displayed square in Proposition 3.2.1.11(4), printed pp.170-171 and 175; four boundary chains computed explicitly."
+   }
+  },
+  {
+   "text": "For a vertex $t$ of $K$, the coning triangle $s_0t\\star v=s_0(t\\star v)$ (degeneracies of the join act on the initial block, [def-coef-infinity-relative-cone]) factors through the cone edge by the monotone map $[2]\\to[1]$ taking $0,1$ to $0$ and $2$ to $1$. Its direct-image map on subsets sends both $\\{0,2\\}$ and $\\{0,1,2\\}$ to $\\{0,1\\}$. (Direct image preserves unions and inclusions, which defines the induced coherent functor of [lem-coef-coherent-nerve-comparison].) Consequently $\\widetilde{s_0t}=s_0\\widetilde t$. Apply this with $t=z$. Diagonal composition of $\\rho_\\sigma$ with $s_0\\widetilde z$ is exactly $\\rho_\\sigma^*\\widetilde z$, so this top edge is the generator $g^*\\widetilde d$ with $g=\\rho_\\sigma$ and $d=s_0z$ in the stipulated $E_x$. If $k$ is degenerate, then $k=s_0x$ and the same calculation makes $\\widetilde k=s_0\\widetilde x$, which belongs to $E_x$. These are marking memberships in the sense of [lem-coef-marked-point-cartesian-model]; no closure under composition of marked edges is assumed.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 3.2.1.1 and Definition 3.2.1.2, printed p.171; degenerate-edge and diagonal-action calculation."
+   }
+  },
+  {
+   "text": "For a vertex $a\\in\\mathfrak C[K](w,x)_0$, precomposition is the simplicial map $a^*:X_x\\to X_w$ obtained by composing with the constant simplices on $a$. The associativity and simplicial composition of [lem-coef-coherent-nerve-comparison] give, on an edge generator,\n$$a^*(g^*\\widetilde d)=(g\\circ s_0a)^*\\widetilde d.$$\nHere $g\\circ s_0a$ is an edge of $\\mathfrak C[K](w,\\operatorname{source}(d))$, so the right side is a generator of $E_w$. Degenerate edges map to degenerate edges because $a^*$ is simplicial. Thus $a^*$ preserves the markings. The composite $a^*H_\\sigma$ is a simplicial square, and restricting it to each boundary gives exactly $a^*$ applied to the corresponding computed edge. This proves both precomposition assertions.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.1.2 and Proposition 3.2.1.11(4), printed pp.171 and 175-176; fixed-vertex precomposition."
+   }
+  },
+  {
+   "text": "The construction in Step 1 applies to every map $\\Delta^2\\to K$, including degenerate simplices: it uses the functor induced by that map and never a lifting or an embedding. All boundary equalities in Step 2 persist under any simplicial functor by the union-composition construction of [lem-coef-coherent-nerve-comparison]; Steps 3 and 4 already allow identities and degenerate acting edges. Thus repeated vertices or degenerate edges introduce no extra hypothesis. If $K$ has no vertices there are no triangles or precomposition instances, so the assertions are vacuous. No horn filler or mapping-space fibrancy has been used.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5 functoriality of coherent realization; the same subset formulas for degenerate simplices."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-marked-point-cartesian-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundation below the finite-coefficient mapping-complex adjunction: explicit subset-poset proof of the triangle square. Checked online against HTT Notation 3.2.1.1, Definition 3.2.1.2 and Proposition 3.2.1.11(4); HTT is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +117,45 @@
    "results": "{\"t\": \"2026-10-17T09:31:30Z\", \"tool\": \"grep\", \"query\": \"coherent.{0,30}cone|coningEdge|rigidification|markedValue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\"], \"digest\": \"914919fc6569c398\"}",
    "date": "2026-10-17",
    "verdict": "no match: HornColimits.lean:33-35,66-68,99-101 concerns bicartesian squares of horn subcomplexes; CompStruct.lean:35-90 and CompStruct.simplex concern edges and composition witnesses, not coherent-realization cone squares. The grep hits at Limits/Fubini.lean:22 and Sites/Coherent/SequentialLimit.lean:39,107 concern ordinary cones. Their sources were read; no rigidification or marked cone declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two-simplex determines a square of coning edges in a homotopy coherent realization mapping simplicial set",
+   "results": "{\"t\": \"2026-10-17T11:33:52Z\", \"tool\": \"leanfinder\", \"query\": \"A two-simplex determines a square of coning edges in a homotopy coherent realization mapping simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₂.sq\", \"SSet.horn₂₁.sq\", \"SSet.horn₂₀.sq\", \"SSet.horn₃₂.desc\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₂.ι₁\", \"SSet.horn₂₂.ι₁₂\", \"SSet.horn₃₂.desc.multicofork\"], \"digest\": \"d23c17dc99e27386\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:33-46,66-79,99-112 gives bicartesian squares of horn subcomplexes, not squares in coherent cone mapping simplicial sets; sources read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Rigidification\"",
+   "results": "{\"t\": \"2026-10-17T11:34:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Rigidification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: search returned no declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.{0,30}cone|coningEdge|rigidification|markedValue",
+   "results": "{\"t\": \"2026-10-17T11:34:50Z\", \"tool\": \"grep\", \"query\": \"coherent.{0,30}cone|coningEdge|rigidification|markedValue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\"], \"digest\": \"0c1ebf81fdd89c2c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Fubini.lean:14-35 and Sites/Coherent/SequentialLimit.lean:37-41,98-110 concern ordinary limit cones and coherent-topology sheaves; sources read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangle in a simplicial set gives a square in the mapping simplicial set of its coherent right cone",
+   "results": "{\"t\": \"2026-10-17T11:34:51Z\", \"tool\": \"leansearch\", \"query\": \"A triangle in a simplicial set gives a square in the mapping simplicial set of its coherent right cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.triangle_mor₂\", \"CochainComplex.mappingCone.triangleMap_hom₃\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingConeCompTriangle\", \"CochainComplex.mappingCone.triangle_mor₁\", \"CochainComplex.mappingCone.triangle\", \"CochainComplex.mappingCone.triangle_obj₃\", \"CochainComplex.mappingCone.mapTrianglehIso\"], \"digest\": \"33a2f804d8cdeb67\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Pretriangulated.lean:49-58 defines a cochain mapping-cone triangle and Triangulated.lean:35-43 its composable-morphism triangle; these are chain complexes, not coherent cone mapping simplicial sets; sources read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Subset poset cubes in homotopy coherent realization and simplicial composition by union of subsets",
+   "results": "{\"t\": \"2026-10-17T11:34:53Z\", \"tool\": \"leanfinder\", \"query\": \"Subset poset cubes in homotopy coherent realization and simplicial composition by union of subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.comp_I\", \"CategoryTheory.SimplicialThickening.compFunctor\", \"SSet.Subcomplex.homOfLE_comp\", \"SSet.degenerate_eq_iUnion_range_σ\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.comp\", \"SSet.prodStdSimplex.orderHomOfSimplex\", \"SSet.iSup_subcomplexOfSimplex_prod_eq_top\", \"SSet.ι₁_comp\"], \"digest\": \"7bb27fc62a096e46\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SimplicialNerve.lean:80-92,113-129,142-148 supplies subset-path union composition and direct images for an ordered simplex, but no right-cone functor for arbitrary K, triangle square, or marking claims. ProdStdSimplex.lean:38-65,99-106 only describes simplex coordinates; sources read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-generator-calculations",
@@ -80,5 +183,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cone-triangle-mapping-square",
+  "worker": "stage1",
+  "summary": "Constructed the square degreewise by the subset chain in C[Delta^3](0,3), computed each boundary by union composition, proved the two marking claims through the coning edge of a degenerate input edge, and verified fixed-vertex precomposition and degenerate triangles. The statement is unchanged. No new nodes or Mathlib leaves are needed.",
+  "blueprint": "Realizes the technical cone-triangle square introduced below lem-coef-marked-cone-generator-calculations, used in its steps 9 and 11, in the foundation chain for proof paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction). Steps 1-2 construct its square, step 3 proves marking membership, steps 4-5 give precomposition and degenerate cases."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-f82502f87",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-f82502f87 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps, both cited statements and the parent's steps 9 and 11 in full. The statement is unchanged and there are no new nodes. I recomputed every value in the subset cube C[Δ^3](0,3) myself: the 4 vertices x̃, e*ỹ, k*z̃, e*f*z̃ and the 4 sides ẽ, ρ_σ*z̃, k̃, e*f̃, including their directions. The marking claim holds because (s_0 z)⋆v = s_0(z⋆v) collapses to s_0 z̃, so the top side ρ_σ*z̃ is the stipulated generator with g=ρ_σ and d=s_0 z. Precomposition preserves the marking by associativity. Small cases checked: K empty, K a point, σ=s_0 f and σ=s_1 e; no Kan hypothesis is used. No duplicate was found by rg over dag/nodes. The Mathlib searches cover all required kinds; HTT is not archived, a WANTED line is recorded, and I verified the mathematics independently. No tool uses and no SGA. One repair (B3/C4): the statement attributed joins to lem-coef-coherent-nerve-comparison, which does not define them, and steps 1 and 3 used the join structure without a citation. The corrected file adds def-coef-infinity-relative-cone to the statement, stmt_deps, step 1, step 3 and proof_deps. That node already lies in the item's dependency closure, so no cycle arises, and the mathematical content of the statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

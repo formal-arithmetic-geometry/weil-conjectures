@@ -17,7 +17,8 @@
   "def-weil-derived-pullback-tensor-hom",
   "thm-coef-rational-verdier",
   "lem-coef-rational-operations",
-  "def-weil-site-perfect-complex"
+  "def-weil-site-perfect-complex",
+  "lem-coef-completed-tensor-hom-transpose"
  ],
  "proof": [
   {
@@ -64,11 +65,23 @@
    }
   },
   {
-   "text": "For a finite extension $E\\subset F$, let $T=-\\otimes_EF$ be [def-weil-rationalization-karoubi]. The tensor comparison is the rational image of the completed-tensor comparison in [lem-pur-integral-operations-scalar-extension]; the dualizing-object comparison $u:T\\omega_{X,E}\\xrightarrow{\\sim}\\omega_{X,F}$ is the rational image of $u_{F/E}$ in [lem-coef-integral-finite-extension]. These are comparisons for the prescribed integral-representative scalar extension, rather than tensoring an arbitrary discrete sheaf by a topological field. Write $c_{A,B}:TA\\otimes_FTB\\xrightarrow{\\sim}T(A\\otimes_EB)$ for the inverse of the rationalized tensor comparison. The evaluation compatibility supplied by [thm-coef-rational-verdier] is $\\mathrm{ev}_{F,TA}(\\beta_A\\otimes1_{TA})=uT(\\mathrm{ev}_{E,A})c_{DA,A}$. Define $b_F=uT(b)c_{K,L}$. By the evaluation compatibility in [thm-coef-rational-verdier], its first adjoint is\n$$\na_F=\\beta_L\\,T(a):TK\\longrightarrow D_F(TL),\n$$\nwhere $\\beta_A:T(DA)\\xrightarrow{\\sim}D_F(TA)$ is that theorem's comparison; the second is $c_F=\\beta_KT(c)$. Their inverses are $T(a^{-1})\\beta_L^{-1}$ and $T(c^{-1})\\beta_K^{-1}$. Applying $T$ to $pi=1$, $qj=1$, $ip=e$, $jq=f$, and the adjoint-idempotent equation gives splittings and adjoint idempotents after extension. Naturality gives $\\beta_Q T(D(j))=D_F(Tj)\\beta_L$ (and $\\beta_L T(D(q))=D_F(Tq)\\beta_Q$, with the analogous equations for $i,p$), so the restricted transpose $\\beta_QT(a')$ is exactly $D_F(Tj)a_F(Ti)$. Consequently the inverse formulas of step 3 are carried to the inverse formulas over $F$. The biduality compatibility in [thm-coef-rational-verdier] is $\\beta_{DA}T(\\delta_{E,A})=D_F(\\beta_A)\\delta_{F,TA}$, an equality of maps $TA\\to D_F(TDA)$. Applying this equality to the maps in step 4, together with the displayed naturality equations, carries its retract identity for biduality to the identity over $F$. Only functoriality is needed to preserve inverse maps; no reflection of isomorphisms is being assumed.",
+   "text": "For a finite extension $E\\subset F$, let $T=-\\otimes_EF$. The tensor comparison and dualizing-object comparison are the rational images of the completed-tensor comparison in [lem-pur-integral-operations-scalar-extension] and $u_{F/E}$ in [lem-coef-integral-finite-extension]. Thus $T$ has the monoidal comparison $c_{A,B}:TA\\otimes_FTB\\xrightarrow{\\sim}T(A\\otimes_EB)$ and duality comparisons $\\beta_A:T(DA)\\xrightarrow{\\sim}D_F(TA)$ supplied by [thm-coef-rational-verdier].",
    "uses": [
     "def-weil-rationalization-karoubi",
     "lem-pur-integral-operations-scalar-extension",
     "lem-coef-integral-finite-extension",
+    "thm-coef-rational-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-retract-evaluation.md",
+    "place": "Proof, paragraph 2: the finite scalar-extension comparison and its effect on every displayed map"
+   }
+  },
+  {
+   "text": "Define $b_F=uT(b)c_{K,L}$. By [lem-coef-rational-scalar-transpose-compatibility], its adjoints are $a_F=\\beta_LT(a)$ and $c_F=\\beta_KT(c)$; their inverses are $T(a^{-1})\\beta_L^{-1}$ and $T(c^{-1})\\beta_K^{-1}$. The same lemma carries the restricted transpose and candidate inverse of step 3 to the corresponding formulas over $F$, so functoriality preserves all inverse equations. Applying $T$ to $pi=1$, $qj=1$, $ip=e$, $jq=f$ and the adjoint-idempotent equation gives the splittings and adjoint idempotents over $F$. Finally [thm-coef-rational-verdier] gives $\\beta_{DA}T(\\delta_{E,A})=D_F(\\beta_A)\\delta_{F,TA}$. Substituting this and $\\beta_QT(D(j))=D_F(Tj)\\beta_L$ (and the three analogous naturality equations) in step 4 carries its evaluation and biduality retract identities to those over $F$.",
+   "uses": [
+    "lem-coef-rational-scalar-transpose-compatibility",
     "thm-coef-rational-verdier"
    ],
    "elementary": false,
@@ -96,14 +109,11 @@
    }
   },
   {
-   "text": "On a chosen slice where $A$ has a bounded finite-projective model $P$ in degrees $[a,b]$, consider the coefficient dual $V\\mapsto V^\\vee=R\\mathcal Hom_E(V,\\mathbf1_E)$. It is contravariantly exact, including the signed shift identifications, by the ringed-Hom exactness theorem and scalar localization. Its square is covariantly exact. The evaluation-defined $d_V$ is a morphism between their triangles: on Hom complexes the dual differential is $d_{V^\\vee}^r(\\phi)=(-1)^{r+1}\\phi d_V^{-r-1}$ and double evaluation in degree $r$ is $x\\mapsto(\\phi\\mapsto(-1)^r\\phi(x))$; substituting in this differential verifies the chain-map equation and the shifted cone-square signs. These equations survive deriving and rationalizing, since the coefficient comparisons preserve evaluation. Hence the objects where $d_V$ is invertible are closed under shifts and triangles by [lem-sf-triangle-morphism-iso]. They contain the unit, since $R\\mathcal Hom_E(\\mathbf1_E,-)$ is the identity under the unit adjunction, and therefore contain its finite sums. They are closed under retracts: if $V\\xrightarrow{i}W\\xrightarrow{p}V$ has $pi=1$, naturality gives $d_V=(p^{\\vee\\vee})d_Wi$, with inverse $p d_W^{-1}(i^{\\vee\\vee})$; the products are identities by $pi=1$ and $d_Wip=(ip)^{\\vee\\vee}d_W$. Each $P^r$ is such a retract by the site-perfect definition. Starting with $\\sigma_{\\geq b+1}P=0$, descend through the degreewise split cone triangles\n$$\\sigma_{\\geq r+1}P\\longrightarrow\\sigma_{\\geq r}P\\longrightarrow P^r[-r]\\longrightarrow(\\sigma_{\\geq r+1}P)[1].$$\nThe third term is in this class, so two-out-of-three puts the middle term in the class. This finite induction proves that $d_A$ is invertible on the chosen slice. Dualizing the finite local model reverses the degrees and dualizes each finite-free retraction, so its coefficient dual also has a bounded local model of finite projective terms, with the displayed dual differential. This uses the rational local models themselves and does not assume they lift to integral perfect lattices.",
+   "text": "On a slice where $A$ has a bounded finite-projective model $P$ in degrees $[a,b]$, coefficient duality $V\\mapsto V^\\vee=R\\mathcal Hom_E(V,\\mathbf1_E)$ is contravariantly exact. The Hom-complex differential is $d_{V^\\vee}^r(\\phi)=(-1)^{r+1}\\phi d_V^{-r-1}$, and the degree-$r$ double-evaluation map is $x\\mapsto(\\phi\\mapsto(-1)^r\\phi(x))$.",
    "uses": [
     "def-weil-site-perfect-complex",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "def-pur-hom-complex",
-    "def-weil-abstract-derived-category",
-    "lem-weil-linear-scalar-localization-triangulated",
-    "lem-sf-triangle-morphism-iso",
     "lem-coef-rational-operations"
    ],
    "elementary": false,
@@ -113,7 +123,36 @@
    }
   },
   {
-   "text": "To pass from this local calculation to the raw rational category, choose integral representatives for the endpoints of $d_A$ and write that rational morphism as an integral numerator divided by $\\varpi_E^t$. Let $C$ be the integral cone of its numerator. The integral endpoints and their cone belong to $D^b_c(X,\\mathcal O_E)$ by the coefficient-operation domains and [lem-weil-integral-constructible-triangulated]; its rational image is a cone of $d_A$ up to the invertible scalar. The finite-type definition gives a finite affine open cover of $X$. On each affine the pro-etale covering definition refines the site-perfect cover by finitely many affine opens in its members. Collect them to obtain a finite covering $\\{U_j\\to X\\}_{j=1}^s$ where step 7 applies. If $X$ is empty, every sheaf is zero and there is nothing to prove. Otherwise, exact restriction shows that $C|_{U_j}$ is zero in the scalar localization. By the Hom-module definition of that localization, the image of $\\operatorname{id}_{C|_{U_j}}$ in $\\operatorname{End}(C|_{U_j})\\otimes_{\\mathcal O_E}E$ is zero. The tensor-localization isomorphism and the localization equivalence relation give $\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}}=0$ for some $N_j\\geq0$. Let $N=\\max_jN_j$. Exact restriction identifies the restrictions of $\\varpi_E^N H^r(C)$ with zero maps for every $r$. A section therefore restricts to zero on a covering, so the separatedness axiom for a sheaf makes it zero. Thus $\\varpi_E^N H^r(C)=0$ globally for every $r$. This is a statement about cohomology; it has not yet asserted that the same scalar kills $\\operatorname{id}_C$.",
+   "text": "The shift and triangle assertion for the actual evaluation-defined map is [lem-coef-rational-bidual-triangle-compatibility], applied to the integral internal-Hom category and then its raw scalar localization; it requires no lifting of a rational perfect model to an integral perfect lattice. This supplies all three squares, including the shifted connecting-map square. By [lem-sf-triangle-morphism-iso], the class of objects with invertible $d_V$ is therefore closed under shifts and triangles.",
+   "uses": [
+    "lem-coef-rational-bidual-triangle-compatibility",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-retract-evaluation.md",
+    "place": "Proof, paragraph 3: local finite-free/retract and bounded-complex biduality; Stacks 08JJ (lemma-dual-perfect-complex), expanded via finite cone triangles at the rational stage"
+   }
+  },
+  {
+   "text": "The class of objects with invertible $d_V$ contains the unit by the unit adjunction, hence finite sums, and is closed under retracts: if $V\\xrightarrow{i}W\\xrightarrow{p}V$ has $pi=1$, naturality gives $d_V=(p^{\\vee\\vee})d_Wi$ with inverse $p d_W^{-1}(i^{\\vee\\vee})$. Starting with $\\sigma_{\\ge b+1}P=0$, descend through the degreewise split cone triangles $\\sigma_{\\ge r+1}P\\to\\sigma_{\\ge r}P\\to P^r[-r]\\to(\\sigma_{\\ge r+1}P)[1]$. Each $P^r$ is a retract by the site-perfect definition, so finite induction proves $d_A$ invertible on the slice; dualizing the model gives the same bounded finite-projective property for $A^\\vee$.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-sf-triangle-morphism-iso",
+    "lem-coef-rational-operations",
+    "lem-coef-rational-bidual-triangle-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-retract-evaluation.md",
+    "place": "Proof, paragraph 3: local finite-free/retract and bounded-complex biduality; Stacks 08JJ (lemma-dual-perfect-complex), expanded via finite cone triangles at the rational stage"
+   }
+  },
+  {
+   "text": "To pass from this local calculation to the raw rational category, choose integral representatives for the endpoints of $d_A$ and write that rational morphism as an integral numerator divided by $\\varpi_E^t$. Let $C$ be the integral cone of its numerator. The integral endpoints and their cone belong to $D^b_c(X,\\mathcal O_E)$ by the coefficient-operation domains and [lem-weil-integral-constructible-triangulated]; its rational image is a cone of $d_A$ up to the invertible scalar. The finite-type definition gives a finite affine open cover of $X$. On each affine the pro-etale covering definition refines the site-perfect cover by finitely many affine opens in its members. Collect them to obtain a finite covering $\\{U_j\\to X\\}_{j=1}^s$ where steps 8–10 apply. If $X$ is empty, every sheaf is zero and there is nothing to prove. Otherwise, exact restriction shows that $C|_{U_j}$ is zero in the scalar localization. By the Hom-module definition of that localization, the image of $\\operatorname{id}_{C|_{U_j}}$ in $\\operatorname{End}(C|_{U_j})\\otimes_{\\mathcal O_E}E$ is zero. The tensor-localization isomorphism and the localization equivalence relation give $\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}}=0$ for some $N_j\\geq0$. Let $N=\\max_jN_j$. Exact restriction identifies the restrictions of $\\varpi_E^N H^r(C)$ with zero maps for every $r$. A section therefore restricts to zero on a covering, so the separatedness axiom for a sheaf makes it zero. Thus $\\varpi_E^N H^r(C)=0$ globally for every $r$. This is a statement about cohomology; it has not yet asserted that the same scalar kills $\\operatorname{id}_C$.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "def-weil-linear-scalar-localization",
@@ -132,7 +171,7 @@
    }
   },
   {
-   "text": "The integral cone $C$ has bounded cohomology. Indeed its reductions have support in one interval $[u,v]$ by [def-weil-derived-complete-integral-detailed]. In its Roos triangle from [def-weil-derived-complete], exact countable products have cohomology only in $[u,v]$. The long exact sequence therefore places $H^r(C)$ in $[u,v+1]$. In any distinguished triangle $A_0\\xrightarrow{i}B_0\\xrightarrow{p}D_0\\to A_0[1]$, suppose $\\varpi_E^e\\operatorname{id}_{A_0}=0$ and $\\varpi_E^f\\operatorname{id}_{D_0}=0$. Then $p\\varpi_E^f=\\varpi_E^fp=0$, so exactness of $\\operatorname{Hom}(B_0,-)$ gives $\\varpi_E^f\\operatorname{id}_{B_0}=ih$ for some $h:B_0\\to A_0$. Multiply by $\\varpi_E^e$ to obtain $\\varpi_E^{e+f}\\operatorname{id}_{B_0}=0$. Apply this to the canonical truncation triangles of $C$, starting with $\\tau_{\\leq u-1}C=0$ and adjoining $H^r(C)[-r]$ for $u\\leq r\\leq v+1$. Step 8 says each of these successive pieces is killed by $\\varpi_E^N$, so induction gives $\\varpi_E^{N(v-u+2)}\\operatorname{id}_C=0$. The last truncation is isomorphic to $C$ because its other cohomology vanishes. After scalar localization $\\varpi_E$ is invertible, hence $\\operatorname{id}_C=0$ and $C=0$. Thus $d_A$ is an isomorphism globally. The two adjoints $1_B,d_A$ show that the usual unit-valued evaluation has precisely the perfection asserted in the statement.",
+   "text": "The integral cone $C$ has bounded cohomology. Indeed its reductions have support in one interval $[u,v]$ by [def-weil-derived-complete-integral-detailed]. In its Roos triangle from [def-weil-derived-complete], exact countable products have cohomology only in $[u,v]$. The long exact sequence therefore places $H^r(C)$ in $[u,v+1]$. In any distinguished triangle $A_0\\xrightarrow{i}B_0\\xrightarrow{p}D_0\\to A_0[1]$, suppose $\\varpi_E^e\\operatorname{id}_{A_0}=0$ and $\\varpi_E^f\\operatorname{id}_{D_0}=0$. Then $p\\varpi_E^f=\\varpi_E^fp=0$, so exactness of $\\operatorname{Hom}(B_0,-)$ gives $\\varpi_E^f\\operatorname{id}_{B_0}=ih$ for some $h:B_0\\to A_0$. Multiply by $\\varpi_E^e$ to obtain $\\varpi_E^{e+f}\\operatorname{id}_{B_0}=0$. Apply this to the canonical truncation triangles of $C$, starting with $\\tau_{\\leq u-1}C=0$ and adjoining $H^r(C)[-r]$ for $u\\leq r\\leq v+1$. Step 11 says each of these successive pieces is killed by $\\varpi_E^N$, so induction gives $\\varpi_E^{N(v-u+2)}\\operatorname{id}_C=0$. The last truncation is isomorphic to $C$ because its other cohomology vanishes. After scalar localization $\\varpi_E$ is invertible, hence $\\operatorname{id}_C=0$ and $C=0$. Thus $d_A$ is an isomorphism globally. The two adjoints $1_B,d_A$ show that the usual unit-valued evaluation has precisely the perfection asserted in the statement.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
     "def-weil-derived-complete",
@@ -150,7 +189,7 @@
    }
   },
   {
-   "text": "For a unit-valued pairing with adjoints $a:K\\xrightarrow{\\sim}L^\\vee$ and $c:L\\xrightarrow{\\sim}K^\\vee$, its restriction along splittings $i,p,j,q$ has adjoints $j^\\vee a i$ and $i^\\vee c j$, with inverses $p a^{-1}q^\\vee$ and $q c^{-1}p^\\vee$: their products are the four identities in step 3 with $D(t)=t^\\vee$. This applies to the pairing of step 9. For its scalar extension use the comparison $v_{K,M}$ of [lem-coef-integral-finite-extension], rationalized at $M=\\mathbf1_E$, together with $T(\\mathbf1_E)\\cong\\mathbf1_F$ and the tensor comparison of [lem-pur-integral-operations-scalar-extension]. The isomorphism $T(\\mathbf1_E)\\cong\\mathbf1_F$ is multiplication on the scalar-extended coefficient module, with inverse $s\\mapsto1\\otimes s$ (at integral coefficients the same identity holds levelwise for completed extension and then rationalizes). The cited internal-Hom comparison preserves evaluation, so the extended adjoints are $v_{L,\\mathbf1_E}T(a)$ and $v_{K,\\mathbf1_E}T(c)$ after the unit identification; their inverses are $T(a^{-1})v_{L,\\mathbf1_E}^{-1}$ and $T(c^{-1})v_{K,\\mathbf1_E}^{-1}$. Applying $T$ to their inverses proves they stay isomorphisms, and applying it to the splitting equations proves the same assertion on retracts. A finite sum of coefficient units extends to the same finite sum of units, and an existing retract extends by the maps $T(i),T(p)$; bounded projective local models therefore remain bounded projective local models. This is the tensor dual to the unit. The earlier Verdier evaluation has target $\\omega_{X,E}$, so none of these statements identifies every constructible object with a site-perfect one.",
+   "text": "For a unit-valued pairing with adjoints $a:K\\xrightarrow{\\sim}L^\\vee$ and $c:L\\xrightarrow{\\sim}K^\\vee$, its restriction along splittings $i,p,j,q$ has adjoints $j^\\vee a i$ and $i^\\vee c j$, with inverses $p a^{-1}q^\\vee$ and $q c^{-1}p^\\vee$: their products are the four identities in step 3 with $D(t)=t^\\vee$. This applies to the pairing of step 12. For its scalar extension use the comparison $v_{K,M}$ of [lem-coef-integral-finite-extension], rationalized at $M=\\mathbf1_E$, together with $T(\\mathbf1_E)\\cong\\mathbf1_F$ and the tensor comparison of [lem-pur-integral-operations-scalar-extension]. The isomorphism $T(\\mathbf1_E)\\cong\\mathbf1_F$ is multiplication on the scalar-extended coefficient module, with inverse $s\\mapsto1\\otimes s$ (at integral coefficients the same identity holds levelwise for completed extension and then rationalizes). The cited internal-Hom comparison preserves evaluation, so the extended adjoints are $v_{L,\\mathbf1_E}T(a)$ and $v_{K,\\mathbf1_E}T(c)$ after the unit identification; their inverses are $T(a^{-1})v_{L,\\mathbf1_E}^{-1}$ and $T(c^{-1})v_{K,\\mathbf1_E}^{-1}$. Applying $T$ to their inverses proves they stay isomorphisms, and applying it to the splitting equations proves the same assertion on retracts. A finite sum of coefficient units extends to the same finite sum of units, and an existing retract extends by the maps $T(i),T(p)$; bounded projective local models therefore remain bounded projective local models. This is the tensor dual to the unit. The earlier Verdier evaluation has target $\\omega_{X,E}$, so none of these statements identifies every constructible object with a site-perfect one.",
    "uses": [
     "lem-coef-integral-finite-extension",
     "lem-pur-integral-operations-scalar-extension"
@@ -169,6 +208,7 @@
   "lem-weil-rationalization-idempotent-complete",
   "lem-pur-integral-operations-scalar-extension",
   "lem-coef-integral-finite-extension",
+  "lem-coef-rational-scalar-transpose-compatibility",
   "def-weil-site-perfect-complex",
   "def-weil-derived-pullback-tensor-hom",
   "def-pur-integral-derived-operations",
@@ -177,9 +217,10 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-proetale-countable-products-exact",
   "def-pur-hom-complex",
-  "def-weil-abstract-derived-category",
-  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-coef-rational-bidual-triangle-compatibility",
   "lem-sf-triangle-morphism-iso",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-abstract-derived-category",
   "def-weil-linear-scalar-localization",
   "lem-weil-integral-constructible-triangulated",
   "def-weil-finite-type-morphism",
@@ -195,7 +236,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-retract-evaluation.md",
-  "place": "Imported proof paragraphs 1–3, expanded by explicit categorical calculations; separate blueprint file unavailable in this checkout (WANTED in report)"
+  "place": "Imported proof paragraphs 1–3, expanded by explicit categorical calculations; returned long scalar-extension and local triangle arguments extracted as statement-only nodes on 2026-10-17."
  },
  "mathlib_searches": [
   {
@@ -291,7 +332,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -319,15 +360,15 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-rational-retract-evaluation",
   "worker": "stage1",
-  "summary": "Retained the statement, made its rational coefficient and splitting conventions explicit in the proof, and wrote down both restricted transposes and their inverses. Verified evaluation and natural biduality by equations, and tracked finite-extension comparisons on each map. The tensor-unit case uses existing perfect-object tools followed by an explicit adjunction argument. Removed the unused common-stage idempotent-completeness citation: the consumer performs the argument at a finite common stage. No new nodes or Mathlib leaves. The separate blueprint file is absent; this expansion is explicitly agent-written and its source is requested in the report. Independent second reading expanded the second restricted-adjoint inverse, and gave the triangle and Hom-bijection equations for unit-valued biduality; the latter step is not labelled elementary. Repair of returned delivery: reread the expanded current statement of thm-coef-rational-verdier, made its global finite-field and prime hypotheses explicit at step 1, and wrote the typed tensor/evaluation and biduality comparison equations in step 5. Refreshed all citation quotes against the current DAG. Second reading repaired the unstated six-functor-datum hypothesis of the perfect-object tools: removed both tool invocations, proved coefficient-unit biduality by local finite-cone/retract calculations and explicit finite-cover scalar-localization detection, and retained the unit-valued extension argument as non-elementary. No child node was created.",
-  "blueprint": "Steps 1–4 realize imported proof paragraph 1 and the restriction part of paragraph 2; step 5 realizes finite extension in paragraph 2; steps 6–10 prove paragraph 3 directly from coefficient operations, local perfect models, rational local-to-global detection, and the already displayed restriction and extension formulas.",
+  "summary": "Repaired the returned long-step issue by extracting scalar-extension transpose transport and local biduality compatibility with shifts and cone triangles as two new statement-only nodes. Replaced the former 2003-character scalar-extension step by two short steps citing the transport node, and replaced the former 2028-character local biduality step by three short steps citing the triangle-compatibility node. The statement and route are unchanged.",
+  "blueprint": "Steps 1–4 realize imported proof paragraph 1 and the restriction part of paragraph 2; steps 5–6 realize finite extension in paragraph 2 using the extracted transpose-transport lemma; steps 7–13 realize paragraph 3, with the extracted biduality-triangle compatibility lemma carrying the previously inline chain-map and triangle argument.",
   "tool_uses": [
    {
     "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "The generic completed tensor comparison gives the actual scalar-extension tensor isomorphism, which the duality comparison alone does not state; it does not replace a geometric biduality step."
+    "why": "The completed tensor comparison provides the scalar-extension tensor isomorphism used in step 5, without replacing the geometric route."
    }
   ]
  },
@@ -335,11 +376,11 @@
   "lem-pur-integral-operations-scalar-extension"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NA-85e09f1fe",
-  "group": "NA",
+  "reviewer": "NT-cc-Q68-e371dfe6e",
+  "group": "Q68",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-85e09f1fe (reviewer sub-agent of L); spot-checked: Read all ten steps, every cited statement, blueprint sources, relevant Stacks/Bhatt–Scholze passages, and archived master targets. Retract inverses, scalar comparisons, signs, and finite-cover/truncation detection check out. No new nodes, cycles, or repairs. Target coefficient-category comparisons remain separate obligations. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-e371dfe6e (reviewer sub-agent of L); spot-checked: I read the whole delivery: all 13 item steps, both new nodes, every cited node's statement, the blueprint source (master, which matches main-20261015 and main-20261017), and Stacks sites-cohomology 08JB l.8934, 08JC l.8948, 0A97 l.8965 and 08JJ l.13048. No SGA is cited. The statement is unchanged, proof_deps equals the union of the step uses, and every step is under 1700 characters. I recomputed by hand the transpose identities and the four inverse products of steps 2–4, the retract inverses of steps 4 and 10, the Hom-complex sign in step 8 (it agrees with the Koszul sign of lem-sfb), the ϖ-annihilator triangle argument in step 12 (exponent N(v−u+2)), and the finite-cover argument in step 11. New node lem-coef-rational-scalar-transpose-compatibility is true: its three identities follow from evaluation compatibility and naturality of β, and I tested the identity extension, zero objects and identity splittings. It is short, but I keep it because it answers the 2000-character return. New node lem-coef-rational-bidual-triangle-compatibility is true and is a real lemma (Stacks 08JC leaves the details out). I tested V=0, O[n] and O/ϖ; the node claims no invertibility, and its localization clause holds for central R. Neither node duplicates lem-sfb-ringed-site-duality-maps, lem-sf-rational-thick-evaluation (that is θ_{L,M}, not the double dual) or lem-coef-integral-finite-extension. I made three B3 citation repairs in fixes/: (1) the transpose node now cites def-weil-finite-field-fiber, def-weil-proper-morphism, def-weil-finite-type-morphism and the rational tensor–Hom bijection lem-coef-completed-tensor-hom-transpose; (2) the triangle node now cites def-pur-localized-ringed-site; (3) the item's stmt_deps now include lem-coef-completed-tensor-hom-transpose. I checked by script that none of this creates a cycle. I accept the declared tool use of lem-pur-integral-operations-scalar-extension. For the maintainer, not faults of this delivery: the identification of the completed-tensor and ordinary transposes on site-perfect objects is used without a node; the rational site-perfect model is read as iterated cones; and the new blueprint snapshot moves the item to sk-lem-sp-tower, so its unit binding needs maintainer attention.; 3 file(s) fixed by the reviewer"
  }
 }

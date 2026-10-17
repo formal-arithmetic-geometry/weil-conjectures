@@ -19,9 +19,75 @@
   "def-weil-pbc-proetale-site",
   "sk-def-pe-classical-definition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The sites in the statement are small in the chosen common larger universe. Apply [lem-weil-pbc-ring-sheaves-grothendieck] to their constant ring sheaves and then [lem-sp-grothendieck-enough-injectives]. Thus the module-sheaf categories on $X_{\\mathrm{ét}}$, $X_{\\mathrm{proét}}$, $W_{\\mathrm{ét}}$ and $W_{\\mathrm{proét}}$ have enough injectives. Let $H$ be classical. Since $A$ is a discrete commutative ring, the equivalence onto classical modules in [det-pe-classical-sheaves-modules] gives an étale $A_X$-module sheaf $G$ and an isomorphism $H\\cong\\nu_X^*G$. No finite-generation or constructibility property of $G$ is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "Essential image paragraph; existence of module resolutions as in Stacks injectives.tex Tag 079Q (remark-existence-D)"
+   }
+  },
+  {
+   "text": "Write $G|_W(V\\to W)=G(V\\to W\\to X)$. For the étale morphism $w$, [lem-weil-pbc-etale-inverse-image-restriction] identifies abelian inverse image with this restriction, naturally in the sheaf. By [lem-pe-constant-left-module-inverse-image], inverse image of constant-$A$ modules has that underlying abelian inverse image and carries each constant scalar to the same scalar. Naturality of the restriction isomorphism with respect to each scalar endomorphism $a:G\\to G$ therefore makes it $A$-linear: its two composites with multiplication by $a$ agree. Hence $w_{\\mathrm{ét}}^{-1}G\\cong G|_W$ as constant-$A$ module sheaves. Apply [lem-sfb-etale-module-affine-bound] to this $G$ and the given $W\\to X$. Its field, prime, finite ring, annihilator, finite-type and affine étale hypotheses are precisely those of the item, and its $d_X,e_X$ conventions are identical. For every $q>e_X$ this gives $H_A^q(W_{\\mathrm{ét}},G|_W)=0$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sfb-etale-module-affine-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
+    "place": "Fixed-degree truncation, étale sheaf-bound input; restriction as in Stacks etale-cohomology.tex Tag 03S2 and sites.tex Tag 00YV"
+   }
+  },
+  {
+   "text": "Regard $G$ as the complex $G[0]$. Apply the affine formula of [sk-prop-sf-comparison] with coefficient ring $A$ and with the presentation $W=\\varprojlim_{i\\in\\{*\\}}W$: the category has one object and only its identity, and its sole term is the given affine étale object. It is small, nonempty and cofiltered, its limit is $W$, and the opposite filtered colimit is just its single value. The formula consequently gives an isomorphism in the derived category of $A$-modules\n$$R\\Gamma(W_{\\mathrm{proét}},(\\nu_X^*G)|_W)\\cong R\\Gamma(W_{\\mathrm{ét}},G|_W).$$\nHere the input is bounded below because it is concentrated in degree zero; the comparison imposes no constructibility or finite-generation condition. On either site, clause (2) of [lem-weil-pbc-right-derived-plus-injective] computes these right-derived section objects by evaluating a bounded-below injective resolution of the displayed sheaf. Their degree-$q$ cohomology is therefore the module cohomology used in step 2. Combining the comparison with $H|_W\\cong(\\nu_X^*G)|_W$ from step 1 and taking degree $q>e_X$ gives $H_A^q(W_{\\mathrm{proét}},H|_W)=0$.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/sk-prop-sf-comparison.proof.md",
+    "place": "Affine formula paragraph, specialized to the constant one-object presentation; Stacks proetale.tex Tag 099W (lemma-compare-cohomology)"
+   }
+  },
+  {
+   "text": "The morphism $w$ is, as fixed in the statement, an object of $X_{\\mathrm{proét}}$. By [lem-weil-pbc-proetale-restriction-injectives], $W_{\\mathrm{proét}}$ is its slice, and restriction of constant-coefficient module sheaves is exact and preserves injectives. Choose $H\\to J^\\bullet$ an injective module resolution on $X_{\\mathrm{proét}}$ [def-sp-injective-resolutions]. Its restriction is then an injective resolution of $H|_W$ on $W_{\\mathrm{proét}}$. At the final object $W\\to W$, the restricted complex has terms $(J^n|_W)(W)=J^n(W)$ and the same differentials. The constant $A$-actions also coincide, since both act by restricting the constant scalar $a\\in A$ to $W$. Thus the complex computing $R^qE_W(H)$ is literally the complex computing $H_A^q(W_{\\mathrm{proét}},H|_W)$. The vanishing in step 3 proves $R^qE_W(H)=0$. The argument works separately for every affine étale $W$ with the unchanged bound $e_X$, so it proves the stated uniform assertion, including empty $X$ or $W$.",
+   "uses": [
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3 (lemma-cohomology-of-open), parts (1)–(2) and its injective-resolution proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sfb-etale-module-affine-bound",
+  "sk-prop-sf-comparison",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
+  "place": "Fixed-degree truncation, transferring the étale module bound to classical sheaves using the constant-presentation specialization of sk-prop-sf-comparison and the injective-resolution argument of Stacks Tag 03F3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +130,45 @@
    "results": "; 0 hits: . Read hits: definitions of sites, module evaluation, etale algebra and cotangent cohomology do not assert this geometric vanishing bound.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived evaluation of classical sheaves of finite ring modules on affine etale objects vanishes above a uniform cohomological dimension bound",
+   "results": "; 8 hits: CategoryTheory.Sheaf.H, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.HasInjectiveDimensionLT.mk. Read the returned signatures and the relevant definitions in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:59, Mathlib/CategoryTheory/Abelian/RightDerived.lean:154, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:88-105, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:140 and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:19-32. These give cohomology definitions, formal derived vanishing on injectives or bounded objects, and finite-presentation notions; none supplies the geometric uniform bound for arbitrary classical sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.proetaleTopology, CategoryTheory.Sheaf",
+   "results": "; 0 hits: . Read the returned signatures and the relevant definitions in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:59, Mathlib/CategoryTheory/Abelian/RightDerived.lean:154, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:88-105, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:140 and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:19-32. These give cohomology definitions, formal derived vanishing on injectives or bounded objects, and finite-presentation notions; none supplies the geometric uniform bound for arbitrary classical sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "classical|cohomolog|derived",
+   "results": "; 6 hits: Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. Read the returned signatures and the relevant definitions in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:59, Mathlib/CategoryTheory/Abelian/RightDerived.lean:154, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:88-105, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:140 and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:19-32. These give cohomology definitions, formal derived vanishing on injectives or bounded objects, and finite-presentation notions; none supplies the geometric uniform bound for arbitrary classical sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classical proetale finite coefficient module sheaves have uniformly bounded cohomology on affine etale objects",
+   "results": "; 8 hits: SheafOfModules.IsFiniteType.mk, SheafOfModules.IsFiniteType, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.hasLimitsOfSize, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation. Read the returned signatures and the relevant definitions in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:59, Mathlib/CategoryTheory/Abelian/RightDerived.lean:154, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:88-105, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:140 and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:19-32. These give cohomology definitions, formal derived vanishing on injectives or bounded objects, and finite-presentation notions; none supplies the geometric uniform bound for arbitrary classical sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale comparison transfers finite cohomological dimension to higher section functors on classical sheaves of modules",
+   "results": "; 8 hits: SheafOfModules.isFinitePresentation, LightCondMod.ofSheafLightProfinite, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, CondensedMod.ofSheafProfinite, LightCondAb.ofSheafLightProfinite, CondensedMod.ofSheafCompHaus, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat. Read the returned signatures and the relevant definitions in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:59, Mathlib/CategoryTheory/Abelian/RightDerived.lean:154, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:88-105, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:140 and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:19-32. These give cohomology definitions, formal derived vanishing on injectives or bounded objects, and finite-presentation notions; none supplies the geometric uniform bound for arbitrary classical sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-unbounded-site-comparison",
@@ -86,5 +187,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-classical-module-affine-evaluation-bound",
+  "worker": "stage1",
+  "summary": "Kept the statement and all statement dependencies unchanged. Four-step proof: descend the classical module sheaf, apply the existing étale module bound, transfer it by the bounded-below comparison on the constant one-object affine presentation, and identify ambient evaluation by restriction of injective resolutions. All inputs already exist; no new nodes. Repeated the item Mathlib searches with logged real queries and checked each cited statement.",
+  "blueprint": "Realizes the classical sheaf-bound input in the Fixed-degree truncation paragraph of det-pe-unbounded-classical-unit, supporting the unbounded-comparison input in the first paragraph of det-ctf-finite-comparison-localizing. Keeps the bounded-below comparison and uniform-bound route; no unbounded comparison conclusion is used. Blueprint searches for classical (60 hits) and evaluation bound (0 hits) found no identical module-derived-evaluation statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ringed-site existence tool for module resolutions in the common larger universe; no node of the unit constructs the ambient abelian categories."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives tool applied to these Grothendieck module categories."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic étale localization tool identifying the restriction in the affine formula with the inverse image in the given étale bound."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-coefficient tool ensuring that the abelian restriction identification lifts with the same A-action."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic homological computation tool identifying degree-zero-input derived sections with cohomology of module injective resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Generic localization tool identifying ambient-site module evaluation with sections on the slice; no node of this unit gives that injective-preservation assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-proetale-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-8394cd28b",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-8394cd28b (reviewer sub-agent of L); spot-checked: Read the item, all 4 steps and every cited statement in full; review written to review.md. Step 1: lem-weil-pbc-ring-sheaves-grothendieck and lem-sp-grothendieck-enough-injectives give enough injectives on the four small sites. det-pe-classical-sheaves-modules (any discrete commutative ring) gives H ≅ ν^*G with no finiteness condition. Step 2: lem-weil-pbc-etale-inverse-image-restriction(1) gives the restriction isomorphism. lem-pe-constant-left-module-inverse-image keeps the same constant scalars; A-linearity from naturality is elementary. lem-sfb-etale-module-affine-bound has the same k, ℓ, A, ℓ^aA=0, W and d_X/e_X conventions as the item. Step 3: the affine formula of sk-prop-sf-comparison with K=G[0] (bounded below) and the one-object cofiltered presentation (W is affine and étale, so a pro-étale affine). Clause (2) of lem-weil-pbc-right-derived-plus-injective links RΓ to injective resolutions. Only the bounded-below comparison is used, never the unbounded one, so there is no circularity with lem-sfb-unbounded-site-comparison. The cycle check is clean. Step 4: lem-weil-pbc-proetale-restriction-injectives applies because objects of X_proét are weakly étale; it matches Stacks 03F3 (sites-cohomology l.608). This is the input of the Fixed-degree truncation paragraph, lines 16-26 of the main-20261015 unit proof. Small cases: algebraically closed field (true cd 0 ≤ 1), F_q (cd 1, nothing claimed at q=1), empty X/W, non-finitely-generated G. The statement is true and not weakened. No new nodes and no duplicates (det-pe-unbounded-classical-bounds(1) is abelian cohomology on U_proét, not module-valued evaluation on the ambient site). Batch-5 flag on lem-sfb-etale-module-affine-bound: in the closure of every proof_dep, the only sec-poincare-duality node is lem-pod-separated-finite-type-base-change. That node is a Mathlib leaf saying separated + finite type is stable under base change, a general scheme fact. It is not a step of the trace formula or of Poincaré duality, and neither assumption states it or the cohomological-dimension bound it feeds. No closure meets sec-trace-formula. So the citation is genuinely outside the assumptions. I accept the six generic tool_uses as declared. No SGA. No changes."
  }
 }

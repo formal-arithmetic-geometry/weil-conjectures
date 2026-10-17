@@ -3,59 +3,149 @@
  "blueprint": {
   "is": "lem-wf-geometric-jacobian-galois-action",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Canonical semilinear Galois action on the geometric Jacobian",
- "statement": "Let $C_0/k_0$ be a smooth projective geometrically connected curve, put\n$C=C_0\\times_{k_0}\\overline{k}_0$, and let $J$ be the\nJacobian of $C$, which exists by\n[thm-sc-jacobian-representability] because $C$ is a smooth projective\ncurve over the separably closed field $\\overline{k}_0$ and is geometrically\nintegral ($C_0$ is smooth, hence geometrically reduced, and geometrically\nconnected by hypothesis). For every\n$\\sigma\\in\\operatorname{Gal}(\\overline{k}_0/k_0)$ there is a canonical\nisomorphism\n\n$$\n\\sigma_J:\\;J\\longrightarrow J\n\\qquad\\text{over}\\qquad\n\\sigma:\\operatorname{Spec}\\overline{k}_0\\longrightarrow\n\\operatorname{Spec}\\overline{k}_0,\n$$\n\nwhich preserves the group laws and is compatible with the identification\n$\\operatorname{Pic}^0(C)=J(\\overline{k}_0)$; the assignment\n$\\sigma\\mapsto\\sigma_J$ is an action of\n$\\operatorname{Gal}(\\overline{k}_0/k_0)$, so that $J(\\overline{k}_0)$ is a\nGalois module and $T_\\ell J$ a\n$\\mathbf Z_\\ell[\\operatorname{Gal}(\\overline{k}_0/k_0)]$-module for the Tate\nmodule of [def-wf-abelian-tate-module]. Moreover, if $J_0$ is the\nJacobian of $C_0$ over $k_0$ of [thm-pd-jacobian-general-field], then\nunder the isomorphism $J\\cong J_0\\times_{k_0}\\overline{k}_0$ of that\ntheorem one has $\\sigma_J=\\mathrm{id}_{J_0}\\times\\sigma$; hence the action\non $J(\\overline{k}_0)=J_0(\\overline{k}_0)$ is the one through the\n$k_0$-structure of $J_0$, and the identification\n$J_0[\\ell^n](\\overline{k}_0)\\cong\\operatorname{Pic}^0(C)[\\ell^n]$ is\n$\\operatorname{Gal}(\\overline{k}_0/k_0)$-equivariant for every $\\ell$ and\n$n$.",
+ "statement": "Let $k_0$ be a field, let $K=\\overline{k}_0$ be an algebraic closure, let $C_0/k_0$ be a smooth projective geometrically connected curve, and put $C=C_0\\times_{k_0}K$. Fix a Jacobian $(J,\\varphi)$ of $C$ in the sense of [def-sc-jacobian]; such a Jacobian exists by the base-change clause of [thm-pd-jacobian-general-field]. Put $\\Gamma=\\operatorname{Aut}(K/k_0)$, with multiplication $\\sigma\\tau=\\sigma\\circ\\tau$. Write $s_\\sigma=\\operatorname{Spec}(\\sigma)$ and $b_\\sigma=s_{\\sigma^{-1}}$, so that $b_{\\sigma\\tau}=b_\\sigma\\circ b_\\tau$.\n\nThere is a canonical left semilinear action $\\sigma\\mapsto a_\\sigma$ on $J$: each $a_\\sigma:J\\to J$ is an isomorphism over $b_\\sigma$, preserves the group structure in the semilinear sense, and $a_{\\sigma\\tau}=a_\\sigma\\circ a_\\tau$, $a_1=\\mathrm{id}_J$. If $J_0/k_0$ is the Jacobian of $C_0$ provided by [thm-pd-jacobian-general-field] and $\\alpha:J\\xrightarrow{\\sim}J_0\\times_{k_0}K$ is the isomorphism respecting the representing isomorphisms, then\n$$\n\\alpha\\circ a_\\sigma\\circ\\alpha^{-1}=\\mathrm{id}_{J_0}\\times b_\\sigma.\n$$\nThe induced left action on $K$-points is\n$$\n\\sigma\\cdot x=a_\\sigma\\circ x\\circ s_\\sigma\n\\quad\\text{for }x:\\operatorname{Spec}K\\to J\\text{ over }K.\n$$\nUnder $J(K)\\cong J_0(K)=\\operatorname{Hom}_{k_0}(\\operatorname{Spec}K,J_0)$ this is $u\\mapsto u\\circ s_\\sigma$. The identification $J(K)\\cong\\operatorname{Pic}^0(C)$ is equivariant for this action and the action\n$$\n\\sigma\\cdot[\\mathcal L]=[(\\mathrm{id}_{C_0}\\times s_\\sigma)^*\\mathcal L].\n$$\nThus $J(K)$ is a $\\Gamma$-module. For every prime $\\ell$ and $n\\ge1$, the induced group isomorphisms\n$$\nJ_0[\\ell^n](K)\\cong\\operatorname{Pic}^0(C)[\\ell^n]\n$$\nare $\\Gamma$-equivariant and commute with multiplication by $\\ell$. The inverse-limit Tate module $T_\\ell J=T_\\ell(J(K))$ of [def-tate-module-abelian-group] therefore has a componentwise $\\mathbf Z_\\ell$-linear $\\Gamma$-action, making it a $\\mathbf Z_\\ell[\\Gamma]$-module. For $\\ell\\ne\\operatorname{char}(k_0)$ this is the abelian-variety Tate module of [def-wf-abelian-tate-module].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-geometric-jacobian-galois-action.md",
   "place": "node lem-wf-geometric-jacobian-galois-action, order 2609"
  },
  "stmt_deps": [
-  "thm-sc-jacobian-representability",
-  "def-wf-abelian-tate-module",
-  "thm-pd-jacobian-general-field"
+  "def-sc-jacobian",
+  "thm-pd-jacobian-general-field",
+  "def-tate-module-abelian-group",
+  "def-wf-abelian-tate-module"
  ],
  "proof": [
   {
-   "text": "The automorphism $\\sigma$ of $\\overline{k}_0$ over $k_0$ defines the\nautomorphism $\\sigma_C:=\\mathrm{id}_{C_0}\\times\\sigma$ of $C$ over\n$\\sigma$, hence an isomorphism of functors\n$\\sigma_C^*:\\operatorname{Pic}^0_{C/\\overline{k}_0}\\to \\operatorname{Pic}^0_{C/\\overline{k}_0}$ on\n$(\\mathit{Sch}/\\overline{k}_0)_{fppf}$\n([def-sc-picard-functor]). Since $J$ represents\n$\\operatorname{Pic}^0_{C/\\overline{k}_0}$\n([thm-sc-jacobian-representability], [def-sc-jacobian]), this\nisomorphism of functors is induced by a unique isomorphism $\\sigma_J:J\\to J$\nover $\\sigma$, by Yoneda together with the uniqueness of representing\nobjects ([lem-pc-representable-unique],\n[lem-sc-jacobian-unique]); it preserves the group laws because\n$\\sigma_C^*$ is an isomorphism of group-valued functors. Functoriality of\nbase change gives $(\\sigma\\tau)_C^*=\\sigma_C^*\\tau_C^*$ and\n$\\mathrm{id}_C^*=\\mathrm{id}$, so $\\sigma\\mapsto\\sigma_J$ is an action;\npassing to geometric points and to torsion gives the Galois module structure\non $J(\\overline{k}_0)$ and on the Tate module of\n[def-wf-abelian-tate-module].",
-   "uses": [
-    "def-sc-picard-functor",
-    "thm-sc-jacobian-representability",
-    "def-sc-jacobian",
-    "lem-pc-representable-unique",
-    "lem-sc-jacobian-unique",
-    "def-wf-abelian-tate-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the comparison with $J_0$: by [thm-pd-jacobian-general-field] the\nscheme $J_0\\times_{k_0}\\overline{k}_0$ represents\n$\\operatorname{Pic}^0_{C_0/k_0}\\times_{k_0}\\overline{k}_0=\n\\operatorname{Pic}^0_{C/\\overline{k}_0}$, through the base change of the\nisomorphism $h_{J_0}\\cong\\operatorname{Pic}^0_{C_0/k_0}$. That isomorphism\nis a natural transformation of functors on $k_0$-schemes, and\n$\\mathrm{id}_{C_0}\\times\\sigma$ and $\\mathrm{id}_{J_0}\\times\\sigma$ are the\nmaps induced on the base changes by the $k_0$-morphism\n$\\sigma:\\operatorname{Spec}\\overline{k}_0\\to\\operatorname{Spec}\\overline{k}_0$;\nhence $\\mathrm{id}_{J_0}\\times\\sigma$ is an isomorphism over $\\sigma$\ninducing $\\sigma_C^*$ on the represented functor. By the uniqueness in\nthe Yoneda argument above it equals $\\sigma_J$ (after transport along\n$J\\cong J_0\\times_{k_0}\\overline{k}_0$, which is compatible with the\nrepresenting isomorphisms by [lem-sc-jacobian-unique]). On\n$\\overline{k}_0$-points, $\\mathrm{id}_{J_0}\\times\\sigma$ acts on\n$J_0(\\overline{k}_0)=\\operatorname{Hom}_{k_0}(\\operatorname{Spec}\\overline{k}_0,J_0)$\nthrough the $k_0$-structure of $J_0$, and the equivariance of the torsion\nidentification is the torsion clause of [thm-pd-jacobian-general-field].",
+   "text": "Apply [thm-pd-jacobian-general-field] to $C_0/k_0$: its hypotheses are precisely smoothness, projectivity and geometric connectedness, and it assumes no $k_0$-point. It gives a representing abelian variety $J_0$ and makes $H=J_0\\times_{k_0}K$, with its base-changed representing isomorphism, a Jacobian of $C$. By [def-sc-jacobian] the given $J$ includes its representing isomorphism; hence [lem-sc-jacobian-unique] gives a unique $K$-group-scheme isomorphism $\\alpha:J\\to H$ respecting those representing isomorphisms. This also establishes existence of a Jacobian over $K$ without an extra rational-point assumption.",
    "uses": [
     "thm-pd-jacobian-general-field",
+    "def-sc-jacobian",
     "lem-sc-jacobian-unique"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-prop-jacobian-descent/thm-pd-jacobian-general-field.proof.md",
+    "place": "Steps 8–9, base change and geometric points; item proof, second paragraph"
+   }
+  },
+  {
+   "text": "Write $q:H\\to J_0$ and $p:H\\to\\operatorname{Spec}K$ for the projections. Since $b_\\sigma$ is over $k_0$, the pair $(q,b_\\sigma\\circ p)$ defines a unique map $t_\\sigma:H\\to H$ by the fibre-product universal property. Thus $t_\\sigma=\\mathrm{id}_{J_0}\\times b_\\sigma$. The same construction with $\\sigma^{-1}$ is its inverse. The identities $q t_\\sigma=q$ and $p t_\\sigma=b_\\sigma p$ show, by checking both projections, that $t_\\sigma t_\\tau=t_{\\sigma\\tau}$ and $t_1=\\mathrm{id}$. Here $b_\\sigma b_\\tau=\\operatorname{Spec}(\\tau^{-1}\\sigma^{-1})=b_{\\sigma\\tau}$. The group law on $H$ is the base change of that on $J_0$; checking its $J_0$-projection and its base projection gives $t_\\sigma\\circ m=m\\circ(t_\\sigma\\times_{b_\\sigma}t_\\sigma)$, and likewise the zero and inverse maps commute with $t_\\sigma$ over $b_\\sigma$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-geometric-jacobian-galois-action.md",
+    "place": "Proof, second paragraph: the maps induced on the base changes; variance made explicit"
+   }
+  },
+  {
+   "text": "Set $a_\\sigma=\\alpha^{-1}t_\\sigma\\alpha$. Conjugating the identities of Step 2 proves the left action law, semilinearity, preservation of the group laws, and the displayed comparison with $J_0$. This construction does not depend on the representing model: for a second model $J'_0$, [lem-pc-representable-unique] applied over $k_0$ to their representing isomorphisms gives $v:J_0\\xrightarrow{\\sim}J'_0$. Its base change $v_K$ respects the representing isomorphisms, so uniqueness in [lem-pc-representable-unique] over $K$ gives $\\alpha'=v_K\\alpha$. Checking the two projections gives $v_Kt_\\sigma=t'_\\sigma v_K$, since $v$ is over $k_0$ and the other factor is $b_\\sigma$. Substitution gives $\\alpha'^{-1}t'_\\sigma\\alpha'=\\alpha^{-1}t_\\sigma\\alpha$. This proves canonicity relative to the fixed representing isomorphism of $J$.",
+   "uses": [
+    "lem-pc-representable-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-geometric-jacobian-galois-action.md",
+    "place": "Proof, second paragraph: uniqueness of the representing comparison"
+   }
+  },
+  {
+   "text": "For a $K$-point $x$ of $J$, put $\\sigma\\cdot x=a_\\sigma x s_\\sigma$. It is over $K$, since its base map is $b_\\sigma s_\\sigma=\\mathrm{id}$. Because $s_\\tau s_\\sigma=s_{\\sigma\\tau}$, one has $\\sigma\\cdot(\\tau\\cdot x)=a_\\sigma a_\\tau x s_\\tau s_\\sigma=(\\sigma\\tau)\\cdot x$. Addition is preserved by the semilinear group-law identity of Step 2. If $u=q\\alpha x$ is the corresponding $k_0$-point of $J_0$, then $q\\alpha(\\sigma\\cdot x)=qt_\\sigma\\alpha x s_\\sigma=q\\alpha x s_\\sigma=u s_\\sigma$. These are exactly the point actions specified in [thm-pd-jacobian-general-field]. Its geometric-point equivariance clause identifies this action with $[\\mathcal L]\\mapsto[(\\mathrm{id}_{C_0}\\times s_\\sigma)^*\\mathcal L]$ on $\\operatorname{Pic}^0(C)$. Since $\\alpha$ respects the representing isomorphisms, that clause applies to the given identification of $J(K)$ as well.",
+   "uses": [
+    "thm-pd-jacobian-general-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-prop-jacobian-descent/thm-pd-jacobian-general-field.proof.md",
+    "place": "Steps 9–10, geometric points and equivariance"
+   }
+  },
+  {
+   "text": "For every prime $\\ell$ and $n\\ge1$, [thm-pd-jacobian-general-field] gives the claimed equivariant torsion identification. Its underlying identification is one group isomorphism $J_0(K)\\cong\\operatorname{Pic}^0(C)$ restricted to the subgroups killed by $\\ell^n$. Consequently all these restrictions commute with multiplication by $\\ell$: for a point $z$ killed by $\\ell^{n+1}$, its image satisfies $\\Phi(\\ell z)=\\ell\\Phi(z)$, and $\\ell^n(\\ell z)=0$. No invertibility of $\\ell$ is used here; the assertion concerns geometric points, not the assertion that the torsion group scheme is etale.",
+   "uses": [
+    "thm-pd-jacobian-general-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-prop-jacobian-descent/thm-pd-jacobian-general-field.proof.md",
+    "place": "Step 11, torsion"
+   }
+  },
+  {
+   "text": "By [def-tate-module-abelian-group], an element of $T_\\ell(J(K))$ is a sequence $(x_n)$ with $\\ell^nx_n=0$ and $\\ell x_{n+1}=x_n$. Define $(\\sigma x)_n=\\sigma\\cdot x_n$. Additivity gives $\\ell^n(\\sigma\\cdot x_n)=\\sigma\\cdot(\\ell^nx_n)=0$ and $\\ell(\\sigma\\cdot x_{n+1})=\\sigma\\cdot x_n$, so this sequence is in the same inverse limit. Identity and composition hold at each coordinate. For $c=(c_n)\\in\\mathbf Z_\\ell$, choose an integer representative of each residue $c_n$; additivity yields $\\sigma\\cdot(c_nx_n)=c_n(\\sigma\\cdot x_n)$, independently of that choice because $\\ell^nx_n=0$. This proves $\\mathbf Z_\\ell$-linearity and hence the group-ring module assertion. Under the characteristic restriction in [def-wf-abelian-tate-module], its last clause identifies this inverse limit with $T_\\ell J$ and specifies the same componentwise action.",
+   "uses": [
+    "def-tate-module-abelian-group",
+    "def-wf-abelian-tate-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-geometric-jacobian-galois-action.md",
+    "place": "Proof, first paragraph: passing to torsion and the Tate module, expanded coordinatewise"
+   }
   }
  ],
  "proof_deps": [
-  "def-sc-picard-functor",
-  "thm-sc-jacobian-representability",
+  "thm-pd-jacobian-general-field",
   "def-sc-jacobian",
-  "lem-pc-representable-unique",
   "lem-sc-jacobian-unique",
-  "def-wf-abelian-tate-module",
-  "thm-pd-jacobian-general-field"
+  "lem-pc-representable-unique",
+  "def-tate-module-abelian-group",
+  "def-wf-abelian-tate-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-geometric-jacobian-galois-action.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs, repaired for contravariance using the general-field Jacobian comparison"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Jacobian|geometricFiberGalois|tateModuleSemilinear",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"galois\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Jacobian over an algebraic closure carries the Galois action of its model over the ground field",
+   "results": "instSMulDistribClassAlgEquiv; galRestrict.congr_simp; Field.absoluteGaloisGroup; Ideal.instMulActionAlgEquivElemPrimesOver; Ideal.coe_smul_primesOver_eq_map_galRestrict; IsGaloisGroup.of_isFractionRing; IsGaloisGroup.isInvariant; Algebra.isInvariant_of_isGalois",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric Jacobian of a smooth projective curve has a canonical semilinear Galois action compatible with its Picard group and Tate module",
+   "results": "WeierstrassCurve.Jacobian.PointClass; WeierstrassCurve.instMulActionVariableChange; WeierstrassCurve.Jacobian.Point.instAddCommGroup; WeierstrassCurve.instSMulVariableChange; WeierstrassCurve.VariableChange.instGroup; WeierstrassCurve.Affine.Point.toClass_some; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|TateModule|semilinear",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois automorphisms act on a base changed group scheme and its torsion inverse limit by functoriality",
+   "results": "InfiniteGalois.algEquivToLimit; CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π; InfiniteGalois.mulEquivToLimit; InfiniteGalois.limitToAlgEquiv; CategoryTheory.PreGaloisCategory.AutGalois.π; CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply; CategoryTheory.PreGaloisCategory.comp_autMap_apply; InfiniteGalois.limitToAlgEquiv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -83,5 +173,34 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-jacobian"
+ "unit": "sk-d-real-jacobian",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-geometric-jacobian-galois-action",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: Spec reverses composition, so the imported scheme-action formula is an anti-action. Use b_sigma=Spec(sigma inverse) for a left semilinear action and twist geometric points by Spec(sigma). Construct it on the existing ground-field Jacobian, transport by its unique representing comparison, and prove torsion and Tate compatibility explicitly. No new nodes.",
+  "blueprint": "Second proof paragraph supplies J0 and its representing comparison (steps 1–3); first paragraph action/group laws and Tate claim are realized by steps 2, 4–6, with the variance error corrected.",
+  "tool_uses": [
+   {
+    "node": "thm-pd-jacobian-general-field",
+    "why": "Use its existing general-field representing Jacobian, base-change clause and geometric-point equivariance, explicitly invoked by the original node; the unit contains no replacement for these Picard results."
+   },
+   {
+    "node": "lem-sc-jacobian-unique",
+    "why": "Use uniqueness of the group-scheme comparison respecting the two representing isomorphisms, a generic Jacobian tool already cited by the original proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pd-jacobian-general-field",
+  "lem-sc-jacobian-unique"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-d2f7f4b46",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-d2f7f4b46 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement (with its blueprint_update), the master and main-20261015 blueprint text for this node, the unit (a definition sketch with no steps) and the four citers. The delivery has no new nodes. The statement correction is right. Spec reverses composition, so the source's sigma_J = id x Spec(sigma) is an anti-action, not a left action. The genus-0 counterexample checks out: P1 over Q with sigma and tau acting as (12) and (23) on the splitting field of X^3-2. The source's own point action u -> u.Spec(sigma) is left, which shows the inconsistency. The repair takes b_sigma = Spec(sigma^-1), a_sigma ~ id x b_sigma, and sigma.x = a_sigma x s_sigma. I checked the base map, the action law and additivity. On J0(K) the point action is u -> u.Spec(sigma), and Picard pullback by id x Spec(sigma) is also a left action; both match thm-pd-jacobian-general-field exactly. I tested it on E0/Q: points go to (sigma x, sigma y). No clause is weakened. J is now any fixed Jacobian, and the 'l != char' proviso covers only the identification with def-wf-abelian-tate-module, matching that node's current hypothesis. Step checks: step 1 gets the model, base change and alpha from thm-pd, def-sc-jacobian and lem-sc-jacobian-unique. It takes the integrality of C over K from thm-pd's claim that the base change is the Jacobian, which is acceptable. Step 2 is an elementary fibre-product check. Step 3 shows independence of the model using lem-pc-representable-unique over k0 and over K, and I checked both projections. Step 4 uses thm-pd's equivariance clause. Step 5 uses its torsion clause and needs no etaleness, so it holds for every l. Step 6 checks the coordinatewise Z_l-linear action using def-tate-module-abelian-group and def-wf-abelian-tate-module. I accept both declared tool_uses: thm-pd-jacobian-general-field and lem-sc-jacobian-unique are both closed in Lean and both cited by the original blueprint proof. The DAG has no duplicate of the scheme-level semilinear action. Downstream, lem-wf-finite-field-tate-no-fixed step 2 still writes id x sigma_Q; its conclusion holds, and the expression should be fixed when that node is split. Minor: the correction is under 'Statement corrected' rather than 'Source error'. No fixes."
+ }
 }
