@@ -1,0 +1,99 @@
+{
+ "id": "lem-coef-split-coproduct-bar-extra-degeneracy",
+ "kind": "statement",
+ "title": "An initial unused factor gives an extra degeneracy of the split coproduct bar",
+ "statement": "Let $O$ be a small set, let $F,A,V$ be small ordinary categories [def-nagata-category] with object set $O$, and let $v:A\\to V$ be a functor equal to the identity on $O$. All functors below fix $O$. Write $D*E$ for the coproduct of $D,E$ in categories with object set $O$: arrows are composable words of arrows of the factors modulo the composition and identity relations within each factor. Let $A_i$ denote labelled copies of $A$. Define an augmented simplicial category by\n$$R_n=F*A_0*\\cdots*A_n*V\\quad(n\\geq0),\\qquad R_{-1}=F*V.$$\nFor $n\\geq1$, the face $d_i:R_n\\to R_{n-1}$, $0\\leq i<n$, folds $A_i,A_{i+1}$ by the identity of $A$ and reindexes later copies; $d_n$ sends $A_n$ into $V$ by $v$. The degeneracy $s_i:R_n\\to R_{n+1}$ inserts an unused copy of $A$ immediately after $A_i$, sending an old copy $k$ to copy $k$ if $k\\leq i$ and to copy $k+1$ otherwise. All these maps fix $F,V$. The augmentation $\\varepsilon_n:R_n\\to F*V$ fixes $F,V$ and sends every $A_i$ into $V$ by $v$. Simplicial and augmented simplicial objects have the functor and operator conventions of [def-weil-pbc-simplicial-set]. Let $h_{-1}:F*V\\to R_0$ be the coproduct inclusions, and let $h_n:R_n\\to R_{n+1}$ insert an unused copy before $A_0$, send each old copy $A_k$ identically to copy $A_{k+1}$, and fix $F,V$. These functors satisfy\n$$\\varepsilon_0h_{-1}=1_{F*V},\\quad d_0h_n=1_{R_n},\\quad d_1h_0=h_{-1}\\varepsilon_0,$$\n$$d_{i+1}h_{n+1}=h_nd_i\\quad(0\\leq i\\leq n+1),\\qquad s_{i+1}h_n=h_{n+1}s_i\\quad(0\\leq i\\leq n).$$\nConsequently, for every $x,y\\in O$, restricting these functors to the mapping sets gives an extra degeneracy in exactly the sense of [lem-coef-extra-degeneracy-contraction] for the augmentation of simplicial sets $R_\\bullet(x,y)\\to\\operatorname{const}((F*V)(x,y))$. No freeness hypothesis on $F,A,V$ is imposed.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Proof of Proposition 8.2, printed p.279: ordinary split coproduct bar and its contracting homotopy; the explicit initial-factor insertion identities are the agent expansion retained from the returned parent step 6. Compare Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, lines 72-83 for the identities. No Stacks tag states this fixed-object coproduct-bar assertion."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-extra-degeneracy-contraction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ExtraDegeneracy|extraDegeneracy|extra_degeneracy",
+   "results": "{\"t\": \"2026-10-17T08:41:36Z\", \"tool\": \"grep\", \"query\": \"ExtraDegeneracy|extraDegeneracy|extra_degeneracy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\"], \"digest\": \"36e0d35e189f91e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExtraDegeneracy\", \"Coproduct\"",
+   "results": "{\"t\": \"2026-10-17T08:41:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExtraDegeneracy\\\", \\\"Coproduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.FormalCoproduct.extraDegeneracyCech\"], \"digest\": \"d66801c7cfbe0e25\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented coproduct bar of ordinary categories F * A * ... * A * V over a fixed object set has an extra degeneracy inserting an unused A factor before the first A copy",
+   "results": "{\"t\": \"2026-10-17T08:41:47Z\", \"tool\": \"leanfinder\", \"query\": \"The augmented coproduct bar of ordinary categories F * A * ... * A * V over a fixed object set has an extra degeneracy inserting an unused A factor before the first A copy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.augment\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.augment_left\", \"CategoryTheory.SimplicialObject.augment_hom_app\"], \"digest\": \"25951899203b1ba9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oproduct.*[Bb]ar|[Bb]ar.*[Cc]oproduct|[Cc]ocech|[Cc]oCech",
+   "results": "{\"t\": \"2026-10-17T08:45:01Z\", \"tool\": \"grep\", \"query\": \"[Cc]oproduct.*[Bb]ar|[Bb]ar.*[Cc]oproduct|[Cc]ocech|[Cc]oCech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An augmented simplicial coproduct bar F coproduct A power n+1 coproduct V is split by inserting a first unused summand",
+   "results": "{\"t\": \"2026-10-17T08:45:01Z\", \"tool\": \"leansearch\", \"query\": \"An augmented simplicial coproduct bar F coproduct A power n+1 coproduct V is split by inserting a first unused summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Split.casesOn\", \"SimplicialObject.Splitting.mk\", \"SimplicialObject.Splitting\", \"SimplicialObject.Splitting.N\", \"SimplicialObject.Split\", \"SimplicialObject.Splitting.summand\", \"SimplicialObject.Splitting.πSummand\", \"SimplicialObject.Splitting.casesOn\"], \"digest\": \"0d2d573b59caae04\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExtraDegeneracy\", \"Cech\"",
+   "results": "{\"t\": \"2026-10-17T08:45:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExtraDegeneracy\\\", \\\"Cech\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_base\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_succ\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_0\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_base_assoc\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_succ_assoc\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_0_assoc\"], \"digest\": \"e9d94082c2eb03f8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two sided bar for the coproduct monoid A in categories with fixed objects has a left extra degeneracy when its left module is F coproduct A",
+   "results": "{\"t\": \"2026-10-17T08:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"The two sided bar for the coproduct monoid A in categories with fixed objects has a left extra degeneracy when its left module is F coproduct A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AugmentedSimplexCategory.inl_comp_tensorHom\", \"AugmentedSimplexCategory.inl_comp_tensorHom_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.mapMono_on_summand_id_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc\", \"AugmentedSimplexCategory.inr_comp_tensorHom\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\"], \"digest\": \"a5108e77f2a6f59f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-fixed-object-scat-left-proper",
+  "date": "2026-10-17",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and following naturality and triangle-identity sentences: foundational coherent localization input. Fixed-object left properness used in the two span comparisons of the interval-cell argument. Extracts the ordinary split coproduct-bar factor-insertion identities from the returned proof of lem-coef-fixed-object-scat-left-proper, step 6.",
+   "via": [
+    "lem-coef-fixed-object-scat-left-proper",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

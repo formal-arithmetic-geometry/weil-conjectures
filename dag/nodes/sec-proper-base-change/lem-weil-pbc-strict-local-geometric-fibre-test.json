@@ -71,21 +71,17 @@
    }
   },
   {
-   "text": "For each $z\\in E$, choose a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ inducing an embedding $K=\\kappa(z)\\to\\Omega$, with $\\Omega$ algebraically closed. Clopen pointed neighbourhoods of $z$ are cofinal among the pointed etale neighbourhoods of $\\bar z$. Indeed choose an affine open $\\operatorname{Spec}D$ around the distinguished point of such a neighbourhood. Its fibre $D\\otimes_C K$ is etale over $K$ by etale base change; the finite-separable-product theorem and separable closedness identify it with a finite product of copies of $K$. Thus its given map to $\\Omega$ selects a factor and comes from a $K$-point: the pointed map $D\\to\\Omega$ factors through $D\\to K=C_z$. By the affine-etale ring criterion, $D$ is a finitely presented $C$-algebra. Write the finitely many generator images in $C_z$ as fractions and invert the product of their denominators, all outside $z$. Each defining relation vanishes in $C_z$, so invert one further element outside $z$ annihilating it, for each of the finitely many relations. This produces a $C$-map $D\\to C_s$, $s\\notin z$, hence a section over $D(s)$ through the prescribed point. The clopen basis supplies $z\\in W\\subseteq D(s)$, and restriction gives a pointed map $W\\to\\operatorname{Spec}D$. By the clopen-idempotent theorem, each such $W$ is $D(e)=\\operatorname{Spec}C_e$ for an idempotent $e$ of $C$, so it is an affine etale neighbourhood. Two such clopen refinements have common refinement their intersection. To equalize two pointed maps from a clopen into a neighbourhood, first shrink around $z$ into an affine open of that neighbourhood containing their common distinguished point. On its finitely many algebra generators the two maps have differences zero in $C_z$; invert finitely many annihilators outside $z$ and take a smaller clopen. The maps then agree, since they agree on every generator. This proves cofinality, including the equalization condition, for every choice of $\\Omega$ and embedding $K\\to\\Omega$. Hence the stalk of any abelian sheaf at $\\bar z$ is computed on the same clopen system, independently of $\\Omega$. A germ has a representative on a clopen $W$; gluing it with the zero section on the disjoint open complement gives a global section with that germ. Therefore $\\Gamma(E,G)=0$ implies that every geometric stalk of $G$ vanishes, and geometric-stalk conservativity gives $G=0$. The argument also applies to $T=\\operatorname{Spec}K$; its clopen neighbourhood system has the single nonempty object $T$, so for every geometric point of $T$ the germ map $F(T)\\to F_{\\bar t}$ is an isomorphism.",
+   "text": "For each $z\\in E$, choose a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ over $z$. Step 2 gives $C_z=K$ and a profinite underlying space; [lem-weil-pbc-profinite-clopen-basis] supplies its clopen basis. Apply [lem-weil-pbc-clopen-etale-neighbourhood-cofinality] to obtain, for every choice of algebraically closed $\\Omega$ and embedding $K\\to\\Omega$, a cofinal system of clopen pointed neighbourhoods and the equalization property. Then [lem-weil-pbc-clopen-stalk-global-sections-detection] identifies every geometric stalk of an abelian sheaf on $E$ with its clopen-section colimit and shows that a zero global section group has zero geometric stalks; applying [lemma-weil-pbc-geometric-stalk-conservative] gives the corresponding zero-sheaf conclusion. The same clopen-section statement for $T=\\operatorname{Spec}K$ identifies $F(T)$ canonically with $F_{\\bar t}$ for every geometric point $\\bar t$.",
    "uses": [
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
     "lem-weil-pbc-profinite-clopen-basis",
-    "def-weil-pbc-geometric-stalks",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-etale-algebra-over-field-product",
-    "lem-pc-sepclosed-finite-sep-trivial",
-    "lem-weil-pbc-spec-clopen-idempotent"
+    "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
+    "lem-weil-pbc-clopen-stalk-global-sections-detection",
+    "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 09AY and 03PN; clopen basis from Topology Tag 08ZZ; explicit localization argument; Algebra Tag 00EE, lemma-disjoint-decomposition"
+    "place": "Tags 09AY and 03PN; corrected Tag 0EZV proof after the finite-product presentation, clopen cofinality and stalk detection paragraphs"
    }
   },
   {
@@ -152,11 +148,10 @@
   "lem-weil-pbc-spec-finite-product-fields",
   "lem-weil-pbc-zero-dimensional-spectrum-profinite",
   "def-pc-fibre-product",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "lem-weil-pbc-profinite-clopen-basis",
-  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
+  "lem-weil-pbc-clopen-stalk-global-sections-detection",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-spec-clopen-idempotent",
   "lem-cbc-affine-sepclosed-etale-acyclic",
   "lem-weil-pbc-derived-functor-long-exact",
   "lem-weil-pbc-module-sheaves-enough-injectives",
@@ -164,7 +159,8 @@
   "lem-weil-pbc-cohomology-pullback-derived-unit",
   "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-  "lem-weil-pbc-inverse-image-stalk-germ"
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-spec-clopen-idempotent"
  ],
  "proof_origin": {
   "by": "agent",
@@ -265,7 +261,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-smooth-local-acyclicity",
   "by": "worker",
@@ -274,10 +270,10 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-strict-local-geometric-fibre-test",
   "worker": "stage1",
-  "summary": "STATEMENT-DISPUTED: Tag 0EZV fixed-lift assertion fails for a nodal normalization branch. Corrected to all lifts over the same geometric point and proved by split ind-etale base geometry, clopen germ extension, 09AY exact conservative sections, and unrestricted 03Q9 stalks. Reused existing nodes; no new nodes. Existing citer uses only the surviving first-to-selected-fibre implication.",
+  "summary": "STATEMENT-DISPUTED: Tag 0EZV fixed-lift assertion fails for a nodal normalization branch. Corrected to all lifts over the same geometric point and proved by split ind-etale base geometry, clopen germ extension, 09AY exact conservative sections, and unrestricted 03Q9 stalks. Re-split the returned long step 3 into two statement-only nodes for clopen etale-neighbourhood cofinality/equalization and clopen stalk/global-section detection; the existing citer uses only the surviving first-to-selected-fibre implication. Revalidated the retained repair: actual msearch.py logs, explicit self-contained new statements, full blueprint ancestry, and statement-only nodes.",
   "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. Ingredient of Tag 0GJQ: Tag 0EZV, lemma-check-stalks-better",
   "tool_uses": [
    {
@@ -365,12 +361,12 @@
   "lem-weil-pbc-module-sheaves-enough-injectives"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NC-17aeaee63",
-  "group": "NC",
+  "reviewer": "NT-Codex-Q92-3a2185f62",
+  "group": "Q92",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-17aeaee63 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements/sources. Verified the nodal counterexample to 0EZV, the all-lifts correction, all seven proof steps, and preservation of the sole citer’s implication. Repaired C1 in step 4 by adding existing long-exact-sequence and enough-injectives citations. No targets weakened or new nodes added. Wrote review.md and corrected item JSON under fixes/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-3a2185f62 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; verified the 0EZV source error, all-lifts correction, canonical maps, seven steps, both helpers, and duplicate candidates. Added required neutral merged_into and lean_audit fields to both new nodes. No mathematical changes or target weakening. Details in review.md.; 2 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

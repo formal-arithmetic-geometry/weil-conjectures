@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-clopen-stalk-global-sections-detection",
+ "kind": "statement",
+ "title": "Clopen sections compute stalks and detect zero etale sheaves",
+ "statement": "Let $K$ be a separably closed field [def-pc-separably-closed], let $C$ be a commutative $K$-algebra, and put $E=\\operatorname{Spec}C$ [def-weil-affine-spectrum]. Assume that $K\\to C_z$ is an isomorphism for every prime $z\\subset C$, where $C_z$ denotes localization at the complement of $z$, and that clopen subsets form a basis of the topology of $E$. Let $G$ be an abelian sheaf on the small etale site of $E$ [def-weil-pbc-abelian-etale-sheaves]. For each geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ over $z$ [def-weil-geometric-point], the restriction maps induce a canonical isomorphism $$\\varinjlim_{W\\ni z,\\ W\\ \\mathrm{clopen}}G(W)\\xrightarrow{\\sim}G_{\\bar z},$$ where the transition maps are restriction to smaller clopen neighbourhoods and the geometric stalk is that of [def-weil-pbc-geometric-stalks]. The canonical germ map $G(E)\\to G_{\\bar z}$ is surjective; in particular $G(E)=0$ implies $G_{\\bar z}=0$ for every geometric point. For $T=\\operatorname{Spec}K$, every abelian etale sheaf $F$ on $T$, and every geometric point $\\bar t$ of $T$, the canonical germ map $F(T)\\to F_{\\bar t}$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PN, section-stalks, geometric stalk definition; Tag 09AY, lemma-affine-only-closed-points; Tag 0EZV, lemma-check-stalks-better, finite-product presentation. Agent-written clopen stalk and germ-surjectivity refinement for the corrected proof."
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme with a clopen basis, geometric etale sheaf stalks are computed by clopen sections and zero global sections imply all geometric stalks vanish",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.stalkMap_injective_of_isAffine\nAlgebraicGeometry.Scheme.Etale\nAlgebraicGeometry.IsAffineOpen.stalkMap_injective\nAlgebraicGeometry.isReduced_stalk_of_isReduced\nAlgebra.etaleLocus\nAlgebra.isOpen_etaleLocus\nAlgebraicGeometry.isReduced_of_isReduced_stalk\nAlgebraicGeometry.Scheme.IsGermInjectiveAt.cond",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric etale stalks computed on clopen neighborhoods and global sections detect zero sheaves",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.Scheme.zero_of_zero_cover\nAlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero\nAlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen\nAlgebraicGeometry.germ_stalkClosedPointIso_hom\nAlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\nModuleCat.Tilde.smul_stalk_no_nonzero_divisor\nAlgebraicGeometry.RingedSpace.res_zero\nAlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf stalk global sections reflectsIsomorphisms",
+   "results": "[loogle] OK 0 hit(s) | loogle: Unknown identifier `Sheaf`\n",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*clopen|clopen.*stalk|global.*stalk",
+   "results": "[grep] OK 0 hit(s); searched AlgebraicGeometry/ under Mathlib/.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"IsClopen\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strict-local-geometric-fibre-test",
+  "date": "2026-10-17",
+  "group": "Q92"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof of Tag 0EZV after the clopen refinement: use the clopen cofinal system to compute geometric stalks; glue a clopen representative with zero on its clopen complement, and treat $\\operatorname{Spec}K$ as the one-point case.",
+   "via": [
+    "lem-weil-pbc-strict-local-geometric-fibre-test",
+    "lem-weil-pbc-smooth-local-acyclicity",
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

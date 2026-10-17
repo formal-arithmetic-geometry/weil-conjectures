@@ -1,0 +1,92 @@
+{
+ "id": "lem-cbc-opposite-interval-internal-hom",
+ "kind": "statement",
+ "title": "Opposite interval mapping object exchanges endpoints",
+ "statement": "Use small simplicial sets, degreewise products, internal functor simplicial sets and endpoint evaluations of [def-cbc-enhanced-diagrams-cones]. For $\\theta:[m]\\to[n]$ put $\\theta^{\\mathrm{rev}}(j)=n-\\theta(m-j)$; define $K^{\\mathrm{op}}_m=K_m$ with operator $K^{\\mathrm{op}}(\\theta)=K(\\theta^{\\mathrm{rev}})$. Put $I=\\Delta^1$. For every small simplicial set $E$ the formula\n$$R_{E,n}(\\alpha)_m(i,\\theta)=\\alpha_m(i^{\\mathrm{rev}},\\theta^{\\mathrm{rev}}),\\qquad \\alpha:I\\times\\Delta^n\\to E,$$\nwhere $i:[m]\\to[1]$ and $\\theta:[m]\\to[n]$, defines a natural simplicial isomorphism\n$$R_E:\\operatorname{Fun}(I,E)^{\\mathrm{op}}\\xrightarrow{\\sim}\\operatorname{Fun}(I,E^{\\mathrm{op}}).$$\nIt satisfies $\\operatorname{ev}_a R_E=(\\operatorname{ev}_{1-a})^{\\mathrm{op}}$ for $a=0,1$, as maps to $E^{\\mathrm{op}}$. For every simplicial map $p:E\\to B$ it satisfies $R_B\\operatorname{Fun}(I,p)^{\\mathrm{op}}=\\operatorname{Fun}(I,p^{\\mathrm{op}})R_E$. The opposite of a degreewise pullback is the pullback of the opposite maps. Thus these identifications carry the opposite of $\\rho_0(p)$ to $\\rho_1(p^{\\mathrm{op}})$, where\n$$\\rho_a(p):\\operatorname{Fun}(I,E)\\to\\operatorname{Fun}(I,B)\\times_{\\operatorname{ev}_a,B}E,\\qquad \\alpha\\mapsto(p\\alpha,\\alpha(a)).$$\nNo Kan condition is imposed on $E$ or $B$.",
+ "source": {
+  "document": "Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+  "place": "SSet.op, op_map and the degreewise definition of the simplicial internal hom; explicit reversal formula"
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The opposite of a simplicial internal hom is naturally isomorphic to the internal hom of the opposite simplicial sets, compatibly with evaluation",
+   "results": "{\"t\": \"2026-10-17T07:34:55Z\", \"tool\": \"leanfinder\", \"query\": \"The opposite of a simplicial internal hom is naturally isomorphic to the internal hom of the opposite simplicial sets, compatibly with evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.opFunctor_map\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app\", \"SSet.opEquivalence_counitIso\", \"SSet.op_map\", \"SSet.opFunctorCompOpFunctorIso_inv_app_app\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.opFunctorCompOpFunctorIso\"], \"digest\": \"bcae7268c79545d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reversing the simplex order preserves internal hom of simplicial sets and interchanges the two endpoint evaluation maps on interval mapping objects",
+   "results": "{\"t\": \"2026-10-17T07:54:51Z\", \"tool\": \"leanfinder\", \"query\": \"Reversing the simplex order preserves internal hom of simplicial sets and interchanges the two endpoint evaluation maps on interval mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op_map\", \"SSet.op\", \"SSet.stdSimplex.objEquiv\", \"SSet.stdSimplex.objEquiv_symm_comp\", \"SSet.stdSimplex.map_apply\", \"SSet.opFunctor_map\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"CategoryTheory.SimplicialCategory.sHom\"], \"digest\": \"2ed78ae780910982\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a natural isomorphism Fun(K,E).op isomorphic to Fun(K.op,E.op), compatible with precomposition, postcomposition and endpoint evaluation for K the interval",
+   "results": "{\"t\": \"2026-10-17T08:35:17Z\", \"tool\": \"leanfinder\", \"query\": \"There is a natural isomorphism Fun(K,E).op isomorphic to Fun(K.op,E.op), compatible with precomposition, postcomposition and endpoint evaluation for K the interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.opFunctorCompOpFunctorIso\", \"CategoryTheory.Functor.mapComposableArrowsOpIso\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app\", \"SimplicialObject.opFunctorCompOpFunctorIso\", \"SimplicialObject.opFunctorCompOpFunctorIso_hom_app_app\", \"CategoryTheory.ComposableArrows.opEquivalence_functor_map_app\", \"CategoryTheory.ComposableArrows.opEquivalence_unitIso_hom_app\", \"CategoryTheory.ComposableArrows.opEquivalence_functor_obj_obj\"], \"digest\": \"a3364208d2fd72b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.op, CategoryTheory.expComparison",
+   "results": "{\"t\": \"2026-10-17T08:48:59Z\", \"tool\": \"loogle\", \"query\": \"SSet.op, CategoryTheory.expComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite of the simplicial mapping object is the mapping object between opposite simplicial sets, exchanging the two interval endpoints",
+   "results": "{\"t\": \"2026-10-17T08:35:08Z\", \"tool\": \"leansearch\", \"query\": \"Opposite of the simplicial mapping object is the mapping object between opposite simplicial sets, exchanging the two interval endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op\", \"SimplicialObject.opFunctor\", \"SSet.opFunctor\", \"SimplicialObject.opEquivalence\", \"SSet.op_map\", \"CategoryTheory.simplicialCosimplicialEquiv_inverse_obj\", \"SimplicialObject.opFunctor_map_app\", \"CategoryTheory.SimplicialObject\"], \"digest\": \"3834e6d758c77ac8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "op.*ihom|ihom.*op|op.*internalHom|internalHom.*op|op.*sHom|sHom.*op",
+   "results": "{\"t\": \"2026-10-17T08:35:07Z\", \"tool\": \"grep\", \"query\": \"op.*ihom|ihom.*op|op.*internalHom|internalHom.*op|op.*sHom|sHom.*op\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"30a6eeb710d7177f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "closedComparison|ihomComparison|Closed.*Equiv|closed.*[Ee]quival|[Ii]so.*[Ii]hom|[Ii]hom.*[Ii]so",
+   "results": "{\"t\": \"2026-10-17T08:35:27Z\", \"tool\": \"grep\", \"query\": \"closedComparison|ihomComparison|Closed.*Equiv|closed.*[Ee]quival|[Ii]so.*[Ii]hom|[Ii]hom.*[Ii]so\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\"], \"digest\": \"fe781365d0e79c71\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-right-fibration-space-fiber",
+  "date": "2026-10-17",
+  "group": "Q60"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Proof opening: Choose a compactification c=(j,p). Inherited coherent lift-space foundation; returned space-fiber proof Step 5, reversal identification of internal-hom corner maps.",
+   "via": [
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

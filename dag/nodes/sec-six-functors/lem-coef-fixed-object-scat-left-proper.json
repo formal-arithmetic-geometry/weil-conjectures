@@ -87,11 +87,33 @@
    }
   },
   {
-   "text": "Fix $q$. Reorder $\\widetilde C_q=A_q*F_q$ as $F_q*A_q$. The augmented bar row is then\n$$R^V_{n,q}=F_q*A_{q,0}*\\cdots*A_{q,n}*V_q\\longrightarrow F_q*V_q=D^V_q.$$\nHere all $A_{q,i}$ are labelled copies of $A_q$. For $n\\geq1$, $d_i$ folds copies $i,i+1$ when $i<n$, and $d_n$ sends copy $n$ to $V_q$ by $v$; $s_i$ inserts an unused copy immediately after copy $i$. Define $h_n$ to insert an unused copy before copy $0$, shifting every old label up by one and fixing $F_q,V_q$. Define $h_{-1}:F_q*V_q\\to F_q*A_{q,0}*V_q$ by the factor inclusions. The augmentation followed by $h_{-1}$ sends the $A_{q,0}$ factor into $V_q$. Thus $\\varepsilon h_{-1}=1$, $d_0h_n=1$, and $d_1h_0=h_{-1}\\varepsilon$: the last equality sends the old copy $0$ into $V_q$ on both sides. For the remaining face identity $d_{i+1}h_{n+1}=h_nd_i$ with $0\\leq i\\leq n$, each side sends an old copy with label $k\\leq i$ to label $k+1$, copy $i+1$ to label $i+1$, and a copy with $k>i+1$ to label $k$; the two adjacent copies are folded by the identity functor of $A_q$. For $i=n+1$, both sides send the old last copy into $V_q$ by $v$ and send every other old copy $k$ to label $k+1$. For $s_{i+1}h_n=h_{n+1}s_i$ ($0\\leq i\\leq n$), both sides send an old copy $k\\leq i$ to label $k+1$ and an old copy $k>i$ to label $k+2$. In all these equalities both sides fix $F_q,V_q$, so equality on coproduct factor inclusions proves equality of functors. Restrict these functors to $(x,y)$ mapping sets. The statement of [lem-coef-extra-degeneracy-contraction] now gives a section and simplicial homotopy inverse for the row augmentation. Realization preserves the product with $\\Delta^1$ by [lem-coef-realization-finite-limits], so this homotopy realizes to a continuous homotopy. The row augmentation is therefore a weak homotopy equivalence, with no Kan assumption, by the definition in [lem-coef-kan-quillen-right-proper]. Finally [lem-coef-bisimplicial-diagonal-equivalence], in the exchanged direction, shows\n$$\\varepsilon_V:\\operatorname{diag}R^V\\longrightarrow D^V$$\nis a local weak equivalence. The chosen free factors and the contractions need not be natural in $q$: only the bar augmentation is used as a map of bisimplicial sets, and it is natural by step 5.",
+   "text": "Fix $q$. Apply [lem-coef-fixed-object-scat-bar-reordering] to the free-extension bar of step 5: the factor braiding identifies its row with $R^V_{n,q}=F_q*A_{q,0}*\\cdots*A_{q,n}*V_q$, and identifies every face, degeneracy and augmentation with the displayed labelled coproduct-bar operators. By [lem-coef-fixed-object-scat-pushout-coproduct], the augmentation target $(F_q*A_q)\\amalg_{A_q}V_q$ is canonically $F_q*V_q$, with the stated structure map. Apply [lem-coef-split-coproduct-bar-extra-degeneracy] to $F_q,A_q,V_q,v_q$; its initial-factor insertion identities therefore hold on every mapping set in this row, including $d_1h_0=h_{-1}\\varepsilon_0$.",
+   "uses": [
+    "lem-coef-fixed-object-scat-bar-reordering",
+    "lem-coef-fixed-object-scat-pushout-coproduct",
+    "lem-coef-split-coproduct-bar-extra-degeneracy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 7.4–7.6 and Proposition 8.2, printed p.279: fixed-object coproduct bar reordering, pushout identification, and initial-factor insertion."
+   }
+  },
+  {
+   "text": "For every $q,x,y$, apply [lem-coef-extra-degeneracy-contraction] to the row augmentation of step 6, with $S=(F_q*V_q)(x,y)$. It gives a simplicial section $s$ with $\\varepsilon s=1$ and a simplicial cylinder homotopy $s\\varepsilon\\simeq1$. The other composite has the constant homotopy because it equals the identity. These are precisely the two homotopies required by [lem-cbc-simplicial-homotopy-equivalence-weak], applied to $u=\\varepsilon$ and $v=s$. Therefore every row augmentation is a weak homotopy equivalence. Both cited statements allow empty simplicial sets and impose no Kan condition.",
    "uses": [
     "lem-coef-extra-degeneracy-contraction",
-    "lem-coef-realization-finite-limits",
-    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 8.2, explicit contraction of the split ordinary pushout row and diagonal argument"
+   }
+  },
+  {
+   "text": "The augmentation $R^V\\to\\operatorname{const}_nD^V$ constructed in step 5 is a morphism of bisimplicial mapping sets. Step 7 gives its weak equivalence in the $n$ direction for every fixed $q$. Apply the exchanged-direction assertion of [lem-coef-bisimplicial-diagonal-equivalence] to obtain the local weak equivalence $\\varepsilon_V:\\operatorname{diag}R^V\\to D^V$. The factors $F_q$ and the contractions need not be natural in $q$: the diagonal theorem requires only the natural augmentation, already constructed in step 5, and the separate row weak equivalences.",
+   "uses": [
     "lem-coef-bisimplicial-diagonal-equivalence"
    ],
    "elementary": false,
@@ -101,7 +123,7 @@
    }
   },
   {
-   "text": "Apply steps 5–6 first to $V=A$, $v=1_A$, and then to $V=B$, $v=u$. In the first case $D^A=\\widetilde C$, and in the second $D^B=\\widetilde C\\amalg_A B$. There is a map of augmented bars $R^A\\to R^B$ that is the identity on $\\widetilde C$ and every intermediate $A$ and is $u$ on the last factor. It commutes with the last face because that face uses $v$; it commutes with all other operators since they act on the unchanged factors. For fixed $n$, step 4 makes this finite-coproduct map a local weak equivalence of simplicial categories. The diagonal theorem [lem-coef-bisimplicial-diagonal-equivalence] therefore gives a local weak equivalence on diagonals. Both vertical augmentations in the resulting commuting square are local weak equivalences by step 6. Its bottom arrow is precisely the canonical $\\widetilde C\\to\\widetilde C\\amalg_A B$, since on each factor the augmentation uses the pushout structure map. Two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that bottom arrow is a local weak equivalence.",
+   "text": "Apply steps 5–8 first to $V=A$, $v=1_A$, and then to $V=B$, $v=u$. In the first case $D^A=\\widetilde C$, and in the second $D^B=\\widetilde C\\amalg_A B$. There is a map of augmented bars $R^A\\to R^B$ that is the identity on $\\widetilde C$ and every intermediate $A$ and is $u$ on the last factor. It commutes with the last face because that face uses $v$; it commutes with all other operators since they act on the unchanged factors. For fixed $n$, step 4 makes this finite-coproduct map a local weak equivalence of simplicial categories. The diagonal theorem [lem-coef-bisimplicial-diagonal-equivalence] therefore gives a local weak equivalence on diagonals. Both vertical augmentations in the resulting commuting square are local weak equivalences by step 8. Its bottom arrow is precisely the canonical $\\widetilde C\\to\\widetilde C\\amalg_A B$, since on each factor the augmentation uses the pushout structure map. Two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that bottom arrow is a local weak equivalence.",
    "uses": [
     "lem-coef-bisimplicial-diagonal-equivalence",
     "lem-coef-kan-quillen-right-proper"
@@ -113,7 +135,7 @@
    }
   },
   {
-   "text": "Push out the maps $s,r$ of step 1 along $A\\to B$. The pushout universal property gives maps $C\\amalg_A B\\to\\widetilde C\\amalg_A B\\to C\\amalg_A B$ whose composite is the identity, and the canonical arrows from $C,\\widetilde C$ form commuting squares with them. Thus $C\\to C\\amalg_A B$ is a retract, in the arrow category, of the local weak equivalence of step 7. On every mapping set it is a retract of a weak homotopy equivalence. Weak equivalences are retract-closed in the simplicial-set model structure of [lem-coef-kan-quillen-right-proper], proving the required conclusion for $i$. For $O=\\varnothing$ there are no mapping sets and the conclusion is vacuous. Empty mapping sets, loop generators, and identity-only categories are all allowed in the word and contraction constructions.",
+   "text": "Push out the maps $s,r$ of step 1 along $A\\to B$. The pushout universal property gives maps $C\\amalg_A B\\to\\widetilde C\\amalg_A B\\to C\\amalg_A B$ whose composite is the identity, and the canonical arrows from $C,\\widetilde C$ form commuting squares with them. Thus $C\\to C\\amalg_A B$ is a retract, in the arrow category, of the local weak equivalence of step 9. On every mapping set it is a retract of a weak homotopy equivalence. Weak equivalences are retract-closed in the simplicial-set model structure of [lem-coef-kan-quillen-right-proper], proving the required conclusion for $i$. For $O=\\varnothing$ there are no mapping sets and the conclusion is vacuous. Empty mapping sets, loop generators, and identity-only categories are all allowed in the word and contraction constructions.",
    "uses": [
     "lem-coef-kan-quillen-right-proper"
    ],
@@ -125,12 +147,16 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-simplicial-interval-lifting",
-  "lem-coef-realization-finite-limits",
-  "lem-coef-kan-quillen-right-proper",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
   "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-extra-degeneracy-contraction",
+  "lem-coef-fixed-object-scat-bar-reordering",
+  "lem-coef-fixed-object-scat-pushout-coproduct",
   "lem-coef-free-resolution-coproduct-augmentation",
-  "lem-coef-extra-degeneracy-contraction"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-split-coproduct-bar-extra-degeneracy"
  ],
  "proof_origin": {
   "by": "agent",
@@ -256,7 +282,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-interval-cell-stability",
@@ -269,16 +295,22 @@
   "date": "2026-10-17",
   "item": "lem-coef-fixed-object-scat-left-proper",
   "worker": "stage1",
-  "summary": "Kept the statement and its fixed-object hypotheses unchanged. Gave a free-retract and coproduct-bar proof with explicit extra degeneracy and no Kan assumptions. Existing free-calculus cannot be cited because it depends on this item through coherent-nerve comparison, so the coproduct invariance argument is expanded from its lower-level existing inputs; no new node is created. Checked all cited statements, edge cases, Lean absence and Mathlib searches.",
-  "blueprint": "Realizes the fixed-object left-properness input to the two span comparisons in lem-coef-simplicial-interval-cell-stability, in the existing ancestry of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (mapping-limit adjunction and coherent naturality foundation). This does not alter the unit route or its realized fields."
+  "summary": "Repair of the human re-split return: kept the statement, Lean record, proof route and all steps other than returned step 6 unchanged (renumbered cross-references only). Extracted the hidden fixed-object pushout/coproduct identification, augmented-bar reordering, and initial-factor insertion identities into three separately cited nodes. The pushout identification is a Mathlib leaf by CategoryTheory.IsPushout.of_coprod_inl_with_id and isoPushout; the two specialized bar lemmas are statement-only unsplit nodes. Step 6 cites all three. Step 7 uses existing contraction and homotopy-invariance statements; step 8 uses the existing diagonal comparison. No new definition.",
+  "blueprint": "Realizes the fixed-object left-properness input to the two span comparisons in lem-coef-simplicial-interval-cell-stability, in the existing ancestry of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (mapping-limit adjunction and coherent naturality foundation). This does not alter the unit route or its realized fields.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy invariance turns the row contraction into a realization weak equivalence without Kan assumptions. The unit supplies the extra-degeneracy contraction but no statement of this generic implication; this reuses the already split foundational tool, with no change to the coproduct-bar route."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q88-d6fb729ff",
-  "group": "Q88",
+  "reviewer": "NT-Codex-Q80-4c6464c8d",
+  "group": "Q80",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d6fb729ff (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, the free-calculus node and the citer interval-cell-stability in full, and checked both sources (fetched read-only, not archived). Bergner math/0406507 Lemma 3.4, printed p.11, says 'SC_X is proper [4, 7.3]'. The item's statement is exactly Dwyer–Kan 7.3(ii), with the cofibrations of 7.1(iii) and the free-map retracts of 7.4–7.6; no hypothesis is added and nothing is weakened. Steps 2–4 match DK 2.7(i)–(iii): the word normal form, then the degreewise-free diagonal, then the F_• resolution through free-resolution-coproduct-augmentation, which applies to ordinary X_q,Z_q with no freeness hypothesis (I checked that delta is natural). Steps 5–7 are DK 8.2 and 8.1. The row extra-degeneracy identities hold on labels when checked against Mathlib ExtraDegeneracy.lean:72-83, including the composition order and the cases i=n+1 and d_1h_0. The non-natural row contractions are used only through the natural augmentation in the diagonal theorem. Step 1's domain-fixing retract (pushout along b; r is valid since r_0 j_0 = i b) and step 8's retract closure are correct. Edge cases: empty O, identity-only categories, empty F, empty mapping sets. A computed closure shows no cycle; free-calculus does reach the item, so not citing it is right. All cited nodes are in the same unit, so there are no tool_uses, and no SGA is cited. The DAG scan found no duplicate, and there are no new nodes. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q80-4c6464c8d (reviewer sub-agent of L); spot-checked: Read all mathematics, ten proof steps, three new nodes, cited statements and source locations. Corrected the pushout node’s canonical map to use the pushout leg V→P rather than v:A→V. Verified insertion identities, edge cases, Mathlib specialization and acyclic dependencies; accepted the declared homotopy-invariance tool use. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.FixedObjectScatLeftProper",
@@ -310,5 +342,8 @@
    "decls": [],
    "missing": []
   }
- }
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ]
 }

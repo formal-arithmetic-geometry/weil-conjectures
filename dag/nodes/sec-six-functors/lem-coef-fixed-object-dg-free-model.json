@@ -41,16 +41,38 @@
    }
   },
   {
-   "text": "The model axioms on $\\mathbf G_S$ hold coordinatewise: take both functorial factorizations coordinatewise, and solve every lifting problem coordinatewise. A generating set consists of the generating maps in [lem-coef-projective-cochain-monoidal-model] placed in one coordinate and zero elsewhere. These single-coordinate embeddings are left adjoint to evaluation, so the lifting characterizations follow by adjunction. Apply [lem-coef-ordinary-presheaf-local-presentability] with $A=\\mathbf V$ and $C$ the discrete category on $S^2$. Its hypotheses hold since $\\mathbf V$ is locally presentable and complete by [lem-coef-projective-cochain-monoidal-model]. An ordinary functor from this discrete category is just its family of values, and a natural transformation is just its family of components; thus this is exactly the graph category and gives its local presentability. Left properness and tractability are coordinatewise by [lem-coef-projective-chains-monoidal-model]. Define\n$$(P\\star Q)(s,t)=\\bigoplus_{u\\in S}P(u,t)\\otimes Q(s,u),\\qquad E(s,t)=\\begin{cases}\\mathbf Z[0]&s=t,\\\\0&s\\ne t.\\end{cases}$$\nReindexing the two sums and applying the tensor associator gives the matrix associator; the diagonal summands give the unit constraints. Both partial tensor functors are left adjoints. Explicitly their right adjoints have entries\n$$R_P(H)(s,u)=\\prod_t\\underline{\\operatorname{Hom}}(P(u,t),H(s,t)),\\qquad L_Q(H)(u,t)=\\prod_s\\underline{\\operatorname{Hom}}(Q(s,u),H(s,t)).$$\nTensor-Hom adjunction, applied to each summand, verifies these formulas; in $L_Q$ use the symmetry of complexes. The component of the matrix pushout product $i\\square_\\star j$ is $\\bigoplus_u i(u,t)\\square_\\otimes j(s,u)$. The projective pushout-product axiom makes each summand a cofibration, trivial if either matrix map is trivial. Coproducts preserve these lifting classes because fillers are chosen independently on summands. The diagonal unit $E$ is cofibrant. These checks establish the biclosed monoidal model hypotheses; $\\star$ need not be symmetric.",
+   "text": "The graph category $\\mathbf G_S$ has the coordinatewise model structure and the stated completeness, cocompleteness, combinatoriality, local presentability, left properness, and tractability by [lem-coef-graph-product-model]. Its single-coordinate generating maps give the coordinatewise lifting characterization.",
    "uses": [
-    "lem-coef-projective-chains-monoidal-model",
-    "lem-coef-projective-cochain-monoidal-model",
-    "lem-coef-ordinary-presheaf-local-presentability"
+    "lem-coef-graph-product-model"
    ],
    "elementary": false,
    "source": {
-    "document": "https://arxiv.org/html/1312.3881v4",
-    "place": "Lemma 3.20 proof; Muro Section 10, Remark 10.2, with the matrix adjoints and pushout products written explicitly"
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Muro Remark 10.2, p. 1596 (PDF page 56), specialized to S^2 coordinates"
+   }
+  },
+  {
+   "text": "The formulas in [lem-coef-matrix-biclosed-monoidal-structure] define the matrix product and diagonal unit on $\\mathbf G_S$. Reindexing the intermediate-object sums and using the tensor associator gives associativity and the unit constraints; its displayed products of internal Homs give the two right adjoints.",
+   "uses": [
+    "lem-coef-matrix-biclosed-monoidal-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Muro Definition 10.1, pp. 1595-1596 (PDF pages 55-56)"
+   }
+  },
+  {
+   "text": "For graph maps $i:P\\to P\\prime$ and $j:Q\\to Q\\prime$, assume both are cofibrations. Because graph colimits are coordinatewise and tensor preserves coproducts, expanding the four corners of the defining pushout gives the canonical arrow isomorphism $(i\\square_\\star j)(s,t)\\cong\\bigoplus_{u\\in S}i(u,t)\\square_\\otimes j(s,u)$. Each summand is a cofibration, trivial when either input is trivial, by [lem-coef-projective-chains-monoidal-model]; coproducts preserve these two left lifting classes since a lifting problem is solved independently on each summand, so [lem-coef-graph-product-model] gives the corresponding graph classes. The diagonal unit of [lem-coef-matrix-biclosed-monoidal-structure] is cofibrant because its entries are the cofibrant complex $\\mathbf Z[0]$ or the initial complex $0$.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-graph-product-model",
+    "lem-coef-matrix-biclosed-monoidal-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Muro Definition 4.2, p. 1557 (PDF page 17), and Definition 10.1/Remark 10.2, pp. 1595-1596 (PDF pages 55-56)"
    }
   },
   {
@@ -66,7 +88,7 @@
    }
   },
   {
-   "text": "An algebra $A\\star A\\to A$, $E\\to A$ is exactly a family of compositions $A(u,t)\\otimes A(s,u)\\to A(s,t)$ and identity maps, with the dg associativity and unit equations; its algebra maps are exactly dg functors fixing $S$. Under this identification the free algebra is the $F$ of Step 1. Apply [lem-coef-associative-algebra-model-transfer] to the matrix category verified in Steps 2-3. It gives the combinatorial transferred structure, the Quillen adjunction and cofibrancy of the underlying graph of a cofibrant dg category. Weak equivalences and fibrations are the asserted coordinate classes. The terminal dg category has zero mapping complexes; every $A\\to0$ is mappingwise surjective, so every object is fibrant. Factor the map from the initial dg category $E\\to A$ functorially as a cofibration followed by a trivial fibration $Q_SA\\to A$. Every object and morphism here lies in the fixed-$S$ category, so this replacement fixes $S$.",
+   "text": "An algebra $A\\star A\\to A$, $E\\to A$ is exactly a family of compositions $A(u,t)\\otimes A(s,u)\\to A(s,t)$ and identity maps, with the dg associativity and unit equations; its algebra maps are exactly dg functors fixing $S$. Under this identification the free algebra is the $F$ of Step 1. Apply [lem-coef-associative-algebra-model-transfer] to the matrix category verified in Steps 2-5. It gives the combinatorial transferred structure, the Quillen adjunction and cofibrancy of the underlying graph of a cofibrant dg category. Weak equivalences and fibrations are the asserted coordinate classes. The terminal dg category has zero mapping complexes; every $A\\to0$ is mappingwise surjective, so every object is fibrant. Factor the map from the initial dg category $E\\to A$ functorially as a cofibration followed by a trivial fibration $Q_SA\\to A$. Every object and morphism here lies in the fixed-$S$ category, so this replacement fixes $S$.",
    "uses": [
     "lem-coef-associative-algebra-model-transfer"
    ],
@@ -88,7 +110,7 @@
    }
   },
   {
-   "text": "Apply [lem-coef-model-infinity-derived-adjunction] to the Quillen adjunction of Step 4. Since $U$ preserves all weak equivalences, its right derived functor agrees with direct localization, and the left derived functor is $qF(P^c)$ for an objectwise cofibrant replacement $p:P^c\\to P$. Step 5 identifies the graph localization with $\\mathcal D^{S^2}$. The cited theorem gives the mapping-space adjunction and its coherent unit and counit, not merely a homotopy-category adjunction. In particular the unit at $qP$ is the composite of $(qp)^{-1}:qP\\simeq qP^c$ with the image of the strict length-one insertion $P^c\\to UF(P^c)$. The localization is presentable by [lem-coef-combinatorial-localization-presentability], applied to the combinatorial structure in Step 4.",
+   "text": "Apply [lem-coef-model-infinity-derived-adjunction] to the Quillen adjunction of Step 6. Since $U$ preserves all weak equivalences, its right derived functor agrees with direct localization, and the left derived functor is $qF(P^c)$ for an objectwise cofibrant replacement $p:P^c\\to P$. Step 7 identifies the graph localization with $\\mathcal D^{S^2}$. The cited theorem gives the mapping-space adjunction and its coherent unit and counit, not merely a homotopy-category adjunction. In particular the unit at $qP$ is the composite of $(qp)^{-1}:qP\\simeq qP^c$ with the image of the strict length-one insertion $P^c\\to UF(P^c)$. The localization is presentable by [lem-coef-combinatorial-localization-presentability], applied to the combinatorial structure in Step 6.",
    "uses": [
     "lem-coef-model-infinity-derived-adjunction",
     "lem-coef-combinatorial-localization-presentability"
@@ -100,7 +122,7 @@
    }
   },
   {
-   "text": "Every tensor factor in $UF(P^c)$ is cofibrant. By [lem-coef-projective-chains-monoidal-model], localizing its finite tensor products therefore computes the derived tensor products. For any discrete indexing set $J$, the ordinary coproduct $\\mathbf V^J\\to\\mathbf V$ is left Quillen: its right adjoint is the diagonal, which preserves fibrations and trivial fibrations coordinatewise. Applying [lem-coef-model-infinity-derived-adjunction] and Step 5 to this adjunction shows that a coproduct of cofibrant complexes computes their infinity-categorical coproduct. The path-sum formula of Step 1 thus gives exactly the stated underlying graph of $F_\\infty$, with derived tensors and coproducts. These comparisons are natural in the graph, and the derived unit is the length-one inclusion by Step 6. The source's forward-order formula is identified with ours on homogeneous factors by reversing them with sign $(-1)^{\\sum_{i<j}|a_i||a_j|}$; this is the Koszul symmetry, whose associativity and unit constraints are part of the monoidal structure. No rectification comparison is used to infer these formulas.",
+   "text": "Every tensor factor in $UF(P^c)$ is cofibrant. By [lem-coef-projective-chains-monoidal-model], localizing its finite tensor products therefore computes the derived tensor products. For any discrete indexing set $J$, the ordinary coproduct $\\mathbf V^J\\to\\mathbf V$ is left Quillen: its right adjoint is the diagonal, which preserves fibrations and trivial fibrations coordinatewise. Applying [lem-coef-model-infinity-derived-adjunction] and Step 7 to this adjunction shows that a coproduct of cofibrant complexes computes their infinity-categorical coproduct. The path-sum formula of Step 1 thus gives exactly the stated underlying graph of $F_\\infty$, with derived tensors and coproducts. These comparisons are natural in the graph, and the derived unit is the length-one inclusion by Step 8. The source's forward-order formula is identified with ours on homogeneous factors by reversing them with sign $(-1)^{\\sum_{i<j}|a_i||a_j|}$; this is the Koszul symmetry, whose associativity and unit constraints are part of the monoidal structure. No rectification comparison is used to infer these formulas.",
    "uses": [
     "lem-coef-projective-chains-monoidal-model",
     "lem-coef-model-infinity-derived-adjunction"
@@ -112,7 +134,7 @@
    }
   },
   {
-   "text": "To prove conservativity, let $a:qA\\to qB$ have equivalent image under $U_\\infty$. Replace $A$ by $Q_SA$, and note that $B$ is fibrant by Step 4. The mapping-space representation clause of [lem-coef-cosimplicial-frame-mapping] represents the resulting component by a strict map $f:Q_SA\\to B$. The image of $f(s,t)$ in $\\mathcal D$ is an equivalence for every pair because the image of $a$ is, and the replacement is a weak equivalence. The saturation assertion of [lem-coef-projective-chains-monoidal-model] makes each $f(s,t)$ a quasi-isomorphism. Thus $f\\in\\mathrm{FF}_S$, so $qf$, and hence $a$, is an equivalence. Being an equivalence is invariant under the homotopy relating $a$ to this representative.",
+   "text": "To prove conservativity, let $a:qA\\to qB$ have equivalent image under $U_\\infty$. Replace $A$ by $Q_SA$, and note that $B$ is fibrant by Step 6. The mapping-space representation clause of [lem-coef-cosimplicial-frame-mapping] represents the resulting component by a strict map $f:Q_SA\\to B$. The image of $f(s,t)$ in $\\mathcal D$ is an equivalence for every pair because the image of $a$ is, and the replacement is a weak equivalence. The saturation assertion of [lem-coef-projective-chains-monoidal-model] makes each $f(s,t)$ a quasi-isomorphism. Thus $f\\in\\mathrm{FF}_S$, so $qf$, and hence $a$, is an equivalence. Being an equivalence is invariant under the homotopy relating $a$ to this representative.",
    "uses": [
     "lem-coef-cosimplicial-frame-mapping",
     "lem-coef-projective-chains-monoidal-model"
@@ -124,7 +146,7 @@
    }
   },
   {
-   "text": "The matrix model category is left proper and tractable by Step 2 and satisfies the nonsymmetric monoid axiom by Step 3. Apply [lem-coef-associative-algebra-sifted-localization] to it and identify its strict associative algebras with $\\mathbf C_S$ by Step 4. It gives preservation by $U_\\infty$ of every $N(I)$-indexed colimit with $N(I)$ sifted; the comparison of Step 5 identifies its target with $\\mathcal D^{S^2}$. The cited statement includes $I=\\Delta^{\\mathrm{op}}$, so it also gives geometric-realization preservation. This proves the remaining colimit clauses directly on the strict-model localization, without using the downstream fixed-object enriched rectification theorem.",
+   "text": "The matrix model category is left proper and tractable by Step 2 and satisfies the nonsymmetric monoid axiom by Step 5. Apply [lem-coef-associative-algebra-sifted-localization] to it and identify its strict associative algebras with $\\mathbf C_S$ by Step 6. It gives preservation by $U_\\infty$ of every $N(I)$-indexed colimit with $N(I)$ sifted; the comparison of Step 7 identifies its target with $\\mathcal D^{S^2}$. The cited statement includes $I=\\Delta^{\\mathrm{op}}$, so it also gives geometric-realization preservation. This proves the remaining colimit clauses directly on the strict-model localization, without using the downstream fixed-object enriched rectification theorem.",
    "uses": [
     "lem-coef-associative-algebra-sifted-localization"
    ],
@@ -140,10 +162,10 @@
   "lem-coef-associative-algebra-sifted-localization",
   "lem-coef-combinatorial-localization-presentability",
   "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-graph-product-model",
+  "lem-coef-matrix-biclosed-monoidal-structure",
   "lem-coef-model-infinity-derived-adjunction",
-  "lem-coef-ordinary-presheaf-local-presentability",
-  "lem-coef-projective-chains-monoidal-model",
-  "lem-coef-projective-cochain-monoidal-model"
+  "lem-coef-projective-chains-monoidal-model"
  ],
  "proof_origin": {
   "by": "agent",
@@ -202,7 +224,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-enriched-rectification",
@@ -215,16 +237,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-fixed-object-dg-free-model",
   "worker": "stage1",
-  "summary": "Second reading repaired the uncited transfer and the unsupported strict-to-coherent use of categorical-algebra colimits. Nine explicit proof steps construct the path adjunction, verify the matrix model and strong monoid axiom, apply two generic associative-algebra inputs, and prove product localization, coherent derived units, the derived path formula and conservativity with existing model-category nodes. Two new statement-only inputs and one exact Mathlib leaf for ordinary presheaf local presentability; no statement change.",
+  "summary": "Repair extracts the returned 2039-character matrix-model step into three short proof steps citing the coordinatewise graph model, biclosed matrix convolution, and a dedicated matrix pushout-product/cofibrant-unit node. The item statement, strict free-path construction, and all later localization steps remain unchanged apart from corrected step references.",
   "blueprint": "Realizes the fixed-object strict dg free/forgetful structural input used before passage to coherent coefficient diagrams in the ancestor proof paragraph 2."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NN-811dcfcdd",
-  "group": "NN",
+  "reviewer": "NT-Codex-Q120-477621168",
+  "group": "Q120",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-811dcfcdd (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the three new nodes and every cited statement in full. I checked the item's statement against Haugseng arXiv:1312.3881v4 Lemma 3.20 (with Cor. 3.14/3.15, Def. 3.18 and Lemma 3.19), read online in the HTML version. The source error is confirmed: printed Def. 3.11 takes only cofibrant X_i, while the proof of Cor. 3.14 needs arbitrary objects. The new nodes use Muro's arbitrary-object axiom, a stronger and correct hypothesis, and Step 3 verifies it for the matrix product from the chain node's monoid axiom (arbitrary C). Step checks: I recomputed both matrix right adjoints R_P and L_Q, and the pushout-product component ⊕_u i(u,t)□j(s,u). The reverse-order path concatenation needs no signs. Algebras for the matrix product are exactly dg categories with object set S and the unit E is initial. In Step 5 the evaluations are left Quillen (right adjoint puts X at one coordinate, 0 elsewhere), so the frame node identifies the comparison maps. Coproduct ⊣ diagonal computes derived coproducts. Conservativity goes through a strict representative Q_S A→B and saturation. Every hypothesis of the sifted lemma is checked in Steps 2-4. Small cases: S empty, a single object (tensor algebra), the zero graph (F(0)=E), the zero dg category as terminal object, and Z/2 as a non-cofibrant complex. The Mathlib leaf is verified at Presheaf.lean:90-95. All cited nodes are in unit sk-prop-sf-biduality-general, there are no tool_uses, no cycle and no SGA. The DAG and blueprint searches found no duplicate. FIX: in lem-coef-associative-algebra-model-transfer the term 'Quillen adjunction' was undefined (B3); I added 'meaning that T preserves cofibrations and trivial cofibrations'. The item statement is unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q120-477621168 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Haugseng and Muro sources, all 11 steps, edge cases, duplicates, coefficient boundaries and acyclicity. Folded the elementary matrix pushout-product argument into Step 4 and removed its citation. Corrected JSON and detailed review.md are written; the statement is unchanged.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

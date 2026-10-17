@@ -1,0 +1,90 @@
+{
+ "id": "lem-pur-cochain-pullback-tensor-coherence",
+ "kind": "statement",
+ "title": "Signed tensor comparison and composition on cochain sheaf pullbacks",
+ "statement": "Let $u:(\\operatorname{Sh}(\\mathcal D),S)\\to(\\operatorname{Sh}(\\mathcal C),R)$ be a morphism of ringed topoi on small sites: $u^{-1}\\dashv u_*$, $u^{-1}$ preserves finite limits, and $u^{-1}R\\to S$ is a map of sheaves of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], $u^*P=S\\otimes_{u^{-1}R}u^{-1}P$ [def-pur-sheaf-tensor-product] termwise on cochain complexes, and direct-sum total tensor with differential $d(x\\otimes y)=dx\\otimes y+(-1)^p x\\otimes dy$ for $x\\in P^p$ [def-pc-tensor-complex-sheaves].\n\nFor arbitrary, possibly unbounded cochain complexes $P,Q$, the ordinary module tensor comparison induces an isomorphism of complexes\n$$c_{u;P,Q}:u^*\\operatorname{Tot}(P\\otimes_R Q)\\xrightarrow{\\sim}\\operatorname{Tot}(u^*P\\otimes_Su^*Q).$$\nOn local pure tensors in degrees $(p,q)$ it is $s\\otimes(x\\otimes y)\\mapsto(s\\otimes x)\\otimes(1\\otimes y)$; its inverse is $(s\\otimes x)\\otimes(t\\otimes y)\\mapsto st\\otimes(x\\otimes y)$. The maps are natural in both complex arguments. They respect the usual reassociation of triple total tensors, the signed symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$, and the two action unitors for the ring complex $R[0]$ and its pullback identification $u^*R[0]\\cong S[0]$.\n\nFor any composable morphism of ringed topoi $v:(\\operatorname{Sh}(\\mathcal E),T)\\to(\\operatorname{Sh}(\\mathcal D),S)$, let $a_P:(u\\circ v)^*P\\xrightarrow{\\sim}v^*u^*P$ be the canonical composition comparison, obtained from the inverse-image adjunctions and the scalar multiplication $T\\otimes_{v^{-1}S}v^{-1}(S\\otimes_{u^{-1}R}u^{-1}P)\\cong T\\otimes_{(u\\circ v)^{-1}R}(u\\circ v)^{-1}P$. Then\n$$(a_P\\otimes a_Q)c_{u\\circ v;P,Q}=c_{v;u^*P,u^*Q}\\,v^*(c_{u;P,Q})\\,a_{\\operatorname{Tot}(P\\otimes Q)}.$$\nFor a commutative coefficient square $R\\to R'$, $S\\to S'$ over the same inverse image, the square comparing $c_u$ before and after ordinary scalar extension commutes under the canonical scalar-association maps. These equations hold as equations of chain maps; consequently the same formulas on any strict quotient towers commute with all transitions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product, the displayed isomorphism of total complexes in its proof; Tag 03EL, sites-modules-lemma-tensor-product-pullback, for its constituents. Cochain coherence is the explicit refinement of this construction."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|Koszul",
+   "results": "1 hits: Mathlib/Algebra/Homology/LocalCohomology.lean; scope Mathlib/Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pullback composition, presheaf tensor, and generic monoidal functor identities do not provide the simultaneous signed total-complex comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor pullback comparison on complexes of sheaves with signed symmetry and coherence",
+   "results": "8 hits: ComplexShape.TensorSigns.ctorIdx, SheafOfModules.pullbackComp, TopCat.Sheaf.pullbackIso, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pullback composition, presheaf tensor, and generic monoidal functor identities do not provide the simultaneous signed total-complex comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"map_tensor\"",
+   "results": "5 hits: CategoryTheory.Functor.Monoidal.map_tensor, CategoryTheory.Functor.Monoidal.map_tensor_assoc, CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.ι_map_tensorHom_hom_eq_tensorHom, CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ι_map_tensorHom_eq, CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.convolutionExtensionUnit_comp_ι_map_tensorHom_app",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pullback composition, presheaf tensor, and generic monoidal functor identities do not provide the simultaneous signed total-complex comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor comparison for pullback of cochain complexes of sheaves on a ringed topos respects associators Koszul symmetry units and composition on homogeneous tensors",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pullback composition, presheaf tensor, and generic monoidal functor identities do not provide the simultaneous signed total-complex comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|monoidal",
+   "results": "0 hits: ; scope Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pullback composition, presheaf tensor, and generic monoidal functor identities do not provide the simultaneous signed total-complex comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pullback composition, presheaf tensor, and generic monoidal functor identities do not provide the simultaneous signed total-complex comparison for arbitrary ringed topoi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal pullback of module sheaf cochain complexes preserves the signed total tensor comparison and coefficient change",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pullback composition, presheaf tensor, and generic monoidal functor identities do not provide the simultaneous signed total-complex comparison for arbitrary ringed topoi"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-derived-pullback-tensor-iso",
+  "date": "2026-10-17",
+  "group": "Q79"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Natural Weil isomorphism on coefficient twists: the tensor comparison used in theta_{K(m)}; cochain construction and signed coherence underlying former proof step 2 of lem-pur-derived-pullback-tensor-iso.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
