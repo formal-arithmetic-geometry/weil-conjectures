@@ -154,20 +154,7 @@ lemma ihomStr_evaluation {Z : Scheme.{u}} (b : Z ≅ Z) {A B : AdicSheaf l Z}
     ((ihomStr l b sA sB).hom.hom ⊗ₘ sA.hom.hom) ≫ Mod.evaluation A B =
       μ (b.inv)_*[WeilCoefficients.{u} l] ((AdicSheaf.ihom A).obj B).X A.X ≫
         (b.inv)_*[WeilCoefficients.{u} l].map (Mod.evaluation A B) ≫ sB.hom.hom := by
-  have : (Mod.mapModComap (G := (b.inv)_*[WeilCoefficients.{u} l])
-      (adicConstantSheafToLowerStar l b.inv)).IsEquivalence := isEquivalence_adicLowerStar l _
-  have h := Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l b.inv)
-    (fun _ _ ↦ Functor.LaxBraided.braided _ _) A B
-  have hstr : (ihomStr l b sA sB).hom.hom =
-      ((adicLowerStarCompIhomIso l b.inv A).inv.app B).hom ≫
-      ((Mod.ihomMap sA.inv).app _).hom ≫ ((AdicSheaf.ihom A).map sB.hom).hom := rfl
-  have hφ : sA.hom.hom ≫ sA.inv.hom = 𝟙 _ := by
-    rw [← Mod.comp_hom', Iso.hom_inv_id, Mod.id_hom']
-  rw [hstr, tensorHom_def', comp_whiskerRight, comp_whiskerRight]
-  simp only [Category.assoc]
-  rw [Mod.evaluation_naturality A sB.hom, Mod.evaluation_ihomMap_assoc sA.inv,
-    ← whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, hφ,
-    MonoidalCategory.whiskerLeft_id, Category.id_comp, ← Category.assoc, ← h, Category.assoc]
+  sorry
 
 variable (l c) in
 /-- The structure isomorphism `(a⁻¹)_* j^* M ≅ j^* M` induced by `(b⁻¹)_* M ≅ M` along the

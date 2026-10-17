@@ -114,12 +114,13 @@ theorem isIso_of_upperStar_uncurry_eq_mul {Y W : Scheme.{u}} (π : W ⟶ Y) [Wea
     rw [Mod.uncurryHom_comp_ihomMap, Mod.uncurryHom_comp_ihom_map, Mod.uncurryHom_comp,
       Mod.uncurryHom_comp, Mod.uncurryHom, adicUpperStarIhomIso_evaluation, tensorHom_def',
       Category.assoc, Functor.map_comp]
-    have hn := μ_natural_left (π)^*[WeilCoefficients.{u} l] κ.hom D.X
-    change _ ≫ _ ≫ ((π)^*[WeilCoefficients.{u} l].map κ.hom ▷
-      (π)^*[WeilCoefficients.{u} l].obj D.X ≫
-        μ (π)^*[WeilCoefficients.{u} l] ((AdicSheaf.ihom D).obj N).X D.X ≫ _) ≫ _ = _
-    rw [reassoc_of% hn]
+    have hn : ((π)^*ᵃ[l].map κ).hom ▷ ((π)^*ᵃ[l].obj D).X ≫
+        μ (π)^*[WeilCoefficients.{u} l] ((AdicSheaf.ihom D).obj N).X D.X =
+          μ (π)^*[WeilCoefficients.{u} l] M.X D.X ≫
+            (π)^*[WeilCoefficients.{u} l].map (κ.hom ▷ D.X) :=
+      μ_natural_left (π)^*[WeilCoefficients.{u} l] κ.hom D.X
     simp only [Category.assoc]
+    rw [reassoc_of% hn]
   have : IsIso ((π)^*ᵃ[l].map κ) := by
     have h₁ : IsIso (eM.inv ≫ (π)^*ᵃ[l].map κ ≫ e.hom) := by
       rw [key]

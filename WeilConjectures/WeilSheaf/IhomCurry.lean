@@ -47,6 +47,7 @@ noncomputable def curryHom {M D N : AdicSheaf l Y} (q : M.X ⊗ D.X ⟶ N.X)
       Category.assoc, Mod.act_whiskerRight_evaluation, associator_naturality_middle_assoc,
       ← MonoidalCategory.whiskerLeft_comp_assoc, Mod.curry_evaluation])
 
+/-- The underlying morphism of `curryHom q` is the currying `Mod.curry q`. -/
 @[simp]
 lemma curryHom_hom {M D N : AdicSheaf l Y} (q : M.X ⊗ D.X ⟶ N.X) (hq : Mod.IsLinearRight q)
     (hq' : Mod.act M.X ▷ D.X ≫ q =
@@ -93,6 +94,33 @@ theorem ProEtaleWeilSheaf.homToIhom_comm (M D N : ProEtaleWeilSheaf k₀ l X)
     ← tensorHom_def'_assoc]
   erw [hκ]
   rw [Fr.map_comp_assoc, ← reassoc_of% (μ_natural_left Fr κ.hom D.carrier.X)]
+  rfl
+
+/-- **Morphisms into internal homs of pro-étale Weil sheaves.** A morphism
+`κ : M ⟶ 𝓗om(D, N)` of `ℓ`-adic sheaves whose uncurried form `M ⊗ D ⟶ N` is compatible with the
+Weil structures, as a morphism of pro-étale Weil sheaves `M ⟶ [D, N]`. -/
+noncomputable def ProEtaleWeilSheaf.homToIhom (M D N : ProEtaleWeilSheaf k₀ l X)
+    (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
+    (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
+        Mod.evaluation D.carrier N.carrier) =
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+          M.carrier.X D.carrier.X ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
+    M ⟶ ProEtaleWeilSheaf.ihom k₀ l X D N :=
+  ObjectProperty.homMk ⟨κ, ProEtaleWeilSheaf.homToIhom_comm M D N κ hκ⟩
+
+/-- The underlying morphism of `homToIhom κ` is `κ`. -/
+@[simp]
+lemma ProEtaleWeilSheaf.homToIhom_hom_f (M D N : ProEtaleWeilSheaf k₀ l X)
+    (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
+    (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
+        Mod.evaluation D.carrier N.carrier) =
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+          M.carrier.X D.carrier.X ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
+    (ProEtaleWeilSheaf.homToIhom M D N κ hκ).hom.f = κ :=
   rfl
 
 end AlgebraicGeometry
