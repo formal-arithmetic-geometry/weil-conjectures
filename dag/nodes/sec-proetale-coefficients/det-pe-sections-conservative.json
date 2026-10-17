@@ -236,5 +236,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.SectionsConservative",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.sections_conservative",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/SectionsConservative.lean",
+  "statement": "theorem sections_conservative (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{u}) : (∀ (A B C : ringedSiteModules.{max u (t + 1)} R) (f : A ⟶ B) (g : B ⟶ C) (h : f ≫ g = 0), (ShortComplex.mk f g h).Exact ↔ ∀ (W : X.ProEt), IsAffine W.left → (topology X).IsWeaklyContractible.{max u (t + 1)} W → ((ShortComplex.mk f g h).map (SheafOfModules.evaluation.{max u (t + 1)} R (op W))).Exact) ∧ (∀ (K : CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ), K.Acyclic ↔ ∀ (W : X.ProEt), IsAffine W.left → (topology X).IsWeaklyContractible.{max u (t + 1)} W → HomologicalComplex.Acyclic ((SheafOfModules.evaluation.{max u (t + 1)} R (op W)).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj K)) ∧ (∀ (A B : ringedSiteModules.{max u (t + 1)} R) (f : A ⟶ B), IsIso f ↔ ∀ (W : X.ProEt), IsAffine W.left → (topology X).IsWeaklyContractible.{max u (t + 1)} W → Function.Bijective ((SheafOfModules.evaluation.{max u (t + 1)} R (op W)).map f).hom) ∧ (∀ (K L : CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ) (f : K ⟶ L), QuasiIso f ↔ ∀ (W : X.ProEt), IsAffine W.left → (topology X).IsWeaklyContractible.{max u (t + 1)} W → QuasiIso (((SheafOfModules.evaluation.{max u (t + 1)} R (op W)).mapHomologicalComplex (ComplexShape.up ℤ)).map f))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fee6a0181",
+  "group": "N6",
+  "result": "pass",
+  "note": "Clauses 1-3 match the node, blueprint and Stacks 0947(1) with no extra hypotheses: ShortComplex.Exact with one zero-composite hypothesis; Acyclic over unbounded ℤ cochain complexes; IsIso iff evaluation bijective; QuasiIso iff evaluated QuasiIso. The class is IsAffine W.left together with upstream IsWeaklyContractible (Stacks 090M). Recorded dependencies (Mathlib ProEt/ProEt.topology, ringedSiteModules = SheafOfModules, Mathlib QuasiIso/DerivedCategory) were read. Universes stay independent (scheme t, ring u, modules max u (t+1)). Nonblocking: weak contractibility at max u (t+1) rather than the dependency's t+1 is equivalent for affine W and matches landed usage; the two structural instances are not in lean.declarations. Helper instances have no sorry (axioms checked). Docstrings carry the source place and the seven-step proof. lean.statement is verbatim; the report has the Worker report and Second reading by N6 sections; the node differs from the clone only in lean. nt_compile.py --json with side overlay: rc 0, no errors or warnings, 2.0-2.2 s; the theorem's only non-standard axiom is sorryAx."
  }
 }

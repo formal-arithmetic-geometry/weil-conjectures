@@ -8,7 +8,8 @@
   "place": "Definition 6.3.5.1 (02M0), using the equivalent functor-category definition of localization, Proposition 6.3.1.13(2) (01MS); Kerodon tags, not Stacks tags. Read online 2026-10-17; archive WANTED."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-enriched-marked-realization"
  ],
  "proof": [],
  "proof_deps": [],
@@ -91,5 +92,29 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-a4e56f284 (reviewer sub-agent of L); spot-checked: I read the definition in full and checked it against Kerodon online. Def 6.3.5.1 (02M0) says that for every map of simplicial sets S'->S, the projection S'x_S X->S' is a localization at some collection of edges W. Prop 6.3.1.13(2) (01MS) characterises localization as: for every infinity-category E, precomposition factors through Fun(C[W^-1],E) and is an equivalence. The node matches clause by clause. f, A, B and T are arbitrary, with no quasicategory hypothesis. The base change is the degreewise pullback along every small g. W_g may depend on g and does not depend on E. The full functor equivalence is kept, not weakened to the core or to pi_0. The only stmt_dep, def-cbc-enhanced-diagrams-cones, defines every notion used: quasicategories, equivalence edges, Fun(K,C), full subcategories, functor equivalence and degreewise pullbacks. Proof and proof_deps are empty, as they should be for a definition. Edge cases agree with Kerodon and with the three citers (contractible-factor 02M8, pushout 02MA, and finite-embedded-simplex-resolution steps 3 and 7, which use stability under base change and g=1_X): g=id, T=empty (Fun(empty,E)=Delta^0), and f=id with W=empty. Grepping the DAG and blueprint found no duplicate definition, so same_as [] holds. The four recorded Mathlib searches found no match. This is not a target node, so the base-change morphism and coefficient-category checks do not apply. There are no new nodes, no tool_uses and no changes. The online Kerodon source with the archive marked WANTED is accepted, following the neighbouring nodes. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UniversallyLocalizingSimplicialMap",
+  "declaration": "SSet.Enhanced.IsUniversallyLocalizing",
+  "declarations": [
+   "SSet.Enhanced.edgeInvertingDiagrams",
+   "SSet.Enhanced.IsLocalizationAtEdges",
+   "SSet.Enhanced.IsUniversallyLocalizing"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/UniversallyLocalizingSimplicialMap.lean",
+  "statement": "def IsUniversallyLocalizing {A B : SSet.{u}} (f : A ⟶ B) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses EnrichedMarkedRealization.invertingDiagrams via degreewise ULift transport. Its IsEdgeLocalization is not an exact match: it requires the localization target to be a quasicategory, whereas this node allows arbitrary simplicial sets."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-540ef8fed",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Checked all clauses against Kerodon 02M0/01MS(2): arbitrary A,B,T,W, no quasicategory hypotheses on them; test E : SSet.{max u v} quasicategory with degreewise ULift transport (v free, no universe equality); factorization is an equation of simplicial maps r ≫ ι = pre(ulift f) plus coherent IsFunctorEquivalence r; ∀T g ∃W ∀E order via pullback g f / pullback.fst. edgeInvertingDiagrams reuses landed EnrichedMarkedRealization.invertingDiagrams (no duplicate); IsEdgeLocalization only allows quasicategory targets, so it is no replacement. Node copy changes only lean and adds landed stmt_dep lem-coef-enriched-marked-realization (allowed by brief-stage2 §5, no cycle). No sorry, no hollow defs, source/blueprint docstrings present, lean.statement matches the signature. nt_compile.py --json: rc 0, no errors/warnings, all lines ≤100 chars."
  }
 }
