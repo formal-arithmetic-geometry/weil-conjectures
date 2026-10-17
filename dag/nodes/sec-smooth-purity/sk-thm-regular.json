@@ -37,21 +37,33 @@
    }
   },
   {
-   "text": "*Step 2: cancel the twist and identify supported cohomology.* Use the pro-etale co-projection [lem-pur-coprojection] with $K=\\Lambda_X$ and $L=\\Lambda_X(n)[2n]$. The constant coefficient sheaf $K$ is bounded constructible, and $L$ is bounded constructible of finite Tor amplitude with tensor inverse $\\Lambda_X(-n)[-2n]$; thus the finite-coefficient hypotheses of the current co-projection statement hold. For the last arrow below the same check uses the invertible factor $\\Lambda_X(-m)[-2m]$. Step 1 then gives $Ri^!\\Lambda_X\\cong\\Lambda_Z(-c)[-2c]$. Fix the direction of the resulting isomorphism $\\Phi_i$ by the composite\n$$\\Lambda_Z\\xrightarrow{\\Pi_{a_Z}^{-1}(-m)[-2m]}\\omega_Z(-m)[-2m]\\xrightarrow{c_{a_X,i}}(Ri^!\\omega_X)(-m)[-2m]\\xrightarrow{Ri^!\\Pi_{a_X}}(Ri^!\\Lambda_X(n)[2n])(-m)[-2m]\\xrightarrow{\\sim}Ri^!(\\Lambda_X(c)[2c]),$$\nwhere the last arrow uses co-projection and $n-m=c$. Consequently the target is a degree-zero sheaf isomorphic to $\\Lambda_Z$. For $F=\\Lambda_X(c)$, [lem-pur-supported-hom] identifies $H_Z^{2c}(X,F)$ with $\\operatorname{Hom}(i_*\\Lambda_Z,F[2c])$. For the closed immersion, [prop-sf-closed-immersion-unit] states $i_*=Ri_*=Ri_!$ with the compactification $(\\operatorname{id}_Z,i)$. Apply the constructible adjunction of [def-weil-exceptional-inverse-image] directly to $\\Lambda_Z$ and $F[2c]$, both bounded constructible (indeed finite-Tor); it identifies this Hom group with $\\operatorname{Hom}(\\Lambda_Z,Ri^!(F[2c]))=H^0(Z,Ri^!(F[2c]))$. For a degree-zero sheaf this is its group of sections. For an etale neighbourhood $u:U\\to X$, the pullback $v:Z\\times_XU\\to Z$ is etale by [lem-weil-pbc-etale-covering-base-change], applied to the jointly surjective family $(u,\\operatorname{id}_X)$ and base change by $i$. Thus the same argument applies on every such neighbourhood: smoothness and the relative dimensions persist by [lem-sbc-smooth-relative-dimension-permanence], and pulling a regular sequence through the flat etale local ring map preserves its successive injective multiplication maps [def-weil-etale-morphism, sk-def-purity-conv].",
+   "text": "*Step 2a: cancel the twist.* Apply [lem-pur-twist-cancellation] to the data $b=c_{a_X,i}$, $\\Pi_X=\\Pi_{a_X}$ and $\\Pi_Z=\\Pi_{a_Z}$ from Step 1, on each component meeting $Z$. Its dimension equality is $n=m+c$. The co-projection hypotheses [lem-pur-coprojection] hold: $\\Lambda_X$ is bounded constructible and the Tate shifts $\\Lambda_X(n)[2n]$, $\\Lambda_X(-m)[-2m]$ are bounded constructible finite-Tor invertible objects. Denote the specified composite by $\\Phi_i$; it is exactly [pur9-rg-def-phi], with direction $\\Lambda_Z\\xrightarrow{\\sim}Ri^!(\\Lambda_X(c)[2c])$. Hence the target is a degree-zero sheaf free of rank one, and cancellation also gives $Ri^!\\Lambda_X\\cong\\Lambda_Z(-c)[-2c]$.",
    "uses": [
+    "lem-pur-twist-cancellation",
     "lem-pur-coprojection",
-    "lem-pur-supported-hom",
-    "prop-sf-closed-immersion-unit",
-    "def-weil-exceptional-inverse-image",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "def-weil-etale-morphism",
-    "sk-def-purity-conv",
-    "lem-weil-pbc-etale-covering-base-change"
+    "pur9-rg-def-phi"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
-    "place": "Step 2; expanded using the cited current DAG statements"
+    "place": "Step 2, twist cancellation and the direction of Phi_i"
+   }
+  },
+  {
+   "text": "*Step 2b: identify supported cohomology.* For $F=\\Lambda_X(c)$, [lem-pur-supported-hom] gives $H_Z^{2c}(X,F)=\\operatorname{Hom}(i_*\\Lambda_Z,F[2c])$. The closed compactification $(\\operatorname{id}_Z,i)$ gives $i_*=Ri_!=Ri_*$ [prop-sf-closed-immersion-unit], so the bounded constructible adjunction [def-weil-exceptional-inverse-image] identifies this with $\\operatorname{Hom}(\\Lambda_Z,Ri^!(F[2c]))=H^0(Z,Ri^!(F[2c]))$. Both inputs are bounded constructible and finite-Tor. Step 2a identifies the latter group with sections of the degree-zero sheaf. For an etale neighbourhood $u:U\\to X$, the pullback $v:Z\\times_XU\\to Z$ is etale by [lem-weil-pbc-etale-covering-base-change] (apply it to $(u,\\operatorname{id}_X)$). Smoothness and dimensions persist by [lem-sbc-smooth-relative-dimension-permanence]. The etale local ring maps are flat [def-weil-etale-morphism]; tensoring each injective multiplication map for a regular sequence preserves injectivity, and its quotient at a point of $Z\\times_XU$ is nonzero. Thus the same cancellation and adjunction argument applies there. This proves (a), including its etale-local assertion.",
+   "uses": [
+    "lem-pur-supported-hom",
+    "prop-sf-closed-immersion-unit",
+    "def-weil-exceptional-inverse-image",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-weil-etale-morphism",
+    "sk-def-purity-conv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 2, supported cohomology and etale neighbourhoods"
    }
   },
   {
@@ -72,74 +84,120 @@
    }
   },
   {
-   "text": "*Step 4: compare $\\Phi_i(1)$ with the frame class.* For an etale map $u:U\\to X$ put $V=Z\\times_XU$ and write $v:V\\to Z$, $i_U:V\\hookrightarrow U$. Apply the canonical ordinary etale adjoint-locality comparison [lem-amb-etale-adjoint-locality] to $f=\\operatorname{id}_X$ and $u$, and to $f=\\operatorname{id}_Z$ and $v$. Since the identity compact-support functor and its right adjoint are identities, it gives $u^{\\times}\\cong u^*$ and $v^{\\times}\\cong v^*$. Transport these comparisons on etale-origin bounded constructible inputs through the defining formula of [def-weil-exceptional-inverse-image], obtaining $Ru^!\\cong Lu^*$ and $Rv^!\\cong Lv^*$. These etale maps are taken between separated finite-type $k$-schemes, hence satisfy the separatedness, finite-type and Noetherian hypotheses of the locality lemma; all maps admit the compactifications required there, as in the exceptional-functor definition. The smooth orientation agrees with this exact etale identification: the etale diagonal is open by [def-weil-etale-morphism] and closed by separatedness, and the projection restricted to that diagonal is the identity. The section invariant in [lem-pur-diagonal-base-change] is therefore in the rank-zero coordinate model; [thm-pur-dnc-invariance] is the identity on that model, and [lem-pur-projection-purity-agreement] at $d=0$ fixes its affine comparison to be the identity. General exceptional composition from Step 1 gives the typed restriction identification\n$$Ri_U^!Lu^*\\cong Ri_U^!Ru^!\\cong R(ui_U)^!=R(iv)^!\\cong Rv^!Ri^!\\cong Lv^*Ri^!.$$\nThe composition compatibility of the smooth orientations [thm-pur-composition-coherence], applied to the smooth pairs $(u,a_X)$ and $(v,a_Z)$, identifies the composite defining $\\Phi_{i_U}$ with $Lv^*\\Phi_i$ under this identification; twists move by [lem-pur-coprojection]. For $c\\geq1$, [lem-pur-regular-immersion-linearization] supplies such a neighbourhood with an etale map $w:U\\to\\mathbf A^{c+m}_k$ and $V=w^{-1}(\\mathbf A^m_k)$ scheme-theoretically; this is a pullback of the coordinate pair, not an isomorphism of $U$ with affine space. Put $f_j=w^*t_j$; these form a frame, which is enough by Step 3.\nOn the model let $p:\\mathbf A^c_{\\mathbf A^m}\\to\\mathbf A^m$ and $i_0$ be its zero section. Since $a_{\\mathbf A^{c+m}}=a_{\\mathbf A^m}p$ and $pi_0=\\mathrm{id}$, smooth composition compatibility and Step 1 rewrite $\\Phi_{i_0}$ as the inverse of\n$$T:Ri_0^!\\Lambda(c)[2c]\\xrightarrow{Ri_0^!\\gamma_{p,\\Lambda}}Ri_0^!Rp^!\\Lambda\\xrightarrow{\\sim}\\Lambda.$$\nThe smooth map is invertible by [thm-pur-finite-coefficient-smooth-purity], and [lem-pur-projection-purity-agreement] identifies it with the ordered affine comparison. Precisely the last normalization clause of [cor-pur-affine-space-zero-section-purity] says $T^{-1}=\\mathrm{th}_c$ and $\\mathrm{th}_c(1)=\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_c)$. Pullback of the Kummer class is natural by [sk-def-purity-conv]; boundaries are natural by [thm-pur-with-support-exactness]. The cup product [def-pur-supported-cup] is formed by tensoring the supported-Hom morphisms, so restricting this composite tensors the restricted morphisms. Hence the restricted coordinate class is $\\operatorname{cl}(w^*t_1,\\ldots,w^*t_c)$, the frame class of [def-pur-frame-class]. For $c=0$, near any point of $Z$ the empty sequence generates the zero ideal, so $i$ is the identity pair there; the defining composite for $\\Phi_{\\mathrm{id}}$ cancels $\\Pi_a^{-1}$ with $\\Pi_a$, leaving the identity. Its class is the empty-frame unit, also the $c=0$ normalization in the cited affine-space corollary. These neighbourhoods cover $Z$, so $\\Phi_i(1)=[Z\\subset X]$. A morphism from $\\Lambda_Z$ to a degree-zero sheaf is determined by the image of $1$; thus $\\operatorname{cl}_i=\\Phi_i$, proving (b),(c), including stalkwise generation.",
+   "text": "*Step 4a: etale locality of the specified orientation.* Let $u:U\\to X$ be an etale neighbourhood, with $V=Z\\times_XU$, $v:V\\to Z$ and $i_U:V\\hookrightarrow U$. Take finite-type separated neighbourhoods; all pairs are then in the finite-coefficient exceptional-functor setting. By [lem-pur-etale-orientation-locality] the adjunction-preserving restriction comparison\n$$B_{u,i}:Ri_U^!Lu^*\\xrightarrow{\\sim}Lv^*Ri^!$$\nsatisfies $B_{u,i}\\Phi_{i_U}=Lv^*\\Phi_i$, including the Tate shifts. This lemma includes agreement of the etale adjoint identification with the rank-zero diagonal orientation, so the restriction here is the specified one. Thus comparison of $\\Phi_i(1)$ with the glued frame class can be checked on these neighbourhoods.",
    "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "def-weil-exceptional-inverse-image",
-    "thm-pur-composition-coherence",
-    "lem-pur-coprojection",
-    "lem-pur-regular-immersion-linearization",
-    "thm-pur-finite-coefficient-smooth-purity",
-    "lem-pur-projection-purity-agreement",
-    "cor-pur-affine-space-zero-section-purity",
-    "sk-def-purity-conv",
-    "thm-pur-with-support-exactness",
-    "def-pur-supported-cup",
-    "def-pur-frame-class",
-    "def-weil-etale-morphism",
-    "lem-pur-diagonal-base-change",
-    "thm-pur-dnc-invariance"
+    "lem-pur-etale-orientation-locality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
-    "place": "Step 4; expanded using the cited current DAG statements"
+    "place": "Step 4(i)-(ii), etale restriction and the normalized orientation"
    }
   },
   {
-   "text": "*Step 5: compatibilities.* An etale base change pulls a frame back to a frame. The Kummer pullback of [sk-def-purity-conv], functorial localization boundary of [thm-pur-with-support-exactness], and tensor composite defining [def-pur-supported-cup] carry its class to the class of the pulled-back frame. Step 3 and uniqueness of gluing therefore give the asserted base-change identity; by Step 4 it is also the identity for the purity maps.\nFor products first verify the hypotheses. The schemes $X_j$ and $Z_j$ are smooth over $k$ by [lem-pur-regular-immersion-smooth-structure]. Base change and composition [lem-sbc-smooth-relative-dimension-permanence] show their products are smooth; regularity of the product of the $Z_j$ follows on affine smooth $k$-algebras from [lem-weil-pbc-smooth-over-field-regular-local]. For regularity of the immersion use affine regular frames $f$ in a $k$-algebra $R$ and $g$ in a $k$-algebra $S$, whose existence is part of [sk-def-purity-conv]. Tensoring the successive injective multiplication maps for $f$ with the $k$-vector space $S$ preserves injectivity. After quotienting by $f$, tensoring the successive multiplication maps for $g$ with the $k$-vector space $R/(f)$ also preserves injectivity. Thus $(f\\otimes1,1\\otimes g)$ is a regular sequence of length $c_1+c_2$ locally at every point of $Z_1\\times Z_2$, where its final quotient is nonzero; its ideal is the kernel of $R\\otimes_kS\\to R/(f)\\otimes_kS/(g)$. This proves the required pure codimension in the regular-sequence convention of [sk-def-purity-conv], including empty sequences.\nOn the resulting product frames the left-associated cup product for the concatenated tuple is\n$\\operatorname{pr}_1^*\\operatorname{cl}(f)\\cup\\operatorname{pr}_2^*\\operatorname{cl}(g)$: tensor associativity rebrackets the same ordered factors, with no permutation or sign. This is the supported exterior product of the two classes: the definition [def-pur-proetale-supported-exterior-product] tensors the pulled-back evaluation morphisms, and its coefficient comparison and the coefficient comparison in [def-pur-supported-cup] both restrict constants to the intersection and multiply them. Their composites agree on local tensor generators, hence agree as sheaf morphisms and on K-flat representatives. Consequently the two supported classes agree on these frames. Frame independence [lem-pur-frame-independence] and uniqueness of gluing give the required global exterior-product identity.",
+   "text": "*Step 4b: choose coordinates.* For $c\\geq1$, [lem-pur-regular-immersion-linearization] supplies around every $z\\in Z$ an etale $w:U\\to\\mathbf A^{c+m}_k$ with $V=Z\\times_XU=w^{-1}(\\mathbf A^m_k)$ scheme-theoretically, and with $w|_V$ etale. This is a pullback of the coordinate pair, not an isomorphism of $U$ with affine space. The functions $f_j=w^*t_j$ form a frame. By Step 3 it suffices to compare this frame with $\\Phi_{i_U}(1)$, and Step 4a also applies to this pullback chart.",
+   "uses": [
+    "lem-pur-regular-immersion-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4, etale linearization and reduction to the coordinate pair"
+   }
+  },
+  {
+   "text": "*Step 4c: the coordinate normalization.* Put $p:\\mathbf A^c_{\\mathbf A^m}\\to\\mathbf A^m$, with zero section $i_0$. In the composite of Step 2a, substitute $a_{\\mathbf A^{c+m}}=a_{\\mathbf A^m}p$ and $pi_0=\\operatorname{id}$. The smooth composition formula [thm-pur-composition-coherence] cancels the two occurrences of the orientation of $a_{\\mathbf A^m}$, leaving $\\Phi_{i_0}=T^{-1}$, where\n$$T:Ri_0^!\\Lambda(c)[2c]\\xrightarrow{Ri_0^!\\gamma_{p,\\Lambda}}Ri_0^!Rp^!\\Lambda\\xrightarrow{\\sim}\\Lambda.$$\nBy [lem-pur-projection-purity-agreement], $\\gamma_{p,\\Lambda}$ is the ordered affine comparison. The normalization clause of [cor-pur-affine-space-zero-section-purity] therefore gives $\\Phi_{i_0}=\\mathrm{th}_c$ and $\\Phi_{i_0}(1)=\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_c)$. In particular this fixes the inverse direction, not just an unspecified rank-one isomorphism.",
+   "uses": [
+    "thm-pur-composition-coherence",
+    "lem-pur-projection-purity-agreement",
+    "cor-pur-affine-space-zero-section-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(iii), inverse Thom normalization"
+   }
+  },
+  {
+   "text": "*Step 4d: pull back and glue the comparison.* Kummer classes commute with pullback [sk-def-purity-conv], as do localization boundaries [thm-pur-with-support-exactness]. In the supported-Hom formula defining [def-pur-supported-cup], pullback tensors the pulled-back morphisms and their coefficient multiplication. Thus the class in Step 4c restricts to $\\operatorname{cl}(w^*t_1,\\ldots,w^*t_c)$ [def-pur-frame-class]. Step 4a identifies its associated morphism with $\\Phi_{i_U}$. For $c=0$, locally the ideal is zero, so $i$ is the identity; its composite $\\Phi_i$ cancels $\\Pi_a^{-1}$ and $\\Pi_a$ and is the identity, agreeing with the empty-frame unit. The charts cover $Z$, hence $\\Phi_i(1)=[Z\\subset X]$ globally. A map from $\\Lambda_Z$ to a degree-zero sheaf is determined by the image of $1$, so $\\operatorname{cl}_i=\\Phi_i$. Its invertibility from Step 2a proves stalkwise generation and (b),(c).",
    "uses": [
     "sk-def-purity-conv",
     "thm-pur-with-support-exactness",
     "def-pur-supported-cup",
+    "def-pur-frame-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(iv), pullback of the coordinate class and gluing; codimension zero"
+   }
+  },
+  {
+   "text": "*Step 5a: etale base change.* An etale base change pulls a frame back to a frame. Naturality of Kummer classes [sk-def-purity-conv], localization boundaries [thm-pur-with-support-exactness] and the tensor composite [def-pur-supported-cup] carries its class to that of the pulled-back frame. Step 3 and uniqueness of gluing give the asserted base-change identity. Since $\\operatorname{cl}_i=\\Phi_i$, Step 4a gives the same identity for the purity maps.",
+   "uses": [
+    "sk-def-purity-conv",
+    "thm-pur-with-support-exactness",
+    "def-pur-supported-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 5, etale base change"
+   }
+  },
+  {
+   "text": "*Step 5b: the product is again a regular pair.* By [lem-pur-regular-immersion-smooth-structure], $X_j$ and $Z_j$ are smooth over $k$. Base change and composition [lem-sbc-smooth-relative-dimension-permanence] give smoothness of both products; smooth algebras over a field have regular local rings [lem-weil-pbc-smooth-over-field-regular-local], so $Z_1\\times_kZ_2$ is regular. Choose affine regular frames $f$ in $R$ and $g$ in $S$. By [lem-pur-product-regular-sequence] their concatenation in $R\\otimes_kS$ is regular of length $c_1+c_2$, with quotient $R/(f)\\otimes_kS/(g)$, the coordinate ring of the product closed subscheme. Such charts cover the product. This verifies regularity and pure codimension $c_1+c_2$ in the convention [sk-def-purity-conv], including empty sequences.",
+   "uses": [
     "lem-pur-regular-immersion-smooth-structure",
     "lem-sbc-smooth-relative-dimension-permanence",
     "lem-weil-pbc-smooth-over-field-regular-local",
-    "def-pur-proetale-supported-exterior-product",
+    "lem-pur-product-regular-sequence",
+    "sk-def-purity-conv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 5, regularity and codimension of the product"
+   }
+  },
+  {
+   "text": "*Step 5c: the exterior-product identity.* On the product frames of Step 5b, [lem-pur-exterior-product-frame] identifies the concatenated frame class with $\\operatorname{cl}(f)\\boxtimes\\operatorname{cl}(g)$ for the specified supported exterior product. Its hypotheses hold: all schemes are smooth on these constant-dimension components, both individual closed subschemes are smooth, and Step 5b gives the product codimension. By [lem-pur-frame-independence] and the uniqueness of gluing in Step 3, these local equalities give\n$$[Z_1\\times Z_2\\subset X_1\\times X_2]=[Z_1\\subset X_1]\\boxtimes[Z_2\\subset X_2].$$\nThis proves (d).",
+   "uses": [
+    "lem-pur-exterior-product-frame",
     "lem-pur-frame-independence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
-    "place": "Step 5; expanded using the cited current DAG statements"
+    "place": "Step 5, local supported exterior-product comparison and gluing"
    }
   }
  ],
  "proof_deps": [
   "cor-pur-affine-space-zero-section-purity",
   "def-pur-frame-class",
-  "def-pur-proetale-supported-exterior-product",
   "def-pur-smooth-purity-map",
   "def-pur-supported-cup",
   "def-weil-etale-morphism",
   "def-weil-exceptional-inverse-image",
-  "lem-amb-etale-adjoint-locality",
   "lem-pur-coprojection",
-  "lem-pur-diagonal-base-change",
+  "lem-pur-etale-orientation-locality",
+  "lem-pur-exterior-product-frame",
   "lem-pur-frame-independence",
+  "lem-pur-product-regular-sequence",
   "lem-pur-projection-purity-agreement",
   "lem-pur-regular-immersion-linearization",
   "lem-pur-regular-immersion-smooth-structure",
   "lem-pur-supported-hom",
+  "lem-pur-twist-cancellation",
   "lem-sbc-smooth-relative-dimension-permanence",
   "lem-weil-pbc-etale-covering-base-change",
   "lem-weil-pbc-smooth-over-field-regular-local",
   "prop-sf-closed-immersion-unit",
+  "pur9-rg-def-phi",
   "sk-def-purity-conv",
   "thm-pur-composition-coherence",
   "thm-pur-diagonal-dualizing-object",
-  "thm-pur-dnc-invariance",
-  "thm-pur-finite-coefficient-smooth-purity",
   "thm-pur-with-support-exactness",
   "thm-sf-comp-composition"
  ],
@@ -235,7 +293,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -359,12 +417,12 @@
   "date": "2026-10-17",
   "item": "sk-thm-regular",
   "worker": "stage1",
-  "summary": "Second reader repaired the composition and dimension citations, specified the direction of Phi and the inverse Thom normalization, distinguished an etale pullback chart from an isomorphism, and expanded support adjunction, gluing, and product calculations. No new node; no mathematical statement change. Returned-landing repair: rebased permitted split fields on the current DAG, re-read all cited statements, checked the finite-Tor/invertibility hypotheses in Step 2 explicitly, supplied exact per-step blueprint sources, and included the previously missing unit realization record (only realized and realized_by). Current second reading replaces the SGA-sourced etale normalization by the existing ordinary etale adjoint-locality theorem at the identity and applies the constructible closed-immersion adjunction directly, avoiding an unjustified ambient-to-constructible right-adjoint identification. The final hypothesis audit cites the existing etale-covering base-change node explicitly for the etaleness of v. Maintainer reader: recorded the blueprint duplicate thm-pur-regular-immersion-purity in same_as, declared the generic tool prop-sf-closed-immersion-unit, and wrote out the smoothness, constant-relative-dimension and pure-codimension hypotheses of frame independence in Step 3.",
-  "blueprint": "Current sk-thm-regular.proof.md Steps 1–5, with the general exceptional composition obtained by the displayed Hom calculation and the affine normalization used in its stated inverse direction; chapter diagonal/DNC route unchanged.",
+  "summary": "Repair of the long-step return: retain the statement, Lean metadata, route, and original Steps 1 and 3. Extract conditional orientation/twist cancellation, normalized etale orientation locality, tensor-product regular sequences, and the supported frame exterior-product comparison as four precise statement-only nodes. Replace returned Steps 2, 4 and 5 with short cited applications and explicit remaining formal calculations. Correct the retained auxiliary search records using actual msearch.py results, and supply verbatim citation evidence.",
+  "blueprint": "Realizes sk-thm-regular.proof.md Steps 1–5; the four added nodes make precise the twist-cancellation paragraph in Step 2, the étale-local comparison in Step 4, and the regular-sequence and product-frame paragraphs in Step 5.",
   "tool_uses": [
    {
     "node": "prop-sf-closed-immersion-unit",
-    "why": "Step 2 takes from its statement only that, with the compactification (id_Z,i), the constructible compact-support functor of the closed immersion is i_*=Ri_*, so that the constructible adjunction of def-weil-exceptional-inverse-image identifies Hom(i_*Lambda_Z,F[2c]) with Hom(Lambda_Z,Ri^!F[2c]); this generic six-functor fact belongs to unit sk-prop-sf-closed-unit, which sk-thm-regular does not cite, and no node of the unit's route states it."
+    "why": "The generic closed-immersion compactification identifies Ri_! with the underived i_*, needed to apply the exceptional adjunction to the supported-Hom formula."
    }
   ]
  },
@@ -374,9 +432,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q56-5b682554a",
-  "group": "Q56",
+  "reviewer": "NT-cc-Q103-ac636d3e3",
+  "group": "Q103",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-5b682554a (reviewer sub-agent of L); spot-checked: I read the whole split (item, unit, the current main-20261015 sk-thm-regular section and proof, the detailed thm-pur-regular-immersion-purity, pur9-rg-def-*, and the full statements of all 26 proof dependencies and the 3 statement dependencies) and it is mathematically sound. Statement: same hypotheses and clauses (a)-(d) as the unit, with finite coefficients A_{E,n}, k = Fq-bar and the constructible Rf^!. The only change is the dangling [sk-prop-a1] cross-reference, now pointing to the all-level zero-section corollary with c=1; no target is weakened. No SGA source is cited; the route is diagonal/DNC. The unit differs from the side repository only in realized and realized_by. Step 1: the composition R(a_X i)^! = Ri^!Ra_X^! comes from compact-support composition, the constructible adjunction and Yoneda in D^b_c; Pi is the diagonal orientation applied per component. Step 2: the co-projection hypotheses hold (K constructible, L an invertible finite-Tor twist); Phi_i has the same direction as pur9-rg-def-phi; H^{2c}_Z becomes Hom(Lambda_Z, Ri^!F[2c]) via supported-Hom and i_*=Ri_!. Step 4: etale-locality at f=id gives Ru^!=u^*; the d=0 orientation is the identity via the clopen diagonal, DNC and projection agreement (compressed, but the blueprint step is no more detailed); linearization applies only for c>=1; Phi_{i_0}=T^{-1}=th_c, and the corollary's Cartier-Kummer class is the frame-class prescription at every n; the c=0 case is handled separately. Step 5: I checked the regular-sequence tensor argument (flatness over k) and that the exterior-product definitions give the product identity with no signs. Edge cases checked: empty Z or X, c=0, Spec k in A^1, products with a c=0 factor, n=1 with E ramified, non-equidimensional X. The dependency graph is acyclic and every cited id exists and is unmerged. Three repairs in fixes/dag/nodes/sec-smooth-purity/sk-thm-regular.json: (1) blueprint.same_as was [] although the existing imported node thm-pur-regular-immersion-purity (same unit) states the same theorem; it is now recorded, and the maintainer should merge the two (B9). (2) prop-sf-closed-immersion-unit (unit sk-prop-sf-closed-unit) is the only statement dependency outside the unit's route; it is now declared in split_report.tool_uses and I accept it as a generic tool, used only for i_*=Ri_! (C8). (3) Step 3 did not check the hypotheses of def-pur-frame-class and lem-pur-frame-independence (smooth of constant relative dimension, Z_U smooth, pure codimension); they are now written out, with lem-pur-regular-immersion-smooth-structure and lem-sbc-smooth-relative-dimension-permanence added to that step's uses (proof_deps unchanged) (E1). No new nodes; no nodes dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-ac636d3e3 (reviewer sub-agent of L); spot-checked: Read the full delivery: the item's 11 steps, the 4 new nodes, the blueprint main-20261015 sk-thm-regular _section.md and the whole proof.md (Steps 1-5), Stacks Tag 065K (algebra.tex line 16717), and the statement of every cited node. The statement is unchanged from the blueprint and keeps the finite-level coefficients A_{E,n} on pro-etale D^b_c with the constructible Rf^!. All proof dependencies are on the unit route except prop-sf-closed-immersion-unit, a generic closed-immersion fact used for i_*=Ri_!; I accept it as a tool use. No SGA is cited, and the route is the diagonal/DNC one. Steps checked: Step 2a matches the factors and direction of pur9-rg-def-phi, and the co-projection inputs K=Lambda(n)[2n], L=Lambda(-m)[-2m] meet its hypotheses. Step 4b's linearized pair (A^{c+m},A^m) meets the hypotheses of the locality lemma. Step 4c gives Phi_{i0}=T^{-1}=th_c via composition coherence, projection agreement and the normalization clause of cor-pur-affine-space-zero-section-purity. Step 5b matches the affine regular-sequence definition of regular immersion in sk-def-purity-conv. New nodes: all four are true, strictly smaller than the item and not duplicates. Twist cancellation was tested with c=0, Z empty and point-in-line. Etale-orientation locality was tested with u=id, an open immersion, V empty and c=0; I compared it with lem-amb-etale-adjoint-locality, det-sp-orientation-charts and lem-pur-diagonal-dnc-chart-normalization. The product regular sequence was tested with empty sequences, k[x] and k[y], and primes not containing (h); the Mathlib candidates are recorded as candidates, not a match. The exterior-product frame lemma was tested with empty tuples and the coordinate axes in A^2, and has no Koszul signs since all factors have even degree. Batch-5 check: the two sec-poincare-duality nodes reached are generic foundations of unit sk-lem-finite: lem-pod-integral-pullback-composition (composition of integral derived pullbacks, reached via the projection formula and Weil operations) and lem-pod-etale-stalk-tensor-scalar (stalks of sheaf tensor products, reached via a definition). Neither is PD or the trace formula, nor a step of their proofs. So the flagged citations of sk-def-purity-conv, thm-pur-diagonal-dualizing-object, pur9-rg-def-phi, lem-pur-coprojection and def-pur-proetale-supported-exterior-product are outside the assumptions; no RETURN. FIX (B3 missing definition citations, statement brackets and stmt_deps added): def-weil-pbc-localization-at-prime in lem-pur-product-regular-sequence; def-sbc-smooth-morphisms and def-weil-regular-scheme in lem-pur-etale-orientation-locality; def-sbc-smooth-morphisms and def-weil-closed-immersion in lem-pur-exterior-product-frame.; 3 file(s) fixed by the reviewer"
  }
 }

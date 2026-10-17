@@ -12,9 +12,289 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-infinity-isofibration-exponentiation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct a presentation strictly over $N(I)$. Let $R$ be the normalized, object-preserving locally Kan replacement in the coherent-nerve comparison. Adjoint $p$ to $u:\\mathfrak C[E]\\to I$, set $A=R\\mathfrak C[E]$, and set $\\pi=R(u):A\\to R(I)=I$. Let $e$ be the unit $E\\to N_{\\mathrm{hc}}\\mathfrak C[E]$ followed by $N_{\\mathrm{hc}}$ of the replacement. Every simplicial set is Joyal cofibrant, so this is the derived unit of the Quillen equivalence and is a categorical equivalence. Both its source and target are quasicategories; the Joyal characterization therefore makes it a functor equivalence. Naturality of the ordinary unit, $R(I)=I$ with replacement unit the identity, and the adjunction identity for $u$ give $N_{\\mathrm{hc}}(\\pi)e=p$ as an equality, not merely an unspecified equivalence. This construction uses no model-category structure on $E$ itself.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, derived unit; normalized replacement and adjunction naturality"
+   }
+  },
+  {
+   "text": "Write $V=\\coprod_{v\\in S_0}\\Delta^0$ and $i:V\\hookrightarrow S$. At the level of actual enriched functors, $\\mathfrak C[S]=\\operatorname{colim}_{\\Delta^m\\to S}\\mathfrak C[\\Delta^m]$. A functor on one simplex with the prescribed objects is precisely a map on each $N(P_{a,b})$, together with the unit and union-composition equations. Under a monotone map $\\alpha:[r]\\to[m]$, the mapping-poset operator is $J\\mapsto\\alpha(J)$; it preserves union. If its two endpoints coincide, its image is the singleton poset giving the identity. Thus requiring these equations for every simplex operator is exactly descent along faces AND degeneracies, including repeated vertices. Maps to the discrete category $I$ amount to specifying the arrow assigned to each pair of endpoints; the functor adjoint to $b$ assigns the composite along $[a,b]$. Consequently enriched functors $\\mathfrak C[S]\\to A$ over this functor to $I$, with restriction to $\\mathfrak C[V]$ fixed, are exactly the displayed cut-map families. Conversely such families glue to an enriched functor by the colimit property. This identifies actual maps only; their derived space is computed below.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.1, 1.1.5.3, 1.1.5.5 and the simplex-colimit extension of coherent realization"
+   }
+  },
+  {
+   "text": "For any small simplicial set $T$ and locally Kan simplicial category $B$, put $H_B(T)=\\operatorname{Map}^{h}_{\\mathrm{sCat}}(\\mathfrak C[T],B)$. Compute it using an augmented cosimplicial frame on the cofibrant object $\\mathfrak C[T]$; its $n$-simplices are ordinary enriched functors from the frame's degree $n$ to $B$. The frame theorem gives a Kan complex representing the mapping space in the localization. The coherent-nerve equivalence identifies it with the mapping space in $\\mathrm{Cat}_\\infty$ from $Q_T=N_{\\mathrm{hc}}R\\mathfrak C[T]$ to $N_{\\mathrm{hc}}B$, namely $\\operatorname{Fun}(Q_T,N_{\\mathrm{hc}}B)^\\simeq$. The unit $T\\to Q_T$ is a Joyal equivalence, even if $T$ is not a quasicategory. The functor-equivalence test makes restriction an equivalence $\\operatorname{Fun}(Q_T,N_{\\mathrm{hc}}B)\\to\\operatorname{Fun}(T,N_{\\mathrm{hc}}B)$. Its inverse and natural equivalences restrict to the cores, giving inverse homotopies there. We obtain $H_B(T)\\simeq\\operatorname{Fun}(T,N_{\\mathrm{hc}}B)^\\simeq$. These are comparisons of localized mapping spaces, hence coherently natural in both variables, in particular for $B\\to I$ and $V\\to S$.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 1.2.7.3; framed mapping-space interpretation of the derived adjunction"
+   }
+  },
+  {
+   "text": "Here is a precise space model for the word derived. For a locally Kan simplicial category $B\\to I$ and $c:T\\to N(I)$ let $F_B(T;c)=\\operatorname{hofib}_{c}(H_B(T)\\to H_I(T))$, where $c$ denotes its adjoint map under the preceding comparison. A point is a derived enriched map together with its identification over $I$; the path in this homotopy fiber, and its higher simplices, retain that identification. For the vertex tuple $\\widetilde x$, viewed as a point of $F_A(V;b i)$, define $D_A=\\operatorname{hofib}_{\\widetilde x}(F_A(S;b)\\to F_A(V;b i))$. This second path retains the identifications with the chosen vertex values. Frames may be chosen on the whole restriction diagram; alternatively their natural weak-equivalence zigzags give the same space by homotopy-pullback invariance. Step 3 compares this model to the identical two successive homotopy fibers formed from $\\operatorname{Fun}(T,N_{\\mathrm{hc}}A)^\\simeq\\to\\operatorname{Fun}(T,N(I))^\\simeq$. It is essential to take the fiber over the base diagram BEFORE the fiber over its vertex tuple: the second identification is then vertical over $I$.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, relative mapping spaces; agent expansion using two specified path-space fibers"
+   }
+  },
+  {
+   "text": "Define $F_E(T;c)=\\operatorname{hofib}_{c}(\\operatorname{Fun}(T,E)^\\simeq\\to\\operatorname{Fun}(T,N(I))^\\simeq)$. Exponentiation of the isofibration $p$ shows that $\\operatorname{Fun}(T,E)\\to\\operatorname{Fun}(T,N(I))$ is an isofibration (use the empty inclusion into $T$). Apply the isofibration pullback theorem to its pullback along the vertex $c:\\Delta^0\\to\\operatorname{Fun}(T,N(I))$. With testing quasicategory $\\Delta^0$, it gives a natural equivalence from the core of the strict lift category to $F_E(T;c)$. For $T=S$ this is $\\mathscr L_b^\\simeq\\simeq F_E(S;b)$. For $T=V$, the strict lift category is degreewise $\\prod_v E_{b(v)}$. Equivalences in this product are detected coordinatewise, since inverse edges and their two triangle witnesses can be chosen coordinatewise; hence its core is $\\prod_v E_{b(v)}^\\simeq$. The comparisons commute with restriction $V\\to S$. Taking the homotopy fiber at $(x_v)_v$ now identifies the fixed-vertex lift space in the statement with $\\operatorname{hofib}_{x}(F_E(S;b)\\to F_E(V;b i))$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Relative consequence of Theorem 2.2.5.1; isofibration exponentiation and strict-fiber comparison as stated by the cited nodes"
+   }
+  },
+  {
+   "text": "For any presentation $(A,\\pi,e)$ in the statement, not just the one of step 1, postcomposition with $e$ gives $\\operatorname{Fun}(T,E)\\to\\operatorname{Fun}(T,N_{\\mathrm{hc}}A)$. Postcomposition with a quasi-inverse of $e$, and the two natural equivalences, give a quasi-inverse to this functor; the pointwise equivalence criterion lets these homotopies restrict to cores. The maps of cores are therefore weak homotopy equivalences. Since $N_{\\mathrm{hc}}\\pi\\,e=p$ exactly, they form comparisons over the SAME $\\operatorname{Fun}(T,N(I))^\\simeq$, sending $x$ to $\\widetilde x$ on $V$. Homotopy-pullback invariance first compares the fibers over $b$ and $b i$, and then their fibers at the vertex tuples. Combining steps 3--5 gives the asserted equivalence with $D_A$. In particular no isofibration property of $N_{\\mathrm{hc}}\\pi$ is needed: its relative space was derived. Two presentations compare by the zigzag through this fixed lift space of $E$, which proves presentation independence with the specified identifications retained.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.7.3 and Theorem 2.2.5.1; invariance of the two relative homotopy fibers"
+   }
+  },
+  {
+   "text": "Put $O=S_0$, write $O_d=\\mathfrak C[V]$ for its identity-only simplicial category, and put $C=\\mathfrak C[S]$. For a vertex assignment $f:O\\to\\operatorname{Ob}B$ to a locally Kan $B$, let $B_f\\in\\mathrm{sCat}_O$ have $B_f(u,v)=B(fu,fv)$ and the inherited identities and composition. Repeated assigned objects remain separate labels in $O$. The inclusion $j:\\mathrm{sCat}_O\\to O_d\\downarrow\\mathrm{sCat}$ has right adjoint $(O_d\\xrightarrow{f}B)\\mapsto B_f$: both ordinary Hom sets are the enriched functors with the stated object assignment. The fixed-object cofibrations are Bergner cofibrations, and a fixed-object trivial cofibration is also a Dwyer--Kan equivalence. Thus $j$ is left Quillen. Its right adjoint takes the fibrant under-object $f$ to the locally Kan $B_f$.",
+   "uses": [
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-model-undercategory-mapping-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent expansion: fixed-object/undercategory adjunction; fixed-object cofibrations and underlying undercategory model classes."
+   }
+  },
+  {
+   "text": "The map $O_d\\to C$ is a Bergner cofibration: it is $\\mathfrak C$ of the monomorphism $V\\to S$. Hence $C$ is cofibrant in $\\mathrm{sCat}_O$ and as an under-object. The derived adjunction for $j$, the model-undercategory fiber theorem, and the simplicial mapping-space theorem give, coherently in $B$ and $f$,\n$$M_B:=\\underline{\\operatorname{Map}}_O(C,B_f)\\simeq\\operatorname{hofib}_f\\bigl(H_B(S)\\to H_B(V)\\bigr).$$\nHere $O_d$ is cofibrant, $B$ is Bergner fibrant, and $B_f$ is fixed-object fibrant, so every hypothesis of those theorems is met. Apply this simultaneously to $(B,f)=(A,\\widetilde x)$ and $(I,b|_O)$; postcomposition by $\\pi$ gives a map $M_A\\to M_I$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-fixed-object-simplicial-mapping-calculus",
+    "lem-coef-model-undercategory-mapping-fiber",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent relative calculation: derived adjunction followed by the undercategory mapping-fiber theorem."
+   }
+  },
+  {
+   "text": "Let $b_C:C\\to I$ be adjoint to $b$, now a vertex of $M_I$, and define $Z=\\operatorname{hofib}_{b_C}(M_A\\to M_I)$. It agrees with $D_A$ of step 4. Indeed both are the homotopy fiber, at the compatible pair $(b,\\widetilde x)$ with its constant compatibility path, of\n$$H_A(S)\\longrightarrow H_I(S)\\times^h_{H_I(V)}H_A(V).$$\nFor $D_A$ first fix the top-right base value and then the vertex value inside its relative fiber. For $Z$ first fix the bottom-left vertex value and then the base value inside its relative fiber, using step 8. Both descriptions impose the same two triangles and their homotopy over $H_I(V)$. Their universal properties agree: mapping a testing space into either is the limit of the same finite diagram of mapping spaces. Thus this interchange retains the compatibility path; it does not replace a relative identification by an arbitrary absolute path.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent expansion: interchange of two specified homotopy fibers by the mapping-space universal property of limits."
+   }
+  },
+  {
+   "text": "Let $S^{(n)}$ be the simplicial subset generated by the simplices of degrees at most $n$. Use the skeletal filtration $S^{(0)}=V\\subseteq S^{(1)}\\subseteq\\cdots$ and put $C_n=\\mathfrak C[S^{(n)}]$. The relative boundary-cell theorem says that $S^{(m)}$ is obtained by attaching one $\\Delta^m$ for each nondegenerate $m$-simplex of $S$, along its actual boundary map to $S^{(m-1)}$. Its colimit is $S$. The left adjoint $\\mathfrak C$ preserves these pushouts and the colimit. Every $C_n$ has objects $O$; its transition maps and $O_d\\to C_n$ are fixed-object cofibrations by the Quillen comparison and the agreement of cofibrations. At dimension ZERO, the attachment is $\\varnothing\\to\\{0\\}$ for each vertex. These object attachments have already been made in $C_0=O_d$. No mapping cube is attached in dimension zero.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-rigidification-boundary-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT proof of Theorem 2.2.5.1, printed p.90, together with the relative skeletal filtration."
+   }
+  },
+  {
+   "text": "For $m\\geq1$ set $Q_m=(\\Delta^1)^{m-1}$ and let $\\partial Q_m$ be its full coordinate boundary, with $Q_1=\\Delta^0$ and $\\partial Q_1=\\varnothing$. For each nondegenerate $\\sigma\\in S_m$, write $u=\\sigma(0)$ and $v=\\sigma(m)$. The boundary-cube pushout, followed by the boundary attaching map, gives the following pushout in $\\mathrm{sCat}_O$:\n$$\\coprod_{\\sigma\\in S_m^{\\rm nd}}F_{uv}(\\partial Q_m)\\longrightarrow C_{m-1},\\qquad\n\\coprod_{\\sigma\\in S_m^{\\rm nd}}F_{uv}(Q_m)\\longrightarrow C_m.$$\nThe vertical map on the left is the coproduct of free boundary inclusions. Coproducts here amalgamate the identity category $O_d$. The fixed-object pushout comparison identifies this $\\mathrm{sCat}_O$ pushout with the variable-object pushout along $U(\\partial Q_m)\\to U(Q_m)$ sending $0,1$ to $u,v$, so a functor out of it is a functor from $C_{m-1}$ and a cut-cube map for each $\\sigma$, agreeing on the boundary; this is exactly the boundary-cube universal property for the skeletal attachment. If $u=v$, $F_{uu}$ freely generates loops and their words, so no assumption that endpoints are distinct is used.",
+   "uses": [
+    "lem-coef-rigidification-boundary-cube",
+    "lem-coef-fixed-object-simplicial-mapping-calculus",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-scat-fixed-object-pushout-comparison",
+    "lem-coef-fixed-object-free-arrow-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Boundary-cube universal property after relabelling endpoints in the fixed object set; free-generator adjunction."
+   }
+  },
+  {
+   "text": "Specify the boundary attaching maps, rather than leaving composition implicit. Identify $Q_m=N(P_{0,m})$ by the characteristic functions of the interior indices $1,\\ldots,m-1$. On the face $t_j=0$, the cut subset omits $j$; the attaching functor uses the restriction to the face of $\\sigma$ omitting $j$. On $t_j=1$, the subset contains $j$ and splits uniquely into its two intervals meeting at $j$; the attaching functor applies enriched composition to the two maps for those intervals. On intersections of these faces the two prescriptions agree, by the face relations and associativity of union; insertion of an identity handles a collapsed interval. Thus all multiple-face relations are included in the actual attaching functor. For $m=1$ there is no boundary condition and one freely chooses an arrow.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-rigidification-boundary-cube"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Definitions 1.1.5.1--1.1.5.5 and boundary-cube description: explicit zero/one face formulas."
+   }
+  },
+  {
+   "text": "For either locally Kan fixed-object target $B_f=A_{\\widetilde x}$ or $I_{b|_O}$ define\n$$R_{B,n}=\\underline{\\operatorname{Map}}_O(C_n,B_f),\\quad\nG_{B,m}=\\prod_{\\sigma\\in S_m^{\\rm nd}}\\operatorname{Fun}(Q_m,B_f(\\sigma0,\\sigma m)),\\quad\nT_{B,m}=\\prod_{\\sigma\\in S_m^{\\rm nd}}\\operatorname{Fun}(\\partial Q_m,B_f(\\sigma0,\\sigma m)).$$\nMapping the pushout of step 11 into $B_f$ gives the STRICT pullback\n$$R_{B,m}=R_{B,m-1}\\times_{T_{B,m}}G_{B,m}.$$\nThe map $R_{B,m-1}\\to T_{B,m}$ is exactly the pair of boundary prescriptions in step 12 in every simplicial parameter degree. The free-generator adjunction identifies the other map with restriction of cut cubes. All these spaces are Kan. The latter map is a Kan fibration by the simplicial model axiom applied to the free boundary cofibration (and to its coproduct). Consequently this strict square is a homotopy pullback and $R_{B,m}\\to R_{B,m-1}$ is a Kan fibration. Also $R_{B,0}=*$, since there is one identity-preserving functor from $O_d$.",
+   "uses": [
+    "lem-coef-fixed-object-simplicial-mapping-calculus",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Dwyer--Kan Proposition 7.2, enriched mapping of the explicit fixed-object cell square; strict pullback along a Kan fibration."
+   }
+  },
+  {
+   "text": "Here is a small indexing category for the COMPLETE comparison diagram. Let $J$ have objects $r_n$ ($n\\geq0$), $g_m,t_m$ ($m\\geq1$), arrows $r_m\\to r_{m-1}$, $r_m\\to g_m$, $g_m\\to t_m$ and $r_{m-1}\\to t_m$, with the two composites $r_m\\to t_m$ equal, and no further relations beyond their consequences. Define $\\mathcal D_B:J\\to\\mathcal S$ by sending these objects to $R_{B,n},G_{B,m},T_{B,m}$ and the arrows to the maps just constructed. Thus every cell square and its attaching map is specified, not just the separate mapping spaces. Enriched mapping simplicial operators retain every parameter simplex. The composite with $\\pi$ gives a map of these diagrams for $A$ and $I$. Faces and degeneracies of $S$ are those of its skeletal attaching maps: degenerate simplices are the unique degeneracies of nondegenerate simplices, with their identities enforced by the enriched functor laws. Step 2 identifies these laws with all simplex restrictions, degeneracies and union-compositions of the cut family.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-fixed-object-simplicial-mapping-calculus",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent explicit category J built from all cut-attachment squares; simplex-colimit description of coherent realization."
+   }
+  },
+  {
+   "text": "The restriction of this diagram to the inverse tower $r_0\\leftarrow r_1\\leftarrow\\cdots$ has the same homotopy limit as the full $J$-diagram. To check this with the opposite cofinal-comma theorem, for any $j\\in J$ compute the ordinary comma category of tower objects mapping to $j$. For $j=r_n$ it is the inverse tail $r_k$, $k\\geq n$, with terminal object $r_n$; for $j=g_m$ it is the tail $k\\geq m$, with terminal $r_m$; for $j=t_m$ it is the tail $k\\geq m-1$, with terminal $r_{m-1}$. The square relation in $J$ identifies the two possible maps to $t_m$, so there is no additional arrow in that comma category. Each tail contracts to its terminal object, via the natural transformation from the identity to the constant functor. The cited comma criterion, applied to the opposite categories, therefore identifies all spaces of coherent cones and hence their limits.",
+   "uses": [
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT cofinal-comma criterion in the opposite category; explicit comma computation for J."
+   }
+  },
+  {
+   "text": "Since $C=\\operatorname{colim}_n C_n$, mapping into $B_f^{\\Delta^q}$ gives, in every degree $q$, the equality\n$$\\underline{\\operatorname{Map}}_O(C,B_f)=\\lim_nR_{B,n}.$$\nStep 13 proved this is a tower of Kan fibrations between Kan complexes, including the possibly empty later terms. The Kan-fibration tower theorem identifies this strict inverse limit with the homotopy limit of the tower. The simplicial mapping-space theorem identifies its left side with the framed derived mapping space in $\\mathrm{sCat}_O$, since $C$ is cofibrant and $B_f$ fibrant. Combining with step 15 proves the previously missing comparison\n$$\\operatorname{holim}_{J}\\mathcal D_B\\simeq M_B.$$\nThis is a natural restriction comparison: its components are evaluations on $C_n$ and its generating cut cubes, not an unspecified equivalence between objects. In particular it commutes with postcomposition to $I$.",
+   "uses": [
+    "lem-coef-kan-fibration-tower-limit",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent assembly of the strict enriched colimit formula, Kan tower theorem and simplicial localization mapping-space comparison."
+   }
+  },
+  {
+   "text": "The relative derived compatible-map space is consequently the following EXPLICIT augmented limit problem: form $\\mathcal D_A\\to\\mathcal D_I$ on $J$, take their limits, and take the homotopy fiber at the cone given by $b_C$. Its value is\n$$\\operatorname{hofib}_{b_C}\\bigl(\\operatorname{holim}_J\\mathcal D_A\\to\\operatorname{holim}_J\\mathcal D_I\\bigr)\\simeq Z.$$\nEquivalently it is the limit of the diagram of objectwise homotopy fibers at the components of this cone. To see the equivalence without an interchange assumption, map a testing space into both expressions: each is precisely a cone into $\\mathcal D_A$ with a specified homotopy of its image to the fixed cone in $\\mathcal D_I$. The universal properties therefore agree including higher simplices. By steps 8--9 and 16 this is the framed TWO-fiber space of step 4. By steps 5--6 it computes the required fixed-vertex lift space. The fixed-object model has thus retained vertex identifications through its derived undercategory comparison; it has not replaced them by equality in an arbitrary absolute mapping space.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent assembly: the augmented full cut-comparison diagram computes the framed relative two-fiber model."
+   }
+  },
+  {
+   "text": "For a coherent equivalence of complete systems, use the actual $J$-diagrams and their base cones just defined. If the comparison is initially given on the cut factors and their attaching data, it gives equivalences on $G_m,T_m$ and $R_0=*$. Inductively step 13 and homotopy-pullback invariance give equivalences on every $R_m$, commuting with its restrictions. This produces an equivalence of the full $J$-diagrams. A transformation with a coherent inverse and the two inverse homotopies maps coherent cones in both directions; their composites on cones are homotopic to the identity. The limiting-cone universal property therefore gives mutually inverse maps of their limits, with those homotopies. Applying the same argument to the augmented fiber problem in step 17 yields equivalences of the relative compatible-map spaces. All small limits of spaces exist. An unconnected collection of cut-space equivalences does not supply these transformations of $J$-diagrams: it lacks precisely the boundary-composition maps $R_{m-1}\\to T_m$ and their relations. The asserted invariance is for coherent equivalences of the complete augmented diagrams, as stipulated in the statement.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Universal property of the explicit complete comparison diagram and its augmented relative fiber problem."
+   }
+  },
+  {
+   "text": "Finally every comparison used above is induced by restriction, postcomposition, the unit, or the natural framed mapping-space comparison. Restriction along $T\\to S$ over $N(I)$ sends the adjoint of $b$ to its composite, the cut family to its restrictions, and each of the two retained paths to its restriction. An equivalence of vertex tuples is a path in the relative vertex space; the homotopy-fiber path model transports along that path and retains its higher homotopies. Coherent cubes of these maps compare the path models by the cube-invariance input. For any small parameter $K$, repeat steps 2--18 with $S\\times K$ and $b\\operatorname{pr}_S$; the same adjunction and frame comparisons commute with every map of $K$. Thus all parameter simplices and their face, degeneracy and composition maps are included, proving the requested coherent naturality. Only model categories of simplicial sets and simplicial categories, and limits of spaces, entered the argument. No completeness, cocompleteness or presentability of $E$ was used.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-cosimplicial-frame-mapping",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.3 and 1.1.5.5; naturality of Theorem 2.2.5.1; agent expansion for relative vertex paths and S times K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-fixed-object-simplicial-mapping-calculus",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-kan-homotopy-coherent-cube-invariance",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-kan-fibration-tower-limit",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-undercategory-mapping-fiber",
+  "lem-coef-rigidification-boundary-cube",
+  "lem-coef-scat-fixed-object-pushout-comparison",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Sections 1.1.5 and 2.2.5; Dwyer--Kan Section 7; Hovey Sections 1.1, 5.2 and 5.4. Agent expansion through fixed-object simplicial mapping complexes, explicit cut-cell squares and the Kan-fibration inverse tower. Online sources not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -43,10 +323,45 @@
    "results": "{\"t\": \"2026-10-17T08:06:35Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent diagrams over an ordinary category are assembled from cut poset mapping cubes with all face degeneracy and composition compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"CategoryTheory.cechNerveTerminalFrom\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\"], \"digest\": \"02c049424a2035fb\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:55-225 (Path, SimplicialThickening and SimplicialNerve) and SimplicialSet/Nerve.lean:65-85. These define the cut nerves and ordinary/coherent nerve functors, but do not prove the relative derived fixed-vertex comparison or invariance of derived compatible-map spaces. LeanSearch returned ordinary relative simplicial morphisms and topological realization, not a match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative coherent diagrams with prescribed vertices are derived enriched maps from coherent realization over an ordinary category",
+   "results": "{\"t\": \"2026-10-17T13:43:06Z\", \"tool\": \"leanfinder\", \"query\": \"Relative coherent diagrams with prescribed vertices are derived enriched maps from coherent realization over an ordinary category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.diagram\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.Enriched.FunctorCategory.diagram_obj_obj\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"lightProfiniteToLightDiagram\"], \"digest\": \"7d267154ee6c8844\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/strict Segal/enriched functor declarations do not identify relative derived coherent-nerve lift spaces with vertex homotopy fibers. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-85,185-210; these construct cut paths and the nerve, without the Bergner--Joyal derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialThickening|SimplicialNerve|homotopyFunction|cosimplicialFrame",
+   "results": "{\"t\": \"2026-10-17T13:43:17Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|SimplicialNerve|homotopyFunction|cosimplicialFrame\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"3358c6b085bd02b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/strict Segal/enriched functor declarations do not identify relative derived coherent-nerve lift spaces with vertex homotopy fibers. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-85,185-210; these construct cut paths and the nerve, without the Bergner--Joyal derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy coherent nerve adjunction identifies derived enriched functor mapping spaces and cores of functor quasicategories",
+   "results": "{\"t\": \"2026-10-17T13:43:17Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy coherent nerve adjunction identifies derived enriched functor mapping spaces and cores of functor quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"8cbb38ede467daf8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/strict Segal/enriched functor declarations do not identify relative derived coherent-nerve lift spaces with vertex homotopy fibers. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-85,185-210; these construct cut paths and the nerve, without the Bergner--Joyal derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-17T13:43:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/strict Segal/enriched functor declarations do not identify relative derived coherent-nerve lift spaces with vertex homotopy fibers. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-85,185-210; these construct cut paths and the nerve, without the Bergner--Joyal derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent nerve and rigidification identify relative lift spaces with fixed vertex identifications and derived compatible cut poset maps",
+   "results": "{\"t\": \"2026-10-17T13:44:22Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent nerve and rigidification identify relative lift spaces with fixed vertex identifications and derived compatible cut poset maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty_eq_top\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"b55523ac4146910e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/strict Segal/enriched functor declarations do not identify relative derived coherent-nerve lift spaces with vertex homotopy fibers. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-85,185-210; these construct cut paths and the nerve, without the Bergner--Joyal derived comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-colored-operation-section-reconstruction",
@@ -72,5 +387,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-cut-nerve-diagrams",
+  "worker": "stage1",
+  "summary": "Repair of returned e73b8c4899: retain supported steps 1--6; construct the fixed-object simplicial mapping model, every cut-cell boundary map, the full small comparison category J, and the Kan-fibration inverse tower. Identify its augmented homotopy limit with the framed two-fiber space via a derived undercategory comparison. Treat dimension zero as object attachment. Two generic statement-only supporting nodes, no change to the item statement.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle derived mapping comparison: steps 1--6 give the relative framed model; 7--9 compare fixed-object mapping spaces to it; 10--17 construct and verify the full cut-comparison diagram and augmented limit; 18--19 prove complete-system invariance and coherent naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic Kan-core and pointwise-transformation calculus for coherent functor categories, used in the framed comparison and postcomposition equivalences; the biduality unit has no substitute for this general quasicategorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "why": "Generic uniqueness of a simplex as a degeneracy of a nondegenerate simplex (Stacks 017R); used only to check that the cut-cell system includes all degeneracies, not to replace a biduality-unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-06da9942e",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-06da9942e (reviewer sub-agent of L); spot-checked: Read the item's 19 steps, both new nodes and every cited statement. The mathematics is sound. Sources checked: Dwyer-Kan 7.1/Prop 7.2, printed p.276 (text extracted: 'closed simplicial model category'), matches the mapping-calculus node; I checked SM7 on the free generators. Hovey Prop 1.1.8 and the paragraph after it on p.5 give the undercategory model structure, and the fibre comparison is the standard result, correctly marked as agent-formulated. Steps 7-8: every hypothesis holds (O_d cofibrant, O_d->C a cofibration, A, I and B_f locally Kan, j left Quillen). Step 9 is the symmetric total fibre of a square. Step 11: I checked the pushout pasting, including u=v. Step 13: the strict pullback along a Kan fibration is fine, and infinite products are covered by SM7 on the coproduct. Step 15: I recomputed the comma categories (tails with terminal objects), so the tower is initial in J. Step 16: the Kan-tower and nerve-localization hypotheses hold. Small cases tested: empty S, a vertex, an edge, a one-vertex loop, a groupoid I, and O empty. No cycle over 748 nodes, the route is fine, and I accept the tool use of lem-cbc-enhanced-functor-cone-calculus. Fixes: (1) the new mapping-calculus node redefined F_uv instead of citing the existing lem-coef-fixed-object-free-arrow-adjunction; it now cites it, with a stmt_dep added. (2) Step 11 re-derived lem-coef-scat-fixed-object-pushout-comparison without citing it; it now cites that node and the free-arrow adjunction, both added to proof_deps. The item statement is unchanged.; 2 file(s) fixed by the reviewer"
  }
 }

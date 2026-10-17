@@ -10,11 +10,124 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-sp-injective-resolutions",
+  "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_{g,f}:(gf)_*\\to g_*f_*$ and $u_T:(\\mathrm{id}_T)_*\\to\\mathrm{id}$. Construct these first on module sheaves using [def-weil-pbc-direct-image]. For $V\\to Z$ etale, the map $a:(V\\times_ZY)\\times_YX\\to V\\times_ZX$ preserving the projections to $V,X$ is an isomorphism: its inverse has projections $(v,f(x)),x$. The universal property in [def-pc-fibre-product] verifies both inverse identities. Put $(c_{g,f,F})_V=F(a)$, so it has exactly the required direction $F(V\\times_ZX)\\to F((V\\times_ZY)\\times_YX)$. Put $(u_{T,F})_V=F(b)$, where $b:V\\to V\\times_TT$ has projections $\\mathrm{id}_V,V\\to T$. Naturality in $V$ follows because the two scheme maps have the same projections; naturality in $F$ is the naturality of a sheaf morphism at $a,b$. These maps are $\\Lambda$-linear: restriction respects the module action, and pullback of each constant scalar along $a,b$ is that same scalar. Inverses come from $a^{-1},b^{-1}$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, underived comparison made explicit from the direct-image formula; fibre-product universal property"
+   }
+  },
+  {
+   "text": "The comparisons just constructed obey the underived associativity and unit equations. At $V\\to W$, both associativity composites are obtained by applying $F$ to the map from $((V\\times_WZ)\\times_ZY)\\times_YX$ to $V\\times_WX$ that preserves the projections to $V$ and $X$. The two maps are equal by [def-pc-fibre-product]; contravariance gives $(h_*c_{g,f})c_{h,gf}=(c_{h,g}f_*)c_{hg,f}$. For either unit composite the resulting map from $V\\times_YX$ to itself preserves both projections, hence is the identity. Thus $(u_Yf_*)c_{\\mathrm{id}_Y,f}=\\mathrm{id}$ and $(f_*u_X)c_{f,\\mathrm{id}_X}=\\mathrm{id}$. These are equalities of natural transformations of module sheaves, and therefore hold degree by degree for complexes too.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, underived associativity and unit comparisons underlying the composition formula; explicit universal-property verification"
+   }
+  },
+  {
+   "text": "For every scheme map $v$, constant-coefficient module inverse image $v^{-1}$ is exact and left adjoint to $v_*$ by clause (3) of [prop-weil-pbc-inverse-image-modules-exact]. It therefore preserves monomorphisms, and [lem-exc-rg-right-adjoint-preserves-injectives] applies to this adjunction: $v_*$ sends injective module sheaves to injective module sheaves. It is additive by [def-weil-pbc-direct-image]. Hence it acts on complexes and homotopies; a zero term stays zero. In particular $f_*I$, $g_*f_*I$ and all composite direct images of a bounded-below injective complex $I$ are again bounded-below complexes of injectives. This uses the constant ring identification in the cited exactness proposition, not flatness of a scheme morphism.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-exc-rg-right-adjoint-preserves-injectives",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z, lemma-adjoint-preserve-injectives, (a) implies (c); sites-modules.tex Tag 04JC, lemma-flat-pullback-exact, constant-ring case"
+   }
+  },
+  {
+   "text": "The module categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. For every edge $v$ denote the natural derived-functor map by $\\alpha^v_L:Q(v_*L)\\to Rv_*(QL)$. [lem-weil-pbc-right-derived-plus-injective] gives this map and says it is invertible whenever $L$ is a bounded-below injective complex. For such $I$ put\n$$t_{g,f,I}=Rg_*(\\alpha^f_I)\\circ\\alpha^g_{f_*I},\\qquad D_{g,f,I}=t_{g,f,I}\\circ Q(c_{g,f,I})\\circ(\\alpha^{gf}_I)^{-1}.$$\nStep 3 ensures that $\\alpha^g_{f_*I}$ is invertible, so $D_{g,f,I}:R(gf)_*(QI)\\to Rg_*Rf_*(QI)$ is an isomorphism. Naturality of $\\alpha$ and $c$ shows that $D_{g,f,I}$ commutes with every $Q(k)$ for a chain map $k:I\\to J$. Additive functors preserve the chain-homotopy equation, so the same assertion holds for homotopy classes. This formula is precisely the stipulated normalization, with all three computation isomorphisms displayed.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI, lemma-enough-injectives-right-derived, and 05TH, lemma-injective-acyclic; injectives.tex Tag 01DU, theorem-sheaves-modules-injectives"
+   }
+  },
+  {
+   "text": "For $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ choose $e:QI\\xrightarrow{\\sim}K$ with $I$ bounded below and injective, using [lem-weil-pbc-dplus-injective-representative]. Write $A=R(gf)_*$, $B=Rg_*Rf_*$, and define\n$$d_{g,f,K}=B(e)\\circ D_{g,f,I}\\circ A(e)^{-1}.$$\nFor another choice $e':QJ\\xrightarrow{\\sim}K$, [lem-weil-pbc-kinjective-hom-derived] represents $(e')^{-1}e$ by a homotopy class $k:I\\to J$. The equation $B(Qk)D_{g,f,I}=D_{g,f,J}A(Qk)$ from step 4 proves equality of the two displayed formulas after substituting $e=e'Qk$. For a map $r:K\\to K'$, represent $(e')^{-1}re$ by a homotopy class in the same way; that equation gives $B(r)d_K=d_{K'}A(r)$. Thus these components form a natural isomorphism. Any natural transformation with the prescribed components on $QI$ must satisfy the displayed conjugation formula by naturality at $e$; hence it equals $d_{g,f}$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K, lemma-injective-resolutions-exist; 070J, lemma-bounded-below-injectives-K-injective; 070I, lemma-K-injective, (3); explicit conjugation argument"
+   }
+  },
+  {
+   "text": "For the identity map on $T$ set $D_{T,I}=Q(u_{T,I})\\circ(\\alpha^{\\mathrm{id}_T}_I)^{-1}:R(\\mathrm{id}_T)_*(QI)\\to QI$. The map $\\alpha^{\\mathrm{id}_T}_I$ is invertible by [lem-weil-pbc-right-derived-plus-injective]. Naturality of $u_T$ and $\\alpha$ makes $D_{T,I}$ natural on chain maps and on homotopy classes. Apply exactly the conjugation formula of step 5, now with $A=R(\\mathrm{id}_T)_*$ and $B=\\mathrm{id}$, to obtain $d_T$. The representative existence and the Hom bijection used there are [lem-weil-pbc-dplus-injective-representative] and [lem-weil-pbc-kinjective-hom-derived]. This gives the required identity normalization and its uniqueness.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH, lemma-injective-acyclic; 013K and 070I; identity specialization of the explicit conjugation argument"
+   }
+  },
+  {
+   "text": "Evaluate the associativity equation at $QI$. Step 3 permits computing with $I,f_*I,g_*f_*I$. Put\n$$t=Rh_*Rg_*(\\alpha^f_I)\\circ Rh_*(\\alpha^g_{f_*I})\\circ\\alpha^h_{g_*f_*I}.$$\nExpanding the left side with step 4 gives\n$$t\\circ Q((h_*c_{g,f,I})\\circ c_{h,gf,I})\\circ(\\alpha^{hgf}_I)^{-1}.$$\nIndeed the two occurrences of $Rh_*(\\alpha^{gf}_I)$ cancel, and naturality gives\n$$Rh_*Q(c_{g,f,I})\\circ\\alpha^h_{(gf)_*I}=\\alpha^h_{g_*f_*I}\\circ Q(h_*c_{g,f,I}).$$\nFor the right side first use naturality of $d_{h,g}$ at $\\alpha^f_I:Q(f_*I)\\to Rf_*(QI)$, then apply its normalized formula at $Q(f_*I)$. Cancellation of $\\alpha^{hg}_{f_*I}$ leaves\n$$t\\circ Q(c_{h,g,f_*I}\\circ c_{hg,f,I})\\circ(\\alpha^{hgf}_I)^{-1}.$$\nStep 2 identifies the middle factors, proving equality at $QI$. Every object is isomorphic to such a $QI$ by [lem-weil-pbc-dplus-injective-representative], so naturality at that isomorphism proves equality everywhere. The natural maps $\\alpha$ and their injective computation are those of [lem-weil-pbc-right-derived-plus-injective].",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tags 05TH and 013K; associativity checked by expanding the normalized comparisons"
+   }
+  },
+  {
+   "text": "For the left unit, naturality of $d_Y$ at $\\alpha^f_I:Q(f_*I)\\to Rf_*(QI)$ and its formula in step 6 give, after inserting step 4,\n$$(d_YRf_*)_{QI}\\circ d_{\\mathrm{id}_Y,f,QI}=\\alpha^f_I\\circ Q(u_{Y,f_*I}\\circ c_{\\mathrm{id}_Y,f,I})\\circ(\\alpha^f_I)^{-1}=\\mathrm{id}.$$\nFor the right unit use naturality of $\\alpha^f$ at $u_{X,I}:(\\mathrm{id}_X)_*I\\to I$; the expansion is\n$$(Rf_*d_X)_{QI}\\circ d_{f,\\mathrm{id}_X,QI}=\\alpha^f_I\\circ Q(f_*u_{X,I}\\circ c_{f,\\mathrm{id}_X,I})\\circ(\\alpha^f_I)^{-1}=\\mathrm{id}.$$\nIn both cases the last equality is the underived unit equality in step 2. The $\\alpha^f_I$ and other cancelled computation maps are invertible by [lem-weil-pbc-right-derived-plus-injective] and step 3. Finally [lem-weil-pbc-dplus-injective-representative] and naturality extend the equations from $QI$ to every $K$. None of these constructions used finiteness, properness, torsion, or invertibility of a coefficient.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tags 05TH and 013K; explicit identity-comparison calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-pc-fibre-product",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, bounded-below constant-ring version. Agent-written injective-model proof using derived.tex Tags 013K, 05TH, 05TI, 070I, 070J and homology.tex Tag 015Z; normalization, associativity and units expanded explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +163,52 @@
    "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
    "date": "2026-10-17",
    "verdict": "no match: returned underived structural-sheaf operations or general derived universal-property/natural-transformation laws; none states the ordinary etale module direct-image composition and all of its specified normalization and coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(assoc|comp)|[Cc]omp.*[Aa]ssoc",
+   "results": "Mathlib/NumberTheory/DirichletCharacter/Basic.lean; Mathlib/Dynamics/Ergodic/MeasurePreserving.lean; Mathlib/Dynamics/Ergodic/MeasurePreserving.lean; Mathlib/Analysis/CStarAlgebra/GelfandNaimarkSegal.lean; Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean; Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean; Mathlib/NumberTheory/Zsqrtd/Basic.lean; Mathlib/NumberTheory/FLT/Three.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-natural-transformation laws or underived pushforwards do not state the normalized etale D+ compositor and all coherence clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "associativity of derived functor composition isomorphisms",
+   "results": "CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc; CategoryTheory.NatTrans.leftDerived_comp_assoc; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc; CategoryTheory.Functor.rightDerived_fac_app_assoc; CategoryTheory.Functor.leftDerivedNatTrans_comp_assoc; CategoryTheory.Functor.rightDerived_fac_assoc; CategoryTheory.Functor.rightDerivedNatTrans_app_assoc; CategoryTheory.Functor.associator",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-natural-transformation laws or underived pushforwards do not state the normalized etale D+ compositor and all coherence clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "CategoryTheory.Functor.IsRightDerivedFunctor; CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit; CategoryTheory.Functor.HasRightDerivedFunctor.mk'; CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension; CategoryTheory.Functor.IsRightDerivedFunctor.mk; CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension; CategoryTheory.Functor.rightDerivedDesc; CategoryTheory.Functor.rightDerivedUnique",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-natural-transformation laws or underived pushforwards do not state the normalized etale D+ compositor and all coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bounded below derived pushforward of etale sheaves is computed by injective complexes and has canonical associative unital composition comparisons",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafPushforwardContinuousComp; SheafOfModules.pushforward_assoc; CategoryTheory.Functor.sheafPushforwardContinuousComp'; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardComp_hom_app_val_app; CategoryTheory.Functor.sheafPushforwardCocontinuous",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-natural-transformation laws or underived pushforwards do not state the normalized etale D+ compositor and all coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of schemes the canonical composition isomorphisms of bounded below derived direct images of constant coefficient etale module sheaves satisfy associativity and identity laws",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; SheafOfModules.pushforward_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-natural-transformation laws or underived pushforwards do not state the normalized etale D+ compositor and all coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(assoc|comp)|lowerStarComp",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-natural-transformation laws or underived pushforwards do not state the normalized etale D+ compositor and all coherence clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-cbc-finite-torsion",
@@ -70,5 +225,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-etale-derived-direct-image-coherence",
+  "worker": "stage1",
+  "summary": "Constructed the ordinary module sheaf comparisons sectionwise, checked underived coherence by fibre-product uniqueness, proved preservation of injectives using the existing exact inverse-image and adjoint tools, and wrote the normalized derived comparisons and their uniqueness by conjugation along injective representatives. Expanded both associativity paths and both unit paths. No statement change and no new nodes; all non-elementary inputs reuse existing DAG nodes. Lean associativity is only a partial attachment, not the full item.",
+  "blueprint": "Realizes the thm-cbc-finite-torsion proof refinement paragraph (composition isomorphism of proper direct images) and its final associativity/pasting sentence. The item is the ordinary direct-image coherence tool required by parent steps 5 and 9, not a replacement for compact-support base change.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Constant-ring module inverse image is an exact left adjoint for arbitrary scheme maps, so its right adjoint preserves injectives; a generic coefficient/sheaf tool not supplied by the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives for the constant-ring module categories, required to apply the generic derived-functor and injective-representative tools; not a replacement of a compact-support step."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Natural comparison alpha and computation on bounded-below injective complexes; generic homological algebra used to construct the ordinary etale compositor, absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-dec878ec9",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-dec878ec9 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all 8 steps, and the statement of every cited node (11 of them). The split creates no new nodes. Sources checked: Stacks Tag 0D6E, sites-cohomology.tex lines 4011-4030; it is unbounded and proved by adjoint uniqueness with no normalization, so proof_origin=agent is correct. Also checked: homology.tex Tag 015Z (line 7270), sites-modules.tex lemma-flat-pullback-exact (line 5540), the main-20261015 text of thm-cbc-finite-torsion, and the Lean declaration rightDerivedFunctorPlusCompIso'_lowerStarComp_assoc, which is only the associativity clause and is rightly not attached. The coefficient category is Mod(T_et,Lambda) in D^+, the same as def-weil-pbc-derived-categories and def-weil-pbc-direct-image. Steps 1-2: I checked the direction of F(a) for a:(VxY)xX->VxX, linearity via constant sections, and the underived associativity and unit laws through the fibre-product projections. Step 3: the exact inverse-image adjunction preserves monomorphisms, so the right adjoint preserves injectives (Mathlib Adjunction.map_injective). Steps 4-8: I re-expanded the D formula and both associativity and unit paths myself, using naturality of alpha and d and step 3 for f_*I and (id)_*I. Each reduces to step 2. Uniqueness and independence of choices follow from the K-injective Hom bijection. Edge cases: Lambda=0, empty scheme, identity edges. No finiteness hypothesis is used anywhere. Possible duplicates I read: lem-weil-derived-direct-image-composition clause 5 (unbounded, no normalization, other unit), def-weil-pbc-derived-direct-image-composition (abelian sheaves, defined as a conjugate), the ringed-topoi, pc and sfb composition nodes. None states this D^+ normalized package, so the empty same_as is acceptable. Accepted tool_uses: prop-weil-pbc-inverse-image-modules-exact and lem-weil-pbc-module-sheaves-enough-injectives (generic tools), and lem-weil-pbc-right-derived-plus-injective (a Mathlib leaf). No SGA source is used and no fixes were needed."
  }
 }

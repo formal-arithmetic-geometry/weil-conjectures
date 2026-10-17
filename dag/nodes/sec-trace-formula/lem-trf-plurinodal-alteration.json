@@ -16,11 +16,235 @@
   "def-exc-excellent-ring",
   "def-pc-integral-scheme",
   "def-weil-etale-morphism",
-  "def-weil-flat-morphism"
+  "def-weil-flat-morphism",
+  "def-kun-projective",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-discrete-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record that every finite extension $L/K$ of the fraction field of the given excellent DVR $R$ has a finite excellent strictly henselian DVR model with the same algebraically closed residue field. Put $R_L=\\overline R^{\\,L}$. Excellence implies Nagata by [lem-exc-quasi-excellent-nagata]. The prime $0$ in [def-weil-pbc-nagata-ring], followed by [def-weil-pbc-japanese-domain], makes $R_L$ a finite $R$-module. By [lem-sc-integral-closure-dedekind-surjective-fibres] it is a Noetherian normal domain of dimension one; [lem-weil-pbc-integral-closure-finite-extension-normal] identifies its fraction field with $L$.",
+   "uses": [
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Finite trait changes in Expose X, proof of Theorem 2.4, Step 1; Stacks 07QV, 032R, 032F, 09IG"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-over-henselian-local-product] to $R\\to R_L$. A domain cannot have two nonzero factors, since the corresponding idempotent would contradict $e(e-1)=0$. Thus $R_L$ is local henselian and its residue field is finite over the residue field of $R$, hence equal to it by algebraic closedness. It is strictly henselian. The one-dimensional normal local criterion [lem-sc-normal-dim1-dvr] makes it a DVR, and [lem-exc-finite-type-localization-excellent] makes it excellent (a finite algebra is of finite type). Taking composita inside the fixed algebraic closure gives common finite extensions for finitely many such traits. The inclusions into this algebraic closure give the compatible geometric generic points.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-sc-normal-dim1-dvr",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Finite trait changes; Stacks 04GH, 00PD, 07QU"
+   }
+  },
+  {
+   "text": "We shall use the following elementary consequence of affine flatness throughout the induction. If $Y$ is integral, $g:V\\to Y$ is flat and its generic fibre is integral, then $V$ is integral. On affine charts $A\\to C$, [lem-weil-pbc-flat-morphism-affine-criterion] and the definition [def-weil-pbc-flat-ring-map] applied to $A\\hookrightarrow\\operatorname{Frac}(A)$ give $C\\hookrightarrow C\\otimes_A\\operatorname{Frac}(A)$. Hence each nonempty affine chart has a domain as its coordinate ring and meets the generic fibre; any two such charts meet because that fibre is irreducible. The same argument works after a dominant integral base change when the generic fibre is geometrically integral. For a tower whose stages have geometrically integral generic fibre, it also proves by induction that its total generic fibre is geometrically integral over the bottom field: repeat the chart argument after every extension of that field.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Stacks Tag 0BCM, divisors.tex, lemma-flat-over-integral-integral-fibre; explicit affine argument"
+   }
+  },
+  {
+   "text": "Prove first the auxiliary existence assertion: for any integral proper $W\\to B$ dominating an allowed trait, there is a finite trait extension $C\\to B$ and an integral projective nodal tower $P\\to C$ with a proper dominant morphism $P\\to W$ inducing a finite function-field extension. Require each stage to have smooth geometrically integral generic fibre; then Step 3 ensures geometric integrality of $P_{\\operatorname{Frac}(C)}$. Induct on $d=\\dim W_\\eta$, which is finite by [lem-kun-dimension-finite-type]. If $d=0$, [lem-pc-dim-zero-finite-over-field] says $W_\\eta$ is finite over $K$. Since it is integral, it is $\\operatorname{Spec}L$ for a finite extension $L/K$. Steps 1--2 give $C=\\operatorname{Spec}R_L$; [lemma-nagata-proper-valuative-criterion-existence-api] extends $\\operatorname{Spec}L\\to W$ to $C\\to W$. This map is proper by [lem-weil-pbc-proper-to-separated], as $C\\to B$ is finite, hence proper by [lem-weil-pbc-finite-proper], and $W\\to B$ is separated. It is dominant and induces the identity on $L$. Take the tower of length zero.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-pc-dim-zero-finite-over-field",
+    "lemma-nagata-proper-valuative-criterion-existence-api",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Dimension induction; zero-dimensional case via finite normalization and the valuative criterion"
+   }
+  },
+  {
+   "text": "For $d>0$, apply [lem-trf-alteration-relative-curve-preparation] to $(W,\\varnothing)$ over the current trait. It supplies $W_1\\to W$ and $W_1\\to Y$, with $\\dim Y_\\eta=d-1$ and smooth irreducible generic curve. The preparation makes $Y$ projective over the affine trait, so [lem-trf-relative-marked-nodal-reduction] applies to this relative curve with empty boundary: write the resulting curve as $V\\to Y_1$, with $V\\to W_1$ a proper alteration and $Y_1\\to Y$ a projective alteration. Then $Y_1$ is integral and proper over $B$, and its generic dimension remains $d-1$, since the function-field extension is finite. This last dimension equality is [lem-sc-closed-irreducible-dimension-trdeg]. The induction hypothesis applies to $Y_1$: after a finite trait change $C\\to B$ it gives a tower $T\\to C$ and a proper dominant generically finite map $T\\to Y_1$.",
+   "uses": [
+    "lem-trf-alteration-relative-curve-preparation",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, Step 5 relative-curve factorization, followed by Expose IX, Theorem 1.2 and induction on the base"
+   }
+  },
+  {
+   "text": "Set $P=V\\times_{Y_1}T$. By [lem-trf-projective-nodal-family-geometry], $P\\to T$ is a projective flat nodal curve with geometrically connected fibres. The generic curve of $V\\to Y_1$ is smooth geometrically integral by [lem-trf-relative-marked-nodal-reduction], so its base change to the function field of $T$ is integral. Step 3 proves $P$ integral and proves the required geometric integrality over the bottom generic field. Appending $P\\to T$ gives the desired tower. The projection $P\\to V$ is proper, as a base change of $T\\to Y_1$, and its generic fibre is the spectrum of a finite field extension: tensoring that finite extension with the function field of $V$ is finite-dimensional, and is a domain by integrality of $P$. Thus the composite $P\\to W$ is proper, dominant and has finite function-field extension. Properness here uses [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition]. This proves the auxiliary assertion without assuming geometrically integral generic fibre of $W$.",
+   "uses": [
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Pullback of the nodal curve after alteration of its base; completion of the dimension induction"
+   }
+  },
+  {
+   "text": "To obtain every component after one trait change, first stabilize the generic components of $X$. Its generic fibre is Noetherian with finitely many components; the same holds over $K^{\\mathrm{sep}}$ by finite type, [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-noetherian-finite-components]. Apply [lem-sbc-components-finite-separable-descent]. For each component over the resulting finite separable extension, its inverse image over $K^{\\mathrm{sep}}$ is irreducible and nonempty; [lem-sbc-subset-geometric-irreducibility] therefore makes it geometrically irreducible under arbitrary field extension. Next apply [lem-pur-finite-inseparable-geometric-reduction] to the finite disjoint union of those components with their reduced structures. After one finite purely inseparable extension, their reduced base changes are geometrically reduced, and they remain geometrically irreducible: reduction and a purely inseparable field change do not change the underlying component spaces. They are therefore geometrically integral. Steps 1--2 realize the composite field extension by a finite trait $B_0\\to B$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sbc-components-finite-separable-descent",
+    "lem-sbc-subset-geometric-irreducibility",
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 2.4, Steps 1--2; Stacks 054R and 04KT, with explicit use of the existing component-descent and irreducibility statements"
+   }
+  },
+  {
+   "text": "For each reduced closure $W_i$ of one of these generic components in $(X\\times_BB_0)_{\\mathrm{red}}$, apply the auxiliary assertion, obtaining a tower over a finite trait $C_i\\to B_0$. These closures are integral proper finite-type schemes dominating $B_0$; closed immersions and reduction preserve properness by [lem-weil-pbc-closed-immersion-proper] and composition of proper maps. Choose a common finite extension $B'\\to B_0$ of the finitely many $C_i$ using Step 2. Pull back each tower to $B'$. Every stage remains nodal by [lem-trf-projective-nodal-family-geometry], and Step 3 makes its total scheme integral, since its generic fibre is geometrically integral. Each target $W_i$ has a geometrically integral generic fibre, so its base change has exactly one dominating reduced component. The map of the pulled-back tower has its image in that component: nilpotents vanish in a reduced source, and on any affine chart every equation vanishing at its generic point vanishes in its domain of sections. The reduced closures obtained this way are exactly all the components of $(X\\times_BB')_{\\mathrm{red}}$ dominating $B'$. The maps onto them are proper by base change and factorization through a closed subscheme, and dominant by the generic-field description.",
+   "uses": [
+    "lem-trf-projective-nodal-family-geometry",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Simultaneous trait extension and componentwise base change of the constructed towers"
+   }
+  },
+  {
+   "text": "All maps just constructed are of finite type between Noetherian integral schemes and have finite function-field extension. Their fibre over the generic point is a single point: on an affine neighbourhood the generic-fibre coordinate algebra is a finite-type subalgebra of a finite field extension and hence is itself finite-dimensional and a field. Proper maps are quasi-compact and quasi-separated by [pqf-lem-proper-basic]. Apply [lem-weil-pbc-generic-finite-morphism-open-neighborhood] to replace the function-field formulation by finiteness over a dense open, exactly the convention in the item. Finally [lem-trf-projective-nodal-family-geometry] gives the open relative smooth locus $U$ of every stage and a closed singular subscheme with finite fibres. Its reduction $N$ is closed in the projective stage, hence proper over the base by [lem-pc-projective-proper] and [lem-weil-pbc-closed-immersion-proper]. Its fibres have the same finite underlying sets. Since the base is Noetherian, [thm-pqf-finite-iff-proper-finite-fibres] gives $N$ finite over the base. Thus all clauses of the trait assertion, including length zero, hold. No alteration degree has been inverted.",
+   "uses": [
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "lem-trf-projective-nodal-family-geometry",
+    "pqf-lem-proper-basic",
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Generic finiteness and finite nonsmooth support; Stacks generic finiteness and Tags 0C59, 0C5B"
+   }
+  },
+  {
+   "text": "For the field assertion use a separate induction on $d=\\dim W$, proving the stronger pair assertion: for every integral proper finite-type $F$-scheme $W$ and every nowhere dense closed subscheme $Z$, there is a smooth integral proper alteration $Q\\to W$ whose inverse image of $|Z|$ is contained in a strict normal crossings divisor. Strict normal crossings has the explicit smooth-intersection meaning in [lem-trf-nodal-pair-projective-resolution]. At $d=0$, [lem-pc-dim-zero-finite-over-field] makes $W$ the spectrum of a finite field extension of $F$, which is $F$ since $F$ is algebraically closed; take the identity and empty divisor. The induction measure is finite by [lem-kun-dimension-finite-type].",
+   "uses": [
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-pc-dim-zero-finite-over-field",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Lemma 2.2, field version of the nodal-curve induction; strengthened boundary assertion"
+   }
+  },
+  {
+   "text": "For $d>0$, apply [lem-trf-alteration-relative-curve-preparation] to $(W,Z)$ over $F$, followed by [lem-trf-relative-marked-nodal-reduction] to the prepared curve and its reduced inverse boundary. That lemma's hypotheses hold: $Y$ is projective over $\\operatorname{Spec}F$ by the preparation. The inverse boundary is nowhere dense, because the dominant map from the integral source sends its generic point to the generic point of $W$, which is not in $Z$. Obtain $V\\to Y_1$ projective nodal, with smooth geometrically integral generic fibre and $\\dim Y_1=d-1$. Its inverse image of $Z$ is contained in $D\\cup f^{-1}T$, where $D$ is finite etale in the smooth locus and $T$ is nowhere dense. Give $T$ its reduced closed structure. Apply the pair induction to $(Y_1,T)$. It gives a smooth integral proper alteration $T_1\\to Y_1$ and a strict normal crossings divisor $E\\subset T_1$ containing the inverse image of $T$. The dimension equality uses [lem-sc-closed-irreducible-dimension-trdeg] as in Step 5; thus the induction is applied strictly below $d$.",
+   "uses": [
+    "lem-trf-alteration-relative-curve-preparation",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Field induction: alter the lower-dimensional base together with its degeneration boundary"
+   }
+  },
+  {
+   "text": "Form $V_1=V\\times_{Y_1}T_1$. By [lem-trf-projective-nodal-family-geometry] it is projective flat nodal over $T_1$; it is integral by Step 3, since its generic curve is geometrically integral. The divisor $D$ is flat over $Y_1$, since it is etale by [def-weil-etale-morphism]; it is a relative effective Cartier divisor by [def-pc-relative-effective-cartier]. Thus [lem-pc-recd-pullback] makes its pullback $D_1$ Cartier. It stays etale by [lem-weil-pbc-etale-scheme-base-change]; it stays finite because a finite algebra-generating module family tensors to a generating family. It stays in the smooth locus by the description in the nodal-family lemma. The curve is smooth away from $E$, because the inverse image of $T$ lies in $E$. Apply [lem-trf-nodal-pair-projective-resolution] to $(V_1\\to T_1,D_1,E)$. The resulting proper birational map $Q\\to V_1$ has smooth $F$-source and strict normal crossings inverse boundary. Hence the inverse image of $Z$ is contained in that divisor. The composite $Q\\to V_1\\to V\\to W$ is proper, dominant, and has finite function-field extension, by the same generic-field calculation as Step 6. Properness follows from [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition]. Since $W$ is proper over $F$, so is $Q$. This proves the pair induction; take $Z=\\varnothing$ and apply the dense-open finiteness criterion of Step 9. The resulting smooth proper $Q$ and $Q\\to X$ give exactly the field clause.",
+   "uses": [
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-etale-morphism",
+    "def-pc-relative-effective-cartier",
+    "lem-pc-recd-pullback",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Field induction: resolve the single nodal curve over the smooth normal-crossings base and compose the alterations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-quasi-excellent-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-sc-normal-dim1-dvr",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-weil-pbc-flat-ring-map",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-dim-zero-finite-over-field",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-trf-alteration-relative-curve-preparation",
+  "lem-trf-relative-marked-nodal-reduction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-proper-composition",
+  "lem-trf-projective-nodal-family-geometry",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sbc-components-finite-separable-descent",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "pqf-lem-proper-basic",
+  "lem-pc-projective-proper",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "lem-trf-nodal-pair-projective-resolution",
+  "def-weil-etale-morphism",
+  "def-pc-relative-effective-cartier",
+  "lem-pc-recd-pullback",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent assembly of the relative-dimension induction from Expose IX Theorem 1.2 and Expose X Theorem 3.5 Step 5; field pair induction using Expose X Lemma 2.2. Original Lu--Zheng PDF unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +280,38 @@
    "results": "{\"t\": \"2026-10-17T14:17:40Z\", \"tool\": \"leanfinder\", \"query\": \"de Jong alterations give a projective tower of nodal curves after a finite extension of an excellent discrete valuation ring.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"WeierstrassCurve.IsIntegral.integral\", \"Algebra.FormallyUnramified.projective_of_restrictScalars\", \"WeierstrassCurve.Affine.Point.map_some\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"f533ba1c6156fedc\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral scheme over an excellent discrete valuation ring admits an alteration by a tower of projective nodal curves after a finite extension of traits.",
+   "results": "{\"t\": \"2026-10-17T15:22:49Z\", \"tool\": \"leanfinder\", \"query\": \"A proper integral scheme over an excellent discrete valuation ring admits an alteration by a tower of projective nodal curves after a finite extension of traits.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.IsIntegralHom\"], \"digest\": \"d7eb28bf6f87c142\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A variety admits a generically finite alteration by smooth projective curves composed in a tower.",
+   "results": "{\"t\": \"2026-10-17T15:23:34Z\", \"tool\": \"leansearch\", \"query\": \"A variety admits a generically finite alteration by smooth projective curves composed in a tower.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"d17ced547cd1408a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alteration\"",
+   "results": "{\"t\": \"2026-10-17T15:25:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"alteration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "plurinodal|alteration|semistable|nodal",
+   "results": "{\"t\": \"2026-10-17T15:23:34Z\", \"tool\": \"grep\", \"query\": \"plurinodal|alteration|semistable|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-cycle-verdier-duality",
@@ -80,5 +332,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-plurinodal-alteration",
+  "worker": "stage1",
+  "summary": "Kept both statements; supplied actual relative-dimension inductions over traits and over an algebraically closed field, including the marked-boundary resolution needed for the latter. Exposed four smaller geometric inputs, reused finite trait normalization and component-descent nodes, and checked all hypotheses and citations.",
+  "blueprint": "Realizes the alteration input to nearby-duality, used in normal-cone specialization for proof (1)--(2) of lem-trf-local-term-locality, through the existing specialization and nearby-duality ancestors.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-pc-dim-zero-finite-over-field",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lemma-nagata-proper-valuative-criterion-existence-api",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-sbc-components-finite-separable-descent",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-sbc-subset-geometric-irreducibility",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "thm-pqf-finite-iff-proper-finite-fibres",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "Generic algebraic-geometric input used exactly as stated for finite trait extensions, zero-dimensional schemes, component preparation, flatness, or properness; it does not replace a step of the normal-cone/nearby-duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-sc-normal-dim1-dvr",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-dim-zero-finite-over-field",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sbc-components-finite-separable-descent",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "pqf-lem-proper-basic",
+  "lem-pc-projective-proper",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "lem-pc-recd-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-cd216f707",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-cd216f707 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement, the unit and chapter route, and the sources: ILO Exposé IX Thm 1.2 (p.131), Exposé X Thm 3.5 Steps 2/5 (pp.162-164), Exposé X Lemma 2.2 and its proof (pp.149-150), Stacks 0C59/0C5B, and 087S/01WE. The item statement is verbatim unchanged. There is no SGA, and this is not a target node, so there is no base-change morphism or coefficient category to check. The trait induction (Steps 1-9) and the field pair induction (Steps 10-12) are correctly set up, and I checked them on the small cases d=1, inseparable L, split components, uv=t and uv=t1t2. The four new nodes are faithful statement-only versions of X 3.5 Step 5, IX 1.2 (G forgotten), 0C59/0C5B and the Vidal 4.4.4 step of X 2.2. None duplicates an existing node or restates a clause of the item. I accept all 18 tool_uses (generic black boxes). Three repairs are in fixes/: (1) E1/C4: def-kun-projective means H-projective, but ILO gives only projective-bundle projectivity. Preparation now gives Y->S projective (X 3.5 Step 5 plus Stacks 087S/01WE). Nodal reduction now assumes Y projective over the spectrum of a Noetherian ring, so b and f' are H-projective via 087S/01WE, and a is asserted only proper. The resolution node now asserts only a proper birational r. Item steps 5, 11 and 12 are updated to match. (2) E1: item step 11 now argues that (h^{-1}Z)_red is nowhere dense. (3) B3: the nodal-family-geometry node now cites def-weil-closed-immersion and def-kun-dimension. No uses changed, nothing dropped.; 5 file(s) fixed by the reviewer"
  }
 }

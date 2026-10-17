@@ -38,29 +38,26 @@
    }
   },
   {
-   "text": "We prove that the specified map i is a categorical equivalence; no injectivity is asserted for i. Apply the cocartesian opposite of [lem-cbc-cartesian-mapping-simplex-comparison] for n=1, K=Δ¹ and E consisting only of degenerate base edges. The endpoint comparisons are identities and i carries every degenerate-fibre transition edge to the cocartesian e_p, by the relative-nerve theorem. The source marking is exactly S_u^flat. The target marking is exactly N^natural: equivalences in N lie over degenerate edges of Δ¹, and cocartesian edges over such edges are exactly equivalences in P or Q by the relative-nerve edge criterion. Reversing the ordering of simplex vertices converts the stated cartesian comparison to this cocartesian one; the definitions of horns, products and markings are carried to their duals by this involution. Thus i:S_u^flat→N^natural is a weak equivalence in the marked model over a point. Here is its unmarked consequence in full. For any quasicategory Z let W_N=Fun(N,Z), W_S=Fun(S_u,Z), which are quasicategories by the functor-cone calculus. Testing against Z^natural gives W_N^≃→W_S^≃ a weak equivalence of Kan complexes; every functor preserves equivalences, so the markings impose no extra objects. Repeat with Arr(Z)=Fun(Δ¹,Z) and curry to get Arr(W_N)^≃→Arr(W_S)^≃ a weak equivalence, strictly compatible with endpoint evaluation. The induced map of the two core products is a weak equivalence as well: apply the cited homotopy-pullback invariance with middle space the point, whose path pullback is literally the product. Both endpoint maps to W_N^≃×W_N^≃ and W_S^≃×W_S^≃ are Kan fibrations, by sharp mapping restriction along (∂Δ¹)^flat→(Δ¹)^flat in the marked lifting calculus. Their fibres at (F,G) are the arrow mapping spaces U(F,G): transformations with constant endpoint components have equivalence components, so taking the core adds no restriction to those fibres. Compare these strict fibres with path pullbacks by [lem-coef-kan-pullback-path-comparison], then apply [lem-coef-kan-homotopy-pullback-invariance] to the weak equivalences of total spaces and bases and the identity of the point. Thus the fibre comparison is a weak equivalence. The natural pinch comparison gives full faithfulness on right-pinched mapping spaces. The original core equivalence gives essential surjectivity (a path in the core gives an equivalence edge, using Kan horn composition). The full-essential-image theorem therefore gives W_N≃W_S for the actual restriction functor. The Joyal functor-equivalence test now proves i categorical equivalence, in every containing universe.",
+   "text": "Use the current horn-reversal and categorical-equivalence clauses of [lem-coef-simplicial-opposite-homotopy-calculus]: reversal sends Λ_i^n to Λ_{n-i}^n, preserves inner fibrations and quasicategories, and reflects categorical equivalences for arbitrary simplicial sets. Reverse vertices. The formula for S_u in Step 1 becomes the mapping simplex of Q^op←P^op in [lem-coef-cartesian-mapping-simplex-presentation]. The horn definitions interchange cocartesian and cartesian edges, so t₀^op is cartesian and i^op takes each degenerate-fibre transition to a cartesian edge, by Step 2 and [def-coef-infinity-fibrations]. Apply [lem-cbc-cartesian-mapping-simplex-comparison] with n=1, K=Δ¹ and E the degenerate base edges. The endpoint maps are identities. The source marking is flat. The target marking is precisely the equivalences: an equivalence in N lies in an endpoint, and the relative-nerve edge criterion identifies cocartesian edges over identity base edges with equivalences in that endpoint. Thus (i^op)^flat→(N^op)^natural is an absolute marked weak equivalence. The existing [lem-coef-marked-flat-categorical-equivalence-test] gives that i^op is a categorical equivalence, without requiring S_u fibrant. Apply its categorical-equivalence reflection clause to i, whose source S_u need not be a quasicategory, to conclude that i is a categorical equivalence.",
    "uses": [
-    "lem-cbc-cartesian-mapping-simplex-comparison",
+    "lem-coef-simplicial-opposite-homotopy-calculus",
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "def-coef-infinity-fibrations",
     "lem-cbc-strict-presentation-transport-representation",
-    "lem-coef-marked-point-cartesian-model",
-    "lem-coef-marked-anodyne-lifting-calculus",
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "lem-coef-kan-pullback-path-comparison",
-    "lem-coef-kan-homotopy-pullback-invariance",
-    "lem-coef-infinity-pinch-comparison",
-    "lem-coef-infinity-full-essential-image",
-    "lem-coef-joyal-functor-equivalence-test"
+    "lem-cbc-cartesian-mapping-simplex-comparison",
+    "lem-coef-marked-flat-categorical-equivalence-test"
    ],
    "elementary": false,
    "source": {
-    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
-    "place": "HTT §3.2.2 mapping-simplex comparison and §§2.2.5,3.1.3; explicit agent-written conversion of the absolute marked comparison to the unmarked categorical equivalence"
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.2.6 and Proposition 3.2.2.7(2), printed pp.180-181; apply the existing universal mapping-simplex comparison after reversing vertices."
    }
   },
   {
-   "text": "Factor i in the category of simplicial sets over N using only the set I of inner horn inclusions Λ_i^n→Δ^n equipped with a simplex Δ^n→N whose Δ¹-coordinate is nonconstant. This is a small set since N is small. Slice colimits are degreewise colimits of sets; a horn has finitely many nondegenerate simplices, so any map from it to a continuous ω-chain of these cell attachments factors through a finite stage. Thus the small-object cell-factorization theorem applies with κ=ℵ₀ and gives S_u --j→ M --k→ N, with j an I-cell map and k I-injective. Every newly attached simplex and its only potentially new codimension-one face d_i are mixed: removing an internal vertex cannot remove all zeros or all ones of a nonconstant [n]→[1]. All other faces were in the horn. Inducting through the attachments shows that no new pure endpoint simplex is added, so M₀=P, M₁=Q exactly and k is the identity on them. For a pure-base inner horn lifting problem for k, its simplex and horn lie in the same endpoint and the identity there supplies the lift; mixed problems are precisely I. Thus k is an inner fibration and M is a quasicategory since N is one. The underlying j is degreewise injective and inner anodyne: each attaching horn is a trivial Joyal cofibration, and fillers against Joyal fibrations extend successively across pushouts, coproducts and continuous composites. The weak factorization system therefore makes j a categorical equivalence. Since i=kj is one too, k is a categorical equivalence. Any equivalence in N is an endpoint edge; it lifts identically from any specified source because k is identity on that endpoint. The quasicategory characterization makes k a Joyal fibration. Therefore k is a trivial Joyal fibration and lifts every degreewise injection, by the other weak factorization system. In particular k induces equivalences on all mapping spaces, by its functor-equivalence characterization and the functor-cone calculus. The small-object construction uses only sets in the universe of P,Q; O is absent from it.",
+   "text": "Apply [lem-coef-endpoint-fixed-inner-horn-refinement] to i:S_u→N over Δ¹. Step 3 supplies the categorical equivalence. The relative-nerve theorem of [lem-cbc-strict-presentation-transport-representation] supplies the quasicategory N and inner fibration t₀, with endpoint fibres P,Q and identity endpoint maps. Its subset-indexed formula uses sets in the universe of P,Q, so N is small. The refinement yields S_u --j→ M --k→ N with exact endpoint fibres, j degreewise injective and a categorical equivalence, and k a trivial Joyal fibration. The Joyal characterizations and functor-cone calculus give equivalences on mapping spaces for k; these will transfer the mapping-space squares below. The construction is independent of O.",
    "uses": [
-    "lem-coef-small-object-cell-factorization",
+    "lem-coef-endpoint-fixed-inner-horn-refinement",
+    "lem-cbc-strict-presentation-transport-representation",
     "lem-coef-joyal-model-structure",
     "lem-coef-joyal-quasicategory-characterizations",
     "lem-cbc-enhanced-functor-cone-calculus"
@@ -72,14 +69,9 @@
    }
   },
   {
-   "text": "We verify all family axioms first for π₀:N→N(Fin_*)×Δ¹. It is an inner fibration by the explicit formula of Step 2. For a pure inner horn use the inner fibration P→N(Fin_*) or Q→N(Fin_*). For a mixed horn Λ_i^n with 0<i<n, the whole initial zero block Z is contained in the present face d_n. Hence its P-simplex a is already prescribed. The horn prescribes a Q-valued inner horn (replace pure-zero faces by u of their P-data). Fill it over the given Fin_* simplex using Q→N(Fin_*). The filler b restricts to ua on Z because the d_n face is already prescribed, giving the required N-simplex. Next take any inert cocartesian edge of P within its fibre. In the mapping criterion for π₀, targets in P give the operad's own cocartesian square; targets x∈Q give, by the natural equivalences Map_N(p,x)≃Map_Q(up,x) of Step 2, the square for its u-image, which is inert cocartesian since u is an operad map. For an inert cocartesian edge in Q, targets in Q give the Q square and targets in P give the empty square over the empty reverse-base mapping spaces. Thus endpoint inert lifts are π₀-cocartesian. A base equivalence is a bijection in Fin_* with constant Δ¹-coordinate. It has one of these inert lifts in the prescribed endpoint. That lift is an equivalence: the cocartesian mapping criterion over a base equivalence says precomposition is an equivalence for every target; taking the two targets to be its endpoints produces a two-sided inverse on π₀ of mapping spaces, hence an equivalence edge by [lem-coef-infinity-mapping-composition]. The quasicategory characterization now gives categorical fibrancy of π₀. Finally fix x→x_i over the inert projections. For y,x in the same endpoint, the incoming Segal square is the endpoint operad square. For y∈P and x∈Q, replace each top mapping space by Map_Q(uy,x) or Map_Q(uy,x_i), over the same pointed-map spaces; the Q operad's Segal square and homotopy-pullback invariance prove the desired square. For y∈Q,x∈P its left entries are empty, and for r>0 its right entries are empty; for r=0 both right entries are points and the square ∅→* over ∅→* is still a homotopy pullback. This verifies the zero-arity axiom too. These are exactly all family conditions, not merely the fibre conditions.",
+   "text": "Apply [lem-coef-relative-nerve-symmetric-family] to the strict diagram D(0)=P^⊗, D(1)=Q^⊗, D(0→1)=u over N(Fin_*). Its transitions preserve inert edges by the hypothesis that u is an operad map. Its subset-indexed construction is exactly N of Step 2 and its pointed-map coordinate is Fin_*∘h. The lemma proves that π₀:N→N(Fin_*)×Δ¹ is a symmetric operadic family, including categorical fibrancy, globally cocartesian inert lifts and all Segal squares. It also includes zero arity and all order-map pullbacks, which Step 6 uses.",
    "uses": [
-    "def-coef-symmetric-operadic-family",
-    "def-coef-infinity-fibrations",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-infinity-mapping-composition",
-    "lem-coef-joyal-quasicategory-characterizations",
-    "lem-coef-kan-homotopy-pullback-invariance"
+    "lem-coef-relative-nerve-symmetric-family"
    ],
    "elementary": false,
    "source": {
@@ -133,10 +125,9 @@
    }
   },
   {
-   "text": "We give the coherent cocone identification, not only its components. The explicit relative-nerve formula in Step 2 defines a transformation θ:id_N→incl_Q h with θ_p=e_p and θ_x=id_x for x∈Q, and hθ=id_h. On a simplex (ε,a,b), form each simplex of its prism by switching any final part of the zero block to ones: the Q-datum is b restricted along the prism projection, and the remaining P-datum is the restriction of a. The relation b|Z=ua makes these formulas agree on faces, so they define the claimed simplicial prism. Lift θk along k using its lifting property against injections, with values prescribed as id_M on M×{0}, incl_Q w on M×{1}, j on P×Δ¹, and the constant diagram on Q×Δ¹. These prescriptions agree on intersections and under k, so their union is a legitimate simplicial subset of M×Δ¹. This gives Θ:id_M→incl_Q w with Θ_p=j({p}×Δ¹), Θ|Q=id, and gΘ constant because g=vhk and hθ=id. Restrict its naturality prisms to the coherent slice over d. For H∈L, every triangle associated to σ:p→d has edges η_p=HΘ_p, F(wσ), and Hσ, with apex component id_Fd; the higher prism simplices give the same comparison for every simplex of the slice. Thus the tautological H-cocone on the left slice is coherently identified, over its fixed source A and apex Fd, with the composite of η and the F-cocone pulled back along w_d. By the mapping-composition calculus these triangles represent exactly F(α)η_p at α=wσ, with all composition coherences. Applying g gives the corresponding comparison of specified base cocones, on the nose before the compositional comparison. Use the inverse equivalence over P of Step 8 to transport to the right slice; since it is over P its source diagram is still A. After each fixed concatenation by Z, functor equivalences preserve mapping spaces and equivalences of diagrams are pointwise, by the functor-cone calculus. The two local tests of [def-coef-symmetric-operadic-family] therefore differ by equivalences at all four corners with the displayed composition homotopy. Homotopy-pullback invariance proves that one test holds exactly when the other does, for every Z and every target color W. This includes the empty index slice and empty tuple. The definition of the colorwise condition is precisely these tests for every d, proving the final equivalence without imposing any prior colimit or Kan-extension hypothesis.",
+   "text": "Apply [lem-coef-relative-nerve-cylinder-contraction] to the factorization i=kj. It gives Θ:id_M→incl_Q w, fixed on Q, with Θ_p=j({p}×Δ¹) and wΘ constant. For H∈L put F=H|Q and η=HΘ|P; this is exactly the transformation in R(H), not an arbitrary one. The lemma identifies the tautological cocone with the cocone of components F(α)η_p pulled back along w_d, retaining the entire naturality prism. Take B=N(Fin_*) and b the structure map of Q: its active edge class restricts this comparison to the active slices. Taking instead b=v shows the comparison is over the specified O-base cocone since g=vw. Step 8 supplies an inverse equivalence of indexing quasicategories over P. Precomposition with that equivalence and the pointwise cocone equivalence induce equivalences on all mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. After every fixed concatenation by Z the same holds, and [lem-coef-infinity-mapping-composition] identifies the horizontal maps with composition by the compared cocones. Consequently the four corners and composition paths of the defining q-colimit squares are identified. Apply [lem-coef-kan-homotopy-pullback-invariance] to these squares. One is a homotopy pullback exactly when the other is, for every Z and target color W, including the empty tuple and empty active slice. By [def-coef-symmetric-operadic-family] this is the asserted equivalence of colorwise conditions, without any prior colimit hypothesis.",
    "uses": [
-    "lem-cbc-strict-presentation-transport-representation",
-    "lem-coef-joyal-model-structure",
+    "lem-coef-relative-nerve-cylinder-contraction",
     "lem-coef-infinity-mapping-composition",
     "def-coef-symmetric-operadic-family",
     "lem-cbc-enhanced-functor-cone-calculus",
@@ -157,22 +148,21 @@
   "lem-cbc-cartesian-mapping-simplex-comparison",
   "lem-cbc-enhanced-functor-cone-calculus",
   "lem-cbc-strict-presentation-transport-representation",
+  "lem-coef-cartesian-mapping-simplex-presentation",
   "lem-coef-cocartesian-joyal-fibration",
+  "lem-coef-endpoint-fixed-inner-horn-refinement",
   "lem-coef-infinity-cocartesian-mapping-criterion",
-  "lem-coef-infinity-full-essential-image",
   "lem-coef-infinity-mapping-composition",
-  "lem-coef-infinity-pinch-comparison",
   "lem-coef-infinity-slice-right-fibration",
   "lem-coef-joyal-cartesian-pushout-product",
-  "lem-coef-joyal-functor-equivalence-test",
   "lem-coef-joyal-model-structure",
   "lem-coef-joyal-quasicategory-characterizations",
   "lem-coef-kan-homotopy-pullback-invariance",
-  "lem-coef-kan-pullback-path-comparison",
-  "lem-coef-marked-anodyne-lifting-calculus",
-  "lem-coef-marked-point-cartesian-model",
-  "lem-coef-simplicial-right-fibration-presentation",
-  "lem-coef-small-object-cell-factorization"
+  "lem-coef-marked-flat-categorical-equivalence-test",
+  "lem-coef-relative-nerve-cylinder-contraction",
+  "lem-coef-relative-nerve-symmetric-family",
+  "lem-coef-simplicial-opposite-homotopy-calculus",
+  "lem-coef-simplicial-right-fibration-presentation"
  ],
  "proof_origin": {
   "by": "agent",
@@ -259,7 +249,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-extension-boundaries",
@@ -290,20 +280,20 @@
   "date": "2026-10-17",
   "item": "lem-coef-symmetric-operadic-mapping-cylinder",
   "worker": "stage1",
-  "summary": "Repair of all returned points: withdraw the false over-O counterexample and restore the exact live boundary-lifting statement; construct a relative nerve and endpoint-fixed mixed-inner-horn refinement; explicitly check mixed mapping spaces, categorical fibrancy, inert lifts, cross-fibre Segal and all simplex pullbacks; restore all-boundary restriction lifting via a new general Cartesian Joyal leaf; cite the existing precise fibrewise right-fibration criterion and give a coherent cocone prism. Nine proof steps, one statement-only new node, no Mathlib leaves. Previous delivered text and report retained as sandbox history.",
-  "blueprint": "The supporting mapping-cylinder construction for prop-coef-integral-exceptional-adjoint, proof paragraph 2 before passage to the inverse limit, along the existing ancestry through lem-coef-symmetric-operadic-extension-boundaries. The parent uses the restored unrestricted boundary clause, including n=0.",
+  "summary": "Repair of the four returned long steps, retaining the statement and the other five steps verbatim. Step 3 cites the existing marked-flat categorical-equivalence detection lemma for its hidden marked-to-unmarked argument. Steps 4, 5 and 9 cite three statement-only lemmas extracting the endpoint-fixed refinement, relative-nerve operadic family verification, and coherent contraction prism. Redundant interface nodes of the interrupted attempt are omitted from delivery; the contraction now fixes eta to be induced by the cylinder edges. Current-DAG landing repair: reread the present opposite-calculus statement and all cited statements, revalidate all 36 retained quotations, and make Step 3 explicitly use its horn-reversal and arbitrary-simplicial-set categorical-equivalence clauses; refresh its citation to the full current statement.",
+  "blueprint": "The ancestral integral exceptional-adjoint proof paragraph beginning “For K” uses the middle derived mapping-complex comparison. Along the retained ancestry this invokes the coherent free-module/relative operadic Kan criterion and HA Remark 3.1.3.15. Steps 1–9 keep that mapping-cylinder route. The returned steps 3/4/5/9 now use, respectively, the existing marked-flat detection lemma and new endpoint refinement/family verification/coherent prism lemmas.",
   "tool_uses": [
    {
     "node": "lem-cbc-cartesian-mapping-simplex-comparison",
-    "why": "Generic absolute marked comparison of the mapping simplex with its cocartesian relative nerve proves the specified raw cylinder map categorical equivalence."
+    "why": "The generic cartesian mapping-simplex comparison applies after reversing vertices; the unit has no such comparison."
    },
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Generic functor quasicategories, mapping-space invariance and pointwise equivalences are needed to convert the marked comparison and to compare the final coherent cocone tests."
+    "why": "Generic functor quasicategories, mapping-space invariance, and pointwise equivalence detection compare the coherent cocone tests."
    },
    {
     "node": "lem-cbc-strict-presentation-transport-representation",
-    "why": "The explicit relative-nerve simplex formula constructs a cocartesian cylinder with exact fibres and prescribed transport; the unit has no exact-model replacement."
+    "why": "The explicit subset-indexed relative nerve constructs the exact endpoint fibres and prescribed cocartesian transport; no node of this unit replaces it."
    }
   ]
  },
@@ -315,9 +305,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q123-9c04d1048",
-  "group": "Q123",
+  "reviewer": "NT-cc-N5-bf4071338",
+  "group": "N5",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-9c04d1048 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, the new node and the full statement of every cited node (23 ids; all exist, none merged, no cycle). I also read the reviewed parent lem-coef-symmetric-operadic-extension-boundaries and the 03:15 return. All three return points are repaired. (1) E7/E2: the clause that R lifts every simplex boundary, including dimension 0, is restored; with q=id_O, L={g} and T=Δ^0. Step 7 proves it: L=R^{-1}(T) on all simplices, j□(∂Δ^n⊂Δ^n) is a mono categorical equivalence by the new node, and q is a Joyal fibration by lem-coef-cocartesian-joyal-fibration. (2) D3/E5: M_u is now constructed. The relative-nerve formula gives h with h|P=u and h|Q=id, and the cross-fibre equivalence Map_N(p,x)≃Map_Q(up,x) follows from the cocartesian mapping criterion and h(e_p)=id. Step 3 shows i is a categorical equivalence; I checked that the dual of the mapping simplex G_[1](D)^op is M^m(Q^op←P^op) and that the markings are flat and ♮. Step 4 is a mixed-inner-horn small-object refinement: the missing face d_i stays mixed, so the endpoint fibres are exactly P and Q and k is a trivial Joyal fibration. Step 5 checks every family axiom, including all four endpoint Segal cases and the r=0 square ∅→* over ∅→*. Step 6 transfers along k and checks base change: N×_{Δ^1}Δ^m is literally R_[m](Dβ). (3) Step 8 cites the RFib fibrewise criterion of lem-coef-simplicial-right-fibration-presentation; the fibres are the active components over the discrete Map_Fin. Step 9: I checked the prism θ and that the four prescriptions for Θ agree with θ(k×1). The new leaf lem-coef-joyal-cartesian-pushout-product (the Joyal Cartesian pushout-product axiom) is true by HTT Cor 2.2.5.4 and Thm 2.2.5.1 with two-out-of-three; I tested it on empty A, on Δ^0→J with ∂Δ^1⊂Δ^1, and on identities. It is statement-only and self-contained, its blueprint ancestry and via chain are correct, its searches are complete, and it duplicates no existing node (inner-anodyne pushout-product, marked Cartesian model, Joyal exponentials, cocartesian base change, presheaf cylinder) and restates no clause of the item. The item statement equals the reviewed live statement and still supplies everything the parent uses in its steps 1, 3 and 6. I accept the three declared sk-prop-sf-cbc tool_uses (relative nerve, mapping-simplex comparison, functor-cone calculus) as generic black boxes. No SGA is used. HA and HTT are not archived locally: they are recorded as WANTED, and I checked the cited places from my knowledge of the texts. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-bf4071338 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 9 steps, the 3 new nodes, the statements of all 22 cited nodes, and the unit record. Structure is clean: proof_deps equals the union of the step uses, no cycle, nothing merged, every step is at most 1955 characters, and no SGA is cited. The item statement is unchanged and it is not a target. Step 3 is correct: S_u reversed is the mapping simplex M^m(Q^op<-P^op); the cartesian mapping-simplex comparison with K=Δ¹ and E the degenerate edges gives a flat-to-natural marked weak equivalence; the marked-flat test then gives i^op as a categorical equivalence, and the current opposite statement reflects this to i. The endpoint-fixed refinement is true: pure horns are solved inside the fixed fibres; deleting an inner vertex of a mixed horn leaves a mixed face, so no endpoint simplex is added; the resulting map is an inner fibration and an isofibration, hence a trivial Joyal fibration by two-out-of-three. The family node is true: inner horns fill in D(σ(n)), mapping spaces are Map_{D(b)}(D(a→b)x,y) or empty, the r=0 square is ∅→pt over ∅→pt, and the order-map pullback formula is literal. The contraction node is true: θ has the explicit formula with coordinate ε∨δ and Q-datum h(x); Θ is a lift against k with all four overlaps checked; η=HΘ|=Hj| is exactly the η of R(H); the prism gives H(β)≃F(wβ)η_p; and bwΘ=bw·pr gives base compatibility. Small cases tested: u=id, P=∅, noninjective u, m=0. No duplicates found among the filtered/relative Joyal factorizations, the relative-nerve and family-calculus nodes, or the prism/cone nodes, and none restates a clause of the item. Steps 5–9 check against their cited statements: w|_P=u, active cancellation, right-fibration fibrewise detection, the j□∂Δ^n lift against the Joyal fibration q, and homotopy-pullback invariance. I accept the three sk-prop-sf-cbc tool_uses. HA and HTT are not archived locally and are recorded as WANTED. Minor issues, not fixed: the new nodes lack lean_audit, the refinement has a redundant inner-fibration hypothesis, 'empty fibres' in the family node cannot occur, and some search verdict strings are generic."
  }
 }
