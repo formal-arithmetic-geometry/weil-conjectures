@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-curve-invariance-inseparable-closure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Passage to the algebraic closure of a separably closed field",
@@ -13,24 +13,56 @@
   "place": "node det-curve-invariance-inseparable-closure, order None"
  },
  "stmt_deps": [
-  "def-weil-pbc-curve-setting"
+  "def-pc-separably-closed",
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof": [
   {
-   "text": "Since $k$ is separably closed, $\\bar k/k$ is purely inseparable: every\n$a\\in\\bar k$ satisfies $a^{p^e}\\in k$ for some $e$ (or $\\bar k=k$ in\ncharacteristic zero). Hence $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$\nis integral, surjective and radicial: for every $k$-algebra $R$, each element\nof $\\bar k\\otimes_kR$ has a $p^e$th power in the image of $R$, so\n$\\operatorname{Spec}(\\bar k\\otimes_kR)\\to\\operatorname{Spec}R$ is bijective\non points with purely inseparable residue field extensions; that is, a universal homeomorphism. Its\nbase change $u:C_{\\bar k}\\to C$ is again a universal homeomorphism\n([lem-weil-pbc-universal-homeomorphism-base-change]). By\n[thm-weil-pbc-universal-homeomorphism-invariance], $u^{-1}$ is an\nequivalence of étale topoi compatible with cohomology, so the pullback maps\n$H^q(C,F)\\to H^q(C_{\\bar k},u^{-1}F)$ are isomorphisms.",
+   "text": "If $k$ has characteristic zero [def-pc-separably-closed], every $\\alpha\\in\\bar k$ has an irreducible minimal polynomial over $k$, which is separable in characteristic zero and hence has a root in $k$; so it has degree one, $\\alpha\\in k$, and $\\bar k=k$, which is purely inseparable over $k$ by the characteristic-zero clause of [def-weil-pbc-finite-purely-inseparable-extension]. If $k$ has characteristic $p>0$, the existing purely-inseparable-closure result [lem-pc-kbar-pure-insep] gives that $\\bar k/k$ is purely inseparable. In either case, apply [lem-pc-spec-pure-insep-integral-radicial-surjective] to $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ and then [lem-pc-integral-radicial-surjective-universal-homeomorphism] to obtain a universal homeomorphism. By the base-change definition [def-pc-base-change], $u:C_{\\bar k}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k\\to C$ is its base change; [lem-weil-pbc-universal-homeomorphism-base-change] therefore makes $u$ a universal homeomorphism. Applying [thm-weil-pbc-universal-homeomorphism-invariance] gives the equivalence of étale topoi and the cohomology isomorphisms $H^q(C,F)\\to H^q(C_{\\bar k},u^{-1}F)$ for every $q$.",
    "uses": [
+    "def-pc-separably-closed",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-pc-kbar-pure-insep",
+    "lem-pc-spec-pure-insep-integral-radicial-surjective",
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "def-pc-base-change",
     "lem-weil-pbc-universal-homeomorphism-base-change",
     "thm-weil-pbc-universal-homeomorphism-invariance"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-cor-curve-invariance/det-curve-invariance-inseparable-closure.md",
+    "place": "## Proof, first paragraph"
+   }
   },
   {
-   "text": "For the square: the two composites $C_{\\bar k'}\\to C$ are the same morphism,\nbecause $\\bar k\\subseteq\\bar k'$ extends $k\\subseteq k'$, and pullback maps\non cohomology are functorial for composition of morphisms (the pullback map\nof a composite is the composite of the pullback maps, via the canonical\nisomorphism $(fg)^{-1}\\cong g^{-1}f^{-1}$). Hence the square commutes.",
-   "uses": [],
-   "elementary": null
+   "text": "For the square, compatibility of the algebraic-closure inclusions makes the two composites $C_{\\bar k'}\\to C$ equal: one factors through $C_{\\bar k}$ and the other through $C_{k'}$. Clause 4 (composition) of [lem-weil-pbc-cohomology-pullback-functorial] identifies the pullback along either composite with the corresponding composite of pullback maps, using the canonical inverse-image composition isomorphism. Thus the two paths in the displayed cohomology square agree in every degree.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-cor-curve-invariance/det-curve-invariance-inseparable-closure.md",
+    "place": "## Proof, second paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-separably-closed",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-pc-kbar-pure-insep",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "lem-weil-pbc-cohomology-pullback-functorial",
   "lem-weil-pbc-universal-homeomorphism-base-change",
   "thm-weil-pbc-universal-homeomorphism-invariance"
  ],
@@ -39,9 +71,59 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-cor-curve-invariance/det-curve-invariance-inseparable-closure.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "universal homeomorphism|IsUniversalHomeomorphism|purely inseparable",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Does Mathlib prove that an algebraic closure of a separably closed field is purely inseparable and that etale cohomology is invariant under the resulting universal homeomorphism?",
+   "results": "Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed, separableClosure.isPurelyInseparable, separableClosure.isAlgebraic, isSepClosed_iff_isPurelyInseparable_algebraicClosure, separableClosure_le_iff, IsSepClosure.isAlgClosure_of_perfectField, IsSepClosure.sep_closed, IsPurelyInseparable.isAlgebraic",
+   "date": "2026-10-17",
+   "verdict": "generalization: Mathlib has field-theoretic pure-inseparability results, but no scheme étale cohomology invariance theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUniversalHomeomorphism, cohomologyMap, IsPurelyInseparable",
+   "results": "loogle: unknown identifier 'IsUniversalHomeomorphism'",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib identifier for the project universal-homeomorphism or cohomologyMap notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal homeomorphism from the algebraic closure of a separably closed field and invariance of etale cohomology",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, IsSepClosed.lift_def, Algebra.FormallyEtale.of_isSeparable_aux, galLiftEquiv, Field.absoluteGaloisGroup, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.iff_exists_algEquiv_prod, instTotallySeparatedSpaceAlgEquivOfIsIntegral",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated étale/field declarations, no universal-homeomorphism cohomology theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyMap|cohomology.*pullback|upperStarComp",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "cohomologyMap composition inverse image",
+   "results": "loogle: Unknown identifier `cohomologyMap`",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib identifier for the project universal-homeomorphism or cohomologyMap notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback maps on etale cohomology are functorial for composition of scheme morphisms",
+   "results": "AlgebraicGeometry.Scheme.Hom.comp_appLE, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE, AlgebraicGeometry.Scheme.comp_appLE, AlgebraicGeometry.Scheme.appLE_comp_appLE, AlgebraicGeometry.Scheme.Hom.comp_app, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated étale/field declarations, no universal-homeomorphism cohomology theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -71,5 +153,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-curve-invariance-inseparable-closure",
+  "worker": "stage1",
+  "summary": "Checked the imported two-paragraph proof against the existing DAG. No new nodes were needed: the algebraic-closure purely-inseparable leaf, the integral-radicial-surjective universal-homeomorphism criterion, base-change stability, étale-topos invariance, and cohomology-pullback functoriality already state every non-elementary ingredient. Removed the unused curve-coefficient dependency, added the base-change and scheme-over-base dependencies needed for the notation, and made the characteristic-zero case and the cohomology square explicit.",
+  "blueprint": "Step 1 realizes the first proof paragraph of the blueprint node: the algebraic closure over a separably closed field is purely inseparable, its Spec map is a universal homeomorphism, and base change plus topological invariance gives the cohomology isomorphisms. Step 2 realizes the second paragraph: compatible closure inclusions give equal composites and functorial cohomology pullback makes the square commute.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "The unit route invokes this generic étale-topos and cohomology invariance theorem after establishing the universal homeomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "The commutative-square clause uses the generic composition law for étale cohomology pullback maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-e70956505",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-e70956505 (reviewer sub-agent of L); spot-checked: I read the item, its blueprint source (main-20261015, unchanged in 20261017), the unit sk-cor-curve-invariance and every cited node in full. The statement is verbatim from the source and not weakened. Step 1 is correct: in char p, lem-pc-kbar-pure-insep (Mathlib leaf) applies; in char 0, k-bar = k, now written out. lem-pc-spec-pure-insep-integral-radicial-surjective does not require a finite extension, so it covers k-bar/k (its closed Lean of_isPurelyInseparable is general too). Then the integral-radicial-surjective criterion, the base-change Mathlib leaf (topologically IsHomeomorph universally) and thm-weil-pbc-universal-homeomorphism-invariance, which uses the same def-weil-universal-homeomorphism and whose reviewed proof ends in cohomologyMap_bijective, give the isomorphisms for arbitrary abelian etale sheaves. Removing def-weil-pbc-curve-setting (algebraically closed field, torsion sheaf) is correct. Step 2 is correct: both composites C_{k-bar'} -> C are the same base-change projection, and clause 4 of lem-weil-pbc-cohomology-pullback-functorial makes each path equal H^q(c^{-1}) composed with the pullback along that composite. Edge cases checked: empty C, k algebraically closed, char 0, and the downstream use in lem-trf-geometric-duality-uniform-range. There are no new nodes, and no duplicate in the DAG (lem-pc-homeo-pure-insep and the curve-separably-closed-passage family checked). Accepted tool_uses: thm-weil-pbc-universal-homeomorphism-invariance and lem-weil-pbc-cohomology-pullback-functorial. Fixes in fixes/dag/nodes/sec-curve-estimates/det-curve-invariance-inseparable-closure.json: (B3) stmt_deps now also cite separably closed, algebraic closure, universal homeomorphism, etale site, abelian etale sheaves, inverse image, etale cohomology and cohomology pullback; (B4/C2) the unclosed '$q.' in step 1 is closed and the char-0 argument is written out with its definitions cited; split_report.tool_uses trimmed to the two real off-unit tools (the rest were definitions, Mathlib leaves or Lean-closed nodes). The fixed item stays acyclic and every cited id exists.; 1 file(s) fixed by the reviewer"
  }
 }
