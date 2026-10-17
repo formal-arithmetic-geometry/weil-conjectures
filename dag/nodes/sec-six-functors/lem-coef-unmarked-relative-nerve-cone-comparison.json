@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-unmarked-straightening-quillen"
+  "lem-coef-unmarked-straightening-quillen",
+  "lem-coef-free-factor-hammock-pushout"
  ],
  "proof": [
   {
@@ -310,5 +311,37 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-b3c13f41d (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full. All 11 steps hold. Step 2 builds alpha as an enriched functor out of the cone pushout into a collage B_X, so it descends through the pushout automatically. I checked: the last vertex of y restricted to m_0..m_k is y_{m_0}, so the labels have the right type; dropping the first flag entry composes the label correctly, using the 2-simplex on a, m_0, m_1; and max commutes with direct image. Step 3: in the universal case the map is J -> min J, and the cube maps onto M(i,v). For C=[2], i=2, the subsets {0,2} and {0,1,2} are identified, which confirms the item's quotient wording and the report's source-error note on HTT 3.2.5.10(3). Step 4 checks: the counit is natural, so both pushouts have the same attaching map; I verified the coend inverse (h,x,g) -> (x,h u(g)) both ways, and that the two adjoints agree. Step 5: colimit preservation and density give the specified extension. Step 6: every H_C(X) is projectively cofibrant, because L_phi preserves monomorphism cofibrations. Step 7: the boundary square is a pushout, since the surjective theta are in bijection with interior simplex times Hom_C(x_n,-); valuewise opposite preserves trivial fibrations and hence projective cofibrations. Step 8: relabel and use target change to get L^lin; then V(Delta^{r-i..r}) is V(Delta^i), which is Q^i, a simplex by the pinched-cube node; the target is Delta^i, so the map is a weak equivalence of contractibles. Step 9: sigma_! is left Quillen, and both ends are cofibrant by steps 6-7. Steps 10-11: clauses (a), (b), (c) of the cofibrant-colimit node with the skeletal induction. proof_deps equals the union of the step uses. There is no cycle (the 433-node closure does not reach the item). Every cited statement is in unit sk-prop-sf-biduality-general; the only exception is the definition def-cbc-enhanced-diagrams-cones. No tool_uses are needed and there are no new nodes. The marked lem-cbc-relative-nerve-cone-left-comparison is a different statement, not a duplicate. No SGA is cited. The target, coefficient categories and base-change morphism are untouched. HTT is not under literature/; WANTED is recorded and proof_origin is agent. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40743ef87",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read the node, all 4 stmt_deps declarations (EnhancedDiagramsCones, CoherentNerveComparison [existential, so the counit is correctly pinned directly], UnmarkedStraighteningQuillen value/valueAction/valueMap/conePushout, FreeFactorPushout.discreteCategory) and PinchedCube.rigidification. Diagrams pins the counit on all coherent simplices in all degrees (vertex reversal checked via opObjEquiv), H to the actual cone-pushout hom(c,v) with precomposition action and pushout maps, F to pullback X.hom (nerveMap (Over.forget c)) with action and maps fixed on both projections; alpha is natural in X and c, objectwise IsWeakHomotopyEquivalence. SimplexNormalization: cubeLift J↦{r-j}∪{r+1} is exactly the coherent paths r-i→v; projection is the real pushout composite, surjective (quotient, not iso); minimum J↦min J on all flags; normalization fixes alpha on the universal simplex; adjoin gives the action. TargetChange gives IsLeftKanExtension units for H and F, pinned on pushout legs and pullback projections, plus alpha_square; colimit preservation plus naturality give the simplex-colimit specification; identity/composite HEq coherence. No hollow data, no extra hypotheses, universe Cat.{u,u}/SSet.{u}. Node diff: only lean added and stmt_deps gained the landed free-factor-hammock-pushout (allowed). 11 declarations, all with source/blueprint docstrings; proof docstring step by step; sorry only. nt_compile.py --json on the snapshot file: exit 0, no errors or warnings, 5.9 s. Only note: SimplexNormalization.cubeIso is a redundant, true, unconnected iso (non-blocking)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.UnmarkedRelativeNerveConeComparison",
+  "declaration": "SSet.RelativeNerveCone.unmarked_relative_nerve_cone_comparison",
+  "declarations": [
+   "SSet.RelativeNerveCone.commaValue",
+   "SSet.RelativeNerveCone.constantArrow",
+   "SSet.RelativeNerveCone.coneAction",
+   "SSet.RelativeNerveCone.ordinal",
+   "SSet.RelativeNerveCone.subsets",
+   "SSet.RelativeNerveCone.Diagrams",
+   "SSet.RelativeNerveCone.oppositeDiscreteMap",
+   "SSet.RelativeNerveCone.TargetChange",
+   "SSet.RelativeNerveCone.SimplexNormalization",
+   "SSet.RelativeNerveCone.ComparisonStatement",
+   "SSet.RelativeNerveCone.unmarked_relative_nerve_cone_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/UnmarkedRelativeNerveConeComparison.lean",
+  "statement": "theorem unmarked_relative_nerve_cone_comparison : Nonempty ComparisonStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existential comparison is fully specified by actual cone-pushout values and maps, comma pullbacks and their projections, all-degree counit normalization, the surjective universal subset-cube quotient and minimum formula, left Kan extension units, and identity/composite coherence. No data are chosen from the theorem. Reuses the already landed discrete enrichment from lem-coef-free-factor-hammock-pushout; this is the only added statement dependency."
  }
 }

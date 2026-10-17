@@ -250,20 +250,20 @@
  "lean": {
   "module": "WeilConjectures.CategoryTheory.Abelian.Filtration",
   "declaration": "CategoryTheory.DecreasingFiltration",
-  "statement": "structure DecreasingFiltration where",
+  "statement": "structure DecreasingFiltration",
   "branch": "slopmaster2",
-  "by": "Q01",
+  "by": "Q65",
   "date": "2026-10-17",
   "existing": true,
-  "note": "The recorded PBCDecreasingFiltration is an equivalent but distinct representation that cannot be passed to the recorded filtered-complex and homotopy APIs. The upstream CategoryTheory.DecreasingFiltration (parameter A bound in the preceding variable declaration; fields F and F_succ_le) supplies the same decreasing subobject filtration used by those APIs. This is an existing-interface repair, with no new filtration construction."
+  "note": "The recorded PBCDecreasingFiltration has the same mathematical notion but its type cannot be supplied to the recorded FilteredComplexSubquotients and FilteredObject.gradedMapSteps interfaces, which take the already existing DecreasingFiltration. Rebind to that exact upstream declaration (F and F_succ_le), with IsFinite, FilteredObject and induced/image/graded operations supplied by its existing compatibility modules. No new filtration is defined. This is a representation repair under §1(B), not a change of the mathematical notion."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2caaf4b9e",
-  "group": "Q01",
-  "result": "pass",
-  "note": "Every node clause matches the Lean exactly (conjuncts 1-7): projective equivalence, replacement, Hom bijection with unbounded target, the two-step versions on the recorded TwoStepModuleHomotopy (tested on K' and K/K'), and the canonical two-step-to-global localization lift. Normalized embedding is ⊤ for p<=0, K' at p=1, ⊥ for p>=2. No hollow data; the 5 sorry helper theorems are named, documented and true; main theorem is sorry. The 9 node steps are verbatim in the docstring. lean.statement matches the file up to whitespace; all 29 declarations are listed. nt_compile.py: rc 0, no messages; an injected-error control was caught. The gained stmt_dep def-trf-two-step is landed and cited correctly. Minor, non-blocking: the def-sp-filtration record goes back to DecreasingFiltration (justified by every API used, but NA's PBCDecreasingFiltration and def-sp-image-filtration remain; maintainer should list both representations). Docstrings name the wrong chapter for Tag 03TB. Parts of the worker report are stale; the second reading explains the change."
+  "reviewer": "NT-stage2-cc-f995652b3",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Read the node, all 6 stmt deps, the upstream FilteredObject/DecreasingFiltration/IsFinite/induced/quotient/gradedMapSteps/complexQuotientπ interfaces, the Q03 FiniteFilteredLocalization module and the full 548-line module. Every clause has its Lean counterpart: DF^b/DF^+ as real localizations of uniformly finite filtered bounded or bounded-below complexes at graded quasi-isomorphisms; omega and gr pinned to the actual functors; exact truncations normalized to the actual F^r inclusion and K/F^r quotient; natural distinguished triangle; exists-unique triangle iso fixing P under the stated gr supports; omega triangulated; filtered Hom into DF^+(Ab) with natural underlying, cohomology and Hom-complex model comparisons; graded bilimit with index a+r and finite support; additive Hom ≃ H^0(ω t≥0 H) natural in both variables, with forgetful-map and graded-projection equations. No extra hypotheses or universe restrictions. coneι/coneπ choose determined data (FilteredObject.Hom is hom plus a Prop); everything else is real data or a named sorry theorem. Not a duplicate of Q03 FiniteFilteredDerivedPlus (per-degree/single-interval, homotopy-category, plus only). nt_compile: snapshot and fixed module both compile clean (11.2 s / 11.4 s, no messages). FIX: the docstring had 8 proof steps vs the node's 7, so steps 7 and 8 are merged (fixes/FilteredDerivedHomCalculus.lean, docstring only, recompiled) and the report's 'eight steps' sentence is corrected (fixes/lem-trf-filtered-derived-hom-calculus.report.md). Non-blocking: the def-sp-filtration lean record is rewritten to the same DecreasingFiltration binding Q01 already landed (only by, note and a dropped 'where' change; lead may use --revert-nodes def-sp-filtration); ordinaryHom is pinned only up to cohomology and an objectwise model, enough for the node's existential wording; the added landed stmt_dep def-trf-finite-filtered-localization is only imported, not used."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-relative-limit-join-boundary"
  ],
  "proof": [
   {
@@ -249,5 +252,28 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-248f351d1 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-left-cone-restriction-cocartesian and all 16 cited node statements in full. I checked Kerodon 02XB, 02VW and 01UF online, since they are not archived. The proof follows the route of Kerodon 02XB (Prop. 7.1.6.13). Step 1: the pushout-join clause applies literally with A=Λ_i^n, B=Δ^n and the mono ∅→K. Steps 2–3: cocartesian structure and preservation come from the new node plus its base change; R is inner by the Mathlib pushout-product leaf, and q is only assumed inner. Step 4: the fixed-boundary join-cone equivalence and the dualized join-slice/cocone comparison both send s to the same fat cone. Step 5: two-out-of-three plus equivalence invariance through the mapping-composition node. Step 6: every hypothesis of the dual cartesian-initial boundary lift is met, the opposite/pinch comparison is valid, and the final-vertex boundary criterion is used for n>0 only. Step 7: the strict pullback of mapping spaces, the Kan fibration from the inner-mapping-fiber node and the path-pullback comparison match exactly the square in def-coef-infinity-relative-cone. The new node equals Kerodon 02VW(1) plus 01UF; I tested it on K=∅, K=Δ^0 (target evaluation on arrows) and B=∅. A whole-DAG search found no duplicate, and the node does not restate the item. Its searches are recorded, it carries a statement only, and its blueprint ancestry is correct. There is no cycle, proof_deps equals the union of the step uses, the item statement is unchanged and not weakened, and no SGA source is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic foundation. No fixes were made. Details are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27af85a42",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clause-by-clause match: small SSet.{u} X,C,K; Quasicategory X,C; InnerFibration q; arbitrary cone s : leftJoinCone K ⟶ X; f = orderedJoinInr Δ[0] K ≫ s (= leftJoinConeInclusion used by IsRelativeLimitDiagram); joinSlice slices quasicategories; canonical relativeLimitSlicePostcomp inner; IsRelativeFinal (incoming mapping-space WHE for all vertices) at the unique JoinSliceSimplex with extension = s implies IsRelativeLimitDiagram q s. Helper chosen from the exists-exactly-one clause (canonical, real data, docstrings ok). No extra hypotheses; empty K covered; lean.statement verbatim; node text unchanged; three added stmt_deps own joinSlice/IsRelativeFinal/relativeLimitSlicePostcomp and do not lead back to this item. nt_compile --json: exit 0, no errors or warnings, 2.4 s. Only finding is cosmetic: the report's source line has 'the project server' in place of the HTT numbers 4.3.1.1/4.3.1.2."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeLimitJoinSliceRecognition",
+  "declaration": "SSet.Enhanced.relative_limit_join_slice_recognition",
+  "declarations": [
+   "SSet.Enhanced.relativeLimitJoinSliceVertex",
+   "SSet.Enhanced.relative_limit_join_slice_recognition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeLimitJoinSliceRecognition.lean",
+  "statement": "theorem relative_limit_join_slice_recognition {X C K : SSet.{u}} [Quasicategory X] [Quasicategory C] (q : X ⟶ C) [InnerFibration q] (s : leftJoinCone K ⟶ X) : Quasicategory (joinSlice (orderedJoinInr Δ[0] K ≫ s)) ∧ Quasicategory (joinSlice ((orderedJoinInr Δ[0] K ≫ s) ≫ q)) ∧ InnerFibration (relativeLimitSlicePostcomp q (orderedJoinInr Δ[0] K ≫ s)) ∧ (IsRelativeFinal (relativeLimitSlicePostcomp q (orderedJoinInr Δ[0] K ≫ s)) (relativeLimitJoinSliceVertex s).1 → IsRelativeLimitDiagram q s)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed fixed join-slice, relative-final predicate, and canonical slice postcomposition map; their owning nodes are added to stmt_deps as permitted by brief-stage2 §5. The cone vertex is selected from the existing unique-presentation theorem and retains its extension equality in its type. No statement or proof change."
  }
 }

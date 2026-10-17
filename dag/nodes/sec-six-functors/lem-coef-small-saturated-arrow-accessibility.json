@@ -223,5 +223,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55e34d616",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read the node, both statement deps and their modules, the shared EnhancedStrongSaturation module and its node, and HTT 5.5.4.14 (3)=>(1) with Def 5.5.4.5(2). Every hypothesis and conclusion clause matches: C presentable with the dependency's universes (u small, ambient max(u+1) v, no equality); S a small vertex set of Fun(Δ1,C) via arrowEdge, possibly empty; W is the shared strongSaturation, reused not copied (H4); its retract clause leaves the minimum unchanged because node-W is retract-closed by HTT Rem 5.5.4.6 and retract closure gives repleteness; A_W is a real fullSubcomplex; the existential Quasicategory instance is a Prop conclusion; IsAccessible, HasSmallColimits and the iff with the canonical mappedCocone give existence, preservation and ambient computation. Edge cases covered: empty S, empty diagrams, degenerate triangles. The missing stmt_dep on def-cbc-enhanced-strong-saturation is justified: a side-DAG BFS confirms the cycle through lem-coef-sheaf-flat-model, the TeX statement defines W itself, and the Lean imports are acyclic. Node differs from base only in lean; statement verbatim; the 7 recorded proof-dep modules imported; no hollow def; the only proof is sorry; docstrings complete; no line over 100 chars; report sections present. nt_compile --json side overlay, run twice: rc 0, item 2.4-2.8 s, no errors or warnings. Cosmetic: mangled HTT numbers in the report prose."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallSaturatedArrowAccessibility",
+  "declaration": "SSet.Enhanced.small_saturated_arrow_accessibility",
+  "file": "lean/Sheaf/CategoryTheory/SmallSaturatedArrowAccessibility.lean",
+  "statement": "theorem small_saturated_arrow_accessibility (C : SSet.{max (u + 1) v}) [Quasicategory C] (hC : SSet.Presentability.IsPresentable.{u, v} C) (S : Set (((ihom Δ[1]).obj C) _⦋0⦌)) (hS : Small.{u} S) : ∃ h : Quasicategory (saturatedArrowSubcategory.{u, max (u + 1) v} C S).toSSet, @SSet.Presentability.IsAccessible.{u, v} (saturatedArrowSubcategory.{u, max (u + 1) v} C S).toSSet h ∧ SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (saturatedArrowSubcategory.{u, max (u + 1) v} C S).toSSet ∧ ∀ (I : SSet.{max (u + 1) v}), SSet.Presentability.IsSmall.{u, max (u + 1) v} I → ∀ (F : I ⟶ (saturatedArrowSubcategory.{u, max (u + 1) v} C S).toSSet) (t : (coconeCategory F) _⦋0⦌), IsColimiting F t ↔ IsColimiting (F ≫ (saturatedArrowSubcategory.{u, max (u + 1) v} C S).ι) (CategoryTheory.Spaces.mappedCocone (saturatedArrowSubcategory.{u, max (u + 1) v} C S).ι F t)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.saturatedArrowSubcategory",
+   "SSet.Enhanced.small_saturated_arrow_accessibility"
+  ],
+  "note": "Reuses the published strongSaturation construction through an explicit public import of Sheaf.CategoryTheory.EnhancedStrongSaturation. The node itself defines W in full, so its original statement-dependency list is retained; the optional extra edge to def-cbc-enhanced-strong-saturation introduced a DAG cycle through its sheaf-flat-model convention reference. The sole helper forms the full subcomplex on that closure after the existing arrowEdge correspondence. No saturation definition is copied and no mathematical statement changes."
  }
 }

@@ -8,7 +8,8 @@
   "place": "Proposition A.2.8.2, Remark A.2.8.5, Proposition A.2.8.7(2) and definition of homotopy right Kan extension following it, printed pp.830-833. Read online 2026-10-17; archival HTT WANTED. No Stacks tag states this homotopical theorem."
  },
  "stmt_deps": [
-  "lem-coef-reedy-model-structure"
+  "lem-coef-reedy-model-structure",
+  "def-coef-injective-homotopy-limit"
  ],
  "proof": [
   {
@@ -261,5 +262,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-95836321c (reviewer sub-agent of L); spot-checked: I read the governing docs (AGENTS, stage-1, brief, GOAL, dag-sync, errors A-F), the full packet, the item with all 10 steps, the full statements of all 8 cited nodes, the unit sk-prop-sf-biduality-general, the chapter, and paragraph 2 of the main-20261015 exceptional-adjoint proof. The statement is unchanged and matches HTT A.2.8.2, A.2.8.5, A.2.8.7(2) and the homotopy right Kan extension definition: combinatorial M, small ordinary A, no enrichment or properness assumed. HTT is not under literature/, so WANTED stands and proof_origin=agent is correct. Step 1: the discrete tensor/cotensor works via pi0 (c(K x Delta^n)=c(K)), including empty K. Step 2: the size-generation hypotheses (local presentability, enrichment, tensors/cotensors, no SM7) hold, and discrete enriched functors are exactly ordinary functors. Step 3: the saturations of I and J are Cof and Cof∩W; I checked the retract equations hf=i, ph=1. Step 4: the small-generation clause gives sat(S)=C_A and sat(T)=T_A, S^square=C_A^square, and the small-object theorem in the locally presentable D gives functorial WFS. Step 5: a_!X is the coproduct over Hom(a,b), so R_C is objectwise Fib∩W and R_T is objectwise Fib; only the one-way claim is made. Step 6: R_C=R_T∩W_A by the retract (i,1),(h,1) with hi=1, ph=q, giving the model axioms without the recognition/localization nodes. Step 7: Delta is left Quillen. Step 8: Ken Brown fibrant clause, p and r trivial, so lim f is a weak equivalence. Step 9: arbitrary replacements are handled by factoring w=qj; right classes compose. Step 10: definition and empty-A case check out. Small cases tested: empty, [0], walking arrow, monoid, discrete A. All cited statements are in the item's unit (the 2 definitions are Mathlib leaves); no tool_uses, no SGA. No cited node's closure reaches the item. The only related node, lem-coef-simplicial-model-coherent-diagrams, needs a simplicial model category, so it is not a duplicate. No new nodes. One cosmetic point: the item source says pp.830-833 although the second reader claims to have added p.834; step 10's source has it. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-166eda6f1",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Checked every clause of lem-coef-combinatorial-injective-diagram-model against HTT A.2.8.2/A.2.8.5/A.2.8.7(2) and the definition after it. Objectwise weak equivalences and cofibrations, fibrations = rlp of objectwise trivial cofibrations, injective fibrations objectwise fibrations, combinatorial S via the recorded CombinatorialModelCategory, const ⊣ lim plus preservation of cofibrations and trivial cofibrations (left Quillen), replacement-independent criterion with the canonical limit.lift ≫ lim.map j over all weak-equivalence replacements. Hypotheses and universes match Reedy.model_structure; empty A included; no extra assumptions. New def node def-coef-injective-homotopy-limit: real Prop, faithful to the HTT definition, H12 fields correct, no duplicate found. Item changed only stmt_deps (+ new def) and lean; both lean.statement fields verbatim; docstrings carry source, blueprint id and the 10 steps; proof-only imports are those of recorded proof deps. nt_compile.py --json on both files, run twice: rc=0, no errors or warnings. Non-blocking: CombinatorialModelCategory sits in the module of lem-coef-model-colimit-localization-comparison, whose proof dependencies lead back to the item (path verified), so it is correctly not in stmt_deps; the same import pattern has already landed; split the structure out before stage 3 proves that theorem in place."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CombinatorialInjectiveDiagramModel",
+  "declaration": "HomotopicalAlgebra.combinatorial_injective_diagram_model",
+  "file": "lean/Sheaf/CategoryTheory/CombinatorialInjectiveDiagramModel.lean",
+  "statement": "theorem combinatorial_injective_diagram_model {A : Type w} [SmallCategory A] {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [HasLimitsOfSize.{w, w} M] [HasColimitsOfSize.{w, w} M] (hM : CombinatorialModelCategory.{u, v, max v w} M) : ∃ S : ModelCategory (A ⥤ M), @CombinatorialModelCategory.{max u v w, max v w, max v w} (A ⥤ M) inferInstance S ∧ S.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory A ∧ S.categoryWithCofibrations.cofibrations = (cofibrations M).functorCategory A ∧ S.categoryWithFibrations.fibrations = ((trivialCofibrations M).functorCategory A).rlp ∧ S.categoryWithFibrations.fibrations ≤ (fibrations M).functorCategory A ∧ Nonempty ((Functor.const A : M ⥤ (A ⥤ M)) ⊣ lim) ∧ (∀ (X Y : M) (f : X ⟶ Y), cofibrations M f → S.categoryWithCofibrations.cofibrations ((Functor.const A).map f)) ∧ (∀ (X Y : M) (f : X ⟶ Y), trivialCofibrations M f → (S.categoryWithCofibrations.cofibrations ⊓ S.categoryWithWeakEquivalences.weakEquivalences) ((Functor.const A).map f)) ∧ (∀ (H R : A ⥤ M) (j : H ⟶ R) (c : Cone H), (weakEquivalences M).functorCategory A j → S.categoryWithFibrations.fibrations (terminal.from R) → (IsInjectiveHomotopyLimit c ↔ weakEquivalences M (limit.lift H c ≫ lim.map j)))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

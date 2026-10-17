@@ -12,7 +12,8 @@
   "def-sp-enough-injectives",
   "def-weil-abstract-derived-category",
   "def-sp-filtration",
-  "def-sp-filtered-complex-subquotients"
+  "def-sp-filtered-complex-subquotients",
+  "def-trf-finite-filtered-localization"
  ],
  "proof": [
   {
@@ -226,5 +227,62 @@
   "group": "Q50",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-a79073a8b (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, Varshavsky pp.39-41 (5.1.1-5.1.5, Lemma 5.1.4 with its proof), Stacks derived.tex 05S2-05S6, the unit sk-i-curve-zero and the parent's use of the item. The statement matches Varshavsky 5.1.5 and 5.1.4(i) in the contravariant case: the index is target minus source, the filtration bounds are c-b and e-a+1, and RHom is kept to bounded P,Q. The reported source error is confirmed: in 5.1.1(c), t>=a is the right adjoint of the embedding, not the left one (k in grade 0 mapping to k in grade 1); the proof never uses that sentence. Every step was checked by hand: the split flag, the cone-to-quotient contraction, orthogonality, the Hom-complex signs (cocycle, boundary, S and T homotopies), the bounds, the graded-quotient kernel and surjectivity by injective extension, and the H^0, forgetful and projection identifications. All correct. The new node is true without enough injectives, by Stacks 05S6(1),(3) and the 05S5 truncation, which keeps the filtration interval. It is not a duplicate: I searched the DAG for 05S5, 05S6 and filtered/bounded/uniqueness terms; lem-trf-filtered-operations-hom is a sheaf-level specialization of the item, not a merge. FIXES: (1) Gap: the statement localizes filtered complexes, the cited nodes localize the homotopy category. A new Step 1 proves they agree with the filtered cylinder, so steps are renumbered. (2) Long step 2 (now Step 3) re-proved inline the existing lem-weil-pbc-triangle-morphism-extension(2). It now cites that node, with the tool use declared, and drops lem-weil-pbc-hom-into-triangle-exact. The rest of the step is one argument. (3) Long step 5 (now Step 6) is one construction and stays; its two-variable descent is now spelled out one variable at a time. (4) The new node's statement now cites def-weil-triangulated-category for 'exact'. Accepted tool uses: lem-trf-filtered-localization-injective-model and lem-weil-pbc-triangle-morphism-extension, both generic homological algebra used as black boxes.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f995652b3",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Read the node, all 6 stmt deps, the upstream FilteredObject/DecreasingFiltration/IsFinite/induced/quotient/gradedMapSteps/complexQuotientπ interfaces, the Q03 FiniteFilteredLocalization module and the full 548-line module. Every clause has its Lean counterpart: DF^b/DF^+ as real localizations of uniformly finite filtered bounded or bounded-below complexes at graded quasi-isomorphisms; omega and gr pinned to the actual functors; exact truncations normalized to the actual F^r inclusion and K/F^r quotient; natural distinguished triangle; exists-unique triangle iso fixing P under the stated gr supports; omega triangulated; filtered Hom into DF^+(Ab) with natural underlying, cohomology and Hom-complex model comparisons; graded bilimit with index a+r and finite support; additive Hom ≃ H^0(ω t≥0 H) natural in both variables, with forgetful-map and graded-projection equations. No extra hypotheses or universe restrictions. coneι/coneπ choose determined data (FilteredObject.Hom is hom plus a Prop); everything else is real data or a named sorry theorem. Not a duplicate of Q03 FiniteFilteredDerivedPlus (per-degree/single-interval, homotopy-category, plus only). nt_compile: snapshot and fixed module both compile clean (11.2 s / 11.4 s, no messages). FIX: the docstring had 8 proof steps vs the node's 7, so steps 7 and 8 are merged (fixes/FilteredDerivedHomCalculus.lean, docstring only, recompiled) and the report's 'eight steps' sentence is corrected (fixes/lem-trf-filtered-derived-hom-calculus.report.md). Non-blocking: the def-sp-filtration lean record is rewritten to the same DecreasingFiltration binding Q01 already landed (only by, note and a dropped 'where' change; lead may use --revert-nodes def-sp-filtration); ordinaryHom is pinned only up to cohomology and an objectwise model, enough for the node's existential wording; the added landed stmt_dep def-trf-finite-filtered-localization is only imported, not used."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredDerivedHomCalculus",
+  "declaration": "CochainComplex.FiniteFiltered.filteredDerivedHomCalculus",
+  "declarations": [
+   "CochainComplex.FiniteFiltered.shiftMap",
+   "CochainComplex.FiniteFiltered.shift_preserves",
+   "CochainComplex.FiniteFiltered.coneπ",
+   "CochainComplex.FiniteFiltered.coneι",
+   "CochainComplex.FiniteFiltered.cone_maps",
+   "CochainComplex.FiniteFiltered.shift",
+   "CochainComplex.FiniteFiltered.cone",
+   "CochainComplex.FiniteFiltered.cone_shift_bounds",
+   "CochainComplex.FiniteFiltered.shiftObject",
+   "CochainComplex.FiniteFiltered.shift_antitone",
+   "CochainComplex.FiniteFiltered.coneObject",
+   "CochainComplex.FiniteFiltered.cone_antitone",
+   "CochainComplex.FiniteFiltered.coneStepMap",
+   "CochainComplex.FiniteFiltered.lowπ",
+   "CochainComplex.FiniteFiltered.highι",
+   "CochainComplex.FiniteFiltered.truncation_maps",
+   "CochainComplex.FiniteFiltered.restriction_square",
+   "CochainComplex.FiniteFiltered.low",
+   "CochainComplex.FiniteFiltered.high",
+   "CochainComplex.FiniteFiltered.truncation_bounds",
+   "CochainComplex.FiniteFiltered.lowObject",
+   "CochainComplex.FiniteFiltered.highObject",
+   "CochainComplex.FiniteFiltered.Q",
+   "CochainComplex.FiniteFiltered.Derived",
+   "CochainComplex.FiniteFiltered.quasiIso",
+   "CochainComplex.FiniteFiltered.graded",
+   "CochainComplex.FiniteFiltered.forget",
+   "CochainComplex.FiniteFiltered.graded_laws",
+   "CochainComplex.FiniteFiltered.Complex",
+   "CochainComplex.FiniteFiltered.DegreeBound",
+   "CochainComplex.FiniteFiltered.TriangulatedLocalization",
+   "CochainComplex.FiniteFiltered.BoundedDerived",
+   "CochainComplex.FiniteFiltered.TruncationCalculus",
+   "CochainComplex.FiniteFiltered.GlobalHomCalculus",
+   "CochainComplex.FiniteFiltered.DerivedHomCalculus",
+   "CochainComplex.FiniteFiltered.filteredDerivedHomCalculus"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FilteredDerivedHomCalculus.lean",
+  "statement": "theorem filteredDerivedHomCalculus [EnoughInjectives A] : Nonempty (DerivedHomCalculus A)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-f995652b3"
  }
 }

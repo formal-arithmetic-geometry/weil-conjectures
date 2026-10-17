@@ -1,0 +1,112 @@
+{
+ "id": "def-coef-mapping-simplex-functor",
+ "kind": "definition",
+ "title": "Mapping simplex of a finite chain and its induced map",
+ "status": "split",
+ "statement": "Use small simplicial sets [def-cbc-enhanced-diagrams-cones]. For $n\\geq0$, a chain is a functor $[n]^{\\mathrm{op}}\\to\\mathrm{sSet}$, written $A_0\\leftarrow\\cdots\\leftarrow A_n$. Define $M(A)_r=\\coprod_{\\alpha:[r]\\to[n]}(A_{\\alpha(r)})_r$. For $\\theta:[s]\\to[r]$, its operator sends $(\\alpha,a)$ to $(\\alpha\\theta,t_{\\alpha(r),\\alpha\\theta(s)}\\theta^*a)$, where $t_{j,i}:A_j\\to A_i$ is the chain transition. For a natural transformation $f:A\\to B$, its induced map $M(f):M(A)\\to M(B)$ sends $(\\alpha,a)$ to $(\\alpha,f_{\\alpha(r)}(a))$ in every degree. These are the mapping-simplex construction and its map on chains.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 3.2.2, mapping simplex construction preceding Notation 3.2.2.3, and Remark 3.2.2.5, printed pages 178–180"
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mapping simplex associated to a finite chain of simplicial sets and its natural map under a map of chains",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SimplexCategory.toTop\", \"module\": \"Mathlib.AlgebraicTopology.TopologicalSimplex\", \"type\": \": SimplexCategory ⥤ TopCat.{u}\", \"doc\": \"The functor from the simplex category $\\\\Delta$ to the category of topological spaces that sends each finite ordinal $[n]$ to the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ with non-negativ\"}\n  {\"name\": \"SimplexCategory.toTop_map\", \"module\": \"Mathlib.AlgebraicTopology.TopologicalSimplex\", \"type\": \"∀ {X Y : SimplexCategory} (f : X ⟶ Y),\\n  SimplexCategory.toTop.{u}.map f =\\n    TopCat.uliftFunctor.map\\n      (TopCat.ofHom { toFun := stdSimplex.map ⇑(CategoryTheory.ConcreteCategory.hom f), continuous_toFun := ⋯ })\", \"doc\": \"For any order-preserving map $ f : [n] \\to [m] $ in the simplex category $\\\\Delta$, the induced continuous map between standard simplices $\\\\Delta^n \\to \\\\Delta^m$ is given by coordinate reindexing via $f$\"}\n  {\"name\": \"SSet.Augmented.stdSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex\", \"type\": \": SimplexCategory ⥤ SSet.Augmented.{u}\", \"doc\": \"The functor from the simplex category to augmented simplicial sets that sends each finite ordinal $[n]$ to the augmented simplicial set consisting of the standard $n$-simplex and the terminal simplici\"}\n  {\"name\": \"SSet.S.map\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Simplices\", \"type\": \"{Y : SSet.{u}} (f : X ⟶ Y) (s : X.S) : Y.S\", \"doc\": \"Given a morphism $ f : X \\to Y $ of simplicial sets and an element $ s $ of the standard simplex $ X.S $, this function returns the image of $ s $ in $ Y.S $ obtained by applying $ f $ to the correspon\"}\n  {\"name\": \"StdSimplex.map\", \"module\": \"Mathlib.LinearAlgebra.ConvexSpace\", \"type\": \"{M : Type v} {N : Type w} (g : M → N) (f : StdSimplex R M) : StdSimplex R N\", \"doc\": \"Given a function $ g : M \\to N $ and a standard simplex $ f $ over $ M $, this constructs a standard simplex over $ N $ by applying $ g $ to the domain elements of $ f $'s weights. The resulting weight\"}\n  {\"name\": \"stdSimplex.map\", \"module\": \"Mathlib.Analysis.Convex.StdSimplex\", \"type\": \"(f : X → Y) (s : stdSimplex S X) : stdSimplex S Y\", \"doc\": \"Given an ordered ring $ S $ and finite sets $ X $ and $ Y $, for any function $ f : X → Y $ and element $ s $ of the standard simplex over $ X $, the linear map induced by $ f $ sends $ s $ to the sta\"}\n  {\"name\": \"SimplexCategory.toTop_obj\", \"module\": \"Mathlib.AlgebraicTopology.TopologicalSimplex\", \"type\": \"∀ (X : SimplexCategory),\\n  SimplexCategory.toTop.{u}.obj X =\\n    TopCat.uliftFunctor.obj { carrier := ↑(stdSimplex ℝ (Fin (X.len + 1))), str := instTopologicalSpaceSubtype }\", \"doc\": \"The functor from the simplex category $\\\\Delta$ to the category of topological spaces maps each finite ordinal $[n]$ to the standard $n$-simplex $\\\\Delta^n \\\\subset \\\\mathbb{R}^{n+1}$ (the set of points w\"}\n  {\"name\": \"SSet.stdSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex\", \"type\": \": CosimplicialObject SSet.{u}\", \"doc\": \"The standard simplex object in the category of simplicial sets, defined as the cosimplicial object obtained by composing the Yoneda embedding with the universe-lifting functor. This construction maps \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping simplex functor on finite contravariant diagrams of simplicial sets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.stdSimplex.objMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"{n : SimplexCategory} →\\n  {m : SimplexCategoryᵒᵖ} → (Fin ((Opposite.unop m).len + 1) →o Fin (n.len + 1)) → (SSet.stdSimplex.obj n).obj m\", \"doc\": \"For objects $ n $ in the simplex category $ \\\\Delta $ and $ m $ in its opposite category $ \\\\Delta^\\\\text{op} $, this function constructs an element of the standard simplex object $ \\\\Delta^n $ evaluated \"}\n  {\"name\": \"SSet.stdSimplex.map_apply\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"∀ {m₁ m₂ : SimplexCategoryᵒᵖ} (f : m₁ ⟶ m₂) {n : SimplexCategory} (x : (SSet.stdSimplex.obj n).obj m₁),\\n  (SSet.stdSimplex.obj n).map f x =\\n    SSet.stdSimplex.objEquiv.symm (CategoryTheory.CategoryStruct.comp f.unop (SSet.stdSimplex.objEquiv x))\", \"doc\": \"For objects $ m_1, m_2 $ in the opposite simplex category $ \\\\Delta^\\\\text{op} $, a morphism $ f: m_1 \\\\to m_2 $, and an element $ x $ of the standard simplex $ \\\\Delta^n $ evaluated at $ m_1 $, the actio\"}\n  {\"name\": \"SSet.stdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"CategoryTheory.CosimplicialObject SSet\", \"doc\": \"The standard simplex object in the category of simplicial sets, defined as the cosimplicial object obtained by composing the Yoneda embedding with the universe-lifting functor. This construction maps \"}\n  {\"name\": \"SSet.S.simplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices\", \"type\": \"{X : SSet} → (self : X.S) → X.obj (Opposite.op (SimplexCategory.mk self.dim))\", \"doc\": \"For a simplicial set $X$ and an element $s$ of its standard simplex $X.S$, this function returns the $n$-simplex in $X$ corresponding to $s$, where $n$ is the dimension of $s$. Specifically, it evalua\"}\n  {\"name\": \"SSet.S.map\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices\", \"type\": \"{X Y : SSet} → (X ⟶ Y) → X.S → Y.S\", \"doc\": \"Given a morphism $ f : X \\to Y $ of simplicial sets and an element $ s $ of the standard simplex $ X.S $, this function returns the image of $ s $ in $ Y.S $ obtained by applying $ f $ to the correspon\"}\n  {\"name\": \"SSet.PtSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct\", \"type\": \"(X : SSet) → ℕ → X.obj (Opposite.op (SimplexCategory.mk 0)) → Type u\", \"doc\": \"The relative morphism from the boundary of the standard $ n $-simplex $ \\\\Delta[n] $ to the subcomplex generated by a 0-simplex $ x $, representing a pointed simplex where the boundary is mapped to the\"}\n  {\"name\": \"SSet.Augmented.stdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"CategoryTheory.Functor SimplexCategory SSet.Augmented\", \"doc\": \"The functor from the simplex category to augmented simplicial sets that sends each finite ordinal $[n]$ to the augmented simplicial set consisting of the standard $n$-simplex and the terminal simplici\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.SimplicialCategory C] → CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C SSet)\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "mapping.?[Ss]implex|MappingSimplex",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingSimplex|MappingSimplex|mapping simplex in WeilConjectures, lean/Sheaf, dag/nodes; blueprint_refs.py search \"mapping simplex\"",
+   "results": "No upstream construction. Side library: CartesianMappingSimplexPresentation.lean defines SimplexChain, MappingSimplexDegree, mappingSimplexOperator and mappingSimplex; MappingSimplexConeFibers.lean defines mappingSimplexChainMap. DAG: presentation and cone-fibre theorem nodes list these helpers but there is no standalone definition node for the mapping-simplex functor. blueprint_refs.py: 0 blueprint nodes match.",
+   "date": "2026-10-17",
+   "verdict": "reuse the landed exact construction with existing: true; no second Lean definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-mapping-simplex-termwise-equivalence",
+  "date": "2026-10-17",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Mapping-simplex construction needed for HTT Remark 3.2.2.5 in the mapping-complex adjunction proof.",
+   "via": [
+    "lem-coef-mapping-simplex-termwise-equivalence",
+    "lem-coef-mapping-simplex-final-edge",
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-monoidal-straightening",
+    "lem-coef-algebroid-external-product",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MappingSimplexConeFibers",
+  "declaration": "SSet.Enhanced.mappingSimplexChainMap",
+  "statement": "def mappingSimplexChainMap {n : ℕ} {A B : SimplexChain.{u} n} (h : A ⟶ B) :\n    mappingSimplex A ⟶ mappingSimplex B",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The exact map and its source/target construction are already landed as helper definitions of two theorem nodes. This definition node records their shared construction without depending on either later theorem or duplicating any Lean data."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7af6367aa",
+  "group": "NI",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7af6367aa",
+  "group": "NI",
+  "result": "pass",
+  "note": "Clause-by-clause match: SimplexChain/natural transformation for the chains and ladder; MappingSimplexDegree/mappingSimplexOperator/mappingSimplexChainMap match the node's coproduct, operator and induced-map formulas; hf and conjunct 1 are the exact Joyal weak-equivalence test of exists_joyal_model_structure (fixing one v is equivalent, not stronger); conjunct 2 is DwyerKanEquivalence of Pinched.rigidification.map, the left Kan extension of the same subset-poset simplices pinned by CoherentNerveComparisonStatement, so canonically isomorphic to its realization functor. Edge cases n=0, empty fibres, non-injective transitions and universes covered with no extra hypotheses. New def node def-coef-mapping-simplex-functor is a valid existing:true record of the only mapping-simplex construction; item node changes only lean and stmt_deps; lean.statement verbatim. No hollow defs, proof is sorry, source and blueprint docstrings with the 5-step proof, report sections present. nt_compile.py --json exit 0, no errors or warnings."
+ }
+}

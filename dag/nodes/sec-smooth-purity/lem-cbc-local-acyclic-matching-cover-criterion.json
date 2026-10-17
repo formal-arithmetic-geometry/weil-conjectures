@@ -12,7 +12,8 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-simplicial-set",
   "def-cbc-generalized-cover",
-  "def-cbc-local-simplicial-presheaf-maps"
+  "def-cbc-local-simplicial-presheaf-maps",
+  "lem-cbc-local-acyclic-matching-generalized-cover"
  ],
  "proof": [
   {
@@ -273,5 +274,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-b642b37b3 (reviewer sub-agent of L); spot-checked: FIX: the item lem-cbc-local-acyclic-matching-cover-criterion is the objectwise-Kan converse of DHI Prop. 3.2 / (3.4). Read the item, all eight steps and the full statements of its six proof dependencies and five statement dependencies. The statement is true and unchanged. Its hypotheses are no stronger than DHI's, which does not even need objectwise Kan values. In degree 0 the hypothesis is local surjectivity of F_0 to G_0. DHI and DI are not in literature/; they are listed as WANTED and proof_origin is agent, which is correct. Step 1: the matching-map lifting sieve is exactly the sieve of strict boundary fillers. Step 2: the finite cell filtration comes from the leaf lem-coef-infinity-monomorphism-boundary-cells (SSet.relativeCellComplexOfMono). The induction R_j with T_u contained in u^*R_{j+1}, then transitivity, is correct, including empty domains and empty covering sieves. Steps 3-5: horns, pi_0 via a finite interval with its actual edge orientations, and pi_m surjectivity via boundary-constant representatives on every object of the slice; all correct. Steps 6-7: the finite prism complex L and its subcomplex A agree on overlaps, finiteness follows from lem-cbc-finite-simplicial-product plus the s_i/d_i argument, and the restricted fillers give based zigzags; correct. Repair (one fault): Step 8 relied on an 'equivalently' claim stated inside the definition node def-cbc-local-simplicial-presheaf-maps. It now applies the already-cited lem-cbc-set-presheaf-sheafification-local-bijection directly on each slice C/V with its induced topology. Only the Step 8 text changed; uses and proof_deps are the same. Route: all proof dependencies are definitions of the unit sk-prop-sf-cbc or Mathlib leaves, so no tool_uses are needed. There are no new nodes, no duplicates (the converse, homotopy-lifting and cotensor nodes were checked) and no cycle; the cotensor node depends on this item and is not cited by it. Edge cases tested: A=B, A empty, n=0, n=1, m=1, zero-length zigzags, empty covering sieves, trivial topology.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a78713096",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read the item node, all six statement deps, the delivered module, the report and the side dependency modules (IsLocalKanFibration, IsLocalWeakEquivalence, Pi/piMap, relativeBoundaryMatchingMap). Lean matches the node clause by clause: small site J, SSet.{max u w} values, objectwise Kan hF/hG, hcover = IsLocallySurjective of the canonical pullback.lift matching map for all n>=0 (n=0 gives f_0), conclusion IsLocalKanFibration ∧ IsLocalWeakEquivalence (landed defs; horns n+1 with i:Fin(n+2)). Node diff vs base is only lean plus the landed stmt_dep lem-cbc-local-acyclic-matching-generalized-cover; no cycle. lean.statement appears verbatim in the file; one theorem, proof sorry only, no definitions; source and blueprint docstrings with all 8 steps; no lines over 100 chars; universes bound; name unique; report has Worker report and Second reading by NM. Edge cases n=0, n=1, m=1, empty site/values/sieves, trivial topology, arbitrary w all covered. nt_compile.py --json rc=0 and clean; a control with an injected error gave rc=1. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalAcyclicMatchingCoverCriterion",
+  "declaration": "CategoryTheory.LocalSimplicialPresheaf.local_acyclic_of_matching_cover",
+  "file": "lean/Sheaf/CategoryTheory/LocalAcyclicMatchingCoverCriterion.lean",
+  "statement": "theorem local_acyclic_of_matching_cover {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (F G : Cᵒᵖ ⥤ SSet.{max u w}) (hF : ∀ V : C, SSet.KanComplex (F.obj (op V))) (hG : ∀ V : C, SSet.KanComplex (G.obj (op V))) (f : F ⟶ G) (hcover : ∀ n : ℕ, Presheaf.IsLocallySurjective J (relativeBoundaryMatchingMap f n)) : IsLocalKanFibration J f ∧ IsLocalWeakEquivalence J f",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

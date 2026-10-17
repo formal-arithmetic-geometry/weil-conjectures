@@ -180,5 +180,27 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-cf05e8516 (reviewer sub-agent of L); spot-checked: I read the item and its one new node in full against Stacks derived.tex lines 7820-7930 (05TP lemma-filtered-injective, 05TQ, 05TR lemma-injective-property-filtered-injective, 05TS lemma-strict-monomorphism-into-filtered-injective), checked the tags in tags/tags, and read the three cited definition nodes (def-sp-abelian, def-sp-filtration, def-sp-injective-resolutions). The item statement matches 05TR/05TS hypothesis by hypothesis. Enough injectives is assumed only for the embedding, and the same-interval clause is the 05TS construction, which parent Step 12 needs; nothing is weakened. Step 1 takes only what the new node's statement gives (theta identifying F^p with the summands n>=p, so f_n vanishes on F^{n+1}X). Step 2 is correct: strictness gives u^{-1}(F^{n+1}Y)=F^{n+1}X, so the induced quotient map is monic. Step 3 is correct: the componentwise extension satisfies g_n u=f_n, and components n<p kill F^pY. This replaces the 05TR pushout argument and is recorded as by=agent. In Steps 4-5 I recomputed that v is filtered, that gr^pE=E_p, that v is monic because v_b=e_b, and that the kernel of v followed by projection to summands n<p is the intersection of F^{n+1}X, which is F^pX; p<=a and p>b+1 hold as well. The new node lem-trf-injective-graded-filtration-splits is the forward half of 05TP (proof 'details omitted') on a fixed interval. I proved it true by descending induction using the existing leaf lem-weil-pbc-ses-injective-kernel-splits, and tested a=b, zero objects and zero graded pieces. It is statement-only, self-contained, sourced by tag and label, with LeanSearch/LeanFinder/Loogle/grep searches recorded; created.item is this item and its blueprint from/via are right. It is not a clause of the item and has no cycle. No duplicate: a DAG-wide rg for 05TP-05TS and a scan of statements with gr plus injective/split found only the two parent nodes and unrelated notions (filtered colimits, lem-sp-finite-filtration-induction, lem-trf-finite-filtered-graded-exactness); a grep of the main-20261015 blueprint found nothing. I checked the strictness counterexample (Z in Q with F^1Q=Q). No SGA and no off-unit statements, so no tool_uses. Remark: the report claims the item's created fields were changed to Q24, but the file keeps the correct Q53 creator; no change. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96a69d600",
+  "group": "N6",
+  "result": "fix",
+  "note": "Read the node, the three stmt_deps, Stacks derived.tex (filtered injective definition, 05TP, 05TR, 05TS; all in Fil^f), the module and the report (Worker report and Second reading by N6 present), and the declarations FilteredObject, HomPreservingSteps, DecreasingFiltration.step/gr/IsFinite, Mathlib Injective and EnoughInjectives. Clauses 1 and 3 match the node exactly: Mono u.hom plus imageSubobject strictness, injective graded pieces, no EnoughInjectives in clause 1, same bounds a<=b in clause 3, free universes. Finding: clause 2 (05TS) omitted I.filtration.IsFinite, although the node and Stacks require I in Fil^f; without it the clause is weaker than the node and its witness cannot be used with clause 1 (needs hI). Fix: added 'I.filtration.IsFinite ∧' to the clause-2 conclusion (fixes/EnoughStrictFilteredInjectives.lean, full file) and appended a Maintainer fix note to the full report (fixes/<item>.report.md). nt_compile --json: delivered rc0 with no messages, fixed rc0 with no messages, injected-error control rc1. No hollow definitions, sorry only, docstrings carry the source and the 5 node steps, deps correct, no duplicate found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnoughStrictFilteredInjectives",
+  "declaration": "CategoryTheory.FilteredObject.enough_strict_filtered_injectives",
+  "file": "lean/Sheaf/CategoryTheory/EnoughStrictFilteredInjectives.lean",
+  "statement": "theorem enough_strict_filtered_injectives : (∀ {X Y I : FilteredObject C} (hX : X.filtration.IsFinite) (hY : Y.filtration.IsFinite) (hI : I.filtration.IsFinite) (u : X ⟶ Y) [Mono u.hom], (∀ p : ℤ, imageSubobject ((X.filtration.step p).arrow ≫ u.hom) = imageSubobject u.hom ⊓ Y.filtration.step p) → (∀ p : ℤ, Injective (I.filtration.gradedPiece p)) → ∀ f : X ⟶ I, ∃ g : Y ⟶ I, u ≫ g = f) ∧ (EnoughInjectives C → ∀ X : FilteredObject C, X.filtration.IsFinite → ∃ (I : FilteredObject C) (v : X ⟶ I), I.filtration.IsFinite ∧ Mono v.hom ∧ (∀ p : ℤ, imageSubobject ((X.filtration.step p).arrow ≫ v.hom) = imageSubobject v.hom ⊓ I.filtration.step p) ∧ (∀ p : ℤ, Injective (I.filtration.gradedPiece p))) ∧ (EnoughInjectives C → ∀ (X : FilteredObject C) (a b : ℤ), a ≤ b → X.filtration.step a = ⊤ → X.filtration.step (b + 1) = ⊥ → ∃ (I : FilteredObject C) (v : X ⟶ I), Mono v.hom ∧ (∀ p : ℤ, imageSubobject ((X.filtration.step p).arrow ≫ v.hom) = imageSubobject v.hom ⊓ I.filtration.step p) ∧ (∀ p : ℤ, Injective (I.filtration.gradedPiece p)) ∧ I.filtration.step a = ⊤ ∧ I.filtration.step (b + 1) = ⊥)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.FilteredObject.enough_strict_filtered_injectives"
+  ],
+  "fixed_by": "NT-stage2-cc-96a69d600"
  }
 }

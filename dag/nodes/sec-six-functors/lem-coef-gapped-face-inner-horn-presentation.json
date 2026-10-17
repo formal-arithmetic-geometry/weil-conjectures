@@ -240,5 +240,28 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-6efada2f7 (reviewer sub-agent of L); spot-checked: The statement agrees exactly with HTT Lemma 4.4.5.8 (same gap hypothesis and K_J = union of the faces at q in J), stated as the finite inner-horn filtration that the lemma's proof gives, plus the quasicategory extension clause with exact restriction to K_J. HTT is not archived locally: the worker filed WANTED and set proof_origin to agent, which is correct. I read all 7 steps in full. Step 1: membership is decided by the image of a simplex, so degeneracies are covered. Step 2: P is ordered by cardinality and ends at [n]. Step 3: every face T minus v with v != j is already present, and 0<a<d. Step 4: the omitted face F = T minus j is absent, because F inside T_b forces T inside T_b and then equality by cardinality. Step 5: the intersection is exactly the horn at a in every degree, since an image containing F is F or T. Step 6: the pushout is the degreewise union of sets. Step 7: finite induction with the definition's inner-horn fillers. Every cited use of def-cbc-enhanced-diagrams-cones is in that node's statement (simplex convention, horn as 'omits some vertex other than i', quasicategory filling for 0<i<n). I ran my own exhaustive check of all J, every admissible j and 2<=n<=7 (825 configurations): the horn intersection, the inner index and final coverage all hold. Hand checks of n=2 and n=3 also pass. The parent lem-coef-weak-retraction-coherent-extension step 3 uses n=2m, J = odd vertices and the gap 1<2<3, which is valid; there is no cycle. The delivery has no new nodes. The DAG duplicate search (4.4.5.8, gapped, inner anodyne, face unions) finds only Kerodon 01NX nodes and general saturation or horn nodes, none of which duplicates this one. The 14 Mathlib searches support the null match. There are no tool uses, no SGA and no off-route citation. Minor and unchanged: the item lacks a lean_audit key, which is not split-owned. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1be6b8e44",
+  "group": "N2",
+  "result": "pass",
+  "note": "Read the node, its 7 proof steps, the dependency def-cbc-enhanced-diagrams-cones (which adopts the Mathlib primitives), the module, report, and the Mathlib declarations face/horn/IsPushout/homOfLE/Quasicategory. Every clause matches HTT 4.4.5.8: K_J = iSup of face {q}ᶜ over q in J (real, not hollow); gap hypotheses exact; finite filtration from K_J to ⊤; each step IsPushout of the horn inclusion with 2≤d, 0<a<last d, orientation checked; quasicategory extension with exact restriction. Single universe u, no extra assumptions; edge cases n<2, degenerate J and t=0 checked. No duplicate in Mathlib or the project. Docstrings have source and blueprint tag and carry all 7 proof steps; the only sorry is the proof. Node differs from live only by lean; lean.statement matches the file verbatim. Report has Worker report and Second reading by N2 sections. nt_compile --json rc=0, clean. Cosmetic only: '4.4.5.8' scrubbed to 'the project server' in report text. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.GappedFaceInnerHornPresentation",
+  "declaration": "SSet.gapped_face_inner_horn_presentation",
+  "declarations": [
+   "SSet.gappedFaceSubcomplex",
+   "SSet.gapped_face_inner_horn_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/GappedFaceInnerHornPresentation.lean",
+  "statement": "theorem gapped_face_inner_horn_presentation (n : ℕ) (hn : 2 ≤ n) (J : Set (Fin (n + 1))) (i j k : Fin (n + 1)) (hij : i < j) (hjk : j < k) (hi : i ∈ J) (hj : j ∉ J) (hk : k ∈ J) : ∃ (t : ℕ) (L : Fin (t + 1) → (Δ[n] : SSet.{u}).Subcomplex), L 0 = gappedFaceSubcomplex n J ∧ L (Fin.last t) = ⊤ ∧ (∀ h : Fin t, ∃ (hle : L h.castSucc ≤ L h.succ) (d : ℕ) (a : Fin (d + 1)) (g : (Λ[d, a] : SSet.{u}) ⟶ (L h.castSucc : SSet)) (f : (Δ[d] : SSet.{u}) ⟶ (L h.succ : SSet)), 2 ≤ d ∧ 0 < a ∧ a < Fin.last d ∧ Λ[d, a].ι ≫ f = g ≫ Subcomplex.homOfLE hle ∧ IsPushout Λ[d, a].ι g f (Subcomplex.homOfLE hle)) ∧ ∀ (Q : SSet.{u}) [Quasicategory Q] (f : (gappedFaceSubcomplex n J : SSet) ⟶ Q), ∃ (F : (Δ[n] : SSet.{u}) ⟶ Q), (gappedFaceSubcomplex n J).ι ≫ F = f",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declaration gappedFaceSubcomplex realizes the node's K_J union of codimension-one faces; the theorem states the finite inner-horn filtration and quasicategory extension."
  }
 }
