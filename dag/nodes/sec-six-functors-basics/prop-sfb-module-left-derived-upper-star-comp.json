@@ -8,14 +8,75 @@
   "place": "node prop-sfb-module-left-derived-upper-star-comp"
  },
  "stmt_deps": [
-  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
   "def-sfb-module-upper-star-comp",
-  "sk-def-sfb-derived-categories",
-  "sk-def-sfb-module-derived-pushpull"
+  "sk-def-sfb-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $h=g\\circ f$, $\\mathcal A_T=\\Mod_{\\Lambda_T}$, $F_a=a^*$ and $L_a=La^*$ for $a=f,g,h$. These are the full module-object pullbacks and their total left derived functors of [sk-def-sfb-module-derived-pushpull], not functors on abelian sheaves alone. By [det-prop-sfb-module-pullback-exact-main], each $F_a$ is additive and preserves finite limits and finite colimits, for every commutative condensed $\\Lambda$ and every scheme morphism $a$. Let $Q_T:\\mathrm{CoCh}(\\mathcal A_T)\\to D(\\mathcal A_T)$ be the localization at quasi-isomorphisms of [def-weil-abstract-derived-category], in the chosen universes. Write $C(F_a)$ for application of $F_a$ to every term and differential. For $a:T\\to S$, the total left derived functor $L_a$ comes with its structure transformation $\\epsilon_a:L_aQ_S\\to Q_TC(F_a)$, and $(L_a,\\epsilon_a)$ is a right Kan extension of $Q_TC(F_a)$ along $Q_S$; this is the meaning of a (total) left derived functor used in [lem-weil-pbc-exact-functor-derived-functor].",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "det-prop-sfb-module-pullback-exact-main",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
+    "place": "First sentence: exactness of all pullbacks and the total left derived functors"
+   }
+  },
+  {
+   "text": "For $a:T\\to S$, [lem-weil-pbc-exact-functor-derived-factorization] says that $C(F_a)$ preserves quasi-isomorphisms and supplies $D_a:D(\\mathcal A_S)\\to D(\\mathcal A_T)$ with a natural isomorphism $\\varphi_a:D_aQ_S\\xrightarrow{\\sim}Q_TC(F_a)$. Clause (1) of [lem-weil-pbc-exact-functor-derived-functor] makes $(D_a,\\varphi_a)$ a total left derived pair. Compare it with the total left derived pair $(L_a,\\epsilon_a)$ from step 1, using the right Kan universal property. It gives unique maps $u_a:L_a\\to D_a$, $v_a:D_a\\to L_a$ with $\\varphi_a(u_aQ_S)=\\epsilon_a$ and $\\epsilon_a(v_aQ_S)=\\varphi_a$. Substitution gives $\\varphi_a(u_av_aQ_S)=\\varphi_a$ and $\\epsilon_a(v_au_aQ_S)=\\epsilon_a$, so the same uniqueness gives $u_av_a=1$ and $v_au_a=1$. Thus $u_a$ is the canonical natural isomorphism $L_a\\cong D_a$, and $p_a:=\\varphi_a(u_aQ_S):L_aQ_S\\xrightarrow{\\sim}Q_TC(F_a)$ is natural and invertible on every complex. No boundedness or preservation of K-flat objects by a second pullback is required.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), exact-functor principle; left-derived version and its Kan uniqueness are supplied by the cited existing node"
+   }
+  },
+  {
+   "text": "Take exactly the underived natural isomorphism $b:F_h\\xrightarrow{\\sim}F_fF_g$ of [def-sfb-module-upper-star-comp]. On a cochain complex $K$ in $\\mathcal A_Z$, the maps $b_{K^n}$ form a chain isomorphism $B_K:C(F_h)K\\xrightarrow{\\sim}C(F_f)C(F_g)K$: its chain-map equation is $F_fF_g(d_K^n)b_{K^n}=b_{K^{n+1}}F_h(d_K^n)$, the naturality of $b$ at $d_K^n$. Its inverse is given degreewise by $b_{K^n}^{-1}$. Naturality at each component of a chain map proves that $B$ is natural in $K$.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
+    "place": "Second sentence: induce the comparison of levelwise functors from the specified underived isomorphism"
+   }
+  },
+  {
+   "text": "For $K\\in\\mathrm{CoCh}(\\mathcal A_Z)$ put $q_K=p_{f,C(F_g)K}\\circ L_f(p_{g,K})$. It is a natural isomorphism from $L_fL_gQ_ZK$ to $Q_XC(F_f)C(F_g)K$. Consequently\n$$t_K=q_K^{-1}\\circ Q_X(B_K)\\circ p_{h,K}:L_hQ_ZK\\xrightarrow{\\sim}L_fL_gQ_ZK$$\nis a natural isomorphism of functors on cochain complexes. Apply clause (2) of [lem-weil-pbc-localization-universal-property] with localization $Q_Z$, target $D(\\mathcal A_X)$, and the functors $L_h$ and $L_fL_g$. Their composites with $Q_Z$ invert quasi-isomorphisms since $Q_Z$ inverts them and functors preserve inverses. With the comparison isomorphisms identities, that clause descends $t$ to a natural transformation $c:L_h\\to L_fL_g$ with $c_{Q_ZK}=t_K$. Descend $t^{-1}$ in the same way. Since descent respects composition and identities, the descended transformations are inverse, so $c$ is a natural isomorphism. Its defining equation\n$$q_K\\circ c_{Q_ZK}=Q_X(B_K)\\circ p_{h,K}$$\nidentifies it as the comparison induced by the specified $b$ under the canonical exact-derived identifications. Clause (3) of the same localization node makes a transformation with these components unique. This proves the claimed ambient comparison on unbounded derived categories.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
+    "place": "Second and third sentences: descent of the degreewise comparison and transport along the canonical exact-derived identifications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "det-prop-sfb-module-pullback-exact-main",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-sfb-module-upper-star-comp",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
+  "place": "Full proof: exactness, termwise comparison, and transport, expanded by the existing exact-derived Kan comparison and localization universal property; Stacks Tag 015F is the exact-functor input."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +112,52 @@
    "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-42 and related generic derived-category declarations; no condensed pullback comparison.",
    "date": "2026-10-17",
    "verdict": "candidate only: generic infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorCompIso|mapDerivedCategoryCompIso|leftDerivedUpperStarComp",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: none of the derived composition names occurs in the pinned Mathlib source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of derived pullbacks of module objects over condensed rings on proetale sites",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.pullback_assoc; SheafOfModules.pullback; CategoryTheory.Over.pullbackComp; CategoryTheory.GrothendieckTopology.overMapPullbackComp; CategoryTheory.ChosenPullbacksAlong.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern underived sheaf-module pullback or generic exact-functor infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.comp",
+   "results": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategoryCompIso; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj; CategoryTheory.Functor.mapDerivedCategoryIdIso_inv_app_singleFunctor_obj",
+   "date": "2026-10-17",
+   "verdict": "candidate only: online mapDerivedCategoryCompIso concerns generic exact functors and is absent from pinned Mathlib; no condensed module-object comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left derived pullback on module objects over a condensed ring on the pro-etale site has a natural composition isomorphism induced by ordinary pullback composition",
+   "results": "SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc; SheafOfModules.pullbackIso; SheafOfModules.pullback_comp_id; AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullback_id_comp",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern underived sheaf-module pullback or generic exact-functor infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|fullyFaithfulWhiskeringLeft",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-17",
+   "verdict": "generic infrastructure only: exact-functor factorization is already an existing Mathlib leaf in the DAG"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor induces a functor on unbounded derived categories and natural isomorphisms between composites descend along quasi-isomorphism localization",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern underived sheaf-module pullback or generic exact-functor infrastructure"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-sfb-dc-upper-star-comp",
@@ -71,5 +174,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-sfb-module-left-derived-upper-star-comp",
+  "worker": "stage1",
+  "summary": "Preserved the statement and derived the specified ordinary module-object composition comparison on unbounded derived categories. Reused the existing pullback exactness, exact-derived factorization, exact-derived Kan characterization and localization nodes. Wrote out the canonical comparison and its component equation, rather than treating composition of arbitrary derived functors as automatic. No new nodes or Mathlib leaves were created; no slopmaster2 attachment exists for module objects.",
+  "blueprint": "Realizes the ambient-comparison paragraph of def-sfb-dc-upper-star-comp and the exactness/levelwise/descent/transport argument of the current main-20261015 prop-sfb-module-left-derived-upper-star-comp proof; it supplies the ambient comparison used in step 2 of the restricted-functor unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor total-left-derived characterization, clause (1), used solely to identify a specified derived functor with termwise localization via the Kan universal property; no node of the restricted-functor unit states this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-848abd312",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-848abd312 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the blueprint main-20261015 statement, its proof and unit clause 4, the restricted-functor unit, Stacks derived.tex label lemma-right-derived-exact-functor (015F, line 5884), and Mathlib Localization/Predicate.lean:278-290. The statement is verbatim the blueprint statement and is not weakened. The coefficient category is the same Mod_{Λ_T} throughout, and f^* = Ext_{α_f}∘mapMod(f^*_Ab) is the same functor in def-sfb-module-upper-star and in sk-def-sfb-module-pushforward-pullback. The direction b: h^*→f^*g^* matches def-sfb-module-upper-star-comp. Step 1: exactness comes from det-prop-sfb-module-pullback-exact-main, applied to f, g and h. Step 2: the right-Kan comparison u_a/v_a, with inverse equations from uniqueness, is correct, and p_a = ε_a is invertible. Step 3: the termwise chain isomorphism is genuinely elementary. Step 4: I checked the types of q_K and t_K. The descent through localization clauses (2) and (3) is correct, and the component equation makes the 'induced by b' clause precise. The route follows the blueprint (exact ⇒ levelwise ⇒ transport). The missing blueprint node prop-sfb-module-left-derived-upper-star-levelwise is correctly replaced by the exactness node, the factorization leaf and tool clause (1). Accepted tool_use: lem-weil-pbc-exact-functor-derived-functor, a generic tool that is split and reviewed pass. There are no new nodes and no cycle (only the parent def-sfb-dc-upper-star-comp cites the item). Possible duplicates checked: def-sfb-derived-comap-upper-star-iso, new-comap-upper-star-iso-composition, lem-sfb-module-upper-star-kflat-quasi-iso; none states this result. No SGA source is used. Fixes: step 1 now introduces ε_a and says (L_a, ε_a) is a right Kan extension, with lem-weil-pbc-exact-functor-derived-functor added to its uses; step 2 had relied on ε_a 'from step 1' without it being introduced. I also added sk-def-sfb-condensed-ring to stmt_deps. The statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -73,25 +73,49 @@
    }
   },
   {
-   "text": "Now put $R_Y=\\widehat{\\mathcal O}_{E,Y}$, $R_X=\\widehat{\\mathcal O}_{E,X}$ and use $c_{\\mathcal O_E}$ to regard $F$ as the exact equivalence of their module sheaves in step 1. Relabelling gives\n$$F(M\\otimes_{R_Y}N)\\cong FM\\otimes_{R_X}FN.$$\nIndeed the presheaf tensor has the same sectionwise tensor after relabelling, and a sheafification has the same universal property because the coverings are relabelled. These maps send $m\\otimes n$ to the corresponding tensor and commute with restrictions. Since $F$ commutes with direct sums, the same identification applies to total tensor complexes and their differentials $d\\otimes1+(-1)^i1\\otimes d$ [def-pc-tensor-complex-sheaves]. If $P$ is K-flat and $B$ is an acyclic complex on $X$, relabel $B$ back to $B'$ on $Y$. Then $B'$ is acyclic by step 1 and\n$$B\\otimes_{R_X}FP\\cong F(B'\\otimes_{R_Y}P)$$\nis acyclic; thus $FP$ is K-flat by [def-pc-kflat-complex]. Relabelling also preserves flat module sheaves [def-pc-flat-sheaf-modules]: for a flat $M$ and a short exact sequence on $X$, relabel the sequence back to $Y$, tensor with $M$, and apply the exact $F$; the tensor identification just proved gives its tensor with $FM$, so it is exact. Choose $P\\to K$ with flat terms by [lem-pc-kflat-resolution], so that $FP$ is K-flat with flat terms as well, and form $P_n=P\\otimes_{R_Y}(A_{E,n})_Y$ as in [def-weil-integral-derived-reduction]. The coefficient-projection square of step 1 gives, simultaneously for all $n$,\n$$F(P_n)\\cong FP\\otimes_{R_X}(A_{E,n})_X.$$\nThe maps $P\\to P_n$ and $P_{n+1}\\to P_n$ are $x\\mapsto x\\otimes1$ and $x\\otimes a\\mapsto x\\otimes\\rho_n(a)$ [def-weil-integral-reduction-tower]. Under the tensor identification these are the identical formulas on $X$, so both the quotient arrows and the transitions agree, not just the objects. These identifications are natural on K-flat representatives; the canonical resolution comparisons respect the quotient arrows and transitions by [lem-weil-integral-reduction-tower-well-defined]. Consequently they identify the derived reduction towers of $FK$ with the relabelled derived reduction towers of $K$.",
+   "text": "Put $R_Y=\\widehat{\\mathcal O}_{E,Y}$ and $R_X=\\widehat{\\mathcal O}_{E,X}$, with the coefficient identification from step 1. Apply [lem-pur-isomorphism-inverse-image-tensor-hom] to $\\mathcal O=R_Y$: its natural tensor isomorphism sends a local pure tensor to the corresponding tensor, and its scalar-extension clause applies to every projection $R_Y\\to(A_{E,n})_Y$. For complexes, apply the tensor isomorphism to each pair of terms and take the direct sums defining [def-pc-tensor-complex-sheaves]. The equivalence $F$ preserves these sums by step 1. Naturality identifies both $d_M\\otimes1$ and $1\\otimes d_N$, and additivity preserves the sign $(-1)^p$. This proves the chain-level tensor comparison $F(M\\otimes_{R_Y}N)\\cong FM\\otimes_{R_X}FN$.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution",
-    "def-weil-integral-derived-reduction",
-    "def-weil-integral-reduction-tower",
-    "lem-weil-integral-reduction-tower-well-defined",
-    "def-pc-flat-sheaf-modules"
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-weil-completed-integral-coefficients",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, sites-modules-lemma-tensor-product-pullback; extend the existing natural sheaf tensor comparison to direct-sum total complexes"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-ringed-topos-kflat-pullback] for the morphism of pro-etale topoi induced by $g$, with source ring $R_Y$, target ring $R_X$, and ring map $c_{\\mathcal O_E}$. The small-site universe is that of [def-weil-pbc-proetale-site], and the required inverse-image adjunction and finite-limit preservation are given by [def-weil-proetale-inverse-image] and step 1. Module pullback along this ring isomorphism is naturally identified with $F$ by the multiplication maps of step 2, now for $R_Y,R_X$. Hence if $P$ is K-flat with flat terms, the cited preservation theorem says exactly that $FP$ is K-flat with flat terms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; tensor and K-flatness definitions applied under the covering-preserving site equivalence; quotient-arrow compatibility written explicitly"
+    "place": "Tag 0G7E, sites-cohomology-lemma-pullback-K-flat, with the coefficient-ring isomorphism of step 1"
    }
   },
   {
-   "text": "For the K-flat representative $P\\to K$ with flat terms chosen in step 4 put $B(P)=\\prod_n\\operatorname{Res}_nP_n$ and\n$$C(P)=\\operatorname{Cone}(1-s:B(P)\\to B(P))[-1].$$\nHere products are the termwise products of module sheaves; they are exact by [lem-weil-proetale-countable-products-exact] and represent derived products by clause 2 of [lem-weil-derived-limit-existence]. With the cone convention of [def-weil-abstract-derived-category], $C(P)^j=B(P)^{j-1}\\oplus B(P)^j$ and\n$$d(y,x)=(-d_By-(1-s)x,d_Bx).$$\nWriting $a:P\\to B(P)$ for the maps $x\\mapsto x\\otimes1$, the strict equality $(1-s)a=0$ makes $x\\mapsto(0,a(x))$ a chain map $P\\to C(P)$. It gives a natural comparison $\\eta_K:K\\to C(P)$ in the derived category. Apply [lem-weil-finite-free-completed-scalar-comparison] with the coefficient extension $L=E$: its last sentence identifies precisely this zero-shifted-component comparison with the derived-completeness map, and its isomorphism assertion says that $\\eta_K$ is an isomorphism for $K$ derived complete as in [def-weil-derived-complete]. Naturality and independence from the representative are also part of that comparison theorem. This uses the specified strict cone map, rather than an arbitrary isomorphism between two Roos-triangle objects.",
+   "text": "Choose $P\\to K$ with flat terms by [lem-pc-kflat-resolution]; step 5 makes $FP$ K-flat with flat terms. For $P_n=P\\otimes_{R_Y}(A_{E,n})_Y$, the reduction-tower compatibility node identifies $F(P_n)$ with $FP\\otimes_{R_X}(A_{E,n})_X$ for every $n$, and identifies the maps $P\\to P_n$ and $P_{n+1}\\to P_n$ with the corresponding quotient and transition maps for $FP$. Its naturality, together with [lem-weil-integral-reduction-tower-well-defined], gives compatibility under changes of K-flat representative, so the derived reduction towers of $FK$ and $K$ are identified.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-isomorphism-derived-pullback-reduction-tower",
+    "def-weil-integral-derived-reduction",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph; agent extraction of the quotient-tower and resolution-comparison argument from the former step 4"
+   }
+  },
+  {
+   "text": "For the K-flat representative $P\\to K$ with flat terms chosen in step 6 put $B(P)=\\prod_n\\operatorname{Res}_nP_n$ and\n$$C(P)=\\operatorname{Cone}(1-s:B(P)\\to B(P))[-1].$$\nHere products are the termwise products of module sheaves; they are exact by [lem-weil-proetale-countable-products-exact] and represent derived products by clause 2 of [lem-weil-derived-limit-existence]. With the cone convention of [def-weil-abstract-derived-category], $C(P)^j=B(P)^{j-1}\\oplus B(P)^j$ and\n$$d(y,x)=(-d_By-(1-s)x,d_Bx).$$\nWriting $a:P\\to B(P)$ for the maps $x\\mapsto x\\otimes1$, the strict equality $(1-s)a=0$ makes $x\\mapsto(0,a(x))$ a chain map $P\\to C(P)$. It gives a natural comparison $\\eta_K:K\\to C(P)$ in the derived category. Apply [lem-weil-finite-free-completed-scalar-comparison] with the coefficient extension $L=E$: its last sentence identifies precisely this zero-shifted-component comparison with the derived-completeness map, and its isomorphism assertion says that $\\eta_K$ is an isomorphism for $K$ derived complete as in [def-weil-derived-complete]. Naturality and independence from the representative are also part of that comparison theorem. This uses the specified strict cone map, rather than an arbitrary isomorphism between two Roos-triangle objects.",
    "uses": [
     "lem-weil-proetale-countable-products-exact",
     "lem-weil-derived-limit-existence",
@@ -106,7 +130,7 @@
    }
   },
   {
-   "text": "Use the integral definition [def-pur-integral-derived-operations], to which [def-weil-derived-pullback-tensor-hom] refers: $Lg^*K$ is represented by the strict cone of the tower $\\operatorname{Res}_n g_n^*P_n$. The multiplication isomorphisms of step 2 and the projection square of step 1 identify this tower with $F(\\operatorname{Res}_nP_n)$, including its transition maps. The product comparison $F B(P)\\cong\\prod_nF(\\operatorname{Res}_nP_n)$ has $n$-th component $F(\\mathrm{pr}_n)$; it therefore identifies $F(1-s)$ with the endomorphism having components $\\mathrm{pr}_n-F(t_n)\\mathrm{pr}_{n+1}$. Applying $F$ to both coordinates of the cone and to the displayed differential in step 5 gives a natural chain isomorphism from $F C(P)$ to that representative of $Lg^*K$. By [lem-pur-integral-operations-well-defined], these comparisons on K-flat representatives descend to a natural isomorphism $\\theta_K:Lg^*K\\xrightarrow{\\sim}F C(P)$, independent of the resolutions. For a derived-complete $K$, define\n$$\\lambda_K=F(\\eta_K)^{-1}\\circ\\theta_K:Lg^*K\\xrightarrow{\\sim}FK.$$\nThe inverse is natural because $\\eta$ is natural and all its components on this full subcategory are isomorphisms. Thus this comparison has the required naturality for integral coefficients as well.",
+   "text": "Use the integral definition [def-pur-integral-derived-operations], to which [def-weil-derived-pullback-tensor-hom] refers: $Lg^*K$ is represented by the strict cone of the tower $\\operatorname{Res}_n g_n^*P_n$. The multiplication isomorphisms of step 2 and the projection square of step 1 identify this tower with $F(\\operatorname{Res}_nP_n)$, including its transition maps. The product comparison $F B(P)\\cong\\prod_nF(\\operatorname{Res}_nP_n)$ has $n$-th component $F(\\mathrm{pr}_n)$; it therefore identifies $F(1-s)$ with the endomorphism having components $\\mathrm{pr}_n-F(t_n)\\mathrm{pr}_{n+1}$. Applying $F$ to both coordinates of the cone and to the displayed differential in step 7 gives a natural chain isomorphism from $F C(P)$ to that representative of $Lg^*K$. By [lem-pur-integral-operations-well-defined], these comparisons on K-flat representatives descend to a natural isomorphism $\\theta_K:Lg^*K\\xrightarrow{\\sim}F C(P)$, independent of the resolutions. For a derived-complete $K$, define\n$$\\lambda_K=F(\\eta_K)^{-1}\\circ\\theta_K:Lg^*K\\xrightarrow{\\sim}FK.$$\nThe inverse is natural because $\\eta$ is natural and all its components on this full subcategory are isomorphisms. Thus this comparison has the required naturality for integral coefficients as well.",
    "uses": [
     "def-pur-integral-derived-operations",
     "def-weil-derived-pullback-tensor-hom",
@@ -120,7 +144,7 @@
    }
   },
   {
-   "text": "It remains to put the integral comparison in the stated full subcategory. Apply the triangulated termwise functor of step 1 to a Roos triangle witnessing the derived completeness of $K$ in [def-weil-derived-complete]. By the product and transition identifications of step 6, and the quotient-arrow identifications of step 4, its image is a Roos triangle for the reduction tower of $FK$, with the required first map from $FK$. Thus $FK$ is derived complete. Step 4 identifies every derived reduction of $FK$ with $F(K\\otimes^L_{\\mathcal O_E}A_{E,n})$. Step 3 makes these reductions bounded constructible, and step 1 gives the same cohomological vanishing interval as on $Y$. The single interval $[r,s]$ supplied by [def-weil-derived-complete-integral-detailed] therefore works for every reduction on $X$. These are exactly the two defining conditions of $D^b_c(X,\\mathcal O_E)$. Fullness puts the natural isomorphism of step 6 in this subcategory.",
+   "text": "It remains to put the integral comparison in the stated full subcategory. Apply the triangulated termwise functor of step 1 to a Roos triangle witnessing the derived completeness of $K$ in [def-weil-derived-complete]. By the product identification of step 8 and transition identifications of step 6, and the quotient-arrow identifications of step 6, its image is a Roos triangle for the reduction tower of $FK$, with the required first map from $FK$. Thus $FK$ is derived complete. Step 6 identifies every derived reduction of $FK$ with $F(K\\otimes^L_{\\mathcal O_E}A_{E,n})$. Step 3 makes these reductions bounded constructible, and step 1 gives the same cohomological vanishing interval as on $Y$. The single interval $[r,s]$ supplied by [def-weil-derived-complete-integral-detailed] therefore works for every reduction on $X$. These are exactly the two defining conditions of $D^b_c(X,\\mathcal O_E)$. Fullness puts the natural isomorphism of step 8 in this subcategory.",
    "uses": [
     "def-weil-derived-complete",
     "def-weil-derived-complete-integral-detailed",
@@ -155,13 +179,15 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-proetale-operations",
   "def-weil-finite-torsion-constructibility",
-  "def-pur-sheaf-tensor-product",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower",
   "def-weil-integral-derived-reduction",
   "def-weil-integral-reduction-tower",
   "lem-weil-integral-reduction-tower-well-defined",
-  "def-pc-flat-sheaf-modules",
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-derived-limit-existence",
   "lem-weil-finite-free-completed-scalar-comparison",
@@ -277,7 +303,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -299,11 +325,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-admissible",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-weil-isomorphism-derived-pullback",
   "worker": "stage1",
-  "summary": "Kept the statement. Checked the finite and completed coefficient sheaves separately, constructed the module equivalence by site relabelling, and wrote the finite K-flat comparison and constructibility argument. At integral level wrote tensor, reduction-transition and strict Roos-cone comparisons, taking the natural reconstruction unit from the existing finite-free completed scalar comparison with L=E. Transported the completeness triangle and the uniform reduction interval. No new nodes: all non-elementary facts already have DAG statements. Second reading made finite-level naturality independent of resolution choices and explicitly chose flat-term resolutions, proving flatness is preserved by relabelling.",
-  "blueprint": "Realizes the coefficient-object paragraph of def-weil-ordinary-compact-cohomology and its canonical Weil-structure requirement through def-weil-constant-weil-structure; the unit has no proof steps to replace.",
+  "summary": "Kept the statement and Lean record unchanged. Replaced the returned long step 4 by three short steps: existing natural tensor comparison extended to total complexes, existing ringed-topos flat-term K-flat preservation, and a new statement-only comparison of completed-coefficient quotient towers including resolution comparisons. Removed two duplicate unlanded sandbox helpers; retained their search log. Corrected downstream step-number references and helper source/blueprint places.",
+  "blueprint": "Realizes the coefficient-object paragraph of def-weil-ordinary-compact-cohomology (current main-20261015 location in sec-six-functors-basics), via def-weil-constant-weil-structure. Tensor and K-flat arguments use existing generic nodes; the new quotient-tower compatibility lemma extracts the remaining argument of former step 4.",
   "tool_uses": [
    {
     "node": "lem-pc-kflat-resolution",
@@ -328,6 +354,14 @@
    {
     "node": "lem-pur-integral-operations-well-defined",
     "why": "Generic tool used exactly for functorial descent of the strict Roos-cone computations; the admissibility unit does not supply this underlying coefficient-category fact."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Generic natural tensor and scalar-extension comparison under a pro-etale scheme isomorphism, extended explicitly to total complexes; this unit supplies no such tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic flat-term K-flat preservation for ringed topoi, specialized to the completed coefficient-ring isomorphism; the admissibility unit supplies no preservation lemma."
    }
   ]
  },
@@ -337,15 +371,17 @@
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-derived-limit-existence",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pur-integral-operations-well-defined"
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q34-be31f82b0",
-  "group": "Q34",
+  "reviewer": "NT-cc-Q51-f40c7fcb3",
+  "group": "Q51",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-be31f82b0 (reviewer sub-agent of L); spot-checked: Read the complete item, report, all cited node statements, unit/chapter route, and cited source passages. All eight steps check, including the specified strict completion map, cone signs, transition compatibility, and uniform constructibility bounds. No cycles or duplicate new nodes; six declared tool uses accepted. Exact master target categories remain distinct and unchanged. Detailed findings recorded in review.md; no repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-f40c7fcb3 (reviewer sub-agent of L); spot-checked: I read the item's ten steps, the new node, the statement of every cited node, unit sk-def-sf-admissible (uses []), the chapter, and the main-20261015 coefficient-object paragraph of def-weil-ordinary-compact-cohomology (l.52). The item's statement, stmt_deps and Lean record are unchanged and no target is weakened. The constant and completed coefficient sheaves are kept distinct. Lg^* is the finite module pullback and, at the integral level, the strict cone of def-pur-integral-derived-operations. Step checks: S1 extends clauses 1-3 of the inverse-image lemma to the completed ring by relabelling, and the projection square holds. S2's multiplication isomorphism is the one in def-weil-pbc-proetale-operations. S3 constructibility is elementary. S4 applies the tensor lemma, which holds for any ring sheaf, extended over Tot. S5 checks the hypotheses of the ringed-topos K-flat lemma (morphism of topoi, flat-term K-flat P). S6 uses the new node and the two equations of the tower well-definedness lemma. S7: the cone sign agrees with def-weil-abstract-derived-category, (1-s)a=0 holds strictly, and finite-free-completed comparison at L=E gives eta_K invertible for derived-complete K. S8: theta_K descends by integral-operations-well-defined, and lambda=F(eta)^{-1}theta has the right direction. S9 transports the Roos triangle and keeps the uniform interval. S10 uses constant-coefficient-objects with the auxiliary p different from l. uses equal proof_deps, steps are at most 1504 characters, and there are no cycles or missing/merged ids. No SGA is cited. The new node is true; I tested g=id, P=R_Y[0], P=0, n=1 and the empty scheme. It is not a clause of the item. It does not duplicate tensor-hom, reduction-tower-well-defined, completed-pullback-reduction, def-weil-inverse-image-pullback-comparison or the point-transport tower node, and the blueprint has no same_as. FIX, statement only: stmt_deps listed lem-pur-isomorphism-inverse-image-tensor-hom, but the statement never cited it or said what the identification is. The resolution-compatibility clause was vague and did not say that F(P) and F(P') must be K-flat. The corrected statement defines beta_n (tensor iso followed by coefficient change along c_OE and c^g), writes the gamma/tau and theta_n equations, and adds the K-flat hypothesis, which step 5 supplies. Step 4 is not cited by number later; this is harmless and I left it. I accept all eight declared tool_uses.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

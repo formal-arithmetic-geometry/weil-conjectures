@@ -1,0 +1,75 @@
+{
+ "id": "lem-pod-constant-tower-transition",
+ "kind": "statement",
+ "title": "Degree-zero direct-image comparison is compatible with coefficient restriction",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, $\\varphi:A\\to B$ a homomorphism of finite commutative rings, $F$ a sheaf of $A_X$-modules and $G$ a sheaf of $B_X$-modules on the small pro-etale sites [def-weil-pbc-proetale-site]. Let $u:F\\to\\operatorname{Res}_\\varphi G$ be an $A_X$-linear morphism. Use the K-injective derived direct images $Rf_*^A,Rf_*^B$ and the canonical restriction-of-scalars comparison $c: Rf_*^A\\operatorname{Res}_\\varphi\\xrightarrow{\\sim}\\operatorname{Res}_\\varphi Rf_*^B$ of [lem-weil-proetale-direct-image-restriction-of-scalars]. Under the degree-zero augmentation isomorphisms $f_*F\\cong\\mathcal H^0(Rf_*^A(F[0]))$ and $f_*G\\cong\\mathcal H^0(Rf_*^B(G[0]))$ supplied by [lem-weil-pbc-left-exact-injective-resolution-degree-zero], the morphism\n$$\\mathcal H^0\\bigl(c_{G[0]}\\circ Rf_*^A(u[0])\\bigr):\\mathcal H^0(Rf_*^A(F[0]))\\longrightarrow\\mathcal H^0(\\operatorname{Res}_\\varphi Rf_*^B(G[0]))$$\nis the underived map $f_*u:f_*F\\to f_*\\operatorname{Res}_\\varphi G=\\operatorname{Res}_\\varphi f_*G$ [def-weil-proetale-module-direct-image]. Here restriction of scalars is exact, so commutes with $\\mathcal H^0$, and the augmentation identifications are those obtained from nonnegative injective resolutions. Thus the comparison retains the actual section map, not merely its source and target objects.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD (lemma-left-exact-higher-derived), canonical F -> R^0F; combined with the explicitly stated K-injective representative of lem-weil-proetale-direct-image-restriction-of-scalars. The coefficient-comparison square is written by the worker."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-weil-proetale-module-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical degree zero derived direct image isomorphism is natural in a map of module sheaves with restriction of scalars along a ring homomorphism",
+   "results": "SheafOfModules.pushforwardNatIso and pushforwardCongr plus free/pullback naturality; these concern underived sheaf pushforward, not the canonical H^0 comparison across coefficient restriction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree zero right derived direct image commutes with coefficient restriction and maps of sheaves",
+   "results": "CategoryTheory.Functor.rightDerivedZeroIsoSelf and InjectiveResolution.toRightDerivedZero'_naturality_assoc concern a fixed functor; no compatibility with derived pro-etale restriction-of-scalars comparison. Read RightDerived.lean:280-293.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toRightDerivedZero\"",
+   "results": "12 hits: generic augmentation, naturality and degree-zero isomorphism declarations. No changing-coefficient comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero|restrictionOfScalars",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean:36,263,273,275,277; inspected naturality at 280-293. Fixed-category augmentation only. Subdirectory: CategoryTheory/Abelian.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedZeroIsoSelf\"",
+   "results": "10 hits for the generic isomorphism of a fixed left exact functor with its zeroth derived functor; no coefficient-change compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-connected-constant-h0",
+  "date": "2026-10-17",
+  "group": "Q113"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Step 7, passage from the finite-level derived direct-image tower to the coefficient reduction maps on degree-zero sections",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
