@@ -14,9 +14,165 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-complete-intersection-over-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work over the tail $i\\geq i_0$. For $T_0=B_0$ and $T_0=C_0$, the squares $R_i\\to R_i\\otimes_{R_{i_0}}T_0$, $R\\to R\\otimes_{R_{i_0}}T_0$ are pushouts by [lem-weil-pbc-algebra-tensor-pushout-universal-property]: maps out of the tensor product are exactly pairs of ring maps agreeing on $R_{i_0}$. Apply [lem-weil-pbc-limit-finite-presentation-colimits] to obtain $B=\\varinjlim B_i$ and $C=\\varinjlim C_i$. The same argument applies on every later tail. Tensor associativity identifies $C_i$ with $B_i\\otimes_{B_0}C_0$: $(r\\otimes b)\\otimes c\\mapsto r\\otimes\\varphi_0(b)c$, with inverse $r\\otimes c\\mapsto(r\\otimes1)\\otimes c$. Hence [lem-weil-pbc-finite-presentation-base-change-composition](1) shows that every $B_i\\to C_i$ is finitely presented. All indexing categories here are small directed tails of the given set, in a universe containing the rings.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-limit-finite-presentation-colimits",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33 (lemma-colimit-lci), notation and use of Tag 00QO; Tag 00R0 (lemma-limit-finite-presentation); Tag 05G5 (lemma-base-change-finiteness)(4)."
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak q\\subset C$, put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ and $F=C\\otimes_B\\kappa(\\mathfrak p)$. Flatness of $B\\to C$ gives flatness of $B_{\\mathfrak p}\\to C_{\\mathfrak q}$ by [lem-weil-pbc-flat-local-ring-maps]. The prime $\\mathfrak Q=\\ker(F\\to\\kappa(\\mathfrak q))$ belongs to some $D(h)$ in the defining complete-intersection cover of $F$, so $h\\notin\\mathfrak Q$ and $F_h$ is a global complete intersection by [def-weil-pbc-complete-intersection-over-field]. Apply [lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection] to $B\\to C$ with the finite-presentation neighbourhood $g=1$. Its three hypotheses are precisely the finite presentation assumed in the item, the local flatness just obtained, and this choice of $h$. It gives $g_{\\mathfrak q}\\notin\\mathfrak q$ and a specified relative global complete-intersection presentation of $C_{g_{\\mathfrak q}}$ over $B$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, syntomic paragraph, first sentence; Tag 00SY (lemma-syntomic), implication (3) to (2); Tag 00HT (lemma-flat-localization)(6)."
+   }
+  },
+  {
+   "text": "The opens $D(g_{\\mathfrak q})$ cover $\\operatorname{Spec}C$. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii), choose a finite subcover $D(g_1),\\ldots,D(g_m)$. By its clause (i), choose $h_1,\\ldots,h_m\\in C$ with $\\sum_{a=1}^m h_ag_a=1$. Keep the presentations $C_{g_a}\\cong B[x_1,\\ldots,x_{n_a}]/(f_{a,1},\\ldots,f_{a,c_a})$ supplied by Step 2. Empty spectra cause no exception: the finite subcover can be empty, and its unit-ideal relation is $0=1$ in $C=0$.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, syntomic paragraph: elements generating the unit ideal."
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-filtered-colimit-finite-data] to $C=\\varinjlim_{i\\geq i_0}C_i$ from Step 1, the finitely many $g_a,h_a$, and the one equation $\\sum_a h_ag_a=1$. We obtain a stage $j\\geq i_0$ and lifts $g_{j,a},h_{j,a}\\in C_j$ such that $\\sum_a h_{j,a}g_{j,a}=1$. Write $g_{k,a}$ for their images for $k\\geq j$. The relation persists under every transition homomorphism, so these elements generate the unit ideal at every later stage, including when $m=0$.",
+   "uses": [
+    "lemma-nagata-filtered-colimit-finite-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, syntomic paragraph: lifting the cover and its unit-ideal relation; Tags 00D6 and 00D7, directed-colimit finite relations."
+   }
+  },
+  {
+   "text": "Fix $a\\in\\{1,\\ldots,m\\}$. Apply [lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation] to the specified presentation of $C_{g_a}$ in Step 3. It supplies a finite type integer subring $P_a\\subset B$ containing the coefficients and a relative global complete intersection $Q_a=P_a[x_1,\\ldots,x_{n_a}]/(f_{a,1},\\ldots,f_{a,c_a})$. By [lem-weil-pbc-relative-global-complete-intersection-base-change](a), the presentation identifies $B\\otimes_{P_a}Q_a\\cong C_{g_a}$ as $B$-algebras. Moreover $P_a$ is finitely presented over $\\mathbf Z$: choose a surjection $\\mathbf Z[t_1,\\ldots,t_r]\\twoheadrightarrow P_a$ using its finite ring generators; [lem-trf-mvpolynomial-noetherian] says its kernel is finitely generated. This is a finite presentation by [def-weil-pbc-finitely-presented-algebra]. The displayed presentation also makes $Q_a$ finitely presented over $P_a$.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "lem-trf-mvpolynomial-noetherian",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, relative-global-complete-intersection paragraph, first two sentences; Tag 00SU (lemma-relative-global-complete-intersection-Noetherian); Tag 00SS (lemma-base-change-relative-global-complete-intersection)(1)."
+   }
+  },
+  {
+   "text": "Put $D_{j,a}=(C_j)_{g_{j,a}}$. This is a finitely presented $B_j$-algebra: take a finite presentation $C_j=B_j[x_1,\\ldots,x_N]/(u_1,\\ldots,u_s)$ from Step 1, lift $g_{j,a}$ to a polynomial $G$, and adjoin one variable $t$ and the relation $Gt-1$. The maps $x_b\\mapsto x_b/1$, $t\\mapsto1/g_{j,a}$ give the isomorphism with $D_{j,a}$, with inverse determined by the invertibility of $G$; thus this is a presentation in [def-weil-pbc-finitely-presented-algebra]. By [lem-weil-pbc-algebra-localization-away-base-change] and the tensor pushout property of Step 1, $R\\otimes_{R_j}D_{j,a}\\cong C_{g_a}$ as $B$-algebras, via $r\\otimes(c/g_{j,a}^e)\\mapsto(r\\otimes c)/g_a^e$. The analogous formula with $R_k$ gives $R_k\\otimes_{R_j}D_{j,a}\\cong(C_k)_{g_{k,a}}$ for $k\\geq j$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, syntomic paragraph, application of the relative-global-complete-intersection case to principal localizations."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-presentation-model-stage] to the original ring diagram $R_i$ with starting index $j$, $R_j$-algebras $B_j,D_{j,a}$ and their finitely presented map from Step 6, and the rings $P_a,Q_a$ from Step 5. The canonical isomorphism $R\\otimes_{R_j}B_j\\cong B$ equips its left side with the required $P_a$-algebra structure. Combining Steps 5 and 6 gives the required comparison $B\\otimes_{P_a}Q_a\\cong R\\otimes_{R_j}D_{j,a}$, compatible with the inclusion of $B$ because both comparisons are $B$-algebra maps. All hypotheses of the model-stage node hold: $P_a$ is finitely presented over $\\mathbf Z$, $Q_a$ over $P_a$, and $B_j\\to D_{j,a}$ is finitely presented. It supplies $k_a\\geq j$, a map $P_a\\to B_{k_a}$, and a $B_{k_a}$-algebra isomorphism $B_{k_a}\\otimes_{P_a}Q_a\\cong(C_{k_a})_{g_{k_a,a}}$, using Step 6 to identify the target. By [lem-weil-pbc-relative-global-complete-intersection-base-change](b), this last algebra is a relative global complete intersection over $B_{k_a}$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-model-stage",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, relative-global-complete-intersection paragraph, descent of the comparison isomorphism using Tags 00QO and 0C32; syntomic paragraph, penultimate sentence."
+   }
+  },
+  {
+   "text": "Choose one upper bound $i$ of $j$ and the finitely many $k_a$ in the directed set. For each $a$, base-change the presentation obtained in Step 7 along $B_{k_a}\\to B_i$. Its target is $(C_i)_{g_{i,a}}$: the tensor pushout identifications of Step 1 identify the base change of $C_{k_a}$ with $C_i$, and [lem-weil-pbc-algebra-localization-away-base-change] then identifies the localized algebras, sending $(c/g_{k_a,a}^e)\\otimes b$ to $b\\bar c/g_{i,a}^e$. Therefore [lem-weil-pbc-relative-global-complete-intersection-base-change](b) shows that every $B_i\\to(C_i)_{g_{i,a}}$ is a relative global complete intersection. The identity $\\sum_a h_{i,a}g_{i,a}=1$ still holds by Step 4. If $m=0$ choose $i=j$; that identity says $C_i=0$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, syntomic paragraph: increase the index for all finitely many charts; Tag 00SS(1)."
+   }
+  },
+  {
+   "text": "Each chart $(C_i)_{g_{i,a}}$ is flat over $B_i$ by [lem-weil-pbc-relative-global-complete-intersection-flat], applied to its presentation from Step 8. For any prime $\\mathfrak q\\subset C_i$, the unit-ideal relation gives an $a$ with $g_{i,a}\\notin\\mathfrak q$. By [lem-weil-pbc-spec-localization-away-basic-open](ii), it corresponds to a prime $\\mathfrak q'$ of $(C_i)_{g_{i,a}}$. Let $\\mathfrak p$ be its contraction to $B_i$. By [lem-weil-pbc-flat-local-ring-maps] the map $(B_i)_{\\mathfrak p}\\to((C_i)_{g_{i,a}})_{\\mathfrak q'}$ is flat. The latter target identifies with $(C_i)_{\\mathfrak q}$ by [lem-weil-pbc-localization-of-localization]: both invert exactly the elements outside $\\mathfrak q$, and $g_{i,a}$ is already invertible there. These are isomorphisms over $(B_i)_{\\mathfrak p}$. Thus [lem-weil-pbc-flat-map-local-criterion] proves $B_i\\to C_i$ flat. For $C_i=0$ there are no primes and that same criterion applies vacuously.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-flat",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, final sentence; Tag 00SO (lemma-local-syntomic), flatness clause; Tag 00HT(6)."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset B_i$ and write $k=\\kappa(\\mathfrak p)$, $F=C_i\\otimes_{B_i}k$. By Step 1 and [lem-weil-pbc-finite-presentation-base-change-composition](1), $F$ is finitely presented, hence finitely generated, over $k$. Applying the fibre ring map to Step 4's relation gives $\\sum_a\\bar h_{i,a}\\bar g_{i,a}=1$, so the $D(\\bar g_{i,a})$ cover $\\operatorname{Spec}F$ by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](i). By [lem-weil-pbc-algebra-localization-away-base-change], $F_{\\bar g_{i,a}}\\cong (C_i)_{g_{i,a}}\\otimes_{B_i}k$. Base-change the presentation in Step 8 using [lem-weil-pbc-relative-global-complete-intersection-base-change]. It presents this fibre as a polynomial quotient over $k$ of dimension $n-c$ whenever nonzero, by [def-weil-pbc-relative-global-complete-intersection]; if zero it is allowed as well. Thus every chart is a global complete intersection, and the displayed cover makes $F$ a local complete intersection by [def-weil-pbc-complete-intersection-over-field]. An empty cover has $F=0$ and satisfies the same definition. Together with Steps 1 and 9 this proves all three asserted properties at $i\\geq i_0$, without imposing any finite-presentation assumption on $R_{i_0}\\to B_0$ or $R_{i_0}\\to C_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "def-weil-pbc-relative-global-complete-intersection",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C33, final sentence; Tag 00SO (lemma-local-syntomic), fibre clause; Tags 00SP and 00S9, definitions of the two complete-intersection conditions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-limit-finite-presentation-colimits",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-trf-mvpolynomial-noetherian",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-finite-presentation-model-stage",
+  "lem-weil-pbc-relative-global-complete-intersection-flat",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "def-weil-pbc-relative-global-complete-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C33 (lemma-colimit-lci), both proof paragraphs: descend each relative global complete-intersection model and then glue its finite principal cover. The generic model-isomorphism descent is the existing model-stage node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +208,45 @@
    "results": "{\"t\": \"2026-10-17T19:21:11Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation algebra with flat local complete intersection fibres descends along a directed colimit of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"RingHom.finitePresentation_isLocal\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"CommRingCat.isFinitelyPresentable_hom\", \"Algebra.FinitePresentation.trans\", \"Algebra.Smooth.finitePresentation\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"bcddaf813f31ee0b\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits give flatness, smoothness, finite presentation, generic affine-local or colimit constructions; none states complete-intersection fibres or syntomic descent. The syntomic source search has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|CompleteIntersection|colimit.*lci",
+   "results": "{\"t\": \"2026-10-17T19:37:06Z\", \"tool\": \"grep\", \"query\": \"syntomic|CompleteIntersection|colimit.*lci\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no syntomic or complete-intersection notion; smooth algebra, finite-presentation, colimit, and descent hits do not assert this property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Syntomic homomorphisms descend along filtered colimits of rings",
+   "results": "{\"t\": \"2026-10-17T19:37:07Z\", \"tool\": \"leansearch\", \"query\": \"Syntomic homomorphisms descend along filtered colimits of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"RingCat.FilteredColimits.colimit\", \"CommRingCat.FilteredColimits.colimit\", \"preservesFilteredColimits_coyoneda\", \"RingHom.FormallySmooth\", \"CommRingCat.FilteredColimits.forget₂Ring_preservesFilteredColimits\"], \"digest\": \"c843173c984c6f22\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no syntomic or complete-intersection notion; smooth algebra, finite-presentation, colimit, and descent hits do not assert this property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"syntomic\"",
+   "results": "{\"t\": \"2026-10-17T19:37:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no syntomic or complete-intersection notion; smooth algebra, finite-presentation, colimit, and descent hits do not assert this property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented algebra map which is flat with local complete intersection fibres after a directed colimit is syntomic at some stage",
+   "results": "{\"t\": \"2026-10-17T19:37:16Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely presented algebra map which is flat with local complete intersection fibres after a directed colimit is syntomic at some stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"RingHom.finitePresentation_isLocal\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\"], \"digest\": \"36db949493d80471\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no syntomic or complete-intersection notion; smooth algebra, finite-presentation, colimit, and descent hits do not assert this property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite polynomial quotient with flat complete intersection fibres spreading out to a finite stage of a ring direct limit",
+   "results": "{\"t\": \"2026-10-17T19:37:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite polynomial quotient with flat complete intersection fibres spreading out to a finite stage of a ring direct limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.IsStandardSmooth.out\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.IsStandardSmooth.finitePresentation\", \"MvPolynomial.finitePresentation_universalFactorizationMap\"], \"digest\": \"8593cb6dfadce6b5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no syntomic or complete-intersection notion; smooth algebra, finite-presentation, colimit, and descent hits do not assert this property."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-complete-intersection-fibres-limit-descent",
@@ -83,5 +274,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-syntomic-ring-filtered-colimit-descent",
+  "worker": "stage1",
+  "summary": "Ten steps follow Stacks 0C33. Reuse the existing local syntomic presentation criterion, Noetherian coefficient approximation and finite-presentation model-isomorphism descent. Explicitly descend the unit-ideal witness, retain algebra-structure compatibility, pass to a common stage by base change, and spell out local flatness and complete-intersection fibre gluing. No new nodes, no statement change, no Lean attachment.",
+  "blueprint": "Historical auxiliary input below lem-trf-local-term-locality through the recorded alteration/nodal-chart ancestry: the 0C5F syntomic descent reduction used by 0CBY. Steps 1-4 choose and descend the principal cover, 5-8 realize 0C33 first paragraph for every chart, and 9-10 realize its final gluing sentence. The current contracting-correspondence unit and chapter records are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic tensor, localization, or affine-spectrum tool needed for the ring argument of 0C33; no result in this unit gives that algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-limit-finite-presentation-colimits",
+    "why": "Tensor pushout diagrams over the given ring colimit compute the two algebra colimits; this is a generic colimit tool, not another geometric proof route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Finite presentation survives scalar extension; the unit has no commutative-algebra base-change interface."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-ring-maps",
+    "why": "Flatness passes to the induced local ring map, for the chart criterion and the final local flatness check."
+   },
+   {
+    "node": "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "why": "Generic ring-local presentation criterion 00SY used explicitly in the prescribed source 0C33; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Generic tensor, localization, or affine-spectrum tool needed for the ring argument of 0C33; no result in this unit gives that algebraic operation."
+   },
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Only finite ring elements and one unit-ideal equation are lifted; no compactification route is used."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
+    "why": "Generic 00SU coefficient model used exactly as in 0C33 first paragraph; not a replacement of the unit geometry."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "why": "Only scalar extension of specified complete-intersection presentations, used in 0C33 itself."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-localization-away-base-change",
+    "why": "Generic tensor, localization, or affine-spectrum tool needed for the ring argument of 0C33; no result in this unit gives that algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-model-stage",
+    "why": "Generic finite-presentation comparison-isomorphism descent; accepts arbitrary initial base algebras and requires only relative finite presentation."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-flat",
+    "why": "Flatness of each specified relative global complete-intersection presentation, the chart input to the 00SO gluing step."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic tensor, localization, or affine-spectrum tool needed for the ring argument of 0C33; no result in this unit gives that algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-localization",
+    "why": "Generic identification of the local ring of a principal chart with the original local ring."
+   },
+   {
+    "node": "lem-weil-pbc-flat-map-local-criterion",
+    "why": "Generic flatness criterion over prime local rings to spell out the flatness clause of 00SO."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-limit-finite-presentation-colimits",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-finite-presentation-model-stage",
+  "lem-weil-pbc-relative-global-complete-intersection-flat",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-flat-map-local-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-ca174ff33",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-ca174ff33 (reviewer sub-agent of L); spot-checked: Pass, no fixes written; I read the item and all 24 cited node statements in full. Statement: it matches Stacks 0C33 (algebra.tex 47706) in the syntomic case, with syntomic spelled out from 00SL (line 36437) as flat, finitely presented, and every fibre ring a local complete intersection. No hypothesis is weakened; the extra 'phi finitely presented' assumption is redundant but harmless. Steps 1-10 checked against their cited statements. Step 1 needs no finite-presentation hypothesis in the colimit node, the tail is cofinal, and finite presentation comes from base change (05G5). Step 2 meets all three hypotheses of the 00SY node, with g=1. Steps 3-4: quasi-compactness gives a finite cover, and the unit-ideal relation lifts to a stage. Step 5: the 00SU subring P_a is finitely presented over Z because Z[t] is Noetherian; 00SS(a) gives the B-algebra isomorphism. Step 6: the localization presentation and its base change are correct. Step 7: every hypothesis of the existing model-stage node holds with i0:=j, and its compatibility clause makes the stage isomorphism B_k-linear; 00SS(b) then gives a relative global complete intersection. This replaces Stacks' 00QO/0C32 argument with an existing node. Step 8: base change to a common upper bound is correct. Step 9: flatness via 00SW, 00HT(6) and localization-of-localization; I checked that U equals C_i minus q. Step 10: the fibre charts become relative global complete intersections over a field, hence global complete intersections, hence the fibre is a local complete intersection. Edge cases: C=0 / empty cover, a one-element index set, non-injective transition maps, B_0 and C_0 not finitely generated. No new nodes and no duplicates (grep over the DAG for 0C33, syntomic, and colimit plus complete intersection). No SGA. Not a target node, so the base-change-morphism and coefficient-category checks do not apply. All 15 declared tool uses are generic commutative algebra and accepted. No unit or chapter change."
  }
 }

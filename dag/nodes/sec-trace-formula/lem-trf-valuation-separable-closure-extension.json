@@ -12,9 +12,95 @@
   "def-weil-field",
   "def-weil-pbc-fpqc-covering"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lemma-nagata-valuation-ring-extension] to the embedding $K\\hookrightarrow K^s$ and the valuation ring $V$. Its statement supplies a valuation ring $W\\subseteq K^s$ with fraction field $K^s$ dominating $V$, hence with $\\mathfrak m_W\\cap V=\\mathfrak m_V$. Moreover $W\\cap K=V$, either directly from its combined conclusion or by [lemma-nagata-valuation-intersection]. Set $V^s=W$. This uses the extension theorem for an arbitrary field extension, so no finiteness or perfection hypothesis is needed.",
+   "uses": [
+    "lemma-nagata-valuation-ring-extension",
+    "lemma-nagata-valuation-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IA, algebra-lemma-dominate; intersection as in Tag 052K, algebra-lemma-x-or-x-inverse-valuation-ring."
+   }
+  },
+  {
+   "text": "The extension $K^s/K$ is algebraic by hypothesis. Apply [lem-trf-valuation-algebraic-height] with $E=K^s$ and its valuation ring $W$. Its restriction is $W\\cap K=V$ by step 1, so contraction is an order isomorphism on prime ideals. It sends strictly increasing chains bijectively to strictly increasing chains. Since the primes of $V$ form a finite chain, those of $W$ do also, with exactly the same number of strict inclusions. Thus $W$ has precisely the required finite height.",
+   "uses": [
+    "lem-trf-valuation-algebraic-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, more-algebra-lemma-inequality-general, finite-extension input to the algebraic-height lemma; the order-isomorphism consequence is the statement of lem-trf-valuation-algebraic-height."
+   }
+  },
+  {
+   "text": "View $W\\subseteq K^s$ as a $V$-module by the inclusion from step 1. It is torsion free: if $0\\ne a\\in V$ and $w\\in W$ satisfy $aw=0$, the same equation holds in the field $K^s$, where $a\\ne0$, and multiplication by $a^{-1}$ gives $w=0$. By [lem-trf-valuation-torsionfree-flat] applied to the valuation ring $V$ and module $W$, the inclusion $V\\to W$ is flat.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0539, more-algebra-lemma-valuation-ring-torsion-free-flat."
+   }
+  },
+  {
+   "text": "The valuation rings $V,W$ are local rings, and the inclusion is local because it maps $\\mathfrak m_V$ into $\\mathfrak m_W$ by domination in step 1. It is flat by step 3. Therefore [lem-weil-pbc-flat-local-hom-faithfully-flat] gives faithful flatness and surjectivity of $p:\\operatorname{Spec}W\\to\\operatorname{Spec}V$. In particular tensoring is exact and detects zero modules, as required by the statement.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HR, algebra-lemma-local-flat-ff, and 00HQ, algebra-lemma-ff-rings."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-ring-map-iff-flat-affine] to the flat inclusion $V\\to W$ of step 3. This proves that its spectrum morphism $p$ is flat in the scheme-theoretic sense, not just flat on global sections.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5, morphisms-lemma-flat-characterize, (4) implies (1) on the singleton affine charts."
+   }
+  },
+  {
+   "text": "Let $U$ be any affine open of $\\operatorname{Spec}V$ and put $R=\\Gamma(U,\\mathcal O_U)$, so $U\\cong\\operatorname{Spec}R$. By [lem-weil-pbc-morphism-into-affine-scheme] the inclusion $U\\to\\operatorname{Spec}V$ corresponds to a ring map $\\rho:V\\to R$ and is $\\operatorname{Spec}\\rho$; this makes $R$ a $V$-algebra. By [lem-weil-pbc-open-preimage-fibre-product] the open subscheme $p^{-1}U$, with its inclusion and $p|_{p^{-1}U}$, is a fibre product $\\operatorname{Spec}W\\times_{\\operatorname{Spec}V}U$. By [lem-weil-pbc-fibre-product-affine-spectra] this fibre product is $\\operatorname{Spec}(W\\otimes_VR)$; so $p^{-1}U$ is affine. Surjectivity in step 4 gives $p(p^{-1}U)=U$. Thus for each affine open $U$ one affine open of the source already maps onto it; for $U=\\varnothing$ use the empty family. Together with flatness from step 5 this is exactly the covering condition of [def-weil-pbc-fpqc-covering]. This proves the singleton fpqc assertion.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1, schemes-lemma-morphism-into-affine; Tag 01JR, schemes-lemma-open-fibre-product; Tag 01I4, schemes-lemma-fibre-product-affine-schemes; Tag 022B, topologies-definition-fpqc-covering (topologies.tex)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-valuation-algebraic-height",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lemma-nagata-valuation-intersection",
+  "lemma-nagata-valuation-ring-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of Stacks 00IA/052K, the existing algebraic-height interface (finite-extension input 0ASH), 0539, 00HR/00HQ, 01U5, 01I4 and 022B; no single source asserts the assembled separable-closure/fpqc conclusion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +129,80 @@
    "results": "hits=25; top=['Mathlib/RingTheory/Valuation/DiscreteValuativeRel.lean', 'Mathlib/RingTheory/Valuation/DiscreteValuativeRel.lean', 'Mathlib/RingTheory/Valuation/DiscreteValuativeRel.lean', 'Mathlib/RingTheory/Valuation/Integers.lean', 'Mathlib/RingTheory/Valuation/Integers.lean', 'Mathlib/RingTheory/Valuation/Integers.lean', 'Mathlib/RingTheory/Valuation/ValuationRing.lean', 'Mathlib/RingTheory/Valuation/ValuationRing.lean']; note=; digest=661e659e4f964b05. The HasExtension hits assume an extension already; rank-at-most-one is not arbitrary finite rank. The flat-iff-torsion theorem is only one ingredient. None asserts the extension together with preservation of arbitrary finite height and faithful flatness.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_comap_eq|IsAlgebraic|height|FaithfullyFlat",
+   "results": "hits=8; top=['Mathlib/RingTheory/Valuation/Minpoly.lean', 'Mathlib/RingTheory/Valuation/Minpoly.lean', 'Mathlib/RingTheory/Valuation/IsTrivialOn.lean', 'Mathlib/RingTheory/Valuation/IsTrivialOn.lean', 'Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean', 'Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean', 'Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean', 'Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean']; subdirectory=RingTheory/Valuation; note=; digest=48febcd2261a6ec5. The extension-valuations hits assume compatible valuations, while arbitrary finite-height invariance is not asserted. No exact theorem or one-line specialization gives all clauses of this item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A valuation ring extends to a separable closure preserving the height and giving a faithfully flat local inclusion",
+   "results": "hits=8; top=['Valuation.HasExtension.ofComapInteger', 'Valuation.HasExtension', 'Valuation.HasExtension.instIsLocalHomValuationInteger', 'instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation', 'Valuation.HasExtension.id', 'Valuation.HasExtension.mk', 'ValuativeExtension', 'Valuation.extendToLocalization']; subdirectory=; note=; digest=018907eca05bde8e. The extension-valuations hits assume compatible valuations, while arbitrary finite-height invariance is not asserted. No exact theorem or one-line specialization gives all clauses of this item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, Algebra.IsAlgebraic",
+   "results": "hits=0; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c. The extension-valuations hits assume compatible valuations, while arbitrary finite-height invariance is not asserted. No exact theorem or one-line specialization gives all clauses of this item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic field extension admits an extension of a valuation ring of the same finite height which is faithfully flat",
+   "results": "hits=8; top=['Valuation.HasExtension.instAlgebra_valuationSubring', 'ValuationSubring.algebra', 'Valuation.HasExtension.ofComapInteger', 'Valuation.HasExtension', 'Valuation.HasExtension.instAlgebraInteger', 'Valuation.HasExtension.instLiesOverSubtypeMemValuationSubringValuationSubringMaximalIdeal', 'ValuationSubring.instAlgebraSubtypeMemValuationSubringWithZeroMultiplicativeInt', 'IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers']; subdirectory=; note=; digest=b1761787bcb62792. The extension-valuations hits assume compatible valuations, while arbitrary finite-height invariance is not asserted. No exact theorem or one-line specialization gives all clauses of this item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsValuationRing|valuationRing|torsion.*flat|flat.*torsion",
+   "results": "hits=5; top=['Mathlib/RingTheory/Flat/TorsionFree.lean', 'Mathlib/RingTheory/Flat/TorsionFree.lean', 'Mathlib/RingTheory/Flat/TorsionFree.lean', 'Mathlib/RingTheory/Flat/TorsionFree.lean', 'Mathlib/RingTheory/Flat/TorsionFree.lean']; subdirectory=RingTheory/Flat; note=; digest=a24857eab95bd868. MATCH: Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Mathlib/RingTheory/Flat/TorsionFree.lean:93--94, with the valuation-ring IsBezout instance in Mathlib/RingTheory/Valuation/ValuationRing.lean:379--386. The torsion submodule equality means exactly that no nonzero scalar kills a nonzero vector; see Submodule.isTorsionFree_iff_torsion_eq_bot at Algebra/Module/Torsion/Basic.lean:838. This is an ingredient, now cited via existing lem-trf-valuation-torsionfree-flat; it does not establish the whole item.",
+   "date": "2026-10-18",
+   "verdict": "ingredient match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a valuation domain a module is flat if and only if it is torsion free",
+   "results": "hits=8; top=['Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal', 'IsDedekindDomain.flat_iff_torsion_eq_bot', 'Module.Flat.instOfIsDedekindDomainOfIsTorsionFree', 'Module.Flat.flat_iff_torsion_eq_bot_of_isBezout', 'Module.free_iff_isTorsionFree', 'Module.Flat.of_forall_isTrivialRelation', 'Module.Flat', 'Module.Flat.iff_lift_lsmul_comp_subtype_injective']; subdirectory=; note=; digest=13aaa98f0ad27667. MATCH: Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Mathlib/RingTheory/Flat/TorsionFree.lean:93--94, with the valuation-ring IsBezout instance in Mathlib/RingTheory/Valuation/ValuationRing.lean:379--386. The torsion submodule equality means exactly that no nonzero scalar kills a nonzero vector; see Submodule.isTorsionFree_iff_torsion_eq_bot at Algebra/Module/Torsion/Basic.lean:838. This is an ingredient, now cited via existing lem-trf-valuation-torsionfree-flat; it does not establish the whole item.",
+   "date": "2026-10-18",
+   "verdict": "ingredient match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsion-free module over any valuation ring is flat",
+   "results": "hits=8; top=['Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal', 'Module.Flat.instOfIsDedekindDomainOfIsTorsionFree', 'Module.Flat.flat_iff_torsion_eq_bot_of_isBezout', 'IsDedekindDomain.flat_iff_torsion_eq_bot', 'Valuation.HasExtension.instIsTorsionFreeInteger', 'Module.Flat.self', 'Module.Flat.torsion_eq_bot', 'Module.FaithfullyFlat.self']; subdirectory=; note=; digest=4ebbb72f39390431. MATCH: Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Mathlib/RingTheory/Flat/TorsionFree.lean:93--94, with the valuation-ring IsBezout instance in Mathlib/RingTheory/Valuation/ValuationRing.lean:379--386. The torsion submodule equality means exactly that no nonzero scalar kills a nonzero vector; see Submodule.isTorsionFree_iff_torsion_eq_bot at Algebra/Module/Torsion/Basic.lean:838. This is an ingredient, now cited via existing lem-trf-valuation-torsionfree-flat; it does not establish the whole item.",
+   "date": "2026-10-18",
+   "verdict": "ingredient match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_iff_torsion_eq_bot_of_isBezout|flat_iff_torsion_eq_bot_of_valuationRing|instance.*[Bb]ezout|isBezout",
+   "results": "hits=25; top=['Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/PrincipalIdealDomain.lean', 'Mathlib/RingTheory/PrincipalIdealDomain.lean', 'Mathlib/RingTheory/PrincipalIdealDomain.lean']; subdirectory=RingTheory; note=; digest=0a943f35e2e7f152. MATCH: Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Mathlib/RingTheory/Flat/TorsionFree.lean:93--94, with the valuation-ring IsBezout instance in Mathlib/RingTheory/Valuation/ValuationRing.lean:379--386. The torsion submodule equality means exactly that no nonzero scalar kills a nonzero vector; see Submodule.isTorsionFree_iff_torsion_eq_bot at Algebra/Module/Torsion/Basic.lean:838. This is an ingredient, now cited via existing lem-trf-valuation-torsionfree-flat; it does not establish the whole item.",
+   "date": "2026-10-18",
+   "verdict": "ingredient match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every module with no nonzero element killed by a nonzero scalar is flat over a valuation domain or Bezout domain",
+   "results": "hits=8; top=['Module.Flat.flat_iff_torsion_eq_bot_of_isBezout', 'Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal', 'Module.Flat.instOfIsDedekindDomainOfIsTorsionFree', 'IsDedekindDomain.flat_iff_torsion_eq_bot', 'Module.FaithfullyFlat', 'Module.Flat.torsion_eq_bot', 'Module.Flat.of_forall_exists_factorization', 'Module.Flat.tfae_equational_criterion']; subdirectory=; note=; digest=14066d274b45ab15. MATCH: Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Mathlib/RingTheory/Flat/TorsionFree.lean:93--94, with the valuation-ring IsBezout instance in Mathlib/RingTheory/Valuation/ValuationRing.lean:379--386. The torsion submodule equality means exactly that no nonzero scalar kills a nonzero vector; see Submodule.isTorsionFree_iff_torsion_eq_bot at Algebra/Module/Torsion/Basic.lean:838. This is an ingredient, now cited via existing lem-trf-valuation-torsionfree-flat; it does not establish the whole item.",
+   "date": "2026-10-18",
+   "verdict": "ingredient match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, IsBezout",
+   "results": "hits=4; top=['ValuationRing.instIsBezout', 'ValuationRing.instOfIsLocalRingOfIsBezout', 'ValuationRing.iff_local_bezout_domain', 'ValuationRing.TFAE']; digest=bef415b5551592d3. ValuationRing.instIsBezout is the instance read at Valuation/ValuationRing.lean:379--386 and removes the extra Bezout hypothesis of flat_iff_torsion_eq_bot_of_isBezout. This is an ingredient, now cited via existing lem-trf-valuation-torsionfree-flat; it does not establish the whole item.",
+   "date": "2026-10-18",
+   "verdict": "ingredient match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-semistable-dominates-stable",
@@ -74,5 +230,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-separable-closure-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps assemble the existing dominating valuation extension, algebraic-height node, valuation-module flatness Mathlib leaf, flat-local-hom faithful-flatness criterion, and affine fpqc verification. Zero new nodes. The first dry run detected the newly synchronized Q33 valuation-module flatness leaf; the draft duplicate was removed and its exact existing statement is now cited. All hypotheses, zero-height and nondiscrete cases checked.",
+  "blueprint": "Historical semistable-alteration/nearby-cycle branch of lem-trf-local-term-locality proof (1)--(2), via the inherited chain, specifically the separable-closure base change of lem-trf-valuation-semistable-dominates-stable step 4. The current ancestor proof quotes Varshavsky and does not itself state this valuation-theoretic lemma. This split realizes the auxiliary base-change input and changes no unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-valuation-ring-extension",
+    "why": "Generic extension of a valuation ring along K to K^s; no node of sk-i-curve-zero supplies the extension. The existing project declaration is closed."
+   },
+   {
+    "node": "lemma-nagata-valuation-intersection",
+    "why": "Generic intersection theorem for a dominating valuation ring, also Lean-closed; used only to identify W cap K with V."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-valuation-ring-extension",
+  "lemma-nagata-valuation-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-a360d4bec",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-a360d4bec (reviewer sub-agent of L); spot-checked: I read the item and all eight cited statements in full and checked the sources: Stacks 00IA (algebra.tex:11750), 052K, 0ASH (more-algebra.tex:37334; only the finite-extension inequality), 0539 (more-algebra.tex:4925), 00HR (algebra.tex:9184), 01U5, 01I4 and 022B. The statement is unchanged and true. I tested height 0, K already separably closed, and nondiscrete rank 1, and confirmed that the domination clause is needed for faithful flatness. Step by step: step 1 gives the dominating extension and W∩K=V from the Nagata nodes; I accept both declared tool_uses, since these are Lean-closed generic tools that no node of sk-i-curve-zero supplies. Step 2 applies algebraic-height with E=K^s algebraic and A=W∩K=V; there is no cycle. Step 3 shows W is torsion-free inside the field K^s, so it is flat by the 0539 leaf. Step 4 gets faithful flatness and surjective Spec from flatness plus the local inclusion. Step 5 is the Spec-flatness equivalence. Step 6 used two facts with no cited node (C1): the open preimage is a fibre product (01JR) and the affine open U is Spec of a V-algebra (01I1). FIX: step 6 now cites the existing leaves lem-weil-pbc-open-preimage-fibre-product and lem-weil-pbc-morphism-into-affine-scheme, and proof_deps and the step source were updated to match. The delivery has no new nodes and so no duplicates or restated clauses, keeps the unit/chapter route unchanged, and uses no SGA.; 1 file(s) fixed by the reviewer"
  }
 }

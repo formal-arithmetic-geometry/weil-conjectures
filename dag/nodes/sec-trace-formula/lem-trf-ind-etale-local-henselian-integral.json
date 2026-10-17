@@ -12,11 +12,104 @@
   "def-weil-pbc-ind-etale-algebra"
  ],
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=A^h_{\\mathfrak p}$ and let $\\eta:A\\to H$ be the structural map. The contraction $\\mathfrak p=f^{-1}(\\mathfrak m_D)$ is prime. If $s\\notin\\mathfrak p$, then $f(s)\\notin\\mathfrak m_D$, so $f(s)$ is a unit in the local ring $D$. Thus the formula $a/s\\mapsto f(a)f(s)^{-1}$ gives the unique map $A_{\\mathfrak p}\\to D$ extending $f$, and its inverse image of $\\mathfrak m_D$ is $\\mathfrak pA_{\\mathfrak p}$. It is a local map. By the initial property of the henselization specified in the statement, this local map extends uniquely to a local homomorphism $h:H\\to D$. In particular $h\\eta=f$ and $h^{-1}(\\mathfrak m_D)=\\mathfrak m_H$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO and 07BH (fractions and local rings); henselization universal local-map convention in the item, compatible with Tags 04GN and 04GQ. This step applies that defining universal property."
+   }
+  },
+  {
+   "text": "Choose a small filtered presentation $D\\cong\\varinjlim_i E_i$ by etale $A$-algebras with coprojections $u_i:E_i\\to D$, as supplied by the definition of ind-etale. Fix an arbitrary $d\\in D$. The element-representative assertion for filtered colimits of commutative algebras gives an index $i$ and $e\\in E_i$ such that $u_i(e)=d$. The presentation is a colimit in commutative $A$-algebras, exactly the category to which that assertion applies; no injectivity of the maps $u_i$ or of the transition maps is assumed.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00D6 (lemma-directed-colimit), ring/algebra elementwise model; Categories Tag 04AX for a filtered indexing category. Expansion of the sentence between Huebner--Schmidt Theorems 6.3 and 6.4."
+   }
+  },
+  {
+   "text": "Set $C=H\\otimes_A E_i$. The formula $g(x\\otimes y)=h(x)u_i(y)$ defines an $H$-algebra map $g:C\\to D$, since $h\\eta=f$. In particular $g(1\\otimes e)=d$. Etale base change, applied to $A\\to E_i$ and $\\eta:A\\to H$, shows that $H\\to C$ is etale. The etale quasi-finiteness theorem therefore says both that $C$ is a finitely generated $H$-algebra and that $H\\to C$ is quasi-finite at every prime of $C$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-ring-map-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2 (lemma-etale), base-change clause (3) in the local source; Tag 00U5 (lemma-etale-quasi-finite)."
+   }
+  },
+  {
+   "text": "Apply the henselian finite-type product decomposition to the henselian local ring $H$ and its finite-type algebra $C$. It gives an $H$-algebra isomorphism $C\\cong F_1\\times\\cdots\\times F_n\\times B$, where each $F_j$ is local and finite as an $H$-module, and $H\\to B$ is not quasi-finite at any prime over $\\mathfrak m_H$. Here $n=0$ and $B=0$ are allowed. Retain $g$ as a map out of this product via the displayed isomorphism.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-type-product-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GJ (lemma-mop-up), applied with R=H and S=C."
+   }
+  },
+  {
+   "text": "Write $e_1,\\ldots,e_n,e_B$ for the coordinate idempotents of this finite product, which are pairwise orthogonal and sum to $1$. Every idempotent $a$ of a local ring is $0$ or $1$: one of $a,1-a$ is a unit, and $a(1-a)=0$. Consequently exactly one of $g(e_1),\\ldots,g(e_n),g(e_B)$ is $1$ and all the others are $0$. Indeed their sum is $1$ and orthogonality excludes two values equal to $1$ in the nonzero local ring $D$. If $e_*$ is the selected idempotent, then $g(z)=g(e_*z)$ for every $z\\in C$. Thus $g$ factors as the projection to the selected factor followed by an $H$-algebra map from that factor to $D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GJ product decomposition, elementary coordinate-idempotent argument for a map to a local ring."
+   }
+  },
+  {
+   "text": "The selected factor cannot be $B$. Otherwise write $g=v\\circ\\operatorname{pr}_B$ and put $\\mathfrak q=v^{-1}(\\mathfrak m_D)$. This is a prime of $B$ over $\\mathfrak m_H$ because $v$ extends the local map $h$. Let $k=H/\\mathfrak m_H$ and $\\mathfrak Q=g^{-1}(\\mathfrak m_D)$. In the fibre over $\\mathfrak m_H$, the primes belonging to the $B$ factor form the basic open $D(e_B)$: localizing the product at $e_B$ kills every other factor and gives $B\\otimes_H k$. Under this identification the fibre primes associated with $\\mathfrak Q$ and $\\mathfrak q$ agree. Quasi-finiteness of $H\\to C$ at $\\mathfrak Q$ says that this point is isolated in the full fibre spectrum. Restrict its open singleton to $D(e_B)$; it remains an open singleton in $\\operatorname{Spec}(B\\otimes_H k)$. By the definition of quasi-finite at a prime, $H\\to B$ is quasi-finite at $\\mathfrak q$, contradicting step 4. The finite-type hypothesis here holds because the product projection $C\\to B$ is surjective, so the images of generators of $C$ generate $B$.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PL (definition-quasi-finite), isolated-point-of-fibre definition; Tag 04GJ residual-factor condition. The fibre identification is the explicit localization at the coordinate idempotent."
+   }
+  },
+  {
+   "text": "Hence the selected factor is some $F_j$, with $g=v\\circ\\operatorname{pr}_j$. Let $e_j$ now denote the image of $1\\otimes e$ in $F_j$. Since $F_j$ is a finite $H$-module, the finite-algebra integrality theorem provides a monic polynomial $P(T)=T^r+\\sum_{a<r}c_aT^a\\in H[T]$ such that $P(e_j)=0$. Apply the $H$-algebra map $v:F_j\\to D$ to this equality. As $v(e_j)=d$, the resulting equality is $d^r+\\sum_{a<r}h(c_a)d^a=0$. Thus $d$ is integral over $H$ via the canonical local map $h$. Since $d$ was arbitrary, $D$ is integral over $A^h_{\\mathfrak p}$, as required.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK (lemma-finite-is-integral); elementary application of the H-algebra map to the monic equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expansion of the unproved sentence between Theorems 6.3 and 6.4 of Huebner--Schmidt, printed p. 13 (online PDF read); finite-part route using Tags 00U2, 00U5, 04GJ, 00PL and 00GK. The universal local-map characterization of henselization is already explicit in the statement."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-artin-henselian-tensor-residue-dichotomy",
@@ -53,6 +146,34 @@
    "results": "[grep] OK 0 hit(s): none. HenselianLocalRing and etale-locus/localization results do not give integrality of arbitrary local henselian ind-etale algebras over the base henselization.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local henselian ind etale algebra is integral over the henselization of the base at the contracted maximal ideal",
+   "results": "Actual search: 8 hits; Algebra.IsStandardEtale, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.IsStandardEtale.of_isLocalizationAway, Algebra.FormallyEtale.localization_base.  Checked Henselian.lean and Etale/Basic.lean: henselian predicates and etale stability do not state integrality over an ordinary henselization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli[sz]ation|[Ii]ndEtale.*[Ii]ntegral|[Ii]ntegral.*[Ii]ndEtale",
+   "results": "Actual search: 0 hits; .  Checked Henselian.lean and Etale/Basic.lean: henselian predicates and etale stability do not state integrality over an ordinary henselization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian local ind etale algebras are integral over the henselization of the base local ring",
+   "results": "Actual search: 8 hits; HenselianLocalRing, HenselianLocalRing.TFAE, HenselianLocalRing.is_henselian, HenselianRing.casesOn, HenselianRing, HenselianRing.is_henselian, HenselianRing.recOn, HenselianLocalRing.casesOn.  Checked Henselian.lean and Etale/Basic.lean: henselian predicates and etale stability do not state integrality over an ordinary henselization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.IsIntegral",
+   "results": "Actual search: 0 hits; .  Checked Henselian.lean and Etale/Basic.lean: henselian predicates and etale stability do not state integrality over an ordinary henselization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -72,5 +193,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ind-etale-local-henselian-integral",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the local henselian ind-etale integrality sentence through elementwise filtered-colimit representatives, etale base change to the ordinary henselization, the existing henselian finite-type product decomposition, and the explicit local-idempotent selection and residual-factor exclusion. All non-elementary inputs reuse existing nodes; no new nodes. Mathlib/project attachment searches do not state this theorem.",
+  "blueprint": "The normal-cone specialization proof of lem-trf-local-term-locality, through its strict-local nearby-cycle cohomological input and Artin joins: this item supplies the local henselian ind-etale reduction from Huebner--Schmidt Theorem 6.4 to Theorem 6.3, as recorded by the existing blueprint.from ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "Generic algebraic quasi-finiteness theorem used after etale base change; the local-term unit contains no ring-theoretic substitute."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "why": "Generic henselian finite-type algebra decomposition needed to identify the finite factor selected by a map to a local ring; this is a tool below the fixed normal-cone/Artin input route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-28cf732ad",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-28cf732ad (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, plus the statement of every cited node. I checked the Stacks places (algebra.tex 04GJ lemma-mop-up l.42418, 00U5 l.39456, 00U2, 00GK, 00PL, 00D6, 04GN l.42971 and 04GQ l.43125) and Hübner–Schmidt p.13 from the public PDF. That paper is not under literature/ and is WANTED in the report. Its sentence reads: 'If A→B is ind-étale with B local, henselian, then B is an integral A^h_p-algebra for some prime ideal p ⊂ A.' The item states exactly this, with p = f^{-1}(m_D) and the canonical local map made explicit. It uses ordinary henselization, defined inline by the initial local-map property, which agrees with 04GN/04GQ. Nothing is weakened and no hypothesis is added. Steps: (1) local A_p→D, then the universal property gives h; (2) a representative d = u_i(e) from the elementwise filtered-colimit node; (3) étale base change to H⊗_A E_i, then 00U5 gives finite type and quasi-finite; (4) 04GJ decomposition over the henselian H; (5) the local ring D selects one coordinate idempotent; (6) the B factor is excluded because Spec(B⊗k) = D(e_B) is clopen in the fibre, so quasi-finiteness at Q gives quasi-finiteness at q, against step 4; (7) a finite factor is integral (00GK), and the monic equation is pushed through v. All hypotheses hold where they are used. Small cases tested: fields, Z_(p)^h, Z_(p)^sh, Q over Z. There are no new nodes. The grep found no duplicate, and the parent and lem-trf-artin-join-theorem-6-3 use the conclusion in exactly this form. I accept both declared tool_uses (00U5 and 04GJ ring-theory nodes) as generic black boxes. No SGA source is used. This is not a target node, so no base-change or coefficient comparison applies. No fixes were made. review.md written."
  }
 }
