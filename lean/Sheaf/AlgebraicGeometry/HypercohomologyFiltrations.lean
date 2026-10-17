@@ -268,7 +268,19 @@ theorem hypercohomology_maps_exact :
 Source: blueprint order 1315; Stacks Tags 0DDE, 015J
 (blueprint: def-weil-pbc-hypercohomology-filtrations). -/
 noncomputable def hypercohomologyCouple : BigradedExactCouple B 0 := by
-  sorry
+  obtain ⟨h₁, h₂, h₃, h₄, h₅, h₆⟩ := hypercohomology_maps_exact F K
+  exact
+    { D := hypercohomologyD F K
+      E := hypercohomologyE F K
+      alpha := hypercohomologyAlpha F K
+      f := hypercohomologyBoundary F K
+      g := hypercohomologyG F K
+      alpha_f_zero := h₁
+      f_g_zero := h₂
+      g_alpha_zero := h₃
+      exact_alpha := h₄
+      exact_f := h₅
+      exact_g := h₆ }
 
 /-- The canonical map from a truncation to the abutment in total degree n.
 Source: blueprint order 1315; Stacks Tags 0DDE, 015J
@@ -434,21 +446,6 @@ private theorem inverse_square {V W V' W' : A} (a : V ⟶ W) (b : V' ⟶ W')
 
 omit [HasDerivedCategory A] in
 set_option backward.isDefEq.respectTransparency false in
-private theorem couple_iso_pages (X Y : BigradedExactCouple A 0)
-    (eD : ∀ p q : ℤ, X.D p q ≅ Y.D p q)
-    (eE : ∀ p q : ℤ, X.E p q ≅ Y.E p q)
-    (ha : ∀ p q, X.alpha p q ≫ (eD (p - 1) (q + 1)).hom =
-      (eD p q).hom ≫ Y.alpha p q)
-    (hf : ∀ p q, X.f p q ≫ (eD (p + 2) (q - 1)).hom =
-      (eE p q).hom ≫ Y.f p q)
-    (hg : ∀ p q, X.initialG p q ≫ (eE p q).hom =
-      (eD p q).hom ≫ Y.initialG p q) :
-    ∃ e : ∀ r p q, (X.pageCouple r).E p q ≅ (Y.pageCouple r).E p q,
-      (∀ p q, e 0 p q = eE p q) ∧
-      (∀ r p q, (X.pageCouple r).d p q ≫ (e r (p + 2 + r) (q - 1 - r)).hom =
-        (e r p q).hom ≫ (Y.pageCouple r).d p q) := by
-  sorry
-
 omit [Abelian A] [HasDerivedCategory A] in
 private theorem change_source_square {V W V' W' V'' W'' : A}
     (a : V ⟶ W) (b : V' ⟶ W') (c : V'' ⟶ W'')
@@ -459,27 +456,6 @@ private theorem change_source_square {V W V' W' V'' W'' : A}
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
   rw [← Category.assoc, ← h]
   simpa only [Category.assoc, Iso.hom_inv_id_assoc] using k
-
-omit [HasDerivedCategory A] [HasDerivedCategory B] in
-set_option backward.isDefEq.respectTransparency false in
-private theorem exact_couple_pages (Φ : A ⥤ B) [Φ.Additive]
-    [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]
-    (X : BigradedExactCouple A 0) (Y : BigradedExactCouple B 0)
-    (eD : ∀ p q : ℤ, Φ.obj (X.D p q) ≅ Y.D p q)
-    (eE : ∀ p q : ℤ, Φ.obj (X.E p q) ≅ Y.E p q)
-    (ha : ∀ p q, Φ.map (X.alpha p q) ≫ (eD (p - 1) (q + 1)).hom =
-      (eD p q).hom ≫ Y.alpha p q)
-    (hf : ∀ p q, Φ.map (X.f p q) ≫ (eD (p + 2) (q - 1)).hom =
-      (eE p q).hom ≫ Y.f p q)
-    (hg : ∀ p q, Φ.map (X.initialG p q) ≫ (eE p q).hom =
-      (eD p q).hom ≫ Y.initialG p q) :
-    ∃ e : ∀ r p q, Φ.obj ((X.pageCouple r).E p q) ≅ (Y.pageCouple r).E p q,
-      (∀ p q, e 0 p q = eE p q) ∧
-      (∀ r p q, Φ.map ((X.pageCouple r).d p q) ≫
-        (e r (p + 2 + r) (q - 1 - r)).hom =
-          (e r p q).hom ≫ (Y.pageCouple r).d p q) := by
-  sorry
-
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exact_boundary_naturality (G : A ⥤ B) [G.Additive]
