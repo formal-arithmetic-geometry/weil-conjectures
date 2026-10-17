@@ -278,5 +278,26 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-d03ec2dcb (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the 5 cited node statements, the parent's citing step, and HTT (online PDF, fetched to /tmp; not in literature/): Def A.1.5.1, Rem A.1.5.3, Lem A.1.5.6, and Lem A.1.5.11 with its whole proof, pp. 799-800 and 806-807. The statement agrees with A.1.5.11. HTT's 'X is kappa-compact' is a misprint for X_0. Two hypotheses are added: uncountable tau (harmless; the parent supplies it) and presentable L-targets, which are used only in Step 7 to prove N presentable. Steps 1-6 follow HTT's recursion: Step 1 is Rem A.1.5.3 made explicit, Step 2 reindexes to a tau-filtered poset with a tail-colimit check, Step 3 sets up the exhaustion and invariant (a)-(c), Step 4 factors the attaching map through a stage using presentability of P_t and clause (1) of 04AX, Step 5 builds the successor pushout with explicit leg compatibility, and Step 6 glues at limits with an upper bound since lambda<tau. Step 7 proves presentability by induction, with the root adjoined and fewer than tau arrows (the Mathlib isCardinalPresentable_of_isColimit leaf). Step 8 is A.1.5.6, via the tree node's transition clause for the empty set inside T. Edge cases checked: empty T, a single cell in Set with non-presentable Z and a non-injective cell, and incomparable cells. There are no new nodes and no cycle; every cited statement is same-unit or a definition/Mathlib leaf. Tool use lem-weil-pbc-filtered-colimit-sets-elementwise is accepted. lem-coef-cellular-tree-presentable-approximations (Q11, unsplit) is a stronger filtered-family version, not a duplicate; its future split should cite this item. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-891e560b6",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Every clause of smallCellularTree_descent matches the node: regular uncountable κ, IsCardinalLocallyPresentable, L with both endpoints presentable, arbitrary root Z, CellularTree on T with |T|<κ; conclusions: presentable M and N=(colimit small.diagram).right, tree on the same T, vertexwise IsPushout via α, cell isomorphisms intertwining target and attaching maps, canonical total pushout via rootChangeMap, least-class weak-saturation clause as in the dependency. No extra assumptions, universes bound, edge cases (empty T, empty L, non-presentable Z) covered. rootChangeMap is a real canonical helper with docstrings and is listed in lean.declarations. Node differs from base only in lean; lean.statement matches the file byte for byte; stmt_deps unchanged. Sole proof is sorry; 8-step proof plan present; real worker and Q63 second-reading report sections. nt_compile.py --json on the snapshot file against the local side overlay: rc=0, no errors or warnings. HTT not archived; source checked against the node and the recorded A.1.5.11 readings. No findings beyond a wording nit about the sorry warning."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallCellularTreeDescent",
+  "declaration": "CategoryTheory.smallCellularTree_descent",
+  "file": "lean/Sheaf/CategoryTheory/SmallCellularTreeDescent.lean",
+  "statement": "theorem smallCellularTree_descent {A : Type u} [Category.{v} A] (κ : Cardinal.{v}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) [IsCardinalLocallyPresentable A κ] (L : MorphismProperty A) (hL : ∀ ⦃P Q : A⦄ (i : P ⟶ Q), L i → IsCardinalPresentable P κ ∧ IsCardinalPresentable Q κ) (Z : A) (T : Type v) [PartialOrder T] [WellFoundedLT T] (tree : CellularTree L Z T) (hT : HasCardinalLT T κ) : ∃ (M : A) (f : M ⟶ Z) (small : CellularTree L M T) (α : small.diagram ⟶ tree.diagram ⋙ Under.map f), IsCardinalPresentable M κ ∧ IsCardinalPresentable (colimit small.diagram).right κ ∧ (∀ t : T, IsPushout (small.diagram.obj t).hom f (α.app t).right (tree.diagram.obj t).hom) ∧ (∀ t : T, ∃ e : Arrow.mk (small.cell t) ≅ Arrow.mk (tree.cell t), e.hom.right ≫ tree.targetMap t = small.targetMap t ≫ (α.app t).right ∧ e.hom.left ≫ tree.attach t = small.attach t ≫ (CellularTree.rootChangeMap f (Functor.whiskerLeft (Subtype.mono_coe (Set.Iio t)).functor α)).right) ∧ IsPushout (colimit small.diagram).hom f (CellularTree.rootChangeMap f α).right (colimit tree.diagram).hom ∧ (∀ W : MorphismProperty A, L ≤ W → MorphismProperty.isomorphisms A ≤ W → W.IsStableUnderCobaseChange → W.IsStableUnderTransfiniteComposition.{v} → W.IsStableUnderRetracts → W (colimit small.diagram).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.CellularTree.rootChangeMap"
+  ]
  }
 }

@@ -30,7 +30,8 @@
   "lem-coef-joyal-model-structure",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-segal-dk-diagonal-equivalence",
-  "lem-coef-simplicial-model-nerve-localization"
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-coef-segal-space"
  ],
  "proof": [],
  "proof_deps": [],
@@ -100,5 +101,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f6d2e7c4",
+  "group": "NH",
+  "result": "pass",
+  "note": "Delivery changes only the item node's lean record plus stmt_deps (adds the landed def-coef-segal-space) and the new module RezkLocalModel.lean. Statement verbatim, no statement_change. Checked every clause: ModelCategory on SimplexCategoryᵒᵖ⥤SSet with vertical-first storage (uncurry∘flip gives the outer-first SegalSpace.Space convention); cofibrations iff Mono; fibrant iff SegalSpace.IsComplete (Reedy matching against J.rlp for all n including 0; strict Segal maps equivalent to homotopy Segal for Reedy-fibrant objects; equivalence components; actual s0); weak equivalences iff the native vertical enrichment eHomWhiskerRight is a weak homotopy equivalence for every complete Z; both functorial factorizations; tensor/cotensor plus SatisfiesSM7; LocalizationClause with q normalized by IsOrdinaryNerveMap and Q an IsLocalization at M's W into the M-independent completeSegalObjects subcomplex, restricting to the objectwise comparison; box/boxMap/boxPushout canonical; Mono i/j as Joyal/Kan cofibrations; acyclicity via the exact Joyal (v=0) and Kan tests. Edge cases (empty, terminal, identity, n=0, any universe u) covered. No hollow definitions; the only sorry is the main theorem; docstrings carry source and blueprint; no other complete-Segal-object notion in the project. nt_compile --json on the snapshot module: clean, 1.5 s, rc 0, no diagnostics."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RezkLocalModel",
+  "declaration": "SSet.RezkLocalModel.exists_rezk_model_structure",
+  "declarations": [
+   "SSet.RezkLocalModel.Bisimplicial",
+   "SSet.RezkLocalModel.box",
+   "SSet.RezkLocalModel.boxMap",
+   "SSet.RezkLocalModel.boxPushout",
+   "SSet.RezkLocalModel.Spaces",
+   "SSet.RezkLocalModel.Presheaves",
+   "SSet.RezkLocalModel.completeSegalObjects",
+   "SSet.RezkLocalModel.Complete",
+   "SSet.RezkLocalModel.objectwise",
+   "SSet.RezkLocalModel.LocalizationClause",
+   "SSet.RezkLocalModel.SimplicialClause",
+   "SSet.RezkLocalModel.exists_rezk_model_structure"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RezkLocalModel.lean",
+  "statement": "theorem exists_rezk_model_structure : ∃ M : ModelCategory Bisimplicial.{u}, (∀ {A B : Bisimplicial.{u}} (f : A ⟶ B), M.categoryWithCofibrations.cofibrations f ↔ Mono f) ∧ (∀ X : Bisimplicial.{u}, M.categoryWithFibrations.fibrations (terminal.from X) ↔ CategoryTheory.SegalSpace.IsComplete (Functor.uncurry.obj X.flip)) ∧ (∀ {A B : Bisimplicial.{u}} (f : A ⟶ B), M.categoryWithWeakEquivalences.weakEquivalences f ↔ ∀ Z : Bisimplicial.{u}, CategoryTheory.SegalSpace.IsComplete (Functor.uncurry.obj Z.flip) → Enhanced.IsWeakHomotopyEquivalence (eHomWhiskerRight SSet f Z)) ∧ MorphismProperty.HasFunctorialFactorization M.categoryWithCofibrations.cofibrations (M.categoryWithFibrations.fibrations ⊓ M.categoryWithWeakEquivalences.weakEquivalences) ∧ MorphismProperty.HasFunctorialFactorization (M.categoryWithCofibrations.cofibrations ⊓ M.categoryWithWeakEquivalences.weakEquivalences) M.categoryWithFibrations.fibrations ∧ SimplicialClause M ∧ LocalizationClause M.categoryWithWeakEquivalences.weakEquivalences ∧ (∀ {A A' B B' : SSet.{u}} (i : A ⟶ A') (j : B ⟶ B'), Mono i → Mono j → M.categoryWithCofibrations.cofibrations (boxPushout i j) ∧ (((∀ C : SSet.{u}, C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre i).app C)).toFunctor).IsEquivalence) ∨ Enhanced.IsWeakHomotopyEquivalence j) → M.categoryWithWeakEquivalences.weakEquivalences (boxPushout i j)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Vertical-first storage uses Mathlib's native simplicial-object enrichment in the correct direction; flip/uncurry give the recorded outer-first Segal-space definitions. Added landed def-coef-segal-space instead of copying Reedy fibrancy, equivalence components or completeness. The full coherent presheaf subcategory is presented by strict complete Segal representatives and saturated under equivalence independently of the Rezk weak-equivalence class. The localization map is normalized on the entire ordinary nerve of the fibrant objects. All helpers are explicit constructions for this node; only the main theorem is postponed."
  }
 }
