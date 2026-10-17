@@ -3980,6 +3980,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.IntegralVerdier
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
