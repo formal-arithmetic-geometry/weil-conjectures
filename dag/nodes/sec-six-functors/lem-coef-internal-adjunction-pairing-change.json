@@ -22,7 +22,8 @@
   "lem-coef-etale-open-tensor",
   "lem-coef-finite-direct-image",
   "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-asd-internal-adjunction-evaluation"
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-coef-etale-hom-thick-locus"
  ],
  "proof": [
   {
@@ -222,5 +223,42 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-5fe85b61c (reviewer sub-agent of L); spot-checked: Read in full: the item, the source paragraph 4 of thm-coef-finite-hom, the four cited nodes, lem-coef-etale-locally-closed-shriek (which defines q_s and b_s), lem-amb-proper-coproducts-projection, the parent's steps 7-8 and the unit route. The statement is true and well-typed in the ordinary étale categories with A=O_E/ϖ^n → B=O_E/ϖ^m, and is unchanged. Edge cases checked: m=n, S=Z, L=0. No new nodes and no duplicates. Three repairable faults, corrected in fixes/dag/nodes/sec-six-functors/lem-coef-internal-adjunction-pairing-change.json. (1) E4: step 2 used c_{g,Q}, but Q lives on S. The proper projection pushes j_!L, so the comparison is c_{g,j_!L}, the first factor of q_{s,L}. I rewrote the step with an explicit B-transpose calculation of both routes. (2) C/E5: the counit square α_B∘s^*c_{s,Q}=F_S(α_A) and the naturality of q_s were hidden inside 'projection' in steps 3 and 6. Step 3 now states the pure projection square for every T. Step 6 now computes the transpose p of h through lem-asd-internal-adjunction-evaluation, uses the definition of c (lem-coef-finite-direct-image) and the naturality of q_s (lem-coef-etale-locally-closed-shriek, same unit, reviewed, no cycle), then the b-hypothesis. Step 7 is made explicit. (3) The split_report summary was stale and the tool_uses were undeclared. Accepted tool_uses: lem-sfb-dc-hom-scalar-adjunction and lem-asd-internal-adjunction-evaluation, as generic transpose and evaluation tools already accepted on sibling nodes of this unit. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalAdjunctionPairingChange",
+  "declaration": "AlgebraicGeometry.Etale.CoefficientPairingChange.internalAdjunction_pairing_change",
+  "declarations": [
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.shriek",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.star",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.exceptional",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.counit",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.ordinaryCounit",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.projection",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.internalAdjunction",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.compactComparison",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.ordinaryComparison",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.evaluationComparison",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.CounitCompatible",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.PairingChangeEquation",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.coefficient",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.coefficientFinite",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.reduction",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.internalAdjunction_pairing_change"
+  ],
+  "file": "lean/Sheaf/Paper/InternalAdjunctionPairingChange.lean",
+  "statement": "theorem internalAdjunction_pairing_change (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n m : ℕ+) (hmn : m ≤ n) {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] {S Z : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g] (j : S ⟶ Z) [IsOpenImmersion j] (M : DerivedCategoryModule (coefficient l E n) X) (L : DerivedCategoryModule (coefficient l E n) S) (_hM : WeilConjectures.finiteTorConstructibleEtale l E n n.property X M) (_hL : WeilConjectures.finiteTorConstructibleEtale l E n n.property S L) (_hN : WeilConjectures.finiteTorConstructibleEtale l E n n.property S ((exceptional (coefficient l E n) g j).obj M)) (_hQ : WeilConjectures.finiteTorConstructibleEtale l E n n.property S (((derivedHom (ModuleCat (coefficient l E n)) S).obj (op L)).obj ((exceptional (coefficient l E n) g j).obj M))) (b : (scalarExtension (reduction l E n m hmn) S).obj ((exceptional (coefficient l E n) g j).obj M) ≅ (exceptional (coefficient l E m) g j).obj ((scalarExtension (reduction l E n m hmn) X).obj M)) (_hb : CounitCompatible (reduction l E n m hmn) g j M b) : PairingChangeEquation (reduction l E n m hmn) g j L M b",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical open/closed operations are expanded in helpers: ordinary direct image is Rg_* Rj_* through the canonical composition identification. The internal-adjunction arrow is constructed by transposing the specified proper/open projection, ordinary counit, evaluation and pasted exceptional counit. Evaluation comparison uses the published normalized etaleHomTensorComparison; b is an isomorphism subject exactly to the displayed exceptional-counit hypothesis. No invertibility of the Hom comparison is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-24a2ff495",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source, Lean modules, docstrings, edge cases, route-pivot compliance, report sections, scompile evidence, and deliver2 dry run; no substantive or mechanical faults found.; reverted the delivery's change of existing node(s) def-weil-pbc-constructible-complexes (--revert-nodes; kept as on newtargets-dag)"
  }
 }

@@ -151,5 +151,37 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-c6603cec1 (reviewer sub-agent of L); spot-checked: I read Stacks Curves 0C4D (lemma-nodal) in full and Algebra 090W (lemma-characterize-separable-algebraic-field-extensions). I checked Mathlib Unramified/Field.lean:44 (of_isSeparable) and Unramified/Basic.lean:58-61 (the FormallyUnramified class field Subsingleton Ω). The item's statement is true and unchanged, and both steps of the citer lem-trf-separable-closed-point-formal-presentation can use it. Separability is needed: for F=k(a^{1/p}), Ω_{A/k}⊗Â gets an extra generator. I tested the statement on n=0, on k[x]_(x), on F[[t]]/(t) and on the node xy. All three new nodes are true and are in the item's unit, they are not duplicates (I grepped dag/nodes for separable-differential and continuous-differential nodes), and neither unsplit node restates the item. There is no cycle, no SGA citation and no tool_use. Repairs in fixes/: (1) B3: 'module of continuous F-differentials' had no definition in either unsplit node; I defined it inline as lim_r Ω_{(R/n^r)/F} with its derivation. (2) C4: the comparison node's last clause covered only elements of A, but step 2 used it for d̂(t_i) with t_i in Â. The node now states (i) the unique continuous extension d̂ and (ii) the isomorphism Φ with Φ∘d̂ = d̂_F on all of Â. (3) Step 1 claimed something the cited node did not say. It now derives d̂∘σ=0 from Ω_{F/k}=0 through the universal property. Step 3 now says explicitly that the (t)-adic and mÂ-adic topologies and the F-structures agree. (4) B5: the separable leaf's source.place had no tag; it is now Tag 090W.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompletedJacobianDifferentials",
+  "declaration": "AlgebraicGeometry.completedJacobianDifferentials",
+  "declarations": [
+   "AlgebraicGeometry.completedLocalRing",
+   "AlgebraicGeometry.completedIdeal",
+   "AlgebraicGeometry.completedRing",
+   "AlgebraicGeometry.completedDifferentialTarget",
+   "AlgebraicGeometry.completedDifferentialTargetSMul",
+   "AlgebraicGeometry.completedDifferentialTargetModule",
+   "AlgebraicGeometry.completedResidueMap",
+   "AlgebraicGeometry.IsCompletedDifferentialExtension",
+   "AlgebraicGeometry.completedJacobianMatrix",
+   "AlgebraicGeometry.completedDifferentialCoordinateMap",
+   "AlgebraicGeometry.completedJacobianDifferentials"
+  ],
+  "file": "lean/Sheaf/TraceFormula/CompletedJacobianDifferentials.lean",
+  "statement": "theorem completedJacobianDifferentials (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S] (hfinite : RingHom.FiniteType (algebraMap k S)) (p : Ideal S) [p.IsMaximal] [FiniteDimensional k (S ⧸ p)] [Algebra.IsSeparable k (S ⧸ p)] (n s : ℕ) (σ : (S ⧸ p) →ₐ[k] completedRing S p) (hsection : (completedResidueMap p).comp σ.toRingHom = RingHom.id (S ⧸ p)) (f : Fin s → MvPowerSeries (Fin n) (S ⧸ p)) (hf : ∀ j : Fin s, f j ∈ Ideal.span (Set.range (fun i : Fin n ↦ (MvPowerSeries.X i : MvPowerSeries (Fin n) (S ⧸ p))))) (π : MvPowerSeries (Fin n) (S ⧸ p) →+* completedRing S p) (hπsurj : Function.Surjective π) (hπcontinuous : @Continuous (MvPowerSeries (Fin n) (S ⧸ p)) (completedRing S p) (@MvPowerSeries.WithPiTopology.instTopologicalSpace (Fin n) (S ⧸ p) ⊤) ((Ideal.map (algebraMap (completedLocalRing S p) (completedRing S p)) (completedIdeal S p)).adicTopology) π) (hπcoeff : ∀ c : S ⧸ p, π (MvPowerSeries.C c) = σ c) (hkernel : RingHom.ker π = Ideal.span (Set.range f)) : ∃ dhat : Derivation k (completedRing S p) (completedDifferentialTarget k S p), IsCompletedDifferentialExtension p σ dhat ∧ (∀ dhat' : Derivation k (completedRing S p) (completedDifferentialTarget k S p), IsCompletedDifferentialExtension p σ dhat' → dhat' = dhat) ∧ ∃ e : ((Fin n → completedRing S p) ⧸ LinearMap.range ((Matrix.toLin' (completedJacobianMatrix (S := S) p n s f π)) : (Fin s → completedRing S p) →ₗ[completedRing S p] (Fin n → completedRing S p))) ≃ₗ[completedRing S p] completedDifferentialTarget k S p, ∀ v : Fin n → completedRing S p, e ((LinearMap.range ((Matrix.toLin' (completedJacobianMatrix (S := S) p n s f π)) : (Fin s → completedRing S p) →ₗ[completedRing S p] (Fin n → completedRing S p))).mkQ v) = completedDifferentialCoordinateMap p n π dhat v",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 9cbf7856d902: tensor factors match the node; hf requires each relation in the variable ideal; completedResidueMap is canonical; the conclusion supplies the unique continuous extension and a linear equivalence whose composite with the quotient map is the specified coordinate map. The false unconstrained range-to-kernel helper is removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-daedb6717",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, source attribution, docstrings, universes, edge cases, and verbatim signature checked. Immutable module compiles cleanly through scompile.py; no substantive defects found."
  }
 }

@@ -20,7 +20,9 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification"
  ],
  "proof": [
   {
@@ -304,5 +306,29 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-8e956c483 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. The Temkin PDF is not in literature/ (the worker listed it as WANTED, proof_origin by agent), so I checked the public arXiv 0707.3953v3 text instead. Item statement: its hypotheses (S normal, integral and qcqs, p flat and finitely presented, reduced geometric fibres) and its eta-modification and eta-normality definitions match Temkin Prop. 3.5.2 and §3, pp. 14-15, exactly. The statement is unchanged from the live copy and no target is weakened. Steps: 1 uses torsion-freeness from flatness plus the geometric-fibre definition. 2 does the Noetherian reduction (§3.1 and Rem. 3.1.1(i)). 3 builds an open isomorphism locus W containing the generic fibre (elementary, written out); this replaces Temkin's generalization-closed U and Z-closure soundly. 4 gives O_Z ⊂ A ⊂ j_*O_W from schematic density. 5 makes neighbourhoods of fibre-component generic points normal via 033C (Temkin's EGA IV 17.5.1 and 6.8.3). 6 extends sections by the normal dense-open integral-section node, all hypotheses checked. 7 gets depth ≥ 2 from 031R S1 and 0337 (Temkin's EGA IV 6.3.1). 8 applies 0E9I Hartogs. 9 checks the curve fibres via Krull 00IQ and reducedness of Omega[[u,v]]/(uv), verified. 10 handles the marking (etale implies smooth implies reduced fibres). New node lem-trf-normal-approximation-finite-eta-modification is true: I proved it myself by normalizing finite-type Z-subrings and quotienting Z'_0 by its R_0-torsion to keep schematic density. lem-trf-generic-fibre-points-smooth is true by 056V and 01V9. Neither node restates a clause of the item, and neither duplicates an existing node: I compared against lem-sbc-normal-noetherian-refinement, the pointed-family approximations, lem-pur-geometrically-reduced-dense-smooth-open, sbc-lem-smooth-criterion and lem-trf-dth-fitting-smooth-locus. Both have all three kinds of search, statement only, and correct blueprint from/via. Edge cases: empty Z, a field base, and a constant nodal family (which shows the eta-fibre condition is essential). I accept all twelve declared tool_uses as generic algebra matching Temkin's EGA inputs. No SGA citations. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal",
+  "declaration": "AlgebraicGeometry.geometricallyReduced_etaNormal",
+  "declarations": [
+   "AlgebraicGeometry.IsEtaModification",
+   "AlgebraicGeometry.IsEtaNormal",
+   "AlgebraicGeometry.geometricallyReduced_etaNormal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyReducedEtaNormal.lean",
+  "statement": "theorem geometricallyReduced_etaNormal {S Z : Scheme.{u}} (p : Z ⟶ S) [IsIntegral S] [CompactSpace S] [QuasiSeparatedSpace S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) [Flat p] [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] [GeometricallyReduced p] : IsReduced Z ∧ IsEtaNormal p ∧ ∀ (C : MultipointedCurve S), C.IsSemistable → IsReduced C.X ∧ IsEtaNormal C.x ∧ IsReduced C.D ∧ IsEtaNormal C.d",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of 2c8927ab94e7: finite presentation includes QuasiCompact and QuasiSeparated; semistability reuses MultipointedCurve.IsSemistable, including its scalar-compatible ordinary-double-point predicate. The generic-fibre squares describe source and target, and the isomorphism commutes with both projections. The item also reuses the pair modification and stability notions through the imported dependency. Schematic density is stated literally as injectivity on sections over every ambient open, without quasi-compactness assumptions on the opens."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-324beb7fa",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Wrote review.md. The immutable statement, definitions, dependencies, docstrings, edge cases, universes, and verbatim signature pass review. No dropped route-pivot citations. scompile.py reproduced clean sandbox and library compiles; no fixes required."
  }
 }

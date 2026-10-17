@@ -23,7 +23,12 @@
   "def-weil-finite-type-morphism",
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-kun-tensor-sym",
+  "lem-kun-tensor-unit",
+  "lem-kun-inverse-image-monoidal"
  ],
  "proof": [
   {
@@ -290,5 +295,28 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-d384acd28 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, the statements of the 13 cited nodes plus def-asd-compactifiable and thm-nagata-compactification, and blueprint main-20261015 thm-asd-smooth-tensor.proof.md paragraphs 1 and 3, which the item realizes as the 'transpose on U' and composite étale counit argument. Stacks 0DV0 (categories.tex:3576) is the composite-counit formula used in step 2. The statement is true. It works on unbounded ordinary étale D(-,A) with A finite, the same coefficient category as every cited node. Checked on u=id, U empty, K=0, A=0 and a disjoint union of copies of id. I re-derived each step. Step 2: λ is defined as the comparison of right adjoints through c=α_{f,u}∘F(c_u^{-1}), which gives ε_h H(λ) c = ε_f F(e_G). Step 3: inverting lem-amb-shriek-tensor-composition for (u,f) and using clause (2) of lem-pur-etale-support-map-compatibility gives q_h c = (1⊗c_M) q_f F(Q). Step 4 is the counit identity of lem-asd-etale-sum-extension-tensor with B=f^*K, C=ω_f. Steps 5-7 are naturality and Hom-bijection algebra; I checked their domains. No duplicate (rg over dag/nodes; the nearest hits are lem-amb-etale-adjoint-locality, which gives only an existence isomorphism, and pro-étale/system nodes in other coefficient categories). No cycle, no new nodes, no SGA. I accept all 7 declared tool_uses. Two faults fixed in fixes/dag/nodes/sec-smooth-purity/lem-asd-tensor-mate-etale-precomp.json. (1) C1/E1: steps 2-3 need a compactification of u (for the normalization lemma, for the composition and coherence lemmas, and for Ru_! itself). The item assumes compactifiability only for f and h. Cited thm-nagata-compactification, which applies because U and X are Noetherian and hence qcqs; it is Lean-closed, so it is a tool, not route. (2) B3: the statement now cites lem-weil-pbc-ringed-topoi-derived-tensor-pullback for the inverse-image tensor comparison, in the text and in stmt_deps; this is a citation only. proof_deps and the split_report summary are updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SmoothPurity.TensorMateEtalePrecomp",
+  "declaration": "AlgebraicGeometry.Etale.tensorMateEtalePrecomp",
+  "declarations": [
+   "AlgebraicGeometry.Etale.tensorMateEtalePrecompLocalityIso",
+   "AlgebraicGeometry.Etale.tensorMateEtalePrecomp"
+  ],
+  "file": "lean/Sheaf/SmoothPurity/TensorMateEtalePrecomp.lean",
+  "statement": "theorem tensorMateEtalePrecomp (A : Type (v + 1)) [CommRing A] [Finite A] (N : EtaleCompactSupportNormalization A) {U X S : Scheme.{v}} (u : U ⟶ X) (f : X ⟶ S) [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] [IsNoetherian U] [IsNoetherian X] [IsNoetherian S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated (u ≫ f)] [LocallyOfFiniteType (u ≫ f)] [QuasiCompact (u ≫ f)] [HasCompactification f] [HasCompactification (u ≫ f)] : (∀ K : DerivedCategoryModule A S, (etaleSumExtensionTensorPullbackIso A u ((f)^*[ModuleCat A].mapDerivedCategory.obj K) (R(f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))).hom ≫ (u)^*[ModuleCat A].mapDerivedCategory.map ((rightDerivedUpperShriekAdjunction (ModuleCat A) (f)).homEquiv _ K (R(f)_![ModuleCat A].map (((derivedTensor (ModuleCat A) X).map ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat A) (f)).inv.app K)).app (R(f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))) ≫ R(f)_![ModuleCat A].map (((derivedTensorSymmetry (ModuleCat A) X).hom.app ((f)^*[ModuleCat A].leftDerivedFunctor.obj K)).app (R(f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))) ≫ ((@inv _ _ _ _ (projectionMap (ModuleCat A) (f)) (isIso_projectionMap_of_finite A (f))).app (R(f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))).app K ≫ ((derivedTensorSymmetry (ModuleCat A) S).hom.app (R(f)_![ModuleCat A].obj (R(f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S))))).app K ≫ ((derivedTensor (ModuleCat A) S).obj K).map ((rightDerivedUpperShriekAdjunction (ModuleCat A) (f)).counit.app (𝟙_ (DerivedCategoryModule A S))) ≫ (derivedTensorRightUnitor (ModuleCat A) S K).hom)) ≫ (tensorMateEtalePrecompLocalityIso A N u f).hom.app K = ((derivedTensor (ModuleCat A) U).map ((unboundedEtaleUpperStarCompIso A u f).inv.app K)).app ((u)^*[ModuleCat A].mapDerivedCategory.obj (R(f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))) ≫ ((derivedTensor (ModuleCat A) U).obj ((u ≫ f)^*[ModuleCat A].mapDerivedCategory.obj K)).map ((tensorMateEtalePrecompLocalityIso A N u f).hom.app (𝟙_ (DerivedCategoryModule A S))) ≫ ((rightDerivedUpperShriekAdjunction (ModuleCat A) (u ≫ f)).homEquiv _ K (R(u ≫ f)_![ModuleCat A].map (((derivedTensor (ModuleCat A) U).map ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat A) (u ≫ f)).inv.app K)).app (R(u ≫ f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))) ≫ R(u ≫ f)_![ModuleCat A].map (((derivedTensorSymmetry (ModuleCat A) U).hom.app ((u ≫ f)^*[ModuleCat A].leftDerivedFunctor.obj K)).app (R(u ≫ f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))) ≫ ((@inv _ _ _ _ (projectionMap (ModuleCat A) (u ≫ f)) (isIso_projectionMap_of_finite A (u ≫ f))).app (R(u ≫ f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S)))).app K ≫ ((derivedTensorSymmetry (ModuleCat A) S).hom.app (R(u ≫ f)_![ModuleCat A].obj (R(u ≫ f)^![ModuleCat A].obj (𝟙_ (DerivedCategoryModule A S))))).app K ≫ ((derivedTensor (ModuleCat A) S).obj K).map ((rightDerivedUpperShriekAdjunction (ModuleCat A) (u ≫ f)).counit.app (𝟙_ (DerivedCategoryModule A S))) ≫ (derivedTensorRightUnitor (ModuleCat A) S K).hom))) ∧ (∀ B : DerivedCategoryModule A S, (etaleAmbientLeftComparison A N u f (HasCompactification.compactification f) (HasCompactification.compactification (u ≫ f))).hom.app ((u)^*[ModuleCat A].mapDerivedCategory.obj (R(f)^![ModuleCat A].obj B)) ≫ R(u ≫ f)_![ModuleCat A].map ((tensorMateEtalePrecompLocalityIso A N u f).hom.app B) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat A) (u ≫ f)).counit.app B = R(f)_![ModuleCat A].map (((etaleLowerShriekUpperStarAdjunction (ModuleCat A) u inferInstance).mapDerivedCategoryAdjunction).counit.app (R(f)^![ModuleCat A].obj B)) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app B)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Returned-head repair: restores the original natural-language statement, including the actual tensor-mate equality and the sum/evaluation counit. The helper is the canonical right mate of etaleAmbientLeftComparison against the degreewise sum adjunction and the exceptional adjunction. The normalized comparison family N has the graph-section and representative characterizations of EtaleCompactSupportNormalization, whose existence is already stated; the assertion holds for every such family. The two alpha maps are written as explicit adjunction transposes, avoiding a duplicate of the downstream smoothTensorDualityMap definition and an import cycle with thm-asd-smooth-tensor. No arbitrary exceptional comparison or extra adjoint-existence hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-64a2aa88b",
+  "group": "NS",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all 21 statement dependencies, canonical tensor mates and sum counit, source clauses, hypotheses, universes, edge cases, docstrings, and verbatim signature. scompile.py passed with no diagnostics: local overlay 12.2s, library confirmation 13.2s. No fixes or repository changes."
  }
 }
