@@ -12,9 +12,67 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-categorical-pattern-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the family in the statement with $J_{\\mathfrak P}$ of [lem-coef-pattern-anodyne-lifting-products], taking $C=B$ and $\\mathfrak P=P$. The maps (A0), (A1), (B0), (B1), (C1) and (C2) have identical underlying maps, markings and allowed base maps. For (C0), the pushout marking adds exactly the edge $01$ and the degenerate edges, so it is precisely the notation $(U,\\{01\\})$ used there. This follows from the definition of a marking-preserving map: a map out of that pushout is an underlying map whose edge $01$ is marked. The join conventions agree by ordered concatenation. Thus the two families, and consequently their weakly saturated closures, coincide.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition B.1.1; comparison of the explicit generators with the existing DAG statement."
+   }
+  },
+  {
+   "text": "Apply the fibered-object criterion in [lem-coef-pattern-anodyne-lifting-products] to this identified family. The terminal object in the slice is the identity of $(B,S)$. A square against the terminal map $X\\to(B,S)$ consists exactly of a marked map $D\\to X$ over $B$ and the already specified structural map $E\\to(B,S)$. Its diagonal is precisely a marked extension $E\\to X$ over $B$. The cited criterion therefore gives both directions of the first assertion, with exactly the extension property stated here.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.1.6; its lifting characterization as recorded in the existing lifting-products node."
+   }
+  },
+  {
+   "text": "Let $u:A\\to A^{\\prime}$ be any member of the weakly saturated closure of $J_P$, and let $Z$ be any $P$-fibered object. By the identification in step 1, $u$ is $P$-anodyne in [lem-coef-pattern-anodyne-lifting-products]. That node states that $u$ is injective on underlying simplices, so the cofibration criterion of [lem-coef-categorical-pattern-model-calculus] makes $u$ a cofibration in $\\mathsf M_P$. The lifting-products node also states that restriction $\\operatorname{Map}^{\\sharp}_B(A^{\\prime},Z)\\to\\operatorname{Map}^{\\sharp}_B(A,Z)$ is a trivial Kan fibration. In the Kan model structure of [lem-coef-kan-quillen-right-proper], a trivial fibration is in particular a weak homotopy equivalence. The mapping-space criterion in [lem-coef-categorical-pattern-model-calculus], applied for every such $Z$, now says that $u$ is a weak equivalence in $\\mathsf M_P$. It is therefore a trivial cofibration. This proves the assertion for the entire saturated closure at once, including each generator.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.1.14, its proof using B.1.9, and Example B.2.2; the mapping-space weak-equivalence criterion of Definition B.2.1."
+   }
+  },
+  {
+   "text": "All preceding applications are for the same small pattern in the chosen universe: the lifting-products theorem is stated for every small pattern and explicitly permits empty cone shapes. Neither it nor the pattern-model theorem requires the $K_a$ to be finite. For each fixed $n$ and $a$, the joins and markings in step 1 are made from small simplicial sets, and the collection of their base maps is a set in that universe. The ordinal composites in the saturated closure are stipulated small there. Thus the same proof applies in any universe containing the input pattern; it does not replace the cone shapes by finite approximations or assert any new universe-comparison theorem.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Universe-relative application of Definition B.1.1, Proposition B.1.6 and Example B.2.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-pattern-anodyne-lifting-products",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Definitions B.1.1 and B.2.1, Propositions B.1.6 and B.1.14, Example B.2.2, read online; deduction from the existing broader lifting-products and pattern-model nodes. Not archived locally, so marked agent under the worker brief."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +115,45 @@
    "results": "{\"t\": \"2026-10-17T00:37:19Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial sets over a base, anodyne morphisms, and fibrant objects defined by categorical patterns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.I\", \"SSet.KanComplex\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"f348c187814e86ab\"}",
    "date": "2026-10-17",
    "verdict": "no match: all eight hits concern unmarked simplicial sets, ordinary Kan lifting or quasicategories; inspected CategoryWithFibrations.lean has no markings or prescribed pattern cones."
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.?pattern|pattern.?anodyne|MarkedSSet",
+   "results": "{\"t\": \"2026-10-17T01:47:49Z\", \"tool\": \"grep\", \"query\": \"categorical.?pattern|pattern.?anodyne|MarkedSSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned declarations; generic model-category lifting and unmarked Kan/quasicategory horn filling do not state marked categorical-pattern or prescribed-cone results. Loogle and the Mathlib grep have no hits. Inspected SimplicialSet/CategoryWithFibrations.lean:38-105 and Quasicategory/Basic.lean:30-100."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked simplicial sets over categorical patterns with prescribed limit cones and anodyne inclusions",
+   "results": "{\"t\": \"2026-10-17T01:47:49Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial sets over categorical patterns with prescribed limit cones and anodyne inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.hasLimits\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"SSet.modelCategoryQuillen.mono_of_cofibration\"], \"digest\": \"4e67158373e619c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned declarations; generic model-category lifting and unmarked Kan/quasicategory horn filling do not state marked categorical-pattern or prescribed-cone results. Loogle and the Mathlib grep have no hits. Inspected SimplicialSet/CategoryWithFibrations.lean:38-105 and Quasicategory/Basic.lean:30-100."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MarkedSSet\", \"Fibrant\"",
+   "results": "{\"t\": \"2026-10-17T01:47:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"MarkedSSet\\\", \\\"Fibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned declarations; generic model-category lifting and unmarked Kan/quasicategory horn filling do not state marked categorical-pattern or prescribed-cone results. Loogle and the Mathlib grep have no hits. Inspected SimplicialSet/CategoryWithFibrations.lean:38-105 and Quasicategory/Basic.lean:30-100."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical pattern anodyne marked inclusions characterize fibered objects and are trivial cofibrations",
+   "results": "{\"t\": \"2026-10-17T01:47:51Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical pattern anodyne marked inclusions characterize fibered objects and are trivial cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.trivialCofibrations_rlp\", \"HomotopicalAlgebra.fibrations_llp\", \"HomotopicalAlgebra.Fibration\", \"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.mem_fibrations\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"b3148989ca2be726\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned declarations; generic model-category lifting and unmarked Kan/quasicategory horn filling do not state marked categorical-pattern or prescribed-cone results. Loogle and the Mathlib grep have no hits. Inspected SimplicialSet/CategoryWithFibrations.lean:38-105 and Quasicategory/Basic.lean:30-100."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory marked horn and cone generators give trivial Kan fibrations on mapping spaces",
+   "results": "{\"t\": \"2026-10-17T01:47:51Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory marked horn and cone generators give trivial Kan fibrations on mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"faf731475d3e233a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned declarations; generic model-category lifting and unmarked Kan/quasicategory horn filling do not state marked categorical-pattern or prescribed-cone results. Loogle and the Mathlib grep have no hits. Inspected SimplicialSet/CategoryWithFibrations.lean:38-105 and Quasicategory/Basic.lean:30-100."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-pattern-universe-comparison",
@@ -87,5 +180,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pattern-anodyne-generators",
+  "worker": "stage1",
+  "summary": "Reused the already existing, strictly broader pattern-anodyne lifting-products statement after comparing all seven families. Converted its terminal-map RLP into the stated extension property, and combined its trivial Kan mapping restrictions with the pattern model weak-equivalence and cofibration criteria. No new nodes; the statement is unchanged. Checked empty shapes, arbitrary small shapes, and absence of a dependency cycle.",
+  "blueprint": "Technical pattern-model foundation of prop-coef-integral-exceptional-adjoint, historical proof paragraph 2: the finite-coefficient mapping-complex adjunction preceding derived inverse limit. Realizes the generator/lifting and acyclicity input of lem-coef-finite-pattern-universe-comparison without replacing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-0eb4d4d6c",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-0eb4d4d6c (reviewer sub-agent of L); spot-checked: I read the item and the full statements of all cited nodes: lifting-products, def-coef-categorical-pattern-fibrancy, marked-point-cartesian-model, categorical-pattern-model-calculus and kan-quillen-right-proper. Step 1: all seven generator types match lifting-products' J_P clause by clause. For C0, the edge 01 lies in Λ^n_0 when n≥2, so the pushout marking is exactly (U,{01}). The weak saturations agree. Step 2: lifting-products' terminal-map lifting criterion is exactly the item's extension property, in both directions. Step 3: lifting-products makes P-anodyne maps injective, and model-calculus makes injective maps cofibrations. Lifting-products also makes restriction to Map^♯_C(-,Z) a trivial Kan fibration for every P-fibered Z, which by kan-quillen is a weak homotopy equivalence. Both nodes define Map^♯_C the same way, so model-calculus's mapping-space criterion makes the map a weak equivalence. Step 4: no finiteness on the K_a is used, empty shapes are allowed, and the universe clause only reapplies results already stated for any small pattern. Edge cases checked: empty A, empty K_a, n=1 in C2, n=2 in C0, the point pattern, and an empty base. The DAG has no cycle; the item's only citer is the universe-comparison node. All dependencies are in the same unit, so there are no tool_uses. The blueprint has no anodyne or categorical-pattern node, so same_as=[] is right. No SGA is cited. Higher Algebra Appendix B is not archived, so the WANTED line and proof_origin=agent are correct; I could not open the PDF and checked the HA content from memory and the source places recorded on the nodes. The second reading's claim that it changed `created` to Q06 is not reflected in the file, which correctly keeps the original Q87 value; this is not a DAG fault. No fixes were made and nothing is dropped. The target is not weakened."
  }
 }
