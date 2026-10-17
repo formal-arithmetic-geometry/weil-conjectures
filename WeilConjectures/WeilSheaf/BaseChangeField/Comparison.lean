@@ -224,14 +224,15 @@ def transportLowerStarIso :
         Category.assoc]
       have nat := (adicLowerStarSquareIso l hsq).hom.naturality (K.frobeniusPowIso r).hom
       simp only [Functor.comp_map] at nat
-      rw [nat, ← reassoc_of% (adicLowerStarSquareIso_cube θ.hom θY.hom
+      rw [nat]
+      exact reassoc_of% (adicLowerStarSquareIso_cube θ.hom θY.hom
         (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
         (Scheme.Hom.geometricFiberMap φ' (comp_over φ' _)) _ _ _ _ hsq
         (hom_comp_geometricGaloisFrobenius_inv θ r hθ)
         (hom_comp_geometricGaloisFrobenius_inv θY r hθY)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow_inv φ (comp_over φ _) r)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ' (comp_over φ' _))
-        K.carrier)]))
+        K.carrier) _))
     (fun f ↦ IsoAlgebra.hom_ext ((adicLowerStarSquareIso l hsq).hom.naturality f.hom.f))
 
 include hsq in

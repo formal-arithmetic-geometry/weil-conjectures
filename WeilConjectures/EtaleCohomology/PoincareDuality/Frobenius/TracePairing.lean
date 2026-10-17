@@ -95,9 +95,11 @@ theorem isPerfectPairing_poincarePairingOfTrace_aux (K : 𝐃(X, A)) (n : ℤ)
       (((R(a)_![A]).commShiftIso n).inv.app _ ≫ t)) := by
   constructor
   rw [poincarePairingOfTrace, mixedSupportCupProduct, Category.assoc]
-  exact MonoidalClosed.isIso_curry_of_projection _ _ _ _ _ _ _ _ _ (fun _ ↦ True)
+  refine MonoidalClosed.isIso_curry_of_projection _ _ _ _ _ _ _ _ _ (fun _ ↦ True)
     (fun _ _ u hu ↦ isIso_of_bijective_comp_shift n u fun N ↦ hu N trivial) (fun N _ ↦ hPF N)
-    (bijective_derivedTensor_map_comp_counit_comp_coefficientEvaluation A a K) ht
+    ?_ ?_
+  · exact bijective_derivedTensor_map_comp_counit_comp_coefficientEvaluation A a K
+  · exact ht
 
 end Etale
 
