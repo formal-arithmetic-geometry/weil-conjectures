@@ -190,8 +190,7 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
       Functor.whiskerLeft_app, Functor.associator_hom_app, Iso.symm_hom,
       Functor.mapHomologicalComplexCompIso_hom_app_f, NatIso.mapHomologicalComplex_hom_app_f,
       NatIso.mapHomologicalComplex_inv_app_f, Functor.mapHomologicalComplex_map_f,
-      restriction_comp_iso, NatIso.ofComponents_inv_app, Iso.refl_inv,
-      Category.id_comp]
+      restriction_comp_iso, NatIso.ofComponents_inv_app, Iso.refl_inv]
     erw [CategoryTheory.Functor.map_id, Category.id_comp, HomologicalComplex.id_f, Category.id_comp]
     have h := hc (M.X n)
     rw [hc₀] at h

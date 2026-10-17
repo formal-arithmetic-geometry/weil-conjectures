@@ -85,14 +85,7 @@ theorem exists_affine_perfect_open_stalk_chainMap_lift
   change (openModuleStalkFunctor X V ⟨x, hxV⟩).map (k n) = _
   rw [hkg n, hg n]
   simp only [HomologicalComplex.comp_f, Category.assoc]
-  have hPcancel : (eW.app P).inv.f n ≫ (eW.app P).hom.f n = 𝟙 _ := by
-    simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
-      congrArg (fun f ↦ f.f n) (eW.app P).inv_hom_id
-  have hQcancel : (eW.app Q).inv.f n ≫ (eW.app Q).hom.f n = 𝟙 _ := by
-    simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
-      congrArg (fun f ↦ f.f n) (eW.app Q).inv_hom_id
-  simp only [eW] at hPcancel hQcancel
-  simp only [← Category.assoc, hPcancel, hQcancel, Category.id_comp]
+  simp only [← Category.assoc, ← HomologicalComplex.comp_f, Iso.inv_hom_id, Category.comp_id]
 
 end
 end AlgebraicGeometry.Scheme
