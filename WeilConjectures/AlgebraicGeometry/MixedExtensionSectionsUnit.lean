@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.MixedGlobalExtension
-public import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsPullbackMate
 

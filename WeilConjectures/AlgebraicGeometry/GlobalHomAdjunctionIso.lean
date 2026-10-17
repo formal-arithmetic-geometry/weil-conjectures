@@ -20,8 +20,6 @@ import WeilConjectures.AlgebraicGeometry.DQCoheratorAdjunction
 import WeilConjectures.AlgebraicGeometry.InternalHomMateCounitTransport
 
 /-!
-This module was independently rechecked by S3; all declarations are already proved.
-
 Canonical adjunction and tensor data are pinned by their characterising equations.
  # Canonical global Hom adjunction
 Source: Stacks Project, duality.tex, Tag 0B6I (lemma-iso-global-hom).
@@ -34,7 +32,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
-universe u w vC vD vE vB uC uD uE uB
+universe u w wA vC vD vE vB uC uD uE uB
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
   Opposite TopologicalSpace
 noncomputable section
@@ -296,15 +294,17 @@ def schemeGlobalScalarRestriction {X Y : Scheme.{u}} (f : X ⟶ Y) :=
     (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))
     (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom).mapDerivedCategory
 
-/-- The canonical Leray comparison is the identity on underived sections and is
-compatible with the right-derived units.
-Source: Stacks, Tags 0B6I and 0D5T (blueprint: lem-pc-global-hom-adjunction).
-Proof: the underived comparison is the identity on sections over the whole space.
-Resolve by K-injective complexes. Direct image of a K-injective is acyclic for
-subsequent global sections, by the pullback/direct-image adjunction and derived
-composition. The right-derived universal property extends the identity comparison
-uniquely and gives the displayed unit equation. -/
-theorem exists_schemeGlobalSectionsDirectImageIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+  [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
+/-- The normalized Leray comparison with independent module and sheaf localization universes.
+Source: Stacks Tags 0D5T and 0B6I. Its derived-unit equation determines the comparison.
+(blueprint: lem-sc-mixed-global-sections-direct-image-iso). -/
+theorem exists_mixedGlobalSectionsDirectImageIso
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ (c₀ : RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
         RingedSpace.globalSectionsFunctor Y.toRingedSpace ≅
       RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
@@ -355,12 +355,19 @@ theorem exists_schemeGlobalSectionsDirectImageIso {X Y : Scheme.{u}} (f : X ⟶ 
   intro M x
   rfl
 
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+  [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- The canonical derived Leray isomorphism, chosen with its unit compatibility.
 Source: Stacks, Tags 0B6I and 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
-def schemeGlobalSectionsDirectImageIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
+def mixedGlobalSectionsDirectImageIso
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
     schemeDerivedDirectImage f ⋙ schemeDerivedGlobalSections Y ≅
       schemeDerivedGlobalSections X ⋙ schemeGlobalScalarRestriction f :=
-  Classical.choose (Classical.choose_spec (exists_schemeGlobalSectionsDirectImageIso f))
+  Classical.choose (Classical.choose_spec (exists_mixedGlobalSectionsDirectImageIso f))
 
 
 set_option backward.isDefEq.respectTransparency true in
@@ -375,40 +382,39 @@ def schemeHomPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition))) f))
 
-set_option linter.unusedSectionVars false in
-/-- The canonical comparison of def-pc-derived-pullback-tensor-comparison is an iso.
-Source: Stacks, Tags 079U and 0B6I (blueprint: lem-pc-global-hom-adjunction).
-Proof: choose K-flat representatives. The canonical module tensor comparison is
-invertible on each summand. Pullback and tensor preserve K-flatness, so the
-left-derived counits and localization tensor maps in the characterising equation
-are invertible. Thus the comparison is invertible on representatives, and hence
-on all objects by naturality and existence of K-flat resolutions. -/
-theorem exists_schemeHomTensorPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ∃ t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅
-      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X),
-      IsCanonicalPullbackTensorComparison f (fun K L ↦ t.hom.app (K, L)) := by
-  obtain ⟨τ, hτ⟩ := exists_canonicalPullbackTensorComparison f
-  let c : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ⟶
-      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X) :=
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
+/-- The canonical pullback tensor comparison with independent localization universes.
+Proof: take the canonical comparison normalized to SingleComplexBaseChange.counit.
+On K-flat representatives, tensor, pullback, localization tensor maps and the shared
+left-derived counits are invertible. The canonical coordinate equation thus makes
+its components invertible. K-flat resolutions and naturality transport invertibility
+to arbitrary objects. Package these components as a natural isomorphism.
+Source: Stacks Tags 079U and 0B6I
+(blueprint: lem-sc-mixed-hom-tensor-pullback-iso). -/
+theorem exists_mixedHomTensorPullbackIso {T S : Scheme.{u}} (h : T ⟶ S) :
+    ∃ t : tensor (schemeDerivedCategory S) ⋙ derivedPullback h ≅
+      (derivedPullback h).prod (derivedPullback h) ⋙ tensor (schemeDerivedCategory T),
+      IsCanonicalPullbackTensorComparison h (fun K L ↦ t.hom.app (K, L)) := by
+  obtain ⟨τ, hτ⟩ := exists_canonicalPullbackTensorComparison h
+  let c : tensor (schemeDerivedCategory S) ⋙ derivedPullback h ⟶
+      (derivedPullback h).prod (derivedPullback h) ⋙ tensor (schemeDerivedCategory T) :=
     { app := fun Z ↦ τ Z.1 Z.2
       naturality := fun Z Z' a ↦ hτ.2 Z.1 Z'.1 Z.2 Z'.2 a.1 a.2 }
-  obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization f τ hτ
-  have (Z : schemeDerivedCategory Y × schemeDerivedCategory Y) : IsIso (c.app Z) := by
+  obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization h τ hτ
+  have (Z : schemeDerivedCategory S × schemeDerivedCategory S) : IsIso (c.app Z) := by
     change IsIso (τ Z.1 Z.2)
     rw [← hm Z.1 Z.2]
     infer_instance
   exact ⟨NatIso.ofComponents (fun Z ↦ asIso (c.app Z))
     (fun a ↦ c.naturality a), hτ⟩
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-/-- The canonical derived pullback tensor iso, specified on K-flat representatives.
-Source: Stacks, Tags 079U and 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
-def schemeHomTensorPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅
-      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X) :=
-  let t := Classical.choose (exists_schemeHomTensorPullbackIso f)
-  NatIso.ofComponents (fun Z ↦ asIso (t.hom.app Z)) (fun a ↦ t.hom.naturality a)
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
+/-- The pullback tensorator normalized to the shared derived counit.
+Source: Stacks Tag 079U. -/
+def mixedHomTensorPullbackIso {T S : Scheme.{u}} (h : T ⟶ S) :
+    tensor (schemeDerivedCategory S) ⋙ derivedPullback h ≅
+      (derivedPullback h).prod (derivedPullback h) ⋙ tensor (schemeDerivedCategory T) :=
+  Classical.choose (exists_mixedHomTensorPullbackIso h)
 
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- Naturality of the fixed family, isolated from its representative equation.
@@ -422,7 +428,7 @@ private theorem schemeHomTensorHom_naturality (X : Scheme.{u})
       (a ⊗ₘ b) ≫ schemeDerivedTensorHomEquiv X A L M g ≫ d :=
   (Classical.choose_spec (exists_canonicalDerivedTensorHom X)).1 A A' L L' M M' a b d g
 
-attribute [local irreducible] schemeHomPullbackAdjunction schemeHomTensorPullbackIso
+attribute [local irreducible] schemeHomPullbackAdjunction mixedHomTensorPullbackIso
 
 /-- Existence of the evaluation-mate direct-image internal Hom comparison.
 Fixed-data form of the existing `exists_derivedDirectImage_internalHom_comparison`,
@@ -445,7 +451,7 @@ theorem exists_schemeHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
           ((schemeDerivedDirectImage f).obj L) ((schemeDerivedDirectImage f).obj M)
             (α ≫ c.app (op L, M)) =
           (schemeHomPullbackAdjunction f).homEquiv (A ⊗ (schemeDerivedDirectImage f).obj L) M
-            ((schemeHomTensorPullbackIso f).hom.app (A, (schemeDerivedDirectImage f).obj L) ≫
+            ((mixedHomTensorPullbackIso f).hom.app (A, (schemeDerivedDirectImage f).obj L) ≫
               (𝟙 ((derivedPullback f).obj A) ⊗ₘ
                 (schemeHomPullbackAdjunction f).counit.app L) ≫
               (schemeDerivedTensorHomEquiv X)
@@ -458,7 +464,7 @@ theorem exists_schemeHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)
     (derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf)
     (derivedPullback f) (schemeDerivedDirectImage f)
-    (schemeHomPullbackAdjunction f) (schemeHomTensorPullbackIso f)
+    (schemeHomPullbackAdjunction f) (mixedHomTensorPullbackIso f)
     (schemeDerivedTensorHomEquiv X) (schemeDerivedTensorHomEquiv Y)
     (schemeHomTensorHom_naturality X) (schemeHomTensorHom_naturality Y)
 
@@ -477,7 +483,7 @@ theorem schemeHomDirectImageComparison_counit_transport
       ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op L, M))) :
     let p := (schemeHomPullbackAdjunction f).ofNatIsoLeft δ
     let t := Functor.isoWhiskerLeft (tensor (schemeDerivedCategory Y)) δ.symm ≪≫
-      schemeHomTensorPullbackIso f ≪≫
+      mixedHomTensorPullbackIso f ≪≫
         Functor.isoWhiskerRight (NatIso.prod δ δ) (tensor (schemeDerivedCategory X))
     let c := Classical.choose (exists_schemeHomDirectImageComparison f)
     schemeDerivedTensorHomEquiv Y A
@@ -501,7 +507,7 @@ theorem schemeHomDirectImageComparison_counit_transport
     (internalHomMate_counit_transport
       (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)
       (derivedPullback f) (schemeDerivedDirectImage f) (schemeHomPullbackAdjunction f)
-      (schemeHomTensorPullbackIso f) (schemeDerivedTensorHomEquiv X) hx δ L M A α).symm
+      (mixedHomTensorPullbackIso f) (schemeDerivedTensorHomEquiv X) hx δ L M A α).symm
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -549,7 +555,7 @@ def schemeGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (schemeGlobalScalarRestriction f).obj ((schemeGlobalDerivedHom X).obj (op P, Q)) ⟶
       (schemeGlobalDerivedHom Y).obj
         (op ((schemeDerivedDirectImage f).obj P), (schemeDerivedDirectImage f).obj Q) :=
-  (schemeGlobalSectionsDirectImageIso f).inv.app
+  (mixedGlobalSectionsDirectImageIso f).inv.app
       ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op P, Q)) ≫
     (schemeDerivedGlobalSections Y).map
       ((Classical.choose (exists_schemeHomDirectImageComparison f)).app (op P, Q))
@@ -620,7 +626,7 @@ theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}}
       (α : A ⟶ R.obj (Hx.obj (op L, M))),
       ((by' (R.obj L)).homEquiv A (R.obj M)).symm (α ≫ c.app (op L, M)) =
         (schemeHomPullbackAdjunction f).homEquiv _ M
-          ((schemeHomTensorPullbackIso f).hom.app (A, R.obj L) ≫
+          ((mixedHomTensorPullbackIso f).hom.app (A, R.obj L) ≫
             (𝟙 _ ⊗ₘ (schemeHomPullbackAdjunction f).counit.app L) ≫
             ((bx L).homEquiv _ M).symm
               (((schemeHomPullbackAdjunction f).homEquiv A
@@ -632,7 +638,7 @@ theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}}
     exact (Classical.choose_spec (exists_schemeHomDirectImageComparison f)) L M A α
   have h := qcqsSheafRHomAdjunction X Y f
     (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst a adj DQ coh
-    (schemeHomPullbackAdjunction f) bx by' (schemeHomTensorPullbackIso f) c hc
+    (schemeHomPullbackAdjunction f) bx by' (mixedHomTensorPullbackIso f) c hc
   constructor
   · intro P K
     have hPK := h.2 P K
@@ -646,7 +652,7 @@ theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}}
     dsimp only [schemeGlobalHomAdjunctionMap, schemeGlobalHomDirectImageMap,
       schemeGlobalDerivedHom, Functor.comp_map]
     simp only [Category.assoc]
-    change IsIso ((schemeGlobalSectionsDirectImageIso f).inv.app _ ≫
+    change IsIso ((mixedGlobalSectionsDirectImageIso f).inv.app _ ≫
       G.map (c.app (op P.obj, (a.obj K).obj)) ≫
         G.map (Hy.map (X := (op (R.obj P.obj), R.obj (a.obj K).obj))
           (Y := (op (R.obj P.obj), K.obj)) ((𝟙 _).op, (adj.counit.app K).hom)))
@@ -666,7 +672,7 @@ theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}}
         Hy.map (X := (op (R.obj P.obj), K.obj))
           (Y := (op (R.obj P'.obj), K'.obj)) ((R.map s.hom).op, t.hom) := hn
     have hl := lerayNaturality R G (schemeDerivedGlobalSections X)
-      (schemeGlobalScalarRestriction f) (schemeGlobalSectionsDirectImageIso f)
+      (schemeGlobalScalarRestriction f) (mixedGlobalSectionsDirectImageIso f)
       _ _ _ _ hn'
     simpa only [schemeGlobalHomAdjunctionMap, schemeGlobalHomDirectImageMap,
       schemeGlobalDerivedHom, Functor.comp_map, CategoryTheory.Functor.map_comp,

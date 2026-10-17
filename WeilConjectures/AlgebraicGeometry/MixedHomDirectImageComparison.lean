@@ -6,11 +6,10 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.MixedHomTensorPullbackIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import all WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # Evaluation-mate direct-image Hom comparison
