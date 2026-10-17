@@ -83,7 +83,7 @@ namespace Etale
 section DualityAtZero
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
-  {a : X ⟶ Y} [IsProper a] {d : ℕ}
+  {a : X ⟶ Y} [HasCompactification a] [IsProper a] {d : ℕ}
 
 variable (Λ a) in
 /-- The class `1 ∈ H^0_c(X, Λ)` of a proper morphism `a : X ⟶ Y`, as a morphism
@@ -159,6 +159,8 @@ namespace TateOrientation
 
 variable [HasTateTwist Λ]
 
+omit [HasInvertibleExponent Λ (Spec (.of k))] [HasInvertibleExponent Λ X]
+  [SmoothOfRelativeDimension d a] in
 /-- Blueprint `sk-cor-trace` (the trace isomorphism, twisted form): for `X` proper and
 geometrically connected over the algebraically closed field `k`, a self-injective finite
 coefficient ring `Λ` and any Tate orientation `γ`, the trace map
@@ -173,8 +175,25 @@ theorem bijective_traceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d
   rw [bijective_traceMap_iff]
   have h := bijective_comp_unit_rightDerivedLowerStar (Λ := Λ) a
     (leftDerivedUpperStarConstantComplexIso Λ a)
-  sorry
+  let α := (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).app
+    (constantComplex Λ X)
+  let v := (derivedUpperStarLowerStarAdjunction _ a).unit.app (𝟙_ _) ≫
+    (R((a)_*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ a).hom
+  have hu : unitClassCompactSupport Λ a = v ≫ α.inv := by
+    rw [Category.assoc]
+    rfl
+  rw [hu]
+  refine ⟨fun h₁ h₂ h₁₂ ↦ ?_, fun z ↦ ?_⟩
+  · replace h₁₂ : v ≫ α.inv ≫ h₁ = v ≫ α.inv ≫ h₂ := by
+      simpa only [Category.assoc] using h₁₂
+    simpa only [Iso.hom_inv_id_assoc] using α.hom ≫= h.1 h₁₂
+  · obtain ⟨g, hg⟩ := h.2 z
+    refine ⟨α.hom ≫ g, ?_⟩
+    replace hg : v ≫ g = z := hg
+    change (v ≫ α.inv) ≫ α.hom ≫ g = z
+    rw [Category.assoc, Iso.inv_hom_id_assoc, hg]
 
+omit [SmoothOfRelativeDimension d a] in
 /-- Blueprint `sk-cor-trace` (the trace isomorphism, compactly supported form): for `X` smooth,
 proper and geometrically connected of pure dimension `d` over the algebraically closed field `k`,
 a self-injective finite coefficient ring `Λ` (such as `A_{E,n} = 𝒪_E/ϖⁿ`) and any Tate
@@ -186,6 +205,7 @@ theorem bijective_untwistedTraceMap [Module.Injective Λ Λ] (γ : TateOrientati
     Function.Bijective γ.untwistedTraceMap :=
   bijective_untwistedTraceMap_of_bijective_traceMap γ (bijective_traceMap a γ)
 
+omit [SmoothOfRelativeDimension d a] in
 /-- The untwisted trace on ordinary cohomology, `tr^{(-d)}_X : H^{2d}(X, Λ) ⟶ Λ(-d)`, is
 bijective: it is `AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap` read through
 `H^{2d}(X, Λ) ≃ H^{2d}_c(X, Λ)`. -/
