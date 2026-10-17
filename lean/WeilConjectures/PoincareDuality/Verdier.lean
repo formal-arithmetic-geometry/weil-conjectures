@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 
 /-!
 
@@ -38,18 +38,6 @@ monoidal closed structure on `Dᵇc` is that of
   dualizing complex `ω_X = Ra^! ℚ̄_ℓ,S`, and `ProEtale.CondensedRing.verdierDual`: the Verdier
   dual `𝔻_X K = RHom(K, ω_X)`.
 - `ProEtale.CondensedRing.verdierBiduality`: the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`.
-- `ProEtale.CondensedRing.upperShriekDualizingComplexIso`: for `f : X ⟶ Y` and `a_Y : Y ⟶ S`,
-  the identification `γ : Rf^! ω_Y ≅ ω_X` with `ω_X` relative to `f ≫ a_Y`, the composition
-  isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!`
-  (`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl`) at the unit.
-- `ProEtale.CondensedRing.absoluteVerdierExchange` and
-  `ProEtale.CondensedRing.dualVerdierExchange`: the absolute exchange
-  `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K` and the opposite exchange `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, built
-  with `γ`.
-
-The isomorphism `γ` is the conjugate of the composition isomorphism of lower shrieks
-`R(f ≫ a_Y)_! ≅ Rf_! ⋙ Ra_Y_!`
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl`).
 
 ## Main results
 
@@ -57,10 +45,13 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
   is an isomorphism, deduced from the derived projection formula
   (`isIso_boundedConstructibleExceptionalProjectionMorphism`) by the Yoneda argument.
 
-## Sorried input
+## Relative biduality
 
-- `ProEtale.CondensedRing.isIso_verdierBiduality`: **constructible biduality**, `δ_K` is an
-  isomorphism for `K` bounded constructible (Input 3.3 of the specification).
+For an arbitrary base `S`, `Ra^! 𝟙_S` need not be a dualizing object. In particular the
+double-dual morphism above is not asserted to be invertible without a hypothesis on the base.
+The change record `G4-verdier-relative-biduality.md` gives a nodal-curve counterexample to the
+former unrestricted assertion. The absolute exchange constructions, unused by consumers of
+this module, have been pruned together with their shriek-composition dependency.
 
 -/
 
@@ -141,57 +132,9 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ a (verdierDual ℓ a K) :=
   Verdier.bidualityMap (relativeDualizingComplex ℓ a) K
 
-/-- **Constructible Verdier biduality**: the double-dual morphism `δ_K` is an isomorphism for
-`K` bounded constructible. See the module docstring. -/
-theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (verdierBiduality ℓ a K) :=
-  sorry
+/- STATEMENT-DISPUTED: unrestricted relative biduality is false over singular bases.
+The assertion is omitted because `Ra^! 𝟙_S` need not be dualizing for an arbitrary base. -/
 
 end Dualizing
-
-/-! ### The absolute and opposite exchange morphisms -/
-
-section Absolute
-
-variable {X Y S : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
-  [IsSeparated S.hom]
-  (f : X ⟶ Y) (aY : Y ⟶ S)
-
-/-- The identification `γ : Rf^! ω_Y ≅ ω_X` of the dualizing complexes `ω_Y = Ra_Y^! ℚ̄_ℓ,S` and
-`ω_X = R(f ≫ a_Y)^! ℚ̄_ℓ,S`: the composition isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` of
-`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl` at the unit. -/
-noncomputable def upperShriekDualizingComplexIso :
-    (boundedConstructibleUpperShriek _ ℓ f).obj (relativeDualizingComplex ℓ aY) ≅
-      relativeDualizingComplex ℓ (f ≫ aY) :=
-  ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f aY).app (𝟙_ _)).symm
-
-/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`, with `𝔻_X` relative to
-`f ≫ a_Y` and `𝔻_Y` relative to `a_Y`: the exchange morphism `Φ_{f,K,ω_Y}` precomposed with the
-inverse of `γ = upperShriekDualizingComplexIso`. -/
-noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (f ≫ aY) K) ⟶
-      verdierDual ℓ aY ((boundedConstructibleLowerShriek _ ℓ f).obj K) :=
-  Verdier.absoluteExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleExceptionalProjection _ ℓ f)
-    (relativeDualizingComplex ℓ (f ≫ aY)) (relativeDualizingComplex ℓ aY)
-    (upperShriekDualizingComplexIso ℓ f aY) K
-
-/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, with `𝔻_X`
-relative to `f ≫ a_Y` and `𝔻_Y` relative to `a_Y`: the double-dual morphism of `Rf_! 𝔻_X K`,
-followed by the dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y Rf_! 𝔻_X K`. The familiar
-`𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse, when it is invertible. -/
-noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ f).obj (verdierDual ℓ (f ≫ aY) K) ⟶
-      verdierDual ℓ aY ((boundedConstructibleLowerStar _ ℓ f).obj K) :=
-  Verdier.dualExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
-    (boundedConstructibleUpperShriekAdjunction _ ℓ f)
-    (boundedConstructibleExceptionalProjection _ ℓ f)
-    (relativeDualizingComplex ℓ (f ≫ aY)) (relativeDualizingComplex ℓ aY)
-    (upperShriekDualizingComplexIso ℓ f aY) K
-
-end Absolute
 
 end AlgebraicGeometry.ProEtale.CondensedRing
