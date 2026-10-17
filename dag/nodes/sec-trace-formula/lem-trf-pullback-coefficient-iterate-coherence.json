@@ -12,7 +12,8 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-pc-scheme",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "pur713-def-pullback-comparison"
  ],
  "proof": [
   {
@@ -239,5 +240,31 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-1ae41a669 (reviewer sub-agent of L); spot-checked: I read the item in full; it has 6 steps and creates no new nodes. Statement and coefficient category are unchanged: ordinary unbounded D of constant A-module sheaves on small pro-etale sites, not completed and not condensed. I checked the statements of all 9 cited nodes and the sources: Stacks 03D8 (sites-modules.tex:1236), 0D6D (sites-cohomology.tex:3658), 0B65 and 0DV0 (categories.tex:3542/3576), and blueprint main-20261015 prop-trf-trace-additivity-open-closed Step 1, which asks for exactly this cocycle-plus-naturality induction. Step 1: the nested fibre-product comparison is determined by its projections to S and B, so it is associative; rho^{gf}=g_*rho^f∘rho^g on constants. Step 2: conjugate-iso-unit-equation with L1=F_{gf}, L2=F_fF_g and composite unit R_g(eta_f F_g)eta_g is correct. Step 3: I redid the adjunct computation and both sides reduce to R_kR_g(eta_f)R_k(eta_g)eta_k, so uniqueness gives associativity. Step 4: localization universal property clauses (2) and (3) with K-flat resolutions identify the descended comparison with the binary lemma everywhere; whiskering compatibility follows from (3) and naturality of phi, which I checked. Step 5: I recomputed the cancellation of the three triples (h,t,t^m), (T,h,t^m), (T,T^m,h) by hand and it gives H(d^X_m)c_{m+1}=(c_1P_m)Q_1(c_m)d^W_m. Step 6: the induction is correct, using naturality of c_1 at u_m, and no inverse of u is used. Edge cases: h=id, t=t_W=id, m=0 under both readings, and u=0. Duplicate search found nothing equivalent: lem-trf-iterated-weil-cocycle, lem-pod-integral-pullback-composition, lem-weil-pbc-qbar-condensed-pullback-cube, pur713-def-pull-composition-module-underived and lem-sc-left-adjoint-composition-iso-associativity all state different things. No cycle and no restated clause. I accept both declared tool uses, lem-weil-pbc-proetale-derived-pullback-composition and lem-pc-kflat-resolution, as generic tools. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackCoefficientIterateCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.trf_pullback_coefficient_iterate_coherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.trf_commuting_endomorphism_powers",
+   "AlgebraicGeometry.Scheme.trfPullbackSquareComparison",
+   "AlgebraicGeometry.Scheme.trfPullbackPowerStep",
+   "AlgebraicGeometry.Scheme.trfCoefficientIterate",
+   "AlgebraicGeometry.Scheme.trf_pullback_coefficient_iterate_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/PullbackCoefficientIterateCoherence.lean",
+  "statement": "theorem trf_pullback_coefficient_iterate_coherence (A : Type u) [CommRing A] [Finite A] {W X : Scheme.{u}} (h : W ⟶ X) (tW : W ⟶ W) (t : X ⟶ X) (w : tW ≫ h = h ≫ t) (K : proEtaleDerivedCategory X A) : (∀ m : ℕ, (trfPullbackSquareComparison A h ((End.of tW) ^ (m + 1)) ((End.of t) ^ (m + 1)) (trf_commuting_endomorphism_powers h tW t w (m + 1))).hom.app K ≫ (proEtaleConstantRingDerivedPullback A h).map ((trfPullbackPowerStep A t m).hom.app K) = (trfPullbackPowerStep A tW m).hom.app ((proEtaleConstantRingDerivedPullback A h).obj K) ≫ (proEtaleConstantRingDerivedPullback A tW).map ((trfPullbackSquareComparison A h ((End.of tW) ^ m) ((End.of t) ^ m) (trf_commuting_endomorphism_powers h tW t w m)).hom.app K) ≫ (trfPullbackSquareComparison A h tW t w).hom.app ((proEtaleConstantRingDerivedPullback A ((End.of t) ^ m)).obj K)) ∧ (∀ (f : (proEtaleConstantRingDerivedPullback A t).obj K ⟶ K) (n : ℕ), trfCoefficientIterate A tW ((proEtaleConstantRingDerivedPullback A h).obj K) ((trfPullbackSquareComparison A h tW t w).hom.app K ≫ (proEtaleConstantRingDerivedPullback A h).map f) n = (trfPullbackSquareComparison A h ((End.of tW) ^ (n + 1)) ((End.of t) ^ (n + 1)) (trf_commuting_endomorphism_powers h tW t w (n + 1))).hom.app K ≫ (proEtaleConstantRingDerivedPullback A h).map (trfCoefficientIterate A t K f n))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helpers name precisely the commuting-power equality, canonical square comparison, power-step comparison and positive coefficient recursion introduced by this node. The power functor is pullback along the scheme power, including exponent zero; n indexes the positive exponent n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e75c7f66",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Every clause matches the node in Lean: the finite comm ring, arbitrary h/t/tW with tW≫h=h≫t, the ordinary uncompleted proEtaleDerivedCategory with the recorded proEtaleConstantRingDerivedPullback, scheme powers via End.of. c_m = canonical composition(tW^m,h) ≫ eqToIso ≫ composition(h,t^m).symm, as the landed pur713 comparison is built. d_m = pow_succ transport ≫ canonical (t,t^m) comparison inverted, landing in P_1(P_m K). The first identity holds for all m≥0 (types checked factor by factor). The recursion u_{n+1} and v = c_1 ≫ H(u) are correct, and the second identity covers every positive exponent. No invertibility, finite-type or Cartesian hypothesis. Edge cases m=0, n=0, identities, empty schemes, zero ring and non-invertible f are covered. statement/proof unchanged; stmt_deps gains only the landed pur713-def-pullback-comparison. The def-weil-pbc-proetale-site lean-only §1(B) rebind to the existing proEtaleDerivedCategory is justified (the operations record acts on it; it is otherwise unowned). Maintainer observation: this record has oscillated Q27/Q01/Q103/Q17. No hollow defs, theorems are sorry only, docstrings carry source, blueprint id and six proof steps, no line over 100 chars, statement verbatim. nt_compile --json: rc=0, no errors/warnings, 3.7 s. No duplicates found."
  }
 }

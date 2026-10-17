@@ -264,5 +264,28 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-bb510da26 (reviewer sub-agent of L); spot-checked: FIX: one repairable C1/C4 fault in steps 4-5, fixed in fixes/. I read the whole item, every cited statement, the proofs of lem-cbc-proetale-extension-zero-comparison and lem-weil-pbc-comparison-pullback (to pin down 'canonical'), and Stacks proetale.tex 09AF (l.5076-5087). STEP CHECKS: Steps 1-3 and 6-7 are correct, checked term by term. Step 2 uses the composite adjunctions C_X e -| rR_X and dC_U -| R_U s and applies the conjugation leaf with delta = theta^{-1} : Q2 -> Q1. The resulting c equals the existing node's alpha = Psi^{-1}(id) and the 09AF common-right-adjoint map. Steps 3 and 7 give Psi(c) = 1, so Psi(h) = h c^{-1} and the transpose of Psi(c) is eta^d. Step 6 follows from naturality of theta and u_U plus the step-5 equation at G = eF. Step 5's composite units and its triangle-identity reduction are correct, and its construction matches lem-weil-pbc-comparison-pullback step 2. THE FAULT: zeta, the unit of s -| K, and the target of a belong to the actual pro-etale inverse image of def-weil-proetale-inverse-image (a sheafified colimit tensored with A_X). The statement's s and the d -| s adjunction use localization restriction. Step 4 credited the localization lemma with identifying the two and with the unit formula; that lemma states neither. REPAIR: steps 4-5 and proof_deps now cite the reviewed node lem-pur-proetale-open-unit-evaluation, which gives rho: j_pro^{-1} = restriction and states that the unit is restriction along the projection; no cycle. The statement's a is now rho o a^0, and step 4 derives the lambda formula at W/U from the triangle identity. tool_uses is rewritten with specific reasons, definition entries dropped. Statement, stmt_deps, unit, blueprint and coefficient category (finite discrete A, constant modules) are unchanged and not weakened. Edge cases j = id, U empty, F = 0, A = 0 hold. No new nodes, no duplicate, no restatement of parent step 10, no SGA. Accepted tool uses: etale-inverse-image-restriction, weakly-etale-localization, both extension-by-zero adjunctions, cbc-extension-zero-comparison, pbc-comparison-pullback, pur-proetale-open-unit-evaluation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.openComparison_unit_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openComparisonRestrictionIso",
+   "AlgebraicGeometry.ProEtale.openComparisonHomEquiv",
+   "AlgebraicGeometry.ProEtale.openComparison_unit_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenComparisonUnitNormalization.lean",
+  "statement": "theorem openComparison_unit_normalization (A : Type (u + 1)) [CommRing A] [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) (h : (comparisonUpperStar (ModuleCat.{u + 1} A) X).obj ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).obj F) ⟶ M), openComparisonHomEquiv A j F M h = (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j).inv.app F ≫ h) ∧ (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)), (comparisonUpperStar (ModuleCat.{u + 1} A) U).map ((Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).unit.app F) ≫ (openComparisonRestrictionIso A j).hom.app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).obj F) ≫ (openImmersionRestriction (ModuleCat.{u + 1} A) j).map ((openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j).hom.app F) = (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).unit.app ((comparisonUpperStar (ModuleCat.{u + 1} A) U).obj F))",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f046b815",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Clause-by-clause match. C/R = comparisonUpperStar/comparisonAdjunction (= recorded proEtaleSiteComparisonModules). e/d = Etale.openImmersionLowerShriek and the fixed-scalar ProEtale.openImmersionLowerShriek (middle functor of recorded sfIntrinsicExtensionByZero, same as the landed c dependency). r/s and both units come from the open lower-shriek adjunctions. c = recorded openImmersionLowerShriekComparisonUpperStarIso, the conjugate of the Iso.refl sectionwise identity. a = canonical leftAdjointUniq transports around the recorded supportSiteComparisonCoefficientPullbackIso. Hom chain orientation verified by conjugation: Psi(h) = c.inv.app F ≫ h. The unit equation is in correct diagrammatic order. A : Type (u+1), forced by the c dependency, no scheme-universe restriction. Edge cases j=id, U/X empty, F=M=0, zero ring covered. Helpers non-hollow and listed in lean.declarations, docstrings carry source, blueprint and the 7 proof steps, only sorry, statement verbatim, both report sections present. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings; #print axioms gives propext/sorryAx/Classical.choice/Quot.sound. No findings requiring repair."
  }
 }

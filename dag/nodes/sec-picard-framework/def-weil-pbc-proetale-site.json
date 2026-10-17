@@ -142,22 +142,22 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.ModuleDerivedCategory",
-  "declaration": "AlgebraicGeometry.ProEtale.ModuleDerivedCategory",
-  "statement": "abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : Type _",
-  "note": "§1(B), existing interface repair. The intrinsic SheafOfModules record has a Type u coefficient plus its lift, while the finite-coefficient conventions, supported-Hom theorem and direct-image record use Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u+1} P.Coefficient) with P.Coefficient : Type (u+1). The published ModuleDerivedCategory names exactly that ambient unbounded localization on the same small site. This changes only its presentation; the site retains object universe u+1 and morphism universe u, with no equality imposed.",
-  "branch": "slopmaster2",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedCategory",
+  "statement": "abbrev proEtaleDerivedCategory (Y : Scheme.{t})\n    (A : Type t) [CommRing A] : Type _",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
   "existing": true,
-  "by": "Q103",
-  "date": "2026-10-17"
+  "note": "§1(B), existing interface repair for this consumer. The current record is the fixed ModuleCat-valued presentation with coefficients in Type (u+1). The recorded constant-ring operations and their canonical composition instead act on the already published intrinsic SheafOfModules presentation. They are not definitionally equal. Rebind to that existing ordinary unbounded derived category, exactly the ring-sheaf module formulation of this node: constant coefficients are ULift A in u+1; the original small pro-etale site has object universe u+1 and morphism universe u. No new category, universe equality, completion or additional assumption is introduced."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-71cb30d3e",
-  "group": "Q103",
+  "reviewer": "NT-stage2-cc-1e75c7f66",
+  "group": "Q17",
   "result": "pass",
-  "note": "I read the node, the blueprint (main-20261015 and -17, identical), SupportedCup.lean, the report (real Worker report and Second reading by Q103) and the dependency declarations: PurityFiniteSetting, supported_cohomology_hom, ModuleDerivedCategory, ProEtale.derivedTensor (= curriedTensor), DerivedCategory/Monoidal/Shift.lean and Mathlib mapBifunctorShift2Iso. Every clause matches: finite A with n>=1, k-scheme X, closed immersions, h = pullback.fst ≫ i, underived lowerStar in degree 0, D^+ inputs with a,b in Z as supported-Hom representatives, unbounded Hom output with no Tor hypothesis. mu is chosen from a true ∃! (restriction and multiplication; quotient maps are epi), which AGENTS.md permits. theta is lax mu_Q, then the single-complex iso, then mu; its sorry IsIso is true (degree-0 flat implies K-flat). Right-shift-first composite gives exactly the node's (-1)^(b r); upstream left-first shiftTensorShiftIso would differ by (-1)^(ab). Four sorry theorems with proof docstrings, no hollow data, verbatim lean.statement, lines <=100. nt_compile at Sheaf/Paper/SupportedCup.lean: 14.8 s, exit 0, no errors or warnings. Maintainer note: the §1(B) repairs to def-weil-pbc-proetale-site / def-weil-derived-tensor are valid but flip shared records again (H1 → Q27/Q11 → Q01/Q16 → Q103; ~68 files use intrinsic, ~51 fixed-scalar). The maintainer should fix one canonical presentation; the stage-2 fix format cannot revert dependency nodes."
+  "note": "Every clause matches the node in Lean: the finite comm ring, arbitrary h/t/tW with tW≫h=h≫t, the ordinary uncompleted proEtaleDerivedCategory with the recorded proEtaleConstantRingDerivedPullback, scheme powers via End.of. c_m = canonical composition(tW^m,h) ≫ eqToIso ≫ composition(h,t^m).symm, as the landed pur713 comparison is built. d_m = pow_succ transport ≫ canonical (t,t^m) comparison inverted, landing in P_1(P_m K). The first identity holds for all m≥0 (types checked factor by factor). The recursion u_{n+1} and v = c_1 ≫ H(u) are correct, and the second identity covers every positive exponent. No invertibility, finite-type or Cartesian hypothesis. Edge cases m=0, n=0, identities, empty schemes, zero ring and non-invertible f are covered. statement/proof unchanged; stmt_deps gains only the landed pur713-def-pullback-comparison. The def-weil-pbc-proetale-site lean-only §1(B) rebind to the existing proEtaleDerivedCategory is justified (the operations record acts on it; it is otherwise unowned). Maintainer observation: this record has oscillated Q27/Q01/Q103/Q17. No hollow defs, theorems are sorry only, docstrings carry source, blueprint id and six proof steps, no line over 100 chars, statement verbatim. nt_compile --json: rc=0, no errors/warnings, 3.7 s. No duplicates found."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

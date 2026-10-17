@@ -9,7 +9,10 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-filtered-presentation-common-refinement",
+  "lem-coef-directed-cover-colimit-assembly",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -188,5 +191,31 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-c8d1da073 (reviewer sub-agent of L); spot-checked: I read the item, the three proof deps (lem-coef-filtered-presentation-common-refinement, lem-coef-compact-small-colimits, lem-coef-directed-cover-colimit-assembly), both stmt defs (def-coef-presentable-infinity-category, def-cbc-enhanced-diagrams-cones), the consuming parent step (lem-coef-small-saturated-arrow-accessibility step 4) and the blueprint node prop-coef-integral-exceptional-adjoint. The statement is byte-identical to the base and live DAG, so nothing is weakened. The delivery creates no new nodes. Step 1: every hypothesis of common refinement holds in F. H(q(a)) and r(j) are kappa-compact, colim Hq ~ H(x) ~ colim r, and the subsets are T and the empty set. Step 2: N(c) is kappa-small (at most max(aleph0,|c|) chains, below kappa since kappa is uncountable), and P is replete and closed under kappa-small colimits, so H(x_b) is in P. Step 3: B is small and nonempty (take T empty). Step 4: regularity gives kappa-filteredness, and the quasicategorical convention also holds because N(poset) cocones are determined by vertices. Step 5: compact-small-colimits applies (E locally small, kappa-small nerve, compact vertices). Step 6: directed-cover assembly applies (B small, nonempty, finitely directed; the N(b) monotone and covering N(A) chain by chain). Step 7 just collects the results. Every hypothesis of the item is used. Small cases (singleton A, P = initial objects, T empty) are consistent. There is no duplicate (grep for 5.5.4.13/14, partial colimit, regroup), the route stays inside sk-prop-sf-biduality-general with no tool use, the item is not reachable from its own deps (705-node closure), and no SGA is cited. HTT is not archived and is cited by URL like 168 other nodes; WANTED is recorded and proof_origin agent is correct. I did not re-read HTT itself. FIX: the delivery had rewritten the inherited blueprint.from.place to say that proof paragraph 2 of prop-coef-integral-exceptional-adjoint is the HTT construction. That paragraph is the RHom adjunction calculation. I restored the inherited place (mapping-complex adjunction, lower-level presentability infrastructure) and reworded split_report.blueprint to match; the statement and proof are unchanged. The full corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactPresentationFunctorRefinement",
+  "declaration": "SSet.Presentability.compact_presentation_functor_refinement",
+  "declarations": [
+   "SSet.Presentability.partialSubsetNerve",
+   "SSet.Presentability.compactPartialSubsets",
+   "SSet.Presentability.goodCompactPartialSubsets",
+   "SSet.Presentability.goodPartialSubsetCover",
+   "SSet.Presentability.compact_presentation_functor_refinement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompactPresentationFunctorRefinement.lean",
+  "statement": "theorem compact_presentation_functor_refinement (κ : Cardinal.{u}) (hκ : Cardinal.aleph0 < κ) (hκreg : κ.IsRegular) (E F : SSet.{max (u + 1) v}) [Quasicategory E] [Quasicategory F] (hE : IsLocallySmall.{u, max (u + 1) v} E) (hF : IsLocallySmall.{u, max (u + 1) v} F) (hEcolim : HasSmallColimits.{u, max (u + 1) v} E) (hFcolim : HasSmallColimits.{u, max (u + 1) v} F) (H : E ⟶ F) (hH : PreservesColimitsIn H (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I)) (P : F _⦋0⦌ → Prop) (hPreplete : ∀ e : F _⦋1⦌, IsEquivalenceEdge F e → (P (F.δ 1 e) ↔ P (F.δ 0 e))) (hPcompact : ∀ y : F _⦋0⦌, P y → IsKappaCompact F κ y) (hPcolim : ∀ K : SSet.{max (u + 1) v}, IsKappaSmall κ K → ∀ s : K ⟶ F, (∀ k : K _⦋0⦌, P (s.app (op ⦋0⦌) k)) → ∀ c : (coconeCategory s) _⦋0⦌, IsColimiting s c → P c.1.1) (A : Type (max (u + 1) v)) [PartialOrder A] [Small.{u} A] (hA : IsKappaFiltered κ (nerve A)) (q : nerve A ⟶ E) (hq : ∀ a : A, IsKappaCompact E κ (q.app (op ⦋0⦌) (ComposableArrows.mk₀ a))) (hHq : ∀ a : A, IsKappaCompact F κ (H.app (op ⦋0⦌) (q.app (op ⦋0⦌) (ComposableArrows.mk₀ a)))) (x : (coconeCategory q) _⦋0⦌) (hx : IsColimiting q x) (J : Type (max (u + 1) v)) [PartialOrder J] [Small.{u} J] (hJ : IsKappaFiltered κ (nerve J)) (r : nerve J ⟶ (fullSubcomplex F P).toSSet) (y : (coconeCategory (r ≫ (fullSubcomplex F P).ι)) _⦋0⦌) (hy : IsColimiting (r ≫ (fullSubcomplex F P).ι) y) (heq : ∃ e : F _⦋1⦌, IsEquivalenceEdge F e ∧ F.δ 1 e = y.1.1 ∧ F.δ 0 e = H.app (op ⦋0⦌) x.1.1) (t : ∀ b : compactPartialSubsets κ A, (coconeCategory ((partialSubsetNerve b.1).ι ≫ q)) _⦋0⦌) (ht : ∀ b : compactPartialSubsets κ A, IsColimiting ((partialSubsetNerve b.1).ι ≫ q) (t b)) : Small.{u} (goodCompactPartialSubsets H P q t) ∧ IsKappaFiltered κ (nerve (goodCompactPartialSubsets H P q t)) ∧ (∀ T : Set A, HasCardinalLT T κ → ∃ b : goodCompactPartialSubsets H P q t, T ⊆ b.1.1) ∧ ∃ (q' : nerve (goodCompactPartialSubsets H P q t) ⟶ E) (a : (directedCoverIncidence (goodPartialSubsetCover H P q t)).toSSet ⊗ Δ[1] ⟶ E) (ν : (coconeCategory q') _⦋0⦌), (∀ b : goodCompactPartialSubsets H P q t, q'.app (op ⦋0⦌) (ComposableArrows.mk₀ b) = (t b.1).1.1) ∧ SSet.ι₀ ≫ a = directedCoverToShape (goodPartialSubsetCover H P q t) ≫ q ∧ SSet.ι₁ ≫ a = directedCoverToIndex (goodPartialSubsetCover H P q t) ≫ q' ∧ (∀ b : goodCompactPartialSubsets H P q t, (directedCoverFiber (goodPartialSubsetCover H P q t) b ▷ Δ[1]) ≫ a = coconeHomotopy ((partialSubsetNerve b.1.1).ι ≫ q) (t b.1)) ∧ IsColimiting q' ν ∧ ν.1.1 = x.1.1 ∧ (∀ b : goodCompactPartialSubsets H P q t, IsKappaCompact E κ (q'.app (op ⦋0⦌) (ComposableArrows.mk₀ b)) ∧ P (H.app (op ⦋0⦌) (q'.app (op ⦋0⦌) (ComposableArrows.mk₀ b)))) ∧ ∃ z : (directedCoverIncidence (goodPartialSubsetCover H P q t)).toSSet ⊗ Δ[2] ⟶ E, (_ ◁ (stdSimplex.δ 2 : Δ[1] ⟶ Δ[2])) ≫ z = a ∧ (_ ◁ (stdSimplex.δ 0 : Δ[1] ⟶ Δ[2])) ≫ z = (directedCoverToIndex (goodPartialSubsetCover H P q t) ▷ Δ[1]) ≫ coconeHomotopy q' ν ∧ (_ ◁ (stdSimplex.δ 1 : Δ[1] ⟶ Δ[2])) ≫ z = (directedCoverToShape (goodPartialSubsetCover H P q t) ▷ Δ[1]) ≫ coconeHomotopy q x",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The good-subset poset and its full-subnerve cover are real subtype/subcomplex constructions. Reuses the landed finite-filtered-subset predicate, incidence projections and fibers, and coherent-cocone extractor. The original global cocone is retained, with an incidence transformation and a 2-simplex family expressing all compatibility. Added landed statement dependencies supply those interfaces; the mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-248779b9f",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read the node, the delivered module, the report and the node JSON. The JSON is identical to the live node except for three added stmt_deps (common-refinement, directed-cover-assembly, final-index-colimit), and none of their closures reaches this item, so there is no cycle. Checked the declarations used: IsKappaFiltered, IsKappaCompact, IsLocallySmall, HasSmallColimits, PreservesColimitsIn, fullSubcomplex, IsEquivalenceEdge, coconeCategory/IsColimiting, IsFiniteFilteredSubset, the directedCover* interfaces and coconeHomotopy. Every hypothesis matches the node and none is stronger: uncountable regular κ in universe u, ambient universe max(u+1) v, P replete, κ-compact and closed under κ-small colimits, A and J small κ-filtered, r valued in P with a colimit equivalent to H(x), and an arbitrary choice t of colimiting partial cocones over κ-small filtered subsets. Every conclusion clause matches: B small and κ-filtered, cofinality for κ-small T, q'(b)=x_b, the incidence transformation with fiber equations, ν colimiting with apex x, the 2-simplex compatibility with the original cocone (same form as directed_cover_colimit_assembly), compactness and P-membership. Edge cases T empty, b empty, A or J empty, P empty and κ=ℵ0 are all handled. The helpers are real subcomplexes and subtypes, not hollow. Docstrings carry the source place and blueprint id, and the only proof is sorry. The statement field is verbatim. nt_compile --json rc=0, target 5.1 s, no warnings. The report has both required sections; the second reading was done by the same worker and says so. No findings requiring change."
  }
 }
