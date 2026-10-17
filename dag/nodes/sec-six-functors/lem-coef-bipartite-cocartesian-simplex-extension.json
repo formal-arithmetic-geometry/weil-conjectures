@@ -14,7 +14,9 @@
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-fibrations",
   "def-weil-pbc-trivial-kan-fibration",
-  "lem-coef-joyal-model-structure"
+  "lem-coef-joyal-model-structure",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-infinity-join-cone-calculus"
  ],
  "proof": [
   {
@@ -280,5 +282,54 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-f6689d65f (reviewer sub-agent of L); spot-checked: I read the full item, its ten steps and the full statement of every cited node; none is merged. The statement is inherited and unchanged, and the delivery adds no new nodes. Step 1: lem-cbc-relative-coslice-left-fibration with K=Δ^0, K_0=∅, f=x gives the left fibration E_{x/}→E×_B B_{b/}. Its pullback along U→E×_B B_{b/}, (y,σ)↦(y,g_0(id⋆σ)), is exactly L^0, so L^0 and J_a^0 are quasicategories. This is an off-unit tool use (unit sk-prop-sf-cbc), declared and accepted. Step 2: {d}↪Δ^d=(Δ^{d-1})^▷ is right anodyne, with the correct orientation. Step 3: P_k is the pushout-join with A={d}, B=Δ^d, K=∂Δ^k, L=Δ^k. I confirmed the variance on Λ^2_1, so lem-coef-infinity-anodyne-cocones makes P_k↪Δ^d⋆Δ^k inner anodyne. Fillers keep τ, and k=0 gives surjectivity on vertices, so R is a trivial Kan fibration. Steps 4-5: R_a is a pullback of R, so it is trivial too. L and J_a are quasicategories by lifting inner horns. The Joyal weak factorization system (monomorphisms, trivial fibrations) makes R and R_a categorical equivalences. Step 6: J_a^0=L(x,f_a) on all degrees, since g_0(id⋆const_a) is the degenerate simplex on f_a, so s_a is initial. Step 7: the right-pinched lifting domain ((∂Δ^k)⋆Δ^0)∪Δ^k∪Δ^0 glues correctly, and the mapping-space map is a trivial fibration. lem-coef-kan-quillen-right-proper and two-out-of-three then make every lift z of s_a initial. Step 8: a Λ^2_0 horn on s_a, s_b is filled by cocartesianness, and cancellation makes t_u cocartesian. Step 9: N(J) is 1-skeletal, reading the hypothesis as forbidding the pair (u,u); the statement stays true even otherwise, because {d}⋆∂Δ^k=Λ^{k+1}_0. Step 10: lifting through the monomorphism V↪N(J) gives the section with prescribed vertices, last edges s_a and cocartesian terminal evaluation. I checked d=0, J=∅, discrete J and J=[1]. Not duplicates: lem-coef-join-pullback-simplex-extension and lem-coef-initial-poset-slice-restriction state different results. HTT, HA and Kerodon are not archived; the WANTED lines are filed and proof_origin=agent is correct. There is no SGA citation, and proof_deps equals the union of the step uses. The item is not a target, so the base-change check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BipartiteCocartesianSimplexExtension",
+  "declaration": "SSet.Enhanced.bipartite_cocartesian_simplex_extension",
+  "declarations": [
+   "SSet.Enhanced.BipartiteSimplex",
+   "SSet.Enhanced.bipartiteOperator_restrict",
+   "SSet.Enhanced.bipartiteOperator_over",
+   "SSet.Enhanced.bipartiteOperator",
+   "SSet.Enhanced.bipartiteOperator_id",
+   "SSet.Enhanced.bipartiteOperator_comp",
+   "SSet.Enhanced.bipartiteL",
+   "SSet.Enhanced.bipartiteProjection_naturality",
+   "SSet.Enhanced.bipartiteProjection",
+   "SSet.Enhanced.lastVertexInclusion",
+   "SSet.Enhanced.finalVertexBase",
+   "SSet.Enhanced.bipartiteL0",
+   "SSet.Enhanced.bipartiteRestriction_restrict",
+   "SSet.Enhanced.bipartiteRestriction_over",
+   "SSet.Enhanced.bipartiteRestrictionApp",
+   "SSet.Enhanced.bipartiteRestriction_naturality",
+   "SSet.Enhanced.bipartiteRestriction",
+   "SSet.Enhanced.bipartiteEvaluation_naturality",
+   "SSet.Enhanced.bipartiteEvaluation",
+   "SSet.Enhanced.bipartiteFiberRestriction_condition",
+   "SSet.Enhanced.bipartiteFiberRestriction",
+   "SSet.Enhanced.joinZeroInterval",
+   "SSet.Enhanced.bipartiteLiftEdge",
+   "SSet.Enhanced.bipartiteBaseEdge",
+   "SSet.Enhanced.IsBipartiteCocartesianSection",
+   "SSet.Enhanced.BipartiteExtensionConclusion",
+   "SSet.Enhanced.bipartite_cocartesian_simplex_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BipartiteCocartesianSimplexExtension.lean",
+  "statement": "theorem bipartite_cocartesian_simplex_extension {C J : Type u} [Category.{u} C] [Category.{u} J] (hJ : ∀ {a b c : J} (f : a ⟶ b) (h : b ⟶ c), (∃ e : a = b, f = eqToHom e) ∨ (∃ e : b = c, h = eqToHom e)) {E : SSet.{u}} [Quasicategory E] (p : E ⟶ nerve C) (hp : InnerFibration p) (d : ℕ) (τ : (Δ[d] : SSet.{u}) ⟶ E) (g : orderedJoinFunctor.obj ((Δ[d] : SSet.{u}), nerve J) ⟶ nerve C) (hg : orderedJoinInl (Δ[d] : SSet.{u}) (nerve J) ≫ g = τ ≫ p) (s : (nerve J) _⦋0⦌ → ((Δ[1] : SSet.{u}) ⟶ E)) (hs_source : ∀ a : (nerve J) _⦋0⦌, SSet.stdSimplex.map (SimplexCategory.δ (1 : Fin 2)) ≫ s a = lastVertexInclusion d ≫ τ) (hs_over : ∀ a : (nerve J) _⦋0⦌, s a ≫ p = bipartiteBaseEdge g a) (hs_cocartesian : ∀ a : (nerve J) _⦋0⦌, IsCocartesianEdge p (s a)) : BipartiteExtensionConclusion.{u, v} d p τ g s",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 6e868c2e9d42: the actual last-vertex restriction, strict fiber map, complete equivalence and initiality clauses, specified cocartesian lifts, canonical terminal evaluation, arbitrary prescribed sections and the full source are all retained. Uses the exact Mathlib boundary lifting match directly; no duplicate trivial-fibration definition or dependency repair. stmt_deps adds the two already-landed owners of concrete coslice/join interfaces. Maintainer FIX: construction proof obligations are named sorry theorems with source and proof-plan docstrings; concrete data and the main signature are unchanged. The module directly imports the enhanced-diagrams owner. See the independent second-reading report for reproduced per-file compilation.",
+  "fixed_by": "NT-stage2-Codex-c08fad00c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c08fad00c",
+  "group": "NH",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. All mathematical clauses match. Replaced inline construction proofs with named sorry obligations, supplied the independent second reading, and updated declaration records. Original and fixed modules compile cleanly through scompile.py. No repository or branch mutations."
  }
 }
