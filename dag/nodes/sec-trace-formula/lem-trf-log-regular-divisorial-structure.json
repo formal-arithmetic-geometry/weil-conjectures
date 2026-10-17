@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "pqf-def-locnoeth",
-  "def-weil-pbc-normal-ring"
+  "def-weil-pbc-normal-ring",
+  "def-trf-log-regular-pair"
  ],
  "proof": [
   {
@@ -215,5 +216,23 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-d5699b0da (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 new nodes, every cited statement, ILO VI 1.1-1.8 (pp. 69-70; 1.4 divisorial/dense citing Niziol 2.6, 1.6 completed models citing Kato 3.2), and the unit/chapter route. The statement is unchanged and true. Steps 3-7 are correct: D(s) triviality locus; s nonzero by empty-ideal contraction; density via the local Spec A; injectivity via contraction, sharpness and cancellation; factor lemma then double ideal contraction for surjectivity; geometric-stalk detection; affine normality leaf. All 3 new nodes are true and tested on small cases: P=0 Cohen/ramified cases, P=N, C[[x,y]]/(p-xy), k[[u^2,uv,v^2]], C[[X,Z]]/(XZ-p^2), and the non-saturated counterexample k[[t^2,t^3]]. They are statement-only, self-contained, searched, not duplicates (rg over the DAG) and not restatements of the item. Two repairable faults, fixed in fixes/: (1) E1/E3: the completed-chart node and step 1 split only into 'equal char' and 'mixed (0,p)', which misses a local ring of characteristic p^n before domain-ness is known. Restated as Kato's 'contains a field / contains no field (then char k = p)' split, with the chart replacement made explicit as a chart on an affine pointed étale neighbourhood. (2) C1/C4: step 2 applied the triples-colimit faithful-flatness lemmas to the pointed-neighbourhood colimit O^sh_{Y,ybar} without a comparison. Added lem-exc-affine-strict-local-ring-comparison (same use as sibling lem-trf-snc-divisorial-log-chart), wrote out the pairs/triples match, recomputed proof_deps and declared it in split_report.tool_uses. No cycle. The other tool uses are accepted: the two sk-thm-br strict-henselization lemmas and the normal-domain Mathlib leaf. No SGA cited, no target touched.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ddef70575",
+  "group": "Q160",
+  "result": "pass",
+  "note": "All clauses and dependencies match; report sections and docstrings are substantive; side-overlay compilation passed with no errors."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LogRegularDivisorialStructure",
+  "declaration": "AlgebraicGeometry.logRegular_divisorialStructure",
+  "file": "lean/Sheaf/TraceFormula/LogRegularDivisorialStructure.lean",
+  "statement": "theorem logRegular_divisorialStructure (X : FineSaturatedLogScheme.{u}) (hX : X.IsLogRegular) : (∃ U : X.scheme.Opens, Dense (U : Set X.scheme) ∧ X.logStructure.trivialityLocus = (U : Set X.scheme) ∧ Presheaf.IsSheaf X.scheme.smallEtaleTopology (divisorialLogPresheaf U.ι) ∧ ∃ (e : X.logStructure.monoidSheaf.obj ≅ divisorialLogPresheaf U.ι), e.hom ≫ divisorialStructuralMap U.ι = X.logStructure.alpha ∧ ∀ (W : X.scheme.Etale) (s : X.logStructure.monoidSheaf.obj.obj (op W)), IsUnit ((pullback.fst W.hom U.ι).appTop (X.logStructure.alpha.app (op W) s))) ∧ (∀ y : X.scheme, IsDomain (X.scheme.presheaf.stalk y) ∧ IsIntegrallyClosed (X.scheme.presheaf.stalk y)) ∧ (∀ (U : X.scheme.Opens), IsAffineOpen U → IsIntegral U.toScheme → IsIntegrallyClosed (Γ(X.scheme, U)))",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

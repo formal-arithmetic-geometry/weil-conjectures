@@ -159,5 +159,24 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-59c6b950f (reviewer sub-agent of L); spot-checked: I read the item in full, its stmt_dep def-trf-fs-log-blowup (which defines P^gp and integrality), the citer lem-trf-fs-face-sharpening, the siblings lem-trf-face-localization-fs, lem-trf-face-subgroup-saturated, lem-trf-log-regular-sharp-chart and lem-trf-log-regular-monoidal-ideal-contraction, the unit sk-i-curve-zero, and ILO Exposé VIII 3.1.1-3.1.2 (printed p.98, through pdftotext). The statement matches 3.1.2, where for integral M the localization is M_S=M[S^{-1}] inside M^gp; integrality is a hypothesis of the item. Step 1 is correct: f=f-0 and -f=0-f both lie in Q_F, so F^gp is contained in the units. Step 2 is correct: from q+q'=f+f' in Q^gp, integrality gives equality in Q, and the face property applied to f+f' in F gives q,q' in F, so x is in F^gp. Both steps are genuinely elementary and proof_deps=[] is right. Small cases checked: N with {0}, N with N, N^2 with a coordinate face, and Q^x in any integral Q. The citer's fs hypothesis implies integrality. The item is a strict sub-fact of the citer, not a restatement. rg searches of the DAG and of both blueprint snapshots found no duplicate, so same_as=[] is right. There are no new nodes, no tool_uses and no SGA source; this is not a target node, so the base-change and coefficient checks do not apply. One fix: proof_origin said by=document, but the ILO place gives only the definitions and not the units characterization. I set it to by=agent with the ILO place and added a note to split_report.summary in fixes/dag/nodes/sec-trace-formula/lem-trf-face-localization-units.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-01836b1e1",
+  "group": "Q85",
+  "result": "fix",
+  "note": "Reviewed immutable delivery and sources. Complete fixes generalize Q’s universe, remove an unused import and inline tactic, synchronize the statement record, and expand the report. Original and replacement compile successfully through scompile.py. Full findings are in review.md; repositories and branch heads were unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FaceLocalizationUnits",
+  "declaration": "Algebra.isAddUnit_addLocalization_iff_face",
+  "file": "lean/Sheaf/AlgebraicGeometry/FaceLocalizationUnits.lean",
+  "statement": "theorem isAddUnit_addLocalization_iff_face {Q : Type u} [AddCommMonoid Q] (hQ : Function.Injective (fun q : Q => AddLocalization.mk q (⟨0, AddSubmonoid.mem_top 0⟩ : (⊤ : AddSubmonoid Q)))) (F : AddSubmonoid Q) (hF : ∀ a b : Q, a + b ∈ F → a ∈ F ∧ b ∈ F) (x : AddLocalization F) : IsAddUnit x ↔ ∃ f₁ f₂ : F, x = AddLocalization.mk (f₁ : Q) f₂",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-01836b1e1"
  }
 }
