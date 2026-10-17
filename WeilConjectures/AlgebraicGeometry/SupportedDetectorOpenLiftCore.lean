@@ -85,7 +85,7 @@ theorem exists_supported_detector_open_lift_core
       ∃ (R : DerivedCategory
           (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤
           schemeDerivedCategory X)
-        (adj : (SheafOfModules.overFunctor.{u}
+        (_ : (SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)
         (Q : schemeDerivedQCohCategory X),
         Scheme.IsPerfect X Q.obj ∧

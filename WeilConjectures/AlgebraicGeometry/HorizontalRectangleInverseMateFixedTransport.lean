@@ -105,6 +105,8 @@ private theorem qc_comp_hom_map
     (E : schemeDerivedQCohCategory Z) :
     (schemeDerivedQCohProperty X).ι.map ((horizontalMateComp f g).hom.app E) =
       (horizontalMateAmbientComp f g).hom.app E.obj := by
+  simp only [horizontalMateComp, Functor.fullyFaithfulCancelRight_hom_app,
+    Functor.map_preimage]
   rfl
 
 private theorem qc_comp_inv_map
@@ -114,6 +116,8 @@ private theorem qc_comp_inv_map
     (E : schemeDerivedQCohCategory Z) :
     (schemeDerivedQCohProperty X).ι.map ((horizontalMateComp f g).inv.app E) =
       (horizontalMateAmbientComp f g).inv.app E.obj := by
+  simp only [horizontalMateComp, Functor.fullyFaithfulCancelRight_inv_app,
+    Functor.map_preimage]
   rfl
 private theorem source_inv_map
     [∀ Z : Scheme.{u},
