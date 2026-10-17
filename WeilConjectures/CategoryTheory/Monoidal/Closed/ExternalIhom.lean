@@ -428,17 +428,19 @@ variable {C₁ C₁' C₂ C C' : Type*} [Category* C₁] [Category* C₁'] [Cate
 
 omit [MonoidalClosed C₁] [MonoidalClosed C₁'] [MonoidalClosed C₂] [MonoidalClosed C]
   [MonoidalClosed C'] [∀ M N, IsIso (π M N)] [∀ M N, IsIso (π₁ M N)] [IsIso Ex]
-  [∀ N, IsIso (κ N)] in
+  [∀ N, IsIso (κ N)] [SymmetricCategory C₁] [SymmetricCategory C₁'] [SymmetricCategory C]
+  [SymmetricCategory C'] [F₁.Braided] [F₁'.Braided] [G.Braided] in
 /-- The compatibility of the base change map `Ex : L₁ ⋙ F₁ ⟶ F₁' ⋙ L` with the projection maps
 `π₁` of `L₁` and `π` of `L`, through the comonoidal structures of `F₁`, `F₁'` and the comparison
 maps `κ N : F₁' G₁ N ⟶ G F₁ N`. -/
-def ProjectionExchange : Prop :=
+def ProjectionExchange (δ₁' : ∀ M N : C₁', F₁'.obj (M ⊗ N) ⟶ F₁'.obj M ⊗ F₁'.obj N)
+    (δ₁ : ∀ M N : C₁, F₁.obj (M ⊗ N) ⟶ F₁.obj M ⊗ F₁.obj N) : Prop :=
   ∀ (M : C₁') (N : C₁), F₁.map (π₁ M N) ≫ Ex.app (M ⊗ G₁.obj N) ≫
-    L.map (Functor.OplaxMonoidal.δ F₁' M (G₁.obj N)) ≫ L.map (F₁'.obj M ◁ κ N) =
-      Functor.OplaxMonoidal.δ F₁ (L₁.obj M) N ≫ Ex.app M ▷ F₁.obj N ≫
-        π (F₁'.obj M) (F₁.obj N)
+    L.map (δ₁' M (G₁.obj N)) ≫ L.map (F₁'.obj M ◁ κ N) =
+      δ₁ (L₁.obj M) N ≫ Ex.app M ▷ F₁.obj N ≫ π (F₁'.obj M) (F₁.obj N)
 
-variable (hEx : ProjectionExchange π π₁ Ex κ)
+variable (hEx : ProjectionExchange π π₁ Ex κ (Functor.OplaxMonoidal.δ F₁')
+  (Functor.OplaxMonoidal.δ F₁))
 
 omit [MonoidalClosed C] [MonoidalClosed C'] [G.Braided] in
 include hπ hExξ hEx in
@@ -502,7 +504,7 @@ lemma projectionTensorMap_map_tensorHom
   rw [tensorHom_def, R.map_comp, ← projectionTensorMap_naturality_left_assoc adj π hπ,
     ← projectionTensorMap_naturality_right adj π hπr, tensorHom_def, Category.assoc]
 
-include hπ hπ₁ hExξ hEx in
+include hπ hπ₁ hExξ in
 /-- **The external internal-hom map under an exceptional inverse image.** Let `R = g^!` be right
 adjoint to `L = g_!` with an associative invertible projection formula for `G = g^*`, and let
 `g` be the base change of `g₁ : Z₁' ⟶ Z₁` along the first projection, with base change map
@@ -512,11 +514,18 @@ maps of `R` at `(F₁ M, F₂ N)` are isomorphisms, then `R` of the external int
 `(E₁, L₁, E₂, L₂)` is an isomorphism if and only if the external internal-hom map of
 `(G₁ E₁, R₁ L₁, E₂, L₂)` is. -/
 theorem isIso_map_externalIhomMap_iff
+    (δ₁' : ∀ M N : C₁', F₁'.obj (M ⊗ N) ⟶ F₁'.obj M ⊗ F₁'.obj N)
+    (hδ₁' : ∀ M N, δ₁' M N = Functor.OplaxMonoidal.δ F₁' M N)
+    (δ₁ : ∀ M N : C₁, F₁.obj (M ⊗ N) ⟶ F₁.obj M ⊗ F₁.obj N)
+    (hδ₁ : ∀ M N, δ₁ M N = Functor.OplaxMonoidal.δ F₁ M N)
+    (hEx : ProjectionExchange π π₁ Ex κ δ₁' δ₁)
     (hπr : ∀ (M : C') {N N' : C} (φ : N ⟶ N'),
       L.obj M ◁ φ ≫ π M N' = π M N ≫ L.map (M ◁ G.map φ))
+    (δG : ∀ N N' : C, G.obj (N ⊗ N') ⟶ G.obj N ⊗ G.obj N')
+    (hδG : ∀ N N', δG N N' = Functor.OplaxMonoidal.δ G N N')
     (hassoc : ∀ (M : C') (N N' : C), π M N ▷ N' ≫ π (M ⊗ G.obj N) N' ≫
       L.map (α_ M (G.obj N) (G.obj N')).hom =
-        (α_ _ N N').hom ≫ π M (N ⊗ N') ≫ L.map (M ◁ Functor.OplaxMonoidal.δ G N N'))
+        (α_ _ N N').hom ≫ π M (N ⊗ N') ≫ L.map (M ◁ δG N N'))
     [∀ N, IsIso ((mateEquiv adj₁ adj ξ).natTrans.app N)]
     (e₂ : F₂ ⋙ G ≅ F₂')
     (he₂ : ∀ X Y : C₂, μ G (F₂.obj X) (F₂.obj Y) ≫ G.map (μ F₂ X Y) ≫ e₂.hom.app (X ⊗ Y) =
@@ -525,6 +534,9 @@ theorem isIso_map_externalIhomMap_iff
     (E₁ L₁ : C₁) (E₂ L₂ : C₂) :
     IsIso (R.map (externalIhomMap F₁ F₂ E₁ L₁ E₂ L₂)) ↔
       IsIso (externalIhomMap F₁' F₂' (G₁.obj E₁) (R₁.obj L₁) E₂ L₂) := by
+  obtain rfl : δ₁' = Functor.OplaxMonoidal.δ F₁' := funext fun M ↦ funext (hδ₁' M)
+  obtain rfl : δ₁ = Functor.OplaxMonoidal.δ F₁ := funext fun M ↦ funext (hδ₁ M)
+  obtain rfl : δG = Functor.OplaxMonoidal.δ G := funext fun N ↦ funext (hδG N)
   set BC := (mateEquiv adj₁ adj ξ).natTrans
   set H₁ := (ihom E₁).obj L₁
   set H₂ := (ihom E₂).obj L₂
