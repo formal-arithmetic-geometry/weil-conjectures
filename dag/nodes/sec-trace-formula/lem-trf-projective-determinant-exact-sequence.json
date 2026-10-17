@@ -2,7 +2,7 @@
  "id": "lem-trf-projective-determinant-exact-sequence",
  "kind": "statement",
  "title": "Determinant-line isomorphism for an exact sequence of finite projective modules",
- "statement": "Let $R$ be a commutative ring and let $0\\to U\\xrightarrow{i}V\\xrightarrow{p}W\\to0$ be an exact sequence of $R$-modules, meaning that $i$ is injective, $p$ is surjective and $\\operatorname{im}(i)=\\ker(p)$. Assume $U,V,W$ are direct summands of finite free $R$-modules [def-weil-pbc-projective-module]. For any such module $E$, its determinant module $\\det_R(E)$ is obtained on finite free localizations [lem-weil-pbc-finite-projective-standard-free-cover] by taking the top exterior power [def-weil-pbc-exterior-algebra] and identifying these rank-one modules on overlaps using the top exterior powers of change-of-basis maps; the determinant of the zero module is $R$. These local modules define an invertible $R$-module (a finite projective module locally free of rank one). There is a canonical isomorphism $\\gamma_{i,p}:\\det_R(U)\\otimes_R\\det_R(W)\\xrightarrow{\\sim}\\det_R(V)$. On a localization where $U,W$ have bases $u_1,\\ldots,u_r$ and $w_1,\\ldots,w_s$, its formula is\n$$\\gamma_{i,p}((u_1\\wedge\\cdots\\wedge u_r)\\otimes(w_1\\wedge\\cdots\\wedge w_s))=i(u_1)\\wedge\\cdots\\wedge i(u_r)\\wedge\\widetilde w_1\\wedge\\cdots\\wedge\\widetilde w_s,$$\nwhere $p(\\widetilde w_j)=w_j$. This formula is independent of the lifts and bases and commutes with further localization; it includes $r=0$ and $s=0$.",
+ "statement": "Let $R$ be a commutative ring and let $0\\to U\\xrightarrow{i}V\\xrightarrow{p}W\\to0$ be an exact sequence of $R$-modules, meaning that $i$ is injective, $p$ is surjective and $\\operatorname{im}(i)=\\ker(p)$. Assume $U,V,W$ are direct summands of finite free $R$-modules [def-weil-pbc-projective-module]. For any such module $E$, its determinant module $\\det_R(E)$ is obtained on finite free localizations [lem-weil-pbc-finite-projective-standard-free-cover] by taking the top exterior power [def-weil-pbc-exterior-algebra] and identifying these rank-one modules on overlaps using the top exterior powers of change-of-basis maps; the determinant of the zero module is $R$. These local modules define an invertible $R$-module (a finite projective module locally free of rank one). Tensor products are as in [def-weil-pbc-module-tensor-product]. There is a canonical isomorphism $\\gamma_{i,p}:\\det_R(U)\\otimes_R\\det_R(W)\\xrightarrow{\\sim}\\det_R(V)$. On a localization where $U,W$ have bases $u_1,\\ldots,u_r$ and $w_1,\\ldots,w_s$, its formula is\n$$\\gamma_{i,p}((u_1\\wedge\\cdots\\wedge u_r)\\otimes(w_1\\wedge\\cdots\\wedge w_s))=i(u_1)\\wedge\\cdots\\wedge i(u_r)\\wedge\\widetilde w_1\\wedge\\cdots\\wedge\\widetilde w_s,$$\nwhere $p(\\widetilde w_j)=w_j$. This formula is independent of the lifts and bases and commutes with further localization; it includes $r=0$ and $s=0$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0FJB (lemma-det-ses), first and second constructions, with the determinant-module definition preceding it."
@@ -10,11 +10,136 @@
  "stmt_deps": [
   "def-weil-pbc-projective-module",
   "lem-weil-pbc-finite-projective-standard-free-cover",
-  "def-weil-pbc-exterior-algebra"
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Projectivity of $W$ lifts $\\mathrm{id}_W$ through the surjection $p$, giving an $R$-linear $s:W\\to V$ with $ps=1$. The map $t:U\\oplus W\\to V$, $(u,w)\\mapsto i(u)+s(w)$, is an isomorphism: given $v$, the element $v-s(pv)$ is in $\\ker p=\\operatorname{im}i$, so there is a unique $u$ with $i(u)=v-s(pv)$; this gives its inverse. Localizing these mutually inverse formulas preserves the splitting, so no assertion about preservation of an arbitrary exact sequence is needed. Choose finite standard free covers for $U$ and $W$. Their pairwise products give a common finite standard cover: if $1=\\sum a_jf_j=\\sum b_kg_k$, then $1=\\sum_{j,k}a_jb_kf_jg_k$. On each member $A=R_h$, the localized modules $U_h,W_h$ have finite bases of lengths $r,s$, and $t_h$ gives a concatenated basis of $V_h$ of length $r+s$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first construction: reduction to free local charts"
+   }
+  },
+  {
+   "text": "First make precise the determinant modules used in the statement. For a finite projective $E$, choose a finite standard free cover and, on a member $D(f_a)$ where $E_{f_a}$ has basis length $n_a$, take $L_a=\\bigwedge^{n_a}_{R_{f_a}}E_{f_a}$. It is free of rank one by the exterior-power basis theorem. Exterior powers commute with localization. Thus on a nonempty overlap these lines identify by the exterior power of the identity of $E_{f_af_b}$. The two basis lengths agree there: if $n_a<n_b$, the basis theorem would make $\\bigwedge^{n_b}E_{f_af_b}$ both zero and free of rank one, forcing $R_{f_af_b}=0$; interchange $a,b$ for the other inequality. On a zero overlap all modules and maps are zero and the identification is unique. The induced exterior map sends a wedge to the wedge of the images: it is obtained by applying the map to every factor of the tensor algebra, which preserves the relations $x\\otimes x$. Consequently identity and composition of these maps follow on pure wedges, which span. The transition isomorphisms therefore satisfy the cocycle condition, including empty overlaps.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "new-v2-generic-exterior-power-localization",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Determinants section (section-determinants), determinant-module definition before Tag 0FJB; local exterior-power description"
+   }
+  },
+  {
+   "text": "On $X=\\operatorname{Spec}R$, form the associated module sheaves $\\widetilde{L_a}$ on the standard opens of the preceding step. Their restrictions are the corresponding localized modules, so the transition isomorphisms give sheaf gluing data. Glue these sheaves by the module-sheaf gluing theorem, obtaining $\\mathcal D_E$. It is quasi-coherent by the affine-local definition, since every $\\widetilde{L_a}$ is quasi-coherent. Put $D_E=\\Gamma(X,\\mathcal D_E)$. The affine tilde/Gamma counit identifies $\\widetilde{D_E}$ with $\\mathcal D_E$, and the standard-open section formula gives $(D_E)_{f_a}\\cong L_a$. Since these are free of rank one, the standard-cover finite-projectivity criterion makes $D_E$ finite projective and locally of rank one. Define $\\det_R(E)=D_E$. Two covers have the common refinement by pairwise products; the transition identifications there give mutually inverse glued sheaf maps, hence mutually inverse module maps on global sections. Their cocycle equations show independence of refinements. This is exactly the construction by local top wedges stipulated in the statement, rather than an additional choice of determinant object.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sc-affine-standard-cover-finite-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Determinant-module definition before Tag 0FJB, expanded using Schemes Tags 01HV/01IA/01IB and Sheaves Tags 00AL/00AM"
+   }
+  },
+  {
+   "text": "On a simultaneous free chart $A=R_h$, let $t_h:U_h\\oplus W_h\\xrightarrow{\\sim}V_h$ be the splitting isomorphism of step 1. Invert the top-exterior direct-sum isomorphism and follow it by $\\bigwedge^{r+s}t_h$. This gives an isomorphism $\\gamma_h:\\bigwedge^rU_h\\otimes_A\\bigwedge^sW_h\\to\\bigwedge^{r+s}V_h$. Here $\\bigwedge^{r+s}t_h$ and the map induced by $t_h^{-1}$ are inverse, since their composites fix every spanning pure wedge, directly from the tensor-algebra quotient construction. The direct-sum theorem characterizes the inverse on arbitrary pure wedges; consequently $\\gamma_h$ sends $(u_1\\wedge\\cdots\\wedge u_r)\\otimes(w_1\\wedge\\cdots\\wedge w_s)$ to $i(u_1)\\wedge\\cdots\\wedge i(u_r)\\wedge s(w_1)\\wedge\\cdots\\wedge s(w_s)$. Thus this is an actual map of exterior powers and an isomorphism, not merely a prescription on chosen generators.",
+   "uses": [
+    "lem-sc-exterior-top-direct-sum",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first proof: construction of the wedge map"
+   }
+  },
+  {
+   "text": "For arbitrary lifts $\\widetilde w_j$ of $w_j$, exactness on the split chart gives $\\widetilde w_j=s(w_j)+i(a_j)$ with $a_j\\in U_h$. Expand the displayed wedge by multilinearity. Every term except the one using all $s(w_j)$ contains at least $r+1$ factors in $i(U_h)$. Expand these factors in a basis of the free rank-$r$ module $U_h$; each resulting summand repeats a basis vector, so alternation makes it zero. Hence the displayed formula agrees with $\\gamma_h$ for all lifts, and choosing a different splitting gives exactly the same map. This works for arbitrary tuples $u_j,w_j$, not just basis tuples. The vanishing uses alternation $x\\wedge x=0$, so it remains valid in characteristic two.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first proof: omitted verification of independence of lifts"
+   }
+  },
+  {
+   "text": "The construction on each chart uses the canonical direct-sum exterior map and the specified maps $i,p$; the splitting has just been eliminated. It therefore has no remaining dependence on either chosen basis. Explicitly, expand any replacement tuple in the original basis. Multilinearity and alternation expand both the input wedges and the output wedge with identical coefficients (a term with repeated indices vanishes, and interchanging two indices changes the sign in both expressions). Thus the same linear map satisfies the formula in the replacement bases. For further localization $A\\to B$, the exterior-power localization theorem sends each pure wedge to the wedge of its images, and tensor localization sends a pure tensor to the tensor of its images. The two localized maps therefore have the identical formula on pure tensors of pure wedges, which span, so they agree. In particular, on every overlap of the standard cover the two maps $\\gamma_h$ agree under the transition identifications of the determinant modules.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "new-v2-generic-exterior-power-localization",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first construction: basis independence and localization compatibility"
+   }
+  },
+  {
+   "text": "Write $P=D_U\\otimes_R D_W$ and $Q=D_V$. By tensor localization and the determinant identifications of step 3, the local maps are isomorphisms $P_h\\to Q_h$, and step 6 says that they agree on overlaps. For $x\\in P$, their values on $x/1$ form a compatible family in the $Q_h$. The standard-cover exactness theorem gives a unique $y\\in Q$ with these values; define $\\gamma(x)=y$. Uniqueness gives additivity and $R$-linearity. It also shows that the localization of $\\gamma$ is $\\gamma_h$, first on $x/1$ and then on every fraction $x/h^e$. Apply the same argument to the compatible inverses $\\gamma_h^{-1}$ to obtain $\\delta:Q\\to P$. Both $\\delta\\gamma$ and $\\gamma\\delta$ localize to the identity on the finite standard cover. Injectivity in the cover exactness theorem makes them the identity globally. This proves the required canonical isomorphism. Refining the cover produces the same map, since its localized values are prescribed by the same formula and that theorem also gives uniqueness.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first construction: local-to-global isomorphism, with Algebra Tag 00EK"
+   }
+  },
+  {
+   "text": "For $E=0$ use the empty basis: its local determinant is $\\bigwedge^0(0)=R$ with generator $1$, and all transition maps are identities, so $D_0=R$ canonically. If $r=0$, injectivity and exactness identify $V_h$ with $W_h$ and the formula is the ordinary empty-left-wedge identification $A\\otimes\\det(W_h)\\to\\det(V_h)$. If $s=0$, it is the corresponding right-unit identification; if both vanish it is multiplication $A\\otimes_A A\\to A$. The same formulas pass through the gluing. If $R=0$, every unital $R$-module is zero; all asserted maps are the unique isomorphism of zero modules. Finally, the localization calculation of step 6 holds after localizing any finite cover, since the images of its elements still generate the unit ideal. Uniqueness in step 7 therefore proves that the global isomorphism commutes with further localization as asserted.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Determinant definition and Tag 0FJB: degree-zero and zero-ring cases, and compatibility of the local constructions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "new-v2-generic-exterior-power-localization",
+  "def-weil-pbc-exterior-algebra",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-sc-exterior-top-direct-sum",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJB (lemma-det-ses), first proof and preceding determinant-module definition; omitted checks expanded using the cited algebra and affine-sheaf lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +182,52 @@
    "results": "25 hits; top=['Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean', 'Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean', 'Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean', 'Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean', 'Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean', 'Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean', 'Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean', 'Mathlib/LinearAlgebra/Matrix/AbsoluteValue.lean']; note=; digest=66996cb79f4ffb36. Read exteriorPower.map and its wedge formula (ExteriorPower/Basic.lean:260-298), and LinearMap.det_eq_det_mul_det (Determinant.lean:811): the latter is a scalar determinant identity for an endomorphism with free submodule and quotient, not a canonical determinant-line isomorphism for finite projectives.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*(exact|shortExact|ses)|determinant.*line|top.*exterior.*(prod|sum)",
+   "results": "14 hits; top=['Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean', 'Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean', 'Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean', 'Mathlib/LinearAlgebra/Complex/Determinant.lean', 'Mathlib/LinearAlgebra/Complex/Determinant.lean', 'Mathlib/LinearAlgebra/Matrix/AbsoluteValue.lean', 'Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean', 'Mathlib/LinearAlgebra/Matrix/Kronecker.lean']; note=; digest=728f22c672af123a. Read exteriorPower.alternatingMapLinearEquiv (Basic.lean:212), exteriorPower.map (Basic.lean:263), and LinearMap.det_eq_det_mul_det (Determinant.lean:811). The last is a scalar determinant identity for an endomorphism with free submodule/quotient, not the finite-projective determinant-module isomorphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map, LinearEquiv",
+   "results": "1 hits; top=['exteriorPower.alternatingMapLinearEquiv_symm_map']; note=; digest=1fc65398fb89b43c. Read exteriorPower.alternatingMapLinearEquiv (Basic.lean:212), exteriorPower.map (Basic.lean:263), and LinearMap.det_eq_det_mul_det (Determinant.lean:811). The last is a scalar determinant identity for an endomorphism with free submodule/quotient, not the finite-projective determinant-module isomorphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant line of a finite projective module is multiplicative in short exact sequences",
+   "results": "8 hits; top=['LinearMap.det', 'LinearMap.det_prodMap', 'LinearMap.associated_det_comp_equiv', 'LinearMap.coe_det', 'LinearEquiv.det_symm', 'Matrix.det_mul', 'Module.Basis.det_mul_det', 'LinearMap.det_pi']; note=; digest=47f2739e78424184. Read exteriorPower.alternatingMapLinearEquiv (Basic.lean:212), exteriorPower.map (Basic.lean:263), and LinearMap.det_eq_det_mul_det (Determinant.lean:811). The last is a scalar determinant identity for an endomorphism with free submodule/quotient, not the finite-projective determinant-module isomorphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical determinant module isomorphism for a short exact sequence of finite projective modules, top exterior powers with independent lifts",
+   "results": "8 hits; top=['exteriorPower.alternatingMapLinearEquiv', 'LinearMap.coe_equivOfIsUnitDet', 'exteriorPower.pairingDual_ιMulti_ιMulti', 'LinearMap.det_eq_det_mul_det', 'LinearMap.associated_det_comp_equiv', 'exteriorPower.alternatingMapToDual_apply_ιMulti', 'exteriorPower.oneEquiv_naturality', 'LinearMap.detAux_def']; note=; digest=fc000761080e36ff. Read exteriorPower.alternatingMapLinearEquiv (Basic.lean:212), exteriorPower.map (Basic.lean:263), and LinearMap.det_eq_det_mul_det (Determinant.lean:811). The last is a scalar determinant identity for an endomorphism with free submodule/quotient, not the finite-projective determinant-module isomorphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det_eq_det_mul_det|alternatingMapLinearEquiv|map_apply_ιMulti",
+   "results": "12 hits; top=['Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean', 'Mathlib/LinearAlgebra/Determinant.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean']; note=; digest=ef1daa0eeb5f2075. Read exteriorPower.alternatingMapLinearEquiv (Basic.lean:212), exteriorPower.map (Basic.lean:263), and LinearMap.det_eq_det_mul_det (Determinant.lean:811). The last is a scalar determinant identity for an endomorphism with free submodule/quotient, not the finite-projective determinant-module isomorphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top exterior powers of the kernel and quotient of a split exact sequence tensor together canonically to the determinant of the middle module",
+   "results": "8 hits; top=['LinearMap.det_eq_det_mul_det', 'exteriorPower.pairingDual_ιMulti_ιMulti', 'exteriorPower.alternatingMapToDual_apply_ιMulti', 'ModuleCat.exteriorPower', 'exteriorPower.toTensorPower', 'exteriorPower.toTensorPower_apply_ιMulti', 'ModuleCat.exteriorPower.iso₁', 'ModuleCat.exteriorPower.mk']; note=; digest=9133b4bbd38f3505. Read exteriorPower.alternatingMapLinearEquiv (Basic.lean:212), exteriorPower.map (Basic.lean:263), and LinearMap.det_eq_det_mul_det (Determinant.lean:811). The last is a scalar determinant identity for an endomorphism with free submodule/quotient, not the finite-projective determinant-module isomorphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-surjective-two-term-determinant-calculus",
@@ -90,5 +257,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-projective-determinant-exact-sequence",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0FJB first construction into split free charts, construction and descent of the local determinant lines, the top-wedge map, explicit independence of lifts and bases, localization compatibility, and descent of the maps and their inverses. Reused only existing DAG nodes; no new nodes. Added the tensor-product definition reference without changing the mathematical statement.",
+  "blueprint": "Realizes the existing from.place auxiliary module input to lem-trf-surjective-two-term-determinant-calculus: canonical determinant-line map for a finite-projective short exact sequence, serving the lower two-term determinant calculus in the marked-dualizing/stable-modification branch of lem-trf-local-term-locality. No unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-26479bd7b",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-26479bd7b (reviewer sub-agent of L); spot-checked: Mathematics and edge cases check out. Repair the metadata faults: created.item incorrectly names lem-trf-surjective-two-term-determinant-calculus, and worker-authored split_report.tool_uses must be removed for maintainer recording. Corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-projective-determinant-exact-sequence.json.; 1 file(s) fixed by the reviewer"
  }
 }

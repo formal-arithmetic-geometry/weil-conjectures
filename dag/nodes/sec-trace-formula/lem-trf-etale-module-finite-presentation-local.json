@@ -14,9 +14,75 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $\\mathcal M$ is of finite presentation on an open $U\\ni x$. Apply lem-pc-tensor-pullback-finite-presentation to $g_U:g^{-1}(U)\\to U$ and $\\mathcal M|_U$. The composition and tensor formula of def-pc-module-pullback identify $g_U^*(\\mathcal M|_U)$ with $(g^*\\mathcal M)|_{g^{-1}(U)}$: both are the tensor pullback of the same restricted sheaf along the restricted ring-sheaf map. Since $g(x')=x$, the inverse image $g^{-1}(U)$ contains $x'$. Thus $g^*\\mathcal M$ is of finite presentation on a neighbourhood of $x'$.",
+   "uses": [
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T (lemma-devissage-finite-presentation), (1) implies (4); Modules Tag 01BQ (lemma-pullback-finite-presentation)."
+   }
+  },
+  {
+   "text": "Conversely, let $U'\\subseteq X'$ be an open neighbourhood of $x'$ on which $g^*\\mathcal M$ is of finite presentation. By lem-weil-pbc-etale-morphism-open-map, $W=g(U')$ is open in $X$, and $x\\in W$. Factor the restricted morphism as $U'\\xrightarrow{q}W\\hookrightarrow X$. The composite $U'\\to X$ is etale, since the inclusion $U'\\hookrightarrow X'$ is an open immersion and etale morphisms compose; $W\\hookrightarrow X$ is etale as well. The cancellation clause of lem-weil-pbc-etale-composition-cancellation therefore makes $q$ etale. It is surjective by the definition of $W$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, paragraph beginning “The etale morphism g is open”; Morphisms Tags 03WT, 02GP, 02GN and 02GW."
+   }
+  },
+  {
+   "text": "The singleton family $\\{q:U'\\to W\\}$ is an fpqc covering, even though $q$ need not be quasi-compact. Indeed $q$ is flat by def-weil-etale-morphism. For any affine open $V\\subseteq W$, put $U'_V=q^{-1}(V)$. The restricted map $q_V:U'_V\\to V$ is surjective and etale: its composite with the etale open immersion $V\\hookrightarrow W$ is the composite of $q$ with the etale open immersion $U'_V\\hookrightarrow U'$, so apply etale composition and cancellation once more. By lem-weil-pbc-etale-covering-affine-refinement, finitely many affine opens $A_1,\\ldots,A_m\\subseteq U'_V$ have images covering $V$. They are also affine opens of $U'$. These are exactly the finite affine refinements required in def-weil-pbc-fpqc-covering for the family $\\{q\\}$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, the etale covering U\\prime to g(U\\prime); Topologies Tag 0218 (lemma-etale-affine) and Definition 022B (definition-fpqc-covering)."
+   }
+  },
+  {
+   "text": "The restriction $\\mathcal M|_W$ is quasi-coherent, since the affine-local condition in pqf-def-coherent restricts to opens. By the tensor formula and composition identification in def-pc-module-pullback, $q^*(\\mathcal M|_W)\\cong(g^*\\mathcal M)|_{U'}$: pulling back along $U'\\to W\\to X$ or along $U'\\to X'\\to X$ uses the same composite ringed-space morphism. This pullback is of finite presentation by the choice of $U'$. Apply the finite-presentation reflection clause (2) of lem-pc-fpqc-descent to the fpqc covering $\\{q\\}$ established in Step 3. It gives finite presentation of $\\mathcal M|_W$, proving the reverse implication. Neither direction used the residue-field isomorphism, but that hypothesis is retained in the statement.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-pc-module-pullback",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, (4) implies (1), using Descent Tag 05B0 (lemma-finite-presentation-descends)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-pc-fpqc-descent",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057T (lemma-devissage-finite-presentation), proof of (1) iff (4), with the fpqc refinement in Topologies Tag 0218 and Definition 022B made explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +111,52 @@
    "results": "SheafOfModules.isFinitePresentation, Algebra.Etale.finitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.Presentation.IsFinite.mk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFinitePresentation|IsFinitePresentation [AlgebraicGeometry]",
+   "results": "{\"t\": \"2026-10-17T21:40:49Z\", \"tool\": \"grep\", \"query\": \"isFinitePresentation|IsFinitePresentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of quasi-coherent sheaves descends along an etale covering",
+   "results": "{\"t\": \"2026-10-17T21:40:49Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation of quasi-coherent sheaves descends along an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"Algebra.Etale.finitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.rec\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"55f4eb86b6a8c18e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "{\"t\": \"2026-10-17T21:40:50Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.IsFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"993387cff4ffbc82\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-coherent module is finitely presented near a point if and only if its pullback is finitely presented near a point above it under an etale morphism",
+   "results": "{\"t\": \"2026-10-17T21:40:53Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi-coherent module is finitely presented near a point if and only if its pullback is finitely presented near a point above it under an etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"Algebra.Etale.finitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\"], \"digest\": \"5311f17d63e29ac5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "{\"t\": \"2026-10-17T21:41:52Z\", \"tool\": \"grep\", \"query\": \"FinitePresentation\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"d8b4ca7577704312\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of sheaves of modules is local for faithfully flat descent on schemes",
+   "results": "{\"t\": \"2026-10-17T21:41:58Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation of sheaves of modules is local for faithfully flat descent on schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"4cf08ae83ad1b475\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-elementary-devissage-finite-presentation",
@@ -67,5 +175,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-module-finite-presentation-local",
+  "worker": "stage1",
+  "summary": "Split the two directions of the Tag 057T neighbourhood assertion using existing pullback preservation, etale openness and cancellation, finite affine refinement, and fpqc module descent. All non-elementary inputs already occur in the DAG; no new nodes. The sheaf finite-presentation assertion and residue-field hypothesis are unchanged. Corrected the inherited source cross-references to Tags 01BQ and 05B0.",
+  "blueprint": "The inherited ancestry is lem-trf-local-term-locality via lem-trf-elementary-devissage-finite-presentation. These steps realize the supporting Tag 057T (1) iff (4) paragraph cited in that parent, namely the paragraph beginning “The etale morphism g is open”; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic preservation of finite presentation under arbitrary scheme module pullback supplies the forward implication of Tag 057T; no local-term unit node supplies this ringed-space fact."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Only clause (2), reflection of finite presentation for a quasi-coherent module along an fpqc covering, is used after constructing the covering; this is the standard Descent Tag 05B0 input required by Tag 057T, not a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-843cfddea",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-843cfddea (reviewer sub-agent of L); spot-checked: Mathematics and route pass full review. Correct the item’s top-level source locator from inherited incorrect Tags 01PC, 02L2, 03C4 to the verified Tags 01BQ, 05B0, 03WT, 0218, and 022B; corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-module-finite-presentation-local.json. Full checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -10,9 +10,65 @@
  "stmt_deps": [
   "def-trf-rational-rank"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\mathbf Z\\setminus\\{0\\}$, which contains $1$ and is closed under multiplication. Use the fraction construction of [def-weil-pbc-module-localization]. The map $S^{-1}\\mathbf Z\\to\\mathbf Q$, $a/s\\mapsto a/s$, is a ring isomorphism: every rational has a nonzero integer denominator, and the localization relation $u(ta-sb)=0$ for some $u\\ne0$ is equivalent to $ta=sb$, exactly rational-fraction equality. The addition and multiplication formulas agree. In particular $a/1$ maps to the integer $a$ in $\\mathbf Q$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CN (definition-multiplicative-subset) and 07JZ (definition-localization-module), preceding fraction construction; elementary identification of the fraction field of Z with Q."
+   }
+  },
+  {
+   "text": "The universal property and generation clause of [def-weil-pbc-module-tensor-product] give inverse $\\mathbf Z$-linear maps $\\mu:\\mathbf Z\\otimes_{\\mathbf Z}G\\to G$, $a\\otimes g\\mapsto ag$, and $\\nu:G\\to\\mathbf Z\\otimes_{\\mathbf Z}G$, $g\\mapsto1\\otimes g$. Indeed $\\mu\\nu(g)=g$ and $\\nu\\mu(a\\otimes g)=1\\otimes ag=a\\otimes g$ by bilinearity. By [def-weil-pbc-module-localization], their localizations have formulas $(a\\otimes g)/s\\mapsto ag/s$ and $g/s\\mapsto(1\\otimes g)/s$; their composites are identities on every fraction because $\\mu\\nu$ and $\\nu\\mu$ are identities.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 07JZ (definition-localization-module), induced maps on fractions."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] with $R=A=\\mathbf Z$, $T=S$, $M=\\mathbf Z$ and $N=G$. It gives an isomorphism $S^{-1}(\\mathbf Z\\otimes_{\\mathbf Z}G)\\to S^{-1}\\mathbf Z\\otimes_{\\mathbf Z}G$, $(a\\otimes g)/s\\mapsto(a/s)\\otimes g$. Combine its inverse with Step 2 and the ring identification of Step 1. Interchanging the tensor factors gives inverse maps $\\mathbf Q\\otimes_{\\mathbf Z}G\\rightleftarrows G\\otimes_{\\mathbf Z}\\mathbf Q$: they send $q\\otimes g$ to $g\\otimes q$ and back, are well-defined by the bilinear universal property of [def-weil-pbc-module-tensor-product], and their composites fix every generating pure tensor. Thus we obtain an additive isomorphism $\\theta:S^{-1}G\\to G\\otimes_{\\mathbf Z}\\mathbf Q$ satisfying $\\theta(g/s)=g\\otimes(1/s)$, and in particular $\\theta(g/1)=g\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), with the existing general base-ring localization-tensor leaf; Tag 00CX (lemma-tensor-product) for the explicitly written symmetry maps."
+   }
+  },
+  {
+   "text": "Let $g,h\\in G$ satisfy $g\\otimes1=h\\otimes1$. By Step 3, $(g-h)/1=0$ in $S^{-1}G$. The kernel criterion in [def-weil-pbc-module-localization] gives a nonzero integer $s$ with $s(g-h)=0$. If $s>0$, the hypothesis gives $g-h=0$ directly. If $s<0$, then $(-s)(g-h)=-s(g-h)=0$ and $-s>0$, so the same hypothesis gives $g-h=0$. Consequently $g=h$. Bilinearity shows that $g\\mapsto g\\otimes1$ is the canonical additive homomorphism, so this proves its injectivity.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ (definition-localization-module), fraction relation and kernel criterion; Tag 00CX (lemma-tensor-product), bilinearity; elementary application of the stated torsion-free hypothesis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00DK (lemma-tensor-localization), 07JZ (definition-localization-module), 00CX (lemma-tensor-product); explicit rationalization identification and torsion-free kernel argument. The Temkin archival PDF named by the item is unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +97,73 @@
    "results": "8 hits; IsAddTorsionFree.of_module_rat, isAddTorsionFree_iff, and zsmul_right_injective concern torsion criteria, but none states the canonical tensor map injectivity.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical map from a torsion-free abelian group to its tensor product with Q is injective",
+   "results": "{\"t\": \"2026-10-17T21:42:24Z\", \"tool\": \"leanfinder\", \"query\": \"canonical map from a torsion-free abelian group to its tensor product with Q is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DivisibleHull.coe_injective\", \"AddMonoidHom.toRatLinearMap_injective\", \"DivisibleHull.mk_left_injective\", \"DivisibleHull.coe_inj\", \"FreeAbelianGroup.of_injective\", \"IsAddTorsionFree.of_module_rat\", \"AddMonoidHom.toIntLinearMap_injective\", \"AffineAddMonoid.embedding_injective\"], \"digest\": \"914fc99086e44922\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Module, IsAddTorsionFree, Rat",
+   "results": "{\"t\": \"2026-10-17T21:42:24Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Module, IsAddTorsionFree, Rat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*free|TensorProduct.*injective|injective.*TensorProduct",
+   "results": "{\"t\": \"2026-10-17T21:42:24Z\", \"tool\": \"grep\", \"query\": \"torsion.*free|TensorProduct.*injective|injective.*TensorProduct\", \"sub\": \"LinearAlgebra RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: this combined directory argument gave no hits; later searches separately inspect the localization source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "torsion-free abelian group injects into tensor product with rational numbers",
+   "results": "{\"t\": \"2026-10-17T21:42:25Z\", \"tool\": \"leansearch\", \"query\": \"torsion-free abelian group injects into tensor product with rational numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAddTorsionFree.of_module_rat\", \"instIsTorsionFreeIntOfIsAddTorsionFree\", \"IsAddTorsionFree.of_not_isOfFinAddOrder\", \"isAddTorsionFree_iff\", \"Algebra.lsmul_injective\", \"Module.isTorsionFree_iff_algebraMap_injective\", \"zsmul_right_injective\", \"subsingleton_rat_module\"], \"digest\": \"b93ccaa86f367488\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsion-free module over a domain injects into extension of scalars to the field of fractions by m maps to one tensor m",
+   "results": "{\"t\": \"2026-10-17T21:42:46Z\", \"tool\": \"leanfinder\", \"query\": \"A torsion-free module over a domain injects into extension of scalars to the field of fractions by m maps to one tensor m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isTorsionFree_iff_algebraMap_injective\", \"NoZeroSMulDivisors.iff_algebraMap_injective\", \"IsLocalizedModule.isTorsionFree\", \"Module.IsTorsionFree.trans_faithfulSMul\", \"Module.IsTorsionFree.of_isLocalization\", \"IsLocalizedModule.isTorsionFree_of_forall_isRegular\", \"IsLocalizedModule.instIsTorsionFreeLocalizationLocalizedModuleOfIsDomain\", \"Algebra.TensorProduct.mk_one_injective_of_isScalarTower\"], \"digest\": \"cfbf3b0f9c70fb39\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: mk_one_injective_of_isScalarTower requires a Q-module structure on G, not available here; localization torsion-freeness results have different conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, Function.Injective",
+   "results": "{\"t\": \"2026-10-17T21:42:46Z\", \"tool\": \"loogle\", \"query\": \"IsLocalizedModule, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.isRegular_of_smul_left_injective\", \"IsLocalizedModule.smul_injective\", \"IsLocalizedModule.injective_iff_isRegular\", \"IsLocalizedModule.fromLocalizedModule.inj\", \"IsLocalizedModule.injective_of_map_zero\", \"IsLocalizedModule.injective_of_map_eq\", \"IsLocalizedModule.map_injective\", \"IsLocalizedModule.map_injective_iff_localizedModuleMap_injective\"], \"digest\": \"4cf8d4c1ee784c6a\"}",
+   "date": "2026-10-17",
+   "verdict": "generalization: injective_iff_isRegular is localization injectivity, not the tensor-Q map; the tensor-localization identification remains a proof step"
+  },
+  {
+   "tool": "grep",
+   "query": "injective|IsTorsionFree",
+   "results": "{\"t\": \"2026-10-17T21:42:46Z\", \"tool\": \"grep\", \"query\": \"injective|IsTorsionFree\", \"sub\": \"RingTheory/Localization/BaseChange.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"85\", \"220\", \"222\"], \"digest\": \"97fe3b1998eaf58f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*[Tt]ensor|[Tt]ensor.*injective|torsion.*[Ff]ree",
+   "results": "{\"t\": \"2026-10-17T21:43:13Z\", \"tool\": \"grep\", \"query\": \"injective.*[Tt]ensor|[Tt]ensor.*injective|torsion.*[Ff]ree\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"173f29fa4932fae8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective_iff_isRegular|mk_one_injective_of_isScalarTower|coe_injective",
+   "results": "{\"t\": \"2026-10-17T21:43:13Z\", \"tool\": \"grep\", \"query\": \"injective_iff_isRegular|mk_one_injective_of_isScalarTower|coe_injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/TsumDivisorsAntidiagonal.lean\", \"Mathlib/Logic/Embedding/Basic.lean\", \"Mathlib/Logic/Embedding/Basic.lean\", \"Mathlib/Logic/Embedding/Basic.lean\"], \"digest\": \"63a52c01e0d45fbd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-convex-chain-rational-rank",
@@ -73,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-torsionfree-rationalization-injective",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four steps identify the rationalization with localization of the group at nonzero integers, using the existing tensor-localization Mathlib leaf and explicit unit/symmetry maps, and apply the fraction kernel criterion and torsion-free hypothesis. No new nodes or project attachment; Mathlib candidates require the localization identification or stronger hypotheses. Missing Temkin PDF reported; proof marked agent-written from the local Stacks source.",
+  "blueprint": "Retains the inherited ancestry to lem-trf-local-term-locality via lem-trf-convex-chain-rational-rank: supplies the rationalization-injectivity input in its convex-rank argument. Current main-20261015 locality proof (1)--(2) follows normal-cone specialization; this auxiliary split neither replaces that unit route nor changes chapter/unit metadata. The whole-blueprint searches found no equivalent group-theoretic statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-a17c04033",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-a17c04033 (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, cited node statements, and Stacks sources. All four proof steps are mathematically valid with hypotheses checked; localization and tensor comparison formulas match the cited statements, edge cases pass, searches and ancestry are documented, and no route-pivot or SGA violation occurs. Review written to review.md."
  }
 }

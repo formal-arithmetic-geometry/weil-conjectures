@@ -1,0 +1,114 @@
+{
+ "id": "lem-trf-lci-naive-cotangent-model",
+ "kind": "statement",
+ "title": "Natural projection to the two-term naive cotangent truncation",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings and $P\\twoheadrightarrow B$ a surjective $A$-algebra map, where $P$ is a polynomial $A$-algebra on any set of variables or a localization of such an algebra. Put $J=\\ker(P\\to B)$ and $C(P)=[J/J^2\\xrightarrow{\\mathrm d}\\Omega^1_{P/A}\\otimes_P B]$ in degrees $-1,0$, where $\\mathrm d([h])=\\mathrm dh\\otimes1$ [def-weil-pbc-kahler-differentials]. For the standard cotangent complex [lem-trf-cotangent-resolution-coherence] in $D(B)$ [def-weil-abstract-derived-category], there is a canonical map $L_{B/A}\\to C(P)$ inducing an isomorphism $\\tau_{\\geq-1}L_{B/A}\\simeq C(P)$. Truncation means replacing degree $-1$ by the cokernel of the incoming differential and discarding degrees below $-1$. This comparison is natural under commutative diagrams of such surjective presentations: a compatible map $P\\to P'$ over $A\\to A'$ and $B\\to B'$ gives the semilinear chain map $C(P)\\to C(P')$, with $[h]\\mapsto[h']$ in degree $-1$ and $\\mathrm dp\\otimes b\\mapsto\\mathrm dp'\\otimes b'$ in degree $0$, and it commutes in the derived category with the standard functoriality map on $L$. No vanishing below degree $-1$ and no finite generation of the differential module is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08RB (lemma-relation-with-naive-cotangent-complex), 08UP (remark-explicit-comparison-map); arbitrary polynomial presentations: algebra.tex Tag 00S1 (lemma-NL-homotopy) and equation-functoriality-NL; localization: Tag 00S7 (lemma-localize-NL) and cotangent.tex Tag 08SF (lemma-localize)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lci-cotangent-presentation",
+  "date": "2026-10-18",
+  "group": "Q86"
+ },
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naive cotangent complex truncation conormal Koszul regular sequence",
+   "results": "8 hits; top=['HomologicalComplex.stupidTrunc', 'CochainComplex.quasiIso_ιTruncLE_iff', 'CochainComplex.quasiIso_truncLEMap_iff', 'ChainComplex.truncateTo', 'CochainComplex.quasiIso_πTruncGE_iff', 'Ideal.Cotangent', 'ChainComplex.truncateAugment', 'CategoryTheory.CosimplicialObject.truncation']; note=",
+   "date": "2026-10-18",
+   "verdict": "generalization: truncation and ideal cotangent APIs do not state the scheme LCI theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "cotangentComplex, Ideal.Cotangent, KaehlerDifferential",
+   "results": "0 hits; top=[]; note=loogle: unknown identifier 'cotangentComplex'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naive cotangent complex truncation conormal Koszul regular sequence",
+   "results": "8 hits; top=['Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.H1Cotangent', 'Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff', 'Algebra.Generators.cotangentCompAwaySec', 'Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.SubmersivePresentation.sectionCotangent', 'Algebra.Extension.cotangentComplex', 'Algebra.PreSubmersivePresentation.cotangentComplexAux_apply']; note=",
+   "date": "2026-10-18",
+   "verdict": "generalization: algebra presentation cotangent APIs are narrower"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|CotangentComplex|conormal [sub=RingTheory]",
+   "results": "25 hits; top=['Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naive cotangent complex for polynomial presentation is truncation in degrees minus one and zero naturally in presentations",
+   "results": "8 hits; top=['Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Presentation.differentials.hom₁', 'Algebra.SubmersivePresentation.sectionCotangent', 'Algebra.PreSubmersivePresentation.cotangentComplexAux_apply', 'Algebra.Generators.exists_presentation_of_free_cotangent', 'Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff', 'Algebra.SubmersivePresentation.cotangentEquiv']; note=; digest=688eba01e941d606. Read full output in lem-trf-lci-naive-cotangent-model.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical map cotangent complex to conormal differentials two term complex induces isomorphism in degrees zero and minus one",
+   "results": "8 hits; top=['Ideal.cotangentEquivIdeal', 'Ideal.mapCotangent', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.H1Cotangent', 'Algebra.Extension.Cotangent.of_zero', 'CategoryTheory.ShortComplex.asIsoHomologyι', 'Algebra.Extension.toKaehler', 'Algebra.Presentation.differentials.hom₁']; note=; digest=36031542768074a1. Read full output in lem-trf-lci-naive-cotangent-model.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex",
+   "results": "12 hits; top=['Algebra.Extension.cotangentComplex', 'Algebra.Extension.H1Cotangent.val_zero', 'Algebra.Extension.subsingleton_h1Cotangent', 'Algebra.Extension.Cotangent.map_sub_map', 'Algebra.Extension.h1Cotangentι_ext', 'Algebra.Extension.h1Cotangentι_ext_iff', 'Algebra.Extension.h1Cotangentι_apply', 'Algebra.Extension.exact_hCotangentι_cotangentComplex']; note=; digest=bb7ca485915d6d22. Read full output in lem-trf-lci-naive-cotangent-model.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|naive.*cotangent [sub=RingTheory]",
+   "results": "25 hits; top=['Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean']; note=; digest=0d3ebcc0bf10cbe0. Read full output in lem-trf-lci-naive-cotangent-model.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical map cotangent complex to conormal differentials two term complex induces isomorphism in degrees zero and minus one",
+   "results": "8 hits; top=['Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.Extension.h1Cotangentι_apply', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.Extension.cotangentComplex', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.H1Cotangent', 'Algebra.Extension.CotangentSpace.map_cotangentComplex']; note=; digest=edf35fe61ee90ab4. Read full output in lem-trf-lci-naive-cotangent-model.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Natural projection to the two-term naive cotangent truncation.",
+   "via": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

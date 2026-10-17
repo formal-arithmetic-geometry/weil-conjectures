@@ -1,0 +1,113 @@
+{
+ "id": "lem-trf-cotangent-resolution-coherence",
+ "kind": "statement",
+ "title": "Functorial standard resolutions and comparison with arbitrary polynomial resolutions",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings. Let $F_A(E)=A[E]$ be the free polynomial algebra on a set $E$, let $U$ forget an algebra to its underlying set, and let $P^{\\mathrm{std}}_\\bullet(B/A)$ be the augmented simplicial algebra with $P^{\\mathrm{std}}_n=(F_AU)^{n+1}B$; its faces are induced by evaluation $F_AU\\to\\mathrm{id}$ and its degeneracies by the unit $\\mathrm{id}\\to UF_A$. For a simplicial module $M$, write $s(M)^{-n}=M_n$ with differential $\\sum_i(-1)^id_i$ and zero positive terms. Define $L_{B/A}=s(\\Omega^1_{P^{\\mathrm{std}}_\\bullet/A}\\otimes_{P^{\\mathrm{std}}_\\bullet}B)$ in $D(B)$ [def-weil-abstract-derived-category], with differentials as in [def-weil-pbc-kahler-differentials]. The standard augmentation is a resolution. Here a polynomial resolution $P_\\bullet\\to B$ means that every $P_n$ is a polynomial $A$-algebra surjecting onto $B$ and $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism. For every such resolution there is a canonical comparison isomorphism $s(\\Omega^1_{P_\\bullet/A}\\otimes_{P_\\bullet}B)\\simeq L_{B/A}$, natural for morphisms of augmented polynomial resolutions. A commutative square of ring maps $A\\to B$, $A'\\to B'$, $A\\to A'$, $B\\to B'$ induces a canonical semilinear map $P^{\\mathrm{std}}_\\bullet(B/A)\\to P^{\\mathrm{std}}_\\bullet(B'/A')$ commuting with the augmentations, hence a map of differential complexes. These standard maps preserve identities and compose strictly; the induced maps in derived categories agree with the maps obtained using polynomial resolutions and their canonical comparisons.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PM (definition-standard-resolution), 08PN (definition-cotangent-complex-ring-map), 08QI (remark-resolution), 08QL (section-functoriality), especially the explicit maps A[B] to A′[B′]."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lci-cotangent-presentation",
+  "date": "2026-10-18",
+  "group": "Q86"
+ },
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural transformations induced by simplicial free algebra resolutions commute with localization and composition",
+   "results": "8 hits; top=['IsLocalization.map_comp_map', 'CategoryTheory.Localization.Construction.natTransExtension', 'HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans', 'CategoryTheory.Functor.rightDerivedNatTrans_fac', 'IsLocalization.map_map', 'CategoryTheory.Functor.leftDerivedNatTrans_app', 'IsLocalizedModule.map_comp', 'HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans']; note=",
+   "date": "2026-10-18",
+   "verdict": "generalization: category-theoretic naturality and localization lemmas do not state the cotangent-resolution construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject, naturality, localization",
+   "results": "0 hits; top=[]; note=loogle: unknown identifier 'SimplicialObject'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations induced by simplicial free algebra resolutions commute with localization and composition",
+   "results": "8 hits; top=['HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans', 'AlgebraicTopology.DoldKan.QInfty_f_naturality_assoc', 'AlgebraicTopology.DoldKan.QInfty_f_naturality', 'CategoryTheory.Localization.comp_liftNatTrans', 'AlgebraicTopology.DoldKan.compatibility_Γ₂N₁_Γ₂N₂_natTrans', 'AlgebraicTopology.DoldKan.Q_f_naturality_assoc', 'AlgebraicTopology.DoldKan.Q_f_naturality', 'AlgebraicTopology.DoldKan.PInfty_f_naturality_assoc']; note=",
+   "date": "2026-10-18",
+   "verdict": "generalization: Dold–Kan naturality is abstract and does not state cotangent maps"
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*resolution|natural.*localization [sub=RingTheory]",
+   "results": "3 hits; top=['Mathlib/RingTheory/OreLocalization/Basic.lean', 'Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/Localization/Basic.lean']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functorial standard simplicial free algebra resolution computes cotangent complex using any polynomial resolution",
+   "results": "8 hits; top=['Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.Extension.cotangentComplex', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.cotangentComplex_mk', 'Algebra.Generators.exists_presentation_of_free_cotangent', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.H1Cotangent']; note=; digest=bc664949e7b7ed60. Read full output in lem-trf-cotangent-resolution-coherence.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent differential complex independent of simplicial polynomial resolution and canonical maps for squares of ring maps",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.H1Cotangent', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'CategoryTheory.ProjectiveResolution.cochainComplex_d', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Presentation.differentials.hom₁']; note=; digest=399d0545c917c4cf. Read full output in lem-trf-cotangent-resolution-coherence.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\"",
+   "results": "12 hits; top=['CategoryTheory.CosimplicialObject.Truncated.mkNotation', 'CategoryTheory.SimplicialObject.Truncated.mkNotation', 'CategoryTheory.CosimplicialObject', 'CategoryTheory.SimplicialObject', 'CategoryTheory.CosimplicialObject.Augmented', 'CategoryTheory.SimplicialObject.Augmented', 'CategoryTheory.CosimplicialObject.Truncated', 'CategoryTheory.SimplicialObject.Truncated']; note=; digest=fd52027898d27ba0. Read full output in lem-trf-cotangent-resolution-coherence.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*resolution|cotangent.*resolution [sub=RingTheory]",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read full output in lem-trf-cotangent-resolution-coherence.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotangent differential complex independent of simplicial polynomial resolution and canonical maps for squares of ring maps",
+   "results": "8 hits; top=['Algebra.Generators.H1Cotangent.δ_eq_δ', 'Algebra.Generators.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.H1Cotangent.map', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Extension.H1Cotangent', 'Algebra.Extension.H1Cotangent.map']; note=; digest=959c610bb41d9d76. Read full output in lem-trf-cotangent-resolution-coherence.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions.",
+   "via": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

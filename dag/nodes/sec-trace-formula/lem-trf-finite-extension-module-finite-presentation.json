@@ -2,17 +2,53 @@
  "id": "lem-trf-finite-extension-module-finite-presentation",
  "kind": "statement",
  "title": "Finite finitely presented ring extensions preserve finite presentation of modules",
- "statement": "Let $R\\to S$ be a finite and finitely presented homomorphism of commutative rings, and let $M$ be an $S$-module. Then $M$ is finitely presented as an $R$-module if and only if it is finitely presented as an $S$-module [def-sc-finitely-presented-module].",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings such that $S$ is finitely generated as an $R$-module [def-weil-finitely-generated-module] and finitely presented as an $R$-algebra [def-weil-pbc-finitely-presented-algebra]. Let $M$ be an $S$-module. Then $M$ is finitely presented as an $R$-module if and only if it is finitely presented as an $S$-module [def-sc-finitely-presented-module].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra Tag 0564 (lemma-finite-finitely-presented-extension)."
  },
  "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finitely-presented-algebra",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite module hypothesis and finite $R$-algebra presentation of $S$ imply that $S$ is finitely presented as an $R$-module by the existing finite-algebra presentation lemma. Applying the Mathlib scalar-tower lemma `Module.FinitePresentation.trans` to $R\\to S$ and the $S$-module $M$ then shows that finite presentation of $M$ over $S$ implies finite presentation over $R$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+    "lem-pc-module-finite-presentation-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 0564, proof: the direction from finite presentation over S to finite presentation over R, together with Mathlib Module.FinitePresentation.trans"
+   }
+  },
+  {
+   "text": "If $M$ is finitely presented over $R$, the finite generation of $S$ as an $R$-module makes $S$ a finite-type $R$-algebra: module generators also generate the algebra, since every element of $S$ is already an $R$-linear combination of them. The existing finite-type subring lemma (Algebra Tag 0561) therefore gives that $M$ is finitely presented as an $S$-module.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-trf-finitely-presented-over-subring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 0564, proof: the implication from finite presentation over R to finite presentation over S via Lemma 0561"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+  "lem-pc-module-finite-presentation-transitive",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-trf-finitely-presented-over-subring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Tag 0564 (lemma-finite-finitely-presented-extension), complete proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +80,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-elementary-devissage-finite-presentation",
@@ -63,5 +99,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-extension-module-finite-presentation",
+  "worker": "stage1",
+  "summary": "Audited Algebra Tag 0564 and expanded the imported phrase 'finite and finitely presented ring map' into its definitions: finite generation of S as an R-module and finite presentation of S as an R-algebra. The reverse implication uses the existing finite-algebra-to-module presentation node and the existing Mathlib scalar-tower leaf; the forward implication uses the elementary finite-module-to-finite-type observation and the existing Tag 0561 node. No new node was required.",
+  "blueprint": "The item realizes the stalkwise paragraph applying Algebra Tag 0564 in lem-trf-local-term-locality, as recorded by the item's blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-cc71db67d",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-cc71db67d (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, Tag 0564 and Tag 0561 source proofs, all cited node statements, and definitions. Both implications are correct: finite algebra presentation gives S finite as an R-module, then Module.FinitePresentation.trans handles one direction; finite R-module generation implies finite-type algebra, then Tag 0561 handles the other. Edge cases and duplicate/generalization searches checked. No new nodes, route violations, hidden machinery, base-change or coefficient-category issues, or repairs found."
  }
 }
