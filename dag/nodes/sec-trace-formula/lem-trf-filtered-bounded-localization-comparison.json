@@ -10,11 +10,161 @@
  "stmt_deps": [
   "def-sp-abelian",
   "def-weil-abstract-derived-category",
-  "def-sp-filtration"
+  "def-sp-filtration",
+  "def-kun-truncations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Suppose all graded cohomology below $c$ vanishes. Apply [lem-trf-finite-filtered-graded-exactness] to $K^{c-2}\\to K^{c-1}\\to K^c$: its graded sequence is exact at the middle because $H^{c-1}(\\operatorname{gr}^pK)=0$. In particular $v=d^{c-1}$ is strict, so, writing $I=\\operatorname{im}v$, we have $I\\cap F^pK^c=v(F^pK^{c-1})$. Use the good truncation of [def-kun-truncations], with quotient filtration on its degree-$c$ term $K^c/I$ and the original filtration above $c$. The quotient formula gives\n$$\\operatorname{gr}^p(K^c/I)=F^pK^c/(F^{p+1}K^c+(I\\cap F^pK^c))=\\operatorname{coker}(\\operatorname{gr}^pv).$$\nHere the first equality denotes the canonical quotient isomorphism, and the second follows from strictness. Thus $\\operatorname{gr}^p(\\tau^{\\ge c}K)=\\tau^{\\ge c}(\\operatorname{gr}^pK)$, including the induced differential at the cutoff. The cohomology formula for good truncation in [def-kun-truncations] shows that $K\\to\\tau^{\\ge c}K$ induces an isomorphism on every graded cohomology object: it retains degrees $n\\ge c$, while the removed cohomology was zero. Only degrees at most $c$ change, and induced quotient filtrations preserve $F^a=K$, $F^{b+1}=0$.",
+   "uses": [
+    "lem-trf-finite-filtered-graded-exactness",
+    "def-kun-truncations",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S5, lemma-filtered-complex-cohomology-bounded (1); Homology Tag 05QH, lemma-filtered-acyclic, and the quotient computation in Tag 0127, lemma-characterize-strict."
+   }
+  },
+  {
+   "text": "Suppose all graded cohomology above $d$ vanishes. Apply [lem-trf-finite-filtered-graded-exactness] to $K^d\\to K^{d+1}\\to K^{d+2}$, using exactness at degree $d+1$. It makes $v=d^d$ strict. Set $Z=\\ker v$, filtered by $Z\\cap F^pK^d$, and take the good truncation $\\tau^{\\le d}K$ of [def-kun-truncations]. Strictness gives the subobject identity\n$$F^pK^d\\cap v^{-1}(F^{p+1}K^{d+1})=(Z\\cap F^pK^d)+F^{p+1}K^d.$$\nIndeed the images of the two sides under $v$ are both $v(F^pK^d)\\cap F^{p+1}K^{d+1}=v(F^{p+1}K^d)$, and both contain the kernel $Z\\cap F^pK^d$. Taking the quotient by $F^{p+1}K^d$ identifies the kernel of $\\operatorname{gr}^pv$ with $(Z\\cap F^pK^d)/(Z\\cap F^{p+1}K^d)=\\operatorname{gr}^pZ$. Therefore $\\operatorname{gr}^p(\\tau^{\\le d}K)=\\tau^{\\le d}(\\operatorname{gr}^pK)$, with its induced incoming differential. Good truncation retains cohomology in degrees $n\\le d$ and discards only the vanishing cohomology above $d$, so $\\tau^{\\le d}K\\to K$ is a graded quasi-isomorphism. Its induced subobject filtration preserves $[a,b]$ and only degrees at least $d$ change.",
+   "uses": [
+    "lem-trf-finite-filtered-graded-exactness",
+    "def-kun-truncations",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S5, lemma-filtered-complex-cohomology-bounded (2), the dual cutoff argument; Homology Tag 05QH, lemma-filtered-acyclic."
+   }
+  },
+  {
+   "text": "Every functor $H^n\\operatorname{gr}^p$ inverts graded quasi-isomorphisms by their definition, so the universal property of localization makes graded cohomology invariant under isomorphisms in $DF(\\mathcal A)$. A cochain-bounded representative has the corresponding common cohomology bounds, independent of $p$. Conversely steps 1 and 2 give the one-sided representatives. If cohomology is supported in $[c,d]$, choose $c\\le d$ (in the entirely acyclic case any such pair works), put $L=\\tau^{\\ge c}K$, and put $N=\\tau^{\\le d}L$. Then $K\\to L\\leftarrow N$ consists of graded quasi-isomorphisms and $N$ is zero outside $[c,d]$. The second truncation leaves the zero terms below $c$ zero. This proves each asserted essential-image description once full faithfulness is established.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S5 (3), lemma-filtered-complex-cohomology-bounded; Tag 05S4, definition-filtered-derived-bounded."
+   }
+  },
+  {
+   "text": "We may calculate the stated chain-map localizations using filtered chain maps modulo filtered homotopy. Here is the universal-property check, without assuming that finite filtered objects form an abelian category. Given $f-g=dh+hd$, use $\\operatorname{Cyl}(K)=K\\oplus C(1_K)$ with the direct-sum filtration. In degree $n$ its coordinates $(x,y,z)$ belong to $K^n\\oplus K^n\\oplus K^{n+1}$ and its differential is $(dx,dy+z,-dz)$. The projection $\\pi(x,y,z)=x$ has sections $j_0(x)=(x,0,0)$ and $j_1(x)=(x,x,0)$. On $C(1_K)$ the degree-$-1$ map $(y,z)\\mapsto(0,y)$ satisfies $dH+Hd=1$ on every grade. Thus $\\pi$ is a graded quasi-isomorphism. The formula $t^n(x,y,z)=g^nx+(f^n-g^n)y+h^{n+1}z$ defines a chain map, since $f-g=dh+hd$, and $tj_0=g$, $tj_1=f$. Every functor inverting graded quasi-isomorphisms therefore identifies $f$ and $g$, because it identifies both sections with $\\pi^{-1}$. It factors uniquely through the homotopy category. Applying the universal property again after localization gives the claimed equivalence of the two localization models. These cylinder formulas preserve uniform filtration bounds and each of the three kinds of cochain boundedness.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section filtered-derived-category, Tag 05S2, definition-filtered-derived; explicit cylinder verification, using the direct-sum contractible cone of lemma-make-injective."
+   }
+  },
+  {
+   "text": "Construct the dg category of uniformly finite filtered cochain complexes: degree-$r$ maps are $\\prod_n\\operatorname{Hom}_F(K^n,L^{n+r})$, with $\\partial h=d_Lh-(-1)^rh d_K$ and ordinary graded composition. The equations $d_K^2=d_L^2=0$ give $\\partial^2=0$ and the Leibniz rule. Closed degree-zero maps are filtered chain maps, and boundaries are precisely filtered null homotopies. Enlarge universes to make this dg category small. The zero complex and finite direct sums give axiom (A) of [lem-coef-dg-abc-homotopy-category-triangulated]. For (B), set $(K[m])^n=K^{n+m}$, $d_{K[m]}=(-1)^m d_K$, and $h[m]^n=(-1)^{mr}h^{n+m}$ on degree-$r$ maps. These formulas commute with $\\partial$, satisfy $[m][l]=[m+l]$, and identify $\\operatorname{Hom}^\\bullet(K,L[m])$ with $\\operatorname{Hom}^\\bullet(K,L)[m]$. For (C), take $C(f)^n=L^n\\oplus K^{n+1}$ with differential $(d_Ly+fx,-d_Kx)$ and the direct-sum filtration. The coordinate inclusion and projection of $L\\to C(f)\\to K[1]$ have the graded splittings required in the cited statement; the splitting boundary is $f[1]$. Consequently its conclusion gives the filtered homotopy category its cone triangulation. All these formulas use finite sums and shifts, so they apply separately to the bounded, bounded-below and bounded-above dg subcategories and to every fixed filtration interval.",
+   "uses": [
+    "lem-coef-dg-abc-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09QJ, situation-ABC, and 09QY, proposition-ABC-homotopy-category-triangulated; explicit dg category of filtered complexes."
+   }
+  },
+  {
+   "text": "In any of the homotopy categories in step 5 let $\\mathcal S$ be the full replete subcategory of objects with all grades acyclic. The grade of a shifted complex or a cone is the corresponding shift or cone of its grade, since the cone filtration is a direct sum. Hence every cone triangle maps to a distinguished triangle of the ordinary derived category as defined in [def-weil-abstract-derived-category]. The long exact sequence of [lem-sf-derived-homology-long-exact] makes $\\mathcal S$ closed under shifts and triangles: with two graded cohomology sequences identically zero, exactness forces the third to be zero. It contains zero and is additive. By [lem-pur-quasi-iso-cone-acyclic], a map has cone in $\\mathcal S$ exactly when it is a graded quasi-isomorphism. Thus [lem-trf-triangulated-subcategory-cone-system] supplies both calculi of fractions for precisely the required maps, in every one of these homotopy categories. Their class also satisfies two-out-of-three directly, by applying every $H^n\\operatorname{gr}^p$ and using two-out-of-three for isomorphisms. We can now use roofs and their common refinements without any injective or projective hypothesis on $\\mathcal A$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-trf-triangulated-subcategory-cone-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S1, lemma-filtered-acyclic, via Tag 05RG, lemma-construct-multiplicative-system; graded cones and long exact cohomology."
+   }
+  },
+  {
+   "text": "For fullness of $D^+F\\to DF$, take bounded-below $K,L$. By [lem-pc-left-localization-fraction-representation] an ambient morphism is represented in the filtered homotopy category by $K\\xrightarrow f Z\\xleftarrow s L$, with $s$ a graded quasi-isomorphism. Since $L$ is cochain-bounded below, there is a common lower bound $c$ on all $H^n\\operatorname{gr}^pZ$, inherited through $s$. Step 1 provides $q:Z\\to\\tau^{\\ge c}Z$ in the same class. Postcompose the roof with $q$. Its middle object is bounded below and $(qf,qs)$ represents the same ambient morphism, proving surjectivity on Hom sets.",
+   "uses": [
+    "lem-pc-left-localization-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S6, lemma-filtered-bounded-derived (1), following the fullness paragraph of Tag 05RW, lemma-bounded-derived."
+   }
+  },
+  {
+   "text": "For faithfulness take two roofs $(f_i:K\\to Z_i,s_i:L\\to Z_i)$ in the bounded-below homotopy category which become equal in $DF$. The statement of [lem-pc-left-localization-fraction-equality] gives maps $t_i:Z_i\\to T$ with $t_1s_1=t_2s_2$ in the graded quasi-isomorphisms and $t_1f_1=t_2f_2$. The common denominator identifies every graded cohomology object of $T$ with that of $L$, so it has a common lower bound $c$. Postcompose both equalities with the graded quasi-isomorphism $T\\to\\tau^{\\ge c}T$ of step 1. Now the two comparison maps and their common denominator lie in the bounded-below homotopy category, where the same cited equality criterion proves that the original roofs were equal already. This proves injectivity on Hom sets and hence full faithfulness of $D^+F\\to DF$.",
+   "uses": [
+    "lem-pc-left-localization-fraction-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S6 (1); faithfulness argument of Tag 05RW, lemma-bounded-derived, with common refinements instead of subtraction."
+   }
+  },
+  {
+   "text": "For $D^-F\\to DF$ use the right roofs of [lem-pc-right-fraction-representation]. If $K,L$ are bounded above, an ambient morphism has a roof $K\\xleftarrow s Z\\xrightarrow f L$, $s$ a graded quasi-isomorphism. A cochain upper bound for $K$ is a common graded cohomology upper bound $d$ for $Z$. Precompose with $q:\\tau^{\\le d}Z\\to Z$ from step 2; the roof $(sq,fq)$ now has bounded-above middle object. For faithfulness, [lem-pc-right-fraction-common-refinement] says that two equal ambient roofs admit $a_i:T\\to Z_i$ with $s_1a_1=s_2a_2$ a graded quasi-isomorphism and $f_1a_1=f_2a_2$. Their common denominator gives a common upper cohomology bound $d$ for $T$. Precompose both equalities with $\\tau^{\\le d}T\\to T$. This is a common refinement inside the bounded-above homotopy category, so the same equality criterion proves equality there. Thus the functor is fully faithful.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S6 (2), dual to the proof of Tag 05RW, lemma-bounded-derived (1)."
+   }
+  },
+  {
+   "text": "To prove $D^bF\\to D^-F$ fully faithful, repeat steps 7 and 8 with bounded $K,L$ and ambient category the bounded-above homotopy category. The left-fraction representation and equality statements still apply by step 6. Every middle object $Z$, and every equality witness $T$, already has some cochain upper bound. Applying $\\tau^{\\ge c}$ to it as in steps 7 and 8 retains that upper bound while imposing the lower bound, and hence gives a bounded middle object or bounded equality witness. This proves both fullness and faithfulness, using [lem-pc-left-localization-fraction-representation] and [lem-pc-left-localization-fraction-equality]. Compose with step 9 to obtain full faithfulness of $D^bF\\to DF$. Finally the inclusion $D^bF\\to D^+F$, followed by the fully faithful $D^+F\\to DF$, is this fully faithful functor. On Hom sets the second map and the composite are bijections, so the first map is a bijection too. This proves both asserted intermediate inclusions.",
+   "uses": [
+    "lem-pc-left-localization-fraction-representation",
+    "lem-pc-left-localization-fraction-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S6 (3), following the last paragraph of the proof of Tag 05RW, lemma-bounded-derived."
+   }
+  },
+  {
+   "text": "Fix any filtration interval $[a,b]$ at the outset. In steps 1 and 2 the cutoff terms have the induced quotient and subobject filtrations of [def-sp-filtration], so $F^a$ is still the whole term and $F^{b+1}$ is still zero. The dg sums, shifts, cone splittings and cylinder in steps 4 and 5 also retain these exact two bounds. Consequently step 6 gives fractions in the homotopy categories with this fixed interval, and every roof replacement and equality refinement in steps 7–10 remains in those same categories. The bounded representatives in step 3 do too. Thus the entire proof, including all three essential-image characterizations and both intermediate inclusions, holds for the fixed-interval localizations themselves; it does not infer this by asserting that they are full subcategories of a larger localization.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S5 and 05S6, their truncation and roof constructions restricted to a fixed filtration interval."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-filtered-graded-exactness",
+  "def-kun-truncations",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "lem-coef-dg-abc-homotopy-category-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "lem-pc-left-localization-fraction-representation",
+  "lem-pc-left-localization-fraction-equality",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S5 and 05S6, expanding the referenced proof of Tag 05RW and checking the uniformly finite/fixed-interval restriction; dg triangulation is the cited Stacks 09QY tool."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -71,10 +221,38 @@
    "results": "{\"t\": \"2026-10-17T05:32:03Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of finite filtered cochain complexes: good truncations and fully faithful bounded derived inclusions; flat resolutions preserving filtration and associated graded tensor; associated graded of a derived bifunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.Q\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"4cee9af6cf2e16ff\"}",
    "date": "2026-10-17",
    "verdict": "no match: the results concern ordinary abelian derived categories. Finite flags with strict exact sequences and graded quasi-isomorphisms require the filtered localization theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniformly finite filtered complexes with bounded graded cohomology admit good cochain truncations and fully faithful bounded localizations",
+   "results": "{\"t\": \"2026-10-17T05:52:20Z\", \"tool\": \"leanfinder\", \"query\": \"Uniformly finite filtered complexes with bounded graded cohomology admit good cochain truncations and fully faithful bounded localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"460cf9ff530d6686\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits concern ordinary derived categories of abelian categories or diagram-filteredness; finite filtered objects form an additive exact category, and the graded quasi-isomorphism localization is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(truncat|localiz)|bounded.*filtered",
+   "results": "{\"t\": \"2026-10-17T05:52:31Z\", \"tool\": \"grep\", \"query\": \"filtered.*(truncat|localiz)|bounded.*filtered\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits concern ordinary derived categories of abelian categories or diagram-filteredness; finite filtered objects form an additive exact category, and the graded quasi-isomorphism localization is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtered derived categories embed fully faithfully after restricting to bounded cochain complexes",
+   "results": "{\"t\": \"2026-10-17T05:52:31Z\", \"tool\": \"leansearch\", \"query\": \"Finite filtered derived categories embed fully faithfully after restricting to bounded cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.IsFiltered.of_exists_of_isFiltered_of_fullyFaithful\", \"ComplexShape.Embedding.fullyFaithfulExtendFunctor\", \"CategoryTheory.IsFilteredOrEmpty.of_exists_of_isFiltered_of_fullyFaithful\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteColimitsModuleCatEmbeddingRingFunctor\", \"CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteLimitsModuleCatEmbeddingRingFunctor\", \"ComplexShape.Embedding.instFullHomotopyCategoryExtendHomotopyFunctor\"], \"digest\": \"2450549f99b041ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits concern ordinary derived categories of abelian categories or diagram-filteredness; finite filtered objects form an additive exact category, and the graded quasi-isomorphism localization is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"isGE\"",
+   "results": "{\"t\": \"2026-10-17T05:52:55Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"isGE\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"8a235ec4998b25b3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits concern ordinary derived categories of abelian categories or diagram-filteredness; finite filtered objects form an additive exact category, and the graded quasi-isomorphism localization is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-operations-hom",
@@ -93,5 +271,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-bounded-localization-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement and inherited Mathlib research. Expanded the strict cutoff calculations, bounded representatives, the chain/homotopy localization comparison, both roof directions and equality witnesses. Reused the existing finite graded exactness, dg ABC triangulation and fraction-calculus nodes; no new nodes are needed. Added the existing good-truncation definition as a statement dependency.",
+  "blueprint": "Realizes the Additivity paragraph of lem-trf-trace-triangle-compatibility (main-20261015), via lem-trf-filtered-operations-hom: bounded filtered bifunctors must be compared with their unbounded or one-sided resolution models without changing the finite filtration interval.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-abc-homotopy-category-triangulated",
+    "why": "Generic dg cone triangulation tool, applied after explicitly checking axioms A, B and C on uniformly finite filtered complexes; the additivity unit supplies no foundational triangulation theorem."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic ordinary abelian-complex cone criterion, applied grade by grade to identify the cone class with graded quasi-isomorphisms; it does not replace the additivity route."
+   },
+   {
+    "node": "lem-trf-finite-filtered-graded-exactness",
+    "why": "Steps 1 and 2 take from its statement only the generic Stacks 05QH fact that graded exactness of a finitely filtered three-term complex makes both maps strict; its unit sk-i-global-additivity is not cited by sk-i-additivity, and no node of sk-i-additivity gives this homological-algebra lemma (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-abc-homotopy-category-triangulated",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-trf-finite-filtered-graded-exactness"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-c3e498af3",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c3e498af3 (reviewer sub-agent of L); spot-checked: Read in full: the item JSON, every cited node statement, unit sk-i-additivity and its transitive uses, the steps of the parent lem-trf-filtered-operations-hom that cite the item, Stacks derived.tex 05S4/05S5/05S6 (lines 4375-4480) and dga.tex 09QJ (line 3545). The statement is unchanged. Its uniformly finite filtrations and its localizations of cochain-bounded complexes are kept apart from Stacks' per-term Fil^f category, never identified with it, and every construction keeps uniform bounds. Step checks: steps 1-2, I worked out the quotient grade formula gr^p(K^c/I)=coker(gr^p v) and the kernel identity F^p cap v^-1(F^{p+1})=(Z cap F^p)+F^{p+1} from the strictness given by lem-trf-finite-filtered-graded-exactness, with hypotheses H^{c-1}=0 and H^{d+1}=0. The good-truncation convention is the one in def-kun-truncations. Step 4, the cylinder K+C(1_K): t is a chain map, t j0=g, t j1=f, and the contraction H(y,z)=(0,y) preserves the filtration. Step 5, dg axioms A/B/C: [m][l]=[m+l] holds strictly and pi d(s)=f for the cone, as in 09QJ. Step 6, the gradewise-acyclic subcategory is triangulated (via the long exact sequence) and its cone class is exactly the graded quasi-isomorphisms (cone criterion applied to each gr^p); lem-trf-triangulated-subcategory-cone-system, a Mathlib leaf, gives both calculi of fractions. Steps 7-10, the left and right fraction leaves have the right orientation, the bound moves correctly through the denominator, and pre- or post-composing with the truncations keeps W and both equations; the final Hom-bijection cancellation is elementary. Step 11 keeps the fixed interval. Edge cases: the zero complex, a=b, an acyclic complex, and the identity map with raised filtration, where the hypothesis rightly fails. No new nodes and no cycle. Not duplicates: lem-trf-bounded-filtered-localization-embedding (a consequence that already cites the item), lem-trf-filtered-cone-localization (bounded below only), lem-kun-filtered-quasi-isomorphism-fractions (R-modules only). FIX (C8/route): lem-trf-finite-filtered-graded-exactness belongs to unit sk-i-global-additivity, which is not in the transitive uses of sk-i-additivity. The second reader removed it from tool_uses as same-unit, which was wrong. I re-declared it as a generic Stacks 05QH tool in split_report.tool_uses in fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-bounded-localization-comparison.json; nothing else changed. Accepted tool_uses: lem-coef-dg-abc-homotopy-category-triangulated, lem-pur-quasi-iso-cone-acyclic, lem-trf-finite-filtered-graded-exactness.; 1 file(s) fixed by the reviewer"
  }
 }
