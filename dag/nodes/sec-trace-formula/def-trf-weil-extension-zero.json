@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-trf-weil-extension-zero",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Weil extension by zero",
- "statement": "Let $j_0:X_0\\hookrightarrow Y_0$ be an\nopen immersion of\nseparated finite-type schemes over the\nfinite field $k_0$, with\nbase change $j:X\\hookrightarrow Y$. For a\nstrict Weil complex\n$(K,\\varphi)$ on $X$, set\n\n$$\n\\bar K=j_!K,\\qquad\n\\bar\\varphi:\nLg_Y^*j_!K\\xrightarrow{b_{g_Y}}\nj_!Lg_X^*K\\xrightarrow{j_!\\varphi}j_!K.\n$$\n\nHere $j_!$ is extension by\nzero ([def-weil-extension-by-zero]), and $b_{g_Y}$ is the comparison\nisomorphism of [lem-trf-open-square-exchange] for the Cartesian square\nof [lem-trf-frobenius-open-square].",
+ "statement": "Let $j_0:X_0\\hookrightarrow Y_0$ be an\nopen immersion of\nseparated finite-type schemes ([def-weil-scheme-morphism-properties]) over the\nfinite field $k_0$, with\nbase change $j:X\\hookrightarrow Y$ to the fixed algebraic closure $k$\nof [def-weil-finite-field-fiber]. For a\nstrict Weil complex\n$(K,\\varphi)$ on $X$ in the finite-coefficient conventions of\n[def-trf-strict-weil-complex], set\n\n$$\n\\bar K=j_!K,\\qquad\n\\bar\\varphi:\nLg_Y^*j_!K\\xrightarrow{b_{g_Y}}\nj_!Lg_X^*K\\xrightarrow{j_!\\varphi}j_!K.\n$$\n\nHere $j_!$ denotes the induced extension-by-zero functor on complexes\nof [lem-trf-open-square-exchange], built from the module-sheaf functor\n[def-weil-extension-by-zero], and $b_{g_Y}$ is the comparison\nisomorphism of [lem-trf-open-square-exchange] for the Cartesian square\nof [lem-trf-frobenius-open-square].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/def-trf-weil-extension-zero.md",
   "place": "node def-trf-weil-extension-zero, order 2369"
@@ -23,9 +23,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|IsoAlgebra|StrictWeilComplex",
+   "date": "2026-10-17",
+   "results": "1 hits; Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "verdict": "no match: the sole hit is algEquivIsoAlgebraIso for ring algebras, unrelated to derived Weil complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero of a complex equipped with a Frobenius pullback isomorphism along an open immersion",
+   "date": "2026-10-17",
+   "results": "8 hits; Function.ExtendByZero.linearMap, ContinuousLinearMap.extend_zero, HomologicalComplex.extendXIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, HomologicalComplex.extendMap_f_eq_zero, HomologicalComplex.isZero_extend_X, HomologicalComplex.extend_single_d, HomologicalComplex.extend_d_to_eq_zero",
+   "verdict": "no match: function extension and extension of homological complexes along index embeddings do not define geometric extension by zero or its semilinear Frobenius coefficient map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion extension by zero functor on derived sheaves lifts to pairs with a Frobenius pullback isomorphism",
+   "date": "2026-10-17",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "verdict": "no match: restriction of scheme module sheaves is in the opposite direction; the alternate abstract query finds functorOfNatTrans, which changes endofunctor algebra structure on the same underlying category and does not construct the inter-category geometric functor j_! or its exchange map."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra",
+   "date": "2026-10-17",
+   "results": "12 hits; CategoryTheory.Endofunctor.Algebra, CategoryTheory.Endofunctor.instInhabitedAlgebraId, CategoryTheory.Endofunctor.Algebra.a, CategoryTheory.Endofunctor.Algebra.instCategory, CategoryTheory.Endofunctor.Algebra.instCategoryStruct, CategoryTheory.Endofunctor.Algebra.Hom, CategoryTheory.Endofunctor.Algebra.Hom.id, CategoryTheory.Endofunctor.Algebra.forget",
+   "verdict": "no match: Endofunctor.Algebra defines pairs with a structure morphism but supplies neither the pro-etale derived extension-by-zero functor nor the Frobenius exchange; the actual geometric data still require the six cited project nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a functor between categories to algebras for endofunctors using a natural transformation commuting with the endofunctors",
+   "date": "2026-10-17",
+   "results": "8 hits; CategoryTheory.Endofunctor.Algebra.functorOfNatTrans, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_str, CategoryTheory.Monad.algebraFunctorOfMonadHom, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_a, CategoryTheory.Monad.algebraFunctorOfMonadHom_obj_a, CategoryTheory.Endofunctor.Algebra.instCategoryStruct, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_map_f, CategoryTheory.Monad.algebraFunctorOfMonadHom_map_f",
+   "verdict": "no match: restriction of scheme module sheaves is in the opposite direction; the alternate abstract query finds functorOfNatTrans, which changes endofunctor algebra structure on the same underlying category and does not construct the inter-category geometric functor j_! or its exchange map."
+  },
+  {
+   "tool": "grep",
+   "query": "Endofunctor.*Algebra|extension[Bb]y[Zz]ero|lowerShriek",
+   "date": "2026-10-17",
+   "results": "10 hits; Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean, Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean, Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean",
+   "verdict": "no match: the returned general functor and endofunctor-algebra constructions do not define the finite-coefficient geometric extension-by-zero functor and its semilinear exchange."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between categories with commuting endofunctors maps objects equipped with an invertible structure map to such objects",
+   "date": "2026-10-17",
+   "results": "8 hits; CategoryTheory.Functor.copyObj, CategoryTheory.Functor.mapIso, CategoryTheory.Functor.map_conj, CategoryTheory.Functor.mapAut, CategoryTheory.Endofunctor.Algebra, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_a, CategoryTheory.Functor.map_isIso, CategoryTheory.inducedFunctor_obj",
+   "verdict": "no match: the returned general functor and endofunctor-algebra constructions do not define the finite-coefficient geometric extension-by-zero functor and its semilinear exchange."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -56,5 +106,21 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-weil-push"
+ "unit": "sk-d-weil-push",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-weil-extension-zero",
+  "worker": "stage1",
+  "summary": "Audited the definition against the current trace-formula blueprint and the source library. The construction uses the six existing statement dependencies and requires no child nodes: the underlying complex is j_! K and its coefficient map is (j_! phi) composed with the open-square exchange b_{g_Y}. Made the finite-field base change and finite-coefficient conventions explicit and added the three missing inline dependency citations. No finished declaration with this exact statement was found in WeilConjectures. Second reading clarified that j_! denotes the induced functor on complexes supplied by the exchange statement.",
+  "blueprint": "Realizes the sole definition clause in def-trf-weil-extension-zero: bar K = j_! K and bar phi = (j_! phi) composed with b_{g_Y}.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-7ff3250af",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-7ff3250af (reviewer sub-agent of L); spot-checked: I read the whole definition, all six statement dependencies, the unit and the sources. The item text matches the master blueprint (order 2369) and main-20261015 (order 2713) hypothesis by hypothesis; those two snapshots have identical bodies. The delivery only adds inline citations for the three dependencies that were listed but not cited, plus one sentence saying that j_! is the functor on complexes. Nothing is weakened. The composite is well typed. lem-trf-frobenius-open-square at m=1 makes the square (g_X, g_Y, j, j) Cartesian. lem-trf-open-square-exchange accepts any g, including a semilinear one, at A=A_{E,n} on the small pro-etale sites, so b_{g_Y}: Lg_Y^*j_!K -> j_!Lg_X^*K. In def-trf-strict-weil-complex, g_gamma=g_X with gamma=sigma^{-1}, the same map as in the square node, so j_!phi starts exactly where b_{g_Y} ends. The coefficient category (A_{E,n} on the pro-etale site) and the base-change square (the m=1 Galois square) agree with the master source. Strictness of the new pair and functoriality are correctly left to separate statements, as rem-ptr-trf-weil-extension-zero-11 says. I checked Stacks 03S6 (etale-cohomology.tex, lemma-shriek-base-change, line 11493): it gives the same exchange direction and is quoted only as the etale analogue. No SGA source is used. Edge cases checked: j=id gives back phi; an empty X or K=0 gives zero; a disjoint union gives phi(+)0; Spec k_0 works. Duplicate search: I grepped the whole DAG and went through about 80 definition nodes that mention extension by zero. def-weil-frobenius-square-exchange uses the same b map in a compact-support exchange, which is consistent and not a duplicate. There are no new nodes, no fixes and no tool_uses."
+ }
 }

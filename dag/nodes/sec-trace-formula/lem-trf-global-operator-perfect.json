@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-global-operator-perfect",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The global operator is an endomorphism of a perfect complex",
@@ -15,42 +15,146 @@
  "stmt_deps": [
   "def-trf-global-operator",
   "def-trf-categorical-trace",
-  "def-trf-correspondence"
+  "def-trf-correspondence",
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proper-morphism"
  ],
  "proof": [
   {
-   "text": "By [def-trf-coefficient-conventions] the source and the target of\n$T_c(u)$ are $R\\Gamma_c(X,K)$, which lies in\n$D^b_{\\mathrm{fin}}(A)$ by\n[prop-trf-compact-support-perfectness], and\n$D^b_{\\mathrm{fin}}(A)$ of [def-trf-categorical-trace] is a\nfull subcategory of $D(A)$, so it\nsuffices to see that the composite of\n[def-trf-global-operator] is formed in\n$D^b_{\\mathrm{fin}}(A)$, i.e. that its intermediate complexes are\ncompact-support cohomology of finite-Tor constructible complexes in\nthe sense of [def-weil-finite-tor-amplitude]:\n$Lc_2^*K$ is finite-Tor constructible, so\n$R\\Gamma_c(C,Lc_2^*K)\\in D^b_{\\mathrm{fin}}(A)$; the identification\n$Rc_{2*}\\cong Rc_{2!}$ for the proper $c_2$ shows that\n$Rc_{2*}Lc_2^*K\\cong Rc_{2!}Lc_2^*K$ is finite-Tor constructible as\nwell, so $R\\Gamma_c(X,Rc_{2*}Lc_2^*K)\\in D^b_{\\mathrm{fin}}(A)$;\nfinally $Rc_1^!K$ is finite-Tor constructible by item (3) of\n[def-weil-exceptional-adjoint-admissibility], as required by the\nadmissibility of\n[def-trf-admissibility], so that $R\\Gamma_c(C,Rc_1^!K)$ and,\nby the identification\n$R\\Gamma_c(X,Rc_{1!}Rc_1^!K)\\cong R\\Gamma_c(C,Rc_1^!K)$ of\n[def-trf-global-operator] composed with\n[def-compact-support-direct-image-detailed],\n$R\\Gamma_c(X,Rc_{1!}Rc_1^!K)$ are compact-support cohomology of\nfinite-Tor constructible complexes. Each of these four complexes is\ntherefore an object of $D^b_{\\mathrm{fin}}(A)$, which is the\nassertion.",
+   "text": "The coefficient conventions fix $A=A_{E,n}$ with $n\\geq1$ and $\\ell\\ne p$. By [def-trf-correspondence], $X,C$ are separated finite-type $k$-schemes and $c_1$ is exceptionally admissible at $A$; the domain of [def-trf-admissibility] makes $c_1$ separated finite type. Properness of $c_2$ makes it separated finite type by [def-weil-proper-morphism]. Thus the hypotheses of the finite-Tor stability theorem are available for both legs. The source and target in [def-trf-global-operator] are $R\\Gamma_c(X,K)$. Since $K\\in D^b_{ctf}(X,A)$, [prop-trf-compact-support-perfectness] makes this complex perfect in the sense of [def-trf-categorical-trace].",
    "uses": [
     "def-trf-coefficient-conventions",
-    "prop-trf-compact-support-perfectness",
-    "def-trf-categorical-trace",
-    "def-trf-global-operator",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-exceptional-adjoint-admissibility",
+    "def-trf-correspondence",
     "def-trf-admissibility",
-    "def-compact-support-direct-image-detailed"
+    "def-weil-proper-morphism",
+    "def-trf-global-operator",
+    "prop-trf-compact-support-perfectness",
+    "def-trf-categorical-trace"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-perfect.proof.md",
+    "place": "proof paragraph"
+   }
+  },
+  {
+   "text": "Put $H=Lc_2^*K$. Clause (i) of [thm-sf-ctf-stability] gives $H\\in D^b_{ctf}(C,A)$, and clause (iii), applied to $c_2$ and $H$, gives $Rc_{2*}H\\in D^b_{ctf}(X,A)$. This is finite-Tor constructibility as defined in [def-weil-finite-tor-amplitude], not merely bounded constructibility. Apply [prop-trf-compact-support-perfectness] on $C$ to $H$ and on $X$ to $Rc_{2*}H$. It follows that both ordinary-leg intermediate complexes $R\\Gamma_c(C,H)$ and $R\\Gamma_c(X,Rc_{2*}H)$ are perfect.",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "def-weil-finite-tor-amplitude",
+    "prop-trf-compact-support-perfectness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-perfect.proof.md",
+    "place": "proof paragraph"
+   }
+  },
+  {
+   "text": "Put $J=Rc_1^!K$ for the specified constructible exceptional functor of [def-trf-admissibility]. Clause (v) of [thm-sf-ctf-stability] gives $J\\in D^b_{ctf}(C,A)$, and clause (iv), applied to $c_1$ and $J$, gives $Rc_{1!}J\\in D^b_{ctf}(X,A)$. Apply [prop-trf-compact-support-perfectness] on $C$ to $J$ and on $X$ to $Rc_{1!}J$. Thus both exceptional-leg intermediate complexes $R\\Gamma_c(C,J)$ and $R\\Gamma_c(X,Rc_{1!}J)$ are perfect. No unrestricted ambient right adjoint is used.",
+   "uses": [
+    "def-trf-admissibility",
+    "thm-sf-ctf-stability",
+    "prop-trf-compact-support-perfectness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-perfect.proof.md",
+    "place": "proof paragraph"
+   }
+  },
+  {
+   "text": "The compact-support functors are those of [def-compact-support-direct-image-detailed]. In [def-trf-global-operator], the first identification is $R\\Gamma_c(X,Rc_{2*}H)\\simeq R\\Gamma_c(X,Rc_{2!}H)\\simeq R\\Gamma_c(C,H)$, using proper coincidence and compact-support composition for $a_X\\circ c_2=a_C$. The second is the inverse of $R\\Gamma_c(X,Rc_{1!}J)\\simeq R\\Gamma_c(C,J)$, using composition for $a_X\\circ c_1=a_C$. That definition already specifies these identifications, the ordinary unit, the arrow induced by $u$, and the exceptional counit as a composite in $D(A)$. Steps 1–3 show that every displayed object is compact-support cohomology of a finite-Tor constructible complex and is perfect. By [def-trf-categorical-trace], $D^b_{\\mathrm{fin}}(A)=\\operatorname{Perf}(A)$ is a full subcategory of $D(A)$: its Hom sets between these objects are the ambient Hom sets. Each of the five arrows therefore belongs to this full subcategory, and composition there is ambient composition. Their composite is the same $T_c(u)$, hence the asserted endomorphism of a perfect complex.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "def-trf-global-operator",
+    "def-trf-categorical-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-perfect.proof.md",
+    "place": "proof paragraph"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-trf-admissibility",
+  "def-weil-proper-morphism",
+  "def-trf-global-operator",
   "prop-trf-compact-support-perfectness",
   "def-trf-categorical-trace",
-  "def-trf-global-operator",
+  "thm-sf-ctf-stability",
   "def-weil-finite-tor-amplitude",
-  "def-weil-exceptional-adjoint-admissibility",
-  "def-trf-admissibility",
   "def-compact-support-direct-image-detailed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-perfect.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-perfect.proof.md",
+  "place": "proof paragraph, corrected to use constructible finite-Tor preservation rather than the excluded ambient adjoint clause"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "globalOperator|compactSupport|FiniteTor|PerfectComplex",
+   "results": "{\"t\": \"2026-10-17T00:31:08Z\", \"tool\": \"grep\", \"query\": \"globalOperator|compactSupport|FiniteTor|PerfectComplex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits in the existing Mathlib source directory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported cohomology finite Tor constructible sheaves is perfect",
+   "results": "{\"t\": \"2026-10-17T00:31:08Z\", \"tool\": \"leansearch\", \"query\": \"compactly supported cohomology finite Tor constructible sheaves is perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"compactlySupported_eq_top_of_isCompact\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"compactlySupported_eq_top_iff\", \"DerivedCategory.TStructure.t\", \"SheafOfModules.Presentation.IsFinite\"], \"digest\": \"549f228baf3a90b1\"}; Read the returned signatures: abstract derived-category structures, continuous/group cohomology, etale ring facts, sheaves of finite presentation, or topological compact supports do not state the finite-Tor constructible global-operator assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "{\"t\": \"2026-10-17T00:31:09Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory\", \"instCategoryDerivedCategory\", \"DerivedCategory.instHasZeroObject\", \"DerivedCategory.instPreadditive\", \"DerivedCategory.instHasShiftInt\", \"DerivedCategory.singleFunctor\", \"DerivedCategory.singleFunctors\", \"DerivedCategory.instAdditiveSingleFunctor\"], \"digest\": \"f354bb07c1812d8c\"}; Read the returned signatures: abstract derived-category structures, continuous/group cohomology, etale ring facts, sheaves of finite presentation, or topological compact supports do not state the finite-Tor constructible global-operator assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomological correspondence with proper ordinary leg acts on perfect compactly supported cohomology",
+   "results": "{\"t\": \"2026-10-17T00:31:09Z\", \"tool\": \"leanfinder\", \"query\": \"cohomological correspondence with proper ordinary leg acts on perfect compactly supported cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuousCohomology\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"groupCohomologyIsoExt\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc\", \"CochainComplex.HomComplex.CohomologyClass.homAddEquiv\"], \"digest\": \"aa9fb747346a29fc\"}; Read the returned signatures: abstract derived-category structures, continuous/group cohomology, etale ring facts, sheaves of finite presentation, or topological compact supports do not state the finite-Tor constructible global-operator assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Tor constructible etale complex has perfect cohomology with compact supports",
+   "results": "{\"t\": \"2026-10-17T00:31:41Z\", \"tool\": \"leanfinder\", \"query\": \"finite Tor constructible etale complex has perfect cohomology with compact supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"cd2879e48990c6b5\"}; Read the returned signatures: abstract derived-category structures, continuous/group cohomology, etale ring facts, sheaves of finite presentation, or topological compact supports do not state the finite-Tor constructible global-operator assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|finite.tor|perfect",
+   "results": "{\"t\": \"2026-10-17T00:31:41Z\", \"tool\": \"grep\", \"query\": \"compact.support|finite.tor|perfect\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits in the existing Mathlib source directory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|compactSupport|FiniteTor|PerfectComplex",
+   "results": "{\"t\": \"2026-10-17T00:32:52Z\", \"tool\": \"grep\", \"query\": \"globalOperator|compactSupport|FiniteTor|PerfectComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/FixedPoints/Support.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/Support.lean\", \"Mathlib/Topology/Algebra/Support.lean\", \"Mathlib/Topology/Algebra/Support.lean\", \"Mathlib/Topology/Algebra/Support.lean\", \"Mathlib/Topology/Algebra/Support.lean\"], \"digest\": \"af8af5c3fcccebf9\"}; Read the returned signatures: abstract derived-category structures, continuous/group cohomology, etale ring facts, sheaves of finite presentation, or topological compact supports do not state the finite-Tor constructible global-operator assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback and proper pushforward preserve bounded constructible complexes of finite Tor dimension",
+   "results": "{\"t\": \"2026-10-17T00:41:34Z\", \"tool\": \"leanfinder\", \"query\": \"derived pullback and proper pushforward preserve bounded constructible complexes of finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"DerivedCategory.isGE_Q_obj_iff\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp\"], \"digest\": \"f8fc7c9c2afb0898\"}; Second-reader search: the eight returned results concern underived sheaf pullback/pushforward composition, preservation of finite limits, derived-category cohomological bounds, or exponentiable morphisms. None asserts finite-Tor constructible preservation or perfect compact-support cohomology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -83,5 +187,29 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-operator"
+ "unit": "sk-d-operator",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-global-operator-perfect",
+  "worker": "stage1",
+  "summary": "Audited the earlier attempt against the current blueprint and every cited statement. Divided the proof into hypothesis and endpoint checks, ordinary-leg intermediate perfectness, exceptional-leg intermediate perfectness, and the elementary full-subcategory argument for the existing operator. Retained the repair from strong ambient admissibility to constructible stability. Corrected duplicated Mathlib directory prefixes and reran all four search kinds, with a second semantic phrasing and a whole-Mathlib grep. No new nodes; statement unchanged.",
+  "blueprint": "Steps 1–4 realize the current blueprint proof paragraph: endpoint perfectness; the two ordinary-leg objects; the two exceptional-leg objects; the proper/composition comparisons and full-subcategory conclusion.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "The global-operator unit supplies the composite and its four stages but no preservation theorem; this six-functor stability result is used as a generic black box for finite-Tor constructibility under pullback, direct images, compact-support direct image, and exceptional inverse image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ctf-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-5da15bfa2",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-5da15bfa2 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement matches main-20261015 and the master copy word for word: n>=1, ell!=p, admissible correspondence, c_2 proper, K in D^b_ctf, and every intermediate complex perfect, in Perf(A)=D^b_fin(A), a full subcategory of D(A) by def-trf-categorical-trace. Step 1: correspondence, admissibility and the proper-morphism definition make X, C, c_1 and c_2 separated finite type. prop-trf-compact-support-perfectness gives the endpoints. Its D^b_fin means perfect: I checked this against the sk-prop-sf-trace-perfectness unit text and the node's own proof, which concludes with a bounded complex of finite free modules. Step 2: thm-sf-ctf-stability (i) and (iii) put Lc_2^*K in D^b_ctf(C) and Rc_2*Lc_2^*K in D^b_ctf(X); perfectness then gives both ordinary-leg objects. Step 3: stability (v) and (iv) apply to the specified constructible Rc_1^! of def-trf-admissibility. The blueprint's citation of strong ambient admissibility item (3) is stale, since def-trf-admissibility now excludes that notion with an elliptic-curve counterexample. Replacing it with constructible stability is correct and does not weaken the target. Step 4 (elementary): the directions of alpha_{c_2} and gamma_{c_1}^{-1} match def-trf-global-operator, and the full-subcategory argument is valid. There are no new nodes, no duplicates and no cycle. I accept the declared tool use of thm-sf-ctf-stability: the sk-d-operator route through sk-d-six only specifies constructible finiteness in a package and proves no preservation theorem. prop-trf-compact-support-perfectness is the blueprint proof's own citation, which the route check only records. Edge cases: the identity correspondence gives RΓ_c(A^1,A)=A(-1)[-2], which is perfect; for the Frobenius correspondence c_2=F is finite, hence proper; C empty or K=0 makes everything zero. Over Z/ℓ² the complex i_*(Z/ℓ) on a point shows the ctf hypothesis is needed. No fixes."
+ }
 }
