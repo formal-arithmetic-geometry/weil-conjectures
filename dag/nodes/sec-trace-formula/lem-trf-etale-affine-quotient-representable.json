@@ -12,7 +12,8 @@
   "def-pc-fibre-product",
   "def-weil-etale-morphism",
   "def-pc-fppf-site",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-trf-algebraic-space"
  ],
  "proof": [
   {
@@ -316,5 +317,23 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-ba9717435 (reviewer sub-agent of L); spot-checked: Read all seven steps and three new nodes against Stacks 0265, 02W5, 02W8 and cited dependencies. Verified pullback orientations, hypotheses, edge cases, duplicate candidates and unit route. No long steps, cycles or mathematical faults found. Accepted the declared base-change tool use. Detailed checks written to review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a2b4659e",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Exact node/Lean correspondence verified; all dependencies and Tag 0265 source steps checked; required report sections present; scompile sandbox and library compiles passed with no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineQuotientRepresentable",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_affine_quotient_representable",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineQuotientRepresentable.lean",
+  "statement": "theorem etale_affine_quotient_representable {S : Scheme.{u}} {R U : Over S} [IsAffine U.left] (s t : R ⟶ U) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Etale s.left] [Etale t.left] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun g : F.obj ⟶ G.obj ↦ η ≫ g)) : IsRepresentable (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) ∧ IsRepresentable (prod.lift (𝟙 F.obj) (𝟙 F.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

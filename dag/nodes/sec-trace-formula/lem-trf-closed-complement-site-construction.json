@@ -272,5 +272,23 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-e27a81d16 (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, every cited statement, sources, and unit/chapter route. Verified topology axioms, empty-cover gluing, adjunction direction, finite-limit preservation, edge cases, and duplicate/cycle candidates. No new nodes, long steps, prohibited machinery, or repairs. Concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4b9807a4c",
+  "group": "N3",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, edge cases, docstrings, route-pivot constraints, and exact Lean declarations checked. scompile.py passed sandbox and library compilation with only the expected sorry."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ClosedComplementSiteConstruction",
+  "declaration": "CategoryTheory.closed_complement_site_construction",
+  "file": "lean/Sheaf/CategoryTheory/Sites/ClosedComplementSiteConstruction.lean",
+  "statement": "theorem closed_complement_site_construction (C : Type w) [SmallCategory C] [HasFiniteLimits C] (J : GrothendieckTopology C) [J.Subcanonical] (X : C) (hX : IsTerminal X) (U : C) (i : U ⟶ X) [Mono i] : ∃ Jc : GrothendieckTopology C, (∀ (V : C) (R : Presieve V), Sieve.generate R ∈ Jc V ↔ Sieve.generate (R ⊔ Presieve.singleton (pullback.snd i (hX.from V))) ∈ J V) ∧ ∃ q : GeometricMorphism (Sheaf Jc (Type w)) (Sheaf J (Type w)), q.direct ⋙ sheafToPresheaf J (Type w) = sheafToPresheaf Jc (Type w) ∧ Nonempty q.direct.FullyFaithful ∧ ∀ G : Sheaf J (Type w), q.direct.essImage G ↔ IsIso (prod.fst : J.yoneda.obj U ⨯ G ⟶ J.yoneda.obj U)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
