@@ -311,7 +311,8 @@ lemma exists_unit_app_eq_zero_of_isLimit (i : I) (M : Sheaf (D.obj (op i)).small
     (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (π'.app m₀)).unit.app M).hom.app
       (op W) x) (h₀.trans hx)
   have h₁ := congrArg (fun φ ↦ φ.hom.app (op W) x) (unit_app_comp_unitComparison
-    ((Over.forget (op i) ⋙ D).map f) (π'.app m₀) (π'.app m) (by simp [π', m₀]) M)
+    ((Over.forget (op i) ⋙ D).map f) (π'.app m₀) (π'.app m)
+    (by simpa [π', m₀] using congrArg D.map (Subsingleton.elim m.hom f.left)) M)
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply] at h₁
   exact ⟨m.left.unop, m.hom.unop, h₁.symm.trans hf⟩
 
@@ -332,6 +333,8 @@ lemma compactSpace_and_quasiSeparatedSpace_pullback_left {Y Z : Scheme.{u}} (q :
     [IsAffineHom q] (U : Z.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left] :
     CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ q).obj U).left ∧
       QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ q).obj U).left := by
+  have : CompactSpace ↥((𝟭 Scheme).obj U.left) := ‹CompactSpace U.left›
+  have : QuasiSeparatedSpace ↥((𝟭 Scheme).obj U.left) := ‹QuasiSeparatedSpace U.left›
   change CompactSpace ↥(pullback U.hom q) ∧ QuasiSeparatedSpace ↥(pullback U.hom q)
   exact ⟨inferInstance, quasiSeparatedSpace_of_quasiSeparated (pullback.fst U.hom q)⟩
 
@@ -362,10 +365,15 @@ lemma exists_stageMap_app_eq {i₀ : I} (U : (D.obj (op i₀)).Etale) [CompactSp
     (inv (S.limitComparison f₀)).hom.app (op U) ((S.G.map (homOfLE hk)).hom.app _ n₀)
   have hn : (S.limitComparison f₀ ≫ (lowerStar AddCommGrpCat.{u + 1} (c.π.app (op i₀))).map
       (S.L.ι.app k)).hom.app (op U) n = s := by
+    have e := congrArg (fun φ ↦ φ.hom.app (op U) ((S.G.map (homOfLE hk)).hom.app _ n₀))
+      (IsIso.inv_hom_id_assoc (S.limitComparison f₀)
+        ((lowerStar AddCommGrpCat.{u + 1} (c.π.app (op i₀))).map (S.L.ι.app k)))
+    simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+      ConcreteCategory.comp_apply] at e
     rw [← hn₀, ← S.L.w (homOfLE hk)]
-    simp only [n, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply]
-    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom, IsIso.inv_hom_id]
-    rfl
+    simp only [n, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+      ConcreteCategory.comp_apply]
+    exact e
   obtain ⟨j, g, m, hm⟩ := exists_unitComparison_app_eq_of_isLimit hc k (S.F k)
     ((MorphismProperty.Over.pullback @Etale ⊤ (D.map f₀.op)).obj U) n
   refine ⟨j, f₀ ≫ g, (S.pushTransition f₀ g).hom.app (op U) m, ?_⟩
@@ -400,8 +408,7 @@ lemma exists_stageTransition_app_eq_zero {i₀ j : I} (U : (D.obj (op i₀)).Eta
         (((lowerStar AddCommGrpCat.{u + 1} (D.map (f ≫ a).op)).map
           ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app (op k))).unit.app
             (S.F k))).hom.app (op U) x) = 0 := by
-      rw [h]
-      exact ha
+      exact h.trans ha
     have h'' := congrArg ((inv (S.limitComparison (f ≫ a))).hom.app (op U)) h'
     rw [map_zero, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom,
       IsIso.hom_inv_id] at h''
@@ -411,10 +418,9 @@ lemma exists_stageTransition_app_eq_zero {i₀ j : I} (U : (D.obj (op i₀)).Eta
     ((MorphismProperty.Over.pullback @Etale ⊤ (D.map (f ≫ a).op)).obj U) x hx
   refine ⟨l, (f ≫ a) ≫ b, S.stageTransition f a ≫ S.stageTransition (f ≫ a) b, ?_, ?_⟩
   · rw [Category.assoc, S.stageTransition_stageMap, S.stageTransition_stageMap]
-  · change (S.pushTransition (f ≫ a) b).hom.app (op U)
-      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map b.op)).unit.app
-        (S.F k)).hom.app _ x) = 0
-    rw [hb, map_zero]
+  · have := congrArg ((S.pushTransition (f ≫ a) b).hom.app (op U)) hb
+    rw [map_zero] at this
+    exact this
 
 end SystemData
 

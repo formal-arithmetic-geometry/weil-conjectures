@@ -848,6 +848,57 @@ theorem leftDerivedUpperStar_mapIso_iso_sectionInvariant_normalCone
     (hΨ₀ u e)
   exact hΨ₀ u' e'
 
+/-- Blueprint `thm-pur-dnc-invariance`: DNC invariance of the section dualizing line
+
+In the situation of `def-pur-dnc-section-family` (a smooth `g : V ⟶ B` of pure relative
+dimension `d` with a closed section `s`, its normal cone `π_N : N ⟶ B` with zero section `0_N`
+and a deformation to the normal cone `D`), there is a unique isomorphism
+
+`Ψ : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)`
+
+which, in coordinates `e` over a surjective `u : B' ⟶ B` carrying the family to a standard one
+(for instance `(g, s)` to `(𝔸^d_{B'} ⟶ B', 0)`), is the identity of the standard section
+invariant, `Lu^* Ψ = φ₁ ≫ φ₀⁻¹`. It is compatible with étale localization and arbitrary base
+change in `B`: for every `u' : B'' ⟶ B` and every identification `e'` of the restricted family
+with one pulled back from `B''`, `Lu'^* Ψ` is the isomorphism read off from `e'`. The fibres of
+the family object are identified with the two section invariants by `θ₁` and `θ₀`
+(`lem-pur-dnc-section-geometry` (1)). -/
+theorem existsUnique_iso_sectionInvariant_normalCone_and_baseChange
+    [HasTateTwist.IsNormalized Λ] (d : ℕ)
+    (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V)
+    (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
+    (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
+    (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B]
+    (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ g s)
+    (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ N.proj N.zeroSection)
+    {B' : Scheme.{u}} (u : B' ⟶ B) [Surjective u]
+    {C₀ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).obj
+        (D.familyObject Λ) ≅ (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj C₀) :
+    ∃! Ψ : sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection,
+      (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso Ψ =
+          sectionRestrictionIso _ u _ (AffineSpace.oneSection_comp_map u)
+              (AffineSpace.oneSection_comp_over _ B') θ₁ e ≪≫
+            (sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
+              (AffineSpace.zeroSection_comp_over _ B') θ₀ e).symm ∧
+        ∀ {B'' : Scheme.{u}} (u' : B'' ⟶ B)
+          {C₀' : _root_.DerivedCategory (Sheaf B''.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+          (e' : (L((AffineSpace.map (ULift.{u} (Fin 1)) u')^*[ModuleCat.{u + 1} Λ])).obj
+            (D.familyObject Λ) ≅
+              (L((𝔸(ULift.{u} (Fin 1); B'') ↘ B'')^*[ModuleCat.{u + 1} Λ])).obj C₀'),
+          (L((u')^*[ModuleCat.{u + 1} Λ])).mapIso Ψ =
+            sectionRestrictionIso _ u' _ (AffineSpace.oneSection_comp_map u')
+                (AffineSpace.oneSection_comp_over _ B'') θ₁ e' ≪≫
+              (sectionRestrictionIso _ u' _ (AffineSpace.zeroSection_comp_map u')
+                (AffineSpace.zeroSection_comp_over _ B'') θ₀ e').symm := by
+  obtain ⟨Ψ₀, hΨ₀⟩ := exists_iso_sectionInvariant_normalCone Λ d g s N D aB θ₁ θ₀
+  refine ⟨Ψ₀, ⟨hΨ₀ u e, fun u' _ e' ↦ hΨ₀ u' e'⟩, fun Ψ hΨ ↦ ?_⟩
+  exact (existsUnique_iso_sectionInvariant_normalCone Λ d g s N D aB θ₁ θ₀ u e).unique hΨ.1
+    (hΨ₀ u e)
+
 end Etale
 
 end AlgebraicGeometry

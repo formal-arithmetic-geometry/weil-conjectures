@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapIsIso
-public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
 
 /-!
@@ -52,7 +51,7 @@ namespace Etale
 variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
-  {FC : A → A → Type (u + 1)} {CC : A → Type (u + 1)}
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
@@ -120,97 +119,6 @@ theorem nonempty_dualizingComplex_iso_of_adjunction
 
 
 end Linear
-
-section Proper
-
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [IsProper f]
-
-/-- For a proper morphism `f`, the projection map of `Rf_!` is that of `Rf_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`) through the identification
-`Rf_! ≅ Rf_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
-lemma projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((projectionMap A f).app K).app L ≫
-        (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
-          (((derivedTensor A X).obj K).obj ((L((f)^*[A])).obj L)) =
-      ((derivedTensor A Y).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
-          K)).app L ≫
-        ((rightDerivedLowerStarProjectionMap A f).app K).app L := by
-  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
-    rightDerivedLowerShriekToLowerStarComp_comp_eq]
-  exact compactificationProjectionMap_comp_forgetSupports (FA := FC) (CA := CC) A
-    (HasCompactification.compactification f) K L
-
-variable [IsIso (projectionMap A f)]
-
-/-- For a proper morphism `f` with an invertible projection map of `Rf_!`, the projection map
-of `Rf_*` is invertible. -/
-instance isIso_rightDerivedLowerStarProjectionMap_app_app_of_isProper
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app L) := by
-  have h := projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar f K L
-  have : IsIso (((derivedTensor A Y).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar A
-      f).hom.app K)).app L ≫ ((rightDerivedLowerStarProjectionMap A f).app K).app L) := by
-    rw [← h]
-    infer_instance
-  exact IsIso.of_isIso_comp_left (((derivedTensor A Y).map
-    ((rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app K)).app L) _
-
-/-- The **linear counit** `Rf_*(ω ⊗ᴸ Lf^* N) ≅ Rf_* ω ⊗ᴸ N ⟶ Λ_Y ⊗ᴸ N ≅ N` of a proper morphism
-`f` attached to a morphism `t : Rf_* ω ⟶ Λ_Y`: the inverse of the projection formula of `Rf_*`,
-followed by `t ⊗ᴸ N` and the left unitor. -/
-noncomputable def rightDerivedLowerStarLinearCounit
-    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (t : (R((f)_*[A])).obj ω ⟶ 𝟙_ _) (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    (R((f)_*[A])).obj (((derivedTensor A X).obj ω).obj ((L((f)^*[A])).obj N)) ⟶ N :=
-  inv (((rightDerivedLowerStarProjectionMap A f).app ω).app N) ≫
-    ((derivedTensor A Y).map t).app N ≫ (derivedTensorLeftUnitor A Y N).hom
-
-/-- The inverse projection formula of `Rf_*`, through `Rf_! ≅ Rf_*`. -/
-lemma projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_comp_inv
-    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((projectionMap A f).app ω).app N ≫
-        (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
-          (((derivedTensor A X).obj ω).obj ((L((f)^*[A])).obj N)) ≫
-        inv (((rightDerivedLowerStarProjectionMap A f).app ω).app N) =
-      ((derivedTensor A Y).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
-          ω)).app N := by
-  rw [reassoc_of% (projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar f ω N),
-    IsIso.hom_inv_id, Category.comp_id]
-
-/-- The linear counits of `Rf_!` and `Rf_*` correspond under `Rf_! ≅ Rf_*`. -/
-lemma rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app_comp_linearCounit
-    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (t : (R((f)_*[A])).obj ω ⟶ 𝟙_ _) (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
-        (((derivedTensor A X).obj ω).obj ((L((f)^*[A])).obj N)) ≫
-      rightDerivedLowerStarLinearCounit f ω t N =
-    rightDerivedLowerShriekLinearCounit f ω
-      ((rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app ω ≫ t) N := by
-  rw [← cancel_epi (((projectionMap A f).app ω).app N), rightDerivedLowerShriekLinearCounit,
-    IsIso.hom_inv_id_assoc, rightDerivedLowerStarLinearCounit,
-    reassoc_of% (projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_comp_inv f ω N),
-    Functor.map_comp, NatTrans.comp_app, Category.assoc]
-
-/-- An adjunction `Rf_* ⊣ (N ↦ ω ⊗ᴸ Lf^* N)` of a proper morphism with the linear counit
-attached to `t : Rf_* ω ⟶ Λ_Y` is, through `Rf_! ≅ Rf_*`, an adjunction
-`Rf_! ⊣ (N ↦ ω ⊗ᴸ Lf^* N)` with the linear counit attached to `Rf_! ω ≅ Rf_* ω ⟶ Λ_Y`. -/
-theorem exists_rightDerivedLowerShriek_adjunction_of_rightDerivedLowerStar
-    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (t : (R((f)_*[A])).obj ω ⟶ 𝟙_ _) (adj : R((f)_*[A]) ⊣ L((f)^*[A]) ⋙ (derivedTensor A X).obj ω)
-    (hadj : ∀ N, adj.counit.app N = rightDerivedLowerStarLinearCounit f ω t N) :
-    ∃ (t' : (R(f)_![A]).obj ω ⟶ 𝟙_ _) (adj' : R(f)_![A] ⊣ L((f)^*[A]) ⋙ (derivedTensor A X).obj ω),
-      ∀ N, adj'.counit.app N = rightDerivedLowerShriekLinearCounit f ω t' N := by
-  refine ⟨(rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app ω ≫ t,
-    adj.ofNatIsoLeft (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).symm, fun N ↦ ?_⟩
-  rw [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_inv,
-    hadj]
-  exact rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app_comp_linearCounit f ω t N
-
-end Proper
 
 end Etale
 

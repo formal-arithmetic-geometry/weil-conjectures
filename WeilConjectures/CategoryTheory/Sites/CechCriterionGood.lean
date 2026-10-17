@@ -28,6 +28,7 @@ namespace CategoryTheory.Sheaf
 open Presheaf Abelian
 
 variable {C : Type w} [Category.{v} C] {J : GrothendieckTopology C}
+  [HasSheafify J AddCommGrpCat.{max w v}]
   [HasExt.{w'} (Sheaf J AddCommGrpCat.{max w v})] {T : C} (hT : IsTerminal T)
   [∀ V : C, HasFiniteProducts (Over V)]
   [EnoughInjectives (Sheaf J AddCommGrpCat.{max w v})]

@@ -269,7 +269,11 @@ Let `k` be separably closed, `p : X ⟶ Y` a proper morphism of finite-type `k`-
 whose source has dimension at most `d`; it holds for all of them, as
 `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar` allows
 base change along an arbitrary morphism. The hypothesis `[HasInvertibleExponent Λ X]` is only
-there to apply that statement, whose proof does not use it. -/
+there to apply that statement, whose proof does not use it.
+
+The coefficient class of the blueprint is the class of sheaves of étale origin
+(`AlgebraicGeometry.ProEtale.etaleOrigin`), so this is also the vanishing clause of blueprint
+`thm-sf-fullcd-used-class`, with the bound `2d`, uniformly over all base changes. -/
 theorem isZero_homology_rightDerivedLowerStar_of_etaleOrigin
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
     (hF : etaleOrigin (ModuleCat.{u + 1} Λ) X F) (r : ℤ) (hr : (2 * d : ℤ) < r) :

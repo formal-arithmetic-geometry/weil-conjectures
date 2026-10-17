@@ -74,38 +74,36 @@ lemma Scheme.Etale.compactSpace_quasiSeparatedSpace_of_isColimit {X : Scheme.{u}
     (hY : ∀ k, CompactSpace (Y k).left ∧ QuasiSeparatedSpace (Y k).left) :
     CompactSpace Z.left ∧ QuasiSeparatedSpace Z.left := by
   let Yl : ι → Scheme.{u} := fun k ↦ (Y k).left
-  let W : X.Etale := MorphismProperty.Over.mk ⊤ (Sigma.desc fun k ↦ ((Y k).hom : Yl k ⟶ X))
+  let p : ∀ k, Yl k ⟶ X := fun k ↦ (Y k).hom
+  let W : X.Etale := MorphismProperty.Over.mk ⊤ (Sigma.desc p)
     (IsZariskiLocalAtSource.sigmaDesc fun k ↦ (Y k).prop)
   let ιW : ∀ k, Y k ⟶ W := fun k ↦
-    MorphismProperty.Over.homMk (Sigma.ι Yl k) (by simp [W])
-  have hW : IsColimit (Cofan.mk W ιW) := mkCofanColimit _
+    MorphismProperty.Over.homMk (Sigma.ι Yl k) (Sigma.ι_desc p k)
+  have hW : IsColimit (Cofan.mk W ιW) := Cofan.IsColimit.mk _
     (fun s ↦ MorphismProperty.Over.homMk (Sigma.desc fun k ↦ (s.inj k).left) (by
-      apply Sigma.hom_ext
-      intro k
-      simp only [Sigma.ι_desc_assoc, W, MorphismProperty.Over.mk_hom, Sigma.ι_desc]
-      exact MorphismProperty.Over.w (s.inj k)))
-    (fun s k ↦ by ext; simp [ιW])
-    (fun s m hm ↦ by
-      ext
-      apply Sigma.hom_ext
-      intro k
-      simpa [ιW] using congrArg (fun φ ↦ φ.left) (hm k))
+      refine Sigma.hom_ext _ _ fun k ↦ ?_
+      rw [Sigma.ι_desc_assoc]
+      exact (MorphismProperty.Over.w (s.inj k)).trans (Sigma.ι_desc p k).symm))
+    (fun s k ↦ MorphismProperty.Over.Hom.ext (Sigma.ι_desc _ k))
+    (fun s m hm ↦ MorphismProperty.Over.Hom.ext (Sigma.hom_ext _ _ fun k ↦
+      (congrArg (fun φ ↦ φ.left) (hm k)).trans
+        (Sigma.ι_desc (fun k ↦ (s.inj k).left) k).symm))
   let e := (Scheme.Etale.forget X ⋙ Over.forget X).mapIso (hs.coconePointUniqueUpToIso hW)
   have : ∀ k, CompactSpace (Yl k) := fun k ↦ (hY k).1
   have : ∀ k, QuasiSeparatedSpace (Yl k) := fun k ↦ (hY k).2
   obtain ⟨h₁, h₂⟩ := Scheme.compactSpace_quasiSeparatedSpace_of_isColimit (Sigma.ι Yl)
     (coproductIsCoproduct Yl)
   have h : W.left ≃ₜ Z.left := e.inv.homeomorph
-  exact ⟨h.compactSpace, (quasiSeparatedSpace_congr h).mp h₂⟩
+  exact ⟨@Homeomorph.compactSpace _ _ _ _ h₁ h, (quasiSeparatedSpace_congr h).mp h₂⟩
 
 /-- An étale scheme over a quasi-compact quasi-separated base whose underlying space is
 quasi-compact and quasi-separated is qcqs étale. -/
 lemma isQcqsEtale_of_compactSpace {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    (Z : X.Etale) [CompactSpace Z.left] [QuasiSeparatedSpace Z.left] :
+    (Z : X.Etale) [hZ : CompactSpace Z.left] [hZ' : QuasiSeparatedSpace Z.left] :
     IsQcqsEtale ((Scheme.Etale.forget X).obj Z) :=
   ⟨Z.prop, inferInstanceAs (LocallyOfFinitePresentation Z.hom),
-    quasiCompact_of_compactSpace (Y := X) Z.hom,
-    QuasiSeparated.of_quasiSeparatedSpace (Y := X) Z.hom⟩
+    @quasiCompact_of_compactSpace _ X Z.hom hZ _,
+    @QuasiSeparated.of_quasiSeparatedSpace _ X Z.hom hZ'⟩
 
 instance SimplexCategory.Truncated.finite (r : ℕ) : Finite (SimplexCategory.Truncated r) :=
   Finite.of_injective (fun Δ : SimplexCategory.Truncated r ↦
@@ -159,7 +157,6 @@ noncomputable def overPullbackCompIso {i j k : I} (h : j ⟶ i) (g : k ⟶ j) :
     Over.pullback (D.map (g ≫ h)) ≅ Over.pullback (D.map h) ⋙ Over.pullback (D.map g) :=
   eqToIso (congrArg (fun f ↦ Over.pullback f) (D.map_comp g h)) ≪≫ Over.pullbackComp _ _
 
-omit [Category.{u} I] in
 set_option linter.flexible false in
 private lemma eqToHom_pullbackComp_left_fst {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (f' : X ⟶ Z) (hf : f' = f ≫ g) (U : Over Z) :
@@ -167,7 +164,7 @@ private lemma eqToHom_pullbackComp_left_fst {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
         (Over.pullbackComp f g).hom.app U).left ≫
       pullback.fst _ f ≫ pullback.fst U.hom g = pullback.fst U.hom f' := by
   subst hf
-  simp only [eqToHom_refl, NatTrans.id_app, Category.id_comp]
+  simp only [Over.pullback_obj_left, Functor.comp_obj, Over.pullback_obj_hom]
   simp [Over.pullbackComp, Over.mapComp, conjugateIsoEquiv, conjugateEquiv]
   exact (Category.id_comp _).trans (Category.id_comp _)
 
@@ -193,11 +190,12 @@ lemma overPullbackStageIso_comp {i j k : I} (h : j ⟶ i) (g : k ⟶ j) (U : Ove
   ext : 1
   apply pullback.hom_ext
   · simp only [Over.comp_left, Category.assoc, Over.pullback_map_left,
-      overPullbackStageIso_hom_app_left_fst, overPullbackStageIso_hom_app_left_fst_assoc,
-      pullback.lift_fst_assoc, overPullbackCompIso_hom_app_left_fst]
+      overPullbackStageIso_hom_app_left_fst, overPullbackStageIso_hom_app_left_fst_assoc]
+    erw [pullback.lift_fst_assoc]
+    rw [Category.assoc, overPullbackCompIso_hom_app_left_fst]
   · simp only [Over.comp_left, Category.assoc, Over.pullback_map_left,
-      overPullbackStageIso_hom_app_left_snd, overPullbackStageIso_hom_app_left_snd_assoc,
-      pullback.lift_snd]
+      overPullbackStageIso_hom_app_left_snd]
+    erw [pullback.lift_snd]
 
 end Transport
 
@@ -218,13 +216,14 @@ theorem stageEventually_whiskerRight_eq {C : Type*} [Category* C] [Finite C] {i 
       Functor.whiskerRight ψ (Over.pullback (c.π.app i))) :
     StageEventually i (fun _ h ↦ Functor.whiskerRight φ (Over.pullback (D.map h)) =
       Functor.whiskerRight ψ (Over.pullback (D.map h))) := by
-  refine (StageEventually.finite_forall (Q := fun a _ h ↦ (Over.pullback (D.map h)).map (φ.app a) =
+  refine (StageEventually.finite_forall (Q := fun a _ h ↦
+      (Over.pullback (D.map h)).map (φ.app a) =
       (Over.pullback (D.map h)).map (ψ.app a)) fun a ↦ ?_).mono fun _ _ H ↦ ?_
   · obtain ⟨_, _, _, _⟩ := hF a
     obtain ⟨_, _, _, _⟩ := hG a
     exact stageEventually_overPullback_map_eq D hc _ _ (φ.app a) (ψ.app a)
       (congrArg (fun τ ↦ τ.app a) h)
-  · ext a : 1
+  · refine NatTrans.ext (funext fun a ↦ ?_)
     exact H a
 
 include hc in
@@ -235,7 +234,8 @@ theorem exists_natTrans_descent {C : Type*} [Category* C] [Finite C]
     {F G : C ⥤ Over (D.obj i)} (hF : ∀ a, IsQcqsEtale (F.obj a))
     (hG : ∀ a, IsQcqsEtale (G.obj a))
     (φ : F ⋙ Over.pullback (c.π.app i) ⟶ G ⋙ Over.pullback (c.π.app i)) :
-    ∃ (j : I) (h : j ⟶ i) (ψ : F ⋙ Over.pullback (D.map h) ⟶ G ⋙ Over.pullback (D.map h)),
+    ∃ (j : I) (h : j ⟶ i)
+      (ψ : F ⋙ Over.pullback (D.map h) ⟶ G ⋙ Over.pullback (D.map h)),
       ∀ a, (Over.pullback (c.π.app j)).map (ψ.app a) ≫
           (overPullbackStageIso D c h).hom.app (G.obj a) =
         (overPullbackStageIso D c h).hom.app (F.obj a) ≫ φ.app a := by
@@ -277,7 +277,7 @@ theorem exists_natTrans_descent {C : Type*} [Category* C] [Finite C]
     rw [overPullbackStageIso_comp, overPullbackStageIso_comp]
     simp only [Functor.map_comp, Category.assoc]
     rw [← Functor.map_comp_assoc (Over.pullback (c.π.app j₂)) (τ.inv.app (G.obj a)),
-      Iso.inv_hom_id_app, Functor.map_id, Category.id_comp, reassoc_of% n1, hψ₁]
+      Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% n1, hψ₁]
 
 end Finite
 

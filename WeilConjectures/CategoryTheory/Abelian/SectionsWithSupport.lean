@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.CategoryTheory.Monad.Adjunction
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
@@ -44,7 +45,7 @@ The functor of *sections with support in `Z`* is `Γ_Z(M) = i^* ker(M ⟶ j_* j^
 
 @[expose] public section
 
-open CategoryTheory Limits Pretriangulated
+open CategoryTheory Limits Pretriangulated Abelian
 
 namespace CategoryTheory.SectionsWithSupport
 
@@ -228,6 +229,118 @@ lemma epi_unit_app_of_injective [PreservesFiniteLimits jShriek] [jShriek.Additiv
   exact epi_of_epi_fac hsplit
 
 end Injective
+
+section Derived
+
+variable [HasDerivedCategory 𝒳] [HasDerivedCategory 𝒵] [HasDerivedCategory 𝒱]
+  [HasKInjectiveResolutions 𝒳] [HasKInjectiveResolutions 𝒵] [HasKInjectiveResolutions 𝒱]
+  [PreservesFiniteColimits iLow] [PreservesFiniteLimits iLow]
+
+/-- **`D(i_*) ⊣ RΓ_Z`** (blueprint `det-lem-formal-closed-support-adjunction` (2)): the derived
+functor of sections with support in `Z` is right adjoint to `i_*` on the derived categories,
+`Hom_{D(X)}(i_* A, K) ≅ Hom_{D(Z)}(A, RΓ_Z K)`, as `i_*` is exact. -/
+noncomputable def derivedAdjunction :
+    iLow.mapDerivedCategory ⊣ (functor adjI adjJ h₀ hdet).rightDerivedFunctor :=
+  (adjunction adjI adjJ h₀ hdet).mapDerivedCategoryRightDerivedAdjunction
+
+/-- The adjunction `D(i^*) ⊣ D(i_*)`. -/
+noncomputable def derivedUpperLowerAdjunctionI :
+    iUp.mapDerivedCategory ⊣ iLow.mapDerivedCategory :=
+  adjI.mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
+    iLow.rightDerivedFunctorIsoMapDerivedCategory
+
+include adjI in
+/-- `D(i_*)` is fully faithful: `D(i^*) D(i_*) ≅ D(i^* i_*) ≅ 𝟭`. -/
+noncomputable def fullyFaithfulMapDerivedCategoryILow : iLow.mapDerivedCategory.FullyFaithful :=
+  have : PreservesFiniteLimits (iLow ⋙ iUp) := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (iLow ⋙ iUp) := comp_preservesFiniteColimits _ _
+  (derivedUpperLowerAdjunctionI adjI).fullyFaithfulROfCompIsoId
+    ((iLow.mapDerivedCategoryCompIso iUp).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso adjI.counit) ≪≫ Functor.mapDerivedCategoryIdIso _)
+
+/-- The adjunction `D(j^*) ⊣ Rj_*`. -/
+noncomputable abbrev derivedAdjunctionJ : jUp.mapDerivedCategory ⊣ jLow.rightDerivedFunctor :=
+  adjJ.mapDerivedCategoryRightDerivedAdjunction
+
+instance isIso_derivedAdjunctionJ_counit : IsIso (derivedAdjunctionJ adjJ).counit :=
+  have := adjJ.preservesKInjectiveComplexes
+  have h := adjJ.fullyFaithfulROfIsIsoCounit
+  have := h.full
+  have := h.faithful
+  adjJ.mapDerivedCategoryRightDerivedAdjunction.counit_isIso_of_R_fully_faithful
+
+include h₀ in
+lemma isZero_mapDerivedCategory_jUp_iLow (M : DerivedCategory 𝒵) :
+    IsZero (jUp.mapDerivedCategory.obj (iLow.mapDerivedCategory.obj M)) :=
+  have : PreservesFiniteLimits (iLow ⋙ jUp) := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (iLow ⋙ jUp) := comp_preservesFiniteColimits _ _
+  (Functor.isZero_mapDerivedCategory_obj (iLow ⋙ jUp) M fun _ ↦ h₀ _).of_iso
+    ((iLow.mapDerivedCategoryCompIso jUp).symm.app M)
+
+include adjI hdet in
+lemma isZero_of_isZero_mapDerivedCategory {K : DerivedCategory 𝒳}
+    (hi : IsZero (iUp.mapDerivedCategory.obj K)) (hj : IsZero (jUp.mapDerivedCategory.obj K)) :
+    IsZero K :=
+  (DerivedCategory.isZero_iff _).2 fun n ↦ hdet _
+    (((DerivedCategory.isZero_iff _).1 hi n).of_iso
+      ((iUp.mapDerivedCategoryHomologyFunctorIso n).app K))
+    (((DerivedCategory.isZero_iff _).1 hj n).of_iso
+      ((jUp.mapDerivedCategoryHomologyFunctorIso n).app K))
+
+include adjI h₀ hdet in
+/-- A complex `K` with `j^* K = 0` lies in the essential image of `D(i_*)`. -/
+lemma mapDerivedCategory_essImage_of_isZero {K : DerivedCategory 𝒳}
+    (hK : IsZero (jUp.mapDerivedCategory.obj K)) : iLow.mapDerivedCategory.essImage K := by
+  set adj := derivedUpperLowerAdjunctionI adjI
+  have hFF := fullyFaithfulMapDerivedCategoryILow adjI
+  have := hFF.full
+  have := hFF.faithful
+  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
+  obtain ⟨W, v, w, h₁⟩ := distinguished_cocone_triangle (adj.unit.app K)
+  have hiu : IsIso (iUp.mapDerivedCategory.map (adj.unit.app K)) :=
+    have := IsIso.id (iUp.mapDerivedCategory.obj K)
+    IsIso.of_isIso_fac_right (adj.left_triangle_components K)
+  have hju : IsIso (jUp.mapDerivedCategory.map (adj.unit.app K)) :=
+    isIso_of_source_target_iso_zero _ hK.isoZero
+      (isZero_mapDerivedCategory_jUp_iLow h₀ _).isoZero
+  have hW : IsZero W := isZero_of_isZero_mapDerivedCategory adjI hdet
+    ((Triangle.isZero₃_iff_isIso₁ _ (iUp.mapDerivedCategory.map_distinguished _ h₁)).2 hiu)
+    ((Triangle.isZero₃_iff_isIso₁ _ (jUp.mapDerivedCategory.map_distinguished _ h₁)).2 hju)
+  exact ⟨_, ⟨(@asIso _ _ _ _ (adj.unit.app K) ((Triangle.isZero₃_iff_isIso₁ _ h₁).1 hW)).symm⟩⟩
+
+/-- Blueprint `det-lem-formal-closed-support-adjunction` (4): for `K` in `D(X)`, the counit
+`i_* RΓ_Z K ⟶ K` of `D(i_*) ⊣ RΓ_Z` and the unit `K ⟶ Rj_* j^* K` of `D(j^*) ⊣ Rj_*` extend to a
+distinguished triangle `i_* RΓ_Z K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* RΓ_Z K)[1]`, with a unique third
+map. It is natural in `K` (`CategoryTheory.Pretriangulated.Recollement.exists_triangleHom`). -/
+theorem existsUnique_distTriang (K : DerivedCategory 𝒳) :
+    ∃! w, Recollement.triangle (derivedAdjunctionJ adjJ) (derivedAdjunction adjI adjJ h₀ hdet) K w ∈
+      distTriang _ :=
+  Recollement.existsUnique_distTriang_counit_unit _ _ (fullyFaithfulMapDerivedCategoryILow adjI)
+    (isZero_mapDerivedCategory_jUp_iLow h₀)
+    (fun _ hK ↦ mapDerivedCategory_essImage_of_isZero adjI h₀ hdet hK) K
+
+/-- Blueprint `det-lem-formal-closed-support-adjunction` (4): `RΓ_Z K ≅ i^* fib(K ⟶ Rj_* j^* K)`:
+for every distinguished triangle `F ⟶ K ⟶ Rj_* j^* K ⟶ F[1]` whose second map is the unit,
+`D(i^*) F ≅ RΓ_Z K`. -/
+theorem nonempty_iso_upperStar_fib (K : DerivedCategory 𝒳) {F : DerivedCategory 𝒳}
+    (a : F ⟶ K) (δ : jLow.rightDerivedFunctor.obj (jUp.mapDerivedCategory.obj K) ⟶ F⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk a ((derivedAdjunctionJ adjJ).unit.app K) δ ∈ distTriang _) :
+    Nonempty (iUp.mapDerivedCategory.obj F ≅
+      (functor adjI adjJ h₀ hdet).rightDerivedFunctor.obj K) := by
+  obtain ⟨w, hw, -⟩ := existsUnique_distTriang adjI adjJ h₀ hdet K
+  obtain ⟨e, -, -⟩ := exists_iso_of_arrow_iso _ _ (rot_of_distTriang _ hT)
+    (rot_of_distTriang _ hw) (Iso.refl _)
+  have hFF := fullyFaithfulMapDerivedCategoryILow adjI
+  have := hFF.full
+  have := hFF.faithful
+  let e₁ : F ≅ iLow.mapDerivedCategory.obj ((functor adjI adjJ h₀ hdet).rightDerivedFunctor.obj K) :=
+    (shiftFunctor _ (1 : ℤ)).preimageIso (Triangle.π₃.mapIso e)
+  have : IsIso (derivedUpperLowerAdjunctionI adjI).counit :=
+    (derivedUpperLowerAdjunctionI adjI).counit_isIso_of_R_fully_faithful
+  exact ⟨iUp.mapDerivedCategory.mapIso e₁ ≪≫
+    asIso ((derivedUpperLowerAdjunctionI adjI).counit.app _)⟩
+
+end Derived
 
 end Sheaves
 

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.SingleHomology
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.AlgebraicGeometry.SplitEtaleHypercoverLocalCone
@@ -299,14 +300,12 @@ variable [HasSheafify X.smallEtaleTopology A] [X.smallEtaleTopology.WEqualsLocal
   (adj : Free ⊣ forget A)
 
 include hsub in
-omit [Abelian A] in
 lemma zero_apply_of_sub {X Y : A} (x : ToType X) : (0 : X ⟶ Y) x = 0 := by
   have := hsub (0 : X ⟶ Y) 0 x
   rw [sub_zero, sub_self] at this
   exact this
 
 include hsub in
-omit [Abelian A] in
 lemma add_apply_of_sub {X Y : A} (f g : X ⟶ Y) (x : ToType X) : (f + g) x = f x + g x := by
   have h : f + g = f - (0 - g) := by abel
   rw [h, hsub, hsub, zero_apply_of_sub hsub]
@@ -329,8 +328,8 @@ lemma sectionsEquiv_apply (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
     sectionsEquiv Free adj I V φ =
       (toSheafify X.smallEtaleTopology _ ≫ φ.hom).app (op V)
         (adj.unit.app _ (ULift.up (𝟙 V))) := by
-  rw [sectionsEquiv, Equiv.trans_apply, Equiv.trans_apply, Adjunction.homEquiv_unit,
-    Adjunction.homEquiv_unit]
+  simp only [sectionsEquiv, Equiv.trans_apply]
+  erw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   rfl
 
 lemma sectionsEquiv_naturality (I : Sheaf X.smallEtaleTopology A) {V V' : X.Etale}
@@ -346,16 +345,28 @@ lemma sectionsEquiv_add (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
     (φ ψ : (freeSheaf Free).obj V ⟶ I) :
     sectionsEquiv Free adj I V (φ + ψ) =
       sectionsEquiv Free adj I V φ + sectionsEquiv Free adj I V ψ := by
-  rw [sectionsEquiv_apply, sectionsEquiv_apply, sectionsEquiv_apply]
-  rw [← add_apply_of_sub hsub]
-  congr 1
-  rw [NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app, ← Preadditive.comp_add]
-  rfl
+  have h : toSheafify X.smallEtaleTopology _ ≫ (φ + ψ).hom =
+      toSheafify X.smallEtaleTopology _ ≫ φ.hom + toSheafify X.smallEtaleTopology _ ≫ ψ.hom := by
+    rw [← Preadditive.comp_add]
+    rfl
+  rw [sectionsEquiv_apply, sectionsEquiv_apply, sectionsEquiv_apply, h, NatTrans.app_add,
+    add_apply_of_sub hsub]
 
 /-- `sectionsEquiv` as an additive equivalence. -/
 noncomputable def sectionsAddEquiv (I : Sheaf X.smallEtaleTopology A) (V : X.Etale) :
     ((freeSheaf Free).obj V ⟶ I) ≃+ ToType (I.obj.obj (op V)) :=
   { sectionsEquiv Free adj I V with map_add' := sectionsEquiv_add Free hsub adj I V }
+
+include hsub in
+lemma sum_zsmul_apply_of_sub {X Y : A} {ι : Type*} (s : Finset ι) (c : ι → ℤ)
+    (f : ι → (X ⟶ Y)) (x : ToType X) :
+    (∑ i ∈ s, c i • f i) x = ∑ i ∈ s, c i • f i x := by
+  let ev : (X ⟶ Y) →+ ToType Y :=
+    { toFun := fun g ↦ g x
+      map_zero' := zero_apply_of_sub hsub x
+      map_add' := fun g g' ↦ add_apply_of_sub hsub g g' x }
+  change ev (∑ i ∈ s, c i • f i) = ∑ i ∈ s, c i • ev (f i)
+  simp only [map_sum, map_zsmul]
 
 lemma sectionsEquiv_d (I : Sheaf X.smallEtaleTopology A) (p : ℕ)
     (φ : (freeSheaf Free).obj (U.simplicial _⦋p⦌) ⟶ I) :
@@ -369,12 +380,11 @@ lemma sectionsEquiv_d (I : Sheaf X.smallEtaleTopology A) (p : ℕ)
   simp only [Preadditive.zsmul_comp, map_sum, map_zsmul]
   have hC : ((AlgebraicTopology.alternatingCofaceMapComplex A).obj
       (U.simplicial.rightOp ⋙ I.obj)).d p (p + 1) =
-        AlgebraicTopology.AlternatingCofaceMapComplex.objD (U.simplicial.rightOp ⋙ I.obj) p := by
+        AlgebraicTopology.AlternatingCofaceMapComplex.objD
+          (U.simplicial.rightOp ⋙ I.obj) p := by
     simp [AlgebraicTopology.alternatingCofaceMapComplex,
       AlgebraicTopology.AlternatingCofaceMapComplex.obj]
-  rw [hC, AlgebraicTopology.AlternatingCofaceMapComplex.objD]
-  change _ = evalAddHom hsub _ (∑ i : Fin (p + 2), _)
-  simp only [map_sum, map_zsmul]
+  rw [hC, AlgebraicTopology.AlternatingCofaceMapComplex.objD, sum_zsmul_apply_of_sub hsub]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   congr 1
   exact sectionsEquiv_naturality Free adj I (U.simplicial.δ i) φ
@@ -452,11 +462,27 @@ theorem quasiIso_augmentation :
   cases n with
   | zero =>
     rw [ChainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros']
-    · refine ⟨?_, ?_⟩
+    · have h : (AlgebraicTopology.AlternatingFaceMapComplex.ε.app
+          ((SimplicialObject.Augmented.whiskeringObj X.Etale _ (freeSheaf Free)).obj
+            (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))).f 0 =
+            (freeSheaf Free).map (terminal.from (U.simplicial _⦋0⦌)) := by
+        rw [AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero]
+        simp only [SimplicialObject.Augmented.whiskeringObj, NatTrans.comp_app,
+          Functor.whiskerRight_app, SimplicialObject.augmentOfIsTerminal_hom_app,
+          Functor.constComp_hom_app, Category.comp_id]
+        rfl
+      refine ⟨?_, ?_⟩
       · refine (ShortComplex.exact_iff_of_iso ?_).1 (U.freeSheafComplex_exact_zero Free hsub hfin)
-        exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp) (by simp)
-      · have := U.epi_freeSheaf_map_augmentation Free
-        simpa using this
+        refine ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_
+        · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+          rfl
+        · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+          first | exact h | exact h.symm
+      · change Epi ((AlgebraicTopology.AlternatingFaceMapComplex.ε.app
+          ((SimplicialObject.Augmented.whiskeringObj X.Etale _ (freeSheaf Free)).obj
+            (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))).f 0)
+        rw [h]
+        exact U.epi_freeSheaf_map_augmentation Free
     all_goals simp
   | succ n =>
     rw [quasiIsoAt_iff_exactAt' _ _ (ChainComplex.exactAt_succ_single_obj _ _)]
