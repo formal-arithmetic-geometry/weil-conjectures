@@ -34,7 +34,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-reedy-model-structure",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-framed-horn-criterion"
  ],
  "proof": [
   {
@@ -277,5 +278,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1d0c8ab4f",
+  "group": "NF",
+  "result": "pass",
+  "note": "Full statement/dependency/source audit completed; edge cases and declarations checked; scompile.py passed sandbox and library compilation with no diagnostics."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ResolutionIntervalTensor",
+  "file": "lean/Sheaf/CategoryTheory/ResolutionIntervalTensor.lean",
+  "declaration": "HomotopicalAlgebra.interval_tensor_resolution",
+  "statement": "theorem interval_tensor_resolution {M : Type u} [Category.{v} M] [HasLimits M] [HasColimits M] [ModelCategory M] [HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (A : CosimplicialObject M) (hA : IsCosimplicialResolution A) : IsCosimplicialResolution (((resolutionTensorFunctor M).obj A).obj (SSet.stdSimplex.obj ⦋1⦌)) ∧ (∀ n : SimplexCategory, WeakEquivalence ((resolutionVertex A 1 0).app n) ∧ WeakEquivalence ((resolutionVertex A 1 1).app n)) ∧ (∀ (lambda : Cardinal.{v}) [Fact lambda.IsRegular], (∀ n : ℕ, IsCardinalPresentable (A.obj ⦋n⦌) lambda) → ∀ n : ℕ, IsCardinalPresentable ((((resolutionTensorFunctor M).obj A).obj (SSet.stdSimplex.obj ⦋1⦌)).obj ⦋n⦌) lambda)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "declarations": [
+   "HomotopicalAlgebra.IsCosimplicialResolution",
+   "HomotopicalAlgebra.resolution_coend_functoriality",
+   "HomotopicalAlgebra.resolutionCoendFunctor",
+   "HomotopicalAlgebra.resolutionTensorFunctor",
+   "HomotopicalAlgebra.resolutionCoendι",
+   "HomotopicalAlgebra.resolutionVertexComponent",
+   "HomotopicalAlgebra.resolution_vertex_naturality",
+   "HomotopicalAlgebra.resolutionVertex",
+   "HomotopicalAlgebra.resolution_vertex_natural_in_object",
+   "HomotopicalAlgebra.resolution_tensor_point",
+   "HomotopicalAlgebra.resolutionTensorUnitIso",
+   "HomotopicalAlgebra.resolutionAugmentation",
+   "HomotopicalAlgebra.interval_tensor_resolution"
+  ],
+  "note": "Repair of 9081064679d4: positive simplex arrows are monomorphisms; real tensor bifunctor with specified simplex and argument maps; canonical coend-summand endpoints and point-tensor isomorphism; only the presentability clause is conditional. Reuses the landed framedHornCoend and both maps instead of redefining their notion. All helper declarations formalize clauses of this node and are listed above."
  }
 }
