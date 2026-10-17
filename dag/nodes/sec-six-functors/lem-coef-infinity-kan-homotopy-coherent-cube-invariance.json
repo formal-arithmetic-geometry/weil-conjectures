@@ -8,7 +8,10 @@
   "place": "Proposition 7.1.6.9, evaluation-equivalence argument, supplies the context; the coherent-cube path-pullback lemma is the explicit agent argument extracted from the retained item proof, old step 1, not a verbatim assertion of 02X4. Archival Kerodon copy WANTED."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-source-gluing",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-kan-homotopy-commuting-pullback-invariance"
  ],
  "proof": [
   {
@@ -276,5 +279,32 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-d4e996e12 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and sources. All eight steps check, including relative-square lifting and prescribed-boundary triangle gluing. Checked edge cases, duplicate candidates, acyclicity, unit route and archived master target signatures. Accepted the declared Kan-target testing tool use. No repairs needed; details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityKanHomotopyCoherentCubeInvariance",
+  "declaration": "SSet.Enhanced.kan_homotopy_coherent_cube_invariance",
+  "declarations": [
+   "SSet.Enhanced.KanCubeSquare",
+   "SSet.Enhanced.KanCubeSquare.comparison",
+   "SSet.Enhanced.KanCubeSquare.IsHomotopyPullback",
+   "SSet.Enhanced.KanCoherentCube",
+   "SSet.Enhanced.kan_homotopy_coherent_cube_invariance",
+   "SSet.Enhanced.kan_homotopy_coherent_cube_zigzag_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityKanHomotopyCoherentCubeInvariance.lean",
+  "statement": "theorem kan_homotopy_coherent_cube_invariance (s s' : KanCubeSquare.{u}) (cube : KanCoherentCube s s') : ∃ comparison : CoherentPathModelComparison cube.b cube.c cube.d cube.H_u cube.H_v, IsWeakHomotopyEquivalence comparison.map ∧ (∃ (h : KanComplex (simplicialHomotopyPullback s.u s.v)) (h' : KanComplex (simplicialHomotopyPullback s'.u s'.v)), IsIso (spaceWeakEquivalences.Q.map (ObjectProperty.homMk (X := ⟨simplicialHomotopyPullback s.u s.v, h⟩) (Y := ⟨simplicialHomotopyPullback s'.u s'.v, h'⟩) comparison.map))) ∧ Nonempty (SSet.Homotopy (s.comparison ≫ comparison.map) (cube.a ≫ s'.comparison)) ∧ (∀ comparison' : CoherentPathModelComparison cube.b cube.c cube.d cube.H_u cube.H_v, Nonempty (SSet.Homotopy comparison.map comparison'.map)) ∧ (s.IsHomotopyPullback ↔ s'.IsHomotopyPullback)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The square apex is an arbitrary simplicial set; only U,V,W are required Kan. Coherence retains both three-edge boundary composites via the existing SourceAttachmentFamilyComposes, with a homotopy fixing both endpoint families. The output uses the existing CoherentPathModelComparison, the canonical specifiedHomotopyPullbackComparison, and the recorded localization of Kan complexes. The second theorem states finite zigzag invariance. Added statement dependencies are already landed owners of these reused constructions, as permitted by brief-stage2 section 5; their theorem conclusions are not added as hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c717e56d5",
+  "group": "NP",
+  "result": "pass",
+  "note": "All node clauses match the Lean: coherence built from the exact boundary edges with both endpoints fixed; conclusion has the comparison as weak equivalence and iso in the Kan localization, the homotopy between the maps from A, filler independence, the iff, and a zigzag theorem. No assumption beyond the node (A may be non-Kan). Reuses landed constructions with no duplicate. Three added stmt_deps are landed and passed review; no cycle; citers are proof-only. Statement verbatim; docstrings present; sorry only; three-file commit. nt_compile clean in 3.8 s. Minor: second reading is an honest, substantive author self-check, covered by this review."
  }
 }

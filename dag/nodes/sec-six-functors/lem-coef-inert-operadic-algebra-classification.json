@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability",
-  "def-coef-monoidal-infinity-category"
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-inert-operad-color-reconstruction"
  ],
  "proof": [
   {
@@ -190,5 +191,31 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-3656abfe9 (reviewer sub-agent of L); spot-checked: I read the item, all four steps, the only citer (lem-coef-operadic-algebra-colimit-change) and every cited statement in full: lem-coef-inert-operad-color-reconstruction, lem-coef-operadic-algebra-presentability, def-coef-monoidal-infinity-category and def-coef-complete-algebroid, all in unit sk-prop-sf-biduality-general. The two generalized-operad definitions agree: inner fibration, inert cocartesian lifts, Segal condition including n=0, incidence limit over I_n, Kan zero-fiber. Delta^op_int is a wide subcategory (identities and composites of j->a+j are inert), and the fiber over [1] is unchanged. Step 2 takes only conclusions that the reconstruction statement actually gives. That node's closure (692 ids) does not reach the item, so there is no cycle. Steps 3 and 4 are strict restriction identities, also when parameterized over K. Small cases tested: M empty, M = Delta^op (algebras are objects of V), the empty incidence limit for non-inert phi, n=0, and a disconnected Kan M_[0]. Gepner-Haugseng arXiv:1312.3178 §3.4 is not under literature/; I checked against my own knowledge of it, and WANTED and proof_origin=agent are correctly recorded. This is not a target node, so there is no base-change morphism or coefficient category to compare. No SGA, the route is in-unit, and tool_uses=[]. The overlap with the reconstruction node is acknowledged. The item is not a pure duplicate: it adds the u/F naturality and the tau^* clause, and its citer uses the F-naturality. A merge is left to the maintainer. One repairable fault (E5): step 3 did not justify that u_triv preserves inert edges, so that A∘u_triv is an algebra, and it left N's hypotheses unstated. I added the argument to step 3 (1969 characters): inert edges of N_triv equal those of N because the base mapping spaces are discrete and inert maps compose. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-inert-operadic-algebra-classification.json; no other field was changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InertOperadicAlgebraClassification",
+  "declaration": "SSet.Enhanced.InertClassification.inert_operadic_algebra_classification",
+  "declarations": [
+   "SSet.Enhanced.InertClassification.applyFamily",
+   "SSet.Enhanced.InertClassification.composeFamily",
+   "SSet.Enhanced.InertClassification.IsColorRestriction",
+   "SSet.Enhanced.InertClassification.ColorNaturality",
+   "SSet.Enhanced.InertClassification.inert_operadic_algebra_classification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InertOperadicAlgebraClassification.lean",
+  "statement": "theorem inert_operadic_algebra_classification {M : SSet.{max (u + 1) v}} (p : M ⟶ monoidalSimplexBase.{max (u + 1) v}) (hsmall : SSet.Presentability.IsSmall.{u} M) (hp : Nonsymmetric.IsGeneralizedOperad p) : SSet.Presentability.IsSmall.{u} (InertOperad.trivial p) ∧ Nonsymmetric.IsGeneralizedOperad (InertOperad.trivialProjection p) ∧ IsLaxMonoidalInfinityFunctor (InertOperad.trivialProjection p) p (InertOperad.tau p) ∧ (∃ k : fiber (InertOperad.trivialProjection p) (monoidalBaseVertex 0) ⟶ fiber p (monoidalBaseVertex 0), IsIso k ∧ k ≫ monoidalFiberInclusion p 0 = monoidalFiberInclusion (InertOperad.trivialProjection p) 0 ≫ InertOperad.tau p) ∧ ∃ j : monoidalUnderlying p ⟶ InertOperad.trivial p, j ≫ InertOperad.tau p = monoidalFiberInclusion p 1 ∧ ∀ (E : SSet.{max (u + 1) v}) [Quasicategory E] (q : E ⟶ monoidalSimplexBase.{max (u + 1) v}), IsMonoidalInfinityCategory q → ∃ R : Nonsymmetric.algebras (InertOperad.trivialProjection p) q ⟶ (ihom (monoidalUnderlying p)).obj (monoidalUnderlying q), IsColorRestriction p q j R ∧ IsFunctorEquivalence R ∧ ColorNaturality p q R ∧ ∃ T : Nonsymmetric.algebras p q ⟶ Nonsymmetric.algebras (InertOperad.trivialProjection p) q, T ≫ Nonsymmetric.markedInclusion (InertOperad.trivialProjection p) q (IsMonoidalInertEdge (InertOperad.trivialProjection p)) = Nonsymmetric.markedInclusion p q (IsMonoidalInertEdge p) ≫ (MonoidalClosed.pre (InertOperad.tau p)).app E ∧ (T ≫ R) ≫ (ihom (monoidalUnderlying p)).map (monoidalFiberInclusion q 1) = Nonsymmetric.markedInclusion p q (IsMonoidalInertEdge p) ≫ (MonoidalClosed.pre (monoidalFiberInclusion p 1)).app E",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded Nonsymmetric generalized-operad/algebra definitions and the recorded InertOperad pullback. Evaluation, tau restriction and pre/postcomposition are normalized on every simplex. ColorNaturality quantifies over arbitrary common simplicial parameters in operad maps, coefficients and algebras; all induced maps are characterized by monic inclusion equations. No presentability assumption or theorem is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc0653f89",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps (CompleteAlgebroid, OperadicAlgebraPresentability Nonsymmetric.IsGeneralizedOperad incl. Kan zero fiber + markedFunctors/algebras, MonoidalInfinityCategory IsLaxMonoidalInfinityFunctor/IsMonoidalInertEdge, InertOperadColorReconstruction inertBase/trivial/tau/trivialProjection), GH 1312.3178 Def 3.4.1/Prop 3.4.5. All clauses matched: IsSmall.{u} hypothesis and conclusion, generalized-operad axioms of M_triv, tau inert-preserving, zero-fiber iso normalized by monic inclusion, R = actual color restriction + IsFunctorEquivalence for every monoidal V with no presentability, ColorNaturality parameterized over arbitrary K for inert-preserving U and lax F (satisfiable, pinned by monic inclusions), E_V tau^* = color evaluation. No extra assumptions, no hollow defs, single sorry, docstrings with source/blueprint and 4 proof steps, statement verbatim, stmt_deps addition of landed reconstruction node justified and acyclic. Report has real Worker report and Second reading by Q48. nt_compile.py --json reproduced clean compile (4.3 s, no errors/warnings)."
  }
 }

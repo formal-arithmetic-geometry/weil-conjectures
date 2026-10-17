@@ -199,5 +199,24 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-703af19f5 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source passages, and unit/chapter route. All four proof steps are valid for the stated étale module coefficients; finite-support and cone edge cases check out. No new nodes, duplicates, cycles, or repairs found. Detailed checks and accepted tool uses are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da4eb97e7",
+  "group": "Q93",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: closed immersion, IsFinite (i ≫ h), finite comm ring A : Type (u+1) per the recorded convention, K in D^b of étale ModuleCat-sheaves, zero restriction to the open complement of range i.base via upperStar.mapDerivedCategory, Rh_*K=0 iff K=0, and reflection of isomorphisms for all supported bounded L and all f. The total R((h)_*) from the framework agrees with the recorded D+ version on bounded objects for IsZero/IsIso. Edge cases (V empty, i onto, A=0, empty fibres) are covered and no extra hypotheses are added. No definitions; sorry only; source and blueprint docstrings present; four proof steps documented; report sections present; lean.statement verbatim. nt_compile clean (snapshot and fix; a broken copy errors, so the check is meaningful). Finding: both docstrings name the wrong Varshavsky paper ('A proof of a generalization of Deligne's conjecture' instead of 'Lefschetz–Verdier trace formula and a generalization of a theorem of Fujiwara', arXiv:math/0505564). fixes/FiniteSupportDefectConservativity.lean is a complete replacement with only the corrected titles; the signature is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSupportDefectConservativity",
+  "declaration": "AlgebraicGeometry.Etale.finiteSupportDefectConservativity",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSupportDefectConservativity.lean",
+  "statement": "theorem finiteSupportDefectConservativity (A : Type (u + 1)) [CommRing A] [Finite A] {W S V : Scheme.{u}} (h : W ⟶ S) (i : V ⟶ W) [IsClosedImmersion i] [IsFinite (i ≫ h)] (K : _root_.DerivedCategory.Bounded (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A))) (_hK : IsZero ((upperStar (ModuleCat.{u + 1} A) (Scheme.Opens.ι (X := W) ⟨(Set.range i.base)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩)).mapDerivedCategory.obj K.obj)) : (IsZero ((lowerStar (ModuleCat.{u + 1} A) h).rightDerivedFunctor.obj K.obj) ↔ IsZero K.obj) ∧ ∀ (L : _root_.DerivedCategory.Bounded (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A))), IsZero ((upperStar (ModuleCat.{u + 1} A) (Scheme.Opens.ι (X := W) ⟨(Set.range i.base)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩)).mapDerivedCategory.obj L.obj) → ∀ (f : K ⟶ L), IsIso ((lowerStar (ModuleCat.{u + 1} A) h).rightDerivedFunctor.map f.hom) ↔ IsIso f",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-da4eb97e7"
  }
 }

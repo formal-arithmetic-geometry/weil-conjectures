@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category",
-  "lem-coef-cocartesian-straightening"
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cat-infinity-filtered-finite-calculus",
+  "def-coef-homotopy-segal-space",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -215,5 +218,30 @@
   "group": "Q160",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-c4d6a1435 (reviewer sub-agent of L); spot-checked: I read the item, all 8 cited statements, the unit and Gepner–Haugseng arXiv:1312.3178v4 Prop. 3.3.2 with its proof (read online; not archived, so the WANTED and by:agent marking are correct). That proof shows the image of a stage cocartesian arrow is cocartesian: it uses filtered colimits of mapping spaces over α/I, stagewise pullbacks, and the fact that filtered colimits of spaces commute with finite limits. It uses only the transition images of the given edge, so the specified-edge statement is a faithful extraction. The statement is unchanged and true. Edge cases checked: I terminal, e an identity or equivalence, B terminal, empty relative fibers, B empty (vacuous). Step 1: the fixed-base-change clause with {b}→B and object representation give a representative in the fiber; filteredness gives a common stage k; I_{k/} is small and filtered by the cited statement. Step 2: e_w is equivalent to D(wu)e through the coherent 2-simplex, so it is cocartesian; the intrinsic square comes from cocartesian-straightening; coherence over J comes from hom-bifunctor functoriality. Step 3: cone-calculus gives the pointwise equivalence and small-colimits-universe the colimits; the relative-fiber clause of filtered-finite-calculus, applied at stage k, identifies the colimits; transport along r_k z_k ≃ z, an equivalence in the fiber, finishes it. Step 4: P = X×^h_T S, its fiber at g is hofib_{g p(e)}, fiber detection with v = id gives Y→P an equivalence, and the intrinsic criterion applies. No new nodes. I found no cycle among the 662 ancestors and no duplicate (rg over dag/nodes; nearest candidates read). Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, a generic pointwise-equivalence criterion. FIX: step 2 passed from the homotopy-pullback square to the equivalence on homotopy fibers over g without citing a node. It now cites the only-if direction of lem-coef-spaces-homotopy-fiber-detection with bottom map the identity, which was already in proof_deps, and spells out the fiber identification. That node is added to step 2's uses; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredCocartesianEdgePersistence",
+  "declaration": "SSet.Enhanced.FilteredCocartesianPersistence.filtered_cocartesian_edge_persistence",
+  "declarations": [
+   "SSet.Enhanced.FilteredCocartesianPersistence.Data",
+   "SSet.Enhanced.FilteredCocartesianPersistence.precompositionProjection",
+   "SSet.Enhanced.FilteredCocartesianPersistence.RelativePrecompositionAt",
+   "SSet.Enhanced.FilteredCocartesianPersistence.filtered_cocartesian_edge_persistence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FilteredCocartesianEdgePersistence.lean",
+  "statement": "theorem filtered_cocartesian_edge_persistence (data : Data.{u}) (e : Δ[1] ⟶ catInfinityObject ((data.diagram ≫ rightVertexSliceProjection CatInfinity data.b).app _ data.i)) (stageCocartesian : ∀ (j : data.I _⦋0⦌) (a : data.I.Edge data.i j), CocartesianStraightening.IsIntrinsicEdge (data.pStage j) (e ≫ data.transition j a)) : CocartesianStraightening.IsIntrinsicEdge data.p (e ≫ data.leg data.i) ∧ ∀ z : (catInfinityObject ((rightVertexSliceProjection CatInfinity data.b).app _ data.cocone.1.1)) _⦋0⦌, ∃ (x y : (catInfinityObject ((rightVertexSliceProjection CatInfinity data.b).app _ data.cocone.1.1)) _⦋0⦌) (s : (arrowMappingSpace (catInfinityObject ((rightVertexSliceProjection CatInfinity data.b).app _ data.cocone.1.1)) x y) _⦋0⦌), (arrowMappingSpaceInclusion _ x y).app _ s = diagramVertex (e ≫ data.leg data.i) ∧ RelativePrecompositionAt data.p x y z s",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Coherent join slice of the recorded CatInfinity, with decoded stage/transition/cocone functors normalized by HEq. The explicit relative conclusion uses the existing canonical triangle roofs and HomotopySegal.fiberMap on the specified homotopy fibers. Added landed statement dependencies own the reused helper interfaces, including the now-repaired transitive SpaceValuedStraightening module. No new independent notion, dependency replacement, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6807cef36",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps' declarations (rightVertexSlice/Projection, coconeArrow, mappedCocone, IsColimiting, IsSmall, IsKappaFiltered(aleph0), IsIntrinsicEdge, cocartesianPrecomposition roof, arrowMappingSpace, HomotopySegal.fiberMap), module and report. Every hypothesis/conclusion clause matches the node; HEq normalizations of pStage/p/transition/leg relate propositionally equal types, so Data is inhabitable and the functors are uniquely determined; RelativePrecompositionAt gives exactly the hofib_g -> hofib_{g p(s)} precomposition equivalence for every z and g, with q forced. No extra hypotheses or universe restriction; edge cases (empty index excluded by filteredness, empty B/fibres, identities) correct. Added stmt_deps are landed nodes, acyclic (closure checked). lean.statement verbatim; docstrings with source, blueprint and the 4 proof steps; only sorry; lines <=100. nt_compile --json: clean in 6.4 s. Second reading is the author's self-pass but substantive; accepted."
  }
 }

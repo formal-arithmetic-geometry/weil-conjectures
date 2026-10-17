@@ -194,5 +194,23 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-4e54e984c (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, current blueprint proof, every cited DAG statement, and all cited source locations. The four-step split is mathematically correct: finite-field fixed points, affine generator count, finite fixed subgroup, and Tate-module vanishing for Frobenius and its inverse. Hypotheses, edge cases, duplicate checks, closed Lean declarations, and route/tool-use constraints all pass. Wrote review.md; no repairs or new nodes needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c856c8a06",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read the node, source (master/main-20261015/main-20261017, identical) and proof, the module, report, node diff (only lean added) and the recorded dependency declarations (d-ab-field geometricFrobeniusAlgEquivOfAlgebraic = σ⁻¹ with Mathlib frobeniusAlgEquivOfAlgebraic x↦x^card; IsAbelianVariety; AddCommGroup.tateModule/rationalTateModule through the upstream IsAbelianVariety specializations, galoisRepresentation, geometricPointsAddEquiv). All four clauses (T and V, σ and F) are rendered exactly. Hypotheses are no stronger (CharP follows from hcard). One universe u, all variables bound. lean.statement matches the file verbatim. Upstream proves only the geometric clauses, so a new conjunction statement is right and nothing is redefined. No hollow definitions, sorry only, source and blueprint docstrings present, docstring carries the 4-step proof plan. The Second reading section is the standard 2026-10-17 note. nt_compile.py --json: clean, 7.9 s; error-injection control confirms elaboration."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.FrobeniusFixedTateModules",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.frobenius_fixed_tateModules_eq_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/FrobeniusFixedTateModules.lean",
+  "statement": "theorem frobenius_fixed_tateModules_eq_zero (k₀ : Type u) [Field k₀] [Fintype k₀] (p ℓ a : ℕ) [Fact p.Prime] [Fact ℓ.Prime] [CharP k₀ p] (ha : 1 ≤ a) (hcard : Fintype.card k₀ = p ^ a) (hℓp : ℓ ≠ p) (A₀ : Over (Spec (.of k₀))) [GrpObj A₀] [IsAbelianVariety A₀] : (∀ t : tateModule ℓ A₀, galoisRepresentation ℓ A₀ (FiniteField.frobeniusAlgEquivOfAlgebraic k₀ (AlgebraicClosure k₀)) t = t → t = 0) ∧ (∀ t : tateModule ℓ A₀, galoisRepresentation ℓ A₀ (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k₀ (AlgebraicClosure k₀)) t = t → t = 0) ∧ (∀ v : rationalTateModule ℓ A₀, AddCommGroup.rationalTateModule.map (geometricPointsAddEquiv (A := A₀) (FiniteField.frobeniusAlgEquivOfAlgebraic k₀ (AlgebraicClosure k₀))).toAddMonoidHom v = v → v = 0) ∧ (∀ v : rationalTateModule ℓ A₀, AddCommGroup.rationalTateModule.map (geometricPointsAddEquiv (A := A₀) (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k₀ (AlgebraicClosure k₀))).toAddMonoidHom v = v → v = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

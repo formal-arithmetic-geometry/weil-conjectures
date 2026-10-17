@@ -282,5 +282,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-746c777af (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, unit/chapter route, cited DAG statements, Stacks Tags 0C1C/0C1E, and the pinned blueprint sources. All eight proof steps have their hypotheses and citations checked; finite-field residue degrees, Riemann–Roch, finite fibres, differential nonvanishing, generic étaleness, and finite base change are correct, including edge cases. The algebraically closed Riemann–Roch citation in the seeded proof is inapplicable over F_q, and was correctly replaced by the existing general-field theorem; this route correction is documented in review.md. No duplicate or false node, cycle, coefficient-category issue, or DAG repair was found."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f86f60ad9",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement matches node and blueprint source (order 2795) clause by clause: FiniteFieldDatum k0/k; C0 is IsCurve, Smooth, IsAffine and IsConnectedCurve on D.geometricFiber; the conclusion gives C0' that is IsCurve, Smooth and geometrically IsConnectedCurve, an Over open immersion j with DenseRange and finite complement, and g to the affine line over k0 (ULift (Fin 1)) that is IsFinite and Etale on a dense source open (matches the node proof and the citer thm-a1-affine-curve-upper). No extra hypotheses or universe restriction; edge cases (empty or zero-dimensional curves excluded by IsConnectedCurve, empty complement allowed) are fine. lean.statement is verbatim; one sorry, no definitions; docstrings carry the source, blueprint tag and 8 proof steps; imports are statement modules plus recorded proof-dependency modules; lines <= 100 chars. Compile is clean under nt_compile.py --json and lcompile.py, and a deliberate-error control fails under both. The report has a Worker report and a Second reading by Q29 section (a self-reread, noted, not blocking)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FiniteMapAffineLine",
+  "declaration": "AlgebraicGeometry.exists_finite_genericallyEtale_curve_enlargement",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FiniteMapAffineLine.lean",
+  "statement": "theorem exists_finite_genericallyEtale_curve_enlargement (D : FiniteFieldDatum.{u}) (C₀ : Over (Spec (.of D.k₀))) [IsCurve C₀.hom] [Smooth C₀.hom] [IsAffine C₀.left] [IsConnectedCurve (D.geometricFiber C₀).hom] : ∃ (C₀' : Over (Spec (.of D.k₀))) (hC₀' : IsCurve C₀'.hom), Smooth C₀'.hom ∧ IsConnectedCurve (@FiniteFieldDatum.geometricFiber D C₀' hC₀'.toLocallyOfFiniteType hC₀'.toQuasiCompact).hom ∧ ∃ (j : C₀ ⟶ C₀') (g : C₀'.left ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of D.k₀))), IsOpenImmersion j.left ∧ DenseRange j.left ∧ (Set.range j.left)ᶜ.Finite ∧ g ≫ (𝔸(ULift.{u} (Fin 1); Spec (.of D.k₀)) ↘ Spec (.of D.k₀)) = C₀'.hom ∧ IsFinite g ∧ ∃ U : C₀'.left.Opens, Dense (U : Set C₀'.left) ∧ Etale (U.ι ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

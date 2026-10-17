@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-complete-algebroid",
-  "lem-coef-operadic-algebra-presentability"
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -224,5 +226,55 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-00cd2e7f4 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, with the statement of every cited node. Step 1 is the generalized-operad incidence axiom (iii) of lem-coef-operadic-algebra-presentability applied with X=D and phi=alpha over I_k. I checked that it matches Gepner-Haugseng arXiv:1312.3178v4 Def. 2.4.1(3) and 3.1.13(3), read online. I could not reach the Erratum E.0.1 text, which is acceptable because the proof is marked agent-written and the archive is WANTED. The ordinal identities (rho_i alpha)^op = (beta_i r_i)^op and the eta_j alpha vertex choice are correct. Step 2 takes the fiber at beta_i of the cocartesian mapping criterion; it is valid because the base mapping spaces are discrete. Steps 3-4 build the transformation and transport the limit; the 1-dimensional N(I_k) needs only squares. Step 5 gives naturality and step 6 the homotopy-fiber criterion. I tested k=1, n=0, zero-length blocks next to nonzero blocks, and the absence of a groupoid hypothesis; all hold. The statement is not weakened and is at least as general as the parent lem-coef-operadic-operation-segal-product needs. There are no new nodes, no duplicate in the DAG (only symmetric-operad analogues), no cycle, no SGA, and proof_deps equals the union of the steps' uses. I accept the three declared tool_uses: lem-cbc-simplicial-composition-spine, lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion. FIX (two small faults, corrected item in fixes/dag/nodes/sec-six-functors/): (1) step 2 did not check the criterion's hypothesis that Q is a quasicategory; I added the inner-horn argument. (2) Step 4 used the inverse homotopies of postcomposition from lem-cbc-simplicial-composition-spine without citing it (C1/C4); I added it to the step's uses and text.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicBlockIncidenceLifting",
+  "declaration": "SSet.Enhanced.Nonsymmetric.BlockIncidence.operadic_block_incidence_lifting",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.Vertex",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.ComparisonStep",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.vertexPreorder",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.arrow",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.shape",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.BoundaryRel",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.OperationRel",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.BlockRel",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.subshape",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.boundary",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.operations",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.blocks",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.boundaryOperations",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.boundaryBlocks",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.normalizedArrow",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.OrdinalDiagram",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.baseMap",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.BoundaryEdge",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.family",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.restriction",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.solutions",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.solutionRestriction",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.familyInclusion",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.boundaryVertex",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.fixedValue",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.operationEdge",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.operationMap",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.operationEvaluation",
+   "SSet.Enhanced.Nonsymmetric.BlockIncidence.operadic_block_incidence_lifting"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicBlockIncidenceLifting.lean",
+  "statement": "theorem operadic_block_incidence_lifting {k : ℕ} (hk : 1 ≤ k) {Q : SSet.{u}} (q : Q ⟶ monoidalSimplexBase.{u}) (hQ : IsGeneralizedOperad q) (b : OrdinalDiagram k) : IsWeakHomotopyEquivalence (restriction q b ⊤ (operations k) le_top (boundaryOperations k) le_top) ∧ IsWeakHomotopyEquivalence (restriction q b ⊤ (blocks k) le_top (boundaryBlocks k) le_top) ∧ ∀ z : family q b (boundary k) le_rfl _⦋0⦌, (∃ f : solutions q b (operations k) (boundaryOperations k) z ⟶ operationMap q b z, f ≫ monoidalRelativeMapInclusion q (fixedValue q b z .source) (fixedValue q b z .target) (operationEdge k ≫ (operations k).ι ≫ baseMap b) = operationEvaluation q b z ∧ IsWeakHomotopyEquivalence f) ∧ KanComplex (solutions q b ⊤ le_top z) ∧ KanComplex (solutions q b (operations k) (boundaryOperations k) z) ∧ KanComplex (solutions q b (blocks k) (boundaryBlocks k) z) ∧ IsWeakHomotopyEquivalence (solutionRestriction q b ⊤ (operations k) le_top (boundaryOperations k) le_top z) ∧ IsWeakHomotopyEquivalence (solutionRestriction q b ⊤ (blocks k) le_top (boundaryBlocks k) le_top z) ∧ (∀ a : solutions q b (operations k) (boundaryOperations k) z _⦋0⦌, IsContractible (homotopyFiber (solutionRestriction q b ⊤ (operations k) le_top (boundaryOperations k) le_top z) a)) ∧ (∀ a : solutions q b (blocks k) (boundaryBlocks k) z _⦋0⦌, IsContractible (homotopyFiber (solutionRestriction q b ⊤ (blocks k) le_top (boundaryBlocks k) le_top z) a))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical coherent-extension correspondence for the fixed source/block star and entire target incidence cone. The restriction legs, their parameter families and their fixed-boundary fibres are constructed. The original-operation identification is normalized by restriction to D → C. The existing coreMap interface accounts for the added statement dependency. Includes the existing transitive space-valued-straightening dependency for an owning-module noncomputability annotation repair, validated by compiling this consumer."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dea34d6f7",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read the node, all statement dependencies' exact declarations, both modules and the report. The Lean models Map^alpha(D,C) ~ holim T as the extension correspondence solutions(operations) <- solutions(top) -> solutions(blocks) over a fixed boundary: the whole inert incidence diagram of C plus the cocartesian interval projections q_i. Both legs are weak equivalences, on full core families (coherence in equivalences of D over id, of blocks and of projection diagrams) and fibrewise. The operation side is identified with monoidalRelativeMap q D C alpha by the unique f normalized via the mono pullback.fst. Homotopy fibres over every compatible block datum are contractible. Ordinal data checked: active alpha, t_j and n_i (length_eq), interval r_i, active beta_i, monoidalRho, endpoint consts, eta_j alpha forced. Edge cases k=1, n=0 and zero-length blocks are covered; no groupoid hypothesis; single universe u; statement verbatim; 29 declarations present; one sorry; docstrings ok. No duplicate: the dependency holim needs a supplied limiting cone in a quasicategory of spaces. nt_compile --json: both modules rc 0 with no diagnostics (about 6 s each); a probe file confirmed errors are printed. Non-blocking: the SpaceValuedStraightening repair is already live from Q19 (the delivered file differs by one trailing newline); landing it is harmless, or use --revert-nodes lem-coef-space-valued-straightening. The Second-reading section is only the 2026-10-17 policy note.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

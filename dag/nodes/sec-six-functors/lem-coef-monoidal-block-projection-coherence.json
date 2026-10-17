@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category",
-  "lem-coef-cocartesian-straightening"
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cut-chain-forest-compatibility"
  ],
  "proof": [
   {
@@ -297,5 +298,64 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-4d172aea0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-cut-chain-forest-compatibility, every cited statement, the unit sk-prop-sf-biduality-general and the HA Cut place (4.1.2.9; HA is not archived, WANTED is already in the report). This delivery repairs the human return on step 5: the statement and steps 1-4 and 6-9 are unchanged, and step 5 is now 1434 characters with five citations. Step 5 uses only what the cited statements say. G = pi s N(Cut) uses Cut from the associative-Segal comparison and the evaluation formula 'block maps precomposed with input projections' from product-diagram recognition. The reconstruction node supplies 'forest coherences = products of output-tree coherences pulled back along external input projections' and the arbitrary-K and restriction clauses. The new node supplies the tree for each output, its leaves L_j and the face/degeneracy/grafting identifications; endpoint faces use the full record, checked on [2]->[1]->[0]. The new node is self-contained, statement-only, cites only def-weil-pbc-simplicial-set, has all three search kinds recorded, correct blueprint from/via and same_as []. It is not a clause of the parent (pure combinatorics, no target category) and duplicates nothing: I compared it with def-coef-colored-operator-systems, lem-coef-lm-prism-approximation, def-coef-left-module-operadic-encoding, the comparison and reconstruction nodes. I tested it by script over all n<=3: in 11745 cases the composite ordered fibres equal Cut of the composite and the interval {a(k-1)+1..a(k)}, including zero ordinals, constant maps and discarded ends. Route: all cited statements are in the item's unit, and no tool_uses are needed. proof_deps equals the union of uses. No SGA. Minor point, left unchanged: the new node has no lean_audit field (tool-owned). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonoidalBlockProjectionCoherence",
+  "declaration": "SSet.Enhanced.MonoidalBlock.monoidal_block_projection_coherence",
+  "declarations": [
+   "SSet.Enhanced.MonoidalBlock.PlanarTree",
+   "SSet.Enhanced.MonoidalBlock.PlanarTree.output",
+   "SSet.Enhanced.MonoidalBlock.PlanarTree.inputs",
+   "SSet.Enhanced.MonoidalBlock.PlanarTree.Valid",
+   "SSet.Enhanced.MonoidalBlock.PlanarTree.reindex",
+   "SSet.Enhanced.MonoidalBlock.PlanarTree.graft",
+   "SSet.Enhanced.MonoidalBlock.PlanarTree.recolor",
+   "SSet.Enhanced.MonoidalBlock.Contracts",
+   "SSet.Enhanced.MonoidalBlock.TreeProfile",
+   "SSet.Enhanced.MonoidalBlock.treeProfileCategory",
+   "SSet.Enhanced.MonoidalBlock.treeNerve",
+   "SSet.Enhanced.MonoidalBlock.power",
+   "SSet.Enhanced.MonoidalBlock.family",
+   "SSet.Enhanced.MonoidalBlock.System",
+   "SSet.Enhanced.MonoidalBlock.IsColorRestriction",
+   "SSet.Enhanced.MonoidalBlock.unaryTree",
+   "SSet.Enhanced.MonoidalBlock.colorFunctor",
+   "SSet.Enhanced.MonoidalBlock.Base",
+   "SSet.Enhanced.MonoidalBlock.colorInclusion",
+   "SSet.Enhanced.MonoidalBlock.Diagram",
+   "SSet.Enhanced.MonoidalBlock.atColor",
+   "SSet.Enhanced.MonoidalBlock.width",
+   "SSet.Enhanced.MonoidalBlock.blockInputs",
+   "SSet.Enhanced.MonoidalBlock.projection",
+   "SSet.Enhanced.MonoidalBlock.Paths",
+   "SSet.Enhanced.MonoidalBlock.pathTrees",
+   "SSet.Enhanced.MonoidalBlock.retained",
+   "SSet.Enhanced.MonoidalBlock.longMap",
+   "SSet.Enhanced.MonoidalBlock.externalProjection",
+   "SSet.Enhanced.MonoidalBlock.IsNormal",
+   "SSet.Enhanced.MonoidalBlock.colorBase",
+   "SSet.Enhanced.MonoidalBlock.pairNerves",
+   "SSet.Enhanced.MonoidalBlock.diagramFamily",
+   "SSet.Enhanced.MonoidalBlock.representedMap",
+   "SSet.Enhanced.MonoidalBlock.Classifies",
+   "SSet.Enhanced.MonoidalBlock.colorEdge",
+   "SSet.Enhanced.MonoidalBlock.Realization",
+   "SSet.Enhanced.MonoidalBlock.monoidal_block_projection_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MonoidalBlockProjectionCoherence.lean",
+  "statement": "theorem monoidal_block_projection_coherence : ∃ R : CocartesianStraightening.Statement.{u}, (∀ (E : SSet.{u}) [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{u}), IsMonoidalInfinityCategory p → ∃ (T : System (fun _ : Fin 1 => monoidalUnderlying p)) (F : Diagram.{u} 0), IsNormal T F ∧ Classifies R p (atColor F 0)) ∧ (∀ (c : ℕ), c ≤ 1 → ∀ (A : Fin (c + 1) → SSet.{u}), (∀ a : Fin (c + 1), Quasicategory (A a)) → ∀ T : System A, Nonempty (Realization R T))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit tree-contraction nerves, whole-simplex grafting, retained Cut trees and full enriched mapping-simplex projection equalities. One-color and two-color realizations encode objects and compatible functors, with specified product components and pure-system restrictions. Unary identity base arrows use wires while retaining the original unary equivalence in the tree action. The landed Cut-chain interface is added as a direct statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a00cf2d5",
+  "group": "NY",
+  "result": "fix",
+  "note": "Mathematics and statement are correct. Checked all 38 declarations against the node and the dependency declarations: tree-nerve System (wire projection, t_1≃id kept as a contraction arrow rather than literal identity, strict whole-simplex grafting = BV/W form), first conjunct (system on the actual fiber at [1], normal F, Classifies with HEq to p, legitimate because IsMonoidalInfinityCategory requires a strict cocartesian fibration), IsNormal fixing every enriched path simplex as the retained Cut tree pulled back along externalProjection, c=0 and c=1 Realization (f^n components, pure restrictions consistent because normal diagrams are unique, coCart colour edges preserve cocartesian edges). ∃R:Statement is not a weakening because Statement includes FiberTransport/BaseNaturality. Edge cases checked: empty list/product, nullary vertices, target [0], q=0, s∘d=id composites, width 0, empty A. stmt_deps gain of the landed lem-coef-cut-chain-forest-compatibility is allowed (its cutLayer is used). No hollow defs, only sorry, docstrings/blueprint present, statement verbatim, lines ≤100. nt_compile: item alone rc0 clean; item plus delivered CocartesianStraightening rc0 clean. Dependency module: Q77 has since landed its own import repair; the delivered file differs from it only by a legitimate public import of EnhancedCartesianFibration (where CatInfinity is defined); left as delivered (--revert-nodes lem-coef-cocartesian-straightening would also be fine). FIX: H11, the delivered Second reading by NY was a self-check with no clause matching. Supplied a complete fixes/lem-coef-monoidal-block-projection-coherence.report.md with a clause-by-clause second reading, also repairing the garbled HA place numbers in the worker report.; reverted the delivery's change of existing node(s) lem-coef-cocartesian-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

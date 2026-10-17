@@ -260,5 +260,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-835b8d7ce",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: presentably monoidal p, small generalized operad q, ev characterised by ev ≫ monoidalFiberInclusion = markedInclusion ≫ evaluation c (fiber inclusion is mono, so ev unique and canonical); equivalence iff colorwise (both directions); for every small IsInfinitySifted K: colimit exists with colorwise colimiting image, and cocone colimiting iff colorwise; covers geometric realizations. No extra hypotheses or universe restriction; edge cases (no colors, n=0, empty K excluded by siftedness) fine. Node differs from side base only in lean; lean.statement verbatim. No defs, proof only sorry, docstrings with source and blueprint, report has Worker report and Second reading by Q17. Compile via nt_compile.py --json on the snapshot text: clean, 6.0 s, rc=0 (axioms control confirms only sorryAx). No duplicate declaration found. Minor: second reading and proof docstring are brief, not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicColorwiseSiftedColimits",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadic_colorwise_sifted_colimits",
+  "file": "lean/Sheaf/CategoryTheory/OperadicColorwiseSiftedColimits.lean",
+  "statement": "theorem operadic_colorwise_sifted_colimits {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : Algebroid.IsPresentablyMonoidal.{u, v} p) (M : SSet.{max (u + 1) v}) (q : M ⟶ monoidalSimplexBase.{max (u + 1) v}) (hMsmall : Presentability.IsSmall.{u} M) (hM : IsGeneralizedOperad q) : (∃ (ev : ∀ (c : M _⦋0⦌), q.app _ c = monoidalBaseVertex 1 → (algebras q p ⟶ monoidalUnderlying p)), (∀ (c : M _⦋0⦌) (hc : q.app _ c = monoidalBaseVertex 1), ev c hc ≫ monoidalFiberInclusion p 1 = markedInclusion q p (IsMonoidalInertEdge q) ≫ evaluation M E c) ∧ ∀ (f : Δ[1] ⟶ algebras q p), SSet.Enhanced.IsEquivalenceEdge (algebras q p) (SSet.yonedaEquiv f) ↔ ∀ (c : M _⦋0⦌) (hc : q.app _ c = monoidalBaseVertex 1), SSet.Enhanced.IsEquivalenceEdge (monoidalUnderlying p) ((ev c hc).app _ (SSet.yonedaEquiv f))) ∧ (∀ (K : SSet.{max (u + 1) v}) [Quasicategory K], Presentability.IsSmall.{u} K → SSet.Enhanced.IsInfinitySifted K → ∃ (ev : ∀ (c : M _⦋0⦌), q.app _ c = monoidalBaseVertex 1 → (algebras q p ⟶ monoidalUnderlying p)), (∀ (c : M _⦋0⦌) (hc : q.app _ c = monoidalBaseVertex 1), ev c hc ≫ monoidalFiberInclusion p 1 = markedInclusion q p (IsMonoidalInertEdge q) ≫ evaluation M E c) ∧ ∀ (B : K ⟶ algebras q p), (∃ (t : coconeCategory B _⦋0⦌), IsColimiting B t ∧ ∀ (c : M _⦋0⦌) (hc : q.app _ c = monoidalBaseVertex 1), IsColimiting (B ≫ ev c hc) (CategoryTheory.Spaces.mappedCocone (ev c hc) B t)) ∧ ∀ (t : coconeCategory B _⦋0⦌), IsColimiting B t ↔ ∀ (c : M _⦋0⦌) (hc : q.app _ c = monoidalBaseVertex 1), IsColimiting (B ≫ ev c hc) (CategoryTheory.Spaces.mappedCocone (ev c hc) B t))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -255,5 +255,23 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-8228ed9c5 (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, cited DAG nodes, Mathlib matches, delivery-error rules, and HTT Lemma A.3.3.17. Verified all seven proof steps, hypotheses, filtered-colimit and pushout arguments, functor-law stabilization, edge cases, citations, ancestry, searches, and absence of duplicates or forbidden SGA sources. Wrote review.md; no repairs or tool_uses required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-792ddb0ef",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause of CategoryTheory.exists_pointwise_presentable_pushout against the node (HTT A.3.3.17 pp.883-884) and the Mathlib definitions. Universes: kappa : Cardinal.{v} and Category.{v} A, object universe u unrestricted. hpres gives a ColimitPresentation in Fun(D,A) indexed by a kappa-filtered I : Type v, with pointwise presentable stages. hfinite covers every FinCategory colimit, including the empty one. hpush has the correct IsPushout orientation, with no naturality or Mono assumptions. The conclusion is a functor-category IsPushout h x y f, with both pointwise presentability clauses and a per-object pushout of the same u d along a0 with a0 composed with x.app d equal to a d. Edge cases (empty D, non-monic arrows) are covered and all variables are bound. No definitions; the only proof is sorry. Module and theorem docstrings cite the source and blueprint, and the theorem docstring has all seven proof steps. The node's lean.statement matches the file verbatim. The report has a Worker report and a Second reading by Q27 (done by Q27 itself; substantive). Own duplicate searches in the side project, the DAG and Mathlib found none: the retract-descent and cellular-tree modules state different results, and the enriched node is a separate simplicial statement with no Lean. nt_compile.py --json on the snapshot file exited 0 in 3.1 s with no errors, matching the delivery's recorded compile. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DiagramCompactPushoutDescent",
+  "declaration": "CategoryTheory.exists_pointwise_presentable_pushout",
+  "file": "lean/Sheaf/CategoryTheory/DiagramCompactPushoutDescent.lean",
+  "statement": "theorem exists_pointwise_presentable_pushout {A : Type u} [Category.{v} A] (κ : Cardinal.{v}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) [IsCardinalLocallyPresentable A κ] {D : Type v} [SmallCategory D] (hD : HasCardinalLT (Arrow D) κ) (hpres : ∀ H : D ⥤ A, ∃ (I : Type v) (_ : SmallCategory I) (_ : IsCardinalFiltered I κ) (p : ColimitPresentation I H), ∀ (i : I) (d : D), IsCardinalPresentable ((p.diag.obj i).obj d) κ) (hfinite : ∀ (I : Type v) [SmallCategory I] [FinCategory I] (K : I ⥤ A) (c : Cocone K), IsColimit c → (∀ i : I, IsCardinalPresentable (K.obj i) κ) → IsCardinalPresentable c.pt κ) {F G : D ⥤ A} (f : F ⟶ G) (P Q : D → A) (u : ∀ d : D, P d ⟶ Q d) (a : ∀ d : D, P d ⟶ F.obj d) (b : ∀ d : D, Q d ⟶ G.obj d) (hP : ∀ d : D, IsCardinalPresentable (P d) κ) (hQ : ∀ d : D, IsCardinalPresentable (Q d) κ) (hpush : ∀ d : D, IsPushout (u d) (a d) (b d) (f.app d)) : ∃ (F₀ G₀ : D ⥤ A) (h : F₀ ⟶ G₀) (x : F₀ ⟶ F) (y : G₀ ⟶ G), IsPushout h x y f ∧ (∀ d : D, IsCardinalPresentable (F₀.obj d) κ) ∧ (∀ d : D, IsCardinalPresentable (G₀.obj d) κ) ∧ ∀ d : D, ∃ (a₀ : P d ⟶ F₀.obj d) (b₀ : Q d ⟶ G₀.obj d), a₀ ≫ x.app d = a d ∧ IsPushout (u d) a₀ b₀ (h.app d)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -200,5 +200,24 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-aec42df9f (reviewer sub-agent of L); spot-checked: Read the mathematics in full. All six steps check: cardinality ordering gives exact inner-horn intersections and degreewise pushouts. Independent tests for n=1–9 passed. Checked HTT 3.2.2.9, cited definitions, blueprint route, and duplicate candidates; no repairs or tool_uses needed. Findings recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ea0e2f2e",
+  "group": "N2",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: n>0; T=face{last}ᶜ, I=face{n-1,last}, K0=T⊔I; finite chain K: Fin(t+1)→Subcomplex with hle and K(last)=⊤; IsPushout Λ[d,a].ι g f homOfLE with argument order checked; 2≤d, 0<a<last d; degreewise IsPushout in Type u (a consequence, not stronger); n=1 allows t=0. No extra assumptions; universe-polymorphic. Node changed only in lean, record complete, statement verbatim. Six-step proof re-checked and correct; source HTT 3.2.2.9 pp.182-183. No duplicate (gapped_face_inner_horn_presentation coincides only at n=2). No defs, sorry only, imports are the dependency modules, lines ≤100. nt_compile --json clean (rc 0, no errors or warnings) for both delivered and fixed files. F1 (H8): the theorem docstring lacked the node's step-by-step proof; fixes/FinalFaceEdgeHornFiltration.lean adds all six steps naming def-cbc-enhanced-diagrams-cones and def-weil-pbc-category-colimit, with the signature byte-identical."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FinalFaceEdgeHornFiltration",
+  "declaration": "SSet.exists_final_face_edge_horn_filtration",
+  "file": "lean/Sheaf/AlgebraicTopology/FinalFaceEdgeHornFiltration.lean",
+  "statement": "theorem exists_final_face_edge_horn_filtration (n : ℕ) (hn : 0 < n) : ∃ (t : ℕ) (K : Fin (t + 1) → (Δ[n] : SSet.{u}).Subcomplex), K 0 = stdSimplex.face ({Fin.last n}ᶜ : Finset (Fin (n + 1))) ⊔ stdSimplex.face ({⟨n - 1, by omega⟩, Fin.last n} : Finset (Fin (n + 1))) ∧ K (Fin.last t) = ⊤ ∧ ∀ h : Fin t, ∃ (hle : K h.castSucc ≤ K h.succ) (d : ℕ) (a : Fin (d + 1)) (g : (Λ[d, a] : SSet.{u}) ⟶ (K h.castSucc : SSet.{u})) (f : (Δ[d] : SSet.{u}) ⟶ (K h.succ : SSet.{u})), 2 ≤ d ∧ 0 < a ∧ a < Fin.last d ∧ Λ[d, a].ι ≫ f = g ≫ Subcomplex.homOfLE hle ∧ IsPushout Λ[d, a].ι g f (Subcomplex.homOfLE hle) ∧ ∀ q : SimplexCategoryᵒᵖ, IsPushout ((Λ[d, a] : (Δ[d] : SSet.{u}).Subcomplex).ι.app q) (g.app q) (f.app q) ((Subcomplex.homOfLE hle).app q)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-5ea0e2f2e"
  }
 }

@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-coef-infinity-fibrations",
-  "lem-coef-cocartesian-straightening"
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -213,5 +214,33 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-911558794 (reviewer sub-agent of L); spot-checked: FIX with one repair. The delivery adds no new nodes, has no cycle, and all six dependencies are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. Source: I read Gepner–Haugseng arXiv:1312.3178v4 (Def. 4.1.1, Rem. 4.1.2, Rem. 4.1.5, Prop. 4.2.3(iii), pp. 36–38) from the arXiv PDF; the item statement matches it clause by clause (C^{n+1}, projection faces and diagonal degeneracies, variance via alpha, adjunction with the fibre at [0], cocartesian-edge-preserving maps). Step 1: the coslice A x_J J_{[n]/} is literally discrete on rho_0..rho_n because End([0]) = {id}, and the dual constant test over Cat_inf -> * reduces the p-limit condition to the product property. Step 2: Cat_inf -> * is an isofibration and the right-dual Kan existence gives an exact G_C with limit cones. Step 3: the limit-cone alternative of mapping-restriction plus the pointwise-adjoint criterion give the adjunction, and the counit is the identity. Step 4: I checked rho^n_i beta = rho^m_{alpha(i)}, faces omit and degeneracies repeat a coordinate, and composition works; the step is elementary as marked. Step 5: straightening, its compatibility with base change to [0] and the identity counit give the equivalence by restriction. Fault repaired: step 5 used straightening, which is stated only for U-small total categories, while the item covers any cocartesian fibration E. I appended a size sentence to step 5 that reruns the argument one universe up (the inclusion of small into larger Cat_inf is fully faithful and preserves C^{n+1}, so G_C is unchanged), in fixes/dag/nodes/sec-six-functors/lem-coef-cocartesian-right-kan-extension-simplex-powers.json. No statement change. No duplicate found (ordinary pointwise left Kan, relative Kan tools, Delta^op_X for spaces); no Mathlib leaf. Edge cases n=0, empty C, terminal C and non-groupoid C hold.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianRightKanSimplexPowers",
+  "declaration": "SSet.Enhanced.CocartesianRightKanSimplexPowers.cocartesian_rightKan_simplex_powers",
+  "declarations": [
+   "SSet.Enhanced.CocartesianRightKanSimplexPowers.diagrams",
+   "SSet.Enhanced.CocartesianRightKanSimplexPowers.evaluationZero",
+   "SSet.Enhanced.CocartesianRightKanSimplexPowers.singletonProjection",
+   "SSet.Enhanced.CocartesianRightKanSimplexPowers.IsPowerDiagram",
+   "SSet.Enhanced.CocartesianRightKanSimplexPowers.IsFiberRestriction",
+   "SSet.Enhanced.CocartesianRightKanSimplexPowers.Statement",
+   "SSet.Enhanced.CocartesianRightKanSimplexPowers.cocartesian_rightKan_simplex_powers"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocartesianRightKanSimplexPowers.lean",
+  "statement": "theorem cocartesian_rightKan_simplex_powers : Nonempty Statement.{u} ∧ Nonempty Statement.{max u v}",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The coherent adjunction and pointwise right-Kan property are stated together with the strict finite-power diagram, its cocartesian relative nerve, normalized coherent transports, and the actual fibre restriction equivalence on every sharp mapping simplex. Uses the published straightening and power constructions. The second universe clause runs the same statement in any common enlargement for larger total categories; no site or fibre universe equality is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-366b0bbc1",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Item statement matches the node and GH 1312.3178 Def 4.1.1/Rem 4.1.2,4.1.5/Prop 4.2.3(iii) clause by clause: evaluationZero is the left adjoint in CoherentAdjunction, rightKan uses the under-slice with a terminal cone (right Kan), strict powers with coordinate reindexing objectDiagram.map, counit is the coordinate-0 projection, Delta^op_C = Algebroid.domain classified by i_*C, every naturally marked X gets a weak equivalence r fixed on every simplex as fibre restriction; Statement.{max u v} covers a larger E. No extra hypotheses, no hollow defs, one sorry, docstrings/blueprint ok, lean.statement verbatim. nt_compile --json: SpaceValuedStraightening 6.2 s and CocartesianRightKanSimplexPowers 10.6 s, no diagnostics, rc 0. Non-blocking: the dependency repair (noncomputable Diagrams) already landed on the base via Q19 batch 93990d0775; the delivered module differs only by a trailing blank line and the dep record only in by/note/statement formatting; the lead may use --revert-nodes lem-coef-space-valued-straightening. The added stmt_dep is a landed node (allowed) and a real indirect dependency via KanRelativeNerve.TransportData.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }
