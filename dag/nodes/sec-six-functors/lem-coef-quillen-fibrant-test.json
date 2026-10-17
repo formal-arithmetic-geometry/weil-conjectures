@@ -250,5 +250,23 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-22a7ccb34 (reviewer sub-agent of L); spot-checked: I fetched Hirschhorn's PDF and read Proposition 8.5.4 (Dugger), printed pp. 153-155. The item's two hypotheses are exactly condition (3): U preserves all trivial fibrations and the fibrations between fibrant objects. Its conclusion is (1), the Quillen pair, written out clause by clause, with nothing added or weakened. The proof is the delivery's own and is marked agent-written. It replaces the source's dual Ho-detection argument with an elementary one, and I checked all 8 steps by hand. (1) Adjoint lifting gives L(C) in C. (2) k makes Y fibrant, and p: X->Y with X fibrant because right lifting classes compose, so the restricted hypothesis applies to p. (3) The transposed square commutes, R(p)j# = k# i, and its lift h satisfies hf = j and ph = k. (4) A section r with rk = h and pr = 1. (5) (rp)j = j, so rp is in W by two-out-of-three. (6) p is a retract of rp via (1,r) and (1,p). (7) f is in W. (8) R preserves all fibrations by transposition. The only cited node, lem-coef-model-infinity-derived-adjunction, is in the same unit; its first paragraph supplies every axiom used and no step uses its proof. Small cases checked: the identity adjunction, W equal to the isomorphisms, endpoints that are not cofibrant, and an empty or initial source. The two citers, bousfield-quillen-descent and segal-categorical-constancy, apply the statement with exactly these hypotheses. A grep of the DAG finds no duplicate. There are no new nodes. The 12 Mathlib searches are of three kinds and none matches. One small remark: the cited node does not define 'Quillen adjunction' by name, but the item's statement predates the delivery, is unchanged, and spells the clauses out. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuillenFibrantTest",
+  "declaration": "HomotopicalAlgebra.quillen_fibrant_test",
+  "file": "lean/Sheaf/CategoryTheory/QuillenFibrantTest.lean",
+  "statement": "theorem quillen_fibrant_test {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [ModelCategory A] [ModelCategory B] [HasLimits A] [HasColimits A] [HasLimits B] [HasColimits B] [(cofibrations A).HasFunctorialFactorization (trivialFibrations A)] [(trivialCofibrations A).HasFunctorialFactorization (fibrations A)] [(cofibrations B).HasFunctorialFactorization (trivialFibrations B)] [(trivialCofibrations B).HasFunctorialFactorization (fibrations B)] (L : A ⥤ B) (R : B ⥤ A) (adj : L ⊣ R) (hRt : ∀ {X Y : B} (p : X ⟶ Y), Fibration p → WeakEquivalence p → Fibration (R.map p) ∧ WeakEquivalence (R.map p)) (hRf : ∀ {X Y : B} (p : X ⟶ Y), IsFibrant X → IsFibrant Y → Fibration p → Fibration (R.map p)) : (∀ {X Y : B} (p : X ⟶ Y), Fibration p → Fibration (R.map p)) ∧ (∀ {X Y : A} (i : X ⟶ Y), Cofibration i → Cofibration (L.map i)) ∧ (∀ {X Y : A} (i : X ⟶ Y), Cofibration i → WeakEquivalence i → Cofibration (L.map i) ∧ WeakEquivalence (L.map i))",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c07796f20",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Statement matches node and Hirschhorn Prop 8.5.4 (3)=>(1) clause by clause: hRt (all trivial fibrations, any endpoints), hRf (fibrations between fibrant objects), conclusions (all fibrations, cofibrations, trivial cofibrations). The HasLimits/HasColimits/functorial-factorization binders equal the dependency's recorded model-category convention, so there is no stronger assumption. Universes are independent and bound. The 8-step docstring proof is checked, including the retract components. Source and blueprint docstrings are present, the only proof is sorry, there are no definitions, and the report has Worker report and Second reading by Q111. No duplicate in Mathlib or lean/Sheaf. lean.statement is verbatim. Node diff vs side is the lean field only. nt_compile.py rc=0, QuillenFibrantTest 1.5 s, no errors or warnings. No findings."
  }
 }
