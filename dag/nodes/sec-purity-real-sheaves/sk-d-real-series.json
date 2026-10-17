@@ -77,5 +77,27 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d8ac2fe20",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Mathematical binding and verbatim signature verified; scompile.py passed cleanly. review.md records all checks and an upstream documentation caveat. fixes/sk-d-real-series.report.md supplies the complete substantive second reading, correcting H1/H11. No node or Lean changes needed."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius",
+  "declaration": "PowerSeries.radius",
+  "declarations": [
+   "PowerSeries.radius",
+   "PowerSeries.HasNonnegCoeffs"
+  ],
+  "statement": "noncomputable def radius {𝕜 : Type*} [NontriviallyNormedField 𝕜] (f : 𝕜⟦X⟧) : ℝ≥0∞",
+  "branch": "slopmaster2",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Both definitions are already in the upstream module, lines 70–80. Specialize radius to ℂ; HasNonnegCoeffs is already specialized to ℂ. The radius is the Mathlib scalar formal-multilinear-series radius, equal to the supremum in the blueprint by summable_norm_coeff_mul_pow and le_radius_of_summable. The final sentence supplies the standard coefficientwise operation convention (Mathlib PowerSeries multiplication, exp with substitution, and locally finite products), rather than another named definition."
  }
 }

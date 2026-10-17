@@ -216,5 +216,29 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-0f0bc2e2f (reviewer sub-agent of L); spot-checked: I read the whole item, every cited statement, the parent's step 6, Stacks sites.tex 00WX/00VE/lemma-recover, and blueprint main-20261015 lem-pur-kunneth-supported.proof.md l.45-46. The added explicit γ (the conjugate of the sectionwise identity δ) is the same construction as step 2 of lem-weil-pbc-comparison-pullback, and the parent uses it the same way. It removes an ambiguity without changing or weakening the statement. Steps 1-3 and 5 are correct: I checked the composite-unit order, the conjugate-unit equation R1(γ)η1=δη2, and the final cancellation a·γ=1. Edge cases checked: V empty, V=T, F=0, A=0, and the -1 normalization on Z/3. Two faults, both repaired. (1) C3/E5 in step 4: the item's c uses the coprojection identification σ of lem-sfb clause (1), but the step took the unit as restriction from the existential ρ of lem-pur-proetale-open-unit-evaluation and asserted without proof that σ=ρ. This matters because an automorphism such as -1 changes c. I replaced it with a direct computation: by lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction and Stacks 00VE, the unit is the coprojection at (W,id), and the arrow pr from the initial pair gives σ∘f = restriction. The evaluation node is removed from the step, proof_deps and tool_uses. (2) B3/C1: the étale restriction lemma requires j étale, which was never cited. I added lem-weil-pbc-open-immersion-etale to the statement, stmt_deps and step 4. Accepted tool_uses: lem-weil-pbc-etale-inverse-image-restriction and lem-sfb-proetale-object-inverse-image-restriction. No new nodes, no SGA. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-daf3c4efd",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source/docstrings, exact Lean signature, edge cases, and canonical constructions. Reproduced scompile.py side-overlay/server compilation successfully; review.md records all checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComparisonPullbackOpenUnit",
+  "declaration": "AlgebraicGeometry.ProEtale.comparisonPullbackOpenUnit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.comparisonPullbackOpenUnitGamma",
+   "AlgebraicGeometry.ProEtale.comparisonPullbackOpenUnitA",
+   "AlgebraicGeometry.ProEtale.comparisonPullbackOpenUnitC",
+   "AlgebraicGeometry.ProEtale.comparisonPullbackOpenUnit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonPullbackOpenUnit.lean",
+  "statement": "theorem comparisonPullbackOpenUnit (A : Type (u + 1)) [CommRing A] [Finite A] {V T : Scheme.{u}} (j : V ⟶ T) [IsOpenImmersion j] : ∀ (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)), (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).map ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F) ≫ (comparisonPullbackOpenUnitC A j).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj F) ≫ (comparisonLowerStar (ModuleCat.{u + 1} A) V).map ((comparisonPullbackOpenUnitA A j).hom.app F) = (comparisonAdjunction (ModuleCat.{u + 1} A) V).unit.app ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
