@@ -12,9 +12,63 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object V of X_proet put L_A(V)=C(|V|,A), with restrictions by precomposition. The finite commutative ring A with its discrete topology is in particular a topological abelian group whose addition and negation are continuous. The existing Mathlib leaf [lem-cbc-continuous-functions-fpqc-sheaf] therefore says that U maps to C(|U|,A), with pointwise addition, is an fpqc sheaf on schemes. By the covering clause of [def-weil-pbc-proetale-site], every pro-etale covering {U_i to U} is an fpqc covering of schemes; by [lem-weil-pbc-weakly-etale-composition-base-change] each fibre product U_i x_U U_j is weakly etale over X (base change of U_i to U, then composition with U to X), so it is (isomorphic to) an object of X_proet and the matching conditions for the covering in X_proet and in schemes coincide. Hence the restriction of this presheaf to X_proet is a sheaf of abelian groups. Pointwise multiplication and the constant function 1 preserve continuity and restrictions, and the sheaf condition concerns only the underlying sets, so L_A is a sheaf of commutative rings.",
+   "uses": [
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, printed p. 30, continuous-function sheaf assertion; the fpqc sheaf formulation is the Mathlib leaf"
+   }
+  },
+  {
+   "text": "The map of presheaves phi: P_A to L_A from the constant presheaf P_A(V)=A sends a to the constant function with value a; it is a map of presheaves of commutative rings because the operations of L_A are pointwise. If f in L_A(V), then for each a in the finite set A the fibre V_a=f^{-1}({a}) is open because A is discrete, and it is also closed because its complement is the finite union of the other open fibres. Thus the finitely many fibres are clopen and cover |V|; the intersection of V_a with an affine open Spec R of V is clopen in Spec R, hence of the form Spec R_e for an idempotent e, so affine. Each open immersion V_a to V is flat and a monomorphism, so its diagonal is an isomorphism and it is weakly etale; by [lem-weil-pbc-weakly-etale-composition-base-change] the composite V_a to V to X is weakly etale, so V_a is an object of X_proet. For every affine open W of V the finitely many affine opens W meet V_a cover W, so {V_a to V} is a pro-etale covering by [def-weil-pbc-proetale-site], on whose members f restricts to the constant a. Thus phi is locally surjective. It is locally injective: two constants that agree on a nonempty object have equal values, while on the empty object the empty family is a covering. The universal property of ring-valued sheafification [def-weil-pbc-sheafification] gives a unique map of sheaves of rings theta: A_X to L_A from the constant sheaf [def-weil-pbc-constant-sheaf] with theta eta = phi, eta the sheafification unit. By [lem-pe-ring-sheafification-underlying-sets] the underlying set map of eta is a set-valued sheafification of the underlying presheaf of sets of P_A. By [lem-cbc-set-presheaf-sheafification-local-bijection] the set-sheafification of the locally surjective and locally injective map phi is an isomorphism; since L_A is already a sheaf its own unit is an isomorphism, and uniqueness of factorization through the set-valued unit identifies the underlying set map of theta with this isomorphism. Hence theta is bijective on every object, and as each component is a ring homomorphism, theta is an isomorphism of sheaves of rings.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "lem-pe-ring-sheafification-underlying-sets",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, printed p. 30, discrete-space assertion and constant-section normalization; Stacks proetale.tex Tag 0F6D supporting the pro-etale covering context"
+   }
+  },
+  {
+   "text": "The presheaf map phi preserves addition, multiplication, and one, because these operations are pointwise and constant functions have the corresponding constant values; so the isomorphism theta of the previous step is a canonical ring isomorphism, and theta eta = phi says that it sends the image of every constant-presheaf element a to the constant function a. For a morphism h:W to V in X_proet, theta is a morphism of sheaves, so theta_W(h^*s)=h^*theta_V(s)=theta_V(s) composed with |h|, since the restriction in L_A is precomposition by the underlying scheme map. This argument is objectwise and uses neither quasi-compactness nor connectedness nor nonemptiness; the empty object is covered by the empty family as above.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, printed p. 30, pointwise operations, normalization on constant sections, and functoriality under inverse image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-continuous-functions-fpqc-sheaf",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-pe-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, printed p. 30, discrete-space assertion; Stacks proetale.tex Tag 0F6D for the pro-etale site covering context"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-proetale-supported-constant-presentation",
@@ -79,7 +133,7 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-affine-line-orientation",
-   "place": "Proof, sentences 'The supported Cartier map of [lem-amb-cartier-kummer-map] is natural for the base changes of the zero section, and its geometric fibre is the coordinate boundary.' Finite-constant section identification for the supported-source presentation used in the descendant pullback argument.",
+   "place": "Proof, final sentence: 'The etale-origin comparison of [thm-weil-pbc-site-comparison] transports the assertion and its normalization to the stated site.' The finite-constant section identification used for the stated pro-etale constant sheaf.",
    "via": [
     "lem-pur-proetale-supported-constant-presentation",
     "lem-pur-supported-hom-pullback"
@@ -87,5 +141,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-proetale-finite-constant-sections",
+  "worker": "stage1",
+  "summary": "Split the imported statement into three proof steps. First, the existing Mathlib fpqc sheaf of continuous functions restricts to a pro-etale sheaf and gains pointwise ring operations. Second, finite discrete fibres give a pro-etale covering by open fibres, so the constant presheaf map is locally bijective and sheafification yields the canonical isomorphism. Third, pointwise operations, constant-section normalization, and restriction naturality give the ring and pullback clauses, including empty and disconnected cases.",
+  "blueprint": "thm-pur-affine-line-orientation proof, final sentence on transporting the assertion and normalization to the stated site; the steps realize the finite-constant section identification used by the supported-source descendant."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-a4f306cb3",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-a4f306cb3 (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. I read every cited statement, the unit sk-prop-a1-kummer, the parent chain up to thm-pur-affine-line-orientation (its blueprint_update final sentence is the item's from.place, and via is correct), Bhatt–Scholze Lemma 4.2.12 on printed p.30 (the discrete-T clause matches the item exactly) and Stacks proetale.tex example-functions-mod-locally-constant-functions (0F6D, context only). The Mathlib leaf isSheaf_fpqcTopology_continuousMapPresheafAb at ConstantSheaf.lean:116 is exact; the discrete-to-constant identification is a TODO in Mathlib, so the split is right. The statement is true and unchanged; I tested A=0, V empty, an infinite disjoint union of points (not quasi-compact), V=Spec LC(S,k) and disconnected V. The duplicate search found only étale-site, condensed and O_E/E-coefficient neighbours, none stating this item. No SGA is cited, no tool_uses are needed and there is no cycle. Three repairable faults, fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-proetale-finite-constant-sections.json: (1) step 1's source.document had Cyrillic letters (a path that does not exist), now corrected; (2) steps 1 and 2 used weak-étale base change and composition (fibre products U_i×_U U_j and the clopen fibres V_a as objects of X_proet) without citing a node, so I added lem-weil-pbc-weakly-etale-composition-base-change and wrote out why clopen pieces of an affine are affine and why open immersions are weakly étale; (3) C4: step 2 concluded that locally bijective implies isomorphism after sheafification while citing only def-weil-pbc-sheafification, which gives only the universal property, so I added the Mathlib leaves lem-pe-ring-sheafification-underlying-sets and lem-cbc-set-presheaf-sheafification-local-bijection and wrote out the comparison. Step 3 was reworded to match, and proof_deps is the union of the steps' uses.; 1 file(s) fixed by the reviewer"
  }
 }
