@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-rp-real-lisse-purity-affine",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Purity of real lisse sheaves on curves",
@@ -14,7 +14,11 @@
  },
  "stmt_deps": [
   "def-real-weil-representation-operations",
-  "def-wf-weil-category"
+  "def-wf-weil-category",
+  "d-real-setup",
+  "def-wf-iota-real",
+  "def-weil-punctual-weights",
+  "def-wf-determinantal-weight"
  ],
  "proof": [
   {
@@ -42,28 +46,42 @@
    "text": "(c) *Determinant weight.* $\\det(u^*\\mathcal W)=u^*\\det(\\mathcal W)$,\nand $\\det(\\mathcal W)$ is punctually $\\iota$-pure of weight $a$ with\n$\\dw_\\iota(\\mathcal W)=a/r$ by [lem-wf-determinantal-weight-exists] and\n[def-wf-determinantal-weight]; its restriction is punctually pure of the\nsame weight $a$ at the closed points of $U_0$, so by the uniqueness in\n[lem-wf-determinantal-weight-exists] on $U_0$ we get\n$\\dw_\\iota(u^*\\mathcal W)=a/r=\\dw_\\iota(\\mathcal W)$.",
    "uses": [
     "lem-wf-determinantal-weight-exists",
-    "def-wf-determinantal-weight"
+    "def-wf-determinantal-weight",
+    "def-real-weil-representation-operations"
    ],
    "elementary": false
   },
   {
    "text": "The local Frobenius $F_x$ on $\\mathcal W_{\\bar x}$ is the same as on\n$(u^*\\mathcal W)_{\\bar x}$. Therefore it suffices to prove the theorem\nfor the smooth geometrically connected affine curve $U_0$ and the\n$\\iota$-real lisse sheaf $u^*\\mathcal G_0$: its conclusion at $x$ for\nthe constituent $u^*\\mathcal W$ is the required purity of\n$\\mathcal W$ of weight $\\dw_\\iota(\\mathcal W)$ at $x$. In Steps 1–4 we\nthus assume that $C_0=U_0$ is affine, and write $\\mathcal G_0$ for the\nsheaf on $U_0$.",
    "uses": [],
-   "elementary": null
+   "elementary": true
   },
   {
-   "text": "Step 1 (reduction to the semisimple case). Replacing\n$\\mathcal G_0$ by its semisimplification does not change the local\ncharacteristic polynomials (by the Brauer–Nesbitt argument of\n[lem-wf-real-semisimplification]), hence changes neither\n$\\iota$-reality in the sense of [def-wf-iota-real] nor the\ndeterminant weights of $\\mathcal G_0$. The resulting semisimple Weil\nrepresentation is geometrically semisimple by\n[lem-mg-normal-restriction-semisimple]. We therefore assume that\n$\\mathcal G_0$ is semisimple, with distinct\ndeterminant weights\n\n$$\n\\gamma_1>\\gamma_2>\\cdots>\\gamma_r,\n$$\n\nand write $\\mathcal G_0=\\bigoplus_{i=1}^{r}\\mathcal G_0(i)$ where\n$\\mathcal G_0(i)$ is the direct sum of the irreducible constituents\nof determinant weight $\\gamma_i$, of total rank $r(i)$; note\n$\\sum_i r(i)=\\operatorname{rank}\\mathcal G_0$. In the notation of\n[def-rp-weight-blocks], $\\mathcal G_0(i)=\\mathcal G_0(\\gamma_i)$ is the\nweight block of weight $\\gamma_i$, so this decomposition does not\ndepend on the choice of decomposition into irreducible summands.\nStep 2 (the global upper and lower bounds). Applying\n[lem-rp-upper-bound] to $\\mathcal G_0$ (of largest determinant\nweight $\\gamma_1$) gives, at every closed point $x$ and every\neigenvalue $\\alpha$ of $F_x$ on $\\mathcal G_{0,\\bar x}$,\n\n$$\n|\\iota(\\alpha)|^2\\le q_x^{\\gamma_1}.\n$$",
+   "text": "Step 1 (reduction to the semisimple case). Replacing $\\mathcal G_0$ by its semisimplification does not change the local characteristic polynomials (by the Brauer–Nesbitt argument of [lem-wf-real-semisimplification]), hence changes neither $\\iota$-reality in the sense of [def-wf-iota-real] nor the determinant weights of $\\mathcal G_0$. The resulting semisimple Weil representation is geometrically semisimple by [lem-mg-normal-restriction-semisimple]. We therefore assume that $\\mathcal G_0$ is semisimple, with distinct determinant weights $\\gamma_1>\\gamma_2>\\cdots>\\gamma_r$, and write $\\mathcal G_0=\\bigoplus_{i=1}^{r}\\mathcal G_0(i)$ where $\\mathcal G_0(i)$ is the direct sum of the irreducible constituents of determinant weight $\\gamma_i$, of total rank $r(i)$.",
    "uses": [
     "lem-wf-real-semisimplification",
     "def-wf-iota-real",
-    "lem-mg-normal-restriction-semisimple",
+    "lem-mg-normal-restriction-semisimple"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [def-rp-weight-blocks], $\\mathcal G_0(i)=\\mathcal G_0(\\gamma_i)$ is the weight block of weight $\\gamma_i$, and the decomposition is independent of the choice of decomposition into irreducible summands.",
+   "uses": [
+    "def-rp-weight-blocks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Applying [lem-rp-upper-bound] to $\\mathcal G_0$, whose largest determinant weight is $\\gamma_1$, gives, at every closed point $x$ and every eigenvalue $\\alpha$ of $F_x$ on $\\mathcal G_{0,\\bar x}$, $|\\iota(\\alpha)|^2\\le q_x^{\\gamma_1}$.",
+   "uses": [
     "def-rp-weight-blocks",
     "lem-rp-upper-bound"
    ],
    "elementary": false
   },
   {
-   "text": "The dual sheaf $\\mathcal G_0^\\vee$ is also $\\iota$-real (its local\neigenvalue multiset is the inverse ([p-linear-spectra]) of the conjugation-stable multiset\nof $\\mathcal G_0$), has determinant weights $-\\gamma_i$ (the\ndeterminant of the dual of a constituent is the dual of its\ndeterminant, of weight $-r\\gamma_i$ by\n[lem-tw-dual-negation]; the constituents of the dual are the\nduals of the constituents), hence largest determinant weight\n$-\\gamma_r$, and the upper bound of [lem-rp-upper-bound]\napplied to $\\mathcal G_0^\\vee$ gives\n\n$$\n|\\iota(\\alpha^{-1})|^2\\le q_x^{-\\gamma_r}\n\\qquad\\text{hence}\\qquad\n|\\iota(\\alpha)|^2\\ge q_x^{\\gamma_r}\n$$\n\nfor every eigenvalue $\\alpha$ of $F_x$ on\n$\\mathcal G_{0,\\bar x}$.\nStep 3 (the estimates for each isotypic part). Fix $n\\ge0$ with\n$r(n+1)>0$ (writing $r(i)=0$ for $i>r$). Put\n\n$$\nN:=\\sum_{i=1}^{n}r(i),\\qquad\n\\mathcal T_0:=\\bigwedge\\nolimits^{N+1}\\mathcal G_0.\n$$",
+   "text": "The dual sheaf $\\mathcal G_0^\\vee$ is also $\\iota$-real: its local eigenvalue multiset is the inverse multiset by [p-linear-spectra]. Its constituent determinant weights are $-\\gamma_i$, because dualizing a determinant line negates its punctual weight by [lem-tw-dual-negation]. Thus its largest determinant weight is $-\\gamma_r$, and [lem-rp-upper-bound] applied to the dual gives $|\\iota(\\alpha^{-1})|^2\\le q_x^{-\\gamma_r}$, hence $|\\iota(\\alpha)|^2\\ge q_x^{\\gamma_r}$.",
    "uses": [
     "p-linear-spectra",
     "lem-tw-dual-negation",
@@ -72,14 +90,21 @@
    "elementary": false
   },
   {
-   "text": "In the notation of [def-rp-weight-blocks], $N=N_{\\gamma_{n+1}}$ and\n$\\sum_{i\\le n}r(i)\\gamma_i=B_{\\gamma_{n+1}}$.",
+   "text": "Step 3 (the estimates for each isotypic part). Fix $n\\ge0$ with $r(n+1)>0$ (writing $r(i)=0$ for $i>r$). Put $N:=\\sum_{i=1}^{n}r(i)$ and $\\mathcal T_0:=\\bigwedge^{N+1}\\mathcal G_0$.",
    "uses": [
     "def-rp-weight-blocks"
    ],
    "elementary": false
   },
   {
-   "text": "By [cor-mg-det-weight-exterior] the determinant weights of\n$\\mathcal T_0$ are the sums $\\sum_{i}n_i\\gamma_i$ with\n$0\\le n_i\\le r(i)$ and $\\sum_in_i=N+1$, and the maximum of these\nis\n\n$$\n\\gamma_{n+1}+\\sum_{i=1}^{n}r(i)\\gamma_i,\n$$\n\nattained exactly at $n_i=r(i)$ for $i\\le n$ and $n_{n+1}=1$;\nany other tuple either omits some rank at $i\\le n+1$ or uses an\nindex $i>n+1$, and the weights are strictly decreasing, so the value\nis strictly smaller. The sheaf $\\mathcal T_0$ is $\\iota$-real by\n[lem-rp-exterior-reality], so\n[lem-rp-upper-bound] applied to it gives, at every closed point\n$x$ and every eigenvalue $\\lambda$ of $F_x$ on\n$\\mathcal T_{0,\\bar x}$,\n\n$$\n|\\iota(\\lambda)|^2\\le\nq_x^{\\gamma_{n+1}+\\sum_{i\\le n}r(i)\\gamma_i}.\n$$",
+   "text": "In the notation of [def-rp-weight-blocks], $N=N_{\\gamma_{n+1}}$ and $\\sum_{i\\le n}r(i)\\gamma_i=B_{\\gamma_{n+1}}$.",
+   "uses": [
+    "def-rp-weight-blocks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [cor-mg-det-weight-exterior], the determinant weights of $\\mathcal T_0$ are the sums $\\sum_i n_i\\gamma_i$ with $0\\le n_i\\le r(i)$ and $\\sum_i n_i=N+1$. Since $\\gamma_1>\\cdots>\\gamma_r$, the maximum is $\\gamma_{n+1}+\\sum_{i=1}^{n}r(i)\\gamma_i$, attained at $n_i=r(i)$ for $i\\le n$ and $n_{n+1}=1$; every other admissible tuple is strictly smaller. The sheaf $\\mathcal T_0$ is $\\iota$-real by [lem-rp-exterior-reality], so [lem-rp-upper-bound] gives $|\\iota(\\lambda)|^2\\le q_x^{\\gamma_{n+1}+\\sum_{i\\le n}r(i)\\gamma_i}$ for every eigenvalue $\\lambda$ of $F_x$ on $\\mathcal T_0$.",
    "uses": [
     "cor-mg-det-weight-exterior",
     "lem-rp-exterior-reality",
@@ -88,17 +113,42 @@
    "elementary": false
   },
   {
-   "text": "Take the particular eigenvalue\n\n$$\n\\lambda=\\alpha^{(n+1)}_j\\cdot\n\\prod_{i=1}^{n}\\prod_{j=1}^{r(i)}\\alpha^{(i)}_j,\n$$\n\nwhere the $\\alpha^{(i)}_j$ are the eigenvalues (with multiplicity)\nof $F_x$ on $\\mathcal G_0(i)_{\\bar x}$ and\n$\\alpha^{(n+1)}_j$ is any eigenvalue of $F_x$ on\n$\\mathcal G_0(n+1)_{\\bar x}$: for the admissible tuple\n$n_i=r(i)$ ($i\\le n$), $n_{n+1}=1$ the corresponding summand of\nthe direct-sum decomposition of\n[lem-mg-exterior-direct-sum], together with\n[cor-mg-det-weight-exterior], contains the summand\n\n$$\n\\mathcal L:=\\bigl(\\det\\mathcal G_0(1)\\otimes\\cdots\\otimes\n\\det\\mathcal G_0(n)\\bigr)\\otimes\\mathcal G_0(n+1),\n$$\n\nsince the exterior power in maximal degree of a module is its\ndeterminant line; this nonzero summand carries the displayed\neigenvalue $F_x$. Hence\n\n$$\n|\\iota(\\alpha^{(n+1)}_j)|^2\n\\cdot q_x^{\\sum_{i\\le n}r(i)\\gamma_i}\n\\le q_x^{\\gamma_{n+1}+\\sum_{i\\le n}r(i)\\gamma_i},\n$$\n\nbecause for each $i\\le n$ the product\n\n$$\n\\prod_{j=1}^{r(i)}|\\iota(\\alpha^{(i)}_j)|^2=q_x^{r(i)\\gamma_i}\n$$\n\nis the eigenvalue of the local Frobenius on the determinant line of\nthe isotypic part $\\mathcal G_0(i)$, hence of weight\n$r(i)\\gamma_i$ (by [lem-wf-determinantal-weight-exists] and\n[def-wf-determinantal-weight]: the\ndeterminant of an irreducible constituent of weight $\\gamma$ is a\nrank-one sheaf of weight $r\\gamma$, and the determinants of the\nconstituents tensor up to the determinant of the isotypic part, whose\nweights add). Since this holds for every closed point $x$ and\nevery $j$,\n\n$$\n|\\iota(\\alpha)|^2\\le q_x^{\\gamma_{n+1}}\n$$\n\nfor every eigenvalue $\\alpha$ of $F_x$ on\n$\\mathcal G_0(n+1)_{\\bar x}$. For the lower bound, apply the same\nargument to the dual sheaf $\\mathcal G_0^\\vee$, whose distinct\ndeterminant weights in decreasing order are\n$-\\gamma_r>\\cdots>-\\gamma_1$ and whose isotypic part of weight\n$-\\gamma_i$ is the dual of $\\mathcal G_0(i)$, at the block which is\nthe dual of $\\mathcal G_0(n+1)$ (the $(r-n)$-th block of the dual,\nof weight $-\\gamma_{n+1}$): the same computation, with\n$N^\\vee:=\\sum_{j=n+2}^{r}r(j)$ and the isotypic parts of the\ndual of weights $-\\gamma_r,\\ldots,-\\gamma_{n+2}$, whose determinant\nlines have weights $r(j)(-\\gamma_j)$ by\n[def-wf-determinantal-weight], gives\n\n$$\n|\\iota(\\alpha^{-1})|^2\\le q_x^{-\\gamma_{n+1}},\n\\qquad\\text{i.e.}\\qquad\n|\\iota(\\alpha)|^2\\ge q_x^{\\gamma_{n+1}}.\n$$",
+   "text": "For an eigenvalue $\\alpha^{(n+1)}_j$ of the $\\gamma_{n+1}$ block, the direct-sum decomposition [lem-mg-exterior-direct-sum] contains the summand $\\mathcal L=(\\det\\mathcal G_0(1)\\otimes\\cdots\\otimes\\det\\mathcal G_0(n))\\otimes\\mathcal G_0(n+1)$, using the top-exterior-power determinant identification in [def-real-weil-representation-operations]. Its local Frobenius eigenvalues are, by [p-linear-spectra] (top exterior power and tensor product), the products of all eigenvalues of each $\\mathcal G_0(i)$, $i\\le n$, with one eigenvalue of $\\mathcal G_0(n+1)$, and an eigenvalue of a direct summand of $\\mathcal T_0$ is one of $\\mathcal T_0$. Hence $\\lambda=\\alpha^{(n+1)}_j\\prod_{i=1}^{n}\\prod_{j=1}^{r(i)}\\alpha^{(i)}_j$ is an eigenvalue of $\\mathcal T_0$.",
    "uses": [
     "lem-mg-exterior-direct-sum",
-    "cor-mg-det-weight-exterior",
-    "lem-wf-determinantal-weight-exists",
-    "def-wf-determinantal-weight"
+    "def-real-weil-representation-operations",
+    "p-linear-spectra"
    ],
    "elementary": false
   },
   {
-   "text": "So every eigenvalue satisfies\n$|\\iota(\\alpha)|=q_x^{\\gamma_{n+1}/2}$, which is the punctual\npurity of weight $\\gamma_{n+1}$ of\n[def-weil-punctual-weights] for the constituents of\n$\\mathcal G_0(n+1)$.\nStep 4 (conclusion). The estimate of Step 3 applies to every $n$\nwith $r(n+1)>0$, so every isotypic part $\\mathcal G_0(i)$ — and\nhence every irreducible constituent $\\mathcal W$ of\n$\\mathcal G_0$ — is punctually $\\iota$-pure of weight\n$\\dw_\\iota(\\mathcal W)=\\gamma_i$, as asserted.",
+   "text": "For each $i\\le n$, write $\\mathcal G_0(i)=\\bigoplus_a V_a$ with $V_a$ irreducible of rank $r_a$ and $\\dw_\\iota(V_a)=\\gamma_i$. By [lem-wf-determinantal-weight-exists] and [def-wf-determinantal-weight], $\\det V_a$ is punctually pure of weight $r_a\\gamma_i$, and by [p-linear-spectra] its Frobenius eigenvalue at $x$ is the product of the eigenvalues of $F_x$ on $V_{a,\\bar x}$; by [def-weil-punctual-weights] that product has $|\\iota(\\cdot)|^2=q_x^{r_a\\gamma_i}$. The eigenvalues on $\\mathcal G_0(i)_{\\bar x}$ are the union of those on the $V_{a,\\bar x}$, so, the complex absolute value being multiplicative, $\\prod_{j=1}^{r(i)}|\\iota(\\alpha^{(i)}_j)|^2=q_x^{\\sum_a r_a\\gamma_i}=q_x^{r(i)\\gamma_i}$. Substituting this into the bound of the preceding step (all eigenvalues are nonzero, $F_x$ being invertible) yields $|\\iota(\\alpha^{(n+1)}_j)|^2\\le q_x^{\\gamma_{n+1}}$ for every $j$.",
+   "uses": [
+    "lem-wf-determinantal-weight-exists",
+    "def-wf-determinantal-weight",
+    "p-linear-spectra",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the lower bound, apply the same construction to $\\mathcal G_0^\\vee$, which is semisimple, $\\iota$-real and has determinant weights $-\\gamma_i$ by the preceding steps. Its decreasing determinant weights are $-\\gamma_r>\\cdots>-\\gamma_1$, and its weight block of weight $-\\gamma_i$ in [def-rp-weight-blocks] is the dual of $\\mathcal G_0(i)$; the block dual to $\\mathcal G_0(n+1)$ is the $(r-n)$-th block, of weight $-\\gamma_{n+1}$. Put $N^\\vee=\\sum_{j=n+2}^{r}r(j)$ and $\\mathcal T_0^\\vee=\\bigwedge^{N^\\vee+1}\\mathcal G_0^\\vee$. By [cor-mg-det-weight-exterior] its largest determinant weight is $-\\gamma_{n+1}-\\sum_{j\\ge n+2}r(j)\\gamma_j$, it is $\\iota$-real by [lem-rp-exterior-reality], and [lem-rp-upper-bound] bounds its eigenvalues accordingly. The summand $(\\bigotimes_{j\\ge n+2}\\det\\mathcal G_0(j)^\\vee)\\otimes\\mathcal G_0(n+1)^\\vee$ of [lem-mg-exterior-direct-sum] carries, by [p-linear-spectra], the eigenvalue $\\alpha^{-1}\\prod_{j\\ge n+2}\\prod_k(\\alpha^{(j)}_k)^{-1}$, and the product over block $j$ has $|\\iota(\\cdot)|^2=q_x^{-r(j)\\gamma_j}$ by the calculation of the preceding step and [lem-tw-dual-negation] (equivalently by inverting it). This gives $|\\iota(\\alpha^{-1})|^2\\le q_x^{-\\gamma_{n+1}}$, hence $|\\iota(\\alpha)|^2\\ge q_x^{\\gamma_{n+1}}$.",
+   "uses": [
+    "def-rp-weight-blocks",
+    "cor-mg-det-weight-exterior",
+    "lem-rp-exterior-reality",
+    "lem-rp-upper-bound",
+    "p-linear-spectra",
+    "lem-mg-exterior-direct-sum",
+    "lem-tw-dual-negation",
+    "lem-wf-determinantal-weight-exists",
+    "def-wf-determinantal-weight",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "So every eigenvalue satisfies $|\\iota(\\alpha)|=q_x^{\\gamma_{n+1}/2}$, which is punctual purity of weight $\\gamma_{n+1}$ by [def-weil-punctual-weights]. The estimate applies to every $n$ with $r(n+1)>0$, so every isotypic part and hence every irreducible constituent is punctually pure of its determinant weight, as asserted.",
    "uses": [
     "def-weil-punctual-weights"
    ],
@@ -111,6 +161,7 @@
   "lem-wf-dense-open-pi1-surjective",
   "lem-wf-determinantal-weight-exists",
   "def-wf-determinantal-weight",
+  "def-real-weil-representation-operations",
   "lem-wf-real-semisimplification",
   "lem-mg-normal-restriction-semisimple",
   "def-rp-weight-blocks",
@@ -123,12 +174,41 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-purity/thm-rp-real-lisse-purity-affine.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-purity/thm-rp-real-lisse-purity-affine.proof.md",
+  "place": "Proof, Steps 0–4"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isPunctuallyPure_of_isConstituent_of_isReal|punctually.*pure.*constituent",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every irreducible constituent of a real lisse Weil sheaf is punctually pure of its determinant weight",
+   "results": "Representation.IsIrreducible; Representation.IsIrreducible.mk; RootPairing.GeckConstruction.instIsIrreducible; Irreducible.degree_le_two; Representation.IsIrreducible.casesOn; Representation.IsIrreducible.rec; RootPairing.isSimpleModule_weylGroupRootRep; ModularForm.constℝ_apply. No complete purity theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilGroup.IsPunctuallyPure, IsConstituent, IsReal",
+   "results": "No hits; unknown identifier 'WeilGroup.IsPunctuallyPure'.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "purity of every irreducible constituent of an iota-real lisse Weil sheaf on a smooth geometrically connected curve by determinant weight",
+   "results": "WittVector.isocrystal_classification; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced; FDRep.simple_iff_char_is_norm_one; AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced; FDRep.simple_iff_end_is_rank_one; FDRep.finrank_hom_simple_simple; AlgebraicGeometry.isReduced_of_isIntegral; RootPairing.isSimpleModule_weylGroupRootRep. No complete purity theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_remark"
@@ -283,5 +363,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-purity"
+ "unit": "sk-p-real-purity",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-rp-real-lisse-purity-affine",
+  "worker": "stage1",
+  "group": "N6",
+  "summary": "Audited the imported proof against the current main-20261015 blueprint and the Lean reference declaration. The theorem declaration still contains sorry, so it is not an attachment. No new nodes were needed: all non-elementary dependencies are existing DAG nodes. Refined the proof into sixteen cited steps, marked the local-Frobenius reduction elementary, added the determinant-operation and scalar-weight citations, and removed the imported null elementary flag and long hidden argument.",
+  "blueprint": "Realizes Step 0 (affine reduction) in steps 1–5, the semisimple and global bounds in steps 6–8, and the exterior-power block estimate and conclusion in steps 9–14 of the main-20261015 proof."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-631da27f7",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-631da27f7 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is verbatim the main-20261015 statement (order 3011) and is not weakened; the coefficient category is lisse Qlbar-Weil sheaves throughout. There are no new nodes and no duplicates (rg over dag/nodes), the unit route is satisfied and there are no cycles. Steps 0-4 (16 steps) match the blueprint proof. I checked each step against the hypotheses of the cited statements: lem-wf-dense-open-pi1-surjective (4) for a nonempty open of a curve in the sense of d-real-setup; lem-wf-determinantal-weight-exists needs a normal curve and smooth implies normal; lem-rp-upper-bound needs a smooth geometrically connected affine curve and is applied only on U_0; cor-mg-det-weight-exterior needs geometric semisimplicity, which lem-mg-normal-restriction-semisimple supplies. The maximum of the exterior weights is right, and so is the dual lower bound with N^vee = sum_{j>=n+2} r(j). Edge cases tested: zero sheaf, a single block, Qlbar(-1)+Qlbar, negative weights, proper C_0. Batch-5 check: lem-tw-multiplicativity reaches sec-trace-formula only through definitions (def-weil-frobenius-module-weights -> sk-def-frobmod, the definition of a Frobenius module), not through any step of the trace formula or of Poincare duality. It was unneeded anyway, so I removed it. FIX, one corrected item file: (1) step 13 now cites p-linear-spectra for the eigenvalue of the summand (C1); (2) steps 14-15 drop lem-tw-multiplicativity and write out the determinant-modulus calculation through p-linear-spectra and def-weil-punctual-weights, and step 15 now cites the nodes that 'the same construction' uses (cor-mg-det-weight-exterior, lem-rp-exterior-reality, lem-rp-upper-bound, def-rp-weight-blocks) (C1); (3) stmt_deps gains d-real-setup, def-wf-iota-real, def-weil-punctual-weights and def-wf-determinantal-weight (B3). proof_deps is recomputed and now equals the blueprint uses. No tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ }
 }
