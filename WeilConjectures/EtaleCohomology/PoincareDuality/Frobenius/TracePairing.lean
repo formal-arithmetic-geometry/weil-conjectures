@@ -84,6 +84,8 @@ theorem bijective_derivedTensor_map_comp_counit_comp_coefficientEvaluation (K : 
   rw [e]
   exact (Equiv.bijective _).comp (Equiv.bijective _)
 
+set_option maxRecDepth 4000 in
+omit [(R(a)_![A]).IsLeftAdjoint] in
 omit [HasSmallSiteSheafify A] in
 /-- **The pairing of a trace which is a counit is perfect** (form with the trace read on
 `Ra_!(Λ_X[n])`). -/

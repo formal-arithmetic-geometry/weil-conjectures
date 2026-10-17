@@ -1580,6 +1580,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import WeilConjectures.AlgebraicGeometry.ProEtale.LocalProperties
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Sheafification
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProfiniteCoefficientCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
@@ -2760,6 +2761,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism.Point
+public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism.PointClass
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
@@ -4006,8 +4008,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
-public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeilExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
+public import WeilConjectures.SixFunctors.Etale.Derived.DiagonalSectionRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
@@ -4357,6 +4359,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
@@ -4748,6 +4751,7 @@ public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensor
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
