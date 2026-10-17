@@ -45,6 +45,7 @@ open scoped AlgebraicGeometry.ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l U)
 
@@ -72,8 +73,17 @@ noncomputable abbrev directImageCounit' :
   (𝟙 _ : (j̄)^*[_].obj ((directImage j).obj F).obj.carrier.X ⟶
     ((upperStar j).obj ((directImage j).obj F)).obj.carrier.X) ≫ directImageCounit j F
 
-set_option maxHeartbeats 1000000 in
--- unifying the underlying sheaves of `j^* j_* F` and `j̄^* j̄_* F` unfolds the pullback
+set_option maxHeartbeats 4000000 in
+-- unifying the Weil structures of `j^* j_* F` and of the source of the counit is slow
+/-- The counit `j^* j_* F ⟶ F` commutes with the Weil structures. -/
+lemma directImageCounit_naturality :
+    ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+        (directImageCounit j F) ≫ F.frobeniusStr =
+      ((upperStar j).obj ((directImage j).obj F)).frobeniusStr ≫ directImageCounit j F :=
+  frobeniusStr_naturality ((upperStarLowerStarAdjunction j).counit.app F)
+
+set_option maxHeartbeats 4000000 in
+-- unifying the underlying sheaves of `j^* j_* F` and `j̄^* j̄_* F` is slow
 /-- The counit `j̄^* j̄_* F ⟶ F` is compatible with the Weil structures. -/
 lemma directImageCounit_frobeniusStr_compatible :
     (ProEtale.upperStarComp _ (U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
@@ -89,6 +99,6 @@ lemma directImageCounit_frobeniusStr_compatible :
         (j̄)^*[_].map ((directImage j).obj F).frobeniusStr ≫ directImageCounit' j F :=
   comp_map_comp_eq_of_compatible _ _ _ _ _ _ _ _ _
     (upperStar_frobeniusStr_compatible j ((directImage j).obj F))
-    (frobeniusStr_naturality ((upperStarLowerStarAdjunction j).counit.app F))
+    (directImageCounit_naturality j F)
 
 end AlgebraicGeometry.WeilSheaf

@@ -85,16 +85,35 @@ lemma exists_geometricFiberPointOfFinitePoint_comp_geometricFiberProj (x : X.fin
   have : Module.Finite k (X.residueField x.1) := Module.Finite.of_finite
   exact ⟨CommRingCat.ofHom
     (IsAlgClosed.lift : X.residueField x.1 →ₐ[k] AlgebraicClosure k).toRingHom,
-    RingHom.ext fun c ↦ (IsAlgClosed.lift : X.residueField x.1 →ₐ[k] AlgebraicClosure k).commutes c,
-    f.geometricFiberPoint_comp_geometricFiberProj _ _ _⟩
+    RingHom.ext fun c ↦
+      (IsAlgClosed.lift : X.residueField x.1 →ₐ[k] AlgebraicClosure k).commutes c,
+    f.geometricFiberPoint_comp_geometricFiberProj (K := X.residueField x.1) IsAlgClosed.lift
+      (X.fromSpecResidueField x.1) (f.specMap_residueFieldAlgebraMap x.1).symm⟩
 
 lemma geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure
     (x : X.finitePoints) :
     f.geometricFiberPointOfFinitePoint x ≫ f.geometricFiberToAlgebraicClosure = 𝟙 _ :=
   letI := (f.residueFieldAlgebraMap x.1).toAlgebra
-  f.geometricFiberPoint_comp_geometricFiberToAlgebraicClosure _ _ _
+  have : Finite (X.residueField x.1) := X.mem_finitePoints.1 x.2
+  have : Module.Finite k (X.residueField x.1) := Module.Finite.of_finite
+  f.geometricFiberPoint_comp_geometricFiberToAlgebraicClosure (K := X.residueField x.1)
+    IsAlgClosed.lift (X.fromSpecResidueField x.1) (f.specMap_residueFieldAlgebraMap x.1).symm
 
 end Scheme.Hom
+
+lemma specMap_apply_asIdeal {B B' : Type u} [CommRing B] [CommRing B'] (f : B →+* B')
+    (y : Spec (.of B')) :
+    (Spec.map (CommRingCat.ofHom f) y).asIdeal = Ideal.comap f y.asIdeal :=
+  rfl
+
+/-- A ring map from a local ring to a field whose kernel is the maximal ideal maps the closed
+point to the closed point. -/
+lemma specMap_closedPoint_of_forall_eq_zero_iff {B L : Type u} [CommRing B] [IsLocalRing B]
+    [Field L] (r : B →+* L) (hr : ∀ a, r a = 0 ↔ ¬ IsUnit a) :
+    Spec.map (CommRingCat.ofHom r) (closedPoint L) = closedPoint B := by
+  have : IsLocalHom r := ⟨fun a ha ↦ not_not.1 fun h ↦ ha.ne_zero ((hr a).2 h)⟩
+  exact IsLocalRing.comap_closedPoint r
+
 section Boundary
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {C : Scheme.{u}} [C.Over (Spec (.of k₀))]
@@ -102,6 +121,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {C : Scheme.{u}} [C.Over (Sp
   {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
   [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω] [IsSepClosed Ω]
   (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal]
+
+include hW
 
 omit [IsDedekindDomain Γ(C, W)] [IsGalois C.functionField Ω] [IsSepClosed Ω] in
 lemma injective_algebraMap_sections_of_isAffineOpen :
@@ -129,6 +150,7 @@ theorem isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen :
 
 variable (x : C.finitePoints) (hxW : x.1 ∈ W) [Q.LiesOver (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal]
 
+omit [IsSepClosed Ω] in
 include hxW in
 /-- The inertia invariants `B_Q^{I_Q}` are ind-étale over `Γ(C, W)`. -/
 theorem indEtale_inertiaInvariants_of_isAffineOpen :
@@ -172,9 +194,9 @@ theorem exists_algebraicClosure_inertiaInvariants :
   letI : Algebra k₀ Γ(C, W) := φ₀.toAlgebra
   have : IsScalarTower k₀ Γ(C, W) Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let ε₀ : AlgebraicClosure k₀ →ₐ[k₀] Ω := IsSepClosed.lift
-  have hint₀ (z : AlgebraicClosure k₀) : IsIntegral k₀ (ε₀ z) :=
+  have hint₀ (z : AlgebraicClosure k₀) : _root_.IsIntegral k₀ (ε₀ z) :=
     (Algebra.IsIntegral.isIntegral (R := k₀) z).map ε₀
-  have hint (z : AlgebraicClosure k₀) : IsIntegral Γ(C, W) (ε₀ z) := (hint₀ z).tower_top
+  have hint (z : AlgebraicClosure k₀) : _root_.IsIntegral Γ(C, W) (ε₀ z) := (hint₀ z).tower_top
   -- inertia fixes the image of `ε₀`
   have hfix (z : AlgebraicClosure k₀) : ∀ σ ∈ Q.inertia Gal(Ω/K),
       σ • (⟨ε₀ z, hint z⟩ : integralClosure Γ(C, W) Ω) = ⟨ε₀ z, hint z⟩ := by
@@ -186,10 +208,10 @@ theorem exists_algebraicClosure_inertiaInvariants :
           rw [IsScalarTower.algebraMap_apply Γ(C, W) K Ω, AlgEquiv.commutes] }
     set w : integralClosure Γ(C, W) Ω := σ • ⟨ε₀ z, hint z⟩ - ⟨ε₀ z, hint z⟩
     have hwQ : w ∈ Q := hσ _
-    have hwint : IsIntegral k₀ (w : Ω) := ((hint₀ z).map σ').sub (hint₀ z)
+    have hwint : _root_.IsIntegral k₀ (w : Ω) := ((hint₀ z).map σ').sub (hint₀ z)
     by_contra hne
     have hw0 : (w : Ω) ≠ 0 := fun h ↦ hne (sub_eq_zero.1 (Subtype.ext h))
-    have hinv : IsIntegral Γ(C, W) ((w : Ω)⁻¹) :=
+    have hinv : _root_.IsIntegral Γ(C, W) ((w : Ω)⁻¹) :=
       (isAlgebraic_iff_isIntegral.1 hwint.isAlgebraic.inv).tower_top
     have h1 : (⟨(w : Ω)⁻¹, hinv⟩ : integralClosure Γ(C, W) Ω) * w = 1 :=
       Subtype.ext (inv_mul_cancel₀ hw0)
@@ -217,12 +239,129 @@ theorem exists_algebraicClosure_inertiaInvariants :
     exact (RingEquiv.ofBijective ρ hρ).symm_apply_apply z
   · change θ (residue A a) = 0 ↔ _
     rw [map_eq_zero_iff θ θ.injective, residue_eq_zero_iff, mem_maximalIdeal, mem_nonunits_iff]
-  · ext c
+  · refine RingHom.ext fun c ↦ ?_
     apply Ideal.injective_inertiaInvariantsToField K Q
     change Ideal.inertiaInvariantsToField K Q (algebraMap Γ(C, W) A (φ₀ c)) =
       Ideal.inertiaInvariantsToField K Q (ε (algebraMap k₀ (AlgebraicClosure k₀) c))
     rw [AlgHom.commutes, hε, ε₀.commutes]
     rfl
+
+/-- The morphism `Spec B_Q^{I_Q} ⟶ Spec Γ(C, W) ⟶ C`. -/
+noncomputable abbrev specInertiaInvariantsTo :
+    Spec (.of (Ideal.inertiaInvariants C.functionField Q)) ⟶ C :=
+  Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))) ≫
+    hW.fromSpec
+
+omit [Finite k₀] [C.Over (Spec (.of k₀))] [IsDedekindDomain Γ(C, W)] [IsGalois C.functionField Ω]
+  [IsSepClosed Ω] [Q.IsMaximal] in
+include hxW in
+lemma algebraMap_inertiaInvariants_mem_nonunits_iff [Q.IsMaximal] (a : Γ(C, W)) :
+    ¬ IsUnit (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) ↔
+      a ∈ (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal := by
+  set m := (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal
+  refine ⟨fun hu ↦ by_contra fun ham ↦
+    hu (Ideal.isUnit_algebraMap_inertiaInvariants _ m Q ham), fun ham hu ↦ ?_⟩
+  have hu' : IsUnit (algebraMap Γ(C, W) (Localization.AtPrime Q) a) :=
+    hu.map (Ideal.inertiaInvariants C.functionField Q).val
+  rw [IsScalarTower.algebraMap_apply Γ(C, W) (integralClosure Γ(C, W) Ω)
+    (Localization.AtPrime Q), IsLocalization.AtPrime.isUnit_to_map_iff _ Q] at hu'
+  rw [Ideal.over_def Q m] at ham
+  exact hu' ham
+
+include hxW in
+/-- **The geometric point.** There are ring maps `ε : k̄ ⟶ B_Q^{I_Q}` and `r : B_Q^{I_Q} ⟶ k̄`
+with `r ∘ ε = id` and kernel of `r` the maximal ideal, such that `Spec B_Q^{I_Q} ⟶ C` and
+`Spec ε` define a morphism to `C̄ = C ×_{k₀} k̄` and `Spec r` composed with `Spec B_Q^{I_Q} ⟶ C`
+is the geometric point `x̄ ⟶ C` over `x`. The maps of
+`AlgebraicGeometry.exists_algebraicClosure_inertiaInvariants` are twisted by a `k₀`-automorphism
+of `k̄` matching the embedding `κ(x) ↪ k̄` chosen by `x̄`. -/
+theorem exists_algebraicClosure_inertiaInvariants_geometricPoint :
+    ∃ (ε : AlgebraicClosure k₀ →+* Ideal.inertiaInvariants C.functionField Q)
+      (r : Ideal.inertiaInvariants C.functionField Q →+* AlgebraicClosure k₀),
+      r.comp ε = RingHom.id _ ∧ (∀ a, r a = 0 ↔ ¬ IsUnit a) ∧
+      specInertiaInvariantsTo hW Q ≫ (C ↘ Spec (.of k₀)) =
+        Spec.map (CommRingCat.ofHom ε) ≫ (Scheme.specAlgebraicClosure k₀).hom ∧
+      Spec.map (CommRingCat.ofHom r) ≫ specInertiaInvariantsTo hW Q =
+        (C ↘ Spec (.of k₀)).geometricFiberPointOfFinitePoint x ≫
+          (C ↘ Spec (.of k₀)).geometricFiberProj := by
+  classical
+  set A := Ideal.inertiaInvariants C.functionField Q
+  set p := C ↘ Spec (.of k₀)
+  set gA := specInertiaInvariantsTo hW Q
+  have := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
+  obtain ⟨ε, r₀, hrε, hker, hφ⟩ :=
+    exists_algebraicClosure_inertiaInvariants (k₀ := k₀) hW Q x hxW
+  -- `Spec B_Q^{I_Q} ⟶ C ⟶ Spec k₀` is `Spec` of the structure map
+  have hgAp (ε' : AlgebraicClosure k₀ →+* A)
+      (hε' : ε'.comp (algebraMap k₀ (AlgebraicClosure k₀)) =
+        ε.comp (algebraMap k₀ (AlgebraicClosure k₀))) :
+      gA ≫ p = Spec.map (CommRingCat.ofHom ε') ≫ (Scheme.specAlgebraicClosure k₀).hom := by
+    have hfp : hW.fromSpec ≫ p = Spec.map (CommRingCat.ofHom (sectionsStructHom (k₀ := k₀) hW)) := by
+      rw [CommRingCat.ofHom_hom, Spec.map_preimage]
+    simp only [gA, specInertiaInvariantsTo, Category.assoc, hfp, Scheme.specAlgebraicClosure,
+      Over.mk_hom, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ, hε']
+  -- the point `Spec r₀ ⟶ C` lies over `x`
+  set s₀ := Spec.map (CommRingCat.ofHom r₀) ≫ gA
+  have hpt : s₀ (closedPoint (AlgebraicClosure k₀)) = x.1 := by
+    have hcl := specMap_closedPoint_of_forall_eq_zero_iff r₀ hker
+    have hm : Ideal.comap (algebraMap Γ(C, W) A) (maximalIdeal A) =
+        (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal := Ideal.ext fun a ↦ by
+      rw [Ideal.mem_comap, mem_maximalIdeal, mem_nonunits_iff,
+        algebraMap_inertiaInvariants_mem_nonunits_iff hW Q x hxW]
+    have h1 : Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) A)) (closedPoint A) =
+        hW.primeIdealOf ⟨x.1, hxW⟩ := PrimeSpectrum.ext ((specMap_apply_asIdeal _ _).trans hm)
+    rw [← hW.fromSpec_primeIdealOf ⟨x.1, hxW⟩, ← h1, ← hcl]
+    rfl
+  -- it factors through `κ(x)`
+  obtain ⟨ι', hι'⟩ : ∃ ι' : C.residueField x.1 ⟶ CommRingCat.of (AlgebraicClosure k₀),
+      s₀ = Spec.map ι' ≫ C.fromSpecResidueField x.1 :=
+    ⟨(C.residueFieldCongr hpt.symm).hom ≫ C.descResidueField (Scheme.stalkClosedPointTo s₀), by
+      rw [Spec.map_comp, Category.assoc, Scheme.residueFieldCongr_fromSpecResidueField,
+        Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField]⟩
+  have hcond₀ : s₀ ≫ p = 𝟙 _ ≫ (Scheme.specAlgebraicClosure k₀).hom := by
+    rw [Category.assoc, hgAp ε rfl, ← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+      hrε, Category.id_comp]
+    rfl
+  have hι'k : ι'.hom.comp (p.residueFieldAlgebraMap x.1) =
+      algebraMap k₀ (AlgebraicClosure k₀) := by
+    have := p.residueFieldAlgebraMap_comp_eq_of_comp_geometricFiberProj
+      (pullback.lift s₀ (𝟙 _) hcond₀) ι' (by
+        rw [← hι']
+        exact pullback.lift_fst _ _ _)
+    rw [show pullback.lift s₀ (𝟙 _) hcond₀ ≫ p.geometricFiberToAlgebraicClosure = 𝟙 _ from
+      pullback.lift_snd _ _ _, Spec.preimage_id] at this
+    exact this
+  -- the twist `τ` matching `ι'` with the embedding chosen by `x̄`
+  obtain ⟨ι, hιk, hι⟩ := p.exists_geometricFiberPointOfFinitePoint_comp_geometricFiberProj x
+  letI : Algebra (C.residueField x.1) (AlgebraicClosure k₀) := ι'.hom.toAlgebra
+  letI : Algebra k₀ (C.residueField x.1) := (p.residueFieldAlgebraMap x.1).toAlgebra
+  have : IsScalarTower k₀ (C.residueField x.1) (AlgebraicClosure k₀) :=
+    IsScalarTower.of_algebraMap_eq fun c ↦ (RingHom.congr_fun hι'k c).symm
+  have : Algebra.IsAlgebraic (C.residueField x.1) (AlgebraicClosure k₀) :=
+    Algebra.IsAlgebraic.tower_top k₀
+  let ιA : C.residueField x.1 →ₐ[k₀] AlgebraicClosure k₀ :=
+    { ι.hom with commutes' := fun c ↦ RingHom.congr_fun hιk c }
+  obtain ⟨τ, hτ⟩ := IsAlgClosed.surjective_domRestrict_of_isAlgebraic (K := k₀)
+    (L := C.residueField x.1) (M := AlgebraicClosure k₀) (E := AlgebraicClosure k₀) ιA
+  have hτι (y : C.residueField x.1) : τ (ι'.hom y) = ι.hom y := AlgHom.congr_fun hτ y
+  let τe : AlgebraicClosure k₀ ≃ₐ[k₀] AlgebraicClosure k₀ :=
+    AlgEquiv.ofBijective τ (Algebra.IsAlgebraic.algHom_bijective τ)
+  refine ⟨ε.comp τe.symm.toRingEquiv.toRingHom, τe.toRingEquiv.toRingHom.comp r₀, ?_, fun a ↦ ?_,
+    hgAp _ ?_, ?_⟩
+  · refine RingHom.ext fun z ↦ ?_
+    change τe (r₀ (ε (τe.symm z))) = z
+    rw [show r₀ (ε (τe.symm z)) = τe.symm z from RingHom.congr_fun hrε _, τe.apply_symm_apply]
+  · change τe (r₀ a) = 0 ↔ _
+    rw [map_eq_zero_iff τe τe.injective, hker]
+  · refine RingHom.ext fun c ↦ ?_
+    change ε (τe.symm (algebraMap k₀ _ c)) = _
+    rw [AlgEquiv.commutes]
+    rfl
+  · have hτ' : ι' ≫ CommRingCat.ofHom τe.toRingEquiv.toRingHom = ι := by
+      ext y
+      exact hτι y
+    rw [hι, ← hτ', Spec.map_comp, Category.assoc, ← hι', CommRingCat.ofHom_comp, Spec.map_comp,
+      Category.assoc]
 
 end Boundary
 
