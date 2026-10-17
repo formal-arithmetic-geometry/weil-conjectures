@@ -25,7 +25,8 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "lem-coef-presentable-infinity-adjoints"
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-infinity-yoneda-presheaf-limits"
  ],
  "proof": [
   {
@@ -280,5 +281,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0df0fddf2",
+  "group": "NL",
+  "result": "fix",
+  "note": "Statement, dependencies, universes, edge cases, canonical maps, and verbatim signature checked; per-file compilation passed cleanly. review.md records findings. fixes/ contains the complete replacement report with a real independent second reading and corrected citations. No Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinitySmallLocalizationSaturation",
+  "declaration": "SSet.Enhanced.infinity_small_localization_saturation",
+  "file": "lean/Sheaf/CategoryTheory/InfinitySmallLocalizationSaturation.lean",
+  "statement": "theorem infinity_small_localization_saturation (C : SSet.{max (u + 1) v}) [Quasicategory C] (hC : SSet.Presentability.IsPresentable.{u, v} C) (S : Set (C _⦋1⦌)) (hS : Small.{u} S) (P : C _⦋0⦌ → Prop) (hP : ∀ Z : C _⦋0⦌, P Z ↔ ∀ s : C _⦋1⦌, s ∈ S → IsWeakHomotopyEquivalence (canonicalPrecompositionMap (C.δ 1 s) (C.δ 0 s) Z s rfl rfl)) (L : C ⟶ (fullSubcomplex C P).toSSet) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (fullSubcomplex C P).ι) : (∀ f : C _⦋1⦌, (IsEquivalenceEdge (fullSubcomplex C P).toSSet (L.app _ f) ↔ ∀ Z : C _⦋0⦌, P Z → IsWeakHomotopyEquivalence (canonicalPrecompositionMap (C.δ 1 f) (C.δ 0 f) Z f rfl rfl)) ∧ (IsEquivalenceEdge (fullSubcomplex C P).toSSet (L.app _ f) ↔ strongSaturation.{u, max (u + 1) v} C S f)) ∧ (∀ X : C _⦋0⦌, strongSaturation.{u, max (u + 1) v} C S ((evaluation C C X).app _ adj.unitEdge)) ∧ SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (arrowCategory C) ∧ (∀ (J : SSet.{max (u + 1) v}), SSet.Presentability.IsSmall.{u, max (u + 1) v} J → ∀ (F : J ⟶ arrowCategory C) (t : (coconeCategory F) _⦋0⦌), IsColimiting F t ↔ YonedaLimits.ImageCoconeIsColimit (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 0)) F t ∧ YonedaLimits.ImageCoconeIsColimit (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 1)) F t)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

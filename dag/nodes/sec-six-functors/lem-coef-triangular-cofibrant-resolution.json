@@ -11,7 +11,10 @@
  },
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-unmarked-straightening-quillen",
+  "lem-coef-marked-cone-external-product"
  ],
  "proof": [
   {
@@ -192,5 +195,35 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-09d296fc6 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is correct and unchanged, and there are no new nodes. I read the full statements of the 4 cited nodes, plus lem-coef-kan-quillen-right-proper and lem-coef-small-object-cell-factorization. I also read the citer lem-coef-directed-enriched-amalgamation, whose steps 1 and 3-6 use every clause, including functoriality. HTT A.3.3.2/A.3.3.5 and Bergner (C1)/(C2) and Def. 2.1 are background only. Small cases tested: V empty, a single object in each block, and D(u,v) empty. Duplicate check (poset-filtered resolution, extreme bimodule attachment, cone-boundary cells, rg for collage) found nothing. I found three repairable faults, all fixed in the proof steps of fixes/dag/nodes/sec-six-functors/lem-coef-triangular-cofibrant-resolution.json. (1) C4: steps 3-4 used a free-cell retract description of cofibrant M that is in no cited statement. Step 1 now builds M by an explicit countable small-object iteration over the free cells I(i,-)⊗(∂Δ^n→Δ^n). (2) E5: functoriality across a change of index category I→I' was only asserted, and the citer relies on it. Step 1 now gives the naturality explicitly, by sending each square at i to its image square at ψ(i); it is strict and needs no injectivity. (3) C3/C4: step 3 concluded cofibrancy from 'C is a retract of a free map', but lem-coef-fixed-object-simplicial-free-calculus states only the other direction. Step 3 now proves the collage functor is a left adjoint under C_U⊔C_V and that the collage of a free cell is a pushout of F(∂Δ^n)→F(Δ^n). That map lifts against local trivial Kan fibrations, by the free-arrow adjunction and Kan-Quillen; hence C_U⊔C_V→C is a cofibration of sCat_O and so a Bergner cofibration, and the remaining conclusions follow from the coproduct. Step 4 now cites Kan-Quillen for monomorphisms being cofibrations and gives the left-Quillen argument. Step 5 is marked elementary. proof_deps gain two same-unit nodes, with no cycle. tool_uses: none.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29ada27b1",
+  "group": "NN",
+  "result": "pass",
+  "note": "Statement and Lean records match; dependencies, docstrings, edge cases, report sections, and scompile evidence all pass. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TriangularCofibrantResolution",
+  "declaration": "SSet.TriangularResolution.triangular_cofibrant_resolution",
+  "declarations": [
+   "SSet.TriangularResolution.Input",
+   "SSet.TriangularResolution.InputMap",
+   "SSet.TriangularResolution.InputMap.id",
+   "SSet.TriangularResolution.InputMap.comp",
+   "SSet.TriangularResolution.mixedIndex",
+   "SSet.TriangularResolution.mixedAction",
+   "SSet.TriangularResolution.Resolution",
+   "SSet.TriangularResolution.FunctorialResolutions",
+   "SSet.TriangularResolution.triangular_cofibrant_resolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TriangularCofibrantResolution.lean",
+  "statement": "theorem triangular_cofibrant_resolution (Bergner : BergnerModelData.{u}) : Nonempty (FunctorialResolutions Bergner)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary records spell out all clauses of this single theorem, including a simultaneous functorial choice over arbitrary block maps. Reuses the landed fixed-object category, enriched product, enriched transformations and projective lifting class; three already-landed owning nodes are added to stmt_deps. Cofibrancy is the projective left lifting property of the initial map, universally over initial objects, so no chosen diagram-model structure or arbitrary replacement is extracted from a sorry. All data definitions are explicit; only the main theorem is postponed."
  }
 }

@@ -145,5 +145,46 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-beb24a492 (reviewer sub-agent of L); spot-checked: I read the item in full, its four steps, the cited nodes def-weil-size-convention, def-weil-pbc-module-tensor-product and def-weil-abstract-derived-category, the parent lem-coef-dg-quotient-hom-cone (step 6 is its only citer), and the siblings lem-coef-dg-two-sided-bar-derived-tensor and lem-coef-contraction-word-bar-faces. The statement is correct with no flatness or boundedness assumptions and is not weakened. Degree count: Phi_n(x) has degree sum|a_j|-(n+1), which is the degree of x in V_n[n+1]. Differential: for the term differentiating a_j, the W-side exponent is alpha+sum_{k<j}|a_k|-j and the V-side exponent after the shift and Phi is n+1+sum_{k<j}|a_k|+alpha+(n+1-j); they differ by 2n+2. I checked this by hand at n=0 and by brute force for all n=0..4 and all degree tuples in [-3,3]^{n+2}, with zero parity mismatches. The internal part of -d_B on V_n[n+1] is (-1)^{n+1}d_{V_n}, which is what parent step 6 needs, and the Phi and alpha formulas agree verbatim with the parent and the bar-faces sibling. Step 1 is well defined because the sign is constant on each multidegree summand; the wording is terse but correct. In step 2 the inverse composites multiply by (-1)^{2alpha}=1 and naturality is clear. Step 4 is genuinely elementary. All uses are definitions or Mathlib leaves, so there is no route issue and no tool_uses. No new nodes were created. Duplicate search (rg for interleav and Koszul/shift sign wording over dag/nodes) found no node stating this comparison. Drinfeld is not archived under literature/; the worker recorded WANTED and marked the proof agent-written, which is correct. The Mathlib search record covers all three required kinds. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-706e54856",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Mathematics, all statement clauses, dependencies, universes, docstrings, edge cases and verbatim signature checked. Complete fixes replace three local arithmetic tactic proofs with existing lemmas and append the independent reading. Original and corrected modules pass scompile.py without diagnostics; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.InterleavedTensorSuspension",
+  "declaration": "CategoryTheory.interleavedTensorSuspension",
+  "declarations": [
+   "CategoryTheory.Coeff",
+   "CategoryTheory.CoefficientComplex",
+   "CategoryTheory.suspensionGenerator",
+   "CategoryTheory.tensorComplex",
+   "CategoryTheory.tensorMap",
+   "CategoryTheory.iteratedTensor",
+   "CategoryTheory.ordinaryTensor",
+   "CategoryTheory.iteratedTensorMap",
+   "CategoryTheory.ordinaryTensorMap",
+   "CategoryTheory.interleavedTensor",
+   "CategoryTheory.interleavedTensorMap",
+   "CategoryTheory.signExponent",
+   "CategoryTheory.tensorComplexPure",
+   "CategoryTheory.suspensionElement",
+   "CategoryTheory.tensorDegree",
+   "CategoryTheory.iteratedTensorPure",
+   "CategoryTheory.shiftedOrdinaryTensorPure",
+   "CategoryTheory.interleavedTensorPure",
+   "CategoryTheory.interleavedTensorSuspension"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/InterleavedTensorSuspension.lean",
+  "statement": "theorem interleavedTensorSuspension (n : ℕ) : ∃ Φ : ∀ K : Fin (n + 2) → CoefficientComplex.{u}, (ordinaryTensor n K)⟦(n + 1 : ℤ)⟧ ≅ interleavedTensor n K, (∀ (K : Fin (n + 2) → CoefficientComplex.{u}) (a : Fin (n + 2) → ℤ) (x : ∀ j, (K j).X (a j)), ((Φ K).hom.f (tensorDegree (n + 1) a - (n + 1 : ℤ))) (shiftedOrdinaryTensorPure n K a x) = (signExponent n a).negOnePow • interleavedTensorPure n K a x) ∧ (∀ (K : Fin (n + 2) → CoefficientComplex.{u}) (a : Fin (n + 2) → ℤ) (x : ∀ j, (K j).X (a j)), ((Φ K).inv.f (tensorDegree (n + 1) a - (n + 1 : ℤ))) (interleavedTensorPure n K a x) = (signExponent n a).negOnePow • shiftedOrdinaryTensorPure n K a x) ∧ (∀ (K L : Fin (n + 2) → CoefficientComplex.{u}) (f : ∀ j, K j ⟶ L j), (shiftFunctor (CoefficientComplex.{u}) (n + 1 : ℤ)).map (ordinaryTensorMap n f) ≫ (Φ L).hom = (Φ K).hom ≫ interleavedTensorMap n K L f) ∧ (∀ (K : Fin (n + 2) → CoefficientComplex.{u}) (i j : ℤ), (Φ K).hom.f i ≫ (interleavedTensor n K).d i j = ((ordinaryTensor n K).shiftFunctorObjXIso (n + 1 : ℤ) i (i + (n + 1 : ℤ)) rfl).hom ≫ ((n + 1 : ℤ).negOnePow • (ordinaryTensor n K).d (i + (n + 1 : ℤ)) (j + (n + 1 : ℤ))) ≫ ((ordinaryTensor n K).shiftFunctorObjXIso (n + 1 : ℤ) j (j + (n + 1 : ℤ)) rfl).inv ≫ (Φ K).hom.f j)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repairs H3/H8 at returned head 51322f4b6b56: the statement prescribes both sign formulas on actual homogeneous pure tensors, quantifies one comparison family before all naturality maps, and displays the shifted differential sign. Every helper is documented and has real data; only the main theorem is postponed.",
+  "fixed_by": "NT-stage2-Codex-706e54856"
  }
 }
