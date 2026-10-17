@@ -368,7 +368,6 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso
       ((e₂.app K).symm ≪≫ asIso (F.map φ) ≪≫ e₁.symm))
 
-#exit
 variable [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [HasCompactification aX]
@@ -506,7 +505,7 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
     _ hN (𝟙 _) fun Y g h hY ↦ ?_).of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
-  have hY0 : IsZero Y := (Triangle.isZero₃_iff_isIso₁ _ hY).2 (by dsimp; infer_instance)
+  have hY0 : IsZero Y := (Triangle.isZero₃_iff_isIso₁ _ hY).2 (inferInstanceAs (IsIso (𝟙 _)))
   exact ⟨⟨0, hY0.eq_of_src _ _, hY0.eq_of_src _ _⟩⟩
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
