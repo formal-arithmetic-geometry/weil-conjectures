@@ -45,10 +45,11 @@
    }
   },
   {
-   "text": "Keep such a filtered slice diagram, and select any collection $A$ of base arrows over which every $p_i$ has cocartesian lifts preserved by the transition functors. This includes $A$ all arrows of $B$, and later $A$ the inert arrows of $\\Delta^{\\mathrm{op}}$. We prove that every stage cocartesian lift over an arrow of $A$ remains cocartesian in $E$. Let $e:x\\to y$ in $E_i$ be such a lift. For a testing object $z\\in E$, the object-representation clause of [lem-coef-cat-infinity-filtered-finite-calculus] supplies $z_k\\in E_k$ and an equivalence $r_kz_k\\simeq z$. Filteredness supplies a stage $j$ and arrows $i\\to j$, $k\\to j$. Use the transition image of the original $e$ at $j$, which is cocartesian by hypothesis, and the transition image of $z_k$ as the testing object. This retains the specified lift; it does not select an arbitrary new representative of $e$. Equivalence of testing objects changes all mapping spaces by equivalences. At every later stage the square with top row $\\operatorname{Map}(y,z)\\to\\operatorname{Map}(x,z)$ and bottom row $\\operatorname{Map}_B(py,pz)\\to\\operatorname{Map}_B(px,pz)$ is a homotopy pullback, by the intrinsic cocartesian-arrow criterion in [lem-coef-cocartesian-straightening]. Equivalently, on the homotopy fiber over every $g:py\\to pz$, the map $\\operatorname{Map}^{g}(y,z)\\to\\operatorname{Map}^{g\\,p(e)}(x,z)$ is an equivalence. The relative mapping-space formula and its precomposition naturality in [lem-coef-cat-infinity-filtered-finite-calculus] identify the same map in $E$ with the filtered colimit of these equivalences, so it is an equivalence for every $g$. Hence the square in $E$ is a homotopy pullback and $r_i(e)$ is cocartesian. To obtain a lift out of an arbitrary object of $E_b$, use the finite-limit comparison in that same node to identify $E_b\\simeq\\operatorname{colim}_i(E_i)_b$. Its object-representation clause supplies an object at a stage together with an equivalence in this fiber. Lift the given base arrow there and precompose with the inverse fiber equivalence. The mapping-square criterion is invariant under that precomposition because it changes its rows by equivalences. Thus $p$ has all the required lifts.",
+   "text": "Keep the filtered slice diagram of step 1. Let $A$ be any collection of base arrows over which the stages admit cocartesian lifts preserved by transitions. For a stage lift $e:x\\to y$ over $f\\in A$, every transition image of $e$ is cocartesian by hypothesis. Apply [lem-coef-filtered-cocartesian-edge-persistence] to this specified edge and the slice/total colimit from step 1. Its image in $E$ is cocartesian; thus every cocone leg preserves the required lifts.\n\nFor existence at any $x\\in E_b$, the fixed-base-change clause of [lem-coef-cat-infinity-filtered-finite-calculus] gives $E_b\\simeq\\operatorname{colim}_i(E_i)_b$. Its object-representation clause gives $x_i\\in(E_i)_b$ and an equivalence $r_ix_i\\simeq x$ in this fiber. Lift $f:b\\to b'$ from $x_i$ at that stage, take its now-cocartesian image, and precompose with the inverse fiber equivalence. In the intrinsic mapping-square criterion of [lem-coef-cocartesian-straightening], precomposition by a fiber equivalence changes the top row by equivalences and leaves the base row unchanged. The resulting arrow out of $x$ is therefore cocartesian over $f$. This works both for all arrows and for only the inert arrows used later.",
    "uses": [
-    "lem-coef-cocartesian-straightening",
-    "lem-coef-cat-infinity-filtered-finite-calculus"
+    "lem-coef-filtered-cocartesian-edge-persistence",
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "lem-coef-cocartesian-straightening"
    ],
    "elementary": false,
    "source": {
@@ -107,11 +108,11 @@
    }
   },
   {
-   "text": "Fix $x\\in E_{[m]}$, $y\\in E_{[n]}$, and a base arrow $\\phi:[m]\\to[n]$. By the fiber-colimit comparisons of step 6 and the object-representation clause of [lem-coef-cat-infinity-filtered-finite-calculus], represent $x$ and $y$ by objects in the stage fibers over $[m]$ and $[n]$, with equivalences in those fibers. Filteredness moves these representatives to one stage. Choose there the finite coherent diagram of inert lifts out of the representative of $y$; at later stages use its transition image. The fiber equivalences identify the relative mapping-space tests for these representatives with those for $x,y$, while leaving the base arrow $\\phi$ fixed. Their images are inert lifts in $E$ by step 2, and step 3 compares any other chosen inert lifts to these by equivalences. The ordinary operadic mapping axiom of [lem-coef-operadic-algebra-presentability] gives at every later stage\n$$\\operatorname{Map}^{\\phi}(x,y)\\simeq\\prod_{a=1}^n\\operatorname{Map}^{\\rho_a\\phi}(x,y_a).$$\nThe relative mapping-space and composition comparisons of [lem-coef-cat-infinity-filtered-finite-calculus] identify the map in $E$ with the colimit of these stage comparisons. By [lem-coef-spaces-kappa-limit-filtered-colimit] with $\\kappa=\\aleph_0$, that colimit of finite products is the product of the colimits, including the empty product when $n=0$. Hence it is the required equivalence in $E$. For generalized operads, replace the discrete collection of unary projections by the finite incidence category of inert maps $\\alpha:[n]\\to[1]$ and $[n]\\to[0]$ and their endpoint factorizations. The relative limit axiom is\n$$\\operatorname{Map}^{\\phi}(x,y)\\simeq\\lim_{\\alpha}\\operatorname{Map}^{\\alpha\\phi}(x,y_\\alpha).$$\nThe incidence category has no nonidentity composable pair, so its nerve has finitely many nondegenerate simplices. Apply exactly the same relative mapping-space comparison and the finite-limit assertion for spaces to this finite nerve. All maps are postcomposition with the chosen inert lifts, and the naturality clause in the finite-data node identifies them with the stage maps. This proves the generalized mapping axiom, including the single-vertex diagram for $n=0$. Together with steps 5-6, $E$ is an operad of the required kind.",
+   "text": "Fix $y\\in E_{[n]}$. The fiber comparison of step 6 and [lem-coef-cat-infinity-filtered-finite-calculus] represent it by $y_i\\in(E_i)_{[n]}$, up to equivalence in that fiber. Choose the coherent inert projection cone at that stage and use its transition images thereafter. These remain cocartesian by the transition hypotheses and step 2. Step 3 compares other choices by equivalences.\n\nFor ordinary operads let $K$ be the discrete set of $n$ unary inert projections. For generalized operads let $K=N(I_n)$, where $I_n$ is the incidence category of inert projections to $[1]$ and $[0]$ and their endpoint factorizations. There is no composable pair of nonidentity arrows in $I_n$, so its nerve has finitely many nondegenerate simplices. In either case the mapping axiom in [lem-coef-operadic-algebra-presentability] says exactly that this stage cone and every transition image satisfy the hypothesis of [lem-coef-filtered-finite-relative-cone-persistence], for every testing object and every fixed base arrow. That lemma applied to the slice/total colimit of step 1 proves the same comparison for the image cone in $E$. In particular it holds for every $x\\in E_{[m]}$ and $\\phi:[m]\\to[n]$. Fiber equivalences and the lift comparisons from step 3 identify this comparison with the one for the original $y$ and any chosen inert projections. For $n=0$, ordinary $K$ is empty and generalized $I_0$ is the single vertex; both are covered by the lemma. Together with steps 5-6, $E$ has all the required operad axioms.",
    "uses": [
     "lem-coef-cat-infinity-filtered-finite-calculus",
     "lem-coef-operadic-algebra-presentability",
-    "lem-coef-spaces-kappa-limit-filtered-colimit"
+    "lem-coef-filtered-finite-relative-cone-persistence"
    ],
    "elementary": false,
    "source": {
@@ -138,10 +139,11 @@
   "lem-coef-cat-infinity-filtered-finite-calculus",
   "lem-coef-infinity-yoneda-presheaf-limits",
   "lem-coef-cocartesian-straightening",
+  "lem-coef-filtered-cocartesian-edge-persistence",
   "lem-coef-marked-relative-cartesian-model",
   "lem-coef-operadic-algebra-presentability",
   "lem-coef-joyal-model-structure",
-  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-filtered-finite-relative-cone-persistence",
   "lem-coef-marked-operadic-model-structures"
  ],
  "proof_origin": {
@@ -229,7 +231,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -242,8 +244,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-filtered-operadic-unstraightening",
   "worker": "stage1",
-  "summary": "Expanded the source Section 3.3 argument into eight steps. One new statement-only finite-data theorem for filtered colimits in Cat infinity; no clause-restating cocartesian or operadic node. Proved slice creation through mapping fibers; proved persistence, existence and uniqueness of cocartesian lifts; checked all ordinary and generalized Segal and mapping axioms, including nullary arity, and the preservation/reflection universal properties. Searched the entire DAG, blueprint and Lean source and ran logged Mathlib searches. Statement unchanged. Second reading specifies transition images of lifts and fiberwise representatives, and adds the explicit space-category definition to the new node.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction; supporting argument of lem-coef-many-object-operad-accessibility, Proposition 4.1.7 via Section 3.3: finite-data calculations in the proof of Proposition 3.3.2 and Theorem 3.3.1.",
+  "summary": "Q117 repairs the dedicated return: extracted persistence of a specified cocartesian edge from old step 2 and persistence of a finite relative mapping cone from old step 7 as two generic statement-only prerequisites. Kept the statement, source route, and six other steps verbatim. All proof steps are now below 2000 characters. Read all cited statements, retained previous report/search records, searched DAG/blueprint/Lean and ran logged multi-tool Mathlib searches for both new lemmas. No statement dispute or weakening.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction; supporting argument of lem-coef-many-object-operad-accessibility, Proposition 4.1.7 via Section 3.3: finite-data calculations in the proof of Proposition 3.3.2 and Theorem 3.3.1. Q117 extraction: the common-stage mapping-square argument in former step 2 and finite relative mapping-cone argument in former step 7; original ancestry retained.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -255,12 +257,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NB-74b4000af",
-  "group": "NB",
+  "reviewer": "NT-cc-Q117-622a2210a",
+  "group": "Q117",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-74b4000af (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node and the full statement of every cited node, plus the parent's use in step 2 of lem-coef-many-object-operad-accessibility. Source: Gepner–Haugseng arXiv:1312.3178v4 §3.3, read online because it is not archived (WANTED). The item agrees with Thm 3.3.1 (operadic forgetful functors detect filtered colimits) and with Cor 3.3.3 plus Lemma 3.3.6 (total categories). Step-by-step source match: steps 2–3 are Prop 3.3.2(i)–(iii). Step 1 is Lemma 3.3.6 via cone calculus with K=Δ^0 (the slice) and testing on T×B. Steps 6–7 are the Segal and mapping axioms, by commuting filtered colimits with finite limits in Cat_∞ and in S at κ=ℵ0. I checked that the incidence category I_n has no nonidentity composable pair, so its nerve is finite, and that n=0 works in both conventions. Step 6 also proves the DAG's extra Kan-zero-fiber condition. Step 8 handles reflection through the inverse equivalence over Δ^op. The new node lem-coef-cat-infinity-filtered-finite-calculus is true: Cat_∞ is compactly generated, which gives the finite-limit and base-change commutation, preservation by the core and by Fun(L,-) for finite L, finite data represented at a stage, and the coslice mapping-space formula. It is statement-only, has full definition citations, is no restatement of an item clause, and duplicates nothing found by rg over dag/nodes. Non-blocking: step 4's strict-fiber versus homotopy-fiber comparison is not needed, because step 3 already gives the coCart(B) mapping spaces. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic slice mapping-space formula. No SGA source, no changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-622a2210a (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is kept, not weakened, and all 8 steps are checked, including the changed steps 2 and 7. I read both new nodes in full and every cited statement. I checked them against Gepner–Haugseng arXiv:1312.3178v4 §3.3, read online (not archived; WANTED line in the report): Thm 3.3.1, Prop 3.3.2(i)-(iii) and the proof of (ii) (colimit of pullback squares; filtered colimits of spaces commute with finite limits), Cor 3.3.3-3.3.4, Lemma 3.3.6, and the mapping-space part of the proof of 3.3.1. New node 1 (edge persistence) is true: represent z at a common stage, use the fixed-arrow fibre comparison and precomposition naturality from cat-infinity-filtered-finite-calculus, and take a filtered colimit of equivalences. Tested with B a point, identity transitions and constant diagrams. New node 2 (finite relative cone persistence) is true: finite-calculus fibre comparison plus filtered colimit/finite limit interchange in spaces. Tested with K empty (terminal space), K a point (cartesian edges) and K discrete. The hypothesis of node 2 is exactly the operadic mapping axiom of operadic-algebra-presentability, for every X and phi, at every transition image. The nerve of I_n is finite because I_n has no composable non-identity pairs, and n=0 is covered. Neither new node restates an item clause. Both are statement-only, cite definitions for their notions, carry a correct blueprint from/via and real searches. The rg duplicate search over dag/nodes found no duplicate or generalization. proof_deps equals the union of the uses, every step is under 2000 characters, there is no cycle and no SGA source. The tool use of lem-cbc-enhanced-functor-cone-calculus (generic slice mapping-space formula) is accepted. Non-blocking: node 1 is the op-dual of node 2 with K=Delta^0, but no DAG node states op-duality for Cat_infinity colimits, so I keep both; the next splitter of node 1 may use node 2. No changes made."
  },
  "lean_audit": {
   "master": {

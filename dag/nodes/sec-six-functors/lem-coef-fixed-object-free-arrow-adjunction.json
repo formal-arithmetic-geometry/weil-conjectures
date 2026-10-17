@@ -1,0 +1,82 @@
+{
+ "id": "lem-coef-fixed-object-free-arrow-adjunction",
+ "kind": "statement",
+ "title": "Free arrows in fixed-object simplicial categories and their evaluation adjunction",
+ "statement": "Use small simplicial categories and $\\mathrm{sCat}_O$ from [lem-coef-simplicial-interval-lifting]. Let $O$ be a small set and $a,b\\in O$, allowing $a=b$. For a small simplicial set $K$, define $F^O_{a,b}(K)$ to have object set $O$ and, in simplicial degree $n$, the free ordinary category on the directed graph having one generating arrow $a\\to b$ for each element of $K_n$ and no other generating arrows. Its arrows are finite composable words, including the length-zero identity at each object; composition concatenates words. Faces and degeneracies apply to each letter. This construction defines a functor $F^O_{a,b}:\\mathrm{sSet}\\to\\mathrm{sCat}_O$. For every $T\\in\\mathrm{sCat}_O$, restriction to the length-one words gives a bijection\n$$\\operatorname{Hom}_{\\mathrm{sCat}_O}(F^O_{a,b}(K),T)\\cong\\operatorname{Hom}_{\\mathrm{sSet}}(K,T(a,b)),$$\nnatural in $K$ and $T$. The inverse sends a word to the composite of the images of its letters and an empty word to the corresponding identity. Thus $F^O_{a,b}$ is left adjoint to mapping-set evaluation, including when the generators are loops.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0508152",
+  "place": "Bergner, Rigidification of algebras over multi-sorted theories, Example 3.5, printed pp.1937-1938, and the evaluation/free adjunction before Theorem 4.7, printed p.1942. Explicit degreewise word construction; no Stacks tag states this enriched adjunction."
+ },
+ "stmt_deps": [
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The free simplicial category on a simplicial set of arrows between two specified objects is left adjoint to evaluation at that mapping simplicial set",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Reflective CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is reflective, with its left adjoint given by the homotopy category functor for 2-truncated simplicial sets. \"}\n  {\"name\": \"sSetTopAdj\", \"module\": \"Mathlib/AlgebraicTopology/SingularSet\", \"type\": \"SSet.toTop ⊣ TopCat.toSSet\", \"doc\": \"The adjunction between the geometric realization functor from simplicial sets to topological spaces and the singular simplicial set functor from topological spaces to simplicial sets, constructed via \"}\n  {\"name\": \"SSet.Truncated.nerve₂Adj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.Truncated.hoFunctor₂ ⊣ CategoryTheory.Nerve.nerveFunctor₂\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Reflective CategoryTheory.Nerve.nerveFunctor₂\", \"doc\": \"The nerve functor from the category of small categories to 2-truncated simplicial sets is reflective, meaning it is fully faithful and admits a left adjoint given by the homotopy category functor. Thi\"}\n  {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → SSet\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 :\\n        ∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n          CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom] →\\n      CategoryTheory.SimplicialObject.Augmented.toArrow ⊣ CategoryTheory.SimplicialOb\", \"doc\": \"The adjunction between the functor sending augmented simplicial objects to their augmentation arrow in the arrow category $\\\\mathcal{C}^{\\\\to}$ and the functor sending arrows in $\\\\mathcal{C}$ to their a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary free categories, functor-category evaluation and simplicial-set colimits do not state this strict enriched-category assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In simplicial categories with a fixed object set the category of finite composable words on a graph is free, including the free simplicial monoid on a loop",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FreeSimplexQuiver\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"Type\", \"doc\": \"The type representing the objects of the free simplex quiver, which are identified with the natural numbers.\"}\n  {\"name\": \"FreeSimplexQuiver.quiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"Quiver FreeSimplexQuiver\", \"doc\": \"The free simplex quiver is equipped with a canonical quiver structure where both objects and morphisms are identified with natural numbers. Specifically, objects correspond to natural numbers and morp\"}\n  {\"name\": \"CategoryTheory.Cat.free_obj\", \"module\": \"Mathlib/CategoryTheory/Category/Quiv\", \"type\": \"∀ (V : CategoryTheory.Quiv), CategoryTheory.Cat.free.obj V = CategoryTheory.Cat.of (CategoryTheory.Paths ↑V)\", \"doc\": \"For any quiver $ V $, the free category generated by $ V $ is equal to the path category of $ V $, i.e., $ \\\\text{Free}(V) = \\\\text{Paths}(V) $.\"}\n  {\"name\": \"FreeSimplexQuiver.mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"ℕ → FreeSimplexQuiver\", \"doc\": \"The function maps a natural number $ n $ to the corresponding object in the free simplex quiver, which is identified with $ n $. This constructs an object in the free simplex quiver by associating it \"}\n  {\"name\": \"instCategorySimplexCategoryGenRel\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"CategoryTheory.Category.{0, 0} SimplexCategoryGenRel\", \"doc\": \"The simplex category constructed as the quotient of the path category of the free simplex quiver (with objects and morphisms identified with natural numbers) by a hom-set relation that identifies cert\"}\n  {\"name\": \"SimplexCategoryGenRel\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"Type\", \"doc\": \"The category obtained by taking the path category of the free simplex quiver (whose objects and morphisms are identified with natural numbers) and quotienting by the hom-set relation that identifies c\"}\n  {\"name\": \"FreeSimplexQuiver.homRel\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"HomRel (CategoryTheory.Paths FreeSimplexQuiver)\", \"doc\": \"The binary relation defined on hom-sets of the path category $\\\\text{Paths}(\\\\text{FreeSimplexQuiver})$, where each hom-set consists of paths between objects in the free simplex quiver (identified with \"}\n  {\"name\": \"CategoryTheory.Cat.free\", \"module\": \"Mathlib/CategoryTheory/Category/Quiv\", \"type\": \"CategoryTheory.Functor CategoryTheory.Quiv CategoryTheory.Cat\", \"doc\": \"The functor from the category of quivers to the category of small categories, which assigns to each quiver its free (path) category and to each prefunctor between quivers the induced functor between t\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary free categories, functor-category evaluation and simplicial-set colimits do not state this strict enriched-category assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCategory, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary free categories, functor-category evaluation and simplicial-set colimits do not state this strict enriched-category assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*(simplicial|enriched)|((simplicial|enriched).*free)",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"line\": \"21\", \"text\": \"The homotopy category of a simplicial set is defined as a quotient of the free category on its\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"line\": \"222\", \"text\": \"/-- The 2-simplices in a 2-truncated simplicial set `V` generate a hom relation on the free\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"153\", \"text\": \"  ((SimplicialObject.Augmented.whiskering _ _).obj (ModuleCat.monoidAlgebraFree k)).obj\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary free categories, functor-category evaluation and simplicial-set colimits do not state this strict enriched-category assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free category enriched in simplicial sets on arrows at a fixed pair of objects is left adjoint to evaluation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.evaluationLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : D ⥤ C ⥤ D\", \"doc\": \"For a fixed object $c$ in category $\\\\mathcal{C}$, this constructs a left adjoint to the evaluation functor at $c$. It maps an object $d$ in $\\\\mathcal{D}$ to the coproduct $\\\\coprod_{f:c\\\\to t} d$ indexe\"}\n  {\"name\": \"CategoryTheory.evaluationIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : ((evaluation _ D).obj c).IsLeftAdjoint\", \"doc\": \"For any object $ c $ in a category $ \\\\mathcal{C} $, the evaluation functor at $ c $ (which maps a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ to its value $ F(c) $) is a left adjoint functor in the fu\"}\n  {\"name\": \"CategoryTheory.evaluationIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : ((evaluation _ D).obj c).IsRightAdjoint\", \"doc\": \"For any object $ c $ in a category $ \\\\mathcal{C} $, the evaluation functor at $ c $ from the functor category $ [\\\\mathcal{C}, \\\\mathcal{D}] $ to $ \\\\mathcal{D} $ is a right adjoint. This means there exi\"}\n  {\"name\": \"CategoryTheory.evaluationLeftAdjoint_obj_obj\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) (d : D) (t : C),\\n  ((CategoryTheory.evaluationLeftAdjoint D c).obj d).obj t = ∐ fun x => d\", \"doc\": \"For any object $d$ in $\\\\mathcal{D}$ and object $t$ in $\\\\mathcal{C}$, the object component of the left adjoint to the evaluation functor at $c$ applied to $d$ and evaluated at $t$ is the coproduct of $\"}\n  {\"name\": \"MonCat.adj\", \"module\": \"Mathlib.Algebra.Category.MonCat.Adjunctions\", \"type\": \": free ⊣ forget MonCat.{u}\", \"doc\": \"The free monoid functor is left adjoint to the forgetful functor from the category of monoids to the category of types. This establishes a natural bijection between monoid homomorphisms from the free \"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionRight\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c\", \"doc\": \"For a fixed object $c$ in category $\\\\mathcal{C}$, if category $\\\\mathcal{D}$ admits coproducts indexed by every hom-set $\\\\mathrm{Hom}_{\\\\mathcal{C}}(c, t)$ for objects $t \\\\in \\\\mathcal{C}$, then the eval\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionLeft\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : (evaluation _ _).obj c ⊣ evaluationRightAdjoint D c\", \"doc\": \"For a category $\\\\mathcal{C}$ and a complete category $\\\\mathcal{D}$, the evaluation functor $\\\\text{Eval}_c : \\\\mathcal{D}^{\\\\mathcal{C}} \\\\to \\\\mathcal{D}$ at an object $c \\\\in \\\\mathcal{C}$ has a right adjo\"}\n  {\"name\": \"CategoryTheory.evaluationRightAdjoint.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c c_1 : C),\\n  c = c_1 → CategoryTheory.evaluationRightAdjoint D c = CategoryTheory.evaluationRightAdjo\", \"doc\": \"For a category $\\\\mathcal{C}$ and a complete category $\\\\mathcal{D}$, the evaluation functor $\\\\text{Eval}_c : \\\\mathcal{D}^{\\\\mathcal{C}} \\\\to \\\\mathcal{D}$ at an object $c \\\\in \\\\mathcal{C}$ has a right adjo\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary free categories, functor-category evaluation and simplicial-set colimits do not state this strict enriched-category assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-simplicial-interval-cell-stability",
+  "date": "2026-10-17",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Weak equivalences survive simplicial interval cell attachments. Extracted from interval-cell stability proof step 3: Free arrows in fixed-object simplicial categories and their evaluation adjunction.",
+   "via": [
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

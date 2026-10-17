@@ -53,15 +53,17 @@
    }
   },
   {
-   "text": "Consider a horn cell attached to a simplicial category $C$ with object set $O$. Its attaching functor sends the two objects to some $a,b\\in O$, possibly equal. Let $F_{a,b}(K)$ denote the free $O$-object simplicial category on a simplicial set of arrows $K$ from $a$ to $b$: in each degree its morphisms are composable words in these generators, including empty identity words; faces and degeneracies act on each letter. Maps $F_{a,b}(K)\\to T$ in $\\mathrm{sCat}_O$ are exactly simplicial maps $K\\to T(a,b)$. The variable-object horn pushout is the fixed-object pushout of $F_{a,b}(\\Lambda_i^n)\\to F_{a,b}(\\Delta^n)$. To check this even against a target $T$ with arbitrary object set, fix a functor $C\\to T$. An extension over either proposed pushout is exactly a simplicial map $\\Delta^n\\to T(Fa,Fb)$ restricting to the prescribed horn map. The object choices are already fixed by $C\\to T$ because the horn generator changes no objects. For the fixed-object calculation use the $O$-labelled category $T_F$ with $T_F(s,t)=T(Fs,Ft)$ and identities and compositions from $T$, even when different labels have the same image. The free-arrow bijection applied to $T_F$ gives the same extensions on the fixed-object side, and their uniqueness proves the variable-object pushout universal property. By [lem-coef-kan-quillen-right-proper] horns have the left lifting property against all Kan fibrations; the displayed bijection of maps translates a lifting square against an objectwise fibration in $\\mathrm{sCat}_O$ into precisely such a horn square. Hence this free horn map, and its pushout $C\\to D$, have the left lifting property against every fibration in the fixed-object model of [lem-coef-simplicial-interval-lifting]. The model axioms make $C\\to D$ a trivial cofibration there. It is locally a weak equivalence, fixes all objects, and is consequently a DK-equivalence. When $a=b$ the free words are loops, and the bijection of maps just proved still sends a generator to an arbitrary simplex of $T(a,a)$; its horn-lifting conclusion therefore includes coincident attaching objects.",
+   "text": "Consider a horn cell attached to $C$ with object set $O$, whose attaching functor sends the two objects to $a,b\\in O$, possibly equal. By [lem-coef-fixed-object-free-arrow-adjunction], the functor $F^O_{a,b}$ is left adjoint to $T\\mapsto T(a,b)$. A square from $F^O_{a,b}(\\Lambda_i^n)\\to F^O_{a,b}(\\Delta^n)$ against an objectwise Kan fibration therefore corresponds, naturally on all four sides, to a horn-filling square against its $(a,b)$-mapping-set fibration. It has a lift by [lem-coef-kan-quillen-right-proper]. Thus the free horn map has the left lifting property against every fibration in the fixed-object model of [lem-coef-simplicial-interval-lifting], so is a trivial cofibration. Its pushout $C\\to P$ is also a trivial cofibration: a lifting square restricts to the free horn map, and its lift glues with the given map from $C$ by the pushout property. By [lem-coef-scat-fixed-object-pushout-comparison], this $P$, with its specified structure maps, is exactly the variable-object horn pushout $D$. Hence $C\\to D$ is locally a weak equivalence and fixes its objects. Its component functor is consequently fully faithful and surjective on objects, so is an equivalence. This proves the horn-cell case without a Kan assumption on $C$ or a distinctness assumption on $a,b$.",
    "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-kan-quillen-right-proper",
     "lem-coef-simplicial-interval-lifting",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-scat-fixed-object-pushout-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/pdf/math/0406507",
-    "place": "Lemma 3.4, horn case; explicit free-arrow/lifting argument also treating coincident attaching objects"
+    "place": "Lemma 3.4, horn case, printed p.11; free-arrow adjunction and fixed/variable-object comparison extracted as separate statement nodes; lifting and pushout deduction remains here"
    }
   },
   {
@@ -137,6 +139,8 @@
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-realization-finite-limits",
   "lem-coef-kan-quillen-right-proper",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-scat-fixed-object-pushout-comparison",
   "lem-coef-fixed-object-scat-left-proper",
   "lem-coef-filtered-colimit-weak-equivalences"
  ],
@@ -211,7 +215,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-nerve-comparison",
@@ -224,17 +228,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-simplicial-interval-cell-stability",
   "worker": "stage1",
-  "summary": "Rebased the retained split onto the current DAG after the landing refusal. Re-read every cited statement: realization-finite-limits now defines the simplex boundary explicitly, without changing its product or interval clauses. Step 1 now specifies finite products and homotopies in k-spaces and its quote names only the used clauses. Reused the current lem-coef-filtered-colimit-weak-equivalences at step 8 and removed its duplicate sandbox node. All nine proof steps and the full statement are preserved; one new statement-only node remains, fixed-object left properness. No Mathlib leaf or project attachment.",
+  "summary": "Re-split the retained proof as required by the human repair note: replaced the 2082-character step 3 by a short lifting argument citing two statement-only nodes for the fixed-object free-arrow adjunction and fixed/variable-object pushout comparison. All other steps, the complete statement, and the Lean record are preserved. Read all current cited statements and source clauses, ruled out candidate duplicates, and recorded genuine Mathlib searches. No new Mathlib leaf or attachment.",
   "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2: the displayed derived coefficient-adjunction / inverse-limit calculation, followed by naturality and triangle identities. This item is foundational coherent-localization infrastructure for that calculation through its inherited via chain; it replaces no geometric step of the unit.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q04-db0f1b4d9",
-  "group": "Q04",
+  "reviewer": "NT-cc-Q07-4ade625e4",
+  "group": "Q07",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-db0f1b4d9 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps, the one new node (lem-coef-fixed-object-scat-left-proper) and the full statements of the 5 cited nodes: interval-lifting, realization-finite-limits, kan-quillen-right-proper, filtered-colimit-weak-equivalences and the new node. I also read both citers of the item (coherent-nerve-comparison and rigidification-equivalence-detection), the unit file and the main-20261015 proof of the ancestor (prop-coef-integral-exceptional-adjoint). Source check: network access is blocked for reviewers, so I could not reopen Bergner math/0406507, Dwyer-Kan Prop. 7.3 or Kerodon 00XE (none is in literature/; the WANTED lines are kept). Instead I checked each step against the cited statements. The item statement is unchanged and is Bergner's theorem: the DK class is retract-closed and has two-out-of-three, and J-cell maps are DK with no Kan condition, exactly as the citers use it. Step 1: edge homotopies are realized through k-space products and the (|Δ^1|,|∂Δ^1|) pair; correct. Step 2: I checked all three two-out-of-three cases, including the e'kv comparison square and retract essential surjectivity. Step 3: the free-arrow bijection and the T_F device work, including a=b. Step 4: X→H' and X→C'' are cofibrations and q' is an objectwise trivial fibration. Step 5: two left-properness pushouts in sCat_X with every hypothesis met. Step 6: the explicit P'' conjugation formula, the square with q, and y≅x in π0D. Step 7: the directed colimit is computed on mapping sets. Step 8: the constant source over a filtered tail, the empty start, and essential surjectivity. Step 9: the single-cell refinement is elementary. New node: it is true. I checked it independently: reduce to I-cell attachments, filter by word length, then use the gluing lemma in left-proper sSet, as in HTT A.3.2. It holds for O empty and O a singleton. It does not restate the item and is not a duplicate: all-cofibrant-left-proper needs all objects cofibrant; fixed-object-simplicial-free-calculus gives only free-product invariance and sits above the item, so citing it would make a cycle. Its searches cover all three kinds and its blueprint fields are correct. No cycles, everything is in one unit, no tool_uses, no SGA. The fix: in fixes/, only step 4's text changes, saying that the cofibrant replacement q comes from factoring O→C as a cofibration followed by an objectwise trivial Kan fibration. The step's later claim that q' is a trivial fibration needs this.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-4ade625e4 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics: the item, the new step 3, the other 8 retained steps, both new nodes, and the full statements of all 5 cited nodes. I also read the proof of interval-lifting, the unit and the chapter. Bergner's papers math/0406507 and math/0508152 are not archived and the reviewer has no network, so I checked every claim directly. The WANTED lines stay and proof_origin stays agent. New node free-arrow-adjunction is true. In each degree it is the free category on K_n arrows a->b with letterwise operators, which is a genuine sCat_O object, and freeness gives the natural bijection with Hom(K,T(a,b)). Tested on O empty, a=b with K=Delta^0 (the free monoid N), a!=b, and K empty. It is not a duplicate of sorted-simplicial-algebra-model, which would also need the theorem identifying sCat_O with sorted algebras, and that theorem is stated nowhere. New node pushout-comparison is true. Relabelling through T_g(s,t)=T(gs,gt) together with the node-1 adjunction gives the same universal property as C amalg_{U(K)} U(L), and the square commutes. Tested a=b, K=L, K empty, non-monic i, non-injective object maps. It is not a duplicate: word-filtration needs a mono and does not state the identification, and interval-lifting uses the same relabelling only inside a proof. Neither new node restates a clause of the item. Step 3: LLP against objectwise Kan fibrations via node 1 and Kan-Quillen gives a trivial cofibration; its pushout is also one; node 2 identifies that pushout P with the variable-object horn pushout D; C->D is identity on objects and a local weak equivalence, hence a DK equivalence. a=b is covered and no Kan condition on C is used. Re-checked steps 4-6: both cobase changes in step 5 are identified correctly (C' amalg_{C''} D''=D and E amalg_{H'} D''=P''), and the left-properness hypotheses hold. The P'' conjugation formula and y≅x are correct. Steps 7-9 and the empty edge cases are fine. proof_deps equals the union of uses, there is no cycle, everything is in one unit (no tool_uses), no SGA is cited, the statement and Lean record are unchanged, and the new nodes correctly carry no maintainer fields. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.SimplicialIntervalCellStability",

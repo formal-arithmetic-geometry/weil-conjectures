@@ -1,0 +1,104 @@
+{
+ "id": "lem-coef-small-inner-horn-completion",
+ "kind": "statement",
+ "title": "Explicit small inner-horn completion and universal restriction lifting",
+ "statement": "Fix Grothendieck universes $\\mathcal U\\in\\mathcal V$, with simplicial sets, horns, quasicategories and internal functor simplicial sets as in [def-cbc-enhanced-diagrams-cones]. For a $\\mathcal U$-small simplicial set $X$, put $X_0=X$. Define $X_{r+1}$, for $r\\in\\mathbf N$, by attaching one $\\Delta^n$ along each simplicial map $a:\\Lambda_i^n\\to X_r$, for every $n\\geq2$ and $0<i<n$: explicitly\n$$X_{r+1}=X_r\\amalg_{\\coprod_{(n,i,a)}\\Lambda_i^n}\\coprod_{(n,i,a)}\\Delta^n.$$\nSet $RX=\\operatorname{colim}_{r<\\omega}X_r$, with the pushouts and colimit computed degreewise in sets, and let $j_X:X\\to RX$ be the inclusion. Then $RX$ is a $\\mathcal U$-small quasicategory and $j_X$ is a degreewise monomorphism and an inner-horn cell map. Here an inner-horn cell map is a countable composite of pushouts of small coproducts of the indicated inner horn inclusions. It is inner anodyne in the lifting sense of [lem-coef-inner-anodyne-pushout-product], even when tested against inner fibrations in $\\mathcal V$. For every $\\mathcal V$-small quasicategory $E$, the actual restriction map\n$$j_X^*:\\operatorname{Fun}(RX,E)\\longrightarrow\\operatorname{Fun}(X,E)$$\nis a map between quasicategories with the right lifting property against every degreewise monomorphism of $\\mathcal V$-small simplicial sets: every commutative square with such a left map has a diagonal making both triangles commute. The inclusions $j_X$ and the maps $R(f)$ induced by relabelling each attached simplex $(n,i,a)$ by $(n,i,f_ra)$ are functorial in simplicial maps $f:X\\to Y$. These same objects, maps and lifting assertions remain valid in any further containing universe. The empty simplicial set is sent to itself.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Small-object inner-anodyne replacement used in the proof of Corollary 2.2.5.4 (printed p.92, PDF p.109), and Corollaries 2.3.2.4-2.3.2.5 (printed pp.100-101, PDF pp.117-118). The explicit countable construction, same-universe size bound and stability against larger test objects are the agent formulation of this construction. Read online 2026-10-17; WANTED: archived HTT. No Stacks tag states this quasicategorical theorem."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-inner-anodyne-pushout-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "innerAnodyne|fibrantReplacement|quasicategory",
+   "results": "{\"t\": \"2026-10-17T07:23:19Z\", \"tool\": \"grep\", \"query\": \"innerAnodyne|fibrantReplacement|quasicategory\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"b68f7d98bedd49b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give Kan horn lifting, general model factorizations or ordinary quasicategory definitions, not the stated inner-horn completion and all-monomorphism restriction theorem. Read Inner/Basic.lean:43-110, Inner/PushoutProduct.lean:103-109, CategoryWithFibrations.lean:37-84 and StrictBicategory.lean:14-31.",
+   "sub": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every simplicial set admits a small inner anodyne quasicategory replacement whose restriction on functor categories is a trivial fibration",
+   "results": "{\"t\": \"2026-10-17T07:23:19Z\", \"tool\": \"leansearch\", \"query\": \"Every simplicial set admits a small inner anodyne quasicategory replacement whose restriction on functor categories is a trivial fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.recOn\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.mk\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.casesOn\"], \"digest\": \"051f2d8d515712ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern QCat, horn filling, nerves or general small-object arguments; none states this replacement with internal-Hom lifting against all monomorphisms in larger universes.",
+   "sub": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every small simplicial set has an inner anodyne embedding into a small quasicategory, inducing a trivial fibration of functor simplicial sets into any quasicategory",
+   "results": "{\"t\": \"2026-10-17T07:23:20Z\", \"tool\": \"leanfinder\", \"query\": \"Every small simplicial set has an inner anodyne embedding into a small quasicategory, inducing a trivial fibration of functor simplicial sets into any quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling\", \"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"5fb591ba44c58c75\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern QCat, horn filling, nerves or general small-object arguments; none states this replacement with internal-Hom lifting against all monomorphisms in larger universes.",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-17T07:23:20Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\", \"SSet.Subcomplex.Pairing.innerAnodyneExtensions\"], \"digest\": \"1e41fe895e33b68d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-anodyne closure and small-object declarations do not give this explicit completion together with the internal-Hom lifting and universe clauses.",
+   "sub": ""
+  },
+  {
+   "tool": "grep",
+   "query": "replacement|hasFactorization|functorialFactorization|trivial.*[Ff]ibration|innerAnodyneExtensions.*ihom|ihom.*innerAnodyne",
+   "results": "{\"t\": \"2026-10-17T07:26:36Z\", \"tool\": \"grep\", \"query\": \"replacement|hasFactorization|functorialFactorization|trivial.*[Ff]ibration|innerAnodyneExtensions.*ihom|ihom.*innerAnodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"0140202238240f5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give Kan horn lifting, general model factorizations or ordinary quasicategory definitions, not the stated inner-horn completion and all-monomorphism restriction theorem. Read Inner/Basic.lean:43-110, Inner/PushoutProduct.lean:103-109, CategoryWithFibrations.lean:37-84 and StrictBicategory.lean:14-31.",
+   "sub": "AlgebraicTopology"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions, SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T07:26:37Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions, SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-anodyne closure and small-object declarations do not give this explicit completion together with the internal-Hom lifting and universe clauses.",
+   "sub": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial countable attachment of all inner horns gives quasicategory completion in the same universe, with restriction on internal Hom having right lifting property against all monomorphisms",
+   "results": "{\"t\": \"2026-10-17T07:26:43Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial countable attachment of all inner horns gives quasicategory completion in the same universe, with restriction on internal Hom having right lifting property against all monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.Truncated.Quasicategory₂\"], \"digest\": \"aee6945f773cca73\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern QCat, horn filling, nerves or general small-object arguments; none states this replacement with internal-Hom lifting against all monomorphisms in larger universes.",
+   "sub": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "date": "2026-10-17",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Integral exceptional-adjoint proof, paragraph 2, the displayed derived coefficient-adjunction and inverse-limit calculation; foundational small-colimit and internal-Hom facts for the coherent functor-category pushout comparison. Technical input to step 3 of lem-coef-cat-infinity-colimits-cartesian-closure: same-universe inner-horn completion and universe-stable restriction lifting.",
+   "via": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-infinity-functor-pushout",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
