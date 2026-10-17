@@ -169,7 +169,8 @@ def geometricFiberBaseChangeIso : f.geometricFiber ≅ f'.geometricFiber where
     ext
     · refine hg.hom_ext ?_ ?_
       · simp
-      · rw [Category.assoc, Category.assoc, geometricFiberBaseChangeHom_comp_geometricFiberProj_assoc,
+      · rw [Category.assoc, Category.assoc,
+          geometricFiberBaseChangeHom_comp_geometricFiberProj_assoc,
           geometricFiberToBaseChange_comp_snd,
           geometricFiberBaseChangeInv_comp_geometricFiberToAlgebraicClosure_assoc,
           spec_map_comp_spec_map_eq _ _ (algebraMap k₀' (AlgebraicClosure k₀')) (fun x ↦ by simp),
@@ -180,6 +181,87 @@ def geometricFiberBaseChangeIso : f.geometricFiber ≅ f'.geometricFiber where
         geometricFiberBaseChangeInv_comp_geometricFiberToAlgebraicClosure_assoc,
         spec_map_comp_spec_map_eq _ _ (RingHom.id _) (fun x ↦ by simp), Category.id_comp,
         CommRingCat.ofHom_id, Spec.map_id, Category.comp_id]
+
+section Frobenius
+
+variable [Finite k₀] [Finite k₀']
+
+omit [Algebra.IsAlgebraic k₀ k₀'] in
+/-- The geometric Frobenius of `k̄'` over `k₀'` corresponds under `τ : k̄' ≅ k̄` to the `r`-th
+power of that of `k̄` over `k₀`, as automorphisms of spectra: `Spec τ ≫ σ' = σʳ ≫ Spec τ`. -/
+lemma spec_algebraicClosureAlgEquiv_comp_specGeometricFrobenius [Algebra.IsAlgebraic k₀ k₀']
+    (r : ℕ) (hr : Nat.card k₀' = Nat.card k₀ ^ r) :
+    Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₀').toRingHom) ≫
+        (specGeometricFrobenius k₀').hom =
+      (specGeometricFrobenius k₀ ^ r).hom ≫
+        Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₀').toRingHom) := by
+  let := Fintype.ofFinite k₀
+  let := Fintype.ofFinite k₀'
+  rw [specGeometricFrobenius_hom, specGeometricFrobenius_pow_hom, ← Spec.map_comp,
+    ← Spec.map_comp]
+  congr 1
+  ext x
+  exact algEquiv_geometricFrobenius_apply r
+    (by rw [← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card, hr])
+    (algebraicClosureAlgEquiv k₀ k₀').toRingEquiv x
+
+include hg in
+/-- The point `Y ×_{k₀} k̄ ⟶ Y'` is invariant under the `r`-th power of the geometric Galois
+Frobenius, `k₀'` having `#k₀ ^ r` elements. -/
+lemma geometricGaloisFrobenius_pow_hom_comp_geometricFiberToBaseChange (r : ℕ)
+    (hr : Nat.card k₀' = Nat.card k₀ ^ r) :
+    (f.geometricGaloisFrobenius ^ r).hom ≫ geometricFiberToBaseChange hg =
+      geometricFiberToBaseChange hg := by
+  refine hg.hom_ext ?_ ?_
+  · simp
+  · simp only [Category.assoc, geometricFiberToBaseChange_comp_snd,
+      geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure_assoc]
+    rw [specGeometricFrobenius_pow_hom_comp_spec_map_of_card_eq k₀ r hr]
+
+include hg in
+/-- Under the identification `θ : Y ×_{k₀} k̄ ≅ Y' ×_{k₀'} k̄'`, the geometric Galois Frobenius of
+`Y'` relative to `k₀'` is the `r`-th power of that of `Y` relative to `k₀`:
+`θ ≫ Fr' = Frʳ ≫ θ`. -/
+lemma geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius (r : ℕ)
+    (hr : Nat.card k₀' = Nat.card k₀ ^ r) :
+    (geometricFiberBaseChangeIso hg).hom ≫ f'.geometricGaloisFrobenius.hom =
+      (f.geometricGaloisFrobenius ^ r).hom ≫ (geometricFiberBaseChangeIso hg).hom := by
+  ext
+  · simp [geometricFiberBaseChangeIso,
+      geometricGaloisFrobenius_pow_hom_comp_geometricFiberToBaseChange hg r hr]
+  · simp only [geometricFiberBaseChangeIso, Category.assoc,
+      geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure,
+      geometricFiberBaseChangeHom_comp_geometricFiberToAlgebraicClosure_assoc,
+      geometricFiberBaseChangeHom_comp_geometricFiberToAlgebraicClosure,
+      geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure_assoc]
+    rw [spec_algebraicClosureAlgEquiv_comp_specGeometricFrobenius r hr]
+
+end Frobenius
+
+section Map
+
+variable {B B' : Scheme.{u}} {fB : B ⟶ Spec (.of k₀)} {fB' : B' ⟶ Spec (.of k₀')}
+  {gB : B' ⟶ B} (hgB : IsPullback gB fB' fB (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))))
+  {φ : Y ⟶ B} (hφ : φ ≫ fB = f) {φ' : Y' ⟶ B'} (hφ' : φ' ≫ fB' = f') (hgφ : φ' ≫ gB = g ≫ φ)
+
+include hgφ in
+/-- The identifications of the geometric fibers of `Y` and `B` with those of their base changes
+are compatible with the base change `φ̄` of a morphism `φ : Y ⟶ B` and that of its base change
+`φ' : Y' ⟶ B'`. -/
+lemma geometricFiberBaseChangeIso_hom_comp_geometricFiberMap :
+    (geometricFiberBaseChangeIso hg).hom ≫ geometricFiberMap φ' hφ' =
+      geometricFiberMap φ hφ ≫ (geometricFiberBaseChangeIso hgB).hom := by
+  ext
+  · simp only [geometricFiberBaseChangeIso, Category.assoc,
+      geometricFiberMap_comp_geometricFiberProj,
+      geometricFiberBaseChangeHom_comp_geometricFiberProj_assoc,
+      geometricFiberBaseChangeHom_comp_geometricFiberProj]
+    refine hgB.hom_ext ?_ ?_
+    · simp [hgφ]
+    · simp [hφ']
+  · simp [geometricFiberBaseChangeIso]
+
+end Map
 
 end Scheme.Hom
 
