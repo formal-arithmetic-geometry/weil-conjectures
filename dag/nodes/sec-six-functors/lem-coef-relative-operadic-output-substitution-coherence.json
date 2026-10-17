@@ -14,9 +14,128 @@
   "def-coef-colored-operator-systems",
   "lem-coef-relative-operadic-output-mapping"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a containing universe so that all the tuple fibers and their diagrams are small. Write $F(\\mathbf c)=E_{\\mathbf c}$ and $F(f)=f_!$ for the coherent transport functor supplied by [lem-coef-cocartesian-straightening]. Use its classification equivalence to identify transports with the fixed frame of [def-coef-colored-operator-systems], retaining the lift triangles. Let $\\lambda_{f,X}:X\\to f_!X$ denote that lift. The horn and mapping-space meanings of cocartesianness agree by [lem-coef-infinity-cocartesian-mapping-criterion]. Apply [lem-coef-infinity-pointwise-cocartesian-transport] with $K=\\Delta^0$ to obtain the equivalence $\\operatorname{Map}_{E_{\\mathbf d}}(f_!X,Y)\\to M_f(X,Y)$ given by $u\\mapsto u\\lambda_{f,X}$. Use the same lemma for general $K$ whenever the objects, lifts or factorization triangles vary in a coherent parameter. Thus factorization below means this equivalence of spaces with its triangles, rather than a choice of factorization for each individual edge.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-colored-operator-systems",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Theorem 3.2.0.1 and Proposition 4.2.4.4; Propositions 2.4.4.2, 2.4.4.3 and 3.1.2.1, cocartesian duals; agent assembly"
+   }
+  },
+  {
+   "text": "For output $j$ let $I_j=\\{i:\\bar f(i)=j\\}$, let $r_j:\\mathbf c\\to\\mathbf c|_{I_j}$ be the inert input restriction and let $\\pi_j:\\mathbf d\\to d_j$ be the inert output projection. In the operator category $\\pi_jf=\\theta_jr_j$. Apply the one coherent transport functor of [lem-coef-cocartesian-straightening] to these equal composites. Together with the frame's Segal identifications this gives a natural equivalence\n$$a_{f,j}:T_{\\theta_j}((x_i)_{i\\in I_j})\\xrightarrow{\\sim}(\\pi_j)_!f_!X.$$\nIts orientation is chosen so that its lift triangle compares the two cocartesian composites from $X$ over $\\pi_jf$. Consequently, if $u:f_!X\\to Y$ corresponds to $\\alpha\\in M_f(X,Y)$, the $j$th output comparison is\n$$C_f(\\alpha)_j=(\\pi_j)_!(u)\\,a_{f,j}.$$\nIndeed, precomposing this expression with the lift of $\\theta_jr_j$ gives the inert projection of $u\\lambda_{f,X}$. This is exactly the postcomposition-and-factorization comparison specified in [lem-coef-relative-operadic-output-mapping], which also supplies its equivalence property. The equality of base composites and the input blocks use the operator and pruning coordinates of [def-coef-colored-operator-systems]; there is no operation on inputs discarded by $f$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-colored-operator-systems",
+    "lem-coef-relative-operadic-output-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7(2)-(3), Definition 2.1.1.10(2), Remark 2.1.2.16; agent formula for the given comparison"
+   }
+  },
+  {
+   "text": "The formula of step 2 is coherent in both variables. The lift is a coherent transformation, each projection transport is a functor, and $a_{f,j}$ is an equivalence of functors coming from the fixed base diagram. The coherent Hom bifunctor and its natural transformation for a functor in [lem-coef-infinity-hom-bifunctor-functoriality] therefore make postcomposition, precomposition, and application of these projection functors natural on mapping spaces. Factorization is the natural mapping-fiber equivalence of [lem-coef-infinity-pointwise-cocartesian-transport]. All constructions are thus made on coherent diagrams. For a further inert restriction retaining a subset $J$ of outputs, the component formula retains exactly $j\\in J$: both procedures restrict to the same composite base diagrams and their lift triangles. In the coordinates of [def-coef-colored-operator-systems], iterated restriction is precomposition by the composite simplicial map. This proves output-restriction compatibility, including its parameter restrictions; the objectwise equivalence itself is [lem-coef-relative-operadic-output-mapping].",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-colored-operator-systems",
+    "lem-coef-relative-operadic-output-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Remark 2.1.3.4; coherent naturality from the cited Hom and pointwise-transport statements"
+   }
+  },
+  {
+   "text": "Let $\\alpha:X\\to Y$ lie over $f$ and $\\beta:Y\\to Z$ over $g$, and write their vertical factors as $u:f_!X\\to Y$, $v:g_!Y\\to Z$. Denote by $\\chi_{g,f,X}:(gf)_!X\\xrightarrow{\\sim}g_!f_!X$ the composition equivalence, oriented so that\n$$\\chi_{g,f,X}\\lambda_{gf,X}\\simeq\\lambda_{g,f_!X}\\lambda_{f,X}.$$\nIts coherent existence is part of the transport functor and fixed lift frame in [lem-coef-cocartesian-straightening] and [def-coef-colored-operator-systems]. Naturality of the coherent lift of $g$ gives $g_!(u)\\lambda_{g,f_!X}\\simeq\\lambda_{g,Y}u$. Pasting these specified triangles gives\n$$(v\\,g_!(u)\\,\\chi_{g,f,X})\\lambda_{gf,X}\\simeq v\\lambda_{g,Y}u\\lambda_{f,X}\\simeq\\beta\\alpha.$$\nThus the vertical factor of total composition is $v\\,g_!(u)\\,\\chi_{g,f,X}$. This identification holds on the whole mapping spaces and on parameterized triangles: [lem-coef-infinity-pointwise-cocartesian-transport] explicitly makes successive transports compatible with its precomposition equivalences. No cancellation of homotopy classes is substituted for this space-level equivalence.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-colored-operator-systems",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Propositions 2.4.1.7, 2.4.4.2 and 3.1.2.1, cocartesian duals; explicit pasting calculation"
+   }
+  },
+  {
+   "text": "Fix an output $l$ of $g$, put $J_l=\\{j:\\bar g(j)=l\\}$ and let $\\psi_l$ be its operation. Its input colors are precisely $(d_j)_{j\\in J_l}$. The $l$th operation of $gf$ is $\\omega_l=\\psi_l\\circ(\\theta_j)_{j\\in J_l}$ with external inputs $\\coprod_{j\\in J_l}I_j$, ordered using the given symmetric operator presentation. Put $u_j=C_f(\\alpha)_j$ and $v_l=C_g(\\beta)_l$. Apply the inert restriction to $J_l$ to the pasted diagram in step 4, then its output projection to $e_l$. The two base factorizations are now exactly the two-level rooted tree with vertices $\\psi_l,\\theta_j$ and its contracted tree $\\omega_l$. Their image under the same transport functor gives the frame comparison\n$$\\chi_l:T_{\\omega_l}((x_i)_{i\\in\\coprod I_j})\\xrightarrow{\\sim}T_{\\psi_l}((T_{\\theta_j}((x_i)_{i\\in I_j}))_{j\\in J_l}).$$\nUsing step 2 on each restricted lift triangle, the displayed vertical factor in step 4 becomes\n$$C_{gf}(\\beta\\alpha)_l\\simeq v_l\\circ T_{\\psi_l}((u_j)_{j\\in J_l})\\circ\\chi_l.$$\nHere the middle arrow is application of the operation transport functor to the tuple of vertical arrows; the first arrow is $v_l$. Every comparison in this calculation is obtained by applying [lem-coef-cocartesian-straightening] to those base diagrams and using the lift triangles of [def-coef-colored-operator-systems]. Compatibility of factorization with the pasted transports is [lem-coef-infinity-pointwise-cocartesian-transport]; the identification with $C_{gf}$ is [lem-coef-relative-operadic-output-mapping]. This proves the required substitution formula, including the actual direction of its comparison.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-colored-operator-systems",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-relative-operadic-output-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7(3), Remark 2.1.2.16; agent output restriction of the preceding triangle calculation"
+   }
+  },
+  {
+   "text": "Retain all the simplices in these diagrams. For a chain $f_1,\\ldots,f_r$ the nerve $B$ contains its $r$-simplex, whose inner faces compose adjacent operators and whose degeneracies insert identities. Apply the single coherent transport functor of [lem-coef-cocartesian-straightening] to that simplex and to its inert-pruning diagrams. The resulting composition equivalences, naturality diagrams and higher homotopies restrict to exactly the ones used in steps 2, 4 and 5; they were not chosen separately for each pair. The frame of [def-coef-colored-operator-systems] keeps those lift and pruning faces. For any additional simplicial parameter $K$, use the exponentiated fibration and natural factorization equivalence of [lem-coef-infinity-pointwise-cocartesian-transport] to carry the same lift diagrams to target-fiber diagrams. A face or degeneracy $K'\\to K$ is literal precomposition, as in [def-cbc-enhanced-diagrams-cones], so the pasted factorization diagrams restrict to their previous faces. Likewise, contracting a different edge of the base chain restricts the same coherent transport diagram. Hence the two iterated substitutions for three arrows are joined by its specified higher simplex, and every further chain supplies the higher compatibility by the identical restriction rule. This argument inherits the existing coherent transport and factorization diagrams; it does not infer coherent choices from unrelated equivalences of spaces. It proves all higher parameter and further-substitution clauses.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-colored-operator-systems",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4 and HTT Proposition 3.1.2.1, dual; agent restriction of coherent transport diagrams in every degree"
+   }
+  },
+  {
+   "text": "For identities the base diagrams are degeneracies, so step 6 gives the unit comparisons of the transport frame. A permutation of a tuple is an invertible inert operator; projection after that operator is projection to the relabeled entry. The formula of step 2 therefore just relabels the factors, and applying the same transport functor to composites of permutations supplies their compatibility with substitution. These are substitutions and restrictions of the same operator diagrams of [def-coef-colored-operator-systems], with coherence supplied by [lem-coef-cocartesian-straightening]. Thus neither extra orderings nor independently chosen symmetry comparisons enter the system.",
+   "uses": [
+    "def-coef-colored-operator-systems",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7, identity and symmetric-operator diagrams; degeneracies in the preceding step"
+   }
+  },
+  {
+   "text": "If $I_j$ is empty, its restriction is to the empty tuple and $T_{\\theta_j}$ is still the nullary operation transport. The comparison in [lem-coef-relative-operadic-output-mapping] retains that factor. In step 5 the input union may be empty even when $J_l$ is nonempty; the same formula then substitutes constants into $\\psi_l$. If $J_l$ is empty, $\\omega_l=\\psi_l$ is nullary and $T_{\\psi_l}$ is applied to the unique empty tuple of arrows. If the target tuple itself is empty there is no output $l$; the cited output-mapping lemma says both $M_f$ and its output product are contractible. The unique map to the empty product is compatible with every preceding restriction and composite. These checks also cover an empty set of colors. No construction above requires limits or colimits in any color fiber: the products used are the given inert Segal products, products of spaces in the comparison, and tuples serving as domains of operation transports.",
+   "uses": [
+    "lem-coef-relative-operadic-output-mapping",
+    "def-coef-colored-operator-systems"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7 with zero arity; Remark 2.1.2.16 and the empty-product clauses of the cited nodes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-straightening",
+  "def-coef-colored-operator-systems",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-relative-operadic-output-mapping",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Construction 2.1.1.7, Definition 2.1.1.10(2), Remarks 2.1.2.16 and 2.1.3.4; explicit triangle-pasting and simplicial-restriction argument using the existing coherent transport lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +171,45 @@
    "results": "{\"t\": \"2026-10-17T13:22:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStronglyCocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\"], \"digest\": \"9c7259df0a46fbe2\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:54-79,285-318,343-354. The hits concern strict unique factorization and composition for ordinary categories; they do not compare quasicategorical mapping spaces with coherent output products."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|operadic|substitution.*mapping|cocartesian.*composition",
+   "results": "{\"t\": \"2026-10-17T13:42:04Z\", \"tool\": \"grep\", \"query\": \"operad|operadic|substitution.*mapping|cocartesian.*composition\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"87457169ff2dfc4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian unique factorizations, Dold-Kan summand identities and type-level product equivalences do not state infinity-operadic mapping-space substitution with higher coherence; read Cocartesian.lean:54-79,285-318, FunctorGamma.lean:165-195 and Equiv/Basic.lean:143-148,808-875. The grep hit is a bibliography entry at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Outputwise mapping space equivalences preserve substitution and all higher coherence for a cocartesian symmetric infinity operad",
+   "results": "{\"t\": \"2026-10-17T13:42:04Z\", \"tool\": \"leansearch\", \"query\": \"Outputwise mapping space equivalences preserve substitution and all higher coherence for a cocartesian symmetric infinity operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Equiv.piCongr'\", \"Equiv.piCongr\", \"CategoryTheory.instEffectiveEpiFamilyObjMapOfIsEquivalence\", \"Equiv.piCongrLeft\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"Equiv.arrowCongr\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"Equiv.functor\"], \"digest\": \"9d51e6af3b644de8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian unique factorizations, Dold-Kan summand identities and type-level product equivalences do not state infinity-operadic mapping-space substitution with higher coherence; read Cocartesian.lean:54-79,285-318, FunctorGamma.lean:165-195 and Equiv/Basic.lean:143-148,808-875. The grep hit is a bibliography entry at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStronglyCocartesian\"",
+   "results": "{\"t\": \"2026-10-17T13:42:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStronglyCocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\"], \"digest\": \"9c7259df0a46fbe2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian unique factorizations, Dold-Kan summand identities and type-level product equivalences do not state infinity-operadic mapping-space substitution with higher coherence; read Cocartesian.lean:54-79,285-318, FunctorGamma.lean:165-195 and Equiv/Basic.lean:143-148,808-875. The grep hit is a bibliography entry at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent substitution and higher compatibility of outputwise mapping-space decompositions in a symmetric infinity-operad",
+   "results": "{\"t\": \"2026-10-17T13:42:06Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent substitution and higher compatibility of outputwise mapping-space decompositions in a symmetric infinity-operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'\", \"SimplicialObject.Splitting.πSummand_comp_cofan_inj_id_comp_PInfty_eq_PInfty_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc\", \"SimplexCategoryGenRel.standardσ_comp_standardσ_assoc\", \"SimplicialObject.Split.cofan_inj_naturality_symm_assoc\", \"SimplicialObject.Splitting.cofan_inj_comp_app_assoc\", \"SimplicialObject.Splitting.cofan_inj_comp_app\"], \"digest\": \"898c71c73f6a839e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian unique factorizations, Dold-Kan summand identities and type-level product equivalences do not state infinity-operadic mapping-space substitution with higher coherence; read Cocartesian.lean:54-79,285-318, FunctorGamma.lean:165-195 and Equiv/Basic.lean:143-148,808-875. The grep hit is a bibliography entry at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian fibration over a colored operator category has functorial fiber transport compatible with operadic substitution and inert projections",
+   "results": "{\"t\": \"2026-10-17T13:42:19Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian fibration over a colored operator category has functorial fiber transport compatible with operadic substitution and inert projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.fac_assoc\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.fac_assoc\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\", \"CategoryTheory.Functor.IsStronglyCocartesian.fac\"], \"digest\": \"7197dcab098a008c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian unique factorizations, Dold-Kan summand identities and type-level product equivalences do not state infinity-operadic mapping-space substitution with higher coherence; read Cocartesian.lean:54-79,285-318, FunctorGamma.lean:165-195 and Equiv/Basic.lean:143-148,808-875. The grep hit is a bibliography entry at Distributive/Monoidal.lean:55."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-colored-operation-section-reconstruction",
@@ -81,5 +235,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-operadic-output-substitution-coherence",
+  "worker": "stage1",
+  "summary": "Zero-new-node split. Retains the statement and proves the coherent comparison through one fixed transport functor, the natural cocartesian factorization equivalence, an explicit vertical-composition calculation, its outputwise rooted-tree formula, and restriction of those same diagrams in every simplicial degree. Verified output pruning, identities, permutations, nullary blocks and the empty product. Read every cited statement; no project attachment or full Mathlib match was found.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle derived mapping comparison before inverse limit; current main-20261015 copy is under sk-thm-sf-package. This item supplies the substitution-coherence clause extracted in step 1 of lem-coef-colored-operation-section-reconstruction along the recorded ancestry. No unit route or unit realization changes."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-5eee9fae1",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-5eee9fae1 (reviewer sub-agent of L); spot-checked: I read the item in full, the full statement of all 9 cited nodes, the unit record sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015). The delivery has one commit touching only the item and its report, with no new nodes. proof_deps equals the union of the steps' uses, every cited id exists and none is merged, and a traversal of the dependency closure (947 nodes) finds no cycle. The statement is kept verbatim and is not weakened. I tested the composition formula C_gf(beta alpha)_l = v_l T_psi_l((u_j)) chi_l on four small cases: swap then multiply, a dropped nullary output, an empty target, and an empty input block; all were correct. It does not duplicate output-mapping, which only gives the objectwise equivalence natural in X,Y; this item adds restriction, parameters, composition and higher coherence, which is what the parent cites it for in steps 2 and 7. Checks by step: step 1 applies the pointwise-transport lemma with K=Delta^0, and its hypotheses hold by the mapping criterion. Step 2 uses pi_j f = theta_j r_j, which holds on the nose in the operator category; the comparison's direction matches output-mapping's recipe. Step 3 gets coherent naturality from the Hom bifunctor T_*. Step 4's pasting beta alpha = v g_!(u) chi lambda_gf checks out at space level via the pointwise lemma's compatibility of successive transports. Step 5's indices and treatment of discarded inputs and outputs are right. Step 6 is a compressed restriction along straightening's coherent base change, not a gap. Step 7: permutations are bijections of Fin_*, inert and active. Step 8 is genuinely elementary. All cited statement nodes are in the unit; def-cbc-enhanced-diagrams-cones is a definition, so it counts as a notion, not route. No tool_uses are needed and none were accepted. Higher Algebra and Higher Topos Theory are not in literature/; the worker records them as WANTED and the proof is correctly marked agent-origin. No SGA source is used. Searches of all three kinds were run, and the invalid Loogle query is honestly labelled. Not a delivery fault: the item has no lean_audit field, which was already true before this delivery, as for 655 other chapter nodes. No fixes written."
  }
 }
