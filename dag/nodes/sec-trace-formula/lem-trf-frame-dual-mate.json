@@ -14,9 +14,50 @@
   "def-sc-module-total-hom-complex",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For a homogeneous \\(\\varphi\\in R^\\vee\\) of degree \\(j\\) and \\(x\\in P^{-j-1}\\), the dual differential gives\n\\[\n(d_P^\\vee(f^\\vee\\varphi))(x)=(-1)^{j+1}\\varphi(f(d_Px))=(-1)^{j+1}\\varphi(d_R(fx))=((d_R^\\vee\\varphi)\\circ f)(x).\n\\]\nThe middle equality is the chain-map identity for \\(f\\). Both sides vanish on the other degrees by the grading conventions. Thus precomposition \\(f^\\vee(\\varphi)=\\varphi\\circ f\\) is a degree-zero chain map \\(R^\\vee\\to P^\\vee\\).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: identifying the maps on duals when transporting the frame duality along an isomorphism."
+   }
+  },
+  {
+   "text": "On a homogeneous pure tensor \\(\\varphi\\otimes x\\) with \\(\\varphi\\in(R^\\vee)^j\\) and \\(x\\in P^{-j}\\), the two composites in the evaluation equation both have value \\(\\varphi(fx)\\): the left side is \\(\\operatorname{ev}_P((f^\\vee\\varphi)\\otimes x)\\) and the right side is \\(\\operatorname{ev}_R(\\varphi\\otimes f(x))\\). On all other total degrees both evaluations are zero by definition. Since pure tensors generate the tensor product and the canonical associators and unitors only reparenthesize them, this proves\n\\[\n\\operatorname{ev}_P\\circ(f^\\vee\\otimes1_P)=\\operatorname{ev}_R\\circ(1_{R^\\vee}\\otimes f).\n\\]",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: identifying the maps on duals when transporting the frame duality along an isomorphism."
+   }
+  },
+  {
+   "text": "If a degree-zero chain map \\(u:R^\\vee\\to P^\\vee\\) satisfies the displayed evaluation equation, then for every homogeneous \\(\\varphi\\in(R^\\vee)^j\\) and every \\(x\\in P^{-j}\\) it gives \\((u\\varphi)(x)=\\varphi(fx)\\). Thus \\(u\\varphi\\) and \\(f^\\vee\\varphi\\) agree on all of \\(P^{-j}\\), hence are equal as degree-\\(j\\) functionals. This holds in every degree, so \\(u=f^\\vee\\); the precomposition map is the unique chain map with the mate property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: identifying the maps on duals when transporting the frame duality along an isomorphism."
+   }
+  },
+  {
+   "text": "Write the chosen frames as \\((e^P_{i,a},\\epsilon^P_{i,a})\\) and \\((e^R_{k,b},\\epsilon^R_{k,b})\\). Evaluating the left side of the coevaluation identity at \\(1\\) and expanding each \\(f(e^P_{i,a})\\) in the \\(R^i\\)-frame gives\n\\[\n\\sum_{i,a,b}e^R_{i,b}\\,\\epsilon^R_{i,b}(f(e^P_{i,a}))\\otimes\\epsilon^P_{i,a}.\n\\]\nFor the right side, expand each functional \\(\\epsilon^R_{i,b}\\circ f\\) in the \\(P^i\\)-frame; the frame identity gives\n\\[\n\\epsilon^R_{i,b}\\circ f=\\sum_a\\epsilon^R_{i,b}(f(e^P_{i,a}))\\,\\epsilon^P_{i,a}.\n\\]\nTherefore its value at \\(1\\) is the same finite sum. Since both maps have source \\(A[0]\\), equality at \\(1\\) proves\n\\[\n(f\\otimes1_{P^\\vee})\\circ\\operatorname{coev}_P=(1_R\\otimes f^\\vee)\\circ\\operatorname{coev}_R.\n\\]",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: identifying the maps on duals when transporting the frame duality along an isomorphism."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+  "place": "Final two sentences: identifying the maps on duals when transporting the frame duality along an isomorphism."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-chain-supertrace",
@@ -79,5 +120,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-frame-dual-mate",
+  "worker": "stage1",
+  "summary": "Expanded the transported-duality sentence into four direct computations: precomposition is a chain map, it satisfies the evaluation mate equation, the evaluation equation gives uniqueness degree by degree, and finite dual-frame expansions give the coevaluation identity. No new nodes were needed; all steps use only the item’s explicit definitions, frame identities, and the chain-map hypothesis on f.",
+  "blueprint": "Realizes the final two sentences of literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md by spelling out the dual-map identification, evaluation mate, uniqueness, and coevaluation transport.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-8b4d49468",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-8b4d49468 (reviewer sub-agent of L); spot-checked: Read the complete item, cited definitions, current blueprint sources, and unit/chapter route. All four elementary steps correctly establish chain compatibility, evaluation naturality, uniqueness, and the coevaluation identity. Checked signs, redundant frames, nonfree projectives, zero cases, and characteristic 2; found no duplicate covering the full statement or missing non-elementary dependency. No repairs or tool_uses. Detailed review written to review.md."
  }
 }

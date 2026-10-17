@@ -12,11 +12,68 @@
   "lem-coef-semilinear-derived-sections",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the enhanced semilinear-section model to represent the actual tensor transition. For m≥n, the transition-adjoint of the fibrewise tensor system is obtained by first applying the derived scalar extension along B_m→B_n to P_m⊗^L_{B_m}Q_m and then applying the two cartesian transition-adjoints. The derived tensor pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], specialized to the identity topos and the coefficient map B_m→B_n, gives the canonical first isomorphism in the displayed formula. The two remaining factors are α^P_{m,n} and α^Q_{m,n}, hence are invertible by normalization. The section model in [lem-coef-semilinear-derived-sections] identifies this composite with the adjoint of the actual semilinear transition, rather than with a separately selected reduction isomorphism.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), with Tag 06YS (lemma-K-flat-resolution); the identification with the actual semilinear transition is the agent-formulated strict-system consequence"
+   }
+  },
+  {
+   "text": "The scalar-extension comparisons are coherent for a triple m≥n≥r: the two ways of extending from B_m to B_r are identified by the associativity comparison of derived extension of scalars, and the naturality of α^P and α^Q makes the two composites of the displayed tensor formula equal. The quotient cocycle for the tensor system is therefore the image of the quotient cocycles of P and Q under the enhanced tensor construction. Since the semilinear-section statement supplies simultaneous tensor models and says that cartesian sections are exactly normalized systems, these coherent invertible adjoints prove that P⊗^LQ is normalized.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution) and the strict-system/cartesian-section construction of lem-coef-semilinear-derived-sections"
+   }
+  },
+  {
+   "text": "For a morphism of topoi v and C_n=v^{-1}B_n, use the inverse-image section model of [lem-coef-semilinear-derived-sections]. At each m≥n, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives the canonical comparison (v^{-1}P_m)⊗^L_{C_m}C_n ≅ v^{-1}(P_m⊗^L_{B_m}B_n), with no flatness assumption on the coefficient map. Under this comparison the transition-adjoint of v^*P is exactly v^{-1}α^P_{m,n}; it is invertible because inverse image preserves isomorphisms. Naturality of the comparison and of the original quotient cocycle gives the cocycle for v^*P, so the section model identifies v^*P as normalized.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), together with the inverse-image clause of lem-coef-semilinear-derived-sections"
+   }
+  },
+  {
+   "text": "All constructions are unbounded: the semilinear-section theorem explicitly works with unbounded complexes, while [lem-pur-derived-change-of-rings] computes each derived scalar extension by K-flat resolutions and does not require the ring map B_m→B_n to be flat. Thus neither closure assertion introduces boundedness or flatness hypotheses.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT/06YY (derived change of rings) and the unbounded/no-flatness clause of lem-coef-semilinear-derived-sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YS, with the strict-system tensor and inverse-image closure formulated from the enhanced semilinear-section model"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-system-level-projection-formula-coherence",
@@ -79,5 +136,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-system-normalized-tensor-closure",
+  "worker": "stage1",
+  "summary": "Split the normalized-system closure into four steps: derive the actual tensor transition-adjoint from the canonical scalar-extension tensor comparison, verify its quotient cocycle, transport normalization through inverse image, and record the unbounded/no-flatness scope. No new child nodes were needed; all non-elementary inputs are existing statements.",
+  "blueprint": "Realizes the normalized tensor and inverse-image closure assertion extracted in Step 8 of the proof of lem-pur-system-level-projection-formula-coherence, itself serving the normalized-system operations paragraph of prop-pur-adic-reconstruction-trace-coherence. The displayed formula and actual-transition qualification are proved using Tags 07A4 and 06YS through the enhanced semilinear-section model."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q120-ab3eaa7e7",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q120-ab3eaa7e7 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, sources and route. All four steps support the actual transition adjoints and cocycles for unbounded complexes without flat coefficient maps. Checked non-flat quotient cases, duplicate candidates and dependency acyclicity. No new nodes or repairs; no additional tool_uses needed. Detailed review written to review.md."
  }
 }

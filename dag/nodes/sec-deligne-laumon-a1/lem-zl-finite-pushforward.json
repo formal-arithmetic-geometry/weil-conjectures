@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-finite-pushforward",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite pushforward preserves upper weights",
@@ -13,37 +13,138 @@
   "place": "node lem-zl-finite-pushforward, order 2789"
  },
  "stmt_deps": [
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-complex-weights",
+  "def-weil-finite-integral-morphism",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof": [
   {
-   "text": "A finite morphism is proper, so $Rg_!=Rg_*$ by the properness law of\n[prop-functor-package], and $g_*$ is exact by\n[lemma-weil-pbc-finite-direct-image-exact]; hence\n$\\mathcal H^j(Rg_*K)=g_*\\mathcal H^j(K)$. Fix $j$ and choose a\nfinite Weil filtration of $\\mathcal H^j(K)$ whose nonzero quotients\n$\\mathcal Q_i$ are punctually pure in the sense of\n[def-weil-punctual-weights], of weights $u_i\\le w+j$, as\nprovided by [def-weil-complex-weights]. Exactness pushes this\nfiltration forward. It remains to check that $g_*\\mathcal Q_i$ is\npunctually pure of weight $u_i$. Let $y$ be closed and use the finite\nstalk formula of [lemma-weil-pbc-finite-stalk-formula]. The geometric\nFrobenius permutes the finitely many points $x$ over $y$; on an orbit\nof length $f$, its $f$-th power on the corresponding summand is the\nlocal Frobenius $F_x$. If $\\mu$ is an eigenvalue on that orbit, then\n$\\mu^f$ is an eigenvalue of $F_x$. Since $\\mathcal Q_i$ is pure,\n\n$$\n|\\iota(\\mu)|^f=|\\iota(\\mu^f)|\n=q_x^{u_i/2}=(q_y^f)^{u_i/2},\n$$\n\nso $|\\iota(\\mu)|=q_y^{u_i/2}$. Thus each $g_*\\mathcal Q_i$ is\npunctually pure of weight $u_i$, and the pushed-forward filtration makes\n$g_*\\mathcal H^j(K)$ mixed of weights at most $w+j$. This holds for\nevery $j$, hence $Rg_*K\\in D_{\\le w}(Y_0)$ by\n[def-weil-complex-weights].",
+   "text": "Use the separated finite-type finite-field and coefficient conventions implicit in $D_{\\le w}$ of [def-weil-complex-weights]. Let $g:Z\\to Y$ be the geometric base change of $g:Z_0\\to Y_0$. The schemes $Z,Y$ are separated of finite type over $k$ by [lem-pod-separated-finite-type-base-change]. Finiteness survives each base change used here: on an affine chart $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, finite module generators $b_1,\\ldots,b_r$ of $B$ give generators $b_1\\otimes1,\\ldots,b_r\\otimes1$ of $B\\otimes_A A'$ over $A'$; the fibre-product affine charts therefore satisfy [def-weil-finite-integral-morphism]. This applies both to $g$ and to the finite fibre in Step 3. A finite morphism is proper by [lem-weil-pbc-finite-proper]. The properness clause of [prop-functor-package] gives $Rg_!\\simeq Rg_*$. This is an isomorphism of Weil complexes by [prop-weil-operations], so it suffices to prove the upper weight bound for $Rg_*K$.",
    "uses": [
-    "prop-functor-package",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "def-weil-punctual-weights",
     "def-weil-complex-weights",
-    "lemma-weil-pbc-finite-stalk-formula"
+    "lem-weil-pbc-finite-proper",
+    "prop-functor-package",
+    "prop-weil-operations",
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-finite-integral-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "First sentence: finite is proper and Rg_!=Rg_*"
+   }
+  },
+  {
+   "text": "By [lem-zl-finite-adic-direct-image], $Rg_*$ is $t$-exact on the actual rational constructible categories and $\\mathcal H^j(Rg_*K)\\simeq g_*^c\\mathcal H^j(K)$. The naturality of these identifications and the Weil lifts of [prop-weil-operations] make them identifications of Weil sheaves. Fix $j$. The definitions [def-weil-complex-weights, def-weil-punctual-weights] give a finite filtration $0=F_0\\subset\\cdots\\subset F_m=\\mathcal H^j(K)$ by constructible Weil subsheaves, with quotients $Q_i$ punctually pure of weights $u_i\\le w+j$. Exactness of $g_*^c$ sends $0\\to F_{i-1}\\to F_i\\to Q_i\\to0$ to a short exact sequence. Thus the images of the $g_*^cF_i$ form a finite Weil filtration with quotients $g_*^cQ_i$; no splitting or semisimplicity is used.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image",
+    "prop-weil-operations",
+    "def-weil-complex-weights",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "First sentence through exactness pushes the filtration forward"
+   }
+  },
+  {
+   "text": "Fix one quotient $Q=Q_i$ of weight $u=u_i$, and a closed point $y\\in Y_0$ with $q_y=\\#\\kappa(y)$. Restrict $Q$ to the finite scheme $T_0=Z_0\\times_{Y_0}\\operatorname{Spec}\\kappa(y)$; its Weil structure relative to $\\kappa(y)$ is the $[\\kappa(y):k_0]$-fold iterate of the original structure, with the point transport prescribed by [def-weil-local-frobenius-trace]. By [lem-zl-finite-adic-direct-image], the stalk $(g_*^cQ)_{\\bar y}$ is the geometric sections of this fibre, and its evaluation maps to the source stalks are natural under semilinear isomorphisms. The Weil direct-image structure is the exchange map followed by the image of the Weil structure, by [prop-weil-operations]; hence on these evaluation maps its local operator $F_y$ is precisely the geometric Frobenius of the finite fibre over $\\kappa(y)$. The structure morphism of the finite geometric fibre is finite, hence proper by [lem-weil-pbc-finite-proper]; the properness comparison of [prop-functor-package] identifies its ordinary and compactly supported sections, compatibly with the Weil action by [prop-weil-operations]. Apply [lem-a1-finite-weil-sections-decomposition] with base field $\\kappa(y)$. For each closed $x$ over $y$ it gives an invariant block $V_x$ consisting of $f_x=[\\kappa(x):\\kappa(y)]$ stalks, cyclically permuted by $F_y$, and on each stalk the return $F_y^{f_x}$ is the local $F_x$. The latter normalization agrees with the original base $k_0$: iterating $[\\kappa(y):k_0]$ a total of $f_x$ times is the defining $[\\kappa(x):k_0]$-fold iterate. This uses geometric stalks, with no arithmetic Frobenius invariants.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image",
+    "def-weil-local-frobenius-trace",
+    "prop-weil-operations",
+    "lem-a1-finite-weil-sections-decomposition",
+    "lem-weil-pbc-finite-proper",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Finite stalk formula and Frobenius cycles, with relative residue degree and point transport made explicit"
+   }
+  },
+  {
+   "text": "Let $\\mu$ be an eigenvalue of $F_y$ on a nonzero block $V_x$ of Step 3. Choose an eigenvector $v\\ne0$. Then $F_y^{f_x}v=\\mu^{f_x}v$. Choose a nonzero stalk component $v_z$ of $v$. The return identity on that component gives $F_xv_z=\\mu^{f_x}v_z$, so $\\mu^{f_x}$ is an eigenvalue of the local operator on $Q_{\\bar x}$. By [def-weil-punctual-weights] and purity of $Q$, $|\\iota(\\mu^{f_x})|=q_x^{u/2}$. The field extension has degree $f_x$, hence $q_x=q_y^{f_x}$ (a basis gives $f_x$ coordinates over the $q_y$-element field). Therefore\n$$|\\iota(\\mu)|^{f_x}=q_y^{f_xu/2}.$$\nSince $f_x\\ge1$ and $q_y>0$, taking the positive $f_x$-th root gives $|\\iota(\\mu)|=q_y^{u/2}$. For an eigenvector on the whole finite direct sum, a nonzero block component is still an eigenvector with the same eigenvalue; thus this proves the assertion for every eigenvalue on $(g_*^cQ)_{\\bar y}$. If the fibre or stalk is zero there is no eigenvalue to check. Consequently $g_*^cQ$ is punctually pure of weight $u$.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Displayed absolute-value calculation; elementary eigenvector argument on cyclic blocks"
+   }
+  },
+  {
+   "text": "Step 4 applies to every quotient of the filtration from Step 2. Its pushed-forward quotients are therefore punctually pure of weights $u_i\\le w+j$, so $g_*^c\\mathcal H^j(K)$ is mixed of weights at most $w+j$ by [def-weil-punctual-weights]. Zero quotients can be omitted; the zero sheaf has the empty filtration. For every $j$, Step 2 identifies this sheaf with $\\mathcal H^j(Rg_*K)$, and [def-weil-complex-weights] gives $Rg_*K\\in D_{\\le w}(Y_0)$. The Weil isomorphism of Step 1 gives the same conclusion for $Rg_!K$.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Final two sentences: mixed sheaf bound and the cohomological definition of D_le_w"
+   }
   }
  ],
  "proof_deps": [
-  "prop-functor-package",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-punctual-weights",
   "def-weil-complex-weights",
-  "lemma-weil-pbc-finite-stalk-formula"
+  "lem-weil-pbc-finite-proper",
+  "prop-functor-package",
+  "prop-weil-operations",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-finite-integral-morphism",
+  "lem-zl-finite-adic-direct-image",
+  "def-weil-punctual-weights",
+  "def-weil-local-frobenius-trace",
+  "lem-a1-finite-weil-sections-decomposition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Entire proof, retaining its exactness, filtration and Frobenius-cycle route; coefficient gap supplied by lem-zl-finite-adic-direct-image"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite pushforward of constructible ell-adic Weil complexes over finite fields preserves upper bounds on weights",
+   "results": "Hits: LieModule.finite_genWeightSpace_ne_bot, LieModule.finite_genWeightSpaceOf_ne_bot, LieModule.exists₂_genWeightSpace_smul_add_eq_bot, BoundingSieve.weights, chevalley_mvPolynomial_mvPolynomial, LieModule.Weight.instFinite, LieModule.exists_genWeightSpace_smul_add_eq_bot, ChevalleyThm.chevalley_polynomialC. No theorem about weights of constructible Weil complexes: hits concern Lie algebra weights, ring Frobenius, structure-sheaf pushforward, or finite morphisms being proper. The latter is already the existing Mathlib leaf lem-weil-pbc-finite-proper.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, CategoryTheory.Functor",
+   "results": "No hits. No theorem about weights of constructible Weil complexes: hits concern Lie algebra weights, ring Frobenius, structure-sheaf pushforward, or finite morphisms being proper. The latter is already the existing Mathlib leaf lem-weil-pbc-finite-proper.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|IsPunctuallyPure|IsMixedOfWeightsAtMost",
+   "results": "No hits. No theorem about weights of constructible Weil complexes: hits concern Lie algebra weights, ring Frobenius, structure-sheaf pushforward, or finite morphisms being proper. The latter is already the existing Mathlib leaf lem-weil-pbc-finite-proper.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward along a finite map preserves punctual purity of an ell-adic sheaf by Frobenius permuting stalks",
+   "results": "Hits: IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.StandardOneDimIsocrystal.frobenius_apply, SheafOfModules.bijective_pushforwardSections, AlgebraicGeometry.Scheme.Modules.pushforwardComp, WittVector.Isocrystal. No theorem about weights of constructible Weil complexes: hits concern Lie algebra weights, ring Frobenius, structure-sheaf pushforward, or finite morphisms being proper. The latter is already the existing Mathlib leaf lem-weil-pbc-finite-proper.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite direct image preserves mixed weights of Weil sheaves",
+   "results": "Hits: AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Subfunctor.range_isFinite, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, AlgebraicGeometry.IsFinite. No theorem about weights of constructible Weil complexes: hits concern Lie algebra weights, ring Frobenius, structure-sheaf pushforward, or finite morphisms being proper. The latter is already the existing Mathlib leaf lem-weil-pbc-finite-proper.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -182,5 +283,34 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-finite-pushforward",
+  "worker": "stage1",
+  "summary": "Kept the statement. Replaced the single imported paragraph by five checked steps. Exposed rational adic finite direct-image exactness and its natural stalk comparison as one new statement-only lemma, rather than applying an abelian etale theorem to a different coefficient category. Reused the existing finite-scheme Weil sections decomposition and finite-is-proper leaf. Wrote the eigenvector and residue-degree calculation explicitly, including empty fibres and zero quotients. The local Lean checkout has only the sorried closed-immersion specialization, despite newer imported audit metadata. No Lean was changed or compiled. Maintainer reading: explicitly checked geometric base-change hypotheses using the existing separated finite-type permanence leaf and the affine finite-module tensor calculation; explicitly cited the proper ordinary/compact-support comparison for the finite fibre.",
+  "blueprint": "Current main-20261015 proof: Step 1 realizes the opening properness comparison; Step 2 its exactness and filtration passage; Step 3 its geometric Frobenius orbits using the existing finite-fibre decomposition; Step 4 its displayed eigenvalue calculation; Step 5 its final mixed-complex conclusion. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Only its proper direct-image comparison is used; the unit is a weight argument and supplies no replacement for the six-functor laws."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "The equivariant lifts and Frobenius compatibility of comparison maps are generic tools needed to interpret the finite direct image as a Weil complex; no unit step proves these functorial laws."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "prop-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q116-d30257f00",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-d30257f00 (reviewer sub-agent of L); spot-checked: Reviewed all five steps and the sole new node against the blueprint, Stacks 03QP, Bhatt–Scholze 6.8.14–15 and Deligne’s Frobenius conventions. Repaired geometric base-change hypothesis justification and the finite fibre’s ordinary/compact-support comparison. Statements unchanged; no duplicate or dependency cycle found. Details and corrected JSON are in review.md and fixes/.; 1 file(s) fixed by the reviewer"
  }
 }

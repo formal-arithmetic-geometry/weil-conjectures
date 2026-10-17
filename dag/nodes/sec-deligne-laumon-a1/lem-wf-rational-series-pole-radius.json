@@ -14,9 +14,35 @@
   "d-real-series",
   "def-weil-complex-absolute-value"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume for contradiction that $R(f)>|a|$. By the definition of $R(f)$ in [d-real-series], the numerical series $\\sum_{n\\ge0}|c_n|\\,|a|^n$ converges, so $f(a)=\\sum_{n\\ge0}c_na^n$ is well-defined and absolutely convergent. Write $Q=\\sum_{k=0}^d q_kT^k$. The formal identity $Qf=P$, using the coefficient convolution in [def-weil-formal-power-series] and the polynomial-to-series map [def-weil-polynomial-as-power-series], says that the coefficients of $P$ are those of this Cauchy product. Since the sum over $k$ is finite and the series for $f(a)$ is absolutely convergent, evaluating that product at $a$ gives $P(a)=Q(a)f(a)=0$. This contradicts $P(a)\\ne0$. Hence $R(f)\\le |a|$.",
+   "uses": [
+    "d-real-series",
+    "def-weil-formal-power-series",
+    "def-weil-polynomial-as-power-series",
+    "def-weil-polynomial-ring",
+    "def-weil-complex-absolute-value"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+    "place": "Final paragraph, Taylor-radius conclusion; the general polynomial identity formulation isolates its analytic input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "d-real-series",
+  "def-weil-formal-power-series",
+  "def-weil-polynomial-as-power-series",
+  "def-weil-polynomial-ring",
+  "def-weil-complex-absolute-value"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.proof.md",
+  "place": "Final paragraph, Taylor-radius conclusion; expanded as the direct absolutely convergent Cauchy-product argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -76,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-wf-l2-dictionary",
@@ -93,5 +119,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-rational-series-pole-radius",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged and expanded its final Taylor-radius inference into a direct contradiction argument: a radius larger than the root modulus permits absolute evaluation, and the formal polynomial-times-series identity evaluates to P(a)=Q(a)f(a). No additional node is needed because the finite Cauchy-product calculation is elementary from the cited power-series and radius definitions.",
+  "blueprint": "Realizes the final paragraph of thm-wf-l2-dictionary.proof.md, specifically the inference that an uncancelled denominator root bounds the Taylor radius. The item is not the unit key node, so no unit realization record is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-96ac73bb1",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-96ac73bb1 (reviewer sub-agent of L); spot-checked: Read the item, parent, all five cited statements, unit/chapter route, and current blueprint proof. The sole Cauchy-product step is correct under every hypothesis; edge cases and cancellation examples check out. No duplicate, circularity, route departure, missing dependency, SGA use, or coefficient-category issue found. No new nodes or repairs; review.md written."
  }
 }

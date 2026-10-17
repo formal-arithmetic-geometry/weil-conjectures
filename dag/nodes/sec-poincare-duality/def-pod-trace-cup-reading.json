@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-pod-trace-cup-reading",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Poincare duality conventions: trace and trace-cup pairing",
- "statement": "In the conventions of [def-pod-conventions] ($X_0$ not necessarily\nproper), the trace map of [def-weil-poincare-trace-cup] is read through the\ncanonical orientation $\\eta_X$ as the counit of $Ra_{X!}\\dashv Ra_X^!$,\n\n$$\n\\operatorname{tr}_X:H_c^{2d}(X,\\Lambda(d))\\longrightarrow\\Lambda,\n\\qquad\n\\operatorname{tr}^{(-d)}_X:H_c^{2d}(X,\\Lambda)\\longrightarrow\\Lambda(-d),\n$$\n\nthe second being its untwisted form; neither uses properness (compare\n[def-pur-smooth-trace], where the same trace is realized as the normalized\nsmooth trace $\\operatorname{Tr}^{\\mathrm{sm}}_{a_X,\\Lambda}$). If $X_0$ is\nproper, then $Ra_{X!}\\cong Ra_{X*}$ by [cor-cbc-proper-coincidence], so\n$H_c^{2d}=H^{2d}$ and $\\operatorname{tr}^{(-d)}_X$ is the map\n$H^{2d}(X,\\Lambda)\\to\\Lambda(-d)$ of [def-weil-poincare-trace-cup]; only\nin this case is the trace–cup pairing\n$\\langle x,y\\rangle_i=\\operatorname{tr}^{(-d)}_X(x\\smile y)$ on\n$H^i(X,\\Lambda)\\times H^{2d-i}(X,\\Lambda)$ of that definition read in\nthese conventions.",
+ "statement": "In the conventions of [def-pod-conventions] ($X_0$ not necessarily\nproper), fix $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ and use the coefficient cohomology of [def-weil-ordinary-compact-cohomology] and the Tate twists of [def-coefficient-twists-detailed]. The trace construction of [def-weil-poincare-trace-cup], read at this coefficient stage, uses the\ncanonical orientation $\\eta_X$ to read the counit of $Ra_{X!}\\dashv Ra_X^!$,\n\n$$\n\\operatorname{tr}_X:H_c^{2d}(X,\\Lambda(d))\\longrightarrow\\Lambda,\n\\qquad\n\\operatorname{tr}^{(-d)}_X:H_c^{2d}(X,\\Lambda)\\longrightarrow\\Lambda(-d),\n$$\n\nthe second being its untwisted form; neither uses properness (compare\n[def-pur-smooth-trace] at $\\Lambda=A_{E,n}$. The identification with its normalized smooth trace is [cor-pur-finite-stage-smooth-dualizing-complex]; for $\\Lambda\\in\\{\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ the counit is the transported normalized integration map of [cor-pur-adic-and-rational-smooth-dualizing-complexes]). If $X_0$ is\nproper, then use the canonical comparison $\\kappa:Ra_{X!}\\xrightarrow{\\sim}Ra_{X*}$ of [prop-weil-proper-compact-coincidence] at the chosen coefficient stage (at finite coefficients, the proper comparison in [cor-cbc-proper-coincidence]), so\n$H_c^{2d}\\cong H^{2d}$ and, writing $h=H^{2d}(\\operatorname{Fib}_s\\kappa)$, the ordinary-cohomology trace is $\\operatorname{tr}^{(-d)}_X\\circ h^{-1}$. This is the corresponding map $H^{2d}(X,\\Lambda)\\to\\Lambda(-d)$ in the trace convention of [def-weil-poincare-trace-cup] (literally its displayed map when $\\Lambda=\\mathbf Q_\\ell$); only\nunder this properness assumption is the trace–cup pairing\n$\\langle x,y\\rangle_i=\\operatorname{tr}^{(-d)}_X(x\\smile y)$ on\n$H^i(X,\\Lambda)\\times H^{2d-i}(X,\\Lambda)$ of that definition read in\nthese conventions.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-trace-cup/def-pod-trace-cup-reading.md",
   "place": "node def-pod-trace-cup-reading, order 2422"
@@ -16,14 +16,201 @@
   "def-pod-conventions",
   "def-weil-poincare-trace-cup",
   "def-pur-smooth-trace",
-  "cor-cbc-proper-coincidence"
+  "cor-cbc-proper-coincidence",
+  "def-weil-ordinary-compact-cohomology",
+  "def-coefficient-twists-detailed",
+  "cor-pur-finite-stage-smooth-dualizing-complex",
+  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "prop-weil-proper-compact-coincidence"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "traceCupPairing|untwistedTrace|smoothTrace|cohomologyAddEquivCompactSupport",
+   "results": {
+    "t": "2026-10-17T14:10:56Z",
+    "tool": "grep",
+    "query": "traceCupPairing|untwistedTrace|smoothTrace|cohomologyAddEquivCompactSupport",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth etale cohomology trace H_c^(2d)(X,Lambda(d)) to Lambda and untwisted trace to Lambda(-d) defined by exceptional adjunction",
+   "results": {
+    "t": "2026-10-17T14:10:56Z",
+    "tool": "leansearch",
+    "query": "Smooth etale cohomology trace H_c^(2d)(X,Lambda(d)) to Lambda and untwisted trace to Lambda(-d) defined by exceptional adjunction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.of_unramified_and_smooth",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+     "Algebra.FormallyEtale.instFormallySmooth",
+     "Algebra.intTraceAux",
+     "Algebra.FormallyEtale.iff_unramified_and_smooth",
+     "Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth",
+     "Algebra.normalizedTrace"
+    ],
+    "digest": "835ea61d0e7e235b"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned underived etale/smooth algebra, field trace, scheme module pseudofunctors, condensed counits or analytic compact support; none constructs the required maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"trace\"",
+   "results": {
+    "t": "2026-10-17T14:10:56Z",
+    "tool": "loogle",
+    "query": "DerivedCategory, \"trace\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace and untwisted trace on compactly supported etale cohomology defined from a smooth purity orientation and exceptional adjunction counit, with proper trace cup pairing",
+   "results": {
+    "t": "2026-10-17T14:11:07Z",
+    "tool": "leanfinder",
+    "query": "Trace and untwisted trace on compactly supported etale cohomology defined from a smooth purity orientation and exceptional adjunction counit, with proper trace cup pairing",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.trace_eq_contract_apply",
+     "LinearMap.trace_eq_contract",
+     "LinearMap.trace_eq_contract'",
+     "Algebra.normalizedTrace",
+     "Algebra.traceForm_apply",
+     "Algebra.trace_quotient_mk",
+     "trace_quotient_eq_trace_localization_quotient",
+     "Algebra.normalizedTrace_trans"
+    ],
+    "digest": "a6e0bf0c6714d7d0"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned linear algebra, field trace, condensed internal Hom or group cohomology; none gives this four-stage geometric trace convention"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupported|Poincare|poincare|Verdier|dualizing",
+   "results": {
+    "t": "2026-10-17T14:11:50Z",
+    "tool": "grep",
+    "query": "compactlySupported|Poincare|poincare|Verdier|dualizing",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support cohomology trace map smooth scheme counit exceptional inverse image Tate twist Poincare pairing",
+   "results": {
+    "t": "2026-10-17T14:11:51Z",
+    "tool": "leansearch",
+    "query": "compact support cohomology trace map smooth scheme counit exceptional inverse image Tate twist Poincare pairing",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompHausLike.LocallyConstant.counit",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τr",
+     "HasCompactSupport.toSchwartzMap_toFun",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τr",
+     "CompHausLike.LocallyConstant.counitAppApp",
+     "HasCompactSupport.toSchwartzMap",
+     "HasCompactSupport.toSchwartzMap.congr_simp"
+    ],
+    "digest": "a81e048dbb48b610"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned underived etale/smooth algebra, field trace, scheme module pseudofunctors, condensed counits or analytic compact support; none constructs the required maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\"",
+   "results": {
+    "t": "2026-10-17T14:11:51Z",
+    "tool": "loogle",
+    "query": "\"Tate\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Lean.Macro.State",
+     "Lean.Macro.instInhabitedState",
+     "Lean.Macro.State.macroScope",
+     "EStateM.dummySave",
+     "_private.Init.Prelude.0.Lean.Macro.State.expandedMacroDecls",
+     "EStateM",
+     "EStateM.Backtrackable",
+     "EStateM.Result"
+    ],
+    "digest": "7f3136703288883a"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: substring Tate returned State and EStateM identifiers, not Tate twists or geometric traces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality integration map on compactly supported cohomology, remove the Tate twist, and compose with ordinary cup product when a scheme is proper",
+   "results": {
+    "t": "2026-10-17T14:12:01Z",
+    "tool": "leanfinder",
+    "query": "Poincare duality integration map on compactly supported cohomology, remove the Tate twist, and compose with ordinary cup product when a scheme is proper",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints_symm_comp",
+     "CharacterModule.dual_rTensor_conj_homEquiv",
+     "groupCohomologyIsoExt",
+     "groupCohomology.isoCocycles₁_inv_comp_iCocycles",
+     "groupCohomology.isoCocycles₁_hom_comp_i",
+     "groupCohomology.isoShortComplexH1_hom",
+     "groupCohomologyIso",
+     "groupCohomology.toCocycles_comp_isoCocycles₁_hom"
+    ],
+    "digest": "d100e1a8dc794bf7"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned linear algebra, field trace, condensed internal Hom or group cohomology; none gives this four-stage geometric trace convention"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +234,21 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-def-trace-cup"
+ "unit": "sk-def-trace-cup",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pod-trace-cup-reading",
+  "worker": "stage1",
+  "summary": "Definition split with no new nodes. Checked the current main-20261015 source and both geometric trace maps, the coefficient stages and properness restriction. Made the coefficient stages and cohomology/twist definitions explicit, cited the finite and higher-stage normalization results rather than applying the finite smooth-trace definition at field coefficients, and specified the direction of transport through the proper comparison. The finite-coefficient etale Lean definitions do not attach the all-stage pro-etale convention. All eight Mathlib searches are logged; none matches.",
+  "blueprint": "Realizes the full definition in main-20261015, def-pod-trace-cup-reading.md: the opening counit reading and two compact-support traces, the finite/higher-stage normalized smooth-trace parenthesis, and the final proper-comparison and ordinary trace-cup clause. This is a definition, so proof and proof_deps are empty; the sk-def-trace-cup unit has no proof steps, and this item is not its key node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q100-e046d7ba3",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q100-e046d7ba3 (reviewer sub-agent of L); spot-checked: Read the full definition, all nine cited statements, master/current source passages, and unit/chapter route. Coefficient stages, normalized counit trace, untwisting, and proper transport tr_c∘h⁻¹ are consistent. Checked edge cases, duplicate candidates, and dependency cycles. No new nodes, repairs, or accepted tool_uses. Detailed checks written to review.md."
+ }
 }
