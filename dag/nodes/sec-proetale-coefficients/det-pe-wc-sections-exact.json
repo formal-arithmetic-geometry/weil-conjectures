@@ -213,5 +213,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsExact",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.wContractible_sections_exact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleWContractibleSectionsExact.lean",
+  "statement": "theorem wContractible_sections_exact (X : Scheme.{t}) (D : Type t) [CommRing D] [IsWContractibleRing D] (f : Spec (CommRingCat.of D) ⟶ X) [WeaklyEtale f] (R : Sheaf (topology X) RingCat.{u}) : PreservesFiniteLimits ((sheafSections (topology X) AddCommGrpCat.{max v (t + 1)}).obj (op (ProEt.mk f))) ∧ PreservesFiniteColimits ((sheafSections (topology X) AddCommGrpCat.{max v (t + 1)}).obj (op (ProEt.mk f))) ∧ PreservesFiniteLimits (SheafOfModules.evaluation.{max v (t + 1)} R (op (ProEt.mk f))) ∧ PreservesFiniteColimits (SheafOfModules.evaluation.{max v (t + 1)} R (op (ProEt.mk f)))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4705f2f63",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read node, blueprint statement+proof, the 4 stmt-dep records/declarations (Mathlib ProEt/topology/mk, IsWContractibleRing hierarchy via #print, ringedSiteModules=SheafOfModules, sheafSections) and SheafOfModules.evaluation universe order. Lean: X:Scheme.{t}, D:Type t w-contractible, f:Spec D ⟶ X weakly etale, R:Sheaf RingCat.{u}; conclusion PreservesFiniteLimits∧PreservesFiniteColimits for abelian sheafSections and module evaluation at ProEt.mk f, universe max v (t+1) (generalizes project u+1 convention, no silent restriction). Edge cases (zero ring/empty U, empty X, zero sheaves) covered. No duplicate (existing evaluation theorems assume weak contractibility/section-surjectivity). No defs, sorry only, source+blueprint docstrings with 5 proof steps, only lean field changed, statement verbatim. nt_compile.py: clean, 1.9 s, no warnings. No findings."
  }
 }
