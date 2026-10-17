@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "lem-coef-simplicial-inversion-universal-property",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-diagram-equivalence-classes"
  ],
  "proof": [
   {
@@ -229,5 +230,37 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-83df53237 (reviewer sub-agent of L); spot-checked: I read the item in full and every cited statement: inversion-universal-property, projective-model-calculus, diagram-equivalence-classes, realization-finite-limits, model-nerve-localization, localization-homotopy-category, model-localization-detects-weak-equivalences, plus boundary-collapse-test and the only citer, inversion-product-parameter. I checked the source in HTT (Harvard PDF fetched read-only with pdftotext into /tmp). Prop. A.3.4.13, printed p.890: evaluation (A^C)°⊗C→A° gives Hom(D,(A^C)°)≅Hom(C⊗D,A°) for every small D, proved by identifying both sides with π0 A^{C⊗D} through A.3.4.12, p.889–890. The item's subset clause is the Hom^W ≅ Hom^{W'} bijection in Lemma A.3.5.14, p.896. The statement is this result over Kan-model sSet, with no added or dropped hypothesis and no cofibrancy or local-Kan condition on I or D. It is unchanged from the side DAG copy, which is still unsplit. Step checks: (1) evaluation is a simplicial functor on end mapping sets, by enriched naturality. (2) Currying (A^D)^I≅A^{I×D}; the two model structures have the same weak equivalences and fibrations, hence the same cofibrations. (3) The classification is applied twice with valid hypotheses, and the chunk clause is unused. (4) The uncurried bifibrant representative equals e∘(P×1_D) exactly, and ×D preserves DK equivalences through finite products under realization. (5) The bifibrant π0 iso ⇔ W criterion follows from the three cited statements, each of which says what the step takes. (6) The objectwise criterion holds, with P(s)_d=P̃(s,1_d). (7) Naturality in I and in D: the D-direction makes precise, through the classification, the derived restriction the statement leaves undefined, and the citer uses only I-naturality. Small cases D=∅, I=∅, D=*, S=∅ all check. All deps are in the item's own unit sk-prop-sf-biduality-general, so there are no tool_uses. The dependency closure of 252 nodes contains no cycle. There are no new nodes and no duplicate. The searches cover all three kinds. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a69e43a8",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Every hypothesis and clause matches the node and HTT A.3.4.12-13 and A.3.5.14 through the recorded projective-calculus and diagram-classification interfaces. Same C hypotheses as the classification; no cofibrancy/local-Kan binders on I,D; only object sets enlarged. The exponential Equiv is pinned to actual uncurried evaluation by `representative`, and every class has a strict representative via unrestricted classification. I-naturality, D-naturality via an enriched RestrictionPresentation, the (s,1_d) marked subset iff with IsPiZeroIso, and the pointwise criterion are all correct. Product maps and uncurrying are uniquely pinned data, not arbitrary. Edge cases I=∅, D=∅, D=*, S=∅ checked. stmt_deps gains the landed diagram-equivalence-classes node (allowed, acyclic); node otherwise changed only in lean; statement verbatim. One sorry; source/blueprint docstrings with 7 proof steps. nt_compile.py side overlay: exit 0, no errors/warnings. Non-blocking: restriction_exists needs enriched functorial factorization (true, Riehl 13.2.1, project node lem-coef-enriched-functorial-factorizations) at stage 3; Second-reading section is the standard post-2026-10-17 placeholder."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialDerivedExponential",
+  "declaration": "CategoryTheory.SimplicialDerivedExponential.simplicial_derived_exponential",
+  "declarations": [
+   "CategoryTheory.SimplicialDerivedExponential.index",
+   "CategoryTheory.SimplicialDerivedExponential.target",
+   "CategoryTheory.SimplicialDerivedExponential.functorClass",
+   "CategoryTheory.SimplicialDerivedExponential.indexClass",
+   "CategoryTheory.SimplicialDerivedExponential.Inverts",
+   "CategoryTheory.SimplicialDerivedExponential.IndexProducts",
+   "CategoryTheory.SimplicialDerivedExponential.productMarking",
+   "CategoryTheory.SimplicialDerivedExponential.Uncurrying",
+   "CategoryTheory.SimplicialDerivedExponential.RestrictionPresentation",
+   "CategoryTheory.SimplicialDerivedExponential.Statement",
+   "CategoryTheory.SimplicialDerivedExponential.simplicial_derived_exponential"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialDerivedExponential.lean",
+  "statement": "theorem simplicial_derived_exponential (C : Type (max u w)) [Category.{u} C] [ModelCategory C] [SimplicialCategory C] (T : SimplicialTensorCotensor C) (hC : CombinatorialModelCategory.{max u w, u, u} C) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 C) : Nonempty (Statement C T)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded projective enrichment and model structure, full bifibrant subcategories and the diagram-classification large Bergner localization. Uncurrying is fixed on all objects and mapping simplices. Restriction existence and an enriched objectwise weak comparison are conclusions, and naturality holds for every such representative. No cofibrancy/local Kan condition on either index and no object/morphism universe equality is added. The paired product index is the existing MarkedCone.productIndex definition, not the downstream marked-cone theorem."
  }
 }
