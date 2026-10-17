@@ -12,9 +12,129 @@
   "def-weil-finite-type-morphism",
   "lem-trf-riemann-zariski-finite-refinement"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a centred quasi-model $U$, its generic map embeds $k(U)$ in $L$. By [lem-sc-integral-scheme-stalks-in-function-field], every local ring $R_U=\\mathcal O_{U,c_U}$ injects into $k(U)$ and hence into $L$. The local homomorphism $R_U\\to V$ associated to the given map $\\operatorname{Spec}V\\to U$ is the one in [lem-weil-pbc-morphism-from-spec-local-ring]; its composite with $V\\subseteq L$ is precisely this embedding, by compatibility of the generic maps. For a refinement $U'\\to U$, its stalk homomorphism $R_U\\to R_{U'}$ is local by [def-weil-locally-ringed-space-morphism], and its composite into $L$ is the given embedding of $R_U$. Consequently it is injective and is an inclusion of these subrings of $V$. Composition and identities agree because they agree as subring inclusions.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, centre local rings in Lemma 3.2.2 and Corollary 3.2.5; local-map description: Stacks Tag 01J6"
+   }
+  },
+  {
+   "text": "Here is the affine construction used below. Write $t$ for the centre on $T$. By [lem-weil-pbc-finite-type-over-noetherian], $T$ and every quasi-model are Noetherian; [lem-weil-pbc-locally-noetherian-quasi-separated] makes them quasi-separated. An affine open $W$ in any such scheme $Y$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so its inclusion is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), and of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Choose an affine open $T_0=\\operatorname{Spec}A$ containing $t$. Every point of the spectrum of a local ring generalizes its closed point, so the prescribed morphism $\\operatorname{Spec}V\\to T$ factors through $T_0$. Thus $A$ embeds in $V$ by its generic restriction, using Step 1 for $T$. For a finitely generated $A$-subalgebra $B\\subseteq V$, $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is of finite type: if $b_1,\\ldots,b_r$ generate $B$, the same elements generate $B_f$ over $A_f$ on every principal open of $\\operatorname{Spec}A$; this is the affine finite-type criterion in [def-weil-finite-type-morphism]. Composition with $T_0\\to T$ is finite type by [lem-sfb-finite-type-composition-base-change]. It is separated by [lem-weil-pbc-affine-source-morphism-separated]. The domain $B\\subseteq L$ makes $\\operatorname{Spec}B$ integral; the maps from $\\operatorname{Spec}V$ and $\\operatorname{Spec}L$ induced by inclusion have the required generic behaviour. Hence this is an affine centred quasi-model. The same argument shows that an affine open neighbourhood of a centre in any quasi-model is again a centred quasi-model.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2 affine quasi-model constructions; Stacks Tags 01T6, 01OY, 01KN, 03GI, 01T5, 01T3"
+   }
+  },
+  {
+   "text": "There is at most one refinement map $U'\\to U$. Indeed, by the separatedness definition [def-weil-proper-morphism], the equalizer of two such maps is the pullback of the closed diagonal of $U\\to T$; it is a closed subscheme of $U'$ by [lem-pc-closed-imm-base-change]. The maps coincide on $\\operatorname{Spec}L$, so the equalizer's ideal vanishes at the generic point of $U'$. On every nonempty affine open of the integral scheme $U'$, injectivity into its function field from [lem-sc-integral-scheme-stalks-in-function-field] forces this ideal to be zero. Thus the equalizer is all of $U'$. In particular mutually refining objects are uniquely isomorphic. The isomorphism classes form a set: a quasi-model is quasi-compact, by finite type over the quasi-compact scheme $T$ and [lem-weil-pbc-qcqs-morphism-permanence](2). Choose a finite affine cover. By Step 1 its coordinate rings can all be regarded as subrings of the fixed set $L$. Finite lists of such subrings, open overlaps, and their gluing isomorphisms range over sets. The possible maps of each resulting scheme to the fixed scheme $T$, and from $\\operatorname{Spec}L$ and $\\operatorname{Spec}V$, also range over sets. Choosing representatives therefore gives a small partially ordered system under refinement.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-closed-imm-base-change",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, the system of quasi-models; separated generic-map uniqueness made explicit (Stacks Tags 01KK and 01JY)"
+   }
+  },
+  {
+   "text": "The system is nonempty, since $T$ with its identity map and the given valuation morphism is a centred quasi-model. Given two centred quasi-models $U_1,U_2$, take $T_0=\\operatorname{Spec}A$ as in Step 2. In the inverse image of $T_0$ in each $U_i$, choose an affine chart $\\operatorname{Spec}B_i$ containing $c_{U_i}$ from a finite-type affine cover as in [def-weil-finite-type-morphism]; each $B_i$ is finitely generated over $A$. The valuation morphism factors through this chart because its inverse image is an open containing the closed point of $\\operatorname{Spec}V$. By Step 1 identify $B_1,B_2$ with subrings of $V$, compatibly with $A$. Let $B=A[B_1,B_2]\\subseteq V$, meaning the subalgebra generated by finite generating sets for the two $B_i$. Step 2 makes $Z=\\operatorname{Spec}B$ an affine centred quasi-model. The inclusions $B_i\\subseteq B$ give $T_0$-morphisms $Z\\to\\operatorname{Spec}B_i\\to U_i$. Their composites with the maps from $\\operatorname{Spec}V$ and $\\operatorname{Spec}L$ are the prescribed maps, since all ring maps are inclusions. Thus $Z$ is a common refinement. Combined with Step 3, this proves directedness, and even that common refinements may be chosen affine.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, affine quasi-model refinements; explicit finite-subalgebra construction supplementing Lemma 3.2.2"
+   }
+  },
+  {
+   "text": "For any $a\\in V$, use Step 2 with $B=A[a]$. Put $\\mathfrak p=B\\cap\\mathfrak m_V$, the image of the closed point of $\\operatorname{Spec}V$. The centre local ring is $B_{\\mathfrak p}$ as in [def-weil-pbc-localization-at-prime]. Every denominator $s\\in B\\setminus\\mathfrak p$ is a unit in $V$, so the map $b/s\\mapsto bs^{-1}$ embeds $B_{\\mathfrak p}$ in $V$, and its image contains $a=a/1$. Thus every element of $V$ occurs in a centre local ring; Step 1 gives the reverse containment. Hence $V=\\bigcup_U R_U$, including when $a=0$ or $V=L$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, affine quasi-models and valuation-stalk union (Lemma 3.2.2, Corollaries 3.2.4--3.2.5); element-adjoining proof"
+   }
+  },
+  {
+   "text": "This directed union has the colimit universal property [def-weil-pbc-category-colimit]. Given a compatible family of ring maps $f_U:R_U\\to C$, define $f(a)=f_U(a)$ using any ring containing $a$, which exists by Step 5. If $a$ also belongs to $R_{U'}$, choose a common refinement by Step 4; compatibility makes the two values equal there. Taking a common refinement for rings containing any pair $a,b$ proves $f(a+b)=f(a)+f(b)$ and $f(ab)=f(a)f(b)$; constants are preserved in any one ring. Thus $f:V\\to C$ is a ring map with the required restrictions. The union description forces uniqueness. This proves that the given local maps identify $V$ with the filtered colimit, with exactly the transition maps in the statement.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, stalk union; explicit universal-property verification"
+   }
+  },
+  {
+   "text": "Fix a centred quasi-model $U_0$, and optionally an affine open neighbourhood $W_0$ of $c_{U_0}$ in $U_0$. By Step 2, $W_0$ is itself a centred quasi-model. Step 4 gives, for every $U$, an affine common refinement of $U$ and $U_0$ (or of $U$ and $W_0$). Hence each restricted family is nonempty and cofinal. It is directed: apply Step 4 to two of its members; the resulting affine common refinement still maps to $U_0$, or to $W_0$, and these maps agree by Step 3. The inclusions of local rings are unchanged. For any $a\\in V$, first use Step 5 to find a model containing $a$, then refine it into the restricted family. Its local ring still contains $a$ by Step 1. Therefore the restricted union is also $V$, and the proof of Step 6 gives its filtered-colimit universal property as well. This establishes both restriction clauses without assuming that an arbitrary morphism factors through an open merely from its set-theoretic image: only maps from a local spectrum with centre in that open were so factored.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, cofinal affine quasi-model neighbourhoods in Lemma 3.2.2; restriction argument written explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-colimit-limit] to the small directed diagram of commutative rings $R_U$ from Steps 1, 3 and 4, whose colimit is $V$ by Step 6. It gives a limit cone in the category of schemes with vertex $\\operatorname{Spec}V$ and legs induced by the inclusions $R_U\\to V$. These are precisely the morphisms specified in the statement. Its transition morphisms are induced by the stalk inclusions of Step 1. Apply the same cited statement to each restricted small directed diagram from Step 7; its colimit is again $V$. This proves all inverse-limit assertions, with no smallness or affineness hypothesis left unchecked.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Stacks Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit, and its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-proper-morphism",
+  "lem-pc-closed-imm-base-change",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§3.2 Lemma 3.2.2 and Corollaries 3.2.4--3.2.5, read online at https://arxiv.org/html/0707.3953v3#S3.SS2. The named local archive is missing (WANTED in report); the affine finite-subalgebra and universal-property details are supplied by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +170,45 @@
    "results": "{\"t\": \"2026-10-17T19:50:45Z\", \"tool\": \"leanfinder\", \"query\": \"The valuation ring equals the directed union of the local rings at its centres on quasi models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"LocalSubring.exists_le_valuationSubring\", \"ValuationRing.of_integers\", \"LocalSubring.exists_valuationRing_of_isMax\", \"Valuation.Integers\", \"ValuationRing.iff_isInteger_or_isInteger\", \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\", \"IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation\"], \"digest\": \"652cf426b37809c3\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+  },
+  {
+   "tool": "grep",
+   "query": "Riemann.?Zariski|valuation.*colimit|quasi.?model",
+   "results": "{\"t\": \"2026-10-17T20:40:18Z\", \"tool\": \"grep\", \"query\": \"Riemann.?Zariski|valuation.*colimit|quasi.?model\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual hits concern valuation-ring structure or finite-type morphisms, not this centred-quasi-model colimit and its cofinal restriction clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A valuation ring is the directed union of local rings of finite type models in its fraction field",
+   "results": "{\"t\": \"2026-10-17T20:40:19Z\", \"tool\": \"leansearch\", \"query\": \"A valuation ring is the directed union of local rings of finite type models in its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationRing\", \"ValuationRing.mk\", \"ValuationRing.isLocalRing\", \"Valuation.integer\", \"ValuationRing.TFAE\", \"ValuationRing.iff_isInteger_or_isInteger\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing.toIsLocalRing\"], \"digest\": \"7e2f345364bba969\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual hits concern valuation-ring structure or finite-type morphisms, not this centred-quasi-model colimit and its cofinal restriction clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, DirectLimit",
+   "results": "{\"t\": \"2026-10-17T20:40:19Z\", \"tool\": \"loogle\", \"query\": \"ValuationRing, DirectLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual hits concern valuation-ring structure or finite-type morphisms, not this centred-quasi-model colimit and its cofinal restriction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Valuation ring is the filtered colimit of local rings at its centres on finite type integral models",
+   "results": "{\"t\": \"2026-10-17T20:40:24Z\", \"tool\": \"leanfinder\", \"query\": \"Valuation ring is the filtered colimit of local rings at its centres on finite type integral models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"Valuation.Integers.isFractionRing\", \"ValuationRing.instIsFractionRingInteger\", \"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"IsLocalRing.exists_factor_valuationRing\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"Valuation.HasExtension.instIsLocalHomValuationInteger\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\"], \"digest\": \"9965a912962a825f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual hits concern valuation-ring structure or finite-type morphisms, not this centred-quasi-model colimit and its cofinal restriction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a local subring of a field occurs on a finite type affine model dominated by that local ring",
+   "results": "{\"t\": \"2026-10-17T20:40:25Z\", \"tool\": \"leanfinder\", \"query\": \"Every element of a local subring of a field occurs on a finite type affine model dominated by that local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finiteType_isLocal\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"Algebra.EssFiniteType.cond\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"69ae7550e66bbd48\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual hits concern valuation-ring structure or finite-type morphisms, not this centred-quasi-model colimit and its cofinal restriction clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-stability-locus",
@@ -72,5 +227,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-riemann-zariski-local-colimit",
+  "worker": "stage1",
+  "summary": "Wrote the local-ring inclusions, set-sized poset, common affine refinements by finite subalgebras of V, element-adjoining union, colimit universal property, cofinal restricted families, and affine-spectrum limit argument. Reused existing scheme and Mathlib leaf nodes; created no nodes and changed no statement. The local Temkin PDF is missing and is reported WANTED; online source was read.",
+  "blueprint": "Realizes the valuation-centre inverse-limit input to the stable-modification approximation branch of lem-trf-local-term-locality through lem-trf-stable-modification-stability-locus, retaining the inherited ancestor and via. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic scheme tool: The ideal sheaf of a base-changed closed immersion. It supplies only its stated foundational fact in the affine valuation-colimit proof; no statement in the trace-formula unit supplies this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-imm-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-75229484b",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-75229484b (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements; checked Temkin §3.2 and local Stacks sources. All eight steps establish the unchanged statement, including both restricted systems and the actual limit maps. No new nodes, circularity, hidden long steps, or forbidden machinery. Accepted the closed-immersion base-change tool use. Detailed checks are in review.md; no fixes required."
  }
 }
