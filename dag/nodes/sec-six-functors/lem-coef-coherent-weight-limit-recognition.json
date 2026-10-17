@@ -11,7 +11,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching",
   "def-coef-coherent-nerve-infrastructure",
-  "lem-coef-infinity-join-cone-calculus"
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-right-straightening-fiber-comparison"
  ],
  "proof": [
   {
@@ -335,5 +336,49 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-340389d46 (reviewer sub-agent of L); spot-checked: Decision FIX, one repair. The item statement is unchanged and matches the RV recognition theorem: every-Z weak equivalence, locally Kan D, the item's fixed-boundary fixed-vertex convention, and Y=∅ reduces to terminality. Source access: the Riehl–Verity PDF is online only and WANTED, it is not under literature/, a file-name search found no copy, and the review service blocks network access. My full-text grep of /home/ubuntu was stopped at its time limit without a match, so it does not prove absence. I could not open the cited pages, so I checked every claim directly from the subset-poset definition of C[-]. New node lem-coef-join-boundary-cubical-extension is true: I checked the cross-mapping formula on Δ⁰⋆Δ⁰, Δ¹⋆Δ⁰ and Δ¹⋆Δ¹; ∂Δⁿ⋆Δ⁰ is the horn Λⁿ⁺¹ₙ₊₁, whose hom(0,v) is exactly V=∂Q×Δ¹∪Q×{0}; the extension data (a,c) with its three equations is checked at n=1, n=2, Y=∅ and empty mapping sets. It is statement-only, self-contained, searched, not a duplicate (rigidification-boundary-cube, pinched-cube-latching, cone-boundary-projective-cells and quasicategory-simplex-join-attachment differ) and strictly smaller than the item. Steps 1–5 are correct: the collage and C⊣N_hc adjunction; cofibrancy of W_Y through L_S at S=Y^op and SM7 for Kan T_Z; the reduction with Z=H(0); the path-object fibration e is trivial by 2-of-3 even when u is not a fibration; the lift, including n=1. Fault in Step 6 (E5/C1): it claimed that simplex reversal 'exchanges initial with terminal objects'. def-cbc defines both through right-pinched mapping spaces, so reversal gives left-pinched spaces, and that comparison was uncited. Repaired with no new node by citing the same-unit lem-coef-infinity-relative-initial-boundary over Δ⁰, which gives initial and terminal boundary-filling criteria. The chain is now: terminal in C_{/d}, initial in J_{d^op}, initial cocone in P_{d^op}, boundary filling in (Δ_Y↓d) ≅ P^op, terminal, hence limiting. This removes the off-unit tool lem-cbc-terminal-boundary-extension; tool_uses=[], none accepted. Corrected item in fixes/dag/nodes/sec-six-functors/; proof_deps recomputed. No cycles, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-447a7a2be",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of afa93b21ca5a; the H13 return is fixed: the dependency node is unchanged, the 5 comparison helpers are moved into the item module with this item's blueprint tag and listed in lean.declarations, and there are no duplicates. Every node clause matches the Lean: A,B via rigidification, b via Straightening.vertex, W_Y=coherentHomDiagram with postcomposition action, locally Kan D, enriched F, L, GradedNatTrans lambda, Nat_n via enrichedNatTransYoneda on Δⁿ, every-Z hypothesis on the defined postcomposition map, collage fixed by restrict/vertex/mixed (unique), transpose via the Kan unit, IsLimiting of the dependency's fixed-boundary fixed-vertex comparison image with const→d orientation. The Classical.choose cylinder is uniquely determined by IsJoinConeCylinder. Edge cases checked: empty Y, point Y, empty mapping spaces, n=0, single universe u as recorded by the coherent-nerve dependency. No hollow definitions, only sorry proofs, docstrings present, statement verbatim, added stmt_dep acyclic. nt_compile --json: 3.3 s, exit 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentWeightLimitRecognition",
+  "declaration": "CategoryTheory.CoherentNerve.coherent_weight_limit_recognition",
+  "declarations": [
+   "SSet.Enhanced.joinConeCylinder",
+   "SSet.Enhanced.joinConeApex",
+   "SSet.Enhanced.joinConeComparisonArrow",
+   "SSet.Enhanced.joinConeComparisonArrow_endpoints",
+   "SSet.Enhanced.joinConeComparisonImage",
+   "CategoryTheory.CoherentNerve.enrichedNaturalMapSpace",
+   "CategoryTheory.CoherentNerve.coherentHomAction",
+   "CategoryTheory.CoherentNerve.coherentHomAction_laws",
+   "CategoryTheory.CoherentNerve.coherentHomDiagram",
+   "CategoryTheory.CoherentNerve.coherentBoundaryInclusion",
+   "CategoryTheory.CoherentNerve.coherentWeightApex",
+   "CategoryTheory.CoherentNerve.coherentJoinWeight",
+   "CategoryTheory.CoherentNerve.coherentWeightLeg",
+   "CategoryTheory.CoherentNerve.weightedPostcompositionComponent",
+   "CategoryTheory.CoherentNerve.weightedPostcompositionComponent_naturality",
+   "CategoryTheory.CoherentNerve.weightedPostcompositionSimplex",
+   "CategoryTheory.CoherentNerve.weightedPostcompositionSimplex_naturality",
+   "CategoryTheory.CoherentNerve.coherentWeightedPostcomposition",
+   "CategoryTheory.CoherentNerve.coherentTransposeSimplex",
+   "CategoryTheory.CoherentNerve.coherentTransposeSimplex_naturality",
+   "CategoryTheory.CoherentNerve.coherentTranspose",
+   "CategoryTheory.CoherentNerve.CoherentWeightLimitDatum",
+   "CategoryTheory.CoherentNerve.coherent_weight_limit_recognition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentWeightLimitRecognition.lean",
+  "statement": "theorem coherent_weight_limit_recognition (data : CoherentWeightLimitDatum.{u}) (mapping_equivalence : ∀ Z : data.D, SSet.Enhanced.IsWeakHomotopyEquivalence (coherentWeightedPostcomposition data.F data.L data.lambda Z)) : SSet.Enhanced.IsLimiting (SSet.Enhanced.orderedJoinInr Δ[0] data.Y ≫ coherentTranspose data.collageMap) (SSet.Enhanced.joinConeComparisonImage (coherentTranspose data.collageMap))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned afa93b21ca5a, H13: retain the landed InfinityJoinConeCalculus dependency record unchanged; publicly import its original module and move the five fixed-boundary comparison helpers unchanged into this owning module with this item’s blueprint tags and declarations. The canonical weight, Hom actions, enriched naturality, postcomposition, collage equations, transpose and recognition statement are unchanged."
  }
 }

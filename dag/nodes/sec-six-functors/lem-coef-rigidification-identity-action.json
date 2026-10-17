@@ -199,5 +199,34 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-47feae134 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node lem-coef-point-family-q-counit-identification, all seven cited statements, both consumers, the unit, the chapter and the ancestor paragraph (prop-coef-integral-exceptional-adjoint, paragraph 2). Both previous return points are fixed. (1) The new node supplies R≅Sing_Q Fun(X,Y), which agrees with HTT §2.2.4. It also gives E, the max map q (consistent with pinched-cube-latching), alpha, beta=j alpha, and [E]=[alpha]^{-1}[p_R]; I checked that equation via E V(alpha)=q_T, p≃max(p,q)≃q and naturality of p. The point-precomposition clause gives Step 2's chain [e][p]=[ev_eta][E][V h]=[u][theta]. Step 1 holds by the unit law in A^top. Fixing e_x through beta resolves a real ambiguity (on a discrete two-point target a swap changes the point map); it is not a weakening. Both consumers use e_x exactly as the item specifies it. (2) Step 3 now proves saturation through both directions of lem-cbc-realization-weak-equivalence. My reachability check finds no cycle. The suggested model-localization and coherent-nerve nodes do reach the item again, so they cannot be used. Step 4 follows from naturality of p, theta and u. The new node is a strictly smaller general Kan lemma, not a restatement of the item. It is statement-only, has 7 recorded searches and correct blueprint.from and via. I found no duplicate in the DAG. I accept the two lem-cbc tool_uses as generic tools. FIX: added the missing lean_audit {master: none, slopmaster2: none} to the new node in fixes/. Remark: the report says created.item was 'corrected', but the file correctly still has the parent lem-coef-infinity-pointwise-yoneda-evaluation. HTT and Kerodon are not in literature; WANTED is recorded.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a2dda510",
+  "group": "NV",
+  "result": "pass",
+  "note": "Only the item's lean field differs from the side clone; the recorded statement is verbatim with ' := by'; the 8 declarations match the file in order; all six stmt_deps modules are imported publicly; Worker report and Second reading by NV are present. Every clause matches: H=corepresented C a with value=Sing|A(a,z)|; identityPoint = enriched identity followed by the realization unit; ImageFormula fixes h in every degree; IsActionFamily is a triangle with edges 12 = h≫D.pinch (equal to H∘rightPinchPrism by pinch_formula) and 01 = beta(mapVertex eta), long edge gamma, matching the dependency's point_precomposition; Represents gives [lift e][pointHom.inv][beta]=[gamma], i.e. [e]=[beta]^-1[gamma]; main equation map p_M ≫ map e = map(theta≫unit) in the correct order; weak equivalence, naturality via mappingSpaceMap and singularRealization.map(mappingMap), and the ulift.{v} clause. Existence is a separate conjunct and is satisfiable, so the theorem is not vacuous. p/hp add no strength (any cosimplicial p gives the same [p_K] by the max homotopies); the D fields used (pinch, beta, pointHom) are fixed by their formula fields. Edge cases covered: empty mapping spaces, a=x, all degrees, no Nonempty or finiteness assumption, no forced universe equality. No hollow definitions; source and blueprint docstrings present, with the four proof steps; only a sorry proof. nt_compile.py --json: rc=0 with no errors or warnings in the output, item 2.5 s, 38 overlay modules; injecting exact 0 gave rc=1 with an error at 201:8."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RigidificationIdentityAction",
+  "declaration": "CategoryTheory.Spaces.IdentityAction.rigidification_identity_action",
+  "declarations": [
+   "CategoryTheory.Spaces.IdentityAction.value",
+   "CategoryTheory.Spaces.IdentityAction.identityPoint",
+   "CategoryTheory.Spaces.IdentityAction.comparison",
+   "CategoryTheory.Spaces.IdentityAction.ImageFormula",
+   "CategoryTheory.Spaces.IdentityAction.IsActionFamily",
+   "CategoryTheory.Spaces.IdentityAction.Represents",
+   "CategoryTheory.Spaces.IdentityAction.IsPointMap",
+   "CategoryTheory.Spaces.IdentityAction.rigidification_identity_action"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RigidificationIdentityAction.lean",
+  "statement": "theorem rigidification_identity_action (p : SSet.Pinched.resolution.{u} ⟶ SSet.stdSimplex.{u}) (hp : ∀ K : SSet.{u}, SSet.Enhanced.IsWeakHomotopyEquivalence ((SSet.Pinched.projection p).app K)) {p' : SSet.Pinched.resolution.{u + 1} ⟶ SSet.stdSimplex.{u + 1}} (D : PointFamily.ComparisonData.{u, w} p') : (∀ (C : SSet.{u}) [SSet.Quasicategory C] (a x : C _⦋0⦌), ∃ e : SSet.Enhanced.mappingSpace C a x ⟶ (value C a x).obj, IsPointMap D C a x e) ∧ (∀ (C : SSet.{u}) [SSet.Quasicategory C] (a x : C _⦋0⦌) (e : SSet.Enhanced.mappingSpace C a x ⟶ (value C a x).obj), IsPointMap D C a x e → PointFamily.weakLocalization.map ((SSet.Pinched.projection p).app (SSet.Enhanced.mappingSpace C a x)) ≫ PointFamily.weakLocalization.map e = PointFamily.weakLocalization.map (comparison C a x) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence e ∧ (PointFamily.weakLocalization.map (SSet.uliftFunctor.{v}.map ((SSet.Pinched.projection p).app (SSet.Enhanced.mappingSpace C a x))) ≫ PointFamily.weakLocalization.map (SSet.uliftFunctor.{v}.map e) = PointFamily.weakLocalization.map (SSet.uliftFunctor.{v}.map (comparison C a x))) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence (SSet.uliftFunctor.{v}.map e) ∧ ∀ (C' : SSet.{u}) [SSet.Quasicategory C'] (f : C ⟶ C') (e' : SSet.Enhanced.mappingSpace C' (f.app _ a) (f.app _ x) ⟶ (value C' (f.app _ a) (f.app _ x)).obj), IsPointMap D C' (f.app _ a) (f.app _ x) e' → PointFamily.weakLocalization.map (SSet.Enhanced.mappingSpaceMap f a x) ≫ PointFamily.weakLocalization.map e' = PointFamily.weakLocalization.map e ≫ PointFamily.weakLocalization.map (singularRealization.map (SSet.Pinched.mappingMap f a x)))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical coherent identity action specified by the H-image formula on every right-mapping simplex and a fixed-short-edge composition triangle; every beta-normalized representative satisfies the actual localized coend equation, weak-equivalence conclusion, naturality and arbitrary containing-universe lifts. Existence is a conclusion. The small and containing universes stay distinct. All helpers are real constructions or predicates belonging to this comparison node; no dependency or natural-language statement is changed."
  }
 }

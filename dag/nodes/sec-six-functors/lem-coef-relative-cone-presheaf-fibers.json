@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-space-transport-classification"
+  "lem-coef-space-transport-classification",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-cbc-grothendieck-presheaf-coherent-straightening"
  ],
  "proof": [
   {
@@ -287,5 +290,55 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-6f9811e92 (reviewer sub-agent of L); spot-checked: The mathematics is correct; one step needed a repair. Item statement: unchanged from base. Checked against GHN arXiv:1501.02161v3 Def 9.1 (B glued at E×{0}), Lemma 9.4(2) and Remark 9.5 after taking opposites (so j* is Cartesian, with fiber P(E)_{/p*X} and arrow Ψ→p*X), Prop 9.6, Prop 9.7, Cor 9.8 and the fiber chain in the proof of Prop 9.12. The statement correctly does not claim D is a quasicategory. Small cases checked: E empty, A=E=point, X initial, identity p and h. Steps 1-4 and 6-8 are correct. Step 1 is genuinely elementary: degreewise pushout and currying. Step 2 is the fixed-base horn argument. Step 4's fibrant-object comparison matches GHN's proof of 9.7. In step 8, right fibrations are isofibrations via the Kan core, then Brown on Joyal fibrant objects applies. New nodes: lem-coef-arrow-target-cartesian-pullbacks matches HTT Lemma 6.1.1.1 and lem-coef-contravariant-fibrations-between-right-fibrations matches HTT Cor 2.2.3.14 (both read in the HTT PDF, which states 2.2.3.14 for arbitrary S). Both are self-contained and statement-only, have five searches each, are generic tools rather than restated clauses of the item, and are not duplicates: I compared them with lem-coef-slice-cartesian-colimit-criterion, lem-coef-infinity-arrow-target-right-fibration, lem-coef-infinity-relative-slice-sections, lem-coef-contravariant-slice-model and lem-coef-simplicial-right-fibration-presentation. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-right-fibration-space-fiber, generic foundational tools already used this way in this unit. def-cbc-enhanced-diagrams-cones is a definition and needs no tool_use. FIX (C1/C2): step 5 moved the slice across the equivalence LR_E ≃ P(E) with an uncited 'apply a quasi-inverse' sentence. I replaced it with an explicit argument: the slice-arrow equivalence, Fun(Δ^1,-) applied to the equivalence, ev_1 as an isofibration and hence a Joyal fibration, then Brown pullbacks of equivalent cospans. The cited nodes were already in proof_deps. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-relative-cone-presheaf-fibers.json; no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9f36de4f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery after the duplicate-name return of 630952046450. Compared with that snapshot, the only change is that the colliding helper relativeSliceArrow is deleted. Its five uses become Mathlib pullback.fst, which is exactly its body, since fixedTargetArrows is pullback ev1 (const x). The node diff only drops the declaration entry and adds a note sentence. Independent full check of the node's clauses against the Lean: pushout D via ι0 with j=inl and free end ι1≫inr; j* via MonoidalClosed.pre and cartesianFibration; representatives tied to the classifier; E_X as the actual pullback; the ∞-fiber via pullbackCoreComparison; the first equivalence fully determined by source_formula and cylinder_formula, with opIso reversing the interval (StdSimplex.lean:775) so the arrow runs Ψ→p*X; the second equivalence with the homotopy-fiber formula as a natural equivalence of whole functors; representative_arrows and transport (cartesian W intertwined with the pullback functor P, and P with restriction along the canonical E_X'→E_X); naturality for every square p'≫a=b≫p; models_are_homotopy_pullbacks. Edge cases checked: empty E or A, initial X, a point, identities, empty fibers. Node: only lean and stmt_deps differ from the side clone; the 3 added deps are landed and used. All 29 names checked against the live library, side clone, Mathlib and slopmaster2: no collision. No hollow def, one sorry with the 8-step docstring, 30 blueprint tags, no line over 100 columns, statement verbatim, both report sections real. nt_compile --json on the snapshot: rc 0, no errors or warnings (target 6.5 s). Remark R1, no change needed: fiber_values is existential, mirroring TransportClassificationClauses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeConePresheafFibers",
+  "declaration": "SSet.Enhanced.relative_cone_presheaf_fibers",
+  "declarations": [
+   "SSet.Enhanced.relativePresheaves",
+   "SSet.Enhanced.relativePresheafCylinder",
+   "SSet.Enhanced.relativePresheafBase",
+   "SSet.Enhanced.relativePresheafFree",
+   "SSet.Enhanced.relativePresheafRestrict",
+   "SSet.Enhanced.relativePresheafEval",
+   "SSet.Enhanced.relativePresheafValue",
+   "SSet.Enhanced.relativePresheafValueMap",
+   "SSet.Enhanced.RelativePresheafRepresentative",
+   "SSet.Enhanced.relativeCospanVertex",
+   "SSet.Enhanced.relativeCospanLeft",
+   "SSet.Enhanced.relativeCospanRight",
+   "SSet.Enhanced.RelativeSlicePullback",
+   "SSet.Enhanced.relativeSliceRestrict",
+   "SSet.Enhanced.relativePresheafInterval",
+   "SSet.Enhanced.relativePresheafLiftCylinder",
+   "SSet.Enhanced.relativePresheafCylinderDiagram",
+   "SSet.Enhanced.RelativeConeSliceComparison",
+   "SSet.Enhanced.relativePresheafPullbackPoint",
+   "SSet.Enhanced.relativePresheafFiberPoint",
+   "SSet.Enhanced.relativeFibrationEdgeMap",
+   "SSet.Enhanced.RelativeRepresentativeArrow",
+   "SSet.Enhanced.RelativeCartesianTransport",
+   "SSet.Enhanced.RelativeConeElementComparison",
+   "SSet.Enhanced.relativePresheafElementsMap",
+   "SSet.Enhanced.relativePresheafSourceMap",
+   "SSet.Enhanced.relativePresheafSquareMap",
+   "SSet.Enhanced.RelativeConePresheafFibers",
+   "SSet.Enhanced.relative_cone_presheaf_fibers"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeConePresheafFibers.lean",
+  "statement": "theorem relative_cone_presheaf_fibers : ∃ T : ∀ (A : SSet.{u + 1}) (left : Bool), TransportClassifier.{u, 0} A left, (∀ (A : SSet.{u + 1}) (left : Bool), TransportClassificationClauses (T A left)) ∧ (∀ left : Bool, Nonempty (CoherentTransportBaseChange T left)) ∧ TransportSmallRepresentatives T ∧ Nonempty (RelativeConePresheafFibers (fun A ↦ T (SSet.uliftFunctor.{u + 1}.obj A) false))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published coherent space-valued presheaf and right-fibration interfaces. The first comparison is fixed on every cylinder simplex; the second has the full slice-valued fiber-functor formula. Pullback cones and cartesian lifts specify contravariant transport, and general commuting squares specify naturality in both base functors. Helpers belong to this construction; only the final theorem is postponed. The added landed dependency owns the canonical pullbackCoreComparison used to express infinity-categorical pullbacks. Second reading reuses the landed infinityCospan and explicitly supplies a representative map for every presheaf edge before applying transport. Cylinder endpoint inclusions use Mathlib SSet.ι₀ and SSet.ι₁; internal-hom vertices use the published CategoryTheory.vertexMap. Return repair removes the colliding relativeSliceArrow helper entirely and uses the existing Mathlib pullback.fst at every fixed-target-arrow inclusion."
  }
 }

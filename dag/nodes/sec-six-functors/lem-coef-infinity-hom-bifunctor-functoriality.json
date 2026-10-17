@@ -336,5 +336,39 @@
   "group": "Q130",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-9ae498658 (reviewer sub-agent of L); spot-checked: I read the full 9-step re-split of lem-coef-infinity-hom-bifunctor-functoriality against the complete statements of all 14 cited nodes and the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015, proof paragraph 2). The delivery has no new nodes, and the statement and stmt_deps are unchanged. Circularity: I computed the transitive dependency closure of the cited nodes (269 nodes). Nothing leads back to the item, and the invalidated chain (straightening, coherent-nerve-comparison, full-essential-image, local-adjoint) is absent, so the split_invalidated cycle is resolved. Checks: Step 1 cancels [j] using the naturality of j/θ/ℓ. In Step 3, the row B(a,-) is literally h_a, because the constant simplex factors through C[Δ^0]. In Step 4, the postcomposition 2-cell runs over V, and precomposition sends η_a to r, with variance checked on N([1]). Step 5's mixed enriched functor reduces to f(vhu)=f(v)f(h)f(u). In Step 6, β e p = u f θ = u θ' |T|_Q = e' T p, and p cancels. Step 8 lifts along the isofibration K_0⊂K and uses fullness of S_U⊂S_{U'}, which needs only local smallness. In Step 9, [α]k=k'[T_M], and the prism decomposition is correct. Edge cases checked: empty E, Δ^0, N([1]), a noncommutative monoid, empty mapping spaces. Two repairs are in the fix file. (1) In Step 7 the Whitehead homotopies point the wrong way for a 2-simplex of N_hc(Kan), which needs a 1-simplex from the long edge id to gf. The fix applies Whitehead with the cylinder ends interchanged. (2) The two off-unit tool uses were not declared, so I added split_report.tool_uses: lem-cbc-enhanced-functor-cone-calculus (Step 9: Fun is a quasicategory, and a transformation with invertible components is an equivalence) and lem-cbc-simplicial-homotopy-equivalence-weak (Step 7: the cylinder projection is a weak equivalence). Both are generic and already accepted many times in this chapter. The Kerodon/HTT sources are online only, recorded as WANTED, and the proof is marked agent-written.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-240f3d9f4",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Node clauses all matched in Lean. Universes: C,D : SSet.{max(u+1) v}, no restriction. Hypotheses: Quasicategory and HasSmallHomSpaces (essential/local smallness, no stronger than the node). HomBifunctorData: bifunctor into the dependency's S_U (ulift of Spaces.infinityCategory); weak-equivalence value comparison to mappingSpace; first/second-variable edge actions conjugate to pre/postcomposition (variance via E.op checked); composition pinned to canonicalHomComposition = choose of c in mapping_composition (projection checked); assoc/unit homotopies. HomBifunctorComparison: actual edge of ihom(C.op⊗C) homSpaceCategory with δ1/δ0 equal to H_C and H_D∘(T^op×T); component = mappingSpaceMap T, matched to the evaluated edge after value comparisons; composition and identity-class preservation. Quantifiers ∃HC ∃HD ∀T as in the node. Item and dependency nodes unchanged apart from item lean; lean.statement verbatim; declarations list exact; docstrings with source, blueprint and nine proof steps; no hollow def, only sorry is the theorem; no line over 100 chars; no duplicate notion (infinityYoneda covers only the U-small explicit pairing). nt_compile --json on the snapshot: rc 0, 4.7 s, no errors or warnings. Minor, not faults: extra pinch fields restate mapping_composition's j; duplicated composition clause; short but concrete second reading."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityHomBifunctorFunctoriality",
+  "declaration": "SSet.Enhanced.infinity_hom_bifunctor_functoriality",
+  "declarations": [
+   "SSet.Enhanced.homSpaceCategory",
+   "SSet.Enhanced.HasSmallHomSpaces",
+   "SSet.Enhanced.canonicalHomComposition",
+   "SSet.Enhanced.homSpaceEdgeSource",
+   "SSet.Enhanced.homSpaceEdgeTarget",
+   "SSet.Enhanced.homSpaceEdgeMap",
+   "SSet.Enhanced.homSpaceEdgeTransport",
+   "SSet.Enhanced.bifunctorFirstEdge",
+   "SSet.Enhanced.bifunctorSecondEdge",
+   "SSet.Enhanced.homValue",
+   "SSet.Enhanced.HomBifunctorData",
+   "SSet.Enhanced.homBifunctorComponentEdge",
+   "SSet.Enhanced.HomBifunctorComparison",
+   "SSet.Enhanced.infinity_hom_bifunctor_functoriality"
+  ],
+  "branch": "newtargets-dag",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/InfinityHomBifunctorFunctoriality.lean",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "statement": "theorem infinity_hom_bifunctor_functoriality (C D : SSet.{max (u + 1) v}) [Quasicategory C] [Quasicategory D] (_hC : HasSmallHomSpaces.{u, v} C) (_hD : HasSmallHomSpaces.{u, v} D) : ∃ HC : HomBifunctorData.{u, v} C, ∃ HD : HomBifunctorData.{u, v} D, ∀ T : C ⟶ D, HomBifunctorComparison C D HC HD T"
  }
 }
