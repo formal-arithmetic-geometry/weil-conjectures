@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-slice-right-fibration"
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-initial-poset-slice-restriction"
  ],
  "proof": [
   {
@@ -206,5 +207,35 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q95-00c13490a (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited interfaces; checked HTT and Kerodon sources. Exact boundary lifting and gluing are valid. All 2,220 finite-poset checks passed; no duplicates, cycles, new nodes, or repairs found. Full findings recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PosetRelativeVertexInsertion",
+  "declaration": "SSet.Enhanced.exists_posetRelativeVertexInsertion",
+  "declarations": [
+   "SSet.Enhanced.vertexInsertionPoset",
+   "SSet.Enhanced.vertexInsertionInclusion",
+   "SSet.Enhanced.vertexInsertionFinalRow",
+   "SSet.Enhanced.vertexInsertionOldRow",
+   "SSet.Enhanced.vertexInsertionNewRow",
+   "SSet.Enhanced.vertexInsertionLeftBoundary",
+   "SSet.Enhanced.vertexInsertionFinalSimplex",
+   "SSet.Enhanced.IsVertexInsertionRow",
+   "SSet.Enhanced.exists_posetRelativeVertexInsertion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PosetRelativeVertexInsertion.lean",
+  "statement": "theorem exists_posetRelativeVertexInsertion (κ : Cardinal.{u}) (hκ : κ.IsRegular) (A B : Type (max (u + 1) v)) [PartialOrder A] [Finite A] [PartialOrder B] (hB : HasCardinalLT B κ) (E : SSet.{max (u + 1) v}) [Quasicategory E] (P : E _⦋0⦌ → Prop) (F : nerve A ⟶ E) (L : Set A) (hL : IsLowerSet L) (a : A) (ha : a ∉ L) (hmin : ∀ x : A, x < a → x ∈ L) (U : nerve (vertexInsertionPoset A B L) ⟶ E) (hfinal : nerveMap (vertexInsertionFinalRow (B := B) L).toFunctor ≫ U = F) (hvertices : ∀ x : vertexInsertionPoset A B L, x.val.2 ≠ ⊤ → P (U.app (op ⦋0⦌) (ComposableArrows.mk₀ x))) (hfiltered : ∃ hR : Quasicategory (fullJoinSlice P (SSet.yonedaEquiv.symm (F.app _ (ComposableArrows.mk₀ a)))), @Presentability.IsKappaFiltered κ (fullJoinSlice P (SSet.yonedaEquiv.symm (F.app _ (ComposableArrows.mk₀ a)))) hR) (β : nerve (WithBot B) ⟶ fullJoinSlice P (SSet.yonedaEquiv.symm (F.app _ (ComposableArrows.mk₀ a)))) (hβ : IsVertexInsertionRow P (SSet.yonedaEquiv.symm (F.app _ (ComposableArrows.mk₀ a))) U (vertexInsertionOldRow L a) (nerveMap (WithBot.coeOrderHom (α := B)).monotone.functor ≫ β)) : ∃ (U' : nerve (vertexInsertionPoset A B (insert a L)) ⟶ E) (β' : nerve (WithBot (WithTop B)) ⟶ fullJoinSlice P (SSet.yonedaEquiv.symm (F.app _ (ComposableArrows.mk₀ a)))), nerveMap (vertexInsertionInclusion (B := B) (Set.subset_insert a L)).toFunctor ≫ U' = U ∧ P (U'.app (op ⦋0⦌) (ComposableArrows.mk₀ ((vertexInsertionNewRow (B := B) L a) (⊤ : WithTop B)))) ∧ nerveMap (vertexInsertionLeftBoundary B).toFunctor ≫ β' = β ∧ IsVertexInsertionRow P (SSet.yonedaEquiv.symm (F.app _ (ComposableArrows.mk₀ a))) U' (vertexInsertionNewRow L a) (nerveMap (WithBot.coeOrderHom (α := WithTop B)).monotone.functor ≫ β')",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The explicit poset, inclusion, and final-simplex helpers belong to this node. The canonical row is specified in every degree by its final-vertex simplex in the existing full join slice. The existing owner of fullJoinSlice is added to stmt_deps; it was already a proof dependency. No mathematical statement correction or dependency-interface repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd593052c",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, module, report, edge cases, docstrings, exact statement, and compiler evidence; scompile passed in sandbox and library contexts with no findings."
  }
 }

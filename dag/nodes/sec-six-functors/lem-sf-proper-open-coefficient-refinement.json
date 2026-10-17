@@ -403,5 +403,32 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-52a4008b7 (reviewer sub-agent of L); spot-checked: Step 6 is substantively non-elementary but was marked elementary and had no explicit node uses. Corrected full DAG JSON written under fixes/dag/nodes/sec-six-functors/lem-sf-proper-open-coefficient-refinement.json, marking it non-elementary and citing the relevant existing product, localization, change-of-rings, and tensor-descent nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperOpenCoefficientRefinement",
+  "declaration": "AlgebraicGeometry.Etale.properOpenComparison_coefficient_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properOpenCoefficientPullbackIso",
+   "AlgebraicGeometry.Etale.properOpenCoefficientOpenInverse",
+   "AlgebraicGeometry.Etale.properOpenCoefficientOpenInverse_isIso",
+   "AlgebraicGeometry.Etale.properOpenCoefficientOpenIso",
+   "AlgebraicGeometry.Etale.properOpenComparisonAmbient",
+   "AlgebraicGeometry.Etale.properOpenComparison_coefficient_refinement"
+  ],
+  "file": "lean/Sheaf/Paper/ProperOpenCoefficientRefinement.lean",
+  "statement": "theorem properOpenComparison_coefficient_refinement {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X T₁ T₂ : Scheme.{u}} [IsNoetherian X] [IsNoetherian T₁] [IsNoetherian T₂] (v : T₁ ⟶ T₂) [IsProper v] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ ≫ v = j₂) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (hQ : _root_.DerivedCategory.TStructure.t.plus ((scalarExtension φ X).obj K.obj)) : (scalarExtension φ T₂).map (properOpenComparisonAmbient A v j₁ j₂ h K) ≫ (scalarMate φ v).app ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j₁).mapDerivedCategory.obj K.obj) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) v).map (properOpenCoefficientOpenIso φ j₁ K.obj).hom = (properOpenCoefficientOpenIso φ j₂ K.obj).hom ≫ properOpenComparisonAmbient B v j₁ j₂ h ⟨(scalarExtension φ X).obj K.obj, hQ⟩",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing scalarExtension and K-flat-normalized scalarPullbackIso, and the existing scalarMate as chi. The auxiliary exact-inverse-image comparison is a canonical transport of scalarPullbackIso; beta inverse is constructed from its open-unit transpose, with invertibility stated separately. properOpenComparisonAmbient embeds the recorded theta-normalized bounded-below properOpenComparison using the canonical rightDerivedFunctorPlusCompatibility. Only K and its scalar extension are bounded below."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d12eb46c0",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean declarations, report, edge cases, and pro-etale exclusion. scompile.py compiled the delivery successfully; no findings or fixes required."
  }
 }
