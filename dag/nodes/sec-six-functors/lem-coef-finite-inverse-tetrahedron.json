@@ -10,9 +10,74 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $e:a\\to b$ be the prescribed equivalence. By the definition in [def-cbc-enhanced-diagrams-cones], choose an inverse $u:b\\to a$ and two $2$-simplices with ordered boundary triples $(u,e,1_b)$ and $(e,u,1_a)$, where a triple lists edges $01,12,02$. Give vertices $0,1,2,3$ the values $b,a,b,a$. On face $012$ use the first inverse triangle, on face $123$ the second, and on face $013$ the degenerate triangle $(u,1_a,u)$ obtained by repeating the target of $u$. These faces agree on their pairwise intersections: the common edges $12,13,01$ are respectively $e,1_a,u$. Consequently they define a map $\\Lambda_1^3\\to D$ (faces opposite vertices $0,2,3$). This is direct gluing on the union of the three faces; compatibility on their edge intersections also gives compatibility on every smaller simplex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Proposition B.1.6, (3) and (A1), printed pp.1473-1474; explicit agent expansion of the inverse tetrahedron and diagram chase."
+   }
+  },
+  {
+   "text": "The horn in step 1 is inner, since $0<1<3$. The defining horn-filling property of the quasicategory [def-cbc-enhanced-diagrams-cones] gives $\\sigma:\\Delta^3\\to D$ extending it. Its edges $02$ and $13$ are exactly the degenerate edges at $b$ and $a$, while its edge $12$ is exactly $e$. Thus $\\sigma$ is constant on each of $\\Delta^{\\{0,2\\}}$ and $\\Delta^{\\{1,3\\}}$. It descends to $f:Q\\to D$: in degree $m$ send the class of a simplex of $\\Delta^3$ to its image under $\\sigma$, and send the simplex of each attached $\\Delta^0$ to the corresponding constant simplex. The assignments agree on the two collapsed edges in every degree and commute with face and degeneracy operators, so they give a simplicial map with $fc=e$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Proposition B.1.6, (3) and (A1), printed pp.1473-1474; explicit agent expansion of the inverse tetrahedron and diagram chase."
+   }
+  },
+  {
+   "text": "Now let $F:Q\\to D$ be any simplicial map and restrict it to $\\Delta^3$. Put $x=F(0)=F(2)$ and $y=F(1)=F(3)$, and denote its edges $01,12,23,03$ by $u:x\\to y$, $v:y\\to x$, $w:x\\to y$, $z:x\\to y$. The edges $02,13$ are the degenerate identities at $x,y$. In the edge-and-triangle category $hD$ of [lem-coef-homotopy-category-triangle-calculus], the four faces $012,123,013,023$ therefore give, respectively, $$[v]\\circ[u]=1_x,\\qquad [w]\\circ[v]=1_y,\\qquad [z]=[u],\\qquad [z]=[w].$$ These equalities use precisely the triangle relations and the relations identifying degenerate edges with identities in that cited statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Proposition B.1.6, (3) and (A1), printed pp.1473-1474; explicit agent expansion of the inverse tetrahedron and diagram chase."
+   }
+  },
+  {
+   "text": "The last two equalities imply $[u]=[z]=[w]$. Substituting into the first two shows that for each $r\\in\\{u,w,z\\}$, $$[v]\\circ[r]=1_x,\\qquad [r]\\circ[v]=1_y.$$ In particular $[u]$ and $[v]$ are mutual inverses. This is substitution of the displayed relations in the ordinary category $hD$ defined in [lem-coef-homotopy-category-triangle-calculus]; it does not assert equality of the actual edges $u,w,z$.",
+   "uses": [
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Proposition B.1.6, (3) and (A1), printed pp.1473-1474; explicit agent expansion of the inverse tetrahedron and diagram chase."
+   }
+  },
+  {
+   "text": "Apply the exact triangle criterion of [lem-coef-homotopy-category-triangle-calculus] to both equations in step 4. For each $r\\in\\{u,w,z\\}$ it gives $2$-simplices with boundary triples $(r,v,1_x)$ and $(v,r,1_y)$. Thus $r$ is an equivalence edge by [def-cbc-enhanced-diagrams-cones]; taking $r=u$ also proves that $v$ is an equivalence, with inverse $u$. The remaining edges $02,13$, and the images of vertex degeneracies, are identities, whose inverse triangles are the constant $2$-simplices. There are no other edges to check: the pushout defining $Q$ is the degreewise quotient described in step 2, so every $1$-simplex is represented either by an edge or a vertex degeneracy of $\\Delta^3$, or by the unique (degenerate) edge of an attached $\\Delta^0$. Hence $F$ sends every edge of $Q$ to an equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Proposition B.1.6, (3) and (A1), printed pp.1473-1474; explicit agent expansion of the inverse tetrahedron and diagram chase."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-category-triangle-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient mapping-complex adjunction, supporting marked-pattern foundations; explicit inverse-triangle horn construction and the diagram chase of HA Proposition B.1.6 (3),(A1), read online but not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +134,52 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.coherentIso\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet\", \"doc\": \"The simplicial set that encodes a single isomorphism.\\nIts n-simplices are formal compositions of arrows in WalkingIso.\"}\n  {\"name\": \"SSet.coherentIso.hom\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.Edge SSet.coherentIso.x₀ SSet.coherentIso.x₁\", \"doc\": \"The forwards edge of `coherentIso`.\"}\n  {\"name\": \"SSet.coherentIso.inv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.Edge SSet.coherentIso.x₁ SSet.coherentIso.x₀\", \"doc\": \"The backwards edge of `coherentIso`.\"}\n  {\"name\": \"SSet.coherentIso.invStructHom\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.hom.InvStruct\", \"doc\": \"The forwards edge of `coherentIso` has an inverse.\"}\n  {\"name\": \"SSet.coherentIso.homInvId\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.hom.CompStruct SSet.coherentIso.inv (SSet.Edge.id SSet.coherentIso.x₀)\", \"doc\": \"The forwards and backwards edge of `coherentIso` compose to the identity.\"}\n  {\"name\": \"SSet.coherentIso.invHomId\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.inv.CompStruct SSet.coherentIso.hom (SSet.Edge.id SSet.coherentIso.x₁)\", \"doc\": \"The backwards and forwards edge of `coherentIso` compose to the identity.\"}\n  {\"name\": \"SSet.coherentIso.invStructHom_inv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.invStructHom.inv = SSet.coherentIso.inv\", \"doc\": \"\"}\n  {\"name\": \"SSet.coherentIso.x₀\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.obj (Opposite.op { len := 0 })\", \"doc\": \"The source vertex of `coherentIso`.\"}\n  {\"name\": \"SSet.coherentIso.x₁\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.obj (Opposite.op { len := 0 })\", \"doc\": \"The target vertex of `coherentIso`.\"}\n  {\"name\": \"SSet.coherentIso.invStructHom_homInvId\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.invStructHom.homInvId = SSet.coherentIso.homInvId\", \"doc\": \"\"}\n  {\"name\": \"SSet.coherentIso.invStructHom_invHomId\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" : SSet.coherentIso.invStructHom.invHomId = SSet.coherentIso.invHomId\", \"doc\": \"\"}\n  {\"name\": \"SSet.coherentIso.invStructOfEqMapHom\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CoherentIso\", \"type\": \" {X : SSet} {x₀ x₁ : X.obj (Opposite.op { len := 0 })} {f : SSet.Edge x₀ x₁} {g : SSet.coherentIso ⟶ X} (hfg : f.edge = (CategoryTheory.ConcreteCategory.hom (g.app (Opposite.op { len := 1 }))) SSet.coherentIso.hom.edge) : f.InvStruct\", \"doc\": \"For a simplicial set `X`, if an edge in `X` is equal to the image of `hom`\\nunder a morphism of simplicial sets, this edge has an inverse.\"}",
    "date": "2026-10-17",
    "verdict": "no match: CoherentIso.lean defines the entire nerve of WalkingIso and inverse structures from maps out of it; neither its statements nor inner horn fillers assert extension to the finite opposite-edge quotient Q."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"InvStruct\"",
+   "results": "{\"t\": \"2026-10-17T04:17:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"InvStruct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the conjunction of Quasicategory and InvStruct."
+  },
+  {
+   "tool": "grep",
+   "query": "tetrahedron|InvStruct|invStructOfEqMapHom",
+   "results": "{\"t\": \"2026-10-17T04:17:41Z\", \"tool\": \"grep\", \"query\": \"tetrahedron|InvStruct|invStructOfEqMapHom\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CompStruct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CompStruct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CompStruct.lean\"], \"digest\": \"9029c543d43178a1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CompStruct.lean:268 defines inverse data; CoherentIso.lean:183,190 maps inverse data from the whole walking-isomorphism nerve. Neither states extension to this finite quotient or detection of all its edges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory an equivalence edge extends to a three simplex whose opposite edges 02 and 13 are degenerate",
+   "results": "{\"t\": \"2026-10-17T04:17:45Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory an equivalence edge extends to a three simplex whose opposite edges 02 and 13 are degenerate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.Quasicategory₂.fill32\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.Edge.CompStruct.exists_of_simplex\", \"SSet.quasicategory_of_filler\", \"SSet.Edge.exists_of_simplex\"], \"digest\": \"67f82d901688415c\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: Basic.lean:39-48 provides the defining inner-horn fillers; TwoTruncated.lean:54-71 provides only 2-truncated horn boundary witnesses, not an actual 3-simplex. TwoTruncated.lean:295 is the composition triangle criterion already represented in the DAG. None states both clauses for the finite quotient Q."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite three simplex with two opposite edges collapsed detects equivalences in a quasicategory",
+   "results": "{\"t\": \"2026-10-17T04:17:53Z\", \"tool\": \"leansearch\", \"query\": \"A finite three simplex with two opposite edges collapsed detects equivalences in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\", \"SSet.horn₃₁.desc.congr_simp\", \"SSet.horn₃₁.desc\", \"SSet.Truncated.Quasicategory₂.mk\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.OneTruncation₂.id_edge\", \"SimplexCategory.instHasStrongEpiMonoFactorisations\"], \"digest\": \"e136df8f9fa0d40a\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: Basic.lean:39-48 provides the defining inner-horn fillers; TwoTruncated.lean:54-71 provides only 2-truncated horn boundary witnesses, not an actual 3-simplex. TwoTruncated.lean:295 is the composition triangle criterion already represented in the DAG. None states both clauses for the finite quotient Q."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|fill31|fill32|nonempty_iff",
+   "results": "{\"t\": \"2026-10-17T04:17:57Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|fill31|fill32|nonempty_iff\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"fd5cd7325fa2266a\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: Basic.lean:39-48 provides the defining inner-horn fillers; TwoTruncated.lean:54-71 provides only 2-truncated horn boundary witnesses, not an actual 3-simplex. TwoTruncated.lean:295 is the composition triangle criterion already represented in the DAG. None states both clauses for the finite quotient Q."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An edge of a quasicategory is invertible if and only if it lies on the central edge of a tetrahedron with the two opposite edges collapsed to vertices",
+   "results": "{\"t\": \"2026-10-17T04:18:06Z\", \"tool\": \"leanfinder\", \"query\": \"An edge of a quasicategory is invertible if and only if it lies on the central edge of a tetrahedron with the two opposite edges collapsed to vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.Quasicategory₂.fill32\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Truncated.Edge.exists_of_simplex\", \"SSet.Edge.CompStruct.exists_of_simplex\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Edge.exists_of_simplex\", \"SSet.quasicategory_of_filler\"], \"digest\": \"e39adeca16a7f568\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: Basic.lean:39-48 provides the defining inner-horn fillers; TwoTruncated.lean:54-71 provides only 2-truncated horn boundary witnesses, not an actual 3-simplex. TwoTruncated.lean:295 is the composition triangle criterion already represented in the DAG. None states both clauses for the finite quotient Q."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-anodyne-lifting-products",
@@ -84,7 +191,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the derived inverse limit; auxiliary construction of the marked operadic models used by lem-coef-marked-operadic-model-structures. Higher Algebra, Definition B.1.1, Proposition B.1.6, Proposition B.1.9 specialized to a second pattern trivial on a point, and Proposition B.1.14, printed pp.1470-1482. For triviality of restriction along a P-anodyne map, use the proof of B.1.14 together with B.1.9, as in Example B.2.2. The point-pattern identification is Example B.0.21 and the definition of cocartesian edges over a point. Auxiliary lemma used by the explicit lifting-recognition proof of lem-coef-pattern-anodyne-lifting-products.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed finite-coefficient mapping-complex adjunction before the derived inverse limit; supporting marked-pattern lifting calculus, specifically HA Proposition B.1.6 (3) (extension of an equivalence over the inverse tetrahedron) and (A1) (every tetrahedron edge is invertible).",
    "via": [
     "lem-coef-pattern-anodyne-lifting-products",
     "lem-coef-categorical-pattern-model-calculus",
@@ -100,5 +207,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-inverse-tetrahedron",
+  "worker": "stage1",
+  "summary": "Zero new nodes. Preserved the statement, existing searches and historical blueprint ancestry. Expanded extension into the gluing of two inverse triangles and one degenerate triangle on an inner 3-horn, its filler, and strict descent through the degreewise quotient. Expanded detection into all four face equations and conversion of inverse equations to actual inverse triangles using the existing reviewed homotopy-category triangle calculus. Read both cited node statements, the unit and ancestor proof, HA B.1.6 (3),(A1) online, and Mathlib candidates. All non-elementary ingredients are explicitly cited; no core, weak-equivalence extension or categorical-pattern theorem is needed.",
+  "blueprint": "Realizes supporting simplicial equivalence detection for paragraph 2 of prop-coef-integral-exceptional-adjoint, through the existing marked-pattern-model branch. Steps 1-2 supply the finite inverse extension used by HA B.1.6 (3); steps 3-5 expand the diagram chase of (A1). The unit and chapter route and the coefficient adjunction are unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Supplies the quasicategory, standard simplex, degenerate simplex, and equivalence-edge definitions used by steps 1, 2, 3, and 5; this foundational definition is in the separate sk-prop-sf-cbc unit and no same-unit node replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-3022f7635",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-3022f7635 (reviewer sub-agent of L); spot-checked: PASS. I read the whole item and the full statements of def-cbc-enhanced-diagrams-cones and the same-unit lem-coef-homotopy-category-triangle-calculus. The statement is unchanged, true and not weakened. I tested it on an empty D, nerves of categories, a one-sided retract (which gives no Q-diagram) and a=b with degenerate e. Step 1: the faces 012=(u,e,1_b), 123=(e,u,1_a) and 013=s1u=(u,1_a,u) agree on edges 12, 13 and 01, so they glue to Lambda^3_1. Step 2: the horn is inner and the filler is degenerate on 02 and 13, so it descends to Q with fc=e. Step 3: the faces 012, 123, 013 and 023 give [v][u]=1_x, [w][v]=1_y, [z]=[u] and [z]=[w], using only the defining relations, which the cited statement provides. Step 4 is algebra in hD. Step 5: the cited 'only if' clause with h a degenerate edge gives the inverse triangles that the definition requires, and the edge list is exhaustive (10 edges of Delta^3 plus the degenerate point edges). proof_deps equals the union of uses. There is no cycle: the item's only citer is pattern-anodyne-lifting-products. I read 11 rg candidates (the Joyal walking-iso test, marked fibrancy, pattern generators with the same Q as (A1), and others) and none duplicates this node. The node has no new nodes and no SGA. I accept tool_uses for def-cbc as a notion use; it is unnecessary but harmless. HA B.1.6 is not archived under literature/, so I checked it through the mathematics and the identical (A1) Q in existing nodes; proof_origin is correctly agent and the WANTED line is recorded. No fixes."
  }
 }
