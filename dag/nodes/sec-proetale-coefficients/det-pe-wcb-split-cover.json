@@ -156,5 +156,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd8f70e1f",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Existing attachment of RingHom.exists_retraction_of_wlocal_geometric_criterion (Sheaf.RingTheory.WContractibleGeometricCriterion). Commit touches only the item node (lean field added; the normalized diff shows no other field changed) and the report, which has a real Worker report and Second reading by Q83. Node = blueprint main-20261015 word for word; Stacks 0982 (3)=>(1) read at proetale.tex:1869. Hypotheses [IsWLocalRing], [ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R))] and hstrict are exactly the fields of the recorded IsWContractibleRing/IsWStrictlyLocalRing (WLocal.lean:30,151; WContractible.lean:40). f.FaithfullyFlat and f.WeaklyEtale (not ind-etale). Conclusion r.comp f = id is exactly the D-algebra map / Spec section. Universes u and v independent. Edge cases D=0, E=0, f=id fine. lean.statement is verbatim in both the side and live files (live is proved, side is sorry); the same declaration is owned by lem-weil-pbc-wcontractible-geometric-criterion, so H4 reuse is correct. nt_compile --json of the module plus a consumer deriving the item from [IsWContractibleRing R] with independent universes: no errors. No findings; maintainer should record the equivalence with lem-weil-pbc-wcontractible-geometric-criterion."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WContractibleGeometricCriterion",
+  "declaration": "RingHom.exists_retraction_of_wlocal_geometric_criterion",
+  "statement": "theorem exists_retraction_of_wlocal_geometric_criterion\n    {R : Type u} [CommRing R] [IsWLocalRing R]\n    [ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R))]\n    (hstrict : ∀ (m : Ideal R) [m.IsMaximal],\n      IsStrictlyHenselianLocalRing (Localization.AtPrime m))\n    {B : Type v} [CommRing B] (f : R →+* B)\n    (hfaithful : f.FaithfullyFlat) (hweak : f.WeaklyEtale) :\n    ∃ r : B →+* R, r.comp f = RingHom.id R",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The existing theorem spells out exactly IsWContractibleRing: IsWLocalRing, extremal disconnectedness of ConnectedComponents (PrimeSpectrum R), and strictly henselian localizations at every maximal ideal. Its retraction identity is precisely the algebra-map condition and equivalently the affine section condition. No new declaration or module is needed."
  }
 }

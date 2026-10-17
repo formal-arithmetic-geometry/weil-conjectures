@@ -187,5 +187,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-0959abb56 (reviewer sub-agent of L); spot-checked: I read the whole item, its four steps, the parent lem-coef-small-right-adjoint-diagram-compact-model and the statement of every cited node. I checked these against HTT from a server copy of its text: Proposition 5.4.2.9, Remark 5.4.2.10, Definition 5.4.2.5, Remark 5.4.2.13, and Definition A.2.6.3 with the note after it. The statement is true and unchanged, and nothing in it is weakened. Step 1: a small family of ordinals plus N, with lem-coef-small-family-regular-bound, gives a regular theta with kappa_i, rho_e < theta and aleph0 < theta, so the empty I case is covered. Step 2: lambda = (2^theta)^+. The square-power and successor-regular Mathlib leaves give mu^nu <= sigma^theta = sigma < lambda, which is HTT's example after A.2.6.3. The injection between function sets is correct, including the zero cases, and lambda is uncountable. Step 3: lem-coef-infinity-sharp-accessibility-enlargement is applied with lower cardinal kappa_i and upper cardinal lambda, and all of its hypotheses hold. Step 4 is genuinely elementary: a rho_e-small simplicial set is lambda-small, so a lambda-filtered J is rho_e-filtered. There are no new nodes. Searching the DAG for the HTT places and for rank wording found no duplicate; the nearest nodes cover one category or ordinary categories only. There is no cycle, proof_deps equals the union of the step uses, all cited statements are in the same unit, no tool_uses are needed, and no SGA is cited. FIX, applied in the item's source field only: (1) source.document had a broken host, math.ias.harvard.edu, inherited from the parent; I set it to www.math.ias.edu. (2) source.place said Remark 5.4.2.13 does a simultaneous family enlargement, but in HTT it treats one functor between two categories. I corrected the wording and added Definition 5.4.2.5 and the A.2.6.3 successor example, which the steps actually use.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c72b938c2",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Every clause of small_family_accessibility_rank matches the node and the PresentableInfinityCategory definitions: small quasicategory I; presentable C over I_0 with IsPresentable.{u,v}; T e : C(δ1 e) -> C(δ0 e) with correct source/target; each T e has a regular rho with preservation of small rho-filtered colimits; conclusion: regular lam > aleph0, every C i lam-accessible, every T e preserves small lam-filtered colimits. No extra assumptions; universes u / max(u+1) v kept. Edge cases (empty I, degenerate edges, empty test diagram) covered, and the hypotheses of isKappaAccessible_of_sharp fit proof steps 2-3. lean.statement is verbatim; the node copy differs from the shared node only in lean; no duplicate found. One theorem whose proof is just sorry, docstrings with source place and blueprint id, report has Worker report and Second reading by Q29. nt_compile.py --json on the local side overlay exited 0 with no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallFamilyAccessibilityRank",
+  "declaration": "SSet.Presentability.small_family_accessibility_rank",
+  "file": "lean/Sheaf/CategoryTheory/SmallFamilyAccessibilityRank.lean",
+  "statement": "theorem small_family_accessibility_rank (I : SSet.{max (u + 1) v}) [SSet.Quasicategory I] (hI : IsSmall.{u, max (u + 1) v} I) (C : I _⦋0⦌ → SSet.{max (u + 1) v}) [∀ i, SSet.Quasicategory (C i)] (hC : ∀ i, IsPresentable.{u, v} (C i)) (T : ∀ (e : I _⦋1⦌), C (I.δ 1 e) ⟶ C (I.δ 0 e)) (hT : ∀ (e : I _⦋1⦌), ∃ (ρ : Cardinal.{u}), ρ.IsRegular ∧ PreservesColimitsIn (T e) (fun J _ _ ↦ IsSmall.{u, max (u + 1) v} J ∧ ∃ (hJ : SSet.Quasicategory J), @IsKappaFiltered ρ J hJ)) : ∃ (lam : Cardinal.{u}), lam.IsRegular ∧ Cardinal.aleph0 < lam ∧ (∀ (i : I _⦋0⦌), IsKappaAccessible (C i) lam) ∧ ∀ (e : I _⦋1⦌), PreservesColimitsIn (T e) (fun J _ _ ↦ IsSmall.{u, max (u + 1) v} J ∧ ∃ (hJ : SSet.Quasicategory J), @IsKappaFiltered lam J hJ)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

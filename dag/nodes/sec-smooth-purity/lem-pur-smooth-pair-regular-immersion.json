@@ -317,5 +317,23 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d97044da0 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing: no fixes, no nodes dropped. It is the item only, with no new nodes, and its statement and stmt_deps are unchanged. The statement is the closed-immersion, affine-local form of Stacks divisors.tex Tag 067U (lemma-immersion-smooth-into-smooth-regular-immersion, l.5720), with regular immersion as in 063J; the hypotheses match (arbitrary base, both smooth, b=0 allowed). I read 062Y (lemma-fibre-Cartier), statement and proof: part (3) needs a flat, locally finitely presented ambient, a locally principal Z and a Cartier fibre, which is exactly what step 6 checks at every stage of the induction. Steps 1-7 each use exactly what the cited statements say. Step 1: 01V6, the smooth-ring-map definition and 00TA, and smoothness restricts to opens. Step 2: 00F4(4) and 00R2 with n=0, so I is finitely generated with no Noetherian hypothesis. Step 3: fibre regularity for R->A and R->C, then 00NR and 00NQ, with prefixes and the cases d=0 and b=0 handled. Step 4: L=A_q/pA_q is correct; 00HL uses flat C, then localization and Nakayama with r=0 give equality of ideals after inverting finitely many denominators. Step 5: 061L is applied on the Noetherian fibre only, and gamma=a/r lifts to an ambient principal open. Step 6: the induction is stated with its claim, base and step. The cancellation argument does make f_{e+1} itself a nonzerodivisor, and the ambient principal open, flatness and finite presentation are all carried through. Step 7: correctly marked elementary, including b=0. Small cases checked: Y empty, Y=X, an open-and-closed component, and the zero section of A^1 over a non-Noetherian or nonreduced base. No cycle: a script check shows the item is not in its own dependency closure, and its only citer is the parent coordinate lemma. No duplicate: rg for 067U/067T/063W and 'regular immersion' finds only diagonal results, results over a field going the other way, and a kernel criterion. No SGA source is cited. blueprint.from (lem-pur-divisor-class, via the parent) is correct and same_as=[] holds. I accept all five declared tool_uses as generic black boxes: 01V6, 00T4/00TT, 00NR, 00NQ and 062Y(3). One issue outside this delivery: lem-pc-recd-fibre-cartier-local cites the curve-only def-sc-effective-cartier-divisor for a general fibre. That should get a maintenance note; it does not affect the correctness of this item."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-049358031",
+  "group": "NL",
+  "result": "pass",
+  "note": "The commit adds 3 files (module, node and report); the node changes only in its lean record, whose statement is verbatim. The Lean matches every clause of the node and of Stacks 067U/063J/0FUE: S, X, Y share Scheme.{u}; [Smooth p] [Smooth q], [IsClosedImmersion i], i ≫ p = q; an open U ∋ i y with U ≅ Spec A; f : List A (b=0 included); pullback i U.ι ≅ Spec(A⧸ofList f) compatible with the embeddings into Spec A; RingTheory.Sequence.IsRegular A f gives injectivity at each step plus top_ne_smul. No extra hypotheses or universe restriction. Edge cases checked: Y empty, identity, clopen component, non-Noetherian base. Statement dependencies use their recorded declarations as public imports; proof-only imports match the proof dependencies. No duplicate: the older IsRegularImmersion and the etale-chart result are pure-codimension notions over a perfect field. The only proof is sorry; docstrings carry the source, blueprint id and all 7 proof steps; lines are at most 100 characters. nt_compile compiled the module cleanly in 1.7 s; a control run with a deliberate error confirmed real elaboration. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPairRegularEquations",
+  "declaration": "AlgebraicGeometry.exists_regular_equations_of_smooth_closedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPairRegularEquations.lean",
+  "statement": "theorem exists_regular_equations_of_smooth_closedImmersion {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (i : Y ⟶ X) [Smooth p] [Smooth q] [IsClosedImmersion i] (hi : i ≫ p = q) (y : Y) : ∃ U : X.Opens, i y ∈ U ∧ ∃ (A : CommRingCat.{u}) (a : U.toScheme ≅ Spec A) (f : List A), RingTheory.Sequence.IsRegular A f ∧ ∃ e : pullback i U.ι ≅ Spec (CommRingCat.of (A ⧸ Ideal.ofList f)), e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.ofList f))) = pullback.snd i U.ι ≫ a.hom",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
