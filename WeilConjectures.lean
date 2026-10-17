@@ -4286,6 +4286,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverConti
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverDescent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverLoop
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverRepresentation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
