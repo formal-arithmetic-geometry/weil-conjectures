@@ -7,10 +7,109 @@
   "date": "2026-10-17",
   "group": "Q91"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "First establish the finite cube attachment used below. For any nonempty finite set $J$, write $P(J)$ for its subsets ordered by inclusion and $P_-(J)=P(J)\\setminus\\{J\\}$. Choose $j\\in J$ and put $I=J\\setminus\\{j\\}$. The poset isomorphism $P(J)\\cong[1]\\times P(I)$ sends $K$ to $(\\mathbf1_{j\\in K},K\\cap I)$. By the nerve definition, nerves of product posets are degreewise products and $N([1])=\\Delta^1$. A weakly increasing flag in $P(J)$ avoids $J$ exactly when either every term omits $j$, or every intersection with $I$ is proper: if any term contains $j$, the final term contains $j$; avoiding $J$ then makes its intersection with $I$ proper, and every earlier intersection is contained in that proper intersection. Thus $N(P_-(J))$ is the union of $\\{0\\}\\times N(P(I))$ and $\\Delta^1\\times N(P_-(I))$, with intersection $\\{0\\}\\times N(P_-(I))$. This is their degreewise pushout. The inclusion into $\\Delta^1\\times N(P(I))$, after interchanging product coordinates, is the pushout-product of the degreewise-injective $N(P_-(I))\\hookrightarrow N(P(I))$ and $\\{0\\}\\hookrightarrow\\Delta^1$. The latter is the horn $\\Lambda_0^1$ and hence anodyne directly from the definition. The pushout-product theorem makes $N(P_-(J))\\hookrightarrow N(P(J))$ anodyne. No induction or assumption $I\\ne\\varnothing$ is used: for $I=\\varnothing$, $P_-(I)$ is the empty poset, whose nerve is empty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00Z9",
+    "place": "Lemma 3.3.5.9 (00Z9), expanded coordinate calculation of its pushout-product"
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and $0\\leq k\\leq n$. Put $V=[n]$, $J=V\\setminus\\{k\\}$ and $C=P_+(V)=P(V)\\setminus\\{\\varnothing\\}$. Here $J$ is nonempty. A nonempty subset of $V$ is a face of $\\Lambda_k^n$ precisely when it omits some vertex other than $k$; the only nonempty subsets that fail this condition are $J$ and $V$. Apply the finite-complex formula and its compatibility with inclusions in the subdivision face-poset calculus, using the finite ordered poset $[n]$. It identifies $\\operatorname{Sd}\\Delta^n$ with $N(C)$ and $\\operatorname{Sd}\\Lambda_k^n$ with $A=N(C\\setminus\\{J,V\\})$, with the subdivided horn map the inclusion. All following unions and intersections mean simplicial subsets, computed as sets of flags in each degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-subdivision-face-poset-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00Z3",
+    "place": "Proposition 3.3.5.3 (00Z3), horn face-poset identification using Proposition 3.3.3.17 (00YL)"
+   }
+  },
+  {
+   "text": "Let $g:P(J)\\to C$ be $T\\mapsto T\\cup\\{k\\}$ and let $G=N(g)(N(P(J)))$. The map $g$ is an order embedding, so $G$ consists exactly of flags all of whose terms contain $k$. A flag in $G$ cannot contain $J$; it belongs to $A$ exactly when it does not contain $V$, which under $g$ means avoiding the terminal subset $J$ of $P(J)$. Consequently $G\\cap A=N(g)(N(P_-(J)))$. Set $Z=A\\cup G$. Degreewise union along intersection gives the pushout square with upper row $N(P_-(J))\\to A$ and lower row $N(P(J))\\to Z$. Step 1 makes its left vertical map anodyne. Apply lifting-class closure under pushouts with $T$ the class of Kan fibrations to conclude that $A\\hookrightarrow Z$ is anodyne.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00Z3",
+    "place": "Proposition 3.3.5.3 (00Z3), first pushout; its intersection calculation and pushout closure"
+   }
+  },
+  {
+   "text": "Write $P_+(J)=P(J)\\setminus\\{\\varnothing\\}$ and $P_{\\pm}(J)=P(J)\\setminus\\{\\varnothing,J\\}$. Define $h:[1]\\times P_+(J)\\to C$ by $h(0,T)=T$ and $h(1,T)=T\\cup\\{k\\}$. This is an order embedding onto the induced subposet $C\\setminus\\{\\{k\\}\\}$: the two sides distinguish whether $k$ is present, and a cross inequality from side $0$ to side $1$ says exactly $T\\subseteq T'$, while the reverse cross inequality is impossible. Put $H=N(C\\setminus\\{\\{k\\}\\})\\cong\\Delta^1\\times N(P_+(J))$. We claim $Z\\cup H=N(C)$. Indeed, a flag outside $H$ contains $\\{k\\}$, so all its terms contain $k$ and it lies in $G\\subseteq Z$. In a flag in $H$, membership in $G$ says that every side coordinate equals $1$. If some side coordinate is $0$, the flag is outside $G$ and is in $A$ exactly when no underlying $T$ is $J$: a side-$0$ term with $T=J$ is the excluded vertex $J$, and a side-$1$ such term is the excluded vertex $V$. Thus the preimage of $Z\\cap H$ is exactly\n$$D=(\\{1\\}\\times N(P_+(J)))\\amalg_{\\{1\\}\\times N(P_{\\pm}(J))}(\\Delta^1\\times N(P_{\\pm}(J))).$$\nThese statements hold for weak flags, hence in every simplicial degree and compatibly with all operators. Since the two embedded subsets cover $N(C)$ and intersect as calculated, the square with top row $D\\to Z$ and bottom row $\\Delta^1\\times N(P_+(J))\\to N(C)$ is a degreewise pushout.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00Z3",
+    "place": "Proposition 3.3.5.3 (00Z3), second pushout, with full cover and intersection verification"
+   }
+  },
+  {
+   "text": "The map $D\\hookrightarrow\\Delta^1\\times N(P_+(J))$ is, after swapping product coordinates, the pushout-product of the monomorphism $N(P_{\\pm}(J))\\hookrightarrow N(P_+(J))$ and the endpoint inclusion $\\{1\\}\\hookrightarrow\\Delta^1$. This endpoint inclusion is the horn $\\Lambda_1^1$, hence anodyne by definition. Apply the pushout-product theorem and then lifting-class pushout closure to the second square in step 4. It follows that $Z\\hookrightarrow N(C)$ is anodyne. Lifting-class closure under binary composition combines it with step 3 to give the anodyne map $A\\hookrightarrow N(C)$. By step 2 this is $\\operatorname{Sd}(\\Lambda_k^n\\hookrightarrow\\Delta^n)$. This establishes subdivided horn lifting for every positive $n$ and every $k$, including both outer horns.",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00Z3",
+    "place": "Proposition 3.3.5.3 (00Z3), pushout-product and composition after the second pushout"
+   }
+  },
+  {
+   "text": "Use the natural Hom bijection of the subdivision face-poset calculus to pass from horns to arbitrary maps without invoking weak saturation. Let $p:E\\to B$ be any Kan fibration. For a square with left side $\\Lambda_k^n\\hookrightarrow\\Delta^n$ and right side $\\operatorname{Ex}(p)$, denote its horizontal maps by $a:\\Lambda_k^n\\to\\operatorname{Ex}E$ and $b:\\Delta^n\\to\\operatorname{Ex}B$. Their adjoints $\\widetilde a:\\operatorname{Sd}\\Lambda_k^n\\to E$ and $\\widetilde b:\\operatorname{Sd}\\Delta^n\\to B$ satisfy $p\\widetilde a=\\widetilde b\\operatorname{Sd}(\\Lambda_k^n\\hookrightarrow\\Delta^n)$ by both naturality identities of that bijection. Step 5 says that the left side of this transposed square is anodyne, so its lifting property against $p$ supplies $t:\\operatorname{Sd}\\Delta^n\\to E$. Its transpose fills the original square, again by naturality and injectivity of the Hom bijection. Hence $\\operatorname{Ex}(p)$ is a Kan fibration. This argument uses only the proved subdivided horn case, not subdivision preservation for general anodyne maps.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00Z3",
+    "place": "Agent-expanded lifting-square form of the horn reduction in 00Z3, using the Sd–Ex adjunction of Corollary 3.3.3.4"
+   }
+  },
+  {
+   "text": "Finally let $f:X\\to Y$ be anodyne and let $p:E\\to B$ be any Kan fibration. In any square with left side $\\operatorname{Sd}(f)$ and right side $p$, write the horizontal maps as $u:\\operatorname{Sd}X\\to E$ and $v:\\operatorname{Sd}Y\\to B$. Their adjoints satisfy $\\operatorname{Ex}(p)u^{\\sharp}=v^{\\sharp}f$ by naturality. By step 6 the right side $\\operatorname{Ex}(p)$ is a Kan fibration. The hypothesis on $f$ therefore supplies $s:Y\\to\\operatorname{Ex}E$ with $sf=u^{\\sharp}$ and $\\operatorname{Ex}(p)s=v^{\\sharp}$. Transpose $s$ to $\\widetilde s:\\operatorname{Sd}Y\\to E$. Naturality gives $\\widetilde s\\operatorname{Sd}(f)=u$ and $p\\widetilde s=v$. This is the required filler for the original arbitrary square. Thus $\\operatorname{Sd}(f)$ has the left lifting property against every Kan fibration, which is exactly the asserted anodyne property.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00Z3",
+    "place": "Agent-expanded adjunction reduction from the horn calculation of Proposition 3.3.5.3 (00Z3) to arbitrary anodyne maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-subdivision-face-poset-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00Z3",
+  "place": "Proposition 3.3.5.3 and Lemma 3.3.5.9 (00Z9), online sources; expanded finite-poset pushout computations and replaced weak-saturation reduction by explicit adjunction transposition. WANTED: local literature archive."
+ },
  "mathlib_match": null,
  "id": "lem-coef-subdivision-anodyne",
  "blueprint": {
@@ -109,6 +208,90 @@
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"46\", \"text\": \"* show that anodyne extensions are stable under the subdivision functor (@joelriou)\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: second reader checked all returned types; none asserts stability of anodyne extensions under subdivision. Mathlib AnodyneExtensions/Basic.lean:46 still lists that result as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subdivision sends every anodyne simplicial map to an anodyne map",
+   "results": "8 hits: SSet.image_degenerate_le, SimplexCategoryGenRel.instHasFactorizationP_σP_δ, SSet.modelCategoryQuillen.I, SSet.Subcomplex.image, SimplexCategory.instHasStrongEpiMonoFactorisations, SSet.Subcomplex.toSSetFunctor, SimplexCategoryGenRel.isSplitMono_toSimplexCategory_map_of_P_δ, SSet.Subcomplex.lift",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:63-84 and PushoutProduct.lean:95-110. The Hom adjunction, horn generators and pushout-product are inputs only; Basic.lean:46 lists subdivision preservation as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The subdivision of an anodyne extension is anodyne",
+   "results": "8 hits: SSet.Subcomplex.Pairing.IsRegular, SSet.Subcomplex.PairingCore.IsRegular, SSet.Subcomplex.Pairing.isUniquelyCodimOneFace, SSet.horn, SSet.Subcomplex.PairingCore.instIsProperPairingOfIsProper, SSet.Subcomplex.Pairing.IsProper.isUniquelyCodimOneFace, SSet.Subcomplex.Pairing.II, SSet.Subcomplex",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:63-84 and PushoutProduct.lean:95-110. The Hom adjunction, horn generators and pushout-product are inputs only; Basic.lean:46 lists subdivision preservation as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.sd, anodyne",
+   "results": "0 hits: ; loogle: unknown identifier 'anodyne'",
+   "date": "2026-10-17",
+   "verdict": "no match: the unqualified identifier anodyne was rejected; reran with SSet.anodyneExtensions and got zero hits. This invalid-pattern response is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "Sd.*anodyne|subdivision.*anodyne|anodyne.*Sd",
+   "results": "0 hits:  [directory: AlgebraicTopology]",
+   "date": "2026-10-17",
+   "verdict": "no match for this case-sensitive expression; the later broader subdivision search finds Basic.lean:46 TODO and the ordinary subdivision adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Barycentric subdivision preserves acyclic cofibrations of simplicial sets",
+   "results": "8 hits: SSet.modelCategoryQuillen.J, SSet.modelCategoryQuillen.I, SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.boundary_ι_mem_I, SSet.modelCategoryQuillen.horn_ι_mem_J, SSet.modelCategoryQuillen.instCategoryWithFibrations, SSet.modelCategoryQuillen.mono_of_cofibration, SSet.modelCategoryQuillen.cofibration_of_mono",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:63-84 and PushoutProduct.lean:95-110. The Hom adjunction, horn generators and pushout-product are inputs only; Basic.lean:46 lists subdivision preservation as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.sd, SSet.anodyneExtensions",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:63-84 and PushoutProduct.lean:95-110. The Hom adjunction, horn generators and pushout-product are inputs only; Basic.lean:46 lists subdivision preservation as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "subdivision|anodyneExtensions_pushoutObjObjι|def anodyneExtensions|def fibrations",
+   "results": "18 hits: Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean [directory: AlgebraicTopology/SimplicialSet]",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:63-84 and PushoutProduct.lean:95-110. The Hom adjunction, horn generators and pushout-product are inputs only; Basic.lean:46 lists subdivision preservation as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.sd, SSet.anodyneExtensions",
+   "results": "0 hits; logged names/files: ",
+   "date": "2026-10-17",
+   "verdict": "no match: recovered-attempt review read the returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:46,63-84, and PushoutProduct.lean:95-110. They provide the Sd-Ex adjunction, horn/LLP definitions and pushout-product input; subdivision preservation remains explicitly TODO at Basic.lean:46. The second semantic phrasing also yields only generators, cofibration/fibration facts, horns and face pairings, not the required preservation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Subdivision of simplicial sets preserves anodyne extensions",
+   "results": "8 hits; logged names/files: SSet.modelCategoryQuillen.J, SSet.modelCategoryQuillen.I, SSet.S.IsUniquelyCodimOneFace.cast, SSet.horn, SSet.S.IsUniquelyCodimOneFace, SSet.S.subcomplex_toN, SSet.S.subcomplex, SSet.Subcomplex",
+   "date": "2026-10-17",
+   "verdict": "no match: recovered-attempt review read the returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:46,63-84, and PushoutProduct.lean:95-110. They provide the Sd-Ex adjunction, horn/LLP definitions and pushout-product input; subdivision preservation remains explicitly TODO at Basic.lean:46. The second semantic phrasing also yields only generators, cofibration/fibration facts, horns and face pairings, not the required preservation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "subdivision|sdExAdjunction|anodyneExtensions_pushoutObjObjι",
+   "results": "17 hits; logged names/files: Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean (searched AlgebraicTopology/SimplicialSet)",
+   "date": "2026-10-17",
+   "verdict": "no match: recovered-attempt review read the returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:46,63-84, and PushoutProduct.lean:95-110. They provide the Sd-Ex adjunction, horn/LLP definitions and pushout-product input; subdivision preservation remains explicitly TODO at Basic.lean:46. The second semantic phrasing also yields only generators, cofibration/fibration facts, horns and face pairings, not the required preservation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Barycentric subdivision preserves acyclic cofibrations of simplicial sets",
+   "results": "8 hits; logged names/files: SSet.modelCategoryQuillen.cofibrations_eq, SSet.modelCategoryQuillen.cofibration_iff, SSet.modelCategoryQuillen.mono_of_cofibration, SSet.modelCategoryQuillen.cofibration_of_mono, SSet.modelCategoryQuillen.instCategoryWithFibrations, SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration, SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.J_le_monomorphisms",
+   "date": "2026-10-17",
+   "verdict": "no match: recovered-attempt review read the returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:46,63-84, and PushoutProduct.lean:95-110. They provide the Sd-Ex adjunction, horn/LLP definitions and pushout-product input; subdivision preservation remains explicitly TODO at Basic.lean:46. The second semantic phrasing also yields only generators, cofibration/fibration facts, horns and face pairings, not the required preservation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Barycentric subdivision sends trivial cofibrations of simplicial sets to trivial cofibrations",
+   "results": "8 hits; logged names/files: SSet.modelCategoryQuillen.J, SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.I, SSet.modelCategoryQuillen.cofibration_of_mono, SSet.modelCategoryQuillen.cofibrations_eq, SSet.modelCategoryQuillen.horn_ι_mem_J, SSet.modelCategoryQuillen.cofibration_iff, SSet.modelCategoryQuillen.fibrations_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: recovered-attempt review read the returned types and pinned Subdivision.lean:35-78, AnodyneExtensions/Basic.lean:46,63-84, and PushoutProduct.lean:95-110. They provide the Sd-Ex adjunction, horn/LLP definitions and pushout-product input; subdivision preservation remains explicitly TODO at Basic.lean:46. The second semantic phrasing also yields only generators, cofibration/fibration facts, horns and face pairings, not the required preservation theorem."
   }
  ],
  "lean_audit": {
@@ -122,5 +305,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-subdivision-anodyne",
+  "worker": "stage1",
+  "summary": "Proved both finite-poset attachments in the item using existing pushout-product and lifting-class closure leaves. Wrote the full cube, horn, cover and intersection calculations; deduced Ex preservation of Kan fibrations by transposition and transposed arbitrary anodyne lifting squares back. No new nodes or statement change. Searched source Lean, DAG and whole blueprint; refreshed registered Mathlib searches.",
+  "blueprint": "Realizes the existing foundational ancestry to prop-coef-integral-exceptional-adjoint paragraph 2, derived coefficient-adjunction/limit and naturality calculation, through its finite-adjunction-diagram enhancement and subdivision homotopy input. Read main-20261015 ancestor proof; no unit/chapter route or realization fields changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-8ce4de5b9",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-8ce4de5b9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and its 7 steps, the report, and the statements of all six cited nodes (simplicial-set, colimit, nerve/horn defs; subdivision face-poset calculus; anodyne pushout-product leaf SSet.anodyneExtensions_pushoutObjObjι; lifting-class closure leaf). I also read Kerodon 00Z3 and 00Z9 online. They are not in literature/, so the WANTED line is correct. The statement matches 00Z3 exactly: arbitrary small simplicial sets, arbitrary anodyne f, no added hypothesis and nothing weakened. It is stated and proved in the DAG's convention, anodyne = left lifting property against Kan fibrations, so no comparison of conventions is hidden. Step 1 (00Z9 cube): I checked the isomorphism P(J) ≅ [1]×P(I), the rule for flags that avoid J, and the union and intersection; together they give exactly the leaf's pushout-product with {0}↪Δ^1 = Λ^1_0; I=∅ is fine. Step 2: the faces missing from the horn are exactly J and V, the face family is closed under nonempty subsets, and the calculus gives Sd Λ ≅ N(C∖{J,V}); n=1 is fine. Step 3: g: T↦T∪{k} is an order embedding, G∩A = N(g)N(P_-(J)), and pushout closure applies. Step 4: h is an order embedding onto C∖{{k}}, and the cover and the overlap D are correct; |J|=1 is fine. Step 5: the pushout-product with Λ^1_1, then pushout and composition closure, covers every n≥1 and every k, outer horns included. Steps 6–7: the adjoint transposition through the natural Sd–Ex Hom bijection gives Ex(p) Kan, then lifting for Sd(f); every filler equation checks. It replaces the weak-saturation step without a small-object argument and without circularity. There are no new nodes, no cycle (the only citer of the item is lem-coef-subdivision-ex-homotopy-adjunction) and no duplicate (rg over subdivision/anodyne/Sd). The route stays inside unit sk-prop-sf-biduality-general, using its leaves and its face-poset calculus. No SGA source is cited, the blueprint fields are correct and no tool_uses are needed. The base-change and coefficient-category check does not apply: this is not a target node. No fixes were needed."
  }
 }

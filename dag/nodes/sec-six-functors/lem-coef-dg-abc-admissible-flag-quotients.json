@@ -28,9 +28,108 @@
  "stmt_deps": [
   "lem-coef-dgcat-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use right-to-left composition and work first with homogeneous maps in the unshifted Hom complexes. The chain-map composition in [lem-coef-dgcat-model-structure] means $\\partial(gh)=(\\partial g)h+(-1)^{|g|}g\\partial h$. For any admissible splitting $(a,b,\\pi,s)$ put $D=\\pi\\partial s$, of degree $1$. Differentiating $bs=1$ and using $1=a\\pi+sb$ gives $\\partial s=aD$. Differentiating $1=a\\pi+sb$ and multiplying on the left by $\\pi$ gives $\\partial\\pi=-Db$. Consequently $\\partial D=(\\partial\\pi)\\partial s=-DbaD=0$. Under (B), $D$ represents the closed degree-zero boundary. Apply this calculation to the two given sequences to obtain $D_1=\\pi_1\\partial s_1$, $D_3=\\pi_3\\partial s_3$, $\\partial s_1=\\alpha D_1$, $\\partial\\pi_1=-D_1p_1$, $\\partial s_3=\\beta D_3$, and $\\partial\\pi_3=-D_3p_3$.",
+   "uses": [
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P6, lemma-get-triangle, identities (1)-(8), expanded directly from the dg composition and splitting definitions."
+   }
+  },
+  {
+   "text": "The degree-one map $E=p_1D_3:q_3\\to q_1$ is closed since $p_1$ and $D_3$ are closed. Let $\\varepsilon:q_3\\to q_1[1]$ be its degree-zero version under (B), so $\\varepsilon=p_1[1]\\delta_3$. Set $f=\\varepsilon[-1]:q_3[-1]\\to q_1$. It is closed because $[-1]$ is a dg functor; the strict shift identities give $f[1]=\\varepsilon$. Apply the ASSUMED axiom (C) to $f$ to choose $q_2=c(f)$ and an admissible sequence $q_1\\xrightarrow{j}q_2\\xrightarrow{k}q_3$, with graded splitting $(R,T)$, whose boundary is exactly $\\varepsilon$. No existence of a graded kernel or additional quotient object is being assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QJ, situation-ABC, axiom (C); construction filling the omitted existence argument at the start of Tag 09QX, lemma-dgc-analogue-tr4."
+   }
+  },
+  {
+   "text": "The chosen sequence has $Rj=1$, $kT=1$, $jR+Tk=1$, $kj=0$, and $RT=0$. The calculation of step 1, with its prescribed boundary $E$, gives $\\partial T=jE$ and $\\partial R=-Ek$. Define graded degree-zero maps\n$$P=jp_1\\pi_3+Tp_3:z\\to q_2,\\qquad S=\\beta s_1R+s_3k:q_2\\to z,\\qquad \\Pi=\\pi_1\\pi_3:z\\to x.$$\nThe identities $\\pi_3\\beta=1$, $\\pi_3s_3=0$, $p_3\\beta=0$, $p_3s_3=1$, $p_1\\alpha=0$, and $\\pi_1s_1=0$ give $\\Pi\\beta\\alpha=1$, $P\\beta\\alpha=0$, and $\\Pi S=0$ by direct substitution.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, quotient diagrams; explicit cone-based formulas for the middle quotient."
+   }
+  },
+  {
+   "text": "Expand the other two graded splitting equations:\n$$PS=jp_1s_1R+Tp_3s_3k=jR+Tk=1,$$\nwith the two cross terms zero by $\\pi_3s_3=0$ and $p_3\\beta=0$. In the other order the two cross terms vanish by $RT=0$ and $kj=0$, and\n$$SP=\\beta s_1p_1\\pi_3+s_3p_3=\\beta(1-\\alpha\\pi_1)\\pi_3+s_3p_3=1-\\beta\\alpha\\Pi.$$\nThus the underlying graded sequence $x\\xrightarrow{\\beta\\alpha}z\\xrightarrow{P}q_2$ has precisely the required splitting $(\\Pi,S)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, graded direct-sum argument, here replaced by its explicit inverse-map equations."
+   }
+  },
+  {
+   "text": "The quotient map $P$ is closed:\n$$\\partial P=jp_1\\partial\\pi_3+(\\partial T)p_3=-jp_1D_3p_3+jEp_3=0.$$\nAlso $\\beta\\alpha$ is closed as the composite of closed maps. Therefore the graded splitting of step 4 is an admissible sequence in $Z^0\\mathcal A$. Take $p_2=P$, $s_2=S$, and $\\pi_2=\\Pi=\\pi_1\\pi_3$. Its boundary is closed by step 1. This establishes the existence of the composite quotient with the specified retraction, from the cone axiom alone.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, existence of the second quotient; closedness verified using Tag 09P6 identities."
+   }
+  },
+  {
+   "text": "Compute its boundary explicitly. The Leibniz rule and step 3 give\n$$\\partial S=\\beta\\alpha D_1R-\\beta s_1Ek+\\beta D_3k.$$\nBecause $E=p_1D_3$ and $1-s_1p_1=\\alpha\\pi_1$, this becomes\n$$\\partial S=\\beta\\alpha(D_1R+\\pi_1D_3k).$$\nMultiplying by $\\Pi$, for which $\\Pi\\beta\\alpha=1$, shows that the degree-one version of $\\delta_2$ is\n$$D_2=\\Pi\\partial S=D_1R+\\pi_1D_3k.$$\nThis is an equality of homogeneous maps, before passing to $H^0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, boundary of the composite quotient, expanded via Tag 09P6."
+   }
+  },
+  {
+   "text": "The four maps in the statement are the original cone splitting maps. Indeed\n$$u=P\\beta s_1=jp_1s_1=j,\\qquad v=p_3S=p_3s_3k=k,$$\n$$r=p_1\\pi_3S=p_1s_1R=R,\\qquad t=Ps_3=Tp_3s_3=T.$$\nEvery omitted summand is zero by $p_3\\beta=0$ or $\\pi_3s_3=0$. Thus $u,v$ are closed, and all five admissibility equations for $(u,v,r,t)$ are the five equations listed in step 3. In particular $vu=kj=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, dashed arrows and their graded splitting; corrected calculation of their zero composite."
+   }
+  },
+  {
+   "text": "The boundary of $q_1\\xrightarrow{u}q_2\\xrightarrow{v}q_3$ is\n$$r\\partial t=R\\partial T=RjE=E=p_1D_3,$$\nwhich corresponds under (B) to $p_1[1]\\delta_3$, as claimed. Equivalently, the source's final calculation is $p_1\\pi_3(1-\\beta\\alpha\\pi_1\\pi_3)\\partial s_3=p_1\\pi_3\\partial s_3$, because $p_1\\pi_3\\beta\\alpha=p_1\\alpha=0$, using $\\pi_3\\beta=1$. This calculation uses $s_2p_2=1-\\beta\\alpha\\pi_1\\pi_3$, not the erroneous zero identity printed earlier in the source.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, final displayed calculation, with its two printed typos corrected."
+   }
+  },
+  {
+   "text": "Two of the four required squares commute strictly:\n$$up_1=jp_1=P\\beta,\\qquad vp_2=kP=p_3,$$\nby the formulas for $P$ and $kT=1$, $kj=0$, $\\pi_3\\beta=1$, $p_3\\beta=0$. A third commutes strictly after the shift identification: step 6 gives\n$$D_2u=(D_1R+\\pi_1D_3k)j=D_1,$$\nsince $Rj=1$ and $kj=0$. Hence $\\delta_2u=\\delta_1$ already among closed maps, and all three identities hold in $H^0\\mathcal A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, the three octahedral squares computed from the displayed quotient maps."
+   }
+  },
+  {
+   "text": "For the last square the necessary homotopy is explicit. Set $h=s_1R:q_2\\to y$, a graded degree-zero map. Then\n$$\\partial h=\\alpha D_1R-s_1Ek,$$\nwhereas $1-\\alpha\\pi_1=s_1p_1$ and step 6 give\n$$D_3v-\\alpha D_2=s_1p_1D_3k-\\alpha D_1R=-\\partial h.$$\nThe cochain isomorphism $\\mathcal A(q_2,y[1])\\cong\\mathcal A(q_2,y)[1]$ sends $h$ to degree $-1$ and has differential $-\\partial$. Thus if $H$ is the corresponding degree-minus-one map into $y[1]$, the last displayed identity is exactly $\\delta_3v-\\alpha[1]\\delta_2=\\partial H$. It follows that $[\\delta_3v]=[\\alpha[1]\\delta_2]$. This proves the fourth identity without assuming any triangulated-category axiom.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4, last octahedral square; explicit homotopy with the shift sign from axiom (B)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09P6 (lemma-get-triangle), 09QJ (situation-ABC), 09QX (lemma-dgc-analogue-tr4). Agent fills the omitted composite-quotient existence by a cone of the induced boundary and writes the explicit splitting and fourth-square homotopy."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +172,73 @@
    "results": "{\"t\": \"2026-10-16T22:38:14Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered differential graded object with three filtration terms has a short exact sequence of its subquotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.SnakeInput.exact_C₃_down\", \"CategoryTheory.Functor.homologySequence_exact₃\", \"CochainComplex.shortComplexTruncLE_shortExact\", \"HomologicalComplex.HomologySequence.composableArrows₃_exact\", \"HomologicalComplex.shortComplexTruncLE_shortExact\", \"DerivedCategory.HomologySequence.exact₃\", \"CategoryTheory.Functor.homologySequence_exact₂\", \"CategoryTheory.Functor.homologySequence_exact₁\"], \"digest\": \"7ef169a7a25ae059\"}",
    "date": "2026-10-17",
    "verdict": "No match: returned exactness and homology-sequence theorems concern abelian or already triangulated categories, not arbitrary ABC dg categories with the explicit boundary compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "dgCategory|DGCategory|admissible.*mono|mappingConeCompTriangle",
+   "results": "{\"t\": \"2026-10-16T23:08:50Z\", \"tool\": \"grep\", \"query\": \"dgCategory|DGCategory|admissible.*mono|mappingConeCompTriangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean\"], \"digest\": \"f6e0aa2f6583735e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCategory/Triangulated.lean:29-62 and DegreewiseSplit.lean:31-90 and the abelian kernel-cokernel sequence. These APIs concern ordinary cochain complexes or abelian categories, and do not give arbitrary ABC dg-category quotients with a prescribed graded retraction and the four boundary identities by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded category admissible three step filtration successive quotients and connecting morphisms",
+   "results": "{\"t\": \"2026-10-16T23:08:50Z\", \"tool\": \"leansearch\", \"query\": \"Differential graded category admissible three step filtration successive quotients and connecting morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HomologySequence.composableArrows₃Functor\", \"CategoryTheory.ShortComplex.SnakeInput.δ\", \"HomologicalComplex.HomologySequence.composableArrows₃\", \"CategoryTheory.kernelCokernelCompSequence.δ\", \"CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp\", \"DerivedCategory.triangleOfSES_mor₃\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"CategoryTheory.DifferentialObject.HomSubtype\"], \"digest\": \"efb86127edf6e6c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCategory/Triangulated.lean:29-62 and DegreewiseSplit.lean:31-90 and the abelian kernel-cokernel sequence. These APIs concern ordinary cochain complexes or abelian categories, and do not give arbitrary ABC dg-category quotients with a prescribed graded retraction and the four boundary identities by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.DegreewiseSplit, CochainComplex.mappingConeCompTriangle",
+   "results": "{\"t\": \"2026-10-16T23:08:50Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.DegreewiseSplit, CochainComplex.mappingConeCompTriangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CochainComplex.DegreewiseSplit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reports unknown identifier CochainComplex.DegreewiseSplit; this is not evidence of absence. The subsequent valid quoted mappingConeCompTriangle query was run and its ordinary-complex declaration read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Admissible monomorphisms in a differential graded category satisfying the cone axiom have successive quotient short exact sequences with compatible boundary maps",
+   "results": "{\"t\": \"2026-10-16T23:08:50Z\", \"tool\": \"leanfinder\", \"query\": \"Admissible monomorphisms in a differential graded category satisfying the cone axiom have successive quotient short exact sequences with compatible boundary maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ComposableArrows.IsComplex.mono_cokerToKer'\", \"HomologicalComplex.HomologySequence.instMonoMap'ComposableArrows₃OfNatNat\", \"CategoryTheory.ShortComplex.mono_τ₂_of_exact_of_mono\", \"CategoryTheory.ShortComplex.mono_of_mono_of_mono_of_mono\", \"DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff\", \"CategoryTheory.Abelian.mono_of_mono_of_mono_of_mono\", \"CategoryTheory.ShortComplex.mono_of_epi_of_epi_of_mono\", \"CategoryTheory.ShortComplex.ShortExact.mono_δ\"], \"digest\": \"7234825164181cea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCategory/Triangulated.lean:29-62 and DegreewiseSplit.lean:31-90 and the abelian kernel-cokernel sequence. These APIs concern ordinary cochain complexes or abelian categories, and do not give arbitrary ABC dg-category quotients with a prescribed graded retraction and the four boundary identities by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the quotient of the composite of two graded split injections using a cone of the boundary between their cokernels",
+   "results": "{\"t\": \"2026-10-16T23:08:51Z\", \"tool\": \"leanfinder\", \"query\": \"Construct the quotient of the composite of two graded split injections using a cone of the boundary between their cokernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.decomp_to\", \"CochainComplex.mappingCone.decomp_from\", \"CochainComplex.cm5b.fac\", \"CochainComplex.cm5b.i_f_comp\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"CochainComplex.mappingCone.inl_snd\", \"HomologicalComplex.homotopyCofiber.inrX_fstX_assoc\", \"CochainComplex.mappingCone.inl_v_snd_v\"], \"digest\": \"71f36130245c3cd6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCategory/Triangulated.lean:29-62 and DegreewiseSplit.lean:31-90 and the abelian kernel-cokernel sequence. These APIs concern ordinary cochain complexes or abelian categories, and do not give arbitrary ABC dg-category quotients with a prescribed graded retraction and the four boundary identities by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingConeCompTriangle\"",
+   "results": "{\"t\": \"2026-10-16T23:09:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingConeCompTriangle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingConeCompTriangle\", \"CochainComplex.mappingConeCompTriangle_obj₁\", \"CochainComplex.mappingConeCompTriangle_obj₃\", \"CochainComplex.mappingConeCompTriangleh\", \"CochainComplex.mappingConeCompTriangle_obj₂\", \"HomotopyCategory.mappingConeCompTriangleh_distinguished\", \"CochainComplex.mappingConeCompTriangle_mor₁\", \"CochainComplex.mappingConeCompTriangle_mor₂\"], \"digest\": \"3afc95a175d5eafa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCategory/Triangulated.lean:29-62 and DegreewiseSplit.lean:31-90 and the abelian kernel-cokernel sequence. These APIs concern ordinary cochain complexes or abelian categories, and do not give arbitrary ABC dg-category quotients with a prescribed graded retraction and the four boundary identities by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category enriched in cochain complexes, form successive split cokernels of composable injections using the mapping cone of their connecting morphism",
+   "results": "{\"t\": \"2026-10-16T23:35:35Z\", \"tool\": \"leanfinder\", \"query\": \"In a category enriched in cochain complexes, form successive split cokernels of composable injections using the mapping cone of their connecting morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.i\", \"HomotopyCategory.composableArrowsFunctor_obj\", \"CochainComplex.mappingConeHomOfDegreewiseSplitXIso\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"CochainComplex.mappingCone.decomp_to\", \"CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f\", \"CochainComplex.cm5b.i_f_comp_assoc\", \"CochainComplex.cm5b.i_f_comp\"], \"digest\": \"b32d59a227a24553\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read HomotopyCategory/Triangulated.lean:29-62, HomotopyCategory/DegreewiseSplit.lean:31-90, ShortComplex/Exact.lean:495-507 and Monoidal/Closed/Enrichment.lean:36-50. Splitting is an ordinary preadditive short-complex structure; the cone constructions require CochainComplex C Z; self-enrichment constructs an enriched category, not this flag quotient. None states the arbitrary ABC dg-category result or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex.Splitting\"",
+   "results": "{\"t\": \"2026-10-16T23:35:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"ShortComplex.Splitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Splitting\", \"CategoryTheory.ShortComplex.Splitting.exact\", \"CategoryTheory.ShortComplex.Splitting.homologyData\", \"CategoryTheory.ShortComplex.Splitting.leftHomologyData\", \"CategoryTheory.ShortComplex.Splitting.rightHomologyData\", \"CategoryTheory.ShortComplex.Splitting.op\", \"CategoryTheory.ShortComplex.Splitting.r\", \"CategoryTheory.ShortComplex.Splitting.s\"], \"digest\": \"1dc5710efdc4f818\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read HomotopyCategory/Triangulated.lean:29-62, HomotopyCategory/DegreewiseSplit.lean:31-90, ShortComplex/Exact.lean:495-507 and Monoidal/Closed/Enrichment.lean:36-50. Splitting is an ordinary preadditive short-complex structure; the cone constructions require CochainComplex C Z; self-enrichment constructs an enriched category, not this flag quotient. None states the arbitrary ABC dg-category result or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|EnrichedCategory|triangleOfDegreewiseSplit|mappingConeCompTriangle",
+   "results": "{\"t\": \"2026-10-16T23:35:38Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|EnrichedCategory|triangleOfDegreewiseSplit|mappingConeCompTriangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/FunctorHom.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\"], \"digest\": \"957f68446854a039\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read HomotopyCategory/Triangulated.lean:29-62, HomotopyCategory/DegreewiseSplit.lean:31-90, ShortComplex/Exact.lean:495-507 and Monoidal/Closed/Enrichment.lean:36-50. Splitting is an ordinary preadditive short-complex structure; the cone constructions require CochainComplex C Z; self-enrichment constructs an enriched category, not this flag quotient. None states the arbitrary ABC dg-category result or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-abc-homotopy-category-triangulated",
@@ -84,5 +246,21 @@
   "group": "NL"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-abc-admissible-flag-quotients",
+  "worker": "stage1",
+  "summary": "Proved the flag quotient construction directly from the assumed dg cone axiom and homogeneous-map arithmetic, with no new nodes. Constructed q2 as the cone of the deshifted induced boundary and wrote all graded splitting identities, closedness, the quotient boundary and the four squares, including the explicit homotopy and shift sign for the last. Statement unchanged. Corrected the two printed source identities and the mistyped target of its third quotient diagram.",
+  "blueprint": "Proof paragraph 2, the three displayed derived Hom objects: generic dg-quotient infrastructure through the recorded ancestry, specifically the finite-cone argument in the final step of lem-coef-dg-quotient-hom-cone. The triangulated structure is obtained from a general cone-closed module-category criterion, before proving invariance of the finite hull. Abstract dg-category axioms (A), (B), (C) supply the generic triangulation theorem used after the module and sign checks. Technical input: Admissible quotients of a three-object dg flag.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-2cb9746f1",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-2cb9746f1 (reviewer sub-agent of L); spot-checked: I read Stacks dga.tex Tags 09P6 (lemma-get-triangle, l.3491), 09QJ (situation-ABC, l.3545) and 09QX (lemma-dgc-analogue-tr4, l.4360) in full, plus the cited node lem-coef-dgcat-model-structure and the parent lem-coef-dg-abc-homotopy-category-triangulated. The statement is unchanged and not weakened. The parent uses it existentially ('some choice'), and I checked by hand that it also holds for any q_2-sequence with pi_2=pi_1pi_3. All ten steps hold, and I re-derived each one: dD=-DbaD=0; R dT=E from the cone of eps[-1] (axiom C with strict shifts); the five splitting identities for (Pi,S,P); dP=0; D_2=D_1R+pi_1D_3k; u=j, v=k, r=R, t=T; boundary RjE=E; three squares strict; and D_3v-alpha D_2=-d(s_1R), which gives the fourth square with the correct shift sign. I confirm the three source errors in 09QX: s_2p_2=0 should be 1-beta alpha pi_1pi_3, pi_3beta=0 should be 1, and delta_3's target is y[1], not x[1]. The source also never constructs q_2; the worker fills that gap with the cone, which is sound. My own pure-Python test on 300 random two-degree Z-complex examples confirmed every identity; the last-square difference was nonzero in 293 of them, so the homotopy is genuinely needed. There are no new nodes. The candidate duplicates cone-homotopy and admissible-replacement state different results, and there is no cycle. The only dependency is in the same unit, so there are no tool_uses. No SGA is cited and Mathlib searches cover all three kinds. The missing lean_audit field predates this delivery and is not a fault of it. No fixes."
+ }
 }

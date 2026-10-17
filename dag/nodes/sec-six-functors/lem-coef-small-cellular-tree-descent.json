@@ -31,9 +31,113 @@
  "stmt_deps": [
   "lem-coef-weak-saturation-tree-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first spell out the colimit calculations used in the construction, from [def-weil-pbc-category-colimit]. A colimit of a diagram in $R/\\mathcal A$ is computed in $\\mathcal A$ by adjoining an initial indexing vertex with value $R$ and its structure maps; a cocone on this enlarged diagram is exactly a cocone under $R$. In particular the empty undercategory colimit is $R$. For $R\\to S$, base change sends $R\\to V$ to $S\\to S\\amalg_R V$. A map from this pushout to $H$ is a pair of maps from $S,V$ agreeing on $R$. Thus a cocone on a base-changed diagram under $S$ is exactly a cocone on the old diagram under $R$, together with its specified map from $S$, with agreement on $R$. This proves that base change preserves every undercategory colimit, including the empty one. The same description of maps out proves $(V\\amalg_R S)\\amalg_S S'\\cong V\\amalg_R S'$ and shows that base change of a pushout square is a pushout square. These isomorphisms commute with the cocone legs; any two composites with the same legs agree by uniqueness.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.3 and the colimit calculations in the proof of A.1.5.11, printed pp. 800, 806-807; explicit universal-property expansion."
+   }
+  },
+  {
+   "text": "By local $\\tau$-presentability, choose a small $\\tau$-filtered diagram of $\\tau$-presentable objects with colimit $Z$. Apply [lem-coef-cardinal-filtered-poset-reindex] with $\\eta=\\tau$ to obtain a small $\\tau$-filtered poset $P$ and a presentation $Z=\\operatorname{colim}_{p\\in P}Z_p$ with each $Z_p$ $\\tau$-presentable. For each $i\\in P$ the tail $P_{\\ge i}$ is $\\tau$-filtered and still has colimit $Z$: a subset of the tail of size less than $\\tau$, together with $i$, has an upper bound in $P$ lying in the tail. Given a cocone on the tail, extend its leg at $p\\in P$ by choosing $q\\ge p,i$ and composing $Z_p\\to Z_q$ with the tail leg. A common upper bound proves independence of $q$, compatibility with every transition, and uniqueness of the extension. Hence restriction and extension give inverse bijections of cocones, including their maps to any fixed apex.",
+   "uses": [
+    "lem-coef-cardinal-filtered-poset-reindex",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, first proof paragraph, printed p. 806; directed presentation and explicit tail-colimit argument."
+   }
+  },
+  {
+   "text": "Choose a continuous chain $(E_\\gamma)_{\\gamma\\le\\beta}$ of downward-closed subsets of $T$: start with $E_0=\\varnothing$, adjoin a minimal remaining element $t_\\gamma$ at each successor, and take unions at limits, stopping at $E_\\beta=T$. Well-foundedness guarantees the minimal choices, and smallness of $T$ guarantees termination. Each successor adds exactly one cell, so $\\gamma\\mapsto t_\\gamma$ is a bijection $\\beta\\to T$, and $|T|<\\tau$ implies $\\beta<\\tau$. We will construct increasing indices $i_\\gamma\\in P$ and $L$-trees $V^\\gamma$ on $E_\\gamma$ rooted at $Z_{i_\\gamma}$. The invariant is: for $\\gamma\\le\\delta$, restriction of $V^\\delta$ to $E_\\gamma$ is the objectwise base change of $V^\\gamma$ along $Z_{i_\\gamma}\\to Z_{i_\\delta}$; base change of $V^\\gamma$ to $Z$ is the given tree on $E_\\gamma$, with its specified cell squares. All comparisons are compatible with order arrows and with each other. For $\\gamma=0$, choose any $i_0\\in P$ (filteredness includes nonemptiness) and the empty tree rooted at $Z_{i_0}$. The invariant is then empty of cell conditions.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, subsets (i)-(iv), data (a)-(c) and the zero stage, printed pp. 806-807."
+   }
+  },
+  {
+   "text": "Suppose the invariant is constructed through $\\gamma<\\beta$, put $i=i_\\gamma$, $t=t_\\gamma$, and $B=\\{s\\in T:s<t\\}\\subseteq E_\\gamma$. Write $V^\\gamma_B$ for the predecessor colimit under $Z_i$. The invariant and Step 1 give $Y_B\\cong V^\\gamma_B\\amalg_{Z_i}Z$. More precisely, this is a colimit of the $\\tau$-filtered tail diagram $j\\mapsto V^\\gamma_B\\amalg_{Z_i}Z_j$, $j\\ge i$. To verify this directly, a cocone to $H$ on that diagram gives maps $Z_j\\to H$ and maps $V^\\gamma_B\\to H$ agreeing on $Z_i$. The latter maps are a single map, since any two tail indices have a common upper bound and every transition is the identity on $V^\\gamma_B$. Step 2 identifies the compatible $Z_j$ maps with a map $Z\\to H$. Thus these cocones are precisely maps $V^\\gamma_B\\amalg_{Z_i}Z\\to H$, with the required legs. The specified attaching map $a_t:P_t\\to Y_B$ therefore factors through $V^\\gamma_B\\amalg_{Z_i}Z_j$ for some $j\\ge i$: the Hom functor of the $\\tau$-presentable object $P_t$ preserves this small $\\tau$-filtered colimit, and clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] represents the corresponding element of its Hom-set colimit at one index. Denote the factor by $b_t$. No presentability of $V^\\gamma_B$ or of $Z$ is used for this factorization.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, successor stage and displayed tail colimit preceding the factorization of g, printed p. 807."
+   }
+  },
+  {
+   "text": "Set $i_{\\gamma+1}=j$. Base-change every old cell of $V^\\gamma$ along $Z_i\\to Z_j$. For the new cell define $V^{\\gamma+1}_t$ as the pushout of the same specified arrow $P_t\\to Q_t$ along $b_t:P_t\\to V^\\gamma_B\\amalg_{Z_i}Z_j$. Step 1 identifies this attaching target with the predecessor colimit of the base-changed tree. The maps from each predecessor into this colimit and then into the new pushout define all new order arrows; there is no arrow from $t$ into $E_\\gamma$, since $E_\\gamma$ is downward-closed. This gives an $L$-tree on $E_{\\gamma+1}$ with exactly the same labelled cell arrows as the original. After base change to $Z$, the new square is the original cell square: $b_t$ was chosen to compose to $a_t$, and the two pushouts are uniquely isomorphic respecting both legs. This isomorphism agrees with every old order arrow because those arrows factor through the predecessor cocone. For earlier stages the transition comparisons are the canonical associativity isomorphisms of Step 1; equality on all cocone legs gives their compatibility. Thus the invariant extends to $\\gamma+1$ without separately lifting any equations.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, last displayed pushout and successor extension, printed p. 807; expansion of compatibility on the cell legs."
+   }
+  },
+  {
+   "text": "At a nonzero limit $\\lambda\\le\\beta$, choose an upper bound $i_\\lambda$ of $\\{i_\\gamma:\\gamma<\\lambda\\}$ in $P$. It exists since $\\lambda<\\tau$. For each cell $t\\in E_\\lambda$, choose a prior stage containing $t$ and base-change that stage's cell to $Z_{i_\\lambda}$. For any two such prior stages, the invariant at their larger stage, followed by Step 1's associativity, identifies the two choices with the same cocone legs. Hence the choices glue to a tree on $E_\\lambda$: every order arrow and specified pushout square already occurs at some prior stage. The resulting tree satisfies the full comparison invariant, again since the comparisons agree on all legs. This proves the construction for all stages. At the final stage put $M=Z_{i_\\beta}$, take $V=V^\\beta$ on the unchanged poset $T$, and let $N$ be its colimit in $M/\\mathcal A$. The invariant gives the required objectwise isomorphism $V_t\\amalg_M Z\\cong Y_t$, including the attaching squares, and Step 1 gives $N\\amalg_M Z\\cong Y_T$ under $Z$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, limit-stage clause and conclusion of data (a)-(c), printed p. 807."
+   }
+  },
+  {
+   "text": "The object $M$ is $\\tau$-presentable because it is a term of the chosen root presentation. Prove every $V_t$ $\\tau$-presentable by well-founded induction on the original order of $T$. Its predecessor colimit $V_{<t}$, including the case of no predecessors, is by Step 1 the colimit in $\\mathcal A$ of the predecessor diagram with the extra root vertex of value $M$. This indexing poset has fewer than $\\tau$ morphisms: its number of arrows is at most the square of its number of objects, which is less than the infinite cardinal $\\tau$ since $|T|<\\tau$. All its values are $\\tau$-presentable by induction, so [lem-coef-ordinary-small-colimit-presentable] makes $V_{<t}$ $\\tau$-presentable. The finite pushout diagram $V_{<t}\\leftarrow P_t\\to Q_t$ has presentable values by the endpoint hypothesis on $L$; the same lemma makes its colimit $V_t$ presentable. Finally apply that lemma to the entire $V$ diagram with the root vertex adjoined, again with fewer than $\\tau$ morphisms, to conclude that $N$ is $\\tau$-presentable. This use of an adjoined root is essential for empty and disconnected predecessor diagrams.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11 with both cell endpoints presentable, and closure under colimits with fewer than tau morphisms; strengthens the source conclusion by proving target presentability."
+   }
+  },
+  {
+   "text": "The final $V$ is an $L$-tree rooted at $M$. Apply the tree-transition clause of [lem-coef-weak-saturation-tree-presentation] with the downward-closed subsets $\\varnothing\\subseteq T$ to obtain that $h:M=V_\\varnothing\\to V_T=N$ lies in the weakly saturated closure of $L$. The isomorphism $N\\amalg_M Z\\cong Y_T$ of Step 6 respects the maps from $Z$ and from $N$, so it identifies their defining pushout square with the asserted canonical square. If $T=\\varnothing$, the construction chooses just $i_0$, has $N=M$, and gives the identity map $h$ and the square $Z\\amalg_M M\\cong Z$. Thus the empty case is included as well, and throughout $Z$ was arbitrary.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.6 (printed pp. 800-801), applied to the descended tree of A.1.5.11 (pp. 806-807)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "lem-coef-weak-saturation-tree-presentation",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-coef-ordinary-small-colimit-presentable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Direct expansion of HTT Lemma A.1.5.11, printed pp. 806-807, with A.1.5.3 and A.1.5.6 and the existing Mathlib small-colimit-presentability leaf. HTT is not archived locally (WANTED in report.md)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +173,80 @@
    "results": "{\"t\": \"2026-10-16T21:51:44Z\", \"tool\": \"grep\", \"query\": \"IsCardinalPresentable|presentable|compact\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/Basic.lean\"], \"digest\": \"de4b5463664cde1e\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits give individual cell-attachment constructions and factorization/equality at a presentable stage (Presentable/Basic.lean:240ff), not descent of an entire small tree to a single presentable root. The SmallObject grep finds explanatory presentability comments only; Loogle has no hit."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalPresentable|pushout|cellular",
+   "results": "{\"t\": \"2026-10-16T23:01:41Z\", \"tool\": \"grep\", \"query\": \"IsCardinalPresentable|pushout|cellular\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\"], \"digest\": \"c10c5ccce91dc563\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalPresentable, \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T23:01:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsCardinalPresentable, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small cellular tree in a locally presentable category descends to a compact root",
+   "results": "{\"t\": \"2026-10-16T23:01:42Z\", \"tool\": \"leansearch\", \"query\": \"A small cellular tree in a locally presentable category descends to a compact root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.mk\", \"CategoryTheory.IsFinitelyAccessibleCategory.instEssentiallySmallIsFinitelyPresentable\", \"CategoryTheory.SmallObject.locallySmall\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.ObjectProperty.instSmallStrictLimitsOfShapeOfSmallOfLocallySmall\", \"CategoryTheory.OrthogonalReflection.instSmallD₁OfIsSmallOfLocallySmall\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\"], \"digest\": \"8cae2806ca7d0b63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small cellular tree with fewer than tau presentable cells descends to a tau-presentable root via pushout",
+   "results": "{\"t\": \"2026-10-16T23:01:43Z\", \"tool\": \"leanfinder\", \"query\": \"A small cellular tree with fewer than tau presentable cells descends to a tau-presentable root via pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsιFunctorObjOfSmall\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.instSmallιAttachCellsιFunctorObj\", \"CategoryTheory.SmallObject.hasPushouts\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.hasPushouts\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"CategoryTheory.SmallObject.hasIterationOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\"], \"digest\": \"242118ca2d91b05b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small cellular tree with fewer than tau presentable cells descends to a tau-presentable root via pushout",
+   "results": "{\"t\": \"2026-10-16T23:06:26Z\", \"tool\": \"leanfinder\", \"query\": \"A small cellular tree with fewer than tau presentable cells descends to a tau-presentable root via pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.hasPushouts\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"CategoryTheory.SmallObject.hasPushouts\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument\"], \"digest\": \"a81d3f57ead08d95\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalPresentable, \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T23:06:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsCardinalPresentable, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalPresentable|pushout|cellular",
+   "results": "{\"t\": \"2026-10-16T23:06:27Z\", \"tool\": \"grep\", \"query\": \"IsCardinalPresentable|pushout|cellular\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\"], \"digest\": \"3b73fc1217037be1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a small cellular tree along a filtered presentation of its root to a compact object",
+   "results": "{\"t\": \"2026-10-16T23:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of a small cellular tree along a filtered presentation of its root to a compact object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.Limits.IndObjectPresentation.hI\"], \"digest\": \"156a4a3b56da4e8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small diagram of cell attachments in a locally presentable category descends to a presentable stage of the root",
+   "results": "{\"t\": \"2026-10-16T23:06:29Z\", \"tool\": \"leanfinder\", \"query\": \"A small diagram of cell attachments in a locally presentable category descends to a presentable stage of the root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.isCardinalPresentable_of_isColimit\"], \"digest\": \"677a0d323a622c39\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small cellular tree in a locally presentable category descends to a presentable root",
+   "results": "{\"t\": \"2026-10-16T23:08:29Z\", \"tool\": \"leansearch\", \"query\": \"A small cellular tree in a locally presentable category descends to a presentable root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.essentiallySmall_isPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable.recOn\", \"CategoryTheory.IsLocallyPresentable.recOn\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\"], \"digest\": \"9341202d161fa18b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: single-step cell constructions, relative cell complexes and generic presentability do not descend a specified small well-founded tree to one presentable root."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-intersection-generators",
@@ -80,5 +254,29 @@
   "group": "Q119"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-cellular-tree-descent",
+  "worker": "Q14",
+  "summary": "Proved compact-root descent by the source transfinite recursion, explicitly maintaining compatible base-change trees as the root stage advances. Tail colimits and base-change colimits are checked by cocones, every attaching map factors through one stage, limit stages use tau-filtered upper bounds, and a separate induction proves the descended endpoint presentability. No new nodes and no statement changes.",
+  "blueprint": "The current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph beginning For K in D^b_c(X,R) is the inherited ancestry. This auxiliary lemma realizes compact-root descent of a small cellular block in the generic recognition argument below that ancestry; it is not a literal claim in the current coefficient-adjunction paragraph. Steps 1-6 give HTT A.1.5.11, Step 7 proves target presentability, and Step 8 gives the weak-saturation/pushout consequence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "why": "Generic representative-of-a-filtered-colimit-of-sets tool (Stacks 04AX), applied to Hom(P_t,-) to factor the attaching map. The same-unit tree statement defines presentability but does not state this representative property. No unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-d03ec2dcb",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-d03ec2dcb (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the 5 cited node statements, the parent's citing step, and HTT (online PDF, fetched to /tmp; not in literature/): Def A.1.5.1, Rem A.1.5.3, Lem A.1.5.6, and Lem A.1.5.11 with its whole proof, pp. 799-800 and 806-807. The statement agrees with A.1.5.11. HTT's 'X is kappa-compact' is a misprint for X_0. Two hypotheses are added: uncountable tau (harmless; the parent supplies it) and presentable L-targets, which are used only in Step 7 to prove N presentable. Steps 1-6 follow HTT's recursion: Step 1 is Rem A.1.5.3 made explicit, Step 2 reindexes to a tau-filtered poset with a tail-colimit check, Step 3 sets up the exhaustion and invariant (a)-(c), Step 4 factors the attaching map through a stage using presentability of P_t and clause (1) of 04AX, Step 5 builds the successor pushout with explicit leg compatibility, and Step 6 glues at limits with an upper bound since lambda<tau. Step 7 proves presentability by induction, with the root adjoined and fewer than tau arrows (the Mathlib isCardinalPresentable_of_isColimit leaf). Step 8 is A.1.5.6, via the tree node's transition clause for the empty set inside T. Edge cases checked: empty T, a single cell in Set with non-presentable Z and a non-injective cell, and incomparable cells. There are no new nodes and no cycle; every cited statement is same-unit or a definition/Mathlib leaf. Tool use lem-weil-pbc-filtered-colimit-sets-elementwise is accepted. lem-coef-cellular-tree-presentable-approximations (Q11, unsplit) is a stronger filtered-family version, not a duplicate; its future split should cite this item. No fixes."
+ }
 }
