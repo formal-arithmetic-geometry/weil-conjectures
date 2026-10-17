@@ -269,7 +269,8 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
     exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso (e.app K).symm
         (boundedConstructible_rightDerivedLowerStar _ aX c.g c.i c.comm.symm _ hN hNY hbc),
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
-        (torAmplitudeIn_rightDerivedLowerStar _ aX c.g c.i c.comm.symm d hd a b _ hN hNY hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX c.g c.i c.comm.symm d hd a b
+          _ hN hNY hbc hta)⟩
   exact (isPerfect_compactlySupportedGlobalSections_integral I c.g hI _ hK').of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)

@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair
@@ -211,7 +212,7 @@ theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
     ∀ E : Sheaf T.smallEtaleTopology (Type (u + 1)), IsFiniteLocallyConstantSheafOfTypes E →
       ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),
         Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) :=
-  sorry
+  isFiniteLocallyConstant_yoneda_and_exists_iso' T
 
 section Henselian
 

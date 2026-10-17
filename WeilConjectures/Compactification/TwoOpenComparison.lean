@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreti
 This file builds the comparison layer of the two-open compactification theorem,
 following the blueprint chapter "Nagata compactification", section "The two-open
 compactification theorem" (`def:nagata-two-open-comparison-space` through
-`lemma:nagata-one-valuation-avoids-boundary`):
+`lemma-nagata-one-valuation-avoids-boundary`):
 
 Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 
@@ -31,11 +31,11 @@ Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 - `AlgebraicGeometry.TwoOpenSide.exists_comparisonFst_comparisonSnd`: a pair of
   valuation-ring extensions of a common generic point of `O₁ ∩ O₂` to the two ambient
   models factors through the comparison space (blueprint:
-  `lemma:nagata-valuation-pair-factors-comparison`);
+  `lemma-nagata-valuation-pair-factors-comparison`);
 - `AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids`: key disjointness implies that of
   any such pair at least one avoids its forbidden boundary (blueprint:
-  `lemma:nagata-valuation-open-closed-point`,
-  `lemma:nagata-one-valuation-avoids-boundary`);
+  `lemma-nagata-valuation-open-closed-point`,
+  `lemma-nagata-one-valuation-avoids-boundary`);
 - `AlgebraicGeometry.TwoOpenPreparation`: the bundled output of the comparison layer,
   consumed by the final assembly of the two-open theorem;
 - `AlgebraicGeometry.nonempty_twoOpenPreparation`: existence. The construction of a
@@ -508,7 +508,7 @@ variable {A K : Type u} [CommRing A] [IsDomain A] [ValuationRing A] [Field K]
 
 omit [ValuationRing A] in
 /-- **The pair of valuation extensions factors through the comparison space** (blueprint:
-`lemma:nagata-valuation-pair-factors-comparison`): if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
+`lemma-nagata-valuation-pair-factors-comparison`): if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
 point `Spec K ⟶ O₁ ∩ O₂` over a common morphism to `S`, then `(g₁, g₂)` factors through
 the closed subscheme `X₁₂ ⊆ X₁ ×_S X₂`. Generically the pair lands in `V₁ ×_U V₂`, and a
 morphism from the spectrum of a domain factoring generically through a closed subscheme
@@ -556,11 +556,11 @@ theorem exists_comparisonFst_comparisonSnd
   · rw [comparisonSnd, ← Category.assoc, hl, hĝ₂]
 
 /-- **One valuation extension avoids its forbidden boundary** (blueprint:
-`lemma:nagata-one-valuation-avoids-boundary`): the closed points of `g₁` and `g₂` cannot
+`lemma-nagata-one-valuation-avoids-boundary`): the closed points of `g₁` and `g₂` cannot
 both lie in the forbidden boundaries, since the pair factors through the comparison space
 (`exists_comparisonFst_comparisonSnd`) on which the key disjointness holds; and an open of
 `Spec A` containing the closed point is everything (`IsLocalRing.closedPoint_mem_iff`,
-blueprint `lemma:nagata-valuation-open-closed-point`). -/
+blueprint `lemma-nagata-valuation-open-closed-point`). -/
 theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
     (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
       η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)
