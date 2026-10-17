@@ -21,7 +21,10 @@
   "def-weil-exceptional-inverse-image",
   "def-weil-derived-direct-image",
   "def-weil-pbc-proetale-site",
-  "lem-coef-finite-direct-image"
+  "lem-coef-finite-direct-image",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-restriction-of-scalars"
  ],
  "proof": [
   {
@@ -427,5 +430,56 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-847c2fe53 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and sources; checked all nine steps, coefficient domains, counit-defined comparison, coherence, edge cases, duplicates and dependency cycles. No repairs needed. Accepted tool uses and target-category distinctions are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteClosedShriek",
+  "declaration": "WeilConjectures.finiteCoefficientClosedShriek",
+  "declarations": [
+   "WeilConjectures.finiteClosedDerived",
+   "WeilConjectures.finiteClosedCoefficient",
+   "WeilConjectures.finiteClosedScalar",
+   "WeilConjectures.finiteClosedPush",
+   "WeilConjectures.finiteClosedPull",
+   "WeilConjectures.finiteClosedExceptional",
+   "WeilConjectures.finiteClosedCounit",
+   "WeilConjectures.finiteClosedDirectInverse",
+   "WeilConjectures.IsFiniteClosedShriekMap",
+   "WeilConjectures.finiteClosedShriekMap",
+   "WeilConjectures.IsFiniteClosedComposition",
+   "WeilConjectures.finiteClosedComposition",
+   "WeilConjectures.finiteClosedScalarPullIso",
+   "WeilConjectures.finiteClosedOpenPush",
+   "WeilConjectures.finiteClosedOpenScalarIso",
+   "WeilConjectures.finiteLocallyClosedExceptional",
+   "WeilConjectures.finiteLocallyClosedPush",
+   "WeilConjectures.finiteLocallyClosedShriekMap",
+   "WeilConjectures.finiteLocallyClosedCounit",
+   "WeilConjectures.finiteLocallyClosedCoefficientMap",
+   "WeilConjectures.finiteLocallyClosedCoefficientInverse",
+   "WeilConjectures.finiteCoefficientClosedShriek",
+   "WeilConjectures.finiteCoefficientClosedShriek_naturality",
+   "WeilConjectures.finiteCoefficientClosedShriek_comp",
+   "WeilConjectures.finiteCoefficientClosedShriek_coefficientChain",
+   "WeilConjectures.finiteCoefficientLocallyClosedShriek",
+   "WeilConjectures.finiteCoefficientLocallyClosedShriek_naturality",
+   "WeilConjectures.finiteCoefficientLocallyClosedShriek_coefficientChain",
+   "WeilConjectures.finiteCoefficientLocallyClosedShriek_comp"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteClosedShriek.lean",
+  "statement": "theorem finiteCoefficientClosedShriek (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (m n : ℕ) (φ : ULift.{u + 1, u} (finiteClosedCoefficient l E m) →+* ULift.{u + 1, u} (finiteClosedCoefficient l L n)) (X Z : Over (Spec (CommRingCat.of D.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] (i : Z ⟶ X) [IsClosedImmersion i.left] (M : finiteClosedDerived X.left (finiteClosedCoefficient l E m)) (_hM : finiteTorConstructibleProEtaleModule l E (m + 1) (Nat.succ_pos m) X.left M) : (∃! b, IsFiniteClosedShriekMap φ i.left M b) ∧ IsFiniteClosedShriekMap φ i.left M (finiteClosedShriekMap φ i.left M) ∧ IsIso (ProEtale.finiteCoefficientChangeDirectImageMap φ i.left ((finiteClosedExceptional (finiteClosedCoefficient l E m) i.left).obj M)) ∧ IsIso (finiteClosedShriekMap φ i.left M) ∧ finiteTorConstructibleProEtaleModule l L (n + 1) (Nat.succ_pos n) X.left ((finiteClosedScalar φ X.left).obj M) ∧ finiteTorConstructibleProEtaleModule l L (n + 1) (Nat.succ_pos n) Z.left ((finiteClosedScalar φ Z.left).obj ((finiteClosedExceptional (finiteClosedCoefficient l E m) i.left).obj M)) ∧ finiteTorConstructibleProEtaleModule l L (n + 1) (Nat.succ_pos n) Z.left ((finiteClosedExceptional (finiteClosedCoefficient l L n) i.left).obj ((finiteClosedScalar φ X.left).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair packet: canonical pro-etale closed comparison normalized uniquely by the exceptional counit; actual naturality, closed composition, coefficient-chain and locally closed equations are separate named declarations in the same module. Positive levels are indexed by m+1 and n+1.",
+  "fixed_by": "NT-stage2-cc-c24c02b28"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c24c02b28",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Every node clause checked against the Lean: datum, l≠p, E/L finite, all levels ≥1 via m+1, arbitrary nonflat φ, separated finite-type schemes over k, closed immersion, D^b_ctf input. The map is fixed uniquely by the exceptional-counit equation, using the published rightDerivedUpperShriekCounit (sfFiniteExceptionalFixed is definitionally rightDerivedUpperShriek) and the canonical finiteCoefficientChangeDirectImageMap. IsIso, B-side D^b_ctf, naturality, closed composition, coefficient chain and all locally closed clauses are present. No hollow definitions or unbound universes; lean.statement verbatim. Dependency modules: import-only (one definitional adjunction unfolding). nt_compile: all 5 files clean, fixed file clean; importers show no new failures (3 pass; 3 fail or time out identically on base). FIX: module docstring and 8 theorem docstrings cited sec-smooth-purity/sk-lem-sp-tower instead of the node source sec-six-functors/sk-prop-sf-biduality-general, order 2139; corrected in fixes/FiniteClosedShriek.lean. Noted, not faulted: lem-sf-compact-support-restriction-of-scalars record rebound to the fixed-scalar module; item status unsplit on base.; reverted the delivery's change of existing node(s) lem-weil-derived-direct-image-composition (--revert-nodes; kept as on newtargets-dag)"
  }
 }

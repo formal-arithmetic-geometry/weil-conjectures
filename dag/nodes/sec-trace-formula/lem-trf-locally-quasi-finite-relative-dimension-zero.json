@@ -230,5 +230,23 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-202436475 (reviewer sub-agent of L); spot-checked: Read the item, the report and all 16 cited statements, plus the full proof of the ring lemma lem-weil-pbc-ring-quasifinite-zero-fibre-dimension. Checked the sources: Stacks 0397 (morphisms.tex 5641-5676, both proofs), 02NJ (5564-5575), Properties 0H7C (1372-1389) and Topology 0055 with the remark after it. The statement matches 0397's global equivalence, keeps the locally-finite-type hypothesis and uses dimension at a point as the minimum over open neighbourhoods. Nothing is weakened. The only citer, lem-trf-proper-flat-finite-dense-open, uses both directions, and the statement serves both. Step 1 is correct: it uses the affine basis 01IT and the locally-finite-type pair characterization 01T2. Step 2 is correct: it compares the fibre topologically through the two homeomorphisms in def-pc-scheme-fibre, uses that homeomorphisms preserve Krull dimension, and passes to the open subspace with a closed node. Steps 3 and 4 correctly use the pair that witnesses pqf-def-quasifinite and both directions of the ring lemma. The proof dependencies are exactly the union of the steps' uses, and the dependency closure has no cycle (88 nodes). There are no new nodes. No other node in the DAG states this equivalence; I searched for 0397, 0H7C, isolated-dim-0 and relative dimension zero. Edge cases checked: the affine line over k, its generic point, k[e]/e^2, k(t) over k (shows the finite-type hypothesis is needed), immersions over non-Noetherian bases, and empty X. No base-change morphism or coefficient category is involved, and no SGA source is cited. Accepted tool use: the ring lemma, a generic commutative-algebra lemma reviewed on 2026-10-14 that replaces no step of the unit. Fix (C1/C4): steps 3 and 4 used the ring-level clause of pqf-def-quasifinite, quasi-finite at a prime, without citing its definition def-weil-pbc-ring-map-quasi-finite-at-prime, which is the notion the ring lemma's conclusion is stated in. I added it to both steps' uses with one identifying sentence each, and updated proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyQuasiFiniteRelativeDimension",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isLocallyQuasiFinite_iff_topologicalKrullDimAt_fiber_eq_zero",
+  "statement": "theorem isLocallyQuasiFinite_iff_topologicalKrullDimAt_fiber_eq_zero {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f] : f.IsLocallyQuasiFinite ↔ ∀ x : X, topologicalKrullDimAt (f.asFiber x) = 0",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyQuasiFiniteRelativeDimension.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a36dcc3e",
+  "group": "NE",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0397 (global form). The only hypothesis is LocallyOfFiniteType f. The left side is the project's Stacks IsLocallyQuasiFinite (01TD, carries the finite-type witness). The right side is ∀ x, topologicalKrullDimAt (f.asFiber x) = 0, using the recorded neighbourhood-minimum definition and the canonical fibre point. No stronger assumptions and no extra universe restriction. Edge cases checked: empty X, affine line, generic and non-closed points, immersions, k(t)/k excluded by the hypothesis. No duplicate in Sheaf or Mathlib. The node diff is only the lean field, and lean.statement is verbatim the file signature. Body is just sorry. Docstrings give the source place and blueprint id with the proof summary. Report has both sections; the second reading is brief but adequate. nt_compile.py --json on the snapshot file compiled clean in 3.6 s; axioms are propext, sorryAx, Classical.choice, Quot.sound."
  }
 }

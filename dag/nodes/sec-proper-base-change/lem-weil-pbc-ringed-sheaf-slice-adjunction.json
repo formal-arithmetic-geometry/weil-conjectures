@@ -189,5 +189,45 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-7a3797386 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps, every cited statement, and Stacks sites.tex 0791 and sites-modules.tex 04IE (1)-(4), 04J4 and 03DJ. The statement matches the sources and is not weakened. Step 1 (the element site) is correct. In step 2 (the fibre equivalence) the presheaf of pairs is already a sheaf, so the extra sheafification is harmless. Step 6 (relocalization) is correct: s is determined by b, the coverings agree and the ring maps are identities. The three clause-restating helper nodes are gone, so the D1 return is repaired. I fixed three faults in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-sheaf-slice-adjunction.json. F1 (step 4): the u_p comma category had its arrows reversed, and A(f)(t) with f:V->U and t in A(V) is ill-typed. It now uses the triples (V,t,phi:U->V); the discrete part {(U,s,id)} is final, which gives the direct sum over s in A(U). F2 (step 5, E3): exactness of j_{A!} applied a direct sum to a short exact sequence of sheaves as if it were exact on each section, which is false because sheaf epimorphisms are only locally surjective. It now uses the 03DJ argument: right exact as a left adjoint, plus injectivity from injective maps on sections, exact sheafification (lem-weil-pbc-sheafification-exact) and the faithful forgetful functor that preserves kernels (lem-weil-pbc-module-sheaves-colimits-forgetful). F3 (steps 3 and 5): j_A existing as a morphism of topoi and j_A^* preserving cokernels had no support, and the step treated a definition as if it supplied the morphism. The repair shows that p is continuous and cocontinuous and cites lem-weil-pbc-continuous-cocontinuous-topos-adjunction and lem-weil-pbc-ringed-topoi-module-adjunction (structure map id, R_A tensor over R_A of M is M). So j_A^* is a left adjoint, and it is exact because kernels are computed on sections. Both added nodes are reviewed and in unit sk-thm-properbasechange. A DFS found no cycle through the item or its citer lem-weil-pbc-ringed-presentation-transport. The module-colimits lemma is in sk-thm-reduction, which the unit cites, so it stays on the route and no tool_uses are needed. The duplicate search found only the representable-object versions, and the edge cases (A terminal, A initial, two sections, B=A) are consistent. Statement, stmt_deps, blueprint and searches are unchanged; no nodes added or dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSheafSliceAdjunction",
+  "declaration": "CategoryTheory.ringed_sheaf_slice_adjunction",
+  "statement": "theorem ringed_sheaf_slice_adjunction {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) : Nonempty (RingedSheafSliceAdjunctionData R A)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/RingedSheafSliceAdjunction.lean",
+  "declarations": [
+   "CategoryTheory.elementProjection",
+   "CategoryTheory.elementTopology",
+   "CategoryTheory.elementProjection_isContinuous",
+   "CategoryTheory.elementRing",
+   "CategoryTheory.elementFibrePresheaf",
+   "CategoryTheory.elementFibrePresheafFunctor",
+   "CategoryTheory.elementObj",
+   "CategoryTheory.elementObjMap",
+   "CategoryTheory.elementDirectSumMap",
+   "CategoryTheory.elementDirectSumMap_id",
+   "CategoryTheory.elementDirectSumMap_comp",
+   "CategoryTheory.elementDirectSumPresheaf",
+   "CategoryTheory.elementModulePullback",
+   "CategoryTheory.elementSheafPullback",
+   "CategoryTheory.elementMap",
+   "CategoryTheory.elementModulePullbackOver",
+   "CategoryTheory.RingedSheafSliceAdjunctionData",
+   "CategoryTheory.ringed_sheaf_slice_adjunction"
+  ],
+  "note": "Canonical element-site topology (induced, stated equal to the restricted topology of underlying covers) and projection pullbacks are definitions. The fibre equivalence's inverse is naturally isomorphic to the canonical fibre presheaf functor. The localization has slice-to-base direction and canonical inverse image. Extension by zero is isomorphic to PresheafOfModules.sheafification (𝟙 R.obj) [def-weil-presheaf-modules-sheafification] of the canonical direct-sum presheaf elementDirectSumPresheaf (summand s to summand A(v)(s)). Its presheaf laws are the named sorry theorems elementDirectSumMap_id/_comp. Relocalization uses the induced element map and canonical restriction.",
+  "fixed_by": "NT-stage2-cc-5d0837e11"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d0837e11",
+  "group": "Q23",
+  "result": "fix",
+  "note": "Read node, 4 stmt deps (RingedToposMorphism direction checked), Stacks 0791/04IE/04J4/03DJ, prior RETURN. Faults: j_{A!}L clause hollow (directSumPresheaf restriction maps unconstrained, moduleSheafification a free field tied by a bare non-natural hom-set Equiv, recorded PresheafOfModules.sheafification unused: prior RETURN item 5); fibre equivalence constrained only by a Type equality on objects; missing source/blueprint docstrings on elementMap/elementModulePullbackOver. Fix (fixes/RingedSheafSliceAdjunction.lean, lean-record.json, report.md): canonical elementDirectSumPresheaf (summand s -> A(v)s via L; laws as named sorry theorems), extensionByZero_sheafification iso to PresheafOfModules.sheafification (𝟙 R.obj), fibre_iso to the canonical elementFibrePresheafFunctor, elementTopology_eq (induced = restricted topology of underlying covers), docstrings incl. six proof steps, Grp.FilteredColimits import for the WEqualsLocallyBijective instance. Theorem signature/lean.statement unchanged; no name clashes; nt_compile clean (no errors/warnings, 16.8 s); edge cases (A initial/terminal, empty A(U), B=A) consistent."
  }
 }

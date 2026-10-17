@@ -561,5 +561,42 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-3cc78742b (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no fixes. The statement keeps Q44's created form and is the parent blueprint sentence (main-20261015 lem-weil-finite-duality-site-comparison proof, second paragraph: locally closed Rs^! commutes with nu^* by the open and closed comparisons). It holds in the cases I tested: empty S, s the identity, s open (gamma=b_M, the counit equation is Step 3), and s closed (the closed sibling). The coefficients are ordinary constant-A_{E,n} module derived categories, the same as in thm-sf-ambient-adjoint-class, lem-pur-bounded-site-adjunction-transpose and def-weil-exceptional-inverse-image; G_s is exactly the Rf^!_n of def-weil-exceptional-inverse-image. Step checks: Step 1 gives Noetherian, finite-type and separated V and N=v^*M in D^b_c, so the closed sibling applies. Step 2 matches lem-sf-open-comparison-unit-normalization symbol for symbol and descends by exactness. I recomputed Step 3's transpose (unit normalization, naturality of b, triangle identity) and Step 6's counit chain (naturality of k^p, the closed counit equation, naturality of o, Step 3); both are valid. Step 7 uses the closure compactification (u,i), valid under def-weil-compactifications-refinements with no density needed, with Rs_!=i_*u_! from def-amb-etale-compact-support and the normalized q_e/q_p from the two locally-closed-extension nodes. Step 8 identifies the derived closed mate with the termwise sheaf mate through uniqueness of transposes, with closed counits invertible by lem-kun-04ca and lem-weil-pbc-proetale-ringed-open-closed. Step 9: C_bar_s is literally B_{s,L} of the bounded-transpose node, and the restriction Hom bijection of lem-sfb-locally-closed-extension-coherence forces q_p Delta=C_bar_s C_T(q_e). Step 10: all hypotheses of the bounded-transpose node hold. I checked a_p C_bar_s=C_T(a_e) and the ambient transpose gamma_M C_S g_0, and the node then gives rho_M C_S g_0. Steps 11 and 12 (theta=rho gamma^{-1}, witness independence, coherence under change of factorization) follow from cited statements. The Stacks tags 09AF, 0B65, 0DV0, 03DI/03DJ and 0GJ1 match the claimed labels, and there is no SGA. There are no new nodes. A DFS over 12,652 nodes finds no cycle and no missing or merged citation. Duplicate candidates are not duplicates: lem-sf-etale-proetale-exceptional-transport is ctf-only with a preservation hypothesis, and lem-coef-finite-closed-shriek and lem-pur-exceptional-mate-site-comparison state other results. The searches cover leanfinder/leansearch, loogle and grep. All declared tool_uses are accepted as black-box generic or normalization statements; none replaces a step of the route."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDualityLocallyClosedComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteDuality_locallyClosed_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints",
+   "AlgebraicGeometry.ProEtale.locallyClosedEtaleExtension",
+   "AlgebraicGeometry.ProEtale.locallyClosedProEtaleExtension",
+   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.etaleRight",
+   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.proetaleRight",
+   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.etalePasted",
+   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.proetalePasted",
+   "AlgebraicGeometry.ProEtale.locallyClosedExtensionComparison",
+   "AlgebraicGeometry.ProEtale.locallyClosedImageCompactification",
+   "AlgebraicGeometry.ProEtale.locallyClosedEtaleSheafIso",
+   "AlgebraicGeometry.ProEtale.locallyClosedEtaleSupportIso",
+   "AlgebraicGeometry.ProEtale.locallyClosedImage_isLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.locallyClosedEtaleExceptional",
+   "AlgebraicGeometry.ProEtale.locallyClosedEtaleRightIso",
+   "AlgebraicGeometry.ProEtale.LocallyClosedExceptionalComparison",
+   "AlgebraicGeometry.ProEtale.finiteDuality_locallyClosed_comparison",
+   "AlgebraicGeometry.ProEtale.locallyClosed_comparison_factorization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDualityLocallyClosedComparison.lean",
+  "statement": "theorem finiteDuality_locallyClosed_comparison (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {S V T : Scheme.{u}} (aS : S ⟶ Spec (.of D.k)) (aT : T ⟶ Spec (.of D.k)) [LocallyOfFiniteType aS] [QuasiCompact aS] [IsSeparated aS] [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT] (c : S ⟶ V) (v : V ⟶ T) [IsClosedImmersion c] [IsOpenImmersion v] (_hs : (c ≫ v) ≫ aT = aS) : ∃ hT : IsNoetherian T, ∃ hqc : QuasiCompact (c ≫ v), Nonempty (@LocallyClosedExceptionalComparison (Padic.coefficientExtensionRing l E (n + 1)) inferInstance (Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))) S V T c v inferInstance inferInstance hT hqc)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-278569559",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Every clause matches the node; the statement field is verbatim and all 17 declarations exist. The pasted adjunctions are literal, the counit equation pins gamma uniquely, Delta is built from the named comparison maps, and unit_normalization pins the transport to nu^* s^x(eta). relative_hom covers every witness and the uniquely determined class adjunction. The factorization theorem was checked true as stated. Both section 1(B) repairs are justified: the old thm-sf-ambient-adjoint-class interface uses an arbitrary .some isomorphism (confirmed in the source), and the old def-weil-exceptional-inverse-image takes A : Type u. Edge cases checked: empty S, identity, pure open, pure closed, first level, universes. Only the three theorem bodies are sorry; no hollow definitions; docstrings carry the source and all 12 proof steps; no extra assumptions or pro-etale substitute. nt_compile --json on all three modules: exit 0, no errors or warnings. Minor notes, no change needed: the narrower declarations list in the exceptional-inverse-image record, a helper instance that applies an existing theorem, and the copyright author label."
  }
 }

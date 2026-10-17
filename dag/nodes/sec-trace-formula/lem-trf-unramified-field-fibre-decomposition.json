@@ -220,5 +220,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c8ea49f32 (reviewer sub-agent of L); spot-checked: Read the whole item, all 5 steps and every cited node statement, and checked the statement against Stacks 02G7(1) (morphisms.tex 7789-7821; tag verified in tags/tags). The statement is unchanged and matches 02G7(1) with no added hypotheses; the empty union and arbitrary index sets are allowed. The delivery creates no new nodes. Step 1 cites base-change-open clause (2) with V=S and the algebra-over-field-product node; the hypotheses are met, with the k-structure fixed by the uniqueness clause of def-weil-affine-spectrum. Step 2 uses only the stated clauses (1) and (3) of spec-finite-product-fields, and the k-compatibility is written out via the projection. Step 3 is a genuinely elementary sheaf argument on a disjoint open cover, done at scheme level. Step 4 goes finite separable -> etale (00U3 node) -> unramified (etale definition) -> finite type with Omega=0 (affine criterion). Step 5 applies the affine-cover formulation stated in def-weil-unramified-morphism. Route: unit sk-i-curve-zero does not cite sk-thm-p1. base-change-open is slopmaster2-closed, and ring-map-iff and finite-separable-etale are Mathlib leaves. I accept the declared tool_uses lem-weil-pbc-unramified-algebra-over-field-product and lem-weil-pbc-spec-finite-product-fields as generic algebra black boxes. No cycle: the dependencies of the algebra-product node stay in sk-thm-p1. Duplicate check: unramified-over-field-discrete (discreteness only), etale-fibre-discrete-separable-points (assumes etale), unramified-fibre-point-isolated (02G7(2)), lem-exc-etale-coproduct-etale (converse only, other unit), unramified-ordinary-fibre-criterion (02G8 relative criterion). None states the item. Small cases checked: empty X; Spec(kxk); an infinite non-quasi-compact union; k[eps] (Omega nonzero); F_p(t^{1/p}) (inseparable, excluded); Spec of prod_N k (not finite type, not discrete). Minor and not changed: the unchanged statement's 'disjoint union' cites no coproduct node, and step 5 mentions a pointwise form for the empty case that the definition does not state verbatim, which is harmless. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition",
+  "declaration": "AlgebraicGeometry.unramified_iff_exists_iso_coproduct_spec_finite_separable",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedFieldFibreDecomposition.lean",
+  "statement": "theorem unramified_iff_exists_iso_coproduct_spec_finite_separable (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) : (LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f)) ↔ ∃ (I : Type u) (L : I → Type u) (_ : ∀ i, Field (L i)) (_ : ∀ i, Algebra k (L i)), (∀ i, Module.Finite k (L i) ∧ Algebra.IsSeparable k (L i)) ∧ ∃ e : (∐ fun i : I ↦ Spec (.of (L i))) ≅ X, ∀ i : I, Sigma.ι (fun j : I ↦ Spec (.of (L j))) i ≫ e.hom ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k (L i)))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-401efc952",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02G7(1) (morphisms.tex 7789-7821) clause by clause: explicit structure map f : X ⟶ Spec k (allowed form), unramified as the recorded inline LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f), ↔, I : Type u with no size constraint, L i fields with Algebra k, Module.Finite and Algebra.IsSeparable, iso from the Mathlib scheme coproduct ∐ Spec L i to X, each summand's map to Spec k equal to Spec.map of algebraMap. Edge cases (empty X, infinite I, universe u sufficiency, char p, inseparable, nonreduced) all correct. No definitions, sorry-only proof (axioms: propext, sorryAx, choice, Quot.sound). Docstrings give source place, blueprint id and all 5 proof steps. Imports are the statement's needs plus exactly the proof_dep modules. Node differs from base only in lean; lean.statement verbatim. No duplicate in Mathlib or side tree. nt_compile.py clean (rc 0, 3.4 s); a probe with a deliberate error confirms messages surface. Second-reading section is the pipeline-wide 2026-10-17 stub (508 packets), not a fault. No findings."
  }
 }

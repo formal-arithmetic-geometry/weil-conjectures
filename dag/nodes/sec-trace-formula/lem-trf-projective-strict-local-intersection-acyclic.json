@@ -14,7 +14,8 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-pc-fibre-product",
   "def-weil-pbc-torsion-etale-sheaf",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -183,5 +184,23 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-50e03f514 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-artin-tensor-etale-acyclic, every cited node statement, the parent's step 3, unit sk-i-curve-zero (sk-thm-p1 is reached transitively) and the source. The source is Hübner–Schmidt, The tame site of a scheme, author PDF (not in literature/, already WANTED), pp. 14–16: Def 7.8 (étale acyclic = every étale covering splits), Prop 7.9 (iff every component strictly henselian, from Artin 71 Prop 3.2), Thm 7.10 (a tensor product of étale-acyclic ind-étale A-algebras is étale acyclic) and Prop 7.14(i), which is exactly the item's geometric form. The new node matches Thm 7.10 with n=2 plus Prop 7.9. It is the algebraic theorem the item specializes, not a restatement: the item's affine-neighbourhood, ind-étale and fibre-product reduction is real, and the source splits it the same way. Small cases checked: B1=B2=R, the zero tensor product, k[t]^sh ⊗ k(t)^sep, and k[t]^sh ⊗ k[t]^sh (residue fields separably closed by F. K. Schmidt). rg found no duplicate in dag/nodes. Fixes: (C4) step 2 derived the covering-splitting form of étale acyclicity from lem-weil-pbc-strictly-henselian-etale-acyclic, which only gives exactness of Γ. Step 2 now uses the local, hence connected, strictly henselian Spec B_x as the node's equivalent component form, states why both strict localizations factor through V, drops that citation and recomputes proof_deps. The item's source and proof_origin now cite HS Prop 7.14(i). The new node's source place now says vanishing comes from Γ being exact because every covering splits, with 03QO cited only for that argument. Accepted tool_use: lem-pd-projective-finite-affine-neighbourhood, a generic black box with no replacement on the route. Orgogozo Prop 2.3 was not checked; it is not needed. Not a target node, so no base-change or coefficient comparison applies.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveStrictLocalIntersectionAcyclic",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_cohomology_projective_strictLocal_intersection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveStrictLocalIntersectionAcyclic.lean",
+  "statement": "theorem isZero_cohomology_projective_strictLocal_intersection {B P : Scheme.{u}} [IsAffine B] (p : P ⟶ B) [IsProjective p] {Ωx Ωu : Type u} [Field Ωx] [IsAlgClosed Ωx] [Field Ωu] [IsAlgClosed Ωu] (x : Spec (.of Ωx) ⟶ P) (y : Spec (.of Ωu) ⟶ P) (A : Sheaf (pullback (strictHenselizationStructuralMap x) (strictHenselizationStructuralMap y)).smallEtaleTopology AddCommGrpCat.{u + 1}) (hA : IsTorsionAbelianSheaf A) (i : ℕ) (hi : 0 < i) : IsZero ((Etale.cohomology AddCommGrpCat.{u + 1} (pullback (strictHenselizationStructuralMap x) (strictHenselizationStructuralMap y)) (i : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj A))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8ac31016",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Lean signature matches node clause by clause: IsAffine B, IsProjective p (H-projective + quasi-compact), independent geometric points Ωx/Ωu : Type u, W = pullback over P of the upstream canonical strictHenselizationStructuralMap (unique by its characterization) whose source is the real affine-neighbourhood colimit strictHenselizationScheme (recorded Sheaf module re-exports upstream: one definition), arbitrary sheaf on W's small étale site with IsTorsionAbelianSheaf, IsZero of Etale.cohomology AddCommGrpCat.{u+1} W i on single 0 A for all i>0. No extra hypotheses; edge cases (empty W, empty P, i=1, A=0, coincident points) covered; universes bound per convention. Proof only sorry; source/blueprint docstrings and 3-step proof present; lean.statement verbatim; added stmt_dep def-weil-pbc-strict-henselization-structural-map is recorded and imported. nt_compile --json on snapshot file: rc 0, 6.6 s, no errors/warnings (error path sanity-checked). No duplicate found. Minor: the 'Second reading by Q24' section was written by the author (dispatcher would not start another agent); covered by this independent review. Statement text does not cite the added structural-map dependency; no tool requires it."
  }
 }

@@ -212,5 +212,23 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-e58c320ff (reviewer sub-agent of L); spot-checked: PASS: I read the item and all its proof steps in full; it creates no new nodes. Statement: its inline relative assassin matches Divisors 05AT (definition-relative-assassin) with F = O_X, and its notion of associated point matches 02OJ (definition-associated). The fibrewise claim is 05AH (lemma-minimal-support-in-ass) applied to the fibre X_t, which needs X_t to be locally Noetherian. Flat and locally-finite-type hypotheses are kept; nothing is weakened or added. Step 1: the fibre is a base change, so it is locally of finite type by lem-weil-pbc-lft-base-change (01T4). A field is Noetherian, so Spec K is locally Noetherian, and pqf-lem-locnoeth-lft (01T6) makes X_t locally Noetherian. No hypothesis on S is needed. Step 2 (marked elementary): I checked the closure and maximality argument that p is a minimal prime of a Noetherian affine A; it does not assume a reduced or irreducible fibre. Step 3: lem-weil-pbc-noetherian-minimal-prime-associated (05BV with M = A); both hypotheses are supplied by steps 1 and 2. Step 4: lem-weil-pbc-associated-prime-localization-depth-zero (05BZ), then clause (c) of lem-weil-pbc-affine-open-stalk-localization; the annihilator is moved along a ring isomorphism. Step 5: membership in the union. proof_deps equals the union of the step uses. Small cases tested: empty fibre, Spec K, K[e]/(e^2), K[u,v]/(uv), K[x,y]/(x^2,xy). Duplicate search with rg (05AH, 05AT, relative assassin, generic point with associated) found no scheme-level duplicate; the module version lem-weil-pbc-minimal-support-prime-associated is correctly replaced by its M = R leaf. Every cited statement is a Mathlib leaf or a definition, so there is no route departure, no tool_uses and no SGA citation. LeanFinder, LeanSearch, Loogle and grep searches are recorded. No fixes. For maintenance only: the existing node def-sc-associated-points has source tag 02OZ, which should be 02OJ (02OZ is lemma-regular-meromorphic-section-exists). Its statement is correct."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FibreComponentRelativeAssociated",
+  "file": "lean/Sheaf/TraceFormula/FibreComponentRelativeAssociated.lean",
+  "declaration": "AlgebraicGeometry.fibre_component_relative_associated",
+  "statement": "theorem fibre_component_relative_associated {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFiniteType f] (t : S) (C : Set (f.fiber t)) (y : f.fiber t) (hC : C ∈ irreducibleComponents (f.fiber t)) (hy : IsGenericPoint y C) : y ∈ associatedPoints (f.fiber t) ∧ f.fiberι t y ∈ ⋃ s : S, (f.fiberι s) '' associatedPoints (f.fiber s)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-142883e5f",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches the node and source (Stacks 05AT/02OJ/05AH/01T6): [Flat f], [LocallyOfFiniteType f], t : S, C ∈ irreducibleComponents (f.fiber t), IsGenericPoint y C; conclusion y ∈ associatedPoints (f.fiber t) ∧ f.fiberι t y ∈ ⋃ s, fiberι s '' associatedPoints (f.fiber s) is the node's relative assassin. No added hypotheses; the single universe is forced by Mathlib's pullback fibre. The statement is true. Edge cases checked: empty fibre, Spec K, K[e]/(e^2), K[u,v]/(uv). Dependency declarations read: associatedPoints = IsAssociatedPrime of the stalk maximal ideal; Mathlib fiber, fiberι, range_fiberι, IsGenericPoint, irreducibleComponents. Proof is sorry only; docstrings carry the source tags and blueprint id; no new definitions or duplicates; node copy differs from the clones only in the lean field and lean.statement matches the file signature. nt_compile.py --json on the snapshot file: clean, 4.2 s, exit 0 (a deliberately broken copy did report an error). Second-reading section is the post-2026-10-17 workflow note, accepted. Maintenance only: def-sc-associated-points cites tag 02OZ, should be 02OJ."
  }
 }

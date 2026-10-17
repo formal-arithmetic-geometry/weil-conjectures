@@ -241,5 +241,43 @@
   "group": "Q135",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-1ac075531 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full, plus the full statement of every cited node: the étale sum adjunction (lem-weil-pbc-etale-restriction-injectives), the Mathlib-leaf colimit lemma, def-pc-tensor-complex-sheaves, def-weil-pbc-etale-sum-extension, prop-weil-pbc-inverse-image-modules-exact (3), def-pc-cochain-complex-modules, lem-pur-etale-sheaf-projection-map and the homotopy sentence of def-pur-kinjective-complex. Sources checked at the cited places: Stacks 0GKF (more-etale.tex l.1808, the pure-tensor rule (Z,s)⊗t↦(Z,s⊗f^{-1}t)), Stacks 0038 (1) (categories.tex l.3472), and the 012Z total-complex sign (−1)^p, which matches the convention of def-pc-tensor-complex-sheaves. The hypotheses (commutative A; separated étale finite-type u) satisfy what the projection-map lemma needs. I redid the step 4 differential squares by hand, and the step 6 and 7 homotopy calculations: the mixed terms (−1)^{p−1}/(−1)^p and (−1)^p/(−1)^{p+1} cancel, and the remaining coefficient is (−1)^{2p}=1. Descent to the homotopy category is valid. Small cases checked: U empty, u=id, a single bidegree, A=0. Route: the unit closure of sk-thm-sf-compatibility contains sk-thm-iff, sk-def-exchange and sk-thm-properbasechange. The declared tool use is therefore already on route, and I accept it as harmless. The projection-map node is unsplit with no proof dependencies, so there is no cycle. The only citer, lem-pur-etale-support-map-compatibility, uses exactly this statement. There are no new nodes. An rg duplicate search found only open-immersion/derived analogues (lem-trf-open-tensor, lem-sf-open-tensor-normalization), which are different statements. No statement was weakened, no fixes were written, and no SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSumTensorTotalization",
+  "declaration": "AlgebraicGeometry.etale_sum_tensor_totalization",
+  "declarations": [
+   "AlgebraicGeometry.TotalTensorComparison",
+   "AlgebraicGeometry.TotalTensorNaturality",
+   "AlgebraicGeometry.TotalTensorSummandNormalization",
+   "AlgebraicGeometry.TotalTensorHomotopyComparison₁",
+   "AlgebraicGeometry.TotalTensorHomotopyComparison₂",
+   "AlgebraicGeometry.TotalTensorHomotopyLeft",
+   "AlgebraicGeometry.TotalTensorHomotopyRight",
+   "AlgebraicGeometry.TotalTensorHomotopyIso",
+   "AlgebraicGeometry.TotalTensorClauses",
+   "AlgebraicGeometry.EtaleModuleSheaf",
+   "AlgebraicGeometry.EtaleModuleComplex",
+   "AlgebraicGeometry.EtaleSumTensorComparison",
+   "AlgebraicGeometry.etaleSumTensorComponent",
+   "AlgebraicGeometry.EtaleSumTensorClauses",
+   "AlgebraicGeometry.EtaleSumPreservesDirectSums",
+   "AlgebraicGeometry.etale_sum_tensor_totalization"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSumTensorTotalization.lean",
+  "statement": "theorem etale_sum_tensor_totalization (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (u : U ⟶ X) (hu : Etale u) [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] : ∃ Ψ : EtaleSumTensorComparison A u hu, EtaleSumPreservesDirectSums A u hu ∧ EtaleSumTensorClauses A u hu Ψ",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of 10230e1534ed: every total summand is normalized by the inverse canonical etaleLowerShriekTensorIso; the same comparison intertwines the actual signed tensor homotopies and factors as a natural isomorphism of the canonical homotopy-category bifunctors. Reviewer fix (S2 review of 3c49b611e92b): TotalTensorHomotopyIso restored from `opaque` (an uninterpretable Prop) to an ordinary `def`; the five comparison clauses are bundled once as the generic TotalTensorClauses and specialized once as EtaleSumTensorClauses (same clauses, same Ψ, same canonical component), and the unused abbrev etaleTensorTotal is removed, to keep the per-file compile well under the 60 s limit; missing docstrings added.",
+  "fixed_by": "NT-stage2-cc-3c49b611e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c49b611e",
+  "group": "Q128",
+  "result": "fix",
+  "note": "Mathematics matches the node: CommRing A : Type (u+1) (upstream convention), Etale/IsSeparated/LocallyOfFiniteType/QuasiCompact u, nothing stronger; L = Etale.etaleLowerShriek, R = Etale.upperStar, Tot = mapBifunctor curriedTensor (.up Z); every summand pinned to etaleLowerShriekTensorIso.inv (orientation checked upstream, no factor swap), so Psi is unique; naturality in both variables, both mapBifunctorMapHomotopy intertwinings and the homotopy-category iso with components Q(Psi) are correct; one sorry, no pro-etale substitute, report sections present. Findings repaired in fixes/: (1) H5/H3: TotalTensorHomotopyIso was `opaque`, which Lean never unfolds, so the homotopy-category clause was an unprovable, unusable Prop; restored as a def. (2) H8: four declarations (TotalTensorHomotopyComparison₂, TotalTensorHomotopyLeft, TotalTensorHomotopyRight, TotalTensorHomotopyIso) lacked source/blueprint docstrings; added. (3) Two earlier landings were returned for the 60 s per-file timeout; the five clauses are now bundled once as generic TotalTensorClauses and specialized once as EtaleSumTensorClauses, same clauses and same Psi; theorem is ∃ Ψ, EtaleSumPreservesDirectSums ∧ EtaleSumTensorClauses Ψ; unused etaleTensorTotal removed (no users in the side clone or other review runs). nt_compile: delivered file timed out at 60 s; opaque->def only gave 53.9/59.5 s; final fix rc 0, no messages, 31.9 s and 35.9 s at load average about 135. Fixes: EtaleSumTensorTotalization.lean, lean-record.json (16 declarations, statement verbatim), report.md with an appended reviewer-fix section."
  }
 }

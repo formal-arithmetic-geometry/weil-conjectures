@@ -158,5 +158,28 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c958ca1af (reviewer sub-agent of L); spot-checked: I read all of it: the item, the three new nodes, every cited node's statement, unit sk-i-curve-zero, Stacks morphisms.tex Tag 02JX (lemma-alteration-dimension, the whole proof) and Tag 02JU (lemma-dimension-formula), topology.tex Tag 0066, and Mathlib Inseparable.lean lines 354 and 400. The item matches the four 02JX hypotheses exactly, gives equality only for a closed f, and adds the proper, finite-extension case; it is not weakened. Small cases tested: P^1_Z over Spec Z gives 2=1+1; Spec Q over Spec Z_(p) gives a strict inequality (that map is not closed); r=0. Step 1 is 02JX paragraph 1, using the Mathlib-leaf stalk/chain node and the 02JU node. Step 2 writes out the generic-fibre check: A->B is injective by dominance, and S^{-1}B is a nonzero domain of finite type with the same fraction field. Step 3 is 0066(1). Step 4 is an elementary concatenation, and the points are distinct because they lie over distinct base points. Step 5 uses pqf-lem-proper-closed-map, whose Lean is closed in slopmaster2, so it counts as a tool rather than a route; there are no tool_uses. Duplicate search (rg over dag/nodes for dimension formula, 02IJ/02JU/00O*, and specialization lifting): the closest node, lem-exc-dimension-formula-universally-catenary-finite-type-domain, is the equality for a universally catenary ring, so no duplicate. No new node restates a clause of the item. Fixes made: (1) lem-trf-closed-map-specializing had an unclosed $ and \\prime in its TeX, cited source morphisms.tex instead of topology.tex for 0066, and cited a Krull-dimension definition for 'topological space' (B3/B4/B5). I fixed the statement, set stmt_deps to [], and pointed source and proof_origin to topology.tex 0066(1). The Mathlib match IsClosedMap.specializingMap at Inseparable.lean:400 is exact. (2) lem-trf-generic-fibre-closed-chain now states that the chain has distinct points, which step 4 needs to count its length; the statement is still true (Jacobson closed point, Nullstellensatz, 00OS). The item is unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedDominantDimension",
+  "declaration": "AlgebraicGeometry.closed_dominant_dimension",
+  "declarations": [
+   "AlgebraicGeometry.closed_dominant_dimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedDominantDimension.lean",
+  "statement": "theorem closed_dominant_dimension (U V : Scheme.{u}) [IsIntegral U] [IsIntegral V] (f : V ⟶ U) [IsDominant f] [LocallyOfFiniteType f] [IsLocallyNoetherian U] : letI := (f.functionFieldMap f.apply_genericPoint_of_isDominant).hom.toAlgebra Function.Injective (algebraMap U.functionField V.functionField) ∧ topologicalKrullDim V ≤ topologicalKrullDim U + (Cardinal.toENat (Algebra.trdeg U.functionField V.functionField) : WithBot ℕ∞) ∧ (IsClosedMap f → topologicalKrullDim V = topologicalKrullDim U + (Cardinal.toENat (Algebra.trdeg U.functionField V.functionField) : WithBot ℕ∞)) ∧ (IsProper f → Module.Finite U.functionField V.functionField → topologicalKrullDim V = topologicalKrullDim U)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Second reader (cc review): the induced function-field injection k(U) -> k(V) is the existing source-repository declaration AlgebraicGeometry.Scheme.Hom.functionFieldMap (WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback: stalkSpecializes along f (genericPoint V) = genericPoint U, then f.stalkMap at the generic point), with the identification supplied by AlgebraicGeometry.Scheme.Hom.apply_genericPoint_of_isDominant (WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree). The delivered private copies closedDominantFunctionFieldMap / closedDominantFunctionFieldAlgebra / ClosedDominantFunctionFieldFinite (H4) were removed; the algebra is installed by letI and finiteness is Module.Finite.",
+  "fixed_by": "NT-stage2-cc-858def311"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-858def311",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Hypotheses/conclusions match Stacks 02JX and the node clause by clause (integral U,V; dominant, locally finite type; U locally Noetherian; inequality, closed equality, proper+finite equality; WithBot ℕ∞ allows infinity; single universe u; empty case excluded by integrality). H4: helper Scheme.closedDominantFunctionFieldMap (+ algebra/finite wrappers) duplicates existing AlgebraicGeometry.Scheme.Hom.functionFieldMap (WeilConjectures/AlgebraicGeometry/Curve/DivisorPullback.lean:64) with Scheme.Hom.apply_genericPoint_of_isDominant (FiberDegree.lean:689). Fix: fixes/ClosedDominantDimension.lean reuses them via letI, removes helpers and the existential, adds step-by-step proof docstring (H8); fixes/lem-trf-closed-dominant-dimension.lean-record.json (declarations, note); fixes/lem-trf-closed-dominant-dimension.report.md (both sections kept + fix section). nt_compile: delivered and fixed modules rc 0, no errors; negative control confirms error reporting."
  }
 }

@@ -20,7 +20,8 @@
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-cbc-strict-constant-tower-operations"
  ],
  "proof": [
   {
@@ -272,5 +273,62 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-4e1b22d56 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Corrected proof provenance, distinguished K-flat and K-injective representatives, and supplied constant-coefficient pullback justifications. Statement unchanged. Corrected JSON and review.md written; dependency closure is acyclic and avoids forbidden batch-5 proof nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantTowerDirectImageNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.constantTowerDirectImageNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.IsDirectImageNormalizedOnKInjectives",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.IsReductionPullAt",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.delta",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.push",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.pull",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.L",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.deltaPull",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.deltaAdj",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.limitPush",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.delta_preservesKInjective",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.chi",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.deltaEval",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.deltaUnit_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.deltaLimit",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.quotient",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.quotientStep",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.level",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.step_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModule",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModule_additive",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionHomotopy",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ReductionModel",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reduction_exists",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModel",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reduction",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionCounit",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryAugmentation_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryAugmentation",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.augmentationHomotopy",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.augmentation",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryReductionPull_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryReductionPull",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionPull_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionPull",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.projection",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.constantTowerDirectImageNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantTowerDirectImageNormalization.lean",
+  "statement": "theorem constantTowerDirectImageNormalization (d : CompleteCoefficientDatum A) {X Y : Scheme.{u}} (f : X ⟶ Y) : IsDirectImageNormalizedOnKInjectives (moduleDirectImage A f) (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X) (Functor.const ℕᵒᵖ : Modules A Y ⥤ Towers A Y) (towerDirectImage A f) (Functor.compConstIso ℕᵒᵖ (moduleDirectImage A f)) (chi A f) ∧ (∀ (M : DerivedCategory (Modules A X)) (n : ℕ), (ev A Y n).map ((chi A f).hom.app M) ≫ (evalR A f n).app ((delta A X).obj M) ≫ (push A f).map ((deltaEval A X n).hom.app M) = (deltaEval A Y n).hom.app ((push A f).obj M)) ∧ (∀ M : DerivedCategory (Modules A X), (push A f).map ((deltaLimit A X).inv.app M) ≫ (limitPush A f).hom.app ((delta A X).obj M) ≫ (L A Y).map ((chi A f).inv.app M) ≫ (deltaLimit A Y).hom.app ((push A f).obj M) = 𝟙 _) ∧ (∀ M : DerivedCategory (Modules A X), (augmentation d.ideal Y).app ((push A f).obj M) ≫ (projection d.ideal f).app M = (chi A f).hom.app M ≫ (R A f).map ((augmentation d.ideal X).app M))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical original-site constant-tower comparisons, quotient-tower reduction and its universal augmentation, and the normalized projection mate are retained with explicit representative characterizations. The already-landed strict constant-tower operations are added to stmt_deps; the mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f36870a1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read node, all 12 stmt_deps records, the source tags (agent proof per proof_origin), the module (36 decls), report and node delta. Hypotheses: A:Type(u+1) (landed ops convention), CompleteCoefficientDatum, any f; small ProEt site, no universe equality, no finite quotients. Clause 1: chi plus K-injective identity-square predicate; clause 2: ev_n(chi) is the identity via evalR/deltaEval; clause 3: deltaLimit^-1, limitPush, L(chi^-1), deltaLimit composite is the identity; clause 4: aug_Y then projection = chi then R(aug_X), in D(towers). limitPush (conjugate of identity square, 0A07) and projection (mate of uniquely characterized reductionPull, 0B56) are canonical helpers; recorded dependency existentials unusable (equal universes / abstract corners). reduction is the universal left derived functor with its K-flat counit, not hollow. Statement verbatim, decl list exact, stmt_deps gained only a landed node. 9 sorry theorem bodies, no axioms, docstrings with source and blueprint. nt_compile clean (8.9 s / 10.1 s). Minor: thin in-thread Q16 second-reading section; stage 3 must prove the mate compatibilities."
  }
 }

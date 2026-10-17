@@ -207,5 +207,23 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-8c71f025c (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement is word for word the main-20261015 _section.md (order 9), and the two new stmt_deps (effective Cartier ideal, schematic density) are the right notions. Stacks sources checked at their labels: 01PH properties.tex:3718, (2)<=>(4); 02OS divisors.tex:8383, (2); 07ZU divisors.tex:2449; 0809 divisors.tex:8567, whose chart argument cancels x, not a. Step 1 (qc-open-complement-ideal) and step 2 (ideal-unit-off-support plus sk-def-nagata-admissible) meet every hypothesis of their cited nodes, and both nodes are Lean-closed. Step 3: the principalization node's stored statement needs only finite type and gives a local non-zero-divisor generator, which is the Cartier-ideal definition. Step 4 is correctly elementary: V(IB) is the preimage of V(I) by contraction of primes. Step 5: lem-pc-cartier-divisor-nowhere-dense (split and reviewed, the generic 07ZU density lemma, quasi-compactness included) gives density of b^{-1}(U) and finishes the statement. Step 6 is correct and realizes the unit's second paragraph: the total-transform node applies to any blow-up, and the tower induction has an invariant, a base and a step. It proves more than the item's existential statement needs, which is harmless. Route: the other-unit nodes used are Lean-closed tools; the accepted tool_use is lem-pc-cartier-divisor-nowhere-dense. The dependency closure is acyclic and no cited node is merged. Duplicate check: det-nagata-boundary-divisor-cartier is strictly stronger and is not used; conrad-schematically-dense-blowup lacks the Cartier conclusion. Edge cases U=T, U empty, the plane minus the origin, nonreduced T and disconnected T all hold. There are no new nodes and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataBoundaryDivisor",
+  "declaration": "AlgebraicGeometry.exists_admissibleBlowup_boundaryDivisor",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataBoundaryDivisor.lean",
+  "statement": "theorem exists_admissibleBlowup_boundaryDivisor {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T] (U : T.Opens) (hU : IsCompact (U : Set T)) : ∃ (B : IsAdmissible T U) (J : B.I.blowup.IdealSheafData), IsSchemeTheoreticallyDominant (B.I.blowupMap ⁻¹ᵁ U).ι ∧ J.IsInvertible ∧ (J.support : Set B.I.blowup) = ((B.I.blowupMap ⁻¹ᵁ U : B.I.blowup.Opens) : Set B.I.blowup)ᶜ",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4c0b2d06",
+  "group": "Q79",
+  "result": "fix",
+  "note": "Lean statement correct: qcqs T and qc U map to CompactSpace/QuasiSeparatedSpace/IsCompact; ∃ B : IsAdmissible T U (the recorded sk-def-nagata-admissible); IsSchemeTheoreticallyDominant of (blowupMap⁻¹ᵁU).ι (the Mathlib match for schematic density); ∃ J with J.IsInvertible (the recorded effective-Cartier-ideal definition, local regular principal) and J.support = (preimage of U)ᶜ; both conclusions on the same B; node statement verbatim from main-20261015 _section.md order 9; lean.statement equals the file signature; node changed only in its lean field. No stronger hypothesis, universe restriction or hollow definition. Edge cases U=⊤, U=⊥, empty, nonreduced and disconnected T hold. Upstream exists_admissibleBlowup_cartierBoundary and exists_isAdmissible_isSchemeTheoreticallyDominant_preimage each give only one clause, so a new statement is right. nt_compile --json: clean in 3.5 s, axioms propext/sorryAx/choice/Quot.sound. Only fault H1.1/H11: '## Second reading by Q79' was a placeholder ('No second reading by a worker'). Fixed by fixes/sk-lem-nagata-boundary-divisor.report.md, which keeps the Worker report and adds a real clause-by-clause second reading."
  }
 }

@@ -235,5 +235,33 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-f818aa912 (reviewer sub-agent of L); spot-checked: I read the whole item and all 8 steps against Stacks sites.tex: 00Y5 definition-point, 00YA lemma-point-site-topos, 00YC proposition-point-limits with remark 00YD, the opening of section 00YN (u(V)=colim Hom(U_i,V), F_p=colim F(U_i)) and 00YQ. I also read the full statements of all six cited nodes. The statement keeps every hypothesis of the source (small site with finite limits, nonempty directed inverse system, lifting for every covering) and is not weakened. It has no base-change morphism or coefficient category. Step checks: (1) the directed-colimit quotient is correct. (2) Hom into a limit plus the filtered-colimit Mathlib leaf, used over the filtered index (I,<=), shows u preserves finite limits, including the terminal object because I is nonempty. (3) The objectwise finite-limit leaf (1),(2) plus the same leaf shows S preserves finite limits. (4) Joint surjectivity is the hypothesis; an empty cover forces u(W) empty. (5) I checked the explicit inverse maps between the neighbourhood stalk and colim F(U_i): independence of representatives, pointed arrows, f_ji pointed, a:(U_i,[i,id])->(W,x) pointed; both composites are identities. (6) All three clauses of 00Y5 hold. (7) Map(u(-),E) is a sheaf by lifting pairs through u(W_k x_W W_l); empty covers work. (8) Currying gives stalk -| R, so with step 3 this is the def-trf-geometric-morphism datum, matching 00YA(1). Edge cases tested: one-element I, a terminal one-object site, empty covers, transition maps that are not monomorphisms. No new nodes, nothing restated or circular. Duplicate search by rg (00YC/00YA/skyscraper/point of the site): the reconstruction and fibre nodes start from a given point, and the geometric-stalk nodes are étale-specific; none is a duplicate. Mathlib Point.ofIsCofiltered is a candidate only (stagewise sieve hypothesis, Mathlib's own Point structure, no Stacks geometric morphism), not a one-line leaf. All cited nodes are definitions or Mathlib leaves, so the route stays in sk-i-curve-zero and tool_uses is empty. No SGA source cited. One cosmetic remark, not repaired: the title says finite-cover lifting while the hypothesis covers all coverings. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.InverseSystemSitePoint",
+  "declaration": "CategoryTheory.inverseSystemSitePoint",
+  "file": "lean/Sheaf/TraceFormula/InverseSystemSitePoint.lean",
+  "statement": "theorem inverseSystemSitePoint {C : Type u} [Category.{u} C] [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (U : Iᵒᵖ ⥤ C) (hcover : ∀ {K : Type u} {W : C} (V : K → C) (a : ∀ k, V k ⟶ W), Presieve.ofArrows V a ∈ J W → ∀ f : (inverseSystemHomFunctor U).obj W, ∃ (k : K) (g : (inverseSystemHomFunctor U).obj (V k)), (inverseSystemHomFunctor U).map (a k) g = f) : PreservesFiniteLimits (inverseSystemHomFunctor U) ∧ (∀ (K : Type u) (W : C) (V : K → C) (a : ∀ k, V k ⟶ W) (_ : Presieve.ofArrows V a ∈ J W) (f : (inverseSystemHomFunctor U).obj W), ∃ (k : K) (g : (inverseSystemHomFunctor U).obj (V k)), (inverseSystemHomFunctor U).map (a k) g = f) ∧ ∃ (p : GeometricMorphism (Type (max u w)) (Sheaf J.toGrothendieck (Type (max u w)))), Nonempty (p.inverse ≅ inverseSystemSectionColimitFunctor.{w} J.toGrothendieck U)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.inverseSystemSitePoint",
+   "CategoryTheory.inverseSystemOppositeDiagram",
+   "CategoryTheory.inverseSystemRepresentableDiagram",
+   "CategoryTheory.inverseSystemHomFunctor",
+   "CategoryTheory.inverseSystemSectionDiagram",
+   "CategoryTheory.inverseSystemSectionColimitFunctor"
+  ],
+  "note": "Maintainer fix 2026-10-18: the site is the recorded rendering of def-weil-pbc-sites-and-cohomology (Precoverage J with J.IsSiteForCoverings, sheaves for J.toGrothendieck); sheaf values are Type (max u w), as in the citer finitarySite_enoughPoints; the inverse-image clause is a natural isomorphism p.inverse ≅ inverseSystemSectionColimitFunctor (F ↦ colim_i F(U_i) with its canonical action on morphisms), replacing a per-sheaf Nonempty isomorphism of sets, which only asserted equal cardinality.",
+  "fixed_by": "NT-stage2-cc-6fb2b70f7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fb2b70f7",
+  "group": "Q19",
+  "result": "fix",
+  "note": "Read the node, its 4 statement dependencies and their modules (GeometricMorphism, SiteCoveringAxioms), Stacks 00YC/00YA/00YQ, the citer finitarySite_enoughPoints and Mathlib Point.ofIsCofiltered (candidate only, no duplicate). The node copy changes only the lean record. The delivered file compiles cleanly (nt_compile --json, 5.1 s). Findings, all fixed: (1) the inverse-image clause was a per-sheaf Nonempty isomorphism of sets, which only says equal cardinality and is not natural; it is replaced by a natural isomorphism p.inverse ≅ inverseSystemSectionColimitFunctor (new helper, F ↦ colim_i F(U_i)). (2) Sheaf values were silently restricted to Type u; they are now Type (max u w), as the size convention allows and the citer needs. (3) A bare GrothendieckTopology replaced the recorded site notion; it is now Precoverage J with J.IsSiteForCoverings, Presieve.ofArrows coverings and Sheaf J.toGrothendieck. Fixes: the full module (compiles cleanly), a lean-record.json override (declarations, note) and the full report. Edge cases checked: empty I excluded by Nonempty, one-element I, empty coverings, non-mono transitions, universes."
  }
 }

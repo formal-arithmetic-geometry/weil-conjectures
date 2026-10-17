@@ -261,10 +261,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-15cfaa36c",
-  "group": "Q72",
-  "result": "fix",
-  "note": "Statement matches node lem-trf-modifications-zariski-refinement clause by clause: IsIntegral+IsNoetherian S, finite cover Fin n with ⨆U i=⊤, q i : V i ⟶ (U i).toScheme with recorded Orgogozo.IsModification (the explicit compactness argument is a Prop, so no extra assumption), conclusion ∃ S' p, IsModification p ∧ ∀ i ∃ a, a ≫ q i = pullback.snd p (U i).ι, plus the finite-family corollary. Edge cases checked: n=0 impossible on nonempty S, empty U_i, empty family via identity, single universe u. No defs; both proofs exactly sorry (#print axioms); docstrings carry source, blueprint id and the 7 proof steps; non-public imports are exactly the proof_deps modules; lines at most 92 chars; lean.statement verbatim; only the lean field changed; no duplicate declaration found. nt_compile.py --json compiled cleanly (rc=0, 5.8 s/10.5 s). Only finding H1/H11: the '## Second reading by Q72' section was a placeholder; fixes/lem-trf-modifications-zariski-refinement.report.md replaces the report with the worker report kept verbatim and a real clause-by-clause second reading."
+  "reviewer": "NT-stage2-cc-2e35ad6b8",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Statement matches node lem-trf-modifications-zariski-refinement clause by clause: [IsIntegral S][IsNoetherian S], Fin n cover with ⨆U i=⊤, q i : V i ⟶ (U i).toScheme with recorded Orgogozo.IsModification (proper, iso over dense open, dense preimage; read at OrgogozoInductionData.lean:85). Its CompactSpace argument is a Mathlib proof term, so it adds no assumption. Conclusion ∃ S' p, IsModification p ∧ ∀ i ∃ a, a ≫ q i = pullback.snd p (U i).ι; corollary for finitely many modifications including the empty family. Edge cases: n=0 vacuous, empty U_i, repeated opens, field base, nonreduced V_i, single universe u as in the dependency. No definitions; both proofs exactly sorry (#print axioms: sorryAx plus the standard axioms). Docstrings carry source, blueprint id and the 7 steps. lean.statement verbatim; only the lean field changed; report has real Worker report and Second reading by Q85. nt_compile.py --json on the snapshot: rc=0, no diagnostics, 7.0 s; probe #check shows every variable bound. Note: identical to the already-landed Q72 content except the Authors line and lean.by/date."
  },
  "lean": {
   "module": "Sheaf.Paper.ModificationsZariskiRefinement",
@@ -276,8 +276,8 @@
   "file": "lean/Sheaf/Paper/ModificationsZariskiRefinement.lean",
   "statement": "theorem exists_modification_zariski_refinement (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] (n : ℕ) (U : Fin n → S.Opens) (hcover : (⨆ i, U i) = ⊤) (V : Fin n → Scheme.{u}) (q : ∀ i : Fin n, V i ⟶ (U i).toScheme) (hq : ∀ i : Fin n, @IsModification (V i) (U i).toScheme inferInstance inferInstance (isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact (U i : Set S))) (q i)) : ∃ (S' : Scheme.{u}) (p : S' ⟶ S), IsModification p ∧ ∀ i : Fin n, ∃ a : pullback p (U i).ι ⟶ V i, a ≫ q i = pullback.snd p (U i).ι",
   "branch": "newtargets-dag",
-  "by": "Q72",
-  "date": "2026-10-17",
+  "by": "Q85",
+  "date": "2026-10-18",
   "existing": false
  }
 }

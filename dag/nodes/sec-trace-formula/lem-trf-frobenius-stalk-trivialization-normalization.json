@@ -242,5 +242,24 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-0228fd840 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and every cited node statement in full. I also read Stacks more-morphisms Tag 0F6W (lemma-relative-frobenius-weakly-etale) and the main-20261015 blueprint proofs of prop-trf-scheme-galois-comparison and lem-trf-local-frobenius-conjugacy (3). The statement is unchanged; its hypotheses (finite commutative A, any characteristic-p X) match lem-pur-frobenius-trivialization-pullback and lem-trf-proetale-pullback-stalk-coherence, and the coefficient category is the ordinary pro-etale constant-sheaf one. Step 2: I checked the adjunction direction independently. With (L1,R1)=(P,Q), (L2,R2)=(id,id) and delta=d^{-1}, Q(tau)eta=d^{-1}, so the unit section goes to M(R_V^{-1})a; the mate convention cannot change this. Step 3: R_V(v delta^{-1})=(v,u), and h R_V^{-1}=pr_T, so R_V^{-1} is a pointed T-morphism and the germ relation gives [V,v delta^{-1},a]. Step 6: I redid the full chase from the reparametrization equation (t=z, u=delta, Spec alpha=delta^{-1}), the two composition equations and lem-pur pullback naturality with u=z; it closes. Step 7 is termwise and passes to the derived category by parts (2) and (3) of the localization node. Edge cases checked: b=0; X=s with z=id; the constant sheaf on V=s, v=delta; the direction of delta^{-1}; nonreduced X; A=0. There are no new nodes and no cycle (transitive check), and no duplicate in the DAG (0F6W, Frobenius and stalk greps; closest are lem-trf-absolute-frobenius-site, the coefficient-naturality lemmas and lem-trf-local-frobenius-transport-normalization, none of which states this formula). Both declared tool_uses (lem-pur, prop-weil-pbc-proetale-constant-ring-map) are accepted; they lie in the unit route anyway (sk-thm-sf-package directly, sk-thm-properbasechange transitively). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FrobeniusStalkTrivializationNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.frobeniusStalkTrivializationNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusStalkTrivializationNormalization.lean",
+  "statement": "theorem frobeniusStalkTrivializationNormalization (p : ℕ) (hp : Nat.Prime p) (k : Type u) [Field k] [IsAlgClosed k] (hs : (Spec (.of k)).IsCharacteristic p) (X : Scheme.{u}) (hX : X.IsCharacteristic p) (z : Spec (.of k) ⟶ X) (A : Type u) [CommRing A] [Finite A] : FrobeniusStalkTrivializationNormalized p hp k hs X hX z A",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-665f15e5f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-665f15e5f",
+  "group": "Q146",
+  "result": "fix",
+  "note": "Statement correct against node and Stacks 0F6W: hypotheses exact (p prime, alg-closed k with hs, char-p X, z, finite comm A, all b); δ unique p^b-power automorphism with Spec.map δ = F_s^b and zδ = F_X^b z; rS/rX pinned by projection F_V^b (Over-morphism forces h), tauS/tauX pinned by the unit equation Q(τ)η = M(R_V^{-1}), comp pinned by the conjugate/pullbackComp formula, exactly as in lem-pur; germ and map clauses for (τ_s)_id∘c^{-1} and (τ_X)_z∘c^{-1}_{F_X^b,z} = r_{zδ,δ^{-1}} with correct directions, using the uniquely-specified proEtaleStalkReparam; pullback-along-z compatibility via the c/r reparametrization equation and the lem-pur derived identity; derived clauses for bounded H. Edge cases b=0, empty X, X=Spec k, A=0, nonreduced X, universes OK. Shape: 3 files, only the lean field changed, statement verbatim. Delivered file compiles clean via nt_compile --json (16.7 s and 18.5 s, exit 0). Only finding H8: the theorem docstring had 7 one-line labels, not the node proof step by step, and they did not follow the node's step order. fixes/FrobeniusStalkTrivializationNormalization.lean is a complete replacement with the full 7-step proof in the docstring and is otherwise byte-identical; it compiles clean (13.0 s); no record change needed."
  }
 }

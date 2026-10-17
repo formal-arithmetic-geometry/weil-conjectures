@@ -12,7 +12,8 @@
   "def-weil-abstract-derived-category",
   "def-sp-spectral-sequence",
   "def-sp-filtration",
-  "def-sp-convergence"
+  "def-sp-convergence",
+  "def-sp-filtered-complex-subquotients"
  ],
  "proof": [
   {
@@ -207,5 +208,29 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-8ea71bd41 (reviewer sub-agent of L); spot-checked: I read the item, all six cited node statements, Stacks 0130/0132 (homology.tex lemma-first-quadrant-ss, which assumes only finite diagonals) and 014E (derived.tex definition-cone, the same matrix as def-weil-abstract-derived-category), the parent step 5 of lem-trf-nearby-finite-base-descent, and unit sk-i-curve-zero. The statement is unchanged and not weakened: arbitrary integer a, supports q>=0 and j>=a, finite diagonals. I recomputed every step. Step 1: the column-cone double complex has d_v^2=0 and d_h d_v=d_v d_h because u commutes with both differentials, and its support is j>=a-1. Step 2: T=(b,(-1)^q x) is checked on all three A-components ((-1)^q u x, (-1)^{q+1} d_h x, -d_v x) against the cone of Tot u; it is filtered and self-inverse. Step 3: shifting the index by a-1 gives a first-quadrant double complex, and the cited theorem's statement gives E_1, F^{n-b+1}H^n=0, stabilization and convergence. Step 4: a zero E_1 entry stays zero on every page, and a finite filtration with zero graded pieces gives H^n=0 for n<=r. Small cases agree: zero complexes; A=Lambda at (0,a) with B=0, which shows the a-1 bound is needed; u=id; r<a-1; negative a. No new nodes. The nearby nodes lem-sp-first-quadrant-vertical-cone-filtration, lem-sp-bounded-below-second-filtration and lem-weil-pbc-bounded-below-total-column-comparison are not duplicates, since none gives vanishing only through degree r. Searches cover three kinds. I accept the tool_use of thm-sp-double-complex-spectral-sequences as a generic homological tool; the unit route is unchanged. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedBelowCechConeComparison",
+  "declaration": "HomologicalComplex₂.boundedBelow_cech_cone_comparison",
+  "declarations": [
+   "HomologicalComplex₂.cechTotalMapCone",
+   "HomologicalComplex₂.cechTotalMapConeStep",
+   "HomologicalComplex₂.boundedBelow_cech_cone_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BoundedBelowCechConeComparison.lean",
+  "statement": "theorem boundedBelow_cech_cone_comparison (f : A ⟶ B) (a : ℤ) (hA : ∀ q j : ℤ, q < 0 ∨ j < a → IsZero ((A.X q).X j)) (hB : ∀ q j : ℤ, q < 0 ∨ j < a → IsZero ((B.X q).X j)) : (∃ (F : DecreasingFiltration (cechTotalMapCone f)) (E : CohomologicalSpectralSequence (ModuleCat.{v} R) 1) (e₁ : ∀ q j : ℤ, (E.page 1).X (q, j) ≅ (F.gradedPiece q).homology (q + j)) (G : ∀ n : ℤ, DecreasingFiltration ((cechTotalMapCone f).homology n)) (X : BigradedExactCouple (ModuleCat.{v} R) 0) (L : X.LimitSubobjects) (H : ∀ n : ℤ, X.AlphaColimit n) (eH : ∀ n : ℤ, (H n).obj ≅ (cechTotalMapCone f).homology n) (eD : ∀ P Q : ℤ, X.D P Q ≅ (F.step (-Q) : CochainComplex (ModuleCat.{v} R) ℤ).homology (P + Q)) (eC : ∀ (s : ℕ) (q j : ℤ), (X.pageCouple s).E (2 * q + j) (-q) ≅ (E.page (s + 1) (by omega)).X (q, j)), (∀ p n : ℤ, F.complexStep p n = cechTotalMapConeStep f a p n) ∧ (∀ q j : ℤ, Nonempty ((E.page 1).X (q, j) ≅ (CochainComplex.mappingCone (f.f q)).homology j)) ∧ (∀ n p : ℤ, (G n).step p = imageSubobject (HomologicalComplex.homologyMap (F.step p).arrow n)) ∧ (∀ n : ℤ, (G n).IsFinite) ∧ (∀ n P : ℤ, (H n).ι P ≫ (eH n).hom = (eD P (n - P)).hom ≫ eqToHom (by rw [show -(n - P) = P - n by omega, show P + (n - P) = n by omega]) ≫ HomologicalComplex.homologyMap (F.step (P - n)).arrow n) ∧ (∀ P Q : ℤ, X.alpha P Q ≫ (eD (P - 1) (Q + 1)).hom = (eD P Q).hom ≫ HomologicalComplex.homologyMap (Subobject.ofLE (F.step (-Q)) (F.step (-(Q + 1))) (F.antitone_step (by omega))) (P + Q) ≫ eqToHom (by rw [show P - 1 + (Q + 1) = P + Q by omega])) ∧ (∀ P Q : ℤ, X.initialG P Q ≫ eqToHom (by congr 1 <;> omega) ≫ (eC 0 (-Q) (P + 2 * Q)).hom ≫ (e₁ (-Q) (P + 2 * Q)).hom ≫ eqToHom (by rw [show -Q + (P + 2 * Q) = P + Q by omega]; rfl) = (eD P Q).hom ≫ HomologicalComplex.homologyMap (F.complexQuotientπ (-Q) (-Q + 1) (by omega)) (P + Q)) ∧ (∀ (s : ℕ) (q j : ℤ), (eC s q j).hom ≫ (E.page (s + 1) (by omega)).d (q, j) (q + (s + 1), j - (s + 1) + 1) = (X.pageCouple s).d (2 * q + j) (-q) ≫ eqToHom (by congr 1 <;> omega) ≫ (eC s (q + (s + 1)) (j - (s + 1) + 1)).hom) ∧ X.ConvergesTo L H ∧ (∀ q j : ℤ, Nonempty (X.pageInfinity L (2 * q + j) (-q) ≅ (G (q + j)).gradedPiece q)) ∧ (∀ q j : ℤ, ∃ (N : ℤ) (hN : 1 ≤ N), ∀ (s : ℤ) (hs : N ≤ s), (E.page s (by omega)).d (q, j) (q + s, j - s + 1) = 0 ∧ (E.page s (by omega)).d (q - s, j + s - 1) (q, j) = 0 ∧ Nonempty ((E.page s (by omega)).X (q, j) ≅ (E.page N hN).X (q, j)) ∧ Nonempty ((E.page s (by omega)).X (q, j) ≅ (G (q + j)).gradedPiece q))) ∧ ∀ r : ℤ, (∀ q : ℤ, 0 ≤ q → ∀ j : ℤ, j ≤ r → IsZero ((CochainComplex.mappingCone (f.f q)).homology j)) → ∀ n : ℤ, n ≤ r → IsZero ((cechTotalMapCone f).homology n)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary definitions use Mathlib total.map, mappingCone and finite suprema of canonical summand images. The theorem specifies the cone column filtration, the induced cohomology filtration and its exact couple, including ConvergesTo, stationary pages and vanishing through every integer r. The already-landed filtered-complex subquotient definition is added to stmt_deps for complexStep and complexQuotientπ. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d4fcd6bd",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read the node, all six stmt_deps declarations (DecreasingFiltration/step/gradedPiece/IsFinite, complexStep/complexQuotientπ, BigradedExactCouple, LimitSubobjects/AlphaColimit/ConvergesTo, Mathlib CohomologicalSpectralSequence (r,1-r), mappingCone, total), Stacks 0130/0132/014E. The only node change besides lean is adding the landed def-sp-filtered-complex-subquotients to stmt_deps (allowed). Statement matches clause by clause: CommRing R with independent universes u,v; termwise support q<0 or j<a for arbitrary integer a; total with sign (-1)^q; column cones via mappingCone(f.f q); filtration pinned degreewise to finite column tails p..n-a+1 (bound verified, A-summand needs n-a+1); E1 tied to gr-cohomology and to H^j(C_q) for all q,j (zero outside the range); exact-couple bidegrees, alpha/initialG/eC/eH equations and colimit direction verified; ConvergesTo, finite G, E_inf≅gr G, per-bidegree stabilization; vanishing for every r including n=r. Edge cases checked: zero, (0,a) point, negative a, r<a-1. Real defs, theorem by sorry only, docstrings with source/blueprint/proof steps, max line 87, lean.statement verbatim. nt_compile clean (4.5 s; probe error surfaced; axioms only sorryAx+standard). Minor: unused private proof import, accepted."
  }
 }

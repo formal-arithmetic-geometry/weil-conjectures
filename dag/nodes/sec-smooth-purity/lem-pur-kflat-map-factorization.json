@@ -212,5 +212,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-d2338cb6f (reviewer sub-agent of L); spot-checked: I read the item in full, with every cited statement and Stacks sites-cohomology 0G7D (lines 3417-3480: statement, proof and the flat-terms paragraph). I also checked 06YS, 07A3, 0G6C and 014A against the tags file. The item's hypotheses and conclusions match 0G7D. The delivery has no new nodes and leaves the statement unchanged. Step 3 (shift stability of K-flatness): multiplying the summand by (-1)^{sp} makes the two differentials agree on both the d_F and d_K terms, so it is honestly elementary. Step 4: N=Cone(g)[-1] has the stated terms D^n+M^n and differential [[d_D,-g],[0,d_M]]. Two backward rotations by TR2 give D -(-i[-1])-> N -(p[-1])-> M -g-> D[1]. N is K-flat by the cone clause of lem-pc-kflat-cone-direct-sum, which uses the same K-flat definition, together with step 3. Step 5: TR3 on (M,D[1],W) and the rotated (C,D[1],I[1]) gives c with cu=t in K(A), since g=delta m holds exactly. Step 6: Q is exact and Q(m) is invertible, so 014A makes Q(c) invertible, and H^r of Q(c) is H^r(c). This is Stacks' own alternative argument. Step 7: flat terms of the same N, by finite direct sums. Edge cases checked: D=0, t=id and g=0. An rg search found no duplicate statement of 0G7D. I accept two tool uses from sk-thm-picard-semicon, lem-pc-kflat-resolution and lem-pc-kflat-cone-direct-sum, used as generic black boxes. The other citations are Mathlib leaves or definitions. No SGA is used and there is no cycle. One maintainer note on existing metadata outside this delivery: lem-pc-kflat-cone-direct-sum names 06YS as its source, but the operative tag for the cone clause is 07A3. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KFlatMapFactorization",
+  "declaration": "CochainComplex.exists_kFlat_map_factorization",
+  "statement": "theorem exists_kFlat_map_factorization {D I : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ} (t : D ⟶ I) (hD : IsKFlatIndependentCoefficients (J := J) (R := R) D) : ∃ (N : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (u : D ⟶ N) (c : N ⟶ I), IsKFlatIndependentCoefficients (J := J) (R := R) N ∧ QuasiIso c ∧ Nonempty (Homotopy t (u ≫ c)) ∧ ((∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (D.X i)) → ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (N.X i))",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/Paper/KFlatMapFactorization.lean",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-048233005",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps, Stacks 0G7D (sites-cohomology.tex 3418-3433), module, report. Every clause matches: EssentiallySmall.{r} site with independent u,v,r; R : Sheaf J CommRingCat.{r}; complexes of SheafOfModules over R; hD/N use the recorded IsKFlatIndependentCoefficients (real 06YN body); QuasiIso c; Nonempty (Homotopy t (u ≫ c)) matches the node's homotopy equation; flat-terms implication for the same N via recorded IsFlatOnSite. No extra assumptions or universe restriction; no definitions, only a sorry proof; source and blueprint docstrings present; lean.statement equals the signature verbatim; no duplicate 0G7D theorem found. nt_compile --json: rc=0, 8.3 s, no errors; a #print axioms probe shows the only sorry is the theorem's own proof. Second-reading section is the standard post-2026-10-17 placeholder, accepted. No blocking findings."
  }
 }

@@ -196,5 +196,24 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-367244e79 (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes, the parent, the unit, the blueprint proof lem-sfb-derived-monoidal, the cited nodes, and the FromJoel sources: LeftResolution/CochainComplexMinus.lean:32-256, Basic.lean:20-145, BicomplexColumns.lean:874-912, TotalComplexMap.lean:27-145, BicomplexRows.lean:85-182, and Mathlib LeftResolution/Basic.lean:100-135. The item's hypotheses match the source variables and the parent's step 2. All eight steps are correct. Step 4's upper bound holds: a nonzero diagonal term has p<=b and q<=0, so n<=b; the term S(K)^n=iota(T(K)^n) is in the essential image; and the functor never uses a chosen bound. Step 8's composite r o tau o e^{-1} and its naturality chain agree with minusResolutionNatTrans. Each new node is true, strictly smaller than the item, and not a duplicate: the transport node holds because the diagonal support lies in [n,b] and additive functors preserve finite coproducts, and the worker's {0,Z/2,Z/3} counterexample to the earlier version is valid. I tested K=0, K concentrated in one degree, and X=0. I accept the tool use lem-pc-bounded-above-double-complex-total-comparison: its hypotheses x0=b, y0=0, existing totals and columnwise quasi-isomorphisms match the use, but the item's citation is redundant because the totalized-augmentation child states its conclusion. No SGA source is used and no target is touched. Fixes, under fixes/dag/nodes/sec-proetale-coefficients: (1) B3/B2: def-weil-pbc-additive-functor is now cited in the item and three children. bicomplex-total-exists and totalized-augmentation named the resolution and augmentation constructed in another node without citing it, so they now cite lem-sfb-left-resolution-objectwise-cochain in the statement and stmt_deps. objectwise-cochain now states the kernel-iteration construction of R and its augmentation explicitly. (2) single-row-total cited the abelian-only cochain-complex definition for a preadditive category; the notion is now stated inline. No statement's meaning changed, nothing was dropped, and the graph stays acyclic.; 6 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LeftResolutionBoundedMinus",
+  "declaration": "CochainComplex.exists_functorial_boundedAbove_left_resolution",
+  "file": "lean/Sheaf/Algebra/Homology/LeftResolutionBoundedMinus.lean",
+  "statement": "theorem exists_functorial_boundedAbove_left_resolution {A : Type u₁} [Category.{v₁} A] [Abelian A] {C : Type u₂} [Category.{v₂} C] [Preadditive C] [HasZeroObject C] [HasFiniteCoproducts C] (ι : C ⥤ A) [ι.Full] [ι.Faithful] [ι.Additive] (Q : A ⥤ C) [Q.PreservesZeroMorphisms] (π : Q ⋙ ι ⟶ 𝟭 A) (hπ : ∀ (X : A), Epi (π.app X)) : ∃ (S : CochainComplex.Minus A ⥤ CochainComplex A ℤ) (a : S ⟶ CochainComplex.Minus.ι A), (∀ (L : CochainComplex.Minus A), QuasiIso (a.app L)) ∧ (∀ (L : CochainComplex.Minus A) (i : ℤ), ∃ (X : C), Nonempty ((S.obj L).X i ≅ ι.obj X)) ∧ (∀ (L : CochainComplex.Minus A) (b : ℤ), L.obj.IsStrictlyLE b → (S.obj L).IsStrictlyLE b)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-703d10d2b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-703d10d2b",
+  "group": "N8",
+  "result": "fix",
+  "note": "Statement correct: every hypothesis and conclusion clause matches the node and the FromJoel CochainComplexMinus.lean:32-36/90/208 assumptions. CochainComplex.Minus = ∃n IsStrictlyLE n; the essential-image clause ∃X, Nonempty(S(L)^i ≅ ιX); the upper-bound clause quantifies every b; S is a functor on the full subcategory. No extra assumptions, four independent universes, no duplicate, and the parent exists_functorial_boundedAbove_class_resolution uses the same clauses. Node unchanged except the lean record, whose statement is verbatim in the file. Delivered file compiles clean (nt_compile 3.6 s). FIX: fixes/LeftResolutionBoundedMinus.lean (1) H8: the theorem docstring now carries the node's 8 proof steps with the nodes they use; (2) adds a plain import of WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns, the module of the only stated proof dep. Signature unchanged; the fixed file compiles clean (2.5 s)."
  }
 }

@@ -17,7 +17,8 @@
   "def-weil-pbc-inverse-image",
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-closed-subset-proper-over-base"
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-cbc-etale-section-proper-support"
  ],
  "proof": [
   {
@@ -245,5 +246,29 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-71bccff4d (reviewer sub-agent of L); spot-checked: I read the item and its five steps in full, plus the full statement of every node they cite: the fibre-product and direct-image definitions, the module inverse-image proposition (clauses 2 and 3), the stalk-germ lemma, the zero-open lemma, local-finite-type base change, clause (1) of the closed-proper-support locality lemma and clause (2) of the closed-subset properness properties. Sources checked: Stacks more-etale.tex Tag 0F55 (lemma-base-change-f-shriek-separated). Its proof restricts the general pullback map, and the item is the adjoint form G->b_*H of that map with an explicit support formula. I also checked lines 34-42 of the refinement paragraph in blueprint main-20261015 thm-cbc-finite-torsion.proof.md, which from.place cites. This is not a target node, and no comparison isomorphism is claimed. Step 1: the identification T'_U = T_U x_X X' = T_U x_U U' holds over X', and the unit is Lambda-linear by prop (3). Step 2: the germ lemma applies with f=a, the neighbourhood (T_U, q z') and the lift condition from the commuting square; with the zero-open lemma this gives Supp t(s) = q^{-1} Supp s. Step 3: T_U->U is locally of finite type, locality (1) applies along U'->U, and U'->Y' is etale, so the section lies in H(U') = (b_*H)(U). Steps 4 and 5 are elementary naturality of the unit plus Supp phi(s) contained in Supp s, which is closed by the zero-open lemma and proper by clause (2). Small cases tested: F=0, empty X or Y', b=id, a non-flat closed-point base change and an open immersion f. No new nodes. Duplicate search found def-cbc-etale-section-proper-support, the parent composition lemma (its step 8 cites this item), the unsplit fibre-restriction citer, lem-cbc-base-change-mate-stalk and the coherent lem-pc-proper-support-* nodes; none states this map. The statement is not weakened, and separatedness is kept although unused. I accept all four declared tool_uses: stalk-germ, modules-exact, lft-base-change and closed-subset-properties (2). The report mentions a citations.json that is not in the commit; this has no effect on the DAG. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProperSupportPullbackSectionMap",
+  "declaration": "AlgebraicGeometry.Etale.properSupportPullbackSectionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properSupportBaseChangeProjection",
+   "AlgebraicGeometry.Etale.properSupportBaseChangeEtaleMap",
+   "AlgebraicGeometry.Etale.properSupportUnitPullback",
+   "AlgebraicGeometry.Etale.properSupportPullbackSectionMap"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ProperSupportPullbackSectionMap.lean",
+  "statement": "theorem properSupportPullbackSectionMap {Λ : Type (u + 1)} [CommRing Λ] {X X' Y Y' : Scheme.{u}} (a : X' ⟶ X) (f : X ⟶ Y) (b : Y' ⟶ Y) (f' : X' ⟶ Y') [IsSeparated f] [LocallyOfFiniteType f] (sq : IsPullback a f' f b) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (H : Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ιG : G ⟶ (lowerStar (ModuleCat.{u + 1} Λ) f).obj F) (ιH : H ⟶ (lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) a).obj F)) [Mono ιG] [Mono ιH] (hG : ∀ (U : Y.Etale) (s : ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj.obj (op U)), (∃ t, (ιG.hom.app (op U)) t = s) ↔ SectionHasProperSupport Λ F ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U) (pullback.fst U.hom f) s) (hH : ∀ (V : Y'.Etale) (s : ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) a).obj F)).obj.obj (op V)), (∃ t, (ιH.hom.app (op V)) t = s) ↔ @SectionHasProperSupport Λ _ X' V.left ((upperStar (ModuleCat.{u + 1} Λ) a).obj F) ((MorphismProperty.Over.pullback @Etale ⊤ f').obj V) (pullback.fst V.hom f') (MorphismProperty.of_isPullback (P := @LocallyOfFiniteType) (IsPullback.of_hasPullback V.hom f').flip (MorphismProperty.of_isPullback (P := @LocallyOfFiniteType) sq inferInstance)) s) : ∃ α : G ⟶ (lowerStar (ModuleCat.{u + 1} Λ) b).obj H, (∀ (U : Y.Etale) (s : G.obj.obj (op U)), (ιH.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ b).obj U))) ((α.hom.app (op U)) s) = (properSupportUnitPullback a f b f' sq F U) ((ιG.hom.app (op U)) s)) ∧ (∀ (U : Y.Etale) (s : G.obj.obj (op U)) (t : H.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ b).obj U))), t = (α.hom.app (op U)) s → ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (v : Spec (.of Ω) ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ f').obj ((MorphismProperty.Over.pullback @Etale ⊤ b).obj U)).left), ((Scheme.pointSmallEtale (v ≫ ((MorphismProperty.Over.pullback @Etale ⊤ f').obj ((MorphismProperty.Over.pullback @Etale ⊤ b).obj U)).hom)).toPresheafFiber ((MorphismProperty.Over.pullback @Etale ⊤ f').obj ((MorphismProperty.Over.pullback @Etale ⊤ b).obj U)) (Over.homMk v) ((upperStar (ModuleCat.{u + 1} Λ) a).obj F).obj ((ιH.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ b).obj U))).hom t) ≠ 0) ↔ ((Scheme.pointSmallEtale ((v ≫ properSupportBaseChangeProjection a f b f' sq U) ≫ ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U).hom)).toPresheafFiber ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U) (Over.homMk (v ≫ properSupportBaseChangeProjection a f b f' sq U)) F.obj ((ιG.hom.app (op U)) s) ≠ 0)) ∧ (∀ (F₂ : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (G₂ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (H₂ : Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ιG₂ : G₂ ⟶ (lowerStar (ModuleCat.{u + 1} Λ) f).obj F₂) (ιH₂ : H₂ ⟶ (lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) a).obj F₂)) [Mono ιH₂] (φ : F ⟶ F₂) (γ : G ⟶ G₂) (δ : H ⟶ H₂) (α₂ : G₂ ⟶ (lowerStar (ModuleCat.{u + 1} Λ) b).obj H₂), γ ≫ ιG₂ = ιG ≫ (lowerStar (ModuleCat.{u + 1} Λ) f).map φ → δ ≫ ιH₂ = ιH ≫ (lowerStar (ModuleCat.{u + 1} Λ) f').map ((upperStar (ModuleCat.{u + 1} Λ) a).map φ) → (∀ (U : Y.Etale) (s : G₂.obj.obj (op U)), (ιH₂.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ b).obj U))) ((α₂.hom.app (op U)) s) = (properSupportUnitPullback a f b f' sq F₂ U) ((ιG₂.hom.app (op U)) s)) → γ ≫ α₂ = α ≫ (lowerStar (ModuleCat.{u + 1} Λ) b).map δ)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24800e43b",
+  "group": "NM",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the Lean statement matches the node and Stacks Tag 0F55. Node file changes only in lean and adds the landed def-cbc-etale-section-proper-support to stmt_deps, which brief-stage2 allows. Subsheaves are mono inclusions described with the landed SectionHasProperSupport; f separated and locally of finite type, nothing extra on f'. alpha is fixed by the unit-pullback formula and unique because the H inclusion is mono. The support clause is a pointwise geometric-germ equivalence, the naturality-in-F clause holds, and Lambda : Type (u+1) is the recorded encoding. Three helpers are real constructions listed in lean.declarations; source and blueprint docstrings present; only the theorem's sorry; lean.statement matches the file verbatim. nt_compile.py --json on the snapshot text exited 0 in about 9-11 s with no errors, reproduced twice. No findings."
  }
 }

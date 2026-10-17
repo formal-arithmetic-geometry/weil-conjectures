@@ -124,5 +124,29 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-4264b07fa (reviewer sub-agent of L); spot-checked: I read the whole definition node against Stacks topologies.tex section-ph (0DBC): Definitions 0DBD, 0DBG, 0DBJ and 0DBL, Lemmas 0DBH, 0DBI, lemma-surjective-proper-ph and 0DBQ characterize-sheaf. I also read all five cited dependencies, the unit sk-i-curve-zero and the chapter, and the three citers (proper-hypercover-etale-descent, simplicial-ph-etale-square, ph-etale-torsion-comparison). The statement is correct. The smallest Grothendieck topology containing the sieves of Zariski covers and of singleton proper surjections equals the topology of Stacks' ph coverings. One direction: both kinds of generator are ph coverings (0DBH, surjective-proper-ph), and ph coverings satisfy the site axioms (0DBI). The other direction: a standard ph covering's sieve is a J-sieve by transitivity, applied to the proper surjection followed by an affine Zariski cover, and local character finishes it. So the two topologies have the same sheaves, as 0DBQ says. Edge cases checked: a surjection that is not of finite type, such as Spec k-bar over Spec k, is not a covering; T_red into T is a covering; the empty cover; the size choice of all U-schemes is admissible. A grep of the DAG for ph and 0DB* tags found no duplicate. The item has no new nodes or proof steps, and no tool_uses. Three small repairs are in fixes/dag/nodes/sec-trace-formula/def-trf-ph-scheme-site.json. (1) B3: the Zariski covering families were uncited; they are now spelled out as jointly surjective families of open immersions citing def-weil-open-immersion, which is added to stmt_deps, with the generated sieves made explicit. The meaning is unchanged. (2) B5: source.place now names the exact tags 0DBD, 0DBG, 0DBJ, 0DBL, 0DBH and 0DBQ. (3) The split_report summary called definition-big-small-ph 'Definition 0DBP'; it is 0DBL, since 0DBP is lemma-affine-big-site-ph. The report's 'Tag 0DBQ' for that definition is also wrong; this is noted in review.md only.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PhSchemeSite",
+  "declaration": "AlgebraicGeometry.Scheme.phTopology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.phTopology",
+   "AlgebraicGeometry.Scheme.phSiteModel",
+   "AlgebraicGeometry.Scheme.phModelTopology",
+   "AlgebraicGeometry.Scheme.PhSheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PhSchemeSite.lean",
+  "statement": "def phTopology (S : Scheme.{u}) : GrothendieckTopology (Over S)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6bfc1249",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Node, all 6 stmt_deps, Stacks topologies.tex section-ph (0DBC: standard/ph coverings, zariski-ph, surjective-proper-ph, 0DBL, 0DBQ) and the module read. phTopology = sInf of the Grothendieck topologies on Over S (all u-schemes, all S-morphisms) containing the sieves of jointly surjective open-immersion families and of proper point-surjective singletons. This is exactly the node's generated topology and agrees with Stacks 0DBQ. The I : Type (u+1) index loses no sieve. AsSmall.{max w (u+1)} presentation via the canonical equivalence and inducedTopology; PhSheaf is Mathlib Sheaf with values in Type (max w (u+1)). Edge cases checked: empty index set, empty base, isomorphisms, infinite covers, non-proper surjections excluded, no universe restriction. Clean nt_compile --json of the file (3.0 s, no warnings); a probe proved generator containment (mem_sInf), leastness (sInf_le) and universe levels. Node changed only in lean; statement verbatim; docstrings with source and blueprint; no sorry; no duplicate in Mathlib or the project; report has both sections. Minor: two Sheaf.* dependency imports are not referenced (harmless; not a fault)."
  }
 }

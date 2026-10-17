@@ -416,12 +416,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-0a7b2cd7a (reviewer sub-agent of L); spot-checked: Read all eight steps, five new nodes, cited statements and source passages. Removed the redundant tensor-map node and supplied its quotient-normalization and derived-localization argument in step 7. Statement and hypotheses unchanged. Review and corrected JSON written; direct dependencies and cycle checks pass.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-712728d22",
-  "group": "NY",
-  "result": "fix",
-  "note": "Wrote review.md and complete replacements under fixes/. Reused the existing etale open-restriction map to resolve H4/H9 and removed the inline proof for H6. Mathematical statement preserved; both corrected modules compile without errors or warnings. Branch unchanged."
+  "reviewer": "NT-stage2-cc-6ca9e13b4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Repair of return 17548e9ecadc via correction (b). Item module differs from the reviewed version only in its import (SupportSiteComparisonCanonical -> SupportSiteComparison); the clause table was rechecked: fixed c_C/c_T/c_V constructions, boundaries pinned to ShortExact.delta in both sites, boundary/forget/restriction squares and naturality, no extra hypotheses on F. The dependency owner SupportSiteComparison is repaired in place and has no importers; the Canonical module is gone (H9/H4 resolved). All old declarations are kept, main declaration supportComparison_exterior, statement identical apart from the etaleSupportKernel->globalEtaleSupportKernel rename; forget, C=T, open and exterior clauses all stated (H13 resolved). New supportKernelEvaluationIso is uniquely pinned by the kernel inclusion, and its derived map is used in the right direction. supportDerivedComparisonTensorIso is the same composite as the legacy derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso, built on upstream leftDerivedTensorComparison. Only lean fields changed in the two node records; both statements verbatim in their files; all declarations exist; 9 theorems by sorry, no hollow data. nt_compile --json side overlay rc=0: SupportSiteComparison 21.6 s, SupportComparisonBoundary 11.3 s, no errors or warnings. Minor: second reading by the same agent; redundant naturality conjuncts."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SupportSiteComparison",
@@ -432,13 +432,21 @@
    "AlgebraicGeometry.ProEtale.supportComparisonUnit",
    "AlgebraicGeometry.ProEtale.supportComparison",
    "AlgebraicGeometry.ProEtale.supportComparison_isIso",
+   "AlgebraicGeometry.ProEtale.supportKernelEvaluationIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.supportKernelEvaluationIso",
+   "AlgebraicGeometry.ProEtale.globalEtaleSupportKernel",
    "AlgebraicGeometry.ProEtale.supportComparisonUnbounded",
    "AlgebraicGeometry.ProEtale.etaleSupportForget",
    "AlgebraicGeometry.ProEtale.proEtaleSupportForget",
+   "AlgebraicGeometry.ProEtale.supportEtaleGlobalEvaluationIso",
+   "AlgebraicGeometry.ProEtale.supportProEtaleGlobalEvaluationIso",
+   "AlgebraicGeometry.ProEtale.supportGlobalComparison",
    "AlgebraicGeometry.ProEtale.supportComparison_forget",
    "AlgebraicGeometry.ProEtale.fullSupportForget_isIso",
+   "AlgebraicGeometry.ProEtale.supportDerivedCoefficientPullbackIso",
    "AlgebraicGeometry.ProEtale.supportDerivedPullbackIso",
    "AlgebraicGeometry.ProEtale.supportBifunctorIso",
+   "AlgebraicGeometry.ProEtale.supportDerivedComparisonTensorIso",
    "AlgebraicGeometry.ProEtale.supportExteriorCoefficientIso",
    "AlgebraicGeometry.ProEtale.supportComparison_exterior",
    "AlgebraicGeometry.ProEtale.supportOpenConstantIso_existsUnique",
@@ -449,12 +457,12 @@
    "AlgebraicGeometry.ProEtale.supportComparison_open"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/SupportSiteComparison.lean",
-  "statement": "theorem supportComparison_exterior [Finite A] (k : Type u) [Field k] [IsAlgClosed k] {X Y Z W : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) (F : DerivedCategory.Plus (Sheaf (pullback (X ↘ Spec (.of k)) (Y ↘ Spec (.of k))).smallEtaleTopology (ModuleCat.{u + 1} A))) (eF : F.obj ≅ Etale.externalProduct (ModuleCat.{u + 1} A) (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) K.obj L.obj) : Etale.supportedExteriorProduct A (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j K.obj L.obj ≫ (etaleSupportKernel A (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j)).rightDerivedFunctor.map eF.inv ≫ supportComparisonUnbounded A (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j) F ≫ (supportSections (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j) A).rightDerivedFunctor.map ((comparisonUpperStar (ModuleCat.{u + 1} A) (pullback (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)))).mapDerivedCategory.map eF.hom ≫ (supportExteriorCoefficientIso A (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) K.obj L.obj).hom) = tensorHom (supportComparisonUnbounded A i K) (supportComparisonUnbounded A j L) ≫ supportedExteriorProductOverField A k (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K.obj) ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj L.obj)",
+  "statement": "theorem supportComparison_exterior [Finite A] (k : Type u) [Field k] [IsAlgClosed k] {X Y Z W : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) (F : DerivedCategory.Plus (Sheaf (pullback (X ↘ Spec (.of k)) (Y ↘ Spec (.of k))).smallEtaleTopology (ModuleCat.{u + 1} A))) (eF : F.obj ≅ Etale.externalProduct (ModuleCat.{u + 1} A) (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) K.obj L.obj) : Etale.supportedExteriorProduct A (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j K.obj L.obj ≫ (globalEtaleSupportKernel A (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j)).rightDerivedFunctor.map eF.inv ≫ supportComparisonUnbounded A (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j) F ≫ (supportSections (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j) A).rightDerivedFunctor.map ((comparisonUpperStar (ModuleCat.{u + 1} A) (pullback (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)))).mapDerivedCategory.map eF.hom ≫ (supportExteriorCoefficientIso A (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) K.obj L.obj).hom) = tensorHom (supportComparisonUnbounded A i K) (supportComparisonUnbounded A j L) ≫ supportedExteriorProductOverField A k (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K.obj) ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj L.obj)",
   "branch": "newtargets-dag",
-  "by": "NY",
-  "date": "2026-10-16",
+  "by": "Q86",
+  "date": "2026-10-17",
   "existing": false,
-  "fixed_by": "NT-stage2-Codex-712728d22"
+  "note": "Section 1(B), correction (b) of return 17548e9ecadc: repair the existing owning module in place, removing the separate colliding Canonical module. The old import chain mixes retired pro-etale global/monoidal owners with finite-coefficient owners (duplicate rightDerivedLowerShriekOfCompactification / upperStarIsoLowerStarInv); the finite derived monoidal owner also collides with the existing exterior product tensor owner (laxMonoidal_Q). Reuse the original supported exterior product, the published ordinary comparison monoidality and generic leftDerivedTensorComparison directly, and the recorded finiteComparisonGlobalSections. The uniquely inclusion-normalized supportKernelEvaluationIso transports the existing global-section kernel to SupportLongExact's restriction-kernel model; its right-derived map transports the full exterior/open interface. The whole node is retained: canonical isomorphism and naturality, forgetting supports, C=T global-unit normalization, open restriction, and supported exterior-product equality with the specified theta and actual-product boundedness hypothesis. The main declaration and all old exported names stay in their original owner; helpers are listed in declarations. No natural-language node field changes. The canonical pullback and tensor transports are assembled for abstract coefficient categories before specializing to ModuleCat A, avoiding expensive unfolding of sheaf categorical instances without changing the maps."
  },
  "lean_audit": {
   "master": {

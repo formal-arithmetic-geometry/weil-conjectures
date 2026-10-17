@@ -19,7 +19,10 @@
   "def-weil-pbc-etale-shriek-base-change-map",
   "def-weil-pbc-adjunction-mate",
   "def-weil-extension-by-zero",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sf-class-compact-support-comparison",
+  "lem-cbc-proetale-extension-zero-base-change"
  ],
  "proof": [
   {
@@ -289,5 +292,30 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-fae89cbec (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and unit/chapter route. All seven proof steps, map directions, counit normalization, hypotheses, and edge cases check out. Repaired one B3/C4 citation fault: replaced étale-only and restricted-coefficient definitions with the existing general pro-étale definitions. Corrected JSON is under fixes/; full findings and accepted tool_uses are in review.md. No new nodes or weakened statements.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen",
+  "declaration": "AlgebraicGeometry.ProEtale.compactSupportSiteComparison_open",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.compactSupportEtaleExchangePlus",
+   "AlgebraicGeometry.ProEtale.compactSupportProEtaleExchangePlus",
+   "AlgebraicGeometry.ProEtale.compactSupportSiteComparison_open",
+   "AlgebraicGeometry.ProEtale.compactSupportSiteComparison_open_counits"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportSiteComparisonOpen.lean",
+  "statement": "theorem compactSupportSiteComparison_open (A : Type u) [CommRing A] [Finite A] {X' X S' S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] {v : X' ⟶ X} {f' : X' ⟶ S'} {f : X ⟶ S} {u : S' ⟶ S} [IsOpenImmersion u] (sq : IsPullback v f' f u) (c : Compactification f) [IsNoetherian c.Z] (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) : (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) u).mapDerivedCategoryPlus.map ((compactSupportSiteComparisonPlus (ULift.{u + 1, u} A) c).hom.app L) ≫ (compactSupportProEtaleExchangePlus A sq c).app ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategoryPlus.obj L) ≫ (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) (c.ofIsPullback sq)).map ((fixedComparisonPullbackPlus (ULift.{u + 1, u} A) v).inv.app L) = (fixedComparisonPullbackPlus (ULift.{u + 1, u} A) u).inv.app ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).obj L) ≫ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) S').mapDerivedCategoryPlus.map ((compactSupportEtaleExchangePlus A sq c).app L) ≫ (compactSupportSiteComparisonPlus (ULift.{u + 1, u} A) (c.ofIsPullback sq)).hom.app ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) v).mapDerivedCategoryPlus.obj L)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-3dd16f3fd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dd16f3fd",
+  "group": "Q139",
+  "result": "fix",
+  "note": "Read the node, its dependency nodes, the Stacks places (09A6, 09AF, 03S6), all three delivered modules, report.md (Worker report and Second reading by Q139 present), and the declarations Etale.baseChange, Compactification.ofIsPullback and its squares, sfFixedOpenExtensionBaseChange, fixedComparison*. Every hypothesis and clause matches: finite A in the published ULift fixed-scalar presentation, Noetherian X/S/c.Z, D+ only, J is the actual proper mate followed by the open comparison as an Iso, C^et/C^pro are the unit-square-counit exchange followed by the inverse open base change with directions checked, the open-restriction equation shows both inverse-image comparisons, and both counit normalizations are stated. No hollow definitions, nothing proved beyond sorry, source and blueprint docstrings present, statement field verbatim, edge cases fine. The lem-cbc existing:true re-record to sfFixedDerivedOpenExtensionBaseChangeIso is accepted. Finding (H4, fixed): CanonicalCompactSupportSiteComparison defines compactSupportSiteOpenIsoPlus, an exact copy of the existing properOpenSiteExtensionIso, and undoes an earlier reviewed version of that module. The claimed import collision does not exist on the base (the item alone fails only with unknown identifier compactSupportSiteOpenIsoPlus). fixes/ removes the copy, restores the ProEtaleProperOpenComparison import and uses properOpenSiteExtensionIso in J and in the counits conjunct (equal by definition, no signature change), and adds a fix section to the report. The lem-sf-class record note's last sentence becomes outdated and cannot be changed through fixes/. nt_compile: delivered and fixed three modules exit 0; seven direct importers compile with the fixed modules; four other importers fail the same way with the base modules (pre-existing duplicate imports).; reverted the delivery's change of existing node(s) lem-cbc-proetale-extension-zero-base-change (--revert-nodes; kept as on newtargets-dag)"
  }
 }

@@ -68,12 +68,18 @@
   "is": null
  },
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows",
+  "declaration": "HomologicalComplex₂.singleRow₀ObjTotal",
   "declarations": [
    "HomologicalComplex₂.singleRow₀ObjTotal",
    "HomologicalComplex₂.singleRow₀ObjTotal_hom_naturality"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 18:25 UTC for group N5, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: singleRow₀ObjTotal supplies the total-to-cochain-complex isomorphism, and singleRow₀ObjTotal_hom_naturality supplies its n"
+  "statement": "noncomputable def singleRow₀ObjTotal (L : CochainComplex C ℤ) :\n    ((singleRow C (up ℤ) (up ℤ) 0).obj L).total (up ℤ) ≅ L",
+  "branch": "slopmaster2",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing declarations: singleRow₀ObjTotal identifies the diagonal-coproduct total of the row-zero bicomplex with the original integer cochain complex; singleRow₀ObjTotal_hom_naturality states naturality for every cochain map. The module constructs HasTotal from the single possibly nonzero summand on each diagonal, so no general coproduct hypothesis is required. Source read locally and confirmed using scompile.py --source."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -103,5 +109,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e63af4e2",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Existing-record delivery: HomologicalComplex₂.singleRow₀ObjTotal (BicomplexRows.lean 170-172) and singleRow₀ObjTotal_hom_naturality (176-182); the module is byte-identical across slopmaster2, side, live and build. Every node clause matches exactly: Preadditive+HasZeroObject with independent universes and no extra assumptions, unbounded CochainComplex C ℤ, singleRow at 0, Mathlib diagonal total with HasTotal from the one-summand instance, explicit canonical iso (sign 1, shiftFunctorZero), naturality for every φ. lean.statement verbatim; lean_audit lines correct; node otherwise unchanged versus the side clone. lem-sp-double-complex-single-row-total-iso is a different statement (ℕ, abelian, Nonempty), not a duplicate. nt_compile probe at explicit universes u v was clean (2.6 s); axioms propext/choice/Quot.sound, no sorryAx. The report has Worker report and Second reading sections. No findings."
  }
 }

@@ -239,5 +239,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-77dfff5ac (reviewer sub-agent of L); spot-checked: I read the item, all seven steps, the new node and every cited statement in full, and checked the sources in the local Stacks project: 07QW(3) (more-algebra l.13386), 07PC (4)=>(1), 00NM (algebra l.25607) and 00NQ (l.25732), with labels matched against tags/tags. Steps 1-3 and 5-7 are correct and each hypothesis is met by the cited statements: Noetherian and regular from z-localizations-dvr, field-regular-ring and the definition of regular local ring; the G-ring condition is the same notion def-exc-excellent-ring uses; every hypothesis of the J-2 criterion's witness is checked at (0) and at (p); Step 7 assembles the clauses of the definition. One repair in Step 4: it said the residue field is Z/pZ but proved only that Z/pZ is a field. The argument needs every element of the residue field to be an integer multiple of 1, so that Frobenius fixes a. I added the surjectivity argument (Bezout: a/s - au in pZ_(p)) and the kernel argument (kernel = pZ). The uses are unchanged and the step stays elementary; the corrected item is in fixes/dag/nodes/sec-trace-formula/. The new node lem-trf-regular-ring-universally-catenary is true (regular local implies CM by 00NQ; Noetherian CM implies universally catenary by 00NM). I tested it on fields, Z, DVRs, the zero ring, finite products of fields and Nagata's infinite-dimensional regular ring. It is statement-only and self-contained, cites a definition node for every notion, matches the definition's catenary clause, and records all three kinds of Mathlib search; my own rg of Mathlib for catenar/CohenMacaulay finds nothing. Its blueprint from/via and created fields are correct. It duplicates no DAG node: the existing catenary nodes assume universal catenarity, cover only fields, or are local CM chain-length lemmas. It is strictly more general than the item and not a clause of it. Accepted tool_uses: lem-weil-pbc-z-localizations-dvr, lem-weil-pbc-z-g-ring and lem-exc-j2-residue-field-criterion, all reviewed generic commutative-algebra tools. No SGA source is used, no target is touched, and there is no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IntegersExcellent",
+  "file": "lean/Sheaf/RingTheory/IntegersExcellent.lean",
+  "declaration": "Int.isExcellent",
+  "statement": "theorem isExcellent : IsExcellent ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3ab5ea06",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Int.isExcellent : IsExcellent ℤ matches the node and Stacks 07QW(3); IsExcellent (def-exc-excellent-ring, ExcellentRing.lean) read in full: Noetherian, G-ring, J-2 open regular loci and universally catenary, as the node says. No extra hypotheses or unbound universes; ℤ:Type 0 means quantifying over Type-0 finite-type algebras, a limit of the landed definition and harmless. Node diff against the side clone: only the lean record was added, statement verbatim. Report has Worker report and Second reading sections. Source/blueprint docstrings present, all 7 proof steps in the theorem docstring, proof is only sorry, no hollow definitions, no duplicate in Mathlib or side. Imported proof-dependency declarations exist; lem-trf-regular-ring-universally-catenary is proof-only with no Lean yet, acceptable at stage 2. nt_compile.py --json on the snapshot file: 3.4 s, exit 0, no errors (three runs). No findings."
  }
 }

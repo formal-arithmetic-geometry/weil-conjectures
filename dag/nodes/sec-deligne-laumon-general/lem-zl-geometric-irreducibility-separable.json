@@ -179,5 +179,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-ba0913a9b (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 0G33 (proof in full), 037P, 0G30 and 0BRA, every cited node statement and the unit route; all cited units are in the route of sk-i-dl-general-real, and I accept the declared tool_use of lem-pur-power-generated-spectrum-homeomorphism. The item is exactly 0G33 (1)<=>(2) and was tested on k, k(t), k(a^{1/p}) and C/R. Both new nodes are correct and not duplicates: 037P was tested on k(t)/k, and 0G30 (specialised to a field tower) on k⊂k(s)⊂k(s,t). Mathlib GeometricallyIrreducible.comp needs UniversallyOpen on both morphisms and Mathlib has no instance supplying it here, so it is a candidate, not a leaf. Repairs, all in the item's proof only (other fields unchanged): (C1) step 1 now cites def-weil-pbc-relative-separable-closure and lem-weil-pbc-simple-algebraic-extension-power-basis for k(alpha) being finite separable, and step 2 checks the 030O separability hypothesis of lem-pc-separable-tensor-algebraic-closure; (C1) step 3 now cites def-weil-relative-algebraic-closure and writes out transitivity of algebraicity using lem-weil-pbc-algebraic-generators-finite-extension and the power-basis node; (E5) step 5 now handles characteristic 0 (k'=k, p=2) and checks the 0BRA hypotheses (n>0, kernel 0). I also fixed proof_deps and the split_report summary. The graph stays acyclic. Clerical: the report says four new nodes (there are two) and names a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GeometricIrreducibilitySeparable",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_iff_separableElements_mem",
+  "file": "lean/Sheaf/FieldTheory/GeometricIrreducibilitySeparable.lean",
+  "statement": "theorem geometricallyIrreducible_iff_separableElements_mem (k K : Type u) [Field k] [Field K] [Algebra k K] : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↔ ∀ α : K, IsSeparable k α → α ∈ Set.range (algebraMap k K)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b7ff51a0",
+  "group": "Q74",
+  "result": "pass",
+  "note": "The Lean matches node and Stacks 0G33 (1)<=>(2) clause by clause: Field k, Field K, Algebra k K; GeometricallyIrreducible (Spec.map (algebraMap k K)) per the def-pc-geometrically-irreducible Mathlib record; forall alpha, IsSeparable k alpha -> alpha in range (algebraMap k K), with IsSeparable implying integrality. No extra hypotheses; one shared universe forced by Spec K -> Spec k. Edge cases K=k, k(t), purely inseparable and C/R agree. No hollow definition; proof is sorry only (print axioms: sorryAx plus standard). Docstrings carry source place, blueprint id and the six proof steps. Node differs from shared copy only by lean; lean.statement verbatim. nt_compile.py --json: clean, rc 0, 3.2 s, re-checked with #check and #print axioms. Second reading section is the direct-delivery stub, accepted under the current regime. Clerical only: lean.date 2026-10-17 precedes created 2026-10-18."
  }
 }

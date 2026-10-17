@@ -249,26 +249,31 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.SfCompactSupportRestrictionOfScalars",
-  "declaration": "AlgebraicGeometry.Scheme.sfCompactSupportRestriction",
+  "module": "Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars",
+  "declaration": "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso",
   "declarations": [
-   "AlgebraicGeometry.Scheme.sfCompactSupportRestriction",
-   "AlgebraicGeometry.Scheme.sfCompactSupportRestriction_comp"
+   "AlgebraicGeometry.ProEtale.fixedScalarOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpenMap",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpenMap_isIso",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpen",
+   "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso",
+   "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso_comp"
   ],
-  "statement": "def sfCompactSupportRestriction {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (φ : A →+* B) : (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory ⋙ sfAmbientCompactSupportCandidate A c ≅ sfAmbientCompactSupportCandidate B c ⋙ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory",
+  "statement": "def compactSupportRestrictionIso {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ ⋙ Rf_!(c)[ModuleCat.{u + 1} A] ≅ Rf_!(c)[ModuleCat.{u + 1} B] ⋙ Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ",
   "branch": "newtargets-dag",
-  "by": "NH",
-  "date": "2026-10-16",
-  "existing": true,
-  "note": "Section 1(B), record-only repair using an already published declaration. The recorded fixed-scalar compactSupportRestrictionIso cannot be imported together with the recorded intrinsic sfIntrinsicCompactSupport: the generic and FiniteCoefficient UpperLowerStar.Defs modules both declare AlgebraicGeometry.ProEtale.lowerStarComp (confirmed by scompile.py locally and on the server). The already published sfCompactSupportRestriction gives exactly the canonical open-extension/derived-proper-image comparison in the intrinsic constant-ring module presentation used by the consumer; sfCompactSupportRestriction_comp gives its cocycle. sfAmbientCompactSupportCandidate and the recorded sfIntrinsicCompactSupport have the same defining composite, definitionally. The comparison is built from the section-normalized realization, open adjunction comparison and K-injective-normalized direct-image comparison; no arbitrary isomorphism is introduced. The replacement import probe compiled cleanly."
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B) repair: this consumer uses the equivalent standard fixed-scalar constant-module presentation of the recorded intrinsic compact-support comparison. The existing CompactSupportRestrictionOfScalars declarations give the full canonical open/proper comparison and coefficient cocycle, but their legacy pro-etale import closure clashes with the canonical finite-coefficient framework (upperStarIsoLowerStarInv). This module uses canonical imports and unfolds the legacy derived-open-adjunction helper to its exact defining expression, mapDerivedCategoryAdjunction of the ordinary open adjunction. All other declaration bodies, signatures and normalizations are unchanged. No arbitrary isomorphism or stronger hypothesis is introduced.",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportRestrictionOfScalars.lean"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-adaa4a262",
-  "group": "NH",
-  "result": "pass",
-  "note": "Full immutable-delivery review recorded in review.md; canonical constructions and all clauses match, both required report sections are substantive, and sandbox/library compiles pass cleanly. Branch unchanged."
+  "reviewer": "NT-stage2-cc-c24c02b28",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Every node clause checked against the Lean: datum, l≠p, E/L finite, all levels ≥1 via m+1, arbitrary nonflat φ, separated finite-type schemes over k, closed immersion, D^b_ctf input. The map is fixed uniquely by the exceptional-counit equation, using the published rightDerivedUpperShriekCounit (sfFiniteExceptionalFixed is definitionally rightDerivedUpperShriek) and the canonical finiteCoefficientChangeDirectImageMap. IsIso, B-side D^b_ctf, naturality, closed composition, coefficient chain and all locally closed clauses are present. No hollow definitions or unbound universes; lean.statement verbatim. Dependency modules: import-only (one definitional adjunction unfolding). nt_compile: all 5 files clean, fixed file clean; importers show no new failures (3 pass; 3 fail or time out identically on base). FIX: module docstring and 8 theorem docstrings cited sec-smooth-purity/sk-lem-sp-tower instead of the node source sec-six-functors/sk-prop-sf-biduality-general, order 2139; corrected in fixes/FiniteClosedShriek.lean. Noted, not faulted: lem-sf-compact-support-restriction-of-scalars record rebound to the fixed-scalar module; item status unsplit on base.; reverted the delivery's change of existing node(s) lem-weil-derived-direct-image-composition (--revert-nodes; kept as on newtargets-dag)"
  },
  "split_report": {
   "date": "2026-10-17",

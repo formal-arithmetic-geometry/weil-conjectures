@@ -260,5 +260,24 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-ee01f76f3 (reviewer sub-agent of L); spot-checked: The item agrees with Stacks 081L case (1) (flat.tex l.3020) together with 02NJ (morphisms.tex l.5564): flat and lfp is enough, since lfp implies lft, and the bound is the pointwise dim_x(X_{f(x)})<=e on both sides. The statement is unchanged, not weakened, and has no new nodes. Step 1: elementary universal-property identification (X_U)_s=X_s for s in U. Steps 2-3 follow the 081L proof. lem-sbc-flat-fibre-dimension-strata-core (054T, applied with U=S) gives V_n with local fibre dimension n and a union dense in every fibre. lem-weil-pbc-flat-lfp-open (UniversallyOpen.of_flat) makes f(V_n) open, so density of U gives V_n empty for n>e. Steps 4-7 expand the step 081L abbreviates: by the affine-chart base-change lemma, an affine fibre chart is Spec(kappa(s) tensor_R B), finite type over kappa(s). H=A meet W_s is dense open in A with local dimensions <=e (open-subspace lemma). Sobriety (unique generic points give quasi-sober and T0) and the open-cover lemma give dim H<=e. The dense-open clause of lem-kun-dimension-extension, whose proof I read, gives dim A=dim H<=e, hence dim_x X_s<=e. Every cited statement supports its step and every hypothesis is checked where it is used. Edge cases checked: empty X, S or U; e=0, as the parent uses it; H nonempty; non-equidimensional fibres; A^r_S. No duplicate: a search for 081L hits only the item and its parent. No cycle: the 384-node dependency closure does not contain the item. Accepted tool_uses: lem-sbc-flat-fibre-dimension-strata-core and lem-kun-dimension-extension. The other cross-unit nodes are Mathlib leaves or Lean-closed. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FlatFpRelativeDimensionDenseOpen",
+  "declaration": "AlgebraicGeometry.flat_finitePresentation_relativeDimension_denseOpen",
+  "file": "lean/Sheaf/TraceFormula/FlatFpRelativeDimensionDenseOpen.lean",
+  "statement": "theorem flat_finitePresentation_relativeDimension_denseOpen {X S U : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] (j : U ⟶ S) [IsOpenImmersion j] (hdense : Dense (Set.range j.base)) (e : ℕ) (hbound : ∀ x : pullback (C := Scheme.{u}) f j, topologicalKrullDimAt ((pullback.snd f j).asFiber x) ≤ e) : ∀ x : X, topologicalKrullDimAt (f.asFiber x) ≤ e",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-65f462df0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65f462df0",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Statement checked clause by clause against node and Stacks 081L(1) (flat.tex l.3019) with 02NJ: [Flat f], [LocallyOfFinitePresentation f], j open immersion with Dense (Set.range j.base), e:ℕ, hypothesis over pullback f j via (pullback.snd f j).asFiber, conclusion ∀ x, topologicalKrullDimAt (f.asFiber x) ≤ e — exact, no extra assumptions, no universe restriction, lean.statement verbatim, only the lean field changed, imports = stated proof-dep modules, no defs, sorry-only, no duplicate found (own rg/Mathlib searches). Edge cases (empty X/S/U, empty fibres, e=0) covered. nt_compile --json: delivered file exit 0, no diagnostics (warn.sorry=false in the lakefile; injected-error sanity check shows errors are reported). Finding H8: the theorem docstring condensed the node's 7 proof steps into 5 (steps 4-7 merged). FIX: fixes/FlatFpRelativeDimensionDenseOpen.lean is a complete replacement with only that docstring rewritten to give all seven steps; signature byte-identical; compiles exit 0, no diagnostics, lines ≤ 100."
  }
 }

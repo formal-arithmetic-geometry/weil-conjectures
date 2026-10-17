@@ -188,5 +188,35 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-bf5687331 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired canonical free-sheaf pullback citations, the finite-presentation citation and Hom descent argument, and syzygy definition dependencies/source labels. Statements unchanged. Four-lemma, induction, edge-case and dependency checks passed. Whole corrected JSON files are in fixes/; detailed findings are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ConstructibleEtaleExtContinuity",
+  "declaration": "AlgebraicGeometry.Etale.constructible_etale_ext_continuity",
+  "file": "lean/Sheaf/TraceFormula/ConstructibleEtaleExtContinuity.lean",
+  "statement": "theorem constructible_etale_ext_continuity {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, IsNoetherian (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (i : I) {A : Type (u + 1)} [CommRing A] [Finite A] (P Q : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} A)) (hP : (D.obj (op i)).IsConstructibleEtaleModuleSheaf P) (hQ : (D.obj (op i)).IsConstructibleEtaleModuleSheaf Q) : ∀ n : ℕ, (∀ a : affineLimitExtHom (c.π.app (op i)) P Q 0 (n : ℤ), ∃ (j : I) (hij : i ≤ j) (b : affineLimitExtHom (D.map (homOfLE hij).op) P Q 0 (n : ℤ)), affineLimitExtLeg D c hij P Q 0 (n : ℤ) b = a) ∧ (∀ (j k : I) (hij : i ≤ j) (hik : i ≤ k) (a : affineLimitExtHom (D.map (homOfLE hij).op) P Q 0 (n : ℤ)) (b : affineLimitExtHom (D.map (homOfLE hik).op) P Q 0 (n : ℤ)), affineLimitExtLeg D c hij P Q 0 (n : ℤ) a = affineLimitExtLeg D c hik P Q 0 (n : ℤ) b → ∃ (l : I) (hjl : j ≤ l) (hkl : k ≤ l), affineLimitExtTransition D hij hjl P Q 0 (n : ℤ) a = affineLimitExtTransition D hik hkl P Q 0 (n : ℤ) b)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineLimitExtHom",
+   "AlgebraicGeometry.Etale.affineLimitExtSingleIso",
+   "AlgebraicGeometry.Etale.affineLimitExtPullback",
+   "AlgebraicGeometry.Etale.affineLimitExtPullback_comp",
+   "AlgebraicGeometry.Etale.affineLimitExtPullback_trans",
+   "AlgebraicGeometry.Etale.affineLimitExtLeg",
+   "AlgebraicGeometry.Etale.affineLimitExtTransition",
+   "AlgebraicGeometry.Etale.affineLimitExtLeg_transition",
+   "AlgebraicGeometry.Etale.constructible_etale_ext_continuity"
+  ],
+  "fixed_by": "NT-stage2-cc-7fafcea93"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fafcea93",
+  "group": "Q58",
+  "result": "fix",
+  "note": "Read node, 4 stmt deps, upstream upperStar/upperStarComp (canonical conjugate of lowerStarComp, coherent), Mathlib singleFunctor shift convention. All hypotheses match with none stronger (IsNoetherian gives qcqs, IsAffineHom, Finite CommRing A : Type (u+1), recorded IsConstructibleEtaleModuleSheaf). Ext^n = Hom(single 0 P, single (-n) Q) = Hom(P,Q[n]), sign correct. Conclusion is elementwise bijectivity of the covariant filtered-colimit comparison (surjective plus injective at a common later stage). Legs and transitions are canonical via mapDerivedCategory, upperStarComp and mapDerivedCategorySingleFunctor. Composition and later-stage clauses are named sorry theorems, and all are true. All points of the earlier return are repaired. Edge cases OK; no hollow defs; only sorry; docstrings OK; lean.statement verbatim; 9 declarations present; no duplicate. nt_compile of the delivered file: rc 0, 42-46 s, no warnings. Fixes: added the missing proof-dependency import Sheaf.AlgebraicGeometry.ConstructibleEtaleFiniteAffineSyzygy (stated at base af363c0c; rule 7) and a Main definitions/statements docstring list. The fixed file compiles with rc 0 in 44.7 s, with no signature change."
  }
 }

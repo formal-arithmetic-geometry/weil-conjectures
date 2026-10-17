@@ -291,5 +291,28 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-5c0ff7332 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new leaf, the statement of every cited node, Stacks algebra.tex 11207-11257 (Definition 037M, Lemma 037N and its proof), blueprint main-20261015 lem-zl-bertini-finite-cover-curve proof paragraph 3, and Mathlib RingTheory/Spectrum/Prime/Topology.lean:276. Statement: it matches 037N(1) (injective k-map, equivalent via the image) and 037N(3). Requiring I to be nonempty adds nothing, since the empty colimit would be k, which is geometrically irreducible. Nothing is weakened, no hypothesis is added, and it matches both uses in the citer lem-zl-generic-point-geometric-irreducibility. Step 1: the fibre-product leaf identifies the base change with Spec(T⊗K), which bridges the DAG definition and Stacks 037M. Steps 2-3: K is flat via the faithfully-flat leaf with D=k and k⊗K≅K. The injective tensor map is a unital ring map, and the preimage of a proper prime nilradical is a proper prime nilradical. Step 4 constructs the module-colimit universal property instead of claiming it from a node: well-definedness via the rings-zero leaf, k-linearity because the ι_i are algebra maps, uniqueness via representatives. Step 5: tensor commutes with colimits, and the modules-elementwise leaf needs no injectivity. Step 6: nonemptiness of I gives 1≠0 in B. Step 7: finite-stage detection of (xy)^n=0 plus primality at stage j proves the nilradical of B is prime. All 12 proof dependencies are Mathlib leaves, so there is no route issue. The declared tool_uses are harmless and accepted but unnecessary. New node lem-zl-spectrum-irreducible-nilradical-prime: an exact one-line specialization of PrimeSpectrum.irreducibleSpace_iff_isPrime_nilradical (CommSemiring version; IrreducibleSpace includes nonempty, IsPrime includes proper). It is self-contained, has three kinds of search and correct blueprint.from/via, and is not a restatement of an item clause. Tested on the zero ring, a field, the dual numbers, k×k and k[x,y]/(xy). The rg duplicate search (nilradical, 00ES, the declaration name, geometrically irreducible) found no duplicate; lem-weil-pbc-spec-irreducible-closed-subsets-primes and lem-pc-integral-scheme-irreducible do not state the criterion. No SGA cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyIrreducibleAlgebraClosure",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_spec_of_injective",
+  "declarations": [
+   "AlgebraicGeometry.geometricallyIrreducible_spec_of_injective",
+   "AlgebraicGeometry.geometricallyIrreducible_spec_colimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyIrreducibleAlgebraClosure.lean",
+  "statement": "theorem geometricallyIrreducible_spec_of_injective {k A S : Type u} [Field k] [CommRing A] [CommRing S] [Algebra k A] [Algebra k S] (u : A →ₐ[k] S) (hu : Function.Injective u) (hS : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k S)))) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k A)))",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two declarations state clauses (1) and (2), respectively; both use the recorded scheme-theoretic geometric irreducibility of Spec of the algebra, with its canonical structure morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c44d2aee",
+  "group": "Q76",
+  "result": "pass",
+  "note": "I read the node, the 5 statement-dependency records, Stacks algebra.tex 11205-11257 (037M, 037N), the Mathlib geometrically/GeometricallyIrreducible definitions and the delivered module and report. Both theorems match node clauses (1) and (2) exactly: injective AlgHom; nonempty directed PartialOrder with diagram into CommAlgCat.{u} k and its categorical colimit; no extra hypotheses; lean.statement verbatim. The single universe u is forced by the Mathlib interface and is equivalent because the separable closure lies in Type u. Edge cases checked: zero ring, dual numbers, empty I, non-injective transitions. No hollow definitions, only sorry, source and blueprint docstrings present, no duplicate found in Mathlib or the side clone. nt_compile (--json, snapshot file) compiled clean in 4 s, and a control run showed the tool reports errors. The Second reading section is the placeholder allowed by the 2026-10-17 direct-delivery rule. No findings."
  }
 }

@@ -207,5 +207,23 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-1f147d49f (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-catenary-affine-open-cover and the statement of every cited node in full. The item agrees with Stacks Morphisms Tag 02J9 (lemma-universally-catenary-local), (4)=>(3): the source proof covers Spec C by affines over the U_i, uses 01T2 for finite type coordinate maps, then Properties 02IX. The new node is exactly Properties Tag 02IX (lemma-catenary-local), (4)=>(3), for an arbitrary scheme. It is true without Noetherian hypotheses: the chain condition for p in q only depends on the local ring at q. Small cases pass: the empty scheme, a one-member cover, Spec k[x] covered by D(x) and D(x-1). The node's 'catenary' matches algebra.tex 00NI as spelled out in def-exc-excellent-ring. It is not a restatement of the parent, and a grep for catenar, 02IX and 02J9 finds no duplicate. Repaired in the item's proof (2 faults, plus 1 wording slip): (1) step 1 justified quasi-compactness of V into X by 'V is affine', which is invalid without quasi-separatedness; it is also not needed, so I replaced lem-weil-pbc-qc-open-immersion-finite-type with lem-weil-pbc-immersion-base-change-lft (2), which says an immersion is locally of finite type (a Mathlib leaf). (2) step 1 said 'the single affine chart satisfies the finite-type definition', but def-weil-finite-type-morphism quantifies over all affine opens of the target; I wrote out the standard-open argument (D(b) in V', Spec C_b finitely generated over O(V')). (3) step 4 now concludes that O_Y(Y)=C is catenary by applying the node with V=Y, and adds def-weil-affine-spectrum. proof_deps was recomputed. The declared tool_use lem-weil-pbc-lft-affine-pairs is a Mathlib leaf, so it is redundant but harmless and I accept it. No SGA source; not a target node, so there is no base change or coefficient category to check.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversallyCatenaryAffineCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversallyCatenaryAffineCover.lean",
+  "declaration": "AlgebraicGeometry.universallyCatenary_of_affineOpenCover",
+  "statement": "theorem universallyCatenary_of_affineOpenCover (X : Scheme.{u}) [IsLocallyNoetherian X] {I : Type u} (U : I → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤) (hcat : ∀ i, IsUniversallyCatenary Γ(X, U i)) : ∀ V : X.Opens, IsAffineOpen V → IsUniversallyCatenary Γ(X, V)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2eef60b92",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02J9 (4)=>(3) clause by clause: Scheme.{u}, [IsLocallyNoetherian X], affine cover U : I -> X.Opens with IsAffineOpen and iSup U = top, hcat via the recorded IsUniversallyCatenary, conclusion for every affine open V. No extra assumptions; I : Type u loses no generality (reindex by the image in X.Opens). Edge cases (empty I, empty V, infinite covers) are fine. The node changed only by the lean field; lean.statement matches the file verbatim. sorry-only proof, source and blueprint docstrings with proof steps, no duplicate in side/slopmaster2/Mathlib, report has Worker report and Second reading by NF. nt_compile against the side overlay: clean, 2.8 s, rc 0, no errors."
  }
 }

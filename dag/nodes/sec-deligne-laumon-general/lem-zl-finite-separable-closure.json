@@ -119,5 +119,24 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-20af9ad76 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: Stacks 037Q algebra.tex:11428, 0G33 algebra.tex:11392, 037J fields.tex:3584, 09HB fields.tex:1409. I also read the parent lem-zl-bertini-field-extension and the main-20261015 blueprint proof of lem-zl-bertini-finite-cover-curve. The item matches 037Q; assuming finite generation for the first clause too is harmless, and the parent's use has that hypothesis. Step 1 (separable closure, then 09HB, then 0G33 (2)=>(1)) and step 2 (037J, k' inside k_alg, then a subspace of a finite-dimensional space) are correct. Every route node is in the same unit or is a definition or Mathlib leaf, so no tool_uses are needed. lem-zl-finite-algebraic-closure (037J) is a correct, statement-only node; Mathlib has no 037J and no finiteness result for algebraicClosure. lem-zl-separable-permanence is a correct leaf: Algebra.IsSeparable.trans at SeparableDegree.lean:835, tagged stacks 09HB. rg over the whole DAG and blueprint finds no duplicate. Edge cases checked: K=k, finite separable, purely inseparable, Q(i)(t). Fixes: (1) both new nodes' blueprint.from.via now put the item in front (B9); (2) item step 1 now names the extension that permanence is applied to, the separable closure F of k' in K, and gets F=k'; (3) both new nodes recorded '0 hits' for their greps, which my re-runs show is false (for permanence the grep hits line 835 itself), so I replaced those results with what the re-runs returned. No statement was changed and no node was dropped.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteSeparableClosure",
+  "declaration": "finite_separable_closure",
+  "file": "lean/Sheaf/FieldTheory/FiniteSeparableClosure.lean",
+  "statement": "theorem finite_separable_closure {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap (separableClosure k K) K))) ∧ FiniteDimensional k (separableClosure k K)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-0fdcbad23"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fdcbad23",
+  "group": "Q72",
+  "result": "fix",
+  "note": "Statement matches the node and Stacks 037Q clause by clause: Field k (Type u), Field K (Type v), Algebra k K; finite generation as (⊤ : IntermediateField k K).FG; k' = separableClosure k K (recorded Mathlib declaration); GeometricallyIrreducible (Spec.map (algebraMap k' K)) in the right direction ∧ FiniteDimensional k k'. No extra hypotheses; Mathlib testing fields only in universe v is no restriction, since an algebraic closure of k' lives there. Edge cases K=k, finite separable, purely inseparable, k(t), any characteristic and an empty generating set are covered. lean.statement matches the file verbatim; proof is sorry only; no duplicate in Mathlib or the project. Compiled through nt_compile --json: delivered and fixed files both compile with no error or warning (the tool does not print the sorry warning). Fixes: F1 (H9) removed the unused import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra; F2 (H8) docstring step 1 now follows the node's proof (separable closure F of k' in K, 09HB on k ⊆ k' ⊆ F, F = k', then 0G33 (2)⇒(1)) instead of the wrong claim of transitivity in k ⊆ k' ⊆ K, and step 2 is written out; report updated to match. Fix files: fixes/FiniteSeparableClosure.lean and fixes/lem-zl-finite-separable-closure.report.md."
  }
 }

@@ -180,5 +180,29 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-99c3c0f33 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. Sources checked: slopmaster2 FromJoel TotalComplexMap.lean 27-145 (no sorry; it imports only Mathlib and HomologicalBicomplex, which also has no sorry); BicomplexColumns.lean 174-245 (cofanOfIsZero/preservesColimitOfIsZero), 416-489 (CoreHasTotal) and 874-911 (coreHasTotalOfIsStrictlyLE, hasTotal/preservesTotal_of_isStrictlyLE); Mathlib AdditiveFunctor.lean:213; the blueprint main-20261015 lem-sfb-derived-monoidal proof. The item's hypotheses match the source with y0=0 and x0=b. The sign (-1)^p matches Mathlib's up-Z total shape, and the comparison direction and the bound-free naturality match the Lean. The arithmetic n<=p<=b is correct, including the empty case n>b. I tested the zero bicomplex, a bicomplex in one bidegree, degree n>b, and a map between bicomplexes with different bounds. The map-total-iso node is a generalization of the item's main clause without bounds, not a restatement; Step 1 proves the existence and preservation the item adds. No duplicates, no cycle, no tool_uses, no SGA. Three fixes: (1) E5 in Step 1: the diagonal index set is infinite, and the step now writes out the zero-extension argument the source uses (existence of the coproduct, F sends zero objects to zero, preservation). (2) B9 on both new nodes: via was [item] and is now the item plus the item's own via; from.place quoted sentences that are not in the blueprint proof and now names the real sentence 'So the K-flat complexes form a left derivability structure'. (3) B10 on map-total-iso: it is exactly the sorry-free slopmaster2 mapTotalXIso/mapTotalIso and the two naturality lemmas, so lean_audit.slopmaster2 is now closed with those declarations and lines; its statement now defines the comparison and the naturality equations explicitly. Item statement unchanged. Corrected files are in fixes/dag/nodes/sec-proetale-coefficients/.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdditiveTotalTransport",
+  "declaration": "HomologicalComplex₂.additive_total_transport",
+  "declarations": [
+   "HomologicalComplex₂.additiveTotalComparison",
+   "HomologicalComplex₂.additive_total_transport"
+  ],
+  "file": "lean/Sheaf/Paper/AdditiveTotalTransport.lean",
+  "statement": "theorem additive_total_transport {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasFiniteCoproducts C] {D : Type uD} [Category.{vD} D] [Preadditive D] (F : C ⥤ D) [F.Additive] (B : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ)) (b : ℤ) [CochainComplex.IsStrictlyLE B b] [∀ p : ℤ, CochainComplex.IsStrictlyLE (B.X p) 0] : ∃ (hB : B.HasTotal (ComplexShape.up ℤ)) (hP : F.PreservesTotalComplex B (ComplexShape.up ℤ)), IsIso (additiveTotalComparison F B hB hP).hom ∧ ∀ (B' : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ)) (b' : ℤ) [CochainComplex.IsStrictlyLE B' b'] [∀ p : ℤ, CochainComplex.IsStrictlyLE (B'.X p) 0] (φ : B ⟶ B'), ∃ (hB' : B'.HasTotal (ComplexShape.up ℤ)) (hP' : F.PreservesTotalComplex B' (ComplexShape.up ℤ)), total.map ((F.mapHomologicalComplex₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ)).map φ) (ComplexShape.up ℤ) ≫ (additiveTotalComparison F B' hB' hP').hom = (additiveTotalComparison F B hB hP).hom ≫ (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (total.map φ (ComplexShape.up ℤ))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper additiveTotalComparison is the canonical mapTotalIso with explicit total and preservation witnesses.",
+  "fixed_by": "NT-stage2-cc-326ce10f8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-326ce10f8",
+  "group": "N4",
+  "result": "fix",
+  "note": "Fault H3: the theorem dropped the node's and source's hypothesis that C has a zero object and finite coproducts (source: BicomplexColumns.lean:746 [HasFiniteCoproducts D] for hasTotal_of_isStrictlyLE/preservesTotal_of_isStrictlyLE, 874-912), so its claim that B.HasTotal holds is false. Counterexample: C = full subcategory of Ab on {0, Z}, B^{0,0} = B^{1,-1} = Z, b = 1; the degree-0 diagonal has no coproduct. Fixed in fixes/AdditiveTotalTransport.lean by adding [HasZeroObject C] [HasFiniteCoproducts C] to the theorem; docstring now cites the source place, step 1 spells out finite support n<=p<=b and the empty case n>b; helper and D unchanged. Everything else matches the node: Preadditive and Functor.Additive deps, Mathlib bicomplex with sign (-1)^p, IsStrictlyLE B b and row bound 0, existence of HasTotal and PreservesTotalComplex, additiveTotalComparison is exactly mapTotalIso, naturality has source orientation and an independent b'; universes independent; helper not hollow; proof only sorry; worker report and N4 second reading present. nt_compile --json: delivered and fixed files compile without errors. A throwaway full proof of the fixed statement from hasTotal_of_isStrictlyLE, preservesTotal_of_isStrictlyLE and mapTotalIso_hom_naturality compiles without errors."
  }
 }

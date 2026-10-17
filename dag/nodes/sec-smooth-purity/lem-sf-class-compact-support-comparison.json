@@ -225,25 +225,26 @@
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison",
   "declaration": "AlgebraicGeometry.ProEtale.compactSupportSiteComparison",
-  "statement": "def compactSupportSiteComparison (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅ DerivedCategory.Plus.ι ⋙ Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory",
-  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalCompactSupportSiteComparison.lean",
-  "branch": "newtargets-dag",
-  "by": "Q78",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "Section 1(B): the recorded module directly imported the retired ProEtale.Derived.LowerShriek after its other imports had loaded the same declarations from ProEtale.FiniteCoefficient.Derived.LowerShriek. Compilation rejected the duplicate rightDerivedLowerShriekOfCompactification. Replace just that import with the canonical finite-coefficient module. Every declaration, signature and definition body is unchanged: the proper factor is still fixedComparisonDirectImageMatePlus and the open factor its canonical degreewise comparison.",
   "declarations": [
    "AlgebraicGeometry.ProEtale.compactSupportSiteComparisonPlus",
    "AlgebraicGeometry.ProEtale.compactSupportSiteComparison"
-  ]
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalCompactSupportSiteComparison.lean",
+  "statement": "def compactSupportSiteComparison (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅ DerivedCategory.Plus.ι ⋙ Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): repair the original CanonicalCompactSupportSiteComparison module in place, rather than introducing a second owning module for its declarations. The legacy pro-etale lower-shriek import collides with the finite-coefficient operations used by the open-base-change dependency. This interface imports the repaired original FixedComparisonDirectImageMate and the finite lower-shriek comparison. The existing compact-support comparison signatures and canonical proper-mate construction are retained. The open comparison is the same literal termwise descent, exposed as compactSupportSiteOpenIsoPlus without the incompatible proper-open umbrella import.",
+  "fixed_by": "NT-stage2-cc-3dd16f3fd"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f905594fc",
-  "group": "Q78",
-  "result": "pass",
-  "note": "Read the item node, all 12 statement dependencies, the source place, both delivered modules and report.md (Worker report and Second reading by Q78 both present). Checked every clause: separated finite-type f, arbitrary g, Compactification f with c.ofIsPullback sq, fixed-scalar ModuleCat coefficients with Λ : Type (u+1) as in all dependencies, bounded-below input via Plus.ι. C = Plus compatibility then compactSupportSiteComparison.symm (counit mate fixedComparisonDirectImageMatePlus, then degreewise openImmersionLowerShriekComparisonUpperStarIso). a_v and a_w = leftDerivedUpperStarComparisonIso (tagged lem-weil-pbc-comparison-pullback; the same as in the Lean of lem-weil-pbc-transport-identifies-exchange). S and T unfold correctly. E^e is the recorded Etale...PlusBaseChangeMap; E^p is the second component of finiteExchangeProjection with g arbitrary (FiniteCoefficient copy differs only in imports). The first conjunct is an equality of natural transformations; the second equates the witness-transported map to E^p.app N for every (L,N,α), which gives witness invariance. No extra hypotheses; no hollow data (sorryAx only from upstream Prop isIso); one sorry; statement field verbatim; no duplicate found. The §1(B) dependency repair is a single import swap with bodies unchanged (diffed); added stmt_dep is used and acyclic. nt_compile.py on both files, three runs: 4-10 s and 11-19 s, clean. Minor non-blocking: dependency lean.note replaced rather than extended."
+  "reviewer": "NT-stage2-cc-3dd16f3fd",
+  "group": "Q139",
+  "result": "fix",
+  "note": "Read the node, its dependency nodes, the Stacks places (09A6, 09AF, 03S6), all three delivered modules, report.md (Worker report and Second reading by Q139 present), and the declarations Etale.baseChange, Compactification.ofIsPullback and its squares, sfFixedOpenExtensionBaseChange, fixedComparison*. Every hypothesis and clause matches: finite A in the published ULift fixed-scalar presentation, Noetherian X/S/c.Z, D+ only, J is the actual proper mate followed by the open comparison as an Iso, C^et/C^pro are the unit-square-counit exchange followed by the inverse open base change with directions checked, the open-restriction equation shows both inverse-image comparisons, and both counit normalizations are stated. No hollow definitions, nothing proved beyond sorry, source and blueprint docstrings present, statement field verbatim, edge cases fine. The lem-cbc existing:true re-record to sfFixedDerivedOpenExtensionBaseChangeIso is accepted. Finding (H4, fixed): CanonicalCompactSupportSiteComparison defines compactSupportSiteOpenIsoPlus, an exact copy of the existing properOpenSiteExtensionIso, and undoes an earlier reviewed version of that module. The claimed import collision does not exist on the base (the item alone fails only with unknown identifier compactSupportSiteOpenIsoPlus). fixes/ removes the copy, restores the ProEtaleProperOpenComparison import and uses properOpenSiteExtensionIso in J and in the counits conjunct (equal by definition, no signature change), and adds a fix section to the report. The lem-sf-class record note's last sentence becomes outdated and cannot be changed through fixes/. nt_compile: delivered and fixed three modules exit 0; seven direct importers compile with the fixed modules; four other importers fail the same way with the base modules (pre-existing duplicate imports).; reverted the delivery's change of existing node(s) lem-cbc-proetale-extension-zero-base-change (--revert-nodes; kept as on newtargets-dag)"
  },
  "split_report": {
   "date": "2026-10-16",

@@ -157,5 +157,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-6e4f0f5e1 (reviewer sub-agent of L); spot-checked: I read all the cited material and checked every step. The item's statement agrees with Stacks 0202 (limits.tex l.3071) and with the blueprint. Its hypotheses are S qcqs and f separated of finite type. Its conclusion is a finite N, a proper surjective π and an immersion i_S with q_S i_S = fπ. The finite-N form is equivalent to Stacks' n ≥ 0 form: an empty N forces X to be empty. All 8 delivered steps are correct. I checked each one against the current blueprint_update statements and against the closed Lean behind them: 01ZJ envelope (AffineTransitionLimit.lean:4606), 01ZA approximation (l.2146), 01ZQ descent with qcqs stages (l.3511, stages qcqs via 01OY), and Noetherian Chow through ChowModification.Data in ChowLemma.lean, which states the full 0200 result. The remaining steps use base change of proper, surjective, immersion and closed-immersion maps, the projective-space pasting, and closed-immersion composition. One fault (C5 / stages §3.4): the item duplicates the existing node lem-weil-pbc-chow-finite-type. That node states Stacks 0202 with N={0..n}, is split and reviewed (pass), and is Lean-closed by the sorry-free AlgebraicGeometry.exists_chow_finite_type in ChowFiniteType.lean. The worker's report missed it. Fix written to fixes/dag/nodes/sec-nagata-compactification/det-chow-projective-qcqs-chow.json: the proof is now one step citing lem-weil-pbc-chow-finite-type plus def-nagata-projective-space-base-change for N={0,...,n}. proof_deps equals the step's uses, and I checked that this creates no cycle. I accepted lem-weil-pbc-chow-finite-type as a tool use: it is Lean-closed and its proof is exactly unit paragraph 3. I removed the worker's three tool_uses, which are no longer cited. Statement and stmt_deps are unchanged. I recommend the maintainer merge the two nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChowProjectiveQcqs",
+  "declaration": "AlgebraicGeometry.exists_chow_projective_qcqs",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowProjectiveQcqs.lean",
+  "statement": "theorem exists_chow_projective_qcqs {S X : Scheme.{u}} (f : X ⟶ S) [CompactSpace S] [QuasiSeparatedSpace S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ (N : Type u) (_ : Finite N) (X' : Scheme.{u}) (π : X' ⟶ X) (i : X' ⟶ ProjectiveSpace N S), IsProper π ∧ Surjective π ∧ IsImmersion i ∧ i ≫ ProjectiveSpace N S ↘ S = π ≫ f",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4ee43c24",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Statement exists_chow_projective_qcqs matches the node, blueprint and Stacks 0202 clause by clause: S qcqs; f separated, locally of finite type and quasi-compact; finite N : Type u; proper surjective pi; IsImmersion i into ProjectiveSpace N S; i ≫ ↘S = pi ≫ f with ↘ = pullback.fst. No extra hypotheses; one universe, all variables bound. Edge cases (empty X, empty S, empty N, n=0) are fine. The new module is justified because exists_chow_finite_type has only the Fin(n+1) form. Docstrings and the proof step are present; proof is sorry only; no definitions. Node equals the base apart from lean, and lean.statement is verbatim. Report has Worker report and Second reading by Q11. nt_compile --json: exit 0, no errors or warnings."
  }
 }

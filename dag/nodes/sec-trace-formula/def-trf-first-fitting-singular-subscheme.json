@@ -87,5 +87,31 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-28aa69cdd (reviewer sub-agent of L); spot-checked: I read the item in full and checked it against More on Algebra 07Z6/07Z8/07Z9/07ZA (more-algebra.tex lines 1318-1460) and Divisors 0C3C/0C3H/0C3I/0C3J/0C3K. The definition is correct. The minors of (n-1)xn matrices with rows in the kernel K are exactly the description in the first paragraph of the proof of 07Z8. The n<=1 convention is correct (I_0=R, and 07ZA(1) covers n=0). Locally of finite type is enough. Gluing follows 0C3C. Small cases: k[x,y]/(xy) gives Fit_1=(x,y), the node; k[t] and k give the unit ideal; k[x,y] gives 0, which is expected in relative dimension 2. Generator independence and localization also check out on these examples. I found two repairable faults and fixed both in fixes/dag/nodes/sec-trace-formula/. (1) stages/1-dag.md §2 and C1: the definition claims generator independence and compatibility with localization, which are real lemmas (07Z8 uses Schanuel's lemma; 07ZA(3)), but the worker made no statement node for them. I added the statement-only unsplit node lem-trf-fitting-ideal-independence-base-change: for any finite module, I_k does not depend on the surjection, and I_k(pi tensor R') = phi(I_k(pi))R', with the localization case spelled out. I checked (2) by right exactness and multilinearity of minors. It is more general than the item, so it is not a restatement and makes no cycle. No duplicate in the DAG (rg fitting/minors), the blueprint or Mathlib (grep only; LeanSearch was unreachable and is recorded as unavailable). (2) The claim that A is finitely generated over R on every affine pair is Stacks 01T2 and was uncited. I now cite the existing Mathlib leaf lem-weil-pbc-lft-affine-pairs. In the corrected item, stmt_deps gains these two nodes and the statement gains the two inline citations. The mathematics is unchanged and nothing is weakened. No tool_uses, no SGA, unit binding unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme",
+  "declaration": "AlgebraicGeometry.Scheme.firstFittingSingularSubscheme",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.isFirstFittingIdealSheaf",
+   "AlgebraicGeometry.Scheme.existsUnique_firstFittingIdealSheaf",
+   "AlgebraicGeometry.Scheme.firstFittingIdealSheaf",
+   "AlgebraicGeometry.Scheme.firstFittingSingularSubscheme",
+   "AlgebraicGeometry.Scheme.firstFittingSingularSubscheme_isClosedImmersion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FirstFittingSingularSubscheme.lean",
+  "statement": "def firstFittingSingularSubscheme {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] : (firstFittingIdealSheaf f).subscheme ⟶ X",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The ideal sheaf is chosen from the uniquely characterized affine-local first Fitting ideals; its closed subscheme inclusion is Mathlib IdealSheafData.subschemeι."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-446f16b89",
+  "group": "Q105",
+  "result": "fix",
+  "note": "Read the node, all 5 stmt_deps records, Stacks Divisors 0C3C (divisors.tex 1247-1283) and Schemes 01IN, the module, PresentationFittingIdeal.lean and relativeDifferentials. The Lean matches the node: [LocallyOfFiniteType f] with nothing extra; Fit_1 is the kernel-row (n-1)-minor ideal with the n<=1 unit convention, taken over every affine open as 0C3C characterizes it; the glued IdealSheafData is a Classical.choose from a sorry'd ∃! theorem that has a proof plan (not hollow); Sing(f) is subschemeι, with the IsClosedImmersion instance. lean.statement is verbatim; one bound universe. Edge cases checked: empty affine, n=0 and 1, zero Omega, the node xy, affine U not over an affine of S. No duplicate in Mathlib, the project or the DAG. nt_compile.py --json: delivered file clean (5.1 s), dependency override clean, error-reporting probe works; fixed file clean. Only finding: the instance firstFittingSingularSubscheme_isClosedImmersion had no source/blueprint docstring; a complete replacement file in fixes/lean/Sheaf/AlgebraicGeometry/FirstFittingSingularSubscheme.lean adds only that docstring (Divisors 0C3C, Schemes 01IN, blueprint tag). No record changes."
  }
 }

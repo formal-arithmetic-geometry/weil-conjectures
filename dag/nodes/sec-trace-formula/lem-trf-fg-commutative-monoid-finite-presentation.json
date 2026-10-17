@@ -138,5 +138,23 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-f136c9287 (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete. Item step 1 uses the kernel lemma on M=N^n, c=ker pi, where M/c is R. Step 2 uses Noetherianity of Z[x_1..x_n] (Mathlib isNoetherianRing_fin, RingTheory/Polynomial/Basic.lean:925-931, read; instance for Z inferred) and finite extraction of binomial generators. Step 3 shows c=d via the kernel lemma's second clause and the fact that distinct classes are independent basis vectors. Step 4 is correctly elementary. The parent lem-trf-fine-log-stalk-chart-spreading uses exactly the finite relations and the universal property. Removing the [sk-def-sfb-ring-object] parenthetical leaves the content unchanged and the report names it. Stacks 00FN (algebra.tex:5991) was read. Both lemmas of the kernel node were checked, including on N with 2~1, giving kernel (x^2-x). Item edge cases checked: n=0, free, Z/2, idempotent {0,1}, repeated generators, non-cancellative. No duplicates in the DAG: the only polynomial-Noetherian node is for k[t], and there is no congruence, monoid-algebra or Rédei node. Three fixes. (1) Both new nodes had kind 'definition'; set to 'statement'. (2) B3/C4: lem-trf-congruence-polynomial-kernel cited def-trf-fs-log-blowup for 'commutative monoid' and def-weil-pbc-mv-polynomial-ring for an arbitrary monoid algebra, and neither node defines these. The citations are removed and the statement is made self-contained. Its Mathlib source lines were wrong (Con.mk'_ker is at line 154, not 163-176) and are corrected. The leaf now cites def-weil-pbc-noetherian-ring. (3) Item step 1 now cites def-weil-pbc-mv-polynomial-ring for Z[N^n]=Z[x_1..x_n]; it is also added to uses and proof_deps. No tool_uses. Checks are written in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FgCommutativeMonoidFinitePresentation",
+  "declaration": "fg_commutative_monoid_finite_presentation",
+  "statement": "theorem fg_commutative_monoid_finite_presentation (R : Type u) [AddCommMonoid R] (n : ℕ) (r : Fin n → R) (π : (Fin n →₀ ℕ) →+ R) (hπ : Function.Surjective π) (hπ_formula : ∀ a : Fin n →₀ ℕ, π a = a.sum (fun i k => k • r i)) : ∃ (m : ℕ) (ab : Fin m → (Fin n →₀ ℕ) × (Fin n →₀ ℕ)), (∀ j : Fin m, π (ab j).1 = π (ab j).2) ∧ (∀ a b : Fin n →₀ ℕ, π a = π b ↔ ∀ c : AddCon (Fin n →₀ ℕ), (∀ j : Fin m, c (ab j).1 (ab j).2) → c a b) ∧ (∀ (T : Type v) [AddCommMonoid T] (t : Fin n → T), (∃! f : R →+ T, ∀ i : Fin n, f (r i) = t i) ↔ ∀ j : Fin m, (ab j).1.sum (fun i k => k • t i) = (ab j).2.sum (fun i k => k • t i))",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/TraceFormula/FgCommutativeMonoidFinitePresentation.lean",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a430b1ec8",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Only the lean field of the node changed; lean.statement matches the file verbatim. Every node clause has its Lean: R an AddCommMonoid; r a Fin n tuple; pi a surjective map given by the sum formula; m chosen pairs with equal pi; pi a = pi b iff every AddCon containing the pairs relates a and b; for every T in a free universe v and tuple t, a unique extending hom exists iff the m sum equations hold. Quantifier order is right, and nothing stronger is assumed. Edge cases n=0, m=0, repeated generators, idempotent or non-cancellative monoids and the zero monoid are covered. Stacks Tag 00FN (algebra.tex:5991) was read; the docstrings give the source and blueprint id and the theorem docstring carries all 4 proof steps. Searches of Mathlib, the side clone and slopmaster2 found no duplicate. No definitions, sorry only, Mathlib-only imports all used, no line over 100 characters. nt_compile --json compiled the file clean in 1.6 s with no errors or warnings. The 'Second reading by Q17' section only states the direct-delivery policy (since 2026-10-17); not a fault."
  }
 }

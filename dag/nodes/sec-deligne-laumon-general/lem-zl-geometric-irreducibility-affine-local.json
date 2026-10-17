@@ -146,5 +146,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-8258c64a0 (reviewer sub-agent of L); spot-checked: The statement of lem-zl-geometric-irreducibility-affine-local is correct. It is Stacks 038G (varieties.tex lines 1405-1442), conditions (1)<=>(2) plus the moreover clause, restricted to irreducible X. That restriction is a true special case, it is all the parent lem-zl-generic-point-geometric-irreducibility needs, and it weakens no target. Small cases checked: Spec Q(sqrt2)/Q (both sides false), P^1, the line with doubled origin, Spec k[x]/x^2 (all true); the empty scheme is excluded. The proof is mathematically complete, but it had two C1 citation faults, which I repaired in fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-geometric-irreducibility-affine-local.json. (1) Steps 1-2 used surjectivity of X_K->X, which step 1 needs for U_K nonempty, without citing anything. They now cite the existing Mathlib leaves lem-pc-field-extension-surjective and lem-weil-pbc-surjective-base-change (Tag 01S1), are marked non-elementary, and proof_deps is updated to match. This follows the precedent repair of lem-weil-geometrically-connected-check-after-extension. (2) Step 3 quoted Mathlib PreirreducibleSpace.of_isOpenCover by name with no node. I checked the theorem at Topology/Sets/OpenCover.lean:123 and its use is correct. The step now writes out the three-line topological argument and keeps the Mathlib name only as a pointer. All other fields are unchanged. There are no new nodes and no duplicates: rg for 038G, affine-local and pairwise-cover phrasings found only lem-sc-geometrically-irreducible-product, which is a different result. The blueprint from/via fields are correct, there are no SGA citations, and tool_uses is empty.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricIrreducibilityAffineLocal",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_affineLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricIrreducibilityAffineLocal.lean",
+  "statement": "theorem geometricallyIrreducible_affineLocal (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IrreducibleSpace X] : (GeometricallyIrreducible (X ↘ Spec (.of k)) ↔ ∀ (U : X.Opens) (hU : IsAffineOpen U), (U : Set X).Nonempty → GeometricallyIrreducible (hU.fromSpec ≫ X ↘ Spec (.of k))) ∧ (GeometricallyIrreducible (X ↘ Spec (.of k)) → ∀ (V : X.Opens), (V : Set X).Nonempty → GeometricallyIrreducible (V.ι ≫ X ↘ Spec (.of k)))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2df33d5fb",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Statement matches node lem-zl-geometric-irreducibility-affine-local and Stacks 038G (varieties.tex 1405-1442; (1)<=>(2) restricted to irreducible X, which is a true special case, plus the Moreover clause). Field/Scheme.Over/IrreducibleSpace hypotheses; iff over all nonempty affine opens via the canonical hU.fromSpec (isoSpec.inv ≫ U.ι); Moreover over all nonempty opens via V.ι. No extra hypotheses; universe u bound, test-field universe as recorded in def-pc-geometrically-irreducible. Edge cases: empty X and empty opens excluded; Spec Q(sqrt2)/Q, non-reduced, non-separated and non-affine cases correct. No duplicate in Mathlib Geometrically/Irreducible.lean or lean/Sheaf. Commit touches only module, node lean field and report; lean.statement verbatim; docstrings give source, blueprint id and the 3 proof steps; only proof is sorry. nt_compile --json: rc 0, no errors or warnings; axioms are only propext/sorryAx/Classical.choice/Quot.sound. Second reading is an author self-check (process note, not a fault)."
  }
 }

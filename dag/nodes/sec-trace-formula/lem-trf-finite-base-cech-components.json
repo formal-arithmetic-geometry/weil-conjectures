@@ -150,5 +150,29 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-a5c63b479 (reviewer sub-agent of L); spot-checked: I read the item, all five cited nodes, the parent lem-trf-nearby-finite-base-descent, the sibling lem-trf-finite-cover-tube-comparison (where I_q and J_q are defined), the unit sk-i-curve-zero and the chapter. The statement is unchanged and true; it holds even without finiteness. The geometric fibre Spec Ω ×_U (U ×_S Z) is canonically Spec Ω ×_S Z by pasting of cartesian squares, and that isomorphism is the projection-induced map, so components correspond bijectively. Edge cases checked: Z empty, q=0, h=id. The parent uses the lemma with Z=P_q, S=S_0, U=U_0, and these objects match the item's exactly. Step 1 uses only the universal property and uniqueness stated in def-pc-fibre-product and the definition of a geometric point, with no hidden hypothesis. Step 2 is a correctly posed induction on q: finiteness of each Z^(q) -> S follows from lem-weil-pbc-finite-morphism-permanence (a) and lem-weil-pbc-finite-composition. Both are Mathlib leaves (IsFinite base-change stability at Finite.lean:60 and IsFinite.instCompScheme), so they are tools and not part of the route, and no tool_uses are needed. There are no new nodes, proof_deps equals the union of the steps' uses, and there is no cycle. Duplicate check: lem-weil-pbc-geometric-component-count-base-change gives only equal component counts, not the projection-induced bijection the parent needs for face maps, so it is not a duplicate. A blueprint search returned 0 matches, consistent with same_as []. The blueprint ancestor is lem-trf-local-term-locality, as the node records. The Orgogozo PDF (Lemma 2.6.1) is absent from both literature trees, so I could not check that place; the worker filed a WANTED line and set proof_origin.by to agent. There are no SGA citations, and this is not a target node, so the base-change morphism and coefficient checks do not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteBaseCechComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteBaseCechComponents.lean",
+  "declaration": "AlgebraicGeometry.finite_base_cech_components",
+  "declarations": [
+   "AlgebraicGeometry.CechStage",
+   "AlgebraicGeometry.cechStage",
+   "AlgebraicGeometry.finiteBaseFiberProjection",
+   "AlgebraicGeometry.finite_base_cech_components"
+  ],
+  "statement": "theorem finite_base_cech_components {Z S U : Scheme.{u}} (p : Z ⟶ S) [IsFinite p] (h : U ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (b_U : Spec (.of Ω) ⟶ U) : Function.Bijective (finiteBaseFiberProjection p h b_U).continuous.connectedComponentsMap ∧ ∀ q : ℕ, Function.Bijective (Continuous.connectedComponentsMap (finiteBaseFiberProjection (cechStage p q).map h b_U).continuous)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98d2b887f",
+  "group": "N7",
+  "result": "fix",
+  "note": "Read the node, its 3 statement dependencies (IsFinite, the inline geometric point Ω/IsAlgClosed/Spec, pullback), the module and the report; the Orgogozo source PDF is in neither literature tree, so I judged against the node. Every hypothesis and conclusion clause matches: the canonical pullback.map projection (snd, identity, h), π0 bijectivity via connectedComponentsMap, and ∀ q over cechStage (stage 0 = (Z,p), stage q has q+1 factors). No stronger assumptions; universes are bound; edge cases (empty Z, q=0, h=id) are fine. lean.statement matches the signature verbatim, the helpers are non-hollow and have source/blueprint docstrings, the only proof is sorry, there are no name clashes and no duplicate notion. nt_compile is clean (3.4 s; a control run confirms errors are reported). Only finding: H11, the N7 second reading is generic. Fix: fixes/lem-trf-finite-base-cech-components.report.md, a complete report that keeps both N7 sections and adds a clause-by-clause maintainer reading; Lean and node record are unchanged."
  }
 }

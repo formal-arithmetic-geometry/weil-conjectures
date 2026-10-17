@@ -158,5 +158,23 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Compactification.NagataSketchBlowups",
+  "declaration": "AlgebraicGeometry.nagata_sketch_blowups",
+  "file": "lean/Sheaf/Compactification/NagataSketchBlowups.lean",
+  "statement": "theorem nagata_sketch_blowups {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T] {U : T.Opens} (hU : IsCompact (U : Set T)) : (∀ (n : ℕ) (B : Fin n → IsAdmissible T U), ∃ (C : IsAdmissible T U) (m : ∀ i : Fin n, C.I.blowup ⟶ (B i).I.blowup), ∀ i : Fin n, m i ≫ (B i).I.blowupMap = C.I.blowupMap) ∧ (∀ (B₁ : IsAdmissible T U) (B₂ : IsAdmissible B₁.I.blowup (B₁.I.blowupMap ⁻¹ᵁ U)), ∃ (C : IsAdmissible T U) (e : B₂.I.blowup ≅ C.I.blowup), e.hom ≫ C.I.blowupMap = B₂.I.blowupMap ≫ B₁.I.blowupMap) ∧ (∀ (V : T.Opens) (hV : IsCompact (V : Set T)) (hUV : U ≤ V) (J : V.toScheme.IdealSheafData) (hJ : J.ofFiniteType) (hdisj : Disjoint ((V.ι ⁻¹ᵁ U : V.toScheme.Opens) : Set V.toScheme) (J.support : Set V.toScheme)), ∃ (B : IsAdmissible T U) (h : J.blowup ⟶ B.I.blowup), h ≫ B.I.blowupMap = J.blowupMap ≫ V.ι ∧ IsPullback J.blowupMap h V.ι B.I.blowupMap)",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14cb301d0",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Node statement matches main-20261015 source verbatim; Lean theorem nagata_sketch_blowups renders qcqs T, qc open U, and all three clauses in order with IsAdmissible (the attached sk-def-nagata-admissible notion). Clause 1: common dominating U-admissible blow-up for Fin n families (n=0 covered; checked by compiling a unit-ideal IsAdmissible). Clause 2 matches proved upstream IsAdmissible.exists_comp (iso over T, B2 admissible for the pulled-back open). Clause 3 matches upstream IsAdmissible.exists_extend exactly (qc V ⊇ U, finite-type J disjoint from V.ι⁻¹U, IsPullback restriction). No extra assumptions, single universe u, no new definitions, docstrings carry source/blueprint, only sorry, lean.statement verbatim, node diff only adds the lean field, report has Worker report and Second reading by Q102. nt_compile --json: BoundaryRefinement 2.7 s, NagataSketchBlowups 3.0 s/3.5 s, no errors; probe #check of exists_comp/exists_extend matches. No findings."
  }
 }

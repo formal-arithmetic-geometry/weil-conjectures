@@ -130,7 +130,8 @@
   "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-slice-site-localization",
   "def-weil-etale-morphism",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "sbc-def-base-change-map"
  ],
  "mathlib_searches": [
   {
@@ -229,5 +230,37 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-cb25e3e5c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sbc-sets-underived-exchange-sectionwise, every cited statement, the parent sbc-lem-etale-locality with its main-20261015 blueprint_update and blueprint proof, and Stacks Tag 0EZR (etale-cohomology.tex, lemma-base-change-local, line 16307, proof of (1), via Sites 03EF). The item statement is true and unchanged. Its beta matches Stacks' base change map (the transpose of e^{-1}eps_g after theta). The set and abelian cases each use their own lemmas; neither coefficient category is identified with the other. Checked cases: identity maps, U=X with B=S, empty U, f_U an isomorphism. I verified kappa ell_loc = ell_glob componentwise using ce_U=ed; kappa is correctly not claimed to be an isomorphism. C_L comes from inverse-image composition (fa=bf_U) and C_R from the slice lemma at U, where u(U)=Y_U. The new node is the true set-valued analogue of lem-weil-pbc-underived-exchange-sectionwise: ell_a is well defined, an identity square gives plain restriction and V=empty gives singletons. It is not a duplicate: sk-def-exchange defines the set-level Ex^0 but gives no sectionwise formula. Three faults, all fixed in fixes/: (1) step 3 had C_L going the wrong way and never defined s_B; (2) step 5 relied on 'equality of adjuncts' when step 4 computes the maps themselves, so it is rewritten to use uniqueness of the sheafification factorization (def-weil-pbc-sheafification); (3) the new node's blueprint.from.via was [] and is now [item]. I also added missing citations: composition-units and inverse-image-composition in step 4 (for the identity kappa^*(e^*s)=e_U^*s_B), def-pc-fibre-product in steps 1 and 3, and def-pc-scheme in the new node's stmt_deps. In the new node, the representative now cites the set-valued presheaf inverse image. proof_deps was recomputed. I accepted eight generic site and inverse-image tool_uses and removed the entry for the new node, which is in the same unit. No SGA source is used.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeArrowLocalization",
+  "declaration": "AlgebraicGeometry.Etale.BaseChangeLocalization.baseChangeArrow_localization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.pullComp",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.squareIso",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.restrictionIso",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.inverseRestrictionSquare",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.directRestrictionSquare",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.localArrow",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.localSquare",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.leftComparison",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.rightComparison",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.Compatible",
+   "AlgebraicGeometry.Etale.BaseChangeLocalization.baseChangeArrow_localization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeArrowLocalization.lean",
+  "statement": "theorem baseChangeArrow_localization : Compatible (Type (u + 1)) (fun {_ _} k => Scheme.etaleSetPullback k) (fun {_ _} k => Etale.setUpperLowerAdjunction k) sq a b fU fac (fun {_ _ _ _} {_ _ _ _} q F => Etale.setBaseChangeArrow q F) ∧ Compatible AddCommGrpCat.{u + 1} (fun {_ _} k => Etale.upperStar AddCommGrpCat.{u + 1} k) (fun {_ _} k => Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} k) sq a b fU fac (fun {_ _ _ _} {_ _ _ _} q F => (Etale.baseChangeMap AddCommGrpCat.{u + 1} q.toCommSq.flip).app F)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical localization comparison helpers and the full compatibility identity for both sets and abelian groups, including naturality in the sheaf. The existing setBaseChangeArrow and baseChangeMap are reused; sbc-def-base-change-map is added as a landed statement dependency for its set arrow and set adjunction. General helper parameters L and adj are fixed to the recorded functors and adjunctions in the theorem. No extra hypothesis, statement correction, dependency repair or new standalone notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a7225b2c",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read brief, packet, node, all 14 stmt_deps and their recorded declarations, Stacks 0EZR lemma-base-change-local proof of (1), module, report. Node delta only lean + landed stmt_dep sbc-def-base-change-map (no cycle, 328 nodes); statement verbatim; 11 decls present. beta: abelian baseChangeMap on q.toCommSq.flip = mate of squareUpperStarIso (= theta of baseChangeInverseImageIso) giving f^-1 g_* -> h_* e^-1; sets: landed setBaseChangeArrow. C_L/C_R match node chains: leftAdjointUniq restriction iso (= recorded upperStarIsoLocalizationRestriction formula), conjugate of lowerStarComp (= upperStarComp), canonical pullbackMapComparison inverted via sheafPushforwardContinuousIso; localSquare constructed by pasting, not assumed. No extra hypotheses (fU arbitrary, no cover/nonempty), universes u / u+1 bound, both coefficient cases plus explicit naturality. nt_compile --json: clean in 20.4 s; #print axioms: sorryAx only in main theorem. Minor non-blocking: unused proof-plan imports, redundant naturality conjunct."
  }
 }

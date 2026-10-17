@@ -90,5 +90,23 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.Compactification.GraphExtension",
+  "declaration": "AlgebraicGeometry.Compactification.nonempty_properExtension",
+  "statement": "theorem Compactification.nonempty_properExtension\n    [CompactSpace S] [QuasiSeparatedSpace S] (u : U ⟶ S)\n    [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]\n    (V : U.Opens) (hV : IsCompact (V : Set U)) (c : Compactification (V.ι ≫ u)) :\n    Nonempty (Compactification.ProperExtension u V c)",
+  "branch": "slopmaster2",
+  "by": "Q120",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The source declaration is the exact graph-extension existence theorem for the node (Stacks Tag 0F3Z). Its typeclass assumptions encode qcqs S ([CompactSpace S] and [QuasiSeparatedSpace S]), separated finite-type u ([IsSeparated u], [LocallyOfFiniteType u], [QuasiCompact u]), and hV gives the quasi-compact open V. The compactification c is the given V-to-S compactification. Its conclusion Nonempty (Compactification.ProperExtension u V c) packages the V-admissible blow-up, open V^gr, proper ψ, identity over V, exact inverse image, and restriction isomorphism required by the node. The ProperExtension structure uses AlgebraicGeometry.IsAdmissible for the admissible blow-up notion recorded by sk-def-nagata-admissible."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a16ce1cc",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Existing attachment AlgebraicGeometry.Compactification.nonempty_properExtension (WeilConjectures.Compactification.GraphExtension, the blueprint's own lean target, Stacks 0F3Z). Only the node's lean field changed. Hypotheses match: qcqs S, separated finite-type u, compact V; the Compactification needs no density, so it is weaker and more general. ProperExtension gives the V-admissible blow-up via the landed IsAdmissible, open Vgr containing V over c.i, proper ψ, ψ⁻¹V = range v, v≫ψ = V.ι, plus a harmless iso-over-V and lying over S. Edge cases V=⊥/⊤ and empty schemes are covered; the single universe u is the source convention. lean.statement is verbatim at source lines 85-89. nt_compile --json check file: clean in 3.8 s, #check/#print as recorded, axioms propext/choice/Quot.sound only. Report has Worker report and Second reading by Q120. No findings."
  }
 }

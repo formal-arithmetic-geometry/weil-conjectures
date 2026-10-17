@@ -151,5 +151,33 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-6d4629f5c (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Corrected Step 2’s duplicate tensor symmetry, replaced nonexistent proof-source locations, and added Step 4 naturality citations. Statement unchanged; edge cases, coefficient domains, route, duplicate candidates, and dependency cycles checked. Whole corrected JSON and review.md written under the review directory.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TensorTraceTranspose",
+  "declaration": "AlgebraicGeometry.ProEtale.tensorTraceTranspose",
+  "declarations": [
+   "AlgebraicGeometry.Etale.tensorTraceSymmetry",
+   "AlgebraicGeometry.Etale.tensorTraceProjection",
+   "AlgebraicGeometry.Etale.tensorTraceTheta",
+   "AlgebraicGeometry.Etale.tensorTraceIntegrated",
+   "AlgebraicGeometry.ProEtale.tensorTraceRealization",
+   "AlgebraicGeometry.ProEtale.tensorTraceProjectionDomain",
+   "AlgebraicGeometry.ProEtale.tensorTraceTranspose"
+  ],
+  "file": "lean/Sheaf/Paper/TensorTraceTranspose.lean",
+  "statement": "theorem tensorTraceTranspose (P : WeilConjectures.PurityFiniteSetting.{u}) {V S : Scheme.{u}} [V.Over (Spec (.of P.field.k))] [S.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (V ↘ Spec (.of P.field.k))] [QuasiCompact (V ↘ Spec (.of P.field.k))] [IsSeparated (V ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))] [QuasiCompact (S ↘ Spec (.of P.field.k))] [IsSeparated (S ↘ Spec (.of P.field.k))] (f : V ⟶ S) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (L : Scheme.proEtaleDerivedCategory V P.Ring) (K : Scheme.proEtaleDerivedCategory S P.Ring) (_hL : Scheme.intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos V L) (_hK : WeilConjectures.finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos S K) (L₀ : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (K₀ : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (_eL : (tensorTraceRealization P V).functor.obj ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) V).mapDerivedCategory.obj L₀) ≅ L) (_eK : (tensorTraceRealization P S).functor.obj ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) S).mapDerivedCategory.obj K₀) ≅ K) (_hPF : tensorTraceProjectionDomain P f c L K) : letI := c.hasCompactification ∀ (t : (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) f).obj L₀ ⟶ 𝟙_ _), ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) V).mapDerivedCategory ⋙ (tensorTraceRealization P V).functor).map (((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) V).obj ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.obj K₀)).map ((Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} P.Coefficient) f).homEquiv L₀ (𝟙_ _) t) ≫ Etale.tensorTraceTheta P.Coefficient f K₀) = ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) V).mapDerivedCategory ⋙ (tensorTraceRealization P V).functor).map (Etale.tensorTraceIntegrated P.Coefficient f L₀ K₀ t) ∧ ∀ (K₁ : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (_hK₁ : WeilConjectures.finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos S ((tensorTraceRealization P S).functor.obj ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) S).mapDerivedCategory.obj K₁))) (_hPF₁ : tensorTraceProjectionDomain P f c L ((tensorTraceRealization P S).functor.obj ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) S).mapDerivedCategory.obj K₁))) (a : K₀ ⟶ K₁), ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) V).mapDerivedCategory ⋙ (tensorTraceRealization P V).functor).map (Etale.tensorTraceIntegrated P.Coefficient f L₀ K₀ t ≫ (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} P.Coefficient) f).map a) = ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) V).mapDerivedCategory ⋙ (tensorTraceRealization P V).functor).map (((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) V).map ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.map a)).app L₀ ≫ Etale.tensorTraceIntegrated P.Coefficient f L₀ K₁ t)",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical comparison coordinates of the recorded cohomological-smoothness interface, retaining arbitrary intrinsic pro-etale L and K, their bounded constructible and finite-Tor predicates, and representative isomorphisms. Both projection-invertibility assumptions and naturality on that domain are explicit. Canonical Koszul symmetries, the existing exceptional tensor mate, and the actual exceptional Hom bijection define all maps; no ambient exceptional adjunction or arbitrary endpoint map is assumed. Smaller defining constituent imports avoid the published legacy/finite duplicate declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b4073cb4",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: k-scheme setting, D^b_c L, D^b_ctf K, exactly the two invertibility conditions on the pro-etale projectionMap at (L,K) and (omega_f,K), P as the real homEquiv transpose of t, Pi with both symmetries then 1 tensor t then the unitor, theta = symmetry then dualizingComplexTensorMap (checked equal to the node's transpose of (1 tensor counit) after Pi then the unit constraint), first conjunct (1 tensor P) then theta = adj((1 tensor t) after Pi), second conjunct naturality in K. Uses the canonical comparison coordinates of the landed def-pur-co-smoothness interface; no stronger assumptions, arbitrary maps, Nonempty choices or ambient adjunction. Helpers carry real data with source/blueprint docstrings; the only proof is one sorry; no name collisions; only the lean field changed and lean.statement is verbatim; report sections present. nt_compile --json on the snapshot module: 16.3 s, exit 0, no errors or warnings. Non-blocking: node source.place 'Expanded Step 5' does not exist in the cited file, already recorded in proof_origin."
  }
 }

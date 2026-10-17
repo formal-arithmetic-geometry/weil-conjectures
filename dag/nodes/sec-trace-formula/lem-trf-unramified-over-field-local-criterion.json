@@ -182,5 +182,23 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-75dcba72c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the cited node statements, Stacks morphisms.tex 7785-7940 (02G7, 02GE, 02GF) and Mathlib Morphisms/FormallyUnramified.lean. The statement is unchanged and true: it is 02G7(1) plus 02GF (1)<=>(6) at s=Spec k. I tested it on the empty scheme, Spec L, k[eps], a purely inseparable extension and A^1. Step 1: the existing fibre-decomposition node (same unit, no cycle) gives the disjoint union; closedness and stalk=L_i follow in a few lines. Step 2: the tower k=k⊆L is allowed by the differential base-change node, so Omega_{L/k}=0, and 00UO holds for arbitrary ring maps; transport goes along the canonical k-isomorphism. Step 3: lem-sbc-formally-unramified-stalk-neighbourhood, used for its statement only; it is true (02GF (3)=>(1) plus 02HE), and the off-unit tool_use is declared and accepted. Step 4: correct elementary gluing on affine opens W, with T∩W⊂W again an affine square-zero thickening. Step 5: locally finite type plus formally unramified gives an open diagonal by 02HE/02GE. proof_deps equals the union of uses. There is no cycle, and the only citer (nodal-lci steps 2 and 3) matches the statement. No new nodes, no duplicate, no Mathlib match; no SGA is cited. Remark, not changed: the source place says 02G7 parts (1),(2), but the local form is 02GF(6); proof_origin names 02GF. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedOverFieldLocalCriterion",
+  "declaration": "AlgebraicGeometry.unramified_over_field_iff_local_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedOverFieldLocalCriterion.lean",
+  "statement": "theorem unramified_over_field_iff_local_criterion {k : Type u} [Field k] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f] : (LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f)) ↔ ∀ y : Y, y ∈ closedPoints Y ∧ Function.Bijective (Y.residue y) ∧ (f.residueFieldAlgebraMap y).Finite ∧ @Algebra.IsSeparable k (Y.residueField y) _ _ (f.residueFieldAlgebraMap y).toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbe280608",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Theorem matches the node clause by clause: [LocallyOfFiniteType f]; unramified in the dependency's inline form LocallyOfFiniteType ∧ IsOpenImmersion (pullback.diagonal f); ∀ y closed, canonical Y.residue y bijective, residueFieldAlgebraMap (canonical k→κ(f y)→κ(y)) finite and Algebra.IsSeparable; empty Y allowed; shared universe forced by Spec (.of k). True by Stacks 02G7(1) and 02GF(6). Edge cases checked: empty, Spec L, k[ε], purely inseparable, A^1. One sorry theorem, no definitions; docstrings carry source, blueprint tag and the 5 proof steps; lean.statement verbatim; commit touches 3 files, node changed only in lean; no duplicate. nt_compile clean (exit 0, about 4 s; warn.sorry=false in lakefile; a mutated copy fails, so the tool reports errors). Minor remark only: node source cites 02G7(1),(2) though the pointwise form is 02GF(6)."
  }
 }

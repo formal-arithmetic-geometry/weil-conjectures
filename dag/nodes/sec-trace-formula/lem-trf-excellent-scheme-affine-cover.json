@@ -180,5 +180,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-a07c839e6 (reviewer sub-agent of L); spot-checked: Read the whole delivery and every source. The item's statement is unchanged and matches Stacks 0HAB (morphisms.tex lemma-locally-excellent), the (3)=>(2) direction plus its 'Moreover' clause. The six steps follow the source's own proof, which uses exactly three lemmas, and each of the three new statement-only nodes states one of them with the source's hypotheses kept. lem-trf-g-ring-affine-cover is 0HA5 (properties.tex lemma-locally-G-scheme), (3)=>(2), for any scheme; that is correct because Stacks derives local Noetherianity itself. lem-trf-j2-affine-cover is 07R4 (morphisms.tex lemma-J), (4)=>(3), with X locally Noetherian; the source's S/X typo is noted in its source place. lem-trf-universally-catenary-affine-cover is 02J9 (morphisms.tex lemma-universally-catenary-local), (4)=>(3), with X locally Noetherian. Step 1 gets local Noetherianity directly from the definitions def-exc-excellent-ring and pqf-def-locnoeth. Step 2 takes Noetherianity of B from the G-ring definition (def-weil-pbc-g-ring includes it). That matters because def-exc-excellent-ring defines universal catenarity only for Noetherian rings, so step 4 uses the predicate only where it is defined. Step 6 uses the existing Mathlib leaf lem-weil-pbc-affine-opens-basis and does not assume that intersections of affine opens are affine or that the cover is finite. Edge cases checked: empty X, empty cover and empty V give the zero ring, which satisfies all four ring conditions. None of the new nodes is a clause of the item (none mentions excellence), and none depends on the item, so there is no cycle. Duplicate search over the whole snapshot DAG (the tags, the TeX labels, and every node mentioning G-ring, J-2 or universal catenarity) found no other node stating locality on an affine cover. The logged Mathlib searches are real and found no match. The only off-unit citations are definitions and a Mathlib leaf, so no tool_uses are needed. No SGA source and no coefficient-category question is involved. No fixes were written; review.md has the full checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentSchemeAffineCover.lean",
+  "declaration": "AlgebraicGeometry.isExcellent_of_affine_open_cover",
+  "statement": "theorem isExcellent_of_affine_open_cover {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (hcover : TopologicalSpace.IsOpenCover U) (haff : ∀ i : I, IsAffineOpen (U i)) (hexc : ∀ i : I, IsExcellent Γ(X, U i)) : (∀ V : X.Opens, IsAffineOpen V → IsExcellent Γ(X, V)) ∧ (∀ W : X.Opens, ∀ V : (W.toScheme).affineOpens, IsExcellent Γ(W.toScheme, V))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2643eb17",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement isExcellent_of_affine_open_cover matches lem-trf-excellent-scheme-affine-cover and Stacks 0HAB (3)=>(2) plus Moreover: Scheme.{u}, arbitrary Type v index, Mathlib IsOpenCover, IsAffineOpen and IsExcellent (Q21 def-exc-excellent-ring) charts; no extra hypotheses or universe restriction. Second conjunct (all affine opens of each open W excellent) is equivalent to the node's 'covered by affine opens with excellent rings' (affine opens always cover) and faithful to the source; does not duplicate Orgogozo.IsExcellentScheme. Node changes only the lean field; lean.statement verbatim in file. Edge cases (empty I/X, V=⊥, W=⊥/⊤) fine. sorry only, no definitions, source/blueprint docstrings with steps 1-6, both report sections present. nt_compile.py on local side overlay: clean, 4.9 s; error reporting confirmed with a deliberately broken copy. No fixes."
  }
 }

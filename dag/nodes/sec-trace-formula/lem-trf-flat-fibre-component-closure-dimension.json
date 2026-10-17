@@ -131,5 +131,23 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-1f0601e2f (reviewer sub-agent of L); spot-checked: The mathematics is correct and the item statement is unchanged against the base (I checked it is byte-identical). lem-trf-flat-associated-equidimensional matches Stacks 0GSJ (more-morphisms lemma-flat-associated-equidimensional) hypothesis by hypothesis, read together with 0GSI and relative dimension as defined in 02NJ. lem-trf-fibre-component-relative-associated is true by Divisors 05AH (generic points of components are associated, on a locally Noetherian scheme) together with 01T6. Step 1 is exactly the statement of the second node. In step 2, flatness of f gives the 0GSJ flatness hypothesis for F=O_X. In step 3, Y_t has underlying set equal to the closure of y in X_t, which is B, so dim B = d; Y_s has the same underlying space as Z_s; and Z_s is empty for s outside T. This step is elementary. Small cases tested: xy=t (generic and special t), A^1xA^1->A^1, and the finite flat k[t,x]/(x^2-t). Neither new node is a duplicate of an existing node, a blueprint node, or a restated clause of the item. No off-unit statements are used and no tool_uses are needed. I fixed four faults in fixes/: (1) B4: step 2 of the item contained two literal TAB characters, because `Y\\to T` had been decoded as a JSON tab; (2) B5: the relative-assassin tag 02OZ (actually the regular meromorphic section lemma) is corrected to 05AT, with 05AH added, in the item's step 1 source, its proof_origin and the source of the new node; (3) B3: lem-trf-flat-associated-equidimensional used associated points of a module's fibre, flatness at a point, integral subscheme, fibre and dimension with no definitions, so its statement is made self-contained with citations (mathematics unchanged, stmt_deps expanded), and lem-trf-fibre-component-relative-associated now cites def-sc-associated-points; (4) B9: from.via of both new nodes is completed to the item plus the item's via chain. Separate note, outside this delivery: the existing node def-sc-associated-points also cites 02OZ where the correct tag is 02OJ.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FlatFibreComponentClosureDimension",
+  "declaration": "AlgebraicGeometry.flat_fibre_component_closure_dimension",
+  "file": "lean/Sheaf/TraceFormula/FlatFibreComponentClosureDimension.lean",
+  "statement": "theorem flat_fibre_component_closure_dimension {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFiniteType f] (t s : S) (B : Set (f.fiber t)) (hB : B ∈ irreducibleComponents (f.fiber t)) (y : f.fiber t) (hy : IsGenericPoint y B) : ∀ (D : Set (Set.inter (closure ({f.fiberι t y} : Set X)) ((f.base : X → S) ⁻¹' ({s} : Set S)))), D ∈ irreducibleComponents (Set.inter (closure ({f.fiberι t y} : Set X)) ((f.base : X → S) ⁻¹' ({s} : Set S))) → topologicalKrullDim D = topologicalKrullDim B",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6994ad8f",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Delivery changes only the node's lean record (statement, proof and sources unchanged; no §1(C) correction) and adds the module and a report with real Worker report and Second reading by Q05 sections. Every clause matches: [Flat f], [LocallyOfFiniteType f], B ∈ irreducibleComponents (f.fiber t), IsGenericPoint y B, Z_s = closure{f.fiberι t y} ∩ f.base⁻¹'{s} as a subspace (Set.inter = ∩ by rfl), and ∀ D ∈ irreducibleComponents Z_s, topologicalKrullDim D = topologicalKrullDim B. No extra hypotheses; a single universe u, which a morphism requires. True by Stacks 0GSJ(2) with F=O_X and 05AH/05AT, using the fibreι embedding with range f⁻¹(t), both checked in Lean. Empty fibres and empty Z_s are vacuous, as in the node. Gates OK: no definitions, one sorry, source and blueprint docstrings, proof steps in the docstring, lean.statement verbatim in the file. nt_compile.py on the snapshot file: clean in 3.4 s; a /tmp check copy also compiled. No fixes needed; Set.inter vs ∩ is cosmetic only."
  }
 }

@@ -213,5 +213,29 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-b243aa58c (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the whole item (no new nodes), every cited statement, Stacks sites-cohomology 08J9 (lemma-internal-hom), 07A6 (lemma-adjoint) and 08FJ, and the blueprint lem-weil-stratum-ambient-hom (master and main-20261015 copies agree). The item follows that blueprint's Hom chain and finishes with Yoneda. The statement is correct. Small cases checked: s=id gives theta=id and the formula reduces to ev(u tensor 1); S empty gives 0 on both sides; an open s and a closed s give the standard formulas. The coefficient category is the ordinary constant-A etale module category throughout. The arrow directions in steps 2 and 4 are right: tracing the inverse bijections gives exactly eps^! o Rs_!ev o Rs_!(u~ tensor 1) o pi_s, which is what the citers lem-sf-etale-generic-evaluation-coherence and lem-sf-etale-generic-exchange-algclosed use. Fault E1/C1 in step 1: it got s^* -| Rs_* and the derived j_! -| j^* from lem-sc-derived-adjunction-from-underived, which is Mathlib Adjunction.derived and needs absolute derived functors; no cited node shows Rs_* is absolute (lem-weil-pbc-kinjective-total-derived only gives the Kan-extension property). I repaired this in fixes/dag/nodes/sec-six-functors/lem-sf-etale-generic-stratum-mate.json. Step 1 now proves both adjunctions through K-injective resolutions, citing prop-weil-pbc-kinjective-resolutions-exist, lem-weil-pbc-right-adjoint-preserves-kinjective, lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-kinjective-hom-derived and lem-weil-pbc-termwise-adjunction-homotopy(b), all on the unit's route, with source Stacks 07A6+08FJ. lem-sc-derived-adjunction-from-underived is removed from steps 1, 3 and 4 and from proof_deps, and a sentence is appended to split_report.summary; the statement is unchanged. Every proof dep is on the route of sk-prop-sf-biduality-general. The declared tool_use prop-weil-pbc-inverse-image-modules-exact (sk-def-exchange) is actually on route; accepted as harmless. Duplicate check: lem-weil-stratum-ambient-hom gives only an unspecified isomorphism, so the item strengthens it rather than restating it. No SGA is cited. Minor point left alone: the statement does not cite a definition node for Rs_*, same wording as the accepted sibling projection node; the fixed step 1 now spells out the K-injective construction.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGenericStratumMate",
+  "declaration": "AlgebraicGeometry.Etale.immersionInternalHomIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.immersionUpperShriek",
+   "AlgebraicGeometry.Etale.immersionLowerUpperShriekAdjunction",
+   "AlgebraicGeometry.Etale.immersionHomEvaluation",
+   "AlgebraicGeometry.Etale.immersionInternalHomIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericStratumMate.lean",
+  "statement": "theorem immersionInternalHomIso (A : Type (u + 1)) [CommRing A] [Finite A] {S U X : Scheme.{u}} (i : S ⟶ U) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] : ∃ θ : (immersionLowerShriek A i j).op.prod (𝟭 (DerivedCategoryModule A X)) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) X) ≅ (𝟭 (DerivedCategoryModule A S)ᵒᵖ).prod (immersionUpperShriek A i j) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) S) ⋙ R((i ≫ j)_*[ModuleCat.{u + 1} A]), ∀ (P : DerivedCategoryModule A S) (M C : DerivedCategoryModule A X) (f : C ⟶ (R((i ≫ j)_*[ModuleCat.{u + 1} A])).obj (((derivedHom (ModuleCat.{u + 1} A) S).obj (op P)).obj ((immersionUpperShriek A i j).obj M))), derivedTensorHom (ModuleCat.{u + 1} A) (f ≫ θ.inv.app (op P, M)) (𝟙 ((immersionLowerShriek A i j).obj P)) ≫ immersionHomEvaluation A X ((immersionLowerShriek A i j).obj P) M = immersionProjectionMap A i j C P ≫ (immersionLowerShriek A i j).map (derivedTensorHom (ModuleCat.{u + 1} A) (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (i ≫ j)).homEquiv C (((derivedHom (ModuleCat.{u + 1} A) S).obj (op P)).obj ((immersionUpperShriek A i j).obj M))).symm f) (𝟙 P)) ≫ (immersionLowerShriek A i j).map (immersionHomEvaluation A S P ((immersionUpperShriek A i j).obj M)) ≫ (immersionLowerUpperShriekAdjunction A i j).counit.app M",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac4a19934",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read node, all 9 stmt deps, Stacks 08J9/07A6/08FJ, the delivered EtaleGenericStratumMate.lean and the exact declarations it uses (immersionLowerShriek, immersionProjectionMap, derivedHom/derivedTensorHomAdjunction, derivedTensorSymmetry, derivedUpperStarLowerStarAdjunction, closed-ambient IsLeftAdjoint). The statement matches clause by clause: A finite CommRing in Type (u+1), closed-then-open factorization, Rs^! = D(j^*) then rightAdjoint R(i_*), counit of Adjunction.comp, natural iso of functors D(S)^op x D(X) -> D(X), and the tensor-adjoint formula with all arrows correctly oriented; the property determines theta uniquely. Helpers are real, not hollow; the internal Hom is upstream derivedHom, as in landed EtaleTwistedBidualTransport, with no duplicate. Edge cases (id, purely open/closed, S empty, A=0, unbounded) are covered; no extra assumptions or unbound universes; docstrings and proof plan present; sorry only; no pro-etale. lean.statement is verbatim. nt_compile --json clean (6.0 s, 4.8 s, rc 0). Cosmetic: the report's 'preflight recorded below' sentence has nothing after it."
  }
 }

@@ -132,5 +132,30 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap",
+  "declaration": "HomologicalComplex₂.mapTotalIso",
+  "declarations": [
+   "HomologicalComplex₂.mapTotalXIso",
+   "HomologicalComplex₂.ι_mapTotalXIso_hom",
+   "HomologicalComplex₂.mapTotalIso",
+   "HomologicalComplex₂.mapTotalIso_hom_naturality",
+   "HomologicalComplex₂.mapTotalIso_inv_naturality"
+  ],
+  "statement": "def mapTotalIso : ((F.mapHomologicalComplex₂ c₁ c₂).obj K).total c ≅\n    (F.mapHomologicalComplex c).obj (K.total c)",
+  "branch": "slopmaster2",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing source declarations jointly give every clause. Specialize c₁, c₂ and c to ComplexShape.up ℤ, K to B and L to B′. mapTotalXIso is asIso of sigmaComparison; ι_mapTotalXIso_hom characterizes its hom on diagonal injections. mapTotalIso assembles exactly these components, and mapTotalIso_hom_naturality and mapTotalIso_inv_naturality give the two stated naturality identities. HasTotal and Functor.PreservesTotalComplex express exactly diagonal existence and preservation; existence for FB is supplied by hasTotalOfPreserves. No new module or definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd1e17f5e",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Existing-declaration delivery; only the node's lean field changed. HomologicalComplex₂.mapTotalIso, mapTotalXIso, ι_mapTotalXIso_hom, mapTotalIso_hom_naturality and mapTotalIso_inv_naturality (FromJoel TotalComplexMap.lean, the node's source place, identical to the live copy) match every clause: Preadditive/Functor.Additive deps, HomologicalComplex₂ over up ℤ (commuting squares), total with π=p+q, ε₁=1, ε₂=p.negOnePow (checked by rfl/simp), HasTotal and PreservesTotalComplex exactly the diagonal hypotheses, FB existence derived by instance, canonical sigmaComparison components with injection lemma, both naturality identities; universes independent, no boundedness. check_existing gives no fails or notes for all 5 names (statement verbatim, branch slopmaster2). nt_compile.py refuses files outside the side tree, so the probe was compiled with lcompile.py against the live build at the integer specialization: exit 0, axioms propext/choice/Quot.sound only. Report has a substantive Worker report and a non-empty Second reading section (post-2026-10-17 convention, accepted by the report check). No findings needing repair."
  }
 }

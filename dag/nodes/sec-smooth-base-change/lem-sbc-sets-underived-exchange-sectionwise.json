@@ -14,7 +14,8 @@
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "def-pc-fibre-product",
   "def-weil-pbc-sheafification",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "sbc-def-base-change-map"
  ],
  "proof": [
   {
@@ -165,5 +166,32 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-bff78ead5 (reviewer sub-agent of L); spot-checked: Read the item, all five steps, every cited statement, Stacks 0EZR, the paragraph before it, and the sk-def-bc unit/chapter route. Coefficient category is sheaves of sets, and the exchange is the same mate g'^{-1}eps_f∘theta as def-weil-pbc-underived-exchange and the parent's beta_F. I recomputed the formula myself from units/counits: (0), (1) and the triangle identity give l_a^*(g'^*t). I tested it on the identity square, f=id, V empty and the terminal sheaf. Steps 2, 3 and 5 are correct. The route is clean: only definitions, mathlib-status nodes and the Lean-closed composition-units node are cited, so no tool_uses are needed. No duplicate: the only near match, lem-weil-pbc-underived-exchange-sectionwise, is abelian. Two citation faults are repaired in fixes/dag/nodes/sec-smooth-base-change/lem-sbc-sets-underived-exchange-sectionwise.json. (B2/C4) The set-valued theta_square was never defined, because def-weil-pbc-cartesian-square gives only the abelian theta; it is now written as c_{f,g',G}^{-1}∘c_{g,f',G}, using gf'=fg'. (C4) Step 4 used, without a cited statement, that the unit g^*s is the sheafified class of (W,id,s); it now cites lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction (2) and lem-weil-pbc-presheaf-pullback-sets-left-exact (1), whose unit is the coprojection at (X,id), and proof_deps is updated. Step 5's closing injectivity argument is also spelled out. No hypothesis or conclusion changed and no nodes are dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SetUnderivedExchangeSectionwise",
+  "declaration": "AlgebraicGeometry.setUnderivedExchangeSectionwise",
+  "declarations": [
+   "AlgebraicGeometry.ChosenCartesianSquare.exchangeTranspose",
+   "AlgebraicGeometry.ChosenCartesianSquare.setExchangeComparison",
+   "AlgebraicGeometry.ChosenCartesianSquare.setExchangeRestrictionMap",
+   "AlgebraicGeometry.setExchangeRepresentative",
+   "AlgebraicGeometry.ChosenCartesianSquare.setExchangeRepresentativeImage",
+   "AlgebraicGeometry.setUnderivedExchangeSectionwise"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SetUnderivedExchangeSectionwise.lean",
+  "statement": "theorem setUnderivedExchangeSectionwise {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) : (∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))), Etale.setBaseChangeArrow sq.exchangeTranspose F = (Etale.setUpperLowerAdjunction f').homEquiv _ _ (sq.setExchangeComparison ((Etale.lowerStar (Type (u + 1)) f).obj F) ≫ (Scheme.etaleSetPullback g').map ((Etale.setUpperLowerAdjunction f).counit.app F))) ∧ (∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (V : Y'.Etale) (W : Y.Etale) (a : V ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj W) (s : F.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W))), (Etale.setBaseChangeArrow sq.exchangeTranspose F).hom.app (op V) (setExchangeRepresentative f g F V W a s) = sq.setExchangeRepresentativeImage F V W a s) ∧ (∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (V : Y'.Etale) (W₁ W₂ : Y.Etale) (a₁ : V ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj W₁) (a₂ : V ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj W₂) (s₁ : F.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W₁))) (s₂ : F.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W₂))), setExchangeRepresentative f g F V W₁ a₁ s₁ = setExchangeRepresentative f g F V W₂ a₂ s₂ → sq.setExchangeRepresentativeImage F V W₁ a₁ s₁ = sq.setExchangeRepresentativeImage F V W₂ a₂ s₂) ∧ (∀ (F F₁ : Sheaf X.smallEtaleTopology (Type (u + 1))) (ψ : F ⟶ F₁), (Scheme.etaleSetPullback g).map ((Etale.lowerStar (Type (u + 1)) f).map ψ) ≫ Etale.setBaseChangeArrow sq.exchangeTranspose F₁ = Etale.setBaseChangeArrow sq.exchangeTranspose F ≫ (Etale.lowerStar (Type (u + 1)) f').map ((Scheme.etaleSetPullback g').map ψ))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed setUpperLowerAdjunction and setBaseChangeArrow from sbc-def-base-change-map, transposing the chosen square. The main theorem specifies the original counit-transpose normalization and all sectionwise, representative-independence and naturality clauses. No new exchange arrow is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7074e8670",
+  "group": "ND",
+  "result": "pass",
+  "note": "Delivery changes only the new module, the report and the item node (lean record; stmt_deps gains the landed sbc-def-base-change-map, allowed, no cycle). Reuses Etale.setBaseChangeArrow on sq.exchangeTranspose, a real ChosenCartesianSquare f' g' g f, so there is one definition per notion. Conjunct 1 (equals the f'-homEquiv of theta then g'^{-1}eps_f) is true: theta = c_{g,f'} then eqToHom then c_{f,g'}^{-1}; c is Classical.choose of a clause with fixed-sheaf uniqueness, so it is determined, uses the same adjunction as setUpperLowerAdjunction, and is the conjugate of setPushComp, which is term-for-term lowerStarComp. Conjunct 2 recomputed: lowerStarComp components are pullbackComp restrictions and eps_g restricts along f'(a), giving exactly ell_a; the representative typechecks as the actual sheafified class. Conjuncts 3 (equality after sheafification) and 4 (naturality in F) match the node. No stronger hypotheses; Type (u+1) is the project convention forced by site size. Edge cases covered: identity square, f = id, empty objects, terminal sheaf, any characteristic and universe. Helpers are real data, only the theorem uses sorry, docstrings carry source and blueprint with all 5 proof steps, statement field verbatim, all declarations present. nt_compile.py --json: rc=0 in 4.6 s with no errors or warnings; an injected-error copy was reported, confirming the wrapper surfaces diagnostics. No findings."
  }
 }
