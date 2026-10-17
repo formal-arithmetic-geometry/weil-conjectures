@@ -3,27 +3,113 @@
  "blueprint": {
   "is": "sk-d-weil",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Frobenius and Weil data",
- "statement": "Let $X$ be a scheme over $s$. A *Weil complex* on $X$ consists of an\nendomorphism $\\Phi_1:X\\to X$ over $s$ (so it fixes the scalar field $k$), a\ncomplex $K\\in D(X,A)$, and a *Frobenius coefficient morphism*\n$\\varphi:\\Phi_1^*K\\to K$, an arbitrary map without an invertibility\nrequirement. Its Frobenius is *the model Frobenius* if\n$X=X_0\\times_{\\mathbf F_q}k$ is the base change of a scheme $X_0$ over\n$\\mathbf F_q$ and $\\Phi_1$ is the base change of the $q$-power scheme Frobenius\nof $X_0$. A *Weil datum* is a Weil complex with $X_0/\\mathbf F_q$ separated of\nfinite type, the model Frobenius, $K\\in D^b_{ctf}(X,A)$ and $\\varphi$ an\nisomorphism $\\Phi_1^*K\\simeq K$.\n\nPut $\\Phi_m=\\Phi_1^m$; for the model Frobenius it is the base change of the\n$q^m$-power scheme Frobenius of $X_0$.\nDefine the iterate $\\varphi_m:\\Phi_m^*K\\to K$\nby composing the pulled-back copies of $\\varphi$ using\npullback composition ($\\varphi_0$ is the identification $\\mathrm{id}^*K\\simeq K$).\nIts graph correspondence is\n$c_m=(\\operatorname{id}_X,\\Phi_m)$, with coefficient map $\\varphi_m$.\nWrite $F_{c,m}=T_{c_m}(\\varphi_m)$ for the\nglobal operator; Frobenius finiteness is checked below.\nFor a point $\\bar x:s\\to X$ over $s$ fixed by $\\Phi_m$ (for the model Frobenius,\nthe geometric point attached to some $x\\in X_0(\\mathbf F_{q^m})$), the stalk\nendomorphism is $F_{x,m}=(\\varphi_m)_{\\bar x}:\\bar x^*K\\simeq\\bar x^*\\Phi_m^*K\\to\\bar x^*K$.",
+ "statement": "Fix the finite coefficient data $q=p^r$, $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$ and $A=\\mathcal O_E/\\varpi^n$ of [sk-d-setup]. Use its categories $D(X,A)$ and $D^b_{ctf}(X,A)$ and the derived functors of [sk-d-six]. Let $a_X:X\\to s$ be a scheme over $s$ [def-weil-scheme-over-base]. A *Weil complex* on $X$ is the data\n$$\n (\\Phi_1,K,\\varphi),\\qquad\n \\Phi_1:X\\to X,\\quad a_X\\circ\\Phi_1=a_X,\\quad\n K\\in D(X,A),\\quad \\varphi:\\Phi_1^*K\\to K.\n$$\nThe *Frobenius coefficient morphism* $\\varphi$ is arbitrary, without an invertibility requirement.\n\nIts endomorphism is *the model Frobenius* relative to a specified $\\mathbf F_q$-scheme $X_0$ [def-weil-scheme-over-base] and an isomorphism of $s$-schemes $X\\simeq X_0\\times_{\\mathbf F_q}k$ [def-pc-base-change], the target being an $s$-scheme through its projection to $s$, if $\\Phi_1$ is the base change of the absolute $q$-power scheme Frobenius of $X_0$ [def-weil-absolute-frobenius-scheme]. Thus the Frobenius on the model raises local functions to the $q$-th power, and its base change fixes the scalar field $k$. A *Weil datum* is such a Weil complex with a specified separated finite-type model $X_0/\\mathbf F_q$ [def-weil-proper-morphism, def-weil-finite-type-morphism], the model Frobenius, $K\\in D^b_{ctf}(X,A)$ and $\\varphi$ an isomorphism.\n\nFor $m\\in\\mathbf Z_{\\geq0}$ put $\\Phi_m=\\Phi_1^m$, with $\\Phi_0=\\operatorname{id}_X$. For the model Frobenius this is the base change of the $q^m$-power scheme Frobenius of $X_0$ (the identity for $m=0$). Write\n$$\n c_{f,g}:(g\\circ f)^*\\xrightarrow{\\sim}f^*g^*\n$$\nfor the canonical composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. Using $\\Phi_{m+1}=\\Phi_m\\circ\\Phi_1$, define recursively\n$$\n \\varphi_0:(\\operatorname{id}_X)^*K\\xrightarrow{\\sim}K,\\qquad\n \\varphi_{m+1}=\\varphi\\circ\\Phi_1^*(\\varphi_m)\\circ c_{\\Phi_1,\\Phi_m}(K):\\Phi_{m+1}^*K\\to K,\n$$\nwhere $\\varphi_0$ is the canonical identity-pullback identification.\n\nFor the bounded geometric operations of [sk-d-six], assume that $a_X$ is geometric (separated of finite type over $k$) and $K\\in D^b_{ctf}(X,A)$. The graph correspondence $c_m=(\\operatorname{id}_X,\\Phi_m)$ of [sk-d-corr] attached to this iterate has support $X$, exceptional leg $c_1=\\operatorname{id}_X$, ordinary leg $c_2=\\Phi_m$, and coefficient map\n$$\n u_m:\\Phi_m^*K\\xrightarrow{\\varphi_m}K\\xrightarrow{\\sim}(\\operatorname{id}_X)^!K.\n$$\nThe last comparison is the canonical identity-exceptional-pullback identification from the identity compact-support functor and its right adjoint in [sk-d-six]. Whenever the resulting correspondence satisfies all the hypotheses of [sk-d-operator], including properness of $\\Phi_m$ [def-weil-proper-morphism] and the availability of the stated compact-support adjunctions and comparisons, define\n$$\n F_{c,m}=T_{c_m}(u_m):R\\Gamma_c(X,K)\\to R\\Gamma_c(X,K)\n$$\nby [sk-d-operator]. For the separated finite-type model Frobenius, applicability is checked by the later Frobenius-finiteness result.\n\nFor any $s$-point $\\bar x:s\\to X$ [def-weil-geometric-point] satisfying $\\Phi_m\\circ\\bar x=\\bar x$, define its stalk endomorphism by\n$$\n F_{x,m}:\\bar x^*K\\xrightarrow{\\sim}(\\Phi_m\\circ\\bar x)^*K\n \\xrightarrow{c_{\\bar x,\\Phi_m}(K)}\\bar x^*\\Phi_m^*K\n \\xrightarrow{\\bar x^*(\\varphi_m)}\\bar x^*K.\n$$\nThe first arrow is inverse pullback congruence for the specified equality $\\Phi_m\\circ\\bar x=\\bar x$. For the model Frobenius and $m\\geq1$, use the finite subfield $\\mathbf F_{q^m}\\subset k$ of [def-weil-finite-field-fiber] and write $X_0(\\mathbf F_{q^m})=\\operatorname{Hom}_{\\mathbf F_q}(\\operatorname{Spec}\\mathbf F_{q^m},X_0)$ [def-weil-scheme-over-base], also when $X_0$ is not of finite type. For $x$ in this set, let $j_m:s\\to\\operatorname{Spec}\\mathbf F_{q^m}$ be induced by the chosen subfield inclusion. The associated fixed $s$-point $\\bar x:s\\to X$ is the unique morphism with projections $x\\circ j_m:s\\to X_0$ and $\\operatorname{id}_s:s\\to s$ under $X\\simeq X_0\\times_{\\mathbf F_q}k$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/_section.md",
   "place": "node sk-d-weil, order 2638"
  },
  "stmt_deps": [
+  "sk-d-setup",
+  "sk-d-six",
   "sk-d-corr",
   "sk-d-operator",
-  "sk-d-setup",
-  "sk-d-six"
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-absolute-frobenius-scheme",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-proper-morphism",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-point"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilComplex|WeilDatum|stalkFrobenius",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilComplex, Frobenius",
+   "results": "No hits; loogle: unknown identifier 'WeilComplex'",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil complexes on schemes with a Frobenius coefficient morphism and its iterates and stalk Frobenius endomorphisms",
+   "results": "iterateFrobenius_mul_apply; PreTilt.coeff_iterate_frobenius'; PreTilt.coeff_iterate_frobenius; iterateFrobeniusEquiv_one; iterateFrobenius.congr_simp; iterateFrobenius_one; WittVector.iterate_frobenius_coeff; WittVector.coeff_frobenius_charP",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weil complex on a scheme over an algebraic closure of a finite field consists of an endomorphism over the base, a complex of pro-etale sheaves and a morphism from its derived Frobenius pullback to itself, with coefficient iterates, graph correspondence and global and stalk Frobenius operators.",
+   "results": "WittVector.Isocrystal; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.StandardOneDimIsocrystal; WittVector.IsocrystalHom; WittVector.IsocrystalEquiv; WittVector.isocrystal_classification; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.Isocrystal.toModule",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|WeilDatum|stalkFrobenius",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|frobenius",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.End",
+   "results": "CategoryTheory.Functor.FullyFaithful.mulEquivEnd; CategoryTheory.Functor.mapEnd; CategoryTheory.Functor.FullyFaithful.mulEquivEnd_apply_asHom; CategoryTheory.Functor.mapEnd_apply_asHom; CategoryTheory.Functor.FullyFaithful.mulEquivEnd_symm_apply_asHom; CategoryTheory.Functor.map_conj; ModuleCat.smulNatTrans; ModuleCat.smulNatTrans_apply_asHom_app (first 8 of 12 hits)",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object K of a category of derived sheaves together with a morphism F(K) to K for an endofunctor F, iterated using functorial pullback composition",
+   "results": "CategoryTheory.plusPlusSheaf; CategoryTheory.plusPlusSheaf_obj_val; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; PresheafOfModules.HasDifferentials; CategoryTheory.Functor.sheafPullback; CategoryTheory.Functor.IsCoverDense.Types.pushforwardFamily; CategoryTheory.GrothendieckTopology.plusFunctor; CategoryTheory.Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the complete scheme/pro-etale Weil data and its graph, global and stalk operators"
+  },
+  {
+   "tool": "grep",
+   "query": "Endofunctor.*(Algebra|Coalgebra)|Frobenius.*(Sheaf|Derived)|Weil.*(complex|datum)",
+   "results": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean; Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean; Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean (first 8 of 10 hits)",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: endofunctor algebras encode the pair for fixed pullback only; scheme stalks and module pullback do not define derived pro-etale Weil data, graph or compact-support operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf complex with a morphism from its pullback by a scheme endomorphism, and the induced map on a fixed geometric stalk",
+   "results": "AlgebraicGeometry.Scheme.Hom.stalkMap; AlgebraicGeometry.Scheme.instIsOverMapStalkMapOverInferInstanceOverClass; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.stalkMap_comp; AlgebraicGeometry.Scheme.Hom.germ_stalkMap; AlgebraicGeometry.Scheme.SpecMap_stalkMap_fromSpecStalk; AlgebraicGeometry.Scheme.Spec_map_stalkMap_fromSpecStalk; AlgebraicGeometry.Scheme.Hom.stalkMap_comp",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: endofunctor algebras encode the pair for fixed pullback only; scheme stalks and module pullback do not define derived pro-etale Weil data, graph or compact-support operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra",
+   "results": "CategoryTheory.Endofunctor.Algebra; CategoryTheory.Endofunctor.instInhabitedAlgebraId; CategoryTheory.Endofunctor.Algebra.a; CategoryTheory.Endofunctor.Algebra.instCategory; CategoryTheory.Endofunctor.Algebra.instCategoryStruct; CategoryTheory.Endofunctor.Algebra.Hom; CategoryTheory.Endofunctor.Algebra.Hom.id; CategoryTheory.Endofunctor.Algebra.forget (first 8 of 12 hits)",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: endofunctor algebras encode the pair for fixed pullback only; scheme stalks and module pullback do not define derived pro-etale Weil data, graph or compact-support operators"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -70,5 +156,20 @@
     "AlgebraicGeometry.ProEtale.WeilComplex"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-weil",
+  "worker": "stage1",
+  "summary": "Expanded the definition into explicit data and recursive composites using existing nodes. Kept arbitrary noninvertible coefficients on the unbounded category, and separated out the bounded geometric domain of the graph and the proper-ordinary-leg domain of the global operator. Restricted the rational-point convention to m >= 1. Restored all imported audit metadata; no new nodes or theorem proof steps. Made the rational-point Hom notation explicit for arbitrary models and specified the associated geometric point by its fibre-product projections. Rechecked the inherited attempt and reran its Mathlib searches before the no-push handoff. Independent second reading named the graph c_m, specified the successor power equality, and identified the initial stalk arrow as inverse pullback congruence.",
+  "blueprint": "main-20261015 sk-d-weil: first paragraph (arbitrary coefficient morphism, model Frobenius, Weil datum); second paragraph (iterates, graph, global operator with its proper-leg domain, and fixed-point stalk composite). This is a definition unit with no proof steps; no route was replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-759d77dca",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-759d77dca (reviewer sub-agent of L); spot-checked: Read the full current blueprint sk-d-weil (main-20261015, order 2638), the unit, the base and delivered item, and all 12 statement dependencies. Sources checked: Stacks 03SM at varieties.tex:7014 and 0D6D at sites-cohomology.tex:3658. Shape: one commit; the item and the unit's realized and realized_by fields are the only node and unit changes; no new nodes; proof=[], as a definition requires. Clause checks: (1) the Weil-complex data are kept, and the coefficient map need not be invertible. (2) The Weil datum matches the blueprint exactly. (3) The phi_m recursion type-checks. It uses c_{Phi_1,Phi_m} from lem-weil-pbc-proetale-derived-pullback-composition with Phi_{m+1}=Phi_m∘Phi_1. It is the same recursion as the same-unit node def-trf-frobenius-coefficient-morphism. (4) The graph has exceptional leg id and ordinary leg Phi_m, and u_m: Phi_m^*K -> id^!K points the right way for sk-d-corr. It is restricted to geometric X and ctf K, the domain where sk-d-six states the identity comparison. (5) The global operator is defined only when Phi_m is proper, as sk-d-operator requires. The source-error claim holds: the constant map A^1 -> A^1 is not universally closed, because the hyperbola ut=1 projects onto D(t). (6) The stalk composite type-checks. (7) The rational-point fixed s-point is correct for m>=1, by naturality of absolute Frobenius and a^{q^m}=a on F_{q^m}. Small cases tested: m=0, m=1, K=0, phi=0, X empty, X=s with X_0=Spec F_q. Duplicate candidates read: def-trf-frobenius-coefficient-morphism, def-trf-iterated-weil-map, def-trf-strict-weil-complex, def-trf-scheme-frobenius. None states the general item. No tool_uses, no SGA. One repairable fault, now fixed in fixes/dag/nodes/sec-trace-formula/sk-d-weil.json (statement only): the model identification X ≃ X_0×_{F_q}k was not required to be over s. Counterexample: X=s, X_0=Spec F_q, with identification Spec(sigma). Then the 'associated fixed s-point' would be Spec(sigma^{-1}), which is not an s-point. The fix now requires an isomorphism of s-schemes, which is what the blueprint and nt-assume-trace-formula mean. No target is weakened.; 1 file(s) fixed by the reviewer"
  }
 }
