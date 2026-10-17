@@ -1,0 +1,267 @@
+{
+ "id": "lem-coef-infinity-hom-bifunctor-functoriality",
+ "kind": "statement",
+ "title": "Coherent Hom bifunctors and their functorial comparison",
+ "statement": "Use quasicategories, spaces, coherent functors and transformations, and right-pinched mapping spaces as in [def-cbc-enhanced-diagrams-cones], the space category $\\mathcal S_{\\mathcal U}$ of [def-coef-infinity-category-of-spaces], and canonical composition classes of [lem-coef-infinity-mapping-composition]. Fix universes $\\mathcal U\\in\\mathcal U'$ and let $\\mathcal C,\\mathcal D$ be $\\mathcal U'$-small quasicategories with $\\mathcal U$-small mapping spaces. There are coherent Hom bifunctors\n$$H_{\\mathcal E}:\\mathcal E^{\\mathrm{op}}\\times\\mathcal E\\longrightarrow\\mathcal S_{\\mathcal U}\\qquad(\\mathcal E=\\mathcal C,\\mathcal D),$$\nwhose values identify with $\\operatorname{Map}_{\\mathcal E}(a,b)$ as spaces. Their action in the first variable is precomposition and their action in the second is postcomposition, with the canonical unit and composition homotopies. For any coherent functor $T:\\mathcal C\\to\\mathcal D$, the induced maps of right-pinched mapping spaces assemble, under these identifications, to a coherent natural transformation\n$$T_*:H_{\\mathcal C}\\longrightarrow H_{\\mathcal D}\\circ(T^{\\mathrm{op}}\\times T).$$\nAt $(a,b)$ its homotopy class is the simplicial map obtained by applying $T$ to every simplex $\\Delta^{n+1}\\to\\mathcal C$ in the right-pinched mapping space. Naturality is in the infinity category $\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}}\\times\\mathcal C,\\mathcal S_{\\mathcal U})$, retaining higher simplices; it is not merely naturality on component sets. These induced maps preserve the canonical composition and identity classes.",
+ "source": {
+  "document": "https://kerodon.net/tag/046J",
+  "place": "Kerodon Proposition 8.3.3.2 (03N2), existence of Hom-functors; Corollary 8.3.5.8 (046J) and Remark 8.3.5.9 (03PD), coherent functoriality and agreement with maps on morphism spaces. Read online 2026-10-17. These are Kerodon identifiers, not Stacks tags; no Stacks analogue for arbitrary quasicategories. Archival copies WANTED."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof": [
+  {
+   "text": "Work first with spaces in $\\mathcal U'$ and form $B_{\\mathcal E}=\\mathcal E^{\\mathrm{op}}\\times\\mathcal E$. Opposites are quasicategories by clause (4) of [lem-coef-infinity-relative-cone-equivalence]; a product fills each inner horn coordinatewise. Apply the existing [lem-coef-twisted-arrow-graph-cofinality] with $\\mathcal A=\\mathcal B=\\mathcal E$ and $f=1_{\\mathcal E}$. Its $W_f$ is canonically $\\operatorname{Tw}(\\mathcal E)$, and its classification clause supplies a coherent functor $\\widetilde H_{\\mathcal E}:B_{\\mathcal E}\\to\\mathcal S_{\\mathcal U'}$ with value the right-pinched mapping space, up to its specified space identification. This uses only the mapping-space classifier clause of that existing stronger statement, not its finality clause. The construction of $\\operatorname{Tw}$ and its left-fibration projection is that of [lem-coef-twisted-arrow-left-fibration]. The space category is exactly the coherent nerve in [def-coef-infinity-category-of-spaces], and is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory]. All these constructions fit in a further ambient universe; no assertion that $B_{\\mathcal E}$ is $\\mathcal U$-small has been used.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-twisted-arrow-graph-cofinality",
+    "lem-coef-twisted-arrow-left-fibration",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent derived coefficient adjunction: Hom-functor foundation. Agent specialization of Cisinski, Section 5.6, mapping-space classifier and naturality; compare Kerodon 03N2."
+   }
+  },
+  {
+   "text": "Put $F=T^{\\mathrm{op}}\\times T:B_{\\mathcal C}\\to B_{\\mathcal D}$. In degree $n$, postcomposition with $T$ sends $\\sigma:N([n]^{\\mathrm{op}}\\star[n])\\to\\mathcal C$ to $T\\sigma$. Associativity of composition gives $(T\\sigma)N(\\theta^{\\mathrm{op}}\\star\\theta)=T(\\sigma N(\\theta^{\\mathrm{op}}\\star\\theta))$, so this is a simplicial map, not just a function on arrows. The commuting block restrictions define a map of left fibrations over $B_{\\mathcal C}$,\n$$u:\\operatorname{Tw}(\\mathcal C)\\longrightarrow B_{\\mathcal C}\\times_{B_{\\mathcal D}}\\operatorname{Tw}(\\mathcal D).$$\nApply [lem-coef-space-valued-straightening] in universe $\\mathcal U'$. A map over the base is an edge in the coherent nerve of its simplicial category of left fibrations, hence its image is an actual coherent transformation $\\widetilde\\gamma:\\widetilde H_{\\mathcal C}\\to\\widetilde H_{\\mathcal D}F$. Pullback naturality identifies the target with the displayed composite. Concretely, $\\operatorname{St}_{B_{\\mathcal C}}(u)$ is an edge from $\\operatorname{St}(\\operatorname{Tw}(\\mathcal C))$ to $\\operatorname{St}(F^*\\operatorname{Tw}(\\mathcal D))$. Classification gives an equivalence edge $\\operatorname{St}(\\operatorname{Tw}(\\mathcal C))\\simeq\\widetilde H_{\\mathcal C}$, and pullback naturality together with classification for $\\mathcal D$ gives an equivalence edge $\\operatorname{St}(F^*\\operatorname{Tw}(\\mathcal D))\\simeq\\widetilde H_{\\mathcal D}F$, both in $\\operatorname{Fun}(B_{\\mathcal C},\\mathcal S_{\\mathcal U'})$. That simplicial set is a quasicategory by [lem-cbc-internal-hom-quasicategory] and [lem-coef-kan-coherent-nerve-quasicategory]. Choose an inverse of the first equivalence with its inverse-triangle witnesses, and fill two inner $2$-horns. This gives an edge $\\widetilde\\gamma$ whose source is exactly $\\widetilde H_{\\mathcal C}$ and whose target is exactly $\\widetilde H_{\\mathcal D}F$. At each vertex, its component class is the fiber map of $u$ conjugated by these chosen value equivalences. The natural classification clause of [lem-coef-twisted-arrow-graph-cofinality], applied to the commutative square from $1_{\\mathcal C}$ to $1_{\\mathcal D}$ with both vertical arrows $T$, identifies the fiber map of $u$ with the usual map of mapping spaces. In the convention of [def-cbc-enhanced-diagrams-cones] this usual map sends each $\\Delta^{n+1}\\xrightarrow{q}\\mathcal C$ to $Tq$; it preserves its constant initial face and final vertex and commutes with every extended simplex operator. Thus the component class of $\\widetilde\\gamma$ is this simplicial map under the classifier identifications. No equivalence or cofinality of $T$ is required.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-space-valued-straightening",
+    "lem-coef-twisted-arrow-graph-cofinality",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent Hom comparison; agent expansion of the twisted-arrow map and its straightening. Cisinski 5.6.5-5.6.6; Kerodon 046J and 03PD."
+   }
+  },
+  {
+   "text": "Check the variance and composition action before changing universes. An edge over $(u^{\\mathrm{op}},v):(a,b)\\to(a',b')$, where $u:a'\\to a$ and $v:b\\to b'$, is a simplex on the ordered vertices $a',a,b,b'$ in $\\operatorname{Tw}(\\mathcal E)$. Its middle edge is the source $f:a\\to b$, and its long edge is the target $f':a'\\to b'$. Its triangular faces say successively that the intermediate edge represents $f\\circ u$ and the long edge represents $v\\circ(f\\circ u)$. This statement holds for families of simplices: restricting the same joined simplex gives the corresponding parameterized triangles. By [lem-cbc-simplicial-composition-spine] restriction of the fixed-vertex multi-arrow space to consecutive arrows is a trivial Kan fibration, and its face and degeneracy operations give all composition and unit coherences. Hence the triangular calculation is an equality of maps of spaces up to the specified homotopy, with its higher compatibilities. It is not a calculation only on components. To identify this with the action of the classified functor, restrict classification along the given $\\Delta^1\\to B_{\\mathcal E}$. An edge of $\\mathcal S_{\\mathcal U'}$ is a simplicial map between its Kan objects; [lem-coef-kan-relative-nerve-left-fibration] says that its relative-nerve left fibration has exactly that transport map, and [lem-coef-space-valued-straightening] identifies this model with the restricted classifier. In a left fibration every edge is cocartesian directly from the $\\Lambda_0^n$ lifting property in [def-coef-infinity-fibrations]: the defining lifting property is exactly the required lifting problem. Both left fibrations therefore have every edge cocartesian, so the map over $\\Delta^1$ carries the source transport edge to a cocartesian edge in the target and hence preserves the transport map. Taking $u=1_a$ gives postcomposition, and taking $v=1_b$ gives precomposition. The face and degeneracy coherences just described identify their units and composites with the canonical ones of [lem-coef-infinity-mapping-composition].",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-kan-relative-nerve-left-fibration",
+    "lem-coef-space-valued-straightening",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, composition action underlying the coherent adjunction. Agent expansion using the twisted-arrow quadrilateral; Kerodon 01PF, composition by triangle restriction."
+   }
+  },
+  {
+   "text": "The map on mapping spaces induced by $T$ preserves the canonical composition classes. Write $M_{\\mathcal E}(a,b)$ and $j_{\\mathcal E,a,b}:M_{\\mathcal E}(a,b)\\to U_{\\mathcal E}(a,b)$ as in [lem-coef-infinity-mapping-composition]. Applying $T$ to every parameterized triangle gives $T_V:V_{\\mathcal C}(a,b,c)\\to V_{\\mathcal D}(Ta,Tb,Tc)$. It commutes strictly with the two consecutive-edge restrictions $\\theta$ and the long-edge restriction $\\ell$. Applying $T$ to arrows gives $T_U$, and the right-pinch maps commute strictly with $T$ by [lem-coef-infinity-pinch-comparison]. Consequently in the homotopy category of Kan spaces,\n$$[T_M]\\,c_{\\mathcal C}=c_{\\mathcal D}([T_M]\\times[T_M]):M_{\\mathcal C}(b,c)\\times M_{\\mathcal C}(a,b)\\to M_{\\mathcal D}(Ta,Tc).$$\nIndeed insert the defining formula $[j]c=[\\ell][\\theta]^{-1}([j]\\times[j])$ on both sides; the three strict restriction squares allow $T$ to pass through $\\ell,\\theta,j$, and the inverse classes cancel. This does not assume that $T_V$ or $T_M$ is an equivalence. Applying $T$ to the degenerate edge $s_0a$ gives $s_0(Ta)$, so identity classes are preserved as well. This calculation also proves compatibility of the component maps in Step 2 with the canonical composition of Step 3.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, composition and identity compatibility of the adjunct Hom comparison; agent calculation using the canonical triangle-span formula."
+   }
+  },
+  {
+   "text": "Now retain the original universe $\\mathcal U$ of mapping spaces. For each vertex $z=(a,b)$ of $B_{\\mathcal E}$ put $M_z=\\operatorname{Map}_{\\mathcal E}(a,b)$, a $\\mathcal U$-small Kan complex. The identification in Step 1 gives an equivalence between $M_z$ and $\\widetilde H_{\\mathcal E}(z)$ as spaces. Choose a representative map for each arrow in a weak-equivalence zigzag; [lem-cbc-kan-whitehead-inverse] supplies a simplicial homotopy inverse for every arrow whose orientation must be reversed, so composing these representatives gives a map $e_z:M_z\\to\\widetilde H_{\\mathcal E}(z)$ with inverse homotopies. The maps and inverse homotopies give the two coherent-nerve inverse triangles, since $\\mathfrak C[\\Delta^2](0,2)=\\Delta^1$; a homotopy can be reversed using a Kan horn in the mapping complex if its orientation requires it. Thus $e_z$ is an equivalence edge in $\\mathcal S_{\\mathcal U'}$. Apply [lem-coef-infinity-equivalence-prism-extension] with $p:\\mathcal S_{\\mathcal U'}\\to\\Delta^0$, $A=(B_{\\mathcal E})_0$ the simplicial subset of vertices and degeneracies, $B=B_{\\mathcal E}$, and $\\epsilon=1$. On $\\{1\\}\\times B$ use $\\widetilde H_{\\mathcal E}$ and on $\\Delta^1\\times A$ use the chosen $e_z$. These data agree on their intersection; $A$ contains every vertex, and all these vertical edges are equivalences. The target is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory], so $p$ fills all inner horns. The extension gives $e_{\\mathcal E}:H_{\\mathcal E}\\to\\widetilde H_{\\mathcal E}$ with $H_{\\mathcal E}(z)=M_z$. By [lem-coef-infinity-pointwise-equivalences] this is a coherent natural equivalence. Every simplex of $H_{\\mathcal E}$ lies in $\\mathcal S_{\\mathcal U}$: the simplicial category $\\mathbf{Kan}_{\\mathcal U}$ is the full simplicial subcategory of $\\mathbf{Kan}_{\\mathcal U'}$ on its $\\mathcal U$-small objects, and a coherent-nerve simplex whose vertices lie there is an enriched functor with precisely those objects and the same mapping complexes. Thus it factors degreewise through the smaller coherent nerve. This proves the required size assertion without shrinking $\\mathcal C$ or $\\mathcal D$. Identify values using $e_{\\mathcal E}$; the action and higher unit/composition homotopies of Step 3 are carried by this coherent equivalence to $H_{\\mathcal E}$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-coef-infinity-equivalence-prism-extension",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, universe-correct Hom functor. Agent vertex-replacement argument from Kerodon 01NX and 01DK; no local-small classification theorem is assumed."
+   }
+  },
+  {
+   "text": "Finally shrink the comparison while keeping these two chosen endpoints. Regard $\\widetilde\\gamma$ as a diagram $K=B_{\\mathcal C}\\times\\Delta^1\\to\\mathcal S_{\\mathcal U'}$. Let $A=B_{\\mathcal C}\\times\\partial\\Delta^1\\subseteq K$; it contains every vertex of $K$. On $\\{1\\}\\times K$ prescribe $\\widetilde\\gamma$. On $\\Delta^1\\times A$ prescribe $e_{\\mathcal C}$ at the first endpoint of $K$ and $e_{\\mathcal D}F$ at the second. Apply [lem-coef-infinity-equivalence-prism-extension] again, with $p:\\mathcal S_{\\mathcal U'}\\to\\Delta^0$ and $\\epsilon=1$. The endpoint data agree at the intersection and their vertex components are equivalences. The new $\\{0\\}\\times K$ diagram has endpoints exactly $H_{\\mathcal C}$ and $H_{\\mathcal D}F$; all its vertices are the small $M_z$, so the full-subcategory argument of Step 5 places the entire diagram in $\\mathcal S_{\\mathcal U}$. It is the required coherent transformation $T_*$. The prism supplies the homotopy-commutative comparison square, so at $z$ its class satisfies\n$$[e_{\\mathcal D,Fz}][(T_*)_z]=[\\widetilde\\gamma_z][e_{\\mathcal C,z}].$$\nUnder the identifications of Step 5 this is exactly the simplexwise $T_M$ of Step 2, and the composition and identity equalities of Step 4 therefore remain valid. The transformation is an edge of the full functor simplicial set, whose higher simplices are retained by [def-cbc-enhanced-diagrams-cones]. This functor simplicial set is a quasicategory by [lem-cbc-internal-hom-quasicategory] and [lem-coef-kan-coherent-nerve-quasicategory]. The same prism, rather than a separately chosen collection of component homotopies, gives its coherent naturality.",
+   "uses": [
+    "lem-coef-infinity-equivalence-prism-extension",
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent Hom comparison with prescribed endpoints. Agent relative-prism argument from Kerodon 01NX; agrees with Kerodon 03PD."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-twisted-arrow-graph-cofinality",
+  "lem-coef-twisted-arrow-left-fibration",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-space-valued-straightening",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-kan-relative-nerve-left-fibration",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-coef-infinity-equivalence-prism-extension",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-cbc-internal-hom-quasicategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: acyclic twisted-arrow classifier route using existing stronger nodes, explicit composition-span calculation, and universe shrinking by relative equivalence prisms. External sources read online; not archived."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mapping space bifunctor of a quasicategory is functorial under coherent functors and transformations with coherent precomposition postcomposition and naturality",
+   "results": "{\"t\": \"2026-10-16T23:01:32Z\", \"tool\": \"leanfinder\", \"query\": \"The mapping space bifunctor of a quasicategory is functorial under coherent functors and transformations with coherent precomposition postcomposition and naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.OneTruncation₂.map\", \"CategoryTheory.nerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveFunctor_map\", \"CategoryTheory.nerve_map\", \"SSet.Truncated.HomotopyCategory.mkNatTrans\"], \"digest\": \"875b6e0050431a69\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/Hom.lean:24-32 (ordinary Type-valued Hom pairing), AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-70 (homotopy bicategory only), and TwoTruncated.lean:195-228 (sets of homotopy classes). The enriched eHomFunctor hits assume an enriched ordinary category, not an arbitrary quasicategory with its right-pinched mapping spaces. Loogle gives internal-Hom quasicategory instances only. The other hits concern nerves of ordinary categories or ordinary bifunctor composition; none constructs the coherent Hom bifunctor comparison for arbitrary simplicial functors."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctor|yoneda|natural|composition",
+   "results": "{\"t\": \"2026-10-16T23:01:36Z\", \"tool\": \"grep\", \"query\": \"bifunctor|yoneda|natural|composition\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"2d57446d7002f120\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/Hom.lean:24-32 (ordinary Type-valued Hom pairing), AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-70 (homotopy bicategory only), and TwoTruncated.lean:195-228 (sets of homotopy classes). The enriched eHomFunctor hits assume an enriched ordinary category, not an arbitrary quasicategory with its right-pinched mapping spaces. Loogle gives internal-Hom quasicategory instances only. The other hits concern nerves of ordinary categories or ordinary bifunctor composition; none constructs the coherent Hom bifunctor comparison for arbitrary simplicial functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces of infinity categories form coherent bifunctors and natural transformations act by composition",
+   "results": "{\"t\": \"2026-10-16T23:01:42Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces of infinity categories form coherent bifunctors and natural transformations act by composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.bifunctorComp₁₂Functor_map\", \"CategoryTheory.bifunctorComp₂₃FunctorMap\", \"CategoryTheory.bifunctorComp₁₂FunctorMap\", \"CategoryTheory.Functor.HomObj.comp\", \"CategoryTheory.bifunctorComp₂₃Functor_map\", \"CategoryTheory.Pseudofunctor.ObjectProperty.mapComp\", \"CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp\", \"CategoryTheory.Functor.mapTriangleCompIso\"], \"digest\": \"2b76d17c64e11e07\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/Hom.lean:24-32 (ordinary Type-valued Hom pairing), AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-70 (homotopy bicategory only), and TwoTruncated.lean:195-228 (sets of homotopy classes). The enriched eHomFunctor hits assume an enriched ordinary category, not an arbitrary quasicategory with its right-pinched mapping spaces. Loogle gives internal-Hom quasicategory instances only. The other hits concern nerves of ordinary categories or ordinary bifunctor composition; none constructs the coherent Hom bifunctor comparison for arbitrary simplicial functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-16T23:01:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryObjIhom\", \"SSet.instQuasicategoryObjIhomTerminal\"], \"digest\": \"4bf963e126f428d2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/Hom.lean:24-32 (ordinary Type-valued Hom pairing), AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-70 (homotopy bicategory only), and TwoTruncated.lean:195-228 (sets of homotopy classes). The enriched eHomFunctor hits assume an enriched ordinary category, not an arbitrary quasicategory with its right-pinched mapping spaces. Loogle gives internal-Hom quasicategory instances only. The other hits concern nerves of ordinary categories or ordinary bifunctor composition; none constructs the coherent Hom bifunctor comparison for arbitrary simplicial functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial Hom space pairing on the product of the opposite infinity category and the infinity category retaining higher naturality",
+   "results": "{\"t\": \"2026-10-16T23:02:58Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial Hom space pairing on the product of the opposite infinity category and the infinity category retaining higher naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hom_map\", \"CategoryTheory.yonedaPairing\", \"CategoryTheory.eHomFunctor_obj_map\", \"CategoryTheory.yonedaPairing_map\", \"CategoryTheory.coyonedaPairing\", \"CategoryTheory.eHomFunctor_map_app\", \"CategoryTheory.coyonedaPairing_map\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\"], \"digest\": \"a0c249fa9187fef0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/Hom.lean:24-32 (ordinary Type-valued Hom pairing), AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-70 (homotopy bicategory only), and TwoTruncated.lean:195-228 (sets of homotopy classes). The enriched eHomFunctor hits assume an enriched ordinary category, not an arbitrary quasicategory with its right-pinched mapping spaces. Loogle gives internal-Hom quasicategory instances only. The other hits concern nerves of ordinary categories or ordinary bifunctor composition; none constructs the coherent Hom bifunctor comparison for arbitrary simplicial functors."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctor|yoneda|natural|composition",
+   "results": "{\"t\": \"2026-10-17T01:49:18Z\", \"tool\": \"grep\", \"query\": \"bifunctor|yoneda|natural|composition\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"3a6898e5e9ee275c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Functor/Hom.lean:24-31, AlgebraicTopology/SimplicialCategory/Basic.lean:43-70, SimplicialNerve.lean:24-34,193-210. Ordinary hom pairings and Hom functors of an already enriched ordinary category do not construct the coherent Hom comparison for arbitrary quasicategories. Internal-Hom quasicategory instances only provide closure of functor objects; coherent space category and straightening are not supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces in an infinity category form a functor on the product of its opposite with itself and are natural in functors",
+   "results": "{\"t\": \"2026-10-17T01:49:18Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces in an infinity category form a functor on the product of its opposite with itself and are natural in functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hom\", \"CategoryTheory.Functor.homObjFunctor\", \"CategoryTheory.prodOpEquiv_functor_obj\", \"CategoryTheory.presheafHom\", \"CategoryTheory.Functor.hom_map\", \"CategoryTheory.yonedaPairing\", \"CategoryTheory.prodFunctorToFunctorProd\", \"CategoryTheory.prodCategoryInstance1\"], \"digest\": \"0414bf0648389c43\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Functor/Hom.lean:24-31, AlgebraicTopology/SimplicialCategory/Basic.lean:43-70, SimplicialNerve.lean:24-34,193-210. Ordinary hom pairings and Hom functors of an already enriched ordinary category do not construct the coherent Hom comparison for arbitrary quasicategories. Internal-Hom quasicategory instances only provide closure of functor objects; coherent space category and straightening are not supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-17T01:49:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryObjIhom\", \"SSet.instQuasicategoryObjIhomTerminal\"], \"digest\": \"4bf963e126f428d2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Functor/Hom.lean:24-31, AlgebraicTopology/SimplicialCategory/Basic.lean:43-70, SimplicialNerve.lean:24-34,193-210. Ordinary hom pairings and Hom functors of an already enriched ordinary category do not construct the coherent Hom comparison for arbitrary quasicategories. Internal-Hom quasicategory instances only provide closure of functor objects; coherent space category and straightening are not supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping space bifunctor of a quasicategory is functorial under simplicial functors as a coherent natural transformation",
+   "results": "{\"t\": \"2026-10-17T01:49:21Z\", \"tool\": \"leanfinder\", \"query\": \"The mapping space bifunctor of a quasicategory is functorial under simplicial functors as a coherent natural transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\"], \"digest\": \"eb2e503dd44db7cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Functor/Hom.lean:24-31, AlgebraicTopology/SimplicialCategory/Basic.lean:43-70, SimplicialNerve.lean:24-34,193-210. Ordinary hom pairings and Hom functors of an already enriched ordinary category do not construct the coherent Hom comparison for arbitrary quasicategories. Internal-Hom quasicategory instances only provide closure of functor objects; coherent space category and straightening are not supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "sHomFunctor|eHomFunctor|def hom|SimplicialNerve",
+   "results": "{\"t\": \"2026-10-17T01:50:01Z\", \"tool\": \"grep\", \"query\": \"sHomFunctor|eHomFunctor|def hom|SimplicialNerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"a25b2e214a99db02\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Functor/Hom.lean:24-31, AlgebraicTopology/SimplicialCategory/Basic.lean:43-70, SimplicialNerve.lean:24-34,193-210. Ordinary hom pairings and Hom functors of an already enriched ordinary category do not construct the coherent Hom comparison for arbitrary quasicategories. Internal-Hom quasicategory instances only provide closure of functor objects; coherent space category and straightening are not supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Space valued Hom functors of infinity categories obtained by straightening the twisted arrow left fibration",
+   "results": "{\"t\": \"2026-10-17T01:50:04Z\", \"tool\": \"leanfinder\", \"query\": \"Space valued Hom functors of infinity categories obtained by straightening the twisted arrow left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerveFunctor_obj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.SimplicialCategory.sHom\"], \"digest\": \"83122db04bdd7b7b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Functor/Hom.lean:24-31, AlgebraicTopology/SimplicialCategory/Basic.lean:43-70, SimplicialNerve.lean:24-34,193-210. Ordinary hom pairings and Hom functors of an already enriched ordinary category do not construct the coherent Hom comparison for arbitrary quasicategories. Internal-Hom quasicategory instances only provide closure of functor objects; coherent space category and straightening are not supplied."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-adjunction-mapping-equivalence",
+  "date": "2026-10-17",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent derived coefficient adjunction, beneath the suspension-square construction and local universal-arrow criterion; passing from a coherent unit/counit adjunction to the explicitly stated adjunct equivalences. The generic coherent Hom-bifunctor comparison used to construct the adjunct transformations before the two triangle calculations.",
+   "via": [
+    "lem-coef-infinity-adjunction-mapping-equivalence",
+    "lem-coef-infinity-bicartesian-interval-adjunction",
+    "lem-coef-infinity-local-adjoint-criterion",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-coef-suspension-square-comparison",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-hom-bifunctor-functoriality",
+  "worker": "stage1",
+  "summary": "Six-step split with no new nodes. Reused the acyclic mapping-classifier clause of the existing twisted-arrow graph theorem rather than the cyclic space-transport/coherent-nerve packages. Expanded the simplexwise functor map, its coherent straightening, the quadrilateral composition action, the natural triangle-span equation, and two relative-prism constructions that preserve the smaller universe and the chosen comparison endpoints. Statement unchanged; all cited statements read and quoted in citations.json; actual Mathlib searches logged.",
+  "blueprint": "Realizes the coherent Hom-functor foundation beneath paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint, in the current main-20261015 proof file and the historical ancestry recorded in blueprint.from. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic simplicial multiarrow restriction theorem supplies the composition/unit coherences; the biduality unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic Kan Whitehead theorem turns the classifier value identifications into actual inverse-homotopy maps for the universe-replacement prism; it does not replace any geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-e9fc0aaf5",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-e9fc0aaf5 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, all 16 cited statements, unit sk-prop-sf-biduality-general, blueprint main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2, and Kerodon 03N2 (Prop 8.3.3.2), 046J (Cor 8.3.5.8) and 03PD (Rem 8.3.5.9) online. The statement matches Kerodon, with literal U-small right-pinched mapping spaces instead of local smallness; it is unchanged and weakens nothing. No new nodes. A BFS over the DAG shows the 16 cited nodes do not reach the item, and confirms that space-transport-classification, coherent-nerve-comparison and enriched-hom-twisted-arrow-comparison all reach it, so they cannot be cited. Step 1 correctly reuses the stronger lem-coef-twisted-arrow-graph-cofinality with f=1, where W_f=Tw(E), using only its classifier and naturality clauses. Step 3: variance checked on the vertex order a',a,b,b', and every edge of a left fibration is cocartesian through the Lambda_0^n horn. Step 4: the equation [j]c=[l][theta]^{-1}([j]x[j]) conjugation redone by hand; correct and elementary. Steps 5-6: every prism-extension hypothesis checked, and Kan_U is the full simplicial subcategory of Kan_U' on U-small objects, so the shrinking is valid. Edge cases tested: empty C, N([1]) with an empty Hom, discrete Hom, T=id, constant T. Fault fixed: Step 2 left the source and target of gamma-tilde only up to equivalence, but Step 6 needs them exact (H_C-tilde and H_D-tilde o F) for the prism data to agree. The whole corrected item JSON is in fixes/dag/nodes/sec-six-functors/; it fixes the endpoints by composing with equivalence edges in the functor quasicategory and adds two uses already in proof_deps. Tool uses lem-cbc-simplicial-composition-spine and lem-cbc-kan-whitehead-inverse accepted as generic simplicial tools. Pre-existing overlap noted, not a fault of this delivery: the second paragraph of lem-coef-space-transport-classification also asserts the Hom bifunctor, but citing it here would make a cycle.; 1 file(s) fixed by the reviewer"
+ }
+}

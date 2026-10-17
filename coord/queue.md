@@ -1,6 +1,6 @@
 # Work queue
 
-27 items; claim with `tools/claim.py next <group> [--stage N]`.
+39 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (27)
+## Stage 3: modules to prove (39)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -30,13 +30,25 @@
 | `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 5 | 10 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SupportDimensionUnion` | 9 | 1 | proof |
+| `Sheaf.FieldTheory.OneVariableFieldCohomologicalDimension` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleLfpAndFiniteType` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Sites.PolynomialGenericStrictLocalizationField` | 10 | 1 | proof |
+| `Sheaf.EtaleCohomology.EtaleSectionZeroOpen` | 10 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
+| `Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject` | 13 | 1 | proof |
+| `Sheaf.CategoryTheory.FilteredComplexDecalageComparison` | 13 | 1 | proof |
+| `Sheaf.CategoryTheory.SpectralObjectPageTwoMapExistence` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueScalarCounitModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison` | 15 | 1 | proof |
+| `Sheaf.CategoryTheory.CartanEilenbergGoodCutIdentification` | 15 | 1 | proof |
+| `Sheaf.CategoryTheory.MapGoodUpperTruncation` | 16 | 1 | proof |
+| `Sheaf.CategoryTheory.GoodTruncationTotalBoundaryImage` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
