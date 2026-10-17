@@ -81,12 +81,16 @@ lemma Scheme.Hom.app_top_appLE_apply {X X' Y : Scheme.{u}} (f : X ⟶ X') (m : X
   rw [← Scheme.Hom.appLE_comp_appLE f m U ⊤ ⊤ e (by simp), h]
   rfl
 
+/-- Pulling back sections over an affine open `U` along `Spec Γ(X, U) ⟶ X` is the inverse of
+`Γ(Spec R, ⊤) ≅ R`. -/
 lemma IsAffineOpen.fromSpec_appLE_top {X : Scheme.{u}} {U : X.Opens} (hU : IsAffineOpen U)
     (e : ⊤ ≤ hU.fromSpec ⁻¹ᵁ U) :
     hU.fromSpec.appLE U ⊤ e = (Scheme.ΓSpecIso Γ(X, U)).inv := by
   rw [Scheme.Hom.appLE, hU.fromSpec_app_self, Category.assoc, ← Functor.map_comp,
     Subsingleton.elim (_ ≫ _) (𝟙 _), CategoryTheory.Functor.map_id, Category.comp_id]
 
+/-- For an affine open `U` and a ring map `r : Γ(X, U) ⟶ R`, pulling back sections over `U`
+along `Spec R ⟶ Spec Γ(X, U) ⟶ X` is `r`. -/
 lemma IsAffineOpen.appLE_SpecMap_fromSpec {X : Scheme.{u}} {U : X.Opens} (hU : IsAffineOpen U)
     {R : CommRingCat.{u}} (r : Γ(X, U) ⟶ R) (e : ⊤ ≤ (Spec.map r ≫ hU.fromSpec) ⁻¹ᵁ U) :
     (Spec.map r ≫ hU.fromSpec).appLE U ⊤ e ≫ (Scheme.ΓSpecIso R).hom = r := by
@@ -181,7 +185,6 @@ lemma comap_surjective_app {V : Y.Opens} (hV : IsAffineOpen V) :
   rw [Scheme.Hom.app_eq_appLE]
   exact hV.fromSpec.isOpenEmbedding.injective h1
 
-
 set_option backward.isDefEq.respectTransparency false in
 /-- **The rank of a Galois cover.** For a Galois cover `Z` of `Y` with group `G` and an affine
 open `V ⊆ Y`, the rank of `Γ(Z.P, π⁻¹ V)` over `Γ(Y, V)` is `|G|` at every prime: the
@@ -246,7 +249,6 @@ theorem rankAtStalk_app_eq {V : Y.Opens} (hV : IsAffineOpen V) (p : PrimeSpectru
   have := Fintype.ofFinite G
   rw [hrank, Nat.card_eq_fintype_card, ← Module.finrank_linearMap_self Ω Ω A]
   exact ((linearIndependent_toLinearMap Ω A Ω).comp ψg hinj).fintype_card_le_finrank
-
 
 /-- A function on `π⁻¹ V` fixed by all `appSMul g` is equal to its two pullbacks to
 `Spec (L ⊗[A] L)`. -/
