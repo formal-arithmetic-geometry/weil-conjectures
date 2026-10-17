@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisPushforward
-import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisSections
+import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnitOfSections
 
 /-! The scalar-basis unit decomposition used for condensed algebraic closures.
 
@@ -64,6 +65,9 @@ theorem exists_condensedQbar_scalar_basis_unit :
         IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i ↦
           Mod.qbar_scalarUnitLeg (coefficientMap
             (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z) (b Z i) M)) := by
-  sorry
+  let h := exists_condensedQbar_scalar_basis_sections ℓ E
+  rcases h with ⟨I, b, hcoh, hexact, hN⟩
+  refine ⟨I, b, hcoh, ?_⟩
+  exact condensedQbar_scalar_basis_unit_of_sections ℓ E I b hexact hN
 
 end AlgebraicGeometry.ProEtale.CondensedRing

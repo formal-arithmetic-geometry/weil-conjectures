@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit-of-sections",
+ "kind": "statement",
+ "title": "Ordinary exact scalar-unit copowers descend to the derived category",
+ "statement": "Fix a prime ell, a finite intermediate field E, an index type I, and coefficient sections b(Z,i):1 -> Omega_Z as in [def-weil-pbc-condensed-e-module-category] and [lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward]. Assume ordinary extension of scalars preserves finite limits for every Z, and its ordinary scalar-unit legs indexed by b(Z,i) give an isomorphism from every ordinary module copower. Then the actual left-derived extension adjunction unit followed by the localized central actions gives an isomorphism from every chosen I-copower of every derived E_Z-module. Section coherence is not required for this formal descent.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
+ ],
+ "proof": [
+  {
+   "text": "Form the ordinary adjunction unit followed by degreewise central scalar action on a complex. Evaluation preserves coproducts; sigmaComparison_map_desc and the ordinary module hypothesis make its component in every degree invertible, hence the complex map is invertible.",
+   "uses": [
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved upstream DerivedCategory.isColimitCofanMkQObj and quotientCompQhIso to preserve this coproduct under homotopy/derived localization. Exact-functor factorization, the adjunction-unit factorization, and localized center naturality identify each mapped leg with the termwise derived scalar-unit leg. Compare left-derived extension with exact derived extension and use central naturality to obtain the actual left-derived unit legs.",
+   "uses": [
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the derived object by a K-injective complex, composing its representative isomorphism with quotientCompQhIso. Transport the chosen copower along the component isomorphisms. Naturality of the adjunction unit and central action identifies the transported scalar legs, and cancellation of coproduct and target isomorphisms proves the result for the original chosen copower.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasisUnitOfSections.lean",
+  "place": "C2 second reading: proved degreewise ordinary-module-to-derived descent, exact-functor/left-derived comparison, then representative transport"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnitOfSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasisUnitOfSections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensedQbar_scalar_basis_unit_of_sections",
+  "statement": "theorem condensedQbar_scalar_basis_unit_of_sections\n    (I : Type (u + 1))\n    (b : ∀ Z : Scheme.{u}, I →\n      (𝟙_ (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) ⟶\n        condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z))\n    (hexact : ∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap\n      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)))\n    (h : ∀ (Z : Scheme.{u})\n      (N : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n        (condensedRingObj (Profinite.continuousMapRingObj E) Z))\n      [HasCoproduct (fun _ : I ↦ N)],\n      IsIso (Sigma.desc (f := fun _ : I ↦ N) fun i ↦\n        (Mod.extendRestrictAdjunction (coefficientMap\n          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).unit.app N ≫\n        (Mod.comap (coefficientMap\n          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).map\n          (Mod.qbar_scalarEndo (b Z i) ((Mod.extendScalars (coefficientMap\n            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).obj N)))) :\n    ∀ (Z : Scheme.{u}) (M : DerivedCategory\n      (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n        (condensedRingObj (Profinite.continuousMapRingObj E) Z)))\n      [HasCoproduct (fun _ : I ↦ M)],\n      IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i ↦\n        Mod.qbar_scalarUnitLeg (coefficientMap\n          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z) (b Z i) M)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-17",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedQbar_scalar_basis_unit_of_sections"
+  ]
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "Compatibility.lean: continuousBasisSheafIso, isIso_basisAdjUnitDesc, preservesFiniteLimits_extendScalars_of_flat, isIso_derivedBasisUnitDesc and isIso_leftDerivedBasisUnitDesc; FiniteSubextension.lean: finite-subextension-valued section model. Infinite-basis adaptation below the unit level."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the condensed regular algebraic closure to a finite p-adic extension is a direct sum of copies of the regular module, indexed by a vector-space basis, because finite-extension-valued continuous functions have finitely many continuous coordinates",
+   "results": "8 hits, including LocallyConstant.freeOfProfinite, p-adic complex scalar algebra and Condensed.finFree. No finite-subextension-valued condensed coefficient basis or ordinary extension-unit theorem.",
+   "date": "2026-10-17",
+   "verdict": "No exact match; finite free and locally constant module statements do not construct this coefficient module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension of scalars with a coproduct scalar basis descends termwise to an isomorphism in the unbounded derived category",
+   "results": "8 hits, mainly Ext.mapExactFunctor and its naturality. No scalar-unit copower descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "Use the local finite-basis template, replacing finite biproduct comparisons by coproduct comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.sigmaComparison",
+   "results": "11 hits, including sigmaComparison_map_desc, instIsIsoSigmaComparison, PreservesCoproduct.of_iso_comparison and ι_comp_sigmaComparison.",
+   "date": "2026-10-17",
+   "verdict": "Use sigmaComparison_map_desc and the existing preservation instances in the formal descent."
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*(condensed|coproduct)|scalar.*unit|sigmaComparison",
+   "results": "12 hits under CategoryTheory, principally the coproduct comparison API; separate rg in lean/Sheaf and lean/WeilConjectures found the private finite-basis descent template in Colimit/Compatibility and the original assigned hole.",
+   "date": "2026-10-17",
+   "verdict": "No complete infinite-basis coefficient construction. Compatibility imports the assigned theorem, so importing its private finite-basis proof would be cyclic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor induces a functor on derived categories compatible with the adjunction unit, and termwise coproduct decompositions descend through localization",
+   "results": "8 hits, including Adjunction.derived_unit, derived'_unit, derived, Functor.mapDerivedCategory, mapHomologicalComplexUpToQuasiIso and Adjunction.derivedη.",
+   "date": "2026-10-17",
+   "verdict": "These provide the general derived-functor and unit infrastructure, already used through the source exact-derived APIs; none constructs the scalar basis or identifies its coproduct of localized scalar legs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnit",
+  "group": "C2",
+  "date": "2026-10-17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit",
+   "place": "Strict substeps of the assigned scalar-basis proof"
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261017T003416-L-3313128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261017T003416-L-3313128",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
