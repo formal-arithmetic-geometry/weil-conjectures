@@ -97,7 +97,7 @@ private theorem open_pullback_model_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
     Nonempty ((derivedPullback f).obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj
       (((Scheme.Modules.restrictFunctor f).mapHomologicalComplex (.up ℤ)).obj P)) := by
   classical
-  have d := Classical.choose_spec (exists_derivedPullback f)
+  have d := derivedPullback_spec f
   obtain ⟨T, hT, hTmap, hTadd, ε, _, _, hflat⟩ :=
     d.choose_spec.choose_spec.choose_spec.choose_spec.2.2.2
   let T₀ := Scheme.Modules.tensorPullback f
