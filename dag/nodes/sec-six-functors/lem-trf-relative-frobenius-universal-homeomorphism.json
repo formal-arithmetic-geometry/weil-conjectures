@@ -417,5 +417,23 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-324fd4378 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one item, no new nodes, no fixes. The statement matches Stacks varieties.tex 0CCB/0CC9 (l.7117/7071): fibre product V x_{X,F_X} X, r=(F_V,v), and the condition v F_V = F_X v is in the correct order. Integral and universal homeomorphism are both true for arbitrary schemes. I tested the empty scheme, v=id, F_p[e]/e^2 and an infinite polynomial ring; the last shows r is integral but not finite, as the statement says. Step 2: the specialization q=p of lem-pur-absolute-frobenius-universal-homeomorphism is valid because its closed Lean (slopmaster2 Morphisms/Frobenius.lean:149-168) works for any finite field k and any k-scheme with no finiteness hypothesis. Step 3: pi_1 is the base change of F_X along v. Step 4: 04DE plus universally closed plus 01WM make F_V integral. Step 5: h is affine, hence separated; IsIntegralHom.of_comp with f=r, g=h gives r integral. Step 6: the field-point criterion of 01S4, quoted in def-weil-radicial-morphism, gives universal injectivity. Step 7: point-set surjectivity. Step 8: lem-pc-integral-radicial-surjective-universal-homeomorphism, which is Lean-closed, gives the topological notion. proof_deps equals the union of uses. Every cited node is a definition, a Mathlib leaf or Lean-closed, and I accept the six declared tool_uses. No duplicate: the nearby nodes i-relative-frob, d-relative-frob and lem-trf-scheme-frobenius-finite-radicial assume finite type over a finite field. The parent lem-trf-absolute-frobenius-site uses exactly these two conclusions in its step 2. No SGA is cited and nothing was changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFrobeniusIntegralUniversalHomeomorphism",
+  "declaration": "AlgebraicGeometry.Scheme.relativeFrobenius_integral_universalHomeomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFrobeniusIntegralUniversalHomeomorphism.lean",
+  "statement": "theorem relativeFrobenius_integral_universalHomeomorphism (p : ℕ) (X V : Scheme.{u}) (hX : X.IsCharacteristic p) (v : V ⟶ X) : ∃ hV : V.IsCharacteristic p, ∃ r : V ⟶ pullback v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1), r ≫ pullback.fst v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1) = V.iterateFrobenius hV.1 (hV.2 ⊤) 1 ∧ r ≫ pullback.snd v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1) = v ∧ IsIntegralHom r ∧ (topologically IsHomeomorph).universally r ∧ ∀ s : V ⟶ pullback v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1), s ≫ pullback.fst v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1) = V.iterateFrobenius hV.1 (hV.2 ⊤) 1 → s ≫ pullback.snd v (X.iterateFrobenius hX.1 (hX.2 ⊤) 1) = v → s = r",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d8d62c83",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read node, 6 stmt deps and their Lean (IsCharacteristic = Nat.Prime p ∧ p=0 on all opens; iterateFrobenius n=1; pullback/fst/snd; IsIntegralHom; (topologically IsHomeomorph).universally) against Stacks varieties.tex 0CC9/0CCB (l.7071,7117). All clauses match: V's characteristic concluded not assumed, r characterized by both projection equations plus uniqueness, integral (not finite) and universal homeomorphism, no extra hypotheses; edge cases empty/zero ring, nonreduced, imperfect, p=2, universe u fine. lean.statement verbatim in file, only node lean field changed, proof_deps = union of uses, no definitions, sorry only, docstrings carry source+blueprint+8 proof steps, report has both sections (worker's 'no proof steps' remark is corrected by the second reading). No duplicate found. nt_compile.py per-file compile rc=0, no errors."
  }
 }
