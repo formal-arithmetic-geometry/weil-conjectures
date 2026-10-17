@@ -20,9 +20,94 @@
   "def-weil-integral-rational-qbar-compact-support",
   "prop-coef-integral-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a compactification of $f$ and use the compact-support construction: the canonical projection map is the proper direct-image projection mate for the compactification followed by the open-extension projection isomorphism. This is exactly the composite specified in [def-exchange-projection]. At every coefficient stage the resulting map is the canonical projection transformation and is invertible on the stated finite-Tor inputs by [fix-prop-projection-formula].",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-integral-rational-qbar-compact-support",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Unit Step 2 (the adic stage): compact-support projection map at every coefficient stage"
+   }
+  },
+  {
+   "text": "For the proper constituent $p:\\overline X\\to Y$ of a compactification $f=pj$ at a finite quotient $A_n=\\mathcal O_E/\\varpi_E^n$, the proper factor $\\pi_{p;j_!T_n,K_n}$ of the composite in [def-exchange-projection] is, by that definition, the counit-defined natural projection map of [lem-weil-pbc-ringed-projection-mate-exact] for the morphism of ringed topoi $(\\overline X_{\\mathrm{proet}},A_n)\\to(Y_{\\mathrm{proet}},A_n)$ with fixed first input $E=j_!T_n$. That lemma states that $F(P)=Rp_*E\\otimes^LP$ and $G(P)=Rp_*(E\\otimes^LLp^*P)$ are exact and that $s_G\\alpha_{P[1]}=\\alpha_P[1]s_F$ for their canonical shift structures; composing the one-step equation (and inverting it for negative shifts) gives the equation for every integer shift. The lemma is stated for an arbitrary morphism of ringed topoi presented by small ringed sites, so the same equation holds, as an equality of derived maps and not only after evaluation, for every ringed model of the proper factor; Step 4 applies it to the ringed diagram-site model.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0B56, canonical projection mate and its shift compatibility"
+   }
+  },
+  {
+   "text": "For the open constituent $j:X\\to\\overline X$, the open factor of [def-exchange-projection] is the map of [lem-cbc-extension-zero-projection-formula] followed by $Lj^*Lp^*\\cong Lf^*$; [lem-cbc-proetale-extension-zero] makes $j_!$ exact, degreewise and left adjoint to $j^{-1}$. Represent the second input by a K-flat complex $L$, so that $j^{-1}L$ is K-flat and both derived tensors are total tensor complexes. In bidegree $(a,b)$ the comparison is the sheaf isomorphism $j_!T^a\\otimes L^b\\to j_!(T^a\\otimes j^{-1}L^b)$. Shifting the second input replaces $L^b$ by $L^{b+1}$ and $d_L$ by $-d_L$, and the total-complex shift identification multiplies the component of bidegree $(a,b+1)$ by $(-1)^a$ on both sides, since $j_!$ acts degreewise and preserves this decomposition; the pullback composition $Lj^*Lp^*\\cong Lf^*$ is degreewise and commutes with shift. Hence the shift square of the open factor commutes already on representatives, hence in the derived category. The same chain-level argument applies verbatim to the termwise open extension of strict systems used in Step 4.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-extension-zero-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Unit Step 2 (the adic stage): open extension-by-zero constituent of the projection formula"
+   }
+  },
+  {
+   "text": "For the integral coefficient stage use the simultaneous ringed-diagram-site realization of the strict-system operations stated in [lem-sf-integral-compactification-system-realization]: strict systems are module sheaves over the ring diagram $((A_n)_W)_n$, $J_j$ is exact termwise, and the coherent system projection map is the composite of [def-exchange-projection] formed from these canonical maps. By [lem-pur-system-level-projection-formula-coherence] this strict-system projection $\\operatorname{PF}^{\\mathrm{sys}}$ is the proper counit-defined projection mate of these models followed by the open-extension tensor comparison, with the actual quotient transitions of one model. Its proper factor is the projection map of [lem-weil-pbc-ringed-projection-mate-exact] for the morphism of ringed diagram topoi induced by $p$, so by that lemma (as in Step 2) it commutes with the shift of the second input as an equality in $D(\\mathscr S_Y)$; its open factor is the termwise chain map of Step 3 on K-flat system representatives, whose shift square commutes on representatives. Thus $\\operatorname{PF}^{\\mathrm{sys}}$ satisfies the shift equation in $D(\\mathscr S_Y)$, proved on the system model itself and not inferred from its finite evaluations. Next [lem-sf-integral-compactification-system-realization] supplies the realization isomorphisms $c_V$, states that $c_{S_pJ_j}$ identifies the realized expression with exactly the integral compact-support functor $R\\varprojlim_n\\operatorname{Res}_nRf_{!,n}K_n$ of [def-weil-integral-rational-qbar-compact-support], and says that $c_V$ intertwine the units, counits, pullback/tensor maps and open maps, including whiskerings; hence the integral projection map $\\operatorname{PF}_{T,K}$ of [def-exchange-projection] is $c\\circ\\mathcal L_Y(\\operatorname{PF}^{\\mathrm{sys}}_{\\mathcal RT,\\mathcal RK})\\circ c^{-1}$ for the relevant realization maps. The total-limit functor $\\mathcal L_Y=R\\lim\\operatorname{Res}$ is exact with termwise shift structure, and the realization maps and their whiskerings commute with every integer shift by [lem-pur-integral-realization-shift-coherence]. Conjugating the system shift square by these shift-compatible isomorphisms gives the shift square of $\\operatorname{PF}_{T,K}$; since $\\operatorname{PF}_{T,K}$ is invertible by [fix-prop-projection-formula], its inverse satisfies the reversed equation.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "def-exchange-projection",
+    "lem-pur-system-level-projection-formula-coherence",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-pur-integral-realization-shift-coherence",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Unit Step 2 (the adic stage): normalized strict-system construction and transport to the integral derived category"
+   }
+  },
+  {
+   "text": "The exceptional adjunction has the canonical shift comparison characterized by its counit, by [lem-weil-pbc-adjunction-shift-compatibility-unique] and the adjunction supplied in [prop-coef-integral-exceptional-adjoint]. Therefore the adjoint transpose of a map commutes with shifts whenever the map itself does. Apply this to $u_K$, which is obtained from the inverse compact-support projection followed by $t\\widehat\\otimes1$: tensor shift naturality and the projection shift square give $u_{K[1]}=u_K[1]$. Transposing through the shifted adjunction gives $\\gamma_{K[1]}=\\gamma_K[1]$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "prop-coef-integral-exceptional-adjoint",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Unit Step 2 (the adic stage): adjunction shift comparison and trace transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "fix-prop-projection-formula",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-pur-system-level-projection-formula-coherence",
+  "lem-pur-integral-realization-shift-coherence",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "prop-coef-integral-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0B56 and adjunction shift identities, expanded along Unit Step 2 (the adic stage) of the purity-transport blueprint"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,7 +153,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-adic-purity-scalar-naturality",
@@ -81,9 +166,25 @@
   "from": {
    "node": "thm-pur-rational-and-qbar-purity",
    "via": [],
-   "place": "Unit Step 3: projection-formula, proper/open constituent and adjunction shift calculation"
+   "place": "Unit Step 2 (the adic stage): normalized strict-system construction and transport to the integral derived category"
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-adic-projection-shift-coherence",
+  "worker": "stage1",
+  "summary": "Repaired the returned adic-stage passage. Steps 2-3 now cite the reviewed finite-coefficient shift lemma directly. Step 4 uses a dedicated statement for shift-compatible strict-system realization maps, explicitly identifies the realized compact-support expression with the integral R lim Res_n Rf_{!,n}K_n definition, and then transports the single strict-system equality through the total derived limit. Maintainer reader (2026-10-18): Steps 2-3 no longer appeal to the off-unit finite shift lemma; they rest on the ringed projection-mate shift equation and the degreewise extension-by-zero calculation, and Step 4 proves the system shift square on the ringed diagram-site model before transport.",
+  "blueprint": "Unit Step 2 (the adic stage) of the master purity-transport proof: normalized strict-system construction and transport to the integral derived category.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-dcf6dcb12",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-dcf6dcb12 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-pur-integral-realization-shift-coherence, the full statement of every cited node, master sk-thm-purity-transport Steps 1-4 (diffed against main-20261015), thm-pur-rational-and-qbar-purity Step 1 and Stacks 07A4/0B56. The item statement is true and not weakened. I tested K=0, T=0, f=id, f proper, f an open immersion, negative shifts, and T=O(d)[2d] (Koszul sign (-1)^{2d}=1). The new node is not a restatement or a duplicate: the realization lemma gives only naturality and intertwining of c_V, not shift compatibility, and an rg search over the DAG found no existing statement of it. I repaired three faults in fixes/. (1) C1/C4: Steps 2-3 relied on lem-sf-finite-exchange-projection-commshift without listing it in uses or proof_deps, and declared it as an off-unit tool use. Citing it would newly pull Poincare-pairing and trace-formula Frobenius-transport nodes into the batch-5 closure. Steps 2-3 now rest on lem-weil-pbc-ringed-projection-mate-exact, whose shift equation holds for any ringed topos and so covers pi_p at A_n, plus a written-out degreewise sign check for the j_! factor; tool_uses is now []. (2) E5: Step 4 inferred the strict-system shift square from the finite squares, which is detection by evaluation. It now proves the square on the ringed diagram-site model: PF^sys is the counit mate plus termwise J_j (lem-pur-system-level-projection-formula-coherence, lem-sf-integral-compactification-system-realization), so the ringed mate lemma and the Step 3 chain argument apply there. The integral map is then reached by conjugating with the shift-compatible c_V (new node) and the exact L_Y. I removed the cited-but-unused lem-pur-compact-support-completed-projection-coherence, which is stated for constant sheaves; the node stays in the DAG. (3) Metadata: the source and step places said Unit Step 3 (the E/Qlbar step) and are now Unit Step 2 (the adic stage); the new node's blueprint.from.via is now [item]. Batch-5 check: the flagged citation lem-pur-system-level-projection-formula-coherence reaches lem-pod-etale-stalk-tensor-scalar through lem-weil-finite-compact-projection-formula. That is a stalk-tensor fact used by the finite projection formula, so it is genuinely outside both assumptions: neither the trace formula nor Poincare duality gives the projection formula, it is not a step of their proofs, and the existing fix-prop-projection-formula citation already reaches it. No SGA, no cycle; every citation in the fixed steps is in uses, and proof_deps is their union. Details in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
