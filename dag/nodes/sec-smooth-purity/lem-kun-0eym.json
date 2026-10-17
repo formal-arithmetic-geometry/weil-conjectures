@@ -45,21 +45,66 @@
    }
   },
   {
-   "text": "It suffices to prove the comparison after replacing the bases by affine opens pulled back from one stage. Fix $i_0$. The tail $j\\ge i_0$ is cofinal: any finite collection of indices has an upper bound together with $i_0$. Hence restricting all colimits and inverse limits to this tail does not change them (a compatible cone or cocone extends uniquely by choosing an upper bound, and two choices agree at a further upper bound). Cover $B_{i_0}$ by affine opens $W_{i_0}$ and put $W_j=b_{ji_0}^{-1}W_{i_0}$ and $Z_j=u_j^{-1}W_j$. Then $W_j$ is affine, $Z_j\\to W_j$ is qcqs, and $Z_k=a_{kj}^{-1}Z_j$ for $k\\ge j$. The restricted transitions are affine by base change. The restricted limits are $W=b_{i_0}^{-1}W_{i_0}$ and $Z=u^{-1}W$, by the open-restriction assertion for affine-transition limits; the equalities $Z_j=a_{ji_0}^{-1}Z_{i_0}$ justify its use on the sources as well. All $Z_j$ are qcqs by permanence. Etale inverse image along an open immersion is restriction and preserves colimits, so $A|_Z=\\varinjlim_j(A_j|_{Z_j})|_Z$, and $L|_W$ is the corresponding restricted colimit. Higher direct image restricts to the higher direct image of the restricted morphism: on every etale object over $W_j$ (or $W$), the cohomology presheaf of the restricted morphism is the original presheaf evaluated on that object; local representation and local equality for sheafification give the same associated sheaf. To check the restricted maps, take an etale test object over $W_j$ and its base change at a later stage or at the limit. The chart lemma expresses the original exchange and the exchange for the restricted morphisms, after precomposition by the chart map, as pullback along the same map between the fibre products with that test object. Coefficient naturality then gives the same formula for the transitions and legs. Every section is locally in the image of a chart map by the cited sheafification-local-representation statement; hence equality after those chart maps implies equality of the sheaf morphisms. Therefore the restricted comparison is exactly the same construction for $Z_j\\to W_j$. Prove this on each $W$; these opens cover $B$. Rename the restricted systems $V_j\\to B_j$. We may now assume the $B_j$ affine and the $V_j$ qcqs.",
+   "text": "Fix $i_0$ and restrict to the tail $j\\ge i_0$. This does not change the inverse limits: a cone over the tail extends to index $i$ by choosing $j\\ge i,i_0$ and composing its leg with the transition to $i$; two choices agree after passing to a common upper bound. The same argument extends cocones of the pulled-back coefficient and higher-image diagrams, so their colimits and comparison are unchanged. The identity and composition laws established in step 1 ensure these extensions respect all arrows.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, second proof: localization on inverse-image affine opens"
+   }
+  },
+  {
+   "text": "Cover $B_{i_0}$ by affine opens $W_{i_0}$ and put $W_j=b_{ji_0}^{-1}W_{i_0}$, $Z_j=u_j^{-1}W_j$. Affine-morphism permanence makes $W_j$ affine. The qcqs base-change and source-permanence clauses make $Z_j\\to W_j$ qcqs and $Z_j$ qcqs. Commutativity gives $Z_j=a_{ji_0}^{-1}(u_{i_0}^{-1}W_{i_0})$. Apply open restriction of affine-transition limits separately to the $B_j$ and $V_j$: their restricted limits are $W=b_{i_0}^{-1}W_{i_0}$ and $Z=u^{-1}W$. That same lemma supplies affine restricted transitions. These $W$ cover $B$.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
     "lem-weil-pbc-affine-morphism-permanence",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-kun-commutative-exchange-chart"
+    "lem-weil-pbc-limit-affine-transition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYM, lemma-relative-colimit-general, second proof, locality on the affine etale site; explicit reduction needed for the qcqs version of Tag 0EYL in the DAG"
+    "place": "Tag 0EYM, lemma-relative-colimit-general, second proof: localization on inverse-image affine opens"
+   }
+  },
+  {
+   "text": "Apply the tail-open coefficient lemma to the source system with $g_0=u_{i_0}:V_{i_0}\\to B_{i_0}$ and the open $W_{i_0}$. It gives the coherent restricted $A_j|_{Z_j}$ system, its colimit $A|_Z$, and the restricted coefficient legs. Apply it also to the base system with sheaves $G_j$ and $g_0=\\mathrm{id}_{B_{i_0}}$; it identifies $L|_W$ with the colimit of the pulled-back $G_j|_{W_j}$, with the specified restricted transitions. Open inverse image is restriction by the etale restriction lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-tail-open-coefficients",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, second proof: localization on inverse-image affine opens"
+   }
+  },
+  {
+   "text": "Open inclusions are etale, so etale-localization exchange and exact-inverse-image cohomology give $G_j|_{W_j}\\cong R^q(u_j|_{Z_j})_*(A_j|_{Z_j})$ and $(R^qu_*A)|_W\\cong R^q(u|_Z)_*(A|_Z)$. For any transition or projection square write its arrows as $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$. Let $W\\subseteq Y$, $W'=g^{-1}W$, $Z=f^{-1}W$, $Z'=f'^{-1}W'$, with open inclusions $j,j',k,k'$. Apply the exchange-cube lemma with $(X_0,Y_0,S_0,T_0)=(Y',X',Y,X)$, $(X_1,Y_1,S_1,T_1)=(W',Z',W,Z)$ and $(x,y,s,a)=(j',k',j,k)$. Its $E_0,E_1$ are original and restricted exchange; its $P,Q$ are the localization exchanges for $f,f'$. Indeed the faces $(f,f|_Z,j,k)$ and $(f',f'|_{Z'},j',k')$ are cartesian, since $Z=f^{-1}W=X\\times_YW$ and $Z'=X'\\times_{Y'}W'$. The cartesian-square exchange of the localization lemma is the mate of the derived square isomorphism, in which only the equality of composites enters. That isomorphism is the class of the termwise sheaf-level composite $c^{-1}\\circ c$ along that equality. By clause (2) of derived inverse-image composition, this is the commutative-square isomorphism $\\theta$. So the two exchange definitions give the same morphisms $P,Q$, and these are isomorphisms. All six faces commute by restriction and the original square equality. The cube equation, taking degree $q$ through exact inverse images, identifies original exchange restricted to $W'$ with restricted-square exchange under these localization isomorphisms and inverse-image composition comparisons. Coefficient naturality and the restricted legs in step 4 identify the coefficient maps too. Thus $C_u|_W$ is exactly the canonical comparison for $Z_j\\to W_j$.",
+   "uses": [
+    "lem-weil-pbc-etale-localization-exchange",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-kun-derived-exchange-cube",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-derived-square-iso",
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, second proof: localization on inverse-image affine opens"
+   }
+  },
+  {
+   "text": "It remains to prove the restricted comparisons are isomorphisms on every $W$. Indeed local injectivity and local surjectivity on these opens give the same two properties on $B$, and the locally-bijective sheafification criterion then gives the original isomorphism. By steps 3--5 each restricted problem has affine bases, qcqs sources, affine transitions, the stated limit coefficients, and exactly the specified comparison. Rename this restricted system $V_j\\to B_j$ for the rest of the proof.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, second proof: localization on inverse-image affine opens"
    }
   },
   {
@@ -93,7 +138,7 @@
    }
   },
   {
-   "text": "Put $P_j(U_j)=H^q(T_j,A_{j,T_j})$ and $P(U)=H^q(T,A|_T)$, with canonical sheafification maps $\\theta_j:P_j(U_j)\\to G_j(U_j)$ and $\\theta:P(U)\\to(R^qu_*A)(U)$. The commutative-square chart compatibility lemma, first for a transition square and then for a projection square, followed by naturality for the coefficient maps, gives\n$$C_u(U)\\circ h_U=\\theta\\circ\\alpha_U,$$\nwhere $h_U:\\varinjlim_{j\\ge i}P_j(U_j)\\to L(U)$ is induced by the $\\theta_j$ and the section formula of step 3. In particular, this is a commutative diagram with top row $\\varinjlim P_j\\to L(U)$, bottom row $P(U)\\to R^qu_*A(U)$, left vertical arrow $\\alpha_U$ an isomorphism, and right vertical arrow the specified $C_u(U)$. It is a diagram for the actual mate-defined comparison, not just for some isomorphism between the objects.",
+   "text": "Put $P_j(U_j)=H^q(T_j,A_{j,T_j})$ and $P(U)=H^q(T,A|_T)$, with canonical sheafification maps $\\theta_j:P_j(U_j)\\to G_j(U_j)$ and $\\theta:P(U)\\to(R^qu_*A)(U)$. The commutative-square chart compatibility lemma, first for a transition square and then for a projection square, followed by naturality for the coefficient maps, gives\n$$C_u(U)\\circ h_U=\\theta\\circ\\alpha_U,$$\nwhere $h_U:\\varinjlim_{j\\ge i}P_j(U_j)\\to L(U)$ is induced by the $\\theta_j$ and the section formula of step 7. In particular, this is a commutative diagram with top row $\\varinjlim P_j\\to L(U)$, bottom row $P(U)\\to R^qu_*A(U)$, left vertical arrow $\\alpha_U$ an isomorphism, and right vertical arrow the specified $C_u(U)$. It is a diagram for the actual mate-defined comparison, not just for some isomorphism between the objects.",
    "uses": [
     "lem-kun-commutative-exchange-chart",
     "sbc-lem-higher-direct-image-presheaf"
@@ -105,7 +150,7 @@
    }
   },
   {
-   "text": "Let $s\\in(R^qu_*A)(U)$. Locally on $U$, the sheafification description and local representation provide $z\\in P(U)$ mapping to $s$; refine the cover by affine etale objects. Each such object has a model at some stage by affine-etale descent, and step 4 gives $z=\\alpha_U(\\zeta)$ for a class $\\zeta\\in\\varinjlim_jP_j(U_j)$. Then step 5 gives $C_u(h_U(\\zeta))=s$. Thus $C_u$ is locally surjective on the affine etale site.",
+   "text": "Let $s\\in(R^qu_*A)(U)$. Locally on $U$, the sheafification description and local representation provide $z\\in P(U)$ mapping to $s$; refine the cover by affine etale objects. Each such object has a model at some stage by affine-etale descent, and step 8 gives $z=\\alpha_U(\\zeta)$ for a class $\\zeta\\in\\varinjlim_jP_j(U_j)$. Then step 9 gives $C_u(h_U(\\zeta))=s$. Thus $C_u$ is locally surjective on the affine etale site.",
    "uses": [
     "sbc-lem-higher-direct-image-presheaf",
     "lem-weil-pbc-site-sheafification-sections-local",
@@ -119,7 +164,7 @@
    }
   },
   {
-   "text": "Let $\\xi\\in L(U)$ have $C_u(\\xi)=0$. By the section formula of step 3 and the elementwise description of a filtered colimit of abelian groups (integer modules), choose a stage $j\\ge i$ and $\\xi_j\\in G_j(U_j)$ representing $\\xi$. Since $G_j$ is the sheafification of $P_j$, there is a finite standard affine etale cover $\\{U_{j,k}\\to U_j\\}$ on which $\\xi_j$ lifts to $z_{j,k}\\in H^q(V_j\\times_{B_j}U_{j,k},A_j)$. Pull this cover back to $U$ and work on one member. Step 5 says the image of the pulled-back raw class in $R^qu_*A$ is zero. The local-equality property of sheafification, applied to that raw class and zero, gives a further affine etale cover on which the raw limit class itself is zero. Descend each of these affine objects to some stage. Choose a common upper bound of that stage and $j$, then use morphism descent to represent its map to $U_{j,k}$ after enlarging this upper bound once more. The coefficient on the new chart is pulled back from $A_j$ and mapped into the later $A_l$ by the given coefficient transition; this is exactly the restriction of the original raw class in the system of step 4, by the coefficient and test-object naturality in step 5. Different covering members may use different later stages, since we seek local vanishing. On each resulting object step 4 applies, so injectivity of $\\alpha$ says that the restricted raw class is zero in the colimit of the $P_l$. Its image under $h$ is therefore zero. That image is precisely the restriction of $\\xi$, by the diagram of step 5 and the restriction maps of the stage sheafification maps. Hence $\\xi$ is locally zero. This does not infer global vanishing of a cohomology class from vanishing of its sheafification; the second local refinement is essential.",
+   "text": "Let $\\xi\\in L(U)$ have $C_u(\\xi)=0$. By the section formula of step 7 and the elementwise description of a filtered colimit of abelian groups (integer modules), choose a stage $j\\ge i$ and $\\xi_j\\in G_j(U_j)$ representing $\\xi$. Since $G_j$ is the sheafification of $P_j$, there is a finite standard affine etale cover $\\{U_{j,k}\\to U_j\\}$ on which $\\xi_j$ lifts to $z_{j,k}\\in H^q(V_j\\times_{B_j}U_{j,k},A_j)$. Pull this cover back to $U$ and work on one member. Step 9 says the image of the pulled-back raw class in $R^qu_*A$ is zero. The local-equality property of sheafification, applied to that raw class and zero, gives a further affine etale cover on which the raw limit class itself is zero. Descend each of these affine objects to some stage. Choose a common upper bound of that stage and $j$, then use morphism descent to represent its map to $U_{j,k}$ after enlarging this upper bound once more. The coefficient on the new chart is pulled back from $A_j$ and mapped into the later $A_l$ by the given coefficient transition; this is exactly the restriction of the original raw class in the system of step 8, by the coefficient and test-object naturality in step 9. Different covering members may use different later stages, since we seek local vanishing. On each resulting object step 8 applies, so injectivity of $\\alpha$ says that the restricted raw class is zero in the colimit of the $P_l$. Its image under $h$ is therefore zero. That image is precisely the restriction of $\\xi$, by the diagram of step 9 and the restriction maps of the stage sheafification maps. Hence $\\xi$ is locally zero. This does not infer global vanishing of a cohomology class from vanishing of its sheafification; the second local refinement is essential.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-modules-elementwise",
     "sbc-lem-higher-direct-image-presheaf",
@@ -134,7 +179,7 @@
    }
   },
   {
-   "text": "For any two local sections with equal images, apply step 7 to their difference. Thus $C_u$ is locally injective as well as locally surjective. Apply the locally-bijective criterion for sheafification to this morphism viewed as a map of presheaves of abelian groups; its source and target are already sheaves, so their sheafifications are themselves. It follows that $C_u$ is an isomorphism on the affine etale site, hence on the small etale site by the restriction equivalence. Finally the open cover in step 2 gives local injectivity and local surjectivity on the original base, and the same criterion gives the original isomorphism. All cohomology-continuity and sheafification results used here apply to arbitrary abelian sheaves, including nontorsion ones.",
+   "text": "For any two local sections with equal images, apply step 11 to their difference. Thus $C_u$ is locally injective as well as locally surjective. Apply the locally-bijective criterion for sheafification to this morphism viewed as a map of presheaves of abelian groups; its source and target are already sheaves, so their sheafifications are themselves. It follows that $C_u$ is an isomorphism on the affine etale site, hence on the small etale site by the restriction equivalence. Finally the open cover in step 6 gives local injectivity and local surjectivity on the original base, and the same criterion gives the original isomorphism. All cohomology-continuity and sheafification results used here apply to arbitrary abelian sheaves, including nontorsion ones.",
    "uses": [
     "lem-weil-pbc-site-sheafification-iso-locally-bijective",
     "lem-weil-pbc-affine-etale-site-topos"
@@ -154,22 +199,28 @@
   "prop-weil-pbc-inverse-image-exact",
   "def-weil-pbc-adjunction-mate",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-limit-tail-open-coefficients",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-kun-commutative-exchange-chart",
+  "lem-weil-pbc-etale-localization-exchange",
+  "lem-kun-derived-exchange-cube",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
   "lem-weil-pbc-affine-etale-site-topos",
   "lem-weil-pbc-affine-etale-site-colimit",
   "lem-weil-pbc-cohomology-colimit-of-sites",
   "def-weil-pbc-sites-and-cohomology",
   "def-pc-fibre-product",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-kun-commutative-exchange-chart",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-site-sheafification-sections-local",
   "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-square-iso",
+  "def-weil-pbc-cartesian-square"
  ],
  "proof_origin": {
   "by": "document",
@@ -347,7 +398,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0ezt",
   "by": "worker",
@@ -369,11 +420,11 @@
   }
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-kun-0eym",
   "worker": "stage1",
-  "summary": "Repaired returned C4/E1: replaced the cartesian-only exchange definition by def-kun-commutative-derived-exchange, explicitly built from the general inverse-image composition isomorphisms and derived adjunction mate. Attached its existing general CommSq construction AlgebraicGeometry.Etale.baseChange after reading its body and the sorry map. The chart child cites the same interface. The eight-step Stacks 0EYM continuity argument, arbitrary abelian coefficients and noncartesian scope are retained; the statement change is only the exchange citation, with no changed mathematical hypothesis or conclusion. Both new nodes have statement only and logged searches; citations.json includes the new definition and updated chart quotes.",
-  "blueprint": "Historical node provenance remains lem-kun-0ezt, blueprint_proof_text sentence invoking Tag 0EYM. The source-aligned proof-unit binding is sk-lem-kun-relative-continuity: its statement is this item and steps 1--8 are carried by the corresponding eight item steps, with the chart lemma supporting steps 2 and 5. This auxiliary Tag 0EYM route is not identified with the Kunneth/projection-formula unit statement.",
+  "summary": "Q140 repair of the 2026-10-17 re-split return: preserved the statement and Lean record, retained the Tag 0EYM second-proof route and original steps outside localization (cross-reference renumbering only), and replaced the long step 2 by five short steps. Existing geometry and tail-open coefficient lemmas supply the restriction constructions; existing etale-localization exchange and the existing general derived exchange-cube identity identify the actual restricted comparison. The cube specialization is written explicitly. No new nodes are required and every non-elementary step is shorter than 2000 characters.",
+  "blueprint": "Preserves historical ancestry lem-kun-0ezt, proof sentence invoking 0EYM; source-aligned unit sk-lem-kun-relative-continuity still has its eight logical stages: original step 1 is item step 1, original step 2 is item steps 2--6, original steps 3--8 are item steps 7--12.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-derived-inverse-image-composition",
@@ -426,6 +477,14 @@
    {
     "node": "lem-weil-pbc-exact-functor-complex-cohomology",
     "why": "Generic exact-functor comparison of cohomology with inverse image, needed to pass the mate-pasting equation to degree q; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-limit-tail-open-coefficients",
+    "why": "Generic restriction of coherent coefficients and colimit cocones to tail inverse-image opens, used only in the existing 0EYM affine-localization argument; does not replace the continuity unit route."
+   },
+   {
+    "node": "lem-kun-derived-exchange-cube",
+    "why": "Generic exchange coherence for a commutative cube, specialized to open restriction to identify the actual comparison morphism; it does not invoke the parent continuity/base-change theorem or replace the unit route."
    }
   ]
  },
@@ -442,15 +501,17 @@
   "lem-weil-pbc-cohomology-colimit-of-sites",
   "def-weil-pbc-sites-and-cohomology",
   "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-exact-functor-complex-cohomology"
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-etale-limit-tail-open-coefficients",
+  "lem-kun-derived-exchange-cube"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q29-9e31af040",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q140-b3c83763c",
+  "group": "Q140",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-9e31af040 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but both new nodes have incomplete stage-1 metadata: created lacks by/date/group, merged_into is missing, and lean_audit is missing. Corrected whole JSON files are in fixes/dag/nodes/sec-smooth-purity/ for both nodes.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-b3c83763c (reviewer sub-agent of L); spot-checked: I read the whole item: the statement (unchanged, and it agrees with Stacks 0EYM lemma-relative-colimit-general hypothesis by hypothesis), all 12 steps, the statement of every cited node, the unit and 0EYM (the construction of the map and both proofs). No new nodes and no SGA citations. Step 2 (restriction to the tail) is genuinely elementary. Step 3: the permanence clauses and the open-restriction clause of the limit lemma give the claims, and Z_j=a_{ji0}^{-1}u_{i0}^{-1}W_{i0} follows from commutativity. Step 4: the hypotheses of the tail-open coefficients lemma hold for both the source system (g_0=u_{i0}) and the base system (g_0=id). Step 5: I recomputed the cube specialization (X0,Y0,S0,T0)=(Y',X',Y,X), (h0,e0,f0,g0)=(f',g',g,f), level 1 = the restrictions, with g'(Z')⊆Z because Z'=(fg')^{-1}W. The cube identity with Q invertible gives exactly the claimed conjugation. Steps 7–12 are the earlier reviewed text, renumbered; I rechecked T_k=V_k x_{V_j} T_j and the qcqs and affine hypotheses of the continuity theorem. The only cited node outside the route, lem-kun-derived-exchange-cube, is accepted as a generic tool use; it has no proof deps, so it creates no cycle. FIX (C4): step 5 used lem-weil-pbc-etale-localization-exchange, which is about the cartesian exchange def-weil-pbc-derived-exchange, to say the cube's P and Q (def-kun-commutative-derived-exchange exchanges) are isomorphisms, without saying why the two definitions agree. I added that identification: the open-restriction faces are cartesian; the derived square isomorphism is the class of the termwise canonical composite (only the equality enters); clause (2) of derived inverse-image composition makes it the commutative-square isomorphism. I added the matching citations to step 5 and proof_deps. The corrected whole item is in fixes/dag/nodes/sec-smooth-purity/lem-kun-0eym.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
