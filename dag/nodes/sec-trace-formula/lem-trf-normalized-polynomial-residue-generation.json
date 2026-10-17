@@ -203,5 +203,31 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-bf5a2e734 (reviewer sub-agent of L); spot-checked: Read the complete item, report, unit, chapter, all cited node statements, and Temkin Proposition 4.3.1 pp. 27–28. Verified each proof step, normalization and residue-field maps, hypotheses, edge cases, searches, DAG uniqueness, and route compliance. No new nodes or repairs are needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.NormalizedPolynomialResidueGeneration",
+  "declaration": "ValuationSubring.normalizedPolynomialResidueGeneration",
+  "declarations": [
+   "ValuationSubring.normalizedPolynomialResidueBaseSubring",
+   "ValuationSubring.normalizedPolynomialResidueBaseMap",
+   "ValuationSubring.normalizedPolynomialResidueBaseMap_isLocal",
+   "ValuationSubring.normalizedPolynomialResidueAlgebra",
+   "ValuationSubring.normalizedPolynomialResidueGeneration"
+  ],
+  "file": "lean/Sheaf/FieldTheory/NormalizedPolynomialResidueGeneration.lean",
+  "statement": "theorem normalizedPolynomialResidueGeneration (K : Type u) [Field K] (O : ValuationSubring (RatFunc K)) (hscale : ∀ x : RatFunc K, x ≠ 0 → ∃ c : Kˣ, ∃ u : Oˣ, ((u : O) : RatFunc K) = algebraMap K (RatFunc K) c * x) : IntermediateField.adjoin (IsLocalRing.ResidueField (normalizedPolynomialResidueBaseSubring K O)) {x : IsLocalRing.ResidueField O | ∃ (f : Polynomial K) (π : Kˣ) (u : Oˣ), Polynomial.Monic f ∧ Irreducible f ∧ ((u : O) : RatFunc K) = algebraMap (Polynomial K) (RatFunc K) f / algebraMap K (RatFunc K) π ∧ x = IsLocalRing.residue O (u : O)} = ⊤ ∧ (Algebra.trdeg (IsLocalRing.ResidueField (normalizedPolynomialResidueBaseSubring K O)) (IsLocalRing.ResidueField O) = (1 : Cardinal) → ∃ (f : Polynomial K) (π : Kˣ) (u : Oˣ), Polynomial.Monic f ∧ Irreducible f ∧ ((u : O) : RatFunc K) = algebraMap (Polynomial K) (RatFunc K) f / algebraMap K (RatFunc K) π ∧ Transcendental (IsLocalRing.ResidueField (normalizedPolynomialResidueBaseSubring K O)) (IsLocalRing.residue O (u : O)))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical helpers specialize Mathlib ValuationSubring.comap, the constant map, and IsLocalRing.ResidueField.map; the named local-hom theorem supplies only the proof that this explicit canonical map reflects units. The conclusion is field generation and its transcendence-degree-one consequence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-711d2e511",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Independent audit found the statement, dependencies, canonical helpers, edge cases, docstrings, and Temkin source alignment correct. scompile.py compiled both sandbox and library module successfully; no route-pivot issue or delivery error found."
  }
 }

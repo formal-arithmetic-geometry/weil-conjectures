@@ -237,5 +237,27 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-0d6b3566d (reviewer sub-agent of L); spot-checked: I read the mathematics in full. I checked Stacks morphisms.tex Tag 0AFF (lemma-smoothness-dimension, line 7572) and Tag 0AFE (lemma-rel-dimension-dimension, line 5679), both statement and proof, and the definition of relative dimension d (line 5564). The item states 0AFF exactly, with topological local dimensions and nothing weakened. Steps 1-6 follow the 0AFF proof and each is supported by the statements it cites. Step 1: the differentials node gives the finite d and the locally-constant node gives U; def-kun-dimension and def-kun-topological-dimension-at-point are the same formula. Step 2: restricting to the open U keeps flatness (same stalk maps), local Noetherianity and local finite type (01TQ leaf applied to affines W in U). Step 3: the fibre over b is open in the full fibre by def-pc-scheme-fibre, and the open-subspace lemma gives fibre dimension d. Steps 4-5 apply 0AFE and transfer back to P; this holds in extended naturals, so dim_q Q = infinity is covered. The new node lem-per-flat-constant-relative-dimension keeps all of 0AFE's hypotheses; writing relative dimension pointwise is equivalent for fibres locally of finite type over a field. It meets B1-B9 and is not a restatement of the item: it also covers the non-smooth Spec k[eps]/eps^2 -> Spec k. I found no duplicate in the DAG (checked 02JS, 00ON, 00OH, 01UA and the 00OM-based nodes) or in the main-20261015 blueprint. Small cases checked: A^1_k (including its generic point), A^1 over a DVR, Spec K -> Spec R, D(pi t-1), Spec k[eps], and a closed point embedded in A^1 (excluded by flatness). I accept both tool_uses; the two cited closures are slopmaster2-closed. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothLocalDimension",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_add_of_smooth",
+  "declarations": [
+   "AlgebraicGeometry.topologicalKrullDimAt_eq_add_of_smooth",
+   "AlgebraicGeometry.topologicalKrullDimAt_asFiber_eq_of_smoothOfRelativeDimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothLocalDimension.lean",
+  "statement": "theorem topologicalKrullDimAt_eq_add_of_smooth (P Q : Scheme.{u}) [IsLocallyNoetherian P] [IsLocallyNoetherian Q] (g : P ⟶ Q) [Smooth g] (p : P) : topologicalKrullDimAt p = topologicalKrullDimAt (g p) + topologicalKrullDimAt (g.asFiber p)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cd1b034b5",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Independent review complete; statement and dependencies match Stacks Tag 0AFF, no hollow definitions or route-pivot machinery, and per-file scompile passed."
  }
 }
