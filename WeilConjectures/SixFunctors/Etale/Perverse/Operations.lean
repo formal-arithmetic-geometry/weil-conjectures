@@ -262,10 +262,7 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
   have hDK : IsPerverseLE (-n) DY :=
     SupportCondition.of_iso (verdierDualShiftIso _ aY K n) hK
   have h₁ := isPerverseLE_upperStar aY d f hDK
-<<<<<<< HEAD
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
-=======
->>>>>>> origin/bundle/sec-deligne-laumon-a1-b1
   obtain ⟨L₀, _, hL₀, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨-, hL₀f⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L₀ hL₀
   have h₂ := SupportCondition.derivedTensor h₁ (torAmplitudeIn_singleFunctor_zero_of_flat _ L₀ hL₀f)
@@ -343,13 +340,8 @@ exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` and the support estimate for `Rf_*` along
 (`AlgebraicGeometry.Etale.DerivedCategory.supportCondition_shift_rightDerivedLowerStar`), which
 does not use the bound on the fibre dimension.
 (blueprint: `lem-per-artin-gabber-affine-curve`) -/
-<<<<<<< HEAD
-theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [PerfectField k] [IsAffineHom f]
-    [LocallyOfFiniteType f]
-=======
 theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]
     [PerfectField k]
->>>>>>> origin/bundle/sec-deligne-laumon-a1-b1
     [HasCompactification f] [QuasiCompact f] [HasCompactification (f ≫ aY)]
     (_hf : ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : ℕ∞)) {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

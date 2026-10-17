@@ -492,11 +492,6 @@ namespace ConstituentsLE
 
 variable {V'' : Type*} [AddCommGroup V''] [Module k V''] {τ : Representation k W V''}
 
-/-- The constituents of a subquotient `S / U` are constituents of `ρ`. -/
-theorem subquotient (U S : Subrepresentation ρ) : ConstituentsLE (S.subquotient U) ρ :=
-  (of_surjective (σ := S.subquotient U) (ρ := S.toRepresentation) ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
-    (Submodule.mkQ_surjective _)).trans (of_injective S.subtype S.subtype_injective)
-
 /-- The constituents of `⋀ⁿ V` are constituents of the pieces `⋀ʲ P ⊗ ⋀ⁿ⁻ʲ (V ⧸ P)`, for a
 subrepresentation `P`. (blueprint: `lem-mg-filtered-exterior-power`) -/
 theorem exteriorPower_of_tprod [FiniteDimensional k V] (P : Subrepresentation ρ) (n : ℕ)
