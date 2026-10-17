@@ -44,7 +44,8 @@ variable (S : Type u) [CommRing S] [Algebra (A ⧸ I) S] [Algebra A S] [IsScalar
 /-- The reduction isomorphism `H_A(C̄) ⊗_A (A ⧸ I) ≃ C̄`. -/
 noncomputable def closedLiftTensorEquiv :
     TensorProduct A (Algebra.ClosedLift A S) (A ⧸ I) ≃+* S :=
-  (Algebra.TensorProduct.quotIdealMapEquivTensorQuot (Algebra.ClosedLift A S) I).symm.toRingEquiv.trans
+  (Algebra.TensorProduct.quotIdealMapEquivTensorQuot (Algebra.ClosedLift A S)
+    I).symm.toRingEquiv.trans
     (RingEquiv.ofBijective _ (Algebra.ClosedLift.bijective_reduction A S I))
 
 lemma closedLiftTensorEquiv_one_tmul (r : A ⧸ I) :
@@ -66,6 +67,21 @@ noncomputable def closedLiftSpecPullbackIso :
   asIso (Spec.map (CommRingCat.ofHom (closedLiftTensorEquiv I S :
       TensorProduct A (Algebra.ClosedLift A S) (A ⧸ I) →+* S))) ≪≫
     (pullbackSpecIso A (Algebra.ClosedLift A S) (A ⧸ I)).symm
+
+lemma closedLiftSpecPullbackIso_hom_fst :
+    (closedLiftSpecPullbackIso I S).hom ≫ pullback.fst _ _ =
+      Spec.map (CommRingCat.ofHom (Algebra.ClosedLift.toAlgHom A S :
+        Algebra.ClosedLift A S →+* S)) := by
+  simp only [closedLiftSpecPullbackIso, Iso.trans_hom, asIso_hom, Iso.symm_hom, Category.assoc]
+  erw [pullbackSpecIso_inv_fst]
+  rw [← Spec.map_comp]
+  congr 1
+  ext x
+  simp only [closedLiftTensorEquiv, CommRingCat.hom_comp, CommRingCat.hom_ofHom,
+    RingHom.coe_comp, Function.comp_apply, RingEquiv.coe_toRingHom, RingEquiv.trans_apply,
+    AlgEquiv.coe_ringEquiv, RingEquiv.ofBijective_apply]
+  erw [Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, one_smul]
+  rfl
 
 lemma closedLiftSpecPullbackIso_hom_snd :
     (closedLiftSpecPullbackIso I S).hom ≫ pullback.snd _ _ =
@@ -143,7 +159,7 @@ lemma exists_closedLiftBasis_cover (V : (Spec (.of (A ⧸ I))).ProEt) :
       Spec.map θ = 𝒜.f x ≫ V.hom := Spec.map_surjective _
   choose θ hθ using hθ
   have hwe (x : 𝒜.I₀) : letI := (θ x).hom.toAlgebra; Algebra.WeaklyEtale (A ⧸ I) (𝒜.X x) := by
-    letI := (θ x).hom.toAlgebra
+    let := (θ x).hom.toAlgebra
     rw [← weaklyEtale_SpecMap_algebraMap_iff]
     change WeaklyEtale (Spec.map (θ x))
     rw [hθ]
@@ -156,7 +172,7 @@ lemma exists_closedLiftBasis_cover (V : (Spec (.of (A ⧸ I))).ProEt) :
   let U (x : 𝒜.I₀) := Scheme.ProEt.ofOpenImmersion V (𝒜.f x)
   let g (x : 𝒜.I₀) : closedLiftBasisObj I (S x) ⟶ U x :=
     MorphismProperty.Over.homMk ((closedLiftBasisIso I (S x)).inv ≫ Spec.map (κ x)) (by
-      letI := (θ x).hom.toAlgebra
+      let := (θ x).hom.toAlgebra
       change _ ≫ 𝒜.f x ≫ V.hom = _
       rw [Category.assoc, Iso.inv_comp_eq, closedLiftBasisIso_hom_comp, ← hθ x, ← Spec.map_comp]
       congr 1
@@ -193,7 +209,8 @@ lemma exists_closedLiftBasis_cover (V : (Spec (.of (A ⧸ I))).ProEt) :
     have : QuasiCompact ((ProEt.forget _ ⋙ Over.forget _).map (g x)) := hgq x
     exact Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale)
       (MorphismProperty.of_postcomp (W := @WeaklyEtale) (W' := @WeaklyEtale) (g x).left
-        (U x).hom (U x).prop (by rw [MorphismProperty.Over.w (g x)]; exact (closedLiftBasisObj I (S x)).prop))
+        (U x).hom (U x).prop (by
+          rw [MorphismProperty.Over.w (g x)]; exact (closedLiftBasisObj I (S x)).prop))
 
 variable {R : Type (u + 1)} [Ring R] {U : Scheme.{u}} (j : U ⟶ Spec A) [IsOpenImmersion j]
   [QuasiCompact j]
@@ -232,7 +249,8 @@ lemma isIso_map_limit_post_of_isClosedLiftBasis
     infer_instance
   exact IsIso.of_isIso_comp_right _ (limit.post (D ⋙ (closedSpecι I)^*[ModuleCat.{u + 1} R]) EV)
 
-/-- Blueprint `det-sf-open-closed-pullback-limits` (subsection `sk-prop-sf-closed-unit`), part (2),
+/-- Blueprint `det-sf-open-closed-pullback-limits` (subsection `sk-prop-sf-open-closed-triangle`),
+part (2),
 for `X = Spec A`: let `i : Spec (A ⧸ I) ⟶ Spec A` be a closed immersion with quasi-compact open
 complement `j`. The pullback `i^*` of pro-étale sheaves of modules preserves all small limits.
 (It preserves all colimits, being a left adjoint, and is exact,

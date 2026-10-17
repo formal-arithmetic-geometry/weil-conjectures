@@ -177,7 +177,8 @@ section BaseChange
 variable {Z' U' X' : Scheme.{u}} (g : X' ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i']
   (j' : U' ⟶ X') [IsOpenImmersion j'] [QuasiCompact j'] (gZ : Z' ⟶ Z) (gU : U' ⟶ U)
 
-omit [QuasiCompact j] [IsClosedImmersion i'] [QuasiCompact j'] in
+omit [IsClosedImmersion i] [QuasiCompact j] [IsClosedImmersion i'] [IsOpenImmersion j']
+  [QuasiCompact j'] in
 /-- The pullback along `g` of a sheaf supported on `Z` vanishes on the preimage `U'` of the
 complement of `Z`. -/
 lemma isZero_upperStar_upperStar_lowerStar (hij : IsCompl (Set.range i.base) (Set.range j.base))

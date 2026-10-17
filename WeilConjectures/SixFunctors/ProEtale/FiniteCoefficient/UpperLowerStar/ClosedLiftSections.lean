@@ -235,7 +235,7 @@ theorem subsingleton_openImmersionLowerShriek_closedLiftSpec [Algebra.IndEtale (
         refine ⟨⟨?_⟩, (O k).isOpen⟩
         have : (O k : Set W.left)ᶜ = ⋃ l ∈ {l | l ≠ k}, (O l : Set W.left) := by
           ext x
-          simp only [Set.mem_compl_iff, Set.mem_setOf_eq, Set.mem_iUnion, exists_prop]
+          simp only [Set.mem_compl_iff, Set.mem_ofPred_eq, Set.mem_iUnion, exists_prop]
           refine ⟨fun hx ↦ ?_, fun ⟨l, hl, hx⟩ hx' ↦
             (disjoint_iff.1 (hdisj l k hl)).le ⟨hx, hx'⟩⟩
           obtain ⟨l, hl⟩ := hcov x
