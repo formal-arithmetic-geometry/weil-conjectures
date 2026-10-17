@@ -18,9 +18,105 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A field is Noetherian, since its only ideals are $(0)$ and $(1)$. Hence [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian, and [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes $N$ Noetherian and quasi-compact. It is reduced because its local rings are local rings of $X$. The finite-type condition is local on its source apart from quasi-compactness: restrict the finite-type charts of $X$ to principal affine opens inside $N$, and take a finite subcover. Thus $N$ is finite type over $k$. Since $Y\\subseteq N$, it remains a reduced closed subscheme with exactly its original pure dimension one. If $N$ is empty, so are $Y$ and $T$, and every conclusion is vacuous; otherwise continue.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 hypotheses; Tags 01T6 and 01OW/01OZ for Noetherian restriction."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-equidimensional-open-local-dimension] with ambient scheme $X$, open $X$ and $n=1$. It says that every point of $N$ has local topological dimension $1$ in $X$. Apply [lem-sbc-constant-local-dimension-components] to the locally Noetherian $X$ and its open $N$: every irreducible component of $N$ has dimension $1$. This supplies the ambient equidimensionality needed in both later applications; it is not inferred merely from openness in an arbitrary Noetherian curve.",
+   "uses": [
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 ambient dimension hypothesis; Tag 0A21 (lemma-dimension-locally-algebraic)."
+   }
+  },
+  {
+   "text": "Put $W=\\overline{N\\setminus Y}_{\\mathrm{red}}$ inside $N$. Apply [lem-trf-complementary-pure-subcurve-components] to $(N,Y)$, using Steps 1 and 2. It gives that $W$ is reduced and pure of dimension one (possibly empty), and that the reduced complementary closure of $N\\setminus W$ in $N$ is $Y$. Both opens $N\\setminus Y$ and $N\\setminus W$ are reduced: their local rings are those of the reduced $N$. Therefore [lem-trf-reduced-scheme-image] identifies their scheme-theoretic closures with $W$ and $Y$, respectively. This verifies the hypotheses and the actual complementary closed subscheme when the roles are exchanged.",
+   "uses": [
+    "lem-trf-complementary-pure-subcurve-components",
+    "lem-trf-reduced-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 first paragraph and Tag 056B (lemma-scheme-theoretic-image-reduced)."
+   }
+  },
+  {
+   "text": "The open immersion $j:X\\setminus Y\\hookrightarrow X$ is quasi-compact: its inverse image in every affine open of $X$ is an open subscheme of a Noetherian scheme and is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. It is quasi-separated since it is an immersion with diagonal an isomorphism. Its source is reduced, so [lem-trf-reduced-scheme-image] identifies its scheme-theoretic image with the stated reduced closure $Z$. Apply [lemma-nagata-scheme-image-restrict-open] to $j$ and the open target $N$. Its restricted image is the scheme-theoretic closure of $N\\setminus Y$, namely $W$ by Step 3. Thus $W=Z\\cap N$ as closed subschemes of $N$. Because $Y\\subseteq N$, summing the two restricted ideals identifies $Y\\cap W$ with the entire scheme $T=Y\\cap Z$, including its scheme structure.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-trf-reduced-scheme-image",
+    "lemma-nagata-scheme-image-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B and 0E38."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-stacks-nodal-closed-subcurve] to $N$ and $Y$. Steps 1 and 2 give reducedness, finite type and pure dimension one; the stated nodal hypothesis supplies its nonsmooth completed-local-ring condition. Here $k$ is algebraically closed, so closed-point residue fields are $k$ and the prescribed nodal completions have exactly the required coefficient field. The complementary scheme-theoretic closure is $W$ by Step 3, and $Y\\cap W=T$ by Step 4. Conclusion (1) makes $Y$ nodal, (2)(a) gives a finite disjoint union of spectra of finite separable extensions of $k$, (2)(b) makes every boundary point a node of $N$, and (2)(c) makes $Y$ smooth there. An open subscheme has the same local rings at its points, so those nodes are nodes of $X$.",
+   "uses": [
+    "lem-trf-stacks-nodal-closed-subcurve",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (1), (2)(a)--(c); closed points over an algebraically closed field."
+   }
+  },
+  {
+   "text": "A finite field extension of an algebraically closed field is the field itself: the minimal polynomial of any element is irreducible and splits into linear factors, hence has degree one. Consequently the spectra of the finite separable extensions obtained in Step 5 are copies of $\\operatorname{Spec}k$. This also allows the empty disjoint union.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (2)(a), elementary algebraically closed specialization."
+   }
+  },
+  {
+   "text": "If $W$ is empty, then $T=Y\\cap W$ is empty and the remaining smoothness assertion is vacuous. Otherwise apply [lem-trf-stacks-nodal-closed-subcurve] again with ambient $N$ and closed subcurve $W$. The ambient hypotheses were checked in Steps 1, 2 and 5; $W$ is reduced and pure one-dimensional by Step 3. Crucially, its complementary scheme-theoretic closure in $N$ is exactly $Y$, also by Step 3. Conclusion (2)(c) therefore says that $W$ is smooth at every point of $W\\cap Y=T$. Finally $W=Z\\cap N$ is an open subscheme of $Z$ by Step 4; their local rings and morphisms to $k$ agree in that neighbourhood, so this is smoothness of $Z$ at the boundary points.",
+   "uses": [
+    "lem-trf-stacks-nodal-closed-subcurve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (2)(c), applied to W after the complementary-closure identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-trf-complementary-pure-subcurve-components",
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-stacks-nodal-closed-subcurve",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lemma-nagata-scheme-image-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), applied to the nodal neighbourhood N and then with the complementary subcurve exchanged."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +155,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-contraction-euler-defect",
@@ -89,5 +185,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-subcurve-boundary",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery: corrected created.item/group to this item/Q51; retained the Stacks nodal child and its searches, clarified its split-node hypotheses, and introduced two smaller generic statement-only inputs for reduced scheme-theoretic images and complementary components of a reduced pure subcurve. The seven short steps explicitly verify Noetherianity, finite type and pure dimension on N, identify both complementary scheme-theoretic closures, restrict Z schematically using the existing image-restriction theorem, and only then apply 0E38 in both orders. The item statement is unchanged.",
+  "blueprint": "Realizes the geometric input sentence under lem-trf-local-term-locality: the reduced subcurve inherits nodality and each boundary attachment has scheme-theoretic length one.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic local-dimension input used only to check pure dimension of the nodal open neighbourhood; the trace-formula unit has no such geometry lemma."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Generic converse from constant local dimension to component dimension; verifies hypotheses of the same 0E38 route and replaces no trace-formula step."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-restrict-open",
+    "why": "Generic localization of scheme-theoretic image, used to identify the complementary closure in the open neighbourhood; no trace-formula node gives this fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic finite-type closed-point residue-field calculation; checks the split-node hypothesis over the given algebraically closed field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-constant-local-dimension-components",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-e8c66b497",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-e8c66b497 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. The item JSON still records created.item=lem-trf-nodal-contraction-euler-defect and created.group=Q111; corrected whole file is in fixes/dag/nodes/sec-trace-formula/lem-trf-nodal-subcurve-boundary.json.; 1 file(s) fixed by the reviewer"
  }
 }

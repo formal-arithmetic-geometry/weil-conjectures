@@ -10,11 +10,115 @@
  "stmt_deps": [
   "lem-trf-algebraic-shriek-calculus",
   "def-weil-pbc-noetherian-ring",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-perfect-ring-complex",
+  "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a polynomial presentation $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ for which $A[0]$ is perfect, as in the hypothesis. The finite-type Noetherian-algebra theorem applied to $R\\to P$ makes $P$ Noetherian. Unpack the definition of a perfect ring complex to choose a bounded complex $E$ of finite projective $P$-modules representing $A[0]$, with $E^i=0$ outside some interval $[u,v]$. The polynomial model of algebraic upper shriek says that, after forgetting the $A$-action, $\\varphi^!K$ is $R\\operatorname{Hom}_P(A,K\\otimes_R^{\\mathbf L}P)[n]$. We will compute this model; no flatness of $R\\to A$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-pc-perfect-ring-complex",
+    "lem-trf-algebraic-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, lemma-shriek-boundedness, polynomial factorization and perfect first argument; Tag 0BZI for the polynomial model."
+   }
+  },
+  {
+   "text": "Let $K\\in D(R)$ have bounded finitely generated cohomology. The Noetherian pseudo-coherence criterion applies because $R$ is Noetherian, all $H^i(K)$ are finite, and they vanish for $i\\gg0$. Together with the definition of ring pseudo-coherence it gives a bounded-above finite-free $R$-complex $F$ representing $K$. Choose $b$ with $F^j=0$ for $j>b$. Finite free modules are flat directly: tensoring with $R^r$ is taking $r$ copies of a sequence, which preserves exactness coordinatewise. Thus the bounded-above flat-complex lemma makes $F$ K-flat. Derived change of rings, on the one-point ringed site, identifies $K\\otimes_R^{\\mathbf L}P\\in D(P)$ with the termwise scalar extension $L=F\\otimes_RP$. Each $L^j$ is finite free over $P$, and $L^j=0$ for $j>b$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, preservation under polynomial scalar extension; more-algebra.tex Tags 066E and 064K, finite-free K-flat model."
+   }
+  },
+  {
+   "text": "The monomial description of $P$ identifies its underlying $R$-module with a direct sum of copies of $R$. For every module $M$, $M\\otimes_RP$ is accordingly the direct sum of copies of $M$: the inverse maps send $m\\otimes\\sum r_\\alpha x^\\alpha$ to $(r_\\alpha m)_\\alpha$ and the $\\alpha$-th summand to $m\\otimes x^\\alpha$. Kernels and images in a direct-sum sequence are computed coordinatewise, since every element has finite support; hence $P$ is $R$-flat. Flat-tensor exactness identifies the kernels and images of the differential of $L$ with those of $F$ tensored with $P$, so $H^j(L)=H^j(F)\\otimes_RP$. Choose $a\\le b$ below the cohomological support of $K$. Then $H^j(L)=0$ for $j<a$ as well as for $j>b$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, polynomial scalar extension preserves bounded cohomology; algebra.tex Tag 00HD."
+   }
+  },
+  {
+   "text": "Replace $L$ by the explicit lower truncation $G$: set $G^j=0$ for $j<a$, $G^a=\\operatorname{coker}(L^{a-1}\\to L^a)$, and $G^j=L^j$ for $j>a$, with induced differential. The projection $L\\to G$ induces the identity on cohomology above $a$; in degree $a$ its kernel-of-differential modulo boundaries is exactly $H^a(L)$; below $a$ both cohomologies vanish. It is therefore a quasi-isomorphism. The images of any finite generating set of $L^a$ generate its quotient $G^a$, and the other nonzero terms are finite free. Thus $G$ is a bounded complex of finite $P$-modules in degrees $[a,b]$ representing $K\\otimes_R^{\\mathbf L}P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, finite-complex computation of the bounded coherent input; explicit good truncation."
+   }
+  },
+  {
+   "text": "The projective-complex derived-Hom model applies over $P$ to $E$ (bounded above and projective) and $G$ (bounded below). It represents $R\\operatorname{Hom}_P(A,K\\otimes_R^{\\mathbf L}P)$ by $C=\\operatorname{Hom}_P^\\bullet(E,G)$, with $C^t=\\bigoplus_{i=u}^v\\operatorname{Hom}_P(E^i,G^{i+t})$; the product formula is a finite direct sum because $E$ is bounded. Each $E^i$ is a direct summand of a finite free module: a finite generating set gives a surjection $P^{r_i}\\twoheadrightarrow E^i$, and projectivity supplies a section. Applying $\\operatorname{Hom}_P(-,G^j)$ makes $\\operatorname{Hom}_P(E^i,G^j)$ a retract of $(G^j)^{r_i}$. The projections of finite generators of this latter module generate the retract, so every $C^t$ is finite. A nonzero summand requires $u\\le i\\le v$ and $a\\le i+t\\le b$, hence $a-v\\le t\\le b-u$. Consequently $C$ is bounded in $[a-v,b-u]$.",
+   "uses": [
+    "lem-sc-affine-projective-complex-derived-hom",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, bounded finite-projective Hom calculation; more-algebra.tex Tag 0A66, lemma-RHom-out-of-projective, and algebra.tex Tag 05CE for projective splitting."
+   }
+  },
+  {
+   "text": "Because $P$ is Noetherian and each $C^t$ is finite, the Noetherian submodule theorem makes $\\ker(C^t\\to C^{t+1})$ finite. Its quotient $H^t(C)$ is finite, generated by the images of generators of that kernel. Step 1 identifies restriction of $\\varphi^!K$ to $D(P)$ with $C[n]$. Restriction of scalars is exact (kernels and quotients have the same underlying groups), so its cohomology is the underlying $P$-module of each $A$-cohomology module. Thus $H^t(\\varphi^!K)$ vanishes outside $[a-v-n,b-u-n]$ and is finite as a $P$-module. The same generators also generate it over $A$: a $P$-linear expression is an $A$-linear expression after applying $P\\to A$ to its coefficients. This proves bounded finitely generated cohomology over $A$ for every allowed $K$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-trf-algebraic-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, final restriction-of-scalars reflection; algebra.tex Tag 00IK, finite submodules."
+   }
+  },
+  {
+   "text": "Take $K=R[0]$. Its cohomology is zero outside degree zero and is generated by $1$ in degree zero (the zero ring is included). The result just proved gives bounded finitely generated $A$-cohomology for $\\varphi^!(R[0])$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK (2), specialization to the unit complex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-projective-module",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZK, lemma-shriek-boundedness (2): polynomial extension and a bounded finite-projective Hom computation; expanded with the finite-free model criterion 066E, K-flatness 064K, and projective RHom computation 0A66."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +147,45 @@
    "results": "8 hits; Kähler differential finite-presentation and unrelated category declarations; no relative dualizing boundedness theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|relativeDualizing|dualizingComplex",
+   "results": "{\"t\": \"2026-10-17T22:11:51Z\", \"tool\": \"grep\", \"query\": \"upperShriek|relativeDualizing|dualizingComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: ordinary sheaf/ring morphisms, derived t-structure bounds, Ext and K-projectivity only; none states coherent boundedness for algebraic upper shriek.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Twisted inverse image for perfect finite type ring homomorphisms preserves bounded coherent complexes",
+   "results": "{\"t\": \"2026-10-17T22:11:52Z\", \"tool\": \"leansearch\", \"query\": \"Twisted inverse image for perfect finite type ring homomorphisms preserves bounded coherent complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.inv_app\", \"Subring.comap\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"RingHom.map_frobeniusEquiv_symm\", \"SheafOfModules.pushforwardNatIso_inv\", \"CategoryTheory.MorphismProperty.instIsStableUnderRetractsInverseImage\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val\", \"CategoryTheory.MorphismProperty.IsStableUnderComposition.inverseImage\"], \"digest\": \"f033509390586c8c\"} Read the returned signatures: ordinary sheaf/ring morphisms, derived t-structure bounds, Ext and K-projectivity only; none states coherent boundedness for algebraic upper shriek.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "{\"t\": \"2026-10-17T22:11:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: ordinary sheaf/ring morphisms, derived t-structure bounds, Ext and K-projectivity only; none states coherent boundedness for algebraic upper shriek.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective modules has derived Hom preserving bounded finitely generated cohomology over a Noetherian ring",
+   "results": "{\"t\": \"2026-10-17T22:11:53Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of finite projective modules has derived Hom preserving bounded finitely generated cohomology over a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ext\", \"CochainComplex.isKProjective_of_projective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\"], \"digest\": \"8d459b8d811c48b6\"} Read the returned signatures: ordinary sheaf/ring morphisms, derived t-structure bounds, Ext and K-projectivity only; none states coherent boundedness for algebraic upper shriek.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic upper shriek for a perfect finite type map of Noetherian rings sends bounded finite cohomology complexes to bounded finite cohomology complexes",
+   "results": "{\"t\": \"2026-10-17T22:11:54Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic upper shriek for a perfect finite type map of Noetherian rings sends bounded finite cohomology complexes to bounded finite cohomology complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"SheafOfModules.IsFiniteType\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"f69b3a01215e6669\"} Read the returned signatures: ordinary sheaf/ring morphisms, derived t-structure bounds, Ext and K-projectivity only; none states coherent boundedness for algebraic upper shriek.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-shriek-relative-perfect",
@@ -76,5 +215,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-upper-shriek-bounded-coherent",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0BZK into a polynomial scalar-extension computation, an explicit finite good truncation, the existing projective derived-Hom model, Noetherian finiteness of cohomology, and reflection along P to A. Reused all supporting nodes; no new node and no statement change. Verified the cohomological shift and the case of nonperfect bounded coherent inputs.",
+  "blueprint": "Realizes the bounded-coherence prerequisite of lem-trf-algebraic-shriek-relative-perfect in the recorded coherent relative-duality polynomial-chart branch below lem-trf-local-term-locality proof (1)--(2); retains its unit and complete recorded ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Hilbert basis theorem for the polynomial presentation; the curve local-term unit has no commutative-algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic ring-complex criterion producing a finite-free model of the bounded coherent input; it does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic K-flatness of the bounded-above finite-free model, needed to compute scalar extension; no such module theorem is supplied by the unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived extension of scalars on the one-point ringed site; used to identify the P-module model, with no etale coefficient change."
+   },
+   {
+    "node": "lem-sc-affine-projective-complex-derived-hom",
+    "why": "Generic projective module-complex Hom model, applied to bounded E and G; the unit supplies no algebraic derived-Hom model."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic finite-submodule theorem for kernels in the finite Hom complex; no unit lemma states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q64-743386ef8",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q64-743386ef8 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements, unit/chapter route, Stacks Tags 0BZK, 0BZI, 0BZW, 066E, 064K, 0A66, 00FN, and 00IK. Verified every proof step, hypotheses, coefficient category, base-change model, shift bounds, edge cases, duplicate/cycle checks, route-pivot compliance, and long-step rule. No new nodes or repairs are needed. Review written to review.md."
  }
 }

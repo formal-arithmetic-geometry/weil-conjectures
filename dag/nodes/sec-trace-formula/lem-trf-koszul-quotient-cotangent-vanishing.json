@@ -7,10 +7,68 @@
   "date": "2026-10-18",
   "group": "Q86"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Let $P=\\mathbf Z[x_1,\\ldots,x_r]$ map to $R$ by $x_i\\mapsto f_i$, with $J=(x_1,\\ldots,x_r)$ and $\\mathbf Z=P/J$. The Koszul-regularity hypothesis [def-weil-pbc-koszul-regular-sequence] is exactly the hypothesis of [lem-trf-koszul-derived-quotient], whose canonical augmentation identifies $R\\otimes_P^{\\mathbf L}\\mathbf Z$ with $B[0]$. This also handles $r=0$, where $P=\\mathbf Z$, $I=J=0$, and $B=R$.",
+   "uses": [
+    "lem-trf-koszul-derived-quotient",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SJ, proof: the Koszul resolution of $\\mathbf Z$ over $\\mathbf Z[x_1,\\ldots,x_r]$ and the derived tensor identification."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cotangent-flat-base-change] to the commutative square with $(A,C,A',C')=(P,\\mathbf Z,R,B)$: the top map is the augmentation $P\\to\\mathbf Z$, the lower map is $R\\to R/I=B$, the vertical maps are $x_i\\mapsto f_i$ and $\\mathbf Z\\to B$. Step 1 gives the required canonical quasi-isomorphism $\\mu:\\mathbf Z\\otimes_P^{\\mathbf L}R\\to B[0]$: either order of the tensor factors is computed by tensoring the free Koszul resolution of $\\mathbf Z$ over $P$ with $R$. Thus the square-induced morphism $\\beta:L_{\\mathbf Z/P}\\otimes_{\\mathbf Z}^{\\mathbf L}B\\longrightarrow L_{B/R}$ is an isomorphism in $D(B)=D(\\operatorname{Mod}(B))$. All objects here are complexes of ordinary modules. The hypothesis used is precisely $\\mu$, with no flatness hypothesis on $P\\to R$ or $\\mathbf Z\\to R$.",
+   "uses": [
+    "lem-trf-cotangent-flat-base-change",
+    "lem-trf-koszul-derived-quotient",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SJ (lemma-mod-regular-sequence), application of Tag 08QQ (lemma-flat-base-change-cotangent-complex) to the square (P, Z, R, B)."
+   }
+  },
+  {
+   "text": "By [lem-trf-cotangent-polynomial-special-case], $L_{\\mathbf Z/P}\\simeq(J/J^2)[1]$, where $J/J^2$ has the finite free $\\mathbf Z$-basis $[x_i]$. This free module, concentrated in degree zero, is already a projective resolution of itself, so the derived tensor with $B$ is $((J/J^2)\\otimes_{\\mathbf Z}B)[1]$, whose module has $B$-basis $[x_i]\\otimes1$. The canonical conormal map sends $[x_i]\\otimes1$ to $[f_i]$; it is well-defined since the ring map takes $J$ into $I$ and $J^2$ into $I^2$. By [lem-sc-koszul-conormal-basis] the $[f_i]$ are a $B$-basis of $I/I^2$, so this map is an isomorphism, with inverse determined by $[f_i]\\mapsto[x_i]\\otimes1$. Composing with the inverse of $\\beta$ from Step 2 gives the stated canonical isomorphism $L_{B/R}\\simeq(I/I^2)[1]$ in $D(B)$.",
+   "uses": [
+    "lem-trf-cotangent-polynomial-special-case",
+    "lem-sc-koszul-conormal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SJ, final derived-tensor computation using Tag 08SI (lemma-special-case); conormal basis: more-algebra.tex Tags 0CEM and 062I (lemma-koszul-regular-H1-regular and lemma-H1-regular-quasi-regular)."
+   }
+  },
+  {
+   "text": "The module $I/I^2$ placed in degree $-1$ has cohomology only in degree $-1$: its only nonzero term is the shifted module itself, so $H^{-1}((I/I^2)[1])=I/I^2$ and $H^i((I/I^2)[1])=0$ for $i\\ne-1$. Transporting this along the isomorphism of Step 3 proves the asserted vanishing. For the empty sequence, $I=0$ and the same statement says $L_{R/R}=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SJ, conclusion after the derived tensor computation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-sc-koszul-conormal-basis",
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-cotangent-polynomial-special-case",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-koszul-derived-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SJ (lemma-mod-regular-sequence), expanded using the exact derived base-change hypothesis of Tag 08QQ and the polynomial special case Tag 08SI."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -82,5 +140,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-koszul-quotient-cotangent-vanishing",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: replaced the flat-only auxiliary statement by the exact canonical derived-tensor hypothesis of Tag 08QQ and applied it to (P, Z, R, B) in D(Mod(B)); separated the finite-free derived-tensor calculation; corrected the requested item/group attribution to NY; retained the existing searches and added genuine searches for the changed statement and alternative phrasings.",
+  "blueprint": "Realizes the supporting ring/sheaf input sentence 'Full cotangent complex of a Koszul-regular quotient' in the parent blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-koszul-conormal-basis",
+    "why": "The ordinary ring conormal-basis theorem identifies the canonical map by its basis vectors in Step 3. It is a generic commutative-algebra tool, independent of cotangent complexes; the item unit has no corresponding general conormal-basis node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-koszul-conormal-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-fe1c56610",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-fe1c56610 (reviewer sub-agent of L); spot-checked: Read the full item, all new nodes, cited node statements, unit/chapter route, and Stacks Tags 08QQ, 08SI, 08SJ plus conormal-basis sources. The repaired derived base-change hypothesis and coefficient category are correct; Koszul quotient, polynomial special case, conormal identification, shifts, edge cases, searches, duplicate checks, and route restrictions pass. Review written to review.md."
  }
 }
