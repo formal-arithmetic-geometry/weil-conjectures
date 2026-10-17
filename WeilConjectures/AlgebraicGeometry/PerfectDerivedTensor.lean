@@ -193,7 +193,7 @@ theorem perfect_derivedTensor (X : Scheme.{uT})
     (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U))),
     strictlyPerfect_totalTensor X U A B hA hB, ?_⟩
   exact strictPerfect_tensor_localComparison X U P N hP hN A B hA hB
-    ⟨(SheafOfModules.overFunctor
+    ⟨(SheafOfModules.overFunctor.{uT}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso eP ≪≫ eA.some⟩
     ⟨(SheafOfModules.overFunctor
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso eN ≪≫ eB.some⟩
