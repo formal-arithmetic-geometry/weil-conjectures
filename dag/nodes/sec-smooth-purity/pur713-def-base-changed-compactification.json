@@ -3,22 +3,92 @@
  "blueprint": {
   "is": "pur713-def-base-changed-compactification",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-cbc-compact-support-square",
+   "def-nagata-compactification-base-change",
+   "det-def-sfb-shriek-base-change-morphism-compactification"
+  ]
  },
  "kind": "definition",
  "title": "Base change of a compactification",
- "statement": "Let $c=(j,p)$ be a compactification of $f$ (Definition “Chosen compactifications” (`pur456-pbc-chosen-compactification`, in [sk-thm-sf-comp-composition])); in the exchange maps below $c=c_f$. Write $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$. For the Cartesian square $\\square$, put $\\overline X'=\\overline X\\times_YY'$, with projections $\\bar g:\\overline X'\\to\\overline X$ and $p':\\overline X'\\to Y'$, and let $j':X'\\hookrightarrow\\overline X'$ be the morphism induced by $j$ and $\\mathrm{id}_{Y'}$. Then $X'=X\\times_{\\overline X}\\overline X'$, $jg'=\\bar gj'$, $j'$ is an open immersion and $p'$ is proper, because open immersions and proper morphisms are stable under base change; and $p'j'=f'$. The base change of $c$ along $g$ is the compactification $c'=(j',p')$ of $f'$. Write $\\square_p$ for the Cartesian square formed by $p$, $g$, $p'$ and $\\bar g$.",
+ "statement": "Let $\\square$ be a Cartesian square of schemes\n[def-weil-pbc-cartesian-square]\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y.\n\\end{array}\n$$\nLet $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y)$ be a compactification of $f$ [def-nagata-compactification], with $j$ an open immersion, $p$ proper and $p\\circ j=f$, as in the current blueprint definition. In exchange maps using a chosen compactification $c_f$ of $f$, take $c=c_f$.\nPut $\\overline X'=\\overline X\\times_Y Y'$ [def-pc-fibre-product], with projections $\\bar g:\\overline X'\\to\\overline X$ and $p':\\overline X'\\to Y'$, and define $j':X'\\to\\overline X'$ to be the unique morphism with\n$$\n\\bar g\\circ j'=j\\circ g',\\qquad p'\\circ j'=f'.\n$$\nThis is the base-changed factorization of [def-nagata-compactification-base-change]. The maps $g'$ and $j'$ identify $X'$ canonically with $X\\times_{\\overline X}\\overline X'$: the outer rectangle formed by $\\square$ (with $f'=p'\\circ j'$ and $f=p\\circ j$) and the lower square $\\square_p$ below are Cartesian, so the upper square with sides $g',j',j,\\bar g$ is Cartesian [lem-weil-pbc-cartesian-square-pasting]. The morphism $j'$ is an open immersion [lem-weil-pbc-open-immersion-base-change], $p'$ is proper [lem-weil-pbc-proper-base-change], and $p'\\circ j'=f'$; thus the base change of $c$ along $g$ is the compactification $c'=(j',p')$ of $f'$ [lemma-nagata-compactification-base-change]. Write $\\square_p$ for the Cartesian square\n$$\n\\begin{array}{ccc}\n\\overline X'&\\xrightarrow{\\bar g}&\\overline X\\\\\np'\\downarrow&&\\downarrow p\\\\\nY'&\\xrightarrow{g}&Y.\n\\end{array}\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-base-changed-compactification.md",
   "place": "node pur713-def-base-changed-compactification, order 2355"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-nagata-compactification",
+  "def-pc-fibre-product",
+  "def-nagata-compactification-base-change",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-nagata-compactification-base-change"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base changed compactification along a Cartesian pullback square with open immersion and proper morphism",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; AlgebraicGeometry.IsImmersion.isStableUnderBaseChange; HasPullbacks declarations; no Compactification.ofIsPullback definition",
+   "date": "2026-10-17",
+   "verdict": "generalization: Mathlib supplies stability and pullback infrastructure, but not the project Compactification construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Compactification.ofIsPullback, Compactification.baseChange, IsPullback",
+   "results": "0 hits; unknown identifier 'Compactification.ofIsPullback'",
+   "date": "2026-10-17",
+   "verdict": "no match for the project-specific construction."
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsPullback|baseChange.*Compactification|IsPullback.*Compactification [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of a compactification along a Cartesian square, preserving open immersion and proper morphism",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; quasiCompact_isStableUnderBaseChange; IsSeparated.isStableUnderBaseChange; universallyClosed_isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "generalization: only generic morphism-property stability, no project Compactification definition."
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification|baseChange|ofIsPullback [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|of_isPullback",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "date": "2026-10-17",
+   "verdict": "No project Compactification construction: results concern generic scheme pullbacks and morphism properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A factorisation of a scheme morphism into an open immersion followed by a proper morphism induces such a factorisation after pullback",
+   "results": "8 hits; AlgebraicGeometry.IsImmersion.instMapDescScheme, AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.instFstScheme",
+   "date": "2026-10-17",
+   "verdict": "No project Compactification construction: results concern generic scheme pullbacks and morphism properties."
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification",
+   "results": "0 hits; none",
+   "date": "2026-10-17",
+   "verdict": "No Compactification declaration in Mathlib/AlgebraicGeometry."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -42,5 +112,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-base-changed-compactification",
+  "worker": "NK",
+  "summary": "Split the base-changed compactification definition using existing nodes only. The second reader explicitly introduced the Cartesian square, typed the induced map by its two projection equations, and interpreted the source pullback equality as the canonical isomorphism. The current blueprint compactification convention is open immersion followed by proper morphism, without a quasi-compactness assumption. General base-change and fibre-product nodes supply the construction and well-definedness; no finite-type compact-support setting is used.",
+  "blueprint": "Realizes the complete definition at pur713-def-base-changed-compactification, order 2355, main-20261015: ambient pullback, induced open immersion, identification of its square as Cartesian, compactification of f prime, and notation square_p. The arbitrary-square formulation follows the current def-nagata-compactification-base-change statement. Canonical isomorphism replaces the informal equality of independently chosen pullback objects, with both projection equations explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NK-0142a5f31",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-0142a5f31 (reviewer sub-agent of L); spot-checked: I read the master source pur713-def-base-changed-compactification.md (main-20261015, order 2355), the sk-prop-sp-purity-bc unit, the chapter, and the statements of all seven cited nodes, including the current blueprint_update texts of def-weil-pbc-cartesian-square, def-nagata-compactification, def-nagata-compactification-base-change and lemma-nagata-compactification-base-change. The source cites pur456-pbc-chosen-compactification, which exists in neither the blueprint nor the DAG, so repointing it to def-nagata-compactification is correct; the open-immersion-plus-proper convention of its update is used. j' is now defined by the projection equations ḡj'=jg' and p'j'=f'. That pair is compatible because pjg'=fg'=gf', and the universal property of def-pc-fibre-product gives j'. The source's 'induced by j and id_{Y'}' is ill-typed for an arbitrary Cartesian square, and its literal equality X'=X×_{X̄}X̄' is false, so the second reader's canonical-identification reading is right. I re-derived that identification by hand. Open immersion and properness follow from the leaves lem-weil-pbc-open-immersion-base-change (Stacks 01JY) and lem-weil-pbc-proper-base-change (Stacks 01W4), with no finiteness hypothesis. Edge cases checked: identity base change, empty Y', empty X with a nonempty compactification, j an isomorphism. The three close blueprint nodes (def-nagata-compactification-base-change, def-cbc-compact-support-square, det-def-sfb-shriek-base-change-morphism-compactification) are restricted versions or the generic construction; they are listed in same_as, not duplicated. There are no new nodes, no cycle, and no coefficient category or sheaf base-change morphism in this definition. The citers (open, shriek and chosen exchanges, pur9-cs-def-bc) get the jg'=ḡj', c' and □_p they use. FIX (C1/B3): the identification X'≅X×_{X̄}X̄', on which the open-immersion clause depends, had no node cited. I added the existing Mathlib leaf lem-weil-pbc-cartesian-square-pasting (IsPullback.paste_vert_iff): the lower square □_p and the outer rectangle □ are Cartesian, so the upper square is Cartesian. This matches slopmaster2 BaseChange.lean:82/100/117. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; the only changes are that statement sentence and the added stmt_dep. Nothing is weakened.; 1 file(s) fixed by the reviewer"
  }
 }
