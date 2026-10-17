@@ -59,6 +59,6 @@ theorem exists_cartesianHigherImage_affine_section_eq_zero
     exists_cartesianHigherImage_affine_section_local_zero D c hc f F q U i x hx
   refine ⟨j, a, ?_⟩
   exact cartesianHigherImage_section_eq_zero_of_finite_cover
-    D c hc f F q U i j a x J V r hcover hzero
+    D c f F q U i j a x J V r hcover hzero
 
 end AlgebraicGeometry.Etale
