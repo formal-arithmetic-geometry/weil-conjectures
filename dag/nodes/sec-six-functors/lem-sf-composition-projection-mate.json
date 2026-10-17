@@ -12,14 +12,184 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-compactifications-refinements",
   "def-exchange-projection",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "thm-sf-comp-composition",
-  "lem-sf-integral-compactification-system-realization"
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-coef-semilinear-derived-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All schemes in the supplied triangle are finite type over $k$. A field is Noetherian since its only ideals are $0,k$, so the finite-type lemma makes these schemes Noetherian. Each inverse image of an affine open under $j,b,i$ is an open subscheme of the Noetherian source of that map, hence quasi-compact by the open-subscheme lemma. Thus these opens, and $bj$, are quasi-compact, as required below. Work first on the finite-coefficient unbounded pro-etale categories. Write $P_h=Lh^*$, $S_h=Rh_*$ and $J_e=e_!$, and write $\\pi_h$ and $\\delta_e$ for the proper counit projection and open tensor maps. Use the triangle already supplied in the statement; do not replace it by a Cartesian triangle. Put $F=S_qJ_j$, $G=S_sJ_i$, $H=S_{sp}J_{bj}$ and $\\gamma=\\Gamma_{(b,i,q,p)}$. If $C:S_sS_pJ_bJ_j\\cong H$ is the composite of $c_{s,p}$ and $e_{b,j}$ of the ambient pasting lemma, the specified normalization is exactly $\\alpha=C\\circ S_s(\\gamma J_j)$. This is the definition of the comparison in the question, rather than a transport from an etale-origin composition theorem. The projection definition reads $\\operatorname{PF}_f=S_q(\\delta_j)\\pi_q$, $\\operatorname{PF}_g=S_s(\\delta_i)\\pi_s$ and $\\operatorname{PF}_{gf}=S_{sp}(\\delta_{bj})\\pi_{sp}$, with the indicated pullbacks in each $\\delta$.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), displayed compactification calculation; agent use of the supplied normalized map on its actual pro-etale domain"
+   }
+  },
+  {
+   "text": "For composable maps $u,v$, identify $P_{vu}=P_uP_v$ and $S_{vu}=S_vS_u$ by the conjugate compositors of the ambient lemma. The composite adjunction has counit $\\varepsilon_u\\circ P_u\\varepsilon_vS_u$. The transpose of $S_v(\\pi_{u;M,P_vN})\\pi_{v;S_uM,N}$ is therefore $(\\varepsilon_{u,M}\\otimes1)\\circ(P_u\\varepsilon_{v,S_uM}\\otimes1)\\circ\\mu_{P_uP_v}$: substitute the counit-transpose formula twice and use naturality of $\\mu_u$ and the adjunction triangle identity. This is precisely the transpose defining $\\pi_{vu}$ for that composite counit. Injectivity of the adjunction bijection gives, restoring $c$, $$\\pi_{vu}(c_{v,u,M}\\otimes1)=c_{v,u,M\\otimes P_uP_vN}\\,S_v(\\pi_u)\\,\\pi_v.$$ This is a calculation of maps; no projection is inverted.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "def-weil-pbc-composite-adjunction",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent formulation for ambient pro-etale and ringed diagram categories, not an assertion that these Stacks lemmas themselves have those domains"
+   }
+  },
+  {
+   "text": "For opens $j,b$ and $M,N$ on their source and target, respectively, $$\\delta_{bj}(e_{b,j,M}\\otimes1)=e_{b,j,M\\otimes P_jP_bN}\\,J_b(\\delta_j)\\,\\delta_b.$$ Indeed, the tensor source is isomorphic, by $\\delta_b$ and $J_b\\delta_j$, to an object in the image of $J_bJ_j\\cong J_{bj}$. Both arrows become the identity on $M\\otimes P_jP_bN$ after $P_{bj}$, by the open-unit normalization. Full faithfulness of $J_{bj}$ proves their equality. This uses restriction to the open, where it is fully faithful, rather than evaluation of a coefficient system.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent formulation for ambient pro-etale and ringed diagram categories, not an assertion that these Stacks lemmas themselves have those domains"
+   }
+  },
+  {
+   "text": "Put $T=P_sL$, $U=P_iT=P_gL$, $M=J_jK$ and $K'=K\\otimes P_jP_qU=K\\otimes P_fP_gL$. Apply the finite-coefficient clause of the proper/open projection-mate lemma to the actual commutative square $pb=iq$, with inputs $M,T$. It gives $$\\gamma_{M\\otimes P_qU}\\,J_i(\\pi_{q;M,U})\\,\\delta_i=S_p(\\delta_b)\\,\\pi_{p;J_bM,T}\\,(\\gamma_M\\otimes1).$$ The proper maps are exactly $q,p$ and the open maps are $b,i$; a Cartesian square is not required. The pullback identification $P_qP_i=P_bP_p$ is the one for this square.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent formulation for ambient pro-etale and ringed diagram categories, not an assertion that these Stacks lemmas themselves have those domains"
+   }
+  },
+  {
+   "text": "Expand $\\alpha_{K'}G(\\operatorname{PF}_f)\\operatorname{PF}_g$ using step 1. Naturality of $\\gamma$ with respect to $\\delta_j:M\\otimes P_qU\\to J_jK'$ replaces $\\gamma_{J_jK'}J_iS_q(\\delta_j)$ by $S_pJ_b(\\delta_j)\\gamma_{M\\otimes P_qU}$. Substitute the equality of step 4, and use naturality of $\\pi_s$ with respect to $\\gamma_M$. The resulting map is $$C_{K'}\\,S_sS_p\\bigl(J_b(\\delta_j)\\circ\\delta_b\\bigr)\\,S_s(\\pi_p)\\,\\pi_s\\,(S_s\\gamma_M\\otimes1).$$ The source is $GF K\\otimes L$ and the target is $HK'$. Every substitution is inside a functor or a composite, so it preserves equality of derived maps.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "def-exchange-projection",
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent formulation for ambient pro-etale and ringed diagram categories, not an assertion that these Stacks lemmas themselves have those domains"
+   }
+  },
+  {
+   "text": "Apply step 2 with $u=p,v=s$ to replace $S_s(\\pi_p)\\pi_s$ under $c_{s,p}$ by $\\pi_{sp}$. Apply step 3 with opens $j,b$ and tensor factor $P_{sp}L$ to replace $J_b(\\delta_j)\\delta_b$ under $e_{b,j}$ by $\\delta_{bj}$. Naturality of the two compositors then makes the expression in step 5 equal to $$S_{sp}(\\delta_{bj})\\pi_{sp}(C_K\\otimes1)(S_s\\gamma_M\\otimes1)=\\operatorname{PF}_{gf}(\\alpha_K\\otimes1).$$ This proves the displayed finite-coefficient identity. In particular the input of $\\alpha$ on its left side is $K'=K\\otimes Lf^*Lg^*L$, retaining both pullbacks.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent formulation for ambient pro-etale and ringed diagram categories, not an assertion that these Stacks lemmas themselves have those domains"
+   }
+  },
+  {
+   "text": "Now work intrinsically in $D(\\mathscr S_T)$, with $P,S,J$, tensor, units and counits from the simultaneous system models. The ambient pasting lemma supplies conjugate compositors on these unbounded system categories, so the transpose calculation of step 2 and the fully faithful open restriction calculation of step 3 apply to system maps. Crucially use the SYSTEM clause of the proper/open projection-mate lemma with $M=J_jK$, $T=P_sL$. It gives in $D(\\mathscr S_{\\overline Y})$ exactly $$\\gamma_{M\\otimes P_qP_iT}J_i(\\pi_q)\\delta_i=S_p(\\delta_b)\\pi_p(\\gamma_M\\otimes1).$$ Whisker this system equality by $S_s$ and postcompose by $C_{K'}S_sS_pJ_b(\\delta_j)$. Naturality of the system $\\gamma$ and $\\pi_s$ gives the expression displayed in step 5. The two system identities from steps 2 and 3 turn that expression into the right-hand side displayed in step 6. All factors, including quotient transitions, belong to the same ringed diagram models; no evaluated equality or total-limit argument is used.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-proper-open-projection-mate",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent formulation for ambient pro-etale and ringed diagram categories, not an assertion that these Stacks lemmas themselves have those domains"
+   }
+  },
+  {
+   "text": "For later comparison of compactifications, take a proper refinement $u:c_1\\to c_2$, $c_a=(j_a,p_a)$, so $uj_1=j_2$ and $p_2u=p_1$. Let $C_u:S_{p_2}J_{j_2}\\to S_{p_1}J_{j_1}$ be $S_{p_2}\\Gamma_{(j_1,j_2,1,u)}$ followed by the direct-image compositor. Apply the proper/open mate identity with $r=1$, input $K$, and tensor factor $P_{p_2}L$. The defining transpose for $\\pi_1$ is the identity. Thus it reads $$\\Gamma_{K\\otimes P_{j_2}P_{p_2}L}\\delta_{j_2}=S_u(\\delta_{j_1})\\pi_u(\\Gamma_K\\otimes1).$$ Apply $S_{p_2}$ and precompose by $\\pi_{p_2}$; step 2 with $u,p_2$ gives $$C_u(K\\otimes P_fL)\\operatorname{PF}^{c_2}=\\operatorname{PF}^{c_1}(C_uK\\otimes1).$$ This proves the required refinement compatibility for arbitrary inputs, in both coefficient settings, without the bounded constructible/finite-Tor refinement lemma. It is an equation in the direction of the specified refinement maps and uses no inverse of $C_u$.",
+   "uses": [
+    "def-weil-compactifications-refinements",
+    "lem-sf-proper-open-projection-mate",
+    "def-exchange-projection",
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent formulation for ambient pro-etale and ringed diagram categories, not an assertion that these Stacks lemmas themselves have those domains"
+   }
+  },
+  {
+   "text": "An arbitrary supplied triangle can first be refined to a Cartesian one. Its induced $V\\to\\overline X\\times_{\\overline Y}Y$ is clopen by the ambient lemma. Let $W\\hookrightarrow\\overline X$ be the schematic closure of $X$ supplied by the closure lemma; its hypotheses hold because $\\overline X$ is finite type over the Noetherian field $k$, hence Noetherian and quasi-separated. The open $W_Y=W\\times_{\\overline Y}Y$ has dense open $X$ and its complementary clopen piece outside $V$ misses $X$, so that piece is empty. Thus $W_Y\\to\\overline X_Y$ factors through the open $V$ and is a closed immersion there (restriction of the closed immersion $W\\hookrightarrow\\overline X$). The maps $W\\to\\overline X$ and $W_Y\\to V$ are proper, and $W\\to\\overline Y$ is proper by composition. The induced open $X\\to W_Y$ and $W_Y\\to W$, with proper $W_Y\\to Y$, therefore form a Cartesian refining triangle. All arrows restrict to the identity on $X$ and satisfy the original triangle equations. These are geometric operations; the refinement projection identity is already proved in step 8 on both coefficient domains.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "sk-lem-nagata-sketch-closure",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/_section.md",
+    "place": "Schematic closure and density; agent clopen-complement argument reducing a supplied non-Cartesian triangle to a Cartesian refining triangle"
+   }
+  },
+  {
+   "text": "First use step 9 for every supplied non-Cartesian triangle. For three composable maps, arrange compatible compactifications in one refining tower: apply the compatible-tower construction successively to the two adjacent pairs, then its common-refinement clause to compare two choices. The cofiltered compactification lemma permits incorporating any previously supplied compactifications; repeat for the finite list of ambient and intermediate schemes. In the resulting grid let $A,B,C$ denote the three proper/open cells of Stacks Tag 0F7K (lemma-pseudo-functor). As in 0F7K, one composition path uses $\\gamma_C$ followed by $\\gamma_{A+B}$ and the other uses $\\gamma_A$ followed by $\\gamma_{B+C}$, with their functor whiskerings. Vertical and horizontal pasting from the ambient lemma replace the rectangle maps by their constituent $\\Gamma_A,\\Gamma_B,\\Gamma_C$. The transformations for $A$ and $C$ act in disjoint functor positions, so their two whiskering orders agree by naturality. The unital associative $c,e$ finish the equality on the common tower. Pasting applied to the squares between refining towers gives the same equation with the directed refinement maps inserted, so the construction is compatible with either original parenthesization and its specified comparison maps. This argument concerns the actual unbounded pro-etale or system transformations, not the bounded-below etale-origin compositor.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7K (lemma-pseudo-functor), grid A,B,C and last paragraph, using the ambient pasting identities rather than a change of coefficient domain"
+   }
+  },
+  {
+   "text": "Apply the identity of steps 6 and 7 first to $(g,f)$ and then to $(h,gf)$, or first to $(h,g)$ and then to $(hg,f)$. Both identify the threefold iterated projection map with $\\operatorname{PF}_{hgf}$ after the corresponding composition path. Step 10 equates those paths on the common tower, and step 8 intertwines every projection map with each directed refinement comparison to that tower. Consequently these projection identities commute with the associative compositor and with the comparisons between the two compactifications of $hgf$. Tensor parenthesizations are identified by the canonical tensor associator. Every constituent is natural in $K,L$ (the adjunction units/counits, open tensor maps, $\\Gamma$ and compositors), which proves the claimed naturality. No step restricted $K,L$ or asserted that a projection map is invertible.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "def-exchange-projection",
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7K and the pentagon paragraph of prop-sf-pf-coherence in blueprint main-20261015; explicit application of the preceding directed identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-proper-open-pasting",
+  "def-exchange-projection",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sf-proper-open-projection-mate",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-compactifications-refinements",
+  "sk-lem-nagata-sketch-closure",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-compactifiable-cofiltered"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition/refinement sentence, expanded using the counit computation and Stacks Tags 0F7B, 0F7C, 0F7D, 0F7J, 0F7K on explicitly stated ambient categories"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -107,7 +277,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "fix-prop-projection-formula",
@@ -124,5 +294,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-composition-projection-mate",
+  "worker": "stage1",
+  "summary": "Repair all five return points: replace coefficient-domain transports by the supplied normalized comparison and one ambient pasting helper; prove direct-image projection composition by its composite counit, prove open-tensor composition by fully faithful restriction, expand the local mate calculation including both pullbacks, repeat it using the explicit system clause, and derive refinement/threefold compatibility on common towers. The statement is unchanged; one statement-only ambient-pasting helper, with the elementary geometric reduction written in the item, no Mathlib leaves.",
+  "blueprint": "The composition/refinement sentence in fix-prop-projection-formula and the pentagon paragraph of prop-sf-pf-coherence; steps 1-7 give the two-map projection identity and steps 8-11 its refinement and associativity compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Open tensor maps restrict to the identity and open extension is fully faithful, also on ringed diagram sites; needed to prove open-composition compatibility without a coefficient-domain restriction."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "The explicit composite counit computes the projection of two direct images; the unit has no categorical-adjunction lemma of its own."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Provides the actual unbounded semilinear-system operations and their simultaneous adjunction models, rather than a lift from evaluations."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Geometric existence and common refinements of compatible towers, with no separatedness assumption on the schemes over k."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Common refinements/equalizers incorporate previously supplied compactifications in the associativity grid, without restricting the coefficient category."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Defines the precise counit and chosen-compactification projection composites being compared."
+   },
+   {
+    "node": "sk-lem-nagata-sketch-closure",
+    "why": "Geometric schematic-closure reduction of a supplied non-Cartesian triangle: Schematic closure and uniqueness. The unit has no replacement for this geometric fact; no coefficient-category change is made."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Geometric schematic-closure reduction of a supplied non-Cartesian triangle: Closed immersions are proper. The unit has no replacement for this geometric fact; no coefficient-category change is made."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Geometric schematic-closure reduction of a supplied non-Cartesian triangle: Base change of a closed immersion is a closed immersion. The unit has no replacement for this geometric fact; no coefficient-category change is made."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Geometric schematic-closure reduction of a supplied non-Cartesian triangle: Properness is stable under composition. The unit has no replacement for this geometric fact; no coefficient-category change is made."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Geometric schematic-closure reduction of a supplied non-Cartesian triangle: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). The unit has no replacement for this geometric fact; no coefficient-category change is made."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Geometric schematic-closure reduction of a supplied non-Cartesian triangle: A locally Noetherian scheme is quasi-separated (Stacks 01OY). The unit has no replacement for this geometric fact; no coefficient-category change is made."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Every open subset of a Noetherian scheme is quasi-compact; this verifies the quasi-compact-open hypothesis of the local proper/open mate and the closure construction. The remark unit has no geometric substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization",
+  "def-weil-pbc-composite-adjunction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-compactifiable-cofiltered",
+  "def-exchange-projection",
+  "sk-lem-nagata-sketch-closure",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-27fc833c8",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-27fc833c8 (reviewer sub-agent of L); spot-checked: I read all of it: process documents, the unit sk-rem-sf-pf-done (uses []), the blueprint main-20261015 text for fix-prop-projection-formula (statement and proof), Stacks more-etale 0F7B/0F7C/0F7D/0F7K, the item's statement and all 11 steps, the new node, and the statement of every cited node. Steps 1-7 (the two-map identity) recompute correctly. Step 2's transpose under the composite counit ε_u∘P_uε_vS_u gives π_{vu}(c⊗1)=c·S_v(π_u)·π_v. Step 3 holds by full faithfulness of J_{bj}, since the open tensor maps and e restrict to the identity. Step 4 applies lem-sf-proper-open-projection-mate to the square (V,X̄,Y,Ȳ;b,i,q,p): it commutes, the opens are quasi-compact because the schemes are Noetherian, and the non-Cartesian case is allowed. My recomputation of steps 5-6 gives PF_{gf}(α⊗1) with both pullbacks kept. Step 7 uses the explicit system clauses. Step 8 (refinement with r=1, π_1=id), step 9 (s is clopen; closure density empties the extra piece; Cartesian refining triangle) and steps 10-11 (the 0F7K grid with the helper's pasting laws) are sound. The new node lem-sf-ambient-proper-open-pasting is true: I type-checked both pasting laws, and the pasted a_Q is a composite of clopen restrictions, which is the restriction for the outer square. It is statement-only and contains no projection clause of the item. It is not a duplicate: lem-amb-unbounded-proper-open-interchange is on the étale site, lem-cbc-strict-tower-proper-open-calculus is on constant-B towers, and lem-sf-integral-compactification-system-realization covers only normalized constructible systems. Its fields satisfy B1-B9, with four logged searches and the blueprint ancestor fix-prop-projection-formula. I accept all declared tool_uses (open normalization, system models, geometric tower and closure lemmas, Mathlib-status geometry lemmas). There is no cycle, proof_deps equals the union of the uses, and no SGA source is used. I fixed two wording faults in fixes/dag/nodes/sec-six-functors/lem-sf-composition-projection-mate.json, changing only proof text. In step 1 the inverse image is open in the map's Noetherian source, not its target. In step 10 the 0F7K path pairing was wrong; it now reads γ_C then γ_{A+B}, and γ_A then γ_{B+C}.; 1 file(s) fixed by the reviewer"
  }
 }

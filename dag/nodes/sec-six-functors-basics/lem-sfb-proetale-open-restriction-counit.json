@@ -18,9 +18,72 @@
   "lem-weil-pbc-proetale-ringed-open-comparison",
   "lem-weil-pbc-site-morphism-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The base-change functors for h:W→Y and g:X_W→X are continuous morphisms of the chosen small pro-etale sites. The base change of the open immersion h is an open immersion, so g is a valid site morphism; the coefficient identifications g^{-1}R_X≅f_W^{-1}R_W are the canonical composition comparison. By the ringed-topos module-adjunction construction, the displayed inverse images and direct images are adjoint with the stated module structures. The composition comparison for inverse images is the unique unit-compatible isomorphism α. Concretely, the two composite base-change functors $u_g\\circ u_f$ and $u_{f_W}\\circ u_h$ from $Y_{\\mathrm{proet}}$ to $(X_W)_{\\mathrm{proet}}$ send $V$ to $X_W\\times_X(X\\times_YV)$ and $X_W\\times_W(W\\times_YV)$; the fibre-product universal property gives a natural isomorphism $c_V$ between them over $X_W$, compatible with the projections to $X\\times_YV$. Define $\\alpha$ as the composite of the inverse of the composition isomorphism $(u_g u_f)_s\\cong g^{-1}f^{-1}$, the isomorphism $(u_gu_f)_s\\cong(u_{f_W}u_h)_s$ induced by $c$, and the composition isomorphism $(u_{f_W}u_h)_s\\cong f_W^{-1}h^{-1}$. With the identity coefficient map $f^{-1}R\\to R_X$, the module pullback $R_X\\otimes_{f^{-1}R}f^{-1}M$ is $f^{-1}M$ and the module counit is the abelian-sheaf counit; likewise for $f_W$ after transport along $\\alpha_R$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tag 09A5 (section-morphism), Sites Lemma 03CB and Sites Modules Lemma 03D3"
+   }
+  },
+  {
+   "text": "Use the open-slice equivalence for the actual inverse-image ringed site. For an object E→W, restriction along h identifies (h^{-1}f_*M)(E) with (f_*M)(E→W→Y), hence with M(X×_Y E) by the direct-image formula. The same equivalence for the base-changed open g identifies (f_{W,*}g^{-1}M)(E) with (g^{-1}M)(X_W×_W E), hence with M(X_W×_W E). The fibre-product universal property gives the canonical isomorphism X_W×_W E≅X×_Y E. These component maps commute with arrows E'→E and are linear for R_W, so they assemble to a natural module-sheaf isomorphism β_M.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "def-weil-proetale-module-direct-image",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex",
+    "place": "Sites Lemma 03CF and Sites Modules Lemma 04J0 (f'_*j_U^{-1}=j_V^{-1}f_*); Tag 09A5 (pro-etale morphism of sites); Tag 00XZ (section-localize)"
+   }
+  },
+  {
+   "text": "Counit normalization. Both sides are morphisms of sheaves on $(X_W)_{\\mathrm{proet}}$ from $g^{-1}f^{-1}f_*M$ to $g^{-1}M$; module maps with equal underlying abelian maps are equal, so compare underlying maps. Put $N=f_*M$. By the composition isomorphism, the source is $(w_pN)^\\#$ for $w=u_g u_f$, and by the universal property of sheafification together with the colimit description of $w_p$, a morphism out of it is determined by its values on the generating sections $[s]_{(V,\\psi)}\\in(w_pN)(U')$, for $U'\\to X_W$, $V\\to Y$, $\\psi:U'\\to X_W\\times_X(X\\times_YV)$ and $s\\in N(V)=M(X\\times_YV)$. The adjunction of the continuous-functor pullback lemma is the composite of $u_p\\dashv u^p$ and sheafification, so its counit sends the coprojection of $s$ indexed by $(V,\\phi)$ to $\\phi^*s$, and its unit sends $s$ to the coprojection indexed by $(V,\\mathrm{id})$. Hence the map $[s]_{(V,\\psi)}\\mapsto[[s]_{(V,\\mathrm{id})}]_{(X\\times_YV,\\psi)}$ is compatible with the units; by the uniqueness clause it is the composition isomorphism $(u_gu_f)_s\\cong g^{-1}f^{-1}$, and similarly for $u_{f_W}u_h$. Left side: $g^{-1}(\\varepsilon_{f,M})$ sends $[[s]_{(V,\\mathrm{id})}]_{(X\\times_YV,\\psi)}$ to $[\\varepsilon_f[s]_{(V,\\mathrm{id})}]_{(X\\times_YV,\\psi)}=[s]_{(X\\times_YV,\\psi)}$. Under $g^{-1}M\\cong M|_{X_W}$ (object inverse-image restriction lemma, initial index pair) this is $\\bar\\psi^*s\\in M(U')$, where $\\bar\\psi:U'\\to X\\times_YV$ is $\\psi$ followed by the projection. Right side: $\\alpha$ sends the generator to $[[s]^h_{(V,\\mathrm{id})}]_{(E,c_V\\psi)}$ with $E=W\\times_YV\\to W$. Under $h^{-1}N\\cong N|_W$, $[s]^h_{(V,\\mathrm{id})}$ is $s|_E\\in N(E)=M(X\\times_YE)$. Then $f_W^{-1}(\\beta_M)$ replaces it by $\\beta_{M,E}(s|_E)\\in(g^{-1}M)(X_W\\times_WE)$, which is $s|_E$ transported along $X_W\\times_WE\\cong X\\times_YE$ (step 2). Finally $\\varepsilon_{f_W}$ restricts along $c_V\\psi:U'\\to X_W\\times_WE$, giving the restriction of $s$ along $U'\\to X_W\\times_WE\\cong X\\times_YE\\to X\\times_YV$. By the uniqueness in the fibre-product universal property, this composite equals $\\bar\\psi$: $c_V$ and the identification $X_W\\times_WE\\cong X\\times_YE$ both commute with the projections to $X\\times_YV$. The two sides therefore agree on all generating sections, so they are equal. Equivalently, $\\beta_M$ is the adjunct (mate) of $g^{-1}(\\varepsilon_{f,M})\\circ\\alpha^{-1}_{f_*M}$ under $f_W^{-1}\\dashv f_{W,*}$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-module-direct-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Sites Lemma 00WX with 00VE (the adjunction u_s -| u^s and its counit on coprojections); Sites Lemma 03CB (unit-compatible composition); Sites Modules Lemma 04J0; Sites Modules Lemma 03D3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-site-morphism-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Sites Lemma 03CF and Sites Modules Lemma 04J0, with Tag 09A5 (section-morphism), Sites Tags 00XZ, 00WX and 03CB, and Sites Modules Tag 03D3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,7 +129,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-locally-closed-extension-coherence",
@@ -78,12 +141,46 @@
  "blueprint": {
   "from": {
    "node": "det-prop-scalar-six-pullback",
-   "place": "Proof (2), compatibility with composition: the open-slice direct-image comparison and its counit normalization used to construct mixed open/closed extension comparisons.",
+   "place": "Proof (2): 'compatible with composition of immersions'. It is the open-restriction calculation h^{-1}c_* = c_{W,*}h_S^{-1} with its closed-counit normalization, used in steps 3, 5 and 7 of lem-sfb-locally-closed-extension-coherence for the factorization independence and composition of the locally closed extensions a_! entering (a_!M)_{Lambda'} = a_!(M_{Lambda'}).",
    "via": [
     "lem-sfb-locally-closed-extension-coherence"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-proetale-open-restriction-counit",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and split its proof into site setup, the objectwise fibre-product comparison, and the counit calculation. The comparison is assembled from the existing open-slice ringed-site equivalence, the reviewed inverse-image restriction lemma, the direct-image section formula, and the fibre-product universal property; no new nodes were needed.",
+  "blueprint": "det-prop-scalar-six-pullback, Proof (2), 'compatible with composition of immersions', via lem-sfb-locally-closed-extension-coherence (its open-restriction steps 3, 5 and 7).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Arbitrary-ring identification of actual open inverse image with slice restriction, for both h and g; no node of sk-prop-scalar-six gives it, and the parent already uses it as a tool."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Explicit section formula (h^{-1}G)(E)=G(E->W->Y) via the initial index pair, on underlying abelian sheaves; a generic localization fact that no unit node replaces."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module inverse-image/direct-image adjunction for arbitrary ring sheaves with the identity coefficient map; fixes the counits in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-a06aac330",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-a06aac330 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, unit sk-prop-scalar-six, parent lem-sfb-locally-closed-extension-coherence, blueprint det-prop-scalar-six-pullback.proof.md, Stacks 09A5, 03CF (sites-lemma-localize-morphism) and 04J0 (sites-modules-lemma-localize-morphism-ringed-sites). The statement is true and unchanged: arbitrary ring sheaf R with inverse-image rings, nothing weakened. 03CF/04J0 with V=W, U=X_W give h^{-1}f_*=f_{W*}g^{-1} by the section formula, and the counit equation says beta is the mate of g^{-1}eps_f o alpha^{-1}. Tested W empty, W=Y, f=id, and f closed with W disjoint from its image. No new nodes. The rg search found no duplicate (the etale, Zariski and derived variants were read). Fixes: (1) E4: step 3 evaluated morphisms of sheaves on X_W 'at E->W', which does not typecheck. I rewrote it as a check on generating sections [s]_(V,psi) of (u_g u_f)_p f_*M, using the coprojection description of the u_s -| u^s counit and unit (lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, def-weil-pbc-sheafification), unit-compatible uniqueness (03CB) and fibre-product uniqueness. Step 1 now defines alpha through the fibre-product isomorphism X_W x_X (X x_Y V) = X_W x_W (W x_Y V), and the uses and proof_deps are updated. (2) blueprint.from.place pointed to Proof (1)'s final sentence, which is about (gf)^{-1}=f^{-1}g^{-1}; corrected to Proof (2), 'compatible with composition of immersions', via the parent's steps 3, 5 and 7. (3) The source now cites Sites 03CF / Sites Modules 04J0. Accepted tool_uses: lem-weil-pbc-proetale-ringed-open-comparison, lem-weil-pbc-ringed-topoi-module-adjunction and lem-sfb-proetale-object-inverse-image-restriction, all generic localization/adjunction black boxes; the first two were already accepted for the parent.; 1 file(s) fixed by the reviewer"
  }
 }

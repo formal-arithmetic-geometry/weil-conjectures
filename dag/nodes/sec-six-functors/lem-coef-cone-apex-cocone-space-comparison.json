@@ -12,9 +12,123 @@
   "def-coef-infinity-relative-cone",
   "lem-coef-join-slice-cocone-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=K^{\\triangleright}$, and for $d:T\\to C$ write $M_d(W)=\\operatorname{Map}_{\\operatorname{Fun}(T,C)}(d,\\Delta_TW)$ and $R_d(W)=\\{d\\}\\times_{\\operatorname{Fun}(T,C)}\\operatorname{Fun}(\\Delta^1,\\operatorname{Fun}(T,C))\\times_{\\operatorname{Fun}(T,C)}\\{\\Delta_TW\\}$, with the two endpoint evaluations understood. The functor-cone calculus makes the functor categories quasicategories and $M_d(W)$ Kan. Apply the join-slice comparison to $d=c,f$ and also to $qc,qf$. It makes the four sharp apex fibers Kan and gives equivalences $U_d^C(W)\\to R_d(W)$. The pinch comparison gives natural homotopy equivalences $M_d(W)\\to R_d(W)$. All restriction and $q$ maps commute with this zigzag, since both comparisons are precomposition with their specified collapse maps. Thus it suffices to identify the restriction square on the four $M$ spaces, retaining its commutation data.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5 and Corollaries 4.2.1.7-4.2.1.8; Kerodon 01L5; application to the four diagrams, with the agent notation M and R."
+   }
+  },
+  {
+   "text": "Apply the cone-monomorphism lemma to $\\varnothing\\hookrightarrow K$. Its cone map is exactly $i:\\{*\\}=\\varnothing^{\\triangleright}\\hookrightarrow S$, so $i$ is right anodyne even when $K$ is not a quasicategory. The coherent-cocone assertion of the anodyne-cocones lemma, with $A=\\{*\\}$, $B=S$, $p=c$ and $T=W$, therefore makes actual apex evaluation $E_C:M_c(W)\\to\\operatorname{Map}_C(x,W)$ a weak equivalence. Here $\\operatorname{Fun}(\\Delta^0,C)=C$ by the internal-functor definition. The same argument gives $E_D:M_{qc}(qW)\\to\\operatorname{Map}_D(qx,qW)$. Evaluation commutes strictly with $q$ on the specified pinched mapping spaces. Neither application assumes a fibration or a colimit.",
+   "uses": [
+    "lem-coef-infinity-cone-mono-right-anodyne",
+    "lem-coef-infinity-anodyne-cocones",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0196",
+    "place": "Lemma 4.3.7.8, with A empty; Proposition 7.2.1.3 (02N3) and the opposite dual of Proposition 7.2.2.1 (02NR), (1) implies (6)."
+   }
+  },
+  {
+   "text": "Construct a simplicial map $s:S\\times\\Delta^1\\to S$ as follows. In an $n$-simplex $\\sigma$ of the ordered join, let $a$ be the length of its initial $K$-block ($0\\leq a\\leq n+1$). For $t:[n]\\to[1]$ let $b$ be the length of the initial zero-block. Retain the initial $\\min(a,b)$ vertices of the $K$-simplex and put all remaining vertices at the apex; an empty retained block means the pure apex simplex. For a monotone operator, the retained block is the inverse image of the intersection of these two initial blocks, which is also the intersection of their inverse images. This proves compatibility with all simplicial operators, including empty blocks. Thus $s(-,0)=\\mathrm{id}_S$, $s(-,1)=*$ and $s(*,t)=*$. Consequently $\\eta=c\\circ s:c\\to\\Delta_Sx$ is a coherent transformation whose apex component is $1_x$. On $K\\times\\Delta^1$ the formula is precisely the ordered-block collapse defining the coherent cocone $\\gamma$ of $c$. This construction commutes with every induced cone map $L^{\\triangleright}\\to K^{\\triangleright}$.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 3.1.1.2 supplies the cone context; agent explicit degreewise ordered-block contraction, not a theorem asserted by HA."
+   }
+  },
+  {
+   "text": "We identify the composition homotopy explicitly in the unpinched model $R_c(W)$. An $n$-simplex is a map $\\tau:S\\times\\Delta^n\\times\\Delta^1\\to C$ with endpoints $c$ and the constant $W$. Form the rectangle\n$$F_\\tau(z,v,t,u)=\\tau(s(z,t),v,u).$$\nIts bottom edge ($u=0$) is $\\eta$, its top edge ($u=1$) is $1_{\\Delta_SW}$, its left edge ($t=0$) is $\\tau$, and its right edge ($t=1$) is $\\Delta_S(\\tau_*)$. Split the $(t,u)$ square along the diagonal from $(0,0)$ to $(1,1)$. The lower-right triangle witnesses that this diagonal is a composite of $\\eta$ and $\\Delta_S(\\tau_*)$; the upper-left triangle witnesses that it is a composite of $\\tau$ and $1_{\\Delta_SW}$. These statements hold with the entire $\\Delta^n$ parameter and commute with all operators on it. Apply the fixed-vertex triangle-space equivalence and unit homotopy in the mapping-composition node to these two triangles, and then the natural pinch equivalence. They give a homotopy of maps of spaces between $\\tau\\mapsto\\tau$ and $\\tau\\mapsto\\Delta_S(\\tau_*)\\eta$. This uses the Kan spaces of triangles and their restriction maps as spans of equivalences, so it requires no functorial choice of horn fillers.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Corollaries 4.6.8.5 and 4.6.8.8, Construction 4.6.8.9 and Proposition 4.6.8.11; agent application to the displayed parametrized rectangle."
+   }
+  },
+  {
+   "text": "Restrict both triangles of the preceding rectangle along $K\\hookrightarrow S$. The left edge becomes restriction $r_C(\\tau)$, the bottom becomes $\\gamma$, and the right becomes $\\Delta_K(E_C\\tau)$. Thus the retained homotopy is\n$$r_C\\simeq g_CE_C,\\qquad g_C(\\alpha)=\\Delta_K(\\alpha)\\gamma.$$\nPerform the same construction in $D$ to obtain $r_D\\simeq g_DE_D$ with $g_D(\\beta)=\\Delta_K(\\beta)(q\\gamma)$. The composition maps and their homotopies are those of the coherent Hom bifunctors, rather than just their actions on components. Applying $q$ to $F_\\tau$ gives exactly $F_{q\\tau}$, and applying $q$ to either of its two triangles gives the corresponding triangle for $q\\tau$. The naturality of the induced Hom transformation therefore supplies the compatibility between these horizontal homotopies and the vertical maps. In particular the resulting cube compares the original constant commutation homotopy of $r_C,r_D$ to the displayed composition commutation homotopy of $g_C,g_D$, with its boundary paths homotopic relative endpoints.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 and Remark 8.3.5.9 (03PD), applied to the two triangles; the rectangle and its restriction are the agent proof of the required homotopy."
+   }
+  },
+  {
+   "text": "For $W\\to W'$, the second-variable action of the coherent Hom bifunctor postcomposes the rectangles, and its composition and unit homotopies identify $\\Delta_K(a)(\\Delta_K(\\alpha)\\gamma)$ with $\\Delta_K(a\\alpha)\\gamma$. The same coherent bifunctor supplies all higher compatibilities, including those with $q$. For $j:L\\to K$, step 3 gives $s_K(j^{\\triangleright}(z),t)=j^{\\triangleright}(s_L(z,t))$ degreewise. Hence the entire rectangle and its two triangles restrict to the construction for $cj^{\\triangleright}$, and $\\eta|_L$ is the restricted cocone. Apex evaluation commutes with these restrictions. Combined with the natural sharp-to-coherent and pinch comparisons of step 1, these identities establish all three claimed naturalities for the square of spaces.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Coherent Hom functoriality, together with HTT 4.2.1.5-4.2.1.8 for naturality of the corner zigzags; agent substitution into the rectangle."
+   }
+  },
+  {
+   "text": "Use the four corner equivalences of step 1, followed at the two left corners by $E_C,E_D$ from step 2, and use the two horizontal homotopies with their cube coherence from step 5. These form a zigzag of coherent comparisons of squares whose corner maps are weak equivalences. Apply the coherent-cube invariance lemma, whose comparison uses precisely these specified side homotopies. It gives an isomorphism of the path-pullback targets in the homotopy category of Kan complexes, represented by a weak-equivalence zigzag, and identifies the two comparison maps up to the retained homotopy. Together with the weak equivalence of their sources, this is the asserted weak equivalence between comparison maps. It does not substitute an arbitrary commutation homotopy for the one obtained from cocone composition.",
+   "uses": [
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X4",
+    "place": "Context only: Proposition 7.1.6.9; the actual path-pullback conclusion uses the cited agent coherent-cube lemma, whose statement explicitly retains side homotopies."
+   }
+  },
+  {
+   "text": "If $K=\\varnothing$, then $S=\\Delta^0$, $E_C,E_D$ are identities, and $M_f(W)$ and $M_{qf}(qW)$ are the one-point mapping spaces in $\\operatorname{Fun}(\\varnothing,C)=\\Delta^0$. Thus both squares are the same map-to-point square. In general some cocone spaces may be empty; none of the constructions selects a cocone or a vertex in such a space, so all arguments apply unchanged. The existence of the stated diagram $c$ already supplies $x$, and $W$ is fixed as in the assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Agent check of the empty-shape and empty-space cases from the internal-functor definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-kan-homotopy-coherent-cube-invariance",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-join-slice-cocone-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0196",
+  "place": "Agent ordered-block contraction and parametrized two-triangle argument. Supporting results: Kerodon 0196, 02N3, 02NR, 01L5, 01PF, 046J and 03PD; HTT 4.2.1.5-4.2.1.8. These online references are not archived in literature/; archival copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +157,52 @@
    "results": "{\"t\": \"2026-10-17T08:38:01Z\", \"tool\": \"grep\", \"query\": \"coslice|cocone.*[Aa]pex|[Aa]pex.*cocone|[Jj]oin.*[Ss]lice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Probability/Kernel/RadonNikodym.lean\", \"Mathlib/Probability/Kernel/RadonNikodym.lean\", \"Mathlib/Combinatorics/SetFamily/LYM.lean\", \"Mathlib/Combinatorics/SetFamily/LYM.lean\", \"Mathlib/Data/Finset/Slice.lean\", \"Mathlib/Data/Finset/Slice.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\"], \"digest\": \"a07591fc9f84a900\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary Comma/Over and cocone apex comments; no coherent cone-apex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a diagram on a simplicial right cone in a quasicategory, restriction of coherent cocones to the apex is an equivalence of Kan spaces, compatible with composition",
+   "results": "{\"t\": \"2026-10-17T13:20:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a diagram on a simplicial right cone in a quasicategory, restriction of coherent cocones to the apex is an equivalence of Kan spaces, compatible with composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Limits.Cocones.precomposeEquivalence\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\"], \"digest\": \"2f6dbb9a6bfea234\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary cocone/category statements and strict Segal coskeletality do not assert equivalences of coherent quasicategorical cocone spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"cocone\"",
+   "results": "{\"t\": \"2026-10-17T13:20:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the specified quasicategory/coherent-cocone query."
+  },
+  {
+   "tool": "grep",
+   "query": "cocone|coslice|anodyne",
+   "results": "{\"t\": \"2026-10-17T13:20:19Z\", \"tool\": \"grep\", \"query\": \"cocone|coslice|anodyne\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the specified quasicategory/coherent-cocone query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right cofinal inclusion of the terminal cone vertex induces an equivalence of spaces of natural transformations from a simplicial diagram to a constant diagram",
+   "results": "{\"t\": \"2026-10-17T13:21:08Z\", \"tool\": \"leansearch\", \"query\": \"Right cofinal inclusion of the terminal cone vertex induces an equivalence of spaces of natural transformations from a simplicial diagram to a constant diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.unitHomEquiv\", \"CategoryTheory.Limits.IsLimit.homEquiv\", \"CategoryTheory.Limits.IsColimit.homEquiv\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.Cocone.ι\", \"CategoryTheory.TransfiniteCompositionOfShape.incl\", \"CategoryTheory.Limits.limitOfDiagramTerminal\"], \"digest\": \"c1bc211f2157c87a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary cocone/category statements and strict Segal coskeletality do not assert equivalences of coherent quasicategorical cocone spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of natural transformations at the final vertex of a cone identifies restriction to the base with postcomposition of the defining cocone",
+   "results": "{\"t\": \"2026-10-17T13:21:09Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of natural transformations at the final vertex of a cone identifies restriction to the base with postcomposition of the defining cocone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.extendCocone_obj_ι_app'\", \"CategoryTheory.Functor.Final.extendCocone_obj_ι_app\", \"CategoryTheory.Limits.Cocone.extensions_app\", \"CategoryTheory.Limits.Cone.extensions_app\", \"CategoryTheory.cocones_map_app_app\", \"CategoryTheory.Functor.cocones_map_app\", \"CategoryTheory.cocones_obj_map_app\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone_π_app\"], \"digest\": \"3ee4fc251633ad3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary cocone/category statements and strict Segal coskeletality do not assert equivalences of coherent quasicategorical cocone spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "coslice|pinch|coherent.*cocone|cocone.*coherent|cone.*apex",
+   "results": "{\"t\": \"2026-10-17T13:21:09Z\", \"tool\": \"grep\", \"query\": \"coslice|pinch|coherent.*cocone|cocone.*coherent|cone.*apex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the specified quasicategory/coherent-cocone query."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-colimit-active-join-boundary",
@@ -74,5 +230,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cone-apex-cocone-space-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused existing sharp/cocone and pinch comparisons, right-anodyne cone and cocone-restriction lemmas, coherent composition/Hom functoriality, and coherent-cube invariance. Proved the composition homotopy by a degreewise contraction and a parametrized rectangle with two explicit triangles. No new nodes or Mathlib leaves. Checked arbitrary simplicial indexing sets, empty shapes/spaces and naturality before path-pullback comparison.",
+  "blueprint": "Supports ancestor prop-coef-integral-exceptional-adjoint, historical proof paragraph 2 middle derived mapping-complex comparison, through the recorded operadic-colimit ancestry: identifies the join-coslice restriction of HA 3.1.1.2 with coherent cocone composition. Current main-20261015 node states the integral adjunction without expanding this foundational comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic closure of functor simplicial sets under quasicategories and Kan mapping-space property; it is a foundation tool, not a replacement of the integral-adjunction unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-ac829706b",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-ac829706b (reviewer sub-agent of L); spot-checked: I read the item, all ten cited statements, the unit record and the parent's steps 2-3 in full. No new nodes; statement unchanged and still matches what the parent's step 2 uses. Edge cases K=empty and K=Delta^0 check out, and K need not be a quasicategory. Step 1: the join-slice fiber over W equals R_d(W) strictly; pinch comparison applied in Fun(T,C), which is a quasicategory by the functor-cone calculus. Both comparisons are precompositions, so they commute with restriction and q. Step 2: the cone-monomorphism lemma for the injection from empty to K gives Delta^0 into K^cone right anodyne; the anodyne-cocones lemma holds for any B, so apex evaluation is an equivalence. Step 3: I re-derived the contraction s. It is simplicial because retained blocks pull back to intersections of initial segments; it equals id at t=0, the apex at t=1, and fixes the apex. On K x Delta^1 it is the join-slice block collapse, so gamma is the cocone that comparison assigns to c, and s commutes with restriction along L to K. Step 4: I checked all four edges of F_tau. Both triangles lie in V(a,b,d) and share the diagonal; mapping-composition's homotopy equivalence theta and unit homotopy give tau ~ composite of Delta_S(tau_*) with eta. Step 5: restricting to K gives r ~ g E. q commutes strictly with F, theta and l; the resulting cube coherence is compressed but correct. Step 6: naturality checked degreewise. Step 7: the cube-invariance node (unsplit, already in the DAG, no cycle) matches the hypotheses steps 1, 2 and 5 provide. No cycle (the item's only citer is its parent), no duplicate found by rg over the DAG. All cited statements are in the item's unit except one definition and lem-cbc-enhanced-functor-cone-calculus. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, generic quasicategory/Kan closure, already accepted on four sibling nodes. Searches cover all three kinds. Agent origin with WANTED lines for HA, HTT and Kerodon, which are not in literature/; no SGA used. No fixes."
  }
 }

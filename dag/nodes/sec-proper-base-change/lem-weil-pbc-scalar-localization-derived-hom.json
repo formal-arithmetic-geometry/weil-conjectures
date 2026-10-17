@@ -16,9 +16,92 @@
   "def-pur-sheaf-tensor-product",
   "lem-weil-pbc-exact-functor-derived-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\varphi:R\\to R_t$ be the localization map and $U=\\operatorname{Res}_\\varphi$ restriction of scalars [def-pc-sheaf-restrict-scalars]. First, $M\\mapsto R_t\\otimes_RM$ is exact on module sheaves. Let $L_t$ be the presheaf $V\\mapsto R(V)[1/t]$, so $R_t=L_t^\\#$. By [lem-pc-sites-module-sheafification-tensor] (with $\\mathcal O=R$, $\\mathcal G=M$, $\\mathcal F=L_t$) there is an isomorphism $M\\otimes_RR_t\\cong(M\\otimes_{p,R}L_t)^\\#$, natural in $M$, with $(M\\otimes_{p,R}L_t)(V)=M(V)\\otimes_{R(V)}R(V)[1/t]$. If $M'\\to M$ is a monomorphism of sheaves, then each $M'(V)\\to M(V)$ is injective, because kernels are computed sectionwise [def-weil-sheaf-of-modules-category]. The maps $M'(V)\\otimes R(V)[1/t]\\to M(V)\\otimes R(V)[1/t]$ stay injective because $R(V)\\to R(V)[1/t]$ is flat [lem-weil-pbc-localization-flat], and sheafification preserves monomorphisms [lem-weil-pbc-ringed-site-module-sheafification-exact]. The functor $-\\otimes_RR_t$ preserves cokernels as a left adjoint [lem-pc-sheaf-modules-tensor-closed], so it is exact on $R$-modules. Since $\\operatorname{Res}_\\varphi$ does not change the underlying abelian sheaves, it is also exact as a functor to $R_t$-modules. Hence the termwise functor induces $F:D(R)\\to D(R_t)$ by [lem-weil-pbc-exact-functor-derived-functor], and $U$ is induced termwise. By that node, $F$ with $FQ\\cong Q(-\\otimes_RR_t)$ is a left derived functor (a right Kan extension along $Q$) of the termwise change of rings. By [lem-pur-derived-change-of-rings](2), $L\\varphi^*$ is the left derived functor of the same termwise functor, computed on K-flat complexes. Uniqueness of Kan extensions gives a unique isomorphism $L\\varphi^*\\cong F$ compatible with the maps from $Q(-\\otimes_RR_t)$. On a K-flat representative $P$ it is the identity of $Q(P\\otimes_RR_t)$ under $c_P$. Transport the adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] along this isomorphism. This gives bijections $$\\operatorname{Hom}_{D(R_t)}(FK,M)\\cong\\operatorname{Hom}_{D(R)}(K,UM)$$ natural in $K\\in D(R)$ and $M\\in D(R_t)$. By its clause (1), and by naturality of the unit for an arbitrary complex replaced by a K-flat resolution, the unit $\\eta_L:L\\to UFL$ is the class of the termwise map $x\\mapsto x\\otimes1$. Both $F$ and $U$ commute strictly with the shift on complexes, and the bijections are compatible with these identifications.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint, derived adjunction for the morphism of ringed topoi (Sh(S),R_t)->(Sh(S),R)), with derived.tex Tag 015F (lemma-right-derived-exact-functor) for the exact termwise functor and algebra.tex Tag 00HT (localization is flat)"
+   }
+  },
+  {
+   "text": "For bounded-below $L$, apply [lem-weil-pbc-scalar-localization-underlying-telescope]. It identifies $UFL$ with the telescope triangle of the sequence $L\\xrightarrow{t}L\\xrightarrow{t}\\cdots$, and identifies the stage-$n$ leg with the scalar-extension unit followed by multiplication by $t^{-n}$. After shifting by $q$, the same identification holds for $UFL[q]$.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Proposition 6.8.14(2), scalar-localization telescope"
+   }
+  },
+  {
+   "text": "Fix $q$. Apply [lem-weil-pbc-sequence-relative-hom-telescope] in $D(R)$ to $K$, the sequence $X_n=L[q]$ with transition $t$, and the telescope vertex $UFL[q]$. Its two coproduct comparison hypotheses are exactly the hypothesis on $K$ in the statement, applied to the constant countable families $L[q]$ and $L[q+1]$; both have a common lower bound because $L$ is bounded below. We obtain\n$$\\varinjlim_n\\operatorname{Hom}_{D(R)}(K,L[q])\\xrightarrow{\\sim}\\operatorname{Hom}_{D(R)}(K,UFL[q]).$$\nThe stage map sends $u:K\\to L[q]$ to the composite with the $n$th telescope leg.",
+   "uses": [
+    "lem-weil-pbc-sequence-relative-hom-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 093W, 0CRK and 094A; the sequence-relative Hom telescope lemma"
+   }
+  },
+  {
+   "text": "Compose the bijection of Step 3 with the adjunction of Step 1 for $M=FL[q]$, using the identification of $UFL[q]$ with the telescope vertex from Step 2. This gives a natural isomorphism\n$$\\varinjlim_n\\operatorname{Hom}_{D(R)}(K,L[q])\\xrightarrow{\\sim}\\operatorname{Hom}_{D(R_t)}(FK,FL[q]).$$\nAt stage $n$ a map $u$ goes to the adjunct of $(t^{-n}\\circ\\eta_L)[q]\\circ u$, by the leg normalization of Step 2, where $\\eta_L$ is the unit identified in Step 1. For any adjunction the adjunct of $U(g)\\circ\\eta\\circ u$ is $g\\circ F(u)$. Here $t^{-n}$ on $UFL$ is $U$ of the automorphism $t^{-n}$ of $FL$: $t$ is a unit of $R_t$, so it acts invertibly on $FL$. Hence the image is $t^{-n}F(u)$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-scalar-localization-underlying-telescope",
+    "lem-weil-pbc-sequence-relative-hom-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full-faithfulness calculation"
+   }
+  },
+  {
+   "text": "The colimit in Step 4 has transition $u\\mapsto t u$. By the fraction relation in [def-weil-pbc-module-localization-away], it is canonically $\\operatorname{Hom}_{D(R)}(K,L[q])[1/t]$, with the class at stage $n$ written $u/t^n$. Under this identification the preceding map is $u/t^n\\mapsto t^{-n}F(u)$, proving the displayed isomorphism. Naturality in $K,L$, compatibility with shifts, and preservation of identities and composition follow from naturality of the adjunction and of the telescope legs, together with bilinearity of composition and the fraction relation.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ and Lemma 07K0, module localization fraction relation; naturality from the preceding constructions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-scalar-localization-underlying-telescope",
+  "lem-weil-pbc-sequence-relative-hom-telescope"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2), with the telescope and fraction calculations expanded from Stacks derived.tex Tags 093W, 0CRK and 094A"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-condensed-e-realization",
@@ -70,5 +153,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-scalar-localization-derived-hom",
+  "worker": "stage1",
+  "summary": "Expanded the scalar-localization Hom calculation into five steps. The existing reviewed sequence-relative Hom telescope lemma supplies the compact-source calculation; one new statement-only node records the underlying scalar-extension telescope. The scalar extension/restriction adjunction supplies the comparison to D(R_t), and the module-localization fraction relation gives the stated formula and functoriality. The original statement, hypotheses, source and blueprint ancestry are unchanged.",
+  "blueprint": "The steps realize the integral-lattice/rationalization paragraph of thm-weil-pbc-finite-extension: Step 2 is the scalar-extension telescope underlying the Hom calculation, Steps 3–4 are the Hom/telescope full-faithfulness argument, and Step 5 is the denominator/fraction identification.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Step 1 needs the derived extension/restriction adjunction for a map of sheaves of commutative rings on a site, with the unit given by x ↦ x⊗1; this is a generic ringed-site tool and no node of sk-thm-properbasechange states it (reviewer repair: replaces def-sfb-derived-extend-restrict-adjunction, whose module-object hypotheses were not checked and which fixes no unit)."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Step 1 identifies the termwise F with the K-flat derived change of rings that the adjunction is stated for; generic ringed-site tool."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Step 1 identifies R_t⊗_R M with the sheafified sectionwise localization to prove exactness. It is already an accepted tool in this unit (lem-weil-pbc-ringed-localization-rhom-calculus)."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Step 1 needs right exactness of change of rings, since tensor is a left adjoint. It is already an accepted tool in this unit (lem-weil-pbc-ringed-localization-rhom-calculus)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-5b42e07b8",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-5b42e07b8 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources checked: Bhatt–Scholze 6.8.2, 6.8.12 and 6.8.14(2); Stacks 093W, 0CRK, 094A, 0949, 015F, 07A6 and 00HT. The statement is unchanged and not weakened: the hypothesis on K is exactly the content of 6.8.12 used in 6.8.14(2). Steps 2, 3 and 5 are correct. In Step 3, the telescope Hom lemma's two coproduct comparisons are the K-hypothesis applied to the constant families L[q] and L[q+1], whose common lower bound comes from L being bounded below. I tested the new telescope node on t=0, t a unit, L=0 and Z→Z[1/p]; it is true via termwise colimit = hocolim (Stacks 0949). It does not duplicate anything and does not restate a clause of the item. Three faults repaired in fixes/. (1) C1: Step 1 asserted exactness of R_t⊗_R− without a citation. Added lem-pc-sites-module-sheafification-tensor, lem-weil-pbc-localization-flat (00HT), lem-weil-pbc-ringed-site-module-sheafification-exact and lem-pc-sheaf-modules-tensor-closed. (2) C4/E1: Steps 1 and 4 used def-sfb-derived-extend-restrict-adjunction, an abstract module-object node whose hypotheses were not checked and which fixes no unit. Replaced it with lem-pur-sheaf-ring-derived-coefficient-adjunction (unit x↦x⊗1) and lem-pur-derived-change-of-rings, with the Kan-uniqueness identification L phi^* ≅ F written out. Step 4 now derives t^{-n}F(u) by the triangle identity. split_report.tool_uses is updated to these generic tools (the two lem-pc ones are already accepted in this unit). (3) New node: restriction of scalars now cites def-pc-sheaf-restrict-scalars, the unit is defined explicitly and the leg is written as U(t^{-n})∘η. The source tag 0CRK is corrected to 0949 (lemma-colim-hocolim) and def-weil-pbc-category-colimit is added to stmt_deps. The content is unchanged. No SGA and no cycle; all cited ids exist.; 2 file(s) fixed by the reviewer"
  }
 }

@@ -20,9 +20,148 @@
   "lem-cbc-extension-zero-composition",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each of $q,p,s$, the constant-$A$ inverse image is an exact additive left adjoint to direct image by [prop-weil-pbc-inverse-image-modules-exact]. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to these module categories. It gives K-injectivity of $q_*I$, $p_*M$, $s_*L$, and $s_*p_*M$. No properness or exactness of direct image is used in this application; the needed exact functor is inverse image. All the termwise functors in the calculation are additive and therefore preserve chain homotopies: applying an additive functor to $f-g=dh+hd$ gives the same equation with its image of $h$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); constant-coefficient exactness: sites-modules.tex Tag 04JC (lemma-flat-pullback-exact)"
+   }
+  },
+  {
+   "text": "The open-extension composition isomorphism [lem-cbc-extension-zero-composition] identifies $a_!J$ with $b_!j_!J$. By [lem-weil-pbc-extension-by-zero-exact], $b_!u$ is a quasi-isomorphism. Hence $t:=v\\circ b_!u:a_!J\\to M$ is a quasi-isomorphism as a composite of two such maps. Its target is K-injective by the choice of $M$, so it is a K-injective resolution by [def-weil-pbc-kinjective-resolutions].",
+   "uses": [
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-weil-pbc-kinjective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), resolution construction; horizontal composition calculation (lemma-shriek-proper-and-open-compose-horizontal); exactness: sites-modules.tex Tag 03DJ"
+   }
+  },
+  {
+   "text": "Put $B=i_!q_*I$ and $c=(p_*v)\\chi_I:B\\to p_*M$. In the derived category $Qw:QB\\to QL$ is invertible, since $w$ is a quasi-isomorphism. The Hom bijection of [lem-weil-pbc-kinjective-hom-derived], with K-injective target $p_*M$ from step 1, represents $Qc\\circ(Qw)^{-1}$ by a chain map $\\ell:L\\to p_*M$, unique up to homotopy. The same bijection with source $B$ shows $\\ell w\\simeq c$. Conversely this equation determines $Q\\ell=Qc\\circ(Qw)^{-1}$, hence determines its homotopy class. Here and below $Q$ means the localization at quasi-isomorphisms specified by [def-weil-pbc-derived-categories].",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), equivalence (1) and (3)"
+   }
+  },
+  {
+   "text": "Naturality of the section-preserving sheaf identification [lem-cbc-proper-support-sheaf-composition], applied degreewise to $u:j_!J\\to I$, gives $\\chi_I(i_!q_*u)=(p_*b_!u)\\chi_{j_!J}$. Choose a homotopy $h$ with $\\ell w-c=dh+hd$ from step 3. Applying $s_*$ and precomposing with the chain map $s_*i_!q_*u$ gives a homotopy $s_*h\\circ s_*i_!q_*u$ between the first displayed path and $s_*c\\circ s_*i_!q_*u$. Substitute the naturality equation and use functoriality of $p_*,s_*$ to obtain exactly $s_*p_*(v\\circ b_!u)\\circ s_*\\chi_{j_!J}$, the second path. Additivity of $s_*$ is included in [prop-weil-pbc-inverse-image-modules-exact].",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), section-preserving construction, and Tag 0F7J (lemma-shriek-composition); explicit chain homotopy"
+   }
+  },
+  {
+   "text": "Use the total-right-derived unit convention of [def-sfb-right-derived-functor], with the unbounded direct images interpreted as in [def-amb-etale-compact-support]. Write $\\eta^t_K:Q(t_*K)\\to Rt_*(QK)$. For any of the chosen K-injective resolutions $r:K\\to T$, its canonical resolution identification is $c_r=(\\eta^t_T)^{-1}\\circ Rt_*(Qr)$. Naturality of $\\eta^t$ reads $Rt_*(Qr)\\eta^t_K=\\eta^t_TQ(t_*r)$; cancelling the invertible $\\eta^t_T$ yields $c_r\\eta^t_K=Q(t_*r)$. Thus the unit on an unresolved termwise complex is represented by the direct image of its resolution map. This calculation uses the unit as a natural transformation and does not assert that $t_*$ preserves quasi-isomorphisms.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined); explicit naturality equation for the unit"
+   }
+  },
+  {
+   "text": "Apply step 5 first to $q_*$ and $u$, then to $s_*$ and $w$. After termwise $i_!$ and $s_*$, the two resolution maps are $s_*i_!q_*u$ and $s_*w$, respectively. The representative formula in [lem-amb-unbounded-proper-open-interchange], applied to the square with top edge $b$, bottom edge $i$, and K-injective input $I$, says that $\\Gamma_{Q,QI}$ is represented by $c=(p_*v)\\chi_I$. Under the resolution $w:B\\to L$ this is represented by $\\ell$, because $\\ell w\\simeq c$. Both $L$ and $p_*M$ are K-injective, so the action of $Rs_*$ on that morphism is represented by $s_*\\ell$ by [def-amb-etale-compact-support]. Consequently the successive units followed by $Rs_*\\Gamma_Q$ are represented by the first displayed path. The square here need not be cartesian; the cited comparison explicitly allows a commutative proper/open square.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), specified resolution map; Tag 0F7J (lemma-shriek-composition)"
+   }
+  },
+  {
+   "text": "Apply step 5 to $(sp)_*$ and the resolution $t$ of step 2. The single unit is represented by $(sp)_*t=s_*p_*t$. Precomposing with the section-preserving identification $s_*\\chi_{j_!J}$ of [lem-cbc-proper-support-sheaf-composition] gives precisely the second displayed path. The canonical direct-image composition identification [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] at $M$ can be computed with the identity resolution of the K-injective complex $p_*M$ (step 1). Its stated normalization is then the class of $s_*\\mathrm{id}_{p_*M}$, so $\\kappa_{QM}$ is the identity in these representatives. Naturality gives $\\kappa_{Q(a_!J)}=(Rs_*Rp_*(Qt))^{-1}\\kappa_{QM}R(sp)_*(Qt)$; under the resolution identifications this introduces no further map. The open comparison is the one of [lem-cbc-extension-zero-composition] used in step 2. This checks the specified canonical identifications, rather than choosing an arbitrary isomorphism between the two derived outputs.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), resolution normalization as recorded in the cited node; more-etale.tex Tag 0F7J"
+   }
+  },
+  {
+   "text": "For a chain map $f:J\\to J'$ of K-injective representatives and resolutions $u',v',w'$ for $J'$, use [lem-weil-pbc-kinjective-hom-derived] to choose maps $\\alpha:I\\to I'$, $\\beta:M\\to M'$, $\\gamma:L\\to L'$ satisfying, in the homotopy categories, $\\alpha u=u'j_!f$, $\\beta v=v'b_!\\alpha$, and $\\gamma w=w'i_!q_*\\alpha$. For example $Q\\alpha=Q(u'j_!f)(Qu)^{-1}$; the other two are obtained by the same displayed formula with $(v,v'b_!\\alpha)$ and $(w,w'i_!q_*\\alpha)$. Each target $I',M',L'$ is K-injective by choice, so the cited bijection supplies the map and uniqueness of its homotopy class. These are applications of the Hom bijection, not assertions of degreewise lifting through a monomorphism.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), derived morphisms into K-injectives and cancellation of quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "Write $\\ell'$ for the primed comparison. Using step 8 and naturality of $\\chi$ from [lem-cbc-proper-support-sheaf-composition], calculate in the homotopy category\n$$p_*\\beta\\,\\ell w=p_*\\beta\\,p_*v\\,\\chi_I=p_*v'\\,p_*b_!\\alpha\\,\\chi_I=p_*v'\\,\\chi_{I'}\\,i_!q_*\\alpha=\\ell'\\gamma w.$$\nThe target $p_*M'$ is K-injective by step 1. By [lem-weil-pbc-kinjective-hom-derived], cancellation of the invertible $Qw$ implies $p_*\\beta\\,\\ell\\simeq\\ell'\\gamma$. Apply $s_*$ and precompose with the augmented source maps: step 8 now gives commutativity of the first-path naturality square with source map $s_*i_!q_*j_!f$ and target map $s_*p_*\\beta$. For the second path, $\\beta t=t'a_!f$ in the homotopy category follows directly from the two equations for $\\alpha,\\beta$; naturality of $\\chi$ gives the identical square. Thus the identifications of steps 6 and 7 are natural in $f$.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective); explicit naturality calculation for more-etale.tex Tag 0F7B"
+   }
+  },
+  {
+   "text": "For two choices of $I,M,L$ at fixed $J$, apply steps 8 and 9 to $f=\\mathrm{id}_J$. The equation $\\alpha u=u'$ implies $Q\\alpha$ is invertible. Exactness of $b_!$ [lem-weil-pbc-extension-by-zero-exact] then implies $Q\\beta$ is invertible from $\\beta v=v'b_!\\alpha$. The map $\\alpha$ is a quasi-isomorphism between K-injectives, hence a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]; its images under $q_*$ and $i_!$ are homotopy equivalences. The equation for $\\gamma$ therefore makes $Q\\gamma$ invertible too. Thus $\\alpha,\\beta,\\gamma$ are homotopy equivalences, and so is $s_*p_*\\beta$. Their homotopy classes over the augmentations are unique by step 8, and comparison maps for three choices compose to the unique such maps. Step 9 identifies the two delivered morphisms under these canonical target comparisons, with the source fixed as $Q(s_*i_!q_*j_!J)$. If $J$ itself is replaced by a quasi-isomorphic K-injective representative, its comparison is a homotopy equivalence by the same cited result and the termwise source comparison is likewise invertible. This is the claimed independence on K-injective representatives and resolutions; it makes no assertion that the termwise source functor descends on arbitrary complexes.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), homotopy equivalence and uniqueness; sites-modules.tex Tag 03DJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J, with derived.tex Tags 070I, 070K, 070Y, 08BJ and sites-cohomology.tex Tag 0D6E; explicit augmentation, homotopy, and choice-comparison calculations by Q100"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +197,52 @@
    "results": "Hits: TopCat.Sheaf.interUnionPullbackConeLift_right, AlgebraicGeometry.IsOpenImmersion.lift_app, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, TopCat.Sheaf.interUnionPullbackConeLift_left, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.InjectiveResolution.descFOne_zero_comm, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; ; digest f2efcad26d11ddfc",
    "date": "2026-10-17",
    "verdict": "no match: derived natural-transformation composition and its unit exist, but do not supply the proper/open sheaf identification, K-injective tower comparison, or the specified equality for its two resolution paths. Sites and topological-stalk hits concern other constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective resolutions compute the compatibility of right derived functor unit maps with composition and extension by zero",
+   "results": "Hits: CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; ; digest b4ee85407c7a4d65",
+   "date": "2026-10-17",
+   "verdict": "no match: general derived-unit or natural-transformation statements, objectwise injective resolutions, or structure-sheaf pushforward; none states the etale constant-coefficient proper/open K-injective tower calculation or all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "totalRightDerivedUnit|rightDerivedNatTrans_comp|properOpen",
+   "results": "Hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; ; digest 8b37a97c17410d18",
+   "date": "2026-10-17",
+   "verdict": "no match: general derived-unit or natural-transformation statements, objectwise injective resolutions, or structure-sheaf pushforward; none states the etale constant-coefficient proper/open K-injective tower calculation or all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.totalRightDerivedUnit, Functor.rightDerivedNatTrans_comp",
+   "results": "Hits: ; loogle: unknown identifier 'Functor.totalRightDerivedUnit'; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "query rejected: loogle: unknown identifier 'Functor.totalRightDerivedUnit'; corrected name-substring query recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor comparison from a complex to its K injective resolution is natural and compatible with composition",
+   "results": "Hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.rightDerived; ; digest 4c2bb80a87a52bac",
+   "date": "2026-10-17",
+   "verdict": "no match: general derived-unit or natural-transformation statements, objectwise injective resolutions, or structure-sheaf pushforward; none states the etale constant-coefficient proper/open K-injective tower calculation or all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalRightDerivedUnit\"",
+   "results": "Hits: CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.totalRightDerivedUnit; ; digest 41a18f9888df90dd",
+   "date": "2026-10-17",
+   "verdict": "no match: general derived-unit or natural-transformation statements, objectwise injective resolutions, or structure-sheaf pushforward; none states the etale constant-coefficient proper/open K-injective tower calculation or all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a proper open square of schemes the comparison of derived direct image with extension by zero commutes with resolution augmentation units",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; ; digest d4060f31633e919b",
+   "date": "2026-10-17",
+   "verdict": "no match: general derived-unit or natural-transformation statements, objectwise injective resolutions, or structure-sheaf pushforward; none states the etale constant-coefficient proper/open K-injective tower calculation or all its clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-quasifinite-compact-support-exact",
@@ -80,5 +261,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-proper-open-tower-derived-unit",
+  "worker": "stage1",
+  "summary": "Proved the resolution-lifting, chain-homotopy, derived-unit normalization and choice-independence clauses using existing general K-injective and proper/open nodes. Statement unchanged. No new nodes; all algebraic comparison equations are written explicitly. Read the constant-coefficient hypotheses and the specified composition normalizations; no exactness of direct image is assumed.",
+  "blueprint": "Realizes sk-lem-geo-affine-local proof (2), last Hom equality using Stacks 0F7J and its compatibility with composition; precisely the proper/open tower augmentation calculation extracted via lem-sfb-quasifinite-compact-support-exact. Whole-blueprint searches for derived unit, K-injective, proper/open and resolution paths found no node stating this full chain-level assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic preservation under an exact left adjoint, used for etale constant-coefficient direct images; no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exact termwise open extension preserves the two augmentation quasi-isomorphisms; generic sheaf-theoretic tool."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Canonical open composition identification in the 0F7J tower, including its normalization."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Section-preserving underived identification and its naturality, the sheaf-level input to 0F7B used by this unit."
+   },
+   {
+    "node": "lem-amb-unbounded-proper-open-interchange",
+    "why": "Specified resolution formula for Gamma_Q, exactly the 0F7B comparison required by the 0F7J composition route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic composition normalization for unbounded direct images on constant-ringed etale topoi."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-dbe68b429",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-dbe68b429 (reviewer sub-agent of L); spot-checked: I read the item, the unit sk-lem-geo-affine-local, the parent lem-sfb-quasifinite-compact-support-exact (steps 6-7), all 12 cited statements, and Stacks more-etale 0F7B (l.2460) and 0F7J (l.3159). The statement is unchanged and is an exact instance of lem-amb-unbounded-proper-open-interchange (k=b, r=q, square need not be cartesian, finite A, Noetherian schemes). chi needs separated, locally finite type maps, and i,q,p,b are. All coefficients are constant-A etale modules, unbounded. This is not a target node, so no base-change morphism is involved. Steps checked: (1) K-injectivity from exact constant-coefficient inverse-image adjoints plus the right-adjoint lemma; (2) t is a resolution by exactness of b_!; (3) ell from the Hom bijection into the K-injective p_*M, existence and uniqueness both correct; (4) homotopy s_*h precomposed with s_*i_!q_*u, then chi-naturality gives the second path exactly; (5) the formula c_r eta = Q(t_*r) follows from unit naturality; (6) the representative (p_*v)chi_I matches the 0F7B proof, and Rs_* acts on resolved maps as in def-amb-etale-compact-support; (7) kappa is the identity at QM with identity resolution of p_*M; (8)-(10) I re-derived the comparison maps, the naturality chain and the cancellation of Qw. Independence uses homotopy equivalences between K-injectives and never assumes q_* is exact. Edge cases checked: empty X, identity maps, unbounded J, A=0. There are no new nodes. Generic and duplicate candidates were checked and are not duplicates: lem-sc-resolution-derived-single-unit-augmentation (bounded-below, injective) and lem-amb-unbounded-compact-support-comparisons (only the normalization). I accept the six declared tool uses as the 0F7B/0F7J ingredients and generic tools; prop-weil-pbc-inverse-image-modules-exact is Lean-closed and the Hom lemma is a Mathlib leaf. No SGA is used. No fixes."
  }
 }
