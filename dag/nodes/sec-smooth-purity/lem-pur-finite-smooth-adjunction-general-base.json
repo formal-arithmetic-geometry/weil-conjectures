@@ -54,16 +54,9 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-finite-ring-constructible-derived-origin], every intrinsic bounded constructible pro-etale $K$ has etale origin $K_0$. Write $C_T=\\nu_T^*$. This functor is exact [lem-sf-comparison-pullback-exact], fully faithful on $D^+$ [thm-weil-pbc-site-comparison], and preserves derived tensor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. If $K$ has Tor interval $[a,b]$, then for each ordinary etale module sheaf $M$, $C_Y(K_0\\otimes_A^LM)=K\\otimes_A^LC_YM$ vanishes outside that interval. Exactness and full faithfulness on degree-zero sheaves detect zero cohomology, so $K_0$ has the same Tor interval. Take its bounded flat representative $Q$ in $[a,b]$ by [lem-sf-etale-flat-model]; it is K-flat by [lem-pc-bounded-above-flat-kflat-site]. For any quotient $A=A_r\\to B=A_m$, $Q\\otimes_AB$ is flat over $B$: tensoring it with a short exact sequence of $B$-module sheaves is tensoring $Q$ with the same exact sequence of underlying $A$-module sheaves. Its interval remains $[a,b]$, and derived associativity identifies $((Q\\otimes_AB)\\otimes_BC)$ with $Q\\otimes_AC$ by $(q\\otimes b)\\otimes c\\mapsto q\\otimes bc$. Derived tensor is defined even for non-flat quotients by [lem-pur-derived-change-of-rings]. Apply [lem-pur-finite-tensor-constructible-cohomology] on the pro-etale site to $C_YK_0$ and the finite constant second factor $B$, with $E=\\mathbf Q_\\ell$. Tensor preservation identifies the resulting tensor with $C_Y(K_0\\otimes_A^LB)$. The origin equivalence [lem-weil-pbc-finite-ring-constructible-derived-origin] reflects constructibility of its cohomology sheaves back to the ordinary etale site; the bounded model already gives its finite cohomological interval. Thus the cited pro-etale tensor lemma is not being applied directly on the ordinary etale site. A constructible $A$-module sheaf annihilated by the kernel of $A\\to B$ is constructible as a $B$-module sheaf: on a trivializing cover its $A$-linear transition maps are $B$-linear, and its finite stalks are finite over $B$. Consequently reduction stays in the stated intrinsic categories, and has bounded constructible etale origin again.",
+   "text": "The finite-origin comparison, preservation of the Tor interval by a bounded flat K-flat model, associativity of quotient tensors, and constructibility of derived reduction are exactly the finite-reduction lemma [lem-pur-finite-reduction-constructibility]. Applying it with $A_r\twoheadrightarrow A_m$ proves that every reduction remains in the stated intrinsic categories and has an ordinary-etale origin.",
    "uses": [
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-sf-comparison-pullback-exact",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-etale-flat-model",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-finite-tensor-constructible-cohomology"
+    "lem-pur-finite-reduction-constructibility"
    ],
    "elementary": false,
    "source": {
@@ -89,18 +82,14 @@
    }
   },
   {
-   "text": "First justify applying Step 3 to $G_AK$: [thm-asd-smooth-tensor] already identifies $G_AK$ with $f^*K\\otimes_A^L\\omega_{f,A}$, where $\\omega_{f,A}[-2d]$ is a locally constant free rank-one sheaf. Thus it is bounded constructible of finite Tor amplitude by the flat-model and finite-stratification calculation of Step 2, with interval shifted by $-2d$. This uses no chosen orientation. Hence $b_{G_AK}$ is defined on a bounded finite-Tor object. Define $c_K:S_XG_AK\\to G_BS_YK$ by transposing $S_Y\\varepsilon_A(K)\\circ b_{G_AK}^{-1}$. This is natural by the adjunction bijection. For three rings, transpose $c_{B,C}(S_BK)\\circ S_C(c_{A,B}(K))$. Substituting the defining counit identity twice gives $S_C\\varepsilon_A(K)$ preceded by the inverse of the twice-applied $b$. Step 3 identifies this with $S_C\\varepsilon_A(K)\\circ b_{A,C}^{-1}$, the transpose of $c_{A,C}$. Injectivity of the adjunction bijection proves the exceptional cocycle, without any faithfulness claim for restriction of scalars on derived morphisms. This definition also commutes with the smooth base-change maps of [prop-asd-smooth-base-change]: both orders, transposed, are the pulled-back original counit tensored with $B$. For the proper piece, the needed exchange/projection equality is precisely [lem-weil-pbc-ringed-exchange-tensor-coherence]; for the open piece it is the identity-on-the-open/zero-off-the-open tensor equality of Step 3. Pasting [lem-weil-pbc-mate-pasting] therefore proves the equality for compact supports and their transposes. Let $\\phi_{A,K}:f^*K\\otimes\\omega_{f,A}\\to G_AK$ be the canonical tensor map of [thm-asd-smooth-tensor]. Its transpose is $P_A(f^*K\\otimes\\omega_{f,A})\\to K\\otimes P_A\\omega_{f,A}\\xrightarrow{1\\otimes\\varepsilon_A(A_Y)}K$. Extending this expression to $B$ and substituting the counit identity for $c_{A_Y}$ gives exactly the transpose of $\\phi_{B,S_YK}\\circ(1\\otimes c_{A_Y})$. The projection maps agree because their own transposes are counit tensored with identity, with the tensor associators computed in Step 2. Thus\n$$c_K\\circ S_X\\phi_{A,K}=\\phi_{B,S_YK}\\circ(1\\otimes c_{A_Y}).$$\nThe pullback and tensor identifications in this equation are those of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. No invertibility of $c$ has yet been assumed.",
+   "text": "Apply [lem-pur-exceptional-coefficient-comparison] to the canonical $b$ of Step 3. Its ordinary-etale hypotheses hold by Step 1 and the quotient-domain checks of Step 2. It supplies the bounded finite-Tor domain of $G_AK$, the counit-defined map $c_K$, naturality, the quotient cocycle, compatibility with exceptional base change, and the tensor-map identity\n$$c_K\\circ S_X\\phi_{A,K}=\\phi_{B,S_YK}\\circ(1\\otimes c_{A_Y}).$$\nNo invertibility of $c$ is used at this point.",
    "uses": [
-    "prop-asd-smooth-base-change",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-mate-pasting",
-    "thm-asd-smooth-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-pur-exceptional-coefficient-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-    "place": "Composition (2), tensor-map part of (3), and explicit base-change mate square"
+    "place": "Composition, base-change mates, and tensor-map compatibility"
    }
   },
   {
@@ -120,35 +109,35 @@
    }
   },
   {
-   "text": "Put $W=X\\times_YX$. The first projection $p_1$ is smooth of the same pure relative dimension $d$, by [lem-sbc-smooth-relative-dimension-permanence](1), since it is the base change of $f$ along $f$. By [lem-pur-diagonal-regular-immersion], $\\Delta$ is a closed regular section of $p_1$ with normal bundle $T_{X/Y}$ of rank $d$. All these schemes and the deformation space are separated finite type over $k$; the Noetherian and compactification checks of Step 1 apply. The canonical base-change isomorphism [prop-asd-smooth-base-change] gives $p_2^*\\omega_{f,A}\\xrightarrow{\\sim}\\omega_{p_1,A}$; pulling back by $\\Delta$ identifies its source with $\\omega_{f,A}$. Apply [lem-pur-noetherian-etale-section-specialization] to $(p_1,\\Delta)$ and compose its $\\delta$ with $z^*v_{\\pi,A}^{-1}$ from Step 5. This is the orientation $\\alpha_{f,A}$ in the statement, and every factor is an isomorphism. To check its coefficient compatibility, use the same deformation space for $A=A_r$ and $B=A_m$. Write $F_A$ for its family object and $C_A$ for its $t=1$ fibre. The maps $c$ of Step 4 give $e_F:S(F_A)\\to F_B$ and $e_C:S(C_A)\\to C_B$, with these fibre restrictions, by the base-change equality proved there. The two maps\n$$\\kappa_B\\circ e_F,\\qquad a^*e_C\\circ S(\\kappa_A):S(F_A)\\longrightarrow a^*C_B$$\nagree at $t=1$, both being $e_C$. Neither $e_F$ nor $e_C$ is assumed invertible at this stage. They agree everywhere: by the new lemma and the rank-one flatness, remove $[2d]$ and identify their source and target with pullbacks of rank-one locally constant sheaves on $X$. Their sheaf of homomorphisms is itself pulled back from $X$, so this uniqueness argument applies to arbitrary morphisms between these lines, not only to isomorphisms. Locally trivialize those two sheaves. A difference is then a section of the constant coefficient sheaf $B$ over $\\mathbf A^1$, whose zero locus is open and closed on each geometric fibre and contains $t=1$. Every such affine-line fibre is connected, so the difference vanishes. These are actual degree-zero sheaf maps by [lem-weil-pbc-derived-single-fully-faithful]. Restrict the resulting equality at $t=0$ and invert the two $\\kappa$'s to obtain\n$$\\delta_B\\circ e_C=e_0\\circ S(\\delta_A).$$\nCombining with the base-change compatibility in Step 4 and the vector-bundle compatibility in Step 5 proves\n$$\\alpha_{f,B}\\circ c_{A_Y}=S(\\alpha_{f,A})$$\nunder the canonical twist identifications. This checks equality of morphisms using rank-one sheaves, not equality of arbitrary derived morphisms on stalks.",
+   "text": "The projection $p_1:X\\times_YX\\to X$ is smooth of pure relative dimension $d$ by [lem-sbc-smooth-relative-dimension-permanence], and its diagonal section is regular with normal bundle $T_{X/Y}$ by [lem-pur-diagonal-regular-immersion]. Apply [lem-pur-noetherian-etale-section-specialization] to this pair. Compose its $\\delta$ with the exceptional base-change map [prop-asd-smooth-base-change] pulled back by $\\Delta$ and the inverse vector-bundle normalization from Step 5. This is exactly $\\alpha_{f,A}$ in the statement. Step 4 gives coefficient maps on the deformation family whose $t=1$ restrictions agree. Hence [lem-pur-diagonal-orientation-compatibility] identifies their $t=0$ restrictions, without requiring them to be invertible. Composing this equality with the base-change equality of Step 4 and the vector-bundle equality of Step 5 gives $\\alpha_{f,B}\\circ c_{A_Y}=S_X\\alpha_{f,A}$ under the canonical twist identifications.",
    "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
     "lem-pur-diagonal-regular-immersion",
-    "prop-asd-smooth-base-change",
     "lem-pur-noetherian-etale-section-specialization",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-sbc-smooth-relative-dimension-permanence"
+    "prop-asd-smooth-base-change",
+    "lem-pur-diagonal-orientation-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
-    "place": "Three diagonal factors; sk-lem-sp-reduction-compatibilities.proof.md (3), normalized family comparison at t=1 and t=0"
+    "place": "Diagonal, deformation, and vector-bundle factors; coefficient compatibility"
    }
   },
   {
-   "text": "Define the ordinary $\\gamma_{A,K_0}$ by the three factors displayed in the statement. The orientation is an isomorphism by Step 6 and the tensor map is an isomorphism by [thm-asd-smooth-tensor]; hence their composite is an isomorphism, natural in $K_0$. The twist line is locally free rank one by [lem-asd-etale-finite-twist-pullback]. The bounded flat model in Step 2, pulled back using [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and tensored with that line, gives the Tor interval $[a-2d,b-2d]$. Exact pullback takes the finite stratification of each cohomology sheaf to its inverse-image stratification on $X$, and on each stratum it preserves finite locally constant sheaves. Tensoring a locally free rank-one line preserves this property. Thus $f^*K_0(d)[2d]$, and therefore $G_AK_0$, is bounded constructible with finite Tor amplitude. For $d=0$, $f$ is separated etale of finite type between Noetherian schemes. By [lem-asd-etale-compact-support-normalization] its compact support is identified with etale sum extension $f_{\\Sigma!}$, the compact-support adjunction with $f_{\\Sigma!}\\dashv f^*$ including the sum/evaluation counit, and the compact-support base-change exchange with the sum-extension exchange; [lem-amb-etale-adjoint-locality] gives the resulting identification $f^*\\cong f^\\times$, so $\\omega_{f,A}\\cong A_X$. Under these identifications each factor of $\\alpha_{f,A}$ is the identity. First, the base-change map of [prop-asd-smooth-base-change] for $p_1$ is the transpose of the pulled-back counit through the compact-support exchange; by the normalization lemma this is the transpose of the pulled-back sum counit through the sum exchange, and on geometric stalks both are the sum over the same fibre points, so it is the canonical inverse-image composition isomorphism $p_2^*f^*\\cong p_1^*f^*$. Second, $\\Delta$ is open and closed in $W$ (unramified and separated), so on the deformation the component through the section is $\\mathbf A^1_X$ mapping isomorphically to $\\mathbf A^1_X$, with $\\widetilde s$ an open and closed section of the etale $\\widetilde g$; by the same two identifications $F\\cong A_{\\mathbf A^1_X}$ and $C\\cong A_X$, the fibre identifications are the canonical pullback ones, and the identity map is normalized at $t=1$, so by uniqueness it is $\\kappa$ and $\\delta$ is the identity. Third, at rank zero $\\pi=1_X$ and the vector integration is the identity trace [def-amb-vector-integration]. Finally the transpose of the tensor map at $\\omega\\cong A_X$ is $f_{\\Sigma!}f^*K\\cong K\\otimes f_{\\Sigma!}A_X\\to K$, the sum counit tensored with $K$; on geometric stalks this is the sum map $\\bigoplus K_{\\bar y}\\to K_{\\bar y}$, which is the sum counit at $K$. Hence $\\gamma$ at $d=0$ is the inverse-image identification $f^*K\\cong f^\\times K$ of the etale sum adjunction, with its given counit.",
+   "text": "Define $\\gamma_{A,K_0}=\\phi_{f,A,K_0}\\circ(1\\otimes\\alpha_{f,A}^{-1})$ with the twist reassociation in the statement. The orientation is invertible because its three factors are the isomorphisms of [prop-asd-smooth-base-change], [lem-pur-noetherian-etale-section-specialization] and [thm-amb-vector-bundle-purity] (Step 6 proves only its coefficient compatibility), and [thm-asd-smooth-tensor] makes the tensor map invertible and natural; thus their composite is an isomorphism natural in $K_0$. Its source lies in the claimed category: pull back the bounded flat model from Step 2, using [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and tensor it with the locally free rank-one twist of [lem-asd-etale-finite-twist-pullback]. This gives Tor interval $[a-2d,b-2d]$. Exact inverse image pulls each finite constructibility stratification back to one on $X$ and preserves finite locally constant sheaves there; tensoring with a rank-one line preserves them as well. Hence the source, and its isomorphic target, have bounded constructible cohomology and finite Tor amplitude. At $d=0$, [lem-pur-finite-smooth-gamma-normalization] identifies the three factors with the inverse-image comparison for the etale sum adjunction and its given counit.",
    "uses": [
     "thm-asd-smooth-tensor",
-    "lem-asd-etale-finite-twist-pullback",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-amb-etale-adjoint-locality",
-    "lem-asd-etale-compact-support-normalization",
-    "def-amb-vector-integration",
-    "prop-asd-smooth-base-change"
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-finite-smooth-gamma-normalization",
+    "prop-asd-smooth-base-change",
+    "lem-pur-noetherian-etale-section-specialization",
+    "thm-amb-vector-bundle-purity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
-    "place": "Three-factor purity map and its constructible finite-Tor restriction"
+    "place": "Three-factor finite smooth purity map and relative-dimension-zero normalization"
    }
   },
   {
@@ -185,37 +174,33 @@
   "thm-nagata-compactification",
   "thm-amb-etale-exceptional-adjoint",
   "lem-amb-etale-compact-comparisons",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-sf-comparison-pullback-exact",
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sf-etale-flat-model",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-pur-finite-reduction-constructibility",
   "lem-weil-pbc-extension-by-zero-stalks",
   "lem-weil-pbc-extension-by-zero-exact",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
   "lem-amb-proper-coproducts-projection",
   "lem-weil-pbc-mate-pasting",
-  "prop-asd-smooth-base-change",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "thm-asd-smooth-tensor",
+  "lem-pur-exceptional-coefficient-comparison",
   "thm-amb-vector-bundle-purity",
   "def-amb-vector-integration",
   "lem-asd-etale-finite-twist-pullback",
   "lem-asd-ordinary-finite-p1-adjunction",
   "lem-amb-affine-space-top-trace",
   "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sbc-smooth-relative-dimension-permanence",
   "lem-pur-diagonal-regular-immersion",
   "lem-pur-noetherian-etale-section-specialization",
-  "lem-amb-etale-adjoint-locality",
+  "prop-asd-smooth-base-change",
+  "lem-pur-diagonal-orientation-compatibility",
+  "thm-asd-smooth-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-finite-smooth-gamma-normalization",
   "lem-weil-pbc-comparison-pullback",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-asd-etale-compact-support-normalization"
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin"
  ],
  "proof_origin": {
   "by": "agent",
@@ -260,7 +245,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "nt-target-smooth-purity-qbar",
   "by": "worker",
@@ -272,8 +257,8 @@
   "date": "2026-10-17",
   "item": "lem-pur-finite-smooth-adjunction-general-base",
   "worker": "stage1",
-  "summary": "Replaced the prohibited trace-first normalization by the current blueprint diagonal/deformation orientation followed by the orientation-free tensor map. Kept every arbitrary-field, intrinsic constructibility and finite-Tor hypothesis. One new statement-only ordinary-etale Noetherian normalized section-specialization lemma isolates the geometric input absent from restricted old detailed nodes. Constructed non-flat quotient comparisons by proper projection and actual counits, proved their cocycle, compared rank-one deformation-family maps at t=1, and derived coefficient compatibility of the specified purity map. No Lean attachment gives all clauses. STATEMENT-DISPUTED: the imported normalization refers to a forbidden source rather than the current blueprint map; corrected the map specification faithfully to the current blueprint, without asserting an unproved equality with that older normalization.",
-  "blueprint": "Realizes current sk-thm-smooth-purity through diagonal -> deformation of the diagonal -> normal vector bundle -> tensor formula, and current sk-lem-sp-reduction / det-sp-reduction-compatibilities through the canonical compactification comparison and counit transpose. The old unit sk-thm-purity-transport Step 1 is precisely the finite reduction task. The seed ancestry has no blueprint ancestor (blueprint_refs.py ancestor prints None); retained that ancestry and supplied a precise place.",
+  "summary": "Repaired the four returned long steps without changing the item statement or Lean record. Four statement-only nodes isolate bounded constructible quotient models, ordinary-etale counit-transpose/tensor/base-change coherence, normalized DNC coefficient morphisms, and the dimension-zero diagonal/deformation sum-counit normalization. The remaining naturality/category argument stays in the parent; every non-elementary step is shorter than 2000 characters. Fresh searches are backed by the item search log.",
+  "blueprint": "Realizes current sk-thm-smooth-purity through diagonal -> deformation of the diagonal -> normal vector bundle -> tensor formula, and current sk-lem-sp-reduction / det-sp-reduction-compatibilities through the canonical compactification comparison and counit transpose. The old unit sk-thm-purity-transport Step 1 is precisely the finite reduction task. The seed ancestry has no blueprint ancestor (blueprint_refs.py ancestor prints None); retained that ancestry and supplied a precise place. The four repair nodes make the hidden arguments in Steps 2, 4, 6 and 7 explicit and cite the current main-20261015 reduction, DNC, orientation and smooth-purity sources.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -443,12 +428,12 @@
   "lem-sbc-smooth-relative-dimension-permanence"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NE-17502edd2",
-  "group": "NE",
+  "reviewer": "NT-cc-Q52-2c955aebd",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-17502edd2 (reviewer sub-agent of L); spot-checked: Read the item, the new node, all cited statements, the unit sk-thm-purity-transport with its route, and the current blueprint sk-thm-smooth-purity, sk-prop-sp-orientation, sk-thm-dnc and DNC sub-lemmas. Statement change: the item replaces the old SGA 4 XVIII trace normalization, now forbidden by the route lock, with the blueprint's three-factor map. That map is gamma = phi∘(1⊗alpha^{-1}), with alpha = inverse vector-bundle purity ∘ delta_{p1,Delta} ∘ Delta^* of the base-change map p_2^*omega_f -> omega_{p1}. This matches sk-thm-smooth-purity.proof and sk-prop-sp-orientation.proof, with the same base-change morphism (transpose of the pulled-back counit) and the same coefficient category (intrinsic pro-etale D^b_ctf, with Rf^! transported from f^x). Nothing is weakened: k stays arbitrary, reduction is now stated for all r>=m, and the cocycle and degree -2d unit clauses are kept. The only citer, lem-pur-condensed-exceptional-reconstruction, uses only those last two clauses. Steps 1-6, 8 and 9 check against their cited statements: non-flat quotients via K-flat models and the unbounded proper projection formula; c defined by counit transpose with its cocycle; vector-bundle compatibility via the P^1 unit/Kummer components; DNC compatibility via connected A^1 fibres; and Step 9 substitution makes c invertible. Every proof dependency is on the unit route and there is no SGA citation. The new node lem-pur-noetherian-etale-section-specialization is true and statement-only; it is the general Noetherian ordinary-etale form of sk-thm-dnc, which in the DAG is restricted to k = F̄_q. Checks: the t=0 fibre of O_V[t,I/t] is Sym(I/I^2), s̃ is a ring map, D commutes with base change because I^n is S-flat, kappa is unique by connected fibres, and the standard-pair and d=0 cases work. Fixes: (1) the d=0 'etale adjunction' clause in Step 7 cited only lem-amb-etale-adjoint-locality, which says nothing about beta, kappa or the counit; I added lem-asd-etale-compact-support-normalization (on route) with the written argument, and added prop-asd-smooth-base-change and def-amb-vector-integration to the step's uses and proof_deps. (2) Item same_as set to [thm-pur-finite-reduction-of-purity]. (3) New-node same_as set to [sk-thm-dnc, prop-pur-dnc-family-constancy]. Details are in review.md.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-2c955aebd (reviewer sub-agent of L); spot-checked: I read the item, its nine steps, the four new nodes, all 43 cited statements, unit sk-thm-purity-transport and its route, and these main-20261015 sources: sk-lem-sp-reduction proof, -exceptional proof, -compatibilities (2)/(3), sk-thm-smooth-purity proof, sk-prop-sp-orientation proof and sk-thm-dnc Gluing. The item statement is the one NE reviewed and is not weakened (k arbitrary, all r>=m, cocycle and degree -2d clauses kept). The base change β (transpose of the pulled-back counit, Δ^* of p_2^*ω_f→ω_{p1}) and the coefficient category (intrinsic pro-étale D^b_ctf, Rf^! transported from f^×) match the source. No SGA source is cited. Every proof dependency is on the unit route, except lem-sbc-canonical-restrict-scalars-functor-comparisons, which already has an accepted tool_use. New nodes: (1) finite-reduction-constructibility is true. Flat terms survive base change, and Q⊗A_m is K-flat over A_m because (Q⊗A_m)⊗_{A_m}L=Q⊗_{A_r}Res L. The Tor interval carries over. Constructibility holds because the periodic resolution of A_m gives locally constant Tor sheaves. Tested r=m, the zero complex and a=b. (2) exceptional-coefficient-comparison: I checked the types of the counit-transpose identity, the cocycle and the tensor identity. G_AK is ctf by thm-asd-smooth-tensor. The node matches det-sp-reduction-exceptional's identity, but over an arbitrary Noetherian base and without claiming invertibility. (3) diagonal-orientation-compatibility: the zero locus of a section of a locally constant sheaf on A^1_S is clopen. A^1_S→S is open with connected fibres, so restriction at t=1 is injective. The δ identity follows from i_0^*. Tested e=0, non-invertible e and d=0. (4) gamma-normalization: for étale f, Δ is open and closed, so D = A^1_X ⊔ (W'×G_m) and κ=δ=id. β is the identity by the sum-extension normalization, and the rank-0 integration is the identity. It is strictly smaller than the parent's d=0 clause, which is still transported in Step 8. None of the four duplicates an existing node: every candidate (det-sfb, det-sp-reduction-exceptional, thm-pur-finite-reduction-of-purity, prop-pur-dnc-family-constancy, lem-pur-dnc-coefficient-transport, det-sp-finite-general-ring, lem-fix-operation-reduction) is stated over F̄_q or finite type over k, or is the pro-étale constructible package. All four are statement-only, with searches logged and read. I redid the Step 9 algebra (c∘Sγ_A=γ_B∘λ, hence c invertible). Fix: Step 7 attributed invertibility of α to Step 6, which proves only coefficient compatibility. It now cites prop-asd-smooth-base-change, lem-pur-noetherian-etale-section-specialization and thm-amb-vector-bundle-purity, which were already in proof_deps. The corrected item is in fixes/dag/nodes/sec-smooth-purity/. Minor, left as is: two new nodes list proof lemmas in stmt_deps that their statements do not cite. No nodes dropped and no new tool_uses.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
