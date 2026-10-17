@@ -14,18 +14,33 @@ import WeilConjectures.WeilSheaf.LowerShriek
 import WeilConjectures.WeilSheaf.CohomologyNonneg
 import WeilConjectures.AlgebraicGeometry.DenseCompactification
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+import WeilConjectures.WeilSheaf.OpenClosedTriangle
+import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 
 /-!
 # Compactly supported cohomology of the constant Weil sheaf
 
+Let `X` be a separated `k₀`-scheme of finite type whose geometric fiber `X ⊗ k̄` has dimension
+at most `e`. Then `H_c^r(X ⊗ k̄, ℚ̄_ℓ) = 0` for `r ∉ [0, 2e]`. Choose a dense compactification
+`j : X ⟶ X'` with `dim X' = dim X` and let `i : W ⟶ X'` be its closed complement, of dimension
+`< e`. The open–closed triangle gives the exact sequence
+`H^{r-1}(W, i^*ℚ̄_ℓ) ⟶ H_c^r(X, j^*ℚ̄_ℓ) ⟶ H^r(X', ℚ̄_ℓ)`, whose outer terms vanish for `r > 2e`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant_of_two_mul_lt`); and the
+vanishing of `H_c^r` only depends on the underlying `ℓ`-adic sheaf, which is `ℚ̄_ℓ` for `j^*ℚ̄_ℓ`.
+
 ## Main statements
 
-- `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_lowerStarCohomologyIso`: for a pro-étale Weil sheaf `G` on
-  a `k₀`-scheme `Y` and `φ : Y ⟶ Spec k₀`, the global sections of the `r`-th cohomology sheaf of
+- `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_lowerStarCohomologyIso`: for a pro-étale Weil
+  sheaf `G` on `Y` and `φ : Y ⟶ Spec k₀`, the global sections of the `r`-th cohomology sheaf of
   `Rφ_* G` are the pro-étale cohomology `Rʳ Γ(Ȳ_proét, G)` of the underlying sheaf.
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_congr`: the vanishing of
-  `H_c^r(X ⊗ k̄, F)` only depends on the underlying `ℓ`-adic sheaf of `F`.
+- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_iso`: the vanishing
+  of `H_c^r(X ⊗ k̄, F)` only depends on the underlying `ℓ`-adic sheaf of `F`.
+- `AlgebraicGeometry.topologicalKrullDim_compl_add_one_le_of_dense`: the complement of a dense
+  open subset has smaller dimension.
+- `WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant_of_two_mul_lt`:
+  the vanishing of `H_c^r(X ⊗ k̄, ℚ̄_ℓ)` for `r ∉ [0, 2e]`.
 -/
 
 @[expose] public section
@@ -47,9 +62,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 namespace ProEtaleWeilSheaf
 
 variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
-  (φ : Y ⟶ Spec (CommRingCat.of k₀)) [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ]
-  [QuasiSeparated φ] [LocallyOfFiniteType φ]
+  (φ : Y ⟶ Spec (CommRingCat.of k₀)) [φ.IsOver (Spec (CommRingCat.of k₀))]
 
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- **Cohomology of the direct image to `Spec k₀` is pro-étale cohomology.** For a pro-étale Weil
 sheaf `G` on `Y` and `φ : Y ⟶ Spec k₀`, the global sections over `Spec k̄` of the `r`-th
 cohomology sheaf of `Rφ_* G` are the pro-étale cohomology `Rʳ Γ(Ȳ_proét, G)` of the underlying
@@ -118,7 +133,7 @@ theorem topologicalKrullDim_compl_add_one_le_of_dense {X : Type*} [TopologicalSp
     [NoetherianSpace X] [QuasiSober X] [T0Space X] {U : Set X} (hU : IsOpen U)
     (hd : Dense U) : topologicalKrullDim (Uᶜ : Set X) + 1 ≤ topologicalKrullDim X := by
   have : QuasiSober (Uᶜ : Set X) := hU.isClosed_compl.isClosedEmbedding_subtypeVal.quasiSober
-  letI oC := specializationOrder (Uᶜ : Set X)
+  let oC := specializationOrder (Uᶜ : Set X)
   rcases isEmpty_or_nonempty (Uᶜ : Set X) with hE | hE
   · rw [topologicalKrullDim_eq_krullDim_specializationOrder (X := (Uᶜ : Set X)),
       krullDim_eq_bot]
@@ -229,6 +244,133 @@ theorem subsingleton_cohomology_of_carrier_iso_unit {Y : Scheme.{u}}
       (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure d hd r hr).of_iso
         (((Sheaf.Γ _ (WeilCoefficients.{u} l)).rightDerived r).mapIso
           ((ProEtale.AdicSheaf.forget _).mapIso eF)))
+
+omit [Finite k₀] [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] in
+/-- The geometric fiber of a `k₀`-scheme locally of finite type has the same dimension as the
+scheme. -/
+lemma topologicalKrullDim_geometricFiber (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
+    topologicalKrullDim (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber = topologicalKrullDim Y :=
+  topologicalKrullDim_pullback_eq_of_field _ (Scheme.specAlgebraicClosure k₀).hom
+
+variable (k₀ l) in
+/-- Blueprint `prop-cohomological-finiteness` (constant-sheaf clause): if the geometric fiber
+`X ⊗ k̄` of a separated `k₀`-scheme of finite type has dimension at most `e`, then
+`H_c^r(X ⊗ k̄, ℚ̄_ℓ) = 0` for `r < 0` and for `r > 2e`.
+
+Choose a dense compactification `X ⟶[j] X' ⟶ Spec k₀` with `dim X' = dim X`
+(`AlgebraicGeometry.exists_dense_compactification`) and let `W = X' ∖ X`, with
+`dim W < dim X'`. The open–closed triangle gives the exact sequence
+`H^{r-1}(W, ℚ̄_ℓ) ⟶ H_c^r(X, j^*ℚ̄_ℓ) ⟶ H^r(X', ℚ̄_ℓ)` of compactly supported cohomology, both
+outer terms vanishing for `r > 2e`, and `j^*ℚ̄_ℓ` has the same underlying sheaf as `ℚ̄_ℓ`. -/
+theorem subsingleton_compactlySupportedCohomology_adicConstant_of_two_mul_lt (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (e : ℕ)
+    (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
+    (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
+    Subsingleton ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier := by
+  obtain hr | hr := hr
+  · exact subsingleton_compactlySupportedCohomology_of_neg _ hr
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, r = n + 1 := ⟨(r - 1).toNat, by lia⟩
+  have hX : topologicalKrullDim X ≤ e := (topologicalKrullDim_geometricFiber X).symm.trans_le he
+  obtain ⟨X', aX', j, hprop, hj, hcomm, hdense, hdim⟩ :=
+    exists_dense_compactification (X ↘ Spec (CommRingCat.of k₀))
+  let : X'.Over (Spec (CommRingCat.of k₀)) := ⟨aX'⟩
+  have : IsProper (X' ↘ Spec (CommRingCat.of k₀)) := hprop
+  have : IsOpenImmersion j := hj
+  have : j.IsOver (Spec (CommRingCat.of k₀)) := ⟨hcomm⟩
+  have hX' : topologicalKrullDim (X' ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ e := by
+    rw [topologicalKrullDim_geometricFiber, hdim]
+    exact hX
+  -- the closed complement `W` of `X` in `X'`
+  let C : TopologicalSpace.Closeds X' :=
+    ⟨(Set.range j.base)ᶜ, j.isOpenEmbedding.isOpen_range.isClosed_compl⟩
+  let W := (Scheme.IdealSheafData.vanishingIdeal C).subscheme
+  let i : W ⟶ X' := (Scheme.IdealSheafData.vanishingIdeal C).subschemeι
+  have : IsClosedImmersion i :=
+    inferInstanceAs (IsClosedImmersion (Scheme.IdealSheafData.vanishingIdeal C).subschemeι)
+  have hrange : Set.range i.base = (Set.range j.base)ᶜ :=
+    (Scheme.IdealSheafData.range_subschemeι _).trans
+      (by simp [Scheme.IdealSheafData.coe_support_vanishingIdeal, C])
+  let : W.Over (Spec (CommRingCat.of k₀)) := ⟨i ≫ aX'⟩
+  have : i.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : IsProper (W ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (IsProper (i ≫ aX'))
+  by_cases hW : IsEmpty W
+  · -- `X = X'` is proper, and `H_c = H`
+    have hsurj : Function.Surjective j.base := fun x ↦ by
+      by_contra hx
+      obtain ⟨w, -⟩ : x ∈ Set.range i.base := by
+        rw [hrange]
+        exact fun ⟨y, hy⟩ ↦ hx ⟨y, hy⟩
+      exact hW.false w
+    have : Epi j.base := (TopCat.epi_iff_surjective _).2 hsurj
+    have : IsIso j := IsOpenImmersion.isIso j
+    have : IsProper (X ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← comp_over j (Spec (CommRingCat.of k₀))]
+      infer_instance
+    have := subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X e he
+      (r := (n : ℤ) + 1) (Or.inr hr)
+    exact @Equiv.subsingleton _ _ (WeilComplex.cohomologyEquivOfIso
+      (WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar (X ↘ Spec (CommRingCat.of k₀))
+        (toComplex.obj (adicConstant k₀ l X))) ((n : ℤ) + 1)).toLinearEquiv.toEquiv this
+  rw [not_isEmpty_iff] at hW
+  -- `dim W < dim X' ≤ e`
+  have : IsLocallyNoetherian X' := LocallyOfFiniteType.isLocallyNoetherian aX'
+  have : CompactSpace X' := QuasiCompact.compactSpace_of_compactSpace aX'
+  have : IsNoetherian X' := ⟨⟩
+  have hWdim : topologicalKrullDim W + 1 ≤ e := by
+    rw [i.isClosedEmbedding.isEmbedding.topologicalKrullDim_eq_range, hrange]
+    exact (topologicalKrullDim_compl_add_one_le_of_dense j.isOpenEmbedding.isOpen_range
+      hdense).trans (hdim.trans_le hX)
+  have hne : topologicalKrullDim W ≠ ⊥ := by
+    rw [topologicalKrullDim, Ne, Order.krullDim_eq_bot_iff, not_isEmpty_iff]
+    exact ⟨⟨closure {hW.some}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+  obtain ⟨m, hm⟩ := WithBot.ne_bot_iff_exists.1 hne
+  rw [← hm] at hWdim
+  have hm' : m + 1 ≤ (e : ℕ∞) := by exact_mod_cast hWdim
+  have hmtop : m ≠ ⊤ := by
+    rintro rfl
+    simp at hm'
+  obtain ⟨d, rfl⟩ := ENat.ne_top_iff_exists.1 hmtop
+  have hde : d + 1 ≤ e := by exact_mod_cast hm'
+  have hW' : topologicalKrullDim (W ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ d := by
+    rw [topologicalKrullDim_geometricFiber, ← hm]
+    exact_mod_cast le_rfl
+  -- the open–closed triangle `Ra_{X!} j^*ℚ̄_ℓ ⟶ Ra_{X'!} ℚ̄_ℓ ⟶ Ra_{W!} i^*ℚ̄_ℓ ⟶`
+  obtain ⟨α, β, γ, hT⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_structure_openClosed
+    j i hrange (toComplex.obj (adicConstant k₀ l X'))
+  set T := Pretriangulated.Triangle.mk α β γ
+  have h₂ : Subsingleton (T.obj₂.cohomologyFrobeniusModule ((n : ℤ) + 1)).carrier := by
+    have := subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X' e hX'
+      (r := (n : ℤ) + 1) (Or.inr hr)
+    exact @Equiv.subsingleton _ _ (WeilComplex.cohomologyEquivOfIso
+      (WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar (X' ↘ Spec (CommRingCat.of k₀))
+        (toComplex.obj (adicConstant k₀ l X'))) ((n : ℤ) + 1)).toLinearEquiv.toEquiv this
+  have h₃ : Subsingleton (T.obj₃.cohomologyFrobeniusModule n).carrier := by
+    have := subsingleton_cohomology_of_carrier_iso_unit
+      ((WeilSheaf.upperStar i).obj (adicConstant k₀ l X'))
+      (ProEtale.adicUpperStarUnitIso l _) d hW' n (by lia)
+    exact @Equiv.subsingleton _ _ (WeilComplex.cohomologyEquivOfIso
+      (WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar (W ↘ Spec (CommRingCat.of k₀)) _ ≪≫
+        (WeilComplex.derivedLowerStar (W ↘ Spec (CommRingCat.of k₀))).mapIso
+          ((toComplexCompUpperStarIso i).app (adicConstant k₀ l X'))) n).toLinearEquiv.toEquiv this
+  have h₁ : Subsingleton (T.obj₁.cohomologyFrobeniusModule ((n : ℤ) + 1)).carrier := by
+    refine ⟨fun x y ↦ ?_⟩
+    have hex := WeilComplex.exact_cohomologyδ_right T n ((n : ℤ) + 1) rfl hT
+    have hx (x : (T.obj₁.cohomologyFrobeniusModule ((n : ℤ) + 1)).carrier) : x = 0 := by
+      obtain ⟨z, rfl⟩ := (hex x).1 (Subsingleton.elim _ _)
+      rw [Subsingleton.elim z 0, map_zero]
+    rw [hx x, hx y]
+  have hG : Subsingleton (((WeilSheaf.upperStar j).obj
+      (adicConstant k₀ l X')).compactlySupportedCohomology ((n : ℤ) + 1)).carrier :=
+    let eT := WeilComplex.cohomologyEquivOfIso
+      ((WeilComplex.derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).mapIso
+        ((toComplexCompUpperStarIso j).app (adicConstant k₀ l X'))) ((n : ℤ) + 1)
+    @Equiv.subsingleton _ _ eT.symm.toLinearEquiv.toEquiv h₁
+  exact subsingleton_compactlySupportedCohomology_of_iso (ProEtale.adicUpperStarUnitIso l _).symm
+    _ hG
 
 end WeilSheaf
 
