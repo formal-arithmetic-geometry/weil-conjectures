@@ -257,5 +257,23 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-777d340c5 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full, and checked them against the sources. Sources read at the cited places: Stacks 04HU (etale-cohomology.tex:3610ff), 00YA(2), 00YB and 00YC in sites.tex, 04HM (etale.tex:1820), 086J, and Mathlib CofilteredSystem.lean:79-81. Item: the statement is unchanged and the nine steps prove 04HU completely. Step 1: finite limits, u(empty)=empty, monos and disjoint unions. Step 2: the irreducibility argument for Z and the generic point; u(T) is nonempty exactly when s is in the image of T. Steps 3-4: restriction to an affine base A, then the splitting gives |u(U)|=n through a fibre over an actual b, including n=0. Steps 5-6: a small skeleton of affine neighbourhoods, the Mathlib section, and an extension whose independence and naturality are checked with equalizers. Step 7: bijectivity on affine objects. Step 8: affine-cover injectivity; no affine overlap is assumed (E1 avoided). Step 9: reindexing the colimit, lem-fix-geometric-stalk-topos-point, and the mate isomorphism. New nodes: (1) lem-trf-site-point-reconstruction-sets is true, from 00YA(2) and 00YC. It does not duplicate lem-trf-site-point-fibre, which is the Lambda-module version; a set sheaf is not a module, so that node does not specialize to this one in one line. (2) lem-trf-affine-etale-split-neighbourhood is true: 04HM applied to the finite fibre, the geometric lift through a finite separable residue extension, and a shrink to V_s={v} because points of the fibre do not specialize to each other. The bijection with the lifts holds, U=empty was tested, and no existing node states 04HM. (3) lem-trf-cofiltered-finite-sets-section is an exact Mathlib leaf at line 79. No new node restates the item, there is no SGA citation, and the blueprint from/via fields are consistent. Accepted tool_use: lem-fix-geometric-stalk-topos-point. The other off-unit citations are Mathlib or closed nodes. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26e3a7800",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_deps, the report, the module, Stacks 04HU(1)(2), Mathlib EtalePoint/Point.Basic and the side GeometricMorphism. The statement (S : Scheme.{u}; p : GeometricMorphism (Type (u+1)) (Sheaf S.smallEtaleTopology (Type (u+1))); ∃ Ω : Type u, Field, IsAlgClosed, s : Spec Ω ⟶ S with Nonempty (p.inverse ≅ (pointSmallEtale s).sheafFiber)) matches the node's explicitly equivalent inverse-image form and 04HU(2). sheafFiber is the colimit over the opposite of the pointed-neighbourhood category (the recorded mathlib_match), the same functor in the same universes as geometricStalkToposPoint. No extra hypotheses, no universe restriction beyond the size convention; empty S is vacuous and empty fibres are covered. No definitions, proof is sorry only, source and blueprint docstrings carry the 9 steps, no pro-etale substitute, lean.statement verbatim. Compiled with nt_compile.py --json (the CLI form refuses snapshot paths): exit 0, no errors, about 6 s; a test import confirmed the universes and that errors are reported. The Second reading section is the policy note, accepted. No blocking findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric",
+  "declaration": "AlgebraicGeometry.Scheme.etaleToposPoint_isGeometric",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleToposPointsGeometric.lean",
+  "statement": "theorem etaleToposPoint_isGeometric (S : Scheme.{u}) (p : GeometricMorphism (Type (u + 1)) (Sheaf S.smallEtaleTopology (Type (u + 1)))) : ∃ (Ω : Type u) (_ : Field Ω) (_ : IsAlgClosed Ω) (s : Spec (.of Ω) ⟶ S), Nonempty (p.inverse ≅ (pointSmallEtale s).sheafFiber (A := Type (u + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

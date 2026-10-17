@@ -390,5 +390,42 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-1804a701f (reviewer sub-agent of L); spot-checked: I read the item, all 17 steps, both new nodes and every cited statement in full, and checked them against the HA (2017) text at /tmp/ha_txt/HA.txt: B.0.20, B.2.1–B.2.6 and the proof of B.0.20 on pp.1482–1487. The item statement is unchanged and is the fully scaled case of B.0.20, with weak equivalences from B.2.1/B.2.6 and the enrichment from B.2.5 with P'=P0. Repaired steps 4–8: (4) small generation and filtered closure supply V, and the regrouping lemma applies (sSet^[1] is cocomplete, J is small and filtered, λ is uncountable regular). (5) The set count over ordinals below λ works, and λ-directed implies λ-filtered, which is exactly the accessibility convention of the inverse-image node. (6) Fiber selection over a fixed C commutes with colimits, and pullbacks of inner fibrations to Δ¹ are quasicategories. (7) The labelled-coproduct iff applies with labels preserved. (8) The inverse-image node's hypotheses hold, so W is an accessible replete subcategory as Smith (iii) needs. In the retained steps: all five Smith hypotheses are met; the pullback in step 12 is correctly oriented (HA B.2.3); step 13 is B.2.4 (1)⇔(2); in step 14, i□(∅→L)=i×L and (∅→A)□j=A×j; both pushouts in step 15 are correct; the lifting bijection in step 16 is correct; the step-15 reference in step 17 is correct. New node lem-coef-filtered-colimit-cardinal-regrouping is true: I checked the countable-stage closure (uses cf λ>ω), λ-directedness, nonemptiness and the cocone bijection, with tests on J=ω, one object, and ≥λ parallel arrows (which shows why non-full subcategories are needed). New node lem-coef-quasicategory-labelled-coproduct-equivalences is true: Fun(⊔Y_i,C)=ΠFun(Y_i,C), nonempty test objects give each factor, two-point C handles empty summands; tested on I=∅ and on ∅→Δ⁰ summands. Both are statement-only, self-contained, correctly escaped and carry correct blueprint from/via. DAG rg searches found no duplicate; the same argument appears only inline in a step of lem-coef-relative-cartesian-equivalence-saturation. All three kinds of Mathlib search are recorded. All dependencies are in unit sk-prop-sf-biduality-general, so no tool_uses are needed; there is no cycle and no SGA source. Observation, not a fault: lem-coef-model-weak-equivalences-accessible applied to the marked point model offered a shorter route. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3415a8942",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read the node, all 17 steps, the three stmt deps (CategoricalPattern/Object/IsCategoricalPatternFibered, CartesianModelStatement/cof/weak, ModelCategory convention), MarkedRelativeCartesianModel mapFlat/mapSharp/mapSharpPre, SimplicialTensorCotensor, SatisfiesSM7. Every clause matches with nothing weaker or extra: left proper combinatorial model with the point-model convention, cof = injective on all simplices, fibrant iff the existing four-clause predicate, weak = sharp mapping test, flat/sharp marked Hom with canonical curry, simplicial SM7 with sharp tensors/cotensors, marked corner-map axiom (orientation checked), both pushout-product axioms. The existential K is pinned by CartesianModelStatement's cofibration/weak/fibration fields. Universes are a single u, no hollow definitions, one sorry, docstrings and blueprint tags present, node differs only in lean, statement verbatim. nt_compile --json on the snapshot file: 12.6 s, exit 0, no errors or warnings. The Second reading section is the sanctioned 2026-10-17 placeholder. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CategoricalPatternModelCalculus",
+  "declaration": "SSet.Enhanced.CategoricalPattern.categorical_pattern_model_calculus",
+  "declarations": [
+   "SSet.Enhanced.CategoricalPattern.expand",
+   "SSet.Enhanced.CategoricalPattern.expandMap",
+   "SSet.Enhanced.CategoricalPattern.productLeft",
+   "SSet.Enhanced.CategoricalPattern.productMapLeft",
+   "SSet.Enhanced.CategoricalPattern.tensor",
+   "SSet.Enhanced.CategoricalPattern.hom",
+   "SSet.Enhanced.CategoricalPattern.restriction",
+   "SSet.Enhanced.CategoricalPattern.postcomposition",
+   "SSet.Enhanced.CategoricalPattern.mapSharp",
+   "SSet.Enhanced.CategoricalPattern.mapSharpPre",
+   "SSet.Enhanced.CategoricalPattern.cof",
+   "SSet.Enhanced.CategoricalPattern.weak",
+   "SSet.Enhanced.CategoricalPattern.IsPushoutProduct",
+   "SSet.Enhanced.CategoricalPattern.Enrichment",
+   "SSet.Enhanced.CategoricalPattern.ModelStatement",
+   "SSet.Enhanced.CategoricalPattern.categorical_pattern_model_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CategoricalPatternModelCalculus.lean",
+  "statement": "theorem categorical_pattern_model_calculus (P : CategoricalPattern.{u}) : ∃ K : SSet.Marked.CartesianModelStatement.{u}, Nonempty (ModelStatement P K)",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the current four-clause IsCategoricalPatternFibered verbatim. General-pattern tensor and marked Hom helpers use the recorded pattern category and the established relative flat/sharp mapping constructions. ModelStatement includes complete/cocomplete and locally presentable structures, small generators, functorial factorizations, exact fibrancy and mapping tests, normalized enrichment, actual simplicial tensors/cotensors and SM7, left properness, and both marked corner-map and pushout-product axioms. No data is chosen from the existence theorem."
  }
 }

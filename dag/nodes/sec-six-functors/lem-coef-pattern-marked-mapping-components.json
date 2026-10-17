@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-coef-categorical-pattern-fibrancy",
   "lem-coef-marked-point-cartesian-model",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-marked-anodyne-lifting-calculus"
  ],
  "proof": [
   {
@@ -202,5 +204,32 @@
   "group": "Q155",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-ebf04e76d (reviewer sub-agent of L); spot-checked: I read the item, all five steps, the four cited statements (pattern fibrancy, marked cartesian model, Kan–Quillen, pattern-anodyne lifting products), and Step 3 of the parent edge-detection, which is the only citer. I checked them against Higher Algebra Prop. B.1.14 (pp.1481-1482) and Lemma B.2.4(a) (pp.1483-1484), read from a local pdftotext. HA only asserts the full-subset description. The item's version is the same: marked edges of a fibered Z are the cocartesian edges over S. Step 1: the product marking makes r degreewise injective, and L_0 is the set of marked maps. Step 2: the final paragraph of anodyne-lifting-products applies to W^flat->W with Z fibered, so r is a Kan fibration and L and K are Kan; this matches B.1.14, which needs only a cofibration. Step 3: lifting against both 1-dimensional horns shows the selection is closed under edges, so it is a union of components. Step 4: induction on dimension. Face lifts are unique and glue to a map from the 0th horn, and the horn lift gives fullness. Step 5: naturality under postcomposition and the empty cases. Tested: W empty, M degenerate, Z empty, W=Delta^1 with its edge marked; naturality needs preservation only. No new nodes. No duplicate found by rg (kan-component-restriction-fibration and walking-groupoid-components differ). It does not restate a parent clause, and the dependencies are acyclic. All uses are in the same unit, so no tool_uses are needed. The searches cover all three kinds. Not a target node, so the base-change and coefficient checks do not apply. No SGA. Statement unchanged. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2908c482",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches node and HA B.2.4(a)/B.1.14 clause by clause: KanComplex K_Z; degreewise injective restriction (mapSharpPre along flatToMarked); range = fullSubcomplex on PreservesSourceMarking (evaluation of every marked edge); predicate constant on pi0 classes; strict naturality square plus predicate preservation for marked g into fibered Z'. Sharp-base Marked.Over slice leaves relative Hom sets unchanged (absolute product, base map via fst); fibrancy stays IsCategoricalPatternFibered. No extra hypotheses; empty W/Z and unselected components covered; single universe u. Five helpers are real constructions with source/blueprint docstrings; no duplicate of an existing notion (relative mapSharpPost absent before; PreservesSourceMarking lives on a different complex than PreservesMarkings). Node differs from base only in lean and two added landed stmt_deps, acyclic; statement field unchanged; lean.statement verbatim. nt_compile rc 0, 4.1 s, no errors or warnings (sorry warning suppressed by project options); a probe copy confirmed the theorem elaborates. Second-reading section is the post-2026-10-17 standard note, accepted under that policy."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PatternMarkedMappingComponents",
+  "declaration": "SSet.Enhanced.CategoricalPattern.marked_mapping_components",
+  "declarations": [
+   "SSet.Enhanced.CategoricalPattern.toSharpSlice",
+   "SSet.Marked.Over.unmarkInclusion",
+   "SSet.Marked.Over.markingRestriction",
+   "SSet.Marked.Over.mapSharpPost",
+   "SSet.Marked.Over.PreservesSourceMarking",
+   "SSet.Enhanced.CategoricalPattern.marked_mapping_components"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PatternMarkedMappingComponents.lean",
+  "statement": "theorem marked_mapping_components (P : CategoricalPattern.{u}) (W Z : Object P) (hZ : IsCategoricalPatternFibered P Z) : KanComplex (Marked.Over.mapSharp (Marked.Over.unmark ((toSharpSlice P).obj W)) ((toSharpSlice P).obj Z)) ∧ (∀ n : SimplexCategoryᵒᵖ, Function.Injective ((Marked.Over.markingRestriction ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z)).app n)) ∧ Subcomplex.range (Marked.Over.markingRestriction ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z)) = fullSubcomplex (Marked.Over.mapSharp (Marked.Over.unmark ((toSharpSlice P).obj W)) ((toSharpSlice P).obj Z)) (Marked.Over.PreservesSourceMarking ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z)) ∧ (∀ x y : (Marked.Over.mapSharp (Marked.Over.unmark ((toSharpSlice P).obj W)) ((toSharpSlice P).obj Z)) _⦋0⦌, π₀.mk x = π₀.mk y → (Marked.Over.PreservesSourceMarking ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z) x ↔ Marked.Over.PreservesSourceMarking ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z) y)) ∧ (∀ (Z' : Object P), IsCategoricalPatternFibered P Z' → ∀ g : Z ⟶ Z', Marked.Over.markingRestriction ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z) ≫ Marked.Over.mapSharpPost (Marked.Over.unmark ((toSharpSlice P).obj W)) ((toSharpSlice P).map g) = Marked.Over.mapSharpPost ((toSharpSlice P).obj W) ((toSharpSlice P).map g) ≫ Marked.Over.markingRestriction ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z') ∧ ∀ x : (Marked.Over.mapSharp (Marked.Over.unmark ((toSharpSlice P).obj W)) ((toSharpSlice P).obj Z)) _⦋0⦌, Marked.Over.PreservesSourceMarking ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z) x → Marked.Over.PreservesSourceMarking ((toSharpSlice P).obj W) ((toSharpSlice P).obj Z') ((Marked.Over.mapSharpPost (Marked.Over.unmark ((toSharpSlice P).obj W)) ((toSharpSlice P).map g)).app _ x))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses Marked.Over.mapSharp and unmark through a canonical functor retaining the pattern object marking and structural map. The sharp ambient base changes no relative Hom set: each source and target already maps to the original marked base. The two added statement dependencies are already landed nodes supplying the relative mapping complex and flatToMarked. No statement correction or new independent notion."
  }
 }

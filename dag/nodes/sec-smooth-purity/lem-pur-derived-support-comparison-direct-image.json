@@ -308,5 +308,47 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-927f4e4ca (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, every cited statement, the parent lem-pur-support-site-comparison, the proof of lem-weil-pbc-comparison-pullback, the unit sk-prop-a1-kummer and blueprint main-20261015 lem-pur-kunneth-supported.proof.md paragraph 4. In Stacks I checked derived 070K, 08BJ, 09T4 (including its proof) and 09T5, sites-cohomology 08FI and proetale 099R. The statement is unchanged, true and not weakened. It uses ordinary constant-A modules, the same coefficient category as the parent; the item is not a target node, so no base-change morphism is involved. Small cases checked: C empty or C=T, V=T or V empty, A=0, N=0. Steps 1-5 and 8 are correct: exactness of nu^*, nu_* preserves K-injectives (08BJ hypotheses met), the literal kernel identity (nu_*J)(T)=J(T) and (nu_*J)(U)=J(U), homotopy-invariant naturality, and K-injective restriction to the open V (08FI) with the explicit sectionwise identity. Faults repaired (C3/C4): (1) Step 6 asserted that the canonical comparison a of lem-weil-pbc-comparison-pullback is the coprojection reindexing; that statement gives no normalization, which appears only in its proof (conjugate of the identity delta). No DAG node states it; I checked lem-sf-open-comparison-unit-normalization, lem-fix-site-open-exchange, lem-trf-*, comparison-direct-image-canonical-mate and lem-pur-proetale-open-unit-evaluation. I added the statement-only unsplit node lem-pur-comparison-pullback-open-unit, created.item = this item, blueprint.from = lem-pur-kunneth-supported paragraph 4. It states the underived open-restriction unit equation, is strictly smaller than the item's derived unit clause, and is acyclic. Mathlib grep found no match; LeanSearch is recorded as unavailable. Step 6 now cites it, and lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction is dropped from Step 6's uses and from proof_deps. (2) Step 7 relied on an unstated form of the canonical bijection of lem-pc-derived-adjoint-functors, and its hypothesis that RF is defined at every complex was not checked. Step 7 now writes the K-injective Hom chain explicitly and checks the ind/pro-system hypotheses. proof_deps equals the union of uses. tool_uses accepted for the five off-route generic tools: site-pullback-abelian-exact, kinjective-total-derived, etale-inverse-image-restriction, sfb-proetale-object-inverse-image-restriction and comparison-pullback. No SGA source is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ec65eb59",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read node, all 13 stmt deps, source place (blueprint para 4; Stacks 099R/070Y/08BJ/08FI/09T5), module, report, and the exact upstream/side declarations (rightDerivedFunctor/Unit/NatTrans, mapDerivedCategoryRightDerivedAdjunction, comparisonLowerStar/UpperStar/Adjunction = recorded proEtaleSiteComparisonModules, supportedSectionsFunctor + both supportRestrictionArrows, supportSiteComparisonCoefficientPullbackIso, upperStarIsoOpenImmersionRestriction). Every node clause is rendered: b with K-injective identity-kernel normalization, forget square, arbitrary open V with C×_T V (openEt/Pro fixed by monic kernel inclusion, derivedOpen fixed by resolution units), rho fixed by literal refl identity, open_square, unit_square with the recorded comparison-pullback iso, C=T via g/final_normalization/full_support/forget. All Nonempty-packaged data are uniquely determined, so this is the canonical construction. No stronger hypotheses; universes match the recorded encoding (A : Type (u+1), ModuleCat.{u+1}); edge cases C empty, C=T, T/V empty, V=T, A=0, N=0, unbounded checked. nt_compile --json: rc 0, no messages, 39.8 s / 41.6 s (two later reruns hit the 60 s limit at load ~135). Helper defs have only standard axioms; sorryAx in the structure type traced, as far as two timed-out reruns allowed, to the Prop instance supportedSectionsFunctor_additive of recorded def-pur-support-cohomology, not data. lean.statement verbatim, 22 declarations listed, node differs only by lean, docstrings and proof plan present, sole sorry is the main theorem. Second-reading section is the post-2026-10-17 placeholder (worker delivers directly), not a real reading; accepted under the current process."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedSupportDirectImageComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedSupportDirectImageComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportResolutionUnit",
+   "AlgebraicGeometry.ProEtale.supportEt",
+   "AlgebraicGeometry.ProEtale.supportEvalEt",
+   "AlgebraicGeometry.ProEtale.supportForgetEt",
+   "AlgebraicGeometry.ProEtale.supportPro",
+   "AlgebraicGeometry.ProEtale.supportEvalPro",
+   "AlgebraicGeometry.ProEtale.supportForgetPro",
+   "AlgebraicGeometry.ProEtale.supportNu",
+   "AlgebraicGeometry.ProEtale.supportRestrictEt",
+   "AlgebraicGeometry.ProEtale.supportRestrictPro",
+   "AlgebraicGeometry.ProEtale.supportRestrictEt_isLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.supportRestrictPro_isLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.supportDerivedAdjunction",
+   "AlgebraicGeometry.ProEtale.supportSectionRestrictionEt",
+   "AlgebraicGeometry.ProEtale.supportSectionRestrictionPro",
+   "AlgebraicGeometry.ProEtale.supportKernelIdentity",
+   "AlgebraicGeometry.ProEtale.supportEvaluationIdentity",
+   "AlgebraicGeometry.ProEtale.supportOpenIdentity",
+   "AlgebraicGeometry.ProEtale.supportOpenPullback",
+   "AlgebraicGeometry.ProEtale.supportDerivedOpenPullback",
+   "AlgebraicGeometry.ProEtale.DerivedSupportDirectImageComparison",
+   "AlgebraicGeometry.ProEtale.derivedSupportDirectImageComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSupportDirectImageComparison.lean",
+  "statement": "theorem derivedSupportDirectImageComparison [Finite A] : Nonempty (DerivedSupportDirectImageComparison A)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

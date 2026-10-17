@@ -167,5 +167,38 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-e65bf93df (reviewer sub-agent of L); spot-checked: I read the whole item, the statements of every cited node (lem-trf-injective-graded-filtration-splits, def-sp-abelian, def-sp-filtration, def-sp-injective-resolutions), the parent's step 5 (lem-trf-filtered-hom-complex-invariance, the only citer), the units sk-i-curve-zero and sk-i-global-additivity, and the source Stacks derived.tex:7852 lemma-filtered-injective (Tag 05TP) together with the next lemma, lemma-split-strict-monomorphism. The statement is correct and is what the parent uses; it is not weakened. Small cases agree: X=0; one-step X and Y, where G^r=Hom exactly when a+r<=c and the quotient is nonzero only for a+r=c; Y=J_0+J_1. The injectivity hypothesis is needed: with X=Z/2 and Y=Z/4 filtered by 2Z/4, sigma_0=0 but Hom(Z/2,Z/2)=Z/2. Steps 1-4 are correct. Step 1: gr^pX is a subobject of X/F^{p+1}X, and the injective extension property applies. Step 2: the filtration estimate on tails and the degree-p symbol both check. Step 3: the kernel is G^{r+1}. Step 4: naturality, with Y' assumed to have injective graded pieces. I found no duplicate after an rg search for 05TP, 'symbol' and shift-filtration over dag/nodes and reading five related trf nodes. There are no new nodes and no SGA citation. I made two fixes in fixes/dag/nodes/sec-trace-formula/lem-trf-injective-target-hom-symbol.json. (1) E5: steps 1 and 2 said 'transport' without naming which isomorphism gr^{p+r}Y = J_{p+r} is used. The steps now name the theta-induced isomorphism on tail quotients, which is the one needed for sigma_r(f)=alpha. (2) C8: the item cites the split lemma, which belongs to unit sk-i-global-additivity and is off this unit's route, but split_report.tool_uses was empty. I added that tool use with its reason. I accept it: it is a generic 05TP tool, and the same use is already accepted on lem-trf-filtered-derived-hom-calculus in the same unit.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31faee44e",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Statement correct against node and Stacks 05TP: arbitrary abelian C with independent universes, finite bounds on X and Y, injective gr of Y (Mathlib Injective), G^r a real AddSubgroup, canonical sigma_r (unique lift and unique cokernel descent, existence as named sorry theorems, H5-ok), symbol to the full Z-indexed direct sum summed over Icc a b (gr^pX=0 off [a,b], checked), inclusion, kernel = G^{r+1} (checked for p outside [a,b]), surjectivity, pre/post naturality with correct composition order and with Y' required to have injective gr; no extra hypotheses; lean.statement verbatim; 12 declarations listed. Edge cases X=0, Y=0, a=b, any r. No duplicate: Q03 CategoryTheory.filteredHomSubgroup is only the unshifted G^0. Fault H8: shiftedGradedMap had no docstring; shiftedGradedMapHom, precomp_mem, postcomp_mem, precompHom, postcompHom lacked source and blueprint; helper sorry theorems lacked proof sketches. fixes/InjectiveTargetHomSymbol.lean changes docstrings only. nt_compile: delivered and fixed modules both exit 0 with no messages (3.2 s and 4.6 s). Non-blocking: Q16 second-reading section is thin; the worker report and review.md give the full clause table."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveTargetHomSymbol",
+  "declaration": "CategoryTheory.FilteredObject.injectiveTargetHomSymbol",
+  "declarations": [
+   "CategoryTheory.FilteredObject.HasFilteredDegree",
+   "CategoryTheory.FilteredObject.filteredHomSubgroup",
+   "CategoryTheory.FilteredObject.exists_shiftedGradedMap",
+   "CategoryTheory.FilteredObject.shiftedGradedMap",
+   "CategoryTheory.FilteredObject.exists_shiftedGradedMapHom",
+   "CategoryTheory.FilteredObject.shiftedGradedMapHom",
+   "CategoryTheory.FilteredObject.filteredHomSymbol",
+   "CategoryTheory.FilteredObject.precomp_mem",
+   "CategoryTheory.FilteredObject.postcomp_mem",
+   "CategoryTheory.FilteredObject.precompHom",
+   "CategoryTheory.FilteredObject.postcompHom",
+   "CategoryTheory.FilteredObject.injectiveTargetHomSymbol"
+  ],
+  "statement": "theorem injectiveTargetHomSymbol (X Y : FilteredObject C) (a b c d : ℤ) (hab : a ≤ b) (hcd : c ≤ d) (hXa : X.filtration.F a = ⊤) (hXb : X.filtration.F (b + 1) = ⊥) (hYc : Y.filtration.F c = ⊤) (hYd : Y.filtration.F (d + 1) = ⊥) (hgr : ∀ q : ℤ, Injective (Y.filtration.gr q)) (r : ℤ) : filteredHomSubgroup X Y (r + 1) ≤ filteredHomSubgroup X Y r ∧ (∀ f : filteredHomSubgroup X Y r, filteredHomSymbol X Y r a b f = 0 ↔ f.1 ∈ filteredHomSubgroup X Y (r + 1)) ∧ Function.Surjective (filteredHomSymbol X Y r a b) ∧ (∀ (X' : FilteredObject C) (a' b' : ℤ), a' ≤ b' → X'.filtration.F a' = ⊤ → X'.filtration.F (b' + 1) = ⊥ → ∀ (u : FilteredObject.Hom X' X) (f : filteredHomSubgroup X Y r) (p : ℤ), shiftedGradedMapHom X' Y r p (precompHom X' X Y r u f) = FilteredObject.gradedMap u p ≫ shiftedGradedMapHom X Y r p f) ∧ (∀ (Y' : FilteredObject C) (c' d' : ℤ), c' ≤ d' → Y'.filtration.F c' = ⊤ → Y'.filtration.F (d' + 1) = ⊥ → (∀ q : ℤ, Injective (Y'.filtration.gr q)) → ∀ (v : FilteredObject.Hom Y Y') (f : filteredHomSubgroup X Y r) (p : ℤ), shiftedGradedMapHom X Y' r p (postcompHom X Y Y' r v f) = shiftedGradedMapHom X Y r p f ≫ FilteredObject.gradedMap v (p + r))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/InjectiveTargetHomSymbol.lean",
+  "fixed_by": "NT-stage2-cc-31faee44e"
  }
 }

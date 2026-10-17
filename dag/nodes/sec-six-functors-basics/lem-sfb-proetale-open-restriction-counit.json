@@ -182,5 +182,49 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-a06aac330 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, unit sk-prop-scalar-six, parent lem-sfb-locally-closed-extension-coherence, blueprint det-prop-scalar-six-pullback.proof.md, Stacks 09A5, 03CF (sites-lemma-localize-morphism) and 04J0 (sites-modules-lemma-localize-morphism-ringed-sites). The statement is true and unchanged: arbitrary ring sheaf R with inverse-image rings, nothing weakened. 03CF/04J0 with V=W, U=X_W give h^{-1}f_*=f_{W*}g^{-1} by the section formula, and the counit equation says beta is the mate of g^{-1}eps_f o alpha^{-1}. Tested W empty, W=Y, f=id, and f closed with W disjoint from its image. No new nodes. The rg search found no duplicate (the etale, Zariski and derived variants were read). Fixes: (1) E4: step 3 evaluated morphisms of sheaves on X_W 'at E->W', which does not typecheck. I rewrote it as a check on generating sections [s]_(V,psi) of (u_g u_f)_p f_*M, using the coprojection description of the u_s -| u^s counit and unit (lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, def-weil-pbc-sheafification), unit-compatible uniqueness (03CB) and fibre-product uniqueness. Step 1 now defines alpha through the fibre-product isomorphism X_W x_X (X x_Y V) = X_W x_W (W x_Y V), and the uses and proof_deps are updated. (2) blueprint.from.place pointed to Proof (1)'s final sentence, which is about (gf)^{-1}=f^{-1}g^{-1}; corrected to Proof (2), 'compatible with composition of immersions', via the parent's steps 3, 5 and 7. (3) The source now cites Sites 03CF / Sites Modules 04J0. Accepted tool_uses: lem-weil-pbc-proetale-ringed-open-comparison, lem-weil-pbc-ringed-topoi-module-adjunction and lem-sfb-proetale-object-inverse-image-restriction, all generic localization/adjunction black boxes; the first two were already accepted for the parent.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-501c8b7d8",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Read node, 9 stmt deps, Stacks 09A5/00XZ/03CB/03CF/04J0, module, report. Only item lean changed; dep nodes identical to main; lean.statement verbatim; all declarations documented with source+blueprint. Clauses: f, open h, arbitrary R (CommRingCat.{u+1}, framework size convention, sites unchanged); RX/RW/RXW actual inverse images; coefficientIso canonical conjugate of squareSiteIso; beta iso of module functors pinned by Sectionwise (bijective canonical coprojections for h and g, beta = restriction along pullback.map E x_W X_W -> E x_Y X); alpha pinned by unit compatibility (03CB clause 3); CounitEquation matches node order. Recorded Type-u adjunction/composition declarations unusable for ProEt, published pro-etale operations used instead (no private copy). No extra hypotheses, edge cases (W empty, h=id, f=id, X_W empty, zero modules) covered, no duplicate (localize_ringed_site_morphism is small-site localization). One sorry (theorem only), no hollow defs. nt_compile.py on snapshot: exit 0, 12.9 s, no errors/warnings; axioms only sorryAx beyond standard."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenRestrictionCounit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.proEtaleOpenRestrictionCounit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.RX",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.RW",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.RXW",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.CoeffCmp",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.ModX",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.Left",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.Right",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.AlphaL",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.AlphaR",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.PFst",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.PSnd",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.PH",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.AdjF",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.AdjSnd",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.squareSiteIso",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.ringSquareIso",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.coefficientIso",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.objectComposition",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.objectCoprojection",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.sectionArrow",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.Sectionwise",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.AlphaNormalization",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.CounitEquation",
+   "AlgebraicGeometry.Scheme.ProEtaleOpenRestriction.proEtaleOpenRestrictionCounit"
+  ],
+  "statement": "theorem proEtaleOpenRestrictionCounit {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y) [IsOpenImmersion h] (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) : ∃ β : Left f h R ≅ Right f h R (coefficientIso f h R), Sectionwise f h R β ∧ ∃ α : AlphaL f h R ≅ AlphaR f h R (coefficientIso f h R), AlphaNormalization f h R α ∧ CounitEquation f h R β α",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

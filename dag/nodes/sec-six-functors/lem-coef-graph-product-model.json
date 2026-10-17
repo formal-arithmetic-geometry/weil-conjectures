@@ -278,5 +278,31 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-de1bf9c33 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the full statements of its 7 cited nodes, and checked the Mathlib lines behind the leaves: Presheaf.lean:90-96, HasCardinalLT.lean:199-206 and IsCardinalForSmallObjectArgument.lean:76-88. The statement is unchanged and true. It holds for any commutative R. Left properness and tractability come from the chains-model node, which uses the cochain-node model that Step 1 cites. The initial map off the chosen coordinate is id_0. Edge cases S empty (terminal category, empty generating sets), S a singleton, S infinite and R=0 all hold. Steps 4-5: the classes, lifts and factorizations work coordinatewise. I checked the retract argument both ways (f=pc with hf=c, ph=1; and hc=1, fh=p), so these are genuine weak factorization systems. Step 3: the graph category is presheaves on the discrete category T, which meets the presheaf leaf's hypotheses (small C, pullbacks). Steps 6-7: the single-coordinate adjunction gives I_T^pitchfork = F_T and W_T together, and J_T^pitchfork = F_T. Steps 8-9: the common regular lambda bound and the tau_k-filteredness of lambda are correct, and they are stronger than the Mathlib smallness class requires. Step 10: S^m is dg-projective because Hom(S^m,E) is E shifted, so D^n and 0 are cofibrant and the generators have cofibrant sources and targets. Step 11: left properness follows coordinate by coordinate. The delivery has no new nodes. The closest DAG candidate, lem-coef-dg-product-localization, lacks left properness, tractability and the generators, so it is not a duplicate. Every cited node is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no SGA citation. Muro Remarks 2.3 and 10.2 are not in literature/, so I could not check them. The worker recorded them as WANTED and marked the proof as agent-written, and I verified the mathematics without that source. I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ef8645e7",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: coordinatewise W/F/C equal to those of the supplied ProjectiveCochainMonoidalModel m (whose classes are fixed, so m is not arbitrary), complete and cocomplete, CombinatorialModelCategory.{u+1,u,u} (locally presentable, set-generated, functorial factorizations), left proper, single-coordinate generators with id_0 in the other coordinates via Functor.pi', and cofibrant sources (and disk targets) via the canonical zero-graph arrow. S : Type u follows the node's step 1. No extra hypotheses; S empty, singleton or infinite and R=0 all covered. Helpers have real data; docstrings carry source, blueprint tag and all 11 steps; imports follow rule 7; item lean record complete and verbatim; dependency node unchanged. nt_compile --json clean (3.5 s, rerun 7.2 s). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CochainGraphProductModel",
+  "declaration": "HomotopicalAlgebra.cochainGraphProductModel",
+  "declarations": [
+   "HomotopicalAlgebra.CochainGraph",
+   "HomotopicalAlgebra.cochainGraphSingle",
+   "HomotopicalAlgebra.cochainGraphInitialTo",
+   "HomotopicalAlgebra.CochainGraphProductModel",
+   "HomotopicalAlgebra.cochainGraphProductModel"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CochainGraphProductModel.lean",
+  "statement": "theorem cochainGraphProductModel (R : Type u) [CommRing R] (S : Type u) (m : ProjectiveCochainMonoidalModel R) : Nonempty (CochainGraphProductModel R S m)",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the supplied projective model and Mathlib product category on actual S-squared families. Owning-node helpers spell out only the graph family, its single-coordinate functor, its canonical initial arrow and the bundled clauses of this theorem. No chosen model is defined from an existence theorem."
  }
 }

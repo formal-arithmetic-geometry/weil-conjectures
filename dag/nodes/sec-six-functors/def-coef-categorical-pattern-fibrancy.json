@@ -200,18 +200,17 @@
   "file": "lean/Sheaf/CategoryTheory/CategoricalPatternFibrancy.lean",
   "statement": "structure CategoricalPattern",
   "branch": "newtargets-dag",
-  "by": "NG",
-  "date": "2026-10-17",
+  "by": "N9",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "The classifying functor is compared by a coherent natural equivalence of entire diagrams with the normalized straightening of a coCart vertex representing exactly the pullback projection. Clause (iv) uses the recorded IsRelativeLimitDiagram of def-coef-infinity-relative-cone, quantifying over the quasicategory structure of the total space (which clause (i) supplies); only the universe-lifted left-cone variant IsRelativeLimitDiagramOnLeftCone, needed because Cat infinity lives one universe up, is a helper of this item module. The relative-cone dependency record is unchanged.",
-  "fixed_by": "NT-stage2-cc-2d7f3e61a"
+  "note": "The classifying functor is compared by a coherent natural equivalence of entire diagrams with the normalized straightening of a coCart vertex representing exactly the pullback projection. Clause (iv) uses the recorded IsRelativeLimitDiagram of def-coef-infinity-relative-cone, quantifying over the quasicategory structure of the total space (which clause (i) supplies); only the universe-lifted left-cone variant IsRelativeLimitDiagramOnLeftCone, needed because Cat infinity lives one universe up, is a helper of this item module. The relative-cone dependency record is unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2d7f3e61a",
-  "group": "NG",
-  "result": "fix",
-  "note": "Read node, the 5 stmt_deps' Lean (CocartesianStraightening Statement/FiberTransport/BaseNaturality in full, RelativeInfinityCone.IsRelativeLimitDiagram, InfinityFibrations, Marked, AreNaturallyEquivalent) and GH 3.2.1/3.2.3/Rem 3.2.2/Thm 3.2.5(2). All clauses (C, S with degenerates, all 2-simplices scaled, small A and quasicategory K_alpha, left cones into S, marked slice objects/morphisms, (i) inner fibration, (ii) lifts with source x and T exactly the cocartesian edges over S, (iii) pullback projection cocartesian with a classifying functor naturally equivalent to the normalized straightening of the actual fibration and a limit over Cat_inf->Delta0, (iv) all cocartesian sections give q-limits) match. No extra hypotheses; universes u/u+1; edge cases (A empty, K empty -> terminal, C empty) fine; only the lean field changed; report has Worker report and Second reading by NG. H4 fix: IsRelativeLimitDiagramRaw was a verbatim copy of the recorded IsRelativeLimitDiagram minus Prop instance binders; it is removed and clause (iv) now uses @IsRelativeLimitDiagram with forall hX : Quasicategory X (supplied by clause (i)), so the meaning is unchanged; declarations and note updated in fixes/def-coef-categorical-pattern-fibrancy.lean-record.json. nt_compile --json: delivered and fixed files both rc 0 with no errors or warnings (an error sanity check gave rc 1)."
+  "reviewer": "NT-stage2-cc-91f672fe4",
+  "group": "N9",
+  "result": "pass",
+  "note": "Correct, and redundant with NG's version of this item, which landed 2026-10-17 after a reviewer FIX. The module adds one docstring line; the node's Lean record changes only author/date and drops fixed_by (keep the landed fixed_by if this lands). The side ledger shows N9's claim was retired 2026-10-18 00:35. Checked clause by clause against the node: CategoricalPattern fields, marked-slice Object/Hom, and (i)-(iv) all match, including the source convention in (ii), the exact marking iff, whole-diagram classification in (iii), and Quasicategory as a Prop class in (iv). The helper is the recorded IsRelativeLimitDiagram lifted to u+1. No extra assumptions or universe restriction, edge cases covered, no sorry, docstrings and record in order, no duplicate definition, report has both sections. nt_compile --json: rc 0, no messages; injected-error check rc 1."
  }
 }
