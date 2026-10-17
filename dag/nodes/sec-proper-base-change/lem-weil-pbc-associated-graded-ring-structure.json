@@ -1,435 +1,452 @@
 {
- "id": "lem-weil-pbc-associated-graded-ring-structure",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 2 of its current split: essential surjectivity (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); associated-graded construction used in the completion subargument",
-   "via": [
-    "def-weil-pbc-associated-graded-ring",
-    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
-    "lem-weil-pbc-cohen-rings-exist",
-    "lem-weil-pbc-cohen-coefficient-ring-exists",
-    "lem-weil-pbc-complete-local-domain-finite-over-regular",
-    "lem-weil-pbc-complete-local-g-ring",
-    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
-    "lem-weil-pbc-henselization-pair-g-ring",
-    "lem-weil-pbc-finite-etale-lifting-limit-descent",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
+  "id": "lem-weil-pbc-associated-graded-ring-structure",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "step 2 of its current split: essential surjectivity (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); associated-graded construction used in the completion subargument",
+      "via": [
+        "def-weil-pbc-associated-graded-ring",
+        "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+        "lem-weil-pbc-cohen-rings-exist",
+        "lem-weil-pbc-cohen-coefficient-ring-exists",
+        "lem-weil-pbc-complete-local-domain-finite-over-regular",
+        "lem-weil-pbc-complete-local-g-ring",
+        "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+        "lem-weil-pbc-henselization-pair-g-ring",
+        "lem-weil-pbc-finite-etale-lifting-limit-descent",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "The associated graded ring of an ideal is a commutative graded ring and an A/J-algebra",
- "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ an ideal, with $J^0=A$ and $J^{k+1}=J^kJ$ [def-weil-pbc-algebra-hom-quotient]. For $n\\ge0$ let $G_n=J^n/J^{n+1}$ be the quotient of the $A$-module $J^n$ by its submodule $J^{n+1}$ [def-weil-pbc-quotient-module], and let $G=\\bigoplus_{n\\ge0}G_n$ [def-weil-pbc-direct-sum-modules], with canonical inclusions $\\iota_n:G_n\\to G$. Then:\n(1) for all $n,m\\ge0$ there is a unique map $\\mu_{n,m}:G_n\\times G_m\\to G_{n+m}$ with $\\mu_{n,m}(a\\bmod J^{n+1},\\,b\\bmod J^{m+1})=ab\\bmod J^{n+m+1}$ for all $a\\in J^n$, $b\\in J^m$; it is biadditive (indeed $A$-bilinear);\n(2) the multiplication on $G$ defined by $(\\xi\\eta)_k=\\sum_{n+m=k}\\mu_{n,m}(\\xi_n,\\eta_m)$ for $\\xi=(\\xi_n)$, $\\eta=(\\eta_m)$ in $G$, together with the addition of $G$, makes $G$ a commutative ring with unit $\\iota_0(1\\bmod J)$, and $\\iota_n(x)\\iota_m(y)=\\iota_{n+m}(\\mu_{n,m}(x,y))$;\n(3) $G_0=J^0/J^1$ is the quotient ring $A/J$ as an abelian group, and $\\iota_0:A/J\\to G$ is an injective ring homomorphism; thus $G$ is an $A/J$-algebra [def-weil-pbc-algebra-hom-quotient] through $\\iota_0$, and for $a\\in A$, $n\\ge0$ and $x\\in J^n$: $\\iota_0(a\\bmod J)\\cdot\\iota_n(x\\bmod J^{n+1})=\\iota_n(ax\\bmod J^{n+1})$, so each $\\iota_n(G_n)$ is an $A/J$-submodule of $G$.",
- "source": {
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: '$\\bigoplus I^n/I^{n+1}$' used as a ring and an $R/I$-algebra without proof; Algebra, Section 00JL (section-graded, line 13200) for graded rings; Artin approximation, Section 07XA (artin-section-approximation), artin.tex line 1268, the notation $\\text{Gr}_I(A)=\\bigoplus I^n/I^{n+1}$"
- },
- "stmt_deps": [
-  "def-weil-pbc-algebra-hom-quotient",
-  "def-weil-pbc-quotient-module",
-  "def-weil-pbc-direct-sum-modules",
-  "def-weil-pbc-associated-graded-ring"
- ],
- "proof": [
-  {
-   "text": "From the ideal-product definition in [def-weil-pbc-algebra-hom-quotient], $J^{r+1}\\subseteq J^r$: each generator $xy$ with $x\\in J^r,y\\in J$ lies in the ideal $J^r$, and hence so does the ideal it generates. Also $J^1=AJ=J$, since $aj\\in J$ and $j=1j$. Thus $J^{n+1}$ really is a submodule of $J^n$ and $G_0=A/J$ as an abelian group by [def-weil-pbc-quotient-module].",
-   "uses": [
+  "kind": "statement",
+  "title": "The associated graded ring of an ideal is a commutative graded ring and an A/J-algebra",
+  "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ an ideal, with $J^0=A$ and $J^{k+1}=J^kJ$ [def-weil-pbc-algebra-hom-quotient]. For $n\\ge0$ let $G_n=J^n/J^{n+1}$ be the quotient of the $A$-module $J^n$ by its submodule $J^{n+1}$ [def-weil-pbc-quotient-module], and let $G=\\bigoplus_{n\\ge0}G_n$ [def-weil-pbc-direct-sum-modules], with canonical inclusions $\\iota_n:G_n\\to G$. Then:\n(1) for all $n,m\\ge0$ there is a unique map $\\mu_{n,m}:G_n\\times G_m\\to G_{n+m}$ with $\\mu_{n,m}(a\\bmod J^{n+1},\\,b\\bmod J^{m+1})=ab\\bmod J^{n+m+1}$ for all $a\\in J^n$, $b\\in J^m$; it is biadditive (indeed $A$-bilinear);\n(2) the multiplication on $G$ defined by $(\\xi\\eta)_k=\\sum_{n+m=k}\\mu_{n,m}(\\xi_n,\\eta_m)$ for $\\xi=(\\xi_n)$, $\\eta=(\\eta_m)$ in $G$, together with the addition of $G$, makes $G$ a commutative ring with unit $\\iota_0(1\\bmod J)$, and $\\iota_n(x)\\iota_m(y)=\\iota_{n+m}(\\mu_{n,m}(x,y))$;\n(3) $G_0=J^0/J^1$ is the quotient ring $A/J$ as an abelian group, and $\\iota_0:A/J\\to G$ is an injective ring homomorphism; thus $G$ is an $A/J$-algebra [def-weil-pbc-algebra-hom-quotient] through $\\iota_0$, and for $a\\in A$, $n\\ge0$ and $x\\in J^n$: $\\iota_0(a\\bmod J)\\cdot\\iota_n(x\\bmod J^{n+1})=\\iota_n(ax\\bmod J^{n+1})$, so each $\\iota_n(G_n)$ is an $A/J$-submodule of $G$.",
+  "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: '$\\bigoplus I^n/I^{n+1}$' used as a ring and an $R/I$-algebra without proof; Algebra, Section 00JL (section-graded, line 13200) for graded rings; Artin approximation, Section 07XA (artin-section-approximation), artin.tex line 1268, the notation $\\text{Gr}_I(A)=\\bigoplus I^n/I^{n+1}$"
+  },
+  "stmt_deps": [
     "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-quotient-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "For every $r\\ge1$, $J^r$ consists of finite sums of products of $r$ elements of $J$. The induction starts at $r=1$; for the successor, generators of $J^rJ$ are products of such sums with one element of $J$, and ring coefficients can be absorbed into that last element of $J$. Conversely every such product belongs to $J^rJ$. Expanding products of the two finite sums gives $ab\\in J^{n+m}$ whenever $a\\in J^n,b\\in J^m$; if either index is zero this is just closure of an ideal under multiplication by $A$. In particular $J^{n+1}J^m\\subseteq J^{n+m+1}$ and $J^nJ^{m+1}\\subseteq J^{n+m+1}$.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "Write $[a]_n$ for the coset of $a\\in J^n$ in $G_n$. Define $\\mu_{n,m}([a]_n,[b]_m)=[ab]_{n+m}$. This lies in the stated quotient by step 2. If representatives are replaced by $a+u,b+v$, where $u\\in J^{n+1},v\\in J^{m+1}$, the difference is $ub+av+uv$. The first two terms lie in $J^{n+m+1}$ by step 2, and the third lies in $J^{n+m+2}\\subseteq J^{n+m+1}$ by step 1. The cosets are therefore equal. Surjectivity of both quotient maps in [def-weil-pbc-quotient-module] proves uniqueness of a map with this representative formula.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-quotient-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "Using the quotient addition and scalar operations of [def-weil-pbc-quotient-module], the identities $(a+a')b=ab+a'b$, $a(b+b')=ab+ab'$, $(ca)b=c(ab)=a(cb)$ and $0b=a0=0$ in $A$ prove biadditivity, $A$-linearity in each variable, and vanishing with a zero argument. On representatives, $(ab)c=a(bc)$ proves $\\mu_{n+m,r}(\\mu_{n,m}(x,y),z)=\\mu_{n,m+r}(x,\\mu_{m,r}(y,z))$ after identifying the equal degrees; $ab=ba$ gives commutativity, and $1a=a=a1$ gives the two degree-zero unit identities. Quotient-map surjectivity extends these identities to all $x,y,z$.",
-   "uses": [
-    "def-weil-pbc-quotient-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "For $\\xi,\\eta\\in G$ use the convolution in the statement as the definition of their product. Each component is a finite sum (there are only $k+1$ pairs of natural numbers with $n+m=k$). If $S,T$ are the finite supports of $\\xi,\\eta$ from [def-weil-pbc-direct-sum-modules], step 4 implies that the product is supported in the finite set $\\{n+m:n\\in S,m\\in T\\}$. Hence it is in $G$. For single-component families the only possibly nonzero summand is the pair $(n,m)$, giving $\\iota_n(x)\\iota_m(y)=\\iota_{n+m}(\\mu_{n,m}(x,y))$ component by component.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "The addition of $G$ is already an abelian group operation by [def-weil-pbc-direct-sum-modules]. In each degree $k$, biadditivity from step 4 gives $\\sum_{n+m=k}\\mu(\\xi_n,\\eta_m+\\zeta_m)=\\sum_{n+m=k}\\mu(\\xi_n,\\eta_m)+\\sum_{n+m=k}\\mu(\\xi_n,\\zeta_m)$, proving left distributivity. Swapping $(n,m)$ with $(m,n)$ and using homogeneous commutativity proves $\\xi\\eta=\\eta\\xi$, and consequently right distributivity as well. Equality of components is equality of the families defining $G$.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "For associativity fix $k$. Distribute the inner finite sums using step 4 to obtain $((\\xi\\eta)\\zeta)_k=\\sum_{n+m+r=k}\\mu_{n+m,r}(\\mu_{n,m}(\\xi_n,\\eta_m),\\zeta_r)$ and $(\\xi(\\eta\\zeta))_k=\\sum_{n+m+r=k}\\mu_{n,m+r}(\\xi_n,\\mu_{m,r}(\\eta_m,\\zeta_r))$. These are sums over the same finite set of triples: the first grouping uses the uniquely determined intermediate degree $n+m$, the second $m+r$. Homogeneous associativity from step 4 equates every summand. Thus every component, and hence both families in [def-weil-pbc-direct-sum-modules], agrees.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "Set $e=\\iota_0([1]_0)$. In $(e\\xi)_k$ all terms vanish except $(0,k)$ and its value is $\\mu_{0,k}([1]_0,\\xi_k)=\\xi_k$ by step 4. Commutativity gives $\\xi e=\\xi$ too. Together with steps 5--7 and the direct-sum abelian group structure [def-weil-pbc-direct-sum-modules], this proves precisely the commutative unital ring laws for the specified convolution; step 5 proves its grading law.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "Under $G_0=A/J$ from step 1, $\\mu_{0,0}([a]_0,[b]_0)=[ab]_0$ is exactly the quotient-ring multiplication of [def-weil-pbc-algebra-hom-quotient]. The componentwise inclusion $\\iota_0$ of [def-weil-pbc-direct-sum-modules] preserves addition, step 5 shows it preserves multiplication, and step 8 shows it preserves the unit. It is injective since its degree-zero component is the original element: $\\iota_0(x)=\\iota_0(y)$ implies $x=y$ by taking that component. This proves clause (3)'s ring-homomorphism assertion.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  },
-  {
-   "text": "The ring homomorphism of step 9 makes $G$ an $A/J$-algebra by the definition in [def-weil-pbc-algebra-hom-quotient]; explicitly its scalar action is $\\overline a\\cdot\\xi=\\iota_0(\\overline a)\\xi$, whose module axioms are the ring distributive, associative and unit laws already proved. For $x\\in J^n$, step 5 gives $\\iota_0([a]_0)\\iota_n([x]_n)=\\iota_n([ax]_n)$. If $a$ is changed by $j\\in J$, then $jx\\in J^{n+1}$ by step 2, so the formula depends only on $a\\bmod J$. Each image $\\iota_n(G_n)$ is closed under addition and additive inverses by its componentwise definition [def-weil-pbc-direct-sum-modules], and the displayed formula proves closure under every $A/J$ scalar. Therefore it is an $A/J$-submodule of $G$.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-algebra-hom-quotient",
-  "def-weil-pbc-quotient-module",
-  "def-weil-pbc-direct-sum-modules"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 05GH (lemma-completion-Noetherian) and 00JL (section-graded): explicit construction and verifications supplied here because the source uses the associated graded ring without proving its ring laws"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "graded ring structure on the associated graded of an ideal filtration, multiplication I^n/I^(n+1) × I^m/I^(m+1) → I^(n+m)/I^(n+m+1)",
-   "results": "GradedRing, GradedRing.mk, GradedAlgebra, DirectSum.coe_decompose_mul_of_left_mem (Mathlib.RingTheory.GradedAlgebra.Basic), IsRingFiltration.toGradedMonoid (Mathlib.RingTheory.FilteredAlgebra.Basic), Ideal.Filtration (Mathlib.RingTheory.Filtration), AddMonoidAlgebra.gradeBy.gradedMonoid",
-   "date": "2026-10-10",
-   "verdict": "no match: general graded-ring API and filtrations, no ring structure on ⊕ I^n/I^{n+1}"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "associated graded ring of a filtered ring is a commutative graded ring, GradedPiece multiplication well defined",
-   "results": "SetLike.gcommRing, SetLike.gring, SetLike.gcommSemiring (Mathlib.Algebra.DirectSum.Internal: for subgroups A_i of R with A_i A_j ⊆ A_{i+j}, not quotients), IsRingFiltration.toGradedMonoid, GradedRing.toGradedMonoid, CommRing.directSumGCommRing, DirectSum.GCommRing.toGRing, DirectSum.GradeZero.commRing (Mathlib.Algebra.DirectSum.Ring)",
-   "date": "2026-10-10",
-   "verdict": "no match; candidate: DirectSum.GCommRing (Ring.lean:144) gives DirectSum.commRing (Ring.lean:356) and DirectSum.ofZeroRingHom (Ring.lean:445) once the graded multiplication μ_{n,m} on the quotients J^n/J^{n+1} and its axioms are supplied, which is the content of clauses (1)-(2)"
-  },
-  {
-   "tool": "loogle",
-   "query": "DirectSum.GCommRing, Ideal ; DirectSum.GCommRing fun n : ℕ => _ ⧸ _",
-   "results": "none (both queries)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rnE 'AssociatedGraded|associatedGraded|GradedPiece|gradedPiece' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rni 'associated graded' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FilteredAlgebra/; grep -n 'gr\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Filtration.lean",
-   "results": "only Algebra/Homology/HomologicalBicomplex.lean:62 (associated graded object of a bicomplex, unrelated); FilteredAlgebra/ has only Basic.lean with IsFiltration/IsRingFiltration/IsModuleFiltration (lines 49, 75, 96), no graded pieces; Filtration.lean has no associated graded",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "GCommRing|ofZeroRingHom",
-   "results": "Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean; ",
-   "date": "2026-10-14",
-   "verdict": "no match: bicomplex associated graded object is unrelated; DirectSum.GCommRing and ofZeroRingHom are generic interfaces, not the quotient multiplication construction"
-  },
-  {
-   "tool": "grep",
-   "query": "AssociatedGraded|associatedGraded|GradedPiece|associated graded",
-   "results": "Mathlib/Algebra/Homology/HomologicalBicomplex.lean; ",
-   "date": "2026-10-14",
-   "verdict": "no match: bicomplex associated graded object is unrelated; DirectSum.GCommRing and ofZeroRingHom are generic interfaces, not the quotient multiplication construction"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Multiplication on quotients of a decreasing multiplicative filtration gives a graded commutative ring with quotient ring in degree zero",
-   "results": "IsRingFiltration.toGradedMonoid, SetLike.gcommRing, DirectSum.GradeZero.commRing, CommRing.directSumGCommRing, DirectSum.commRing, DirectSum.GCommRing.mul_comm, DirectSum.GCommRing, SetLike.GradeZero.instCommRing; ",
-   "date": "2026-10-14",
-   "verdict": "no match: homogeneous ideals, filtration of subobjects, and generic direct sums require additional structure; no associated graded quotient construction"
-  },
-  {
-   "tool": "loogle",
-   "query": "DirectSum.GCommRing",
-   "results": "DirectSum.GCommRing, CommRing.directSumGCommRing, DirectSum.GCommRing.toGRing, DirectSum.GCommRing.toGCommSemiring, DirectSum.commRing, DirectSum.instCommRingOfNat, DirectSum.GCommRing.mk, DirectSum.GCommRing.mul_comm; ",
-   "date": "2026-10-14",
-   "verdict": "no match: DirectSum.GCommRing/commRing require the graded multiplication and its laws, which the item constructs"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The associated graded ring of an ideal is the direct sum of powers modulo successive powers, with multiplication induced by the ring",
-   "results": "Ideal.homogeneousHull_eq_iSup, HomogeneousIdeal, Ideal.toIdeal_homogeneousHull_eq_iSup, IsRingFiltration.toGradedMonoid, Ideal.IsHomogeneous, instMulHomogeneousIdeal, Ideal.mul_homogeneous_element_mem_of_mem, HomogeneousIdeal.irrelevant_eq_span; ",
-   "date": "2026-10-14",
-   "verdict": "no match: homogeneous ideals, filtration of subobjects, and generic direct sums require additional structure; no associated graded quotient construction"
-  },
-  {
-   "tool": "leansearch",
-   "query": "associated graded ring of an ideal with degree zero the quotient ring",
-   "results": "unavailable: service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "DirectSum, Quotient",
-   "results": "0 hits (msearch.py Loogle, successful request)",
-   "date": "2026-10-14",
-   "verdict": "no match: no Loogle hits; grep hits concern homogeneous ideals in an already graded ring, not multiplication on successive ideal-power quotients"
-  },
-  {
-   "tool": "grep",
-   "query": "Ideal.*Graded|Graded.*Ideal|AssociatedGraded",
-   "results": "18 hits: ProjectiveSpectrum, HomogeneousLocalization, GradedAlgebra/Homogeneous/Ideal and Maps, Radical, WeightedHomogeneous. Read Homogeneous/Ideal.lean lines 16-26: these concern ideals inside an already graded ring.",
-   "date": "2026-10-14",
-   "verdict": "no match: no Loogle hits; grep hits concern homogeneous ideals in an already graded ring, not multiplication on successive ideal-power quotients"
-  }
- ],
- "mathlib_match": null,
- "mathlib_candidate": {
-  "declaration": "DirectSum.GCommRing, DirectSum.commRing, DirectSum.ofZeroRingHom",
-  "file": "Mathlib/Algebra/DirectSum/Ring.lean",
-  "how": "lines 144 (class GCommRing), 356 (instance commRing : CommRing (⨁ i, A i)), 445 (ofZeroRingHom : A 0 →+* ⨁ i, A i): the commutative ring and the degree-0 ring map follow from a GCommRing instance on n ↦ J^n/J^{n+1}; constructing that instance (well-definedness of μ_{n,m}, graded associativity, commutativity, unit) is not in Mathlib"
- },
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-associated-graded-ring",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-associated-graded-ring"
+  ],
+  "proof": [
     {
-     "name": "Ideal.associatedGradedMulAux_left",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      63,
-      79
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "From the ideal-product definition in [def-weil-pbc-algebra-hom-quotient], $J^{r+1}\\subseteq J^r$: each generator $xy$ with $x\\in J^r,y\\in J$ lies in the ideal $J^r$, and hence so does the ideal it generates. Also $J^1=AJ=J$, since $aj\\in J$ and $j=1j$. Thus $J^{n+1}$ really is a submodule of $J^n$ and $G_0=A/J$ as an abelian group by [def-weil-pbc-quotient-module].",
+      "uses": [
+        "def-weil-pbc-algebra-hom-quotient",
+        "def-weil-pbc-quotient-module"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGradedMulAux_right",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      81,
-      97
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "For every $r\\ge1$, $J^r$ consists of finite sums of products of $r$ elements of $J$. The induction starts at $r=1$; for the successor, generators of $J^rJ$ are products of such sums with one element of $J$, and ring coefficients can be absorbed into that last element of $J$. Conversely every such product belongs to $J^rJ$. Expanding products of the two finite sums gives $ab\\in J^{n+m}$ whenever $a\\in J^n,b\\in J^m$; if either index is zero this is just closure of an ideal under multiplication by $A$. In particular $J^{n+1}J^m\\subseteq J^{n+m+1}$ and $J^nJ^{m+1}\\subseteq J^{n+m+1}$.",
+      "uses": [
+        "def-weil-pbc-algebra-hom-quotient"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGraded_gone_mul",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      130,
-      141
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Write $[a]_n$ for the coset of $a\\in J^n$ in $G_n$. Define $\\mu_{n,m}([a]_n,[b]_m)=[ab]_{n+m}$. This lies in the stated quotient by step 2. If representatives are replaced by $a+u,b+v$, where $u\\in J^{n+1},v\\in J^{m+1}$, the difference is $ub+av+uv$. The first two terms lie in $J^{n+m+1}$ by step 2, and the third lies in $J^{n+m+2}\\subseteq J^{n+m+1}$ by step 1. The cosets are therefore equal. Surjectivity of both quotient maps in [def-weil-pbc-quotient-module] proves uniqueness of a map with this representative formula.",
+      "uses": [
+        "def-weil-pbc-algebra-hom-quotient",
+        "def-weil-pbc-quotient-module"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGraded_mul_gone",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      143,
-      154
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Using the quotient addition and scalar operations of [def-weil-pbc-quotient-module], the identities $(a+a')b=ab+a'b$, $a(b+b')=ab+ab'$, $(ca)b=c(ab)=a(cb)$ and $0b=a0=0$ in $A$ prove biadditivity, $A$-linearity in each variable, and vanishing with a zero argument. On representatives, $(ab)c=a(bc)$ proves $\\mu_{n+m,r}(\\mu_{n,m}(x,y),z)=\\mu_{n,m+r}(x,\\mu_{m,r}(y,z))$ after identifying the equal degrees; $ab=ba$ gives commutativity, and $1a=a=a1$ gives the two degree-zero unit identities. Quotient-map surjectivity extends these identities to all $x,y,z$.",
+      "uses": [
+        "def-weil-pbc-quotient-module"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGraded_gmul_assoc",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      156,
-      176
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "For $\\xi,\\eta\\in G$ use the convolution in the statement as the definition of their product. Each component is a finite sum (there are only $k+1$ pairs of natural numbers with $n+m=k$). If $S,T$ are the finite supports of $\\xi,\\eta$ from [def-weil-pbc-direct-sum-modules], step 4 implies that the product is supported in the finite set $\\{n+m:n\\in S,m\\in T\\}$. Hence it is in $G$. For single-component families the only possibly nonzero summand is the pair $(n,m)$, giving $\\iota_n(x)\\iota_m(y)=\\iota_{n+m}(\\mu_{n,m}(x,y))$ component by component.",
+      "uses": [
+        "def-weil-pbc-direct-sum-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGraded_gmul_comm",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      178,
-      193
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "The addition of $G$ is already an abelian group operation by [def-weil-pbc-direct-sum-modules]. In each degree $k$, biadditivity from step 4 gives $\\sum_{n+m=k}\\mu(\\xi_n,\\eta_m+\\zeta_m)=\\sum_{n+m=k}\\mu(\\xi_n,\\eta_m)+\\sum_{n+m=k}\\mu(\\xi_n,\\zeta_m)$, proving left distributivity. Swapping $(n,m)$ with $(m,n)$ and using homogeneous commutativity proves $\\xi\\eta=\\eta\\xi$, and consequently right distributivity as well. Equality of components is equality of the families defining $G$.",
+      "uses": [
+        "def-weil-pbc-direct-sum-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGraded_one",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      226,
-      235
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "For associativity fix $k$. Distribute the inner finite sums using step 4 to obtain $((\\xi\\eta)\\zeta)_k=\\sum_{n+m+r=k}\\mu_{n+m,r}(\\mu_{n,m}(\\xi_n,\\eta_m),\\zeta_r)$ and $(\\xi(\\eta\\zeta))_k=\\sum_{n+m+r=k}\\mu_{n,m+r}(\\xi_n,\\mu_{m,r}(\\eta_m,\\zeta_r))$. These are sums over the same finite set of triples: the first grouping uses the uniquely determined intermediate degree $n+m$, the second $m+r$. Homogeneous associativity from step 4 equates every summand. Thus every component, and hence both families in [def-weil-pbc-direct-sum-modules], agrees.",
+      "uses": [
+        "def-weil-pbc-direct-sum-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGraded_mul",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      237,
-      256
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Set $e=\\iota_0([1]_0)$. In $(e\\xi)_k$ all terms vanish except $(0,k)$ and its value is $\\mu_{0,k}([1]_0,\\xi_k)=\\xi_k$ by step 4. Commutativity gives $\\xi e=\\xi$ too. Together with steps 5--7 and the direct-sum abelian group structure [def-weil-pbc-direct-sum-modules], this proves precisely the commutative unital ring laws for the specified convolution; step 5 proves its grading law.",
+      "uses": [
+        "def-weil-pbc-direct-sum-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGraded_of_zero_mul",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      258,
-      272
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Under $G_0=A/J$ from step 1, $\\mu_{0,0}([a]_0,[b]_0)=[ab]_0$ is exactly the quotient-ring multiplication of [def-weil-pbc-algebra-hom-quotient]. The componentwise inclusion $\\iota_0$ of [def-weil-pbc-direct-sum-modules] preserves addition, step 5 shows it preserves multiplication, and step 8 shows it preserves the unit. It is injective since its degree-zero component is the original element: $\\iota_0(x)=\\iota_0(y)$ implies $x=y$ by taking that component. This proves clause (3)'s ring-homomorphism assertion.",
+      "uses": [
+        "def-weil-pbc-algebra-hom-quotient",
+        "def-weil-pbc-direct-sum-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     },
     {
-     "name": "Ideal.associatedGradedRingHom_ker",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      290,
-      304
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "Ideal.algebraMap_associatedGraded_injective",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      314,
-      330
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "Ideal.associatedGraded_smul",
-     "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
-     "lines": [
-      332,
-      353
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "The ring homomorphism of step 9 makes $G$ an $A/J$-algebra by the definition in [def-weil-pbc-algebra-hom-quotient]; explicitly its scalar action is $\\overline a\\cdot\\xi=\\iota_0(\\overline a)\\xi$, whose module axioms are the ring distributive, associative and unit laws already proved. For $x\\in J^n$, step 5 gives $\\iota_0([a]_0)\\iota_n([x]_n)=\\iota_n([ax]_n)$. If $a$ is changed by $j\\in J$, then $jx\\in J^{n+1}$ by step 2, so the formula depends only on $a\\bmod J$. Each image $\\iota_n(G_n)$ is closed under addition and additive inverses by its componentwise definition [def-weil-pbc-direct-sum-modules], and the displayed formula proves closure under every $A/J$ scalar. Therefore it is an $A/J$-submodule of $G$.",
+      "uses": [
+        "def-weil-pbc-algebra-hom-quotient",
+        "def-weil-pbc-direct-sum-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 05GH (lemma-completion-Noetherian, associated graded ring in the proof) and 00JL (section-graded); elementary construction of the multiplication omitted there"
+      }
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GH (lemma-completion-Noetherian) and 00JL (section-graded): explicit construction and verifications supplied here because the source uses the associated graded ring without proving its ring laws"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "graded ring structure on the associated graded of an ideal filtration, multiplication I^n/I^(n+1) × I^m/I^(m+1) → I^(n+m)/I^(n+m+1)",
+      "results": "GradedRing, GradedRing.mk, GradedAlgebra, DirectSum.coe_decompose_mul_of_left_mem (Mathlib.RingTheory.GradedAlgebra.Basic), IsRingFiltration.toGradedMonoid (Mathlib.RingTheory.FilteredAlgebra.Basic), Ideal.Filtration (Mathlib.RingTheory.Filtration), AddMonoidAlgebra.gradeBy.gradedMonoid",
+      "date": "2026-10-10",
+      "verdict": "no match: general graded-ring API and filtrations, no ring structure on ⊕ I^n/I^{n+1}"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "associated graded ring of a filtered ring is a commutative graded ring, GradedPiece multiplication well defined",
+      "results": "SetLike.gcommRing, SetLike.gring, SetLike.gcommSemiring (Mathlib.Algebra.DirectSum.Internal: for subgroups A_i of R with A_i A_j ⊆ A_{i+j}, not quotients), IsRingFiltration.toGradedMonoid, GradedRing.toGradedMonoid, CommRing.directSumGCommRing, DirectSum.GCommRing.toGRing, DirectSum.GradeZero.commRing (Mathlib.Algebra.DirectSum.Ring)",
+      "date": "2026-10-10",
+      "verdict": "no match; candidate: DirectSum.GCommRing (Ring.lean:144) gives DirectSum.commRing (Ring.lean:356) and DirectSum.ofZeroRingHom (Ring.lean:445) once the graded multiplication μ_{n,m} on the quotients J^n/J^{n+1} and its axioms are supplied, which is the content of clauses (1)-(2)"
+    },
+    {
+      "tool": "loogle",
+      "query": "DirectSum.GCommRing, Ideal ; DirectSum.GCommRing fun n : ℕ => _ ⧸ _",
+      "results": "none (both queries)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rnE 'AssociatedGraded|associatedGraded|GradedPiece|gradedPiece' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rni 'associated graded' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FilteredAlgebra/; grep -n 'gr\\b' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Filtration.lean",
+      "results": "only Algebra/Homology/HomologicalBicomplex.lean:62 (associated graded object of a bicomplex, unrelated); FilteredAlgebra/ has only Basic.lean with IsFiltration/IsRingFiltration/IsModuleFiltration (lines 49, 75, 96), no graded pieces; Filtration.lean has no associated graded",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "GCommRing|ofZeroRingHom",
+      "results": "Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean, Mathlib/Algebra/DirectSum/Ring.lean; ",
+      "date": "2026-10-14",
+      "verdict": "no match: bicomplex associated graded object is unrelated; DirectSum.GCommRing and ofZeroRingHom are generic interfaces, not the quotient multiplication construction"
+    },
+    {
+      "tool": "grep",
+      "query": "AssociatedGraded|associatedGraded|GradedPiece|associated graded",
+      "results": "Mathlib/Algebra/Homology/HomologicalBicomplex.lean; ",
+      "date": "2026-10-14",
+      "verdict": "no match: bicomplex associated graded object is unrelated; DirectSum.GCommRing and ofZeroRingHom are generic interfaces, not the quotient multiplication construction"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Multiplication on quotients of a decreasing multiplicative filtration gives a graded commutative ring with quotient ring in degree zero",
+      "results": "IsRingFiltration.toGradedMonoid, SetLike.gcommRing, DirectSum.GradeZero.commRing, CommRing.directSumGCommRing, DirectSum.commRing, DirectSum.GCommRing.mul_comm, DirectSum.GCommRing, SetLike.GradeZero.instCommRing; ",
+      "date": "2026-10-14",
+      "verdict": "no match: homogeneous ideals, filtration of subobjects, and generic direct sums require additional structure; no associated graded quotient construction"
+    },
+    {
+      "tool": "loogle",
+      "query": "DirectSum.GCommRing",
+      "results": "DirectSum.GCommRing, CommRing.directSumGCommRing, DirectSum.GCommRing.toGRing, DirectSum.GCommRing.toGCommSemiring, DirectSum.commRing, DirectSum.instCommRingOfNat, DirectSum.GCommRing.mk, DirectSum.GCommRing.mul_comm; ",
+      "date": "2026-10-14",
+      "verdict": "no match: DirectSum.GCommRing/commRing require the graded multiplication and its laws, which the item constructs"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The associated graded ring of an ideal is the direct sum of powers modulo successive powers, with multiplication induced by the ring",
+      "results": "Ideal.homogeneousHull_eq_iSup, HomogeneousIdeal, Ideal.toIdeal_homogeneousHull_eq_iSup, IsRingFiltration.toGradedMonoid, Ideal.IsHomogeneous, instMulHomogeneousIdeal, Ideal.mul_homogeneous_element_mem_of_mem, HomogeneousIdeal.irrelevant_eq_span; ",
+      "date": "2026-10-14",
+      "verdict": "no match: homogeneous ideals, filtration of subobjects, and generic direct sums require additional structure; no associated graded quotient construction"
+    },
+    {
+      "tool": "leansearch",
+      "query": "associated graded ring of an ideal with degree zero the quotient ring",
+      "results": "unavailable: service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "DirectSum, Quotient",
+      "results": "0 hits (msearch.py Loogle, successful request)",
+      "date": "2026-10-14",
+      "verdict": "no match: no Loogle hits; grep hits concern homogeneous ideals in an already graded ring, not multiplication on successive ideal-power quotients"
+    },
+    {
+      "tool": "grep",
+      "query": "Ideal.*Graded|Graded.*Ideal|AssociatedGraded",
+      "results": "18 hits: ProjectiveSpectrum, HomogeneousLocalization, GradedAlgebra/Homogeneous/Ideal and Maps, Radical, WeightedHomogeneous. Read Homogeneous/Ideal.lean lines 16-26: these concern ideals inside an already graded ring.",
+      "date": "2026-10-14",
+      "verdict": "no match: no Loogle hits; grep hits concern homogeneous ideals in an already graded ring, not multiplication on successive ideal-power quotients"
+    }
+  ],
+  "mathlib_match": null,
+  "mathlib_candidate": {
+    "declaration": "DirectSum.GCommRing, DirectSum.commRing, DirectSum.ofZeroRingHom",
+    "file": "Mathlib/Algebra/DirectSum/Ring.lean",
+    "how": "lines 144 (class GCommRing), 356 (instance commRing : CommRing (⨁ i, A i)), 445 (ofZeroRingHom : A 0 →+* ⨁ i, A i): the commutative ring and the degree-0 ring map follow from a GCommRing instance on n ↦ J^n/J^{n+1}; constructing that instance (well-definedness of μ_{n,m}, graded associativity, commutativity, unit) is not in Mathlib"
+  },
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-associated-graded-ring",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "Ideal.associatedGradedMulAux_left",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            63,
+            79
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGradedMulAux_right",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            81,
+            97
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_gone_mul",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            130,
+            141
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_mul_gone",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            143,
+            154
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_gmul_assoc",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            156,
+            176
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_gmul_comm",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            178,
+            193
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_one",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            226,
+            235
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_mul",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            237,
+            256
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_of_zero_mul",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            258,
+            272
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGradedRingHom_ker",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            290,
+            304
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.algebraMap_associatedGraded_injective",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            314,
+            330
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "Ideal.associatedGraded_smul",
+          "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+          "lines": [
+            332,
+            353
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "import_flags": [
+    "unreachable"
+  ],
+  "note": "Claim moved out of def-weil-pbc-associated-graded-ring (well-definedness of its multiplication and the ring and A/J-algebra structure). The definition names it in `pointers`, not in stmt_deps (a definition does not cite a lemma about its own data). The citers lem-weil-pbc-completion-noetherian-quotient-noetherian (steps 2-4) and lem-weil-pbc-completed-module-associated-graded-generators (steps 1, 5) use these clauses through the definition.",
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-ND-0f77a92d8",
+    "group": "ND",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-0f77a92d8 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited definitions, unit/chapter route, and Stacks 05GH/00JL/07XA. All ten steps correctly establish quotient multiplication, ring laws, and the A/J-algebra structure without extra hypotheses. Exhaustive finite-ring checks passed; DAG generalization candidates do not replace this construction. No new nodes, missing citations, circularity, repairs, or accepted tool_uses. Detailed checks are in review.md."
+  },
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-weil-pbc-associated-graded-ring-structure",
+    "worker": "stage1",
+    "summary": "Verified the Stacks associated-graded usage and preserved every hypothesis and clause. Supplied ten elementary steps: ideal-power product membership, quotient representative independence, homogeneous bilinearity and identities, finite convolution support, all ring laws, injective degree-zero homomorphism and the quotient scalar action. Reused the three existing Mathlib definition leaves; no new nodes or hidden generic graded-ring theorem. No matching project declaration was found.",
+    "blueprint": "The ancestor is thm-weil-pbc-finite-etale-lifting, current proof step 2 (essential surjectivity), source Lemma 0GS2. This item supplies the ideal-power associated-graded ring used in the completion subargument along the recorded via chain; its ten steps verify the multiplication, ring laws and coefficient algebra structure, without replacing the unit route."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-b13046f29",
+    "group": "NB",
+    "result": "pass",
+    "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, edge cases, docstrings, and verbatim signature; no defects found. Server-only compilation reproduced cleanly in 1.2 seconds. Branch head unchanged."
+  },
+  "lean": {
+    "module": "WeilConjectures.RingTheory.AssociatedGradedRing",
+    "declaration": "Ideal.associatedGradedMulAux_left",
+    "file": "lean/WeilConjectures/RingTheory/AssociatedGradedRing.lean",
+    "existing": true,
+    "branch": "sheaf-dag",
+    "by": "L",
+    "date": "2026-10-17",
+    "note": "2026-10-17 (L): repointed from the sorried duplicate Sheaf.RingTheory.AssociatedGradedRingStructure.associatedGraded_ring_structure to the source library's sorry-free declarations recorded by the slopmaster2 audit (state closed).",
+    "superseded": {
+      "module": "Sheaf.RingTheory.AssociatedGradedRingStructure",
+      "declaration": "Ideal.associatedGraded_ring_structure"
+    },
+    "declarations": [
+      "Ideal.associatedGradedMulAux_left",
+      "Ideal.associatedGradedMulAux_right",
+      "Ideal.associatedGraded_gone_mul",
+      "Ideal.associatedGraded_mul_gone",
+      "Ideal.associatedGraded_gmul_assoc",
+      "Ideal.associatedGraded_gmul_comm",
+      "Ideal.associatedGraded_one",
+      "Ideal.associatedGraded_mul",
+      "Ideal.associatedGraded_of_zero_mul",
+      "Ideal.associatedGradedRingHom_ker",
+      "Ideal.algebraMap_associatedGraded_injective",
+      "Ideal.associatedGraded_smul"
+    ]
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "import_flags": [
-  "unreachable"
- ],
- "note": "Claim moved out of def-weil-pbc-associated-graded-ring (well-definedness of its multiplication and the ring and A/J-algebra structure). The definition names it in `pointers`, not in stmt_deps (a definition does not cite a lemma about its own data). The citers lem-weil-pbc-completion-noetherian-quotient-noetherian (steps 2-4) and lem-weil-pbc-completed-module-associated-graded-generators (steps 1, 5) use these clauses through the definition.",
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-ND-0f77a92d8",
-  "group": "ND",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-0f77a92d8 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited definitions, unit/chapter route, and Stacks 05GH/00JL/07XA. All ten steps correctly establish quotient multiplication, ring laws, and the A/J-algebra structure without extra hypotheses. Exhaustive finite-ring checks passed; DAG generalization candidates do not replace this construction. No new nodes, missing citations, circularity, repairs, or accepted tool_uses. Detailed checks are in review.md."
- },
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-weil-pbc-associated-graded-ring-structure",
-  "worker": "stage1",
-  "summary": "Verified the Stacks associated-graded usage and preserved every hypothesis and clause. Supplied ten elementary steps: ideal-power product membership, quotient representative independence, homogeneous bilinearity and identities, finite convolution support, all ring laws, injective degree-zero homomorphism and the quotient scalar action. Reused the three existing Mathlib definition leaves; no new nodes or hidden generic graded-ring theorem. No matching project declaration was found.",
-  "blueprint": "The ancestor is thm-weil-pbc-finite-etale-lifting, current proof step 2 (essential surjectivity), source Lemma 0GS2. This item supplies the ideal-power associated-graded ring used in the completion subargument along the recorded via chain; its ten steps verify the multiplication, ring laws and coefficient algebra structure, without replacing the unit route."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-b13046f29",
-  "group": "NB",
-  "result": "pass",
-  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, edge cases, docstrings, and verbatim signature; no defects found. Server-only compilation reproduced cleanly in 1.2 seconds. Branch head unchanged."
- },
- "lean": {
-  "module": "Sheaf.RingTheory.AssociatedGradedRingStructure",
-  "declaration": "Ideal.associatedGraded_ring_structure",
-  "file": "lean/Sheaf/RingTheory/AssociatedGradedRingStructure.lean",
-  "statement": "theorem associatedGraded_ring_structure {A : Type u} [CommRing A] (J : Ideal A) : (∀ n m : ℕ, (∀ (a : (J ^ n : Ideal A)) (b : (J ^ m : Ideal A)), associatedGradedMul J n m (Submodule.Quotient.mk a) (Submodule.Quotient.mk b) = associatedGradedMulAux J n m a b) ∧ (∀ μ : associatedGradedPiece J n → associatedGradedPiece J m → associatedGradedPiece J (n + m), (∀ (a : (J ^ n : Ideal A)) (b : (J ^ m : Ideal A)), μ (Submodule.Quotient.mk a) (Submodule.Quotient.mk b) = associatedGradedMulAux J n m a b) → μ = fun x y ↦ associatedGradedMul J n m x y)) ∧ (∀ (ξ η : associatedGraded J) (k : ℕ), (ξ * η) k = ∑ p ∈ Finset.antidiagonal k, if h : p.1 + p.2 = k then h ▸ associatedGradedMul J p.1 p.2 (ξ p.1) (η p.2) else 0) ∧ (∀ (n m : ℕ) (x : associatedGradedPiece J n) (y : associatedGradedPiece J m), DirectSum.of (associatedGradedPiece J) n x * DirectSum.of (associatedGradedPiece J) m y = DirectSum.of (associatedGradedPiece J) (n + m) (associatedGradedMul J n m x y)) ∧ (∃ e : (A ⧸ J) ≃+ associatedGradedPiece J 0, (∀ a : A, e (Ideal.Quotient.mk J a) = Submodule.Quotient.mk (⟨a, by simp⟩ : (J ^ 0 : Ideal A))) ∧ (∀ a : A ⧸ J, algebraMap (A ⧸ J) (associatedGraded J) a = DirectSum.of (associatedGradedPiece J) 0 (e a)) ∧ (1 : associatedGraded J) = DirectSum.of (associatedGradedPiece J) 0 (e 1)) ∧ Function.Injective (algebraMap (A ⧸ J) (associatedGraded J)) ∧ (∀ (a : A) (n : ℕ) (x : (J ^ n : Ideal A)), algebraMap (A ⧸ J) (associatedGraded J) (Ideal.Quotient.mk J a) * DirectSum.of (associatedGradedPiece J) n (Submodule.Quotient.mk x) = DirectSum.of (associatedGradedPiece J) n (Submodule.Quotient.mk (a • x))) ∧ (∀ n : ℕ, ∃ S : Submodule (A ⧸ J) (associatedGraded J), (S : Set (associatedGraded J)) = Set.range (DirectSum.of (associatedGradedPiece J) n))",
-  "branch": "newtargets-dag",
-  "by": "NB",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "Uses the landed associated-graded construction; its node was added to stmt_deps under the standing rule permitting landed definition dependencies."
- }
 }

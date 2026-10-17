@@ -20,11 +20,14 @@ def reach(n):
             if i in imports and i not in seen: seen.add(i); dq.append(i)
     return seen
 rs = [(f"batch{n}", reach(n)) for n in (1, 2, 3, 4)]   # 2026-10-17: batch 4 (Poincare duality)
-rows = []
+rows = []; allrows = []
 for l in (R / "coord/queue.tsv").read_text().splitlines():
     r = l.split("\t")
     if l.startswith("#") or len(r) < 2: continue
     b = "untagged" if r[1] != "3" else next((name for name, s in rs if r[0] in s), "unneeded")   # 2026-10-16: never batch1 (complete)
     rows.append(f"{r[0]}\t{b}")
+    allb = ",".join(name for name, s in rs if r[0] in s) if r[1] == "3" else ""   # 2026-10-17: every open batch reaching it
+    allrows.append(f"{r[0]}\t{allb or b}")
 tmp = R / "coord/.queue-batches.tsv"; tmp.write_text("# item\tbatch\n" + "\n".join(rows) + "\n"); tmp.replace(R / "coord/queue-batches.tsv")
+tmp = R / "coord/.queue-batches-all.tsv"; tmp.write_text("# item\tbatches (every open batch whose target modules import the item; queue-batches.tsv has the dispatch tag)\n" + "\n".join(allrows) + "\n"); tmp.replace(R / "coord/queue-batches-all.tsv")
 print(len(rows), "items tagged;", sum(1 for x in rows if x.endswith("unneeded")), "unneeded")

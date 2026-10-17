@@ -276,14 +276,32 @@
     "note": "Statement, dependencies, docstrings, edge cases, searches, report sections, and server compilation all checked."
   },
   "lean": {
-    "module": "Sheaf.AlgebraicGeometry.RelativeProjExists",
-    "declaration": "AlgebraicGeometry.exists_relativeProjData",
-    "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjExists.lean",
-    "statement": "theorem exists_relativeProjData {X : Scheme.{u}} (A : RelativeProjAlgebra X) : ∃ D : RelativeProjData A, ∀ (P : Scheme.{u}) (π : P ⟶ X) (i : ∀ V : X.affineOpens, (π ⁻¹ᵁ V.1).toScheme ≅ A.localProj V), (∀ V : X.affineOpens, (i V).hom ≫ A.localBase V ≫ V.1.ι = (π ⁻¹ᵁ V.1).ι ≫ π) → (∀ (V W : X.affineOpens) (h : W ≤ V), (i W).inv ≫ P.homOfLE (π.preimage_mono h) ≫ (i V).hom = A.localTransition h) → ∃! e : D.proj ≅ P, e.hom ≫ π = D.π ∧ ∀ V : X.affineOpens, (D.restrictionIso V).inv ≫ (D.π ⁻¹ᵁ V.1).ι ≫ e.hom = (i V).inv ≫ (π ⁻¹ᵁ V.1).ι",
-    "branch": "newtargets-dag",
-    "by": "NA",
-    "date": "2026-10-15",
-    "existing": false
+    "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+    "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι_relProjHom",
+    "file": "lean/WeilConjectures/AlgebraicGeometry/RelativeProj/Basic.lean",
+    "existing": true,
+    "branch": "sheaf-dag",
+    "by": "L",
+    "date": "2026-10-17",
+    "note": "2026-10-17 (L): repointed from the sorried duplicate Sheaf.AlgebraicGeometry.RelativeProjExists.exists_relativeProjData to the source library's sorry-free declarations recorded by the slopmaster2 audit (state closed).",
+    "superseded": {
+      "module": "Sheaf.AlgebraicGeometry.RelativeProjExists",
+      "declaration": "AlgebraicGeometry.exists_relativeProjData"
+    },
+    "declarations": [
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι_relProjHom",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjHom_preimage",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjι",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.isColimitRestrict",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.existsUnique_relProjIso"
+    ],
+    "modules": [
+      "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+      "WeilConjectures.AlgebraicGeometry.RelativeProj.Universal"
+    ]
   },
   "blueprint_update": {
     "snapshot": "main-20261015",

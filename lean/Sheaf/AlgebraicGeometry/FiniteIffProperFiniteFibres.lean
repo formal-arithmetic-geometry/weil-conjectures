@@ -1,49 +1,24 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group T1
 -/
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.AlgebraicGeometry.FiniteIsQuasiFinite
-import Sheaf.AlgebraicGeometry.ProperBasic
-import Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!
-# Finite morphisms and proper morphisms with finite fibres
+# Retired duplicate (2026-10-17)
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.21.1, Tag 02OG
-(blueprint: thm-pqf-finite-iff-proper-finite-fibres).
+The source library proves blueprint node
+`thm-pqf-finite-iff-proper-finite-fibres`
+sorry-free as
+`AlgebraicGeometry.IsFinite.iff_isProper_and_finite_preimage_singleton`
+in
+`WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite`
+This module re-exports it. Its sorried declaration
+`AlgebraicGeometry.isFinite_iff_isProper_and_hasFiniteFibres`
+is gone (no module used it).
 -/
-
-@[expose] public section
-
-universe u
-
-open CategoryTheory
-
-namespace AlgebraicGeometry
-
-/-- Over a locally Noetherian target, a morphism is finite if and only if it is proper
-with finite fibres (Stacks Tag 02OG)
-(blueprint: thm-pqf-finite-iff-proper-finite-fibres).
-
-Proof outline from the DAG:
-1. A finite morphism is proper (`lem-weil-pbc-finite-proper`) and quasi-finite
-   (`pqf-lem-finite-qf`), hence has finite fibres (`pqf-lem-qf-finitefibres`).
-2. Conversely, properness supplies finite type, local finite type and quasi-compactness
-   (`pqf-lem-proper-basic`). Finite fibres then imply quasi-finiteness
-   (`pqf-lem-qf-finitefibres`), which implies local quasi-finiteness
-   (`pqf-lem-qf-locqf-qc`). Properness and local quasi-finiteness imply finiteness
-   (`pqf-lem-proper-lqf-finite`). The locally Noetherian hypothesis is retained as in
-   the source statement, although this route proves the reverse implication without it. -/
-theorem isFinite_iff_isProper_and_hasFiniteFibres {X S : Scheme.{u}}
-    [IsLocallyNoetherian S] (f : X ⟶ S) :
-    IsFinite f ↔ IsProper f ∧ Scheme.Hom.HasFiniteFibres f := by
-  sorry
-
-end AlgebraicGeometry
