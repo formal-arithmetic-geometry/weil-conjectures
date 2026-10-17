@@ -105,6 +105,42 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
     { Algebra.TensorProduct.lift ((IsScalarTower.toAlgHom R₀ R₀ A₁).comp ε) (AlgHom.id R₀ A₁)
         fun _ _ ↦ Commute.all _ _ with
       commutes' := fun a ↦ (Algebra.TensorProduct.lift_tmul _ _ _ (1 : B) a).trans (by simp) }
+  have hε₁ (b : B) : ε₁ (b ⊗ₜ[R₀] (1 : A₁)) = algebraMap R₀ A₁ (ε b) :=
+    (Algebra.TensorProduct.lift_tmul ((IsScalarTower.toAlgHom R₀ R₀ A₁).comp ε) (AlgHom.id R₀ A₁)
+      (fun _ _ ↦ Commute.all _ _) b 1).trans (by rw [AlgHom.id_apply, mul_one]; rfl)
+  -- the points
+  let K₁ := FractionRing A₁
+  have hinjK : Function.Injective (algebraMap R₀ K₁) := by
+    rw [IsScalarTower.algebraMap_eq R₀ A₁ K₁]
+    exact (IsFractionRing.injective A₁ K₁).comp hinj
+  let ιK : K →+* K₁ := IsFractionRing.lift hinjK
+  letI : Algebra B K₁ := ((algebraMap R₀ K₁).comp ε.toRingHom).toAlgebra
+  let f₁ : B₁ →ₐ[B] K₁ :=
+    { (algebraMap A₁ K₁).comp ε₁.toRingHom with
+      commutes' := fun b ↦ by
+        change algebraMap A₁ K₁ (ε₁ (b ⊗ₜ 1)) = algebraMap R₀ K₁ (ε b)
+        rw [hε₁, ← IsScalarTower.algebraMap_apply] }
+  let f₂ (j : Fin (Nat.card G)) : L →ₐ[B] K₁ :=
+    { ιK.comp (φ j) with
+      commutes' := fun b ↦ by
+        change ιK (φ j (algebraMap B L b)) = algebraMap R₀ K₁ (ε b)
+        rw [← RingHom.comp_apply (φ j), hφ j, RingHom.comp_apply, IsFractionRing.lift_algebraMap]
+        rfl }
+  let φ₁ (j : Fin (Nat.card G)) : L₁ →+* K₁ :=
+    (Algebra.TensorProduct.lift f₁ (f₂ j) fun _ _ ↦ Commute.all _ _).toRingHom
+  have hφ₁ (j) : (φ₁ j).comp (algebraMap B₁ L₁) = (algebraMap A₁ K₁).comp ε₁.toRingHom :=
+    RingHom.ext fun x ↦
+      (Algebra.TensorProduct.lift_tmul f₁ (f₂ j) (fun _ _ ↦ Commute.all _ _) x 1).trans (by
+      rw [map_one, mul_one]
+      rfl)
+  have hφ₁inj : Function.Injective φ₁ := fun j l hjl ↦ hφinj <| RingHom.ext fun x ↦ ιK.injective <|
+    by
+      have h := congr($hjl ((1 : B₁) ⊗ₜ[B] x))
+      have e (k : Fin (Nat.card G)) : φ₁ k ((1 : B₁) ⊗ₜ[B] x) = ιK (φ k x) :=
+        (Algebra.TensorProduct.lift_tmul f₁ (f₂ k) (fun _ _ ↦ Commute.all _ _) 1 x).trans (by rw [map_one, one_mul]; rfl)
+      rwa [e, e] at h
+  obtain ⟨hE, hF⟩ := etale_localization_integralClosure_of_isPrimitiveRoot (A := A₁) (B := B₁)
+    (Bk := Bk₁) (L := L₁) ε₁ G hfix₁ hrank₁ hG₁ (K := K₁) φ₁ hφ₁ hφ₁inj hζ
   sorry
 
 end Algebra
