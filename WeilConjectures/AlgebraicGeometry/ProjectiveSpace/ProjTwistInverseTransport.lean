@@ -9,9 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ProjectiveLineTwistData
 import WeilConjectures.AlgebraicGeometry.ProjShiftedFreeTwist
-import WeilConjectures.AlgebraicGeometry.ProjectiveLineTwistExists
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 
 /-!
 # Transport of a polynomial Proj twist to the projective line
@@ -56,7 +55,7 @@ theorem proj_twist_inverse_transport (k : Type u) [Field k]
         ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d) := by
   classical
   let L := ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d
-  obtain ⟨T⟩ := ProjectiveLine.nonempty_twistData_projectiveSpace k d
+  let T := ProjectiveLine.twistData (Spec (.of k)) d
   obtain ⟨C', ⟨L', ⟨T'⟩, ⟨e'⟩⟩, _⟩ := proj_shifted_free_is_twist k d
   have hcov : (⨆ i : ULift.{u} (Fin 2),
       basicOpen (homogeneousSubmodule (Fin 2) k) (X i.down)) = ⊤ := by
@@ -71,9 +70,9 @@ theorem proj_twist_inverse_transport (k : Type u) [Field k]
       (fun j ↦ X_mem_homogeneousSubmodule_one k j.down) hcov).hom_ext
     intro i
     exact (C'.chart_eq i).trans (C.chart_eq i).symm
-  obtain ⟨L₀, T₀, _, huniq⟩ := ProjectiveLine.exists_twistData_unique_iso k d
-  obtain ⟨e₀, _, _⟩ := huniq L' T'
-  obtain ⟨e₁, _, _⟩ := huniq L T
+  let T₀ := ProjectiveLine.twistData (Spec (.of k)) d
+  obtain ⟨e₀, _, _⟩ := T₀.existsUnique_iso T'
+  obtain ⟨e₁, _, _⟩ := T₀.existsUnique_iso T
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction C'.iso.hom
   let a := adj.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction C'.iso.hom)
   let e := e' ≪≫ a.app L' ≪≫
