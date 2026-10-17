@@ -53,14 +53,14 @@ private theorem restrict_model (X : Scheme.{u})
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (U V : X.Opens) (h : V ≤ U) (E : schemeDerivedCategory X)
     (K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
-    (e : (SheafOfModules.overFunctor
+    (e : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) :
-    Nonempty ((SheafOfModules.overFunctor
+    Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj
         (((SheafOfModules.overMap
           (moduleRings X.toRingedSpace) (homOfLE h)).mapHomologicalComplex (.up ℤ)).obj K)) := by
   let F := SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE h)
-  let G := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
+  let G := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   have : PreservesFiniteLimits (G ⋙ F) := comp_preservesFiniteLimits _ _
   have : PreservesFiniteColimits (G ⋙ F) := comp_preservesFiniteColimits _ _
   exact ⟨(Functor.mapDerivedCategoryNatIso
@@ -91,9 +91,9 @@ theorem perfect_common_affine_models (X : Scheme.{u})
       ∃ A B : CochainComplex
           (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,
         IsStrictlyPerfect X U A ∧ IsStrictlyPerfect X U B ∧
-        Nonempty ((SheafOfModules.overFunctor
+        Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj A) ∧
-        Nonempty ((SheafOfModules.overFunctor
+        Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj F ≅
           DerivedCategory.Q.obj B) := by
   obtain ⟨U, hxU, A, hA, ⟨eA⟩⟩ := hE x
