@@ -161,4 +161,20 @@ theorem Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective
   exact Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map A (a j.1) φ (hφ j.1) _
 
 
+include hJ in
+omit [HasSmallSiteSheafify A] in
+/-- **An étale covering detects isomorphisms of sheaves.** Let `a_i : U_i ⟶ X` be a jointly
+surjective family of morphisms, for instance an étale covering. A morphism `φ` of `A`-valued
+sheaves on the small étale site of `X` is an isomorphism if and only if all its restrictions
+`a_i^* φ` are: restriction is a functor, and conversely
+`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective` checks `φ` on the
+geometric stalks, each of which is a geometric stalk of some `a_i^* φ`.
+(blueprint: `lem-weil-pbc-etale-cover-detects-iso`) -/
+theorem Etale.isIso_iff_forall_isIso_upperStar_map_of_jointlySurjective
+    {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X)
+    (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
+    {F G : Sheaf X.smallEtaleTopology A} (φ : F ⟶ G) :
+    IsIso φ ↔ ∀ i, IsIso ((a i)^*[A].map φ) :=
+  ⟨fun _ _ ↦ inferInstance, Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective A a ha φ⟩
+
 end AlgebraicGeometry
