@@ -144,25 +144,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-d1e79aa3b (reviewer sub-agent of L); spot-checked: Read the complete definition, cited statements, report, and unit/chapter route. Bhatt–Scholze 7.3.1(1), Stacks 0H7J, 00Y0 and 04IX support coverwise constancy, constant modules and slice restriction. Arbitrary module coefficients and edge cases are preserved. No new nodes, duplicates, missing dependencies or cycles; no repairs or tool_uses needed. Review written to review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-11ddb111d",
-  "group": "NM",
+  "reviewer": "NT-stage2-cc-5c8bf76bd",
+  "group": "Q135",
   "result": "pass",
-  "note": "Wrote review.md. Both immutable modules compile cleanly through scompile.py. Checked source, all statement dependencies, exact signatures, universe bounds, edge cases, docstrings, report sections, and the justified §1(B) interface repair. No corrections needed."
+  "note": "Checked all hypotheses and eight conclusions against the node; all match. Shift sign correct (shift n gives degree -n). _hrank (locally isomorphic to the constant ring on a pro-etale cover) implies _hlocal (locally constant), so no stronger assumption. Edge cases hold: empty Y or empty index, empty members with any labels, A[3] gives degree -3, two components with different shifts, A=0 excluded; universes bound. Helper etaleLocalShiftLocus is a real set with source/blueprint docstrings. Theorem proof is only sorry; docstrings carry source place and proof steps; real pro-etale site used. lean.statement verbatim in file; no duplicate declaration. Item changes only lean plus one added landed stmt_dep (def-weil-pbc-proetale-operations, allowed). Report has Worker report and Second reading by Q135. Dependency def-weil-proetale-locally-constant-sheaf is re-pointed (1(B), with note) from NM's fixed-coefficient predicate to the original ringed-site IsLocallyConstantProEtaleModuleSheaf: needed, same notion. Side effect: NM's fixed-coefficient module loses its node record and landed lem-sf-proetale-lisse-finite-models uses it; the mirror situation existed before, so remark only. nt_compile.py: first run, dependency KFlat.lean hit the 60 s limit under load ~220; rerun rc=0, item compiled in 15.4 s with no errors or warnings."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleFixedModuleLocalConstancy",
-  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleFixedModuleSheaf",
-  "file": "lean/Sheaf/Paper/ProEtaleFixedModuleLocalConstancy.lean",
-  "statement": "def IsLocallyConstantProEtaleFixedModuleSheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop",
+  "module": "Sheaf.Paper.ProEtaleLocallyConstantSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheaf",
+  "statement": "noncomputable def IsLocallyConstantProEtaleModuleSheaf\n    (Y : Scheme.{t}) (A : Type t) [CommRing A]\n    (F : SheafOfModules.{t + 1}\n      ((sheafCompose (ProEt.topology Y)\n        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj\n          ((constantSheaf (ProEt.topology Y) CommRingCat.{t + 1}).obj\n            (CommRingCat.of (ULift.{t + 1, t} A))))) : Prop",
   "branch": "newtargets-dag",
-  "by": "NM",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "The recorded predicate accepts only SheafOfModules over the constant ring of ULift A with A : Type u. The recorded canonical module comparison accepts Sheaf (ModuleCat A) with A : Type (u+1), so that interface cannot state local constancy for its objects. This module retains the original ringed-site definitions by public import and supplies the same coverwise constant-module notion in fixed coefficients, with no finiteness or freeness assumptions.",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleFixedModuleSheaf"
-  ]
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "§1(B), exact existing interface repair. The recorded fixed ModuleCat-valued predicate cannot accept the intrinsic SheafOfModules objects in the recorded proEtaleDerivedCategory. Rebind to the existing ringed-site predicate already publicly imported by that fixed interface. It states exactly the node: a pro-etale cover with localized restrictions isomorphic to constant module sheaves, with arbitrary varying module models and no finiteness assumptions. No definition is duplicated, no underlying site or coefficient data is changed."
  }
 }

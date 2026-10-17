@@ -13,7 +13,8 @@
   "def-weil-etale-morphism",
   "def-weil-proetale-locally-constant-sheaf",
   "prop-weil-pbc-proetale-constant-exact",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof": [
   {
@@ -232,5 +233,27 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-23301488a (reviewer sub-agent of L); spot-checked: I read the item in full, all cited node statements, the unit sk-prop-a1-inv, main-20261015 prop-pur-a1-invariance Step 1, the parent's Step 3 (the only citer), Stacks 0F6C and the Mathlib lines (UniversallyOpen.lean:48 and :147, Etale.lean:111/114, EtalePoint.lean:37). The statement is correct. It needs A nonzero for the H^{-n} nonzero clause, uses joint surjectivity for the union and the lifts, and uses bounded cohomology for finiteness. I checked it on the empty Y, on empty members with unbounded n_alpha, on Spec k-bar with K=A[3], and on two components with different shifts. It is not a restatement of a parent clause and has no duplicate in the DAG. Steps 2 and 3 are correct. Step 1 (C1/E5): computing the stalk of L_alpha at the geometric point required lifting it into a pro-etale (weakly etale) trivializing member, and nothing cited gave this; the etale lifting leaf does not cover it. I repaired it in fixes/dag/nodes/sec-smooth-purity/lem-pur-etale-local-shift-partition.json. The lift now goes through lem-galois-fpqc-covering-base-change, def-weil-pbc-fpqc-covering, lem-weil-pbc-weakly-etale-composition-base-change, def-pc-fibre-product and lem-fix-weakly-etale-algclosed-section. The stalk identification now cites lem-weil-proetale-weakly-etale-localization and writes out the cofinality argument. I recomputed proof_deps and checked there is no cycle. I accept these off-unit tool uses: prop-weil-pbc-proetale-constant-exact, lem-weil-proetale-constant-sheaf-stalk, lem-fix-weakly-etale-algclosed-section, lem-weil-proetale-weakly-etale-localization. There are no new nodes and no statement change.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c8bf76bd",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Checked all hypotheses and eight conclusions against the node; all match. Shift sign correct (shift n gives degree -n). _hrank (locally isomorphic to the constant ring on a pro-etale cover) implies _hlocal (locally constant), so no stronger assumption. Edge cases hold: empty Y or empty index, empty members with any labels, A[3] gives degree -3, two components with different shifts, A=0 excluded; universes bound. Helper etaleLocalShiftLocus is a real set with source/blueprint docstrings. Theorem proof is only sorry; docstrings carry source place and proof steps; real pro-etale site used. lean.statement verbatim in file; no duplicate declaration. Item changes only lean plus one added landed stmt_dep (def-weil-pbc-proetale-operations, allowed). Report has Worker report and Second reading by Q135. Dependency def-weil-proetale-locally-constant-sheaf is re-pointed (1(B), with note) from NM's fixed-coefficient predicate to the original ringed-site IsLocallyConstantProEtaleModuleSheaf: needed, same notion. Side effect: NM's fixed-coefficient module loses its node record and landed lem-sf-proetale-lisse-finite-models uses it; the mirror situation existed before, so remark only. nt_compile.py: first run, dependency KFlat.lean hit the 60 s limit under load ~220; rerun rc=0, item compiled in 15.4 s with no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalShiftPartition",
+  "declaration": "AlgebraicGeometry.Scheme.etaleLocalShiftPartition",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleLocalShiftLocus",
+   "AlgebraicGeometry.Scheme.etaleLocalShiftPartition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalShiftPartition.lean",
+  "statement": "theorem etaleLocalShiftPartition (A : Type u) [CommRing A] [Finite A] [Nontrivial A] (Y : Scheme.{u}) (K : proEtaleDerivedCategory Y A) (_hK : Set.Finite {q : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y A)) q).obj K)}) (I : Type v) (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ Y) [∀ i : I, Etale (f i)] (_hcover : ∀ y : Y, ∃ i : I, y ∈ Set.range (f i)) (shift : I → ℤ) (L : ∀ i : I, proEtaleRingModules (U i) (proEtaleConstantRing (U i) A)) (_hlocal : ∀ i : I, IsLocallyConstantProEtaleModuleSheaf (U i) A (L i)) (_hrank : ∀ i : I, ∃ (J : Type (u + 1)) (V : J → (U i).ProEt) (g : ∀ j : J, V j ⟶ ProEt.mk (𝟙 (U i))), Presieve.ofArrows V g ∈ (ProEt.precoverage (U i)).coverings _ ∧ ∀ j : J, Nonempty ((L i).over (V j) ≅ SheafOfModules.unit (((sheafCompose (ProEt.topology (U i)) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing (U i) A)).over (V j)))) (_hshape : ∀ i : I, Nonempty ((proEtaleConstantRingDerivedPullback A (f i)).obj K ≅ ((DerivedCategory.singleFunctor (proEtaleRingModules (U i) (proEtaleConstantRing (U i) A)) 0).obj (L i))⟦shift i⟧)) : (∀ i j : I, (Set.range (f i) ∩ Set.range (f j)).Nonempty → shift i = shift j) ∧ Pairwise (fun n m : ℤ ↦ Disjoint (etaleLocalShiftLocus f shift n) (etaleLocalShiftLocus f shift m)) ∧ (∀ n : ℤ, IsClopen (etaleLocalShiftLocus f shift n)) ∧ (⋃ n : ℤ, etaleLocalShiftLocus f shift n) = Set.univ ∧ Set.Finite {n : ℤ | (etaleLocalShiftLocus f shift n).Nonempty} ∧ (∀ n : ℤ, (etaleLocalShiftLocus f shift n).Nonempty → ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y A)) (-n)).obj K)) ∧ (∀ i : I, Nonempty (U i) → Set.range (f i) ⊆ etaleLocalShiftLocus f shift (shift i)) ∧ (∀ y : Y, ∃ i : {i : I // Nonempty (U i)}, y ∈ Set.range (f i.val))",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
