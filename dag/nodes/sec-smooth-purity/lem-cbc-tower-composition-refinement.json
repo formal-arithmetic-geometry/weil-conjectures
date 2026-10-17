@@ -205,5 +205,31 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-16bd14b84 (reviewer sub-agent of L); spot-checked: I read the whole item, unchanged statement plus a 5-step proof, with no new nodes. I checked it against the full statements of all 6 cited nodes, Stacks more-etale 0F7B/0F7C/0F7D (l.2460ff, 2617ff, 2676ff; 0F7B needs only a commutative square, not a cartesian one), the main-20261015 thm-cbc-finite-torsion proof (l.33-43) and the citer's step 11. Step 2: the horizontal formula of lem-cbc-proper-open-interchange-coherence applied to squares (c1,c2,id,w) and R=(b1,b2,w,v), with the refinement normalization, gives alpha_v=(delta c1!)(b2! alpha_w); the types check. Step 3: the two vertical decompositions (R over tower 2, and tower 1 over (i1,i2,id,u)) have the same outer square because p_{Y,2}w=p_{Y,1} and p2 v=u p1. All verticals are proper and all horizontals open. Step 4 is the naturality of gamma_2 at alpha_w. Step 5: I recomputed each line; the compositor identifications follow from the direct-image coherence node, with q2 p2 v=q2 u p1=q1 p1. Coefficients are ordinary small-etale D^+ with Lambda finite (hence torsion), never identified with the pro-etale or adic categories. Edge cases checked: Lambda=0, X empty, identity refinement, and the noncartesian fold example. The tool use of lem-weil-pbc-extension-by-zero-exact is accepted as a generic exactness tool. There is no SGA citation and no cycle. lem-sp-compactification-refinement-coherence and the unbounded and pro-etale composition nodes are not duplicates: they are abstract, carry extra hypotheses, or use other categories. Minor, not changed: proper/open-immersion definitions reach the statement only through the compatible-tower node. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d29563c1d",
+  "group": "NE",
+  "result": "pass",
+  "note": "Statement, dependencies, ordinary derived route, edge cases, docstrings, proof plan, and recorded compile/preflight evidence checked; no faults found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TowerCompositionRefinement",
+  "declaration": "AlgebraicGeometry.Etale.cbcTowerComposition_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cbcOrdinaryGamma",
+   "AlgebraicGeometry.Etale.cbcTowerRefinementComponent",
+   "AlgebraicGeometry.Etale.cbcTowerOpenCompositionComponent",
+   "AlgebraicGeometry.Etale.cbcTowerCompositionComponent",
+   "AlgebraicGeometry.Etale.cbcTowerCompositeRefinementComponent",
+   "AlgebraicGeometry.Etale.cbcTowerComposition_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TowerCompositionRefinement.lean",
+  "statement": "theorem cbcTowerComposition_refinement (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (T₁ T₂ : Compactification.Triangle f h) [QuasiCompact T₁.cf.i] [QuasiCompact T₁.cg.i] [QuasiCompact T₁.cfg.i] [QuasiCompact T₁.q] [QuasiCompact T₂.cf.i] [QuasiCompact T₂.cg.i] [QuasiCompact T₂.cfg.i] [QuasiCompact T₂.q] (uY : T₁.cg.Z ⟶ T₂.cg.Z) (v : T₁.cfg.Z ⟶ T₂.cfg.Z) (w : T₁.cf.Z ⟶ T₂.cf.Z) [IsProper uY] [IsProper v] [IsProper w] (hi : T₁.cg.i ≫ uY = T₂.cg.i) (ha : T₁.cfg.i ≫ v = T₂.cfg.i) (hc : T₁.cf.i ≫ w = T₂.cf.i) (hb : T₁.q ≫ v = w ≫ T₂.q) (hp : v ≫ T₂.p = T₁.p ≫ uY) (hs : w ≫ T₂.cf.g = T₁.cf.g) (hq : uY ≫ T₂.cg.g = T₁.cg.g) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : cbcTowerCompositionComponent Λ T₂ K ≫ cbcTowerCompositeRefinementComponent Λ T₁ T₂ uY v ha hp hq K = (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) T₂.cg.g).map ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) T₂.cg.i).mapDerivedCategoryPlus.map (cbcTowerRefinementComponent Λ T₁.cf T₂.cf w hc hs.symm K)) ≫ cbcTowerRefinementComponent Λ T₁.cg T₂.cg uY hi hq.symm ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) T₁.cf.g).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) T₁.cf.i).mapDerivedCategoryPlus.obj K)) ≫ cbcTowerCompositionComponent Λ T₁ K",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
