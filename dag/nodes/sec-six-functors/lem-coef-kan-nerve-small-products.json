@@ -25,9 +25,68 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every simplicial degree n, an n-simplex of the degreewise product is a tuple of n-simplices, and all face and degeneracy operators act coordinatewise. Given a horn in the product, project it to each K_j and choose a Kan filler in K_j; the tuple of fillers is a filler in the product. The empty product is the terminal simplicial set Δ^0, which is Kan. Thus the degreewise product is a Kan complex, including the empty-family case.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Lurie, Higher Topos Theory (not in literature/; WANTED)",
+    "place": "Theorem 4.2.4.1, product case; coordinatewise horn filling"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-coherent-weight-limit-recognition] with $Y=J$ discrete, $\\mathcal D=\\mathbf{Kan}_{\\mathcal W}$, $F(j)=K_j$ and $L=P=\\prod_jK_j$. Work in an ambient universe containing this simplicial category. Here $P$ is an object of $\\mathcal D$: it is a Kan complex by step 1, and it is $\\mathcal W$-small because its $n$-simplices form the product $\\prod_{j}(K_j)_n$ of $\\mathcal W$-small sets over the $\\mathcal W$-small index set $J$, and a universe is closed under such products. Its mapping simplicial sets are Kan by [lem-coef-kan-coherent-nerve-quasicategory]. The simplex-colimit rigidification of [def-coef-infinity-category-of-spaces] makes $A=\\mathfrak C[J]$ discrete: every simplex of $J$ is degenerate at one vertex. The only nondegenerate simplices of $\\Delta^0\\star J$ are its vertices and the individual edges $b\\to j$; no two nonidentity arrows compose. Thus $B(b,j)=\\Delta^0$, so the weight $W_J$ is constant at $\\Delta^0$ on the discrete category $A$. The projections specify $\\lambda:W_J\\to\\mathcal D(P,F(-))$. For every Kan complex $Z$, an $n$-simplex of $\\underline{\\operatorname{Nat}}(W_J,\\mathcal D(Z,F(-)))$ is exactly a tuple of maps $Z\\times\\Delta^n\\to K_j$, without further naturality constraints. Such a tuple is uniquely a map $Z\\times\\Delta^n\\to P$, and these bijections commute with every simplicial operator. Consequently postcomposition with $\\lambda$ is an actual simplicial isomorphism from $\\mathcal D(Z,P)$ to this enriched natural-transformation simplicial set, hence a weak homotopy equivalence. The cited recognition lemma therefore makes the projection cone limiting, in exactly the comma-cone convention of the item. No product in $\\mathcal S_{\\mathcal W}$ is used in this computation. If $J$ is empty, $A$ is empty, the natural-transformation simplicial set and $\\operatorname{Fun}(Z,\\Delta^0)$ are both $\\Delta^0$; the same recognition proves terminality.",
+   "uses": [
+    "lem-coef-coherent-weight-limit-recognition",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lurie, Higher Topos Theory (not in literature/; WANTED)",
+    "place": "Agent specialization of the coherent-weight recognition statement to the discrete shape; HTT Theorem 4.2.4.1, Corollary 4.2.4.8 are WANTED."
+   }
+  },
+  {
+   "text": "Let $f_j:K_j\\to L_j$ be the given weak homotopy equivalences. In the model structure of [lem-coef-kan-quillen-model-right-proper-core], factor $(1,f_j):K_j\\to K_j\\times L_j$ as a trivial cofibration $i_j:K_j\\to Z_j$ followed by a Kan fibration $p_j:Z_j\\to K_j\\times L_j$. Set $r_j=\\operatorname{pr}_1p_j$ and $q_j=\\operatorname{pr}_2p_j$, so $r_ji_j=1$ and $q_ji_j=f_j$. Both $r_j,q_j$ are Kan fibrations: to lift a horn against $r_j$, first extend the missing $L_j$ coordinate using that $L_j$ is Kan, then lift the resulting horn square against $p_j$; for $q_j$ extend the $K_j$ coordinate instead. Since $i_j$ and $f_j$ are weak equivalences, two-out-of-three in this model structure gives that $r_j$ and $q_j$ are weak equivalences. Thus both are trivial fibrations. This construction uses the Kan hypotheses on BOTH $K_j$ and $L_j$ and does not assert that $f_j$ itself is a fibration.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent Ken Brown factorization of (identity,f); model factorization and two-out-of-three from the cited core node."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-model-product-weak-equivalence] to the two families of trivial fibrations $r_j:Z_j\\to K_j$ and $q_j:Z_j\\to L_j$ constructed in step 3. All degreewise products exist, so $R=\\prod_jr_j$ and $Q=\\prod_jq_j$ are weak equivalences. Put $I=\\prod_ji_j$. Coordinatewise composition gives $RI=1$ and $QI=\\prod_jf_j$. Two-out-of-three for the model structure of [lem-coef-kan-quillen-model-right-proper-core] first makes $I$ a weak equivalence from $RI=1$ and $R$, and then makes $QI$ a weak equivalence from $Q$ and $I$. This proves the final clause. For $J=\\varnothing$, every product map here is the identity of $\\Delta^0$.",
+   "uses": [
+    "lem-coef-model-product-weak-equivalence",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/ModelCategory/Instances.lean",
+    "place": "Instances.lean:276–288 (trivial-fibration products) and the explicit two-out-of-three argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-weight-limit-recognition",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-model-product-weak-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: product-of-frame-mapping-spaces input, expanded using coherent-weight recognition and the explicit Ken Brown argument. HTT is not archived; WANTED, not claimed read."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +108,94 @@
    "results": "not run: no LeanSearch/Loogle/LeanFinder access on the cc review server (msearch.py exists only on the Codex machine)",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "arbitrary small products of Kan complexes preserve weak homotopy equivalences",
+   "results": "CategoryTheory.hoFunctor.preservesFiniteProducts; CategoryTheory.hoFunctor.preservesBinaryProduct; CategoryTheory.hoFunctor.preservesBinaryProducts; CategoryTheory.hoFunctor.isIso_prodComparison; HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations",
+   "date": "2026-10-17",
+   "verdict": "general product hits; exact coherent-nerve statement absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet weak homotopy equivalence product Kan",
+   "results": "0 hits; loogle parser reports an application error at SSet",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*homotopy.*equiv.*prod|prod.*weak.*equiv in Mathlib/AlgebraicTopology",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "small products of Kan complexes in the homotopy coherent nerve of simplicial Kan complexes",
+   "results": "SSet.instQuasicategoryOfKanComplex, SSet.KanComplex, HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations, CategoryTheory.hoFunctor.isIso_prodComparison; no coherent-nerve product theorem",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degreewise product of Kan complexes is a limiting product in coherent nerve",
+   "results": "SSet.hasLimits; CategoryTheory.hoFunctor.preservesBinaryProduct; CategoryTheory.hoFunctor.preservesFiniteProducts; no homotopy-coherent Kan product theorem",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Limits.Pi.map WeakEquivalence",
+   "results": "0 hits; loogle reports Unknown identifier Limits.Pi.map",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Products section|Limits.Pi.map in Mathlib/AlgebraicTopology/ModelCategory/Instances.lean",
+   "results": "0 hits from msearch; direct source inspection found product instances at lines 252-290",
+   "date": "2026-10-17",
+   "verdict": "match after direct source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "Limits.Pi.map",
+   "results": "{\"t\": \"2026-10-17T13:43:10Z\", \"tool\": \"grep\", \"query\": \"Limits.Pi.map\", \"sub\": \"AlgebraicTopology/ModelCategory/Instances.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"279\", \"285\"], \"digest\": \"14f74b117f3daceb\"}",
+   "date": "2026-10-17",
+   "verdict": "The corrected generic trivial-fibration product leaf matches; it does not by itself state the item or the general weak-equivalence clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Products of maps that are both fibrations and weak equivalences are weak equivalences",
+   "results": "{\"t\": \"2026-10-17T13:43:11Z\", \"tool\": \"leansearch\", \"query\": \"Products of maps that are both fibrations and weak equivalences are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HomotopicalAlgebra.instIsMultiplicativeFibrations\", \"ContinuousMap.HomotopyEquiv.prodCongr\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"b5ed4ae381399389\"}",
+   "date": "2026-10-17",
+   "verdict": "The corrected generic trivial-fibration product leaf matches; it does not by itself state the item or the general weak-equivalence clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"Pi\"",
+   "results": "{\"t\": \"2026-10-17T13:43:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"Pi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CategoryWithWeakEquivalences\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.mk\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOpposite\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesFullSubcategory\", \"HomotopicalAlgebra.mem_weakEquivalences\"], \"digest\": \"dcc01d28fbaff4d9\"}",
+   "date": "2026-10-17",
+   "verdict": "The corrected generic trivial-fibration product leaf matches; it does not by itself state the item or the general weak-equivalence clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a model category the product of a small family of trivial fibrations is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T13:43:15Z\", \"tool\": \"leanfinder\", \"query\": \"In a model category the product of a small family of trivial fibrations is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instIsMultiplicativeTrivialFibrations\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.instIsMultiplicativeWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instIsMultiplicativeFibrations\"], \"digest\": \"f5a6fa79e0e455c5\"}",
+   "date": "2026-10-17",
+   "verdict": "The corrected generic trivial-fibration product leaf matches; it does not by itself state the item or the general weak-equivalence clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trivialFibrations\", \"Products\"",
+   "results": "{\"t\": \"2026-10-17T13:43:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"trivialFibrations\\\", \\\"Products\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\"], \"digest\": \"6f7f7bee38a47532\"}",
+   "date": "2026-10-17",
+   "verdict": "The corrected generic trivial-fibration product leaf matches; it does not by itself state the item or the general weak-equivalence clause."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -69,5 +212,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-nerve-small-products",
+  "worker": "stage1",
+  "summary": "Repair: retains the statement and coordinatewise horn-filling step. Replaces the circular Yoneda/product argument by coherent-weight recognition for the discrete weight W_J=Δ⁰ and an explicit degreewise enriched Nat isomorphism. Corrects the Mathlib leaf to trivial fibrations, with its full section hypothesis, and factors (identity,f_j) to deduce product invariance for weak equivalences between Kan complexes by two-out-of-three.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2 through the stated split route: the degreewise product of frame mapping Kan complexes is the product of mapping spaces, and componentwise weak equivalences give a weak equivalence on the product."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-967af1412",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-967af1412 (reviewer sub-agent of L); spot-checked: I read the whole delivery, its sources and the Mathlib file the new leaf cites. The item statement is unchanged; I compared it against the side project's current node. There are no cycles. All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses are needed, and no SGA source is used. Step 1: the product of Kan complexes is Kan, by filling horns one coordinate at a time; the empty product is Δ^0. This step is correctly marked elementary. Step 2: the hypotheses of lem-coef-coherent-weight-limit-recognition all hold. The mapping simplicial sets are Kan by the last clause of lem-coef-kan-coherent-nerve-quasicategory. Since J is discrete, 𝔆[J] is discrete, Δ^0⋆J is a fan of single edges, and B(b,j)=Δ^0. Then Nat(W_J,Fun(Z,K_-)) is ∏Fun(Z,K_j)≅Fun(Z,∏K_j), so postcomposition with the projections is an isomorphism. For discrete J the cone-comparison map of lem-coef-infinity-join-cone-calculus is an isomorphism, so the conclusion is exactly the item's comma-cone sense. For J empty this gives a terminal Δ^0. Gap repaired: step 2 did not say that P=∏K_j is 𝒲-small, which it must be to be an object of Kan_𝒲; I added that sentence. Step 3: the factorization of (1,f_j) through a trivial cofibration and a Kan fibration is correct. r_j and q_j are Kan fibrations because L_j and K_j are Kan, and they are weak equivalences by two-out-of-three. Step 4: with RI=1 and QI=∏f_j, two-out-of-three gives the last clause. New node lem-coef-model-product-weak-equivalence is a correct Mathlib leaf. Instances.lean:276 carries the section hypothesis that every f_i is a fibration, and lines 283–288 give the weak-equivalence instance for Pi.map. Basic.lean:85–91 supplies the required weak factorization system. The node is a self-contained statement with no proof, its blueprint fields and searches are present, it holds for J empty, and it does not restate a clause of the item. Searching the whole DAG found no duplicate for either node. The fix is the whole item file at fixes/dag/nodes/sec-six-functors/lem-coef-kan-nerve-small-products.json. The review is in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
