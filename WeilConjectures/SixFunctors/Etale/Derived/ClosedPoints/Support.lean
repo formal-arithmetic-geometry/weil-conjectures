@@ -214,10 +214,14 @@ lemma isZero_upperStar_supportedSections (U : X.Opens) :
   let P := (U.ι)^*[ModuleCat.{u + 1} Λ]
   have : IsIso (P.map (adj.unit.app F)) :=
     (NatIso.isIso_map_iff (upperStarIsoOpenImmersionRestriction _ U.ι) _).2 this
-  have h0 : P.map (supportedSectionsι F U) = 0 := by
-    rw [← cancel_mono (P.map (adj.unit.app F)), zero_comp, ← P.map_comp,
-      supportedSectionsι_comp_unit, P.map_zero]
-  exact IsZero.of_mono_eq_zero _ h0
+  have hmono : Mono (P.map (supportedSectionsι F U)) := Functor.map_mono P _
+  have hm : Mono (P.map (adj.unit.app F)) := IsIso.mono_of_iso _
+  have h1 : P.map (supportedSectionsι F U) ≫ P.map (adj.unit.app F) =
+      0 ≫ P.map (adj.unit.app F) := by
+    rw [← P.map_comp, supportedSectionsι_comp_unit, P.map_zero, zero_comp]
+  have h0 : P.map (supportedSectionsι F U) = 0 :=
+    (@cancel_mono _ _ _ _ _ (P.map (adj.unit.app F)) hm _ _).1 h1
+  exact @IsZero.of_mono_eq_zero _ _ _ _ _ _ hmono h0
 
 /-- The unit `F ⟶ j_* j^* F` on sections over `W` is the restriction to `W ×_X U`. -/
 lemma openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app (U : X.Opens)
@@ -300,8 +304,9 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
     refine (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) (Sigma.desc ψ)).1 ⟨fun {W} s ↦ ?_⟩
     rw [mem_smallEtaleTopology_iff]
     intro w
-    obtain ⟨O, hO, hwO, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+    obtain ⟨O', hO, hwO, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp
       W.left.isBasis_affineOpens) (show w ∈ (⊤ : W.left.Opens) from trivial)
+    let O : W.left.Opens := O'
     have : Etale W.hom := W.prop
     let V : X.Etale := Scheme.Etale.mk (O.ι ≫ W.hom)
     let g : V ⟶ W := MorphismProperty.Over.homMk O.ι rfl
@@ -312,7 +317,7 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
     obtain ⟨z, hz⟩ := exists_supportedSectionsι_app_eq F (U ⟨S, hSf, hSc⟩) (F.obj.map g.op s)
       fun v hv ↦ hS v hv
     refine ⟨V, g, ⟨(Sigma.ι G ⟨S, hSf, hSc⟩).hom.app (op V) z, ?_⟩, ⟨⟨w, hwO⟩, rfl⟩⟩
-    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← Sheaf.comp_hom, Sigma.ι_desc]
+    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← Sheaf.Hom.comp_hom, Sigma.ι_desc]
     exact hz
   exact isGloballyGenerated_of_epi_sigmaDesc Λ ψ hG
 

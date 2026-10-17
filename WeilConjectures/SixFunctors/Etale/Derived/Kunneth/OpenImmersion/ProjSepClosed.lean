@@ -6,8 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.ExchangeCompat
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
+public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
@@ -49,9 +51,10 @@ lemma isZero_map_homology_obj₃_of_isIso (Φ : C ⥤ D) [PreservesFiniteLimits 
   have e₃ := (HomologySequence.exact₃ T hT n (n + 1) rfl).map Φ
   have e₁ := (HomologySequence.exact₁ T hT n (n + 1) rfl).map Φ
   have hg : Φ.map ((homologyFunctor C n).map T.mor₂) = 0 :=
-    e₂.epi_f_iff.1 (by infer_instance)
+    e₂.epi_f_iff.1 (inferInstanceAs (Epi (Φ.map ((homologyFunctor C n).map T.mor₁))))
   have hδ : Φ.map (HomologySequence.δ T n (n + 1) rfl) = 0 :=
-    e₁.mono_g_iff.1 (by infer_instance)
+    e₁.mono_g_iff.1
+      (inferInstanceAs (Mono (Φ.map ((homologyFunctor C (n + 1)).map T.mor₁))))
   exact e₃.isZero_X₂ hg hδ
 
 end DerivedCategory
@@ -74,7 +77,10 @@ theorem Etale.isIso_rightDerivedGlobalSections_map_unboundedExchange_of_isProper
     (E : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).map
       (Etale.unboundedExchange (ModuleCat.{u + 1} Λ) sq.toCommSq E)) := by
-  sorry
+  refine Etale.isIso_rightDerivedGlobalSections_map_derivedBaseChangeMap_of_isProper Λ
+    (fun x ↦ isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, Nat.pos_of_ne_zero hn₀, ?_⟩) aX aY q₁ q₂ hW
+    j e h sq E
+  rw [nsmul_eq_mul, hΛ, zero_mul]
 
 /-- Blueprint `lem-kun-0f1h`, the projective case over a separably closed field: for `K`
 separably closed and `Y` proper over `K`, if the base change map at `F` is an isomorphism on the
@@ -130,17 +136,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_isSepClosed {K : Type u
             ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).hom).2
         (Etale.isIso_rightDerivedGlobalSections_map_unboundedExchange_of_isProper Λ aX aY j q₁
           q₂ hW e h sq n hn₀ hΛ _)
-    let c := q₁ ≫ aX
-    let ε := Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) c
-    have hc : IsIso ((R((c)_*[ModuleCat.{u + 1} Λ])).map (DerivedCategory.Plus.ι.map β)) := by
-      have : IsIso ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of K))).map
-          ((R((c)_*[ModuleCat.{u + 1} Λ])).map (DerivedCategory.Plus.ι.map β))) :=
-        (NatIso.isIso_map_iff ε _).2 hRΓ
-      exact isIso_of_reflects_iso _
-        (Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of K)))
-    have := (R((c)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hT'
-    refine (DerivedCategory.homologyFunctor _ k).map_isZero ?_
-    exact ((Etale.rightDerivedGlobalSections _ (Spec (.of K))).map_isZero
-      ((Triangle.isZero₃_iff_isIso₁ _ this).2 hc)).of_iso (ε.app _).symm
+    have : (Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).IsTriangulated :=
+      inferInstanceAs
+        ((Sheaf.Γ W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctor.IsTriangulated)
+    have := (Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).map_distinguished _ hT'
+    exact (DerivedCategory.homologyFunctor _ k).map_isZero
+      ((Triangle.isZero₃_iff_isIso₁ _ this).2 hRΓ)
 
 end AlgebraicGeometry

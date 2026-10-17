@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.DescentDiagram
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.DescentStalkColimit
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
@@ -54,8 +54,26 @@ affine schemes) with affine transition maps, and write `pᵢ : X ⟶ Xᵢ`. For 
 `pᵢ^* pᵢ_* F ⟶ F` is an isomorphism. Here `i ↦ pᵢ^* pᵢ_* F` is
 `AlgebraicGeometry.Etale.descentDiagram`. -/
 theorem isIso_colimitDesc_descentCocone :
-    IsIso (colimit.desc _ (descentCocone (ModuleCat.{u + 1} Λ) c F)) :=
-  sorry
+    IsIso (colimit.desc _ (descentCocone (ModuleCat.{u + 1} Λ) c F)) := by
+  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun s ↦ ?_
+  rw [Scheme.uliftPointSmallEtale,
+    NatIso.isIso_map_iff ((Scheme.pointSmallEtale (c.pt.algClosurePoint s)).uliftSheafFiberIso _)]
+  have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) := ModuleCat.hasLimitsOfSize.{u, u, u + 1}
+  have : PreservesColimitsOfShape Iᵒᵖ
+      ((Scheme.pointSmallEtale (c.pt.algClosurePoint s)).sheafFiber (A := ModuleCat.{u + 1} Λ)) :=
+    ((Scheme.pointSmallEtale (c.pt.algClosurePoint s)).skyscraperSheafAdjunction
+      (A := ModuleCat.{u + 1} Λ)).leftAdjoint_preservesColimits.preservesColimitsOfShape
+  let P := isColimitOfPreserves (Scheme.pointSmallEtale (c.pt.algClosurePoint s)).sheafFiber
+    (colimit.isColimit (descentDiagram (ModuleCat.{u + 1} Λ) c F))
+  let Q := isColimitSheafFiberMapCoconeDescentCocone hc F (c.pt.algClosurePoint s)
+  have e : (Scheme.pointSmallEtale (c.pt.algClosurePoint s)).sheafFiber.map
+      (colimit.desc _ (descentCocone (ModuleCat.{u + 1} Λ) c F)) =
+      (P.coconePointUniqueUpToIso Q).hom :=
+    P.hom_ext fun j ↦ by
+      rw [IsColimit.comp_coconePointUniqueUpToIso_hom]
+      simp [← Functor.map_comp]
+  rw [e]
+  infer_instance
 
 /-- The counits `pᵢ^* pᵢ_* F ⟶ F` exhibit `F` as the colimit of the sheaves `pᵢ^* pᵢ_* F`
 (blueprint `lem-kun-descent-limit`, see
