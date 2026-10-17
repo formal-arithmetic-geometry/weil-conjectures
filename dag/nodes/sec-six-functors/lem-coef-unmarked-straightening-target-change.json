@@ -1,0 +1,68 @@
+{
+ "id": "lem-coef-unmarked-straightening-target-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction: foundational left-fibration indexing model. Change of the target simplicial category for unmarked cone straightening; identifies the cone diagram over the counit with the left Kan extension of the cone diagram over C[S] in the ordinary-base straightening comparison (step 8 of lem-coef-space-valued-straightening).",
+   "via": [
+    "lem-coef-space-valued-straightening",
+    "lem-coef-kan-relative-nerve-left-fibration",
+    "def-coef-complete-algebroid",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unmarked cone straightening along a change of target is enriched left Kan extension",
+ "statement": "Use simplicial sets of [def-cbc-enhanced-diagrams-cones], and the small simplicial categories, coherent realization $\\mathfrak C$, ordered cone $X\\star\\Delta^0$ with last vertex $v$, cone pushout and enriched natural transformations of [lem-coef-unmarked-straightening-quillen]. Fix a small simplicial set $S$, small simplicial categories $D$ and $D'$, a simplicial functor $\\phi:\\mathfrak C[S]\\to D^{\\mathrm{op}}$ and a simplicial functor $\\pi:D\\to D'$, and put $\\phi'=\\pi^{\\mathrm{op}}\\circ\\phi:\\mathfrak C[S]\\to D'^{\\mathrm{op}}$. For $a:X\\to S$ and $\\psi\\in\\{\\phi,\\phi'\\}$ with target $E^{\\mathrm{op}}$ ($E=D$ or $E=D'$), put $M_{a,\\psi}=\\mathfrak C[X\\star\\Delta^0]\\amalg_{\\mathfrak C[X]}E^{\\mathrm{op}}$, the categorical pushout of simplicial categories along $\\psi\\circ\\mathfrak C[a]$, and let $L_\\psi(X):E\\to\\mathsf{sSet}$ be $e\\mapsto M_{a,\\psi}(e,v)$ with action by precomposition. Write $\\pi^*G=G\\circ\\pi$ for a simplicial functor $G:D'\\to\\mathsf{sSet}$, and $\\pi_!$ for enriched left Kan extension, the left adjoint of $\\pi^*$ on simplicial functors and enriched natural transformations, characterized by natural bijections $\\operatorname{Nat}(\\pi_!H,G)\\cong\\operatorname{Nat}(H,\\pi^*G)$.\n\nThe simplicial functor $M_{a,\\phi}\\to M_{a,\\phi'}$ which is $\\pi^{\\mathrm{op}}$ on $D^{\\mathrm{op}}$ and the identity on $\\mathfrak C[X\\star\\Delta^0]$ fixes $v$ and induces a natural map $L_\\phi(X)\\to\\pi^*L_{\\phi'}(X)$. Its adjoint\n$$\\pi_!L_\\phi(X)\\longrightarrow L_{\\phi'}(X)$$\nis an isomorphism of simplicial functors $D'\\to\\mathsf{sSet}$, natural in $X$ over $S$. Equivalently, defining $U_\\psi(G)$ to have as $n$-simplices over $\\sigma:\\Delta^n\\to S$ the enriched natural maps $L_\\psi(\\Delta^n\\xrightarrow{\\sigma}S)\\to G$, with operators induced by simplex operators, there is an isomorphism of simplicial sets over $S$, $U_{\\phi'}(G)\\cong U_\\phi(\\pi^*G)$, natural in $G:D'\\to\\mathsf{sSet}$. These isomorphisms are the identity for $\\pi=\\mathrm{id}$, compatible with composites $D\\to D'\\to D''$, and compatible with maps $X\\to Y$ over $S$. No Kan, local Kan, Dwyer--Kan, fibrancy or cofibrancy hypothesis is imposed.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.2.1, the straightening construction (St_phi X)(C)=Map_M(C,v) (printed p.73), and Proposition 2.2.1.1(2) (printed p.74), which HTT calls an obvious functoriality property and states without proof; the right-adjoint form follows by adjunction. Read in the sandbox copy of the PDF (April 9, 2017 text); not archived in literature/. No Stacks tag states this result. The marked analogue is part of lem-coef-marked-cone-straightening-quillen, which assumes a locally Kan target and so does not apply to the identity of C[S]."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-unmarked-straightening-quillen"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'straighten|unstraighten|coherentNerve|homotopyCoherent' Mathlib/AlgebraicTopology (pinned mathlib of ~/weil-conjectures-sheaf/lean)",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has no straightening or coherent-realization construction"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'lan|leftKan' Mathlib/AlgebraicTopology/SimplicialCategory Mathlib/CategoryTheory/Enriched; rg 'SimplicialThickening' Mathlib/AlgebraicTopology/SimplicialNerve.lean",
+   "results": "no enriched left Kan extension; SimplicialNerve.lean:24,54-94 defines only the simplicial thickening and the homotopy coherent nerve",
+   "date": "2026-10-17",
+   "verdict": "no match: neither enriched left Kan extension nor the cone pushout exists in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "not run",
+   "results": "not run",
+   "date": "2026-10-17",
+   "verdict": "unavailable: the maintainer-review sandbox has no LeanSearch, Loogle or LeanFinder access; the semantic searches remain to be recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "maintainer-reader",
+  "item": "lem-coef-space-valued-straightening",
+  "date": "2026-10-17",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
