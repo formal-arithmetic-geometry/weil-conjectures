@@ -100,12 +100,18 @@
   "is": null
  },
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap",
+  "declaration": "AlgebraicGeometry.Etale.mono_baseChangeHomologyMap",
   "declarations": [
    "AlgebraicGeometry.Etale.mono_baseChangeHomologyMap",
    "AlgebraicGeometry.Etale.mono_cokernelMap"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 03:40 UTC for group Q01, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: mono_baseChangeHomologyMap gives clause (1), and mono_cokernelMap gives clause (2)."
+  "statement": "theorem Etale.mono_baseChangeHomologyMap (q : ℤ) (hq : 1 ≤ q)\n    (hprev : Etale.BaseChangeProperty Λ p (q - 1)) [QuasiCompact g] [QuasiSeparated g]\n    (sq : IsPullback e h g p) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Mono (Etale.baseChangeHomologyMap Λ sq q F)",
+  "branch": "slopmaster2",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The two existing declarations together state clauses (1) and (2), respectively. Both use only fixed-base, single-degree Etale.BaseChangeProperty Λ p (q - 1), q ≥ 1, qcqs g and the Cartesian square; no universal, annihilator or invertibility assumption. The primary signature is verbatim; the second signature and the common section binders are reproduced in the worker report."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -135,5 +141,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ecda82fb7",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Delivery binds existing sorry-free theorems Etale.mono_baseChangeHomologyMap (clause 1) and Etale.mono_cokernelMap (clause 2) in SmoothBaseChange.Injectivity.CriticalMap. Only the node's lean field changed, plus the report. Clause-by-clause match: fixed-base single-degree BaseChangeProperty Λ p (q-1), q≥1, qcqs g, IsPullback e h g p, all Λ-module sheaves, canonical baseChangeHomologyMap, and for clause 2 the cokernel.map induced by baseChangeHomologyMap_naturality for mono α. No universal/annihilator/invertibility hypothesis; universes follow the sk-def-bc u/u+1 convention. lean.statement verbatim with lines 82-85 (script-checked). Stacks 0F03 read at etale-cohomology.tex:16869; fixed-base form consistent with its proof. Edge cases q=1, Λ=0, zero/empty, identity checked. nt_compile probe clean, axioms only propext/Classical.choice/Quot.sound. Report has real Worker and Second reading sections. No findings."
  }
 }
