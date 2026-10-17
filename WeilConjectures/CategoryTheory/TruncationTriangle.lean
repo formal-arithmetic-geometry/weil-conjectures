@@ -286,3 +286,130 @@ theorem truncation_triangle (A : Type u) [Category.{v} A] [Abelian A]
       exact ⟨truncation_isGE K n (q - 1), truncation_isGE K n q, inferInstance⟩
 
 end DerivedCategory
+
+namespace CochainComplex
+
+variable {A : Type u} [Category.{v} A] [Abelian A]
+
+/-- **Cohomology of the canonical truncation.** For a cochain complex `K` and `n : ℤ`, the
+inclusion `c_n : τ_{≤ n} K ⟶ K` induces isomorphisms `Hⁱ(τ_{≤ n} K) ≅ Hⁱ(K)` for `i ≤ n`
+(Mathlib's `CochainComplex.quasiIsoAt_ιTruncLE`), `Hⁱ(τ_{≤ n} K) = 0` for `i > n`, and
+`τ_{≤ n} K` is strictly `≥ a` if `K` is.
+This is blueprint `lem-weil-pbc-truncation-cohomology` (for the statement in the derived
+category see `DerivedCategory.truncation_cohomology`). -/
+theorem truncation_cohomology (K : CochainComplex A ℤ) (n : ℤ) :
+    (∀ i ≤ n, QuasiIsoAt (K.ιTruncLE n) i) ∧
+      (∀ i, n < i → IsZero ((K.truncLE n).homology i)) ∧
+      (∀ a, K.IsStrictlyGE a → (K.truncLE n).IsStrictlyGE a) := by
+  refine ⟨fun i hi ↦ K.quasiIsoAt_ιTruncLE n i hi, fun i hi ↦ (K.truncLE n).isZero_of_isLE n i hi,
+    fun a _ ↦ ?_⟩
+  rw [CochainComplex.isStrictlyGE_iff]
+  intro i hi
+  have : Mono ((K.ιTruncLE n).f i) :=
+    inferInstanceAs (Mono ((HomologicalComplex.ιTruncLE K (ComplexShape.embeddingUpIntLE n)).f i))
+  exact IsZero.of_mono ((K.ιTruncLE n).f i) (K.isZero_of_isStrictlyGE a i hi)
+
+end CochainComplex
+
+namespace DerivedCategory
+
+variable {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+
+/-- **Cohomology of the canonical truncation in the derived category**: the image under `Q` of
+`c_n : τ_{≤ n} K ⟶ K` is an isomorphism on `Hⁱ` for `i ≤ n`, and `Hⁱ(Q(τ_{≤ n} K)) = 0` for
+`i > n` (blueprint `lem-weil-pbc-truncation-cohomology`, see
+`CochainComplex.truncation_cohomology`). -/
+theorem truncation_cohomology (K : CochainComplex A ℤ) (n : ℤ) :
+    (∀ i ≤ n, IsIso ((homologyFunctor A i).map (Q.map (K.ιTruncLE n)))) ∧
+      (∀ i, n < i → IsZero ((homologyFunctor A i).obj (Q.obj (K.truncLE n)))) := by
+  refine ⟨fun i hi ↦ ?_, fun i hi ↦ ?_⟩
+  · have := K.quasiIsoAt_ιTruncLE n i hi
+    exact (NatIso.isIso_map_iff (homologyFunctorFactors A i) (K.ιTruncLE n)).2
+      (inferInstanceAs (IsIso (HomologicalComplex.homologyMap (K.ιTruncLE n) i)))
+  · exact IsZero.of_iso ((CochainComplex.truncation_cohomology K n).2.1 i hi)
+      ((homologyFunctorFactors A i).app _)
+
+/-- Part (a) of blueprint `lem-weil-pbc-truncation-descends`: the canonical truncation
+`τ_{≤ q}` and the functor `Hᵠ(-)[-q]` on cochain complexes preserve quasi-isomorphisms. -/
+theorem quasiIso_truncLEMap_and_singleFunctor_map_homologyMap {K L : CochainComplex A ℤ}
+    (s : K ⟶ L) [QuasiIso s] (q : ℤ) :
+    QuasiIso (CochainComplex.truncLEMap s q) ∧
+      QuasiIso ((CochainComplex.singleFunctor A q).map (HomologicalComplex.homologyMap s q)) :=
+  ⟨(CochainComplex.quasiIso_truncLEMap_iff s q).2 (fun _ _ ↦ inferInstance), inferInstance⟩
+
+/-- The canonical truncation `τ_{≤ q}` followed by `Q` inverts quasi-isomorphisms. -/
+lemma isInvertedBy_truncLEFunctor_comp_Q (q : ℤ) :
+    (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).IsInvertedBy
+      ((ComplexShape.embeddingUpIntLE q).truncLEFunctor A ⋙ Q) := fun _ _ s hs ↦
+  have : QuasiIso s := hs
+  (isIso_Q_map_iff_quasiIso A _).2 (quasiIso_truncLEMap_and_singleFunctor_map_homologyMap s q).1
+
+/-- The functor `Hᵠ(-)[-q]` followed by `Q` inverts quasi-isomorphisms. -/
+lemma isInvertedBy_homologySingle_comp_Q (q : ℤ) :
+    (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).IsInvertedBy
+      ((HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q ⋙
+        CochainComplex.singleFunctor A q) ⋙ Q) := fun _ _ s hs ↦
+  have : QuasiIso s := hs
+  (isIso_Q_map_iff_quasiIso A _).2 (quasiIso_truncLEMap_and_singleFunctor_map_homologyMap s q).2
+
+/-- The canonical truncation `τ_{≤ q} : D(A) ⥤ D(A)`, descended from complexes along `Q`. -/
+noncomputable def truncLEDesc (q : ℤ) : DerivedCategory A ⥤ DerivedCategory A :=
+  Localization.lift _ (isInvertedBy_truncLEFunctor_comp_Q q) Q
+
+/-- The functor `Hᵠ(-)[-q] : D(A) ⥤ D(A)`, descended from complexes along `Q`. -/
+noncomputable def homologySingleDesc (q : ℤ) : DerivedCategory A ⥤ DerivedCategory A :=
+  Localization.lift _ (isInvertedBy_homologySingle_comp_Q (A := A) q) Q
+
+/-- The isomorphism `Q ⋙ τ_{≤ q} ≅ τ_{≤ q} ⋙ Q`. -/
+noncomputable def truncLEDescFactors (q : ℤ) :
+    Q ⋙ truncLEDesc q ≅ (ComplexShape.embeddingUpIntLE q).truncLEFunctor A ⋙ Q :=
+  Localization.fac _ _ _
+
+/-- The isomorphism `Q ⋙ Hᵠ(-)[-q] ≅ Hᵠ(-)[-q] ⋙ Q`. -/
+noncomputable def homologySingleDescFactors (q : ℤ) :
+    Q ⋙ homologySingleDesc q ≅ (HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q ⋙
+      CochainComplex.singleFunctor A q) ⋙ Q :=
+  Localization.fac _ _ _
+
+private lemma existsUnique_liftNatTrans {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (W : MorphismProperty C) (L : C ⥤ D) [L.IsLocalization W] {F G : C ⥤ E}
+    (hF : W.IsInvertedBy F) (hG : W.IsInvertedBy G) (τ : F ⟶ G) :
+    ∃! τ' : Localization.lift F hF L ⟶ Localization.lift G hG L, ∀ X,
+      τ'.app (L.obj X) = (Localization.fac F hF L).hom.app X ≫ τ.app X ≫
+        (Localization.fac G hG L).inv.app X := by
+  refine ⟨Localization.liftNatTrans L W F G _ _ τ, fun X ↦ ?_, fun τ' h ↦ ?_⟩
+  · rw [Localization.liftNatTrans_app]
+    rfl
+  · refine Localization.natTrans_ext L W fun X ↦ ?_
+    rw [h, Localization.liftNatTrans_app]
+    rfl
+
+/-- **Truncations descend to the derived category** (blueprint
+`lem-weil-pbc-truncation-descends`).
+(a) `τ_{≤ q}` and `Hᵠ(-)[-q]` preserve quasi-isomorphisms
+(`DerivedCategory.quasiIso_truncLEMap_and_singleFunctor_map_homologyMap`); hence they descend to
+functors `DerivedCategory.truncLEDesc q` and `DerivedCategory.homologySingleDesc q` on `D(A)` with
+isomorphisms `DerivedCategory.truncLEDescFactors` and `DerivedCategory.homologySingleDescFactors`
+(unique up to unique isomorphism: `CategoryTheory.Localization.liftNatIso`,
+`CategoryTheory.Localization.natTrans_ext`).
+(b) Every natural transformation `i_q : τ_{≤ q - 1} ⟶ τ_{≤ q}` and `j_q : τ_{≤ q} ⟶ Hᵠ(-)[-q]` of
+functors on complexes descends to a unique natural transformation of the descended functors whose
+component at `Q K` is `Q(i_q)`, resp. `Q(j_q)`, up to these isomorphisms. Naturality of the
+descended transformations gives `τ_{≤ q} f ∘ i_q = i_q ∘ τ_{≤ q - 1} f` and
+`Hᵠ(f)[-q] ∘ j_q = j_q ∘ τ_{≤ q} f` for every morphism `f` of `D(A)`. -/
+theorem truncation_descends (q : ℤ)
+    (i : (ComplexShape.embeddingUpIntLE (q - 1)).truncLEFunctor A ⟶
+      (ComplexShape.embeddingUpIntLE q).truncLEFunctor A)
+    (j : (ComplexShape.embeddingUpIntLE q).truncLEFunctor A ⟶
+      HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q ⋙
+        CochainComplex.singleFunctor A q) :
+    (∃! i' : truncLEDesc (A := A) (q - 1) ⟶ truncLEDesc q, ∀ K,
+      i'.app (Q.obj K) = (truncLEDescFactors (q - 1)).hom.app K ≫ Q.map (i.app K) ≫
+        (truncLEDescFactors q).inv.app K) ∧
+    (∃! j' : truncLEDesc (A := A) q ⟶ homologySingleDesc q, ∀ K,
+      j'.app (Q.obj K) = (truncLEDescFactors q).hom.app K ≫ Q.map (j.app K) ≫
+        (homologySingleDescFactors q).inv.app K) :=
+  ⟨existsUnique_liftNatTrans _ Q _ _ (Functor.whiskerRight i Q),
+    existsUnique_liftNatTrans _ Q _ _ (Functor.whiskerRight j Q)⟩
+
+end DerivedCategory

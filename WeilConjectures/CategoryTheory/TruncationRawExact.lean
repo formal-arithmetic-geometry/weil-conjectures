@@ -235,4 +235,59 @@ theorem truncation_raw_exact
         (fun n ↦ (DerivedCategory.homologyFunctor B n).map
           (TruncationCouple.derivedTriangle F K (q + 1)).mor₂) (by omega)
 
+set_option backward.defeqAttrib.useBackward true in
+/-- **The truncation couple is an exact couple.** Let `F : A ⥤ B` be left exact and additive
+between Grothendieck abelian categories and let `K` be a bounded below complex with
+`Hᵠ(K) = 0` for `q < a`. The three structure maps `α`, `f`, `g` of the truncation couple
+`CategoryTheory.truncationCouple F K a ha` (of bidegrees `(-1, +1)`, `(+2, -1)` and `(0, 0)`)
+satisfy: `f ≫ α = 0`, `g ≫ f = 0` and `α ≫ g = 0`, and the three corresponding sequences are
+exact. This is blueprint `lem-sp-truncation-couple-exact`; it is deduced from
+`CategoryTheory.truncation_raw_exact`. The same couple, as a bundled
+`CategoryTheory.ExactCouple`, is `CategoryTheory.Functor.truncationCouple`. -/
+theorem truncationCouple_exact
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
+    {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
+    (K : CochainComplex.Plus A) (a : ℤ) (ha : ∀ q : ℤ, q < a → IsZero (K.obj.homology q)) :
+    letI := HasDerivedCategory.standard A
+    letI := HasDerivedCategory.standard B
+    (truncationCouple F K a ha).1 = TruncationCouple.D F K ∧
+    (truncationCouple F K a ha).2.1 = TruncationCouple.E F K ∧
+    (∀ p q : ℤ,
+      ∃ w : TruncationCouple.f F K p q ≫ TruncationCouple.alpha F K (p + 2) (q - 1) = 0,
+        (ShortComplex.mk _ _ w).Exact) ∧
+    (∀ p q : ℤ,
+      ∃ w : TruncationCouple.g F K p q ≫ TruncationCouple.f F K p q = 0,
+        (ShortComplex.mk _ _ w).Exact) ∧
+    (∀ p q : ℤ,
+      ∃ w : TruncationCouple.alpha F K p q ≫ TruncationCouple.g F K (p - 1) (q + 1) = 0,
+        (ShortComplex.mk _ _ w).Exact) := by
+  letI := HasDerivedCategory.standard A
+  letI := HasDerivedCategory.standard B
+  have h := truncation_raw_exact F K
+  dsimp only at h
+  obtain ⟨h₁, h₂, h₃⟩ := h
+  refine ⟨rfl, rfl, h₁, fun p q ↦ ?_, fun p q ↦ ?_⟩
+  · have key : ∀ (p' q' : ℤ) (_ : p' = p) (_ : q' = q)
+        (e : TruncationCouple.E F K p q = TruncationCouple.E F K p' q')
+        (w : (TruncationCouple.g F K p q ≫ eqToHom e) ≫ TruncationCouple.f F K p' q' = 0),
+        (ShortComplex.mk _ _ w).Exact →
+        ∃ w : TruncationCouple.g F K p q ≫ TruncationCouple.f F K p q = 0,
+          (ShortComplex.mk _ _ w).Exact := by
+      rintro p' q' rfl rfl e w hw
+      exact exact_transport _ _ w hw (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp) (by simp)
+    obtain ⟨w, hw⟩ := h₂ p q
+    exact key _ _ (by simp) (by simp) _ w hw
+  · have key : ∀ (p' q' : ℤ) (_ : p' = p - 1) (_ : q' = q + 1)
+        (e : TruncationCouple.E F K (p - 1) (q + 1) = TruncationCouple.E F K p' q')
+        (w : TruncationCouple.alpha F K p q ≫ (TruncationCouple.g F K (p - 1) (q + 1) ≫
+          eqToHom e) = 0),
+        (ShortComplex.mk _ _ w).Exact →
+        ∃ w : TruncationCouple.alpha F K p q ≫ TruncationCouple.g F K (p - 1) (q + 1) = 0,
+          (ShortComplex.mk _ _ w).Exact := by
+      rintro p' q' rfl rfl e w hw
+      exact exact_transport _ _ w hw (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp) (by simp)
+    obtain ⟨w, hw⟩ := h₃ p q
+    exact key _ _ (by simp) (by simp) _ w hw
+
 end CategoryTheory

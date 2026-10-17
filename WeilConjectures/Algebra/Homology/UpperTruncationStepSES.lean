@@ -17,6 +17,16 @@ import WeilConjectures.Algebra.Homology.TwoTermCoimageQuasiIso
 
 Source: Stacks Project, Homology, Section 12.15 (Tag 0118), and Derived Categories,
 Remark 13.12.4 (Tag 08J5) (blueprint: lem-weil-pbc-truncation-step-ses).
+
+## Blueprint pointers
+
+- `lem-weil-pbc-cochain-complexes-degreewise-exact`: (1) the instance
+  `Abelian (HomologicalComplex C c)` of `Mathlib.Algebra.Homology.HomologicalComplexAbelian`;
+  (2) `HomologicalComplex.shortExact_iff_degreewise_shortExact`; (3)
+  `CategoryTheory.ShortComplex.ShortExact.epi_g` and
+  `CategoryTheory.ShortComplex.ShortExact.gIsCokernel`;
+- `lem-weil-pbc-coimage-mono`: the instance `CategoryTheory.Abelian.instMonoFactorThruCoimage`
+  (`Mono (Abelian.factorThruCoimage f)`), with `CategoryTheory.Abelian.coimage.fac`.
 -/
 
 @[expose] public section

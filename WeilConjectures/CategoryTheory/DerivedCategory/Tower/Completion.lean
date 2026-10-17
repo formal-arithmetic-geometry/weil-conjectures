@@ -86,6 +86,19 @@ noncomputable def reductionTowerMap (φ : P ⟶ P') : reductionTower P ⟶ reduc
     (Functor.whiskerLeft (CochainComplex.ιKFlat A)
       (Functor.whiskerRight (tensorTowerFunctorMap φ) Q))
 
+lemma tensorTowerFunctorMap_comp {P'' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (φ : P ⟶ P') (ψ : P' ⟶ P'') :
+    tensorTowerFunctorMap (φ ≫ ψ) = tensorTowerFunctorMap φ ≫ tensorTowerFunctorMap ψ := by
+  simp only [tensorTowerFunctorMap, Functor.map_comp, Functor.whiskerRight_comp,
+    Functor.whiskerLeft_comp]
+
+lemma reductionTowerMap_comp {P'' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (φ : P ⟶ P') (ψ : P' ⟶ P'') :
+    reductionTowerMap (φ ≫ ψ) = reductionTowerMap φ ≫ reductionTowerMap ψ := by
+  apply Localization.natTrans_ext (TensorCommShift₂.LKFlat A) (kFlatQuasiIso A)
+  intro X
+  simp only [NatTrans.comp_app, reductionTowerMap, Localization.liftNatTrans_app,
+    Category.assoc, Iso.inv_hom_id_app_assoc, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, tensorTowerFunctorMap_comp, Functor.map_comp]
+
 end Functoriality
 
 section Augmentation
@@ -155,6 +168,32 @@ noncomputable def completionMap {P : ℕᵒᵖ ⥤ CochainComplex A ℤ}
     (ε : (Functor.const ℕᵒᵖ).obj (𝟙_ (CochainComplex A ℤ)) ⟶ P) :
     𝟭 (DerivedCategory A) ⟶ reductionTower P ⋙ rlim A :=
   (towerConstAdjunction A).unit ≫ Functor.whiskerRight (towerConstToReductionTower ε) (rlim A)
+
+lemma constToTensorTower_comp {P P' : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (ε : (Functor.const ℕᵒᵖ).obj (𝟙_ (CochainComplex A ℤ)) ⟶ P) (φ : P ⟶ P') :
+    constToTensorTower ε ≫ tensorTowerFunctorMap φ = constToTensorTower (ε ≫ φ) := by
+  simp only [constToTensorTower, tensorTowerFunctorMap_comp, Category.assoc]
+
+/-- The map `const K ⟶ K_•` is compatible with maps of coefficient towers. -/
+lemma towerConstToReductionTower_comp {P P' : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (ε : (Functor.const ℕᵒᵖ).obj (𝟙_ (CochainComplex A ℤ)) ⟶ P) (φ : P ⟶ P') :
+    towerConstToReductionTower ε ≫ reductionTowerMap φ = towerConstToReductionTower (ε ≫ φ) := by
+  apply Localization.natTrans_ext (TensorCommShift₂.LKFlat A) (kFlatQuasiIso A)
+  intro X
+  simp only [NatTrans.comp_app, reductionTowerMap, towerConstToReductionTower,
+    Localization.liftNatTrans_app, Category.assoc, Iso.inv_hom_id_app_assoc,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, ← Functor.map_comp,
+    ← constToTensorTower_comp]
+  rfl
+
+/-- The completion map is compatible with maps of coefficient towers: if `φ : P ⟶ P'` is
+compatible with the augmentations, then `comp^{P'} = R lim (φ) ∘ comp^P`. -/
+lemma completionMap_comp {P P' : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (ε : (Functor.const ℕᵒᵖ).obj (𝟙_ (CochainComplex A ℤ)) ⟶ P) (φ : P ⟶ P') :
+    completionMap ε ≫ Functor.whiskerRight (reductionTowerMap φ) (rlim A) =
+      completionMap (ε ≫ φ) := by
+  rw [completionMap, completionMap, Category.assoc, ← Functor.whiskerRight_comp,
+    towerConstToReductionTower_comp]
 
 end Augmentation
 

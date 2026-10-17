@@ -84,6 +84,8 @@ structure Hom (ρ ρ' : Reduction 𝔇 𝔗) where
 
 namespace Hom
 
+attribute [reassoc] commF commF' commG commG'
+
 variable {ρ} {ρ' : Reduction 𝔇 𝔗} (τ : Hom ρ ρ')
 
 /-- The induced map `A ⟶ A'` on the corners `A = G^* red_Y f_* K`. -/
@@ -97,6 +99,14 @@ def mapC : ρ.cornerC ⟶ ρ'.cornerC := whiskerLeft (𝔇.upperG' ⋙ 𝔇.lowe
 
 /-- The induced map `D ⟶ D'` on the corners `D = F'_* G'^* red_X K`. -/
 def mapD : ρ.cornerD ⟶ ρ'.cornerD := whiskerRight τ.τX (𝔗.upperG' ⋙ 𝔗.lowerF')
+
+lemma mapA_app (K : 𝒳) : τ.mapA.app K = 𝔗.upperG.map (τ.τY.app (𝔇.lowerF.obj K)) := rfl
+
+lemma mapB_app (K : 𝒳) : τ.mapB.app K = 𝔗.upperG.map (𝔗.lowerF.map (τ.τX.app K)) := rfl
+
+lemma mapC_app (K : 𝒳) : τ.mapC.app K = τ.τY'.app (𝔇.lowerF'.obj (𝔇.upperG'.obj K)) := rfl
+
+lemma mapD_app (K : 𝒳) : τ.mapD.app K = 𝔗.lowerF'.map (𝔗.upperG'.map (τ.τX.app K)) := rfl
 
 /-- The projection map `π_f` is natural with respect to morphisms of reductions. -/
 @[reassoc]
@@ -131,19 +141,16 @@ lemma arrows_comm :
     ρ.arrowH' ≫ τ.mapD = τ.mapC ≫ ρ'.arrowH' ∧
     ρ.arrowV' ≫ τ.mapD = τ.mapB ≫ ρ'.arrowV' := by
   refine ⟨?_, ?_, ?_, ?_⟩ <;> ext K <;> simp only [NatTrans.comp_app]
-  · rw [arrowH_app, arrowH_app]
-    simp only [mapA, mapB, whiskerRight_app, whiskerLeft_app, Functor.comp_map,
-      ← Functor.map_comp, projF_naturality]
-  · rw [arrowV_app, arrowV_app]
-    simp only [mapA, mapC, whiskerRight_app, whiskerLeft_app, Functor.comp_obj, Category.assoc]
-    rw [← τ.τY'.naturality, reassoc_of% (τ.commG (𝔇.lowerF.obj K))]
-  · rw [arrowH'_app, arrowH'_app]
-    simp only [mapC, mapD, whiskerRight_app, whiskerLeft_app, Functor.comp_obj,
-      Functor.comp_map, Category.assoc]
-    rw [projF'_naturality_assoc, ← Functor.map_comp, ← Functor.map_comp]
+  · rw [arrowH_app, arrowH_app, mapA_app, mapB_app, ← Functor.map_comp, ← Functor.map_comp,
+      projF_naturality]
+  · rw [arrowV_app, arrowV_app, mapA_app, mapC_app, Category.assoc, ← τ.commG_assoc]
+    congr 1
+    exact (τ.τY'.naturality _).symm
+  · rw [arrowH'_app, arrowH'_app, mapC_app, mapD_app, projF'_naturality_assoc, Category.assoc,
+      ← Functor.map_comp, ← Functor.map_comp]
     congr 2
-    rw [Iso.inv_comp_eq, ← reassoc_of% (τ.commG' K), Iso.hom_inv_id, Category.comp_id]
-  · simp only [arrowV'_app, mapB, mapD, whiskerRight_app, Functor.comp_map]
+    rw [Iso.inv_comp_eq, ← τ.commG'_assoc, Iso.hom_inv_id, Category.comp_id]
+  · rw [arrowV'_app, arrowV'_app, mapB_app, mapD_app]
     exact (𝔗.exchange.natTrans.naturality (τ.τX.app K)).symm
 
 end Hom

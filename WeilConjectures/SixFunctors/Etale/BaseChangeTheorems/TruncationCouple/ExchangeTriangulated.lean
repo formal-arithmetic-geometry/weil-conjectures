@@ -20,8 +20,12 @@ obtained by comparing injective resolutions
 `lem-weil-pbc-derived-adjunction-commshift`, proved for abelian sheaves as
 `AlgebraicGeometry.Etale.derivedPlus_upperStarLowerStar_commShift`; the uniqueness of the
 compatible shift structure on a right adjoint, blueprint
-`lem-weil-pbc-adjunction-shift-compatibility-unique`, is Mathlib's
-`CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit`).
+`lem-weil-pbc-adjunction-shift-compatibility-unique`, is Mathlib: (i)
+`CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit`; (ii) the formula
+`CategoryTheory.Adjunction.CommShift.compatibilityUnit_right` and the uniqueness
+`CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right`; (iii) the induced structure
+`CategoryTheory.Adjunction.rightAdjointCommShift`, compatible with the adjunction by
+`CategoryTheory.Adjunction.commShift_of_leftAdjoint`).
 
 For a commutative square of schemes `g' ≫ f = f' ≫ g`, the derived exchange transformation
 `Ex : Φ = R f_*⁺ ⋙ D g^*⁺ ⟶ Ψ = D g'^*⁺ ⋙ R f'_*⁺`

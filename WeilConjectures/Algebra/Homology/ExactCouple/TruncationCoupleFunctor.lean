@@ -42,9 +42,9 @@ truncation hypercohomology spectral sequence `E₂^{p, q} = Rᵖv(Hᵠ(M)) ⇒ H
 
 ## Blueprint pointers
 
-- `lem-sp-truncation-couple-exact`: the truncation couple
-  `CategoryTheory.Functor.truncationCouple`
-  (an `ExactCouple`, built by `TriangleTower.exactCoupleTotal`), equal to
+- `lem-sp-truncation-couple-exact`: `CategoryTheory.truncationCouple_exact` (exactness of the
+  three structure maps of `CategoryTheory.truncationCouple`); as a bundled exact couple,
+  `CategoryTheory.Functor.truncationCouple` (built by `TriangleTower.exactCoupleTotal`), equal to
   `DerivedCategory.Plus.functorTruncationCouple` of `R⁺v`;
 - `lem-sp-derived-couple-exact`: `CategoryTheory.ExactCouple.derived`;
 - `lem-sp-derived-cohomology-shift`: the shift isomorphisms
@@ -57,16 +57,27 @@ truncation hypercohomology spectral sequence `E₂^{p, q} = Rᵖv(Hᵠ(M)) ⇒ H
   `CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso`, natural in the
   object (`CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso`);
 - `lem-weil-pbc-derived-functor-negative-vanishing`:
-  `CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE`;
+  `CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE` and, in
+  degree `0`,
+  `CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor_obj`;
 - `lem-weil-pbc-derived-functor-truncation-iso`:
+  `CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_map` (general statement),
+  `CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι` (truncation
+  case),
   `CategoryTheory.Functor.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLTι` and
   `DerivedCategory.Plus.isIso_functorTruncationCoupleι`;
-- `lem-weil-pbc-truncation-cohomology`: Mathlib's `CochainComplex.quasiIsoAt_ιTruncLE`;
-- `lem-weil-pbc-truncation-descends`: the truncation functors of the canonical t-structure
-  `DerivedCategory.Plus.TStructure.t` (`truncLE`, `truncLEι`) and
-  `DerivedCategory.Plus.truncLETower`;
+- `lem-weil-pbc-truncation-cohomology`: `CochainComplex.truncation_cohomology` and
+  `DerivedCategory.truncation_cohomology` (using Mathlib's `CochainComplex.quasiIsoAt_ιTruncLE`);
+- `lem-weil-pbc-truncation-descends`: `DerivedCategory.truncation_descends`, with part (a)
+  `DerivedCategory.quasiIso_truncLEMap_and_singleFunctor_map_homologyMap` and the descended
+  functors `DerivedCategory.truncLEDesc`, `DerivedCategory.homologySingleDesc`; on `D⁺` these are
+  the truncation functors of the canonical t-structure `DerivedCategory.Plus.TStructure.t`
+  (`truncLE`, `truncLEι`) and `DerivedCategory.Plus.truncLETower`;
 - `lem-weil-pbc-truncation-step-ses`: `CochainComplex.exists_upperTruncationStepSES`;
-- `lem-weil-pbc-complex-ses-triangle`: Mathlib's `DerivedCategory.triangleOfSES_distinguished`;
+- `lem-weil-pbc-complex-ses-triangle`: Mathlib's `DerivedCategory.triangleOfSES_distinguished`
+  (distinguished triangle), with the naturality of `δ`:
+  `DerivedCategory.triangleOfSESδ_naturality`
+  and the morphism of triangles `DerivedCategory.triangleOfSES.map`;
 - `lem-weil-pbc-short-five-lemma`: Mathlib's
   `CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃`;
 - `lem-sp-finite-filtration-induction`:
@@ -321,7 +332,8 @@ variable {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
   (v : A ⥤ B) [v.Additive] (M : DerivedCategory.Plus A)
 
 /-- The truncation couple of `v` is the truncation couple of the triangulated functor `R⁺v`
-(blueprint `lem-sp-truncation-couple-exact`: it is an exact couple). -/
+(its exactness, blueprint `lem-sp-truncation-couple-exact`, is
+`CategoryTheory.truncationCouple_exact`). -/
 lemma truncationCouple_eq_functorTruncationCouple :
     v.truncationCouple M = functorTruncationCouple v.rightDerivedFunctorPlus M :=
   rfl

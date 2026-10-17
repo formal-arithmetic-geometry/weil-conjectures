@@ -25,10 +25,13 @@ and Corollaire 1.1.10 (ii), pp. 23–24
 
 The facts on distinguished triangles used in the proof are in Mathlib:
 - `def-weil-pbc-triangles-with-shift`: `CategoryTheory.Pretriangulated.Triangle`;
-- `lem-weil-pbc-hom-into-triangle-exact`:
-  `CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂`;
-- `lem-weil-pbc-hom-out-of-triangle-exact`:
-  `CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂`;
+- `lem-weil-pbc-hom-into-triangle-exact`: (i)
+  `CategoryTheory.Pretriangulated.comp_distTriang_mor_zero₁₂`; (ii)
+  `CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂`; (iii)
+  `CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁`;
+- `lem-weil-pbc-hom-out-of-triangle-exact`: (i)
+  `CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂`; (ii)
+  `CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃`;
 - `lem-weil-pbc-tr3-second-square` (TR3 starting from a commutative square on the second
   arrows): `CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁`.
 -/

@@ -41,7 +41,13 @@ images of `Hⁿ(Φ τ_{≤ q} K)` and `Hⁿ(Ψ τ_{≤ q} K)` (blueprint
 
 The truncation functors on the derived category are those of its canonical t-structure; their
 descent from complexes uses the universal property of the localization (blueprint
-`lem-weil-pbc-localization-universal-property`, Mathlib's `CategoryTheory.Localization.lift`).
+`lem-weil-pbc-localization-universal-property`, which is Mathlib: (1)
+`CategoryTheory.Localization.lift` with `CategoryTheory.Localization.fac`; (2)
+`CategoryTheory.Localization.liftNatTrans` with `CategoryTheory.Localization.liftNatTrans_app`,
+`CategoryTheory.Localization.liftNatTrans_id`, `CategoryTheory.Localization.comp_liftNatTrans`
+and `CategoryTheory.Localization.liftNatIso`; (3) `CategoryTheory.Localization.natTrans_ext`; for
+the category of fractions, `CategoryTheory.Localization.Construction.lift`,
+`CategoryTheory.Localization.Construction.fac` and `CategoryTheory.Localization.Construction.uniq`).
 -/
 
 @[expose] public section

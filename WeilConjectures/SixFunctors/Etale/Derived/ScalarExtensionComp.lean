@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMapComp
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 
 /-!
 # Composition of scalar extensions
@@ -102,6 +103,59 @@ noncomputable def restrictScalarsIdIso : restrictScalars J f ≅ 𝟭 _ :=
     (fun {F G} φ ↦ (fullyFaithfulSheafToPresheaf J _).map_injective (by
       ext U : 2
       exact (ModuleCat.restrictScalarsId' f hf).hom.naturality (φ.hom.app U)))
+
+end CategoryTheory.Sheaf
+
+namespace CategoryTheory.Sheaf
+
+section Assoc
+
+variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+  (J : GrothendieckTopology C)
+  {A₀ A₁ A₂ A₃ : Type (u + 1)} [CommRing A₀] [CommRing A₁] [CommRing A₂] [CommRing A₃]
+  {f₁ : A₀ →+* A₁} {f₂ : A₁ →+* A₂} {f₃ : A₂ →+* A₃} {f₁₂ : A₀ →+* A₂} {f₂₃ : A₁ →+* A₃}
+  {f₁₂₃ : A₀ →+* A₃} (h₁₂ : f₁₂ = f₂.comp f₁) (h₂₃ : f₂₃ = f₃.comp f₂)
+  (h₁₃ : f₁₂₃ = f₂₃.comp f₁) (h₀₃ : f₁₂₃ = f₃.comp f₁₂)
+
+/-- The composition isomorphisms of the restrictions of scalars of sheaves of modules satisfy
+the associativity (cocycle) condition. -/
+lemma restrictScalarsCompIso_assoc :
+    Functor.isoWhiskerLeft (restrictScalars J f₃) (restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂) ≪≫
+        restrictScalarsCompIso J f₁₂ f₃ f₁₂₃ h₀₃ =
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃) (restrictScalars J f₁) ≪≫
+          restrictScalarsCompIso J f₁ f₂₃ f₁₂₃ h₁₃ := by
+  ext F : 2
+  apply (fullyFaithfulSheafToPresheaf J _).map_injective
+  ext U x
+  rfl
+
+/-- The composition isomorphisms of the derived restrictions of scalars satisfy the
+associativity (cocycle) condition. -/
+lemma derivedRestrictScalarsCompIso_assoc :
+    Functor.isoWhiskerLeft (derivedRestrictScalars J f₃) (derivedRestrictScalarsCompIso J h₁₂) ≪≫
+        derivedRestrictScalarsCompIso J h₀₃ =
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (derivedRestrictScalarsCompIso J h₂₃)
+          (derivedRestrictScalars J f₁) ≪≫ derivedRestrictScalarsCompIso J h₁₃ := by
+  have e₁ := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft (restrictScalars J f₃)
+    (restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂)
+  have e₂ := Functor.mapDerivedCategoryNatIso_isoWhiskerRight
+    (restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃) (restrictScalars J f₁)
+  have e₃ := Functor.mapDerivedCategoryCompIso_assoc (restrictScalars J f₃)
+    (restrictScalars J f₂) (restrictScalars J f₁)
+  have e₄ := restrictScalarsCompIso_assoc J h₁₂ h₂₃ h₁₃ h₀₃
+  ext1
+  simp only [derivedRestrictScalarsCompIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_comp,
+    Functor.whiskerRight_comp, Category.assoc]
+  rw [← cancel_epi (Functor.whiskerLeft (restrictScalars J f₃).mapDerivedCategory
+      (Functor.mapDerivedCategoryCompIso (restrictScalars J f₂) (restrictScalars J f₁)).hom),
+    ← cancel_epi (Functor.mapDerivedCategoryCompIso (restrictScalars J f₃)
+      (restrictScalars J f₂ ⋙ restrictScalars J f₁)).hom]
+  sorry
+
+end Assoc
 
 end CategoryTheory.Sheaf
 
