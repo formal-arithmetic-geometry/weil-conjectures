@@ -14,9 +14,133 @@
   "lem-coef-combinatorial-localization-presentability",
   "lem-coef-cat-infinity-colimits-cartesian-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Theorem 2.2.5.1 of HTT constructs the Joyal model structure in each universe, with monomorphisms as cofibrations and categorical equivalences as weak equivalences; the quasicategory convention and internal functor objects are those of [def-cbc-enhanced-diagrams-cones]. The simplicial sets form the presheaf category on the small simplex category, so [lem-coef-presheaf-local-presentability] gives local presentability. The existing Mathlib leaf [lem-coef-infinity-monomorphism-boundary-cells] supplies the relative boundary-cell presentation of every monomorphism. The Joyal generating-trivial-cofibration statement [lem-coef-joyal-generating-trivial-cofibrations] supplies a small set $J_{\\mathrm J}$ generating the trivial-cofibration class. Hence both weak factorization systems are set-generated and the model is combinatorial. The initial map $\\varnothing\\hookrightarrow K$ is degreewise injective for every $K$, so every object is cofibrant; therefore the generating cofibrations have cofibrant sources and the model is tractable.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-presheaf-local-presentability",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-joyal-generating-trivial-cofibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and proof, Corollary 2.2.5.4; Appendix A.2.6 for combinatoriality; online PDF, archival source WANTED"
+   }
+  },
+  {
+   "text": "The Joyal model is left proper. Every simplicial set is cofibrant by Step 1, so the all-cofibrant left-properness lemma [lem-coef-all-cofibrant-left-proper] applies to the model-category structure supplied by [lem-coef-joyal-model-structure]. It gives, for every cofibration $i:A\\to B$ and categorical equivalence $w:A\\to A'$, that $B\\to B\\amalg_AA'$ is again a categorical equivalence. This is exactly left properness and does not use any Kan simplicial enrichment.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-all-cofibrant-left-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4 and proof of Theorem 2.2.5.1; online PDF, archival source WANTED"
+   }
+  },
+  {
+   "text": "Degreewise products make simplicial sets cartesian closed, with terminal object $\\Delta^0$. The cartesian pushout-product axiom is exactly [lem-coef-joyal-cartesian-pushout-product], while [lem-coef-joyal-model-structure] gives the cofibrations, weak equivalences and all-object cofibrancy. Step 1 supplies local presentability and set-generated factorizations, so the hypotheses of [lem-coef-combinatorial-localization-presentability] apply: its coherent localization is presentable and receives a symmetric monoidal structure for which $q(K)\\otimes q(L)\\simeq q(K\\times L)$ and whose unit is $q(\\Delta^0)$. The construction is coherent and preserves small colimits separately in each variable.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-cartesian-pushout-product",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-presheaf-local-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Higher Algebra §1.3.4 (model localization), Proposition 4.1.7.4 and Example 4.1.7.6; online, archival source WANTED"
+   }
+  },
+  {
+   "text": "A homotopy coherent localization $q:N(\\mathsf{sSet})\\to\\mathsf{sSet}[W^{-1}]_\\infty$ at $W$ exists by [lem-coef-hammock-infinity-localization]: the homotopy coherent nerve of a locally Kan replacement of the hammock localization of $(\\mathsf{sSet},W)$, with its full functor-infinity-category universal property; it is a quasicategory. By the Joyal-specific comparison [lem-coef-joyal-localization-cat-infinity] there is an equivalence $\\Phi:\\mathsf{sSet}[W^{-1}]_\\infty\\simeq\\mathrm{Cat}_\\infty$, induced by the Joyal--Bergner coherent-nerve Quillen equivalence, with $\\Phi(qQ)\\simeq Q$ naturally for every small quasicategory $Q$. This comparison concerns the ordinary Joyal model and imposes no Kan-enrichment hypothesis on its cartesian mapping objects, and it is compatible with enlarging the universe. Here $\\mathrm{Cat}_\\infty$ is the cartesian closed infinity category of small quasicategories and coherent functors of [lem-coef-cat-infinity-colimits-cartesian-closure].",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-joyal-localization-cat-infinity",
+    "lem-coef-cat-infinity-colimits-cartesian-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, Corollary 2.2.5.4 and Proposition 2.2.5.8; Higher Algebra §1.3.4; online, archival source WANTED"
+   }
+  },
+  {
+   "text": "The localization is saturated for arbitrary simplicial maps $f:A\\to B$, with no Kan, fibrancy or quasicategory hypothesis on $A$ or $B$. The Joyal structure of [lem-coef-joyal-model-structure] is a model category in the sense of [lem-coef-model-localization-detects-weak-equivalences]: $\\mathsf{sSet}$ is a presheaf category, hence complete and cocomplete, $W$ is retract closed with two-out-of-three, and both weak factorization systems are functorial. Since the target of $q$ is a quasicategory with the coherent localization universal property, [lem-coef-localization-homotopy-category] says that $q(f)$ is an equivalence if and only if its class is an isomorphism in $h(\\mathsf{sSet}[W^{-1}]_\\infty)$, and that $hq:\\mathsf{sSet}\\to h(\\mathsf{sSet}[W^{-1}]_\\infty)$ is an ordinary localization at $W$. By [lem-coef-model-localization-detects-weak-equivalences] applied to this ordinary localization, $hq(f)$ is an isomorphism if and only if $f\\in W$. Hence $q(f)$ is an equivalence exactly when $f\\in W$. By [lem-coef-joyal-functor-equivalence-test], membership in $W$ is equivalently the coherent functor-equivalence test $\\operatorname{Fun}(B,C)\\to\\operatorname{Fun}(A,C)$ against every quasicategory $C$.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-localization-homotopy-category",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4 and Proposition 2.2.5.8; online, archival source WANTED"
+   }
+  },
+  {
+   "text": "Products preserve $W$. For a simplicial set $X$, the functor $X\\times-$ has the right adjoint $\\operatorname{Fun}(X,-)$ of [def-cbc-enhanced-diagrams-cones]. Applying [lem-coef-joyal-cartesian-pushout-product] to $\\varnothing\\hookrightarrow X$ and a monomorphism $b$, the pushout-product is $X\\times b$, so $X\\times-$ preserves cofibrations and trivial cofibrations. By [lem-coef-model-infinity-derived-adjunction] it preserves weak equivalences between cofibrant objects, which are all objects by Step 1; by symmetry so does $-\\times X$. Products are carried to products. For small simplicial sets $K,L$ factor $K\\to RK$ and $L\\to RL$ as trivial cofibrations followed by fibrations to $\\Delta^0$ ([lem-coef-joyal-model-structure]); $RK,RL$ are quasicategories, and $K\\times L\\to RK\\times L\\to RK\\times RL$ lies in $W$ by the previous paragraph. By Step 4, $\\Phi q$ sends $RK,RL,RK\\times RL$ and the two projections to the quasicategories $RK,RL,RK\\times RL$ and their projections. By [lem-coef-cat-infinity-colimits-cartesian-closure] the degreewise product of two quasicategories, with its projections, is their product in $\\mathrm{Cat}_\\infty$ (it is the variable of the exponential adjunction $\\operatorname{Fun}(T,\\operatorname{Fun}(A,E))\\simeq\\operatorname{Fun}(T\\times A,E)$), and $\\Delta^0$, the empty product, is terminal. Hence $q$ sends each product square $K\\leftarrow K\\times L\\to L$ to a product diagram and $\\Delta^0$ to a terminal object. Monoidal comparison. Since $W$ contains the isomorphisms, is closed under composition and is preserved by $X\\times-$ and $-\\times X$, [lem-coef-relative-symmetric-monoidal-localization] applies to the cartesian symmetric monoidal nerve of $(\\mathsf{sSet},\\times,\\Delta^0)$: it gives the localized symmetric monoidal structure with strong symmetric monoidal $q^\\otimes$, $q(K)\\otimes q(L)\\simeq q(K\\times L)$ and unit $q(\\Delta^0)$, coherently. Its canonical maps $qK\\otimes qL\\to qK\\otimes\\mathbf 1\\simeq qK$ are $q$ of the projections $K\\times L\\to K\\times\\Delta^0=K$, so by the previous paragraph this structure is cartesian, with terminal unit; this is the structure of Step 3, which is computed by the same products since every object is cofibrant. The structure on $\\mathrm{Cat}_\\infty$ is cartesian by [lem-coef-cat-infinity-colimits-cartesian-closure]. The cartesian-monoidal uniqueness principle [lem-coef-cartesian-monoidal-structure-uniqueness] therefore upgrades $\\Phi$ to a strong symmetric monoidal equivalence, unique up to a contractible space of choices, with the coherent-nerve comparison [lem-coef-coherent-nerve-comparison] supplying $\\Phi$ on underlying categories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-cartesian-pushout-product",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-localization-cat-infinity",
+    "lem-coef-relative-symmetric-monoidal-localization",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-cartesian-monoidal-structure-uniqueness",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Higher Algebra Proposition 4.1.7.4 and Example 4.1.7.6; HTT Proposition 2.2.5.8; online, archival source WANTED"
+   }
+  },
+  {
+   "text": "The strong monoidal structure gives coherent equivalences $q(K\\times L)\\simeq qK\\times qL$ and $q(\\Delta^0)\\simeq\\mathbf 1$. Every construction above is performed in a chosen universe of small simplicial sets. Enlarging the ambient universe (Step 4 and [lem-coef-joyal-localization-cat-infinity] are compatible with it) only enlarges the test quasicategories and coherent functor categories; the universe clauses in [lem-coef-cat-infinity-colimits-cartesian-closure] and the Joyal model statement show that the same comparison and saturation argument remains valid.",
+   "uses": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-localization-cat-infinity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 2.2.5.8; online, archival source WANTED"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-all-cofibrant-left-proper",
+  "lem-coef-cartesian-monoidal-structure-uniqueness",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-joyal-cartesian-pushout-product",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-generating-trivial-cofibrations",
+  "lem-coef-joyal-localization-cat-infinity",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-localization-homotopy-category",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-relative-symmetric-monoidal-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Written by agents after HTT Theorem 2.2.5.1, Corollary 2.2.5.4, Proposition 2.2.5.8 and Higher Algebra §1.3.4, Proposition 4.1.7.4; these documents are not in literature/ (WANTED)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +176,38 @@
    "results": "{\"t\": \"2026-10-17T16:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"The Joyal model structure is left proper combinatorial and its cartesian monoidal localization is Cat infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.QCat\", \"SSet.instCartesianMonoidalCategory\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.Truncated.hoFunctor.monoidal\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.Truncated.instMonoidalOfNatNatCatHoFunctor₂\"], \"digest\": \"c6094aa2077433e5\"}",
    "date": "2026-10-17",
    "verdict": "no match: source read at AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-88 gives boundary cofibrations and all-horn Kan fibrations, not the Joyal model. SimplicialSet/Monoidal.lean supplies cartesian closedness only; Quasicategory/StrictBicategory.lean:49-70 supplies a homotopy bicategory, not the monoidal infinity localization or left proper combinatorial structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Joyal model category is left proper combinatorial tractable and its localization is Cat infinity",
+   "results": "SSet.QCat; SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.modelCategoryQuillen.instCategoryWithCofibrations; HomotopicalAlgebra.CofibrantObject localization declarations",
+   "date": "2026-10-18",
+   "verdict": "no match: Mathlib has Kan/Quillen simplicial-set structures and ordinary localization helpers, not the Joyal combinatorial/monoidal theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.modelCategoryQuillen, CategoryTheory.Functor.IsLocalization, SSet.instCartesianMonoidalCategory",
+   "results": "0 hits; unknown identifier SSet.modelCategoryQuillen",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|categoricalEquivalence|locallyPresentable [Mathlib/AlgebraicTopology]",
+   "results": "Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean lines 13,17,40,44,69 only",
+   "date": "2026-10-18",
+   "verdict": "no match: JoyalTrick is generic lifting, not the Joyal model or localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Joyal model structure left proper combinatorial tractable saturated localization Cat infinity",
+   "results": "HomotopicalAlgebra.ModelCategory.mk'; HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations; HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick; HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations; CategoryTheory.Localization.LeftBousfield.isLocalization",
+   "date": "2026-10-18",
+   "verdict": "no match: generic model/localization declarations do not state the Joyal result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-joyal-fixed-object-rectification",
@@ -79,5 +231,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-joyal-presentable-monoidal-localization",
+  "worker": "stage1",
+  "summary": "Repair E1/E4/E5/C1/D5/C5: removed the duplicate Mathlib boundary-cell node and cite existing lem-coef-infinity-monomorphism-boundary-cells; add explicit local-presentability, generating-trivial-cofibration, and all-cofibrant-left-proper dependencies; replace the invalid Kan-enriched localization application by a Joyal-specific hammock/coherent-nerve localization statement that reflects categorical equivalences for arbitrary simplicial maps. The item statement is unchanged. Maintainer-reader FIX 2026-10-18: removed the reflection clause from lem-coef-joyal-localization-cat-infinity (it restated this item's saturation clause) and proved saturation in Step 5 from the existing lem-coef-localization-homotopy-category and lem-coef-model-localization-detects-weak-equivalences; Step 4 takes existence of q from lem-coef-hammock-infinity-localization; Step 6 now proves that products preserve W and that q preserves finite products before applying the localization and uniqueness lemmas; proof_origin set to agent, since HTT/HA are WANTED.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex adjunction before the inverse limit: the cartesian Joyal presentation, its set-generated and left-proper model structure, and the Joyal coherent localization identified with Cat-infinity."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-9333b2175",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-9333b2175 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint. HTT 2.2.5.1/2.2.5.4/2.2.5.8 and HA 1.3.4/4.1.7.4 are not in literature/ (WANTED is correct), so I checked them against the standard results. The item statement is true, unchanged and not weakened. Edge cases checked: the empty simplicial set, Delta^0 as terminal unit, non-quasicategory inputs handled by fibrant replacement. Every cited node is in the item's unit, there are no cycles, and no SGA is cited. Steps 1-3 are correct: boundary-cell Mathlib leaf for set-generated cofibrations, the presheaf presentability leaf, all-cofibrant left properness, and the combinatorial-localization hypotheses. Three faults were repaired under fixes/. (1) D1/C5: the new node lem-coef-joyal-localization-cat-infinity contained a reflection clause that repeated the item's saturation clause word for word, plus the generic hammock universal property already stated by lem-coef-hammock-infinity-localization. Its statement now says only: for a coherent localization q at W_J there is an equivalence Phi to Cat_infty with Phi(qQ) equivalent to Q for quasicategories Q. This is true, strictly smaller than the item, and no existing node states it. Step 4 now takes q from the hammock node. Step 5 proves saturation from the existing lem-coef-localization-homotopy-category and lem-coef-model-localization-detects-weak-equivalences. (2) E5: Step 6 asserted that the comparison carries products to products without an argument, and applied relative-symmetric-monoidal-localization without checking that X x w is in W. It now proves that X x - preserves W (pushout-product with the empty inclusion, then model-infinity-derived-adjunction, all objects cofibrant), that q preserves finite products and the terminal object (fibrant replacement, plus the degreewise product being the product in Cat_infty by the cartesian-closure node), and then applies the localization and cartesian-uniqueness lemmas. (3) proof_origin changed from document to agent, because the sources are WANTED. Also added the missing bracket citation in Step 1. The new node lem-coef-joyal-generating-trivial-cofibrations is true (Smith/HTT A.2.6), is not a duplicate of categorical-equivalences-small-generation or bousfield-smith-bounded-generation, and is kept unchanged. No tool_uses needed; no nodes dropped.; 2 file(s) fixed by the reviewer"
  }
 }

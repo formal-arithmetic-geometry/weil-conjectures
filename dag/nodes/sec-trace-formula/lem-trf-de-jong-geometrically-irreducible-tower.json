@@ -20,11 +20,197 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-finite-integral-morphism",
-  "def-weil-geometric-fibre"
+  "def-weil-geometric-fibre",
+  "def-pc-fibre-product",
+  "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove the assertion by strong induction on $d\\geq1$, uniformly for all the bases in the statement. If $d=1$, apply [lem-trf-excellent-base-marked-semistable-curve] to $W\\to S$ with $Z=\\varnothing$. Its square gives $S_1$, $P_1$, $b$, $h$ and the single curve map, with all the required fibre clauses. The finite-dimension verification for its excellent Noetherian sources is included in Step 11 below. Hence assume $d\\geq2$ and the assertion for all positive dimensions less than $d$.",
+   "uses": [
+    "lem-trf-excellent-base-marked-semistable-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, first two sentences; Theorem 2.4 for the dimension-one base case"
+   }
+  },
+  {
+   "text": "Put $K=\\kappa(\\eta_S)$. The integral finite-type scheme $W_K$ has one irreducible component. By [lem-pur-finite-inseparable-geometric-reduction] choose a finite purely inseparable extension $K'/K$ for which $(W_{K'})_{\\mathrm{red}}$ is geometrically reduced. Normalize $S$ in $K'$ using [lem-weil-pbc-normalization-in-residue-field-extension], obtaining integral $S_0$ with function field $K'$. This normalization is finite: for every affine domain $A$ of $S$, excellence implies Nagata by [lem-exc-quasi-excellent-nagata]; the prime $0$ in [def-weil-pbc-nagata-ring] and [def-weil-pbc-japanese-domain] says exactly that the integral closure of $A$ in $K'$ is a finite $A$-module. The finite dominant map $S_0\\to S$ is proper by [lem-weil-pbc-finite-proper], and its closed image contains the generic point, hence is all of $S$.",
+   "uses": [
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, purely inseparable normalization of S; Stacks 04KT, 035H, 032R, 032F"
+   }
+  },
+  {
+   "text": "Geometric irreducibility of $W_K$ makes $W_{K'}$ irreducible. In $W\\times_S S_0$ take the reduced closure $W_0$ of its generic fibre, using [lem-weil-pbc-reduced-induced-closed-subscheme]. The generic fibre of $W_0\\to S_0$ is $(W_{K'})_{\\mathrm{red}}$ by [lem-pur-reduction-generic-fibre]; it is geometrically integral: after every further field extension, the reduction immersion still has nilpotent defining ideal (the rings are Noetherian), hence the same underlying irreducible space as the corresponding base change of $W_K$, and Step 2 supplies geometric reducedness. The map $W_0\\to W$ is finite: affine locally the base change of the finite algebra of $S_0$ is a finite module and its quotient is still finite. It is dominant (its generic fibre contains the point over the generic point of $W$), hence surjective because it is finite and therefore closed. It is an alteration. The morphism $W_0\\to S_0$ is proper by base change and closed immersion [lem-weil-pbc-proper-fp-permanence]. The finite dominant generic-fibre map to $W_K$ and [lem-trf-closed-dominant-dimension] give generic dimension $d$. The schemes $S_0,W_0$ are integral excellent Noetherian of finite dimension by Step 11.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-pur-reduction-generic-fibre",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, geometrically reduced preparation; Stacks 054Z, 01J3, 02JX"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-geometrically-integral-curve-factorization] to $W_0\\to S_0$. Write its proper birational modification as $X\\to W_0$ and its factorization as $X\\xrightarrow{v}Y\\to S_0$. Thus the generic fibre of $v$ is a geometrically integral curve, and that of $Y\\to S_0$ is geometrically integral of dimension $r=d-1\\geq1$. All these schemes are integral excellent Noetherian and of finite dimension. The modification is surjective because its closed image contains a dense open. It is finite over that open, so it is an alteration.",
+   "uses": [
+    "lem-trf-geometrically-integral-curve-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, application of Lemma 5.2"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-excellent-base-marked-semistable-curve] to $v:X\\to Y$, with empty boundary. Denote its square by $C\\to X$ over $B\\to Y$ and its curve map by $c:C\\to B$. Both horizontal maps are alterations, $C$ and $B$ are integral excellent Noetherian, and $c$ is proper flat finitely presented with the required geometric curve fibres and smooth geometrically integral generic fibre. The composite $B\\to S_0$ is proper by [lem-weil-pbc-proper-fp-permanence] and dominant. Its generic fibre is integral of dimension $r$: $k(B)/k(Y)$ is finite because $B\\to Y$ is an alteration, and [lem-sc-closed-irreducible-dimension-trdeg] computes both dimensions over $K'$. No geometric irreducibility of this generic fibre is assumed.",
+   "uses": [
+    "lem-trf-excellent-base-marked-semistable-curve",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, Theorem 2.4; the group-free argument retains only the curve family"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-generic-components-split] to $B_{K'}$, giving a finite separable extension $L/K'$ over which all components are geometrically irreducible. Normalize $S_0$ in $L$, obtaining a finite surjective integral alteration $S_2\\to S_0$ by the construction of Step 2. Choose a component of $B_L$ dominating $B_{K'}$ and take its reduced closure $B_2$ in $B\\times_{S_0}S_2$ [lem-weil-pbc-reduced-induced-closed-subscheme]. Such a component exists: a prime of the nonzero finite-dimensional $k(B)$-algebra $k(B)\\otimes_{K'}L$ gives its generic point. There is no smaller prime after localization since this algebra is zero-dimensional, so its closure is a component of $B_L$. Consequently $B_2\\to B$ is finite dominant (as in Step 3), hence an alteration. Its generic fibre over $S_2$ is the chosen reduced component [lem-pur-reduction-generic-fibre], geometrically irreducible by the splitting node, and has dimension $r$ by [lem-trf-closed-dominant-dimension] on its finite dominant map to $B_{K'}$. Properness of $B_2\\to S_2$ follows from [lem-weil-pbc-proper-fp-permanence]. Step 11 supplies excellence, Noetherianness and finite dimensions.",
+   "uses": [
+    "lem-sbc-generic-components-split",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-pur-reduction-generic-fibre",
+    "lem-trf-closed-dominant-dimension",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, preparation before induction; in the absence of group constraints use finite generic-component splitting instead of Lemma 5.5"
+   }
+  },
+  {
+   "text": "The induction hypothesis now applies to $B_2\\to S_2$: its generic dimension is $r=d-1$, not $d$, and all its other hypotheses were checked in Step 6. Obtain an alteration $S_1\\to S_2$, a tower $Q_{d-1}\\to\\cdots\\to Q_0=S_1$ of $d-1$ required curves, and an alteration $Q=Q_{d-1}\\to B_2$, commuting over $S_2$. The composite $Q\\to B$ is proper by [lem-weil-pbc-proper-fp-permanence], and surjective because both factors are surjective. It is finite over a dense open: if $U\\subset B$ makes $B_2|_U\\to U$ finite and $V\\subset B_2$ makes $Q|_V\\to V$ finite, remove from $U$ the closed image of $B_2|_U\\setminus V$. That image omits the generic point because $B_2$ is integral and finite dominant over $B$, whose generic fibre is its single generic point. On the remaining dense open both maps are finite, and products of their finite module generators prove their composite finite. Thus $Q\\to B$ is an alteration.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, induction on relative dimension and composition of alterations"
+   }
+  },
+  {
+   "text": "Set $P=C\\times_B Q$, with its two projections [def-pc-fibre-product]. The map $q_d:P\\to Q$ is proper flat and finitely presented by [lem-weil-pbc-proper-fp-permanence], [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence]. For any geometric point of $Q$, its fibre is exactly the fibre of $c$ at the composite geometric point of $B$, by the fibre-product universal property. Hence it is nonempty connected reduced of pure dimension one, with only the stated ordinary double points. In particular the last curve can be appended without any claim about vertical components of $W\\times_S S_1$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, final fibre product; Stacks 01W4, 01U9, 01TS"
+   }
+  },
+  {
+   "text": "The scheme $P$ is integral. Indeed, $Q\\to B$ is dominant, so $P_{k(Q)}$ is obtained by extending the ground field of the smooth geometrically integral generic fibre of $c$; it is therefore integral and nonempty by [def-pc-geometrically-irreducible]. For an affine open $\\operatorname{Spec}A\\subset Q$ and a nonempty affine open $\\operatorname{Spec}D\\subset P$ above it, flatness and [lem-weil-pbc-flat-morphism-affine-criterion] make $D$ flat over the domain $A$. Tensoring the injection $A\\hookrightarrow\\operatorname{Frac}A$ gives an injection $D\\hookrightarrow D\\otimes_A\\operatorname{Frac}A$, by [def-weil-pbc-flat-ring-map]. The latter ring is the ring of a nonempty affine open of the integral generic fibre: it cannot be zero by injectivity. It is a domain, hence so is $D$. Thus $P$ is reduced and every nonempty open meets its integral generic fibre. Two nonempty opens then intersect there, so $P$ is irreducible as well. This establishes integrality without selecting or normalizing a component, which could destroy flatness of the curve map.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, verification of the final fibre product; elementary affine flatness argument"
+   }
+  },
+  {
+   "text": "The projection $P\\to C$ is proper and surjective by base change of the alteration $Q\\to B$ [lem-weil-pbc-proper-fp-permanence, lem-weil-pbc-surjective-base-change]. Over the inverse image in $C$ of the dense open of $B$ where $Q\\to B$ is finite it is finite: affine locally tensoring its finite module generators gives finite generators after base change [def-weil-finite-integral-morphism]. This inverse image is dense and nonempty since $C$ is integral and dominates $B$. Hence $P\\to C$ is an alteration. Composing it with $C\\to X\\to W_0\\to W$ gives an alteration $h:P\\to W$; composing $S_1\\to S_2\\to S_0\\to S$ gives an alteration $b:S_1\\to S$. For either composite the same dense-open removal argument of Step 7 applies successively; properness is preserved by [lem-weil-pbc-proper-fp-permanence]. Put $P_j=Q_j$ for $j<d$ and $P_d=P$. The defining squares and the fibre-product projections give $gh=bq_1\\cdots q_d$ exactly.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-finite-integral-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, final commutative diagram and alteration verifications"
+   }
+  },
+  {
+   "text": "All auxiliary schemes formed by finite morphisms, proper modifications, reduced closed subschemes of finite-type schemes, or the final curve base change are of finite type over one of the original excellent Noetherian schemes or an induction output. Thus they are excellent by the affine finite-type statement [lem-exc-finite-type-localization-excellent], and Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Finite total dimensions follow from [lem-trf-closed-dominant-dimension]: a finite dominant map or proper birational modification has relative function-field transcendence degree zero, and the proper dominant maps $C\\to B$ and $P\\to Q$ have transcendence degree one. In the base case this proves $\\dim B=\\dim S$ and $\\dim C=\\dim B+1<\\infty$; in the induction step $B$ is an alteration of finite-dimensional $Y$, $S_2$ is finite over $S_0$, $B_2$ finite over $B$, and $P$ has dimension $\\dim Q+1$. The intermediate $Q_j$ already have finite dimension by induction. This also justifies every earlier application requiring finite dimension. All required clauses now hold.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof and Stacks 07QU, 01T1, 02JX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-excellent-base-marked-semistable-curve",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-exc-quasi-excellent-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-proper",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pur-reduction-generic-fibre",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-geometrically-integral-curve-factorization",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sbc-generic-components-split",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Theorem 5.9, printed p. 617: non-equivariant induction following the online publisher PDF. Use finite generic-component splitting in place of the Galois bookkeeping; local archival PDF WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,10 +246,45 @@
    "results": "{\"t\": \"2026-10-17T16:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"De Jong theorem 5.9: alteration of an excellent proper family with geometrically irreducible generic fibre into a projective plurinodal fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"d7d5844b96866f11\"}; Read the returned signatures: Weierstrass nonsingularity, ordinary properness/base change and projective spectra do not give alterations into a semistable tower.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "plurinodal|semistable|semiStable|deJong|alteration",
+   "results": "{\"t\": \"2026-10-17T17:55:27Z\", \"tool\": \"grep\", \"query\": \"plurinodal|semistable|semiStable|deJong|alteration\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: general dominance, normalization, properness and smooth base change do not construct plurinodal alterations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper family with geometrically irreducible generic fibre has a plurinodal alteration",
+   "results": "{\"t\": \"2026-10-17T17:55:28Z\", \"tool\": \"leansearch\", \"query\": \"A proper family with geometrically irreducible generic fibre has a plurinodal alteration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"Algebra.IsGeometricallyReduced.casesOn\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.casesOn\"], \"digest\": \"d2ba5bfb80d7432b\"}; Read the returned signatures: general dominance, normalization, properness and smooth base change do not construct plurinodal alterations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semistable\"",
+   "results": "{\"t\": \"2026-10-17T17:55:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"semistable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: general dominance, normalization, properness and smooth base change do not construct plurinodal alterations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper dominant morphism of excellent integral schemes with geometrically irreducible generic fibre admits an alteration into a tower of semistable curves",
+   "results": "{\"t\": \"2026-10-17T17:55:37Z\", \"tool\": \"leanfinder\", \"query\": \"A proper dominant morphism of excellent integral schemes with geometrically irreducible generic fibre admits an alteration into a tower of semistable curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\"], \"digest\": \"e1f50bcf955f5bc3\"}; Read the returned signatures: general dominance, normalization, properness and smooth base change do not construct plurinodal alterations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "De Jong plurinodal alteration of a proper family after altering its excellent base",
+   "results": "{\"t\": \"2026-10-17T17:55:38Z\", \"tool\": \"leanfinder\", \"query\": \"De Jong plurinodal alteration of a proper family after altering its excellent base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"532aff27e5ced25b\"}; Read the returned signatures: general dominance, normalization, properness and smooth base change do not construct plurinodal alterations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-plurinodal-proper-hypercover",
@@ -86,5 +307,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-de-jong-geometrically-irreducible-tower",
+  "worker": "stage1",
+  "summary": "Kept the statement and split the group-free proof of de Jong 5.9 by strong induction on generic dimension. Reused finite inseparable reduction, normalization, finite component splitting and all permanence inputs. Added only the arbitrary-excellent-base marked curve theorem and geometrically integral curve factorization. Wrote out the integral final fibre product, dense-open composition of alterations, generic-component choice and total dimension checks. No Lean attachment found.",
+  "blueprint": "Proof of (1) and (2): \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; the Orgogozo modification input, via the application of de Jong Theorem 5.9 in Lemma 3.3.2. Steps 1--11 implement that alteration input through the existing plurinodal proper-hypercover node.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "def-weil-pbc-nagata-ring",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "def-weil-pbc-japanese-domain",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "lem-pur-reduction-generic-fibre",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "lem-sbc-generic-components-split",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebraic-geometric tool used exactly as stated for normalization, generic fibres, or excellence; the current trace unit has no corresponding general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-exc-quasi-excellent-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pur-reduction-generic-fibre",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sbc-generic-components-split",
+  "lem-exc-finite-type-localization-excellent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-c40d7235b",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c40d7235b (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, both new nodes and the statements of all 24 cited nodes. The item statement is unchanged: it is de Jong 5.9 without the group, projectivity and boundary, and no target is weakened. de Jong 1997 is not in literature/; it is recorded as WANTED and proof_origin is agent. I cross-checked against the local ILO Travaux de Gabber, Exp. IX Thm 1.2, which states de Jong 2.4 for f proper between excellent integral Noetherian schemes with no base projectivity, and Exp. VII 3.4. Each step was checked against the hypotheses in force. Step 2: Nagata via 07QV and 032R/032F gives a finite normalization in K'. Step 3: a surjective closed immersion keeps the space under base change, so (W_K')_red is geometrically integral. Step 6: points over the generic point are primes of the Artinian algebra k(B)⊗L, so they are generic points of components, and the induction runs at r=d-1. Step 7: the fibre of finite dominant B_2→B over η_B is the generic point alone, so the dense-open composition of alterations is valid. Steps 8 and 9 (flat base change; P integral via D↪D⊗Frac A) are correctly elementary. Step 10: I traced the commutativity gh=bq_1⋯q_d through every square. Step 11: the dimension bookkeeping via 02JX is not circular. Both new nodes are true and statement-only. N1 (marked semistable curve over an arbitrary excellent base) is not a duplicate: the existing dejong-relative-marked-semistable and relative-marked-nodal-reduction nodes require a projective-over-affine base, a smooth generic curve and an étale divisor. N2 (geometrically integral curve factorization) has a proof via a separating transcendence basis, graph closure, normalization and Stein factorization. It is not a duplicate of the field/trait factorization nodes. Neither new node restates the item. I accept the ten declared generic tool uses. Fix: N1 used 'geometric fibres' without citing a definition (B3); I added [def-weil-geometric-fibre] to its statement and stmt_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-excellent-base-marked-semistable-curve.json.; 1 file(s) fixed by the reviewer"
  }
 }

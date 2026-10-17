@@ -13,9 +13,72 @@
   "def-weil-geometric-fibre",
   "def-weil-unramified-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume that $h$ is unramified. For every $s\\in B$, the geometric-fibre morphism $h_{\\bar s}$ is the base change of $h$ along the morphism $\\operatorname{Spec}\\overline{\\kappa(s)}\\to B$ defining the chosen geometric point. Unramified morphisms are stable under arbitrary base change, so $h_{\\bar s}$ is unramified.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open",
+    "def-weil-geometric-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tags 02GA and 02G8; geometric-fibre definition"
+   }
+  },
+  {
+   "text": "Conversely, assume every geometric fibre is unramified and fix $s\\in B$. Put $B_s=\\operatorname{Spec}\\kappa(s)$ and let $h_s:Z_s=Z\\times_BB_s\\to B_s$ be the ordinary scheme-theoretic fibre. By the definition of geometric fibre, after choosing $\\Omega=\\overline{\\kappa(s)}$ the given geometric fibre is the base change of $h_s$ along $\\operatorname{Spec}\\Omega\\to B_s$. The latter field-extension morphism is an fpqc singleton covering, and unramifiedness descends along fpqc coverings; therefore $h_s$ is unramified.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-geometric-fibre",
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-galois-fpqc-descend-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02VM, together with Topologies Tag 022B and the ordinary/geometric fibre identification in Morphisms Tag 02G8"
+   }
+  },
+  {
+   "text": "Apply the field-fibre characterization to the unramified morphism $h_s:Z_s\\to\\operatorname{Spec}\\kappa(s)$. It follows that $Z_s$ is a disjoint union of spectra of finite separable algebraic extensions of $\\kappa(s)$.",
+   "uses": [
+    "lem-trf-unramified-field-fibre-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 02G7, part (1)"
+   }
+  },
+  {
+   "text": "The morphism $h$ is locally of finite type by hypothesis, and every ordinary fibre has the disjoint-union description from step 3. The ordinary-fibre criterion of Tag 02G8(2) therefore implies that $h$ is unramified.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-trf-unramified-ordinary-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 02G8, part (2), lines 7828-7839"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unramified-base-change-open",
+  "def-weil-geometric-fibre",
+  "def-pc-scheme-fibre",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-galois-fpqc-descend-unramified",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "def-weil-finite-type-morphism",
+  "lem-trf-unramified-ordinary-fibre-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02G7 and 02G8, with Descent Tag 02VM and Morphisms Tag 02GA"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,7 +138,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-family-fitting-singular",
@@ -87,7 +150,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof '(1) and (2)': specialization to the normal cone; the nodal relative-curve geometry in the nearby-duality alteration reduction, specifically the fibrewise singular-locus calculation used by lem-trf-nodal-family-fitting-singular.",
+   "place": "Proof (1)--(2), normal-cone specialization and the nearby-duality alteration reduction; Stacks nodal-family geometry: the unramifiedness of the first-Fitting singular subscheme Sing(f)->S over the nodal base, checked on geometric fibres (step 2 of lem-trf-nodal-family-fitting-singular)",
    "via": [
     "lem-trf-nodal-family-fitting-singular",
     "lem-trf-projective-nodal-family-geometry",
@@ -99,5 +162,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-fibre-unramified-criterion",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against Stacks Morphisms Tags 02G7 and 02G8 and Descent Tag 02VM. The statement is correct with locally finite type only; empty fibres and arbitrary non-quasi-compact bases are allowed. The proof first uses base-change stability for the forward implication. For the converse it descends unramifiedness from each algebraically closed geometric fibre to the ordinary fibre along the fpqc field extension, applies the field-over-a-base characterization (new node), and then applies the ordinary-fibre criterion (new node). No hypotheses were added or removed.",
+  "blueprint": "The four steps realize the geometric-fibre criterion used in the proof of lem-trf-nodal-family-fitting-singular: base-change stability, descent from geometric to ordinary fibres, the Tag 02G7 field-fibre description, and Tag 02G8(2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "step 1 uses arbitrary base-change stability of unramified morphisms, which is a generic morphism fact outside this trace-formula unit"
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "step 2 uses that Spec of an algebraic closure is an fpqc singleton cover of the residue-field spectrum"
+   },
+   {
+    "node": "lem-galois-fpqc-descend-unramified",
+    "why": "step 2 uses fpqc descent of unramifiedness, which is a generic descent fact outside this unit"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-galois-fpqc-descend-unramified"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-f5224bf7f",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-f5224bf7f (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks morphisms.tex 7790-7843 (02G7, 02G8). Descent 02VM and base change 02GA were checked through the statements of the existing nodes that record them. The item statement is correct and complete: it assumes only local finite type, empty fibres are allowed, and unramified means the Stacks 02G4 notion, not G-unramified. Small cases agree: Spec Z/p->Spec Z, Spec F_p(t^{1/p})->Spec F_p(t) (non-reduced geometric fibre), the empty scheme and the identity. Step 1: the geometric-fibre definition makes h_sbar a base change, and 02GA gives stability. Step 2: the geometric-fibre definition identifies it with the base change of the ordinary fibre Z_s; Spec Omega->Spec kappa(s) is an fpqc cover; 02VM descends unramifiedness with X=Z_s and a single cover. Step 3: the forward direction of the new 02G7(1) node. Step 4: the new 02G8(2) node, using local finite type and step 3. Both new nodes are exact source lemmas, carry statements only, are strictly smaller than the item and are not duplicates: the existing pbc nodes cover only the affine or topological case. There are no cycles and no SGA. I accepted the three declared tool uses (unramified-base-change-open, field-extension-fpqc-cover, galois-fpqc-descend-unramified) as generic black-box facts outside unit sk-i-curve-zero's route. Fixes: (B9) blueprint.from.place on the item and both new nodes now names the place in the ancestor lem-trf-local-term-locality's proof that the parent chain uses, instead of Stacks line numbers or the parent's proof; (B3) lem-trf-unramified-ordinary-fibre-criterion now cites def-weil-affine-spectrum and def-pc-field-extension in its statement and stmt_deps. No content changed.; 3 file(s) fixed by the reviewer"
  }
 }

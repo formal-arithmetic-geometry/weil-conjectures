@@ -1,0 +1,101 @@
+{
+ "id": "lem-trf-integral-compact-transport-system-mate-pasting",
+ "kind": "statement",
+ "title": "Typed Frobenius-power pasting for compactification exchange on systems",
+ "statement": "Fix $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite, $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ [def-trf-coefficient-conventions]. Let $f_0:X_0\\to Y_0$ be separated of finite type between finite-type $k_0$-schemes [def-weil-scheme-morphism-properties]. Supply one compactification $c_0=(j_0,p_0)$ over $k_0$, and write $X\\xrightarrow j\\overline X\\xrightarrow pY$ for its base change, with $f=pj$ [def-weil-compactifications-refinements]. For $W=X,\\overline X,Y$ let $g_W=\\operatorname{id}_{W_0}\\times\\operatorname{Spec}(\\gamma)$ be geometric Frobenius [def-trf-scheme-frobenius], and put $B_{W,n}=(A_n)_W$. Let $\\mathscr S_W$ be strict semilinear $B_{W,n}$-module systems, with simultaneous derived operations on $D(\\mathscr S_W)$ [lem-coef-semilinear-derived-sections]. For every $r\\geq1$ write $G_{W,r}=(g_W^r)^{-1}$ on these systems, transported along the constant coefficient isomorphisms; let\n$$t^W_m:G_{W,1}G_{W,m}\\xrightarrow{\\sim}G_{W,m+1}$$\nbe the canonical inverse-image compositor (inverse to the direction in [lem-weil-pbc-proetale-derived-pullback-composition]). Write $S_p$ for total derived system direct image, $J_j$ for exact system open extension, and $F=S_pJ_j:D(\\mathscr S_X)\\to D(\\mathscr S_Y)$.\n\nFor each $r$, use the actual proper-adjunction mate and the open-adjunction comparison of [def-weil-frobenius-square-exchange], item 2, with Frobenius replaced by its $r$-th power, to define\n$$E_r=(S_p b_r)\\circ(e_{p,r}J_j):G_{Y,r}F\\longrightarrow FG_{X,r},$$\nwhere $e_{p,r}:G_{Y,r}S_p\\to S_pG_{\\overline X,r}$ is the unit--square--counit mate and $b_r:G_{\\overline X,r}J_j\\to J_jG_{X,r}$ is the open-extension exchange, both formed in the system categories. Then for EVERY $C\\in D(\\mathscr S_X)$ and $m\\geq1$ the following typed equation holds in $D(\\mathscr S_Y)$:\n$$E_{m+1,C}\\circ t^Y_{m,FC}=F(t^X_{m,C})\\circ E_{1,G_{X,m}C}\\circ G_{Y,1}(E_{m,C}).$$\nBoth sides have source $G_{Y,1}G_{Y,m}FC$ and target $FG_{X,m+1}C$. The equation is natural in $C$ and is an identity of the simultaneous derived system transformations before evaluation or realization. No boundedness or finite Tor-amplitude hypothesis on $C$ is needed. In the specialization $Y_0=\\operatorname{Spec}k_0$, applying levelwise sections on $s=\\operatorname{Spec}k$ yields an equation of coefficient-complex towers. For general $Y$ the displayed equation remains an equation over $Y$ and makes no identification with $R\\Gamma_c(X,-)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Agent-formulated prerequisite to clause (3) and thm-trf-l-function-euler-product.proof.md, Step 1 Global powers: typed compactification-exchange pasting BEFORE realization. This system identity is not asserted as an explicit formula in the blueprint."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-trf-scheme-frobenius",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-frobenius-square-exchange"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pasting compact support Frobenius system mates with pullback comparison gives composition before derived limit",
+   "results": "PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; no compact-support system-mate theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mate pasting natural transformation pullback composition",
+   "results": "0 hits; loogle reports unknown identifier mate.",
+   "date": "2026-10-18",
+   "verdict": "no match (unavailable identifier)"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*pasting|pullback.*composition|compact.*transport in Mathlib/",
+   "results": "15 hits, including Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean and Presheaf/Pullback.lean; ordinary sheaf pullback compositors, not the specified derived-system compactification exchange.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "system mate pasting compact support transport tower composition before inverse limit",
+   "results": "InverseSystem.limit; CategoryTheory.Limits.limit.isoLimitCone_inv_π; no compact-support system-mate theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For semilinear sheaf coefficient systems the compactification exchange for two successive Frobenius powers equals the composite exchange with source and target pullback compositors",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.map_ιFree_mapFree_hom_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc. 8 returned hit(s); none states the specified semilinear-system comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification exchange natural transformations on semilinear sheaf systems compose for two successive base automorphisms before inverse limit",
+   "results": "AlgebraicGeometry.SheafedSpace.comp_c_app; SheafOfModules.pullbackComp; SheafOfModules.pushforwardNatTrans_comp; CategoryTheory.Sheaf.ΓNatIsoLim; SheafOfModules.pushforwardComp; CategoryTheory.constantCommuteCompose; CategoryTheory.sheafifyComposeIso; CategoryTheory.sheafCompose_map. 8 returned hit(s); none states the specified semilinear-system comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp. 1 returned hit(s); none states the specified semilinear-system comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_hcomp",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean. 5 returned hit(s); none states the specified semilinear-system comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-integral-compact-transport-recurrence",
+  "date": "2026-10-18",
+  "group": "NY"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: compatibility with composition before rationalization",
+   "via": [
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
