@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-flat-ringed-diagram-restriction",
+ "kind": "statement",
+ "title": "Flat coefficient restriction and normalized derived operations on module diagrams",
+ "statement": "Let $J$ be a small category, and let $\\mathcal C_U,\\mathcal C_V$ be small sites in the module-sheaf universe. Let $u:\\operatorname{Sh}(\\mathcal C_U)\\to\\operatorname{Sh}(\\mathcal C_V)$ be a geometric morphism, that is an adjunction $u^{-1}\\dashv u_*$ with $u^{-1}$ preserving finite limits [def-weil-pbc-ringed-topos-morphism]. On each site $T=U,V$ let $a_T:R_T\\to S_T$ be a morphism of sheaves of commutative rings. Suppose $S_T$ is flat over $R_T$, meaning $S_T\\otimes_{R_T}-$ is exact [def-pc-flat-sheaf-modules]. Specify ring isomorphisms $c_R:u^{-1}R_V\\simeq R_U$ and $c_S:u^{-1}S_V\\simeq S_U$ satisfying $a_Uc_R=c_Su^{-1}a_V$. Put $\\mathcal A_{T,R}=\\operatorname{Fun}(J,\\operatorname{Mod}(R_T))$ and $\\mathcal A_{T,S}=\\operatorname{Fun}(J,\\operatorname{Mod}(S_T))$, with module sheaves as in [def-weil-sheaf-of-modules-category] and diagram-site models as in [lem-weil-pbc-diagram-site-realization]. Let $r_T$ be termwise restriction of scalars [def-pc-sheaf-restrict-scalars]. Let $L_R,L_S$ be termwise inverse image with the ring action transported by $c_R,c_S$, and $F_R,F_S$ termwise module direct image, whose action uses the adjoint ring map. Use the termwise module adjunctions $L_R\\dashv F_R$, $L_S\\dashv F_S$. Write $D$ for localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]; derive exact functors termwise and derive $F_R,F_S$ by K-injective resolutions, where K-injective means every map from an acyclic complex is null-homotopic [def-pur-kinjective-complex]. Use the derived adjunctions normalized by [lem-pc-pre-derived-adjoint-functors-general].\n\nRestriction $r_T$ is exact and preserves K-injective diagram complexes. There are canonical natural isomorphisms\n$$b:r_UL_S\\xrightarrow{\\sim}L_Rr_V,\\qquad d:r_VRF_S\\xrightarrow{\\sim}RF_Rr_U.$$\nHere $b$ is the termwise identified inverse image on underlying abelian sheaves. For a K-injective complex $I$ in $\\mathcal A_{U,S}$, $r_UI$ computes the restricted object's derived image, and $d_{QI}$ is induced by the underived identity $r_VF_SI=F_Rr_UI$ with its identified ring actions; $Q$ is localization. These comparisons respect adjuncts: for $M\\in D(\\mathcal A_{V,S})$, $N\\in D(\\mathcal A_{U,S})$, and $t:L_SM\\to N$ with adjunct $t^\\sharp:M\\to RF_SN$, the adjunct of $r_U(t)b_M^{-1}$ is $d_Nr_V(t^\\sharp)$. The comparisons are isomorphisms of derived diagram functors, including all $J$-transition maps.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND (lemma-pre-derived-adjoint-functors-general), 0DVC (lemma-pre-derived-adjoint-functors); agent specialization to compatible flat coefficient changes on diagram sites",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3 (lemma-adjoint-push-pull-modules), underlying module adjunction; applied on the small diagram sites"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfModules, \"adjunction\"",
+   "results": "{\"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.SheafOfModules'\", \"n_hits\": 0}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(pushforward|pullback)|((pushforward|pullback).*restrictScalars)|restrict.*[Ii]njective",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"note\": \"\", \"n_hits\": 3}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of module sheaves commutes with restriction of scalars along a flat ring sheaf map",
+   "results": "{\"top\": [\"PresheafOfModules.pushforward_obj_map_apply'\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"ModuleCat.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.pushforward_obj_map_apply\", \"PresheafOfModules.pushforward_obj_obj\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For diagrams of sheaves of modules on ringed sites, restriction along compatible flat ring maps commutes with derived direct image and exact inverse image, preserving their adjunction",
+   "results": "{\"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pushforwardNatIso\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "{\"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"note\": \"\", \"n_hits\": 5}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|[Rr]estrict.*[Ss]calar",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"note\": \"\", \"n_hits\": 10}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of sheaf ring homomorphisms with isomorphisms on inverse image yields coefficient restriction comparisons for derived pullback and pushforward, compatible with adjunction transposes",
+   "results": "{\"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical exchange on an inverse system of sheaf complexes is the counit and inverse image square mate and commutes with change of coefficients",
+   "results": "{\"top\": [\"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app\", \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIsoApp_inv_hom\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso_inv_app_hom\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "date": "2026-10-17",
+  "group": "NP"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences: finite exchange equations and compatibility as tower morphisms; coefficient-restriction comparison hidden in step 5 of the strict-mate normalization",
+   "via": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

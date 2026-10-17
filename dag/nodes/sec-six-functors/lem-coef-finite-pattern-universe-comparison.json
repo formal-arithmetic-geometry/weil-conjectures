@@ -94,17 +94,15 @@
    }
   },
   {
-   "text": "For a map $f:F\\to G$ between fibrant marked objects, the mapping-test characterization in [lem-coef-categorical-pattern-model-calculus] implies that $f$ is a weak equivalence if and only if it has a marked homotopy inverse over $B$, with homotopies parameterized by $(\\Delta^1)^\\sharp$. Here are both arguments. If $f$ is weak, test first with $Z=F$: surjectivity on $\\pi_0$ gives $g:G\\to F$ with $gf$ in the component of $1_F$. Test with $Z=G$: injectivity on $\\pi_0$, together with $fgf$ in the component of $f$, puts $fg$ in the component of $1_G$. The mapping complexes are Kan. To identify their path components with vertices modulo edge paths, apply [lem-cbc-kan-realization-mapping-classes] with $K=\\Delta^0$: continuous maps from a point modulo homotopy are precisely path components, and the displayed bijection is natural in the Kan target. Finite edge paths can be replaced by single edges by filling $2$-horns: for $e:x\\to y$, fill $\\Lambda_0^2$ with vertices $(x,y,x)$, edge $01=e$ and edge $02=1_x$ to obtain an edge $12:y\\to x$; for edges $x\\to y\\to z$, fill $\\Lambda_1^2$ to obtain the edge $02:x\\to z$. A path of length zero is represented by the degenerate edge. These edges give the two required marked homotopies. Conversely, for every fibrant $Z$, precomposition with $g$ is a homotopy inverse to precomposition with $f$ on the sharp mapping complexes. Write $H:F\\times(\\Delta^1)^\\sharp\\to F$ for the homotopy from $gf$ to $1_F$ and $J:G\\times(\\Delta^1)^\\sharp\\to G$ for that from $fg$ to $1_G$. If $a:\\Delta^n\\to\\operatorname{Map}^{\\sharp}_B(F,Z)$ corresponds to $\\widetilde a:F\\times(\\Delta^n)^\\sharp\\to Z$ and $t:\\Delta^n\\to\\Delta^1$, send $(a,t)$ to the map $(x,s)\\mapsto\\widetilde a(H(x,t(s)),s)$. This is marked and over $B$, commutes with every simplicial operator, and has endpoints $a\\circ gf$ and $a$. Replacing $(F,H,a)$ by $(G,J,b)$ gives endpoints $b\\circ fg$ and $b$. These formulas are precisely the homotopies between the two composites of precomposition maps and their identities. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude the mapping maps are weak homotopy equivalences, and apply the mapping-test criterion. For smaller $F,G$, all inverse maps and homotopies just described are functions between smaller sets, and the sharp mapping complexes between them have identical simplices in both universes. The criterion is therefore identical in the two universes. The Kan horn-filling assertion used here is [lem-coef-kan-quillen-right-proper]; no test against a larger target is inferred merely from tests against smaller ones.",
+   "text": "Let $f:F\\to G$ be a map between smaller fibrant marked objects. Their fibrancy in both universes was proved in step 2; by [lem-coef-categorical-pattern-model-calculus] fibrant objects are exactly the $P$-fibered ones, so the hypotheses of the criterion hold in both universes. Apply [lem-coef-fibrant-pattern-homotopy-inverse] in each universe, with the same pattern $P$ and endpoints $F,G$. This criterion says that $f$ is a weak equivalence exactly when it admits an inverse map $g:G\\to F$ and marked homotopies $F\\times(\\Delta^1)^\\sharp\\to F$, $G\\times(\\Delta^1)^\\sharp\\to G$ from $gf,fg$ to the identities. All three are functions between fixed smaller sets. The simplicial identities, preservation of markings, equations over $B$, and endpoint equalities are identical in both universes. Thus existence of these data is unchanged, and $f$ has the same weak-equivalence status in both universes. The criterion applies to all fibrant testing objects in its ambient universe, so this does not infer larger-target tests merely from smaller-target tests.",
    "uses": [
-    "lem-coef-categorical-pattern-model-calculus",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-cbc-simplicial-homotopy-equivalence-weak",
-    "lem-cbc-kan-realization-mapping-classes"
+    "lem-coef-fibrant-pattern-homotopy-inverse",
+    "lem-coef-categorical-pattern-model-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
-    "place": "Lemma B.2.4, (1) iff (2), printed p.1483; the formal two-test inverse argument and its sharp simplicial homotopies written out."
+    "place": "Lemma B.2.4, (1) iff (2), printed p.1483, applied in each universe; the inverse and homotopy data are compared as functions between fixed smaller sets."
    }
   },
   {
@@ -120,12 +118,11 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-categorical-pattern-model-calculus",
-  "lem-coef-kan-quillen-right-proper",
   "def-weil-size-convention",
-  "lem-coef-pattern-anodyne-generators",
-  "lem-cbc-simplicial-homotopy-equivalence-weak",
-  "lem-cbc-kan-realization-mapping-classes"
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-fibrant-pattern-homotopy-inverse",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-pattern-anodyne-generators"
  ],
  "proof_origin": {
   "by": "agent",
@@ -198,7 +195,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-nonsymmetric-operadic-tensor-adjunction",
@@ -211,18 +208,9 @@
   "date": "2026-10-17",
   "item": "lem-coef-finite-pattern-universe-comparison",
   "worker": "stage1",
-  "summary": "Preserved every hypothesis and clause. Proved common generating cofibrations, compared fibrancy via the seven explicit pattern-anodyne types, constructed the compatible replacements by countably adjoining all finite lifting problems, and reduced weak-equivalence comparison to an explicit homotopy-inverse test between smaller fibrant objects. One new statement-only node isolates the pattern-anodyne lifting theorem; no Lean attachment or Mathlib match.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction before R lim: technical pattern models below lem-coef-enriched-category-tensor-calculus; the finite-cone replacement and universe comparison in step 5 of lem-coef-nonsymmetric-operadic-tensor-adjunction. Steps 1-7 supply the finite-cone model-size input used in step 5 of the nonsymmetric-operadic tensor adjunction, without changing the integral-adjoint route.",
-  "tool_uses": [
-   {
-    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
-    "why": "Generic simplicial homotopy-inverse implies weak homotopy equivalence, applied only to testing mapping complexes in step 6; this technical model argument does not replace any geometric unit route."
-   },
-   {
-    "node": "lem-cbc-kan-realization-mapping-classes",
-    "why": "The K=Delta^0 case identifies edge components of the Kan testing complexes with path components of their realizations, to justify extracting marked inverse homotopies in step 6; a generic tool, with no replacement of the unit route."
-   }
-  ]
+  "summary": "Repaired returned step 6 by isolating the Higher Algebra B.2.4 homotopy-inverse criterion as one new statement-only lemma. The item now applies it and compares only inverse/homotopy functions between fixed smaller sets. All seven proof steps are under 2000 characters; the statement and steps 1-5 and 7 are unchanged. Removed the two CBC citations from the item because their arguments now belong to the new lemma, whose source proof is preserved in report.md. No Mathlib leaf or Lean attachment.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction before R lim: technical pattern models below lem-coef-enriched-category-tensor-calculus; the finite-cone replacement and universe comparison in step 5 of lem-coef-nonsymmetric-operadic-tensor-adjunction. Steps 1-7 supply the finite-cone model-size input used in step 5 of the nonsymmetric-operadic tensor adjunction; the repaired step 6 isolates the Higher Algebra B.2.4 homotopy-inverse criterion.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-cbc-simplicial-homotopy-equivalence-weak",
@@ -231,9 +219,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q87-c0782ba45",
-  "group": "Q87",
+  "reviewer": "NT-cc-NF-624c017fb",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-c0782ba45 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the statements of all seven cited nodes, the unit and chapter records, and the citer's steps 1, 5 and 6. I also read the official Higher Algebra PDF (2017), from a copy already cached on this server, at Def. B.0.19, Thm. B.0.20, Rem. B.0.26, Def. B.1.1, Prop. B.1.6, Prop. B.1.14, Def. B.2.1, Ex. B.2.2, Lemma B.2.4 and the finite-K proof of B.0.20 (printed pp. 1467-1487). New node lem-coef-pattern-anodyne-generators: all seven generators match B.1.1 term by term once every 2-simplex is scaled. C0's first-edge-in-S condition is forced by the domain's marking. Extension against the generators is the same as extension against their weakly saturated class, which is B.1.6, and triviality of that class is B.2.2/B.1.14; no finiteness is needed. It satisfies B1-B7, is not a duplicate of the marked-anodyne, relative-replacement, saturation or small-direct-colimit nodes, and restates no clause of the item. Steps: (1) boundary-cell presentation plus a marking-only pass, giving a U-small label set. (2) Finite shapes, including K_a empty, so the same extension test in both universes. (3)-(4) Explicit all-attaching-maps countable cell construction: finite domains factor at a stage, so RX is P-fibered and X->RX is a trivial cofibration. (5) Identical set constructions give an actual natural isomorphism compatible with eta. (6) B.2.4 (1)<=>(2) expanded: I checked the horn fills, the precomposition homotopy formula and its endpoints (vu=(fg)^*, uv=(gf)^*), and that only F and G serve as test objects. (7) Two-out-of-three. The two tool_uses (lem-cbc-simplicial-homotopy-equivalence-weak, lem-cbc-kan-realization-mapping-classes) are generic and accepted. The statement is unchanged, nothing is weakened, and there is no SGA use. No fixes made. Minor remarks: the new node and the item have no lean_audit field, which the tools maintain; the definition node's universe choice inside 'P-fibered' is loose, but the item uses only the universe-free extension characterization."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-624c017fb (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-fibrant-pattern-homotopy-inverse, the statements of all six cited nodes, the unit and chapter records and the blueprint ancestor. I also read Higher Algebra (2017) B.1.14, B.2.1, B.2.2, B.2.3 and B.2.4 with its whole proof (printed pp.1481-1485), from a copy already cached on this server. The new node is exactly B.2.4 (1)<=>(2): a map of P-fibered objects is a weak equivalence iff it has an inverse g and homotopies over (B,S) built from the interval with every edge marked. Its weak-equivalence notion agrees with the source's via the mapping test in model-calculus. I checked both directions (two tests on pi_0 plus horn filling; precomposition homotopies). Edge cases checked: identity map, empty base, empty or absent cones, empty source; no finiteness is needed. It satisfies B1-B7. Duplicate search over the DAG and blueprint: edge-detection is (1)<=>(3), fixed-cylinder detection is a generic class-bijection test, induced-fibration-test is about fibrations, and the recognition/nerve nodes state other things, so there is no duplicate and no restatement of an item clause. Mathlib's Whitehead lemmas are not a one-line specialization. Steps 1-5 and 7 are unchanged and I re-verified them. The new step 6 is valid: g, H and J are maps between the same smaller objects in both universes, and the criterion tests against every fibrant object of its own universe. Fix: step 6 used the new criterion, whose hypothesis is P-fibered, while it only had 'fibrant (step 2)'. I added the citation of lem-coef-categorical-pattern-model-calculus for fibrant = P-fibered (already in proof_deps) and updated the step's outdated source place. The item statement, proof_deps and all other fields are unchanged. No SGA source is used, no tool use is introduced, and there is no cycle.; 1 file(s) fixed by the reviewer"
  }
 }
