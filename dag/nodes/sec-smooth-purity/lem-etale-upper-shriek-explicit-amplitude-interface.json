@@ -1,0 +1,129 @@
+{
+ "id": "lem-etale-upper-shriek-explicit-amplitude-interface",
+ "kind": "statement",
+ "title": "General coefficient-category amplitude criterion for bounded-below upper shriek",
+ "statement": "Let A be a Grothendieck abelian coefficient category, let f : X \\to Y admit a compactification, and suppose Rf_! is a left adjoint. If an integer N satisfies: for every integer m and every L in D(X_et,A), L in D^{\\le m} implies Rf_! L in D^{\\le m+N}, then the chosen right adjoint Rf^! preserves globally bounded-below objects.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+  "place": "isGE_iff_orthogonal, lines 617-621; source-module bounded-below docstring adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose n with K in D^{≥n} for a bounded-below K. For every L in D^{≤n-N-1}, the amplitude hypothesis gives Rf_! L in D^{≤n-1}; t-structure orthogonality and the additive adjunction imply every map L → Rf^! K is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply TStructure.isGE_iff_orthogonal at n-N-1 and n-N to obtain Rf^! K in D^{≥n-N}; this constructs the plus_rightDerivedUpperShriek_obj field.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+  "place": "isGE_iff_orthogonal, lines 617-621; source-module bounded-below docstring adjunction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isGE_iff_orthogonal|homEquiv.*zero",
+   "results": "14 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean",
+   "verdict": "no exact adjoint amplitude theorem; component APIs found",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint between derived categories preserves bounded below objects when its left adjoint has a uniform finite upper cohomological amplitude",
+   "results": "8 hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "verdict": "no exact adjoint amplitude theorem; component APIs found",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isGE_iff_orthogonal\"",
+   "results": "1 hits: CategoryTheory.Triangulated.TStructure.isGE_iff_orthogonal",
+   "verdict": "orthogonality API found",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint preserves bounded below objects if its left adjoint has a uniform finite upper cohomological amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "date": "2026-10-17",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Source-library bounded-below adjoint variant: finite upper amplitude and adjunction orthogonality"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.Etale.Derived.UpperShriekBoundedBelow",
+  "file": "lean/Sheaf/SixFunctors/Etale/Derived/UpperShriekBoundedBelow.lean",
+  "declaration": "AlgebraicGeometry.Etale.hasBoundedBelowUpperShriekWithAmplitude",
+  "statement": "theorem hasBoundedBelowUpperShriekWithAmplitude [(R(f)_![A]).IsLeftAdjoint] (N : ℤ) (hN : ∀ (L : DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ), DerivedCategory.TStructure.t.IsLE L n → DerivedCategory.TStructure.t.IsLE ((R(f)_![A]).obj L) (n + N)) : HasBoundedBelowUpperShriek A f",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-17"
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "C4 stage 3 repair",
+  "old_statement": "Finite commutative coefficients have an explicit-amplitude alias of the source theorem.",
+  "what": "Generalize the interface to arbitrary Grothendieck-abelian coefficients with an explicit left-adjoint hypothesis; prove it directly by the adjunction and t-structure orthogonality. This is strictly more general than the source ModuleCat specialization and removes the duplicate statement.",
+  "citers": [],
+  "old_lean_statement": "theorem hasBoundedBelowUpperShriekWithAmplitude (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] ..."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261017T155211-L-1645319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261017T155211-L-1645319",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

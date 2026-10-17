@@ -259,7 +259,7 @@ theorem hasBoundedBelowUpperShrieks_of_amplitude (Λ : Type (u + 1)) [CommRing �
       HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
     intro X Y f hf
     obtain ⟨N, hN⟩ := h f
-    exact hasBoundedBelowUpperShriek_of_amplitude f Λ N hN
+    simpa only using hasBoundedBelowUpperShriek_of_amplitude f Λ N hN
   refine ⟨?_, hall⟩
   constructor
   · intro X Y f hf

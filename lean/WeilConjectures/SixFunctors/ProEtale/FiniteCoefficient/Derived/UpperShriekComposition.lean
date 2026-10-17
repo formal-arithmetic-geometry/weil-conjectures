@@ -134,7 +134,6 @@ end EtaleOrigin
 section Composition
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-  [Etale.HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ)]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
 
@@ -265,7 +264,6 @@ end LowerShriek
 section BoundedBelow
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-  [Etale.HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ)]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
 
