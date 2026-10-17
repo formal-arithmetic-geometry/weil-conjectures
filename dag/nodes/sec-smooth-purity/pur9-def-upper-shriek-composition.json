@@ -3,22 +3,31 @@
  "blueprint": {
   "is": "pur9-def-upper-shriek-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Composition comparison for standing exceptional inverse images",
- "statement": "Assume Input “Composition of standing compact-support direct images” (`pur9-input-ambient-composition`). For composable $f:X\\to Y$ and $g:Y\\to S$ as in Definition “Standing choices” (`pur9-def-standing-choices`) and $L\\in D(S_{\\Proet},\\mathcal O_E/\\varpi^n)$, let\n\n$$\nc_{g,f,L}:R(gf)^!_{\\mathcal O_E/\\varpi^n}L\\longrightarrow Rf^!_{\\mathcal O_E/\\varpi^n}Rg^!_{\\mathcal O_E/\\varpi^n}L\n$$\n\nbe the morphism corresponding, under the composite adjunction $Rg_{!,\\mathcal O_E/\\varpi^n}Rf_{!,\\mathcal O_E/\\varpi^n}\\dashv Rf^!_{\\mathcal O_E/\\varpi^n}Rg^!_{\\mathcal O_E/\\varpi^n}$ of Definition “Standing compact-support and exceptional functors” (`pur9-def-shriek-notation`), to the composite\n\n$$\nRg_{!,\\mathcal O_E/\\varpi^n}Rf_{!,\\mathcal O_E/\\varpi^n}R(gf)^!_{\\mathcal O_E/\\varpi^n}L\n\\xrightarrow{\\alpha_{g,f}}R(gf)_{!,\\mathcal O_E/\\varpi^n}R(gf)^!_{\\mathcal O_E/\\varpi^n}L\n\\xrightarrow{\\varepsilon_{gf,L}}L,\n$$\n\nwhere $\\varepsilon_{gf}$ is the counit of the standing adjunction for $gf$.",
+ "statement": "Assume the canonical compact-support composition isomorphism of [thm-sf-comp-composition]. Fix the finite-coefficient conventions of [def-pur-conventions], including the algebraically closed field $k$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, a uniformizer $\\varpi_E$, and $n\\geq1$, and write $A=\\mathcal O_E/\\varpi_E^n$. For composable separated finite-type morphisms $f:X\\to Y$ and $g:Y\\to S$ of finite-type $k$-schemes, and $L\\in D^b_c(S,A)$, let\n\n$$\nc_{g,f,L}:R(gf)^!_A L\\longrightarrow Rf^!_A Rg^!_A L\n$$\n\nbe the morphism corresponding, under the composite hom bijection\n$$\n\\operatorname{Hom}_S(Rg_{!,A}Rf_{!,A}K,L)\\cong\\operatorname{Hom}_Y(Rf_{!,A}K,Rg^!_AL)\\cong\\operatorname{Hom}_X(K,Rf^!_ARg^!_AL),\\qquad K=R(gf)^!_AL,\n$$\nof the composite adjunction $Rg_{!,A}Rf_{!,A}\\dashv Rf^!_A Rg^!_A$ [def-weil-pbc-composite-adjunction], to the composite\n\n$$\nRg_{!,A}Rf_{!,A}R(gf)^!_A L\n\\xrightarrow{\\alpha_{g,f}}R(gf)_{!,A}R(gf)^!_A L\n\\xrightarrow{\\varepsilon_{gf,L}}L.\n$$\n\nHere $Rf_!,Rg_!,R(gf)_!$ are the compact-support direct images of [def-compact-support-direct-image-detailed], and $Rf^!,Rg^!,R(gf)^!$ are the constructible exceptional inverse images of [def-weil-exceptional-inverse-image], the standing ones of [def-pur-conventions]; they carry $D^b_c(S,A)$ into $D^b_c(Y,A)$ and $D^b_c(X,A)$. The adjunction bijections $\\operatorname{Hom}(Rh_!K',L')\\cong\\operatorname{Hom}(K',Rh^!L')$ used above, for bounded-below $K'$ of etale origin and bounded-below $L'$, are those of [thm-sf-ambient-adjoint-class], and $\\varepsilon_{gf}$ is the counit of this standing adjunction for $gf$. The object $K=R(gf)^!_AL\\in D^b_c(X,A)$ has an etale-origin witness by [lem-sf-proetale-constructible-origin](ii), so $\\alpha_{g,f}$ is evaluated on its stated domain, and $Rf_{!,A}K$ is again bounded below of etale origin by [thm-sf-comp-composition]. The object $L$ and all displayed functors are on the small pro-etale sites of [def-weil-pbc-proetale-site].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/pur9-def-upper-shriek-composition.md",
   "place": "node pur9-def-upper-shriek-composition, order 2320"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "thm-sf-comp-composition",
+  "def-pur-conventions",
+  "def-weil-pbc-composite-adjunction",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-proetale-constructible-origin",
+  "def-weil-pbc-proetale-site"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -40,5 +49,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur9-def-upper-shriek-composition",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against the main-20261015 blueprint and the current DAG. No Lean declaration states the item. The three stale pur9 references were made precise with existing nodes: thm-sf-comp-composition supplies the compact-support comparison, def-pur-conventions supplies the finite-coefficient standing choices and adjunction, and def-weil-pbc-composite-adjunction, def-compact-support-direct-image-detailed, pur713-def-upper-shriek and def-weil-pbc-proetale-site supply the displayed composite adjunction, functors and categories. No new nodes were needed; the defining morphism and its counit formula are unchanged. Maintainer-reader repair (2026-10-17): the exceptional functors are those of def-weil-exceptional-inverse-image fixed by def-pur-conventions (whose counit the definition uses), not pur713-def-upper-shriek, which needs an unrestricted pro-etale proper adjoint that def-weil-exceptional-inverse-image shows does not exist in general. L is restricted to D^b_c(S,A), where the standing adjunction (thm-sf-ambient-adjoint-class) and alpha_{g,f} (etale-origin domain, lem-sf-proetale-constructible-origin(ii)) are defined. This is the reading the merged citer thm-pur-composition-coherence already uses.",
+  "blueprint": "Realizes the complete definition in pur9-def-upper-shriek-composition.md (node order 2320), including the mate under the composite adjunction and the counit-normalized compact-support composition map."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-07b80c47c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-07b80c47c (reviewer sub-agent of L); spot-checked: I read the whole definition. The source (main-20261015 sk-prop-sp-composition/pur9-def-upper-shriek-composition.md, order 2320) cites three pur9 ids that no blueprint snapshot defines, so replacing them with DAG nodes was right. Fault (E4/E6): the delivered statement took Rf^!, Rg^! and R(gf)^! from pur713-def-upper-shriek. That node is imported and unreviewed, and it defines Rf^! on unbounded D(Y_proet,A) through a non-existent proper-adjoint input; def-weil-exceptional-inverse-image shows this ambient right adjoint fails in general (elliptic-curve counterexample). The counit eps_{gf}, however, came from the standing adjunction of def-pur-conventions, which belongs to def-weil-exceptional-inverse-image. On top of that, L was arbitrary, while alpha_{g,f} of thm-sf-comp-composition is defined only on D^+_et. Repair, statement and stmt_deps only: the functors are now those of def-weil-exceptional-inverse-image; L lies in D^b_c(S,A); K=R(gf)^!L has etale origin by lem-sf-proetale-constructible-origin(ii); Rf_!K stays bounded below of etale origin by thm-sf-comp-composition; the two hom bijections come from thm-sf-ambient-adjoint-class(2). I removed pur713-def-upper-shriek and added def-weil-exceptional-inverse-image, thm-sf-ambient-adjoint-class and lem-sf-proetale-constructible-origin. None of the three reaches the item, so there is no cycle. The defining mate eps_{gf} o alpha_{g,f} and the composite counit eps_g Rg_!(eps_f Rg^!) are unchanged; I checked them against def-weil-pbc-composite-adjunction and unit statement (1). D^b_c covers every use: the unit works in D_ctf, thm-pur-composition-coherence (merged) uses D^b_ctf and already reads the item this way, and the chart-normalization node uses L=Lambda. Edge cases checked: f or g an identity gives the identity, L=0, n=1 with E ramified. Duplicate candidates read (lem-sf-mate, fix-prop-adjunctions(3), det-sp-composition-comparisons(1)) are statements about the map, not this definition. There are no new nodes and no proof steps, so no tool_uses are needed. No SGA source is cited, and no target changed.; 1 file(s) fixed by the reviewer"
  }
 }

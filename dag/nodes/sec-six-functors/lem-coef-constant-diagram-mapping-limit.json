@@ -2,19 +2,108 @@
  "id": "lem-coef-constant-diagram-mapping-limit",
  "kind": "statement",
  "title": "Mapping from a constant coherent diagram is a limit of mapping spaces",
- "statement": "Use universes, small quasicategories, coherent functor categories, constant diagrams and right-pinched mapping spaces of [def-cbc-enhanced-diagrams-cones], coherent Hom bifunctors of [lem-coef-infinity-hom-bifunctor-functoriality], and small limits of spaces of [lem-coef-infinity-yoneda-presheaf-limits]. Let $K$ and $E$ be small quasicategories, let $F:K\\to E$ be a coherent functor, and let $z\\in E$. Write $\\Delta_K z$ for the constant diagram. Evaluation of a coherent transformation at the vertices and simplices of $K$ induces a natural equivalence of spaces $$\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(\\Delta_K z,F)\\simeq\\lim_{k\\in K}\\operatorname{Map}_E(z,F(k)).$$ The right-hand diagram is the composite of $F$ with the covariant coherent Hom functor $\\operatorname{Map}_E(z,-)$. The equivalence retains all higher simplices, is natural in $z,F$, in postcomposition by functors $E\\to E\\prime$, and in restriction along functors $K\\prime\\to K$. Empty $K$ is allowed; its right side is the terminal space. No limits in $E$ are assumed.",
+ "statement": "Use universes, small quasicategories, coherent functor categories, constant diagrams and right-pinched mapping spaces of [def-cbc-enhanced-diagrams-cones], the space-valued transport and coherent mapping bifunctor $H_E:E^{\\mathrm{op}}\\times E\\to\\mathcal S$ of [lem-coef-space-transport-classification], and small limits of spaces of [lem-coef-infinity-yoneda-presheaf-limits]. Let $K$ and $E$ be small quasicategories, let $F:K\\to E$ be a coherent functor, and let $z\\in E$. Write $\\Delta_K z$ for the constant diagram. Evaluation of a coherent transformation at the vertices and simplices of $K$ induces a natural equivalence of spaces $$\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(\\Delta_K z,F)\\simeq\\lim_{k\\in K}\\operatorname{Map}_E(z,F(k)).$$ The right-hand diagram is $H_E(z,F(-))$, the composite of $F$ with the covariant restriction $H_E(z,-)$ of that bifunctor, whose values are naturally equivalent to $\\operatorname{Map}_E(z,F(k))$. The equivalence retains all higher simplices, is natural in $z,F$, in postcomposition by functors $T:E\\to E\\prime$ (on the right, through the map of limits induced by the transformation $H_E(z,F(-))\\to H_{E\\prime}(Tz,TF(-))$ that corresponds under transport to the map of pulled-back source-fixed arrow left fibrations applying $T$ to arrows), and in restriction along functors $K\\prime\\to K$. Empty $K$ is allowed; its right side is the terminal space. No limits in $E$ are assumed.",
  "source": {
   "document": "https://arxiv.org/html/1312.3178",
   "place": "Definitions 3.1.13(3), 3.2.3(4) and Example 3.2.4(3): general coherent mapping-space calculation underlying the relative-limit clause; statement extracted by the agent. General reference wanted: Lurie, Higher Topos Theory, sections 5.1.2-5.1.3."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-space-transport-classification",
   "lem-coef-infinity-yoneda-presheaf-limits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a universe $\\mathcal U$ containing the small quasicategories $K,E$, and form the space category in a containing universe. Let $H_E$ be the coherent mapping bifunctor of the transport classification and put $H=H_E(z,F(-)):K\\to\\mathcal S_{\\mathcal U}$; this is exactly the diagram $F_{z,F}$ of the constant-source section comparison, a coherent space-valued diagram and not a diagram of component sets. The constant-source section comparison, applied with $J=K$, $p=F$, $x=z$, gives an equivalence $a:M\\simeq N$, where $M=\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(\\Delta_Kz,F)$ and $N=\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal S_{\\mathcal U})}(\\Delta_K*,H)$, through the section space $\\Gamma_K(q_{z,F})$. It identifies an entire coherent transformation with its family of arrows $z\\to F(k)$ and all their higher compatibilities. The size hypotheses hold because $K,E$ are $\\mathcal U$-small, so $E$ is $\\mathcal U\\prime$-small with $\\mathcal U$-small mapping spaces; the comparison also supplies a small Kan model for $M$.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-constant-source-section-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Agent application of the existing constant-source comparison; Subsection 7.4.1, especially the section/transformation comparison of Proposition 7.4.1.14."
+   }
+  },
+  {
+   "text": "By the small-limit assertion choose a limiting cone $\\lambda:\\Delta_KL\\to H$ in $\\mathcal S_{\\mathcal U}$. The mapping-space cone criterion applied in this space category, with testing object $*$, says that $b:\\operatorname{Map}_{\\mathcal S_{\\mathcal U}}(*,L)\\to N$, $u\\mapsto\\lambda\\circ\\Delta_Ku$, is an equivalence. Here we use the cone criterion itself, rather than the representable limit formula with its right-hand limit. Apply the first equivalence of the point-cocone criterion with its indexing simplicial set equal to $\\Delta^0$ and $Y=L$. Since $\\operatorname{Fun}(\\Delta^0,\\mathcal S_{\\mathcal U})=\\mathcal S_{\\mathcal U}$ and $\\operatorname{Fun}(\\Delta^0,L)=L$, it gives the natural point-evaluation equivalence $e:\\operatorname{Map}_{\\mathcal S_{\\mathcal U}}(*,L)\\simeq L$. Consequently $c=b\\circ e^{-1}:L\\simeq N$ is an equivalence. Only a limit in spaces has been chosen, never a limit in $E$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Proposition 7.4.1.1 and the paragraph following it; small limits of spaces. Example 4.6.7.7 (06QR) for point evaluation."
+   }
+  },
+  {
+   "text": "Take $c^{-1}a:M\\simeq L$. To identify this equivalence, first compose $c$ with evaluation at any vertex or simplex of $K$. Its value on a point $\\ell$ of $L$ is the corresponding component of $\\lambda(\\ell)$, by the formula $b(u)=\\lambda\\circ\\Delta_Ku$ and the point-evaluation description of $e$. This is an equality of coherent families, since $\\lambda$ is a transformation on the whole indexing simplicial set. The comparison $a$ has exactly the same evaluation description for a transformation in $M$. Thus the inverse $c^{-1}$ sends that family to its point of the limit, proving that the displayed equivalence is the evaluation-induced comparison claimed in the statement. The cone criterion and the constant-source comparison are equivalences of spaces, so this argument retains every parameter simplex.",
+   "uses": [
+    "lem-coef-infinity-constant-source-section-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Agent identification of the comparison obtained from Proposition 7.4.1.1 with evaluation; no extra comparison lemma is asserted."
+   }
+  },
+  {
+   "text": "Naturality in $z,F$ and restriction $v:K\\prime\\to K$ holds for $a$ by the constant-source comparison. For the postcomposition clause let $T:E\\to E\\prime$ and $H\\prime=H_{E\\prime}(Tz,TF(-))$. Applying $T$ to arrows gives a map over $K$ of the pulled-back source-fixed arrow fibrations, $A_{z,F}\\to A_{Tz,TF}$, $(k,h)\\mapsto(k,Th)$: $Th$ is an arrow from $Tz$ to $TF(k)$, and this commutes with all simplicial operators. By the transport mapping-space equivalence for these representatives, this vertex of $\\operatorname{Fun}_{/K}(A_{z,F},A_{Tz,TF})$ is a transformation $\\tau_T:H\\to H\\prime$, the one named in the statement, and by compatibility with composition, composition with $\\tau_T$ on $N$ corresponds to postcomposition $s\\mapsto Ts$ on section spaces $\\Gamma_K(q_{z,F})\\to\\Gamma_K(q_{Tz,TF})$. On the other side an $n$-simplex of $M$ is $\\sigma:K\\times\\Delta^{n+1}\\to E$, and its section is $h=\\sigma\\circ(\\mathrm{id}_K\\times\\rho_n)$; since $T(\\sigma\\circ(\\mathrm{id}_K\\times\\rho_n))=(T\\sigma)\\circ(\\mathrm{id}_K\\times\\rho_n)$, the first comparison commutes strictly with $T$, which is the functor-naturality of the pinch comparison applied to $\\operatorname{Fun}(K,E)\\to\\operatorname{Fun}(K,E\\prime)$. Hence $a$ commutes with postcomposition by $T$ on every simplex.",
+   "uses": [
+    "lem-coef-infinity-constant-source-section-comparison",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Agent naturality calculation using the explicit pinch/arrow formulas and transport of the source-fixed arrow fibration; Subsection 7.4.1."
+   }
+  },
+  {
+   "text": "Now compare $c$ with $c\\prime:L\\prime\\simeq N\\prime$, built in step 2 from a limiting cone $\\lambda\\prime:\\Delta_KL\\prime\\to H\\prime$. The cone $\\tau_T\\circ\\lambda$ with apex $L$ corresponds, by the cone mapping-space criterion for $\\lambda\\prime$ with testing object $L$, to a map $\\phi:L\\to L\\prime$, unique up to a contractible choice, with $\\lambda\\prime\\circ\\Delta_K\\phi\\simeq\\tau_T\\circ\\lambda$ as whole coherent cones; this is the induced map of limits. By the formula $b(u)=\\lambda\\circ\\Delta_Ku$ of step 2 and the point evaluations, composition with $\\tau_T$ on $N$ sends $c(\\ell)=\\lambda(\\ell)$ to $\\tau_T\\lambda(\\ell)\\simeq\\lambda\\prime(\\phi(\\ell))=c\\prime(\\phi(\\ell))$, on every parameter simplex. Restriction along $v$ is treated in the same way, with the restricted cone $\\lambda v$ and the limiting cone of the restricted diagram. Therefore $c^{-1}a$ has all the claimed naturalities. Restriction is the usual map from a limit to the limit of the restricted diagram; it need not be an equivalence.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Agent: universal property of the limiting cone of step 2 applied to the transformed cone; Proposition 7.4.1.1."
+   }
+  },
+  {
+   "text": "If $K=\\varnothing$, its functor category has exactly one simplex in each degree, so $M$ is a point. The small-limit assertion and the cone criterion give the terminal space for the empty limit, and all constructions above give its unique comparison. For $K=\\Delta^0$ the comparison is the identity of the usual mapping space. For $K=\\Delta^1$ it encodes an arrow $z\\to F(0)$ together with its coherent image in $F(1)$, with no unjustified product over vertices. If a Hom value is empty, there is no coherent point family; both sides can be empty and none of the cited assertions required nonempty mapping spaces. If $E$ is empty there is no object $z$, so the statement has no such instance.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Agent edge-case check of the explicit comparison and empty limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-constant-source-section-comparison",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-space-point-cocone-criterion",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05QM",
+  "place": "Agent composition of existing DAG statements, following the point-test calculation of Proposition 7.4.1.1; archival Kerodon WANTED. This is not attributed verbatim to Gepner–Haugseng."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +139,45 @@
    "results": "{\"t\": \"2026-10-17T12:50:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory E and diagram F indexed by K, Map in Fun(K,E) from constant z to F equals limit over K of Map_E(z,F(k))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.Quasicategory\", \"SSet.Truncated.hasLimits\", \"SSet.hoFunctor.preservesTerminal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.const\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\"], \"digest\": \"142e9ee4f8c48d45\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary category limits, strict Segal sets or basic simplicial-set structures; not the whole mapping-space comparison for coherent diagrams in arbitrary quasicategories. The ordinary limitCompCoyonedaIsoCone candidate was read in Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-90; its Hom is a set, not a quasicategory mapping space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping space of coherent natural transformations from a constant diagram to F is the limit of Map(z,F(k))",
+   "results": "{\"t\": \"2026-10-17T13:12:05Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping space of coherent natural transformations from a constant diagram to F is the limit of Map(z,F(k))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CategoryOfElements.CreatesLimitsAux.isLimit\", \"CategoryTheory.Limits.IsLimit.ofRepresentableBy\", \"CategoryTheory.Limits.IsLimit.representableBy\", \"CategoryTheory.Limits.lim\", \"CategoryTheory.Limits.DiagramOfCones.mkOfHasLimits\", \"CategoryTheory.Limits.Types.limitCone\", \"CategoryTheory.Limits.Types.limitConeIsLimit\", \"CategoryTheory.Limits.DiagramOfCones.mkOfHasLimits_obj\"], \"digest\": \"0bfbefcfa17d6f54\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary-category limit/cone results concern sets of morphisms, not coherent mapping spaces in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-92, especially limitCompCoyonedaIsoCone; the AlgebraicTopology grep has zero hits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.const, CategoryTheory.Limits.limit",
+   "results": "{\"t\": \"2026-10-17T13:12:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.const, CategoryTheory.Limits.limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limit.lift_π\", \"CategoryTheory.Limits.limit.existsUnique\", \"CategoryTheory.Limits.limit.isoLimitCone_hom_π\", \"CategoryTheory.Limits.limit.lift_π_assoc\", \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"CategoryTheory.Limits.limit.isoLimitCone_hom_π_assoc\", \"CategoryTheory.Limits.limit.isoLimitCone_inv_π_assoc\", \"CategoryTheory.Limits.limit.homIso_hom\"], \"digest\": \"9f3e43dda5ab01af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary-category limit/cone results concern sets of morphisms, not coherent mapping spaces in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-92, especially limitCompCoyonedaIsoCone; the AlgebraicTopology grep has zero hits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*mapping|mapping.*limit|homotopyLimit",
+   "results": "{\"t\": \"2026-10-17T13:12:06Z\", \"tool\": \"grep\", \"query\": \"constant.*mapping|mapping.*limit|homotopyLimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary-category limit/cone results concern sets of morphisms, not coherent mapping spaces in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-92, especially limitCompCoyonedaIsoCone; the AlgebraicTopology grep has zero hits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations from a constant quasicategory diagram are the limit of covariant mapping spaces",
+   "results": "{\"t\": \"2026-10-17T13:12:07Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations from a constant quasicategory diagram are the limit of covariant mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limitCompCoyonedaIsoCone\", \"CategoryTheory.Limits.limitCompCoyonedaIsoCone_hom_app\", \"CategoryTheory.Limits.limitConstTerminal\", \"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Limits.IsLimit.homEquiv\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.LimitPresentation.π\", \"CategoryTheory.Limits.isLimitConstCone\"], \"digest\": \"425e6c0cb147b335\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary-category limit/cone results concern sets of morphisms, not coherent mapping spaces in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-92, especially limitCompCoyonedaIsoCone; the AlgebraicTopology grep has zero hits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an infinity category E and K diagram F, coherent cones with fixed apex z form the homotopy limit of the spaces of arrows z to F(k)",
+   "results": "{\"t\": \"2026-10-17T13:12:08Z\", \"tool\": \"leanfinder\", \"query\": \"For an infinity category E and K diagram F, coherent cones with fixed apex z form the homotopy limit of the spaces of arrows z to F(k)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightDiagram.isLimit\", \"CategoryTheory.CostructuredArrow.CreatesConnected.isLimitRaiseCone\", \"CategoryTheory.Limits.combineCones\", \"LightProfinite.asLimitConeAux\", \"CategoryTheory.Limits.diagramOfConesInhabited\", \"CategoryTheory.Limits.DiagramOfCones.mkOfHasLimits_conePoints\", \"LightProfinite.asLimitCone\", \"LightProfinite.asLimitCone'\"], \"digest\": \"073329eb54fb6800\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned ordinary-category limit/cone results concern sets of morphisms, not coherent mapping spaces in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-92, especially limitCompCoyonedaIsoCone; the AlgebraicTopology grep has zero hits. Both semantic phrasings were inspected."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-generalized-operad-pattern-fibered",
@@ -82,5 +206,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-constant-diagram-mapping-limit",
+  "worker": "stage1",
+  "summary": "Reused the existing constant-source section comparison, cone mapping criterion and point-evaluation result to prove the coherent limit formula without new nodes. Verified the evaluation map, all naturalities, size conventions and empty cases; no statement change. Recorded actual searches and excluded the ordinary categorical Mathlib candidate. Maintainer-reader FIX (2026-10-17): the statement now takes the right-hand diagram from the transport mapping bifunctor of lem-coef-space-transport-classification (the model the constant-source section comparison uses) instead of lem-coef-infinity-hom-bifunctor-functoriality, since no node identifies the two Hom-functor models; the postcomposition map is named, and the naturality step is split into steps 4 and 5.",
+  "blueprint": "Historical master prop-coef-integral-exceptional-adjoint proof paragraph 2 via the recorded generalized-operadic replacement chain: realizes the mapping-space calculation used in steps 3 and 4 of lem-coef-generalized-operad-pattern-fibered, retaining the historical ancestry; same_as search found none.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space universal property of a limiting cone, applied only in spaces; the coefficient unit has no separate cone mapping criterion. This preserves the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-c0c7eaad4",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-c0c7eaad4 (reviewer sub-agent of L); spot-checked: I read the item and its 5 steps in full, the full statements of all 8 cited nodes (plus the proofs of the section-comparison and hom-bifunctor nodes, and def-coef-infinity-category-of-spaces), and the only citer (lem-coef-generalized-operad-pattern-fibered, steps 3-4). The delivery has no new nodes and is not a target. Gepner-Haugseng 1312.3178 and Kerodon 05QM are not in literature/, so I could not check the cited source places; they stay WANTED and the proof is agent-written. One fault, repaired (C4/E5): the statement takes the Hom diagram from lem-coef-infinity-hom-bifunctor-functoriality, built by rigidification, while step 1's section comparison gives the transport/straightening bifunctor of lem-coef-space-transport-classification. Steps 1 and 4 treated these two models as the same, including their T-functoriality, but no DAG node identifies them; that would need a Yoneda-type comparison. Fix, a named statement correction that weakens nothing: the statement and stmt_deps now use the transport H_E (the model of the sibling section comparison and of the representable criterion the citer combines with the item), and the postcomposition map is named as tau_T, induced by (k,h)->(k,Th) on the pulled-back arrow fibrations. Step 1 is re-cited, and old step 4 is rewritten as steps 4 (a commutes with T, from the transport mapping formula plus composition, and pinch naturality) and 5 (c commutes with T and v, from the cone criterion with testing object L). Other checks: in step 2 the cone criterion with x=* in S_U and the point-cocone specialization with K=Delta^0 hold literally, since Fun(Delta^0,S_U)=S_U and L is a U-small Kan complex. Size hypotheses hold (E U-small). Edge cases hold: empty K gives a point and the terminal limit, Delta^0 and Delta^1, empty Hom values, empty E. The dependency closure (625 nodes) has no cycle. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (cone mapping-space criterion, already a recorded tool of sibling nodes). No duplicates, no SGA. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-constant-diagram-mapping-limit.json; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

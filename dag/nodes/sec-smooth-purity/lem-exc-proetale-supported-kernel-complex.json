@@ -1,9 +1,82 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Write $P_V$ for restriction along $B_V\\to A_V$ [def-pc-sheaf-restrict-scalars]. This coefficient map is induced by $\\bar r\\mapsto r1_A$: it is well defined because $n1_A=0$, and central because integer multiples of $1_A$ commute with every element. Apply [lem-exc-proetale-finite-scalar-unit-comparison] to $B\\to A$ and to $i,j$. Thus scalar restriction commutes with these inverse and direct images and takes the actual $A$-unit, through the displayed comparisons, to the $B$-unit. Scalar restriction detects zero objects and reflects isomorphisms: it leaves all underlying abelian sheaves and maps unchanged. Explicitly, the inverse of an invertible underlying map $v$ of $A$-module sheaves is $A$-linear, since applying $v$ to $v^{-1}(ax)$ and $av^{-1}(x)$ gives $ax$ in both cases.",
+   "uses": [
+    "lem-exc-proetale-finite-scalar-unit-comparison",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
+    "place": "Supported kernel identification and assembly of the degreewise short exact sequences"
+   }
+  },
+  {
+   "text": "If $j_A^*N=0$, the inverse-image comparison gives $j_B^*P_TN=0$. The assumed [lem-exc-proetale-closed-essential-image], applied with the commutative ring sheaves $B_V$, says exactly that $\\eta^B_{i,P_TN}$ is invertible. By the unit equation in [lem-exc-proetale-finite-scalar-unit-comparison], $P_T(\\eta^A_{i,N})$ is invertible; Step 1 reflects this to an $A_T$-linear isomorphism. Naturality is the naturality of the closed adjunction unit itself. For an $A_Z$-module sheaf $M$, the direct-image comparison identifies $P_Ti_{A,*}M$ with $i_{B,*}P_ZM$. This object is in the essential image of $i_{B,*}$, so the other implication of [lem-exc-proetale-closed-essential-image] gives $j_B^*P_Ti_{A,*}M=0$. Comparing inverse images and detecting zero gives $j_A^*i_{A,*}M=0$. The quasi-compact open-complement hypothesis needed for the assumed lemma is precisely the hypothesis on $j$.",
+   "uses": [
+    "lem-exc-proetale-finite-scalar-unit-comparison",
+    "lem-exc-proetale-closed-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
+    "place": "Supported kernel identification and assembly of the degreewise short exact sequences"
+   }
+  },
+  {
+   "text": "For any $A_T$-module sheaf $N$, put $G(N)=\\ker(\\eta^A_{j,N})$. First, $j_B^*(\\eta^B_{j,P_TN})$ is invertible: by [lem-pur-proetale-open-unit-evaluation], after restricting to an object $W\\to U$ it is the restriction map from $W$ to $W\\times_TU\\cong W$, hence the identity. The comparison and unit equation of [lem-exc-proetale-finite-scalar-unit-comparison], and Step 1, therefore show that $j_A^*(\\eta^A_{j,N})$ is invertible. Exactness of $j_A^*$ in [prop-weil-pbc-proetale-constant-exact] gives $j_A^*G(N)\\cong\\ker(j_A^*\\eta^A_{j,N})=0$. Step 2, now applied to $G(N)$, identifies its actual closed unit $G(N)\\xrightarrow{\\sim}i_*i^*G(N)=i_*H(N)$.",
+   "uses": [
+    "lem-exc-proetale-finite-scalar-unit-comparison",
+    "lem-pur-proetale-open-unit-evaluation",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
+    "place": "Supported kernel identification and assembly of the degreewise short exact sequences"
+   }
+  },
+  {
+   "text": "Let $k_q:F^q\\to I^q$ be the kernel inclusion and write $\\eta_q=\\eta_{j,I^q}$. Naturality gives $\\eta_{q+1}d_I^q=(j_*j^*d_I^q)\\eta_q$, so $d_I^q k_q$ is killed by $\\eta_{q+1}$. The sectionwise kernel description in [def-weil-sheaf-of-modules-category] defines a unique restriction $d_F^q:F^q\\to F^{q+1}$ with $k_{q+1}d_F^q=d_I^qk_q$. Since $k_{q+2}d_F^{q+1}d_F^q=d_I^{q+1}d_I^qk_q=0$ and $k_{q+2}$ is monic, $d_F^{q+1}d_F^q=0$. Define $H(I)^q=i^*F^q$ and $d_{H(I)}^q=i^*(d_F^q)$. The closed units $u_q:F^q\\to i_*i^*F^q$, invertible by Step 3, satisfy $u_{q+1}d_F^q=(i_*i^*d_F^q)u_q$ by naturality. Thus $u:F\\to i_*H(I)$ is a chain map, and $d_F^qu_q^{-1}=u_{q+1}^{-1}(i_*i^*d_F^q)$ shows that the degreewise inverses form its inverse chain map.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
+    "place": "Supported kernel identification and assembly of the degreewise short exact sequences"
+   }
+  },
+  {
+   "text": "By hypothesis each $\\eta_q$ is epic. In the abelian module-sheaf category of [def-weil-sheaf-of-modules-category], $k_q$ is its kernel, hence $0\\to F^q\\xrightarrow{k_q}I^q\\xrightarrow{\\eta_q}j_*j^*I^q\\to0$ is short exact. Replacing $F^q$ by $i_*H(I)^q$ through $u_q$, the first arrow is exactly $k_qu_q^{-1}$. Step 4 makes these arrows chain maps, and [lem-weil-pbc-cochain-complexes-degreewise-exact] gives the asserted short exact sequence of complexes. For any chain map $a:I\\to I'$, naturality of $\\eta_j$ restricts each $a^q$ to $F^q\\to F'^q$, and naturality of $\\eta_i$ makes its square with $u_q,u'_q$ commute. The kernel inclusions also commute with $a^q$ by construction, so the whole short exact sequence is natural in $I$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
+    "place": "Supported kernel identification and assembly of the degreewise short exact sequences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-proetale-finite-scalar-unit-comparison",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-exc-proetale-closed-essential-image",
+  "lem-pur-proetale-open-unit-evaluation",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.proof.md",
+  "place": "Supported kernel identification and assembly of the degreewise short exact sequences"
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -69,6 +142,34 @@
    "results": "12 hits including LinearMap.restrictScalars_id, LinearMap.restrictScalars, LinearMap.restrictScalars_injective, LinearMap.restrictScalars_self, LinearMap.restrictScalars_inj, LinearMap.coe_restrictScalars, LinearMap.restrictScalars_apply, LinearMap.restrictScalars_zero. These describe restriction of scalars for module maps, without a site or closed-support comparison.",
    "date": "2026-10-17",
    "verdict": "no match: scalar restriction infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|supportedAway|closedUpperShriek",
+   "results": "Actual search hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sectionsWithSupport\"",
+   "results": "Actual search hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The closed supported part of a complex of sheaves of left modules over a finite ring is the kernel of restriction to the open complement",
+   "results": "Actual search hits: Module.isClosed_support, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Hom.support_ker, HomologicalComplex.IsStrictlySupportedOutside.mk, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite noncommutative coefficients a proetale sheaf supported on a closed complement has an invertible closed adjunction unit and its supported kernels form a short exact sequence of complexes",
+   "results": "Actual search hits: Profinite.NobelingProof.succ_exact, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyEtale.comp_bijective, Algebra.smoothLocus_eq_compl_support_inter, Algebra.Extension.exact_cotangentComplex_toKaehler, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyEtale.instForallOfFinite. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
   }
  ],
  "source": {
@@ -77,10 +178,24 @@
  },
  "split_report": {
   "date": "2026-10-17",
-  "item": "lem-exc-proetale-support-triangle",
+  "item": "lem-exc-proetale-supported-kernel-complex",
   "worker": "stage1",
-  "summary": "Statement-only hidden lemma extracted from the returned long item step.",
-  "blueprint": "## Proof, identification of the supported kernel and assembly of the short exact complex sequence"
+  "summary": "Transfers the assumed commutative supported-unit theorem by a separate unit-normalized finite scalar comparison, proves open-kernel support, and writes the kernel differential and complex naturality explicitly. No change to mathematical hypotheses or conclusions; repaired imported double-escaped TeX.",
+  "blueprint": "The closed-supported kernel identification and degreewise short exact sequences in lem-exc-proetale-support-triangle, Proof; the final three steps give the previously implicit complex argument.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-proetale-closed-essential-image",
+    "why": "The item explicitly assumes this commutative-coefficient support criterion; it is the input for scalar transfer, not an alternative proof of localization."
+   },
+   {
+    "node": "lem-pur-proetale-open-unit-evaluation",
+    "why": "Canonical evaluation of the open unit on pro-etale objects identifies its open restriction with the identity; no node of this unit supplies that unit-normalized evaluation."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic kernel preservation for inverse image with possibly noncommutative finite constant coefficients; this is the exactness input to the supported-kernel calculation, not a replacement localization route."
+   }
+  ]
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-localization",
@@ -92,5 +207,18 @@
   },
   "same_as": [],
   "is": null
+ },
+ "tool_uses": [
+  "lem-exc-proetale-closed-essential-image",
+  "lem-pur-proetale-open-unit-evaluation",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-6671f391d",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-6671f391d (reviewer sub-agent of L); spot-checked: Read the item, all five steps, the new helper, every cited statement (closed-essential-image, open-unit-evaluation, proetale-constant-exact and constant-ring-map, proetale-inverse-image, proetale-operations, restrict-scalars, sheaf-of-modules-category, cochain-complexes-degreewise-exact), the parent support-triangle split, unit sk-prop-sf-localization, the main-20261015 blueprint proof and Stacks 03D3 (sites-modules.tex 1043-1098). Coefficient category: def-weil-pbc-proetale-operations explicitly identifies the tensor pullback with the transported action r.m=c^{-1}(r)m and with the 03D3-lifted adjunction, so the commutative closed unit in closed-essential-image for B=Z/n is the helper's eta^B. Step 2's transfer is therefore exact, and in any case invertibility of a unit does not depend on the choice of isomorphic left adjoint. Step 1: Z/n to A is well defined and central, and scalar restriction reflects isomorphisms and detects zero. Step 2: the unit equation gives P(eta^A_i) = iso composed with eta^B_i, and beta and alpha give j^*i_*M=0. The quasi-compact j hypothesis matches. Step 3: j^*eta_j is the identity by the restriction description of open-unit-evaluation (finite commutative B), kernel preservation gives j^*G=0, and Step 2 applies to G. Steps 4-5: the kernel differential, d^2=0, the chain map u and its inverse, the degreewise short exact sequence with epic eta, and naturality are all correct. The helper is true: both ring-map composites agree on constant sections, the underlying maps are identities, and the module units have the abelian unit as underlying map. Tested on identities, the zero ring, the empty scheme and a matrix ring. It is not a restatement of the item, and it does not duplicate ring-sheaf-change-adjunction, cbc-finite-open-exchange-scalars, finite-constant-coefficient-transport or the sfb module-object nodes, all of which assume commutative coefficients. Searches cover three kinds, the blueprint from/via fields are correct, and no SGA is cited. Accepted tool_uses: open-unit-evaluation and proetale-constant-exact. The closed-essential-image entry is on the unit's route (sk-prop-sf-closed-unit) and is harmless. No fixes."
  }
 }

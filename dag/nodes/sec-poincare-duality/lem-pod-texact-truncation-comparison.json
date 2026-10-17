@@ -1,0 +1,87 @@
+{
+ "id": "lem-pod-texact-truncation-comparison",
+ "kind": "statement",
+ "title": "Canonical truncation comparisons for t-exact triangulated functors",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be triangulated categories [def-weil-triangulated-category] with bounded t-structures [def-weil-t-structure]. Let $F:\\mathcal C\\to\\mathcal D$ be an exact functor, with its shift comparison, and suppose that for every $n\\in\\mathbf Z$ it sends $\\mathcal C^{\\le n}$ into $\\mathcal D^{\\le n}$ and $\\mathcal C^{\\ge n}$ into $\\mathcal D^{\\ge n}$. Write $\\iota^m:\\tau^{\\le m}\\Rightarrow\\operatorname{id}$ and $\\pi^m:\\operatorname{id}\\Rightarrow\\tau^{\\ge m}$ for the canonical maps. There are unique natural isomorphisms\n$$\n \\alpha^-_{F,m}:F\\tau_{\\mathcal C}^{\\le m}\\xrightarrow{\\sim}\\tau_{\\mathcal D}^{\\le m}F,\n \\qquad\n \\alpha^+_{F,m}:F\\tau_{\\mathcal C}^{\\ge m}\\xrightarrow{\\sim}\\tau_{\\mathcal D}^{\\ge m}F\n$$\ncharacterized at each $K$ by\n$$\n \\iota^m_{FK}\\circ\\alpha^-_{F,m,K}=F(\\iota^m_K),\\qquad\n \\alpha^+_{F,m,K}\\circ F(\\pi^m_K)=\\pi^m_{FK}.\n$$\nFor any other such functor $G$ and any natural transformation $\\eta:F\\Rightarrow G$, the comparisons satisfy, for either sign and its corresponding truncation $\\tau$,\n$$\n \\alpha_{G,m,K}\\circ\\eta_{\\tau K}=\\tau(\\eta_K)\\circ\\alpha_{F,m,K}.\n$$\nThe comparison for the identity functor is the identity. If $H:\\mathcal D\\to\\mathcal B$ is another exact functor preserving the two halves of bounded t-structures, the comparison for $HF$ is the composite $H(\\alpha_F)$ followed by $\\alpha_H$ at $FK$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+  "place": "Proof, scalar-extension sentence and final automorphism sentence: the implication from preservation of both halves to natural truncation comparison, including natural-transformation and composition compatibility; generic lemma extracted by the agent, not stated as a separate theorem in the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-t-structure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A t-exact triangulated functor between categories with t-structures commutes naturally with upper and lower truncation functors",
+   "results": "8 hits: CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.isTriangulated_iff_comp_right, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.map_distinguished, CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Functor.isTriangulated_of_precomp_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTExact",
+   "results": "0 hits:  ; loogle: unknown identifier 'CategoryTheory.Functor.IsTExact'",
+   "date": "2026-10-17",
+   "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t-exact functor between triangulated categories commutes naturally with both truncation functors, compatibly with truncation maps",
+   "results": "8 hits: CategoryTheory.Functor.IsTriangulated, ComplexShape.Embedding.truncGEFunctor, ChainComplex.truncate, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Triangulated.TStructure.truncLT, ComplexShape.Embedding.truncLEFunctor, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Triangulated.TStructure.triangleLTGE",
+   "date": "2026-10-17",
+   "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*[Ii]so|[Ii]so.*trunc|IsTExact",
+   "results": "20 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trunc\", \"Functor\"",
+   "results": "12 hits: ComplexShape.Embedding.truncGE'Functor, ComplexShape.Embedding.truncGEFunctor, ComplexShape.Embedding.truncGE'Functor_obj, ComplexShape.Embedding.truncGEFunctor_obj, ComplexShape.Embedding.truncGE'Functor_map, ComplexShape.Embedding.truncGEFunctor_map, ComplexShape.Embedding.truncLE'Functor, ComplexShape.Embedding.truncLEFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural comparison from a triangulated functor applied to canonical truncation is an isomorphism if the functor preserves the nonpositive and nonnegative subcategories; comparisons respect natural transformations and composition",
+   "results": "8 hits: CategoryTheory.Functor.isTriangulated_iff_of_iso, CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.mapTriangleIso, CochainComplex.mappingCone.mapTriangleIso, CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.IsHomological.of_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "def.*(eTruncLTIso|eTruncGEIso|truncLEIso|truncGEIso)|IsTExact",
+   "results": "2 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-constructible-truncations",
+  "date": "2026-10-17",
+  "group": "Q118"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-constructible-truncations",
+   "place": "Proof, scalar-extension sentence and final automorphism sentence: the implication from preservation of both halves to natural truncation comparison, including natural-transformation and composition compatibility",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

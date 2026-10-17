@@ -26,34 +26,147 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-projective-chains-monoidal-model] with R=Z, V=D(Z) is presentably symmetric monoidal, so the algebroid nodes below apply. Apply [lem-coef-algebroid-presentability] to the discrete diagram j ↦ C_j in Algd(V). Its limiting cone has object space the product of the X_j and, for x=(x_j) and y=(y_j), mapping object the limit of the C_j(x_j,y_j), namely the product in V. By the same node the compositions and units of this limit are induced by projection to every factor, so they, with their coherences, are the unique operations whose projections are the corresponding operations of the factors; equivalently, every p_j is an algebroid map. The empty diagram gives the limit with one-point object space and the empty limit as its mapping object.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-algebroid-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit; product of algebroids and mapping objects."
+   }
+  },
+  {
+   "text": "Let P be the algebroid product from Step 1 and let s:E^1→E^0 be the walking-equivalence map. By [lem-coef-algebroid-completion], an algebroid is complete exactly when it is s-local, i.e. Map_Algd(E^0,A)→Map_Algd(E^1,A) is an equivalence. By the limiting-cone mapping-space criterion of [lem-coef-infinity-yoneda-presheaf-limits], applied to the product cone in Algd(V) with test objects E^0 and E^1, naturally in the test object, the map Map_Algd(s,P) is identified with the product over j of the maps Map_Algd(s,C_j). Each of these is an equivalence because C_j is complete, and by [lem-coef-kan-nerve-small-products] a product of weak homotopy equivalences of Kan complexes is one, also for J empty or infinite. Hence P is complete and lies in Cat_V.",
+   "uses": [
+    "lem-coef-algebroid-completion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-kan-nerve-small-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit; passage from algebroid products to complete enriched categories."
+   }
+  },
+  {
+   "text": "Cat_V is a full subcategory of Algd(V) containing P and every C_j (Step 2), so for complete D the mapping spaces Map_Cat(D,P) and Map_Cat(D,C_j) are those of Algd(V); the criterion of [lem-coef-infinity-yoneda-presheaf-limits] therefore shows that the projections induce Map_Cat(D,P) ≃ prod_j Map_Cat(D,C_j), naturally in D, and that (P,p_j) is a product in Cat_V. For the functor categories, [lem-coef-enriched-category-tensor-calculus] makes Cat_V closed symmetric monoidal with internal Hom Fun_V(D,-), the enriched category of coherent enriched functors and transformations; this is the functor category used in [lem-coef-enhanced-localization-universal]. For every complete A, the adjunction gives equivalences Map_Cat(A,Fun_V(D,P)) ≃ Map_Cat(A⊗D,P) ≃ prod_j Map_Cat(A⊗D,C_j) ≃ prod_j Map_Cat(A,Fun_V(D,C_j)), natural in A, the middle one by the first paragraph with test object A⊗D; by naturality of the adjunction in the target the composite is induced by postcomposition with the p_j. By the same criterion, the maps Fun_V(D,P)→Fun_V(D,C_j) form a product cone in Cat_V, so Fun_V(D,P) ≃ prod_j Fun_V(D,C_j), the product computed by Steps 1 and 2. An equivalence of V-categories identifies objects and the mapping objects; by Step 1 the mapping objects of the product are the products of the mapping objects of the Fun_V(D,C_j), and Map_V(1,-) takes them to products of spaces ([lem-coef-infinity-yoneda-presheaf-limits]). Thus enriched functors, coherent transformations (points of Map_V(1,-) of these mapping objects) and their higher homotopies into P are exactly families of them into the C_j. An equivalence of mapping spaces alone would only see the invertible transformations; the internal-Hom adjunction is what gives the non-invertible ones.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit; universal property in Cat_{D(Z)}."
+   }
+  },
+  {
+   "text": "Let x=(x_j) and y=(y_j) be objects of P. By [lem-coef-algebroid-equivalence-nerve] an equivalence from x to y is a point in an invertible component of Map_V(1,P(x,y)), and similarly in each C_j. Since the representable Map_V(1,-) preserves products ([lem-coef-infinity-yoneda-presheaf-limits]), Map_V(1,P(x,y)) is the product of the Map_V(1,C_j(x_j,y_j)) by the projections; for a degreewise product of Kan complexes ([lem-coef-kan-nerve-small-products]) the components are families of components. Composition and units of P are coordinatewise by Step 1, so on components composition and identities are computed in each coordinate. If f:x→y is an equivalence, each p_j(f) is one, since the algebroid map p_j preserves composition and units. Conversely, if each coordinate f_j has an inverse g_j (chosen for all j), then g=(g_j) is a point of Map_V(1,P(y,x)), and gf and fg lie in the identity components because every coordinate does. Hence a morphism of P is an equivalence if and only if every coordinate is, and choosing coordinate equivalences shows that x and y are equivalent if and only if every x_j and y_j are.",
+   "uses": [
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-kan-nerve-small-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit; equivalences in the product."
+   }
+  },
+  {
+   "text": "Let J be empty. A cone over the empty diagram is just its apex, so a limiting cone is a terminal object; thus P has the one-point object space and its single mapping object is a terminal object of D(Z). By [lem-coef-projective-chains-monoidal-model] (R=Z) every complex is fibrant and D(Z) is the localization q of this model; the zero complex is initial in complexes, hence cofibrant, and its constant cosimplicial object is a frame (all latching maps are identities of 0). By [lem-coef-cosimplicial-frame-mapping], Map(q0,qY) is represented by Hom(0,Y)=Δ^0 for every Y, and for cofibrant X with frame X^• the space Map(qX,q0) is represented by Hom(X^n,0)=Δ^0; since every object is equivalent to some qY and some qX with X cofibrant, q0 is both initial and terminal, so the mapping object of P is the zero object of V. Finally Step 3 gives Fun_V(D,P) ≃ the empty product, the one-object category with zero mapping object; since Map_V(1,0) is contractible, there is up to contractible choice exactly one enriched functor D→P and one coherent family of transformations, as required.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit; empty small family."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-algebroid-completion",
+  "lem-coef-algebroid-equivalence-nerve",
+  "lem-coef-algebroid-presentability",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-enhanced-localization-universal",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-nerve-small-products",
+  "lem-coef-projective-chains-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit; agent expansion of the product in Cat_{D(Z)}."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rn of /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib for 'HasConicalProducts|class HasConicalLimits' in CategoryTheory/Enriched/Limits",
-   "results": "Enriched/Limits/HasConicalProducts.lean:23 class HasConicalProducts; HasConicalLimits.lean:65,79: conical limits inside one ordinary V-enriched category, not products of enriched infinity categories",
+   "tool": "leansearch",
+   "query": "small products in Cat_V of complete enriched infinity categories, object spaces and mapping objects computed coordinatewise",
+   "results": "CategoryTheory.Pi.monoidalCategory; CategoryTheory.pi; CategoryTheory.Limits.pointwiseProduct; CategoryTheory.Enriched.HasConicalProducts; none states complete algebroids or Cat_{D(Z)} products.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "products of complete algebroids and enriched infinity categories over D(Z)",
+   "results": "CategoryTheory.Enriched.HasConicalProduct; CategoryTheory.Enriched.HasConicalProducts; CategoryTheory.EnrichedCat; ordinary enriched-category products only, no complete algebroids or enriched infinity categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCat, CategoryTheory.Limits.pi",
+   "results": "0 hits; unknown identifier CategoryTheory.Limits.pi.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn of /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib -l for 'Algebroid|EnrichedInfinity|InfinityCategory.*Enriched'",
-   "results": "none",
+   "query": "EnrichedCat|CompleteAlgebroid|Cat_[{]D in Mathlib/CategoryTheory",
+   "results": "ordinary EnrichedCategory and EnrichedCat declarations only; no algebroid or Cat_{D(Z)} product theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "product of enriched infinity categories over the derived category of abelian groups",
-   "results": "not run: no LeanSearch/Loogle/LeanFinder access on the cc review server (msearch.py exists only on the Codex machine)",
+   "query": "product of enriched infinity categories with mapping objects product and universal property",
+   "results": "CategoryTheory.Cat.isLimitProdCone; CategoryTheory.prod; CategoryTheory.prodFunctor_obj; ordinary products only, no enriched infinity-category theorem.",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete algebroid limits closed local objects",
+   "results": "CategoryTheory.MorphismProperty.instIsClosedUnderLimitsOfShapeIsLocal; ordinary local morphism properties, no complete algebroid result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched.HasConicalProducts",
+   "results": "CategoryTheory.Enriched.HasConicalProducts; HasConicalProduct; HasConicalProducts.mk; these concern ordinary V-enriched categories, not Cat_{D(Z)}.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasConicalProducts|HasConicalLimits in Mathlib/CategoryTheory/Enriched",
+   "results": "HasConicalProducts.lean lines 23-40 and HasConicalLimits.lean lines 19-79; ordinary enriched conical limits only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -70,5 +183,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-small-products",
+  "worker": "stage1",
+  "summary": "Split the enriched small-product assertion by constructing the product in Algd(D(Z)), proving completeness by the walking-equivalence localization criterion, transferring the limiting universal property to the full subcategory Cat_{D(Z)}, obtaining the functor-category product from the internal-Hom adjunction of Cat_{D(Z)}, checking equivalences coordinatewise, and identifying the empty-product mapping object with the zero object of D(Z). No new nodes. Maintainer reader (Q51 review) repaired steps 3-5 and added the presentability, Kan-product, internal-Hom and frame citations.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit; the product of localized/enriched factors and its universal property."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-e2a1b6aa7",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-e2a1b6aa7 (reviewer sub-agent of L); spot-checked: I read the item, all cited statements, the user steps of lem-coef-dg-product-localization (steps 5, 6, 8, 9), and paragraph 2 of the main-20261015 prop-coef-integral-exceptional-adjoint proof. The statement is unchanged and correct. I tested it on J of size 1, 2, infinite and empty, and on a factor with empty object space. No duplicate: rg over the DAG finds only tensor-calculus, which says Cat_V has all small limits but gives no formulas. No cycle; all dependencies are in unit sk-prop-sf-biduality-general; no tool_uses. Repairs: (1) E5 gap in Step 3. It derived Fun_V(D,prod C_j) ≃ prod Fun_V(D,C_j) from the equivalence of mapping spaces, which only contains invertible transformations. Repaired with the internal-Hom adjunction of lem-coef-enriched-category-tensor-calculus plus the Yoneda limit criterion. (2) C4 in Step 4: it cited the Step 3 functor equivalence and garbled the content of the equivalence-nerve node. Rewritten using equivalence-nerve (equivalences are invertible components of Map_V(1,-)), Map_V(1,-) preserving products, kan-nerve-small-products, and coordinatewise composition. (3) C2 in Step 5: the claim that 0 is the zero object of D(Z) is not elementary. It is now derived from lem-coef-projective-chains-monoidal-model and lem-coef-cosimplicial-frame-mapping (the constant frame on 0), and the step is marked elementary false. Missing citations added: projective-chains (D(Z) presentably monoidal, a hypothesis of algebroid-presentability and algebroid-completion) and kan-nerve-small-products (a product of equivalences is an equivalence, Step 2). Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-enriched-small-products.json.; 1 file(s) fixed by the reviewer"
+ }
 }

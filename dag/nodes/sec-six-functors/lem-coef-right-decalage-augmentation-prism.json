@@ -11,9 +11,86 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-right-decalage-index-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an ordinal $J$ write $J^+=J\\sqcup\\{\\infty\\}$. By [lem-coef-right-decalage-index-calculus], $sJ=J^+$ and $s(f)=f^+$, where $f^+$ agrees with $f$ on $J$ and fixes the new last element. Let $e_J:J\\to J^+$ be inclusion. It is monotone, including for $J=\\varnothing$. For every monotone $f:J\\to K$, both $f^+e_J$ and $e_Kf$ send $x\\in J$ to $f(x)$. Thus these maps are equal, even when $J$ is empty, and $e_J$ defines the asserted $\\eta:\\mathrm{id}_{\\Delta_+}\\Rightarrow qs$.",
+   "uses": [
+    "lem-coef-right-decalage-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definitions 2.1–2.2, printed pp.13–14, for nerve and functor simplicial sets; the explicit ordinal and prism calculation is by Q27, not a theorem quoted from the notes."
+   }
+  },
+  {
+   "text": "For $J\\in D$ let $l_J:\\{\\infty\\}\\to UJ$ select the new last element. For an arrow $g:J\\to K$ of $D$, its underlying map fixes that element, so $U(g)l_J=l_K$. This proves naturality of $\\lambda$. The unique arrow $r_J:\\varnothing\\to J$ in $D$ is exactly the last-element inclusion on the underlying singleton; hence $U(r_J)=l_J$. Also $r_{\\varnothing}=1_{\\varnothing}$ and $g r_J=r_K$, since both sides send the singleton to the last element. Taking opposites gives $t:\\mathrm{id}_{D^{\\mathrm{op}}}\\Rightarrow\\operatorname{const}_{\\varnothing}$, with $U^{\\mathrm{op}}t=\\lambda^{\\mathrm{op}}$ on objects and arrows.",
+   "uses": [
+    "lem-coef-right-decalage-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definitions 2.1–2.2, printed pp.13–14, for nerve and functor simplicial sets; the explicit ordinal and prism calculation is by Q27, not a theorem quoted from the notes."
+   }
+  },
+  {
+   "text": "Use the nerve and coherent-transformation definitions of [def-cbc-enhanced-diagrams-cones]. Explicitly, for $b:P\\Rightarrow Q$ between ordinary functors $I\\to A$, its prism is the nerve of the functor $T_b:I\\times[1]\\to A$. This sends $(x,0)$ to $Px$ and $(x,1)$ to $Qx$, uses $P(f),Q(f)$ on same-level arrows, and sends a mixed arrow over $f:x\\to y$ to $Q(f)b_x=b_yP(f)$. For a composable pair at levels $0,0,1$, composition gives $b_zP(g)P(f)=b_zP(gf)$; at levels $0,1,1$ it gives $Q(g)Q(f)b_x=Q(gf)b_x$; constant levels use functoriality. Identities follow from those of $P,Q$. An $m$-simplex of $N(I)\\times\\Delta^1$ is a pair $\\sigma:[m]\\to I$, $\\epsilon:[m]\\to[1]$, equivalently the functor $(\\sigma,\\epsilon)$ into the product. Send it to $T_b(\\sigma,\\epsilon)$. Restriction along every $\\theta:[r]\\to[m]$ commutes with this formula by composition of functors, proving directly that it is a simplicial map. Its endpoints are $NP,NQ$. Postcomposition with any simplicial map $W:N(A)\\to\\mathcal C$ therefore gives the coherent transformation with components $W(b_x)$, by the displayed definition of $\\operatorname{Fun}(-,\\mathcal C)_1$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definitions 2.1–2.2, printed pp.13–14, for nerve and functor simplicial sets; the explicit ordinal and prism calculation is by Q27, not a theorem quoted from the notes."
+   }
+  },
+  {
+   "text": "Apply step 3 to $\\lambda^{\\mathrm{op}}:U^{\\mathrm{op}}\\Rightarrow\\operatorname{const}_{\\{\\infty\\}}$ and postcompose with $Z$. Its endpoints are $F$ and $\\operatorname{const}_{Z_0}$, so this is a cocone in the definition of [def-cbc-enhanced-diagrams-cones]. Step 2 identifies the ordinary transformations $U^{\\mathrm{op}}t$ and $\\lambda^{\\mathrm{op}}$. Their interval functors agree at both levels and on every mixed arrow: both use $U^{\\mathrm{op}}(t_y\\circ f)=U^{\\mathrm{op}}(t_y)U^{\\mathrm{op}}(f)$ over $f:x\\to y$ in $D^{\\mathrm{op}}$. Hence their nerves agree on each pair $(\\sigma,\\epsilon)$ of step 3. Postcomposition with $Z$ identifies the whole cocone prism with the one induced by the unique arrows to $\\varnothing$. At $\\varnothing$, $l_{\\varnothing}$ is the identity of the singleton. Its nerve edge is degenerate; $Z$ preserves degeneracies, so $a_{\\varnothing}=1_{Z_0}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-right-decalage-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definitions 2.1–2.2, printed pp.13–14, for nerve and functor simplicial sets; the explicit ordinal and prism calculation is by Q27, not a theorem quoted from the notes."
+   }
+  },
+  {
+   "text": "Restrict this cocone along $N(j^{\\mathrm{op}})$. Its diagram has value $Z(J^+)$ at $J$ and uses the maps $f^+$ of step 1 on operators. For nonempty $J=[n]$, this is $H_n=Z_{n+1}$ with every operator fixing the newly added last vertex. The restricted cocone leg is $Z(l_J^{\\mathrm{op}})$, which is restriction to that last vertex. At the empty ordinal its value is $Z_0$ and its leg is the identity by step 4. This also identifies the augmentation encoded by the diagram on $\\Delta_+^{\\mathrm{op}}$: its arrow $J\\to\\varnothing$ is $j^{\\mathrm{op}}$ of the unique empty-source map, whose image under $U$ selects the new last element. On all chains the same equality holds after composition with the indexing functors, so restricting the prism gives this augmentation together with all its simplices.",
+   "uses": [
+    "lem-coef-right-decalage-index-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definitions 2.1–2.2, printed pp.13–14, for nerve and functor simplicial sets; the explicit ordinal and prism calculation is by Q27, not a theorem quoted from the notes."
+   }
+  },
+  {
+   "text": "Taking opposites in step 1 gives $\\eta^{\\mathrm{op}}:(qs)^{\\mathrm{op}}\\Rightarrow\\mathrm{id}_{\\Delta_+^{\\mathrm{op}}}$. Its step-3 prism postcomposed with $\\overline Z$ has source $\\overline ZN((qs)^{\\mathrm{op}})=ZN(s^{\\mathrm{op}})=FN(j^{\\mathrm{op}})$ and target $\\overline Z$; these equalities hold on every chain because $s=Uj$ and $Z=\\overline ZN(q^{\\mathrm{op}})$. At nonempty $J=[n]$, its component is $\\overline Z(e_J^{\\mathrm{op}})$, hence restriction from $Z_{n+1}$ to the first $n+1$ vertices. At $J=\\varnothing$, $e_J:\\varnothing\\to\\{\\infty\\}$ is the original augmentation arrow, so the component is exactly $Z_0\\to\\overline Z(\\varnothing)$. For every $(\\sigma,\\epsilon)$, the comparison is explicitly $\\overline Z(T_{\\eta^{\\mathrm{op}}}(\\sigma,\\epsilon))$. Restriction to nonempty ordinals, to the empty vertex, or along a simplicial operator is precomposition of this same formula. Thus these are identifications of entire prisms, not merely their component edges. No horn-filling, realization or colimit theorem is used.",
+   "uses": [
+    "lem-coef-right-decalage-index-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definitions 2.1–2.2, printed pp.13–14, for nerve and functor simplicial sets; the explicit ordinal and prism calculation is by Q27, not a theorem quoted from the notes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-right-decalage-index-calculus",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/scholze-six-functor-formalisms.pdf",
+  "place": "Lecture II, Definitions 2.1–2.2, printed pp.13–14: nerve and internal-Hom conventions. Q27 supplies the complete finite-ordinal and interval-category calculation. HTT 6.1.3.17 and 6.1.3.19 are WANTED, not archived and not claimed as read."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +126,52 @@
    "results": "{\"t\": \"2026-10-17T08:45:35Z\", \"tool\": \"leanfinder\", \"query\": \"For quasicategory valued augmented simplicial diagrams, applying the nerve of the natural inclusion J into J plus a terminal vertex constructs the whole augmentation comparison prism, including higher simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"SSet.Augmented.stdSimplex_map_right\", \"CategoryTheory.Arrow.augmentedCechNerve\", \"CategoryTheory.SimplicialObject.augmentedCechNerve\", \"CategoryTheory.SimplicialObject.augment_left\", \"CategoryTheory.SimplicialObject.augment_right\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.Arrow.augmentedCechConerve_right\"], \"digest\": \"74d7b72898564b29\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits augment ordinary-category simplicial objects or give special Cech/extra-degeneracy constructions; none identifies these coherent nerve prisms in arbitrary quasicategories. Read SimplicialObject/Basic.lean and ExtraDegeneracy.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|décalage|lastVertex|augmentation.*prism|prism.*augmentation",
+   "results": "{\"t\": \"2026-10-17T13:18:53Z\", \"tool\": \"grep\", \"query\": \"decalage|décalage|lastVertex|augmentation.*prism|prism.*augmentation\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary augment and extra-degeneracy APIs do not identify these two whole prisms in an arbitrary quasicategory. Read SimplicialObject/Basic.lean:397–428,504–522, ExtraDegeneracy.lean:242–279 and SimplicialSet/Nerve.lean:35–57. The nerveMap hits implement the primitive functor-on-chains operation only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nerve of inclusions of finite ordinals into ordinals with an added greatest point gives a coherent transformation from a right shifted augmented simplicial object to the original diagram",
+   "results": "{\"t\": \"2026-10-17T13:18:53Z\", \"tool\": \"leansearch\", \"query\": \"The nerve of inclusions of finite ordinals into ordinals with an added greatest point gives a coherent transformation from a right shifted augmented simplicial object to the original diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.Arrow.augmentedCechNerve\", \"CategoryTheory.CosimplicialObject.augment\", \"SSet.Augmented.StandardSimplex.shift\", \"CategoryTheory.SimplicialObject.augmentedCechNerve\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.cechNerveTerminalFrom\"], \"digest\": \"863626cb76f733d9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary augment and extra-degeneracy APIs do not identify these two whole prisms in an arbitrary quasicategory. Read SimplicialObject/Basic.lean:397–428,504–522, ExtraDegeneracy.lean:242–279 and SimplicialSet/Nerve.lean:35–57. The nerveMap hits implement the primitive functor-on-chains operation only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.augment, AugmentedSimplexCategory.inclusion",
+   "results": "{\"t\": \"2026-10-17T13:18:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject.augment, AugmentedSimplexCategory.inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary augment and extra-degeneracy APIs do not identify these two whole prisms in an arbitrary quasicategory. Read SimplicialObject/Basic.lean:397–428,504–522, ExtraDegeneracy.lean:242–279 and SimplicialSet/Nerve.lean:35–57. The nerveMap hits implement the primitive functor-on-chains operation only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an augmented simplicial diagram in any quasicategory the right decalage has a last vertex cocone and a natural comparison to the original augmentation induced by inclusions of original ordinal elements",
+   "results": "{\"t\": \"2026-10-17T13:18:54Z\", \"tool\": \"leanfinder\", \"query\": \"For an augmented simplicial diagram in any quasicategory the right decalage has a last vertex cocone and a natural comparison to the original augmentation induced by inclusions of original ordinal elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment_right\", \"SSet.Augmented.stdSimplex_obj_right\", \"SSet.Augmented.stdSimplex_map_right\", \"CategoryTheory.CosimplicialObject.augment_right\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.stdSimplex\", \"CategoryTheory.SimplicialObject.augment_left\"], \"digest\": \"1d1f421362834db7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary augment and extra-degeneracy APIs do not identify these two whole prisms in an arbitrary quasicategory. Read SimplicialObject/Basic.lean:397–428,504–522, ExtraDegeneracy.lean:242–279 and SimplicialSet/Nerve.lean:35–57. The nerveMap hits implement the primitive functor-on-chains operation only."
+  },
+  {
+   "tool": "grep",
+   "query": "nerve.*[Nn]at|[Nn]at.*nerve|def augment|theorem augment",
+   "results": "{\"t\": \"2026-10-17T13:19:18Z\", \"tool\": \"grep\", \"query\": \"nerve.*[Nn]at|[Nn]at.*nerve|def augment|theorem augment\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\"], \"digest\": \"8a05349488a94728\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary augment and extra-degeneracy APIs do not identify these two whole prisms in an arbitrary quasicategory. Read SimplicialObject/Basic.lean:397–428,504–522, ExtraDegeneracy.lean:242–279 and SimplicialSet/Nerve.lean:35–57. The nerveMap hits implement the primitive functor-on-chains operation only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of ordinary indexing functors induces a simplicial map from the product of the nerve with the interval simplex, and postcomposition gives a coherent transformation of quasicategory valued diagrams",
+   "results": "{\"t\": \"2026-10-17T13:19:22Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation of ordinary indexing functors induces a simplicial map from the product of the nerve with the interval simplex, and postcomposition gives a coherent transformation of quasicategory valued diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.nerveMap\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerveMap_app_mk₁\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.nerve.functorOfNerveMap_map\", \"CategoryTheory.nerveFunctor_map\"], \"digest\": \"694e7f96e89fdff8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary augment and extra-degeneracy APIs do not identify these two whole prisms in an arbitrary quasicategory. Read SimplicialObject/Basic.lean:397–428,504–522, ExtraDegeneracy.lean:242–279 and SimplicialSet/Nerve.lean:35–57. The nerveMap hits implement the primitive functor-on-chains operation only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -77,5 +196,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-decalage-augmentation-prism",
+  "worker": "stage1",
+  "summary": "Zero-new-node split: verified original-element and last-vertex naturality, constructed the nerve interval prism degreewise, and identified the terminal-object cocone and augmentation comparison on all simplices. Preserved the statement and both statement dependencies. Searched project Lean, all blueprint nodes and Mathlib; no exact attachment or Mathlib match. HTT is not archived, so the explicit proof is agent-written from the existing definitions, with a WANTED entry in report.md.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent mapping-complex adjunction before derived inverse limit, through the existing geometric-descent/right-shift ancestry. The steps establish the last-vertex and augmentation prisms supporting that descent; no unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-27468b81a",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-27468b81a (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 6 steps and the 11 searches. I also read the full statements of lem-coef-right-decalage-index-calculus (same unit) and def-cbc-enhanced-diagrams-cones (a definition), and the user lem-coef-space-geometric-descent, steps 12 and 15, which take exactly what the statement gives. HTT is not archived. proof_origin=agent is correct, and WANTED is listed. I checked that Scholze's Lecture II Def. 2.1–2.2 (pp.13–14) is the convention the steps cite. The math holds. Step 1: f+e_J=e_K f, including J=∅. Step 2: lambda is natural, and r_J={inf}->J+ is the unique arrow equal to l_J, so U^op t=lambda^op; I tested a D-arrow sending an old element to inf. Step 3: the interval functor I×[1]->A, with both mixed compositions checked and N(I×[1])=N(I)×Delta^1, is an edge of Fun by definition. Step 4: T_{lambda^op}=U^op∘T_t, and a_∅=1_{Z_0} because Z sends a degenerate edge to a degenerate edge. Step 5: the restriction along N(j^op) is the right shift with last-vertex legs, and the Delta_+^op augmentation is again the last vertex because j(∅->J)=r_J. Step 6: the source is ZbarN((qs)^op)=FN(j^op); the components are first-vertex restrictions, and at ∅ the component is the original augmentation. No Kan, groupoid or colimit hypothesis is used, and the categories are small. Not a target node, so the base-change check does not apply. No new nodes. proof_deps equals the union of uses, the route stays inside the unit, there are no tool_uses, no cycle and no duplicate (I searched dag/nodes for decalage, right shift, last vertex and extra degeneracy). No SGA. I made no changes."
  }
 }

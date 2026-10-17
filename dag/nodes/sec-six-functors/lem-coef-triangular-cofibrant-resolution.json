@@ -13,9 +13,78 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=C_U^{\\mathrm{op}}\\times C_V$, so that enriched functors $I\\to\\mathsf{sSet}$ are exactly simplicial sets $N(u,v)$ with commuting contravariant $C_U$- and covariant $C_V$-actions. Let $E(u,v)=D(u,v)$ with its actions restricted along $q_U,q_V$ (these are the identity on objects). By [lem-coef-simplicial-projective-model-calculus] (with $\\mathcal A=\\mathsf{sSet}$) projective fibrations and weak equivalences are objectwise, so the projective trivial fibrations are the objectwise trivial Kan fibrations, and evaluation at $i$ has left adjoint $X\\mapsto I(i,-)\\otimes X$. Let $\\mathcal J$ be the small set of free cells $I(i,-)\\otimes\\partial\\Delta^n\\to I(i,-)\\otimes\\Delta^n$, $i\\in\\operatorname{Ob}I$, $n\\geq0$. By this adjunction and the boundary characterization of trivial fibrations in [lem-coef-kan-quillen-right-proper], $\\mathcal J^{\\pitchfork}$ is exactly the class of objectwise trivial Kan fibrations. Construct $M$ by the countable small-object iteration: $M_0=\\varnothing$, and $M_{k+1}$ is the pushout of $M_k\\leftarrow\\coprod_\\sigma I(i,-)\\otimes\\partial\\Delta^n\\to\\coprod_\\sigma I(i,-)\\otimes\\Delta^n$, the coproduct over all squares $\\sigma=(i,n,a:\\partial\\Delta^n\\to M_k(i),b:\\Delta^n\\to E(i))$ with $b|_{\\partial\\Delta^n}$ equal to $a$ followed by $M_k(i)\\to E(i)$; put $M=\\operatorname{colim}_kM_k$ with the induced map $M\\to E$. Then $\\varnothing\\to M$ is a $\\mathcal J$-cell map, hence lies in ${}^{\\pitchfork}(\\mathcal J^{\\pitchfork})$ by [lem-coef-small-object-cell-factorization], i.e. $M$ is projectively cofibrant. Colimits are objectwise and $\\partial\\Delta^n$ has finitely many nondegenerate simplices, so every map $\\partial\\Delta^n\\to M(i)$ factors through some $M_k(i)$; the square it belongs to is filled in $M_{k+1}$, so $M\\to E$ lies in $\\mathcal J^{\\pitchfork}$ and is an objectwise trivial Kan fibration. Functoriality: a map of data consists of block-preserving $D\\to D'$ and compatible $C_U\\to C'_U$, $C_V\\to C'_V$, giving $\\psi:I\\to I'$ and $E\\to\\psi^*E'$. Inductively define $M_k\\to\\psi^*M'_k$ over $E\\to\\psi^*E'$: a square $\\sigma$ at $i$ is sent to its image square at $\\psi(i)$, and the cell $I(i,-)\\otimes K$ maps to $\\psi^*(I'(\\psi i,-)\\otimes K)$ by $\\psi$ on mapping sets; $\\psi^*$ preserves colimits, so the pushouts and the colimit induce $M\\to\\psi^*M'$. These maps are defined by the images of squares, hence preserve identities and composites of maps of data, and they need no injectivity of $\\psi$ on objects.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, Proposition A.3.3.2 and Remark A.3.3.5 (projective structure, free cells); explicit countable small-object iteration written here for naturality in the index category."
+   }
+  },
+  {
+   "text": "Form $C$ on $U\\amalg V$ by retaining $C_U$ and $C_V$ on the diagonal, putting $C(u,v)=M(u,v)$ and $C(v,u)=\\varnothing$, and using the two actions for the only mixed compositions $C_V(v,v')\\times M(u,v)\\times C_U(u',u)\\to M(u',v')$. A composable word has at most one mixed arrow, since there are no arrows from $V$ to $U$; the reassociations are the action axioms and their commutation, and the unit laws are the unit axioms. Thus $C$ is a simplicial category, and the identity on objects together with $q_U,q_V$ and $M\\to E$ defines a simplicial functor $C\\to D$, because $M\\to E$ is natural for both actions. A map $M\\to\\psi^*M'$ of Step 1 likewise extends the given $C_U\\to C'_U$, $C_V\\to C'_V$ to a functor $C\\to C'$ over $D\\to D'$, compatibly with composites.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, Proposition A.3.3.2; direct verification of the collage composition."
+   }
+  },
+  {
+   "text": "For an $I$-diagram $N$ write $C(N)$ for the collage of Step 2 built from $N$, so $C=C(M)$. Put $O=U\\amalg V$ and $A=C_U\\amalg C_V=C(\\varnothing)$. For a simplicial category $T$ with object set $O$ and an identity-on-objects functor $s:A\\to T$, let $T^s$ be the $I$-diagram $(u,v)\\mapsto T(u,v)$ with actions through $s$. A functor $C(N)\\to T$ restricting to $s$ is determined by its mixed components $N(u,v)\\to T(u,v)$, the reverse mapping sets being empty, and its compatibility with the composites $c_V\\circ n\\circ c_U$ is exactly naturality for the actions; so $\\operatorname{Hom}_{A/\\mathrm{sCat}_O}(C(N),T)\\cong\\operatorname{Hom}_{\\mathsf{sSet}^I}(N,T^s)$, naturally. Hence $N\\mapsto C(N)$ is a left adjoint into $\\mathrm{sCat}_O$ under $A$ and carries pushouts and countable composites to pushouts and composites in $\\mathrm{sCat}_O$. By [lem-coef-fixed-object-free-arrow-adjunction], $A*F^O_{u_0,v_0}(K)$ represents $T\\mapsto\\operatorname{Hom}(K,T(u_0,v_0))$ under $A$, as does $C(I((u_0,v_0),-)\\otimes K)$ by the adjunction of Step 1; so the collage of a free cell is $A*F^O_{u_0,v_0}(\\partial\\Delta^n)\\to A*F^O_{u_0,v_0}(\\Delta^n)$, a pushout of $F^O_{u_0,v_0}(\\partial\\Delta^n)\\to F^O_{u_0,v_0}(\\Delta^n)$. The latter has the left lifting property against every local trivial Kan fibration in $\\mathrm{sCat}_O$: by the same adjunction a lifting square transposes to a lifting problem of $\\partial\\Delta^n\\to\\Delta^n$ against a trivial Kan fibration of mapping sets, solved by [lem-coef-kan-quillen-right-proper]. The trivial fibrations of the model structure of [lem-coef-fixed-object-simplicial-free-calculus] are the local trivial Kan fibrations, so these maps are cofibrations there. Applying $C(-)$ to the filtration of Step 1, $A=C(M_0)\\to C(M_1)\\to\\cdots\\to C(M)=C$ is a countable composite of pushouts of coproducts of such maps, hence a cofibration of $\\mathrm{sCat}_O$, i.e. a Bergner cofibration by [lem-coef-fixed-object-simplicial-free-calculus]. In the Bergner structure of [lem-coef-coherent-nerve-comparison], $A$ is the coproduct of the cofibrant $C_U,C_V$, so $C_U\\to A$ and $C_V\\to A$ are cofibrations (pushouts of $\\varnothing\\to C_V$, $\\varnothing\\to C_U$) and $A$ is cofibrant. Composing, $C$ is Bergner cofibrant and $C_U\\to C$, $C_V\\to C$ are Bergner cofibrations.",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Bergner, Section 1 generating cofibrations (C1),(C2) (free arrow on a boundary inclusion) and Section 2 Definition 2.1 (free maps); collage left adjoint written here."
+   }
+  },
+  {
+   "text": "Evaluation at a fixed $u\\in U$, $N\\mapsto N(u,-)$, from $I$-diagrams to covariant $C_V$-modules preserves all colimits, since they are objectwise. A free cell at $(u_0,v_0)$ evaluates to $C_V(v_0,-)\\otimes(C_U(u,u_0)\\times\\partial\\Delta^n)\\to C_V(v_0,-)\\otimes(C_U(u,u_0)\\times\\Delta^n)$, because $I((u_0,v_0),(u,v))=C_U(u,u_0)\\times C_V(v_0,v)$. The map of simplicial sets inside is a monomorphism, hence a cofibration by [lem-coef-kan-quillen-right-proper], and the free-module functor $X\\mapsto C_V(v_0,-)\\otimes X$ preserves cofibrations, being left adjoint to evaluation, which preserves (trivial) fibrations because they are objectwise [lem-coef-simplicial-projective-model-calculus]. Pushouts, coproducts and countable composites of projective cofibrations are projective cofibrations, so applying evaluation to the filtration of Step 1 shows $M(u,-)$ is projectively cofibrant over $C_V$. Symmetrically, $M(-,v)$ is filtered by cells $C_U(-,u_0)\\otimes(C_V(v_0,v)\\times\\partial\\Delta^n)\\to C_U(-,u_0)\\otimes(C_V(v_0,v)\\times\\Delta^n)$ and is projectively cofibrant over $C_U^{\\mathrm{op}}$. Empty mapping sets give empty cells.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, Proposition A.3.3.2 and Remark A.3.3.5; restriction of the projective free-cell filtration."
+   }
+  },
+  {
+   "text": "On diagonal pairs the map $C\\to D$ is $q_U$ or $q_V$, a local trivial fibration by hypothesis; on mixed pairs it is $M(u,v)\\to D(u,v)$, a trivial Kan fibration by Step 1; on reverse pairs it is the identity of $\\varnothing$, which has the right lifting property against every $\\partial\\Delta^n\\to\\Delta^n$ because $\\Delta^n$ is nonempty. Therefore $C\\to D$ is a local trivial fibration fixing objects. Functoriality was established in Steps 1 and 2. If $U$ or $V$ is empty, $I$ is empty, $M$ is empty and $C$ is $C_V$ or $C_U$; no step uses injectivity of object functions, nonempty blocks or mapping sets, or Kan conditions on $C_U,C_V,D$ (the lifting arguments only use trivial fibrations).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, Proposition A.3.3.2 and Remark A.3.3.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-small-object-cell-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Appendix A.3.3, Proposition A.3.3.2 and Remark A.3.3.5; relative two-block collage argument written here from the projective free-cell and Bergner generator descriptions."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,7 +144,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-enriched-amalgamation",
@@ -107,5 +176,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-triangular-cofibrant-resolution",
+  "worker": "stage1",
+  "summary": "Audited the imported two-block collage statement and supplied a five-step proof: functorial projective cofibrant replacement of the mixed mapping bimodule, collage composition, free-cell transfer to the Bergner model structure, row and column projective cofibrancy, and the local trivial-fibration and functoriality conclusions. No hypotheses were added; empty blocks and noninjective block maps remain allowed. Reviewer repair (NG maintainer reading, 2026-10-17): Step 1 builds M by an explicit small-object iteration over free cells (cell structure and naturality in the index category made explicit); Step 3 proves the collage is a left adjoint and that free arrow cells are fixed-object cofibrations via the free-arrow adjunction, instead of the unstated converse 'free maps are cofibrations'; Steps 4-5 cite the Kan-Quillen monomorphism/lifting facts.",
+  "blueprint": "The steps realize the auxiliary relative-cofibrant-model construction used in the coherent middle-adjunction/directed-gluing support paragraph of prop-coef-integral-exceptional-adjoint; the blueprint has no separately numbered theorem for this agent-formulated lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-09d296fc6",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-09d296fc6 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is correct and unchanged, and there are no new nodes. I read the full statements of the 4 cited nodes, plus lem-coef-kan-quillen-right-proper and lem-coef-small-object-cell-factorization. I also read the citer lem-coef-directed-enriched-amalgamation, whose steps 1 and 3-6 use every clause, including functoriality. HTT A.3.3.2/A.3.3.5 and Bergner (C1)/(C2) and Def. 2.1 are background only. Small cases tested: V empty, a single object in each block, and D(u,v) empty. Duplicate check (poset-filtered resolution, extreme bimodule attachment, cone-boundary cells, rg for collage) found nothing. I found three repairable faults, all fixed in the proof steps of fixes/dag/nodes/sec-six-functors/lem-coef-triangular-cofibrant-resolution.json. (1) C4: steps 3-4 used a free-cell retract description of cofibrant M that is in no cited statement. Step 1 now builds M by an explicit countable small-object iteration over the free cells I(i,-)⊗(∂Δ^n→Δ^n). (2) E5: functoriality across a change of index category I→I' was only asserted, and the citer relies on it. Step 1 now gives the naturality explicitly, by sending each square at i to its image square at ψ(i); it is strict and needs no injectivity. (3) C3/C4: step 3 concluded cofibrancy from 'C is a retract of a free map', but lem-coef-fixed-object-simplicial-free-calculus states only the other direction. Step 3 now proves the collage functor is a left adjoint under C_U⊔C_V and that the collage of a free cell is a pushout of F(∂Δ^n)→F(Δ^n). That map lifts against local trivial Kan fibrations, by the free-arrow adjunction and Kan-Quillen; hence C_U⊔C_V→C is a cofibration of sCat_O and so a Bergner cofibration, and the remaining conclusions follow from the coproduct. Step 4 now cites Kan-Quillen for monomorphisms being cofibrations and gives the left-Quillen argument. Step 5 is marked elementary. proof_deps gain two same-unit nodes, with no cycle. tool_uses: none.; 1 file(s) fixed by the reviewer"
  }
 }
