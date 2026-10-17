@@ -37,6 +37,13 @@ limit of the étale cohomology with coefficients `L/ℓᵐ`, of cohomological di
 
 @[expose] public section
 
+/- The comparison with étale cohomology imports `AlgebraicGeometry.specOverSpec` (from
+`Mathlib.AlgebraicGeometry.Group.Affine`), which gives `Spec k₀` a second structure over
+itself, `Spec.map (algebraMap k₀ k₀)`. The Weil sheaves on `Spec k₀` of the repository are
+formed for the identity structure; we give it priority so that downstream files keep
+elaborating `Spec k₀ ↘ Spec k₀` as the identity. -/
+attribute [instance high] CategoryTheory.instOverClass
+
 universe u
 
 open CategoryTheory Limits
