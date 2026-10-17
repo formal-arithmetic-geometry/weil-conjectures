@@ -3,15 +3,15 @@ Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
+
 module
 
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.SixFunctors.Finite.BaseChange
-
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # Normalization comparison objects on the isomorphism locus
