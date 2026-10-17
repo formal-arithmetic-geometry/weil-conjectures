@@ -200,5 +200,41 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-7acf7590a (reviewer sub-agent of L); spot-checked: I read all seven steps in full, every cited statement and Stacks 08NZ at simplicial.tex line 5756. Delivery: one commit holding only the item and its report. There are zero new nodes: the earlier child lem-cbc-kan-sphere-nullhomotopy-face is not on the branch, so no drop is needed. proof_deps equals the union of the step uses. No cycle: the closures of lem-coef-kan-realization-serre (32 nodes), lem-cbc-kan-relative-realization-lift and the four definitions do not reach the item. Statement unchanged. The kernel normalization (intersection of ker d_i for i>=1, differential d_0) is valid. Checked on the zero module, a constant module (M_1=0, pi_0=A), a module concentrated in one degree, and m=1. Steps 1-3: recomputed the Moore identities and both horn-filler sweeps of 08NZ face by face; every degeneracy index exists, and r=1 and both outer horns are covered. Step 4: the representatives in the cited node are maps Delta^m/boundary to K sending the boundary to the base point; at 0 these are exactly the cycles Z_m, so the map is surjective. Step 5: h=s_{m-1}b+s_m a has faces b, a+b, a in positions m-1, m, m+1 and zero elsewhere. The cited node leaves the horn-composition order implicit, but either order gives a homomorphism because Z_m is abelian. Step 6: the boundary data is compatible and the cone on the boundary is a quotient map, so the continuous filler is well defined. The same-unit lift lemma's hypotheses hold for X->Delta^0 and give w with d_0w=z and all other faces 0. The converse segment contraction stays in faces j>=1 and fixes the boundary. So ker q_m=B_m. Step 7: the edge normalization and its converse match the components clause; naturality holds because module maps are pointed. I accept the declared tool use of lem-coef-kan-realization-serre: it is a generic black box and is already recorded in the tool_uses of three sk-prop-sf-cbc nodes. Searches of the DAG and of Mathlib's SimplicialSet files found no duplicate and no leaf. This is not a target node, and the split uses no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialModuleMooreHomotopy",
+  "declaration": "AlgebraicTopology.simplicialModuleMooreHomotopy",
+  "declarations": [
+   "AlgebraicTopology.simplicialModuleUnderlying",
+   "AlgebraicTopology.simplicialModuleMooreComplex",
+   "AlgebraicTopology.simplicialModuleMooreTerm",
+   "AlgebraicTopology.simplicialModuleMooreCycles",
+   "AlgebraicTopology.simplicialModuleMooreBoundarySubmodule",
+   "AlgebraicTopology.simplicialModuleMooreHomology",
+   "AlgebraicTopology.simplicialModuleComponentQuotient",
+   "AlgebraicTopology.simplicialModuleZeroVertex",
+   "AlgebraicTopology.simplicialModuleCubeSimplexPoint_mem",
+   "AlgebraicTopology.simplicialModuleCubeSimplexPoint",
+   "AlgebraicTopology.simplicialModuleCubeSimplexPoint_continuous",
+   "AlgebraicTopology.simplicialModuleMooreCycleLoopFunction",
+   "AlgebraicTopology.simplicialModuleMooreCycleLoopFunction_continuous",
+   "AlgebraicTopology.simplicialModuleMooreCycleLoopFunction_boundary",
+   "AlgebraicTopology.simplicialModuleMooreCycleLoop",
+   "AlgebraicTopology.simplicialModuleMooreHomotopy"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialModuleMooreHomotopy.lean",
+  "statement": "theorem simplicialModuleMooreHomotopy {Λ : Type u} [CommRing Λ] : (∃ e₀ : ∀ (X : SimplicialObject (ModuleCat.{v} Λ)), simplicialModuleComponentQuotient X ≃ ZerothHomotopy (SSet.toTop.obj (simplicialModuleUnderlying X)), (∀ (X : SimplicialObject (ModuleCat.{v} Λ)) (x : X.obj (Opposite.op (SimplexCategory.mk 0))), e₀ X (Submodule.Quotient.mk x) = Quotient.mk _ (SSet.realizationVertex (K := simplicialModuleUnderlying X) x)) ∧ (∀ {X Y : SimplicialObject (ModuleCat.{v} Λ)} (f : X ⟶ Y) (x : X.obj (Opposite.op (SimplexCategory.mk 0))), e₀ Y (Submodule.Quotient.mk ((Functor.whiskerRight f (CategoryTheory.forget (ModuleCat.{v} Λ))).app _ x)) = SSet.Enhanced.componentsMap (SSet.toTop.map (Functor.whiskerRight f (CategoryTheory.forget (ModuleCat.{v} Λ)))).hom (e₀ X (Submodule.Quotient.mk x)))) ∧ (∃ e : ∀ (X : SimplicialObject (ModuleCat.{v} Λ)) (m : ℕ) (hm : 0 < m), (simplicialModuleMooreHomology X m : Type v) ≃ HomotopyGroup (Fin m) (SSet.toTop.obj (simplicialModuleUnderlying X)) (SSet.realizationVertex (simplicialModuleZeroVertex X)), (∀ (X : SimplicialObject (ModuleCat.{v} Λ)) (m : ℕ) (hm : 0 < m) (z : (simplicialModuleMooreCycles X m : Type v)), e X m hm ((simplicialModuleMooreComplex X).homologyπ m z) = Quotient.mk _ (simplicialModuleMooreCycleLoop X m z)) ∧ (∀ (X : SimplicialObject (ModuleCat.{v} Λ)) (m : ℕ) (hm : 0 < m) (a b : simplicialModuleMooreHomology X m), e X m hm (a + b) = SSet.groupMul (@HomotopyGroup.group _ _ _ (Fin m) inferInstance ⟨⟨0, hm⟩⟩) (e X m hm a) (e X m hm b)) ∧ (∀ {X Y : SimplicialObject (ModuleCat.{v} Λ)} (f : X ⟶ Y) (m : ℕ) (hm : 0 < m) (a : simplicialModuleMooreHomology X m), HEq (e Y m hm (((simplicialModuleMooreComplex X).homologyMap ((AlgebraicTopology.normalizedMooreComplex (ModuleCat.{v} Λ)).map f) m) a)) (SSet.Enhanced.homotopyGroupMap (SSet.toTop.map (Functor.whiskerRight f (CategoryTheory.forget (ModuleCat.{v} Λ)))).hom m (SSet.realizationVertex (simplicialModuleZeroVertex X)) (e X m hm a))))",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fe9ca313",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: Mathlib normalized Moore complex (kernels of d_i for i>=1, differential d0), cycles and homology; X0/d0M1 quotient (objX 0 = top) with the vertex-to-component bijection; for m>0 an equivalence to HomotopyGroup (Fin m) based at the zero vertex, pinned by e(homologyPi z) = class of the cycle's characteristic loop; additivity via groupMul including m=1 with an explicit Fin m witness; naturality via componentsMap and an HEq homotopyGroupMap square. No extra hypotheses; universes u and v independent. Checked by hand that the four postponed helpers are true: the cube coordinates telescope to sum 1; a boundary cube point lands in face d_m (if z_j=0) or d_j (if z_j=1), and every face of a Moore cycle is zero; m=0 has an empty boundary. No hollow definitions; every sorry is a Prop with a complete docstring proof and is recorded in lean.declarations. lean.statement is verbatim; all 16 declarations exist; imports and docstrings are correct; no existing duplicate (DoldKanHomology is the parent's different statement). nt_compile --json: clean, 2.0 s; a control copy with a planted error was rejected, so errors are reported. Minor, non-blocking: stale sentence in the worker report about KanRelativeRealizationLift; unused boundary-submodule definition."
  }
 }

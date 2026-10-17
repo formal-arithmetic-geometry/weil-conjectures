@@ -196,5 +196,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SharpFilteredPosetSubsets",
+  "file": "lean/Sheaf/CategoryTheory/SharpFilteredPosetSubsets.lean",
+  "declaration": "coef_sharp_filtered_poset_subsets",
+  "declarations": [
+   "IsSharpFilteredSubset",
+   "coef_sharp_filtered_poset_subsets"
+  ],
+  "statement": "theorem coef_sharp_filtered_poset_subsets (α β : Cardinal.{u}) (hα : α.IsRegular) (hβ : β.IsRegular) (hαβ : α < β) (hpow : ∀ μ ν : Cardinal.{u}, μ < β → ν < α → μ ^ ν < β) (A : Type u) [PartialOrder A] (hA : ∀ {K : Type u}, HasCardinalLT K α → ∀ f : K → A, ∃ a : A, ∀ k : K, f k ≤ a) : (∀ T : Set A, HasCardinalLT T β → ∃ B : Set A, T ⊆ B ∧ IsSharpFilteredSubset α β A B) ∧ Small.{u} {B : Set A // IsSharpFilteredSubset α β A B} ∧ (∀ a : A, ∃ B : {B : Set A // IsSharpFilteredSubset α β A B}, a ∈ B.1) ∧ (∀ {K : Type u}, HasCardinalLT K β → ∀ f : K → {B : Set A // IsSharpFilteredSubset α β A B}, ∃ B : {B : Set A // IsSharpFilteredSubset α β A B}, ∀ k : K, f k ≤ B)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c2f47ff1",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Every clause of the Lean statement matches the node (HTT Lemma 5.4.2.8): IsRegular includes infinitude, α<β, the power bound, and the α-small family upper bound on A (equivalent to the subset form, empty case included). IsSharpFilteredSubset is a real Prop: |B|<β plus an inherited-order upper bound. The conclusion has four clauses: enlargement, Small.{u} of the whole subtype, covering, and β-small family bounds with the bound depending on the family and empty families allowed. No extra assumptions, all variables bound, universe u is the stmt_dep's small universe. True via isCardinalFiltered_preorder and the Mathlib lemma exists_isCardinalFiltered_set_of_exists_cofinal (SharplyLT/Basic.lean:241-261), with the cofinal hypothesis from the power bound and regularity. No duplicate in the side clone or Mathlib; four citers mention the node only in proof docstrings. The node changes only its lean field; the dep node is identical to the landed one; lean.statement is verbatim; source and blueprint docstrings present; only sorry; report has Worker report and Second reading by Q47. nt_compile --json (local side overlay): exit 0, no errors or warnings. Cosmetic only: HTT numbers redacted in the report text."
  }
 }
