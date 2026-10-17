@@ -245,5 +245,30 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-4bdd4b585 (reviewer sub-agent of L); spot-checked: Read the item and all six proof steps in full, plus the full statements of every cited node: def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-cofinal-comma-criterion, lem-coef-infinity-isofibration-pullback-limit, lem-coef-nerve-natural-homotopy-equivalence, and lem-coef-infinity-isofibration-exponentiation (for the definition of isofibration). Also read the citing parent's step 4 and the unit record. The delivery creates no new nodes. The statement is unchanged and correctly oriented. It needs the undercategory (final) condition of the criterion, and its case X=Δ^0 is the classical cofinality of Δ_inj^op in Δ^op. Rechecked by hand: the comma (σ↓u) is C_n^op (a comma arrow θ→θ' is an injective a with θa=θ'). In the prepended-zero contraction, monotonicity, H(θ')H(a)=H(θ), the two components 0↦0 and i↦i+1, and both naturality equations hold, including at n=0 and for constant θ. The hypotheses of the nerve homotopy lemma (zigzag in either orientation, non-invertible components) are met exactly. The undercategory projection is an isofibration: inner fillers in a nerve are unique and isomorphisms lift as h→eh. Nerves preserve pullbacks, so the strict pullback is N(σ↓u). The criterion's conclusion is the restriction map itself, with no colimit hypothesis. proof_deps equals the union of the steps' uses. A traversal of 484 reachable nodes finds no cycle. An rg sweep of the DAG and a read of six candidate nodes found no duplicate. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, only for the generic facts that Fun(K,E) is a quasicategory and its mapping spaces are Kan. HTT is not archived; it is recorded as WANTED and proof_origin is agent, as the brief requires. No SGA is used. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveSimplexCoconeRestriction",
+  "declaration": "SSet.Enhanced.injective_simplex_cocone_restriction",
+  "declarations": [
+   "SSet.Enhanced.injectiveSimplexOppositeCategory",
+   "SSet.Enhanced.injectiveSimplexOppositeInclusion",
+   "SSet.Enhanced.injectiveSimplexNerveInclusion",
+   "SSet.Enhanced.injective_simplex_cocone_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InjectiveSimplexCoconeRestriction.lean",
+  "statement": "theorem injective_simplex_cocone_restriction (X : SSet.{u}) (E : SSet.{max u v}) [Quasicategory E] (p : SSet.uliftFunctor.{v}.obj (nerve X.Elements) ⟶ E) (T : E _⦋0⦌) : IsWeakHomotopyEquivalence (mappingSpaceMap ((MonoidalClosed.pre (SSet.uliftFunctor.{v}.map (injectiveSimplexNerveInclusion X))).app E) (diagramVertex p) (diagramVertex (SSet.const T)))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three helpers spell out the indexing category and inclusion already introduced by this node. Mathlib X.Elements is S(X)^op; the wide subcategory uses the inverse image of opposite ordinal monomorphisms. The conclusion uses the existing right-pinched mapping-space map of actual precomposition, with a common universe lift."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bf21ca79",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: X.Elements = S(X)^op (orientation checked), wide subcategory on Mono f.val.unop keeps all (incl. degenerate) objects, j_X = nerveMap of inclusion, conclusion is mappingSpaceMap of actual precomposition on right-pinched Map(p, const T), identical to the first conjunct of infinity_cofinal_comma_criterion with the same max u v lift; no extra hypotheses, universes bound, edge cases (empty X, point, empty E, v=0) covered. Helpers non-hollow, only sorry is the main theorem, docstrings carry source/blueprint and all six proof steps, lean.statement verbatim, node differs only in lean, report sections present. No duplicate found. nt_compile.py (side overlay, live library) clean in 1.6 s with no diagnostics. Cosmetic only: report.md has 'the project server' where HTT numbers should be."
  }
 }
