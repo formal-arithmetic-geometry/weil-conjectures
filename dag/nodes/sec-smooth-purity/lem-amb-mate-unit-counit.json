@@ -1,0 +1,99 @@
+{
+ "id": "lem-amb-mate-unit-counit",
+ "kind": "statement",
+ "title": "Counit identity of an adjunction mate",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E,\\mathcal F$ be categories [def-nagata-category], with functors $L_1:\\mathcal C\\to\\mathcal D$, $R_1:\\mathcal D\\to\\mathcal C$, $L_2:\\mathcal E\\to\\mathcal F$, $R_2:\\mathcal F\\to\\mathcal E$, adjunctions $L_1\\dashv R_1$, $L_2\\dashv R_2$ with units $\\eta_1,\\eta_2$ and counits $\\varepsilon_1,\\varepsilon_2$, and functors $G:\\mathcal C\\to\\mathcal E$, $H:\\mathcal D\\to\\mathcal F$. Let $\\alpha:L_2G\\to HL_1$ be a natural transformation and let $\\beta:GR_1\\to R_2H$ be its mate [def-weil-pbc-adjunction-mate]. Composition is written right to left. For every $d\\in\\mathcal D$ one has\n$$\\varepsilon_{2,Hd}\\circ L_2(\\beta_d)=H(\\varepsilon_{1,d})\\circ\\alpha_{R_1d}.$$\nThis identity requires neither the functors nor $\\alpha$ nor $\\beta$ to be equivalences or isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof sentence: both defining components commute with base change; the retained step 2 closed-immersion unit and exchange component calculations; agent-written categorical interface for the retained proof"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a square of adjunctions the transpose of the base change mate composed with the image of a morphism is the image of its transpose composed with the original square.",
+   "results": "8 hits: CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv, CategoryTheory.Bicategory.mateEquiv_square, CategoryTheory.mateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv. no match",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit. match",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(counit|homEquiv)|homEquiv.*mateEquiv|unit_mateEquiv",
+   "results": "13 hits: Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean. Subdirectory: CategoryTheory. match",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjoint transpose of a base change mate composed with a pulled back morphism is obtained by pulling back its adjoint transpose.",
+   "results": "8 hits: TopCat.Presheaf.pushforwardToOfIso, CategoryTheory.ChosenPullbacksAlong.mapPullbackAdj, CategoryTheory.Adjunction.commShiftPullback, Module.Dual.transpose, CategoryTheory.leftAdjointMate, CategoryTheory.ChosenPullbacksAlong.pullbackComp, CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. no match",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a natural transformation between left adjoints satisfies the unit and counit equations unit_mateEquiv and mateEquiv_counit.",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.Bicategory.toNatTrans_mateEquiv, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm. match",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "1 hits: CategoryTheory.unit_mateEquiv. match",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem (mateEquiv_counit|unit_mateEquiv)",
+   "results": "4 hits: 123, 128, 136, 151. Subdirectory: CategoryTheory/Adjunction/Mates.lean. match",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A mate of a square of functors satisfies its unit and counit identities.",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.mateEquiv_counit",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "how": "exact: CategoryTheory.mateEquiv_counit, lines 121-124: L₂.map ((mateEquiv adj₁ adj₂ α).app d) ≫ adj₂.counit.app (H.obj d) = α.app (R₁.obj d) ≫ H.map (adj₁.counit.app d), for α : TwoSquare G L₁ L₂ H (a transformation G ⋙ L₂ ⟶ L₁ ⋙ H); only composition notation is reversed. No invertibility hypothesis. The unit identity unit_mateEquiv (line 136) is the existing leaf lem-pur-mate-unit-compatibility.",
+  "line": 123
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "thm-amb-p1-decomposition",
+  "date": "2026-10-17",
+  "group": "Q123"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-amb-p1-decomposition",
+   "place": "Proof sentence: both defining components commute with base change; the retained step 2 closed-immersion unit and exchange component calculations",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

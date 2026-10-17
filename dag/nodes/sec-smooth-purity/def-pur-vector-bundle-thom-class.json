@@ -1,66 +1,291 @@
 {
-  "id": "def-pur-vector-bundle-thom-class",
-  "blueprint": {
-    "is": "def-pur-vector-bundle-thom-class",
-    "from": null,
-    "same_as": null
+ "id": "def-pur-vector-bundle-thom-class",
+ "blueprint": {
+  "is": "def-pur-vector-bundle-thom-class",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Thom class of a vector bundle",
+ "statement": "Work in the finite-coefficient purity conventions [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ and $n\\geq1$. Let $B$ be a separated finite-type $k$-scheme and let $\\pi:E\\to B$ be a vector bundle of constant rank $r\\geq0$ with zero section $z$ [def-pur-vector-bundle-zero-section]. To fix the dual convention, write\n$$E=\\mathbf V(\\mathcal M)=\\underline{\\operatorname{Spec}}_B(\\operatorname{Sym}^{\\bullet}\\mathcal M),\\qquad \\mathcal F=\\mathcal M^\\vee=\\mathcal Hom_{\\mathcal O_B}(\\mathcal M,\\mathcal O_B).$$\nThus $\\mathcal F$ is the locally free module of vectors in the fibers; the algebra generator map $\\mathcal M\\to\\pi_*\\mathcal O_E$ is equivalently the tautological section $s_{\\mathrm{taut}}$ of $\\pi^*\\mathcal F$. Its zero scheme is $z(B)$ and it is a regular section. Define the supported Thom class by the localized top Chern construction [thm-pur-localized-top-chern]:\n$$\\operatorname{thom}(E):=c_r(\\pi^*\\mathcal F,s_{\\mathrm{taut}}):z_*A_B\\longrightarrow A_E(r)[2r].$$\nThe twists and derived tensor are those of [def-coefficient-twists-detailed; def-weil-derived-tensor]. Applying compact-support direct image [def-compact-support-direct-image-detailed] gives\n$$\\tau_E:A_B\\xrightarrow{\\sim}R\\pi_!z_*A_B\\xrightarrow{R\\pi_!\\operatorname{thom}(E)}R\\pi_!\\bigl(A_E(r)[2r]\\bigr),$$\nwhere the first isomorphism is the inverse of the composition identification $R\\pi_!Rz_!\\cong R(\\pi z)_!=\\operatorname{id}$ [thm-sf-comp-composition], using $Rz_!=Rz_*=z_*$ for the closed immersion.\n\nFor $r\\geq1$ put $\\overline E=\\mathbf P_B(\\mathcal M\\oplus\\mathcal O_B)$, $H=\\mathbf P_B(\\mathcal M)$ and $q:\\overline E\\to B$, with projective bundles interpreted as relative Proj of the symmetric algebra [lem-pur-projective-bundle-tautological-geometry]. The complementary open is $E=\\overline E\\setminus H$. Applying $Rq_*$ to the localization triangle [prop-sf-open-closed-triangle-all-stages] and using the two projective-bundle decompositions [thm-pur-projective-bundle-formula] identifies its fiber with\n$$R\\pi_!A_E\\cong A_B(-r)[-2r].$$\nUnder a local direct-sum decomposition into line bundles, the supported class is the cup product of the pullbacks of their Thom classes along the projections from the total space; cup product has the meaning of [def-pur-supported-cup]. For $r=0$, $E=B$, $z=\\pi=\\operatorname{id}$, the Thom class and $\\tau_E$ are the identity and the product is the empty unit product; no projective bundle of rank $-1$ is used.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+  "place": "node def-pur-vector-bundle-thom-class, order 1988"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
+  "thm-pur-localized-top-chern",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-tensor",
+  "def-compact-support-direct-image-detailed",
+  "thm-sf-comp-composition",
+  "lem-pur-projective-bundle-tautological-geometry",
+  "prop-sf-open-closed-triangle-all-stages",
+  "thm-pur-projective-bundle-formula",
+  "def-pur-supported-cup"
+ ],
+ "proof": [
+  {
+   "text": "Use the relative-spectrum convention of [def-pur-vector-bundle-zero-section]. On an affine trivializing open $U=\\operatorname{Spec}R$ with a basis $e_1,\\ldots,e_r$ of $\\mathcal M$, [lem-weil-pbc-symmetric-algebra-free-module-polynomial] identifies $E_U$ with $\\operatorname{Spec}R[x_1,\\ldots,x_r]$ and the generator map sends $e_i$ to $x_i$. The corresponding section of $\\pi^*\\mathcal M^\\vee$ is $\\sum_i x_i e_i^\\vee$. If $e'=eG$ then $x'=G^{\\mathsf T}x$ and $e'^\\vee=e^\\vee G^{-\\mathsf T}$, so these local sections agree on overlaps. Its zero scheme is the augmentation quotient $R[x_1,\\ldots,x_r]/(x_1,\\ldots,x_r)=R$, exactly $z(U)$. Successive quotients by $x_1,\\ldots,x_{i-1}$ are polynomial rings in the remaining variables, and multiplication by $x_i$ is injective, by comparison of polynomial coefficients. The resulting regularity is checked at points of the zero scheme, so also covers empty opens. The empty tuple for $r=0$ gives the identity zero scheme. These are local coordinate verifications, requiring no regularity or smoothness of $B$.",
+   "uses": [
+    "def-pur-vector-bundle-zero-section",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+    "place": "first paragraph: tautological section and its zero scheme; dual convention made explicit"
+   }
   },
-  "kind": "definition",
-  "title": "Thom class of a vector bundle",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $E\\to B$ be a\nvector bundle of constant\nrank $r$, with zero section $z$ and projection $\\pi$. The\ntautological section of $\\pi^*E$ has zero scheme $z(B)$; its\nlocalized top Chern class of [thm-pur-localized-top-chern] is the\nsupported class\n\n$$\n\\operatorname{thom}(E):z_*\\Lambda_B\\longrightarrow\\Lambda_E(r)[2r].\n$$\n\nApplying $R\\pi_!$ defines\n\n$$\n\\tau_E:\\Lambda_B\\longrightarrow R\\pi_!\\Lambda_E(r)[2r].\n$$\n\nExplicitly, with $\\overline E=\\mathbf P_B(E\\oplus\\mathcal O_B)$ and\nthe localization triangle of the open $E=\\overline E\\setminus \\mathbf P_B(E)$ of def:weil-open-closed-recollement, the two\n[thm-pur-projective-bundle-formula] decompositions for the\n$\\mathbf P^r$-bundle $\\overline E\\to B$ and the $\\mathbf P^{r-1}$-bundle $\\mathbf P_B(E)\\to B$ identify the fiber of the\nrestriction map with\n\n$$\nR\\pi_!\\Lambda_E\\;\\cong\\;\\Lambda_B(-r)[-2r].\n$$\n\nUnder a local decomposition $E\\simeq L_1\\oplus\\cdots\\oplus L_r$ the\nsupported class is $\\operatorname{thom}(L_1)\\smile\\cdots\\smile \\operatorname{thom}(L_r)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
-    "place": "node def-pur-vector-bundle-thom-class, order 1988"
-  },
-  "stmt_deps": [
+  {
+   "text": "The projection is affine by its relative-spectrum description, hence quasi-compact and separated by [lem-weil-pbc-affine-morphism-permanence]. On the charts of Step 1 its algebra is generated by the finite list $x_1,\\ldots,x_r$, so [lem-weil-pbc-lft-pointwise-criterion] makes it locally of finite type; quasi-compactness makes it finite type. The zero section is closed by [def-pur-vector-bundle-zero-section], and hence proper by [lem-weil-pbc-closed-immersion-proper]. In particular the schemes and morphisms have the finite-type domains required in [def-pur-conventions]. Apply [thm-pur-localized-top-chern] on $T=E$ to the rank-$r$ bundle $\\pi^*\\mathcal F$ and the regular section of Step 1: its displayed morphism is exactly the definition of $\\operatorname{thom}(E)$. This uses the specified canonical Chern construction, rather than choosing an arbitrary element of a supported Hom group. For $r=0$ use the degree-zero unit class, namely the identity on $A_B$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "def-pur-vector-bundle-zero-section",
+    "lem-weil-pbc-closed-immersion-proper",
     "def-pur-conventions",
-    "thm-pur-localized-top-chern",
+    "thm-pur-localized-top-chern"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+    "place": "first displayed morphism: apply the localized Chern construction to the regular tautological section"
+   }
+  },
+  {
+   "text": "For a proper map the compactification with identity open gives $Rz_!=Rz_*$ by [def-compact-support-direct-image-detailed]; $z_*$ is exact by [lem-weil-pbc-proetale-ringed-open-closed], so $Rz_*A_B=z_*A_B$. The constant sheaf $A_B$ is the comparison pullback of the degree-zero constant etale $A$-sheaf, giving its bounded-below etale-origin witness; the closed pushforward stays in that class by [thm-sf-comp-composition]. That theorem applies to $B\\xrightarrow{z}E\\xrightarrow{\\pi}B$, and since $\\pi z=1_B$ its composition isomorphism gives $R\\pi_!z_*A_B\\cong A_B$. Invert it and follow it by the image of the supported morphism under $R\\pi_!$. This constructs the displayed $\\tau_E$ with its specified source. No assertion that $\\tau_E$ is invertible is needed here: that is the separate vector-bundle Thom theorem. At rank zero this composite is the identity, using the identity normalization of the composition isomorphism.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "thm-sf-comp-composition",
+    "def-pur-vector-bundle-zero-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+    "place": "second displayed morphism: compact-support pushforward with the source identification supplied"
+   }
+  },
+  {
+   "text": "Assume $r\\geq1$. Construct $\\overline E$ and $H$ by [lem-pur-projective-bundle-tautological-geometry], whose properness assertion applies to both projections (for $H$, use $n=r-1$). On a trivializing affine base chart their homogeneous rings are $R[x_1,\\ldots,x_r,t]$ and its quotient by $t$. The complement $D_+(t)$ has degree-zero ring $R[x_1/t,\\ldots,x_r/t]$. Changes of the basis of $\\mathcal M$ give the same substitutions in $x_i/t$ as for the affine bundle in Step 1, so these chart identifications glue to $E=\\overline E\\setminus H$. Homogeneous quotient by $t$ defines a closed immersion $i:H\\hookrightarrow\\overline E$. The twisting module on the Proj charts has transition functions given by ratios of degree-one coordinates; restricting these functions to the charts of $H$ gives $i^*\\mathcal O_{\\overline E}(1)=\\mathcal O_H(1)$. These are coordinate constructions, not an application of the field-only hyperplane clause of the geometry node to a general base. Apply [prop-sf-open-closed-triangle-all-stages] at finite coefficients to $A_{\\overline E}$, and then the triangulated functor $Rq_*$ of [lem-weil-pbc-derived-direct-image-triangulated]. By [def-compact-support-direct-image-detailed] the first term is $R\\pi_!A_E$ for this compactification; by [lem-weil-derived-direct-image-composition] the third is $R(qi)_*A_H$. Thus obtain the triangle $R\\pi_!A_E\\to Rq_*A_{\\overline E}\\xrightarrow{\\rho}R(qi)_*A_H\\to R\\pi_!A_E[1]$, with $\\rho$ restriction.",
+   "uses": [
+    "lem-pur-projective-bundle-tautological-geometry",
+    "prop-sf-open-closed-triangle-all-stages",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-compact-support-direct-image-detailed",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+    "place": "paragraph beginning Explicitly: projective completion and the pushed localization triangle"
+   }
+  },
+  {
+   "text": "Put $C_a=A_B(-a)[-2a]$ and $S=\\bigoplus_{a=0}^{r-1}C_a$. By [thm-pur-projective-bundle-formula], the middle and right terms of Step 4 identify with $S\\oplus C_r$ and $S$, via the powers of their respective hyperplane Chern classes. The equality $i^*\\mathcal O(1)=\\mathcal O_H(1)$ from Step 4 and the pullback identity of [lem-pur-kummer-additivity] give $i^*h=h_H$; since pullback commutes with cup products ($v^*(\\alpha\\cup\\beta)=v^*\\alpha\\cup v^*\\beta$, with support the whole scheme, [lem-pur-supported-cup-functoriality]), $i^*h^a=h_H^a$. By naturality of the adjunction defining the two decompositions, this identifies the restrictions of powers $0,\\ldots,r-1$ with the corresponding powers on $H$. Hence $\\rho$ has matrix $[1_S\\ v]$ for a morphism $v:C_r\\to S$, which need not vanish. Precompose with the automorphism $(s,c)\\mapsto(s-vc,c)$ to replace this matrix by the projection $S\\oplus C_r\\to S$. Its derived fiber is $C_r$: using the cone model of [def-weil-abstract-derived-category], the cone of this projection, shifted by $-1$, is $C_r$ plus the shifted cone of $1_S$. The identity cone is acyclic directly: for its differential $(y,x)\\mapsto(dy+x,-dx)$, a cocycle $(y,x)$ has $x=-dy$ and is the boundary of $(0,y)$. Thus the second summand is zero after localization at quasi-isomorphisms, giving the asserted fiber identification $R\\pi_!A_E\\cong C_r$. This is a computation of the object, not an unjustified identification of $\\tau_E$ with an arbitrary generator.",
+   "uses": [
     "thm-pur-projective-bundle-formula",
-    "def-coefficient-twists-detailed",
-    "def-pur-vector-bundle-zero-section",
-    "def-weil-derived-tensor"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1988,
-  "blueprint_uses": [
-    "def-coefficient-twists-detailed",
-    "def-pur-conventions",
-    "def-pur-vector-bundle-zero-section",
-    "def-weil-derived-tensor",
-    "thm-pur-localized-top-chern",
-    "thm-pur-projective-bundle-formula"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-pur-vector-bundle-zero-section",
-    "def-weil-derived-tensor"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-pur-kummer-additivity",
+    "def-weil-abstract-derived-category",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+    "place": "third display: fiber of restriction, with its potentially nonzero top-column correction"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-an",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $E\\to B$ be a\nvector bundle of constant\nrank $r$, with zero section $z$ and projection $\\pi$. The\ntautological section of $\\pi^*E$ has zero scheme $z(B)$; its\nlocalized top Chern class of [thm-pur-localized-top-chern] is the\nsupported class\n\n$$\n\\operatorname{thom}(E):z_*\\Lambda_B\\longrightarrow\\Lambda_E(r)[2r].\n$$\n\nApplying $R\\pi_!$ defines\n\n$$\n\\tau_E:\\Lambda_B\\longrightarrow R\\pi_!\\Lambda_E(r)[2r].\n$$\n\nExplicitly, with $\\overline E=\\mathbf P_B(E\\oplus\\mathcal O_B)$ and\nthe localization triangle of the open $E=\\overline E\\setminus \\mathbf P_B(E)$, the two\n[thm-pur-projective-bundle-formula] decompositions for the\n$\\mathbf P^r$-bundle $\\overline E\\to B$ and the $\\mathbf P^{r-1}$-bundle $\\mathbf P_B(E)\\to B$ identify the fiber of the\nrestriction map with\n\n$$\nR\\pi_!\\Lambda_E\\;\\cong\\;\\Lambda_B(-r)[-2r].\n$$\n\nUnder a local decomposition $E\\simeq L_1\\oplus\\cdots\\oplus L_r$ the\nsupported class is $\\operatorname{thom}(L_1)\\smile\\cdots\\smile \\operatorname{thom}(L_r)$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "On an open where the module of vectors decomposes as $\\mathcal F=\\mathcal L_1\\oplus\\cdots\\oplus\\mathcal L_r$, write $E_i=\\mathbf V(\\mathcal L_i^\\vee)$ and $p_i:E\\to E_i$. The tautological section has these pulled-back rank-one tautological components. Any subset of their coordinates has zero scheme given by that subset of $x_1,\\ldots,x_r$; the coefficient argument of Step 1 proves regularity after killing any previous subset. Thus these sections form a transverse direct sum. Property (L2) of [thm-pur-localized-top-chern] identifies each component class with $p_i^*\\operatorname{thom}(E_i)$; property (L3), iterated, identifies their product with the total localized class. The operation is precisely [def-pur-supported-cup], and its associativity is supplied by [lem-pur-supported-cup-functoriality]. The intersection of the component supports is $z(B)$, so its source is $z_*A_B$ and its twist and degree are $r$ and $2r$. For one component there is no iteration; for none it is the unit chosen in Step 2. All constructions here have finite coefficients; no integral or rational coefficient transport is assumed.",
+   "uses": [
+    "thm-pur-localized-top-chern",
+    "def-pur-supported-cup",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+    "place": "last paragraph: product formula under a local decomposition, with pullbacks and transversality explicit"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pur-vector-bundle-zero-section",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-pur-conventions",
+  "thm-pur-localized-top-chern",
+  "def-compact-support-direct-image-detailed",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "thm-sf-comp-composition",
+  "lem-pur-projective-bundle-tautological-geometry",
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-derived-direct-image-composition",
+  "thm-pur-projective-bundle-formula",
+  "lem-pur-kummer-additivity",
+  "def-weil-abstract-derived-category",
+  "def-pur-supported-cup",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-vector-bundle-thom-class.md",
+  "place": "definition, first paragraph through the final direct-sum sentence; elementary coordinate and matrix details supplied by N5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "thom|localized.*chern|tautological.*section",
+   "results": "Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/DirichletCharacter/GaussSum.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean; scope Mathlib/",
+   "date": "2026-10-17",
+   "verdict": "no match: broad thom substring also matches castHom; refined AlgebraicGeometry grep below has no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized top Chern class with support on the zero section of a vector bundle",
+   "results": "Bundle.mdifferentiableOn_zeroSection, Bundle.mdifferentiableAt_zeroSection, Bundle.zeroSection, Bundle.mdifferentiable_zeroSection, Bundle.contMDiff_zeroSection, Bundle.contMDiffOn_zeroSection, ContMDiffSection.coe_zero, Bundle.mdifferentiableWithinAt_zeroSection",
+   "date": "2026-10-17",
+   "verdict": "no match: returned notions do not construct the supported algebraic Thom class or its compact-support morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Thom\"",
+   "results": "instHomogeneousPowFloat, instHomogeneousPowFloat32, Std.Async.System.getHomeDir, Lean.Meta.Grind.getHomoPredTheorems, Lean.Meta.Grind.getHomoSourceTypes, Lean.Meta.Grind.getHomoTheorems, Equiv.Perm.sigmaCongrRightHom, Equiv.Perm.sigmaCongrRightHom_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: substring hits are unrelated names, not Chern or Thom classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Thom class of an algebraic vector bundle from the localized top Chern class of its tautological section, compactly supported cohomology and Tate twist",
+   "results": "hom_trivializationAt, hom_trivializationAt_apply, hom_trivializationAt_baseSet, VectorBundle.trivialization_linear', ModuleCat.Tilde.isUnit_toStalk, CommRing.Pic.mk_tensor, VectorBundleCore.localTriv.isLinear, ModuleCat.Tilde.const",
+   "date": "2026-10-17",
+   "verdict": "no match: returned notions do not construct the supported algebraic Thom class or its compact-support morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bThom\\b|thomClass|thom_class|localized.*[Cc]hern|[Cc]hern.*class",
+   "results": "none; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: returned notions do not construct the supported algebraic Thom class or its compact-support morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology projective bundle formula compact supports affine space Tate twist",
+   "results": "AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.IsEtale, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.AffineSpace.coord, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-17",
+   "verdict": "no match: returned notions do not construct the supported algebraic Thom class or its compact-support morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\"",
+   "results": "Lean.Meta.MatcherApp.matcherName, Lean.Meta.Match.MkMatcherInput.matcherName",
+   "date": "2026-10-17",
+   "verdict": "no match: substring hits are unrelated names, not Chern or Thom classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the derived category of etale sheaves, the top Chern class of the universal section on a vector bundle gives a morphism from the zero section pushforward to the Tate-twisted constant sheaf",
+   "results": "SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardSections_unitHomEquiv, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'",
+   "date": "2026-10-17",
+   "verdict": "no match: returned notions do not construct the supported algebraic Thom class or its compact-support morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1988,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
+  "def-weil-derived-tensor",
+  "thm-pur-localized-top-chern",
+  "thm-pur-projective-bundle-formula"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-pur-vector-bundle-zero-section",
+  "def-weil-derived-tensor"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $E\\to B$ be a\nvector bundle of constant\nrank $r$, with zero section $z$ and projection $\\pi$. The\ntautological section of $\\pi^*E$ has zero scheme $z(B)$; its\nlocalized top Chern class of [thm-pur-localized-top-chern] is the\nsupported class\n\n$$\n\\operatorname{thom}(E):z_*\\Lambda_B\\longrightarrow\\Lambda_E(r)[2r].\n$$\n\nApplying $R\\pi_!$ defines\n\n$$\n\\tau_E:\\Lambda_B\\longrightarrow R\\pi_!\\Lambda_E(r)[2r].\n$$\n\nExplicitly, with $\\overline E=\\mathbf P_B(E\\oplus\\mathcal O_B)$ and\nthe localization triangle of the open $E=\\overline E\\setminus \\mathbf P_B(E)$, the two\n[thm-pur-projective-bundle-formula] decompositions for the\n$\\mathbf P^r$-bundle $\\overline E\\to B$ and the $\\mathbf P^{r-1}$-bundle $\\mathbf P_B(E)\\to B$ identify the fiber of the\nrestriction map with\n\n$$\nR\\pi_!\\Lambda_E\\;\\cong\\;\\Lambda_B(-r)[-2r].\n$$\n\nUnder a local decomposition $E\\simeq L_1\\oplus\\cdots\\oplus L_r$ the\nsupported class is $\\operatorname{thom}(L_1)\\smile\\cdots\\smile \\operatorname{thom}(L_r)$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pur-vector-bundle-thom-class",
+  "worker": "stage1",
+  "summary": "Checked current main-20261015 definition and chapter/unit route; no exact Lean attachment. Corrected the scheme-versus-module dual convention, specified finite coefficients and rank zero, named the source comparison for tau, and supplied coordinate regularity, compactification, matrix-fiber and transverse-product arguments. No new nodes or Mathlib leaves: existing statements supply every non-elementary fact. The projective restriction matrix is [I v], not necessarily [I 0].",
+  "blueprint": "Definition def-pur-vector-bundle-thom-class: Step 1 realizes its tautological-section sentence, Step 2 the first display, Step 3 the second display, Steps 4–5 the projective-completion/fiber paragraph, and Step 6 its final direct-sum sentence. These are the auxiliary constructions of sk-prop-an, not a new proof route for purity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "why": "Generic symmetric-algebra coordinate identification, used only to check the section and zero scheme."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affine morphism separatedness and quasi-compactness."
+   },
+   {
+    "node": "lem-weil-pbc-lft-pointwise-criterion",
+    "why": "Generic affine algebra criterion to verify the finite-type domain."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic properness of the closed zero section."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Exactness of closed pro-etale pushforward, not a purity result."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic derived additive functor preserves distinguished triangles."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic finite-level derived direct-image composition in the localization triangle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-0959c81db",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-0959c81db (reviewer sub-agent of L); spot-checked: I read the whole item, the main-20261015 and master blueprint text, the sk-prop-an unit, the downstream thm-pur-vector-bundle-thom, the statement of every cited node, and Stacks constructions definition-vector-bundle (01M2). The statement correction is right. The zero-section node fixes E=Spec Sym(M), so the tautological section lives in pi^*(M^vee), not pi^*M; the rank-one test O(1) on P^1 gives total space O(-1). Proj Sym(M+O) minus Proj Sym M is exactly E. No clause is weakened: r>=0 with rank zero handled explicitly, finite A_{E,n} as def-pur-conventions requires, and the projective part only for r>=1. Step checks: (1) the change-of-basis and coordinate-regularity calculations hold over any ring; (2) finite type, proper zero section, and localized top Chern applied on T=E; (3) Rz_!=z_* via the compactification (id,z) and exact closed pushforward, and the composition theorem's identity normalization gives Rpi_! z_* A_B = A_B; (4) (j,q) is a compactification of pi, the open-closed triangle holds at finite level, and Rq_* is triangulated; (5) the restriction matrix [1 v] (v need not vanish), the conjugation and the acyclic cone of the identity all check, so Rpi_!A_E = A_B(-r)[-2r], and B=pt, r=1 gives RGamma_c(A^1); (6) (L2) and (L3) with all partial sums regular, and the supports meet in z(B). Every cited unit is on the sk-prop-an route, so the 7 declared tool_uses are accepted but not needed. No cycle, including through the blueprint_update proofs. pur9-def-thom-class is a different construction, not a duplicate. No new nodes, no SGA. One fault fixed (C1): Step 5 restricted powers h^a to H citing only the c_1 pullback identity. Multiplicativity of pullback on cup products is lem-pur-supported-cup-functoriality (on route), now cited with one sentence in fixes/dag/nodes/sec-smooth-purity/def-pur-vector-bundle-thom-class.json. Minor, not a fault: Step 3 does not state that A_E(r)[2r] is of etale origin; this holds via nu^*(mu_m tensor A)=A(1).; 1 file(s) fixed by the reviewer"
+ }
 }
