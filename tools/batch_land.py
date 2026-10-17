@@ -742,7 +742,7 @@ def _undo_entries(entries, message, *, returned=False, repair_jobs=None):
             if p.relative_to(ROOT).as_posix() in prepared:
                 parts = re.split(r'(?=^## )', prepared[p.relative_to(ROOT).as_posix()].decode(), flags=re.M)
             kept = ''.join(x for x in parts if not x.startswith(f"## {e['item']} ("))
-            prepared[p.relative_to(ROOT).as_posix()] = (kept.rstrip() + f"\n\n## {e['item']} ({ld.now()}, head {e['head'][:9]})\n\n{entry_message}\n").encode()
+            prepared[p.relative_to(ROOT).as_posix()] = (kept.rstrip() + f"\n\n## {e['item']} ({ld.now()}, branch head {e['head'][:9]})\n\n{entry_message}\n").encode()
     # Reserve repairs atomically with take-out; local outbox requests become
     # runnable only when this dedicated claim appears. No original-group return.
     for e in entries:
