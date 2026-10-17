@@ -3,72 +3,148 @@
  "blueprint": {
   "is": "cor-a1-fourier-middle-hc1",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Fourier bound for middle-extension cohomology",
- "statement": "Let $j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be a dense open immersion and\nlet $\\mathcal M$ be an irreducible\nlisse Weil sheaf on\n$U_0$, unramified at infinity,\npunctually $\\iota$-pure of weight\n$w$, with irreducible geometric fundamental representation of\n[def-wf-fundamental-representation] and\nFourier-nonexceptional\nmiddle extension\n$j_*\\mathcal M$. Then\n$H_c^1(\\mathbf A^1_{k_0},j_*\\mathcal M)$ has\nweights at most $w+1$.",
+ "statement": "Let $\\psi$ be a nontrivial additive character of $k_0$ [def-fd-additive-character], let\n$j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be a dense open immersion and\nlet $\\mathcal M$ be an irreducible lisse Weil sheaf on $U_0$, that is,\na nonzero lisse Weil sheaf whose only lisse Weil subsheaves are $0$ and\n$\\mathcal M$ (irreducibility among lisse sheaves; equivalently the Weil\ngroup acts irreducibly on the geometric generic stalk). Assume that\n$\\mathcal M$ is punctually $\\iota$-pure of weight $w$ [def-weil-punctual-weights]\nand nonexceptional in the constituent sense of [def-a1-constituent-nonexceptional]:\nnone of its geometric irreducible constituents\nis the restriction $\\mathcal L_{\\psi(ax)}|_U$ of a linear\nArtin–Schreier sheaf, for any $a\\in k$, the value $a=0$ (the trivial\nrank-one sheaf) included. Then, for the ordinary sheaf middle extension\n$j_*\\mathcal M$ of [def-wf-middle-extension] and the compactly supported\ncohomology of [def-weil-ordinary-compact-cohomology], the Frobenius module\n$H_c^1(\\mathbf A^1_{k_0},j_*\\mathcal M)$ (with geometric Frobenius) has\nweights at most $w+1$ in the sense of [def-weil-frobenius-module-weights].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-c-dl-a1-hc1/cor-a1-fourier-middle-hc1.md",
   "place": "node cor-a1-fourier-middle-hc1, order 2782"
  },
  "stmt_deps": [
-  "def-wf-fundamental-representation"
+  "def-fd-additive-character",
+  "def-a1-constituent-nonexceptional",
+  "def-weil-punctual-weights",
+  "def-wf-middle-extension",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-module-weights"
  ],
  "proof": [
   {
-   "text": "*Step 1: the transform of the middle extension.* The hypothesis\n[def-fd-nonexceptional] excludes, after geometric base change, a\nconstant sheaf up to a constant Weil twist; so $\\mathcal M$ is not\ngeometrically constant. Being nonzero, irreducible and unramified at\ninfinity, $\\mathcal M$ is therefore constituent-nonexceptional by\n[lem-a1-unramified-nonexceptional], and\n[prop-a1-fourier-middle-extension] supplies a dense open\n$j':U'_0\\hookrightarrow\\mathbf A^1_{k_0}$ of the dual line and a nonzero\nirreducible lisse Weil sheaf $\\mathcal M'$ on $U'_0$ with\n\n$$\n\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong(j'_*\\mathcal M')[1].\n$$",
+   "text": "*Step 1: the transform of the middle extension.* The nonexceptionality\nhypothesis is constituent-nonexceptionality in the sense of\n[def-a1-constituent-nonexceptional]: it excludes every linear Artin–Schreier\ngeometric constituent, including the constant one ($a=0$). Together with\n$\\mathcal M$ nonzero and irreducible, these are exactly the hypotheses of the\nFourier middle-extension proposition, which therefore\nsupplies a dense open $j':U'_0\\hookrightarrow\\mathbf A^1_{k_0}$ of the dual\nline and a nonzero irreducible lisse Weil sheaf $\\mathcal M'$ on $U'_0$ with\n\\[\n\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong(j'_*\\mathcal M')[1].\n\\]",
    "uses": [
-    "def-fd-nonexceptional",
-    "lem-a1-unramified-nonexceptional",
-    "prop-a1-fourier-middle-extension"
+    "prop-a1-fourier-middle-extension",
+    "def-a1-constituent-nonexceptional"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-c-dl-a1-hc1/cor-a1-fourier-middle-hc1.proof.md",
+    "place": "Step 1: the transform of the middle extension"
+   }
   },
   {
-   "text": "*Step 2: the weight of $\\mathcal M'$.* Since $\\mathcal M$ is moreover\npunctually $\\iota$-pure of weight $w$, the last assertion of\n[cor-fd-l2-plancherel-middle-extension] shows that $\\mathcal M'$ is\npunctually $\\iota$-pure of weight exactly $w+1$ on all of $U'_0$.",
+   "text": "*Step 2: the weight of $\\mathcal M'$.* The generic Fourier-sheaf purity\nstatement gives a real number $v$ such that $\\mathcal M'$ is punctually\n$\\iota$-pure of weight $v$ on $U'_0$. The Fourier upper-weight proposition\nthen gives $v\\le w+1$.",
    "uses": [
-    "cor-fd-l2-plancherel-middle-extension"
+    "thm-fd-generic-fourier-sheaf-pure",
+    "prop-a1-fourier-weight-upper"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-c-dl-a1-hc1/cor-a1-fourier-middle-hc1.proof.md",
+    "place": "Step 2: the weight of the Fourier partner"
+   }
   },
   {
-   "text": "*Step 3: weights of the middle extension on the dual line.* The dual\nline is a smooth geometrically connected affine curve, and\n$\\mathcal M'$ is a nonzero lisse Weil sheaf on the dense open $U'_0$\nall of whose closed-point Frobenius eigenvalues satisfy\n$|\\iota(\\alpha)|^2=q_x^{w+1}\\le q_x^{w+1}$. Boundary semicontinuity\n[lem-wf-boundary-semicontinuity], with $\\beta=w+1$, shows that the\nmiddle extension $j'_*\\mathcal M'$ of [def-wf-middle-extension] has\npunctual weights at most $w+1$ at every closed point of the dual line,\nincluding the finitely many points outside $U'_0$, where it may be\nsingular.",
+   "text": "*Step 3: weights of the middle extension on the dual line.* The dual\nline is a smooth geometrically connected affine curve, and $\\mathcal M'$ is\nlisse on the dense open $U'_0$ with punctual eigenvalue weights at most\n$v\\le w+1$. Boundary semicontinuity, applied with $\\beta=w+1$, shows that\nthe middle extension $j'_*\\mathcal M'$ has punctual weights at most $w+1$ at\nevery closed point of the dual line, including points outside $U'_0$.",
    "uses": [
     "lem-wf-boundary-semicontinuity",
     "def-wf-middle-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-c-dl-a1-hc1/cor-a1-fourier-middle-hc1.proof.md",
+    "place": "Step 3: weights of the middle extension on the dual line"
+   }
   },
   {
-   "text": "*Step 4: the origin fibre.* By the stationary-phase identification\n[cor-fd-origin-stationary-phase], whose hypotheses are those of the\npresent statement, there is a Frobenius-equivariant isomorphism\n\n$$\nH_c^1(\\mathbf A^1_{k_0},j_*\\mathcal M)\\cong(j'_*\\mathcal M')_{0'},\n$$\n\nthe geometric Frobenius of $k_0$ on the left corresponding to the local\nFrobenius $F_{0'}$ at the $k_0$-rational point $0'$ on the right. Hence\nthe eigenvalues of Frobenius on $H_c^1(\\mathbf A^1_{k_0},j_*\\mathcal M)$\nare those of $F_{0'}$ on the stalk, and by Step 3 (with $q_{0'}=q$)\neach of them satisfies $|\\iota(\\alpha)|^2\\le q^{w+1}$. In the\nconvention of [def-weil-punctual-weights], this says that\n$H_c^1(\\mathbf A^1_{k_0},j_*\\mathcal M)$ has weights at most $w+1$.\nThe irreducibility of the geometric fundamental representation of\n[def-wf-fundamental-representation] is not needed for this argument.",
+   "text": "*Step 4: the origin fibre.* The stationary-phase identification, whose\nhypotheses (lisse Weil sheaves $\\mathcal M,\\mathcal M'$ on dense opens with\n$\\operatorname{FT}_\\psi((j_*\\mathcal M)[1])\\cong(j'_*\\mathcal M')[1]$) are given by Step 1,\ngives a Frobenius-equivariant isomorphism\n\\[\nH_c^1(\\mathbf A^1_{k_0},j_*\\mathcal M)\\cong(j'_*\\mathcal M')_{0'},\n\\]\nwhere geometric Frobenius $F$ on the left corresponds to local Frobenius $F_{0'}$ at the\n$k_0$-rational origin $0'$ on the right. Thus the eigenvalues of $F$ on\n$V=H_c^1(\\mathbf A^1_{k_0},j_*\\mathcal M)$ are those of $F_{0'}$ on the origin stalk, and by\nStep 3 (with $q_{0'}=q$) each satisfies $|\\iota(\\alpha)|^2\\le q^{w+1}$; they are nonzero since\n$F$ is an automorphism. To obtain the filtration of [def-weil-frobenius-module-weights], let\n$c_1<\\dots<c_m$ be the distinct values of $|\\iota(\\alpha)|$ ($m=0$ if $V=0$) and let $V_r$ be\nthe sum of the generalized eigenspaces of $F$ for the eigenvalues with $|\\iota(\\alpha)|\\le c_r$.\nEach $V_r$ is $F$-stable with $F(V_r)=V_r$ ($F$ is injective on it), $V_m=V$, and\n$V_r/V_{r-1}$ is isomorphic, compatibly with $F$, to the sum of the generalized eigenspaces with\n$|\\iota(\\alpha)|=c_r$, hence $\\iota$-pure of weight $w_r=2\\log_q c_r\\le w+1$. So $V$ has\nweights at most $w+1$.",
    "uses": [
     "cor-fd-origin-stationary-phase",
-    "def-weil-punctual-weights",
-    "def-wf-fundamental-representation"
+    "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-c-dl-a1-hc1/cor-a1-fourier-middle-hc1.proof.md",
+    "place": "Step 4: the origin fibre"
+   }
   }
  ],
  "proof_deps": [
-  "def-fd-nonexceptional",
-  "lem-a1-unramified-nonexceptional",
   "prop-a1-fourier-middle-extension",
-  "cor-fd-l2-plancherel-middle-extension",
+  "def-a1-constituent-nonexceptional",
+  "thm-fd-generic-fourier-sheaf-pure",
+  "prop-a1-fourier-weight-upper",
   "lem-wf-boundary-semicontinuity",
   "def-wf-middle-extension",
   "cor-fd-origin-stationary-phase",
-  "def-weil-punctual-weights",
-  "def-wf-fundamental-representation"
+  "def-weil-frobenius-module-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-c-dl-a1-hc1/cor-a1-fourier-middle-hc1.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-c-dl-a1-hc1/cor-a1-fourier-middle-hc1.proof.md",
+  "place": "Steps 1–4; corrected to the current blueprint upper-weight route"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "weights at most w plus one for compactly supported degree one cohomology of an irreducible nonexceptional pure lisse Weil sheaf on the affine line",
+   "results": "LieModule weight-space declarations only; no cohomology or Weil-sheaf result",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier transform middle extension stalk at origin identifies H_c^1 and gives a weight bound",
+   "results": "Fourier analysis and LieModule declarations only; no relevant result",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, WeilSheaf, compactlySupportedCohomology, HasWeightsAtMost",
+   "results": "0 hits; unknown identifier CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fourier, IsPunctuallyPureOfWeight, le_add_one",
+   "results": "0 hits; unknown identifier Fourier",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupportedCohomology|HasWeightsAtMost",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fourier|PunctuallyPure|weight",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "weights at most w plus one for compactly supported cohomology of Fourier middle extension",
+   "results": "Fourier integral and bump-function declarations; no relevant result",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier partner weight inequality over finite field lisse sheaves",
+   "results": "FourierTransform and FourierPair declarations; no relevant result",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -629,5 +705,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "cor-a1-fourier-middle-hc1",
+  "worker": "stage1",
+  "summary": "Updated the imported item to the current main-20261015 statement: a nontrivial additive character, irreducible lisse sheaf, punctual purity, and constituent nonexceptionality, with no unramified-at-infinity hypothesis. Replaced the stale exact-weight step by the current route through generic Fourier purity and the upper bound v ≤ w+1, then applied boundary semicontinuity and Frobenius-equivariant stationary phase. Added the missing upper-weight statement as prop-a1-fourier-weight-upper.",
+  "blueprint": "Steps 1–4 realize cor-a1-fourier-middle-hc1.proof.md in main-20261015: transform shape; existence of a pure Fourier partner and its upper weight; boundary semicontinuity; origin-fibre identification."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-0a7a41f2a",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-0a7a41f2a (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, the new node, every cited statement, the main-20261015 blueprint (cor-a1-fourier-middle-hc1 and its unit, sk-p-dl-a1-fourier-weight and its unit, cor-fd-origin-stationary-phase, cor-fd-l2-plancherel-middle-extension), the unit records and the slopmaster2 Lean (DegreeOne.lean:148, FourierWeight.lean:46, MiddleExtension.lean:63). The route is sound: Fourier middle-extension shape, then generic purity of the partner plus the new bound v<=w+1, then boundary semicontinuity with beta=w+1, then the Frobenius-equivariant identification H_c^1 = (j'_*M')_{0'}. This matches the unit sections and the Lean proof. The worker was right to drop the old master hypotheses and lem-a1-unramified-nonexceptional, whose unramified-at-infinity hypothesis is not available. The new node prop-a1-fourier-weight-upper is true and kept: it states the unrealized unit sk-p-dl-a1-fourier-weight and matches le_add_one_of_isFourierPartner hypothesis by hypothesis. I tested it on M=0 (excluded by 'nonzero'), on a Kummer sheaf on G_m, and on L_psi(x^2). It is not a restatement of the item. cor-fd-l2-plancherel-middle-extension would imply it, but that node's first part lacks a nonzero hypothesis and is false for M=0; the maintainer should add M nonzero there. I repaired three faults in the item. (1) B3/C4: the statement cited def-fd-nonexceptional, the weaker Fourier-nonexceptionality, while its words and Lean IsNonexceptional are def-a1-constituent-nonexceptional, which Step 1 needs; the statement now cites def-a1-constituent-nonexceptional. (2) B3/B4: an unclosed '$w+1.', a garbled 'is used, and' clause, and missing stmt_deps (def-fd-additive-character, plus def-weil-ordinary-compact-cohomology and def-weil-frobenius-module-weights). (3) E5: Step 4 claimed the eigenvalue bound 'is exactly' weights <=w+1; it now writes out the filtration by generalized eigenspaces grouped by |iota(alpha)|. Batch-5 check: thm-fd-generic-fourier-sheaf-pure is a downstream Deligne–Laumon result, not given by the trace-formula or Poincaré-duality assumptions and not a step of their proofs. Its large closure, which reaches trf and pod nodes, comes from that node's existing split and was already reached by the base item through prop-a1-fourier-middle-extension, cor-fd-origin-stationary-phase and cor-fd-l2-plancherel-middle-extension. def-a1-constituent-nonexceptional, def-wf-middle-extension and def-weil-punctual-weights are general definitions; their hits are def-pod-lisse-l-adic-sheaves and the eigenvalue well-definedness lemma lem-weil-local-frobenius-conjugacy-class, neither part of either proof. All are accepted. No tool_uses, no SGA. The only fixed file is fixes/dag/nodes/sec-deligne-laumon-a1/cor-a1-fourier-middle-hc1.json.; 1 file(s) fixed by the reviewer"
  }
 }
