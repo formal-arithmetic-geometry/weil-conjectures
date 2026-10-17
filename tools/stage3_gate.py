@@ -17,7 +17,10 @@ theorem with its node, change records):
      ~/cc1/proof-imports-cycle.sh and tools/batch_land.py check it);
   2. `sorry` put into a declaration that had none (a proved result replaced by sorry);
   3. `sorry` added while no sorried declaration is proved and the sorry count of the delivered modules does not fall
-     (a stage-3 delivery claims proof progress).
+     (a stage-3 delivery claims proof progress);
+  4. in the adopted source library (lean/WeilConjectures/): a changed statement, attributes or public imports, a removed or
+     new public declaration, and a changed body of a non-theorem declaration (def, instance, ...) unless its upstream body
+     is exactly `sorry` (launcher, 2026-10-17: filling an upstream `sorry` body with the signature unchanged is allowed).
 The global build (tools/build.py) then enforces compile, the axiom probe (only propext, Classical.choice, Quot.sound;
 no sorryAx outside the declarations the landing may leave with sorry) and 60 s per file; a red build takes the
 delivery at fault out again (tools/batch_land.py triage).
