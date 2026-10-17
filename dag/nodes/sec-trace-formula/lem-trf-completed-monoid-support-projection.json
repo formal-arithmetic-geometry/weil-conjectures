@@ -11,9 +11,124 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=L[Q]$ and $I=\\mathfrak mA+(X_1,\\ldots,X_r)A$. The basis map $j:B\\to A$, $z^q\\mapsto X^q$, preserves products because exponents add; distinct basis exponents give distinct series coefficients, so it is injective [def-weil-pbc-multivariate-power-series]. Write $|e|=\\sum_i e_i$. Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with $\\Lambda=L$, base ideal $\\mathfrak m$ and $d=r$: $F\\in I^n$ precisely when $c_e(F)\\in\\mathfrak m^{n-|e|}$ for every $|e|<n$. This statement assumes neither Noetherianity nor completeness, so it applies to the given $L$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary), motivating context for the existing agent-formulated coefficient-criterion node; its full statement, including no Noetherianity requirement, is used."
+   }
+  },
+  {
+   "text": "Choose nonzero generators $q_1,\\ldots,q_s$ of $Q$ and let $D=\\max(1,|q_1|,\\ldots,|q_s|)$; when $Q=\\{0\\}$ take the empty list and $D=1$. Put $E_n=j^{-1}(I^n)$. Since $j(J)\\subseteq I$, $J^n\\subseteq E_n$. Conversely take $f=\\sum c_qz^q\\in E_{Dn}$. Express $q$ with $h$ generator factors, so $|q|\\leq Dh$. If $h\\geq n$, its monomial already belongs to $J^n$. If $h<n$, the coefficient criterion gives $c_q\\in\\mathfrak m^{Dn-|q|}$, and $Dn-|q|\\geq D(n-h)\\geq n-h$; hence $c_qz^q\\in J^{n-h}J^h=J^n$. Summing the finitely many terms proves $E_{Dn}\\subseteq J^n$. These estimates include $q=0$, with $h=0$.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  },
+  {
+   "text": "For $x=(x_n)_n\\in T$ choose a polynomial representative $f_n\\in B$ of $x_n\\in B/J^n$ [def-weil-pbc-adic-completion]. Compatibility gives $f_m-f_n\\in J^n$ for $m\\geq n$. By step 2 and the coefficient criterion, $c_e(jf_m)-c_e(jf_n)\\in\\mathfrak m^{n-|e|}$ whenever $n>|e|$. For each $k\\geq1$ the residue of $c_e(jf_n)$ modulo $\\mathfrak m^k$ is thus independent of $n\\geq k+|e|$. These residues form a compatible system. The assumed bijection $L\\to\\varprojlim L/\\mathfrak m^k$ supplies a unique $c_e(x)\\in L$ with these residues. Changing representatives changes no stabilized residue. Thus $\\iota(x)=\\sum_e c_e(x)X^e$ is well defined as a series [def-weil-pbc-multivariate-power-series].",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  },
+  {
+   "text": "The construction gives $c_e(\\iota x)-c_e(jf_n)\\in\\mathfrak m^{n-|e|}$ for $|e|<n$, hence $\\iota x-jf_n\\in I^n$ by the coefficient criterion. Representatives for $x+y$, $xy$ are $f_n+g_n$, $f_ng_n$. For fixed exponent $e$ and $k$, take $n\\geq k+|e|$: every coefficient of exponent at most $e$ agrees with its limit modulo $\\mathfrak m^k$. The finite convolution formula then shows $c_e(\\iota(xy))$ and $\\sum_{a+b=e}c_a(\\iota x)c_b(\\iota y)$ agree modulo every $\\mathfrak m^k$, so they agree in $L$; the same computation with addition proves additivity. Here $\\bigcap_k\\mathfrak m^k=0$ follows from injectivity of the assumed completion map. Constant representatives prove preservation of $1$ and $L$, and $\\iota|_B=j$. Thus $\\iota$ is an $L$-algebra homomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  },
+  {
+   "text": "If $\\iota x=0$, the preceding approximation at index $Dn$ gives $jf_{Dn}\\in I^{Dn}$, and step 2 gives $f_{Dn}\\in J^n$. Since $f_{Dn}$ represents $x_{Dn}$ and $x$ is compatible, its image modulo $J^n$ is $x_n=0$. This holds for every $n$, so $x=0$ as a compatible family. Therefore $\\iota$ is injective [def-weil-pbc-adic-completion].",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  },
+  {
+   "text": "For $e\\notin Q$, every $jf_n$ has zero $e$-coefficient; hence $c_e(x)=0$, so $\\iota(T)\\subseteq A_Q$. Conversely let $F=\\sum_{q\\in Q}c_qX^q\\in A_Q$. Let $b_n=\\sum_{q\\in Q,\\ |q|<Dn}c_qz^q\\in B$, a finite sum since $r$ is finite. If $m\\geq n$, $j(b_m-b_n)$ has no terms below degree $Dn$, so it lies in $I^{Dn}$ by the coefficient criterion; step 2 gives $b_m-b_n\\in J^n$. Thus $x_n=b_n\\bmod J^n$ is a compatible family defining $x\\in T$. For each $q$, the coefficient of $jb_n$ eventually equals $c_q$ exactly, so the construction of $\\iota$ gives $\\iota x=F$. This proves $\\iota(T)=A_Q$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  },
+  {
+   "text": "Give $T=\\varprojlim B/J^n$ its completion topology, with basic neighborhoods $P_n=\\ker(T\\to B/J^n)$ [def-weil-pbc-adic-completion]. If $x\\in P_n$, its representative $f_n$ is in $J^n$, so $jf_n\\in I^n$; the approximation in step 4 then gives $\\iota x\\in I^n$. Thus $\\iota$ is continuous. For any $x\\in T$, the canonical image of $f_n$ differs from $x$ by an element of $P_n$, so these images converge to $x$. Also $A$ is separated for $I$: if $F\\in\\bigcap_nI^n$, its $e$-coefficient lies in every $\\mathfrak m^k$ by taking $n=k+|e|$, hence is zero. Any other continuous extension of $j$ therefore has the same limit on the $f_n$, proving uniqueness.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  },
+  {
+   "text": "The set $A_Q$ is a subalgebra: $0\\in Q$ and $Q+Q\\subseteq Q$, so the finite coefficient convolution of two supported series again has support in $Q$ [def-weil-pbc-multivariate-power-series]. Define $\\pi$ coefficientwise as in the statement. Additivity and $\\pi|_{A_Q}=1$ follow coefficientwise. For $a\\in A_Q$, compute the $u$-coefficient using the finite sum over $q+e=u$. If $u\\in Q$, every contributing $q$ lies in $Q$ and $e=u-q\\in M\\cap\\mathbf N^r=Q$, so $\\pi(ab)$ and $a\\pi(b)$ have the same coefficient. If $u\\notin Q$, the first coefficient is zero and the second is zero too: a nonzero contributing term would require $q,e\\in Q$, forcing $u=q+e\\in Q$. Thus $\\pi(ab)=a\\pi(b)$ for all $u$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  },
+  {
+   "text": "The proved injectivity and image equality make $\\iota:T\\to A_Q$ an $L$-algebra isomorphism. Put $\\rho=\\iota^{-1}\\pi$. For $t\\in T$ and $b\\in A$, step 8 gives $\\pi(\\iota(t)b)=\\iota(t)\\pi(b)$; applying $\\iota^{-1}$ gives $\\rho(\\iota(t)b)=t\\rho(b)$. Additivity transports in the same way, proving $T$-linearity. Finally $\\pi\\iota=\\iota$ gives $\\rho\\iota=\\operatorname{id}_T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 specifies the monoid models; Q09 agent argument for the auxiliary supported-series comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70 motivates the model; Q09 supplies the explicit coefficient-limit proof using the existing combined-ideal coefficient criterion. No unavailable reference is used as a proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +164,52 @@
    "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"19\", \"text\": \"* `MvPowerSeries.truncFinset s p` restricts the support of a multivariate power series `p`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"160\", \"text\": \"theorem support_truncFinset_subset (p : MvPowerSeries σ R) : (truncFinset R s p).support ⊆ s := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"183\", \"text\": \"If `f : MvPowerSeries σ R` and `n : σ →₀ ℕ` is a (finitely-supported) function from `σ`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"235\", \"text\": \"If `f : MvPowerSeries σ R` and `n : σ →₀ ℕ` is a (finitely-supported) function from `σ`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"939\", \"text\": \"  rw [MvPowerSeries.monomial_eq', Finsupp.prod_of_support_subset _ Finsupp.support_smul _\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"line\": \"222\", \"text\": \"    (fun (d : ℕ) ↦ coeff d f • MvPowerSeries.coeff e (a ^ d)).HasFiniteSupport := by\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/Expand.lean\", \"line\": \"104\", \"text\": \"  rw [expand, MvPowerSeries.support_expand]\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/Expand.lean\", \"line\": \"108\", \"text\": \"  rw [expand, MvPowerSeries.support_expand]\"}\nRead the returned declarations: none supplies this completed monoid comparison and module projection.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a lattice monoid algebra is the supported formal power series subring with a coefficient projection",
+   "results": "{\"t\": \"2026-10-17T19:07:49Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of a lattice monoid algebra is the supported formal power series subring with a coefficient projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.powerSeries_as_subring\", \"LaurentSeries.powerSeries_ext_subring\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.powerSeriesEquivSubring\", \"LaurentSeries.instLaurentSeriesComplete\", \"LaurentSeries.powerSeriesEquivSubring_apply\", \"LaurentSeries.extensionAsRingHom\", \"LaurentSeries.powerSeriesEquivSubring_coe_apply\"], \"digest\": \"1843851c6307b9b7\"} Read the returned candidates: LaurentSeries statements concern one-variable field-valued valuation completions; generic AdicCompletion APIs do not provide the monoid-support comparison; the graded-ring projections assume a direct-sum grading and do not apply to arbitrary infinite supported series. Truncation gives finite polynomials, not the stated completed monoid theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, MvPowerSeries, AdicCompletion",
+   "results": "{\"t\": \"2026-10-17T19:07:50Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra, MvPowerSeries, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned candidates: LaurentSeries statements concern one-variable field-valued valuation completions; generic AdicCompletion APIs do not provide the monoid-support comparison; the graded-ring projections assume a direct-sum grading and do not apply to arbitrary infinite supported series. Truncation gives finite polynomials, not the stated completed monoid theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*[Cc]ompletion|[Cc]ompletion.*MonoidAlgebra|MvPowerSeries.*[Ss]upport",
+   "results": "{\"t\": \"2026-10-17T19:07:50Z\", \"tool\": \"grep\", \"query\": \"MonoidAlgebra.*[Cc]ompletion|[Cc]ompletion.*MonoidAlgebra|MvPowerSeries.*[Ss]upport\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned candidates: LaurentSeries statements concern one-variable field-valued valuation completions; generic AdicCompletion APIs do not provide the monoid-support comparison; the graded-ring projections assume a direct-sum grading and do not apply to arbitrary infinite supported series. Truncation gives finite polynomials, not the stated completed monoid theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adic completion of a finitely generated lattice monoid algebra embeds as supported formal power series and admits a module linear coefficient projection",
+   "results": "{\"t\": \"2026-10-17T19:07:50Z\", \"tool\": \"leansearch\", \"query\": \"The adic completion of a finitely generated lattice monoid algebra embeds as supported formal power series and admits a module linear coefficient projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.module\", \"AdicCompletion.instAlgebra\", \"AdicCompletion.liftAlgHom\", \"AdicCompletion.mkₐ\", \"AdicCompletion.ofAlgEquiv_apply\", \"AdicCompletion.kerProj\", \"LaurentSeries.powerSeriesAlgEquiv\"], \"digest\": \"63e58a1be89a637b\"} Read the returned candidates: LaurentSeries statements concern one-variable field-valued valuation completions; generic AdicCompletion APIs do not provide the monoid-support comparison; the graded-ring projections assume a direct-sum grading and do not apply to arbitrary infinite supported series. Truncation gives finite polynomials, not the stated completed monoid theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal series ring graded by an abelian quotient has a linear projection to its degree zero supported subring, identified with an affine monoid algebra completion",
+   "results": "{\"t\": \"2026-10-17T19:17:24Z\", \"tool\": \"leanfinder\", \"query\": \"A formal series ring graded by an abelian quotient has a linear projection to its degree zero supported subring, identified with an affine monoid algebra completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedRing.projZeroRingHom'\", \"GradedRing.projZeroRingHom\", \"GradedRing.proj\", \"GradedRing.projZeroRingHom_apply\", \"GradedRing.coe_projZeroRingHom'_apply\", \"GradedRing.projZeroRingHom'_apply_coe\", \"AddMonoidAlgebra.gradeBy.gradedAlgebra\", \"GradedAlgebra.proj\"], \"digest\": \"9d26ec16033e4b10\"} Read the returned candidates: LaurentSeries statements concern one-variable field-valued valuation completions; generic AdicCompletion APIs do not provide the monoid-support comparison; the graded-ring projections assume a direct-sum grading and do not apply to arbitrary infinite supported series. Truncation gives finite polynomials, not the stated completed monoid theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*[Cc]ompletion|[Cc]ompletion.*MonoidAlgebra|MvPowerSeries.*[Ss]upport",
+   "results": "{\"t\": \"2026-10-17T19:17:24Z\", \"tool\": \"grep\", \"query\": \"MonoidAlgebra.*[Cc]ompletion|[Cc]ompletion.*MonoidAlgebra|MvPowerSeries.*[Ss]upport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/PowerSeries/Expand.lean\", \"Mathlib/RingTheory/PowerSeries/Expand.lean\"], \"digest\": \"082f0c42d2a927a5\"} Read the returned candidates: LaurentSeries statements concern one-variable field-valued valuation completions; generic AdicCompletion APIs do not provide the monoid-support comparison; the graded-ring projections assume a direct-sum grading and do not apply to arbitrary infinite supported series. Truncation gives finite polynomials, not the stated completed monoid theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-regular-saturation-normality",
@@ -64,7 +221,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii). Expose VI 1.6(i)--(ii), printed p. 70, supplies the completed monoid models, not this auxiliary comparison theorem. The supported-series comparison and coefficient projection are Q48 agent-formulated local algebra; report.md gives the filtration and coefficient arguments. The unavailable Kato 1994 reference is recorded WANTED there.",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry through the log-regular divisorial and saturation-normality lemmas: the supported-series realization of the completed monoid model in Expose VI 1.6(i)--(ii), printed p. 70, and its module-linear coefficient retraction.",
    "via": [
     "lem-trf-log-regular-saturation-normality",
     "lem-trf-log-regular-divisorial-structure",
@@ -79,5 +236,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completed-monoid-support-projection",
+  "worker": "stage1",
+  "summary": "Preserved the item statement; proved the filtration comparison and constructed the completion map directly by unique coefficient limits. Reused the existing arbitrary-base combined-ideal coefficient criterion, so no new nodes are needed. Wrote the injectivity, supported-image, continuity, uniqueness and module-retraction calculations explicitly.",
+  "blueprint": "Completed monoid models in the log-regular saturation-normality branch below lem-trf-local-term-locality, proof (1)--(2); the completion comparison and coefficient projection are auxiliary agent algebra, as the inherited source field records.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Its coefficient test for powers of the combined ideal applies over any commutative base ring and supplies the generic power-series tool needed for the filtration estimates; the trace unit has no corresponding statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-d04bfd378",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-d04bfd378 (reviewer sub-agent of L); spot-checked: I read the whole item and all nine steps, the two cited definitions (def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series) and the full statement and proof of lem-weil-pbc-power-series-combined-ideal-coefficients. That lemma covers any commutative base with no Noetherian hypothesis, and the item applies it with Lambda=L, J=m, d=r. I also read the parent lem-trf-log-regular-saturation-normality, the unit, the chapter and ILO VI 1.6 (printed p.70, PDF p.76). ILO gives only the k[[P]][[t]] and C(k)[[P]][[t]]/(f) models; the comparison here is agent algebra, and the source field and proof_origin say so correctly. Step 2: with D=max(1,|q_i|), J^n is in E_n, and E_{Dn} is in J^n because Dn-|q| >= D(n-h) >= n-h; the cases q=0 and Q={0} are covered. Steps 3-4: coefficient residues stabilise for n >= k+|e|, the assumed bijection of L onto its completion gives the limits, and injectivity of that map gives intersection of m^k = 0, so the map respects sums and products. Step 5 (injectivity) works at index Dn. Step 6 proves both image inclusions, with truncations b_n at |q|<Dn. Step 7 proves continuity on P_n, and uniqueness from separatedness of A. Step 8 uses that M is a group to get u-q in Q, and checks the u not in Q case. Step 9 is a correct transport through iota. Small cases checked: r=0; M=Z^r (iota is the identity); the diagonal M, where pi is linear but not multiplicative, as the statement allows; L=Z_p with Q={0}; L=Z/4. The parent's coefficient rings (a field or a Cohen ring) satisfy the hypotheses. The hypothesis that m is finitely generated is unused but kept, so nothing is weakened. A DAG search (completed-chart, formal-monoid-ring-dimension, formal-monoid-extension-model, complete-toric-monomial-factors, power-series-quotient-variables, sbc-dual-map-local-retraction) found no duplicate. There are no new nodes, nothing restates an item clause, and no SGA is cited. I accept the declared tool_use of lem-weil-pbc-power-series-combined-ideal-coefficients (sk-thm-p1) as a generic black-box tool. Minor and not a fault: step 1's source points to Stacks 032C only as context, and the item has no lean_audit field, a maintainer-owned field that the inherited node also lacks. No fixes written."
  }
 }

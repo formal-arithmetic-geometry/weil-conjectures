@@ -15,9 +15,207 @@
   "def-weil-irreducible-components",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X$ is empty, take $X_1$ empty with its empty cover. Otherwise give its finitely many irreducible components their reduced induced closed structures $C_a\\hookrightarrow X$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Each $C_a$ is integral by [def-pc-integral-scheme], and is qcqs: it is closed in the qcqs scheme $X$, and on an affine chart its ring is a quotient. Assign $Y_i$ to the component containing the image of its generic point. Every point of $Y_i$ specializes that generic point, so its image is in $C_a$; [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] gives a factorization $Y_i\\to C_a\\to X$. This factor is separated and of finite type: $Y_i\\times_X C_a\\cong Y_i$, so its diagonal is the same closed diagonal, and on affine charts its ring generators over the original base also generate over the quotient ring of $C_a$. The valuation-cover hypothesis holds over each $C_a$: a valuation morphism into $C_a$ is one into $X$, and any lift to a $Y_i$ has the same generic component and is over $C_a$, since $C_a\\to X$ is a monomorphism. Taking the field $k(C_a)$ itself as a valuation ring shows that the family assigned to every component is nonempty.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 0356 (lemma-map-into-reduction); finite-component reduction of Temkin Proposition 3.2.6"
+   }
+  },
+  {
+   "text": "Fix one component $C=C_a$, write $K=k(C)$, and use only the $Y_i$ assigned to it. By [sk-thm-nagata-compactification], each separated finite-type map $Y_i\\to C$ has a dense compactification $Y_i\\xrightarrow{j_i}\\overline Y_i\\to C$. Here the theorem applies because $C$ is qcqs. By [sk-def-nagata-sketch-data], $j_i$ is an open immersion and $\\overline Y_i\\to C$ is proper, with $\\mathcal O_{\\overline Y_i}\\hookrightarrow j_{i*}\\mathcal O_{Y_i}$. The latter injection kills nilpotents, since $Y_i$ is reduced. It also shows that every nonempty open of $\\overline Y_i$ meets $Y_i$: otherwise its structure sheaf would be zero. Thus $Y_i$ is topologically dense, $\\overline Y_i$ is irreducible, and $\\overline Y_i$ is integral by [def-pc-integral-scheme]. Its generic point and function field are those of its nonempty open $Y_i$, hence the prescribed $K$.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "sk-def-nagata-sketch-data",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0F41, theorem-nagata; density is the dense-compactification assertion of sk-thm-nagata-compactification"
+   }
+  },
+  {
+   "text": "The fibre of each $\\overline Y_i$ over the generic point of $C$ is exactly $\\operatorname{Spec}K$, with the specified generic map. Indeed choose a nonempty affine $\\operatorname{Spec}A\\subset C$. For any nonempty affine chart $\\operatorname{Spec}B$ of its inverse image, [lem-sc-integral-function-field-affine-fraction] identifies $A$ and $B$ with subrings of $K$, compatibly with the structural map. Thus $A\\subseteq B\\subseteq K=\\operatorname{Frac}(A)$ and $B\\otimes_A K=K$: localization at the nonzero elements of $A$ already contains $\\operatorname{Frac}(A)$ and remains a subring of $K$. By [lem-weil-pbc-fibre-product-affine-spectra] these are precisely the generic-fibre charts. They glue to one $\\operatorname{Spec}K$, since every two nonempty opens of the integral $\\overline Y_i$ contain its generic point and their identifications induce the identity on $K$. This is an affine localization computation, with no finiteness or Noetherian assumption on $A$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4/01JQ (lemma-fibre-product-affine-schemes, lemma-fibre-product-affines), together with Morphisms 01RV (lemma-integral-scheme-rational-functions)"
+   }
+  },
+  {
+   "text": "Form the finite nonempty fibre product $P=\\prod_C\\overline Y_i$, using [def-pc-fibre-product]. Repeated proper base change and composition, [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition], show that $P\\to C$ is proper. Step 3 gives $P_K=\\operatorname{Spec}K$; denote its point by $\\xi$. Let $Z\\hookrightarrow P$ be the reduced induced closed subscheme on $\\overline{\\{\\xi\\}}$, which exists by [lem-weil-pbc-reduced-induced-closed-subscheme]. By [lem-weil-pbc-closed-immersion-proper], the structural map $r:Z\\to C$ is proper. We use this explicit reduced closure, rather than a whole fibre product with possible extra components.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01W4 (lemma-base-change-proper), 01W5 (lemma-closed-immersion-proper); Schemes 01J3 for the reduced closure"
+   }
+  },
+  {
+   "text": "The scheme $Z$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. Its generic fibre is the full $\\operatorname{Spec}K$: it is a closed subscheme of $P_K=\\operatorname{Spec}K$ and contains $\\xi$, so its defining ideal in the field $K$ is zero. In particular the residue field at $\\xi$, and thus the function field of $Z$, is $K$. Every projection $q_i:Z\\to\\overline Y_i$ induces the identity on this specified $K$. These assertions use just the reduced closed structure from Step 4 and the calculation of the single generic fibre.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme; integral means reduced and irreducible, Properties Tag 01ON"
+   }
+  },
+  {
+   "text": "Since $Z\\to C$ is proper and $\\overline Y_i\\to C$ is separated, [lem-weil-pbc-proper-to-separated] makes each projection $q_i:Z\\to\\overline Y_i$ proper. Put $W_i=q_i^{-1}(Y_i)=Z\\times_{\\overline Y_i}Y_i$. It is open in $Z$ by [lem-weil-pbc-open-immersion-base-change], and $h_i:W_i\\to Y_i$ is proper by [lem-weil-pbc-proper-base-change]. It contains $\\xi$ because the generic point of $\\overline Y_i$ belongs to $Y_i$. Hence $W_i$ is a nonempty integral open with function field $K$, and $h_i$ induces the identity of $K$ by Step 5 and [lem-sc-integral-function-field-affine-fraction]. All squares and maps here are over $C$, and therefore over $X$.",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 (lemma-base-change-proper), 01W6 (lemma-image-proper-scheme-closed), part (2); Schemes open-immersion base change"
+   }
+  },
+  {
+   "text": "For each of the maps $r:Z\\to C$ and $h_i:W_i\\to Y_i$, choose a nonempty affine target $V$ and a nonempty affine source chart $U$ inside its inverse image on which the map is of finite type. Such a chart exists by [def-weil-finite-type-morphism], since these maps are proper and dominant. Apply [lem-sbc-affine-birational-fraction-ring-equiv] with its affine base $S=V$, its $X=U$, its $Y=V$, and its two structural maps the restricted morphism and the identity. Both are locally of finite type; [lem-sc-integral-function-field-affine-fraction] identifies their fraction fields with the same $K$, and the isomorphism is the identity on every element of the base ring. The resulting $V$-isomorphism between dense opens of $U$ and $V$ is necessarily the restriction of the given map, because the second structural map is the identity. Those opens are also dense in the corresponding integral source and target. Thus $r$ and every $h_i$ induce isomorphisms between nonempty dense opens; no assertion about a normal target is needed.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-sbc-affine-birational-fraction-ring-equiv",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, integral locally-finite-type case; specialized through the existing affine fraction-ring criterion"
+   }
+  },
+  {
+   "text": "Every nonempty open of an integral scheme is schematically dense. To verify the particular claim needed here, take an affine chart $\\operatorname{Spec}A$ and a section whose restriction to the given dense open is zero. Its germ at the generic point is zero, and the injection $A\\hookrightarrow k(Z)$ (or into the function field of the relevant integral scheme) in [lem-sc-integral-function-field-affine-fraction] makes that section zero. Affine charts test injectivity of the sheaf map. Consequently all dense opens in Step 7 are schematically dense. Combined with properness, this proves that $r$ and each $h_i$ are modifications in exactly the sense of the item. The remaining task is to prove that the opens $W_i$ cover $Z$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; explicit verification of schematic density"
+   }
+  },
+  {
+   "text": "Take any $z\\in Z$. On an affine neighbourhood $\\operatorname{Spec}B$ of $z$, $B$ is a domain with fraction field $K$ by [lem-sc-integral-function-field-affine-fraction]. The local ring $\\mathcal O_{Z,z}$ is a localization of $B$ by [lem-weil-pbc-affine-open-stalk-localization], so it too has fraction field $K$. By [lemma-nagata-local-domain-valuation-dominates] choose a valuation ring $V\\subseteq K$ dominating $\\mathcal O_{Z,z}$. Its local inclusion gives a morphism $v:\\operatorname{Spec}V\\to Z$ sending the closed point to $z$, by [lem-weil-pbc-morphism-from-spec-local-ring]. Its restriction to $\\operatorname{Spec}K$ is the specified generic point, since the ring map is the inclusion in $K$. Thus $rv$ is one of the centred valuations of $C$ in the hypothesis.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lemma-nagata-local-domain-valuation-dominates",
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IA, lemma-dominate; Schemes 01HV (lemma-spec-sheaves), 01J6 (lemma-morphism-from-spec-local-ring)"
+   }
+  },
+  {
+   "text": "By the hypothesis over $C$ verified in Step 1, $rv$ lifts to some $u:\\operatorname{Spec}V\\to Y_i$. Compare the two $C$-morphisms $q_i v$ and $j_i u$ from $\\operatorname{Spec}V$ to $\\overline Y_i$. They have the same restriction to $\\operatorname{Spec}K$: Step 3 identifies the whole generic fibre with $\\operatorname{Spec}K$ and its structural map with the identity. Since $\\overline Y_i\\to C$ is separated, [lemma-nagata-separated-valuation-lift-unique] gives $q_i v=j_i u$. At the closed point this says $q_i(z)\\in Y_i$, so $z\\in W_i$. As $z$ was arbitrary, the finite opens $W_i$ cover $Z$. In particular the cover is proved by comparing actual valuation morphisms, not just their images in $C$.",
+   "uses": [
+    "lemma-nagata-separated-valuation-lift-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L0, lemma-valuative-criterion-separatedness; valuation-cover argument underlying Temkin Corollaries 3.2.5 and 3.2.7"
+   }
+  },
+  {
+   "text": "Perform Steps 2--10 for each $C_a$, producing integral $Z_a$, proper $r_a:Z_a\\to C_a$, and their finite covers by opens proper and birational over the assigned $Y_i$. Form $X_1=\\coprod_a Z_a$ and the map $p:X_1\\to X$ with restrictions $Z_a\\to C_a\\hookrightarrow X$, by [lem-weil-pbc-scheme-coproduct-family]. Each restriction is proper by [lem-weil-pbc-closed-immersion-proper] and [lem-weil-pbc-proper-composition]. The finite coproduct map is proper directly from [def-weil-proper-morphism]: after any base change its closed images are finite unions of closed images; it is of finite type using the finite union of the affine covers for the component maps; and its diagonal on each open-and-closed $(a,b)$ block of $X_1\\times_X X_1$ is the closed diagonal of $Z_a\\to X$ when $a=b$ and the empty closed subscheme when $a\\ne b$. The scheme $X_1$ is reduced, since all its open-and-closed pieces are integral. Their $W_i$ are opens of $X_1$ and cover it, with the same proper birational $X$-morphisms to the $Y_i$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W1 (definition-proper), 01W3, 01W5; Schemes 01JC (lemma-glue-schemes), finite disjoint-union case"
+   }
+  },
+  {
+   "text": "For each $a$, Step 7 supplies nonempty opens $A_a\\subset Z_a$ and $B_a\\subset C_a$ with $r_a:A_a\\xrightarrow{\\sim}B_a$. Apply [lem-weil-pbc-dense-open-component-coproduct] to the component immersions and these $B_a$. Obtain a dense open $U\\subset X$ such that $(\\coprod C_a)|_U\\to U$ is an isomorphism and $U\\cap C_a\\subset B_a$. The inverse images of $U\\cap C_a$ in $A_a$ form an open $U_1\\subset X_1$ isomorphic to $U$. Each is nonempty and dense in its integral $Z_a$, so $U_1$ is schematically dense by Step 8. To check schematic density of $U$ in the reduced $X$, pull a section zero on $U$ back to each $C_a$. It vanishes at its generic point, hence vanishes on $C_a$ by [lem-sc-integral-function-field-affine-fraction]. Its value in every residue field of $X$ is therefore zero, since the components cover $X$. The affine ideal formula of [lem-weil-pbc-reduced-induced-closed-subscheme], applied to the whole reduced scheme $X$, makes the section zero. This verifies injectivity of $\\mathcal O_X\\to j_*\\mathcal O_U$. Together with Step 11, $p$ is a reduced modification, and all required claims now hold.",
+   "uses": [
+    "lem-weil-pbc-dense-open-component-coproduct",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ, lemma-birational-isomorphism-over-dense-open, finite-component disjoint-open reduction; Schemes 01J3 ideal formula"
+   }
+  },
+  {
+   "text": "For the optional affine reindexing, each $Y_i$ is quasi-compact (finite type over qcqs $X$), so choose a finite affine open cover of it. A valuation morphism $\\operatorname{Spec}V\\to Y_i$ factors through any such affine containing the image of its closed point: its inverse image is open and contains the closed point of the local spectrum, hence all its points. Therefore these finitely many affine models still cover all centred valuations. Each is integral and separated of finite type over $X$: the affine open immersion is quasi-compact because $Y_i$ is quasi-separated, and finite generation is local on source. The construction of Steps 1--12 applies to this finite family and gives modifications to the selected affine opens. Relabel these opens by their original $i$, allowing repetitions as stated.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6, lemma-morphism-from-spec-local-ring, last paragraph of proof; Temkin Proposition 3.2.6, initial finite affine-cover reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-sbc-affine-birational-fraction-ring-equiv",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-dense-open-component-coproduct",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "sk-def-nagata-sketch-data",
+  "sk-thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0F41 (theorem-nagata), with Schemes 01J3/0356/01J6/01L0 and Algebra 00IA; agent-written compactification-and-product proof of the finite-component form of Temkin Proposition 3.2.6 and valuation-cover consequence. Temkin primary PDF consulted online, local archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +251,45 @@
    "results": "[grep] OK 0 hit(s) No hits. Read the returned signatures: none gives the asserted theorem for these schemes and morphisms.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Riemann.?Zariski|quasi.?modification|birational.*refin|valuation.*cover",
+   "results": "{\"t\": \"2026-10-17T19:08:28Z\", \"tool\": \"grep\", \"query\": \"Riemann.?Zariski|quasi.?modification|birational.*refin|valuation.*cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\"], \"digest\": \"ab83a86fe67ab331\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures checked; constituent properness, normalization and open-cover results do not construct a common modification with these valuation-cover and proper-open-model clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite birational quasi modifications with centres for all valuations admit a common proper refinement with an open cover",
+   "results": "{\"t\": \"2026-10-17T19:08:29Z\", \"tool\": \"leansearch\", \"query\": \"Finite birational quasi modifications with centres for all valuations admit a common proper refinement with an open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"ShrinkingLemma.PartialRefinement.ctorIdx\"], \"digest\": \"051ffb522d8c754f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures checked; constituent properness, normalization and open-cover results do not construct a common modification with these valuation-cover and proper-open-model clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\", \"ValuativeCriterion\"",
+   "results": "{\"t\": \"2026-10-17T19:08:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsProper\\\", \\\"ValuativeCriterion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.eq_valuativeCriterion\"], \"digest\": \"978b60fcac9bacd3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures checked; constituent properness, normalization and open-cover results do not construct a common modification with these valuation-cover and proper-open-model clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many integral birational models of a reduced qcqs scheme covering all centred valuations admit a common proper modification covered by opens proper over the models",
+   "results": "{\"t\": \"2026-10-17T19:08:38Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely many integral birational models of a reduced qcqs scheme covering all centred valuations admit a common proper modification covered by opens proper over the models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\"], \"digest\": \"596558ca4f71dd77\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures checked; constituent properness, normalization and open-cover results do not construct a common modification with these valuation-cover and proper-open-model clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of open birational charts covering the Riemann Zariski space can be refined by one proper birational scheme",
+   "results": "{\"t\": \"2026-10-17T19:08:38Z\", \"tool\": \"leanfinder\", \"query\": \"A finite family of open birational charts covering the Riemann Zariski space can be refined by one proper birational scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"AlgebraicGeometry.Scheme.OpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\"], \"digest\": \"eb2c6140f123e556\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures checked; constituent properness, normalization and open-cover results do not construct a common modification with these valuation-cover and proper-open-model clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-stable-reduction",
@@ -83,5 +316,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-birational-quasi-modification-common-cover",
+  "worker": "stage1",
+  "summary": "Kept the full reduced qcqs finite-component statement. Wrote a thirteen-step agent proof using existing Nagata compactification, reduced closed structures, affine birationality, valuation domination and separatedness, and finite component assembly. The generic-fibre and schematic-density computations are explicit; every non-elementary fact is an existing node. No new nodes, no Mathlib leaves, no Lean changes. Read Temkin Proposition 3.2.6, Corollaries 3.2.5/3.2.7 online and the local Stacks sources, checked all cited statements and small cases.",
+  "blueprint": "Retains the historical lem-trf-local-term-locality ancestry through lem-trf-valuation-stable-reduction: common modification C prime and proper local modifications C_i prime in Temkin Proposition 4.5.1, supplied by Proposition 3.2.6. Steps 1--8 construct that refinement; 9--10 prove the valuation-cover consequence; 11--12 assemble finitely many reduced components; 13 realizes the source finite-affine-cover reduction. The present item does not change the ancestor/unit statement or the normal-cone route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Reduced structures on component closures and the main component of the product, and the affine ideal formula for schematic density; the curve-zero unit has no general closed-subscheme construction."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Factor an integral model through the reduced component it dominates; a generic scheme-theoretic tool absent from the curve-zero unit."
+   },
+   {
+    "node": "sk-thm-nagata-compactification",
+    "why": "Compactify each separated finite-type birational model over its qcqs component; a generic geometric tool for this common-cover lemma, not a replacement of the local-term theorem."
+   },
+   {
+    "node": "lem-sbc-affine-birational-fraction-ring-equiv",
+    "why": "Obtain dense isomorphism opens for actual integral finite-type maps with identical function fields, by taking the affine target itself as the affine base; the unit has no birationality criterion."
+   },
+   {
+    "node": "lemma-nagata-local-domain-valuation-dominates",
+    "why": "Represent an arbitrary point of the integral main component by a valuation of its own function field dominating its local ring; the unit has no valuation-existence lemma."
+   },
+   {
+    "node": "lemma-nagata-separated-valuation-lift-unique",
+    "why": "Compare the two specified valuation morphisms to a separated compactification; the unit has no general valuative uniqueness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-dense-open-component-coproduct",
+    "why": "Choose the global dense open on which component separation is an isomorphism and lies inside the specified component opens; the unit has no finite-component assembly lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "sk-thm-nagata-compactification",
+  "lem-sbc-affine-birational-fraction-ring-equiv",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lem-weil-pbc-dense-open-component-coproduct"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-80beaa594",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-80beaa594 (reviewer sub-agent of L); spot-checked: I read the item, its 13 steps, every cited node's statement, the parent lem-trf-valuation-stable-reduction and the consumer lem-trf-valuation-horizontal-curve-models in full. No new nodes; statement unchanged. Stacks sources checked at the cited labels, with tags/tags confirming each tag: 0F41 (qcqs base, no finite presentation), 0BAC, 0BAJ, 01L0, 01J6, 00IA, 01W1/3/4/5/6, 01J3, 0356, 01RV, 01I4/01JQ, 01JC, 01HV, 01ON. Temkin's paper is not in literature/; it is recorded as WANTED and proof_origin.by is agent, which is correct. Step checks: (1) components with C_a -> X a monomorphism; the lift lands in the same component, so the hypothesis restricts to each C_a. (2) The dense Nagata compactification is reduced, irreducible and integral. (3) Generic fibre: A in B in K, so B tensor_A K = K. (4)-(5) Z, the reduced closure of xi in the product of the compactifications, is integral with generic fibre Spec K. (6) Proper-to-separated and base change make W_i -> Y_i proper. (7) The affine birational node with S = Y = V and s_Y = id gives an isomorphism that is the restriction of the given map. (8) Nonempty opens of an integral scheme are schematically dense. (9)-(10) A dominating valuation, a lift, and separated uniqueness against the compactification give the cover. (11) The finite coproduct map is proper; the off-diagonal blocks are handled correctly. (12) The component-coproduct node, plus reduced X with zero nilradical, gives schematic density. (13) Affine reindexing. Small cases checked: X empty, a field, the two charts of P^1, two crossing lines, a missing valuation. The item's 'modification' (isomorphism between schematically dense opens) is the same as the consumer's definition. The stronger form, with the full preimage as source open, also follows because p^{-1}(eta_a) = {xi_a}; noted in review.md, no change needed. Seven off-unit tool_uses are accepted as generic black boxes. Duplicates ruled out: riemann-zariski-finite-refinement (finite type over Z, separable extensions allowed) and modifications-zariski-refinement (Noetherian base). No SGA. proof_deps equals the union of uses, and there are no doubled backslashes. No fixes."
  }
 }

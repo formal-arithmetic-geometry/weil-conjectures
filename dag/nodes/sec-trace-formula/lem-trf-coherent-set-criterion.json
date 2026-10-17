@@ -17,49 +17,104 @@
   "def-weil-constructible-subset",
   "lem-trf-oriented-product-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The hypotheses give the finite-cover triple presentation. Noetherianity and finite presentation imply that S and X are quasi-compact, quasi-separated and Noetherian by [lem-weil-pbc-finite-type-over-noetherian], [lem-weil-pbc-locally-noetherian-quasi-separated] and [def-weil-pbc-scheme-conventions]. Hence [lem-trf-qcqs-oriented-triple-presentation] presents V_f by a finite-limit site whose covers have finite refinements. The coherent-generator criterion [lem-trf-finitary-site-coherent-generators] applies to this presentation.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "lem-trf-finitary-site-coherent-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, proof of Lemma 2.5; Orgogozo author draft §8.1, printed p. 17"
+   }
+  },
+  {
+   "text": "Assume $A$ is coherent; $V_f$ is coherent by step 1. By [lem-trf-finitary-site-coherent-generators] the $H_Z$ generate, so $A$ receives an epimorphism from a coproduct of objects $H_Z$, and since $A$ is quasi-compact [def-trf-coherent-topos] finitely many suffice: $q:F=\\coprod_jH_{Z_j}\\to A$ is an epimorphism. Each $H_{Z_j}$ is coherent, and $A$ is quasi-separated, so the kernel pair $R=F\\times_AF=\\coprod_{j,\\ell}H_{Z_j}\\times_AH_{Z_\\ell}$ is quasi-compact, hence receives an epimorphism from a finite coproduct $G=\\coprod_kH_{Z'_k}$ of generators. Thus $R$ is the image of $G\\to F\\times F$ and $A$ is the quotient $F/R$. Every component $U\\to X$, $V\\to S$, $W\\to S$ of the finitely many triples $Z_j,Z'_k$ is separated etale of finite presentation over a qcqs scheme, hence qcqs. Apply [lem-weil-pbc-etale-stratified-finite] to each of these components and take the common refinement of the resulting finitely many partitions of $X$, resp. of $S$; intersections of constructible locally closed subsets are constructible and locally closed [def-weil-constructible-subset], so this gives finite constructible stratifications $X=\\coprod_\\alpha X_\\alpha$, $S=\\coprod_\\beta S_\\beta$ [def-constructible-stratification] with reduced subscheme structures, and every component pulled back to a stratum is finite etale, since finite etale morphisms are stable under base change along $X_\\alpha\\to X_i$. The strata $X_\\alpha,S_\\beta$ and the immersions $X_\\alpha\\to X$, $S_\\beta\\to S$ and $X_\\alpha\\to S$ are qcqs, so the base-change clause of [lem-trf-qcqs-oriented-triple-presentation] applies to $a:X_\\alpha\\to X$, $b=1_S$, $d=g_\\beta:S_\\beta\\to S$ and the induced $u_{\\alpha\\beta}:P_{\\alpha\\beta}\\to V_f$ of [lem-trf-oriented-product-universal]: $u_{\\alpha\\beta}^{-1}H_Z\\cong H_{Z_{\\alpha\\beta}}$ with $Z_{\\alpha\\beta}=(U_\\alpha\\to V\\leftarrow W_\\beta)$, $U_\\alpha=U\\times_XX_\\alpha$, $W_\\beta=W\\times_SS_\\beta$. The explicit formula of [lem-trf-oriented-product-universal] for the identity of $P_{\\alpha\\beta}$ gives $$H_{Z_{\\alpha\\beta}}\\cong p_1^{-1}H_{U_\\alpha}\\times_{(g_\\beta p_2)^{-1}H_V}p_2^{-1}H_{W_\\beta},\\qquad (g_\\beta p_2)^{-1}H_V=p_2^{-1}H_{V\\times_SS_\\beta}.$$ Since $U_\\alpha\\to X_\\alpha$, $V\\times_SS_\\beta\\to S_\\beta$ and $W_\\beta\\to S_\\beta$ are finite etale, [lem-galois-flc-representable] (1) makes $H_{U_\\alpha}$, $H_{V\\times_SS_\\beta}$, $H_{W_\\beta}$ finite locally constant on the quasi-compact schemes $X_\\alpha$, $S_\\beta$ (a finite subcovering suffices, and the slice of the etale topos at $Y_i$ is $(Y_i)_{\\mathrm{Et}}$). Inverse images $p_1^{-1}$, $p_2^{-1}$ preserve epimorphic families onto the final object, slices and constant sheaves, so the three factors are finite locally constant on $P_{\\alpha\\beta}$, which is presented by a finite-limit site with finite covering families by [lem-trf-qcqs-oriented-triple-presentation]. The finite-limit clause of [lem-trf-finite-locally-constant-coherent] then makes every $u_{\\alpha\\beta}^{-1}H_{Z_j}$ and $u_{\\alpha\\beta}^{-1}H_{Z'_k}$ finite locally constant, and its coproduct clause makes $u_{\\alpha\\beta}^{-1}F$, $u_{\\alpha\\beta}^{-1}G$ and $u_{\\alpha\\beta}^{-1}F\\times u_{\\alpha\\beta}^{-1}F$ finite locally constant. Because $u_{\\alpha\\beta}^{-1}$ is exact and preserves colimits, $u_{\\alpha\\beta}^{-1}R$ is an internal equivalence relation on $u_{\\alpha\\beta}^{-1}F$, it is the image of $u_{\\alpha\\beta}^{-1}G\\to u_{\\alpha\\beta}^{-1}F\\times u_{\\alpha\\beta}^{-1}F$, hence finite locally constant by the image clause, and $u_{\\alpha\\beta}^{-1}A\\cong u_{\\alpha\\beta}^{-1}F/u_{\\alpha\\beta}^{-1}R$ is finite locally constant by the quotient clause. This is the asserted local constancy with finite values on each $P_{\\alpha\\beta}$.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "lem-trf-oriented-product-universal",
+    "lem-galois-flc-representable",
+    "lem-trf-finite-locally-constant-coherent",
+    "def-constructible-stratification",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Author draft §8.1, printed pp. 17–18, coherence criterion and its finite constructible refinement"
+   }
+  },
+  {
+   "text": "Conversely, let finite constructible stratifications with finite locally constant restrictions be given, and let $u:\\coprod_{\\alpha,\\beta}P_{\\alpha\\beta}\\to V_f$ be the coproduct of the maps $u_{\\alpha\\beta}$. By [lem-trf-stratified-product-coherent-conservative] $u$ is coherent and conservative. Each $P_{\\alpha\\beta}$ is presented by a finite-limit site with finite covering families by the qcqs case of [lem-trf-qcqs-oriented-triple-presentation] (the strata and their maps to $S$ are qcqs), so it is coherent by [lem-trf-finitary-site-coherent-generators]; its final object is quasi-compact, so each given covering family $(U_i)$ has a finite subfamily, and $u_{\\alpha\\beta}^{-1}A$ is finite locally constant in the sense of [lem-trf-finite-locally-constant-coherent], hence coherent. An object of the finite coproduct topos is coherent exactly when each component is, so $u^{-1}A=(u_{\\alpha\\beta}^{-1}A)_{\\alpha\\beta}$ is coherent, and $V_f$ is coherent by step 1. Applying [lem-trf-coherent-conservative-reflection] to $u$ yields that $A$ is coherent.",
+   "uses": [
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-stratified-product-coherent-conservative",
+    "lem-trf-finite-locally-constant-coherent",
+    "lem-trf-coherent-conservative-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Author draft §8.1, printed p. 17, converse direction via the finite coproduct of stratum oriented products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-trf-coherent-topos",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-scheme-conventions",
+  "lem-galois-flc-representable",
+  "lem-trf-coherent-conservative-reflection",
+  "lem-trf-finitary-site-coherent-generators",
+  "lem-trf-finite-locally-constant-coherent",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-qcqs-oriented-triple-presentation",
+  "lem-trf-stratified-product-coherent-conservative",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Author draft §8.1, printed pp. 17–18; the local archival copy is unavailable, so the finite-cover argument is expanded from the cited site criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "A coherent sheaf of sets on a vanishing topos is constructible by finite stratifications of the source and base",
-   "results": "8 hits: LightProfinite.instWEqualsLocallyBijectiveCoherentTopology; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; CategoryTheory.isSheaf_coherent; CategoryTheory.PresheafIsFinite; CategoryTheory.coherentTopology.isLocallySurjective_iff; TopCat.toSheafCompHausLike; Condensed.isSheafProfinite. None concerns vanishing topoi or oriented-product constructibility.",
+   "results": "TopCat.toSheafCompHausLike; LightCondensed.IsDiscrete; Condensed.IsDiscrete; LightProfinite.hasSheafify_type; Condensed; topCatToSheafCompHausLike; LightCondensed; CondensedSet.ofSheafCompHaus",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "Coherent Sheaf Constructible",
-   "results": "0 hits; unknown identifier Coherent",
+   "results": "loogle: Unknown identifier `Coherent`",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "coherent.?topos|constructible.?sheaf|oriented.?product",
-   "results": "1 hit: Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean:48 (equivalent precoherent categories give equivalent coherent toposes); no oriented-product or constructible-sheaf theorem.",
+   "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "A coherent sheaf of sets on a vanishing topos is constructible by finite stratifications of the source and base",
-   "results": "8 hits: Topology.IsConstructible and IsLocallyConstructible; CategoryTheory.isSheaf_coherent; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition; TopCat.Sheaf.forget; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk. None states the criterion.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Finite stratification criterion for coherent sheaves of sets on an oriented product of etale topoi",
-   "results": "8 hits: coherent-topology and condensed declarations (including CategoryTheory.isSheaf_coherent and CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp); no oriented-product criterion.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsCoherent IsConstructible",
-   "results": "0 hits; unknown identifier IsCoherent",
+   "results": "Topology.IsConstructible; Topology.IsConstructible.isLocallyConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.biInter; TopCat.Sheaf.forget; CategoryTheory.isSheaf_coherent; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition; SheafOfModules.QuasicoherentData.IsFinitePresentation",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -72,14 +127,28 @@
   },
   {
    "tool": "leansearch",
-   "query": "Finite stratification criterion for coherent sheaves of sets on an oriented product of etale topoi",
-   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition; SheafOfModules.GeneratingSections.IsFiniteType.mk; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; none states the criterion.",
+   "query": "Finite stratification criterion for coherent sheaves on an oriented product of etale topoi",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.IsFinitePresentation.casesOn",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCoherent IsConstructible",
+   "results": "loogle: Unknown identifier `IsCoherent`",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite stratification criterion for coherent sheaves on an oriented product of etale topoi",
+   "results": "LightProfinite.instWEqualsLocallyBijectiveCoherentTopology; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; CategoryTheory.isSheaf_coherent; CategoryTheory.coherentTopology.isLocallySurjective_iff; Condensed.isSheafProfinite; CategoryTheory.PresheafIsFinite; TopCat.toSheafCompHausLike",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-constructible-coherent",
@@ -91,7 +160,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The author-draft §8.1 coherence criterion for sheaves of sets on oriented products, used to supply the set-valued core of the item.",
+   "place": "The author-draft §8.1 coherence criterion for sheaves of sets on oriented products: finite-cover triple-site argument and its finite constructible stratification conclusion.",
    "via": [
     "lem-trf-oriented-constructible-coherent",
     "lem-trf-psi-constructibility-descent",
@@ -103,5 +172,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-coherent-set-criterion",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: corrected the finite-locally-constant helper so quotient closure requires a finite locally constant equivalence relation and added image closure; removed its arbitrary-topos scheme-etale dependencies and trimmed the stratified-cover helper dependencies. Expanded the forward criterion step with the oriented-product fibre-product formula, finite-etale representability, qcqs checks for all stratum base changes, and the fact that generator-overlap triples are stratified by the same partitions.",
+  "blueprint": "Realizes the author-draft §8.1 coherence criterion: finite-cover triple-site setup, finite étale stratification of the generator data, and the converse through the coherent conservative coproduct of oriented stratum products.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-b7ea7d0fa",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-b7ea7d0fa (reviewer sub-agent of L); spot-checked: I read the whole item (statement unchanged, not a target), both new nodes, every cited statement, ILO Exposé XI 1.1–1.8 and 2.5 with its proof, and Stacks sites-modules 093P–093U and etale-cohomology 03RU/03RX. Orgogozo §8.1 is not available locally and is marked WANTED; I did not rely on it. The criterion is true: V_f is coherent by XI 2.5. Forward: a finite generator cover F→A, the kernel pair covered by finitely many triples Z'_k, 03S0 on every component, base change of the triples to the strata, FLC, then image and quotient. Converse: the stratified-product helper and lem-trf-coherent-conservative-reflection. Edge cases: X or S empty, A empty, infinite constant A. Helper lem-trf-finite-locally-constant-coherent is true: its operation clauses follow from 093U(1) and 093S, and I checked the coherence clause by hand. I tested it on a point, the empty topos, Set×Set, the Sierpiński topos and the excluded non-FLC relation. Helper lem-trf-stratified-product-coherent-conservative is true by XI 2.5, the base-change clause and points (XI 1.8). Neither helper duplicates an existing node (rg over dag/nodes) or restates a clause of the item. Two faults, fixed in fixes/. (1) B5/B3: the FLC helper cited 03RU/03RX 'in sites-modules.tex'; those tags are scheme-étale. I changed the source to Stacks sites-modules 093Q/093R/093S/093U(1) and cited def-weil-pbc-constant-sheaf. (2) E3/E5 in item step 2: it said the kernel-pair cover triples are stratified 'because they are fibre products', which is wrong; they need 03S0 too. Its base-change display used an untyped g_{αβ}. I rewrote steps 2 and 3 with the same uses and statement: the kernel-pair cover Z'_k, the formula H_{Z_αβ} = p1^{-1}H_{U_α} ×_{(g_β p2)^{-1}H_V} p2^{-1}H_{W_β}, the FLC transfer through p1^{-1} and p2^{-1}, and a finite-subcover and componentwise-coherence remark in step 3. Accepted tool_uses, for the maintainer to record: lem-galois-flc-representable (sk-prop-h2) and lem-weil-pbc-etale-stratified-finite (03S0, sk-thm-p1). No SGA source, no cycle, no dropped nodes.; 2 file(s) fixed by the reviewer"
  }
 }
