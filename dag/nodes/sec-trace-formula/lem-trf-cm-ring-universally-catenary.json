@@ -15,9 +15,95 @@
   "def-exc-excellent-ring",
   "def-weil-pbc-finite-type-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an integer $n\\ge0$ and put $P=R[x_1,\\ldots,x_n]$. The hypotheses of [lem-trf-polynomial-algebra-cm] are precisely the Noetherianity and local depth-equals-dimension hypotheses on $R$. Hence $P$ is Noetherian and every $P_{\\mathfrak r}$ is Cohen–Macaulay. We prove directly that $P$ is catenary; Steps 2–4 apply to this fixed $P$ and arbitrary comparable primes in it.",
+   "uses": [
+    "lem-trf-polynomial-algebra-cm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NM, lemma-CM-ring-catenary, first sentence, using Tag 00ND, lemma-CM-polynomial-algebra."
+   }
+  },
+  {
+   "text": "Fix primes $\\mathfrak p\\subseteq\\mathfrak q$ in $P$. The rings $P_{\\mathfrak p}$ and $P_{\\mathfrak q}$ are local by [def-weil-pbc-localization-at-prime] and Noetherian: for an ideal $J$ in either localization, let $I=\\{a\\in P:a/1\\in J\\}$. If $a/s\\in J$, multiplication by the unit $s/1$ shows $a\\in I$, so $J=IP_{\\mathfrak r}$; finite generators of $I$ give finite generators of $J$. By [lem-weil-pbc-noetherian-local-finite-krull-dimension], $d_{\\mathfrak p}=\\dim P_{\\mathfrak p}$ and $d_{\\mathfrak q}=\\dim P_{\\mathfrak q}$ are finite nonnegative integers. The inclusion-preserving prime bijection [lem-weil-pbc-primes-of-localization](1), whose inverse is extension, identifies all primes below $\\mathfrak q$ with those of $P_{\\mathfrak q}$. Thus every finite strict prime chain between $\\mathfrak p$ and $\\mathfrak q$ has length at most $d_{\\mathfrak q}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NM, lemma-CM-ring-catenary, localizations at the two primes; finite chain bounds from Tag 00KQ, proposition-dimension, and prime correspondence Tag 00E3, lemma-spec-localization."
+   }
+  },
+  {
+   "text": "Choose a finite strict chain ending at $\\mathfrak p$ of greatest possible length $m$. Such a chain exists: the singleton chain has length zero, and by the same localization correspondence and finite-dimension bound of Step 2 all these lengths lie in $\\{0,\\ldots,d_{\\mathfrak p}\\}$. Its first prime is minimal in $P$, and each adjacent pair is saturated, since prepending or inserting a prime would increase its length. Under the correspondence for $P_{\\mathfrak p}$ it is therefore a maximal chain: any prime below its first term or between consecutive terms would contract to such an insertion, and the last prime is the maximal ideal. Similarly a chain of greatest length between $\\mathfrak p$ and $\\mathfrak q$ exists by Step 2, so there is at least one saturated chain between these endpoints.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NM, lemma-CM-ring-catenary: choose a maximal chain ending at the lower prime; existence written out from the finite bounds and the definition of chain length."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p=\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_t=\\mathfrak q$ be any saturated chain between the endpoints. Concatenate it with the chain of length $m$ from Step 3, counting $\\mathfrak p$ only once. The resulting chain has length $m+t$, minimal first prime, saturated adjacent pairs and last prime $\\mathfrak q$. Under [lem-weil-pbc-primes-of-localization](1) it is a maximal chain in $P_{\\mathfrak q}$: any missing prime that could extend the chain is either below the first term, between two consecutive terms, or above its maximal last term; each possibility is excluded. Apply [lem-weil-pbc-cm-local-maximal-chain-length] first to the prefix in $P_{\\mathfrak p}$ and then to the concatenation in $P_{\\mathfrak q}$. These rings are Noetherian local of finite dimensions $d_{\\mathfrak p}$ and $d_{\\mathfrak q}$ by Step 2, and have depth equal to dimension by Step 1, hence satisfy the cited lemma’s depth-at-least-dimension hypothesis. It gives $m=d_{\\mathfrak p}$ and $m+t=d_{\\mathfrak q}$. Consequently every such chain has length $t=d_{\\mathfrak q}-d_{\\mathfrak p}$. Together with the finite bound from Step 2 this proves that $P$ is catenary.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-cm-local-maximal-chain-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NM, lemma-CM-ring-catenary, first assertion: concatenate the two chains and apply Tag 00N9, lemma-maximal-chain-CM, twice."
+   }
+  },
+  {
+   "text": "Now let $A$ be an arbitrary finite type $R$-algebra. By [def-weil-pbc-finite-type-algebra] choose a surjective $R$-algebra homomorphism $\\pi:P=R[x_1,\\ldots,x_n]\\to A$ and put $I=\\ker\\pi$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], inverse image under $\\pi$ bijects the primes of $A$ with the primes of $P$ containing $I$, with inverse given by image under $\\pi$. Both inverse image and image preserve inclusion, so this is an order isomorphism. For comparable primes $\\mathfrak a\\subseteq\\mathfrak b$ of $A$, every prime of $P$ between $\\pi^{-1}(\\mathfrak a)$ and $\\pi^{-1}(\\mathfrak b)$ contains $I$ because the lower endpoint does. Thus the correspondence identifies the whole intervals, preserving strict chain lengths and whether an intermediate prime can be inserted. By Step 4, chains in that interval of $P$ have a finite bound and all saturated ones have equal length; the same is true in $A$. Hence $A$ is catenary.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NM, opening reduction to polynomial algebras, expanded using Tag 00NK, lemma-quotient-catenary, whose proof is the prime correspondence of Tag 00E5, lemma-spec-closed."
+   }
+  },
+  {
+   "text": "The algebra $A$ in Step 5 was arbitrary. Therefore every finite type commutative $R$-algebra is catenary, and $R$ is Noetherian by hypothesis. This is universal catenarity as defined in [def-exc-excellent-ring], including the explicitly stated finite bound for each pair of primes. If $R=0$, its polynomial rings and unital $R$-algebras are zero, have no primes, and all the prime-chain assertions are vacuous.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NL, definition-universally-catenary, and Tag 00NM, conclusion of the first assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-polynomial-algebra-cm",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-cm-local-maximal-chain-length",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "def-exc-excellent-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NM, lemma-CM-ring-catenary, first assertion; polynomial input 00ND and maximal-chain input 00N9. Its quotient reduction is expanded using the proof of lemma-quotient-catenary and 00E5."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +146,80 @@
    "results": "{\"t\": \"2026-10-17T18:36:34Z\", \"tool\": \"loogle\", \"query\": \"|- IsNoetherianRing _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"instIsNoetherianRingProd\", \"instIsNoetherianRingForallOfFinite\", \"isNoetherianRing_of_ringEquiv\", \"isNoetherianRing_of_surjective\", \"isNoetherianRing_rangeS\", \"isNoetherianRing_range\", \"IsNoetherianRing.of_finite\", \"PrincipalIdealRing.isNoetherianRing\"], \"digest\": \"510ab60f466a63ae\"}",
    "date": "2026-10-18",
    "verdict": "no match: no matching declaration in the Loogle index"
+  },
+  {
+   "tool": "grep",
+   "query": "catenar|Cohen.?Macaulay",
+   "results": "{\"t\": \"2026-10-17T18:52:03Z\", \"tool\": \"grep\", \"query\": \"catenar|Cohen.?Macaulay\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no indexed declaration found for this query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay",
+   "results": "{\"t\": \"2026-10-17T18:52:04Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.isNoetherianRing\", \"Polynomial.isJacobsonRing_polynomial_of_isJacobsonRing\", \"MvPolynomial.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Polynomial.instIsJacobsonRing\", \"Polynomial.algebra\", \"Algebra.Generators.instRing\", \"Polynomial.algebraOfAlgebra\"], \"digest\": \"defd38fd83bc02bb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned Noetherianity, dimension and presentation results do not establish Cohen–Macaulayness (depth equals local dimension)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohenMacaulay\"",
+   "results": "{\"t\": \"2026-10-17T18:52:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"CohenMacaulay\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no indexed declaration found for this query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finitely generated algebra over a Cohen Macaulay ring has saturated prime chains of equal length between fixed endpoints",
+   "results": "{\"t\": \"2026-10-17T18:52:12Z\", \"tool\": \"leansearch\", \"query\": \"Every finitely generated algebra over a Cohen Macaulay ring has saturated prime chains of equal length between fixed endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.iff_exists_generators\", \"Ideal.exists_ltSeries_of_hasGoingDown\", \"isNoetherianRing_of_fg\", \"Ideal.exists_ltSeries_length_eq_height\", \"Subalgebra.fg_def\", \"Subalgebra.fg_of_fg_toSubmodule\", \"Algebra.QuasiFinite.finite_primeSpectrum\"], \"digest\": \"26a9c052b394ed5b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned Noetherianity, height and finite-type results do not establish catenarity of finite-type algebras"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian Cohen Macaulay ring is universally catenary",
+   "results": "{\"t\": \"2026-10-17T18:52:14Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian Cohen Macaulay ring is universally catenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_isLocalization_maximal\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"IsNoetherianRing.of_prime\", \"IsNoetherianRing.of_prime_ne_bot\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"AlgebraicGeometry.isNoetherian_Spec\", \"IsLocalization.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\"], \"digest\": \"26eee3cf5a4783f8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned Noetherianity, height and finite-type results do not establish catenarity of finite-type algebras"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial ring in finitely many variables over a Noetherian Cohen Macaulay ring is Cohen Macaulay",
+   "results": "{\"t\": \"2026-10-17T18:52:14Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial ring in finitely many variables over a Noetherian Cohen Macaulay ring is Cohen Macaulay\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.isNoetherianRing_fin\", \"MvPolynomial.isNoetherianRing\", \"Polynomial.isNoetherianRing\", \"MvPolynomial.isNoetherianRing_fin_0\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"Algebra.FinitePresentation.mvPolynomial\"], \"digest\": \"a83a4176734bd11a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned Noetherianity, dimension and presentation results do not establish Cohen–Macaulayness (depth equals local dimension)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining indeterminates preserves equality of depth and dimension in all prime localizations of a Noetherian ring",
+   "results": "{\"t\": \"2026-10-17T18:52:19Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining indeterminates preserves equality of depth and dimension in all prime localizations of a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Polynomial.height_map_C\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Polynomial.height_eq_height_add_one\"], \"digest\": \"c1995cd6e3c8816b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned Noetherianity, dimension and presentation results do not establish Cohen–Macaulayness (depth equals local dimension)"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|IsCohenMacaulay|CM-polynomial|catenary",
+   "results": "{\"t\": \"2026-10-17T18:52:52Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|IsCohenMacaulay|CM-polynomial|catenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no indexed declaration found for this query"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"depth\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-17T18:52:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"depth\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no indexed declaration found for this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Catenarity of finite type algebras over rings all of whose localizations have depth equal to dimension",
+   "results": "{\"t\": \"2026-10-17T18:52:55Z\", \"tool\": \"leanfinder\", \"query\": \"Catenarity of finite type algebras over rings all of whose localizations have depth equal to dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finiteType_isLocal\", \"FiniteRingKrullDim\", \"Algebra.FiniteType.of_span_eq_top_source\", \"RingHom.EssFiniteType.holdsForLocalization\", \"Algebra.QuasiFiniteAt\", \"Module.Finite.of_isLocalized_maximal\", \"Algebra.EssFiniteType.cond\", \"instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl\"], \"digest\": \"55031e09141f6468\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned Noetherianity, height and finite-type results do not establish catenarity of finite-type algebras"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-ring-universally-catenary",
@@ -87,5 +243,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cm-ring-universally-catenary",
+  "worker": "stage1",
+  "summary": "Retained the exact ring assertion of Stacks 00NM. Wrote its polynomial reduction, the finite local dimension bound, existence of a maximal prefix, both applications of the CM local maximal-chain formula, and the quotient prime-interval argument. Added only the statement-only polynomial Cohen–Macaulay theorem 00ND; reused the existing 00N9 and prime-correspondence nodes. Fresh logged searches find no Mathlib match or source attachment. No statement change.",
+  "blueprint": "Realizes the inherited regularity-to-universal-catenarity input of lem-trf-local-term-locality, through lem-trf-regular-ring-universally-catenary and the recorded via chain: in 00NM, polynomial Cohen–Macaulayness followed by the local maximal-chain formula. The blueprint current proof gives the normal-cone/local-term route; this is a generic arithmetic-model ring-theory input below that route, not a replacement for it. Whole-blueprint searches for Cohen, catenary, 00ND and polynomial Cohen found no same_as.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cm-local-maximal-chain-length",
+    "why": "The generic commutative-algebra maximal-chain formula 00N9 is applied to the two CM prime localizations; no statement of sk-i-curve-zero supplies this ring-theoretic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cm-local-maximal-chain-length"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-1e542c2f0",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-1e542c2f0 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, plus every cited node's statement, against Stacks algebra.tex 00NM (the lemma that Cohen–Macaulay rings are catenary, with its proof), 00ND, the Cohen–Macaulay ring definition, 00N9, the 0AAI proof, 00NK/00E5 and the catenary definition. Tag-to-label pairs were checked in tags/tags. The item statement is unchanged and matches 00NM's first assertion: Cohen–Macaulay is spelled out as depth = dim at every prime, and the conclusion includes both the finite bound and equal saturated-chain lengths. Step 1: the new polynomial node has exactly the item's hypotheses. Step 2: Noetherianity of the localization is written out; the Noetherian-local finite-dimension leaf and the localization prime bijection (order-preserving, inverse given by extension) give chain length <= d_q without assuming any global finite dimension. Step 3 (elementary): a longest chain ending at p exists, starts at a minimal prime, is saturated, and is a maximal chain in P_p. Step 4: the concatenated chain is maximal in P_q. All hypotheses of lem-weil-pbc-cm-local-maximal-chain-length hold (Noetherian local, finite d, depth >= d from depth = d, chain maximal), and the two applications give t = d_q - d_p; p = q is consistent. Step 5 (elementary): the surjection P -> A and the quotient-spectrum leaf identify whole prime intervals, because every intermediate prime contains the kernel. Step 6 unfolds def-exc-excellent-ring, and R = 0 is vacuous. New node lem-trf-polynomial-algebra-cm is 00ND restricted to finitely many variables, which is all 00NM needs and is the setting of 0AAI. It is true (Matsumura 17.7), statement-only, self-contained, correctly tagged, and is a genuine input rather than a restated clause of the item. It holds on the tested cases: R = 0, n = 0, fields, Z, and k[e]/(e^2). An rg search of the DAG for 00ND/0AAI/00NM, universally catenary, and polynomial with depth or Cohen found no duplicate; the field-base node lem-weil-pbc-polynomial-ring-maximal-chain-height-difference is not a generalization of it. Route: this is a generic ring-theory input of unit sk-i-curve-zero, inherited through the via chain; no unit step is replaced and no SGA source is used. I accept the declared tool use of lem-weil-pbc-cm-local-maximal-chain-length (00N9, generic, reviewed by L). The other off-unit citations are definitions or Mathlib leaves. This is not a target node, so the base-change and coefficient checks do not apply. No fixes."
  }
 }
