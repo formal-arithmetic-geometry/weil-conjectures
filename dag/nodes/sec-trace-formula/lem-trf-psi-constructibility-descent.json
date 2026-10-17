@@ -16,9 +16,64 @@
   "def-trf-oriented-nearby-cycles",
   "def-trf-oriented-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=V_f$ and $E'=V_{f_T}$. Apply [lem-trf-proper-base-change-coherent-conservative] with the proper surjective map $p$ of the statement. Its hypotheses are exactly our Noetherian base and finite-presentation hypothesis on $f$. It gives coherent topoi $E,E'$ and a coherent conservative geometric morphism $v:E'\\to E$. It also gives the Noetherian base $T$ and finite presentation of $f_T$, which will allow the constructibility criterion to be used on $E'$.",
+   "uses": [
+    "lem-trf-proper-base-change-coherent-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proof of Lemma 9.1.5, printed p. 21, coherence and conservativity of the induced morphism; §8.1 for the coherent topoi."
+   }
+  },
+  {
+   "text": "Let $A=|F|$ be the underlying sheaf of sets. All coefficients are the same finite constant ring $\\Lambda$. The inverse image of a module over this constant ring is the ordinary exact inverse image with the transported operations, as stipulated in [def-trf-oriented-nearby-cycles]; hence $|v^*F|=v^{-1}A$. Apply [lem-trf-oriented-constructible-coherent] to $f_T$ and $v^*F$: the geometric hypotheses were supplied in Step 1 and the finite coefficient hypothesis is unchanged. The assumed constructibility of $v^*F$ therefore says that $v^{-1}A$ is a coherent object of $E'$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-constructible-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "§8.1, printed pp. 17–18, constructibility equals coherence, applied on the changed base."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coherent-conservative-reflection] to $u=v$ and $A$. Step 1 supplies both coherent topoi and the coherence and conservativity of $v$; Step 2 supplies coherence of $v^{-1}A$. Thus $A$ is coherent in $E$. This is descent of an intrinsic finiteness property of $F$, and does not require any comparison theorem for nearby-cycle complexes.",
+   "uses": [
+    "lem-trf-coherent-conservative-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "§8.1, printed p. 17, coherence detected by coherent conservative inverse image; used in the proof of Lemma 9.1.5."
+   }
+  },
+  {
+   "text": "Apply the reverse implication of [lem-trf-oriented-constructible-coherent] to the original $f$ and $F$. The original hypotheses give its Noetherian base, finite presentation, and finite constant ring. Step 3 supplies coherence of $|F|$, so the criterion gives finite stratifications of $X$ and $S$ on whose oriented products $F$ is locally constant with finite $\\Lambda$-module values. This is precisely the requested constructibility.",
+   "uses": [
+    "lem-trf-oriented-constructible-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "§8.1, printed pp. 17–18, agreement of coherence and constructibility; conclusion of Lemma 9.1.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-proper-base-change-coherent-conservative",
+  "def-trf-oriented-nearby-cycles",
+  "lem-trf-oriented-constructible-coherent",
+  "lem-trf-coherent-conservative-reflection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Agent-written expansion of the author draft Lemma 9.1.5 through its §8.1 coherence argument; primary source read online but not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -82,10 +137,45 @@
    "results": "{\"t\": \"2026-10-17T16:40:09Z\", \"tool\": \"leansearch\", \"query\": \"Constructible sheaves on left oriented products of etale topoi descend along proper surjective morphisms of bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"TopCat.Sheaf.forget\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"377690e97876e438\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected returned signatures; these concern ordinary sheaves, finite type/presentation of module sheaves, constructible subsets or functions, or stability of scheme morphisms under base change, not constructibility on oriented products or nearby cycles."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T17:56:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; coherent-site sheaf conditions, condensed objects, quasicoherent module presentations, and scheme base-change properties do not define or assert this topos-theoretic statement."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.?topos|coherent.?topoi|vanishing.?topos|oriented.?product",
+   "results": "{\"t\": \"2026-10-17T17:57:20Z\", \"tool\": \"grep\", \"query\": \"coherent.?topos|coherent.?topoi|vanishing.?topos|oriented.?product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\"], \"digest\": \"c605340e39c9c599\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; coherent-site sheaf conditions, condensed objects, quasicoherent module presentations, and scheme base-change properties do not define or assert this topos-theoretic statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T17:57:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; coherent-site sheaf conditions, condensed objects, quasicoherent module presentations, and scheme base-change properties do not define or assert this topos-theoretic statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible finite coefficient sheaves on the vanishing topos descend along a proper surjective base morphism",
+   "results": "{\"t\": \"2026-10-17T17:57:20Z\", \"tool\": \"leansearch\", \"query\": \"Constructible finite coefficient sheaves on the vanishing topos descend along a proper surjective base morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.forget\", \"LightCondensed\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"CategoryTheory.Sheaf.instHasFiniteColimits\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"03ddaf1000ce0f09\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; coherent-site sheaf conditions, condensed objects, quasicoherent module presentations, and scheme base-change properties do not define or assert this topos-theoretic statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves on vanishing topoi descend along proper surjective changes of the base",
+   "results": "{\"t\": \"2026-10-17T17:57:21Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible sheaves on vanishing topoi descend along proper surjective changes of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.ofSheafForgetProfinite\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"Condensed.epi_iff_locallySurjective_on_compHaus\", \"Condensed.lanSheafProfinite\", \"Condensed.isSheafProfinite\", \"topCatToSheafCompHausLike\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite\"], \"digest\": \"999758c09623aadb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; coherent-site sheaf conditions, condensed objects, quasicoherent module presentations, and scheme base-change properties do not define or assert this topos-theoretic statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-good-oriented-cohomology-strata",
@@ -119,5 +209,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-psi-constructibility-descent",
+  "worker": "stage1",
+  "summary": "Expanded the proper-surjective descent argument using the intrinsic coherence of underlying sheaves. Four statement-only children separate the coherence terminology, general conservative reflection theorem, constructibility/coherence comparison, and geometry of proper base change. The item statement and its hypotheses are unchanged. All new nodes were checked for DAG/blueprint duplicates and searched with logged Mathlib tools; no exact or one-line Mathlib match was found.",
+  "blueprint": "Realizes the proper-surjective constructibility-descent input in the conditional Psi-good nearby-cycle strata argument below lem-trf-local-term-locality, specifically the coherence-based argument of Orgogozo Lemma 9.1.5. The sk-i-curve-zero unit route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-a47cc2153",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-a47cc2153 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited statement in full. Orgogozo (author draft) is not archived locally, so I fetched it from the URL the item records and read §8.1 (pp. 17–18), §8.3 and Lemmas 9.1.1–9.1.5 (pp. 19–21). I also read Gabber travaux XI 2.4–2.5 for coherence of oriented products. The four steps follow the 9.1.5 proof exactly: (1) v is coherent and conservative; (2) |v*F| = v⁻¹|F|, by the constant-Λ exact inverse-image clause of def-trf-oriented-nearby-cycles, then constructible ⇒ coherent on V_{f_T}; (3) coherence is reflected along v; (4) coherent ⇒ constructible on V_f. All hypotheses are checked: S Noetherian and f of finite presentation give the qcqs schemes §8.1 needs, T is Noetherian by 01T6, f_T is of finite presentation by 01TS, and Λ is finite throughout. I proved the reflection lemma myself (finite subcover after u⁻¹, then conservativity on the image, for both quasi-compactness and quasi-separation). I checked point lifting for proper surjective p: a point of T over f(x̄) inside T×_S S_(s̄) specialises to the closed fibre. I checked that a locally constant underlying set sheaf with finite Λ gives a locally constant module. Small cases: identity, empty, zero module, infinite constant module, non-surjective p. No false statements, no restated clauses, no cycle, and no duplicates (rg over the DAG and blueprint main-20261015). Two fixes: def-trf-coherent-topos now cites def-trf-geometric-morphism and def-weil-pbc-topos instead of 'def-weil-pbc-ringed-topos-morphism after forgetting rings'; lem-trf-proper-base-change-coherent-conservative had a stale wrong tag 01TQ in blueprint.from.place, now 01TS. No tool_uses. The Orgogozo PDF should be archived in literature/.; 2 file(s) fixed by the reviewer"
  }
 }

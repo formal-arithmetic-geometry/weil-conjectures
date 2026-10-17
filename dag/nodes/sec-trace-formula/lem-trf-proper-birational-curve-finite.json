@@ -15,9 +15,43 @@
   "def-sc-function-field",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The structure morphism C to Spec k is of finite type, and Spec k is Noetherian because k is a field. Applying [lem-weil-pbc-finite-type-over-noetherian] therefore makes C Noetherian. The dimension-one hypothesis means every local ring of C is Noetherian of dimension at most one. The k-morphism p is locally of finite type: on affine charts, the coordinate ring of E is finitely generated over k and hence over the coordinate ring of the corresponding chart of C; the charts cover E. The function-field isomorphism in the item is a finite generic extension. Thus Tag 0AB6, condition (1), applies at every point of C and gives that p is quasi-finite at every point of E, exactly the conclusion of [lem-trf-birational-curve-quasifinite].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-birational-curve-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6 (lemma-quasi-finite-in-codim-1), condition (1) and proof; the Noetherianity input is Morphisms Tag 01T6."
+   }
+  },
+  {
+   "text": "The item assumes that p is proper, and Step 1 proves that p is quasi-finite at every point of E, that is, p is locally quasi-finite in the sense of [pqf-def-quasifinite]. Apply [pqf-lem-proper-lqf-finite], whose statement is that every proper locally quasi-finite morphism is finite. This gives that p is finite in the sense of [def-weil-finite-integral-morphism], which is the required conclusion.",
+   "uses": [
+    "pqf-lem-proper-lqf-finite",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Proof (1)--(2), projective preparation of the relative-curve alteration input; proper quasi-finite morphisms are finite by More on Morphisms Tag 02LS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-birational-curve-quasifinite",
+  "pqf-lem-proper-lqf-finite",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0AB6 and 0AB7, with the proper quasi-finite to finite implication of More on Morphisms Tag 02LS."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +80,17 @@
    "results": "0 hits in Mathlib/AlgebraicGeometry.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'quasiFinite|finite.*birational|birational.*finite' Mathlib/AlgebraicGeometry (extended regex; the earlier record's pattern, run as a basic regex, treats | literally)",
+   "results": "53 hits, in Morphisms/QuasiFinite.lean and ZariskisMainTheorem.lean: LocallyQuasiFinite (QuasiFinite.lean:71), IsFinite.of_isProper_of_locallyQuasiFinite (ZariskisMainTheorem.lean:373), IsFinite.iff_isProper_and_locallyQuasiFinite (:382), quasiFiniteLocus lemmas; no hit on birational. None states that a proper birational morphism of integral curves is finite; the ZMT lemma is the leaf pqf-lem-proper-lqf-finite used in step 2.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-birational-normal-curve-iso",
@@ -61,7 +102,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), projective preparation of the relative-curve alteration input: a Chow modification is an isomorphism on the smooth generic curve.",
+   "place": "Proof (1)--(2), projective preparation of the relative-curve alteration input: a Chow modification is an isomorphism on the smooth generic curve because the proper birational curve map is finite.",
    "via": [
     "lem-trf-proper-birational-normal-curve-iso",
     "lem-trf-dejong-relative-marked-semistable",
@@ -74,5 +115,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-birational-curve-finite",
+  "worker": "stage1",
+  "summary": "Split the proper birational curve finiteness argument into (1) quasi-finiteness from the one-dimensional codimension-one criterion of Stacks Tag 0AB6, after checking Noetherianity, local finite type, and the finite generic function-field extension, and (2) finiteness from proper plus quasi-finite using the existing proper-quasi-finite finiteness theorem. No statement was changed.",
+  "blueprint": "Realizes the projective-preparation sentence in the ancestor proof that the proper birational map of integral curves is finite (the generic curve map in the Chow modification)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-fe0c2ce07",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-fe0c2ce07 (reviewer sub-agent of L); spot-checked: Verdict: FIX. I read the item, the new node lem-trf-birational-curve-quasifinite, every cited statement, the citer lem-trf-proper-birational-normal-curve-iso, the unit sk-i-curve-zero, the ancestor lem-trf-local-term-locality.proof.md in main-20261015, and Stacks varieties.tex lines 3187-3283 (Tag 0AB6 is lemma-quasi-finite-in-codim-1 and Tag 0AB7 is lemma-finite-in-codim-1; both labels checked in tags/tags). The item's statement agrees with 0AB7 condition (1) at every point of C: C is Noetherian with local rings of dimension at most 1, dominance sends the generic point of E to the generic point of C, and the function-field isomorphism is a finite extension. No hypothesis was changed. The new node is true: it follows from 0AB6, and directly, because the fibres of a dominant map of integral curves are finite and Mathlib's LocallyQuasiFinite.of_finite_preimage_singleton then applies. I tested it on the normalisation of the nodal cubic, t->t^2 on P^1, A^1 minus 0 into A^1, and a constant map, which dominance excludes. For the item, A^1 inside P^1 shows that properness is needed. The new node is strictly smaller than the item (no properness, conclusion quasi-finite), so it does not restate a clause. I searched the DAG with rg for 0AB6, 0AB7, 02LS, 02OG and quasi-finite, and grepped the blueprint for quasi-finite and birational; nothing duplicates the node, and same_as [] is correct. Step 1 checks the new node's hypotheses; local finite type is elementary. Step 2 applies the Mathlib leaf pqf-lem-proper-lqf-finite (IsFinite.of_isProper_of_locallyQuasiFinite, ZariskisMainTheorem.lean:373). Both proof dependencies outside the new node are Mathlib leaves, so the route is clean, there are no tool_uses, and no SGA is cited. I made three fixes in fixes/: (1) B4: the new node's statement had $E. with no closing $; (2) step 2 said only 'quasi-finite', which in pqf-def-quasifinite (3) means something else; it now says locally quasi-finite, and pqf-def-quasifinite is added to uses and proof_deps; (3) B7: both grep records claimed 0 hits, but with grep -E the patterns give 25 and 53 hits in QuasiFinite.lean and ZariskisMainTheorem.lean. I appended the correct records with their actual hits; the 'no match' verdict stands.; 2 file(s) fixed by the reviewer"
  }
 }

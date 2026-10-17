@@ -16,9 +16,114 @@
   "def-nagata-strict-transform",
   "def-weil-quasi-separated-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [sk-lem-nagata-boundary-divisor] to $S$ and $U$, obtaining a $U$-admissible blow-up $b_0:S_0\\to S$ for which $U_0=b_0^{-1}(U)$ is scheme-theoretically dense. The map $b_0$ is proper by [lemma-nagata-blowup-proper], hence quasi-compact and separated by [def-weil-proper-morphism]. By [lem-pc-separated-quasi-separated] it is quasi-separated, and [lem-weil-pbc-qcqs-morphism-permanence](2) makes $S_0$ qcqs. By [lemma-nagata-admissible-blowup-over-open], $U_0\\to U$ is an isomorphism; in particular $U_0$ is quasi-compact.",
+   "uses": [
+    "sk-lem-nagata-boundary-divisor",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-nagata-admissible-blowup-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0B49 proof, schematic-density reduction; flat.tex remark-successive-blowups; Divisors Tags 02OS and 07ZU."
+   }
+  },
+  {
+   "text": "For the blow-ups in this proof the strict transform is a closed subscheme of the ambient base change by [def-nagata-strict-transform], read in its current scheme-image formulation. Its restriction over the preserved open is the original restriction: [lemma-nagata-admissible-blowup-over-open] identifies the base over that open with the original base, and [lemma-nagata-scheme-image-restrict-open] restricts the closure-defining scheme image there. The open immersion defining this image is quasi-compact: locally in an affine of the ambient scheme, the pulled-back finite-type center ideal has finitely many generators, so its complement is a finite union of principal affine opens. It is quasi-separated since it is an open immersion. After restriction, this open immersion is the identity on the whole ambient restriction, whose scheme image is itself (its restriction kernel is zero). This proves the asserted identification with the original restriction, including its scheme structure.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lemma-nagata-admissible-blowup-over-open",
+    "lemma-nagata-scheme-image-restrict-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Divisors Tag 080D, definition-strict-transform; Morphisms Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, restriction to an open. The restriction kernel on the identity open is zero."
+   }
+  },
+  {
+   "text": "Let $f_0:X_0\\to S_0$ be the strict transform along $b_0$. Its closed inclusion into $X\\times_S S_0$, followed by the base change of the given proper $X\\to S$, is proper by [lem-weil-pbc-proper-fp-permanence](a)--(c). Thus $f_0$ is of finite type and separated by [def-weil-proper-morphism], hence quasi-separated by [lem-pc-separated-quasi-separated]. Step 2 identifies $(X_0)_{U_0}\\to U_0$ with the original $X_U\\to U$, so it is finite, flat and locally of finite presentation by [def-pc-finite-locally-free]. Apply [lem-trf-flattening-by-admissible-blowup] to $(S_0,U_0,f_0)$. All its hypotheses have now been checked. It gives a $U_0$-admissible blow-up $b_1:S_1\\to S_0$ and a strict transform $f_1:X_1\\to S_1$ which is flat and of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "def-pc-finite-locally-free",
+    "lem-trf-flattening-by-admissible-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 0B49 and 081R, lemma-flat-after-blowing-up; properness permanence: Morphisms Tags 01W3, 01W4 and 01W5."
+   }
+  },
+  {
+   "text": "The closed inclusion $X_1\\hookrightarrow X_0\\times_{S_0}S_1$ and [lem-weil-pbc-proper-fp-permanence](a)--(c) show that $f_1$ is still proper. By [lemma-nagata-admissible-blowup-preserves-density], applied to the quasi-compact scheme-theoretically dense open $U_0\\subseteq S_0$ and the finite-type center of $b_1$, the open $U_1=b_1^{-1}(U_0)$ is scheme-theoretically dense in $S_1$. It is topologically dense as well: if a nonempty affine open $V\\subseteq S_1$ missed $U_1$, the injection $\\mathcal O_{S_1}\\to (j_1)_*\\mathcal O_{U_1}$ of [def-nagata-scheme-theoretically-dense-open] would inject the nonzero ring $\\Gamma(V,\\mathcal O)$ into zero, a contradiction. Step 2 identifies $(X_1)_{U_1}\\to U_1$ with $X_U\\to U$, which is finite. The finite-presentation conclusion of Step 3 includes local finite presentation. Therefore [lem-trf-proper-flat-finite-dense-open] applies to $f_1$ and $U_1$, proving that $f_1$ is finite.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-admissible-blowup-preserves-density",
+    "def-nagata-scheme-theoretically-dense-open",
+    "lem-trf-proper-flat-finite-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0B49 proof, application of Tag 0B48, lemma-proper-flat-finite-over-dense-open; schematic-density preparation in remark-successive-blowups and the cited blueprint lemma-nagata-admissible-blowup-preserves-density."
+   }
+  },
+  {
+   "text": "The morphism $f_1$ is finite by Step 4, and flat and locally of finite presentation by Step 3. It is therefore finite locally free by exactly the definition [def-pc-finite-locally-free].",
+   "uses": [
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0B49 last sentence, Morphisms Tag 02KB, lemma-finite-flat; the project definition already uses its finite, flat and locally-of-finite-presentation characterization."
+   }
+  },
+  {
+   "text": "Write $b_0=\\operatorname{Bl}_{\\mathcal I}(S)\\to S$ and $b_1=\\operatorname{Bl}_{\\mathcal J}(S_0)\\to S_0$ using their admissible center data. The current statement of [thm-nagata-composition-of-blowups] supplies a finite-type quasi-coherent ideal $\\mathcal K$ on $S$ and an isomorphism $S_1\\cong\\operatorname{Bl}_{\\mathcal K}(S)$ over $S$, with $V(\\mathcal K)=V(\\mathcal I)\\cup b_0(V(\\mathcal J))$. Both terms are disjoint from $U$: the first by admissibility of $b_0$, the second because $V(\\mathcal J)$ misses $U_0=b_0^{-1}(U)$. Thus $\\mathcal K|_U=\\mathcal O_U$, and this presentation makes $b=b_0b_1$ a single $U$-admissible blow-up by [def-nagata-admissible-blowup]. Apply [lem-trf-strict-transform-composition] with these three ideals and this specified isomorphism. Its support-equality hypothesis is exactly the equality supplied above, and it identifies $X_1$ with the strict transform of the original $X$ along $b$. Consequently that strict transform is finite locally free by Step 5, as required.",
+   "uses": [
+    "thm-nagata-composition-of-blowups",
+    "def-nagata-admissible-blowup",
+    "lem-trf-strict-transform-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "flat.tex remark-successive-blowups; Divisors Tags 080B, lemma-composition-finite-type-blowups, and 080I, lemma-strict-transform-composition-blowups (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-nagata-strict-transform",
+  "def-pc-finite-locally-free",
+  "def-weil-proper-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-trf-flattening-by-admissible-blowup",
+  "lem-trf-proper-flat-finite-dense-open",
+  "lem-trf-strict-transform-composition",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lemma-nagata-admissible-blowup-preserves-density",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-scheme-image-restrict-open",
+  "sk-lem-nagata-boundary-divisor",
+  "thm-nagata-composition-of-blowups"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0B49, lemma-finite-after-blowing-up, with remark-successive-blowups (density blow-up taken first), Tag 081R, Tag 0B48 and Divisors Tags 080B and 080I."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +180,66 @@
    "results": "8 hits: AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.IsProper.mk; AlgebraicGeometry.IsProper; AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.IsProper.toLocallyOfFiniteType",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism whose restriction over a quasi-compact open is finite locally free admits a U-admissible blow-up whose strict transform is finite locally free",
+   "results": "{\"t\": \"2026-10-17T17:55:36Z\", \"tool\": \"leanfinder\", \"query\": \"A proper morphism whose restriction over a quasi-compact open is finite locally free admits a U-admissible blow-up whose strict transform is finite locally free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"643b477b8238ffe0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper scheme finite locally free over an open strict transform finite locally free after admissible blowup",
+   "results": "{\"t\": \"2026-10-17T17:55:44Z\", \"tool\": \"leanfinder\", \"query\": \"proper scheme finite locally free over an open strict transform finite locally free after admissible blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.LocallyOfFiniteType\"], \"digest\": \"be5409de0e919b81\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-17T17:55:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|finite-after-blowing-up",
+   "results": "{\"t\": \"2026-10-17T17:55:45Z\", \"tool\": \"grep\", \"query\": \"strictTransform|finite-after-blowing-up\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*IsProper|proper.*flat.*finite",
+   "results": "{\"t\": \"2026-10-17T17:55:45Z\", \"tool\": \"grep\", \"query\": \"IsFinite.*IsProper|proper.*flat.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\"], \"digest\": \"5bbcc08bb48281ca\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper flat finitely presented morphism finite over a scheme theoretically dense open is finite",
+   "results": "{\"t\": \"2026-10-17T17:55:45Z\", \"tool\": \"leansearch\", \"query\": \"proper flat finitely presented morphism finite over a scheme theoretically dense open is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.mk\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"ddbd2dde7819b798\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism finite locally free on open becomes finite locally free after blowup",
+   "results": "{\"t\": \"2026-10-17T17:55:46Z\", \"tool\": \"leansearch\", \"query\": \"proper morphism finite locally free on open becomes finite locally free after blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\"], \"digest\": \"fe78f9cd772a7f30\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*dense|dense.*finite",
+   "results": "{\"t\": \"2026-10-17T17:55:46Z\", \"tool\": \"grep\", \"query\": \"finite.*dense|dense.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"c83a58c2b508ce8b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the finite-locally-free strict-transform existence theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-alteration-finite-refinement",
@@ -101,5 +262,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-after-blowup",
+  "worker": "stage1",
+  "summary": "Q51 retained the exact Stacks 0B49 statement and expanded its proof into density preparation, strict-transform restriction, existing flattening, proper-flat dense-open finiteness, and the single-blow-up comparison. Reused the existing flattening and Nagata nodes; created two genuinely smaller statement-only nodes (0B48 and 080I). Checked all citations, hypotheses, edge cases, and real Mathlib searches. No Lean work.",
+  "blueprint": "Supports the existing Orgogozo modification/alteration refinement branch of lem-trf-local-term-locality: the finite-after-blowing-up invocation in lem-trf-alteration-finite-refinement. Steps 1--5 realize the density/flatification/finite-locally-free argument of Stacks 0B49; Step 6 supplies the strict-transform compatibility hidden in its successive-blow-up reduction.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-nagata-boundary-divisor",
+    "why": "Generic boundary blow-up makes the chosen open schematically dense; this trace-formula unit has no separate boundary-principalization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic proper base change, closed-immersion properness and composition keep both strict transforms proper; no proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-nagata-boundary-divisor",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-3c3c16fb9",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-3c3c16fb9 (reviewer sub-agent of L); spot-checked: Read the whole delivery and checked it against the sources. The item's statement agrees with Stacks 0B49 (flat.tex lemma-finite-after-blowing-up) hypothesis by hypothesis; it is unchanged and not weakened. Its old 'Lemma 29.27.1' label is stale, but the tag and label are right. Step 1: boundary blow-up, then properness, qcqs of S_0 via the separated-to-quasi-separated lemma and permanence (2), and U_0≅U. Step 2: strict-transform restriction via the scheme-image update and restriction to an open; the quasi-compactness of the open immersion comes from the finite-type center, and the step is genuinely elementary. Step 3: properness permanence (a)-(c), then the hypotheses of the 081R flattening node, all checked. Step 4: the density-preservation update applies because U_0 is quasi-compact and schematically dense and J is finite type and U_0-admissible; the topological-density argument is correct; this gives exactly the hypotheses of the 0B48 node. Step 5: holds by definition. Step 6: the composition-of-blowups update gives K with V(K)=V(I)∪b_0(V(J)), which is disjoint from U; then 080I(2). New node lem-trf-proper-flat-finite-dense-open: matches 0B48 with the lfp alternative; tested on U empty, on a non-proper open immersion of the generic point of a DVR, and with flatness dropped; not a duplicate of pqf-lem-proper-lqf-finite. New node lem-trf-strict-transform-composition: matches 080I(2) restricted to finite-type centers, which is where the project's strict-transform definition agrees with Stacks; not a duplicate of thm-nagata-composition-of-blowups, lemma-nagata-admissible-blowup-comp or lemma-nagata-scheme-image-strict-transform. rg over the snapshot DAG for 0B48/0B49/080I/081R and keywords found no other node stating either fact. Neither new node restates a clause of the item, there is no cycle and no SGA is cited. The tool_uses for sk-lem-nagata-boundary-divisor and lem-weil-pbc-proper-fp-permanence are accepted. No fixes were made."
  }
 }
