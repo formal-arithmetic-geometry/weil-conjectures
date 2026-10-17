@@ -183,4 +183,97 @@ def geometricFiberBaseChangeIso : f.geometricFiber ≅ f'.geometricFiber where
 
 end Scheme.Hom
 
+section Frobenius
+
+variable [Finite k₀] [Finite k₀'] [Algebra.IsAlgebraic k₀ k₀'] (r : ℕ)
+  (hr : Nat.card k₀' = Nat.card k₀ ^ r)
+
+include hr in
+/-- The `k₀`-isomorphism `τ : k̄' ≅ k̄` intertwines the geometric Frobenius `σ'` of `Spec k̄'`
+over `k₀'` with the `r`-th power of the geometric Frobenius `σ` of `Spec k̄` over `k₀`:
+`σʳ ≫ Spec τ = Spec τ ≫ σ'`. -/
+lemma specGeometricFrobenius_pow_hom_comp_spec_map_algebraicClosureAlgEquiv :
+    (specGeometricFrobenius k₀ ^ r).hom ≫
+        Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₀').toRingHom) =
+      Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₀').toRingHom) ≫
+        (specGeometricFrobenius k₀').hom := by
+  let := Fintype.ofFinite k₀
+  let := Fintype.ofFinite k₀'
+  have hr' : Fintype.card k₀' = Fintype.card k₀ ^ r := by
+    rw [← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card, hr]
+  rw [specGeometricFrobenius_pow_hom, specGeometricFrobenius_hom, ← Spec.map_comp,
+    ← Spec.map_comp]
+  congr 1
+  ext x
+  exact (algEquiv_geometricFrobenius_apply r hr'
+    (algebraicClosureAlgEquiv k₀ k₀').toRingEquiv x).symm
+
+namespace Scheme.Hom
+
+variable {Y Y' : Scheme.{u}} {f : Y ⟶ Spec (.of k₀)} {f' : Y' ⟶ Spec (.of k₀')} {g : Y' ⟶ Y}
+  (hg : IsPullback g f' f (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))))
+
+include hr in
+/-- The point `Ȳ ⟶ Y'` of the base change through `k₀' ⟶ k̄` is invariant under the `r`-th power
+of the geometric Galois Frobenius of `Ȳ`: `σʳ` fixes the image of `k₀'` in `k̄`. -/
+@[reassoc]
+lemma geometricGaloisFrobenius_pow_hom_comp_geometricFiberToBaseChange :
+    (f.geometricGaloisFrobenius ^ r).hom ≫ geometricFiberToBaseChange hg =
+      geometricFiberToBaseChange hg := by
+  refine hg.hom_ext ?_ ?_
+  · simp
+  · rw [Category.assoc, geometricFiberToBaseChange_comp_snd,
+      geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure_assoc,
+      specGeometricFrobenius_pow_hom_comp_spec_map_of_card_eq k₀ r hr]
+
+include hr in
+/-- Under the identification `θ : Ȳ ≅ Ȳ'` of the geometric fibers of `Y` over `k₀` and of its
+base change `Y'` over `k₀'`, the geometric Galois Frobenius of `Ȳ'` relative to `k₀'` is the
+`r`-th power of that of `Ȳ` relative to `k₀`: `θ ≫ Fr' = Frʳ ≫ θ`. -/
+lemma geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius :
+    (geometricFiberBaseChangeIso hg).hom ≫ f'.geometricGaloisFrobenius.hom =
+      (f.geometricGaloisFrobenius ^ r).hom ≫ (geometricFiberBaseChangeIso hg).hom := by
+  ext
+  · simp only [geometricFiberBaseChangeIso, Category.assoc,
+      geometricGaloisFrobenius_hom_comp_geometricFiberProj,
+      geometricFiberBaseChangeHom_comp_geometricFiberProj]
+    exact (geometricGaloisFrobenius_pow_hom_comp_geometricFiberToBaseChange r hr hg).symm
+  · simp only [geometricFiberBaseChangeIso, Category.assoc,
+      geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure,
+      geometricFiberBaseChangeHom_comp_geometricFiberToAlgebraicClosure_assoc,
+      geometricFiberBaseChangeHom_comp_geometricFiberToAlgebraicClosure,
+      geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure_assoc,
+      specGeometricFrobenius_pow_hom_comp_spec_map_algebraicClosureAlgEquiv r hr]
+
+end Scheme.Hom
+
+end Frobenius
+
+namespace Scheme.Hom
+
+variable [Algebra.IsAlgebraic k₀ k₀'] {Y Y' Z Z' : Scheme.{u}} {f : Y ⟶ Spec (.of k₀)}
+  {f' : Y' ⟶ Spec (.of k₀')} {g : Y' ⟶ Y}
+  (hg : IsPullback g f' f (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))))
+  {e : Z ⟶ Spec (.of k₀)} {e' : Z' ⟶ Spec (.of k₀')} {h : Z' ⟶ Z}
+  (hh : IsPullback h e' e (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))))
+
+/-- The identifications of geometric fibers of base changes are natural: for `φ : Y ⟶ Z` over
+`k₀` with base change `φ' : Y' ⟶ Z'`, `θ_Y ≫ φ̄' = φ̄ ≫ θ_Z`. -/
+lemma geometricFiberBaseChangeIso_hom_comp_geometricFiberMap (φ : Y ⟶ Z) (hφ : φ ≫ e = f)
+    (φ' : Y' ⟶ Z') (hφ' : φ' ≫ e' = f') (hc : φ' ≫ h = g ≫ φ) :
+    (geometricFiberBaseChangeIso hg).hom ≫ geometricFiberMap φ' hφ' =
+      geometricFiberMap φ hφ ≫ (geometricFiberBaseChangeIso hh).hom := by
+  ext
+  · simp only [geometricFiberBaseChangeIso, Category.assoc,
+      geometricFiberMap_comp_geometricFiberProj,
+      geometricFiberBaseChangeHom_comp_geometricFiberProj_assoc,
+      geometricFiberBaseChangeHom_comp_geometricFiberProj]
+    refine hh.hom_ext ?_ ?_
+    · simp [hc]
+    · simp only [Category.assoc, hφ', geometricFiberToBaseChange_comp_snd,
+        geometricFiberMap_comp_geometricFiberToAlgebraicClosure_assoc]
+  · simp [geometricFiberBaseChangeIso]
+
+end Scheme.Hom
+
 end AlgebraicGeometry
