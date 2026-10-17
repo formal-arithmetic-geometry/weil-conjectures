@@ -21,27 +21,92 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The cited module-sheaf adjunction supplies the required underived data: [prop-weil-pbc-inverse-image-modules-exact] says that the inverse image on constant-$R$ module sheaves is additive and exact and is left adjoint to $u_*$, while [def-weil-pbc-inverse-image] identifies its counit on a sheaf with the componentwise sheaf counit $\\varepsilon_{u,-}$. Applying the exact inverse image termwise to complexes therefore gives the derived inverse-image functor and its canonical comparison $u^{-1}Q(L)\\cong Q(u^{-1}L)$ by [def-weil-pbc-derived-inverse-image, lem-weil-pbc-exact-functor-derived-functor].",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (derived-lemma-right-derived-exact-functor): an exact functor is computed termwise on all complexes; module adjunction data are the cited project definitions"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-inverse-image-modules-exact] the module direct image $u_*$ is additive, so applying it termwise commutes with shifts and carries the cone of a chain map $a$ to the cone of $u_*(a)$; hence $Q\\circ u_*$ is an exact functor on the homotopy category, and [prop-weil-pbc-kinjective-resolutions-exist] supplies K-injective resolutions in $\\Mod(X_{\\mathrm{et}},R)$. These are the hypotheses of [lem-weil-pbc-kinjective-total-derived], which gives the derived-functor comparison $\\gamma_I:Q(u_*I)\\to Ru_*(QI)$ and says that it is an isomorphism because $I$ is K-injective; this is the computation $Ru_*(QI)=Q(u_*I)$ used in [def-kun-unbounded-exchange] (resolution $1_{QI}$). Applying $u^{-1}$ and the comparison $\\varphi$ of Step 1 identifies the source of the derived counit, $u^{-1}Ru_*(QI)\\cong u^{-1}Q(u_*I)\\cong Q(u^{-1}u_*I)$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K (lemma-enough-K-injectives-implies): K-injective complexes compute the right derived functor; Tag 015F for the exact inverse image"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-inverse-image-modules-exact], $u^{-1}\\dashv u_*$ on module sheaves with $u^{-1}$ exact and both functors additive, the counit being the sheaf counit $\\varepsilon_u$ of [def-weil-pbc-inverse-image]. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that $u_*I$ is K-injective, and [lem-weil-pbc-termwise-adjunction-homotopy] makes the termwise functors adjoint on the homotopy categories, with counit the class of the chain map $\\varepsilon^0_{u,I}=(\\varepsilon_{u,I^r})_r:u^{-1}u_*I\\to I$ and inverse bijection $[g]\\mapsto[\\varepsilon^0_{u,I}\\circ u^{-1}(g)]$. For a complex $N$ on $Y_{\\mathrm{et}}$, the canonical derived Hom bijection of [def-kun-unbounded-exchange] at the K-injective target $QI$ is the composite of natural bijections\n$$\\operatorname{Hom}_D(u^{-1}QN,QI)\\cong\\operatorname{Hom}_D(Q(u^{-1}N),QI)\\cong\\operatorname{Hom}_K(u^{-1}N,I)\\cong\\operatorname{Hom}_K(N,u_*I)\\cong\\operatorname{Hom}_D(QN,Q(u_*I))\\cong\\operatorname{Hom}_D(QN,Ru_*QI),$$\nwhere $K$ denotes homotopy categories: the first is precomposition with $\\varphi_N^{-1}$ (Step 1), the second and fourth are [lem-weil-pbc-kinjective-hom-derived] for the K-injective targets $I$ and $u_*I$, the third is the homotopy adjunction, and the fifth is composition with $\\gamma_I$ (Step 2). This is the colimit description of the canonical derived adjunction (Stacks 0FND) in which, the target being K-injective and the left adjoint exact, the indexing quasi-isomorphisms may be taken to be identities; no boundedness is used. Following an element through the chain, for a chain map $a:N\\to u_*I$ the morphism $\\gamma_I\\circ Q(a)$ corresponds to $Q(\\varepsilon^0_{u,I}\\circ u^{-1}(a))\\circ\\varphi_N$. The transpose of $h:QN\\to Ru_*QI$ is $\\varepsilon_{u,QI}\\circ u^{-1}(h)$; taking $N=u_*I$ and $a=1$ gives\n$$\\varepsilon_{u,QI}\\circ u^{-1}(\\gamma_I)=Q(\\varepsilon^0_{u,I})\\circ\\varphi_{u_*I}.$$\nSince $u^{-1}(\\gamma_I)$ and $\\varphi_{u_*I}$ are the identifications of Step 2, this says that the derived counit at $QI$ is represented by $Q(\\varepsilon^0_{u,I}):Q(u^{-1}u_*I)\\to QI$, as claimed.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0DVC (lemma-pre-derived-adjoint-functors) via 0FND (lemma-pre-derived-adjoint-functors-general), colimit chain collapsed at a K-injective target; Lemma 08BJ (lemma-adjoint-preserve-K-injectives) and its proof's homotopy adjunction; Lemma 070I (lemma-K-injective)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0DVC/0FND (derived adjunction as a colimit of Hom bijections), 08BJ, 070I and 070K; the same computation as step 3 of lem-weil-pbc-derived-exchange-module-termwise"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "derived counit of exact inverse image right derived direct image on a K-injective complex is represented by ordinary counit",
-   "results": "CategoryTheory.Adjunction.derived_counit (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derived'_counit (same); no scheme-sheaf specialization",
+   "results": "CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Functor.totalLeftDerivedCounit; no scheme-sheaf K-injective specialization",
    "date": "2026-10-17",
-   "verdict": "generalization only: generic derived adjunction declarations do not state this K-injective sheaf representative"
+   "verdict": "generalization only: generic derived-adjunction declarations do not state this K-injective sheaf representative"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Adjunction.counit, KInjective, derived direct image",
    "results": "0 hits; service reported unknown identifier KInjective",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "unavailable: query service reported unknown identifier KInjective"
   },
   {
    "tool": "grep",
-   "query": "counit.*K-injective|K-injective.*counit|derived.*counit in Mathlib",
+   "query": "counit.*K-injective|K-injective.*counit|derived.*counit",
    "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match"
@@ -49,13 +114,13 @@
   {
    "tool": "leansearch",
    "query": "derived counit represented by ordinary counit for exact inverse image and K-injective direct image",
-   "results": "CategoryTheory.Adjunction.derivedε and CategoryTheory.Adjunction.derived_counit in Mathlib.CategoryTheory.Functor.Derived.Adjunction; no K-injective sheaf statement",
+   "results": "CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.Adjunction.derivedε_fac_app; no K-injective sheaf statement",
    "date": "2026-10-17",
-   "verdict": "generalization only: generic derived counit formulas do not state this representative"
+   "verdict": "generalization only: generic derived-counit declarations do not state this representative"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-asd-proper-open-refinement-adjoint-projection",
@@ -75,5 +140,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-asd-derived-counit-k-injective-termwise",
+  "worker": "stage1",
+  "summary": "Completed the statement-only helper split with three proof steps. Exact inverse image is descended termwise, the right derived direct image is computed on the K-injective complex, and the canonical derived adjunction counit is identified via the ordinary componentwise sheaf counit after localization. I found no exact Lean declaration or Mathlib specialization and created no new child nodes. Maintainer reader (2026-10-18): steps 2 and 3 rewritten so that the identification of the derived counit is computed from cited statements (08BJ, homotopy adjunction, 070I) instead of from the construction inside the proofs of Tags 0DVC/09T5; off-unit tools declared.",
+  "blueprint": "Realizes prop-asd-smooth-base-change, coherences (i) and (iii), specifically the extracted normalization argument identifying the derived counit on a K-injective representative with the ordinary counit.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "exactness and module adjunction u^{-1} -| u_* for constant-coefficient sheaves; generic sheaf fact of sk-def-exchange, no node of sk-prop-sf-cbc states it"
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "exact functors are derived termwise (comparison phi); generic homological tool of sk-def-exchange"
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "K-injective complexes compute the total right derived functor (gamma_I iso); generic tool of sk-thm-properbasechange"
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "existence of K-injective resolutions of module sheaves, hypothesis of the total-derived lemma; generic tool of sk-prop-cd"
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "right adjoint of an exact functor preserves K-injective complexes (Stacks 08BJ); generic homological tool of sk-def-exchange"
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "termwise adjunction on homotopy categories with termwise counit; generic homological tool of sk-def-exchange"
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-kinjective-total-derived",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-cb2642ddb",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-cb2642ddb (reviewer sub-agent of L); spot-checked: Read the item in full, with its parent lem-asd-proper-open-refinement-adjoint-projection and the main-20261015 proof of prop-asd-smooth-base-change (coherences i-iii). Also read the statement of every cited node and Stacks derived.tex 0FND/0DVC/09T5 (lines 9505-9606). The statement is true: for an unbounded K-injective I, eps_{QI} o u^{-1}(gamma_I) = Q(eps^0_I) o phi_{u_*I}, with the same constant-coefficient module categories as def-kun-unbounded-exchange and no weakening. Tested on R=0, u=id, a bounded-below injective I (this recovers prop-weil-pbc-derived-inverse-image-adjunction (1)), an acyclic I and an empty X. It is no duplicate of the D+ adjunction node, the degree-zero counit node or the general 0FND bijection node, and it is not a clause of the parent. Faults: (C1/C3, D5/E5) step 3 got the whole identification from 'the construction of Tags 0DVC and 09T5', which no cited node states (lem-pc-derived-adjoint-functors only says 'canonical bijection'); (C8) tool_uses was empty although the steps cite split statements of sk-def-exchange and sk-thm-properbasechange; minor: step 2 applied lem-weil-pbc-kinjective-total-derived without checking its hypotheses. FIX rewrites steps 2-3 following the accepted step 3 of lem-weil-pbc-derived-exchange-module-termwise: u_*I is K-injective by lem-weil-pbc-right-adjoint-preserves-kinjective (08BJ); the homotopy adjunction is lem-weil-pbc-termwise-adjunction-homotopy; the Hom chain at K-injective targets uses lem-weil-pbc-kinjective-hom-derived (070I); the 0FND chain is evaluated at N=u_*I, a=1; step 2 now checks the hypotheses, with existence from prop-weil-pbc-kinjective-resolutions-exist. Six generic tool uses are declared and accepted. proof_deps and proof_origin are updated; the statement, stmt_deps and blueprint are unchanged; no new nodes and no cycle.; 1 file(s) fixed by the reviewer"
  }
 }

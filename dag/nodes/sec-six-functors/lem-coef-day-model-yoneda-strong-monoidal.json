@@ -1,0 +1,70 @@
+{
+ "id": "lem-coef-day-model-yoneda-strong-monoidal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: the right-fibration Day convolution used for the operadic Day universal property must carry the strong monoidal Yoneda embedding and separately cocontinuous operations (Haugseng 2311.13362 Section 5 defines Day convolution as this pullback).",
+   "via": [
+    "lem-coef-operadic-day-convolution",
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-algebroid-bilinear-colimits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Yoneda is strong monoidal into the right-fibration Day convolution",
+ "statement": "Use the quasicategories, coherent functors, mapping spaces and universes of [def-cbc-enhanced-diagrams-cones] and [def-coef-complete-algebroid], the presentably monoidal convention of [def-coef-complete-algebroid], and the monoidal infinity categories, cocartesian edges and strong monoidal functors of [def-coef-monoidal-infinity-category]. Let $C$ be a small monoidal infinity category with structure map $C^\\otimes\\to N(\\Delta^{\\mathrm{op}})$, let $\\mathcal S$ be the infinity category of small spaces, put $P(C)=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$, and let $j:C\\to P(C)$, $j(c)=\\operatorname{Map}_C(-,c)$, be the Yoneda functor. Let $Q_C\\to N(\\Delta^{\\mathrm{op}})$ be the right-fibration Day convolution of [lem-coef-day-relative-exponential-model], that is, the infinity-categorical pullback of $p^\\times:\\operatorname{RFib}^\\times\\to\\operatorname{Cat}_{\\mathcal U}^\\times$ along the coherent classifying algebra $\\underline C$ of $C^\\otimes$; it is a monoidal infinity category with fibre $P(C)^r$ over $[r]$, whose $r$-ary operation $\\star_r$ sends $(F_1,\\ldots,F_r)$ to the left Kan extension of $(c_i)\\mapsto\\prod_iF_i(c_i)$ along the opposite of the $r$-fold tensor functor $C^r\\to C$ (for $r=0$, of the point along the unit $*\\to C$). Then:\\n\\n(1) for every $r\\geq0$ the operation $\\star_r:P(C)^r\\to P(C)$ preserves small colimits separately in each variable; hence $P(C)$ with the monoidal structure $Q_C$ is presentably monoidal;\\n\\n(2) the Yoneda functor has a strong monoidal enhancement $j^\\otimes:C^\\otimes\\to Q_C$: a coherent functor over $N(\\Delta^{\\mathrm{op}})$ carrying every cocartesian edge of $C^\\otimes$ to a cocartesian edge of $Q_C$, whose functor on fibres over $[r]$ is $j^r:C^r\\to P(C)^r$ under the Segal identifications. In particular it supplies coherent equivalences $j(c_1)\\star\\cdots\\star j(c_r)\\simeq j(c_1\\otimes\\cdots\\otimes c_r)$ for every $r\\geq0$, including $\\mathbf 1_{Q_C}\\simeq j(\\mathbf 1_C)$ for $r=0$. In the planar normal form of [lem-coef-monoidal-block-projection-coherence] for $C^\\otimes$ and $Q_C$, with reduced operations $c_r$ and $\\star_r$, these equivalences $\\star_rj^r\\simeq jc_r$ come with all tree-indexed compatibility simplices for substitution, grafting and unary identities, so that they form a morphism of unital planar operation systems;\\n\\n(3) $j^\\otimes$ is fully faithful: it induces equivalences on all mapping spaces of the total infinity categories over every base arrow.",
+ "source": {
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Section 5, first paragraph (Day convolution on P(C) defined as the pullback of RFib along the algebra classifying C^tensor), with the reference there to Chu-Haugseng, Free algebras through Day convolution (arXiv 2006.08269), Section 6, and to Glasman and Lurie HA 4.8.1 for the alternative Day models in which Yoneda is strong monoidal. The exact statement place in 2006.08269 Section 6 is not verified: that paper is not archived (WANTED). No Stacks tag states this infinity-categorical result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-complete-algebroid",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-day-relative-exponential-model",
+  "lem-coef-monoidal-block-projection-coherence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n -i yoneda Mathlib/CategoryTheory/Monoidal/DayConvolution*; rg -l -i 'monoidal.*yoneda|yoneda.*monoidal|rightFibration|RightFibration' Mathlib (in /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib)",
+   "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean (1-categorical Day convolution via CorepresentableBy of F ⊠ G, lines 180-281; no Yoneda strong monoidality statement); Monoidal/Types/Coyoneda.lean, Monoidal/DayConvolution/DayFunctor.lean, Monoidal/Cartesian/Mon.lean, Monoidal/Cartesian/GrpLimits.lean, Enriched/Ordinary/Basic.lean, Enriched/Basic.lean (1-categorical); no right fibrations or infinity-categorical Day convolution",
+   "date": "2026-10-18",
+   "verdict": "no match: Mathlib has only 1-categorical Day convolution; no quasicategorical right-fibration model or its monoidal Yoneda embedding"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-coef-operadic-day-convolution",
+  "date": "2026-10-18",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
