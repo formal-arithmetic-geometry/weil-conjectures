@@ -152,5 +152,28 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-a1e9b0126 (reviewer sub-agent of L); spot-checked: Read in full: the master statement and proof (order 1358) and the main-20261015 copy (order 1418, same statement and proof), the master and main-20261015 text of thm-weil-pbc-finite-extension, and the full DAG statements of every cited node. Also read, because they supply the hypotheses, cor-weil-pbc-geometric-fiber-finite, cor-weil-pbc-constructible-complete, prop-weil-pbc-rational-transport, def-weil-pbc-bounded-constructible-complete, prop-weil-pbc-preservation-constructible and thm-weil-pbc-complete-proetale. Coefficients: the raw localization Dbc(T_Proet,O_E)[1/varpi] is used throughout, with no identification with a condensed category. Base-change morphism: square (f, a_y, y, i_y, alpha=id), checked against the corner layout of def-weil-pbc-cartesian-square; substituting into the specified rational exchange gives exactly L y^* Rf_* K -> R a_{y,*} L i_y^* K in Dbc(Spec Omega,E). Statement change, accepted: the source's 'setup of the finite-level corollary' never makes the categories Dbc(T,E) defined (they need noetherian, finite-dimensional, ell invertible; example: Spec F_ell). The added hypotheses are exactly those of the parent theorem, and those on X_y and P (and a_y proper, the fibre bound) follow from X and Y, so nothing is weakened. Steps 1-2 are correctly marked elementary (fibre-product equality with alpha=id; unpacking the definition). Step 3 is a black-box application of thm-weil-pbc-finite-extension; every hypothesis was checked. Same unit, no tool_uses, no SGA. Edge cases checked: K=0, empty fibre, f=id, char Omega=ell (excluded), Omega any algebraically closed field. No new nodes; rg over dag/nodes found no duplicate (cor-weil-pbc-geometric-fiber-qbar cites this item). Fix (B3): the statement now cites def-pc-dimension for 'finite-dimensional' and dimension, in the text and in stmt_deps; the corrected item JSON is under fixes/dag/nodes/sec-proper-base-change/. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricFiberFiniteExtension",
+  "declaration": "AlgebraicGeometry.Scheme.geometricFiber_finiteExtension_properBaseChange",
+  "file": "lean/Sheaf/Paper/GeometricFiberFiniteExtension.lean",
+  "statement": "theorem geometricFiber_finiteExtension_properBaseChange (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{u}} (f : X ⟶ Y) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (ybar : Spec (.of Ω) ⟶ Y) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian (pullback f ybar)] [IsNoetherian (Spec (.of Ω))] (_dimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (_dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_dimFiber : ∃ n : ℕ, topologicalKrullDim (pullback f ybar : Scheme.{u}) ≤ (n : WithBot ℕ∞)) (_dimPoint : ∃ n : ℕ, topologicalKrullDim (Spec (.of Ω) : Scheme.{u}) ≤ (n : WithBot ℕ∞)) [IsProper f] [IsProper (pullback.snd f ybar)] (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlY : IsUnit (l : Γ(Y, ⊤))) (_hlFiber : IsUnit (l : Γ(pullback f ybar, ⊤))) (_hlPoint : IsUnit (l : Γ(Spec (.of Ω), ⊤))) (e : ℕ) (_hFibres : ∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (y : Spec (.of Ω') ⟶ Y), topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞)) : ∃ (hRf : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y l E (((pbcPadicCoefficientDatum l E).push f).obj K.obj)) (hRa : ∀ K : PbcBoundedConstructibleComplete (pullback f ybar) (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete (Spec (.of Ω)) l E (((pbcPadicCoefficientDatum l E).push (pullback.snd f ybar)).obj K.obj)) (hLy : ∀ K : PbcBoundedConstructibleComplete Y (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete (Spec (.of Ω)) l E (((pbcPadicCoefficientDatum l E).completedPull ybar).obj K.obj)) (hLi : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete (pullback f ybar) l E (((pbcPadicCoefficientDatum l E).completedPull (pullback.fst f ybar)).obj K.obj)), ∀ K : PbcRationalCategory X (pbcPadicCoefficientDatum l E) (Padic.coefficientExtensionUniformizer l E), IsIso (finiteExtensionRationalExchangeComponent l E (geometricFiberSquare f ybar) K (hLy ⟨((pbcPadicCoefficientDatum l E).push f).obj K.obj.obj, hRf K.obj⟩) (hRa ⟨((pbcPadicCoefficientDatum l E).completedPull (pullback.fst f ybar)).obj K.obj.obj, hLi K.obj⟩))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.geometricFiberSquare",
+   "AlgebraicGeometry.Scheme.geometricFiber_finiteExtension_properBaseChange"
+  ],
+  "fixed_by": "NT-stage2-Codex-644a00131"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-644a00131",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Statement, dependencies, sources, universes, edge cases and canonical exchange checked; scompile.py passed both compile checks. review.md records all findings. Complete fixes replace the placeholder second reading and add the square helper to lean.declarations. No mathematical changes or repository mutations."
  }
 }
