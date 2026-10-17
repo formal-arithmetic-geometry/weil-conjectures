@@ -11,7 +11,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration",
   "def-coef-infinity-fibrations",
-  "def-weil-pbc-trivial-kan-fibration"
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-infinity-pointwise-adjoint-criterion"
  ],
  "proof": [
   {
@@ -208,5 +210,30 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-027f0aeba (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged, its orientations are correct, and I tested it on {1}⊂Δ^1 (giving Λ^2_1), {0}⊂Δ^1 (fails the hypothesis, passes the dual) and empty B. The two special cases (adjoint, and one initial object per component) are true. Steps 1–5 check out: step 2 applies lem-coef-infinity-anodyne-cocones with k=∂Δ^n⊂Δ^n and step 4 with k=∅⊂Δ^0, step 3 writes out the lifting closure, and step 5 handles reversal correctly (Λ^n_i to Λ^n_{n−i}, (X⋆Y)^op=Y^op⋆X^op, (b↓j^op)≅(j↓b)^op). I checked step 6's unit–counit contraction square in Fun(Q,B) by hand, and step 7's representability argument. The new node lem-coef-infinity-cofinal-mono-right-anodyne is true by Kerodon 02NZ (2′) with 02N3 (Prop 7.2.1.3), which I fetched; its arrow comma matches 02NZ exactly. It is statement-only, self-contained, and not a restatement of the item. It duplicates none of the 11 nearby candidates I read (cofinal-comma-criterion, cofinality-space-test, cone-mono-right-anodyne and others). There is no cycle and no SGA citation; review_split passes. One fix: step 7 uses lem-cbc-enhanced-functor-cone-calculus from unit sk-prop-sf-cbc, which is outside this unit's route, while split_report.tool_uses was empty. I declared it in fixes/dag/nodes/sec-six-functors/lem-coef-cofinal-relative-join-slice-restriction.json and accept it as a black-box tool. HTT and HA are not archived (WANTED).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CofinalRelativeJoinSliceRestriction",
+  "declaration": "SSet.Enhanced.cofinal_relative_join_slice_restriction",
+  "declarations": [
+   "SSet.Enhanced.coherentSliceRestriction",
+   "SSet.Enhanced.relativeSliceRestrictionPullback",
+   "SSet.Enhanced.relativeSliceRestrictionMap",
+   "SSet.Enhanced.cofinal_relative_join_slice_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CofinalRelativeJoinSliceRestriction.lean",
+  "statement": "theorem cofinal_relative_join_slice_restriction {A B C D : SSet.{u}} [Quasicategory A] [Quasicategory B] [Quasicategory C] [Quasicategory D] (j : A ⟶ B) [Mono j] (_hj : Subfunctor.range j = fullSubcomplex B (Set.range (j.app (op ⦋0⦌)))) (p : C ⟶ D) (_hp : InnerFibration p) (f : B ⟶ C) : ((∀ b : B _⦋0⦌, IsContractible (comma A B j b false)) → modelCategoryQuillen.I.rlp (relativeCosliceRestrictionMap p j f)) ∧ ((∃ R : B ⟶ A, MappingBifunctorsEquivalent R j) → ∀ b : B _⦋0⦌, IsContractible (comma A B j b false)) ∧ ((∀ b : B _⦋0⦌, IsContractible (comma A B j b true)) → modelCategoryQuillen.I.rlp (relativeSliceRestrictionMap p j f)) ∧ (((∀ b : B _⦋0⦌, ∃! a : A _⦋0⦌, π₀.mk (j.app _ a) = π₀.mk b) ∧ (∀ (a : A _⦋0⦌) (b : B _⦋0⦌), π₀.mk (j.app _ a) = π₀.mk b → IsContractible (mappingSpace B (j.app _ a) b))) → ∀ b : B _⦋0⦌, IsContractible (comma A B j b true))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published coherent join coslice and canonical relativeCosliceRestrictionMap. The dual canonical map is constructed on the recorded joinSlice by restriction and postcomposition, with real extension-map data. The two added already-landed statement dependencies own the exact coslice and mapping-bifunctor-equivalence notions. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-927ac6de7",
+  "group": "NX",
+  "result": "pass",
+  "note": "Every clause matches the node, checked against the dependency declarations: full inclusion via Mono plus range = fullSubcomplex; comma false = b→j(a) and true = j(a)→b; MappingBifunctorsEquivalent R j makes R the left adjoint; relativeCosliceRestrictionMap and the new relativeSliceRestrictionMap are canonical pullback lifts with the stated targets; I.rlp includes n=0; the initial-component clause is exactly one selected vertex per π₀ class that is initial within its component. Edge cases empty B, empty A, {0}/{1}⊂Δ¹, several components all behave correctly. No hollow definitions, only the main theorem is sorry, docstrings and seven proof steps present, imports correct, lines ≤100. Node changes only in lean and stmt_deps (two landed nodes added, no cycle), lean.statement verbatim. Reusing relativeLimitSlicePostcomp is accepted (helper, no cycle). nt_compile --json rc 0 with no errors; control error rc 1."
  }
 }
