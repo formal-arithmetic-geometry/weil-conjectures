@@ -41,7 +41,6 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
       (.up ℤ)).obj Q) ⟶ N)
 
 set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The localized comparison on a direct sum is conjugate to the sum of the comparisons.
 Source: Stacks Project, Tag 0DJA(1), the tensor-inheritance argument, and Tag 0BYJ.
@@ -61,17 +60,12 @@ universal counit, ordinary tensor associator, scalar-extension adjunction,
 and tensorator are natural. The equations comparison_eq and localized_eq
 therefore identify the restriction of the comparison for the sum with the
 comparison for that summand. Coproduct extensionality gives the displayed
-square. The sum of K-flat A-complexes is K-flat, so these are valid derived
-representatives; no flatness of N or of A to C is used. For an empty family
+square. No K-flatness of Q or of the summands, no flatness of C over A tensor_R B,
+no flatness of N and no flatness of A to C is used. For an empty family
 all sources and targets are zero and the same coproduct argument applies.
 (blueprint: lem-pc-localized-tensor-comparison-direct-sum-square). -/
 theorem exists_localizedTensorComparison_direct_sum_square
-    (hC : Module.Flat (A ⊗[R] B) C)
-    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
-      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)
     {I : Type u} (U : I → CochainComplex (ModuleCat.{u} A) ℤ)
-    (hU : ∀ j (V : CochainComplex (ModuleCat.{u} A) ℤ), V.Acyclic →
-      (CochainComplex.mapBifunctor V (U j) (curriedTensor _)).Acyclic)
     (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (U j ⊗ Q) C)
     (mS : BaseDerivedTensorCohomologyModel R A B ((∐ U) ⊗ Q) C) (i : ℤ) :
     let F := (extendScalars.{u, u, u}

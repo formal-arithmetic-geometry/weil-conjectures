@@ -169,7 +169,7 @@ private theorem exists_gluedMonoOpenAtlas {I : Type u} (S : Scheme.{u}) (W : I �
     simpa only [D, Category.assoc, Limits.pullbackSymmetry_hom_comp_fst_assoc] using
       (D.glue_condition i k).symm
 
-/-- Compatible immersions over a point-indexed open cover descend to Cartesian charts.
+/-- Compatible immersions over a point-indexed family of opens descend to Cartesian charts.
 Source: Stacks Project, Tags 01JB and 01JC, applied to the characterized patches
 in the final paragraph of Tag 0BDL.
 (blueprint: lem-sc-compatible-immersion-gluing).
@@ -197,7 +197,7 @@ Proof:
    For empty S the point-indexed family is empty; take the empty scheme for Z
    and its unique map to S, and the chart assertions are vacuous. -/
 theorem exists_gluedCompatibleImmersionCharts (S : Scheme.{u})
-    (U : S → S.Opens) (hU : ∀ s : S, s ∈ U s)
+    (U : S → S.Opens)
     (W : S → Scheme.{u}) (j : ∀ s : S, W s ⟶ (U s).toScheme)
     (hj : ∀ s : S, IsImmersion (j s))
     (hcompat : ∀ (i k : S) {T : Scheme.{u}}
@@ -207,7 +207,6 @@ theorem exists_gluedCompatibleImmersionCharts (S : Scheme.{u})
     ∃ (Z : Scheme.{u}) (q : Z ⟶ S),
       ∀ i : S, ∃ e : W i ⟶ Z, IsPullback (j i) e (U i).ι q := by
   classical
-  have _ := hU
   let f : ∀ i : S, W i ⟶ S := fun i ↦ j i ≫ (U i).ι
   have (i : S) : IsImmersion (j i) := hj i
   have (i : S) : Mono (f i) := by dsimp [f]; infer_instance

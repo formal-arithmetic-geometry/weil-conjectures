@@ -50,7 +50,8 @@ Proof:
    them hold at some common later k. The comparison at k is an isomorphism.
 4. Transport the canonical tensor pushout along this isomorphism. Its restrictions
    are precisely f_k and the transition of the factor Q to B_s. Naturality gives
-   the asserted equality after passage to Y. All constructions work for zero
+   the asserted equality after passage to Y. The P-structure on A_k is the one
+   factored through the stage in step 1, so it maps to the given P-structure of X. All constructions work for zero
    rings and empty presentations, without flatness or injective transitions.
 -/
 theorem exists_tensor_model_algebra_stage
@@ -89,6 +90,15 @@ theorem exists_tensor_model_algebra_stage
          letI : Algebra D E := d.toAlgebra
          letI : Algebra Q E := qk.toAlgebra
          ∃ aPk : Algebra P D,
+           (letI : Algebra (F.obj i : Type v) (c.pt : Type v) :=
+              (c.ι.app i).hom.toAlgebra
+            let t : F.obj k →ₐ[F.obj i] c.pt :=
+              { (c.ι.app k).hom with
+                commutes' := fun s ↦ ConcreteCategory.congr_hom (c.w (homOfLE hik)) s }
+            letI := aPk
+            letI := aP
+            (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom.comp
+                (algebraMap P D) = algebraMap P ((c.pt : Type v) ⊗[F.obj i] A)) ∧
            letI := aPk
            letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
            letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
@@ -97,7 +107,7 @@ theorem exists_tensor_model_algebra_stage
              Algebra.IsPushout P D Q E) := by
   classical
   obtain ⟨r, hir, aPs, D, E, α, d, b, cD, cE, g, hD, hE,
-      hfilt, hcomm, hbij, hfp, htrans, hleft, hright⟩ :=
+      hfilt, hcomm, hbij, hfp, htrans, hleft, hright, hcompat⟩ :=
     exists_tensor_model_comparison_diagram F c hc f P Q aP e he
   let := hfilt
   obtain ⟨j, hj⟩ := CommRingCat.exists_bijective_stage_of_filtered_pushouts
@@ -115,7 +125,7 @@ theorem exists_tensor_model_algebra_stage
       (Algebra.TensorProduct.map (AlgHom.id (F.obj j.val) (F.obj j.val)) f).toRingHom
     let : Algebra Aₖ Bₖ := fk.toAlgebra
     let : Algebra Q Bₖ := qk.toAlgebra
-    refine ⟨aPs j, ?_⟩
+    refine ⟨aPs j, hcompat j, ?_⟩
     let : Algebra P Bₖ := (fk.comp (algebraMap P Aₖ)).toAlgebra
     let : IsScalarTower P Aₖ Bₖ := .of_algebraMap_eq fun _ ↦ rfl
     have hL : ek.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom = fk := hleft j

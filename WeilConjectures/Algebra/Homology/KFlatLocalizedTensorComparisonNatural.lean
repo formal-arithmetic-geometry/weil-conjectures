@@ -84,8 +84,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
+omit [HasDerivedCategory (ModuleCat.{u} A)] in
 /-- The localized coefficient comparison is natural on K-flat complexes.
 
 Source: Stacks Project, Tag 06Y6 (derived change of rings), Tag 0BYJ
@@ -110,14 +109,11 @@ isomorphisms. For the target, compose the inverse monoidal tensorator of
 C-extension with identity tensor t. Tensorator naturality and whisker exchange
 prove its naturality in the input complex. Take homology and compose with the
 previous comparison. Extend the ordinary model isomorphism to C; associativity
-and the component equation give the displayed equality. The flatness hypothesis
-on C and the derived category over A are retained as part of the existing
-signature, but this construction does not need them. No invertibility of t or
-K-flatness of N is used. Zero rings, zero complexes and unbounded complexes
+and the component equation give the displayed equality. No flatness of C, no
+invertibility of t and no K-flatness of N is used. Zero rings, zero complexes and unbounded complexes
 are covered by the same maps and tensor generator equations.
 (blueprint: lem-pc-kflat-localized-tensor-comparison-natural). -/
 theorem exists_kFlatLocalizedTensorComparison_natural
-    (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)
     (i : ℤ) :

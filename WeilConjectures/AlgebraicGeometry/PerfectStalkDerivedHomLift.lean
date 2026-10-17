@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
@@ -49,7 +50,11 @@ private theorem map_strictlyPerfect_of_mapFree
     exact T.map_id _
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem local_model_stalk_comparison
+/-- The comparison between the open stalk at `x` of a local model `P` of `G` on `U` and the
+stalk of `G` at `x`, in the derived category of the stalk ring, built from the given
+identification `eP` of the restriction of `G` with `P`: stalks commute with the derived
+restriction, and the stalk of a restriction is the original stalk. -/
+def perfectLocalModelStalkComparison
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]
@@ -62,14 +67,11 @@ private theorem local_model_stalk_comparison
     (eP : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj
         (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P) :
-    let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
-        ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hx⟩
-    letI : S.PreservesZeroMorphisms :=
-      AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X U ⟨x, hx⟩
-    Nonempty (DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj P) ≅
+    DerivedCategory.Q.obj
+        (((openModuleStalkFunctor X U ⟨x, hx⟩).mapHomologicalComplex (.up ℤ)).obj P) ≅
       DerivedCategory.Q.obj
         (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
-          (.up ℤ)).obj G)) := by
+          (.up ℤ)).obj G) := by
   let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
       ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hx⟩
   have : S.PreservesZeroMorphisms :=
@@ -92,7 +94,7 @@ private theorem local_model_stalk_comparison
     (.up ℤ)).obj G
   have : (Scheme.Modules.restrictFunctor U.ι).Additive :=
     Functor.additive_of_iso (Scheme.Modules.restrictFunctorIsoPullback U.ι).symm
-  obtain ⟨c⟩ := nonempty_restriction_stalk_extension_iso U.ι ⟨x, hx⟩ G
+  let c := (nonempty_restriction_stalk_extension_iso U.ι ⟨x, hx⟩ G).some
   let eρ := RingEquiv.ofBijective ρ
     (ConcreteCategory.bijective_of_isIso (U.ι.stalkMap ⟨x, hx⟩))
   have : A.IsEquivalence := ModuleCat.restrictScalars_isEquivalence_of_ringEquiv eρ
@@ -104,7 +106,7 @@ private theorem local_model_stalk_comparison
     ((A.mapHomologicalComplex (.up ℤ)).mapIso c).symm ≪≫
     ((NatIso.mapHomologicalComplex
       (asIso (ModuleCat.extendRestrictScalarsAdj ρ).unit) (.up ℤ)).app C).symm
-  exact ⟨d ≪≫ DerivedCategory.Q.mapIso q⟩
+  exact d ≪≫ DerivedCategory.Q.mapIso q
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An arbitrary derived stalk morphism lifts to a chain map between strictly perfect
@@ -115,11 +117,12 @@ original morphism or the lifted map is asserted.
 Source: Stacks Project, Tags 09RE (affine case), 0BC7 (2), 00CR, and 06Z0.
 (blueprint: lem-sc-perfect-stalk-derived-hom-lift).
 
-Proof: On the given affine open, the finite-free retract terms of P and Q are
+Proof: On an affine neighbourhood of x in U, the finite-free retract terms of P and Q are
 quasi-coherent and
 correspond to finite projective modules over the ring of sections. The complexes are
 bounded. Exactness of stalks identifies the stalks of the derived comparisons with the
-prime localizations of these module complexes, yielding comparison isomorphisms cG,cH.
+prime localizations of these module complexes. The comparison isomorphisms cG, cH are
+the canonical restriction comparison followed by `perfectLocalModelStalkComparison`.
 Transport the given morphism by cG and cH. Present the prime localization as the filtered
 colimit of principal localizations outside the prime (00CR). Surjectivity of the perfect
 Hom comparison (09RE, or 0BC7 (2)) descends this morphism to one principal localization.
@@ -135,7 +138,7 @@ theorem exists_affine_perfect_stalk_hom_lift
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]
     (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]
     (G H : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)
+    (U : X.Opens) (hxU : x ∈ U)
     (P Q : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)
@@ -158,25 +161,23 @@ theorem exists_affine_perfect_stalk_hom_lift
           ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩
       letI : S.PreservesZeroMorphisms :=
         AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩
-      ∃ (cG : DerivedCategory.Q.obj
-          ((S.mapHomologicalComplex (.up ℤ)).obj
-            (T.obj P)) ≅ DerivedCategory.Q.obj
-              (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
-                (.up ℤ)).obj G))
-        (cH : DerivedCategory.Q.obj
-          ((S.mapHomologicalComplex (.up ℤ)).obj
-            (T.obj Q)) ≅ DerivedCategory.Q.obj
-              (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
-                (.up ℤ)).obj H))
-        (f : T.obj P ⟶ T.obj Q),
+      let c : T ⋙ S.mapHomologicalComplex (.up ℤ) ≅
+          (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ) :=
+        Functor.mapHomologicalComplexCompIso
+          (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)
+      let cG := DerivedCategory.Q.mapIso (c.app P) ≪≫
+        perfectLocalModelStalkComparison X x U hxU G P iG
+      let cH := DerivedCategory.Q.mapIso (c.app Q) ≪≫
+        perfectLocalModelStalkComparison X x U hxU H Q iH
+      ∃ f : T.obj P ⟶ T.obj Q,
         DerivedCategory.Q.map
           ((S.mapHomologicalComplex (.up ℤ)).map f) =
             cG.hom ≫ t ≫ cH.inv := by
-  obtain ⟨a⟩ := local_model_stalk_comparison X x U hxU G P iG
-  obtain ⟨b⟩ := local_model_stalk_comparison X x U hxU H Q iH
-  obtain ⟨V, hxV, hV, hVU, cP, cQ, g, hg⟩ :=
+  let a := perfectLocalModelStalkComparison X x U hxU G P iG
+  let b := perfectLocalModelStalkComparison X x U hxU H Q iH
+  obtain ⟨V, hxV, hV, hVU, g, hg⟩ :=
     exists_affine_perfect_open_stalk_derived_hom_descent
-      X x U hxU hU P Q hP hQ (a.hom ≫ t ≫ b.inv)
+      X x U hxU P Q hP (a.hom ≫ t ≫ b.inv)
   let R := moduleRings X.toRingedSpace
   let T := (SheafOfModules.overMap.{u} R (homOfLE hVU : V ⟶ U)).mapHomologicalComplex
     (.up ℤ)
@@ -195,7 +196,7 @@ theorem exists_affine_perfect_stalk_hom_lift
   obtain ⟨f, hf⟩ := perfect_affine_map_representative X V hV (T.obj P) (T.obj Q)
     (map_strictlyPerfect_of_mapFree X U V F e P hP)
     (map_strictlyPerfect_of_mapFree X U V F e Q hQ) g
-  refine ⟨V, hxV, hV, hVU, cP ≪≫ a, cQ ≪≫ b, f, ?_⟩
+  refine ⟨V, hxV, hV, hVU, f, ?_⟩
   have hn := S.mapDerivedCategoryFactors.hom.naturality f
   change S.mapDerivedCategory.map (DerivedCategory.Q.map f) ≫
       (S.mapDerivedCategoryFactors.app (T.obj Q)).hom =

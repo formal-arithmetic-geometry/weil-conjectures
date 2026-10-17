@@ -75,7 +75,7 @@ theorem perfect_hom_continuity
   have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated s
   have htop := quasiCompactOpen_induction X (PerfectHomContinuityOn R c i X s)
     (perfect_hom_continuity_affine R c hc i X s)
-    (perfect_hom_continuity_union R c hc i X s) ⊤
+    (perfect_hom_continuity_union R c i X s) ⊤
     CompactSpace.isCompact_univ
   have hrange : Scheme.Hom.opensRange (𝟙 X) = ⊤ := by
     ext x

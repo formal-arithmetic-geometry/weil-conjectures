@@ -125,9 +125,7 @@ by geometric stalk conservativity, so every comparison for G is bijective. These
 the two cases in the displayed torsion alternative.
 -/
 theorem IsCurve.dense_open_baseChange_comparison {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
-      ((sheafCompose P.C.smallEtaleTopology
-        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj P.F)))
+    (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom
@@ -150,7 +148,6 @@ theorem IsCurve.dense_open_baseChange_comparison {k : Type u} [Field k] [IsAlgCl
       IsCurve.BaseChangeOfIsProper (ULift.{u + 1} ℤ) P.toSpec F →
       IsCurve.BaseChangeOfIsProper (ULift.{u + 1} ℤ) P.toSpec G) := by
   classical
-  have _hconstructible := hP
   have : IsCurve P.toSpec := P.isCurve
   have : LocallySmall.{u} P.C.Etale := locallySmall_self _
   dsimp only

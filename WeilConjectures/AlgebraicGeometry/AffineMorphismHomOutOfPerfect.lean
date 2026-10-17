@@ -112,7 +112,7 @@ theorem affineMorphism_hom_out_of_perfect
     (hTor : PullbackStalkTensor.IsTorIndependent f g)
     (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)
     (hK : schemeDerivedQCohProperty X K) :
-    IsIso (affineGlobalHomBaseChangeMap f g M K hM hK) :=
+    IsIso (affineGlobalHomBaseChangeMap f g M K) :=
     open Opposite TopologicalSpace in by
   classical
   obtain ⟨adj, s, adj', hadj, _, _, hadj'⟩ :=

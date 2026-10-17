@@ -75,11 +75,8 @@ theorem singleComplexBaseChangeQcqsInduction
       P U → P V → P (U ⊓ V) → P (U ⊔ V) := by
     intro U V hUqc hV hU hPV hUV
     have hVqc : IsCompact (V : Set X₀) := hV.isCompact
-    have hUVqc : IsCompact ((U ⊓ V : X₀.Opens) : Set X₀) :=
-      QuasiSeparatedSpace.inter_isCompact (U : Set X₀) (V : Set X₀)
-        U.isOpen hUqc V.isOpen hVqc
     exact singleComplexOpenComparison_union f₀ f₀' g₀ g₀' sq₀
-      K₀ hK₀ K₀' hK₀' φ₀ U V hUqc hVqc hUVqc hU hPV hUV
+      K₀ K₀' φ₀ U V hUqc hVqc hU hPV hUV
   have htop : P ⊤ := quasiCompactOpen_induction X₀ P h_affine h_union ⊤
     (by simpa using (isCompact_univ : IsCompact (Set.univ : Set X₀)))
   exact singleComplexOpenComparison_top f₀ f₀' g₀ g₀' sq₀.w K₀ K₀' φ₀ htop

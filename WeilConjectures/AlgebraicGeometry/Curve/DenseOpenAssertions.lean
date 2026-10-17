@@ -256,12 +256,12 @@ theorem IsCurve.dense_open_assertions {k : Type u} [Field k] [IsAlgClosed k]
     let G := T.obj ((Etale.openImmersionLowerShriek AddCommGrpCat.{u + 1} U.ι).obj
       ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj P.F))
     obtain ⟨hhigh, hprimary₁, hprimary₂⟩ :=
-      IsCurve.dense_open_vanishing_comparison P hP U hU
+      IsCurve.dense_open_vanishing_comparison P U hU
     obtain ⟨hfinite₁, hfinite₂, hproperFinite₁, hproperFinite₂⟩ :=
       IsCurve.dense_open_finiteness_comparison P hP U hU
     obtain ⟨hbase₁, hbase₂, hproperBase₁, hproperBase₂⟩ :=
-      IsCurve.dense_open_baseChange_comparison P hP U hU
-    have hrestrict := IsCurve.dense_open_restriction_comparison P hP U hU
+      IsCurve.dense_open_baseChange_comparison P U hU
+    have hrestrict := IsCurve.dense_open_restriction_comparison P U hU
     have hforward : IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec G →
         IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec F :=
       fun h ↦ (IsCurve.assertions_iff _ _ _).mpr

@@ -313,7 +313,6 @@ def canonicalTensorHomAdjunction (S : Scheme.{u}) (K : schemeDerivedCategory S) 
         (derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf)).obj (op K) :=
   (Classical.choose (exists_canonicalTensorHomAdjunction S)) K
 
-set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- Unfolding affine scalar restriction comparisons requires extra elaboration heartbeats.
 /-- The canonical comparison is specified by four equations, not mere existence of
@@ -343,8 +342,7 @@ theorem exists_globalHomPullbackComparison
     [∀ U : X.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u}
         ((moduleRings X.toRingedSpace).over U))]
-    (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)
-    (hK : schemeDerivedQCohProperty X K) :
+    (M K : schemeDerivedCategory X) :
     ∃ (φ : (schemeGlobalDerivedHomOver f).obj (op M, K) ⟶
         (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory.obj
           ((schemeGlobalDerivedHomOver (pullback.snd f g)).obj
@@ -464,14 +462,13 @@ def globalHomPullbackComparison
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)
     [∀ U : X.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
-    (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)
-    (hK : schemeDerivedQCohProperty X K) :
+    (M K : schemeDerivedCategory X) :
     (schemeGlobalDerivedHomOver f).obj (op M, K) ⟶
       (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory.obj
         ((schemeGlobalDerivedHomOver (pullback.snd f g)).obj
           (op ((derivedPullback (pullback.fst f g)).obj M),
             (derivedPullback (pullback.fst f g)).obj K)) :=
-  Classical.choose (exists_globalHomPullbackComparison f g M K hM hK)
+  Classical.choose (exists_globalHomPullbackComparison f g M K)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -484,8 +481,7 @@ def affineGlobalHomBaseChangeMap
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)
     [∀ U : X.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
-    (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)
-    (hK : schemeDerivedQCohProperty X K) :
+    (M K : schemeDerivedCategory X) :
     (affineDerivedExtension g).obj ((schemeGlobalDerivedHomOver f).obj (op M, K)) ⟶
       (schemeGlobalDerivedHomOver (pullback.snd f g)).obj
         (op ((derivedPullback (pullback.fst f g)).obj M),
@@ -495,6 +491,6 @@ def affineGlobalHomBaseChangeMap
     ((schemeGlobalDerivedHomOver (pullback.snd f g)).obj
       (op ((derivedPullback (pullback.fst f g)).obj M),
         (derivedPullback (pullback.fst f g)).obj K)) |>.symm
-    (globalHomPullbackComparison f g M K hM hK)
+    (globalHomPullbackComparison f g M K)
 
 end AlgebraicGeometry

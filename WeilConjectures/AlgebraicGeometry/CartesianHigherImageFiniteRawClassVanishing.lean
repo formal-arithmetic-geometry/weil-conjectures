@@ -76,7 +76,7 @@ theorem exists_cartesianHigherImage_finite_raw_classes_eq_zero
               (D.map a).left (Over.w (D.map a)).symm
               ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) = 0 := by
   classical
-  apply exists_cartesianHigherImage_finite_raw_assembly D c hc f F q i J V z
+  apply exists_cartesianHigherImage_finite_raw_assembly D c f F q i J V z
   intro t
   exact exists_cartesianHigherImage_single_raw_class_eq_zero D c hc f F q i
     (V t) (z t) (hz t)

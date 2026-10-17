@@ -65,14 +65,9 @@ theorem relativeMayerVietoris
     (hpull : IsPullback g' f' f g)
     [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f]
     (K : schemeDerivedCategory X)
-    (hK : schemeDerivedQCohProperty X K)
     (K' : schemeDerivedCategory X')
-    (hK' : schemeDerivedQCohProperty X' K')
     (φ : (derivedPullback g').obj K ⟶ K')
-    (U V : X.Opens)
-    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))
-    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X))
-    (hcover : U ⊔ V = ⊤)
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (hU : IsIso (schemeDerivedBaseChangeMap (U.ι ≫ f)
       (pullback.fst g' U.ι ≫ f') g (pullback.snd g' U.ι)
       (by rw [← pullback.condition_assoc, Category.assoc, hpull.w, ← Category.assoc])
@@ -119,8 +114,8 @@ theorem relativeMayerVietoris
       (schemeDerivedDirectImage f').map φ) := by
   classical
   obtain ⟨d₁, d₂, d₃, d₁', d₂', d₃', hT, hT', t, ht₁, ht₂, ht₃⟩ :=
-    relativeMV_canonicalTriangles f f' g g' hpull K hK K' hK' φ
-      U V hUqc hVqc hUVqc hcover
+    relativeMV_canonicalTriangles f f' g g' hpull K K' φ
+      U V hcover
   have h₂ := isIso_of_eq ht₂ (isIso_biprod_map hU hV)
   have h₃ := isIso_of_eq ht₃ hUV
   exact isIso_of_eq ht₁.symm (Pretriangulated.isIso₁_of_isIso₂₃ t hT hT' h₂ h₃)

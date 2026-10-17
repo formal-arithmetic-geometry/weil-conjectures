@@ -43,9 +43,7 @@ theorem exists_affineExtensionSections_underived_model
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙
         affineGlobalSections (𝟙 (Spec R)) ≅
       affineGlobalSections (𝟙 (Spec B)) ⋙
-        ModuleCat.restrictScalars.{u} (affineBaseRingMap g))
-    (_hv : ∀ (N : SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
-      (x : (affineGlobalSections (𝟙 (Spec B))).obj N), (v.hom.app N) x = x) :
+        ModuleCat.restrictScalars.{u} (affineBaseRingMap g)) :
     ∃ c : (@id (ModuleCat.{u} R ⥤
         SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))
         (tilde.functor R)) ⋙ affineGlobalSections (𝟙 (Spec R)) ⋙

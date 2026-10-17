@@ -62,7 +62,9 @@ theorem exists_finite_projective_open_stalk_maps_lift
   let : Fintype I := Fintype.ofFinite I
   let F := openModuleStalkFunctor X V ⟨x, hxV⟩
   choose m ι π hsplit using hM
-  obtain ⟨e, he⟩ := exists_open_stalk_free_map_local_lifts X V x hxV
+  have he := exists_open_stalk_free_map_local_lifts X V x hxV
+  let e := fun (W : X.Opens) (hxW : x ∈ W) (hWV : W ≤ V) ↦
+    openModuleStalkRestrictionComparison X V W hWV x hxV hxW
   choose D hxD hDV g hg using fun q ↦ he (m q) (N q) (F.map (π q) ≫ h q)
   let Z : X.Opens := T ⊓ ⨅ q, D q
   have hZT : Z ≤ T := inf_le_left

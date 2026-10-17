@@ -92,7 +92,7 @@ makes this tail nonempty. Empty Xi uses the empty family; zero modules and zero 
 use their zero presentations. No overlap identifications are claimed. -/
 theorem exists_finitePresentation_local_object_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
+    (R : I ⥤ CommRingCat.{u})
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

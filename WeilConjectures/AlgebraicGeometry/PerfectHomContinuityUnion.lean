@@ -54,7 +54,7 @@ the entire later tail, giving the second. These arguments also apply when U,
 V or their intersection is empty; the corresponding Hom groups are zero. -/
 theorem perfect_hom_continuity_union
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (X : Scheme.{u}) (s : X ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]
     [∀ Z : Scheme.{u},
@@ -71,7 +71,7 @@ theorem perfect_hom_continuity_union
   intro Y t _ ht s' hs' _ _ _ _ P Q hP hQ
   obtain ⟨H, d, ⟨hd⟩, ident, htransition, A, B, φ, a, b,
     hA, hB, h0, h1, h3, h4, hcanonical⟩ :=
-    perfect_hom_mayerVietoris_comparison R c hc i X s U V hU hV
+    perfect_hom_mayerVietoris_comparison R c i X s U V hU hV
       hcontU hcontV hcontUV Y t ht s' hs' P Q hP hQ
   have : IsIso (ComposableArrows.app' φ 0) := h0
   have : IsIso (ComposableArrows.app' φ 1) := h1

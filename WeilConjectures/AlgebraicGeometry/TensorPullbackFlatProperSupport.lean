@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
@@ -30,17 +31,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
-
-private theorem flatOver_of_iso
-    {X S : Scheme.{u}} (f : X ⟶ S) {G H : X.Modules} (eGH : G ≅ H)
-    (hflat : H.IsFlatOver f) : G.IsFlatOver f := by
-  intro V U e
-  let φ := (f.appLE V.1 U.1 e).hom
-  let : Module Γ(S, V.1) Γ(G, U.1) := Module.compHom _ φ
-  let : Module Γ(S, V.1) Γ(H, U.1) := Module.compHom _ φ
-  let E := (ModuleCat.restrictScalars φ).mapIso
-    ((SheafOfModules.evaluation (R := X.ringCatSheaf) (Opposite.op U.1)).mapIso eGH)
-  exact (Module.Flat.equiv_iff E.toLinearEquiv).mpr (hflat V U e)
 
 private theorem flatOver_restrict
     {X Y S : Scheme.{u}} (a : X ⟶ Y) [IsOpenImmersion a] (f : Y ⟶ S)
@@ -119,7 +109,7 @@ theorem tensorPullback_flat_proper_support
     let eg : Scheme.Modules.tensorPullbackObj p M ≅ N.restrict a :=
       (eqToIso (congrArg (fun q ↦ Scheme.Modules.tensorPullbackObj q M)
         hcart.isoPullback_hom_fst)).symm ≪≫ ec.app M ≪≫ ea.app N ≪≫ ei.app N
-    apply flatOver_of_iso fj eg
+    refine Scheme.Modules.IsFlatOver.of_iso (f := fj) eg.symm ?_
     simpa only [a, hcart.isoPullback_hom_snd] using
       flatOver_restrict a (pullback.snd fi k) N hn
   · -- Base change a closed subscheme structure on the support.

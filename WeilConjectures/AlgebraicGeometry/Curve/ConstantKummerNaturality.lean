@@ -48,9 +48,7 @@ theorem IsConnectedCurve.constant_kummer_baseChange_naturality
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]
-    (_hfin : (Set.range c.i.base)ᶜ.Finite)
-    (_hclosed : ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z))
-    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0)
+    (n : ℕ) [NeZero n] (hn : (n : k) ≠ 0)
     (r : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q →+
         Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q)
     (hr : (∀ q : ℕ, r q =
@@ -108,7 +106,7 @@ theorem IsConnectedCurve.constant_kummer_baseChange_naturality
     kummer_base_change_compatibility k K C f (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k
       K)))) (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (pullback.snd f
       (Spec.map (CommRingCat.ofHom (algebraMap k K))))
-      (IsPullback.of_hasPullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) n _hn
+      (IsPullback.of_hasPullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) n hn
   have hθ := constant_root_trivialization_baseChange f n ζ hζ hζK φ hφ₂
   have ht_apply (q : ℕ) (x : Sheaf.H (C.constantZMod n) q) :
       t q x = Sheaf.H.map (C.constantZModIsoRootsOfUnitySheaf n f hζ).hom q x :=

@@ -68,9 +68,7 @@ theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]
-    (_hfin : (Set.range c.i.base)ᶜ.Finite)
-    (_hclosed : ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z))
-    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0) :
+    (n : ℕ) [NeZero n] (hn : (n : k) ≠ 0) :
     ∃ r : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q →+
         Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q,
       (∀ q : ℕ, r q =
@@ -243,7 +241,7 @@ theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))).hom) q).comp
           (Etale.cohomologyMap π (C.constantZMod n) q)
   have hr : ∀ q, r q = _ := fun _ => rfl
-  have hlow := constant_low_degree_baseChange_bijective f c _hfin _hclosed n _hn r hr
+  have hlow := constant_low_degree_baseChange_bijective f c n hn r hr
   have hbij : ∀ q, Function.Bijective (r q) := by
     intro q
     by_cases hq : q ≤ 1
@@ -252,7 +250,7 @@ theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
       · subst q
         obtain hf | hC := isProper_or_isAffine f
         · have : IsProper f := hf
-          have : NeZero (n : k) := ⟨_hn⟩
+          have : NeZero (n : k) := ⟨hn⟩
           obtain ⟨_, _, ζ₀, hζ₀, hmap⟩ := IsSepClosed.exists_isPrimitiveRoot k n
           let t₀ : ∀ q, Sheaf.H (C.constantZMod n) q ≃+
               Sheaf.H (C.rootsOfUnitySheaf n) q :=
@@ -264,7 +262,7 @@ theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
               (P.constantZModIsoRootsOfUnitySheaf n fK
                 (hmap K (algebraMap k K)))).addCommGroupIsoToAddEquiv
           obtain ⟨_, e, eK, he, _, _⟩ := constant_proper_degree_coordinates
-            f c _hfin _hclosed n _hn r hr ζ₀ hζ₀ (hmap K (algebraMap k K))
+            f c n hn r hr ζ₀ hζ₀ (hmap K (algebraMap k K))
               t₀ tK₀ (fun _ => rfl) (fun _ => rfl)
           refine ⟨?_, ?_⟩
           · intro x y hxy
@@ -303,15 +301,15 @@ theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
   have ht : ∀ q, (t q).toAddMonoidHom = _ := fun _ => rfl
   have htK : ∀ q, (tK q).toAddMonoidHom = _ := fun _ => rfl
   obtain ⟨hpic, hboundary, hunits⟩ := constant_kummer_baseChange_naturality
-    f c _hfin _hclosed n _hn r hr ζ hζ hζK t tK ht htK
+    f c n hn r hr ζ hζ hζK t tK ht htK
   refine ⟨t, tK, ht, htK, hpic, hboundary, ?_, ?_, ?_, hunits, ?_⟩
   · intro hf
     have : IsProper f := hf
     obtain ⟨hgen, e₂, eK₂, he₂, hdegree, hdegreeK⟩ :=
-      constant_proper_degree_coordinates f c _hfin _hclosed n _hn
+      constant_proper_degree_coordinates f c n hn
         r hr ζ hζ hζK t tK ht htK
     obtain ⟨_, _, _, hgenK, _, _, _⟩ := genus_jacobian_invariant (K := K) f
-    obtain ⟨e₁⟩ := (sheafH_constantZMod_of_isProper f n _hn).2.1
+    obtain ⟨e₁⟩ := (sheafH_constantZMod_of_isProper f n hn).2.1
     let e : Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * c.g.genus) → ZMod n) :=
       by
         rw [← hgen]
