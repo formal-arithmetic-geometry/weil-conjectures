@@ -263,5 +263,38 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-ac74d7d7c (reviewer sub-agent of L); spot-checked: I read the item and every cited node statement in full. I checked them against Rezk (Rochester PDF, fetched and run through pdftotext): §5.1 (map_W and the trivial fibrations φ_n), §5.3, Prop 5.4, §5.5, and §11.2 with Prop 11.3 and Cor 11.5 (printed pp. 11-13 and 25). The statement matches the source hypothesis by hypothesis: Reedy fibrant plus Segal, no completeness, and Rezk's conventions for f^* and f_*. I checked all nine steps. Step 2: the fixed-vertex fiber T_n is the pullback of the trivial spine fibration. Step 3: two lifts are compared by lifting the endpoint cylinder. Step 4: I checked the horn indices for composing and reversing edges in the Kan complex Fun(K,Q). Step 5: I checked the triangle pairs 012/023 and 123/013 face by face, that (A_V→P)∘r_A = θ3, two-out-of-three, and that edge 03 gives c(c(a,b),h) and c(a,c(b,h)); associativity holds as a homotopy over the whole product. Step 6: units via s0 and s1, using d2s0 = s0d1 and d0s1 = s0d0. Steps 7-8: the α/β inverse paths are in the right order for all four composites. Step 9: weak equivalences and preservation/reflection on components. Edge cases tested: the discrete nerve of a category, empty mapping fibers, empty V, repeated vertices, disconnected V0. There are no new nodes and no cycle; the only citer is lem-coef-segal-equivalence-outer-horn step 2, and the item supports exactly what that step uses. The DAG search found no duplicate. Accepted tool uses: lem-cbc-simplicial-homotopy-equivalence-weak, and lem-cbc-kan-functor-space-kan (a Mathlib leaf, so declaring it is redundant). The report has two inaccuracies with no effect on the files: it claims created.item was changed, but the file correctly keeps lem-coef-segal-equivalence-outer-horn/Q23, and it mentions a citations.json that is not in the delivery. Maintenance note: the future split of the unsplit lem-coef-segal-homotopy-category-components must not cite this item, or it will create a cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalCompositionEquivalences",
+  "declaration": "SSet.Segal.composition_equivalences",
+  "declarations": [
+   "SSet.Segal.triangleVertices",
+   "SSet.Segal.triangleSubcomplex",
+   "SSet.Segal.triangleFiber",
+   "SSet.Segal.triangleEdge",
+   "SSet.Segal.triangleSegalMap",
+   "SSet.Segal.triangleComposite",
+   "SSet.Segal.IsTriangleSection",
+   "SSet.Segal.sectionComposition",
+   "SSet.Segal.identityFiberVertex",
+   "SSet.Segal.sectionPrecomposition",
+   "SSet.Segal.sectionPostcomposition",
+   "SSet.Segal.composition_equivalences"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalCompositionEquivalences.lean",
+  "statement": "theorem composition_equivalences (V : Space.{u}) (hV : IsSegal V) : (∀ x y z : (V.obj (op ⦋0⦌)) _⦋0⦌, Fibration (triangleSegalMap V x y z) ∧ Enhanced.IsWeakHomotopyEquivalence (triangleSegalMap V x y z) ∧ ∃ s : mappingFiber V x y ⊗ mappingFiber V y z ⟶ triangleFiber V x y z, IsTriangleSection V x y z s) ∧ (∀ (x y z : (V.obj (op ⦋0⦌)) _⦋0⦌) (s : mappingFiber V x y ⊗ mappingFiber V y z ⟶ triangleFiber V x y z), IsTriangleSection V x y z s → (∀ t : mappingFiber V x y ⊗ mappingFiber V y z ⟶ triangleFiber V x y z, IsTriangleSection V x y z t → Nonempty (SSet.Homotopy (sectionComposition V x y z s) (sectionComposition V x y z t))) ∧ Nonempty (SSet.Homotopy (triangleComposite V x y z) (triangleSegalMap V x y z ≫ sectionComposition V x y z s)) ∧ ∀ (a : (mappingFiber V x y) _⦋0⦌) (b : (mappingFiber V y z) _⦋0⦌), fiberEdge V x z ((sectionComposition V x y z s).app _ (a, b)) = fiberEdge V x y a ≫ fiberEdge V y z b) ∧ (∀ S : ∀ x y z : (V.obj (op ⦋0⦌)) _⦋0⦌, mappingFiber V x y ⊗ mappingFiber V y z ⟶ triangleFiber V x y z, (∀ x y z : (V.obj (op ⦋0⦌)) _⦋0⦌, IsTriangleSection V x y z (S x y z)) → (∀ x y z w : (V.obj (op ⦋0⦌)) _⦋0⦌, Nonempty (SSet.Homotopy ((sectionComposition V x y z (S x y z) ▷ mappingFiber V z w) ≫ sectionComposition V x z w (S x z w)) ((α_ (mappingFiber V x y) (mappingFiber V y z) (mappingFiber V z w)).hom ≫ (mappingFiber V x y ◁ sectionComposition V y z w (S y z w)) ≫ sectionComposition V x y w (S x y w)))) ∧ ∀ x y : (V.obj (op ⦋0⦌)) _⦋0⦌, Nonempty (SSet.Homotopy (sectionPrecomposition V x x y (S x x y) (identityFiberVertex V x)) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (sectionPostcomposition V x y y (S x y y) (identityFiberVertex V y)) (𝟙 _))) ∧ (∀ (x y : (V.obj (op ⦋0⦌)) _⦋0⦌) (f : (mappingFiber V x y) _⦋0⦌), IsIso (fiberEdge V x y f) → (∀ (z : (V.obj (op ⦋0⦌)) _⦋0⦌) (s : mappingFiber V x y ⊗ mappingFiber V y z ⟶ triangleFiber V x y z), IsTriangleSection V x y z s → Enhanced.IsWeakHomotopyEquivalence (sectionPrecomposition V x y z s f) ∧ ∀ g : (mappingFiber V y z) _⦋0⦌, IsIso (fiberEdge V x z ((sectionPrecomposition V x y z s f).app _ g)) ↔ IsIso (fiberEdge V y z g)) ∧ (∀ (w : (V.obj (op ⦋0⦌)) _⦋0⦌) (s : mappingFiber V w x ⊗ mappingFiber V x y ⟶ triangleFiber V w x y), IsTriangleSection V w x y s → Enhanced.IsWeakHomotopyEquivalence (sectionPostcomposition V w x y s f) ∧ ∀ g : (mappingFiber V w x) _⦋0⦌, IsIso (fiberEdge V w y ((sectionPostcomposition V w x y s f).app _ g)) ↔ IsIso (fiberEdge V w x g)))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded Segal space, strict mapping fibers, and homotopy category. Explicit fixed-vertex triangle and edge maps define composition from any supplied simplicial section; the theorem records all section-independence, associativity, unit, component-composition, long-edge, weak-equivalence and invertibility clauses. No sections are chosen from postponed existence proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-109b2b8ed",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, recorded Segal interface (Space/IsSegal/mappingFiber/homotopyCategory/fiberEdge/homotopyCategory_homs), right_proper_kan_quillen classes, Mathlib SSet.Homotopy. Every clause matches: strict triangle fiber over the three vertices, θ=(d₂,d₀) via δ2/δ0, c=s≫d₁(δ1), trivial fibration = Fibration ∧ IsWeakHomotopyEquivalence plus ∃ section, section independence, d₁≃cθ, fiberEdge composition equation, associativity with associator on the triple product, both unit homotopies with s₀x, invertible f gives weak equivalences for pre/postcomposition and IsIso preserve/reflect iffs; component action follows from the composition equation. No extra hypotheses or universe restriction; edge cases (empty V/fibers, repeated vertices) fine. Helpers are real, with docstrings; only sorry is the target theorem; no duplicate notion; dep nodes unchanged, item differs only in lean; statement field verbatim. nt_compile --json on the snapshot text: rc 0, no diagnostics."
  }
 }

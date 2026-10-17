@@ -273,5 +273,29 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-e6dc68541 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the full statements of the 5 cited nodes, both citers (ind-finite-poset-realization steps 4-6, symmetric-operadic-left-horn-filling step 4), the report and the source places. HTT 2.1.2.5/5.3.5.15(a) and Kerodon 02J5/0196/018J are cited by URL and not archived, so proof_origin is agent with WANTED recorded; step 8 cites Stacks 08NL, label definition-trivial-kan. The statement is unchanged and true. The least vertex is initial, so this is the left-anodyne orientation in the diagram variable of Delta^n * N(T). Tested on T={t}, on T={t<u} in an ordinary-category nerve (r is bijective, nerve is 2-coskeletal), on empty E_0, and on t only greatest (the statement fails there, so the hypothesis is used). The E_0 restriction is a pullback of the unrestricted map. Step 2: G is monotone because t is greatest in T^op, and the arrow retract identities hold; cone-mono's right-anodyne class is the same as anodyne-cocones'. Step 3: both hypotheses of the pushout-join clause hold, reversal sends Lambda^n_i to Lambda^n_{n-i} and is an automorphism of sSet, and the reversed domain is exactly D. Steps 4-7: the slice correspondence, the intersection (L*N(T)) cap (M*{t}) = L*{t}, closure of the extension class under pushout, transfinite composition and retract, and the E_0 source all check. Step 8 matches the trivial-Kan definition, with n=0 giving vertex surjectivity. All cited statements are in unit sk-prop-sf-biduality-general apart from one definition and one Mathlib leaf; no tool_uses; no SGA; no cycle. Zero new nodes: the snapshot confirms the helper was dropped. Duplicate search: lem-coef-cofinal-relative-join-slice-restriction (unsplit, 2026-10-17) is a generalization whose dual clause specializes to this item. It is not the same statement and is unproved, so I kept the item and noted the overlap for the maintainer. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InitialPosetSliceRestriction",
+  "declaration": "SSet.Enhanced.initialPosetSliceRestriction",
+  "declarations": [
+   "SSet.Enhanced.fullJoinSlice",
+   "SSet.Enhanced.initialVertex",
+   "SSet.Enhanced.initialPosetSliceRestriction"
+  ],
+  "statement": "theorem initialPosetSliceRestriction {T : Type u} [PartialOrder T] [OrderBot T] (E : SSet.{u}) [Quasicategory E] (P : E _⦋0⦌ → Prop) (p : nerve T ⟶ E) : ∃ r : fullJoinSlice P p ⟶ fullJoinSlice P (initialVertex (T := T) ≫ p), r ≫ pullback.fst (fullSubcomplex E P).ι (joinSliceProjection (initialVertex (T := T) ≫ p)) = pullback.fst (fullSubcomplex E P).ι (joinSliceProjection p) ∧ (∀ (n : SimplexCategoryᵒᵖ) (s : (fullJoinSlice P p).obj n), ((pullback.snd (fullSubcomplex E P).ι (joinSliceProjection (initialVertex (T := T) ≫ p))).app n (r.app n s)).extension = orderedJoinFunctor.map (𝟙 (stdSimplex.obj n.unop), initialVertex (T := T)) ≫ ((pullback.snd (fullSubcomplex E P).ι (joinSliceProjection p)).app n s).extension) ∧ modelCategoryQuillen.I.rlp r ∧ (∀ L M : SSet.{u}, ∀ j : L ⟶ M, Mono j → ∀ h : L ⟶ fullJoinSlice P p, ∀ v : M ⟶ fullJoinSlice P (initialVertex (T := T) ≫ p), h ≫ r = j ≫ v → ∃ c : M ⟶ fullJoinSlice P p, j ≫ c = h ∧ c ≫ r = v)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/InitialPosetSliceRestriction.lean",
+  "note": "The existential map is specified uniquely by its source projection and its entire join-extension formula in every simplicial degree. It is exactly restriction by id ⋆ initialVertex, not an arbitrary map over the source. The original node statement is unchanged. Helpers construct the source pullback and least-vertex inclusion from the recorded dependency data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-785f2bc26",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim in file. Clause-by-clause match: OrderBot least element, Quasicategory E, fullSubcomplex P (dependency definition), p : nerve T ⟶ E, fullJoinSlice = pullback of the recorded joinSliceProjection along fullSubcomplex.ι (real data), initialVertex = Yoneda point of mk₀ ⊥ (real data). r is fixed canonically by the degreewise id ⋆ initialVertex extension formula plus the over-E₀ equation; I.rlp is the recorded trivial-Kan match including n=0; Mono-j lifting clause in node order. Statement true (dual of HTT 2.1.2.5, initial vertex left anodyne); orientation checked on T={t<u}. Edge cases: empty T excluded, singleton, empty P, empty L/M, n=0. Single universe u forced by the JoinSliceSimplex dependency; a larger E with a smaller T is covered by ULift T, so no substantive restriction. Gates: one sorry (main theorem only; axioms include sorryAx), source and blueprint docstrings, 8-step proof docstring, no extra assumptions, no duplicates, no pro-etale substitute, Worker report and Second reading by Q39 present. nt_compile.py --json: rc=0, no diagnostics; control copy with a deliberate error confirmed diagnostics are reported. Cosmetic only: section numbers in report.md replaced by 'the project server', 'Joyal' for Lurie, unused proof-dependency imports."
  }
 }
