@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
+public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism.Point
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 
@@ -158,28 +159,48 @@ namespace TateOrientation
 
 variable [HasTateTwist Λ]
 
+/-- Blueprint `sk-cor-trace` (the trace isomorphism, twisted form): for `X` proper and
+geometrically connected over the algebraically closed field `k`, a self-injective finite
+coefficient ring `Λ` and any Tate orientation `γ`, the trace map
+`tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is bijective. Through the duality at `i = 0` it is evaluation at
+`1 ∈ H^0_c(X, Λ)`, `Hom(Ra_! Λ_X, Λ) ⟶ Hom(Λ, Λ)`
+(`AlgebraicGeometry.Etale.TateOrientation.bijective_traceMap_iff`), which is bijective as
+`H^0(X, Λ) = Λ` for the connected `X` and `Λ` is self-injective
+(`AlgebraicGeometry.Etale.bijective_comp_unit_rightDerivedLowerStar`). -/
+theorem bijective_traceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d) :
+    Function.Bijective γ.traceMap := by
+  have : ConnectedSpace X := GeometricallyConnected.connectedSpace_of_subsingleton (f := a)
+  rw [bijective_traceMap_iff]
+  have h := bijective_comp_unit_rightDerivedLowerStar (Λ := Λ) a
+    (leftDerivedUpperStarConstantComplexIso Λ a)
+  let α := (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).app
+    (constantComplex Λ X)
+  have : (fun h : (R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X) ⟶
+      𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ↦ unitClassCompactSupport Λ a ≫ h) =
+      (fun h ↦ ((derivedUpperStarLowerStarAdjunction _ a).unit.app (𝟙_ _) ≫
+        (R((a)_*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ a).hom) ≫
+          h) ∘ α.homFromEquiv := by
+    funext h
+    simp [unitClassCompactSupport, α, Iso.homFromEquiv]
+  rw [this]
+  exact h.comp α.homFromEquiv.bijective
+
 /-- Blueprint `sk-cor-trace` (the trace isomorphism, compactly supported form): for `X` smooth,
 proper and geometrically connected of pure dimension `d` over the algebraically closed field `k`,
-and any Tate orientation `γ`, the untwisted trace map
-`tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective. -/
-theorem bijective_untwistedTraceMap (γ : TateOrientation Λ a d) :
+a self-injective finite coefficient ring `Λ` (such as `A_{E,n} = 𝒪_E/ϖⁿ`) and any Tate
+orientation `γ`, the untwisted trace map `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective:
+the twisted trace is (`AlgebraicGeometry.Etale.TateOrientation.bijective_traceMap`), and over
+the algebraically closed `k` the Tate twists are trivial
+(`AlgebraicGeometry.Etale.TateOrientation.bijective_untwistedTraceMap_of_bijective_traceMap`). -/
+theorem bijective_untwistedTraceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d) :
     Function.Bijective γ.untwistedTraceMap :=
-  -- Proof sketch (blueprint): the duality `sk-thm-sf-identification` at `K = Λ_X` and `i = 0`
-  -- reads `H^0_c(X, Λ)^∨ ≅ H^{2d}(X, Λ)(d)`; `H^0_c = H^0` as `X` is proper, and
-  -- `H^0(X, Λ) = Λ` as `X` is connected (`sk-lem-finite`). The resulting isomorphism is the
-  -- counit of `Ra_! ⊣ Ra^!` read through `γ`, i.e. the trace map
-  -- (`traceMap_eq_unitClassCompactSupport_comp` for the twisted trace).
-  -- Missing: (i) `Hom(Ra_! Λ_X, Λ_Y) ⟶ Hom(Λ_Y, Λ_Y)`, evaluation at `1`, is bijective; for a
-  -- self-injective `Λ` this is `H^0(X, Λ) = Λ` plus `Ext^{>0}_Λ(-, Λ) = 0` in the point category,
-  -- for a general finite `Λ` it needs the perfectness of `RΓ(X, Λ)`; (ii) the untwisted form
-  -- needs `Λ_k(-d)` to lie in degree `0`, which `HasTateTwist` does not provide.
-  sorry
+  bijective_untwistedTraceMap_of_bijective_traceMap γ (bijective_traceMap a γ)
 
 /-- The untwisted trace on ordinary cohomology, `tr^{(-d)}_X : H^{2d}(X, Λ) ⟶ Λ(-d)`, is
 bijective: it is `AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap` read through
 `H^{2d}(X, Λ) ≃ H^{2d}_c(X, Λ)`. -/
 theorem bijective_untwistedTraceMap_comp_cohomologyAddEquivCompactSupport
-    (γ : TateOrientation Λ a d) :
+    [Module.Injective Λ Λ] (γ : TateOrientation Λ a d) :
     Function.Bijective (γ.untwistedTraceMap.comp (cohomologyAddEquivCompactSupport a
       (leftDerivedUpperStarConstantComplexIso Λ a) (2 * d)).toAddMonoidHom) :=
   (bijective_untwistedTraceMap a γ).comp (AddEquiv.bijective _)
@@ -239,7 +260,7 @@ invertible in `k`. Then:
    class `[x ⊂ X]` of every `k`-point `x ∈ X(k)` to `1`.
 
 See the module docstring for the form of the normalization. -/
-theorem traceIsomorphism :
+theorem traceIsomorphism [Module.Injective Λ Λ] :
     (∀ γ : TateOrientation Λ a d,
       Function.Bijective (γ.untwistedTraceMap.comp (cohomologyAddEquivCompactSupport a
         (leftDerivedUpperStarConstantComplexIso Λ a) (2 * d)).toAddMonoidHom)) ∧
