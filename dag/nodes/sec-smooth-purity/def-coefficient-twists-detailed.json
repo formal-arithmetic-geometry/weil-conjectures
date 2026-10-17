@@ -90,26 +90,28 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a9508b970",
-  "group": "Q133",
-  "result": "pass",
-  "note": "Checked immutable statements, all statement dependencies, sources, twist repair, normalized functors, universes, edge cases, docstrings, and route-pivot compliance. Both modules passed scompile.py with no diagnostics; branch head unchanged."
+  "reviewer": "NT-stage2-Codex-e95f18870",
+  "group": "Q118",
+  "result": "fix",
+  "note": "The delivery's `## Second reading by Q118` section is explicitly the worker's self-reading, so it does not satisfy the required independent second reading (H11). Replace that section with the independent reading recorded in the review; mathematical statements and Lean modules otherwise passed."
  },
  "lean": {
-  "module": "Sheaf.Paper.IntrinsicCoefficientTwists",
-  "declaration": "WeilConjectures.intrinsicQbarComplexTwistFunctor",
+  "module": "Sheaf.Paper.FixedFinitePositiveCoefficientTwist",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalTwist",
   "declarations": [
-   "WeilConjectures.intrinsicIntegralCoefficientTwist_mem",
-   "WeilConjectures.intrinsicIntegralCoefficientTwist",
-   "WeilConjectures.intrinsicQbarCoefficientTwist",
-   "WeilConjectures.intrinsicQbarComplexTwistFunctor"
+   "WeilConjectures.PurityFiniteSetting.diagonalCoefficientFinite",
+   "WeilConjectures.PurityFiniteSetting.diagonalExponent",
+   "WeilConjectures.PurityFiniteSetting.diagonalExponent_annihilates",
+   "WeilConjectures.PurityFiniteSetting.diagonalExponent_isUnit",
+   "WeilConjectures.PurityFiniteSetting.diagonalTwistEtale",
+   "WeilConjectures.PurityFiniteSetting.diagonalTwist"
   ],
-  "file": "lean/Sheaf/Paper/IntrinsicCoefficientTwists.lean",
-  "statement": "def intrinsicQbarComplexTwistFunctor (m : ℤ) : generalAlgebraicallyClosedConstructibleCategory l Ω W ⥤ generalAlgebraicallyClosedConstructibleCategory l Ω W",
+  "file": "lean/Sheaf/Paper/FixedFinitePositiveCoefficientTwist.lean",
+  "statement": "def diagonalTwist (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ)",
   "branch": "newtargets-dag",
-  "by": "Q133",
+  "by": "Q118",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Section 1(B) repair: the recorded algebraicClosureComplexTwistFunctor and rationalComplexTwistFunctor use the legacy rationalConstructibleCategory, not the intrinsic sfRationalConstructibleCategory required by this consumer and by the current recorded coefficient category. Preserve all old finite/integral/root-line constructions by public import; place the identical completed signed root line in sfIntegralConstructibleCategory, rationalize it at the least finite coefficient field, and define K(m) by the existing commonStageDerivedTensor. Thus the finite, integral, rational and Qbar coefficients retain the same root line and signed-power/dual definitions, with the Qbar operation now on the recorded intrinsic category. Only lean changes."
+  "note": "Section 1(B): preserve and publicly reexport IntrinsicCoefficientTwists, including all finite, signed, integral, rational and Qbar constructions. Its recorded primary interface is on the intrinsic Qbar category, while its reexported finiteComplexTwist is encoded in variable-ring SheafOfModules; neither is an object in the fixed-ring ModuleCat derived category of sfFiniteExceptionalAt. The conventions twistEtale also requires e divides n, which is absent from this consumer. This module exposes the existing positive finite root-line construction in the required fixed-ring coordinates, using l^n as an annihilator for every positive quotient level, and exact nu-star for its pro-etale realization. Each line is the existing finiteEtaleTateLine and each ordered shifted tensor is the existing affineLinearBaseCoefficient; no root, basis or orientation is chosen and no alternative Tate line is defined."
  }
 }

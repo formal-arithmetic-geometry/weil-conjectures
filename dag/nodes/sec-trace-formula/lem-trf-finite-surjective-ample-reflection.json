@@ -15,7 +15,8 @@
   "def-weil-surjective-morphism",
   "def-sc-invertible-module",
   "def-pc-module-pullback",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-invertible-pullback-tensor"
  ],
  "proof": [
   {
@@ -364,5 +365,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-b0b5bb168 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements, Stacks Tags 0B5V/0B5U/01YP/01E8/089W and related coherence/devissage sources. The seven steps correctly establish finite-surjective ampleness reflection, all hypotheses and edge cases check, no new nodes remain, no route-pivot or SGA violation occurs, and no step exceeds 2000 characters. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveAmpleReflection",
+  "declaration": "AlgebraicGeometry.isAmple_iff_tensorPullback_of_isFinite_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveAmpleReflection.lean",
+  "statement": "theorem isAmple_iff_tensorPullback_of_isFinite_surjective (R : Type u) [CommRing R] [IsNoetherianRing R] (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of R))] [Y.Over (Spec (CommRingCat.of R))] [IsProper (X ↘ Spec (CommRingCat.of R))] [IsProper (Y ↘ Spec (CommRingCat.of R))] (f : Y ⟶ X) [f.IsOver (Spec (CommRingCat.of R))] [IsFinite f] [Surjective f] (L : X.Modules) [L.IsInvertible] : Scheme.Modules.IsAmple X L ↔ @Scheme.Modules.IsAmple Y ((Scheme.Modules.tensorPullback f).obj L) ((Scheme.Modules.invertible_pullback_tensor f).1 L |>.2)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-231aa8754",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Reviewed source, node, dependencies, declarations, docstrings, edge cases, route-pivot compliance, and report sections; independent scompile.py verification passed with exit code 0. review.md written; no fixes needed."
  }
 }

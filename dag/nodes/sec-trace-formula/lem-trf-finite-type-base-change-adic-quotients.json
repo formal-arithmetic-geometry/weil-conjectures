@@ -213,5 +213,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-ae7f0c5fe (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. Verified all six steps against Stacks 05GG, 05GI, and 00CT, including Q=qD, the canonical localized morphism, and transition compatibility. Edge cases pass; no new nodes, long steps, circularity, forbidden machinery, or repairs. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteTypeBaseChangeAdicQuotients",
+  "declaration": "RingTheory.finiteTypeBaseChangeAdicQuotients",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeBaseChangeAdicQuotients.lean",
+  "statement": "theorem finiteTypeBaseChangeAdicQuotients {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] {C : Type v} [CommRing C] [Algebra R C] (hC : RingHom.FiniteType (algebraMap R C)) (q : Ideal C) [q.IsPrime] (hq : Ideal.map (algebraMap R C) (IsLocalRing.maximalIdeal R) ≤ q) (Q : Ideal (TensorProduct R C (AdicCompletion (IsLocalRing.maximalIdeal R) R))) [Q.IsPrime] (hQC : Ideal.comap (Algebra.TensorProduct.includeLeft (R := R) (S := R) (A := C) (B := AdicCompletion (IsLocalRing.maximalIdeal R) R)).toRingHom Q = q) (hQR : Ideal.comap (Algebra.TensorProduct.includeRight (R := R) (A := C) (B := AdicCompletion (IsLocalRing.maximalIdeal R) R)).toRingHom Q = IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal R) R)) : ∃ e : ∀ n : ℕ, (Localization.AtPrime q ⧸ (IsLocalRing.maximalIdeal (Localization.AtPrime q)) ^ (n + 1)) ≃+* (Localization.AtPrime Q ⧸ (IsLocalRing.maximalIdeal (Localization.AtPrime Q)) ^ (n + 1)), (∀ (n : ℕ) (x : Localization.AtPrime q), e n (Ideal.Quotient.mk _ x) = Ideal.Quotient.mk _ (Localization.localRingHom q Q (Algebra.TensorProduct.includeLeft (R := R) (S := R) (A := C) (B := AdicCompletion (IsLocalRing.maximalIdeal R) R)).toRingHom hQC.symm x)) ∧ ∀ (n k : ℕ) (hnk : n ≤ k), (Ideal.Quotient.factor (R := Localization.AtPrime Q) (Ideal.pow_le_pow_right (Nat.add_le_add_right hnk 1))).comp (e k).toRingHom = (e n).toRingHom.comp (Ideal.Quotient.factor (R := Localization.AtPrime q) (Ideal.pow_le_pow_right (Nat.add_le_add_right hnk 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5679f05f5",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Recorded review.md. Verified immutable files, all hypotheses and conclusions, dependencies, sources, universes, edge cases, docstrings, and route-pivot compliance. Snapshot compile passed in sandbox and library modes; no fixes needed."
  }
 }

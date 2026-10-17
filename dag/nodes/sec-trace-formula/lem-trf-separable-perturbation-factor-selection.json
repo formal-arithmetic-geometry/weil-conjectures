@@ -24,7 +24,8 @@
   "def-kun-separably-closed",
   "def-weil-polynomial-ring",
   "def-weil-rational-function-field",
-  "def-pc-separable-polynomial"
+  "def-pc-separable-polynomial",
+  "lem-trf-abhyankar-inequality"
  ],
  "proof": [
   {
@@ -236,5 +237,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-b44cd6a02 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, unit route, delivery instructions/errors, Temkin Proposition 4.3.1 at the cited place, and Mathlib declarations. The proof and hypotheses are correct; edge cases, duplicates, searches, route, and short-step rule check out. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SeparablePerturbationFactorSelection",
+  "declaration": "ValuationSubring.exists_separable_irreducible_transcendental_residue",
+  "file": "lean/Sheaf/TraceFormula/SeparablePerturbationFactorSelection.lean",
+  "statement": "theorem exists_separable_irreducible_transcendental_residue {K : Type u} [Field K] [IsSepClosed K] (O : ValuationSubring (RatFunc K)) (f : Polynomial K) (hf_monic : f.Monic) (hf_irreducible : Irreducible f) (π : Kˣ) (v : Oˣ) (hv : ((v : O) : RatFunc K) = Polynomial.eval₂ (algebraMap K (RatFunc K)) RatFunc.X f / algebraMap K (RatFunc K) (π : K)) (htrans : @Transcendental (IsLocalRing.ResidueField (O.comap (algebraMap K (RatFunc K)))) (IsLocalRing.ResidueField O) _ _ (O.comapResidueFieldMap (algebraMap K (RatFunc K))).toAlgebra (IsLocalRing.residue O (v : O))) : (∃ (g : Polynomial K) (π' : Kˣ) (w : Oˣ), g.Monic ∧ g.Separable ∧ Irreducible g ∧ ((w : O) : RatFunc K) = Polynomial.eval₂ (algebraMap K (RatFunc K)) RatFunc.X g / algebraMap K (RatFunc K) (π' : K) ∧ @Transcendental (IsLocalRing.ResidueField (O.comap (algebraMap K (RatFunc K)))) (IsLocalRing.ResidueField O) _ _ (O.comapResidueFieldMap (algebraMap K (RatFunc K))).toAlgebra (IsLocalRing.residue O (w : O))) ∧ (∀ g : Polynomial K, g.Monic → g.Separable → Irreducible g → g.degree = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bf783de27",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Statement matches the node verbatim; dependencies, docstrings, edge cases, canonical residue map, and postponed proof were checked. scompile.py passed sandbox and library compilation; report sections are present."
  }
 }
