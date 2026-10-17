@@ -26,7 +26,7 @@ of `thm-asd-smooth-tensor` (through `cor-amb-affine-space-adjunction`).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekAdjunction_projectiveLine`
+- `AlgebraicGeometry.Etale.exists_rightDerivedLowerStarAdjunction_projectiveLine`
   (`thm-amb-p1-adjunction`)
 - `AlgebraicGeometry.Etale.satisfiesSmoothDuality_projectiveLine`
 - `AlgebraicGeometry.Etale.affineLineSmoothDuality`
@@ -34,12 +34,15 @@ of `thm-asd-smooth-tensor` (through `cor-amb-affine-space-adjunction`).
 ## Implementation notes
 
 The twist `Λ(1)` is not a datum of the coefficient ring here (smooth duality does not choose an
-orientation), so `thm-amb-p1-adjunction` is stated with an unnamed locally constant sheaf `T` of
-free rank-one `Λ`-modules in place of `Λ_S(1)`, and an unnamed `t` in place of the trace. For the
-proper morphism `q` the direct image with compact support `Rq_!` is the direct image `Rq_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and the adjunction
-is stated for `Rq_!` together with its projection map
-(`AlgebraicGeometry.Etale.projectionMap`).
+orientation), so `thm-amb-p1-adjunction` is stated with an unnamed object `T`, a locally
+constant sheaf of free rank-one `Λ`-modules placed in degree `-2`, in place of `Λ_S(1)[2]`, and
+an unnamed `t` in place of the trace. The blueprint states the projective-line computation over
+a Noetherian base; the adjunction is
+stated here over an arbitrary base, as `cor-amb-affine-space-adjunction`
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`). For the
+proper morphism `q`, the direct image with compact support `Rq_!` is `Rq_*`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), compatibly with the
+projection maps, which transports the adjunction to `Rq_!`.
 -/
 
 @[expose] public section
@@ -69,41 +72,45 @@ derived categories of étale sheaves of `Λ`-modules,
 
 `Rq_* ⊣ q^*(1)[2]`,
 
-and the counit is the trace counit of `def-amb-p1-trace`: for every `N`,
+and the counit is the trace counit `ε` of `def-amb-p1-trace`: for every `N`,
 `ε_N : Rq_*(q^* N (1)[2]) ≅ N ⊗ᴸ Rq_* Λ(1)[2] ⟶ N` is the inverse of the projection formula
 followed by `1 ⊗ t_q`, for the trace `t_q : Rq_* Λ(1)[2] ⟶ Λ_S`.
 
 Here `T = Λ_S(1)[2]` is a locally constant sheaf of free rank-one `Λ`-modules placed in degree
-`-2`, the functor `q^*(-)(1)[2]` is `N ↦ q^* T ⊗ᴸ q^* N`, `Rq_*` is the direct image with compact
-support `Rq_!` of the proper morphism `q`, with its projection map, and the counit is
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekLinearCounit` of `t = t_q`. This is a node of
-the blueprint subsection `sk-prop-geo-p1-adjunction`. -/
-theorem exists_rightDerivedLowerShriekAdjunction_projectiveLine (S : Scheme.{u})
+`-2`, the functor `q^*(-)(1)[2]` is `N ↦ q^* T ⊗ᴸ q^* N`, and the counit is
+`AlgebraicGeometry.Etale.rightDerivedLowerStarLinearCounit` of `t = t_q`, built from the
+projection formula `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap` of `Rq_*`. This
+is a node of the blueprint subsection `sk-prop-geo-p1-adjunction`. -/
+theorem exists_rightDerivedLowerStarAdjunction_projectiveLine (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     ∃ (T : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
       (_ : IsShiftedRankOneLocalSystem T 2)
-      (t : (R(ProjectiveLine S ↘ S)_![ModuleCat.{u + 1} Λ]).obj
+      (t : (R((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ])).obj
           ((L((ProjectiveLine S ↘ S)^*[ModuleCat.{u + 1} Λ])).obj T) ⟶ 𝟙_ _)
-      (adj : R(ProjectiveLine S ↘ S)_![ModuleCat.{u + 1} Λ] ⊣
+      (adj : R((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ]) ⊣
         L((ProjectiveLine S ↘ S)^*[ModuleCat.{u + 1} Λ]) ⋙
           (derivedTensor (ModuleCat.{u + 1} Λ) (ProjectiveLine S)).obj
             ((L((ProjectiveLine S ↘ S)^*[ModuleCat.{u + 1} Λ])).obj T)),
-      ∀ N, adj.counit.app N = rightDerivedLowerShriekLinearCounit (ProjectiveLine S ↘ S) _ t N :=
+      ∀ N, adj.counit.app N = rightDerivedLowerStarLinearCounit (ProjectiveLine S ↘ S) _ t N :=
   sorry
 
 /-- **Smooth duality for the projective line.** For `q : ℙ¹_S ⟶ S`, with the exponent of `Λ`
 invertible on `S`, the dualizing complex `ω_q` is a locally constant sheaf of free rank-one
 `Λ`-modules placed in degree `-2`, and the canonical tensor maps `θ_{q,K}` are isomorphisms: the
-counit of the projective-line adjunction (`thm-amb-p1-adjunction`) is linear. -/
+counit of the projective-line adjunction (`thm-amb-p1-adjunction`) is linear, and so is its
+transport along `Rq_! ≅ Rq_*`
+(`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriek_adjunction_of_rightDerivedLowerStar`). -/
 theorem satisfiesSmoothDuality_projectiveLine (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     SatisfiesSmoothDuality Λ (ProjectiveLine S ↘ S) 2 := by
   intro _
-  obtain ⟨T, hT, t, adj, hadj⟩ := exists_rightDerivedLowerShriekAdjunction_projectiveLine Λ S
+  obtain ⟨T, hT, t, adj, hadj⟩ := exists_rightDerivedLowerStarAdjunction_projectiveLine Λ S
+  obtain ⟨t', adj', hadj'⟩ := exists_rightDerivedLowerShriek_adjunction_of_rightDerivedLowerStar
+    (A := ModuleCat.{u + 1} Λ) (ProjectiveLine S ↘ S) _ t adj hadj
   obtain ⟨e⟩ := nonempty_dualizingComplex_iso_of_adjunction (A := ModuleCat.{u + 1} Λ)
-    (ProjectiveLine S ↘ S) _ t adj hadj
+    (ProjectiveLine S ↘ S) _ t' adj' hadj'
   exact ⟨(hT.leftDerivedUpperStar _).of_iso e.symm, fun K ↦
     (isIso_dualizingComplexTensorMapOfIsIso_of_adjunction (A := ModuleCat.{u + 1} Λ)
-      (ProjectiveLine S ↘ S) _ t adj hadj K).1⟩
+      (ProjectiveLine S ↘ S) _ t' adj' hadj' K).1⟩
 
 /-- The standard chart `𝔸¹_S ⟶ ℙ¹_S`, `x ↦ [x : 1]`, with the affine line indexed by
 `ULift (Fin 1)`. -/

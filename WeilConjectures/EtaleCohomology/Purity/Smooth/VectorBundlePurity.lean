@@ -9,6 +9,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundle
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarConjugation
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
 
 /-!
 # Vector-bundle purity
@@ -366,7 +368,107 @@ theorem nonempty_iso_rightDerivedUpperShriek
   exact ⟨t.symm ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) V).obj _).mapIso ω ≪≫
     (((derivedTensor (ModuleCat.{u + 1} Λ) V).obj _).commShiftIso (2 * (d : ℤ))).app _⟩
 
+include aS in
+/-- Blueprint `def-amb-vector-integration`: Integration along a vector bundle
+
+The *integration map* `t_π : Rπ_! Λ_V(d)[2d] ⟶ Λ_S` of a vector bundle of rank `d`: the transpose
+under `Rπ_! ⊣ Rπ^!` of an isomorphism `Λ_V(d)[2d] ≅ ω_π`, which exists by vector-bundle purity
+(`AlgebraicGeometry.VectorBundle.nonempty_iso_dualizingComplex`), glued from the affine-space
+integrations of the charts.
+
+The isomorphism is chosen: the composition isomorphisms of the exceptional inverse images, from
+which the blueprint's normalization of the local integrations by the projective-line trace would
+be read, are only recorded up to existence in this repository. Its transpose is an isomorphism
+(`AlgebraicGeometry.VectorBundle.isIso_integrationTranspose`), and the induced purity map
+`Λ_V(d)[2d] ⊗ Lπ^* K ⟶ Rπ^! K` is an isomorphism for every `K`
+(`AlgebraicGeometry.VectorBundle.isIso_purityMap`). -/
+noncomputable def integration :
+    (R(π)_![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ V d)⟦2 * (d : ℤ)⟧) ⟶ constantComplex Λ S :=
+  ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) π).homEquiv _ _).symm
+    (E.nonempty_iso_dualizingComplex Λ aS).some.inv
+
+/-- The transpose `Λ_V(d)[2d] ⟶ Rπ^! Λ_S = ω_π` of the integration map. -/
+noncomputable def integrationTranspose :
+    (tateObject Λ V d)⟦2 * (d : ℤ)⟧ ⟶ dualizingComplex (ModuleCat.{u + 1} Λ) π :=
+  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) π).homEquiv _ _ (E.integration Λ aS)
+
+lemma integrationTranspose_eq :
+    E.integrationTranspose Λ aS = (E.nonempty_iso_dualizingComplex Λ aS).some.inv := by
+  simp [integrationTranspose, integration]
+
+/-- The transpose of the integration map is an isomorphism `Λ_V(d)[2d] ≅ ω_π`. -/
+instance isIso_integrationTranspose : IsIso (E.integrationTranspose Λ aS) := by
+  rw [integrationTranspose_eq]
+  infer_instance
+
+/-- The purity map `Λ_V(d)[2d] ⊗ Lπ^* K ⟶ Rπ^! K`: the transpose of the integration map,
+followed by the canonical map `ω_π ⊗ Lπ^* K ⟶ Rπ^! K`, the mate of the projection formula
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`). It is the adjoint of
+`Rπ_!(Λ_V(d)[2d] ⊗ Lπ^* K) ≅ Rπ_! Λ_V(d)[2d] ⊗ K ⟶ K`, `1 ⊗ t_π`. -/
+noncomputable def purityMap
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) V).obj ((tateObject Λ V d)⟦2 * (d : ℤ)⟧)).obj
+        ((L((π)^*[ModuleCat.{u + 1} Λ])).obj K) ⟶ (R(π)^![ModuleCat.{u + 1} Λ]).obj K :=
+  ((derivedTensor (ModuleCat.{u + 1} Λ) V).map (E.integrationTranspose Λ aS)).app _ ≫
+    dualizingComplexTensorMap Λ π K
+
+/-- Blueprint `thm-amb-vector-bundle-purity`: Vector-bundle purity before smooth orientation
+
+Let `π : V ⟶ S` be a vector bundle of rank `d` over a separated scheme of finite type over a
+field, on which the exponent of the finite coefficient ring `Λ` is invertible. For every complex
+`K` of étale `Λ`-modules on `S`, the adjoint of
+`Rπ_!(Λ_V(d)[2d] ⊗ Lπ^* K) ≅ Rπ_! Λ_V(d)[2d] ⊗ K ⟶ K`, `1 ⊗ t_π`, is an isomorphism
+
+`Λ_V(d)[2d] ⊗ Lπ^* K ≅ Rπ^! K`
+
+(`AlgebraicGeometry.VectorBundle.purityMap`): the transpose of the integration is an isomorphism,
+and so is the mate of the projection formula, by cohomological smoothness (`thm-asd-smooth-tensor`). -/
+theorem isIso_purityMap
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (E.purityMap Λ aS K) := by
+  have := E.smoothOfRelativeDimension
+  have := isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := d) π K
+  unfold purityMap
+  infer_instance
+
 end Purity
+
+/-! ### Transport to the pro-étale site -/
+
+section ProEtale
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
+  [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] [HasCompactification π]
+  {k : Type u} [Field k] (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
+
+include aS in
+/-- Blueprint `cor-pur-vector-bundle-purity`: Vector-bundle purity
+
+Blueprint `sk-prop-an`: vector-bundle purity on the pro-étale site. For a vector bundle
+`π : V ⟶ S` of rank `d` and a bounded below complex `K` of étale `Λ`-modules on `S`, with
+pro-étale avatar `ν^* K`,
+
+`Rπ^! (ν^* K) ≅ ν^* (Lπ^* K (d)[2d])`
+
+in `D(V_proét, Λ)`. The pro-étale `Rπ^!` is `ν^* ∘ π^× ∘ Rν_*`
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), `Rν_* ν^* K ≅ K` by the site comparison
+(`thm-weil-pbc-site-comparison`), and `π^× K ≅ Lπ^* K (d)[2d]` is the étale vector-bundle purity
+(`AlgebraicGeometry.VectorBundle.nonempty_iso_rightDerivedUpperShriek`). -/
+theorem nonempty_iso_proEtale_rightDerivedUpperShriek
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : _root_.DerivedCategory.TStructure.t.plus K) :
+    Nonempty ((ProEtale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) π).obj
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) S).mapDerivedCategory.obj K) ≅
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) V).mapDerivedCategory.obj
+        ((twistShift Λ V d).obj ((L((π)^*[ModuleCat.{u + 1} Λ])).obj K))) := by
+  have := ProEtale.isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) S K hK
+  obtain ⟨e⟩ := E.nonempty_iso_rightDerivedUpperShriek Λ aS K
+  exact ⟨(ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) V).mapDerivedCategory.mapIso
+    ((R(π)^![ModuleCat.{u + 1} Λ]).mapIso
+      (asIso ((ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) S).unit.app K)).symm ≪≫
+      e)⟩
+
+end ProEtale
 
 end VectorBundle
 
