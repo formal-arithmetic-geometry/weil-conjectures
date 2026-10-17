@@ -11,9 +11,68 @@
   "def-sp-abelian",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose common integers $a\\le b$ with $F^aT=T$ and $F^bT=0$ for $T=X,Y,Z$, by taking $a$ to be the minimum of the three whole-object bounds and $b$ the maximum of $a$ and the three zero bounds [def-sp-filtration]. Put $K=(X\\xrightarrow{u}Y\\xrightarrow{v}Z)$ in cochain degrees $0,1,2$, zero elsewhere. The equation $vu=0$ makes this a complex, and preservation of filtrations makes each $F^pK$ a subcomplex. Its quotient $K/F^pK$ and $\\operatorname{gr}^pK=F^pK/F^{p+1}K$ have the termwise quotient objects and induced differentials: the square-zero identity descends from $vu=0$. In all these three-term complexes, $H^1$ means the quotient of the kernel of the second map by the image of the first. Thus the hypothesis says $H^1(\\operatorname{gr}^pK)=0$ for every integer $p$.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0121 (definition-filtered), 05QH (lemma-filtered-acyclic), hypotheses and part (1)"
+   }
+  },
+  {
+   "text": "Prove $H^1(F^pK)=0$ for every $p$ by descending induction from $b$. For $p\\ge b$ the complex is zero. If it holds at $p+1$, the sequence $0\\to F^{p+1}K\\to F^pK\\to\\operatorname{gr}^pK\\to0$ is short exact in each degree: its first map is a subobject inclusion and its last object is its cokernel. Apply [lem-weil-pbc-complex-ses-homology-long-exact]. The resulting exact segment $H^1(F^{p+1}K)\\to H^1(F^pK)\\to H^1(\\operatorname{gr}^pK)$ has zero outside terms, so its middle object is zero. Iterating $b-p$ times proves the assertion for $a\\le p\\le b$. For $p\\le a$ the complex equals $K=F^aK$, and for $p\\ge b$ it is zero. Consequently every $F^pX\\to F^pY\\to F^pZ$ is exact, and the case $p=a$ proves $X\\to Y\\to Z$ exact.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05QH (lemma-filtered-acyclic), parts (2), (5); its filtration induction made explicit using Tag 0117 (lemma-long-exact-sequence-cochain)"
+   }
+  },
+  {
+   "text": "Prove $H^1(K/F^pK)=0$ by ascending induction from $a$. At $p=a$ the quotient complex is zero. For $a\\le p<b$, the natural sequence $0\\to\\operatorname{gr}^pK\\to K/F^{p+1}K\\to K/F^pK\\to0$ is termwise short exact: for a term $T$ its kernel is $F^pT/F^{p+1}T$ and the last projection is the quotient map. The long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] gives the exact segment $H^1(\\operatorname{gr}^pK)\\to H^1(K/F^{p+1}K)\\to H^1(K/F^pK)$. The outside terms vanish by the graded hypothesis and the induction hypothesis, so the middle term vanishes. This proves the result for $a\\le p\\le b$. Below $a$ the quotient is zero, and above $b$ it equals $K$, already exact by Step 2. This proves exactness of every $X/F^pX\\to Y/F^pY\\to Z/F^pZ$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05QH (lemma-filtered-acyclic), part (3); finite quotient induction using Tag 0117 (lemma-long-exact-sequence-cochain)"
+   }
+  },
+  {
+   "text": "Fix $p$. By Step 2, as subobjects of $Y$, $u(F^pX)=\\ker(v|_{F^pY})=\\ker(v)\\cap F^pY=\\operatorname{im}(u)\\cap F^pY$. Here the first equality is exactness on filtration steps, the second is the defining pullback of the kernel along $F^pY\\hookrightarrow Y$, and the third is underlying exactness. This is precisely strictness of $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05QH (lemma-filtered-acyclic), part (4), strictness of the first map"
+   }
+  },
+  {
+   "text": "For strictness of $v$, let $q:Y\\twoheadrightarrow Y/F^pY$ and let $\\bar u,\\bar v$ be the induced morphisms between quotients from Step 3. The square defining $\\bar v$ gives $v^{-1}(F^pZ)=q^{-1}(\\ker\\bar v)$. Quotient exactness gives $\\ker\\bar v=\\operatorname{im}\\bar u=q(\\operatorname{im}u)$, since $X\\to X/F^pX$ is an epimorphism. Therefore $v^{-1}(F^pZ)=F^pY+\\operatorname{im}u$: taking the inverse image of the image of a subobject under $q$ adds $\\ker q=F^pY$ (both are the subobject corresponding to that image in the quotient). Taking its image under $v$ now gives $\\operatorname{im}v\\cap F^pZ=v(v^{-1}(F^pZ))=v(F^pY+\\operatorname{im}u)=v(F^pY)$, because $vu=0$. These are subobject inverse-image, sum and image identities in the abelian category; no lifting of individual elements is assumed. This is strictness of $v$, completing all conclusions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05QH (lemma-filtered-acyclic), part (4), the dual strictness argument written as quotient-kernel and subobject identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtration",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 05QH (lemma-filtered-acyclic), parts (1)–(5); the induction diagrams are implemented using the exact segment at the middle cohomology object of Tag 0117 (lemma-long-exact-sequence-cochain)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +94,66 @@
    "results": "0 hits: ",
    "date": "2026-10-17",
    "verdict": "no match: ordinary unfiltered exactness, injectivity and triangulated localization APIs do not supply this finite filtered-object statement or identify its graded quasi-isomorphism class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact associated graded sequence of finite decreasing filtered objects implies strict maps and exactness at every filtration step",
+   "results": "{\"t\": \"2026-10-17T05:22:54Z\", \"tool\": \"leanfinder\", \"query\": \"Exact associated graded sequence of finite decreasing filtered objects implies strict maps and exactness at every filtration step\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.ComposableArrows.Exact.exact'\", \"CategoryTheory.ComposableArrows.Exact.sc'\", \"CategoryTheory.ComposableArrows.Exact.exact\", \"IsModuleFiltration.mk_int\", \"CategoryTheory.ComposableArrows.exact_iff_δlast\", \"AdicCompletion.map_exact\", \"CategoryTheory.ComposableArrows.exact_of_δlast\"], \"digest\": \"ddcc52125a5dc9ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary unfiltered exactness, graded algebra, or unrelated filtrations; none states strictness and stepwise exactness for finite filtered abelian-category objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact",
+   "results": "{\"t\": \"2026-10-17T05:22:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex.Exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Exact\", \"CategoryTheory.ShortComplex.Exact.hasZeroObject\", \"CategoryTheory.ShortComplex.Exact.hasHomology\", \"CategoryTheory.ShortComplex.exact_of_isZero_X₂\", \"CategoryTheory.ShortComplex.Splitting.exact\", \"CategoryTheory.ShortComplex.exact_iff_isZero_homology\", \"CategoryTheory.ShortComplex.Exact.op\", \"CategoryTheory.ShortComplex.exact_op_iff\"], \"digest\": \"d23c62c72bda570e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary unfiltered exactness, graded algebra, or unrelated filtrations; none states strictness and stepwise exactness for finite filtered abelian-category objects"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.{0,25}(filtration|filtered)|graded.{0,25}exact|exact.{0,25}graded",
+   "results": "{\"t\": \"2026-10-17T05:22:56Z\", \"tool\": \"grep\", \"query\": \"strict.{0,25}(filtration|filtered)|graded.{0,25}exact|exact.{0,25}graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Grading.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Grading.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Grading.lean\"], \"digest\": \"f45f26893bb68a27\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary unfiltered exactness, graded algebra, or unrelated filtrations; none states strictness and stepwise exactness for finite filtered abelian-category objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtered abelian category objects exact associated graded sequence strict exactness",
+   "results": "{\"t\": \"2026-10-17T05:23:13Z\", \"tool\": \"leansearch\", \"query\": \"Finite filtered abelian category objects exact associated graded sequence strict exactness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.casesOn\", \"CategoryTheory.ComposableArrows.Exact\", \"CategoryTheory.ShortComplex.ShortExact.exact\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.ShortComplex.ab_exact_iff_range_eq_ker\", \"HomologicalComplex.exact_of_degreewise_exact\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.epi_f\", \"CategoryTheory.AB4.of_AB5\"], \"digest\": \"5a4916cbc5d34b9d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary unfiltered exactness, graded algebra, or unrelated filtrations; none states strictness and stepwise exactness for finite filtered abelian-category objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness in the middle of a complex follows by finite induction from exactness of every associated graded complex",
+   "results": "{\"t\": \"2026-10-17T05:23:15Z\", \"tool\": \"leanfinder\", \"query\": \"Exactness in the middle of a complex follows by finite induction from exactness of every associated graded complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.exact_of_degreewise_exact\", \"HomologicalComplex.exactAt_iff'\", \"HomologicalComplex.shortExact_of_degreewise_shortExact\", \"CategoryTheory.ComposableArrows.exact_of_δ₀\", \"HomologicalComplex.exactAt_of_isSupported\", \"CategoryTheory.ComposableArrows.exact_of_δlast\", \"HomologicalComplex.exact_iff_degreewise_exact\", \"HomologicalComplex.exactAt_iff\"], \"digest\": \"b07ce0c39dc661b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary unfiltered exactness, graded algebra, or unrelated filtrations; none states strictness and stepwise exactness for finite filtered abelian-category objects"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredObject|gradedPiece|associatedGraded",
+   "results": "{\"t\": \"2026-10-17T05:23:15Z\", \"tool\": \"grep\", \"query\": \"FilteredObject|gradedPiece|associatedGraded\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary unfiltered exactness, graded algebra, or unrelated filtrations; none states strictness and stepwise exactness for finite filtered abelian-category objects"
+  },
+  {
+   "tool": "grep",
+   "query": "filtration.*(exact|strict)|(exact|strict).*filtration|grMap.*exact",
+   "results": "{\"t\": \"2026-10-17T05:30:31Z\", \"tool\": \"grep\", \"query\": \"filtration.*(exact|strict)|(exact|strict).*filtration|grMap.*exact\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: checked the second-reader results; snake-lemma exactness and degreewise exactness of complexes do not state finite-filtration graded exactness or strictness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded filtration of a short complex in an abelian category is exact if every successive quotient complex is exact; both arrows are strict",
+   "results": "{\"t\": \"2026-10-17T05:30:32Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded filtration of a short complex in an abelian category is exact if every successive quotient complex is exact; both arrows are strict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.SnakeInput.L₂'_exact\", \"CategoryTheory.ShortComplex.SnakeInput.L₁'_exact\", \"CategoryTheory.ShortComplex.SnakeInput.L₀'_exact\", \"CategoryTheory.ShortComplex.SnakeInput.L₀_exact\", \"CategoryTheory.ShortComplex.SnakeInput.L₂_exact\", \"CategoryTheory.ShortComplex.SnakeInput.snake_lemma\", \"HomologicalComplex.exact_of_degreewise_exact\", \"HomologicalComplex.shortExact_of_degreewise_shortExact\"], \"digest\": \"d40635ea87b9cabc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: checked the second-reader results; snake-lemma exactness and degreewise exactness of complexes do not state finite-filtration graded exactness or strictness"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-localization-injective-model",
@@ -58,5 +173,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-finite-filtered-graded-exactness",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged after reading Stacks 05QH. Proved filtration and quotient exactness by two finite inductions, citing the existing long exact cohomology sequence Mathlib leaf. Wrote both strictness arguments in subobject formulas, including the quotient-kernel calculation for the second map. No new nodes are needed. Searched the project Lean source by tag and concept and found no exact attachment; repeated semantic, Loogle and source Mathlib searches under Q28.",
+  "blueprint": "Realizes the finite-filtered exactness tool required in Step 3 of prop-trf-trace-additivity-open-closed, via lem-trf-filtered-derived-operation-lifts and lem-trf-filtered-localization-injective-model: it supplies strictness and exact filtration/subquotient sequences for the filtered-injective construction. Whole-blueprint searches for 05QH, graded exact, and finite filtered graded exactness found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Only the generic exact segment at the middle cohomology of a termwise short exact sequence of three-term complexes is used in the two finite inductions; no trace-additivity unit node provides this homological-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-22dd65878",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-22dd65878 (reviewer sub-agent of L); spot-checked: Read the item in full against Stacks homology.tex 05QH lemma-filtered-acyclic (l.5094-5144) and Def 0121. The statement matches the source exactly: vu=0, finite filtrations, gr exact for every p; conclusions (2)-(5) with strictness defined inline; nothing added or dropped. Step 1: the common bounds a=min, b=max(a, zero bounds) are correct, including the all-zero case. Steps 2 and 3: the termwise sequences 0->F^{p+1}K->F^pK->gr^pK->0 and 0->gr^pK->K/F^{p+1}K->K/F^pK->0 are short exact. The cited Mathlib leaf lem-weil-pbc-complex-ses-homology-long-exact (I checked homology_exact₂, HomologySequence.lean l.309) gives the H^1 segment. The inductions have correct bases and ranges and are not circular. The report's note on the source's 'p>=n' typo is correct and the explicit inductions avoid it. Step 4 is the source's (4) argument with the right subobject identities. Step 5 writes out the dual argument correctly: v^{-1}F^pZ=q^{-1}(ker v̄)=F^pY+im u, and its image is v(F^pY) because vu=0. Small cases checked: all zero, one nonzero graded degree, u=0 (strict mono), a projection example. No new nodes. No duplicate in the DAG (lem-sp-finite-filtration-induction is a single-map iso criterion) or in blueprint main-20261015. The route fits under Step 3 of prop-trf-trace-additivity-open-closed via the filtered-injective model. I accept the tool_uses entry for the Mathlib leaf. No SGA. Searches recorded in all three kinds. No changes."
  }
 }
