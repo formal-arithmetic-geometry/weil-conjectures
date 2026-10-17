@@ -277,13 +277,13 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes
 section BiprodAux
 
 variable {C : Type*} [Category C] [Preadditive C] [Limits.HasBinaryBiproducts C]
-  {R : Type*} [Ring R] (H : C ⥤ ModuleCat R) [H.Additive] {X : C}
+  {R : Type*} [Ring R] (H : C ⥤ ModuleCat R) [H.Additive] {X X' : C}
 
-lemma _root_.CategoryTheory.Functor.map_biprod_fst_inl_add_inr (a b : H.obj X) :
+lemma _root_.CategoryTheory.Functor.map_biprod_fst_inl_add_inr (a : H.obj X) (b : H.obj X') :
     H.map Limits.biprod.fst (H.map Limits.biprod.inl a + H.map Limits.biprod.inr b) = a := by
   simp [← ConcreteCategory.comp_apply, ← H.map_comp]
 
-lemma _root_.CategoryTheory.Functor.map_biprod_snd_inl_add_inr (a b : H.obj X) :
+lemma _root_.CategoryTheory.Functor.map_biprod_snd_inl_add_inr (a : H.obj X) (b : H.obj X') :
     H.map Limits.biprod.snd (H.map Limits.biprod.inl a + H.map Limits.biprod.inr b) = b := by
   simp [← ConcreteCategory.comp_apply, ← H.map_comp]
 

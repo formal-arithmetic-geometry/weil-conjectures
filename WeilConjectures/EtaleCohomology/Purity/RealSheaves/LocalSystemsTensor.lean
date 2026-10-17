@@ -120,4 +120,124 @@ lemma Scheme.sheafFiberTensorIso'_hom_naturality
 
 end Stalk
 
+/-- The pairing `F ⊞ G → F ⊗ G`, `(σ, τ) ↦ σ ⊗ τ`, as a morphism of the underlying étale sheaves
+of sets. It is not linear, but it is a morphism of finite locally constant sheaves of sets, so it
+commutes with the Galois action on stalks. -/
+def Scheme.tensorPairing (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj (F ⊞ G) ⟶
+      (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj (F ⊗ G) :=
+  ObjectProperty.homMk
+    { app U := TypeCat.ofHom fun z ↦ (Scheme.tensorToSheafTensor F G).app U
+        ((biprod.fst : F ⊞ G ⟶ F).hom.app U z ⊗ₜ (biprod.snd : F ⊞ G ⟶ G).hom.app U z)
+      naturality U V i := by
+        ext z
+        change (Scheme.tensorToSheafTensor F G).app V
+            ((biprod.fst : F ⊞ G ⟶ F).hom.app V ((F ⊞ G).obj.map i z) ⊗ₜ
+              (biprod.snd : F ⊞ G ⟶ G).hom.app V ((F ⊞ G).obj.map i z)) =
+          (F ⊗ G).obj.map i ((Scheme.tensorToSheafTensor F G).app U
+            ((biprod.fst : F ⊞ G ⟶ F).hom.app U z ⊗ₜ (biprod.snd : F ⊞ G ⟶ G).hom.app U z))
+        rw [← NatTrans.naturality_apply (Scheme.tensorToSheafTensor F G) i,
+          NatTrans.naturality_apply (biprod.fst : F ⊞ G ⟶ F).hom i,
+          NatTrans.naturality_apply (biprod.snd : F ⊞ G ⟶ G).hom i]
+        rfl }
+
+lemma Scheme.tensorPairing_app (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (U : Y.Etaleᵒᵖ) (z : (F ⊞ G).obj.obj U) :
+    (Scheme.tensorPairing F G).hom.app U z = (Scheme.tensorToSheafTensor F G).app U
+      ((biprod.fst : F ⊞ G ⟶ F).hom.app U z ⊗ₜ (biprod.snd : F ⊞ G ⟶ G).hom.app U z) :=
+  rfl
+
+section Galois
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) [Finite Λ]
+
+/-- The identification of the stalk of a finite locally constant sheaf of `Λ`-modules with that of
+its underlying sheaf of sets, on germs. -/
+lemma Scheme.IsFiniteLocallyConstantSheaf.stalkEquiv_toPresheafFiber
+    {F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstantSheaf F)
+    (V : Y.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V) (σ : F.obj.obj (.op V)) :
+    hF.stalkEquiv s ((Scheme.pointSmallEtale s).toPresheafFiber V v F.obj σ) =
+      (Scheme.pointSmallEtale s).toPresheafFiber V v
+        (F.obj ⋙ CategoryTheory.forget (ModuleCat.{u + 1} Λ)) σ := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  apply (hF.stalkEquiv s).symm.injective
+  rw [Equiv.symm_apply_apply]
+  exact (ConcreteCategory.congr_hom
+    ((Scheme.pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) V v F.obj) σ).symm
+
+/-- On the stalk at `s`, the pairing `AlgebraicGeometry.Scheme.tensorPairing` is
+`(x, y) ↦ x ⊗ y`, read through `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`. -/
+lemma Scheme.IsFiniteLocallyConstantSheaf.sheafFiber_map_tensorPairing
+    {F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (hB : IsFiniteLocallyConstantSheaf (F ⊞ G)) (hT : IsFiniteLocallyConstantSheaf (F ⊗ G))
+    (z : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj (F ⊞ G)) :
+    (hT.stalkEquiv s).symm ((Scheme.pointSmallEtale s).sheafFiber.map (Scheme.tensorPairing F G)
+        (hB.stalkEquiv s z)) =
+      (Scheme.sheafFiberTensorIso' s F G).inv.hom
+        ((Scheme.pointSmallEtale s).sheafFiber.map (biprod.fst : F ⊞ G ⟶ F) z ⊗ₜ
+          (Scheme.pointSmallEtale s).sheafFiber.map (biprod.snd : F ⊞ G ⟶ G) z) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨V, v, w, rfl⟩ := (Scheme.pointSmallEtale s).toPresheafFiber_jointly_surjective z
+  rw [Equiv.symm_apply_eq]
+  erw [hB.stalkEquiv_toPresheafFiber]
+  change _ = hT.stalkEquiv s ((Scheme.sheafFiberTensorIso' s F G).inv.hom
+    ((Scheme.pointSmallEtale s).presheafFiber.map (biprod.fst : F ⊞ G ⟶ F).hom
+        ((Scheme.pointSmallEtale s).toPresheafFiber V v (F ⊞ G).obj w) ⊗ₜ
+      (Scheme.pointSmallEtale s).presheafFiber.map (biprod.snd : F ⊞ G ⟶ G).hom
+        ((Scheme.pointSmallEtale s).toPresheafFiber V v (F ⊞ G).obj w)))
+  rw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply,
+    GrothendieckTopology.Point.toPresheafFiber_naturality_apply,
+    Scheme.sheafFiberTensorIso'_inv_tmul, hT.stalkEquiv_toPresheafFiber]
+  exact GrothendieckTopology.Point.toPresheafFiber_naturality_apply _
+    (Scheme.tensorPairing F G).hom V v w
+
+variable (G : Type u) [Group G] [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+  [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G]
+
+/-- The Galois action on stalks commutes with the stalk of any morphism of the underlying
+sheaves of sets, linear or not. -/
+lemma Scheme.IsFiniteLocallyConstantSheaf.galoisAct_map_of_types (g : G)
+    {F₁ F₂ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (h₁ : IsFiniteLocallyConstantSheaf F₁) (h₂ : IsFiniteLocallyConstantSheaf F₂)
+    (φ : h₁.toFLC ⟶ h₂.toFLC)
+    (x : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F₁) :
+    (h₂.stalkEquiv s).symm ((Scheme.pointSmallEtale s).sheafFiber.map φ.hom
+        (h₁.stalkEquiv s (h₁.galoisAct s G g x))) =
+      h₂.galoisAct s G g ((h₂.stalkEquiv s).symm
+        ((Scheme.pointSmallEtale s).sheafFiber.map φ.hom (h₁.stalkEquiv s x))) := by
+  simp only [galoisAct, Equiv.apply_symm_apply,
+    Scheme.FiniteLocallyConstant.galoisSMul_naturality s G g φ]
+
+/-- **The Galois action on the stalk of a tensor product** is the tensor product of the Galois
+actions: `g (x ⊗ y) = g x ⊗ g y`, through `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`. -/
+lemma Scheme.IsFiniteLocallyConstantSheaf.galoisAct_sheafFiberTensorIso'_inv_tmul (g : G)
+    {F₁ F₂ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (h₁ : IsFiniteLocallyConstantSheaf F₁) (h₂ : IsFiniteLocallyConstantSheaf F₂)
+    (hT : IsFiniteLocallyConstantSheaf (F₁ ⊗ F₂))
+    (x : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F₁)
+    (y : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F₂) :
+    hT.galoisAct s G g ((Scheme.sheafFiberTensorIso' s F₁ F₂).inv.hom (x ⊗ₜ y)) =
+      (Scheme.sheafFiberTensorIso' s F₁ F₂).inv.hom
+        (h₁.galoisAct s G g x ⊗ₜ h₂.galoisAct s G g y) := by
+  have := h₁
+  have := h₂
+  have hB : IsFiniteLocallyConstantSheaf (F₁ ⊞ F₂) :=
+    Scheme.IsFiniteLocallyConstantSheaf.biprod F₁ F₂
+  let St := (Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  let z := St.map biprod.inl x + St.map biprod.inr y
+  have hfst : St.map biprod.fst z = x := St.map_biprod_fst_inl_add_inr x y
+  have hsnd : St.map biprod.snd z = y := St.map_biprod_snd_inl_add_inr x y
+  have k₁ := hB.sheafFiber_map_tensorPairing s hT z
+  have k₂ := hB.sheafFiber_map_tensorPairing s hT (hB.galoisAct s G g z)
+  rw [hfst, hsnd] at k₁
+  rw [galoisAct_naturality s G g hB h₁, galoisAct_naturality s G g hB h₂, hfst, hsnd] at k₂
+  rw [← k₁, ← k₂]
+  exact (galoisAct_map_of_types s G g hB hT (ObjectProperty.homMk (Scheme.tensorPairing F₁ F₂))
+    z).symm
+
+end Galois
+
 end AlgebraicGeometry

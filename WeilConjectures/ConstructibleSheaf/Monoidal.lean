@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.MonoidalParts
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
@@ -49,7 +50,7 @@ constructible without finiteness hypotheses on `X`: for an open immersion `j` it
 
 ## TODO
 
-Prove `IsFiniteLocallyConstantSheaf.tensorObj` and `IsFiniteLocallyConstantSheaf.ihom_unit`.
+Prove `IsFiniteLocallyConstantSheaf.ihom_unit`.
 -/
 
 @[expose] public section
@@ -110,8 +111,9 @@ constant: on a common trivialising cover it is the constant sheaf at the tensor 
 finitely generated modules. -/
 theorem IsFiniteLocallyConstantSheaf.tensorObj (hF : IsFiniteLocallyConstantSheaf F)
     (hG : IsFiniteLocallyConstantSheaf G) :
-    IsFiniteLocallyConstantSheaf (F ⊗ G) :=
-  sorry
+    IsFiniteLocallyConstantSheaf (F ⊗ G) where
+  toIsLocallyConstantSheaf := hF.toIsLocallyConstantSheaf.tensorObj_part hG.toIsLocallyConstantSheaf
+  toIsFiniteSheaf := hF.toIsFiniteSheaf.tensorObj_part hG.toIsFiniteSheaf
 
 /-- **The tensor product of two constructible sheaves of modules is constructible**: on the
 common refinement of witnessing stratifications, the pullback of `F ⊗ G` to a stratum is the
