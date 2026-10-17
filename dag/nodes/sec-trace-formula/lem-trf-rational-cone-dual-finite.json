@@ -11,9 +11,72 @@
   "def-weil-field",
   "def-weil-finite-dimensional-subspace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-finite-dimensional-subspace], choose a finite spanning list in $V$. Repeatedly remove an element expressible as a linear combination of the others; the span is unchanged and the list strictly shortens. The resulting list $e_1,\\ldots,e_n$ is linearly independent: any nontrivial relation, solved for a vector with nonzero coefficient, would allow another removal. It is therefore a basis. For $x=\\sum_h x_he_h$ let $\\epsilon_h(x)=x_h$. Uniqueness of coordinates shows $\\epsilon_h(x+y)=\\epsilon_h(x)+\\epsilon_h(y)$ and $\\epsilon_h(qx)=q\\epsilon_h(x)$, so these are rational linear forms. Their signed family $\\{\\epsilon_h,-\\epsilon_h:1\\le h\\le n\\}$ has nonnegative locus $\\{0\\}$, because both signs force every coordinate to be zero. For $V=0$ this family is empty.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof, base family: finite coordinates and the zero cone. Remark 3.1.29 is contextual only and does not contain this argument."
+   }
+  },
+  {
+   "text": "For $0\\le k\\le m$ put $C_k=\\{\\sum_{j=1}^k q_jv_j:q_j\\in\\mathbf Q_{\\ge0}\\}$. We prove by induction on $k$ that $C_k$ is the nonnegative locus of a finite family of rational linear forms. The preceding signed coordinate family gives the base case $C_0=\\{0\\}$. For the induction step, suppose $C_k=\\{x:f_i(x)\\ge0\\ (i\\in I)\\}$ for a finite index set $I$, and put $v=v_{k+1}$. Splitting off the last coefficient gives $$x\\in C_{k+1}\\ \\Longleftrightarrow\\ \\exists t\\in\\mathbf Q,\\ t\\ge0\\ \\text{and}\\ f_i(x)-t f_i(v)\\ge0\\ (i\\in I).$$ Indeed the old inequalities say exactly that $x-tv\\in C_k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof, induction assertion, base case and coefficient identity. Remark 3.1.29 is contextual only and does not contain this argument."
+   }
+  },
+  {
+   "text": "Set $a_i=f_i(v)$ and partition $I$ as $I_0=\\{i:a_i=0\\}$, $I_+=\\{i:a_i>0\\}$, $I_-=\\{i:a_i<0\\}$. Define a new family $\\mathcal F$ consisting of $f_h$ for $h\\in I_0$, $f_i$ for $i\\in I_+$, and $$g_{ij}=a_i f_j-a_j f_i\\qquad(i\\in I_+,\\ j\\in I_-).$$ It is finite, since the old index set and its indicated product are finite, and every member is rational linear. Steps 4 and 5 verify that its nonnegative locus is exactly $C_{k+1}$; thus this defines the induction step without assuming a separation or cone-duality theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof, explicit next finite family. Remark 3.1.29 is contextual only and does not contain this argument."
+   }
+  },
+  {
+   "text": "Suppose $x\\in C_{k+1}$ and choose $t\\ge0$ as in Step 2. For $h\\in I_0$, $f_h(x)=f_h(x)-ta_h\\ge0$. For $i\\in I_+$, $f_i(x)=(f_i(x)-ta_i)+ta_i\\ge0$. For $i\\in I_+$ and $j\\in I_-$, cancellation gives $$g_{ij}(x)=a_i(f_j(x)-ta_j)+(-a_j)(f_i(x)-ta_i)\\ge0,$$ since both coefficients are positive. Hence every form in $\\mathcal F$ is nonnegative at $x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof, forward inclusion by cancellation. Remark 3.1.29 is contextual only and does not contain this argument."
+   }
+  },
+  {
+   "text": "Conversely, suppose all forms in $\\mathcal F$ are nonnegative at $x$. The finite nonempty set $B=\\{0\\}\\cup\\{f_j(x)/a_j:j\\in I_-\\}\\subset\\mathbf Q$ has a largest member $T$, obtained by successively taking the larger of two entries. Thus $T\\ge0$. For each $i\\in I_+$, the inequality $f_i(x)\\ge0$ gives $0\\le f_i(x)/a_i$, and for each $j\\in I_-$ the inequality $g_{ij}(x)\\ge0$ gives $$\\frac{f_j(x)}{a_j}\\le\\frac{f_i(x)}{a_i}.$$ Here division reverses the inequality precisely because $a_i a_j<0$: the displayed difference is $g_{ij}(x)/(a_i a_j)\\le0$. Every entry of $B$ is consequently at most $f_i(x)/a_i$, so $T\\le f_i(x)/a_i$. It follows that $f_i(x)-Ta_i\\ge0$ for $i\\in I_+$. For $j\\in I_-$, $T\\ge f_j(x)/a_j$, and multiplication by $a_j<0$ gives $f_j(x)-Ta_j\\ge0$. For $h\\in I_0$ the same inequality is just $f_h(x)\\ge0$. Thus $x-Tv\\in C_k$ and $T\\ge0$, so Step 2 gives $x\\in C_{k+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof, reverse inclusion with an explicit rational coefficient. Remark 3.1.29 is contextual only and does not contain this argument."
+   }
+  },
+  {
+   "text": "Steps 3--5 construct the required finite family for $C_{k+1}$ from that for $C_k$, completing the induction. At $k=m$ we have $C_m=C$, and enumeration of the final family gives the forms $\\lambda_1,\\ldots,\\lambda_s$ of the statement. All operations used rational coefficients, with division only by the strictly signed $a_i$. Empty sign classes cause no problem: $B$ always contains $0$, and if $I_+$ is empty there are no upper bounds to satisfy. If the old family is empty then the new one is empty and both cones are $V$. For $m=0$ the signed coordinate family applies, and for $V=0$ the empty family applies for every $m$. No pointedness or spanning assumption on the given generators was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof, induction conclusion and degenerate cases. Remark 3.1.29 is contextual only and does not contain this argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Complete constructive proof supplied in the six steps: induction on the number of generators and explicit elimination of the next nonnegative coefficient. The original contextual citation, Expose VIII Remark 3.1.29 (printed p. 103), does not state or prove this result; no claim from unread Kato §9.6 is used."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +105,52 @@
    "results": "ProperCone.dual, FGModuleCat.FGModuleCatDual, PointedCone.dual, PointedCone.dual_span, Module.finite_dual_iff, Module.dual_finite, FGModuleCat.FGModuleCatDual_obj, PointedCone.mem_dual; no required theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection of a set defined by finitely many rational homogeneous linear inequalities is again defined by finitely many rational homogeneous linear inequalities",
+   "results": "IsSemilinearSet.proj and proj' (Presburger/Semilinear/Defs); unrelated Diophantine and Nobeling projections. Semilinear-set projection does not state rational H-cone projection or the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"polyhedral\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fourier.Motzkin|Minkowski|polyhedr|finite.*inequal",
+   "results": "The command returned its first 25 hits, in Combinatorics/Pigeonhole, NumberTheory/NumberField and GeometryOfNumbers, chiefly unrelated Minkowski bounds and finite pigeonhole inequalities. This capped output alone does not establish absence; the targeted cone grep below and direct source reads were used.",
+   "date": "2026-10-18",
+   "verdict": "no match in displayed hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existential elimination in a finite system of linear inequalities over the rationals Fourier Motzkin",
+   "results": "Mathlib.Tactic.Linarith.elimVarM, elimVar, pelimVar, elimWithSet, LinarithData, CompSource.assump.elim, CertificateOracle.fourierMotzkin, elimAllVarsM in Tactic/Linarith/Oracle/FourierMotzkin.lean. These are metaprogram definitions, not a mathematical theorem giving rational cone inequalities.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated cone over the rational numbers is the intersection of finitely many rational linear halfspaces by induction adding one ray",
+   "results": "PointedCone.span and mem_span_set (Geometry/Convex/Cone/Pointed), ConvexCone.IsGenerating, IsGenerating.isReproducing and IsReproducing.isGenerating, PointedCone.ofConeComb, stdSimplex_eq_inter, and NumberField.mixedEmbedding.fundamentalCone.integerSet. No finite half-space theorem for rational FG cones.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polyhedr|Minkowski|Fourier|Motzkin",
+   "results": "Geometry/Convex/Cone/DualFinite.lean:21-22 only: documentation mentions Minkowski-Weyl and polyhedral cones. The file was read through its end; it defines DualFG and proves API results, not the rational FG-to-H theorem. Search subdirectory: Geometry/Convex/Cone.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-rational-cone-dual-integral-forms",
@@ -57,7 +162,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), rational polyhedral cone embedding by integral dual inequalities: the finite rational half-space description of the cone used before clearing denominators.",
+   "place": "Historical ancestry only: lem-trf-local-term-locality, proof clauses (1)--(2), contains no rational-cone step in either blueprint snapshot. The immediate parent lem-trf-rational-cone-dual-integral-forms, proof step 1, explicitly applies this half-space theorem. The present agent-written proof supplies that application; it does not assert a cone argument in the blueprint ancestor.",
    "via": [
     "lem-trf-rational-cone-dual-integral-forms",
     "lem-trf-sharp-fs-orthant-embedding",
@@ -74,5 +179,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-rational-cone-dual-finite",
+  "worker": "stage1",
+  "summary": "Repair of E7/F1: read ILO VIII Remark 3.1.29 and the blueprint proof and removed the false source attributions. Replaced the unsupported pointed-case/lineality split by a complete explicit induction on the generators; each induction step eliminates one rational nonnegative coefficient by a finite maximum and verified signed inequalities. No new node or unread theorem is used. The statement is unchanged.",
+  "blueprint": "The historical ancestor and via list are preserved, but its clauses (1)--(2) contain no rational-cone assertion. This is a descendant auxiliary result used in proof step 1 of lem-trf-rational-cone-dual-integral-forms, not a claimed realization of a cone step in lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q78-4fdb6c160",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-4fdb6c160 (reviewer sub-agent of L); spot-checked: Reviewed item, cited statements, unit/chapter route, blueprint/source records, all six proof steps, edge cases, duplicate candidates, and Mathlib searches. The explicit rational induction is correct, handles degeneracies, has no hidden long-step lemma, uses no SGA or dropped machinery, and honestly records the ILO/Kato attribution limit. Review written to review.md."
  }
 }

@@ -12,14 +12,121 @@
   "def-trf-algebraic-space",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary scheme $T$ with a map $t:h_T\\to P$. Put $F=h_T\\times_P X$, as a sheaf-valued fibre product, without assuming it is a scheme. For each $i$ put $T_i=T\\times_P P_i$. Because $P_i\\to P$ is representable etale, $T_i$ is a scheme and $q_i:T_i\\to T$ is etale by the scheme-test definition. The jointly surjective family in the hypothesis remains jointly surjective on this scheme test: the family of base-change projections $q_i$ covers $T$. This is the covering meaning of jointly surjective representable etale maps; all products here are the actual sheaf fibre products. Scheme products used below are the chosen products of [def-pc-fibre-product].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, proof, applied after an arbitrary scheme test; scheme-test definition of representable etale covers"
+   }
+  },
+  {
+   "text": "Regard the $T_i$ as objects of $T_{\\mathrm{Et}}$ and $(q_i)$ as a covering of its identity object. The statement of [lem-weil-pbc-fpqc-finer-than-etale] gives an fpqc covering of $T$, with no finiteness assumption on $I$ or quasi-compactness assumption on the $T_i$. Also $(q_i)$ is an fppf covering: etale means flat and locally of finite presentation, and it is jointly surjective. For any scheme $Z\\to T$, [lem-weil-pbc-etale-covering-base-change] gives the jointly surjective etale family $Z_i=Z\\times_TT_i\\to Z$; by the same definitions this too is fppf. We will use these fppf covers for the sheaf condition, not assume that an algebraic space is an fpqc sheaf.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C, lemma-zariski-etale-smooth-syntomic-fppf-fpqc; the etale subcase"
+   }
+  },
+  {
+   "text": "Write $Y_i=X\\times_P P_i$, a scheme whose projection $j_i:Y_i\\to P_i$ is an open immersion by hypothesis. By [lem-weil-pbc-open-immersion-base-change], the scheme $Y_i\\times_{P_i}T_i\\to T_i$ is an open immersion. Denote its image open subscheme by $W_i\\subset T_i$. The fibre-product universal property identifies $h_{W_i}$ over $h_{T_i}$ with $F\\times_{h_T}h_{T_i}$. For $R_{ij}=T_i\\times_TT_j$, the two pullbacks of these open subschemes are open by the same base-change lemma, and both represent the identical subfunctor $F\\times_{h_T}h_{R_{ij}}$ of $h_{R_{ij}}$. They are therefore equal as opens of $R_{ij}$: membership of a point $r$ in either open is exactly the factorization of $\\operatorname{Spec}\\kappa(r)\\to R_{ij}$ through that subfunctor. Their structure sheaves are both restrictions of $\\mathcal O_{R_{ij}}$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, proof: the two pullbacks of the open subscheme are equal"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-subscheme-fpqc-descent] to the fpqc covering $(q_i:T_i\\to T)$ from Step 2 and the compatible opens $W_i$ from Step 3. It gives a unique open subscheme $U\\subset T$ such that $U\\times_TT_i=W_i$ for every $i$. Thus the descended object is an actual open subscheme of the arbitrary test scheme $T$. This lemma descends only open subsets of schemes; identification with $F$ is still to be proved.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0, lemma-open-fpqc-covering, statement"
+   }
+  },
+  {
+   "text": "The identifications of Step 3 give sections $b_i\\in X(W_i)$, the maps $W_i\\simeq Y_i\\times_{P_i}T_i\\to X$. On $W_i\\times_UW_j$ they agree: after mapping to $R_{ij}$, both are the unique $X$-section corresponding to the inclusion of the same open in the common subfunctor of Step 3. The family $W_i=U\\times_TT_i\\to U$ is fppf by Step 2. Since $X$ is an fppf sheaf, its equalizer condition glues the $b_i$ to a unique $b\\in X(U)$. Moreover $a(b)$ equals the image in $P(U)$ of $U\\hookrightarrow T\\xrightarrow{t}P$: they agree after restriction to every $W_i$, and $P$ is an fppf sheaf too. Consequently $b$ defines a map $h_U\\to F$ over $h_T$, by pullback of this section.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, proof: glue the compatible local maps from the descended open into X; here the etale covers permit the defining fppf sheaf condition"
+   }
+  },
+  {
+   "text": "For every scheme $g:Z\\to T$ and $x\\in F(Z)$, pull back along the fppf covering $Z_i=Z\\times_TT_i\\to Z$. The identification $F|_{T_i}=h_{W_i}$ gives a unique map $Z_i\\to W_i$. Since $W_i=q_i^{-1}(U)$, the structural map $Z_i\\to Z\\xrightarrow{g}T$ has image in $U$. Joint surjectivity of $(Z_i\\to Z)$ forces $g(Z)\\subset U$. Restricting the continuous map and sheaf map of $g$ to this open gives a unique scheme morphism $\\widetilde g:Z\\to U$ with $g$ equal to its composite with $U\\hookrightarrow T$. On every $Z_i$, the sections $x$ and $\\widetilde g^*b$ agree, since each is the unique element over the fixed $Z_i\\to T_i$ in the represented open $W_i$. Separatedness in the defining sheaf condition for $X$ gives $x=\\widetilde g^*b$. Conversely every $Z\\to U$ gives such an $x$ by pulling back $b$. Uniqueness of the factorization through an open shows that these constructions are inverse. The covers used here are exactly those supplied by [lem-weil-pbc-etale-covering-base-change].",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, final paragraph: factor every test point through the descended open and show the resulting map of sheaves is bijective"
+   }
+  },
+  {
+   "text": "The bijections of Step 6 commute with pullback in $Z$: the forward map is pullback of $b$, and its inverse is the unique factorization through $U$. They therefore identify $F=h_T\\times_PX$ with $h_U$, with its projection to $h_T$ equal to the open inclusion $U\\hookrightarrow T$. Since $T\\to P$ was arbitrary, the scheme-test definition of representability proves that $a$ is representable, and every scheme-test projection is an open immersion. This is precisely the asserted meaning of an open immersion of algebraic spaces. If $P$ is itself a scheme, take $T=P$ and $t$ the identity to obtain $X\\simeq U\\subset P$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M4, conditions (1) and (2); these are now verified by the constructed open on each scheme test"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041X, lemma-descending-property-open-immersion, proof by descent of compatible opens (03N0) and the sheaf condition. Apply this construction directly to each scheme test and its given etale family; all sheaf gluing uses fppf covers, so no fpqc-sheaf theorem is needed."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Being an open immersion of algebraic spaces descends along etale coverings of the target",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}",
+   "query": "An algebraic space mapping to a scheme becomes an open subscheme if the morphism is an open immersion after etale base change",
+   "results": "Retained command log: 8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.scheme_toScheme, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.Etale. These concern schemes or presheafed spaces, not fppf sheaves with representable diagonal or descent for algebraic spaces.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -46,7 +153,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-ample-local",
@@ -75,5 +182,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-open-immersion-etale-local",
+  "worker": "stage1",
+  "summary": "Repaired the returned C1/C4/D3 gap: replace the naked Tag 03M4 application and coproduct reduction with arbitrary scheme tests, fpqc descent of compatible open subschemes by existing Tag 03N0, explicit fppf gluing of their inverse maps to X, and a sectionwise inverse proving representability. The statement and historical ancestry are unchanged. No new nodes.",
+  "blueprint": "Realizes the helper assertion in the polarized descent ancestry of lem-trf-local-term-locality used in lem-trf-algebraic-space-ample-local: the map into relative Proj is an open immersion and its source is a scheme. Expands the source Tag 041X open-subscheme construction, rather than assuming Tag 03M4 (4) implies (1). No unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic conversion of a scheme etale covering to an fpqc covering for open-subscheme descent; this unit contains no replacement for the topology comparison."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Generic descent of compatible open subsets of a scheme (03N0); this supplies the descended open of each test T, not representability of X, which Steps 5-7 prove."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-5214109af",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-5214109af (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and relevant Stacks sources. All seven steps correctly establish representability using compatible-open descent and explicit fppf sheaf gluing. No new nodes, cycles, missing dependencies, long steps or duplicate theorem found. Both declared tool uses accepted. Detailed checks and the unavailable external route-pivot-list limitation are recorded in review.md."
  }
 }

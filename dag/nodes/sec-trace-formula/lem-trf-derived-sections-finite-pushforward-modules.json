@@ -13,11 +13,118 @@
   "def-weil-pbc-etale-site",
   "def-kun-rgamma-unbounded",
   "def-pc-fibre-product",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The underlying abelian direct image along a finite morphism is exact by [lemma-weil-pbc-finite-direct-image-exact]. The module direct image has exactly this underlying functor by [lem-weil-pbc-module-direct-image-left-exact]. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting module scalars is faithful and preserves kernels and cokernels: it therefore reflects exactness, since the homology of a sequence has zero underlying abelian sheaf exactly when it is zero. Consequently finite direct image is exact on module sheaves. This is an underived argument only.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero; module direct image is sites-cohomology.tex Tag 071J (section-derived-functors), and coefficient forgetting is sites-modules.tex Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)."
+   }
+  },
+  {
+   "text": "For every scheme morphism $u$, [prop-weil-pbc-inverse-image-modules-exact] and [lem-sp-right-adjoint-preserves-injectives] show that $u_*$ preserves injective module sheaves. Use [lem-weil-pbc-module-sheaves-enough-injectives, lem-weil-pbc-dplus-injective-representative] to choose a bounded-below injective representative $L$ of $M$. The comparison $M\\to L$ may be represented by a quasi-isomorphism of module complexes by [lem-weil-pbc-kinjective-hom-derived]. By Step 1, $p_*L$ represents $p_*M$ and is termwise injective. Both $R\\Gamma$ functors are computed on these module complexes by [def-kun-rgamma-unbounded, lem-weil-pbc-right-derived-plus-injective]. The equality $\\Gamma(Y,p_*L)=\\Gamma(Z,L)$ is an equality of complexes of $\\Lambda$-modules, with the same differential. It gives $\\lambda_{p,M}$. To compare choices, a map into another injective representative is a unique homotopy class by [lem-weil-pbc-kinjective-hom-derived]; applying $p_*$ and then sections gives the same map as taking sections on $Z$. Hence these identifications commute with comparison maps and with morphisms of $M$, proving canonicity, naturality and the claimed normalization.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-kun-rgamma-unbounded",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 070I (lemma-K-injective), and 015M (lemma-compose-derived-functors), applied in module categories"
+   }
+  },
+  {
+   "text": "Finite morphisms are stable under arbitrary base change by [lem-trf-finite-radicial-basechange], so Steps 1 and 2 apply to $p'$. Exactness of $g^{-1}$ preserves the lower bound. By [lem-weil-pbc-dplus-injective-representative, lem-weil-pbc-kinjective-hom-derived] choose a bounded-below injective module complex $J$ on $Z'$ and a module-linear quasi-isomorphism $t:g^{-1}L\\to J$. Then $p'_*J$ is termwise injective and $p'_*t$ is a quasi-isomorphism, so it computes $R\\Gamma(Y',p'_*g^{-1}L)$. The bottom-right comparison $\\lambda_{p',g^{-1}L}$ is the identity $\\Gamma(Y',p'_*J)=\\Gamma(Z',J)$ from Step 2. In particular all four corners have module-complex models; no assertion that an underlying abelian complex is K-injective has entered.",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective); finite base change is morphisms.tex Tag 01WL (lemma-base-change-finite)"
+   }
+  },
+  {
+   "text": "Use the inverse-image composition comparison of [lem-weil-pbc-inverse-image-composition] to identify $(p')^{-1}h^{-1}$ with $g^{-1}p^{-1}$. This comparison also applies to constant-$\\Lambda$ modules: its naturality commutes with each scalar endomorphism, and [prop-weil-pbc-inverse-image-modules-exact] supplies the transported actions and the identical underlying units and counits. A section of a constant ring sheaf is locally a constant scalar [def-weil-pbc-constant-sheaf], so commuting with constant scalars proves module linearity locally and hence globally. The comparison's unit equation remains the same equation after forgetting scalars, and faithfulness in [lem-weil-pbc-module-sheaves-colimits-forgetful] proves it in module sheaves. Define $\\beta_F$ by the module adjunction from $g^{-1}\\varepsilon_{p,F}$ with this comparison. Thus $\\beta$ is a natural transformation of module functors, and is the canonical mate in the statement.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "section-pullback: adjunction-mate construction; module linearity follows from naturality and the constant-ring actions"
+   }
+  },
+  {
+   "text": "Write $e_u$ for the underived unit section map. We verify $\\Gamma(Y',\\beta_F)e_h(p_*F)=e_g(F)$ under the section identifications, for a module sheaf $F$ on $Z$. A section $s\\in\\Gamma(Y,p_*F)$ is, by adjunction, the same section $\\widetilde s\\in\\Gamma(Z,F)$. Equivalently, viewing sections as linear maps from the regular constant module, its transpose is $\\widetilde s=\\varepsilon_{p,F}\\circ p^{-1}s$, with the constant-module identifications. Pulling $s$ along $h$ and applying $\\beta_F$ has transpose under $(p')^{-1}\\dashv p'_*$ equal to\n$$g^{-1}(\\varepsilon_{p,F})\\circ g^{-1}p^{-1}(s)=g^{-1}(\\varepsilon_{p,F}\\circ p^{-1}s)=g^{-1}\\widetilde s.$$\nThe first equality is the defining counit formula for $\\beta$ from Step 4 and the unit equation for the composition comparison; the last expression is precisely $e_g(F)(\\widetilde s)$. This proves the equality on every section as $\\Lambda$-linear maps, before deriving. Applied to each $F=L^n$ it proves an equality of chain maps, since all constituent sheaf maps are natural and commute with the differentials.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "section-pullback: unit/counit mate formula, expanded on a global section"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-module-derived-restriction-resolution] first to $u=h$, $I=p_*L$, target $p'_*J$, and $a=p'_*t\\circ\\beta_L$. It says that the left vertical composite, after the resolution identifications, is the class in $D(\\operatorname{Mod}\\Lambda)$ of\n$$\\Gamma(Y,p_*L)\\xrightarrow{e_h}\\Gamma(Y',h^{-1}p_*L)\\xrightarrow{\\Gamma(\\beta_L)}\\Gamma(Y',p'_*g^{-1}L)\\xrightarrow{\\Gamma(p'_*t)}\\Gamma(Y',p'_*J).$$\nApply the same node to $u=g$, $I=L$, target $J$, and $a=t$. The right vertical composite is the class of $\\Gamma(Z',t)\\circ e_g(L)$. The horizontal maps are identities on the section-complex models by Steps 2 and 3. Step 5 identifies the first three terms of the upper expression with $e_g(L)$, and $\\Gamma(Y',p'_*t)=\\Gamma(Z',t)$. Thus the two composites are equal as module-linear chain maps and consequently in the module derived category. Naturality of $\\beta$ and exactness of all four underived functors identify its component at $M$ with its component at $L$ under $M\\to L$, so this proves exactly the displayed square for $M$. No isomorphism assertion for $\\beta$ is needed.",
+   "uses": [
+    "lem-trf-module-derived-restriction-resolution",
+    "def-kun-rgamma-unbounded",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J6 (remark-before-Leray); module unit-section resolution formula plus the explicit mate calculation of Step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-kun-rgamma-unbounded",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-module-derived-restriction-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J6 and cohomology.tex Tags 01F8/01FB give the ringed-site/module resolution route. Steps 4-6 write the finite-pushforward mate square as an equality of module-linear chain maps; no abelian derived pullback or composition theorem is invoked."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,12 +182,40 @@
    "results": "{\"t\": \"2026-10-17T19:22:05Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*[Ss]ection|[Ss]ection.*rightDerived|[Cc]ech.*[Ii]njective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits give generic nerve, ordinary sections, abstract derived functor, or object-resolution APIs; none states this module-valued finite-cover or strict resolved-diagram assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStarCompRightDerivedGlobalSectionsIso|isBaseChangeIso_of_isFinite|preservesFiniteColimits_lowerStar_of_isFinite",
+   "results": "0 hits; no declarations returned in SixFunctors",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite pushforward derived global sections module sheaves natural base change square",
+   "results": "8 hits: SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardSections, SheafOfModules.pushforward, PresheafOfModules.pushforward₀, SheafOfModules.pushforwardNatTrans_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.pushforward_map_app_apply",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedLowerStarCompRightDerivedGlobalSectionsIso, IsFinite, inverse image",
+   "results": "0 hits; unknown identifier rightDerivedLowerStarCompRightDerivedGlobalSectionsIso",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections through finite pushforward of module sheaf complexes and base change compatibility",
+   "results": "8 hits: SheafOfModules.pushforwardSections, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_map_val, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-base-cech-hypercohomology",
@@ -90,7 +225,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "finite-surjective Čech descent input: identify derived sections of each Čech level with sections after finite pushforward",
+   "place": "finite-surjective Čech descent input: identify derived sections of each Čech level with sections after finite pushforward, including the restriction compatibility needed after base change",
    "via": [
     "lem-trf-finite-base-cech-hypercohomology",
     "lem-trf-nearby-finite-base-descent",
@@ -102,5 +237,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-sections-finite-pushforward-modules",
+  "worker": "stage1",
+  "summary": "Repair of returned head 7f0399c7c6: retained finite exactness and module injective normalization, replaced the unsupported abelian-derived transport by explicit module-chain representatives. One new generic module restriction-resolution statement is used twice; the item itself calculates the mate on sections and proves its square. Removed finite exchange and the two abelian derived-law citations; beta need not be invertible.",
+  "blueprint": "Realizes the finite-surjective Cech descent input of lem-trf-local-term-locality: identify derived sections at each Cech level through finite pushforward and retain compatibility after arbitrary base change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic underived composition and unit comparison, lifted explicitly to constant-ring modules in Step 4; the trace-formula unit has no such adjunction comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-585601cf5",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-585601cf5 (reviewer sub-agent of L); spot-checked: Read the item, new lemma, cited statements and mathematical sources in full. Module-resolution proof and canonical mate square check out. Corrected two source references: Step 1 uses 03DA/03DB, not 01B1; Step 3 uses 01WL, not 02NB. Statements unchanged. Findings and route-check limitations are recorded in review.md; corrected whole JSON is under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

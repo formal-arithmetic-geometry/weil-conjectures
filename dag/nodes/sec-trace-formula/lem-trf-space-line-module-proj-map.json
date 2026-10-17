@@ -2,7 +2,7 @@
  "id": "lem-trf-space-line-module-proj-map",
  "kind": "statement",
  "title": "Canonical map from the generation locus of a line module into relative Proj",
- "statement": "Let $S,T$ be schemes [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $f:X\\to T$ a morphism over $S$. Let $\\mathcal A=\\bigoplus_{d\\geq0}\\mathcal A_d$ be a quasi-coherent graded $\\mathcal O_T$-algebra [def-weil-pbc-quasi-coherent-algebra] [def-weil-pbc-graded-sheaf-structures], let $L$ be a line module on $X$, and let $\\psi:f^*\\mathcal A\\to\\bigoplus_{d\\geq0}L^{\\otimes d}$ be a graded algebra homomorphism on the small etale site, with tensor pullback $f^*$ along the induced ringed-topos map. Let $U(\\psi)\\subseteq X$ be the union over $d\\geq1$ of the loci where $\\psi_d:f^*\\mathcal A_d\\to L^{\\otimes d}$ is surjective. This is an open subspace, and there is a canonical $T$-morphism $r_{L,\\psi}:U(\\psi)\\to\\operatorname{Proj}_T(\\mathcal A)$ [def-nagata-relative-proj]. For any etale map of schemes $g:T'\\to T$ for which $X'=X\\times_TT'$ is a scheme, put $\\mathcal A'=g^*\\mathcal A$, let $L'$ be the restriction of $L$, and let $\\psi'$ be the restricted homomorphism. Then $U(\\psi')=X'\\times_XU(\\psi)$, and under the canonical isomorphism $\\operatorname{Proj}_{T'}(\\mathcal A')\\simeq T'\\times_T\\operatorname{Proj}_T(\\mathcal A)$ the map $r_{L',\\psi'}$ is the base change of $r_{L,\\psi}$. On schemes this is the usual canonical morphism obtained from the graded maps into tensor powers of an invertible module [def-sc-invertible-module], with pullback [def-pc-module-pullback].",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $f:X\\to T$ a morphism over $S$. Let $\\mathcal A=\\bigoplus_{d\\geq0}\\mathcal A_d$ be a quasi-coherent graded $\\mathcal O_T$-algebra [def-weil-pbc-quasi-coherent-algebra] [def-weil-pbc-graded-sheaf-structures], let $L$ be a line module on $X$, and let $\\psi:f^*\\mathcal A\\to\\bigoplus_{d\\geq0}L^{\\otimes d}$ be a graded algebra homomorphism on the small etale site, with tensor pullback $f^*$ along the induced ringed-topos map. Let $U(\\psi)\\subseteq X$ be the union over $d\\geq1$ of the loci where $\\psi_d:f^*\\mathcal A_d\\to L^{\\otimes d}$ is surjective. This is an open subspace, and there is a canonical $T$-morphism $r_{L,\\psi}:U(\\psi)\\to\\operatorname{Proj}_T(\\mathcal A)$ [def-nagata-relative-proj]. For any commutative diagram of $S$-spaces\\n$$\\begin{array}{ccc} X' &\\xrightarrow{g'}& X\\\\ f'\\downarrow &&\\downarrow f\\\\ T'&\\xrightarrow{g}&T,\\end{array}$$\\nwhere $X'$ and $T'$ are schemes and $g,g'$ are arbitrary morphisms, put $\\mathcal A'=g^*\\mathcal A$, let $L'=(g')^*L$, and let $\\psi'$ be the pulled-back graded homomorphism. Then $U(\\psi')=(g')^{-1}(U(\\psi))$, and under the canonical isomorphism $\\operatorname{Proj}_{T'}(\\mathcal A')\\simeq T'\\times_T\\operatorname{Proj}_T(\\mathcal A)$ the map $r_{L',\\psi'}$ is the base change of $r_{L,\\psi}$. On schemes this is the usual canonical morphism obtained from the graded maps into tensor powers of an invertible module [def-sc-invertible-module], with pullback [def-pc-module-pullback].",
  "source": {
   "document": "literature/stacks-project/spaces-divisors.tex",
   "place": "Tag 0D2Z (lemma-invertible-map-into-relative-proj), opening definition of U(psi) and parts (2),(3), specialized to a scheme base T; Constructions Tag 01O9 (lemma-invertible-map-into-relative-proj)."
@@ -14,11 +14,75 @@
   "def-weil-pbc-graded-sheaf-structures",
   "def-nagata-relative-proj",
   "def-sc-invertible-module",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a representable jointly surjective etale scheme cover $V\\to X$ from the definition of an algebraic space, then refine $V$ by affine opens over affine opens of $T$ and by etale trivializations of the line module $L$. On a chart $W=\\operatorname{Spec}(B)\\to X$ over $T_0=\\operatorname{Spec}(R)$, write the trivialized line module as $\\mathcal O_W$. For every positive-degree local section $a$ of $f^*\\mathcal A_d$, its image $\\psi_d(a)$ is a function on $W$, and the locus where $a$ generates the target is the principal open $D(\\psi_d(a))$: a map to an invertible module is surjective exactly where one local image is a unit. These principal opens cover the locus where $\\psi_d$ is surjective, and their union over $d\\geq1$ is therefore open. On $V\\times_XV$ the two pullbacks of each such principal open agree, because both are defined by the pullback of the same section and surjectivity of a map of sheaves is local on the etale site. Thus the chartwise opens carry a canonical descent datum; the sheaf definition of the algebraic space gives the descended open subspace $U(\\psi)$, and its pullback to every scheme over $X$ is the same union of principal opens. On each such principal open, the affine relative-Proj construction (Constructions, Tag 01O9) gives the canonical morphism to $\\operatorname{Proj}(A)$; the affine-chart identifications in [lemma-nagata-relative-proj-exists] identify these targets with the restriction of $\\operatorname{Proj}_T(\\mathcal A)$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sc-invertible-module",
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D2Z, opening construction of U(psi); Constructions Tag 01O9, affine construction and standard opens"
+   }
+  },
+  {
+   "text": "On a refinement of two affine and trivializing charts, the two local morphisms just constructed have the same homogeneous-fraction formulas on every standard Proj chart. The uniqueness clause in the affine construction therefore identifies them on overlaps, and the same equality holds after pullback to $V\\times_XV$. To descend the map, let $W\\to U(\\psi)$ be any scheme and choose an etale cover $W_i\\to W$ factoring through the presentation $V\\to X$. The local maps $W_i\\to\\operatorname{Proj}_T(\\mathcal A)$ agree on every $W_i\\times_WW_j$ by the overlap equality, so the sheaf condition for the target algebraic space glues them uniquely to a map $W\\to\\operatorname{Proj}_T(\\mathcal A)$. This construction is functorial in $W$, hence defines the unique morphism $r_{L,\\psi}$; the structural map to $T$ agrees locally and therefore globally. Pullback to the jointly surjective presentation detects equality, so both the map and its homogeneous-algebra compatibility are unique.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lemma-nagata-relative-proj-exists",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D2Z, construction and uniqueness of r_{L,psi}; Constructions Tag 01O9, parts (1),(2),(3)"
+   }
+  },
+  {
+   "text": "For an arbitrary commutative square with $X'$ and $T'$ schemes, pullback of the local charts, the graded algebra, the line module, and $\\psi$ gives precisely $(\\mathcal A',L',\\psi')$. Surjectivity of a sheaf map and invertibility of a local generator are preserved and reflected after pullback, so the principal-open description in Step 1 gives $U(\\psi')=(g')^{-1}(U(\\psi))$. The unrestricted comparison [lemma-nagata-relative-proj-base-change-arbitrary] gives the canonical isomorphism $\\operatorname{Proj}_{T'}(\\mathcal A')\\simeq T'\\times_T\\operatorname{Proj}_T(\\mathcal A)$ for this arbitrary $g$, with no flatness assumption. On every pulled-back affine chart, the homogeneous-fraction formula is the pullback of the original formula; by the uniqueness and descent argument of Step 2 these local equalities identify $r_{L',\\psi'}$ with the base change of $r_{L,\\psi}$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lemma-nagata-relative-proj-exists",
+    "lemma-nagata-relative-proj-base-change-arbitrary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D2Z, part (3); Constructions Tag 01O9, part (3); relative-Proj base change"
+   }
+  },
+  {
+   "text": "When $X$ is a scheme, the small-etale line module is the usual invertible $\\mathcal O_X$-module [def-sc-invertible-module], and the tensor pullback in the statement agrees with the ordinary module pullback [def-pc-module-pullback]. The preceding affine construction is then exactly the usual canonical morphism obtained from graded maps into tensor powers of an invertible module.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D2Z, scheme specialization; Constructions Tag 01O9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D2Z (lemma-invertible-map-into-relative-proj), with the affine construction of Tag 01O9; local chart and etale descent details expanded from the source's construction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +111,31 @@
    "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"33\", \"text\": \"- An invertible module is finite and projective (provided as instances).\"}\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"58\", \"text\": \"- Connect to invertible sheaves on `Spec R`. More generally, connect projective `R`-modules of\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary scheme morphism base change, the generation locus and canonical line module map to relative Proj commute with base change",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso and related Proj chart pullback identities (Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic); no algebraic-space or line-module theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Proj, base change, invertible module",
+   "results": "unknown identifier Proj; no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "base.change.*Proj|Proj.*base.change|invertible.*Proj [Mathlib/AlgebraicGeometry]",
+   "results": "no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-ample-local",
@@ -62,7 +147,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Polarized descent used by the specialization chain below lem-trf-local-term-locality: Canonical map from the generation locus of a line module into relative Proj. Historical imported ancestry is retained; this helper supplies a step in the section-algebra/Proj proof of the ampleness descent input.",
+   "place": "Polarized descent helper: local section-algebra/relative-Proj construction, gluing, and base-change compatibility used in the section-algebra/Proj proof below lem-trf-local-term-locality.",
    "via": [
     "lem-trf-algebraic-space-ample-local",
     "lem-trf-polarized-scheme-etale-descent",
@@ -79,5 +164,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-line-module-proj-map",
+  "worker": "stage1",
+  "summary": "Repaired the returned split against Stacks Tag 0D2Z: restored arbitrary commutative base-change squares with scheme corners, cited the existing unrestricted relative-Proj base-change node, and expanded the chartwise open-locus and etale descent arguments so the algebraic-space construction is explicit.",
+  "blueprint": "Realizes the historical polarized-descent helper recorded under lem-trf-local-term-locality: local section-algebra/relative-Proj construction, effective etale descent of the open locus and morphism, and unrestricted base-change compatibility."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-664f87dd6",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-664f87dd6 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited nodes, and Stacks Tags 0D2Z and 01O9. The unrestricted arbitrary-base-change statement, generation-locus formula, Proj comparison, hypotheses, and coefficient category are correct. All proof steps are concrete, non-circular, below the long-step threshold, and use only cited statements; edge cases and non-flat base change were checked. No new nodes or repairs are needed. Review written to review.md."
  }
 }

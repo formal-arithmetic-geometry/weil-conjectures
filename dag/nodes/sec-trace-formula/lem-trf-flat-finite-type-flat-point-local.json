@@ -14,8 +14,58 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Put (X=operatorname{Spec}(B)), (S=operatorname{Spec}(A)), let\n(f:X\to S) be induced by (A\to B), let\n(mathcal F=\\widetilde N), and let (x) be the point (mathfrak q), with\n(s=f(x)) corresponding to (mathfrak p=mathfrak qcap A).  The finite\npresentation of (B) over (A) makes (f) locally of finite presentation,\nand finiteness of (N) makes (mathcal F) of finite type.  Moreover\n(mathcal F_x=N_{mathfrak q}) and (mathcal O_{S,s}=A_{mathfrak p});\nthe assumed (A)-flatness localizes to (A_{mathfrak p})-flatness.  Apply\nthe etale-neighborhood proposition (Tag 05I6) to obtain an etale\nneighborhood ((S',s')\\to(S,s)) and an open (V) around the induced point\n(x') in (X\\times_S\\operatorname{Spec}(mathcal O_{S',s'})) on which the\npulled-back module is finitely presented and flat over\n(mathcal O_{S',s'}).",
+   "uses": [
+    "lem-trf-finite-type-flat-etale-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I7 proof, first sentence: apply Proposition 05I6."
+   }
+  },
+  {
+   "text": "The local-ring map $\\mathcal O_{X,x}\\to\\mathcal O_{X\\times_S\\operatorname{Spec}(\\mathcal O_{S',s'}),x'}$ is flat and local: the etale map is flat by the definition of etale morphism, and passage to the indicated local rings is a localization, hence flat by Tag 00HT. Therefore it is faithfully flat by the flat-local-faithfully-flat lemma. By the definition of stalk and affine pullback, the stalk of the pulled-back sheaf at $x'$ identifies with $\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{X\\times_S\\operatorname{Spec}(\\mathcal O_{S',s'}),x'}$, and this module is finitely presented over the latter local ring by Step 1.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "def-weil-pbc-module-stalk",
+    "def-pc-fibre-product",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I7 proof, paragraph beginning 'The ring map O_{X,x} → O_{X ×_S Spec(O_{S',s'}),x'} is flat and local'."
+   }
+  },
+  {
+   "text": "Apply faithful-flat descent of finite presentation for modules (Tag 03C4(2)) to the map in Step 2 and the module $\\mathcal F_x$. Since its tensor product with the faithfully flat target is the finitely presented stalk from Step 2, $\\mathcal F_x$ is finitely presented over $\\mathcal O_{X,x}$, which is the asserted conclusion.",
+   "uses": [
+    "lem-trf-finite-presentation-module-descent-flat-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I7 proof, final sentence, citing Algebra Lemma 03C4 (lemma-descend-properties-modules), part (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-finite-presentation-module-descent-flat-local",
+  "lem-trf-finite-type-flat-etale-neighborhood",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-localization-flat"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
@@ -52,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-finite-type-dense-presentation",
@@ -71,5 +121,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-finite-type-flat-point-local",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 05I6, 05I7 and Algebra Tag 03C4(2), including the full cited proofs. Repaired the first proof step to spell out the affine translation X=Spec(B), S=Spec(A), F=~N, x=q, the stalk and base local ring identifications, and localization of flatness before applying 05I6. The remaining steps check the flat local stalk map, faithful flatness, tensor identification, and descent of finite presentation.",
+  "blueprint": "The steps realize the supporting algebra input in the Tag 081N/05I7 branch of the ancestor proof: etale local finite presentation and faithful-flat descent of the stalk module.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-6dd25f751",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-6dd25f751 (reviewer sub-agent of L); spot-checked: The theorem and both supporting nodes are mathematically correct, and the cited Stacks passages, hypotheses, dependencies, searches, route, and edge cases check out. The delivered Step 1 omitted the affine translation X=Spec(B), S=Spec(A), F=~N, x=q, the stalk/base-local-ring identifications, and localization of A-flatness to A_(q∩A)-flatness before applying Tag 05I6. I repaired the item proof in fixes/dag/nodes/sec-trace-formula/lem-trf-flat-finite-type-flat-point-local.json and documented all checks in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
