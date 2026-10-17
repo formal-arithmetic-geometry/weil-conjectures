@@ -2,7 +2,7 @@
  "id": "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
  "kind": "statement",
  "title": "Coproduct preservation for proper étale derived direct image",
- "statement": "Let A be a Grothendieck abelian category and let g : Z → Y be a proper morphism of schemes. Then the total right derived direct image Rg_* on the unbounded derived categories of A-valued sheaves on the small étale sites preserves coproducts of every set-indexed family.",
+ "statement": "Let $A$ be a finite commutative ring, and let $g : Z \\to Y$ be a proper morphism [def-weil-proper-morphism] of finite type between Noetherian schemes (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]). On the ordinary unbounded derived categories $D(Z_{\\Et},A)$ and $D(Y_{\\Et},A)$ [def-weil-pbc-derived-categories], the total right derived direct image $Rg_*$ preserves arbitrary set-indexed coproducts. Its bounded-below restriction is the derived direct image of [def-weil-pbc-direct-image].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-etale-exceptional-adjoint.md",
   "place": "Proof, first paragraph: proper derived direct image preserves arbitrary coproducts before Brown representability",
@@ -14,17 +14,48 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-derived-categories",
-  "lem-pur-ringed-site-grothendieck-abelian"
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "Retired auxiliary obligation, not a proof of the historical statement. Its sole caller was the unused AlgebraicGeometry.Etale.CompactificationUpperShriek namespace, now withdrawn. The active AlgebraicGeometry.Etale.rightDerivedUpperShriek is defined in WeilConjectures.SixFunctors.Etale.Derived.UpperShriek with an explicit left-adjoint hypothesis for general coefficients. Its finite-module-coefficient instance uses the already proved isLeftAdjoint_rightDerivedLowerShriekOfCompactification in LowerShriekLeftAdjoint, which retains the compactification, coproduct-preservation and Brown-representability route. A consumer source scan and compiled-expression audit find no external caller of the withdrawn namespace. The unit sk-prop-sf-cbc has empty realized arrays; no realized statement or proof step is withdrawn.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply [pqf-lem-proper-basic] to $g$: it is quasi-compact, quasi-separated and of finite type. The target $Y$ is quasi-compact by the Noetherian hypothesis. Apply [lem-fin-finite-type-fibre-dimension-bound] to obtain an integer $e\\geq0$ bounding the dimensions of every scheme-theoretic fibre; empty fibres are allowed.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Because $A$ is finite, some positive integer $N$ annihilates $A$. Every $A$-module sheaf is therefore torsion as an abelian sheaf. Apply [lem-kun-proper-torsion-cd-bound] to obtain vanishing of higher direct images above $2e$, and use [lem-sbc-higher-direct-image-forget-comparison] to transfer the vanishing from abelian sheaves to $A$-module sheaves.",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-exc-direct-image-coproducts] with $u=g$, coefficient ring $A$, and bound $c=2e$. Its finite-amplitude unbounded derived argument gives preservation of every set-indexed coproduct, including the empty family. The bounded-below comparison with the direct image of [def-weil-pbc-direct-image] is the canonical right-derived-functor comparison.",
+   "uses": [
+    "lem-exc-direct-image-coproducts",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lem-exc-direct-image-coproducts",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "pqf-lem-proper-basic"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "coord/changes/etale-compactification-upper-shriek-retirement.md",
@@ -109,5 +140,54 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e70659b11",
+  "group": "Q119",
+  "result": "fix",
+  "note": "Reviewed immutable delivery and wrote review.md plus complete fixes. Reuse the exact existing theorem to repair H4 duplication and H2 signature mismatch. Source correction and sole citer audit hold; both modules compile cleanly through scompile.py. No branch or project clone changed.; left out new module(s) lean/Sheaf/AlgebraicGeometry/ProperDerivedLowerStarGrothendieckCoproducts.lean (--drop-files, or a record fixed to existing: true)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q119 stage 2",
+  "old_statement": "Let A be a Grothendieck abelian category and let g : Z → Y be a proper morphism of schemes. Then the total right derived direct image Rg_* on the unbounded derived categories of A-valued sheaves on the small étale sites preserves coproducts of every set-indexed family.",
+  "what": "The retained statement generalized the source lemma from finite commutative module coefficients on Noetherian schemes to an arbitrary Grothendieck abelian coefficient category and arbitrary schemes. The cited blueprint lemma assumes a finite coefficient ring and a proper finite-type morphism between Noetherian schemes, and also identifies the bounded-below restriction with the ordinary derived direct image. The correction restores exactly those hypotheses and clauses.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts.md",
+   "place": "statement and proof; the first paragraph of thm-amb-etale-exceptional-adjoint invokes this lemma"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-cartesian-section-adjoint-mates",
+    "holds": true,
+    "note": "Its coefficient-system applications use finite rings A_n and proper finite-type maps between finite-type schemes over an algebraically closed finite field, so the corrected finite-Noetherian statement supplies the cited coproduct preservation."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-derived-categories",
+   "lem-pur-ringed-site-grothendieck-abelian"
+  ],
+  "old_proof": [
+   {
+    "text": "Retired auxiliary obligation, not a proof of the historical statement. Its sole caller was the unused AlgebraicGeometry.Etale.CompactificationUpperShriek namespace, now withdrawn. The active AlgebraicGeometry.Etale.rightDerivedUpperShriek is defined in WeilConjectures.SixFunctors.Etale.Derived.UpperShriek with an explicit left-adjoint hypothesis for general coefficients. Its finite-module-coefficient instance uses the already proved isLeftAdjoint_rightDerivedLowerShriekOfCompactification in LowerShriekLeftAdjoint, which retains the compactification, coproduct-preservation and Brown-representability route. A consumer source scan and compiled-expression audit find no external caller of the withdrawn namespace. The unit sk-prop-sf-cbc has empty realized arrays; no realized statement or proof step is withdrawn.",
+    "uses": [],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperDerivedDirectImageCoproducts",
+  "declaration": "AlgebraicGeometry.Etale.proper_rightDerivedLowerStar_preservesCoproducts",
+  "statement": "theorem proper_rightDerivedLowerStar_preservesCoproducts\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V T : Scheme.{u}} (r : V ⟶ T) [IsProper r]\n    [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] :\n    (∀ I : Type w, PreservesColimitsOfShape (Discrete I)\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) r)) ∧\n    Nonempty\n      (rightDerivedLowerStarPlus (ModuleCat.{u + 1} A) r ⋙\n          _root_.DerivedCategory.Plus.ι ≅\n        _root_.DerivedCategory.Plus.ι ⋙ rightDerivedLowerStar (ModuleCat.{u + 1} A) r)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The exact finite-coefficient statement already exists as the landed project declaration AlgebraicGeometry.Etale.proper_rightDerivedLowerStar_preservesCoproducts in Sheaf.AlgebraicGeometry.ProperDerivedDirectImageCoproducts (Q119 read-only group clone, landed by NP). Reuse it and drop the duplicate delivered module; its file compiles via scompile.py. This also repairs the delivered record's line-break mismatch with its module signature.",
+  "fixed_by": "NT-stage2-Codex-e70659b11"
  }
 }
