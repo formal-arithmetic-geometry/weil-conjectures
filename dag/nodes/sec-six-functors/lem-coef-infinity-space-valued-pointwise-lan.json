@@ -28,7 +28,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-infinity-local-adjoint-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -386,5 +389,34 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-87387fa7b (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all 8 steps, the searches and the split report. I also read the full statements of all 18 cited nodes, the biduality unit, the parent's two steps that use the item, and the duplicate candidates (ordinary-pointwise-kan-extension, sfb-pointwise-kan-colimit, local-adjoint-criterion, the collage nodes). None of these candidates is a duplicate, and the delivery has no new nodes. The statement agrees with HTT Def 4.3.2.2, Lemma 4.3.2.13, Prop 4.3.2.15, Def 4.3.3.2 and Prop 4.3.3.7 (online source; a WANTED line is in the report). Small cases tested: A empty, v=id, a fold of two points to one, BG to a point, and an empty comma. Step checks: (1) I recomputed the relative-nerve subset formula for A^natural to B^natural; it gives exactly the triple model, and the fibrant, cocartesian and inner-fibration chain makes C a quasicategory. (2) The max(s,t) homotopy is natural, with tau j = 1 and r tau = 1. (3) K_{j(b)} = A x_B B_{/b}; delta_b is an equivalence over B by the right-fibration, fibre and transport nodes, with homotopies strictly over B, so it pulls back along v. (4) For p: S_W to a point, colimit is equivalent to p-colimit by the join-cone mapping formula; p is an isofibration and i is full, so the existence node applies. (5) Naturality of tau together with clauses (1) and (2) of relative-cone-equivalence gives the item's actual comma cocone. (6) and (8) The inverse and mate algebra is correct. However, these steps form composites and their homotopies on whole mapping spaces while marked elementary and citing only Kan-ness (C2/C3). FIX: I added lem-cbc-simplicial-composition-spine to steps 6 and 8, set elementary=false, updated proof_deps, and declared it in split_report.tool_uses. (7) The kan-mapping-restriction substitution gives (theta v) eta. No cycle (I checked the transitive closure), no SGA, no fullness or size hypothesis is added, and the 24 searches cover all three kinds. I accept the tool uses: marked-relative-nerve, enhanced-functor-cone-calculus and composition-spine. They are all generic sk-prop-sf-cbc tools and replace no unit step. The corrected whole file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-space-valued-pointwise-lan.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinitySpaceValuedPointwiseLan",
+  "declaration": "SSet.Enhanced.infinity_space_valued_pointwise_lan",
+  "declarations": [
+   "SSet.Enhanced.lanCommaProjection",
+   "SSet.Enhanced.lanCommaArrow",
+   "SSet.Enhanced.lanCommaImageEdge",
+   "SSet.Enhanced.lanCoconeEdge",
+   "SSet.Enhanced.IsSpaceLanNatural",
+   "SSet.Enhanced.lanOnePointKan",
+   "SSet.Enhanced.lanOnePoint",
+   "SSet.Enhanced.infinity_space_valued_pointwise_lan"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinitySpaceValuedPointwiseLan.lean",
+  "statement": "theorem infinity_space_valued_pointwise_lan (A B : SSet.{u}) [Quasicategory A] [Quasicategory B] (v : A ⟶ B) (F : SSet.uliftFunctor.{u + 1, u}.obj A ⟶ CategoryTheory.Spaces.infinityCategory.{u}) : ∃ (L : SSet.uliftFunctor.{u + 1, u}.obj B ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (η : (mappingSpace ((ihom (SSet.uliftFunctor.{u + 1, u}.obj A)).obj CategoryTheory.Spaces.infinityCategory.{u}) (diagramVertex F) (diagramVertex (SSet.uliftFunctor.{u + 1, u}.map v ≫ L))) _⦋0⦌) (c : ∀ b : B _⦋0⦌, (coconeCategory (lanCommaProjection (SSet.uliftFunctor.{u + 1, u}.map v) (ULift.up b) ≫ F)) _⦋0⦌), (∀ (G : SSet.uliftFunctor.{u + 1, u}.obj B ⟶ CategoryTheory.Spaces.infinityCategory.{u}), IsWeakHomotopyEquivalence (@localAdjointComparison _ _ (@enhanced_functor_cone_calculus _ _ CategoryTheory.Spaces.infinityCategory_quasicategory).1 ((MonoidalClosed.pre (SSet.uliftFunctor.{u + 1, u}.map v)).app CategoryTheory.Spaces.infinityCategory.{u}) (diagramVertex F) (diagramVertex L) η (diagramVertex G))) ∧ IsSpaceLanNatural ((MonoidalClosed.pre (SSet.uliftFunctor.{u + 1, u}.map v)).app CategoryTheory.Spaces.infinityCategory.{u}) (diagramVertex L) (diagramVertex F) η ∧ (∀ b : B _⦋0⦌, (c b).1.1 = L.app _ (ULift.up b) ∧ (∃ τ : ((ihom (comma (SSet.uliftFunctor.{u + 1, u}.obj A) (SSet.uliftFunctor.{u + 1, u}.obj B) (SSet.uliftFunctor.{u + 1, u}.map v) (ULift.up b) true)).obj CategoryTheory.Spaces.infinityCategory.{u}) _⦋2⦌, ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 2 τ = ((MonoidalClosed.pre (lanCommaProjection (SSet.uliftFunctor.{u + 1, u}.map v) (ULift.up b))).app CategoryTheory.Spaces.infinityCategory.{u}).app _ η.1 ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 0 τ = lanCommaImageEdge (SSet.uliftFunctor.{u + 1, u}.map v) L (ULift.up b) ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 1 τ = lanCoconeEdge _ (c b)) ∧ IsColimiting _ (c b)) ∧ (F = SSet.const lanOnePoint.{u} → ∃ e : (mappingSpace ((ihom (SSet.uliftFunctor.{u + 1, u}.obj B)).obj CategoryTheory.Spaces.infinityCategory.{u}) (diagramVertex L) (diagramVertex (SSet.const lanOnePoint.{u}))) _⦋0⦌, (∃ m : ((ihom (SSet.uliftFunctor.{u + 1, u}.obj A)).obj CategoryTheory.Spaces.infinityCategory.{u}) _⦋2⦌, ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 2 m = η.1 ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 0 m = ((MonoidalClosed.pre (SSet.uliftFunctor.{u + 1, u}.map v)).app CategoryTheory.Spaces.infinityCategory.{u}).app _ e.1 ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 1 m = ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).σ 0 (diagramVertex F)) ∧ ∀ b : B _⦋0⦌, ∃ κ : ((ihom (comma (SSet.uliftFunctor.{u + 1, u}.obj A) (SSet.uliftFunctor.{u + 1, u}.obj B) (SSet.uliftFunctor.{u + 1, u}.map v) (ULift.up b) true)).obj CategoryTheory.Spaces.infinityCategory.{u}) _⦋2⦌, ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 2 κ = lanCoconeEdge _ (c b) ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 0 κ = (constantDiagrams _ CategoryTheory.Spaces.infinityCategory.{u}).app _ ((evaluation (SSet.uliftFunctor.{u + 1, u}.obj B) CategoryTheory.Spaces.infinityCategory.{u} (ULift.up b)).app _ e.1) ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 1 κ = ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).σ 0 (diagramVertex (lanCommaProjection (SSet.uliftFunctor.{u + 1, u}.map v) (ULift.up b) ≫ F)))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical existing localAdjointComparison supplies the right-pinched mapping comparison. Naturality is a specified map of represented undercategories over the target functor category, with a full simplicial family of composition triangles. Pointwise and one-point normalization clauses retain the full coherent cocones, not only their apices. Helpers have real data; the sole postponed theorem is the item itself. Added statement dependencies provide already landed comparison, functor-quasicategory and cocone-edge interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b9838f99",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Read the node, the 5 statement-dependency declarations (comma/commaSubcomplex orientation, coconeCategory, IsColimiting, mappingSpace pinching, localAdjointComparison, enhanced_functor_cone_calculus.1, coconeHomotopy, Spaces.infinityCategory), the module, the report and the commit diff. Every clause matches the node and HTT 4.3.2.2/4.3.2.13/4.3.2.15/4.3.3.2/4.3.3.7: L and eta as a pinched mapping-space vertex; for all G, IsWeakHomotopyEquivalence of theta -> (theta v) eta; naturality in G as an equivalence of represented undercategories with coherent triangles; colimiting comma cocones c b with apex L b, identified with L(alpha) eta_a by a full 2-simplex; one-point mate e with (ev)eta ~ id and e_b induced by the identity cocone. No fullness, nonemptiness or size hypothesis is added; the ulift is a faithful universe transport. The 7 helpers carry real data and source/blueprint docstrings; the only proof is sorry; no duplicate in side lean/Sheaf. The node diff adds only 3 landed stmt_deps plus the lean record; the statement is unchanged; lean.statement matches the file verbatim; the closure is acyclic. nt_compile --json on the snapshot module: rc=0, no warnings, 2.0 s. Both report sections are present. No findings."
  }
 }

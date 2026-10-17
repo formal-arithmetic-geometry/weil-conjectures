@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-weil-pbc-site-comparison-morphism",
   "def-constructible-torsor",
-  "det-pe-classical-definition-continuity-map"
+  "det-pe-classical-definition-continuity-map",
+  "def-pe-comparison-torsor"
  ],
  "proof": [
   {
@@ -283,5 +284,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsorComparisonGlue",
+  "declaration": "AlgebraicGeometry.ProEtale.torsorComparisonGlue",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.torsorComparisonGlue"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsorComparisonGlue.lean",
+  "statement": "theorem torsorComparisonGlue (X : Scheme.{u}) (G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}) (T : ComparisonTorsor G₀) : (∃ (T₀ : CategoryTheory.Sheaf.NonabelianTorsor.{u, u + 1, u + 1} X G₀) (α : ComparisonTorsor.ModelIso T₀ T), ∀ (T₀' : CategoryTheory.Sheaf.NonabelianTorsor.{u, u + 1, u + 1} X G₀) (α' : ComparisonTorsor.ModelIso T₀' T), ∃! e : T₀.sheaf ≅ T₀'.sheaf, etaleTorsorAction T₀ ≫ e.hom = (𝟙 (groupSets G₀) ⊗ₘ e.hom) ≫ etaleTorsorAction T₀' ∧ (comparisonSets X).map e.hom ≫ α'.iso.hom = α.iso.hom) ∧ IsClassical T.sheaf ∧ ∃ (I : Type (u + 1)) (U : I → X.Etale), (∀ x : X, ∃ (i : I) (y : (U i).left), (U i).hom y = x) ∧ ∀ i : I, Nonempty (ComparisonTorsor.Trivialization T ((Scheme.toProEt X).obj (U i)))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd53c3fef",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Read the node, 4 stmt_deps (3 identical to the side clone, plus the new def-pe-comparison-torsor), both Lean modules, NonabelianTorsor, proEtaleSiteComparison, IsClassical and proEtaleClassicalSheavesUnit. Every clause matches: arbitrary X; G0 in GrpCat.{u+1} with noncommutative groups allowed; ComparisonTorsor is the 03AH torsor under the canonical L(m0)∘c⁻¹ and L(e0)∘c∅⁻¹ structure on the recorded original-site sheafPullback; there exist T0 (NonabelianTorsor) and an equivariant ModelIso; uniqueness is ∃! of an equivariant iso compatible with α,α' (pair uniqueness, step 7); IsClassical T.sheaf; a jointly surjective X.Etale family with natural, equivariant pro-étale Trivializations. No extra hypotheses; universes bound; empty X, empty sections and trivial group all covered. New node is non-duplicate (side tree has only étale/additive/scheme torsors), its 12 declarations are real data with source and blueprint docstrings, and the record fields are complete. Item has a single sorry theorem whose docstring carries all 8 steps; lean.statement is verbatim; the report has both required sections. nt_compile.py --json on both files: rc 0, 3.6 s and 2.0 s. Observation only: it uses the publicly exported original-site comparison rather than the AsSmall model; this is the same inverse image, and the classical-sheaves-unit proof dependency is stated on it."
  }
 }

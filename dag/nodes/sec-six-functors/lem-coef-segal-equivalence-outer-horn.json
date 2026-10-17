@@ -32,7 +32,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper",
-  "lem-coef-reedy-model-structure"
+  "lem-coef-reedy-model-structure",
+  "lem-coef-segal-cartesian-exponent",
+  "def-coef-segal-space",
+  "lem-coef-simplicial-space-reedy-cartesian"
  ],
  "proof": [
   {
@@ -243,5 +246,32 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-bc36bb0ea (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. I checked them against Rezk §10 (cover, Lemma 10.1) and §11.2-11.11 (11.3, 11.5, 11.6, (11.9), 11.10, 11.11), using the cached text of the online PDF the nodes name. The item statement is unchanged and matches Lemma 11.10 with §11.7: H(k), the hoequiv subspaces, Reedy-fibrant Segal, no completeness, k>=2. Steps 1-7 verified. Step 1: restriction fibrations come from the last clause of the cartesian-exponent node, and T is a union of components. Step 2: the base case uses d0 as a pulled-back Segal trivial fibration, d1 ~ f^*d0 from the composition node, and the arbitrary-base fiber criterion twice; this is Rezk 11.6 made explicit. Step 3: I checked the (11.9) decomposition and C cap d^1F = d^1H by hand; a is the pullback of rho_{k-1}. Step 4: the faces S_J={0,1}+J, J a proper subset of {2..k}, are intersection-closed, and A cap F(S_J) = F{0,1} + F({1}+J) is an interval cover. Step 5: the inverse-image argument holds. Step 6: B(k) gluing at vertex 1 and the Segal 2-of-3. Step 7: s=bar. The report's source-error note (d^1 vs d^0 in 11.10/11.11) is correct, and the fork example is valid. New node lem-coef-segal-composition-equivalences is true (Rezk 11.2-11.5 in section form) and does not duplicate the homotopy-category-components node (pi_0 only). New node lem-coef-segal-finite-cover-descent is true: Reedy-fibrant finite poset limits with objectwise Segal-cover equivalences. It is not Lemma 10.3, the spine-interval-test node or the localization nodes, and its consecutive-edge condition repairs Rezk's cover definition. Neither node restates a clause of the item. No cycle: the 183-node closure does not reach the item. All citations are in the unit, so tool_uses is empty and none was accepted. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalEquivalenceOuterHorn",
+  "declaration": "SSet.SegalSpace.equivalence_outer_horn",
+  "declarations": [
+   "SSet.SegalSpace.mappingEdgeEvaluation",
+   "SSet.SegalSpace.uncurriedRowIso",
+   "SSet.SegalSpace.equivalenceMappingSubcomplex",
+   "SSet.SegalSpace.equivalenceMappingRestriction",
+   "SSet.SegalSpace.outerHornInclusion",
+   "SSet.SegalSpace.equivalence_outer_horn"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalEquivalenceOuterHorn.lean",
+  "statement": "theorem equivalence_outer_horn (V : SimplicialSpace.{u}) (hV : IsSegal V) (k : ℕ) (hk : 2 ≤ k) : Enhanced.IsWeakHomotopyEquivalence (equivalenceMappingRestriction (outerHornInclusion k) V)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed cartesian-internal-hom mappingSpace and mappingSpacePre, Segal-space predicate, strict-fiber inverse-equation equivalence components, and discrete representables. Helpers construct edge evaluation from the existing counit, the identity currying transport, the all-edge preimage intersection, and the canonical restricted horn map. No duplicate mapping complex or restriction and no downstream Segal theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60a332fe0",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read node, Rezk 11.7/Lemma 11.10, module and deps (SegalSpace equivalenceArrows/IsEquivalenceArrow, SegalCartesianExponent IsSegal/discreteRepresentable, SimplicialSpaceReedyCartesian mappingSpace/mappingSpacePre, fullSubcomplex, Mathlib horn). Every clause exact: all-edge intersection over every F(1)->X incl. degenerate, canonical Yoneda edge evaluation, restriction = mappingSpacePre, H(k) = horn k 0 = faces 1..k, k>=2, no completeness; identity row iso confirms outer/inner orientation. Edge cases k=2/0/1, empty V/X, universes ok. Real-data helpers, sorry only on theorem, docstrings with source/blueprint and 7-step proof, lean.statement verbatim, dependency graph acyclic (239 nodes). nt_compile exit 0, no errors or warnings (6.3 s). Minor: Worker report mentions stale name mappingComplex; documentation only."
  }
 }

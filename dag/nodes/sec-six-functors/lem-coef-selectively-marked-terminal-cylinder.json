@@ -261,5 +261,30 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-b51e09649 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The delivery is one commit containing the item and the report, with no new nodes. The item statement matches HTT Lemma 3.2.1.9 (simplex input 3.2.1.8) hypothesis by hypothesis: arbitrary small K, a simplicial subset K', a set A of vertices, marking by degenerate edges plus the vertical edges over A, and the final-vertex alternative for every nondegenerate simplex. HTT is not archived under literature/; the WANTED lines are present and proof_origin.by=agent. The statement is exactly what parent lem-coef-marked-cone-generator-calculations uses in steps 4 and 5 (K a cube, K'=boundary of K). Step 2 uses only the statement of lem-coef-infinity-right-prism-boundary, with the coordinates exchanged. I rechecked the faces of tau_0 and tau_n. Step 3 is inner horn generator (i): the only vertical edge of tau_q is over q, which is not n, and e_n already lies in X_0 for n>=1. Step 4 is final horn generator (ii): the final edge maps to e_n, and n=0 gives {1}->(Delta^1)^sharp. Step 5 uses the boundary-cell Mathlib leaf; the final-vertex hypothesis makes sigma x id a marked map. In Step 6 I checked the bijection of new simplices and the exact markings, where a new vertex can only appear at n=0 and gets its marked edge from e_0. Step 7 uses closure under pushouts and transfinite composition with small well-orders. Small cases I checked: K'=K, A empty, a missing point, and K=Delta^1 with K'={0} and A={1}. No duplicate: endpoint-prism-generation covers only the all-vertical case A=K_0. All cited statements are in the unit or are definitions, so tool_uses is empty and needs nothing. No SGA is cited and no target is touched. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SelectivelyMarkedTerminalCylinder",
+  "declaration": "SSet.Marked.selectively_marked_terminal_cylinder",
+  "declarations": [
+   "SSet.Marked.selectivelyMarkedCylinder",
+   "SSet.Marked.terminalCylinderSubcomplex",
+   "SSet.Marked.selectivelyMarkedTerminalCylinderInclusion",
+   "SSet.Marked.selectively_marked_terminal_cylinder"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SelectivelyMarkedTerminalCylinder.lean",
+  "statement": "theorem selectively_marked_terminal_cylinder {K : SSet.{u}} (K' : K.Subcomplex) (A : Set (K _⦋0⦌)) (h : ∀ (n : ℕ) (x : K.nonDegenerate n), x.1 ∈ K'.obj (op ⦋n⦌) ∨ K.map (SimplexCategory.const ⦋0⦌ ⦋n⦌ (Fin.last n)).op x.1 ∈ A) : markedAnodyne (selectivelyMarkedTerminalCylinderInclusion K' A)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The explicit target marking, relative terminal subcomplex and its induced-marking inclusion are helpers of this node. Reuses SSet.Marked.markedAnodyne and inducedMarkingMap, Mathlib nonDegenerate and subcomplex products/unions. The sole theorem has sorry as its proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fa292d79",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Statement matches node/HTT 3.2.1.9 clause by clause: K:SSet.{u}, K':Subcomplex, A:Set K_0, marking = range σ0 ∪ vertical edges (σ0 a, edge 0→1), B = K'.unionProd {1} (=⊤.prod{1} ⊔ K'.prod ⊤, checked in Mathlib Monoidal.lean:248), induced marking/inclusion via the dependency's inducedMarking(Map), hypothesis over nondegenerate simplices with final vertex via const [0]→[n] at last n (equivalent to HTT's all simplices), conclusion markedAnodyne. Edge cases (K empty, K'=K, A empty, Δ⁰, Δ¹ selective, A=K₀, non-regular, universes) fine. Helpers real; only sorry; docstrings with source+blueprint; lean.statement verbatim; node differs only in lean; no duplicate (MarkedEndpointPrismGeneration is the all-vertical case). nt_compile.py clean (rc 0, no errors/non-sorry warnings; broken-copy control errors). Report has Worker report and Second reading by Q36. No findings."
  }
 }

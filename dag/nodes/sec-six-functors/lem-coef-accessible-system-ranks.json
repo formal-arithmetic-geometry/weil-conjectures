@@ -295,5 +295,23 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-36574d2fe (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement, all ten steps, every cited node statement, the parent lem-coef-accessible-pie-closure, and the blueprint ancestor's proof paragraph 2. The ancestor is only a distant auxiliary input, so the agent origin and the WANTED for Adámek–Rosický are honest. Step 2: the reindex node and the sharp-subset node apply with (α,β,A)=(ν,τ,Π). Each J has fewer than τ arrows and is ν-filtered, and every arrow lies in some J. Step 3: the small-colimit node's hypotheses hold, and it needs no cocompleteness. Step 4: the cocone gluing and the small representative family, which does not depend on X, are correct and elementary. Step 5: clause (1) of the elementwise node gives rs=1. Step 6: η0 lies above all ν_s, α_t and b, and β=(2^{η0})^+ satisfies the power bound since (2^{η0})^{η0}=2^{η0}. Step 7: each generator image gets its rank from its own presentation. Step 8: κ=(2^η)^+ satisfies the bound for (β,κ); H_t preserves the β-filtered retract presentation, and the image is κ-presentable. Step 9: the Hom-set retract inverse p c_D^{-1} i_Z checks on both sides. Step 10: λ=β<η<κ and b<κ. Edge cases checked: S and T empty, finite b, 0^0, empty families, terminal category. The parent uses this item exactly in this form. No ordinary-category duplicate exists: the other rank nodes assume local presentability or cocompleteness, or concern infinity-categories. All citations are within the unit or are Mathlib leaves, so no tool_uses are needed. No SGA is cited, no new nodes are created, the statement is unchanged, and there are no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleSystemRanks",
+  "declaration": "CategoryTheory.accessible_system_ranks",
+  "file": "lean/Sheaf/CategoryTheory/AccessibleSystemRanks.lean",
+  "statement": "theorem accessible_system_ranks (S T : Type w) (A : S → Type u) [∀ s, Category.{w} (A s)] [∀ s, IsAccessibleCategory.{w} (A s)] (a b : T → S) (H : ∀ t, A (a t) ⥤ A (b t)) (hH : ∀ t, ∃ (η : Cardinal.{w}) (_ : Fact η.IsRegular), HasCardinalFilteredColimits (A (a t)) η ∧ (H t).IsCardinalAccessible η) (bound : Cardinal.{w}) : ∃ (μ κ : Cardinal.{w}) (_ : Fact μ.IsRegular) (_ : Fact κ.IsRegular), μ < κ ∧ bound < κ ∧ (∀ s, HasCardinalFilteredColimits (A s) μ ∧ IsCardinalAccessibleCategory (A s) κ) ∧ ∀ t, (H t).IsCardinalAccessible μ ∧ (H t).IsCardinalAccessible κ ∧ ∀ (P : A (a t)) [IsCardinalPresentable P κ], IsCardinalPresentable ((H t).obj P) κ",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f85031c51",
+  "group": "Q39",
+  "result": "pass",
+  "note": "I matched every hypothesis and conclusion of accessible_system_ranks against the node and the installed Mathlib definitions (IsAccessibleCategory, IsCardinalAccessibleCategory, IsCardinalFilteredGenerator, Functor.IsCardinalAccessible, IsCardinalPresentable, HasCardinalFilteredColimits); all are exact with the same quantifier order. The functor hypothesis keeps the source-colimit conjunct, nothing stronger is assumed, and no λ-accessibility is claimed. Edge cases checked: empty S and T, zero or finite bound, empty categories. The ten proof steps are sound and the statement is true. lean.statement matches the file verbatim, stmt_deps and the statement are unchanged, there is one sorry and no definitions, the docstrings give the sources, the blueprint id and all ten steps, and the report has a real Worker report and Second reading by Q39. No duplicate: Mathlib's Uniformization.lean is not installed, and the side-tree accessibility modules state different things. nt_compile.py --json gave rc=0 with no errors, and a broken copy showed diagnostics are reported and all universes are bound in w. No findings and no fixes."
  }
 }
