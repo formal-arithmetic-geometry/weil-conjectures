@@ -8,7 +8,8 @@
   "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10, printed pp.31–33: the first comma retraction in Lemma 9.7, with simultaneous base/contravariant-endpoint functoriality. No Stacks tag states this categorical bar calculation; source formulas checked online, agent expansion of strict naturality."
  },
  "stmt_deps": [
-  "def-coef-zigzag-homotopy-calculus"
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-thomason-grothendieck-comparison"
  ],
  "proof": [
   {
@@ -206,5 +207,30 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-be2a850d1 (reviewer sub-agent of L); spot-checked: Read the item, cited dependency, parent, chapter/unit route, report, source sections, and all seven proof steps in full. The strict Grothendieck/comma constructions, contravariant variance, retraction, base-change square, composition, identities, and naturality are correctly typed and verified on objects and arrows. Dwyer–Kan §9.1 and §9.10 support the construction; Mathlib searches found no whole-lemma match. Edge cases (empty/terminal bases, empty fibres, nonidentity arrows) pass. No duplicate, cycle, missing citation, route violation, target change, SGA use, or A–F fault found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.OrdinaryCommaRetractionNaturality",
+  "declaration": "CategoryTheory.OrdinaryCommaRetraction.exists_strict_naturality",
+  "declarations": [
+   "CategoryTheory.OrdinaryCommaRetraction.Total",
+   "CategoryTheory.OrdinaryCommaRetraction.projection",
+   "CategoryTheory.OrdinaryCommaRetraction.CommaFiber",
+   "CategoryTheory.OrdinaryCommaRetraction.exists_strict_naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/OrdinaryCommaRetractionNaturality.lean",
+  "statement": "theorem exists_strict_naturality : ∃ (R : ∀ (C : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (c : C), CommaFiber C F c ⥤ F.obj (op c)) (K : ∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (_α : G ⟶ H.op ⋙ F), Total D G ⥤ Total C F) (L : ∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (_α : G ⟶ H.op ⋙ F) (c : D), CommaFiber D G c ⥤ CommaFiber C F (H.obj c)), (∀ (C : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (c : C) (x : CommaFiber C F c), (R C F c).obj x = (F.map x.hom.op).toFunctor.obj x.right.unop.fiber.unop) ∧ (∀ (C : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (c : C) (x y : CommaFiber C F c) (f : x ⟶ y), HEq ((R C F c).map f) ((F.map x.hom.op).toFunctor.map f.right.unop.fiber.unop)) ∧ (∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (α : G ⟶ H.op ⋙ F) (x : Total D G), (K C D F G H α).obj x = op ⟨op (H.obj x.unop.base.unop), op ((α.app x.unop.base).toFunctor.obj x.unop.fiber.unop)⟩) ∧ (∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (α : G ⟶ H.op ⋙ F) (x y : Total D G) (f : x ⟶ y), HEq ((K C D F G H α).map f).unop.base.unop (H.map f.unop.base.unop) ∧ HEq ((K C D F G H α).map f).unop.fiber.unop ((α.app x.unop.base).toFunctor.map f.unop.fiber.unop)) ∧ (∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (α : G ⟶ H.op ⋙ F), K C D F G H α ⋙ projection C F = projection D G ⋙ H) ∧ (∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (α : G ⟶ H.op ⋙ F) (c : D) (x : CommaFiber D G c), ((L C D F G H α c).obj x).right = (K C D F G H α).obj x.right ∧ HEq ((L C D F G H α c).obj x).hom (H.map x.hom)) ∧ (∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (α : G ⟶ H.op ⋙ F) (c : D) (x y : CommaFiber D G c) (f : x ⟶ y), HEq ((L C D F G H α c).map f).right ((K C D F G H α).map f.right)) ∧ (∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (α : G ⟶ H.op ⋙ F) (b c : D) (s : b ⟶ c), StructuredArrow.map s ⋙ L C D F G H α b = L C D F G H α c ⋙ StructuredArrow.map (H.map s)) ∧ (∀ (C D : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (α : G ⟶ H.op ⋙ F) (c : D), L C D F G H α c ⋙ R C F (H.obj c) = R D G c ⋙ (α.app (op c)).toFunctor) ∧ (∀ (C D E : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (Q : Eᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (J : E ⥤ D) (α : G ⟶ H.op ⋙ F) (γ : Q ⟶ J.op ⋙ G), K C E F Q (J ⋙ H) (γ ≫ Functor.whiskerLeft J.op α) = K D E G Q J γ ⋙ K C D F G H α) ∧ (∀ (C D E : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (G : Dᵒᵖ ⥤ Cat.{v, v}) (Q : Eᵒᵖ ⥤ Cat.{v, v}) (H : D ⥤ C) (J : E ⥤ D) (α : G ⟶ H.op ⋙ F) (γ : Q ⟶ J.op ⋙ G) (c : E), L C E F Q (J ⋙ H) (γ ≫ Functor.whiskerLeft J.op α) c = L D E G Q J γ c ⋙ L C D F G H α (J.obj c)) ∧ (∀ (C : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}), K C C F F (𝟭 C) (𝟙 F) = 𝟭 (Total C F)) ∧ (∀ (C : Cat.{u, u}) (F : Cᵒᵖ ⥤ Cat.{v, v}) (c : C), L C C F F (𝟭 C) (𝟙 F) c = 𝟭 (CommaFiber C F c))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The total category is the existing SSet.Thomason.Gr on the opposite base; the landed owner node was added to stmt_deps. Projection and comma are abbreviations of existing Mathlib constructions. The theorem simultaneously supplies the canonical R, K and L families, fully characterized on objects and arrows, with strict projection, precomposition, retraction, composition and identity equalities. HEq only transports dependent endpoints in component formulas."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0ffb7a6d2",
+  "group": "N7",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, sources, dependencies, all thirteen clauses, universes, edge cases and maintainer gates. Both scompile.py passes succeeded without diagnostics. No fixes required; shared context-clone HEAD advanced externally, documented in review."
  }
 }

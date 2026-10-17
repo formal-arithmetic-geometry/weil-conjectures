@@ -27,7 +27,10 @@
   "def-weil-pbc-sheafification",
   "def-weil-abstract-derived-category",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-combinatorial-localization-presentability"
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-cbc-general-bousfield-localization",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -352,5 +355,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgPresheafModelLocalizations",
+  "declaration": "HomotopicalAlgebra.dgPresheafModelLocalizations",
+  "declarations": [
+   "HomotopicalAlgebra.DgPresheaf",
+   "HomotopicalAlgebra.DgObjectwiseQuasiIso",
+   "HomotopicalAlgebra.DgObjectwiseDegreewiseSurjective",
+   "HomotopicalAlgebra.DgObjectwiseSurjectiveQuasiIso",
+   "HomotopicalAlgebra.DgProjectiveCofibration",
+   "HomotopicalAlgebra.DgSheafifiedCohomologyMap",
+   "HomotopicalAlgebra.DgSheafCohomologyEquivalence",
+   "HomotopicalAlgebra.DgCoherentLocalization",
+   "HomotopicalAlgebra.DgHomotopyFunctionComplex",
+   "HomotopicalAlgebra.DgArrowQuasiIsoSquare",
+   "HomotopicalAlgebra.DgShiftInvariant",
+   "HomotopicalAlgebra.DgLeftProper",
+   "HomotopicalAlgebra.DgShiftQuillenAutoequivalences",
+   "HomotopicalAlgebra.DgProjectiveModelData",
+   "HomotopicalAlgebra.DgSheafModelData",
+   "HomotopicalAlgebra.DgBousfieldModelData",
+   "HomotopicalAlgebra.DgLeftQuillen",
+   "HomotopicalAlgebra.dgPresheafModelLocalizations"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgPresheafModelLocalizations.lean",
+  "statement": "theorem dgPresheafModelLocalizations {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {Λ : Type w} [CommRing Λ] : ∃ (_sheafification : HasWeakSheafify J (ModuleCat.{max u v w, w} Λ)), ∃ (P : DgProjectiveModelData (C := C) (Λ := Λ)), ∃ (S : DgCoherentLocalization.{(max u v w) + 1, max u v w, t} (DgPresheaf C Λ) (fun _ _ f ↦ DgObjectwiseQuasiIso f)), Nonempty (@CosimplicialFrameMappingData _ _ P.hasLimits P.hasColimits P.model S.K S.q) ∧ ∃ (M : DgSheafModelData (C := C) (Λ := Λ) J), ∀ (I : Type (max u v w)) (B : I → Arrow (DgPresheaf C Λ)), ∃ (L : DgBousfieldModelData (P := P) B), (DgShiftInvariant B → DgShiftQuillenAutoequivalences L.model) ∧ ((∀ i : I, DgSheafCohomologyEquivalence J (B i).hom) → DgLeftQuillen L.model M.model (𝟭 (DgPresheaf C Λ)) ∧ (∀ {X Y : DgPresheaf C Λ} (f : X ⟶ Y), L.model.categoryWithWeakEquivalences.weakEquivalences f → M.model.categoryWithWeakEquivalences.weakEquivalences f))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repairs H3/H8/H11 of returned head a79979fe23e2: actual framed precomposition from the published general localization interface, normalized coherent comparison, compatible site/coefficient/model universes, small indexed arrow families, equivalence-closed zigzags for shifts, the complete eleven-step proof docstring, and a clause-by-clause second reading. No natural statement or proof plan was changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4342075a6",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Wrote review.md. Checked both immutable modules, all statement dependencies, source clauses, universes, edge cases, docstrings, and verbatim signatures. Both files compiled cleanly through scompile.py. No corrections needed.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }
