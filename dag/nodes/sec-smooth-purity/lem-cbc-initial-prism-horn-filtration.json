@@ -50,18 +50,30 @@
    }
   },
   {
-   "text": "Fix a free simplex $\\sigma=\\sigma_s$ of dimension $q$ and index $p$, with initial chain $(0,0)<\\cdots<(p,0)<(p,1)$. For each face deleting position $a\\ne p$, verify membership in $X_{s-1}$. If $a<p$, its first projection omits $a$, so the face belongs to $X_0$. If $a=p+1$, a next vertex exists because the second projection contains $2$ (here $n\\geq2$). If its second coordinate is at least $2$, deleting $(p,1)$ omits $1$, so the face belongs to $X_0$. Otherwise that next vertex is $(p+1,1)$: it has first coordinate greater than $p$ by strictness and cannot skip $p+1$ by surjectivity. Insert $(p+1,0)$ in the face just before $(p+1,1)$; the resulting free $q$-simplex has index $p+1$ and is earlier in the enumeration, so contains the face. If $a>p+1$, deletion either loses a required coordinate and gives a face in $X_0$, or preserves both surjections and the vertical pair, giving a free $(q-1)$-simplex, again earlier. This puts every face other than the $p$th in $X_{s-1}$.\n\nThe $p$th face $\\tau$ retains all first coordinates and all second coordinates $1,\\ldots,n$, so is outside $X_0$. It is not free: its initial chain is $(0,0)<\\cdots<(p-1,0)<(p,1)$. If it were in $X_{s-1}$, it would be a face of some earlier free simplex $\\sigma'$. Since $\\tau$ is nonfree of dimension $q-1$ and earlier simplices have dimension at most $q$, $\\sigma'$ is obtained by inserting exactly one vertex into $\\tau$. To create a vertical pair $(b,0)<(b,1)$, either insert $(p,0)$, which gives $\\sigma$ itself, or insert $(b,1)$ after an existing $(b,0)$. Inserting $(b,0)$ before an existing $(b,1)$ with $b\\neq p$ is impossible: the vertices of $\\tau$ with second coordinate $1$ are $(p,1)$ and possibly later $(b,1)$ with $b>p$, and such a later $(b,1)$ is preceded by a vertex of second coordinate $1$, which is not below $(b,0)$. In the latter case $b<p$ and monotonicity forces $b=p-1$: for $b<p-1$ the next existing vertex $(b+1,0)$ is incomparable with $(b,1)$. Thus when $p>0$ the only distinct free enlargement has index $p-1$, and is later in the enumeration; when $p=0$ there is none. Both contradict the choice of $\\sigma'$. So $\\tau$ is absent. As $\\sigma$ is an injective chain map, the only nondegenerate simplices of $\\Delta^q$ outside its $p$th horn are that missing face and the full simplex, and containment of the full simplex would imply containment of that face. Repeating entries shows the same for all degenerate simplices. Therefore $\\sigma^{-1}(X_{s-1})=\\Lambda_p^q$.",
+   "text": "Fix a free simplex $\\sigma=\\sigma_s$ of dimension $q$ and index $p$, with initial chain $(0,0)<\\cdots<(p,0)<(p,1)$. For each face deleting position $a\\ne p$, verify membership in $X_{s-1}$. If $a<p$, its first projection omits $a$, so the face belongs to $X_0$. If $a=p+1$, a next vertex exists because the second projection contains $2$ (here $n\\geq2$). If its second coordinate is at least $2$, deleting $(p,1)$ omits $1$, so the face belongs to $X_0$. Otherwise that next vertex is $(p+1,1)$: it has first coordinate greater than $p$ by strictness and cannot skip $p+1$ by surjectivity. Insert $(p+1,0)$ in the face just before $(p+1,1)$; the resulting free $q$-simplex has index $p+1$ and is earlier in the enumeration, so contains the face. If $a>p+1$, deletion either loses a required coordinate and gives a face in $X_0$, or preserves both surjections and the vertical pair, giving a free $(q-1)$-simplex, again earlier. This puts every face other than the $p$th in $X_{s-1}$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/01DN",
-    "place": "Lemma 4.4.4.7 proof, verification that the old inverse image of each free simplex is exactly its indexed horn (lines 92-128)."
+    "place": "Lemma 4.4.4.7 proof, the three face cases preceding the missing-face argument."
    }
   },
   {
-   "text": "The strict vertex chain of $\\sigma_s$ is injective, so postcomposition with it is injective on the weak chains in every degree. Thus $\\Delta^{q_s}$ is isomorphic to its image, $X_s=X_{s-1}\\cup\\operatorname{im}(\\sigma_s)$, and their intersection is the image of $\\Lambda_{p_s}^{q_s}$ by step 3. Given simplicial maps $g:X_{s-1}\\to T$ and $h:\\Delta^{q_s}\\to T$ agreeing on this horn, define the map on $X_s$ by $g$ on the first subset and by $h\\sigma_s^{-1}$ on the image. It is well-defined on the intersection, commutes with every simplicial operator because the two subsets are closed under those operators, and is the unique extension since they cover $X_s$. This is exactly the pushout universal property of [def-weil-pbc-category-colimit], using the natural-transformation definition in [def-weil-pbc-simplicial-set]. Each free simplex surjects onto the $n+1$ vertices of $\\Delta^n$, so $q_s\\geq n\\geq2$; its vertical pair occupies positions $p_s,p_s+1$, hence $0\\leq p_s<q_s$. If $p_s=0$, those first two vertices are precisely $(0,0),(0,1)$ by step 1. This proves all remaining clauses.",
+   "text": "The missing $p$th face $\\tau$ retains all first coordinates and all second coordinates $1,\\ldots,n$, hence is outside $X_0$. Its initial chain is $(0,0)<\\cdots<(p-1,0)<(p,1)$ and it has no vertical $0$-to-$1$ pair. If it belonged to $X_{s-1}$ it would be a face of an earlier free simplex $\\sigma'$. It is nonfree of dimension $q-1$, whereas earlier simplices have dimension at most $q$; thus $\\sigma'$ is obtained by inserting exactly one vertex into $\\tau$. Apply [lem-cbc-nonfree-chain-completions]: inserting $(p,0)$ recovers $\\sigma_s$, and the only distinct possibility has index $p-1$ and exists only for $p>0$. That possibility occurs later, since equal dimensions are ordered by decreasing index. This contradiction excludes the missing face, also when $p=0$. By [def-cbc-enhanced-diagrams-cones], the only strict subchains of $[q]$ outside $\\Lambda_p^q$ are $[q]\\setminus\\{p\\}$ and $[q]$ itself: every other proper subchain omits some vertex different from $p$. Containment of the full simplex would imply containment of its missing face. Together with step 3 this proves $\\sigma_s^{-1}(X_{s-1})=\\Lambda_p^q$ on strict chains, and hence on weak chains by collapsing repetitions.",
+   "uses": [
+    "lem-cbc-nonfree-chain-completions",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DN",
+    "place": "Lemma 4.4.4.7 proof, final missing-face contradiction and inverse-image equality."
+   }
+  },
+  {
+   "text": "The strict vertex chain of $\\sigma_s$ is injective, so postcomposition with it is injective on the weak chains in every degree. Thus $\\Delta^{q_s}$ is isomorphic to its image, $X_s=X_{s-1}\\cup\\operatorname{im}(\\sigma_s)$, and their intersection is the image of $\\Lambda_{p_s}^{q_s}$ by step 4. Given simplicial maps $g:X_{s-1}\\to T$ and $h:\\Delta^{q_s}\\to T$ agreeing on this horn, define the map on $X_s$ by $g$ on the first subset and by $h\\sigma_s^{-1}$ on the image. It is well-defined on the intersection, commutes with every simplicial operator because the two subsets are closed under those operators, and is the unique extension since they cover $X_s$. This is exactly the pushout universal property of [def-weil-pbc-category-colimit], using the natural-transformation definition in [def-weil-pbc-simplicial-set]. Each free simplex surjects onto the $n+1$ vertices of $\\Delta^n$, so $q_s\\geq n\\geq2$; its vertical pair occupies positions $p_s,p_s+1$, hence $0\\leq p_s<q_s$. If $p_s=0$, those first two vertices are precisely $(0,0),(0,1)$ by step 1. This proves all remaining clauses.",
    "uses": [
     "def-weil-pbc-simplicial-set",
     "def-weil-pbc-category-colimit"
@@ -76,6 +88,7 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-simplicial-set",
+  "lem-cbc-nonfree-chain-completions",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
@@ -183,7 +196,7 @@
   "lines": "551-599,601-657,659-672,676-713",
   "why_not_leaf": "Regular pairings are useful implementation input, but no declaration read supplies this finite horn-pushout filtration with all outer horns attached along the precise initial edge. Extracting and ordering cells, proving finiteness, and checking these endpoints are additional combinatorial work. Independent second reading also checked Subcomplex.Pairing.RankFunction.isPushout and relativeCellComplex (AnodyneExtensions/RelativeCellComplex.lean:569-589,609-630): their rank-indexed coproduct horn cells still require finite linearization and endpoint verification."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-invertible-prism-extension",
@@ -196,16 +209,16 @@
   "date": "2026-10-17",
   "item": "lem-cbc-initial-prism-horn-filtration",
   "worker": "stage1",
-  "summary": "Four steps prove the finite free-simplex enumeration, exhaustion of the product, predecessor intersection equal to the indexed horn, and elementary pushout gluing for embedded attaching simplices. Explicitly handles the p=0 missing-face case and verifies q>=2 and the outer-horn endpoints. Second reading removed the unnecessary general horn-image pushout helper; no new nodes.",
+  "summary": "Dedicated repair of the human return on the former long step 3: extracted the classification of all free one-vertex superchains as one statement-only finite-poset lemma. Preserved the statement, Lean record, route and other proof arguments; separated included faces and missing-face exclusion into short steps, with the latter citing the extracted lemma. Every non-elementary step is under 2000 characters.",
   "blueprint": "The steps realize the opening finite-prism attachment input in thm-cbc-finite-level-proetale, via the inherited chain lem-cbc-invertible-prism-extension -> lem-cbc-enhanced-functor-cone-calculus. They supply the exact Kerodon 01DN free-simplex filtration and its pushout verification."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NP-c8a3068dc",
-  "group": "NP",
+  "reviewer": "NT-cc-NU-6f9e3a142",
+  "group": "NU",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-c8a3068dc (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, the full statements of the cited definitions (def-cbc-enhanced-diagrams-cones, def-weil-pbc-simplicial-set, def-weil-pbc-category-colimit) and how the parent lem-cbc-invertible-prism-extension uses it (steps 1-2: filtration, pushout, q>=2, the p=0 endpoint edge). Source: Kerodon Lemma 4.4.4.7 (01DN), read online 2026-10-17 and still WANTED as an archive copy. The statement matches it hypothesis by hypothesis (m>=0, n>=2, X0=(dDelta^m x Delta^n) u (Delta^m x Lambda^n_0), q>=2, 0<=p<q, pushout along Lambda^q_p, and sigma sends 0,1 to (0,0),(0,1) when p=0) and is not weakened. There are no coefficient categories or base-change morphisms here. Step 1 (strict chains, unique index, Kerodon's ordering) is correct. Step 2 (exhaustion, including p=0 with (0,0) absent) is correct. Step 3: all face cases a<p, a=p+1 (uses n>=2) and a>p+1 are correct, and so is the argument that the missing p-th face is absent (the only other free enlargement has index p-1 and comes later). Fix: I added one sentence ruling out inserting (b,0) before an existing (b,1) with b!=p. Step 4 glues along the image of an embedded simplex; this is elementary and correctly marked. Independent brute force (all strict chains, three random tie-breaks, every (m,n) with m<=3, 2<=n<=4, (m+1)(n+1)<=16): the faces lying in X_{s-1} are exactly the horn, q>=2, 0<=p<q, the endpoint clause holds, and X_t is the whole product. All passed; the counts match the report. There are no new nodes. rg for 01DN, Lambda_0^n and prism found no duplicate: lem-coef-infinity-right-prism-boundary and lem-weil-pbc-simplicial-set-glue-simplex are different statements. The Mathlib pairing candidate is rightly not a leaf. All citations are definitions, so there is no route issue, no tool_uses and no SGA. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-cbc-initial-prism-horn-filtration.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-6f9e3a142 (reviewer sub-agent of L); spot-checked: I read all of it: the contract (AGENTS, stage 1, brief, GOAL, dag-sync, delivery-errors A-F), the packet, the report, the NU return (re-split of the 2486-character step 3, statement kept), the item and new node in full, the full statements of def-cbc-enhanced-diagrams-cones, def-weil-pbc-simplicial-set and def-weil-pbc-category-colimit, the unit sk-prop-sf-cbc and the chapter. I read Kerodon Lemma 4.4.4.7 (01DN) online; it has no local copy and remains WANTED. The item statement is unchanged and matches 01DN clause by clause. Steps 1-5 follow 01DN's proof: free simplices with forced prefix and unique index; enumeration by increasing dimension, then decreasing index; exhaustion by inserting (p,0); face cases a<p, a=p+1 (uses n>=2) and a>p+1; missing face excluded through the child, since the only other completion has index p-1 and comes later, also for p=0; horn inverse-image equality; elementary gluing pushout with q>=n>=2, p<q and the p=0 endpoints. Step lengths are 1482/978/983/1188/1092, and proof_deps equals the union of the uses. The new node lem-cbc-nonfree-chain-completions is statement-only and self-contained, cites def-weil-pbc-simplicial-set for [r], has correct blueprint from/via and same_as=[], and does not restate a clause of the item. I proved it by hand: (b,0) is forced to b=p by incomparability with (p,1), and (b,1) to b=p-1 by incomparability with (b+1,0). My own exhaustive script covered all 152 chains with m<=3, n<=4, (m+1)(n+1)<=16, including n=1, m=0 and p=0; for n>=2 it also rebuilt the whole filtration and checked that each preimage of the previous stage is exactly the horn. An rg search of the DAG for 01DN, vertical pair, free/nonfree and insertion vocabulary found no duplicate; prop-pur-weil-equivariance-scheme-frobenius is only a tag collision. There are no coefficient categories or base-change morphisms, no SGA source, no tool_uses and no fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

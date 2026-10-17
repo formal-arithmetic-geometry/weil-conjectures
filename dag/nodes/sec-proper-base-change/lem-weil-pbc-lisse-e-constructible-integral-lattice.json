@@ -49,28 +49,71 @@
    }
   },
   {
-   "text": "For two constructible integral sheaves $P,Q$ as described in the statement, the integral characterization places $P[0],Q[0]$ in the bounded constructible complete category. The scalar-extension/restriction adjunction is given on sheaves by $\\phi\\mapsto(m\\mapsto\\phi(1\\otimes m))$, with inverse $\\psi\\mapsto(e\\otimes m\\mapsto e\\psi(m))$. Step 1 shows that both functors are exact; the exact-functor and derived-adjunction nodes therefore give the same adjunction on derived categories. Apply bounded-below compactness to $P[0]$ and the copies of $Q[0]$, with common lower bound zero. Coproducts are exact: they are filtered colimits of their finite subsums, which are exact, so step 1 applies. Therefore termwise coproducts preserve quasi-isomorphisms and compute the derived coproducts used here. The telescope of $Q\\xrightarrow{\\varpi}Q\\to\\cdots$ is the cone of $1-s$ on $\\bigoplus_{n\\geq0}Q$, where $s$ sends summand $n$ to summand $n+1$ by $\\varpi$. The direct sum of sheaves is the sheafification of the sectionwise direct sum by the module-colimit node. Thus every section locally has a finitely supported representative. The map $1-s$ is injective: in such a kernel representative the first coordinate and then every successive coordinate is zero; sheafification preserves this conclusion by exactness from step 1; its cokernel is $Q[1/\\varpi]$ by the fraction relations. To justify the use of a cone here, choose K-injective resolutions of the two direct-sum terms by the resolution-existence node and represent $1-s$ by a chain map between them using K-injective Hom comparison. The cone of that map is K-injective: mapping an acyclic complex into it gives the cone of the two acyclic Hom complexes, hence is acyclic. The defining Hom-complex formula identifies $\\operatorname{Hom}^{\\bullet}(P,C(f))^q$ with $\\operatorname{Hom}^{\\bullet}(P,J)^q\\oplus\\operatorname{Hom}^{\\bullet}(P,I)^{q+1}$ for $f:I\\to J$. On a pair $(a,b)$ its differential is $(d(a)+f\\circ b,-d(b))$, exactly the cone differential. Global sections of the Hom complex therefore take this cone to the cone of the corresponding global Hom-complex map. For a K-injective representative $I_B$ of any target $B$, K-injective Hom comparison identifies $H^q\\operatorname{Hom}^{\\bullet}(P,I_B)$ with $\\operatorname{Hom}_{D(A_T)}(P,B[q])$: cocycles are chain maps and boundaries are null homotopies. Thus compactness identifies derived Hom from $P$ of the telescope with the same telescope on $R\\operatorname{Hom}_{A_T}(P,Q)$. Exactness of filtered colimits from step 1 identifies its cohomology with localization. Taking degree one and using the adjunction yields the natural bijection $\\operatorname{Ext}^1_{A_T}(P,Q)[1/\\varpi]\\cong\\operatorname{Ext}^1_{E_T}(S(P),S(Q))$. In particular every rational extension class is $S(\\alpha)/\\varpi^n$ for an integral class $\\alpha$ and an integer $n\\geq0$.",
+   "text": "For constructible integral sheaves $P,Q$ as in the statement, [lem-weil-pbc-integral-stratified-perfect-characterization] puts $P[0],Q[0]$ in the bounded constructible complete category. Scalar extension $S$ is left adjoint to restriction of scalars $U$: the adjunction sends $\\phi$ to $m\\mapsto\\phi(1\\otimes m)$, with inverse $\\psi\\mapsto(e\\otimes m\\mapsto e\\psi(m))$. Both functors are exact by step 1. Apply [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor] to identify their derived functors with termwise application. The derived adjunction [lem-pc-pre-derived-adjoint-functors-general] consequently gives $\\operatorname{Hom}_{D(E_T)}(S(P),S(Q)[1])\\cong\\operatorname{Hom}_{D(A_T)}(P,U S(Q)[1])$. The essential-constancy requirements of that node hold because exact functors invert every quasi-isomorphism, so all objects in each resolution diagram map isomorphically to its value on the original complex.",
    "uses": [
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-hom-complex",
-    "def-weil-abstract-derived-category",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-complex-colimit-hocolim] to the sequence of $A_T$-module complexes $Q[0][1]\\xrightarrow{\\varpi}Q[0][1]\\to\\cdots$. Its termwise colimit is $U S(Q)[1]$ by step 1. Thus, with $B=\\bigoplus_{n\\geq0}Q[1]$ and $s\\iota_n=\\iota_{n+1}\\varpi$, there is the distinguished telescope triangle $B\\xrightarrow{1-s}B\\to U S(Q)[1]\\to B[1]$. The cited node supplies both the derived coproduct universal property and the cone-to-colimit quasi-isomorphism; the transition maps need not be injective.",
+   "uses": [
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
+   }
+  },
+  {
+   "text": "We identify the cohomology of global derived Hom with derived morphisms. For any $M$ and integer $r$, [lem-pur-derived-internal-hom-shift-right] identifies $R\\mathcal Hom(P,M)[r]$ with $R\\mathcal Hom(P,M[r])$. Derived sections commute with this shift: a K-injective resolution $I$ can be shifted by [lem-weil-pbc-kinjective-shift], and termwise sections give $\\Gamma(I[r])=\\Gamma(I)[r]$. Taking $H^0$ and applying [lem-pur-rhom-global-sections] therefore yields the natural identification $H^r R\\operatorname{Hom}_{A_T}(P,M)=\\operatorname{Hom}_{D(A_T)}(P,M[r])$. This uses global derived Hom as defined in [def-weil-pbc-adic-global-derived-hom], not sheaf-valued internal Hom.",
+   "uses": [
+    "lem-pur-derived-internal-hom-shift-right",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-pur-rhom-global-sections",
+    "def-weil-pbc-adic-global-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-constructible-bounded-below-compactness] to the copies of $Q[1]$ and to the copies of $Q[2]$. Each family has a common lower cohomological bound, respectively $-1$ and $-2$; no global compactness in the unbounded derived category is claimed. Taking degree zero and using the preceding identification gives the two bijections $\\bigoplus_n\\operatorname{Hom}(P,Q[1])\\cong\\operatorname{Hom}(P,B)$ and $\\bigoplus_n\\operatorname{Hom}(P,Q[2])\\cong\\operatorname{Hom}(P,B[1])$. To take degree zero of the coproduct of $A$-module complexes, use [lem-kun-derived-countable-sums-exact]: termwise sums represent derived sums. Their cohomology is the sum of the cohomologies, since exact sums preserve the short exact sequences defining cycles, boundaries and the quotients of cycles by boundaries. The shift $[1]$ preserves coproducts because its inverse is $[-1]$, identifying the second target with the indicated $B[1]$.",
+   "uses": [
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-kun-derived-countable-sums-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
+   }
+  },
+  {
+   "text": "The preceding two comparisons are exactly the hypotheses of [lem-weil-pbc-sequence-relative-hom-telescope] for $K=P[0]$ and $X_n=Q[0][1]$. Apply it to the telescope above, then use the derived adjunction and [def-pc-ext], to obtain\n$$\\varinjlim\\bigl(\\operatorname{Ext}^1_{A_T}(P,Q)\\xrightarrow{\\varpi}\\operatorname{Ext}^1_{A_T}(P,Q)\\to\\cdots\\bigr)\\cong\\operatorname{Ext}^1_{E_T}(S(P),S(Q)).$$\nThe left side is $\\operatorname{Ext}^1_{A_T}(P,Q)[1/\\varpi]$: $\\alpha$ at stage $n$ maps to $\\alpha/\\varpi^n$ and the colimit relation is the fraction relation. For a class $\\alpha:P\\to Q[1]$, the stage-zero morphism is $\\eta_Q[1]\\alpha$ for the localization unit $\\eta_Q:Q\\to U S(Q)$; the adjunction identifies it with $S(\\alpha)$. If $a_n$ is the stage-$n$ map, the colimit relation gives $\\varpi a_{n+1}=a_n$. Multiplication by $\\varpi$ is invertible on $U S(Q)$, so $a_n=\\varpi^{-n}a_0$. In particular every rational extension class is $S(\\alpha)/\\varpi^n$ for an integral class $\\alpha$ and $n\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-sequence-relative-hom-telescope",
     "def-pc-ext"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13"
+    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13; expanded using Stacks Tags 0949, 0CRK, 094A and 08JA."
    }
   },
   {
-   "text": "Consequently the rationalizations of constructible integral sheaves are closed under extensions. Given $0\\to S(Q)\\to F\\to S(P)\\to0$, let its class be $S(\\alpha)/\\varpi^n$ as in step 2. Degree-one extension classification realizes $\\alpha$ by $0\\to Q\\to N\\to P\\to0$. The short-exact-complex triangle node identifies its middle term with the shifted cone of its connecting morphism. The integral characterization then makes $N$ constructible: its degree-zero complex is the shifted cone of $P[0]\\xrightarrow{\\alpha}Q[0][1]$, hence belongs to the integral category, and clause (iii) describes its cohomology $N$. Exact scalar extension sends this sequence to the class $S(\\alpha)$. Pushing its rational sequence out along the automorphism $\\varpi^{-n}$ of $S(Q)$ changes its class to $S(\\alpha)/\\varpi^n$; because this is an automorphism, its middle term is isomorphic to $S(N)$. The bijection in extension classification now identifies that sequence with the given sequence, so $S(N)\\cong F$. This is only an isomorphism of middle terms, as required; the chosen identification of the subobject has been scaled.",
+   "text": "Consequently the rationalizations of constructible integral sheaves are closed under extensions. Given $0\\to S(Q)\\to F\\to S(P)\\to0$, let its class be $S(\\alpha)/\\varpi^n$ as in step 6. Degree-one extension classification realizes $\\alpha$ by $0\\to Q\\to N\\to P\\to0$. The short-exact-complex triangle node identifies its middle term with the shifted cone of its connecting morphism. The integral characterization then makes $N$ constructible: its degree-zero complex is the shifted cone of $P[0]\\xrightarrow{\\alpha}Q[0][1]$, hence belongs to the integral category, and clause (iii) describes its cohomology $N$. Exact scalar extension sends this sequence to the class $S(\\alpha)$. Pushing its rational sequence out along the automorphism $\\varpi^{-n}$ of $S(Q)$ changes its class to $S(\\alpha)/\\varpi^n$; because this is an automorphism, its middle term is isomorphic to $S(N)$. The bijection in extension classification now identifies that sequence with the given sequence, so $S(N)\\cong F$. This is only an isomorphism of middle terms, as required; the chosen identification of the subobject has been scaled.",
    "uses": [
     "lem-weil-pbc-ext-one-extension-classification",
     "lem-weil-pbc-integral-stratified-perfect-characterization",
@@ -116,7 +159,7 @@
    }
   },
   {
-   "text": "Let $i:Z_0\\hookrightarrow X$ be the reduced induced closed subscheme of $X\\setminus U$ and $j:U\\hookrightarrow X$ the open immersion. Its support is strictly smaller. The induction hypothesis supplies a constructible integral model $M_Z$ for $i^{-1}L$. Put $Q=j_!M_U$ and $P=i_*M_Z$. The ringed open-closed node gives their restrictions $(M_U,0)$ and $(0,M_Z)$ on $U,Z_0$. Consequently adjoining the open stratum $U$ to the finitely many strata of $Z_0$ proves both $P$ and $Q$ are constructible integral sheaves. The local modules are finite free on $U$ and the given finitely presented modules on $Z_0$, with zero modules on the complementary pieces. Scalar localization commutes with $i_*$ because that node gives filtered-colimit preservation for qcqs $X$. It commutes with $j_!$ because $j_!$ is a left adjoint, hence preserves the sequential colimit expressing localization; the scalar multiplications and the coefficient identifications in step 1 identify these colimits as module sheaves. Therefore $S(Q)\\cong j_!j^{-1}L$ and $S(P)\\cong i_*i^{-1}L$. The same node gives $0\\to S(Q)\\to L\\to S(P)\\to0$. Step 3 now provides a constructible integral model for $L$ on $X$, completing the noetherian induction.",
+   "text": "Let $i:Z_0\\hookrightarrow X$ be the reduced induced closed subscheme of $X\\setminus U$ and $j:U\\hookrightarrow X$ the open immersion. Its support is strictly smaller. The induction hypothesis supplies a constructible integral model $M_Z$ for $i^{-1}L$. Put $Q=j_!M_U$ and $P=i_*M_Z$. The ringed open-closed node gives their restrictions $(M_U,0)$ and $(0,M_Z)$ on $U,Z_0$. Consequently adjoining the open stratum $U$ to the finitely many strata of $Z_0$ proves both $P$ and $Q$ are constructible integral sheaves. The local modules are finite free on $U$ and the given finitely presented modules on $Z_0$, with zero modules on the complementary pieces. Scalar localization commutes with $i_*$ because that node gives filtered-colimit preservation for qcqs $X$. It commutes with $j_!$ because $j_!$ is a left adjoint, hence preserves the sequential colimit expressing localization; the scalar multiplications and the coefficient identifications in step 1 identify these colimits as module sheaves. Therefore $S(Q)\\cong j_!j^{-1}L$ and $S(P)\\cong i_*i^{-1}L$. The same node gives $0\\to S(Q)\\to L\\to S(P)\\to0$. Step 7 now provides a constructible integral model for $L$ on $X$, completing the noetherian induction.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
     "lem-weil-pbc-proetale-ringed-open-closed",
@@ -147,13 +190,18 @@
   "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-derived-functor",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-pur-hom-complex",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-pur-derived-internal-hom-shift-right",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-pur-rhom-global-sections",
+  "def-weil-pbc-adic-global-derived-hom",
+  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "lem-kun-derived-countable-sums-exact",
   "def-weil-abstract-derived-category",
+  "lem-weil-pbc-sequence-relative-hom-telescope",
   "def-pc-ext",
   "lem-weil-pbc-ext-one-extension-classification",
   "lem-weil-pbc-complex-ses-triangle",
@@ -172,7 +220,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.13, with the compactness telescope and extension gluing written out; reduction and noetherian induction clarify its finite-stratification devissage."
+  "place": "Lemma 6.8.13, with the Ext passage through Lemma 6.8.12 expanded via the sequential telescope and its sequence-relative Hom comparison; reduced-scheme noetherian induction and extension gluing retained."
  },
  "mathlib_searches": [
   {
@@ -268,7 +316,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-e-realization",
   "by": "worker",
@@ -277,33 +325,49 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
   "worker": "stage1",
-  "summary": "Statement unchanged. Split Bhatt-Scholze 6.8.13 into etale-local integral structures, finite-etale descent on strata, and an explicit compactness/Ext/extension gluing argument using existing nodes. Added three statement-only inputs; tracked continuous completed coefficients and nonreduced strata, with no global lisse-lattice claim.",
-  "blueprint": "Realizes the first sentence of the finite-extension ancestor proof, \"Choose an integral lattice for K\", for its lisse degree-zero input. The parent condensed realization handles general stratified sheaves and bounded complexes.",
+  "summary": "Dedicated repair of the 2026-10-17 return: statement and Lean record unchanged, and the geometric steps retained. Replaced the long second step by five short steps. Reused the existing site-module telescope, exact-functor factorization, shifted internal-Hom and global Hom comparisons; isolated the sequence-relative Hom/telescope comparison as one new statement-only node. Distinguishes bounded-below coproduct compatibility from unbounded compactness.",
+  "blueprint": "Keeps the integral-lattice route in the historical ancestor proof, first sentence \"Choose an integral lattice for K\", and the existing Bhatt-Scholze 6.8.13 proof. The current main-20261015 ancestor file is statement-only. The repair elaborates the Ext-denominator step; it replaces no unit or chapter step.",
   "tool_uses": [
    {
     "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Generic derivation of the exact scalar-extension/restriction adjunction in step 2; the unit route has no replacement for this categorical tool."
+    "why": "Exact scalar-extension/restriction derived adjunction; a generic categorical tool, with essential constancy verified in step 2."
    },
    {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic ringed-site K-injective resolutions for the explicit global Hom cone calculation in step 2; not a replacement of any geometric unit step."
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "General module-sheaf sequential telescope and derived coproduct comparison in step 3, valid on the pro-etale ringed site; not a different geometric route."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-right",
+    "why": "Shift compatibility of internal derived Hom on an arbitrary small ringed site, used only to read degree-zero global Hom in step 4."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Global H-zero/internal-Hom identification on an arbitrary small ringed site in step 4; the fixed unit has no such generic statement."
+   },
+   {
+    "node": "lem-kun-derived-countable-sums-exact",
+    "why": "Termwise computation of countable derived sums of ordinary A-modules in step 5; generic homological tool."
    }
   ]
  },
  "tool_uses": [
   "lem-pc-pre-derived-adjoint-functors-general",
-  "prop-pur-kinjective-resolutions-exist"
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-pur-derived-internal-hom-shift-right",
+  "lem-pur-rhom-global-sections",
+  "lem-kun-derived-countable-sums-exact"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NI-1ade26b98",
-  "group": "NI",
+  "reviewer": "NT-cc-Q22-cdd689d84",
+  "group": "Q22",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-1ade26b98 (reviewer sub-agent of L); spot-checked: Read the full item and all three new nodes against Bhatt–Scholze 6.8.2, 6.8.4, 6.8.11–13 and cited Stacks sources; checked all seven steps, edge cases, DAG duplicates/cycles, and exact master coefficient category and exchange morphism. Corrected duplicate dependencies, missing Noetherian-definition citations, and creation metadata in fixes/dag/nodes. Statements unchanged; no nodes dropped. Full findings and accepted tool uses are in review.md.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-cdd689d84 (reviewer sub-agent of L); spot-checked: I read the full re-split against Bhatt–Scholze Lemmas 6.8.12–6.8.13, Definition 6.8.10, Proposition 6.8.11 and 6.8.4(6), and against Stacks 0CRK, 094A and 093W in derived.tex. Compared with the side-project copy, only proof, proof_deps, proof_origin, split_report and status changed. The statement, stmt_deps, blueprint and Lean record are unchanged, so nothing is weakened. The old 2865-character step 2 is now steps 2–6, and the other steps are kept word for word. Step 2: the derived S⊣U adjunction holds, because exact functors make the essential-constancy conditions hold trivially; P[0] and Q[0] are in Dbc by condition (iii). Step 3: the Kunneth telescope node applies to Mod(A_T) with E_n=Q[1] and u=1−s. Step 4: the shift identities and H0 RΓ RHom = Hom_D are valid; the pro-étale site is a small skeleton. Step 5: bounded-below compactness is used only for the uniformly bounded families Q[1] (bound −1) and Q[2] (bound −2), with no unbounded compactness claimed. Step 6: Ext^1 localization; the stage-n leg is ϖ^{-n} times the stage-0 leg, which matches S(α). Steps 7–11 are the previously accepted extension gluing, stratification and reduction; I re-checked hypotheses and orientations (Ext^1(end,start), 0→S(Q)→L→S(P)→0). New node lem-weil-pbc-sequence-relative-hom-telescope: I checked its proof sketch (five-term sequence, injectivity of 1−shift on direct sums, 093W) and tested K=0, X_n=0, u_n=0, u_n=id and non-injective u_n. It is statement-only and self-contained, with correct blueprint from/via and same_as=[]. It is not a duplicate: lem-pc-compact-hom-hocolim needs full compactness, which this K does not have. lem-weil-pbc-integral-constructible-sheaf-hom and the condensed telescope nodes use the condensed coefficient presentation with multiplication by ℓ, so they are correctly not identified with A_T. It does not restate a clause of the item. proof_deps equals the union of the uses, there is no cycle and no SGA. Accepted tool_uses: lem-kun-complex-colimit-hocolim, lem-pur-rhom-global-sections, lem-kun-derived-countable-sums-exact, and the already accepted lem-pc-pre-derived-adjoint-functors-general. lem-pur-derived-internal-hom-shift-right is already on the unit's route. The item's maintainer tool_uses field still lists prop-pur-kinjective-resolutions-exist, which the new proof no longer uses; replace it with the accepted list at merge. I ran tools/review_split.py on the snapshot; it calls git show internally (read-only). Its FAIL comes only from four nodes created for this item that landed on 2026-10-14 and are already split. No fixes, no nodes dropped."
  },
  "lean_audit": {
   "master": {

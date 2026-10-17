@@ -1,494 +1,576 @@
 {
-  "id": "thm-fin-deligne-generic-open",
-  "blueprint": {
-    "is": "thm-fin-deligne-generic-open",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Generic bounded constructibility for an open immersion",
-  "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, and let\n$j:X\\hookrightarrow Y$ be an open immersion of finite-type\n$S$-schemes. For a constructible $\\mathbf F_\\ell$-sheaf $F$\non $X$, there is a nonempty open $U\\subset S$ such that\n$Rj_{U,*}F|_{X_U}$ belongs to $D^b_c(Y_U,\\mathbf F_\\ell)$\nand, for every morphism $T\\to U$ with Noetherian $T$, its canonical base-change morphism\n\n$$\nRj_{U,*}F|_{X_U}\\big|_{Y_T}\n\\longrightarrow Rj_{T,*}F|_{X_T}\n$$\n\nis an isomorphism.\nThe notation refers to ordinary derived categories.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-    "place": "node thm-fin-deligne-generic-open, order 1637"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-scheme-conventions",
-    "sbc-def-base-change-map"
-  ],
-  "proof": [
-    {
-      "text": "Preliminaries used throughout. Shrink the integral base to a nonempty affine open. All finite-type schemes in the argument are Noetherian: apply [lem-wf-affine-noetherian-components] on a finite affine cover and glue the descending-chain property. Thus they have finitely many irreducible components, and all further base changes in the assertion have Noetherian source. Pullback for the constant ring $\\mathbf F_\\ell$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. The canonical comparison and its invertibility can be checked after forgetting coefficients by [lem-weil-pbc-exchange-forget-coefficients]; this permits use of the abelian-sheaf exchange formulas below without identifying coefficient categories.\nThe assertion is local for a finite open cover of the target. Indeed [lem-weil-pbc-etale-underived-exchange-restriction] identifies underived direct image restricted to a target open with direct image of the source restriction. A bounded-below injective resolution restricts to an injective resolution by [lem-weil-pbc-etale-restriction-injectives], giving the same identification for derived direct image and its actual exchange map. Vanishing and invertibility are checked on the cover. Constructible stratifications on its finitely many members give a finite global stratification: order the members and subtract the preceding members from each stratum. Take the union of their finite cohomological intervals. Thus finitely many good base opens can be intersected, and we may work on affine target charts whenever needed.",
-      "uses": [
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-weil-pbc-exchange-forget-coefficients",
-        "lem-weil-pbc-etale-underived-exchange-restriction",
-        "lem-weil-pbc-etale-restriction-injectives",
-        "def-weil-pbc-constructible-complexes",
-        "lem-wf-affine-noetherian-components"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    },
-    {
-      "text": "We prove both assertions together by induction on $n=\\dim X_{k(S)}$, with the empty generic source as the initial case. At every stage the result for open immersions also gives the result for quasi-compact immersions with the same source dimension: factor such an immersion as an open immersion followed by a closed immersion using [lem-pqf-qc-immersion-open-closed-factor], and use exact constructibility-preserving closed direct image [lem-fin-closed-immersion], finite exchange [lemma-weil-pbc-finite-exchange], and the derived composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The exchange for the composite is the pasting formula [lem-weil-pbc-exchange-identity-pasting], read after forgetting coefficients as in step 1.\nFor the open immersion at hand replace $Y$ by the closure of $X$ with its scheme-theoretic structure, using [lemma-nagata-immersion-open-in-scheme-image] for the quasi-compact immersion $j$. This gives a dense open factor and a closed inclusion into the original target: on an affine chart its ideal consists of sections whose restriction to $X$ is zero, so it restricts to the zero ideal on $X$ and $X$ remains open. Its underlying space is the topological closure, so $X$ is dense there. The preceding closed-image argument transfers the conclusion back. Remove the closures in $S$ of the images of those finitely many irreducible components not dominating $S$. If the generic source is empty, what remains is empty. If $n=0$, each component of the generic target meets the dense generic source and is zero-dimensional. The generic target is discrete by [lem-sc-zero-dim-noetherian-finite-discrete]; its dense open therefore contains every point. The complement $C=Y\\setminus X$ therefore has empty generic fibre. Cover $C$ by finitely many affine charts over the affine base $\\operatorname{Spec}A$. For each coordinate ring $B$, $B\\otimes_A\\operatorname{Frac}(A)=0$, so some nonzero $a_B\\in A$ kills $1_B$. Invert their product. Then $C$ is empty and $j$ is the identity, which proves the base case. Assume henceforth the simultaneous assertion for source generic dimension at most $n-1$, allowing any integral finite-type base over $k$.",
-      "uses": [
-        "lem-pqf-qc-immersion-open-closed-factor",
-        "lem-fin-closed-immersion",
-        "lemma-weil-pbc-finite-exchange",
-        "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "lem-weil-pbc-exchange-identity-pasting",
-        "lem-sc-zero-dim-noetherian-finite-discrete",
-        "lemma-nagata-immersion-open-in-scheme-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    },
-    {
-      "text": "First construct a good open with finite complement when $b:Y\\to S$ is projective and $X$ is dense. Cover $Y$ by finitely many affine opens $Y_\\alpha$ and choose closed embeddings $Y_\\alpha\\hookrightarrow\\mathbf A^{m_\\alpha}_S$, with $m_\\alpha\\geq1$ (append a zero coordinate if necessary). For each coordinate $t_{\\alpha r}$, regard $X\\cap Y_\\alpha\\hookrightarrow Y_\\alpha$ as an open immersion over the integral base $\\mathbf A^1_S$. By [lem-fin-coordinate-generic-dimension] its generic source dimension is at most $n-1$, possibly empty. Induction gives a dense open $V_{\\alpha r}\\subset\\mathbf A^1_S$ over whose preimage both assertions hold. These assertions include every induced base change from a Noetherian $T\\to S$: the open inverse image of $V_{\\alpha r}$ in $\\mathbf A^1_T$ is Noetherian and maps to $V_{\\alpha r}$. By step 1 the union $G$ of the finitely many good target opens has bounded constructible direct image with a common finite cohomological range and the canonical exchange is invertible on $G_T$. Apply [lem-fin-projective-coordinate-boundary] to shrink $S$ so that the reduced closed complement $Z=Y\\setminus G$ is finite over $S$.",
-      "uses": [
-        "lem-fin-coordinate-generic-dimension",
-        "lem-fin-projective-coordinate-boundary"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    },
-    {
-      "text": "Prove the dimension-$n$ assertion first when $X\\to S$ is smooth and $F$ finite locally constant. By step 1 work on one affine chart of $Y$. A finite generating set of its coordinate algebra gives a closed embedding in $\\mathbf A^m_S$. Apply [lem-chow-closed-model] to its quasi-compact immersion into $\\mathbf P^m_S$ to take the closure there: equivalently homogenize the defining ideal and saturate by the distinguished homogeneous coordinate. On the chart where that coordinate is invertible the ideal dehomogenizes to the original ideal, so the original affine target is open in this projective scheme. The original $X$ is still open. Take its closure there as in step 2, using [lemma-nagata-immersion-open-in-scheme-image]. This gives a projective target to which step 3 applies; it is proper by [lem-kun-projective-implies-proper], and restriction later recovers the original chart. In particular the smooth source morphism $a=bj$ is now separated, since $X$ is open in a projective $S$-scheme, and is of finite type.\nPut $K=Rj_*F\\in D^+(Y,\\mathbf F_\\ell)$. Step 3 gives $K|_G\\in D^b_c(G)$. By [lem-asd-smooth-generic-direct-image], after shrinking once more, $Ra_*F$ is bounded with finite locally constant cohomology. The composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies this with $Rb_*K$. All hypotheses of [lem-fin-finite-boundary-reconstruction] now hold: $b$ is proper between finite-type schemes, $Z\\to S$ is finite, and the two required restrictions/direct images are bounded constructible. It follows that $K\\in D^b_c(Y)$.",
-      "uses": [
-        "lem-asd-smooth-generic-direct-image",
-        "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "lem-fin-finite-boundary-reconstruction",
-        "lem-kun-projective-implies-proper",
-        "lem-chow-closed-model",
-        "lemma-nagata-immersion-open-in-scheme-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    },
-    {
-      "text": "For any Noetherian $T\\to S$, let $c:g_Y^*K\\to Rj_{T,*}g_X^*F$ be the canonical exchange. It is an isomorphism on $G_T$ by step 3. Proper base change [thm-weil-pbc-bounded-below] applied to the torsion underlying complex of $K$ gives $g^*Rb_*K\\simeq Rb_{T,*}g_Y^*K$. Under the direct-image composition comparisons, part (3), vertical pasting, of [lem-weil-pbc-exchange-identity-pasting] says that the exchange for $a=bj$ equals proper exchange for $b$ followed by $Rb_{T,*}c$. The former exchange for $a$ is invertible by [lem-asd-smooth-generic-direct-image]. Therefore $Rb_{T,*}c$ is invertible. These are the actual morphisms after forgetting coefficients, and [lem-weil-pbc-exchange-forget-coefficients] reflects invertibility for $\\mathbf F_\\ell$-complexes. Properness of $b_T$ follows from [lem-kun-proper-stability], and finiteness of $Z_T\\to T$ follows by tensoring a finite algebra presentation. Apply [lem-fin-finite-boundary-comparison] over $T$ to conclude that $c$ is invertible. Both arguments of $c$ are bounded below; no constructibility of its target was assumed. This completes the smooth locally constant case at dimension at most $n$.",
-      "uses": [
-        "thm-weil-pbc-bounded-below",
-        "lem-weil-pbc-exchange-identity-pasting",
-        "lem-asd-smooth-generic-direct-image",
-        "lem-weil-pbc-exchange-forget-coefficients",
-        "lem-kun-proper-stability",
-        "lem-fin-finite-boundary-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    },
-    {
-      "text": "For general $F$, invoke [lem-fin-generic-radicial-smoothing] after removing vertical components as in step 2: shrink $S$ and take a finite radicial surjection $S'\\to S$ with a dense smooth open $v:V\\hookrightarrow (X_{S'})_{\\mathrm{red}}$ on which the pulled-back $F$ is finite locally constant. We may replace $S'$ by its reduction: finite radicial surjectivity is preserved, its underlying space is the irreducible space of $S$, hence it is integral; smoothness of $V$ persists by base change. Replace $X_{S'}$ and $Y_{S'}$ by reductions too. Reductions are surjective closed immersions, hence universal homeomorphisms by [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism]. A finite radicial surjection is a closed bijection by [lem-weil-pbc-finite-closed-map-finite-fibres] and the definition of radicial; this justifies the irreducibility assertion above. Thus the reductions and all their base changes are universal homeomorphisms, so [thm-weil-pbc-universal-homeomorphism-invariance] gives equivalences preserving pullbacks, direct images and cohomology. The canonical exchange is preserved because it is the adjunction-mate composite defining [sbc-def-base-change-map]. Constructibility is unchanged, using the same topological strata and their finite locally constant sheaves.\nWork now over this integral base. The smooth-source case already proved at dimension at most $n$ applies to $v:V\\hookrightarrow X$ and $jv:V\\hookrightarrow Y$. Intersect their two nonempty good base opens. Choose the cone triangle of the adjunction unit $F\\to Rv_*v^*F$, denoting its third vertex by $\\Delta$. The first two vertices are bounded constructible, and the long exact cohomology sequence [lem-sf-derived-homology-long-exact], together with closure under kernels, cokernels and extensions [thm-constructible-serre], makes $\\Delta$ bounded constructible. Restricting to $V$ makes the unit the identity, so $v^*\\Delta=0$. The triangle of [lem-cbc-open-closed-recollement] for the reduced complement $i:W\\hookrightarrow X$ therefore gives the canonical isomorphism $\\Delta\\simeq i_*i^*\\Delta$. This uses the ordinary finite-coefficient etale localization theorem, not a definition of extension by zero or a pro-etale analogue.",
-      "uses": [
-        "lem-fin-generic-radicial-smoothing",
-        "thm-weil-pbc-universal-homeomorphism-invariance",
-        "sbc-def-base-change-map",
-        "lem-sf-derived-homology-long-exact",
-        "thm-constructible-serre",
-        "lem-cbc-open-closed-recollement",
-        "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-        "lem-weil-pbc-finite-closed-map-finite-fibres"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    },
-    {
-      "text": "By the dimension assertion in [lem-fin-generic-radicial-smoothing], the complement $W$ has generic dimension at most $n-1$. Pullback $i^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact] and preserves constructibility: pull back the finitely many constructible strata of $\\Delta$ and their locally constant restrictions. Thus $Q=i^*\\Delta$ has finitely many nonzero constructible cohomology sheaves. Apply lower-dimensional induction, extended to immersions in step 2, to $ji:W\\to Y$ and each such sheaf. Intersect the finitely many resulting base opens.\nThe truncation triangles [lem-sf-derived-truncation-triangle] give a finite filtration of $Q$ with successive vertices $\\mathcal H^q(Q)[-q]$: if its cohomology is supported in $[a,b]$, begin at $\\tau_{\\le a-1}Q=0$ and add one cohomology sheaf through degree $b$. Applying the triangulated direct image [lem-weil-pbc-derived-direct-image-triangulated] preserves these triangles. The long exact sequences [lem-sf-derived-homology-long-exact] and [thm-constructible-serre] prove bounded constructibility by finite induction (take a finite union of degree bounds). The exchange morphisms commute with shifts and form morphisms of triangles by [lem-weil-pbc-derived-exchange-triangulated]; the cohomology long exact sequences then show inductively that their third components are isomorphisms when the first two are, degree by degree. This checks the actual exchange for $Q$, not just separate existence of endpoint isomorphisms. These abelian exchange assertions apply to modules by [lem-weil-pbc-exchange-forget-coefficients]. The direct-image composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $R(ji)_*Q$ with $Rj_*\\Delta$; closed exchange [lemma-weil-pbc-finite-exchange] and vertical pasting [lem-weil-pbc-exchange-identity-pasting] give the corresponding exchange identification.\nApply $Rj_*$ to $F\\to Rv_*v^*F\\to\\Delta\\to F[1]$. The middle vertex is $R(jv)_*v^*F$ and the third is the just-treated $Rj_*\\Delta$. The same long exact sequence proves bounded constructibility of $Rj_*F$. Under base change the triangle for $v$ identifies with the corresponding triangle for $v_T$, because its unit commutes with pullback and the exchange for $v$ is invertible. The exchange for $j$ gives a morphism of these triangles, with invertible middle component by the smooth case for $jv$ and invertible third component by the preceding finite filtration. The long exact sequences imply that the first component, the desired exchange for $F$, is invertible.",
-      "uses": [
-        "lem-fin-generic-radicial-smoothing",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-sf-derived-truncation-triangle",
-        "lem-weil-pbc-derived-direct-image-triangulated",
-        "lem-sf-derived-homology-long-exact",
-        "thm-constructible-serre",
-        "lem-weil-pbc-derived-exchange-triangulated",
-        "lem-weil-pbc-exchange-forget-coefficients",
-        "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "lemma-weil-pbc-finite-exchange",
-        "lem-weil-pbc-exchange-identity-pasting"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    },
-    {
-      "text": "It remains to descend from the good open $U'\\subset S'$ of steps 6--7. A finite radicial surjection is a homeomorphism on underlying spaces: it is bijective by surjectivity and universal injectivity, and closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. Consequently $S'\\setminus U'$ has closed image $C$ in the original shrunken base, and $C$ misses the generic point since $U'$ is nonempty in the irreducible space $S'$. For the nonempty open $U=S\\setminus C$, its full preimage $S'_U$ lies inside $U'$. Over $S'_U$ bounded constructibility and compatibility with every further Noetherian base change have been proved, including the reduction identifications of step 6. Apply [lem-fin-radicial-exchange-descent] to the finite radicial surjection $S'_U\\to U$. It gives both assertions on $U$, completing the induction. This last topological argument also covers zero-dimensional bases; it does not use a dimension estimate for a closed subset.",
-      "uses": [
-        "lem-fin-radicial-exchange-descent",
-        "lem-weil-pbc-finite-closed-map-finite-fibres"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-        "place": "## Proof"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-fin-deligne-generic-open",
+ "blueprint": {
+  "is": "thm-fin-deligne-generic-open",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Generic bounded constructibility for an open immersion",
+ "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, and let\n$j:X\\hookrightarrow Y$ be an open immersion of finite-type\n$S$-schemes. For a constructible $\\mathbf F_\\ell$-sheaf $F$\non $X$, there is a nonempty open $U\\subset S$ such that\n$Rj_{U,*}F|_{X_U}$ belongs to $D^b_c(Y_U,\\mathbf F_\\ell)$\nand, for every morphism $T\\to U$ with Noetherian $T$, its canonical base-change morphism\n\n$$\nRj_{U,*}F|_{X_U}\\big|_{Y_T}\n\\longrightarrow Rj_{T,*}F|_{X_T}\n$$\n\nis an isomorphism.\nThe notation refers to ordinary derived categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
+  "place": "node thm-fin-deligne-generic-open, order 1637"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Preliminaries used throughout. Shrink the integral base to a nonempty affine open. All finite-type schemes in the argument are Noetherian: apply [lem-wf-affine-noetherian-components] on a finite affine cover and glue the descending-chain property. Thus they have finitely many irreducible components, and all further base changes in the assertion have Noetherian source. Pullback for the constant ring $\\mathbf F_\\ell$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. The canonical comparison and its invertibility can be checked after forgetting coefficients by [lem-weil-pbc-exchange-forget-coefficients]; this permits use of the abelian-sheaf exchange formulas below without identifying coefficient categories.\nThe assertion is local for a finite open cover of the target. Indeed [lem-weil-pbc-etale-underived-exchange-restriction] identifies underived direct image restricted to a target open with direct image of the source restriction. A bounded-below injective resolution restricts to an injective resolution by [lem-weil-pbc-etale-restriction-injectives], giving the same identification for derived direct image; since the derived exchange along the etale restriction square is then invertible, horizontal pasting, part (2) of [lem-weil-pbc-exchange-identity-pasting], applied to the two factorizations of the square over the target open, identifies the restriction of the actual exchange map with the exchange of the restricted square. Vanishing and invertibility are checked on the cover. Constructible stratifications on its finitely many members give a finite global stratification: order the members and subtract the preceding members from each stratum. Take the union of their finite cohomological intervals. Thus finitely many good base opens can be intersected, and we may work on affine target charts whenever needed.",
+   "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-exchange-forget-coefficients",
     "lem-weil-pbc-etale-underived-exchange-restriction",
     "lem-weil-pbc-etale-restriction-injectives",
     "def-weil-pbc-constructible-complexes",
     "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-exchange-identity-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "We prove both assertions together by induction on $n=\\dim X_{k(S)}$, with the empty generic source as the initial case. At every stage the result for open immersions also gives the result for quasi-compact immersions with the same source dimension: factor such an immersion as an open immersion followed by a closed immersion using [lem-pqf-qc-immersion-open-closed-factor], and use exact constructibility-preserving closed direct image [lem-fin-closed-immersion], finite exchange [lemma-weil-pbc-finite-exchange], and the derived composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The exchange for the composite is the pasting formula [lem-weil-pbc-exchange-identity-pasting], read after forgetting coefficients as in step 1.\nFor the open immersion at hand replace $Y$ by the closure of $X$ with its scheme-theoretic structure, using [lemma-nagata-immersion-open-in-scheme-image] for the quasi-compact immersion $j$. This gives a dense open factor and a closed inclusion into the original target: on an affine chart its ideal consists of sections whose restriction to $X$ is zero, so it restricts to the zero ideal on $X$ and $X$ remains open. Its underlying space is the topological closure, so $X$ is dense there. The preceding closed-image argument transfers the conclusion back.",
+   "uses": [
     "lem-pqf-qc-immersion-open-closed-factor",
     "lem-fin-closed-immersion",
     "lemma-weil-pbc-finite-exchange",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "lem-weil-pbc-exchange-identity-pasting",
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Base case. Remove the closures in $S$ of the images of those finitely many irreducible components not dominating $S$. If the generic source is empty, what remains is empty. If $n=0$, each irreducible component $C$ of the generic target meets the dense generic source in a dense open of $C$ of dimension at most $0$; by [lem-kun-dimension-extension] (a dense open of a finite-type scheme over a field has the same dimension) $C$ is zero-dimensional. The generic target is discrete by [lem-sc-zero-dim-noetherian-finite-discrete]; its dense open therefore contains every point. The complement $C=Y\\setminus X$ therefore has empty generic fibre. Cover $C$ by finitely many affine charts over the affine base $\\operatorname{Spec}A$. For each coordinate ring $B$, $B\\otimes_A\\operatorname{Frac}(A)=0$, so some nonzero $a_B\\in A$ kills $1_B$. Invert their product. Then $C$ is empty and $j$ is the identity, which proves the base case. Assume henceforth the simultaneous assertion for source generic dimension at most $n-1$, allowing any integral finite-type base over $k$.",
+   "uses": [
     "lem-sc-zero-dim-noetherian-finite-discrete",
-    "lemma-nagata-immersion-open-in-scheme-image",
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "First construct a good open with finite complement when $b:Y\\to S$ is projective and $X$ is dense. Cover $Y$ by finitely many affine opens $Y_\\alpha$ and choose closed embeddings $Y_\\alpha\\hookrightarrow\\mathbf A^{m_\\alpha}_S$, with $m_\\alpha\\geq1$ (append a zero coordinate if necessary). For each coordinate $t_{\\alpha r}$, regard $X\\cap Y_\\alpha\\hookrightarrow Y_\\alpha$ as an open immersion over the integral base $\\mathbf A^1_S$. By [lem-fin-coordinate-generic-dimension] its generic source dimension is at most $n-1$, possibly empty. Induction gives a dense open $V_{\\alpha r}\\subset\\mathbf A^1_S$ over whose preimage both assertions hold. These assertions include every induced base change from a Noetherian $T\\to S$: the open inverse image of $V_{\\alpha r}$ in $\\mathbf A^1_T$ is Noetherian and maps to $V_{\\alpha r}$. By step 1 the union $G$ of the finitely many good target opens has bounded constructible direct image with a common finite cohomological range and the canonical exchange is invertible on $G_T$. Apply [lem-fin-projective-coordinate-boundary] to shrink $S$ so that the reduced closed complement $Z=Y\\setminus G$ is finite over $S$.",
+   "uses": [
     "lem-fin-coordinate-generic-dimension",
-    "lem-fin-projective-coordinate-boundary",
+    "lem-fin-projective-coordinate-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Prove the dimension-$n$ assertion first when $X\\to S$ is smooth and $F$ finite locally constant. By step 1 work on one affine chart of $Y$. A finite generating set of its coordinate algebra gives a closed embedding in $\\mathbf A^m_S$. Apply [lem-chow-closed-model] to its quasi-compact immersion into $\\mathbf P^m_S$ to take the closure there: equivalently homogenize the defining ideal and saturate by the distinguished homogeneous coordinate. On the chart where that coordinate is invertible the ideal dehomogenizes to the original ideal, so the original affine target is open in this projective scheme. The original $X$ is still open. Take its closure there as in step 2, using [lemma-nagata-immersion-open-in-scheme-image]. This gives a projective target to which step 4 applies; it is proper by [lem-kun-projective-implies-proper], and restriction later recovers the original chart. In particular the smooth source morphism $a=bj$ is now separated, since $X$ is open in a projective $S$-scheme, and is of finite type.\nPut $K=Rj_*F\\in D^+(Y,\\mathbf F_\\ell)$. Step 3 gives $K|_G\\in D^b_c(G)$. By [lem-asd-smooth-generic-direct-image], after shrinking once more, $Ra_*F$ is bounded with finite locally constant cohomology. The composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies this with $Rb_*K$. All hypotheses of [lem-fin-finite-boundary-reconstruction] now hold: $b$ is proper between finite-type schemes, $Z\\to S$ is finite, and the two required restrictions/direct images are bounded constructible. It follows that $K\\in D^b_c(Y)$.",
+   "uses": [
     "lem-asd-smooth-generic-direct-image",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "lem-fin-finite-boundary-reconstruction",
     "lem-kun-projective-implies-proper",
     "lem-chow-closed-model",
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "For any Noetherian $T\\to S$, let $c:g_Y^*K\\to Rj_{T,*}g_X^*F$ be the canonical exchange. It is an isomorphism on $G_T$ by step 4. Proper base change [thm-weil-pbc-bounded-below] applied to the torsion underlying complex of $K$ gives $g^*Rb_*K\\simeq Rb_{T,*}g_Y^*K$. Under the direct-image composition comparisons, part (3), vertical pasting, of [lem-weil-pbc-exchange-identity-pasting] says that the exchange for $a=bj$ equals proper exchange for $b$ followed by $Rb_{T,*}c$. The former exchange for $a$ is invertible by [lem-asd-smooth-generic-direct-image]. Therefore $Rb_{T,*}c$ is invertible. These are the actual morphisms after forgetting coefficients, and [lem-weil-pbc-exchange-forget-coefficients] reflects invertibility for $\\mathbf F_\\ell$-complexes. Properness of $b_T$ follows from [lem-kun-proper-stability], and finiteness of $Z_T\\to T$ follows by tensoring a finite algebra presentation. Apply [lem-fin-finite-boundary-comparison] over $T$ to conclude that $c$ is invertible. Both arguments of $c$ are bounded below; no constructibility of its target was assumed. This completes the smooth locally constant case at dimension at most $n$.",
+   "uses": [
     "thm-weil-pbc-bounded-below",
-    "lem-kun-proper-stability",
-    "lem-fin-finite-boundary-comparison",
-    "lem-fin-generic-radicial-smoothing",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "sbc-def-base-change-map",
-    "lem-sf-derived-homology-long-exact",
-    "thm-constructible-serre",
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "lem-sf-derived-truncation-triangle",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-weil-pbc-derived-exchange-triangulated",
-    "lem-fin-radicial-exchange-descent"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
-    "place": "## Proof: dimension induction and three Deligne devissage steps, with citation and typing repairs"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "generic bounded constructibility and base change for direct image under an open immersion over a finite type integral base",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.IsConstructible.preimage_of_isOpenEmbedding",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory, ConstructibleSheaf, OpenImmersion, base change",
-      "results": "0 hits: ; loogle: unknown identifier 'ConstructibleSheaf'",
-      "date": "2026-10-14",
-      "verdict": "invalid-pattern: loogle: unknown identifier 'ConstructibleSheaf'"
-    },
-    {
-      "tool": "grep",
-      "query": "OpenImmersion|constructible.*base.change|base.change.*open",
-      "results": "0 hits:  (subdirectory WeilConjectures)",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
-    },
-    {
-      "tool": "leansearch",
-      "query": "For an open immersion of finite type schemes over an integral base, direct image of a constructible finite sheaf is generically bounded constructible and commutes with arbitrary Noetherian base change",
-      "results": "0 hits: ; service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "generic base change theorem for etale cohomology of a constructible torsion sheaf under a quasi compact open immersion",
-      "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"baseChange\", \"Sheaf\"",
-      "results": "2 hits: CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
-    },
-    {
-      "tool": "grep",
-      "query": "generic.*base.?change|constructible.*[Ss]heaf|boundedConstructible",
-      "results": "0 hits:  (subdirectory AlgebraicGeometry)",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1637,
-  "blueprint_uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-scheme-conventions",
-    "lem-asd-smooth-generic-direct-image",
-    "lem-fin-closed-immersion",
-    "lem-fin-coordinate-generic-dimension",
-    "lem-fin-finite-boundary-comparison",
-    "lem-fin-finite-boundary-reconstruction",
-    "lem-fin-generic-radicial-smoothing",
-    "lem-fin-projective-coordinate-boundary",
-    "lem-fin-radicial-exchange-descent",
-    "lemma-weil-pbc-finite-exchange",
-    "sbc-def-base-change-map",
-    "sbc-lem-base-change-composition",
-    "thm-constructible-serre",
-    "thm-sp-truncation-e2",
-    "thm-weil-pbc-bounded-below",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-scheme-conventions",
-    "sbc-def-base-change-map"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "thm-fin-deligne-generic-open",
-    "worker": "stage1",
-    "summary": "Audited and expanded the imported dimension-induction proof into eight steps. Reused existing DAG nodes only. Replaced the mismatched composition citation by the actual vertical-pasting theorem plus coefficient-forgetting comparison; replaced the definition-only localization citation by the finite-coefficient etale recollement theorem. Made locality, separatedness, reduction of the radicial base, finite truncation devissage, and full-preimage descent explicit. No statement change.",
-    "blueprint": "Steps 1--2 realize the initial locality/reduction/dimension induction; step 3 the first finite-boundary step; steps 4--5 the smooth-source second step; steps 6--8 the arbitrary-sheaf third step and radicial descent.",
-    "tool_uses": [
-      {
-        "node": "prop-weil-pbc-inverse-image-modules-exact",
-        "why": "Generic tool for Inverse image of etale sheaves of modules over a constant ring is exact used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-weil-pbc-exchange-forget-coefficients",
-        "why": "Generic tool for The derived exchange morphism commutes with forgetting the coefficient ring used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-weil-pbc-etale-underived-exchange-restriction",
-        "why": "Generic tool for Underived exchange along an etale morphism is the restriction identification used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-weil-pbc-etale-restriction-injectives",
-        "why": "Generic tool for Etale restriction preserves injectives used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-pqf-qc-immersion-open-closed-factor",
-        "why": "Generic tool for Quasi-compact immersions factor through an open and a closed immersion used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lemma-weil-pbc-finite-exchange",
-        "why": "Generic tool for Finite exchange isomorphism used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "why": "Generic tool for Canonical composition comparison for unbounded ringed-topos direct images used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-weil-pbc-exchange-identity-pasting",
-        "why": "Generic tool for Identity and pasting equations for exchange used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "thm-weil-pbc-bounded-below",
-        "why": "Generic tool for Bounded-below derived proper base change used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-kun-proper-stability",
-        "why": "Generic tool for Properness survives base change and composition used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "thm-weil-pbc-universal-homeomorphism-invariance",
-        "why": "Generic tool for Universal-homeomorphism invariance used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-sf-derived-homology-long-exact",
-        "why": "Generic tool for Long exact cohomology sequence of a distinguished triangle in the derived category used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "thm-constructible-serre",
-        "why": "Generic tool for Constructible sheaves form a weak Serre subcategory used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-cbc-open-closed-recollement",
-        "why": "Generic tool for Open-closed recollement used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-sf-derived-truncation-triangle",
-        "why": "Generic tool for Canonical truncation triangle in the derived category used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-weil-pbc-derived-direct-image-triangulated",
-        "why": "Generic tool for The derived direct image on bounded below derived categories is a triangulated functor used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-weil-pbc-derived-exchange-triangulated",
-        "why": "Generic tool for The derived exchange transformation commutes with shifts and maps triangles to morphisms of triangles used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
-      },
-      {
-        "node": "lem-wf-affine-noetherian-components",
-        "why": "Generic tool: Affine schemes of finite type are Noetherian with finitely many components; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
-      },
-      {
-        "node": "lem-sc-zero-dim-noetherian-finite-discrete",
-        "why": "Generic tool: A Noetherian zero-dimensional scheme has finite discrete underlying space; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
-      },
-      {
-        "node": "lem-kun-projective-implies-proper",
-        "why": "Generic tool: Projective morphisms are proper; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
-      },
-      {
-        "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-        "why": "Generic tool: A surjective closed immersion is a universal homeomorphism; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
-      },
-      {
-        "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
-        "why": "Generic tool: A finite morphism is separated, universally closed and has finite fibres; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
-      },
-      {
-        "node": "lemma-nagata-immersion-open-in-scheme-image",
-        "why": "Quasi-compact immersion has a dense open factor in its schematic image; supplies the closure reductions in steps 2 and 4 without changing the route."
-      },
-      {
-        "node": "lem-chow-closed-model",
-        "why": "Projective closure of the affine target is a closed model containing that target as an open subscheme; supplies the compactification in step 4 without changing the route."
-      }
-    ]
-  },
-  "tool_uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "lem-weil-pbc-etale-underived-exchange-restriction",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-pqf-qc-immersion-open-closed-factor",
-    "lemma-weil-pbc-finite-exchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "lem-weil-pbc-exchange-identity-pasting",
-    "thm-weil-pbc-bounded-below",
+    "lem-asd-smooth-generic-direct-image",
+    "lem-weil-pbc-exchange-forget-coefficients",
     "lem-kun-proper-stability",
+    "lem-fin-finite-boundary-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "For general $F$, invoke [lem-fin-generic-radicial-smoothing] after removing vertical components as in step 3: shrink $S$ and take a finite radicial surjection $S'\\to S$ with a dense smooth open $v:V\\hookrightarrow (X_{S'})_{\\mathrm{red}}$ on which the pulled-back $F$ is finite locally constant. We may replace $S'$ by its reduction: finite radicial surjectivity is preserved, its underlying space is the irreducible space of $S$, hence it is integral; smoothness of $V$ persists by base change. Replace $X_{S'}$ and $Y_{S'}$ by reductions too. Reductions are surjective closed immersions, hence universal homeomorphisms by [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism]. A finite radicial surjection is a closed bijection by [lem-weil-pbc-finite-closed-map-finite-fibres] and the definition of radicial; this justifies the irreducibility assertion above. Thus the reductions and all their base changes are universal homeomorphisms, so [thm-weil-pbc-universal-homeomorphism-invariance] gives equivalences preserving pullbacks, direct images and cohomology. The canonical exchange is preserved because it is the adjunction-mate composite defining [sbc-def-base-change-map]. Constructibility is unchanged, using the same topological strata and their finite locally constant sheaves.\nThe generic fibre of $X_{S'}$ is $X_{k(S)}\\times_{k(S)}\\operatorname{Spec}k(S')$, so by [lem-kun-dimension-extension] it has dimension $n$, as does its reduction (same space); the open $V$ therefore has generic dimension at most $n$.",
+   "uses": [
+    "lem-fin-generic-radicial-smoothing",
     "thm-weil-pbc-universal-homeomorphism-invariance",
+    "sbc-def-base-change-map",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Over the integral base $S'$ of step 7 (reductions taken), the smooth-source case already proved at dimension at most $n$ applies to $v:V\\hookrightarrow X$ and $jv:V\\hookrightarrow Y$. Intersect their two nonempty good base opens. Choose the cone triangle of the adjunction unit $F\\to Rv_*v^*F$, denoting its third vertex by $\\Delta$. The first two vertices are bounded constructible, and the long exact cohomology sequence [lem-sf-derived-homology-long-exact], together with closure under kernels, cokernels and extensions [thm-constructible-serre], makes $\\Delta$ bounded constructible. Restricting to $V$ makes the unit invertible: by the triangle identity $v^*\\eta_F$ is a section of the counit $v^*Rv_*v^*F\\to v^*F$, which is an isomorphism: computing $Rv_*v^*F$ by an injective resolution $I$ and using that $v^*$ is exact [prop-weil-pbc-inverse-image-modules-exact], it is the termwise counit $v^*v_*I\\to I$, invertible because the underived counit of the open immersion $v$ is an isomorphism [lem-sc-open-immersion-pushforward-fully-faithful] (checked after forgetting coefficients). Hence $v^*\\Delta=0$. The triangle of [lem-cbc-open-closed-recollement] for the reduced complement $i:W\\hookrightarrow X$ therefore gives the canonical isomorphism $\\Delta\\simeq i_*i^*\\Delta$. This uses the ordinary finite-coefficient etale localization theorem, not a definition of extension by zero or a pro-etale analogue.",
+   "uses": [
     "lem-sf-derived-homology-long-exact",
     "thm-constructible-serre",
     "lem-cbc-open-closed-recollement",
+    "lem-sc-open-immersion-pushforward-fully-faithful",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "By the dimension assertion in [lem-fin-generic-radicial-smoothing], the complement $W$ has generic dimension at most $n-1$, since the components of $X_{S'}$ have generic dimension at most $n$ by step 7. Pullback $i^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact] and preserves constructibility: pull back the finitely many constructible strata of $\\Delta$ and their locally constant restrictions. Thus $Q=i^*\\Delta$ has finitely many nonzero constructible cohomology sheaves. Apply lower-dimensional induction, extended to immersions in step 2, to $ji:W\\to Y$ and each such sheaf. Intersect the finitely many resulting base opens.\nThe truncation triangles [lem-sf-derived-truncation-triangle] give a finite filtration of $Q$ with successive vertices $\\mathcal H^q(Q)[-q]$: if its cohomology is supported in $[a,b]$, begin at $\\tau_{\\le a-1}Q=0$ and add one cohomology sheaf through degree $b$. Applying the triangulated direct image [lem-weil-pbc-derived-direct-image-triangulated] preserves these triangles. The long exact sequences [lem-sf-derived-homology-long-exact] and [thm-constructible-serre] prove bounded constructibility by finite induction (take a finite union of degree bounds). The exchange morphisms commute with shifts and form morphisms of triangles by [lem-weil-pbc-derived-exchange-triangulated]; the cohomology long exact sequences then show inductively that their third components are isomorphisms when the first two are, degree by degree. This checks the actual exchange for $Q$, not just separate existence of endpoint isomorphisms. These abelian exchange assertions apply to modules by [lem-weil-pbc-exchange-forget-coefficients]. The direct-image composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $R(ji)_*Q$ with $Rj_*\\Delta$; closed exchange [lemma-weil-pbc-finite-exchange] and vertical pasting [lem-weil-pbc-exchange-identity-pasting] give the corresponding exchange identification.",
+   "uses": [
+    "lem-fin-generic-radicial-smoothing",
+    "prop-weil-pbc-inverse-image-modules-exact",
     "lem-sf-derived-truncation-triangle",
     "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "thm-constructible-serre",
     "lem-weil-pbc-derived-exchange-triangulated",
-    "lem-wf-affine-noetherian-components",
-    "lem-sc-zero-dim-noetherian-finite-discrete",
-    "lem-kun-projective-implies-proper",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lem-chow-closed-model"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NJ-9a9ba7f3d",
-    "group": "NJ",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9a9ba7f3d (reviewer sub-agent of L); spot-checked: Read all eight steps, cited statements, sources, and unit/chapter route. Repaired two C1 citation gaps for schematic closure and projective closed models in steps 2 and 4. Statement unchanged; coefficient comparison, canonical exchange, Noetherian base changes, edge cases, and item acyclicity checked. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-exchange-identity-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.GenericOpenImmersionConstructibility",
-    "declaration": "AlgebraicGeometry.Etale.exists_nonempty_open_isBoundedConstructible_derived_open_pushforward",
-    "file": "lean/Sheaf/AlgebraicGeometry/GenericOpenImmersionConstructibility.lean",
-    "statement": "theorem exists_nonempty_open_isBoundedConstructible_derived_open_pushforward (k : Type u) [Field k] (S : Scheme.{u}) [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k) (X Y : Scheme.{u}) (aX : X ⟶ S) (aY : Y ⟶ S) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (j : X ⟶ Y) [IsOpenImmersion j] (hj : j ≫ aY = aX) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : ∃ U : S.Opens, Nonempty U ∧ ∀ (XU YU : Scheme.{u}) (pX : XU ⟶ X) (pY : YU ⟶ Y) (bU : YU ⟶ U.toScheme) (jU : XU ⟶ YU), IsPullback pY bU aY U.ι → IsPullback pX jU j pY → DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) YU ((R((jU)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((L((pX)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧ ∀ (T : Scheme.{u}) [IsNoetherian T] (t : T ⟶ U.toScheme) (XT YT : Scheme.{u}) (qX : XT ⟶ XU) (qY : YT ⟶ YU) (bT : YT ⟶ T) (jT : XT ⟶ YT), IsPullback qY bT bU t → ∀ sq : IsPullback qX jT jU qY, IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) sq.toCommSq).app ((L((pX)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))",
-    "branch": "newtargets-dag",
-    "by": "NP",
-    "date": "2026-10-15",
-    "existing": false
+  {
+   "text": "Assemble the dimension-$n$ assertion for $F$ over $S'$. Apply $Rj_*$ to $F\\to Rv_*v^*F\\to\\Delta\\to F[1]$. By the composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] the middle vertex is $R(jv)_*v^*F$ and the third is the just-treated $Rj_*\\Delta$. Since $Rj_*$ is triangulated [lem-weil-pbc-derived-direct-image-triangulated], the long exact sequence [lem-sf-derived-homology-long-exact] and [thm-constructible-serre] prove bounded constructibility of $Rj_*F$. For a Noetherian $T$ over the good open, the exchange for $j$ applied to this triangle is a morphism of triangles by [lem-weil-pbc-derived-exchange-triangulated]. Its middle component, the exchange for $j$ at $Rv_*v^*F$, is invertible: by vertical pasting [lem-weil-pbc-exchange-identity-pasting] the exchange for $jv$ equals $Rj_{T,*}$ of the exchange for $v$ composed with it, and both exchanges for $jv$ and for $v$ are invertible by the smooth case (read after forgetting coefficients [lem-weil-pbc-exchange-forget-coefficients]). Its third component is invertible by the preceding finite filtration. The cohomology long exact sequences [lem-sf-derived-homology-long-exact] imply that the first component, the desired exchange for $F$, is invertible.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-triangulated",
+    "lem-weil-pbc-exchange-identity-pasting",
+    "lem-sf-derived-homology-long-exact",
+    "thm-constructible-serre",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-71fe66321",
-    "group": "NP",
-    "result": "pass",
-    "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, hypotheses, conclusions, universes, edge cases, docstrings, and verbatim statement record. Immutable module compiled cleanly through scompile.py in both sandbox and library-path checks. No findings or fixes; branch head unchanged."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, and let\n$j:X\\hookrightarrow Y$ be an open immersion of finite-type\n$S$-schemes. For a constructible $\\mathbf F_\\ell$-sheaf $F$\non $X$, there is a nonempty open $U\\subset S$ such that\n$Rj_{U,*}F|_{X_U}$ belongs to $D^b_c(Y_U,\\mathbf F_\\ell)$\nand, for every morphism $T\\to U$ with Noetherian $T$, its canonical base-change morphism\n\n$$\nRj_{U,*}F|_{X_U}\\big|_{Y_T}\n\\longrightarrow Rj_{T,*}F|_{X_T}\n$$\n\nis an isomorphism.",
-    "proof": [
-      {
-        "text": "Throughout this proof all base changes have Noetherian source.\nWe prove the two assertions simultaneously, so that every use of\nthe induction includes the specific exchange map. Replace $Y$\nby the scheme-theoretic closure of $X$; the original immersion\nis its composite with a closed immersion. Closed direct image\nis exact and preserves constructibility by\n[lem-fin-closed-immersion], and it commutes with base change by\n[lemma-weil-pbc-finite-exchange]. We may therefore assume\nthat $X$ is dense in $Y$. The same observation extends any\ncase already proved for a dense open immersion to an arbitrary\nimmersion with that bound on the generic dimension of its source.\n\nInduct on $n=\\dim X_{k(S)}$. Before starting, remove the\nclosures of the images of the finitely many irreducible components\nof $Y$ that do not dominate $S$. For an empty generic fiber\nthe remaining scheme is empty. For $n=0$, the dense open\n$X_{k(S)}$ contains every point of the zero-dimensional\nNoetherian space $Y_{k(S)}$, so it equals that space.\nThe closed complement $Y\\setminus X$ has empty generic fiber.\nIts finite affine presentations show that it becomes empty after\ninverting one nonzero element of the base: over the fraction\nfield each coordinate ring is zero, so a nonzero base element\nkills its unit; use the product for a finite affine cover.\nThus, after shrinking, $j$ is the identity and the assertion\nholds. Assume now the assertion for generic source dimension\nat most $n-1$, including all immersions as above.",
-        "uses": [
-          "lem-fin-closed-immersion",
-          "lemma-weil-pbc-finite-exchange"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*First step: the good locus has finite complement.*\nThe question is local on $Y$, and $Y$ has a finite affine\ncover. For this step suppose $Y$ projective over an affine\nopen of $S$, and cover it by finitely many affine schemes\n$Y_\\alpha\\hookrightarrow\\mathbf A^{m_\\alpha}_S$.\nFor each coordinate, regard\n$X\\cap Y_\\alpha\\hookrightarrow Y_\\alpha$ as an immersion\nover the integral finite-type base $\\mathbf A^1_S$.\nIts generic source dimension is at most $n-1$ by\n[lem-fin-coordinate-generic-dimension]. The induction\nhypothesis supplies a dense open $V_{\\alpha r}\\subset\\mathbf A^1_S$\nover whose inverse image the direct image is bounded constructible\nand commutes with all base changes. This includes every base\nchange induced from $T\\to S$: restrict the induced morphism\n$\\mathbf A^1_T\\to\\mathbf A^1_S$ to $V_{\\alpha r}$.\nThere are finitely many coordinate pairs. Their union $G$\ntherefore has both properties, with a common finite cohomological\nrange. By [lem-fin-projective-coordinate-boundary], shrink\n$S$ so that $Z=Y\\setminus G$, with reduced structure, is\nfinite over $S$.",
-        "uses": [
-          "lem-fin-coordinate-generic-dimension",
-          "lem-fin-projective-coordinate-boundary"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Second step: smooth source and locally constant sheaf.*\nAssume $X\\to S$ is smooth and $F$ locally constant.\nThe assertion can be checked on each member of a finite affine\ncover of $Y$. For one such member, embed it in affine space\nand take its projective closure. The original affine member\nis open in this closure, so $X$ remains an open subscheme of\nthe projective closure. Replacing the closure by the closure of\n$X$ makes $X$ dense. This operation changes no generic\ndimension of $X$, and the desired result on the projective\nclosure restricts to the original member.\nWe can thus use the first step with $b:Y\\to S$ projective.\nSet $K=Rj_*F$ and $a=bj:X\\to S$. The first step proves\n$K|_G\\in D^b_c(G)$. After one further shrinking,\n[lem-asd-smooth-generic-direct-image] proves\n$Ra_*F=Rb_*K\\in D^b_c(S)$.\n[lem-fin-finite-boundary-reconstruction] now gives\n$K\\in D^b_c(Y)$.\n\nFor any $T\\to S$ with Noetherian $T$, let $c:K|_{Y_T}\\to Rj_{T,*}F|_{X_T}$\nbe its exchange morphism. On $G_T$ it is an isomorphism by\nthe first step. After applying $Rb_{T,*}$, proper base change\n[thm-weil-pbc-bounded-below] and the composition rule\n[sbc-lem-base-change-composition] identify the resulting\nmorphism with the exchange for $a$, which is an isomorphism\nby the smooth-source lemma. The base change of $Z\\to S$\nis finite. Hence [lem-fin-finite-boundary-comparison],\napplied over $T$, says that $c$ is an isomorphism.\nNotice that the target of $c$ need only start in $D^+$;\nits boundedness follows from the proved isomorphism.\nThis proves the entire dimension-$n$ assertion whenever the\nsource is smooth and the coefficient sheaf is locally constant.",
-        "uses": [
-          "lem-asd-smooth-generic-direct-image",
-          "lem-fin-finite-boundary-reconstruction",
-          "thm-weil-pbc-bounded-below",
-          "sbc-lem-base-change-composition",
-          "lem-fin-finite-boundary-comparison"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Third step: arbitrary constructible sheaf.*\nBy [lem-fin-generic-radicial-smoothing], after shrinking and\nmaking a finite radicial surjective base change, the reduction of\n$X$ has a dense smooth open $v:V\\hookrightarrow X$ on which\n$F$ is locally constant. Replacing the schemes by their\nreductions does not change their etale topoi, by\n[thm-weil-pbc-universal-homeomorphism-invariance].\nThe second step, which has already been proved at dimension\n$n$, applies both to $v:V\\hookrightarrow X$ and to\n$jv:V\\hookrightarrow Y$. After intersecting the two resulting\nbase opens, their derived direct images are bounded constructible\nand commute with every base change. Form the triangle\n\n$$\nF\\longrightarrow Rv_*v^*F\\longrightarrow\\Delta\\longrightarrow F[1].\n\\tag{1}\n$$\n\nThe first arrow is the adjunction unit. Both first terms are\nbounded constructible, so the cohomology long exact sequence and\n[thm-constructible-serre] show that $\\Delta$ is\nbounded constructible. The unit is the identity after restriction\nto $V$, hence $\\Delta|_V=0$. For the reduced closed complement\n$i:W\\hookrightarrow X$, termwise open–closed localization from\n[def-weil-pbc-extension-by-zero] identifies\n$\\Delta=i_*i^*\\Delta$. The generic dimension of $W$ is less\nthan $n$.\n\nApply the induction hypothesis to the immersion $ji:W\\to Y$\nand to each of the finitely many constructible sheaves\n$\\mathcal H^q(i^*\\Delta)$. Intersect the finitely many base\nopens. Finite truncation triangles, or their bounded spectral\nsequence [thm-sp-truncation-e2], prove that\n$R(ji)_*i^*\\Delta=Rj_*\\Delta$ is bounded constructible and\ncommutes with every base change. Only a finite number of\ncohomology sheaves and a bounded truncation filtration occur.\nApply $Rj_*$ to (1). The middle term is\n$R(jv)_*v^*F$, already handled by the second step, and the\nthird term has just been handled by lower-dimensional induction.\nThe long exact sequence proves bounded constructibility of\n$Rj_*F$. After any base change, the second-step exchange\nidentifies the pullback of (1) with the analogous triangle for\n$v_T$. The three exchange morphisms consequently form a\nmorphism of triangles; the second and third are isomorphisms,\nso the first is an isomorphism as well.\nFinally [lem-fin-radicial-exchange-descent] descends the result\nthrough the finite radicial base change. Its hypothesis must be checked\nover the whole base to which it is applied, so we first produce an open of\n$S$ whose preimage lies inside the good open. Let $U\\subseteq S$ be\nthe open over which the preceding steps hold and let\n$U'\\subseteq S'_{U}=S'\\times_SU$ be the nonempty open of $S'_{U}$ on\nwhich they were verified. Since $S'\\to S$ is finite, surjective and\nradicial, it is a homeomorphism on underlying spaces; $S$ being\nintegral, $S'$ and $S'_{U}$ are therefore irreducible of dimension\n$\\dim S$. The complement $F=S'_{U}\\setminus U'$ is closed in\n$S'_{U}$, and its image $C\\subseteq U$ is closed because\n$S'_{U}\\to U$ is finite. If $C=U$, then $F\\to U$ is surjective, so\n$\\dim F\\ge\\dim U=\\dim S'_{U}$, which is impossible for a proper closed\nsubset of the irreducible $S'_{U}$. Hence $C\\neq U$, and for the\nnonempty open $U_1=U\\setminus C$ the preimage $S'_{U_1}$ is contained\nin $U'$. Applying [lem-fin-radicial-exchange-descent] over\n$U_1$, and intersecting with the finitely many opens already produced,\ncompletes the induction.",
-        "uses": [
-          "lem-fin-generic-radicial-smoothing",
-          "thm-weil-pbc-universal-homeomorphism-invariance",
-          "thm-constructible-serre",
-          "def-weil-pbc-extension-by-zero",
-          "thm-sp-truncation-e2",
-          "lem-fin-radicial-exchange-descent"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "It remains to descend from the good open $U'\\subset S'$ of steps 7--10. A finite radicial surjection is a homeomorphism on underlying spaces: it is bijective by surjectivity and universal injectivity, and closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. Consequently $S'\\setminus U'$ has closed image $C$ in the original shrunken base, and $C$ misses the generic point since $U'$ is nonempty in the irreducible space $S'$. For the nonempty open $U=S\\setminus C$, its full preimage $S'_U$ lies inside $U'$. Over $S'_U$ bounded constructibility and compatibility with every further Noetherian base change have been proved, including the reduction identifications of step 7. Apply [lem-fin-radicial-exchange-descent] to the finite radicial surjection $S'_U\\to U$. It gives both assertions on $U$, completing the induction. This last topological argument also covers zero-dimensional bases; it does not use a dimension estimate for a closed subset.",
+   "uses": [
+    "lem-fin-radicial-exchange-descent",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+    "place": "## Proof"
+   }
   }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-pbc-constructible-complexes",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-pqf-qc-immersion-open-closed-factor",
+  "lem-fin-closed-immersion",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-kun-dimension-extension",
+  "lem-fin-coordinate-generic-dimension",
+  "lem-fin-projective-coordinate-boundary",
+  "lem-asd-smooth-generic-direct-image",
+  "lem-fin-finite-boundary-reconstruction",
+  "lem-kun-projective-implies-proper",
+  "lem-chow-closed-model",
+  "thm-weil-pbc-bounded-below",
+  "lem-kun-proper-stability",
+  "lem-fin-finite-boundary-comparison",
+  "lem-fin-generic-radicial-smoothing",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sf-derived-homology-long-exact",
+  "thm-constructible-serre",
+  "lem-cbc-open-closed-recollement",
+  "lem-sc-open-immersion-pushforward-fully-faithful",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-derived-exchange-triangulated",
+  "lem-fin-radicial-exchange-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/thm-fin-deligne-generic-open.proof.md",
+  "place": "## Proof: dimension induction and three Deligne devissage steps, with citation and typing repairs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "generic bounded constructibility and base change for direct image under an open immersion over a finite type integral base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.IsConstructible.preimage_of_isOpenEmbedding",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, ConstructibleSheaf, OpenImmersion, base change",
+   "results": "0 hits: ; loogle: unknown identifier 'ConstructibleSheaf'",
+   "date": "2026-10-14",
+   "verdict": "invalid-pattern: loogle: unknown identifier 'ConstructibleSheaf'"
+  },
+  {
+   "tool": "grep",
+   "query": "OpenImmersion|constructible.*base.change|base.change.*open",
+   "results": "0 hits:  (subdirectory WeilConjectures)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an open immersion of finite type schemes over an integral base, direct image of a constructible finite sheaf is generically bounded constructible and commutes with arbitrary Noetherian base change",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic base change theorem for etale cohomology of a constructible torsion sheaf under a quasi compact open immersion",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "2 hits: CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*base.?change|constructible.*[Ss]heaf|boundedConstructible",
+   "results": "0 hits:  (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state generic etale direct-image constructibility or exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic bounded constructibility and base change for direct image under an open immersion over a finite type integral base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; Topology.IsConstructible.image_of_isOpenEmbedding; Topology.IsConstructible.preimage_of_isOpenEmbedding",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern topological constructibility/open immersions, not generic etale direct-image constructibility or exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, ConstructibleSheaf, OpenImmersion, base change",
+   "results": "0 hits; unknown identifier ConstructibleSheaf",
+   "date": "2026-10-17",
+   "verdict": "unavailable/invalid pattern: no candidate states the theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "OpenImmersion|constructible.*base.change|base.change.*open [WeilConjectures]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an open immersion of finite type schemes over an integral base, direct image of a constructible finite sheaf is generically bounded constructible and commutes with arbitrary Noetherian base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion; AlgebraicGeometry.IsOpenImmersion; AlgebraicGeometry.Scheme.image_basicOpen; AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern open-immersion topology/stalks, not generic etale direct-image constructibility or exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1637,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-scheme-conventions",
+  "lem-asd-smooth-generic-direct-image",
+  "lem-fin-closed-immersion",
+  "lem-fin-coordinate-generic-dimension",
+  "lem-fin-finite-boundary-comparison",
+  "lem-fin-finite-boundary-reconstruction",
+  "lem-fin-generic-radicial-smoothing",
+  "lem-fin-projective-coordinate-boundary",
+  "lem-fin-radicial-exchange-descent",
+  "lemma-weil-pbc-finite-exchange",
+  "sbc-def-base-change-map",
+  "sbc-lem-base-change-composition",
+  "thm-constructible-serre",
+  "thm-sp-truncation-e2",
+  "thm-weil-pbc-bounded-below",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-map"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-fin-deligne-generic-open",
+  "worker": "stage1",
+  "summary": "Audited the imported eight-step dimension-induction split against the current main-20261015 blueprint proof. Reused existing DAG nodes only; no new nodes were needed. The steps explicitly account for Noetherian reductions, closure and dimension induction, finite-boundary devissage, smooth locally constant reduction, arbitrary constructible sheaves, and radicial descent, with canonical exchange maps and coefficient typing tracked. No statement change. Maintainer review (Codex reader, 2026-10-17): added citations for the dimension facts (lem-kun-dimension-extension, steps 3 and 7), the open-immersion counit (lem-sc-open-immersion-pushforward-fully-faithful, step 8) and the restriction compatibility of the exchange (horizontal pasting, step 1); split the long steps into eleven steps without changing the argument.",
+  "blueprint": "Current main-20261015 proof: opening closure reduction and dimension induction; first-step finite-boundary good locus; second-step smooth locally constant case and exchange; third-step radicial smoothing, triangle devissage, lower-dimensional induction, and descent.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic tool for Inverse image of etale sheaves of modules over a constant ring is exact used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic tool for The derived exchange morphism commutes with forgetting the coefficient ring used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-underived-exchange-restriction",
+    "why": "Generic tool for Underived exchange along an etale morphism is the restriction identification used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic tool for Etale restriction preserves injectives used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-pqf-qc-immersion-open-closed-factor",
+    "why": "Generic tool for Quasi-compact immersions factor through an open and a closed immersion used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Generic tool for Finite exchange isomorphism used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic tool for Canonical composition comparison for unbounded ringed-topos direct images used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-identity-pasting",
+    "why": "Generic tool for Identity and pasting equations for exchange used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Generic tool for Bounded-below derived proper base change used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-kun-proper-stability",
+    "why": "Generic tool for Properness survives base change and composition used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic tool for Universal-homeomorphism invariance used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic tool for Long exact cohomology sequence of a distinguished triangle in the derived category used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic tool for Constructible sheaves form a weak Serre subcategory used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic tool for Open-closed recollement used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Generic tool for Canonical truncation triangle in the derived category used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic tool for The derived direct image on bounded below derived categories is a triangulated functor used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-triangulated",
+    "why": "Generic tool for The derived exchange transformation commutes with shifts and maps triangles to morphisms of triangles used within the existing Deligne dimension-induction route; no statement of this unit gives this general input."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic tool: Affine schemes of finite type are Noetherian with finitely many components; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic tool: A Noetherian zero-dimensional scheme has finite discrete underlying space; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic tool: Projective morphisms are proper; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Generic tool: A surjective closed immersion is a universal homeomorphism; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic tool: A finite morphism is separated, universally closed and has finite fibres; supports the existing dimension induction and scheme reductions, with no replacement of the unit route."
+   },
+   {
+    "node": "lemma-nagata-immersion-open-in-scheme-image",
+    "why": "Quasi-compact immersion has a dense open factor in its schematic image; supplies the closure reductions in steps 2 and 4 without changing the route."
+   },
+   {
+    "node": "lem-chow-closed-model",
+    "why": "Projective closure of the affine target is a closed model containing that target as an open subscheme; supplies the compactification in step 4 without changing the route."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Generic tool: dimension of a finite-type scheme over a field is invariant under field extension and under passing to a dense open; used for the zero-dimensional base case (step 2) and the generic dimension over the radicial base change (steps 6-7), facts the blueprint proof uses without citation; no node of the unit gives them."
+   },
+   {
+    "node": "lem-sc-open-immersion-pushforward-fully-faithful",
+    "why": "Generic tool: the counit of an open immersion is an isomorphism; gives that the adjunction unit becomes invertible after restriction to V in step 6 (blueprint: 'the unit is the identity after restriction to V'); no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-pqf-qc-immersion-open-closed-factor",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "thm-weil-pbc-bounded-below",
+  "lem-kun-proper-stability",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-sf-derived-homology-long-exact",
+  "thm-constructible-serre",
+  "lem-cbc-open-closed-recollement",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-derived-exchange-triangulated",
+  "lem-wf-affine-noetherian-components",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-chow-closed-model",
+  "lem-kun-dimension-extension",
+  "lem-sc-open-immersion-pushforward-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-6d08e32a6",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-6d08e32a6 (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full, plus the statement of every cited node (34 before the fix, 36 after). I also read the unit and chapter records, and the main-20261015 and master blueprint statement and proof; the two are identical except for master's notation sentence. The statement matches the source hypothesis by hypothesis. The coefficients are ordinary D(-_et, F_ell). The base-change morphism is sbc-def-base-change-map, compared with the abelian-sheaf exchange via lem-weil-pbc-exchange-forget-coefficients, so no coefficient categories are identified silently and the statement is not weakened. The math holds: induction on generic dimension, coordinate good locus, the smooth case through finite-boundary reconstruction and comparison with vertical pasting and proper base change, radicial smoothing with the cone and localization, truncation devissage, and topological radicial descent. I checked the hypotheses of every cited lemma and the edge cases (empty generic source, n=0, dim S=0). I fixed three C1 citation faults in fixes/dag/nodes/sec-smooth-purity/thm-fin-deligne-generic-open.json. (1) Step 1 asserted that the exchange is compatible with restriction to a target open without citing anything; it now cites horizontal pasting, lem-weil-pbc-exchange-identity-pasting (2). (2) Two dimension facts had no node: the zero-dimensional components in the n=0 base case, and the generic dimension n after the radicial base change, which both the smooth case for V and dim W <= n-1 need. Both are now cited to the existing lem-kun-dimension-extension. (3) 'The unit becomes the identity on V' was asserted without support; it now uses the triangle identity, exact v^* (prop-weil-pbc-inverse-image-modules-exact) and the existing lem-sc-open-immersion-pushforward-fully-faithful. I also wrote out the vertical-pasting argument for the middle component in the assembly, which the old text only stated loosely. The three long steps (2, 6, 7) are each two or three fully written arguments with no source-labelled standard lemma hidden in them; I split them into separate steps, giving 11 steps in total, all under 2000 characters. Cross-references are renumbered, proof_deps equals the union of uses, and the two added off-unit tools are declared in split_report.tool_uses and accepted. There are no new nodes, no duplicates and no cycle (checked by reachability), and no SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericOpenImmersionConstructibility",
+  "declaration": "AlgebraicGeometry.Etale.exists_nonempty_open_isBoundedConstructible_derived_open_pushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericOpenImmersionConstructibility.lean",
+  "statement": "theorem exists_nonempty_open_isBoundedConstructible_derived_open_pushforward (k : Type u) [Field k] (S : Scheme.{u}) [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k) (X Y : Scheme.{u}) (aX : X ⟶ S) (aY : Y ⟶ S) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (j : X ⟶ Y) [IsOpenImmersion j] (hj : j ≫ aY = aX) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : ∃ U : S.Opens, Nonempty U ∧ ∀ (XU YU : Scheme.{u}) (pX : XU ⟶ X) (pY : YU ⟶ Y) (bU : YU ⟶ U.toScheme) (jU : XU ⟶ YU), IsPullback pY bU aY U.ι → IsPullback pX jU j pY → DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) YU ((R((jU)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((L((pX)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧ ∀ (T : Scheme.{u}) [IsNoetherian T] (t : T ⟶ U.toScheme) (XT YT : Scheme.{u}) (qX : XT ⟶ XU) (qY : YT ⟶ YU) (bT : YT ⟶ T) (jT : XT ⟶ YT), IsPullback qY bT bU t → ∀ sq : IsPullback qX jT jU qY, IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) sq.toCommSq).app ((L((pX)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71fe66321",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, hypotheses, conclusions, universes, edge cases, docstrings, and verbatim statement record. Immutable module compiled cleanly through scompile.py in both sandbox and library-path checks. No findings or fixes; branch head unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, and let\n$j:X\\hookrightarrow Y$ be an open immersion of finite-type\n$S$-schemes. For a constructible $\\mathbf F_\\ell$-sheaf $F$\non $X$, there is a nonempty open $U\\subset S$ such that\n$Rj_{U,*}F|_{X_U}$ belongs to $D^b_c(Y_U,\\mathbf F_\\ell)$\nand, for every morphism $T\\to U$ with Noetherian $T$, its canonical base-change morphism\n\n$$\nRj_{U,*}F|_{X_U}\\big|_{Y_T}\n\\longrightarrow Rj_{T,*}F|_{X_T}\n$$\n\nis an isomorphism.",
+  "proof": [
+   {
+    "text": "Throughout this proof all base changes have Noetherian source.\nWe prove the two assertions simultaneously, so that every use of\nthe induction includes the specific exchange map. Replace $Y$\nby the scheme-theoretic closure of $X$; the original immersion\nis its composite with a closed immersion. Closed direct image\nis exact and preserves constructibility by\n[lem-fin-closed-immersion], and it commutes with base change by\n[lemma-weil-pbc-finite-exchange]. We may therefore assume\nthat $X$ is dense in $Y$. The same observation extends any\ncase already proved for a dense open immersion to an arbitrary\nimmersion with that bound on the generic dimension of its source.\n\nInduct on $n=\\dim X_{k(S)}$. Before starting, remove the\nclosures of the images of the finitely many irreducible components\nof $Y$ that do not dominate $S$. For an empty generic fiber\nthe remaining scheme is empty. For $n=0$, the dense open\n$X_{k(S)}$ contains every point of the zero-dimensional\nNoetherian space $Y_{k(S)}$, so it equals that space.\nThe closed complement $Y\\setminus X$ has empty generic fiber.\nIts finite affine presentations show that it becomes empty after\ninverting one nonzero element of the base: over the fraction\nfield each coordinate ring is zero, so a nonzero base element\nkills its unit; use the product for a finite affine cover.\nThus, after shrinking, $j$ is the identity and the assertion\nholds. Assume now the assertion for generic source dimension\nat most $n-1$, including all immersions as above.",
+    "uses": [
+     "lem-fin-closed-immersion",
+     "lemma-weil-pbc-finite-exchange"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*First step: the good locus has finite complement.*\nThe question is local on $Y$, and $Y$ has a finite affine\ncover. For this step suppose $Y$ projective over an affine\nopen of $S$, and cover it by finitely many affine schemes\n$Y_\\alpha\\hookrightarrow\\mathbf A^{m_\\alpha}_S$.\nFor each coordinate, regard\n$X\\cap Y_\\alpha\\hookrightarrow Y_\\alpha$ as an immersion\nover the integral finite-type base $\\mathbf A^1_S$.\nIts generic source dimension is at most $n-1$ by\n[lem-fin-coordinate-generic-dimension]. The induction\nhypothesis supplies a dense open $V_{\\alpha r}\\subset\\mathbf A^1_S$\nover whose inverse image the direct image is bounded constructible\nand commutes with all base changes. This includes every base\nchange induced from $T\\to S$: restrict the induced morphism\n$\\mathbf A^1_T\\to\\mathbf A^1_S$ to $V_{\\alpha r}$.\nThere are finitely many coordinate pairs. Their union $G$\ntherefore has both properties, with a common finite cohomological\nrange. By [lem-fin-projective-coordinate-boundary], shrink\n$S$ so that $Z=Y\\setminus G$, with reduced structure, is\nfinite over $S$.",
+    "uses": [
+     "lem-fin-coordinate-generic-dimension",
+     "lem-fin-projective-coordinate-boundary"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Second step: smooth source and locally constant sheaf.*\nAssume $X\\to S$ is smooth and $F$ locally constant.\nThe assertion can be checked on each member of a finite affine\ncover of $Y$. For one such member, embed it in affine space\nand take its projective closure. The original affine member\nis open in this closure, so $X$ remains an open subscheme of\nthe projective closure. Replacing the closure by the closure of\n$X$ makes $X$ dense. This operation changes no generic\ndimension of $X$, and the desired result on the projective\nclosure restricts to the original member.\nWe can thus use the first step with $b:Y\\to S$ projective.\nSet $K=Rj_*F$ and $a=bj:X\\to S$. The first step proves\n$K|_G\\in D^b_c(G)$. After one further shrinking,\n[lem-asd-smooth-generic-direct-image] proves\n$Ra_*F=Rb_*K\\in D^b_c(S)$.\n[lem-fin-finite-boundary-reconstruction] now gives\n$K\\in D^b_c(Y)$.\n\nFor any $T\\to S$ with Noetherian $T$, let $c:K|_{Y_T}\\to Rj_{T,*}F|_{X_T}$\nbe its exchange morphism. On $G_T$ it is an isomorphism by\nthe first step. After applying $Rb_{T,*}$, proper base change\n[thm-weil-pbc-bounded-below] and the composition rule\n[sbc-lem-base-change-composition] identify the resulting\nmorphism with the exchange for $a$, which is an isomorphism\nby the smooth-source lemma. The base change of $Z\\to S$\nis finite. Hence [lem-fin-finite-boundary-comparison],\napplied over $T$, says that $c$ is an isomorphism.\nNotice that the target of $c$ need only start in $D^+$;\nits boundedness follows from the proved isomorphism.\nThis proves the entire dimension-$n$ assertion whenever the\nsource is smooth and the coefficient sheaf is locally constant.",
+    "uses": [
+     "lem-asd-smooth-generic-direct-image",
+     "lem-fin-finite-boundary-reconstruction",
+     "thm-weil-pbc-bounded-below",
+     "sbc-lem-base-change-composition",
+     "lem-fin-finite-boundary-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Third step: arbitrary constructible sheaf.*\nBy [lem-fin-generic-radicial-smoothing], after shrinking and\nmaking a finite radicial surjective base change, the reduction of\n$X$ has a dense smooth open $v:V\\hookrightarrow X$ on which\n$F$ is locally constant. Replacing the schemes by their\nreductions does not change their etale topoi, by\n[thm-weil-pbc-universal-homeomorphism-invariance].\nThe second step, which has already been proved at dimension\n$n$, applies both to $v:V\\hookrightarrow X$ and to\n$jv:V\\hookrightarrow Y$. After intersecting the two resulting\nbase opens, their derived direct images are bounded constructible\nand commute with every base change. Form the triangle\n\n$$\nF\\longrightarrow Rv_*v^*F\\longrightarrow\\Delta\\longrightarrow F[1].\n\\tag{1}\n$$\n\nThe first arrow is the adjunction unit. Both first terms are\nbounded constructible, so the cohomology long exact sequence and\n[thm-constructible-serre] show that $\\Delta$ is\nbounded constructible. The unit is the identity after restriction\nto $V$, hence $\\Delta|_V=0$. For the reduced closed complement\n$i:W\\hookrightarrow X$, termwise open–closed localization from\n[def-weil-pbc-extension-by-zero] identifies\n$\\Delta=i_*i^*\\Delta$. The generic dimension of $W$ is less\nthan $n$.\n\nApply the induction hypothesis to the immersion $ji:W\\to Y$\nand to each of the finitely many constructible sheaves\n$\\mathcal H^q(i^*\\Delta)$. Intersect the finitely many base\nopens. Finite truncation triangles, or their bounded spectral\nsequence [thm-sp-truncation-e2], prove that\n$R(ji)_*i^*\\Delta=Rj_*\\Delta$ is bounded constructible and\ncommutes with every base change. Only a finite number of\ncohomology sheaves and a bounded truncation filtration occur.\nApply $Rj_*$ to (1). The middle term is\n$R(jv)_*v^*F$, already handled by the second step, and the\nthird term has just been handled by lower-dimensional induction.\nThe long exact sequence proves bounded constructibility of\n$Rj_*F$. After any base change, the second-step exchange\nidentifies the pullback of (1) with the analogous triangle for\n$v_T$. The three exchange morphisms consequently form a\nmorphism of triangles; the second and third are isomorphisms,\nso the first is an isomorphism as well.\nFinally [lem-fin-radicial-exchange-descent] descends the result\nthrough the finite radicial base change. Its hypothesis must be checked\nover the whole base to which it is applied, so we first produce an open of\n$S$ whose preimage lies inside the good open. Let $U\\subseteq S$ be\nthe open over which the preceding steps hold and let\n$U'\\subseteq S'_{U}=S'\\times_SU$ be the nonempty open of $S'_{U}$ on\nwhich they were verified. Since $S'\\to S$ is finite, surjective and\nradicial, it is a homeomorphism on underlying spaces; $S$ being\nintegral, $S'$ and $S'_{U}$ are therefore irreducible of dimension\n$\\dim S$. The complement $F=S'_{U}\\setminus U'$ is closed in\n$S'_{U}$, and its image $C\\subseteq U$ is closed because\n$S'_{U}\\to U$ is finite. If $C=U$, then $F\\to U$ is surjective, so\n$\\dim F\\ge\\dim U=\\dim S'_{U}$, which is impossible for a proper closed\nsubset of the irreducible $S'_{U}$. Hence $C\\neq U$, and for the\nnonempty open $U_1=U\\setminus C$ the preimage $S'_{U_1}$ is contained\nin $U'$. Applying [lem-fin-radicial-exchange-descent] over\n$U_1$, and intersecting with the finitely many opens already produced,\ncompletes the induction.",
+    "uses": [
+     "lem-fin-generic-radicial-smoothing",
+     "thm-weil-pbc-universal-homeomorphism-invariance",
+     "thm-constructible-serre",
+     "def-weil-pbc-extension-by-zero",
+     "thm-sp-truncation-e2",
+     "lem-fin-radicial-exchange-descent"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,0 +1,93 @@
+{
+ "id": "lem-pur-retracted-support-localization-comparison",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "Proof Step 1 (reduction to the degree-zero support sheaf) and Step 3 (canonical support-object identification); unit sk-prop-a1 proof, localization triangle after Rp_* and its connecting map carrying kappa(t) to partial kappa(t).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Localization and boundary comparison for a closed section with a retraction",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions], with $A=A_{E,n}$. Let $X,Y$ be separated finite-type $k$-schemes, let $p:X\\to Y$ be a separated finite-type morphism, and let $s:Y\\hookrightarrow X$ be a closed section, so $ps=\\operatorname{id}_Y$. Let $j:U\\hookrightarrow X$ be its quasi-compact open complement and put $\\pi=pj$. The meanings of these morphisms are [def-weil-finite-type-morphism], [def-weil-proper-morphism], [def-weil-closed-immersion] and [def-weil-open-immersion]. For each scheme $T$ write $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ for the site comparison [def-weil-pbc-site-comparison-morphism]. Let $B\\in D^+(X_{\\mathrm{et}},A)$ and put $K=\\nu_X^*B$, in the ordinary module derived categories [def-weil-pbc-derived-categories, def-weil-derived-cohomology-sheaves], where $D^+$ denotes objects whose cohomology sheaves vanish below some integer. Use the finite direct images of [def-weil-derived-direct-image]. Use the finite-level transported exceptional inverse image of [def-weil-exceptional-inverse-image], and put $C=Rs^!K\\in D^+(Y_{\\mathrm{proet}},A)$.\n\nThere is a natural distinguished triangle [def-weil-triangulated-category]\n$$C\\longrightarrow Rp_*K\\longrightarrow R\\pi_*j^*K\\xrightarrow{d}C[1].$$\nIt is the $\\nu_Y^*$-transport of the ordinary etale closed-support localization triangle after $Rp_{\\mathrm{et},*}$, with $Rp_{\\mathrm{et},*}s_*s^\\times B=s^\\times B$. The finite direct-image comparison identifies the second arrow with restriction along $j$. Here $s^\\times$ is the ordinary etale right adjoint of $s_*$, and the first arrow is the image of its counit, with the transported exceptional functor and counit identified by the compactification $Y\\xrightarrow{\\mathrm{id}}Y\\xrightarrow{s}X$. These identifications are natural in $B$ and use the canonical etale/pro-etale direct-image comparisons, rather than an adjunction on all pro-etale inputs.\n\nUse cohomology sheaves [def-weil-derived-cohomology-sheaves] and supported cohomology [def-pur-support-cohomology]. Applying derived global sections to this triangle identifies $H^{q+1}(Y,C)$ with $H^{q+1}_{s(Y)}(X,K)$ and identifies $H^q(Y,d)$ with the support boundary $\\partial:H^q(U,j^*K)\\to H^{q+1}_{s(Y)}(X,K)$ of [thm-pur-with-support-exactness]. For the canonical edge maps $e_V^r:H^r(Y,V)\\to\\Gamma(Y,\\mathcal H^r(V))$ and the cohomology-sheaf boundary $\\delta^q:\\mathcal H^q(R\\pi_*j^*K)\\to\\mathcal H^{q+1}(C)$, one has, for every integer $q$ and $\\alpha\\in H^q(U,j^*K)$,\n$$e_C^{q+1}(\\partial\\alpha)=\\Gamma(Y,\\delta^q)\\bigl(e_{R\\pi_*j^*K}^{q}(\\alpha)\\bigr).$$\nThe edge maps here send a global cohomology class to its local cohomology classes in the cohomology sheaf. The boundary and all these identifications agree with their ordinary etale counterparts under site comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "Unit sk-prop-a1, proof: localization triangle after Rp_*; comparison and edge compatibility expanded from the prior item proof step 2"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-derived-direct-image",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-triangulated-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-support-cohomology",
+  "thm-pur-with-support-exactness",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed section of a separated finite type scheme morphism the etale localization triangle transports to finite coefficient pro etale exceptional inverse image and its cohomology boundary agrees with the global support boundary",
+   "results": "Returned Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.of_comp, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.isOpen_etaleLocus and affine-transition-limit section lemmas. None states a support triangle or its comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localization\", \"triangle\"",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle and complete_distinguished_triangle_morphism concern abstract localization of a triangulated category (Mathlib/CategoryTheory/Localization/Triangulated.lean, lines 135 and 156, read through line 170); the other two hits are monoidal triangle identities. None constructs closed-support/site comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*triangle|support.*triangle|triangle.*support",
+   "results": "No hits in the pinned Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of global localization boundary and the cohomology sheaf connecting morphism after a derived direct image",
+   "results": "Returned structure-sheaf localization maps, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, and CategoryTheory.Functor.mapDerivedCategoryFactors. None states the support/direct-image comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the edge map from hypercohomology to sections of the cohomology sheaf with respect to the connecting map of a localization triangle",
+   "results": "Returned CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, CategoryTheory.Functor.homologySequenceδ_naturality, and mapping-cone naturality lemmas. These are homology-sequence facts; they do not identify global supported cohomology and the sheaf edge after site transport.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-affine-line-orientation-uniqueness",
+  "date": "2026-10-17",
+  "group": "NX"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

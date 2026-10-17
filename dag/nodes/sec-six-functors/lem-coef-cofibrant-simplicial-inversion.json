@@ -38,44 +38,32 @@
    }
   },
   {
-   "text": "Here is the bar augmentation calculation, with an arbitrary second leg $A\\to C_0$ and with $i:A\\to B$ fixed. Use the coproduct $*$ and the strong free retract description of [lem-coef-fixed-object-simplicial-free-calculus]. Form the bisimplicial category $T_r=B*A^{*r}*C_0$ for $r\\geq0$, augmented to $P=B\\amalg_A C_0$. Bar faces fold adjacent copies of $A$, or fold the end copy into $B$ or $C_0$ by the two structure maps; degeneracies insert a new $A$ factor by the identity-only unit, so their maps omit that factor. All identities follow on each coproduct factor, and hence on words.\n\nFirst suppose $i$ is free. Fix the original simplicial degree $q$, so $B_q=F_q*A_q$ and $P_q=F_q*(C_0)_q$. In bar degree $r$ write $(T_r)_q=F_q*A_0*\\cdots*A_r*(C_0)_q$, where the subscripts $0,\\ldots,r$ label copies of $A_q$. Define an extra degeneracy by fixing $F_q,(C_0)_q$ and sending the copy $A_k$ into copy $A_{k+1}$, leaving copy $A_0$ unused. The degree-minus-one section includes $F_q*(C_0)_q$ and omits $A_0$. Explicitly, $d_i$ folds copies $A_i,A_{i+1}$ for $0\\leq i<r$ and $d_r$ folds $A_r$ into $(C_0)_q$; $s_i$ inserts an unused copy $A_{i+1}$, sending $A_k$ to $A_k$ for $k\\leq i$ and to $A_{k+1}$ for $k>i$. Write $h_r$ for the shift and $h_{-1}$ for the section. Then $d_0h_r=1$, since folding copies $0,1$ sends the shifted copy $A_{k+1}$ back to $A_k$. Also $d_1h_0=h_{-1}\\varepsilon_0$, since both sides send the original $A_0$ into $(C_0)_q$. For $0\\leq i\\leq r+1$, $d_{i+1}h_{r+1}=h_rd_i$: the adjacent copies folded on either side have original labels $i,i+1$, and in the last-face case both sides send the last copy into $(C_0)_q$. For $0\\leq i\\leq r$, $s_{i+1}h_r=h_{r+1}s_i$: both sides send $A_k$ to $A_{k+1}$ if $k\\leq i$ and to $A_{k+2}$ if $k>i$. All these maps fix $F_q,(C_0)_q$, and $\\varepsilon_0h_{-1}=1$. Hence they satisfy exactly the extra-degeneracy identities. For each pair $x,y$, [lem-coef-extra-degeneracy-contraction] gives a section and simplicial homotopy for the augmented bar set of arrows. Its realization is a homotopy equivalence: realize the prism homotopy on each simplex; its two composites are the identity and the section followed by the augmentation. Hence this is a weak homotopy equivalence. Applying [lem-coef-bisimplicial-diagonal-equivalence] to the two simplicial degrees of each mapping set proves $\\operatorname{diag}T\\to P$ is a local weak equivalence. The degreewise free decompositions need not be compatible with faces in $q$, since the diagonal theorem only needs this rowwise assertion. For a general cofibration $i$, take its strong free retract, keep $A,C_0$ fixed and form the same bars and pushouts. Their augmentations exhibit the original augmentation as a retract of the free one, so it is again a local weak equivalence.",
+   "text": "Put $C=G(A)$. By [lem-coef-fixed-object-simplicial-free-calculus], factor $A\\to C$ functorially in $\\mathrm{sCat}_O$ as a cofibration $j:A\\hookrightarrow\\widetilde C$ followed by a trivial fibration $p:\\widetilde C\\to C$. The same node identifies the given Bergner cofibration $i:A\\to B$ and the cofibrancy of $A,B$ with their fixed-object counterparts, and identifies $j$ with a Bergner cofibration. For the direct Reedy category with objects $a,b,c$ and nonidentity arrows $a\\to b,a\\to c$, choose degrees $0,1,1$. In the span $B\\leftarrow A\\to\\widetilde C$, the latching objects are the initial object at $a$ and $A$ at both $b,c$. Thus [lem-coef-reedy-model-structure] makes this a cofibrant span in the Bergner structure: its three latching maps are the initial map of $A$, $i$, and $j$. The map to the original span is the identity on $A,B$ and $p$ on its third object. It is objectwise a Dwyer--Kan equivalence since $p$ fixes objects and is a weak equivalence on every mapping set. Hence this is a cofibrant replacement span of the kind stipulated in the statement. Write $\\widetilde P=B\\amalg_A\\widetilde C$ for its pushout.",
    "uses": [
     "lem-coef-fixed-object-simplicial-free-calculus",
-    "lem-coef-extra-degeneracy-contraction",
-    "lem-coef-bisimplicial-diagonal-equivalence"
+    "lem-coef-reedy-model-structure",
+    "lem-coef-coherent-nerve-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
-    "place": "Proposition 8.2 proof, pp.278-279; explicit missing contraction written here using Mathlib ExtraDegeneracy.homotopy"
+    "place": "Sections 7.2 and 8.1; functorial factorization and the direct Reedy span criterion"
    }
   },
   {
-   "text": "If $C_1\\to C_0$ is a local weak equivalence under $A$, [lem-coef-fixed-object-simplicial-free-calculus] makes every map $B*A^{*r}*C_1\\to B*A^{*r}*C_0$ a local weak equivalence, by repeated binary free-product invariance. For each $x,y$ apply [lem-coef-bisimplicial-diagonal-equivalence] in the original simplicial degree to obtain a local weak equivalence between the diagonal bars. Their augmentations to the two pushouts are local weak equivalences by step 2. The augmentation square commutes factor by factor, so two-out-of-three makes $B\\amalg_A C_1\\to B\\amalg_A C_0$ a local weak equivalence. This argument concerns an arbitrary replacement of the second leg, not an assumption about total inversion preserving local weak equivalences.",
+   "text": "The map $k:\\widetilde C\\to\\widetilde P$ is a fixed-object cofibration. Indeed, a lifting square against $k$ and a trivial fibration restricts, along $A\\to\\widetilde C$ and $B\\to\\widetilde P$, to a lifting square against $i$. A lift for $i$ and the given map from $\\widetilde C$ agree on $A$, so the pushout universal property combines them into the required lift against $k$. Apply [lem-coef-fixed-object-scat-left-proper] to the weak equivalence $p:\\widetilde C\\to C$ and cofibration $k$. It gives a local weak equivalence $\\widetilde P\\to C\\amalg_{\\widetilde C}\\widetilde P$. Cocones for the latter object are pairs of maps from $C,B$ agreeing on $A$, so it is canonically $C\\amalg_A B=B[A^{-1}]$ by step 1. The comparison fixes $O$ and induces bijections on components of every mapping set. Its $\\pi_0$ functor is therefore fully faithful and surjective on objects, hence an equivalence. By [lem-coef-coherent-nerve-comparison] this local weak equivalence is a Dwyer--Kan equivalence. Consequently the displayed ordinary pushout is the required Bergner homotopy pushout.",
    "uses": [
-    "lem-coef-fixed-object-simplicial-free-calculus",
-    "lem-coef-bisimplicial-diagonal-equivalence"
+    "lem-coef-fixed-object-scat-left-proper",
+    "lem-coef-coherent-nerve-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
-    "place": "Propositions 2.7 and 8.1-8.2, pp.270-271,278-279; explicit comparison of the two augmented bars"
+    "place": "Proposition 7.3(ii), proved in Section 8.3; cofibration cobase change checked by lifting"
    }
   },
   {
-   "text": "Apply the functorial fixed-object factorization of [lem-coef-fixed-object-simplicial-free-calculus] to $j:A\\to C=G(A)$, writing $A\\hookrightarrow\\widetilde C\\xrightarrow{p}C$, with $p$ a trivial fibration. The hypotheses on $A,B,i$ give fixed-object cofibrancy and a fixed-object cofibration by the same node. For the direct Reedy category with arrows $a\\to b,a\\to c$, [lem-coef-reedy-model-structure] says that the span $B\\leftarrow A\\to\\widetilde C$ is cofibrant: the latching conditions are exactly cofibrancy of $A$ and cofibrancy of its two outgoing maps. The same conditions hold in the Bergner model structure by the fixed-object/Bergner agreement. Thus its ordinary pushout is a pushout of a cofibrant span computing the homotopy pushout in the sense stipulated in the statement. Step 3 applied to $p$ shows that the comparison $B\\amalg_A\\widetilde C\\to B\\amalg_A C=B[A^{-1}]$ is a local weak equivalence. It fixes $O$, so its induced functor on $\\pi_0$ is fully faithful and surjective on objects, hence it is a Dwyer--Kan equivalence. This proves the homotopy-pushout assertion in the Bergner, rather than only the fixed-object, homotopy theory.",
-   "uses": [
-    "lem-coef-fixed-object-simplicial-free-calculus",
-    "lem-coef-reedy-model-structure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
-    "place": "Sections 7.2-7.6 and Proposition 8.1; direct Reedy cofibrant-span interpretation"
-   }
-  },
-  {
-   "text": "Let $D(V)=\\operatorname{diag}_{p,q}N_p(V_q)$. Cofibrancy of $A$ and [lem-coef-fixed-object-simplicial-free-calculus] give a retract $A\\to E\\to A$ with $E_q$ free for every $q$. Apply degreewise groupoid completion and ordinary nerve to this retraction. For every $q$, the canonical $N(E_q)\\to N(G(E_q))$ is a weak homotopy equivalence by [lem-coef-free-category-groupoid-nerve]. Consequently $N(A_q)\\to N(G(A_q))$ is a weak homotopy equivalence, as a retract of that map. Apply [lem-coef-bisimplicial-diagonal-equivalence], now to the degreewise ordinary nerves, to conclude that $D(A)\\to D(G(A))$ is a weak homotopy equivalence. The two uses of a diagonal in steps 2 and 5 are distinct: step 2 uses mapping sets of a bar of simplicial categories, whereas this step uses nerves of ordinary categories.",
+   "text": "Let $D(V)=\\operatorname{diag}_{p,q}N_p(V_q)$. Cofibrancy of $A$ and [lem-coef-fixed-object-simplicial-free-calculus] give a retract $A\\to E\\to A$ with $E_q$ free for every $q$. Apply degreewise groupoid completion and ordinary nerve to this retraction. For every $q$, the canonical $N(E_q)\\to N(G(E_q))$ is a weak homotopy equivalence by [lem-coef-free-category-groupoid-nerve]. Consequently $N(A_q)\\to N(G(A_q))$ is a weak homotopy equivalence, as a retract of that map. Apply [lem-coef-bisimplicial-diagonal-equivalence], now to the degreewise ordinary nerves, to conclude that $D(A)\\to D(G(A))$ is a weak homotopy equivalence.",
    "uses": [
     "lem-coef-fixed-object-simplicial-free-calculus",
     "lem-coef-free-category-groupoid-nerve",
@@ -88,7 +76,7 @@
    }
   },
   {
-   "text": "For $V=A$ and $V=G(A)$ use the natural weak homotopy equivalence $z_V:D(V)\\to D(RV)\\to N_{\\mathrm{hc}}(RV)$ in [lem-coef-diagonal-coherent-nerve-comparison]. The comparison theorem is applied only to the locally Kan objects $RV$. Naturality gives the commutative square with upper edge $D(A)\\to D(G(A))$, lower edge $N_{\\mathrm{hc}}(RA)\\to N_{\\mathrm{hc}}(RG(A))$, and vertical edges $z_A,z_{G(A)}$. All but the lower edge are weak homotopy equivalences by step 5 and the cited comparison. Two-out-of-three proves that the lower edge is a weak homotopy equivalence. By the specified definition of $\\mathbf RN_{\\mathrm{hc}}$, this is precisely the map in the statement, rather than an unrelated equivalence of homotopy types.",
+   "text": "For $V=A$ and $V=G(A)$ use the natural weak homotopy equivalence $z_V:D(V)\\to D(RV)\\to N_{\\mathrm{hc}}(RV)$ in [lem-coef-diagonal-coherent-nerve-comparison]. The comparison theorem is applied only to the locally Kan objects $RV$. Naturality gives the commutative square with upper edge $D(A)\\to D(G(A))$, lower edge $N_{\\mathrm{hc}}(RA)\\to N_{\\mathrm{hc}}(RG(A))$, and vertical edges $z_A,z_{G(A)}$. All but the lower edge are weak homotopy equivalences by step 4 and the cited comparison. Two-out-of-three proves that the lower edge is a weak homotopy equivalence. By the specified definition of $\\mathbf RN_{\\mathrm{hc}}$, this is precisely the map in the statement, rather than an unrelated equivalence of homotopy types.",
    "uses": [
     "lem-coef-diagonal-coherent-nerve-comparison"
    ],
@@ -110,31 +98,32 @@
    }
   },
   {
-   "text": "Total inversion is a functor: send a formal inverse of an arrow to the inverse of its image. The pushout identification of step 1 commutes with this formula. The bar comparison is induced on every coproduct factor and its augmentation, so it commutes with maps of the pairs; the fixed-object factorization can be functorial by [lem-coef-fixed-object-simplicial-free-calculus]. The retractions and degreewise free decompositions above are used only to verify weak equivalences, not to define any of the maps claimed in the statement. Finally $R$ is functorial and $z_V$ is natural by [lem-coef-diagonal-coherent-nerve-comparison]. Thus both the pushout square and the total-inversion map have the asserted naturality. All arguments applied to an arbitrary cofibration $A\\to B$; none used saturation or two-out-of-three for its image.",
+   "text": "Total inversion is functorial: a functor sends a formal inverse of an arrow to the inverse of its image, and uniqueness preserves compositions and identities. The pushout identification in step 1 commutes with this formula and therefore with maps of the pairs. The factorization used in step 2 can be functorial by [lem-coef-fixed-object-simplicial-free-calculus]; pushout comparisons are then natural by their universal properties. The retractions in step 4 only verify weak equivalences and do not define any claimed map. Finally $R$ is functorial by [lem-coef-coherent-nerve-comparison], and the maps $z_V$ and their squares are natural by [lem-coef-diagonal-coherent-nerve-comparison]. Thus the total-inversion map and the homotopy-pushout comparison have the asserted naturality. The argument used no saturation or two-out-of-three hypothesis on the image of $A$ in $B$.",
    "uses": [
     "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-coherent-nerve-comparison",
     "lem-coef-diagonal-coherent-nerve-comparison"
    ],
    "elementary": true,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
-    "place": "Functoriality of ordinary inversion and bars; the stated functoriality of replacement and of the nerve comparison"
+    "place": "Sections 3.1-3.3, 9.1 and 10.1; functorial inverse words and pushout comparisons"
    }
   }
  ],
  "proof_deps": [
   "lem-coef-fixed-object-simplicial-free-calculus",
-  "lem-coef-extra-degeneracy-contraction",
-  "lem-coef-bisimplicial-diagonal-equivalence",
   "lem-coef-reedy-model-structure",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-fixed-object-scat-left-proper",
   "lem-coef-free-category-groupoid-nerve",
-  "lem-coef-diagonal-coherent-nerve-comparison",
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-diagonal-coherent-nerve-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-  "place": "Paragraph 2 mapping-space foundation. Agent-written bar contraction and comparison proof from online Dwyer--Kan I Sections 2,3,7-9; nerve bridge from online Arakawa Corollary 4.3. External documents are requested in report.md."
+  "place": "Paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: underlying mapping-space foundations. Agent-written cofibrant-span comparison using existing fixed-object left properness (DK I 7.3(ii), 8.1), free-retract diagonal nerve argument (DK I 9.2), and the natural locally Kan bridge (Arakawa 2.1, 4.3). Sources read online; archival copies WANTED in report.md."
  },
  "mathlib_searches": [
   {
@@ -171,10 +160,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": HoCat C ⥤ D\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_3, u_2} D] →\\n          [inst_2 : CategoryTheory.Category.{v_5, u_3} H] →\\n            (LF : CategoryTheory.Functor D H) →\\n              {F : Cate\", \"doc\": \"Given categories $ \\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H} $, functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, and $ LF : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, along with a mo\"}\n  {\"name\": \"CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived\", \"type\": \"[L.IsLocalization W] (F' : D ⥤ H) (e : L ⋙ F' ≅ F) : F'.IsLeftDerivedFunctor e.hom W\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $F' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, along with a morphism p\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{D : Type*} [Category* D] (L : C ⥤ D) [L.IsLocalization (weakEquivalences C)] :\\n  (ι ⋙ L).IsLocalization (weakEquivalences (CofibrantObject C))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": IsIso (HoCat.resolutionCompToLocalizationNatTrans L)\", \"doc\": \"The natural transformation from the composition of the resolution functor (sending objects to cofibrant replacements) and the localization functor (inverting weak equivalences) to the direct localizat\"}\n  {\"name\": \"CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived\", \"type\": \"[L.IsLocalization W] (hF : W.IsInvertedBy F) :\\n  (Localization.lift F hF L).IsRightDerivedFunctor (Localization.fac F hF L).inv W\", \"doc\": \"Given a localization functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a morphism property $ W $, and a $ W $-inverting functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{E} $, the lift of $ F $ through\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{D : Type*} [Category* D] (L : CofibrantObject.HoCat C ⥤ D) [L.IsLocalization (weakEquivalences _)] :\\n  (toHoCat ⋙ L).IsLocalization (weakEquivalences _)\", \"doc\": \"In a model category $\\\\mathcal{C}$, if $L$ is a functor from the homotopy category of cofibrant objects $\\\\mathrm{HoCat}(\\\\mathcal{C})$ to another category $D$ that localizes with respect to weak equival\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{D : Type*} [Category* D] (L : CofibrantObject.HoCat C ⥤ D) [L.IsLocalization (weakEquivalences _)] :\\n  IsIso (Functor.whiskerRight HoCat.ιCompResolutionNatTrans L)\", \"doc\": \"For any category $\\\\mathcal{D}$ and a localization functor $L$ from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to $\\\\mathcal{D}$ with respect to weak equivalences, the \"}\n",
    "date": "2026-10-16",
    "verdict": "no match: ordinary localization and cofibrant homotopy categories do not state enriched inversion or homotopy pushouts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofibrant simplicial category degreewise groupoid completion and arrow inversion compute a homotopy pushout in the Bergner model structure",
+   "results": "OK 8 hits. HomotopicalAlgebra.CofibrantObject.HoCat, HomotopicalAlgebra.CofibrantObject.HoCat.resolution, HomotopicalAlgebra.CofibrantObject.toHoCat, HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization, HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood, HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans, HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat, HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism",
+   "date": "2026-10-17",
+   "verdict": "no match: general model-category localization and ordinary nerves do not assert cofibrant enriched inversion, its Bergner homotopy-pushout comparison and the derived coherent-nerve Kan conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"Localization\"",
+   "results": "OK 0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match: general model-category localization and ordinary nerves do not assert cofibrant enriched inversion, its Bergner homotopy-pushout comparison and the derived coherent-nerve Kan conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|groupoidCompletion|simplicialLocalization|homotopyPushout",
+   "results": "OK 0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match: general model-category localization and ordinary nerves do not assert cofibrant enriched inversion, its Bergner homotopy-pushout comparison and the derived coherent-nerve Kan conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "def HoCat|def resolution|def toHoCat|factorsThroughLocalization",
+   "results": "OK 23 hits. Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: general model-category localization and ordinary nerves do not assert cofibrant enriched inversion, its Bergner homotopy-pushout comparison and the derived coherent-nerve Kan conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total inversion of a cofibrant simplicial category preserves the weak homotopy type of its homotopy coherent nerve",
+   "results": "OK 8 hits. CategoryTheory.instReflectiveSSetCatNerveFunctor, HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff, HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff, CategoryTheory.simplicialCosimplicialEquiv_inverse_map, SSet.modelCategoryQuillen.cofibrations_eq, HomotopicalAlgebra.cofibrations_op, HomotopicalAlgebra.cofibrations_eq_unop, HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism",
+   "date": "2026-10-17",
+   "verdict": "no match: general model-category localization and ordinary nerves do not assert cofibrant enriched inversion, its Bergner homotopy-pushout comparison and the derived coherent-nerve Kan conclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-hammock-infinity-localization",
@@ -186,17 +210,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-cofibrant-simplicial-inversion",
   "worker": "stage1",
-  "summary": "Statement unchanged. Proved the ordinary pushout by inverse words; established bar augmentation by an explicit extra degeneracy and free retracts, compared replacement bars and a Bergner-cofibrant span, then proved the ordinary diagonal-nerve completion equivalence using free ordinary categories and passed to derived coherent nerves through a separate locally Kan comparison. Four new statement-only nodes, one an exact Mathlib leaf. No saturation assumption, attachment, Lean writing or compilation. Second reading corrected printed Arakawa page references, made bar index identities explicit, and clarified two inline definitions; independent searches confirm the existing leaf classification.",
-  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: mapping-space foundation reached through the finite-adjunction-diagram and cosimplicial-frame comparisons; cofibrant inversion input to the hammock-localization comparison.",
+  "summary": "Statement unchanged. Retained the inverse-word pushout, free-retract diagonal nerve argument, derived coherent-nerve comparison, and Kan target proof. Replaced the 2789-character arbitrary-second-leg bar augmentation and its comparison by the existing acyclic same-unit fixed-object left-properness statement; wrote the cobase-change lifting and iterated-pushout identifications explicitly. Seven proof steps, none over 2000 characters; no new nodes, no attachments, no Mathlib match, no Lean edits or compiler commands.",
+  "blueprint": "Integral exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation: cofibrant-inversion input to the hammock-localization mapping-space foundation, through the existing blueprint ancestry. No unit or chapter route changed.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q28-ab33f738c",
-  "group": "Q28",
+  "reviewer": "NT-cc-Q55-ba3e350a8",
+  "group": "Q55",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-ab33f738c (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, the five cited existing nodes, the unit record and the ancestor proof (prop-coef-integral-exceptional-adjoint, paragraph 2) in full. DK I is not in literature/ and the network is blocked; I read a local copy at /tmp/dk1src at 1.4(ii)-(vii), 2.5-2.9, 3.1-3.8, 7.1-7.6, 8.1-8.3 and 9.1-9.7. Checked against DK I: free-product invariance with no cofibrancy (2.7), free maps and strong free retracts (7.4-7.6), the bar with i copies of A (8.2, whose proof omits the contraction), and groupoid completion of cofibrant V (9.2, proved from 7.6 and 3.7). Step 2: I checked by hand every extra-degeneracy identity of the shift A_k->A_{k+1}, including d_0h=1, d_1h_0=h_{-1}eps_0, the face/shift identities case by case and the degeneracy/shift identities. They match the Mathlib ExtraDegeneracy fields at lines 72-83. The leaf ExtraDegeneracy.section_/section_comp_hom/homotopy (lines 126/142/174) is stated for any category C, so C=Type is a one-line specialization. Steps 3-7 use only what the cited nodes state: the diagonal theorem in both directions, Reedy latching for the span, R and N_hc applied only to locally Kan objects, and the groupoid-pi_0 Kan clause. Steps 1 and 8 are elementary. All proof citations lie in the unit sk-prop-sf-biduality-general; no tool_uses are needed. I could not open Arakawa or HTT, so I checked those claims directly. For agreement of fixed-object and Bergner cofibrations: trivial fibrations in sCat_O are Bergner trivial fibrations, and a Bergner trivial fibration pulled back along O->Ob P is one in sCat_O; the same holds for cofibrant objects. For the diagonal comparison: I built a natural map C[Delta^n]->F_n (an n-simplex of D(A) is a functor F_n->A), sending S to max{s in S : s<=k-1}, so D(A)->N_hc(A) exists. Local invariance is DK 1.4(vii). Small cases checked: discrete A, a one-object simplicial group, a free category with one or two loops, empty O, A=I_O, i=id. A full-DAG duplicate scan found nothing: the dk-cofibrant-localization, hammock, partial-sum-bar and simplicial-groupoid-localization nodes state different things. No new node restates a clause of the item, and none carries a proof. Fields and blueprint refs are correct. No SGA source; no target or base-change morphism involved. No fixes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-ba3e350a8 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the full statements of all 7 cited nodes (plus simplicial-interval-lifting) and DK I 7.1-7.6, 8.1-8.3, 9.1-9.2, 10.1-10.4 from the local copy /tmp/dk1src. Only the item and report changed, with no new nodes; proof_deps equals the union of the step uses; the longest step is 1132 characters. Every citation is in unit sk-prop-sf-biduality-general, and no cited node's dependency closure reaches the item, so there is no cycle. Step 1: the pushout B_n ⊔_{A_n} G(A_n) is computed degreewise and is elementary. Step 2: the Reedy span a->b, a->c with degrees 0,1,1 has latching maps ∅->A, i and j, all Bergner cofibrations via the free-calculus identification. Step 3: k is the cobase change of i. The left-properness node (DK 7.3(ii)) has the same trivial fibrations, hence the same cofibrations, and no Kan hypothesis. Pasting gives C ⊔_A B, and a local weak equivalence fixing O is a DK equivalence. Step 4: the retract of a degreewise free category with the free-category groupoid nerve and the bisimplicial diagonal is the DK 9.2 argument. Step 5: two-out-of-three in the cited natural square gives exactly N_hc(R(A->G(A))). Step 6: pi_0 G(A) is a groupoid and RG(A) is locally Kan, so the Kan clause applies. Step 7: naturality holds for fixed O. Edge cases checked: O empty, A = I_O, i = id, a one-loop free A, and empty mapping sets. No saturation is used, no SGA source is cited, and no target is touched. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
