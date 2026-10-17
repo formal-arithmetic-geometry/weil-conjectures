@@ -17,9 +17,122 @@
   "def-pc-fibre-product",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$ and let $S$ be the reduced induced closed subscheme on $\\overline{\\{y\\}}$. Its underlying space is this closure and has generic point $y$: the closure of a point is irreducible, since if it is covered by two closed subsets, the one containing the point contains its closure. Form $h:X_S=X\\times_Y S\\to S$. This is finite type by base-change stability. The base-change count theorem gives $n_{X_S/S}=n_{X/Y}|_S$ and independence from all separably closed extensions. It therefore suffices to find a nonempty open of $S$ on which this function has one finite value. In the remaining steps rename $X_S,S,h,y$ as $X,S,h,\\eta$; thus $S$ is irreducible and $\\eta$ is its generic point.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-trf-geometric-fibre-component-count-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, proof paragraph 1; Tag 0556"
+   }
+  },
+  {
+   "text": "The generic fibre $X_\\eta$ is finite type over $k=\\kappa(\\eta)$. Apply generic component splitting to choose a field $L$ and a finite etale morphism $a:\\operatorname{Spec}L\\to\\operatorname{Spec}k$ such that every irreducible component of $G=X_\\eta\\times_k\\operatorname{Spec}L$ remains irreducible and nonempty after every extension of $L$. Base-change stability makes $G$ finite type over $L$. The spectrum of a field is Noetherian (its only ideals are zero and the whole field), so the finite-type-over-Noetherian theorem and the finite-components theorem give a finite list of distinct components $A_1,\\ldots,A_n$ covering $G$. Allow $n=0$, in which case $G$ is empty.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sbc-generic-components-split",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, proof paragraph 2; Tag 0551, generic field splitting"
+   }
+  },
+  {
+   "text": "Apply the geometric generic-cover spreading theorem to $h:X\\to S$ with the specified $L,a$ and the closed cover $(A_i)_{1\\leq i\\leq n}$. Its geometric-irreducibility hypothesis is precisely the component-splitting conclusion of Step 2. Obtain an open $W\\subseteq S$ containing $\\eta$ such that, for every $s\\in W$ and every field extension $K/\\kappa(s)$, there are a continuous surjective scheme morphism $p:Z\\to (X_s)_K$ and a cover of $Z$ by $n$ nonempty irreducible subsets $B_i$. Each $\\overline{p(B_i)}$ is irreducible and closed, and these $n$ subsets cover $(X_s)_K$. Every irreducible component $D$ of this fibre lies in one of them: apply irreducibility to the finite closed cover $D=\\bigcup_i(D\\cap\\overline{p(B_i)})$. Maximality then gives $D=\\overline{p(B_i)}$. Thus the fibre has at most $n$ components. For $n=0$, the cover forces $Z$ empty and surjectivity forces the fibre empty. In particular $n_{X/S}(s)\\leq n$ on $W$.",
+   "uses": [
+    "lem-sbc-geometric-generic-cover-spread",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, proof final paragraph, upper bound; geometric-cover spreading is the existing Tag 055G closure-and-shrinking input"
+   }
+  },
+  {
+   "text": "Spread the specified finite etale field map $a$ using the etale generic residue-field model theorem. It gives an etale morphism $g:T\\to S$, a generic point $\\xi$ of $T$ with $g(\\xi)=\\eta$, and an isomorphism $r:\\operatorname{Spec}\\kappa(\\xi)\\simeq\\operatorname{Spec}L$ compatible with the maps to $S$. Set $P=X\\times_S T$ and $q:P\\to T$, which is finite type by base-change stability. Associating the fibre products and using $r$ identifies $P_\\xi$ with $G$: both are the pullback of $X\\to S$ along the same field-valued point of $S$. Therefore $T$ is irreducible with generic point $\\xi$, and its generic fibre has exactly $n$ ordinary irreducible components.",
+   "uses": [
+    "lem-sbc-etale-generic-residue-field-model",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, proof paragraph 2; the field-splitting and etale model portions of Tag 0551"
+   }
+  },
+  {
+   "text": "Apply the ordinary component lower-bound theorem to $q:P\\to T$ and $\\xi$. The hypotheses hold by Step 4, including finite type and the finite generic component count $n$. Obtain a nonempty open $U\\subseteq T$ on which every ordinary fibre $P_t$ has at least $n$ irreducible components. Because $\\xi$ is generic, $\\xi\\in U$.",
+   "uses": [
+    "lem-trf-generic-fibre-component-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, proof final paragraph, invocation of Tag 0554"
+   }
+  },
+  {
+   "text": "For $t\\in U$ and a separable closure $K$ of $\\kappa(t)$, the projection $(P_t)_K\\to P_t$ is surjective: $\\operatorname{Spec}K\\to\\operatorname{Spec}\\kappa(t)$ is surjective and surjectivity is stable under arbitrary base change. Both schemes have finitely many irreducible components, since they are finite type over fields, hence Noetherian. Write the geometric fibre as a union of $m$ irreducible components. The closures of their images are $m$ closed irreducible subsets covering $P_t$. The finite closed-cover and maximality argument of Step 3 shows that each ordinary component is one of these closures; hence the ordinary count is at most $m=n_{P/T}(t)$. Step 5 gives $n_{P/T}(t)\\geq n$. This also covers the empty case $n=0$.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, proof final paragraph, ordinary lower bound implies geometric lower bound"
+   }
+  },
+  {
+   "text": "Let $U_0=U\\cap g^{-1}(W)$. It contains $\\xi$, because $g(\\xi)=\\eta\\in W$, so it is nonempty and open. Etale openness shows that $V=g(U_0)$ is a nonempty open subset of $S$ contained in $W$. For every $s\\in V$ choose $t\\in U_0$ with $g(t)=s$. By base-change invariance, $n_{X/S}(s)=n_{P/T}(t)\\geq n$; by Step 3, $n_{X/S}(s)\\leq n$. Thus it equals the finite integer $n$. Step 1 identifies $V$ with a relatively open nonempty subset of the original $\\overline{\\{y\\}}$ and identifies the component-count functions there. Independence from all choices of separable closure was included in Step 1, and no flatness or Noetherian hypothesis was added.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-trf-geometric-fibre-component-count-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, proof paragraph 2, open descent, combined with final paragraph and Tag 0556"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-geometric-fibre-component-count-base-change",
+  "lem-sbc-generic-components-split",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sbc-geometric-generic-cover-spread",
+  "def-weil-irreducible-components",
+  "lem-sbc-etale-generic-residue-field-model",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-trf-generic-fibre-component-lower-bound",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-etale-morphism-open-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055A (lemma-nr-geom-irreducible-components-good), using the already split geometric-cover spreading input of Tag 055G for its upper-bound construction, and the generic etale residue-field model for its Tag 0551 reduction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +168,58 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints. Finiteness of components, discrete finite fibres and a component equivalence for an already geometrically irreducible open morphism do not give generic constancy for arbitrary finite type morphisms.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*component|component.*geometric|055A|0556|0554",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean. Read the returned signatures; these concern finite components, finite fibres, geometric reducedness, or component correspondences for maps already known open with irreducible fibres. They do not give this statement or a one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "a69b4efd394bc74a"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The number of irreducible components of the geometric fibres of a finite type morphism of schemes is generically constant",
+   "results": "8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.IsFinite.recOn, genericPoints.component, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, genericPoints.ofComponent, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents. Read the returned signatures; these concern finite components, finite fibres, geometric reducedness, or component correspondences for maps already known open with irreducible fibres. They do not give this statement or a one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "81fe5b5522545d71"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\", \"irreducibleComponents\"",
+   "results": "0 hits: . Read the returned signatures; these concern finite components, finite fibres, geometric reducedness, or component correspondences for maps already known open with irreducible fibres. They do not give this statement or a one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes the number of geometric irreducible components of fibres is constant on a nonempty open in each irreducible closed subset",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.Scheme.Hom.isConstructible_image. Read the returned signatures; these concern finite components, finite fibres, geometric reducedness, or component correspondences for maps already known open with irreducible fibres. They do not give this statement or a one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "04e0dbe6eed78026"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*irreducible|irreducibleComponentsEquiv|separablyClosed",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean. Read the returned signatures; these concern finite components, finite fibres, geometric reducedness, or component correspondences for maps already known open with irreducible fibres. They do not give this statement or a one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "fbc24b645faa32f5"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility on an irreducible scheme implies generic constancy of the number of geometric irreducible components in a finite type family",
+   "results": "8 hits: PrimeSpectrum.BasicConstructibleSetData.n, AlgebraicGeometry.Scheme.Hom.isConstructible_image, chevalley_mvPolynomial_mvPolynomial, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.exists_range_eq_of_isConstructible, genericPoints.finite, PrimeSpectrum.ConstructibleSetData, PrimeSpectrum.BasicConstructibleSetData.g. Read the returned signatures; these concern finite components, finite fibres, geometric reducedness, or component correspondences for maps already known open with irreducible fibres. They do not give this statement or a one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "25647cdd79008a5d"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-irreducible-fibre-locus",
@@ -90,5 +251,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-component-count-generic-constancy",
+  "worker": "stage1",
+  "summary": "Seven steps realize Stacks 055A by reduced-closure reduction, finite separable component splitting, the existing geometric-cover spread for an upper bound, an etale generic field model, the ordinary generic lower bound, the explicit ordinary-to-geometric comparison, and descent through the open image. Two genuinely smaller statement-only inputs are added: 0556 and 0554. Empty generic fibre and n=0 are included; the statement is unchanged.",
+  "blueprint": "The generic-constancy input of Stacks 055A in the 055B irreducible-fibre-locus branch of 05FH in the local-term-locality proof ancestry. The steps implement 055A paragraphs 1--3; 055G is used only as the existing general geometric closed-cover spreading tool that packages the closure, cover and geometric-irreducibility shrinking of the last paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the reduced closed scheme on a point closure without a Noetherian hypothesis; generic scheme tool."
+   },
+   {
+    "node": "lem-sbc-generic-components-split",
+    "why": "Splits generic components over a finite etale field extension, the generic-field part of the 0551 input in 055A."
+   },
+   {
+    "node": "lem-sbc-geometric-generic-cover-spread",
+    "why": "Spreads the supplied finite geometric component cover, exactly the upper-bound closure-and-shrinking construction of 055A; no trace-unit statement supplies this generic geometry."
+   },
+   {
+    "node": "lem-sbc-etale-generic-residue-field-model",
+    "why": "Spreads that specified finite etale field extension with its compatible generic fibre, the model part of 0551; openness of its image suffices for descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sbc-generic-components-split",
+  "lem-sbc-geometric-generic-cover-spread",
+  "lem-sbc-etale-generic-residue-field-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q104-c1ccc5b60",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q104-c1ccc5b60 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, unit route, and Stacks sources 055A, 0556, and 0554. All hypotheses, component-count comparisons, base changes, edge cases, duplicate checks, and route constraints pass; no long-step or repair issue found. Review written to review.md."
  }
 }

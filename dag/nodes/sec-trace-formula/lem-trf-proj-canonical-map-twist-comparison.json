@@ -18,9 +18,48 @@
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the canonical generation-locus construction to the graded map ψ. The positive-degree nonvanishing opens cover Z by hypothesis, so U(ψ)=Z; the resulting canonical morphism is the stated r, characterized on every basic open D_+(a) by r^{-1}D_+(a)=Z_{ψ(a)} and by the displayed localized ring map.",
+   "uses": [
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), construction of r_{L,ψ} and property (1); the scheme specialization of the canonical relative-Proj construction"
+   }
+  },
+  {
+   "text": "If Z is empty, take d=1; then every sheaf-generation assertion and the final isomorphism on Z are vacuous. Otherwise, quasi-compactness gives a finite nonempty family of positive-degree homogeneous elements a_i∈A_{d_i} whose nonvanishing opens Z_{ψ(a_i)} cover Z. Let d be a common positive multiple of the d_i. For each i, ψ(a_i)^{d/d_i} is a section of M^{⊗d} with the same nonvanishing open, so the degree-d sections ψ(A_d) generate M^{⊗d} on all of Z. Raising these generators to the k-th tensor power shows that ψ(A_{dk}) generates M^{⊗dk} for every k≥1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, final assertion after choosing a common positive degree; quasi-compactness gives a finite subcover and powers move all degrees to d"
+   }
+  },
+  {
+   "text": "Apply the generated-chart comparison node to V=Z and each positive degree dk. Its hypotheses hold by Step 2, and U(ψ)=Z by Step 1. We obtain the canonical isomorphism r^*O_P(dk)≅M^{⊗dk} for every k≥1. The uniqueness clause identifies these maps with the canonical maps induced by ψ, so the assertion is independent of the finite subcover and of the chosen common multiple.",
+   "uses": [
+    "lem-trf-proj-invertible-map-twist-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, graded comparison θ and final assertion; Tag 01N8, converse construction in each common positive degree"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-line-module-proj-map",
+  "lem-trf-proj-invertible-map-twist-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK (lemma-invertible-map-into-proj), graded comparison θ and final assertion; Tag 01N8 (lemma-converse-construction), applied after a finite-subcover common-degree argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +98,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-scheme-ample-canonical-proj-criterion",
@@ -89,5 +128,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proj-canonical-map-twist-comparison",
+  "worker": "stage1",
+  "summary": "Split the quasi-compact section-ring comparison into the canonical generation-locus construction, a finite-subcover/common-degree argument, and the generated-chart twist comparison. Added one general statement-only node for the Stacks 01NK/01N8 comparison; no Lean declaration states the item and no Mathlib theorem gives the invertible-sheaf result.",
+  "blueprint": "Realizes the section-algebra/Proj ampleness input recorded under lem-trf-local-term-locality: the canonical Proj map, common positive degree, and graded pullback comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-915d9aa32",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-915d9aa32 (reviewer sub-agent of L); spot-checked: The proof is correct for nonempty Z and matches Stacks Tags 01NK/01N8, with hypotheses and route checked. Step 2 has one repairable edge-case gap: for empty Z, the finite subcover has no degrees d_i, so a common positive multiple is undefined. I added a corrected DAG JSON handling Z=∅ by taking d=1. Full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

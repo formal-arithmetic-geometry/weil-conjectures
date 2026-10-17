@@ -17,11 +17,151 @@
   "def-pur-derived-internal-hom",
   "def-weil-closed-immersion",
   "def-weil-pbc-exterior-algebra",
-  "def-weil-pbc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials",
+  "def-pc-derived-pullback",
+  "def-pur-pseudo-coherent-complex",
+  "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the basis of affine opens $U=\\operatorname{Spec}A\\subset X$ mapping into an affine $V=\\operatorname{Spec}R\\subset S$. The hypotheses make $R$ Noetherian and $R\\to A$ flat of finite presentation. Choose a surjection $P=R[x_1,\\ldots,x_n]\\to A$. Set $K=\\varphi^!R=R\\operatorname{Hom}_P(A,P)[n]$, and then tensor the displayed coefficient $P$ with its free line $\\Omega^n_{P/R}$ using the ordered generator $dx_1\\wedge\\cdots\\wedge dx_n$. The relative-perfection lemma shows that the resulting $K_P=R\\operatorname{Hom}_P(A,\\Omega^n_{P/R})[n]$ is pseudo-coherent and has finite $R$-Tor amplitude. This change of coefficient is an isomorphism of complexes, so it preserves these properties. No regular-sequence description of $\\ker(P\\to A)$ is used.",
+   "uses": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-algebraic-shriek-relative-perfect"
+   ],
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Algebraic construction: Tags 0BZI and 0BZW."
+   },
+   "elementary": false
+  },
+  {
+   "text": "Let $B=A\\otimes_RA$, $p_i:A\\to B$ be the coprojections and $\\delta:B\\to A$ multiplication. Every ring here is Noetherian of finite type over $R$. Flat base change for $R\\to A$, with $R'=A$ and base complex $R[0]\\in D^+(R)$, identifies $K\\otimes_{A,p_1}^{\\mathbf L}B$ with $p_2^!A$. Composition for $A\\xrightarrow{p_2}B\\xrightarrow{\\delta}A$ identifies $\\delta^!p_2^!A$ with $A$. Since $\\delta$ is surjective, this gives an $A$-linear isomorphism $A\\to R\\operatorname{Hom}_B(A,K\\otimes_{A,p_1}^{\\mathbf L}B)$. Take the image of $1$ under this isomorphism and then its coinduction-adjoint map $\\xi_P:A\\to K\\otimes_{A,p_1}^{\\mathbf L}B$. The original isomorphism is multiplication by $\\xi_P$, by $A$-linearity. Transport this construction along $P\\cong\\Omega^n_{P/R}$; it gives the affine diagonal class for $K_P$. The construction uses the actual adjunction evaluation maps, rather than an unnamed choice of a diagonal map.",
+   "uses": [
+    "lem-trf-algebraic-shriek-calculus"
+   ],
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Algebraic proof of lemma-relative-dualizing-noetherian (Tag 0E2E), using Tags 0BZN, 0BZT, 0A70 and 0A71."
+   },
+   "elementary": false
+  },
+  {
+   "text": "Pass from modules to sheaves on the affine charts using the affine derived equivalence. Pullback is derived tensor by the affine-pullback lemma. The closed-immersion pushforward is the underlying module complex with its quotient-algebra action, by the affine-derived equivalence for an affine morphism. For internal Hom one can check the comparison explicitly: over the Noetherian ring $B$, resolve its finite module $A$ by a bounded-above finite-free resolution and represent the target by a bounded-below complex (it is bounded because $A$ is $R$-flat and $K_P$ is bounded). The finite-projective Hom-model lemma and the finite-free sheaf Hom-model lemma identify their total Hom complexes after sheafification; the K-projective Hom-bijection identifies the algebraic derived Hom. In each total degree there are only finitely many nonzero Hom terms, so no infinite-product/sheafification interchange occurs. Consequently step 2 gives precisely a relative dualizing pair $(\\widetilde K_P,\\widetilde\\xi_P)$ on $U/V$. Finite Tor amplitude and pseudo-coherence transfer by localizing the indicated resolutions and flat complexes.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-affine-finite-projective-hom-model",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, proof of affine comparison; perfect.tex Tags 06Z0, 08DW, 0DJK and 0A6H."
+   },
+   "elementary": false
+  },
+  {
+   "text": "Restricting a pair to an open $U'\\subset U$ again gives a pair: pseudo-coherence and relative Tor bounds are local, derived pullback commutes with open restriction, and derived internal Hom commutes with open restriction. The rigidity lemma therefore supplies the unique isomorphism between the restriction of any chosen pair on $U$ and the chosen pair on $U'$. For a chain $U''\\subset U'\\subset U$, the direct comparison and the composite both preserve the diagonal class, hence agree by uniqueness. This also makes the choice of affine base $V$ harmless, since $U\\times_VU=U\\times_SU$ and relative Tor amplitude is unchanged by restricting the base to an open.",
+   "uses": [
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2V, 0E2W and the restriction paragraph of 0E2X."
+   },
+   "elementary": false
+  },
+  {
+   "text": "The affine opens just used cover $X$ and refine every intersection. For each such $U$, rigidity gives $R\\mathcal Hom_U(K_U,K_U)\\cong\\mathcal O_U[0]$, so $\\operatorname{Hom}(K_U,K_U[i])=H^i(U,\\mathcal O_U)=0$ for $i<0$. The comparisons of step 4 satisfy the identity and cocycle equations. BBD descent therefore produces $D_f$ and compatible identifications $D_f|_U\\cong K_U$. This applies to the entire set of basis opens; it needs no finite cover of $X$. The local finite-free models and the local $R$-Tor bounds from step 1 give exactly the pseudo-coherence and locally finite relative Tor amplitude demanded in the statement.",
+   "uses": [
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-derived-basis-bbd-descent"
+   ],
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2X, BBD gluing paragraph; cohomology.tex Tag 0D6C."
+   },
+   "elementary": false
+  },
+  {
+   "text": "Put $Y=X\\times_SX$ and $E=R\\mathcal Hom_Y(\\Delta_*\\mathcal O_X,Lp_1^*D_f)$. On $U\\times_SU$, step 3 identifies $E$ with $\\Delta_*\\mathcal O_U[0]$. On $Y\\setminus\\Delta(X)$ it is zero, since its first argument restricts to zero. These opens cover $Y$: the products cover the diagonal and separatedness makes its complement open. Thus $E$ has cohomology only in degree zero. The compatible local diagonal classes from step 4 give matching sections of $\\mathcal H^0(E)$ on the products; to check matching near a diagonal point in their overlap, shrink to $U''\\subset U\\cap U'$, and off the diagonal both sections are zero. Glue them, together with zero on the complement. Since $E\\cong\\mathcal H^0(E)[0]$, the resulting section is a morphism $\\xi_f:\\Delta_*\\mathcal O_X\\to Lp_1^*D_f$. Multiplication by this section is locally the isomorphism of step 2, hence is an isomorphism globally. This proves the requested assertion on the full product, rather than merely a neighborhood of the diagonal.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2X, gluing the diagonal section; Tag 0E2T, with closed diagonal."
+   },
+   "elementary": false
+  },
+  {
+   "text": "We now describe the comparison for a refinement $P\\to Q=P[t]\\to A$. Choose $g\\in P$ lifting the image $a\\in A$ of $t$, and let $\\pi:Q\\to P$ send $t$ to $g$. The element $t-g$ is a nonzerodivisor: in a nonzero polynomial its highest coefficient survives multiplication by the monic polynomial $t-g$. The two-term resolution $[Q\\xrightarrow{t-g}Q]$ therefore resolves $P$. Derived coinduction transitivity identifies $R\\operatorname{Hom}_Q(A,-)$ with $R\\operatorname{Hom}_P(A,R\\operatorname{Hom}_Q(P,-))$. By the Koszul dual-complex theorem, $R\\operatorname{Hom}_Q(P,Q)=\\operatorname{Hom}_P((t-g)/(t-g)^2,P)[-1]$. Apply this to the free coefficient $\\Omega^{n+1}_{Q/R}[n+1]$. The exact split differential sequence for $Q=P[t]$ identifies its restriction with $\\Omega^n_{P/R}\\otimes P\\,d(t-g)$, with the new differential placed last; terms involving $dg$ in the first factor wedge to zero. Evaluate the dual conormal against $d(t-g)$. The shifts $[-1]$ and the extra $[1]$ cancel, giving $R\\operatorname{Hom}_Q(P,\\Omega^{n+1}_{Q/R}[n+1])\\cong\\Omega^n_{P/R}[n]$. Applying $R\\operatorname{Hom}_P(A,-)$ is the desired normalized comparison from the $Q$ model to the $P$ model. For $Q=A[t]\\to A$, this is exactly $\\operatorname{dual}(t-a)\\otimes d(t-a)\\mapsto1$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ],
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Algebraic Tags 0BZJ and 0BZH; 0BZI canonical top-differential footnote. Explicit normalized Koszul calculation."
+   },
+   "elementary": false
+  },
+  {
+   "text": "The normalization in step 7 is unaffected by the lift $g$. Indeed choose a bounded-above projective resolution $F\\to A$ over $P$. If $g'$ is another lift, multiplication by $g'-g$ on $F$ has zero augmentation, hence is $dh+hd$ by homotopy uniqueness for augmented resolution maps. The graph resolutions over $Q$ are cones of $t-g$ and $t-g'$ on $F\\otimes_PQ$; the triangular cone map with off-diagonal entry $h$ intertwines them, induces the identity on $A$, and is the identity on the associated graded pieces. On the dual cones its diagonal is also the identity, so the top conormal evaluation in step 7 agrees. This proves independence in the derived category. The same evaluation is the coinduction counit, so transitivity of those counits carries the class constructed in step 2 to the class for the refined chart: under the composed coinduction adjunction both are adjunct to the identity of A, and the triangle identities identify their adjuncts. Thus these are comparisons of pairs, not just of objects. For several added variables tensor the ordered two-term resolutions and their evaluations. Associativity of total tensor complexes gives composition, and exchanging two factors introduces the cohomological Koszul sign, canceled by the corresponding exchange in the top differential form. Any two presentations have the common refinement $R[x_1,\\ldots,x_n,y_1,\\ldots,y_m]\\to A$. Comparing through it gives a class-preserving isomorphism; rigidity makes it unique, hence independent of further refinements and compatible with composition.",
+   "uses": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "new-t4-augmented-resolution-lift-homotopy"
+   ],
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Algebraic Tag 0BZJ common refinement argument and 0BZI canonical-normalization footnote; explicit lift-homotopy and sign argument supplied here."
+   },
+   "elementary": false
+  },
+  {
+   "text": "The local descriptions glue to the stated chart formula. On affine polynomial charts it is the construction of step 1. Localizing a polynomial presentation restricts its coefficient line and its Hom model, and the open-localization comparison for upper shriek agrees with this restriction; affine derived pullback and internal-Hom restriction give the corresponding sheaf comparisons. Cover an arbitrary open $P\\subset\\mathbf A^n_S$ and its closed subscheme $U$ by such affine restrictions. The local models are the coinduced complexes $R\\mathcal Hom_P(i_*\\mathcal O_U,\\Omega^n_{P/S}[n])$ with their $\\mathcal O_U$-action, and agree on overlaps by steps 4 and 8. Rigidity identifies their glued pair with $(D_f,\\xi_f)|_U$. Thus the formula holds on every chart in the statement, and its restriction/refinement comparisons are the normalized comparisons already proved. Empty charts give the zero complex; the zero-variable case has $\\Omega^0=\\mathcal O$ and no shift, so the argument includes both.",
+   "uses": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BV2 local upper-shriek calculation; algebraic Tags 0BZI, 0BZJ and 0C0H."
+   },
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "new-affine-qcoh-derived-equivalence-core",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sc-affine-finite-projective-hom-model",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-trf-relative-dualizing-pair-rigidity",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-trf-derived-basis-bbd-descent",
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "new-t4-augmented-resolution-lift-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/dualizing.tex",
+  "place": "Follows 0E2X gluing and 0E2E affine diagonal argument, with the normalized Koszul refinement/lift-homotopy argument expanded from 0BZI footnote and 0BZJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +190,66 @@
    "results": "10 hits; top=['Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean', 'Mathlib/Tactic/Translate/ToDual.lean', 'Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean', 'Mathlib/CategoryTheory/Category/Cat/Op.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean']; note=; digest=94578e98cc084ab7. Read the returned types. AlgebraicGeometry.Flat and its affine criteria only assert flatness, and the Kahler finite-presentation result only concerns differentials. No relative-duality or upper-shriek construction appears. Grep returns ten uses of the English word dualizing in order/category duality comments, not coherent relative duality.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic upper shriek for finite type Noetherian ring maps via polynomial presentations, composition and flat base change",
+   "results": "8 hits; top=['AlgHom.FinitePresentation.of_finiteType', 'RingHom.FinitePresentation.of_finiteType', 'fg_of_fg_of_fg', 'Algebra.EssFiniteType.comp', 'RingHom.EssFiniteType', 'RingHom.EssFiniteType.stableUnderComposition', 'Algebra.Smooth.flat_of_isNoetherianRing', 'Algebra.QuasiFinite']; note=; digest=a9d163fe5a50773a",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative duality functor on derived module categories finite type rings composition flat base change",
+   "results": "8 hits; top=['Module.Dual.baseChange_baseChange', 'Module.Dual.baseChange', 'IsBaseChange.toDual', 'RingHom.Flat.stableUnderComposition', 'IsBaseChange.toDualBaseChange', 'IsBaseChange.dual', 'CategoryTheory.RepresentablyFlat.comp', 'IsBaseChange.toDual_apply']; note=; digest=eb2276f1d3ac27e5",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits; top=['CategoryTheory.Adjunction', 'CategoryTheory.Adjunction.isLeftAdjoint', 'CategoryTheory.Adjunction.isRightAdjoint', \"CategoryTheory.Adjunction.mk'\", 'CategoryTheory.Adjunction.mkOfHomEquiv', 'CategoryTheory.Adjunction.mkOfUnitCounit', 'CategoryTheory.Adjunction.ofIsLeftAdjoint', 'CategoryTheory.Adjunction.ofIsRightAdjoint']; note=; digest=d2183a4d275d6f7e",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "upper.shriek|relative.dualizing|RHom",
+   "results": "25 hits; top=['Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean', 'Mathlib/AlgebraicGeometry/EffectiveEpi.lean', 'Mathlib/AlgebraicGeometry/EffectiveEpi.lean', 'Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean', 'Mathlib/AlgebraicGeometry/Normalization.lean']; note=; digest=63154a69fe12f793; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing pairs on a flat finitely presented scheme have scalar derived endomorphisms and a unique isomorphism preserving the diagonal class",
+   "results": "8 hits; top=['IsBaseChange.dual', 'IsBaseChange.toDualBaseChange', 'Module.Flat.iff_characterModule_injective', 'FGModuleCat.exactPairing', 'Module.Flat.iff_characterModule_baer', 'FGModuleCat.rightRigidCategory', 'Module.Flat.injective_characterModule_iff_rTensor_preserves_injective_linearMap', 'FGModuleCat.FGModuleCatCoevaluation']; note=; digest=0b13b38b9cc70108",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness relative dualizing complex with specified diagonal morphism and self derived Hom equal structure sheaf",
+   "results": "8 hits; top=['CategoryTheory.Functor.rightDerivedUnique', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk.noConfusion', 'HomologicalComplex.mapBifunctor.hom_ext', 'Derivation.liftKaehlerDifferential_unique_iff', 'CategoryTheory.InjectiveResolution.mk.noConfusion', 'Derivation.liftKaehlerDifferential_unique', 'SSet.RelativeMorphism.mk.noConfusion', 'Module.subsingleton_dual_iff']; note=; digest=882a63b4ed83a604",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.End",
+   "results": "12 hits; top=['CategoryTheory.Iso.conj', 'CategoryTheory.Iso.conj_id', 'CategoryTheory.Iso.conj_apply', 'CategoryTheory.Iso.conj_apply_asHom', 'CategoryTheory.Iso.conj_symm_apply_asHom', 'CategoryTheory.Iso.self_symm_conj', 'CategoryTheory.Iso.symm_self_conj', 'CategoryTheory.Iso.conj_pow']; note=; digest=0dd8a20c949acb72",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Dualizing",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-lci-canonical-adjunction",
@@ -81,5 +277,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-duality-polynomial-chart",
+  "worker": "Q89",
+  "summary": "Constructs the affine diagonal class using algebraic flat base change and composition; transfers it to sheaves, glues by rigidity and BBD, and computes the normalized polynomial refinements by Koszul contraction. Four new statement-only prerequisites; no statement weakening or extra conclusion.",
+  "blueprint": "The inherited lem-trf-local-term-locality proof (1)--(2) semistable-alteration chain, Temkin marked dualizing line auxiliary determinant adjunction input. Steps 1--6 provide coherent relative duality; steps 7--9 supply the canonical polynomial-chart normalization required by the determinant adjunction parent.",
+  "tool_uses": [
+   {
+    "node": "new-affine-qcoh-derived-equivalence-core",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sc-finite-affine-derived-equivalence",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sc-affine-finite-projective-hom-model",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-hom-finite-free-model",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sc-koszul-regular-sequence-dual-complex",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   },
+   {
+    "node": "new-t4-augmented-resolution-lift-homotopy",
+    "why": "Generic coherent-module/derived-complex or Koszul tool used in the affine comparison and refinement calculation; the curve-local-term unit has no substitute and its geometric route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-affine-qcoh-derived-equivalence-core",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sc-affine-finite-projective-hom-model",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "new-t4-augmented-resolution-lift-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q89-c8171ef94",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-c8171ef94 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, unit route, report, and Stacks sources (duality.tex 0E2T/0E2V/0E2W/0E2X; dualizing.tex 0BZI/0BZJ/0BZW/0E2E and 0A70/0A71/0BZN/0BZT/0C0F/0C0H; cohomology.tex 0D67/0D6C). Verified hypotheses, affine diagonal construction, BBD descent, Koszul normalization, lift independence, refinement coherence, edge cases, duplicate scope, and ordinary-derived route compliance. No SGA or dropped infinity/model-category machinery appears. Wrote review.md; no repairs required."
  }
 }
