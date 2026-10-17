@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-perfect-family-telescope",
+ "kind": "statement",
+ "title": "The perfect-family calculation on the Brown telescope",
+ "statement": "Let C be a pretriangulated category, locally small in v, with all v-small coproducts. Let (S_j) indexed by a v-small type be closed under integer shifts up to isomorphism, and perfect: componentwise surjectivity on Hom from every S_j is preserved by v-small coproducts. Let H:C^op to Ab_v be additive. Let X_0 to X_1 to ... be a tower with compatible elements x_n in H(X_n). Suppose evaluation against x_0 is onto H(S_j) for every j, and every map S_j to X_n killed by x_n vanishes after the next transition. For a distinguished telescope triangle sum X_n --(1-shift)--> sum X_n --q--> T --r--> (sum X_n)[1] and an element t of H(T) restricting along each stage to x_n, evaluation Hom(S_j,T) to H(S_j) against t is bijective for every j.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Cellular Brown construction in Krause Derived categories, resolutions, and Brown representability Section 4.5, comparison with the telescope; the proof here expands this comparison using coproduct weak kernels and constant-sequence retractions instead of coherent functors."
+ },
+ "proof": [
+  {
+   "text": "Coproducts of distinguished triangles give weak kernels for coproduct maps: pass to the opposite category, use productTriangle_distinguished and Hom exactness, and transport by opCoproductIsoProduct. Evaluate all generator maps into these weak kernels; perfectness lifts maps through the sum of the evaluation maps. Therefore, for maps b_i:W to Y_i pulling y_i back to a common z, any map S_j to a sum of copies of W killed by sum b_i is killed by sum c, provided c kills each generator map annihilated by z.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let b_n:X_0 to X_n be the iterated transitions. Cover X_n by X_0 plus the coproduct of all generator maps annihilated by x_n, using b_n on the first summand. Initial surjectivity makes this map onto Hom(S_j,-). Perfectness lifts generator maps into sum X_n through the sum of these covers. The kernel summands die at the next stage.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A generator map fixed by the tower shift consequently factors through B:sum X_0 to sum X_n. Let s_0 and s_1 be the shifts on the constant sequences at X_0 and X_1 and A=sum a_0. The weak-kernel calculation shows (h-h s_0)A=0. Since s_0 A=A s_1 and 1-s_1 has the explicit retraction given on summand n by minus the sum of preceding inclusions, cancel 1-s_1 to get h A=0. Also s_1 has a left-shift retraction. Cancelling it and factoring s_0 B through A makes the original fixed map zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Shift closure transfers that injectivity to the shifted first telescope map. Exactness of Hom on the distinguished triangle now lifts every map S_j to T through q. The covers show every such lifted map factors through X_0 in T. Surjectivity follows from x_0. If evaluation of a map to T is zero, its X_0 factor is killed by a_0, so the map itself is zero. Apply this to the difference of two maps to obtain injectivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Cellular Brown construction in Krause Derived categories, resolutions, and Brown representability Section 4.5, comparison with the telescope; the proof here expands this comparison using coproduct weak kernels and constant-sequence retractions instead of coherent functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Brown telescope is universal on a shift-closed perfect family when its stages surject and kill all kernel maps",
+   "results": "Eight unrelated perfect-space and Brown model-factorization hits.",
+   "date": "2026-10-17",
+   "verdict": "No category-theoretic telescope theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect generating family, the Brown sequential telescope of a tower that kills kernels represents a cohomological functor on that family",
+   "results": "Eight hits: K-injective/K-projective definitions, right-derived functors, and bounded derived fractions.",
+   "date": "2026-10-17",
+   "verdict": "No perfect-family telescope theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₃",
+   "results": "One exact match in Mathlib.CategoryTheory.Triangulated.Pretriangulated.",
+   "date": "2026-10-17",
+   "verdict": "Used for the final lifting; only a component of the argument."
+  },
+  {
+   "tool": "grep",
+   "query": "Telescope|telescope|perfectFamily|PerfectFamily",
+   "results": "Mathlib hits concern tactic telescopes and unrelated telescoping sums. Project Telescope.lean has compact-object factorization and the compatible element lift, but no perfect-family separation calculation.",
+   "date": "2026-10-17",
+   "verdict": "Reuse the existing Telescope.sum/shift/ι API; prove the new calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SetGeneratedDerivedSolutionSet",
+  "date": "2026-10-17",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Cellular Brown construction in Krause Derived categories, resolutions, and Brown representability Section 4.5, comparison with the telescope; the proof here expands this comparison using coproduct weak kernels and constant-sequence retractions instead of coherent functors.",
+   "via": [
+    "lem-sfb-set-generated-derived-solution-set",
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PerfectFamilyTelescope",
+  "file": "lean/Sheaf/CategoryTheory/PerfectFamilyTelescope.lean",
+  "declaration": "CategoryTheory.perfectFamily_telescope_bijective",
+  "statement": "theorem perfectFamily_telescope_bijective\n    {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]\n    [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [HasCoproducts.{v} C]\n    {J : Type v} (S : J → C)\n    (hshift : ∀ (j : J) (n : ℤ), ∃ k, Nonempty (S k ≅ (S j)⟦n⟧))\n    (hperfect : ∀ (I : Type v) (X Y : I → C) (f : ∀ i, X i ⟶ Y i),\n      (∀ i j, Function.Surjective (fun g : S j ⟶ X i ↦ g ≫ f i)) →\n      ∀ j, Function.Surjective (fun g : S j ⟶ ∐ X ↦ g ≫ Limits.Sigma.map f))\n    (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.Additive]\n    (X : ℕ → C) (a : ∀ n, X n ⟶ X (n + 1))\n    (x : ∀ n, H.obj (op (X n)))\n    (hx : ∀ n, H.map (a n).op (x (n + 1)) = x n)\n    (hsurj : ∀ j, Function.Surjective (fun f : S j ⟶ X 0 ↦ H.map f.op (x 0)))\n    (hkill : ∀ n j (f : S j ⟶ X n), H.map f.op (x n) = 0 → f ≫ a n = 0)\n    (T : C) (q : Telescope.sum X ⟶ T) (r : T ⟶ (Telescope.sum X)⟦(1 : ℤ)⟧)\n    (hT : Triangle.mk (𝟙 _ - Telescope.shift X a) q r ∈ distTriang C)\n    (t : H.obj (op T))\n    (ht : ∀ n, H.map (Telescope.ι X n ≫ q).op t = x n) :\n    ∀ j, Function.Bijective (fun f : S j ⟶ T ↦ H.map f.op t)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T154745-L-1516170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T154745-L-1516170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

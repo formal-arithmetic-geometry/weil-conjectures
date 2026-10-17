@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-derived-perfect-small-class",
+ "kind": "statement",
+ "title": "Small perfect classes containing an arbitrary small family in D(A)",
+ "statement": "Let A be a Grothendieck abelian category with Hom and derived-Hom universe v [def-weil-abstract-derived-category]. For every essentially v-small class P in D(A), there exists an essentially v-small replete triangulated class S containing P, perfect in the sense that componentwise surjectivity on Hom from S survives all v-small coproducts. Moreover, for every v-small family Y_i in S and every map f:U to coproduct Y_i with U in S, there are a v-small type J, a map a:J to I, and a factorization of f through coproduct_j Y_(a j), with that subcoproduct itself in S.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Ambient well-generation and common cardinal bound: Neeman Theorem 0.2; Krause Localization theory Sections 6.2-6.3 and Proposition 6.8.1."
+ },
+ "proof": [
+  {
+   "text": "Choose v-small representatives P_0. By Neeman Theorem 0.2 the Grothendieck derived category is well generated, via a Gabriel-Popescu presentation as a set-generated localization of a module derived category. Krause Section 6.3 says every object is beta-compact for some regular beta. Bound the set P_0 by a common uncountable regular alpha above an ambient well-generation bound.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take S=D(A)^alpha. By Krause Sections 6.2-6.3 and Proposition 6.8.1 this is essentially v-small, replete, triangulated, and perfect (PG2). It contains the representatives P_0 and hence P. All its objects are alpha-small and it is closed under coproducts with fewer than alpha summands.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a map U to the coproduct of objects Y_i of S, alpha-smallness factors it through a subcoproduct with fewer than alpha summands. Choose its index J and the inclusion a:J to I. Alpha-localizing closure puts that subcoproduct in S. The canonical Sigma.desc of the coproduct injections is its inclusion. Derived coproducts exist in universe v.",
+   "uses": [
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Ambient well-generation and common cardinal bound: Neeman Theorem 0.2; Krause Localization theory Sections 6.2-6.3 and Proposition 6.8.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a Grothendieck derived category every small set is contained in a small alpha localizing hull inside a class of alpha compact objects",
+   "results": "8 hits: HasDerivedCategory.standard, CategoryTheory.IsGrothendieckAbelian.locallySmall, CategoryTheory.IsGrothendieckAbelian.hasLimits, CategoryTheory.IsGrothendieckAbelian.wellPowered, CategoryTheory.hasExt_of_enoughProjectives, CategoryTheory.IsGrothendieckAbelian.instIsSmallGeneratingMonomorphismsOfSmallSubobject, CategoryTheory.essentiallySmall_fullSubcategory_mem, CategoryTheory.hasExt_of_hasDerivedCategory.",
+   "verdict": "No matching theorem; reuse the component APIs.",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary small set of objects of a Grothendieck derived category is contained in an essentially small triangulated alpha localizing hull with the factorization property for maps from alpha compact objects to coproducts",
+   "results": "8 hits: DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization, CategoryTheory.Triangulated.Localization.pretriangulated.",
+   "verdict": "No matching theorem; reuse the component APIs.",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "alpha.*(compact|localiz)|α.*(compact|localiz)|well.?generat",
+   "results": "25 hits: Mathlib/Dynamics/Minimal.lean, Mathlib/Topology/MetricSpace/Thickening.lean, Mathlib/Topology/MetricSpace/Thickening.lean, Mathlib/Topology/MetricSpace/Thickening.lean, Mathlib/Topology/MetricSpace/Thickening.lean, Mathlib/Topology/MetricSpace/Thickening.lean, Mathlib/Topology/MetricSpace/ProperSpace.lean, Mathlib/Topology/MetricSpace/ProperSpace.lean.",
+   "verdict": "No matching theorem; reuse the component APIs.",
+   "date": "2026-10-17"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SetGeneratedDerivedSolutionSet",
+  "date": "2026-10-17",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Brown step of det-existence-localizing: Ambient well-generation and common cardinal bound: Neeman Theorem 0.2; Krause Localization theory Sections 6.2-6.3 and Proposition 6.8.1.",
+   "via": [
+    "lem-sfb-set-generated-derived-solution-set",
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedPerfectSmallClass",
+  "file": "lean/Sheaf/CategoryTheory/DerivedPerfectSmallClass.lean",
+  "declaration": "CategoryTheory.derived_exists_perfectSmallClass",
+  "statement": "theorem derived_exists_perfectSmallClass\n    {A : Type u} [Category.{v} A] [Abelian A]\n    [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]\n    (P : ObjectProperty (DerivedCategory A))\n    [ObjectProperty.EssentiallySmall.{v} P] :\n    ∃ S : ObjectProperty (DerivedCategory A),\n      ObjectProperty.EssentiallySmall.{v} S ∧ S.IsClosedUnderIsomorphisms ∧\n      S.IsTriangulated ∧ P ≤ S ∧\n      (∀ (I : Type v) (X Y : I → DerivedCategory A) (f : ∀ i, X i ⟶ Y i),\n        (∀ i U, S U → Function.Surjective (fun g : U ⟶ X i ↦ g ≫ f i)) →\n        ∀ U, S U → Function.Surjective\n          (fun g : U ⟶ ∐ X ↦ g ≫ Limits.Sigma.map f)) ∧\n      (∀ (I : Type v) (Y : I → DerivedCategory A), (∀ i, S (Y i)) →\n        ∀ (U : DerivedCategory A), S U → ∀ f : U ⟶ ∐ Y,\n        ∃ (J : Type v) (a : J → I), S (∐ fun j ↦ Y (a j)) ∧\n          ∃ g : U ⟶ ∐ fun j ↦ Y (a j),\n            g ≫ Sigma.desc (fun j ↦ Sigma.ι Y (a j)) = f)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T154745-L-1516170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T154745-L-1516170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
