@@ -219,5 +219,31 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-68bb62e06 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and all 12 cited statements in full: the parent def-pur-dnc-section-family Step 5, unit sk-def-purity-conv, and blueprint main-20261015 sk-lem-geometry clause (2). Stacks tags 00HB/00HD/01U5/01I4/01JQ/02GO/01VA/02NL/00T6/00T7 were checked at their labels. The statement is true. I tested d=0 (it reduces to R[t]=R⊗_A A[t]), A=0 or R=0 (vacuous), nonreduced A, and d=1 with R=C (D=A[t,u]). Step 1: the monomial injectivity (a,β)↦(β,a−|β|) holds, and the image equals E. Step 2: the flat-tensor injection is correctly sourced through etale→flat→ring flat→left-exactness. Step 3: the Laurent tensor isomorphism holds, and the image is exactly D since f/t=Σr_i x_i/t. Step 4: the affine fibre product and étale base change give the stated map. No new nodes. rg for Rees/I/t charts across the DAG found no duplicate; lemma-nagata-flat-pullback-rees and lem-pur-dnc-affine-blowup-complement are different statements. One C4 fault, fixed: Step 5 took 'étale ⇒ smooth of relative dimension 0' from the permanence lemma. There 'étale' is the def-sbc-smooth-morphisms notion, but Step 4 yields étale in the def-weil-etale-morphism sense (lfp+flat+unramified). The existing reviewed node lem-weil-pbc-etale-smooth-zero-dimensional-fibres is now cited in Step 5, added to proof_deps and declared in split_report.tool_uses. I accept the tool uses sbc-lem-affine-space-smooth, lem-sbc-smooth-relative-dimension-permanence and lem-weil-pbc-etale-smooth-zero-dimensional-fibres as generic black boxes. Remark for the maintainer: the unit binding is sk-def-purity-conv, though the content realizes sk-lem-geometry (2); this is maintainer-owned and left unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6eece95c0",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical Rees constructions, universes, edge cases, docstrings, report sections, and compiler evidence all check out; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleReesChart",
+  "declaration": "AlgebraicGeometry.etale_rees_chart",
+  "declarations": [
+   "AlgebraicGeometry.etaleReesChartMap",
+   "AlgebraicGeometry.etaleReesBaseMap",
+   "AlgebraicGeometry.etaleReesTensorMap",
+   "AlgebraicGeometry.etaleReesChartSchemeMap",
+   "AlgebraicGeometry.etaleReesBaseSchemeMap",
+   "AlgebraicGeometry.etale_rees_chart"
+  ],
+  "statement": "theorem etale_rees_chart (A : Type u) (R : Type v) [CommRing A] [CommRing R] (d : ℕ) [Algebra (MvPolynomial (Fin d) A) R] (he : (algebraMap (MvPolynomial (Fin d) A) R).Etale) : ((Ideal.mvPolynomialExtendedReesAlgebraEquiv A (Fin d)).toRingHom.comp (MvPolynomial.C : Polynomial A →+* MvPolynomial (Fin d) (Polynomial A)) = (Ideal.mvPolynomialOrigin A (Fin d)).toExtendedReesAlgebra.comp (Polynomial.mapRingHom (MvPolynomial.C : A →+* MvPolynomial (Fin d) A))) ∧ (∀ i : Fin d, (Ideal.mvPolynomialExtendedReesAlgebraEquiv A (Fin d)).symm (algebraMap (MvPolynomial (Fin d) A) (Ideal.mvPolynomialOrigin A (Fin d)).extendedReesAlgebra (MvPolynomial.X i)) = MvPolynomial.C Polynomial.X * MvPolynomial.X i) ∧ Function.Bijective (etaleReesTensorMap A R d) ∧ (∀ (r : R) (z : (Ideal.mvPolynomialOrigin A (Fin d)).extendedReesAlgebra), ((etaleReesTensorMap A R d) (r ⊗ₜ z) : LaurentPolynomial R) = LaurentPolynomial.C r * LaurentPolynomial.mapRingHom (algebraMap (MvPolynomial (Fin d) A) R) (z : LaurentPolynomial (MvPolynomial (Fin d) A))) ∧ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (etaleReesChartSchemeMap A R d))) ∧ AlgebraicGeometry.SmoothOfRelativeDimension d (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (etaleReesChartSchemeMap A R d)) ≫ AlgebraicGeometry.Spec.map (CommRingCat.ofHom (etaleReesBaseSchemeMap A R d)))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleReesChart.lean"
  }
 }
