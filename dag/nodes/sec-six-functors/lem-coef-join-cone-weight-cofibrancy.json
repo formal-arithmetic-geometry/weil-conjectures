@@ -11,9 +11,82 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=\\Delta^0\\amalg K$ and $Y=\\Delta^0\\star K$. The ordered join described in [lem-coef-join-boundary-cubical-extension] makes $X\\hookrightarrow Y$ degreewise injective and bijective on vertices. Its coherent realization has source $D_0=\\mathbf1\\amalg A$: a functor out of the defining simplex colimit on a disjoint union is precisely a pair of functors on the two factors, and $\\mathfrak C[\\Delta^0]=\\mathbf1$. Apply [lem-coef-coherent-realization-relative-cells] to obtain a sequence of subcategories $D_j\\subseteq D=\\mathfrak C[Y]$ with this initial stage, constant object set, colimit $D$, and only cells $U(\\partial\\Delta^r)\\to U(\\Delta^r)$.",
+   "uses": [
+    "lem-coef-join-boundary-cubical-extension",
+    "lem-coef-coherent-realization-relative-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definitions 5.1.8 and 5.2.8, Lemma 5.1.9; start of Lemma 5.2.9"
+   }
+  },
+  {
+   "text": "By [lem-coef-join-boundary-cubical-extension], $D$ restricts to exactly $A$ on its old objects, has $D(b,b)=\\Delta^0$, and has no arrows from an old object to $b$. Since $D_0\\subseteq D_j\\subseteq D$, these same assertions hold at every stage. The only mapping sets that can grow are $D_j(b,a)$. Define $V_j(a)=D_j(b,a)$ with the action given by composition in $D_j$. The unit and associativity equations are the enriched functor equations, so $V_j:A\\to\\mathsf{sSet}$ is a weight, $V_0=\\varnothing$, and $D_j$ is exactly the category with old full subcategory $A$, one new source $b$, and outgoing weight $V_j$. Every cell has endpoints $(b,a)$: its new top simplex cannot lie in any of the other mapping sets, all of which are already completely contained in $D_0$.",
+   "uses": [
+    "lem-coef-join-boundary-cubical-extension",
+    "lem-coef-coherent-realization-relative-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 5.2.2 and converse direction of Theorem 5.2.6, pp.31–34"
+   }
+  },
+  {
+   "text": "For a cell of dimension $r$ ending at $a$, let $u:\\partial\\Delta^r\\to V_j(a)$ be its attaching boundary. Define an action-compatible map $A(a,-)\\times\\partial\\Delta^r\\to V_j$ by $(f,z)\\mapsto f\\circ u(z)$. Let $P$ be the pushout of the coproduct of these maps along $A(a,-)\\times\\partial\\Delta^r\\hookrightarrow A(a,-)\\times\\Delta^r$, over all cells at stage $j$. These functor pushouts are computed objectwise: composition acts on each representative, and the imposed relations are action-compatible; products with a fixed simplicial set preserve these quotient colimits degreewise, since the inverse is represented using the same fixed coordinate. Thus the objectwise pushout has an enriched action and the required functor pushout property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Theorem 5.2.6, square (5.2.7); explicit free-weight attaching maps"
+   }
+  },
+  {
+   "text": "The category with old part $A$, new source $b$ and outgoing weight $P$ is precisely the simplicial-category pushout defining $D_{j+1}$. To check this, fix any target simplicial category $E$, a functor on $D_j$, and the images of all the existing objects. Extending across a cell with endpoints $(b,a)$ means choosing $h:\\Delta^r\\to E(Fb,Fa)$ extending $F(u)$. A natural map from $A(a,-)\\times\\Delta^r$ to $E(Fb,F(-))$ is determined by this $h$: its value at $(f,z)$ must be $F(f)\\circ h(z)$, and conversely that formula is natural and recovers $h$ at $(1_a,z)$. Agreement on the boundary is exactly the pushout relation. The choices for the coproduct of cells are independent. These mutually inverse descriptions prove the universal property and identify $V_{j+1}=P$, including the old-weight maps. Hence every $V_j\\to V_{j+1}$ is a pushout of the required free boundary maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Proof of Theorem 5.2.6, universal property of (5.2.7), written out rather than assuming a mapping-set functor preserves colimits"
+   }
+  },
+  {
+   "text": "Put $V_\\omega=\\operatorname{colim}_{j<\\omega}V_j$ objectwise. Its category with old part $A$ and new source $b$ is the colimit of the $D_j$: a functor out of it is a functor on $A$, an image for $b$, and an action-compatible map from $V_\\omega$, equivalently compatible such maps from every $V_j$. Thus $V_\\omega(a)=D(b,a)=W^-_K(a)$ with its specified action. The sequence, extended at the limit ordinal $\\omega$ by this colimit, is continuous. It actually presents $\\varnothing\\to W^-_K$ as a free boundary cell composite; the identity retraction gives the weaker retract assertion in the statement. All cell-index sets are small because the realization categories in the cited presentation are small.",
+   "uses": [
+    "lem-coef-coherent-realization-relative-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Theorem 5.2.6, concluding colimit argument, and Lemma 5.2.9"
+   }
+  },
+  {
+   "text": "For the right weight apply [lem-coef-coherent-realization-relative-cells] instead to $K\\amalg\\Delta^0\\hookrightarrow K\\star\\Delta^0$, again a vertex-bijective injection. By [lem-coef-join-boundary-cubical-extension] its final category has full old part $A$, point endomorphisms at $t$, and no maps from $t$ to $A$. Reverse all arrows of this sequence of simplicial categories. Taking opposites is an involutive equivalence of their ordinary category, so it preserves each pushout and the sequential colimit by their mapping-out properties. Moreover $U(T)^{\\mathrm{op}}\\cong U(T)$ by interchanging its two object labels; this isomorphism commutes with every map of $T$, so it preserves the boundary-cell shape without reversing simplicial operators. The reversed sequence starts at $\\mathbf1\\amalg A^{\\mathrm{op}}$, has new source $t$, and its outgoing weight is exactly $a\\mapsto\\mathfrak C[K\\star\\Delta^0](a,t)$ with action by precomposition. Steps 2–5 therefore apply with $B=A^{\\mathrm{op}}$ and give the stated cells $B(a,-)\\times\\partial\\Delta^r\\to B(a,-)\\times\\Delta^r$. If $K=\\varnothing$, there are no old objects or cells and both weights are the unique empty diagram; $r=0$ simply attaches free vertex cells since its boundary is empty.",
+   "uses": [
+    "lem-coef-coherent-realization-relative-cells",
+    "lem-coef-join-boundary-cubical-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Right-cone dual of Definitions 5.2.8 and Lemma 5.2.9; opposite of the cellular proof, not a model-category classification theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-realization-relative-cells",
+  "lem-coef-join-boundary-cubical-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+  "place": "Online Riehl–Verity, §§5.1–5.2, especially the converse proof of Theorem 5.2.6 and Lemma 5.2.9; archival copy WANTED. The explicit pushout comparison and opposite argument are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +143,31 @@
    "results": "{\"t\": \"2026-10-17T04:58:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "flexibleWeight|cofibrantWeight|weighted.*cone|cone.*weight|weight.*cofibrant",
+   "results": "{\"t\": \"2026-10-17T05:29:11Z\", \"tool\": \"grep\", \"query\": \"flexibleWeight|cofibrantWeight|weighted.*cone|cone.*weight|weight.*cofibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\"], \"digest\": \"85290f94b3a3863e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle returned zero hits; grep gives ordinary set-valued weights at Limits/Weighted/HasWeightedLimit.lean:35-58, and LeanFinder gives general cofibrant objects, cylinders and path objects, not enriched coherent join weights. These source definitions were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\", \"cofibrant\"",
+   "results": "{\"t\": \"2026-10-17T05:29:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\", \\\"cofibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle returned zero hits; grep gives ordinary set-valued weights at Limits/Weighted/HasWeightedLimit.lean:35-58, and LeanFinder gives general cofibrant objects, cylinders and path objects, not enriched coherent join weights. These source definitions were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy coherent join cone weight is projectively cofibrant as an enriched simplicial functor built from representable boundary cells",
+   "results": "{\"t\": \"2026-10-17T05:29:15Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy coherent join cone weight is projectively cofibrant as an enriched simplicial functor built from representable boundary cells\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.Cylinder.instCofibrationI₀\", \"HomotopicalAlgebra.Cylinder.instCofibrationI₁\", \"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\", \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\"], \"digest\": \"ede747f669059489\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle returned zero hits; grep gives ordinary set-valued weights at Limits/Weighted/HasWeightedLimit.lean:35-58, and LeanFinder gives general cofibrant objects, cylinders and path objects, not enriched coherent join weights. These source definitions were read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -98,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-cone-weight-cofibrancy",
+  "worker": "stage1",
+  "summary": "One new general coherent-realization cellular-presentation lemma. Reused the existing coherent-join full-subcategory calculation, and proved the passage from simplicial-category mapping cells to free weight cells by explicit universal properties. Applied ordinary simplicial-category opposites for the right cone, without imposing local Kan or finite hypotheses. Read Riehl–Verity online, checked sources, all citation statements, the whole DAG and blueprint, and both project sources. No exact attachment or Mathlib match exists. The printed final join in the proof of Lemma 5.2.9 is a typographical reversal; its Definition 5.2.8 fixes the intended left join.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before the derived limit; independent simplicial-space foundation for the supporting enriched localization/completion argument: projective cofibrancy of the coherent join-cone weight, used to recognize realization cocones without classification/descent. The present steps supply the independent join-weight cellular input needed in that supporting chain; the ancestor proof itself has no computad argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-afa7be592",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-afa7be592 (reviewer sub-agent of L); spot-checked: I read the item and its six steps, the new node lem-coef-coherent-realization-relative-cells, and the statements of the cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-pinched-cube-latching, lem-coef-join-boundary-cubical-extension), all in full. I also read the parent's step that uses the item (lem-coef-space-geometric-descent step 2) and unit sk-prop-sf-biduality-general. I could not read the cited Riehl-Verity source: it is not archived and network access is blocked on this machine. So the source places and the claimed typo in Lemma 5.2.9 are not checked. The delivery already marks the proof as written by an agent (proof_origin.by=agent) and has a WANTED line, and I checked every step of the mathematics independently. New node: true (the relative-computad cell structure; injectivity on mapping sets also follows from bead-normal-form). It is statement-only and self-contained, with the searches recorded and the blueprint from/via fields correct. Small cases checked: X empty and Y=Delta^0; boundary of Delta^1 in Delta^1; boundary of Delta^2 in Delta^2 (one 1-cell); the horn Lambda^2_1 in Delta^2 (a 0-cell, then a 1-cell); X=Y. It is distinct from bead-normal-form, kan-coherent-nerve-cell-filtration, coherent-fixed-vertex-cofibrations (only a lifting property), fixed-object-simplicial-free-calculus, infinity-monomorphism-boundary-cells and cone-boundary-projective-cells, and it does not restate a clause of the item. Item: statement unchanged and variance correct; checked on K empty, a point and Delta^1. Step 1: the join inclusion is injective and bijective on vertices, and D_0 is 1 plus A. Step 2: the join node gives the full old part, D(b,b)=Delta^0 and D(a,b) empty, and with the new-top-simplex clause every cell has endpoints (b,a), including loop attaching maps. Steps 3 and 4: the objectwise pushout and the free-cell Yoneda bijection, with its inverse, are written out. Step 5: the limit stage at omega is continuous and V_omega=W^-. Step 6: taking opposites keeps the U(T) cell shapes and gives W^+ acting by precomposition on A^op. The route stays inside the unit, there are no tool uses or SGA citations, and no target is involved. No fixes."
  }
 }
