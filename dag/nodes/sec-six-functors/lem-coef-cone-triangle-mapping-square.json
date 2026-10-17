@@ -198,5 +198,39 @@
   "group": "Q138",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-f82502f87 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps, both cited statements and the parent's steps 9 and 11 in full. The statement is unchanged and there are no new nodes. I recomputed every value in the subset cube C[Δ^3](0,3) myself: the 4 vertices x̃, e*ỹ, k*z̃, e*f*z̃ and the 4 sides ẽ, ρ_σ*z̃, k̃, e*f̃, including their directions. The marking claim holds because (s_0 z)⋆v = s_0(z⋆v) collapses to s_0 z̃, so the top side ρ_σ*z̃ is the stipulated generator with g=ρ_σ and d=s_0 z. Precomposition preserves the marking by associativity. Small cases checked: K empty, K a point, σ=s_0 f and σ=s_1 e; no Kan hypothesis is used. No duplicate was found by rg over dag/nodes. The Mathlib searches cover all required kinds; HTT is not archived, a WANTED line is recorded, and I verified the mathematics independently. No tool uses and no SGA. One repair (B3/C4): the statement attributed joins to lem-coef-coherent-nerve-comparison, which does not define them, and steps 1 and 3 used the join structure without a citation. The corrected file adds def-coef-infinity-relative-cone to the statement, stmt_deps, step 1, step 3 and proof_deps. That node already lies in the item's dependency closure, so no cycle arises, and the mathematical content of the statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-70cb7c8ea",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Mathematics and Lean accepted; immutable module compiles cleanly through scompile.py. Complete report replacement in fixes/ restores corrupted HTT citations and records the independent reading. Full checks and findings are in review.md; no project clone or branch head changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ConeTriangleMappingSquare",
+  "declaration": "SSet.ConeTriangle.cone_triangle_mapping_square",
+  "declarations": [
+   "SSet.ConeTriangle.simplex",
+   "SSet.ConeTriangle.vertex",
+   "SSet.ConeTriangle.base",
+   "SSet.ConeTriangle.point",
+   "SSet.ConeTriangle.value",
+   "SSet.ConeTriangle.action",
+   "SSet.ConeTriangle.precompose",
+   "SSet.ConeTriangle.conedSimplex",
+   "SSet.ConeTriangle.CanonicalEdges",
+   "SSet.ConeTriangle.markedValue",
+   "SSet.ConeTriangle.IsSquare",
+   "SSet.ConeTriangle.IsPrecomposedSquare",
+   "SSet.ConeTriangle.cone_triangle_mapping_square"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ConeTriangleMappingSquare.lean",
+  "statement": "theorem cone_triangle_mapping_square (C : CoherentNerveComparisonStatement.{u}) (K : SSet.{u}) : ∃ D : CanonicalEdges C K, (∀ {w x : K _⦋0⦌} (a : (hom (C.rigidification.obj K) (vertex C w) (vertex C x)) _⦋0⦌) (t : (value C x) _⦋1⦌), t ∈ (markedValue D x).marking → (precompose C a).app _ t ∈ (markedValue D w).marking) ∧ ∀ {x y z : K _⦋0⦌} (e : Edge x y) (f : Edge y z) (k : Edge x z) (σ : e.CompStruct f k), ∃ H : Δ[1] ⊗ Δ[1] ⟶ value C x, IsSquare D e f k σ H ∧ (action C x z).app _ ((D.coherenceEdge e f k σ).edge, (value C z).σ 0 (D.coneArrow z)) ∈ (markedValue D x).marking ∧ (k.edge ∈ Set.range (K.σ 0) → (D.coningEdge k).edge ∈ (markedValue D x).marking) ∧ ∀ (w : K _⦋0⦌) (a : (hom (C.rigidification.obj K) (vertex C w) (vertex C x)) _⦋0⦌), IsPrecomposedSquare D a e f k σ H",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded CoherentNerveComparisonStatement realization, ordered rightJoinCone, Mathlib subset-path nerves and Edge.CompStruct, and the recorded Marked type. CanonicalEdges fixes every named arrow and interval by equality with its complete coherent-simplex subset chain; the theorem states existence of those normalized data, all corners and full boundaries of each square, minimal marking membership and preservation under every vertex precomposition. No Kan or nondegeneracy assumption."
  }
 }
