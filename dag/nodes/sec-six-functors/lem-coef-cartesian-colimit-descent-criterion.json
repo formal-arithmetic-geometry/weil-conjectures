@@ -26,7 +26,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "def-coef-finite-limits-square-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-cocone-restriction-initial"
  ],
  "proof": [
   {
@@ -271,5 +274,32 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-d92ad6c55 (reviewer sub-agent of L); spot-checked: I read the whole delivery against HTT pp. 544-548 (PDF pp. 562-566); the mathematics is sound. Item: its statement is HTT Thm 6.1.3.9 (1)=>(4) and has the same mathematical content as before: the only change is the maintainer's conventions preamble, and the item includes K empty. Its six steps follow the proof of HTT 6.1.3.7 (3)=>(2) together with 6.1.3.5 and 6.1.3.3. Step 1 is HTT 6.1.3.6, strict initial objects, which makes the slice core over 0 contractible. Step 2 handles pushouts through pointwise colimits in Arr(C) (coyoneda clause with I=[1]) and hypothesis (ii); the diagonal edge is handled by pasting pullbacks inside the step. Step 3 gets binary coproducts from steps 1 and 2. Step 4 handles arbitrary coproducts through f = f_i coproduct f_{!=i}, including |A|=1. Step 5 applies lem-coef-infinity-small-colimit-generation to rho: C -> S^op; I checked that its hypotheses allow a large target and include existence of the image colimit. Step 6 proves both directions, the converse by the cartesian-cone clause plus universality, with K empty correct. New node lem-coef-slice-cartesian-colimit-criterion: it is exactly HTT 6.1.3.5 (2)<=>(3) together with Notation 6.1.3.4, with the opposite left fibration classified at universe U'. The added repleteness is harmless and needed for K empty. I tested K empty, K a point and S empty. It is not a duplicate: I compared it with cartesian-colimit-localization, relative-slice-sections, slice-right-fibration, right-straightening-fiber-comparison, spaces-slice-cartesian-closure and space-universal-colimits. It does not restate a parent clause, and it does not reach the item. Its Mathlib searches cover all three kinds and its blueprint provenance is correct. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, an off-unit generic tool already accepted on sibling nodes. FIX (C1/C4): step 1 used, without a citation, the fact that a quasicategory whose objects are all terminal is a contractible Kan complex. That fact is a clause of lem-cbc-enhanced-functor-cone-calculus. I added the citation to step 1 and widened the tool_uses reason. The corrected item is in fixes/dag/nodes/sec-six-functors/lem-coef-cartesian-colimit-descent-criterion.json. No node dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b42292daf",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Every clause of HTT 6.1.3.9(1)=>(4) as the node states it matches the Lean: universes u/max(u+1)v unrestricted; presentability and finite limits; cartesian arrow is a limiting canonical SquareCone at corner (0,0), which always exists; universality over coherent square families with exactly constant row f:T->B is equivalent to node (i); gluing uses the right edges in and out; the colimit cocone is pinned to its apex and prism as in cocone_restriction_initial; K small with K=empty included; the iff is on all edges of K-cone. lean.statement verbatim; stmt_deps match the imports; the new existing:true node def-coef-finite-limits-square-cones matches its declarations; no duplicates (IsHomotopyPullbackSquare, IsPullbackSquare, SpaceGeometricDescent.IsCartesian are for other settings); no hollow definitions; sorry only; docstrings carry the six steps. nt_compile rc=0, clean; diagnostics checked with a probe copy. Non-blocking: (1) the public import of SuspensionSquareComparison will make add_proof_imports refuse one proof-import edge on the suspension -> space-geometric-descent -> item chain; moving the nine generic definitions to their own module fixes it; (2) the report text has '6.1.3.9'-style numbers replaced by 'the project server' (sanitizer artifact, cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianColimitDescentCriterion",
+  "declaration": "SSet.Enhanced.cartesian_colimit_descent_criterion",
+  "declarations": [
+   "SSet.Enhanced.IsDescentColimitCocone",
+   "SSet.Enhanced.IsDescentCartesianArrow",
+   "SSet.Enhanced.IsDescentCartesianTransformation",
+   "SSet.Enhanced.HasDescentUniversalColimits",
+   "SSet.Enhanced.HasDescentCartesianPushoutGluing",
+   "SSet.Enhanced.cartesian_colimit_descent_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianColimitDescentCriterion.lean",
+  "statement": "theorem cartesian_colimit_descent_criterion (C : SSet.{max (u + 1) v}) [Quasicategory C] (hpresentable : Presentability.IsPresentable.{u, v} C) (hfiniteLimits : SuspensionComparison.HasFiniteLimits C) (huniversal : HasDescentUniversalColimits.{u, max (u + 1) v} C) (hgluing : HasDescentCartesianPushoutGluing C) (K : SSet.{max (u + 1) v}) (hsmall : Presentability.IsSmall.{u} K) (p q : rightJoinCone K ⟶ C) (α : rightJoinCone K ⟶ (ihom Δ[1]).obj C) (hsource : α ≫ evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 0) = p) (htarget : α ≫ evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 1) = q) (hq : IsDescentColimitCocone q) (hcartesian : IsDescentCartesianTransformation (rightJoinConeInclusion K ≫ α)) : IsDescentColimitCocone p ↔ IsDescentCartesianTransformation α",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Arbitrary small simplicial shapes in an unrestricted containing universe. Universality is expressed by coherent families of limiting squares with an exactly constant lower arrow. Helpers retain the canonical join cocone, square cones, and all naturality squares; no object or canonical comparison is chosen from a mere existence theorem."
  }
 }

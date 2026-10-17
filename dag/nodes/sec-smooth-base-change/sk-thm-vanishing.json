@@ -321,5 +321,26 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-74c79220c (reviewer sub-agent of L); spot-checked: I read the item, the four cited statements and proofs, the definitions in stmt_deps, the main-20261015 _section and proof, the unit record and the slopmaster2 Lean statement (Vanishing.lean:346, coefficients are Λ-module constantModSheaf). The statement is the current blueprint's, word for word, and not weakened; its coefficients are sheaves of Λ-modules, matching the Lean. Step 1 (elementary): d≠0 because A is a nonzero domain, dΛ=nΛ, and n is a unit. Step 2: Stacks 01SH and Mathlib isAffineHom_of_isAffine make g affine; clauses (1) and (3) of the permanence leaf make h affine and qcqs. The delivery correctly fixes the blueprint's wrong side: h is the base change of g, not of f. Step 3: every hypothesis of sbc-thm-universal-test-vanishing (same unit, NC-reviewed) is met with integer e dividing n, and e is invertible since e·(a n^{-1})=1. Its conclusion is the abelian vanishing of R^q h_* Z/e. Step 4: lem-sbc-constant-module-higher-direct-image-cyclic-reduction (qcqs h, any Λ, natural n and q) gives R^q h_*(Λ/nΛ)=0 as Λ-modules, which is Λ/dΛ by step 1. I accept its tool_use: it is a generic coefficient transfer, it replaces no curve-test step, and it is the same reduction the Lean proof uses. Over the transitive closure of all cited nodes there is no cycle. There are no new nodes, and the grep for Λ/dΛ found no duplicate; the only citer, sk-lem-induction, uses exactly this Λ-form. Edge cases checked: d=±1, Λ=0, negative d, empty X, and the affine line with K=L. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-550ef161a",
+  "group": "Q115",
+  "result": "pass",
+  "note": "The delivery only adds lean{existing:true} to the node, pointing at AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf (Vanishing.lean:346), which the main-20261015 source front matter itself names; the node statement matches the source verbatim and lean.statement matches the Lean signature. Clause check: affine integral base with integrally closed stalks equals Spec of a normal domain (the IsNormalScheme definition); alg-closed function field; IsAffineHom plus SmoothOfRelativeDimension 1, with X affine derived; g = Spec.map i ≫ fromSpecStalk(genericPoint); IsPullback e h g f₀ in the source orientation (h is the base change of g); d : ℕ instantiated by natAbs with the same unit condition and ideal; constantModSheaf is constantSheaf of Λ ⧸ span{d}; IsZero of the higherDirectImage sheaf for q:ℤ ≥ 1. Edge cases d=±1, negative d, d=0 excluded, Λ=0, empty X/Y, K=L, q=1 all fine. Λ : Type (u+1) is the disclosed framework-wide six-functor convention. One definition per notion holds: the cyclic isZero_universalCurveTest_higherDirectImage serves the other node. Gates: no new definition, no new proof, blueprint docstring present, étale not pro-étale. The #check/#print probe compiled clean through nt_compile.py in 4.8 s. Report has a real Worker report and Second reading by Q115. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing",
+  "declaration": "AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf"
+  ],
+  "branch": "slopmaster2",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing source declaration, read from the current WeilConjectures source with scompile.py --source. It states the arbitrary-commutative-ring vanishing on a CurveTestDatum: the datum fields encode an affine integral normal base with algebraically closed function field, an affine smooth relative-dimension-one curve and its specified geometric-generic Cartesian fibre, and a natural torsion order invertible on the base. The theorem quantifies q : ℤ with 1 ≤ q and concludes IsZero of Etale.higherDirectImage in sheaves of Λ-modules. The node uses an integer d; the source declaration uses d.natAbs, which gives the same quotient because (d)=(|d|), including negative d and d=0 excluded by invertibility. The bundle’s affine integral normal base is equivalent to Spec of a normal domain, and affine f over an affine base implies affine X, so no source hypothesis is lost. No new module is needed.",
+  "statement": "theorem Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf\n    (D : Etale.CurveTestDatum.{u}) (q : ℤ) (hq : 1 ≤ q) :\n    IsZero (Etale.higherDirectImage Λ D.h q (Etale.constantModSheaf Λ D.Y₀ D.d))"
  }
 }

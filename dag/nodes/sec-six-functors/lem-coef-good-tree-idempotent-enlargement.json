@@ -30,7 +30,8 @@
   "place": "HTT Lemma A.1.5.9, printed pp. 803-805 (using the cellular definitions of A.1.5.1-2); read online 2026-10-17, not archived in literature/. No Stacks tag states this result."
  },
  "stmt_deps": [
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-good-cellular-tree"
  ],
  "proof": [
   {
@@ -271,5 +272,23 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-01dc1b945 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and all four cited nodes in full (category-colimit definition; Mathlib leaves for small-colimit presentability, cardinal squares and filtered colimits of sets) against HTT Def. A.1.5.1, Not. A.1.5.2 and Lemmas A.1.5.8-9 (pp. 799-805). The statement matches A.1.5.9 hypothesis by hypothesis and is not weakened. The parent (weak-saturation-tree-presentation) uses exactly its three equations. Step 1: undercategory colimits come from adjoining X as an initial vertex; filtered colimits are created by the forgetful functor; increasing unions give Y_E. Step 2: free objects X->X+P give Hom_K(F P,Z)=Hom_A(P,UZ). Induction then makes each Y_t and each small Y_E presentable: the predecessor diagram has at most theta*theta=theta<tau morphisms, and the cell square is a pushout in K. No presentability of X or Y_B is used. Step 3: the poset of small downward-closed sets is small and tau-filtered; its colimits are Y_T and Y_B (checked via down-sets of b in B), and tails are cofinal. Step 4: clauses (1)-(3) give factorizations and eventual equalities. Steps 5-6: I recomputed every type and every equality in Y_T or Y_B, including the intersection equation via e_T i_{B,T}=i_{B,T}e_B, the delayed naturality and idempotence equations, and the n=0 case. No cancellation of non-monic maps is used. Steps 7-8: D is small because tau is uncountable and regular; the cocone and idempotence calculations hold, and all three equations follow on colimit legs by uniqueness. Edge cases checked: T, E_0 or B empty, B=T, identity idempotents, and tau=aleph_0 excluded. No new nodes, no cycle (all dependencies are leaves, so no route or tool_uses issue), and no duplicates (searched for A.1.5.8/9, idempotent+presentable, coslice+presentable; opened four candidates). No SGA used. HTT is not archived in literature/; the report's WANTED and proof_origin by=agent cover this. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd9893451",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the node matches the Lean theorem CategoryTheory.coef_good_tree_idempotent_enlargement (universes v/u not forced equal; tau regular in Cardinal.{v} with aleph0 < tau; IsCardinalLocallyPresentable read and equal to the node's convention; WellFoundedLT T; hpred; P/Q/top/left/right with IsPushout against CellularTree.predecessorMap; downward-closed B; idempotents in Under X; all four compatibility equations in the correct direction via subsetMap with subset_univ, inter_subset_left and inter_subset_right; no presentability of X or Y_B). Edge cases admitted: empty T, B, E0 and D. One sorry theorem, no hollow or local definitions (landed CellularTree helpers reused), source/blueprint docstrings and all 8 proof steps present. The node differs from newtargets-dag only in lean and the added landed stmt_dep def-coef-good-cellular-tree, which stage2_delivery permits as a gained landed dependency. lean.statement equals the file signature except for one trailing space (harmless; re-read on landing). The report has a real Worker report and Second reading by Q49. nt_compile --json: CellularTree and the delivered file compile with no errors or warnings; an injected error was reported."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoefGoodTreeIdempotentEnlargement",
+  "declaration": "CategoryTheory.coef_good_tree_idempotent_enlargement",
+  "file": "lean/Sheaf/CategoryTheory/CoefGoodTreeIdempotentEnlargement.lean",
+  "statement": "theorem coef_good_tree_idempotent_enlargement {C : Type u} [Category.{v} C] {T : Type v} [PartialOrder T] [WellFoundedLT T] {τ : Cardinal.{v}} [Fact τ.IsRegular] [IsCardinalLocallyPresentable C τ] (hτ_uncountable : ℵ₀ < τ) (hpred : ∀ t, Cardinal.mk {s : T | s < t} < τ) (X : C) (Y : T ⥤ Under X) (P Q : T → C) (hP : ∀ t, IsCardinalPresentable (P t) τ ∧ IsCardinalPresentable (Q t) τ) (top : ∀ t, P t ⟶ Q t) (left : ∀ t, P t ⟶ (CellularTree.subsetObj Y {s | s < t}).right) (right : ∀ t, Q t ⟶ (Y.obj t).right) (cell : ∀ t, IsPushout (top t) (left t) (right t) (CellularTree.predecessorMap Y t).right) (B : Set T) (hB : ∀ ⦃s t⦄, s ∈ B → t ≤ s → t ∈ B) (eB : CellularTree.subsetObj Y B ⟶ CellularTree.subsetObj Y B) (eT : CellularTree.subsetObj Y Set.univ ⟶ CellularTree.subsetObj Y Set.univ) (heB : eB ≫ eB = eB) (heT : eT ≫ eT = eT) (hcompat : eB ≫ CellularTree.subsetMap Y (Set.subset_univ B) = CellularTree.subsetMap Y (Set.subset_univ B) ≫ eT) : ∀ (E₀ : Set T), Cardinal.mk E₀ < τ → ∃ D : Set T, (∀ ⦃s t⦄, s ∈ D → t ≤ s → t ∈ D) ∧ E₀ ⊆ D ∧ Cardinal.mk D < τ ∧ ∃ eD : CellularTree.subsetObj Y D ⟶ CellularTree.subsetObj Y D, ∃ eBD : CellularTree.subsetObj Y (B ∩ D) ⟶ CellularTree.subsetObj Y (B ∩ D), eD ≫ eD = eD ∧ eBD ≫ eBD = eBD ∧ eD ≫ CellularTree.subsetMap Y (Set.subset_univ D) = CellularTree.subsetMap Y (Set.subset_univ D) ≫ eT ∧ eBD ≫ CellularTree.subsetMap Y Set.inter_subset_left = CellularTree.subsetMap Y Set.inter_subset_left ≫ eB ∧ eBD ≫ CellularTree.subsetMap Y Set.inter_subset_right = CellularTree.subsetMap Y Set.inter_subset_right ≫ eD",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

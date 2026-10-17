@@ -144,36 +144,31 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-a8bb0138a (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. Replaced the ill-typed derived-adjunction citation with the existing correctly typed general lemma; corrected JSON and review.md are written. No new nodes. Master condensed coefficients and base-change orientation checked; no comparison theorem assumed. Inherited DAG cycles are documented separately.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f689b9209",
-  "group": "NJ",
+  "reviewer": "NT-stage2-cc-29192ad74",
+  "group": "Q36",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, coherence, universes, edge cases, docstrings, and report sections. Both modules compiled through scompile.py with exit 0 and no diagnostics. No fixes required."
+  "note": "Read the item node (statement, 7 proof steps, proof_deps), both delivered modules, the report (Worker report and Second reading by Q36 present), all 5 stmt_deps and their declarations, plus side ProEtaleInverseImage, ProEtaleCanonicalPullbackComposition, prop-weil-pbc-proetale-constant-ring-map, Mathlib Over.pullbackComp/pullbackId, Stacks 0F6W. Item: arbitrary Scheme.{u}, IsCharacteristic p with Nat.Prime, arbitrary CommRing A : Type u, X.ProEt, iterateFrobenius for all n. r is pinned to (F_V^n, v) by its projections; tau is unique by the unit equation; the derived iso is real exact descent; the comp comparisons are fixed by the published pullbackComp normalization under conjugateIsoEquiv. The open-restriction square type-checks; the iterate equation equals the node's by naturality of tau_a; n=0 is pinned to pullbackId. No added hypotheses or universe restriction. Dependency §1(B) repair is justified (old record needs [Finite A]): re-export plus specialization of the published ring-sheaf operations with c = asIso of c^f_A; its IsIso sorry instance is a definition-needed instance, true for every f and A, not a duplicate (existing proofs are finite-only). Only lean fields changed (diffed against side clone); statements verbatim; lines <=100; imports of stated proof-dep modules present. nt_compile --json of both files in dependency order: exit 0, no errors, no warnings. Notes, not faults: the dependency record drops the old sfIntrinsic* names from declarations (still re-exported); finite-A constant pullback now has two constructions, to be compared in stage 3."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations",
-  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullback",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantRingDerivedPullback",
   "declarations": [
-   "AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence_functor_additive",
-   "AlgebraicGeometry.Scheme.sfIntrinsicTransport",
-   "AlgebraicGeometry.Scheme.sfIntrinsicTransportIso",
-   "AlgebraicGeometry.Scheme.sfIntrinsicTransportComp",
-   "AlgebraicGeometry.Scheme.sfIntrinsicPullback",
-   "AlgebraicGeometry.Scheme.sfIntrinsicPullback_additive",
-   "AlgebraicGeometry.Scheme.sfIntrinsicPullback_preservesFiniteLimits",
-   "AlgebraicGeometry.Scheme.sfIntrinsicPullback_preservesFiniteColimits",
-   "AlgebraicGeometry.Scheme.sfIntrinsicPullbackComp",
-   "AlgebraicGeometry.Scheme.sfIntrinsicPullbackId",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullback"
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingComparison_isIso",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingComparison",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingPullback",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingPushforward",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingAdjunction",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingDerivedPullback"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntrinsicFiniteOperations.lean",
-  "statement": "abbrev sfIntrinsicDerivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantRingOperations.lean",
+  "statement": "abbrev proEtaleConstantRingDerivedPullback (A : Type u) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A",
   "branch": "newtargets-dag",
-  "by": "NJ",
-  "date": "2026-10-16",
+  "by": "Q36",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "§1(B): The recorded module gives identified arbitrary coefficient operations and a continuous-function finite-coefficient specialization, but no canonical pullback in the intrinsic constant CommRingCat-sheaf module category used by the extension-by-zero dependency and A_{E,n}. Publicly retain that entire interface and supply the missing specialization by transport of the published fixed-scalar inverse image through sfIntrinsicModuleEquivalence. Its inverse is fixed by the realization equivalence, and its composition and identity comparisons use the equivalence unit and counit. The derived pullback is exact termwise descent on the identical proEtaleDerivedCategory; no coefficient isomorphism, arbitrary map, boundedness or additional assumption is supplied."
+  "note": "§1(B): The recorded sfIntrinsicDerivedPullback requires [Finite A], while this node states ordinary identified-coefficient operations and the consuming Frobenius statement allows arbitrary commutative A. Reexport that published finite interface and the full arbitrary-ring-sheaf operations, then specialize the latter using the actual constant-section coefficient comparison. Its invertibility is a named construction theorem, and the comparison is asIso of that exact map. Module pullback, direct image, the tensor-unit-normalized adjunction and exact termwise derived pullback are the published constructions, with no replacement module category, arbitrary coefficient identification, completion, torsion, or finiteness assumption."
  },
  "reviewed_proof": {
   "date": "2026-10-15",

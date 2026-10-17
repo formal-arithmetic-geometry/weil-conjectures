@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-sifted-colimit-calculus"
  ],
  "proof": [
   {
@@ -209,5 +210,29 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-4a57606da (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-infinity-finite-coproduct-envelope and all six cited statements in full. There is no local HTT archive, so I fetched the Harvard PDF and read Remark 5.3.5.9, Prop 5.3.6.2, Prop 4.3.2.17, Def 5.5.8.1, Lemma 5.5.8.4, Lemma 5.5.8.11 with Remark 5.5.8.12, Prop 5.5.8.15, Remark 5.5.8.16(1)-(3) and Cor 5.5.8.17 with its proof. The item is true and not weakened; it is HTT Remark 5.5.8.16(3). Its proof follows HTT's own Cor 5.5.8.17 argument: a small finite-coproduct closure J of the representables, extension by Remark 5.3.5.9, then a sifted colimit. Step 1 uses only finite coproducts in E and no local smallness. Step 2: Q_{a,b} is literally the def-cbc cocone category of the two-point discrete diagram and also the comma (b|diag) of cofinality-test (3); the coproduct cospan is initial; parametric-universal-arrows with C=Delta^0 has exactly that hypothesis, so const_q->id contracts Q, and (3)=>(1) makes the diagonal final, with J and JxJ small. Step 3: sifted-nerve-index-calculus gives siftedness from 'nonempty and diagonal final', the hypothesis gives the colimiting beta, and alpha=(beta i)eta. Step 4: the colimit equivalence for beta composed with the envelope's equivalence against H=Delta_J x (not coproduct-preserving) is postcomposition with alpha, so alpha is colimiting by the dual cone criterion; K empty checked. The envelope node is true: its pointwise Kan comma over a finite coproduct of representables is a disjoint union of slices with terminal objects, so only finite coproducts are needed, and HTT 4.3.2.17 gives the equivalence against arbitrary H. Small cases checked: K empty, a point, two points, a groupoid with nontrivial automorphisms. B1-B9 pass: self-contained, inline definition of finite coproducts, correct blueprint.from and via, same_as [] with no 'sifted' hit in main-20261015, eight logged searches of all three kinds. It is not a duplicate: lem-coef-infinity-relative-colimit-completion needs a cocomplete target, and a DAG-wide scan found no other match. It is not a restated clause of the item. The removed child is cited nowhere. There is no cycle (transitive closure of every cited node checked). Accepted tool use: lem-cbc-enhanced-functor-cone-calculus from sk-prop-sf-cbc, a generic cocone mapping-space criterion. No SGA is cited. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-726b98fda",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Lean matches node: C quasicategory in SSet.{max(u+1) v}; hypotheses HasSmallSiftedColimits (small quasicategory K, landed IsInfinitySifted, IsColimiting cocone) and HasFiniteCoproducts (Finite I : Type u incl. PEmpty, nerve(Discrete I)); conclusion recorded HasSmallColimits.{u,max(u+1)v}; no local smallness/accessibility/monadicity/universe equality. Helpers are real predicates with source+blueprint docstrings; theorem docstring carries the 4 proof steps; only sorry is the theorem. stmt_deps gains landed lem-coef-infinity-sifted-colimit-calculus (allowed, acyclic over 461 nodes). lean record complete, statement verbatim. Delivery touches only node/module/report (sk-thm-sf-identification unit diff is upstream b30f3a3360). nt_compile --json rc=0, no errors/warnings; #print axioms shows sorryAx only as expected. Edge cases empty coproduct/initial object, empty shape, Delta0, non-quasicategory shapes checked. Cosmetic: report's second reading has 'the project server' in place of HTT numbers."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinitySiftedCoproductCocompleteness",
+  "declaration": "SSet.Presentability.infinity_sifted_coproduct_cocompleteness",
+  "declarations": [
+   "SSet.Presentability.HasFiniteCoproducts",
+   "SSet.Presentability.HasSmallSiftedColimits",
+   "SSet.Presentability.infinity_sifted_coproduct_cocompleteness"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinitySiftedCoproductCocompleteness.lean",
+  "statement": "theorem infinity_sifted_coproduct_cocompleteness (C : SSet.{max (u + 1) v}) [SSet.Quasicategory C] : HasSmallSiftedColimits.{u, v} C → HasFiniteCoproducts.{u, v} C → HasSmallColimits.{u, max (u + 1) v} C",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Finite coproducts and small sifted-colimit predicates are stated as helper declarations in this module; the theorem asserts the node conclusion without adding local smallness, accessibility, or monadicity hypotheses."
  }
 }

@@ -1,0 +1,120 @@
+{
+ "id": "def-coef-finite-limits-square-cones",
+ "kind": "definition",
+ "title": "Finite limits and specified coherent square cones",
+ "status": "split",
+ "statement": "Use simplicial sets and finite simplicial sets (finitely many nondegenerate simplices) from [def-weil-pbc-simplicial-set], and quasicategories, coherent diagrams, cones, cocones and their universal properties from [def-cbc-enhanced-diagrams-cones]. A quasicategory $C$ has finite limits if for every finite simplicial set $K$ and diagram $F:K\\to C$ there is a limiting coherent cone. This includes the empty shape. Put $S=\\Delta^1\\times\\Delta^1$, with corners $(i,j)$ for $i,j\\in\\{0,1\\}$. For a coherent square $t:S\\to C$, its incoming boundary is the full subcomplex of $S$ on the vertices other than $(0,0)$ and its outgoing boundary is the full subcomplex on the vertices other than $(1,1)$. Define the incoming contraction $S\\times\\Delta^1\\to S$ by $(x,y,a)\\mapsto(\\min(x,a),\\min(y,a))$ and the outgoing contraction by $(x,y,a)\\mapsto(\\max(x,a),\\max(y,a))$, on the monotone vertex chains of every simplex. A specified square cone is a coherent cone on the incoming boundary whose apex is $t(0,0)$ and whose entire cone cylinder is the restriction of the incoming contraction followed by $t$. A specified square cocone is a coherent cocone on the outgoing boundary whose apex is $t(1,1)$ and whose entire cocone cylinder is the restriction of the outgoing contraction followed by $t$. These are data types; limitingness or colimitingness is imposed separately, using the existing coherent universal-property predicates.",
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Sections 4.2 and 4.4 (finite simplicial limits and cones); Theorem 6.1.3.9, printed p. 548, for the finite-limit and pullback-square terminology. The coordinatewise min/max square contractions are explicit models of the coherent cone/cocone already present in Sheaf.CategoryTheory.SuspensionSquareComparison, originally sourced to HA Notation 1.4.2.12 and Lemma 1.4.2.15."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HasFiniteLimits|SquareCone|SquareCocone",
+   "results": "{\"t\": \"2026-10-17T02:03:00Z\", \"tool\": \"grep\", \"query\": \"HasFiniteLimits|SquareCone|SquareCocone\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"73360c7a0e243f36\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching quasicategorical definition in Mathlib; ordinary finite limits and limits in the ordinary category of simplicial sets are different notions. Use the existing project primitives, without redefining them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite limits in quasicategories and limiting cone of a coherent square",
+   "results": "{\"t\": \"2026-10-17T02:03:00Z\", \"tool\": \"leansearch\", \"query\": \"finite limits in quasicategories and limiting cone of a coherent square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPullback.isLimit\", \"CategoryTheory.Square.IsPullback.isLimit\", \"CategoryTheory.IsPullback.of_isLimit'\", \"CategoryTheory.Square.IsPullback.mk\", \"CategoryTheory.CommSq.cone\", \"CategoryTheory.Limits.HasFiniteColimits\", \"CategoryTheory.Square.pullbackCone\", \"CategoryTheory.Square.isPullback_iff\"], \"digest\": \"cad8936812fa8893\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching quasicategorical definition in Mathlib; ordinary finite limits and limits in the ordinary category of simplicial sets are different notions. Use the existing project primitives, without redefining them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasicategory finite limits over finite simplicial sets square cone and cocone in a product of intervals",
+   "results": "{\"t\": \"2026-10-17T02:03:01Z\", \"tool\": \"leanfinder\", \"query\": \"quasicategory finite limits over finite simplicial sets square cone and cocone in a product of intervals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFinitePullback\", \"CategoryTheory.cechNerveTerminalFrom\", \"SSet.hasLimits\", \"SSet.finite_of_isPullback\", \"CategoryTheory.CechNerveTerminalFrom.hasLimit_wideCospan\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"SSet.instFiniteTensorObj\", \"SSet.horn.isColimit\"], \"digest\": \"34ee52c9985fe1fb\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching quasicategorical definition in Mathlib; ordinary finite limits and limits in the ordinary category of simplicial sets are different notions. Use the existing project primitives, without redefining them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n HasFiniteLimits|SquareCone|SquareCocone in WeilConjectures and lean/Sheaf; rg -l finite limits.*quasicategory|finite simplicial|SquareCone|SquareCocone dag/nodes/sec-six-functors/def-*.json; blueprint_refs.py search finite limits",
+   "results": "The project has SSet.Enhanced.SuspensionComparison.HasFiniteLimits at SuspensionSquareComparison.lean:129, SquareCone at :102, SquareCocone at :109, with the square/boundary/sweep primitives at :39-96. The source checkout has only ordinary-category HasFiniteLimits hits. No definition node supplies these generic enhanced finite-limit/square-cone notions. The suspension-comparison statement node includes these as auxiliary declarations but its proof closure reaches the present item, so citing that theorem would introduce a cycle. blueprint_refs.py search returned 25 unrelated blueprint nodes concerning ordinary finite limits.",
+   "date": "2026-10-17",
+   "verdict": "Bind the already existing definitions as an independent definition node; introduce no Lean declaration, and no theorem dependency."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-colimit-descent-criterion",
+  "date": "2026-10-17",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Supporting HTT 6.1.3.9(1) to (4): generic finite limits and specified square cones used to state the cartesian-colimit descent criterion, under the finite-coefficient mapping-complex adjunction before R lim.",
+   "via": [
+    "lem-coef-cartesian-colimit-descent-criterion",
+    "lem-coef-space-geometric-descent",
+    "lem-coef-algebroid-completion",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SuspensionSquareComparison",
+  "declaration": "SSet.Enhanced.SuspensionComparison.HasFiniteLimits",
+  "declarations": [
+   "SSet.Enhanced.SuspensionComparison.square",
+   "SSet.Enhanced.SuspensionComparison.corner",
+   "SSet.Enhanced.SuspensionComparison.puncture",
+   "SSet.Enhanced.SuspensionComparison.sweep",
+   "SSet.Enhanced.SuspensionComparison.boundary",
+   "SSet.Enhanced.SuspensionComparison.conePath",
+   "SSet.Enhanced.SuspensionComparison.SquareCone",
+   "SSet.Enhanced.SuspensionComparison.SquareCocone",
+   "SSet.Enhanced.SuspensionComparison.HasFiniteLimits"
+  ],
+  "statement": "def HasFiniteLimits (C : SSet.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing generic definition and square-cone data, not the suspension-comparison theorem. Read the complete signatures and data bodies. This independent definition binding avoids importing the theorem as a DAG prerequisite: its proof closure returns to the cartesian-colimit descent item. No Lean declaration is duplicated or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b42292daf",
+  "group": "Q53",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b42292daf",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Every clause of HTT 6.1.3.9(1)=>(4) as the node states it matches the Lean: universes u/max(u+1)v unrestricted; presentability and finite limits; cartesian arrow is a limiting canonical SquareCone at corner (0,0), which always exists; universality over coherent square families with exactly constant row f:T->B is equivalent to node (i); gluing uses the right edges in and out; the colimit cocone is pinned to its apex and prism as in cocone_restriction_initial; K small with K=empty included; the iff is on all edges of K-cone. lean.statement verbatim; stmt_deps match the imports; the new existing:true node def-coef-finite-limits-square-cones matches its declarations; no duplicates (IsHomotopyPullbackSquare, IsPullbackSquare, SpaceGeometricDescent.IsCartesian are for other settings); no hollow definitions; sorry only; docstrings carry the six steps. nt_compile rc=0, clean; diagnostics checked with a probe copy. Non-blocking: (1) the public import of SuspensionSquareComparison will make add_proof_imports refuse one proof-import edge on the suspension -> space-geometric-descent -> item chain; moving the nine generic definitions to their own module fixes it; (2) the report text has '6.1.3.9'-style numbers replaced by 'the project server' (sanitizer artifact, cosmetic)."
+ }
+}
