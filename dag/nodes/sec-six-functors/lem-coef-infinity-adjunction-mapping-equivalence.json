@@ -28,7 +28,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-mapping-composition",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-twisted-arrow-left-fibration",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-right-fibration-fibers"
  ],
  "proof": [
   {
@@ -239,5 +242,36 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-8ab8303c5 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-coef-infinity-hom-bifunctor-functoriality, the statements of all 9 cited nodes, the unit record, and the blueprint proof of prop-coef-integral-exceptional-adjoint paragraph 2. Read Kerodon 02F1, 046J and 00LJ online. The item statement agrees with 02F1/02EK and is unchanged. The new node states the 046J Hom-functor comparison with correct variance. It is not a clause of the item (D1) and was tested on T=id, empty, ordinary nerves and T to a point. Its overlap with lem-coef-space-transport-classification (existence of H_E) is unavoidable: that node, enriched-hom-twisted-arrow-comparison and coherent-nerve-comparison all have dependency paths back to the item (I checked by closure). Step 1: the variance of both adjunct transformations and their components v->G(v)eta_x and u->eps_d F(u) are correct. Step 2: the mixed-endpoint right-pinched space of E x Delta^1 is Map_E(a,b) x pt, and functoriality of composition gives a naturality homotopy of whole spaces. Steps 3 and 4: each composite is correctly ordered, and each step uses the correct one of the two independent triangles. Step 5: the equivalence 2-simplex in N_hc(Kan) via C[Delta^2](0,2)=Delta^1 and the homotopy reversal through the Kan property of Fun(A,A) are correct. The four declared generic tool_uses (from sk-prop-sf-cbc) are accepted. Fault C1/C4: steps 1 and 5 apply functor-cone-calculus and pointwise-equivalences with target S=N_hc(Kan), which needs S to be a quasicategory (Cordier-Porter). No cited node states this, and the only DAG node that does (coherent-nerve-comparison) is cyclic. Repaired: added the statement-only unsplit node lem-coef-kan-coherent-nerve-quasicategory (Kerodon 00LJ, Thm 2.4.5.1; its stmt_deps are definitions only; acyclic; Mathlib grep shows SimplicialNerve.lean:193 with no quasicategory theorem, so no match). It is cited in steps 1 and 5 and proof_deps is updated. Nothing else changed.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityAdjunctionMappingEquivalence",
+  "declaration": "SSet.Enhanced.infinity_adjunction_mapping_equivalence",
+  "declarations": [
+   "SSet.Enhanced.adjunctComposition",
+   "SSet.Enhanced.adjunctCoupling",
+   "SSet.Enhanced.adjunctProjection",
+   "SSet.Enhanced.adjunctBaseVertex",
+   "SSet.Enhanced.adjunctUniversal",
+   "SSet.Enhanced.adjunctUniversalProjection",
+   "SSet.Enhanced.AdjunctBifunctorModel",
+   "SSet.Enhanced.AdjunctFiberComparison",
+   "SSet.Enhanced.AdjunctTransport",
+   "SSet.Enhanced.infinity_adjunction_mapping_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityAdjunctionMappingEquivalence.lean",
+  "statement": "theorem infinity_adjunction_mapping_equivalence (C D : SSet.{u}) [Quasicategory C] [Quasicategory D] (F : C ⟶ D) (G : D ⟶ C) (η : ((ihom C).obj C) _⦋1⦌) (ε : ((ihom D).obj D) _⦋1⦌) (hη₀ : ((ihom C).obj C).δ 1 η = diagramVertex (𝟙 C)) (hη₁ : ((ihom C).obj C).δ 0 η = diagramVertex (F ≫ G)) (hε₀ : ((ihom D).obj D).δ 1 ε = diagramVertex (G ≫ F)) (hε₁ : ((ihom D).obj D).δ 0 ε = diagramVertex (𝟙 D)) (hF : ∃ t : ((ihom C).obj D) _⦋2⦌, ((ihom C).obj D).δ 2 t = ((ihom C).map F).app _ η ∧ ((ihom C).obj D).δ 0 t = ((MonoidalClosed.pre F).app D).app _ ε ∧ ((ihom C).obj D).δ 1 t = ((ihom C).obj D).σ 0 (diagramVertex F)) (hG : ∃ t : ((ihom D).obj C) _⦋2⦌, ((ihom D).obj C).δ 2 t = ((MonoidalClosed.pre G).app C).app _ η ∧ ((ihom D).obj C).δ 0 t = ((ihom D).map G).app _ ε ∧ ((ihom D).obj C).δ 1 t = ((ihom D).obj C).σ 0 (diagramVertex G)) : ∃ point : CategoryTheory.Spaces.infinityCategory.{u} _⦋0⦌, (point.obj (.mk (ULift.up 0))).obj = (Δ[0] : SSet.{u}) ∧ ∃ (P : AdjunctBifunctorModel F (𝟙 D) point) (Q : AdjunctBifunctorModel (𝟙 C) G point) (Φ Ψ : ((ihom (SSet.uliftFunctor.{u + 1, u}.obj (C.op ⊗ D))).obj CategoryTheory.Spaces.infinityCategory.{u}) _⦋1⦌), (((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 1 Φ = diagramVertex P.diagram) ∧ (((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 0 Φ = diagramVertex Q.diagram) ∧ (((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 1 Ψ = diagramVertex Q.diagram) ∧ (((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 0 Ψ = diagramVertex P.diagram) ∧ (∃ t s : ((ihom _).obj CategoryTheory.Spaces.infinityCategory) _⦋2⦌, ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 2 t = Φ ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 0 t = Ψ ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 1 t = ((ihom _).obj CategoryTheory.Spaces.infinityCategory).σ 0 (diagramVertex P.diagram) ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 2 s = Ψ ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 0 s = Φ ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 1 s = ((ihom _).obj CategoryTheory.Spaces.infinityCategory).σ 0 (diagramVertex Q.diagram)) ∧ ∃ (φ : adjunctCoupling F (𝟙 D) ⟶ adjunctCoupling (𝟙 C) G) (ψ : adjunctCoupling (𝟙 C) G ⟶ adjunctCoupling F (𝟙 D)) (hφ : φ ≫ adjunctProjection (𝟙 C) G = adjunctProjection F (𝟙 D)) (hψ : ψ ≫ adjunctProjection F (𝟙 D) = adjunctProjection (𝟙 C) G), AdjunctTransport P Q Φ φ ∧ AdjunctTransport Q P Ψ ψ ∧ ∀ (x : C _⦋0⦌) (d : D _⦋0⦌), ∃ (ηx : (mappingSpace C x (G.app _ (F.app _ x))) _⦋0⦌) (εd : (mappingSpace D (F.app _ (G.app _ d)) d) _⦋0⦌) (iP : AdjunctFiberComparison F (𝟙 D) x d) (iQ : AdjunctFiberComparison (𝟙 C) G x d), ηx.1 = (evaluation C C x).app _ η ∧ εd.1 = (evaluation D D d).app _ ε ∧ ∃ (f : mappingSpace D (F.app _ x) d ⟶ mappingSpace C x (G.app _ d)) (g : mappingSpace C x (G.app _ d) ⟶ mappingSpace D (F.app _ x) d), f = lift (mappingSpaceMap G (F.app _ x) d) (SSet.const ηx) ≫ adjunctComposition C x (G.app _ (F.app _ x)) (G.app _ d) ∧ g = lift (SSet.const εd) (mappingSpaceMap F x (G.app _ d)) ≫ adjunctComposition D (F.app _ x) (F.app _ (G.app _ d)) d ∧ IsWeakHomotopyEquivalence f ∧ Nonempty (SSet.Homotopy (f ≫ g) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (g ≫ f) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (iP.map ≫ rightFibrationFiberMap _ _ φ hφ (adjunctBaseVertex x d)) (SSet.opFunctor.map f ≫ iQ.map)) ∧ Nonempty (SSet.Homotopy (iQ.map ≫ rightFibrationFiberMap _ _ ψ hψ (adjunctBaseVertex x d)) (SSet.opFunctor.map g ≫ iP.map))",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "States the unit/counit hypotheses with both functor-category triangles. Associated space-valued bifunctors are classified by the actual twisted-arrow pullbacks over C.op × D; inverse edges in the full space-valued functor category and transport cylinders prescribe their action. Canonical opposite-right-pinched fiber comparisons specify the displayed adjunct and inverse formulas on whole mapping spaces. All auxiliary declarations belong to this node; only the main theorem is postponed. Second reading reuses the published rightFibrationFiberMap instead of duplicating the strict-fiber map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f38ea1a5",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Read the node, the module, the report and all six statement-dependency declarations (TwistedArrowLeftFibration, EnhancedDiagramsCones comma/mappingSpace, MappingCompositionStatement, fiber, rightFibrationFiberMap), against Kerodon 02F1/02EK/01PF/03MT. Hypotheses match exactly: η, ε are functor-object edges with correct endpoints; hF/hG are 2-simplices with correct whiskerings and identity long edges, no stronger. Adjunct formulas G(v)∘η_x and ε_d∘F(u) have the correct order and use evaluated components. Weak equivalence plus both homotopies are present. Coherence: twisted-arrow-pullback classifying models (comma false = S_{*/}, point Δ[0]), inverse edges Φ/Ψ with two 2-simplices, transport cylinders and canonical collapse fiber comparisons pin Φ to the adjunct maps; the comparison's weak-equivalence field follows from the target-fixed comparison in twistedArrow_left_fibration. The composition representative is homotopy-determined and used only in homotopy-invariant clauses. Edge cases (empty categories and mapping spaces, noninvertible η/ε, universes) are fine. The node differs from base only in lean and three acyclic stmt_deps (closures checked); the statement is verbatim. 10 declarations, no collisions, docstrings OK, only sorry is the main theorem, both report sections present. nt_compile.py --json on the snapshot: rc 0, no errors or warnings."
  }
 }

@@ -28,7 +28,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-right-anodyne"
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-cone-mono-right-anodyne"
  ],
  "proof": [
   {
@@ -289,5 +290,24 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-8c41687a8 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-join-pushout-right-anodyne, the statements of every cited node (def-cbc-enhanced-diagrams-cones, def-coef-infinity-right-anodyne, lem-coef-infinity-cone-mono-right-anodyne), the unit record and the item's citers. Source: HTT Lemmas 4.2.3.5 and 4.2.3.6, p. 251. HTT is not in the local literature tree, so I checked from my own reading of HTT; the delivery correctly lists it as WANTED and marks proof_origin as agent. The item statement is unchanged and matches 4.2.3.6. The helper matches 4.2.3.5: its hypothesis is that B0 into B is a weak homotopy equivalence, which is correct, since a right-anodyne hypothesis would not fit the use in 4.2.3.6. Join and horn conventions agree across all three nodes. Step 1: weak contractibility gives a nonempty realization, hence a vertex b, and {b} into B is a weak equivalence (one component, trivial homotopy groups at the single base point). Step 2: A0*{b} into A*{b} is isomorphic to the cone map u^▷, so it is right anodyne by the cone lemma and pushout closure. I checked the union summand by summand: the pure parts meet in A0 and {b}, the mixed parts meet in (A0)_a x {b}_c, so A0*B into P is a pushout. Step 3 is the helper with i=u and j={b} into B; its domain is exactly P. Step 4 is a two-step composite, equal to u*id_B. proof_deps equals the union of the step uses. Helper checked on small cases: Lambda^2_1 and Lambda^2_2 into Delta^2; identity cases; the generator case gives a horn with missing index n+1+k, always at least 1. It is statement-only, self-contained, true and does not restate the item. Duplicate search: grep of the DAG for 4.2.3.5/4.2.3.6, join with right anodyne, and join with weak homotopy equivalence; I read about 15 nearby join and anodyne nodes and none states it. Mathlib has no simplicial join, so no leaf. Route: the only node from another unit is the definition def-cbc-enhanced-diagrams-cones, which is a notion, not a route step. I accepted the declared tool_use for it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ContractibleJoinRightAnodyne",
+  "declaration": "SSet.rightAnodyneExtensions_join_map_of_isContractible",
+  "file": "lean/Sheaf/CategoryTheory/ContractibleJoinRightAnodyne.lean",
+  "statement": "theorem rightAnodyneExtensions_join_map_of_isContractible {A₀ A B : SSet.{u}} (u : A₀ ⟶ A) (hu : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (u.app n)) (hB : Enhanced.IsContractible B) : rightAnodyneExtensions (joinFunctor.map (CategoryTheory.Prod.mkHom u (𝟙 B)))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the ordered joinFunctor from the already recorded cone-monomorphism node, added to stmt_deps; no new join definition. Weak contractibility and right anodyne maps use the recorded dependency definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89f0d47c6",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches node and HTT Lemma 4.2.3.6 clause by clause: degreewise-injective u (not stronger), hB = Enhanced.IsContractible (B→Δ⁰ weak homotopy equivalence), recorded SSet.joinFunctor with the correct A⋆B orientation via Prod.mkHom u (𝟙 B), conclusion rightAnodyneExtensions, no Kan/quasicategory hypothesis, one arbitrary universe. lean.statement verbatim; node diff vs side clone is only lean plus the justified stmt_deps addition of the landed join-owning cone node. No definitions, proof is sorry only, docstrings carry source and blueprint id, real Worker report and Second reading by NX sections. Edge cases checked: A₀=∅, A=∅, identity u, B=Δ⁰ gives the cone lemma, B=∅ excluded, non-Kan B included. nt_compile.py --json compile clean (rc 0, no warnings). Only finding is cosmetic: report.md shows 'Lemma the project server' in place of 4.2.3.5/4.2.3.6; node and docstrings cite correctly."
  }
 }

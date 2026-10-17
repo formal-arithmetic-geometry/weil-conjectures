@@ -302,5 +302,35 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-6032fa265 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps, the statements of all 10 cited nodes, the citer lem-coef-infinity-boundary-extension-small-classes (step 3), the unit and chapter records, and the possible duplicate lem-coef-simplicial-relative-homotopy-invariance (a different statement, unsplit). The delivery has 0 new nodes and leaves the statement unchanged; this is not a target node, so there is no base-change morphism or coefficient category to compare. The source is HTT 5.4.1.1 / 1.1.5 / 2.2.5.1, which is online only and not in literature/, so I could not open it; the agent proof_origin and the WANTED line are correct. No SGA source. Tested the statement: for n=1, T is empty and the classes are pi_0 D(x,y); for n=2, extensions are paths from b(02) to the composite, taken rel endpoints; empty extension sets and x=y also check. n>=1 is required by step 4, where every vertex lies in the boundary. Step checks: (2) the colimit universal property of C[boundary of Delta^n], including the 0/0, 0/1 and 1/1 face intersections; (4) every edge of the fiber F has degenerate components, so it is a pointwise equivalence, lies in the core and so in the Kan fiber K; reversing and composing inside K gives equivalence edges in F, and F is exactly the relative functor simplicial set of the cylinder criterion; (5) the Joyal factorization of the fold meets that criterion's hypotheses; (6) C preserves the pushout, is left Quillen, and the detection node gives the DK equivalence; (7) pushing out the pushout-product gives exactly u_0 into R=(QxI) glued to T along TxI, and anodyne maps are Kan-Quillen trivial cofibrations; (8) B_R adds no new composites, and the endpoint lift is a mono against a trivial Kan fibration; (9) checked both lifting squares of the cylinder comparison, and D is Bergner-fibrant because it is locally Kan; (10) the two generated relations correspond. Route: every cited statement node is in sk-prop-sf-biduality-general, and def-cbc is only a definition; no tool_uses declared or needed. proof_deps equals the union of the step uses; no cycle (the item is not reachable from its 232 dependencies). Mathlib searches cover all three kinds. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentNerveRelativeCubeComparison",
+  "declaration": "CategoryTheory.coherent_nerve_relative_cube_comparison",
+  "declarations": [
+   "CategoryTheory.relativeCube",
+   "CategoryTheory.relativeCubeBoundary",
+   "CategoryTheory.relativeBoundaryObject",
+   "CategoryTheory.cubeComparisonExtensions",
+   "CategoryTheory.relativeEndpointHom",
+   "CategoryTheory.boundarySimplexFunctor",
+   "CategoryTheory.boundarySimplexObject",
+   "CategoryTheory.boundarySimplexArrowElement",
+   "CategoryTheory.RelativeCubeComparison",
+   "CategoryTheory.coherent_nerve_relative_cube_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentNerveRelativeCubeComparison.lean",
+  "statement": "theorem coherent_nerve_relative_cube_comparison (D : SCat.{u}) (hD : IsLocallyKan D) (n : ℕ) (hn : 1 ≤ n) (b : (SSet.boundary n).toSSet ⟶ CoherentNerve.nerveFunctor.obj D) : Nonempty (RelativeCubeComparison D n hn b)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4454b3fc9",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Item node statement unchanged (JSON diff vs side clone: only the lean field added); dependency node copies identical. Every node clause matches RelativeCubeComparison: cube = degreewise (Δ[1])^(n-1); boundary = union of coordinate faces held constantly at ε; cubeIso fixed by the characteristic clause (Mathlib Path arrows are inclusions, so this is satisfiable); boundaryMap fixed by zero_faces (all non-surjective α hitting 0,n) and one_faces (both factors, sHomComp to eComp in the correct order); extensions/classes Equivs fixed by their formula fields; homotopy_iff uses Mathlib RelativeMorphism.HomotopyClass (Quot of boundary-fixed X⊗Δ[1] homotopies, i.e. the generated relation) on both sides. Hypotheses are SCat.{u} + IsLocallyKan + 1≤n with no smallness, universe or extra assumptions. Edge cases n=1 (point cube, empty boundary, vacuous face clauses), n=2, empty extension sets and x=y all check. Real definitions, source/blueprint docstrings, 10-step proof docstring, sorry only in the theorem, lean.statement verbatim, declarations complete, proof_deps = union of step uses, both report sections present. nt_compile.py --json on the snapshot text (path form refuses files outside the side tree) built the side overlay and the item in 2.4 s: exit 0, no errors or warnings. Minor: helper boundarySimplexObject is unused but documented and listed."
  }
 }
