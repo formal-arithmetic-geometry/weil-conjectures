@@ -15859,3 +15859,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:37 L: batch 20261017T183131 dependency take-out
 - 18:48 L: merged deliver/A2/Sheaf.CategoryTheory.DerivedPerfectSmallClassCore (stage 3; reviewer PASS; first push; landing 20261017T184844-L-2155340 (interface); batch 20261017T184840; modules 2; new nodes 1)
 - 18:55 L: returned deliver/B4/WeilConjectures.PoincareDuality.Poincare (reviewer RETURN: (the landing tools, head 20401a8b4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Poi)
+- 18:55 L: merged deliver/A4/Sheaf.CategoryTheory.DerivedPerfectSmallClassProperties (stage 3; reviewer PASS; first push; landing 20261017T185548-L-2338215 (interface); batch 20261017T185544; modules 3; new nodes 2)

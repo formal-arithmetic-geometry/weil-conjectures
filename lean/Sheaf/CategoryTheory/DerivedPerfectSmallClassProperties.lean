@@ -5,7 +5,8 @@ public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import Mathlib.CategoryTheory.Presentable.Basic
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Sheaf.CategoryTheory.DerivedPerfectSmallClassCore
+import Sheaf.CategoryTheory.DerivedPerfectSmallClassFactorization
+import Sheaf.CategoryTheory.DerivedPerfectSmallClassFiniteLifting
 
 @[expose] public section
 
@@ -43,6 +44,29 @@ theorem derived_perfectSmallClass_properties
       ∃ (J : Type v) (a : J → I), S (∐ fun j ↦ Y (a j)) ∧
         ∃ g : U ⟶ ∐ fun j ↦ Y (a j),
           g ≫ Sigma.desc (fun j ↦ Sigma.ι Y (a j)) = f) := by
-  sorry
+  constructor
+  · intro I X Y f hf U hU h
+    obtain ⟨J, (_ : Finite J), a, hJ, g, hg⟩ :=
+      derived_factor_through_small_subcoproduct α I Y U (hcompact U hU) h
+    obtain ⟨q, hq⟩ := (derived_finite_coproduct_surjective I X Y f J a U (fun j ↦
+      hf (a j) U hU)) g
+    refine ⟨q ≫ Sigma.desc (fun j ↦ Sigma.ι X (a j)), ?_⟩
+    change (q ≫ Sigma.desc (fun j ↦ Sigma.ι X (a j))) ≫
+      Limits.Sigma.map f = h
+    have hmap : Sigma.desc (fun j ↦ Sigma.ι X (a j)) ≫ Limits.Sigma.map f =
+        Limits.Sigma.map (fun j ↦ f (a j)) ≫
+          Sigma.desc (fun j ↦ Sigma.ι Y (a j)) := by
+      apply Sigma.hom_ext
+      intro j
+      rw [Sigma.ι_desc_assoc]
+      rw [Limits.Sigma.ι_map]
+      rw [Limits.Sigma.ι_map_assoc]
+      rw [Sigma.ι_desc]
+    change q ≫ Limits.Sigma.map (fun j ↦ f (a j)) = g at hq
+    rw [Category.assoc, hmap, ← Category.assoc, hq, hg]
+  · intro I Y hY U hU f
+    obtain ⟨J, hfinite, a, hJ, g, hg⟩ :=
+      derived_factor_through_small_subcoproduct α I Y U (hcompact U hU) f
+    exact ⟨J, a, hSsum J (fun j ↦ Y (a j)) hJ (fun j ↦ hY (a j)), g, hg⟩
 
 end CategoryTheory
