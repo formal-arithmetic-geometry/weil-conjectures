@@ -237,5 +237,28 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-bed6a2e88 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the full statements of all seven cited nodes, the unit and the current ancestor proof. Not checked against a copy: HTT is not archived and the network is blocked, so Def 5.3.4.5, Prop 5.3.4.13 and Cor 5.3.4.14 were checked from my knowledge of the standard text, plus independent proof checks and small cases. The item's statement and stmt_deps are unchanged against the side DAG (read-only diff). Its hypotheses match HTT 5.3.4.14 one by one, and it is not a target node, so there is no base-change morphism or coefficient category to check. Step 1: the source-fixed arrow fibration A_q classifies H(q,-); its pullback along the diagonal is exactly the def-cbc cocone category, classified by H(q,-)∘Δ_L through the pullback compatibility of the classification node; the join-slice comparison is an equivalence over E; the vertex-component criterion from the cone calculus makes G_q≃F_q. The classification node is applied with universes (U',U''). Step 2: the objectwise functor-category colimit clause of lem-coef-infinity-yoneda-presheaf-limits applies, since ev_l∘Δ_L=id; vacuous for L=∅. Step 3: every hypothesis of the new lemma holds with the same κ, and the definition uses the actual image cocone into S_{U'}. Step 4: the dual cocone mapping-space criterion of the cone calculus transports colimiting cocones along α, so 'transport' is spelled out (E5). Step 5 is genuinely elementary: Fun(∅,E)=Δ^0. The new node lem-coef-pointwise-compact-diagrams is HTT 5.3.4.13 and is true. Small cases: K empty, a point, finite discrete, Δ^1 with κ=ω (a finite homotopy pullback commuting with filtered colimits), and C empty. It is statement-only (B1-B7 pass, 9 logged searches with no Mathlib match) and does not restate the item, which is about a different functor (D1). Duplicate search covered rg for 5.3.4.1[34] and compact/Fun/filtered statements across the whole DAG, plus blueprint_refs. lem-coef-accessible-diagram-presentations has the conclusion as a clause only under stronger accessibility and cardinal hypotheses. accessible-compact-cocones and spine-tower contain pieces of the proof only in their proofs. same_as=[] is correct. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, generic coherent-functor and cocone infrastructure; the same tool_use is already on lem-coef-join-slice-cocone-comparison in this unit. The new node has no lean_audit field, as about half of recent new nodes; tools/lean_status.py fills it, so it is not a fault. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactDiagramCoconeTransport",
+  "declaration": "SSet.Enhanced.compact_diagram_cocone_transport",
+  "declarations": [
+   "SSet.Enhanced.compactDiagramCoconeTransportFunctor",
+   "SSet.Enhanced.compactCoconeSpacesLift",
+   "SSet.Enhanced.compact_diagram_cocone_transport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompactDiagramCoconeTransport.lean",
+  "statement": "theorem compact_diagram_cocone_transport (κ : Cardinal.{u}) (hκ : κ.IsRegular) (E : SSet.{v}) [Quasicategory E] (hEsmall : SSet.Presentability.IsLocallySmall.{u, v} E) (hEcolim : SSet.Presentability.HasSmallKappaFilteredColimits E κ) (L : SSet.{v}) (hL : SSet.Presentability.IsKappaSmall κ L) (q : L ⟶ E) (hq : ∀ l : L _⦋0⦌, SSet.Presentability.IsKappaCompact E κ (q.app (op ⦋0⦌) l)) : leftFibration (coherentCosliceProjection q) ∧ (∃ T : TransportClassifier.{v, v + 1} (SSet.uliftFunctor.{v + 1, v}.obj E) true, TransportClassificationClauses T ∧ TransportOverEquivalence (T.representative (compactDiagramCoconeTransportFunctor q ≫ compactCoconeSpacesLift)).projection (SSet.uliftFunctor.{v + 1, v}.map (coherentCosliceProjection q))) ∧ (∀ (I : SSet.{v + 1}) (hI : SSet.Quasicategory I), SSet.Presentability.IsSmall.{u, v + 1} I → @SSet.Presentability.IsKappaFiltered.{u, v + 1} κ I hI → ∀ (F : I ⟶ SSet.uliftFunctor.{v + 1, v}.obj E) (t : (coconeCategory F) _⦋0⦌), IsColimiting F t → IsColimiting (F ≫ compactDiagramCoconeTransportFunctor q) (CategoryTheory.Spaces.mappedCocone (compactDiagramCoconeTransportFunctor q) F t))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-998ccd379",
+  "group": "NA",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: regular κ:Cardinal.{u}; E:SSet.{v} quasicategory, IsLocallySmall, HasSmallKappaFilteredColimits; κ-small L; vertexwise IsKappaCompact q; no colimit of q; empty L allowed. Conclusion: leftFibration(coherentCosliceProjection q); an existential TransportClassifier(ulift E,true) with TransportClassificationClauses and a TransportOverEquivalence between the representative of F_q=ulift(Δ_L)≫corepresented(Fun(L,E)) q and the lifted coslice projection; and preservation of every small κ-filtered colimiting cocone (the same I-class as IsKappaCompact) with the actual Spaces.mappedCocone. Both defs have real data; only the theorem is sorry; docstrings carry source, blueprint and the 5 proof steps; no line over 100; proof-dependency imports follow the project plan. Node differs from side only in lean; lean.statement is verbatim; the 4 dependency nodes are byte-identical. nt_compile --json exit 0, 2.9 s, no errors or warnings. Remarks only: the classifier is existential because the dependency offers no canonical one; report has redaction artefacts."
  }
 }

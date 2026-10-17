@@ -26,7 +26,9 @@
   "place": "Definition 7.1.2 and Proposition 7.1.3 (localization existence); Theorem 7.2.8 and formula (7.2.10.3) (span mapping spaces); Theorem 7.2.16, Corollary 7.2.18 and Definition 7.2.20 (pullback-stable denominators). Online PDF read on 2026-10-17; local archival copy WANTED. No Stacks tag states this result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -214,5 +216,47 @@
   "group": "Q105",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-1f3e067a6 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the statement of every cited node in full, and checked the unit and chapter route. Cisinski CatLR is not archived locally and the service blocks network access, so I could not check the cited places in the book. All four nodes already record it as WANTED and the proof is marked agent-written; I checked every statement and step mathematically instead. One fault, repaired: item step 2 said that horn attachments add no vertices, so every vertex of L comes from A and q is essentially surjective. That is false, because the Kan completion S attaches Delta^1 along Lambda^1_i = Delta^0 and so adds vertices. The conclusion still holds: step 3 proves essential surjectivity correctly from lem-coef-localization-homotopy-category. I rewrote that sentence in fixes/dag/nodes/sec-six-functors/lem-coef-trivial-fibration-fraction-model.json (step 2 text only). The item statement keeps the base meaning; the pullback clause is only spelled out. Tested on [1] with W=T=all arrows (R_T(1,1) is contractible, L is a point), on discrete categories, and on T=W=isomorphisms. Step 1: the pushout gives a strict pullback of the trivial fibration H(S,E)->H(NW,E), and Fun(S,E)=H(S,E) because S is Kan. Step 2: inner pushout-products, and a trivial fibration between quasicategories is an equivalence. Step 3: ps=1, rs=w gives T-inverting = W-inverting. Step 4: 1_x is terminal in T/x and the comma category is R_T. Step 5: the pullback adjunction v_* -| v^* holds for v in T (the projection a is in T), and the split gives W-invariance. Steps 6-7: every hypothesis of the criterion is supplied, and U gives a map of data. New nodes: edge-inverting-anodyne is true (marked K^sharp, E^natural lifting) and is not covered by marked-anodyne-lifting-calculus (core only) or simplicial-groupoid-localization (equivalence only). Horn completion is a true small-object argument; the Ex^infty node lacks the anodyne property and is cyclic here. The terminal-local criterion is true (hocolim over I^op of corepresentables, q_!, contractible I, locality) and does not restate the item. No cycles. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TrivialFibrationFractionModel",
+  "declaration": "CategoryTheory.TrivialFibrationFractions.trivial_fibration_fraction_model",
+  "declarations": [
+   "CategoryTheory.TrivialFibrationFractions.FractionCategory",
+   "CategoryTheory.TrivialFibrationFractions.FractionHom",
+   "CategoryTheory.TrivialFibrationFractions.fractionCategory",
+   "CategoryTheory.TrivialFibrationFractions.apex",
+   "CategoryTheory.TrivialFibrationFractions.postcompose",
+   "CategoryTheory.TrivialFibrationFractions.mapFractions",
+   "CategoryTheory.TrivialFibrationFractions.TotalFractionCategory",
+   "CategoryTheory.TrivialFibrationFractions.TotalFractionHom",
+   "CategoryTheory.TrivialFibrationFractions.totalFractionCategory",
+   "CategoryTheory.TrivialFibrationFractions.targetProjection",
+   "CategoryTheory.TrivialFibrationFractions.largeNerveMap",
+   "CategoryTheory.TrivialFibrationFractions.targetNerveMap",
+   "CategoryTheory.TrivialFibrationFractions.targetFiber",
+   "CategoryTheory.TrivialFibrationFractions.mapTotalFractions",
+   "CategoryTheory.TrivialFibrationFractions.localizedEdge",
+   "CategoryTheory.TrivialFibrationFractions.TargetComparison",
+   "CategoryTheory.TrivialFibrationFractions.CoherentTargets",
+   "CategoryTheory.TrivialFibrationFractions.FractionFormula",
+   "CategoryTheory.TrivialFibrationFractions.Postcomposition",
+   "CategoryTheory.TrivialFibrationFractions.LocalizationNaturality",
+   "CategoryTheory.TrivialFibrationFractions.trivial_fibration_fraction_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TrivialFibrationFractionModel.lean",
+  "statement": "theorem trivial_fibration_fraction_model (C : Type u) [Category.{v} C] (W T : MorphismProperty C) [W.HasTwoOutOfThreeProperty] [T.IsMultiplicative] [T.HasPullbacks] [T.IsStableUnderBaseChange] (hWiso : MorphismProperty.isomorphisms C ≤ W) (hTiso : MorphismProperty.isomorphisms C ≤ T) (hTW : T ≤ W) (hsplit : ∀ (a b : C) (f : a ⟶ b), W f → ∃ (z : C) (s : a ⟶ z) (p : z ⟶ a) (r : z ⟶ b), s ≫ p = 𝟙 a ∧ s ≫ r = f ∧ T p ∧ T r) : ∃ (L : SSet.{max u v w z t}) (q : largeNerve.{u, v, max u v w z t} C ⟶ L), IsLocalization W q ∧ (∀ l : L _⦋0⦌, ∃ x : C, EquivalentObjects L (object q x) l) ∧ (∀ (x y : C) (a b : FractionCategory T x y) (h : a ⟶ b), W h.hom) ∧ ∃ c : ∀ x y : C, largeNerve.{max u v, v, max u v w z t} (FractionCategory T x y) ⟶ SSet.Enhanced.mappingSpace L (object q x) (object q y), CoherentTargets.{u, v, max w z t} T q c ∧ Postcomposition.{u, v, max w z t} T q c ∧ (∀ (D : Type w) [Category.{z} D], LocalizationNaturality.{u, v, w, z, t} W T q c D) ∧ (∀ x y : C, SSet.Enhanced.IsWeakHomotopyEquivalence (c x y)) ∧ FractionFormula.{u, v, max w z t} T q c ∧ ∀ (x y : C) (e : (SSet.Enhanced.mappingSpace L (object q x) (object q y)) _⦋0⦌), ∃ a : FractionCategory T x y, SSet.π₀.mk ((c x y).app (op ⦋0⦌) (ULift.up (ComposableArrows.mk₀ a))) = SSet.π₀.mk e",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of return 9c301e145c77: existential L and q use the landed coherent-localization interface; direct fraction-nerve mapping-space weak equivalences have coherent targets, actual postcomposition, universal-property naturality with independent source/target category universes and coherent endpoint transport, the Composes fraction formula, and component surjectivity. All hammock declarations are removed. Only lean and the two authorized landed stmt_deps additions change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c5c952d3",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read the node, all three statement dependencies, the module, the report and return A-D. Each hypothesis is exact: two-out-of-three, isomorphisms in W and T, T closed under composition, relative T.HasPullbacks plus base-change stability, existential split s,p,r with s≫p=𝟙 and s≫r=f. Fractions reuse Mathlib RightFraction with a real category of commuting apex maps; W h.hom is stated. ∃ L q with the landed IsLocalization, EquivalentObjects essential surjectivity, weak equivalences c into the right-pinched mappingSpace, Postcomposition tied to q g by Composes, CoherentTargets/TargetComparison using the exact rightPinchPrism formula, LocalizationNaturality with an η-linked Q and ξ endpoints equal to η restrictions (independent D universes; checked provable by Yoneda), FractionFormula with correct face orientation, π0-surjectivity. Statement verbatim; 21 declarations match; node diff is only lean plus two landed acyclic stmt_deps; only one module and node changed; sorry only in the theorem; docstrings follow the 7 node steps; return A-D repaired. nt_compile --json rc=0, 2.6 s, no errors or warnings. No findings requiring repair."
  }
 }

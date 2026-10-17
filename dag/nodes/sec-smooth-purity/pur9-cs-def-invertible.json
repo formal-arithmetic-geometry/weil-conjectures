@@ -127,5 +127,37 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-94678d024 (reviewer sub-agent of L); spot-checked: I read the item in full against main-20261015 sec-smooth-purity/sk-lem-coprojection/pur9-cs-def-invertible.md (order 2349). It matches the source's three sentences: the triple (L,L',e) with e: L⊗^L L' ≅ A_X, the existence predicate, and the same definition on X_Et. It adds no hypothesis and is not weakened. Dependencies read: def-weil-l-adic-coefficient-extension (A_{E,n}, n≥1); def-weil-pbc-proetale-site (site, size convention, sheafified A_Y, unbounded D); def-weil-pbc-etale-site; def-weil-pbc-derived-categories (unbounded D(T_Et,R)); def-weil-pbc-constant-sheaf. It is a definition with no proof, no citations and no new nodes, so B and D have nothing to check. Duplicate search over the whole DAG: def-kun-torsion-invertible is a different notion; def-pur-section-invariant and def-pur-co-smoothness only use tensor-invertibility; lem-pur-coprojection cites this item. same_as=[] is right. The nine Mathlib searches cover all three kinds and find no leaf (CommRing.Pic is about ordinary modules). Small cases checked: shifts of A_X are invertible, 0 on nonempty X is not, for n≥2 A/ϖ is not, the empty and disconnected cases work. One fault, repaired (E6/C4): the item took ⊗^L from the statement node lem-weil-pbc-site-derived-tensor-descent, which resolves both factors. The purity conventions (def-pur-conventions → def-weil-derived-pullback-tensor-hom → def-weil-derived-tensor) and the consumer lem-pur-coprojection use the tensor that resolves only the first factor, and the chapter's etale tensor is def-kun-derived-tensor. The two constructions agree only up to a comparison no node states. The fix file fixes/dag/nodes/sec-smooth-purity/pur9-cs-def-invertible.json cites def-weil-derived-tensor on D(X_Proet,A) and def-kun-derived-tensor on D(X_Et,A) and replaces the lemma with these two in stmt_deps. I checked that each defines the tensor on the same category with the same unit sheaf, and that neither depends on the item, so there is no cycle. No SGA is cited, the route and unit are unchanged, and no tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.Pur9Invertible",
+  "declaration": "AlgebraicGeometry.Scheme.IsProEtaleInvertibleAtLevel",
+  "declarations": [
+   "AlgebraicGeometry.TensorInvertibleData",
+   "AlgebraicGeometry.IsTensorInvertible",
+   "AlgebraicGeometry.Scheme.proEtaleComplex",
+   "AlgebraicGeometry.Scheme.proEtaleQuotient",
+   "AlgebraicGeometry.Scheme.proEtaleConstantComplex",
+   "AlgebraicGeometry.Scheme.ProEtaleInvertibleData",
+   "AlgebraicGeometry.Scheme.IsProEtaleInvertible",
+   "AlgebraicGeometry.Scheme.IsProEtaleInvertibleAtLevel",
+   "AlgebraicGeometry.Etale.DerivedCategory.etaleDerivedTensor",
+   "AlgebraicGeometry.Etale.DerivedCategory.IsEtaleInvertible",
+   "AlgebraicGeometry.Etale.DerivedCategory.IsEtaleInvertibleAtLevel"
+  ],
+  "file": "lean/Sheaf/Paper/Pur9Invertible.lean",
+  "statement": "def IsProEtaleInvertibleAtLevel (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) (X : Scheme.{u}) (L : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The module records the chosen inverse triple on both sites. The pro-etale side exposes its K-flat-resolution model explicitly; the etale side uses the existing derived tensor bifunctor. The finite-level declarations bind ℓ, E, n and n ≥ 1 exactly; the etale encoding uses the standard ULift coefficient universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-882adf850",
+  "group": "Q35",
+  "result": "pass",
+  "note": "I read the node, the blueprint source (main-20261017, order 2349), all 7 statement dependencies and their declarations in the side clone, the delivered module and the report. Every clause matches: the pro-etale chosen triple uses the recorded derivedTensor with a K-flat resolution of the first factor and one isomorphism to the degree-zero constant sheaf, with existence as Nonempty. The etale side uses the recorded DerivedCategoryModule (ULift encoding), Etale.derivedTensor and Etale.constantComplex. No added hypotheses and no second inverse isomorphism. All universes are bound; E : Type u is forced by proEtaleDerivedCategory's size convention and is harmless. Edge cases n=1, empty and disconnected X, the zero object and shifts are correct. No duplicate: the upstream etale isInvertible has two isomorphisms and no pro-etale clause. Docstrings carry the source place and blueprint id; no hollow definitions; the statement field is verbatim. The node copy matches the side clone apart from the lean record. The report has both required sections. nt_compile.py exited 0 with no errors or warnings. No findings."
  }
 }
