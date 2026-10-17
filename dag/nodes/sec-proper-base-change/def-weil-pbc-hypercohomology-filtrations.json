@@ -304,18 +304,18 @@
   "file": "lean/Sheaf/AlgebraicGeometry/HypercohomologyFiltrations.lean",
   "statement": "def hypercohomologyFiltrations (n : ℤ) : PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj K.obj))) × PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyBaseChangeFunctor f g).obj (DerivedCategory.Q.obj K.obj))) × PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologySecondFunctor f' g').obj (DerivedCategory.Q.obj K.obj)))",
   "branch": "newtargets-dag",
-  "by": "Q37",
+  "by": "N6",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The published compiled hypercohomologyCouple has no F or K parameters (#check gives only {B} [Category B] [Abelian B] → BigradedExactCouple B 0), so it cannot describe the three truncation spectral sequences. Rebuild the full recorded construction, making F and K explicit in the couple declaration. It retains the actual truncation terms and maps, all three image filtrations, convergence, bridge equations, and canonical inverse-image comparisons. No mathematical statement is changed."
+  "note": "Section 1(B) repair: the published compiled hypercohomologyCouple has type {B} [Category B] [Abelian B] : BigradedExactCouple B 0, with body sorry, omitting both F and K; applying the recorded construction to the three functors gives Function expected. Re-elaborate the full recorded source, making F, its triangulated structures and K explicit at hypercohomologyCouple. Its D/E terms, canonical maps, exactness, actual image filtrations, all three convergence clauses, bridge equations, and canonical inverse-image comparisons are retained. No notion or theorem statement is replaced by a private copy."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d55936ae5",
-  "group": "Q37",
+  "reviewer": "NT-stage2-cc-c17827e8b",
+  "group": "N6",
   "result": "pass",
-  "note": "Item boundedBelow_truncation_criterion matches node and blueprint order 1439. ChosenCartesianSquare e h g f gives Y = T×_S X with fst e and snd h. K is D^+_{P-tor} via AbelianDerivedCategoryPlusTorsionOfPrimes. The three IsIso clauses use truncLEι n through Rg_*, f⁻¹Rg_* and Rh_*e⁻¹. The support clause says page r (n-q) q is zero for r>=2, q>n on every representative; page r = pageCouple(r-2), so this starts at E2. No extra hypotheses; universes follow the dependency convention; statement verbatim; only the lean record changed. The section 1(B) lean-only repair of def-weil-pbc-hypercohomology-filtrations makes F and K explicit in hypercohomologyCouple. A probe confirmed the published decl has neither F nor K. Repaired type is correct and the argument order matches citers. Data is real; sorry appears only in theorems, with a diagnostic note in the record. nt_compile of both files is clean apart from permitted sorry. Importer TruncationExchangeAbutment is clean. HypercohomologyConvergence already fails on a duplicate ExactCoupleShifted import, identically against the live dependency, so it is unrelated to this delivery."
+  "note": "Clause-by-clause match: ChosenCartesianSquare e h g f instantiates Y≅pullback g f with fst=e, snd=h; K : AbelianDerivedCategoryPlusTorsionOfPrimes T P; truncLEι n; Rg_*, Rg_*⋙f⁻¹, e⁻¹⋙Rh_* with correct domains; page r = pageCouple(r-2), so r≥2 covers E2 and later pages, vanishing only for q>n at (n-q,q), for every bounded-below representative. No extra hypotheses or universe restrictions. Edge cases checked: n<0, K=0, empty schemes, P empty or with non-primes, q=n+1. §1(B) repair of hypercohomologyCouple (explicit F, K) keeps real data; only proofs are sorry. Both lean.statement fields equal the file signatures verbatim; node copies change only lean. nt_compile --json of both files: rc=0, no diagnostics (4.1 s / 1.9 s). The report has Worker report and Second reading by N6 sections. Note: functionally identical to Q37's version already in the side clone; only authorship, docstrings and imports differ."
  },
  "reviewed_proof": {
   "date": "2026-10-15",
