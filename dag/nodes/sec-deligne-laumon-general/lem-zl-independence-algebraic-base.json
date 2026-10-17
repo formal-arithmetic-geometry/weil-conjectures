@@ -1,0 +1,78 @@
+{
+ "id": "lem-zl-independence-algebraic-base",
+ "kind": "statement",
+ "title": "Algebraic independence is unchanged by an algebraic base extension",
+ "statement": "Let $k\\subseteq E\\subseteq K$ be a tower of fields [def-pc-field-extension], with $E/k$ algebraic: every element of $E$ is a root of a nonzero polynomial over $k$ [def-weil-algebraic-element]. Let $I$ be an index set and let $(x_i)_{i\\in I}$ be a family in $K$. Then the family is algebraically independent over $k$ if and only if it is algebraically independent over $E$ [def-kun-transcendence-degree].",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Tag 037J (lemma-algebraic-closure-in-finitely-generated), fields.tex lines 3584--3607: implicit algebraic-independence prerequisite for applying Tag 0G1M to a finite intermediate field. The general algebraic-tower statement is supplied exactly by Algebra.IsAlgebraic.algebraicIndependent_iff, Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean:96--98 (read with its hypotheses at lines 29--35 and 82)."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a tower of fields F contained in E contained in K with E algebraic over F, a family of elements of K is algebraically independent over F if and only if it is algebraically independent over E",
+   "results": "Algebra.IsAlgebraic.algebraicIndependent_iff is the first hit; related hits include IsIntegral.algebraicIndependent_iff, AlgebraicIndependent.extendScalars, and AlgebraicIndependent.algebraicClosure.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsAlgebraic.algebraicIndependent_iff",
+   "results": "One hit: Algebra.IsAlgebraic.algebraicIndependent_iff (Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure), with NoZeroDivisors E and FaithfulSMul k E, automatic for the specified field inclusions.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "protected theorem IsAlgebraic.algebraicIndependent_iff|theorem extendScalars ",
+   "results": "Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean:39 extendScalars and :96 IsAlgebraic.algebraicIndependent_iff. Read lines 29--99, including all tower, domain and faithful-action hypotheses.",
+   "date": "2026-10-18",
+   "verdict": "match",
+   "directory": "RingTheory/AlgebraicIndependent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic independence is preserved when extending scalars by an algebraic field extension",
+   "results": "AlgebraicIndependent.extendScalars, Algebra.IsAlgebraic.algebraicIndependent_iff and extendScalars_of_isIntegral; other hits are scalar-extension and transcendental-element lemmas.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsAlgebraic.algebraicIndependent_iff",
+  "file": "Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean",
+  "line": 96,
+  "how": "exact field specialization: set R=k, S=E, A=K in the theorem at lines 96--98. The tower of inclusions gives the three Algebra structures and IsScalarTower; fields give NoZeroDivisors E and the injective inclusion k into E gives FaithfulSMul k E. The Algebra.IsAlgebraic k E hypothesis is exactly the stated algebraicity. The index type is unrestricted, including the empty family."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-algebraic-closure",
+  "date": "2026-10-18",
+  "group": "Q61"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Fields, Tag 037J (lemma-algebraic-closure-in-finitely-generated), fields.tex lines 3584--3607: the implicit algebraic-independence prerequisite when applying Tag 0G1M to a finite intermediate field k′; exact general algebraic-tower form is Algebra.IsAlgebraic.algebraicIndependent_iff in Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean:96--98. Blueprint lem-zl-bertini-finite-cover-curve.proof.md paragraph 3, Tag 0G4F through its 0G4D field input.",
+   "via": [
+    "lem-zl-finite-algebraic-closure",
+    "lem-zl-finite-separable-closure",
+    "lem-zl-bertini-field-extension",
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

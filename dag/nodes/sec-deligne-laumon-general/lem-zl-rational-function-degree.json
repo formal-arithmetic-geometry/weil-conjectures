@@ -1,0 +1,85 @@
+{
+ "id": "lem-zl-rational-function-degree",
+ "kind": "statement",
+ "title": "A finite field extension preserves degree after adjoining one indeterminate",
+ "statement": "Let $E/k$ be a finite extension of fields [def-pc-field-extension], meaning that $E$ has finite dimension as a $k$-vector space. Let $T$ be one indeterminate, and form the rational function fields $k(T)=\\operatorname{Frac}(k[T])$ and $E(T)=\\operatorname{Frac}(E[T])$ [def-weil-rational-function-field]. Embed $k(T)$ in $E(T)$ by applying $k\\hookrightarrow E$ to polynomial coefficients. Then $E(T)/k(T)$ is finite and $[E(T):k(T)]=[E:k]$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Tag 0G1M (lemma-purely-transcendental-degree), case r=1, fields.tex lines 3557--3582; exact finite specialization of RatFunc.rank_ratFunc_ratFunc and RatFunc.finrank_ratFunc_ratFunc, Mathlib/FieldTheory/RatFunc/Basic.lean:798,802."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-rational-function-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension E/k, adjoining one indeterminate X preserves degree: E(X)/k(X) is finite of degree [E:k]",
+   "results": "RatFunc.finrank_ratFunc_ratFunc and RatFunc.rank_ratFunc_ratFunc, Mathlib/FieldTheory/RatFunc/Basic; other hits concern simple algebraic extensions and rational-function degrees.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RatFunc.finrank_ratFunc_ratFunc",
+   "results": "One hit: RatFunc.finrank_ratFunc_ratFunc (Mathlib.FieldTheory.RatFunc.Basic), for every algebraic field extension.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (rank_ratFunc_ratFunc|finrank_ratFunc_ratFunc)",
+   "results": "Mathlib/FieldTheory/RatFunc/Basic.lean:798 rank_ratFunc_ratFunc and :802 finrank_ratFunc_ratFunc. Read the surrounding hypotheses and both proofs, lines 794--811.",
+   "date": "2026-10-18",
+   "verdict": "match",
+   "directory": "FieldTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite extension E/k, the rational function extension E(X)/k(X) has the same finite vector space dimension",
+   "results": "RatFunc.finrank_ratFunc_ratFunc, Mathlib.FieldTheory.RatFunc.Basic; other hits are functionField_iff, finiteExts, finite-field extensions, and finite_of_fg_of_isAlgebraic.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_finite|rank_lt_aleph0_iff",
+   "results": "RingTheory/Algebraic/Integral.lean:101 IsAlgebraic.of_finite and :108 Algebra.IsAlgebraic.of_finite (instance). The wrapper prints line/text in its file fields for a single-file grep; the actual source was opened and read.",
+   "date": "2026-10-18",
+   "verdict": "match",
+   "directory": "RingTheory/Algebraic/Integral.lean"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RatFunc.rank_ratFunc_ratFunc",
+  "file": "Mathlib/FieldTheory/RatFunc/Basic.lean",
+  "line": 798,
+  "how": "specializes in one line: the cardinal dimension equality rank_ratFunc_ratFunc (lines 794--800) specializes to finite E/k, with Algebra.IsAlgebraic.of_finite (Mathlib/RingTheory/Algebraic/Integral.lean:108) supplying algebraicity. Since the right hand rank is finite, the equal left hand rank is finite too; the equality in natural-number degrees is also RatFunc.finrank_ratFunc_ratFunc at lines 802--809. Both fields are the RatFunc fraction fields of the polynomial rings and the map is their coefficient-extension map. This checks finiteness with cardinal rank, not merely an equality of potentially junk finrank values. Module.rank_lt_aleph0_iff (Mathlib/LinearAlgebra/Dimension/Free.lean:263) is the standard conversion between finite cardinal rank and Module.Finite; Module.finrank_eq_rank (StrongRankCondition.lean:523) converts finite dimensions. Lines inspected."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-algebraic-closure",
+  "date": "2026-10-18",
+  "group": "Q61"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Fields, Tag 0G1M (lemma-purely-transcendental-degree), case r=1, fields.tex lines 3557--3582; used in Tag 037J (lemma-algebraic-closure-in-finitely-generated) proof. Blueprint lem-zl-bertini-finite-cover-curve.proof.md paragraph 3: the Tag 0G4F input, through the 0G4D field-theoretic reduction.",
+   "via": [
+    "lem-zl-finite-algebraic-closure",
+    "lem-zl-finite-separable-closure",
+    "lem-zl-bertini-field-extension",
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

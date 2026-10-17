@@ -11,9 +11,67 @@
   "def-pc-field-extension",
   "def-weil-relative-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose finite field generators $a_1,\\ldots,a_s$ of $K/k$. By [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis], choose $x_1,\\ldots,x_r\\in K$ algebraically independent over $k$ such that $K$ is algebraic over $L=k(x_1,\\ldots,x_r)$. Thus the $a_j$ are algebraic over $L$, and $L(a_1,\\ldots,a_s)=K$ because $k\\subseteq L\\subseteq K$. Apply [lem-weil-pbc-algebraic-generators-finite-extension] over $L$ to obtain $n=[K:L]<\\infty$.",
+   "uses": [
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 037J proof, first paragraph; finite generation made explicit using Tags 030F and 09GH"
+   }
+  },
+  {
+   "text": "Fix any finite intermediate extension $k\\subseteq k'\\subseteq K$, and put $m=[k':k]$. Every $b\\in k'$ is algebraic over $k$: the $m+1$ powers $1,b,\\ldots,b^m$ are linearly dependent over $k$, giving a nonzero polynomial vanishing at $b$. Hence [lem-zl-independence-algebraic-base] makes the tuple $x_1,\\ldots,x_r$ algebraically independent over $k'$ as well. For $0\\le j\\le r$, set $F_j=k(x_1,\\ldots,x_j)$ and $E_j=k'(x_1,\\ldots,x_j)$. Inductively $E_j/F_j$ is finite of degree $m$: for $j=0$ this is $k'/k$. At the successor, independence says that $x_{j+1}$ is transcendental over $E_j$ (and therefore over $F_j$): if a nonzero polynomial over $E_j$ vanished at $x_{j+1}$, express its finitely many coefficients as quotients of polynomials in $x_1,\\ldots,x_j$ over $k′$ and multiply by the product of the nonzero denominators. At least one coefficient stays nonzero, so the resulting nonzero polynomial in $j+1$ variables over $k′$ contradicts independence. Evaluation $P(T)/Q(T)\\mapsto P(x_{j+1})/Q(x_{j+1})$ identifies the rational function fields over $E_j,F_j$ with $E_{j+1},F_{j+1}$, respectively; denominators stay nonzero by transcendence, and every element of the generated field is such a fraction [def-weil-rational-function-field]. The two evaluation maps commute with coefficient inclusion, so [lem-zl-rational-function-degree] gives $[E_{j+1}:F_{j+1}]=[E_j:F_j]=m$. Consequently $[k'(x_1,\\ldots,x_r):L]=[k':k]$.",
+   "uses": [
+    "lem-zl-independence-algebraic-base",
+    "def-weil-rational-function-field",
+    "lem-zl-rational-function-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 037J proof, application of Tag 0G1M; the finite-variable equality is obtained by elementary induction from its one-variable case"
+   }
+  },
+  {
+   "text": "The inclusion $k'(x_1,\\ldots,x_r)\\subseteq K$ is an inclusion of $L$-vector spaces, so any $L$-linearly independent family in the smaller field remains independent in $K$. Its dimension over $L$ is therefore at most $n$. By step 2, $[k':k]\\le n$ for every finite intermediate field $k'$ of $K/k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 037J proof, displayed inequality comparing intermediate degrees with [K:L]"
+   }
+  },
+  {
+   "text": "By [def-weil-relative-algebraic-closure], $A=k_{\\mathrm{alg}}$ is a subfield of $K$ containing $k$ and every element of $A$ is algebraic over $k$. Its finite intermediate fields have degrees in the nonempty finite set $\\{1,\\ldots,n\\}$ (the field $k$ has degree one). Choose one, $k'$, of maximal degree $m$. A $k$-basis $b_1,\\ldots,b_m$ of $k'$ also generates $k'$ as a field: the generated field contains their entire $k$-linear span. For any $\\alpha\\in A$, [lem-weil-pbc-algebraic-generators-finite-extension] applied to $b_1,\\ldots,b_m,\\alpha$ shows that $k'(\\alpha)/k$ is finite. It is contained in $A$, so maximality gives $[k'(\\alpha):k]\\le m$. The inclusion $k'\\subseteq k'(\\alpha)$ gives the reverse dimension inequality. Equality of these finite dimensions forces equality of the two vector subspaces, so $\\alpha\\in k'$. Therefore $A=k'$ and $[A:k]=m<\\infty$.",
+   "uses": [
+    "def-weil-relative-algebraic-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 037J proof, final sentence: explicit maximal-degree argument for the bounded degrees of finite subextensions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-zl-independence-algebraic-base",
+  "def-weil-rational-function-field",
+  "lem-zl-rational-function-degree",
+  "def-weil-relative-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields Tag 037J (lemma-algebraic-closure-in-finitely-generated), using the one-variable case of Tag 0G1M and explicit induction and maximal-degree arguments"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +100,39 @@
    "results": "algebraicClosure, algebraicClosure.isAlgebraic, Field.isAlgebraic_of_finite_intermediateField, IntermediateField.finite_of_fg_of_isAlgebraic; none states finiteness of the relative algebraic closure for a finitely generated field extension.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative algebraic closure of a field in a finitely generated field extension is finite dimensional",
+   "results": "IntermediateField.finite_of_fg_of_isAlgebraic, Algebra.finite_of_essFiniteType_of_isAlgebraic, finite normal-closure results, and Field.FiniteDimensional.of_finite_intermediateField; none proves this item: finite generation of the relative closure or finiteness of the set of all intermediate fields is not among the hypotheses.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "algebraicClosure, Module.Finite",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicClosure",
+   "results": "The wrapper returned 25 hits in FieldTheory: relative algebraicClosure definition and elementary properties at AlgebraicClosure.lean:18,39,44,49,50, absolute AlgebraicClosure definitions and uses, and other imports. No theorem giving finiteness in a finitely generated extension was returned; the full relative-AlgebraicClosure file was read.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "directory": "FieldTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated extension of fields has finite dimensional relative algebraic closure",
+   "results": "algebraicClosure.isAlgebraic, algebraicClosure, finite_of_fg_of_isAlgebraic, IsAlgClosure.ofAlgebraic, of_finite and other finite/intermediate-field results; these do not establish finite generation of the relative algebraic closure.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-finite-separable-closure",
@@ -57,7 +144,7 @@
  "blueprint": {
   "from": {
    "node": "lem-zl-bertini-finite-cover-curve",
-   "place": "field-theoretic reduction paragraph: the finiteness of the algebraic closure in a finitely generated field extension (Fields Tag 037J)",
+   "place": "Main-20261015 lem-zl-bertini-finite-cover-curve.proof.md paragraph 3: the Tag 0G4F geometric-irreducibility input; its 0G4D field-theoretic reduction uses the finite algebraic-closure assertion of Fields Tag 037J, through lem-zl-finite-separable-closure.",
    "via": [
     "lem-zl-finite-separable-closure",
     "lem-zl-bertini-field-extension",
@@ -66,5 +153,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-finite-algebraic-closure",
+  "worker": "stage1",
+  "summary": "Expanded the Fields Tag 037J proof into finite degree over a finite transcendence basis, a finite-variable degree comparison, an elementary intermediate-dimension bound, and an explicit maximal-degree argument. Reused the existing finite-basis and algebraic-generators Mathlib leaves. Added two Mathlib leaves: algebraic independence under an algebraic base extension and degree preservation after one rational-function variable; the finite-tuple iteration is written in the item rather than made into a new node. Statement and inherited metadata are retained.",
+  "blueprint": "Realizes the field-theoretic input to paragraph 3 of main-20261015 lem-zl-bertini-finite-cover-curve.proof.md (Tag 0G4F through 0G4D), along the existing ancestry finite-separable-closure / bertini-field-extension / bertini-irreducible-member. The 037J proof uses the 0G1M equality, here iterated from its one-variable Mathlib form.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-9f87790d3",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-9f87790d3 (reviewer sub-agent of L); spot-checked: No changes made. The item matches Stacks Fields Tag 037J (fields.tex 3584-3607) exactly; its statement is unchanged. Step 1: the finite transcendence basis leaf and the algebraic-generators leaf give n=[K:L] finite. Step 2: the finite intermediate field k' is algebraic over k. The new leaf lem-zl-independence-algebraic-base (Algebra.IsAlgebraic.algebraicIndependent_iff, AlgebraicClosure.lean:96; its hypotheses hold for fields) makes x independent over k'. A correctly stated induction then uses the new leaf lem-zl-rational-function-degree (RatFunc.rank_ratFunc_ratFunc, Basic.lean:798, with algebraicity from Algebra.IsAlgebraic.of_finite, Integral.lean:108). It gives [k'(x):k(x)]=[k':k]. The denominator-clearing and evaluation identifications are written out and correct. Step 3: the elementary bound by n. Step 4: a maximal-degree argument that uses only that A is an algebraic subfield, which is correct. Small cases check out: K=k, k(t), Q(i)(t)/Q, and the inseparable case F_p(u^{1/p},t). Neither new node restates a clause of the item, and an rg search of the whole DAG found no duplicate. The route consists only of definitions and Mathlib leaves, so tool_uses is correctly empty. The blueprint route (paragraph 3, 0G4F to 0G4D to 037J) is kept and there is no SGA citation. Cosmetic only: the text mixes k′ and k', and the report mentions a citations.json that is not among the delivered files."
  }
 }
