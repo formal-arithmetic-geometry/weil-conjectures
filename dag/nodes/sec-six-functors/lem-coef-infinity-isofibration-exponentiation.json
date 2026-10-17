@@ -29,11 +29,10 @@
  ],
  "proof": [
   {
-   "text": "First prove the inner-fibration part for any inner fibration $r:\\mathcal E\\to\\mathcal F$, without equivalence lifting. Identify a degreewise injective $A\\to B$ with its image simplicial subset: the degreewise bijections to its image commute with operators. Unfold [def-cbc-enhanced-diagrams-cones]. The internal-hom adjunction is explicit: a map $V\\to\\operatorname{Fun}(H,X)$ corresponds to a map $H\\times V\\to X$; in degrees, its value at $(h,v)\\in H_n\\times V_n$ is obtained by evaluating the diagram represented by $v$ at $(h,\\operatorname{id}_{[n]})$. Conversely a map $a:H\\times V\\to X$ sends $v\\in V_n$ to the map with $m$-simplex value $(h,\\alpha:[m]\\to[n])\\mapsto a_m(h,V(\\alpha)v)$. These rules commute with operators and are inverse. Thus a lifting problem for the corner map against an inner horn $j:\\Lambda_k^n\\hookrightarrow\\Delta^n$ transposes to one for $r$ against\n$$j\\mathbin{\\square}i:(\\Lambda_k^n\\times B)\\amalg_{\\Lambda_k^n\\times A}(\\Delta^n\\times A)\\longrightarrow\\Delta^n\\times B.$$\nThe two specified maps agree on the intersection and glue by the colimit property of [def-weil-pbc-category-colimit]. Every inner horn is inner anodyne under the lifting-class definition in [lem-coef-inner-anodyne-pushout-product], directly because every inner fibration lifts that horn. That node makes the displayed map inner anodyne, so it lifts against $r$. Transposition proves the corner is an inner fibration. Taking $r:X\\to\\Delta^0$ and $i:\\varnothing\\hookrightarrow H$ proves $\\operatorname{Fun}(H,X)$ is a quasicategory for every quasicategory $X$. Taking arbitrary $i$ and $r:\\mathcal D\\to\\Delta^0$ proves restriction to $A$ is an inner fibration. Consequently the target $T=\\operatorname{Fun}(A,\\mathcal C)\\times_{\\operatorname{Fun}(A,\\mathcal D)}\\operatorname{Fun}(B,\\mathcal D)$ is a quasicategory: fill an inner horn in its first factor, then use the restriction inner fibration in its second factor to lift over that chosen filler. Its source is a quasicategory by the preceding special case.",
+   "text": "Apply [lem-coef-infinity-inner-fibration-corner] to any inner fibration $r:E\\to F$ and the given degreewise injection $i:A\\to B$: the corner map is an inner fibration. This is the product/internal-hom lifting argument formerly written inline. For $r:X\\to\\Delta^0$ and $i:\\varnothing\\hookrightarrow H$ its target is a point, so $\\operatorname{Fun}(H,X)$ is a quasicategory whenever $X$ is. For $r:\\mathcal D\\to\\Delta^0$ and arbitrary $i$, the same lemma says that restriction $\\operatorname{Fun}(B,\\mathcal D)\\to\\operatorname{Fun}(A,\\mathcal D)$ is an inner fibration. Its pullback target $T=\\operatorname{Fun}(A,\\mathcal C)\\times_{\\operatorname{Fun}(A,\\mathcal D)}\\operatorname{Fun}(B,\\mathcal D)$ is a quasicategory: project an inner horn to the first factor, fill it there, then lift its image filler through the restriction inner fibration in the second factor. Pairing the two fillers satisfies the pullback equation. The source $\\operatorname{Fun}(B,\\mathcal C)$ is a quasicategory by the preceding empty-shape specialization.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
-    "def-weil-pbc-category-colimit",
-    "lem-coef-inner-anodyne-pushout-product"
+    "lem-coef-infinity-inner-fibration-corner"
    ],
    "elementary": false,
    "source": {
@@ -67,16 +66,15 @@
    }
   },
   {
-   "text": "Now let $p:\\mathcal C\\to\\mathcal D$ be only an inner fibration and fix $x,y\\in\\mathcal C$. Set $B=\\Delta^1$, $A=\\partial\\Delta^1=\\{0\\}\\amalg\\{1\\}$ and $f:A\\to\\mathcal C$ with values $x,y$. Let $\\theta$ be the corner map for this $p$ and $i$, an inner fibration by Step 1. The map\n$$U_{\\mathcal D}(p(x),p(y))\\longrightarrow\\operatorname{Fun}(A,\\mathcal C)\\times_{\\operatorname{Fun}(A,\\mathcal D)}\\operatorname{Fun}(B,\\mathcal D)$$\nsends a simplex $v$ to $(f,v)$, using the constant simplex at the diagram $f$. Its ordinary simplicial pullback along $\\theta$ is exactly $U_{\\mathcal C}(x,y)$: in each degree the equations are precisely that both endpoint simplices of the arrow diagram are constant at $x,y$. A lifting square for this pullback against an inner horn maps to one for $\\theta$; its filler paired with the already specified base simplex is a filler of the original square. Thus the induced map $s:U_{\\mathcal C}(x,y)\\to U_{\\mathcal D}(p(x),p(y))$ is an inner fibration. Prove independently that $U_X(a,b)$ is Kan for every quasicategory $X$. Its inner horns fill by the same Step 1 argument applied to $X\\to\\Delta^0$ and the boundary inclusion $A\\subset B$. For $n\\geq2$, a left outer horn in $U_X(a,b)$ transposes to a map $B\\times\\Lambda_0^n\\to X$; adjoin the constant maps at $a,b$ on $A\\times\\Delta^n$. They agree on $A\\times\\Lambda_0^n$, so [def-weil-pbc-category-colimit] glues them. For each vertex of $B=\\Delta^1$, the edge in the parameter direction $[0,1]$ is an identity, since both vertices belong to $A$. Apply [lem-cbc-invertible-prism-extension] to extend over $B\\times\\Delta^n$, keeping the two endpoint strips constant. Transposition gives the required filler in $U_X(a,b)$. For the right outer horn use the same argument with opposites: define $X^{\\mathrm{op}}_m=X_m$ with the operator of $\\alpha:[k]\\to[m]$ that of $\\alpha^{\\mathrm{rev}}(j)=m-\\alpha(k-j)$. This operation sends $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, preserves inner horn filling, and commutes with products and degreewise pullbacks. Reversing the shape interval gives the degreewise identification $U_X(a,b)^{\\mathrm{op}}=U_{X^{\\mathrm{op}}}(b,a)$. Thus a right outer horn becomes a left outer horn, the preceding construction fills it, and applying the involution again gives the desired original filler. In dimension one either horn specifies only a vertex, filled by its degenerate identity edge. Hence all horns fill, with no assertion that the space is nonempty. Apply this result to $X=\\mathcal C,\\mathcal D$. This establishes that the source and target of $s$ are Kan independently of the pinch comparison.",
+   "text": "Now assume only that $p:\\mathcal C\\to\\mathcal D$ is an inner fibration, and fix $x,y$. Set $B=\\Delta^1$, $A=\\partial\\Delta^1$ and $f:A\\to\\mathcal C$ with values $x,y$. The corner $\\theta$ for $i:A\\hookrightarrow B$ and $p$ is an inner fibration by Step 1. Pull it back along $v\\mapsto(f,v)$ from $U_{\\mathcal D}(p(x),p(y))$. Degreewise, the resulting source imposes exactly the two constant-endpoint equations defining $U_{\\mathcal C}(x,y)$. A lifting square for this pullback maps to one for $\\theta$; pair its filler with the specified base simplex. Thus $s:U_{\\mathcal C}(x,y)\\to U_{\\mathcal D}(p(x),p(y))$ is an inner fibration. The boundary $A$ contains both vertices of $B$. Apply [lem-coef-infinity-fixed-boundary-functor-kan] to $(X,f)=(\\mathcal C,f)$ and $(\\mathcal D,pf)$. The two strict fibers in that node are degreewise exactly these $U$ spaces, so both are Kan complexes, including when empty. The extracted lemma carries the previous fixed-boundary outer-horn and opposite-involution argument, without a pinch comparison.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
-    "def-weil-pbc-category-colimit",
-    "lem-cbc-invertible-prism-extension"
+    "lem-coef-infinity-fixed-boundary-functor-kan"
    ],
    "elementary": false,
    "source": {
-    "document": "https://kerodon.net/tag/01DP",
-    "place": "Lemma 4.4.4.8 with Q=X, A=boundary of Delta^1 and B=Delta^1: the endpoint strips make every required parameter edge an identity. Right outer horns follow by the explicit opposite involution. Inner horns use Step 1; compare Proposition 4.6.1.11 and Proposition 4.6.1.24 (01PC)."
+    "document": "https://kerodon.net/tag/01P1",
+    "place": "Proposition 4.6.1.11, fixed-boundary Kan property, and the pullback identification from Proposition 4.6.1.24 (01PC). The retained direct prism/opposites route is assigned to the new fixed-boundary node."
    }
   },
   {
@@ -96,11 +94,11 @@
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-inner-fibration-corner",
   "def-weil-pbc-category-colimit",
-  "lem-coef-inner-anodyne-pushout-product",
   "lem-coef-infinity-equivalence-prism-extension",
   "lem-coef-infinity-pointwise-equivalences",
-  "lem-cbc-invertible-prism-extension",
+  "lem-coef-infinity-fixed-boundary-functor-kan",
   "lem-coef-infinity-core-kan-fibration"
  ],
  "proof_origin": {
@@ -178,10 +176,59 @@
    "results": "{\"t\": \"2026-10-16T16:42:48Z\", \"tool\": \"leanfinder\", \"query\": \"An isofibration of quasicategories induces an isofibration on relative functor categories and a Kan fibration on morphism spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"CategoryTheory.Nerve.quasicategory\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\"], \"digest\": \"f0dbe5a7b5b975f3\"}",
    "date": "2026-10-17",
    "verdict": "no match: the actual hits only provide inner-fibration restriction, quasicategory closure, Quillen all-horn fibrations or ordinary hom-lift properties. Read pinned Inner/PushoutProduct.lean:69-109,133-149 and Quasicategory/InnerFibration.lean:55-103. The inner corner theorem proves only the inner-horn part and supplies neither equivalence lifting nor the final morphism-space Kan fibration; the whole item is not a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an isofibration of quasicategories and a degreewise injective simplicial map, exponentiation gives an isofibration and fixed endpoint mapping spaces give a Kan fibration",
+   "results": "{\"t\": \"2026-10-17T07:19:05Z\", \"tool\": \"leanfinder\", \"query\": \"For an isofibration of quasicategories and a degreewise injective simplicial map, exponentiation gives an isofibration and fixed endpoint mapping spaces give a Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\"], \"digest\": \"c1aaf51ee5baf60d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic simplicial-set horn/model-category properties and do not state quasicategorical isofibration exponentiation or fixed-endpoint Kan lifting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"InnerFibration\", \"KanComplex\"",
+   "results": "{\"t\": \"2026-10-17T07:19:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"InnerFibration\\\", \\\"KanComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic simplicial-set horn/model-category properties and do not state quasicategorical isofibration exponentiation or fixed-endpoint Kan lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|Isofibration|innerFibration|KanComplex|arrowMappingSpace",
+   "results": "{\"t\": \"2026-10-17T07:19:05Z\", \"tool\": \"grep\", \"query\": \"isofibration|Isofibration|innerFibration|KanComplex|arrowMappingSpace\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"7615f69425bd48fe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic simplicial-set horn/model-category properties and do not state quasicategorical isofibration exponentiation or fixed-endpoint Kan lifting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isofibrations of quasicategories are preserved by exponentiation along monomorphisms and induce Kan fibrations on fixed endpoint arrow spaces",
+   "results": "{\"t\": \"2026-10-17T07:19:06Z\", \"tool\": \"leansearch\", \"query\": \"Isofibrations of quasicategories are preserved by exponentiation along monomorphisms and induce Kan fibrations on fixed endpoint arrow spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.instIsIsoToRangeOfMono\", \"CategoryTheory.ExponentiableMorphism.noConfusion\", \"CategoryTheory.Limits.MonoFactorisation.ofIsoComp_m\", \"CategoryTheory.Limits.MonoFactorisation.ofArrowIso_I\", \"CategoryTheory.MorphismProperty.RespectsIso.monomorphisms\", \"CategoryTheory.Limits.pushout_inr_iso_of_right_factors_epi\", \"CategoryTheory.Limits.ImageFactorisation.ofArrowIso_F\", \"CategoryTheory.MonoOver.liftIso\"], \"digest\": \"968373962f2e8ff0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic simplicial-set horn/model-category properties and do not state quasicategorical isofibration exponentiation or fixed-endpoint Kan lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of functor quasicategories along a monomorphism is an isofibration and an inner fibration induces a Kan fibration on arrow spaces",
+   "results": "{\"t\": \"2026-10-17T07:19:08Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of functor quasicategories along a monomorphism is an isofibration and an inner fibration induces a Kan fibration on arrow spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"246193964828fad6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic simplicial-set horn/model-category properties and do not state quasicategorical isofibration exponentiation or fixed-endpoint Kan lifting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor category restriction along an injective simplicial map preserves equivalence lifting for quasicategorical isofibrations",
+   "results": "{\"t\": \"2026-10-17T07:19:08Z\", \"tool\": \"leansearch\", \"query\": \"Functor category restriction along an injective simplicial map preserves equivalence lifting for quasicategorical isofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence\", \"CategoryTheory.Localization.liftingLift\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapFullSubcategoryι\", \"CategoryTheory.Functor.FullyFaithful.preimageIso\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Localization.Lifting.iso\", \"CategoryTheory.IsHomLift.lift_comp_id\"], \"digest\": \"85de854f131b0683\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic simplicial-set horn/model-category properties and do not state quasicategorical isofibration exponentiation or fixed-endpoint Kan lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|Isofibration|innerFibration|KanComplex|arrowMappingSpace",
+   "results": "{\"t\": \"2026-10-17T07:19:08Z\", \"tool\": \"grep\", \"query\": \"isofibration|Isofibration|innerFibration|KanComplex|arrowMappingSpace\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"7e9cb6dee4e7fc5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic simplicial-set horn/model-category properties and do not state quasicategorical isofibration exponentiation or fixed-endpoint Kan lifting"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-join-cone-calculus",
@@ -193,25 +240,20 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-isofibration-exponentiation",
   "worker": "stage1",
-  "summary": "Repair of the returned dependency cycle against the current shared DAG: removed the pinch-comparison citation, whose current dependencies reach this item. Step 4 now proves the Kan property directly, filling inner horns with Step 1 and outer horns by the existing absolute invertible-prism lemma with fixed endpoint identities and explicit opposite involution. The item statement and all maintainer metadata are unchanged; the three retained statement-only helpers are unchanged. No Lean, compiler or live-project writes.",
+  "summary": "Q36 repaired the explicit 2026-10-17 long-step return. Kept the item statement, Lean record and Steps 2, 3 and 5 verbatim. Replaced the 2013-character Step 1 inner corner argument by a new exact Mathlib leaf and its elementary quasicategory specializations; replaced the 2607-character Step 4 fixed-boundary horn argument by a new statement-only fixed-boundary Kan lemma, retaining the explicit pullback identification. The original two arguments and intended prism/opposites proof of the new lemma are preserved in report.md. Refreshed verbatim citations; all five non-elementary steps are now shorter than 2000 characters.",
   "blueprint": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. The joint endpoint restriction is an isofibration; its action on unpinched morphism spaces is a Kan fibration. Steps 1-3 establish the joint endpoint restriction input; Steps 4-5 establish its action on unpinched morphism spaces. All inputs remain in the inherited stable coherent-diagram foundation below the specified coefficient adjunction; no chapter/unit step is replaced.",
-  "tool_uses": [
-   {
-    "node": "lem-cbc-invertible-prism-extension",
-    "why": "Generic absolute outer-horn prism extension, used with shape Delta^1 and its boundary to prove that fixed-endpoint arrow spaces are Kan. It replaces the cyclic pinch-comparison citation; no acyclic statement in this unit supplies this prism interface, and no unit-level argument is replaced."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-cbc-invertible-prism-extension"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q37-db7e63890",
-  "group": "Q37",
+  "reviewer": "NT-cc-Q36-4667d0b89",
+  "group": "Q36",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-db7e63890 (reviewer sub-agent of L); spot-checked: Read the item, its 5 steps, the 3 new nodes and every cited statement (def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit, Mathlib leaf lem-coef-inner-anodyne-pushout-product, lem-cbc-invertible-prism-extension) in full. Checked the sources online at kerodon.net. 01F1 (Prop 4.4.5.1) is the corner isofibration. 01P8 (Prop 4.6.1.22) needs only an inner fibration and is about the unpinched Hom = U_C(x,y), so the item statement is unchanged and not weakened. 01NX (Prop 4.4.5.8) assumes A contains every vertex and asks for isomorphisms at final vertices; the new node strengthens this to all vertices, which is valid, and gets epsilon=0 by the opposite dual. 01DK (Thm 4.4.4.4) is pointwise detection; 01EZ (Prop 4.4.3.7) is the map on cores. Step 1: the transposition to j□i and the leaf's inner-anodyne pushout-product statement are correct, and the source and target quasicategory special cases hold. Step 2: equivalence lifting is used only at vertices outside A; the gluing over A u sk_0 B lies over g; the relative prism with eps=0 and the pointwise node give an equivalence lifting tau exactly. Step 3 is an elementary point specialization. Step 4: the pullback of theta is exactly U_C, so s is an inner fibration. U_X is Kan: the Lambda^n_0 horn fills by the absolute prism with identity vertex edges, since both vertices of Delta^1 lie in the boundary; Lambda^n_n fills via the explicit opposite involution; n=1 is degenerate. Step 5: the relative prism lifts every edge, so s is an isofibration between Kan complexes, and the core node then gives a Kan fibration. This step is needed because an inner fibration between Kan complexes need not be Kan (pt -> N(iso)). Small cases tested: B=Delta^1 with A its boundary, A=B, empty K, nerves. No duplicates found (rg of isofibration, core, pointwise and the tags). lem-cbc-enhanced-functor-cone-calculus lies downstream of the item and would make a cycle. Transitive closures of all dependencies avoid the item, so there is no cycle. Accepted tool_use: lem-cbc-invertible-prism-extension (sk-prop-sf-cbc), a generic absolute prism used as a black box. No SGA source. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-4667d0b89 (reviewer sub-agent of L); spot-checked: I read the repair in full: the item, both new nodes, all cited statements, the Mathlib source and Kerodon 01P1 online. New leaf lem-coef-infinity-inner-fibration-corner: an exact match for SSet.innerFibration_pullbackObjObjπ (Inner/PushoutProduct.lean:69-90; Mono i plus InnerFibration p, no quasicategory hypothesis). Mono equals degreewise injective via Types.mono_iff_injective (Types/Basic.lean:365) and NatTrans.mono_iff_mono_app (EpiMono.lean:38). New unsplit lem-coef-infinity-fixed-boundary-functor-kan: matches Kerodon Prop 4.6.1.11 (01P1) hypothesis by hypothesis. Tested on B empty, A=B, nerve N(I) with B=Delta^1 and empty Hom; the all-vertices hypothesis is needed (A empty, B a point gives back X). It has no duplicate in the DAG or the blueprint, and it is strictly smaller than the item: absolute Kan property versus the item's relative Kan fibration, so no D1 relabelling. Step 1: the leaf gives the corner and the restriction inner fibration, and the pullback T is a quasicategory (fill in the first factor, then lift). Step 2: checked against the prism-extension hypotheses (all vertices in A', vertex edges equivalences, epsilon=0, exact over g) and pointwise detection. Step 3: elementary. Step 4: the pullback of theta along v↦(f,v) is degreewise U_C(x,y), and U_C = V_f(Delta^1,C) and U_D = V_pf(Delta^1,D), so both are Kan, including when empty. Step 5: the source-fixed prism lifts every edge, and core-node orientation and definitions match. proof_deps equals the union of uses; the step lengths are 1031/1636/526/1036/1531. Transitive closure shows no cycle. There is no off-unit citation and no SGA. Maintainer notes: (1) Kerodon's own proof of 01P1 uses this item's Cor 4.4.5.3 clause, so a future split of the fixed-boundary node must take the acyclic route kept in the report (corner leaf, the absolute prism lem-cbc-invertible-prism-extension, opposites); (2) the maintainer-owned item tool_uses [lem-cbc-invertible-prism-extension] is now stale for the item and belongs to that future split. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

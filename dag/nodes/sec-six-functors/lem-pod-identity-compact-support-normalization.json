@@ -16,9 +16,149 @@
   "lem-coef-derived-system-evaluation-calculus",
   "lem-weil-finite-free-completed-scalar-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the compactification $(\\operatorname{id}_s,\\operatorname{id}_s)$. For the identity open immersion every site object factors through the open, so the extension-by-zero presheaf is already the original sheaf, with its original restriction maps; its identification with its sheafification is canonical. The direct-image identity acts identically on sheaves and complexes. Deriving it keeps the same identity functor: on a resolution $C\\to I$, the derived comparison is represented by that quasi-isomorphism, hence becomes the identity under the resolution identification. Thus $R\\operatorname{id}_{s!,n}$ has the termwise identity model. Set $v_{A_{E,n}}=1$ in this model. These maps commute with every complex morphism and every coefficient quotient, since all their components are identities.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "def-weil-extension-by-zero",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: identity compact support; expansion using the finite-level definitions"
+   }
+  },
+  {
+   "text": "Put $R=\\widehat{\\mathcal O}_{E,s}$, $B_n=(A_{E,n})_s$, and write $\\mathcal R=\\mathcal R_s$, $\\mathcal L=\\mathcal L_s$. On one flat-term K-flat representative $P\\to C$, $\\mathcal R C$ is the strict system $(P\\otimes_R B_n)_n$ with quotient transitions. For the identity compactification, step 1 identifies the compact-support tower, including its morphisms and transitions, with the underlying $R$-tower of this system. The integral definition therefore gives the natural identification $H_E:=R\\operatorname{id}_{s!,\\mathcal O_E}=\\mathcal L\\mathcal R$. Here the strict-tower lifting theorem supplies the functor on morphisms; this is an identification of those actual identity-operation towers, not a choice of unrelated isomorphisms of their evaluations.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-compact-support-reduction-tower-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.3 and Lemma 3.5.7(1); identity-operation instance of the strict reduction construction"
+   }
+  },
+  {
+   "text": "Record the unit in the strict product-cone model, to fix its normalization for coefficient changes. Write $P_E=\\prod_n\\operatorname{Res}_n(P\\otimes_R B_n)$ and $c:P\\to P_E$ for the strict quotient maps. Then $H_E C$ is represented by $\\operatorname{Cone}(1-s_E:P_E\\to P_E)[-1]$, and $u_C$ is represented by $(0,c)$. To verify the map, derive the quotient/limit adjunction on the single representative $P$: after a simultaneous system resolution its unit is the strict compatible family of quotient maps. Comparing its underlying tower to a K-injective tower $J_\\bullet$ makes this family factor through $\\lim J_n$. The Roos comparison sends that factorization to $(0,c_J)$, by its stated formula $(0,\\iota)$. Exactness of countable products makes the product-cone map from the original quotient tower to $J_\\bullet$ a quasi-isomorphism, and it sends $(0,c)$ to $(0,c_J)$. This identifies the actual unit with the specified zero-shifted-component map. It does not identify maps merely because their finite evaluations agree.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-derived-limit-roos-complex",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, comparison by a K-injective tower; derived.tex Tag 070M, lemma-difficulty-K-injectives, product-cone formula"
+   }
+  },
+  {
+   "text": "Take $L=E$ in the finite-free completed-scalar comparison. It applies to $C$ because $C$ is derived complete in precisely [def-weil-derived-complete], the hypothesis used by that theorem. After the multiplication identification $P\\otimes_R R=P$, its specified map $\\chi_{E/E,C}$ is $(0,c)$ into the same quotient product cone as in step 3, and the theorem says it is an isomorphism. Step 3 therefore identifies this isomorphism with the actual adjunction unit $u_C:C\\to H_E C$. Define $v_{\\mathcal O_E,C}=u_C^{-1}$. Its target/source remain in the constructible category: $H_E C$ is isomorphic to $C$, and all boundedness, constructibility and completeness conditions are invariant under isomorphism. For a morphism $f:C\\to D$, unit naturality says $H_E(f)u_C=u_Df$. Multiplication by $u_D^{-1}$ on the left and $u_C^{-1}$ on the right gives $v_DH_E(f)=fv_C$, proving the required naturality. This argument uses the specified cone map, rather than assuming that a map is determined by its finite projections. It also keeps the completed coefficient sheaf throughout; no comparison with pulled-back condensed coefficients is used.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-derived-complete",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 and Lemma 3.5.7(2); the existing completed-scalar comparison at L=E supplies invertibility of the specified completion unit."
+   }
+  },
+  {
+   "text": "Let $E\\subset L$ and $S=\\widehat{\\mathcal O}_{L,s}$. First use ordinary extension $T=-\\otimes_R^L S$. The finite-free completed-scalar comparison says that $S$ is finite free over $R$, that $TC$ is derived complete, and that its canonical completion map $\\chi_{L/E,C}$ identifies $TC$ with completed integral extension $\\widehat T C$. On $P$, its target tower is $(P\\otimes_R(A_{L,n})_s)_n$. K-flat change of rings identifies this, by $(p\\otimes a)\\otimes b\\mapsto p\\otimes ab$, with the quotient tower of $P\\otimes_R S$. Consequently step 3 identifies $\\chi_{L/E,C}$ with the actual unit $u^L_{TC}:TC\\to H_L(TC)$, including its zero shifted-product component. This applies also with $C$ replaced by $H_E C$, which is complete by step 4. No finite Tor bound on $C$ was introduced.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12, Proposition 3.5.1 and Lemma 6.8.2(1); completed-scalar comparison specialized to the identity"
+   }
+  },
+  {
+   "text": "The canonical ordinary-scalar comparison $b_C:T(H_E C)\\to H_L(TC)$ is explicit. At index $n$, use the quotient-ring map $\\iota_n:A_{E,n}\\to A_{L,n}$ of the scalar-extension well-definedness theorem. Its tensor map sends $(p\\otimes\\bar a)\\otimes z$ to $p\\otimes\\iota_n(\\bar a)\\bar z$. These maps commute with quotient transitions. Since $S$ is finite free, the canonical map $(\\prod_n X_n)\\otimes_R S\\to\\prod_n(X_n\\otimes_R S)$ is invertible: in a finite basis it is the identity reordering of a finite sum and a product, with the coordinatewise inverse. Tensor also commutes with the two-term cone differential for the same reason. Thus the displayed level maps give an actual map of product cones representing $b_C$. On $(0,c)\\otimes1$ its value is the compatible family $p\\otimes z\\mapsto p\\otimes\\bar z$, again with zero shifted component. Steps 3 and 5 therefore give the identity of actual derived maps\n$$b_C\\,T(u^E_C)=u^L_{TC}.$$\nBoth units are invertible by step 4 (at $L$ use completeness of $TC$), so $b_C$ is invertible and cancellation gives\n$$v_{\\mathcal O_L,TC}\\,b_C=T(v_{\\mathcal O_E,C}).$$\nThis proves compatibility for the canonical quotient-induced comparison, rather than defining an unspecified comparison by the desired equation.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Lemma 6.8.2(1); explicit finite-free product/cone and quotient-map calculation"
+   }
+  },
+  {
+   "text": "For the completed extension $\\widehat T$, conjugate this same comparison by the specified $\\chi$ maps:\n$$\\widehat b_C=H_L(\\chi_{L/E,C})\\,b_C\\,\\chi_{L/E,H_E C}^{-1}:\\widehat T(H_E C)\\longrightarrow H_L(\\widehat T C).$$\nNaturality of $v_{\\mathcal O_L}$, the equation of step 6, and naturality of $\\chi$ give, in that order,\n$$v_{\\mathcal O_L,\\widehat T C}\\widehat b_C\n=\\chi_{L/E,C}\\,T(v_{\\mathcal O_E,C})\\,\\chi_{L/E,H_E C}^{-1}\n=\\widehat T(v_{\\mathcal O_E,C}).$$\nAll equalities are between actual maps, by the cone construction.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1); naturality of the canonical completed comparison and explicit tensor reassociation"
+   }
+  },
+  {
+   "text": "The raw rational category has the same objects as the integral one and morphisms $f\\otimes a$, with $a\\in E$. Define $v_{E,C}$ to be the image of $v_{\\mathcal O_E,C}$ in that category. The integral compact-support tower is $\\mathcal O_E$-linear by the strict-tower lifting theorem and its total-limit construction. The unit and its inverse are module maps. For an integral $f:C\\to D$, step 4 gives $v_DH_E(f)=fv_C$; multiplying by $a$ gives $v_DH_E(f\\otimes a)=(f\\otimes a)v_C$. Additivity gives this for every localized morphism. The inverse is the localized unit, since both inverse equations survive localization. By the definition of rational compact support this is precisely $v_E:R\\operatorname{id}_{s!,E}\\xrightarrow{\\sim}\\operatorname{id}$. The scalar compatibility of step 7 survives the same localization.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence, rational coefficient stage: expansion through the raw scalar-localization definition"
+   }
+  },
+  {
+   "text": "Finally, in the common-stage category put $v_{\\Qlb,(E,C)}$ equal to the class of $v_{E,C}$ at stage $E$. Represent a morphism from $(E,C)$ to $(L,D)$ by $h$ over a common finite extension $F$. Step 7, rationalized, identifies the extended components with $v_{F,C\\otimes_E F}$ and $v_{F,D\\otimes_L F}$ under the compact-support coefficient comparisons. Naturality at $F$ from step 8 gives\n$$v_{F,D\\otimes_L F}\\,H_F(h)=h\\,v_{F,C\\otimes_E F}.$$\nEnlarging $F$ preserves this equation by step 7. Check compatibility with the canonical scalar associators of scalar-extension composition as follows: postcompose either composite comparison for nested fields by $v$ at the final field. Naturality of that $v$ with respect to the associator and the equation of step 7 turn both sides into the corresponding scalar extension of the initial $v$. Naturality of the associator makes these equal; cancel the invertible final $v$. The identity-extension equation follows by the same cancellation. Thus equality respects the identifications in the colimit Hom groups. Equal common-stage representatives give the same morphism, proving naturality for every such morphism. The classes of the units are inverse components because both inverse equations already hold at each finite stage. This constructs the specified natural isomorphism at $\\Qlb$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence, algebraically closed coefficient stage: explicit common-stage morphism argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-compact-support-direct-image-detailed",
+  "def-weil-extension-by-zero",
+  "def-weil-derived-direct-image",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-derived-limit-roos-complex",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-complete",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "First sentence; expanded by the actual reduction/total-limit adjunction unit, its strict Roos-cone normalization, and the existing finite-free completed-scalar comparison (including L=E), followed by explicit quotient-cone scalar maps and localization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +194,45 @@
    "date": "2026-10-17",
    "results": "8 hits: CompHausLike.LocallyConstant.unitIso; CompHausLike.LocallyConstant.unit; CompHausLike.LocallyConstant.unit_app; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction; CondensedSet.compactlyGeneratedAdjunctionCounitIso; CompHausLike.LocallyConstant.adjunction_unit; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction",
    "verdict": "no match: generic categorical and module APIs, not the stated pro-etale comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[iI]d|[iI]d.*compactSupport|reduction.*[aA]djunction",
+   "results": "2 hits: Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic categorical or unrelated support declarations, not the stated finite/integral/rational/common-stage identity normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the reduction total inverse limit adjunction unit on derived complete complexes is an isomorphism",
+   "results": "8 hits: CategoryTheory.Adjunction.unitAsIsoOfIso; CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit; CategoryTheory.Adjunction.isIso_unit_of_iso; CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull; CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful; CategoryTheory.Functor.totalRightDerivedUnit; CategoryTheory.Adjunction.inv_map_unit; CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic categorical or unrelated support declarations, not the stated finite/integral/rational/common-stage identity normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact support direct image of the identity morphism is naturally the identity on derived complete adic constructible complexes",
+   "results": "8 hits: AdicCompletion.map_id; PrimeSpectrum.BasicConstructibleSetData.map_id'; AlgebraicGeometry.Scheme.IdealSheafData.map_id; AlgebraicGeometry.Scheme.Modules.pushforwardId; AlgebraicGeometry.Scheme.Modules.restrictFunctorId; LightCondensed.id_val; PrimeSpectrum.ConstructibleSetData.map_id; Condensed.id_val",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic categorical or unrelated support declarations, not the stated finite/integral/rational/common-stage identity normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.id",
+   "results": "12 hits: CategoryTheory.Adjunction.id; CategoryTheory.Adjunction.instInhabitedId; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.ext; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ext_iff; CategoryTheory.Adjunction.toEquivalence",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic categorical or unrelated support declarations, not the stated finite/integral/rational/common-stage identity normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity morphism lower shriek functor with integral coefficients inverse of the derived completion unit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τr; AlgebraicGeometry.Scheme.Modules.pushforwardId; AlgebraicGeometry.Scheme.Modules.restrictFunctorId; AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app; SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: these are generic categorical or unrelated support declarations, not the stated finite/integral/rational/common-stage identity normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-point-dualizing-complex",
@@ -74,5 +249,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-identity-compact-support-normalization",
+  "worker": "stage1",
+  "summary": "Kept the statement. Identified finite identity compact support and the actual integral reduction/total-limit unit in a strict quotient product cone. Applied the completed-scalar comparison at L=E to prove that actual unit invertible without any coefficient-category change. Verified ordinary and completed scalar compatibility by explicit cone maps, then descended through raw rational localization and common finite stages. No new nodes; all five interrupted-attempt searches reused.",
+  "blueprint": "Realizes the first sentence of lem-pod-point-dualizing-complex.proof.md: identity compact support, with its integral normalization and scalar compatibility made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic reduction/total-limit adjunction, its actual unit and triangle identities; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-weil-compact-support-reduction-tower-functor",
+    "why": "Generic strict-tower, resolution or coefficient-change construction used in the displayed elementary calculation; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic strict-tower, resolution or coefficient-change construction used in the displayed elementary calculation; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic strict-tower, resolution or coefficient-change construction used in the displayed elementary calculation; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic strict-tower, resolution or coefficient-change construction used in the displayed elementary calculation; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-weil-derived-limit-roos-complex",
+    "why": "Generic strict-tower, resolution or coefficient-change construction used in the displayed elementary calculation; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic strict-tower, resolution or coefficient-change construction used in the displayed elementary calculation; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic finite-free ordinary-to-completed scalar comparison, including its specified invertible unit at L=E; supplies normalization in the existing completed-coefficient category without replacing any package clause."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Generic strict-tower, resolution or coefficient-change construction used in the displayed elementary calculation; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Generic associators for common finite coefficient-field stages; it supplies a generic tool for the identity normalization, without replacing any six-operations-package clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-derived-limit-roos-complex",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-557f5fa6c",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-557f5fa6c (reviewer sub-agent of L); spot-checked: I read all nine steps against the statement of every cited node. The statement, stmt_deps, unit and blueprint fields are byte-identical to the live node; only split-owned fields changed. No new nodes, and a read-only traversal of the dependencies found no cycle. Step 1: for the identity open immersion every V factors, so the extension-by-zero presheaf is M itself (def-weil-extension-by-zero). Step 2: the integral compact-support definition only asks for a derived limit of Res_n K_n; L R C is one by the Roos triangle of lem-weil-pbc-ringed-strict-tower-homotopy-limit. Step 3: the derived unit is identified with (0,c) through a K-injective tower, the Roos map (0,iota) and exactness of products. Step 4: lem-weil-finite-free-completed-scalar-comparison at L=E has exactly the def-weil-derived-complete hypothesis, which D^b_c objects satisfy by def-weil-derived-complete-integral-detailed; its explicit cone map with zero shifted component is (0,c), and it is asserted invertible. Step 5: K-flat change of rings identifies H_L(TC) and the completed extension with the same cone model, so chi is the unit at L. Steps 6 and 7: I checked the explicit quotient-cone map b_C and the three naturality equalities; only S finite free over R is used, so ramified L/E is fine. Steps 8 and 9: raw localization with no Karoubi completion, and common-stage colimit Homs with coherence via the associators. I tested the zero complex, shifts, n=1, L=E, ramified L/E, torsion objects and stage-enlargement cases. An rg over the DAG found no duplicate. The seven declared tool_uses are all in units the item's unit uses (sk-def-sf-operations, sk-prop-sf-biduality-general, sk-thm-properbasechange), so they are harmless and I accept them. No fixes."
  }
 }

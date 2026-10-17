@@ -10,9 +10,91 @@
  "stmt_deps": [
   "lem-coef-simplicial-model-nerve-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r:D\\to U$ for the other pullback projection. Fibrations have the right lifting property against trivial cofibrations by [lem-coef-simplicial-model-nerve-localization]. A lifting square against $r$ gives one against $b$ after composing its bottom map with $a$; the lift against $b$, paired with the original bottom map to $U$, gives a lift to $D$ by the pullback property. Thus $r$ is a fibration. Right lifting properties are closed under composition (first lift against the second map, then against the first), so $D\\xrightarrow r U\\to1$ is a fibration. Hence $D$ is fibrant. The all-cofibrant hypothesis makes $D,E,U,U\\prime$ bifibrant.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.2.4.5; explicit elementary lifting argument for fibrancy."
+   }
+  },
+  {
+   "text": "Fix a bifibrant $T$ and write $M_T(X)=\\underline{\\operatorname{Map}}_{\\mathcal M}(T,X)$. The tensor adjunction [def-coef-simplicial-tensor-cotensor] identifies its $n$-simplices with ordinary maps $\\Delta^n\\otimes T\\to X$. Consequently $\\underline{\\operatorname{Map}}(T,1)$ is the point, and $\\underline{\\operatorname{Map}}(0,X)$ is the point: $\\Delta^n\\otimes-$ is a left adjoint, hence preserves the initial object. Apply the mapping-space axiom of [lem-coef-simplicial-model-nerve-localization] to $0\\to T$ and each fibrant terminal map $X\\to1$. It gives that $M_T(D),M_T(E),M_T(U),M_T(U\\prime)$ are Kan. Applied instead to $0\\to T$ and $b$, the same axiom says that $M_T(b):M_T(E)\\to M_T(U\\prime)$ is a Kan fibration.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.1, simplicial model axiom, specialized to an initial cofibration."
+   }
+  },
+  {
+   "text": "Let $q$ be the infinity localization of $\\mathcal M$ from [lem-coef-simplicial-model-nerve-localization]. By [def-coef-coherent-localization-interface], $q(a)$ is an equivalence edge, since $a$ is a weak equivalence; let $g:qU'\\to qU$ be an inverse. By Step 1, $U$ and $U'$ are bifibrant. The former node's representation clause, applied to $\\underline{\\operatorname{Map}}_{\\mathcal M}(U',U)$, is a bijection on path components onto morphisms $qU'\\to qU$ up to homotopy; choose a vertex $a':U'\\to U$ in the component representing $g$. Since the comparison respects compositions and $q$ sends identities to identities, $aa'$ lies in the path component of $1_{U'}$ in $\\underline{\\operatorname{Map}}(U',U')$, and $a'a$ in that of $1_U$ in $\\underline{\\operatorname{Map}}(U,U)$; both are Kan by Step 2 with $T=U'$, $T=U$. In a Kan complex one component is joined by a single edge (reverse by an outer two-horn, compose by an inner one); take $\\gamma:\\Delta^1\\to\\underline{\\operatorname{Map}}(U',U')$ from $1_{U'}$ to $aa'$. Enriched composition $\\Delta^1\\times M_T(U')\\xrightarrow{\\gamma\\times1}\\underline{\\operatorname{Map}}(U',U')\\times M_T(U')\\to M_T(U')$ is a simplicial homotopy from the identity to $M_T(a)M_T(a')$; likewise $M_T(a')M_T(a)$ is homotopic to the identity. By [lem-coef-realization-finite-limits], $|\\Delta^1\\times K|\\cong[0,1]\\times|K|$, so the realizations are homotopy inverse. A homotopy equivalence is bijective on path components and on homotopy groups at every basepoint. Thus $M_T(a):M_T(U)\\to M_T(U')$ is a weak homotopy equivalence of Kan complexes.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-coef-coherent-localization-interface",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.2.4.5, reconstructed mapping-space argument; a representative of the inverse of q(a) and enriched-composition homotopies."
+   }
+  },
+  {
+   "text": "The tensor adjunction [def-coef-simplicial-tensor-cotensor] identifies the $n$-simplices of $M_T(D)$ with maps $\\Delta^n\\otimes T\\to D$. The defining pullback property identifies these, bijectively, with pairs of maps $\\Delta^n\\otimes T\\to U$ and $\\Delta^n\\otimes T\\to E$ whose composites to $U\\prime$ agree. This identification commutes with every simplex operator by precomposition, so it is an isomorphism of simplicial sets $$M_T(D)=M_T(U)\\times_{M_T(U\\prime)}M_T(E).$$ Under this identification $M_T(h)$ is the second projection; hence it is precisely the pullback of $M_T(a)$ along $M_T(b)$.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.2.4.5; elementary degreewise calculation using the tensor adjunction and the strict pullback."
+   }
+  },
+  {
+   "text": "By Steps 2 and 3, $M_T(b)$ is a Kan fibration and $M_T(a)$ is a weak homotopy equivalence. The right-properness clause of [lem-coef-kan-quillen-model-right-proper-core] applies to this square of simplicial sets. Together with Step 4 it gives that $M_T(h)$ is a weak homotopy equivalence. Step 2 already established that its source and target are Kan. Since $T$ was arbitrary, this proves the asserted mapping-space clause. Right properness has been used only for simplicial sets, not for $\\mathcal M$.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.2.4.5; Kan right properness as supplied by Hovey Theorem 3.6.5."
+   }
+  },
+  {
+   "text": "Both $E$ and $D$ are bifibrant by Step 1, so they may serve as $T$. Surjectivity on components for $M_E(h)$ supplies a vertex $k:E\\to D$ with $[hk]=[1_E]$. Precomposing this equality with $h:D\\to E$ gives $[hkh]=[h]$. Injectivity on components for $M_D(h)$ then gives $[kh]=[1_D]$. These are component equalities in Kan mapping sets. Each can be witnessed by one edge in the direction from the identity to the composite: reverse an edge by filling an outer two-horn, and combine successive edges by filling an inner two-horn. In the explicit coherent nerve of [lem-coef-simplicial-model-nerve-localization], such an edge is exactly a two-simplex with its direct edge the identity and its two other edges $h,k$ (or $k,h$), because the $0$-to-$2$ mapping set of the thickened $[2]$ is $\\Delta^1$. These two triangles exhibit $k$ as a two-sided inverse to the edge represented by $h$, which is the definition of equivalence in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.2.4.5; explicit inverse test using the coherent-nerve definition and Kan horns."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-coef-simplicial-tensor-cotensor",
+  "def-coef-coherent-localization-interface",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: supporting pullback-invariance argument for coherent model diagrams. Agent reconstruction of the mapping-space proof underlying HTT Remark A.2.4.5; HTT consulted online but archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +130,45 @@
    "results": "{\"t\": \"2026-10-17T08:37:53Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ww]eakEquivalence|[Ww]eakEquivalence.*pullback|rightProper\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\"], \"digest\": \"e7bc9246a9e55525\"}",
    "date": "2026-10-17",
    "verdict": "no match: the Mathlib pullback instances require the pulled-back map itself to be a trivial fibration; here a is only a weak equivalence and the other map b is a fibration. JoyalTrick proves model-axiom recognition, not fibrant weak-equivalence base change. No mapping-space detection theorem of this form was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ww]eakEquivalence|[Ww]eakEquivalence.*pullback|rightProper",
+   "results": "{\"t\": \"2026-10-17T10:12:38Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ww]eakEquivalence|[Ww]eakEquivalence.*pullback|rightProper\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"ffe78cba04bc854d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Instances.lean lines 223-246, PathObject.lean lines 260-290, JoyalTrick.lean lines 68-96 and BrownLemma.lean; the returned base-change results require a trivial fibration, and the Brown-factorization results concern a chosen factorization. None supplies the stated pullback and mapping-space conclusions for a mere fibrant weak equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"Fibration\"",
+   "results": "{\"t\": \"2026-10-17T10:12:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"Fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialCofibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.instIsStableUnderRetractsTrivialCofibrationsOfCofibrationsOfWeakEquivalences\", \"HomotopicalAlgebra.instIsStableUnderRetractsTrivialFibrationsOfFibrationsOfWeakEquivalences\", \"HomotopicalAlgebra.instIsMultiplicativeWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"HomotopicalAlgebra.instRespectsIsoWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"HomotopicalAlgebra.instWeakEquivalenceOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsWeakEquivalencesOfIsIso\", \"HomotopicalAlgebra.instWeakEquivalenceITrivialCofibrationsFibrations\"], \"digest\": \"d857a47d0f9be951\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Instances.lean lines 223-246, PathObject.lean lines 260-290, JoyalTrick.lean lines 68-96 and BrownLemma.lean; the returned base-change results require a trivial fibration, and the Brown-factorization results concern a chosen factorization. None supplies the stated pullback and mapping-space conclusions for a mere fibrant weak equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a weak equivalence between fibrant objects along a fibration is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T10:12:41Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of a weak equivalence between fibrant objects along a fibration is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsWeakEquivalencesOfIsIso\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"853992fbecf73cde\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Instances.lean lines 223-246, PathObject.lean lines 260-290, JoyalTrick.lean lines 68-96 and BrownLemma.lean; the returned base-change results require a trivial fibration, and the Brown-factorization results concern a chosen factorization. None supplies the stated pullback and mapping-space conclusions for a mere fibrant weak equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial model category pullback of a weak equivalence between fibrant objects along a fibration induces weak equivalences on mapping spaces from cofibrant objects",
+   "results": "{\"t\": \"2026-10-17T10:12:49Z\", \"tool\": \"leanfinder\", \"query\": \"In a simplicial model category pullback of a weak equivalence between fibrant objects along a fibration induces weak equivalences on mapping spaces from cofibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.IsVeryGood\"], \"digest\": \"d90840e76abfb4db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Instances.lean lines 223-246, PathObject.lean lines 260-290, JoyalTrick.lean lines 68-96 and BrownLemma.lean; the returned base-change results require a trivial fibration, and the Brown-factorization results concern a chosen factorization. None supplies the stated pullback and mapping-space conclusions for a mere fibrant weak equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of weak equivalences between fibrant objects preserves weak equivalences in model categories without assuming right properness",
+   "results": "{\"t\": \"2026-10-17T10:14:59Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of weak equivalences between fibrant objects preserves weak equivalences in model categories without assuming right properness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\"], \"digest\": \"b044652d8aeab905\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Instances.lean lines 223-246, PathObject.lean lines 260-290, JoyalTrick.lean lines 68-96 and BrownLemma.lean; the returned base-change results require a trivial fibration, and the Brown-factorization results concern a chosen factorization. None supplies the stated pullback and mapping-space conclusions for a mere fibrant weak equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-model-coherent-diagrams",
@@ -78,5 +195,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fibrant-pullback-mapping-invariance",
+  "worker": "stage1",
+  "summary": "Expanded the fibrant pullback lemma into six steps, using the existing simplicial localization theorem for homotopy invariance, an explicit tensor-adjunction pullback calculation, and the existing Kan right-properness core. The final equivalence is proved by a two-sided inverse on components and the explicit coherent nerve. No statement change or new nodes. Searches found only trivial-fibration base-change instances, not the full item.",
+  "blueprint": "Realizes the supporting argument for strict coherent model pullbacks in lem-coef-simplicial-model-coherent-diagrams Step 10, beneath prop-coef-integral-exceptional-adjoint paragraph 2 and its derived coefficient-adjunction calculation. The unit/chapter route and all statement hypotheses are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-55b36a982",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-55b36a982 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement is a correct form of Reedy's lemma / HTT Rem. A.2.4.5 (no right properness for fibrant objects) and is left unchanged; HTT is WANTED and the proof is marked agent-written, so the source place was not checked. Small cases checked: a=id, b=id (h=a, a weak equivalence between bifibrant objects), and empty mapping complexes. No new nodes. The dependency closure (69 nodes) contains no cycle. The only citer is lem-coef-simplicial-model-coherent-diagrams Step 10, which matches the hypotheses. Steps 1, 2, 4, 5 and 6 are correct against the cited statements: F=RLP(C∩W) from the WFS clause; SM7 applied to 0→T, with Map(0,X)=pt because K⊗- is a left adjoint by the tensor/cotensor isos; the degreewise pullback; the right-properness sentence of lem-coef-kan-quillen-model-right-proper-core; and π_0 surjectivity/injectivity turned into two triangles through Map(0,2)=Δ^1 of the thickened [2], matching the def-cbc equivalence definition. Step 3 (E5 fault): 'M_T(a) represents postcomposition by q(a), the inverse identities give the homotopies' relied on functoriality of ∞-categorical mapping spaces, which no cited node states. I rewrote it: choose a vertex a' representing q(a)^{-1} through the π_0 representation; composition-compatibility gives aa'~1 and a'a~1 in Kan mapping complexes; enriched composition with one edge gives simplicial homotopies; lem-coef-realization-finite-limits (same unit, already in the closure) gives |Δ^1×K|≅[0,1]×|K|, so the realizations are homotopy equivalences. lem-coef-realization-finite-limits is added to uses/proof_deps. Every cited statement is in the unit's route; def-cbc is a definition, so no tool_uses are needed. There are no duplicates: lem-coef-brown-fibrant-localization-pullbacks is a related general result, but the item is an existing node.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -15,9 +15,72 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a stratum $i:Z\\hookrightarrow X$ of the given stratification. By its assumed witnessing property, clause (b) of [def-weil-pbc-etale-constructible-sheaf] gives an etale covering $(v_b:V_b\\to Z)_{b\\in B}$ and finite $A$-modules $M_b$ with isomorphisms of $A_{V_b}$-module sheaves $\\psi^0_b:(i^{-1}G)|_{V_b}\\cong\\underline{M_b}_{V_b}$, where $|_{V_b}$ is restriction along the functor $(V_b)_{\\Et}\\to Z_{\\Et}$, $(V'\\to V_b)\\mapsto(V'\\to V_b\\xrightarrow{v_b}Z)$. Since $v_b$ is etale, [lem-weil-pbc-etale-inverse-image-restriction] (1) gives an isomorphism of abelian sheaves $\\rho_b:v_b^{-1}i^{-1}G\\xrightarrow{\\sim}(i^{-1}G)|_{V_b}$, natural in the abelian sheaf. It is $A$-linear: for $\\lambda\\in A$, naturality applied to the endomorphism $\\lambda\\cdot$ of $i^{-1}G$ says that $\\rho_b$ intertwines $v_b^{-1}(\\lambda\\cdot)$, which is multiplication by $\\lambda$ for the module structure of [prop-weil-pbc-inverse-image-modules-exact] (2) (the inverse image of the action map is the action map, and the constant section $\\lambda$ of $A_Z$ goes to the constant section $\\lambda$ of $A_{V_b}$ under the ring identification (1)), with $(\\lambda\\cdot)|_{V_b}$, multiplication by $\\lambda$ on the restricted module. The local sections $a$ of $A_{V_b}$ with $\\rho_b(ax)=a\\rho_b(x)$ for all $x$ form a subsheaf of rings containing the constant sections, hence all of $A_{V_b}$, the sheafification of the constant presheaf. Put $\\psi_b=\\psi^0_b\\circ\\rho_b:v_b^{-1}i^{-1}G\\xrightarrow{\\sim}\\underline{M_b}_{V_b}$, an isomorphism of $A_{V_b}$-module sheaves. This applies the given witness; no new stratification is chosen.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RU, definition-finite-locally-constant (restriction F|_{U_i} to the covering members); Section Tag 03S2, paragraph after Definition Tag 03S3 (definition-extension-zero, part (3) for sheaves of Lambda-modules): 'j^{-1} is just the restriction via the functor U_etale -> X_etale'"
+   }
+  },
+  {
+   "text": "For each $b$, base change the covering $(u_j:U_j\\to X)_{j\\in J}$ along $i\\circ v_b:V_b\\to X$. Write $W_{bj}=V_b\\times_XU_j$, with projections $q_{bj}:W_{bj}\\to V_b$ and $r_{bj}:W_{bj}\\to U_j$. By [lem-weil-pbc-etale-covering-base-change], $(q_{bj})_j$ is an etale covering of $V_b$. By [lem-weil-pbc-etale-covering-composition], the family $h_{bj}=v_b\\circ q_{bj}:W_{bj}\\to Z$ is an etale covering of $Z$. These results allow arbitrary indexing sets, so no quasi-compactness or finite subcover is needed.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0217, lemma-etale, parts (2) and (3)"
+   }
+  },
+  {
+   "text": "Let $\\phi_j:u_j^{-1}F\\xrightarrow{\\sim}u_j^{-1}G$ be the supplied isomorphism. All inverse images are module functors by [prop-weil-pbc-inverse-image-modules-exact]. The equality $i\\circ h_{bj}=u_j\\circ r_{bj}$ and the module-linear composition comparisons of [lem-weil-pbc-inverse-image-composition-module-linear-core] give the following chain, where the middle arrow is $r_{bj}^{-1}\\phi_j$ and the penultimate arrow is the inverse image of the trivialization from step 1:\n$$h_{bj}^{-1}i^{-1}F\\cong r_{bj}^{-1}u_j^{-1}F\\cong r_{bj}^{-1}u_j^{-1}G\\cong q_{bj}^{-1}v_b^{-1}i^{-1}G\\cong q_{bj}^{-1}\\underline{M_b}_{V_b}\\cong\\underline{M_b}_{W_{bj}}.$$\nThe last comparison is [lemma-constructible-pullback-constant] with category of values $\\mathrm{Mod}_A$; it preserves the very same finite module $M_b$. Mapping an isomorphism by a functor is elementary: map its inverse and apply the two functor laws. Thus every arrow in the displayed chain is an isomorphism of $A$-module sheaves, not merely of underlying sets.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear-core",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; constant-sheaf inverse image also as in the cited blueprint lemma"
+   }
+  },
+  {
+   "text": "The family $(h_{bj}:W_{bj}\\to Z)_{b,j}$ is an etale covering by step 2. Each $h_{bj}$ is etale, so [lem-weil-pbc-etale-inverse-image-restriction] (1), made $A$-linear by the same argument as in step 1, gives an isomorphism of $A_{W_{bj}}$-module sheaves $(i^{-1}F)|_{W_{bj}}\\cong h_{bj}^{-1}i^{-1}F$, and composing with the chain of step 3 gives $(i^{-1}F)|_{W_{bj}}\\cong\\underline{M_b}_{W_{bj}}$, restriction being along $(W_{bj})_{\\Et}\\to Z_{\\Et}$. Hence the covering $(h_{bj})_{b,j}$ and the finite modules $M_b$ witness clause (b) of [def-weil-pbc-etale-constructible-sheaf] for $i^{-1}F$. Repeat for every one of the finitely many given strata. Their immersions, partition, local closedness and constructibility as subsets have not changed, so clause (a) and all stratification conditions remain satisfied. This proves constructibility of $F$ with the same stratification. Each trivialization was obtained separately on one $W_{bj}$; the definition asks for their existence and imposes no overlap equation. Empty strata are vacuous, and no size bound on either covering family has been introduced.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RU, definition-finite-locally-constant; Tag 095E, lemma-constructible-quasi-compact-quasi-separated, finite stratification clause as stated in the cited definition; Section Tag 03S2, paragraph after Definition Tag 03S3: 'j^{-1} is just the restriction via the functor U_etale -> X_etale'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear-core",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Cover-refinement argument from Tag 03RU, definition-finite-locally-constant; covering axioms Tag 0217 and module composition Tag 03D8"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +123,52 @@
    "results": "; 8 hits: CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.functorIso, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.Sheaf.isConstant_congr, LightCondensed.isoLocallyConstantOfIsColimit, CompHausLike.LocallyConstant.functor, Condensed.isSheafProfinite, LightCondensed.ofSheafForgetLightProfinite",
    "date": "2026-10-17",
    "verdict": "no match: generic constant-sheaf isomorphism invariance and condensed locally constant models do not give descent of a finite constructible stratification on the small etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally isomorphic to a finite locally constant sheaf on an etale cover is finite locally constant on the same stratum",
+   "results": "{\"t\": \"2026-10-17T09:34:09Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf locally isomorphic to a finite locally constant sheaf on an etale cover is finite locally constant on the same stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.exists_locallyConstant_finite_aux\", \"CompHausLike.LocallyConstant.functor\", \"LightCondensed.locallyConstantPresheaf\", \"Profinite.exists_locallyConstant_finite_nonempty\", \"Profinite.exists_locallyConstant_fin_two\", \"CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"CompHausLike.LocallyConstantModule.functor\"], \"digest\": \"e8010a0604ac81fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf isomorphism invariance is only one elementary part; profinite locally constant functions and finite presentation of module sheaves do not state transfer across an etale cover on a fixed stratification"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(sheaf|Sheaf)|IsConstructibleSheaf",
+   "results": "{\"t\": \"2026-10-17T09:35:43Z\", \"tool\": \"grep\", \"query\": \"constructible.*(sheaf|Sheaf)|IsConstructibleSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf isomorphism invariance is only one elementary part; profinite locally constant functions and finite presentation of module sheaves do not state transfer across an etale cover on a fixed stratification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant module sheaves and constructible stratifications are invariant under isomorphisms on an etale covering",
+   "results": "{\"t\": \"2026-10-17T09:35:43Z\", \"tool\": \"leansearch\", \"query\": \"Finite locally constant module sheaves and constructible stratifications are invariant under isomorphisms on an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_congr\", \"CategoryTheory.Sheaf.isConstant_of_iso\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"CompHausLike.LocallyConstant.functorIso\", \"CategoryTheory.Sheaf.IsConstant.mk\"], \"digest\": \"510e49402bc4b693\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf isomorphism invariance is only one elementary part; profinite locally constant functions and finite presentation of module sheaves do not state transfer across an etale cover on a fixed stratification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstantSheaf\"",
+   "results": "{\"t\": \"2026-10-17T09:35:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyConstantSheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf isomorphism invariance is only one elementary part; profinite locally constant functions and finite presentation of module sheaves do not state transfer across an etale cover on a fixed stratification"
+  },
+  {
+   "tool": "grep",
+   "query": "isConstant_congr|isConstant_of_iso",
+   "results": "{\"t\": \"2026-10-17T09:37:17Z\", \"tool\": \"grep\", \"query\": \"isConstant_congr|isConstant_of_iso\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"], \"digest\": \"b882101c698985cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf isomorphism invariance is only one elementary part; profinite locally constant functions and finite presentation of module sheaves do not state transfer across an etale cover on a fixed stratification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of a sheaf of modules descends through local isomorphisms on an arbitrary jointly surjective etale family preserving a specified finite stratification",
+   "results": "{\"t\": \"2026-10-17T09:37:19Z\", \"tool\": \"leanfinder\", \"query\": \"Constructibility of a sheaf of modules descends through local isomorphisms on an arbitrary jointly surjective etale family preserving a specified finite stratification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.X\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\"], \"digest\": \"20f17e11dd8e1a68\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf isomorphism invariance is only one elementary part; profinite locally constant functions and finite presentation of module sheaves do not state transfer across an etale cover on a fixed stratification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-pur-smooth-admissibility",
@@ -80,5 +185,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-local-isomorphism-constructible",
+  "worker": "stage1",
+  "summary": "Wrote the explicit cover refinement on each original stratum and the full module-linear inverse-image isomorphism chain. Reused existing covering, composition and constant-pullback nodes; no new nodes or statement change. No exact project Lean attachment or Mathlib leaf was found. Maintainer reader (2026-10-17): steps 1 and 4 now cite lem-weil-pbc-etale-inverse-image-restriction for the identification of the restriction (i^{-1}G)|_{V} in clause (b) with the inverse image along the etale chart, with its A-linearity written out.",
+  "blueprint": "cor-pur-smooth-admissibility, proof Step 1 constructibility: the etale-local purity identification transfers finite local constancy on each fixed stratum; steps 1-4 make this local transfer explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic stability of an arbitrary jointly surjective etale covering under scheme base change, used to refine a trivializing chart; no step of the six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "Generic composition of arbitrary etale covering families, used to obtain a single trivializing cover of the stratum."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear-core",
+    "why": "Generic module-linear inverse-image composition comparisons for the cartesian square; no node of the unit supplies these comparisons."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic functor on constant-coefficient module sheaves, needed to pull back the supplied module isomorphisms."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic inverse image of a constant sheaf with the same module of values; used only to retain finite constant models."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic identification, for an etale morphism, of inverse image with restriction to the localized site, needed to pass between the restriction form of clause (b) of def-weil-pbc-etale-constructible-sheaf and the inverse images used in the cover refinement; no node of the unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear-core",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-aa785b6bd",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-aa785b6bd (reviewer sub-agent of L); spot-checked: I read the whole item, its parent cor-pur-smooth-admissibility, and the statement of every cited node. Sources checked: Stacks 03RU (etale-cohomology.tex l.9917), 03S2/03S3 (l.11358-11402, module part (3)), 0217 (topologies.tex l.747, parts (2) and (3)) and 03D8 (sites-modules.tex l.1236), plus the blueprint text and proof of lemma-constructible-pullback-constant. The statement is true and unchanged. It is exactly what the parent's Step 1 uses. Small cases tested: empty X, empty strata, A=0, F=G, a disconnected stratum with different finite models, and an infinite cover of a non-quasi-compact scheme. No duplicate was found in the DAG, and the delivery creates no new nodes. Step 2 is correct: the cover is base-changed along i∘v_b as a real fibre product, then composed, with no finiteness or qcqs hypothesis. Step 3 is correct: the module-linear comparisons c are used for (i,h), (u_j,r), (i,v_b q) and (v_b,q), together with i v_b q = u_j r and the constant-sheaf pullback. One fault, C1/C2: steps 1 and 4 were marked elementary but silently treated the restriction (i^{-1}G)|_{V_b}, which is what clause (b) of def-weil-pbc-etale-constructible-sheaf and Stacks 03RU actually give, as the inverse image v_b^{-1}i^{-1}G; step 4 needs the same identification in reverse. For an etale map these agree by a real lemma, lem-weil-pbc-etale-inverse-image-restriction (Stacks 03S2/03S3), which was not cited. Fixed in fixes/dag/nodes/sec-six-functors/lem-sf-etale-local-isomorphism-constructible.json: steps 1 and 4 now cite that lemma, step 1 also cites prop-weil-pbc-inverse-image-modules-exact (2), and the A-linearity of the isomorphism is written out. Both steps are now marked non-elementary; proof_deps is the union of all uses, and split_report.tool_uses has a new entry for the lemma. I accept the tool uses: the two covering lemmas, prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-inverse-image-composition-module-linear-core, lemma-constructible-pullback-constant and the added restriction lemma. There is no SGA citation and no target is weakened. Not changed: the report's chapter/unit binding mismatch is maintainer metadata, and the citations.json the report mentions is not in the delivery.; 1 file(s) fixed by the reviewer"
  }
 }

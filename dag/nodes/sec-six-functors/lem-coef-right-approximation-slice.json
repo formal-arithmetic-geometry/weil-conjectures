@@ -11,9 +11,79 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix (t\\in A). Write (p_A:A_{/t}\\to A) and (p_B:B_{/G(t)}\\to B) for the initial-face projections of the join slices. By [lem-coef-infinity-slice-right-fibration], both are right fibrations. Reversing simplices turns each into a left fibration, so [lem-cbc-left-fibration-equivalence-lift] says that the projection reflects equivalence edges. If an edge of (A_{/t}) is sent by (G_t) to an equivalence, its underlying edge in (A) is sent by (G) to an equivalence; the hypothesis on (G) then makes the underlying edge an equivalence, and reflection by (p_A) makes the original slice edge an equivalence. Hence (G_t) reflects equivalences.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-left-fibration-equivalence-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.6.5 and Remark 7.6.6, printed p. 387; Definition 7.6.1 for right approximation (online source, not archived)"
+   }
+  },
+  {
+   "text": "Write $a=(a_0\\xrightarrow{\\alpha}t)$ and $b=(b_0\\xrightarrow{\\beta}Gt)$. An edge $\\psi:b\\to G_t(a)$ is a $2$-simplex in $B$ with sides $\\psi_0:b_0\\to G(a_0)$, $G\\alpha$, and $\\beta$. Apply the hypothesis to $\\psi_0$, obtaining $v_0:a'_0\\to a_0$ and an equivalence $e_0:b_0\\to G(a'_0)$ with $[G(v_0)][e_0]=[\\psi_0]$. Fill the inner $2$-horn $(e_0,Gv_0)$ in $B$ and call its long edge $w$. By [lem-coef-infinity-mapping-composition], $[w]=[G(v_0)][e_0]=[\\psi_0]$ in $\\pi_0\\operatorname{Map}_B(b_0,G(a_0))$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.6.5 and Remark 7.6.6, printed p. 387; Definition 7.6.1 for right approximation (online source, not archived)"
+   }
+  },
+  {
+   "text": "Make this triangle have the specified long edge $\\psi_0$, not just its class. By [lem-coef-infinity-slice-right-fibration], $\\operatorname{Map}_B(b_0,G(a_0))$ is Kan. Its two vertices $w,\\psi_0$ are in the same component, hence can be joined by a single directed edge: reverse edges with outer $2$-horns and concatenate a finite edge path with inner $2$-horns. By the right-pinched formula of [def-cbc-enhanced-diagrams-cones], choose the corresponding $2$-simplex $H$ with vertices $(b_0,b_0,G(a_0))$ and edges $(\\mathrm{id}_{b_0},w,\\psi_0)$ on $(01,12,02)$. On vertices $(b_0,b_0,G(a'_0),G(a_0))$, prescribe face $123$ to be the triangle of Step 2, face $013$ to be $H$, and face $012$ to be the degeneracy of $e_0$ repeating its source. These agree on every overlap and form $\\Lambda_1^3$. Its filler gives on face $023$ a triangle $\\tau$ with edges exactly $(e_0,Gv_0,\\psi_0)$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.6.5 and Remark 7.6.6, printed p. 387; Definition 7.6.1 for right approximation (online source, not archived)"
+   }
+  },
+  {
+   "text": "Fill the inner $2$-horn $(v_0,\\alpha)$ in $A$, giving a triangle $\\sigma$ with long edge $\\alpha':a'_0\\to t$. Define $a'=(a'_0\\xrightarrow{\\alpha'}t)$ and let $v:a'\\to a$ be the slice edge encoded by $\\sigma$. In $B$, on vertices $(b_0,G(a'_0),G(a_0),Gt)$, prescribe face $012$ to be $\\tau$, face $123$ to be $G\\sigma$, and face $023$ to be the original triangle encoding $\\psi$. Their common edges are respectively $Gv_0$, $\\psi_0$, and $G\\alpha$, so this is a compatible $\\Lambda_2^3$. An inner-horn filler has face $013$ an edge $e:b\\to G_t(a')$ whose underlying edge is $e_0$. It is an equivalence by reflection through the slice projection, proved in Step 1. The entire $3$-simplex, viewed as $\\Delta^2\\star\\Delta^0\\to B$, is a $2$-simplex of $B_{/Gt}$ with edges $(e,G_t(v),\\psi)$. Thus its compatibility with the given structural map $\\beta$ is retained exactly, not inferred from equality of underlying homotopy classes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.6.5 and Remark 7.6.6, printed p. 387; Definition 7.6.1 for right approximation (online source, not archived)"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-mapping-composition] to the $2$-simplex in $B_{/Gt}$ from Step 4. This slice is a quasicategory by [lem-coef-infinity-slice-right-fibration], so the conclusion is $[G_t(v)][e]=[\\psi]$ in $h(B_{/Gt})$. Together with Step 1 this proves both assertions for arbitrary $t\\in A$. The constructions used only the assumed approximation, conservativity, and horn fillings; no limits were assumed.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.6.5 and Remark 7.6.6, printed p. 387; Definition 7.6.1 for right approximation (online source, not archived)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2; explicit slice right-approximation argument from Cisinski Proposition 7.6.5 and Remark 7.6.6"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -90,7 +160,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-colimit-approximation",
@@ -121,5 +191,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-approximation-slice",
+  "worker": "stage1",
+  "summary": "Expanded the retained proof into five steps using existing nodes only. The two explicit inner 3-horn fillings first replace a composite representative by the specified edge and then produce the actual slice 2-simplex. Cited the existing mapping-composition theorem for homotopy-category composition, rather than attributing that theorem to a definition. Statement and statement dependencies unchanged; no new nodes.",
+  "blueprint": "The steps realize the inherited auxiliary slice argument in the proof paragraph 2 route of prop-coef-integral-exceptional-adjoint, via the dual of Cisinski Theorem 7.6.10 and Proposition 7.6.5/Remark 7.6.6. The online Cisinski source is not archived locally.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Generic conservativity of a left fibration, applied after simplex reversal to the right-fibration slice projection; this is an independent tool and does not replace the coefficient-unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-left-fibration-equivalence-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-38425d134",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-38425d134 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-slice-right-fibration, lem-coef-infinity-mapping-composition, lem-cbc-left-fibration-equivalence-lift and its def-coef-infinity-fibrations), the parent lem-coef-finite-colimit-approximation and the unit sk-prop-sf-biduality-general. Cisinski's CatLR is not archived locally (proof_origin agent, WANTED recorded), so I checked the proof directly. Step 1: reversing simplices turns a right fibration (Λ^n_i, 0<i≤n) into a left fibration, so the slice projections reflect equivalences; with p_B∘G_t = G∘p_A this makes G_t conservative. Step 2: ψ as a map Δ^2→B has edges (ψ0, Gα, β); filling (e0, Gv0) gives w with [w]=[ψ0] by mapping-composition. Step 3: a Map-edge goes from face 02 to face 12, so H=(id,w,ψ0) is an edge ψ0→w in a Kan fiber. The faces s0e0, H and T agree on the edges id, e0 and w; the horn is Λ^3_1 (inner) and face 023 has edges (e0, Gv0, ψ0). Step 4: σ gives v: a'(α')→a(α); the faces τ, Gσ and ψ share the edges Gv0, ψ0 and Gα; the horn is Λ^3_2 (inner). Face 013 is a slice edge b→G_t a' over e0, an equivalence by Step 1, and the 3-simplex is a slice 2-simplex (e, G_t v, ψ) that keeps β exactly. Step 5: mapping-composition in the slice quasicategory. Small cases: G=id, empty A, ordinary nerves. The item is not a restatement of a parent clause. No duplicate turned up in an rg search over dag/nodes. I accept the tool use of lem-cbc-left-fibration-equivalence-lift as a generic black box. No SGA cited, A–F clean, no new nodes, no fixes."
  }
 }

@@ -31,9 +31,123 @@
   "def-coef-categorical-pattern-fibrancy",
   "lem-coef-categorical-pattern-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=N(\\mathsf{Fin}_*)$. By the model-calculus theorem, fibrancy of $(Z,T)$ means that it is $\\mathfrak P_{\\mathrm{sym}}$-fibered. Conditions (i) and (ii) therefore give the inner fibration $q$, cocartesian lifts of every inert map, and the equality of $T$ with the cocartesian edges over inert maps. Also $Z$ is a quasicategory: the image of an inner horn fills in $C$ (a string of composable arrows in an ordinary category has its composite), and the inner lifting property of $q$ then fills the given horn in $Z$.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "def-coef-categorical-pattern-fibrancy",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem B.0.20(F), Definition B.0.19(1)-(4), specialized to the fully scaled pattern"
+   }
+  },
+  {
+   "text": "Let $K_n$ be the discrete simplicial set on $\\{1,\\ldots,n\\}$. Condition (iii) says that $Z\\times_C K_n^{\\triangleleft}\\to K_n^{\\triangleleft}$ is classified by a limiting diagram in $\\mathrm{Cat}_\\infty$. Straightening identifies its vertex with $Z_{\\langle n\\rangle}$, its boundary with the $n$ copies of $Z_{\\langle1\\rangle}$, and its legs with colour-projection transport. A limit of this discrete diagram is its product. These products in $\\mathrm{Cat}_\\infty$ are the categorical products by the straightening theorem, so the comparison is $Z_{\\langle n\\rangle}\\simeq Z_{\\langle1\\rangle}^n$. Here the comparison of two product cones is invertible directly from their universal properties: the tuple of projections gives the map in each direction, and both composites are the identity because their projections are the identity tuple. This includes the empty product, whose object is the terminal category $\\Delta^0$.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition B.0.19(5); Definition 2.1.1.10(3) and Remark 2.1.1.14; use the project colour-projection pattern directly"
+   }
+  },
+  {
+   "text": "Fix $z$ over $\\langle n\\rangle$ and any specified $q$-cocartesian edges $e_i:z\\to z_i$ over the colour projections. These edges define a section $s$ of $Z\\times_C K_n^{\\triangleleft}\\to K_n^{\\triangleleft}$: the cone has only the $n$ legs as nondegenerate positive-dimensional simplices. Each $e_i$ remains cocartesian in this pullback, since a cocartesian horn lifting problem there is exactly a horn problem for $q$ with its base simplex fixed by the map to the cone. Degenerate edges are cocartesian by the composition-initiality lemma. Thus $s$ is a cocartesian section, and condition (iv) says that its composite in $Z$ is a $q$-limit diagram. This works for every chosen family $e_i$, and for the section consisting just of $z$ when $n=0$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition B.0.19(6); the project cone has discrete boundary and includes arity zero"
+   }
+  },
+  {
+   "text": "Fix any $y$ over $\\langle m\\rangle$ and test the relative-limit property of $s$ against the constant cone $t$ at $y$, with all legs identities. Write $M=\\operatorname{Map}_Z(y,z)$ and $V=\\prod_i\\operatorname{Map}_Z(y,z_i)$; write $M_C=\\operatorname{Map}_C(\\langle m\\rangle,\\langle n\\rangle)$ and $V_C=\\prod_i\\operatorname{Map}_C(\\langle m\\rangle,\\langle1\\rangle)$. The join-cone mapping formula, natural for boundary restriction and postcomposition by $q$, identifies $\\operatorname{Map}(t,s)$ with $V\\times^h_V M\\simeq M$ and its boundary restriction with $M\\to V$, whose components are composition with $e_i$. The first map $V\\to V$ is the identity up to the unit homotopy in the mapping-composition lemma, since the legs of $t$ are identities. Evaluation contracts the path-pullback of an identity map to its other factor. The same calculation in $C$ identifies the lower row with $M_C\\to V_C$. The relative-limit square of the relative-cone definition therefore says precisely that the natural comparison $M\\to V\\times^h_{V_C}M_C$ is an equivalence. This computation uses full mapping spaces, including their triangle homotopies.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition B.0.19(6); explicit unpacking through the cited relative-cone and join-cone statements"
+   }
+  },
+  {
+   "text": "For an ordinary category $I$, its right-pinched mapping space from $a$ to $b$ in $N(I)$ is the discrete simplicial set $\\operatorname{Hom}_I(a,b)$. Indeed an $r$-simplex is a functor $[r+1]\\to I$ whose first $r+1$ vertices and entire initial face are constant at $a$, and whose last vertex is $b$. Its only remaining datum is the arrow $a\\to b$; the initial arrows are identities, so every arrow to the last vertex equals that one. All simplicial operators keep this arrow fixed. Consequently $M_C$ and $V_C$ are discrete, and the lower horizontal map sends $\\phi$ to $(\\rho_i\\phi)_i$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2); direct calculation from the nerve and right-pinched mapping-space definitions"
+   }
+  },
+  {
+   "text": "Regard the comparison in step 4 as a map over $M_C$ and apply homotopy-fiber detection with the identity equivalence of $M_C$. For every $\\phi:\\langle m\\rangle\\to\\langle n\\rangle$ this gives an equivalence from $\\operatorname{Map}^{\\phi}_Z(y,z)$ to the homotopy fiber over $\\phi$ of $V\\times^h_{V_C}M_C\\to M_C$. Pasting homotopy-pullback squares identifies the latter with the homotopy fiber of $V\\to V_C$ over $(\\rho_i\\phi)_i$. In the path-pullback model this fiber is $\\prod_i\\operatorname{Map}^{\\rho_i\\phi}_Z(y,z_i)$: a point, path, or higher simplex in a product is exactly a tuple of the corresponding data, since simplicial products and the interval mapping object are computed coordinatewise. The induced equivalence is composition with the chosen $e_i$, as step 4 identifies its boundary restriction. This proves the required mapping-space product formula for every choice of cocartesian projections.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2); homotopy-fiber extraction from the relative-limit square"
+   }
+  },
+  {
+   "text": "When $n=0$, step 2 gives $Z_{\\langle0\\rangle}\\simeq\\Delta^0$, so in particular this fiber is nonempty. In step 4 both $V$ and $V_C$ are empty products, hence points; $M_C$ is also a point because there is exactly one pointed map $\\langle m\\rangle\\to\\langle0\\rangle$. Thus $M\\simeq M_C\\simeq\\Delta^0$, and the homotopy fiber over that unique map is contractible, as asserted. No existence of a colour is needed: if $Z_{\\langle1\\rangle}$ is empty, step 2 makes the positive-arity fibers empty while retaining the terminal zero fiber.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10, including the empty output family; empty-cone conditions in Definition B.0.19(5)-(6)"
+   }
+  },
+  {
+   "text": "Steps 1, 2 and 6 give exactly the inner-fibration, inert-lifting, fiber-product and mapping-product clauses of the symmetric-operad definition in the recognition node. By step 1 the marking is exactly its inert marking, so $(Z,T)=Z^{\\mathrm{in}}$. Conversely the first assertion of the recognition node says that $Q^{\\mathrm{in}}$ is fibrant in this very model category for every small symmetric infinity operad $Q$. The two implications establish the asserted classification of fibrant objects.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.4.6, fibrant-object assertion; forward implication proved directly for the project pattern, reverse implication from the existing recognition theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-categorical-pattern-model-calculus",
+  "def-coef-categorical-pattern-fibrancy",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-symmetric-operadic-fibration-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Definition 2.1.1.10, Remark 2.1.1.14, Proposition 2.1.4.6 and Appendix B.0.19-B.0.20, pp. 174-175, 189-190, 1467-1468. Direct proof for the project all-colour-projection pattern; no comparison with the source binary-cone model structure is assumed. Source read in references/HA.pdf in the delivery sandbox."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +176,52 @@
    "results": "not run: LeanSearch/LeanFinder/msearch.py are unavailable on the review-service machine",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "operad|preoperad|categorical.?pattern|MarkedSSet",
+   "results": "Two docstring bibliography occurrences only: Mathlib/CategoryTheory/Distributive/Monoidal.lean:55; Mathlib/Algebra/NonAssoc/PreLie/Basic.lean:39. No operad or marked-pattern declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Operad, SSet",
+   "results": "Loogle returned unknown identifier 'CategoryTheory.Operad'; no hits. Followed by a valid quoted-name query.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrant objects of the symmetric infinity operad categorical pattern model structure are precisely infinity operads marked by inert edges",
+   "results": "Generic SSet Quillen fibrations, HomotopicalAlgebra.FibrantObject constructors/instances and CategoryTheory.Nerve.quasicategory; no marked operadic pattern or characterization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fibrant objects of infinity preoperads are infinity operads with inert marking",
+   "results": "Generic HomotopicalAlgebra.IsFibrant, FibrantObject, fibrantObjects, isFibrant_iff and cofibrant-object declarations only; none states operadic fibrancy.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"operad\"",
+   "results": "No hits for the quoted substring operad.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Segal condition and relative limit cones characterize symmetric infinity operads over finite pointed sets",
+   "results": "CategoryTheory.Nerve.isStrictSegal, strictSegal; SSet.IsStrictSegal, StrictSegal, StrictSegalCore and coskeletal variants. These concern nerves and strict Segal sets, not marked infinity operads or their fibrant objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +238,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-operadic-fibrant-objects",
+  "worker": "stage1",
+  "summary": "Proved the fibrant-to-operad implication from the existing fully scaled pattern model calculus, using the discrete colour cones for the fiber products and testing their relative-limit property on constant cones to recover the mapping-space products. Checked the exact inert marking, arbitrary choices of projection lifts, the empty output cone, and the reverse implication already stated by the recognition node. No new nodes or statement changes. All cited node statements were read; exact citation excerpts are in citations.json.",
+  "blueprint": "Supports prop-coef-integral-exceptional-adjoint, historical proof paragraph 2 middle derived mapping-complex comparison, through the inherited operadic approximation and monadic-bar ancestry. Realizes precisely the fibrant-target recognition input formerly inline in step 7 of lem-coef-operadic-approximation-marked-equivalence. The main-20261015 separate proof contains the same derived mapping-complex comparison; no new unit route is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-2d865d2e9",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-2d865d2e9 (reviewer sub-agent of L); spot-checked: There are no new nodes. I read the item's 8 steps against the full statement of every node they cite, and each step holds. Step 1: by model-calculus, fibrant means P-fibered; conditions (i) and (ii) give the inner fibration, the inert cocartesian lifts and T = the inert edges, so (Z,T) = Z^in. Step 2: condition (iii) for the discrete colour cone is a product cone in Cat_inf, and straightening gives the fibers, the transports and terminal = Delta^0, hence Z_<n> ≃ Z_<1>^n, with n=0 included. Step 3: an arbitrary family of cocartesian projections is a cocartesian section; cocartesian edges stay cocartesian after pullback, and composition-initiality says degenerate edges are cocartesian; so (iv) applies. Step 4: testing the relative-limit square on the constant cone at y, the join-cone formula and the unit homotopy reduce it to M ≃ V x^h_{V_C} M_C. It also uses two one-line facts not spelled out: mapping spaces in a product are products, and equivalences preserve mapping spaces. Step 5: mapping spaces in the nerve are discrete; I checked this directly. Step 6: fiber detection over id_{M_C}, then pasting, then coordinatewise path fibers. Step 7: n=0 and the no-colour case are consistent. Step 8: the clauses match the recognition node's definition, and the reverse direction is the recognition node's first assertion. No hypothesis is added, nothing is circular, and no node restates a clause of the item. Every cited statement is in unit sk-prop-sf-biduality-general, so no tool_uses are needed; def-cbc is only a definition. I searched dag/nodes (fibrant+operad, 2.1.4.6, B.0.20): the nonsymmetric marked-operadic node and the pattern weak-equivalence nodes are different results, so there is no duplicate. HA is not in literature/ (it is WANTED) and no copy exists on this machine, so I could not open it at the cited pages. I checked the pattern definition against HA B.0.19/B.0.20 from my own knowledge of the text. The proof is correctly marked agent-written and depends only on DAG statements, which I verified. This is not a target node, so the base-change morphism and coefficient-category check does not apply. No SGA is cited. No changes."
  }
 }

@@ -61,13 +61,13 @@
    }
   },
   {
-   "text": "At a $K$-vertex $k$, the category $J_{i_K(k)}=K_{/k}$ is a quasicategory by [lem-coef-infinity-slice-right-fibration]. Its object $t=1_k$ is final by [lem-coef-infinity-slice-equivalence-final], because $1_k$ is an equivalence. Every fiber $Y_z$ is a quasicategory: an inner-horn lifting problem in it is a problem for $q$ over a constant simplex at $z$, and its filler stays in the fiber by [def-coef-infinity-fibrations]. Let $d:K_{/k}\\to\\mathcal C$ be any diagram in a quasicategory $\\mathcal C$. By [lem-coef-infinity-final-index-colimit] there is a colimiting cocone $\\mu_0$ with vertex $d(t)$ and identity leg at $t$; hence colimits of shape $K_{/k}$ exist in every fiber. By the cocone form of [lem-cbc-enhanced-functor-cone-calculus], $\\mu_0$ colimiting means that $a\\mapsto\\Delta(a)\\circ\\mu_0$ is an equivalence $\\operatorname{Map}(d(t),w)\\to\\operatorname{Map}(d,\\Delta w)$ for every $w$; its composite with evaluation at $t$ is homotopic to the identity, so evaluation at $t$ is an equivalence by two-out-of-three. Consequently a cocone $\\mu$ with vertex $l$ and leg $u:d(t)\\to l$ at $t$ is colimiting if and only if $u$ is an equivalence: the composite of $a\\mapsto\\Delta(a)\\circ\\mu$ with evaluation at $t$ is precomposition with $u$, which is an equivalence on all mapping spaces exactly when $u$ is an equivalence (for the converse take $w=d(t)$ and $w=l$ on components, as in Step 2); two-out-of-three and the characterization of colimiting cocones in the same node finish both directions. Now let $\\lambda$ be any colimiting cocone of $d$ in $Y_z$ and $e_!$ any edge transport. The leg of $\\lambda$ at $t$ is an equivalence, a simplicial map carries an equivalence with its two inverse $2$-simplices to an equivalence, so the leg of $e_!\\lambda$ at $t$ is an equivalence and $e_!\\lambda$ is colimiting in $Y_{z'}$. Hence all fibers have colimits of shape $J_{i_K(k)}$ and every edge transport preserves them. This verifies the local hypotheses at $K$-vertices directly from the final object; no additional fiber colimit assumption is introduced.",
+   "text": "At a $K$-vertex $k$, the indexing quasicategory is $J_{i_K(k)}=K_{/k}$ by Step 1 and [lem-coef-infinity-slice-right-fibration]. Its vertex $t=1_k$ is final by [lem-coef-infinity-slice-equivalence-final]. Every fiber $Y_z$ is a quasicategory: an inner-horn problem there is a problem for $q$ over the constant simplex at $z$, so the inner-fibration filler stays in that fiber by [def-coef-infinity-fibrations]. For any diagram $d:K_{/k}\\to Y_z$, apply [lem-coef-infinity-final-index-colimit] to obtain a coherent cocone with vertex $d(t)$ whose leg at $t$ is the identity of $d(t)$. That node phrases colimits by mapping spaces; to obtain a colimiting cocone in the initial-object sense of [def-cbc-enhanced-diagrams-cones] used in Step 5, note that the degenerate identity edge is an equivalence edge (it is its own inverse, with degenerate $2$-simplices as witnesses), so [lem-coef-infinity-final-index-cocone-criterion] shows that this cocone is colimiting. Thus every fiber has colimits of this shape.",
    "uses": [
     "lem-coef-infinity-slice-right-fibration",
     "lem-coef-infinity-slice-equivalence-final",
+    "def-coef-infinity-fibrations",
     "lem-coef-infinity-final-index-colimit",
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "def-coef-infinity-fibrations"
+    "lem-coef-infinity-final-index-cocone-criterion"
    ],
    "elementary": false,
    "source": {
@@ -76,7 +76,18 @@
    }
   },
   {
-   "text": "For each vertex $c$ of $T_a$, apply [lem-coef-cocartesian-prescribed-cone-colimit-lifting] with $p=q$, $J=J_c$, $h=fr_c$ and $g=\\pi k_c$. The compatibility is exact: $qfr_c=ar_c=(\\pi k_c)|_{J_c}$. For $c=i_X(x)$ the required fiber colimits and preservation are precisely the hypotheses for $L_x$ in the statement, using the exact slice identification in Step 1. For $c=i_K(k)$ they were verified in Step 3. All these simplicial sets are small in the common containing universe. The cited lemma gives a $q$-colimit diagram $v_c:J_c^{\\triangleright}\\to Y$ with $v_c|_{J_c}=fr_c$ and $qv_c=\\pi k_c$ exactly. In particular these cones lie over the varying canonical base cones; a cone entirely inside $Y_x$ would not by itself have that property. For an empty $L_x$ the same lemma uses the assumed preserved initial objects.",
+   "text": "For any colimiting cocone $\\lambda:d\\to\\Delta l$ in $Y_z$, [lem-coef-infinity-final-index-cocone-criterion] says that $\\lambda_t:d(t)\\to l$ is an equivalence. Let $e_!:Y_z\\to Y_{z\\prime}$ be any edge transport. As a simplicial map, $e_!$ takes an inverse edge and both inverse-triangle $2$-simplices of $\\lambda_t$ to the same inverse data for $e_!(\\lambda_t)$. The leg of the image cocone $e_!\\lambda$ at $t$ is exactly $e_!(\\lambda_t)$, so it is an equivalence. Apply the same cited criterion in $Y_{z\\prime}$ to conclude that $e_!\\lambda$ is colimiting. Consequently every edge transport preserves all $K_{/k}$-indexed colimits. This supplies the preservation hypothesis at $K$-vertices without adding an assumption.",
+   "uses": [
+    "lem-coef-infinity-final-index-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XV",
+    "place": "Corollary 7.2.2.5, absolute final-index cocone criterion; apply the equivalence-edge definition to the transport simplicial map."
+   }
+  },
+  {
+   "text": "For each vertex $c$ of $T_a$, apply [lem-coef-cocartesian-prescribed-cone-colimit-lifting] with $p=q$, $J=J_c$, $h=fr_c$ and $g=\\pi k_c$. The compatibility is exact: $qfr_c=ar_c=(\\pi k_c)|_{J_c}$. For $c=i_X(x)$ the required fiber colimits and preservation are precisely the hypotheses for $L_x$ in the statement, using the exact slice identification in Step 1. For $c=i_K(k)$ they were verified in Steps 3 and 4. All these simplicial sets are small in the common containing universe. The cited lemma gives a $q$-colimit diagram $v_c:J_c^{\\triangleright}\\to Y$ with $v_c|_{J_c}=fr_c$ and $qv_c=\\pi k_c$ exactly. In particular these cones lie over the varying canonical base cones; a cone entirely inside $Y_x$ would not by itself have that property. For an empty $L_x$ the same lemma uses the assumed preserved initial objects.",
    "uses": [
     "lem-coef-cocartesian-prescribed-cone-colimit-lifting"
    ],
@@ -87,7 +98,7 @@
    }
   },
   {
-   "text": "Now apply [lem-coef-infinity-relative-kan-existence] with $\\mathcal A=K$, $\\mathcal C=T_a$, $\\mathcal D=Y$, $\\mathcal B=X$, $p=q$, $h=f$ and $s=\\pi$. Step 1 gives a full subcategory of a quasicategory; Step 2 verifies the isofibration; the equation $qf=a=\\pi|_K$ is the given equality; and Step 4 supplies every local $q$-colimit lift with the required exact boundary and base. The conclusion is a simplicial map $F:T_a\\to Y$ with $F|_K=f$ and $qF=\\pi$ exactly. No filteredness, extra colimits, or size condition outside the containing universe was used.",
+   "text": "Now apply [lem-coef-infinity-relative-kan-existence] with $\\mathcal A=K$, $\\mathcal C=T_a$, $\\mathcal D=Y$, $\\mathcal B=X$, $p=q$, $h=f$ and $s=\\pi$. Step 1 gives a full subcategory of a quasicategory; Step 2 verifies the isofibration; the equation $qf=a=\\pi|_K$ is the given equality; and Step 5 supplies every local $q$-colimit lift with the required exact boundary and base. The conclusion is a simplicial map $F:T_a\\to Y$ with $F|_K=f$ and $qF=\\pi$ exactly. No filteredness, extra colimits, or size condition outside the containing universe was used.",
    "uses": [
     "lem-coef-infinity-relative-kan-existence"
    ],
@@ -101,9 +112,9 @@
  "proof_deps": [
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-join",
-  "lem-cbc-enhanced-functor-cone-calculus",
   "lem-coef-cocartesian-prescribed-cone-colimit-lifting",
   "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-final-index-cocone-criterion",
   "lem-coef-infinity-final-index-colimit",
   "lem-coef-infinity-relative-cone-equivalence",
   "lem-coef-infinity-relative-join-cartesian-realization",
@@ -259,7 +270,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-cocartesian-section-cofinality",
@@ -272,14 +283,9 @@
   "date": "2026-10-17",
   "item": "lem-coef-cocartesian-relative-cylinder-extension",
   "worker": "stage1",
-  "summary": "Repaired the earlier three-step attempt: its fiber cone did not lie over the canonical varying base cone, coherent transport was uncited, and quasicategoricity of T_a was asserted without a lemma. Reused the opposite relative-join realization, mapping-space cocartesian criterion, slice/final-object calculus and relative Kan theorem. Created one statement-only local cone-lifting input, HTT 4.3.1.11, with five logged searches in two phrasings; no Mathlib leaves. Statement unchanged.",
+  "summary": "Q72 repair of the human return: replaced the 2060-character Step 3 with two short steps. Reused the existing slice-final-object and identity-leg colimit statements for existence; extracted the non-elementary coherent evaluation and final-leg detection argument into a single statement-only lemma. Transport preservation is now an explicit application of that lemma before and after applying the transport to inverse-edge witnesses. Kept the original statement, Lean record, proof route, and all other proof steps (only their step references updated). One new node, no Mathlib leaves; seven logged searches in two semantic phrasings.",
   "blueprint": "Realizes the blueprint.from HTT 5.4.4.2 final-paragraph extension of f from K to T(K): identify K×_X X_{/x}, lift its prescribed base cone using fiber colimits and transport preservation, and assemble via 4.3.2.13.",
-  "tool_uses": [
-   {
-    "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Generic uniqueness of colimiting cocones and preservation of equivalences in the final-object calculation; no unit-specific coefficient argument is replaced."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-cbc-enhanced-functor-cone-calculus"
@@ -287,10 +293,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N4-4d7ff2846",
-  "group": "N4",
+  "reviewer": "NT-cc-Q72-a990623a4",
+  "group": "Q72",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-4d7ff2846 (reviewer sub-agent of L); spot-checked: I read the item, the new node (HTT Cor. 4.3.1.11), every cited statement, the unit/parent route and delivery-errors A–F. The item statement is unchanged and true; the edge cases K=∅, a=id and point base check out. The new node matches 4.3.1.11 hypothesis by hypothesis; its edge cases J=∅, J=pt, p=id and B=pt check out. It duplicates no existing node: I grepped 4.3.1.11 and read the 7 hits, which are all detection or absolute-colimit results. It is strictly smaller than the item (D1 ok). Steps 1, 2, 4 and 5 are correct: the T_a^op = E_{a^op} realization, the exact identification J_{i_X(x)} = L_x, the isofibration via the mapping criterion, the exact boundary/base equations, and the relative Kan existence hypotheses. Fault repaired (C4/E5): the second reading changed Step 3 to infer that transports preserve K_{/k}-colimits from the merely existential final-index-colimit lemma. I rewrote Step 3: a cocone over a diagram with final object t is colimiting iff its leg at t is an equivalence, using the mapping-space characterization in lem-cbc-enhanced-functor-cone-calculus plus Yoneda on π0, and transports preserve equivalences. That node is restored to the step's uses and to proof_deps. The stale tool_use for it is now accurate and accepted. Fixed file: fixes/dag/nodes/sec-six-functors/lem-coef-cocartesian-relative-cylinder-extension.json. HTT is not archived; the WANTED line and agent proof_origin are correct. No SGA is used. Not a target node, so the base-change and coefficient-category check does not apply.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-a990623a4 (reviewer sub-agent of L); spot-checked: Read the item, its six steps and the new node in full, plus every cited statement. Steps 1, 2, 4, 5 and 6 are correct. Step 1: I checked by hand that J_c equals L_x at X-vertices and K_{/k} at K-vertices. Step 2: the isofibration proof via the mapping criterion holds. Step 4: preservation by transports follows because simplicial maps carry equivalence witnesses. Steps 5-6: the hypotheses of the prescribed-cone lifting and relative-Kan existence lemmas match exactly. One fault, fixed: final-index-colimit states colimits in the mapping-space sense, but the prescribed-cone lifting lemma needs initial objects of the cocone category (def-cbc). Old Step 3 asserted the latter without the translation, which the dropped cone-calculus tool use used to supply. Step 3 now applies the new criterion to the identity-leg cocone (the identity is an equivalence edge) and cites the new node. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-cocartesian-relative-cylinder-extension.json; proof_deps still equals the union of the uses. New node lem-coef-infinity-final-index-cocone-criterion is true. Clause 2 is Kerodon 02XV (Cor. 7.2.2.5, read online) with U: C -> Delta^0. Clause 1 follows from right cofinality of {t}, or from the identity-leg colimit by two-out-of-three. Small cases J=Delta^0, J=Delta^1 and C empty pass. It is statement-only, self-contained, honestly searched, and its blueprint ancestry is correct. It duplicates no existing node: right-adjoint-reindexing covers only nerves, relative-cone-equivalence (3) gives one direction only, and final-index-colimit gives existence only. All citations stay in unit sk-prop-sf-biduality-general apart from definitions. No SGA, no coefficient category, no target change. HTT 4.3.1.11, 4.3.2.13 and 5.4.4.2 are not archived and I did not re-read them; the item's route is unchanged from the reviewed split. The node-level tool_uses still lists lem-cbc-enhanced-functor-cone-calculus, which is no longer cited; that maintainer-owned field is left for the maintainer to clear.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CocartesianRelativeCylinderExtension",

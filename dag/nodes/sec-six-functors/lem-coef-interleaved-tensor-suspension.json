@@ -12,41 +12,102 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix n and write |a_j| for the degree of a homogeneous pure tensor factor. Since E is the free abelian group on one generator ε in degree -1, the universal property of the tensor product gives a unique multilinear map sending a_0⊗⋯⊗a_{n+1} to the displayed interleaved tensor. Its degree is Σ_j|a_j|−(n+1), which is the degree of x in V_n[n+1], because the shift is K[r]^q=K^{q+r}. Multiplication by the integer sign (-1)^{α_n(x)} therefore defines a homogeneous degree-zero map Φ_n on pure tensors and hence on V_n[n+1]. The construction uses only the stated tensor products and the fixed generator ε.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, §§3.1 and 3.6(i), with the sign identification written out here"
+   }
+  },
+  {
+   "text": "Define Ψ_n on a homogeneous interleaved pure tensor by removing the ε factors and multiplying by the same sign (-1)^{α_n}, where α_n is computed from the remaining a_j. The tensor universal property makes Ψ_n well defined and additive. On every homogeneous pure tensor, Ψ_nΦ_n and Φ_nΨ_n multiply by (-1)^{2α_n}=1, so they are inverse maps. A degree-zero chain map on each K_j preserves every |a_j| and commutes with the multilinear tensor maps; consequently it commutes with Φ_n and Ψ_n. Thus the maps are natural in all K_j before the differential identity is checked.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, §3.1, word decomposition and §3.6(i), sign-normalized identification"
+   }
+  },
+  {
+   "text": "It remains to compare differentials. In the W_n tensor differential, the term differentiating a_j has the Koszul exponent Σ_{k<j}|a_k|−j, because j copies of ε, each of degree −1, precede a_j. Hence its coefficient after Φ_n is (-1)^{α_n+Σ_{k<j}|a_k|−j}. In d_{V_n} the same term has exponent Σ_{k<j}|a_k|. After applying the shift differential (-1)^{n+1} and then Φ_n to the tensor with a_j replaced by da_j, the exponent is n+1+Σ_{k<j}|a_k|+α_n+(n+1−j), since |da_j|=|a_j|+1. These two exponents differ by 2n+2, so the coefficients agree. Summing over j gives d_{W_n}Φ_n=Φ_n((-1)^{n+1}d_{V_n}); d^2=0 and the tensor Leibniz rule give no additional terms because dε=0.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, §§3.1 and 3.6(i), internal differential sign calculation"
+   }
+  },
+  {
+   "text": "The argument includes n=0: there is one ε, α_0=|a_0|, and the same exponent calculation gives the shift sign (-1). It also includes homogeneous elements of arbitrary degree and unbounded complexes, since each equality is checked on finite pure tensors and then extended additively; no truncation, boundedness, or flatness is invoked. Therefore Φ_n is a natural isomorphism of cochain complexes with the stated inverse and differential formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, §3.6(i), arbitrary-length and unbounded sign comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld, §§3.1 and 3.6(i); explicit arbitrary-length Koszul sign computation"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "bar.*differential|suspension.*sign|tensor.*shift|shift.*tensor",
-   "results": "{\"t\": \"2026-10-17T08:28:36Z\", \"tool\": \"grep\", \"query\": \"bar.*differential|suspension.*sign|tensor.*shift|shift.*tensor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "tool": "leansearch",
+   "query": "Koszul sign isomorphism between an iterated tensor product with degree minus one generators and the shifted tensor product of cochain complexes",
+   "results": "CochainComplex.instHasShiftInt; CochainComplex.shiftFunctorObjXIso; CochainComplex.shiftFunctor; CochainComplex.shiftFunctor_obj_d; no declaration for the arbitrary interleaving formula.",
    "date": "2026-10-17",
-   "verdict": "no match: read BifunctorShift.lean:89-123 and HomologicalComplex tensor declarations in Monoidal.lean:286-304; these provide binary shift/tensor isomorphisms or tensor definitions, not the arbitrary-length interleaved map with the specified exponent and naturality. It needs iteration and the explicit sign comparison, not a one-line specialization."
+   "verdict": "no match: general shift declarations only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "explicit sign formula identifies tensor complex with inserted degree -1 generators and shift",
+   "results": "ComplexShape.TensorSigns and TotalComplexShape sign declarations; CochainComplex.shiftFunctor; no arbitrary interleaved tensor comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match: general tensor-sign infrastructure only"
   },
   {
    "tool": "loogle",
-   "query": "\"tensor\", \"shift\"",
-   "results": "{\"t\": \"2026-10-17T08:28:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensor\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CochainComplex.shiftFunctorObjXIso, HomologicalComplex.tensorObj, tensor",
+   "results": "0 hits; loogle reported unknown identifier 'tensor'.",
    "date": "2026-10-17",
-   "verdict": "no match: read BifunctorShift.lean:89-123 and HomologicalComplex tensor declarations in Monoidal.lean:286-304; these provide binary shift/tensor isomorphisms or tensor definitions, not the arbitrary-length interleaved map with the specified exponent and naturality. It needs iteration and the explicit sign comparison, not a one-line specialization."
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bar.*differential|suspension.*sign|tensor.*shift|shift.*tensor [subdirectory Algebra/Homology]",
+   "results": "0 hits in Mathlib/Algebra/Homology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "Tensor products interleaved with degree minus one generators identify with a shifted tensor complex via Koszul signs, internal differential sign comparison",
-   "results": "{\"t\": \"2026-10-17T08:28:47Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor products interleaved with degree minus one generators identify with a shifted tensor complex via Koszul signs, internal differential sign comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.tensor_unit_d₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.tensorObj\"], \"digest\": \"ca9d01cb9576b956\"}",
+   "results": "HomologicalComplex.tensorObj and unit_tensor_d₁/unit_tensor_d₂ plus HasTensor infrastructure; none states the displayed arbitrary-length map.",
    "date": "2026-10-17",
-   "verdict": "no match: read BifunctorShift.lean:89-123 and HomologicalComplex tensor declarations in Monoidal.lean:286-304; these provide binary shift/tensor isomorphisms or tensor definitions, not the arbitrary-length interleaved map with the specified exponent and naturality. It needs iteration and the explicit sign comparison, not a one-line specialization."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Koszul sign isomorphism between an iterated tensor product with degree minus one separators and the shifted tensor product of cochain complexes",
-   "results": "{\"t\": \"2026-10-17T08:30:40Z\", \"tool\": \"leansearch\", \"query\": \"Koszul sign isomorphism between an iterated tensor product with degree minus one separators and the shifted tensor product of cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shiftFunctorObjXIso\", \"CochainComplex.instHasShiftInt\", \"CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc\", \"CochainComplex.HomComplex.Cochain.shift\", \"CochainComplex.HomComplex.Cochain.δ_shift\", \"CochainComplex.HomComplex.Cochain.leftUnshift_v\", \"CochainComplex.shiftFunctor_obj_d\", \"CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁\"], \"digest\": \"a8d2cbeaaec34657\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read BifunctorShift.lean:89-123 and HomologicalComplex tensor declarations in Monoidal.lean:286-304; these provide binary shift/tensor isomorphisms or tensor definitions, not the arbitrary-length interleaved map with the specified exponent and naturality. It needs iteration and the explicit sign comparison, not a one-line specialization."
+   "verdict": "no match: binary/general tensor infrastructure only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-quotient-hom-cone",
@@ -69,5 +130,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-interleaved-tensor-suspension",
+  "worker": "stage1",
+  "summary": "Checked the imported sign-normalized interleaving statement against its Drinfeld dg-quotient source route and supplied a direct four-step proof. The proof constructs the multilinear map and its inverse, verifies degree bookkeeping and naturality, computes the internal differential sign term by term, and checks n=0 and unbounded complexes. No new subordinate node is needed: every step is either a direct tensor/shift calculation from the cited definitions or an explicitly written sign calculation. The Mathlib searches found only general shift/tensor declarations, not this arbitrary-length comparison.",
+  "blueprint": "Realizes the interleaved-tensor sign comparison used in the mapping-complex calculation of prop-coef-integral-exceptional-adjoint, Proof paragraph 2, via lem-coef-dg-quotient-hom-cone Step 6."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-beb24a492",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-beb24a492 (reviewer sub-agent of L); spot-checked: I read the item in full, its four steps, the cited nodes def-weil-size-convention, def-weil-pbc-module-tensor-product and def-weil-abstract-derived-category, the parent lem-coef-dg-quotient-hom-cone (step 6 is its only citer), and the siblings lem-coef-dg-two-sided-bar-derived-tensor and lem-coef-contraction-word-bar-faces. The statement is correct with no flatness or boundedness assumptions and is not weakened. Degree count: Phi_n(x) has degree sum|a_j|-(n+1), which is the degree of x in V_n[n+1]. Differential: for the term differentiating a_j, the W-side exponent is alpha+sum_{k<j}|a_k|-j and the V-side exponent after the shift and Phi is n+1+sum_{k<j}|a_k|+alpha+(n+1-j); they differ by 2n+2. I checked this by hand at n=0 and by brute force for all n=0..4 and all degree tuples in [-3,3]^{n+2}, with zero parity mismatches. The internal part of -d_B on V_n[n+1] is (-1)^{n+1}d_{V_n}, which is what parent step 6 needs, and the Phi and alpha formulas agree verbatim with the parent and the bar-faces sibling. Step 1 is well defined because the sign is constant on each multidegree summand; the wording is terse but correct. In step 2 the inverse composites multiply by (-1)^{2alpha}=1 and naturality is clear. Step 4 is genuinely elementary. All uses are definitions or Mathlib leaves, so there is no route issue and no tool_uses. No new nodes were created. Duplicate search (rg for interleav and Koszul/shift sign wording over dag/nodes) found no node stating this comparison. Drinfeld is not archived under literature/; the worker recorded WANTED and marked the proof agent-written, which is correct. The Mathlib search record covers all three required kinds. No changes made."
  }
 }

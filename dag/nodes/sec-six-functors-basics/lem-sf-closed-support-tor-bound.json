@@ -10,17 +10,86 @@
  "stmt_deps": [
   "def-weil-closed-immersion",
   "lem-exc-closed-support-triangle",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "def-weil-pbc-derived-categories",
   "def-kun-tor-amplitude",
   "lem-exc-closed-ambient",
   "def-weil-open-immersion",
   "def-weil-pbc-direct-image",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=i^\\times K$ and $F=i_*E$. The exact functors $i_*$ and $i^*$ act termwise on derived categories by [lem-sf-exact-functor-derived-triangulated]. If $C^\\bullet$ represents $E$, the natural counit maps $i^*i_*C^r\\to C^r$ commute with the differentials and are isomorphisms by hypothesis. They give an isomorphism $i^*F\\simeq E$. For an arbitrary $A_Z$-module sheaf $N$, put $M=i_*N$, a degree-zero $A_T$-module sheaf. The same counit gives $i^*(M[0])\\simeq N[0]$.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, termwise exact functors; apply the hypothesized counit in each degree."
+   }
+  },
+  {
+   "text": "Fix the arbitrary sheaf $N$ and its direct image $M$ from step 1. Apply the triangulated functor $-\\otimes_A^{\\mathrm L}M[0]$ of [lem-kun-derived-tensor-triangulated] to the distinguished triangle assumed in the statement. This gives a distinguished triangle with vertices $F\\otimes_A^{\\mathrm L}M$, $K\\otimes_A^{\\mathrm L}M$, $Q\\otimes_A^{\\mathrm L}M$. By [def-kun-tor-amplitude] and the two given Tor bounds, the second vertex has cohomology only in $[a,b]$ and the third only in $[a,b+e]$. No flatness of $M$ is required because the tensor product is derived.",
+   "uses": [
+    "lem-kun-derived-tensor-triangulated",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YM (lemma-derived-tor-exact) and 06YU (definition-derived-tor); tensor the support triangle in the blueprint closed-immersion paragraph."
+   }
+  },
+  {
+   "text": "For every integer $r$, [lem-sf-derived-homology-long-exact] gives the exact segment\n$$H^{r-1}(Q\\otimes_A^{\\mathrm L}M)\\longrightarrow H^r(F\\otimes_A^{\\mathrm L}M)\\longrightarrow H^r(K\\otimes_A^{\\mathrm L}M).$$\nIf $r<a$, then $r-1<a$ and $r<a$, so both outer terms vanish. If $r>b+e+1$, then $r-1>b+e$ and $r>b$ since $e\\geq0$, so both outer terms again vanish. Exactness therefore gives $H^r(F\\otimes_A^{\\mathrm L}M)=0$ for every $r\\notin[a,b+e+1]$. This proves the extra $+1$ directly at the required degrees.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RS (lemma-cohomology-homological) and 0147 (definition-homological), equation-long-exact-cohomology-sequence; the blueprint closed-support Tor-interval argument."
+   }
+  },
+  {
+   "text": "Apply the cohomology comparison in [lem-weil-pbc-exact-functor-bounded-below] to the exact functor $i^*$ and the object $F\\otimes_A^{\\mathrm L}M$. Its statement gives $H^r(i^*(F\\otimes_A^{\\mathrm L}M))\\simeq i^*H^r(F\\otimes_A^{\\mathrm L}M)$ for every integer $r$ and every derived object; despite the node's title, this clause has no bounded-below hypothesis. For $r\\notin[a,b+e+1]$ the right side is $i^*(0)=0$, by step 3 and exactness. Thus $i^*(F\\otimes_A^{\\mathrm L}M)$ has cohomology only in that interval.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), applied termwise; homology.tex Tag 010N (lemma-exact-functor) gives the kernel and image comparison."
+   }
+  },
+  {
+   "text": "The inverse of the monoidal comparison of [lem-kun-inverse-image-monoidal], applied to the scheme morphism $i$ and the commutative coefficient ring $A$, and then the two counit isomorphisms of step 1 give\n$$i^*(F\\otimes_A^{\\mathrm L}M)\\simeq i^*F\\otimes_A^{\\mathrm L}i^*M\\simeq E\\otimes_A^{\\mathrm L}N.$$\nConsequently step 4 says that $H^r(E\\otimes_A^{\\mathrm L}N)=0$ for every $r\\notin[a,b+e+1]$. The sheaf $N$ on $Z$ was arbitrary, so [def-kun-tor-amplitude] gives exactly the claimed Tor amplitude for $E=i^\\times K$.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); the counit identifications use the exact inverse image of step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-kun-derived-tensor-triangulated",
+  "def-kun-tor-amplitude",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Closed-immersion paragraph, sentence giving Tor interval [a,b+cd_l(j)+1]; expanded via Stacks Tags 06YU, 0147, 015F and 07A4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +118,52 @@
    "results": "CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.ext₃'; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂.mk; CategoryTheory.Triangulated.Subcategory.ext₃'; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.recOn; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.mk; CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁'",
    "date": "2026-10-17",
    "verdict": "no match: returned declarations do not state the node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the closed-immersion Tor bound"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude.*(obj₁|triangle|ClosedImmersion)|tor_amplitude|TorAmplitude",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the closed-immersion Tor bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude bound of the first object in a distinguished triangle of sheaves of modules",
+   "results": "CategoryTheory.Triangulated.SpectralObject.triangle_obj₁, CategoryTheory.Pretriangulated.Triangle.obj₁, CochainComplex.triangleOfDegreewiseSplit_obj₁, CategoryTheory.Pretriangulated.shortComplexOfDistTriangle_X₁, DerivedCategory.triangleOfSES_obj₁, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁', DerivedCategory.triangleOfSES_distinguished, CategoryTheory.Pretriangulated.shortComplexOfDistTriangle_X₃",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the closed-immersion Tor bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes, a distinguished support triangle with Tor bounds [a,b] and [a,b+e] gives Tor amplitude [a,b+e+1] for exceptional inverse image",
+   "results": "DerivedCategory.TStructure.t, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.IsGE",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the closed-immersion Tor bound"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|TorAmplitude|[Tt]or amplitude",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the closed-immersion Tor bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology bounds for the fibre of a morphism in a derived category; exact restriction along a closed immersion detects Tor amplitude",
+   "results": "DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the closed-immersion Tor bound"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sf-rf-shriek-preservation",
@@ -64,10 +175,34 @@
  "blueprint": {
   "from": {
    "node": "sk-prop-sf-rf-shriek-preservation",
-   "place": "Step 3, support triangle and long-exact-sequence argument giving the extra +1 in the upper Tor endpoint.",
+   "place": "Proof, closed-immersion paragraph: \"explicitly, a Tor interval $[a,b]$ for $K$ gives the interval $[a,b+\\operatorname{cd}_\\ell(j)+1]$\"; parent split step 3, support-triangle endpoint argument.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-closed-support-tor-bound",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and expanded the closed-support Tor argument in five steps using only existing nodes. The cohomology LES proves the endpoint bound after tensoring with i_*N, exact inverse image preserves it, and the monoidal comparison and counit recover the test with arbitrary N on Z. No new nodes or Mathlib leaves. Searched the project source and Mathlib; the existing closed-immersion constructible theorem has stronger hypotheses and is not an attachment.",
+  "blueprint": "Realizes the closed-immersion paragraph of sk-prop-sf-rf-shriek-preservation.proof.md, specifically its explicit [a,b+cd_l(j)+1] interval sentence; corresponds to step 3 of the current parent split. Does not change the unit or coefficient/site route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Uses its general cohomology comparison for an exact functor on any derived object; this generic t-exactness tool is not supplied by the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-9a582bb3e",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-9a582bb3e (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, together with each cited statement. No new nodes were created. The source is main-20261015 sk-prop-sf-rf-shriek-preservation.proof.md lines 9-21, the sentence giving the Tor interval [a,b+cd_l(j)+1] after the support triangle. The parent's step 3 supplies every hypothesis of the item. Step 1 is elementary: the counit isomorphism on each term gives i^*i_*E≅E and i^*(i_*N)≅N. Step 2 uses lem-kun-derived-tensor-triangulated, which places no condition on M=i_*N, so the tensored triangle is distinguished. Step 3 uses lem-sf-derived-homology-long-exact on the segment H^{r-1}(Q⊗M)->H^r(F⊗M)->H^r(K⊗M); I checked the endpoint inequalities with e>=0. Step 4 uses lem-weil-pbc-exact-functor-bounded-below, whose first clause holds for every K with no boundedness hypothesis. Its unit sk-def-exchange is outside the unit's route, and I accept the declared tool_use because it is a generic exact-functor t-exactness fact. Step 5 uses lem-kun-inverse-image-monoidal with u=i, then the counit isomorphisms, so N is arbitrary and the conclusion follows from def-kun-tor-amplitude. The Stacks tags 015F, 06YM, 06YU, 0147, 05RS, 010N and 07A4 match their labels in tags/tags. The coefficient category is ordinary constant-A on the small étale site, consistent with lem-exc-closed-support-triangle and def-kun-tor-amplitude, and no base-change morphism is involved. Edge cases checked: i=id, Z empty, e=0, the boundary degrees, and A=0. The closest duplicate candidate, prop-exc-closed-tor, has different and stronger hypotheses and is not a duplicate. No SGA is cited. No fixes were needed."
  }
 }

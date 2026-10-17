@@ -10,9 +10,111 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Precomposition preserves nonsurjectivity, since the image of $\\alpha\\theta$ is contained in the image of $\\alpha$. Thus the stated boundary is a simplicial subset, with morphisms interpreted as natural transformations by [def-weil-pbc-simplicial-set]. If $n=0$, every map $[r]\\to[0]$ is surjective because $[r]$ is nonempty. The boundary is empty in every degree, so there is exactly one map from it to $T$. There are no proper injections into $[0]$, so $F_0(T)$ consists of the unique empty family. All asserted compatibilities and the empty-limit universal property are then automatic. Henceforth assume $n\\geq1$. For any $h:\\partial\\Delta^n\\to T$ put $R(h)_\\iota=h_k(\\iota)$. Naturality gives $T(\\theta)h_k(\\iota)=h_l(\\iota\\theta)$ for every injective $\\theta:[l]\\to[k]$, so $R(h)\\in F_n(T)$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NK (section-trivial-kan), boundary paragraph; Tag 0186 (lemma-formula-limit), restriction to face evaluations; the n=0 case is checked directly"
+   }
+  },
+  {
+   "text": "Fix $x=(x_\\iota)\\in F_n(T)$. Write $\\delta_i^n:[n-1]\\hookrightarrow[n]$ for the injection omitting $i$. For every nonsurjective $\\alpha:[r]\\to[n]$, choose a vertex $i$ outside its image. By [lem-weil-pbc-simplex-face-factorization] there is a unique order-preserving $\\psi_i:[r]\\to[n-1]$ such that $\\alpha=\\delta_i^n\\psi_i$. Associate to this choice the candidate value $T(\\psi_i)x_{\\delta_i^n}\\in T_r$. There is no bound on $r$ in the factorization lemma. The next step checks that this value is independent of the omitted vertex, so this prescription will define $H(x)_r(\\alpha)$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplex-face-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0186 (lemma-formula-limit), construction f_alpha = U(psi) f_i; extended to every r because only nonsurjectivity is used"
+   }
+  },
+  {
+   "text": "Suppose $i<j$ are both missing from the image of $\\alpha$. The nonempty image of $[r]$ leaves at most one vertex missing when $n=1$, so this case requires $n\\geq2$. In $\\alpha=\\delta_i^n\\psi_i$, the value $j-1$ is missing from $\\psi_i$, since $\\delta_i^n(j-1)=j$ and $\\delta_i^n$ is injective. Apply [lem-weil-pbc-simplex-face-factorization] again to get $\\psi_i=\\delta_{j-1}^{n-1}\\xi$ with $\\xi:[r]\\to[n-2]$. The identity in [lem-weil-pbc-simplex-face-face-identity], with its parameter $n-1\\geq1$, gives\n$$\\gamma:=\\delta_i^n\\delta_{j-1}^{n-1}=\\delta_j^n\\delta_i^{n-1}.$$\nConsequently $\\alpha=\\delta_j^n\\delta_i^{n-1}\\xi$, and uniqueness of factorization through $\\delta_j^n$ gives $\\psi_j=\\delta_i^{n-1}\\xi$. The map $\\gamma:[n-2]\\hookrightarrow[n]$ is a proper injection. Compatibility of $x$ for its two injective factorizations, and contravariant functoriality of $T$, yield\n$$T(\\psi_i)x_{\\delta_i^n}=T(\\xi)T(\\delta_{j-1}^{n-1})x_{\\delta_i^n}=T(\\xi)x_\\gamma=T(\\xi)T(\\delta_i^{n-1})x_{\\delta_j^n}=T(\\psi_j)x_{\\delta_j^n}.$$\nEqual choices coincide by uniqueness, and reversed choices reduce to this calculation. This proves independence and defines $H(x)_r$ in every degree.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplex-face-factorization",
+    "lem-weil-pbc-simplex-face-face-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0186 (lemma-formula-limit), independence of the choice (i,psi); Tag 0167 (lemma-relations-face-degeneracy), first identity"
+   }
+  },
+  {
+   "text": "For an arbitrary order-preserving $\\theta:[s]\\to[r]$ and a boundary simplex $\\alpha:[r]\\to[n]$, take a vertex $i$ missing from $\\alpha$. It is also missing from $\\alpha\\theta$. If $\\alpha=\\delta_i^n\\psi_i$, then $\\alpha\\theta=\\delta_i^n(\\psi_i\\theta)$; uniqueness in [lem-weil-pbc-simplex-face-factorization] identifies the factor for this choice of $i$. Using choice independence from step 3 and functoriality,\n$$H(x)_s(\\alpha\\theta)=T(\\psi_i\\theta)x_{\\delta_i^n}=T(\\theta)T(\\psi_i)x_{\\delta_i^n}=T(\\theta)H(x)_r(\\alpha).$$\nThus $H(x)$ is a morphism of simplicial sets, including naturality for degeneracy operators, not just face maps.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplex-face-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0186 (lemma-formula-limit), verification f_{alpha psi} = U(psi) f_alpha; no restriction on source degrees is needed"
+   }
+  },
+  {
+   "text": "For a proper injection $\\iota:[k]\\hookrightarrow[n]$, take $i$ missing from its image and write $\\iota=\\delta_i^n\\psi$. The final clause of [lem-weil-pbc-simplex-face-factorization] says that $\\psi$ is injective. Since $x$ is compatible under all injective operators, $H(x)_k(\\iota)=T(\\psi)x_{\\delta_i^n}=x_\\iota$. Hence $R(H(x))=x$, including components at every lower-dimensional proper face.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplex-face-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0186 (lemma-formula-limit), inverse constructions; the statement here retains evaluations at all proper injections"
+   }
+  },
+  {
+   "text": "Conversely, for any $h:\\partial\\Delta^n\\to T$ and $\\alpha=\\delta_i^n\\psi$ as above, naturality of $h$ at $\\psi$ gives\n$$H(R(h))_r(\\alpha)=T(\\psi)R(h)_{\\delta_i^n}=T(\\psi)h_{n-1}(\\delta_i^n)=h_r(\\delta_i^n\\psi)=h_r(\\alpha).$$\nEquality on every simplex in every degree is equality of the natural transformations. Therefore $H(R(h))=h$, which together with step 5 proves the claimed bijection.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0186 (lemma-formula-limit), mutually inverse bijections, with the omitted verification written explicitly"
+   }
+  },
+  {
+   "text": "Let $u:T\\to T'$ be a morphism of simplicial sets. The componentwise assignment $F_n(u)(x)_\\iota=u_k(x_\\iota)$ preserves compatibility, because $u_lT(\\theta)=T'(\\theta)u_k$. Evaluation gives $R(u\\circ h)_\\iota=u_k(h_k(\\iota))=F_n(u)(R(h))_\\iota$, proving naturality in $T$. For $z\\in T_n$, define $a_z:\\Delta^n\\to T$ by $(a_z)_r(\\alpha)=T(\\alpha)z$. Functoriality makes this a natural transformation. Conversely any $a:\\Delta^n\\to T$ satisfies $a_r(\\alpha)=T(\\alpha)a_n(\\mathrm{id}_{[n]})$ by naturality, so this is exactly the map given by $z$. Its boundary restriction evaluates at $\\iota$ as $T(\\iota)z$, proving the last asserted formula.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0186 (lemma-formula-limit), functoriality; Tag 0177 (lemma-simplex-map), whose evaluation argument is written out here"
+   }
+  },
+  {
+   "text": "The index diagram is small and finite: its objects are proper injections into the fixed finite ordered set $[n]$, and its arrows are injective maps $\\theta$ as in the statement. Identities and composition are those of order-preserving maps, and the diagram laws are the functor laws for $T$. Its arrows point from $\\iota$ to $\\iota\\theta$, giving $T_k\\to T_l$ as required. The coordinate evaluations $p_\\iota(x)=x_\\iota$ define a cone with apex $F_n(T)$. Given any set $W$ with compatible maps $f_\\iota:W\\to T_k$, the function $f:W\\to F_n(T)$ defined by $f(w)=(f_\\iota(w))_\\iota$ is well-defined by that compatibility and satisfies $p_\\iota f=f_\\iota$. It is the unique such function, by equality of coordinates. This proves the limit universal property directly. Transporting these coordinate maps along $R$ proves that the evaluations on $\\operatorname{Hom}_{\\mathrm{sSet}}(\\partial\\Delta^n,T)$ exhibit that set as the asserted limit. Step 1 already proves the empty-diagram case $n=0$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0186 (lemma-formula-limit), first displayed description of a limit by compatible families; the set-level universal property is explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplex-face-face-identity",
+  "lem-weil-pbc-simplex-face-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Expansion of Tag 0186 (lemma-formula-limit): its omitted-vertex construction applies to all boundary simplices in arbitrary degree; the inverse, naturality, empty-boundary case, and set-limit universal property are written out. Boundary terminology is Tag 08NK and standard-simplex evaluation is Tag 0177."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,10 +164,80 @@
    "results": "12 hits: SSet.boundary, SSet.instHasDimensionLTToSSetBoundary, SSet.boundary.instMonoι, SSet.boundary.ι, SSet.boundary_obj_eq_univ, SSet.op_boundary, SSet.boundary.hom_ext₀, SSet.boundary.hom_ext₀_iff",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Boundary maps of a standard simplex correspond to compatible families on proper faces",
+   "results": "8 hits: Simplicial.term∂Δ[_], AlgebraicTopology.AlternatingFaceMapComplex.objD, SimplexCategoryGenRel.faces.δ, SSet.boundary_eq_iSup, SSet.boundary, CategoryTheory.SimplicialObject.δ, SSet.modelCategoryQuillen.I, SSet.stdSimplex.ofSimplex_yonedaEquiv_δ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.boundary, SSet.boundary.hom_ext₀, compatible family simplex faces",
+   "results": "0 hits: ; loogle: Unknown identifier `compatible`",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from the boundary of a standard simplex to a simplicial set are compatible families indexed by proper injective faces",
+   "results": "8 hits: SSet.PtSimplex.RelStruct.map, SSet.horn.ι, SSet.boundary, SSet.PtSimplex.MulStruct.map, SSet.degenerate, SSet.horn, SSet.stdSimplex.objMk, SSet.PtSimplex",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary|proper.*face|matching",
+   "results": "0 hits: ; subdirectory Mathlib/AlgebraicTopology/SimplicialSet",
+   "date": "2026-10-17",
+   "verdict": "invalid directory (duplicated Mathlib prefix); not evidence of absence; corrected search recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "^(def|lemma|theorem|noncomputable)|[Ll]imit|[Cc]one|[Ee]quiv|[Cc]ompatib",
+   "results": "5 hits: 37, 44, 55, 60, 65; subdirectory AlgebraicTopology/SimplicialSet/Boundary.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations from the simplicial boundary are determined by compatible simplex faces and form the matching limit",
+   "results": "8 hits: SSet.horn.hom_ext, SSet.Truncated.liftOfStrictSegal.naturalityProperty_eq_top, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, SSet.Truncated.liftOfStrictSegal, SSet.δ_naturality_apply, CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat, SSet.Truncated.IsStrictSegal.hom_ext",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary.*([Ee]quiv|[Ll]imit)|([Ee]quiv|[Ll]imit).*boundary|matchingObject",
+   "results": "0 hits: ; subdirectory AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_iSup|IsColimit|isColimit|hom_ext|exists.*[Mm]ap|compatible|glue",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean, Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean, Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean; subdirectory AlgebraicTopology/SimplicialSet",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.isColimitCoconeN",
+   "results": "1 hits: SSet.isColimitCoconeN",
+   "date": "2026-10-17",
+   "verdict": "candidate only: monogenous-subcomplex colimit needs identification of its index, its subcomplexes with representables, and Yoneda; not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitCoconeN|hom_ext|boundary_zero|eq_comp_δ_of_not_surjective",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean; subdirectory AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-bisimplicial-reedy-division-calculus",
@@ -92,5 +264,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-boundary-proper-face-limit",
+  "worker": "stage1",
+  "summary": "Eight proof steps expand the boundary-Hom comparison via omitted vertices and the existing Mathlib face-factorization and face-identity nodes. No new nodes. Checked independence, arbitrary operators including degeneracies, both inverse identities, naturality, restriction of a simplex, and the n=0 empty limit. Statement and maintainer-owned fields retained; prior sandbox searches retained and additional searches recorded.",
+  "blueprint": "The boundary-to-matching identification in lem-coef-bisimplicial-reedy-division-calculus, on the inherited enrichment-change chain from paragraph 2 of prop-coef-integral-exceptional-adjoint (finite mapping-complex adjunction before R lim). This is a local simplicial-set calculation below the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-5c0541cb0",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-5c0541cb0 (reviewer sub-agent of L); spot-checked: Read the whole item: its statement and all 8 steps. The delivery has no new nodes. Also read the statements of the three cited Mathlib leaves (def-weil-pbc-simplicial-set, lem-weil-pbc-simplex-face-factorization, lem-weil-pbc-simplex-face-face-identity), the parent citer lem-coef-bisimplicial-reedy-division-calculus at step 4, and Stacks simplicial.tex Tag 0186 lemma-formula-limit (lines 2337-2420), which carries the same omitted-vertex construction, independence check and compatibility check. The statement is true and checked on small cases: n=0 (empty boundary, singleton on both sides), n=1 (T_0 x T_0), n=2 (triangle boundary) and empty T. The index category of proper injections is the Reedy matching diagram that the parent needs. Leaf hypotheses hold where they are used. Step 3 justifies n>=2 before using the face-identity leaf at parameter n-1, with indices i<j<=n, and uses compatibility only for the injective delta operators. Step 5 relies on the leaf's clause that psi is injective, and since k<n every proper injection is nonsurjective. Steps 4 and 6 are naturality arguments, and step 4 covers degeneracies too. Steps 7 and 8 work Yoneda and the set-level limit property out by hand, so no node is left uncited. No step relies on another node's proof and there is no cycle. All cited nodes are leaves, so no tool_uses entry is needed. Duplicate search with rg over dag/nodes found related nodes: lem-weil-pbc-matching-object-proper-faces (families against face tuples, not maps out of the boundary), lem-weil-pbc-simplicial-hom-object-standard-simplex (Hom object in SR(X), a different category) and the coskeleton nodes. None restates the item. A search of blueprint main-20261015 found no node stating it, so same_as=[] is correct. The blueprint ancestor and the unit route are unchanged, no SGA is cited, and no statement is weakened. The Mathlib search log is sound: invalid queries are flagged and isColimitCoconeN is correctly recorded as a candidate only. No fixes."
  }
 }

@@ -26,9 +26,79 @@
   "sbc-def-base-change-map",
   "lem-weil-pbc-inverse-image-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\theta_i^0$ for the sheaf square comparisons. Clause (2) of [lem-weil-pbc-square-iso-pasting], with $f'=f_1$, $f''=f_2$, $h=k$, $h'=k_1$, gives\n$$\\theta_{21}^0\\circ(f_2^{-1}c_{g,k})=(c_{g_1,k_1}f^{-1})\\circ(k_1^{-1}\\theta_1^0)\\circ(\\theta_2^0g^{-1}).$$\nThis identity also holds on constant-$\\Lambda$ module sheaves: the inverse images and their module structures are those of [prop-weil-pbc-inverse-image-modules-exact] (2), and the canonical $c$ maps are $\\Lambda$-linear as specified in the item. Each $\\theta^0$ is the composite $c^{-1}c$ specified by the square-pasting statement. The two sides are therefore module maps whose underlying abelian-sheaf maps are equal. Equality of module maps is equality of their underlying maps, proving the displayed module identity.",
+   "uses": [
+    "lem-weil-pbc-square-iso-pasting",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
+   }
+  },
+  {
+   "text": "Apply the sheaf identity of step 1 in each degree of any cochain complex. All its transformations commute with differentials by naturality. Exactness of the module inverse images [prop-weil-pbc-inverse-image-modules-exact] (3) gives the termwise derived inverse images and their comparison isomorphisms as specified in [def-kun-unbounded-exchange]. The localization universal property [lem-weil-pbc-localization-universal-property] (2) respects composition, and (3) detects equality after precomposition with the complex localization. Hence the degreewise identity descends to\n$$\\theta^D_{21}\\circ(f_2^{-1}c^\\Lambda_{g,k})=(c^\\Lambda_{g_1,k_1}f^{-1})\\circ(k_1^{-1}\\theta^D_1)\\circ(\\theta^D_2g^{-1}).$$\nThese are precisely the specified module comparisons, because that definition constructs them by this same termwise descent. This argument uses all complexes and imposes no boundedness condition.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-mate-pasting] (1) with $L_1=f^{-1}$, $L_2=f_1^{-1}$, $L_3=f_2^{-1}$, $R_1=Rf_*$, $R_2=Rf_{1*}$, $R_3=Rf_{2*}$, $G=g^{-1}$, $H=g_1^{-1}$, $G_2=k^{-1}$ and $H_2=k_1^{-1}$. The three adjunctions and the identifications $(\\theta_i^D)^\\flat=\\Ex_{\\square_i}$ are given by [def-kun-unbounded-exchange]. Thus\n$$\\gamma=(k_1^{-1}\\theta_1^D)\\circ(\\theta_2^Dg^{-1})$$\nhas mate\n$$\\gamma^\\flat=(\\Ex_{\\square_2}g_1^{-1})\\circ(k^{-1}\\Ex_{\\square_1}).$$\nThis application is in the unbounded module derived categories themselves; no comparison to abelian-sheaf derived direct images is used.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
+   }
+  },
+  {
+   "text": "Rearrange step 2 to obtain\n$$\\theta_{21}^D=(c^\\Lambda_{g_1,k_1}f^{-1})\\circ\\gamma\\circ(f_2^{-1}(c^\\Lambda_{g,k})^{-1}).$$\nApply [lem-weil-pbc-mate-whisker] with $\\alpha=\\gamma$, $\\sigma=(c^\\Lambda_{g,k})^{-1}$ and $\\tau=c^\\Lambda_{g_1,k_1}$, keeping the endpoint adjunctions $f^{-1}\\dashv Rf_*$ and $f_2^{-1}\\dashv Rf_{2*}$. The mate of this expression is\n$$(Rf_{2*}c^\\Lambda_{g_1,k_1})\\circ\\gamma^\\flat\\circ((c^\\Lambda_{g,k})^{-1}Rf_*).$$\nBy [def-kun-unbounded-exchange] its left side is $\\Ex_{\\square_2\\cdot\\square_1}$. Substituting step 3 gives exactly the equality asserted in the item. All equalities used are equalities of natural transformations, so the result is natural in $K$.",
+   "uses": [
+    "lem-weil-pbc-mate-whisker",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
+   }
+  },
+  {
+   "text": "At every $K$, the first and last factors in the displayed four-arrow formula are isomorphisms, since the $c^\\Lambda$ are natural isomorphisms and functors preserve inverses. A composite $a\\circ m\\circ b$ with invertible $a,b$ is invertible if and only if $m=a^{-1}\\circ(a\\circ m\\circ b)\\circ b^{-1}$ is invertible. Taking $m=\\Ex_{\\square_2,g_1^{-1}K}\\circ k^{-1}\\Ex_{\\square_1,K}$ proves the last clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-mate-whisker",
+  "lem-weil-pbc-square-iso-pasting",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,10 +106,66 @@
    "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:170 mateEquiv_vcomp, :209 mateEquiv_hcomp; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:216,274; RingTheory base-change files (tensor products of algebras), no etale-sheaf exchange",
    "date": "2026-10-17",
    "verdict": "no match: only the categorical mate pasting (already the Mathlib leaf lem-weil-pbc-mate-pasting); no etale derived exchange or composite base-change formula"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|derivedBaseChange.*comp|baseChange.*paste",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale module base change natural transformation is compatible with composition of base changes",
+   "results": "CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.rightDerivedNatTrans_comp, LinearMap.baseChange_comp, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, IsBaseChange.of_comp, LinearMap.liftBaseChange_comp, LinearEquiv.baseChange_trans, LinearEquiv.baseChange_mul",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived categories of etale module sheaves the exchange for a composite base change equals the composite of the exchange maps",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.exact_mapBaseChange_map, ModuleCat.extendScalars_assoc', KaehlerDifferential.moduleBaseChange'",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived module sheaf square isomorphism is compatible with horizontal pasting of cartesian squares in unbounded derived categories",
+   "results": "CategoryTheory.Limits.pullbackRightPullbackFstIso, CategoryTheory.Limits.leftSquareIsPullback, CategoryTheory.Limits.pullbackLeftPullbackSndIso, CategoryTheory.Square.isoMk, CategoryTheory.CatCommSq.hComp, CategoryTheory.Limits.pasteHorizIsPullback, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.mkIso, CategoryTheory.constantCommuteCompose",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.NatTrans.comp",
+   "results": "no hits; loogle: unknown identifier 'CategoryTheory.NatTrans.comp'",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSquareUpperStarIso|squareUpperStarIso_paste|mateEquiv_vcomp",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived category module inverse image square isomorphism horizontal pasting",
+   "results": "DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_inv_hom₁, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_inv_hom₂, DerivedCategory.singleFunctorsPostcompQIso_inv_hom, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: only generic mate, localization, homotopy/derived-category functor calculus, pullback-square, or algebraic base-change results"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -56,5 +182,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fin-module-exchange-composite-base-change",
+  "worker": "stage1",
+  "summary": "Proved module-valued unbounded exchange pasting by lifting the existing sheaf square-pasting identity to module maps, descending degreewise through localization, then applying the existing generic mate-pasting and mate-whiskering identities. No new nodes; statement and coefficient categories unchanged.",
+  "blueprint": "Realizes the sentence 'Compatibility of exchange with composition in [sbc-lem-base-change-composition] identifies it ... with the exchange over S′' in the proof of lem-fin-radicial-exchange-descent; current main-20261015 proof has the same sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-square-iso-pasting",
+    "why": "Generic inverse-image square comparison coherence; its abelian-sheaf statement is used before passing to module maps, not as a module derived theorem. The compact-support base-change unit supplies no such categorical coherence identity."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact inverse-image construction on constant coefficient modules, needed for the elementary module lift and degreewise localization. This does not replace the unit route."
+   },
+   {
+    "node": "def-kun-unbounded-exchange",
+    "why": "The specified unbounded module exchange and derived square comparison are used as definitions; this fixes the very exchange in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-square-iso-pasting",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-unbounded-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-8dba8e3f8",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-8dba8e3f8 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The delivery adds no new nodes and leaves the statement unchanged; I made no fixes. Sources: the blueprint sentence in lem-fin-radicial-exchange-descent is the same in master and main-20261015, and Stacks sites-cohomology Tag 0E47 (remark-compose-base-change-horizontal, lines 4094-4123) omits its verification, so proof_origin=agent is right. The coefficient category and base-change morphism are the unbounded constant-Lambda module exchange of def-kun-unbounded-exchange: the mate of theta^D followed by the counit. The proof never uses the D^+ abelian-sheaf pasting nodes. Step 1: clause (2) of square-iso-pasting with f'=f1, f''=f2, h=k, h'=k1 matches term for term, and the step from abelian-sheaf maps to module maps is elementary. Step 2: descent degreewise through clauses (2) and (3) of the localization lemma. It is brief about the bookkeeping for the comparison isomorphisms, but nothing is missing. Step 3: mate-pasting (1) with L1=f^-1, G=g^-1, H=g1^-1, G2=k^-1, H2=k1^-1 gives gamma-flat = (Ex2 g1^-1) o (k^-1 Ex1); I checked this. Step 4: mate-whisker with sigma = c_{g,k}^-1 and tau = c_{g1,k1}; directions and domains are correct. Step 5 is cancellation of the invertible end factors. The statement's claim that c is Lambda-linear holds: c is natural and the Lambda action is pulled back. Small cases checked: identity k and k1, identity g and g1, empty schemes, K=0. Route: mate-pasting and the localization lemma are Mathlib leaves; square-iso-pasting, mate-whisker and modules-exact are closed in slopmaster2; def-kun is a definition. I accept the three declared tool_uses. Duplicate search: exchange-identity-pasting, sbc-lem-identity-and-base-change-composition, sbc-lem-base-change-composition, module-base-change-map-pasting and derived-square-pasting differ in setting or content, so none is a duplicate. The parent's step uses the item consistently."
+ }
 }
