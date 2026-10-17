@@ -4521,6 +4521,7 @@ public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.Main
+public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
