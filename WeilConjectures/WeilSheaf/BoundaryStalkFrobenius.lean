@@ -97,7 +97,10 @@ lemma directImageCounit_frobeniusStr_compatible :
           (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
           ((directImage j).obj F).obj.carrier.X ≫
         (j̄)^*[_].map ((directImage j).obj F).frobeniusStr ≫ directImageCounit' j F :=
-  comp_map_comp_eq_of_compatible _ _ _ _ _ _ _ _ _
+  comp_map_comp_eq_of_compatible
+    (((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l])
+    _ _ _ _ _ (directImageCounit j F) ((upperStar j).obj ((directImage j).obj F)).frobeniusStr
+    F.frobeniusStr
     (upperStar_frobeniusStr_compatible j ((directImage j).obj F))
     (directImageCounit_naturality j F)
 
