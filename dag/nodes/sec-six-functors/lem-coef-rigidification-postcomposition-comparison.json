@@ -13,9 +13,84 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M_T(x,y)=\\operatorname{Map}_T(x,y)$. The replacement theorem gives $r:D\\to RD$ inducing weak homotopy equivalences $r_{xy}$ on mapping sets. The map from the empty simplicial set to $S$ is a monomorphism, so $S$ is Joyal-cofibrant. The locally Kan category $RD$ is Bergner-fibrant: its map to the terminal category is locally a Kan fibration and the identity lifts the only target isomorphism. Apply the defining criterion of the cited Quillen equivalence to the adjoint pair of maps $r:\\mathfrak C[S]\\to RD$ and $a:S\\to N_{\\mathrm{hc}}RD$. Since $r$ is a Dwyer--Kan equivalence (including on components, with objects fixed), $a$ is a categorical equivalence. The coherent-nerve theorem makes $W$ a quasicategory. Equivalence detection then says that $\\mathfrak C[a]$ is Dwyer--Kan, so each $\\mathfrak C[a]_{xy}$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Theorem 2.2.5.1, Quillen equivalence criterion, and Proposition 2.2.5.8."
+   }
+  },
+  {
+   "text": "Apply the pinched-rigidification resolution to both quasicategories $S$ and $W$. For $f=a_*:M_S(x,y)\\to M_W(ax,ay)$ its naturality gives the strictly commutative square $\\theta_W\\,|f|_Q=\\mathfrak C[a]_{xy}\\,\\theta_S$. Both $\\theta$ maps are weak homotopy equivalences by that node; the mapping-set map on the right is one by Step 1. Thus $|f|_Q$ is a weak homotopy equivalence. The same node supplies natural weak homotopy equivalences $p_K:|K|_Q\\to K$, and $p_{M_W}|f|_Q=f p_{M_S}$. Two-out-of-three now gives that the actual map $f=a_*$ is a weak homotopy equivalence. These applications of two-out-of-three are elementary: on components and on each based homotopy group the two displayed equalities are equalities of functions or homomorphisms with the other factors invertible.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 2.2.4.1 and the natural maps of Section 2.2.2; explicit two-square argument."
+   }
+  },
+  {
+   "text": "Let $h:y\\to z$ and fix $w$. Set $k=r([h])$, and denote the coherent-nerve mapping comparison by $b_{wv}:RD(w,v)\\simeq M_W(aw,av)$. It sends the vertex $k$ to $a(h)$: on $\\Delta^1$ the adjunction evaluates the single generating arrow under $r$. For the Hom bifunctor, the natural transformation induced by $a$ at the edge $(1_w,h)$ gives $a_{wz,*}(h\\circ-)=(a(h)\\circ-)a_{wy,*}$ in the homotopy category of spaces. The coherent-nerve composition clause gives $(a(h)\\circ-)b_{wy}=b_{wz}(k\\circ-)$. Hence, writing $t_{wv}=b_{wv}^{-1}a_{wv,*}$, we obtain $t_{wz}(h\\circ-)=(k\\circ-)t_{wy}$. The inverse exists because $b$ is a weak equivalence, and Step 2 shows each $t$ is an isomorphism. This is precisely the asserted comparison, including its specified vertex and endpoints.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT coherent-nerve comparison; coherent Hom naturality and enriched-composition clauses of the cited nodes."
+   }
+  },
+  {
+   "text": "Suppose $h\\circ-$ is a weak homotopy equivalence. Step 3 identifies the map $k\\circ-$ between the Kan complexes $RD(w,y)$ and $RD(w,z)$ with conjugation of this equivalence by the isomorphisms $t$. It is therefore a weak homotopy equivalence: the maps on components and all based homotopy groups are conjugate by isomorphisms, with basepoint paths supplied by the comparison homotopies. Since $r$ is a simplicial functor, there is also the strictly commutative square\n$$r_{wz}([h]\\circ-)=(k\\circ-)r_{wy}.$$\nBoth $r_{wy}$ and $r_{wz}$ are weak homotopy equivalences by the replacement statement. Taking components and based homotopy groups in this equality proves that the actual simplicial map $[h]\\circ-:D(w,y)\\to D(w,z)$ is a weak homotopy equivalence. This last argument uses neither Kan-ness of $D(w,y)$ nor Kan-ness of $D(w,z)$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent deduction from Step 3 and strict functoriality of r; not an application of HTT Proposition 3.2.2.10."
+   }
+  },
+  {
+   "text": "On each hom-set define $F:hS\\to\\pi_0D$ by $[h]\\mapsto\\pi_0([h])$. To check well-definedness and bijectivity, use the resolution zigzag $M_S(x,y)\\leftarrow |M_S(x,y)|_Q\\to D(x,y)$. Both arrows induce bijections on components, and its degree-zero clause says both take the vertex indexed by an edge $h$ to that edge or to $[h]$. Thus the resulting bijection is exactly $F$. The mapping-composition and Hom-functoriality statements give a functor $ha:hS\\to hW$. The coherent-nerve comparison identifies $\\pi_0RD$ with $hW$ respecting composition, while $\\pi_0r:\\pi_0D\\to\\pi_0RD$ is an isomorphism fixing objects. On every edge, these two functors composed with $F$ agree with $ha$, by the vertex calculation in Step 3. Injectivity of their hom-set maps therefore forces $F$ to preserve identities and composition. It is an isomorphism since its hom-set maps are bijective and it fixes objects. Every morphism of $hS$ has an edge representative, and the mapping-composition statement says an invertible class is represented by an equivalence edge. Apply this to $F^{-1}$ of an isomorphism in $\\pi_0D$. Only $RD$, not the raw realization $D$, was assumed locally Kan.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent deduction using the degree-zero clause of HTT Proposition 2.2.4.1 and composition compatibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-rigidification-equivalence-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Reconstruction from the cited DAG statements; HTT Theorem 2.2.5.1 and Proposition 2.2.4.1 checked online. Archival copy WANTED; expanded naturality and two-out-of-three arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +126,66 @@
    "results": "{\"t\": \"2026-10-17T08:30:46Z\", \"tool\": \"leansearch\", \"query\": \"Coherent realization preserves composition on quasicategory mapping spaces after locally Kan replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPostcompHomRel\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap_fac\", \"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPrecompHomRel\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap_fac_assoc\", \"HomotopyCategory.quotient_map_out_comp_out\", \"Mathlib.Tactic.BicategoryLike.Mor₂.coherenceComp\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"CocompactMap.coe_comp\"], \"digest\": \"f0e2b4c4e93d2421\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned two-out-of-three for model categories, two-truncated edge composition and the ordinary homotopy-category functor. None compares right-pinched spaces with raw coherent-realization enriched composition; source grep found no rigidification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition comparison for raw coherent realization of a quasicategory after locally Kan replacement",
+   "results": "{\"t\": \"2026-10-17T09:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition comparison for raw coherent realization of a quasicategory after locally Kan replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"SSet.QCat.bicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"b7a4472d8c7c1dfe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed ordinary nerve, truncated homotopy-category and generic model-category results do not identify raw coherent-realization mapping spaces or prove its enriched postcomposition comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, categorical equivalence, mapping spaces, postcomposition",
+   "results": "{\"t\": \"2026-10-17T09:24:59Z\", \"tool\": \"loogle\", \"query\": \"SSet, categorical equivalence, mapping spaces, postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `categorical`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: Loogle rejected the natural-language tokens as unknown identifiers; later valid quoted-name query retained below."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent nerve|Dwyer--Kan|postcomposition",
+   "results": "{\"t\": \"2026-10-17T09:25:00Z\", \"tool\": \"grep\", \"query\": \"coherent nerve|Dwyer--Kan|postcomposition\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Decomposition.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Decomposition.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\"], \"digest\": \"517c3d4a40283dd2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary model-category postcomposition, relative simplicial morphisms, Dold--Kan or the ordinary simplicial nerve, not the coherent-realization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coherent nerve of a locally Kan replacement compares quasicategory mapping spaces and preserves composition",
+   "results": "{\"t\": \"2026-10-17T09:25:00Z\", \"tool\": \"leansearch\", \"query\": \"The coherent nerve of a locally Kan replacement compares quasicategory mapping spaces and preserves composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv_comp\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"24bcb3ba6ebf62bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed ordinary nerve, truncated homotopy-category and generic model-category results do not identify raw coherent-realization mapping spaces or prove its enriched postcomposition comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A categorical equivalence of quasicategories induces weak equivalences on all right-pinched mapping spaces",
+   "results": "{\"t\": \"2026-10-17T09:25:11Z\", \"tool\": \"leanfinder\", \"query\": \"A categorical equivalence of quasicategories induces weak equivalences on all right-pinched mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"SSet.QCat.bicategory\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"f769e6a897837a86\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed ordinary nerve, truncated homotopy-category and generic model-category results do not identify raw coherent-realization mapping spaces or prove its enriched postcomposition comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, weak homotopy equivalence, postcomp",
+   "results": "{\"t\": \"2026-10-17T09:25:12Z\", \"tool\": \"loogle\", \"query\": \"SSet, weak homotopy equivalence, postcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `weak`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: Loogle rejected the natural-language tokens as unknown identifiers; later valid quoted-name query retained below."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence.*postcomp|postcomp.*weakEquivalence",
+   "results": "{\"t\": \"2026-10-17T09:25:12Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*postcomp|postcomp.*weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"0ec3b6ae7770a82f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary model-category postcomposition, relative simplicial morphisms, Dold--Kan or the ordinary simplicial nerve, not the coherent-realization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-17T09:40:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory.SimplicialNerve is the ordinary category nerve; it does not construct homotopy-coherent realization or the asserted postcomposition comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-cone-fiber-comparison",
@@ -83,5 +214,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-rigidification-postcomposition-comparison",
+  "worker": "stage1",
+  "summary": "Retained and repaired the five-step split. The natural Q-resolution supplies the missing mapping-space bridge; explicit Hom naturality gives the postcomposition square, strict enriched functoriality reflects the weak equivalence to raw D, and the degree-zero resolution identifies the hom-set bijection. Statement unchanged; no new nodes.",
+  "blueprint": "The extracted prerequisite named in the ancestor proof as “Postcomposition comparison for raw coherent realization”: the five steps realize the replacement/unit comparison, mapping-space and composition compatibility, the weak-equivalence consequence, and the induced hS-to-π₀D identification.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-dd5ca391e",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-dd5ca391e (reviewer sub-agent of L); spot-checked: I read the whole item and the full statements of all 7 cited nodes; there are no new nodes. All cited statements are in the item's own unit sk-prop-sf-biduality-general, except def-cbc, which is a definition. No cycle: a walk over 442 dependency nodes did not reach the item again. proof_deps equals the union of the step uses. No SGA is cited. The item is not a target node. Step 1: S is Joyal-cofibrant because the map from the empty set is a monomorphism. RD is Bergner-fibrant because it is locally Kan, and the identity lifts the only isomorphism of the terminal category. r is a Dwyer-Kan equivalence that fixes objects. The Quillen-equivalence criterion then makes a a categorical equivalence, and equivalence detection makes C[a] Dwyer-Kan. Step 2: Map^R in the resolution node is exactly the right-pinched space. Naturality of theta gives theta_W|f|_Q = C[a]_xy theta_S, naturality of p gives the second square, and two-out-of-three finishes. Step 3: a(h) corresponds to r([h]) by the coherent-nerve vertex clause. Hom naturality at the edge (1_w,h) and the coherent nerve's preservation of composition give t(h∘-) = (k∘-)t in the homotopy category of spaces. Step 4: the strict square r_wz([h]∘-) = (k∘-)r_wy with two-out-of-three; no Kan hypothesis on D is used. Step 5: the degree-zero clause (Q^0 = Δ^0) identifies the hom-set bijection with h ↦ [h]. Since π0r is faithful, F preserves composition. The equivalence-edge claim follows from the invertibility clause of the mapping-composition node. HTT is not archived locally (the report lists it as WANTED), so proof_origin=agent is correct. Small cases checked: the empty set, Δ^0, Δ^1, identity edges and discrete S. Duplicate candidates read and ruled out: component-postcomposition, coherent-nerve-pinched-adjunction, mapping-simplex-final-edge and diagonal-coherent-nerve-comparison. No fixes, no tool_uses."
  }
 }

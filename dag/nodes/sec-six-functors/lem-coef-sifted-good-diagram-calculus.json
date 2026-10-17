@@ -138,21 +138,42 @@
    }
   },
   {
-   "text": "To treat tensor without a symmetry hypothesis, let $\\mathcal M^c$ be the full subcategory of cofibrant objects. Biclosedness makes tensor preserve initial objects in each variable. The pushout products $(0\\to A)\\square(0\\to B)$ and $(0\\to A)\\square f$ show respectively that tensors of cofibrant objects are cofibrant and that tensor by a cofibrant object on either specified side is left Quillen. By [lem-coef-model-infinity-derived-adjunction], those two partial functors preserve weak equivalences between cofibrant objects. A pair of such weak equivalences is a composite of the two coordinate maps, so tensor is a relative bifunctor on $\\mathcal M^c\\times\\mathcal M^c$. Functorial cofibrant replacement $Q$ preserves weak equivalences: naturality gives $\\epsilon_{A'}Qw=w\\epsilon_A$, and two-out-of-three applies since both replacement maps $\\epsilon$ and $w$ are weak equivalences. Thus the inclusion $j:\\mathcal M^c\\to\\mathcal M$ and $Q$ are relative functors. Their natural transformations $jQ\\to1$ and $Qj\\to1$ have weak-equivalence components. The full functor-category localization property of [lem-coef-system-localization-universal] descends these transformations to equivalences, so $j$ and $Q$ induce inverse equivalences on coherent localizations. The finite-product localization and full functor-category universal property of [lem-coef-system-localization-universal] consequently descend this bifunctor to $B:\\mathcal C\\times\\mathcal C\\to\\mathcal C$, with $B(qA,qB)=q(A\\odot B)$ for cofibrant $A,B$, naturally also on diagrams. For fixed cofibrant $A$, the partial functor is the derived left adjoint of $A\\odot-$, or of $-\\odot A$ in the other variable, by the replacement formula in [lem-coef-model-infinity-derived-adjunction]. Every object of $\\mathcal C$ is equivalent to $qA$ for a cofibrant $A$ via its replacement map. Functoriality of $B$ therefore identifies the partial functor at any fixed object with one of these derived left adjoints. Thus each partial functor has a right adjoint. Presentability of $\\mathcal C$ from [lem-coef-combinatorial-localization-presentability] and the adjoint criterion of [lem-coef-presentable-infinity-adjoints] show that $B$ preserves small colimits separately. Only the nonmonoidal presentability clause of the former node is used; its symmetric-monoidal clause is not invoked.",
+   "text": "Let $\\mathcal M^c$ be the full subcategory of cofibrant objects. Biclosedness makes tensor preserve the initial object in each variable. Thus $(0\\to A)\\square(0\\to D)$ identifies with $0\\to A\\odot D$, so the tensor of cofibrant objects is cofibrant. For cofibrant $A$, $(0\\to A)\\square f$ identifies with $A\\odot f$; similarly $f\\square(0\\to A)$ identifies with $f\\odot A$. The assumed pushout-product axiom makes both maps cofibrations, trivial when $f$ is trivial. Their ordinary right adjoints are supplied by biclosedness, so both partial tensor functors are left Quillen.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Proposition 4.1.7.2 and Example 4.1.7.6, Lemma 4.1.8.8; ordered bifunctor descent and derived partial adjunctions; pushout-product checks"
+   }
+  },
+  {
+   "text": "By [lem-coef-model-infinity-derived-adjunction], the two partial tensor functors of Step 10 preserve weak equivalences between cofibrant objects. A coordinatewise weak equivalence $(u,v)$ factors as $(u,1)$ followed by $(1,v)$, so tensor is relative on $\\mathcal M^c\\times\\mathcal M^c$. Apply [lem-coef-cofibrant-inclusion-coherent-localization] to identify the localization of $N(\\mathcal M^c)$ with $\\mathcal C$. Finite-product preservation and the full functor-category universal property of [lem-coef-system-localization-universal] now descend $q\\circ\\odot$ to $B:\\mathcal C\\times\\mathcal C\\to\\mathcal C$, with a coherent natural equivalence $B(qA,qD)\\simeq q(A\\odot D)$ on cofibrant inputs. This comparison includes diagrams and transformations because it is an equivalence in the functor category.",
    "uses": [
     "lem-coef-model-infinity-derived-adjunction",
-    "lem-coef-system-localization-universal",
+    "lem-coef-cofibrant-inclusion-coherent-localization",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Proposition 4.1.7.2 and Example 4.1.7.6, Lemma 4.1.8.8; ordered bifunctor descent and derived partial adjunctions; relative bifunctor descent"
+   }
+  },
+  {
+   "text": "The bifunctor $B$ of Step 11 and its specified comparison satisfy [lem-coef-localized-bifunctor-partial-derived-adjoints], with $F=\\odot$ and all three model categories equal to $\\mathcal M$: Step 10 checks the two partial Quillen hypotheses. Hence $B(qA,-)$ and $B(-,qA)$ are the derived left adjoints for cofibrant $A$, and every partial functor of $B$ has a right adjoint. The first, nonmonoidal clause of [lem-coef-combinatorial-localization-presentability] makes $\\mathcal C$ presentable. Apply the right-adjoint criterion of [lem-coef-presentable-infinity-adjoints] to each partial functor to conclude that $B$ preserves small colimits separately.",
+   "uses": [
+    "lem-coef-localized-bifunctor-partial-derived-adjoints",
     "lem-coef-combinatorial-localization-presentability",
     "lem-coef-presentable-infinity-adjoints"
    ],
    "elementary": false,
    "source": {
-    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
-    "place": "HA Proposition 4.1.7.2 and Example 4.1.7.6, Lemma 4.1.8.8; ordered bifunctor descent and derived partial adjunctions"
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Proposition 4.1.7.2 and Example 4.1.7.6, Lemma 4.1.8.8; ordered bifunctor descent and derived partial adjunctions; derived partial adjunctions and colimit preservation"
    }
   },
   {
-   "text": "For good $X,Y$, their pointwise tensor has cofibrant values by Step 10. Biclosedness and the ordinary finite-diagonal assertion of [lem-coef-sifted-nerve-index-calculus] identify its ordinary colimit, with its cocone, as $c(X\\odot Y)\\cong cX\\odot cY$, which is cofibrant. Apply the coherent finite-diagonal assertion of the same node to the separately colimit-preserving bifunctor $B$ constructed in Step 10:\n$$\\operatorname{colim}_{N(I)}q(X\\odot Y)\\simeq B(\\operatorname{colim}_{N(I)}qX,\\operatorname{colim}_{N(I)}qY)\\simeq B(q(cX),q(cY))\\simeq q(cX\\odot cY).$$\nThe first comparison is the finite-diagonal colimit comparison, the second is induced by the two good cocones, and the last is tensor on cofibrant representatives. Thus their composite is exactly the localized ordinary tensor-colimit cocone, as identified above. Step 1 proves that the canonical $h(X\\odot Y)\\to c(X\\odot Y)$ is a weak equivalence. This proves tensor-product goodness.",
+   "text": "For good $X,Y$, their pointwise tensor has cofibrant values by Steps 10-12. Biclosedness and the ordinary finite-diagonal assertion of [lem-coef-sifted-nerve-index-calculus] identify its ordinary colimit, with its cocone, as $c(X\\odot Y)\\cong cX\\odot cY$, which is cofibrant. Apply the coherent finite-diagonal assertion of the same node to the separately colimit-preserving bifunctor $B$ constructed in Steps 10-12:\n$$\\operatorname{colim}_{N(I)}q(X\\odot Y)\\simeq B(\\operatorname{colim}_{N(I)}qX,\\operatorname{colim}_{N(I)}qY)\\simeq B(q(cX),q(cY))\\simeq q(cX\\odot cY).$$\nThe first comparison is the finite-diagonal colimit comparison, the second is induced by the two good cocones, and the last is tensor on cofibrant representatives. Thus their composite is exactly the localized ordinary tensor-colimit cocone, as identified above. Step 1 proves that the canonical $h(X\\odot Y)\\to c(X\\odot Y)$ is a weak equivalence. This proves tensor-product goodness.",
    "uses": [
     "lem-coef-sifted-nerve-index-calculus"
    ],
@@ -163,7 +184,7 @@
    }
   },
   {
-   "text": "If $f:X\\to X'$ is good and $Y$ is good, Step 11 gives good endpoints for both $f\\odot\\mathrm{id}_Y$ and $\\mathrm{id}_Y\\odot f$. Their components are cofibrations because each $Y(i)$ is cofibrant and tensor on that side is left Quillen, as shown in Step 10. Their colimit maps identify, by the natural ordinary comparison in [lem-coef-sifted-nerve-index-calculus], with $cf\\odot\\mathrm{id}_{cY}$ and $\\mathrm{id}_{cY}\\odot cf$. These are cofibrations by cofibrancy of $cY$ and the same pushout-product calculation. Both ordered tensor morphisms are therefore good.",
+   "text": "If $f:X\\to X'$ is good and $Y$ is good, Step 13 gives good endpoints for both $f\\odot\\mathrm{id}_Y$ and $\\mathrm{id}_Y\\odot f$. Their components are cofibrations because each $Y(i)$ is cofibrant and tensor on that side is left Quillen, as shown in Steps 10-12. Their colimit maps identify, by the natural ordinary comparison in [lem-coef-sifted-nerve-index-calculus], with $cf\\odot\\mathrm{id}_{cY}$ and $\\mathrm{id}_{cY}\\odot cf$. These are cofibrations by cofibrancy of $cY$ and the same pushout-product calculation. Both ordered tensor morphisms are therefore good.",
    "uses": [
     "lem-coef-sifted-nerve-index-calculus"
    ],
@@ -174,7 +195,7 @@
    }
   },
   {
-   "text": "Finally let $f:X\\to X'$ and $g:Y\\to Y'$ be good and put $P=(X'\\odot Y)\\amalg_{X\\odot Y}(X\\odot Y')$. Both maps out of $X\\odot Y$ are good by Step 12, so Step 7 makes $P$ good. Its target $X'\\odot Y'$ is good by Step 11. At every $i$ the displayed arrow $P(i)\\to X'(i)\\odot Y'(i)$ is $f(i)\\square g(i)$, a cofibration by the assumed pushout-product axiom. Ordinary colimit preserves the pushout, and the natural ordinary tensor comparisons of [lem-coef-sifted-nerve-index-calculus] identify its colimit arrow with $(cf)\\square(cg)$, again a cofibration. These are precisely the remaining two conditions for this arrow to be good. Throughout the proof the identifications are induced by the original cocones and the functorial replacement maps, which establishes the final canonical-map assertion of the item.",
+   "text": "Finally let $f:X\\to X'$ and $g:Y\\to Y'$ be good and put $P=(X'\\odot Y)\\amalg_{X\\odot Y}(X\\odot Y')$. Both maps out of $X\\odot Y$ are good by Step 14, so Step 7 makes $P$ good. Its target $X'\\odot Y'$ is good by Step 13. At every $i$ the displayed arrow $P(i)\\to X'(i)\\odot Y'(i)$ is $f(i)\\square g(i)$, a cofibration by the assumed pushout-product axiom. Ordinary colimit preserves the pushout, and the natural ordinary tensor comparisons of [lem-coef-sifted-nerve-index-calculus] identify its colimit arrow with $(cf)\\square(cg)$, again a cofibration. These are precisely the remaining two conditions for this arrow to be good. Throughout the proof the identifications are induced by the original cocones and the functorial replacement maps, which establishes the final canonical-map assertion of the item.",
    "uses": [
     "lem-coef-sifted-nerve-index-calculus"
    ],
@@ -187,8 +208,10 @@
  ],
  "proof_deps": [
   "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cofibrant-inclusion-coherent-localization",
   "lem-coef-combinatorial-localization-presentability",
   "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-localized-bifunctor-partial-derived-adjoints",
   "lem-coef-model-colimit-localization-comparison",
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-model-localization-detects-weak-equivalences",
@@ -288,7 +311,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-associative-algebra-sifted-localization",
@@ -301,7 +324,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-sifted-good-diagram-calculus",
   "worker": "stage1",
-  "summary": "Statement unchanged. Expanded all good-diagram closure arguments using existing generic localization, pointwise colimit, saturation, sifted-index and derived-adjunction nodes. Proved the needed elementary lifting-class consequences, span and ordinal projective-cofibrancy tests inside the proof. Constructed the ordered derived tensor bifunctor through finite-product localization, avoiding a symmetric-only citation. No new nodes; no attachment. Verified actual comparison maps, smallness, left properness, continuity, cofibrancy and edge cases. Second reading expands the canonical-comparison mapping-space argument and the relative cofibrant-replacement descent.",
+  "summary": "Repair of human return 2026-10-17: statement and Lean records unchanged; original steps 1-9 retained verbatim and original 11-13 retained with step references renumbered. Extracted the cofibrant-inclusion coherent-localization comparison and the partial-derived-adjoint identification into two searched, statement-only nodes. Replaced original 2341-character step 10 with three short steps: pushout-product checks, relative bifunctor descent using existing product-localization theorem, and derived partial adjunctions followed by the existing presentability criterion. All proof steps are below 2000 characters.",
   "blueprint": "prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2, finite-level mapping-complex adjunction inside R lim; via the associative-algebra sifted-localization cell filtration, realizes HA 4.1.8.13 observations (1)-(7). No change to chapter or unit route.",
   "tool_uses": [
    {
@@ -314,12 +337,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NF-b12a22472",
-  "group": "NF",
+  "reviewer": "NT-cc-Q125-45335eebf",
+  "group": "Q125",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-b12a22472 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all 13 steps, the report, every cited node's statement, the unit and chapter records, and the parent's uses (steps 2-4). HA was not archived, so I fetched it read-only to /tmp. HA Lemma 4.1.8.13 (pp. 498-501) defines good objects and morphisms (i)-(iii) and makes observations (1)-(7), and the item's clauses match them. Retract closure and the continuous form of (1) are extras that follow from the model axioms. HA's assumptions (A) and (B) are used only after the observations, so the nonsymmetric statement is not weakened. Each step checked out. Step 1 relates goodness to the actual cocone through the comparison node and detection via the ordinary localization factoring through q. Step 3 has the right adjoint of evaluation correct (prod over Hom(k,j)) and a correct Brown argument. Step 6 needs no assumption that the second leg is a cofibration, and the left-properness pushout is correct. Step 8 is a valid transfinite projective lift. Step 9 sets up its induction properly. Step 10 builds the ordered derived tensor from the pushout-product calculations, Q and the inclusion of cofibrant objects as relative functors, and finite-product descent, using only the nonsymmetric presentability clause. Steps 11-13 match HA (5)-(7). Edge cases checked: empty I (excluded by siftedness), singleton I, initial and identity pushout legs, one-stage, successor-length and limit chains, and the initial diagram. There are no new nodes. The duplicate search found none (candidates: sifted-fixed-object-hocolimit, infinity-sifted-colimit-calculus). The 329-node dependency closure has no cycle, proof_deps equals the union of uses, and no SGA is cited. I accept the tool use lem-cbc-enhanced-functor-cone-calculus: it is a generic cocone mapping-space criterion used in step 4 for colimit interchange and does not replace any route step. One minor remark, not a fault: the projective structure's functorial factorizations come from it being combinatorial. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-45335eebf (reviewer sub-agent of L); spot-checked: I read the item (statement and all 15 steps), both new nodes, every cited node's statement, and HA Rem. 1.3.4.16 (p. 116), Cor. 1.3.4.26 and Rem. 1.3.4.27 (pp. 119-120), Lemma 4.1.8.8 (pp. 493-494) and the proof of Lemma 4.1.8.13 with goodness (i)-(iii) and observations (1)-(7) (pp. 499-501). This repair of the human return replaces the 2341-character step 10 with steps 10-12; the statement and maintainer fields are unchanged and old steps 1-9 are retained. Step 10: the pushout-product calculation with (0->A) box f = A (x) f makes both partial tensors left Quillen. Step 11: relativity on M^c x M^c via (u,v) = (1,v)(u,1), then descent through the new cofibrant-inclusion node and finite-product preservation of localization. Step 12: the new bifunctor node plus presentability gives separate colimit preservation, which is HA 4.1.8.8 without symmetry. Steps 13-15 are HA (5)-(7). Both new nodes are true. Node 1: Q preserves W by two-out-of-three, and the inclusion and replacement induce inverse equivalences of the coherent localizations (HA 1.3.4.16). Node 2: restricting to cofibrant objects, the Brown lemma and full faithfulness of restriction along the localization give the identification. I tested both on all-cofibrant, discrete-model and terminal cases. Neither restates a clause of the item; each is strictly smaller and generic. They are not duplicates: lem-coef-simplicial-model-nerve-localization holds only for simplicial model categories, dg-derived-quillen-calculus needs stable dg models, and the monoidal clause of combinatorial-localization-presentability needs symmetry. Each has four kinds of recorded search, the correct blueprint ancestor and via, and no proof (B1). No cycle: the item is not in either node's 523-node dependency closure. proof_deps equals the union of uses. The route stays in the unit apart from the accepted tool use lem-cbc-enhanced-functor-cone-calculus (step 4). No SGA is cited and no target or base-change morphism is involved. No fixes."
  },
  "lean_audit": {
   "master": {
