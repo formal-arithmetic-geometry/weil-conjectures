@@ -209,6 +209,67 @@ lemma leftUnitor_inv_hom (F : Sheaf J (ModuleCat.{max u v} R)) :
   rw [hu, ← Functor.OplaxMonoidal.left_unitality_assoc]
   exact leftUnitor_inv_naturality ((sheafificationAdjunction J _).counit.app F)
 
+section Terminal
+
+variable {W : C} (hW : Limits.IsTerminal W)
+
+omit [(J.W (A := ModuleCat.{max u v} R)).IsMonoidal] in
+include hW in
+lemma unitHom_app_one [(J.W (A := ModuleCat.{max u v} R)).IsMonoidal] (V : C) :
+    (unitHom J).app (op V) (1 : R) =
+      (𝟙_ (Sheaf J (ModuleCat.{max u v} R))).obj.map (hW.from V).op (unitSection J W) :=
+  NatTrans.naturality_apply (unitHom J) (hW.from V).op (1 : R)
+
+/-- `η ≫ x` transposes to `unitHom ≫ x`. -/
+lemma homEquiv_η_comp {F : Sheaf J (ModuleCat.{max u v} R)}
+    (x : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F) :
+    (sheafificationAdjunction J _).homEquiv _ _
+      (Functor.OplaxMonoidal.η (presheafToSheaf J (ModuleCat.{max u v} R)) ≫ x) =
+      unitHom J ≫ x.hom :=
+  Adjunction.homEquiv_naturality_right _ _ _
+
+include hW in
+/-- Morphisms out of the unit of sheaves of modules are determined by the image of the unit
+section over the terminal object. -/
+lemma unit_hom_ext {F : Sheaf J (ModuleCat.{max u v} R)}
+    {x y : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F}
+    (h : x.hom.app (op W) (unitSection J W) = y.hom.app (op W) (unitSection J W)) : x = y := by
+  rw [← cancel_epi (Functor.OplaxMonoidal.η (presheafToSheaf J (ModuleCat.{max u v} R)))]
+  apply ((sheafificationAdjunction J _).homEquiv _ _).injective
+  rw [homEquiv_η_comp, homEquiv_η_comp]
+  refine NatTrans.ext (funext fun V ↦ ModuleCat.hom_ext (LinearMap.ext_ring ?_))
+  change x.hom.app V ((unitHom J).app V (1 : R)) = y.hom.app V ((unitHom J).app V (1 : R))
+  rw [unitHom_app_one hW, NatTrans.naturality_apply, NatTrans.naturality_apply, h]
+
+include hW in
+/-- Every section of a sheaf of modules over the terminal object is the image of the unit
+section under a morphism from the unit. -/
+lemma exists_unitHom_eq (F : Sheaf J (ModuleCat.{max u v} R)) (s : F.obj.obj (op W)) :
+    ∃ x : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F, x.hom.app (op W) (unitSection J W) = s := by
+  let p : 𝟙_ (Cᵒᵖ ⥤ ModuleCat.{max u v} R) ⟶ F.obj :=
+    { app V := ModuleCat.ofHom (LinearMap.toSpanSingleton R _ (F.obj.map (hW.from V.unop).op s))
+      naturality V V' f := by
+        refine ModuleCat.hom_ext (LinearMap.ext_ring ?_)
+        have e : (hW.from V.unop).op ≫ f = (hW.from V'.unop).op :=
+          Quiver.Hom.unop_inj (hW.hom_ext _ _)
+        refine Eq.trans (b := (1 : R) • F.obj.map (hW.from V'.unop).op s) rfl ?_
+        rw [one_smul, ← e, Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply,
+          ModuleCat.hom_ofHom, LinearMap.toSpanSingleton_apply, one_smul]
+        rfl }
+  refine ⟨inv (Functor.OplaxMonoidal.η (presheafToSheaf J (ModuleCat.{max u v} R))) ≫
+    ((sheafificationAdjunction J _).homEquiv _ _).symm p, ?_⟩
+  have hp : unitHom J ≫ (inv (Functor.OplaxMonoidal.η (presheafToSheaf J _)) ≫
+      ((sheafificationAdjunction J _).homEquiv _ _).symm p).hom = p := by
+    rw [← homEquiv_η_comp, IsIso.hom_inv_id_assoc, Equiv.apply_symm_apply]
+  have h := congr_arg (fun φ ↦ φ.app (op W) (1 : R)) hp
+  refine h.trans ?_
+  simp only [p, ModuleCat.hom_ofHom, one_smul]
+  rw [hW.hom_ext (hW.from W) (𝟙 W), op_id, F.obj.map_id]
+  simp only [ModuleCat.hom_id, LinearMap.id_apply]
+  exact one_smul R s
+
+end Terminal
+
 end Sheaf
 
 end CategoryTheory
