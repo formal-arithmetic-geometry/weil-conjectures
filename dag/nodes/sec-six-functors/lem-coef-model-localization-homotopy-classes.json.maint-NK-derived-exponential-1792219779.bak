@@ -1,0 +1,90 @@
+{
+ "id": "lem-coef-model-localization-homotopy-classes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle finite mapping-complex comparison before the total inverse limit: detecting weak equivalences after evaluation on cofibrant dg diagram values; ordinary mapping-class input for detecting weak equivalences",
+   "via": [
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-locally-cofibrant-dg-restriction",
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Maps in a model localization from cofibrant to fibrant objects",
+ "statement": "Let $\\mathcal M$ be a model category as defined in [lem-coef-model-infinity-derived-adjunction], with weak equivalences $W$, and let $\\gamma:\\mathcal M\\to\\mathcal H$ be an ordinary localization at $W$, in universes where it exists. Let $A$ be cofibrant and $B$ fibrant. Every morphism $\\alpha:\\gamma A\\to\\gamma B$ equals $\\gamma(f)$ for some morphism $f:A\\to B$. Moreover, for $f,g:A\\to B$, $\\gamma(f)=\\gamma(g)$ if and only if there exist an object $J$, maps $e_0,e_1:A\\to J$, a weak equivalence $c:J\\to A$ with $ce_0=ce_1=1_A$, and a map $H:J\\to B$ with $He_0=f$ and $He_1=g$. Such data are called a cylinder and a left homotopy; no cofibration condition on $(e_0,e_1):A\\amalg A\\to J$ is required in this assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, ordinary mapping-class foundation beneath the finite enhanced mapping-complex comparison; Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean:65-67,116-120,129-134. No Stacks tag states this general model-category result."
+ },
+ "stmt_deps": [
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a model category maps from a cofibrant object to a fibrant object in the localization are precisely left homotopy classes of actual maps",
+   "results": "{\"t\": \"2026-10-16T15:46:37Z\", \"tool\": \"leanfinder\", \"query\": \"In a model category maps from a cofibrant object to a fibrant object in the localization are precisely left homotopy classes of actual maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.mk_eq_mk_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"ddb37e5e6318b85e\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact hit in the returned semantic-search list: the candidates concern homotopy classes or quotients but do not state both clauses for an arbitrary localization. The subsequent exact-name Loogle search and source grep identify the matching Mathlib declarations, verified at FundamentalLemma.lean:116-120,129-134."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.LeftHomotopyRel.iff_map_eq",
+   "results": "{\"t\": \"2026-10-16T15:46:41Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.LeftHomotopyRel.iff_map_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyRel.iff_map_eq\"], \"digest\": \"34ad3d46c02ccc20\"}",
+   "date": "2026-10-16",
+   "verdict": "match: read FundamentalLemma.lean:116-120 and 129-134. These give respectively representation of all localized arrows and equality if and only if left homotopy, with the cofibrant-source and fibrant-target hypotheses at lines 65-67. Cylinder.lean:135-136 and LeftHomotopy.lean:195-196 define precisely the inline cylinder homotopy."
+  },
+  {
+   "tool": "grep",
+   "query": "map_surjective_of_isLocalization|LeftHomotopyRel.iff_map_eq",
+   "results": "{\"t\": \"2026-10-16T15:46:49Z\", \"tool\": \"grep\", \"query\": \"map_surjective_of_isLocalization|LeftHomotopyRel.iff_map_eq\", \"sub\": \"AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"116\", \"129\"], \"digest\": \"0e13aca2852a5d3c\"}",
+   "date": "2026-10-16",
+   "verdict": "match: read FundamentalLemma.lean:116-120 and 129-134. These give respectively representation of all localized arrows and equality if and only if left homotopy, with the cofibrant-source and fibrant-target hypotheses at lines 65-67. Cylinder.lean:135-136 and LeftHomotopy.lean:195-196 define precisely the inline cylinder homotopy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism in the localization of a model category between a cofibrant source and fibrant target is represented by an actual map, and two maps have equal images exactly when left homotopic",
+   "results": "{\"t\": \"2026-10-16T15:46:52Z\", \"tool\": \"leansearch\", \"query\": \"Every morphism in the localization of a model category between a cofibrant source and fibrant target is represented by an actual map, and two maps have equal images exactly when left homotopic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.areEqualizedByLocalization_iff\", \"HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj_hom_ext\", \"CategoryTheory.AreEqualizedByLocalization\", \"HomotopicalAlgebra.LeftHomotopyClass.mk_eq_mk_iff\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.Hom.map.congr_simp\"], \"digest\": \"4872e6cfe7f35cd0\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact hit in the returned semantic-search list: the candidates concern homotopy classes or quotients but do not state both clauses for an arbitrary localization. The subsequent exact-name Loogle search and source grep identify the matching Mathlib declarations, verified at FundamentalLemma.lean:116-120,129-134."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomotopicalAlgebra.map_surjective_of_isLocalization, HomotopicalAlgebra.LeftHomotopyRel.iff_map_eq",
+  "file": "Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean",
+  "line": 116,
+  "how": "exact, clause by clause: map_surjective_of_isLocalization at lines 116-120 gives the first clause; LeftHomotopyRel.iff_map_eq at lines 129-134 gives the second clause (reverse its iff). Both have [ModelCategory C], [L.IsLocalization (weakEquivalences C)], [IsCofibrant X], [IsFibrant Y], with the last two fixed at lines 65-67. The displayed homotopy is definitionally LeftHomotopyRel (LeftHomotopy.lean:195-196), using Cylinder (Cylinder.lean:135-136), Precylinder and its LeftHomotopy. No good-cylinder hypothesis and no enrichment are added."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-model-localization-detects-weak-equivalences",
+  "date": "2026-10-16",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
