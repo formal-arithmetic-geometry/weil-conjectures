@@ -142,7 +142,11 @@ exceptional right adjoint datum is not a hypothesis, and the two preservation cl
    `lem-exc-open-complement-known` (`AlgebraicGeometry.Etale.exists_preservationClauses`).
 
 The remaining text of the remark (the independence of the chapters and the pointer to the
-separate biduality theorem `thm-fix-general-biduality`) makes no further formal claim. -/
+separate biduality theorem `thm-fix-general-biduality`) makes no further formal claim.
+
+This is also blueprint `rem-ptr-pur-conventions-1`: the preservation clauses (2) and (3) of the
+purity conventions `def-pur-conventions` are not assumed in the purity chapter; they are the
+conclusions proved here. -/
 theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] [HasInvertibleExponent Λ (Spec (.of k))] :
     ((∀ {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f],
