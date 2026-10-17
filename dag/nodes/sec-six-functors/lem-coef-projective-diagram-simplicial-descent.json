@@ -12,9 +12,126 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the indexing categories without using the coherent-nerve comparison. The simplex-colimit definition of $\\mathfrak C$ in [lem-coef-pinched-cube-latching] makes it colimit preserving: a simplicial functor out of its simplex colimit is precisely a compatible family of functors out of the simplex pieces, so maps out of $\\mathfrak C[S]$ satisfy the universal property of every colimit presentation of $S$. In [lem-coef-rigidification-boundary-cube], each positive-dimensional boundary map is a pushout of $U(\\partial B_m)\\to U(B_m)$, and the zero-dimensional one adjoins an object. The cube-boundary inclusion is a monomorphism. Apply the boundary-cell decomposition of [lem-coef-infinity-monomorphism-boundary-cells] to it: $U$ carries the resulting attachments to attachments of $U(\\partial\\Delta^r)\\to U(\\Delta^r)$, with the two objects fixed. For fixed target objects $x,y$, an enriched functor $U(K)\\to D$ taking its two objects to $x,y$ is exactly a simplicial map $K\\to D(x,y)$. This universal property shows that $U$ preserves these attachments with its two objects fixed. These maps, and the object-adjunction map, lift against every trivial Dwyer--Kan fibration. Indeed the trivial-fibration characterization of [lem-coef-dk-weak-exponential-limit-criterion] makes it surjective on objects and a trivial Kan fibration on each mapping set; these are exactly the required fillers. Fill successively over the cells and take the compatible maps at limit stages. Thus the realized boundary maps are cofibrations. The first assertion of [lem-coef-simplicial-boundary-collapse-test] now shows that $\\mathfrak C$ sends every monomorphism to a cofibration. In particular $\\mathfrak C[S]$ is cofibrant, by applying this to $\\varnothing\\to S$.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-rigidification-boundary-cube",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-dk-weak-exponential-limit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 2.2.3.11, assertion (*); proof of Theorem 2.2.5.1, boundary-cube paragraph, used only for its explicit boundary calculation"
+   }
+  },
+  {
+   "text": "The three colimit presentations of bases therefore give homotopy colimits of their realized simplicial categories. Here are the model checks, including the case with only one cofibration in a span. Use the Reedy structures of [lem-coef-reedy-model-structure]. A discrete diagram of cofibrant objects is Reedy cofibrant. A sequence of cofibrations starting at a cofibrant object is Reedy cofibrant, with latching object the preceding term. On the span $b\\leftarrow a\\to c$ put $\\deg(c)=0$, $\\deg(a)=1$, $\\deg(b)=2$, take $a\\to c$ inverse and $a\\to b$ direct. Its Reedy cofibrancy requires just that all three values be cofibrant and $Y(a)\\to Y(b)$ be a cofibration. This holds when $a,b,c$ stand for $A,B,C$. In each of these Reedy structures the constant-diagram functor preserves fibrations and trivial fibrations: at $a$ in the mixed span its relative matching map is an identity, and at $b,c$ it is the given ground map; the other two shapes have empty matching diagrams. Hence colimit is left Quillen. It preserves weak equivalences between cofibrant diagrams: apply [lem-coef-brown-split-factorizations] to $f=pi$ with $ps=1$, $i,s$ cofibrations and $p$ a trivial fibration. If $f$ is a weak equivalence, two-out-of-three makes $i,s$ trivial cofibrations; their images are weak equivalences, then so are the images of $p$ and $f$. To compare with a projectively cofibrant replacement, the identity from projective diagrams to Reedy diagrams is left Quillen, since Reedy (trivial) fibrations are objectwise (trivial) fibrations by the cited Reedy statement. That replacement and the original diagram are thus Reedy cofibrant and objectwise weakly equivalent, so their colimits are weakly equivalent by the argument just given. Consequently their ordinary coproduct, the displayed pushout, and the increasing union really are model homotopy colimits. This requires no global left-properness assertion for simplicial categories.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-dk-weak-exponential-limit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.6.18 applied in Proposition 2.2.3.11 (*); Reedy verification of the three homotopy-colimit presentations"
+   }
+  },
+  {
+   "text": "Passing to opposite simplicial categories keeps these homotopy colimit cocones. Opposite is an involutive equivalence of the ordinary category of simplicial categories, so it preserves strict colimits. It preserves Dwyer--Kan equivalences since it reverses the component category and interchanges the two arguments of every mapping set. It preserves trivial fibrations by their object-surjectivity and local trivial-Kan-fibration characterization in [lem-coef-dk-weak-exponential-limit-criterion]. By the lifting definition it therefore preserves cofibrations as well. It consequently preserves the Reedy replacement and comparison argument of step 2. Write $I_T=\\mathfrak C[T]^{\\mathrm{op}}$. For each of the three shapes $K_0$ (discrete, span, or $\\mathbf N$), let $K=K_0\\cup\\{\\infty\\}$ be its cone poset and let $I:K\\to\\mathrm{sCat}$ be the resulting cocone. Every $I_a$ is cofibrant and $I_\\infty$ is its homotopy colimit. The discrete shape may be empty.",
+   "uses": [
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-dk-weak-exponential-limit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11 (*): opposite-index convention; explicit verification of opposite functoriality"
+   }
+  },
+  {
+   "text": "Fix one such small cone shape. Apply [lem-coef-common-chunk-filtered-approximation] to the small cofibrant family $(I_a)_{a\\in K}$ and the shape $K_0$. It supplies a small regular $\\kappa$ for closure of the fixed-shape homotopy limit cones. Choose also a small infinite regular $\\mu\\geq\\kappa$ strictly larger than the cardinality of the union of the object sets of all $I_a$, including $I_\\infty$. Use the lemma to choose the family $(U_\\lambda)$ to be $\\mu$-filtered; it is therefore $\\kappa$-filtered as well. Every $U_\\lambda\\subseteq\\mathcal A$ is small, full, and simultaneously an $I_a$-chunk. In particular the chunk hypotheses hold for $\\mathcal A$ itself and for each of the projective categories $\\mathcal A^{I_a}$ in which the full subcategory $U_\\lambda^{I_a}$ is being used. All evaluations and all restrictions below preserve values in $U_\\lambda$. The same lemma provides both the localized filtered-union comparison and the stability of these fixed-shape homotopy-limit cones needed after the small-chunk calculation.",
+   "uses": [
+    "lem-coef-common-chunk-filtered-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Corollary A.3.6.18, printed p.905: simultaneous chunks and the universe-independent regular cardinal"
+   }
+  },
+  {
+   "text": "For one $U=U_\\lambda$ put $X=U^f[W_U^{-1}]$, $Y(a)=I_a$ and $Z(a)=E_U(I_a)$. For $b\\leq a$ let $v_{b,a}:I_b\\to I_a$ be the cocone transition and define\n$$P(a,b)=(U_f^{I_a}\\times I_b)[\\{(w,1_i)\\}^{-1}].$$\nIts maps to $Z(a)\\times Y(b)$ and $X$ are projection and evaluation $F(v_{b,a}i)$. These are precisely the spans of [lem-coef-chunk-localized-evaluation-exponential]. In $B=\\{(a,b):b\\leq a\\}$, a map $(a,b)\\to(a',b')$ means $a'\\leq a$ and $b\\leq b'$, with $b'\\leq a'$. Restrict $F$ along $I_{a'}\\to I_a$ and carry $i$ along $I_b\\to I_{b'}$. The two evaluations coincide because the maps $I_b\\to I_a$ factor through $I_{b'}\\to I_{a'}$. Thus $P$ and its spans are functorial with exactly the variance required in [lem-coef-dk-weak-exponential-limit-criterion]. By the evaluation lemma every left map represents a homotopy product; on the diagonal, because $I_a$ is cofibrant and $U$ is an $I_a$-chunk, the span represents the weak exponential of $X$ by $I_a$.",
+   "uses": [
+    "lem-coef-chunk-localized-evaluation-exponential",
+    "lem-coef-dk-weak-exponential-limit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.3.6.16, printed pp.904-905: construction of P(a,b) and evaluation spans"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-dk-weak-exponential-limit-criterion] to these $X,Y,Z,P$. Its product hypothesis and all diagonal weak-exponential hypotheses have just been verified using [lem-coef-chunk-localized-evaluation-exponential]; its last hypothesis is the homotopy-colimit cocone of step 3. It follows that\n$$E_U(I_\\infty)\\longrightarrow(E_U(I_a))_{a\\in K_0^{\\mathrm{op}}}$$\nis a homotopy limit cone in the Dwyer--Kan model structure. This calculation constructs the cone through restriction, since that is how $Z$ and every evaluation span were defined. It does not assume restriction preserves projectively cofibrant diagrams.",
+   "uses": [
+    "lem-coef-chunk-localized-evaluation-exponential",
+    "lem-coef-dk-weak-exponential-limit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.6.16, application of Proposition A.3.6.15 after checking its four hypotheses"
+   }
+  },
+  {
+   "text": "Each individual $I_a$-diagram has fewer than $\\mu$ object values. For each value choose a chunk containing it, using the union property; $\\mu$-filteredness places all these values in a single upper-bound chunk. Since the chunks are full, the entire enriched diagram, including its action on mapping simplicial sets, then belongs to that chunk. The same argument places any small set of diagram values and transformations of size less than $\\mu$ in one chunk. This also applies at the cone vertex $I_\\infty$. Take the pointwise colimit of the localized cones over this common $\\kappa$-filtered family of chunks. By [lem-coef-common-chunk-filtered-approximation] the resulting cone is still a homotopy limit cone, and its vertex and every diagram value map by Dwyer--Kan equivalences to $(\\mathcal A^{I_\\infty})^f[W_\\infty^{-1}]$ and $(\\mathcal A^{I_a})^f[W_a^{-1}]$, respectively. Naturality of that lemma identifies every leg with actual enriched restriction. Homotopy limits are derived limits in the model structure specified in [lem-coef-simplicial-localization-comparison-calculus], so the objectwise weakly equivalent cone has the same homotopy-limit property. Substituting the discrete, span and sequence shapes gives respectively the asserted homotopy product, homotopy pullback, and homotopy inverse limit for $\\mathcal E_{\\mathcal A}$. The span proof used only $A\\to B$ monic; its other map was arbitrary.",
+   "uses": [
+    "lem-coef-common-chunk-filtered-approximation",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Corollary A.3.6.18 and Proposition 2.2.3.11 (*): filtered passage from chunks to the full category"
+   }
+  },
+  {
+   "text": "For completeness, the product description and the empty case have the precise claimed models. On a discrete indexing category the Reedy model structure of [lem-coef-reedy-model-structure] has objectwise fibrations, so its fibrant replacement is an objectwise functorial fibrant replacement in simplicial categories. Product is right adjoint to the diagonal, which preserves cofibrations and trivial cofibrations objectwise, and hence its derived value is the ordinary product of those replacements. With no factors this is the terminal simplicial category. Also $\\mathfrak C[\\varnothing]=\\varnothing$, the category of diagrams on it is terminal, and its only distinguished arrow is already an equivalence. Localization therefore keeps it terminal up to Dwyer--Kan equivalence by [lem-coef-simplicial-localization-comparison-calculus]. All preceding comparisons take place in this enriched model structure; none invokes a right-fibration classification, coherent-nerve equivalence, or replacement of enriched mapping sets by ordinary Hom sets.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.6.18: discrete and empty shapes; explicit model for the derived product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-chunk-localized-evaluation-exponential",
+  "lem-coef-common-chunk-filtered-approximation",
+  "lem-coef-dk-weak-exponential-limit-criterion",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-rigidification-boundary-cube",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-simplicial-localization-comparison-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Corollary A.3.6.18 and its proof via Propositions A.3.6.15-A.3.6.16, specialized as in Proposition 2.2.3.11 (*); online source read, archival document absent"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +177,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-unstraightening-homotopy-descent",
@@ -90,5 +207,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-projective-diagram-simplicial-descent",
+  "worker": "stage1",
+  "summary": "Expanded the enriched homotopy-descent claim into an independent simplicial-category proof: cofibrant coherent realizations, three Reedy homotopy-colimit presentations, opposite indexing, small-chunk evaluation spans, the weak-exponential criterion, and filtered passage to full diagram categories. Added three statement-only foundation nodes; checked all searches and all cited statements. No statement change and no coherent-nerve/right-fibration input. Second reading made the fixed-object attachment universal property and the larger filtration cardinal explicit.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient-adjunction and inverse-limit comparison; independent simplicial-diagram foundation below lem-coef-unstraightening-homotopy-descent. The eight proof steps supply only the inherited independent coherent-diagram foundation, not a replacement of the geometric unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-b3e20b805",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-b3e20b805 (reviewer sub-agent of L); spot-checked: I read the item and the three new nodes in full, the statement of every cited node, and the HTT text (Definitions A.3.4.1 and A.3.4.9, Corollary A.3.4.14, Lemma A.3.4.15, Lemma A.3.5.14, Theorem A.3.5.15, Example A.3.6.8, Lemma A.3.6.14, Propositions A.3.6.15 and A.3.6.16, Lemma A.3.6.17, Corollary A.3.6.18). The item's statement is A.3.6.18 with Kan enrichment and C_a = 𝔆[S_a]^op; it is retained unchanged and no target is weakened. The item is not a target, so the base-change check does not apply. Steps checked: 1) 𝔆 preserves colimits; U(∂B)→U(B) lifts against local trivial fibrations with the two objects fixed; the boundary-collapse-test node then gives monomorphisms to cofibrations. 2) Reedy structure on the span with degrees c=0, a=1, b=2: latching at b is Y(a); the relative matching map of a constant diagram at a is the identity; colim is left Quillen; Brown factorization plus two-out-of-three is correct; Reedy fibrations are objectwise, so the projective-to-Reedy comparison holds; only A→B needs to be a cofibration. 3) Taking opposites preserves DK equivalences, trivial fibrations and cofibrations. 4–7) The P(a,b) spans and variance match the proof of A.3.6.16; hypotheses (i)–(iv) of A.3.6.15 are each verified; the κ-filtered passage matches the proof of A.3.6.18. 8) The empty case gives a terminal category. New nodes: (a) the evaluation/weak-exponential node is A.3.5.14 + A.3.4.14 + A.3.6.17, tested with I=∅ and U=∅; (b) the DK criterion node is A.3.6.15 for sCat, with B={(a,b): b≤a} and empty K_0 tested; (c) the common-chunk node is A.3.4.15 plus the proof of A.3.6.18; it is true taking all small common chunks, which form a μ-filtered family for every small μ. Confirmed the source typo in the proof of A.3.4.15 ('injective trivial cofibration' where a trivial fibration is meant); the node does not inherit it. Grep candidates that reach the item through their dependencies (small-chunks, diagram-equivalence-classes, enriched-diagram-homotopy-descent, rectification and others) cannot be cited without a cycle; the remaining candidates are not duplicates. The dependency closure is acyclic (217 nodes). All cited nodes are in the same unit, so tool_uses is empty. Form checks: proof_deps equals the union of uses, TeX has single backslashes, no SGA, blueprint fields and created.item are correct. No fixes."
  }
 }
