@@ -142,22 +142,22 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedCategory",
-  "statement": "abbrev proEtaleDerivedCategory (Y : Scheme.{t})\n    (A : Type t) [CommRing A] : Type _",
-  "branch": "newtargets-dag",
-  "by": "Q17",
-  "date": "2026-10-17",
   "existing": true,
-  "note": "§1(B), existing interface repair for this consumer. The current record is the fixed ModuleCat-valued presentation with coefficients in Type (u+1). The recorded constant-ring operations and their canonical composition instead act on the already published intrinsic SheafOfModules presentation. They are not definitionally equal. Rebind to that existing ordinary unbounded derived category, exactly the ring-sheaf module formulation of this node: constant coefficients are ULift A in u+1; the original small pro-etale site has object universe u+1 and morphism universe u. No new category, universe equality, completion or additional assumption is introduced."
+  "module": "Mathlib.AlgebraicGeometry.Sites.Proetale",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt",
+  "branch": "mathlib",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "note": "§1(B) repair: the recorded derived-category abbreviation did not state the small pro-etale site. Mathlib.Scheme.ProEt is the category of weakly etale objects over X; its topology is ProEt.topology.",
+  "statement": "def ProEt (S : Scheme.{u}) : Type _"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1e75c7f66",
-  "group": "Q17",
+  "reviewer": "NT-stage2-Codex-bb4bba385",
+  "group": "Q42",
   "result": "pass",
-  "note": "Every clause matches the node in Lean: the finite comm ring, arbitrary h/t/tW with tW≫h=h≫t, the ordinary uncompleted proEtaleDerivedCategory with the recorded proEtaleConstantRingDerivedPullback, scheme powers via End.of. c_m = canonical composition(tW^m,h) ≫ eqToIso ≫ composition(h,t^m).symm, as the landed pur713 comparison is built. d_m = pow_succ transport ≫ canonical (t,t^m) comparison inverted, landing in P_1(P_m K). The first identity holds for all m≥0 (types checked factor by factor). The recursion u_{n+1} and v = c_1 ≫ H(u) are correct, and the second identity covers every positive exponent. No invertibility, finite-type or Cartesian hypothesis. Edge cases m=0, n=0, identities, empty schemes, zero ring and non-invertible f are covered. statement/proof unchanged; stmt_deps gains only the landed pur713-def-pullback-comparison. The def-weil-pbc-proetale-site lean-only §1(B) rebind to the existing proEtaleDerivedCategory is justified (the operations record acts on it; it is otherwise unowned). Maintainer observation: this record has oscillated Q27/Q01/Q103/Q17. No hollow defs, theorems are sorry only, docstrings carry source, blueprint id and six proof steps, no line over 100 chars, statement verbatim. nt_compile --json: rc=0, no errors/warnings, 3.7 s. No duplicates found."
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, canonical pro-etale declarations, and three-file scompile evidence checked; no substantive or mechanical findings.; reverted the delivery's change of existing node(s) def-weil-proetale-inverse-image (--revert-nodes; kept as on newtargets-dag)"
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

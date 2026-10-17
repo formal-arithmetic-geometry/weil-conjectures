@@ -299,5 +299,23 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-114b5b0a5 (reviewer sub-agent of L); spot-checked: I read the whole item and all seven steps, every cited statement, and Stacks etale-cohomology.tex at lemma-punctual-base-change (0F1I) proof paragraph 1, lemma-base-change-Rf-star-colim (0EZT)(2) and the start of the 0F1J proof. The statement is 0F1I for an arbitrary K-scheme Z, specialised to F_ell coefficients with ell invertible in K, which is exactly how the parent lem-kun-0f1j uses it (its Step 4). The map is the F_ell-linear mate in D^+. Edge cases Z empty, F=0, Z=Spec K and B=K[t1,t2,...] are all consistent. The route follows 0F1I paragraph 1: reduce to affine Z, write it as a limit of finite-type Spec B_i, apply lem-kun-0f1i to each, then pass to the limit with lem-kun-0ezt. Every hypothesis holds: the index set is directed and nonempty, all transitions are affine, g is qcqs, and A is ell-torsion. There are no new nodes, no duplicate (I grepped 0F1I and punctual-base-change), no cycle and no SGA. I fixed two missing citations (C1/C3/C4). (1) Step 2 went from 'the termwise underived exchange is an isomorphism' to 'the derived open exchange is an isomorphism' without a cited statement. It now cites lem-weil-pbc-derived-exchange-termwise with J=j_Y^{-1}I, which is K-injective by lem-weil-pbc-dplus-injective-representative. The termwise lemma is declared as a tool use. (2) Step 5 treated lem-kun-0f1i's unbounded exchange (def-kun-unbounded-exchange) as the bounded-below exchange of def-weil-pbc-derived-exchange. It now cites lem-kun-unbounded-exchange-agrees and the fullness of D^+ in D (def-weil-pbc-bounded-derived-subcategories). I accepted the declared tool_uses (coefficient forgetting, inverse-image exactness, injective restriction, underived open exchange, Spec/limit, product limits, cohomology criterion) plus the added termwise lemma. Statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArbitrarySchemeUntensoredBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.arbitraryScheme_untensored_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArbitrarySchemeUntensoredBaseChange.lean",
+  "statement": "theorem arbitraryScheme_untensored_baseChange {K : Type u} [Field K] {Z S' T : Scheme.{u}} (z : Z ⟶ Spec (.of K)) [S'.Over (Spec (.of K))] (g : T ⟶ S') [QuasiCompact g] [QuasiSeparated g] (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : IsUnit (ℓ : K)) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) : IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) (CommSq.mk (pullback.condition (f := pullback.snd z (S' ↘ Spec (.of K))) (g := g)).symm)).app ((_root_.DerivedCategory.Plus.singleFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) 0).obj F))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-46ca3cc4e",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Canonical exchange, hypotheses, dependencies, docstrings, edge cases, report sections, and clean per-file compilation verified; no fixes needed."
  }
 }
