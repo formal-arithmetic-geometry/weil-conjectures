@@ -20,8 +20,9 @@ On an algebra `(M, φ)` of `G`, `γ_G` and `φ` give an automorphism `Γ_D M ≅
 (`IsoAlgebra.forgetCompIsoOfIso`): for Weil sheaves on `Spec k̄` this is the Frobenius of global
 sections. This file shows that, if `γ_L` intertwines these automorphisms for `γ_G` and `γ_F`, then
 on derived categories the automorphism induced by `γ_G` on `Γ_D(RW N)` corresponds, under the
-identification `Γ_D(RW N) ≅ RΓ_C(N)` (`IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompIso`), to the
-automorphism of `RΓ_C(N)` induced by `γ_F` and the derived structure isomorphism of `N`
+identification `Γ_D(RW N) ≅ RΓ_C(N)`
+(`IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetCompIso`), to the automorphism of `RΓ_C(N)`
+induced by `γ_F` and the derived structure isomorphism of `N`
 (`IsoAlgebra.mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_obj`).
 -/
 
@@ -103,7 +104,7 @@ variable {C D V : Type*} [Category C] [Category D] [Category V] [Abelian C] [Abe
 /-- The identification `Γ_D ∘ RW ≅ RΓ_C ∘ For` of right derived functors on the derived category
 of algebras, induced by `γ_L : L ⋙ Γ_D ≅ Γ_C`: both sides are right derived functors of
 `For ⋙ Γ_C`. -/
-noncomputable def rightDerivedFunctorMapOfNatIsoCompIso (γL : L ⋙ ΓD ≅ ΓC) :
+noncomputable def rightDerivedFunctorMapOfNatIsoCompForgetCompIso (γL : L ⋙ ΓD ≅ ΓC) :
     (mapOfNatIso ε).rightDerivedFunctor ⋙ (forget G ⋙ ΓD).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ ΓC.rightDerivedFunctor :=
   rightDerivedNatIso _ _ (rightDerivedFunctorCompMapDerivedCategoryUnit _ _)
@@ -120,10 +121,10 @@ noncomputable def rightDerivedFunctorMapOfNatIsoCompIso (γL : L ⋙ ΓD ≅ ΓC
             NatTrans.mapHomotopyCategory_id] } DerivedCategory.Qh)
 
 @[reassoc]
-lemma rightDerivedFunctorMapOfNatIsoCompIso_hom_fac (γL : L ⋙ ΓD ≅ ΓC)
+lemma rightDerivedFunctorMapOfNatIsoCompForgetCompIso_hom_fac (γL : L ⋙ ΓD ≅ ΓC)
     (X : HomotopyCategory (IsoAlgebra F) (ComplexShape.up ℤ)) :
     (rightDerivedFunctorCompMapDerivedCategoryUnit _ _).app X ≫
-        (rightDerivedFunctorMapOfNatIsoCompIso ε γL).hom.app (DerivedCategory.Qh.obj X) =
+        (rightDerivedFunctorMapOfNatIsoCompForgetCompIso ε γL).hom.app (DerivedCategory.Qh.obj X) =
       DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory
           (isoWhiskerLeft (forget F) γL).hom (ComplexShape.up ℤ)).app X) ≫
         (mapDerivedCategoryCompRightDerivedFunctorUnit (forget F) ΓC).app X := by
@@ -144,16 +145,16 @@ lemma mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_ob
     (N : DerivedCategory (IsoAlgebra F)) :
     (mapDerivedCategoryNatIso (forgetCompIsoOfIso γG)).hom.app
         ((mapOfNatIso ε).rightDerivedFunctor.obj N) ≫
-        (rightDerivedFunctorMapOfNatIsoCompIso ε γL).hom.app N =
-      (rightDerivedFunctorMapOfNatIsoCompIso ε γL).hom.app N ≫
+        (rightDerivedFunctorMapOfNatIsoCompForgetCompIso ε γL).hom.app N =
+      (rightDerivedFunctorMapOfNatIsoCompForgetCompIso ε γL).hom.app N ≫
         (rightDerivedFunctorIsoMapDerivedCategoryComp γF).hom.app
           ((forget F).mapDerivedCategory.obj N) ≫
         ΓC.rightDerivedFunctor.map ((mapDerivedCategoryCompIso (forget F) F).inv.app N ≫
           (mapDerivedCategoryNatIso (strNatIso F)).hom.app N) := by
   suffices H : whiskerLeft (mapOfNatIso ε).rightDerivedFunctor
         (mapDerivedCategoryNatIso (forgetCompIsoOfIso γG)).hom ≫
-        (rightDerivedFunctorMapOfNatIsoCompIso ε γL).hom =
-      (rightDerivedFunctorMapOfNatIsoCompIso ε γL).hom ≫
+        (rightDerivedFunctorMapOfNatIsoCompForgetCompIso ε γL).hom =
+      (rightDerivedFunctorMapOfNatIsoCompForgetCompIso ε γL).hom ≫
         whiskerLeft (forget F).mapDerivedCategory
           (rightDerivedFunctorIsoMapDerivedCategoryComp γF).hom ≫
         whiskerRight ((mapDerivedCategoryCompIso (forget F) F).inv ≫
@@ -162,7 +163,7 @@ lemma mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_ob
     (HomotopyCategory.quasiIso (IsoAlgebra F) (ComplexShape.up ℤ)) _ _ _ ?_
   ext X
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
-  rw [rightDerivedFunctorMapOfNatIsoCompIso_hom_fac_assoc,
+  rw [rightDerivedFunctorMapOfNatIsoCompForgetCompIso_hom_fac_assoc,
     rightDerivedFunctorCompMapDerivedCategoryUnit_app]
   simp only [Category.assoc]
   erw [(mapDerivedCategoryNatIso (forgetCompIsoOfIso γG)).hom.naturality_assoc]
@@ -185,7 +186,7 @@ lemma mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_ob
     erw [c, Category.id_comp, Category.comp_id]
     rfl
   rw [reassoc_of% hφ, ← rightDerivedFunctorCompMapDerivedCategoryUnit_app_assoc,
-    rightDerivedFunctorMapOfNatIsoCompIso_hom_fac]
+    rightDerivedFunctorMapOfNatIsoCompForgetCompIso_hom_fac]
   rw [mapDerivedCategoryCompRightDerivedFunctorUnit_app]
   simp only [Category.assoc]
   erw [(rightDerivedFunctorIsoMapDerivedCategoryComp γF).hom.naturality_assoc]

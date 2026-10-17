@@ -89,7 +89,7 @@ noncomputable def cohomologyCarrierIso (i : ℤ) :
   ((IsoAlgebra.forget _ ⋙ ProEtale.adicGlobalSections l
       (Spec (.of k) ↘ Spec (.of k)).geometricFiber).mapDerivedCategoryHomologyFunctorIso i).app _ ≪≫
     (DerivedCategory.homologyFunctor _ i).mapIso
-      ((IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompIso
+      ((IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetCompIso
           (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l (X ↘ Spec (.of k))
             (comp_over (X ↘ Spec (.of k)) (Spec (.of k))))
           (ProEtale.adicLowerStarCompGlobalSectionsIso l
