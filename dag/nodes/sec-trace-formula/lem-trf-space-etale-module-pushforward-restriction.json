@@ -1,0 +1,81 @@
+{
+ "id": "lem-trf-space-etale-module-pushforward-restriction",
+ "kind": "statement",
+ "title": "Etale localization commutes with direct image of arbitrary space modules",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $g:Y\\prime\\to Y$ be etale. Put $X\\prime=X\\times_Y Y\\prime$, with projections $h:X\\prime\\to X$ and $f\\prime:X\\prime\\to Y\\prime$. For a sheaf $F$ of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], direct image means module direct image on small etale ringed topoi. There is a canonical natural isomorphism $(f_*F)|_{Y\\prime}\\xrightarrow{\\sim}f\\prime_*(F|_{X\\prime})$. For an etale scheme $V\\to Y\\prime$, it identifies both sides with the sections of $F$ over $X\\times_YV=X\\prime\\times_{Y\\prime}V$; sections over this space mean compatible sections on its etale scheme charts. The comparison is the identity on these compatible sections, and is compatible with restriction in $V$ and with module morphisms in $F$. For any etale map $u:Z\\prime\\to Z$ of algebraic spaces, $u^{-1}\\mathcal O_Z\\simeq\\mathcal O_{Z\\prime}$ and the tensor pullback $u^*M=\\mathcal O_{Z\\prime}\\otimes_{u^{-1}\\mathcal O_Z}u^{-1}M$ [def-pur-sheaf-tensor-product] is this restriction of modules on the localized etale sites. For every module $G$ on $Y_{\\mathrm{et}}$, the square also has a canonical natural tensor-pullback comparison $(f^*G)|_{X\\prime}\\simeq f\\prime^*(G|_{Y\\prime})$, where $f^*$ and $f\\prime^*$ are the tensor pullbacks along the induced morphisms of ringed topoi. On local tensors this comparison keeps the restricted section and multiplies the two scalar coefficients; it identifies the two paths from $Y$ to $X\\prime$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03LX (lemma-pushforward-etale-base-change-modules), degree-zero assertion; 03LV (lemma-etale-exact-pullback) and 03LW (equation-restrict-modules). Section formula also spaces-morphisms.tex Tag 03M8 (lemma-compute-pushforward), proof, and spaces-properties.tex lemma-pushforward-etale-base-change. The pullback comparison is the footnote in Tag 03LX, using composition of the two paths in the ringed-topos square."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any sheaf of structure sheaf modules on algebraic spaces direct image commutes with etale base change by restriction to slice sites",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) {U V : Y.Opens} (i : U ⟶ V),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.map i.op =\\n    M.presheaf.map ((TopologicalSpace.Opens.map f.base).map i).op\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a sheaf of modules $ M $ over $ X $, the restriction map of the pushforward sheaf $ f_*M $ on an inclusion $ U \\\\subset V $ in $ Y $'s open sets is equal t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (M : X.Modules) (U : Y.Opens),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.obj (Opposite.op U) =\\n    M.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map f.base).obj U))\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M N : X.Modules} (f : X ⟶ Y) (φ : M ⟶ N) (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforward f).map φ) U =\\n    AlgebraicGeometry.Scheme.Modules.Hom.app φ ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : CommRingCat}\\n  (h :\\n    {\\n        carrier :=\\n          ↑((AlgebraicGeometry.Spec.structureSheaf S).val.obj\\n              (Opposite.op\\n     \", \"doc\": \"Let $R$ and $S$ be commutative rings and let $f: R \\\\to S$ be a ring homomorphism. Let $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ be the induced continuous map on the prime spectra. For a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|pushforward.*restrict|restrict.*pushforward",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"333\", \"text\": \"/-- The canonical morphism from `R` to the pushforward of its restriction to `Over x`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"341\", \"text\": \"/-- The adjunction between restriction to `Over x` and pushforward along `Over.star x`. -/\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale localization of algebraic space ringed topoi commutes with direct image of arbitrary modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R S] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-section-algebra-etale-base-change",
+  "date": "2026-10-18",
+  "group": "N3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Etale localization commutes with direct image of arbitrary space modules. Historical imported ancestry retained.",
+   "via": [
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

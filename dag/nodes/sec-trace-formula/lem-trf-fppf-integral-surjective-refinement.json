@@ -15,9 +15,86 @@
   "def-weil-surjective-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-fppf-local-finite-free-refinement] to the given fppf covering. We obtain a Zariski cover $X=\\bigcup_jU_j$, surjective finite locally free maps $W_j\\to U_j$, open covers $W_j=\\bigcup_kW_{j,k}$, and surjective finite locally free maps $T_{j,k}\\to W_{j,k}$, with each composite $T_{j,k}\\to X$ factoring through one member $X_i\\to X$.",
+   "uses": [
+    "lem-trf-fppf-local-finite-free-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05WN, lemma-dominate-fppf, proof"
+   }
+  },
+  {
+   "text": "By [lem-trf-integral-surjective-open-extension], extend each surjective integral map $W_j\\to U_j$ to a surjective integral map $\\overline W_j\\to X$, and extend each surjective integral map $T_{j,k}\\to W_{j,k}$ to a surjective integral map $\\overline T_{j,k}\\to\\overline W_j$. The open inverse images agree with the original schemes over $U_j$ and $W_{j,k}$, respectively.",
+   "uses": [
+    "lem-trf-integral-surjective-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNX, lemma-extend-integral-surjective-morphisms, and Tag 0CNZ proof"
+   }
+  },
+  {
+   "text": "For each $j$ take the product $\\overline T_j=\\prod_k\\overline T_{j,k}$ over $\\overline W_j$, and then take $Y=\\prod_j\\overline T_j$ over $X$. The products exist by [lem-trf-affine-infinite-product-existence], because integral morphisms are affine by [def-weil-finite-integral-morphism]. Each $\\overline T_j\\to\\overline W_j$ is integral and surjective by [lem-trf-infinite-product-integral] and [lem-trf-infinite-product-surjective]. Its composite $\\overline T_j\\to X$ is integral and surjective by [lem-trf-integral-morphism-composition] and [lem-trf-surjective-morphism-composition]. Applying the same two product lemmas to the family $\\overline T_j\\to X$ shows that $q:Y\\to X$ is integral and surjective.",
+   "uses": [
+    "lem-trf-affine-infinite-product-existence",
+    "lem-trf-infinite-product-integral",
+    "lem-trf-infinite-product-surjective",
+    "lem-trf-integral-morphism-composition",
+    "lem-trf-surjective-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNZ, lemma-dominate-fppf-integral, proof"
+   }
+  },
+  {
+   "text": "For every $j,k$, let $W_{j,k}'\\subset Y$ be the inverse image of the open $T_{j,k}\\subset\\overline T_{j,k}$ under the projection $Y\\to\\overline T_j\\to\\overline T_{j,k}$. These opens cover $Y$: if $y\\in Y$, its image in $X$ lies in some $U_j$, its image in $\\overline W_j$ lies in some $W_{j,k}$, and then its image in $\\overline T_{j,k}$ lies in the inverse image of $W_{j,k}$, namely $T_{j,k}$. The projection therefore gives an $X$-morphism $W_{j,k}'\\to T_{j,k}$, and the factorization from Step 1 gives a lift $W_{j,k}'\\to X_i$ for some $i$. Thus these opens form the required small open covering and local lifts. This is the pointwise argument in Tag 0CNZ; openness is preserved by inverse image of an open immersion [def-weil-open-immersion].",
+   "uses": [
+    "lem-trf-fppf-local-finite-free-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNZ, lemma-dominate-fppf-integral, proof"
+   }
+  },
+  {
+   "text": "If $X$ is empty, the identity of $X$ with the empty open covering supplies the conclusion; if the original indexing family is empty, joint surjectivity forces $X$ to be empty. The constructions above also allow empty index sets under the size convention [def-weil-size-convention]. No quasi-compactness, quasi-separatedness, finiteness, or finite-presentation hypothesis on $X$ or on $q$ has been introduced.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-size-convention",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNZ, lemma-dominate-fppf-integral, statement and proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-surjective-morphism",
+  "lem-trf-affine-infinite-product-existence",
+  "lem-trf-fppf-local-finite-free-refinement",
+  "lem-trf-infinite-product-integral",
+  "lem-trf-infinite-product-surjective",
+  "lem-trf-integral-morphism-composition",
+  "lem-trf-integral-surjective-open-extension",
+  "lem-trf-surjective-morphism-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CNZ, lemma-dominate-fppf-integral, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-finite-surjective-refinement",
@@ -85,5 +162,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-integral-surjective-refinement",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 0CNZ proof into the finite-locally-free refinement, open extension, infinite-product existence, and product preservation inputs. The resulting five-step proof constructs the two levels of products, proves the composite integral surjection, and verifies the open local lifts and empty cases without adding finiteness assumptions.",
+  "blueprint": "The steps realize the auxiliary integral-refinement sentence in the imported proof of the finite-refinement route under the ancestry of lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-7bd5279d1",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-7bd5279d1 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, report, item, all new nodes, unit route, cited definitions, and exact Stacks sources. Verified every proof step, hypotheses, empty cases, small examples, Mathlib leaves, duplicate searches, and route constraints. Wrote review.md. No repairs or tool uses accepted."
  }
 }

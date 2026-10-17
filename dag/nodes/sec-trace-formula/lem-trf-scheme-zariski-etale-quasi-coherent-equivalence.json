@@ -1,0 +1,86 @@
+{
+ "id": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+ "kind": "statement",
+ "title": "Zariski and small etale quasi-coherent modules agree functorially",
+ "statement": "Let $T$ be a scheme [def-pc-scheme]. The association $F\\mapsto F_{\\mathrm{et}}$, where $F_{\\mathrm{et}}(u:U\\to T)=\\Gamma(U,u^*F)$ [def-sc-etale-qcoherent-module], is an equivalence from quasi-coherent Zariski $\\mathcal O_T$-modules [pqf-def-coherent] to quasi-coherent $\\mathcal O_T$-modules on $T_{\\mathrm{et}}$ [def-trf-space-quasi-coherent-module]. The forward functor is tensor pullback by the canonical morphism of ringed sites $\\epsilon:T_{\\mathrm{et}}\\to T_{\\mathrm{Zar}}$, namely $\\mathcal O_{T,\\mathrm{et}}\\otimes_{\\epsilon^{-1}\\mathcal O_{T,\\mathrm{Zar}}}\\epsilon^{-1}(-)$. Its inverse is restriction to Zariski opens; in particular the unit and counit comparisons are the identity on sections of open subschemes. This equivalence identifies ordinary invertible modules [def-sc-invertible-module] with line modules on the small etale site [def-trf-algebraic-space]. For every scheme morphism $a:U\\to T$, it has a canonical natural comparison $(a^*F)_{\\mathrm{et}}\\simeq a_{\\mathrm{et}}^*F_{\\mathrm{et}}$, where the left pullback is [def-pc-module-pullback] and the right is tensor pullback between the ringed etale topoi. If $a$ is quasi-compact and separated [lem-trf-space-qc-separated-etale-local], then for every quasi-coherent Zariski module $H$ on $U$ the two direct images are quasi-coherent and there is a canonical natural isomorphism $(a_*H)_{\\mathrm{et}}\\simeq a_{\\mathrm{et},*}(H_{\\mathrm{et}})$ whose restriction to Zariski opens is the identity on sections.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03FH (remark-change-topologies-ringed-sites) for the forward tensor pullback; Tags 03DX (proposition-equivalence-quasi-coherent), part (2); 03LC (proposition-equivalence-quasi-coherent-functorial), parts (1),(3), restricted to separated morphisms; 05VG (lemma-equivalence-quasi-coherent-properties), finite locally free of rank one. Restriction inverse and open-section normalization: proof of lemma-fully-faithful-associated immediately before 03DX."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "pqf-def-coherent",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-space-quasi-coherent-module",
+  "def-sc-invertible-module",
+  "def-trf-algebraic-space",
+  "def-pc-module-pullback",
+  "lem-trf-space-qc-separated-etale-local"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a scheme and on its small etale site are equivalent compatibly with pullback and quasi compact quasi separated pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent|IsQuasicoherent",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"243\", \"text\": \"## \\\"Quasi-coherent `𝒪ₓ`-algebras\\\"\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"254\", \"text\": \"This is closely related to the notion of quasi-coherent `𝒪ₓ`-algebras, and we shall link them\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"255\", \"text\": \"together once the theory of quasi-coherent `𝒪ₓ`-algebras are developed.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"297\", \"text\": \"/-- The relative gluing data associated to a quasi-coherent `𝒪ₓ` algebra. -/\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski etale comparison equivalence for quasi coherent modules preserves line bundles and usual direct images",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": Sheaf (grothendieckTopology X) A ≌ TopCat.Sheaf A X\", \"doc\": \"For a scheme $X$ and a category $\\\\mathcal{A}$, this establishes an equivalence between the category of sheaves on the affine Zariski site of $X$ (equipped with the Grothendieck topology induced by the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"CategoryTheory.Equivalence.precoherent_isSheaf_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"(e : C ≌ D) (F : Cᵒᵖ ⥤ A) :\\n  haveI := e.precoherent\\n  IsSheaf (coherentTopology C) F ↔ IsSheaf (coherentTopology D) (e.inverse.op ⋙ F)\", \"doc\": \"For equivalent categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ satisfies the sheaf condition with respect to the coherent topology on $\\\\mathcal{C}$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": zariskiTopology.{u} = zariskiPretopology.toGrothendieck\", \"doc\": \"The Zariski topology on the category of schemes is equal to the Grothendieck topology generated by the Zariski pretopology, which is constructed from covering families of open immersions that are join\"}\n  {\"name\": \"Algebra.Etale.of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] (e : A ≃ₐ[R] B) : Etale R B\", \"doc\": \"If $ A $ and $ B $ are algebras over a commutative ring $ R $, and there exists an $ R $-algebra equivalence $ A ≃ₐ[R] B $, then $ A $ being étale over $ R $ implies $ B $ is also étale over $ R $. Th\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongrPrecoherent\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"(e : C ≌ D) :\\n  haveI := e.precoherent\\n  Sheaf (coherentTopology C) A ≌ Sheaf (coherentTopology D) A\", \"doc\": \"Given an equivalence $ e : C ≌ D $ between precoherent categories $ C $ and $ D $, this constructs an equivalence between the sheaf categories $ \\\\text{Sh}(C, J_C, \\\\mathcal{A}) $ and $ \\\\text{Sh}(D, J_D\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-section-algebra-etale-base-change",
+  "date": "2026-10-18",
+  "group": "N3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Zariski and small etale quasi-coherent modules agree functorially. Historical imported ancestry retained.",
+   "via": [
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

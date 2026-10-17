@@ -14,11 +14,125 @@
   "def-weil-pbc-quasi-coherent-algebra",
   "def-weil-pbc-graded-sheaf-structures",
   "def-pc-module-pullback",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F_d=L^{\\otimes d}$, with $F_0=\\mathcal O_X$. On an etale cover trivializing $L$ as in [def-trf-algebraic-space], every $F_d$ is identified with $\\mathcal O$ by multiplying the tensor factors [def-pur-sheaf-tensor-product]. On that cover it therefore has the local presentation $0\\to0\\to\\mathcal O\\xrightarrow{\\sim}F_d\\to0$, where the displayed isomorphism is the chosen trivialization (and for $d=0$ the canonical one). This is a local free presentation, so each $F_d$ is quasi-coherent by [def-trf-space-quasi-coherent-module].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pur-sheaf-tensor-product",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G9 (definition-quasi-coherent), via sites-modules.tex Tag 03DL(6)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-space-qc-separated-quasi-coherent-pushforward] to $f$ and each $F_d$. The hypotheses are exactly the assumed quasi-compactness and separation of $f$; no representability of $X$ is used. It gives a quasi-coherent etale module $f_*F_d$. Apply the inverse equivalence in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] on the scheme $T$, obtaining a quasi-coherent Zariski module $A_d$ whose associated etale module is canonically $f_*F_d$. Its sections on a Zariski open $V$ are the compatible sections of $F_d$ on $X\\times_TV$.",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M9 (lemma-pushforward), and preceding scheme comparison through descent.tex Tags 03DX,03LC; section interpretation as in Tag 03M8 (lemma-compute-pushforward), proof."
+   }
+  },
+  {
+   "text": "For each open $V\\subseteq T$ and $s\\in A_m(V)$, $t\\in A_d(V)$, multiply their compatible local sections using $L^{\\otimes m}\\otimes L^{\\otimes d}\\to L^{\\otimes(m+d)}$. This produces a section $st\\in A_{m+d}(V)$ and commutes with restrictions, since tensor multiplication does so on every etale chart. Associativity, commutativity, bilinearity and the unit $\\mathcal O_T\\to A_0$ follow by multiplying local coefficients in a trivialization of $L$; the unit is pullback of functions. Hence these operations give the graded algebra of [def-weil-pbc-graded-sheaf-structures]. Let $\\mathcal A=\\bigoplus_{d\\geq0}A_d$ in Zariski module sheaves. It is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-coproduct-closure], so is a quasi-coherent algebra by [def-weil-pbc-quasi-coherent-algebra]. The equivalence of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies this sum with $\\bigoplus_d f_*F_d$: restriction to the Zariski opens of that etale coproduct is the indicated sum, because sheaf tensor pullback defining the forward comparison preserves coproducts by its left-adjoint property [lem-weil-pbc-ringed-topoi-module-adjunction].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-graded-sheaf-structures",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "def-weil-pbc-quasi-coherent-algebra",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), section-algebra paragraph; schemes.tex Tag 01ID for coproduct closure; sites-modules.tex Tag 03D7 for the pullback adjunction."
+   }
+  },
+  {
+   "text": "For each degree, the adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] gives the counit $\\epsilon_d:f^*f_*F_d\\to F_d$, corresponding to the identity of $f_*F_d$. In the tensor description it sends a local generator $a\\otimes s$ to $a\\,s|_W$ on a chart $W\\to X$ lying over the domain of $s$. This formula follows by taking the identity map through the inverse-image and extension-of-scalars Hom bijections: the latter sends a map $v$ to $a\\otimes s\\mapsto a\\,v(s)$. Form the direct sum of these counits. Pullback preserves coproducts: for every module $H$, the adjunction identifies maps out of $f^*(\\bigoplus_d A_d)$ with $\\prod_d\\operatorname{Hom}(f^*A_d,H)$. This gives the displayed evaluation $\\psi:f^*\\mathcal A\\to\\bigoplus_dF_d$. On local tensors $\\psi((a\\otimes s)(b\\otimes t))=ab\\,(st)|_W=(a\\,s|_W)(b\\,t|_W)$, and the unit goes to the unit, so it is a homomorphism of graded algebras.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, natural maps psi_d and the graded adjunction map; sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), explicit Hom bijections."
+   }
+  },
+  {
+   "text": "Write $h:X\\prime\\to X$ for the other projection. Since $g$ is etale, [lem-trf-space-etale-module-pushforward-restriction] identifies etale tensor pullback by $g$ and $h$ with restriction and gives $g^*(f_*F_d)\\simeq f\\prime_*(h^*F_d)$ canonically. The tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor], iterated starting from $h^*\\mathcal O_X=\\mathcal O_{X\\prime}$, identifies $h^*F_d$ with $(L\\prime)^{\\otimes d}$ for every $d$. By the pullback comparison in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], the left side corresponds to ordinary scheme pullback $g^*A_d$. Thus the degreewise comparisons are isomorphisms $g^*A_d\\simeq f\\prime_* (L\\prime)^{\\otimes d}$, with the right side interpreted in the same Zariski equivalence. Pullback preserves the sum by the Hom argument of Step 4, so their sum is the required isomorphism of graded modules.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LX (lemma-pushforward-etale-base-change-modules), 03LV,03LW; sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); descent.tex Tag 03LC(1)."
+   }
+  },
+  {
+   "text": "Check the operations under this isomorphism. For an etale scheme $V\\to T\\prime$, the comparison of [lem-trf-space-etale-module-pushforward-restriction] sends a section represented on $X\\times_TV$ to that same section on $X\\prime\\times_{T\\prime}V$, the identical space. Consequently it sends $st$ to $s|\\,t|$, and sends the pulled-back function defining the unit to the same function. It is therefore an isomorphism of graded algebras, not just modules. On a chart $W\\to X\\prime$, the restriction of the degree-$d$ evaluation of Step 4 and the evaluation formed for $f\\prime$ both send $a\\otimes s$ to $a\\,s|_W$. The pullback comparison in [lem-trf-space-etale-module-pushforward-restriction] identifies tensor pullbacks along the two paths by keeping that section and multiplying coefficients. Equality on these local generators gives equality of the sheaf maps in every degree, hence equality on the coproduct. This proves the asserted evaluation compatibility.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, sentence asserting pullback compatibility of psi_d; spaces-properties.tex Tag 03LX and its pullback footnote. The local tensor computation is written out."
+   }
+  },
+  {
+   "text": "Finally suppose that $X\\prime$ is a scheme. Apply [lem-trf-space-qc-separated-etale-local] to the jointly surjective etale family $\\{\\mathrm{id}_T:T\\to T,\\ g:T\\prime\\to T\\}$: its forward implication shows that $f\\prime$ is quasi-compact and separated. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], the line module $L\\prime$ corresponds to an ordinary invertible module, tensor pullback agrees with ordinary scheme tensor pullback, and the direct images of its tensor powers agree with Zariski direct images. The tensor powers themselves correspond: on an open trivializing the invertible module both versions are $\\mathcal O$, and their transition maps are the $d$-th powers of the same units. On every open of $T\\prime$, the comparison of direct images is the identity on sections; consequently their multiplication is the same product of sections. The ordinary counit and the etale counit both send $a\\otimes s$ to $a\\,s|_W$ on local tensors over open subschemes of $X\\prime$. Thus their evaluation maps agree, as do their sums. This also covers $X\\prime=X$ when $X$ was a scheme to begin with.",
+   "uses": [
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Discussion preceding Tag 03M9; descent.tex Tags 03DX,03LC(1),(3),05VG. Separation and quasi-compactness after etale base change: spaces-morphisms.tex Tags 03KG,03KM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-weil-pbc-graded-sheaf-structures",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-trf-space-qc-separated-etale-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample), section algebra and evaluation paragraphs, restricted here to etale scheme bases; underlying pushforward and comparisons are spaces-morphisms.tex 03M9, spaces-properties.tex 03LX, and descent.tex 03DX/03LC. Products and evaluation compatibility are written on local sections and pure tensors."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,7 +164,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-ample-local",
@@ -79,5 +193,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-section-algebra-etale-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and split the degreewise pushforward, formation of the graded algebra, explicit adjunction evaluation, etale restriction, compatibility of multiplication and evaluation, and final scheme comparison. Added three generic statement-only comparison lemmas and one Mathlib definition leaf; reused the existing scheme coproduct closure and arbitrary-ringed-topos adjunction/tensor comparisons. No Lean changes or compiler calls.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality: polarized descent input in its specialization chain, specifically the section-algebra and psi_d paragraphs of Stacks 0D3C realized by parent lem-trf-algebraic-space-ample-local Step 3 and its scheme comparison in Step 5. No change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Generic closure of quasi-coherent scheme modules under the countable degree coproduct; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic underived tensor pullback adjunction, used for the evaluation counit and preservation of coproducts; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic underived tensor comparison on ringed topoi, used to identify restrictions of tensor powers; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-3fae54682",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-3fae54682 (reviewer sub-agent of L); spot-checked: Step 1 is mathematically invalid as delivered: 0→O→O→0 presents the zero module, not F_d. I supplied a corrected whole item JSON using 0→0→O≅F_d→0. All statements, sources, hypotheses, edge cases, route restrictions, citations, searches, and proof steps were checked; no other faults found.; 1 file(s) fixed by the reviewer"
  }
 }

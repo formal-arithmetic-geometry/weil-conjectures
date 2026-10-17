@@ -2,18 +2,108 @@
  "id": "lem-trf-abhyankar-inequality",
  "kind": "statement",
  "title": "Relative Abhyankar inequality for a valued field extension",
- "statement": "Let $F\\subseteq K$ be fields [def-weil-field] such that $K$ is finitely generated as a field over $F$, and let $A$ be a valuation ring of $K$, i.e. a subring $A\\subseteq K$ such that for every $a\\in K^\\times$ at least one of $a,a^{-1}$ lies in $A$ (so $A$ is local with fraction field $K$; write $\\mathfrak m_A$ for its maximal ideal and $A^\\times$ for its unit group). Put $A_F=A\\cap F$; it is a valuation ring of $F$ with maximal ideal $\\mathfrak m_{A_F}=\\mathfrak m_A\\cap F$ and unit group $A_F^\\times=A^\\times\\cap F^\\times$. Let $\\Gamma_K=K^\\times/A^\\times$ and $\\Gamma_F=F^\\times/A_F^\\times$; the inclusion $F^\\times\\subseteq K^\\times$ induces an injective homomorphism $\\Gamma_F\\hookrightarrow\\Gamma_K$. Let $\\kappa_K=A/\\mathfrak m_A$ and $\\kappa_F=A_F/\\mathfrak m_{A_F}$, with the induced field embedding $\\kappa_F\\hookrightarrow\\kappa_K$. For an abelian group $G$ put $\\operatorname{rrk}(G)=\\dim_{\\mathbf Q}(G\\otimes_{\\mathbf Z}\\mathbf Q)$. Then $\\operatorname{rrk}(\\Gamma_K/\\Gamma_F)+\\operatorname{trdeg}_{\\kappa_F}\\kappa_K\\le\\operatorname{trdeg}_F K$, where $\\Gamma_K/\\Gamma_F$ is the quotient abelian group.",
+ "statement": "Let $F\\subseteq K$ be fields [def-weil-field] such that $K$ is finitely generated as a field over $F$, and let $A$ be a valuation ring of $K$, i.e. a subring $A\\subseteq K$ such that for every $a\\in K^\\times$ at least one of $a,a^{-1}$ lies in $A$ (so $A$ is local with fraction field $K$; write $\\mathfrak m_A$ for its maximal ideal and $A^\\times$ for its unit group). Put $A_F=A\\cap F$; it is a valuation ring of $F$ with maximal ideal $\\mathfrak m_{A_F}=\\mathfrak m_A\\cap F$ and unit group $A_F^\\times=A^\\times\\cap F^\\times$. Let $\\Gamma_K=K^\\times/A^\\times$ and $\\Gamma_F=F^\\times/A_F^\\times$; the inclusion $F^\\times\\subseteq K^\\times$ induces an injective homomorphism $\\Gamma_F\\hookrightarrow\\Gamma_K$. Let $\\kappa_K=A/\\mathfrak m_A$ and $\\kappa_F=A_F/\\mathfrak m_{A_F}$, with the induced field embedding $\\kappa_F\\hookrightarrow\\kappa_K$. For an abelian group $G$ put $\\operatorname{rrk}(G)=\\dim_{\\mathbf Q}(G\\otimes_{\\mathbf Z}\\mathbf Q)$. Then $\\operatorname{rrk}(\\Gamma_K/\\Gamma_F)+\\operatorname{trdeg}_{\\kappa_F}\\kappa_K\\le\\operatorname{trdeg}_F K$, where $\\Gamma_K/\\Gamma_F$ is the quotient abelian group. Here transcendence degree and algebraic independence have the meaning of [def-kun-transcendence-degree].",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "§2.1, Lemma 2.1.2 (Abhyankar inequality) and Corollary 2.1.3(i) for the height consequence; the local document copy is unavailable.",
   "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
  },
  "stmt_deps": [
-  "def-weil-field"
+  "def-weil-field",
+  "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] to $K/F$. Its finite transcendence basis and [def-kun-transcendence-degree] give $d=\\operatorname{trdeg}_F K<\\infty$. Put $H=\\Gamma_K/\\Gamma_F$, $V=H\\otimes_{\\mathbf Z}\\mathbf Q$, and for $z\\in K^\\times$ write $q(z)\\in V$ for the image of its class. We use additive notation in $H$ and $V$, so $q(zw)=q(z)+q(w)$ and $q(c)=0$ for $c\\in F^\\times$.",
+   "uses": [
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030F (lemma-transcendence-degree, finite-generation specialization) and 030G (definition-transcendence-degree)"
+   }
+  },
+  {
+   "text": "Fix arbitrary integers $r,s\\geq0$, elements $x_1,\\ldots,x_r\\in K^\\times$ for which $q(x_1),\\ldots,q(x_r)$ are $\\mathbf Q$-linearly independent, and elements $y_1,\\ldots,y_s\\in A$ whose residues $\\bar y_1,\\ldots,\\bar y_s$ are algebraically independent over $\\kappa_F$ [def-kun-transcendence-degree]. Linear independence means that a relation $\\sum_i a_iq(x_i)=0$ with $a_i\\in\\mathbf Q$ has all $a_i=0$. The empty families are permitted. Steps 3--6 show directly that no nonzero polynomial over $F$ vanishes on the combined indexed family $(x_1,\\ldots,x_r,y_1,\\ldots,y_s)$.",
+   "uses": [
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: minimum-term normalization. Agent-written polynomial analogue, not an application of the finite-extension statement. The original Temkin Lemma 2.1.2 is unavailable locally."
+   }
+  },
+  {
+   "text": "For each nonzero polynomial $P\\in F[Y_1,\\ldots,Y_s]$, choose a nonzero coefficient $c$ such that every coefficient divided by $c$ belongs to $A_F$. Such a choice exists by finite selection: for two nonzero coefficients $a,b$, either $a/b\\in A_F$ or $b/a\\in A_F$; keep the divisor, and process the remaining coefficients. Then $P/c$ has coefficients in $A_F$, and one coefficient is $1$. Its reduction is therefore a nonzero polynomial over $\\kappa_F$. Algebraic independence of the residues gives $(P/c)(y)\\bmod\\mathfrak m_A\\ne0$. Thus $P(y)/c$ belongs to $A\\setminus\\mathfrak m_A=A^\\times$. In particular $P(y)\\ne0$ and $P(y)=cu_P$ for some $u_P\\in A^\\times$. The identity of residue evaluation follows term by term because reduction preserves sums and products.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: minimum-term normalization. Agent-written polynomial analogue, not an application of the finite-extension statement. The original Temkin Lemma 2.1.2 is unavailable locally."
+   }
+  },
+  {
+   "text": "Let $Q\\in F[X_1,\\ldots,X_r,Y_1,\\ldots,Y_s]$ be nonzero. Group its terms by their $X$-exponents to write $Q=\\sum_{\\alpha\\in I}X^\\alpha P_\\alpha(Y)$, with $I$ a finite nonempty set of distinct tuples in $\\mathbf N^r$ and every $P_\\alpha\\ne0$. By Step 3, $P_\\alpha(y)=c_\\alpha u_\\alpha$ with $c_\\alpha\\in F^\\times$ and $u_\\alpha\\in A^\\times$. Hence $T_\\alpha=x^\\alpha P_\\alpha(y)$ is nonzero. For distinct $\\alpha,\\beta$, its quotient $T_\\alpha/T_\\beta$ cannot be a unit of $A$: otherwise taking its image under $q$ gives $0=\\sum_i(\\alpha_i-\\beta_i)q(x_i)$, since $q(c_\\alpha/c_\\beta)=0$ and units map to zero. Linear independence forces $\\alpha_i=\\beta_i$ for every $i$, a contradiction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: minimum-term normalization. Agent-written polynomial analogue, not an application of the finite-extension statement. The original Temkin Lemma 2.1.2 is unavailable locally."
+   }
+  },
+  {
+   "text": "Choose $\\beta\\in I$ so that $T_\\alpha/T_\\beta\\in A$ for all $\\alpha\\in I$. To do this, start with one term and process the others: keep the current choice when the new term divided by it lies in $A$; otherwise the inverse quotient lies in $A$, so replace the choice by the new term. Every earlier quotient remains in $A$ because its new quotient is the product of its old quotient and the old choice divided by the new choice. For $\\alpha\\ne\\beta$, Step 4 shows that $T_\\alpha/T_\\beta$ is a nonunit, hence belongs to $\\mathfrak m_A$. Consequently $Q(x,y)/T_\\beta=1+\\sum_{\\alpha\\ne\\beta}T_\\alpha/T_\\beta$ has residue $1$ in $\\kappa_K$ and is nonzero. Since $T_\\beta\\ne0$, also $Q(x,y)\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: minimum-term normalization. Agent-written polynomial analogue, not an application of the finite-extension statement. The original Temkin Lemma 2.1.2 is unavailable locally."
+   }
+  },
+  {
+   "text": "By Steps 3--5 and [def-kun-transcendence-degree], the combined indexed family is algebraically independent over $F$. Its entries are distinct: equality of two entries would give the nonzero relation $Z_i-Z_j$ in the corresponding two distinct variables. Its underlying set thus has $r+s$ elements, and the definition of transcendence degree gives $r+s\\le d$. This conclusion holds for every pair of finite families chosen in Step 2, including $r=0$ or $s=0$.",
+   "uses": [
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: minimum-term normalization. Agent-written polynomial analogue, not an application of the finite-extension statement. The original Temkin Lemma 2.1.2 is unavailable locally."
+   }
+  },
+  {
+   "text": "The elements $q(z)$, $z\\in K^\\times$, span $V$: a tensor is a finite sum of pure tensors $h\\otimes a=a(h\\otimes1)$, and every $h\\in H$ is represented by a class of some $z\\in K^\\times$. Starting from the empty family, if the selected $q(z)$ do not span, some $q(z)$ is outside their span and can be added while preserving independence (in a relation with its coefficient nonzero, solve for that element to contradict its choice). Step 6 with $s=0$ forbids $d+1$ such elements, so this procedure stops after $a\\le d$ choices with a basis of $V$. Its cardinality is $a=\\dim_{\\mathbf Q}V=\\operatorname{rrk}(H)$. This establishes finiteness before using ordinary integer dimension; no finite generation or torsion-freeness of $H$ has been assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: minimum-term normalization. Agent-written polynomial analogue, not an application of the finite-extension statement. The original Temkin Lemma 2.1.2 is unavailable locally."
+   }
+  },
+  {
+   "text": "By Step 6 with $r=0$, every finite algebraically independent subset of $\\kappa_K$ over $\\kappa_F$ has size at most $d$. An infinite such subset would contain $d+1$ distinct elements, so none exists. The possible sizes therefore form a nonempty subset of $\\{0,\\ldots,d\\}$, containing $0$, with maximum $b$. By [def-kun-transcendence-degree] this maximum is $b=\\operatorname{trdeg}_{\\kappa_F}\\kappa_K$. Choose a family attaining $b$ and lift each entry along the surjection $A\\to\\kappa_K$. Combine it with the $a$ elements chosen in Step 7. Step 6 now gives $a+b\\le d$, which is exactly the asserted relative Abhyankar inequality.",
+   "uses": [
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: minimum-term normalization. Agent-written polynomial analogue, not an application of the finite-extension statement. The original Temkin Lemma 2.1.2 is unavailable locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "def-kun-transcendence-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0ASH, lemma-inequality-general, minimum-term proof used as inspiration for the explicit polynomial argument; Temkin §2.1 Lemma 2.1.2 remains WANTED, not read locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,7 +124,7 @@
    "query": "ValuationSubring, rational rank, residue field, transcendence degree",
    "results": "0 hits; service reported unknown identifier rational.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
@@ -42,10 +132,87 @@
    "results": "0 hits in Mathlib/RingTheory/Valuation.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative Abhyankar inequality for valued field extensions: rational rank of the value-group quotient plus residue transcendence degree is bounded by field transcendence degree",
+   "results": "{\"t\": \"2026-10-17T19:54:52Z\", \"tool\": \"leanfinder\", \"query\": \"relative Abhyankar inequality for valued field extensions: rational rank of the value-group quotient plus residue transcendence degree is bounded by field transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.insepDegree_le_rank\", \"IntermediateField.adjoin_rank_le_of_isAlgebraic_right\", \"IntermediateField.adjoin_rank_le_of_isAlgebraic\", \"IntermediateField.adjoin_rank_le_of_isAlgebraic_left\", \"IntermediateField.rank_bot_mul_relrank\", \"IntermediateField.lift_rank_comap\", \"IsTranscendenceBasis.lift_rank_eq_max_lift\", \"IntermediateField.relrank_mul_rank_top\"], \"digest\": \"2685f11f0d034966\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring rational rank residue transcendence degree Abhyankar",
+   "results": "{\"t\": \"2026-10-17T19:54:52Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring rational rank residue transcendence degree Abhyankar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `rational`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|abhyankar|rational.*rank|residue.*transcendence",
+   "results": "{\"t\": \"2026-10-17T19:54:52Z\", \"tool\": \"grep\", \"query\": \"Abhyankar|abhyankar|rational.*rank|residue.*transcendence\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative Abhyankar inequality for a valued field extension",
+   "results": "{\"t\": \"2026-10-17T19:54:53Z\", \"tool\": \"leansearch\", \"query\": \"relative Abhyankar inequality for a valued field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension.val_map_lt_one_iff\", \"Valuation.HasExtension.val_map_le_one_iff\", \"Valuation.HasExtension.ofComapInteger\", \"IsNonarchimedeanLocalField.instIsRankLeOne\", \"Valuation.HasExtension.val_map_lt_iff\", \"Valuation.HasExtension.val_map_le_iff\", \"Valued.closure_coe_completion_v_mul_v_lt\", \"ValuativeRel.IsRankLeOne.of_valuativeExtension\"], \"digest\": \"c848ca97169ae4bb\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "valuation independent value group classes and algebraically independent residue lifts imply algebraic independence over the base field",
+   "results": "{\"t\": \"2026-10-17T19:56:40Z\", \"tool\": \"leanfinder\", \"query\": \"valuation independent value group classes and algebraically independent residue lifts imply algebraic independence over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"algebraicIndependent_adjoin\", \"AlgebraicIndependent.coe_range\", \"algebraicIndependent_of_finite'\", \"Algebra.IsAlgebraic.algebraicIndependent_iff\", \"AlgebraicIndependent.to_subtype_range\", \"algebraicIndependent_of_finite_type'\", \"Algebra.IsIntegral.algebraicIndependent_iff\", \"algebraicIndependent_of_set_of_finite\"], \"digest\": \"a2d07dcbd8be2459\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring AlgebraicIndependent",
+   "results": "{\"t\": \"2026-10-17T19:56:40Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring AlgebraicIndependent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Application type mismatch: The argument\\n  AlgebraicIndependent\\nhas type\\n  (R : Type ?u.3) → {A : Type ?u.2} → (?m.1 → A) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\\nbut is exp\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicIndependent|algebraically.*independent|value.*group",
+   "results": "{\"t\": \"2026-10-17T19:56:40Z\", \"tool\": \"grep\", \"query\": \"AlgebraicIndependent|algebraically.*independent|value.*group\", \"sub\": \"RingTheory/AlgebraicIndependent\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\"], \"digest\": \"cacaecdd461b4080\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "independent values and residue transcendence imply algebraic independence in a valued field",
+   "results": "{\"t\": \"2026-10-17T19:56:41Z\", \"tool\": \"leansearch\", \"query\": \"independent values and residue transcendence imply algebraic independence in a valued field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"algebraicIndependent_of_set_of_finite\", \"algebraicIndependent_of_finite'\", \"AlgebraicIndependent.transcendental\", \"AlgebraicIndepOn.insert\", \"AlgebraicIndependent.algebraicClosure\", \"algebraicIndependent_of_finite_type'\", \"algebraicIndependent_singleton_iff\", \"AlgebraicIndependent.option_iff_transcendental\"], \"digest\": \"2c4043cbbc219290\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valued field extension has residue transcendence degree plus rationally independent new values bounded by its transcendence degree",
+   "results": "{\"t\": \"2026-10-17T19:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"A valued field extension has residue transcendence degree plus rationally independent new values bounded by its transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lift_trdeg_add_le\", \"AlgebraicIndependent.lift_cardinalMk_le_trdeg\", \"AlgebraicIndependent.cardinalMk_le_trdeg\", \"IsTranscendenceBasis.lift_rank_eq_max_lift\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_lift_le_trdeg\", \"Algebra.Transcendental.rank_eq_cardinalMk\", \"AlgebraicIndependent.isTranscendenceBasis_of_lift_trdeg_le\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_lift_le_trdeg_of_finite\"], \"digest\": \"bc12fe888d2a9803\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, AlgebraicIndependent",
+   "results": "{\"t\": \"2026-10-17T19:57:25Z\", \"tool\": \"loogle\", \"query\": \"Valuation, AlgebraicIndependent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|abhyankar|transcendence.*valuation|valuation.*transcendence",
+   "results": "{\"t\": \"2026-10-17T19:57:25Z\", \"tool\": \"grep\", \"query\": \"Abhyankar|abhyankar|transcendence.*valuation|valuation.*transcendence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: general algebraic-independence extension criteria need an additional transcendence hypothesis; valuation-extension comparison and rank-one results impose different hypotheses; ordinary field rank and transcendence-degree bounds do not supply the valued-field inequality. No exact match or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-abhyankar-finite-type-field-height",
@@ -72,5 +239,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-abhyankar-inequality",
+  "worker": "stage1",
+  "summary": "Kept the relative statement, adding only its existing transcendence-degree notion dependency. Gave the coefficient-normalization and distinct-monomial noncancellation proof explicitly, followed by finite-family dimension arguments. No new nodes, no attachment, no Mathlib match, no circular use of the downstream finite-height theorem. Temkin unavailable locally; proof_origin is agent.",
+  "blueprint": "Retains the historical ancestor lem-trf-local-term-locality (1)--(2), specialization/nearby-cycle branch, through the recorded Temkin finite-height input. Realizes relative Lemma 2.1.2 beneath the already split finite-type-field-height node. Does not alter the unit route or its realized fields."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-9204b1373",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-9204b1373 (reviewer sub-agent of L); spot-checked: Read all eight proof steps and cited statements; checked Temkin Lemma 2.1.2, Stacks 0ASH/030F/030G, route, duplicates, and edge cases. Mathematics is correct. Corrected one inherited Loogle error verdict from “no match” to “unavailable”; statement and proof unchanged. Whole corrected JSON and review.md written. Review records an accidental read-only git invocation.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -13,41 +13,144 @@
   "def-weil-pbc-simplicial-object",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $K_q=h_{V_q}$ and $G=h_W$ for the representable presheaves, with the given augmentation $K\\to G$. For every $p$ the map $h_{V_p}\\to h_{N_p}$ has local lifts of every section: pull back the covering of $N_p$ along a section $U\\to N_p$, then use its given factorizations through $V_p$. This also makes its sheafification epic. Indeed, two maps out of $h_{N_p}^{\\#}$ agreeing on $h_{V_p}^{\\#}$ agree on every section of $h_{N_p}$ by these local lifts and sheaf separatedness, hence agree by the sheafification universal property. The cited epi criterion therefore makes the sheafified map locally surjective. This reasoning does not require the site to be subcanonical.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GE, hypotheses (1)-(3); verification from the covering-sieve hypotheses."
+   }
+  },
+  {
+   "text": "Define $K^0_q=K_0\\times_G\\cdots\\times_GK_0$ ($q+1$ factors), with faces deleting and degeneracies repeating factors. This is the relative Cech nerve of $K_0\\to G$. Step 1 for $p=0$ verifies the local surjectivity required by the Cech free-homology lemma. With $R=\\mathbf Z$ that lemma gives $H_i(K^0)=0$ for $i>0$ and identifies $H_0(K^0)$ with $\\mathbf Z[G]^{\\#}$ via the augmentation.",
+   "uses": [
+    "lem-weil-pbc-cech-nerve-free-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tags 01GC (lemma-compare-cosk0) and 01GE (lemma-acyclic-hypercover-sheaves), separately defined relative fibre-product base stage."
+   }
+  },
+  {
+   "text": "For $n\\geq1$ form the ordinary presheaf coskeleta $K^n=\\operatorname{cosk}_n\\mathrm{sk}_nK$. The finite-limit description gives $K^n_q=K_q$ for $q\\leq n$. It also shows that an $m$-coskeleton $A$ is $n$-coskeletal for $n\\geq m$: a compatible cone of simplices of $A$ of dimension at most $n$ restricts to its cone in dimensions at most $m$; conversely, the latter cone uniquely supplies every higher entry by the displayed limit formula for $A_q$. These two operations are inverse and commute with all simplicial operators. The coskeleton universal property supplies the maps $K^n\\to K^{n-1}$ for $n\\geq2$, inducing the identity in degrees below $n$.",
+   "uses": [
+    "lem-weil-pbc-truncated-coskeleton-finite-limits",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018B, lemma-cosk-up, clauses (3)-(4); the cone calculation from the finite-limit coskeleton formula."
+   }
+  },
+  {
+   "text": "The new relative-nerve lemma says $K^0$ is $1$-coskeletal. The degree-zero augmentation of $K^1$, whose degrees zero and one equal those of $K$, extends to an augmentation $K^1\\to G$: all vertices have the same image in $G$ because their connecting edges are in $K_1$ and the two endpoints of each such edge have equal augmentation. Apply the lemma with $T=K^1$ and $g=\\mathrm{id}_{K_0}$ to obtain $K^1\\to K^0$, with its vertex-tuple formula. In degree zero it is the identity and in degree one it is $(d_1,d_0):K_1\\to K_0\\times_GK_0=h_{V_0\\times_WV_0}$. Here $N_1=V_0\\times_WV_0$, so Step 1 gives the needed local surjectivity. Both objects are $1$-coskeletal. Apply the homology-comparison lemma at $n=1$, $R=\\mathbf Z$, to get an isomorphism on every homology sheaf.",
+   "uses": [
+    "lem-trf-cech-nerve-one-coskeletal",
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GE, first transition K^1 to the relative nerve K^0; Tag 018I (simplicial.tex, lemma-cosk-minus-one) supplies its universal property."
+   }
+  },
+  {
+   "text": "For $n\\geq2$, the ordinary matching object for $K$ agrees with $h_{N_n}$, although $N_n$ was defined in the slice over $W$. To check this, evaluate at $U$: Yoneda sends the finite slice limit to tuples of compatible proper faces with a common map $U\\to W$. Any compatible tuple in the ordinary matching limit already has that common map: the boundary of an $n$-simplex contains all its edges, so augmentation equality along edges equates the images of all vertices; every higher face has that same image. Forgetting the common map and recovering it from any vertex are inverse operations. These operations commute with restrictions in $U$ and with the maps from $K_n$. The matching/coskeleton node now identifies $(K^{n-1})_n$ with $h_{N_n}$ and its canonical map from $K_n$ with $h_{V_n}\\to h_{N_n}$.",
+   "uses": [
+    "lem-weil-pbc-matching-object-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GE, hypothesis (3); explicit comparison with the relative matching limit in this item."
+   }
+  },
+  {
+   "text": "For $n\\geq2$, apply the comparison lemma to $K^n\\to K^{n-1}$, with $R=\\mathbf Z$. Step 3 gives the identity below degree $n$ and shows both objects are $n$-coskeletal; Steps 1 and 5 give local surjectivity in degree $n$. Hence every induced homology map is an isomorphism. Together with Step 4 this gives $H_i(K^n)\\simeq H_i(K^0)$ for all $n\\geq1$. Every comparison respects the augmentations: they are determined by the common image of a vertex in $G$, and all comparison maps preserve those vertices.",
+   "uses": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tags 01GD (lemma-acyclicity) and 01GE, induction for n at least 2 after the separate n=1 transition."
+   }
+  },
+  {
+   "text": "Fix $i\\geq0$ and choose $n\\geq i+1$. The counit identification in degrees at most $n$ identifies the alternating-face complexes of $K$ and $K^n$ in degrees $i-1,i,i+1$ (only degrees zero and one are needed if $i=0$), together with their differentials. Thus their degree-$i$ homology sheaves agree. Steps 2, 4 and 6 give vanishing for $i>0$ and $H_0(K)=\\mathbf Z[G]^{\\#}$. The degree-zero isomorphism is the original augmentation because each comparison commutes with augmentation. Consequently it is surjective and has kernel the image of the degree-one boundary, which proves the whole displayed augmented exact sequence.",
+   "uses": [
+    "lem-weil-pbc-truncated-coskeleton-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GE, conclusion by fixed-degree stabilization and augmentation compatibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-cech-nerve-free-homology",
+  "lem-weil-pbc-truncated-coskeleton-finite-limits",
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-trf-cech-nerve-one-coskeletal",
+  "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "lem-weil-pbc-matching-object-coskeleton"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 01GC, 01GD and 01GE, with the separately defined relative Cech nerve and the n=1 comparison; Simplicial Tag 018I for that nerve, and the finite-limit cone calculation of Tag 018B for higher coskeletality."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "lem-trf-site-hypercover-free-resolution arbitrary site hypercover exact free abelian sheaf complex",
-   "results": "MayerVietorisSquare.shortComplex_exact and one-step hypercover APIs; no theorem for an all-degree arbitrary-site free hypercover resolution.",
+   "query": "augmented alternating free abelian sheaf complex of a hypercover is exact on a small site",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; OneHypercoverFamily.IsSheafIff; no all-degree hypercover free-resolution theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Hypercover Exact Hom Injective",
-   "results": "No hits (unknown identifier Hypercover).",
+   "query": "SimplicialObject cosk homologyFunctor",
+   "results": "0 hits; unknown identifier SimplicialObject in the service query.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "hypercover|free.*abelian|injective.*Hom",
+   "query": "hypercover|free.*abelian|cosk Mathlib/CategoryTheory/Sites",
    "results": "No hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "exact augmented free abelian sheaf complex hypercover injective Hom",
-   "results": "Generic injective-resolution, K-injective, and free-sheaf declarations; no all-degree site hypercover resolution.",
+   "query": "augmented alternating free abelian sheaf complex of a hypercover is exact on a small site",
+   "results": "HomologicalComplex.ExactAt, HomologicalComplex.Acyclic, ChainComplex.alternatingConst_exactAt and generic sheaf infrastructure; no hypercover theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial presheaf with locally surjective matching maps has sheafified free abelian homology equal to its augmentation in degree zero and zero in positive degrees",
+   "results": "{\"t\": \"2026-10-17T20:26:53Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial presheaf with locally surjective matching maps has sheafified free abelian homology equal to its augmentation in degree zero and zero in positive degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"PresheafOfModules.instIsLocallySurjectiveToSheafify\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"AlgebraicTopology.NormalizedMooreComplex.objX_zero\"], \"digest\": \"54dec2bcd98f0d0d\"}",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-site-hypercover-injective-sections",
@@ -73,5 +176,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-hypercover-free-resolution",
+  "worker": "Q63",
+  "summary": "Repair of returned head 88f7a2b3fe: replaced the false identification of the ordinary zero-coskeleton with the relative Cech nerve by a separately defined fibre-product nerve; added the general relative-nerve 1-coskeletality node and separated n=1 from n>=2. Wrote out local surjectivity, relative/ordinary matching compatibility in dimensions >=2, higher coskeletality and fixed-degree stabilization. The statement is unchanged. Historical created metadata is preserved from the base by the delivery tool; the split and repair are by Q63, as recorded here and in the signed report.",
+  "blueprint": "The normal-cone specialization descent input of lem-trf-local-term-locality: Steps 1-2 establish the relative Cech base case, Steps 3-6 implement the coskeleton comparisons with the separate first transition, and Step 7 stabilizes in each homology degree.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cech-nerve-free-homology",
+    "why": "Generic Cech-nerve free-module homology is the degree-zero base case and is not reproved in this trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-matching-object-coskeleton",
+    "why": "The generic identification of matching objects with coskeleton terms supplies the matching-map interpretation; no node in this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-truncated-coskeleton-finite-limits",
+    "why": "The generic finite-limit construction and stabilization properties of coskeleta are used to compare the simplicial stages."
+   },
+   {
+    "node": "lem-weil-pbc-coskeleton-free-homology-comparison",
+    "why": "The generic homology invariance under a locally surjective coskeletal comparison is the induction step."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic sheaf epimorphism criterion converts the locally split representable matching maps into the precise sheaf-surjectivity hypotheses; this trace-formula unit has no alternative criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cech-nerve-free-homology",
+  "lem-weil-pbc-matching-object-coskeleton",
+  "lem-weil-pbc-truncated-coskeleton-finite-limits",
+  "lem-weil-pbc-coskeleton-free-homology-comparison",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-d4fa7b911",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-d4fa7b911 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements against Stacks 01GC–01GE, 018I, 018B and matching/coskeleton sources. All seven steps check out; the relative Čech first transition is repaired correctly. Small cases and duplicate searches found no fault. Accepted five declared generic tool uses. Detailed checks recorded in review.md; no fixes needed."
  }
 }
