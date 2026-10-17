@@ -122,4 +122,52 @@ lemma adicLowerStar_map_tensorπ_comp_tensorLeftIso_hom {X : Scheme.{u}} (g : X 
   exact Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom (adicConstantSheafToLowerStar l g)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) P M
 
+/-- Two morphisms out of `g_* j^*(P ⊗_{ℚ̄_ℓ} M)`, for an automorphism `g`, agreeing on
+`g_* j^* P ⊗ g_* j^* M` are equal. -/
+lemma adicLowerStar_upperStar_tensor_hom_ext (j : T₁ ⟶ T₂) (g : T₁ ⟶ T₁) [IsIso g]
+    {P M : AdicSheaf l T₂} {N : AdicSheaf l T₁}
+    {f₁ f₂ : (g)_*ᵃ[l].obj ((j)^*ᵃ[l].obj ((Mod.tensorLeft M).obj P)) ⟶ N}
+    (h : μ (g)_*[WeilCoefficients.{u} l] ((j)^*[WeilCoefficients.{u} l].obj P.X)
+          ((j)^*[WeilCoefficients.{u} l].obj M.X) ≫
+        (g)_*[WeilCoefficients.{u} l].map (μ (j)^*[WeilCoefficients.{u} l] P.X M.X) ≫
+        (g)_*[WeilCoefficients.{u} l].map ((j)^*[WeilCoefficients.{u} l].map
+          (Mod.tensorπ P M)) ≫ f₁.hom =
+      μ (g)_*[WeilCoefficients.{u} l] ((j)^*[WeilCoefficients.{u} l].obj P.X)
+          ((j)^*[WeilCoefficients.{u} l].obj M.X) ≫
+        (g)_*[WeilCoefficients.{u} l].map (μ (j)^*[WeilCoefficients.{u} l] P.X M.X) ≫
+        (g)_*[WeilCoefficients.{u} l].map ((j)^*[WeilCoefficients.{u} l].map
+          (Mod.tensorπ P M)) ≫ f₂.hom) :
+    f₁ = f₂ := by
+  let Φ := (g)_*ᵃ[l].mapIso ((adicUpperStarTensorLeftIso l j M).app P) ≪≫
+    (adicLowerStarTensorLeftIso l g ((j)^*ᵃ[l].obj M)).app ((j)^*ᵃ[l].obj P)
+  have hΦ : μ (g)_*[WeilCoefficients.{u} l] ((j)^*[WeilCoefficients.{u} l].obj P.X)
+          ((j)^*[WeilCoefficients.{u} l].obj M.X) ≫
+        (g)_*[WeilCoefficients.{u} l].map (μ (j)^*[WeilCoefficients.{u} l] P.X M.X) ≫
+        (g)_*[WeilCoefficients.{u} l].map ((j)^*[WeilCoefficients.{u} l].map
+          (Mod.tensorπ P M)) ≫ Φ.hom.hom =
+        Mod.tensorπ ((g)_*ᵃ[l].obj ((j)^*ᵃ[l].obj P)) ((g)_*ᵃ[l].obj ((j)^*ᵃ[l].obj M)) := by
+    simp only [Φ, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Mod.comp_hom',
+      adicLowerStar_map_hom]
+    have h₁ : μ (j)^*[WeilCoefficients.{u} l] P.X M.X ≫
+        (j)^*[WeilCoefficients.{u} l].map (Mod.tensorπ P M) ≫
+          ((adicUpperStarTensorLeftIso l j M).hom.app P).hom =
+        Mod.tensorπ ((j)^*ᵃ[l].obj P) ((j)^*ᵃ[l].obj M) := by
+      rw [adicUpperStar_map_tensorπ_comp_tensorLeftIso_hom, IsIso.hom_inv_id_assoc]
+    have h₂ := adicLowerStar_map_tensorπ_comp_tensorLeftIso_hom (l := l) g ((j)^*ᵃ[l].obj P)
+      ((j)^*ᵃ[l].obj M)
+    rw [← Functor.map_comp_assoc (g)_*[WeilCoefficients.{u} l] _
+      ((adicUpperStarTensorLeftIso l j M).hom.app P).hom,
+      ← Functor.map_comp_assoc (g)_*[WeilCoefficients.{u} l] (μ _ _ _), h₁]
+    exact (congrArg (_ ≫ ·) h₂).trans (IsIso.hom_inv_id_assoc _ _)
+  rw [← Φ.hom_inv_id_assoc f₁, ← Φ.hom_inv_id_assoc f₂]
+  congr 1
+  refine Mod.tensorLeft_obj_hom_ext ?_
+  rw [← hΦ, Mod.comp_hom', Mod.comp_hom']
+  simp only [Category.assoc]
+  have hh : Φ.hom.hom ≫ Φ.inv.hom = 𝟙 _ := by
+    rw [← Mod.comp_hom', Φ.hom_inv_id]
+    rfl
+  rw [reassoc_of% hh, reassoc_of% hh]
+  exact h
+
 end AlgebraicGeometry.ProEtale
