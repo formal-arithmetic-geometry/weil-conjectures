@@ -252,5 +252,23 @@
   "group": "Q126",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-187e4e9e0 (reviewer sub-agent of L); spot-checked: I read the item and all four new nodes in full, the statement of every cited node, and the ILO volume at each cited place: VI 1.1-1.8 pp.69-70; VIII 3.3.7-3.3.15 pp.107-110; VIII 3.4.1-3.4.9 pp.110-112; VIII 4.1.1 p.117. The route matches ILO: saturated monoidal desingularization (3.3.15), then the normalized blowup tower (3.4.6(i), 3.4.8), then regularity and a normal crossings boundary (VI 1.7, VIII 3.4.4/4.1.1). The item rightly claims normal crossings only; strictification is the existing lem-trf-normal-crossings-strictification. Step checks: Step 1 matches the dimension condition of def-trf-log-regular-pair, and finite type over F gives quasi-compact and locally Noetherian. Step 2: M-bar is sharp and saturated, hence torsion-free; I checked the face-quotient argument for saturation myself. Step 3: integrality of the blowup and its normalization is genuinely elementary (Stacks 02ND); a nonzero quasi-coherent ideal on an integral scheme is nonzero on every nonempty affine. Step 4: the induction is stated before use, and I checked every hypothesis of the cited lemmas (comparison, blowup-proper, finite-type composition, normalization-exists, finite-proper, proper composition). Step 5 covers n=0, and the triviality locus p^-1 U gives (p^-1 Z)_red. New nodes: def-trf-fs-log-blowup matches VI 1.1-1.2 and VIII 3.3.7-3.3.9. The tower node is VIII 3.3.15 with no regularity or boundary content, so it does not restate the item. The comparison node is VIII 3.4.6(i), VI 1.8 and 3.3.11; its triviality-locus clause I verified myself (identity over U; a local homomorphism keeps a nonunit a nonunit). The free-characteristic node is VI 1.4 and 1.7. No duplicates turned up in rg over dag/nodes. Statements tested on Z empty, A^2 with xy=0, the cone xy=z^2, and a self-intersecting normal crossings boundary. Tool uses accepted: lemma-nagata-blowup-proper, prop-nagata-affine-blowup-chart-cover, lem-sc-normalization-exists; the other declared entries are Mathlib leaves. No SGA is cited; this is not a target node, so no base-change morphism or coefficient category is involved. Minor, no change made: the report lists a citations.json that the delivery does not contain, and the comparison node presupposes that Bl_J X is integral, which item Step 3 proves. No fix files."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LogRegularDesingularization",
+  "declaration": "AlgebraicGeometry.exists_log_regular_desingularization",
+  "statement": "theorem exists_log_regular_desingularization (F : Type u) [Field F] [IsAlgClosed F] (V : Scheme.{u}) (f : V ⟶ Spec (.of F)) [IsIntegral V] [LocallyOfFiniteType f] [QuasiCompact f] [IsLocallyNoetherian V] (Z : TopologicalSpace.Closeds V) (U : Scheme.{u}) (j : U ⟶ V) [IsOpenImmersion j] (hU : DenseRange j) (hZU : (Set.range j : Set V) = (Z : Set V)ᶜ) (hlog : IsDivisorialFineSaturatedLogRegularPair V U j hU) : ∃ (V₁ : Scheme.{u}) (f₁ : V₁ ⟶ Spec (.of F)) (p : V₁ ⟶ V), IsIntegral V₁ ∧ LocallyOfFiniteType f₁ ∧ QuasiCompact f₁ ∧ p ≫ f = f₁ ∧ (∀ x : V₁, ∃ W : V₁.affineOpens, x ∈ W.1 ∧ IsRegularRing Γ(V₁, W)) ∧ IsProper p ∧ IsIso (pullback.snd p j) ∧ DenseRange (pullback.fst p j) ∧ (((Scheme.IdealSheafData.vanishingIdeal Z).comap p).radical).IsNormalCrossingsDivisor",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/LogRegularDesingularization.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-14287add9",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Reviewed packet, node, all dependencies, source route, Lean declarations, docstrings, edge cases, route-pivot list, and report sections. scompile.py local overlay and server compilation both passed; no substantive findings or fixes needed."
  }
 }

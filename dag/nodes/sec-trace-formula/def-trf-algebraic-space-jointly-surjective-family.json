@@ -1,0 +1,121 @@
+{
+ "id": "def-trf-algebraic-space-jointly-surjective-family",
+ "kind": "definition",
+ "title": "Joint surjectivity of families on algebraic-space points",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $F$ and $(G_i)_{i\\in I}$ be presheaves of sets on the category of schemes over $S$, with test schemes and universes as in [def-trf-algebraic-space]. Let $f_i:G_i\\to F$ be natural transformations. The family is jointly surjective on field-valued point classes if for every field $K$ [def-weil-field], every $s:\\operatorname{Spec}K\\to S$, and every $x\\in F(\\operatorname{Spec}K,s)$, there exist $i\\in I$, a field $L$, a field embedding $e:K\\to L$, and $y\\in G_i(\\operatorname{Spec}L,s\\circ\\operatorname{Spec}e)$ such that $f_i(y)=x|_L$. Here point classes identify representatives whose pullbacks to a common field extension agree. Thus this is exactly that the union of the images of $|f_i|$ is all of $|F|$: a source representative may be restricted to the common extension, and an extension lift conversely witnesses equality of point classes.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BU (definition-points), with the preceding presheaf equivalence relation; spaces-topologies.tex Tag 041F, etale covering families."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "joint surjectivity of algebraic space families using field valued points after field extension",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.JointlySurjective.mk; AlgebraicGeometry.Scheme.JointlySurjective; AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving; AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage; AlgebraicGeometry.Scheme.JointlySurjective.exists_eq; AlgebraicGeometry.Surjective; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage; AlgebraicGeometry.Scheme.JointlySurjective.casesOn.",
+   "date": "2026-10-17",
+   "verdict": "No match for the algebraic-space point-image predicate; scheme-level notions do not apply to presheaves or algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "joint surjectivity of algebraic space families using field valued points after field extension",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.pointsPi_surjective; AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective; AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving; AlgebraicGeometry.Scheme.isJointlySurjectivePreserving; AlgebraicGeometry.Scheme.JointlySurjective; AlgebraicGeometry.instSurjectiveDescI₀SchemeF; AlgebraicGeometry.pointsPi_surjective_of_isAffine; AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage.",
+   "date": "2026-10-17",
+   "verdict": "No match for the algebraic-space point-image predicate; scheme-level notions do not apply to presheaves or algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace, Field, Surjective",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicSpace'",
+   "date": "2026-10-17",
+   "verdict": "No match for the algebraic-space point-image predicate; scheme-level notions do not apply to presheaves or algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "field.*point|Point.*[Ff]ield|jointly[Ss]urjective|IsJointlySurjective (Mathlib/AlgebraicGeometry); AlgebraicSpace|jointlySurjective|IsJointlySurjective (WeilConjectures); IsJointlySurjective|namespace AlgebraicSpace|joint surjectivity.*point|jointly surjective on points (lean/Sheaf)",
+   "results": "Mathlib grep returned 25 hits, including Scheme.JointlySurjective, scheme precoverage and geometricFiber. No algebraic-space point-image predicate. Upstream grep returned 10 occurrences of isIso_of_isIso_upperStar_map_of_jointlySurjective or uses thereof, all about scheme etale sheaves. Side-library grep returned 5 lines: the AlgebraicSpace namespace (two lines) and three scheme-level mentions. No definition of joint surjectivity on algebraic-space points.",
+   "date": "2026-10-17",
+   "verdict": "No match for the algebraic-space point-image predicate; scheme-level notions do not apply to presheaves or algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l point.*algebraic space|points of.*space|jointly surjective.*field|common field extension dag/nodes; blueprint_refs.py search jointly surjective; rg def-trf-algebraic-space-jointly-surjective-family dag/nodes",
+   "results": "The DAG matches mentioning common fields or point language include the item and scheme-specific point/cover lemmas, but no definition node for algebraic-space jointly surjective families. Blueprint search returned 9 nodes about scheme covers, pro-etale covers, and constant sheaves, none defining the missing predicate. The proposed id has zero matches.",
+   "date": "2026-10-17",
+   "verdict": "No match for the algebraic-space point-image predicate; scheme-level notions do not apply to presheaves or algebraic spaces."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-fibre-products-etale-covers",
+  "date": "2026-10-17",
+  "group": "Q98"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The joint-surjectivity clause for pullbacks of algebraic-space etale covering families in the polarized-descent input.",
+   "via": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceJointSurjectivity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsJointlySurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceJointSurjectivity.lean",
+  "statement": "def IsJointlySurjective {S : Scheme.{u}} {I : Type w} {F : (Over S)ᵒᵖ ⥤ Type u} {G : I → (Over S)ᵒᵖ ⥤ Type u} (f : ∀ i : I, G i ⟶ F) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ce275a1ea",
+  "group": "Q98",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ce275a1ea",
+  "group": "Q98",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, source clauses, and edge cases verified; both immutable Lean files compile cleanly. Wrote review.md and a complete report replacement in fixes/lem-trf-space-fibre-products-etale-covers.report.md, repairing the placeholder second-reading section (H11)."
+ }
+}

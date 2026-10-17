@@ -193,5 +193,29 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-7c0a8b140 (reviewer sub-agent of L); spot-checked: Read the item, new Heinzer node, unit/chapter route, every cited statement, and cited sources. The five steps correctly establish chartwise topological Noetherianity, with proper base-change typing and all hypotheses checked. Heinzer’s Theorem 2 and Corollary support the new input; no duplicate, circular split, route-pivot machinery, forbidden SGA, or batch-5 violation found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedBaseChangeNoetherianTopology",
+  "declaration": "AlgebraicGeometry.noetherianSpace_normalized_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.normalizedClosure",
+   "AlgebraicGeometry.normalizedClosureMap",
+   "AlgebraicGeometry.noetherianSpace_normalized_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedBaseChangeNoetherianTopology.lean",
+  "statement": "theorem noetherianSpace_normalized_baseChange {X S : Scheme.{u}} (f : X ⟶ S) (s : S) [IsLocallyNoetherian S] [CompactSpace S] [LocallyOfFiniteType f] [QuasiCompact f] : TopologicalSpace.NoetherianSpace (CategoryTheory.Limits.pullback (C := Scheme) f (normalizedClosureMap s))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-0789b7987"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0789b7987",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Mathematics and verbatim Lean signature verified; original and corrected modules compile cleanly. Complete fixes add source/proof docstrings, a real independent second-reading report, and the missing proof-dependency import. Findings recorded in review.md; replacements are under fixes/."
  }
 }

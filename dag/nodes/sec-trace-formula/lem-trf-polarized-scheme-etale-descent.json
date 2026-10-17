@@ -12,7 +12,10 @@
   "def-pc-fibre-product",
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-etale-site",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso"
  ],
  "proof": [
   {
@@ -261,5 +264,42 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-5a1f6a429 (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps and all four new nodes, every cited statement, and the Stacks sources at the cited places (02WW, 02WV, 0D3C, 0D31, 0D36, 01VH; tag labels of 04W8, 060X, 025Y, 03G7, 023Q, 05VG, 0B8Q and 0409 checked). The item statement is unchanged and true: it is étale descent of schemes with a relatively ample invertible module. Step 1 checked: s and t are étale base changes, the relation is a monomorphism because theta_ij lies over U_ij, and reflexivity, symmetry and transitivity follow from the identity on the diagonal and the cocycle. Step 3 checked: the chart recovery from the kernel pair and the cocycle is correct, and injectivity comes from theta_ii being the identity on the diagonal. Steps 4 to 6 match the hypotheses of the new lemmas, and the uniqueness argument is sound. No duplicate exists anywhere in the DAG or the blueprint, no new node restates a clause of the item (D1), the unit route is respected, and nothing cites SGA. Tool use lem-weil-pbc-small-etale-representable-presheaf-sheaf accepted as generic gluing of representable sheaves. Two B3 repairs to new statement-only nodes: (1) lem-trf-etale-relation-quotient now cites def-weil-pbc-sheafification and adds it to stmt_deps; (2) lem-trf-algebraic-space-ample-local pulled back M along non-étale maps, which def-trf-algebraic-space does not define, and called étale-site line modules ample without translating them to Zariski invertible modules. It is restated so that every pullback is along an étale map and the Zariski/étale identification is explicit; it keeps the representability conclusion the item uses and remains a special case of 0D31/0D36. Item unchanged; no node dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PolarizedSchemeEtaleDescent",
+  "declaration": "AlgebraicGeometry.exists_polarizedScheme_of_etaleDescent",
+  "declarations": [
+   "AlgebraicGeometry.polarizedOverlap",
+   "AlgebraicGeometry.polarizedOverlapX",
+   "AlgebraicGeometry.polarizedOverlapUi",
+   "AlgebraicGeometry.polarizedOverlapUj",
+   "AlgebraicGeometry.polarizedOverlapDiagonal",
+   "AlgebraicGeometry.polarizedModuleCongr",
+   "AlgebraicGeometry.polarizedPullIso",
+   "AlgebraicGeometry.polarizedPullLine",
+   "AlgebraicGeometry.polarizedTensorIdentity",
+   "AlgebraicGeometry.PolarizedSchemeEtaleDescentDatum",
+   "AlgebraicGeometry.PolarizedDescentChart",
+   "AlgebraicGeometry.PolarizedDescentPair",
+   "AlgebraicGeometry.polarizedChartMap",
+   "AlgebraicGeometry.polarizedChartLine",
+   "AlgebraicGeometry.IsPolarizedDescentRealization",
+   "AlgebraicGeometry.PolarizedDescentPairIso",
+   "AlgebraicGeometry.exists_polarizedScheme_of_etaleDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PolarizedSchemeEtaleDescent.lean",
+  "statement": "theorem exists_polarizedScheme_of_etaleDescent (S : Scheme.{u}) (I : Type v) (U : I → Scheme.{u}) (uMap : ∀ i, U i ⟶ S) (X : I → Scheme.{u}) (f : ∀ i, X i ⟶ U i) (L : ∀ i, (X i).Modules) (hL : ∀ i, Scheme.Modules.IsInvertible (L i)) (D : PolarizedSchemeEtaleDescentDatum S I U uMap X f L hL) : ∃ d : PolarizedDescentPair U uMap X f L, IsPolarizedDescentRealization D d ∧ ∀ d' : PolarizedDescentPair U uMap X f L, IsPolarizedDescentRealization D d' → ∃ e : PolarizedDescentPairIso d d', ∀ e' : PolarizedDescentPairIso d d', e' = e",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6c0f2ab13",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Audited the immutable node, dependencies, source references, Lean module, docstrings, edge cases, route-pivot compliance, and reports. scompile.py and deliver2.py dry-run both passed; review.md records all checks and no findings."
  }
 }

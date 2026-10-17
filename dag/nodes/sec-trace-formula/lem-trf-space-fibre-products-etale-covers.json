@@ -11,7 +11,8 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "def-pc-fibre-product",
-  "def-weil-field"
+  "def-weil-field",
+  "def-trf-algebraic-space-jointly-surjective-family"
  ],
  "proof": [
   {
@@ -220,5 +221,29 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-3e0a27c25 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet, report, item, unit/chapter route, all cited DAG statements, and Stacks Tags 025Y, 02X2, 04T9, 041F, 03BU, and 03H4. Verified every proof step, hypotheses, scheme base-change/composition citations, universal property, common-field joint-surjectivity argument, edge cases, searches, route restrictions, and long-step rule. No new nodes or duplicate/restated children remain. Wrote review.md with detailed checks; no repairs required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fibreProduct_isAlgebraicSpace",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFibreProductsEtaleCovers.lean",
+  "statement": "theorem fibreProduct_isAlgebraicSpace {S : Scheme.{u}} (F G H : AlgebraicSpace S) (f : F ⟶ H) (g : G ⟶ H) : IsAlgebraicSpace (Limits.pullback f.hom g.hom) ∧ ∀ (Q : AlgebraicSpace S) (a : Q ⟶ F) (b : Q ⟶ G), a ≫ f = b ≫ g → ∃! l : Q.obj ⟶ Limits.pullback f.hom g.hom, l ≫ Limits.pullback.fst f.hom g.hom = a.hom ∧ l ≫ Limits.pullback.snd f.hom g.hom = b.hom",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fibreProduct_isAlgebraicSpace",
+   "AlgebraicGeometry.AlgebraicSpace.etaleCover_pullback",
+   "AlgebraicGeometry.AlgebraicSpace.etale_fibreProduct_isScheme"
+  ],
+  "note": "The three declarations jointly render the node: sheaf-pullback closure with the full-subcategory universal property; preservation of representable etaleness and joint surjectivity on point classes; and representability of the fibre product when G is a scheme. The point-image condition is expanded on field-valued representatives after extension, via the new definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ce275a1ea",
+  "group": "Q98",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, source clauses, and edge cases verified; both immutable Lean files compile cleanly. Wrote review.md and a complete report replacement in fixes/lem-trf-space-fibre-products-etale-covers.report.md, repairing the placeholder second-reading section (H11)."
  }
 }
