@@ -29,7 +29,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-fibrations",
-  "lem-cbc-enhanced-functor-cone-calculus"
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-slice-arrow-equivalence"
  ],
  "proof": [
   {
@@ -358,5 +360,46 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeConeEquivalence",
+  "declaration": "SSet.Enhanced.relative_cone_equivalence",
+  "declarations": [
+   "SSet.Enhanced.relativeRightConeMap",
+   "SSet.Enhanced.relativeLeftConeMap",
+   "SSet.Enhanced.relativeRightTop",
+   "SSet.Enhanced.relativeLeftTop",
+   "SSet.Enhanced.relativeCoconeEdge",
+   "SSet.Enhanced.relativeConeEdge",
+   "SSet.Enhanced.RelativeColimitNaturalInvariance",
+   "SSet.Enhanced.RelativeLimitNaturalInvariance",
+   "SSet.Enhanced.RelativeColimitIndexInvariance",
+   "SSet.Enhanced.RelativeLimitIndexInvariance",
+   "SSet.Enhanced.RelativeColimitFinalEdge",
+   "SSet.Enhanced.RelativeLimitInitialEdge",
+   "SSet.Enhanced.RelativeConeReversalFormula",
+   "SSet.Enhanced.relativeConeMappingObject",
+   "SSet.Enhanced.relativeConeMappingMap",
+   "SSet.Enhanced.RelativeOppositeMappingSpaces",
+   "SSet.Enhanced.firstVertexCoslice",
+   "SSet.Enhanced.RelativeOppositeSlices",
+   "SSet.Enhanced.RelativeConeOppositeDuality",
+   "SSet.Enhanced.relative_cone_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeConeEquivalence.lean",
+  "statement": "theorem relative_cone_equivalence : RelativeColimitNaturalInvariance.{u} ∧ RelativeColimitIndexInvariance.{u} ∧ RelativeColimitFinalEdge.{u} ∧ RelativeConeOppositeDuality.{u} ∧ RelativeLimitNaturalInvariance.{u} ∧ RelativeLimitIndexInvariance.{u} ∧ RelativeLimitInitialEdge.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All four clauses and all three limit duals. Canonical induced cone maps and apex edges are constructed from the existing ordered join; cone reversal is fixed on pure summands and every apex-adjoined simplex. Mapping equivalences are natural isomorphisms in the existing localization of Kan spaces. The first-vertex coslice is real data defined as the opposite of the existing rightVertexSlice of C.op; RelativeOppositeSlices uses rightVertexSlice C.op directly. The downstream KanMappingRestriction theorem and module are not imported or cited, avoiding the cycle identified in the repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f97001ff6",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H4 return. The KanMappingRestriction/kanSlice import is removed, so the import cycle is gone: no imported module's node depends on this item transitively. RelativeOppositeSlices uses the upstream rightVertexSlice C.op (slice-arrow-equivalence added to stmt_deps) and the real-data helper firstVertexCoslice := (rightVertexSlice C.op c).op, which is first-vertex-fixed (n+1)-simplices with the first vertex prepended to operators; no other project coslice exists. The added non-public imports QuasicategoryInvertibleInterval and EquivalenceAnodyneFactorization are stated proof deps. Clauses (1)-(4) and the three limit duals were re-checked against the node: exact hypotheses, conclusions and quantifiers; edge cases checked (empty M, n=0, repeated apex, single universe u). lean.statement equals the signature verbatim; lean.declarations lists all 20 declarations; node changes against the base are only lean and two stmt_deps. No empty or sorry-valued definitions; the only sorry is the main theorem; source/blueprint docstrings and the 9-step plan are present; Worker report and Second reading by Q32 are present. nt_compile.py --json: exit 0, no errors or warnings; axioms propext, sorryAx, Classical.choice, Quot.sound."
  }
 }
