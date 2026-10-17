@@ -7,7 +7,7 @@ Original returns are removed in the same inverse transaction. Jobs keep original
 source diff, compiler messages, snapshot tip and scope. Repaired deliveries use
 normal deliver/XR<hash>/<item> branches and independent reading/static gates.
 """
-import hashlib, json, pathlib, subprocess, sys, time
+import hashlib, json, os, pathlib, subprocess, sys, time
 import leanindex as li
 ROOT = li.ROOT
 JOBS = ROOT / 'local/batch/repair'
@@ -61,7 +61,7 @@ def jobs(): return [read(p) for p in sorted(JOBS.glob('*.json'))] if JOBS.exists
 def counts():
     out = dict(repaired_in_place=0, released_to_queue=0, repair_still_running=0)
     for j in jobs():
-        if j.get('state') == 'released': out['released_to_queue'] += 1
+        if j.get('state') in ('released', 'released_to_queue'): out['released_to_queue'] += 1
         elif j.get('state') == 'repaired': out['repaired_in_place'] += 1
         elif j.get('state') == 'delivered' or active(j): out['repair_still_running'] += 1
     return out
@@ -124,10 +124,118 @@ def reconcile():
             if r.get('group') == j['group'] and r.get('item') == j['item'] and r.get('result') == 'verified':
                 j.update(state='repaired', verified=time.time()); write(JOBS/(j['id']+'.json'),j); break
 
+# ---------------------------------------------------------------- hand-off to the stage-3 queue (2026-10-17)
+# The dedicated repair service (~/weil-launcher/xrepair.py on the groups' machine) is retired: it retried jobs whose
+# branches were gone and compiled locally, and from 09:50 to 17:50 nobody worked on its jobs. A job is now handed to
+# the regular workers at once: a line in coord/repairs.txt (a stage-3 "repair" item that the dispatcher hands out, the
+# line is the worker's note), the full record in coord/repair-notes/<item>.json, the XR claim given back, and the job
+# closed as `released_to_queue`. queue.py lists a repairs.txt line only for a module in the targets' import closure
+# (the sorry-route filter does not apply to repairs), so a job whose module no target imports is dropped with a note.
+# Called by batch_land.step() on every pass (tools/batch_land.py), and by `repair_queue.py handoff [--dry-run]`.
+
+SLOW = 'does not compile alone within'
+
+def _flat(s, n):
+    s = ' '.join(str(s or '').replace('\t', ' ').split())
+    return s if len(s) <= n else s[:n] + ' ...'
+
+def _note(j):
+    item, c = j['item'], (j.get('commit') or '')[:10]
+    fails = j.get('failures') or [item]
+    line = (f"{item} red-build repair ({time.strftime('%Y-%m-%d')}, job {j['id']}): the delivery {j.get('original_group')}/{item} "
+            f"(head {(j.get('head') or '')[:9]}) broke the global build and was taken out again. Its change is landing commit {c}: "
+            f"recover it with `git show {c} -- lean dag/nodes coord/changes`; full record (diff, compiler messages) in "
+            f"coord/repair-notes/{item}.json. Failing module(s): {', '.join(fails)}. ")
+    if SLOW in (j.get('reason') or ''):
+        line += ("Cause: compile time over the 60 s limit for one file. Make every failing module compile alone within 60 s by "
+                 "changing the definition it unfolds (mark it @[no_expose] and prove the characterizing lemmas the proofs need, "
+                 "or replace it by a lighter definition), NOT by splitting or reshuffling proofs. ")
+        if item == 'Sheaf.Paper.IntegralResidueTensorRouteModel':
+            line += ("This module takes about 55.7 s alone under load and was taken out twice for exceeding 60 s "
+                     "(with Sheaf.Paper.IntegralResidueTensorCounit at 65 s): find the definition both unfold and make it opaque or lighter. ")
+    else:
+        line += "Redo the delivery so that every failing module compiles (adapt importers in the same delivery or do not change what they use). "
+    if j.get('prior_notes'):
+        line += 'An earlier repair attempt ended with: ' + _flat(j['prior_notes'], 300) + ' '
+    return line + 'Compiler: ' + _flat(j.get('reason'), 900)
+
+def open_jobs():
+    return [j for j in jobs() if j.get('state') in ('pending', 'running')]
+
+def handoff(only=None, dry_run=False, log=print):
+    """Hand every open job (or those with ids in `only`) to the stage-3 queue. Returns [(id, item, verdict)]."""
+    todo = [j for j in open_jobs() if only is None or j['id'] in only]
+    # closed jobs whose XR claim survived (the 2026-10-17 race fixed in result(): six items stayed blocked for days)
+    stale = [j for j in jobs() if j.get('state') in ('released', 'released_to_queue', 'dropped', 'superseded', 'repaired')
+             and (only is None or j['id'] in only) and read(claim_path(j['item'])).get('who') == j['group']]
+    if not todo and not stale: return []
+    import importlib.util, mergelock
+    spec = importlib.util.spec_from_file_location('sheaf_work_queue', ROOT / 'tools' / 'queue.py')
+    qm = importlib.util.module_from_spec(spec); spec.loader.exec_module(qm)
+    _, dist = qm.analyse()
+    rp = ROOT / 'coord' / 'repairs.txt'
+    out, paths, released = [], [], []
+    with mergelock.merge_lock():
+        text = rp.read_text() if rp.exists() else ''
+        listed = {l.split()[0] for l in text.splitlines() if l.strip() and not l.lstrip().startswith('#')}
+        add = []
+        for j in todo:
+            item, f = j['item'], li.file_of(j['item'])
+            holder = read(claim_path(item)).get('who')
+            if not f.is_file(): verdict = 'dropped: the module is not in the library any more'
+            elif item not in dist: verdict = 'dropped: no target imports the module (outside the targets\' import closure)'
+            elif li.sorry_count(f.read_text(errors='ignore')) == 0 and item not in listed:
+                verdict = 'dropped: the module has no sorry on the main branch any more (proved since)'
+            else: verdict = 'released_to_queue'
+            out.append((j['id'], item, verdict + ('' if holder in (None, j['group']) else f'; item held by {holder}')))
+            if dry_run: continue
+            note = _note(j)
+            if verdict == 'released_to_queue':
+                if item not in listed: add.append(note); listed.add(item)
+                write(NOTES / (item + '.json'), dict(j, state='released_to_queue', note=note, handed_off=time.time()))
+                paths.append(f'coord/repair-notes/{item}.json')
+            j.update(state='released_to_queue' if verdict == 'released_to_queue' else 'dropped', handoff=verdict,
+                     handoff_note=note, updated=time.time())
+            write(JOBS / (j['id'] + '.json'), j)   # before the claim goes back: active() re-takes claims of open jobs
+            if holder == j['group']: released.append(j)
+        for j in stale:
+            j['handoff'] = 'stale claim of a closed repair job (' + j['state'] + ') given back'
+            out.append((j['id'], j['item'], j['handoff']))
+        if dry_run: return out
+        released += stale
+        for j in released:
+            br = f"deliver/{j['group']}/{j['item']}"
+            if subprocess.run(['git', 'rev-parse', '--verify', '-q', 'refs/heads/' + br], cwd=ROOT, capture_output=True).returncode == 0:
+                # an unfinished attempt of the retired service: kept under refs/xrhandoff/, so claim.py release accepts
+                subprocess.run(['git', 'update-ref', 'refs/xrhandoff/' + br, 'refs/heads/' + br], cwd=ROOT, check=True)
+                subprocess.run(['git', 'update-ref', '-d', 'refs/heads/' + br], cwd=ROOT, check=True)
+            r = subprocess.run([sys.executable, str(ROOT / 'tools' / 'claim.py'), 'release', j['group'], j['item'],
+                                'released_to_queue: dedicated repair service retired; ' + j['handoff']], cwd=ROOT, capture_output=True, text=True)
+            if r.returncode and read(claim_path(j['item'])).get('who') == j['group']:
+                # refused (e.g. an old return entry of the XR group): the job is closed, its claim is removed outright
+                claim_path(j['item']).unlink(missing_ok=True)
+                log('repair handoff: claim.py release refused, XR claim removed', j['id'], j['item'], ' '.join((r.stdout + r.stderr).split())[-200:])
+        if add:
+            rp.write_text(text.rstrip('\n') + '\n' + '\n'.join(add) + '\n'); paths.append('coord/repairs.txt')
+        if paths:
+            env = dict(os.environ, GIT_AUTHOR_NAME='Bin Wu', GIT_AUTHOR_EMAIL='844524296@qq.com',
+                       GIT_COMMITTER_NAME='Bin Wu', GIT_COMMITTER_EMAIL='844524296@qq.com')
+            subprocess.run(['git', 'add', '--', *paths], cwd=ROOT, check=True)
+            subprocess.run(['git', 'commit', '-q', '-m', f'Hand {len(add)} red-build repair job(s) to the stage-3 queue (coord/repairs.txt)',
+                            '-m', '\n'.join(f'{i} {m}: {v}' for i, m, v in out),
+                            '-m', 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>', '--', *paths], cwd=ROOT, env=env, check=True)
+    for i, m, v in out: log('REPAIR HANDOFF', i, m, '|', v)
+    return out
+
 if __name__ == '__main__':
     a=sys.argv[1:]; cmd=a[0] if a else 'status'
     if cmd == 'list': print(json.dumps([j for j in jobs() if j.get('state') in ('pending','running') and active(j)]))
     elif cmd == 'status': reconcile(); print(json.dumps(counts()))
     elif cmd == 'result':
         data=json.load(sys.stdin); print(json.dumps(result(a[1], **data)))
-    else: raise SystemExit('list | status | result ID < JSON')
+    elif cmd == 'handoff':
+        res = handoff(only=set(a[1:]) - {'--dry-run'} or None, dry_run='--dry-run' in a)
+        print(json.dumps(res, ensure_ascii=False, indent=1))
+        if res and '--dry-run' not in a:
+            import batch_land; batch_land.refresh_recovery_queue()
+    else: raise SystemExit('list | status | result ID < JSON | handoff [--dry-run] [ID...]')

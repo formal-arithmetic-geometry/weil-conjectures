@@ -1041,6 +1041,13 @@ def closure_fallback(b, last, log, imports=None):
 def step(cache: dict, log) -> str:
     """One step of the cycle; returns what it did (idle, landed, waiting, verified, triage, returned)."""
     repairs.reconcile()
+    # 2026-10-17 (xrhandoff): no dedicated repair service any more; open repair jobs go to the stage-3 queue at once
+    # (coord/repairs.txt, see repair_queue.handoff), before counts() could re-take their XR claims.
+    try:
+        if any(v.startswith('released_to_queue') for _, _, v in repairs.handoff(log=log)):
+            refresh_recovery_queue()
+    except Exception as e:
+        log('repair handoff failed, retried next step', repr(e)[:300])
     stats = repairs.counts()
     if cache.get('_repair_stats') != stats:
         log('REPAIR statistics', json.dumps(stats, sort_keys=True))
