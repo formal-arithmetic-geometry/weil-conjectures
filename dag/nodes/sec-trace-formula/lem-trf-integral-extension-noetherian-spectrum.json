@@ -1,0 +1,112 @@
+{
+ "id": "lem-trf-integral-extension-noetherian-spectrum",
+ "kind": "statement",
+ "title": "Integral closure of a Noetherian domain in a finite fraction-field extension has Noetherian spectrum",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] which is an integral domain, meaning $1\\ne0$ and $ab=0$ implies $a=0$ or $b=0$. Let $K=\\operatorname{Frac}(A)$ be its fraction field, namely the field of quotients $a/b$ with $a,b\\in A$ and $b\\ne0$. Let $L/K$ be a field extension [def-pc-field-extension] of finite degree, meaning that $L$ is finite-dimensional as a $K$-vector space. Let $B$ be the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure], with $A\\to L$ the composite through $K$. Then the Zariski topological space underlying $\\operatorname{Spec}B$ [def-weil-affine-spectrum] is Noetherian: every nonempty collection of closed subsets has a minimal member for inclusion. No module-finiteness or Noetherian-ring hypothesis on $B$ is assumed. In particular this applies to $L=K$.",
+ "source": {
+  "document": "literature/heinzer-minimal-primes-integral-extensions.pdf",
+  "place": "W. Heinzer, Minimal primes of ideals and integral ring extensions, Proc. Amer. Math. Soc. 40 (1973), 370–372, Theorem 2, printed pp. 371–372, specialized to the integral closure in a finite fraction-field extension; for L=K, the Corollary on p. 372. Theorem 2 assumes a Noetherian integral domain, not merely a domain with Noetherian spectrum. Printed article text read online from the author-uploaded ResearchGate copy, https://www.researchgate.net/publication/243057689_Minimal_primes_of_ideals_and_integral_ring_extensions (DOI 10.1090/S0002-9939-1973-0319962-X). WANTED: PDF absent from the local literature collection."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral extension of a domain with Noetherian spectrum has Noetherian prime spectrum",
+   "results": "IsIntegralClosure.isNoetherian; IsIntegralClosure.isNoetherianRing; integralClosure.isNoetherianRing; minimalPrimes.finite_of_isNoetherianRing; PrimeSpectrum.instNoetherianSpace; no declaration with the weaker topological-spectrum hypothesis.",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations require a Noetherian ring or integrally closed Noetherian base and do not state Heinzer topological Noetherianity for an arbitrary integral extension. Historical search for the returned, overgeneral statement; that statement is withdrawn. See the additional searches for the corrected integral-closure statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsIntegral.comap_lt_comap, minimalPrimes.finite_of_isNoetherianRing, NoetherianSpace",
+   "results": "0 hits; loogle reported unknown identifier NoetherianSpace.",
+   "date": "2026-10-18",
+   "verdict": "no match Historical search for the returned, overgeneral statement; that statement is withdrawn. See the additional searches for the corrected integral-closure statement."
+  },
+  {
+   "tool": "grep",
+   "query": "comap_lt_comap|finite.*minimalPrimes|NoetherianSpace",
+   "results": "Mathlib/RingTheory/Ideal/GoingUp.lean:151,160,164,177; Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean:26,43–44; no theorem combining integral extensions with Noetherian spectrum.",
+   "date": "2026-10-18",
+   "verdict": "no match Historical search for the returned, overgeneral statement; that statement is withdrawn. See the additional searches for the corrected integral-closure statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "topological Noetherianity of the spectrum of an integral extension of a domain with Noetherian spectrum",
+   "results": "AlgebraicGeometry.IsNoetherian.noetherianSpace; PrimeSpectrum.instNoetherianSpace; integral-closure declarations; none has the required hypotheses and conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match Historical search for the returned, overgeneral statement; that statement is withdrawn. See the additional searches for the corrected integral-closure statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a Noetherian domain in a finite extension of its fraction field has Noetherian prime spectrum even if it is not a Noetherian ring",
+   "results": "{\"t\": \"2026-10-17T19:45:41Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a Noetherian domain in a finite extension of its fraction field has Noetherian prime spectrum even if it is not a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherian\", \"IsIntegralClosure.isNoetherianRing\", \"NumberField.RingOfIntegers.extension_isNoetherian\", \"IsIntegralClosure.finite\", \"completeIntegralClosure_eq_integralClosure\", \"isDedekindRing_iff\", \"Ring.instFiniteNormalClosure_1\"], \"digest\": \"7a852180e46b993b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: integralClosure.isNoetherianRing and IsIntegralClosure.isNoetherianRing require an integrally closed base and separability (Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, lines 147–175 and 206–208). The spectrum instances require B itself to be a Noetherian ring. None gives the required topological conclusion for normalization of a general Noetherian domain."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Nn]oetherian|[Nn]oetherian.*integralClosure|isNoetherianRing|isNoetherianSpace",
+   "results": "{\"t\": \"2026-10-17T19:45:46Z\", \"tool\": \"grep\", \"query\": \"integralClosure.*[Nn]oetherian|[Nn]oetherian.*integralClosure|isNoetherianRing|isNoetherianSpace\", \"sub\": \"RingTheory/IntegralClosure\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegral/Basic.lean\"], \"digest\": \"789b69be93a568da\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: integralClosure.isNoetherianRing and IsIntegralClosure.isNoetherianRing require an integrally closed base and separability (Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, lines 147–175 and 206–208). The spectrum instances require B itself to be a Noetherian ring. None gives the required topological conclusion for normalization of a general Noetherian domain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Heinzer normalization of a Noetherian integral domain in a finite fraction field extension has Noetherian spectrum",
+   "results": "{\"t\": \"2026-10-17T19:45:47Z\", \"tool\": \"leansearch\", \"query\": \"Heinzer normalization of a Noetherian integral domain in a finite fraction field extension has Noetherian spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"exists_finite_inj_algHom_of_fg\", \"exists_integral_inj_algHom_of_fg\", \"AlgebraicGeometry.isNoetherian_Spec\", \"PrimeSpectrum.instNoetherianSpace\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\"], \"digest\": \"c7a6aa92a9fdd2b5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: integralClosure.isNoetherianRing and IsIntegralClosure.isNoetherianRing require an integrally closed base and separability (Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, lines 147–175 and 206–208). The spectrum instances require B itself to be a Noetherian ring. None gives the required topological conclusion for normalization of a general Noetherian domain."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Noetherian\"",
+   "results": "{\"t\": \"2026-10-17T19:45:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Noetherian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherian\"], \"digest\": \"0ac205465b85b041\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: integralClosure.isNoetherianRing and IsIntegralClosure.isNoetherianRing require an integrally closed base and separability (Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, lines 147–175 and 206–208). The spectrum instances require B itself to be a Noetherian ring. None gives the required topological conclusion for normalization of a general Noetherian domain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a Noetherian integral domain has a Noetherian underlying prime spectrum without assuming the domain is normal",
+   "results": "{\"t\": \"2026-10-17T19:45:50Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a Noetherian integral domain has a Noetherian underlying prime spectrum without assuming the domain is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isNoetherian\", \"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"completeIntegralClosure_eq_integralClosure\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"IsDedekindRing.toIsNoetherian\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"IsDedekindDomainInv.isNoetherianRing\"], \"digest\": \"2ef421825e0fc89c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: integralClosure.isNoetherianRing and IsIntegralClosure.isNoetherianRing require an integrally closed base and separability (Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, lines 147–175 and 206–208). The spectrum instances require B itself to be a Noetherian ring. None gives the required topological conclusion for normalization of a general Noetherian domain."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalized-base-change-noetherian-topology",
+  "date": "2026-10-18",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Orgogozo Lemma 8.3.2 proof, final finite-type alternative: Heinzer’s Corollary for the normalization of a Noetherian integral domain supplies the Noetherian normalization spectrum.",
+   "via": [
+    "lem-trf-normalized-base-change-noetherian-topology",
+    "lem-trf-oriented-maximal-point-finiteness",
+    "lem-trf-oriented-constructible-subquotients",
+    "lem-trf-psi-proper-surjective-constructibility",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

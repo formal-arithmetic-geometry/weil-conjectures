@@ -18,9 +18,89 @@
   "def-weil-residue-field",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], $S$ has Noetherian underlying topology, and so does its closed subspace $Z_s$. Choose a finite affine open cover $S=\\bigcup_i W_i$, $W_i=\\operatorname{Spec}R_i$, with $R_i$ Noetherian: [pqf-def-locnoeth] supplies such an affine cover and quasi-compactness supplies a finite subcover. Discard indices for which $U_i=Z_s\\cap W_i$ is empty. By the affine description in [def-weil-closed-immersion], $U_i=\\operatorname{Spec}(R_i/I_i)$. Since $Z_s$ is integral, [def-pc-integral-scheme] says $R_i/I_i$ is a domain, so $I_i=\\mathfrak p_i$ is prime. Put $A_i=R_i/\\mathfrak p_i$. It is Noetherian: the inverse image of any ideal $J\\subseteq A_i$ is a finitely generated ideal of $R_i$, and the images of those generators generate $J$. Thus the finitely many $U_i=\\operatorname{Spec}A_i$ cover $Z_s$ by spectra of Noetherian domains.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "pqf-def-locnoeth",
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV, definition-noetherian; Tag 01OZ, lemma-Noetherian-topology; affine quotient characterization of closed immersions, morphisms.tex Tag 01QO, lemma-closed-immersion. The quotient-ring finite-generation argument is written out."
+   }
+  },
+  {
+   "text": "The point $s$ is the generic point of the integral scheme $Z_s$. By [lem-sc-integral-function-field-affine-fraction], every nonempty chart $U_i$ has fraction field $\\mathcal O_{Z_s,s}$. This is $\\kappa(s)$: the closed-immersion map $\\mathcal O_{S,s}\\to\\mathcal O_{Z_s,s}$ is surjective, its target is a field, and hence its kernel is the unique maximal ideal of $\\mathcal O_{S,s}$; use [def-weil-residue-field]. By the relative-Spec construction in [def-sc-normalization], $\\nu_s^{-1}U_i=\\operatorname{Spec}B_i$ with $B_i$ the integral closure of $A_i$ in this fraction field. The ring map $A_i\\to B_i$ is integral, so its Spec map is integral by [lem-weil-pbc-spec-integral-ring-map-integral]. Apply [lem-trf-integral-extension-noetherian-spectrum] with the Noetherian domain $A_i$ from Step 1 and the degree-one extension $L=K=\\kappa(s)$. It gives Noetherian topology on $\\operatorname{Spec}B_i$. These finitely many inverse images cover $N_s$; no assertion that $B_i$ is a Noetherian ring or finite over $A_i$ has been made.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field",
+    "def-sc-normalization",
+    "lem-weil-pbc-spec-integral-ring-map-integral",
+    "lem-trf-integral-extension-noetherian-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/heinzer-minimal-primes-integral-extensions.pdf",
+    "place": "Heinzer, Theorem 2 (printed pp. 371–372) and Corollary (p. 372), the latter being exactly the L=K case used here. Affine normalization via the relative-Spec definition; fraction-field identification via the cited existing node. WANTED: Heinzer PDF absent locally; printed article text read online."
+   }
+  },
+  {
+   "text": "For each affine open $W_i=\\operatorname{Spec}R_i$ of $S$, the finite-type definition [def-weil-finite-type-morphism] gives a finite affine cover $f^{-1}W_i=\\bigcup_j V_{ij}$ with $V_{ij}=\\operatorname{Spec}D_{ij}$ and $D_{ij}$ finitely generated over $R_i$. First form $X_Z=X\\times_S Z_s$. Over $U_i=\\operatorname{Spec}A_i$, its affine charts are $V_{ij}\\times_{W_i}U_i=\\operatorname{Spec}C_{ij}$, where $C_{ij}=D_{ij}\\otimes_{R_i}A_i$. Then $X\\times_SN_s=X_Z\\times_{Z_s}N_s$ has affine charts $\\operatorname{Spec}(C_{ij}\\otimes_{A_i}B_i)$. These identifications follow from [def-pc-fibre-product]: compatible maps into the affine factors correspond to ring maps out of the tensor product, by its universal property. If $d_1,\\ldots,d_n$ generate $D_{ij}$ over $R_i$, then $d_1\\otimes1,\\ldots,d_n\\otimes1$ generate $C_{ij}$ over $A_i$, and their images generate $C_{ij}\\otimes_{A_i}B_i$ over $B_i$. Thus these are finitely many finite-type $B_i$-algebra charts covering $X\\times_SN_s$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1, definition-finite-type; schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes. The tensor universal property and the base-change generators are written out as the elementary argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-type-noetherian-spectrum] to each finite-type $B_i$-algebra $C_{ij}\\otimes_{A_i}B_i$. Since $\\operatorname{Spec}B_i$ is Noetherian by Step 2, each affine chart $\\operatorname{Spec}(C_{ij}\\otimes_{A_i}B_i)$ is Noetherian. There are finitely many such charts and they cover $X\\times_SN_s$ by Step 3. Any descending chain of closed subsets restricts to a stationary chain on each chart; take the maximum of the finitely many stabilization indices. Beyond it all restrictions, hence the closed subsets themselves, agree. Therefore the whole underlying topological space of $X\\times_SN_s$ is Noetherian.",
+   "uses": [
+    "lem-sfb-finite-type-noetherian-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ohm-pendleton-rings-with-noetherian-spectrum.pdf",
+    "place": "Ohm–Pendleton Theorem 2.5 and Corollary 2.6, finite-type algebra step; WANTED: not present in the local literature collection."
+   }
+  },
+  {
+   "text": "A Noetherian topological space is equivalently one in which every nonempty collection of closed subsets has a minimal member under inclusion, by taking complements of ascending chains of open subsets. This is exactly the formulation in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0051, definition-noetherian (descending chain condition for closed subsets). The minimal-member formulation is its equivalent well-founded formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-residue-field",
+  "def-sc-normalization",
+  "lem-weil-pbc-spec-integral-ring-map-integral",
+  "lem-trf-integral-extension-noetherian-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "lem-sfb-finite-type-noetherian-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-curve-zero/sk-i-curve-zero.proof.md",
+  "place": "Imported route through the finite-type alternative in Orgogozo Lemma 8.3.2; affine-cover proof expanded from Heinzer and Ohm–Pendleton inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-maximal-point-finiteness",
@@ -71,7 +151,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Current main-20261015 proof, (1) and (2), normal-cone specialization; via nearby-cycle constructibility and Orgogozo Lemma 8.3.2: Author draft, final sentences of the proof of Lemma 8.3.2, printed p. 18, finite-type alternative: application of [Hei73], W. Heinzer, Minimal primes of ideals and integral ring extensions, Proc. Amer. Math. Soc. 40 (1973), 370–372, to the normalization spectrum and its finite-type schemes. This asserts topological Noetherianity, not a finite normalization or a Noetherian normalization ring.",
+   "place": "Current main-20261015 proof, (1) and (2), normal-cone specialization; the finite-type alternative in Orgogozo Lemma 8.3.2 supplies topological Noetherianity of normalized finite-type base changes.",
    "via": [
     "lem-trf-oriented-maximal-point-finiteness",
     "lem-trf-oriented-constructible-subquotients",
@@ -84,5 +164,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalized-base-change-noetherian-topology",
+  "worker": "stage1",
+  "summary": "Repaired the returned split without changing the item statement. Restricted the single new statement-only Heinzer input to the integral closure of a Noetherian domain in a finite fraction-field extension, matching printed Theorem 2; applied its L=K Corollary. Defined domain and topological Noetherianity inline, and cited the proper integral-closure and field-extension definitions. Step 1 now supplies Noetherian affine quotient domains; Step 3 uses affine opens of S and explicitly base changes first to X times_S Z_s. Reused all existing topology and finite-type algebra inputs. This delivery contains one new unsplit node and zero new Mathlib leaves. The external PDFs remain WANTED locally; Heinzer and Orgogozo were read online.",
+  "blueprint": "Current main-20261015 proof of lem-trf-local-term-locality, clauses (1) and (2), via the finite-type alternative in Orgogozo Lemma 8.3.2.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-noetherian-spectrum",
+    "why": "General Ohm–Pendleton finite-type algebra theorem used chartwise after the Heinzer normalization step; the trace-formula unit has no replacement for this commutative-algebra tool."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic fraction-field identification for every nonempty affine open of an integral scheme, applied to Z_s to verify the degree-one fraction-field hypothesis in Heinzer; no trace-formula node supplies this commutative-algebra identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-7c0a8b140",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-7c0a8b140 (reviewer sub-agent of L); spot-checked: Read the item, new Heinzer node, unit/chapter route, every cited statement, and cited sources. The five steps correctly establish chartwise topological Noetherianity, with proper base-change typing and all hypotheses checked. Heinzer’s Theorem 2 and Corollary support the new input; no duplicate, circular split, route-pivot machinery, forbidden SGA, or batch-5 violation found. Review written to review.md."
  }
 }
