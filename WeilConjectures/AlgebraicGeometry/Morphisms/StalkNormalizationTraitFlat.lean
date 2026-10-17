@@ -54,14 +54,13 @@ splitting is used. -/
 theorem GaloisCover.stalk_normalization_trait_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]
     (G : Type (u + 1)) [Group G] [Finite G]
     (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
     (Z : GaloisCover G Cη)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
+    (U : S.Opens)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
     (hψ : IsPullback ψ Z.π PA.obj.hom jU)
@@ -79,7 +78,7 @@ theorem GaloisCover.stalk_normalization_trait_flat {S C : Scheme.{u}}
   dsimp only
   intro hn
   obtain ⟨I, R, φ, hφ, hcover, hcharts⟩ :=
-    GaloisCover.stalk_normalization_trait_charts hS c G hG q j hCη Z U hηU jU PA
+    GaloisCover.stalk_normalization_trait_charts c G hG q j hCη Z U jU PA
       ψ hjU hψ s hs hmin hdvr hn
   let (i : I) : Etale (φ i) := hφ i
   have hfpqc : Presieve.ofArrows (fun i ↦ Spec (R i)) φ ∈

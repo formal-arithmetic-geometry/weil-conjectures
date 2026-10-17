@@ -66,14 +66,13 @@ uses no section and no rational point. -/
 theorem GaloisCover.stalk_normalization_trait_charts {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]
     (G : Type (u + 1)) [Group G] [Finite G]
     (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
     (Z : GaloisCover G Cη)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
+    (U : S.Opens)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
     (hψ : IsPullback ψ Z.π PA.obj.hom jU)
@@ -113,7 +112,7 @@ theorem GaloisCover.stalk_normalization_trait_charts {S C : Scheme.{u}}
   let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
   let : IsFinite n := hn
   obtain ⟨W, β, hβ⟩ := GaloisCover.stalk_normalization_generic_comparison
-    hS c G q j hCη Z U hηU jU PA ψ hjU hψ s hs hmin hdvr
+    c G q j hCη Z U jU PA ψ hjU hψ s hs hmin hdvr
   let : IsFinite W.π := W.isFinite
   let b := Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField))
   let p := W.π ≫ pullback.fst d b

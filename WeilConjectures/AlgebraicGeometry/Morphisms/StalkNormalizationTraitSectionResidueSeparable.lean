@@ -151,7 +151,6 @@ all points, hence also at the closed section, without a rational-point assumptio
 theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]
     (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)
     (G : Type (u + 1)) [Group G] [Finite G]
@@ -159,7 +158,7 @@ theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : S
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
     (Z : GaloisCover G Cη)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
+    (U : S.Opens)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
     (hψ : IsPullback ψ Z.π PA.obj.hom jU)
@@ -199,7 +198,7 @@ theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : S
   let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
   obtain ⟨I, R, φ, hφ, hcover, hcharts⟩ :=
     GaloisCover.stalk_normalization_trait_charts
-      hS c G hG q j hCη Z U hηU jU PA ψ hjU hψ s hs hmin hdvr hn
+      c G hG q j hCη Z U jU PA ψ hjU hψ s hs hmin hdvr hn
   exact residueSeparableAt_stalk n x
     (residueSeparableAt_of_root_charts n I R φ hφ hcover hcharts x)
 
