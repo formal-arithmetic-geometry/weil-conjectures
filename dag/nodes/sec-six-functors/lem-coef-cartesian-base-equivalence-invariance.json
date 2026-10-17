@@ -437,5 +437,28 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-b9168f3f6 (reviewer sub-agent of L); spot-checked: I read the item, all 17 steps, the one new node and every cited statement (23 proof_deps, 4 stmt_deps). Sources: a local text copy of HTT (Apr 2017 version; not archived under literature/), at §3.2.3 (3.2.3.1–3.2.3.4 and the ψ map), the proof of Thm 3.2.0.1, Props 3.2.2.7–3.2.2.11, Lemma 3.2.2.9, Prop 3.3.1.1, Cor 3.3.1.2, Prop 3.3.1.3 (pp. 180–206) and Cor 2.4.4.5. Item statement: compared with the base version; only wording changed and def-coef-infinity-fibrations was added to stmt_deps, so nothing is weakened. (1) is 3.3.1.3; (2) is the universal form of 3.3.1.2, as HTT uses it on p. 206. The relative model hypotheses are exactly what lem-coef-marked-relative-cartesian-model steps 1–12 supply. Checks: Λ¹₁={1}, so step 3 uses generator (ii) with n=1. Step 11: the retract homotopy H is monotone and constant on the subcomplex; the pushout M=M_-∐A_n×Δⁿ holds degreewise. Step 12: the necklace argument gives full subcategories; final-edge plus the opposite of the cocartesian criterion gives the mixed homs; Y is a quasicategory. Step 13 handles non-injective α by the mapping-simplex pullback; step 14 uses d_nΔⁿ⊆Λⁿ_i; steps 15–17 check out arrow by arrow. Step 10 handles nonfibrant T with the same u for every T. proof_deps equals the union of uses; no cycle (script check). New node lem-coef-cartesian-cone-fiber-comparison: true, by the derived-unit argument from Thm 3.2.0.1 + 3.1.3.5 + Lemma 3.2.3.1. Small cases (point base, empty X, mapping simplex = Lemma 3.2.3.3) pass. It is self-contained, statement-only, cites its notions, has all three search kinds and correct created/blueprint fields; it is not a clause of the item and has no duplicate in the DAG. Maintainer note: whoever splits it must not cite relative-cartesian-model, cone-straightening-quillen, mapping-simplex-cone-fibers, cartesian-mapping-simplex-presentation, relative-marked-anodyne-replacement or cbc-mapping-simplex-universal-equivalence; all have this item in their closure. Cycle-free ingredients exist (relative-model steps 1–12 inputs, enriched-diagram-homotopy-descent); I suggest moving relative-model step 13 into its own node. Accepted tool_uses: lem-cbc-spine-inner-anodyne (step 4) and lem-cbc-enhanced-functor-cone-calculus (steps 10, 12, 16), both generic. Minor, not changed: a stale 'HTT-second-reading.pdf' phrase in the item's source.place, and boilerplate verdict text on two 0-hit searches. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CartesianBaseEquivalenceInvariance",
+  "declaration": "SSet.Marked.Over.cartesian_base_equivalence_invariance",
+  "declarations": [
+   "SSet.Marked.Over.CartesianBaseModelHypotheses",
+   "SSet.Marked.Over.extensionBaseChangeMap",
+   "SSet.Marked.Over.cartesian_base_equivalence_invariance"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CartesianBaseEquivalenceInvariance.lean",
+  "statement": "theorem cartesian_base_equivalence_invariance (_models : ∀ B : SSet.{u}, CartesianBaseModelHypotheses B) (_largerModels : ∀ B : SSet.{max u v}, CartesianBaseModelHypotheses B) : (∀ (S T Z : SSet.{u}) (q : Z ⟶ S) (a : T ⟶ S), relativeFibration false q → (∀ (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map a)).app C)).toFunctor).IsEquivalence) → ∀ (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (pullback.snd a q))).app C)).toFunctor).IsEquivalence) ∧ (∀ (S S' Z : SSet.{u}) (i : S ⟶ S') (q : Z ⟶ S), (∀ (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map i)).app C)).toFunctor).IsEquivalence) → relativeFibration false q → ∃ (Z' : SSet.{u}) (q' : Z' ⟶ S'), relativeFibration false q' ∧ ∃ (e : Z ⟶ pullback i q') (he : e ≫ pullback.fst i q' = q), Enhanced.preservesCartesianEdges q (pullback.fst i q') e he ∧ ∀ (T : SSet.{u}) (b : T ⟶ S) (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (extensionBaseChangeMap q i q' e he b))).app C)).toFunctor).IsEquivalence)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-852ee50c0",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps (InfinityFibrations IsCartesianEdge/preservesCartesianEdges; relativeFibration/IsNaturallyFibrant/weak/mapSharp/push/pull/fiberMap/HasSharpPath from MarkedRelativeCartesianModel via RelativeMarkedAnodyneCalculus; exists_joyal_model_structure), module, report (Worker report + Second reading by Q23 present). Every clause matches: Joyal test spelled exactly as the Joyal node in max u v; (1) pullback.snd a q; (2) Z', q' relativeFibration, e over S preserving cartesian edges, witnesses fixed before forall T b, canonical extensionBaseChangeMap into pullback (b ≫ i) q'. Hypothesis record = landed RelativeCartesianModelStatement false minus derived fields and minus the circular pullback_homotopy_pullback; universes u and max u v, no equality. No hollow defs, only the theorem is sorry, docstrings with HTT 3.3.1.2/3.3.1.3 + blueprint id + 17 steps, lean.statement verbatim, only the lean field changed, proof-dep imports complete, lines <=100. nt_compile.py --json exit 0, no warnings (2.3 s). Notes: proof-time (stage-3) import cycle because MarkedRelativeCartesianModel holds both the definitions and a theorem whose proof cites this item (pre-existing, split before stage 3); small-object Mathlib match not imported; report placeholder text."
  }
 }

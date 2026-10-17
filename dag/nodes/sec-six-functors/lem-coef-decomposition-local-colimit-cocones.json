@@ -28,7 +28,11 @@
   "place": "HTT Notation 4.2.3.1 and Proposition 4.2.3.4, printed pp. 248-250, last assertion (restriction of join cocone categories is a trivial fibration). The displayed coherent-transformation formulation uses the join/comma comparison of Kerodon Example 4.6.4.9 (05YH), equivalently the opposite of lem-coef-infinity-join-cone-calculus, with fixed apex and boundary; it is the mapping-space formulation of that last assertion. Online text read 2026-10-17; archive WANTED. These are infinity-categorical facts; no Stacks tag states them."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-parameter-cone-extension"
  ],
  "proof": [
   {
@@ -208,5 +212,40 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-88ba85413 (reviewer sub-agent of L); spot-checked: I read HTT §4.2.3 from the IAS PDF (Notation 4.2.3.1, Remark 4.2.3.2, Lemma 4.2.3.3 and its proof, Proposition 4.2.3.4 and its whole proof, pp. 248-251). The item's K_F, the maps iota_a (HTT's pi'_I) and the fixed-apex restriction conclusion match HTT's last assertion for an arbitrary category I and non-injective maps pi_a. HTT's existence clause is not claimed, and no citer needs it. Step 1 is an elementary degreewise check. Step 2's pushout of K_{a0}*dDelta^n into K_{a0}*Delta^n holds degreewise by Eilenberg-Zilber uniqueness, including n=0 and non-injective pi. Step 3 is HTT 4.2.3.3: the boundary is dDelta^{n+m+1}, which is positive-dimensional, and with Y=Delta^0 being p-initial is the same as being initial. Step 4: the join with a fixed right factor preserves the pushout, s(0)=q iota_{a0} is initial by the join-slice node, and the successor map is a pullback of a trivial fibration. Step 5 lifts through the limit stages explicitly. Step 6 passes to the fibre over T and uses the fixed-apex and naturality clauses, then 2-out-of-3. Small cases: I a single object, I empty, K empty (pointwise initial objects), K_a empty. There are no new nodes. All four cited lemmas are in the item's unit sk-prop-sf-biduality-general and the definition is notation only, so no tool_uses are needed. There is no cycle (closure of 165 nodes), proof_deps equals the union of the step uses, and no node duplicates the general theorem. The statement is unchanged, no SGA source is used, and I made no fixes. The archived HTT copy is still WANTED."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DecompositionLocalColimitCocones",
+  "declaration": "SSet.Enhanced.decomposition_local_colimit_cocones",
+  "declarations": [
+   "SSet.Enhanced.DecompositionChain",
+   "SSet.Enhanced.decompositionGenerator",
+   "SSet.Enhanced.DecompositionRelation",
+   "SSet.Enhanced.decompositionRelationObject",
+   "SSet.Enhanced.decompositionGenerators",
+   "SSet.Enhanced.decompositionRelations",
+   "SSet.Enhanced.decompositionRelationLeft",
+   "SSet.Enhanced.decompositionRelationRight",
+   "SSet.Enhanced.localColimitDecomposition",
+   "SSet.Enhanced.localColimitDecompositionBase",
+   "SSet.Enhanced.localColimitDecompositionCone",
+   "SSet.Enhanced.localColimitRestrictionMap",
+   "SSet.Enhanced.decomposition_local_colimit_cocones"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DecompositionLocalColimitCocones.lean",
+  "statement": "theorem decomposition_local_colimit_cocones {K : SSet.{u}} (I : Type u) [Category.{u} I] (F : I ⥤ Over K) {E : SSet.{u}} [Quasicategory E] (p : K ⟶ E) (q : localColimitDecomposition F ⟶ E) (hq : localColimitDecompositionBase F ≫ q = p) (hlocal : ∀ a : I, IsRelativeColimitDiagram (stdSimplex.isTerminalObj₀.from E) (localColimitDecompositionCone F a ≫ q)) : (∀ T : E _⦋0⦌, IsWeakHomotopyEquivalence (localColimitRestrictionMap F q T)) ∧ constantDiagrams (localColimitDecomposition F) E ≫ (MonoidalClosed.pre (localColimitDecompositionBase F)).app E = constantDiagrams K E",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Constructs the specified K_F as a coequalizer of upper-chain join generators, with every simplex-operator identification and pure lower gluing along π. The local hypothesis is the absolute-colimit specialization over the terminal simplicial set, not the identity map. The conclusion is the actual mapping-space restriction at each apex and its coherent constant-diagram square. The helpers belong to the decomposition notion introduced by this node; no independent new notion or postponed construction theorem is introduced.",
+  "fixed_by": "NT-stage2-cc-54d3c6c50"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54d3c6c50",
+  "group": "Q04",
+  "result": "fix",
+  "note": "K_F coequalizer construction checked against HTT 4.2.3.1/4.2.3.2: normal forms biject with the degreewise K_F, including non-injective pi/F and both pure blocks; iota_a exact. Hypothesis IsRelativeColimitDiagram over the terminal map is the Kerodon 7.1.6.19 mapping-space colimit test, same as landed parameter_cone_extension. Conclusion: for all T, the literal restriction on right-pinched Map_{Fun(K_F,E)}(q,Delta T) -> Map_{Fun(K,E)}(p,Delta T) is a weak homotopy equivalence; extra constant-diagram identity is true. Edge cases (I, K, K_a empty, n=0) and single-universe interface OK; no hollow defs, sorry-only, docstrings and verbatim lean.statement OK, no cycle, no duplicate. Only finding (H9, stage-2 rule 7): missing non-public import of the stated proof-dependency module Sheaf.CategoryTheory.JoinSliceCoconeComparison, which is present at base dcebb5c4. fixes/DecompositionLocalColimitCocones.lean adds it; nt_compile --json is clean for both the delivered and fixed modules."
  }
 }
