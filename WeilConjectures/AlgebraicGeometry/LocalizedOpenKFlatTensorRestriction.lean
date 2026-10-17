@@ -159,7 +159,7 @@ theorem localizedOpen_kFlat_tensor_restriction (X : Scheme.{u}) (U : X.Opens)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlatTensor (R := X.sheaf) P)
     (hN : CochainComplex.IsKFlatTensor (R := X.sheaf) N) :
-    let R := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
+    let R := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
     let P' := (R.mapHomologicalComplex (.up ℤ)).obj P
     let N' := (R.mapHomologicalComplex (.up ℤ)).obj N
     CochainComplex.IsKFlatTensor (R := X.sheaf.over U) P' ∧
@@ -169,7 +169,7 @@ theorem localizedOpen_kFlat_tensor_restriction (X : Scheme.{u}) (U : X.Opens)
           (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≅
         DerivedCategory.Q.obj (CochainComplex.mapBifunctor P' N'
           (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U))))) := by
-  let R := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
+  let R := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   let E := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
     (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))

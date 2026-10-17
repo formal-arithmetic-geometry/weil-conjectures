@@ -195,7 +195,7 @@ theorem perfect_derivedTensor (X : Scheme.{uT})
   exact strictPerfect_tensor_localComparison X U P N hP hN A B hA hB
     ⟨(SheafOfModules.overFunctor.{uT}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso eP ≪≫ eA.some⟩
-    ⟨(SheafOfModules.overFunctor
+    ⟨(SheafOfModules.overFunctor.{uT}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso eN ≪≫ eB.some⟩
 
 end AlgebraicGeometry
