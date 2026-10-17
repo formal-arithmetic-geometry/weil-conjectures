@@ -17,9 +17,82 @@
   "def-weil-abstract-derived-category",
   "lem-coef-pointed-model-stability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The two cone maps to the displayed object are $j_1(x,y)=(x,0,y)$ and $j_2(x,y)=(0,x,y)$. They are chain maps for the displayed differential and agree on $Q$. Given chain maps $a_1,a_2:CQ\\to T$ agreeing on $Q$, write their degreewise components as $a_r(x,y)=u_r(x)+v(y)$; then the unique induced map is $(x_1,x_2,y)\\mapsto u_1(x_1)+u_2(x_2)+v(y)$. The chain-map equations for $a_1,a_2$ imply the chain-map equation for this formula, and their section compatibilities imply its section compatibility, since the structure maps act separately on the three summands. Thus this is the pushout in $\\operatorname{Sect}$. The differential follows from $d j_r=j_r d$; its square is zero because the third component of $d^2$ is $-dx_1-dx_2+d(x_1+x_2+dy)=0$. This verifies both the universal property and the asserted coordinates without any exactness assumption on extension of scalars.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "lem-coef-quillen-section-rectification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Agent cone computation, Step 1; motivated by the paragraph beginning For Lambda in the blueprint definition. The blueprint itself does not contain the explicit model-category argument."
+   }
+  },
+  {
+   "text": "The cone lemma gives that $Q\\to CQ$ is a cofibration of sections, that $CQ\\to0$ is a componentwise quasi-isomorphism, and that its cokernel is $Q[1]$. Since $Q$ is cofibrant, $0\\to Q$ is a cofibration; model-category cofibrations are closed under composition, so $0\\to CQ$ is a cofibration and $CQ$ is cofibrant. Thus the span $CQ\\leftarrow Q\\to CQ$ has cofibrant objects and cofibration legs.",
+   "uses": [
+    "lem-pur-system-section-cone",
+    "lem-coef-quillen-section-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Agent cone computation, Step 2; motivated by the paragraph beginning For Lambda in the blueprint definition. The blueprint itself does not contain the explicit model-category argument."
+   }
+  },
+  {
+   "text": "The projection $p:P\\to Q[1]$, $(x_1,x_2,y)\\mapsto x_2$, is a chain map because the second component of the differential on $P$ is $-dx_2$, which is the differential of the shifted complex. It is a map of sections by construction. It is degreewise surjective, and its kernel is the subcomplex with $x_2=0$, identified with $CQ$ by $(x_1,y)\\mapsto(x_1,0,y)$. Hence there is a short exact sequence of complexes $0\\to CQ\\to P\\xrightarrow{p}Q[1]\\to0$ at every section level. Since $CQ\\to0$ is a quasi-isomorphism, the long exact cohomology sequence for this short exact sequence shows that $p$ is a componentwise quasi-isomorphism. The same formulas commute with maps of cofibrant sections, so $p$ is natural.",
+   "uses": [
+    "lem-pur-system-section-cone",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Agent cone computation, Step 3; motivated by the paragraph beginning For Lambda in the blueprint definition. The blueprint itself does not contain the explicit model-category argument."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-pointed-model-stability] to $\\operatorname{Sect}$: its zero object is the zero section, and its model structure is the one in the hypotheses. By Step 2 the ordinary pushout $P$ represents the homotopy pushout of $CQ\\leftarrow Q\\to CQ$. In the localization the maps $CQ\\to0$ are equivalences, so this span is equivalent, by a transformation which is the identity on $Q$, to $0\\leftarrow Q\\to0$. Their colimits are therefore equivalent by the colimit universal property. Consequently $P$ represents $\\Sigma Q$. These comparisons are natural: for $f:Q\\to Q'$ the maps are $Cf(x,y)=(f(x),f(y))$ and $Pf(x_1,x_2,y)=(f(x_1),f(x_2),f(y))$; both commute with the cone inclusions and the maps to zero, while $p_{Q'}Pf=f[1]p_Q$.",
+   "uses": [
+    "lem-pur-system-section-cone",
+    "lem-coef-pointed-model-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Agent cone computation, Step 4; motivated by the paragraph beginning For Lambda in the blueprint definition. The blueprint itself does not contain the explicit model-category argument."
+   }
+  },
+  {
+   "text": "For an arbitrary section $X$, choose functorial cofibrant replacement $q_X:RX\\to X$ from the given projective model structure. The functor $[1]$ preserves componentwise quasi-isomorphisms since $H^k(X[1]_n)=H^{k+1}(X_n)$; thus $q_X[1]$ is a weak equivalence. Steps 3--4 give the natural zigzag $\\Sigma X\\simeq P(RX)\\xrightarrow{p_{RX}}RX[1]\\xrightarrow{q_X[1]}X[1]$ in the ordinary homotopy category, which is the localization at weak equivalences by [lem-coef-pointed-model-stability]. All arrows are natural and invertible there. Both shifts descend to this localization, and $X[1][-1]=X=X[-1][1]$ on complexes and on section maps (the two differential signs cancel). Thus the induced suspension is naturally isomorphic to $[1]$ and has inverse $[-1]$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-pointed-model-stability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Agent argument extending the explicit cofibrant-section calculation to the ordinary homotopy category; adic-construction paragraph is motivation only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "lem-coef-pointed-model-stability",
+  "lem-coef-quillen-section-rectification",
+  "lem-pur-system-section-cone",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Agent-written cone-pushout argument supplying the system-model foundation motivated by the adic-construction paragraph; the cited blueprint file itself does not contain this calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -37,8 +110,8 @@
   },
   {
    "tool": "grep",
-   "query": "rotateHomotopyEquiv|homotopy pushout (Mathlib/Algebra/Homology)",
-   "results": "No grep hits were returned by msearch.py.",
+   "query": "rotateHomotopyEquiv|homotopy pushout",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:208,268,269,273,300; read rotateHomotopyEquiv at lines 205 onward: a shift is homotopy equivalent to the cone of inr, not a theorem about semilinear section-model pushouts.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
@@ -48,10 +121,38 @@
    "results": "CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.rotateHomotopyEquiv, and related shift-triangle declarations; no declaration for the semilinear section pushout.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Suspension in the projective model category of semilinear sections of complexes is the cochain shift",
+   "results": "ProjectiveResolution.cochainComplex and isKProjective_shift_iff concern projective complexes, not the semilinear section model.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, \"homotopy\"",
+   "results": "mappingCone.descHomotopy, liftHomotopy, rotateHomotopyEquiv and homotopyToZeroOfId are ordinary complex cone identities; none asserts section-model suspension.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "suspension|homotopyPushout|semilinear",
+   "results": "No hits in Mathlib/Algebra/Homology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy pushout of two contractible cones on a cofibrant complex is naturally quasi-isomorphic to its shift",
+   "results": "Service returned Rate limit exceeded: 60 per 1 minute.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-system-level-left-extension",
@@ -63,12 +164,41 @@
  "blueprint": {
   "from": {
    "node": "def-weil-exceptional-inverse-image",
-   "place": "Adic-stage paragraph before the inverse limit: the explicit stability check for the projective model of strict semilinear sections, after the componentwise cone calculation and before applying the derived Quillen calculus.",
+   "place": "Paragraph beginning For Lambda, use respectively derived inverse limits, rationalization, and the common-stage construction of the compatible finite-level functors: the section-model suspension computation is an auxiliary foundation for this adic construction, not text explicitly present in the blueprint.",
    "via": [
     "lem-pur-etale-coefficient-system-adjoint"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-system-section-suspension",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Verified the pushout by its explicit universal property, cited the existing cone cofibration theorem, identified the projection kernel and applied the long exact cohomology sequence, then identified homotopy pushout with suspension and extended the natural comparison using functorial cofibrant replacement. No new nodes. Corrected the source attribution: the blueprint motivates the adic construction but contains no explicit cone computation, so the proof is agent-written.",
+  "blueprint": "Paragraph beginning For Lambda, use respectively derived inverse limits, rationalization, and the common-stage construction of the compatible finite-level functors: the section-model suspension computation is an auxiliary foundation for this adic construction, not text explicitly present in the blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-pointed-model-stability",
+    "why": "Generic model-localization and cofibrant-span pushout theorem identifies the explicit cone pushout as suspension; the operations unit does not prove this model-category tool."
+   },
+   {
+    "node": "lem-coef-quillen-section-rectification",
+    "why": "The projective section model in the hypotheses supplies model axioms, weak equivalences and functorial cofibrant replacement; it is a generic section-model tool, not a replacement of the operations route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-pointed-model-stability",
+  "lem-coef-quillen-section-rectification"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-77ad27de5",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-77ad27de5 (reviewer sub-agent of L); spot-checked: I read the whole item, every cited statement, the parent's steps 8-9, the unit sk-def-sf-operations and the main-20261015 file def-weil-exceptional-inverse-image.md. The statement is unchanged and there are no new nodes. Step 1: I checked the pushout coordinates, the mediator's chain identity (du_r(x) = -u_r(dx) + v(x)), d^2 = 0, and that the structure maps respect the summands. Step 2: Q -> CQ is a cofibration and cofibrations compose, so CQ is cofibrant. Step 3: p is a chain map because the second coordinate of d is -dx2, its kernel is exactly CQ, and the long exact sequence in CoCh(Mod(B_n)) makes p a quasi-isomorphism. Step 4: the hypotheses of lem-coef-pointed-model-stability hold in Sect (locally presentable, zero section, functorial factorizations), and its statement turns the cofibrant span into Sigma Q. Step 5: functorial cofibrant replacement and descent of [1] to the localization give Sigma = [1] with inverse [-1]. I tested Q = B[0], Q = 0 and characteristic 2. There is no duplicate: lem-cbc-projective-cochain-suspension is about one ordinary ring, and the cone node proves cofibrancy and contractibility only. The declared tool uses (pointed-model-stability, quillen-section-rectification) are accepted. The attribution correction is accurate: the blueprint has no cone computation, so the proof is rightly marked agent-written. One note for maintenance: the maintainer-owned source.place still says 'explicit cone pushout computation' and should be reworded. No fixes were made."
  }
 }

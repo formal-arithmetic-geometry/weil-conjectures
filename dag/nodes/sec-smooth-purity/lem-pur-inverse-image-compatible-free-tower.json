@@ -2,7 +2,7 @@
  "id": "lem-pur-inverse-image-compatible-free-tower",
  "kind": "statement",
  "title": "Inverse image of an inverse tower with compatible local bases",
- "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in a universe larger than their objects and morphisms [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with finite limits. Let $u:\\mathcal C\\to\\mathcal D$ preserve finite limits and coverings, and write $f^{-1}:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ for its geometric inverse image [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Let $(R_n,\\rho_n)_{n\\ge1}$ be an inverse tower of sheaves of commutative rings on $\\mathcal C$. For each $n$ let $M_n$ be an $R_n$-module sheaf [def-weil-sheaf-of-modules-category], with additive transition $t_n:M_{n+1}\\to M_n$ satisfying $t_n(a m)=\\rho_n(a)t_n(m)$. Put $R=\\varprojlim_n R_n$ and $M=\\varprojlim_n M_n$, with sectionwise ring and module operations [def-pur-sheaf-inverse-limit]. Suppose the canonical projection-induced ring map\n$$\\kappa:f^{-1}R\\longrightarrow\\varprojlim_n f^{-1}R_n$$\nis an isomorphism. Suppose there is a covering $\\{V_i\\to1_{\\mathcal C}\\}$ and, for every $i,n$, an $R_n|_{V_i}$-linear isomorphism $b_{i,n}:R_n|_{V_i}\\xrightarrow{\\sim}M_n|_{V_i}$, such that $t_n b_{i,n+1}=b_{i,n}\\rho_n$ after restriction [def-pur-localized-ringed-site]. Then the canonical projection-induced comparison\n$$\\theta:f^{-1}M\\longrightarrow\\varprojlim_n f^{-1}M_n$$\nis an isomorphism, linear over $\\kappa$ when the right hand side has its coordinatewise $\\varprojlim_n f^{-1}R_n$-action. The maps $b_{i,n}$ induce $R|_{V_i}\\cong M|_{V_i}$, and on $\\mathcal D/u(V_i)$ these identifications identify $\\theta$ with the restriction of $\\kappa$. The comparison is natural for homomorphisms of ring towers and compatible semilinear morphisms of module towers; it does not depend on the chosen covering or bases.",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites [def-weil-pbc-sites-and-cohomology] with finite limits, whose objects and morphisms are small in one universe, and take sheaves of sets, abelian groups, rings and modules in a larger universe [def-weil-size-convention]. Let $u:\\mathcal C\\to\\mathcal D$ preserve finite limits and coverings, and write $f^{-1}:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ for its geometric inverse image [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Let $(R_n,\\rho_n)_{n\\ge1}$ be an inverse tower of sheaves of commutative rings on $\\mathcal C$. For each $n$ let $M_n$ be an $R_n$-module sheaf [def-weil-sheaf-of-modules-category], with additive transition $t_n:M_{n+1}\\to M_n$ satisfying $t_n(a m)=\\rho_n(a)t_n(m)$. Put $R=\\varprojlim_n R_n$ and $M=\\varprojlim_n M_n$, with sectionwise ring and module operations [def-pur-sheaf-inverse-limit]. Suppose the canonical projection-induced ring map\n$$\\kappa:f^{-1}R\\longrightarrow\\varprojlim_n f^{-1}R_n$$\nis an isomorphism. Suppose there is a covering $\\{V_i\\to1_{\\mathcal C}\\}$ and, for every $i,n$, an $R_n|_{V_i}$-linear isomorphism $b_{i,n}:R_n|_{V_i}\\xrightarrow{\\sim}M_n|_{V_i}$, such that $t_n b_{i,n+1}=b_{i,n}\\rho_n$ after restriction [def-pur-localized-ringed-site]. Then the canonical projection-induced comparison\n$$\\theta:f^{-1}M\\longrightarrow\\varprojlim_n f^{-1}M_n$$\nis an isomorphism, linear over $\\kappa$ when the right hand side has its coordinatewise $\\varprojlim_n f^{-1}R_n$-action. The maps $b_{i,n}$ induce $R|_{V_i}\\cong M|_{V_i}$, and on $\\mathcal D/u(V_i)$ these identifications identify $\\theta$ with the restriction of $\\kappa$. The comparison is natural for homomorphisms of ring towers and compatible semilinear morphisms of module towers; it does not depend on the chosen covering or bases.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
   "place": "Integral twist paragraph: the local-basis argument underlying the twisted inverse-limit comparison, abstracted to module towers; localization comparison in Stacks sites.tex, Tag 03CF (lemma-localize-morphism)."
@@ -15,9 +15,85 @@
   "def-pur-sheaf-inverse-limit",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each index $i$, the compatible maps $b_{i,n}$ form an isomorphism of inverse systems on the localized site $\\mathcal C/V_i$: their transition compatibility is exactly $t_n b_{i,n+1}=b_{i,n}\\rho_n$. The sectionwise description of inverse limits therefore gives an isomorphism $b_i:R|_{V_i}\\xrightarrow{\\sim}M|_{V_i}$, with inverse induced by the inverses $b_{i,n}^{-1}$. It is $R|_{V_i}$-linear because the action on the limit is coordinatewise and each $b_{i,n}$ is $R_n|_{V_i}$-linear.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph: compatible local bases identify the inverse-limit module with the inverse-limit coefficient ring on the chosen cover."
+   }
+  },
+  {
+   "text": "The functor $u$ preserves coverings and, preserving finite limits, also the fibre products $u(T\\times_VV_j)\\cong u(T)\\times_{u(V)}u(V_j)$, so it is continuous in the sense of [def-weil-pbc-sites-and-cohomology] (3); by [lem-weil-pbc-left-exact-site-inverse-image-tensor] its inverse image $f^{-1}$ preserves finite limits, so $u$ defines a morphism of sites and the slice-site localization lemma applies to it (with the roles of the two sites as written there exchanged). Let $j_i:\\mathcal D/u(V_i)\\to\\mathcal D$ and $k_i:\\mathcal C/V_i\\to\\mathcal C$ denote localization. The slice-site localization comparison gives $(f_{V_i})^{-1}j_{V_i}^{-1}\\cong j_{u(V_i)}^{-1}f^{-1}$, so the restriction of $f^{-1}b_i$ is an isomorphism between the restrictions of $f^{-1}R$ and $f^{-1}M$ on $\\mathcal D/u(V_i)$. The same comparison applies to every projection and transition map of the two towers.",
+   "uses": [
+    "lem-weil-pbc-slice-site-localization",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism; the inverse-image comparison after localization."
+   }
+  },
+  {
+   "text": "Restriction to a localized site is sectionwise [def-pur-localized-ringed-site] and inverse limits are sectionwise [def-pur-sheaf-inverse-limit], so restriction to $\\mathcal D/u(V_i)$ commutes with $\\varprojlim_n$. Under the local identifications from the preceding step, the comparison $\\theta:f^{-1}M\\to\\varprojlim_n f^{-1}M_n$ is the restriction of $\\kappa:f^{-1}R\\to\\varprojlim_n f^{-1}R_n$. Indeed, for every $n$ the square formed by $f^{-1}b_i$, $b_{i,n}$, and the canonical projection maps commutes by construction; the defining universal property of the inverse limit then identifies the two maps. Consequently $\\theta$ is an isomorphism after restriction to each $\\mathcal D/u(V_i)$, since $\\kappa$ is an isomorphism by hypothesis. The same coordinatewise description shows that this local isomorphism is linear over the restricted coefficient-ring comparison.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-slice-site-localization",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph: on each compatible-generator chart the module comparison is identified with the coefficient-ring comparison."
+   }
+  },
+  {
+   "text": "The family $\\{u(V_i)\\to 1_{\\mathcal D}\\}$ is covering because $u$ preserves coverings. For any object $W$ of $\\mathcal D$, finite limits and pullback stability of coverings make $\\{W\\times u(V_i)\\to W\\}$ a covering; restricting the local isomorphisms of the preceding step along these maps shows that $\\theta$ is locally an isomorphism on every object. Applying the sheaf local-isomorphism criterion (local injectivity and local surjectivity) to the underlying sheaves of sets proves that $\\theta$ is an isomorphism globally.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph: descend the chartwise identification by the sheaf criterion on the compatible-generator cover."
+   }
+  },
+  {
+   "text": "The construction uses only canonical projection maps and the given tower morphisms. Hence it is natural for morphisms of ring towers and compatible semilinear morphisms of module towers. The local identification with $\\kappa$ is forced by the commuting projection squares, so changing the covering or the chosen compatible bases changes only the intermediate local witnesses, not $\\theta$ or its inverse; the comparison is therefore independent of those choices.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph: naturality and independence of the chosen compatible local bases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-slice-site-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph: local compatible-basis reduction and descent of the inverse-limit comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-sfb-cartesian-coefficients-twists",
@@ -80,5 +156,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-inverse-image-compatible-free-tower",
+  "worker": "stage1",
+  "summary": "Checked the imported local-basis argument against the blueprint and Stacks Tag 03CF. The compatible bases give an inverse-limit isomorphism on each chosen chart; slice-site localization identifies the pullback restriction with the localized inverse image, so the comparison is locally the assumed ring comparison. Cover stability and the sheaf local-isomorphism criterion globalize it, while the projection-based construction gives linearity, naturality, and independence of choices. No auxiliary node was needed because all non-elementary ingredients were already recorded in the DAG.",
+  "blueprint": "Realizes the integral twist paragraph: (1) compatible local bases induce the limit-ring/module identification; (2) localization transports it across inverse image; (3) the comparison is locally the coefficient comparison; (4) sheaf descent gives the global isomorphism; (5) canonical projections give naturality and choice independence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-53ebf52e4",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-53ebf52e4 (reviewer sub-agent of L); spot-checked: The lemma is true and its five-step proof is complete. Read: the item, the parent det-prop-sfb-cartesian-coefficients-twists (only user, step 5), the blueprint integral-twist paragraph (main-20261015), Stacks 03CF (sites.tex:6265) and every cited statement. Steps: (1) compatible bases form a tower isomorphism, so the sectionwise limit gives R|V_i≅M|V_i; (2) the localization comparison of lem-weil-pbc-slice-site-localization applies because u is continuous and f^{-1} is left exact; (3) restriction commutes with lim, so θ restricted to D/u(V_i) is conjugate to κ restricted there; (4) u(1_C)=1_D, base-changed covers and lem-galois-set-sheaf-local-bijection-isomorphism globalize; (5) naturality is elementary. Small cases checked: singleton, empty and constant towers. The κ hypothesis is needed because f^{-1} does not commute with countable limits in general; the parent supplies it via α_f. All off-chapter citations are on the sk-prop-an route, so no tool_uses are needed. No cycle and no SGA source. Duplicate candidates read and rejected. All three search kinds are recorded. The blueprint field is correct. No target is touched or weakened. Fixes: (a) rewrote the garbled size clause in the statement as the standard two-universe convention; (b) step 2 now checks continuity and morphism-of-sites explicitly and cites def-weil-pbc-sites-and-cohomology; (c) step 3 states that restriction to a slice commutes with lim and cites def-pur-localized-ringed-site. proof_deps recomputed. No new or dropped nodes.; 1 file(s) fixed by the reviewer"
  }
 }
