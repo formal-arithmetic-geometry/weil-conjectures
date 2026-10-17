@@ -10,11 +10,115 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The full inclusion $j$ is degreewise injective. Interpret its coherent comma as the arrow pullback $(b\\downarrow j)=\\{b\\}\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{B,\\operatorname{ev}_1}A$, with the constant simplicial point at $b$. The hypothesis of [lem-coef-infinity-cofinal-mono-right-anodyne] is therefore satisfied, so $j$ is right anodyne. If $A$ is empty and $B$ has a vertex, this hypothesis fails because the comma is empty; if $B$ is empty, $j$ is the identity of the empty simplicial set.",
+   "uses": [
+    "lem-coef-infinity-cofinal-mono-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NZ",
+    "place": "Remark 7.2.3.2 (right-cofinal arrow-comma model), Theorem 7.2.3.1 and Proposition 7.2.1.3; equivalently HTT Theorem 4.1.3.1 and Proposition 4.1.1.3(4), printed pp.236 and 223."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and a lifting square for the displayed restriction map against $\\partial\\Delta^n\\hookrightarrow\\Delta^n$. Unwinding the join-slice definitions, the square supplies a map $A\\star\\Delta^n\\to C$, a map $B\\star\\partial\\Delta^n\\to C$, and a base map $B\\star\\Delta^n\\to D$; on $A\\star\\partial\\Delta^n$ the two $C$-maps agree, and the map from $A\\star\\Delta^n$ to $C$ lies over the restriction of the base map. This is precisely the lifting problem for $p:C\\to D$ with source inclusion\n$$i_n=(A\\star\\Delta^n)\\amalg_{A\\star\\partial\\Delta^n}(B\\star\\partial\\Delta^n)\\longrightarrow B\\star\\Delta^n.$$\nSince $j$ is right anodyne, [lem-coef-infinity-anodyne-cocones] says that $i_n$ is inner anodyne. The join and pullback identifications here are degreewise, so the prescribed boundary is retained exactly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, printed p. 336; unpack the relative coslice lifting square and apply the join pushout-anodyne lemma"
+   }
+  },
+  {
+   "text": "The map $p$ is an inner fibration by hypothesis, so it has the right lifting property against each inner horn. The class of maps against which an inner fibration lifts is closed under pushouts, transfinite compositions and retracts: pushout lifting is obtained by composing with the pushout universal property, transfinite lifting is obtained successively at successor stages and by the colimit property at limit stages, and retract lifting is obtained by inserting the retract maps. Therefore $p$ lifts against the inner-anodyne map $i_n$. The resulting map $B\\star\\Delta^n\\to C$ restricts to the prescribed $C$-maps and projects to the prescribed base map, hence is the required $n$-simplex lift.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, printed p. 336; Proposition 2.1.2.5 lifting argument for an inner-fibration target"
+   }
+  },
+  {
+   "text": "For $n=0$, the same construction uses $\\partial\\Delta^0=\\varnothing$ and the inner-anodyne inclusion $(A\\star\\Delta^0)\\amalg_A B\\to B\\star\\Delta^0$ supplied by [lem-coef-infinity-anodyne-cocones]. The inner-fibration lifting property gives a vertex of $C_{u/}$ above every compatible vertex of the fiber product. Thus the restriction map is surjective on vertices. Together with the positive-dimensional boundary lifts of steps 2--3, this is exactly the definition of a trivial Kan fibration in [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "def-coef-infinity-fibrations",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, printed p. 336; dimension-zero clause of Proposition 2.1.2.5"
+   }
+  },
+  {
+   "text": "For the dual slice assertion define $X^{\\mathrm{op}}$ by replacing each simplicial operator $\\alpha:[m]\\to[n]$ by $a\\mapsto n-\\alpha(m-a)$. Reversal sends $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, so it preserves inner fibrations and takes right anodyne maps to left anodyne maps. It also preserves boundary inclusions. Reversing barycentric coordinates gives $|X^{\\mathrm{op}}|\\cong|X|$, so weak contractibility is preserved. In the arrow-pullback comma, reversal and interchange of the endpoints identify $(b\\downarrow j^{\\mathrm{op}})$ with $(j\\downarrow b)^{\\mathrm{op}}$. Thus [lem-coef-infinity-cofinal-mono-right-anodyne] applies to $j^{\\mathrm{op}}$, which is a full degreewise inclusion, and makes $j^{\\mathrm{op}}$ right anodyne. Apply [lem-coef-infinity-anodyne-cocones] to this map and $\\partial\\Delta^n\\hookrightarrow\\Delta^n$. It gives the inner-anodyne map $(A^{\\mathrm{op}}\\star\\Delta^n)\\amalg_{A^{\\mathrm{op}}\\star\\partial\\Delta^n}(B^{\\mathrm{op}}\\star\\partial\\Delta^n)\\to B^{\\mathrm{op}}\\star\\Delta^n$. Reversing its simplices gives the inner-anodyne map $(\\Delta^n\\star A)\\amalg_{\\partial\\Delta^n\\star A}(\\partial\\Delta^n\\star B)\\to\\Delta^n\\star B$, because reversal interchanges the ordered join blocks and preserves pushouts degreewise. A boundary square for $C_{/u}\\to C_{/uj}\\times_{D_{/puj}}D_{/pu}$ is precisely a map from this pushout to $C$ over a specified map $\\Delta^n\\star B\\to D$. The inner fibration $p$ lifts it by the closure argument of step 3. For $n=0$ its source is $(\\Delta^0\\star A)\\amalg_A B$, giving vertex surjectivity. For all $n>0$ it gives the prescribed boundary lifts, so [def-weil-pbc-trivial-kan-fibration] gives the asserted trivial Kan fibration.",
+   "uses": [
+    "lem-coef-infinity-cofinal-mono-right-anodyne",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-anodyne-cocones",
+    "def-coef-infinity-fibrations",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Opposite of Lemma 2.1.2.3 and Proposition 2.1.2.5, printed pp.62-63; explicit reversal of horns, joins and boundary squares."
+   }
+  },
+  {
+   "text": "For the left-adjoint special case, [lem-coef-infinity-pointwise-adjoint-criterion] supplies the coherent unit $\\eta:1_B\\to jR$ and counit $\\epsilon:Rj\\to1_A$ and their triangle homotopies from the assumed natural mapping-space equivalences. Fix $b$ and put $Q=(b\\downarrow j)$, with projection $v:Q\\to A$ and tautological coherent transformation $\\alpha:\\Delta_Q b\\to jv$. It contains the vertex $q_b=(Rb,\\eta_b)$. For an object $(a,\\alpha_a)$, the arrow from $q_b$ to this object has underlying arrow $h_a=\\epsilon_a\\circ R(\\alpha_a):Rb\\to a$. Its comma triangle is $j(h_a)\\eta_b\\simeq j(\\epsilon_a)\\eta_{ja}\\alpha_a\\simeq\\alpha_a$: the first homotopy is naturality of $\\eta$, and the second is the triangle identity for $j$. Apply these same coherent transformations to the entire diagram $v,\\alpha$, rather than only to its vertices; their coherent naturality supplies an edge $\\Delta_Q q_b\\to1_Q$ in $\\operatorname{Fun}(Q,Q)$, hence a simplicial map $Q\\times\\Delta^1\\to Q$ from the constant map to the identity. By [lem-coef-simplicial-realization-cylinder] its realization is a homotopy between these maps. Thus $|Q|$ is homotopy equivalent to a point, so $Q$ is weakly contractible for every $b$. Step 1 and the boundary construction therefore apply. This also proves that a right adjoint to $j$ supplies the dual comma hypothesis: the assumed mapping equivalences reverse to the left-adjoint equivalences for $j^{\\mathrm{op}}$, and the comma identification of step 5 identifies the resulting contractions with contractions of $(j\\downarrow b)^{\\mathrm{op}}$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-coef-simplicial-realization-cylinder",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, printed p.336: the active-subslice inclusion admits a left adjoint. The displayed unit-counit contraction supplies the omitted comma-contractibility argument."
+   }
+  },
+  {
+   "text": "Finally suppose $A$ is the full subcategory choosing one initial vertex $t_i$ in each component $B_i$ of $B$. For $b\\in B_i$, the presheaves on $A$ given by $a\\mapsto\\operatorname{Map}_B(ja,b)$ and $a\\mapsto\\operatorname{Map}_A(a,t_i)$ have contractible values at $a=t_i$ and empty values on every other component. The first assertion is initiality of $t_i$ in $B_i$; the second uses fullness, and maps between distinct components have no vertices and hence form the empty simplicial set. Both presheaves map naturally to the presheaf which is a point on component $i$ and empty elsewhere. These maps are pointwise equivalences, hence equivalences by [lem-cbc-enhanced-functor-cone-calculus]. Thus $a\\mapsto\\operatorname{Map}_B(ja,b)$ is represented by $t_i$. The right-adjoint direction of [lem-coef-infinity-pointwise-adjoint-criterion] assembles these representing objects into a right adjoint to $j$. The last conclusion of step 6 proves the dual comma hypothesis and step 5 proves the dual restriction assertion. If $B$ is empty there are no $b$ to test and both restrictions are identities; the representation argument imposes no nonemptiness assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, printed p.341, initial output components; mapping-space representability proves the componentwise initial-object special case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-cofinal-mono-right-anodyne",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-simplicial-realization-cylinder"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Proof of Theorem 3.1.2.3, printed pp. 336 and 341, using HTT Theorem 4.1.3.1, Proposition 4.1.1.3(4), and Proposition 2.1.2.5; archival copy WANTED in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +157,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
@@ -65,7 +169,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, through the coherent free-module criterion: the symmetric operadic zeroth-horn argument, HA Theorem 3.1.2.3(B). Proof of Theorem 3.1.2.3, printed p.336 (active-subslice cofinal restriction) and p.341 (initial output components), using HTT Theorem 4.1.3.1 (comma criterion), Proposition 4.1.1.3(4) (cofinal monomorphisms are right anodyne), and Proposition 2.1.2.5 (relative coslice restriction is a trivial Kan fibration), with the opposite versions. The two orientations are specified explicitly.",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: the active-subslice cofinal restriction, with the comma criterion and relative coslice lifting in the two orientations.",
    "via": [
     "lem-coef-symmetric-operadic-left-horn-filling",
     "lem-coef-symmetric-operadic-extension-boundaries",
@@ -80,5 +184,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cofinal-relative-join-slice-restriction",
+  "worker": "stage1",
+  "summary": "Seven steps: comma criterion to right anodyne, explicit relative join-boundary lifting including dimension zero, a dual argument with reversed horn indices and join blocks, unit-counit contraction for the adjoint special case, and representability for initial components. No statement or coefficient category changed.",
+  "blueprint": "The steps realize the ancestor proof paragraph's active-subslice cofinal restriction: HTT Theorem 4.1.3.1 and Proposition 4.1.1.3(4) supply the right-anodyne inclusion, while HTT Proposition 2.1.2.5 supplies the relative coslice boundary lifting and its opposite.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 7 takes only its statement that a coherent transformation of functors into a quasicategory is an equivalence when every vertex component is; this generic functor-category fact (unit sk-prop-sf-cbc) is not stated by any node of sk-prop-sf-biduality-general or its cited units."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-027f0aeba",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-027f0aeba (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged, its orientations are correct, and I tested it on {1}⊂Δ^1 (giving Λ^2_1), {0}⊂Δ^1 (fails the hypothesis, passes the dual) and empty B. The two special cases (adjoint, and one initial object per component) are true. Steps 1–5 check out: step 2 applies lem-coef-infinity-anodyne-cocones with k=∂Δ^n⊂Δ^n and step 4 with k=∅⊂Δ^0, step 3 writes out the lifting closure, and step 5 handles reversal correctly (Λ^n_i to Λ^n_{n−i}, (X⋆Y)^op=Y^op⋆X^op, (b↓j^op)≅(j↓b)^op). I checked step 6's unit–counit contraction square in Fun(Q,B) by hand, and step 7's representability argument. The new node lem-coef-infinity-cofinal-mono-right-anodyne is true by Kerodon 02NZ (2′) with 02N3 (Prop 7.2.1.3), which I fetched; its arrow comma matches 02NZ exactly. It is statement-only, self-contained, and not a restatement of the item. It duplicates none of the 11 nearby candidates I read (cofinal-comma-criterion, cofinality-space-test, cone-mono-right-anodyne and others). There is no cycle and no SGA citation; review_split passes. One fix: step 7 uses lem-cbc-enhanced-functor-cone-calculus from unit sk-prop-sf-cbc, which is outside this unit's route, while split_report.tool_uses was empty. I declared it in fixes/dag/nodes/sec-six-functors/lem-coef-cofinal-relative-join-slice-restriction.json and accept it as a black-box tool. HTT and HA are not archived (WANTED).; 1 file(s) fixed by the reviewer"
  }
 }

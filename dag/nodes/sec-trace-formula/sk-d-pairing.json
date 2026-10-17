@@ -3,27 +3,81 @@
  "blueprint": {
   "is": "sk-d-pairing",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-trf-supported-pairing"
+  ]
  },
  "kind": "definition",
  "title": "The supported pairing recipe",
- "statement": "Let $s$ be the spectrum of a field, $X,Y$ quasi-compact and compactifiable over\n$s$, $K\\in D^b_{ctf}(X,A)$ and $L\\in D^b_{ctf}(Y,A)$.\nFor an opposite pair, use the inverse\nKünneth–Verdier maps to obtain\n\n$$\n\\widetilde u:Rc_!A_C\\to P=L\\boxt D_XK,\n\\qquad \\widetilde v:R\\bar d_!A_D\\to Q=K\\boxt D_YL\n$$\n\non $Z=Y\\times X$. If $e:E(C,D)\\to Z$, the projection formula and $!$-base change\ngive $Re_!A_E\\simeq Rc_!A_C\\otimes R\\bar d_!A_D$.\nCompose with $\\widetilde u\\otimes\\widetilde v$, the exchange of the middle factors\nand the monoidality of the pullbacks, then the two Verdier\nevaluations $L\\otimes D_YL\\to\\omega_Y$, $K\\otimes D_XK\\to\\omega_X$, and the exterior\nproduct map $\\omega_Y\\boxt\\omega_X\\to\\omega_Z$ (the exceptional adjoint of the trace\n$Ra_{X!}\\omega_X\\simeq Ra_{X!}a_X^!A\\to A$ after the projection formula and\n$!$-base change).\nIts exceptional adjoint is the Borel–Moore section\n$\\langle u,v\\rangle_{\\mathrm{LV}}:A_E\\to\\omega_E$.",
+ "statement": "Use the base and finite-level coefficient conventions of [sk-d-setup], so\n$s=\\operatorname{Spec}k$ is the spectrum of a field and\n$A=\\mathcal O_E/\\varpi^n$, $n\\geq1$. Fix the given geometric operation\npackage of [sk-d-six], with its actual pro-étale coefficient categories,\nfunctors, constructible exceptional adjunctions, comparisons and signed\nbraidings. In particular, the notation $D_XK=\\RHom_A(K,\\omega_X)$ and\nexternal products below use that package, not an independently chosen\nsix-functor formalism.\n\nLet $X,Y$ be geometric schemes over $s$, quasi-compact and compactifiable\nas in the package, and let $K\\in D^b_{ctf}(X,A)$ and\n$L\\in D^b_{ctf}(Y,A)$. Let $(C,c,u)$ and $(D,d,v)$ be opposite\ncorrespondences of [sk-d-corr], with geometric supports $C,D$. Write\n$$\n\\begin{gathered}\nc=(c_1,c_2):C\\to Y\\times_sX,\\quad\nu:c_2^*K\\to c_1^!L,\\\\\nd=(d_1,d_2):D\\to X\\times_sY,\\quad\nv:d_2^*L\\to d_1^!K,\\\\\nZ=Y\\times_sX,\\quad p_1:Z\\to Y,\\quad p_2:Z\\to X,\\quad\n\\bar d=(d_2,d_1):D\\to Z,\\\\\nE=C\\times_{Z,c,\\bar d}D,\\quad q_C:E\\to C,\\quad q_D:E\\to D,\n\\quad e=cq_C=\\bar d q_D:E\\to Z.\n\\end{gathered}\n$$\nUse compactifiable maps wherever $R(-)_!$ or $(-)^!$ is displayed;\nin particular $c,d,\\bar d,\\tau,q_C,e,p_1,p_2,q_1,a_X,a_Y,a_Z,a_E$ have those\noperations, and the exceptional adjunctions are the supplied adjunctions\non the full subcategories $D^b_{ctf}$, agreeing with those used in $u,v$.\nAll comparisons below are the specified comparisons of [sk-d-six].\nThere is no assertion here of an exceptional right adjoint on the whole\nunbounded pro-étale category. Pullback and compact-support images preserve\nthese coefficient subcategories by [sk-d-setup]; tensor, internal Hom\nand exceptional inverse-image preservation are as in\n[thm-sf-ctf-stability] (ii), (v). Thus all the displayed adjunctions\nare applied to objects in their domains. The coefficient units $A_T$\nare constant free rank-one modules in degree zero, of Tor amplitude\n$[0,0]$.\n\n1. **Supported classes.** Put $P=p_1^*L\\otimes_A^{\\mathrm L}p_2^*D_XK\n=L\\boxtimes D_XK$. The supported-class identification of [sk-d-corr]\ngives $[u]:Rc_!A_C\\to\\RHom_A(p_2^*K,p_1^!L)$. Define\n$$\n\\widetilde u=\\kappa_{L,K}^{-1}\\circ[u]:Rc_!A_C\\to P,\n$$\nwhere $\\kappa_{L,K}$ is the canonical Künneth–Verdier map specified\nand required invertible in [sk-d-six], with the finite-coefficient\ncomparison of [sk-thm-sf-kunneth-verdier].\nFor $v$, put $W=X\\times_sY$ with projections $q_1:W\\to X$,\n$q_2:W\\to Y$, and let $\\tau:W\\xrightarrow{\\sim}Z$ be the factor exchange\nof [sk-d-corr], so $\\bar d=\\tau d$, $p_2\\tau=q_1$ and $p_1\\tau=q_2$.\nThe supported-class identification of [sk-d-corr], with $(X,K)$ and\n$(Y,L)$ interchanged, gives\n$$\n[v]:Rd_!A_D\\to\\RHom_A(q_2^*L,q_1^!K)\\quad\\text{on }W.\n$$\nThe canonical Künneth–Verdier map of [sk-d-six] on $X\\times_sY=W$, with\n$M=K$ and $N=L$, is\n$\\kappa_{K,L}:q_1^*K\\otimes_A^{\\mathrm L}q_2^*D_YL\\xrightarrow{\\sim}\n\\RHom_A(q_2^*L,q_1^!K)$, so\n$\\kappa_{K,L}^{-1}\\circ[v]:Rd_!A_D\\to q_1^*K\\otimes_A^{\\mathrm L}q_2^*D_YL$.\nApply $R\\tau_!$. Its source is identified with $R\\bar d_!A_D$ by the\ncomposition comparison $R\\bar d_!\\simeq R\\tau_!Rd_!$ of [sk-d-six].\nFor its target, the square with sides $\\tau:W\\to Z$,\n$\\mathrm{id}_Z$, $\\tau^{-1}:Z\\to W$ and $\\mathrm{id}_Z$ is Cartesian\nbecause $\\tau$ is an isomorphism, so $!$-base change and the identity\ncomparisons of [sk-d-six] give $R\\tau_!\\simeq(\\tau^{-1})^*$; the\nmonoidal structure of $(\\tau^{-1})^*$ and pullback composition with\n$q_1\\tau^{-1}=p_2$, $q_2\\tau^{-1}=p_1$ then identify\n$(\\tau^{-1})^*(q_1^*K\\otimes_A^{\\mathrm L}q_2^*D_YL)$ with\n$p_2^*K\\otimes_A^{\\mathrm L}p_1^*D_YL$. Thus only the Künneth–Verdier\nmap on the product $X\\times_sY$ itself is inverted; the passage to $Z$\nis this explicit transport along $\\tau$. Compose with the signed\nbraiding to define\n$$\n\\widetilde v:R\\bar d_!A_D\\to\nQ:=p_1^*D_YL\\otimes_A^{\\mathrm L}p_2^*K=D_YL\\boxtimes K.\n$$\nBoth $P$ and $Q$ are therefore objects on $Z=Y\\times_sX$.\n\n2. **Support of the tensor product.** Define the isomorphism $\\mu$ by\nthis particular composite, using the composition comparison, the inverse\nof $!$-base change for the square defining $E$, the tensor unit, and\ninverse projection formula for $c$:\n$$\n\\begin{aligned}\n\\mu:Re_!A_E\n&\\xrightarrow{\\sim}Rc_!Rq_{C!}q_D^*A_D\n\\xrightarrow{\\sim}Rc_!c^*R\\bar d_!A_D\\\\\n&\\xrightarrow{\\sim}Rc_!(A_C\\otimes_A^{\\mathrm L}c^*R\\bar d_!A_D)\n\\xrightarrow{\\sim}Rc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D.\n\\end{aligned}\n$$\nHere $q_D^*A_D\\simeq A_E$ is the monoidal unit comparison of pullback.\nThe projection formula inputs are $A_C$ and $R\\bar d_!A_D$, both\nin the required finite-Tor constructible categories.\n\n3. **Contraction and dualizing product map.** On $Z$, abbreviate\n$T_1=p_1^*L$, $T_2=p_2^*D_XK$, $T_3=p_1^*D_YL$ and $T_4=p_2^*K$.\nReassociate $P\\otimes Q$ and move $T_3$ past $T_2$ and then past $T_1$,\nusing the signed braidings of [sk-d-six]. This changes the order\n$(T_1,T_2,T_3,T_4)$ into $(T_3,T_1,T_2,T_4)$, with Koszul sign\n$(-1)^{c(a+b)}$ on homogeneous factors of degrees $(a,b,c,d)$.\nUse the inverse pullback tensor comparisons, then the evaluations\n$D_YL\\otimes_A^{\\mathrm L}L\\to\\omega_Y$ and\n$D_XK\\otimes_A^{\\mathrm L}K\\to\\omega_X$ of [sk-d-six]. This defines\n$$\n\\gamma:P\\otimes_A^{\\mathrm L}Q\\longrightarrow\np_1^*\\omega_Y\\otimes_A^{\\mathrm L}p_2^*\\omega_X.\n$$\nDefine $\\delta:\\omega_Y\\boxtimes\\omega_X\\to\\omega_Z$ as follows,\nwithout invoking Künneth–Verdier on the dualizing complexes.\nWrite $B=p_1^*\\omega_Y\\otimes_A^{\\mathrm L}p_2^*\\omega_X$. Form\n$$\n\\begin{aligned}\nRp_{1!}B\n&\\xrightarrow{\\sim}Rp_{1!}p_2^*\\omega_X\\otimes_A^{\\mathrm L}\\omega_Y\n\\xrightarrow{\\sim}a_Y^*Ra_{X!}\\omega_X\\otimes_A^{\\mathrm L}\\omega_Y\\\\\n&\\xrightarrow{a_Y^*\\operatorname{tr}_X\\otimes1}\n a_Y^*A_s\\otimes_A^{\\mathrm L}\\omega_Y\n\\xrightarrow{\\sim}\\omega_Y,\n\\end{aligned}\n$$\nwhere the first arrow is the braiding followed by inverse projection\nformula, the second is inverse $!$-base change for the product square,\nand $\\operatorname{tr}_X$ is\n$Ra_{X!}\\omega_X\\simeq Ra_{X!}a_X^!A_s\\xrightarrow{\\varepsilon}A_s$.\nThe last arrow uses the monoidal unit comparison and unitor.\nTake its exceptional adjoint $B\\to p_1^!\\omega_Y$ and compose with\nthe specified dualizing composition isomorphism\n$p_1^!\\omega_Y\\simeq\\omega_Z$ of [sk-d-six]; this composite is $\\delta$.\nOnly this map, not its invertibility, is needed in the definition.\n\n4. **The supported pairing.** Define\n$$\n\\sigma_{u,v}:Re_!A_E\\xrightarrow{\\mu}\nRc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D\n\\xrightarrow{\\widetilde u\\otimes\\widetilde v}P\\otimes_A^{\\mathrm L}Q\n\\xrightarrow{\\gamma}\\omega_Y\\boxtimes\\omega_X\n\\xrightarrow{\\delta}\\omega_Z.\n$$\nUnder the exceptional adjunction $Re_!\\dashv e^!$ of [sk-d-six],\ntake the image of $\\sigma_{u,v}$ in\n$\\operatorname{Hom}_E(A_E,e^!\\omega_Z)$ and compose with\n$e^!\\omega_Z\\simeq\\omega_E$. This defines the Lefschetz–Verdier\nsupported pairing\n$$\n\\langle u,v\\rangle_{\\mathrm{LV}}:A_E\\longrightarrow\\omega_E,\n$$\na Borel–Moore section in the sense of [sk-d-integral]. No properness of\n$E$ is required to define this section.\n",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-pairing/_section.md",
   "place": "node sk-d-pairing, order 2652"
  },
  "stmt_deps": [
+  "sk-d-setup",
+  "sk-d-six",
   "sk-d-corr",
   "sk-d-integral",
-  "sk-d-six",
-  "sk-thm-sf-kunneth-verdier"
+  "sk-thm-sf-kunneth-verdier",
+  "thm-sf-ctf-stability"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supportedPairing|dualizingExteriorProd|Lefschetz.Verdier|Borel.Moore",
+   "results": "0 hits: ; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define the geometric supported Lefschetz–Verdier pairing; abstract adjunction, linear algebra and derived-category support lemmas supply only individual ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor supported cohomological correspondences then evaluate Verdier duals to form a Borel Moore section",
+   "results": "8 hits: transpose_dualTensorHom, dualTensorHomEquiv, TensorProduct.AlgebraTensorModule.dualDistrib, map_dualTensorHom, dualTensorHomEquivOfBasis_apply, dualTensorHomEquivOfBasis, dualTensorHomEquivOfBasis_toLinearMap, dualTensorHomEquivOfBasis_symm_cancel_left",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define the geometric supported Lefschetz–Verdier pairing; abstract adjunction, linear algebra and derived-category support lemmas supply only individual ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define the geometric supported Lefschetz–Verdier pairing; abstract adjunction, linear algebra and derived-category support lemmas supply only individual ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier pairing of opposite cohomological correspondences supported on their fiber product",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define the geometric supported Lefschetz–Verdier pairing; abstract adjunction, linear algebra and derived-category support lemmas supply only individual ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a Borel Moore section on the intersection of two supports using the projection formula exceptional base change and dualizing evaluations",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, TopCat.Presheaf.IsCompatible.sectionPairwise, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.interUnionPullbackConeLift",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define the geometric supported Lefschetz–Verdier pairing; abstract adjunction, linear algebra and derived-category support lemmas supply only individual ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality evaluation defines a pairing between sheaf correspondences with intersecting supports",
+   "results": "8 hits: CategoryTheory.Sheaf.H, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.objSupIsoProdEqLocus, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary sheaf cohomology, sheaf pullback or monoidal closed structures; source hits concern Verdier triangulated categories and categorical duality, without the exceptional supported pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dualizing|cohomological.correspondence",
+   "results": "25 hits: Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/Tactic/Translate/ToDual.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary sheaf cohomology, sheaf pullback or monoidal closed structures; source hits concern Verdier triangulated categories and categorical duality, without the exceptional supported pairing"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -70,5 +124,29 @@
     "AlgebraicGeometry.ProEtale.GeometricOperations.supportedPairing"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-pairing",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint definition into its actual composites using existing nodes only. Corrected the ill-typed opposite external product on Y times X, made the inherited coefficient/package and geometric-support domains explicit, specified the signed permutation, constructed the dualizing exterior product from the exceptional trace, and used only constructible exceptional adjunctions. The node remains a definition with no proof obligations hidden as new nodes.",
+  "blueprint": "Realizes the entire sk-d-pairing recipe: inverse Kunneth–Verdier supported classes, intersection-support isomorphism, signed tensor contraction, trace-defined exterior product of dualizing complexes, and exceptional adjunct to the Borel–Moore section. The old unit record has no separately enumerated proof steps.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Its finite-level tensor/internal-Hom and exceptional inverse-image preservation justify that the displayed objects belong to the constructible adjunction domains; the unit gives the pairing recipe rather than these coefficient-domain theorems."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ctf-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-3cf32715e",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-3cf32715e (reviewer sub-agent of L); spot-checked: Read in full: the current blueprint sk-d-pairing (main-20261015, order 2652), compared with the master text; the item; the unit; every stmt_dep (sk-d-setup, sk-d-six, sk-d-corr, sk-d-integral, sk-thm-sf-kunneth-verdier, thm-sf-ctf-stability, def-sfb-derived-tensor-hom-adjunction-sheaves); sk-def-sf-kv-maps (iv); def-pc-fibre-product; and def-trf-supported-pairing. There are no new nodes. Accepted: the Q typing correction (the blueprint's K⊠D_YL is not typed on Z=Y×X under sk-d-six's ⊠ convention; test case Y=Spec k, X=A^1_k). Also checked and correct: ũ via sk-d-corr and κ_{L,K} on the chosen Y×_sX; μ (base change with f=d̄, g=c, f'=q_C, g'=q_D, and the projection formula for c); the sign (-1)^{c(a+b)}, which agrees with the blueprint's middle exchange and with def-trf; δ as sk-d-six's α_{ω_Y} through tr_X, invertibility not claimed; and the final adjunct into ω_E. One fault, E5/C4: ṽ inverted a Künneth–Verdier map 'for the reversed square', meaning first factor X on the object Y×_sX. Every cited node (sk-d-six, sk-thm-sf-kunneth-verdier, thm-trf-kunneth-verdier) states the map and its invertibility only on the chosen X×_sY (def-pc-fibre-product chooses each fibre product once), so a transport along the exchange τ was hidden. Fixed in fixes/dag/nodes/sec-trace-formula/sk-d-pairing.json, following def-trf-supported-pairing: [v] on W=X×_sY via sk-d-corr with roles interchanged, then κ_{K,L}^{-1} on W, then Rτ_!. The source becomes Rd̄_!A_D by composition; the target uses Rτ_!≅(τ^{-1})^* from !-base change on the Cartesian iso square, then monoidality and pullback composition give p_2^*K⊗p_1^*D_YL, then the braiding gives Q. The mate construction is gone, so def-sfb-derived-tensor-hom-adjunction-sheaves is removed from stmt_deps and from split_report.tool_uses; d, τ and q_1 are added to the compactifiable maps. Accepted tool_use: thm-sf-ctf-stability. Unit realized fields are accepted. No Lean attachment is claimed and no SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
