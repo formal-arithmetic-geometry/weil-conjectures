@@ -12,9 +12,161 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-unmarked-straightening-quillen"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $Y=X^{\\mathrm{op}}$ and $S=N(C)^{\\mathrm{op}}$. The coherent-nerve adjunction on the discrete category $C^{\\mathrm{op}}$ gives the counit $\\phi$. Thus $H_C(X)=L_\\phi(Y)$ in the unmarked cone-straightening statement; there is no opposite on this output. The pairs $(x,h)$ defining $F_C(X)$ satisfy the simplicial identities: the arrow appended by two successive restrictions is $p(x_{\\theta(m)}\\to x_n)\\circ p(x_{\\theta\\eta(l)}\\to x_{\\theta(m)})=p(x_{\\theta\\eta(l)}\\to x_n)$, with composition read from right to left. Postcomposition in $c$ commutes with restriction. Reversing vertex order gives $F_C(X)^{\\mathrm{op}}$ as a strict $C$-diagram.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 3.2.5.5 and 3.2.5.10; variance and pair operators."
+   }
+  },
+  {
+   "text": "Construct the actual comparison by a simplicial collage $B_X$. Its old objects and mapping sets are $C^{\\mathrm{op}}$; add $v$, put $B_X(c,v)=F_C(X)(c)^{\\mathrm{op}}$, $B_X(v,c)=\\varnothing$, and $B_X(v,v)=\\Delta^0$. Composition into $v$ is the opposite of postcomposition on the pair's arrow label. For $y:\\Delta^n\\to Y$, a $k$-simplex of the coherent mapping set from $a$ to the last cone vertex is a flag $I_0\\subseteq\\cdots\\subseteq I_k$ of subsets containing $a,v$. Put $m_j=\\max(I_j\\setminus\\{v\\})$. Send this flag to $y|_{m_0,\\ldots,m_k}$, labelled by the arrow $p^{\\mathrm{op}}(y_a\\to y_{m_0})$ in $C^{\\mathrm{op}}$. In terms of $F_C^{\\mathrm{op}}$, the label is an arrow from $p(y_{m_0})$ to $p(y_a)$ in $C$. Deleting or repeating a flag entry gives its simplicial operators; deleting its first entry composes the label with $p^{\\mathrm{op}}(y_{m_0}\\to y_{m_1})$. Direct image of subsets under a monotone map commutes with maximum, including repeated vertices, so these maps agree across all simplices of $Y$. Composing an old path from $a$ to $b$ with a cone path from $b$ takes their union; its maximum is the maximum of the cone path. The label becomes precisely the composite base arrow. Consequently these formulas define an enriched functor $\\mathfrak C[Y\\star\\Delta^0]\\to B_X$ whose old part factors through the counit to $C^{\\mathrm{op}}$. The pushout induces $\\alpha_{C,X}:H_C(X)\\to F_C(X)^{\\mathrm{op}}$. It is natural in $X$ and in $c$ by its formula.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.2.5.10: explicit existence construction on coherent subset flags."
+   }
+  },
+  {
+   "text": "For $C=[r]$ and $X=N([r])$, the coherent cone mapping set at $i$ is the cube $N(\\mathcal P_i)$ of the statement. Every path from $i$ through an old object to $v$ is represented in this cube by union of its old and cone subsets, since an old arrow of $[r]^{\\mathrm{op}}$ has a coherent representative. The pushout identifies old mapping simplices with their unique base arrows, also after composing with cone paths. In a composite the old subset has all its elements at least the cone subset's minimum, so union does not change that minimum. On flags this gives the identical target simplex and label for the two sides of every relation. Thus the map $J\\mapsto\\min J$ descends to the actual quotient and is exactly the map in step 2. Precomposition for $i\\to j$ is represented by adjoining $j$; this leaves the minimum and postcomposes the label, as required. The cube is a surjective presentation, not an isomorphism with $H_{[r]}(X)(i)$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.2.5.10(3), interpreted through the cone-pushout quotient specified in the item."
+   }
+  },
+  {
+   "text": "For $u:C\\to D$, apply target change with $S=N(C)^{\\mathrm{op}}$, index change $u:C\\to D$, and attaching functor $\\phi_C$. Naturality of the counit identifies $u^{\\mathrm{op}}\\phi_C$ with $\\phi_D\\mathfrak C[N(u)^{\\mathrm{op}}]$, so its specified isomorphism gives $u_!H_C(X)\\cong H_D(N(u)_!X)$. Compute the comma side degreewise: a representative of $u_!F_C(X)(d)$ is $(h:u(c)\\to d,x,g:p(x_n)\\to c)$, with relation $(h\\circ u(k),x,g)\\sim(h,x,k\\circ g)$. Send it to $(x,h\\circ u(g))$. The inverse uses $c=p(x_n)$, $g=1$, and $h$ equal to the given label. The relation proves both inverse identities. It also proves compatibility with the last-face operator; other operators merely restrict $x$. Opposite commutes with these colimits, being the involution that reverses simplex operators. The construction in step 2 changes only its arrow label under these identifications, so $u_!\\alpha_{C,X}=\\alpha_{D,N(u)_!X}$. For successive functors the label is $l\\circ v(h)\\circ vu(g)$ on both sides; identities act trivially. This proves the claimed identity/composite coherence.",
+   "uses": [
+    "lem-coef-unmarked-straightening-target-change",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 3.2.5.8 and 3.2.5.10(2); explicit coend calculation for comma diagrams."
+   }
+  },
+  {
+   "text": "Both functors preserve small colimits in $X$ over $N(C)$. For $H_C$ this follows from $L_\\phi\\dashv U_\\phi$ and from opposite being an equivalence on slice categories. For $F_C$, degreewise the summand over a fixed base simplex $b\\in N(C)_n$ is $X_{n,b}\\times\\operatorname{Hom}_C(b_n,c)$; disjoint unions over the arrow labels commute with colimits of these fibers, including all quotient relations. The operators are the pair operators of step 1, so this is a colimit assertion for simplicial diagrams. Valuewise opposite preserves colimits too. Every $X$ is the colimit of its simplices: a simplex represented by $(x,a:[m]\\to[n])$ maps to $a^*x\\in X_m$, with inverse represented by $(a^*x,1_{[m]})$; these representatives are equal by the simplex-category relation. The index is small since the sets of simplices and simplex operators are small. On each simplex over $N(C)$, step 4 reduces the map to the universal simplex and step 3 fixes its normalization. Hence the map already constructed is exactly the left-Kan-extension and simplex-colimit specification in the statement, and the specification is well defined.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.2.5.10, final paragraph: colimit extension and uniqueness, with its degreewise relations written out."
+   }
+  },
+  {
+   "text": "All objects of the contravariant slice over $S$ are cofibrant, because its cofibrations are monomorphisms. The opposite of a monomorphism over $N(C)$ is a monomorphism over $S$. The left-Quillen assertion for $L_\\phi$ therefore implies that $H_C$ takes every monomorphism to a projective cofibration, and $H_C(X)$ is projectively cofibrant for every $X$. Its target projective structure agrees with the ordinary presheaf structure for index category $C^{\\mathrm{op}}$: both have objectwise weak homotopy equivalences and Kan fibrations, so their trivial fibrations agree and hence their cofibrations, defined by the left lifting property, agree. No fibrancy of $X$ or equivalence property of $\\phi$ is used.",
+   "uses": [
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-unmarked-straightening-quillen",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1 and Lemma 3.2.5.17, preservation of cofibrations for the skeletal argument."
+   }
+  },
+  {
+   "text": "The comma functor also takes monomorphisms to projective cofibrations. For a simplex $x:\\Delta^n\\to N(C)$, the pair formula makes $F_C(\\partial\\Delta^n)\\to F_C(\\Delta^n)$ the pushout of the free-diagram boundary inclusion $\\operatorname{Hom}_C(x_n,-)\\times\\partial\\Delta^n\\to\\operatorname{Hom}_C(x_n,-)\\times\\Delta^n$. The new nondegenerate simplices are exactly $(x,h)$; the last face has label $h\\,x(n-1\\to n)$, fixing the attaching map. These are the generating projective cofibrations for presheaves on $C^{\\mathrm{op}}$. The monomorphism boundary-cell filtration and step 5 prove the assertion for every monomorphism, and then for the initial map of every $F_C(X)$. Valuewise opposite preserves projective cofibrations: opposite permutes the boundary inclusions up to their vertex-reversal isomorphisms, so the boundary lifting test shows it permutes trivial Kan fibrations. Consequently it permutes objectwise trivial fibrations of strict diagrams and carries their lifting squares bijectively to opposite lifting squares. Thus $F_C(-)^{\\mathrm{op}}$ preserves projective cofibrations and all its values are projectively cofibrant. This includes $n=0$, whose boundary is empty.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Unmarked version of Lemma 3.2.5.15; free boundary cells and reversal of the Kan boundary lifting test."
+   }
+  },
+  {
+   "text": "For the universal simplex over $[r]$, apply the ordered-simplex cone evaluation after relabelling $[r]^{\\mathrm{op}}$ by $a\\mapsto r-a$. At the object formerly called $i$ the new label is $j=r-i$. Target change identifies $H_{[r]}(\\Delta^r)(i)$ with the linearized cone value, and the evaluation formula gives $V(\\Delta^{\\{r-i,\\ldots,r\\}})\\cong V(\\Delta^i)\\cong Q^i$. The last isomorphism is the coend relation for a representable: $[(a:[m]\\to[i]),q]\\mapsto Q(a)q$ has inverse $q\\mapsto[1_{[i]},q]$. The pinched-cube statement says $|Q^i|$ is a topological simplex, so this source is weakly contractible. The comma target is $N(\\{0,\\ldots,i\\}^{\\mathrm{op}})$, isomorphic to $\\Delta^i$ by vertex reversal, and is contractible. Explicitly the realization of $\\Delta^i$ is the usual simplex: $[a,t]$ maps to coordinates $s_j=\\sum_{a(k)=j}t_k$, with inverse $s\\mapsto[1_{[i]},s]$; the quotient relation proves the inverse identities. Linear interpolation to a vertex contracts it. Both components are therefore nonempty and weakly contractible, so the specific descended map of step 3 is a weak homotopy equivalence by the definition. This uses the quoted simplex evaluation, not an unsupported contraction of a quotient cube.",
+   "uses": [
+    "lem-coef-ordered-simplex-cone-evaluation",
+    "lem-coef-unmarked-straightening-target-change",
+    "lem-coef-pinched-cube-latching",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.17(1), universal-simplex case, using the existing ordered-simplex/Q evaluation."
+   }
+  },
+  {
+   "text": "For an arbitrary simplex $\\sigma:[r]\\to C$, restriction of strict diagrams along $\\sigma$ preserves projective fibrations and trivial fibrations, since those are objectwise. Its left adjoint $\\sigma_!$ preserves cofibrations and trivial cofibrations by transporting the corresponding lifting squares across the adjunction. It therefore preserves weak equivalences between projectively cofibrant objects by the model-category preservation statement. Steps 6 and 7 give precisely that cofibrancy for the source and target of the universal comparison of step 8. Apply $\\sigma_!$ and use the isomorphisms and equality of step 4. It follows that every component of $\\alpha_{C,\\Delta^r}$ is a weak homotopy equivalence for every base simplex, including a degenerate or constant one. No claim that arbitrary left Kan extension preserves every objectwise equivalence is needed.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.17, proof (F), applied to the normalized unmarked simplex comparison."
+   }
+  },
+  {
+   "text": "Call an object over $N(C)$ good if its comparison is a projective weak equivalence. The empty object is good. By step 5 both functors preserve colimits. By steps 6 and 7 all images are projectively cofibrant and both functors carry monomorphisms to projective cofibrations. Thus the coproduct clause, the cofibrant-span clause, and the continuous ordinal clause of the model colimit-comparison statement imply respectively: a small coproduct of good objects is good; a pushout of three good objects is good when one span leg is a monomorphism; and a continuous union of good objects along monomorphisms is good. All six cofibrancy assumptions of the span clause and both cofibration-leg assumptions hold by steps 6 and 7. At a limit stage continuity holds by colimit preservation. These assertions use only the listed colimits of cofibrant diagrams, not arbitrary colimits of weak equivalences.",
+   "uses": [
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.17, unmarked versions of proof (A) and (B), with the cofibrant colimit hypotheses checked."
+   }
+  },
+  {
+   "text": "Use the boundary-cell filtration of $\\varnothing\\hookrightarrow X$. First induct on dimension to prove goodness of every finite-dimensional object: the empty object is the initial case; a dimension-zero object is a coproduct of vertices, good by step 9; after dimension $n-1$, each $n$-simplex boundary and the previous skeleton are good, and the pushout attaching the coproduct of nondegenerate $n$-simplices is good by steps 9 and 10. The attaching leg from each boundary to its simplex is a monomorphism. This induction permits arbitrarily many simplices in each dimension because step 10 covers small coproducts. Finally, an arbitrary $X$ is the continuous union of its finite-dimensional skeleta along monomorphisms, so step 10 proves it good. Projective weak equivalences are objectwise, which is the required conclusion for every $c$. The strict naturality and base coherence were proved in steps 2 and 4, and step 5 proved the specified colimit normalization; together these give every clause for all inputs. If $C$ is empty, $X$ must be empty and the conclusion is vacuous; empty fibers, isolated vertices, infinite skeleta and repeated base vertices are already included.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.17(1): explicit unmarked version of the skeletal induction in proof (E)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-contravariant-slice-model",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-ordered-simplex-cone-evaluation",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-unmarked-straightening-quillen",
+  "lem-coef-unmarked-straightening-target-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Remark 3.2.5.10 and Lemma 3.2.5.17, printed pp.197–198,201–203, read online 2026-10-17. The unmarked proof is left to the reader in HTT; the explicit collage, quotient normalization, projective boundary calculation and Q-simplex/skeletal proof are supplied here. WANTED: local literature archive of HTT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +223,52 @@
    "results": "{\"t\": \"2026-10-17T04:12:18Z\", \"tool\": \"grep\", \"query\": \"LeftAnodyne|LeftFibration|[Ss]traightening|relative[Nn]erve|RelativeNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reader. Read SimplicialNerve.lean:12-38,183-208 and the returned nerve-adjunction signatures. SimplicialNerve defines only the coherent nerve, with its quasicategory property still listed as a project, and has no cone pushout, relative nerve, or comparison map. Ordinary nerve/homotopy-category adjunctions do not state this all-input comparison. The recorded search returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural objectwise weak equivalence from unmarked cone straightening to the opposite comma diagram over a category nerve",
+   "results": "{\"t\": \"2026-10-17T04:42:00Z\", \"tool\": \"leanfinder\", \"query\": \"Natural objectwise weak equivalence from unmarked cone straightening to the opposite comma diagram over a category nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"e258fd5315edb81f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary/truncated nerve adjunctions, strict Segal coskeleta, or ordinary over-category weak equivalences. Read NerveAdjunction.lean:232-267,393-415, SimplicialNerve.lean:12-38,183-208 and ModelCategory/Over.lean:25-80. None compares the cone pushout with a comma pullback diagram; the corrected straightening/relative-nerve grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve, SimplicialSet, weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-17T04:42:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve, SimplicialSet, weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialSet'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'SimplicialSet'; repeated below with a valid name-string pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|relativeNerve|comma diagram|cone pushout",
+   "results": "{\"t\": \"2026-10-17T04:42:00Z\", \"tool\": \"grep\", \"query\": \"straighten|relativeNerve|comma diagram|cone pushout\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid directory: the command searched Mathlib/Mathlib, so its zero-hit result is not evidence of absence; repeated below with the correct root."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unmarked relative nerve cone straightening comparison is an objectwise weak equivalence for every simplicial set over a category nerve",
+   "results": "{\"t\": \"2026-10-17T04:42:01Z\", \"tool\": \"leansearch\", \"query\": \"Unmarked relative nerve cone straightening comparison is an objectwise weak equivalence for every simplicial set over a category nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOver\", \"HomotopicalAlgebra.weakEquivalences_over_iff\", \"HomotopicalAlgebra.weakEquivalences_over_def\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverWeakEquivalences\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"a48becb50920a08e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary/truncated nerve adjunctions, strict Segal coskeleta, or ordinary over-category weak equivalences. Read NerveAdjunction.lean:232-267,393-415, SimplicialNerve.lean:12-38,183-208 and ModelCategory/Over.lean:25-80. None compares the cone pushout with a comma pullback diagram; the corrected straightening/relative-nerve grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidification of an ordered cone compared to a comma simplicial diagram by a natural weak homotopy equivalence for arbitrary simplicial inputs",
+   "results": "{\"t\": \"2026-10-17T05:02:19Z\", \"tool\": \"leanfinder\", \"query\": \"Rigidification of an ordered cone compared to a comma simplicial diagram by a natural weak homotopy equivalence for arbitrary simplicial inputs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"67142c9950105fa5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary/truncated nerve adjunctions, strict Segal coskeleta, or ordinary over-category weak equivalences. Read NerveAdjunction.lean:232-267,393-415, SimplicialNerve.lean:12-38,183-208 and ModelCategory/Over.lean:25-80. None compares the cone pushout with a comma pullback diagram; the corrected straightening/relative-nerve grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|nerveAdjunction",
+   "results": "{\"t\": \"2026-10-17T05:02:20Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|nerveAdjunction\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\"], \"digest\": \"6fda8566ef2b9f02\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary/truncated nerve adjunctions, strict Segal coskeleta, or ordinary over-category weak equivalences. Read NerveAdjunction.lean:232-267,393-415, SimplicialNerve.lean:12-38,183-208 and ModelCategory/Over.lean:25-80. None compares the cone pushout with a comma pullback diagram; the corrected straightening/relative-nerve grep has zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-valued-straightening",
@@ -100,5 +294,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unmarked-relative-nerve-cone-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the comparison on coherent subset flags, checked that minimum descends through the actual cone-pushout quotient, and proved the base Kan-extension and simplex-colimit specification. Used the existing ordered-simplex evaluation and pinched Q contractibility for the universal simplex, verified both diagram cofibrancy hypotheses before Kan extension, and completed the proof by cofibrant boundary pushouts and skeletal unions. Zero new nodes; no Lean attachment or Mathlib match. All inherited metadata and searches retained, with actual Q66 searches appended. HTT was read online and the local archive is requested.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the finite-coefficient mapping-complex adjunction before taking the derived inverse limit; foundational notions for the operadic enrichment used by lem-coef-enriched-category-tensor-calculus. Defines the complete operadic enriched categories and their coefficients used by that mapping-complex construction. The Kan-valued relative-nerve construction justifies the object-space indexing left fibration used to define algebroids. Ordinary-base adjoint comparison identifies the classifying functor of the explicit relative-nerve indexing construction after its left-fibration property has been proved. Technical comparison of the ordinary-base cone straightening with the explicit quotient left adjoint, for every simplicial input, before any fibrancy assumption.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-b3c13f41d",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-b3c13f41d (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full. All 11 steps hold. Step 2 builds alpha as an enriched functor out of the cone pushout into a collage B_X, so it descends through the pushout automatically. I checked: the last vertex of y restricted to m_0..m_k is y_{m_0}, so the labels have the right type; dropping the first flag entry composes the label correctly, using the 2-simplex on a, m_0, m_1; and max commutes with direct image. Step 3: in the universal case the map is J -> min J, and the cube maps onto M(i,v). For C=[2], i=2, the subsets {0,2} and {0,1,2} are identified, which confirms the item's quotient wording and the report's source-error note on HTT 3.2.5.10(3). Step 4 checks: the counit is natural, so both pushouts have the same attaching map; I verified the coend inverse (h,x,g) -> (x,h u(g)) both ways, and that the two adjoints agree. Step 5: colimit preservation and density give the specified extension. Step 6: every H_C(X) is projectively cofibrant, because L_phi preserves monomorphism cofibrations. Step 7: the boundary square is a pushout, since the surjective theta are in bijection with interior simplex times Hom_C(x_n,-); valuewise opposite preserves trivial fibrations and hence projective cofibrations. Step 8: relabel and use target change to get L^lin; then V(Delta^{r-i..r}) is V(Delta^i), which is Q^i, a simplex by the pinched-cube node; the target is Delta^i, so the map is a weak equivalence of contractibles. Step 9: sigma_! is left Quillen, and both ends are cofibrant by steps 6-7. Steps 10-11: clauses (a), (b), (c) of the cofibrant-colimit node with the skeletal induction. proof_deps equals the union of the step uses. There is no cycle (the 433-node closure does not reach the item). Every cited statement is in unit sk-prop-sf-biduality-general; the only exception is the definition def-cbc-enhanced-diagrams-cones. No tool_uses are needed and there are no new nodes. The marked lem-cbc-relative-nerve-cone-left-comparison is a different statement, not a duplicate. No SGA is cited. The target, coefficient categories and base-change morphism are untouched. HTT is not under literature/; WANTED is recorded and proof_origin is agent. No fixes."
  }
 }
