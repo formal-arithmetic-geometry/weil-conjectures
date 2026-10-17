@@ -362,5 +362,30 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-38734359b (reviewer sub-agent of L); spot-checked: Read all nine steps, every cited statement, archived source locations, and the unit/chapter route. Checked hypotheses, canonical coefficient maps, coherent tower realization, edge cases, duplicates, and acyclicity. No repairs needed. review.md records the checks and distinguishes this lemma from the condensed-coefficient target comparisons."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCompactSupportPrescribedReductions",
+  "declaration": "WeilConjectures.integralCompactSupport_prescribedReductions",
+  "declarations": [
+   "WeilConjectures.coefCompactSupportHasProduct",
+   "WeilConjectures.coefCompactSupportFiniteTransition",
+   "WeilConjectures.coefIntegralCompactSupportComparison",
+   "WeilConjectures.integralCompactSupport_prescribedReductions"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCompactSupportPrescribedReductions.lean",
+  "statement": "theorem integralCompactSupport_prescribedReductions (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ) (_hab : a ≤ b) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (_hK : sfIntegralConstructible l E X K) (_hTor : ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) a b) (M : DerivedCategory (scalarReductionSource.{u, u} l E Y)) (p : M ⟶ ∏ᶜ fun n : ℕ ↦ sfCompactSupportTerm l E c K n) (δ : (∏ᶜ fun n : ℕ ↦ sfCompactSupportTerm l E c K n) ⟶ M⟦(1 : ℤ)⟧) (_hc : IsDerivedLimitTriangle (sfCompactSupportTransition l E c K) M p δ) : sfIntegralConstructible l E Y M ∧ (∀ n : ℕ, IsIso (coefIntegralCompactSupportComparison l E c K M p n)) ∧ (∀ n : ℕ, HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E Y n).obj M) a (b + 2 * (d : ℤ))) ∧ (∀ n : ℕ, coefIntegralCompactSupportComparison l E c K M p (n + 1) ≫ coefCompactSupportFiniteTransition l E c K n = sfCompactSupportReductionTransition l E Y M n ≫ (sfCompactSupportFiniteRestriction l E Y n).mapDerivedCategory.map (coefIntegralCompactSupportComparison l E c K M p n))",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the exact fixed-compactification reduction tower from sfIntegralCompactSupportValue. The specified distinguished Roos triangle retains its projection so the reduction maps are the normalized tensor/restriction adjuncts; the theorem applies to every realization of that defining limit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8beb177dc",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Read the node, all 9 statement deps and their recorded Lean, the item module, the report and delivery-errors §H, plus the side-clone declarations used (sfCompactSupportTerm/Transition/ReductionTransition, sfIntegralCompactSupportValue, IsDerivedLimitTriangle with 1-shift, HasProEtaleTorAmplitude, sfDerivedReductionUnit, FiniteFieldDatum). Every hypothesis matches the node: D with l≠D.p, E finite over Q_l, completed-coefficient pro-etale categories, finite-type X/Y over D.k, separated finite-type k-morphism f, compactification c fixed as in the def, topologicalKrullDim X ≤ d, a≤b, sfIntegralConstructible K, a common HasProEtaleTorAmplitude [a,b] on reductions. Rf_!K is any Roos realization (M,p,δ) of the def's exact tower. Conclusions: integral constructibility, IsIso of the canonical adjunct comparison of p≫π_n, Tor [a,b+2d] on every reduction, and successive-reduction compatibility (checked by hand from p≫(1-shift)=0 and the restriction identifications). Helpers are real data with source/blueprint docstrings; sorry only in the theorem, whose docstring has all 9 steps. Only the lean field changed; statement verbatim; no lines over 100. Edge cases: empty schemes, d=0, a=b, K=0, all exponents ≥1, universes u-consistent. nt_compile.py --json: rc 0, item 3.8 s, no errors. Non-blocking: two proof-only imports omitted for a reported upstream name clash; the Q131 second reading is a disclosed self-check."
  }
 }
