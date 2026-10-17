@@ -183,5 +183,24 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-ad2ad70aa (reviewer sub-agent of L); spot-checked: I read the item in full and every cited statement: adic datum, completed pullback, intrinsic completion, def-weil-triangulated-category, lem-pur-left-derived-from-kflat-class, lem-weil-pbc-diagram-kflat-replacements, prop-weil-pbc-rlim-functoriality, plus the main-20261015 blueprint_updates. I also read the Stacks sources 06XN, 05SE, 014V, 0941 and 099N(2),(5) at the cited places. The statement is unchanged and not weakened. It uses the completed coefficient sheaves A_W on both sides with the structure map c_u, and does not identify them with constant coefficients. Step 1: the adic-datum definition supplies both resolving-class hypotheses (K-flat resolutions exist; quasi-isomorphisms between K-flat complexes go to tower quasi-isomorphisms), so the derived reduction R is exact. Step 2: the diagram lemma's two clauses apply with small J=N_{>=1}^op, small pro-etale sites, commutative A_T and A_{T'}, and the ring map c_u. Its objectwise quasi-isomorphisms are quasi-isomorphisms of towers because tower cohomology is levelwise. Additivity gives exactness on the homotopy category, so V=Lu*_Tow is exact, and V is literally the functor of the definition. Step 3: prop-weil-pbc-rlim-functoriality gives Rlim triangulated with no boundedness hypothesis, and P_u=Rlim.V.R by definition. Step 4: the domain is stable under shifts and the composite shift comparison is written out explicitly; this is honestly elementary. proof_deps equals the union of the step uses, and there is no cycle. Small cases (I=A, I=0, split triangles, A=Z_l with I=(l)) are consistent. I accept the tool_uses for the three off-unit generic tools lem-pur-left-derived-from-kflat-class, lem-weil-pbc-diagram-kflat-replacements and prop-weil-pbc-rlim-functoriality; the three definitions listed there are notions and need none. The delivery creates no new nodes. rg over dag/nodes found no duplicate: lem-sbc-completed-operations-linear-natural-exchange is O_E-only and asserts linearity and adjunction, not triangle preservation. The parent thm-cbc-finite-extension uses exactly this conclusion. No SGA source is used. No changes."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTriangles",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTriangles.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedPullback_preserves_shifts_distinguished",
+  "statement": "theorem completedPullback_preserves_shifts_distinguished (g : X ⟶ Y) (d : AdicCoefficientDatum A) : ∃ h : (pbcActualCompletedPull g d).CommShift ℤ, (fun [shift : (pbcActualCompletedPull g d).CommShift ℤ] ↦ ∀ (T : Triangle (PbcCompletedDerived Y d)), T ∈ distTriang _ → PbcIsIntrinsicallyComplete Y d T.obj₁ → PbcIsIntrinsicallyComplete Y d T.obj₂ → PbcIsIntrinsicallyComplete Y d T.obj₃ → (pbcActualCompletedPull g d).mapTriangle.obj T ∈ distTriang _) (shift := h)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "fixed_by": "NT-stage2-Codex-d2d4bed24"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d2d4bed24",
+  "group": "Q12",
+  "result": "fix",
+  "note": "Reviewed immutable statements, dependencies, sources, universes and edge cases. Complete fixes replace the placeholder second reading and expand proof documentation/imports; theorem signature unchanged. Original and corrected modules compile cleanly through scompile.py. Findings and evidence are in review.md."
  }
 }

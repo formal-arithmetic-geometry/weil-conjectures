@@ -34,7 +34,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-coef-infinity-fibrations",
-  "def-coef-monoidal-infinity-category"
+  "def-coef-monoidal-infinity-category",
+  "def-coef-infinity-relative-cone"
  ],
  "proof": [
   {
@@ -286,5 +287,47 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-0583c07cb (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, all 3 new nodes and every cited statement in full. The item statement is unchanged and is the Gepner–Haugseng §3.4 (Def 3.4.1/Prop 3.4.5) trivial-operad classification. GH is WANTED and proof_origin=agent. Every dependency is in unit sk-prop-sf-biduality-general, apart from the def-cbc notion (tool_use accepted). No SGA is cited. Steps 1-2 and 10 are unchanged: (psi rho)^op(j)=a+psi^op(j), and for a noninert phi some rho_i phi is noninert, so the incidence limit is empty. Steps 3-9 check out. Step 3: the coslice node's hypotheses come from steps 1-2. Step 4: tuple-cone existence gives a cone with exact boundary h(c_i) and base rho_i, and initial-components extends it to J_x. Step 5: p is an isofibration because Delta^op has only identity isomorphisms, and the right dual of relative-kan-existence applies. Steps 6-7: the particular-cone clause and both directions of the tuple criterion. Step 9: the right-kan-restriction hypotheses hold and Fun_{sj}(A,V^otimes)=Fun(A,V). Coslice node is true: the only inert endomorphism of [1] is the identity, so the [1]-fiber is full; simplices of J_x lie over one rho_i; for n=0 J_x is empty. Tuple-cone node is true: the forward direction is the monoidal axiom fiberwise over discrete base sets via the constant test, and the converse is uniqueness of relative limits; n=0 (every apex over [0] works) and n=1 checked. Neither of these two duplicates an existing node (rg search; typec-incidence-cone and symmetric-family-inert-cone-initiality are different). Fault (C5/D): lem-coef-inert-color-projection-detection duplicates the existing base node lem-coef-operadic-inert-factor-equivalence (Q114, same unit, unsplit, depends only on definitions) clause for clause, including choice independence and the r=0 case. FIX: dropped it, and step 8 plus proof_deps now cite the existing node; the corrected item is in fixes/dag/nodes/sec-six-functors/. One repairable fault. Maintainer note: lem-coef-inert-operadic-algebra-classification still duplicates the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InertOperadColorReconstruction",
+  "declaration": "SSet.Enhanced.InertOperad.inert_operad_color_reconstruction",
+  "declarations": [
+   "SSet.Enhanced.InertOperad.Incidence",
+   "SSet.Enhanced.InertOperad.incidenceTarget",
+   "SSet.Enhanced.InertOperad.incidenceConeTarget",
+   "SSet.Enhanced.InertOperad.incidence",
+   "SSet.Enhanced.InertOperad.incidenceCone",
+   "SSet.Enhanced.InertOperad.incidenceInclusion",
+   "SSet.Enhanced.InertOperad.incidenceBase",
+   "SSet.Enhanced.InertOperad.incidenceConeBase",
+   "SSet.Enhanced.InertOperad.vertexFunctor",
+   "SSet.Enhanced.InertOperad.diagrams",
+   "SSet.Enhanced.InertOperad.diagramInclusion",
+   "SSet.Enhanced.InertOperad.IsGeneralizedOperad",
+   "SSet.Enhanced.InertOperad.inertBase",
+   "SSet.Enhanced.InertOperad.trivial",
+   "SSet.Enhanced.InertOperad.tau",
+   "SSet.Enhanced.InertOperad.trivialProjection",
+   "SSet.Enhanced.InertOperad.algebras",
+   "SSet.Enhanced.InertOperad.algebraInclusion",
+   "SSet.Enhanced.InertOperad.algebraFunctor",
+   "SSet.Enhanced.InertOperad.HasInverseTuples",
+   "SSet.Enhanced.InertOperad.inert_operad_color_reconstruction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InertOperadColorReconstruction.lean",
+  "statement": "theorem inert_operad_color_reconstruction {M E : SSet.{u}} [Quasicategory E] (p : M ⟶ monoidalSimplexBase.{u}) (hp : IsGeneralizedOperad p) (hzero : KanComplex (fiber p (monoidalBaseVertex 0))) (q : E ⟶ monoidalSimplexBase.{u}) (hq : IsMonoidalInfinityCategory q) : IsGeneralizedOperad (trivialProjection p) ∧ (∀ e : Δ[1] ⟶ trivial p, IsMonoidalInertEdge (trivialProjection p) e → IsMonoidalInertEdge p (e ≫ tau p)) ∧ (∃ j : monoidalUnderlying p ⟶ trivial p, j ≫ tau p = monoidalFiberInclusion p 1 ∧ (∃ k : fiber (trivialProjection p) (monoidalBaseVertex 0) ⟶ fiber p (monoidalBaseVertex 0), IsIso k ∧ k ≫ monoidalFiberInclusion p 0 = monoidalFiberInclusion (trivialProjection p) 0 ≫ tau p) ∧ ∃ (R : algebras (trivialProjection p) q ⟶ (ihom (monoidalUnderlying p)).obj (monoidalUnderlying q)) (S : (ihom (monoidalUnderlying p)).obj (monoidalUnderlying q) ⟶ algebras (trivialProjection p) q), R ≫ (ihom (monoidalUnderlying p)).map (monoidalFiberInclusion q 1) = algebraInclusion (trivialProjection p) q ≫ (MonoidalClosed.pre j).app E ∧ AreNaturallyEquivalent (R ≫ S) (𝟙 _) ∧ AreNaturallyEquivalent (S ≫ R) (𝟙 _) ∧ HasInverseTuples p q S)",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Includes the generalized-operad, incidence-section, inert pullback and algebra notions explicitly introduced by the item. The Segal comparison is normalized boundary restriction; the relative-limit axiom is the existing incoming mapping-space homotopy-pullback test on the nerve cone. The canonical fiber identification expresses tau_[0] as the identity on unchanged simplices. The equivalence is normalized as actual color restriction and has a coherent inverse with the stated tuple projections. Added the landed relative-cone definition for its existing homotopy-pullback comparison. No new node, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-06ec0ef51",
+  "group": "Q94",
+  "result": "fix",
+  "note": "Mathematics and declarations pass; per-file compilation reproduced cleanly. Wrote review.md and a complete replacement report under fixes/ to replace the placeholder second-reading section. Lean files, node, and branch head unchanged."
  }
 }
