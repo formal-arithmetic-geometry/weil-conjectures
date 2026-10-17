@@ -91,7 +91,7 @@ theorem higherDirectImage_coefficient_comparison
       (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙
         RingedSpace.openModuleSections Y.toRingedSpace V,
       ∀ (N : X.Modules) (I : InjectiveResolution
-        (show SheafOfModules (moduleRings X.toRingedSpace) from N)) (V : Y.Opens),
+        (show SheafOfModules.{u} (moduleRings X.toRingedSpace) from N)) (V : Y.Opens),
         let K := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
           (ComplexShape.up ℕ)).obj I.cocomplex
         ∃ e :
