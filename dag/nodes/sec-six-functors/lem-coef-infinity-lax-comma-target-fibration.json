@@ -30,21 +30,16 @@
    }
   },
   {
-   "text": "Fix $x=(a,u:f(a)\\to b)$ and $y=(a',v:f(a')\\to b')$, and retain $E,e$ from Step 1. Write $U_C(c,d)$ for the arrow mapping space of the pinch-comparison statement, and $M_C(c,d)$ for the right-pinched mapping space. Internal functor simplicial sets and fibers commute with degreewise pullbacks, so there is a literal identification\n$$U_T(x,y)=(U_A(a,a')\\times U_B(b,b'))\\times_{U_B(f(a),f(a'))\\times U_B(b,b')}U_E(u,v).$$\nThe last map is induced by the inner fibration $e:E\\to B\\times B$, hence is a Kan fibration between Kan complexes by the last assertion of the exponentiation statement. The Kan pullback/path comparison therefore changes this strict pullback into a homotopy pullback. The natural right-pinch maps from $M_C$ to $U_C$ commute strictly with the maps of this cospan. Homotopy-pullback invariance and the pinch equivalences give\n$$M_T(x,y)\\simeq(H\\times K)\\times^h_{S\\times K}M_E(u,v),$$\nwhere $H=M_A(a,a')$, $S=M_B(f(a),f(a'))$, $K=M_B(b,b')$, and $H\\to S$ is induced by $f$. Put $Q=M_E(u,v)$ and $Z=M_B(f(a),b')$. The arrow-morphism-square statement says that the square with top row $Q\\to K$ and bottom row $S\\to Z$, whose vertical maps are source evaluation and $k\\mapsto ku$, is a homotopy pullback; its specified commutation path compares $vs$ and $ku$. Set $P=(H\\times K)\\times^h_{S\\times K}Q$. Here is the pasting calculation explicitly. The square with top row $H\\times K\\to S\\times K$ and bottom row $H\\to S$, and with vertical maps the first projections, is a strict pullback along the Kan fibration $S\\times K\\to S$: its horn lifts fill only the $K$-coordinate. The pullback/path comparison makes this square a homotopy pullback. Above it place the defining homotopy-pullback square for $P\\to Q$ over $H\\times K\\to S\\times K$. Vertical pasting gives a homotopy-pullback square with top row $P\\to Q$ and bottom row $H\\to S$. Paste this horizontally with the arrow-morphism square $Q\\to K$ over $S\\to Z$. The outer square $P\\to K$ over $H\\to Z$ is a homotopy pullback, so\n$$P\\simeq H\\times_Z^h K.$$\nEach use of pasting carries the concatenated specified commutation homotopy. Its two maps to $Z$ are therefore $h\\mapsto vf(h)$ and $k\\mapsto ku$, and its comparison records $(h,k,\\gamma)$ with $\\gamma:vf(h)\\simeq ku$, including all higher simplices. Combining this with the preceding pinch equivalences proves the displayed mapping formula and its projection to $k$.\n\nFor completeness the composition description is as follows. A square from $x_0=(a_0,u_0)$ to $x$ has components $(h_0,k_0,\\gamma_0)$ with $\\gamma_0:uf(h_0)\\simeq k_0u_0$. Precomposing $(h,k,\\gamma)$ with it gives components $(hh_0,kk_0)$; its path first applies $\\gamma f(h_0)$ and then $k\\gamma_0$, inserting the composition homotopies to run from $vf(hh_0)$ to $(kk_0)u_0$. A square from $y$ to $y_1=(a_1,v_1)$ has components $(h_1,k_1,\\gamma_1)$ with $\\gamma_1:v_1f(h_1)\\simeq k_1v$. Postcomposition gives $(h_1h,k_1k)$; its path applies $\\gamma_1f(h)$ and then $k_1\\gamma$, from $v_1f(h_1h)$ to $(k_1k)u$, with the composition homotopies inserted. These are the two gluings of coherent squares. Naturality in both arrows in the arrow-morphism-square statement, and naturality of the pinch maps and all projections used above, identify these gluings with actual precomposition and postcomposition, retaining their higher simplices. The mapping-composition statement supplies their composition and unit homotopies.",
+   "text": "Fix $x=(a,u:f(a)\\to b)$ and $y=(a',v:f(a')\\to b')$ in $T$. Apply [lem-coef-infinity-comma-mapping-pullback] with $\\mathcal C=A$, $F=f$, $\\mathcal D=\\mathcal B=B$ and $G=\\operatorname{id}_B$; it allows arbitrary functors. Its pullback is $E'=A\\times_{f,B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{\\operatorname{ev}_1,B,\\operatorname{id}}B$. The degreewise map $T\\to E'$, $(\\alpha,\\beta)\\mapsto(\\alpha,\\operatorname{ev}_1\\beta,\\beta)$, is an isomorphism of simplicial sets, since the last coordinate of a simplex of $E'$ is forced to be $\\operatorname{ev}_1\\beta$. It carries $q$ to the target projection $p$, and $x,y$ to $(a,b,u)$, $(a',b',v)$. Transport along this isomorphism gives a natural equivalence $\\operatorname{Map}_T(x,y)\\simeq\\operatorname{Map}_A(a,a')\\times^h_{\\operatorname{Map}_B(f(a),b')}\\operatorname{Map}_B(b,b')$, with legs $h\\mapsto vf(h)$ and $k\\mapsto\\operatorname{id}_B(k)u=ku$, retaining the path and all higher simplices. Under it $q$ is the actual projection to $k$, and composition is pasting of coherent squares. Explicitly, for an edge $(h_0,k_0,\\gamma_0):x_0\\to x$, precomposition sends $(h,k,\\gamma)$ to $(hh_0,kk_0)$ with path $\\gamma f(h_0)$ followed by $k\\gamma_0$. For $(h_1,k_1,\\gamma_1):y\\to y_1$, postcomposition gives $(h_1h,k_1k)$ with path $\\gamma_1f(h)$ followed by $k_1\\gamma$. The composition and unit homotopies are those of [lem-coef-infinity-mapping-composition]. This proves the displayed mapping formula and the composition assertions.",
    "uses": [
+    "lem-coef-infinity-comma-mapping-pullback",
     "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-infinity-isofibration-exponentiation",
-    "lem-coef-infinity-pinch-comparison",
-    "lem-coef-kan-pullback-path-comparison",
-    "lem-coef-kan-homotopy-pullback-invariance",
-    "lem-coef-infinity-arrow-morphism-square",
-    "lem-coef-infinity-homotopy-pullback-pasting",
     "lem-coef-infinity-mapping-composition"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/06BZ",
-    "place": "Theorem 8.3.7.1 specialized to the arrow category, then endpoint base change; path comparison 0329, invariance 032B, and pasting 0110 are cited as DAG statements."
+    "place": "Hom-functor pullback square for oriented fiber products, specialized to G = id_B through the existing general comma mapping-space node."
    }
   },
   {
@@ -59,12 +54,13 @@
    }
   },
   {
-   "text": "Fix $z=(a',v:f(a')\\to c)$. Put $H=\\operatorname{Map}_A(a,a')$, $Z=\\operatorname{Map}_B(f(a),c)$, $L'=\\operatorname{Map}_B(b',c)$, and $L=\\operatorname{Map}_B(b,c)$. Step 2 identifies $\\operatorname{Map}_T(y,z)$ with $H\\times_Z^h L'$ using precomposition by $w$, and $\\operatorname{Map}_T(x,z)$ with $H\\times_Z^h L$ using precomposition by $u$. In both cases $H\\to Z$ is $h\\mapsto vf(h)$. The triangle $\\sigma$ of Step 3 gives the specified commutation homotopy between precomposition by $w$ and the composite of precomposition by $k:L'\\to L$ with precomposition by $u:L\\to Z$. The two defining homotopy-pullback squares to $H\\to Z$ therefore form an adjacent diagram\n$(H\\times_Z^h L'\\longrightarrow H\\times_Z^h L\\longrightarrow H)$ over $(L'\\xrightarrow{k^*}L\\longrightarrow Z)$, with vertical maps the second projections and $H\\to Z$.\nThe right square and the outer rectangle are homotopy pullbacks by their path-space definitions. Homotopy-pullback pasting (with the homotopy supplied by $\\sigma$) proves that the left square is a homotopy pullback. On triples its top map sends $(h,\\ell,\\gamma)$ to $(h,\\ell k,\\gamma')$, where $\\gamma'$ pastes $\\gamma$ with the triangle comparing $\\ell w$ and $(\\ell k)u$. This is precomposition with the actual edge $s$ by the coherent-square compatibility of Step 2; its $A$-component is precomposition with the degenerate identity and hence the identity up to its specified unit homotopy. Thus the left square is exactly the mapping-space square for $s$ over $k$, including its specified commutation homotopy, not merely a square of homotopy classes. Applying the cocartesian mapping criterion to the inner fibration $q$ of Step 1 proves that $s$ is $q$-cocartesian.",
+   "text": "Fix $z=(a',v:f(a')\\to c)$. Put $H=\\operatorname{Map}_A(a,a')$, $Z=\\operatorname{Map}_B(f(a),c)$, $L'=\\operatorname{Map}_B(b',c)$, and $L=\\operatorname{Map}_B(b,c)$. Step 2 identifies $\\operatorname{Map}_T(y,z)$ with $H\\times_Z^h L'$ using precomposition by $w$, and $\\operatorname{Map}_T(x,z)$ with $H\\times_Z^h L$ using precomposition by $u$. In both cases $H\\to Z$ is $h\\mapsto vf(h)$. The triangle $\\sigma$ of Step 3 gives the specified commutation homotopy between precomposition by $w$ and the composite of precomposition by $k:L'\\to L$ with precomposition by $u:L\\to Z$. The two defining homotopy-pullback squares to $H\\to Z$ therefore form an adjacent diagram\n$(H\\times_Z^h L'\\longrightarrow H\\times_Z^h L\\longrightarrow H)$ over $(L'\\xrightarrow{k^*}L\\longrightarrow Z)$, with vertical maps the second projections and $H\\to Z$.\nThe right square and the outer rectangle are homotopy pullbacks by their path-space definitions. Homotopy-pullback pasting (with the homotopy supplied by $\\sigma$) proves that the left square is a homotopy pullback. On triples its top map sends $(h,\\ell,\\gamma)$ to $(h,\\ell k,\\gamma')$, where $\\gamma'$ pastes $\\gamma$ with the triangle comparing $\\ell w$ and $(\\ell k)u$. This is precomposition with the actual edge $s$ by the pasting description of composition in Step 2; its $A$-component is precomposition with the degenerate identity and hence the identity up to its specified unit homotopy. Thus the left square is exactly the mapping-space square for $s$ over $k$, including its specified commutation homotopy, not merely a square of homotopy classes. Applying the cocartesian mapping criterion to the inner fibration $q$ of Step 1 proves that $s$ is $q$-cocartesian.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-infinity-homotopy-pullback-pasting",
     "lem-coef-infinity-mapping-composition",
-    "lem-coef-infinity-cocartesian-mapping-criterion"
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-comma-mapping-pullback"
    ],
    "elementary": false,
    "source": {
@@ -87,15 +83,12 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-infinity-arrow-morphism-square",
   "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-comma-mapping-pullback",
   "lem-coef-infinity-homotopy-pullback-pasting",
   "lem-coef-infinity-isofibration-exponentiation",
   "lem-coef-infinity-isofibration-pullback-limit",
-  "lem-coef-infinity-mapping-composition",
-  "lem-coef-infinity-pinch-comparison",
-  "lem-coef-kan-homotopy-pullback-invariance",
-  "lem-coef-kan-pullback-path-comparison"
+  "lem-coef-infinity-mapping-composition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -203,7 +196,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-active-operad-envelope-cocartesian",
@@ -235,16 +228,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-lax-comma-target-fibration",
   "worker": "stage1",
-  "summary": "Retained the earlier five-step split, searched-source records, citations and report; rechecked against current DAG statements and repaired the strict-to-homotopy mapping-space passage using unpinched mapping spaces, their Kan fibration, natural pinch equivalences, path comparison, invariance and pullback pasting. Expanded the actual two-triangle lift and used specified-homotopy pasting for its cocartesian test. No new nodes. Composition now cites its defining statement. Corrected source and blueprint-place descriptions without changing the mathematical assertion. Second reading expands Step 2 into two explicit pullback-pasting diagrams and both whiskered square-path compositions, and corrects the prime in Step 5.",
+  "summary": "Repair of the human return: the former 3409-character Step 2 hid the mapping-space and composition comparison. That comparison is the G=id special case of the existing node lem-coef-infinity-comma-mapping-pullback, now cited in Step 2 through the explicit isomorphism of T with its comma pullback; the explicit pre/postcomposition formulas follow from its pasting clause. Step 1 (quasicategory, inner q), Step 3 (two-triangle lift), Step 4 (homotopy-pullback cancellation and cocartesian criterion) and Step 5 (conclusion) keep the original route. Maintainer review (Q99, 2026-10-17) replaced the delivered six-step expansion and its two new nodes (pinch-transfer, coherent-composition), which were unneeded beside this existing generalization; the coherent-composition node was a special case of it. Statement, stmt_deps, Lean record and stage-2 review are unchanged.",
   "blueprint": "Infrastructure for the second proof paragraph of prop-coef-integral-exceptional-adjoint (the finite-coefficient mapping-complex adjunction before the derived inverse limit), through the recorded active-operad-envelope ancestry: the unrestricted arrow category, its target evaluation, and its coherent-square mapping calculation. These are auxiliary facts of the descendant split, not assertions written literally in that blueprint paragraph."
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NR-12e030487",
-  "group": "NR",
+  "reviewer": "NT-cc-Q99-254f9ea26",
+  "group": "Q99",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-12e030487 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, 5 steps, proof_deps, blueprint record and split_report, plus the full statements of all 11 cited nodes, the citer lem-coef-active-operad-envelope-cocartesian and the unit sk-prop-sf-biduality-general. HTT and Kerodon are not in literature/; WANTED is declared and proof_origin is agent. I checked the item against HTT Cor. 2.4.7.12 (dual) and the Kerodon §4.6.4 oriented-fiber-product Hom formula: endpoint direction and the legs h↦vf(h), k↦ku agree. The isofibration hypothesis on f is inherited and stronger than the source needs; nothing was weakened. Small cases checked: B=Δ⁰ (T=A); A=Δ⁰ (coslice); A=Δ⁰, B=N[1]; f=id (reduces to arrow-morphism-square, not circular); A empty (vacuous). Step 1: e is an isofibration by the exponentiation 'in particular' clause, pullback-limit applies with g=(f,id), q=ev_1 is a composite of inner fibrations. Step 2: the U_T strict pullback identity is correct; the leg is a Kan fibration by the last clause of exponentiation; pinch naturality gives strictly commuting cospans, so invariance applies as stated; vertical and horizontal pasting orientations checked and P≃H×^h_Z K with the right legs. Step 3: both triangles checked explicitly (σ and s_0(w)); s lies in the strict pullback with q(s)=k; elementary. Step 4: the criterion's square matches p(x)=b, p(y)=b', p(z)=c; the pasting uses the specified-homotopy clause. One minor gloss, accepted: the outer rectangle being a homotopy pullback after replacing ℓ↦ℓw by the homotopic ℓ↦(ℓk)u (and transferring along the Step 2 equivalences) is a one-line path-concatenation fact. Step 5 follows from the definition and is elementary. Route: all statements cited are in the item's own unit; the only other-unit citation, def-cbc-enhanced-diagrams-cones, is a definition. No tool_uses, no SGA. proof_deps equals the union of uses; the blueprint via chain matches; same_as=[]. Duplicate search with rg over dag/nodes (relative-slice-sections, arrow-target-right-fibration, slice-arrow-equivalence, cocartesian-arrow-projection): different constructions, no duplicate. No new nodes, no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-254f9ea26 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, and the unit and chapter records. HTT 2.4.7.12 (dual) is not under literature/, so I checked the statement by direct argument. Small cases: B=pt, A=pt, f=id, A empty, degenerate k, discrete nerves. The statement is true and unchanged, and its hypotheses on f are stronger than needed, so nothing is weakened. Delivered Steps 1 and 8-10 are correct: the exponentiation and pullback-limit results give T and an inner q, both triangles of the two-triangle lift (sigma and s0(w)) are exact, and the pasting orientation, sigma homotopy and criterion bottom row match. Steps 2-7 are also correct, including the vertical and horizontal pasting orientations and the typing of the whiskered paths. Both new nodes are true, statement-only and self-contained. But the delivery missed the existing node lem-coef-infinity-comma-mapping-pullback (same unit, unsplit, Q38). For arbitrary F and G it gives the comma quasicategory, the natural mapping formula with legs a'F(h) and G(k)a, the actual endpoint projections, and 'composition agrees with pasting coherent squares'. Taking G=id_B, with T isomorphic to its comma pullback by (alpha,beta) -> (alpha,ev1 beta,beta), gives the item's whole mapping and composition clauses. So coherent-composition is a special case of an existing node (C5 / brief section 2), and pinch-transfer becomes unneeded. Fix: delivered Steps 2-7 become one cited Step 2 (1500 characters) with the explicit pre- and postcomposition formulas. Old Steps 8-10 become Steps 3-5 with renumbered references, and Step 4 cites comma-mapping-pullback for precomposition by s. proof_deps equals the union of uses, split_report.summary is updated, and all other fields are byte-identical. There is no cycle, the only other-unit citation is a definition, no tool_uses are needed, and no SGA source is used. Both new nodes are dropped.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
