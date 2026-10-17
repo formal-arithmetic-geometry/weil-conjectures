@@ -1,0 +1,83 @@
+{
+ "id": "lem-trf-space-section-algebra-etale-base-change",
+ "kind": "statement",
+ "title": "The section algebra of a line module on a space restricts correctly to etale bases",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], let $f:X\\to T$ be a quasi-compact separated morphism over $S$ in the terminology of [lem-trf-space-qc-separated-etale-local], and let $L$ be a line module on $X$. On small etale sites, write $L^{\\otimes d}$ for the tensor powers ($L^{\\otimes0}=\\mathcal O_X$), write $f_*$ for direct image, and write $f^*$ for its left adjoint on modules, the tensor pullback along the morphism of ringed etale topoi. There is a quasi-coherent graded Zariski $\\mathcal O_T$-algebra $\\mathcal A=\\bigoplus_{d\\geq0}f_*L^{\\otimes d}$ [def-weil-pbc-quasi-coherent-algebra] [def-weil-pbc-graded-sheaf-structures]: this equality is interpreted through the equivalence between quasi-coherent Zariski and small etale modules on $T$. For every etale scheme map $g:T'\\to T$, put $X'=X\\times_TT'$, let $f':X'\\to T'$ be projection, and let $L'$ be the restriction of $L$ to $X'$. There is a canonical graded isomorphism $g^*\\mathcal A\\simeq\\bigoplus_{d\\geq0}f'_* (L')^{\\otimes d}$, where on the left $g^*$ is scheme module pullback [def-pc-module-pullback]. Under this isomorphism, the pullback to $X'$ of the evaluation map $f^*\\mathcal A\\to\\bigoplus_{d\\geq0}L^{\\otimes d}$ is the evaluation map for $(f',L')$. If $X'$ is a scheme, these direct images and evaluation maps agree with the ordinary Zariski ones for its invertible module [def-sc-invertible-module].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M9 (lemma-pushforward) and the preceding discussion of representable pushforward; spaces-properties.tex Tag 03LX (lemma-pushforward-etale-base-change-modules). Apply degreewise; multiplication and evaluation use the canonical restriction comparisons."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of quasi coherent modules along quasi compact separated algebraic space morphisms is quasi coherent and commutes with etale base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graded algebra of direct images of tensor powers of a line bundle on an algebraic space commutes with restriction to an etale base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorPower.galgebra\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \": DirectSum.GAlgebra R fun i => ⨂[R]^i M\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, the direct sum $ \\\\bigoplus_{n \\\\in \\\\mathbb{N}} \\\\bigotimes_R^n M $ forms a graded algebra indexed by natural numbers $ \\\\mathbb{N} $. This stru\"}\n  {\"name\": \"TensorProduct.gradedComm_algebraMap_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Graded.External\", \"type\": \"[DirectSum.GSemiring 𝒜] [DirectSum.GAlgebra R 𝒜] (r : R) (b : ⨁ i, ℬ i) :\\n  gradedComm R 𝒜 ℬ (algebraMap R _ r ⊗ₜ b) = b ⊗ₜ algebraMap R _ r\", \"doc\": \"For a commutative semiring $ R $, the graded commutativity isomorphism between tensor products of direct sums satisfies $ \\\\text{gradedComm}(\\\\text{algebraMap}(r) \\\\otimes b) = (-1)^{0 \\\\cdot |b|} (b \\\\oti\"}\n  {\"name\": \"GradedAlgebra\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {A : Type u_3} →\\n      [DecidableEq ι] →\\n        [AddMonoid ι] →\\n          [inst : CommSemiring R] →\\n            [inst_1 : Semiring A] → [inst_2 : Algebra R A] → (ι → Submodule R A) → Type (max u_1 u_3)\", \"doc\": \"A structure on an algebra $ A $ over a commutative semiring $ R $, indexed by an additive monoid $ \\\\iota $, where each element $ i \\\\in \\\\iota $ corresponds to an $ R $-submodule $ \\\\sigma_i $ of $ A $. \"}\n  {\"name\": \"TensorAlgebra.gradedAlgebra\", \"module\": \"Mathlib.LinearAlgebra.TensorAlgebra.Grading\", \"type\": \": GradedAlgebra ((LinearMap.range (ι R : M →ₗ[R] TensorAlgebra R M) ^ ·) : ℕ → Submodule R _)\", \"doc\": \"For any commutative semiring $ R $ and $ R $-module $ M $, the tensor algebra $ \\\\mathrm{TensorAlgebra}(R, M) $ is equipped with a graded algebra structure indexed by $ \\\\mathbb{N} $. Each graded compon\"}\n  {\"name\": \"GradedTensorProduct.comm\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Graded.Internal\", \"type\": \"{R : Type u_1} →\\n  {ι : Type u_2} →\\n    {A : Type u_3} →\\n      {B : Type u_4} →\\n        [inst : CommSemiring ι] →\\n          [inst_1 : DecidableEq ι] →\\n            [inst_2 : CommRing R] →\\n              [inst_3 : Ring A] →\\n                [inst_4 : Ring B] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"For commutative ring $ R $, additive monoid $ \\\\iota $, and graded $ R $-algebras $ A $ and $ B $ indexed by $ \\\\iota $, this constructs an $ R $-algebra equivalence between the graded tensor product $ \"}\n  {\"name\": \"TensorProduct.gradedComm_tmul_algebraMap\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Graded.External\", \"type\": \"[DirectSum.GSemiring ℬ] [DirectSum.GAlgebra R ℬ] (a : ⨁ i, 𝒜 i) (r : R) :\\n  gradedComm R 𝒜 ℬ (a ⊗ₜ algebraMap R _ r) = algebraMap R _ r ⊗ₜ a\", \"doc\": \"For any element $ a $ in the direct sum $ \\\\bigoplus_i \\\\mathcal{A}(i) $ and scalar $ r \\\\in R $, the graded commutator of $ a \\\\otimes \\\\text{algebraMap}(r) $ equals $ \\\\text{algebraMap}(r) \\\\otimes a $, wh\"}\n  {\"name\": \"TensorPower.galgebra_toFun_def\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"(r : R) : DirectSum.GAlgebra.toFun (A := fun i ↦ ⨂[R]^i M) r = algebraMap₀ r\", \"doc\": \"The canonical embedding of the base semiring $ R $ into the zeroth component of the graded algebra $ \\\\bigoplus_{n \\\\in \\\\mathbb{N}} \\\\bigotimes_R^n M $ coincides with the isomorphism $ \\\\text{algebraMap}_\"}\n  {\"name\": \"Algebra.directSumGAlgebra\", \"module\": \"Mathlib.Algebra.DirectSum.Algebra\", \"type\": \"{R A : Type*} [AddMonoid ι] [CommSemiring R] [Semiring A] [Algebra R A] : DirectSum.GAlgebra R fun _ : ι => A\", \"doc\": \"Given an additive monoid $\\\\iota$, a commutative semiring $R$, and a semiring $A$ equipped with an $R$-algebra structure, the direct sum $\\\\bigoplus_{i \\\\in \\\\iota} A$ is endowed with a graded $R$-algebra\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"pushforward\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|etale.*pushforward|pushforward.*etale",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"108\", \"text\": \"instance : ((AffineEtale.Spec S).sheafPushforwardContinuous A\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"117\", \"text\": \"    ((AffineEtale.Spec S).sheafPushforwardContinuous A\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"141\", \"text\": \"  ((AffineEtale.Spec S).sheafPushforwardContinuous A\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"65\", \"text\": \"  ((ProEt.forget X ⋙ Over.forget _).sheafPushforwardContinuous _ _ proetaleTopology).obj\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-ample-local",
+  "date": "2026-10-18",
+  "group": "Q07"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized descent used by the specialization chain below lem-trf-local-term-locality: The section algebra of a line module on a space restricts correctly to etale bases. Historical imported ancestry is retained; this helper supplies a step in the section-algebra/Proj proof of the ampleness descent input.",
+   "via": [
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -13,9 +13,97 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary scheme $T$ with a map $T\\to Y$. Put $X=F\\times_YT$, $T_i=Y_i\\times_YT$, and $X_i=X\\times_TT_i\\simeq F_i\\times_{Y_i}T_i$. By [lem-trf-space-fibre-products-etale-covers], $X$ is an algebraic space, and the base-changed families cover $T$ and $X$. The $T_i$ are schemes: the maps $Y_i\\to Y$ are representable etale maps. Their projections to $T$ form a jointly surjective etale family, and $X_i$ is a scheme since $F_i,T_i,Y_i$ are schemes. These assertions use the scheme-test definition of etale maps of algebraic spaces in [def-trf-algebraic-space] and associativity of sheaf fibre products. Let $N_i$ be the ordinary pullback of $M_i$ to $X_i$, invertible by [lem-weil-pbc-invertible-pullback-tensor]. By [lem-trf-scheme-relative-ample-base-change], $N_i$ is ample on the inverse image of every affine open of $T_i$. On $X_i\\times_XX_j$, pull back the restriction identifications of $M$ on $F_i\\times_FF_j$. Functoriality of tensor pullback [def-pc-module-pullback] makes these isomorphisms satisfy identity and triple-overlap cocycles. By [lem-trf-algebraic-space-invertible-descent] they descend to a line module $N$ on $X$. If $T\\to Y$ is etale, $N$ is canonically the restriction of $M$: that restriction has the same local identifications, and the full faithfulness in the same descent lemma glues the identity maps and their inverses.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-module-pullback",
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D36 (lemma-relatively-ample-local), reduction to scheme tests; Tag 0893 for the scheme pullback; spaces-descent.tex Tag 04W8 for the auxiliary line module on X."
+   }
+  },
+  {
+   "text": "Write $f_T:X\\to T$ and $f_i:X_i\\to T_i$ for the projections. The forward implication of [lem-trf-scheme-ample-canonical-proj-criterion] makes each $f_i$ quasi-compact and separated, because $N_i$ is $f_i$-ample by Step 1. Now [lem-trf-space-qc-separated-etale-local] applies to the cover $\\{T_i\\to T\\}$ and gives that $f_T$ is quasi-compact and separated. This supplies the compactness and separation hypotheses needed for the section algebra; no representability of $f_T$ has been assumed.",
+   "uses": [
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), paragraph beginning By Divisors on Spaces; spaces-morphisms.tex Tags 03KG,03KM."
+   }
+  },
+  {
+   "text": "By [lem-trf-space-section-algebra-etale-base-change], $\\mathcal A=\\bigoplus_{d\\geq0}(f_T)_*N^{\\otimes d}$ is a quasi-coherent graded algebra on the scheme $T$. Let $\\psi:f_T^*\\mathcal A\\to\\bigoplus_{d\\geq0}N^{\\otimes d}$ be its evaluation homomorphism. The relative Proj existence theorem [lemma-nagata-relative-proj-exists] supplies the scheme $P=\\operatorname{Proj}_T(\\mathcal A)$. Apply [lem-trf-space-line-module-proj-map] to obtain an open $U=U(\\psi)\\subseteq X$ and a map $r:U\\to P$. For each $i$, the section-algebra lemma identifies $\\mathcal A_i=(T_i\\to T)^*\\mathcal A$ with $\\bigoplus_{d\\geq0}(f_i)_*N_i^{\\otimes d}$ and identifies the restricted $\\psi$ with the evaluation map $\\psi_i$. In degree $d$ this is precisely the restriction comparison $(f_T)_*N^{\\otimes d}|_{T_i}\\simeq(f_i)_*N_i^{\\otimes d}$; it sends a section to its restriction, so evaluation sends that section to the same local section of $N_i^{\\otimes d}$. Thus these are the canonical maps to which the scheme ampleness criterion applies.",
+   "uses": [
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lemma-nagata-relative-proj-exists",
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, section-algebra and adjunction-map paragraphs; spaces-properties.tex Tag 03LX; spaces-divisors.tex Tag 0D2Z."
+   }
+  },
+  {
+   "text": "For each $i$, [lem-trf-scheme-ample-canonical-proj-criterion] applies to $(f_i,N_i)$ and its canonical algebra from Step 3: it gives $U(\\psi_i)=X_i$ and an open immersion $r_i:X_i\\to P_i=\\operatorname{Proj}_{T_i}(\\mathcal A_i)$. By [lem-trf-space-line-module-proj-map], $U\\times_TT_i=U(\\psi_i)=X_i$ and $P_i\\simeq P\\times_TT_i$, with $r_i$ equal to the base change of $r$. The complement of $U$ is empty: the maps $X_i\\to X$ cover, and its inverse image in each $X_i$ is empty. Therefore $U=X$. The maps $P\\times_TT_i\\to P$ are a jointly surjective etale scheme family, being base changes of $T_i\\to T$; the scheme covering base-change lemma [lem-weil-pbc-etale-covering-base-change] verifies this. Apply [lem-trf-space-open-immersion-etale-local] to $r:X\\to P$: its base changes are the open immersions $r_i$. Hence $r$ is an open immersion and $X$ is a scheme.",
+   "uses": [
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-space-line-module-proj-map",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-trf-space-open-immersion-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, final paragraphs; spaces-morphisms.tex Tag 03M4, open-immersion case."
+   }
+  },
+  {
+   "text": "Regard $N$ now as an ordinary invertible module on the scheme $X$, using the scheme-site interpretation of [lem-trf-algebraic-space-invertible-descent]. The compatibility clause of [lem-trf-space-section-algebra-etale-base-change] identifies the algebra and evaluation map of Step 3 with the ordinary Zariski section algebra and evaluation map. The canonical-map comparison of [lem-trf-space-line-module-proj-map] identifies $r$ with the ordinary canonical map. Since $f_T$ is quasi-compact and separated, $U=X$, and $r$ is an open immersion, the reverse implication of [lem-trf-scheme-ample-canonical-proj-criterion] gives that $N|_{f_T^{-1}(W)}$ is ample for every affine open $W\\subseteq T$. In particular $X=F\\times_YT$ is a scheme for every scheme test $T\\to Y$, proving representability. For an etale test $T\\to Y$, Step 1 identified $N$ with the restriction of $M$, so this proves precisely the requested ampleness on every $F\\times_YW$. Finally, when $Y$ is a scheme take $T=Y$ with its identity map: it is etale, and gives both that $F$ is a scheme and ampleness over every affine open of $Y$.",
+   "uses": [
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-scheme-ample-canonical-proj-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, last sentence; morphisms.tex Tag 01VJ (5) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-module-pullback",
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-trf-algebraic-space-invertible-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-section-algebra-etale-base-change",
+  "lemma-nagata-relative-proj-exists",
+  "lem-trf-space-line-module-proj-map",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-trf-space-open-immersion-etale-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample), direct section-algebra proof, restricted to etale covers; compare spaces-divisors.tex Tags 0D35,0D36. The arbitrary-test reduction and cocycle descent of its auxiliary line module are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +132,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|relatively.?ample|ample.*descen|descen.*ample",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness of an invertible sheaf descends along faithfully flat quasi compact morphisms",
+   "results": "Module.Flat.of_flat_tensorProduct; AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong; Module.Flat.iff_flat_tensorProduct; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact; RingHom.FaithfullyFlat",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on an algebraic space relatively ample after an etale cover makes the morphism representable by schemes",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.UniversallyOpen; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-polarized-scheme-etale-descent",
@@ -75,5 +198,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-algebraic-space-ample-local",
+  "worker": "stage1",
+  "summary": "Read Stacks 0D3C, 0D35, 0D36. Kept the statement; proved its full arbitrary-scheme representability test by a section-algebra/relative-Proj argument. Seven strictly supporting lemmas are stated and searched, rather than restating affine ampleness descent as a new node. For arbitrary tests a line module is constructed by the existing invertible-descent theorem; for etale tests full faithfulness identifies it with the given restriction. All scheme comparison and base-change compatibilities used are explicit in supporting statements.",
+  "blueprint": "Realizes the polarized-scheme descent input in the existing historical ancestry from lem-trf-local-term-locality, specifically the sentence that the descended ample module forces the quotient to be a scheme; no trace-formula or purity route is changed.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Existence of the relative Proj scheme is a generic construction used for the section-algebra embedding; this unit supplies no alternative construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic scheme covering stability verifies the target cover on which the Proj map is an open immersion."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "The generic scheme pullback theorem ensures the local line modules on arbitrary scheme tests are invertible and their tensor pullbacks compose."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-exists",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-c3f7b6472",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-c3f7b6472 (reviewer sub-agent of L); spot-checked: Read the item, all seven new nodes and every cited node's statement, against Stacks 0D3C/0D35/0D36/0D31/0D2Z (spaces-divisors, spaces-descent), 01VH/01VI/01VJ(1)<=>(5)/0893 (morphisms), 03KG/03KM/03M9/03M4 (spaces-morphisms), 03LX/03E3 (spaces-properties), 02X2/041F. The item statement and stmt_deps are byte-identical to the side DAG, so no target is weakened. The proof follows 0D35/0D3C over an arbitrary test T with the whole etale family. Step 1 builds N by the existing invertible-descent node, so M is never pulled back along a non-etale map, and identifies N with M|_X for etale T by full faithfulness. Step 2: qc+separated by the criterion's forward direction and the space locality node. Step 3: section algebra (03M9+03LX) and the Proj map (0D2Z). Step 4: U=X and r is an open immersion by etale descent (03M4), so X is a scheme. Step 5: ampleness by 01VJ reverse, using qc+separated from step 2. Every hypothesis matches. New statements are true: tested on P^1 with O(1), O and O(-1), and on empty, empty-family and infinite-family cases. None is a duplicate (checked lem-sc-ample-proj-open, lem-pc-quasi-compact-local-on-target, lem-galois-fpqc-descend-open-immersion, pqf-lem-pushforward-qcoh, and the 03M4 tag collisions) or a restated clause. Accepted tool_uses: lemma-nagata-relative-proj-exists, lem-weil-pbc-etale-covering-base-change, lem-weil-pbc-invertible-pullback-tensor. FIX (B3): lem-trf-space-qc-separated-etale-local defined quasi-compact morphisms of spaces via the undefined 'underlying topological space' of an algebraic space. I replaced it with Stacks 03E3: there is a surjective etale map from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme], which is equivalent by 03KG(3). I added that stmt_dep and the source tag. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-space-qc-separated-etale-local.json.; 1 file(s) fixed by the reviewer"
  }
 }
