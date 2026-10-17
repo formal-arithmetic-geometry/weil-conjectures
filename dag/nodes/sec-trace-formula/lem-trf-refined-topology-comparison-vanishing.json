@@ -124,5 +124,24 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-cd25299ef (reviewer sub-agent of L); spot-checked: The new induction node incorrectly calls τ′ finer than τ while requiring every τ′-cover to be a τ-cover; Stacks Section section-compare and Tag 0EZ3 give Cov(τ′)⊆Cov(τ), so τ′ is coarser. Corrected the statement and blueprint.from.via ancestry in fixes/dag/nodes/sec-trace-formula/lem-trf-comparison-induction-step.json. Full source, dependency, route, edge-case, and proof-step checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7510eb237",
+  "group": "NM",
+  "result": "pass",
+  "note": "Independent review is complete and clear: no substantive or landing defects found; immutable files and dependencies were checked, and prescribed compilation completed successfully."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.RefinedTopologyComparisonVanishing",
+  "declaration": "CategoryTheory.RefinedTopologyComparison.refinedTopologyComparisonVanishing",
+  "file": "lean/Sheaf/TraceFormula/RefinedTopologyComparisonVanishing.lean",
+  "statement": "theorem refinedTopologyComparisonVanishing {C : Type u} [SmallCategory C] (τ τ' : Precoverage C) (hτsite : τ.IsSiteForCoverings) (hτ'site : τ'.IsSiteForCoverings) (hτ : τ' ≤ τ) (P : ∀ ⦃X Y : C⦄, (X ⟶ Y) → Prop) (A' : ∀ X : C, Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u} → Prop) (hzero : ∀ X : C, A' X 0) (hiso : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), Nonempty (H ≅ K) → A' X H → A' X K) (hkernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (f : H ⟶ K), A' X H → A' X K → A' X (kernel f)) (hcokernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (f : H ⟶ K), A' X H → A' X K → A' X (cokernel f)) (hextension : ∀ (X : C) (S : ShortComplex (Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u})), S.ShortExact → A' X S.X₁ → A' X S.X₃ → A' X S.X₂) (hbaseChange : ∀ (X Y Y' : C) (f : X ⟶ Y), P f → ∀ g : Y' ⟶ Y, ∃ h : HasPullback f g, letI := h; P (pullback.snd f g)) (hrelocalization : ∀ (X Y : C) (f : X ⟶ Y) (H : Sheaf (τ'.toGrothendieck.over Y) AddCommGrpCat.{u}), A' Y H → A' X ((relocalization τ'.toGrothendieck f).inverse.obj H)) (htauSheaf : ∀ (X : C) (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → Presheaf.IsSheaf (τ.toGrothendieck.over X) H.obj) (hderivedImage : ∀ (X Y : C) (f : X ⟶ Y), P f → ∀ (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → ∀ i : ℕ, A' Y (((relocalization τ'.toGrothendieck f).direct.rightDerived i).obj H)) (hrefinement : ∀ (U : C) (I : Type u) (U₀ : I → C) (a : ∀ i : I, U₀ i ⟶ U), Presieve.ofArrows U₀ a ∈ τ U → ∃ (J : Type u) (V W : J → C) (v : ∀ j : J, V j ⟶ U) (w : ∀ j : J, W j ⟶ V j) (K : J → Type u) (Z : ∀ j : J, K j → C) (z : ∀ (j : J) (k : K j), Z j k ⟶ W j), Presieve.ofArrows V v ∈ τ' U ∧ (∀ j : J, Presieve.singleton (w j) ∈ τ (V j) ∧ P (w j)) ∧ (∀ j : J, Presieve.ofArrows (Z j) (z j) ∈ τ' (W j)) ∧ ∀ (j : J) (k : K j), ∃ (i : I) (b : Z j k ⟶ U₀ i), z j k ≫ w j ≫ v j = b ≫ a i) (n : ℕ) (X : C) (H : Sheaf (τ.toGrothendieck.over X) AddCommGrpCat.{u}) (hH : ∃ H' : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}, A' X H' ∧ Nonempty (H ≅ (sliceComparison τ τ' hτ X).inverse.obj H')) : ∀ i : ℕ, 1 ≤ i → i ≤ n → IsZero (((sliceComparison τ τ' hτ X).direct.rightDerived i).obj H)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the repaired canonical slice-site induction prerequisite, including its unchanged helper full names. All five hypotheses and weak Serre closure are explicit; higher direct images are Functor.rightDerived."
  }
 }

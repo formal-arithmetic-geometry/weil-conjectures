@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-kahler-differentials",
-  "def-trf-formal-power-series-partial-derivative"
+  "def-trf-formal-power-series-partial-derivative",
+  "def-trf-continuous-kahler-differentials"
  ],
  "proof": [
   {
@@ -240,5 +241,24 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-1c1e56258 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and wrote review.md. All seven steps are valid; checked Stacks 00RU, 00RX, 02HQ, 0317, 032C and Curves 0C4B/0C4D, cited statements, characteristic-p and zero-variable cases. Accepted the coefficient-criterion tool use. No new nodes, cycles, hidden long steps, forbidden proof dependencies, or repairs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-524079677",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Reviewed immutable statement, dependencies, sources, edge cases, docstrings, exact signature, and route-pivot compliance. Per-file scompile.py passed without diagnostics. No delivery defects found; review.md records all checks and the interrupted dry-run deviation. Delivery head remains unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.FormalPowerSeriesContinuousFree",
+  "declaration": "RingTheory.formalPowerSeriesContinuousDifferentials_free",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/FormalPowerSeriesContinuousFree.lean",
+  "statement": "theorem formalPowerSeriesContinuousDifferentials_free (F : Type u) [Field F] (n : ℕ) : ∃ b : Module.Basis (Fin n) (MvPowerSeries (Fin n) F) (KaehlerDifferential.Continuous F (MvPowerSeries (Fin n) F) (Ideal.span (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) F)))), (∀ i : Fin n, b i = KaehlerDifferential.continuousD F (MvPowerSeries (Fin n) F) (Ideal.span (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) F))) (MvPowerSeries.X i)) ∧ ∀ h : MvPowerSeries (Fin n) F, KaehlerDifferential.continuousD F (MvPowerSeries (Fin n) F) (Ideal.span (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) F))) h = ∑ i : Fin n, (MvPowerSeries.pderiv F i h) • b i",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed compatible-family module and canonical derivation of def-trf-continuous-kahler-differentials. Existence of the specified Module.Basis expresses both freeness and the equivalent coordinate-map isomorphism. No object is replaced by its proposed free model."
  }
 }

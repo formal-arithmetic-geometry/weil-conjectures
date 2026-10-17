@@ -2,7 +2,7 @@
  "id": "lem-trf-valuation-strict-semistable-local-uniformization",
  "kind": "statement",
  "title": "Strictly semistable local uniformization along centred valuations",
- "statement": "Let $K$ be a separably closed [def-kun-separably-closed] field [def-weil-field] and $V\\subset K$ a valuation ring with fraction field $K$: for every $a\\in K^\\times$, either $a$ or $a^{-1}$ lies in $V$. Assume that the prime ideals of $V$ form a finite chain, and put $T=\\operatorname{Spec}V$ [def-weil-affine-spectrum], with generic point $\\eta=\\operatorname{Spec}K$. Let $X$ be a $T$-curve with smooth generic fibre [def-sbc-smooth-morphisms]. There are finitely many integral strictly semistable $T$-curves $Y_i$ and birational quasi-modifications $Y_i\\to X$ such that every centred valuation of every irreducible component [def-weil-irreducible-components] of $X$ lifts to some $Y_i$. Each generic map $(Y_i)_\\eta\\to X_\\eta$ identifies $(Y_i)_\\eta$ with an open subscheme. A $T$-curve means a flat [def-weil-flat-morphism] finitely presented [def-sbc-locally-finite-presentation] $T$-scheme of pure relative dimension one, without a separatedness or properness assumption. Dimension is topological Krull dimension [def-kun-topological-krull-dimension]. A $T$-curve is strictly semistable if, locally on it and on $T$, it admits an etale morphism [def-weil-etale-morphism] to $\\operatorname{Spec}A[t]$ or $\\operatorname{Spec}(A[u,v]/(uv-a))$, where $\\operatorname{Spec}A$ is an open of $T$ and $a\\in A$; polynomial rings use [def-weil-polynomial-ring]. For an integral scheme $Y$ [def-pc-integral-scheme], its function field is the local ring at its generic point. A birational quasi-modification $Y\\to Z$ is a separated finite-type morphism [def-weil-finite-type-morphism] identifying the function field of $Y$ with the function field of the reduced irreducible component of $Z$ represented by $C$; equivalently, for a generic point $\\eta_Y$ of $Y$ mapping to a generic point $\\xi$ of $C$, the canonical residue-field map $\\kappa_X(\\xi)\\to\\kappa_Y(\\eta_Y)$ induced by $Y\\to Z$ is an isomorphism. A centred valuation of that component means a valuation subring $W\\subset\\kappa_X(\\xi)$, together with a morphism $\\operatorname{Spec}W\\to Z$ whose generic point is $\\xi$. It lifts to $Y$ when this morphism factors through $Y$.",
+ "statement": "Let $K$ be a separably closed [def-kun-separably-closed] field [def-weil-field] and $V\\subset K$ a valuation ring with fraction field $K$: for every $a\\in K^\\times$, either $a$ or $a^{-1}$ lies in $V$. Assume that the prime ideals of $V$ form a finite chain, and put $T=\\operatorname{Spec}V$ [def-weil-affine-spectrum], with generic point $\\eta=\\operatorname{Spec}K$. Let $X$ be a $T$-curve with smooth generic fibre [def-sbc-smooth-morphisms]. There are finitely many integral strictly semistable $T$-curves $Y_i$ [def-trf-strictly-semistable-curve] and birational quasi-modifications $Y_i\\to X$ such that every centred valuation of every irreducible component [def-weil-irreducible-components] of $X$ lifts to some $Y_i$. Each generic map $(Y_i)_\\eta\\to X_\\eta$ induced by $Y_i\\to X$ identifies $(Y_i)_\\eta$ with an open subscheme. A $T$-curve means a flat [def-weil-flat-morphism] finitely presented (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-quasi-separated-morphism]) $T$-scheme of pure relative dimension one, without a separatedness or properness assumption. Dimension is topological Krull dimension [def-kun-topological-krull-dimension]. A $T$-curve is strictly semistable if, locally on it and on $T$, it admits an etale morphism over the given affine base open [def-weil-etale-morphism] to $\\operatorname{Spec}A[t]$ or $\\operatorname{Spec}(A[u,v]/(uv-a))$, where $\\operatorname{Spec}A$ is an open of $T$ and $a\\in A$; polynomial rings use [def-weil-polynomial-ring]. For an integral scheme $Y$ [def-pc-integral-scheme], its function field is the local ring at its generic point. A birational quasi-modification $Y\\to Z$ is a separated finite-type morphism [def-weil-finite-type-morphism] identifying the function field of $Y$ with the function field of the reduced irreducible component of $Z$ represented by $C$; equivalently, for a generic point $\\eta_Y$ of $Y$ mapping to a generic point $\\xi$ of $C$, the canonical residue-field map $\\kappa_X(\\xi)\\to\\kappa_Y(\\eta_Y)$ induced by $Y\\to Z$ is an isomorphism. A centred valuation of that component means a valuation subring $W\\subset\\kappa_X(\\xi)$, together with a morphism $\\operatorname{Spec}W\\to Z$ whose generic point is $\\xi$. It lifts to $Y$ when this morphism factors through $Y$.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected; primary PDF read online, local archival copy WANTED (see report.md).",
@@ -15,6 +15,7 @@
   "def-pc-reduced-scheme",
   "def-sbc-locally-finite-presentation",
   "def-sbc-smooth-morphisms",
+  "def-trf-strictly-semistable-curve",
   "def-weil-affine-spectrum",
   "def-weil-etale-morphism",
   "def-weil-field",
@@ -22,7 +23,8 @@
   "def-weil-flat-morphism",
   "def-weil-irreducible-components",
   "def-weil-polynomial-ring",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism"
  ],
  "proof": [
   {
@@ -360,41 +362,79 @@
   "module": "Sheaf.TraceFormula.ValuationStrictSemistableLocalUniformization",
   "declaration": "AlgebraicGeometry.valuation_strict_semistable_local_uniformization",
   "file": "lean/Sheaf/TraceFormula/ValuationStrictSemistableLocalUniformization.lean",
-  "statement": "theorem valuation_strict_semistable_local_uniformization {V K : Type u} [CommRing V] [IsDomain V] [ValuationRing V] [Field K] [Algebra V K] [IsFractionRing V K] [IsSepClosed K] (hchain : ∀ p q : PrimeSpectrum V, p ≤ q ∨ q ≤ p) (hfinite : Finite (PrimeSpectrum V)) (X : Scheme.{u}) (c : X ⟶ Spec (CommRingCat.of V)) [Flat c] [LocallyOfFinitePresentation c] (hcurve : ∀ s : Spec (CommRingCat.of V), ∀ Z ∈ irreducibleComponents (c.fiber s), topologicalKrullDim Z = (1 : WithBot ℕ∞)) [Smooth (pullback.snd c (Spec.map (CommRingCat.ofHom (algebraMap V K))))] : ∃ (n : ℕ) (Y : Fin n → Scheme.{u}) (y : ∀ i, Y i ⟶ X), (∀ i, IsIntegral (Y i)) ∧ (∀ i, Flat (y i ≫ c) ∧ LocallyOfFinitePresentation (y i ≫ c)) ∧ (∀ i, ∀ s : Spec (CommRingCat.of V), ∀ Z ∈ irreducibleComponents ((y i ≫ c).fiber s), topologicalKrullDim Z = (1 : WithBot ℕ∞)) ∧ (∀ i, IsSeparated (y i) ∧ LocallyOfFiniteType (y i) ∧ QuasiCompact (y i)) ∧ (∀ i, ∃ C : Set X, ∃ ξ : X, C ∈ irreducibleComponents (X : Type u) ∧ IsGenericPoint ξ C ∧ (∀ z : Y i, (y i).base z ∈ C) ∧ ∃ ηᵢ : Y i, IsGenericPoint ηᵢ (Set.univ : Set (Y i)) ∧ (y i).base ηᵢ = ξ ∧ Function.Bijective ((y i).residueFieldMap ηᵢ).hom) ∧ (∀ i, ∀ x : Y i, ∃ (U : (Y i).Opens) (S : (Spec (CommRingCat.of V)).Opens), x ∈ U ∧ IsAffineOpen U ∧ IsAffineOpen S ∧ U ≤ (TopologicalSpace.Opens.map (y i ≫ c).base).obj S ∧ ((∃ g : U.toScheme ⟶ Spec (CommRingCat.of (Polynomial Γ(Spec (CommRingCat.of V), S))), Etale g) ∨ (∃ a : Γ(Spec (CommRingCat.of V), S), ∃ g : U.toScheme ⟶ Spec (CommRingCat.of (MvPolynomial (Fin 2) Γ(Spec (CommRingCat.of V), S) ⧸ Ideal.span {MvPolynomial.X 0 * MvPolynomial.X 1 - MvPolynomial.C a})), Etale g))) ∧ (∀ i, ∃ j : pullback (y i ≫ c) (Spec.map (CommRingCat.ofHom (algebraMap V K))) ⟶ pullback c (Spec.map (CommRingCat.ofHom (algebraMap V K))), j ≫ pullback.snd c (Spec.map (CommRingCat.ofHom (algebraMap V K))) = pullback.snd (y i ≫ c) (Spec.map (CommRingCat.ofHom (algebraMap V K))) ∧ IsOpenImmersion j) ∧ (∀ (C : Set X) (hC : C ∈ irreducibleComponents (X : Type u)) (ξ : X) (hξ : IsGenericPoint ξ C) (W : ValuationSubring (X.residueField ξ)) (z : Spec (CommRingCat.of W) ⟶ X), z.base (⊥ : PrimeSpectrum W) = ξ → ∃ i : Fin n, ∃ l : Spec (CommRingCat.of W) ⟶ Y i, l ≫ y i = z)",
+  "statement": "theorem valuation_strict_semistable_local_uniformization {V K : Type u} [CommRing V] [IsDomain V] [ValuationRing V] [Field K] [Algebra V K] [IsFractionRing V K] [IsSepClosed K] (hchain : ∀ p q : PrimeSpectrum V, p ≤ q ∨ q ≤ p) (hfinite : Finite (PrimeSpectrum V)) (X : Scheme.{u}) (c : X ⟶ Spec (CommRingCat.of V)) [Flat c] [LocallyOfFinitePresentation c] [QuasiCompact c] [QuasiSeparated c] (hcurve : ∀ s : Spec (CommRingCat.of V), ∀ Z ∈ irreducibleComponents (c.fiber s), topologicalKrullDim Z = (1 : WithBot ℕ∞)) [Smooth (pullback.snd c (Spec.map (CommRingCat.ofHom (algebraMap V K))))] : ∃ (n : ℕ) (Y : Fin n → Scheme.{u}) (y : ∀ i, Y i ⟶ X), (∀ i, IsIntegral (Y i)) ∧ (∀ i, IsStrictlySemistableCurve (y i ≫ c)) ∧ (∀ i, IsSeparated (y i) ∧ LocallyOfFiniteType (y i) ∧ QuasiCompact (y i)) ∧ (∀ i, ∃ C : Set X, ∃ ξ : X, C ∈ irreducibleComponents (X : Type u) ∧ IsGenericPoint ξ C ∧ (∀ z : Y i, (y i).base z ∈ C) ∧ ∃ ηᵢ : Y i, IsGenericPoint ηᵢ (Set.univ : Set (Y i)) ∧ (y i).base ηᵢ = ξ ∧ Function.Bijective ((y i).residueFieldMap ηᵢ).hom) ∧ (∀ i, ∃ j : pullback (y i ≫ c) (Spec.map (CommRingCat.ofHom (algebraMap V K))) ⟶ pullback c (Spec.map (CommRingCat.ofHom (algebraMap V K))), j ≫ pullback.fst c (Spec.map (CommRingCat.ofHom (algebraMap V K))) = pullback.fst (y i ≫ c) (Spec.map (CommRingCat.ofHom (algebraMap V K))) ≫ y i ∧ j ≫ pullback.snd c (Spec.map (CommRingCat.ofHom (algebraMap V K))) = pullback.snd (y i ≫ c) (Spec.map (CommRingCat.ofHom (algebraMap V K))) ∧ IsOpenImmersion j) ∧ (∀ (C : Set X) (hC : C ∈ irreducibleComponents (X : Type u)) (ξ : X) (hξ : IsGenericPoint ξ C) (W : ValuationSubring (X.residueField ξ)) (z : Spec (CommRingCat.of W) ⟶ X), z.base (⊥ : PrimeSpectrum W) = ξ → ∃ i : Fin n, ∃ l : Spec (CommRingCat.of W) ⟶ Y i, l ≫ y i = z)",
   "branch": "newtargets-dag",
-  "by": "Q69",
-  "date": "2026-10-18",
+  "by": "Q87",
+  "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-144f47cbc",
-  "group": "Q69",
+  "reviewer": "NT-stage2-Codex-7ad237d9e",
+  "group": "Q87",
   "result": "pass",
-  "note": "Reviewed the immutable node, corrected statement, all dependencies, Lean declaration, docstrings, edge cases, searches, and worker report. Reproduced scompile.py successfully with only the expected sorry; no substantive or mechanical faults found.",
+  "note": "Full clause-by-clause review passed; scompile.py sandbox and library checks completed successfully with only the expected sorry.",
   "statement_corrected": true
  },
  "statement_change": {
-  "date": "2026-10-18",
-  "by": "Q69 stage 2",
-  "old_statement": "Let $K$ be a separably closed [def-kun-separably-closed] field [def-weil-field] and $V\\subset K$ a valuation ring with fraction field $K$: for every $a\\in K^\\times$, either $a$ or $a^{-1}$ lies in $V$. Assume that the prime ideals of $V$ form a finite chain, and put $T=\\operatorname{Spec}V$ [def-weil-affine-spectrum], with generic point $\\eta=\\operatorname{Spec}K$. Let $X$ be a $T$-curve with smooth generic fibre [def-sbc-smooth-morphisms]. There are finitely many integral strictly semistable $T$-curves $Y_i$ and birational quasi-modifications $Y_i\\to X$ such that every centred valuation of every irreducible component [def-weil-irreducible-components] of $X$ lifts to some $Y_i$. Each generic map $(Y_i)_\\eta\\to X_\\eta$ identifies $(Y_i)_\\eta$ with an open subscheme. A $T$-curve means a flat [def-weil-flat-morphism] finitely presented [def-sbc-locally-finite-presentation] $T$-scheme of pure relative dimension one, without a separatedness or properness assumption. Dimension is topological Krull dimension [def-kun-topological-krull-dimension]. A $T$-curve is strictly semistable if, locally on it and on $T$, it admits an etale morphism [def-weil-etale-morphism] to $\\operatorname{Spec}A[t]$ or $\\operatorname{Spec}(A[u,v]/(uv-a))$, where $\\operatorname{Spec}A$ is an open of $T$ and $a\\in A$; polynomial rings use [def-weil-polynomial-ring]. For an integral scheme $Y$ [def-pc-integral-scheme], its function field is the local ring at its generic point. A birational quasi-modification $Y\\to Z$ is a separated finite-type morphism [def-weil-finite-type-morphism] identifying the function field of $Y$ with that of one irreducible component of the reduced scheme $Z$ [def-pc-reduced-scheme]. A centred valuation of that component means a valuation subring $W$ of its function field, together with a morphism $\\operatorname{Spec}W\\to Z$ inducing the generic-point map. It lifts to $Y$ when this morphism factors through $Y$. ",
-  "what": "The base Lean statement had two defects. First, its birational clause required only an arbitrary residue-field isomorphism `Nonempty ((Y i).residueField ηᵢ ≃+* X.residueField ξ)`, without tying ηᵢ to ξ through y i or requiring the isomorphism to be induced by y i. Second, its valuation clause quantified an unrelated field L and used unreduced stalks. The corrected statement uses the canonical component field `X.residueField ξ`, requires `z.base (⊥ : PrimeSpectrum W) = ξ`, and requires `(y i).base ηᵢ = ξ ∧ Function.Bijective ((y i).residueFieldMap ηᵢ).hom`, the canonical generic-point residue-field map.",
+  "date": "2026-10-17",
+  "by": "Q87 stage 2",
+  "old_statement": "Let $K$ be a separably closed [def-kun-separably-closed] field [def-weil-field] and $V\\subset K$ a valuation ring with fraction field $K$: for every $a\\in K^\\times$, either $a$ or $a^{-1}$ lies in $V$. Assume that the prime ideals of $V$ form a finite chain, and put $T=\\operatorname{Spec}V$ [def-weil-affine-spectrum], with generic point $\\eta=\\operatorname{Spec}K$. Let $X$ be a $T$-curve with smooth generic fibre [def-sbc-smooth-morphisms]. There are finitely many integral strictly semistable $T$-curves $Y_i$ and birational quasi-modifications $Y_i\\to X$ such that every centred valuation of every irreducible component [def-weil-irreducible-components] of $X$ lifts to some $Y_i$. Each generic map $(Y_i)_\\eta\\to X_\\eta$ identifies $(Y_i)_\\eta$ with an open subscheme. A $T$-curve means a flat [def-weil-flat-morphism] finitely presented [def-sbc-locally-finite-presentation] $T$-scheme of pure relative dimension one, without a separatedness or properness assumption. Dimension is topological Krull dimension [def-kun-topological-krull-dimension]. A $T$-curve is strictly semistable if, locally on it and on $T$, it admits an etale morphism [def-weil-etale-morphism] to $\\operatorname{Spec}A[t]$ or $\\operatorname{Spec}(A[u,v]/(uv-a))$, where $\\operatorname{Spec}A$ is an open of $T$ and $a\\in A$; polynomial rings use [def-weil-polynomial-ring]. For an integral scheme $Y$ [def-pc-integral-scheme], its function field is the local ring at its generic point. A birational quasi-modification $Y\\to Z$ is a separated finite-type morphism [def-weil-finite-type-morphism] identifying the function field of $Y$ with the function field of the reduced irreducible component of $Z$ represented by $C$; equivalently, for a generic point $\\eta_Y$ of $Y$ mapping to a generic point $\\xi$ of $C$, the canonical residue-field map $\\kappa_X(\\xi)\\to\\kappa_Y(\\eta_Y)$ induced by $Y\\to Z$ is an isomorphism. A centred valuation of that component means a valuation subring $W\\subset\\kappa_X(\\xi)$, together with a morphism $\\operatorname{Spec}W\\to Z$ whose generic point is $\\xi$. It lifts to $Y$ when this morphism factors through $Y$.",
+  "what": "The inherited Lean translation omitted quasi-compactness and quasi-separatedness from finite presentation, omitted the structural-map equations from strict semistable charts, and allowed an unrelated open immersion of generic fibres by imposing only the second projection equation. Clarify the text to cite the existing relative strict-semistability definition, spell out full finite presentation, and require the generic map induced by the displayed morphism. These are the original source meanings; the previous Lean interface was too weak.",
   "source": {
    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
-   "place": "Proposition 4.3.3, pp. 29–30: birationality is via the generic-point map on component function fields; the canonical map is induced by the morphism at a generic point."
+   "place": "§1.2 (flat finitely presented relative curves), §4 opening finite-height valuation-base conventions, §4.3 relative strict-semistability definition and Proposition 4.3.3, pp. 29–30."
   },
   "citers": [
    {
     "id": "lem-trf-valuation-common-strict-semistable-refinement",
     "holds": true,
-    "note": "Its proof applies the uniformization componentwise to centred valuations and uses the corrected canonical generic-point birational map."
+    "note": "Its multipointed input is finitely presented, and the strict models and generic maps are relative to the specified base; the clarified clauses supply exactly its existing use."
    },
    {
     "id": "lem-trf-valuation-stable-reduction",
     "holds": true,
-    "note": "Its proof applies the uniformization componentwise to centred valuations; the canonical generic-point map supplies the required component function-field identification."
+    "note": "Its multipointed input is finitely presented, and the strict models and generic maps are relative to the specified base; the clarified clauses supply exactly its existing use."
    }
-  ]
+  ],
+  "old_stmt_deps": [
+   "def-kun-separably-closed",
+   "def-kun-topological-krull-dimension",
+   "def-pc-integral-scheme",
+   "def-pc-reduced-scheme",
+   "def-sbc-locally-finite-presentation",
+   "def-sbc-smooth-morphisms",
+   "def-weil-affine-spectrum",
+   "def-weil-etale-morphism",
+   "def-weil-field",
+   "def-weil-finite-type-morphism",
+   "def-weil-flat-morphism",
+   "def-weil-irreducible-components",
+   "def-weil-polynomial-ring",
+   "def-weil-proper-morphism"
+  ],
+  "previous": {
+   "date": "2026-10-18",
+   "by": "Q69 stage 2",
+   "old_statement": "Let $K$ be a separably closed [def-kun-separably-closed] field [def-weil-field] and $V\\subset K$ a valuation ring with fraction field $K$: for every $a\\in K^\\times$, either $a$ or $a^{-1}$ lies in $V$. Assume that the prime ideals of $V$ form a finite chain, and put $T=\\operatorname{Spec}V$ [def-weil-affine-spectrum], with generic point $\\eta=\\operatorname{Spec}K$. Let $X$ be a $T$-curve with smooth generic fibre [def-sbc-smooth-morphisms]. There are finitely many integral strictly semistable $T$-curves $Y_i$ and birational quasi-modifications $Y_i\\to X$ such that every centred valuation of every irreducible component [def-weil-irreducible-components] of $X$ lifts to some $Y_i$. Each generic map $(Y_i)_\\eta\\to X_\\eta$ identifies $(Y_i)_\\eta$ with an open subscheme. A $T$-curve means a flat [def-weil-flat-morphism] finitely presented [def-sbc-locally-finite-presentation] $T$-scheme of pure relative dimension one, without a separatedness or properness assumption. Dimension is topological Krull dimension [def-kun-topological-krull-dimension]. A $T$-curve is strictly semistable if, locally on it and on $T$, it admits an etale morphism [def-weil-etale-morphism] to $\\operatorname{Spec}A[t]$ or $\\operatorname{Spec}(A[u,v]/(uv-a))$, where $\\operatorname{Spec}A$ is an open of $T$ and $a\\in A$; polynomial rings use [def-weil-polynomial-ring]. For an integral scheme $Y$ [def-pc-integral-scheme], its function field is the local ring at its generic point. A birational quasi-modification $Y\\to Z$ is a separated finite-type morphism [def-weil-finite-type-morphism] identifying the function field of $Y$ with that of one irreducible component of the reduced scheme $Z$ [def-pc-reduced-scheme]. A centred valuation of that component means a valuation subring $W$ of its function field, together with a morphism $\\operatorname{Spec}W\\to Z$ inducing the generic-point map. It lifts to $Y$ when this morphism factors through $Y$. ",
+   "what": "The base Lean statement had two defects. First, its birational clause required only an arbitrary residue-field isomorphism `Nonempty ((Y i).residueField ηᵢ ≃+* X.residueField ξ)`, without tying ηᵢ to ξ through y i or requiring the isomorphism to be induced by y i. Second, its valuation clause quantified an unrelated field L and used unreduced stalks. The corrected statement uses the canonical component field `X.residueField ξ`, requires `z.base (⊥ : PrimeSpectrum W) = ξ`, and requires `(y i).base ηᵢ = ξ ∧ Function.Bijective ((y i).residueFieldMap ηᵢ).hom`, the canonical generic-point residue-field map.",
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, pp. 29–30: birationality is via the generic-point map on component function fields; the canonical map is induced by the morphism at a generic point."
+   },
+   "citers": [
+    {
+     "id": "lem-trf-valuation-common-strict-semistable-refinement",
+     "holds": true,
+     "note": "Its proof applies the uniformization componentwise to centred valuations and uses the corrected canonical generic-point birational map."
+    },
+    {
+     "id": "lem-trf-valuation-stable-reduction",
+     "holds": true,
+     "note": "Its proof applies the uniformization componentwise to centred valuations; the canonical generic-point map supplies the required component function-field identification."
+    }
+   ]
+  }
  }
 }

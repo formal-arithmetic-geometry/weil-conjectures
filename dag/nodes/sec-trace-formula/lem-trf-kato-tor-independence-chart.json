@@ -261,5 +261,23 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-43ee9be45 (reviewer sub-agent of L); spot-checked: Read the item, the report, the full statements of every cited node and the sources: ILO VIII 3.4.3 (p.110, invoking Kato 6.1(ii)) and VI 1.6(i)-(ii) (p.70). The statement is unchanged and not weakened, there are no new nodes, no SGA source is cited, and there are no cycles. Repairs are in fixes/dag/nodes/sec-trace-formula/lem-trf-kato-tor-independence-chart.json; only proof, proof_deps and split_report were changed. (1) Chart gap (E1/C3): the item fixes a given chart, but the completed-chart statement may replace it, so the old proof only covered the replacement chart a'. New Step 1 shows a'=u*a for a monoid homomorphism u:P->A^x, using P sharp and the chart pushout P x A^x. New elementary Step 6 transfers the Tor vanishing back to the given chart through z^q⊗x -> z^q⊗u(q)^{-1}x, which matches the multiplication kernels. (2) Missing citations in Step 2: Noetherianity of O_{X,x} (pqf-def-locnoeth, lem-weil-pbc-affine-open-stalk-localization, lem-weil-pbc-localization-noetherian) and the geometric/algebraic strict-henselization comparison (lem-exc-affine-strict-local-ring-comparison) are now cited before the faithfully flat completion is used. (3) Missing citation in Steps 3-4: L[P][t] is Noetherian, now cited to lem-weil-pbc-finite-type-algebra-noetherian. (4) Step 4 was too terse (E5) and is now written out: N/J^{m+1}N is a free finite-rank C-module because P is sharp and finitely generated (completion exactness, p-adic completeness of C), J-adic separatedness follows from Krull intersection, theta=p+j then forces nonzero p-torsion in that free module, a contradiction, and the snake lemma finishes. Small cases tested: P={0}; P=N with a(1)=p over the strict henselization of Z_p, theta=p-z, I=1+N; a twisted chart a'=u*a; P=N^2. Accepted tool_uses: lem-sc-strict-henselization-completion-noetherian (sk-thm-br) and lem-exc-affine-strict-local-ring-comparison (sk-prop-a1-kummer); lem-weil-pbc-noetherian-completion-flat is a mathlib leaf.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-857a79c39",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Reviewed packet, immutable node, dependencies, source, report, Lean signature, edge cases, route-pivot constraints, and searches. scompile.py compiled sandbox and library successfully with expected sorry only; review.md records all checks."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.KatoTorIndependenceChart",
+  "declaration": "AlgebraicGeometry.torOne_monoidIdeal_independence",
+  "file": "lean/Sheaf/TraceFormula/KatoTorIndependenceChart.lean",
+  "statement": "theorem torOne_monoidIdeal_independence {X : FineSaturatedLogScheme.{u}} (hlog : X.IsLogRegular) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) {W : X.scheme.Etale} (w : (Scheme.pointSmallEtale t).fiber.obj W) {P : Type u} [CommMonoid P] (hP : IsFineSaturatedMonoid P) (c : P →* X.logStructure.monoidSheaf.obj.obj (op W)) (hc : X.logStructure.IsChart W c) (e : P ≃* (X.logStructure.characteristic t)) (he : ∀ p : P, e p = Associates.mk (X.logStructure.toEtalePrelogStructure.germ t W w (c p))) (a : P →* strictLocalRing X.scheme t) (ha : ∀ p : P, a p = X.logStructure.toEtalePrelogStructure.stalkAlpha t (X.logStructure.toEtalePrelogStructure.germ t W w (c p))) (I : Set P) (hI : ∀ q ∈ I, ∀ p : P, q * p ∈ I) : IsZero (((Tor' (ModuleCat.{u} (MonoidAlgebra ℤ P)) 1).obj (ModuleCat.of (MonoidAlgebra ℤ P) (MonoidAlgebra ℤ P ⧸ Ideal.span {x : MonoidAlgebra ℤ P | ∃ q ∈ I, x = MonoidAlgebra.single q 1}))).obj (@ModuleCat.of (MonoidAlgebra ℤ P) _ (strictLocalRing X.scheme t) inferInstance (Module.compHom (strictLocalRing X.scheme t) (MonoidAlgebra.lift ℤ (strictLocalRing X.scheme t) P a).toRingHom)))",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
