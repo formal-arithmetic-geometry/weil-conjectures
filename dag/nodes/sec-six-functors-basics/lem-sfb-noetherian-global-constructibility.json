@@ -18,7 +18,9 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-inverse-image",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-pe-etale-constructible-module",
+  "def-sfb-affine-locally-constructible-proetale-modules"
  ],
  "proof": [
   {
@@ -266,5 +268,27 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6ea0f9479 (reviewer sub-agent of L); spot-checked: Read the whole item, all 6 steps, every cited statement, Stacks 095E (etale-cohomology.tex:11717-11757) and 03RW(3), proetale.tex definition-constructible (5225-5233), and blueprint main-20261015 sk-lem-integral-models-stacks.proof ('constructibility conditions agree'). The statement and stmt_deps are identical to the live unsplit base. There are no new nodes. proof_deps equals the union of the step uses. Step 1: leaves for affine Noetherian space, finite union and compact subsets; the empty cover is fine. Step 2: locally Noetherian, then quasi-separated (01OY), and all opens of U are retrocompact, so locally closed subsets are constructible (005L); no affine intersections are assumed. Step 3: etale cover base change plus finite limits meet the hypotheses of left-exact-site-inverse-image; det-pe-topos-functoriality covers pro-etale. Step 4: the constant-module inverse image keeps the same finitely presented M, with no set finiteness (R=Z, M=Z checked). Step 5: gluing-core (slopmaster2-closed) gives actual factorizations q_c, which avoids E3 for non-reduced strata. Step 6: pullback-stratification along U->X, constructibility from step 2, local models from step 4. Edge cases checked: empty X, R=0, non-separated X, non-reduced strata. No duplicate: lem-weil-pbc-constructible-qcqs-affine-local is etale-only with finite Lambda. No cycle. Accepted tool_uses: left-exact-site-inverse-image-tensor, det-pe-topos-functoriality-inverse-image and lem-pe-constant-left-module-inverse-image; the other three declared entries are leaves or closed nodes and are harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility",
+  "declaration": "AlgebraicGeometry.Scheme.etale_noetherian_global_constructibility",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etale_noetherian_global_constructibility",
+   "AlgebraicGeometry.Scheme.proEtale_noetherian_global_constructibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianGlobalConstructibility.lean",
+  "statement": "theorem etale_noetherian_global_constructibility (X : Scheme.{u}) [IsNoetherian X] (R : Type (max v (u + 1))) [CommRing R] [IsNoetherianRing R] (F : CategoryTheory.ConstantCompletion.Mod (CategoryTheory.ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X) R)) : IsCoefficientConstructibleEtaleModule X R F ↔ ∃ S : LocallyClosedStratification X, (∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) ∧ ∀ a : Fin S.n, IsCoefficientModelLocallyConstantFinite (smallModelComparisonEtaleTopology.{u, v} (S.domain a)) R ((coefficientEtaleFixedPullback.{u, v} (S.immersion a) R).obj ((coefficientModelFixedScalars _ R).obj F))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d23a74793",
+  "group": "NL",
+  "result": "pass",
+  "note": "Both statements match the node clause by clause: IsNoetherian X; R : Type (max v (u+1)) with CommRing and IsNoetherianRing, the landed coefficient-size convention with no Finite R; F a module over the constant ring sheaf. (i) is the landed IsCoefficientConstructibleEtaleModule on the étale side and the new IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf on the pro-étale side. (ii) is one LocallyClosedStratification X with constructible strata and locally constant finitely presented models (Module.Finite is equivalent over Noetherian R). Edge cases checked: empty X or U, R=0, R=Z with M=Z, non-separated X, non-reduced strata. The §1(B) repair of def-sfb-affine-locally-constructible-proetale-modules changes only lean, with a note; it keeps the old module, which the Serre citer still uses; the helper is a real sheafified Kan extension along canonical base change. stmt_deps gained only two landed nodes; both lean.statement fields are verbatim; only theorem bodies are sorry; docstrings have source and blueprint; no duplicate found. Compile: nt_compile.py hit its 60 s timeout twice on the upstream ConstantCompletionEquivalence (load average about 200); a /tmp copy of the same script with a 600 s limit gave rc 0 with no diagnostics, delivered files 10.6 s and 7.1 s. No fixes."
  }
 }

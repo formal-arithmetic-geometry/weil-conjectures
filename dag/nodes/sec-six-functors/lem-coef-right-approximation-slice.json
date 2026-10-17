@@ -215,5 +215,29 @@
   "group": "Q140",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-38425d134 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-slice-right-fibration, lem-coef-infinity-mapping-composition, lem-cbc-left-fibration-equivalence-lift and its def-coef-infinity-fibrations), the parent lem-coef-finite-colimit-approximation and the unit sk-prop-sf-biduality-general. Cisinski's CatLR is not archived locally (proof_origin agent, WANTED recorded), so I checked the proof directly. Step 1: reversing simplices turns a right fibration (Λ^n_i, 0<i≤n) into a left fibration, so the slice projections reflect equivalences; with p_B∘G_t = G∘p_A this makes G_t conservative. Step 2: ψ as a map Δ^2→B has edges (ψ0, Gα, β); filling (e0, Gv0) gives w with [w]=[ψ0] by mapping-composition. Step 3: a Map-edge goes from face 02 to face 12, so H=(id,w,ψ0) is an edge ψ0→w in a Kan fiber. The faces s0e0, H and T agree on the edges id, e0 and w; the horn is Λ^3_1 (inner) and face 023 has edges (e0, Gv0, ψ0). Step 4: σ gives v: a'(α')→a(α); the faces τ, Gσ and ψ share the edges Gv0, ψ0 and Gα; the horn is Λ^3_2 (inner). Face 013 is a slice edge b→G_t a' over e0, an equivalence by Step 1, and the 3-simplex is a slice 2-simplex (e, G_t v, ψ) that keeps β exactly. Step 5: mapping-composition in the slice quasicategory. Small cases: G=id, empty A, ordinary nerves. The item is not a restatement of a parent clause. No duplicate turned up in an rg search over dag/nodes. I accept the tool use of lem-cbc-left-fibration-equivalence-lift as a generic black box. No SGA cited, A–F clean, no new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightApproximationSlice",
+  "declaration": "SSet.Enhanced.rightApproximation_slice",
+  "declarations": [
+   "SSet.Enhanced.RightApproximation",
+   "SSet.Enhanced.rightApproximation_slice"
+  ],
+  "statement": "theorem rightApproximation_slice {A B : SSet.{u}} [Quasicategory A] [Quasicategory B] (G : A ⟶ B) (hG : ∀ (e : A _⦋1⦌), IsEquivalenceEdge B (G.app _ e) → IsEquivalenceEdge A e) (happrox : RightApproximation G) (t : A _⦋0⦌) : (∀ (e : (joinSlice (SSet.yonedaEquiv.symm t)) _⦋1⦌), IsEquivalenceEdge (joinSlice (SSet.yonedaEquiv.symm (G.app _ t))) ((joinSlicePostcomp G t).app _ e) → IsEquivalenceEdge (joinSlice (SSet.yonedaEquiv.symm t)) e) ∧ RightApproximation (joinSlicePostcomp G t)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper predicate records the node's right-approximation factorization using π₀ of right-pinched mapping spaces and a 2-simplex representative of composition. The induced slice functor G_t is the landed canonical postcomposition SSet.Enhanced.joinSlicePostcomp (lem-coef-twisted-arrow-left-fibration), not a second copy; the reflection clause tests equivalence of G_t(e) in the slice B_{/G(t)}, as the node states (reviewer fix).",
+  "file": "lean/Sheaf/CategoryTheory/RightApproximationSlice.lean",
+  "fixed_by": "NT-stage2-cc-b7e371375"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7e371375",
+  "group": "NM",
+  "result": "fix",
+  "note": "Read the node, both stmt_dep modules (EnhancedDiagramsCones: IsEquivalenceEdge/mappingSpace/mappingSpaceMap; JoinSliceRightFibration: joinSlice/joinSliceProjection) and the delivered module and report (Worker report and Second reading by NM present). RightApproximation is correct (faces δ2=e, δ0=G v, δ1=w; π₀ equality in right-pinched mapping spaces); hypotheses exact, one universe, no limits; node changed only in lean. Findings fixed in fixes/: (1) H4: inducedJoinSlice duplicated the landed SSet.Enhanced.joinSlicePostcomp (TwistedArrowLeftFibration:179, node lem-coef-twisted-arrow-left-fibration, base drift); removed it and used joinSlicePostcomp G t via a public import (acyclic, not cited, so no stmt_dep). (2) H3: the conservativity clause assumed IsEquivalenceEdge B (p_B (G_t e)), formally stronger than the node's 'G_t reflects equivalences'; now assumes IsEquivalenceEdge in joinSlice over G t. (3) Added the missing proof-plan import Sheaf.CategoryTheory.LeftFibrationEquivalenceLift. nt_compile --json: delivered and fixed modules both rc 0 with no errors or warnings; stage2_delivery.check_lean_text on the fixed module and record: no failures; lean.statement verbatim. Fix files: RightApproximationSlice.lean, lem-coef-right-approximation-slice.lean-record.json, lem-coef-right-approximation-slice.report.md."
  }
 }

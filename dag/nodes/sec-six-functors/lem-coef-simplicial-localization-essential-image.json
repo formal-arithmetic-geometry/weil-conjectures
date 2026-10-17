@@ -188,5 +188,23 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-edddee463 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the full statements of its three cited nodes (arrow-attachment-localization, category-degreewise-colimits, inversion-universal-property, all in the same unit sk-prop-sf-biduality-general, none merged), the step-4 use by the parent comparison-calculus, and the unit and chapter records. The delivery has no new nodes and changes only the item and the report. A script over the whole snapshot found no cycle, and proof_deps equals the union of the step uses. Step 1: the strict pushout Gamma is isomorphic to L_WC in h sCat under C, with no fibrancy or cofibrancy needed. Step 2: the object-set bijection of the degreewise-colimits node gives Ob Gamma as a set pushout. Step 3: pi0 r is fully faithful and r(i(0))=0, so the arrows to and from 0 lift to mutually inverse arrows x and i(0), and the image of i(0) is j(source w). Step 4: the iso in h sCat under C gives an equivalence E with E∘pi0 j isomorphic to pi0 q, so essential surjectivity transfers. Each step uses only what the cited statements say. Small cases are fine: W empty, C empty, C=[1] with its arrow inverted, a one-object C with a marked loop, repeated labels. The statement is true and is exactly what the parent needs. The duplicate search found nothing equivalent (closest: cofibrant-simplicial-inversion, hammock-pi-zero-closure, localization-homotopy-category, dk-cofibrant-localization-comparison). The Mathlib candidate Localization.essSurj is correctly rejected. HTT A.3.5.1/A.3.5.2/A.3.5.5 is not in literature/: it is WANTED and the proof is marked by agent. No SGA is cited. No target is involved, there are no tool_uses, and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialLocalizationEssentialImage",
+  "declaration": "CategoryTheory.SimplicialInversion.simplicial_localization_essential_image",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialLocalizationEssentialImage.lean",
+  "statement": "theorem simplicial_localization_essential_image (B : BergnerModelData.{u}) (P : Pair.{u}) (L : SCat.{u}) (q : P.category ⟶ L) (_hq : Nonempty (LocalizationPresentation B P q)) : PiZeroEssentiallySurjective (A := underlying P.category) (B := underlying L) q",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d974b295",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Clause-by-clause match: Pair = C with an arbitrary vertex marking; BergnerModelData forces Dwyer-Kan weak equivalences and fixed fibrations/cofibrations, so quantifying over it is harmless; q is pinned by the dependency's LocalizationPresentation (homotopy pushout of C <- coproduct of [1] -> coproduct of K); the conclusion is the existing PiZeroEssentiallySurjective (inverse vertices up to path components), exactly the node. Checked independently that it is true for every presentation, so not stronger. Edge cases (no marked arrows, empty C, loops, repeated endpoints) covered; single universe u bound. No new definitions or duplicates; sorry-only proof; source and blueprint docstrings with the four proof steps; node diff only lean, statement verbatim; lines within 100 characters; Worker report and Second reading by Q53 present. Older non-module form required to import the older-form proof dependency SimplicialCategoryDegreewiseColimits; the arrow-attachment import is correctly deferred (no Lean record). nt_compile.py --json on the side overlay: clean, 7.1 s, no errors or warnings."
  }
 }

@@ -91,14 +91,19 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AffineLocallyConstructibleProEtaleModules",
-  "declaration": "AlgebraicGeometry.Scheme.IsAffineLocallyConstructibleProEtaleModuleSheaf",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocallyConstructibleProEtaleModules.lean",
-  "statement": "def IsAffineLocallyConstructibleProEtaleModuleSheaf (X : Scheme.{u}) (R : Type u) [CommRing R] [IsNoetherianRing R] (F : proEtaleRingModules X (proEtaleConstantRing X R)) : Prop",
+  "module": "Sheaf.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules",
+  "declaration": "AlgebraicGeometry.Scheme.IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.coefficientProEtaleFixedModulePullback",
+   "AlgebraicGeometry.Scheme.IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientAffineConstructibleProEtaleModules.lean",
+  "statement": "def IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf (X : Scheme.{u}) (R : Type (max v (u + 1))) [CommRing R] [IsNoetherianRing R] (F : CategoryTheory.ConstantCompletion.Mod (CategoryTheory.ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) R)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q129",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B): the recorded affine-local predicate restricts R to Type u while X : Scheme.{u}; it cannot state the item with an independently sized Noetherian coefficient ring. Retain and publicly reexport that predicate, and state the identical affine-local stratification and finitely presented local-model condition on the existing equivalent coefficient-sized AsSmall sites. Constant-ring modules use the existing ConstantCompletion.Mod and coefficientModelFixedScalars. The fixed-scalar pullback helper is the actual Kan extension and sheafification along coefficientProEtaleModelBaseChange, not an arbitrary map or chosen module. No site object, cover, coefficient ring, or stratum is restricted; no universe equality or set-finiteness assumption is imposed."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -109,11 +114,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-15b193fd5",
-  "group": "Q129",
+  "reviewer": "NT-stage2-cc-d23a74793",
+  "group": "NL",
   "result": "pass",
-  "note": "Read item, 14 stmt_deps, new def node, both modules, report, upstream decls (LocallyClosedStratification/Stratification, proEtaleConstantRing, proEtaleConstantModulePullback, proEtaleConstantModuleSheafOver, landed Etale.constructibleNoetherianModules) and Stacks 03RZ(3), 09B5, 03RW(3), 09AJ, 00IK. All hypotheses/clauses match: arbitrary Scheme, CommRing+IsNoetherianRing without finiteness, constant-ring module sheaves on Mathlib small etale and ProEt sites, affine-local finite constructible locally closed stratification with immersions, inverse image along S.immersion a ≫ U.ι, local constant f.p. models (etale reuse of landed Module.Finite predicate equivalent over Noetherian R), zero/kernel+cokernel/ShortExact extension clauses. Universes: etale R in u+1, pro-etale R in u per recorded interfaces, documented, no site universe equality. Edge cases empty X/U, n=0, zero ring, Z, non-qc X ok. Item node changed only in lean and stmt_deps (+new def node, +landed def-pe-etale-constructible-module); lean.statement verbatim; new node fields per §5, not a duplicate, real Prop. Only sorry bodies; source/blueprint docstrings with six proof steps; report has Worker report and Second reading by Q129. nt_compile.py --json on both files: rc 0, no errors, no warnings beyond sorry. No findings."
+  "note": "Both statements match the node clause by clause: IsNoetherian X; R : Type (max v (u+1)) with CommRing and IsNoetherianRing, the landed coefficient-size convention with no Finite R; F a module over the constant ring sheaf. (i) is the landed IsCoefficientConstructibleEtaleModule on the étale side and the new IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf on the pro-étale side. (ii) is one LocallyClosedStratification X with constructible strata and locally constant finitely presented models (Module.Finite is equivalent over Noetherian R). Edge cases checked: empty X or U, R=0, R=Z with M=Z, non-separated X, non-reduced strata. The §1(B) repair of def-sfb-affine-locally-constructible-proetale-modules changes only lean, with a note; it keeps the old module, which the Serre citer still uses; the helper is a real sheafified Kan extension along canonical base change. stmt_deps gained only two landed nodes; both lean.statement fields are verbatim; only theorem bodies are sorry; docstrings have source and blueprint; no duplicate found. Compile: nt_compile.py hit its 60 s timeout twice on the upstream ConstantCompletionEquivalence (load average about 200); a /tmp copy of the same script with a 600 s limit gave rc 0 with no diagnostics, delivered files 10.6 s and 7.1 s. No fixes."
  }
 }
