@@ -16,48 +16,94 @@
   "def-weil-proetale-inverse-image",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each C=R,S, the coefficient map c^C_f:f^{-1}C_Y -> C_X is the constant-section isomorphism of [prop-weil-pbc-proetale-constant-ring-map], and [prop-weil-pbc-proetale-constant-exact] says that f_C^*N is f^{-1}N with its action transported through this map. The underlying abelian sheaf of P_X(f_S^*N) is therefore the same f^{-1}N as that of f_R^*(P_YN). On a local constant scalar, both transported actions send r in R_X to the action of its image in S_X, because c^S_f composed with f^{-1}(varphi_Y) equals varphi_X composed with c^R_f as ring maps f^{-1}R_Y -> S_X. To see this equality, pass to adjuncts under the inverse-image/direct-image adjunction of [def-weil-proetale-inverse-image]: by naturality of the adjunction the two adjuncts are rho^S composed with varphi_Y and f_*(varphi_X) composed with rho^R, as maps R_Y -> f_*S_X, where rho^C is the map of [prop-weil-pbc-proetale-constant-ring-map] whose adjoint is c^C_f. On a constant section a over W -> Y both give the constant section varphi(a) of S_X over W x_Y X, because rho sends a to the constant section a and varphi_X is pointwise composition with varphi; an element of the defining presheaf Cont(pi_0(|W|),R) is constant on the members of an open cover of W, so both maps agree on it by gluing, and hence on the sheafification R_Y by its universal property. Also f^{-1}(P_YN) is f^{-1}N with action map f^{-1} of the composite of varphi_Y x id with the S_Y-action, since f^{-1} preserves finite products [def-weil-proetale-inverse-image]. The identity on the underlying abelian sheaf is consequently R_X-linear, giving the natural isomorphism alpha_N; its same identity is the inverse. The restriction action and linearity are exactly [def-pc-sheaf-restrict-scalars] and [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-proetale-inverse-image",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, together with the coefficient-action definitions in proetale.tex Tag 09A5"
+   }
+  },
+  {
+   "text": "For an S_X-module sheaf M, the underlying abelian sheaves of P_Y(f_{S,*}M) and f_{R,*}(P_XM) are both the sectionwise direct image V maps to M(u_f(V)) from [def-weil-proetale-inverse-image]. On an object V to Y, the R_Y(V)-action on the first object applies varphi_Y and then the map rho^S_V:S_Y(V) -> S_X(u_f(V)); the action on the second applies rho^R_V:R_Y(V) -> R_X(u_f(V)) and then varphi_X. Here rho^C:C_Y -> f_*C_X is the adjunct of c^C_f defined in [prop-weil-pbc-proetale-constant-ring-map]. The equality rho^S varphi_Y = f_*(varphi_X) rho^R was checked in step 1: the two maps agree on constant sections by the pointwise definition of varphi, hence on the defining presheaf by gluing over an open cover and after sheafification. Thus the identity underlying map is R_Y-linear, yielding the natural isomorphism beta_M, again with identity inverse. This uses the restriction-of-scalars construction of [def-pc-sheaf-restrict-scalars] and the sectionwise module morphisms of [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, with proetale.tex Tag 09A5 direct-image action"
+   }
+  },
+  {
+   "text": "The module adjunctions in the statement are the abelian-sheaf inverse-image/direct-image adjunctions with the transported actions: [def-weil-proetale-inverse-image] gives the same underlying unit eta_f, and [def-weil-sheaf-of-modules-category] says that a module morphism is determined by its underlying abelian-sheaf map. By the first two steps, alpha_N and beta_{f_S^*N} have identity underlying maps. Restriction of scalars also leaves underlying sheaves and maps unchanged by [def-pc-sheaf-restrict-scalars]. Hence the underlying abelian map of f_{R,*}(alpha_N) composed with beta_{f_S^*N} composed with P_Y(eta^S_N) is exactly the abelian adjunction unit eta_f on P_YN, which is the underlying map of eta^R_{P_YN}. Faithfulness of the forgetful description in [def-weil-sheaf-of-modules-category] then gives the displayed equality of R_Y-module morphisms. No flatness or commutativity was used.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, including compatibility with the abelian adjunction unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D3, lemma-adjoint-push-pull-modules; coefficient action and constant-section comparison from proetale.tex Tag 09A5"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "restrictScalars.*[Pp]ullback|[Pp]ullback.*restrictScalars|restrictScalars.*[Uu]nit|[Uu]nit.*restrictScalars",
-   "results": "Actual search hits: Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean. ",
+   "tool": "leanfinder",
+   "query": "Inverse image and direct image of pro-etale module sheaves commute with restriction of scalars along a finite ring homomorphism and preserve the adjunction unit",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; generic sheaf-module adjunction declarations, but no pro-etale finite-ring comparison",
    "date": "2026-10-17",
-   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
+   "verdict": "no match: generic sheaf/module adjunction infrastructure does not state the pro-etale finite-ring comparison"
   },
   {
    "tool": "loogle",
-   "query": "\"restrictScalars\", \"pullback\"",
-   "results": "Actual search hits: . ",
+   "query": "SheafOfModules.restrictScalars, pullback, pushforward, unit",
+   "results": "0 hits; loogle reports unknown identifier 'pullback'",
    "date": "2026-10-17",
-   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(pullback|pushforward|unit)|pullback.*restrictScalars|unit.*restrictScalars",
+   "results": "0 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Inverse image of sheaves of modules commutes with restriction of scalars and the comparison preserves the inverse image direct image adjunction unit",
-   "results": "Actual search hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendRestrictScalarsAdj.unit, PresheafOfModules.restrictScalars, ModuleCat.RestrictionCoextensionAdj.unit'. ",
+   "query": "restriction of scalars for sheaves of modules commutes with inverse image and direct image and preserves the adjunction unit",
+   "results": "SheafOfModules.restrictScalars; PresheafOfModules.restrictScalarsObj; PresheafOfModules.restrictScalars; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; SheafOfModules.PullbackConstruction.adjunction; generic ModuleCat restriction units",
    "date": "2026-10-17",
-   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Restriction of scalars for sheaves of left modules commutes with inverse image of a morphism of topoi when coefficient ring maps are isomorphisms and preserves the actual adjunction unit",
-   "results": "Actual search hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.restrictScalars, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. ",
-   "date": "2026-10-17",
-   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A homomorphism of finite rings gives scalar restriction on proetale module sheaves compatible with pullback pushforward and the unit",
-   "results": "Actual search hits: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.restrictScalars, PresheafOfModules.pushforward_obj_obj, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, PresheafOfModules.pushforward_obj_map_apply, PresheafOfModules.pushforward_obj_map_apply', AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. ",
-   "date": "2026-10-17",
-   "verdict": "no match: the hits give scalar restriction, pullback construction or other coefficient categories, not this unit-compatible finite-ring comparison"
+   "verdict": "no match: hits are generic or open-immersion constructions, not this pro-etale finite-ring statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-proetale-supported-kernel-complex",
@@ -76,5 +122,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-proetale-finite-scalar-unit-comparison",
+  "worker": "stage1",
+  "summary": "Split the finite-ring coefficient comparison into explicit inverse-image, direct-image, and adjunction-unit compatibility steps. The underlying abelian sheaf maps are identities; the transported actions agree by the constant-section formulas, so the argument covers finite noncommutative rings without flatness or geometric hypotheses. No new nodes were needed.",
+  "blueprint": "Realizes the finite-ring coefficient-transfer sentence in the support-triangle proof of lem-exc-proetale-support-triangle: compare the actual closed adjunction units, not only the underlying objects."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-7e2ed1613",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-7e2ed1613 (reviewer sub-agent of L); spot-checked: I read the item's three steps, every cited statement (def-weil-pbc-proetale-modules, def-pc-sheaf-restrict-scalars, prop-weil-pbc-proetale-constant-exact, prop-weil-pbc-proetale-constant-ring-map, def-weil-proetale-inverse-image, def-weil-sheaf-of-modules-category, def-pc-scheme) and Stacks 03D3 lemma-adjoint-push-pull-modules (sites-modules.tex lines 1044-1130). The parent lem-exc-proetale-supported-kernel-complex uses the item for Z/n -> A exactly as stated. The mathematics is correct. Step 1 holds because the identity is R_X-linear exactly when c^S∘f^{-1}φ_Y = φ_X∘c^R. Step 2 needs the equivalent equality ρ^S φ_Y = f_*(φ_X) ρ^R. Step 3's unit equation holds because every underlying map is the identity or η_f and the forgetful functor is faithful. Small cases checked: X empty, R = 0, φ = id, and noncommutative M_2(F_p). Fixes (no new nodes, statement unchanged): (1) Step 1 only gestured at the coefficient-map equality. I wrote out the argument: pass to adjuncts, check on constant sections, glue over an open cover, then use sheafification. I also wrote out that f^{-1}(P_Y N) carries the f^{-1}-transformed restricted action, since f^{-1} preserves finite products. (2) Step 2 cited def-weil-proetale-inverse-image for ρ, but that node defines ρ only for commutative constant A. I added the missing citation of prop-weil-pbc-proetale-constant-ring-map, which defines ρ for noncommutative pro-étale coefficients. Tool uses for the maintainer to record: prop-weil-pbc-proetale-constant-ring-map and prop-weil-pbc-proetale-constant-exact (unit sk-thm-properbasechange). That unit is outside the sk-prop-sf-localization route, but these are generic coefficient facts that nothing in the route supplies, and other sec-smooth-purity nodes already use them as tools. No duplicate found, no SGA source used.; 1 file(s) fixed by the reviewer"
  }
 }
