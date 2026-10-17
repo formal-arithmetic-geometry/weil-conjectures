@@ -221,5 +221,23 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e6c6a3fd4 (reviewer sub-agent of L); spot-checked: I read the item, its five steps and the full statements of all cited nodes; the mathematics is correct. HTT 5.4.7.7 is not archived, so I checked against its known compact-generator proof, and proof_origin=agent with a WANTED line is right. Step checks: the max(kappa,theta) monotonicity holds (a rho-filtered category is kappa- and theta-filtered). The step-3 composite equals Map(g,q), since the adjunct of t_i∘v is R(t_i)∘R(v)∘eta_g. Step 4 uses a small presentation index J with the Yoneda limit formula and pointwise equivalences. In step 5, x=Ry gives [q][v]=1, and injectivity at x=z gives [v][q]=1. Small cases (terminal categories, identity adjunction, (-)^N on Set needing aleph_1) behave correctly. Dependency closures over dag/nodes show no cycles. The rg search over accessible/adjoint statements found no duplicate. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (generic quasicategory tool already used this way in the unit). Two faults repaired in fixes/: (1) B3/C1: 'left adjoint' had no definition node, and step 3 used coherent naturality of the adjunct equivalences in d while marked elementary. Fixed by citing def-coef-coherent-adjunction-data in the statement and stmt_deps, with the same meaning as in the parent, nothing weakened. Steps 1 and 3 now cite lem-coef-infinity-adjunction-mapping-equivalence (same unit, no cycle) and are marked elementary=false; proof_deps resynced. (2) The source.document URL host math.ias.harvard.edu is corrected to math.ias.edu.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresentableRightAdjointAccessible",
+  "declaration": "SSet.Presentability.presentable_right_adjoint_accessible",
+  "file": "lean/Sheaf/CategoryTheory/PresentableRightAdjointAccessible.lean",
+  "statement": "theorem presentable_right_adjoint_accessible (C D : SSet.{max (u + 1) v}) [SSet.Quasicategory C] [SSet.Quasicategory D] (hC : IsPresentable.{u, v} C) (hD : IsPresentable.{u, v} D) (R : D ⟶ C) (L : C ⟶ D) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L R) : ∃ (ρ : Cardinal.{u}), ρ.IsRegular ∧ PreservesColimitsIn R (fun I _ _ ↦ ∃ hI : SSet.Quasicategory I, IsSmall.{u, max (u + 1) v} I ∧ @IsKappaFiltered ρ I hI)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db41e585e",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read node, 3 stmt deps and their Lean (PresentableInfinityCategory: IsPresentable/IsSmall/IsKappaFiltered/PreservesColimitsIn; ModelInfinityDerivedAdjunction: CoherentAdjunction), snapshot module and node (only the lean field changed vs clone). Clause by clause: C,D : SSet.{max(u+1) v} presentable; R : D⟶C; L with CoherentAdjunction L R (unit id_C→L≫R, counit R≫L→id_D, initial/terminal comma conditions, orientation correct); ∃ρ:Cardinal.{u} regular (infinite via aleph0_le), chosen before the diagram quantifiers; PreservesColimitsIn R over small ρ-filtered quasicategory indices with canonical mappedCocone. Definitionally equal to the consumer's PreservesKappaFiltered. Universes bound, no forced equality. Edge cases: empty I excluded by the K=∅ test, terminal category allowed, ρ=ℵ₀ allowed. No definitions, single sorry theorem, source and blueprint docstrings with the five proof steps, stmt_deps exact, lean.statement verbatim, no duplicate found. nt_compile --json (side overlay): exit 0, module 1.5 s, no errors or warnings. Cosmetic only: redaction artefact 'HTT Proposition the project server' in the report; docstring omits HTT 5.5.3.1(3)/5.5.3.3."
  }
 }

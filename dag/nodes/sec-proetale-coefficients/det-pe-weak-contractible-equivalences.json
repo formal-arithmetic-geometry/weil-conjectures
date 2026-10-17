@@ -217,5 +217,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences",
+  "declaration": "AlgebraicGeometry.Scheme.proetale_weakContractible_equivalences",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/WeakContractibleEquivalences.lean",
+  "statement": "theorem proetale_weakContractible_equivalences (X : Scheme.{u}) (W : X.ProEt) : ((∀ (F : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : F ⟶ (ProEt.topology X).uliftYoneda.{u + 1}.obj W) [Epi φ], ∃ s : (ProEt.topology X).uliftYoneda.{u + 1}.obj W ⟶ F, s ≫ φ = 𝟙 _) ↔ Projective ((ProEt.topology X).uliftYoneda.{u + 1}.obj W)) ∧ (Projective ((ProEt.topology X).uliftYoneda.{u + 1}.obj W) ↔ (∀ (F G : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : F ⟶ G) [Epi φ], Function.Surjective (φ.hom.app (op W)))) ∧ (∀ (D : Type u) [CommRing D] [IsWContractibleRing D] (f : Spec (.of D) ⟶ X) [WeaklyEtale f], ∀ (F : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : F ⟶ (ProEt.topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f)) [Epi φ], ∃ s : (ProEt.topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f) ⟶ F, s ≫ φ = 𝟙 _)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-660830f38",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the module and report are new; the lean statement is verbatim in the file; Worker report and Second reading by Q59 present. Clauses match node and source: (1) section of every Epi onto uliftYoneda.{u+1}.obj W; (2) Mathlib Projective, shown by a test file to equal the node's lifting condition; (3) surjectivity of φ.hom.app (op W), shown by rfl to be the sheafToPresheaf evaluation; (1↔2)∧(2↔3); the affine clause has exactly det-pe-wcb-projective's clause-1 binders. No extra hypotheses. Universes (printed in full): site objects u+1, morphisms u, sheaves Type (u+1), same as the recorded dependencies, nothing collapsed. Edge cases covered (empty or disconnected W, zero ring, empty covers). No definitions or pro-etale substitute; upstream IsWeaklyContractible is the record of the uncited same_as definition, no duplicate. Docstrings give the source, blueprint tag and 5 proof steps; proof is sorry only. nt_compile.py --json on the local overlay: clean, 1.7 s; a test copy confirmed the tool reports diagnostics. No findings."
  }
 }
