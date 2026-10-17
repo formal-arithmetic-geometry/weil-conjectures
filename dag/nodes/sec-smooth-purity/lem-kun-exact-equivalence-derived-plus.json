@@ -256,5 +256,24 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-7acba7920 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full; no new nodes. Verified Stacks 015F/010N, Mathlib natural-transformation descent, boundedness, prescribed unit/counit, inverse formulas, edge cases, duplicate candidates, and route. Accepted the declared boundedness tool use. No repairs needed; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-245544854",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Statement matches node lem-kun-exact-equivalence-derived-plus clause by clause: abelian A,B with HasDerivedCategory; additive exact F,G (Additive+PreservesFiniteLimits/Colimits, equivalent to SES-exactness); eta, epsilon isos without triangle identities; Fplus/Gplus = mapDerivedCategoryPlus on DerivedCategory.Plus (union of D^{>=n}); ηplus/εplus are the termwise-induced isos via mapDerivedCategoryPlusNatIso and the Id/Comp isos; e = Equivalence.mk (unit adjointified, which is faithful since the node assumes no triangle identities); preserve and reflect isos for both functors. Six independent universes, no unbound variables, no duplicate (only unbounded Equivalence.mapDerivedCategory exists), no hollow def, sorry-only proof. Delivered and fixed files compile clean via nt_compile.py --json (error injection confirmed diagnostics are reported). Finding H8: the theorem docstring lacked the node's proof steps; fixes/ExactEquivalenceDerivedPlus.lean adds the six steps with their nodes, signature byte-identical, so the lean.statement record is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ExactEquivalenceDerivedPlus",
+  "declaration": "CategoryTheory.exactEquivalenceDerivedPlus",
+  "file": "lean/Sheaf/SecSmoothPurity/ExactEquivalenceDerivedPlus.lean",
+  "statement": "theorem exactEquivalenceDerivedPlus {A : Type u} {B : Type u'} [Category.{v} A] [Category.{v'} B] [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B] (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits G] [PreservesFiniteColimits G] (η : 𝟭 A ≅ F ⋙ G) (ε : G ⋙ F ≅ 𝟭 B) : let Fplus := F.mapDerivedCategoryPlus let Gplus := G.mapDerivedCategoryPlus let ηplus := (Functor.mapDerivedCategoryPlusIdIso A).symm ≪≫ Functor.mapDerivedCategoryPlusNatIso η ≪≫ Functor.mapDerivedCategoryPlusCompIso F G let εplus := (Functor.mapDerivedCategoryPlusCompIso G F).symm ≪≫ Functor.mapDerivedCategoryPlusNatIso ε ≪≫ Functor.mapDerivedCategoryPlusIdIso B ∃ e : DerivedCategory.Plus A ≌ DerivedCategory.Plus B, e = Equivalence.mk Fplus Gplus ηplus εplus ∧ (∀ {X Y : DerivedCategory.Plus A} (f : X ⟶ Y), IsIso (Fplus.map f) ↔ IsIso f) ∧ (∀ {X Y : DerivedCategory.Plus B} (f : X ⟶ Y), IsIso (Gplus.map f) ↔ IsIso f)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-245544854"
  }
 }

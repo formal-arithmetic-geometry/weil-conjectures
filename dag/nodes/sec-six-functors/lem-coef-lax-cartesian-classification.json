@@ -27,7 +27,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-cartesian-operadic-envelope",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-symmetric-monoidal-segal-classification"
  ],
  "proof": [
   {
@@ -287,5 +288,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-859128382",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Statement matches node and HA 2.4.1.7 clause by clause. Source: IsSymmetricMonoidal (cocartesian, Segal fibre equivalences incl. n=0). Target: recorded CartesianEnvelope.total/projection; HasFiniteProducts incl. empty. Lax functors = relativeOperadicAlgebras (over base, inert-preserving, transformations unrestricted). IsProductConeFunctor fixes the actual cone apex and transformation, legs over rho_i cocartesian; n=0 gives terminal F(()). theta fixed to the full-subset evaluation, IsFunctorEquivalence on the whole functor categories. Colour restriction via fiberValue {0}. Fold block = mu then F, incl. arity 0. liftSpace = core of homotopy fibre on equivalence identifications, Kan and contractible. 12 helpers are real canonical data with source/blueprint docstrings; only sorry. lean.statement verbatim. Added stmt_dep segal-classification correct. nt_compile --json: rc 0, no errors or warnings (4.3 s). Minor: the SpaceValuedStraightening re-delivery is redundant (base already has Q19's noncomputable fix; Lean diff is one trailing blank line; dependency record by changed to Q22). Harmless. Report has garbled section numbers. Second reading is the author's own.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LaxCartesianClassification",
+  "declaration": "SSet.Enhanced.LaxCartesian.lax_cartesian_classification",
+  "declarations": [
+   "SSet.Enhanced.LaxCartesian.fullSubset",
+   "SSet.Enhanced.LaxCartesian.fullSubsetMap",
+   "SSet.Enhanced.LaxCartesian.evaluation",
+   "SSet.Enhanced.LaxCartesian.coneLeg",
+   "SSet.Enhanced.LaxCartesian.IsProductConeFunctor",
+   "SSet.Enhanced.LaxCartesian.productFunctors",
+   "SSet.Enhanced.LaxCartesian.laxFunctors",
+   "SSet.Enhanced.LaxCartesian.laxInclusion",
+   "SSet.Enhanced.LaxCartesian.colorRestriction",
+   "SSet.Enhanced.LaxCartesian.liftSpace",
+   "SSet.Enhanced.LaxCartesian.fold",
+   "SSet.Enhanced.LaxCartesian.foldComponent",
+   "SSet.Enhanced.LaxCartesian.lax_cartesian_classification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LaxCartesianClassification.lean",
+  "statement": "theorem lax_cartesian_classification {E : SSet.{u}} [Quasicategory E] (r : E ⟶ finStarBase.{u}) (hr : SymmetricSegal.IsSymmetricMonoidal r) (D : SSet.{u}) [Quasicategory D] (hD : CartesianEnvelope.HasFiniteProducts D) : ∃ θ : laxFunctors r D ⟶ (productFunctors r D).toSSet, θ ≫ (productFunctors r D).ι = laxInclusion r D ≫ (ihom E).map (evaluation D) ∧ IsFunctorEquivalence θ ∧ (∀ F : (productFunctors r D).toSSet _⦋0⦌, KanComplex (liftSpace θ F) ∧ IsContractible (liftSpace θ F)) ∧ (∀ H : (laxFunctors r D) _⦋0⦌, ∃ h : operadicDiagram ((laxInclusion r D).app _ H) ≫ CartesianEnvelope.projection D = r, AreNaturallyEquivalent (colorRestriction r (operadicDiagram ((laxInclusion r D).app _ H)) h ≫ CartesianEnvelope.fiberValue D 1 {0}) (operadicFiberInclusion r (finStarVertex 1) ≫ operadicDiagram ((productFunctors r D).ι.app _ (θ.app _ H)))) ∧ (∀ (H : (laxFunctors r D) _⦋0⦌) (n : ℕ) (μ : Δ[1] ⟶ E), μ ≫ r = finStarEdge (fold n) → IsCocartesianEdge r μ → ∃ h : (μ ≫ operadicDiagram ((laxInclusion r D).app _ H) ≫ (CartesianEnvelope.complex D).ι) ≫ relativeExponentialProjection D CartesianEnvelope.indexProjection = CartesianEnvelope.indexArrow (fold n) {0} ≫ CartesianEnvelope.indexProjection, foldComponent n (μ ≫ operadicDiagram ((laxInclusion r D).app _ H)) h = μ ≫ operadicDiagram ((productFunctors r D).ι.app _ (θ.app _ H)))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical full-subset evaluation on the recorded cartesian envelope classifies lax functors. The product predicate fixes the actual cone apex and coherent transformation. Includes the color-fiber restriction, actual fold block formula including arity zero, and the core of equivalence-identified lifts. All helper definitions belong to this classification; no existence-based data choice. The added already-landed Segal-classification dependency supplies exactly the symmetric monoidal source hypothesis."
  }
 }

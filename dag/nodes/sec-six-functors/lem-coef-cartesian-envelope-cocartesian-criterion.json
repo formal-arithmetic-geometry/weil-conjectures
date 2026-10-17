@@ -238,5 +238,36 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-b95cce926 (reviewer sub-agent of L); spot-checked: I read the whole item, all eight steps, and the full statements of lem-coef-cocartesian-straightening, lem-coef-cartesian-operadic-envelope and def-cbc-enhanced-diagrams-cones. Chu-Haugseng (arXiv:2006.08269) is not in literature/, so I fetched it read-only into /tmp. Corollary 6.8 (p.15) has exactly the item's hypotheses: finite products in E and B, p preserves them, binary products of p-cocartesian edges are p-cocartesian. Proposition 6.7(ii) and its proof (pp.14-15) give the lift as block product then p-transport. Example 3.2 (p.5) is the ordered-block functor. The iff-criterion and the Delta^op pullback go beyond Corollary 6.8 and are proved directly, so proof_origin=agent is correct. Step checks: step 1 splits the mapping spaces by pointed-map label, which is valid because Fin_* has discrete hom-sets. Step 2 closes cocartesian edges under finite products, with the nullary case the identity of 1_E; it is elementary. Steps 3-4: the blocks regroup disjointly, composing with P(u) sends the beta-summand to the beta-alpha-summand without needing injectivity, and the comparison is a product, then a coproduct, of equivalences. Step 5 proves necessity by testing against a one-term tuple and the inert rho_j. Step 6 builds lifts for every object and every arrow, including empty blocks. Step 7: I recomputed the composition of interval blocks; the direction matches Example 3.2. Step 8 uses pasting of pullbacks, and necessity again comes from the singleton block given by [1]->[s]. Small cases: E->* reduces to the envelope node's criterion that component maps are equivalences; the identity fibration and s=0, t=0, r=0 are consistent. No new nodes. No cycle (the 537-node closure does not contain the item). Not a duplicate: lem-coef-cartesian-monoidal-straightening repeats the argument inside its proof, but its statement only asserts the lax monoidal structure; it could later cite this item. Route: every cited statement is in the same unit, and the off-unit node is a definition, so no tool_uses. The current blueprint has no matching node, so same_as=[] is right. Searches cover LeanSearch, LeanFinder and grep; one Loogle query failed with an unknown identifier but is recorded as 'no match' (minor wording only). No SGA. The statement is unchanged and this is not a target node. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e73546931",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read node, 3 dep nodes and their Lean declarations (CartesianOperadicEnvelope in full, IsIntrinsicEdge/Fibration, IsEquivalenceEdge, PreservesLimitsOfShape, FinStar/finStarEdge), module, report and Chu-Haugseng Cor 6.8/Prop 6.7(ii)/Ex 3.2 (local copy). Every clause matches with no stronger hypothesis: hE/hB, PreservesFiniteProducts includes n=0, ProductsCocartesianClosure tests the actual product edge over id<2>, IsEnvelopeMap fixes P on all simplices, BlockCriterion iff via indexArrow a {j}, BlockTransportLifts with prescribed source and base arrow, IsOrderedBlockFunctor matches Ex 3.2 with correct Fin shift, OrderedBlockAssertions on actual pullbacks with R pinned by both projections. Edge cases r=0, s=0, empty blocks, constant maps ok. Node changes only lean, statement verbatim, declarations match. No hollow defs, docstrings ok, no long lines, no duplicates. nt_compile rc=0 with no messages, 5.5-9.9 s; #print axioms probe shows only sorryAx plus standard axioms. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianEnvelopeCocartesianCriterion",
+  "declaration": "SSet.Enhanced.CartesianEnvelope.cartesian_envelope_cocartesian_criterion",
+  "declarations": [
+   "SSet.Enhanced.CartesianEnvelope.IsComponent",
+   "SSet.Enhanced.CartesianEnvelope.ComponentIsCocartesian",
+   "SSet.Enhanced.CartesianEnvelope.ProductsCocartesianClosure",
+   "SSet.Enhanced.CartesianEnvelope.IsEnvelopeMap",
+   "SSet.Enhanced.CartesianEnvelope.BlockCriterion",
+   "SSet.Enhanced.CartesianEnvelope.BlockTransportLifts",
+   "SSet.Enhanced.CartesianEnvelope.IsOrderedBlockFunctor",
+   "SSet.Enhanced.CartesianEnvelope.orderedBlockNerve",
+   "SSet.Enhanced.CartesianEnvelope.OrderedBlockAssertions",
+   "SSet.Enhanced.CartesianEnvelope.cartesian_envelope_cocartesian_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianEnvelopeCocartesianCriterion.lean",
+  "statement": "theorem cartesian_envelope_cocartesian_criterion {E B : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : IsIntrinsicFibration p) (hE : HasFiniteProducts E) (hB : HasFiniteProducts B) (hproducts : PreservesFiniteProducts p) (hclosed : ProductsCocartesianClosure p) : ∃ P : total E ⟶ total B, IsEnvelopeMap p P ∧ P ≫ projection B = projection E ∧ IsIntrinsicFibration P ∧ BlockCriterion p P (𝟙 _) ∧ BlockTransportLifts p P (𝟙 _) (𝟙 _) ∧ ∃ F : SimplexCategoryᵒᵖ ⥤ FinStar, IsOrderedBlockFunctor F ∧ OrderedBlockAssertions p P F",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Return repair: finite-product existence, actual binary product closure, intrinsic predicates throughout, canonical all-simplex normalization, prescribed-source block transports with target equivalences and triangles, and normalized ordered-block pullback. The imported prerequisite noncomputability defect was repaired on the current base during this work; this delivery uses that published repair."
  }
 }

@@ -199,5 +199,24 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-150d8bdb1 (reviewer sub-agent of L); spot-checked: Read the item, all cited definitions, Stacks 011N/011O/0121/0132, and blueprint route. All five steps correctly prove canonical survival, filtration vanishing, and the specified edge isomorphism. Checked m=0,1,2 and noncollapsed examples; no duplicate generalization, missing citation, cycle, or repair found. No new nodes or tool_uses. Full review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b4c57dae",
+  "group": "NR",
+  "result": "pass",
+  "note": "Clause-by-clause match: Mathlib E2 cohomological SS with differential bidegree (r,1-r); hfirst and hrow exactly the node's vanishing; recorded DecreasingFiltration with F^0=top and F^(n+1)=bot; conv into stable page n+2, which is canonically E_inf since n+2>max(p,q+1) (Stacks 011O degeneration remark; same as landed FirstQuadrantRowCollapse; the recorded pageInfinity is exact-couple-only). Survival maps a r uniquely pinned by a 0=id and the iCycles/homologyPi/E.iso recursion; F^1 H^m=bot; edge unique via its quotient square, IsIso. Statement true and hypotheses satisfiable; m=0,1,2 and higher-row cases covered; universes free. No defs, sorry only, docstrings carry source, blueprint tag and the 5 steps; lean.statement verbatim; node changed only in lean; report has real Worker report and Second reading by NR. nt_compile --json on the snapshot text: 5.0 s, no messages (a negative probe confirmed the tool reports errors). Non-blocking: private import ExactCoupleConvergence is unused by the statement, harmless."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge",
+  "declaration": "CategoryTheory.first_quadrant_lowest_row_edge",
+  "file": "lean/Sheaf/CategoryTheory/FirstQuadrantLowestRowEdge.lean",
+  "statement": "theorem first_quadrant_lowest_row_edge {C : Type u} [Category.{v} C] [Abelian C] (E : E₂CohomologicalSpectralSequence C) (hfirst : ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((E.page 2).X (p, q))) (H : ℕ → C) (F : ∀ n : ℕ, DecreasingFiltration (H n)) (htop : ∀ n : ℕ, (F n).F 0 = ⊤) (hbottom : ∀ n : ℕ, (F n).F ((n : ℤ) + 1) = ⊥) (conv : ∀ (n p q : ℕ) (_hpq : p + q = n), (F n).gr p ≅ (E.page ((n : ℤ) + 2)).X (p, q)) (m : ℕ) (hrow : ∀ p q : ℕ, q < m → IsZero ((E.page 2).X (p, q))) : ∃ (a : ∀ r : ℕ, (E.page 2).X (0, m) ≅ (E.page ((r : ℤ) + 2)).X (0, m)) (b : ∀ r : ℕ, (E.page 2).X (0, m) ⟶ (E.page ((r : ℤ) + 2)).cycles (0, m)), (a 0).hom = 𝟙 _ ∧ (∀ r : ℕ, b r ≫ (E.page ((r : ℤ) + 2)).iCycles (0, m) = (a r).hom ∧ b r ≫ (E.page ((r : ℤ) + 2)).homologyπ (0, m) ≫ (E.iso ((r : ℤ) + 2) ((r : ℤ) + 3) (0, m)).hom = (a (r + 1)).hom) ∧ (F m).F 1 = ⊥ ∧ ∃ edge : H m ⟶ (E.page 2).X (0, m), ((F m).F 0).arrow ≫ edge ≫ (a m).hom = cokernel.π (Subobject.ofLE _ _ ((F m).F_succ_le 0)) ≫ (conv m 0 m (by omega)).hom ∧ IsIso edge",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The recursive E-infinity subquotient is represented by its canonically identified stationary page n+2 in total degree n. The cycles/homology recursion specifies survival on every page; the quotient square specifies the canonical left edge. No exact-couple hypothesis is imposed."
  }
 }

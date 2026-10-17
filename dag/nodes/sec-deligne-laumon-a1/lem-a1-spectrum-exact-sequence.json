@@ -147,5 +147,23 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-ee7e524a3 (reviewer sub-agent of L); spot-checked: I read the item, the full statements of def-weil-frobenius-module-weights and p-linear-filtration (including the latter's blueprint_update), the unit sk-l-dl-a1-endpoints, the chapter, and the blueprint source in main-20261015 and master. The statement and proof are the same in both copies, and the item's statement is unchanged. Step 1: the basis of i(V') plus lifts of a basis of V'' is checked for independence and spanning, the blocks A and C follow from Fi=iF' and pF=F''p, F(S)=S because F' is surjective, and no stable complement is assumed. Step 2: it uses the cited statement's actual det(1-Tf) form on the filtration 0⊆S⊆V and converts with chi_W(T)=T^{dim W}D_W(T^{-1}) and dim V=dim V'+dim V''. I checked this conversion; it is elementary and the same as the existing Mathlib leaf lem-weil-reverse-charpoly-eq-reverse, so citing that leaf would be optional. p-linear-filtration's unit sk-p-linear-filtration is cited by the item's unit, so the step is on-route. Step 3: root factorizations give multiplicity r+s exactly, and applying iota preserves multiset sums. Small cases tested: the zero sequence, zero outer terms, [[1,1],[0,2]], and a non-split Jordan block (multiplicity 2 with a 1-dimensional eigenspace). There are no new nodes, and rg over the DAG found no duplicate. The declared tool_uses are unnecessary (one is a definition, the other is on-route) and harmless; neither is accepted as a needed tool use. No SGA source is cited, no target is involved, and no fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83c5645fc",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Shape: one commit, 3 files; node changed only in lean, record complete, statement verbatim. Each node clause matches: fixed p/a/ell/Qlb/iota as in IsMixedOfWeightsAtMost; upstream FrobeniusModule V',V,V''; Injective/Exact/Surjective; both Frobenius compatibilities in the right direction; spectrum = Multiset.map iota charpoly.roots (Qlb algebraically closed, so algebraic multiplicity), with Multiset + as the union. No extra hypotheses; the statement is true (charpoly factorization, roots_mul). Edge cases: zero modules/zero sequence give empty multisets, non-split sequences are allowed, carrier universes u',u,u'' are independent. No duplicate: upstream charpoly_eq_charpoly_restrict_mul_charpoly_mapQ is only a constituent, Mathlib charpoly_prodMap is the split case. Gates: no defs, only proof is sorry, source/blueprint docstrings with proof steps, lines <=100, the one import is used, no build or live write. nt_compile.py --json on the snapshot: clean, exit 0, 5.1 s, no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.SpectrumExactSequence",
+  "declaration": "FrobeniusModule.spectrum_exact_sequence",
+  "file": "lean/Sheaf/LinearAlgebra/SpectrumExactSequence.lean",
+  "statement": "theorem spectrum_exact_sequence (p a ell : ℕ) [Fact (Nat.Prime p)] (_ha : 1 ≤ a) [Fact (Nat.Prime ell)] (_hellp : ell ≠ p) (Qlb : Type v) [Field Qlb] [Algebra (ℚ_[ell]) Qlb] (_hQ : IsAlgClosure (ℚ_[ell]) Qlb) (iota : Qlb ≃+* ℂ) (V' : FrobeniusModule.{u', v} Qlb) (V : FrobeniusModule.{u, v} Qlb) (V'' : FrobeniusModule.{u'', v} Qlb) (ι : V'.carrier →ₗ[Qlb] V.carrier) (π : V.carrier →ₗ[Qlb] V''.carrier) (hι : Function.Injective ι) (h_exact : Function.Exact ι π) (hπ : Function.Surjective π) (hιF : ∀ x : V'.carrier, ι (V'.frobenius x) = V.frobenius (ι x)) (hπF : ∀ x : V.carrier, π (V.frobenius x) = V''.frobenius (π x)) : Multiset.map iota V.frobeniusEnd.charpoly.roots = Multiset.map iota V'.frobeniusEnd.charpoly.roots + Multiset.map iota V''.frobeniusEnd.charpoly.roots",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

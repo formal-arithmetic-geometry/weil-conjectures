@@ -26,7 +26,8 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "lem-coef-operadic-algebra-presentability"
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-operadic-operation-segal-product"
  ],
  "proof": [
   {
@@ -224,5 +225,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c525de49",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Every hypothesis has its Lean counterpart: M_[0] Kan is a conjunct of IsGeneralizedOperad, O_[1] Kan is hO1, hf gives inert preservation and f≫o=m, hcolor is an equivalence on the real pullback map colorFiberMap. Operation spaces are the landed `operations` (active objects; source edges in core ⊓ constantOrdinal in every degree). hops' ∃e with IsOperationMap pins e uniquely, since operationArrows is mono on the comma, so it is the induced map. The conclusion is IsFunctorEquivalence of the literal precomposition `restriction` for every IsOperad p. Single universe u with no smallness: weaker hypotheses, still true, and the user instantiates at max(u+1) v. Edge cases (nullary, empty spaces, arity-changing and non-invertible edges) handled. Gates pass: one sorry in the main theorem, source/blueprint docstrings and five proof steps, statement verbatim, lines ≤100, report has Worker report and Second reading by Q09, node diff only lean and stmt_deps (adds landed segal-product dep), no duplicate. nt_compile --json rc 0, item 3.5 s, no errors or warnings. Source not reachable from here (no network); checked against node text and knowledge of the erratum. Only remark: redundant Quasicategory instance arguments."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicLocalizationOperationCriterion",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadicLocalizationOperationCriterion",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.colorFiberMap",
+   "SSet.Enhanced.Nonsymmetric.operadicLocalizationOperationCriterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicLocalizationOperationCriterion.lean",
+  "statement": "theorem operadicLocalizationOperationCriterion {M O : SSet.{u}} [Quasicategory M] [Quasicategory O] (m : M ⟶ monoidalSimplexBase.{u}) (o : O ⟶ monoidalSimplexBase.{u}) (f : M ⟶ O) (hM : IsGeneralizedOperad m) (hO : IsOperad o) (hO1 : KanComplex (fiber o (monoidalBaseVertex 1))) (hf : IsLaxMonoidalInfinityFunctor m o f) (hcolor : IsFunctorEquivalence (colorFiberMap f hf.1 1)) (hops : ∀ (x : M _⦋0⦌), m.app _ x = monoidalBaseVertex 1 → ∃ e : operations m x ⟶ operations o (f.app _ x), IsOperationMap m o f x e ∧ IsFunctorEquivalence e) : ∀ (P : SSet.{u}) (p : P ⟶ monoidalSimplexBase.{u}), IsOperad p → IsFunctorEquivalence (restriction p f hf)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

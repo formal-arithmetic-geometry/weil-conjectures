@@ -159,5 +159,28 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-616956e32 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Corrected reversed simplex composition and X-variance; cited the existing marked internal-Hom generalization. Checked HTT pp.39, 94, 154 and Scholze pp.13–15, empty/non-fibrant cases, 27 finite examples, and acyclicity. Statement unchanged. Corrected JSON is under fixes/; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5b284e3b",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read the node, def-cbc-enhanced-diagrams-cones (uses (ihom K).obj Q), the MarkedInternalHom proof dependency, the delivered module, the report and Mathlib FunctorToTypes/FunctorHom/StdSimplex. Every clause matches: the functorSimplexEquiv model is a canonical equivalence, plus restriction on the simplex factor, forward map ev∘(f×1) via braiding, ev_n(h,k)=h_n(k,id), inverse g_m(X(α)x,k), simultaneous X/K/Q naturality via pre and ihom.map, no fibrancy, one universe u. For the canonical E, conjuncts 1, 2, 3 and 5 are proved by rfl in a scratch file; conjunct 4 is true by hand unfolding (𝟙≫a step). No duplicates or name collisions; only the theorem is sorry; docstrings and lean.statement verbatim are OK; only the node's lean field changed; no lines over 100 characters. nt_compile --json is clean (3-6 s). The Second reading section is the accepted 2026-10-17 placeholder. Maintainer note: the node's source fields still cite HTT 1.2.7.3 while the docstrings cite Goerss-Jardine I.5.1; update the metadata."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoyalStrictCurrying",
+  "declaration": "SSet.joyal_strict_currying",
+  "declarations": [
+   "SSet.functorSimplexEquiv",
+   "SSet.joyal_strict_currying"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/JoyalStrictCurrying.lean",
+  "statement": "theorem joyal_strict_currying : ∃ E : ∀ X K Q : SSet.{u}, (X ⟶ (ihom K).obj Q) ≃ (X ⊗ K ⟶ Q), (∀ (K Q : SSet.{u}) (n m : SimplexCategory) (a : m ⟶ n) (h : ((ihom K).obj Q).obj (op n)), functorSimplexEquiv K Q m (((ihom K).obj Q).map a.op h) = (K ◁ SSet.stdSimplex.map a) ≫ functorSimplexEquiv K Q n h) ∧ (∀ (X K Q : SSet.{u}) (f : X ⟶ (ihom K).obj Q), E X K Q f = (f ▷ K) ≫ (β_ ((ihom K).obj Q) K).hom ≫ (ihom.ev K).app Q) ∧ (∀ (X K Q : SSet.{u}) (f : X ⟶ (ihom K).obj Q) (n : SimplexCategoryᵒᵖ) (x : X.obj n) (k : K.obj n), (E X K Q f).app n (x, k) = (functorSimplexEquiv K Q n.unop (f.app n x)).app n (k, stdSimplex.objEquiv.symm (𝟙 n.unop))) ∧ (∀ (X K Q : SSet.{u}) (g : X ⊗ K ⟶ Q) (n m : SimplexCategoryᵒᵖ) (x : X.obj n) (k : K.obj m) (a : m.unop ⟶ n.unop), (functorSimplexEquiv K Q n.unop (((E X K Q).symm g).app n x)).app m (k, stdSimplex.objEquiv.symm a) = g.app m (X.map a.op x, k)) ∧ (∀ (X X' K K' Q Q' : SSet.{u}) (c : X' ⟶ X) (a : K' ⟶ K) (b : Q ⟶ Q') (f : X ⟶ (ihom K).obj Q), E X' K' Q' (c ≫ f ≫ (MonoidalClosed.pre a).app Q ≫ (ihom K').map b) = (c ⊗ₘ a) ≫ E X K Q f ≫ b)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the internal hom of EnhancedDiagramsCones, with its canonical Yoneda/exponential degree equivalence to Hom(K × Δ[n], Q). States restriction on the simplex factor, evaluation factorization, explicit forward and inverse formulas, and simultaneous X/K/Q naturality; no fibrancy hypotheses. The only postponed theorem is the item itself."
  }
 }

@@ -262,5 +262,33 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-78b3beda5 (reviewer sub-agent of L); spot-checked: Read the complete item, cited DAG statements, unit/chapter route, Kerodon 01PF and 01L5 source places, and delivery materials. Verified all seven steps, horn lifting including m=0, Kan and homotopy-equivalence consequences, prism degeneracies and boundaries, roof composition identity, strict simplicial naturality under p, edge cases, route, hypotheses, and duplicate status. No new nodes or repairs are needed. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-660f61254",
+  "group": "N2",
+  "result": "pass",
+  "note": "Compared every clause of lem-coef-infinity-fixed-edge-prism-coherence with SSet.Enhanced.fixed_edge_prism_coherence. fixedEdgeSpace has operators prependFirst∘prependFirst, first edge s and constant final face δ0δ0. r0/r1 are the δ1/δ0 faces into leftMappingSpace. The prism is (0,i)↦0, (1,i)↦1, (2,i)↦i+2. e lands in the dependency's triangleFiber via uncurry/Yoneda. θ, ℓ and sU are pinned by monic inclusions to triangleEdgePair, triangleLongEdge and diagramVertex s. The strict boundary equalities were hand-checked on edges 12, 01 and 02. The composition-class homotopy, the roof equivalence and the strict naturality (e, r0, r1, jL for all three pairs, c_s, θ, ℓ) are present, with the vertical maps pinned to ihom.map p. No extra hypotheses: p is only simplicial, one universe u, no vertex choice. Edge cases n=0 and empty mapping spaces are covered. Defs are real constructions; docstrings carry source and blueprint and the seven proof steps; only the main theorem is sorry. Imports follow stages/2 §3 rule 7; max line 92; statement verbatim; the node diff only adds lean. The Second-reading section is the standard 2026-10-17 placeholder (same as 207 landed reports). nt_compile.py --json gave a clean compile (rc=0, 7.6 s); a broken control copy failed with rc=1, so the clean result is real. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedEdgePrismCoherence",
+  "declaration": "SSet.Enhanced.fixed_edge_prism_coherence",
+  "declarations": [
+   "SSet.Enhanced.fixedEdgeInclusion",
+   "SSet.Enhanced.fixedEdgeFinalFace",
+   "SSet.Enhanced.fixedEdgeSpace",
+   "SSet.Enhanced.fixedEdgeSpaceMap",
+   "SSet.Enhanced.fixedEdgeTrianglePrism",
+   "SSet.Enhanced.FixedEdgePrismData",
+   "SSet.Enhanced.fixed_edge_prism_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FixedEdgePrismCoherence.lean",
+  "statement": "theorem fixed_edge_prism_coherence : ∃ j : ∀ (D : SSet.{u}) [Quasicategory D] (a b : D _⦋0⦌), leftMappingSpace D a b ⟶ arrowMappingSpace D a b, (∀ (D : SSet.{u}) [Quasicategory D] (a b : D _⦋0⦌) (n : SimplexCategoryᵒᵖ) (t : (leftMappingSpace D a b).obj n), MonoidalClosed.uncurry (SSet.yonedaEquiv.symm ((j D a b ≫ arrowMappingSpaceInclusion D a b).app n t)) = leftPinchPrism n.unop.len ≫ SSet.yonedaEquiv.symm t.1) ∧ ∃ P : ∀ (D : SSet.{u}) [Quasicategory D] (x y : D _⦋0⦌) (s : (leftMappingSpace D x y) _⦋0⦌) (z : D _⦋0⦌), FixedEdgePrismData D x y s z (j D), ∀ (D E : SSet.{u}) [Quasicategory D] [Quasicategory E] (p : D ⟶ E) (x y : D _⦋0⦌) (s : (leftMappingSpace D x y) _⦋0⦌) (z : D _⦋0⦌), ∃ (uxy : arrowMappingSpace D x y ⟶ arrowMappingSpace E (p.app _ x) (p.app _ y)) (uxz : arrowMappingSpace D x z ⟶ arrowMappingSpace E (p.app _ x) (p.app _ z)) (uyz : arrowMappingSpace D y z ⟶ arrowMappingSpace E (p.app _ y) (p.app _ z)) (v : triangleFiber D x y z ⟶ triangleFiber E (p.app _ x) (p.app _ y) (p.app _ z)), uxy ≫ arrowMappingSpaceInclusion E (p.app _ x) (p.app _ y) = arrowMappingSpaceInclusion D x y ≫ (ihom Δ[1]).map p ∧ uxz ≫ arrowMappingSpaceInclusion E (p.app _ x) (p.app _ z) = arrowMappingSpaceInclusion D x z ≫ (ihom Δ[1]).map p ∧ uyz ≫ arrowMappingSpaceInclusion E (p.app _ y) (p.app _ z) = arrowMappingSpaceInclusion D y z ≫ (ihom Δ[1]).map p ∧ v ≫ pullback.fst (triangleEndpointMap E) (SSet.const (X := Δ[0]) (triangleVertices (p.app _ x) (p.app _ y) (p.app _ z))) = pullback.fst (triangleEndpointMap D) (SSet.const (X := Δ[0]) (triangleVertices x y z)) ≫ (ihom Δ[2]).map p ∧ (P D x y s z).e ≫ v = fixedEdgeSpaceMap p s.1 z ≫ (P E (p.app _ x) (p.app _ y) ((leftMappingSpaceMap p x y).app _ s) (p.app _ z)).e ∧ (P D x y s z).r₀ ≫ leftMappingSpaceMap p x z = fixedEdgeSpaceMap p s.1 z ≫ (P E (p.app _ x) (p.app _ y) ((leftMappingSpaceMap p x y).app _ s) (p.app _ z)).r₀ ∧ (P D x y s z).r₁ ≫ leftMappingSpaceMap p y z = fixedEdgeSpaceMap p s.1 z ≫ (P E (p.app _ x) (p.app _ y) ((leftMappingSpaceMap p x y).app _ s) (p.app _ z)).r₁ ∧ j D x y ≫ uxy = leftMappingSpaceMap p x y ≫ j E (p.app _ x) (p.app _ y) ∧ j D x z ≫ uxz = leftMappingSpaceMap p x z ≫ j E (p.app _ x) (p.app _ z) ∧ j D y z ≫ uyz = leftMappingSpaceMap p y z ≫ j E (p.app _ y) (p.app _ z) ∧ uxy.app _ (P D x y s z).sU = (P E (p.app _ x) (p.app _ y) ((leftMappingSpaceMap p x y).app _ s) (p.app _ z)).sU ∧ (P D x y s z).θ ≫ (uyz ⊗ₘ uxy) = v ≫ (P E (p.app _ x) (p.app _ y) ((leftMappingSpaceMap p x y).app _ s) (p.app _ z)).θ ∧ (P D x y s z).ℓ ≫ uxz = v ≫ (P E (p.app _ x) (p.app _ y) ((leftMappingSpaceMap p x y).app _ s) (p.app _ z)).ℓ",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The explicit fixed-edge simplicial set and prism are real constructions. The theorem supplies maps characterized in every degree, the strict boundary identities, the roof equivalence and composition homotopy, and a strictly natural family under all simplicial functors. The edge s is represented by a degree-zero simplex of the recorded left mapping space, exactly an edge with the specified endpoints. All vertical maps are characterized by postcomposition after their canonical inclusions; no arbitrary comparison or natural inverse is assumed."
  }
 }

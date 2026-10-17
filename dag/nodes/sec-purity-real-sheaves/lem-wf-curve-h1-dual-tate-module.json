@@ -197,5 +197,28 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-dcadd343b (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all six proof steps, cited statements, blueprint route, Milne §§14/22, and Stacks 0FPJ/0H9A. Coefficient transitions, semilinear invariance, Tate quotients, and inverse constructions are correct. No duplicate, cycle, or target weakening found. Detailed checks and accepted tool uses are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2b203059",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion clause against the node, the blueprint source (identical statement) and the exact dependency declarations. The inverse system uses coefficient reduction ZMod(l^(n+1))->ZMod(l^n); the helper has real data. Linearity is a levelwise toZModPow scalar clause. Equivariance applies pullback along the same gamma to cohomology (Etale.cohomologyMap plus the constant-sheaf iso) and to Tate points (Spec sigma, then the point, then a_sigma, the dependency's rho, which equals Pic.map gamma), so the trace-cup invariance is true and not vacuous. Proper for projective and the redundant instances on C come from the accepted action dependency; no stronger assumptions. Edge cases n=0, genus 0, char 0, l=char excluded, universes u/u+1 all checked. lean.statement is verbatim; docstrings carry source, blueprint tag and six proof steps; only sorry is the theorem proof (axioms checked). nt_compile --json: rc 0, no errors or warnings, 16.6 s. The report has a real Worker report; the Second reading section records the 2026-10-17 direct-delivery policy. No findings requiring change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.H1DualTateModule",
+  "declaration": "AlgebraicGeometry.exists_curveH1_dualTateModule",
+  "declarations": [
+   "AlgebraicGeometry.curveH1CoefficientSystem",
+   "AlgebraicGeometry.exists_curveH1_dualTateModule"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/H1DualTateModule.lean",
+  "statement": "theorem exists_curveH1_dualTateModule (k₀ K : Type u) [Field k₀] [Field K] [Algebra k₀ K] [IsAlgClosure k₀ K] [IsAlgClosed K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))] [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (.of k₀))] [IsProper (C₀ ↘ Spec (.of k₀))] [GeometricallyConnected (C₀ ↘ Spec (.of k₀))] (C : Scheme.{u}) [C.Over (Spec (.of K))] [IsCurve (C ↘ Spec (.of K))] [Smooth (C ↘ Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [IsProper (C ↘ Spec (.of K))] [GeometricallyIntegral (C ↘ Spec (.of K))] (p : C ⟶ C₀) (hC : IsPullback p (C ↘ Spec (.of K)) (C₀ ↘ Spec (.of k₀)) (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))) (J : Over (Spec (.of K))) [CommGrpObj J] [IsJacobian (C ↘ Spec (.of K)) J] (φ : (picardFunctorDegree (C ↘ Spec (.of K)) 0).obj.RepresentableBy J) (hφ : IsPicardZeroMul (C ↘ Spec (.of K)) φ) (ℓ : ℕ) [Fact ℓ.Prime] (c : ℕ) [CharP k₀ c] (hℓ : ℓ ≠ c) : ∃ e : ↥(limit (curveH1CoefficientSystem C ℓ)) ≃+ (IsAbelianVariety.tateModule ℓ J →ₗ[ℤ_[ℓ]] ℤ_[ℓ]), (∀ (r : ℤ_[ℓ]) (x : ↥(limit (curveH1CoefficientSystem C ℓ))), ∃ x' : ↥(limit (curveH1CoefficientSystem C ℓ)), (∀ n : ℕ, limit.π (curveH1CoefficientSystem C ℓ) (.op n) x' = (r.toZModPow n).val • limit.π (curveH1CoefficientSystem C ℓ) (.op n) x) ∧ e x' = r • e x) ∧ ∀ (σ : K ≃ₐ[k₀] K) (γ : C ⟶ C), γ ≫ p = p → γ ≫ (C ↘ Spec (.of K)) = (C ↘ Spec (.of K)) ≫ Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom) → ∀ (x : ↥(limit (curveH1CoefficientSystem C ℓ))) (t : IsAbelianVariety.tateModule ℓ J), ∃ (x' : ↥(limit (curveH1CoefficientSystem C ℓ))) (t' : IsAbelianVariety.tateModule ℓ J), (∀ n : ℕ, limit.π (curveH1CoefficientSystem C ℓ) (.op n) x' = Sheaf.H.map (((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} γ).app (AddCommGrpCat.of (ULift.{u + 1} (ZMod (ℓ ^ n))))).hom) 1 (Etale.cohomologyMap γ (C.constantZMod (ℓ ^ n)) 1 (limit.π (curveH1CoefficientSystem C ℓ) (.op n) x))) ∧ (∀ n : ℕ, ((IsAbelianVariety.pointsAddEquivGeometricPoints J).symm (t'.1 n)).toMul.left = Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom) ≫ ((IsAbelianVariety.pointsAddEquivGeometricPoints J).symm (t.1 n)).toMul.left ≫ ((Classical.choose (existsUnique_geometricJacobian_galoisAction k₀ K C₀ C p hC J φ hφ).exists) σ).hom) ∧ e x' t' = e x t",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The additive equivalence is explicitly linear for the usual coordinatewise Z_l action, expressed via residues instead of introducing a new module instance. Equivariance is simultaneous invariance of evaluation under the canonical cohomology pullback and the unique geometric Jacobian action; this is exactly the contragredient dual action. The auxiliary declaration constructs the coefficient-reduction diagram from the existing constant sheaf and cohomology functors."
  }
 }

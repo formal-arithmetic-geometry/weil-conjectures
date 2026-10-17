@@ -224,5 +224,29 @@
   "group": "Q119",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q119-e5e3b2f59 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, source passages, and current blueprint route. All three proof steps support ordinary constant-ring module sheaves with the required pro-étale quasi-compactness hypothesis. Edge cases pass; no duplicates, cycles, or missing citations found. Accepted all ten declared tool uses. Detailed checks and inherited unit-metadata mismatch recorded in review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ee246b02",
+  "group": "Q60",
+  "result": "fix",
+  "note": "Both theorems parsed as `flat H ↔ ((restrictions flat) ∧ ∀L.. ∧ ∀M..)` since ↔ (prec 20) binds looser than ∧ (35); confirmed by an rfl probe and #check. Fixed by parenthesizing the iff in both theorems; the mathematics is unchanged. Added the node's 3 proof steps to the pro-étale docstring (H8). Hypotheses, objects and operations match the recorded dependency declarations: canonical constant-ring pullback and pushforward, sfIntrinsicExtensionByZero, QuasiCompact j only for pro-étale, IsFlatOnSite. Étale ObjectProperty.flat resolves to Etale.sheafMonoidalCategory (#synth), i.e. tensor exactness, matching def-pc-flat-sheaf-modules on the fixed-scalar model; recorded in lean.note. No hollow definitions, sorry only, docstrings with source and blueprint present, no extra assumptions, universes bound; edge cases (empty pieces, identity immersions, zero ring, zero sheaf) covered; no duplicate found. nt_compile: delivered module rc0 4.8s, fixed module rc0 5.7s. fixes/: OpenClosedFlatness.lean, lean-record.json (note), report.md (Maintainer fix section)."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenClosedFlatness",
+  "declaration": "AlgebraicGeometry.openClosedFlatness_etale",
+  "declarations": [
+   "AlgebraicGeometry.openClosedFlatness_etale",
+   "AlgebraicGeometry.openClosedFlatness_proEtale"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenClosedFlatness.lean",
+  "statement": "theorem openClosedFlatness_etale (A : Type (u + 1)) [CommRing A] [Finite A] {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i] (hij : Set.range i.base = (Set.range j.base)ᶜ) (H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) : (CategoryTheory.ObjectProperty.flat H ↔ (CategoryTheory.ObjectProperty.flat ((Etale.upperStar (ModuleCat.{u + 1} A) j).obj H) ∧ CategoryTheory.ObjectProperty.flat ((Etale.upperStar (ModuleCat.{u + 1} A) i).obj H))) ∧ (∀ L : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A), CategoryTheory.ObjectProperty.flat L → CategoryTheory.ObjectProperty.flat ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).obj L)) ∧ (∀ M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A), CategoryTheory.ObjectProperty.flat M → CategoryTheory.ObjectProperty.flat ((Etale.lowerStar (ModuleCat.{u + 1} A) i).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Maintainer second-reader fix (NT-cc-Q60): both theorems parsed as `flat H ↔ ((restrictions flat) ∧ (∀ L, ...) ∧ (∀ M, ...))` because `↔` (precedence 20) binds looser than `∧` (35); the iff is now parenthesized so the statement is `(flat H ↔ restrictions flat) ∧ (j_! preserves flatness) ∧ (i_* preserves flatness)`, as in the node. The étale clauses use fixed-scalar sheaves `Sheaf X.smallEtaleTopology (ModuleCat A)`, the domain of the recorded Etale.upperStar/lowerStar/openImmersionLowerShriek, and `ObjectProperty.flat` there is tensor exactness for the project's global sheafified tensor `Etale.sheafMonoidalCategory`. That is the node's flatness (def-pc-flat-sheaf-modules, Stacks 03ER(3)) for A_X-modules on this fixed-scalar model. The pro-étale clauses use the recorded SheafOfModules.IsFlatOnSite.",
+  "fixed_by": "NT-stage2-cc-2ee246b02"
  }
 }

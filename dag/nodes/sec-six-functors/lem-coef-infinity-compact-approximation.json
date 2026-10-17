@@ -27,7 +27,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category",
-  "lem-coef-infinity-filtered-cofinal-pullback"
+  "lem-coef-infinity-filtered-cofinal-pullback",
+  "lem-coef-accessible-compact-slice-density"
  ],
  "proof": [
   {
@@ -279,5 +280,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f4b0ad16",
+  "group": "Q12",
+  "result": "fix",
+  "note": "Statement correct: every clause matched against the node and the dependency declarations (IsAccessible/PreservesColimitsIn hypotheses; regular κ<τ with aleph0<τ; local smallness, accessibility at both ranks, essential smallness of compactObjects τ; κ/τ preservation and τ-compact preservation; compactSourceSlice over c (commaSubcomplex true, arrows into c) essentially small, τ-filtered, tautological colimiting cocone; HasTauSmallKappaFilteredColimits plus preservation by the real full inclusion; the induced G fixed on every simplex by the coconePostcompose formula, preserving and IsKappaCofinal κ). No extra assumptions or universe restriction; edge cases (empty families, empty category, identity/constant functors) covered; helper is real data with docstrings; statement field verbatim; sorry-only proof. nt_compile --json: exit 0, no warnings. One fault, H11: the second-reading section was an author self-check. FIXED by fixes/lem-coef-infinity-compact-approximation.report.md (Worker report and Validation kept as delivered; real clause-by-clause second reading added)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCompactApproximation",
+  "declaration": "SSet.Presentability.infinity_compact_approximation",
+  "declarations": [
+   "SSet.Presentability.compactSourceInclusion",
+   "SSet.Presentability.infinity_compact_approximation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCompactApproximation.lean",
+  "statement": "theorem infinity_compact_approximation (V : Type w) (E : Type z) [Finite V] [Finite E] (s t : E → V) (C : V → SSet.{max (u + 1) v}) [hC : ∀ a : V, Quasicategory (C a)] (F : ∀ e : E, C (s e) ⟶ C (t e)) (haccessible : ∀ a : V, IsAccessible.{u, v} (C a)) (hF : ∀ e : E, ∃ ρ : Cardinal.{u}, ρ.IsRegular ∧ PreservesColimitsIn (F e) (fun I _ _ ↦ IsSmall.{u} I ∧ ∃ hI : Quasicategory I, @IsKappaFiltered ρ I hI)) : ∃ κ τ : Cardinal.{u}, κ.IsRegular ∧ τ.IsRegular ∧ κ < τ ∧ Cardinal.aleph0 < τ ∧ (∀ a : V, IsLocallySmall.{u} (C a) ∧ IsKappaAccessible (C a) κ ∧ IsKappaAccessible (C a) τ ∧ IsEssentiallySmall.{u} (compactObjects (C := C a) τ).toSSet) ∧ (∀ e : E, PreservesColimitsIn (F e) (fun I _ _ ↦ IsSmall.{u} I ∧ ∃ hI : Quasicategory I, @IsKappaFiltered κ I hI) ∧ PreservesColimitsIn (F e) (fun I _ _ ↦ IsSmall.{u} I ∧ ∃ hI : Quasicategory I, @IsKappaFiltered τ I hI) ∧ ∀ d : (C (s e)) _⦋0⦌, IsKappaCompact (C (s e)) τ d → IsKappaCompact (C (t e)) τ ((F e).app _ d)) ∧ (∀ (a : V) (c : (C a) _⦋0⦌), IsEssentiallySmall.{u} (compactSourceSlice (C := C a) τ c) ∧ (∃ hK : Quasicategory (compactSourceSlice (C := C a) τ c), @IsKappaFiltered τ (compactSourceSlice (C := C a) τ c) hK) ∧ (∃ q : (SSet.Enhanced.coconeCategory (compactSourceProjection (C := C a) τ c)) _⦋0⦌, IsTautologicalCocone (C := C a) τ c q ∧ SSet.Enhanced.IsColimiting (compactSourceProjection (C := C a) τ c) q) ∧ HasTauSmallKappaFilteredColimits κ τ (compactSourceSlice (C := C a) τ c) ∧ PreservesTauSmallKappaFilteredColimits κ τ (compactSourceInclusion (C := C a) τ c)) ∧ (∀ (e : E) (c : (C (s e)) _⦋0⦌), ∃ G : compactSourceSlice (C := C (s e)) τ c ⟶ compactSourceSlice (C := C (t e)) τ ((F e).app _ c), (∀ (n : SimplexCategoryᵒᵖ) (q : (compactSourceSlice (C := C (s e)) τ c).obj n), (G.app n q).1.1 = ((F e).app n q.1.1.1, ((ihom Δ[1]).map ((ihom Δ[0]).map (F e))).app n q.1.1.2)) ∧ PreservesTauSmallKappaFilteredColimits κ τ G ∧ IsKappaCofinal κ G)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published compact-source slice and its tautological cocone. The induced functor is uniquely normalized on every simplex, including its entire coherent structure arrow. The only helper is the actual full inclusion in the ambient coherent slice. Accessibility of edge functors is expanded using PreservesColimitsIn."
  }
 }

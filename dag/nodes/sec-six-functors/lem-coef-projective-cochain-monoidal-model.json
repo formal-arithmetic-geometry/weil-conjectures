@@ -25,7 +25,8 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "lem-coef-combinatorial-localization-presentability",
-  "def-weil-pbc-projective-module"
+  "def-weil-pbc-projective-module",
+  "def-sc-module-total-hom-complex"
  ],
  "proof": [
   {
@@ -325,5 +326,41 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9872f4aa",
+  "group": "NA",
+  "result": "pass",
+  "note": "I read every clause of the node against the Lean and Hovey 2.3/4.2.13. W=quasiIso, fibrations=termwise surjective, cofibrations=termwise R-linear split ∧ cokernel dg-projective (projective terms ∧ Hom into acyclic is acyclic), each by class equality. CombinatorialModelCategory.{u+1,u,u} matches the dependency and type-checks against combinatorialLocalizationPresentability. The tensor is Mathlib HomologicalComplex.monoidalCategory and the unit is single 0 R, both by rfl. The braiding is the upstream Koszul braidedCategory (no sorry). The internal Hom is the landed moduleHomComplex (δ = d u − (−1)^n u d), and the evaluation sign (−1)^{ij} was checked by hand to give a chain map. The pushout product has the dependency's hypothesis shape. Disks are the cone of the identity (degrees n, n+1, positive identity); generators are llp∘rlp equalities. Edge cases covered: zero ring, negative degrees, unbounded complexes, both factors trivial. No duplicate notion; the ProjectiveCochainCofibration rename is justified. Node diff: only lean and the added landed stmt_dep def-sc-module-total-hom-complex. lean.statement is verbatim. Docstrings and the 13-step proof are complete, and the only sorry is the final theorem's. nt_compile is clean (no errors or warnings); axioms propext, sorryAx, Classical.choice, Quot.sound. No faults."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveCochainMonoidalModel",
+  "declaration": "HomotopicalAlgebra.projectiveCochainMonoidalModel",
+  "declarations": [
+   "HomotopicalAlgebra.TermwiseSplitInjection",
+   "HomotopicalAlgebra.TermwiseSurjective",
+   "HomotopicalAlgebra.DgProjective",
+   "HomotopicalAlgebra.DgProjectiveCokernel",
+   "HomotopicalAlgebra.ProjectiveCochainCofibration",
+   "HomotopicalAlgebra.ProjectiveFibration",
+   "HomotopicalAlgebra.cochainSphere",
+   "HomotopicalAlgebra.cochainDisk",
+   "HomotopicalAlgebra.cochainSphereDisk",
+   "HomotopicalAlgebra.cochainZero",
+   "HomotopicalAlgebra.cochainZeroDisk",
+   "HomotopicalAlgebra.projectiveGeneratingCofibrations",
+   "HomotopicalAlgebra.projectiveGeneratingTrivialCofibrations",
+   "HomotopicalAlgebra.ProjectiveCochainMonoidalModel",
+   "HomotopicalAlgebra.projectiveCochainMonoidalModel"
+  ],
+  "statement": "theorem projectiveCochainMonoidalModel (R : Type u) [CommRing R] : Nonempty (ProjectiveCochainMonoidalModel R)",
+  "by": "NA",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveCochainMonoidalModel.lean",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "note": "Repair of immutable head 040617da6c1d: fixes the small-index universe to u, fixes the total tensor and upstream Koszul braiding, and specifies the already landed module-valued product total Hom and its evaluation adjunction. Restores all recorded statement/proof interface imports and the complete thirteen-step proof docstring. The only added statement dependency is the already landed owning node def-sc-module-total-hom-complex. The specialized complex predicate is named ProjectiveCochainCofibration because HomotopicalAlgebra.ProjectiveCofibration already exists in SiftedGoodDiagramCalculus with a distinct diagram-level meaning."
  }
 }
