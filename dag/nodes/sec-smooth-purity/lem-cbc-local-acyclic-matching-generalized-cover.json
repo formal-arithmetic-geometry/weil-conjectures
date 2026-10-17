@@ -13,9 +13,74 @@
   "def-weil-pbc-simplicial-set",
   "def-cbc-generalized-cover"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n\\geq0$ and $V\\in\\mathcal C$. A section of $\\widetilde M_nF\\times_{\\widetilde M_nG}G_n$ at $V$ is exactly a pair $(a,b)$ with $a:\\partial\\Delta^n\\to F(V)$, $b:\\Delta^n\\to G(V)$ and $f_Va=b|_{\\partial\\Delta^n}$. Indeed an $n$-simplex $z$ of a simplicial set $Z$ is the simplicial map $\\Delta^n\\to Z$ sending an operator $\\alpha:[q]\\to[n]$ to $Z(\\alpha)(z)$; evaluation at $\\mathrm{id}_{[n]}$ is the inverse correspondence. Under this correspondence the displayed relative matching map sends $z$ to $(z|_{\\partial\\Delta^n},f_Vz)$. Thus it suffices to find strict extensions of each $(a,b)$ locally on $V$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "DHI Proposition 3.2 and equation (3.4), printed pp. 7-8; direct simplex evaluation identifies the lifting problem."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-local-weak-equivalence-homotopy-lifting] to $(a,b)$. Its Kan hypotheses are the assumed objectwise Kan conditions, and its homotopy-sheaf hypotheses are exactly the assumed local weak equivalence, including every basepoint and the slice-site topology. Obtain a covering sieve $S$ on $V$. For each $u:W\\to V$ in $S$ choose $c:\\Delta^n\\to F(W)$ extending $u^*a$, and a homotopy $H:\\Delta^n\\times\\Delta^1\\to G(W)$ from $f_Wc$ to $u^*b$, constant on the boundary. We will straighten this particular homotopy after further covering restrictions of $W$.",
+   "uses": [
+    "lem-cbc-local-weak-equivalence-homotopy-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 6.15(a) and the locally fibrant paragraph in Proposition 7.2, printed pp. 14-15; DHI Proposition 3.1."
+   }
+  },
+  {
+   "text": "Here is the finite prism decomposition needed for straightening; it is a calculation with simplices, not an appeal to an anodyne-closure theorem. Put $P=(\\partial\\Delta^n\\times\\Delta^1)\\cup(\\Delta^n\\times\\{0\\})$. The $q$-simplices of $\\Delta^n\\times\\Delta^1$ are weakly increasing strings in the product poset $[n]\\times[1]$. Every strict string extends to a maximal chain, and all maximal chains are\n$$\\sigma_k=((0,0),\\ldots,(k,0),(k,1),\\ldots,(n,1)),\\quad 0\\leq k\\leq n.$$\nAdjoin these $(n+1)$-simplices to $P$ in order $\\sigma_n,\\sigma_{n-1},\\ldots,\\sigma_0$. For $\\sigma_k$, a face $d_j\\sigma_k$ with $j\\ne k,k+1$ omits a spatial vertex and so lies in the boundary prism. The face $d_{k+1}\\sigma_k$ is in the bottom when $k=n$, and is $d_{k+1}\\sigma_{k+1}$ when $k<n$, hence already present. In contrast $d_k\\sigma_k$ contains all spatial vertices, is not in the bottom, and is contained in no previously adjoined $\\sigma_l$ with $l>k$: it includes $(k,1)$ whereas such chains do not. Its proper faces lie in the other faces of $\\sigma_k$. Thus each intersection with the preceding union is exactly $\\Lambda_k^{n+1}$, and adjoining $\\sigma_k$ is a single horn pushout. After the $n+1$ attachments the union is the whole prism. For $n=0$ this is the one horn $\\{0\\}=\\Lambda_0^1\\hookrightarrow\\Delta^1$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Proposition 7.2, locally fibrant paragraph, referencing Corollary 4.2: explicit finite prism calculation of the homotopy-straightening inclusion."
+   }
+  },
+  {
+   "text": "Over $W$, define a map $P\\to F(W)$ by $c$ on the bottom and $(u^*a)\\operatorname{pr}_1$ on the boundary prism. They agree on their intersection, so the degreewise union gives a simplicial map. Its composite with $f_W$ equals $H|_P$ by the four identities in Step 2. Apply the local Kan hypothesis horn by horn along Step 3. More precisely, let $P_0=P\\subseteq P_1\\subseteq\\cdots\\subseteq P_{n+1}=\\Delta^n\\times\\Delta^1$ be that filtration and let $R_j$ be the sieve of arrows $r:W'\\to W$ for which the given square admits a lift on $P_j$. It is a sieve because any such lift restricts further, and $R_0$ is maximal. If $R_j$ covers, choose a partial lift for each $r$ in $R_j$. The next horn square, with base map $r^*H|_{\\sigma_{n-j}}$, has fillers on a covering sieve $T_r$ of $W'$ by the definition of local Kan fibration. Gluing a filler to the partial lift works because their intersection is precisely that horn. Hence $r^*R_{j+1}$ contains $T_r$ and covers. Upward closure of covering sieves follows directly from transitivity: for covering $T\\subseteq T'$, every pullback of $T'$ along an arrow in $T$ is maximal. Transitivity applied to $R_j$ now makes $R_{j+1}$ cover. This finite induction yields a covering sieve of $W$ on each arrow of which $H$ has a lift $\\widetilde H$ extending the prescribed map on $P$. No compatibility between different arrows is used. Restricting $\\widetilde H$ to the endpoint $1$ gives $z:\\Delta^n\\to F(W')$ with boundary the restriction of $a$ and with $f_{W'}z$ equal to the restriction of $b$.",
+   "uses": [
+    "def-cbc-generalized-cover",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Proposition 7.2, locally fibrant paragraph, printed p. 15; finite horn-by-horn lifting and covering-sieve transitivity written out instead of the reference to Corollary 4.2."
+   }
+  },
+  {
+   "text": "Let $R$ be the lifting sieve of $(a,b)$ for the relative matching map, in the sense of [def-cbc-generalized-cover]. For every $u:W\\to V$ of the covering sieve $S$ of Step 2, Step 4 supplies a covering sieve contained in $u^*R$. Upward closure makes $u^*R$ covering, and transitivity makes $R$ covering on $V$. As $V$ and $(a,b)$ were arbitrary, this is exactly the generalized-cover conclusion. If $n=0$, the map $a$ is unique because the boundary is empty; the same one-horn argument yields local preimages of every vertex of $G$, proving the asserted degree-zero case $F_0\\to G_0$.",
+   "uses": [
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "DHI equation (3.4), printed p. 8, and definition of generalized cover on p. 7; transitivity completes the local lifting argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-generalized-cover",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-local-weak-equivalence-homotopy-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0205025",
+  "place": "Proposition 7.2, locally fibrant paragraph, expanded using Theorem 6.15(a); the finite prism filtration and every sieve refinement are proved explicitly. DHI Proposition 3.2 and equation (3.4) identify the matching formulation. Both papers read online; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +137,59 @@
    "results": "{\"t\": \"2026-10-17T03:24:23Z\", \"tool\": \"grep\", \"query\": \"local.*(Fibration|fibration)|[Mm]atching.*[Ss]urject|[Cc]otensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/SimpleGraph/Matching.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"cb6d6c457aa164b1\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned declarations concern ordinary local surjectivity of set-valued presheaves, ordinary simplicial sets, or categorical lifting; none states the local simplicial-presheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local weak equivalence of objectwise Kan simplicial presheaves has local relative homotopy liftings for simplicial boundaries",
+   "results": "{\"t\": \"2026-10-17T03:57:18Z\", \"tool\": \"leanfinder\", \"query\": \"A local weak equivalence of objectwise Kan simplicial presheaves has local relative homotopy liftings for simplicial boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\"], \"digest\": \"b1b89ced6d1cec33\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocallySurjective supplies only the generalized-cover definition; ordinary Kan fibrations and one-hypercover homotopies do not imply the local matching-map theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsLocallySurjective",
+   "results": "{\"t\": \"2026-10-17T03:57:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Presheaf.IsLocallySurjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.IsLocallySurjective\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"CategoryTheory.Presheaf.isLocallySurjective_of_iso\", \"CategoryTheory.Presheaf.isLocallySurjective_of_le\", \"CategoryTheory.Presheaf.IsLocallySurjective.imageSieve_mem\", \"CategoryTheory.Presheaf.IsLocallySurjective.mk\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveFunWhiskerRightOppositeForget\"], \"digest\": \"9f2f878d0417448f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocallySurjective supplies only the generalized-cover definition; ordinary Kan fibrations and one-hypercover homotopies do not imply the local matching-map theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "local.*(Fibration|fibration)|relative.*[Hh]omotopy.*[Ll]ift|homotopy[Ss]heaf",
+   "results": "{\"t\": \"2026-10-17T03:57:37Z\", \"tool\": \"grep\", \"query\": \"local.*(Fibration|fibration)|relative.*[Hh]omotopy.*[Ll]ift|homotopy[Ss]heaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocallySurjective supplies only the generalized-cover definition; ordinary Kan fibrations and one-hypercover homotopies do not imply the local matching-map theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified homotopy groups detect the local relative homotopy lifting property of simplicial presheaves",
+   "results": "{\"t\": \"2026-10-17T03:57:37Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafified homotopy groups detect the local relative homotopy lifting property of simplicial presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercover.homotopicRel\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy\", \"CategoryTheory.Presheaf.isLocallyInjective_toSheafify'\", \"CategoryTheory.GrothendieckTopology.W_toSheafify\", \"CategoryTheory.Presheaf.isLocallyInjective_toPlus\", \"CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff\"], \"digest\": \"bff65eef05c38578\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocallySurjective supplies only the generalized-cover definition; ordinary Kan fibrations and one-hypercover homotopies do not imply the local matching-map theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of Kan simplicial presheaves inducing isomorphisms on homotopy sheaves locally lifts simplicial boundary squares up to a homotopy fixed on the boundary",
+   "results": "{\"t\": \"2026-10-17T03:57:38Z\", \"tool\": \"leansearch\", \"query\": \"A map of Kan simplicial presheaves inducing isomorphisms on homotopy sheaves locally lifts simplicial boundary squares up to a homotopy fixed on the boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.Subcomplex.lift\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.HasLiftingPropertyFixedBot\", \"CategoryTheory.HasLiftingPropertyFixedTop\", \"CategoryTheory.Bicategory.LeftLift.IsAbsKan.isKan\", \"CategoryTheory.IsHomLift.of_commsq\"], \"digest\": \"b4a4a092b4c824f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocallySurjective supplies only the generalized-cover definition; ordinary Kan fibrations and one-hypercover homotopies do not imply the local matching-map theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.KanComplex, CategoryTheory.GrothendieckTopology",
+   "results": "{\"t\": \"2026-10-17T03:57:53Z\", \"tool\": \"loogle\", \"query\": \"SSet.KanComplex, CategoryTheory.GrothendieckTopology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocallySurjective supplies only the generalized-cover definition; ordinary Kan fibrations and one-hypercover homotopies do not imply the local matching-map theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*sheaf|local.*weak.*equivalence|[Rr]elative[Hh]omotopy",
+   "results": "{\"t\": \"2026-10-17T03:57:53Z\", \"tool\": \"grep\", \"query\": \"homotopy.*sheaf|local.*weak.*equivalence|[Rr]elative[Hh]omotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\"], \"digest\": \"045b4af96a71b9bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocallySurjective supplies only the generalized-cover definition; ordinary Kan fibrations and one-hypercover homotopies do not imply the local matching-map theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-hypercover-relative-lifting",
@@ -100,5 +214,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-local-acyclic-matching-generalized-cover",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Split the DHI matching criterion into simplex evaluation, a separately stated homotopy-sheaf lifting input, an explicit n+1-horn prism filtration, finite local horn lifting with covering-sieve transitivity, and the final lifting-sieve criterion. No enough-points, subcanonical or fibre-product hypothesis is imposed. One new statement-only node, no new definitions or Mathlib leaves.",
+  "blueprint": "Proof opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale: arbitrary-site descent foundation for the affine-local compactification repair; in the descendant boundary-lifting proof, the local acyclic fibration square is solved after hypercover refinement before the mapping-space descent argument (DHI Proposition 5.1). Supporting input: Dugger--Hollander--Isaksen Proposition 3.2 and equation (3.4), v2 HTML lines 293-339. Steps 1-5 discharge the matching-map input to the descendant relative-hypercover lifting induction, without changing the compactification route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-eff012ec8",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-eff012ec8 (reviewer sub-agent of L); spot-checked: PASS, no fixes written; full review in review.md. Neither source is in literature/, so I fetched both arXiv PDFs into /tmp and read them with pdftotext. Sources: DHI arXiv math/0205027v2 Prop 3.1, Prop 3.2, the generalized-cover definition (p.7) and (3.4) (p.8); DI arXiv math/0205025v1 Def 3.1 (p.4), Def 6.6 and Prop 6.9 (pp.12-13), Def 6.11 and Thm 6.15(a) (pp.13-14), Prop 7.2 locally fibrant paragraph (p.15). Item statement: unchanged; it is the forward direction of DHI 3.2/(3.4) for objectwise Kan F,G, with every hypothesis matching the source. Step 1: the simplex-evaluation (Yoneda) step is elementary and correct. Step 2: the new node supplies exactly the four homotopy identities used; DI Def 3.1 fixes the homotopy direction as H(0)=f c, H(1)=b. Step 3: I checked the prism faces myself. For j other than k,k+1, d_j sigma_k lies in the boundary prism. d_{k+1} sigma_k is the bottom when k=n and equals d_{k+1} sigma_{k+1} otherwise. d_k sigma_k is new because it contains (k,1). So each attachment meets the earlier union in exactly the horn Lambda^{n+1}_k, and the n+1 attachments cover the prism. Step 4: the map on P is well defined; the sieves R_j cover by T_r inside r*R_{j+1}, with upward closure derived from transitivity; restricting to endpoint 1 gives the strict lift. Step 5: transitivity applied to the lifting sieve gives the generalized-cover property. Edge cases checked: n=0, n=1, empty values, and the trivial topology. New node lem-cbc-local-weak-equivalence-homotopy-lifting: correct objectwise-Kan form of DHI 3.1 / DI 6.15(a); statement only and self-contained; strictly weaker than the item (no local-fibration hypothesis, only a homotopy lift); no cycle; all three search kinds recorded. I searched the whole DAG for duplicates: def-cbc-local-simplicial-presheaf-maps, lem-cbc-hypercover-cotensor-local-acyclic-fibration, lem-cbc-weak-equivalence-relative-disk-extension, lem-cbc-cw-source-homotopy-lift and lem-coef-simplicial-relative-homotopy-invariance are all definitions only or a different setting or conclusion. Route: unit sk-prop-sf-cbc only; no tool_uses declared or needed; no SGA. Minor remarks, no change made: (1) the item's source.place still cites the HTML lines although the report says it was changed (only the step sources changed); (2) the report says the item's created metadata was changed to Q17, but the item correctly keeps its original NL created record."
  }
 }

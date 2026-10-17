@@ -12,9 +12,107 @@
   "lem-coef-cone-presheaf-adjunction",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=\\Lambda_i^n$ and $D=\\Delta^n$, with the given map $D\\to S$, and write $A=S\\amalg_H(H\\star\\Delta^0)$ and $B=S\\amalg_D(D\\star\\Delta^0)$. In $D\\star\\Delta^0=\\Delta^{n+1}$ the subset $P=D\\cup_H(H\\star\\Delta^0)$ is exactly $\\Lambda_i^{n+1}$: its face omitting the last vertex is $D$, and its other included faces are the cones on the faces of $D$ other than face $i$. This is an equality in every degree, since a simplex either avoids the cone vertex or is a simplex of $H$ followed by cone vertices. The universal properties of pushouts give $B=A\\amalg_P\\Delta^{n+1}$: a map out of either side is a map from $S$ and a map from $D\\star\\Delta^0$ agreeing on $D$. The inequality $0<i\\leq n$ says that $P\\hookrightarrow\\Delta^{n+1}$ is an inner horn. Thus $A\\to B$ is inner anodyne, by the pushout closure in [lem-coef-coherent-inner-anodyne-equivalences], and that node makes $\\mathfrak C[A]\\to\\mathfrak C[B]$ a Dwyer--Kan equivalence. Apply the final preservation assertion of [lem-coef-cone-presheaf-adjunction] to $H\\to D$ over $S$: it gives the required objectwise weak homotopy equivalence $L_S(H)\\to L_S(D)$. The horn description is that of [def-cbc-enhanced-diagrams-cones]. The argument includes $n=1,i=1$, when $P$ is the two-edge inner horn in $\\Delta^2$, and does not require the simplex map to be injective or $S$ to be a quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-inner-anodyne-equivalences",
+    "lem-coef-cone-presheaf-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, first preservation assertion in Theorem 2.2.1.2; agent expansion of the right-horn case by a single coned inner-horn pushout, using the existing coherent inner-anodyne theorem."
+   }
+  },
+  {
+   "text": "Here is the simplexwise description needed for base change, directly from the pushout defining $L_S$ in [lem-coef-cone-presheaf-adjunction]. For a simplicial category $C$ and a presheaf $G:C^{\\mathrm{op}}\\to\\mathrm{sSet}$, form the category $E_G$ by adjoining one object $v$ with $E_G(c,v)=G(c)$, $E_G(v,c)=\\varnothing$ and $E_G(v,v)=\\Delta^0$; on the old objects it is $C$. Mixed composition is the action of $G$, so associativity and identities are precisely the presheaf axioms. A natural transformation $L_S(\\Delta^m\\xrightarrow{\\sigma}S)\\to F$ is equivalent to a functor $T_\\sigma\\to E_F$ fixing $\\mathfrak C[S]$ and $v$: its old-to-$v$ maps are exactly the components of the transformation, and compatibility with composition is exactly its naturality. By the defining pushout it is therefore equivalent to a functor $\\mathfrak C[\\Delta^m\\star\\Delta^0]\\to E_F$ whose initial-face restriction is the specified $\\mathfrak C[\\sigma]$ and whose cone vertex is $v$. Concretely, its mixed maps have domains $\\mathfrak C[\\Delta^m\\star\\Delta^0](j,v)$ and targets $F(\\sigma(j))$; their compatibility equations use only $F$ applied to $\\mathfrak C[\\sigma]$ on initial-face arrows. For $\\tau:\\Delta^m\\to T$ and $\\sigma=u\\tau$, these are exactly the domains, targets and equations for the presheaf $F\\circ\\mathfrak C[u]^{\\mathrm{op}}$ over $\\tau$, since $\\mathfrak C[u\\tau]=\\mathfrak C[u]\\mathfrak C[\\tau]$. Keeping each mixed map unchanged gives inverse degreewise bijections between the two sides of the asserted base-change isomorphism. A simplex operator restricts the same cone functor on both sides. Thus these bijections are simplicial. Postcomposition by a map of presheaves and successive substitution of base maps change the same mixed maps in either order; an identity base map changes nothing. This proves naturality and compatibility with identities and composites, for arbitrary $F$.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1; explicit pushout/collage calculation of the right-adjoint base-change isomorphism."
+   }
+  },
+  {
+   "text": "Take the base vertex map $\\{s\\}\\to S$ in Step 2. In the cone-functor description over its constant $m$-simplex, every initial vertex maps to $s$ and every initial-face arrow maps to $1_s$. All mixed targets are consequently $F(s)$ and all initial-face actions are identities. Thus the mixed data factor uniquely through the enriched pushout obtained by collapsing the whole initial $\\mathfrak C[\\Delta^m]$ to one object $x$. To justify that this pushout is $\\mathfrak C[J^m]$, use the simplex-colimit construction in [lem-coef-pinched-cube-latching]: an enriched functor $\\mathfrak C[X]\\to E$ is a compatible family of functors on all simplex categories $\\mathfrak C[\\Delta^r]$ of $X$, hence a simplicial map $X\\to N_E$, where $(N_E)_r$ is that set of enriched functors and operators are restriction. Maps out of a simplicial pushout are agreeing pairs of such maps, so $\\mathfrak C$ preserves this pushout. The resulting two-object category has mixed mapping set $Q^m=\\mathfrak C[J^m](x,y)$ by that cited statement; its reverse mapping set is empty and its endomorphisms are identities, as follows already from the ordered cone, since no nonidentity composable path leaves $y$ or returns to $x$. Therefore its functors to the corresponding two-object category with mixed mapping set $F(s)$ are precisely simplicial maps $Q^m\\to F(s)$. This proves the fiber bijection. Restricting the initial face along $\\alpha:[r]\\to[m]$ induces the map $Q^r\\to Q^m$ specified in [lem-coef-pinched-cube-latching], so the bijections give exactly the displayed simplicial isomorphism, with the stated operators. Postcomposing each mixed map proves naturality in $F(s)$. No Kan hypothesis was used.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.2, definition of J and Q and Remark 2.2.2.11; explicit factorization through the pinched-cone pushout."
+   }
+  },
+  {
+   "text": "Write $V(X)=\\int^{[m]}X_m\\cdot Q^m$, where the dot is a coproduct of copies, explicitly the quotient of $\\coprod_m X_m\\times Q^m$ by $(X(\\alpha)z,q)\\sim(z,Q(\\alpha)q)$. A map $V(X)\\to K$ is exactly a family of maps $Q^m\\to K$ indexed by $z\\in X_m$, compatible with these operators. Thus $V\\dashv R$, where $R(K)=\\operatorname{Sing}_Q K$, by inverse assignments on those families; $V$ preserves small colimits, since compatible maps out of either colimit are the same families. Evaluation $[\\alpha,q]\\mapsto Q(\\alpha)q$ identifies $V(\\Delta^m)$ with $Q^m$, with inverse $q\\mapsto[\\mathrm{id}_{[m]},q]$. On $\\partial\\Delta^m$, every simplex factors through the proper face given by its image; the same quotient relations identify its value with the colimit over proper injective faces, namely $L_mQ$. Consequently $V(\\partial\\Delta^m)\\to V(\\Delta^m)$ is the latching monomorphism of [lem-coef-pinched-cube-latching], including $\\varnothing\\to Q^0$ at $m=0$. The collapse $Q^m\\to Q^0=\\Delta^0$ is a weak homotopy equivalence by that same statement. In the Kan model category of [lem-coef-kan-quillen-right-proper], apply [lem-coef-simplicial-boundary-collapse-test] to $V$. It preserves monomorphisms as cofibrations, weak homotopy equivalences as weak homotopy equivalences, and trivial cofibrations as trivial cofibrations. In particular $V$ sends every horn inclusion to a trivial cofibration. A horn lifting problem for $R(K)\\to\\Delta^0$ is adjoint to lifting its image under $V$ against $K\\to\\Delta^0$; when $K$ is Kan, the Kan model lifting axiom supplies the filler. Hence $R(K)$ is Kan. These assertions use only the Kan model on simplicial sets, with no model structure on a slice.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.9, first assertion; coend adjunction, boundary evaluation and the existing boundary-collapse criterion expand the cofibration and right-adjoint fibrancy arguments."
+   }
+  },
+  {
+   "text": "Let $p:V\\to\\mathrm{id}$ be induced by $p_m:Q^m\\to\\Delta^m$ from [lem-coef-pinched-cube-latching], so that $p_X([z,q])=z(p_m(q))$. This is well-defined and natural because the $p_m$ commute with every monotone map. Each $p_{\\Delta^m}=p_m$ is a weak homotopy equivalence: $Q^m$ is weakly contractible by the cited node, and the realization of $\\Delta^m$ is its ordinary topological simplex, which contracts by $(t,a)\\mapsto(1-a)t+ae_0$. The latter realization identification sends $[\\alpha,t]$ to $\\alpha_*t$ and has inverse $t\\mapsto[\\mathrm{id},t]$, by the quotient relation in [def-cbc-enhanced-diagrams-cones]. Two-out-of-three in the Kan model of Step 4 now applies. We prove that $p_X$ is a weak homotopy equivalence for every $X$. It holds for $\\varnothing$, since $V(\\varnothing)=\\varnothing$. Induct on the bound $d$ for the dimension of a simplicial set, starting with bound $-1$ for the empty set. The relative skeletal presentation of [lem-coef-infinity-monomorphism-boundary-cells], applied to $\\varnothing\\hookrightarrow X$, attaches all nondegenerate $d$-simplices to the $(d-1)$-skeleton along their boundaries. After applying $V$, this remains a pushout; the coproduct of boundary maps is a monomorphism by Step 4. The three maps comparing the two attaching spans are weak homotopy equivalences: the old skeleton and the copies of $\\partial\\Delta^d$ by the induction hypothesis, and the copies of $Q^d\\to\\Delta^d$ by the simplex case. Coproducts of weak homotopy equivalences are weak homotopy equivalences directly from the realization definition: the realization quotient of a disjoint union is the disjoint union of the realizations; its path components are the disjoint unions of theirs, and a based cube or a based cube homotopy has connected domain and stays in its chosen open-and-closed summand. Apply the pushout assertion of [lem-coef-sset-gluing-filtered-equivalences] to these spans. This proves the induction step, including $d=0$ with empty boundaries. For arbitrary $X$, the same skeletal presentation expresses $X$ as the colimit of its finite-dimensional skeleta indexed by the small directed poset $\\mathbb N$. The colimit-preserving $V$ gives the corresponding colimit of $V$ of the skeleta. The filtered-colimit assertion of [lem-coef-sset-gluing-filtered-equivalences] applied to the natural maps $p$ proves the result for $X$. All coproducts and index sets are small in a sufficiently large fixed universe.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7 and its cellular proof; arbitrary coproduct and sequential skeletal-union details supplied explicitly, using the existing gluing/filtered-colimit lemma."
+   }
+  },
+  {
+   "text": "The Quillen adjunction $V\\dashv R$ from Step 4 has left derived functor naturally isomorphic to the identity: every simplicial set is cofibrant in [lem-coef-kan-quillen-right-proper], $V$ preserves weak homotopy equivalences, and the natural transformation $p_X$ of Step 5 has weak-equivalence components. It therefore descends to a natural isomorphism on the homotopy category, including its naturality squares. In particular the left derived functor is an equivalence. Apply [lem-coef-quillen-derived-counit-criterion] to the Kan model category on both sides and a fibrant $K$. The ordinary counit $\\epsilon_K:V R K\\to K$ is a weak homotopy equivalence, since $RK$ is cofibrant (as is every simplicial set). Define $\\tau_K:K\\to RK$ in degree $m$ by $z\\mapsto z\\circ p_m$; this is the map in the item. On a coend representative $[z,q]$ the composite $\\epsilon_K V(\\tau_K)$ evaluates $z\\circ p_m$ at $q$, so it equals $p_K$ exactly. Both $\\epsilon_K$ and $p_K$ are weak homotopy equivalences, hence $V(\\tau_K)$ is one. Naturality of $p$ gives the exact equation $p_{RK}V(\\tau_K)=\\tau_Kp_K$. The first map on the left and $p_K$ are weak homotopy equivalences by Step 5. Two-out-of-three therefore makes $\\tau_K$ a weak homotopy equivalence, as required. This checks the specified natural map itself, without replacing it by an unspecified equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.9, Corollary 2.2.2.10 and Remark 2.2.2.11; derived-counit criterion and two explicit natural-transformation identities identify the required comparison map."
+   }
+  },
+  {
+   "text": "For a simplicial map $h:K\\to K'$, the two composites from $K$ to $RK'$ in the naturality square for $\\tau$ send $z$ to $h\\circ z\\circ p_m$, so they agree in every degree. The fiber isomorphisms of Step 3 postcompose the same mixed maps by $h$, and consequently commute with these comparison maps. This proves the final naturality clause for all maps between Kan complexes. If $S$ or $T$ is empty there are no simplices over that base and the base-change bijections of Step 2 are the unique ones. At $m=0$, $Q^0=\\Delta^0$ makes the fiber bijection and $\\tau_K$ the identity on vertices. If $K=\\varnothing$, every $Q^m$ is nonempty (in its explicit nonempty-subset quotient it has vertices), so $R(K)=\\varnothing$; it is Kan and its empty comparison is a weak homotopy equivalence. No argument has imposed a nonemptiness, quasicategory, or projective-cofibrancy hypothesis on the inputs in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.2.2.11 and Proposition 2.2.1.1; direct naturality and degree-zero/empty-input checks of the preceding formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-inner-anodyne-equivalences",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-quillen-derived-counit-criterion",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 2.2.1.1, the right-horn preservation part of Theorem 2.2.1.2, and §2.2.2 (Propositions 2.2.2.7 and 2.2.2.9, Corollary 2.2.2.10, Remark 2.2.2.11), printed pp.74–77, read online. Archival HTT WANTED. Agent-expanded coned-inner-horn, collage/base-change, pinched-fiber, coend/cellular and counit calculations, using existing nodes and no slice model structure. No Stacks tag states the specialized coherent-realization result."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +155,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.coskAdj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [inst_1 :\\n          ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.SimplicialObject.truncation n\", \"doc\": \"The truncation functor from simplicial objects to $ n $-truncated simplicial objects is left adjoint to the coskeleton functor, which extends $ n $-truncated simplicial objects to full simplicial obje\"}\n  {\"name\": \"SSet.coskAdj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"(n : ℕ) → SSet.truncation n ⊣ SSet.Truncated.cosk n\", \"doc\": \"For any natural number $ n $, the truncation functor from simplicial sets to $ n $-truncated simplicial sets is left adjoint to the coskeleton functor. This adjunction arises from the universal proper\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.isCoskeletal_iff_isIso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.SimplicialObject C) (n : ℕ)\\n  [inst_1 :\\n    ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n      (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F],\\n  X.IsCoskeletal n ↔ CategoryTheory.IsI\", \"doc\": \"For a simplicial object $ X $ in a category $ \\\\mathcal{C} $ and a natural number $ n $, $ X $ is coskeletal at level $ n $ (i.e., all simplices of dimension $ > n $ are uniquely determined by their bo\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instIsIsoAppUnitTruncatedCoskAdj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.SimplicialObject C) (n : ℕ)\\n  [inst_1 :\\n    ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n      (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F]\\n  [X.IsCoskeletal n], CategoryTheory.IsI\", \"doc\": \"For any natural number $ n $ and simplicial object $ X $ in a category $ \\\\mathcal{C} $, if $ X $ is coskeletal at level $ n $, then the unit morphism $ \\\\eta_X : X \\\\to \\\\text{cosk}_n(\\\\text{trunc}_n(X)) \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.isoCoskOfIsCoskeletal_hom\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.SimplicialObject C) (n : ℕ)\\n  [inst_1 :\\n    ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n      (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F]\\n  [inst_2 : X.IsCoskeletal n], (X.isoCos\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$ that is coskeletal at level $n$, the morphism $X \\\\to \\\\text{cosk}_n(\\\\text{trunc}_n(X))$ is equal to the unit of the adjunction between the trunca\"}\n  {\"name\": \"SSet.Truncated.cosk_reflective\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"∀ (n : ℕ), CategoryTheory.IsIso (SSet.coskAdj n).counit\", \"doc\": \"For any natural number $ n $, the counit of the adjunction between the truncation functor and the coskeleton functor for $ n $-truncated simplicial sets is an isomorphism. This implies that the catego\"}\n",
    "date": "2026-10-17",
    "verdict": "No match: these are truncation/coskeleton and ordinary nerve adjunctions; none constructs the ordered cone functor or its right-horn and pinched-cube fiber comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of coherent cone straightening has fibers the singular complex of pinched cubes and preserves change of simplicial base",
+   "results": "{\"t\": \"2026-10-17T04:01:39Z\", \"tool\": \"leansearch\", \"query\": \"The right adjoint of coherent cone straightening has fibers the singular complex of pinched cubes and preserves change of simplicial base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"CategoryTheory.Adjunction.functorialityRightAdjoint\", \"CategoryTheory.Limits.IsLimit.ofRightAdjoint\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.Adjunction.functorialityAdjunction\", \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\"], \"digest\": \"88531c9096e802db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures. Horn.lean:34–75 and CategoryWithFibrations.lean:35–100 give ordinary horns and their lifting classes; Coskeletal.lean:225–239 gives ordinary strict-Segal right Kan extensions; SingularSet.lean:14–100 gives topological realization/singular adjunction only (the Kan/Quillen comparison is a TODO). NerveAdjunction.lean:388–415 is the ordinary homotopy-category/nerve adjunction; ExtraDegeneracy.lean:415 concerns a preadditive alternating-face complex. None supplies coherent cone unstraightening, its base-change, pinched cubes, or the combined statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered cone unstraightening over arbitrary simplicial sets commutes with base change, has pinched cube singular fibers, and sends right horns to objectwise weak equivalences",
+   "results": "{\"t\": \"2026-10-17T04:01:45Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered cone unstraightening over arbitrary simplicial sets commutes with base change, has pinched cube singular fibers, and sends right horns to objectwise weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal\"], \"digest\": \"4d7c6a7227b8c271\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures. Horn.lean:34–75 and CategoryWithFibrations.lean:35–100 give ordinary horns and their lifting classes; Coskeletal.lean:225–239 gives ordinary strict-Segal right Kan extensions; SingularSet.lean:14–100 gives topological realization/singular adjunction only (the Kan/Quillen comparison is a TODO). NerveAdjunction.lean:388–415 is the ordinary homotopy-category/nerve adjunction; ExtraDegeneracy.lean:415 concerns a preadditive alternating-face complex. None supplies coherent cone unstraightening, its base-change, pinched cubes, or the combined statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cosimplicial contractible pinched cube resolution has singular complex naturally weakly equivalent to every Kan complex",
+   "results": "{\"t\": \"2026-10-17T04:02:04Z\", \"tool\": \"leanfinder\", \"query\": \"A cosimplicial contractible pinched cube resolution has singular complex naturally weakly equivalent to every Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor.terminalIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"SSet.isTerminalHoFunctorDeltaZero\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.cosk\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\"], \"digest\": \"559050b8eae454c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures. Horn.lean:34–75 and CategoryWithFibrations.lean:35–100 give ordinary horns and their lifting classes; Coskeletal.lean:225–239 gives ordinary strict-Segal right Kan extensions; SingularSet.lean:14–100 gives topological realization/singular adjunction only (the Kan/Quillen comparison is a TODO). NerveAdjunction.lean:388–415 is the ordinary homotopy-category/nerve adjunction; ExtraDegeneracy.lean:415 concerns a preadditive alternating-face complex. None supplies coherent cone unstraightening, its base-change, pinched cubes, or the combined statement."
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|straightening|SingQ|pinched.?cube",
+   "results": "{\"t\": \"2026-10-17T04:01:38Z\", \"tool\": \"grep\", \"query\": \"unstraighten|straightening|SingQ|pinched.?cube\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all returned signatures read. Horn.lean:34–75 and CategoryWithFibrations.lean:35–100 give ordinary horns and lifting classes only; they contain no coherent cone unstraightening or pinched-cube fiber comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"horn\"",
+   "results": "{\"t\": \"2026-10-17T04:01:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.horn\", \"SSet.instHasDimensionLTToSSetHorn\", \"SSet.horn.face\", \"SSet.horn.const\", \"SSet.horn.edge₃\", \"SSet.horn.ι\", \"SSet.horn_obj_eq_univ\", \"SSet.op_horn\"], \"digest\": \"e9c8c4942a1e429c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all returned signatures read. Horn.lean:34–75 and CategoryWithFibrations.lean:35–100 give ordinary horns and lifting classes only; they contain no coherent cone unstraightening or pinched-cube fiber comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-unstraightening-homotopy-descent",
@@ -90,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unstraightening-simplex-pointwise",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step zero-new-node split: a coned right horn is an inner horn; simplexwise mixed cone functors prove strict base-change and pinched-cube fiber formulas; coend boundary evaluation, skeletal gluing and the existing derived-counit criterion prove that the specified K to Sing_Q K map is a weak homotopy equivalence for Kan K. Checked the statements of every cited node, dependency closures for cycles, empty and degree-zero cases, whole-DAG/blueprint duplicates, project attachments and logged Mathlib searches. No Lean written or compiled.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2 and the displayed derived coefficient-adjunction / inverse-limit comparison. Supplies the independent coherent-diagram foundation in the recorded homotopy-descent ancestry: right-horn preservation, strict restriction, and vertex comparisons. It does not replace a geometric step of the unit."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-1f777f4d0",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-1f777f4d0 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full, and the full statements of all nine cited nodes. None of the cited nodes' dependencies reach back to the item (226 nodes checked), and every cited statement is in unit sk-prop-sf-biduality-general (def-cbc is a definition). The delivery has no new nodes and needs no tool_uses or fixes. Step 1: I checked that P=D∪_H(H⋆Δ^0)=Λ_i^{n+1}, so 0<i≤n gives an inner horn, including n=1, i=1. The inner-anodyne node gives the Dwyer–Kan equivalence that the last clause of cone-presheaf-adjunction requires. Step 2: transformations L_S(σ)→F are the same as cone functors into the collage E_F, and they match for σ=uτ (elementary unwinding, accepted). Step 3: the vertex fiber reduces to C[J^m] and Q^m. Step 4: boundary-collapse-test applies because L_mQ→Q^m is injective and Q^m is contractible. Step 5 (2443 chars): it is one skeletal induction, so it may stay. It uses the gluing lemma with monomorphisms on the right legs, then the colimit over ℕ. Its two inline facts (the realization of Δ^m is contractible; coproducts of weak equivalences are weak equivalences) are two-line consequences of the realization definition. rg found no existing node for either fact or for the cellular-induction lemma. Step 6: the counit criterion applies, and ε_K V(τ_K)=p_K holds exactly with p_{RK}V(τ_K)=τ_K p_K, so the specified map z↦z∘p_m is a weak equivalence. Step 7: naturality and edge cases (empty S, T and K; m=0) hold. The statement is unchanged and not weakened, and Kan is assumed only where needed. HTT is not in the local literature: it is recorded as WANTED with proof_origin.by=agent, and I checked the statement against HTT 2.2.1.1/§2.2.2 from my knowledge only. No SGA is used."
  }
 }
