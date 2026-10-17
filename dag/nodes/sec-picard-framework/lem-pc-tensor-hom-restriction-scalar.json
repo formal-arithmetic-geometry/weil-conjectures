@@ -16,9 +16,10 @@
  ],
  "proof": [
   {
-   "text": "Precompose both sides with the inverse restriction tensor comparison isomorphism. Tensor-bilinear uniqueness reduces equality to pure tensors of local sections of the restricted modules.",
+   "text": "Precompose both sides with the inverse restriction tensor comparison isomorphism. Apply the existing tensor_hom_ext from WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison, imported directly with import all. This is pure-tensor uniqueness from the sheaf tensor bilinear universal property, and reduces the equality to pure tensors of local sections of the restricted modules. No duplicate extensionality theorem is introduced.",
    "uses": [
-    "lem-weil-pbc-module-restriction-tensor-comparison"
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
    ],
    "elementary": false
   },
@@ -30,14 +31,18 @@
    "elementary": false
   },
   {
-   "text": "Whiskering iota and applying the left unitor sends the pure tensor to iota(a) times g. The overFunctorEquiv components and overEquiv mapped morphism evaluate to s at W. Linearity of s equates these expressions.",
-   "uses": [],
-   "elementary": true
+   "text": "Unfold the restriction and slice comparison components on sections. Whiskering iota and applying the left unitor sends the ambient pure tensor to iota(a) times g. The transported slice morphism evaluates s at the image open W. Apply linearity of that component of s. The internal-Hom scalar action restricts iota(a) along the identity of W, and the structure presheaf identity law identifies this with iota(a), proving equality.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-hom",
-  "lem-weil-pbc-module-restriction-tensor-comparison"
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
  ],
  "proof_origin": {
   "by": "agent",
@@ -150,12 +155,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T082339-L-1633716",
+  "landing": "20261017T003424-L-3316258",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

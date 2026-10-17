@@ -6,9 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import all Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+import all WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Restricting a tensor-Hom transpose with prescribed scalar values
 
@@ -63,6 +62,38 @@ theorem tensorHom_restriction_of_local_scalar
           (overFunctorEquiv U).inv.app H ≫
           (overEquiv U).functor.map (⟨s⟩ : H.over U ⟶ F.over U) ≫
           (overFunctorEquiv U).hom.app F := by
-  sorry
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  intro β hβ
+  obtain ⟨e, he⟩ := exists_restriction_tensor_comparison U.ι A H
+  -- Test the two restricted maps on pure tensors after the comparison.
+  apply (cancel_epi e.inv).mp
+  apply tensor_hom_ext
+  intro V a g
+  simp only [Hom.comp_app, ConcreteCategory.comp_apply]
+  have ht := he V a g
+  change e.inv.app V (tmulSection a g) =
+    tmulSection (M := A) (N := H) a g at ht
+  rw [ht]
+  change β.val.app (op (U.ι ''ᵁ V))
+    ((SheafOfModules.tensorObjIsoSheafification A H).inv.val.app _
+      ((toSheafifyTensor A H).app _ (a ⊗ₜ[X.sheaf.obj.obj _] g))) = _
+  rw [hβ]
+  rw [hα (U.ι ''ᵁ V) (U.ι_image_le V) a]
+  -- The slice comparison components act identically on these sections.
+  change _ = s.app (op (Over.mk (homOfLE (U.ι_image_le V))))
+    ((ι ▷ H ≫ (λ_ H).hom).app (U.ι ''ᵁ V) (tmulSection a g))
+  rw [Hom.comp_app, ConcreteCategory.comp_apply, whiskerRight_app_tmulSection]
+  erw [leftUnitor_hom_app_tmulSection']
+  change _ = s.app (op (Over.mk (homOfLE (U.ι_image_le V))))
+    ((show Γ(X, U.ι ''ᵁ V) from ι.val.app (op (U.ι ''ᵁ V)) a) •
+      (show Γ(H, U.ι ''ᵁ V) from g))
+  erw [(s.app (op (Over.mk (homOfLE (U.ι_image_le V))))).hom.map_smul]
+  -- The internal-Hom scalar action restricts the scalar along the identity.
+  change X.sheaf.obj.map (𝟙 (op (U.ι ''ᵁ V)))
+      (show Γ(X, U.ι ''ᵁ V) from ι.val.app (op (U.ι ''ᵁ V)) a) •
+      s.app (op (Over.mk (𝟙 (U.ι ''ᵁ V) ≫ homOfLE (U.ι_image_le V)))) g = _
+  exact congrArg (fun r : Γ(X, U.ι ''ᵁ V) ↦
+    r • (s.app (op (Over.mk (homOfLE (U.ι_image_le V))))).hom g)
+    (ConcreteCategory.congr_hom (X.sheaf.obj.map_id (op (U.ι ''ᵁ V))) _)
 
 end AlgebraicGeometry.Scheme.Modules
