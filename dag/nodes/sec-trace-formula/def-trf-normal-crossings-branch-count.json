@@ -1,0 +1,120 @@
+{
+ "id": "def-trf-normal-crossings-branch-count",
+ "kind": "definition",
+ "title": "Geometric branch count of a normal crossings divisor",
+ "status": "split",
+ "statement": "Let $X$ be a scheme and $D\\subseteq X$ a closed subscheme represented by its quasi-coherent ideal. A pointed normal-crossings presentation of $D$ at $x\\in X$ consists of an etale morphism $e:W\\to X$ [def-weil-etale-morphism], a point $w$ over $x$, an affine open $U\\ni w$, a Noetherian local ring $\\mathcal O_{W,w}$, a regular system of parameters $t$ [def-weil-pbc-regular-system-of-parameters], and a sublist $s$ of $t$ such that the extended stalk ideal of $D\\times_XW$ is $(\\prod s)$. Its branch count is the length of $s$: all these factors lie in the maximal ideal, so exactly these factors vanish in the geometric prime. Write $A_D(x)$ for the set of these lengths and define $b_D(x)=\\inf A_D(x)$ in $\\mathbf N$, with the empty-set value $0$. For a normal crossings divisor [def-trf-normal-crossings-divisor] these lengths agree, and this gives its number of geometric local branches. For a geometric point $p:\\operatorname{Spec}\\Omega\\to X$, with $\\Omega$ algebraically closed, put $b_D(p)=b_D(p(*))$, where $*$ is the unique point of $\\operatorname{Spec}\\Omega$.",
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-trf-normal-crossings-divisor"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 4.1.6 and 4.1.8, printed p. 118; pointed etale coordinate interpretation of multiplicity."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalCrossing|normal_crossing|branchCount",
+   "results": "{\"t\": \"2026-10-17T20:42:54Z\", \"tool\": \"grep\", \"query\": \"normalCrossing|normal_crossing|branchCount\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Number of geometric local branches of a normal crossings divisor in an etale regular parameter chart",
+   "results": "{\"t\": \"2026-10-17T20:43:51Z\", \"tool\": \"leansearch\", \"query\": \"Number of geometric local branches of a normal crossings divisor in an etale regular parameter chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"MeromorphicOn.divisor\", \"AlgebraicGeometry.IsEtale\", \"MeromorphicOn.AnalyticOnNhd.divisor_nonneg\"], \"digest\": \"6efb7d22a2127718\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Count geometric branches of a normal crossings effective Cartier divisor using etale local regular parameter equations",
+   "results": "{\"t\": \"2026-10-17T20:44:12Z\", \"tool\": \"leanfinder\", \"query\": \"Count geometric branches of a normal crossings effective Cartier divisor using etale local regular parameter equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair\", \"Algebra.etaleLocus\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"63cfee4f02d60f70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCrossing|normal_crossing|branchCount",
+   "results": "{\"t\": \"2026-10-17T20:44:12Z\", \"tool\": \"grep\", \"query\": \"normalCrossing|normal_crossing|branchCount\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.?crossing|ncBranchCount|HasNCBranchChart|branch.*count in WeilConjectures, lean/Sheaf, dag/nodes; blueprint_refs.py search branch and normal crossings",
+   "results": "No geometric normal-crossings branch-count definition in the DAG, Mathlib or upstream. The side library has IsNormalCrossingsDivisor and IsLocalRing.IsRegularSystemOfParameters, both reused. The existing coordinate branch-count lemmas are theorem nodes, not a definition of the global function. blueprint_refs.py returned four unrelated branch units and no normal-crossings unit.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nc-maximal-branch-blowup",
+  "date": "2026-10-17",
+  "group": "Q120"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 4.1.6 multiplicity function used in the maximal-stratum construction, before the blowup in 4.1.8.",
+   "via": [
+    "lem-trf-nc-maximal-branch-blowup",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalCrossingsBranchCount",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.ncBranchCount",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IdealSheafData.HasNCBranchChart",
+   "AlgebraicGeometry.Scheme.IdealSheafData.ncBranchCount"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalCrossingsBranchCount.lean",
+  "statement": "def ncBranchCount {X : Scheme.{u}} (D : X.IdealSheafData) (x : X) : ℕ",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-eb1d39b15",
+  "group": "Q120",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-eb1d39b15",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source, modules, report, edge cases, route-pivot compliance, and compiler evidence. Both Lean files compile via scompile.py; no substantive mismatch or repair is required."
+ }
+}

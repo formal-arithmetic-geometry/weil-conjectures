@@ -13,7 +13,9 @@
   "def-nagata-effective-cartier-ideal",
   "def-weil-etale-morphism",
   "def-nagata-global-blowup",
-  "def-nagata-strict-transform"
+  "def-nagata-strict-transform",
+  "def-trf-normal-crossings-divisor",
+  "def-trf-normal-crossings-branch-count"
  ],
  "proof": [
   {
@@ -198,5 +200,27 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-e25ae2176 (reviewer sub-agent of L); spot-checked: Read the required instructions, item, both new nodes, unit/chapter route, all cited node statements, and ILO VIII 4.1.6, 4.1.8, Proposition 4.2.8, and Lemma 4.2.9. The five-step proof and coordinate lemmas are mathematically sound, source-aligned, non-duplicative, route-compliant, and cover hypotheses and edge cases. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-eb1d39b15",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source, modules, report, edge cases, route-pivot compliance, and compiler evidence. Both Lean files compile via scompile.py; no substantive mismatch or repair is required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NCMaximalBranchBlowup",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.nc_maximal_branch_blowup",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IdealSheafData.ncStrictTransformIdeal",
+   "AlgebraicGeometry.Scheme.IdealSheafData.nc_maximal_branch_blowup"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NCMaximalBranchBlowup.lean",
+  "statement": "theorem nc_maximal_branch_blowup {X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] (hX : ∀ x : X, ∃ U : X.affineOpens, x ∈ U.1 ∧ IsRegularRing Γ(X, U)) (B D : X.IdealSheafData) (hB : B.IsNormalCrossingsDivisor) (hDred : IsReduced D.subscheme) (hDne : Nonempty D.subscheme) (hcomponents : ∃ C : Set (Set B.subscheme), C ⊆ irreducibleComponents B.subscheme ∧ (D.support : Set X) = ⋃ Z ∈ C, B.subschemeι '' Z) : ∃ (m : ℕ) (T : Closeds X), 1 ≤ m ∧ (∀ x : X, D.ncBranchCount x ≤ m) ∧ (T : Set X) = {x : X | D.ncBranchCount x = m} ∧ (T : Set X).Nonempty ∧ (∀ z : (vanishingIdeal T).subscheme, ∃ U : (vanishingIdeal T).subscheme.affineOpens, z ∈ U.1 ∧ IsRegularRing Γ((vanishingIdeal T).subscheme, U)) ∧ (∀ x : X, x ∈ T → ∃ (W : Scheme.{u}) (e : W ⟶ X) (w : W), IsAffine W ∧ Etale e ∧ e w = x ∧ ∃ (d r : ℕ) (hmr : m ≤ r) (hrd : r ≤ d) (t : Fin d → Γ(W, ⊤)) (hR : IsNoetherianRing (W.presheaf.stalk w)), @IsLocalRing.IsRegularSystemOfParameters (W.presheaf.stalk w) _ _ hR (List.ofFn (fun j : Fin d ↦ W.presheaf.germ ⊤ w (by trivial) (t j))) ∧ D.comap e = ofIdealTop (Ideal.span {∏ j : Fin m, t (Fin.castLE (hmr.trans hrd) j)}) ∧ B.comap e = ofIdealTop (Ideal.span {∏ j : Fin r, t (Fin.castLE hrd j)}) ∧ (vanishingIdeal T).comap e = ofIdealTop (Ideal.span (Set.range (fun j : Fin m ↦ t (Fin.castLE (hmr.trans hrd) j))))) ∧ (IsEmpty ((vanishingIdeal T).ncStrictTransformIdeal D).subscheme ∨ ((vanishingIdeal T).ncStrictTransformIdeal D).IsNormalCrossingsDivisor) ∧ (∀ y : (vanishingIdeal T).blowup, ((vanishingIdeal T).ncStrictTransformIdeal D).ncBranchCount y ≤ m - 1)",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
