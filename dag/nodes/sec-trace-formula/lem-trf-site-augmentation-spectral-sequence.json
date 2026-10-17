@@ -13,11 +13,141 @@
   "def-weil-pbc-simplicial-object",
   "def-trf-geometric-morphism",
   "def-weil-abstract-derived-category",
-  "def-sp-left-exact-additive"
+  "def-sp-left-exact-additive",
+  "def-sp-double-complex-total",
+  "def-sp-spectral-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The slice-site construction supplies the augmentation $b$ and its component inverse images $(b^{-1}G)_p=b_p^{-1}G$. Its transition adjunctions make $p\\mapsto b_{p,*}F_p$ cosimplicial. The identities for two successive cofaces pair terms with opposite signs, so the alternating differential squares to zero. The degree-zero counit component defining $e$ is compatible with the two vertices of $[1]$, hence its two coface images agree and $\\delta^0e=0$. More explicitly, a map $G\\to b_*F$ is a compatible family $b_p^{-1}G\\to F_p$; its degree-zero map extends along each vertex $[0]\\to[p]$. Equality along the two vertices of $[1]$ makes the extensions along any two vertices agree, by the map $[1]\\to[p]$ joining them. These extensions satisfy all simplicial operators. Thus $e$ in fact identifies $b_*F$ with $H^0(C_b(F))$, with exactly the stated counit normalization.",
+   "uses": [
+    "lem-trf-slice-site-simplicial-augmentation",
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D79, lemma-augmentation-cech-complex, degree-zero equalizer and adjunction; Tag 09WL for the slice-site augmentation"
+   }
+  },
+  {
+   "text": "The slice sites and the total site are small. Their abelian sheaves have enough injectives; they are also the modules over the constant integer sheaf, hence Grothendieck abelian. Choose a nonnegative injective representative $QI^\\bullet\\cong F[0]$ by the bounded-below representative theorem with lower bound zero. It is K-injective. The bijection of homotopy-category maps into a K-injective with derived-category maps represents the inverse isomorphism by a chain map $F[0]\\to I^\\bullet$; it is a quasi-isomorphism, hence an injective resolution under $F$. The derived-injective computation identifies $b_*I^\\bullet$ with $Rb_*F$. Exact component restriction sends each $I^q$ to an injective sheaf $I_p^q$ and sends the resolution to an injective resolution of $F_p$. Consequently $H^q(b_{p,*}I_p^\\bullet)=R^qb_{p,*}F_p$, including $H^0=b_{p,*}F_p$, by the definition of the right derived functors.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-trf-total-site-component-restriction",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7A, lemma-augmentation-spectral-sequence, double-complex proof"
+   }
+  },
+  {
+   "text": "Form $A^{p,q}=b_{p,*}I_p^q$ for $p,q\\ge0$, zero otherwise. Its horizontal differential is the alternating face differential and its vertical differential is induced by $I^\\bullet$. Naturality of transitions makes these differentials commute. Totalize with $d_h+(-1)^pd_v$. For every fixed $q$, the injective augmentation exactness lemma applies to $I^q$: the augmented horizontal row $0\\to b_*I^q\\to A^{0,q}\\to A^{1,q}\\to\\cdots$ is exact. Naturality of its augmentation in $I^q$ makes the inclusions $b_*I^q\\to A^{0,q}$ a chain map $\\rho:b_*I^\\bullet\\to\\operatorname{Tot}A$; its horizontal differential is zero and the vertical sign at $p=0$ is $+1$.",
+   "uses": [
+    "lem-trf-total-site-injective-augmentation-exactness",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7A, lemma-augmentation-spectral-sequence, double-complex proof"
+   }
+  },
+  {
+   "text": "Apply the first-quadrant resolution-column augmentation lemma with $K=A$, with the first index the face degree, and with the nonnegative complex $b_*I^\\bullet$. Its chain map into $K.X\\,0$ is given by the row augmentations of Step 3, and its composite with $K.d\\,0\\,1$ is zero. For each internal degree $q$, its resolution column $K.\\mathrm{flip}.X\\,q$ is the horizontal row $A^{\\bullet,q}$. Step 3 says that $b_*I^q[0]\\to A^{\\bullet,q}$ is a quasi-isomorphism. The lemma therefore makes the explicitly constructed $\\rho$ a quasi-isomorphism. Thus in the derived category $\\operatorname{Tot}A$ is identified with $b_*I^\\bullet$, and hence with $Rb_*F$ by Step 2. The first-quadrant bounds give finitely many summands in every total degree, as required.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7A, lemma-augmentation-spectral-sequence, double-complex proof"
+   }
+  },
+  {
+   "text": "The first double-complex spectral sequence, applied to $A$, has $E_1^{p,q}=H^q(A^{p,\\bullet})$ and $d_1$ induced by the horizontal differential. Step 2 identifies these terms with $R^qb_{p,*}F_p$ and their differentials with the alternating sums induced by the transition maps of $F$: the maps on the resolution columns are precisely the adjoint coface maps used to define $C_b$. Both indices are nonnegative, so the cited theorem gives convergence with finite filtration on each $H^n(\\operatorname{Tot}A)$. Transporting the abutment through $\\rho$ gives $H^n(Rb_*F)$. This yields the asserted first-quadrant spectral sequence without imposing any hypercover hypothesis.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7A, lemma-augmentation-spectral-sequence, double-complex proof"
+   }
+  },
+  {
+   "text": "The resolution map gives a chain map $j:C_b(F)\\to\\operatorname{Tot}A$: in degree $p$ use $b_{p,*}F_p\\to b_{p,*}I_p^0=A^{p,0}$ and the $(p,0)$ diagonal inclusion. Its vertical differential is zero, and naturality gives the horizontal chain-map identity. Set $\\kappa_F=\\rho^{-1}j$ in the derived category, using the derived identification of Step 4. Left exactness of $b_{p,*}$ identifies $b_{p,*}F_p$ with the vertical cycles in $A^{p,0}$ (there are no vertical boundaries from degree $-1$). Thus $E_2^{p,0}=H^p(C_b(F))$. A class on this row represented by a horizontal cocycle is sent by $j$ to that same cocycle in the total complex. In the column filtration this is exactly the bottom edge: it passes to the surviving quotient $E_\\infty^{p,0}$ and then to $F^pH^p(\\operatorname{Tot}A)\\subset H^p(\\operatorname{Tot}A)$. This proves the asserted edge normalization after composing with $\\rho^{-1}$.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-sp-double-complex-total",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7A, lemma-augmentation-spectral-sequence, double-complex proof"
+   }
+  },
+  {
+   "text": "A morphism $F\\to F^{\\prime}$ gives a derived morphism $QI\\to QI^{\\prime}$ through the resolution identifications. The bijection of homotopy-category maps into the K-injective $I^{\\prime}$ with derived-category maps supplies a chain-map lift uniquely up to homotopy. The K-injective comparison lemma identifies these with the canonical resolution comparisons. Applying component restriction and $b_{p,*}$ gives a map of the double complexes commuting with $j$ and $\\rho$. A homotopy of these lifts induces the total homotopy with sign $(-1)^p$ on the summand of face degree $p$; the horizontal cross terms cancel. It preserves the column filtration and gives vertically homotopic maps on every column, hence identical maps on $E_1$ and on all subsequent pages. The same total homotopy proves equality of the maps in the derived category. Comparison lifts for identity maps between two choices of resolution are inverse up to homotopy; their composites compare to the identity. Consequently both the spectral sequence from $E_1$ onward and $\\kappa_F$ are independent of the resolution, with canonical comparisons compatible with composition. They are natural in $F$.",
+   "uses": [
+    "lem-sp-kinjective-computes",
+    "def-sp-double-complex-total",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7A, lemma-augmentation-spectral-sequence, double-complex proof"
+   }
+  },
+  {
+   "text": "Write $i:F\\to I^0$ for the resolution augmentation. Naturality of the counit defining $e$ gives, in total degree zero, $j^0e=e_{I^0}\\,b_*i=\\rho^0\\,b_*i$. All three maps land in cycles, so on degree-zero cohomology $H^0(j)\\,e=H^0(\\rho)\\,H^0(b_*i)$. Left exactness identifies the kernel of $b_*I^0\\to b_*I^1$ with $b_*F$ through $b_*i$. By the definition of $R^0b_*$ this is the canonical identification $b_*F=R^0b_*F=H^0(Rb_*F)$. Composing the displayed equality with $H^0(\\rho)^{-1}$ proves $H^0(\\kappa_F)\\circ e$ is precisely that identification, as claimed.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7A double-complex proof and Tag 0D79 adjunction defining the augmentation; degree-zero counit naturality written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-left-exact-additive",
+  "def-trf-geometric-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-simplicial-object",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sp-kinjective-computes",
+  "lem-trf-slice-site-simplicial-augmentation",
+  "lem-trf-total-site-component-restriction",
+  "lem-trf-total-site-injective-augmentation-exactness",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D7A, lemma-augmentation-spectral-sequence, using Tag 0D79 and homology Tags 0132--0133; the canonical comparison, edge map, naturality and degree-zero normalization are expanded from the double-complex construction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +186,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-site-augmentation-acyclic-cech",
@@ -82,5 +212,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-augmentation-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Followed the Stacks 0D7A injective double-complex construction, reusing component restriction, injective resolutions, total augmentation comparison and the first-quadrant spectral sequences. Added only the strict injective-row exactness ingredient (0D79). Wrote out the canonical bottom-row comparison, edge, resolution independence and counit normalization. The statement is unchanged.",
+  "blueprint": "Realizes the normal-cone specialization descent input of lem-trf-local-term-locality, through the Orgogozo Lemma 3.1.1 first isomorphism: the total-site spectral sequence needed in the injective case of Stacks 0D7A.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Small-site module categories with the constant integer ring give Grothendieck abelian categories; no trace-unit lemma supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "The generic first-quadrant augmentation-to-total criterion identifies the injective-row total with the pushforward resolution; this is homological algebra, not a replacement of the unit route."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The two first-quadrant spectral sequences supply the E1 page and finite convergence of the constructed bicomplex."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic uniqueness up to homotopy of injective resolution comparisons supplies naturality and independence of choices."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The homotopy-to-derived Hom bijection into a K-injective realizes the resolution augmentation and lifts coefficient morphisms; it is a general homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sc-first-quadrant-column-augmentation",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-6a1b31bef",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-6a1b31bef (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement and Stacks spaces-simplicial 0D78/0D79/0D7A with proofs, plus 09WF, 09WL, restriction-to-components-site, restriction-injective-to-component-site and augmentation-site. The item's statement and maintainer fields match the base exactly. Only stmt_deps, which adds the double-complex and spectral-sequence definitions the statement uses, proof, proof_origin, status and split_report changed. The coefficients are abelian sheaves as in 0D7A case (A) on the 09WL slice diagram. Steps checked: (1) e identifies b_*F with ker delta^0 by vertex compatibility; elementary is fair. (2) Representative with n=0, then the K-injective Hom bijection gives an actual injective resolution; component restriction gives resolutions of F_p, so the columns compute R^q b_{p,*}. (3)-(4) Rows are exact by the new node; the column-augmentation lemma's K.X 0 / K.flip.X q convention matches (face degree first); rho is a quasi-isomorphism. (5) First spectral sequence: E1 = R^q b_{p,*}F_p, d1 horizontal, finite convergence. (6) j comes from F to I^0; the edge E2^{p,0} onto E_inf^{p,0} = F^pH^p inside H^p is correct and not claimed injective. (7) Maps F[0] to I' that are homotopic are equal since I'^{-1} = 0, so they commute strictly with j; the total homotopy (-1)^p h was checked. (8) j^0 e = rho^0 b_*i by counit naturality. New node lem-trf-total-site-injective-augmentation-exactness = 0D79 injective case. It is true, and its pseudo-functorial generalization of case (A) is harmless. It is statement-only and self-contained, has 5 recorded searches and correct blueprint from/via. It is not a clause of the item and not a duplicate: lem-trf-simplicial-derived-image-spectral-sequence inlines 0D79 for schemes; the total-site module package, the hypercover-injective-sections node and the sc hypercover row do not state it. No cycle. Small cases: point site and cosimplicial injectives; constant U with b^{-1}G. Accepted tool_uses: lem-weil-pbc-ring-sheaves-grothendieck, lem-sc-first-quadrant-column-augmentation, thm-sp-double-complex-spectral-sequences, lem-sp-kinjective-computes, lem-weil-pbc-kinjective-hom-derived. No fixes."
  }
 }
