@@ -99,17 +99,12 @@
    }
   },
   {
-   "text": "Keep $Y$ affine and let $X$ be arbitrary as in the statement. Cover $X$ by finitely many affine opens $U_1,\\ldots,U_m$; this is possible because it is qc. Each restriction is locally of finite presentation: at points of an open, shrink the affine presentation neighbourhoods to principal opens contained in it, using $B_b=B[t]/(bt-1)$. Its source is qcqs, so [lem-weil-pbc-qcqs-morphism-permanence] makes it of finite presentation. Restrictions remain separated: their diagonals are the base changes of the closed diagonal along the open subschemes of the relative product; [lem-weil-pbc-proper-fp-permanence] preserves closed immersions under base change. Constructibility of the restricted cohomology sheaves follows from [lem-weil-pbc-constructible-qcqs-affine-local], since an affine open of a restriction is still an affine open of $X$; restriction is exact [prop-weil-pbc-inverse-image-modules-exact] and commutes with cohomology by [lem-sp-exact-functor-preserves-homology]. Induct on an upper bound $m$ for the number of affine opens in such a cover, including empty opens. The case $m=1$ is step 5. For $m>1$ put $U=U_1$, $V=U_2\\cup\\cdots\\cup U_m$. By [lem-weil-pbc-separated-affine-open-intersection], $U\\cap V$ is covered by the $m-1$ affine opens $U_1\\cap U_i$. The induction hypothesis applies to $V$ and $U\\cap V$, while step 5 applies to $U$. The triangle [lem-weil-pbc-etale-shriek-relative-mayer-vietoris] and the long exact cohomology theorem [lem-sf-derived-homology-long-exact] give, in every degree $t$, an exact sequence $A^t\\to B^t\\to\\mathcal H^t(Rf_!K)\\to A^{t+1}\\to B^{t+1}$, with $A=R(f|_{U\\cap V})_!K|_{U\\cap V}$ and $B=R(f|_U)_!K|_U\\oplus R(f|_V)_!K|_V$. The end terms are constructible; finite sums are constructible by extension closure. The middle term is an extension of $\\operatorname{coker}(A^t\\to B^t)$ by $\\ker(A^{t+1}\\to B^{t+1})$, so [thm-constructible-serre] proves it constructible. If $m=0$, $X$ is empty and the empty covering forces every sheaf and its derived image to be zero.",
+   "text": "Keep $Y$ affine. For a quasi-compact open $T\\subseteq X$, write $f_T=f|_T$. Every affine open of $T$ is an affine open of $X$, so [lem-weil-pbc-lfp-affine-opens-finite-presentation] gives a finitely presented algebra on each affine chart of $f_T$; hence $f_T$ is locally of finite presentation. Its diagonal is the base change of the closed diagonal of $f$ along $T\\times_YT\\to X\\times_YX$, so it is closed by [lem-weil-pbc-proper-fp-permanence]. Thus $f_T$ is separated. Since $T$ is quasi-compact and $Y$ quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $f_T$ quasi-compact, hence of finite type. Now [lem-weil-pbc-qcqs-over-affine] gives that $T$ is qcqs, and [lem-weil-pbc-qcqs-morphism-permanence](1) also makes $f_T$ quasi-separated. Therefore every such restriction is separated of finite presentation between qcqs schemes, as required by the compact-support inputs.",
    "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-constructible-qcqs-affine-local",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sp-exact-functor-preserves-homology",
-    "lem-weil-pbc-separated-affine-open-intersection",
-    "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
-    "lem-sf-derived-homology-long-exact",
-    "thm-constructible-serre",
-    "lem-weil-pbc-proper-fp-permanence"
+    "lem-weil-pbc-qcqs-over-affine"
    ],
    "elementary": false,
    "source": {
@@ -118,7 +113,34 @@
    }
   },
   {
-   "text": "Finally cover $Y$ by affine opens $W$. By [lem-weil-pbc-qcqs-morphism-permanence], $X_W=X\\times_YW$ is qcqs and $f_W$ is of finite presentation; it is separated because its diagonal is the base change of the closed diagonal, using [lem-weil-pbc-proper-fp-permanence]. The restriction of $K$ to the open $X_W$ has constructible cohomology: every affine open of $X_W$ is an affine open of $X$, the affine-local criterion applies there, and exact inverse image commutes with cohomology. Apply step 6 to $f_W$. Apply [thm-cbc-finite-torsion] to the cartesian square with common scheme base $S=Y$, bottom map $W\\to Y$ and top map $X_W\\to X$. The map $f$ is separated of finite type, $W\\to Y$ is arbitrary as permitted by that theorem, and the coefficients are finite. Thus its output equals $(Rf_!K)|_W$; [prop-weil-pbc-inverse-image-modules-exact] and [lem-sp-exact-functor-preserves-homology] identify its degree-$t$ cohomology with $\\mathcal H^t(Rf_!K)|_W$. All these restrictions are constructible. The affine-local equivalence [lem-weil-pbc-constructible-qcqs-affine-local] now gives constructibility on the original qcqs $Y$. Step 1 identifies this result with the originally fixed candidate $Rp_*j_!K$.",
+   "text": "For the same quasi-compact open $T$, the restriction $K|_T$ remains bounded below and has constructible cohomology. Indeed restriction is exact by [prop-weil-pbc-inverse-image-modules-exact], so [lem-sp-exact-functor-preserves-homology](c) identifies $\\mathcal H^q(K|_T)$ with $\\mathcal H^q(K)|_T$ and preserves its lower bound. Each affine open of $T$ is affine in $X$; apply (3)$\\Rightarrow$(1) of [lem-weil-pbc-constructible-qcqs-affine-local] on $X$, and then (1)$\\Rightarrow$(3) on the qcqs scheme $T$, to obtain constructibility of these restrictions.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-constructible-qcqs-affine-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL0 first paragraph: source induction using Tag 0GKN"
+   }
+  },
+  {
+   "text": "Prove the assertion over affine $Y$ by induction on an upper bound $m$ for the number of affine opens in a finite cover of $X$. Such a cover exists by quasi-compactness. For $m=0$, $X$ is empty and every sheaf is zero by its empty covering, so its derived compact-support image is zero. For $m=1$, use step 5. For $m>1$ write $U=U_1$ and $V=U_2\\cup\\cdots\\cup U_m$. By [lem-weil-pbc-separated-affine-open-intersection], $U\\cap V$ has the affine cover $U_1\\cap U_i$ for $2\\leq i\\leq m$. Thus $U,V,U\\cap V$ are quasi-compact opens. Steps 6 and 7 verify all geometric and coefficient hypotheses for their restricted maps and complexes. Step 5 handles $U$; induction handles $V$ and $U\\cap V$. Set $A=R(f|_{U\\cap V})_!(K|_{U\\cap V})$ and $B=R(f|_U)_!(K|_U)\\oplus R(f|_V)_!(K|_V)$. The relative Mayer--Vietoris triangle [lem-weil-pbc-etale-shriek-relative-mayer-vietoris] and [lem-sf-derived-homology-long-exact] give the exact sequence $H^t(A)\\to H^t(B)\\to H^t(Rf_!K)\\to H^{t+1}(A)\\to H^{t+1}(B)$. Finite sums are constructible by the split short exact sequence and [thm-constructible-serre]. The middle term is an extension of $\\operatorname{coker}(H^t(A)\\to H^t(B))$ by $\\ker(H^{t+1}(A)\\to H^{t+1}(B))$, both constructible by that same node; its extension clause proves the induction step.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+    "lem-sf-derived-homology-long-exact",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL0 first paragraph: source induction using Tag 0GKN"
+   }
+  },
+  {
+   "text": "Finally cover $Y$ by affine opens $W$. By [lem-weil-pbc-qcqs-morphism-permanence], $X_W=X\\times_YW$ is qcqs and $f_W$ is of finite presentation; it is separated because its diagonal is the base change of the closed diagonal, using [lem-weil-pbc-proper-fp-permanence]. The restriction of $K$ to the open $X_W$ has constructible cohomology: every affine open of $X_W$ is an affine open of $X$, the affine-local criterion applies there, and exact inverse image commutes with cohomology. Apply step 8 to $f_W$. Apply [thm-cbc-finite-torsion] to the cartesian square with common scheme base $S=Y$, bottom map $W\\to Y$ and top map $X_W\\to X$. The map $f$ is separated of finite type, $W\\to Y$ is arbitrary as permitted by that theorem, and the coefficients are finite. Thus its output equals $(Rf_!K)|_W$; [prop-weil-pbc-inverse-image-modules-exact] and [lem-sp-exact-functor-preserves-homology] identify its degree-$t$ cohomology with $\\mathcal H^t(Rf_!K)|_W$. All these restrictions are constructible. The affine-local equivalence [lem-weil-pbc-constructible-qcqs-affine-local] now gives constructibility on the original qcqs $Y$. Step 1 identifies this result with the originally fixed candidate $Rp_*j_!K$.",
    "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-proper-fp-permanence",
@@ -152,6 +174,7 @@
   "lem-weil-pbc-module-sheaves-grothendieck-abelian",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
   "lem-weil-pbc-separated-affine-open-intersection",
   "prop-weil-pbc-inverse-image-modules-exact",
   "thm-cbc-finite-torsion",
@@ -577,10 +600,45 @@
    "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, Topology.IsConstructible.image_of_isOpenEmbedding Read results: subset constructibility, ordinary pushforward, site definitions, or ordinary Mayer Vietoris; none states this etale compact-support result.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*cohomology|cohomology.*constructible",
+   "results": "; No hits. Read the returned signatures: subset constructibility, ordinary site functors, or derived t-structure facts; none states etale compact-support constructibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a separated finitely presented morphism of quasi compact quasi separated schemes, derived etale compact support pushforward preserves constructible cohomology for bounded below complexes with finite ring coefficients",
+   "results": "; AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, Algebra.Etale.finitePresentation, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, AlgebraicGeometry.IsSeparated.instMap Read the returned signatures: subset constructibility, ordinary site functors, or derived t-structure facts; none states etale compact-support constructibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "; No hits. Read the returned signatures: subset constructibility, ordinary site functors, or derived t-structure facts; none states etale compact-support constructibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived proper direct image after extension by zero preserves constructibility of bounded below complexes on small etale sites",
+   "results": "; DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.ran_isSheaf_of_isCocontinuous, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Functor.sheafPushforwardCocontinuous, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE Read the returned signatures: subset constructibility, ordinary site functors, or derived t-structure facts; none states etale compact-support constructibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images with compact supports of constructible etale sheaves over an arbitrary quasi compact quasi separated base are constructible",
+   "results": "; AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.image_of_isClosedEmbedding, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsConstructible.preimage_of_isClosedEmbedding, Topology.IsConstructible.preimage Read the returned signatures: subset constructibility, ordinary site functors, or derived t-structure facts; none states etale compact-support constructibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-proper-direct-image-finiteness",
   "by": "worker",
@@ -589,11 +647,11 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-etale-compactification-constructibility",
   "worker": "stage1",
-  "summary": "Expanded Tag 0GL0 through affine-line sheaf finiteness, hypercohomology, affine-space factorization and finite-open-cover induction. Kept qcqs bases, finite coefficients and the fixed etale candidate; no field, invertibility or boundedness-above hypothesis added. Five missing formalism and smaller finiteness inputs are statement-only nodes.",
-  "blueprint": "Expands the classical constructibility sentence in the ancestor thm-weil-pbc-direct-image-finiteness-proper through its source note Tag 0GL0, not the unrelated proetale coefficient tower route.",
+  "summary": "Repair of the 2026-10-17 re-split handoff: replace the 2021-character source-cover step by separately cited geometry, exact restriction, and finite-cover induction steps. Existing affine-presentation, qcqs-over-affine, closed-base-change, exact inverse-image, affine-local constructibility, affine-intersection, Mayer--Vietoris, long-exact-sequence and Serre nodes state every input; no duplicate or elementary helper nodes are created. Statement, Lean record, route, and all other proof arguments are preserved.",
+  "blueprint": "Preserves the original realization of the constructibility input in ancestor thm-weil-pbc-direct-image-finiteness-proper. Steps 6--8 expand precisely the first paragraph of Stacks Tag 0GL0: reduction to affine source by finite affine covers and relative Mayer--Vietoris. Steps 1--5 and the final base-localization step keep the prior route.",
   "tool_uses": [
    {
     "node": "lem-sf-derived-homology-long-exact",
@@ -634,6 +692,10 @@
    {
     "node": "thm-cbc-finite-torsion",
     "why": "Generic Compact-support base change at finite coefficients used exactly as stated in the expanded Tag 0GL0 proof; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic scheme-theoretic tool: a separated finite-type morphism to an affine base has qcqs source. Used for quasi-compact open restrictions before applying the compact-support inputs; it does not replace a step of the unit route."
    }
   ]
  },
@@ -647,15 +709,16 @@
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-separated-affine-open-intersection",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-cbc-finite-torsion"
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-qcqs-over-affine"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NI-c1cac13f8",
-  "group": "NI",
+  "reviewer": "NT-cc-NH-abd10211a",
+  "group": "NH",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-c1cac13f8 (reviewer sub-agent of L); spot-checked: Read the full item, all five new nodes, cited statements and source passages. All seven steps support the unchanged qcqs, bounded-below, finite-ring étale statement; the compact-support exchange has the required coefficient category and morphism. Checked edge cases, duplicate candidates and dependency paths; accepted all ten declared tool uses. No repairs needed. Concrete checks are recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-abd10211a (reviewer sub-agent of L); spot-checked: I read the whole item: steps 1-5 and 9 as kept, the new steps 6-8, every cited node statement, and Stacks Tag 0GL0 (more-etale.tex, around line 4711). The delivery adds no new nodes, the statement and Lean record are unchanged, every step is under 2000 characters, the dependency closure has no cycle, and no SGA source is cited. Step 6 (new): f_T is locally of finite presentation by the 01TQ node, using affine opens inside T. Its diagonal is the base change of Delta_f along the open T x_Y T, so it is closed (proper-fp-permanence (b)). f_T is quasi-compact by 03GI (T quasi-compact, Y quasi-separated). qcqs-over-affine then makes T qcqs, so f_T has finite presentation. No step assumes what it proves. Step 7 (new, marked elementary): restriction is exact (prop node (3)), the exact-functor node (c) carries cohomology, and 095E (3)=>(1) on X followed by (1)=>(3) on T gives constructibility. It really is elementary. Step 8 (new): the induction on the number of affine opens is set up correctly. The 01KP node gives U cap V a cover by m-1 affine opens, so both induction calls strictly decrease m. The Mayer-Vietoris node (0GKN) applies with quasi-compact U and V and any chosen compactifications. The long exact sequence and the Serre node give kernel, cokernel and extension closure. Step 9: thm-cbc-finite-torsion places no condition on the open W -> Y and works with finite Lambda in D^+. Coefficient category and exchange map match Rp_*j_!. Edge cases checked: empty X, n=0, Lambda=0, coefficients of residue characteristic with nothing inverted, K bounded below only. The tool uses are acceptable. Cosmetic only: step 5 names three inputs without brackets, but they are in its uses list. No fixes were needed."
  },
  "lean_audit": {
   "master": {
