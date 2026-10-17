@@ -2,13 +2,13 @@
  "id": "lem-coef-sharp-simplex-criterion",
  "kind": "statement",
  "title": "The simplex criterion for sharp simplicial maps",
- "statement": "Use small simplicial sets, standard simplices $\\Delta^n$, monomorphisms and weak homotopy equivalences of [lem-coef-kan-quillen-right-proper], and sharp maps and homotopy-cartesian squares of [lem-coef-sharp-pullback-calculus]. Let $p:E\\to B$ be any map of small simplicial sets. The following are equivalent:\n(i) $p$ is sharp.\n(ii) For every $n\\geq0$ and every simplicial map $\\sigma:\\Delta^n\\to B$, the strict pullback square $E\\times_B\\Delta^n\\to E$ over $\\Delta^n\\to B$ is homotopy cartesian.\n(iii) For every $m,n\\geq0$, every simplicial map $\\delta:\\Delta^m\\to\\Delta^n$, and every $\\sigma:\\Delta^n\\to B$, the induced map $E\\times_{B,\\sigma\\delta}\\Delta^m\\to E\\times_{B,\\sigma}\\Delta^n$ is a weak homotopy equivalence.\nNo fibrancy hypothesis is imposed on $E$ or $B$.",
+ "statement": "Use small simplicial sets, standard simplices $\\Delta^n$, monomorphisms and weak homotopy equivalences of [lem-coef-kan-quillen-model-right-proper-core], and sharp maps and homotopy-cartesian squares of [lem-coef-sharp-pullback-calculus]. Let $p:E\\to B$ be any map of small simplicial sets. The following are equivalent:\n(i) $p$ is sharp.\n(ii) For every $n\\geq0$ and every simplicial map $\\sigma:\\Delta^n\\to B$, the strict pullback square $E\\times_B\\Delta^n\\to E$ over $\\Delta^n\\to B$ is homotopy cartesian.\n(iii) For every $m,n\\geq0$, every simplicial map $\\delta:\\Delta^m\\to\\Delta^n$, and every $\\sigma:\\Delta^n\\to B$, the induced map $E\\times_{B,\\sigma\\delta}\\Delta^m\\to E\\times_{B,\\sigma}\\Delta^n$ is a weak homotopy equivalence.\nNo fibrancy hypothesis is imposed on $E$ or $B$.",
  "source": {
   "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
   "place": "Remark 4.2(1)-(3), printed p. 9, following Theorem 4.1; specialization to the topos of sets. Read online 2026-10-17. No Stacks tag states this simplicial homotopy criterion; archive WANTED."
  },
  "stmt_deps": [
-  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "lem-coef-sharp-pullback-calculus"
  ],
  "proof": [
@@ -27,7 +27,7 @@
    "text": "Every map $\\delta:\\Delta^m\\to\\Delta^n$ belongs to $W$. Indeed the realized simplices are closed disks, including a point in dimension zero. Each disk is nonempty and has a contraction to any chosen point $a$, given in convex disk coordinates by $(x,t)\\mapsto(1-t)x+ta$. It therefore has one path component and trivial positive homotopy groups at every point. Any map between two such realizations induces the required bijection and isomorphisms. This argument requires neither simplex to be Kan.",
    "uses": [
     "lem-coef-realization-finite-limits",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": true,
    "source": {
@@ -38,7 +38,7 @@
   {
    "text": "Assume (ii). Choose a trivial cofibration $B\\to\\widehat B$ with $\\widehat B$ Kan and factor $E\\to\\widehat B$ as a weak equivalence $E\\to\\widehat E$ followed by a Kan fibration $\\widehat E\\to\\widehat B$; thus $\\widehat E$ is Kan. For $\\sigma:\\Delta^n\\to B$ put $P_\\sigma=E\\times_B\\Delta^n$ and $Q_\\sigma=\\widehat E\\times_{\\widehat B}\\Delta^n$. Factor $\\Delta^n\\to\\widehat B$ as a weak equivalence $\\Delta^n\\to T_\\sigma$ followed by a Kan fibration. Its target $T_\\sigma$ is Kan. The fibrant cospan $\\widehat E\\to\\widehat B\\leftarrow T_\\sigma$ is a simultaneous fibrant replacement of $E\\to B\\leftarrow\\Delta^n$, so the definition of homotopy cartesianness in (ii) makes $P_\\sigma\\to\\widehat E\\times_{\\widehat B}T_\\sigma$ a weak equivalence. Right properness makes $Q_\\sigma\\to\\widehat E\\times_{\\widehat B}T_\\sigma$ a weak equivalence: it is the pullback of $\\Delta^n\\to T_\\sigma$ along the pullback of $\\widehat E\\to\\widehat B$. Two-out-of-three gives the canonical comparison $c_\\sigma:P_\\sigma\\to Q_\\sigma$ in $W$. For $\\delta:\\Delta^m\\to\\Delta^n$, the map $Q_{\\sigma\\delta}\\to Q_\\sigma$ is the pullback of $\\delta$ along the Kan fibration $Q_\\sigma\\to\\Delta^n$, which is itself the pullback of $\\widehat E\\to\\widehat B$. Right properness and step 2 therefore make $Q_{\\sigma\\delta}\\to Q_\\sigma$ a weak equivalence. In the commuting square with vertical maps $c_{\\sigma\\delta}$ and $c_\\sigma$, all maps except $P_{\\sigma\\delta}\\to P_\\sigma$ are now in $W$, so two-out-of-three proves (iii). The replacements are used to compute homotopy pullbacks, not to impose fibrancy on the original $E$ or $B$.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "lem-coef-sharp-pullback-calculus"
    ],
    "elementary": false,
@@ -50,7 +50,7 @@
   {
    "text": "Assume (iii). We prove the local horn assertion used below by an induction that is uniform in the simplex dimension. Say that $q:F\\to\\Delta^r$ satisfies the local condition if $F\\times_{\\Delta^r}\\Delta^s\\to F$ belongs to $W$ for every simplex operator $\\Delta^s\\to\\Delta^r$. For an inclusion $D\\cong\\Delta^d\\hookrightarrow\\Delta^r$ of a nonempty face, the restricted map $F_D\\to D$ again satisfies the local condition: for $\\eta:\\Delta^s\\to D$, both $F_{D,\\eta}\\to F$ and $F_D\\to F$ are in $W$, hence $F_{D,\\eta}\\to F_D$ is in $W$ by two-out-of-three. The inductive claim is: for every $r$, every $q$ satisfying the local condition, every vertex $v$ of $\\Delta^r$, and every nonempty collection $J$ of distinct codimension-one faces containing $v$, the inclusion $F\\times_{\\Delta^r}(\\bigcup_{j\\in J}D_j)\\to F$ belongs to $W$. Induct on $|J|$, for all $r,q,v$ simultaneously. When $|J|=1$ this is exactly the local condition for its single face. There is no nonempty such collection in dimension zero.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": true,
    "source": {
@@ -61,7 +61,7 @@
   {
    "text": "For the induction step in step 4, write $J=J'\\amalg\\{j\\}$ with $J'$ nonempty, put $H'=\\bigcup_{a\\in J'}D_a$, and put $D=D_j$. Inside $D\\cong\\Delta^{r-1}$ the intersection $H'\\cap D$ is the union of the $|J'|$ distinct codimension-one faces $D_a\\cap D$, all containing $v$. Thus the induction hypothesis, applied first to $q$ and $J'$ and then to its restriction over $D$ and these intersections, gives $A:=F\\times H'\\to F$ and $C:=F\\times(H'\\cap D)\\to F_D$ in $W$; all these products are over $\\Delta^r$. Also $F_D\\to F$ is in $W$ by the local condition, so $C\\to F$ is in $W$. The inclusions $C\\to A$ and $C\\to F_D$ are monomorphisms. Degreewise the union is the pushout $A\\amalg_C F_D=F\\times_{\\Delta^r}(H'\\cup D)$: pairs in the intersection are identified once, and every pair in the union is in one of the two pieces. Apply the cited weak-equivalence gluing statement to the map of spans $(A\\leftarrow C\\to F_D)\\to(F\\leftarrow F\\to F)$, where both maps of the second span are identities. The three component maps to $F$ are in $W$ and the required left legs $C\\to A$ and $1_F$ are monomorphisms. It gives $A\\amalg_C F_D\\to F$ in $W$, completing the induction.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "lem-coef-sset-gluing-filtered-equivalences"
    ],
    "elementary": false,
@@ -73,7 +73,7 @@
   {
    "text": "For any $\\sigma:\\Delta^n\\to B$ take $F=E\\times_B\\Delta^n$ over $\\Delta^n$. It satisfies the local condition by (iii) and associativity of strict pullbacks. For $n\\geq1$ and $0\\leq k\\leq n$, the faces $D_j$ with $j\\ne k$ are exactly the codimension-one faces containing vertex $k$, and their union is $\\Lambda_k^n$. Steps 4–5 therefore show $E\\times_B\\Lambda_k^n\\to E\\times_B\\Delta^n$ is in $W$. It is also a monomorphism, hence a trivial cofibration in the Kan–Quillen structure. In dimension one the horn is its single retained vertex, already the base case; no zero-dimensional horn is used.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": true,
    "source": {
@@ -84,7 +84,7 @@
   {
    "text": "We extend step 6 to every trivial cofibration over $B$. The pullback functor $p^*:\\mathrm{sSet}_{/B}\\to\\mathrm{sSet}_{/E}$ preserves monomorphisms and all small colimits. Here is the degreewise verification of the latter assertion: the colimit of a diagram over $B$ is the disjoint union of its sets of simplices modulo the identifications generated by its transition maps. Every generating identification preserves its image in $B$, so the quotient splits into its fibers over each simplex of $B$. Pairing with a simplex of $E$ over that image commutes with this quotient, giving the colimit of the pulled-back diagram. The bijection commutes with each simplicial operator because the map sends a class of a pair to the pair of the class. Monomorphisms remain injective on pairs. The Kan–Quillen cell description writes any trivial cofibration $i:A\\hookrightarrow A'$ as an arrow retract of a transfinite composite of pushouts of coproducts of horns. To exhibit this retract over $B$, write $j:C\\to C'$ for the cell composite and $(a:A\\to C,b:A'\\to C')$, $(r:C\\to A,s:C'\\to A')$ for its arrow-retract maps. Thus $ja=bi$, $ir=sj$, $ra=1_A$ and $sb=1_{A'}$. If $q:A'\\to B$ is the given structure map, equip $C'$ with $qs$ and $C$ with $qsj=qir$. Then $a,b,r,s$ are all maps over $B$: for $a$ and $b$ this follows from $ra=1_A$ and $sb=1_{A'}$, and for $r,s$ it follows from these chosen structure maps. Equip every stage of the cell composite, and every attached horn and simplex, with its map through $C'$ to $B$. Pullback now preserves both this slice retract and the cell colimits, so $p^*i$ is a retract of the corresponding transfinite attachment construction after pullback. Each pulled-back horn is a trivial cofibration by step 6. These remain trivial cofibrations under coproducts, pushouts, transfinite composites and retracts directly from their left lifting property against all Kan fibrations: choose the lifts separately on each coproduct summand; use the pushout universal property for pushouts; extend a partial lift at each successor stage and use its union at each limit ordinal; and compose with the two retract maps for retracts. Thus $p^*i$ has the left lifting property against every Kan fibration. Such a map is a trivial cofibration by the retract argument: factor $p^*i$ by the model structure as a trivial cofibration $c$ followed by a Kan fibration $t$; a lift in the square with top $c$ and bottom the identity gives $h$ with $th=1$ and $h\\,p^*i=c$, so $p^*i$ is an arrow retract of $c$ (maps $(1,h)$ and $(1,t)$), and monomorphisms and weak homotopy equivalences are closed under retracts. Thus $p^*i$ is a trivial cofibration and in particular lies in $W$. This uses no sharp-map colimit-gluing theorem, which would be circular here.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
@@ -95,7 +95,7 @@
   {
    "text": "Finally let $u:A\\to A'$ be an arbitrary weak homotopy equivalence over $B$. Factor its underlying map as a trivial cofibration $i:A\\to Z$ followed by a fibration $t:Z\\to A'$, and give $Z$ the composite map to $B$. Two-out-of-three makes $t$ a trivial fibration. Step 7 makes $p^*i$ a weak equivalence. The pullback $p^*t$ is a trivial fibration as well: a boundary-lifting problem for $p^*t$ projects to one for $t$; the resulting lift has the required map to $E$ because that coordinate is the prescribed bottom map, and the equality over $B$ follows from the bottom triangle. The boundary-lifting characterization in the cited model theorem, including the zero-dimensional boundary, therefore makes $p^*t$ a weak equivalence. Their composite $p^*u$ is in $W$. The weak-equivalence-preservation characterization of sharpness now gives (i). Together with steps 1 and 3 this proves all three conditions equivalent for arbitrary small $E$ and $B$.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "lem-coef-sharp-pullback-calculus"
    ],
    "elementary": false,
@@ -108,7 +108,7 @@
  "proof_deps": [
   "lem-coef-sharp-pullback-calculus",
   "lem-coef-realization-finite-limits",
-  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "lem-coef-sset-gluing-filtered-equivalences"
  ],
  "proof_origin": {
