@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousCoefficientModuleEncoding
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
 
 /-! # Restriction of continuous module encodings
 
@@ -17,92 +18,6 @@ Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites.
 universe u v
 open CategoryTheory Opposite MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor TensorProduct
-
-namespace AlgebraicGeometry.ProEtale
-open Scheme MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal Limits
-
-private noncomputable abbrev encoding_localization_comparison
-    (X Y : Scheme.{u}) (f : Y ⟶ X) [WeaklyEtale f] :
-    (f)^*[Ab.{u + 1}] ≅
-      (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale f)).sheafPushforwardContinuous
-        Ab.{u + 1} (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X) :=
-  upperStarIsoLocalizationRestriction Ab.{u + 1} f inferInstance
-
-/-- Specialization of the monoidal localization comparison to abelian sheaves.
-The general proof is in UpperLowerStar.InternalHom, which cannot be imported here:
-it duplicates laxBraided_upperStar from ModuleObject.UpperLowerStar.Monoidal.
-We prove this specialization using the same adjunction unit calculations.
-Source: the cited source-library module; Stacks Project, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-module-encoding-restriction) -/
-private theorem encoding_localization_monoidal
-    (X Y : Scheme.{u}) (f : Y ⟶ X) [WeaklyEtale f] :
-    NatTrans.IsMonoidal
-      (encoding_localization_comparison X Y f).hom := by
-  let h : WeaklyEtale f := inferInstance
-  have unit_app
-      (P : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (U : X.ProEtᵒᵖ) :
-      ((sheafToPresheaf _ Ab.{u + 1}).map
-        ((localizationRestrictionLowerStarAdjunction Ab.{u + 1} f h).unit.app P)).app U =
-        P.obj.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ f h trivial).counit.app
-          U.unop).op := by
-    simp [localizationRestrictionLowerStarAdjunction, Adjunction.sheafPushforwardContinuous,
-      Adjunction.whiskerLeft]
-  have unit_tensor
-      (P Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
-      (localizationRestrictionLowerStarAdjunction Ab.{u + 1} f h).unit.app (P ⊗ Q) =
-        ((localizationRestrictionLowerStarAdjunction Ab.{u + 1} f h).unit.app P ⊗ₘ
-          (localizationRestrictionLowerStarAdjunction Ab.{u + 1} f h).unit.app Q) ≫
-          μ (f)_*[Ab.{u + 1}] _ _ ≫ (f)_*[Ab.{u + 1}].map
-            (μ ((MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous
-            Ab.{u + 1} (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)) P Q) := by
-    apply Sheaf.tensor_hom_ext
-    rw [Functor.map_comp, ← μ_natural_assoc]
-    ext U : 2
-    simp only [NatTrans.comp_app, Functor.map_comp, Monoidal.tensorHom_app,
-      unit_app]
-    erw [← (μ (sheafToPresheaf (ProEt.topology X) Ab.{u + 1}) P Q).naturality]
-    erw [Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app_assoc]
-    erw [Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app
-      (F := MorphismProperty.Over.map ⊤ h)]
-    rfl
-  have unit_unit :
-      (localizationRestrictionLowerStarAdjunction Ab.{u + 1} f h).unit.app (𝟙_ _) =
-        ε (f)_*[Ab.{u + 1}] ≫ (f)_*[Ab.{u + 1}].map
-          (ε ((MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous
-            Ab.{u + 1} (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X))) := by
-    apply Sheaf.hom_ext_of_ε_comp
-    ext U : 2
-    simp only [NatTrans.comp_app, Functor.map_comp,
-      unit_app]
-    erw [← (ε (sheafToPresheaf (ProEt.topology X) Ab.{u + 1})).naturality]
-    erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app_assoc]
-    erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app
-      (F := MorphismProperty.Over.map ⊤ h)]
-    erw [Monoidal.tensorUnit_map, Category.id_comp]
-    rfl
-  exact {
-    unit := by
-      rw [← cancel_epi (η (f)^*[Ab.{u + 1}])]
-      simp only [Functor.Monoidal.η_ε_assoc]
-      apply ((upperStarLowerStarAdjunction Ab.{u + 1} f).homEquiv _ _).injective
-      dsimp only [encoding_localization_comparison, upperStarIsoLocalizationRestriction]
-      erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
-      rw [Adjunction.homEquiv_unit, Functor.map_comp,
-        ← Category.assoc, Adjunction.unit_app_unit_comp_map_η]
-      exact unit_unit
-    tensor P Q := by
-      rw [← cancel_epi (δ (f)^*[Ab.{u + 1}] P Q)]
-      simp only [Functor.Monoidal.δ_μ_assoc]
-      apply ((upperStarLowerStarAdjunction Ab.{u + 1} f).homEquiv _ _).injective
-      dsimp only [encoding_localization_comparison, upperStarIsoLocalizationRestriction]
-      erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
-      rw [Adjunction.homEquiv_unit, Functor.map_comp,
-        ← Category.assoc, Adjunction.unit_app_tensor_comp_map_δ, Functor.map_comp, Category.assoc,
-        ← μ_natural_assoc, tensorHom_comp_tensorHom_assoc, Adjunction.unit_leftAdjointUniq_hom_app,
-        Adjunction.unit_leftAdjointUniq_hom_app]
-      exact unit_tensor P Q }
-
-end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -144,12 +59,12 @@ theorem continuousRing_module_restriction
   let G := ProEtale.upperStar Ab.{u + 1} f
   let L := (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale f)).sheafPushforwardContinuous
     Ab.{u + 1} (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
-  let τ := ProEtale.encoding_localization_comparison X Y f
+  let τ := ProEtale.upperStarIsoSheafPushforward Ab.{u + 1} f inferInstance
   let cX := chartComparison X T
   let cY := chartComparison Y T
   let : IsIso cX := chartComparison_isIso X T
   let : IsIso cY := chartComparison_isIso Y T
-  let : NatTrans.IsMonoidal τ.hom := ProEtale.encoding_localization_monoidal X Y f
+  let : NatTrans.IsMonoidal τ.hom := inferInstance
   let φ := condensedPullbackHom (Profinite.continuousMapRingObj T) f
   let A := (sheafCompose (Scheme.ProEt.topology X)
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (continuousMapRingSheaf X T)
@@ -226,6 +141,104 @@ private theorem coefficientCast_app
   subst h
   simp
 
+private theorem ringModuleEquivalenceOfIso_val (X : Scheme.{u})
+    {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (e : S ≅ R)
+    (M : SheafOfModules.{u + 1} R) :
+    ((ringModuleEquivalenceOfIso X e).functor.obj M).val =
+      (PresheafOfModules.pushforward (F := 𝟭 X.ProEt) e.hom.hom).obj M.val := rfl
+
+private noncomputable def pushforwardSquare
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D] (F : C ⥤ D)
+    {R R' : Dᵒᵖ ⥤ RingCat.{u + 1}} {S S' : Cᵒᵖ ⥤ RingCat.{u + 1}}
+    (pY : S' ⟶ S) (pX : R' ⟶ R) (j : S ⟶ F.op ⋙ R) (j' : S' ⟶ F.op ⋙ R')
+    (h : pY ≫ j = j' ≫ F.op.whiskerLeft pX) :
+    PresheafOfModules.pushforward.{u + 1} j ⋙
+        PresheafOfModules.pushforward (F := 𝟭 C) pY ≅
+      PresheafOfModules.pushforward (F := 𝟭 D) pX ⋙ PresheafOfModules.pushforward j' :=
+  PresheafOfModules.pushforwardComp (F := 𝟭 C) (G := F) pY j ≪≫
+    eqToIso (congrArg (fun a ↦ PresheafOfModules.pushforward (F := F) a) h) ≪≫
+      (PresheafOfModules.pushforwardComp (F := F) (G := 𝟭 D) j' pX).symm
+
+private theorem ringModule_restrictionOfIso
+    (X Y : Scheme.{u}) (F : Y.ProEt ⥤ X.ProEt)
+    {R₁ S₁ : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}}
+    {R₂ S₂ : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1}}
+    (eX : S₁ ≅ R₁) (eY : S₂ ≅ R₂)
+    (j : R₂.obj ⟶ F.op ⋙ R₁.obj) (j' : S₂.obj ⟶ F.op ⋙ S₁.obj)
+    (h : eY.hom.hom ≫ j = j' ≫ F.op.whiskerLeft eX.hom.hom)
+    (M : SheafOfModules.{u + 1} R₁) (N : SheafOfModules.{u + 1} R₂)
+    (e : N.val ≅ (PresheafOfModules.pushforward j).obj M.val) :
+    Nonempty (((ringModuleEquivalenceOfIso Y eY).functor.obj N).val ≅
+      (PresheafOfModules.pushforward j').obj
+        ((ringModuleEquivalenceOfIso X eX).functor.obj M).val) := by
+  rw [ringModuleEquivalenceOfIso_val, ringModuleEquivalenceOfIso_val]
+  exact ⟨(PresheafOfModules.pushforward (F := 𝟭 _) eY.hom.hom).mapIso e ≪≫
+    (pushforwardSquare F eY.hom.hom eX.hom.hom j j' h).app M.val⟩
+
+section FieldRestriction
+
+private theorem continuousFieldModuleEquivalence_functor
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [TotallyDisconnectedSpace E]
+    (X : Scheme.{u}) :
+    (continuousFieldModuleEquivalence ℓ E X).functor =
+      (continuousRingModuleEquivalence X E).functor ⋙
+        (ringModuleEquivalenceOfIso X ((sheafCompose (Scheme.ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+            (eqToIso (lisseFieldSheaf_eq ℓ E X)))).functor := rfl
+
+private theorem field_restriction_transport
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (X Y : Scheme.{u}) (f : Y ⟶ X) [Etale f]
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) X))
+    [TotallyDisconnectedSpace E]
+    (U : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) Y))
+    (e : ((continuousRingModuleEquivalence Y E).functor.obj U).val ≅
+      (PresheafOfModules.pushforward (continuousRestrictionMap f E)).obj
+        ((continuousRingModuleEquivalence X E).functor.obj P).val) :
+    Nonempty (((continuousFieldModuleEquivalence ℓ E Y).functor.obj
+        U).val ≅
+      (PresheafOfModules.pushforward (lisseEtaleCoefficientIdentification ℓ E f)).obj
+        ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).val) := by
+  let eY := (sheafCompose (Scheme.ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+      (eqToIso (lisseFieldSheaf_eq ℓ E Y))
+  let eX := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+      (eqToIso (lisseFieldSheaf_eq ℓ E X))
+  let F := lisseEtaleSiteInclusion f
+  let pY := eY.hom.hom
+  let pX := eX.hom.hom
+  let j := continuousRestrictionMap f E
+  let j' := lisseEtaleCoefficientIdentification ℓ E f
+  have h : pY ≫ (𝟭 Y.ProEt).op.whiskerLeft j = j' ≫ F.op.whiskerLeft pX := by
+    apply NatTrans.ext
+    funext Z
+    change eY.hom.hom.app Z = eX.hom.hom.app (F.op.obj Z)
+    change ((sheafCompose (Scheme.ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        (eqToHom (lisseFieldSheaf_eq ℓ E Y))).hom.app Z =
+      ((sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (eqToHom (lisseFieldSheaf_eq ℓ E X))).hom.app (F.op.obj Z)
+    rw [coefficientCast_app, coefficientCast_app]
+  have hpush : PresheafOfModules.pushforward.{u + 1} (F := F) j =
+      PresheafOfModules.pushforward j := rfl
+  let M := (continuousRingModuleEquivalence X E).functor.obj P
+  let N := (continuousRingModuleEquivalence Y E).functor.obj U
+  let eF : N.val ≅ (PresheafOfModules.pushforward (F := F) j).obj M.val :=
+    e ≪≫ (eqToIso hpush.symm).app M.val
+  obtain ⟨en⟩ := ringModule_restrictionOfIso X Y F eX eY j j' h M N eF
+  let eFY := (eqToIso (continuousFieldModuleEquivalence_functor ℓ E Y)).app U
+  let eFX := (eqToIso (continuousFieldModuleEquivalence_functor ℓ E X)).app P
+  exact ⟨(SheafOfModules.forget _).mapIso
+    eFY ≪≫
+      en ≪≫ (PresheafOfModules.pushforward j').mapIso
+        ((SheafOfModules.forget _).mapIso eFX.symm)⟩
+
 /-- The rational encoding commutes with the etale restriction used in a lattice.
 Source: Bhatt--Scholze, Proposition 6.8.4(6).
 (blueprint: lem-weil-pbc-continuous-module-encoding-restriction)
@@ -243,6 +256,24 @@ theorem continuousField_module_restriction
         ((upperStar (Profinite.continuousMapRingObj E) f).obj P)).val ≅
       (PresheafOfModules.pushforward (lisseEtaleCoefficientIdentification ℓ E f)).obj
         ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).val) := by
-  sorry
+  rename_i _ hE _ _ _
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
+  let : TotallySeparatedSpace E :=
+    totallySeparatedSpace_iff_exists_isClopen.mpr fun x y h ↦ by
+      obtain ⟨r, hr, hr'⟩ := exists_between (dist_pos.mpr h)
+      refine ⟨_, IsUltrametricDist.isClopen_ball x r, ?_, ?_⟩
+      · simp only [Metric.mem_ball, dist_self, hr]
+      · simp only [Set.mem_compl, Metric.mem_ball, dist_comm, not_lt, hr'.le]
+  -- Compare functors before evaluating them: reducing scalar extension here is expensive.
+  have hF :
+      upperStar (@Profinite.continuousMapRingObj E _ hE.toField.toDivisionRing.toRing _) f =
+        upperStar (@Profinite.continuousMapRingObj E _ hE.toField.toCommRing.toRing _) f := rfl
+  obtain ⟨e⟩ := continuousRing_module_restriction X Y f E P
+  let eU := (eqToIso hF).app P
+  let e' := (SheafOfModules.forget _).mapIso
+    ((continuousRingModuleEquivalence Y E).functor.mapIso eU) ≪≫ e
+  exact field_restriction_transport ℓ E X Y f P _ e'
+
+end FieldRestriction
 
 end AlgebraicGeometry.ProEtale.CondensedRing
