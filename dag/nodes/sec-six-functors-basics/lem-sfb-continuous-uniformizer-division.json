@@ -10,9 +10,49 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The valuation topology makes $E$ a topological field. Since a uniformizer is nonzero, multiplication by $\\pi^e$ on $E$ is a homeomorphism with inverse multiplication by $\\pi^{-e}$. Restricting this map to $A$ gives a homeomorphism $A\\to\\pi^eA$ with the subspace topology. Define $q$ as the inverse of this restriction composed with $f$; it is continuous and $A$-valued by the divisibility hypothesis, and it is unique because multiplication by $\\pi^e$ is injective.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: comparison of valuations makes division integral."
+   }
+  },
+  {
+   "text": "Write $f(t_0)=\\pi^e u$ with $u\\in A^\\times$. The defining equation $\\pi^e q(t_0)=f(t_0)$ and cancellation of the nonzero element $\\pi^e$ in the field $E$ give $q(t_0)=u$, so $q(t_0)$ is a unit of $A$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: comparison of valuations makes division integral."
+   }
+  },
+  {
+   "text": "The unit group $A^\\times$ is open in the valuation topology: for a unit $u$, the coset $u+\\mathfrak m_E$ consists of units and is an open neighbourhood of $u$. Hence $U=q^{-1}(A^\\times)$ is an open neighbourhood of $t_0$ and $q|_U$ is unit-valued. Inversion on $E^\\times$ is continuous for the valuation topology, so $t\\mapsto q(t)^{-1}$, viewed as an $A$-valued map on $U$, is continuous. This proves the final local assertion.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: comparison of valuations makes division integral."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19; explicit valuation-topology division and local unit inversion."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-integral-pivot-splitting",
@@ -65,5 +105,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-continuous-uniformizer-division",
+  "worker": "stage1",
+  "summary": "Expanded the imported auxiliary statement into three elementary proof steps: multiplication by a nonzero uniformizer power is a homeomorphism onto its image, the quotient is uniquely A-valued and unit-valued at the chosen point, and the open unit locus plus continuity of inversion gives the local conclusion. No new nodes were needed; all steps use only the finite-extension coefficient definition and the valuation-topology formulas.",
+  "blueprint": "Realizes the ancestor lem-sfb-dc-hom-preserves proof's continuous integral division clause, as refined by the imported continuous Smith-elimination route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-5718f14be",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-5718f14be (reviewer sub-agent of L); spot-checked: PASS, no fixes written and nothing dropped. I read the item in full: its statement and its 3 steps. The only node it cites is def-weil-l-adic-coefficient-extension: clause 1 (the absolute value), clause 2 (O_E and m_E = {|x|<1}) and clause 3 (uniformizer with pi O_E = m_E, so pi is nonzero). I also read the consumer lem-sfb-continuous-integral-pivot-splitting: its step 1 needs exactly the entrywise quotient, the unit at t0 and the local continuous inverse, and this statement gives all three. I read the unit sk-def-sfb-dc-restricted-functors, the chapter sec-six-functors-basics, and the via chain up to lem-sfb-dc-hom-preserves. Source: HRS arXiv 2305.18131, proof of Thm 6.12(2), pp. 18-19 ('Comparing valuations ... a,b in Gamma(S,O_E)'). That is the same division argument, and proof_origin=agent is correct because HRS does not state the unit or inverse clause. The statement is true. Multiplication by pi^e is a homeomorphism of E (inverse: multiplication by pi^{-e}) and restricts to a homeomorphism A -> pi^e A, so q is continuous and unique. If f(t0) = pi^e u then q(t0) = u by cancellation. A^x is open because u + m_E is the open unit ball and |u+m| = 1. Inversion is continuous on E^x because |x^-1 - y^-1| = |x-y|/(|x||y|). All three steps are correctly marked elementary, and proof_deps equals the union of the step uses. Small cases checked: e=0; empty T; one-point T; f=0; E=Q_5, f(t)=5t, t0=1; f(t)=5t^2, t0=0, where q(0)=0 is not a unit, so the exact-valuation hypothesis is needed; changing the uniformizer only scales q by a constant unit. Duplicate search with rg: I read finite-continuous-ultrametric-pivot, continuous-field-matrix-elimination, integral-matrix-entry-properties and the coefficient nodes; none states this lemma, so same_as=[] is right. There are no new nodes, no route citation other than the definition, no tool_uses, no SGA source and no target or base-change morphism involved. Four Mathlib searches are recorded and I agree with 'no match'. Minor wording I did not change: 'entrywise continuous' is matrix wording carried over from the parent and here just means continuous; 'valuation topology' means the topology of |.|_E, as in the parent."
  }
 }

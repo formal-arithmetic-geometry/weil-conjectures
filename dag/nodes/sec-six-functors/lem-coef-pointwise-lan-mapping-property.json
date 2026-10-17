@@ -10,8 +10,102 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Apply [lem-coef-small-inner-horn-completion] to the given small simplicial set $K$. It supplies a small quasicategory $\\widehat K$ and $i:K\\hookrightarrow\\widehat K$ for which restriction $\\operatorname{Fun}(\\widehat K,X)\\to\\operatorname{Fun}(K,X)$ lifts every monomorphism for every quasicategory $X$ in the containing universe. Lift the vertex $\\delta$ for $X=C$, obtaining $\\widehat\\delta$, and lift $F_0$ for $X=D$, obtaining $\\widehat F_0$. For $X=D$, apply the same lifting property to $\\partial\\Delta^1\\subseteq\\Delta^1$, with endpoints $\\widehat F_0,F\\widehat\\delta$ upstairs and the edge $\\beta$ downstairs. This gives an edge $\\widehat\\beta$ with these exact endpoints and restriction $\\beta$. By [lem-coef-inner-anodyne-pointwise-lan-invariance], the assumed pointwise colimit property on $K$ implies the same property for $(\\widehat\\delta,\\widehat F_0,F,\\widehat\\beta)$ on $\\widehat K$. In particular the replacement preserves the specified unit, not just the objects of the diagrams.",
+   "uses": [
+    "lem-coef-small-inner-horn-completion",
+    "lem-coef-inner-anodyne-pointwise-lan-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "Opening reduction to a quasicategory index; Change of Diagram, Proposition 7.3.1.14."
+   }
+  },
+  {
+   "text": "For any fixed $G$, write $M_X(a,b)=\\operatorname{Map}_{\\operatorname{Fun}(X,D)}(a,b)$ and $U_X(a,b)=U_{\\operatorname{Fun}(X,D)}(a,b)$. The restriction $U_{\\widehat K}(\\widehat F_0,G\\widehat\\delta)\\to U_K(F_0,G\\delta)$ lifts every monomorphism $A\\subseteq B$: a proposed lift is precisely a lifting problem for the functor-category restriction in Step 1 on $(A\\times\\Delta^1)\\cup(B\\times\\partial\\Delta^1)\\subseteq B\\times\\Delta^1$, with the two endpoint diagrams prescribed. It is a homotopy equivalence: lifting $\\varnothing\\subseteq U_K$ gives a section, and lifting $U_{\\widehat K}\\times\\partial\\Delta^1\\subseteq U_{\\widehat K}\\times\\Delta^1$ over the constant image gives a homotopy between its composite with restriction and the identity. The natural pinch equivalences of [lem-coef-infinity-pinch-comparison] therefore make $M_{\\widehat K}\\to M_K$ a homotopy equivalence as well. Restriction of triangles and pinch maps commutes, so the composition characterization of [lem-coef-infinity-mapping-composition] gives $[\\theta_K]=[i^*][\\theta_{\\widehat K}]$, since $\\widehat\\beta|_K=\\beta$. It suffices to prove the conclusion with $K$ a quasicategory; rename the extended data $K,\\delta,F_0,\\beta$.",
+   "uses": [
+    "lem-coef-small-inner-horn-completion",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "Opening reduction: equivalence on the entire target transformation space, not only on vertices."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-relative-join-left-kan-reduction]. Set $E=K\\star_C C$, with its two full inclusions $j_0:K\\to E$, $j_1:C\\to E$, structure map $r:E\\to C$, and $h:\\Delta^1\\times K\\to E$. Choose the supplied realization $\\bar F$ restricting exactly to $F_0,F$. Its edge $\\bar\\beta=\\bar Fh$ has the same fixed-endpoint homotopy class as $\\beta$, and its canonical cocones make $\\bar F$ left Kan extended from $j_0K$. For each $G$ put $\\bar G=Gr$; the same lemma gives the local limit cones making $\\bar G$ right Kan extended from $j_1C$. It also gives $\\bar Gh$ identically constant at $G\\delta$. The left and right properties concern the specific local cocones and cones, so no existence of arbitrary colimits or limits in $D$ has been introduced. The composition rule of [lem-coef-infinity-mapping-composition] allows $\\beta$ to be replaced by $\\bar\\beta$ in computing the homotopy class of $\\theta$.",
+   "uses": [
+    "lem-coef-relative-join-left-kan-reduction",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "Relative-join reduction, Proposition 7.3.2.11, and recognition of G-bar as right Kan extended."
+   }
+  },
+  {
+   "text": "Put $Z=U_E(\\bar F,\\bar G)$. Apply [lem-coef-full-subcategory-kan-trivial-restriction] first to the full inclusion $j_0K\\subseteq E$, using the local colimit condition on $\\bar F$, and then to $j_1C\\subseteq E$, using the local limit condition on $\\bar G$. It gives actual restriction maps\n$$a:Z\\longrightarrow U_C(F,G),\\qquad b:Z\\longrightarrow U_K(F_0,G\\delta)$$\nthat are trivial Kan fibrations and homotopy equivalences. Let $q:U_C(F,G)\\to U_K(F\\delta,G\\delta)$ be restriction along $\\delta$. Thus $qa$ is literally restriction to $j_1\\delta$. Both applications have full inclusions and quasicategory targets by Step 3; the lemma requires the Kan property of the indicated source or target functor only, not that every diagram on the subcategory admit an extension.",
+   "uses": [
+    "lem-coef-full-subcategory-kan-trivial-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "The two trivial-fibration restriction maps phi-plus and phi-minus."
+   }
+  },
+  {
+   "text": "For an $n$-simplex $z$ of $Z$, write its arrow family as $\\tau_z:\\Delta^n\\times\\Delta^1\\times E\\to D$, whose time endpoints are $\\bar F,\\bar G$. Define the square family\n$$W_z(s,t,v,k)=\\tau_z(s,t,h(v,k)).$$\nIts four sides, with the entire $\\Delta^n$ parameter retained, are: $t=0$ is the constant family $\\bar\\beta$; $v=1$ is $(qa)(z)$; $v=0$ is $b(z)$; and $t=1$ is the degenerate identity of $G\\delta$, because $\\bar Gh$ is constant. Restrict this square to the two monotone triangles with vertices $((0,0),(0,1),(1,1))$ and $((0,0),(1,0),(1,1))$ in the $(t,v)$ coordinates. They give maps $\\rho_L,\\rho_R:Z\\to V(F_0,F\\delta,G\\delta)$ and $V(F_0,G\\delta,G\\delta)$, respectively, for the triangle spaces of [lem-coef-infinity-mapping-composition]. Their $02$ edges are the same diagonal $d(z)(s,t,k)=\\tau_z(s,t,h(t,k))$. Their pairs of short edges are $(qa(z),\\bar\\beta)$ and $(\\mathrm{id},b(z))$. For every monotone $\\nu:[m]\\to[n]$, $\\tau_{\\nu^*z}=\\tau_z\\circ(\\nu\\times1\\times1)$, so $W_{\\nu^*z}=W_z\\circ(\\nu\\times1\\times1\\times1)$; the triangle maps and $d$ are therefore simplicial maps on all degrees, not vertexwise assignments.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-relative-join-left-kan-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "The final homotopy-commutative triangle, expanded in the fixed-endpoint arrow model by the two triangles of the naturality square."
+   }
+  },
+  {
+   "text": "Use the characterization of composition by the short-edge map $\\vartheta:V\\to U\\times U$ and long-edge map $\\ell$ in [lem-coef-infinity-mapping-composition]. For $\\rho_L$, it gives $[d]=[\\text{compose with }\\bar\\beta][qa]$. For $\\rho_R$, it gives $[d]=[\\text{compose with identity}][b]=[b]$ by the unit law. Hence the entire maps satisfy $[b]=[\\theta_U][a]$ in the homotopy category of Kan complexes, where $\\theta_U$ is the comparison in the arrow model. Since $a,b$ are homotopy equivalences, $[\\theta_U]=[b][a]^{-1}$ is invertible. The natural pinch equivalences in [lem-coef-infinity-pinch-comparison] and the composition formula identify this with the stated comparison on right-pinched mapping spaces. Restore the original index by Step 2. This proves the asserted equivalence of spaces without constructing an inverse componentwise or identifying pointwise equalities with equality of transformations.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-full-subcategory-kan-trivial-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "Homotopy commutativity and the two restriction equivalences imply that theta is an equivalence."
+   }
+  },
+  {
+   "text": "Finally retain $G$ as a variable. The operation $G\\mapsto Gr$ is precomposition by the fixed simplicial map $r$, and both $a,b$ are the restrictions themselves. Their coherent naturality is included in [lem-coef-full-subcategory-kan-trivial-restriction], applied to this family; it applies to all $Gr$ because Step 3 proves its right Kan condition for every $G$. The square in Step 5 is precomposition by the fixed map $(t,v,k)\\mapsto(t,h(v,k))$, and its two triangle inclusions do not involve $G$. In any additional simplex parameter $\\Delta^p$, all three operations keep that factor by its identity map; restriction along $\\mu:[q]\\to[p]$ gives equal composites because $(\\mu\\times1)(1\\times T)=(1\\times T)(\\mu\\times1)$ for each fixed square or triangle map $T$. Thus the comparison of the natural restriction span with composition by $\\bar\\beta$ retains the higher parameter data. Pinch maps are natural under simplicial functors by [lem-coef-infinity-pinch-comparison], and composition is the triangle-space operation of [lem-coef-infinity-mapping-composition]. The resulting equivalence is therefore natural in $G$. The preliminary index restriction is fixed independently of $G$, so the same naturality holds for the original $K$.",
+   "uses": [
+    "lem-coef-full-subcategory-kan-trivial-restriction",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "Naturality in G via the restriction span, the parameter-preserving square, and natural pinch maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-small-inner-horn-completion",
+  "lem-coef-inner-anodyne-pointwise-lan-invariance",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-relative-join-left-kan-reduction",
+  "lem-coef-full-subcategory-kan-trivial-restriction"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +151,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
@@ -83,5 +177,25 @@
   },
   "same_as": [],
   "is": null
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0309",
+  "place": "Repair following the full-subcategory/relative-join proof of Kerodon Proposition 7.3.6.1, with the final homotopy expanded using both triangles of the naturality square in the fixed-endpoint arrow model. Source read online, archival copy WANTED."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pointwise-lan-mapping-property",
+  "worker": "stage1",
+  "summary": "Replaced the returned definitions-only sketch by the small-inner-horn index reduction, a relative-join realization, two full-subcategory trivial-fibration restrictions, and an explicit parameterized two-triangle composition homotopy. Added three statement-only structural lemmas, avoiding the existing cyclic Kan-restriction proofs. Kept the statement and its hypotheses unchanged; re-used all earlier item searches.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the displayed derived mapping-complex adjunction, through coherent universal maps with the prescribed unit, not merely componentwise bijections."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-e2e623221",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-e2e623221 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the 3 new nodes in full, plus the statements of all 6 cited nodes. Kerodon is not archived locally, so I read these tags online: 0309 (the statement and the whole proof route), 030M, 02YZ and 02YL. The item statement matches Kerodon Prop 7.3.6.1: K is an arbitrary simplicial set, beta is specific, the pointwise condition is on K/c, and no extra colimits are assumed. The steps follow Kerodon's proof. Step 1 replaces K by an inner-horn completion: the lifting property of lem-coef-small-inner-horn-completion lifts delta, F0 and beta with fixed endpoints, and the inner-anodyne invariance node (Kerodon 02YL(2)) keeps the colimit hypothesis. Step 2 shows restriction on transformation spaces is a trivial fibration via the monomorphism (A x Delta1) u (B x dDelta1) in B x Delta1. Steps 3-4 use the relative-join node (Kerodon 02YZ plus 024J/02FK, including the exact identity that Gr composed with h is constant) and then the full-subcategory theorem twice (Kerodon 030M, either/or hypothesis). In Step 5 I recomputed all four sides of the square, its vertices and both triangles: the edge pairs are (qa, beta-bar) and (id, b), with the same diagonal d. Step 6 gives [b] = [theta_U][a] through the composition formula and its unit law; Step 7 gives naturality in G. The new nodes are statement-only, self-contained and searched, with correct blueprint fields. I tested them on edge cases: A=C, A empty, K empty, delta = identity, and the horn inside Delta2. The cycle check (BFS) is clean, all citations stay in the item's unit, and no SGA source is used. lem-coef-infinity-kan-mapping-restriction is a weaker near-duplicate of the new full-subcategory node, but its dependencies reach this item, so it cannot be cited here and the new node is justified. I suggest the maintainer later re-derive that node from the new one. No fixes."
  }
 }

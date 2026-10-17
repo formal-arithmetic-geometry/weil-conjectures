@@ -14,9 +14,96 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the simplicial projective model category $\\mathcal M=\\mathsf{sSet}^A$ of [lem-coef-simplicial-projective-model-calculus], applied to $\\mathcal A=\\mathsf{sSet}$ with the Kan model structure, which is combinatorial and simplicial for its Cartesian enrichment by [lem-coef-simplicial-presheaf-projective-model]; tensors are objectwise. Put $F_aK(b)=K\\times A(a,b)$, the free module left adjoint to evaluation at $a$. Define\n$$K_n(a)=\\coprod_{a_0,\\ldots,a_{n-1},\\,a_n=a}X(a_0)\\times\\prod_{j=1}^n A(a_{j-1},a_j),$$\nso $K_0(a)=X(a)$ and $P_nX=\\coprod_a F_aK_n(a)$. The displayed faces and degeneracies define a simplicial object: disjoint compositions or insertions commute, adjacent compositions agree by associativity, and composing an inserted identity gives the original factor by the unit law; the first-face versions are exactly the action axioms for $X$. They are enriched natural in $b$ by associativity on the final factor. Since composition, actions and identity maps are simplicial, all these operators commute with the internal operators.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 9.11 and Remark 9.12, printed pp.37–38, and §19.1, printed p.90; agent-written enriched latching calculation, not a numbered enriched theorem in this source."
+   }
+  },
+  {
+   "text": "For $n>0$, let $D_n(a)\\subseteq K_n(a)$ be the union of the $n$ loci where, for at least one $1\\leq j\\leq n$, $a_{j-1}=a_j$ and the $j$th arrow is the identity simplex; set $D_0(a)=\\varnothing$. Identity simplices are preserved by every internal operator, so these are simplicial subsets. At each internal degree $r$, a bar degeneracy inserts precisely one such identity arrow, without changing the final vertex or $x\\in X(a_0)_r$. The image of the iterated degeneracy indexed by a proper surjection $[n]\\twoheadrightarrow[k]$ is exactly the locus of identities at its collapsed adjacent positions; deleting those positions recovers its unique preimage. The intersection of two such images imposes the union of their identity conditions and is the image obtained by deleting that union. Thus any two presentations of the same element are identified in the latching diagram: both arise from the presentation obtained by deleting the union of their collapsed positions. Conversely every diagram relation preserves the resulting element. Consequently the colimit of the coefficient degeneracy diagram ending at $a$ is exactly $D_n(a)$, and its map into $K_n(a)$ is the inclusion. This also covers $n=0$, whose latching diagram is empty.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 9.11 and Remark 9.12, printed pp.37–38, and §19.1, printed p.90; agent-written enriched latching calculation, not a numbered enriched theorem in this source."
+   }
+  },
+  {
+   "text": "All degeneracies preserve the final vertex $a$ and the final free factor $A(a,b)$. Therefore the preceding calculation gives, as a map of enriched modules,\n$$L_n(P_\\bullet X)\\longrightarrow P_nX\\;=\\;\\coprod_a\\bigl(F_aD_n(a)\\longrightarrow F_aK_n(a)\\bigr).$$\nHere the equality denotes an isomorphism of arrows. To check the asserted latching universal property, maps from each free summand into an arbitrary module $Z$ correspond, by the free/evaluation adjunction, to simplicial maps of its coefficient into $Z(a)$. Compatible maps on the degeneracy diagram are precisely maps $D_n(a)\\to Z(a)$ by step 2; taking the family over $a$ gives exactly maps $\\coprod_a F_aD_n(a)\\to Z$. This proves the colimit assertion in the enriched-module category without assuming that evaluation detects projective cofibrations.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 9.11 and Remark 9.12, printed pp.37–38, and §19.1, printed p.90; agent-written enriched latching calculation, not a numbered enriched theorem in this source."
+   }
+  },
+  {
+   "text": "Each inclusion $D_n(a)\\hookrightarrow K_n(a)$ is a Kan-model cofibration by [lem-coef-kan-quillen-right-proper]. For an objectwise trivial fibration $E\\to H$ of modules, a lifting square against $F_aD_n(a)\\to F_aK_n(a)$ is, by the adjunction, a square against $D_n(a)\\hookrightarrow K_n(a)$ and $E(a)\\to H(a)$. It has a lift. A square against the coproduct is the family of these squares; choose their lifts and assemble them by the coproduct property. Hence the latching map of step 3 has the left lifting property against every projective trivial fibration, so is a projective cofibration. The Reedy criterion of [lem-coef-reedy-model-structure] now shows that $P_\\bullet X$ is Reedy cofibrant in $\\mathcal M$. In degree zero this says directly that $\\coprod_aF_aX(a)$ is cofibrant, since $\\varnothing\\hookrightarrow X(a)$ is a cofibration for every simplicial set.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 9.11 and Remark 9.12, printed pp.37–38, and §19.1, printed p.90; agent-written enriched latching calculation, not a numbered enriched theorem in this source."
+   }
+  },
+  {
+   "text": "Apply the cofibrancy clause of [lem-coef-reedy-realization-prism] in the simplicial model category $\\mathcal M$ to the Reedy-cofibrant object of step 4 (one can take its second Reedy-cofibrant object equal to the first). Its tensor realization\n$$|P_\\bullet X|=\\int^{[n]\\in\\Delta}P_nX\\times\\Delta^n$$\nis projectively cofibrant. Completeness, cocompleteness and the simplicial projective structure needed here are provided by [lem-coef-simplicial-projective-model-calculus], whose hypothesis on $\\mathsf{sSet}$ is [lem-coef-simplicial-presheaf-projective-model]; no fibrancy of $X$ or of the mapping simplicial sets has been used.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-reedy-realization-prism",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 9.11 and Remark 9.12, printed pp.37–38, and §19.1, printed p.90; agent-written enriched latching calculation, not a numbered enriched theorem in this source."
+   }
+  },
+  {
+   "text": "Identify this realization with the diagonal explicitly. At an object $b$ and internal degree $r$, its elements are classes of pairs $(z,\\alpha)$ with $z\\in(P_nX(b))_r$ and $\\alpha:[r]\\to[n]$. Send this pair to $P(\\alpha)z\\in(P_rX(b))_r$, where $P(\\alpha)$ acts in the outer direction. The coend relation makes this well-defined, since $P(\\alpha)P(\\beta)=P(\\beta\\alpha)$ when the maps are composable. Its inverse sends $w$ to $[w,1_{[r]}]$; the same relation gives $[z,\\alpha]=[P(\\alpha)z,1_{[r]}]$. For $\\theta:[s]\\to[r]$, the internal operator sends $(z,\\alpha)$ to $(z|_\\theta,\\alpha\\theta)$, whose image is $P(\\alpha\\theta)(z|_\\theta)$. This is the diagonal operator applied to $P(\\alpha)z$, because the two simplicial directions commute. The maps are enriched $A$-natural: the action by $u\\in A(b,c)_r$ commutes with $P(\\alpha)$ and the inverse leaves the final factor untouched. Thus this is an isomorphism of enriched modules $|P_\\bullet X|\\cong Q_AX$. Cofibrancy transfers across this isomorphism by the lifting definition. Empty $X(a)$ give empty summands throughout, and for $A$ empty every coproduct and latching object is initial. These cases require no change to the proof.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 9.11 and Remark 9.12, printed pp.37–38, and §19.1, printed p.90; agent-written enriched latching calculation, not a numbered enriched theorem in this source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-reedy-realization-prism",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Proposition 9.11 and Remark 9.12, printed pp.37–38, and §19.1, printed p.90; agent-written enriched latching calculation, not a numbered enriched theorem in this source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +139,45 @@
    "results": "{\"t\": \"2026-10-17T08:42:22Z\", \"tool\": \"grep\", \"query\": \"barResolution|BarResolution|twoSidedBar|projectivelyCofibrant\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic cofibrant replacements in CofibrantObjectHomotopy.lean do not identify the explicit enriched free bar; Rep.barResolution (RepresentationTheory/Homological/Resolution.lean:430) is a chain resolution of a trivial group representation, not a simplicial-category diagram. The ordinary/enriched Yoneda hits do not assert projective cofibrancy of this diagonal."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cofibrant\", \"Simplicial\"",
+   "results": "{\"t\": \"2026-10-17T11:57:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cofibrant\\\", \\\"Simplicial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cofibrant replacements, simplicial enrichments and abelian/representation projective resolutions do not state projective cofibrancy of this explicit enriched bar diagonal. Read Rep.barResolution at Mathlib/RepresentationTheory/Homological/Resolution.lean:430–433 and the generic resolution functor in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:193–202."
+  },
+  {
+   "tool": "grep",
+   "query": "barResolution|BarResolution|projectivelyCofibrant|enrichedBar",
+   "results": "{\"t\": \"2026-10-17T11:57:21Z\", \"tool\": \"grep\", \"query\": \"barResolution|BarResolution|projectivelyCofibrant|enrichedBar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"ffc54578fd0f7359\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cofibrant replacements, simplicial enrichments and abelian/representation projective resolutions do not state projective cofibrancy of this explicit enriched bar diagonal. Read Rep.barResolution at Mathlib/RepresentationTheory/Homological/Resolution.lean:430–433 and the generic resolution functor in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:193–202."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The enriched bar resolution of a space valued simplicial functor has projectively cofibrant diagonal",
+   "results": "{\"t\": \"2026-10-17T11:57:22Z\", \"tool\": \"leansearch\", \"query\": \"The enriched bar resolution of a space valued simplicial functor has projectively cofibrant diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.projectiveResolution\", \"CategoryTheory.projectiveResolutions\", \"CategoryTheory.Functor.mapProjectiveResolution\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"SSet.toTop\"], \"digest\": \"70ab76e44e1035af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cofibrant replacements, simplicial enrichments and abelian/representation projective resolutions do not state projective cofibrancy of this explicit enriched bar diagonal. Read Rep.barResolution at Mathlib/RepresentationTheory/Homological/Resolution.lean:430–433 and the generic resolution functor in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:193–202."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of the enriched free simplicial bar resolution of a simplicial functor is projectively cofibrant",
+   "results": "{\"t\": \"2026-10-17T11:57:23Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of the enriched free simplicial bar resolution of a simplicial functor is projectively cofibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"Rep.standardComplex.x_projective\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"AlgebraicTopology.DoldKan.N₁_obj_p\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"AlgebraicTopology.DoldKan.Γ₀\"], \"digest\": \"e779cda73e666221\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cofibrant replacements, simplicial enrichments and abelian/representation projective resolutions do not state projective cofibrancy of this explicit enriched bar diagonal. Read Rep.barResolution at Mathlib/RepresentationTheory/Homological/Resolution.lean:430–433 and the generic resolution functor in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:193–202."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one sided bar construction in simplicial sets is a cofibrant diagram for any small simplicial category",
+   "results": "{\"t\": \"2026-10-17T11:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"A one sided bar construction in simplicial sets is a cofibrant diagram for any small simplicial category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet.Augmented\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.sk\"], \"digest\": \"73d46fc40ebb1b4f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cofibrant replacements, simplicial enrichments and abelian/representation projective resolutions do not state projective cofibrancy of this explicit enriched bar diagonal. Read Rep.barResolution at Mathlib/RepresentationTheory/Homological/Resolution.lean:430–433 and the generic resolution functor in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:193–202."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-derived-space-module-coyoneda",
@@ -86,5 +208,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-bar-projective-replacement",
+  "worker": "stage1",
+  "summary": "Proved enriched bar cofibrancy by explicit free coefficient latching loci, their intersections and universal property, projective lifting, and the existing Reedy realization cofibrancy theorem. Identified coend realization with the diagonal degreewise and checked enriched naturality. Statement unchanged; no new nodes. All sources read online; all Mathlib searches run through the prescribed logger.",
+  "blueprint": "Supporting the inherited operadic extension branch, paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent middle adjunction, co-Yoneda contraction and reassociation of mapping bimodules; cofibrancy of the free resolution used to compute the derived enriched coend"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-08f7c9f94",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-08f7c9f94 (reviewer sub-agent of L); spot-checked: I read the whole item and all six steps; no new nodes were created. Statement checked on small cases: one object with trivial mapping set (Q=X), a discrete group G (free G-simplicial set), A empty, empty values, non-Kan mapping sets. It is true as stated and nothing is weakened. Step 1: P_n=coprod_a F_aK_n(a) with the calculus node's free adjoint, correct. Step 2: I checked independently that the latching colimit of the coefficients injects onto the identity-slot locus D_n(a). The s_sigma are injective, presentations are linked by the tau with sigma_T=tau sigma, and D_n is a simplicial subset but not a summand, which is why the ordinary lem-coef-simplicial-bar-latching-decomposition cannot be cited. Step 3: degeneracies keep the final vertex and final factor, and F_a commutes with colimits, correct. Step 4: monomorphisms are Kan cofibrations (kan-quillen node), trivial fibrations are objectwise (calculus node), and the lift is transposed and assembled; the Reedy criterion on Delta^op with X empty gives Reedy cofibrancy, correct. Step 5: the cofibrancy clause of lem-coef-reedy-realization-prism, whose coequalizer agrees with the coend, correct. Step 6: the coend-to-diagonal map is well defined, its inverse is [w,1], and it commutes with internal and A-actions, correct. No cycle: no cited closure contains the item. All cited statements are in unit sk-prop-sf-biduality-general and no tool_uses are needed. lem-coef-free-bar-cell-filtration and lem-coef-simplicial-bar-projective-resolution are the ordinary-category special cases, so there is no duplicate. Dugger and HTT are not in literature/; they are marked WANTED with proof_origin agent, so the proof was checked as a self-contained agent proof. FIX: steps 1 and 5 apply the calculus node with sSet as base without citing that sSet is combinatorial simplicial. I added lem-coef-simplicial-presheaf-projective-model (same unit, does not reach the item) to step 1 and step 5 text and uses and to proof_deps, in fixes/dag/nodes/sec-six-functors/lem-coef-enriched-bar-projective-replacement.json.; 1 file(s) fixed by the reviewer"
  }
 }

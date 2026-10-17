@@ -34,23 +34,36 @@
  ],
  "proof": [
   {
-   "text": "Write $S_W=-\\otimes_A^LB$ and $U_W$ for restriction of scalars, on $W=X,Y$ or a scheme used in a compactification. Specialize [lem-coef-finite-free-extension] to $\\mathbf Q_\\ell\\subset E$, prime-coefficient uniformizer $\\ell$ and level $r$. It gives $B=A_{E,er}$ finite free over $A$, with the equality of ideals specified in the statement; no equality of chosen uniformizers is needed. Thus tensoring with $B$ is exact, and all these derived scalar extensions are ordinary tensor extension on complexes. It preserves bounded constructibility: after choosing a finite $A$-basis of $B$, its underlying $A$-complex is a finite sum of copies of the input. Its $B$-Tor interval is the input interval, since for a degree-zero $B$-module sheaf $N$ one has $(M\\otimes_A B)\\otimes_B^LN=M\\otimes_A^LU_WN$. The tensor functors and their canonical reassociations are those of [lem-pur-derived-change-of-rings]. The construction [def-coefficient-twists-detailed] gives $S_WA_W(d)=B_W(d)$: for the first twist the balancing map is $(z\\otimes a)\\otimes b\\mapsto z\\otimes ab$ on the common roots-of-unity tower, and then take tensor powers. By [lem-pur-twist-sheaf-locally-free] these are rank-one locally free coefficient sheaves, so no higher Tor terms occur, and $T_A,T_B$ are bounded constructible finite-Tor objects. Tensor commutes with the common shift $2d$. Every finite-type $k$-scheme used below is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to the field $k$ (its only ideals are $0,k$). The scalar adjunction $S_W\\dashv U_W$ follows from [lem-weil-pbc-ringed-topoi-module-adjunction] applied to the identity topos with ring map $A_W\\to B_W$. Both functors are exact here: $S_W$ by finite freeness, and $U_W$ because kernels and cokernels have the same underlying abelian sheaves. Their termwise unit $m\\mapsto m\\otimes1$ and counit $n\\otimes b\\mapsto bn$ therefore descend through quasi-isomorphisms to derived functors and still satisfy the two triangle identities. This proves the derived adjunction with these actual maps. Restriction also preserves the finite-Tor constructible domain: for a degree-zero $A$-module sheaf $N$, $(U_WK)\\otimes_A^LN=U_W(K\\otimes_B^L(B\\otimes_A N))$, and $B\\otimes_A N$ is in degree zero. Constructibility follows by restricting the finite $B$-module stalks on each constructible stratum.",
+   "text": "Write $S_T=-\\otimes_A^LB$. Apply [lem-coef-finite-free-extension] to $\\mathbf Q_\\ell\\subset E$ and level $r$: it gives the finite-free ring $B=A_{E,er}$, because $(\\ell^r)=(\\varpi_E^{er})$, including for ramified $E$. Scalar extension preserves the bounded constructible finite-Tor domain and its Tor interval by [det-sp-scalar-extension-functor]. Its intrinsic constructibility convention is exactly [def-weil-finite-torsion-constructibility], hence the convention in [def-weil-finite-tor-amplitude]. Ordinary and pro-etale constructible realizations agree by [lem-sf-proetale-constructible-origin].",
    "uses": [
     "lem-coef-finite-free-extension",
-    "lem-pur-derived-change-of-rings",
-    "def-coefficient-twists-detailed",
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "det-sp-scalar-extension-functor",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "lem-sf-proetale-constructible-origin"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "2.13: $n=\\ell^r$, constant coefficient ring sheaf $B_Y$, and finite-free specialization of the coefficient tensor operation."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   },
   {
-   "text": "Fix a compactification $f=pj$ as in [def-compact-support-direct-image-detailed]. The open tensor comparison [lem-cbc-extension-zero-projection-formula] and exactness of $j_!$ [lem-cbc-proetale-extension-zero] identify $j_!M\\otimes_A^LB$ with $j_!(M\\otimes_A B)$. These statements also show that $j_!M$ is bounded constructible with the same Tor interval: extend a finite constructible stratification by the closed complement carrying zero, and use the open projection isomorphism to test its Tor bound. Its etale-origin witness exists by [lem-sf-proetale-constructible-origin]. Apply the finite-algebra coefficient comparison [lem-coef-finite-direct-image] to the proper factor $p$ and $j_!M$; it applies to the finite $A$-algebra $B$, not just a quotient of $A$. Compose it with the open coefficient isomorphism to obtain $c_M:S_YRf_{!,A}M\\xrightarrow{\\sim}Rf_{!,B}S_XM$. These are actual $B$-linear arrows. For the open coefficient isomorphism use $S\\dashv U$ and $j_!\\dashv j^{-1}$: the right adjoints of $S_{\\bar X}j_!^A$ and $j_!^BS_X$ are identified by $j_A^{-1}U_{\\bar X}=U_Xj_B^{-1}$, so their adjoint isomorphism is the stated open tensor map. After restriction of scalars, the proper coefficient map is the counit-defined projection map by [lem-coef-finite-direct-image], and the open map is the open projection map. The restriction/compact-support identification is [lem-sf-compact-support-restriction-of-scalars]. Hence the composite is precisely the specified $c_{B/A,M}$, and its restriction is the compact-support projection transformation of [def-exchange-projection].",
+   "text": "The twist construction [def-coefficient-twists-detailed] identifies $S_TA_T(d)=B_T(d)$: its balancing map on the common roots-of-unity tower is $(z\\otimes a)\\otimes b\\mapsto z\\otimes ab$, and tensor powers give $d\\geq0$. These twists are locally free of rank one by [lem-pur-twist-sheaf-locally-free]; thus $T_A,T_B$ have finite Tor amplitude and no additional derived tensor terms occur. Shifts commute with $S$. The actual etale/pro-etale twist identifications and normalized integration maps are those of [lem-pur-vector-integration-site-comparison], so its common exponent $\\ell^r$ gives the same twists as in the coefficient-transport results below. Every finite-type $k$-scheme used here is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field has only the ideals $0,k$.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
+   }
+  },
+  {
+   "text": "Fix a compactification $f=pj$. The proper coefficient comparison in [lem-coef-finite-direct-image] is the counit transpose for a finite $A$-algebra $B$, while [lem-cbc-extension-zero-projection-formula] and [lem-cbc-proetale-extension-zero] identify the open tensor map and preserve the constructible Tor interval. Using [lem-sf-compact-support-restriction-of-scalars] on the compactification and [lem-sf-proetale-constructible-origin] for the etale-origin witness, the composite is the specified $c_{B/A,M}$; by [def-exchange-projection] its restriction is the compact-support projection transformation.",
    "uses": [
     "def-compact-support-direct-image-detailed",
     "lem-cbc-extension-zero-projection-formula",
@@ -62,92 +75,142 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "2.13.1; compactification realization of its tensor comparison. Compare Stacks Tags 0GL5 and 0GL6 (more-etale.tex), projection and change of rings. The finite-free case here is proved by the cited finite-algebra and open comparisons."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   },
   {
-   "text": "For any separated finite-type map $h:V\\to W$ between separated finite-type $k$-schemes put $P_{h,R}=Rh_{!,R}$ and $G_{h,R}=Rh_R^!$, $R=A,B$. Use the bounded constructible adjunction of [thm-sf-ambient-adjoint-class]; the preservation assertion [thm-sf-preservation-class] keeps its exceptional terms in the finite-Tor domain. Define $b_{h,L}:S_VG_{h,A}L\\to G_{h,B}S_WL$ to be the $B$-adjoint transpose of\n$$P_{h,B}S_VG_{h,A}L\\xrightarrow{c_{h,G_{h,A}L}^{-1}}S_WP_{h,A}G_{h,A}L\\xrightarrow{S_W\\epsilon_{h,A,L}}S_WL.$$\nBy the adjunction definition, in the $B$-category it satisfies\n$$\\epsilon_{h,B,S_WL}\\,P_{h,B}(b_{h,L})\\,c_{h,G_{h,A}L}=S_W(\\epsilon_{h,A,L}).\\tag{*}$$\nHere is a direct proof of invertibility; a general invertible left-adjoint square need not have invertible mate. For arbitrary bounded constructible finite-Tor $K$ on $V$, the scalar adjunction from Step 1, $c$ from Step 2 and the exceptional adjunction give the natural bijections\n$$\\begin{aligned}\n\\operatorname{Hom}_A(K,U_VG_{h,B}S_WL)\n&=\\operatorname{Hom}_B(S_VK,G_{h,B}S_WL)\\\\\n&=\\operatorname{Hom}_B(P_{h,B}S_VK,S_WL)\\\\\n&=\\operatorname{Hom}_B(S_WP_{h,A}K,S_WL)\\\\\n&=\\operatorname{Hom}_A(P_{h,A}K,U_WS_WL)\\\\\n&=\\operatorname{Hom}_A(K,G_{h,A}U_WS_WL).\n\\end{aligned}$$\nThus Yoneda gives an isomorphism $\\rho_L:U_VG_{h,B}S_WL\\xrightarrow{\\sim}G_{h,A}U_WS_WL$. All its objects lie in the tested category by Step 1 and preservation. Choose an $A$-basis $e_1,\\ldots,e_s$ of $B$. Write $i_{j,H}:H\\to U_TS_TH$ for $x\\mapsto x\\otimes e_j$ on any scheme $T$. The composite $\\rho_LU_V(b_{h,L})$ restricts on $i_{j,G_{h,A}L}$ to $G_{h,A}(i_{j,L})$. Indeed, write $i_{j,H}=U(m_{e_j})\\eta_H$, with $m_{e_j}$ multiplication by $e_j$ on $S_TH$ and $\\eta$ the scalar unit. For the $\\eta$ component, the ordinary $A$-adjoint of $\\rho_LU(b)\\eta$ is $\\eta_L\\epsilon_{h,A,L}$ by the defining transpose of $b$ and the scalar triangle identities. For $i_j$, the extra multiplication $m_{e_j}$ passes through $c$, $b$ and the $B$-counit because these are $B$-linear, so that adjunct becomes $U(m_{e_j})\\eta_L\\epsilon_{h,A,L}=i_{j,L}\\epsilon_{h,A,L}$. The $A$-adjoint of $G_{h,A}(i_{j,L})$ is the same map by naturality of the exceptional counit. A right adjoint preserves finite products, and finite products and coproducts agree here, so the maps $G_{h,A}(i_{j,L})$ give an isomorphism $(G_{h,A}L)^s\\to G_{h,A}(L^s)$. Under the chosen basis this is exactly $\\rho_LU_V(b_{h,L})$. Consequently $U_V(b_{h,L})$ is invertible. Finally $U_V$ reflects isomorphisms: a cone with zero restricted cohomology has zero cohomology, since restriction leaves its underlying abelian sheaves unchanged. Hence $b_{h,L}$ is invertible. The basis is used only to prove this fact; the comparison and its counit normalization $(*)$ were defined without it.",
+   "text": "Apply [lem-pur-finite-coefficient-adjoint-comparisons] to the finite-free extension $A\\to B$. It identifies the exceptional comparison $b_{h,L}:S_VG_{h,A}L\\to G_{h,B}S_WL$ as the adjoint mate of $S\\epsilon_Ac^{-1}$ and states the counit equation $\\epsilon_{h,B,S_WL}P_{h,B}(b_{h,L})c_{h,G_{h,A}L}=S_W(\\epsilon_{h,A,L})$. Taking $h=f$ gives $(*)$ and fixes the actual comparison by uniqueness of the adjunction transpose; no unrestricted pro-etale adjunction is used.",
    "uses": [
-    "thm-sf-ambient-adjoint-class",
+    "lem-pur-finite-coefficient-adjoint-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-finite-free-projection-exchange] to the same extension $\\mathbf Q_\\ell\\subset E$. It identifies the actual proper and compact-support projection maps, the compact-support exchange, and their open constituents under $S$ and $c$. The maps in that lemma and the preceding construction are identical: both use the proper counit transpose and the open balancing map. When an inverse exchange is used, it exists by [thm-cbc-finite-level-proetale]; all objects have etale-origin witnesses by [lem-sf-proetale-constructible-origin]. An equality of invertible comparison squares also identifies their inverses.",
+   "uses": [
+    "lem-pur-finite-free-projection-exchange",
+    "thm-cbc-finite-level-proetale",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
+   }
+  },
+  {
+   "text": "Let $h=f$ and, for $R=A,B$, let $C_{R,L}=\\lambda\\circ(\\epsilon_{h,R,R_W}\\otimes1)\\circ\\operatorname{PF}^{-1}_{h,R;\\omega_{h,R},L}\\circ\\sigma$ be the composite whose $F_R\\dashv G_R$ transpose is $\\theta_{h,R,L}$ in [def-pur-co-smoothness] ($\\sigma$ symmetry, $\\lambda$ unitor). First, for any $a:P_{h,A}M\\to L$ with transpose $a^\\flat=G_{h,A}(a)\\eta_{A,M}$, $b_{h,L}S_V(a^\\flat)$ is the $B$-transpose of $S_W(a)c_{h,M}^{-1}$: by the counit equation of [lem-pur-finite-coefficient-adjoint-comparisons] (Step 4) and naturality of $c$, $\\epsilon_BP_B(b_L)P_B(S a^\\flat)=S(\\epsilon_A)c^{-1}P_B(Sa^\\flat)=S(\\epsilon_AP_A(a^\\flat))c^{-1}=S(a)c^{-1}$. Hence it suffices that $S(C_{A,L})=C_{B,SL}\\,P_B(1\\otimes b_{h,A_W})\\,c$. Invert the projection equation of [lem-pur-finite-free-projection-exchange] (Step 5): $S(\\operatorname{PF}_A^{-1})=(c_\\omega\\otimes1)^{-1}\\operatorname{PF}_B^{-1}c$; the inverses exist by [lem-weil-finite-compact-projection-formula], whose hypotheses hold because $\\omega_{h,A}$ is bounded constructible finite-Tor by [thm-sf-preservation-class]. Then the counit equation at $L=A_W$, $S(\\epsilon_A)c_\\omega^{-1}=\\epsilon_BP_B(b_{A_W})$, naturality of $\\operatorname{PF}_B$ in its first variable along $b_{A_W}$, and naturality of $c$ and $\\sigma$ give the required identity. Transposing, after tensor reassociation, $b_{h,L}S_V(\\theta_{h,A,L})=\\theta_{h,B,S_WL}(1\\otimes b_{h,A_W})$.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-finite-free-projection-exchange",
+    "lem-weil-finite-compact-projection-formula",
     "thm-sf-preservation-class"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "Lemma 3.2.3, counit/transpose normalization. Agent-written finite-free proof of invertibility by scalar/exceptional adjunctions and finite biproducts; no quotient-coefficient exceptional theorem is used."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   },
   {
-   "text": "The comparisons just constructed preserve the structural maps used in the diagonal argument, before an orientation is chosen. Here is the map check. An ordinary projection arrow is the adjoint of $(\\epsilon^*\\otimes1)\\mu$, with $\\mu$ the tensor/pullback balancing map, by [def-exchange-projection]. Extend this formula to $B$: both orders of the comparison send the tensor factors to the same factors and apply the extended ordinary counit to the first one. The adjunction bijection therefore equates the two $B$-arrows. For the open projection constituent both maps are the same balancing map on the open, and the zero map on the zero extension off it; this identity is termwise and survives sheafification and passage to complexes. For a Cartesian square, the compactification formula of [def-cbc-exchange-map] expresses the proper exchange as a unit/counit mate of the pullback-composition square, and the open exchange is the canonical isomorphism of [lem-cbc-proetale-extension-zero-base-change]; the two pullback/scalar-extension orders agree by $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$. Pasting their mates using [lem-weil-pbc-mate-pasting] gives preservation of the compact-support exchange. Its inverse exists on the bounded constructible domain by [thm-cbc-finite-level-proetale]: the maps are separated finite type, the coefficient rings are finite, and the etale-origin witnesses are supplied as in Step 2. Inverting the commuting comparison square therefore gives preservation of the inverse exchange as well. Finally the dualizing base-change map in [def-pur-co-smoothness] is the adjoint of pulled-back counit after inverse compact-support exchange. Substituting $(*)$ and the preceding exchange identity gives the same $B$-adjoint in either order, so this dualizing base-change map is preserved. The same calculation applies to the tensor map $\\theta$: its defining adjoint in [def-pur-co-smoothness] is inverse projection followed by counit tensored with the identity. These computations are equalities of adjoints in the $B$-category; no faithfulness of derived scalar restriction, and no equality test on pro-etale geometric stalks, is used.",
+   "text": "At the prime-power model, [lem-asd-ordinary-finite-p1-adjunction] gives the unit-and-Kummer decomposition and defines the normalized trace as the second projection of its inverse. The finite-free adjoint comparison [lem-pur-finite-coefficient-adjoint-comparisons], together with the twist and Kummer scalar identifications in [det-sp-scalar-extension-functor], transports this decomposition and its counit to $B$; uniqueness of the adjoint mate gives $c_qS_S(b_{q,A})=b_{q,B}$ and therefore $t_{q,B}c_q=S_S(t_{q,A})$. The site comparison and open-counit compatibility in [lem-pur-vector-integration-site-comparison] carry this equality to the affine-line restriction used by the normalized integration maps.",
    "uses": [
-    "def-exchange-projection",
-    "def-cbc-exchange-map",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-mate-pasting",
-    "thm-cbc-finite-level-proetale",
-    "def-pur-co-smoothness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "2.13.1 and Lemma 3.2.3: compatibility of the tensor projection and adjunction transposes; Stacks 0B56, 0E46 and 0E47 (sites-cohomology.tex), as realized by the cited mate and projection formulas."
-   }
-  },
-  {
-   "text": "Check the orientation at its normalized rank-one model. Let $S$ be a separated finite-type $k$-scheme, $q:\\mathbf P^1_S\\to S$, and take the common annihilator $N=\\ell^r$. Both coefficient rings are killed by $N$, and $N$ is invertible on $S$. In [def-amb-p1-trace], $h_R$ is the scalar extension of the same $\\mathbf Z/N$ Kummer class of $\\mathcal O(1)$, and $b_{q,R}$ has components the shifted twisted unit and $h_R$. The balancing identity $(z\\otimes a)\\otimes b\\mapsto z\\otimes ab$ and the ordinary counit transpose of Step 2 identify $S_Sh_A$ with $h_B$ and identify the first components as well. Consequently, with $c_q$ the proper coefficient comparison and the twists identified,\n$$c_qS_S(b_{q,A})=b_{q,B}.$$\nBoth decompositions are invertible by [lem-asd-ordinary-finite-p1-adjunction], whose finite-ring, invertible-annihilator and Noetherian hypotheses were just checked. Thus the definition $t_{q,R}=\\operatorname{pr}_2b_{q,R}^{-1}$ gives the equality\n$$t_{q,B}c_q=S_S(t_{q,A})$$\nin $D(S_{\\mathrm{et}},B)$ by multiplication with the inverses and the unchanged second projection. Restricting along $j:\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S$ gives the same equation for affine-line integration: its extra factor is $Rq_*(j_!j^*\\to1)$, and the open counit is preserved by the coefficient/open adjunction construction of Step 2. The site comparisons and actual trace-map identities in [lem-pur-vector-integration-site-comparison] identify these etale traces, their restrictions, and their adjoint transposes with the ones using the prescribed pro-etale twists. Thus this rank-one calculation fixes the normalization of the maps used here, not only their isomorphism classes.",
-   "uses": [
-    "def-amb-p1-trace",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "det-sp-scalar-extension-functor",
     "lem-pur-vector-integration-site-comparison",
-    "lem-asd-ordinary-finite-p1-adjunction"
+    "def-amb-p1-trace"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "2.13.2 and 3.2.3; explicit normalization check from the projective-line Kummer decomposition. The decomposition and site-map statements cited here fix the otherwise unspecified orientation of the blueprint."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   },
   {
-   "text": "Iterate the rank-one calculation in the ordered coordinate tower of [lem-amb-affine-space-top-trace]. At rank zero the trace is the identity and scalar extension preserves it. For rank $m+1$ write $\\mathbf A^{m+1}_S\\xrightarrow{a}\\mathbf A^m_S\\xrightarrow{p_m}S$, where $a$ is the final affine-line projection. Its affine-line right adjoint is $G_{a,R}K=a^*K(1)[2]$. The counit at a coefficient $K$ is the open restriction of the formula in [def-amb-p1-trace]: inverse projection followed by $1_K\\otimes t_{q,R}$. By Step 4 the projection maps commute with scalar extension; Step 5 gives that equality for $t_q$ and the open counit. Tensoring these equalities with $S K$ therefore proves the affine-line counit equation at $S K$, including when $K=R_{\\mathbf A^m}(m)[2m]=G_{p_m,R}R_S$. The inverse projection exists on this bounded finite-Tor input by [lem-weil-finite-compact-projection-formula]; its twists are locally free by Step 1. The composite counit is precisely $\\epsilon_{p_m,R,R_S}\\circ P_{p_m,R}(\\epsilon_{a,R,G_{p_m,R}R_S})$ by [lem-weil-pbc-mate-pasting]. Substituting the inductive equation and the coefficient-valued affine-line equation proves the scalar equation for the ordered trace of rank $m+1$.\nTo identify the iterated source with the geometric compact support, use the canonical composition $\\alpha_R:P_{p_m,R}P_{a,R}\\xrightarrow{\\sim}P_{p_ma,R}$ of [lem-amb-etale-compact-comparisons]. Its coefficient equation is\n$$c_{p_ma,K}\\,S(\\alpha_{A,K})=\\alpha_{B,SK}\\,P_{p_m,B}(c_{a,K})\\,c_{p_m,P_{a,A}K}.$$\nFor this coordinate tower use the product compactifications by projective lines. In their defining proper/open composite, the proper-direct-image constituents obey exactly the composition equation in [lem-coef-finite-direct-image]; the open-extension constituents are the termwise balancing maps of Step 2 and compose by associativity of multiplication in $B$. The intervening proper base-change constituent obeys Step 4's exchange equation. Pasting these three equations gives the displayed equation, with no appeal to faithfulness of restriction. For a proper refinement, the compactification comparison is again a proper-direct-image composite with the open balancing map. Apply the proper composition equation to its proper factor and associativity of the open balancing to its open factor. The resulting commuting refinement square identifies the two coefficient maps. The coherence of [lem-amb-etale-compact-comparisons] therefore removes the chosen product compactification. The site comparison in [lem-pur-vector-integration-site-comparison] then supplies the pro-etale realization of this ordered trace. All shifts being $2m$ and $2$, their interchange has sign $(-1)^{2m\\cdot2}=1$. For a rank-$d$ vector bundle $\\pi:V\\to S$, [thm-amb-vector-bundle-purity] characterizes its integration uniquely by these traces on trivializing opens, and [def-amb-vector-integration] states that the gluing is gluing of degree-zero sheaf morphisms. Step 4 permits restriction of the coefficient comparison to each such open. Hence $S_S(t_{\\pi,A})c_{\\pi,T_A}^{-1}$ restricts to the specified $B$-integration on each open, and that uniqueness gives the global equality with $t_{\\pi,B}$. Equivalently, the source is locally isomorphic to the degree-zero unit by the affine-space theorem, and equality of its morphisms to $B_S$ is sheaf-local by [lem-weil-pbc-derived-single-fully-faithful]. By [lem-pur-vector-integration-site-comparison] the inverse vector-bundle dualizing identification of [cor-pur-vector-bundle-purity] is the transpose of this actual integration. Formula $(*)$ and injectivity of the $B$-adjunction Hom bijection therefore show that this particular identification, including its normalization, is preserved by $S$ and $b$. For the etale coordinate localizations used in Step 7, the required total-space localization comparison is also preserved. On ordinary etale sites [lem-amb-etale-adjoint-locality] identifies $u^*G_{h,R}$ with $G_{hu,R}$ for a separated finite-type etale map $u$ into the source of $h$. The identification of the compact support of $u$ with this sum extension, including its actual sum counit, is [lem-asd-etale-compact-support-normalization]; its Noetherian hypotheses follow from Step 1. Thus the localization is the right-adjoint comparison for $P_{h,R}u_!$; $u_!\\dashv u^*$ is the exact sum-extension adjunction of that same lemma. Tensoring a sum of sections with $B$ gives the sum of their tensors, so scalar extension commutes with $u_!$, and its counit is the sum of the corresponding sections in both coefficient rings. Pasting this scalar square with that for $P_h$ and taking mates by [lem-weil-pbc-mate-pasting] equates the two coefficient/localization orders. For this composition with $u$, use [lem-amb-etale-compact-comparisons]. In arbitrary compactifications its construction uses the proper/open interchange of [lem-cbc-proper-open-interchange-coherence]. The latter statement specifies the sheaf proper/open identification and its derived normalization. The sheaf identification extends a section with its proper support; applying scalar extension sends $x\\otimes b$ to that same extended section tensored with $b$ in either order. On derived objects its specified normalization is proper direct image of open extension followed by a resolution comparison. Applying the proper coefficient counit formula of Step 2 and pasting its mates with this sheaf identity gives the coefficient square for that interchange. The proper composition equation from [lem-coef-finite-direct-image] and the open balancing equation then give the coefficient composition square for $h,u$, just as the displayed constituent calculation above did for the coordinate tower. These are comparisons of $B$-adjoints, rather than an equality test after scalar restriction. Transporting this calculation to bounded constructible pro-etale objects uses their etale-origin witnesses and the transported adjunction of Step 3. Thus this total-space etale localization does not require its square over the fixed base to be Cartesian.",
+   "text": "For composable separated finite-type maps use [lem-pur-finite-free-compact-composition]. With $\\alpha_R:P_{g,R}P_{h,R}\\cong P_{gh,R}$ its equation is\n$$c_{gh,K}\\,S(\\alpha_{A,K})=\\alpha_{B,SK}\\,P_{g,B}(c_{h,K})\\,c_{g,P_{h,A}K}.$$\nIts refinement equation shows that this is the canonical compactification comparison, including for the product compactifications by projective lines used in the coordinate tower. This supplies the geometric-composition equation separately from the counit equation $(*)$.",
+   "uses": [
+    "lem-pur-finite-free-compact-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
+   }
+  },
+  {
+   "text": "Induct on the ordered coordinate rank in [lem-amb-affine-space-top-trace]. Rank zero is the identity adjunction and its trace equation is the identity. For rank $m+1$ write $\\mathbf A^{m+1}_S\\xrightarrow a\\mathbf A^m_S\\xrightarrow{p_m}S$, with $a$ the final affine-line projection. Its right adjoint is $a^*(-)(1)[2]$. The counit at $K$ is the open restriction of inverse projection followed by $1_K\\otimes t_q$ [def-amb-p1-trace]. The projection equation of Step 5 and the projective-line equation of Step 7 identify this counit under $S$, also at $K=R_{\\mathbf A^m}(m)[2m]$. The inverse projection exists by [lem-weil-finite-compact-projection-formula], since that coefficient is a shifted locally free line. By [lem-weil-pbc-mate-pasting] the composite counit is $\\epsilon_{p_m,R,R_S}\\,P_{p_m,R}(\\epsilon_{a,R,G_{p_m,R}R_S})$. Substitute the inductive trace equation and this affine-line equation; naturality of $c$ and the composition equation of Step 8 give $t_{p_{m+1},B}c=S(t_{p_{m+1},A})$. This establishes the induction. The site comparison [lem-pur-vector-integration-site-comparison] identifies these with the actual pro-etale maps. All interchanged shifts are even: $(-1)^{2m\\cdot2}=1$.",
    "uses": [
     "lem-amb-affine-space-top-trace",
-    "lem-weil-pbc-mate-pasting",
-    "thm-amb-vector-bundle-purity",
-    "def-amb-vector-integration",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-vector-integration-site-comparison",
-    "cor-pur-vector-bundle-purity",
     "def-amb-p1-trace",
     "lem-weil-finite-compact-projection-formula",
-    "lem-amb-etale-compact-comparisons",
-    "lem-coef-finite-direct-image",
-    "lem-amb-etale-adjoint-locality",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-cbc-proper-open-interchange-coherence"
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-vector-integration-site-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "2.12 and 2.13.2 (ordered products of normalized traces); 3.2.3 (adjoint transposition). The cited affine-space/vector-bundle statements supply the precise local models and global uniqueness."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   },
   {
-   "text": "Now compute the diagonal normalization. Set $W=X\\times_YX$, with projections $p_1,p_2$ and diagonal $\\Delta$. By [lem-pur-diagonal-regular-immersion], $\\Delta$ is a closed regular section of $p_1$ and $N_\\Delta=T_{X/Y}$ has rank $d$. For $R=A,B$ use the section invariants of [def-pur-section-invariant]. The canonical diagonal construction is the chain\n$$\\alpha_{f,R}:\\omega_{f,R}\\xrightarrow{\\sim}C_R(p_1,\\Delta)\\xrightarrow{\\delta_R}C_R(\\pi_T,0_T)\\xrightarrow{\\sim}R_X(d)[2d].$$\nThe first arrow is the inverse of the section identification in [lem-pur-diagonal-base-change]; the middle arrow is the uniquely normalized map of [thm-pur-dnc-invariance]; the last is zero-section pullback of the normalized vector-bundle identification. This explicitly constructs the canonical identification of [thm-pur-diagonal-dualizing-object], rather than assuming its coefficient compatibility. All these schemes, the tangent bundle and DNC family are separated finite type over $k$, so they are in the stated domains of the exceptional comparisons. Step 4 proves compatibility of the first arrow, since its dualizing base-change comparison is a counit mate. To compare the middle arrow, use $b$ and pullback to identify $S C_A$ with $C_B$ at both ends. The transported $S\\delta_A$ is invertible. In each etale coordinate system from the uniqueness statement, $\\delta_A$ is the identity of the standard section invariant. Applying $S$ still gives the identity; the two endpoint coefficient identifications in this standard pair are the same ones. Pullback/scalar-extension commutes by Step 4, and the total-space etale comparisons commute by the final paragraph of Step 6. Thus the transported map satisfies exactly the identity normalization characterizing $\\delta_B$; uniqueness in [thm-pur-dnc-invariance] equates them globally. Step 6 proves compatibility of the last arrow, and Step 1 proves the final zero-section twist identification. Pasting the three equations gives\n$$\\alpha_{f,B}\\circ b_{f,A_Y}=S_X(\\alpha_{f,A}),$$\nwhere $S_YA_Y=B_Y$ and $S_XT_A=T_B$ are understood. No arbitrary derived maps are being identified by their restrictions: the middle equality uses the cited uniqueness theorem with its exact standard-coordinate normalization.",
+   "text": "For a rank-$d$ vector bundle $\\pi:V\\to S$, [thm-amb-vector-bundle-purity] characterizes its integration as the unique map with the specified traces on trivializing opens. By Step 5 coefficient extension commutes with the exchange used for each such restriction. Thus $S(t_{\\pi,A})c^{-1}$ restricts to the $B$-affine-space trace by Step 9, and uniqueness gives $t_{\\pi,B}c=S(t_{\\pi,A})$. This uniqueness is valid for these maps because [def-amb-vector-integration] glues degree-zero sheaf morphisms, rather than arbitrary derived morphisms. By [lem-pur-vector-integration-site-comparison] the inverse orientation of [cor-pur-vector-bundle-purity] is the adjoint transpose of this integration. The counit equation $(*)$ identifies its scalar extension with the $B$-transpose. The $B$-adjunction bijection is injective, so this is compatibility of the specified normalized vector-bundle orientation.",
+   "uses": [
+    "thm-amb-vector-bundle-purity",
+    "def-amb-vector-integration",
+    "lem-pur-vector-integration-site-comparison",
+    "cor-pur-vector-bundle-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
+   }
+  },
+  {
+   "text": "Put $W=X\\times_YX$ with projections $p_1,p_2$ and diagonal $\\Delta$. By [lem-pur-diagonal-regular-immersion], this is a closed regular section of $p_1$ with normal bundle $T_{X/Y}$ of rank $d$. The canonical construction of [thm-pur-diagonal-dualizing-object] has the three arrows\n$$\\alpha_{f,R}:\\omega_{f,R}\\xrightarrow{\\sim}C_R(p_1,\\Delta)\\xrightarrow{\\delta_R}C_R(\\pi_T,0_T)\\xrightarrow{\\sim}R_X(d)[2d].$$\nHere $C$ is [def-pur-section-invariant]; the first arrow is the inverse section identification of [lem-pur-diagonal-base-change], the middle one is the normalized DNC comparison of [thm-pur-dnc-invariance], and the last is zero-section pullback of the normalized vector orientation. This writes out the construction whose coefficient compatibility is at issue.",
    "uses": [
     "lem-pur-diagonal-regular-immersion",
+    "thm-pur-diagonal-dualizing-object",
     "def-pur-section-invariant",
     "lem-pur-diagonal-base-change",
-    "thm-pur-dnc-invariance",
-    "thm-pur-diagonal-dualizing-object"
+    "thm-pur-dnc-invariance"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "3.2.1--3.2.5, comparison with the blueprint normalization: literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md, Proof Steps 1--2. Its diagonal/DNC/normal-bundle chain is displayed here and its three coefficient squares are proved, using the statements separately cited."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   },
   {
-   "text": "Write $g_R=\\gamma_{f,R_Y}:T_R\\to G_{f,R}R_Y$. The definition [def-pur-smooth-purity-map] writes it as twist reassociation, tensor with $\\alpha_{f,R}^{-1}$, then the canonical tensor map $\\theta$. Step 1 identifies the twist reassociation under $S$, Step 7 identifies $\\alpha^{-1}$ (functors preserve inverses), and Step 4 identifies the tensor map by its defining adjoint. For that map the input is the degree-zero coefficient unit; the inverse projection formula in its definition exists by [lem-weil-finite-compact-projection-formula]. Its hypotheses hold since $\\omega_{f,R}$ is bounded constructible finite-Tor by [thm-sf-preservation-class], and $R_Y$ has Tor interval $[0,0]$; etale-origin witnesses exist by [lem-sf-proetale-constructible-origin]. Functoriality now gives the precise equality\n$$g_B=b_{f,A_Y}\\circ S_X(g_A):T_B\\longrightarrow G_{f,B}B_Y.$$\nThus the actual normalized purity map, rather than an unspecified purity isomorphism, is the coefficient extension under the canonical exceptional comparison.",
+   "text": "Use [lem-pur-dnc-coefficient-transport] with its prime ring $R=A=\\mathbf Z/\\ell^r$ and target $B=\\mathcal O_E/\\ell^r$. Its categories are the same intrinsic bounded constructible finite-Tor categories as here, and its etale Tate lines identify with the prescribed twists by Step 2. Its exceptional comparison is counit-characterized; [det-sp-reduction-exceptional] gives the same transpose $S\\epsilon_Ac^{-1}$ as $(*)$. Thus its $c_g$ equals our $b_g$ by uniqueness of the $B$-adjoint. Its section comparisons are consequently $q_{g,s}=s^*b_g$, with the canonical pullback/tensor comparison. The stated DNC equation gives\n$$\\delta_B\\,q_{p_1,\\Delta}=q_{\\pi_T,0_T}\\,S(\\delta_A).$$\nIt also states compatibility with the dualizing base-change exchange and total-space etale localization of pairs. Hence the first arrow of the chain commutes with $S$ and $b$. This uses that lemma's statement, including its standard-coordinate normalization, in place of an inline etale-coordinate or derived-locality argument.",
+   "uses": [
+    "lem-pur-dnc-coefficient-transport",
+    "det-sp-reduction-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
+   }
+  },
+  {
+   "text": "The last arrow of the chain commutes with coefficient extension by Step 10 and the zero-section twist identification of Step 2. Compose this equation, the DNC equation of Step 12 and the first-arrow equation there. Functoriality gives\n$$\\alpha_{f,B}\\circ b_{f,A_Y}=S_X(\\alpha_{f,A}),$$\nunder $S_YA_Y=B_Y$ and $S_XT_A=T_B$. This is the specified diagonal orientation: the middle arrow is the uniquely identity-normalized deformation map, and the endpoint is the integration-normalized vector orientation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
+   }
+  },
+  {
+   "text": "Write $g_R=\\gamma_{f,R_Y}:T_R\\to G_{f,R}R_Y$. The definition [def-pur-smooth-purity-map] writes it as twist reassociation, tensor with $\\alpha_{f,R}^{-1}$, then the canonical tensor map $\\theta$. Step 2 identifies the twist reassociation under $S$, Step 13 identifies $\\alpha^{-1}$ (functors preserve inverses), and Step 6 identifies the tensor map by its defining adjoint. For that map the input is the degree-zero coefficient unit; the inverse projection formula in its definition exists by [lem-weil-finite-compact-projection-formula]. Its hypotheses hold since $\\omega_{f,R}$ is bounded constructible finite-Tor by [thm-sf-preservation-class], and $R_Y$ has Tor interval $[0,0]$; etale-origin witnesses exist by [lem-sf-proetale-constructible-origin]. Functoriality now gives the precise equality\n$$g_B=b_{f,A_Y}\\circ S_X(g_A):T_B\\longrightarrow G_{f,B}B_Y.$$\nThus the actual normalized purity map, rather than an unspecified purity isomorphism, is the coefficient extension under the canonical exceptional comparison.",
    "uses": [
     "def-pur-smooth-purity-map",
     "lem-weil-finite-compact-projection-formula",
@@ -156,68 +219,67 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "3.2.3 and 3.2.5: purity is the normalized trace transpose; explicit comparison with the three constituents of the blueprint purity map."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   },
   {
-   "text": "Finally expand the two smooth traces using [def-pur-smooth-trace]: $t_R=\\epsilon_{f,R,R_Y}\\circ P_{f,R}(g_R)$. Naturality of $c$ at $g_A$ and Step 8 give\n$$\\begin{aligned}\nt_Bc_{T_A}\n&=\\epsilon_{f,B,B_Y}\\,P_{f,B}(b_{f,A_Y})\\,P_{f,B}(S_Xg_A)\\,c_{T_A}\\\\\n&=\\epsilon_{f,B,B_Y}\\,P_{f,B}(b_{f,A_Y})\\,c_{G_{f,A}A_Y}\\,S_Y(P_{f,A}g_A)\\\\\n&=S_Y(\\epsilon_{f,A,A_Y})\\,S_Y(P_{f,A}g_A)\\\\\n&=S_Y(t_A)=t_A\\otimes_A1_B.\n\\end{aligned}$$\nThe third line is exactly $(*)$ of Step 3. Every arrow in this calculation is in $D(Y_{\\mathrm{proet}},B)$, with the specified coefficient-unit and Tate identifications. The rank-one normalization was fixed by the Kummer class, all further shifts were even, and the DNC comparison was fixed by its identity normalization, so this proves the asserted sign and twist normalization as well as the equality. It also covers $d=0$, $E=\\mathbf Q_\\ell$, and the empty source (all relevant source objects are then zero).",
+   "text": "Finally expand the two smooth traces using [def-pur-smooth-trace]: $t_R=\\epsilon_{f,R,R_Y}\\circ P_{f,R}(g_R)$. Naturality of $c$ at $g_A$ and Step 14 give\n$$\\begin{aligned}\nt_Bc_{T_A}\n&=\\epsilon_{f,B,B_Y}\\,P_{f,B}(b_{f,A_Y})\\,P_{f,B}(S_Xg_A)\\,c_{T_A}\\\\\n&=\\epsilon_{f,B,B_Y}\\,P_{f,B}(b_{f,A_Y})\\,c_{G_{f,A}A_Y}\\,S_Y(P_{f,A}g_A)\\\\\n&=S_Y(\\epsilon_{f,A,A_Y})\\,S_Y(P_{f,A}g_A)\\\\\n&=S_Y(t_A)=t_A\\otimes_A1_B.\n\\end{aligned}$$\nThe third line is exactly $(*)$ of Step 4. Every arrow in this calculation is in $D(Y_{\\mathrm{proet}},B)$, with the specified coefficient-unit and Tate identifications. The rank-one normalization was fixed by the Kummer class, all further shifts were even, and the DNC comparison was fixed by its identity normalization, so this proves the asserted sign and twist normalization as well as the equality. It also covers $d=0$, $E=\\mathbf Q_\\ell$, and the empty source (all relevant source objects are then zero).",
    "uses": [
     "def-pur-smooth-trace"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-    "place": "Lemma 3.2.3, the commuting counit triangle; equation 2.13.2. The displayed calculation is the finite-free specialization with the source comparison explicitly inserted."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 3: finite coefficient compatibility and finite coefficient-field extension; diagonal/DNC and affine-line normalization."
    }
   }
  ],
  "proof_deps": [
-  "cor-pur-vector-bundle-purity",
-  "def-amb-p1-trace",
-  "def-amb-vector-integration",
-  "def-cbc-exchange-map",
-  "def-coefficient-twists-detailed",
-  "def-compact-support-direct-image-detailed",
-  "def-exchange-projection",
-  "def-pur-co-smoothness",
-  "def-pur-section-invariant",
-  "def-pur-smooth-purity-map",
-  "def-pur-smooth-trace",
-  "lem-amb-affine-space-top-trace",
-  "lem-amb-etale-adjoint-locality",
-  "lem-amb-etale-compact-comparisons",
-  "lem-asd-etale-compact-support-normalization",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-cbc-extension-zero-projection-formula",
-  "lem-cbc-proetale-extension-zero",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-coef-finite-direct-image",
   "lem-coef-finite-free-extension",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-diagonal-base-change",
-  "lem-pur-diagonal-regular-immersion",
+  "det-sp-scalar-extension-functor",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "def-coefficient-twists-detailed",
   "lem-pur-twist-sheaf-locally-free",
   "lem-pur-vector-integration-site-comparison",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-finite-compact-projection-formula",
-  "lem-weil-pbc-derived-single-fully-faithful",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "thm-amb-vector-bundle-purity",
+  "def-compact-support-direct-image-detailed",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero",
+  "lem-coef-finite-direct-image",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-exchange-projection",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-pur-finite-free-projection-exchange",
   "thm-cbc-finite-level-proetale",
+  "def-pur-co-smoothness",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-sf-preservation-class",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "def-amb-p1-trace",
+  "lem-pur-finite-free-compact-composition",
+  "lem-amb-affine-space-top-trace",
+  "lem-weil-pbc-mate-pasting",
+  "thm-amb-vector-bundle-purity",
+  "def-amb-vector-integration",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-diagonal-regular-immersion",
   "thm-pur-diagonal-dualizing-object",
+  "def-pur-section-invariant",
+  "lem-pur-diagonal-base-change",
   "thm-pur-dnc-invariance",
-  "thm-sf-ambient-adjoint-class",
-  "thm-sf-preservation-class"
+  "lem-pur-dnc-coefficient-transport",
+  "det-sp-reduction-exceptional",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/sga/SGA4-expose-18_reedition.pdf",
-  "place": "XVIII 2.13.1--2.13.2, 3.2.3 and 3.2.5 (printed pp. 560, 583--586), with an explicit comparison to the canonical diagonal/DNC blueprint normalization; agent-written finite-free comparison argument."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 1, compatibility of the three purity constituents and normalized traces with finite coefficients; Step 3, finite coefficient-field extensions",
+  "note": "Existing diagonal/DNC and Kummer normalization route; repair extracts hidden structural comparisons and reuses exact existing scalar-adjunction, exceptional and DNC statements. No SGA route."
  },
  "mathlib_searches": [
   {
@@ -387,10 +449,38 @@
    "results": "{\"t\": \"2026-10-16T03:45:57Z\", \"tool\": \"grep\", \"query\": \"integration|smoothTrace|cohomologicalSmooth\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: zero results for sheaf traces or integration."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothTrace|smoothPurity|integration.*coefficient",
+   "results": "{\"t\": \"2026-10-17T15:00:35Z\", \"tool\": \"grep\", \"query\": \"smoothTrace|smoothPurity|integration.*coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero Mathlib hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth etale cohomological trace commutes with tensoring a finite free coefficient ring",
+   "results": "{\"t\": \"2026-10-17T15:00:36Z\", \"tool\": \"leansearch\", \"query\": \"Smooth etale cohomological trace commutes with tensoring a finite free coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.intTrace_eq_trace\", \"Algebra.trace_trace\", \"LinearMap.trace_baseChange\", \"Algebra.trace\", \"Algebra.trace_localization\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.FormallyEtale.instFormallySmooth\"], \"digest\": \"5c766f584f3088e6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the eight signatures concern algebraic/linear traces, etale ring maps or smooth scheme morphisms; no smooth cohomological trace."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smooth\", \"trace\"",
+   "results": "{\"t\": \"2026-10-17T15:00:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"smooth\\\", \\\"trace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero Loogle hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized smooth etale trace is compatible with extension from Z mod ell power to the residue ring of a finite ell adic field",
+   "results": "{\"t\": \"2026-10-17T15:00:37Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized smooth etale trace is compatible with extension from Z mod ell power to the residue ring of a finite ell adic field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WittVector.mk_pow_fontaineTheta\", \"PadicInt.toZMod_eq_residueField_comp_residue\", \"trace_quotient_eq_trace_localization_quotient\", \"WittVector.mk_fontaineTheta\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.trace_quotient_mk\", \"WittVector.fontaineThetaModPPow_teichmuller\", \"Algebra.trace_quotient_eq_of_isDedekindDomain\"], \"digest\": \"26796257f67d595b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary module/sheaf operations or algebraic base change, not the stated derived compact-support compatibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-adic-purity-scalar-naturality",
   "by": "worker",
@@ -399,31 +489,147 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-pur-finite-universal-smooth-trace",
   "worker": "stage1",
-  "summary": "Expanded the finite-free trace comparison into coefficient-domain checks, the proper/open B-linear comparison, the duality-defined exceptional mate and its counit equation, structural mate compatibility, the projective-line Kummer normalization, its ordered affine/vector-bundle extension, DNC uniqueness, and the final explicit counit computation. No new nodes, no Lean attachment, no statement change. The quotient-only exceptional theorem is used only for its first (duality formula) assertion, separately at each coefficient level. SGA XVIII and the master blueprint were read in the read-only launcher literature cache. Second reading replaces the implicit exceptional-duality counit identification with an explicit finite-biproduct proof of mate invertibility, cites the actual projective-line isomorphism theorem, and spells out the twisted coefficient and compactification composition in the affine-space induction. The structural step now also treats total-space etale coordinate localizations via exact sum extension and mate pasting, separately from Cartesian base change.",
-  "blueprint": "Realizes thm-pur-rational-and-qbar-purity, imported Proof Step 2, independence in finite coefficient extensions, through the finite-coefficient normalization required by lem-pur-adic-purity-scalar-naturality, and sk-thm-purity-transport Step 3. The underlying canonical diagonal construction is spelled out from the cited section, rather than treating coefficient transport as an assertion.",
+  "summary": "Repaired the five returned long arguments by citing standalone existing DAG lemmas: scalar-extension domain transport, compact-support coefficient comparison, exceptional adjoint-mate/counit compatibility, tensor-map coefficient compatibility (Step 6, by the explicit finite-free counit/projection transpose computation; maintainer review repair 2026-10-18, replacing a citation of the quotient-only lem-pur-finite-adjoint-mate-compatibility), and normalized projective-line trace transport. The exact statement, diagonal/DNC route, finite-free structural nodes, and all hypotheses are retained; every non-elementary step is now below 2000 characters and the source follows the lecture-notes transport proof under the no-SGA route lock.",
+  "blueprint": "Realizes thm-pur-rational-and-qbar-purity Proof Step 2 through sk-thm-purity-transport Steps 1 and 3: finite scalar extension preserves the three constituents of the normalized diagonal purity map, with affine-line/vector-bundle normalization and diagonal/DNC transport.",
   "tool_uses": [
    {
+    "node": "cor-pur-vector-bundle-purity",
+    "why": "Generic Vector-bundle purity used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-amb-p1-trace",
+    "why": "Generic Projective-line trace before an exceptional adjoint used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-amb-vector-integration",
+    "why": "Generic Integration along a vector bundle used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Generic Coefficient Tate twists used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-compact-support-direct-image-detailed",
+    "why": "Generic Compactification-independent finite-level direct image used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Generic Exchange and projection transformations used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-pur-co-smoothness",
+    "why": "Generic Cohomological smoothness used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-pur-section-invariant",
+    "why": "Generic Section invariant used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-pur-smooth-purity-map",
+    "why": "Generic Smooth purity map used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "Generic Finite Tor amplitude used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "def-weil-finite-torsion-constructibility",
+    "why": "Generic Finite-torsion constructibility used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "det-sp-reduction-exceptional",
+    "why": "Generic Exceptional inverse image of a smooth morphism commutes with extension of coefficients used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Generic The derived extension-of-coefficients functor and its associativity used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic The affine-space trace is an isomorphism used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Generic Projection formula for extension by zero used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic Extension by zero on the pro-etale site used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
     "node": "lem-coef-finite-direct-image",
-    "why": "The general finite-algebra B-linear ordinary direct-image comparison is the proper constituent of the compact-support scalar map."
+    "why": "Generic Finite coefficient change for ordinary direct image used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
    },
    {
     "node": "lem-coef-finite-free-extension",
-    "why": "Supplies finite freeness and the evaluation/counit-normalized Verdier comparisons for the same finite extension; the transport unit has no independent finite-free duality lemma."
+    "why": "Generic Finite free coefficient extensions and cofinal levels used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-diagonal-base-change",
+    "why": "Generic Base change for the dualizing object of a projection used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "Generic The diagonal is a regular immersion used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-dnc-coefficient-transport",
+    "why": "Generic Coefficient transport of section invariants and normalized deformation comparisons used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Generic Finite-level site comparison of normalized vector-bundle integration used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Generic Finite-level compact-support direct image commutes with restriction of scalars used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
    },
    {
     "node": "lem-weil-finite-compact-projection-formula",
-    "why": "Generic finite-coefficient Finite-coefficient compact-support projection formula input for the explicitly displayed scalar-mate and normalization argument; the transport unit supplies no replacement infrastructure lemma."
+    "why": "Generic Finite-coefficient compact-support projection formula used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "Generic Vector-bundle purity before smooth orientation used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Generic Finite-level pro-etale compact-support base change used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "thm-pur-diagonal-dualizing-object",
+    "why": "Generic The smooth dualizing object is the Tate twist used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
+   },
+   {
+    "node": "thm-pur-dnc-invariance",
+    "why": "Generic DNC invariance of the section dualizing line used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
    },
    {
     "node": "thm-sf-preservation-class",
-    "why": "Generic finite-coefficient The preservation clauses of exceptional-adjoint admissibility are theorems on the coefficient class input for the explicitly displayed scalar-mate and normalization argument; the transport unit supplies no replacement infrastructure lemma."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Generic same-topos scalar extension/restriction adjunction; exactness lets its actual units and counits descend termwise to the derived finite-free setting."
+    "why": "Generic The preservation clauses of exceptional-adjoint admissibility are theorems on the coefficient class used for the explicitly specified finite-coefficient structural or normalization constituent; it does not replace the diagonal/DNC route."
    }
   ]
  },
@@ -432,15 +638,45 @@
   "lem-coef-finite-free-extension",
   "lem-weil-finite-compact-projection-formula",
   "thm-sf-preservation-class",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "cor-pur-vector-bundle-purity",
+  "def-amb-p1-trace",
+  "def-amb-vector-integration",
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-pur-section-invariant",
+  "def-pur-smooth-purity-map",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "det-sp-reduction-exceptional",
+  "det-sp-scalar-extension-functor",
+  "lem-amb-affine-space-top-trace",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero",
+  "lem-pur-diagonal-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-dnc-coefficient-transport",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "thm-amb-vector-bundle-purity",
+  "thm-cbc-finite-level-proetale",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-pur-dnc-invariance"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N8-e2245448d",
-  "group": "N8",
+  "reviewer": "NT-cc-Q57-40c01d17a",
+  "group": "Q57",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-e2245448d (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, every cited statement and source, and the full nine-step proof. Verified coefficient rings, base-change morphisms, counit normalization, hypotheses, edge cases, duplicates, route/tool uses, and delivery checks A–F. No new nodes or repairs are needed; review.md records the checks."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-40c01d17a (reviewer sub-agent of L); spot-checked: I read the item, all 15 steps, both new nodes and every cited statement in full, against the unit sk-thm-purity-transport and the main-20261015 transport proof (Steps 1 and 3; diagonal/DNC route, no SGA). Coefficients: A=Z/l^r, B=O_E/l^r=A_{E,er}, finite free via lem-coef-finite-free-extension with E=Q_l, L=E. c is the counit-transpose/open-balancing map, the same as det-sp-reduction-direct-image and lem-coef-finite-direct-image. Small cases E=Q_l, ramified r=1, d=0 and empty X all hold. Statement unchanged, nothing weakened. FAULT 1 (E1/C4), repaired: Step 6 cited lem-pur-finite-adjoint-mate-compatibility for the theta compatibility, but that node only covers the quotient A_{E,n}->A_{E,m}, not Z/l^r->O_E/l^r (the worker's own report says so). I rewrote Step 6 as an explicit transpose computation: the finite-free counit equation of lem-pur-finite-coefficient-adjoint-comparisons, the PF equation of the new lem-pur-finite-free-projection-exchange, naturality of c, sigma and PF_B, and injectivity of the B-adjunction; I checked every arrow. lem-pur-finite-adjoint-mate-compatibility is removed from uses and proof_deps. FAULT 2 (B4), repaired: Steps 4 and 6 had \\to and \\theta stored as a TAB character plus o/heta. Steps 4, 7, 9, 10 and 12 checked against their cited statements: (*) at the finite-free map, P1 decomposition for any finite ring killed by N, mate pasting, uniqueness by degree-zero gluing, and DNC transport for an arbitrary finite B with c_g equal to b by uniqueness of transposes. Both new nodes are true, self-contained and statement-only. They are not duplicates: lem-sf-compact-coefficient-composition is quotient-only, lem-sf-pf-coefficient-realization-transport is conditional, and lem-fix-direct-image-scalar-exchange covers only Rf_*. Neither restates a clause of the item. Batch-5 citations: lem-weil-finite-compact-projection-formula, lem-pur-finite-coefficient-adjoint-comparisons, lem-pur-dnc-coefficient-transport and det-sp-reduction-exceptional are all outside both assumptions. Their closures reach the PD/trace chapters only through lem-pod-etale-stalk-tensor-scalar (Stacks 008B stalk tensor) and lem-trf-localization-essentially-surjective (Mathlib Localization.essSurj), generic facts that are not steps of either proof. The PD leaf takes the purity isomorphism as an input, so this chain is not replaced by the leaf. lem-pur-finite-adjoint-mate-compatibility is no longer cited. I accept the declared tool_uses. Maintainer action needed: the base node's maintainer-owned source is still SGA4 XVIII; replace it with the transport proof, Steps 1 and 3, or the route-lock preflight will keep refusing. Corrected item: fixes/dag/nodes/sec-smooth-purity/lem-pur-finite-universal-smooth-trace.json.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

@@ -13,9 +13,177 @@
   "def-sf-kv-maps",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z=X_1\\times_kX_2$ and write $p_i:Z\\to X_i$ for the projections. All the internal Homs appearing in $B$ lie in the finite-coefficient $D^b_{ctf}$ categories by [thm-sf-ctf-stability](ii). Apply (i) to $p_1,p_2$ and then (ii) to form each external product, as defined in [def-sf-kv-maps]. This gives $B(E_1,E_2)$, $E_1\\boxtimes E_2$, and $L_1\\boxtimes L_2$ in the stated categories; a final application of (ii) gives $T(E_1,E_2)$. The projections are separated finite type between separated finite-type $k$-schemes. The same categories have the full inherited triangulated structures by [lem-weil-finite-ctf-triangulated]. No site-perfectness or dimension-free Hom-amplitude bound is used.",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "def-sf-kv-maps",
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "first paragraph, sentence beginning “Both sides are exact in each $E_i$”: closure under cones, shifts, sums, and retracts"
+   }
+  },
+  {
+   "text": "At finite coefficients pullback is termwise exact module inverse image by [prop-weil-pbc-proetale-constant-exact] and [def-weil-derived-pullback-tensor-hom]. Thus it preserves the cone and shift formulas of [def-weil-abstract-derived-category]. For fixed derived $N$, choose a K-flat representative $P$ by [lem-pc-kflat-resolution]. Tensoring any complex with $P$ preserves quasi-isomorphisms by [def-pc-kflat-complex] and [lem-pur-quasi-iso-cone-acyclic]: the cone of a quasi-isomorphism is acyclic and its tensor cone is the cone of the tensor map. The cone comparison is [lem-pc-tensor-mapping-cone-iso]. On its shifted summand it multiplies by $(-1)^r$ on a tensor factor of degree $r$; substituting the total differential of [def-pc-tensor-complex-sheaves] also identifies the cone projections. Hence the descended fixed-factor tensor functor preserves distinguished cone triangles. It is the derived tensor of [def-weil-derived-tensor]; the symmetry $x⊗y↦(-1)^{|x||y|}y⊗x$ of [lem-sf-ringed-derived-closed-symmetric-monoidal] gives the other fixed-factor functor. By the cone definition of distinguished triangles this proves exactness of pullback and tensor in the ambient derived categories.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-tensor",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM, lemma-derived-tor-exact; fixed K-flat representative and total-cone calculation"
+   }
+  },
+  {
+   "text": "For fixed $L$, use [def-pur-derived-internal-hom] to choose one K-injective representative $I$ and put $H(C)=\\mathcal Hom^\\bullet(C,I)$. For a chain map $u:C\\to D$, put $V=H(D)$, $W=H(C)$ and $v=H(u):V\\to W$. The product formula of [def-pur-hom-complex] gives\n$$H(\\operatorname{Cone}u)^n=V^n\\oplus W^{n-1},\\qquad d(x,y)=(d_Vx,d_Wy+(-1)^{n+1}v(x)).$$\nConsequently $(x,y)\\mapsto((-1)^{n+1}y,x)$ identifies this complex with $\\operatorname{Cone}(v)[-1]$: both differentials become $((-1)^nd_Wy-v(x),d_Vx)$. The restriction to $D$ is the second projection $x$; the map induced by $u$ is $v$. The resulting boundary $W^n→H(\\operatorname{Cone}u)^{n+1}$ sends $w$ to $(0,(-1)^nw)$; it is $H(-\\pi)$ after the inverse Hom shift comparison, shifted by $[1]$. Thus all three arrows are the inverse rotation of the cone triangle of $v$. Thus $H$ carries the opposite cone triangle to a distinguished triangle. By [lem-pur-rhom-well-defined] it inverts quasi-isomorphisms in $C$, so the cone-triangle description in [def-weil-abstract-derived-category] proves that $R\\mathcal Hom(-,L)$ is exact from the opposite ambient derived category. This explicitly supplies the termwise-split argument omitted in Stacks Tag 08JC, label lemma-RHom-triangulated.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-pur-rhom-well-defined",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC, lemma-RHom-triangulated; explicit opposite-cone calculation"
+   }
+  },
+  {
+   "text": "For fixed $E_2$, $B(-,E_2)$ is the composite of $R\\mathcal Hom(-,L_1)$, pullback by $p_1$, and tensor with $Lp_2^*R\\mathcal Hom(E_2,L_2)$. The preceding two steps make this an exact contravariant functor. Likewise $T(-,E_2)$ is the composite of the exact functor $E_1\\mapsto Lp_1^*E_1\\otimes^LLp_2^*E_2$ with $R\\mathcal Hom(-,L_1\\boxtimes L_2)$. Interchanging the indices proves the other two exactness assertions. Step 1 puts every vertex back in the full triangulated subcategories, so the ambient distinguished image triangles are distinguished there. Additivity follows directly from the additive tensor, pullback, and Hom formulas; the shift maps are their composites. This is precisely exactness as defined in [def-weil-triangulated-category].",
+   "uses": [
+    "def-sf-kv-maps",
+    "def-weil-triangulated-category",
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "first paragraph, sentence beginning “Both sides are exact in each $E_i$”: closure under cones, shifts, sums, and retracts"
+   }
+  },
+  {
+   "text": "We spell out those shift maps before checking $\\beta$. Use $C[m]^r=C^{r+m}$, $d_{C[m]}=(-1)^m d_C$. On the Hom complex a homogeneous map $f$ of degree $a$ is sent by\n$$s_m:\\mathcal Hom(C[m],I)\\longrightarrow\\mathcal Hom(C,I)[-m]$$\nto $(-1)^{ma}f$, with source components reindexed. Indeed $d(s_m f)=(-1)^{ma+m}d_If-(-1)^{ma+a}f d_C=s_m(df)$. For tensor the comparison $t_{u,v}:P[u]\\otimes Q[v]\\to(P\\otimes Q)[u+v]$ sends a summand of first-factor degree $r$ to $(-1)^{vr}$ times its reindexing; the two differential summands agree by the formula in [def-pc-tensor-complex-sheaves]. Pullback reindexes termwise. These are invertible natural chain maps and yield the canonical comparisons in the statement after localization: existence of the derived Hom shift is [lem-pur-derived-internal-hom-shift-left], and the representative tensor-Hom normalization is [def-coef-ringed-tensor-hom-model]. In particular the cone calculation in Step 3 uses this same $s_1$, not an unsigned shift.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-derived-internal-hom-shift-left",
+    "def-coef-ringed-tensor-hom-model",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "opening exactness assertion: canonical Hom and tensor shift comparisons"
+   }
+  },
+  {
+   "text": "Write $H_i=R\\mathcal Hom(E_i,L_i)$. Choose flat-term K-flat $P_i$ representing $E_i$ [lem-pc-kflat-resolution], the specified K-injective $I_i=I(L_i^0)$, and $H_i^\\bullet=\\mathcal Hom^\\bullet(P_i,I_i)$, so $QH_i^\\bullet=H_i$ by the localization factorization of [def-coef-hom-representative-evaluation]; choose flat-term K-flat $\\rho_i:R_i\\to H_i^\\bullet$. Pullback is termwise [def-weil-derived-pullback-tensor-hom] and preserves flat-term K-flat complexes [lem-weil-pbc-ringed-pullback-preserves-kflat]; hence by [lem-weil-pbc-site-derived-tensor-descent] $R_{12}=\\operatorname{Tot}(p_1^{-1}R_1\\otimes p_2^{-1}R_2)$, $P_{12}=\\operatorname{Tot}(p_1^{-1}P_1\\otimes p_2^{-1}P_2)$ and $S_i=\\operatorname{Tot}(R_i\\otimes P_i)$ represent $H_1\\boxtimes H_2$, $E_1\\boxtimes E_2$ and $H_i\\otimes^LE_i$. By [def-coef-ringed-tensor-hom-model] with $\\phi=\\rho_i$, the evaluation $e_i$ of [lem-sf-ringed-derived-closed-symmetric-monoidal] is $Q\\psi_i$, $\\psi_i(r\\otimes x)=\\rho_i(r)(x)$, followed by the inverse localized augmentation $QL_i^0\\to QI_i$. The reordering of [def-sf-kv-maps](iii) is represented by the chain isomorphism $\\sigma:\\operatorname{Tot}(R_{12}\\otimes P_{12})\\to\\operatorname{Tot}(p_1^{-1}S_1\\otimes p_2^{-1}S_2)$, $(r_1\\otimes r_2)\\otimes(x\\otimes y)\\mapsto(-1)^{bp}(r_1\\otimes x)\\otimes(r_2\\otimes y)$, $b=|r_2|$, $p=|x|$: the symmetry of [lem-sf-ringed-derived-closed-symmetric-monoidal] with the monoidal pullback comparisons of [lem-pur-derived-pullback-tensor-iso]. So the transpose of $\\beta$ is $\\varepsilon\\circ Q\\sigma$, $\\varepsilon=Lp_1^*e_1\\otimes^LLp_2^*e_2$. Writing $f=\\rho_1(r_1)$, $g=\\rho_2(r_2)$, $|f|=a$, we abbreviate this as $(-1)^{bp}f(x)\\otimes g(y)$; no chain map into $I_1\\boxtimes I_2$ or into a model of $L_1\\boxtimes L_2$ is asserted. Naturality: replacing $x$ by $u(x')$ gives $f(u(x'))$ on both paths; the same holds for $y$.",
+   "uses": [
+    "def-sf-kv-maps",
+    "def-coef-hom-representative-evaluation",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pc-kflat-resolution",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "opening exactness assertion: evaluation-defined beta and its naturality"
+   }
+  },
+  {
+   "text": "Shift the first variable by any integer $m$. In the homogeneous notation of Step 6 now let $x\\in E_1[m]^p$ and $f\\in\\mathcal Hom(E_1[m],I_1)^a$. The first external-product input comparison $E_1[m]\\boxtimes E_2\\to(E_1\\boxtimes E_2)[m]$ has no sign. The transpose of $c_{T,1,m}\\beta(E_1[m],E_2)$ therefore has exponent\n$$bp+m(a+b).$$\nFor the other path, $c_{B,1,m}$ contributes $ma$. After reindexing $x$ has degree $p+m$ in $E_1$, so the evaluation symmetry contributes $b(p+m)$. Its total exponent is\n$$ma+b(p+m)=bp+m(a+b).$$\nThe values $f(x)\\otimes g(y)$ agree, including all signs. Thus the two transposed composites agree in the first variable. This is a direct substitution into the evaluation and shift formulas of Steps 5--6.",
+   "uses": [
+    "def-sf-kv-maps",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "opening exactness assertion: first-variable shift square, all integer shifts"
+   }
+  },
+  {
+   "text": "Shift the second variable by $m$, taking $y\\in E_2[m]^q$, $g\\in\\mathcal Hom(E_2[m],I_2)^b$, and $|x|=p$, $|f|=a$. Now $E_1\\boxtimes E_2[m]\\to(E_1\\boxtimes E_2)[m]$ contributes $mp$. Hence the exponent for the transpose of $c_{T,2,m}\\beta(E_1,E_2[m])$ is\n$$bp+m(a+b)+mp.$$\nIn the other path the Hom comparison on $g$ contributes $mb$, and $H_1\\otimes H_2[-m]\\to(H_1\\otimes H_2)[-m]$ contributes $-ma$. After reindexing $g$ has unshifted Hom degree $b-m$, so its middle symmetry contributes $(b-m)p$. The total is\n$$mb-ma+(b-m)p.$$\nThe difference of these exponents is $2m(a+p)$, an even integer. The evaluated tensors therefore agree. This verifies the second-variable square with its necessary right-factor tensor shift sign; it does not replace that comparison by an unsigned reindexing.",
+   "uses": [
+    "def-sf-kv-maps",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "opening exactness assertion: second-variable shift square, all integer shifts"
+   }
+  },
+  {
+   "text": "Fix $m$ and $i$. Model $E_i[m]$ by $P_i[m]$ and $R\\mathcal Hom(E_i[m],L_i)$ by $R_i[-m]$ with $\\rho_i'=s_m^{-1}\\rho_i[-m]$ (Step 5); then $\\psi_i'=\\psi_i\\circ t_{-m,m}$, both being $(-1)^{m|r|}\\rho_i(r)(x)$. Shift rule: for $u:K\\to R\\mathcal Hom(C,M)$, the transpose of $s_m^{-1}\\circ u[-m]$ is the transpose of $u$ composed with $t_{-m,m}$. Indeed [def-coef-ringed-tensor-hom-model] gives it for $u=Q\\rho$, $\\rho$ a flat-term K-flat resolution of $\\mathcal Hom^\\bullet(P,I(M))$, by the same formula; a general $u$ is $Q\\rho\\circ w$, and transposition is natural in $K$ [lem-sf-ringed-derived-closed-symmetric-monoidal], as is $t$. Compose both sides of the square with $s_m^{-1}$. The $T$-side becomes $R\\mathcal Hom(\\tau^{-1},1)\\circ\\beta(E_i[m],E_j)$, $\\tau$ the external-product shift; by naturality in the middle variable its transpose is $\\varepsilon'\\circ Q\\sigma'\\circ(1\\otimes\\tau^{-1})$. By the shift rule the $B$-side transpose is $\\varepsilon\\circ Q\\sigma\\circ t_{-m,m}\\circ(c_{B,i,m}\\otimes1)$. Since $\\psi_i'=\\psi_i t_{-m,m}$, also $\\varepsilon'$ is $\\varepsilon$ after these chain isomorphisms. Both transposes are thus $\\varepsilon\\circ Q\\chi$ for explicit chain maps $\\chi_T,\\chi_B$. Steps 7--8 compare their generator signs; they carry the Hom-shift factor $(-1)^{m(a+b)}$ on the $T$-side, equal by the shift rule to the $t_{-m,m}$ factor $(-1)^{m(a+b)}$ put on the $B$-side here. Thus $\\chi_T=\\chi_B$. Transposition is bijective [lem-sf-ringed-derived-closed-symmetric-monoidal] and $s_m$ invertible, so\n$$c_{T,i,m}\\circ\\beta(E_i[m],E_j)=\\beta(E_i,E_j)[-m]\\circ c_{B,i,m}$$\nfor $i=1,2$ and every integer $m$. Other models give the same maps by [lem-weil-pbc-site-derived-tensor-descent] and [lem-pur-rhom-well-defined]. With Steps 1--4 this proves all clauses.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "opening exactness assertion: descent of evaluation identities and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-ctf-stability",
+  "def-sf-kv-maps",
+  "lem-weil-finite-ctf-triangulated",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-tensor",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pur-rhom-well-defined",
+  "def-weil-triangulated-category",
+  "lem-pur-derived-internal-hom-shift-left",
+  "def-coef-hom-representative-evaluation",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+  "place": "Opening sentence, expanded using Stacks 08JC and explicit cone and Koszul-sign formulas"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +240,52 @@
    "results": "3 hits in Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:357,409,418; diagram external-product simplifications, no geometric derived sheaf comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External derived Hom comparison for sheaves is exact contravariant in each variable and commutes with shifts",
+   "results": "{\"t\": \"2026-10-17T14:11:21Z\", \"tool\": \"leanfinder\", \"query\": \"External derived Hom comparison for sheaves is exact contravariant in each variable and commutes with shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\"], \"digest\": \"890c2f01ea49e0e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, Ext, adjoint, ordinary condensed-module, or Day-convolution infrastructure; none states this geometric external-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct.*(ihom|internalHom|RHom)|(ihom|internalHom|RHom).*externalProduct",
+   "results": "{\"t\": \"2026-10-17T14:11:54Z\", \"tool\": \"grep\", \"query\": \"externalProduct.*(ihom|internalHom|RHom)|(ihom|internalHom|RHom).*externalProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\"], \"digest\": \"0e00411599c4e299\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, Ext, adjoint, ordinary condensed-module, or Day-convolution infrastructure; none states this geometric external-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The evaluation-defined external internal Hom map on derived sheaves commutes with shifts including Koszul signs",
+   "results": "{\"t\": \"2026-10-17T14:11:55Z\", \"tool\": \"leansearch\", \"query\": \"The evaluation-defined external internal Hom map on derived sheaves commutes with shifts including Koszul signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapCochainComplexShiftIso\", \"CochainComplex.shiftEval_hom_app\", \"CategoryTheory.Abelian.Ext.hom'\", \"CategoryTheory.Abelian.Ext.hom\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.ShiftedHom.map\", \"CochainComplex.shiftEval\", \"CochainComplex.ShiftSequence.shiftIso\"], \"digest\": \"c72ff439d96e4d26\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, Ext, adjoint, ordinary condensed-module, or Day-convolution infrastructure; none states this geometric external-Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"t\": \"2026-10-17T14:11:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated.instId\", \"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair\", \"CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms\", \"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"CategoryTheory.Functor.isTriangulated_of_iso\", \"CategoryTheory.Functor.isTriangulated_iff_of_iso\"], \"digest\": \"31acebc33d5862fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, Ext, adjoint, ordinary condensed-module, or Day-convolution infrastructure; none states this geometric external-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product and derived internal Hom are triangulated functors on the category of module sheaves with their canonical cochain shift comparisons",
+   "results": "{\"t\": \"2026-10-17T14:12:05Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor product and derived internal Hom are triangulated functors on the category of module sheaves with their canonical cochain shift comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"CategoryTheory.Tor_map\", \"LightCondensed.instMonoidalCategoryLightCondMod\"], \"digest\": \"5e5b2f18e33153a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, Ext, adjoint, ordinary condensed-module, or Day-convolution infrastructure; none states this geometric external-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any ringed site derived internal Hom in the first variable is a contravariant triangulated functor sending cone triangles to triangles",
+   "results": "{\"t\": \"2026-10-17T14:13:18Z\", \"tool\": \"leanfinder\", \"query\": \"For any ringed site derived internal Hom in the first variable is a contravariant triangulated functor sending cone triangles to triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Functor.map_distinguished_op_exact\"], \"digest\": \"e21a09112f83a882\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, Ext, adjoint, ordinary condensed-module, or Day-convolution infrastructure; none states this geometric external-Hom comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-external-hom",
@@ -92,5 +302,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-external-hom-thick-reduction",
+  "worker": "stage1",
+  "summary": "Expanded the exactness assertion into finite-Tor closure, ambient cone calculations, restriction and two explicit all-integer evaluation-sign checks. Retained the statement. No new nodes; the etale-only Hom-triangulated node was not applied to the pro-etale category. Existing tensor and Hom model nodes provide resolution descent and evaluation normalization.",
+  "blueprint": "Realizes the first sentence of prop-trf-external-hom.proof.md, Both sides are exact in each E_i, including the canonical shift compatibility needed for its subsequent devissage. This item is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic finite-coefficient derived-category infrastructure used for choosing a fixed K-flat tensor representative; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "Generic finite-coefficient derived-category infrastructure used for the tensor cone comparison; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-left",
+    "why": "Generic finite-coefficient derived-category infrastructure used for existence of the ambient Hom shift comparison; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic finite-coefficient derived-category infrastructure used for the normalized monoidal pullback comparison; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic finite-coefficient derived-category infrastructure used for inverting resolution quasi-isomorphisms; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "lem-weil-finite-ctf-triangulated",
+    "why": "Generic finite-coefficient derived-category infrastructure used for the full inherited triangulated structures; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic finite-coefficient derived-category infrastructure used for descent and determination on K-flat models; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic finite-coefficient derived-category infrastructure used for termwise exact finite-coefficient pullback; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Generic finite-coefficient derived-category infrastructure used for the domains of all displayed operations; the unit does not supply a replacement for this generic construction."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "The generic abelian-category cone criterion verifies that tensor by a K-flat representative inverts quasi-isomorphisms; it is infrastructure, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The general small-ringed-site theorem supplies the derived closed adjunction, evaluation counit and signed symmetry; these justify transposition in the external-Hom construction and do not replace the unit route."
+   },
+   {
+    "node": "def-coef-hom-representative-evaluation",
+    "why": "Generic ringed-site representative evaluation fixes the actual localization factorization and inverse localized augmentation used to identify the chain evaluation with the derived transpose; the unit route has no replacement for this normalization."
+   },
+   {
+    "node": "def-coef-ringed-tensor-hom-model",
+    "why": "Generic ringed-site closed tensor-Hom representative model identifies the normalized pure-tensor evaluation with the existing derived tensor and Hom; the unit route has no replacement for this normalization."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-topos fact (Stacks 0G7E) that termwise pullback keeps flat-term K-flat complexes, needed so the pulled-back models in Step 6 compute the external products; added at review, no unit node gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-rhom-well-defined",
+  "lem-weil-finite-ctf-triangulated",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-weil-pbc-proetale-constant-exact",
+  "thm-sf-ctf-stability",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-842f6f83e",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-842f6f83e (reviewer sub-agent of L); spot-checked: Read the item, all nine steps, every cited node's statement, the ancestor prop-trf-external-hom (main-20261015) opening sentence 'Both sides are exact in each E_i', unit sk-thm-sf-kunneth-verdier step 2, and Stacks 06YM/08JC/0G7E. The statement is unchanged and correct: finite A_{E,n}, small pro-etale ringed sites, beta as in def-sf-kv-maps(iii) with Koszul symmetry, no target weakened. Steps 1-5 and 7-8 check by hand: Hom-of-cone differential and (x,y)->((-1)^{n+1}y,x) to Cone(v)[-1] verified, inverse rotation by TR2, s_m and t_{u,v} commute with differentials, exponent parities bp+m(a+b) and bp+m(a+b)+mp versus mb-ma+(b-m)p verified. Faults fixed in Steps 6 and 9: (E4) the source was modelled by a K-flat replacement of the underived Tot(H1⊠H2), which is not B since the H_i are not K-flat; (E4/E5) psi into I_12 was given values f(x)⊗g(y) that lie in p^{-1}I1⊗p^{-1}I2, with a comparison running the wrong way; (C1) K-flatness of the pulled-back P_12 was uncited, now cited to existing lem-weil-pbc-ringed-pullback-preserves-kflat (Stacks 0G7E, no cycle). Rewritten Step 6: flat-term K-flat models R_i, P_i, S_i, evaluation psi_i from def-coef-ringed-tensor-hom-model, transpose of beta = epsilon∘Q sigma with epsilon derived. Rewritten Step 9: shifted models with psi_i'=psi_i∘t, a shift rule for transposition proved from the model node and naturality, and the reduction to chi_T=chi_B, which is exactly what Steps 7-8 compute. proof_deps regenerated; one tool_use added. No new nodes and none dropped; steps are under 2000 characters.; 1 file(s) fixed by the reviewer"
  }
 }
