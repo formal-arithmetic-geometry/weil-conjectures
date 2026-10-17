@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-trf-exceptional-internal-hom-exchange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exceptional internal Hom versus exceptional pullback",
- "statement": "Fix the coefficient\nconventions, $A=A_{E,n}$, and let $c:C\\to Z$ be a separated\nfinite-type morphism of finite-type $k$-schemes which is admissible at\n$A$ ([def-trf-admissibility]). For\n$M,N\\in D^b_{ctf}(Z,A)$ the canonical comparison\n\n$$\nR\\mathcal Hom_A\\bigl(c^*M,c^!N\\bigr)\\xrightarrow{\\ \\sim\\ }\nc^!R\\mathcal Hom_A(M,N)\n$$\n\nis an isomorphism, natural in $M$ and $N$. Its first variable is\nrequired to be an ordinary pullback and its second an exceptional one;\nthe analogous statement with $c^!$ in the first variable is false, as\nrecorded in [def-trf-admissibility].",
+ "statement": "Fix the coefficient\nconventions, $A=A_{E,n}$, and let $c:C\\to Z$ be a separated\nfinite-type morphism of finite-type $k$-schemes which is admissible at\n$A$ ([def-trf-admissibility]). For\n$M,N\\in D^b_{ctf}(Z,A)$ the canonical comparison\n\n$$\nR\\mathcal Hom_A\\bigl(c^*M,c^!N\\bigr)\\xrightarrow{\\ \\sim\\ }\nc^!R\\mathcal Hom_A(M,N)\n$$\n\nis an isomorphism, natural in $M$ and $N$. Its first variable is\nrequired to be an ordinary pullback and its second an exceptional one;\nthe analogous statement with $c^!$ in the first variable is false.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.md",
   "place": "node lem-trf-exceptional-internal-hom-exchange, order 2315"
@@ -15,32 +15,205 @@
  "stmt_deps": [
   "def-trf-admissibility",
   "def-trf-coefficient-conventions",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "Let $P\\in D^b_{ctf}(C,A)$ be a test object. The exceptional adjunction\nof [def-trf-admissibility] and the tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom] give the chain\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_C\\bigl(P,R\\mathcal Hom_A(c^*M,c^!N)\\bigr)\n&\\cong\\operatorname{Hom}_C\\bigl(P\\otimes_A^Lc^*M,c^!N\\bigr)\\\\\n&\\cong\\operatorname{Hom}_Z\\bigl(c_!\\bigl(P\\otimes_A^Lc^*M\\bigr),N\\bigr)\\\\\n&\\cong\\operatorname{Hom}_Z\\bigl(c_!P\\otimes_A^LM,N\\bigr)\\\\\n&\\cong\\operatorname{Hom}_Z\\bigl(c_!P,R\\mathcal Hom_A(M,N)\\bigr)\\\\\n&\\cong\\operatorname{Hom}_C\\bigl(P,c^!R\\mathcal Hom_A(M,N)\\bigr),\n\\end{aligned}\n$$\n\nin which the third arrow is the projection formula of\n[prop-functor-package] for the admissible $c$, applied to the\nfirst tensor factor, and the remaining arrows are the two adjunctions.\nEvery arrow is natural in $P$, so the Yoneda lemma identifies the two\nrepresentable functors of $P$ and produces the canonical comparison of\nthe statement. Naturality in $M$ and $N$, and compatibility with\nshifts and distinguished triangles, are the corresponding properties of\nthe adjunctions and of the projection formula.",
+   "text": "Work at the fixed finite coefficient stage of [def-trf-coefficient-conventions]. Write $\\mathcal D_T=D^b_{ctf}(T,A)$, $F=Rc_!$, $G=Rc^!$, and $L=Lc^*$. The admissibility assumption [def-trf-admissibility] specifies $F:\\mathcal D_C\\to\\mathcal D_Z$, $G:\\mathcal D_Z\\to\\mathcal D_C$ and $F\\dashv G$, including its counit $\\epsilon$. The statement allows $C$ and $Z$ to be arbitrary finite-type $k$-schemes (only $c$ is assumed separated), so the domain checks use preservation results without a separatedness hypothesis on the schemes. Ordinary pullback: [lem-sf-pullback-tor-amplitude] applies to the separated finite-type morphism $c$ of finite-type $k$-schemes and gives $LM\\in\\mathcal D_C$. Derived tensor: [lem-sf-tensor-ctf](ii) on the finite-type schemes $C$ and $Z$ gives $P\\otimes_A^L LM\\in\\mathcal D_C$ for every $P\\in\\mathcal D_C$ and $FP\\otimes_A^L M\\in\\mathcal D_Z$ (using $FP\\in\\mathcal D_Z$). Derived internal Hom on a finite-type $k$-scheme $T$, for $K,K_1\\in\\mathcal D_T$ with Tor amplitudes $[a,b]$ and $[c',d']$: by [lem-sf-proetale-constructible-origin](ii) there are bounded constructible etale complexes $K',K_1'$ with $K\\cong\\nu_T^*K'$ and $K_1\\cong\\nu_T^*K_1'$; by [lem-sf-comparison-tor-amplitude](ii) they have finite Tor amplitude in $[a,b]$ and $[c',d']$ on $T_{\\mathrm{et}}$. Since $T$ has finite dimension [lem-kun-dimension-finite-type], choose an integer $m\\geq0$ with $\\dim T\\leq m$; then [thm-sf-hom-ctf] puts $R\\mathcal Hom_A(K',K_1')$ in $D^b_{ctf}(T_{\\mathrm{et}},A)$, [lem-sf-comparison-tor-amplitude](i) puts $\\nu_T^*R\\mathcal Hom_A(K',K_1')$ in $\\mathcal D_T$, and [thm-sf-hom-comparison-constructible] identifies the latter with $R\\mathcal Hom_A(\\nu_T^*K',\\nu_T^*K_1')\\cong R\\mathcal Hom_A(K,K_1)$. As $\\mathcal D_T$ is defined by conditions on cohomology sheaves, it is closed under isomorphism, so $R\\mathcal Hom_A(K,K_1)\\in\\mathcal D_T$. Applied on $Z$ to $(M,N)$ and on $C$ to $(LM,GN)$, this places $R\\mathcal Hom_A(M,N)$, $H=R\\mathcal Hom_A(LM,GN)$ and $J=GR\\mathcal Hom_A(M,N)$ in their indicated categories. Thus every exceptional-adjunction instance below is on its specified constructible domain; no ambient exceptional adjoint is used.",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "def-trf-admissibility",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-kun-dimension-finite-type",
+    "thm-sf-hom-ctf",
+    "thm-sf-hom-comparison-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.proof.md",
+    "place": "Complete adjunction/projection-formula calculation, followed by representability and naturality"
+   }
+  },
+  {
+   "text": "For any of the small ringed sites $(T_{\\mathrm{proet}},A_T)$, abbreviate derived internal Hom to $H_T(-,-)$. The first assertion of [lem-weil-pbc-ringed-internal-hom-exact-restriction], followed by degree-zero global sections and [lem-pur-rhom-global-sections] on each side, gives the natural bijection\n$$\\operatorname{Hom}_T(U,H_T(V,W))\\cong H^0(T,H_T(U,H_T(V,W)))\\cong H^0(T,H_T(U\\otimes_A^L V,W))\\cong\\operatorname{Hom}_T(U\\otimes_A^L V,W).$$\nThis is precisely the tensor–internal-Hom adjunction for the concrete derived Hom in the statement. Since the constructible categories are full, the same bijection applies to their objects. This derives the required adjunction from statements that actually assert the relevant facts, rather than assuming it from the definition of the operations.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom) and 08JA (lemma-section-RHom-over-U), equation-internal-hom"
+   }
+  },
+  {
+   "text": "For $P\\in\\mathcal D_C$, compose the adjunction of step 2, the specified exceptional adjunction [def-trf-admissibility], the projection isomorphism [fix-prop-projection-formula] at $(c,P,M)$, and then the two adjunctions in reverse order:\n$$\\begin{aligned}\n\\operatorname{Hom}_C(P,H)&\\cong\\operatorname{Hom}_C(P\\otimes_A^L LM,GN)\\\\\n&\\cong\\operatorname{Hom}_Z(F(P\\otimes_A^L LM),N)\\\\\n&\\cong\\operatorname{Hom}_Z(FP\\otimes_A^L M,N)\\\\\n&\\cong\\operatorname{Hom}_Z(FP,R\\mathcal Hom_A(M,N))\\\\\n&\\cong\\operatorname{Hom}_C(P,J).\n\\end{aligned}$$\nThe middle bijection sends $b:F(P\\otimes_A^L LM)\\to N$ to $b\\circ\\operatorname{PF}_{c,P,M}$, where $\\operatorname{PF}_{c,P,M}:FP\\otimes_A^L M\\xrightarrow{\\sim}F(P\\otimes_A^L LM)$. Its hypotheses hold: $P$ is bounded constructible and $M$ is bounded constructible of finite Tor amplitude. Denote the composite by $\\Phi_P$. Each constituent is natural in $P$, contravariantly in $M$ and covariantly in $N$, so the composite has those naturalities.",
    "uses": [
     "def-trf-admissibility",
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-functor-package"
+    "fix-prop-projection-formula",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.proof.md",
+    "place": "Complete adjunction/projection-formula calculation, followed by representability and naturality"
+   }
+  },
+  {
+   "text": "Here is the representability argument explicitly, inside $\\mathcal D_C$. Let $\\Psi_P=\\Phi_P^{-1}$, put $h=\\Phi_H(1_H):H\\to J$ and $u=\\Psi_J(1_J):J\\to H$. Naturality gives $\\Phi_P(a)=h\\circ a$ for every $a:P\\to H$, by applying naturality to $a$ and $1_H$. Likewise $\\Psi_P(b)=u\\circ b$. Taking $a=u$ and $b=h$, the inverse-bijection identities give $h\\circ u=1_J$ and $u\\circ h=1_H$. Thus $h$ is an isomorphism. This also proves uniqueness of the arrow inducing the displayed Hom bijections, without applying a scheme-specific version of Yoneda to a derived category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.proof.md",
+    "place": "Complete adjunction/projection-formula calculation, followed by representability and naturality"
+   }
+  },
+  {
+   "text": "Identify $h$ with the canonical comparison, rather than just an unspecified isomorphism. Write $\\mathrm{ev}:H\\otimes_A^L LM\\to GN$ for the tensor–Hom adjunct of $1_H$. Unwinding $\\Phi_H(1_H)$ in step 3 shows that $h$ is the result of transposing the following map first by tensor–Hom on $Z$, then by $F\\dashv G$:\n$$FH\\otimes_A^L M\\xrightarrow{\\operatorname{PF}_{c,H,M}}F(H\\otimes_A^L LM)\\xrightarrow{F(\\mathrm{ev})}FGN\\xrightarrow{\\epsilon_N}N.$$\nThis is the canonical comparison specified by evaluation, projection and exceptional adjunction. All these maps have the domains verified in step 1. For $a:M'\\to M$ and $b:N\\to N'$, let $H(a,b):H(M,N)\\to H(M',N')$ and $J(a,b):J(M,N)\\to J(M',N')$ be the induced maps. Naturality of the Hom bijections in step 3, evaluated at $1_{H(M,N)}$, gives\n$$J(a,b)\\circ h_{M,N}=\\Phi^{M',N'}_{H(M,N)}(H(a,b))=h_{M',N'}\\circ H(a,b).$$\nThis is the asserted naturality in both variables.",
+   "uses": [
+    "def-trf-admissibility",
+    "fix-prop-projection-formula",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.proof.md",
+    "place": "Complete adjunction/projection-formula calculation, followed by representability and naturality"
+   }
+  },
+  {
+   "text": "For the warning about the first variable, take $c:\\mathbf A^1_k\\to\\operatorname{Spec}k$ and $M=N=A$ in degree zero. The smooth purity theorem [thm-pur-finite-coefficient-smooth-purity] gives $c^!A=A(1)[2]$. The twist is a locally free rank-one coefficient sheaf by [lem-pur-twist-sheaf-locally-free]. Restriction to a trivializing object commutes with derived internal Hom by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. On that slice site, the K-injective Hom definition [def-pur-derived-internal-hom] computes $R\\mathcal Hom_A(A,A)$ as $\\mathcal Hom_A(A,I^\\bullet)=I^\\bullet$ for a resolution $A\\to I^\\bullet$, hence as $A$. Thus the global scalar-action map $A\\to R\\mathcal Hom_A(A(1),A(1))$ restricts to a quasi-isomorphism on every trivializing object: its cone has zero cohomology locally, hence zero cohomology sheaves by the sheaf axiom. It is therefore a quasi-isomorphism globally, so $R\\mathcal Hom_A(A(1),A(1))\\cong A$. Cancelling the equal shifts in the two Hom variables, as allowed by [lem-weil-pbc-ringed-internal-hom-exact-restriction], gives\n$$R\\mathcal Hom_A(c^!A,c^!A)\\cong A,\\qquad c^!R\\mathcal Hom_A(A,A)\\cong A(1)[2].$$\nThese are not isomorphic: their only nonzero cohomology sheaves lie in degrees $0$ and $-2$, respectively, using the cochain shift convention [def-weil-abstract-derived-category]. The coefficient ring $A_{E,n}$ is nonzero for $n\\geq1$. Thus replacing the ordinary first pullback by an exceptional one fails even for this smooth admissible morphism.",
+   "uses": [
+    "thm-pur-finite-coefficient-smooth-purity",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.md",
+    "place": "Final warning about exceptional pullback in the first variable; explicit affine-line counterexample using the lecture-notes smooth-purity route"
+   }
   }
  ],
  "proof_deps": [
+  "def-trf-coefficient-conventions",
   "def-trf-admissibility",
-  "def-weil-derived-pullback-tensor-hom",
-  "prop-functor-package"
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-kun-dimension-finite-type",
+  "thm-sf-hom-ctf",
+  "thm-sf-hom-comparison-constructible",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "fix-prop-projection-formula",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.proof.md",
+  "place": "Complete adjunction/projection-formula calculation, followed by representability and naturality"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperShriek.*[Hh]om|[Hh]om.*upperShriek|exceptional.*[Hh]om",
+   "results": "Returned 0 hits: . These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint of compact support pushforward applied to internal Hom is internal Hom of pullback and exceptional inverse image",
+   "results": "Returned 8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, TopCat.Sheaf.pullback, CategoryTheory.ihom, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Returned 12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image commutes with derived internal Hom when its first argument is ordinary pullback, by compact support projection formula and adjunction",
+   "results": "Returned 8 hits: CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ExponentiableMorphism.homEquiv_symm_apply_eq, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.coev_ev_assoc. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula for a functor between closed monoidal categories implies its right adjoint commutes with internal hom after pullback in the first variable",
+   "results": "Returned 8 hits: CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.uncurry_expComparison, CategoryTheory.expComparison, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.exp.adjunction, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Ii]hom|[Ii]hom.*projection|rightAdjointUniq",
+   "results": "Returned 19 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensorHomAdjunction|derivedHom|derivedTensor",
+   "results": "Returned 0 hits: . These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed site Hom in the derived category from a derived tensor product is naturally isomorphic to Hom into the derived internal Hom computed by K-injective resolutions",
+   "results": "Returned 8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "Returned 12 hits: CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalClosed.curry_injective, CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.curry_uncurry, CategoryTheory.MonoidalClosed.id_eq, CategoryTheory.MonoidalClosed.curry_eq_iff, CategoryTheory.MonoidalClosed.eq_curry_iff, CategoryTheory.MonoidalClosed.comp_eq. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any ringed site the K-injective derived internal Hom is right adjoint to the K-flat derived tensor product, naturally in all three complexes",
+   "results": "Returned 8 hits: CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, PresheafOfModules.sheafificationAdjunction, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', PresheafOfModules.sheafificationAdjunction_homEquiv_apply, CategoryTheory.Adjunction.derivedε. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalClosed|def curry|def derived",
+   "results": "Returned 25 hits: Mathlib/CategoryTheory/Functor/CurryingThree.lean, Mathlib/CategoryTheory/Functor/CurryingThree.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Currying.lean, Mathlib/CategoryTheory/Functor/Currying.lean. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of sheaves of modules over a sheaf of commutative rings is closed: Hom(P, RHom(L,M)) is naturally Hom(P tensor derived L,M)",
+   "results": "Returned 8 hits: DerivedCategory.instLinear, SheafOfModules.instAbelian, CategoryTheory.Sheaf.H, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, Ext, LightCondensed.instIsGrothendieckAbelianLightCondMod. These abstract adjunction/closed-category and underived sheaf results do not state the canonical pro-etale constructible exceptional comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -70,5 +243,94 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-trace-class"
+ "unit": "sk-d-trace-class",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-exceptional-internal-hom-exchange",
+  "worker": "stage1",
+  "summary": "N3 expanded the finite-coefficient adjunction/projection-formula proof into six steps, including a domain check, an explicit derivation of tensor-Hom adjunction from existing ringed-site results, inverse representability maps, the evaluation/counit formula identifying the canonical comparison, both-variable naturality, and the affine-line counterexample to the exceptional-first-variable variant. No new nodes. Removed only the stale claim that the warning is recorded in the admissibility definition; the mathematical statement and coefficient conventions are unchanged.",
+  "blueprint": "Realizes the five Hom-set bijections, the projection-formula sentence, and the Yoneda/naturality conclusion of the current main-20261015 proof of lem-trf-exceptional-internal-hom-exchange; also justifies its statement's final warning. The sk-d-trace-class unit remains the supported diagonal trace-class construction; this auxiliary exchange is proved by its existing formal route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Step 1 domain check: Lc^* preserves D^b_ctf for a separated finite-type c between arbitrary finite-type k-schemes; no trace-class-unit node gives it."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Step 1 domain check: derived tensor preserves D^b_ctf on an arbitrary finite-type k-scheme."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Step 1: pro-etale bounded constructible objects come from the etale site, to transfer the Hom preservation theorem."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Step 1: Tor amplitude agrees under the etale/pro-etale comparison in both directions."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Step 1: finite dimension of a finite-type k-scheme, the dimension bound required by the etale Hom preservation theorem."
+   },
+   {
+    "node": "thm-sf-hom-ctf",
+    "why": "Step 1: derived internal Hom preserves etale D^b_ctf on an arbitrary (not necessarily separated) finite-type k-scheme."
+   },
+   {
+    "node": "thm-sf-hom-comparison-constructible",
+    "why": "Step 1: etale internal Hom of ctf/constructible inputs pulls back to the pro-etale internal Hom."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic derived Hom currying gives tensor-Hom transposition and shift cancellation; this is a ringed-site tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Converts the currying isomorphism to the actual degree-zero Hom bijections needed in the blueprint calculation."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The natural compact-support projection isomorphism is exactly the middle arrow of the blueprint calculation; citing this specific clause avoids importing unrelated functor-package assertions."
+   },
+   {
+    "node": "thm-pur-finite-coefficient-smooth-purity",
+    "why": "Supplies c!A=A(1)[2] for the explicit affine-line counterexample to the warned-against variant, via the authorized lecture-notes route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Finite twists are locally free of rank one, needed for the elementary endomorphism calculation in the counterexample."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Names the K-injective Hom model used for the local rank-one calculation."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Fixes the cochain shift and cohomology conventions distinguishing degrees 0 and -2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-kun-dimension-finite-type",
+  "thm-sf-hom-ctf",
+  "thm-sf-hom-comparison-constructible",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "fix-prop-projection-formula",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-20af83521",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-20af83521 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 6 steps, every cited statement, the main-20261015 and master sources, unit sk-d-trace-class and chapter sec-trace-formula, Stacks 08J9/08JA (sites-cohomology.tex:8874-8910), and the three citers. The statement matches the source. Only the stale words 'as recorded in [def-trf-admissibility]' were removed, which is correct because the current admissibility node has no such warning. No hypothesis was weakened, and the coefficient category stays A_{E,n} on the pro-etale site with D^b_ctf. One fault (E1): step 1 cited thm-sf-ctf-stability, which assumes separated schemes, by appealing to a 'standing separated setting'. The item only says C and Z are finite-type k-schemes, and the admissibility definition allows a non-separated target. I fixed step 1 to use nodes that need no separatedness: lem-sf-pullback-tor-amplitude (Lc^*), lem-sf-tensor-ctf(ii) (tensor), and for Hom the etale-origin transfer through lem-sf-proetale-constructible-origin(ii), lem-sf-comparison-tor-amplitude(ii)/(i), lem-kun-dimension-finite-type, thm-sf-hom-ctf and thm-sf-hom-comparison-constructible. proof_deps and split_report.tool_uses were updated to match, and the thm-sf-ctf-stability entry was removed. Steps 2-6 verified: (2) the ringed-site currying lemma plus H^0=Hom gives tensor-Hom; (3) fix-prop-projection-formula is in the correct direction and needs no separatedness of X or Y; (4) the Yoneda inverse identities hold; (5) evaluation, projection and counit give the canonical map, natural in both variables; (6) the A^1 counterexample gives degree 0 against degree -2, nonzero, using lecture-notes purity and no SGA. There are no new nodes and no duplicates (the tensor-adjunction nodes state a different exchange). Dependency walk found no cycle. Accepted tool_uses: the seven original non-stability entries plus the seven step-1 nodes the fix adds. Corrected full item is in fixes/dag/nodes/sec-trace-formula/; quotations for the new step-1 citations, if citations.json requires them, need regenerating at merge.; 1 file(s) fixed by the reviewer"
+ }
 }

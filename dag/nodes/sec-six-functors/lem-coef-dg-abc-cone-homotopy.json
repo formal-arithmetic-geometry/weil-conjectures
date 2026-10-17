@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, the three displayed derived Hom objects: generic dg-quotient infrastructure through the recorded ancestry, specifically the finite-cone argument in the final step of lem-coef-dg-quotient-hom-cone. The triangulated structure is obtained from a general cone-closed module-category criterion, before proving invariance of the finite hull. Abstract dg-category axioms (A), (B), (C) supply the generic triangulation theorem used after the module and sign checks. Technical input: Homotopy comparisons with admissible quotients and their cones.",
+   "place": "Proof paragraph 2, the three displayed derived Hom objects (master snapshot node file, section '## Proof'; the same paragraph is in main-20261015 at blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md): generic dg-quotient infrastructure through the recorded ancestry, specifically the finite-cone argument in the final step of lem-coef-dg-quotient-hom-cone. The triangulated structure is obtained from a general cone-closed module-category criterion, before proving invariance of the finite hull. Abstract dg-category axioms (A), (B), (C) supply the generic triangulation theorem used after the module and sign checks. Technical input: Homotopy comparisons with admissible quotients and their cones.",
    "via": [
     "lem-coef-dg-abc-homotopy-category-triangulated",
     "lem-coef-dg-module-cone-triangulation",
@@ -28,9 +28,99 @@
  "stmt_deps": [
   "lem-coef-dgcat-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the dg-category definition in [lem-coef-dgcat-model-structure]. For homogeneous maps, $\\partial(vu)=(\\partial v)u+(-1)^{|v|}v\\partial u$. In particular, for closed degree-zero $a,b$ and degree-minus-one $h$, $b\\partial h=\\partial(bh)$ and $(\\partial h)a=\\partial(ha)$. Boundaries therefore form an ideal among closed degree-zero maps; all subsequent equalities of homotopy classes can be multiplied and added. A closed map is a homotopy equivalence exactly when its class has an inverse, by the definition in the statement.",
+   "uses": [
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P6 (lemma-get-triangle), dg Leibniz calculations; Tag 09QT (lemma-analogue-third-isomorphism), passage to homotopy classes."
+   }
+  },
+  {
+   "text": "For any admissible sequence $(a,b,\\pi,s)$ put $D=\\pi\\partial s\\in\\mathcal A(z,x)^1$, the unshifted version of its boundary $\\delta$. Differentiating $\\pi a=1$ and $bs=1$ gives $(\\partial\\pi)a=0$ and $b\\partial s=0$. Insert $a\\pi+sb=1$ to obtain $\\partial s=aD$ and, using $\\partial(\\pi s)=0$, $\\partial\\pi=(\\partial\\pi)sb=-Db$. Finally $a\\partial D=\\partial(aD)=\\partial^2s=0$, so $\\partial D=\\pi a\\partial D=0$. These identities require only the displayed splitting equations, not closed splittings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P6 (lemma-get-triangle), identities (1)-(7)."
+   }
+  },
+  {
+   "text": "For a chosen cone of $f:x\\to y$, write its splitting as $(\\rho,\\sigma)$ and its arrows as $(i,p)$. In computations only, use (B) to suppress the source shift in $\\sigma:x[1]\\to c(f)$ and the target shift in $p:c(f)\\to x[1]$. Denote the resulting maps by $S\\in\\mathcal A(x,c(f))^{-1}$ and $P\\in\\mathcal A(c(f),x)^1$. Composition compatibility gives $\\rho i=1$, $PS=1$, $i\\rho+SP=1$, $Pi=0$, $\\rho S=0$. Since the boundary is $f[1]$, the identities of step 2 give $\\partial S=if$, $\\partial\\rho=-fP$, $\\partial P=0$. Here source shift identifies $\\mathcal A(x[1],c(f))^r$ with $\\mathcal A(x,c(f))^{r-1}$, while target shift identifies $\\mathcal A(c(f),x[1])^r$ with $\\mathcal A(c(f),x)^{r+1}$; the target-shift differential has the minus sign stipulated in (B). Thus these formulas keep the Koszul signs and apply to the actual chosen cone.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P7 (lemma-cone), cone splitting identities; Tag 09QU (lemma-cone-homotopy), proof (1), degree-minus-one interpretation of the cone section."
+   }
+  },
+  {
+   "text": "For (i) specialize step 3 to $f=a$ and retain $D$ from step 2. The maps in the statement are $e=b\\rho$ and $t=is-SD$ in this unshifted notation. Their differentials are $\\partial e=-baP=0$ and $\\partial t=i\\partial s-(\\partial S)D+S\\partial D=iaD-iaD=0$. The splitting identities also give $et=b\\rho(is-SD)=bs=1_z$ and $ei=b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QU (lemma-cone-homotopy), proof (1), construction and closedness of the comparison maps."
+   }
+  },
+  {
+   "text": "Set $H=-S\\pi\\rho$, a degree-minus-one endomorphism of $c(a)$. By steps 2-3, $\\partial H=-ia\\pi\\rho-SDb\\rho-SP$. On the other hand $te-1=is b\\rho-SDb\\rho-i\\rho-SP=-ia\\pi\\rho-SDb\\rho-SP$, since $sb=1-a\\pi$. Hence $te-1=\\partial H$. Moreover $\\partial(\\pi\\rho)=-Db\\rho-P$, so $De+P=-\\partial(\\pi\\rho)$. Under the target-shift isomorphism (B) this last equality says $[\\delta e]=[-p]$: multiplication by the minus sign on the shifted differential does not change the subgroup of boundaries. Together with $ei=b$ and the homotopy inverse $t$, this proves the diagram isomorphism in (i).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QU (lemma-cone-homotopy), proof (1), the identity $1=fe+d(\\sigma\\pi p)$ and the final square."
+   }
+  },
+  {
+   "text": "For (ii) choose splittings $(\\rho_k,\\sigma_k)$ of the two chosen cones, and use $S_k,P_k$ as in step 3. Define $c=i_2b\\rho_1+S_2aP_1+i_2hP_1$. Every summand has degree zero, and $\\partial c=-i_2bf_1P_1+i_2f_2aP_1+i_2(bf_1-f_2a)P_1=0$. Multiplication by the splitting maps gives $ci_1=i_2b$ and $P_2c=aP_1$ strictly. Restoring the shifts gives $p_2c=a[1]p_1$ strictly, hence both required equalities of classes. This constructs the cone map for any homotopy square, including the inverse square used below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P7 (lemma-cone), proof, the explicit cone map and its differential."
+   }
+  },
+  {
+   "text": "Here is the elementary null-product calculation needed to show that this cone map is invertible; keep the shifts on the cone arrows in this step. Let $v$ be a closed degree-zero endomorphism of any chosen cone $(i,p,\\rho,\\sigma)$ such that $[vi]=0$ and $[pv]=0$. Choose degree-minus-one $k,l$ with $vi=\\partial k$ and $pv=\\partial l$. Set $K=k\\rho$, $L=\\sigma l$, $v_L=v-\\partial K$ and $v_R=v-\\partial L$. Then $v_Li=0$ and $pv_R=0$, since $\\rho i=1$, $p\\sigma=1$, and $i,p$ are closed. Thus $v_Lv_R=v_L(i\\rho+\\sigma p)v_R=0$. The Leibniz identity gives $v^2=v^2-v_Lv_R=\\partial(Kv+v_LL)$, since $v,v_L$ are closed. Consequently, if $u$ is a closed cone endomorphism with $[ui]=[i]$, $[pu]=[p]$, take $v=u-1$: its class has square zero, and $[2-u]=[1-v]$ is a two-sided inverse of $[u]=[1+v]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QP (lemma-triseq), strictification and null-product computation; Tag 09QT (lemma-analogue-third-isomorphism), square-zero argument."
+   }
+  },
+  {
+   "text": "Assume now that $a,b$ are homotopy equivalences and choose closed homotopy inverses $a^{\\prime},b^{\\prime}$. Since $[b][f_1]=[f_2][a]$, multiplication by their inverse classes gives $[b^{\\prime}][f_2]=[f_1][a^{\\prime}]$. The closed difference $b^{\\prime}f_2-f_1a^{\\prime}$ is therefore a boundary, so choose $h^{\\prime}$ of degree minus one with that differential. Step 6 applied to this square gives a closed $c^{\\prime}:c(f_2)\\to c(f_1)$ with $[c^{\\prime}i_2]=[i_1b^{\\prime}]$ and $[p_1c^{\\prime}]=[a^{\\prime}[1]p_2]$. Hence $u=c^{\\prime}c$ satisfies $[ui_1]=[i_1]$ and $[p_1u]=[p_1]$; likewise $w=cc^{\\prime}$ satisfies $[wi_2]=[i_2]$ and $[p_2w]=[p_2]$. The shift is a dg functor, so it preserves the inverse equations on classes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QT (lemma-analogue-third-isomorphism), inverse square and the two composite endomorphisms."
+   }
+  },
+  {
+   "text": "By step 7 both $[c^{\\prime}c]$ and $[cc^{\\prime}]$ are invertible. Thus $([c^{\\prime}c])^{-1}[c^{\\prime}]$ is a left inverse of $[c]$, and $[c^{\\prime}]([cc^{\\prime}])^{-1}$ is a right inverse. They agree: if $L[c]=1$ and $[c]R=1$ then $L=L([c]R)=(L[c])R=R$. Each class has a closed representative; its two inverse equations mean precisely that both composites differ from the identities by degree-minus-one boundaries. Therefore $c$ is a homotopy equivalence. Every construction used only the stipulated splittings, the dg Leibniz identity and (B),(C), so no triangulated-category axiom or special model of a cone has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QT (lemma-analogue-third-isomorphism), conclusion from the two composite isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-model-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09P6 (lemma-get-triangle), 09P7 (lemma-cone), 09QP (lemma-triseq), 09QT (lemma-analogue-third-isomorphism), 09QU (lemma-cone-homotopy (1)); splitting and Leibniz computations expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +177,80 @@
    "results": "{\"t\": \"2026-10-16T22:37:54Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping cone maps under a homotopy square of enriched differential graded categories preserve equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapOfHomotopy\", \"CochainComplex.mappingCone.map_eq_mapOfHomotopy\", \"CochainComplex.mappingCone.trianglehMapOfHomotopy\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₃\", \"CochainComplex.mappingCone.trianglehMapOfHomotopy_hom₃\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂_assoc\", \"CochainComplex.mappingCone.trianglehMapOfHomotopy_hom₁\"], \"digest\": \"dca65e364124348d\"}",
    "date": "2026-10-17",
    "verdict": "No match: the hits mapOfHomotopy and trianglehMapOfHomotopy concern CochainComplex C Z, not arbitrary dg categories. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "admissible split sequences and homotopy commutative squares in a differential graded category give homotopy equivalent cones",
+   "results": "CochainComplex.trianglehOfDegreewiseSplit; CochainComplex.mappingCone.mapOfHomotopy; CochainComplex.mappingCone.trianglehMapOfHomotopy; CochainComplex.mappingConeCompHomotopyEquiv.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. The objects are ordinary CochainComplex C Z, whereas the item quantifies over arbitrary dg categories with abstract admissible cones. Transport to ordinary complexes would require a separate representation argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapOfHomotopy",
+   "results": "11 hits, including CochainComplex.mappingCone.mapOfHomotopy and triangleMapOfHomotopy_comm₂/comm₃ in Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. The objects are ordinary CochainComplex C Z, whereas the item quantifies over arbitrary dg categories with abstract admissible cones. Transport to ordinary complexes would require a separate representation argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfHomotopy|trianglehOfDegreewiseSplit|DGCategory|DifferentialGradedCategory",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:103,110-112; DegreewiseSplit.lean:81,189; HomologicalFunctor.lean:36. Subdirectory: Algebra/Homology. No DGCategory or DifferentialGradedCategory hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. The objects are ordinary CochainComplex C Z, whereas the item quantifies over arbitrary dg categories with abstract admissible cones. Transport to ordinary complexes would require a separate representation argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopy equivalence of cones induced by a homotopy commutative square in a differential graded category",
+   "results": "8 hits including CochainComplex.mappingCone.mapOfHomotopy, map_eq_mapOfHomotopy, triangleMapOfHomotopy_comm₂ and mappingConeCompHomotopyEquiv.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. The objects are ordinary CochainComplex C Z, whereas the item quantifies over arbitrary dg categories with abstract admissible cones. Transport to ordinary complexes would require a separate representation argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an arbitrary dg category with shifts and graded split exact sequences compare an admissible quotient with its cone and invert cone maps using square zero endomorphisms",
+   "results": "8 hits including CochainComplex.mappingConeHomOfDegreewiseSplitXIso and mappingConeHomOfDegreewiseSplitIso; HomotopyCategory.spectralObjectMappingCone.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. The objects are ordinary CochainComplex C Z, whereas the item quantifies over arbitrary dg categories with abstract admissible cones. Transport to ordinary complexes would require a separate representation argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "admissible split sequences and homotopy commutative squares in a differential graded category give homotopy equivalent cones",
+   "results": "{\"t\": \"2026-10-17T00:37:43Z\", \"tool\": \"leanfinder\", \"query\": \"admissible split sequences and homotopy commutative squares in a differential graded category give homotopy equivalent cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.homotopyEquiv\", \"CochainComplex.mappingConeCompHomotopyEquiv\", \"CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId\", \"CochainComplex.mappingCone.descHomotopy\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"CochainComplex.mappingCone.map_eq_mapOfHomotopy\", \"CochainComplex.MappingConeCompHomotopyEquiv.inv\", \"CochainComplex.mappingCone.rotateHomotopyEquiv\"], \"digest\": \"e15edb73ae46b26d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned mappingCone, degreewise-split and homotopy-cofiber declarations quantify over ordinary CochainComplex/HomologicalComplex objects; none is the arbitrary dg-category assertion. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. Passing through a dg representation is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfHomotopy|trianglehOfDegreewiseSplit|DGCategory|DifferentialGradedCategory",
+   "results": "{\"t\": \"2026-10-17T00:38:31Z\", \"tool\": \"grep\", \"query\": \"mapOfHomotopy|trianglehOfDegreewiseSplit|DGCategory|DifferentialGradedCategory\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\"], \"digest\": \"3aee9268ccb221fb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned mappingCone, degreewise-split and homotopy-cofiber declarations quantify over ordinary CochainComplex/HomologicalComplex objects; none is the arbitrary dg-category assertion. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. Passing through a dg representation is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopy equivalence of cones induced by a homotopy commutative square in a differential graded category",
+   "results": "{\"t\": \"2026-10-17T00:38:31Z\", \"tool\": \"leansearch\", \"query\": \"homotopy equivalence of cones induced by a homotopy commutative square in a differential graded category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.map_eq_mapOfHomotopy\", \"CochainComplex.mappingCone.mapOfHomotopy\", \"CochainComplex.MappingConeCompHomotopyEquiv.hom_inv_id\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₃_assoc\", \"CochainComplex.mappingCone.map\", \"CochainComplex.mappingConeCompHomotopyEquiv\", \"CochainComplex.mappingCone.trianglehMapOfHomotopy\"], \"digest\": \"c021bfc8029acfbe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned mappingCone, degreewise-split and homotopy-cofiber declarations quantify over ordinary CochainComplex/HomologicalComplex objects; none is the arbitrary dg-category assertion. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. Passing through a dg representation is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapOfHomotopy",
+   "results": "{\"t\": \"2026-10-17T00:38:32Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.mappingCone.mapOfHomotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapOfHomotopy\", \"CochainComplex.mappingCone.trianglehMapOfHomotopy_hom₃\", \"CochainComplex.mappingCone.map_eq_mapOfHomotopy\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂_assoc\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₃\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂_map\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂_map_assoc\"], \"digest\": \"b6c68038f96009f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned mappingCone, degreewise-split and homotopy-cofiber declarations quantify over ordinary CochainComplex/HomologicalComplex objects; none is the arbitrary dg-category assertion. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. Passing through a dg representation is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an arbitrary dg category with shifts and graded split exact sequences compare an admissible quotient with its cone and invert cone maps using square zero endomorphisms",
+   "results": "{\"t\": \"2026-10-17T00:38:39Z\", \"tool\": \"leanfinder\", \"query\": \"In an arbitrary dg category with shifts and graded split exact sequences compare an admissible quotient with its cone and invert cone maps using square zero endomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃_assoc\", \"HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit\", \"HomotopyCategory.spectralObjectMappingCone_δ'_app\", \"CochainComplex.trianglehOfDegreewiseSplit\", \"CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃\", \"CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s\", \"CochainComplex.mappingConeHomOfDegreewiseSplitIso\"], \"digest\": \"88c13ecc6b70fd9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned mappingCone, degreewise-split and homotopy-cofiber declarations quantify over ordinary CochainComplex/HomologicalComplex objects; none is the arbitrary dg-category assertion. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:96-125 and DegreewiseSplit.lean:28-100. Passing through a dg representation is an additional argument, not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-abc-homotopy-category-triangulated",
@@ -98,5 +258,20 @@
   "group": "NL"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-abc-cone-homotopy",
+  "worker": "stage1",
+  "summary": "Read Stacks dg-category cone proofs and expanded all admissible-sequence, cone-map and square-zero calculations. Kept the statement and ancestry unchanged, made the comparison homotopy explicit, and proved cone-map invertibility without triangulatedness. No new node is needed: each supporting computation is written out from the supplied splittings and the dg Leibniz identity. Searched the project and Mathlib; ordinary-complex candidates do not state the arbitrary-dg-category assertion.",
+  "blueprint": "Realizes the generic cone and homotopy-comparison infrastructure in the recorded ancestry from prop-coef-integral-exceptional-adjoint, proof paragraph 2, the three displayed derived Hom objects (present in the master node file and, unchanged, in main-20261015 sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md), through lem-coef-dg-quotient-hom-cone and lem-coef-dg-abc-homotopy-category-triangulated. Steps 2-5 establish the admissible-quotient comparison; steps 6-9 establish cone functoriality and equivalence invariance needed in that triangulation proof."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-5c4bf735d",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-5c4bf735d (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all nine steps, the sole cited statement lem-coef-dgcat-model-structure (its dg-category definition sentence supports the Leibniz rule in step 1), and the citer lem-coef-dg-abc-homotopy-category-triangulated, whose steps 4 and 7 use (i) and (ii) exactly as stated. Sources read in Stacks dga.tex: 09P6 lemma-get-triangle (l.3491), Situation ABC (l.3545), 09P7 lemma-cone (l.3562), 09QP lemma-triseq (l.3833), 09QT lemma-analogue-third-isomorphism (l.4044) and 09QU lemma-cone-homotopy (1) (l.4109-4250). The statement is Situation ABC over Z, unchanged. (i) is 09QU(1) with e=b rho and t=i s - sigma delta; (ii) is 09P7 plus 09QT. I recomputed every identity by hand: dD=0, ds=aD, d pi=-Db, the closedness of e and t, et=1, te-1=d(-S pi rho), De+P=-d(pi rho), dc=0 with ci1=i2b and P2c=aP1 strictly, the null-product strictification d(Kv+v_L L)=v^2 (so [2-u] inverts [u] over Z), and the inverse-square and left/right inverse argument. All signs check, including the Leibniz signs on degree -1 maps, and the shift sign convention is coherent. I agree with the report's 09P7 typo note. Edge cases tested: zero cone, f=0 with h nonzero (c=1+ihP, square zero), split sequence, a=1 with z=0 (the cone is contractible), characteristic 2. There are no new nodes. rg over the DAG for the tags and for cone/homotopy found no duplicate: the module-cone and pretr nodes are different statements. No off-unit citations and no tool_uses. No SGA source. The Mathlib CochainComplex mappingCone candidates are not leaves. Fault repaired (B9): the item's blueprint.from.place and split_report.blueprint claimed the main-20261015 copy of prop-coef-integral-exceptional-adjoint is statement-only. In fact main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md contains the same proof paragraph 2 with the three RHom displays. Both texts are corrected in fixes/dag/nodes/sec-six-functors/lem-coef-dg-abc-cone-homotopy.json; only those two split-owned fields changed. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

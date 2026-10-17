@@ -3,44 +3,192 @@
  "blueprint": {
   "is": "det-sp-orientation-vector-bundle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Diagonal orientation of a vector bundle",
- "statement": "Let $\\pi:V\\to S$ be a vector bundle of rank $d$, with coefficients\n$\\mathbf Z/\\ell^n\\mathbf Z$. The diagonal orientation\n$\\omega_\\pi\\xrightarrow{\\sim}(\\mathbf Z/\\ell^n\\mathbf Z)_V(d)[2d]$ of\n[thm-pur-diagonal-dualizing-object] (constructed from the diagonal of $\\pi$,\nthe deformation to its normal bundle and vector-bundle purity) equals the\nvector-bundle orientation, i.e. the inverse of the vector-bundle purity\nisomorphism given by integration along the fibres of $\\pi$.",
+ "statement": "Work in the finite-coefficient purity conventions [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, $E=\\mathbf Q_\\ell$, and $n\\geq1$, so $\\Lambda=A_{E,n}=\\mathbf Z/\\ell^n\\mathbf Z$. Let $S$ be a finite-type $k$-scheme [def-weil-finite-type-morphism], and let $\\pi:V\\to S$ be a vector bundle of constant rank $d\\geq0$ with zero section [def-asd-vector-bundle-zero-section]. No separatedness of $S$ over $k$ is assumed. Use the small pro-etale categories, constructible exceptional inverse image and specified Tate twists of these conventions.\n\nLet $\\vartheta_\\pi:\\omega_\\pi=R\\pi^!\\Lambda_S\\xrightarrow{\\sim}\\Lambda_V(d)[2d]$ be the diagonal orientation of [thm-pur-diagonal-dualizing-object]: on separated affine target charts it is the composite of diagonal base change, the normalized deformation-to-the-normal-bundle comparison and vector-bundle purity, and these chart maps are glued as in that construction. Let $t_\\pi:R\\pi_!\\Lambda_V(d)[2d]\\to\\Lambda_S$ be integration along the fibres [def-amb-vector-integration], realized with the specified pro-etale twists and compact supports by [lem-pur-vector-integration-site-comparison]. Let $P_\\pi:\\Lambda_V(d)[2d]\\xrightarrow{\\sim}R\\pi^!\\Lambda_S$ be its exceptional adjoint transpose, the vector-bundle purity isomorphism whose inverse is specified in [cor-pur-vector-bundle-purity]. Then\n$$\\vartheta_\\pi=P_\\pi^{-1}.$$\nThus the diagonal orientation equals the vector-bundle orientation, with the same integration normalization.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
   "place": "node det-sp-orientation-vector-bundle, order None"
  },
  "stmt_deps": [
-  "thm-pur-diagonal-dualizing-object"
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-asd-vector-bundle-zero-section",
+  "thm-pur-diagonal-dualizing-object",
+  "def-amb-vector-integration",
+  "lem-pur-vector-integration-site-comparison",
+  "cor-pur-vector-bundle-purity"
  ],
  "proof": [
   {
-   "text": "*Step 1: translation.* Regard $V\\times_SV$ as a vector bundle over the first\nfactor, with projection $p_1$. The automorphism $\\tau:(v,w)\\mapsto(v,w-v)$ of\n$V\\times_SV$ over the first factor takes the diagonal to the zero section.\nIt preserves integration in the second factor: let the translation vector\nvary over $V$; its effect on the top compactly supported direct image\n$R^{2d}p_{1!}(\\mathbf Z/\\ell^n)(d)$, identified with the constant sheaf by\nintegration, is multiplication by a section of the locally constant sheaf of\nunits of $\\mathbf Z/\\ell^n\\mathbf Z$ on $V$. The locus where this unit is $1$\nis open and closed. It contains the zero section, where the translation is\nthe identity, and every geometric fibre of $V\\to S$ is connected, so it is\nall of $V$. Hence $\\tau$ identifies the pair $(p_1,\\Delta)$, together with the\nvector-bundle integration of $p_1$, with the pair (bundle, zero section)\ntogether with its own integration.",
-   "uses": [],
-   "elementary": null
+   "text": "Choose affine opens $U_i\\subset S$ trivializing the bundle, with $V_i=\\pi^{-1}U_i\\cong\\mathbf A^d_{U_i}$ and $j_i:V_i\\hookrightarrow V$, using [def-asd-vector-bundle-zero-section]. They cover $V$. The base $S$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. Each $U_i$ can be chosen of finite type over $k$: refine within a finite affine finite-type cover of $S$ by principal opens, whose coordinate rings are obtained by adjoining an inverse to a finitely generated $k$-algebra. The scheme $V_i$ is affine, separated and finite type over $k$, since its coordinate ring is $\\mathcal O(U_i)[x_1,\\ldots,x_d]$. The projection is smooth of pure dimension $d$ by [sbc-lem-affine-space-smooth]. Globally $\\pi$ is affine by the relative-spectrum description in [def-asd-vector-bundle-zero-section], hence quasi-compact and separated by [lem-weil-pbc-affine-morphism-permanence]; the finite polynomial charts make it locally of finite type and hence finite type. Smoothness and relative dimension are checked on these same charts by the affine-local characterization in [def-sbc-smooth-morphisms]. Thus all exceptional functors in the statement have their prescribed domain; every application of the DNC theorem below is made over one of the separated charts, not over a possibly nonseparated $V$.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-finite-type-morphism",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
+    "place": "Preparation for Steps 1-3: trivializing affine target charts and verification of the finite-type purity domain"
+   }
   },
   {
-   "text": "*Step 2: deformation of a zero section.* The deformation to the normal\nbundle of the zero section of a vector bundle $W\\to T$ is canonically the\nproduct $W\\times\\mathbf A^1$: in a local frame with coordinates $u$ on the\ndeformation space and $x$ on $W$, the map to the original bundle is $x=tu$,\nand these descriptions agree under linear changes of frame (a linear change\nof frame commutes with multiplication by $t$). Vector-bundle integration in\nthis product family is the pullback of the original integration along the\nprojection to $W$. The comparison of the deformation lemma is the identity\nat $t=1$ under these integrations; the constant family of identities has the\nsame property, so by the uniqueness in the deformation lemma the comparison\nis the identity at every $t$, in particular at $t=0$.",
-   "uses": [],
-   "elementary": null
+   "text": "For a chart put $p:V_i\\to U_i$, $W_i=V_i\\times_{U_i}V_i$, and write $p_1,p_2,\\Delta_i$ for its projections and diagonal. Let $\\alpha_i:C(p_1,\\Delta_i)\\xrightarrow{\\sim}\\omega_p$ be [lem-pur-diagonal-base-change], $\\delta_i:C(p_1,\\Delta_i)\\xrightarrow{\\sim}C(\\pi_{N_i},0)$ the normalized comparison of [thm-pur-dnc-invariance], and $\\beta_i:C(\\pi_{N_i},0)\\xrightarrow{\\sim}\\Lambda_{V_i}(d)[2d]$ the zero-section restriction of inverse integration-transposed purity [cor-pur-vector-bundle-purity, lem-pur-vector-integration-site-comparison]. Thus $\\vartheta_i=\\beta_i\\delta_i\\alpha_i^{-1}$. This is exactly the normalization specified in the statement of [lem-pur-projection-purity-agreement]. Under $Lj_i^*\\omega_\\pi\\cong\\omega_p$ from [thm-pur-cohomological-smoothness](3), the restriction of $\\vartheta_\\pi$ is this $\\vartheta_i$: these are the chart composites used in the diagonal construction named in the statement. More explicitly, restricting a chart to a smaller target open restricts its diagonal square; $p_2\\Delta=1$ and the pullback-composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition] identify its $\\alpha$ with the restricted one. The base-change clause of the DNC theorem identifies its $\\delta$, and the base-change clause of vector-bundle purity identifies its $\\beta$. The target identification is the finite-level Tate pullback of [lem-pur-vector-integration-site-comparison]. For two charts use affine opens inside their intersection; no intersection is assumed affine. Therefore the given glued diagonal construction has precisely these local maps, including after an isomorphism of a frame with affine space.",
+   "uses": [
+    "lem-pur-diagonal-base-change",
+    "thm-pur-dnc-invariance",
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-pur-projection-purity-agreement",
+    "thm-pur-cohomological-smoothness",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
+    "place": "Steps 1-3 and the unit composite: its three factors on affine frames and their restriction identifications"
+   }
   },
   {
-   "text": "*Step 3.* By Step 1 the first two isomorphisms of the diagonal orientation\n(the base change $\\omega_\\pi\\simeq L\\Delta^*\\omega_{p_1}$ and the deformation\ncomparison) are carried by $\\tau$ to those of the zero section, which are the\nidentity under integration by Step 2; the third is vector-bundle purity\nitself. Therefore the diagonal orientation of $\\pi$ is the vector-bundle\norientation.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-pur-projection-purity-agreement] over $Y=U_i$ with $K=\\Lambda_{U_i}$. This coefficient is bounded constructible and free of rank one, so its Tor amplitude is $[0,0]$; $E=\\mathbf Q_\\ell$ and every $n\\geq1$ satisfy that lemma. It gives equality of the specified smooth purity map $\\gamma_{p,\\Lambda}$ and the ordered affine-line comparison $\\Gamma_{p,\\Lambda}$. The latter is the transpose of the affine-space integration $t_p$. To check the ordered composition here, use [lem-amb-affine-space-top-trace]: its $d$-dimensional trace is the counit of the ordered composite of the $d$ affine-line adjunctions, each built from the restricted projective-line trace. The formula of [def-weil-pbc-composite-adjunction] says that adjoining a last projection $q$ changes the counit to $\\varepsilon_p\\circ Rp_!(\\varepsilon_q)$. The transpose of that counit is, by the same adjunction bijections in the opposite order, the composite of the affine-line transposes. Starting with the identity adjunction in rank zero, induction gives exactly the ordered recursion defining $\\Gamma_{p,\\Lambda}$. By [def-amb-vector-integration] this is the integration used on a trivializing frame; [lem-pur-vector-integration-site-comparison] identifies the actual integrations and their transposes on the two sites. Consequently $\\Gamma_{p,\\Lambda}=P_p$, not just an unspecified isomorphism with the same endpoints. This uses the existing affine model comparison, whose diagonal/DNC normalization is written in its statement; it does not apply general smooth-purity composition to prove the model case.",
+   "uses": [
+    "lem-pur-projection-purity-agreement",
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "def-amb-vector-integration",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
+    "place": "Steps 1-3 on the affine model, via the already existing normalized affine-space comparison; ordered counit calculation"
+   }
+  },
+  {
+   "text": "At the tensor unit the smooth purity map is $\\vartheta_i^{-1}$. Indeed [def-pur-smooth-purity-map] writes it as $\\theta_{p,\\Lambda}(1\\otimes\\vartheta_i^{-1})$ after the twist reassociation. The defining transpose of $\\theta_{p,\\Lambda}$ in [def-pur-co-smoothness](2), after the tensor unit identifications, is exactly the exceptional counit $Rp_!\\omega_p\\to\\Lambda$. Here the projection map at the tensor unit is the unit identification: in the formula of [def-exchange-projection], $\\mu$ is the tensor-unit comparison, the direct-image projection map is the transpose of the pullback counit and reduces to the identity by the adjunction triangle, and the open-extension projection sends $m\\otimes1$ to $m$. Hence its inverse is also the unit identification. The exceptional transpose of its counit is $1_{\\omega_p}$ by the adjunction triangle. Therefore $\\theta_{p,\\Lambda}$ is the unit identification, and Step 3 becomes $\\vartheta_i^{-1}=P_p$, or $\\vartheta_i=P_p^{-1}$. This explicitly cancels the tensor-unit factors instead of treating an equality of purity maps as an equality of orientations without justification.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "def-pur-co-smoothness",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
+    "place": "Step 3: pass from the affine comparison at the coefficient unit to the dualizing orientation"
+   }
+  },
+  {
+   "text": "The local map $P_p^{-1}$ of Step 4 is the restriction of $P_\\pi^{-1}$. The actual global integration is constructed by its affine-frame integrations in [def-amb-vector-integration]. The comparison [lem-pur-vector-integration-site-comparison] says that their pro-etale transposes are precisely the isomorphisms whose inverses appear in [cor-pur-vector-bundle-purity]. The base-change and adjunction compatibility of that corollary, applied to $U_i\\hookrightarrow S$, therefore identifies $Lj_i^*P_\\pi$ with $P_p$. Combined with Steps 2 and 4 this proves $Lj_i^*\\vartheta_\\pi=Lj_i^*(P_\\pi^{-1})$ on every $V_i$, under the same source and target comparisons. This argument uses actual integration maps and their adjunctions; it does not infer trace normalization from existence of a vector-bundle purity isomorphism.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-pur-vector-integration-site-comparison",
+    "cor-pur-vector-bundle-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
+    "place": "Step 3: base-change comparison of the actual integration-transposed vector-bundle orientation"
+   }
+  },
+  {
+   "text": "Set $T=\\Lambda_V(d)[2d]$ and $h=\\vartheta_\\pi P_\\pi\\in\\operatorname{Aut}(T)$. Step 5 gives $Lj_i^*h=1$ for all $i$. By [lem-pur-twist-sheaf-locally-free](3), $\\Lambda_V(1)$ is a finite locally constant line in degree zero; its $d$-fold tensor power $L=\\Lambda_V(d)$ is again a sheaf in degree zero, since locally it is the free rank-one coefficient module (the zeroth power is the unit). Remove the common shift $[2d]$. By [lem-weil-pbc-derived-single-fully-faithful], $h[-2d]$ is induced by a unique sheaf map $h_0:L\\to L$. Finite-coefficient pullback is exact termwise inverse image by [def-weil-derived-pullback-tensor-hom], so its restrictions are the identity sheaf maps on $V_i$. The site and constant coefficient restrictions on these opens are those of [lem-weil-proetale-weakly-etale-localization]. Apply uniqueness in [lem-pur-sheaf-hom-cover-gluing] to the cover $\\{V_i\\to V\\}$: $h_0$ and $1_L$ have the same restrictions, hence coincide. Full faithfulness and restoring the shift give $h=1_T$, so $\\vartheta_\\pi=P_\\pi^{-1}$. When $S$ is empty this is the unique equality; when $d=0$ the affine comparison, integration and deformation are all the rank-zero identity, and the same argument applies. No connectedness or reducedness assumption on $S$ is used.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
+    "place": "Step 3: global equality by shifted-sheaf full faithfulness and sheaf-map uniqueness; Stacks Tag 06XS (derived.tex, lemma-negative-exts (2)) and Tag 03EM (sites-modules.tex, lemma-internal-hom)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-finite-type-morphism",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sbc-smooth-morphisms",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-projection-purity-agreement",
+  "thm-pur-cohomological-smoothness",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-amb-affine-space-top-trace",
+  "def-weil-pbc-composite-adjunction",
+  "def-amb-vector-integration",
+  "def-pur-smooth-purity-map",
+  "def-pur-co-smoothness",
+  "def-exchange-projection",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
-  "place": "## Proof"
+  "place": "Proof Steps 1-3, localized in bundle frames; reuse of the existing affine projection comparison and explicit unit/counit and sheaf-descent arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a vector bundle the canonical orientation of the relative dualizing complex constructed by deforming the diagonal equals the purity orientation adjoint to integration along fibers",
+   "results": "8 hits: Orientation.map_apply, Orientation.map, Orientation.volumeForm_def, Module.Oriented.positiveOrientation, Orientation.volumeForm_neg_orientation, Orientation, Orientation.volumeForm_map, Orientation.volumeForm. The signatures concern orientations of real or ordered modules, not exceptional pullback on schemes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Iso",
+   "results": "12 hits: Scheme.SpecΓIdentity, Scheme.homeoOfIso, CategoryTheory.Iso.schemeIsoToHomeo, Scheme.SpecΓIdentity_app, Scheme.homeoOfIso_symm, Scheme.hom_base_inv_base, Scheme.inv_base_hom_base, their assoc variants, Scheme.mk, Scheme.local_affine, Scheme.coe_homeoOfIso. Scheme isomorphism and affine-chart results; none is a dualizing-object orientation comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|sectionInvariant|vectorBundlePurity|deformationToNormalCone",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The purity orientation of a vector bundle is the canonical orientation obtained by deformation of its diagonal",
+   "results": "8 hits: Module.Basis.orientation, Complex.orientation, Orientation.map_apply, VectorBundleCore.localTriv, Module.Basis.adjustToOrientation, VectorBundle.mk, VectorBundleCore.Index, VectorBundleCore.vectorBundle. These are linear orientations and topological vector bundles, not etale duality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image of the constant sheaf for affine space and algebraic vector bundles is canonically identified with the Tate twist shifted by twice the rank by the trace morphism",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.unitHomEquiv_comp_apply. These concern affine-space maps and ordinary module-sheaf pullbacks, not exceptional inverse image.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|upperShriek|exceptional.*inverse|integration.*fiber",
+   "results": "0 hits in AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -66,5 +214,99 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sp-orientation-vector-bundle",
+  "worker": "stage1",
+  "summary": "Made the implicit finite-type finite-coefficient chapter domain explicit, keeping possibly nonseparated bases. Reused the existing affine projection agreement and actual integration/site comparison; wrote the restriction of the three diagonal factors, the ordered counit calculation, the tensor-unit cancellation and shifted-sheaf gluing. No new nodes and no Lean attachment.",
+  "blueprint": "Current main-20261015 proof Steps 1 (translation) and 2 (standard DNC normalization) are reused through the explicitly normalized affine model in lem-pur-projection-purity-agreement in Steps 2-4; its statement specifies the same diagonal/DNC factors. Step 3 is realized by Steps 4-6, with affine-frame restrictions in Steps 1-2 and 5. The unit composite alpha^{-1}, delta, beta is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-pur-diagonal-base-change",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "thm-pur-dnc-invariance",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "cor-pur-vector-bundle-purity",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-pur-projection-purity-agreement",
+    "why": "Generic affine model comparison with the same diagonal/DNC/integration normalization, used only after bundle trivialization; the unit route is unchanged."
+   },
+   {
+    "node": "thm-pur-cohomological-smoothness",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Statement used for the domain, restriction or actual integration comparison in the diagonal/vector-bundle route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Statement used for shifted-sheaf equality and ordinary sheaf-map descent."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Statement used for shifted-sheaf equality and ordinary sheaf-map descent."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Statement used for shifted-sheaf equality and ordinary sheaf-map descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-projection-purity-agreement",
+  "thm-pur-cohomological-smoothness",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-badcd0139",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-badcd0139 (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 source with its translation/zero-section DNC proof, the unit, the citer det-sp-orientation-charts, every cited statement, and the full proofs of thm-pur-diagonal-dualizing-object and lem-pur-projection-purity-agreement. Statement: the added hypotheses (finite-type k-scheme S, E=Q_l, n>=1, constant rank d>=0, nonseparated S allowed) are what thm-pur-diagonal-dualizing-object and the site comparison need. Coefficients stay Z/l^n as in the source, and P_pi is direction-fixed. The description of vartheta_pi as the glued chart composite beta delta alpha^{-1} is exactly that theorem's DAG construction, so nothing is weakened. Step 1: pi is affine, hence separated and quasi-compact; the charts V_i = Spec O(U_i)[x] are separated finite type. Step 2: alpha, delta and beta restrict correctly. DNC hypotheses hold on separated charts. The frame isomorphism phi_i is etale, so it carries the orientation across; this is tersely written but correct. Step 3: lem-pur-projection-purity-agreement is used only through its statement (Y=U_i separated finite type, K=Lambda, any n), and its normalization is the same beta delta alpha^{-1}. I checked Gamma_{p,Lambda}=P_p from lem-amb-affine-space-top-trace (ordered composite counit) and def-weil-pbc-composite-adjunction. Step 4: I recomputed theta_{p,Lambda} = unit identification from def-pur-co-smoothness(2) and def-exchange-projection, so vartheta_p^{-1}=P_p. Step 5: t_pi|U_i = a_i by def-amb-vector-integration, so P_pi restricts to P_p. Step 6: degree-zero line twist, full faithfulness and sheaf-map uniqueness on {V_i}; no separatedness of V needed. Edge cases d=0, S empty, disconnected, nonreduced, l=2, no global frame and nonseparated S all hold. No new nodes, no duplicate (grepped orientation nodes), no cycle (transitive closure checked), no SGA. I accept as tool uses lem-pur-diagonal-base-change, lem-pur-vector-integration-site-comparison, lem-pur-projection-purity-agreement (its proof carries the source's translation and standard-pair DNC steps), lem-weil-pbc-proetale-derived-pullback-composition, lem-pur-twist-sheaf-locally-free, lem-weil-proetale-weakly-etale-localization, lem-pur-sheaf-hom-cover-gluing and sbc-lem-affine-space-smooth. The other declared entries are in-route or Mathlib leaves and need no declaration. The split_report 'why' texts are boilerplate; review.md gives the real reasons. Maintainer note: if lem-pur-projection-purity-agreement is re-split along its blueprint_update route via thm-pur-composition-coherence, recheck for a cycle through det-sp-orientation-charts. No files changed."
  }
 }

@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-trf-grothendieck-lefschetz-finite-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Grothendieck–Lefschetz formula over a finite ring",
- "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and the\ncoefficient conventions,\n$A=A_{E,n}$. Let $X_0$ be a\nseparated finite-type\n$k_0$-scheme, put $X=X_0\\times_{k_0}k$, let\n$(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a\nstrict Weil complex whose\nunderlying $K$ has an\nexplicit etale-origin\nwitness, and assume\nthe exceptional-adjoint admissibility\nhypotheses of [def-trf-admissibility] for the structure morphism\nand the fixed-point base changes, including those on a chosen\ncompactification\ndefined over $k_0$. For every integer $m\\geq1$,\n\n$$\n\\boxed{\n\\operatorname{tr}_A\\bigl(F_{c,K}^{\\,m}\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_A\\bigl(F_{y,m}\\mid K_{\\bar y}\\bigr).}\n$$\n\nEquivalently, in the closed-point form,\n\n$$\n\\operatorname{tr}_A\\bigl(F_{c,K}^{\\,m}\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\sum_{\\substack{x\\in|X_0|\\\\d_x\\mid m}}\nd_x\\,\\operatorname{tr}_A\n\\bigl(F_x^{\\,m/d_x}\\mid K_{\\bar x}\\bigr).\n$$\n\nBoth sides lie in $A$, and both sums are finite.",
+ "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and the\ncoefficient conventions,\n$A=A_{E,n}$. Let $X_0$ be a\nseparated finite-type\n$k_0$-scheme, put $X=X_0\\times_{k_0}k$, let\n$(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a\nstrict Weil complex whose\nunderlying $K$ has an\nexplicit etale-origin\nwitness, and assume\nthe exceptional-adjoint admissibility\nhypotheses of [def-trf-admissibility] for the structure morphism\nand the fixed-point base changes, including those on a chosen\ncompactification\ndefined over $k_0$. For every integer $m\\geq1$,\n\n$$\n\\boxed{\n\\operatorname{tr}_A\\bigl(F_{c,K}^{\\,m}\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_A\\bigl(F_{y,m}\\mid K_{\\bar y}\\bigr).}\n$$\n\nEquivalently, in the closed-point form,\n\n$$\n\\operatorname{tr}_A\\bigl(F_{c,K}^{\\,m}\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\sum_{\\substack{x\\in|X_0|\\\\\nd_x\\mid m}}\nd_x\\,\\operatorname{tr}_A\n\\bigl(F_x^{\\,m/d_x}\\mid K_{\\bar x}\\bigr).\n$$\n\nBoth sides lie in $A$, and both sums are finite.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.md",
   "place": "node thm-trf-grothendieck-lefschetz-finite-ring, order 2380"
@@ -19,53 +19,164 @@
   "def-weil-finite-field-fiber",
   "def-weil-pbc-etale-origin-witness",
   "def-weil-scheme-morphism-properties",
-  "def-weil-weil-sheaf-complex"
+  "def-trf-strict-weil-complex",
+  "def-trf-categorical-trace",
+  "def-trf-frobenius-operators",
+  "def-weil-closed-point-degree"
  ],
  "proof": [
   {
-   "text": "This is the case $\\psi=u_1$ of the coefficient-morphism trace formula\n[thm-trf-coefficient-morphism-trace-formula], whose hypotheses are\namong those assumed here; that theorem is proved by reduction to curves\n(closed subschemes of the affine line, the Weil $!$-pushforward along\nthe relative Frobenius factorization, and localization), and it uses\nno compactification of $X_0$.",
+   "text": "Use the braided-monoidal trace of [sk-d-trace], specialized to perfect $A$-complexes by [def-trf-categorical-trace]: for any perfect $A$-complex $P$ and endomorphism $v$, its defining evaluation/coevaluation composite is an element of $\\operatorname{End}_{D(A)}(A[0])\\cong A$. In Step 5 the coefficient-morphism theorem explicitly supplies that the global and stalk endomorphisms are endomorphisms of perfect complexes under the hypotheses verified there. Thus this is the trace convention for the whole argument; a trace on a possibly nonprojective cohomology module is never substituted for it.",
+   "uses": [
+    "sk-d-trace",
+    "def-trf-categorical-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+    "place": "paragraph 1: the coefficient-morphism trace formula; its perfect-complex trace convention"
+   }
+  },
+  {
+   "text": "Take $\\psi=u_1=\\varphi\\circ\\kappa_K:L\\Phi^*K\\to K$. The example in [def-trf-frobenius-coefficient-morphism] applies to this strict Weil pair, so $\\psi$ is a Frobenius coefficient morphism. Here is the equality of its recursive iterates with the maps of [def-trf-iterated-weil-map]. The base case is $\\psi_1=u_1$. If $m>1$ and $\\psi_{m-1}=\\varphi^{[m-1]}\\circ\\kappa^{(m-1)}_K$, expand the recursive definition to obtain\n$$\\psi_m=\\varphi\\circ\\kappa_K\\circ L\\Phi^*(\\varphi^{[m-1]})\\circ L\\Phi^*(\\kappa^{(m-1)}_K).$$\nNaturality of $\\kappa$ in [prop-trf-scheme-galois-comparison] rewrites the two middle arrows as $Lg_\\gamma^*(\\varphi^{[m-1]})\\circ\\kappa_{Lg_\\gamma^{(m-1)*}K}$. The cocycle law of [lem-trf-iterated-weil-cocycle] identifies $\\varphi\\circ Lg_\\gamma^*(\\varphi^{[m-1]})$ with $\\varphi^{[m]}$; multiplicativity of the comparison identifies $\\kappa_{Lg_\\gamma^{(m-1)*}K}\\circ L\\Phi^*(\\kappa^{(m-1)}_K)$ with $\\kappa^{(m)}_K$, after the canonical pullback composition identifications. Therefore $\\psi_m=\\varphi^{[m]}\\circ\\kappa^{(m)}_K=u_m$, completing induction.",
+   "uses": [
+    "def-trf-frobenius-coefficient-morphism",
+    "def-trf-iterated-weil-map",
+    "prop-trf-scheme-galois-comparison",
+    "lem-trf-iterated-weil-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+    "place": "paragraph 2, first two sentences: the coefficient morphism and equality of iterates"
+   }
+  },
+  {
+   "text": "For each $m\\geq1$, [def-trf-frobenius-coefficient-morphism] defines $F_{c,m}(\\psi)=T_{c_m}(\\psi_m)$ with $c_m=(\\operatorname{id}_X,\\Phi^m)$. Step 2 changes this to $T_{c_m}(u_m)$. The strict-Weil assertion of [prop-trf-graph-frobenius-operator], applied to the given $(K,\\varphi)$ and this positive integer $m$, gives $T_{c_m}(u_m)=F_{c,K}^{\\,m}$. This identifies the global operators as endomorphisms of the same compact-support complex.",
+   "uses": [
+    "def-trf-frobenius-coefficient-morphism",
+    "prop-trf-graph-frobenius-operator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+    "place": "paragraph 2: F_{c,m}(u_1)=T_c(u_m)=F_{c,K}^m"
+   }
+  },
+  {
+   "text": "Let $y\\in X_0(\\mathbf F_{q^m})$. By [thm-trf-frobenius-fixed-points] its geometric lift $\\bar y:s=\\operatorname{Spec}k\\to X$ satisfies $\\Phi^m\\bar y=\\bar y$. Write $M=\\operatorname{For}(K,\\varphi)$ and $S_y(N)=\\operatorname{Fib}_s(L\\bar y^*N)$ for the ordinary coefficient-complex stalk functor specified by [def-trf-frobenius-operators]; thus $K_{\\bar y}=S_y(M)$. Let $b_y=\\rho_{y,m}:S_y(M)\\xrightarrow{\\sim}S_y(L\\Phi^{m*}M)$ be that definition's pullback identification for the fixed-point equality. Using the specified comparison of [prop-trf-scheme-galois-comparison], the operator definition gives\n$$\\tau_{y,m}=S_y(\\kappa^{(m)}_M)\\circ b_y,\\qquad F_{y,m}=S_y(\\varphi^{[m]})\\circ\\tau_{y,m}.$$\nThe stalk endomorphism in the coefficient-morphism formula is obtained by precomposing the stalk of $\\psi_m$ with this same $b_y$. Apply the functor $S_y$ to Step 2 and use preservation of composition to obtain\n$$\\psi_{m,\\bar y}=S_y(u_m)\\circ b_y=S_y(\\varphi^{[m]})\\circ S_y(\\kappa^{(m)}_M)\\circ b_y=S_y(\\varphi^{[m]})\\circ\\tau_{y,m}=F_{y,m}.$$\nAll terms here are morphisms of ordinary $A$-complexes, with the same source and target $K_{\\bar y}$.",
+   "uses": [
+    "thm-trf-frobenius-fixed-points",
+    "def-trf-frobenius-operators",
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+    "place": "paragraph 2: fixed points and the stalk transport induced by kappa^(m)"
+   }
+  },
+  {
+   "text": "Apply [thm-trf-coefficient-morphism-trace-formula] to the given $X_0$, $K$ and the coefficient morphism $\\psi$ of Step 2. Its field datum and ring $A=A_{E,n}$ are unchanged. Its separated finite-type and finite-Tor constructibility hypotheses, explicit étale-origin witness, and the exceptional admissibility requirements on the graphs and fixed-point base changes on the chosen $k_0$-compactification are precisely those assumed in the item; its statement does not require an invertible coefficient map. It gives\n$$\\operatorname{tr}_A(F_{c,m}(\\psi)\\mid R\\Gamma_c(X,K))=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\\operatorname{tr}_A(\\psi_{m,\\bar y}\\mid K_{\\bar y}).$$\nSubstituting the endomorphism equalities of Steps 3 and 4 gives the boxed rational-point formula. The cited theorem carries the unit's finite-scheme, affine-line, affine-induction and localization argument, so this specialization keeps that route.",
    "uses": [
     "thm-trf-coefficient-morphism-trace-formula"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+    "place": "paragraph 1 and paragraph 2: substitute psi=u_1 into the coefficient-morphism formula"
+   }
   },
   {
-   "text": "The scheme-Frobenius map $u_1=\\varphi\\circ\\kappa_K$ of\n[def-trf-iterated-weil-map] is an invertible Frobenius coefficient\nmorphism of [def-trf-frobenius-coefficient-morphism] (the example there),\nand its iterates are the scheme-Frobenius maps $u_m$: both are built by\nthe same recursion, using the cocycle identity\n[lem-trf-iterated-weil-cocycle] for $\\varphi^{[m]}$ and the\nmultiplicativity of $\\kappa^{(m)}$ in\n[prop-trf-scheme-galois-comparison]. By\n[prop-trf-graph-frobenius-operator],\n$F_{c,m}(u_1)=T_c(u_m)=F_{c,K}^{\\,m}$. For\n$y\\in X_0(\\mathbf F_{q^m})$ the geometric point $\\bar y$ is fixed by\n$\\Phi^m$ ([thm-trf-frobenius-fixed-points]), and the stalk map\n$u_{m,\\bar y}=\\varphi^{[m]}_{\\bar y}\\circ\\kappa^{(m)}_{K,\\bar y}$ is the\nlocal geometric Frobenius $F_{y,m}=\\varphi^{[m]}_{\\bar y}\\circ\\tau_{y,m}$\nof [def-trf-frobenius-operators], since at the fixed point $\\kappa^{(m)}$\ninduces the stalk transport $\\tau_{y,m}$\n([prop-trf-scheme-galois-comparison]). Substituting into\n[thm-trf-coefficient-morphism-trace-formula] gives the boxed formula.\nGrouping the rational points above a closed point and applying\n[lem-trf-frobenius-degree-formula] and\n[lem-trf-local-frobenius-conjugacy] gives the second formula.",
+   "text": "Group the rational-point sum by the underlying closed point $x$. For completeness a rational point has closed image: on an affine neighborhood its coordinate homomorphism has image a finite integral domain in $\\mathbf F_{q^m}$, hence a field; any specialization lies in an affine neighborhood also containing the original point, where its prime is maximal. Its residue field is thus a subfield of $\\mathbf F_{q^m}$, and the degree tower gives $d_x\\mid m$. Conversely [lem-trf-local-frobenius-conjugacy](1) gives exactly $d_x$ geometric lifts over a degree-$d_x$ closed point; when $d_x\\mid m$ all these lifts are fixed by $\\Phi^m$. The fixed-point identification of [thm-trf-frobenius-fixed-points] makes them exactly the $d_x$ rational points above $x$. Choose one lift over $\\mathbf F_{q^{d_x}}$ and let $F_x$ be its one-circuit operator. For every rational point $y$ above $x$, [lem-trf-frobenius-degree-formula] gives\n$$\\operatorname{tr}_A(F_{y,m}\\mid K_{\\bar y})=\\operatorname{tr}_A(F_x^{m/d_x}\\mid K_{\\bar x}).$$\nThus the entire group contributes $d_x$ times this element of $A$. The conjugacy assertion of [lem-trf-local-frobenius-conjugacy](3) makes the one-circuit conjugacy class independent of the chosen lift. Summing the groups gives exactly the asserted closed-point formula; the integer $d_x$ acts by repeated addition in $A$.",
    "uses": [
-    "def-trf-iterated-weil-map",
-    "def-trf-frobenius-coefficient-morphism",
-    "lem-trf-iterated-weil-cocycle",
-    "prop-trf-scheme-galois-comparison",
-    "prop-trf-graph-frobenius-operator",
+    "lem-trf-local-frobenius-conjugacy",
     "thm-trf-frobenius-fixed-points",
-    "def-trf-frobenius-operators",
-    "thm-trf-coefficient-morphism-trace-formula",
-    "lem-trf-frobenius-degree-formula",
-    "lem-trf-local-frobenius-conjugacy"
+    "lem-trf-frobenius-degree-formula"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+    "place": "paragraph 2, last sentence: group rational points by closed points"
+   }
+  },
+  {
+   "text": "The fixed-scheme isomorphism of [thm-trf-frobenius-fixed-points] has finite left side and one disjoint $\\operatorname{Spec}k$ component for each member of $X_0(\\mathbf F_{q^m})$. Hence this rational-point set is finite. Step 6 partitions it into the nonempty groups of size $d_x$ indexed by $d_x\\mid m$, so the closed-point sum also has a finite index set. The two expressions are equal by this finite regrouping, and all summands and the global trace lie in $A$ by the trace convention in Step 1 and the perfectness supplied in Step 5. This proves the finiteness and value assertions as well as both displayed identities.",
+   "uses": [
+    "thm-trf-frobenius-fixed-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+    "place": "paragraph 2, final grouping argument: finiteness of both sums"
+   }
   }
  ],
  "proof_deps": [
-  "thm-trf-coefficient-morphism-trace-formula",
-  "def-trf-iterated-weil-map",
+  "sk-d-trace",
+  "def-trf-categorical-trace",
   "def-trf-frobenius-coefficient-morphism",
-  "lem-trf-iterated-weil-cocycle",
+  "def-trf-iterated-weil-map",
   "prop-trf-scheme-galois-comparison",
+  "lem-trf-iterated-weil-cocycle",
   "prop-trf-graph-frobenius-operator",
   "thm-trf-frobenius-fixed-points",
   "def-trf-frobenius-operators",
-  "lem-trf-frobenius-degree-formula",
-  "lem-trf-local-frobenius-conjugacy"
+  "thm-trf-coefficient-morphism-trace-formula",
+  "lem-trf-local-frobenius-conjugacy",
+  "lem-trf-frobenius-degree-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-grothendieck-lefschetz-finite-ring.proof.md",
+  "place": "both proof paragraphs, with the iterate induction, specified stalk transport and finite regrouping expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Lefschetz trace formula for finite coefficient Weil complexes compact support cohomology sum of local Frobenius traces",
+   "results": "8 hits: FiniteField.algebraMap_trace_eq_sum_pow (Mathlib/FieldTheory/Finite/Trace), trace_eq_sum_automorphisms (Mathlib/RingTheory/Trace/Basic), and unrelated algebraic and representation traces. None concerns sheaf cohomology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Lefschetz|trace_globalOperator|stalkFrobenius|trace.*[Ff]robenius",
+   "results": "6 hits: Mathlib/FieldTheory/AxGrothendieck.lean:31 and Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean:19,27,40,221,233, all about the model-theoretic Lefschetz principle, not a trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace of geometric Frobenius on compactly supported etale cohomology is the sum of its stalk traces over rational points",
+   "results": "8 hits: LinearMap.trace_eq_sum_trace_restrict and variants (Mathlib.Algebra.DirectSum.LinearMap), Matrix.trace_sum and Matrix.trace, trace_eq_sum_automorphisms and trace_eq_sum_embeddings (Mathlib.RingTheory.Trace.Basic), LinearMap.trace. These are linear/algebraic traces, not the geometric formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz fixed point theorem for an endomorphism of an etale sheaf complex with finite ring coefficients",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support (Mathlib/RingTheory/Etale/Locus), Algebra.FormallyEtale.instForallOfFinite (Mathlib/RingTheory/Etale/Pi), AlgebraicGeometry.IsEtale.of_comp (Mathlib/AlgebraicGeometry/Morphisms/Etale), and other formal-etale algebra results. No cohomological fixed-point formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\"",
+   "results": "12 hits: frobenius, iterateFrobenius and their elementary identities in Mathlib.Algebra.CharP.Lemmas and Mathlib.Algebra.CharP.Frobenius; no sheaf trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompact.*[Cc]ohomology|[Ll]ocal.*[Ff]robenius|[Ll]efschetz.*trace",
+   "results": "1 hit: Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean:217, a local notation for a Frobenius ring equivalence, not compact cohomology or a trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -111,5 +222,34 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-formula"
+ "unit": "sk-thm-trace-formula",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-grothendieck-lefschetz-finite-ring",
+  "worker": "stage1",
+  "summary": "No new nodes. Specialize the existing coefficient-morphism trace formula to u_1, prove equality of the recursive iterates by naturality and the cocycle, identify global and local operators, and explicitly regroup the finite point sum. Replace the unrelated field-stage Weil-category statement dependency by the finite-stage strict-pair definition and add the trace/operator definitions. The mathematical statement is unchanged; only whitespace after a TeX substack row separator is adjusted for the preflight parser.",
+  "blueprint": "Current main-20261015 proof paragraph 1 is Step 5; paragraph 2 iteration is Step 2, global identification Step 3, fixed-stalk identification Step 4, and final closed-point grouping Steps 6-7. Step 1 fixes the perfect-complex trace convention; the coefficient-morphism theorem explicitly supplies perfectness in Step 5. The coefficient-morphism theorem realizes the unit's four reduction steps; no new trace-formula lemma is introduced.",
+  "tool_uses": [
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Its natural multiplicative pullback comparison identifies the coefficient iterates and canonical stalk transport; this is a generic Frobenius comparison, not a replacement for the trace-formula reduction."
+   },
+   {
+    "node": "thm-trf-frobenius-fixed-points",
+    "why": "Its fixed-scheme description identifies the rational-point index and proves its finiteness; the trace-formula unit consumes this geometric input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-trf-scheme-galois-comparison",
+  "thm-trf-frobenius-fixed-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-a44800ff0",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-a44800ff0 (reviewer sub-agent of L); spot-checked: I read the item, the unit and chapter records, the main-20261015 statement, proof and section, and the statement of every cited node. The item statement is identical to main-20261015 apart from a newline after the substack row separator; nothing is weakened. The stmt_deps now cite def-trf-strict-weil-complex (finite-stage pairs over D^b_ctf(X,A)) in place of the rational def-weil-weil-sheaf-complex, which is correct. The added trace, Frobenius-operator and closed-point-degree definitions are the right ones. The delivery creates no new nodes. Step 2: I recomputed the induction psi_m=u_m from the recursion, the naturality of kappa at phi^[m-1], the cocycle with exponents (1,m-1) used only for m>1, and the multiplicative kappa^(m); the comparison's hypotheses (finite A killed by ell^n) hold. Step 3: the graph-Frobenius proposition gives T_c(u_m)=F_c,K^m, an equality of endomorphisms of the same object. Step 4: rho, tau and F_y,m come straight from def-trf-frobenius-operators(2), and functoriality of Fib_s∘Lȳ^* applied to Step 2 gives psi_m,ȳ=F_y,m. Step 5: the coefficient-morphism theorem's hypotheses are met. It allows non-invertible psi, the exceptional graph leg is the identity, and the theorem says admissibility is automatic at the finite stage. It also states that both sides are perfect-complex traces. Its proof does not depend on the item, so there is no cycle. Step 6: closed image and d_x|m are checked. The lifts come from conjugacy(1), the d_x rational points from the fixed-point bijection, the trace equality from the degree formula, and the multiplier d_x is repeated addition with no division. Step 7: finiteness follows from the fixed-scheme coproduct. Route: the cocycle, graph-operator, conjugacy and degree-formula nodes are on route through sk-d-weil and sk-c-proper-global. I accept the two declared tool_uses, prop-trf-scheme-galois-comparison and thm-trf-frobenius-fixed-points; the blueprint proof itself cites both, and they serve as Frobenius geometry, not as a replacement for the unit's route. The realized fields are correct: the coefficient-morphism theorem's proof carries the four unit steps, with d-lines for the P^1 step. No SGA is cited. The Q-bar, E-model and condensed trace-formula nodes are not duplicates. Edge cases checked: m=1, empty X_0, K=0, Spec F_{q^d}, ell dividing d, and [A--ell-->A] over Z/ell^2. Two wording points need no change: 'precisely' in Step 5, and the implicit quasi-compactness in Step 6. No fixes."
+ }
 }
