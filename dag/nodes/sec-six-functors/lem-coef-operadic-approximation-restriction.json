@@ -29,9 +29,93 @@
   "def-coef-infinity-fibrations",
   "def-coef-left-module-operadic-encoding"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the symmetric pattern and the recognition theorem [lem-coef-symmetric-operadic-fibration-recognition]. Write $P^{\\mathrm{in}}$ for $P$ with inert edges marked, $C^m$ for $C$ with exactly the edges whose $f$-images are inert marked, and $E^m$ for $E$ with exactly the $r$-cocartesian edges over inert edges of $P$ marked. The item supplies every hypothesis of that theorem for $r$: categorical fibrancy, inert lifts, the fibre Segal comparisons and the mapping-space comparisons over every base edge, including the terminal empty products. Thus $r:E^m\\to P^{\\mathrm{in}}$ is a fibration in the symmetric pattern model $\\mathsf M$. By [lem-coef-categorical-pattern-model-calculus] this is a marked enriched model category with monomorphism cofibrations. All of its objects, in particular $C^m$ and $P^{\\mathrm{in}}$, are cofibrant.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.4.6 and Proposition 2.3.3.30 with the identity approximation; the relative output-product hypotheses. Read online; the relative enriched-model argument is expanded by the worker."
+   }
+  },
+  {
+   "text": "The marked map $f:C^m\\to P^{\\mathrm{in}}$ is well-defined because its marking was pulled back from the inert edges of $P$. Apply [lem-coef-operadic-approximation-marked-equivalence] to exactly the given $f$. Its inert locally cocartesian projections, active cartesian lifts after the categorical-fibration factorization, and equivalence on colour fibres are the hypotheses of the item. Consequently this marked map is a weak equivalence of $\\mathsf M$. The theorem includes general approximations; no equivalence on colour fibres of a chosen factor needs to be inferred by taking a possibly non-homotopy strict pullback.",
+   "uses": [
+    "lem-coef-operadic-approximation-marked-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 2.3.3.6 and 2.3.3.25; Theorem 2.3.3.23(1) and Remark 2.3.3.27. Read online; the relative enriched-model argument is expanded by the worker."
+   }
+  },
+  {
+   "text": "Form $\\mathsf N=\\mathsf M/P^{\\mathrm{in}}$ using [lem-coef-model-over-structure]. Its weak equivalences, cofibrations and fibrations are created in $\\mathsf M$. Its initial object is the empty marked simplicial set mapping to $P$, so every object of $\\mathsf N$ is cofibrant by the monomorphism criterion of [lem-coef-categorical-pattern-model-calculus]. The object $R=(E^m\\xrightarrow r P^{\\mathrm{in}})$ is fibrant by step 1. Put $A=(C^m\\xrightarrow f P^{\\mathrm{in}})$ and $B=(P^{\\mathrm{in}}\\xrightarrow{\\mathrm{id}}P^{\\mathrm{in}})$. The commuting triangle $u:A\\to B$, whose underlying marked map is $f$, is a weak equivalence of $\\mathsf N$ by step 2. This uses the model structure over the fixed base $P^{\\mathrm{in}}$, without any properness assertion.",
+   "uses": [
+    "lem-coef-model-over-structure",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.4.6, followed by the ordinary slice-model construction. Read online; the relative enriched-model argument is expanded by the worker."
+   }
+  },
+  {
+   "text": "Here is the relative enriched mapping argument. For $a:X\\to P^{\\mathrm{in}}$, let $\\mathcal H_P(X,R)$ be the marked object whose maps from a marked parameter $L$ are the maps $X\\times L\\to E^m$ over $P^{\\mathrm{in}}$. Equivalently it is the fibre at $a$ of $\\mathcal H(X,E^m)\\to\\mathcal H(X,P^{\\mathrm{in}})$, using the enrichment of [lem-coef-categorical-pattern-model-calculus]. The slice tensor is $X\\times L\\to X\\to P$, and its cotensor is the pullback $R^L= (E^m)^L\\times_{(P^{\\mathrm{in}})^L}P^{\\mathrm{in}}$, where the last map is the constant-diagram map. The displayed enriched adjunction gives an ordinary adjunction $L\\mapsto R^L:\\mathsf K\\rightleftarrows\\mathsf N^{\\mathrm{op}}:\\mathcal H_P(-,R)$. For a cofibration $X\\to Y$ over $P$, the map $\\mathcal H_P(Y,R)\\to\\mathcal H_P(X,R)$ is the pullback, at the specified map $Y\\to P$, of the enriched corner map for $X\\to Y$ and the fibration $E^m\\to P^{\\mathrm{in}}$. That corner is a fibration in the marked categorical model $\\mathsf K$, trivial when $X\\to Y$ is trivial. Pullbacks retain these lifting properties, since a lifting square after pullback is the same lifting square together with its fixed base map. Thus this right adjoint preserves fibrations and trivial fibrations in the opposite slice. By the adjunction, its left adjoint preserves the corresponding left lifting classes, namely cofibrations and trivial cofibrations; this is the hypothesis on a Quillen adjunction in [lem-coef-model-infinity-derived-adjunction]. Hence $\\mathcal H_P(-,R):\\mathsf N^{\\mathrm{op}}\\to\\mathsf K$ is right Quillen. The opposite model structure interchanges cofibrations and fibrations and keeps weak equivalences, directly by reversing the two weak factorization systems in [lem-coef-model-infinity-derived-adjunction].",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.4.6 via the categorical-pattern enriched model axiom; explicit slice cotensor and corner-map calculation. Read online; the relative enriched-model argument is expanded by the worker."
+   }
+  },
+  {
+   "text": "By [lem-coef-model-infinity-derived-adjunction], a right Quillen functor preserves weak equivalences between fibrant objects. Every object of $\\mathsf N^{\\mathrm{op}}$ is fibrant, since every object of $\\mathsf N$ is cofibrant. Apply this assertion to $u^{\\mathrm{op}}:B\\to A$ from step 3 and the right Quillen functor from step 4. The actual precomposition map\n$$u^*:\\mathcal H_P(B,R)\\longrightarrow\\mathcal H_P(A,R)$$\nis a weak equivalence in $\\mathsf K$. Both endpoints are fibrant: apply that same right Quillen functor to their terminal maps in $\\mathsf N^{\\mathrm{op}}$. By [lem-coef-marked-point-cartesian-model] these endpoints are quasicategories marked at precisely their equivalences. The localization comparison of [lem-coef-simplicial-model-nerve-localization], and the identification of the fibrant marked-point enrichment with $\\mathrm{Cat}_\\infty$ in [lem-coef-marked-point-cartesian-model], turn this weak equivalence into an equivalence of the represented full infinity categories, for the specified map $u^*$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Marked categorical enrichment of the operadic model; general right Quillen weak-equivalence invariance and its localization comparison. Read online; the relative enriched-model argument is expanded by the worker."
+   }
+  },
+  {
+   "text": "Unpack the underlying simplicial sets using [lem-coef-categorical-pattern-model-calculus]. An $n$-simplex of $\\mathcal H_P(B,R)$ is a map $P\\times(\\Delta^n)^\\flat\\to E^m$ over the projection to $P$ preserving markings. Since only degenerate parameter edges are marked, this says that each vertex section carries every inert edge of $P$ to an $r$-cocartesian edge, with no extra restriction on transformations or their higher simplices. Hence the underlying quasicategory is precisely $\\operatorname{Sect}^{\\mathrm{inert}}_P(E)$. An $n$-simplex of $\\mathcal H_P(A,R)$ is a marking-preserving map $C^m\\times(\\Delta^n)^\\flat\\to E^m$ whose composite with $r$ equals $f$ after projection to $C$. Its vertex lifts therefore carry every edge marked in $C^m$ to an $r$-cocartesian edge, and its parameter transformations are unrestricted. These are precisely the simplices of $\\operatorname{Fun}^{\\mathrm{inert}}_P(C,E)$. In every degree the map $u^*$ is $h\\mapsto h\\circ(f\\times\\mathrm{id}_{\\Delta^n})$. This identifies step 5's equivalence with the restriction in the statement, on objects, noninvertible transformations and all higher simplices. Precomposition commutes with postcomposition by any compatible marked target map and with restriction to a base suboperad, since both composites send a simplex $h$ to the same composite map. This proves the stated naturality whenever that restriction is formed. Only model structures on marked simplicial sets were used; no limits, colimits or presentability of the operadic fibres were required.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.3.25; relative section formulation of Theorems 2.3.3.23(1) and 2.3.3.26; degreewise identification of the specified restriction. Read online; the relative enriched-model argument is expanded by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-symmetric-operadic-fibration-recognition",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-operadic-approximation-marked-equivalence",
+  "lem-coef-model-over-structure",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-simplicial-model-nerve-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent finite-coefficient derived mapping-complex adjunction before R lim: marked operadic foundations. Agent expansion of Higher Algebra 2.1.4.6 and 2.3.3.23/26; HA was read online, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +158,24 @@
    "results": "{\"t\": \"2026-10-16T22:29:41Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction equivalence for algebras over an infinity operad using active cartesian lifts and inert projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"InverseSystem.PEquivOn.restrict_equiv\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"SSet.OneTruncation₂.nerveEquiv\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\"], \"digest\": \"9271909d2c18f789\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search; returned ordinary simplicial/nerve/category declarations, not the stated coloured infinity-operadic structure or restriction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of inert preserving coherent sections along an operadic approximation is an equivalence of infinity categories",
+   "results": "{\"t\": \"2026-10-16T23:49:01Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of inert preserving coherent sections along an operadic approximation is an equivalence of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\"], \"digest\": \"a9f9f61d540b770d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve and homotopy-category equivalences are not marked operadic restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction equivalence of coherent inert preserving sections of an infinity operadic fibration",
+   "results": "{\"t\": \"2026-10-16T23:49:51Z\", \"tool\": \"leansearch\", \"query\": \"Restriction equivalence of coherent inert preserving sections of an infinity operadic fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes\", \"TopCat.Presheaf.restrictOpen.congr_simp\", \"CategoryTheory.Equivalence.precoherent_isSheaf_iff\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.Limits.Types.sectionsEquiv\", \"InverseSystem.PEquivOn.restrict\", \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\"], \"digest\": \"a7ea4de815deada4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf sections, covering-dense restrictions and generic fibration predicates do not state this infinity-operadic result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-module-section-model",
@@ -85,5 +183,21 @@
   "group": "Q118"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-approximation-restriction",
+  "worker": "stage1",
+  "summary": "Replaced the earlier invalid categorical-fibration restatement (which omitted colour equivalence) and unnecessary source-equivalence lemma by two independent inputs: marked operadic weak equivalence of an approximation and recognition of the relative target as a preoperadic model fibration. Six steps construct the slice enriched Hom, prove it right Quillen by an explicit corner-map calculation, apply weak-equivalence invariance, and identify the entire simplicial restriction. The item statement and hypotheses are unchanged. Second reading made the empty cone and Quillen lifting argument explicit, expanded the second degreewise Hom identification, and corrected source annotations; the item statement is unchanged.",
+  "blueprint": "Proof paragraph 2, middle finite-coefficient derived mapping-complex comparison: operadic restriction theorem used to recover coherent fixed-algebra modules from the explicit simplicial prism, in the monadic-bar foundation. The steps supply the marked-section foundation for the finite mapping-complex comparison in paragraph 2.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-82385ff63",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-82385ff63 (reviewer sub-agent of L); spot-checked: PASS, with no fixes. Caveat: Higher Algebra is not archived in the project, so I could not open it. I checked both new statements against the HA definitions and theorems I know (2.3.3.6, 2.3.3.25, 2.3.3.23/26 including the unary-equivalence hypothesis, and 2.1.4.6), and I also derived them from the DAG's own nodes. Item: statement unchanged. Its hypotheses on r match def-coef-left-module-operadic-encoding clause for clause, and the approximation clauses match HA 2.3.3.6. Step 1: the recognition hypotheses are exactly the item's, n=0 included, and every object is cofibrant because cofibrations are monomorphisms. Step 2: the marked-equivalence node is applied to the given f. Its strict-fibre caution is unnecessary but harmless, because ⟨1⟩ is alone in its isomorphism class in Fin_* with no nontrivial automorphisms. Step 3: the Mathlib slice-model leaf makes u a weak equivalence between cofibrant objects over P^in, with no properness used. Step 4: I verified the adjunction Hom_N(X,R^L)=Hom_K(L,H_P(X,R)) and that H_P(Y,R)->H_P(X,R) is the pullback of the enriched corner map along the vertex Y->P, so the right adjoint preserves fibrations and trivial fibrations, hence Quillen. Step 5: the derived-adjunction node's Ken Brown clause gives a K-weak equivalence between fibrant D^natural objects. By marked-point-cartesian-model (Map^sharp = core of Fun) together with the localization node, this is a categorical equivalence. Step 6: an elementary n-simplex unpacking; the flat parameter means only the vertexwise inert condition is imposed, and u^* is h -> h∘(f×id). New node marked-equivalence: by the pattern mapping test it is equivalent to the absolute HA 2.3.3.23 algebra equivalence, so it is true. Tested on id, on Cut: Δ^op -> Assoc, and on the fold map P⊔P->P, which shows the colour hypothesis is needed. It is strictly smaller than the item, which is relative over P. New node recognition: the hypotheses make E an ∞-operad, with markings agreeing, so r is a fibration of fibrant objects in the HA 2.1.4.6 pattern model. Checked at n=0 and at r=id. No duplicates: the existing operadic nodes are nonsymmetric, generic model-calculus, or LM definitions (whole-DAG rg search). No cycle from the item (DFS over 408 ancestors). All proof deps are in unit sk-prop-sf-biduality-general, so tool_uses is empty. B1–B7 hold. The blueprint from-place is the item's paragraph-2 ancestor."
+ }
 }

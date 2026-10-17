@@ -3,34 +3,267 @@
  "blueprint": {
   "is": "sk-lem-sf-open-ctf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero preserves the finite-Tor constructible category",
- "statement": "Let $j:U\\hookrightarrow Y$ be an open immersion admitting a compactification,\nlet $a\\le b$ be integers, and let $K$ be a bounded constructible complex of\n$\\Lambda$-modules on $U$ with cohomology concentrated in $[a,b]$ and Tor\namplitude in $[a,b]$. Then $Rj_!K$ is bounded constructible on $Y$, with\ncohomology concentrated in $[a,b]$ and Tor amplitude in $[a,b]$; in particular\n$j_!$ carries $\\Dctf(U,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$ without moving the\ninterval.",
+ "statement": "Use the standing finite-field, coefficient and finite-type scheme conventions of [sk-def-sf-operations]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$. Let $j:U\\hookrightarrow Y$ be an open immersion of finite-type $k$-schemes admitting a compactification, and let $a\\le b$ be integers. Use the small pro-étale coefficient categories: finite coefficients, derived-complete integral coefficients, raw rationalization, and the common finite-stage category, as in [def-weil-finite-tor-amplitude].\n\nAt $\\Lambda=A_{E,n}$ or $\\mathcal O_E$, let $K\\in\\Dctf(U,\\Lambda)$ have cohomology concentrated in $[a,b]$ and Tor amplitude in $[a,b]$. At $\\mathcal O_E$ the latter means that every derived finite reduction has Tor amplitude in this same interval, independently of the reduction exponent. Then $Rj_!K\\in\\Dctf(Y,\\Lambda)$ has cohomology concentrated in $[a,b]$ and the same Tor interval.\n\nAt $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, where $\\Dctf=\\Dbc$ by definition, $Rj_!$ preserves $\\Dbc$ and every cohomological interval $[a,b]$, with the interval interpreted by the standard pairs of [def-weil-constructible-standard-tstructure]. No additional numerical Tor-interval condition is defined at these two stages by [def-weil-finite-tor-amplitude]. Thus extension by zero carries $\\Dctf(U,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$ at every coefficient stage, without changing any interval asserted above.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/_section.md",
   "place": "node sk-lem-sf-open-ctf, order 2499"
  },
  "stmt_deps": [
-  "sk-def-sf-operations"
+  "sk-def-sf-operations",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-constructible-standard-tstructure"
  ],
  "proof": [
   {
-   "text": "$j_!$ is exact, so\n$\\mathcal H^r(j_!K)=j_!\\mathcal H^r(K)$ and the range does not grow; a finite\nstratification of $U$ witnessing constructibility, together with the closed\ncomplement $Y\\setminus U$, stratifies $Y$; and the amplitude is tested by\nrestricting an arbitrary sheaf on $Y$ to $U$.",
-   "uses": [],
-   "elementary": null
+   "text": "Keep the scheme and coefficient conventions of [sk-def-sf-operations]; in particular no separatedness of $U$ or $Y$ is added. The finite-type schemes are Noetherian: $\\operatorname{Spec}k$ is Noetherian (its ring has just the ideals $0,k$), so apply [lem-weil-pbc-finite-type-over-noetherian]. By [def-weil-constructible-subset] every subset of their underlying Noetherian spaces is retrocompact. Hence for each affine open $V\\subset Y$, $U\\cap V$ is quasi-compact, so $j$ is quasi-compact by [def-weil-finite-type-morphism]. Write $J$ for termwise extension by zero, initially over either the constant finite ring sheaf or the completed integral ring sheaf $B_Y$. By [lem-weil-proetale-weakly-etale-localization] the open site is the localized site $Y_{\\mathrm{proet}}/U$; at integral coefficients [def-weil-completed-integral-coefficients] defines $B_T=\\varprojlim_n(A_{E,n})_T$. Limits of module sheaves are sectionwise by [lem-weil-pbc-module-sheaves-limits-sectionwise], and their ring operations are componentwise. Thus on each $V\\to U$ both $B_Y|_U$ and $B_U$ are the same compatible families of finite-coefficient sections, by the constant-coefficient identification in the localization lemma. This identifies $B_Y|_U=B_U$ and every finite projection, so the coefficient rings agree, not just their scalar rings of global sections. The ringed-site lemma [lem-pur-site-restriction-module-adjunction-exact] gives exactness of $J$ and restriction, and their adjunction. By [lem-weil-pbc-exact-functor-derived-factorization], $J$ acts termwise on derived categories. For every complex $C$, [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^r(JC)\\cong JH^r(C)$. In particular $J$ preserves every cohomological vanishing interval, since an additive functor sends zero to zero.",
+   "uses": [
+    "sk-def-sf-operations",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-constructible-subset",
+    "def-weil-finite-type-morphism",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI/03DJ, lemma-extension-by-zero and lemma-extension-by-zero-exact; geometric preliminaries: morphisms.tex Tag 01T6 and topology.tex Tag 005L; blueprint proof first sentence"
+   }
+  },
+  {
+   "text": "First prove finite-stage bounded constructibility without any finite-Tor assumption, since integral representatives used later need this stronger formulation. For a constructible $A_{E,n}$-module sheaf $F$ on $U$, choose its finite locally closed constructible partition $U=\\coprod_\\nu S_\\nu$ from [def-weil-finite-torsion-constructibility]. Each $S_\\nu$ remains locally closed in $Y$: write $S_\\nu=O\\cap C$ with $O$ open in $U$ and $C$ closed in $U$ by [def-weil-locally-closed-subset]; then $O$ is open in $Y$, $C=U\\cap C'$ for $C'$ closed in $Y$, and $S_\\nu=O\\cap C'$. With its given locally closed subscheme structure this is the same stratum. Add the reduced closed complement $i:Z\\hookrightarrow Y$ constructed by [lem-weil-pbc-reduced-induced-closed-subscheme](2). Step 1 and [def-weil-constructible-subset] make all these strata constructible in $Y$. The arbitrary-ringed pro-étale identities [lem-weil-pbc-proetale-ringed-open-closed], with the quasi-compact $j$ of step 1, give $j^*JF\\cong F$ and $i^*JF=0$ as module sheaves. If $s:S_\\nu\\to U$ is a stratum, [lem-weil-pbc-proetale-derived-pullback-composition] and the exact finite-coefficient pullback in [def-weil-derived-pullback-tensor-hom] identify $(j\\circ s)^*JF$ with $s^*F$. The coefficient identifications satisfy the required composition hypothesis: both identifications send a local constant scalar $a\\in A_{E,n}$ to that same scalar, and constant sections generate the constant sheaf locally. Thus on $S_\\nu$ the restriction is the original finite locally constant sheaf and on $Z$ it is the zero sheaf, constant with finite zero module. This partition witnesses constructibility of $JF$. Apply this separately to every nonzero $H^r(C)$ of an arbitrary bounded constructible finite-stage complex $C$. The exact cohomology formula of step 1 proves bounded constructibility of $JC$ with every original cohomological interval. No common-refinement assertion or geometric-stalk conservativity is needed. For a finite-Tor $C$, the existing same-unit theorem [lem-trf-open-ctf] additionally gives preservation of each chosen Tor interval. In particular it applies to $K$ in the statement and, below, to each finite reduction of an integral finite-Tor $K$; its cohomological and Tor intervals need not coincide.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-locally-closed-subset",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-trf-open-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/lem-trf-open-ctf.proof.md",
+    "place": "Both paragraphs: exactness, adding the closed complement to the strata, and testing against an arbitrary module sheaf; proetale.tex Tags 09BN, 09AG, 09AH; pullback transitivity: sites-cohomology.tex Tag 0D6D"
+   }
+  },
+  {
+   "text": "We need a ringed calculation to pass to integral coefficients. For a sheaf of commutative rings $B$ on $Y_{\\mathrm{proet}}$, [lem-weil-pbc-ringed-slice-extension-tensor] gives $JP\\otimes_B M\\cong J(P\\otimes_{B|_U}M|_U)$ for module sheaves. Apply this in each bidegree of the tensor complexes of [def-pc-tensor-complex-sheaves]. The adjunction of step 1 and [lem-weil-pbc-left-adjoint-preserves-colimits] imply that $J$ preserves the small direct sums in each total degree. Thus the same identity holds on total tensor complexes, with the same differentials and signs. Choose a K-flat resolution $P\\to C$ over $B|_U$ using [lem-pc-kflat-resolution]. For any acyclic $B$-complex $Q$, restriction $Q|_U$ is acyclic by step 1, $P\\otimes Q|_U$ is acyclic by [def-pc-kflat-complex], and its exact extension by zero is acyclic by step 1. The tensor identity therefore proves that $JP$ is K-flat, directly from that definition. For a ring-sheaf map $B\\to B'$, [lem-pur-derived-change-of-rings] now computes both scalar extensions on these K-flat representatives and gives\n$$(JC)\\otimes_B^LB'\\cong J_{B'}(C\\otimes_{B|_U}^LB'|_U).$$\nThis is an isomorphism of $B'$-complexes: on the sheaf tensor identity the $B'$-action on each side is multiplication on the $B'$ factor. It is natural in $C$ and in $B'$, since the underived tensor identity is natural and the representative maps are $1\\otimes\\rho$ for $\\rho:B'\\to B''$. In particular, with $B=\\widehat{\\mathcal O}_{E,Y}$ and $B'=(A_{E,n})_Y$, [def-weil-integral-derived-reduction] gives $(JC)_n\\cong J_n(C_n)$, compatibly with the transition maps induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$. Restriction of scalars commutes with $J$ here because [def-weil-extension-by-zero-presheaf] uses the same summands and maps, and [def-weil-presheaf-modules-sheafification] sheafifies the underlying abelian presheaf and extends its module action uniquely.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-derived-reduction",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tags 06YS/06YT/06YY for K-flat resolutions and derived scalar extension; elementary total-complex calculation"
+   }
+  },
+  {
+   "text": "Let $K\\in\\Dctf(U,\\mathcal O_E)$. Its integral constructibility means derived completeness and finite constructibility of all $K_n$, with one cohomological interval $[c,d]$ independent of $n$, by [def-weil-derived-complete-integral-detailed]. Its Tor hypothesis means one interval $[a,b]$ for every $K_n$, by [def-weil-finite-tor-amplitude]. The completeness assertion of [lem-cbc-completed-extension-zero-comparison] uses Koszul completeness [def-weil-pbc-intrinsic-completion], whereas the integral category uses quotient-tower completeness [def-weil-derived-complete]. The final paragraph of [lem-weil-pbc-constant-completion-equivalence], applied on the small pro-étale site with the completed coefficient sheaf, identifies the two completion functors and their units. To justify this even for the object-only Roos formulation, [def-weil-derived-complete] first gives an isomorphism of $K$ with its quotient-tower limit. The comparison identifies this limit with the Koszul completion, whose output satisfies the local completeness condition by [lem-weil-pbc-ringed-koszul-completion-reflector]. That condition is invariant under isomorphism, so $K$ satisfies it. The reflector theorem now makes the natural Koszul unit of $K$ invertible, exactly the completeness hypothesis of the extension theorem. This does not assume uniqueness of a lift to an arbitrary Roos triangle. Apply that theorem to the identity cartesian open square, then use the same comparison on $Y$ to conclude that $JK$ is complete in the quotient-tower sense required here. Both theorems are applied to the actual completed coefficient sheaf: since every $A_{E,n}$ is finite, the final sentence of [lem-weil-pbc-completed-constant-sheaf-reduction] identifies the sheafified constant ring sheaf $(A_{E,n})_T$ with the coefficient sheaf $(P_n)_T$ of [def-weil-pbc-adic-coefficient-datum], compatibly with the quotient maps, hence $\\widehat{\\mathcal O}_{E,T}=A_T$ for $T=U,Y$ and the module categories coincide. Its coefficient hypotheses [def-weil-pbc-adic-coefficient-datum] hold for $(A,I)=(\\mathcal O_E,(\\varpi_E))$: [lem-weil-l-adic-extension-integers-dvr] gives a Noetherian domain and a finite residue field; [lem-weil-valued-dvr-finite-quotients] gives all finite quotients. Each quotient has the two-term finite free resolution $\\mathcal O_E\\xrightarrow{\\varpi_E^n}\\mathcal O_E$, injective because $\\varpi_E\\ne0$ in a domain, so it is perfect by [def-pc-perfect-ring-complex]; its additive group is finite and hence torsion. The geometric hypothesis is the quasi-compactness of $j$ verified in step 1. By step 3 the reductions of $JK$ are $J_nK_n$. Step 2 makes these constructible, keeps their uniform cohomological interval $[c,d]$, and keeps their Tor interval $[a,b]$. These are exactly the conditions in the two definitions cited above, so $JK\\in\\Dctf(Y,\\mathcal O_E)$. Independently of $[c,d]$, the actual cohomological interval $[a,b]$ of the integral $K$ is retained by the exact cohomology calculation in step 1. The same argument also proves the integral bounded-constructible preservation needed below without a finite-Tor hypothesis: start with any $K\\in\\Dbc(U,\\mathcal O_E)$, retain its derived completeness and uniformly bounded constructible reductions, omit only the Tor-interval sentences, and conclude $JK\\in\\Dbc(Y,\\mathcal O_E)$. This version still preserves every actual integral upper or lower cohomological bound by step 1.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude",
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-derived-complete",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completeness clause; its missing product justification is supplied by the cited node, based on Stacks Tag 09BP. The reduction and uniform-bound argument is the finite-stage blueprint argument applied exponent by exponent; completion comparison: Stacks Tag 099M, lemma-naive-completion, and algebraization.tex Tag 0A0E, lemma-derived-completion-koszul, through lem-weil-pbc-constant-completion-equivalence"
+   }
+  },
+  {
+   "text": "Identify these functors with the $Rj_!$ of the statement. At finite coefficients choose the compactification $U\\xrightarrow{j}Y\\xrightarrow{1_Y}Y$ in [def-compact-support-direct-image-detailed]. Its compact-support candidate is $R(1_Y)_*J=J$: the identity sheaf functor is exact, and applying it to a K-injective resolution computes the identity derived functor. Bounded constructibility supplies a bounded-below étale-origin witness by [lem-sf-proetale-constructible-origin](ii). Thus [prop-compactification-coherence-detailed] identifies this candidate with the one for any chosen compactification on precisely the required domain. At the integral stage [def-weil-integral-rational-qbar-compact-support] defines $Rj_!K$ as the derived limit of the restricted-scalar finite images $J_nK_n$, with the reduction transitions. Step 3 identifies this tower, including its maps, with the reduction tower of $JK$. Completeness in step 4, interpreted by [def-weil-derived-complete], identifies $JK$ with a derived limit of this tower, so the two objects are isomorphic. For later rationalization the identification must also be natural, rather than an unrelated choice of a Roos triangle for every object. Use the functorial completion and unit in [lem-weil-pbc-constant-completion-equivalence]: its final paragraph identifies the quotient-tower limit with the Koszul completion, respecting the units. The unit $JK\\to (JK)^{\\wedge}_{\\mathrm{Kos}}$ is a natural isomorphism on these complete objects; composing it with that comparison and the natural strict-tower identification of step 3 gives a natural isomorphism $J\\cong Rj_!$ on the integral constructible category. All maps are module-linear, as is the tower comparison, so this isomorphism is $\\mathcal O_E$-linear as well. Consequently all membership and vanishing assertions proved for $J$ are assertions for $Rj_!$; no independence on arbitrary nonconstructible pro-étale complexes has been used.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "lem-sf-proetale-constructible-origin",
+    "prop-compactification-coherence-detailed",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-complete",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/_section.md",
+    "place": "Rj_! interpreted through the trivial compactification and the existing finite/integral definitions; finite independence on bounded-below étale-origin objects only"
+   }
+  },
+  {
+   "text": "At $E$ coefficients use the raw rationalization [def-weil-rationalization-karoubi]. Extension by zero is $\\mathcal O_E$-linear: on the presheaf each nonzero value has the given scalar action and zero has its zero action, and sheafification preserves these module maps. Hence its rational functor sends $f\\otimes e$ to $J(f)\\otimes e$; balancing, identities and composition follow from this linearity. The natural $\\mathcal O_E$-linear identification of step 5 rationalizes on Hom tensors, so by [def-weil-integral-rational-qbar-compact-support] this is naturally isomorphic to the prescribed rational compact-support operation. The bounded-constructible preservation in the final sentence of step 4 ensures its object lies in $\\Dbc(Y,E)$. To check an upper bound $b$, [def-weil-constructible-standard-tstructure] supplies an integral object $L$ with no cohomology above $b$ and an isomorphism $K_E\\cong QL$ in the rational category. This upper-bound witness is not required to have the lower bound or the original integral representative. Exactness from step 1 gives the same upper bound for $JL$; its constructibility follows by the integral argument in step 4 without its Tor-bound clause (all reductions remain bounded constructible uniformly). Applying the rational functor to the witnessing isomorphism gives $Rj_!K_E\\cong QJL$. For the lower bound, choose separately an integral $L_-$ with no cohomology below $a$ and an isomorphism $K_E\\cong QL_-$. Step 1 gives $H^r(JL_-)=0$ for $r<a$, steps 2–4 without the Tor clause give its integral constructibility, and applying the rational functor gives $Rj_!K_E\\cong QJL_-$. The use of bounds $a,b$ through shifts is legitimate: the termwise functor commutes with shifts by the shift clause of the exact-derived-functor theorem in step 1, and this compatibility rationalizes. The standard pair therefore puts $Rj_!K_E$ in the same interval $[a,b]$. At this stage $\\Dctf=\\Dbc$ by [def-weil-finite-tor-amplitude]; there is no inference that every arbitrary pro-étale module over a topological coefficient field is flat.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-constructible-standard-tstructure",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/_section.md",
+    "place": "Coefficient-stage interpretation via the rationalization and standard-pair definitions; upper and lower bounds use separate integral witnesses"
+   }
+  },
+  {
+   "text": "Finally [def-weil-algebraically-closed-coefficients] represents each common-stage object by a pair $(E,K_E)$, and [def-weil-integral-rational-qbar-compact-support] sends it to $(E,Rj_!K_E)$. The coefficient compatibilities of [lem-fix-operation-reduction] ensure that this is the prescribed operation when one changes the finite field of definition. Its constructibility follows at that finite stage from step 6. For either cohomological bound, [def-weil-constructible-standard-tstructure] gives an isomorphism to a pair at a finite stage possessing that bound; apply the functor to the isomorphism and use step 6 at that stage. Explicitly, for an upper-bound witness $K\\cong (L,M_+)$ with $M_+\\in D_c^{\\le b}(U,L)$, its image is isomorphic to $(L,Rj_!M_+)$, whose upper bound is step 6. For a separate lower-bound witness $K\\cong (L',M_-)$ with $M_-\\in D_c^{\\ge a}(U,L')$, the image is isomorphic to $(L',Rj_!M_-)$ and has the lower bound by step 6. The common-stage shift is represented by the finite-stage shift, so these are precisely the two inequalities of the standard pair. Since [def-weil-finite-tor-amplitude] defines $\\Dctf=\\Dbc$ at common-stage coefficients, this completes the preservation assertion at all stages. The zero complex and empty open require no special argument: exact extension by zero sends them to zero, and all the intervals remain valid.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-fix-operation-reduction",
+    "def-weil-constructible-standard-tstructure",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/_section.md",
+    "place": "Common finite-stage coefficient interpretation and conclusion; preserves the exactness/finite-stratification/arbitrary-module-test route"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-def-sf-operations",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-constructible-subset",
+  "def-weil-finite-type-morphism",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-locally-closed-subset",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-derived-reduction",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-derived-complete",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-rationalization-karoubi",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-lem-sf-open-ctf.proof.md",
+  "place": "Exactness, finite stratification and unchanged Tor interval, with explicit integral/rational/common-stage passage using the existing coefficient definitions; Stacks Tags 03DI, 03DJ, 0E8I, 06YS, 06YT, 06YY and 09BP"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves constructible complexes and the same Tor amplitude at finite and adic coefficient stages",
+   "results": "HomologicalComplex.instIsStrictlySupportedExtend, localCohomology.diagram, HomologicalComplex.map_isStrictlySupported, HomologicalComplex.extend_exactAt, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.extend_exactAt_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; general support and local cohomology, no sheaf extension by zero",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements do not give constructible extension by zero or its Tor/coefficient-stage preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constructible\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements do not give constructible extension by zero or its Tor/coefficient-stage preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek|TorAmplitude",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements do not give constructible extension by zero or its Tor/coefficient-stage preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves bounded constructible finite Tor complexes on the pro etale site",
+   "results": "HasCompactSupport.extend_zero, HomologicalComplex.extendMap_zero, CategoryTheory.Abelian.Ext.comp_zero, CategoryTheory.Abelian.Ext.zero_comp, HomologicalComplex.instIsStrictlySupportedOfNat, HomologicalComplex.extend.d, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero, HomologicalComplex.extend.instHasHomology; functions or complex-shape extension, not sheaf extension",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements do not give constructible extension by zero or its Tor/coefficient-stage preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact open extension by zero functor on sheaves preserves finite Tor dimension and constructible cohomology",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, Condensed.instAB5CondensedMod, Condensed.hasExactColimitsOfShape, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.instIsGrothendieckAbelian; existence/exactness of sheaf categories only",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements do not give constructible extension by zero or its Tor/coefficient-stage preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extension\", \"zero\", \"Sheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements do not give constructible extension by zero or its Tor/coefficient-stage preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "ConstructibleSheaf|constructibleFiniteTor|finiteTorAmplitude|OpenImmersionLowerShriek",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements do not give constructible extension by zero or its Tor/coefficient-stage preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible.*(lowerShriek|extensionByZero)|TorAmplitude.*lowerShriek",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible or Tor-amplitude preservation statement; semantic hits give module-sheaf adjunctions and condensed monoidal/AB4 structures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact left adjoint to restriction of module sheaves sends bounded constructible derived objects to bounded constructible objects without enlarging tensor amplitude",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Condensed.instAB4CondensedMod, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible or Tor-amplitude preservation statement; semantic hits give module-sheaf adjunctions and condensed monoidal/AB4 structures"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -133,5 +366,89 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-sf-open-ctf",
+  "worker": "stage1",
+  "summary": "Rejected the small-etale finite-coefficient attachment; retained full pro-etale finite/integral/rational/common-stage scope. Reused existing nodes, with explicit K-flat scalar-reduction calculation and completeness passage. STATEMENT-DISPUTED: the imported numerical Tor-interval phrase was undefined at raw rationalized/common-stage coefficients; corrected it to the categories actually defined in def-weil-finite-tor-amplitude, retaining all finite/integral intervals and all cohomological intervals. No new nodes. Second reading supplied the Koszul/quotient completion comparison, its natural unit, and coefficient restriction by the actual inverse-limit definition.",
+  "blueprint": "Steps 1-2 realize exactness, finite stratification and the arbitrary-module Tor test of the source; steps 3-7 make the coefficient-stage interpretation of sk-def-sf-operations explicit without changing the proof route. The older unit record is finite-stage only; its existing lem-trf-open-ctf remains available.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the complementary reduced closed stratum used in the finite constructibility partition. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Supplies the two actual restriction identities for extension by zero on the pro-etale site. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Supplies restriction to a stratum through U, with its coefficient-composition hypothesis checked explicitly. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "The arbitrary-ringed-site tensor identity is needed for completed coefficient reductions, beyond the finite-stage tensor identity in this unit. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies arbitrary K-flat representatives for the ringed reduction calculation. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Identifies the completed coefficient restrictions as identical compatible families, without switching coefficient models. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Supplies quasi-compact open preservation of intrinsic completeness, after the required comparison with quotient-tower completeness. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Identifies completed-sheaf Koszul and quotient completion functors and their natural units; the integral definition alone supplies no such comparison. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Shows the completion output is locally complete and its unit is invertible precisely on that class, including when input completeness was given by an object-only Roos triangle. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Verifies the adic datum hypothesis for O_E, rather than adding an assumption to the item. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Places finite constructible complexes in the actual bounded-below etale-origin domain of compactification coherence. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Supplies the coefficient-field compatibility needed to act on common-stage morphisms. This is a generic tool for the existing exactness/stratification/Tor-test route; the unit supplies no separate interface."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Identifies the sheafified constant finite coefficient sheaves (and hence the completed sheaf of the integral category) with the Cont(pi_0)-coefficient sheaves and A_T of the adic datum used by lem-cbc-completed-extension-zero-comparison; no node of this unit compares the two coefficient models."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sf-proetale-constructible-origin",
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-10bf8914f",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-10bf8914f (reviewer sub-agent of L); spot-checked: I read the whole item, the source and every cited statement. The item cites only existing nodes and creates none. The STATEMENT-DISPUTED repair is correct. def-weil-finite-tor-amplitude defines a numerical Tor interval only at A_{E,n} and O_E; at E and Qbar it sets Dctf:=Dbc. The repaired statement keeps both intervals at the finite and integral stages, and at the field stages keeps Dbc and both standard-pair bounds. No separatedness hypothesis was added. Compactifications need not be dense, so the trivial compactification (j,1_Y) is valid. Steps 1-7 check out. Step 1: quasi-compact j from Noetherianity and retrocompactness; exact adjunction for any ring sheaf (Stacks 03DI/03DJ). Step 2: strata plus the reduced closed complement, using j^{-1}j_!=id and i^{-1}j_!=0 (09BN/09AH, quasi-compact j); bounded constructibility without Tor, and the Tor interval from the reviewed lem-trf-open-ctf. Step 3: the tensor identity (0E8I), K-flatness of JP from the definition, and (JC)_n=J_nC_n through change of rings. Step 4: Koszul and quotient-tower completeness are compared via constant-completion-equivalence and the Koszul reflector, the cbc completeness lemma is applied to the identity square, and the adic datum for O_E is verified. Step 5: J=Rj_! on etale-origin objects and naturally at the integral stage. Steps 6-7: separate upper and lower witnesses, with shifts. Edge cases U empty, U=Y, K=0, n=1, a=b and Z/l^2 checked. No cycle. One repaired fault (C1/C4): step 4 applied lem-cbc-completed-extension-zero-comparison, whose coefficient sheaf is the A_T of the adic datum (built from Cont(pi_0)), to the integral category's limit of sheafified constant sheaves without identifying the two. I added lem-weil-pbc-completed-constant-sheaf-reduction (last sentence: finite A/I^n gives (P_n)_T equal to the constant sheaf, so B=A_T) to step 4 and proof_deps, with a proposed tool_use entry. The 12 tool uses already proposed are generic interfaces and acceptable as proposals. Corrected file: fixes/dag/nodes/sec-six-functors/sk-lem-sf-open-ctf.json; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

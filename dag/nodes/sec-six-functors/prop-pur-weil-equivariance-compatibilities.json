@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-weil-equivariance-compatibilities",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compatibilities of Weil equivariance",
@@ -18,28 +18,186 @@
  ],
  "proof": [
   {
-   "text": "The compatibilities are those of the constituent purity, counit, and\ntrace statements established in\n[thm-pur-weil-equivariance-of-purity-and-trace] (each being\ncompatible with the coefficient transport of\n[thm-pur-adic-reconstruction]), transported by the scheme-Frobenius\nidentification of [prop-pur-weil-equivariance-scheme-frobenius].",
+   "text": "Use precisely the geometric and coefficient setting of the two statements in the conclusion: a smooth separated geometric fiber $f:X\\to Y$ of the finite-type $k_0$-morphism, with strict datum $(K,\\varphi_K)$. All comparison diagrams below retain their stated constructible finite-Tor domains. The smooth purity maps in the named squares have the domain of [def-pur-smooth-purity-map], in particular separated finite-type $k$-schemes $X,Y$. This domain is inherited from those maps; it is not deduced from separation of $f$. All corners in the coefficient and geometric comparison diagrams remain in their named maps' domains. We use the coefficient/composition/base-change compatibility of [sk-thm-purity-transport] and the trace compatibility of [thm-pur-trace-normalization-transitivity] on exactly this domain. Write $G_T=Lg_{T,\\gamma}^*$, $P_fK=Lf^*K(d)[2d]$, $F_f=Rf_!$, $E_f=Rf^!$, $a_f=\\gamma_{f,K}$, and $t_f=\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}$. The purity isomorphism of [sk-thm-purity-transport] and the purity square of [thm-pur-weil-equivariance-of-purity-and-trace] give the identity\n$$\\varphi_{E_fK}=a_f\\circ\\varphi_{P_fK}\\circ(G_Xa_f)^{-1}.$$\nThe trace definition [def-pur-smooth-trace] gives $t_f=\\epsilon_f\\circ F_f(a_f)$, hence\n$$\\epsilon_f=t_f\\circ F_f(a_f^{-1}).$$\nAt higher coefficients this formula is its coefficient transport, with the trace transport specified in [thm-pur-trace-normalization-transitivity]. Finally [def-pur-compact-support-transport] says that the datum on $F_fM$ is $F_f(\\varphi_M)\\circ\\operatorname{Ex}_{!,g_\\gamma}$. Thus the exceptional datum and the counit are recovered from purity, trace, the source datum and compact-support exchange, rather than being additional unproved coherence assertions.",
    "uses": [
+    "sk-thm-purity-transport",
     "thm-pur-weil-equivariance-of-purity-and-trace",
-    "thm-pur-adic-reconstruction",
-    "prop-pur-weil-equivariance-scheme-frobenius"
+    "def-pur-smooth-trace",
+    "def-pur-compact-support-transport",
+    "thm-pur-trace-normalization-transitivity",
+    "def-pur-smooth-purity-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Proof, constituent purity/counit/trace: solve the purity and trace identities"
+   }
+  },
+  {
+   "text": "The source datum is the explicitly specified composite of [def-pur-tate-datum]: $\\varphi_{P_fK}=(Lf^*\\varphi_K\\otimes\\tau_d)[2d]\\circ b_{f,K}$, where $b_{f,K}:G_XP_fK\\xrightarrow{\\sim}(Lf^*G_YK\\otimes^L G_X\\Lambda_X(d))[2d]$ is the first pullback/tensor/shift comparison in that definition. In particular $b_{f,K}$ does not yet apply the Tate datum. Its comparison under a coefficient functor or a geometric pullback is obtained by applying that functor to this composite. The canonical twist data of [def-weil-frobenius-coefficient-twists] are built from the same root-of-unity maps by tensor powers, duals and coefficient passage, so these comparisons carry $\\tau_d$ to the prescribed $\\tau_d$; twist additivity carries $\\tau_d\\otimes\\tau_e$ to $\\tau_{d+e}$. At finite coefficients, pullback-composition is the termwise comparison of [lem-weil-pbc-proetale-derived-pullback-composition], and the tensor comparison is the natural monoidal comparison of [lem-pur-derived-pullback-tensor-iso]. Consequently the two ways of comparing the composite $Lf^*\\varphi_K\\otimes\\tau_d$ agree: both apply the same pullbacks to $\\varphi_K$ and the same tensor map to the twist factors. For completed integral pullback this finite comparison is applied to the strict reduction tower and then its derived limit, as specified in [def-weil-pbc-completed-pullback]; rationalization and a common finite stage give the field comparisons. This does not assume that inverse image commutes with the inverse limit defining the completed coefficient sheaf. The coefficient comparisons for these operations and their units are those of [lem-fix-operation-reduction]; on $k$-linear squares compact-support data additionally use the coefficient and horizontal/vertical pasting equations of [fix-lem-exchanges]. The geometric-Galois maps $g_{T,\\gamma}$ are semilinear scheme isomorphisms, so we do not apply that node's $k$-morphism assertion directly to them. For such an isomorphism square take a compactification $f=pj$ and its pullback $(j',p')$. Use the ambient pro-etale mate/open formula specified in [def-pur-compact-support-transport] and [def-exchange-projection], taken over the base $S=Y$ as in the former statement; no $k$-linearity of the horizontal maps is required. By [lem-weil-proetale-isomorphism-inverse-image], inverse image along each horizontal scheme isomorphism is exact reindexing on its small pro-etale site. In these coordinates the unit--square--counit mate in that formula is the identity comparison of reindexed direct-image sections, and the open factor reindexes extension by zero. Consequently its specified exchange is the reindexing composite:\n$$G_YRp_*j_!\\cong Rp'_*G_{\\overline X}j_!\\cong Rp'_*j'_!G_X.$$\nBoth horizontal orders are restriction along the same composite scheme isomorphism. For vertical composition both orders reindex the same sections of the composite compactification, with the canonical direct-image/open-extension composition comparisons. The site equivalences preserve units and counits, and the square in the mate formula becomes the identity after reindexing; thus these are the specified exchange maps, not new choices. Changing coefficients commutes with reindexing: on a tensor representative both orders send $x\\otimes b$ to $g^*x\\otimes b$. For integral coefficients [def-cbc-completed-exchange-map] uses these same mates and open comparisons on strict reduction towers and then the functor $R\\lim$. Reindexing by a scheme isomorphism is an equivalence on tower module categories and commutes with this limit; the equalities already hold as strict-tower transformations. Localization and common finite field stages preserve them. This verifies the needed semilinear pasting and coefficient identities without assuming the Frobenius arrows are $k$-linear. This checks the source and compact-support data, without assuming that equivariance of the geometric orientation is a definition.",
+   "uses": [
+    "def-pur-tate-datum",
+    "def-weil-frobenius-coefficient-twists",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-fix-operation-reduction",
+    "fix-lem-exchanges",
+    "def-weil-pbc-completed-pullback",
+    "def-cbc-completed-exchange-map",
+    "def-pur-compact-support-transport",
+    "def-exchange-projection",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Proof, constituent data and coefficient transport: expand the source and compact-support data"
+   }
+  },
+  {
+   "text": "For $A_{E,n}\\to A_{E,m}$ with $1\\leq m\\leq n$, apply derived reduction to the three squares. The coefficient compatibility of [sk-thm-purity-transport] identifies the reduced $a_f$ with the level-$m$ purity map; [thm-pur-trace-normalization-transitivity] identifies the reduced $t_f$ with the level-$m$ trace. The composition/base-change identifications are the corresponding compatibilities of the same purity and trace statements. The operation comparisons of [lem-fix-operation-reduction] and the exchange comparisons checked in Step 2 (using [fix-lem-exchanges] on its $k$-linear domain) identify the pullback/tensor terms and the compact-support exchange. A strict integral datum reduces to its specified finite datum by [def-pur-tate-datum]. For integral-to-finite reduction the same two all-coefficient statements identify $a_f$ and $t_f$ with their specified finite maps. Substitute these identities and the source identity from Step 2 into Step 1: since a functor sends $a_f^{-1}$ to the inverse of its image, the reduction of $\\varphi_{E_fK}$ is the prescribed exceptional datum, and the reduction of $\\epsilon_f$ is the prescribed counit. The formula for the compact-support datum then identifies every vertical arrow as well. Hence reduction takes each entire equivariance square, with its labelled arrows, to the required reduced square. This uses the cited reduction identities, not an inference that equality of ordinary derived morphisms is detected by their reductions.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "fix-lem-exchanges",
+    "def-pur-tate-datum",
+    "sk-thm-purity-transport",
+    "thm-pur-trace-normalization-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Proof, finite reduction, including integral-to-finite reduction"
+   }
+  },
+  {
+   "text": "For scalar extension use the coefficient compatibility of the natural purity isomorphism in [sk-thm-purity-transport], including rationalization and finite field extension. The normalized traces commute with these coefficient transports by [thm-pur-trace-normalization-transitivity]. The operation comparisons of [lem-fix-operation-reduction] and the exchange comparisons checked in Step 2 (using [fix-lem-exchanges] on its $k$-linear domain) identify the remaining factors in Steps 1 and 2. Applying the scalar functor to those two formulas therefore gives the formulas over the extended ring. More explicitly, for any comparison $s$ between the two purity sources and $e$ between the two exceptional targets, $e\\,T(a_f)=a'_f s$ implies $T(a_f^{-1})e^{-1}=s^{-1}(a'_f)^{-1}$; substituting this into $T(t_f\\circ F_f(a_f^{-1}))$ is precisely the counit comparison, and substituting into the first formula in Step 1 is the exceptional-datum comparison. The compact-support formula then gives the remaining vertical arrows. At $\\mathcal O_E$ use the completed coefficient category, at $E$ its scalar localization, and at $\\overline{\\mathbf Q}_\\ell$ a common finite field stage, exactly as prescribed by [def-pur-conventions]. No discrete non-torsion etale category is substituted. This proves scalar compatibility of the three geometric squares.",
+   "uses": [
+    "sk-thm-purity-transport",
+    "thm-pur-trace-normalization-transitivity",
+    "lem-fix-operation-reduction",
+    "fix-lem-exchanges",
+    "def-pur-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Proof, scalar extension and rational/common-stage passage"
+   }
+  },
+  {
+   "text": "For smooth composable $X\\xrightarrow fY\\xrightarrow hZ$ of dimensions $d,e$, identify $P_{hf}$ with $P_fP_h$ using twist additivity. The source datum of Step 2 is then the composite of the two source data, since the twist factor is $\\tau_d\\otimes Lf^*\\tau_e$, which reassociates to $\\tau_{d+e}$ under the pullback and twist identifications of Step 2. The exact purity comparison is [thm-pur-composition-coherence]: $a_{hf}=c_{h,f}^{-1}\\circ a_{f,E_hK}\\circ P_f(a_{h,K})$. Its naturality allows the purity squares for $f$ and $h$ to be pasted to the square for $hf$. The normalized trace comparison is [thm-pur-trace-normalization-transitivity]: after the compact-support composition identification it is the $f$-trace at $P_hK= Lh^*K(e)[2e]$, followed by the $h$-trace. The vertical-pasting equation checked in Step 2, using [fix-lem-exchanges] on $k$-linear squares and reindexing on semilinear isomorphism squares, identifies the compact-support Frobenius datum in that pasted square with the datum for $hf$. Thus the two trace equivariance squares paste to the required $hf$-trace square, with the indicated $e$-twist retained. For the counit, the displayed purity formula gives\n$$a_{hf}^{-1}=P_f(a_{h,K}^{-1})\\circ a_{f,E_hK}^{-1}\\circ c_{h,f,K}.$$\nUnder $F_{hf}\\cong F_hF_f$, substitute this and the trace-composition formula in $t_{hf}F_{hf}(a_{hf}^{-1})$. Naturality of the smooth trace (the composite of the natural counit and the isomorphism of functors in Step 1) at $a_{h,K}^{-1}:E_hK\\to P_hK$ says\n$$t_{f,P_hK}\\circ F_fP_f(a_{h,K}^{-1})=a_{h,K}^{-1}\\circ t_{f,E_hK}.$$\nConsequently the substituted composite is\n$$\\begin{aligned}\n&t_h\\circ F_h(t_{f,P_hK})\\circ F_hF_f(P_f(a_h^{-1}))\\circ F_hF_f(a_{f,E_hK}^{-1})\\circ F_hF_f(c_{h,f,K})\\\\\n&=t_h\\circ F_h(a_h^{-1})\\circ F_h\\bigl(t_{f,E_hK}\\circ F_f(a_{f,E_hK}^{-1})\\bigr)\\circ F_hF_f(c_{h,f,K})\\\\\n&=\\epsilon_h\\circ F_h(\\epsilon_{f,E_hK})\\circ F_hF_f(c_{h,f,K}).\n\\end{aligned}$$\nThis is the composite counit with exactly the exceptional-composition identification $c_{h,f,K}$; each equality respects the equivariance squares because it uses naturality or the already compared purity and trace factors. Thus the pasted counit square is the $hf$-counit square. At the integral and field stages the purity-composition comparison is part of [sk-thm-purity-transport], and trace transitivity with its coefficient transport is [thm-pur-trace-normalization-transitivity]. This proves composition compatibility on exactly those domains.",
+   "uses": [
+    "thm-pur-composition-coherence",
+    "thm-pur-trace-normalization-transitivity",
+    "fix-lem-exchanges",
+    "sk-thm-purity-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Proof, composition: paste the purity and trace squares, then cancel inverse purity"
+   }
+  },
+  {
+   "text": "For a Cartesian base-change diagram $(u:X'\\to X,v:Y'\\to Y,f,f')$ carrying the compatible geometric-Frobenius data, let $B_P:Lu^*P_f\\cong P_{f'}Lv^*$ and $B_E:Lu^*E_f\\cong E_{f'}Lv^*$ be its specified comparisons. At finite level [thm-pur-smooth-base-change-coherence] gives the actual equation\n$$B_E\\circ Lu^*(a_f)=a_{f',Lv^*K}\\circ B_P.$$\nThe last assertion of [thm-pur-trace-normalization-transitivity] identifies $Lv^*(t_f)$ with $t_{f',Lv^*K}$ under compact-support base change. Compare the two orders of base change and geometric Frobenius. Since $u,v$ are base changes of $k_0$-morphisms, $g_{X,\\gamma}u=ug_{X',\\gamma}$ and $g_{Y,\\gamma}v=vg_{Y',\\gamma}$, so the Cartesian square $(u,v,f,f')$ and the two Frobenius squares paste in both orders to the same composite square. This mixed pasting, of a $k$-linear square with a semilinear isomorphism square, is not an instance of [fix-lem-exchanges], so we check it from the formulas. Choose a compactification $c=(j,p)$ of $f$; its base change along $g_{Y,\\gamma}$ is again a compactification of $f$, with $k$-structure through $Y$, and its base change along $v$ is the base-changed compactification of $f'$. In the ambient formula of [def-exchange-projection] each exchange is the unit--square--counit mate followed by the open comparison $\\beta$; for squares of ringed topoi, the mate of a pasted square is the pasting of the mates, by the two triangle identities and naturality of units and counits, with no linearity hypothesis, and the $\\beta$'s paste by their canonical composition comparisons. By [lem-weil-proetale-isomorphism-inverse-image], in reindexing coordinates the Frobenius exchange is the identity (Step 2), so both pasted exchanges reduce to the compact-support base change $B_F$ of $(u,v,f,f')$ computed with $c$, resp. with its reindexed compactification. The latter two agree by the independence of the compactification in clause 4 of [fix-lem-exchanges], applied to the $k$-linear square $(u,v,f,f')$; on integral towers and at field stages use the same identities levelwise before $R\\lim$, rationalization and common-stage passage, as in Step 2. Hence the two compact-support comparisons agree; Step 2 gives agreement on the pure pullback/twist source and its datum. Write $Q=Lu^*$ and $Q_Y=Lv^*$. Suppress only the pullback-composition comparisons already checked in Step 2, so $QG_X=G_{X'}Q$. Put $a'=a_{f',Q_YK}$. Source-datum compatibility is $B_PQ(\\varphi_P)=\\varphi'_P G_{X'}(B_P)$. The displayed purity equation therefore gives the explicit exceptional-datum calculation\n$$\\begin{aligned}\nB_EQ(\\varphi_E)G_{X'}(B_E)^{-1}\n&=a' B_P Q(\\varphi_P)G_{X'}(B_P)^{-1}G_{X'}(a')^{-1}\\\\\n&=a'\\varphi'_P G_{X'}(a')^{-1}=\\varphi'_E.\n\\end{aligned}$$\nFor the counit let $B_F:Q_YF_f\\xrightarrow{\\sim}F_{f'}Q$ be compact-support base change. Naturality of $B_F$ at $a_f^{-1}$ and trace compatibility give\n$$\\begin{aligned}\nQ_Y(\\epsilon_f)&=Q_Y(t_f)\\,Q_YF_f(a_f^{-1})\\\\\n&=t_{f'}F_{f'}(B_P)B_F(P_fK)Q_YF_f(a_f^{-1})\\\\\n&=t_{f'}F_{f'}(B_PQ(a_f^{-1}))B_F(E_fK)\\\\\n&=t_{f'}F_{f'}((a')^{-1}B_E)B_F(E_fK)\\\\\n&=\\epsilon_{f'}F_{f'}(B_E)B_F(E_fK).\n\\end{aligned}$$\nThe fourth equality is the inverse of the displayed purity comparison. Thus the exceptional datum and counit use precisely the same base-change identifications as purity and trace. Hence all six faces needed to compare the three equivariance squares commute. At integral and field coefficients use the base-change compatibility of [sk-thm-purity-transport] and [thm-pur-trace-normalization-transitivity]. This assertion always retains the base-change domains of those comparisons; the comparison of Weil data requires a base change with the compatible Frobenius data, as in the squares named in the statement.",
+   "uses": [
+    "thm-pur-smooth-base-change-coherence",
+    "thm-pur-trace-normalization-transitivity",
+    "fix-lem-exchanges",
+    "sk-thm-purity-transport",
+    "def-exchange-projection",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Proof, base change: the explicit purity equation and exchange pasting"
+   }
+  },
+  {
+   "text": "Finally use [prop-pur-weil-equivariance-scheme-frobenius]: on every object $N$ replace $\\varphi_N$ by $u_N=\\varphi_N\\kappa_N$. The naturality and pullback-composition compatibility of $\\kappa$ are the explicitly typed comparison in [def-pur-scheme-geometric-frobenius] and the pullback-naturality identity of [lem-pur-frobenius-trivialization-pullback]. To check explicitly that this replacement respects the coefficient comparisons too, recall its coefficient-independent site construction: the canonical absolute-Frobenius trivialization of [lem-trf-absolute-frobenius-site], combined with the scheme/Galois factorization, induces $\\kappa$. On a weakly etale site object the trivialization is restriction along its relative Frobenius isomorphism. A change of coefficients commutes with this restriction: on a tensor representative both orders send $x\\otimes b$ to $r^*(x)\\otimes b$. The same restriction maps are natural under pullback of site objects; equivalently the relative Frobenius formula is $(F_U,u)$ and commutes with every map of such objects. Thus they give the same pullback-composition comparisons stated in [def-pur-scheme-geometric-frobenius]. Apply the functor of coherent inverse systems and its derived limit for the integral coefficient transport, and then the scalar-localization/common-stage functors: functors preserve this equality. This is equality of the specified transformations before these functors are applied, not an appeal to faithfulness of finite reduction. For any arrow $a:N\\to M$, naturality gives $G(a)\\kappa_N=\\kappa_M L\\Phi^*(a)$, so\n$$a\\,u_N=a\\varphi_N\\kappa_N=\\varphi_MG(a)\\kappa_N=\\varphi_M\\kappa_M L\\Phi^*(a)=u_M L\\Phi^*(a).$$\nApply this identity to every arrow and comparison in Steps 3--6. It identifies their transported geometric squares with the scheme-Frobenius squares, proving all four compatibilities for them as well. No Cartesian base-change theorem is applied to the generally non-Cartesian scheme-Frobenius square.",
+   "uses": [
+    "prop-pur-weil-equivariance-scheme-frobenius",
+    "def-pur-scheme-geometric-frobenius",
+    "lem-trf-absolute-frobenius-site",
+    "lem-pur-frobenius-trivialization-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Proof, scheme-Frobenius identification: natural precomposition, with coefficient restriction calculation"
+   }
   }
  ],
  "proof_deps": [
-  "thm-pur-weil-equivariance-of-purity-and-trace",
-  "thm-pur-adic-reconstruction",
-  "prop-pur-weil-equivariance-scheme-frobenius"
+  "def-cbc-completed-exchange-map",
+  "def-exchange-projection",
+  "def-pur-compact-support-transport",
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "def-pur-tate-datum",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-pbc-completed-pullback",
+  "fix-lem-exchanges",
+  "lem-fix-operation-reduction",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-trf-absolute-frobenius-site",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "prop-pur-weil-equivariance-scheme-frobenius",
+  "sk-thm-purity-transport",
+  "thm-pur-composition-coherence",
+  "thm-pur-smooth-base-change-coherence",
+  "thm-pur-trace-normalization-transitivity",
+  "thm-pur-weil-equivariance-of-purity-and-trace"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Proof, expanded into constituent comparison and cancellation calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity trace and Frobenius equivariance compatibility under coefficient change composition and base change",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δAux_ofComp; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange; Algebra.intTraceAux; WeierstrassCurve.VariableChange.map_baseChange; WeierstrassCurve.baseChange_φ; Algebra.trace_eq_of_equiv_equiv; Algebra.map_intTraceAux; LinearMap.trace_baseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: cotangent-complex maps, elliptic-curve base change and algebraic trace do not state the six-functor equivariance proposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|[Ww]eil|[Ff]robenius",
+   "results": "0 hits in AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of smooth purity and trace under Frobenius and coefficient extension",
+   "results": "8 hits: LinearMap.frobenius; Perfection.coeff_frobenius; Algebra.Smooth.baseChange; PreTilt.coeff_frobenius; IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base; Perfection.coeff_frobeniusEquiv_symm; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; WittVector.FractionRing.frobeniusRingHom",
+   "date": "2026-10-17",
+   "verdict": "no match: ring Frobenius and smoothness stability do not state smooth-purity or exceptional-trace coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology orientation and exceptional adjunction counit compatible with Frobenius pullback coefficient reduction and composition",
+   "results": "8 hits: Condensed.profiniteSolidCounit; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; Algebra.Extension.H1Cotangent.map_comp; StandardEtalePair.homEquiv_symm_apply; Algebra.Generators.H1Cotangent.δ; Algebra.etaleLocus_eq_compl_support; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: these are solid-module or structure-sheaf counits and commutative-algebra declarations, rather than Frobenius-equivariant etale smooth purity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -66,5 +224,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package"
+ "unit": "sk-thm-sf-package",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pur-weil-equivariance-compatibilities",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint assembly into seven steps using existing purity/trace comparisons. Second reading corrected the Tate-source type; distinguished finite pullback from strict-tower completed pullback; made the inherited separated-scheme domain of the smooth-purity map explicit and used the purity/trace coefficient interfaces; and wrote explicit counit composition and base-change equalities. No new nodes, statement changes, Lean edits, or builds. The semilinear Frobenius exchange identities are checked by reindexing and the arbitrary-base compactification formula, rather than applying a k-linear-square theorem to semilinear arrows. Resumed review replaces the etale-only compactification citation by the actual pro-etale semilinear exchange formula and its site-reindexing lemma; all citation extracts were rechecked against the current DAG.",
+  "blueprint": "Realizes the complete proof paragraph: constituent purity/counit/trace in Steps 1--2, finite reduction in Step 3, scalar extension in Step 4, composition in Step 5, base change in Step 6, and scheme-Frobenius transport in Step 7. The unit sk-thm-sf-package assembly clause (5) cites the same smooth-purity and coefficient-transport route. This item is not the unit key node; realization fields are not changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-bec3c6a14",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-bec3c6a14 (reviewer sub-agent of L); spot-checked: Read in full: the item, both blueprint snapshots (same statement; the proof is one assembly sentence) and every one of the 23 cited nodes' statements, including blueprint_update where present. No new nodes; statement and stmt_deps unchanged, target not weakened. proof_deps equals the union of step uses, and a script traversal from all cited dependencies found no cycle. Only SGA-free sources (Stacks 0F6W, via lem-trf-absolute-frobenius-site). The objects match the master definitions: semilinear g_{T,γ}=id×Spec(σ^{-1}), compact-support datum Rf_!(φ)∘Ex_! taken over S=Y, and the coefficient stages A_{E,n} / completed O_E / rationalized E / common-stage Q̄_ℓ. I recomputed the displayed algebra. Step 1: φ_E=aφ_P G(a)^{-1} and ε=t F(a^{-1}) follow from def-pur-smooth-trace and the purity square. Steps 3-4: functors preserve inverses, and the order e T(a)=a's is right. Step 5: inverse of a_hf=c^{-1}a_{f,E_h}P_f(a_h); trace naturality at a_h^{-1}; result ε_h F_h(ε_f) F_hF_f(c); I also checked that φ_E pastes through naturality of the source datum. Step 6: both the B_E-conjugation and the B_F-counit chains are right. Step 7: κ-compatibility with arbitrary Lu^* comes from lem-pur-frobenius-trivialization-pullback, not only from the f-clause of def-pur-scheme-geometric-frobenius. Small cases checked: d=0, identity base change or composition factor, m=n, K=0, and the doubled origin for why the separated-X,Y domain must be inherited. One fault, fixed (E5-type gap): Step 6 cited 'the horizontal pasting checked in Step 2' to compare the two orders of base change and Frobenius. Step 2 only covers pasting of semilinear isomorphism squares with each other, and fix-lem-exchanges covers only k-linear squares. I rewrote Step 6 to check the mixed pasting directly: u,v commute with g_γ; the base-changed compactification is again k-linear; mates and β comparisons paste formally; the Frobenius exchange is the identity after reindexing (lem-weil-proetale-isomorphism-inverse-image); and fix-lem-exchanges clause 4 (independence of compactification) applies on the k-linear square, levelwise before R lim. Added def-exchange-projection and lem-weil-proetale-isomorphism-inverse-image to Step 6 uses; proof_deps unchanged. The corrected file is fixes/dag/nodes/sec-six-functors/prop-pur-weil-equivariance-compatibilities.json. Accepted as tool uses from other units: sk-thm-purity-transport, sk-thm-smooth-purity, sk-prop-sf-cbc, sk-def-sf-operations, sk-def-sf-admissible, sk-thm-properbasechange and sk-prop-sf-pf-reduction nodes, all in the unit's uses; also convention nodes from sk-def-purity-conv. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
