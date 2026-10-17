@@ -21,7 +21,9 @@
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-noetherian-ring",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "def-pc-ring-pseudo-coherent-complex"
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-sc-derived-global-scalar"
  ],
  "proof": [
   {
@@ -335,5 +337,40 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-1aad72eeb (reviewer sub-agent of L); spot-checked: Read the item, new Tor node, all proof steps, cited DAG statements, unit/chapter route, worker report, and Stacks Tags 0E2U and 0DHY. Verified hypotheses, affine base-change and D(B) coefficient identification, Tor bounds, RHom evaluation, restriction compatibilities, edge cases, duplicate searches, route-pivot compliance, and no SGA or forbidden machinery. Wrote review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e517616c",
+  "group": "Q68",
+  "result": "pass",
+  "note": "The Lean statement matches the node clause by clause: separated, flat, locally finitely presented f with S locally Noetherian; the given pair through the recorded IsCoherentRelativeDualizingPair and its class map; arbitrary chart open immersions with the commuting square; flat, finitely presented and Noetherian conclusions; M pseudo-coherent with K|_U isomorphic to tilde M; one Tor interval for every R-module using the derived tensor over R; M1 as the K-flat extension along includeLeft; eD, eM and eH tied by two squares; IsIso of the algebraic class map (not vacuous, since End_B(A)=A); compatibility with a⊗1 through Mathlib's DerivedCategory.instLinear, checked with a probe file; restriction to every affine open of Spec B with a uniquely determined, existing tensor comparison and IsIso of the canonical Hom localization (flat base change, More on Algebra 0A6A), the other equations there following formally. No added hypothesis, universe equality, hollow definition or local proof; the only sorry is the theorem's proof. lean.statement matches the file exactly. stmt_deps add only two existing landed definition nodes that the Lean uses (permitted by the tools). The report has a real Worker report and Second reading by Q68. nt_compile.py: rc 0 twice (53.2 s and 47.9 s, clean); two other runs at load average about 129 timed out at 60 s, so the compile is close to the per-file limit under load."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelativeDualizingComparison",
+  "declaration": "AlgebraicGeometry.affine_relativeDualizing_comparison",
+  "declarations": [
+   "AlgebraicGeometry.relativeDualizingAffineTilde",
+   "CategoryTheory.degreeZeroDerivedMultiplication",
+   "AlgebraicGeometry.relativeDualizingDerivedExtension",
+   "AlgebraicGeometry.relativeDualizingModuleDiagonal",
+   "AlgebraicGeometry.relativeDualizingModuleMultiplication",
+   "AlgebraicGeometry.relativeDualizingModuleClassMap",
+   "AlgebraicGeometry.relativeDualizingProductChart",
+   "AlgebraicGeometry.relativeDualizingExtensionCounit",
+   "AlgebraicGeometry.IsRelativeDualizingExtensionTensorComparison",
+   "AlgebraicGeometry.relativeDualizingHomLocalization",
+   "AlgebraicGeometry.relativeDualizingLocalizedClassMap",
+   "AlgebraicGeometry.relativeDualizingModuleFirstPullback",
+   "AlgebraicGeometry.relativeDualizingModuleHom",
+   "AlgebraicGeometry.affine_relativeDualizing_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRelativeDualizingComparison.lean",
+  "statement": "theorem affine_relativeDualizing_comparison [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] [IsLocallyNoetherian S] (K : schemeDerivedCategory X) (ξ : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj K) (hKξ : IsCoherentRelativeDualizingPair f K ξ) (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} A)] [HasDerivedCategory.{u} (ModuleCat.{u} (A ⊗[R] A))] (jA : Spec (.of A) ⟶ X) (jR : Spec (.of R) ⟶ S) [IsOpenImmersion jA] [IsOpenImmersion jR] (h : jA ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) ≫ jR) : (algebraMap R A).Flat ∧ Algebra.FinitePresentation R A ∧ IsNoetherianRing R ∧ IsNoetherianRing A ∧ ∃ M : DerivedCategory (ModuleCat.{u} A), DerivedCategory.IsPseudoCoherent M ∧ (∃ a b : ℤ, a ≤ b ∧ ∀ (N : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj M) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj N)))) ∧ Nonempty ((derivedPullback jA).obj K ≅ (relativeDualizingAffineTilde A).obj M) ∧ ∃ (eD : (derivedPullback (relativeDualizingProductChart f R A jA jR h)).obj (DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f)) ≅ (relativeDualizingAffineTilde (A ⊗[R] A)).obj (relativeDualizingModuleDiagonal R A)) (eM : (derivedPullback (relativeDualizingProductChart f R A jA jR h)).obj ((derivedPullback (pullback.fst f f)).obj K) ≅ (relativeDualizingAffineTilde (A ⊗[R] A)).obj (relativeDualizingModuleFirstPullback R A M)) (eH : (derivedPullback (relativeDualizingProductChart f R A jA jR h)).obj ((derivedInternalHom (Opens.grothendieckTopology (pullback f f : Scheme.{u})) (pullback f f).sheaf).obj (op (DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f)), (derivedPullback (pullback.fst f f)).obj K)) ≅ (relativeDualizingAffineTilde (A ⊗[R] A)).obj (relativeDualizingModuleHom R A M)) (ξU : (relativeDualizingModuleDiagonal R A) ⟶ (relativeDualizingModuleFirstPullback R A M)), eD.hom ≫ (relativeDualizingAffineTilde (A ⊗[R] A)).map ξU = (derivedPullback (relativeDualizingProductChart f R A jA jR h)).map ξ ≫ eM.hom ∧ eD.hom ≫ (relativeDualizingAffineTilde (A ⊗[R] A)).map (relativeDualizingModuleClassMap R A (relativeDualizingModuleFirstPullback R A M) ξU) = (derivedPullback (relativeDualizingProductChart f R A jA jR h)).map (relativeDualizingClassMap f K ξ) ≫ eH.hom ∧ IsIso (relativeDualizingModuleClassMap R A (relativeDualizingModuleFirstPullback R A M) ξU) ∧ (∀ (a : A) (s : RingCat.sectionsSubring ((Spec (.of (A ⊗[R] A))).sheaf.obj ⋙ forget₂ CommRingCat RingCat)), s.val (op ⊤) = (Scheme.ΓSpecIso (.of (A ⊗[R] A))).inv.hom ((Algebra.TensorProduct.includeLeft : A →ₐ[R] (A ⊗[R] A)) a) → schemeDerivedScalar (Spec (.of (A ⊗[R] A))) s (𝟙 _) ≫ eD.hom = eD.hom ≫ (relativeDualizingAffineTilde (A ⊗[R] A)).map (((Algebra.TensorProduct.includeLeft : A →ₐ[R] (A ⊗[R] A)) a) • 𝟙 (relativeDualizingModuleDiagonal R A)) ∧ schemeDerivedScalar (Spec (.of (A ⊗[R] A))) s (𝟙 _) ≫ eM.hom = eM.hom ≫ (relativeDualizingAffineTilde (A ⊗[R] A)).map (((Algebra.TensorProduct.includeLeft : A →ₐ[R] (A ⊗[R] A)) a) • 𝟙 (relativeDualizingModuleFirstPullback R A M)) ∧ schemeDerivedScalar (Spec (.of (A ⊗[R] A))) s (𝟙 _) ≫ eH.hom = eH.hom ≫ (relativeDualizingAffineTilde (A ⊗[R] A)).map (((Algebra.TensorProduct.includeLeft : A →ₐ[R] (A ⊗[R] A)) a) • 𝟙 (relativeDualizingModuleHom R A M))) ∧ ∀ (C : Type u) [CommRing C] [HasDerivedCategory.{u} (ModuleCat.{u} C)] (φ : (A ⊗[R] A) →+* C) [IsOpenImmersion (Spec.map (CommRingCat.ofHom φ))], ∃ τ : ∀ P Q : DerivedCategory (ModuleCat.{u} (A ⊗[R] A)), (relativeDualizingDerivedExtension φ).obj (P ⊗ Q) ≅ (relativeDualizingDerivedExtension φ).obj P ⊗ (relativeDualizingDerivedExtension φ).obj Q, IsRelativeDualizingExtensionTensorComparison φ τ ∧ ∃ ρ : (relativeDualizingAffineTilde (A ⊗[R] A)) ⋙ (derivedPullback (Spec.map (CommRingCat.ofHom φ))) ≅ (relativeDualizingDerivedExtension φ ⋙ relativeDualizingAffineTilde C), IsIso (relativeDualizingHomLocalization φ τ (relativeDualizingModuleDiagonal R A) (relativeDualizingModuleFirstPullback R A M)) ∧ (relativeDualizingDerivedExtension φ).map (relativeDualizingModuleClassMap R A (relativeDualizingModuleFirstPullback R A M) ξU) ≫ relativeDualizingHomLocalization φ τ (relativeDualizingModuleDiagonal R A) (relativeDualizingModuleFirstPullback R A M) = relativeDualizingLocalizedClassMap R A C φ τ (relativeDualizingModuleFirstPullback R A M) ξU ∧ (derivedPullback (Spec.map (CommRingCat.ofHom φ))).map eD.hom ≫ ρ.hom.app (relativeDualizingModuleDiagonal R A) ≫ (relativeDualizingDerivedExtension φ ⋙ relativeDualizingAffineTilde C).map ξU = (derivedPullback (Spec.map (CommRingCat.ofHom φ))).map ((derivedPullback (relativeDualizingProductChart f R A jA jR h)).map ξ) ≫ (derivedPullback (Spec.map (CommRingCat.ofHom φ))).map eM.hom ≫ ρ.hom.app (relativeDualizingModuleFirstPullback R A M) ∧ (derivedPullback (Spec.map (CommRingCat.ofHom φ))).map eD.hom ≫ ρ.hom.app (relativeDualizingModuleDiagonal R A) ≫ (relativeDualizingAffineTilde C).map (relativeDualizingLocalizedClassMap R A C φ τ (relativeDualizingModuleFirstPullback R A M) ξU) = (derivedPullback (Spec.map (CommRingCat.ofHom φ))).map ((derivedPullback (relativeDualizingProductChart f R A jA jR h)).map (relativeDualizingClassMap f K ξ)) ≫ (derivedPullback (Spec.map (CommRingCat.ofHom φ))).map eH.hom ≫ ρ.hom.app (relativeDualizingModuleHom R A M) ≫ (relativeDualizingAffineTilde C).map (relativeDualizingHomLocalization φ τ (relativeDualizingModuleDiagonal R A) (relativeDualizingModuleFirstPullback R A M))",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 0a2015113bff: removes all statement-local lets; adds the counit-normalized scalar-extension tensor comparison, the evaluation-defined canonical map to the Hom recomputed over each smaller affine open, its invertibility, and compatibility with the class recomputed from localized diagonal multiplication. Uses the recorded supplied-pair predicate and canonical class. Native module morphism universe u remains independent of scheme localization universe w."
  }
 }

@@ -332,5 +332,28 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-88f82ebea (reviewer sub-agent of L); spot-checked: I read the item, the four new nodes, every cited statement, unit sk-i-curve-zero, ILO VI 1.1-1.9 (pp. 69-71) and VIII 3.1.x, and the Stacks tags. The item matches VI 1.8 and 1.4 in the injective, torsion-free chart case of VI 1.9 and is not weakened. There is no cycle: toric-refinement cites the item, and the item's closure does not reach it. All 9 steps check against what the cited statements say. Step 4's corrected stratum formula is (A/I) tensored over Z[G^gp] with Z[F^gp]; I verified it by hand. Step 5's unit character comes from integrality of M_w. In step 6 every hypothesis of the model node holds. Step 7 transfers regularity and dimension through 07NY, 07NV, the closed-immersion lemma, 06LN, 06LK and ind-etale invariance. Steps 3 and 8 use 031E and 00ON with I contained in m_A. I checked all four new statements independently and found them true. Factorization: the image of Q is saturated and an interior primitive vector completes to a basis inside it. Smooth geometric stalk: flatness via 01VB and 01VF, and regular-sequence codimension. Formal model: after rescaling by the twist, completion gives D[[T]] with D the completed localized torus ring with the t variables, and the parameter condition on eta holds even for imperfect residue fields. Dimension: Hilbert-Samuel 00KQ. Test cases: rank 0, unit-only R=Q=Z, the blowup chart N^2 in <e1,e2-e1> at closed and generic exceptional points, V[[x,y]]/(p-xy), and T={0}. No duplicates, no restated clauses, no SGA citation. I accept the 11 declared sk-thm-p1/sk-thm-br commutative-algebra tool_uses. One fix (B5): the source of lem-trf-smooth-geometric-stalk-algebra now gives the missing Stacks tags 01VB and 06LK.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b857ef791",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node (ILO VI 1.4, 1.8-1.9) and its dependencies FineSaturatedLogScheme/EtaleLogHom/IsChart/IsLogRegular, the divisorial pair, and Mathlib Smooth/Etale. Charts cover every geometric point of X; fs P and Q; chart compatibility with f; monomial compatibility determines y and x; comparison fixed by both projections; injective g^gp; torsion-free cokernel (n>0); smooth or etale. Conclusion: log regular, U dense and equal to the triviality locus, divisorial sheaf, isomorphism tied to the structure map alpha, log regular pair. Same form as logRegular_divisorialStructure. No added hypotheses, no universe restriction, one sorry, docstrings complete, lean.statement verbatim, no duplicate found. Edge cases: empty X, disconnected X, trivial log structure, identity chart. nt_compile --json clean: delivered 5.1 s, fixed 4.0 s; error reporting confirmed with a broken copy. One mechanical fix (H8 accuracy): docstring said 'ten steps', the node has nine; full replacement file fixes/LogSmoothLogRegular.lean, statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogSmoothLogRegular",
+  "declaration": "AlgebraicGeometry.logSmooth_logRegular",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogSmoothLogRegular.lean",
+  "statement": "theorem logSmooth_logRegular (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (hY : Y.IsLogRegular) (hcharts : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), ∃ c : InjectiveFSLogChart X Y f, Nonempty ((Scheme.pointSmallEtale t).fiber.obj c.V) ∧ (Smooth c.comparison ∨ Etale c.comparison)) : X.IsLogRegular ∧ ∃ (U : X.scheme.Opens) (hd : DenseRange U.ι), X.logStructure.trivialityLocus = (U : Set X.scheme) ∧ Presheaf.IsSheaf X.scheme.smallEtaleTopology (divisorialLogPresheaf U.ι) ∧ (∃ e : X.logStructure.monoidSheaf.obj ≅ divisorialLogPresheaf U.ι, e.hom ≫ divisorialStructuralMap U.ι = X.logStructure.alpha) ∧ @IsDivisorialFineSaturatedLogRegularPair X.scheme U.toScheme U.ι inferInstance X.locallyNoetherian hd",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.InjectiveFSLogChart",
+   "AlgebraicGeometry.logSmooth_logRegular"
+  ],
+  "fixed_by": "NT-stage2-cc-b857ef791"
  }
 }
