@@ -91,4 +91,185 @@ theorem globalSectionsStr_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l Y) (m : 
 
 end ProEtaleWeilSheaf
 
+namespace ProEtale
+
+variable {l : ℕ} [Fact l.Prime]
+
+lemma forget_map_adicLowerStarSquareIso_hom_app {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y}
+    {q : Y ⟶ X} {p' : Z ⟶ Y'} {q' : Y' ⟶ X} (h : p ≫ q = p' ≫ q') (M : AdicSheaf l Z) :
+    (AdicSheaf.forget X).map ((adicLowerStarSquareIso l h).hom.app M) =
+      (lowerStarComp _ p q).hom.app M.X ≫ (lowerStarCongr _ h).hom.app M.X ≫
+        (lowerStarComp _ p' q').inv.app M.X := by
+  simp only [adicLowerStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  rfl
+
+/-- The `ℚ̄_ℓ`-linear maps induced by the powers of an endomorphism are the powers of the induced
+map. -/
+lemma toModuleCat_map_pow {M : WeilCoefficients.{u} l} (f : End M) (r : ℕ) :
+    ((WeilCoefficients.toModuleCat l).map (f ^ r)).hom =
+      ((WeilCoefficients.toModuleCat l).map f).hom ^ r := by
+  induction r with
+  | zero => rw [pow_zero, pow_zero]; rfl
+  | succ r ih =>
+    rw [pow_succ, pow_succ, End.mul_def, Functor.map_comp, ModuleCat.hom_comp, ih,
+      Module.End.mul_eq_comp]
+
+/-- An isomorphism `E` of `ℚ̄_ℓ`-modules intertwining automorphisms `Φ` and `Ψʳ` induces a linear
+equivalence intertwining the induced automorphism of `Φ` with the `r`-th power of that of `Ψ`. -/
+lemma linearEquivOfIso_apply_linearEquivOfIso {M N : WeilCoefficients.{u} l} (Φ : M ≅ M)
+    (Ψ : N ≅ N) (E : M ≅ N) (r : ℕ)
+    (h : Φ.hom ≫ E.hom = E.hom ≫ @HPow.hPow (End N) ℕ _ _ Ψ.hom r)
+    (x : (WeilCoefficients.toModuleCat l).obj M) :
+    WeilCoefficients.linearEquivOfIso E (WeilCoefficients.linearEquivOfIso Φ x) =
+      ((WeilCoefficients.linearEquivOfIso Ψ).toLinearMap ^ r)
+        (WeilCoefficients.linearEquivOfIso E x) := by
+  have h' := congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom x) h
+  simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply, toModuleCat_map_pow]
+    at h'
+  exact h'
+
+end ProEtale
+
+namespace WeilSheaf
+
+open ProEtaleWeilSheaf
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {k₀' : Type u} [Field k₀'] [Finite k₀'] [Fact (ringChar k₀' ≠ l)]
+  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  {X' : Scheme.{u}} [X'.Over (Spec (CommRingCat.of k₀'))]
+  [QuasiCompact (X' ↘ Spec (CommRingCat.of k₀'))]
+  [QuasiSeparated (X' ↘ Spec (CommRingCat.of k₀'))]
+  [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀'))]
+  (θ : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
+    (X' ↘ Spec (CommRingCat.of k₀')).geometricFiber)
+  (ψ : (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
+    (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
+  (hθ : θ.hom ≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
+  (hψ : ψ.hom ≫ (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
+    ((Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫
+      ψ.hom)
+  (hsq : θ.hom ≫ Scheme.Hom.geometricFiberMap (X' ↘ Spec (CommRingCat.of k₀'))
+      (comp_over (X' ↘ Spec (CommRingCat.of k₀')) _) =
+    Scheme.Hom.geometricFiberMap (X ↘ Spec (CommRingCat.of k₀))
+      (comp_over (X ↘ Spec (CommRingCat.of k₀)) _) ≫ ψ.hom)
+
+section Unfold
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+lemma cohomology_eq (F : WeilSheaf k₀ l Y) (i : ℤ) :
+    F.cohomology i = ((WeilComplex.homologySheaf i).obj
+      ((WeilComplex.derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).obj
+        (toComplex.obj F))).globalSections :=
+  rfl
+
+lemma globalSections_frobenius_apply (F : WeilSheaf k₀ l Y) (x : F.globalSections.carrier) :
+    F.globalSections.frobenius x = WeilCoefficients.linearEquivOfIso
+      (((globalSectionsLowerStarIso _
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app F.obj.carrier.X).symm ≪≫
+        (Sheaf.Γ _ _).mapIso ((AdicSheaf.forget _).mapIso F.obj.str)) x :=
+  rfl
+
+lemma globalSections_frobeniusEnd (F : WeilSheaf k₀ l Y) :
+    F.globalSections.frobeniusEnd = (WeilCoefficients.linearEquivOfIso
+      (((globalSectionsLowerStarIso _
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app F.obj.carrier.X).symm ≪≫
+        (Sheaf.Γ _ _).mapIso ((AdicSheaf.forget _).mapIso F.obj.str))).toLinearMap :=
+  rfl
+
+end Unfold
+
+include hθ hψ hsq in
+/-- Let `θ : X̄ ≅ X̄'` and `ψ : Spec k̄ ≅ Spec k̄'` identify the geometric fibers of a `k₀`-scheme
+`X` and of `Spec k₀` with those of a `k₀'`-scheme `X'` and of `Spec k₀'`, compatibly with the
+structure morphisms, such that the geometric Galois Frobenii relative to `k₀'` correspond to the
+`r`-th powers of those relative to `k₀`. Then `Hⁱ(X' ⊗ k̄', ℚ̄_ℓ) ≅ Hⁱ(X ⊗ k̄, ℚ̄_ℓ)`, the geometric
+Frobenius of `k₀'` corresponding to the `r`-th power of that of `k₀`. -/
+theorem exists_linearEquiv_cohomology_adicConstant_of_iso (i : ℤ) :
+    ∃ e : ((adicConstant k₀' l X').cohomology i).carrier ≃ₗ[PadicAlgCl l]
+        ((adicConstant k₀ l X).cohomology i).carrier,
+      ∀ x, e (((adicConstant k₀' l X').cohomology i).frobenius x) =
+        (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ r) (e x) := by
+  rw [cohomology_eq, cohomology_eq]
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (X' ↘ Spec (CommRingCat.of k₀')).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (X' ↘ Spec (CommRingCat.of k₀')).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricFiber) ℤ
+  let TX := transport (l := l) θ r hθ
+  let Tp := transport (l := l) ψ r hψ
+  let L := ProEtaleWeilSheaf.lowerStar k₀ l (X ↘ Spec (CommRingCat.of k₀))
+  let L' := ProEtaleWeilSheaf.lowerStar k₀' l (X' ↘ Spec (CommRingCat.of k₀'))
+  let Q := (DerivedCategory.singleFunctor (ProEtaleWeilSheaf k₀ l X) 0).obj
+    (ProEtaleWeilSheaf.adicConstant k₀ l X)
+  let Q' := (DerivedCategory.singleFunctor (ProEtaleWeilSheaf k₀' l X') 0).obj
+    (ProEtaleWeilSheaf.adicConstant k₀' l X')
+  let M := L.rightDerivedFunctor.obj Q
+  let M' := L'.rightDerivedFunctor.obj Q'
+  let N := (DerivedCategory.homologyFunctor _ i).obj M
+  let N' := (DerivedCategory.homologyFunctor _ i).obj M'
+  let ε : TX ⋙ IsoAlgebra.forget _ ≅ IsoAlgebra.forget _ ⋙ (θ.hom)_*ᵃ[l] :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ (Category.comp_id _).trans
+      (Category.id_comp _).symm)
+  let iso₁ : Q' ≅ TX.mapDerivedCategory.obj Q :=
+    (DerivedCategory.singleFunctor _ 0).mapIso (adicConstantTransportIso θ r hθ) ≪≫
+      ((TX.mapDerivedCategorySingleFunctor 0).app _).symm
+  let iso₂ : M' ≅ Tp.mapDerivedCategory.obj M :=
+    L'.rightDerivedFunctor.mapIso iso₁ ≪≫
+      ((IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIso TX ε
+        (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l
+          (X' ↘ Spec (CommRingCat.of k₀')) (comp_over _ _))).app Q).symm ≪≫
+      (Functor.rightDerivedFunctorNatIso
+        (transportLowerStarIso θ r hθ ψ hψ _ _ hsq)).app Q ≪≫
+      (Functor.rightDerivedFunctorCompMapDerivedCategoryIso L Tp).app Q
+  let J : N' ≅ Tp.obj N :=
+    (DerivedCategory.homologyFunctor _ i).mapIso iso₂ ≪≫
+      ((Tp.mapDerivedCategoryHomologyFunctorIso i).app M).symm
+  let E : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj N'.carrier.X ≅
+      (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj N.carrier.X :=
+    (Sheaf.Γ _ _).mapIso ((AdicSheaf.forget _).mapIso ((IsoAlgebra.forget _).mapIso J)) ≪≫
+      (globalSectionsLowerStarIso _ ψ.hom).app N.carrier.X
+  refine ⟨WeilCoefficients.linearEquivOfIso E, fun x ↦ ?_⟩
+  rw [globalSections_frobenius_apply, globalSections_frobeniusEnd]
+  refine ProEtale.linearEquivOfIso_apply_linearEquivOfIso _ _ E r ?_ x
+  change globalSectionsStr _ ((AdicSheaf.forget _).map N'.str.hom) ≫ E.hom =
+    E.hom ≫ @HPow.hPow (End _) ℕ _ _ (globalSectionsStr _ ((AdicSheaf.forget _).map N.str.hom)) r
+  rw [← globalSectionsStr_frobeniusPowIso N r]
+  have hf : ((Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv)_*[
+      WeilCoefficients.{u} l].map ((AdicSheaf.forget _).map J.hom.hom.f) ≫
+        (AdicSheaf.forget _).map (Tp.obj N).str.hom =
+      (AdicSheaf.forget _).map N'.str.hom ≫ (AdicSheaf.forget _).map J.hom.hom.f := by
+    have := congrArg (AdicSheaf.forget _).map J.hom.hom.h
+    rw [Functor.map_comp, Functor.map_comp] at this
+    exact this
+  have nat := globalSectionsStr_naturality _ ((AdicSheaf.forget _).map J.hom.hom.f) hf
+  have tr := globalSectionsStr_transport ψ.hom _ _ (hom_comp_geometricGaloisFrobenius_inv ψ r hψ)
+    ((AdicSheaf.forget _).map (N.frobeniusPowIso r).hom)
+  have hstr : (AdicSheaf.forget _).map (Tp.obj N).str.hom =
+      (lowerStarComp _ _ _).hom.app N.carrier.X ≫
+        (lowerStarCongr _ (hom_comp_geometricGaloisFrobenius_inv ψ r hψ)).hom.app N.carrier.X ≫
+        (lowerStarComp _ _ _).inv.app N.carrier.X ≫
+        (ψ.hom)_*[_].map ((AdicSheaf.forget _).map (N.frobeniusPowIso r).hom) := by
+    rw [transport_obj_str, Iso.trans_hom, Functor.map_comp, Iso.app_hom, transportCommIso_eq,
+      forget_map_adicLowerStarSquareIso_hom_app, Category.assoc, Category.assoc]
+    rfl
+  rw [hstr] at nat
+  simp only [E, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, IsoAlgebra.forget_map]
+  rw [← reassoc_of% nat, tr, Category.assoc]
+
+end WeilSheaf
+
 end AlgebraicGeometry
