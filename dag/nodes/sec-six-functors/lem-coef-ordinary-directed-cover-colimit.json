@@ -159,5 +159,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-a3be1f114 (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full. Read the cited def-weil-pbc-category-colimit (Mathlib leaf CategoryTheory.Limits.colimit) and Stacks categories.tex 1310-1329 (002F definition-colimit; the empty colimit is initial at 1332). Read the citer lem-coef-cellular-tree-presentable-approximations Steps 2 and 10-12: Q is a nonempty filtered subposet and the S_q^◁ are increasing, covering, full subposets, so the hypotheses match. The statement is unchanged against the side and live DAGs, and live is still unsplit. Only proof, proof_deps, proof_origin, status and split_report changed; proof_deps equals the union of uses. There are no new nodes, no cycle and no SGA citation. The only citation is a definition/Mathlib leaf, so no tool_use is needed. Math: Step 1 gets u_ij and v_i and their functoriality from uniqueness. Step 2 shows the choice of index does not matter and that the cocone equation holds, using an upper bound of two indices plus fullness, which also handles parallel arrows. Step 3 shows the two constructions are inverse. Step 4: I recomputed Hom(L,H) -> families as phi |-> (phi v_i), a bijection, so (L,(v_i)) is a colimit and the comparison is an iso. Step 5 (empty C, empty C_i) is genuinely elementary. Tested on singleton I, empty C, empty early stages, incomparable indices with a common bound, and parallel arrows. Duplicates checked: directed-cover-colimit-assembly, infinity-directed-union-local-colimits, infinity-directed-cone-cover, colimit-subdiagram-approximation and directed-cover-mixed-subset-cells are all simplicial/∞ statements, not this ordinary cocone bijection; blueprint search found 0 matches. FIX: proof_origin.place and split_report.blueprint attributed 'former Step 12' to prop-coef-integral-exceptional-adjoint.proof.md, which has no numbered steps. I rewrote both to name the blueprint paragraph served via the chain ('For K in D^b_c(X,R) ... derived coefficient adjunction') and Step 12 of the DAG node lem-coef-cellular-tree-presentable-approximations. Whole corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-ordinary-directed-cover-colimit.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrdinaryDirectedCoverColimit",
+  "declaration": "CategoryTheory.Limits.ordinary_directed_cover_colimit",
+  "file": "lean/Sheaf/CategoryTheory/OrdinaryDirectedCoverColimit.lean",
+  "statement": "theorem ordinary_directed_cover_colimit {I : Type u} [PartialOrder I] [Nonempty I] (hdir : ∀ i j : I, ∃ k : I, i ≤ k ∧ j ≤ k) {C : Type u} [SmallCategory C] (S : I → ObjectProperty C) (hmono : Monotone S) (hcover : ∀ c : C, ∃ i : I, S i c) {A : Type v} [Category.{u} A] [HasColimitsOfSize.{u, u} A] (F : C ⥤ A) (s : ∀ i : I, Cocone ((S i).ι ⋙ F)) (hs : ∀ i : I, IsColimit (s i)) (t : Cocone F) (ht : IsColimit t) : ∃ (D : I ⥤ A) (e : ∀ i : I, D.obj i = (s i).pt) (v : D ⟶ (Functor.const I).obj t.pt), (∀ (i j : I) (hij : i ≤ j) (a : (s i).pt ⟶ (s j).pt), (∀ c : (S i).FullSubcategory, (s i).ι.app c ≫ a = (s j).ι.app ⟨c.obj, hmono hij c.obj c.property⟩) ↔ a = eqToHom (e i).symm ≫ D.map (homOfLE hij) ≫ eqToHom (e j)) ∧ (∀ (i : I) (a : (s i).pt ⟶ t.pt), (∀ c : (S i).FullSubcategory, (s i).ι.app c ≫ a = t.ι.app c.obj) ↔ a = eqToHom (e i).symm ≫ v.app i) ∧ Nonempty (IsColimit (⟨t.pt, v⟩ : Cocone D)) ∧ (∀ H : A, ∃ E : { f : ∀ i : I, (s i).pt ⟶ H // ∀ (i j : I) (hij : i ≤ j), (eqToHom (e i).symm ≫ D.map (homOfLE hij) ≫ eqToHom (e j)) ≫ f j = f i } ≃ (F ⟶ (Functor.const C).obj H), ∀ (g : F ⟶ (Functor.const C).obj H) (i : I) (c : (S i).FullSubcategory), (s i).ι.app c ≫ (E.symm g).val i = g.app c.obj) ∧ IsIso (colimit.desc D (⟨t.pt, v⟩ : Cocone D)) ∧ (∀ i : I, colimit.ι D i ≫ colimit.desc D (⟨t.pt, v⟩ : Cocone D) = v.app i)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-67ecf5475",
+  "group": "NS",
+  "result": "fix",
+  "note": "Lean and mathematics accepted; exact signature and clean scompile.py reproduction verified. Wrote review.md and a complete replacement report under fixes/ correcting the H11 placeholder second reading. Branch unchanged."
  }
 }
