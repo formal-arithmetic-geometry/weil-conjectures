@@ -571,5 +571,41 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-c537b4657 (reviewer sub-agent of L); spot-checked: Read all eight steps and 23 citations; checked Stacks 03DX, 05VG, 03LC, fpqc descent, transition orientation, pullback coherence, and edge cases. No new nodes, cycles, hidden long steps, or mathematical faults found. Accepted six generic tool uses; review.md records checks and the unavailable route-pivot list."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e0922bbf7",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, exact signature, and per-file compilation passed. review.md records all checks. fixes/lem-trf-scheme-etale-invertible-comparison.report.md supplies the complete report replacement, correcting H11 by adding the independent second reading."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.SchemeEtaleInvertibleComparison",
+  "declaration": "AlgebraicGeometry.Scheme.scheme_etale_invertible_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.trfEtaleStructureRing_isSheaf",
+   "AlgebraicGeometry.Scheme.trfEtaleStructureRing",
+   "AlgebraicGeometry.Scheme.TrfInvertibleModules",
+   "AlgebraicGeometry.Scheme.TrfIsEtaleLine",
+   "AlgebraicGeometry.Scheme.TrfEtaleLineModules",
+   "AlgebraicGeometry.Scheme.trfInvertibleSections",
+   "AlgebraicGeometry.Scheme.trfEtaleCompose",
+   "AlgebraicGeometry.Scheme.trfTensorId",
+   "AlgebraicGeometry.Scheme.trfEtaleIdArrow",
+   "AlgebraicGeometry.Scheme.trfEtaleCompArrow",
+   "AlgebraicGeometry.Scheme.trfStructureInvertible",
+   "AlgebraicGeometry.Scheme.trfTensorUnit",
+   "AlgebraicGeometry.Scheme.trfLineSections",
+   "AlgebraicGeometry.Scheme.trfComparisonMap",
+   "AlgebraicGeometry.Scheme.scheme_etale_invertible_comparison"
+  ],
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/SchemeEtaleInvertibleComparison.lean",
+  "statement": "theorem scheme_etale_invertible_comparison : ∃ (E : ∀ X : Scheme.{u}, TrfInvertibleModules X ≌ TrfEtaleLineModules X) (α : ∀ (X : Scheme.{u}) (L : TrfInvertibleModules X), trfLineSections ((E X).functor.obj L) ≅ trfInvertibleSections L), (∀ (X : Scheme.{u}) (L : TrfInvertibleModules X) (U : X.Etale) (r : Γ(U.left, ⊤)) (s : ((E X).functor.obj L).obj.val.obj (op U)), (α X L).hom.hom.app (op U) (r • s) = (((Modules.tensorPullback U.hom).obj L.obj).smul r).hom ((α X L).hom.hom.app (op U) s)) ∧ (∀ (X : Scheme.{u}) (L K : TrfInvertibleModules X) (h : L.obj ⟶ K.obj) (U : X.Etale) (s : ((E X).functor.obj L).obj.val.obj (op U)), (α X K).hom.hom.app (op U) ((trfComparisonMap (E X).functor h).val.app (op U) s) = ((Modules.tensorPullback U.hom).map h).app ⊤ ((α X L).hom.hom.app (op U) s)) ∧ (∃ ε : ∀ X : Scheme.{u}, ((E X).functor.obj (trfStructureInvertible X)).obj ≅ SheafOfModules.unit (trfEtaleStructureRing X), ∀ (X : Scheme.{u}) (U : X.Etale) (s : ((E X).functor.obj (trfStructureInvertible X)).obj.val.obj (op U)), (ε X).hom.val.app (op U) s = (trfTensorUnit U.hom).hom.app ⊤ ((α X (trfStructureInvertible X)).hom.hom.app (op U) s)) ∧ ∃ (p : ∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (L : TrfInvertibleModules X), ((Modules.tensorPullback v).obj L.obj).IsInvertible) (β : ∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (L : TrfInvertibleModules X), (PresheafOfModules.pushforward₀ (trfEtaleCompose v) (trfEtaleStructureRing X).obj).obj ((E X).functor.obj L).obj.val ≅ ((E Y).functor.obj ⟨(Modules.tensorPullback v).obj L.obj, p X Y v L⟩).obj.val), (∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (L : TrfInvertibleModules X) (W : Y.Etale) (s : ((E X).functor.obj L).obj.val.obj (op ((trfEtaleCompose v).obj W))), (α Y ⟨(Modules.tensorPullback v).obj L.obj, p X Y v L⟩).hom.hom.app (op W) ((β X Y v L).hom.app (op W) s) = ((Modules.tensorSectionsComp W.hom v).inv.app L.obj).app ⊤ ((α X L).hom.hom.app (op ((trfEtaleCompose v).obj W)) s)) ∧ (∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (L K : TrfInvertibleModules X) (h : L.obj ⟶ K.obj) (W : Y.Etale), (β X Y v L).hom.app (op W) ≫ (trfComparisonMap (E Y).functor (L := ⟨(Modules.tensorPullback v).obj L.obj, p X Y v L⟩) (K := ⟨(Modules.tensorPullback v).obj K.obj, p X Y v K⟩) ((Modules.tensorPullback v).map h)).val.app (op W) = (trfComparisonMap (E X).functor h).val.app (op ((trfEtaleCompose v).obj W)) ≫ (β X Y v K).hom.app (op W)) ∧ (∀ (X : Scheme.{u}) (L : TrfInvertibleModules X) (W : X.Etale) (s : ((E X).functor.obj L).obj.val.obj (op ((trfEtaleCompose (𝟙 X)).obj W))), (trfComparisonMap (E X).functor (L := ⟨(Modules.tensorPullback (𝟙 X)).obj L.obj, p X X (𝟙 X) L⟩) (K := L) ((trfTensorId X).hom.app L.obj)).val.app (op W) ((β X X (𝟙 X) L).hom.app (op W) s) = ((E X).functor.obj L).obj.val.map (trfEtaleIdArrow W).op s) ∧ (∀ (X Y Z : Scheme.{u}) (v : Y ⟶ X) (w : Z ⟶ Y) [Etale v] [Etale w] (L : TrfInvertibleModules X) (W : Z.Etale) (s : ((E X).functor.obj L).obj.val.obj (op ((trfEtaleCompose v).obj ((trfEtaleCompose w).obj W)))), (trfComparisonMap (E Z).functor (L := ⟨(Modules.tensorPullback w).obj ((Modules.tensorPullback v).obj L.obj), p Y Z w ⟨(Modules.tensorPullback v).obj L.obj, p X Y v L⟩⟩) (K := ⟨(Modules.tensorPullback (w ≫ v)).obj L.obj, p X Z (w ≫ v) L⟩) ((Modules.tensorSectionsComp w v).hom.app L.obj)).val.app (op W) ((β Y Z w ⟨(Modules.tensorPullback v).obj L.obj, p X Y v L⟩).hom.app (op W) ((β X Y v L).hom.app (op ((trfEtaleCompose w).obj W)) s)) = (β X Z (w ≫ v) L).hom.app (op W) (((E X).functor.obj L).obj.val.map (trfEtaleCompArrow v w W).op s))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The comparison is specified by an equivalence and additive sheaf identifications with the recorded etaleTensorSectionsSheaf, with scalar and morphism formulas. Restriction is a module-presheaf isomorphism characterized by the normalized tensorSectionsComp, with explicit naturality and identity/composition equations. Helpers belong to the ring, line-module, and restriction notions introduced by this node; the structure ring has explicit data and a separately named sheaf-condition theorem. No statement correction or dependency replacement."
  }
 }
