@@ -207,28 +207,5 @@ theorem upperStarStr_pairing {P Q R : AdicSheaf l Y} (sP : (b.inv)_*ᵃ[l].obj P
   simp only [Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hψ, reassoc_of% nψ]
 
-/-- **The comparison `j^* 𝓗om(A, B) ⟶ 𝓗om(j^* A, j^* B)` is compatible with the structure
-isomorphisms** induced by `(b⁻¹)_* A ≅ A` and `(b⁻¹)_* B ≅ B`. -/
-theorem adicUpperStarIhomComparison_str {A B : AdicSheaf l Y} (sA : (b.inv)_*ᵃ[l].obj A ≅ A)
-    (sB : (b.inv)_*ᵃ[l].obj B ≅ B) :
-    (a.inv)_*ᵃ[l].map (adicUpperStarIhomComparison l j A B) ≫
-        (ihomStr l a (upperStarStr l c sA) (upperStarStr l c sB)).hom =
-      (upperStarStr l c (ihomStr l b sA sB)).hom ≫ adicUpperStarIhomComparison l j A B := by
-  apply Mod.hom_ext
-  rw [Mod.comp_hom', Mod.comp_hom', adicLowerStar_map_hom]
-  apply Mod.hom_ext_of_evaluation
-  have : IsIso (upperStarStr l c sA).hom.hom :=
-    inferInstanceAs (IsIso ((Mod.forget _).map (upperStarStr l c sA).hom))
-  have h1 := ihomStr_evaluation a (upperStarStr l c sA) (upperStarStr l c sB)
-  have h2 := upperStarStr_pairing (c := c) (ihomStr l b sA sB) sA sB (Mod.evaluation A B)
-    (ihomStr_evaluation b sA sB)
-  have h3 := uncurryHom_adicUpperStarIhomComparison j A B
-  rw [Mod.uncurryHom] at h3
-  rw [← cancel_epi (_ ◁ (upperStarStr l c sA).hom.hom), comp_whiskerRight_assoc,
-    whisker_exchange_assoc, ← tensorHom_def'_assoc, h1, comp_whiskerRight_assoc,
-    ← tensorHom_def'_assoc]
-  erw [h3, h2, ← h3]
-  exact μ_natural_left_assoc (a.inv)_*[WeilCoefficients.{u} l]
-    (adicUpperStarIhomComparison l j A B).hom _ _
 
 end AlgebraicGeometry.ProEtale

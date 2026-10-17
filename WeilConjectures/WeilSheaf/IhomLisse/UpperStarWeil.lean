@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.IhomCurry
 public import WeilConjectures.WeilSheaf.IhomLisse.UpperStar
 
 /-!
@@ -39,10 +40,17 @@ lemma upperStarIhomComparison_comm (A B : ProEtaleWeilSheaf k₀ l Y) :
     ((upperStar k₀ l φ).obj ((ihomFunctor k₀ l Y A).obj B)).obj.str ≫
       adicUpperStarIhomComparison l
         (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
-        A.carrier B.carrier :=
-  adicUpperStarIhomComparison_str
+        A.carrier B.carrier := by
+  have h3 := uncurryHom_adicUpperStarIhomComparison
+    (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))) A.carrier B.carrier
+  rw [Mod.uncurryHom] at h3
+  refine ProEtaleWeilSheaf.homToIhom_comm _ _ _ _ ?_
+  erw [h3]
+  exact upperStarStr_pairing
     (c := (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
-      (comp_over φ (Spec (CommRingCat.of k₀)))).symm) A.str B.str
+      (comp_over φ (Spec (CommRingCat.of k₀)))).symm)
+    ((ihomFunctor k₀ l Y A).obj B).str A.str B.str (Mod.evaluation A.carrier B.carrier)
+    (ProEtaleWeilSheaf.ihom_evaluation_str A B)
 
 /-- **Pullback commutes with the internal hom out of a lisse pro-étale Weil sheaf**:
 `φ^* [A, -] ≅ [φ^* A, φ^* -]`. -/
