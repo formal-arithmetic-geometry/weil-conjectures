@@ -13,7 +13,9 @@
   "def-pur-sheaf-hom",
   "lem-pur-twist-sheaf-locally-free",
   "def-weil-pbc-proetale-site",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-integral-twist-line-inverse-image",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -295,25 +297,25 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-de535e8f9",
-  "group": "Q123",
+  "reviewer": "NT-stage2-Codex-46d582859",
+  "group": "Q138",
   "result": "pass",
-  "note": "Completed integral twist base-change delivery checked clause by clause; source, dependencies, canonicality, edge cases, docstrings, and successful scompile verified."
+  "note": "Reviewed immutable snapshot and dependencies; reproduced sandbox and library scompile successfully; no substantive or mechanical defects found."
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralTwistBaseChange",
   "declaration": "WeilConjectures.integral_twist_base_change",
   "declarations": [
-   "WeilConjectures.integralTwistAbSheaf",
-   "WeilConjectures.IntegralTwistSchemeArrows",
-   "WeilConjectures.IsCanonicalIntegralTwistSchemeArrows",
-   "WeilConjectures.IntegralTwistSchemeArrows.AreIsomorphisms",
+   "WeilConjectures.integralTwistUnderlying",
+   "WeilConjectures.integralTwistScalarUnderlying",
+   "WeilConjectures.integralTwistInverseSection",
+   "WeilConjectures.IsIntegralTwistInverseComparison",
    "WeilConjectures.integral_twist_base_change"
   ],
   "file": "lean/Sheaf/Paper/IntegralTwistBaseChange.lean",
-  "statement": "theorem integral_twist_base_change [∀ x : S, Invertible (l : S.residueField x)] : IsCanonicalTwistScalarMaps l E S F ι (twistScalarMaps l E S F ι) ∧ (∀ (m : ℤ) (U : S.ProEtᵒᵖ) (b : (completedIntegralCommRingSheafUnrestricted l F S).obj.obj U) (x : (integralTwistLine l E S m).val.obj U), (twistLineScalarIso l E S F ι m).hom.val.app U (integralOrdinaryTensorSection l E F ι S _ U b x) = b • (@id ((integralTwistLine l F S m).val.obj U) ((twistScalarMaps l E S F ι m).val.app U x))) ∧ (∀ (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G] (κ : F →ₐ[ℚ_[l]] G) (m : ℤ) (U : S.ProEtᵒᵖ) (x : (integralTwistLine l E S m).val.obj U), (twistScalarMaps l E S G (κ.comp ι) m).val.app U x = (twistScalarMaps l F S G κ m).val.app U ((twistScalarMaps l E S F ι m).val.app U x)) ∧ ∀ (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] (h : X ⟶ S), ∃ (aE : IntegralTwistSchemeArrows l E S X h) (aF : IntegralTwistSchemeArrows l F S X h), IsCanonicalIntegralTwistSchemeArrows l E S X h aE ∧ IsCanonicalIntegralTwistSchemeArrows l F S X h aF ∧ aE.AreIsomorphisms l E S X h ∧ aF.AreIsomorphisms l F S X h ∧ (∀ a : IntegralTwistSchemeArrows l E S X h, IsCanonicalIntegralTwistSchemeArrows l E S X h a → a = aE) ∧ (∀ a : IntegralTwistSchemeArrows l F S X h, IsCanonicalIntegralTwistSchemeArrows l F S X h a → a = aF) ∧ (integralCompletedScalarMap l E F ι S ≫ aF.coeff = aE.coeff ≫ (proEtaleSheafDirectImage h CommRingCat.{u + 1}).map (integralCompletedScalarMap l E F ι X)) ∧ ∀ (m : ℤ) (U : S.ProEtᵒᵖ) (x : (integralTwistLine l E S m).val.obj U), (aF.line m).hom.app U ((twistScalarMaps l E S F ι m).val.app U x) = (twistScalarMaps l E X F ι m).val.app ((proEtaleBaseChange h).op.obj U) ((aE.line m).hom.app U x)",
+  "statement": "theorem integral_twist_base_change (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F] (ι : E →ₐ[Padic l] F) (S : Scheme.{u}) [∀ x : S, Invertible (l : S.residueField x)] : IsCanonicalTwistScalarMaps l E S F ι (twistScalarMaps l E S F ι) ∧ (∀ (m : ℤ) (U : S.ProEtᵒᵖ) (b : (completedIntegralCommRingSheafUnrestricted l F S).obj.obj U) (x : (integralTwistLine l E S m).val.obj U), (twistLineScalarIso l E S F ι m).hom.val.app U (integralOrdinaryTensorSection l E F ι S _ U b x) = b • (@id ((integralTwistLine l F S m).val.obj U) ((twistScalarMaps l E S F ι m).val.app U x))) ∧ (∀ (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G] (κ : F →ₐ[Padic l] G) (m : ℤ) (U : S.ProEtᵒᵖ) (x : (integralTwistLine l E S m).val.obj U), (twistScalarMaps l E S G (κ.comp ι) m).val.app U x = (twistScalarMaps l F S G κ m).val.app U ((twistScalarMaps l E S F ι m).val.app U x)) ∧ ∀ (X : Scheme.{u}) (h : X ⟶ S) [∀ x : X, Invertible (l : X.residueField x)], ∃ (αE : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj (completedIntegralCommRingSheafUnrestricted l E S) ⟶ completedIntegralCommRingSheafUnrestricted l E X) (αF : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj (completedIntegralCommRingSheafUnrestricted l F S) ⟶ completedIntegralCommRingSheafUnrestricted l F X) (τ : (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).obj (purTwistZlOne S l) ⟶ purTwistZlOne X l) (ρE : ∀ m : ℤ, (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).obj (integralTwistUnderlying l E S m) ≅ integralTwistUnderlying l E X m) (ρF : ∀ m : ℤ, (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).obj (integralTwistUnderlying l F S m) ≅ integralTwistUnderlying l F X m), (IsIso αE ∧ IsPurIntegralCoefficientComparison h l E αE) ∧ (IsIso αF ∧ IsPurIntegralCoefficientComparison h l F αF) ∧ (IsIso τ ∧ IsPurRootLimitComparison h l τ) ∧ IsIntegralTwistInverseComparison l E h αE τ ρE ∧ IsIntegralTwistInverseComparison l F h αF τ ρF ∧ (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map (integralCompletedScalarMap l E F ι S) ≫ αF = αE ≫ integralCompletedScalarMap l E F ι X ∧ ∀ m : ℤ, (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).map (integralTwistScalarUnderlying l E S F ι m) ≫ (ρF m).hom = (ρE m).hom ≫ integralTwistScalarUnderlying l E X F ι m",
   "branch": "newtargets-dag",
-  "by": "Q123",
+  "by": "Q138",
   "date": "2026-10-17",
   "existing": false
  }
