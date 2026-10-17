@@ -83,7 +83,114 @@ private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian
       (∀ p q, ∃ k : kernel (X.d p q) ⟶ kernel (Y.d p q),
         k ≫ kernel.ι (Y.d p q) = kernel.ι (X.d p q) ≫ tE p q ∧
         X.derivedEProjection p q ≫ b p q = k ≫ Y.derivedEProjection p q) := by
-  sorry
+  classical
+  have hd : ∀ p q, tE p q ≫ Y.d p q =
+      X.d p q ≫ tE (p + 2 + s) (q - 1 - s) := by
+    intro p q
+    dsimp [d]
+    rw [← Category.assoc, hf, Category.assoc, hg, Category.assoc]
+  have hin : ∀ p q, X.dInto p q ≫ tE p q =
+      tE (p - s - 2) (q + s + 1) ≫ Y.dInto p q := by
+    intro p q
+    dsimp [dInto]
+    have hp : p - (s : ℤ) - 2 + 2 + s = p := by omega
+    have hq : q + (s : ℤ) + 1 - 1 - s = q := by omega
+    have htr := transport_square (𝟭 C) tE
+      (p := p - (s : ℤ) - 2 + 2 + s) (q := q + (s : ℤ) + 1 - 1 - s)
+      (p' := p) (q' := q) hp hq
+    simp only [Functor.id_map] at htr
+    rw [Category.assoc, htr, ← Category.assoc, ← hd, Category.assoc]
+  let k := fun p q ↦ kernel.map (X.d p q) (Y.d p q) (tE p q)
+    (tE (p + 2 + s) (q - 1 - s)) (hd p q).symm
+  have hk : ∀ p q, k p q ≫ kernel.ι (Y.d p q) =
+      kernel.ι (X.d p q) ≫ tE p q := by
+    intro p q
+    exact kernel.lift_ι _ _ _
+  let dx := fun p q ↦ kernel.lift (X.d p q) (X.dInto p q) (X.dInto_comp_d p q)
+  let dy := fun p q ↦ kernel.lift (Y.d p q) (Y.dInto p q) (Y.dInto_comp_d p q)
+  have hboundary : ∀ p q, dx p q ≫ k p q =
+      tE (p - s - 2) (q + s + 1) ≫ dy p q := by
+    intro p q
+    apply (cancel_mono (kernel.ι (Y.d p q))).mp
+    simp only [Category.assoc, hk, dx, dy, kernel.lift_ι, kernel.lift_ι_assoc, hin]
+  let b := fun p q ↦ cokernel.desc (dx p q) (k p q ≫ Y.derivedEProjection p q)
+    (by rw [← Category.assoc, hboundary, Category.assoc];
+        exact (Category.assoc _ _ _).symm.trans (by simp [dy, derivedEProjection]))
+  have hb : ∀ p q, X.derivedEProjection p q ≫ b p q =
+      k p q ≫ Y.derivedEProjection p q := by
+    intro p q
+    exact cokernel.π_desc _ _ _
+  let a := fun p q ↦ image.map (Arrow.homMk' (tD (p + 1) (q - 1))
+    (tD ((p + 1) - 1) ((q - 1) + 1)) (ha (p + 1) (q - 1)))
+  have hi : ∀ p q, a p q ≫ Y.derivedDInclusion p q =
+      X.derivedDInclusion p q ≫ tD p q := by
+    intro p q
+    dsimp only [a, derivedDInclusion, derivedD]
+    rw [← Category.assoc]
+    rw [image.map_homMk'_ι]
+    simp only [Category.assoc]
+    have htr := transport_square (𝟭 C) tD
+      (p := (p + 1) - 1) (q := (q - 1) + 1) (p' := p) (q' := q)
+      (by omega) (by omega)
+    simp only [Functor.id_map] at htr
+    rw [htr]
+  refine ⟨a, b, ?_, ?_, ?_, hi, fun p q ↦ ⟨k p q, hk p q, hb p q⟩⟩
+  · intro p q
+    have hx := (Classical.choice X.derivedMaps_exists).alpha_comm p q
+    have hy := (Classical.choice Y.derivedMaps_exists).alpha_comm p q
+    dsimp only [derived]
+    have : Mono (Y.derivedDInclusion (p - 1) (q + 1)) := by
+      dsimp [derivedDInclusion]
+      infer_instance
+    apply (cancel_mono (Y.derivedDInclusion (p - 1) (q + 1))).mp
+    simp only [Category.assoc]
+    rw [hy, ← Category.assoc, hi, Category.assoc, ha, hi]
+    simpa only [Category.assoc] using
+      (congrArg (fun z ↦ z ≫ tD (p - 1) (q + 1)) hx).symm
+  · intro p q
+    have hx := (Classical.choice X.derivedMaps_exists).f_comm p q
+    have hy := (Classical.choice Y.derivedMaps_exists).f_comm p q
+    dsimp only [derived]
+    have : Mono (Y.derivedDInclusion (p + 2) (q - 1)) := by
+      dsimp [derivedDInclusion]
+      infer_instance
+    have : Epi (X.derivedEProjection p q) := by
+      dsimp [derivedEProjection]
+      infer_instance
+    apply (cancel_epi (X.derivedEProjection p q)).mp
+    apply (cancel_mono (Y.derivedDInclusion (p + 2) (q - 1))).mp
+    simp only [Category.assoc]
+    rw [← Category.assoc (X.derivedEProjection p q) (b p q), hb,
+      Category.assoc, hy, ← Category.assoc, hk, Category.assoc, hf,
+      hi]
+    simpa only [Category.assoc] using
+      (congrArg (fun z ↦ z ≫ tD (p + 2) (q - 1)) hx).symm
+  · intro p q
+    have hx := (Classical.choice X.derivedMaps_exists).g_comm p q
+    have hy := (Classical.choice Y.derivedMaps_exists).g_comm p q
+    dsimp only [derived]
+    have hc : tD (p + 1) (q - 1) ≫ Y.gToCycles (p + 1) (q - 1) =
+        X.gToCycles (p + 1) (q - 1) ≫ k ((p + 1) + s) ((q - 1) - s) := by
+      apply (cancel_mono (kernel.ι (Y.d ((p + 1) + s) ((q - 1) - s)))).mp
+      dsimp only [gToCycles]
+      simp only [Category.assoc, kernel.lift_ι, hk]
+      rw [← Category.assoc, kernel.lift_ι, hg]
+    have hfactor : factorThruImage (X.alpha (p + 1) (q - 1)) ≫ a p q =
+        tD (p + 1) (q - 1) ≫ factorThruImage (Y.alpha (p + 1) (q - 1)) :=
+      image.factor_map (Arrow.homMk' _ _ (ha (p + 1) (q - 1)))
+    have ht := transport_square (𝟭 C) b
+      (show (p + 1) + (s : ℤ) = p + (s + 1 : ℕ) by omega)
+      (show (q - 1) - (s : ℤ) = q - (s + 1 : ℕ) by omega)
+    simp only [Functor.id_map] at ht
+    dsimp only [derivedD]
+    apply (cancel_epi (factorThruImage (X.alpha (p + 1) (q - 1)))).mp
+    rw [← Category.assoc, hfactor, Category.assoc, hy,
+      ← Category.assoc (factorThruImage (X.alpha (p + 1) (q - 1)))
+        ((Classical.choice X.derivedMaps_exists).g p q), hx]
+    simp only [Category.assoc]
+    rw [ht, ← Category.assoc (X.derivedEProjection ((p + 1) + s) ((q - 1) - s)), hb]
+    simp only [← Category.assoc]
+    rw [hc]
 
 
 set_option backward.isDefEq.respectTransparency false in
