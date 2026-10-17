@@ -271,5 +271,29 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-7f97c7db7 (reviewer sub-agent of L); spot-checked: Reviewed the item, both new nodes, all cited node statements, unit route, reports, and cited source locations. The repaired direct algebraic proof is coherent, hypotheses and edge cases check out, no circular or route-pivot machinery remains, and the two substantive toric inputs are properly left as independent unsplit stage-1 nodes. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompleteToricKatoRecognition",
+  "declaration": "complete_toric_kato_recognition",
+  "declarations": [
+   "completeToricChart",
+   "cohenCompleteToricRing",
+   "cohenCompleteToricChart"
+  ],
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/CompleteToricKatoRecognition.lean",
+  "statement": "theorem complete_toric_kato_recognition (P : Type u) [AddCommMonoid P] (hP : IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsAddUnit q → q = 0) (n : ℕ) : (∀ (k : Type v) [Field k], (algebraMap (CompletedLocalModel k P n) (Localization (Submonoid.map (completeToricChart k P n) ⊤))) ⁻¹' {x | IsUnit x} = {x | ∃ a : CompletedLocalModel k P n, IsUnit a ∧ ∃ q : Multiplicative P, x = a * completeToricChart k P n q}) ∧ (∀ (C : Type v) [CommRing C] [IsLocalRing C] (p : ℕ), IsCohenRing p C → ∀ θ : CompletedLocalModel C P n, θ - (p : CompletedLocalModel C P n) ∈ completedLocalModelBoundaryIdeal C P n → (algebraMap (cohenCompleteToricRing C P n θ) (Localization (Submonoid.map (cohenCompleteToricChart C P n θ) ⊤))) ⁻¹' {x | IsUnit x} = {x | ∃ a : cohenCompleteToricRing C P n θ, IsUnit a ∧ ∃ q : Multiplicative P, x = a * cohenCompleteToricChart C P n θ q})",
+  "note": "Uses the published AddMonoidAlgebra.CompletedLocalModel and completedLocalModelBoundaryIdeal from the normality proof dependency; the field and Cohen cases are separate conjuncts and the fs predicate is on Multiplicative P."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-051751d26",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source references, Lean declarations, docstrings, edge cases, report sections, route-pivot compliance, and compiler evidence. No substantive or mechanical delivery errors found; review.md written."
  }
 }

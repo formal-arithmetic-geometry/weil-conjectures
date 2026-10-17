@@ -286,5 +286,31 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-9abdfc1ea (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all nine proof steps, cited DAG statements, unit route, and Stacks sources 01VH/01VI/01VJ, 01NK/01N8, 01MW/01Q2. Hypotheses, Proj pullbacks, coefficient algebra, edge cases, searches, duplicates, route, and sub-2000-character steps all check. Wrote review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeAmpleCanonicalProjCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_iff_canonical_section_proj_openImmersion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.evaluate",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.GeneratesEverywhere",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.IsCanonicalMap",
+   "AlgebraicGeometry.Scheme.Modules.relativeSectionAlgebraCoproductComparison",
+   "AlgebraicGeometry.Scheme.Modules.isAmple_iff_canonical_section_proj_openImmersion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeAmpleCanonicalProjCriterion.lean",
+  "statement": "theorem isAmple_iff_canonical_section_proj_openImmersion {X T : Scheme.{u}} (f : X ⟶ T) [QuasiCompact f] (L : X.Modules) [L.IsInvertible] : (∀ _hqs : QuasiSeparated f, IsIso (relativeSectionAlgebraCoproductComparison f L)) ∧ ((∀ V : T.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (f ⁻¹ᵁ V).ι).obj L).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj L) h) ↔ ∃ (_hqs : QuasiSeparated f) (A : RelativeSectionAlgebra f L), A.GeneratesEverywhere ∧ ∃ r : X ⟶ A.data.relProj, A.IsCanonicalMap r ∧ IsOpenImmersion r) ∧ ((∀ V : T.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (f ⁻¹ᵁ V).ι).obj L).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj L) h) → IsSeparated f)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-49aef1907",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical helpers, docstrings, edge cases, route-pivot compliance, report sections, and per-file compilation all checked successfully."
  }
 }

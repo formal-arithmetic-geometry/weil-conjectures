@@ -2,7 +2,7 @@
  "id": "lem-trf-snc-divisorial-log-chart",
  "kind": "statement",
  "title": "Divisorial charts of a smooth strict normal crossings pair",
- "statement": "Let $F$ be an algebraically closed field and $V$ a smooth finite-type $F$-scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Let $Z\\subset V$ be a reduced effective Cartier divisor [def-weil-closed-immersion], meaning locally one non-zero-divisor cuts it out, and assume that its finitely many irreducible components $Z_i$ are smooth and every intersection of $r$ distinct components is empty or smooth of codimension $r$ in $V$. The empty divisor is allowed. At any geometric point on exactly $r$ components, the divisorial log structure $M$ of $(V,|Z|)$ has an etale-local chart $\\mathbf N^r\\to M$ sending the standard basis to local equations $t_1,\\ldots,t_r$ of those components. These equations form part of a regular system of parameters of the strict local ring $A$; its characteristic monoid is $\\overline M_{\\bar v}\\cong\\mathbf N^r$, and $A/(t_1,\\ldots,t_r)$ is regular of dimension $\\dim A-r$. In particular $(V,|Z|)$ is a log regular pair [def-trf-log-regular-pair].",
+ "statement": "Let $F$ be an algebraically closed field and $f:V\\to\\operatorname{Spec}F$ a smooth finite-type morphism [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Let $Z$ be a reduced effective Cartier divisor on $V$ whose finitely many irreducible components are smooth and meet transversely, i.e. $Z$ is a smooth strict normal crossings divisor [def-trf-smooth-strict-normal-crossings-divisor]. Let $U=V\\setminus |Z|$ be the canonical open complement of $Z\\hookrightarrow V$. Then $U\\to V$ has dense range and the divisorial pair $(V,U)$ is a fine-saturated log regular pair [def-trf-log-regular-pair]. For every geometric point $\\bar v:\\operatorname{Spec}\\Omega\\to V$, there are an integer $r\\ge0$, a pointed etale neighbourhood $(W,\\bar w)$, and a chart $\\operatorname{ULift}(\\mathbf N^r)\\to M(W)$ whose stalk map is a chart for the divisorial stalk. The chart monoid is fine saturated and its characteristic monoid is isomorphic to $\\mathbf N^r$. The images of the standard basis are part of a regular system of parameters of the strict local ring $A=\\mathcal O_{V,\\bar v}$; the quotient by the ideal they generate is regular and $\\dim A=\\dim A/(t_1,\\ldots,t_r)+r$. The empty divisor is allowed (the case $r=0$).",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose VI, 1.4--1.5(i), printed pp. 69--70: divisorial log regularity and rank strata for normal crossings divisors; Stacks 0BIA, etale.tex, lemma-strict-normal-crossings, for the equivalence with the smooth-intersection formulation."
@@ -16,7 +16,8 @@
   "def-weil-pbc-regular-system-of-parameters",
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-trf-smooth-strict-normal-crossings-divisor"
  ],
  "proof": [
   {
@@ -415,5 +416,52 @@
   "group": "Q130",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-7f7385495 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full, along with the ILO VI 1.1–1.5 and Stacks 0AG0/04HX sources; the seven-step proof is correct. Step 2 shows the actual component equations form part of a regular system of parameters: the dimension formula gives dim R/I = d−s, so their cotangent classes are independent, and Nakayama lifts an extended basis. Step 3 passes this to the strict local ring through the cotangent isomorphism, Nakayama and the regular-sequence lemma. Step 4 identifies the divisorial stalk by one finite inverse equation. Step 5 builds the pushout chart at each point with characteristic N^J; Steps 6 and 7 cover the ideal, rank, fs, triviality locus and density. Edge cases checked: empty Z, dimension 0, one divisor, the axes in A^2 (ranks 2, 1, 0 from one chart) and nonclosed points. The intersection hypothesis is read scheme-theoretically, as in 0BIA and as Step 2 states; with the reduced reading, two tangent curves would be a counterexample. The new node lem-trf-regular-local-ufd-boundary-factorization is true (0AG0 plus fg=T^n factoring), statement-only and self-contained with a correct source. It is not a duplicate (DAG grep for UFD/factorial/0AG0; this Mathlib has no regular-local UFD) and does not restate a clause of the item. Fault repaired (C1): Steps 1 and 3 used the identification of the geometric stalk with the algebraic strict henselization (Stacks 04HX) without a node. They now cite the existing reviewed lem-exc-affine-strict-local-ring-comparison, added to proof_deps and to tool_uses with a reason; it creates no cycle. Statement unchanged; no node dropped. I accept the declared tool uses as generic tools; no SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q85 stage 2",
+  "old_statement": "Let $F$ be an algebraically closed field and $V$ a smooth finite-type $F$-scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Let $Z\\subset V$ be a reduced effective Cartier divisor [def-weil-closed-immersion], meaning locally one non-zero-divisor cuts it out, and assume that its finitely many irreducible components $Z_i$ are smooth and every intersection of $r$ distinct components is empty or smooth of codimension $r$ in $V$. The empty divisor is allowed. At any geometric point on exactly $r$ components, the divisorial log structure $M$ of $(V,|Z|)$ has an etale-local chart $\\mathbf N^r\\to M$ sending the standard basis to local equations $t_1,\\ldots,t_r$ of those components. These equations form part of a regular system of parameters of the strict local ring $A$; its characteristic monoid is $\\overline M_{\\bar v}\\cong\\mathbf N^r$, and $A/(t_1,\\ldots,t_r)$ is regular of dimension $\\dim A-r$. In particular $(V,|Z|)$ is a log regular pair [def-trf-log-regular-pair].",
+  "what": "The source statement names the pair (V,|Z|) and a divisorial log structure but introduces neither the open complement U nor the scheme-theoretic morphism whose dense range and log-regular predicate are required by the recorded definition. It also leaves the local chart, characteristic, parameter, quotient, and dimension clauses without Lean objects. The correction uses the canonical open complement of Z.subschemeι, the existing smooth strict normal crossings divisor predicate, and explicit chart data matching ILO VI 1.4--1.5(i). The characteristic clause was then repaired after independent review: it now supplies a multiplicative equivalence from the actual stalk characteristic monoid `Associates (divisorialStalk ...)` to `Multiplicative (Fin r → ℕ)` and requires it to send every associated chart germ to the corresponding ULift coordinate, hence in particular every standard basis image and boundary parameter. The second independent return identified that the Lean parameter clause incorrectly asserted that the r boundary equations alone were a full regular system of parameters. For the empty divisor on the affine line at a closed geometric point, r = 0 while the strict local ring has dimension 1, so this was false. The repaired signature existentially supplies a remaining list s and asserts that the ordered boundary list concatenated with s is a regular system of parameters, exactly rendering the unchanged source phrase part of a regular system of parameters.",
+  "source": {
+   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+   "place": "Expose VI, 1.4--1.5(i), printed pp. 69--70; Stacks 0BIA"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-nodal-pair-projective-resolution",
+    "holds": true,
+    "note": "Its proof uses this lemma to obtain log regularity of the smooth SNC base pair; the corrected statement supplies the same pair and adds the canonical chart details."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sbc-smooth-morphisms",
+   "def-weil-finite-type-morphism",
+   "def-weil-closed-immersion",
+   "def-trf-log-regular-pair",
+   "def-weil-regular-scheme",
+   "def-weil-pbc-regular-system-of-parameters",
+   "def-weil-geometric-point",
+   "def-weil-pbc-geometric-stalks",
+   "def-weil-pbc-krull-dimension-ring"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.DivisorialLogChart",
+  "declaration": "AlgebraicGeometry.sncDivisorialLogChart",
+  "file": "lean/Sheaf/TraceFormula/DivisorialLogChart.lean",
+  "statement": "theorem sncDivisorialLogChart (F : Type u) [Field F] [IsAlgClosed F] (V : Scheme.{u}) (f : V ⟶ Spec (.of F)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] (Z : V.IdealSheafData) (hZ : Z.IsSmoothStrictNormalCrossingsDivisor f) : ∃ (hN : IsLocallyNoetherian V) (hU : DenseRange (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι), @IsDivisorialFineSaturatedLogRegularPair V (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).toScheme (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι inferInstance hN hU ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ V), ∃ (r : ℕ) (W : V.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (β : ULift.{u} (Multiplicative (Fin r → ℕ)) →* divisorialSections (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι W), IsFineSaturatedMonoid (ULift.{u} (Multiplicative (Fin r → ℕ))) ∧ ∃ (h : IsUnit.submonoid (strictLocalRing V t) ≤ divisorialStalk (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι t), @IsDivisorialStalkChart _ (ULift.{u} (Multiplicative (Fin r → ℕ))) _ _ (divisorialStalk (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι t) h ((divisorialGerm (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι t W w).comp β) ∧ ∃ (χ : Associates (divisorialStalk (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι t) ≃* Multiplicative (Fin r → ℕ)), (∀ x : ULift.{u} (Multiplicative (Fin r → ℕ)), χ (Associates.mk (((divisorialGerm (Scheme.openComplementOfIsClosedImmersion Z.subschemeι).ι t W w).comp β) x)) = x.down) ∧ ∃ (hA : IsRegularLocalRing (strictLocalRing V t)), (∃ s : List (strictLocalRing V t), @IsLocalRing.IsRegularSystemOfParameters (strictLocalRing V t) _ hA.toIsLocalRing hA.toIsNoetherian ((List.ofFn (fun i : Fin r ↦ (strictLocalGerm V t W w).hom ((β (ULift.up (Multiplicative.ofAdd ((fun q : Fin r ↦ if q = i then 1 else 0) : Fin r → ℕ)))).1))) ++ s)) ∧ IsRegularRing (strictLocalRing V t ⧸ Ideal.span {x | ∃ i : Fin r, x = (strictLocalGerm V t W w).hom ((β (ULift.up (Multiplicative.ofAdd ((fun q : Fin r => if q = i then 1 else 0) : Fin r → ℕ)))).1)}) ∧ ringKrullDim (strictLocalRing V t) = ringKrullDim (strictLocalRing V t ⧸ Ideal.span {x | ∃ i : Fin r, x = (strictLocalGerm V t W w).hom ((β (ULift.up (Multiplicative.ofAdd ((fun q : Fin r => if q = i then 1 else 0) : Fin r → ℕ)))).1)}) + (r : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cbd977580",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, route-pivot constraints, and scompile evidence checked; no findings.",
+  "statement_corrected": true
  }
 }

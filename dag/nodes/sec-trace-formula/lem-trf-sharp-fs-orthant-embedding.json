@@ -137,5 +137,23 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-989c16a49 (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full. Item: a fine saturated sharp monoid P admits an injective lambda:G->Z^r with lambda(P)=lambda(G)∩N^r. Step 1 (P=C∩G with C pointed and spanning, G free) and step 2 (Minkowski–Weyl with integral dual forms spanning the dual) are true; I checked the torsion-freeness, pointedness and saturation arguments. Step 3 is genuinely elementary (injectivity from the spanning forms plus torsion-freeness; orthant equality). Small cases checked: P=0, N, N^2, the cone on (1,0),(1,1), the A1 monoid; the non-sharp Z and the non-saturated <2,3> fail, as they should. The citer lem-trf-log-regular-saturation-normality needs exactly this statement. Sources: ILO VIII 3.1.17 (printed p.101) and Rem 3.1.29 (p.103) were read and only motivate the statement; proof_origin=agent and Kato is WANTED, which is correct. No SGA, no off-unit uses, no tool_uses. The new nodes are strictly smaller than the item and are not duplicates of the Gordan, finite-saturation or fs-face-sharpening nodes (face-sharpening with F=0 covers only clause (a)). Mathlib has no Minkowski–Weyl theorem (DualFinite.lean:21 mentions it only in its documentation). Three repairs in fixes/: (1) B4: a TAB character from the JSON escape '\\t' in item step 2 changed to \\text; (2) item stmt_deps reduced to [def-trf-fs-log-blowup], since the new lemmas are proof dependencies only; (3) B2/B3: both new statements now define pointed, rational polyhedral (finitely many lattice generators), spanning, free of finite rank and sharp inline instead of citing the Gordan statement node, the empty-family clause is made precise, and the Gordan stmt_dep is removed. No content was weakened.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SharpFsOrthantEmbedding",
+  "declaration": "AlgebraicGeometry.exists_sharp_fs_orthant_embedding",
+  "file": "lean/Sheaf/TraceFormula/SharpFsOrthantEmbedding.lean",
+  "statement": "theorem exists_sharp_fs_orthant_embedding (P : Type u) [CommMonoid P] (hP : IsFineSaturatedMonoid P) (hsharp : ∀ a b : P, a * b = 1 → a = 1 ∧ b = 1) : ∃ (r : ℕ) (embedding : Additive (Algebra.GrothendieckGroup P) →+ (Fin r → ℤ)), Function.Injective embedding ∧ (embedding '' Set.range (fun p : P => (Algebra.GrothendieckGroup.of p))) = Set.range embedding ∩ Set.Ici (0 : Fin r → ℤ)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a91e98f7e",
+  "group": "NC",
+  "result": "pass",
+  "note": "Reviewed node, dependency records, source module, docstrings, edge cases, route-pivot compliance, and reports. Existing cone and dual-form proof dependencies were verified in the NC clone. No substantive defects found; scompile was invoked but server saturation prevented completion without reported Lean errors."
  }
 }

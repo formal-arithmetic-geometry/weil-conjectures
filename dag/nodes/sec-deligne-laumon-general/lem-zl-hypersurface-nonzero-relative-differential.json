@@ -279,5 +279,28 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-35d6b05f6 (reviewer sub-agent of L); spot-checked: Read the complete item, six steps, cited statements, Stacks sources and current blueprint route. The enlarged Jacobian minor and localization presentation prove smoothness without assuming flatness of Z. Edge cases, duplicate candidates and dependency closure checked; no new nodes, long-step violations or repairs. Accepted generic tool uses are documented in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypersurfaceNonzeroRelativeDifferential",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.smooth_zeroLocus_of_relativeDifferentialValue",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.relativeDifferentialValue",
+   "AlgebraicGeometry.Scheme.Hom.smooth_zeroLocus_of_relativeDifferentialValue"
+  ],
+  "statement": "theorem smooth_zeroLocus_of_relativeDifferentialValue {X S : Scheme.{u}} (p : X ⟶ S) [Smooth p] (M : X.Modules) [M.IsInvertible] (s : M.sections) (z : (Scheme.Modules.Hom.zeroLocus (M.unitHomEquiv.symm s)).subscheme) (U : X.Opens) (hz : (Scheme.Modules.Hom.zeroLocus (M.unitHomEquiv.symm s)).subschemeι z ∈ U) (e : Γ(M, U)) (he : Scheme.Modules.IsFreeGenerator e) (a : Γ(X, U)) (ha : ((M.unitHomEquiv.symm s).val.app (op U)) (1 : Γ(X, U)) = a • e) (hda : relativeDifferentialValue p U ((Scheme.Modules.Hom.zeroLocus (M.unitHomEquiv.symm s)).subschemeι z) hz a) : ∃ V : (Scheme.Modules.Hom.zeroLocus (M.unitHomEquiv.symm s)).subscheme.Opens, z ∈ V ∧ Smooth (V.ι ≫ (Scheme.Modules.Hom.zeroLocus (M.unitHomEquiv.symm s)).subschemeι ≫ p)",
+  "file": "lean/Sheaf/AlgebraicGeometry/HypersurfaceNonzeroRelativeDifferential.lean",
+  "by": "Q138",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-c2c9eb93b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c2c9eb93b",
+  "group": "Q138",
+  "result": "fix",
+  "note": "Review completed in review.md. Mathematics and signatures match the node. Complete fixes repair source/blueprint docstrings, add the six-step proof explanation and substantive second reading, and record successful scompile.py verification (exit 0, no diagnostics)."
  }
 }
