@@ -13,9 +13,77 @@
   "lem-trf-space-qc-separated-etale-local",
   "def-trf-space-quasi-coherent-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let V -> Y be any affine scheme etale morphism, and choose a surjective etale map W -> Y from a scheme W, which exists by [def-trf-algebraic-space]. The family {V -> Y, W -> Y} consists of etale maps from schemes and is jointly surjective because W -> Y already is. Applying the forward implication of [lem-trf-space-qc-separated-etale-local] to this family shows that f_V:X_V=X\\times_YV -> V is quasi-compact and separated. By [lem-trf-space-etale-module-pushforward-restriction] (with Y'=V), the restriction of f_*F to V is canonically (f_V)_*(F|_{X_V}). Since quasi-coherence is the local presentation condition of [def-trf-space-quasi-coherent-module], and every object of Y_et is covered by affine etale schemes (Zariski affine opens of a scheme etale over Y), a local presentation of the restriction to each affine V, composed with the covering of an object by such V, is a local presentation on Y_et; so it is enough to prove this restricted module quasi-coherent on V_et for every such V.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M9, first proof paragraph: affine etale test V, base change f', and the reduction to an affine target; spaces-properties.tex Tag 03LX for the module restriction formula."
+   }
+  },
+  {
+   "text": "Fix V and abbreviate X_V and f_V by X and f, so that V is affine. Quasi-compactness of f gives a quasi-compact scheme atlas over X; refining by a finite affine cover and taking its finite disjoint union gives a surjective etale map p:U -> X from an affine scheme. Put R=U\\times_XU. The fibre-product and etale-cover statement [lem-trf-space-fibre-products-etale-covers] makes R a scheme, and the atlas equalizer lemma [lem-trf-space-pushforward-atlas-equalizer] identifies f_*F with the kernel of a_*F_U -> b_*F_R, the difference of the two projection restrictions, where a=f\\circ p and b:R->V is either composite.",
+   "uses": [
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-pushforward-atlas-equalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M9, affine-target paragraph: choose an affine surjective etale U -> X and apply Tag 03M8; spaces-properties.tex Tag 03E3 for the quasi-compact atlas."
+   }
+  },
+  {
+   "text": "The map R -> U\\times_VU is the base change of the representable diagonal X -> X\\times_VX along U\\times_VU -> X\\times_VX: indeed R=U\\times_XU = X\\times_{X\\times_VX}(U\\times_VU). Since f is separated, that diagonal is a closed immersion on every scheme test, and U\\times_VU is a scheme test, so R -> U\\times_VU is a closed immersion of schemes (equivalently, by [lem-weil-pbc-closed-immersion-base-change] applied to the scheme test). The target U\\times_VU is affine because U and V are, and a closed subscheme of an affine scheme is affine, so R is affine. Consequently a:U->V and b:R->V are morphisms between affine schemes, hence quasi-compact and separated (their diagonals are the closed immersions given by the surjective multiplication maps). Restriction of the local quasi-coherent presentation of F to the localized etale sites of the charts U and R remains such a presentation, so F_U and F_R are quasi-coherent, by [def-trf-space-quasi-coherent-module] and the restriction description in [lem-trf-space-etale-module-pushforward-restriction].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M9, affine-target paragraph: quasi-separatedness makes R -> U x_Y U quasi-compact and separated, so a and b are qcqs scheme morphisms."
+   }
+  },
+  {
+   "text": "Use [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] on the affine schemes U and R and on the affine target V. The quasi-coherent restrictions F_U and F_R are, by essential surjectivity, isomorphic to (H_U)_et and (H_R)_et for quasi-coherent Zariski modules H_U and H_R. Since a and b are quasi-compact and separated scheme morphisms (Step 3), the same node gives quasi-coherent Zariski direct images a_*H_U and b_*H_R and canonical isomorphisms (a_*H_U)_et = a_*F_U and (b_*H_R)_et = b_*F_R; in particular a_*F_U and b_*F_R are quasi-coherent modules on V_et. The difference map a_*F_U -> b_*F_R of Step 2 is therefore a morphism of O_V-modules on V_et between quasi-coherent modules, and its kernel in the module category is quasi-coherent by [lem-trf-scheme-etale-quasi-coherent-kernel]. By the exact sequence of [lem-trf-space-pushforward-atlas-equalizer], f_*F is that kernel, so f_*F is quasi-coherent on V_et. Since this holds for every affine etale V -> Y, Step 1 proves that f_*F is quasi-coherent on Y_et, with its O_Y scalar action the one of the ringed direct image.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-scheme-etale-quasi-coherent-kernel",
+    "lem-trf-space-pushforward-atlas-equalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M9, final affine-target paragraph: a_*(F|_U), b_*(F|_R) quasi-coherent by Descent 03LC, then f_*F is a kernel of quasi-coherent modules, Properties of Spaces Tag 03M1 (lemma-properties-quasi-coherent) (3), whose scheme case is Descent Tag 0GNB (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-scheme-etale-quasi-coherent-kernel",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-pushforward-atlas-equalizer",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M9 (lemma-pushforward), proof, with Tag 03M8 (lemma-compute-pushforward), Tag 03LX (module etale base change), Descent Tag 03LC, and Descent Tag 0GNB (3) for kernels of quasi-coherent etale modules."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-space-section-algebra-etale-base-change",
@@ -59,7 +127,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Quasi-compact separated direct image preserves quasi-coherence on spaces. Historical imported ancestry retained.",
+   "place": "Stacks spaces-morphisms.tex Tag 03M9, proof: reduction to affine etale tests, the affine-target atlas/equalizer argument, and scheme qcqs pushforward plus kernel closure.",
    "via": [
     "lem-trf-space-section-algebra-etale-base-change",
     "lem-trf-algebraic-space-ample-local",
@@ -77,5 +145,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 03M9 proof into affine etale localization, the affine-atlas Cech kernel computation, the geometry making the two scheme maps qcqs, and the final scheme pushforward/kernel argument. Added one statement-only helper for Tag 03M8's atlas equalizer; all other inputs are existing DAG nodes. The separated hypothesis supplies quasi-separatedness through the closed representable diagonal, so the item statement is unchanged. Maintainer reader fix (2026-10-18): Step 1 now uses the family {V, atlas W} of etale maps from schemes (the identity of Y is not a map from a scheme); Steps 3-4 record that a and b are maps of affine schemes hence separated as the equivalence node requires; and the kernel step cites the new statement-only node lem-trf-scheme-etale-quasi-coherent-kernel (Descent 0GNB (3)) instead of the Zariski kernel lemma, whose application to etale modules needed the exactness of F -> F_et.",
+  "blueprint": "Realizes Tag 03M9's three proof paragraphs below the historical lem-trf-local-term-locality ancestry: affine etale reduction; affine atlas and equalizer; qcqs scheme pushforward and kernel closure.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-95bc2156c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-95bc2156c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-space-pushforward-atlas-equalizer, every cited node statement, and the sources: spaces-morphisms 03M8/03M9, spaces-properties 03M1, descent 0GNB(3)/06VE. The mathematics follows 03M9. The item assumes separated rather than quasi-separated, which is a stronger hypothesis, so nothing is weakened, and the statement is unchanged. The atlas node is a correct affine-U case of 03M8, does not restate any clause of the item, and has no duplicate in the DAG or the blueprint. I fixed three faults. (1) E1/C4: Step 1 applied lem-trf-space-qc-separated-etale-local to {V->Y, id_Y}, but that lemma needs maps from schemes; it now uses {V, atlas W->Y}. (2) C4: the equivalence node requires a and b to be quasi-compact and separated, but the steps said qcqs; Steps 3-4 now state that a and b are maps of affine schemes, hence separated. (3) C4/E5: Step 4 applied the Zariski kernel lemma lem-weil-pbc-quasi-coherent-module-kernel to étale modules, which needs F->F_et to be exact (06VE(5)). I added the statement-only node lem-trf-scheme-etale-quasi-coherent-kernel (descent 0GNB(3), the scheme case of the 03M1(3) that 03M9 cites) in the same unit, cited it, and withdrew the off-unit tool use, so tool_uses is now []. Its LeanSearch and Loogle searches are recorded as unavailable because the services are not reachable here; only the Mathlib grep ran. Corrected files are under fixes/dag/nodes/sec-trace-formula/. Edge cases checked: identity, affine f, empty X, closed immersion.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
