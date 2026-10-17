@@ -324,5 +324,42 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-de8aa3a0d (reviewer sub-agent of L); spot-checked: I read the whole item, the statement of every cited node, the main-20261015 blueprint sk-lem-sp-reduction proof and the unit sk-thm-purity-transport. I also read Stacks 094H, 03EL and 09AL at their labels, and the sorry-free Lean behind lem-sf-etale-flat-model (Coefficients.lean:69 for Tor amplitude, Constructible.lean:100 for bounded constructibility); it has no Noetherian hypothesis. The statement is unchanged and not weakened. The delivery has no new nodes and uses no SGA source. Steps 1-4 and 6-10 check out against the cited statements and their hypotheses: 094H with B=A_r Noetherian, both factors in D^-; fibre-product strata, so the scheme factorization holds (E3); the origin lemma for any finite ring. Edge cases checked: r=m, m=1, a=b, K=0 and an empty T. One fault, repaired in Step 5 (C3/C1): the step took the termwise, A_m-linear form of the coefficient comparison from how the derived tensor-pullback isomorphism is built, but that lemma only states an isomorphism in D(A_r). The underived fact that inverse image commutes with tensor products was cited by no node. Step 5 now builds the termwise isomorphism from the statement of lem-weil-pbc-left-exact-site-inverse-image-tensor (inverse image preserves the Z-tensor product and colimits; the A_r-tensor product is a coequalizer), then gets A_m-linearity from the surjection A_r->A_m. That node was added to the step's uses, proof_deps and tool_uses; there is no cycle. On duplicates: det-sp-scalar-extension-functor (pro-etale clauses) and lem-sf-reduction-flat-model (Steps 3-4) overlap only in part; neither has the etale-origin and comparison clauses, so neither is a duplicate. All declared tool_uses are generic tools used within their stated hypotheses, and I accept them. The fix file is fixes/dag/nodes/sec-smooth-purity/lem-pur-finite-reduction-constructibility.json; the full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-665269744",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, edge cases, docstrings, and required report sections checked; scompile sandbox and library-path compilations both passed with no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteReductionConstructibility",
+  "declaration": "AlgebraicGeometry.FiniteReduction.finiteReduction_constructibility",
+  "declarations": [
+   "AlgebraicGeometry.FiniteReduction.Ring",
+   "AlgebraicGeometry.FiniteReduction.Coeff",
+   "AlgebraicGeometry.FiniteReduction.quotient",
+   "AlgebraicGeometry.FiniteReduction.extend",
+   "AlgebraicGeometry.FiniteReduction.extendAdjunction",
+   "AlgebraicGeometry.FiniteReduction.extend_additive",
+   "AlgebraicGeometry.FiniteReduction.DerivedExtension",
+   "AlgebraicGeometry.FiniteReduction.ordinaryComparison",
+   "AlgebraicGeometry.FiniteReduction.ordinaryAssociator",
+   "AlgebraicGeometry.FiniteReduction.ordinaryComparisonComplex",
+   "AlgebraicGeometry.FiniteReduction.System",
+   "AlgebraicGeometry.FiniteReduction.System.CoherentAt",
+   "AlgebraicGeometry.FiniteReduction.ringFinite",
+   "AlgebraicGeometry.FiniteReduction.realize",
+   "AlgebraicGeometry.FiniteReduction.System.originComparison",
+   "AlgebraicGeometry.FiniteReduction.finiteReduction_constructibility"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteReductionConstructibility.lean",
+  "statement": "theorem finiteReduction_constructibility (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (_hinvert : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) : ∃ S : System T l, ∀ (r m : ℕ) (_hm : 1 ≤ m) (hmr : m ≤ r) (a b : ℤ) (_hab : a ≤ b) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Coeff.{u} l r)))) (_hconstructible : ∀ i : ℤ, Scheme.IsConstructibleProEtaleModuleSheaf T (Ring.{u} l r) ((DerivedCategory.homologyFunctor (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T (Ring.{u} l r))) i).obj ((realize T l r).obj K))) (_hbounded : ∃ c d : ℤ, c ≤ d ∧ ∀ i : ℤ, (i < c ∨ d < i) → IsZero ((DerivedCategory.homologyFunctor (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T (Ring.{u} l r))) i).obj ((realize T l r).obj K))) (_htor : Scheme.HasProEtaleTorAmplitude T (Ring.{u} l r) ((realize T l r).obj K) a b) (K₀ : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l r)))) (_hK₀ : Etale.DerivedCategory.isBoundedConstructible (Coeff.{u} l r) T K₀) (e : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Coeff.{u} l r)) T).mapDerivedCategory.obj K₀ ≅ K), Etale.DerivedCategory.hasTorAmplitudeIn (Coeff.{u} l r) T a b K₀ ∧ ∃ Q : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l r))) ℤ, Etale.IsBoundedFlatComplex (Coeff.{u} l r) a b Q ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q ∧ Nonempty (K₀ ≅ DerivedCategory.Q.obj Q) ∧ Etale.IsBoundedFlatComplex (Coeff.{u} l m) a b (((extend T.smallEtaleTopology (quotient l hmr)).mapHomologicalComplex (.up ℤ)).obj Q) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((extend T.smallEtaleTopology (quotient l hmr)).mapHomologicalComplex (.up ℤ)).obj Q) ∧ Nonempty ((S.etale r m hmr).functor.obj K₀ ≅ DerivedCategory.Q.obj (((extend T.smallEtaleTopology (quotient l hmr)).mapHomologicalComplex (.up ℤ)).obj Q)) ∧ Etale.DerivedCategory.isBoundedConstructible (Coeff.{u} l m) T ((S.etale r m hmr).functor.obj K₀) ∧ (∃ origin : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Coeff.{u} l m)) T).mapDerivedCategory.obj ((S.etale r m hmr).functor.obj K₀) ≅ (S.proetale r m hmr).functor.obj K, origin.hom = (S.comparison r m hmr).hom.app K₀ ≫ (S.proetale r m hmr).functor.map e.hom) ∧ (∀ i : ℤ, Scheme.IsConstructibleProEtaleModuleSheaf T (Ring.{u} l m) ((DerivedCategory.homologyFunctor (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T (Ring.{u} l m))) i).obj ((realize T l m).obj ((S.proetale r m hmr).functor.obj K)))) ∧ (∃ c d : ℤ, c ≤ d ∧ ∀ i : ℤ, (i < c ∨ d < i) → IsZero ((DerivedCategory.homologyFunctor (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T (Ring.{u} l m))) i).obj ((realize T l m).obj ((S.proetale r m hmr).functor.obj K)))) ∧ Scheme.HasProEtaleTorAmplitude T (Ring.{u} l m) ((realize T l m).obj ((S.proetale r m hmr).functor.obj K)) a b ∧ ∀ (n : ℕ) (_hn : 1 ≤ n) (hnm : n ≤ m), S.CoherentAt r m n hmr hnm K₀",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the fixed-module presentation and the recorded canonical intrinsic coefficient realization. The same module supplies the concrete quotient scalar extensions, their universal derived-pair interface, and the canonical comparison and associator normalizations as owning-node helpers. System is existentially returned by the theorem; no definition chooses data from a mere existence theorem. Intrinsic constructibility and Tor amplitude use the publicly retained original predicates from the recorded dependency modules."
  }
 }

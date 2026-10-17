@@ -181,5 +181,25 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-c5c7a1f01 (reviewer sub-agent of L); spot-checked: Read the item, the new node, the report and all cited statements in full. Read Kerodon 01N7 (Prop 6.3.5.3: hypotheses (a)-(d), (1)<=>(2)) and 01FJ (Ex 4.5.5.12, §4.5.5) online, because Kerodon is not archived. The item statement is exactly 01N7 (1)=>(2): the back square is categorical by 01FJ since u_0 is injective (this is (a)), and the front square is categorical since v_0 is injective (this gives (1)). The edge inclusions are (b)-(d), and the conclusion is the union of the images of V_0 and V_1. The statement is unchanged and nothing is weakened. Small cases tested: all V_i empty, empty overlap, non-injective u_1, E=pt. Two repairable faults, both fixed. (1) C1-exception/D: the new node lem-coef-categorical-pushout-mono follows in two lines from facts already in the DAG. Fun of a degreewise pushout is the strict pullback (elementary); lem-coef-infinity-isofibration-exponentiation makes restriction along a mono an isofibration; lem-coef-infinity-isofibration-pullback-limit makes a strict pullback along an isofibration a Cat_inf pullback. The sibling lem-coef-universal-localization-pushout step 4 does the same inline, and the node's 'equivalently ... cores' clause was imprecise (B2/B3). I folded it into item Step 1 and dropped the node; nothing else cites it. (2) E5: the old Step 3 identified the Cat_inf pullback of the L-cospan with the full subcategory L without showing that L_0->L_01 is an isofibration. The new Step 2 proves the isofibration: inner horns by fullness; equivalence lifts via lem-coef-infinity-pointwise-equivalences and lem-coef-infinity-mapping-composition. The new Step 3 gives L = L_0 x_{L_01} L_1 strictly and as a Cat_inf pullback. The new Step 4 checks that the p_i^* commute strictly with restriction, uses the cospan-equivalence invariance and cone naturality of lem-coef-infinity-terminal-pullback-criterion, and builds an explicit quasi-inverse by testing with Q. All citations are in unit sk-prop-sf-biduality-general or are definitions, so no tool_uses are needed. A transitive-dependency check finds no cycle, and proof_deps is the union of the uses. No SGA source; no target touched. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-localization-monomorphic-pushout.json; the full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4431d69c4",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Reviewed source, dependencies, every statement clause, universes and edge cases. Mathematics is correct. Complete fixes remove conclusion lets, add proof docstring and dependency imports, and supply independent review/search/compiler evidence. Original and replacement compile cleanly through scompile.py. Findings recorded in review.md; replacements under fixes/. Branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizationMonomorphicPushout",
+  "declaration": "SSet.Enhanced.localizationAtEdges_monomorphic_pushout",
+  "file": "lean/Sheaf/CategoryTheory/LocalizationMonomorphicPushout.lean",
+  "statement": "theorem localizationAtEdges_monomorphic_pushout {X₀₁ X₀ X₁ Y₀₁ Y₀ Y₁ : SSet.{u}} (u₀ : X₀₁ ⟶ X₀) (u₁ : X₀₁ ⟶ X₁) (v₀ : Y₀₁ ⟶ Y₀) (v₁ : Y₀₁ ⟶ Y₁) (p₀₁ : X₀₁ ⟶ Y₀₁) (p₀ : X₀ ⟶ Y₀) (p₁ : X₁ ⟶ Y₁) (h₀ : u₀ ≫ p₀ = p₀₁ ≫ v₀) (h₁ : u₁ ≫ p₁ = p₀₁ ≫ v₁) (hu₀ : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (u₀.app n)) (hv₀ : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (v₀.app n)) (V₀₁ : Set (X₀₁ _⦋1⦌)) (V₀ : Set (X₀ _⦋1⦌)) (V₁ : Set (X₁ _⦋1⦌)) (h₀₁ : IsLocalizationAtEdges.{u, v} p₀₁ V₀₁) (hV₀ : IsLocalizationAtEdges.{u, v} p₀ V₀) (hV₁ : IsLocalizationAtEdges.{u, v} p₁ V₁) (hV₀₁₀ : (u₀.app (Opposite.op ⦋1⦌)) '' V₀₁ ⊆ V₀) (hV₀₁₁ : (u₁.app (Opposite.op ⦋1⦌)) '' V₀₁ ⊆ V₁) : IsLocalizationAtEdges.{u, v} (pushout.map u₀ u₁ v₀ v₁ p₀ p₁ p₀₁ h₀ h₁) (((pushout.inl u₀ u₁).app (Opposite.op ⦋1⦌)) '' V₀ ∪ ((pushout.inr u₀ u₁).app (Opposite.op ⦋1⦌)) '' V₁)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The theorem states the Kerodon 01N7 localization gluing property for degreewise pushouts. The only monomorphism hypotheses are hu₀ and hv₀; no quasicategory or extra injectivity assumptions are present.",
+  "fixed_by": "NT-stage2-Codex-4431d69c4"
  }
 }
