@@ -238,5 +238,32 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-fb1c9c7e3 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and every cited statement, plus the nodes that β's definition rests on: etale-sum-extension, etale-restriction-injectives (statement and proof), extension-by-zero, cartesian-square, underived-exchange (with blueprint_update). I also read unit sk-prop-sf-cbc, the parent cor and its main-20261015 blueprint text, and Stacks 03S3, 03S5, 0F70, 03S6 (etale-cohomology) and 03DI (sites-modules). I recomputed Steps 1, 3 and 5. Step 1: the exchange transpose formula, with s_g=θ in the right direction. Step 3: naturality plus the triangle identity gives δ=s_A∘g_U^{-1}η_{j,F}. Step 5: a^{-1}∘j'^{-1}(b)∘d=id. Edge cases checked: U empty, F=0, Λ=0, g=id, j=id. Fault 1 (C3/E6, silent identification): b uses the explicit open-immersion j_! and adjunction (lem-weil-pbc-extension-by-zero-adjunction). β (def-weil-pbc-etale-shriek-base-change-map) uses the étale sum extension and the adjunction of lem-weil-pbc-etale-restriction-injectives, whose statement does not give a unit. In slopmaster2 these are separate constructions (openImmersionLowerShriekUpperStarAdjunction vs etaleLowerShriekUpperStarAdjunction) and no lemma relates them. Step 2 and Steps 4–5 equated the two units and counits without a citation. The identification is true by Stacks 03DI. Repair: I added the statement-only node lem-cbc-open-extension-zero-etale-adjunction-agreement. It says the sectionwise identification κ: j_!→j^et_! is a natural isomorphism that takes units to units and counits to counits. The item statement now reads β through κ (conclusion unchanged, nothing weakened), and Step 2 cites the new node. Fault 2 (Step 4): the delivery used the module hom bijection for b, which is a priori only an abelian map, and cited the fibre-product-only lemma lem-weil-pbc-etale-shriek-base-change-modules for β invertible. Step 4 now compares underlying abelian maps through the Λ-independent sectionwise bijection, and gets β invertible from b being an isomorphism. I recomputed proof_deps. The new node records only grep searches, because LeanSearch, Loogle and LeanFinder are not reachable here; it may need the other two search kinds added on the Codex machine. Mathlib's leftAdjointUniq is a generic iso of left adjoints; it does not give that iso as κ, so the verdict is no match. I accepted the three declared tool uses. Corrected files: fixes/dag/nodes/sec-smooth-purity/{item,new node}.json; details in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility",
+  "declaration": "AlgebraicGeometry.Etale.derivedExtensionZeroBaseChangeUnderivedCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/Etale/DerivedExtensionZeroBaseChangeUnderivedCompatibility.lean",
+  "statement": "theorem derivedExtensionZeroBaseChangeUnderivedCompatibility (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] : ∀ {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X} (sqdata : OpenImmersionSquare gU j' j g), letI : IsOpenImmersion j := sqdata.isOpenImmersion letI : IsOpenImmersion j' := sqdata.isOpenImmersion' let sq : IsPullback gU j' j g := IsPullback.of_iso_pullback sqdata.toChosenCartesianSquare.toCommSq sqdata.toChosenCartesianSquare.isoPullback sqdata.toChosenCartesianSquare.hom_fst sqdata.toChosenCartesianSquare.hom_snd letI : IsIso (chosenSquareEtaleLowerShriekBaseChangeMap Λ sq.toCommSq) := isIso_chosenSquareEtaleLowerShriekBaseChangeMap Λ sq ∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq)).inv.app F = ((@asIso _ _ _ _ _ (isIso_chosenSquareEtaleLowerShriekBaseChangeMap Λ sq)).app F).inv ∧ (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j').unit.app ((upperStar (ModuleCat.{u + 1} Λ) gU).obj F) ≫ (upperStar (ModuleCat.{u + 1} Λ) j').map ((openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) = (upperStar (ModuleCat.{u + 1} Λ) gU).map ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app F) ≫ (squareUpperStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).obj F) ∧ (upperStar (ModuleCat.{u + 1} Λ) gU).map ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app F) ≫ (squareUpperStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).obj F) ≫ (upperStar (ModuleCat.{u + 1} Λ) j').map ((@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq)).inv.app F) ≫ (asIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j').unit).inv.app ((upperStar (ModuleCat.{u + 1} Λ) gU).obj F) = 𝟙 ((upperStar (ModuleCat.{u + 1} Λ) gU).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.chosenSquareEtaleLowerShriekBaseChangeMate",
+   "AlgebraicGeometry.Etale.chosenSquareEtaleLowerShriekBaseChangeMate_pullback",
+   "AlgebraicGeometry.Etale.chosenSquareEtaleLowerShriekBaseChangeMap",
+   "AlgebraicGeometry.Etale.chosenSquareEtaleLowerShriekBaseChangeMap_eq_mate",
+   "AlgebraicGeometry.Etale.isIso_chosenSquareEtaleLowerShriekBaseChangeMap",
+   "AlgebraicGeometry.Etale.derivedExtensionZeroBaseChangeUnderivedCompatibility"
+  ],
+  "note": "Repair of H3/H4 at returned head 2e771b0a851d: the chosen-square module mate is now constructed directly by inverse conjugation of the module exchange; its pullback specialization equals the dependency etaleLowerShriekBaseChangeMap, and chosenSquareEtaleLowerShriekBaseChangeMap_eq_mate identifies the saved κ-transported open representative with this mate. All helper declarations belong to the node's comparison statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cf696d3ad",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement, dependencies, helper constructions, edge cases, docstrings, and compiler evidence checked; delivery is correct."
  }
 }

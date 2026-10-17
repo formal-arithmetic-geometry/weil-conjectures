@@ -116,7 +116,9 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category",
-  "lem-coef-presentable-infinity-adjoints"
+  "lem-coef-presentable-infinity-adjoints",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-adjunction-data"
  ],
  "mathlib_searches": [
   {
@@ -230,5 +232,32 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-c9cb3843b (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the 4 proof dependencies and 2 statement-dependency definitions in full, plus the citer's steps 12-13, the unit record and the main-20261015 ancestor proof. The statement is unchanged; it is HTT 5.5.4.20 for a locally small cocomplete target and it is true. I checked it on S empty, Spaces with S={empty->pt}, Spaces with S={pt+pt->pt} (where A_S is the poset [1]) and an empty target. Step 2: the transpose of the precomposition with eps_B is i(f), and Yoneda on A_S^op detects that eps_B is invertible. Step 3: the retract inverse r v^-1 b satisfies both identities; pushout closure goes through mapping spaces and pullbacks. Step 4: colimits of arrows are computed on source and target, then cone calculus applies, then minimality of <S> gives W in T. Step 5: i lambda_j = eta_c iota_j follows from the triangle identity, Step 2 and naturality of eta, so F i lambda = F eta_c . F iota is colimiting, including J empty. Steps 6-7: the forward direction and the two whiskered comparisons with invertible components are correct; cone calculus is applied to large shapes after enlarging the universe, the same convention sibling nodes use. proof_deps equals the union of uses and there is no cycle. The off-unit use of lem-cbc-enhanced-functor-cone-calculus is a generic black box already accepted in the three sibling nodes; I accept it. lem-coef-system-localization-universal and lem-coef-enhanced-localization-universal do not duplicate the item. HTT and Haugseng are WANTED and proof_origin is agent; no SGA source is used. No fixes, no new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocontinuousLocalizationFactorization",
+  "declaration": "SSet.Presentability.LocalizationFactorization.cocontinuous_localization_factorization",
+  "declarations": [
+   "SSet.Presentability.LocalizationFactorization.functors",
+   "SSet.Presentability.LocalizationFactorization.precompositionFamily",
+   "SSet.Presentability.LocalizationFactorization.comparison",
+   "SSet.Presentability.LocalizationFactorization.Data",
+   "SSet.Presentability.LocalizationFactorization.Naturality",
+   "SSet.Presentability.LocalizationFactorization.cocontinuous_localization_factorization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocontinuousLocalizationFactorization.lean",
+  "statement": "theorem cocontinuous_localization_factorization (A : SSet.{max (u + 1) v}) [SSet.Quasicategory A] (hA : IsPresentable.{u, v} A) (S : Set (A _⦋1⦌)) (hS : Small.{u} S) (P : A _⦋0⦌ → Prop) (hP : ∀ Z : A _⦋0⦌, P Z ↔ ∀ s : A _⦋1⦌, s ∈ S → SSet.Enhanced.IsWeakHomotopyEquivalence (SSet.Enhanced.canonicalPrecompositionMap (A.δ 1 s) (A.δ 0 s) Z s rfl rfl)) (L : A ⟶ (SSet.Enhanced.fullSubcomplex A P).toSSet) (adj : CoherentAdjunction L (SSet.Enhanced.fullSubcomplex A P).ι) (E : SSet.{max (u + 1) v}) [SSet.Quasicategory E] (hE : IsLocallySmall.{u, max (u + 1) v} E) (hcE : HasSmallColimits.{u, max (u + 1) v} E) : ∃ d : Data.{u, v} S L (SSet.Enhanced.fullSubcomplex A P).ι adj E, ∀ (E' : SSet.{max (u + 1) v}) [SSet.Quasicategory E'], IsLocallySmall.{u, max (u + 1) v} E' → HasSmallColimits.{u, max (u + 1) v} E' → ∀ (H : E ⟶ E'), PreservesColimitsIn H (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I) → ∃ d' : Data.{u, v} S L (SSet.Enhanced.fullSubcomplex A P).ι adj E', Nonempty (Naturality d d' H)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Full coherent functor subcomplexes use the existing colimit preservation predicate. Precomposition and restriction are specified on all simplices by inclusion equations. The comparison edges are normalized to whiskering the given adjunction unit and counit by the entire functor parameter. Target postcomposition preserves these maps and edges. The two added statement dependencies are already landed definitions used in the signature. No new notion, dependency repair, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7c98459ef",
+  "group": "NN",
+  "result": "fix",
+  "note": "Lean and mathematics pass; per-file sandbox and library compiles reproduced cleanly. Repaired H11’s placeholder second reading with a complete replacement report under fixes/. Full findings are in review.md. Branch head unchanged."
  }
 }

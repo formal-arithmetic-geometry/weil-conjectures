@@ -233,5 +233,31 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-e1f8b10c0 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of every cited node: def-cbc-enhanced-diagrams-cones, coherent-nerve-comparison, simplicial-right-fibration-presentation (covariant D^cov paragraph), simplicial-model-nerve-localization, enriched-diagram-rectification, simplicial-presheaf-projective-model, kan-quillen-right-proper, cbc-enhanced-functor-cone-calculus, infinity-pointwise-equivalences and def-coef-coherent-localization-interface. I also read the users (universal-left-fibration-identity step 6, kan-diagram-evaluation-restriction), the unit and chapter records, and the blueprint ancestor's proof paragraph 2. The statement is correct and unchanged; no target is weakened. Small cases K=empty, Delta^0, Delta^1 and the empty Kan complex all hold. Step 2: I checked the chain functor's compatibility with composition by hand, using enriched naturality of a_jk; N_hc preserves products and N_hc[n]=Delta^n. Step 3: the edge {k}xDelta^1 is a(k), which is an equivalence by the model-localization node; pointwise detection then covers the whole transformation for arbitrary K. Step 4: every rectification hypothesis holds (u=1, no local Kan condition on C[K], sSet combinatorial simplicial, sSet^cf=Kan_V), and Phi composed with c equals e_K strictly on constant-simplex chains. Step 5: the j and lambda argument is correct. Step 6: Q is cofibrant-fibrant by successive lifting. No new nodes. Duplicate check against simplicial-model-coherent-diagrams, cone-straightening-coherent-evaluation, fibrant-subcategory-localization, chunk-localized-evaluation-exponential and space-valued-straightening: none states this result. No cycle. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, used only for 'Fun(K,C) is a quasicategory'. FIX (B3/C1): step 5 uses the functor-category universal property for the localizations L_K and L_cf of subcategories. The model-localization node states it only for N(M)[W^-1]; the defining property is in def-coef-coherent-localization-interface, which the step did not cite. I added it to step 5 uses, proof_deps and the step text in fixes/dag/nodes/sec-six-functors/lem-coef-kan-diagram-localized-evaluation.json; it is an unmerged definition of the same unit and creates no cycle. HTT/HA are online-only (WANTED); no SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanDiagramLocalizedEvaluation",
+  "declaration": "SSet.KanDiagramEvaluation.kan_diagram_localized_evaluation",
+  "declarations": [
+   "SSet.KanDiagramEvaluation.KanDiagrams",
+   "SSet.KanDiagramEvaluation.realizedSimplex",
+   "SSet.KanDiagramEvaluation.IsChainEvaluation",
+   "SSet.KanDiagramEvaluation.BifibrantAgreement",
+   "SSet.KanDiagramEvaluation.kan_diagram_localized_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanDiagramLocalizedEvaluation.lean",
+  "statement": "theorem kan_diagram_localized_evaluation (K : SSet.{u}) (P : SimplicialRightFibration.CovProjectiveData K) : Enhanced.smallSpaces.{u}.Quasicategory ∧ ((ihom (uliftFunctor.{u + 1}.obj K)).obj Enhanced.smallSpaces.{u}).Quasicategory ∧ ∃ e : uliftFunctor.{u + 1}.obj K ⊗ largeNerve.{u + 1, u, 0} (KanDiagrams K) ⟶ Enhanced.smallSpaces.{u}, IsChainEvaluation K e ∧ Inverts (SimplicialRightFibration.covKanWeak K) (MonoidalClosed.curry e) ∧ BifibrantAgreement K P e ∧ ∀ (L : SSet.{u + 1}) (q : largeNerve.{u + 1, u, 0} (KanDiagrams K) ⟶ L), IsLocalization (SimplicialRightFibration.covKanWeak K) q → ∃ E : L ⟶ (ihom (uliftFunctor.{u + 1}.obj K)).obj Enhanced.smallSpaces.{u}, Enhanced.IsFunctorEquivalence E ∧ Enhanced.AreNaturallyEquivalent (q ≫ E) (MonoidalClosed.curry e)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The evaluation is asserted with its full degreewise chain formula, rather than chosen from a bare existence theorem. Uses the existing covariant Kan-diagram category and weak equivalences, and Enhanced.smallSpaces. The comparison on bifibrant objects is normalized on every enriched mapping simplex and on the entire ordinary nerve. The localization clause is uniform in its chosen coherent localization presentation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3c1eaa431",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Clause-by-clause, dependency, source, universe, edge-case, docstring, and compiler checks passed; no H1–H13 issue found."
  }
 }

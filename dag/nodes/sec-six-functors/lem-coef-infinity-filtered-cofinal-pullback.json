@@ -26,7 +26,11 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-cofinal-common-image",
+  "lem-coef-infinity-cofinal-coslice-calculus",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-accessible-pullback-filtered-colimit"
  ],
  "proof": [
   {
@@ -247,5 +251,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityFilteredCofinalPullback",
+  "declaration": "SSet.Presentability.infinity_filtered_cofinal_pullback",
+  "declarations": [
+   "SSet.Presentability.infinity_filtered_cofinal_pullback",
+   "SSet.Presentability.kappaCofinal_cofinal"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityFilteredCofinalPullback.lean",
+  "statement": "theorem infinity_filtered_cofinal_pullback (κ τ : Cardinal.{u}) (hκ : κ.IsRegular) (hτ : τ.IsRegular) (hκτ : κ < τ) {I J I' : SSet.{max (u + 1) v}} [Quasicategory I] [Quasicategory J] [Quasicategory I'] (f : I ⟶ J) (g : I' ⟶ J) (hI : IsKappaFiltered τ I) (hJ : IsKappaFiltered τ J) (hI' : IsKappaFiltered τ I') (hIcol : HasTauSmallKappaFilteredColimits κ τ I) (hJcol : HasTauSmallKappaFilteredColimits κ τ J) (hI'col : HasTauSmallKappaFilteredColimits κ τ I') (hfcol : PreservesTauSmallKappaFilteredColimits κ τ f) (hgcol : PreservesTauSmallKappaFilteredColimits κ τ g) (hf : IsKappaCofinal κ f) (hg : IsKappaCofinal κ g) : (∃ hP : Quasicategory (SSet.Enhanced.equivalencePullback f g), @IsKappaFiltered τ (SSet.Enhanced.equivalencePullback f g) hP) ∧ IsKappaCofinal κ (SSet.Enhanced.equivalencePullbackFst f g) ∧ IsKappaCofinal κ (SSet.Enhanced.equivalencePullbackSnd f g)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two theorem clauses use the equivalence-arrow pullback and projections now owned by the genuine prerequisite lem-coef-accessible-pullback-filtered-colimit, stated in this delivery. Its existing proof dependency is retained and it is also cited in stmt_deps. The main theorem signatures and natural-language statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2457df37d",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, report, edge cases, declarations, and universe assumptions. Dependency-ordered scompile.py verification passed locally and with server confirmation; no substantive or mechanical delivery errors found. review.md records the checks."
  }
 }

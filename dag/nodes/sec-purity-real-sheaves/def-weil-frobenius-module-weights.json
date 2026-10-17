@@ -129,5 +129,23 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-793ee68d4 (reviewer sub-agent of L); spot-checked: I read all of def-weil-frobenius-module-weights against both blueprint snapshots, master order 2651 and main-20261015 order 2995. The two texts are identical. All hypotheses are kept: p is prime, a>=1, q=p^a, l is a prime different from p, Qlb is an algebraic closure of Q_l, iota is a field isomorphism, w is real, and nothing requires integrality or semisimplicity. The clarifications are equivalent to the source. First, F(V_r) contained in V_r is the same as F(V_r)=V_r, because F is injective and V_r is finite-dimensional. Second, strict and non-strict inclusions give the same predicate, because a zero quotient is pure of every weight and can be deleted. Third, the induced map on V_r/V_{r-1} is a well-defined automorphism, so applying the purity predicate to the quotients is legitimate. I tested V=0 (m=0), a 1-dimensional scalar c, the non-semisimple Jordan block with eigenvalue 1 (pure of weight 0), and diag(1,q), which is mixed of weights at most 2 but not at most 1. I read all six cited statements and they say what the item takes from them (sk-def-frobmod: first sentence only, a notion rather than a route). Dropping def-weil-finite-field-fiber is accepted: the item introduces p, a, q, l and Qlb itself, so it is a parametric form with the same meaning. No duplicates: def-weil-punctual-weights and sk-d-real-weights are about sheaves, sk-def-roots is about polynomials, def-tw-eigenvalue is a q-adic normalization, and lem-a1-punctual-bound-module-mixed is a downstream user. There are no new nodes, no proof steps, no tool_uses and no SGA. Fault fixed (B3): q^{w/2} was defined inline without citing the existing node def-weil-real-power (mathlib, Real.rpow, no dependencies). I added [def-weil-real-power] to that sentence and to stmt_deps in fixes/dag/nodes/sec-purity-real-sheaves/def-weil-frobenius-module-weights.json. This adds no cycle and changes nothing else.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FrobeniusModuleWeights",
+  "declaration": "FrobeniusModule.IsMixedOfWeightsAtMost",
+  "file": "lean/Sheaf/LinearAlgebra/FrobeniusModuleWeights.lean",
+  "statement": "def IsMixedOfWeightsAtMost (p a ell : ℕ) [Fact (Nat.Prime p)] (_ha : 1 ≤ a) [Fact (Nat.Prime ell)] (_hellp : ell ≠ p) (Qlb : Type v) [Field Qlb] [Algebra (ℚ_[ell]) Qlb] (_hQ : IsAlgClosure (ℚ_[ell]) Qlb) (iota : Qlb ≃+* ℂ) (M : FrobeniusModule.{u, v} Qlb) (w : ℝ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e7d49629e",
+  "group": "N4",
+  "result": "fix",
+  "note": "Reviewed immutable delivery, all dependencies, sources, universes and edge cases. Complete fixes repair docstrings, remove the local proof and supply a substantive second reading. Original and final replacement compile cleanly through scompile.py. Findings recorded in review.md; branch unchanged."
  }
 }
