@@ -29,7 +29,8 @@
   "place": "Theorem 7.9.8, printed p. 410, conservativity paragraph between (7.9.8.6) and (7.9.8.7), for the nerve of the cofibrant part of an ordinary model category; the model-category saturation and the cofibration-category fraction calculus supply its hypotheses. Remark 7.9.7 checks heredity by sequential lifting. Read online 2026-10-17; not archived in literature/. No Stacks tag states this result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -269,5 +270,24 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-7e742016d (reviewer sub-agent of L); spot-checked: I read the delivery in full (AGENTS, stage 1, brief, GOAL, dag-sync, delivery-errors A-F, packet, report, the item, the new node, every cited statement, the parent, the unit and the blueprint ancestor). The item is true and its statement is unchanged; it is the conservativity half of Cisinski Thm 7.9.8. The Cisinski PDF is not in the literature folder and I could not open it, so I did not check the cited pages; I checked the mathematics of every statement and step instead. Small cases checked: empty I, a single object, discrete I, and W equal to the isomorphisms. Step checks: step 1 cites only clauses the lifting-closure leaf has and writes the right-class pullback argument out. Step 2: the cofibrant replacement of the pullback is needed and correct, and no properness is used. Step 3: I recomputed the word composition and the equation Q(kt)Q(p)^-1=Q(j)Q(g)Q(bc)^-1Q(f), and the induction is properly set up. Steps 4, 5 and 9 use the new node's essential surjectivity, its naturality, its identification of hL with C[W^-1] and its equivalence criterion. Step 6 meets every hypothesis of the map-surjective leaf: the localization is of all of M, RB is cofibrant and E is fibrant. Steps 7 and 8: the good cylinder and path object meet the leaf's definitions, the lifting square commutes (ps=He0), pt=1, tp is in W, and the arrow retract (1,t),(1,p) with composite (1,pt)=1 gives p in W, then u in W. Step 10 uses the cone-calculus componentwise criterion; I accept that declared tool use. There is no cycle: 115 dependencies reached, none missing. The new node lem-coef-localization-homotopy-category is true, independent of the item, not a restated clause, and not a duplicate of brown-left-fractions, edge-triangle-presentation, invertible-interval, system-localization-universal, hammock or the trivial-fibration fraction model. Its searches are recorded and its blueprint from/via are correct. Repairs, in fixes/dag/nodes/sec-six-functors/lem-coef-localization-homotopy-category.json: (1) under B2, the statement now says L is a quasicategory, because hL is only defined for quasicategories; (2) I added the missing merged_into:null and lean_audit with state none. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d053416ad",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps, the module, the report and the declarations used (FiniteReedy largeNerve/strictEvaluation/comparison/Inverts/localDiagrams/IsLocalization; Enhanced IsEquivalenceEdge/evaluation/AreNaturallyEquivalent/IsFunctorEquivalence; Mathlib IsWeakFactorizationSystem, HasFunctorialFactorization, trivialFibrations, CofibrantObject, functorCategory). Every hypothesis and clause matches the node exactly: no added assumption, empty I allowed, independent universes u v t checked against the comparison's explicit universes, the existence of E is the content of 'induces', and detection plus conservativity hold for every normalized E. The node diff is only lean plus the landed interface node added to stmt_deps (brief-stage2 §5); the statement is verbatim. One sorry, no defs, docstrings carry the source, blueprint tag and ten proof steps; report has Worker report and Second reading by Q33. nt_compile.py on the snapshot file: exit 0, no errors or warnings. Non-blocking: comparison/strictEvaluation are recorded under lem-coef-finite-reedy-localization, which depends on this item, so citing it would create a cycle; reusing the existing definitions is correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StrictDiagramEvaluationConservative",
+  "declaration": "HomotopicalAlgebra.strict_diagram_evaluation_conservative",
+  "file": "lean/Sheaf/CategoryTheory/StrictDiagramEvaluationConservative.lean",
+  "statement": "theorem strict_diagram_evaluation_conservative (M : Type v) [Category.{u} M] [HasLimitsOfSize.{u, u} M] [HasColimitsOfSize.{u, u} M] [CategoryWithCofibrations M] [CategoryWithFibrations M] [CategoryWithWeakEquivalences M] [(weakEquivalences M).IsStableUnderRetracts] [(weakEquivalences M).HasTwoOutOfThreeProperty] [MorphismProperty.IsWeakFactorizationSystem (cofibrations M) (trivialFibrations M)] [MorphismProperty.IsWeakFactorizationSystem (trivialCofibrations M) (fibrations M)] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (I : Type u) [Category.{u} I] (B A : SSet.{max u v t}) (qB : FiniteReedy.largeNerve.{v, u, max u t} (CofibrantObject M) ⟶ B) (hqB : FiniteReedy.IsLocalization ((weakEquivalences M).inverseImage CofibrantObject.ι) qB) (qA : FiniteReedy.largeNerve.{max u v, u, t} (I ⥤ CofibrantObject M) ⟶ A) (hqA : FiniteReedy.IsLocalization (((weakEquivalences M).inverseImage CofibrantObject.ι).functorCategory I) qA) : (∃ E : A ⟶ (ihom (FiniteReedy.largeNerve.{u, u, max u v t} I)).obj B, AreNaturallyEquivalent (qA ≫ E) (FiniteReedy.comparison.{v, u, u, u, t} I (CofibrantObject M) B qB)) ∧ ∀ E : A ⟶ (ihom (FiniteReedy.largeNerve.{u, u, max u v t} I)).obj B, AreNaturallyEquivalent (qA ≫ E) (FiniteReedy.comparison.{v, u, u, u, t} I (CofibrantObject M) B qB) → (∀ a : A _⦋1⦌, (∀ i : I, IsEquivalenceEdge B ((evaluation (FiniteReedy.largeNerve.{u, u, max u v t} I) B (ULift.up (ComposableArrows.mk₀ i))).app _ (E.app _ a))) → IsEquivalenceEdge A a) ∧ (∀ a : A _⦋1⦌, IsEquivalenceEdge ((ihom (FiniteReedy.largeNerve.{u, u, max u v t} I)).obj B) (E.app _ a) → IsEquivalenceEdge A a)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed FiniteReedy entire-functor localization property, lifted nerves and canonical strict evaluation comparison. Both pointwise detection and conservativity hold for every coherently normalized induced comparison; existence of a comparison is included. No diagram model structure or nonempty-index assumption."
  }
 }
