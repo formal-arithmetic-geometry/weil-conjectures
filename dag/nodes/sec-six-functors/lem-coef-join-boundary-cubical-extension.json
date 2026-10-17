@@ -1,0 +1,101 @@
+{
+ "id": "lem-coef-join-boundary-cubical-extension",
+ "kind": "statement",
+ "title": "Join realization and its cubical boundary-extension data",
+ "statement": "Use simplicial sets, standard simplices, boundaries and enriched mapping sets of [def-cbc-enhanced-diagrams-cones], and the subset-poset coherent realization $\\mathfrak C$ of [lem-coef-pinched-cube-latching]. For small simplicial sets $X,Y$, let $\\star$ be the ordered join (an $r$-simplex is a pure simplex of either factor or a pair of simplices whose dimensions sum to $r-1$, with the $X$ block first). The full subcategories of $\\mathfrak C[X\\star Y]$ on the two blocks are $\\mathfrak C[X]$ and $\\mathfrak C[Y]$. There are no maps from the second block to the first. For vertices $x$ of $X$ and $y$ of $Y$ there is a natural simplicial isomorphism\n$$\\mathfrak C[X\\star Y](x,y)\\cong\\mathfrak C[X\\star\\Delta^0](x,v)\\times\\mathfrak C[\\Delta^0\\star Y](b,y),$$\nwhere $v$ is the new last vertex and $b$ the new first vertex. The actions of the two full subcategories are the respective actions on these factors; this description is natural in maps of $X,Y$. In particular $\\mathfrak C[\\Delta^0\\star Y]$ has boundary $A=\\mathfrak C[Y]$, one new vertex $b$ with identity endomorphism simplicial set $\\Delta^0$, no maps from $A$ to $b$, and outgoing weight $W_Y(a)=\\mathfrak C[\\Delta^0\\star Y](b,a)$. Its enriched functors into a simplicial category $\\mathcal D$, with fixed boundary functor $F:A\\to\\mathcal D$ and fixed value $L$ at $b$, correspond to enriched natural maps $W_Y\\to\\mathcal D(L,F(-))$.\n\nMore precisely, let $n\\ge1$ and let $H:\\mathfrak C[\\partial\\Delta^n\\star Y]\\to\\mathcal D$ be any enriched functor, with $F=H|_A$ and $z_i=H(i)$ for $0\\le i\\le n$. Here $\\mathcal D$ need not be locally Kan. Let $\\lambda_n:W_Y\\to\\mathcal D(z_n,F(-))$ be the cone at the last vertex of $\\partial\\Delta^n$. Put\n$$M=\\mathcal D(z_0,z_n),\\quad T=\\underline{\\operatorname{Nat}}(W_Y,\\mathcal D(z_0,F(-))),\\quad u:M\\to T,\\qquad u(f)=f^*\\lambda_n,$$\nwhere $\\underline{\\operatorname{Nat}}(P,Q)_r$ is the set of enriched natural maps $P\\times\\Delta^r\\to Q$, and $f^*\\lambda_n$ means composition with $f$ in its source variable. Define $Q=(\\Delta^1)^{n-1}$, with $Q=\\Delta^0$ for $n=1$, and $\\partial Q$ as the union of all coordinate endpoint faces (empty for $n=1$). Put $V=(\\partial Q\\times\\Delta^1)\\cup(Q\\times\\{0\\})$. Order the coordinates of $Q$ by the vertices $1,\\ldots,n-1$. The restriction of $H$ to $\\mathfrak C[\\partial\\Delta^n](0,n)\\cong\\partial Q$ defines $\\alpha:\\partial Q\\to M$. Let $v$ denote the last vertex adjoined to $\\partial\\Delta^n$. The characteristic-function coordinates of $\\mathfrak C[\\partial\\Delta^n\\star\\Delta^0](0,v)\\cong V$ are ordered by $1,\\ldots,n$, with the final $\\Delta^1$ recording membership of $n$. For each vertex $y$ of $Y$, the cross-mapping formula identifies $\\mathfrak C[\\partial\\Delta^n\\star Y](0,y)$ with $V\\times W_Y(y)$. The maps on these mapping sets supplied by $H$, transposed and assembled by enriched naturality in $y$, define $\\beta:V\\to T$. Composition through the vertex $n$ gives $\\beta|_{\\partial Q\\times\\{1\\}}=u\\alpha$. Extensions of $H$ to $\\mathfrak C[\\Delta^n\\star Y]$ correspond bijectively to pairs\n$$a:Q\\to M,\\qquad c:Q\\times\\Delta^1\\to T$$\nsatisfying $a|_{\\partial Q}=\\alpha$, $c|_V=\\beta$, and $c|_{Q\\times\\{1\\}}=ua$. This correspondence fixes all the already prescribed data, including the boundary diagram and every cone at a boundary vertex.",
+ "source": {
+  "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+  "place": "Riehl–Verity, Theorem 5.3.19 and Remark 5.3.21 (printed pp. 41–42), Proposition 6.1.8 and its cubical presentation (printed pp. 44–45); Definition 5.2.8 and Corollary 5.2.4 for the collage. Read online; archival copy WANTED. No Stacks tag states this enriched realization calculation."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-pinched-cube-latching"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent realization of a join converts a boundary extension problem into a cube and open box lifting problem for enriched natural transformation mapping spaces",
+   "results": "{\"t\": \"2026-10-17T03:46:50Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent realization of a join converts a boundary extension problem into a cube and open box lifting problem for enriched natural transformation mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialThickening.functor\", \"SSet.ι₀_comp\", \"SSet.ι₁_comp\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"CategoryTheory.nerve\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\"], \"digest\": \"c5cf98a1fe18e9e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,42–185; the source defines thickening of a linear order and its nerve, but has no realization-of-joins or boundary extension theorem. Semantic hits on ordinary categorical joins (Join/Basic.lean), ordinary nerve, coskeleton and pointed simplex multiplication do not concern the enriched join realization. The targeted grep of SimplicialNerve.lean has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\"",
+   "results": "{\"t\": \"2026-10-17T03:47:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"CategoryTheory.SimplicialThickening.Path\", \"CategoryTheory.SimplicialThickening.as\", \"CategoryTheory.SimplicialThickening.instCategory\", \"CategoryTheory.SimplicialThickening.instCategoryStruct\", \"CategoryTheory.SimplicialThickening.mk\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.instCategoryPath\"], \"digest\": \"6b81c4012784104f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,42–185; the source defines thickening of a linear order and its nerve, but has no realization-of-joins or boundary extension theorem. Semantic hits on ordinary categorical joins (Join/Basic.lean), ordinary nerve, coskeleton and pointed simplex multiplication do not concern the enriched join realization. The targeted grep of SimplicialNerve.lean has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "join|boundary|horn|cube",
+   "results": "{\"t\": \"2026-10-17T03:47:32Z\", \"tool\": \"grep\", \"query\": \"join|boundary|horn|cube\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,42–185; the source defines thickening of a linear order and its nerve, but has no realization-of-joins or boundary extension theorem. Semantic hits on ordinary categorical joins (Join/Basic.lean), ordinary nerve, coskeleton and pointed simplex multiplication do not concern the enriched join realization. The targeted grep of SimplicialNerve.lean has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy coherent realization of a simplicial join has cross mapping spaces the product of the two cone mapping spaces, so boundary extensions are compatible cube fillers",
+   "results": "{\"t\": \"2026-10-17T03:47:32Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy coherent realization of a simplicial join has cross mapping spaces the product of the two cone mapping spaces, so boundary extensions are compatible cube fillers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.mapPairComp\", \"SSet.toTop\", \"CategoryTheory.Join.mkNatIso.congr_simp\", \"CategoryTheory.Join.mkNatIso\", \"CategoryTheory.Join.mapCompLeft\", \"CategoryTheory.Join.inlCompFromSum\", \"sSetTopAdj\", \"CategoryTheory.Join.mapCompRight\"], \"digest\": \"e9a11dd1f5313081\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,42–185; the source defines thickening of a linear order and its nerve, but has no realization-of-joins or boundary extension theorem. Semantic hits on ordinary categorical joins (Join/Basic.lean), ordinary nerve, coskeleton and pointed simplex multiplication do not concern the enriched join realization. The targeted grep of SimplicialNerve.lean has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial functor out of the realized join is determined by its two restrictions and natural maps from products of cone weights to mapping spaces; boundary fillers reduce to two compatible cube maps",
+   "results": "{\"t\": \"2026-10-17T03:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial functor out of the realized join is determined by its two restrictions and natural maps from products of cone weights to mapping spaces; boundary fillers reduce to two compatible cube maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.MulStruct.map\", \"CategoryTheory.SimplicialNerve\", \"SSet.modelCategoryQuillen.J\", \"SSet.cosk\", \"CategoryTheory.nerve\", \"SSet.IsStrictSegal\", \"SSet.toTopSimplex\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"e1160294996ce7c2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:12–33,42–185; the source defines thickening of a linear order and its nerve, but has no realization-of-joins or boundary extension theorem. Semantic hits on ordinary categorical joins (Join/Basic.lean), ordinary nerve, coskeleton and pointed simplex multiplication do not concern the enriched join realization. The targeted grep of SimplicialNerve.lean has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial realization preserves joins as collages with product hom objects and computes horn mapping spaces as cubical boxes",
+   "results": "{\"t\": \"2026-10-17T04:01:27Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial realization preserves joins as collages with product hom objects and computes horn mapping spaces as cubical boxes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.prodStdSimplex.objEquiv\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.horn.isColimit\", \"SSet.hasColimits\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.PtSimplex.MulStruct.map\"], \"digest\": \"cf8b7e3e53758bbb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second reading: SimplicialNerve.lean:12–33,54–120 defines subset paths and the nerve; ProdStdSimplex.lean:38–80 computes products of ordinary simplices; CategoryWithFibrations.lean:35–60 defines horn/boundary generators. These supply neither the realized-join cross mapping product nor its coupled extension dictionary."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialThickening|SimplicialNerve|coherentRealization",
+   "results": "{\"t\": \"2026-10-17T04:02:17Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|SimplicialNerve|coherentRealization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"3358c6b085bd02b6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second reading: SimplicialNerve.lean:12–33,54–120 defines subset paths and the nerve; ProdStdSimplex.lean:38–80 computes products of ordinary simplices; CategoryWithFibrations.lean:35–60 defines horn/boundary generators. These supply neither the realized-join cross mapping product nor its coupled extension dictionary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-weight-limit-recognition",
+  "date": "2026-10-17",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed inverse-limit mapping calculation: technical realization-of-joins and cubical boundary calculation for the coherent weighted cone recognition, Riehl–Verity Proposition 6.1.8, before using its universal mapping property.",
+   "via": [
+    "lem-coef-coherent-weight-limit-recognition",
+    "lem-coef-right-fibration-section-limit",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
