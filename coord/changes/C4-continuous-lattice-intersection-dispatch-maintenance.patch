@@ -1,0 +1,127 @@
+--- a/weil-launcher-all/dispatch_all.py
++++ b/weil-launcher-all/dispatch_all.py
+@@ -58,7 +58,11 @@
+     """A stage-1 DAG scope failure is never a Lean compiler time limit."""
+     if str(stage) not in ("2", "3"):
+         return False
+-    if re.search(r"worktree|slot|lock|ssh|fetch|push|clone|capacity|exit code 143|terminated", message, re.I):
++    # A dry-run flag or an explicit absence of a push does not make a
++    # compiler timeout a transport failure (C4 ContinuousLatticeIntersectionSplitData).
++    diagnostic = re.sub(r"--no-push\b|\bno (?:delivery )?pushed\b|\bnothing pushed\b",
++                        "", message, flags=re.I)
++    if re.search(r"worktree|slot|lock|ssh|fetch|push|clone|capacity|exit code 143|terminated", diagnostic, re.I):
+         return False
+     limit = re.search(r"60\s*[- ]?\s*(?:s\b|seconds?\b)|time ?limit|timed? ?out|timeout", message, re.I)
+     compiler = re.search(r"compil|\blean\b|lean_file|60\s*[- ]?\s*(?:s\b|seconds?\b)", message, re.I)
+--- a/weil-launcher-all/test_dispatch_failure_classification.py
++++ b/weil-launcher-all/test_dispatch_failure_classification.py
+@@ -37,12 +37,51 @@
+                 with self.subTest(stage=stage, message=message):
+                     self.assertTrue(is_compile_limit(stage, message))
+ 
++    def test_c4_dry_run_compile_timeout_is_a_definition_repair(self):
++        message = ('Sheaf.Paper.ContinuousLatticeIntersectionSplitData: deliver3.py --no-push '
++                   'repeatedly fails its 60-second compilation timeout; no delivery pushed.')
++        self.assertTrue(is_compile_limit('3', message))
++        self.assertFalse(is_compile_limit('1', message))
++        self.assertTrue(is_compile_limit('3', 'Lean compile timeout; nothing pushed'))
++
+     def test_delivery_waits_remain_tool_failures(self):
+         for message in ('worktree wait timed out at 60 s', 'compile slot timeout',
+                         'ssh compile timeout', 'compile capacity exceeded',
+                         'compile process terminated with exit code 143',
+                         'push timed out after the compile completed'):
+             self.assertFalse(is_compile_limit('2', message))
++
++    def test_c4_reaper_preserves_the_compile_repair_instruction(self):
++        import tempfile
++        import time
++        from types import SimpleNamespace
++        from unittest.mock import patch
++        import dispatch_all
++
++        item = 'Sheaf.Paper.ContinuousLatticeIntersectionSplitData'
++        key = item + '@new'
++        with tempfile.TemporaryDirectory() as td:
++            root = Path(td)
++            (root / 'last.txt').write_text(
++                'BLOCKED ' + item + ': deliver3.py --no-push repeatedly fails its '
++                '60-second compilation timeout; no delivery pushed.')
++            group = dispatch_all.Group.__new__(dispatch_all.Group)
++            group.g = 'C4-test'
++            group.b = SimpleNamespace(sandbox=lambda stage: root)
++            group.save = lambda: None
++            group.st = dict(stage={item: '3'}, notes={}, tries={key: 10},
++                            running={item: dict(pid=123, t=time.time(), kind='check',
++                                                key=key, last=str(root / 'last.txt'))})
++            with patch.object(dispatch_all, 'DRY', False), \
++                 patch.object(dispatch_all, 'alive', lambda pid: False), \
++                 patch.object(dispatch_all, 'log', lambda *args: None), \
++                 patch.object(dispatch_all, 'CAPACITY', SimpleNamespace(success=lambda: None)):
++                group.reap()
++            self.assertEqual(group.st['tries'][key], 11)
++            self.assertIn('NOT a tool failure:', group.st['notes'][item])
++            self.assertIn('definition', group.st['notes'][item])
++            self.assertNotIn('blocked', group.st)
++            self.assertNotIn('gaveup', group.st)
+ 
+     def test_reap_uses_the_tested_classifier(self):
+         self.assertIn('elif kind == "BLOCKED" and is_compile_limit(stage, rest):', source)
+--- a/weil-launcher-all/test_worker_transport.py
++++ b/weil-launcher-all/test_worker_transport.py
+@@ -98,7 +98,8 @@
+                  alive=lambda pid: False, log=lambda *args: None, PER_GROUP=4,
+                  os=__import__('os'), CAPACITY=SimpleNamespace(success=lambda: None, rate_limited=lambda: None),
+                  provider_failure=lambda path: worker_transport.transport_diagnostic(worker_transport.read_tail(path)),
+-                 stage2_wait=SimpleNamespace(blockers=lambda *args: []))
++                 stage2_wait=SimpleNamespace(blockers=lambda *args: []),
++                 stage1_handoff=SimpleNamespace(ready_receipt=lambda *args: None))
+ helpers = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in
+            {'codex_rate_limit', 'noanswer_detail', 'worker_codex_command'}]
+ exec(compile(ast.Module(body=[classifier, *helpers, group], type_ignores=[]), '<dispatcher>', 'exec'), namespace)
+--- /dev/null
++++ b/weil-launcher/route-notes/Sheaf.Paper.ContinuousLatticeIntersectionSplitData.md
+@@ -0,0 +1,43 @@
++# Maintenance handoff for ContinuousLatticeIntersectionSplitData (2026-10-17)
++
++Resume the retained sandbox. The item is still open on sheaf-dag; the old B2 proof
++was deliberately replaced by `sorry` in commit aabb04015d after the upstream sync
++(kernel deterministic timeout). Its older DAG proof_origin and reviewed_proof are
++historical, not evidence that today's module is proved. The first C4 worker's
++READY was a dry run, not a landing; the second reader did not push.
++
++The ten NOANSWER retries at 07:17–08:29 were terminal HTTP 429 Too Many Requests,
++not ten failed mathematical arguments. Their final messages were absent. Keep all
++existing work and use the current provider retry/admission wrapper; do not start
++over because of the failure counter.
++
++There is also a real performance repair. The second reader's exact BLOCKED text
++included `deliver3.py --no-push ... 60-second compilation timeout; no delivery
++pushed`. A dispatcher bug misclassified the words “push” as a transport problem.
++That classifier is repaired on disk. The running dispatcher predates that fix,
++so this note supplies the definition-repair instruction on its next launch too.
++
++The retained full proof has previously compiled and printed only propext,
++Classical.choice and Quot.sound, but those historical checks do not replace a
++current successful dry run. Current full-proof snapshots still hit 60 seconds.
++The current source with the target proof replaced by sorry compiles quickly;
++the private helper block and statement are not alone the bottleneck.
++
++The second reader isolated its initial target adjoint-isomorphism obligation:
++
++    IsIso (((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv B D).symm g)
++
++with `g := latticePushedEmbedding a X P p M e`. It uses
++`latticePushedEmbedding_rationalization` and
++`integralScalarUnderivedPushHom_isIso`. The active 08:30 worker has continued
++isolation experiments; inspect its latest scratch files before redoing them.
++A generic adjunction helper and a local irreducible attribute alone have not
++validated the whole proof. Diagnose the expensive conversion/unfolding and repair
++its definition/API, preserving the public theorem statement and adapting forced
++users if needed. Do not raise the 60-second limit or split merely to evade it.
++
++Keep the existing proof and node/report work as the starting point; rebase node
++metadata from sheaf-dag before delivery. Run the required single-file compile
++and deliver3.py --no-push successfully, then obtain the normal second reading.
++This maintenance has not proved or delivered the theorem and has not closed its
++claim. No new mathematical obligations have been added.
