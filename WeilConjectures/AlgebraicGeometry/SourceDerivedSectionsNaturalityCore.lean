@@ -173,7 +173,6 @@ private theorem sourceFreeSectionsComplexIso_naturality
   exact congrArg (fun k ↦ k z) ((strictLocalFreeSheafSections (L.X n)).naturality a.op)
 
 set_option backward.defeqAttrib.useBackward true in
--- The existing interface retains K and q, although this square only involves L.
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- Naturality of evaluation of the Hom complex at the free sheaf generator.

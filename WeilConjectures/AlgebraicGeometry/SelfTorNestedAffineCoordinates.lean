@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -33,21 +33,21 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_over_component_ext
     {X : Scheme.{u}} (M Q : X.Modules) (n : ℕ) (L₁ L₂ W : X.Opens)
     (a₁ : W ⟶ L₁) (a₂ : W ⟶ L₂)
-    (f : (Scheme.Modules.exteriorSheaf M n).over L₁ ⟶ Q.over L₁)
-    (g : (Scheme.Modules.exteriorSheaf M n).over L₂ ⟶ Q.over L₂)
+    (f : (Scheme.Modules.exteriorPower M n).over L₁ ⟶ Q.over L₁)
+    (g : (Scheme.Modules.exteriorPower M n).over L₂ ⟶ Q.over L₂)
     (hwedge : ∀ (V : X.Opens) (b : V ⟶ W)
       (v : Fin n → M.val.obj (op V)) (p : X) (_hp : p ∈ V),
       ∃ (V' : X.Opens) (hV' : V' ≤ V), p ∈ V' ∧
         Q.presheaf.map (homOfLE hV').op
             (f.val.app (op (Over.mk (b ≫ a₁)))
-              (Scheme.Modules.exteriorSheafSection M n V v)) =
+              (Scheme.Modules.wedge (M := M) (r := n) (U := V) v)) =
           Q.presheaf.map (homOfLE hV').op
             (g.val.app (op (Over.mk (b ≫ a₂)))
-              (Scheme.Modules.exteriorSheafSection M n V v))) :
+              (Scheme.Modules.wedge (M := M) (r := n) (U := V) v))) :
     f.val.app (op (Over.mk a₁)) = g.val.app (op (Over.mk a₂)) := by
-  let E := Scheme.Modules.exteriorSheaf M n
+  let E := Scheme.Modules.exteriorPower M n
   let η := (PresheafOfModules.sheafificationAdjunction.{u}
-    (𝟙 X.ringCatSheaf.obj)).unit.app (Scheme.Modules.exteriorSheafPresheaf M n)
+    (𝟙 X.ringCatSheaf.obj)).unit.app ((_root_.PresheafOfModules.exteriorPower (R := _) M.val n))
   have : Presheaf.IsLocallySurjective (Opens.grothendieckTopology X)
       ((PresheafOfModules.toPresheaf _).map η) := by
     rw [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
@@ -140,7 +140,7 @@ theorem exists_nested_affine_selfTor_coordinates
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
           (S.obj B ⊗ S.obj B))
-    let E := Scheme.Modules.exteriorSheaf
+    let E := Scheme.Modules.exteriorPower
       ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n
     let T := fun U : Y.affineOpens ↦
       tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙

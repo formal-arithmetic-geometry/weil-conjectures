@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -68,7 +68,7 @@ theorem selfTor_conormal_dual_chart
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
           (S.obj B ⊗ S.obj B))
-    ∃ τ : Scheme.Modules.exteriorSheaf
+    ∃ τ : Scheme.Modules.exteriorPower
       ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n ⟶ Q,
       ∀ (V : Z.Opens) (U : Y.affineOpens)
         (_hU : ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),

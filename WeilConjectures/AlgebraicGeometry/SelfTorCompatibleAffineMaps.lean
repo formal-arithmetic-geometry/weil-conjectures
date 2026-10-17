@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -234,7 +234,7 @@ theorem exists_compatible_affine_selfTor_maps
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
           (S.obj B ⊗ S.obj B))
-    let E := Scheme.Modules.exteriorSheaf
+    let E := Scheme.Modules.exteriorPower
       ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n
     ∃ φ : ∀ U : Y.affineOpens, E.over (i ⁻¹ᵁ U.1) ⟶ Q.over (i ⁻¹ᵁ U.1),
       (∀ U, IsAffineSelfTorChartMap i U n E Q (φ U)) ∧

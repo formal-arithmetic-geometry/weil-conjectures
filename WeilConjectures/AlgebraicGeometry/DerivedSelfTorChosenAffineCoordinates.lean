@@ -64,7 +64,6 @@ private theorem quotient_section_coordinates
   exact ⟨LinearEquiv.ofBijective l hq, fun _ ↦ rfl⟩
 
 set_option linter.unusedVariables false in
--- Retain the existing binder names in the theorem signature.
 set_option maxHeartbeats 800000 in
 -- Affine scalar structures and tensor localization need additional elaboration fuel.
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented

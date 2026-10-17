@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -31,32 +31,31 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_section_map {X : Scheme.{u}} (M : X.Modules) (n : ℕ)
     {U V : X.Opens} (f : V ⟶ U) (a : Fin n → M.val.obj (op U)) :
-    (Scheme.Modules.exteriorSheaf M n).val.map f.op
-        (Scheme.Modules.exteriorSheafSection M n U a) =
-      Scheme.Modules.exteriorSheafSection M n V (fun j ↦ M.val.map f.op (a j)) := by
+    (Scheme.Modules.exteriorPower M n).val.map f.op
+        (Scheme.Modules.wedge (M := M) (r := n) (U := U) a) =
+      Scheme.Modules.wedge (M := M) (r := n) (U := V) (fun j ↦ M.val.map f.op (a j)) := by
   let η := (PresheafOfModules.sheafificationAdjunction.{u}
-    (𝟙 X.ringCatSheaf.obj)).unit.app (Scheme.Modules.exteriorSheafPresheaf M n)
+    (𝟙 X.ringCatSheaf.obj)).unit.app ((_root_.PresheafOfModules.exteriorPower (R := _) M.val n))
   have hn := PresheafOfModules.naturality_apply η f.op
     (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)
-  have hr := (Classical.choose_spec
-    (Scheme.Modules.exteriorSheafRestriction_existsUnique M n f.op)).1 a
+  have hr := (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f.op) a
   exact hn.symm.trans (congrArg (η.app (op V)) hr)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_over_eq_on_span
     {X : Scheme.{u}} (M Q : X.Modules) (n : ℕ) {G : Type u}
     (L₁ L₂ L W : X.Opens) (a₁ : L ⟶ L₁) (a₂ : L ⟶ L₂) (b : W ⟶ L)
-    (f : (Scheme.Modules.exteriorSheaf M n).over L₁ ⟶ Q.over L₁)
-    (g : (Scheme.Modules.exteriorSheaf M n).over L₂ ⟶ Q.over L₂)
+    (f : (Scheme.Modules.exteriorPower M n).over L₁ ⟶ Q.over L₁)
+    (g : (Scheme.Modules.exteriorPower M n).over L₂ ⟶ Q.over L₂)
     (v : G → Fin n → M.val.obj (op L))
     (hgen : ∀ k, f.val.app (op (Over.mk a₁))
-        (Scheme.Modules.exteriorSheafSection M n L (v k)) =
+        (Scheme.Modules.wedge (M := M) (r := n) (U := L) (v k)) =
       g.val.app (op (Over.mk a₂))
-        (Scheme.Modules.exteriorSheafSection M n L (v k)))
-    (z : (Scheme.Modules.exteriorSheaf M n).val.obj (op W))
+        (Scheme.Modules.wedge (M := M) (r := n) (U := L) (v k)))
+    (z : (Scheme.Modules.exteriorPower M n).val.obj (op W))
     (hz : z ∈ Submodule.span (X.presheaf.obj (op W))
-      (Set.range (fun k ↦ Scheme.Modules.exteriorSheafSection M n W
-        (fun j ↦ M.val.map b.op (v k j))))) :
+      (Set.range (fun k ↦ Scheme.Modules.wedge (M := M) (r := n) (U := W) (fun j ↦ M.val.map b.op
+          (v k j))))) :
     f.val.app (op (Over.mk (b ≫ a₁))) z =
       g.val.app (op (Over.mk (b ≫ a₂))) z := by
   induction hz using Submodule.span_induction with
@@ -66,10 +65,10 @@ private theorem exterior_over_eq_on_span
     rw [← exterior_section_map M n b (v k)]
     have hf := PresheafOfModules.naturality_apply f.val
       (Over.homMk b : Over.mk (b ≫ a₁) ⟶ Over.mk a₁).op
-      (Scheme.Modules.exteriorSheafSection M n L (v k))
+      (Scheme.Modules.wedge (M := M) (r := n) (U := L) (v k))
     have hg := PresheafOfModules.naturality_apply g.val
       (Over.homMk b : Over.mk (b ≫ a₂) ⟶ Over.mk a₂).op
-      (Scheme.Modules.exteriorSheafSection M n L (v k))
+      (Scheme.Modules.wedge (M := M) (r := n) (U := L) (v k))
     exact hf.trans ((congrArg (Q.val.map b.op) (hgen k)).trans hg.symm)
   | zero => simp only [map_zero]
   | add x y _ _ hx hy => simp only [map_add, hx, hy]
@@ -82,18 +81,18 @@ private theorem exterior_over_restrict_eq_on_span
     {X : Scheme.{u}} (M Q : X.Modules) (n : ℕ) {G : Type u}
     (L₁ L₂ L W W' : X.Opens) (a₁ : L ⟶ L₁) (a₂ : L ⟶ L₂)
     (b : W ⟶ L) (d : W' ⟶ W)
-    (f : (Scheme.Modules.exteriorSheaf M n).over L₁ ⟶ Q.over L₁)
-    (g : (Scheme.Modules.exteriorSheaf M n).over L₂ ⟶ Q.over L₂)
+    (f : (Scheme.Modules.exteriorPower M n).over L₁ ⟶ Q.over L₁)
+    (g : (Scheme.Modules.exteriorPower M n).over L₂ ⟶ Q.over L₂)
     (v : G → Fin n → M.val.obj (op L))
     (hgen : ∀ k, f.val.app (op (Over.mk a₁))
-        (Scheme.Modules.exteriorSheafSection M n L (v k)) =
+        (Scheme.Modules.wedge (M := M) (r := n) (U := L) (v k)) =
       g.val.app (op (Over.mk a₂))
-        (Scheme.Modules.exteriorSheafSection M n L (v k)))
-    (z : (Scheme.Modules.exteriorSheaf M n).val.obj (op W))
-    (hz : (Scheme.Modules.exteriorSheaf M n).val.map d.op z ∈
+        (Scheme.Modules.wedge (M := M) (r := n) (U := L) (v k)))
+    (z : (Scheme.Modules.exteriorPower M n).val.obj (op W))
+    (hz : (Scheme.Modules.exteriorPower M n).val.map d.op z ∈
       Submodule.span (X.presheaf.obj (op W'))
-        (Set.range (fun k ↦ Scheme.Modules.exteriorSheafSection M n W'
-          (fun j ↦ M.val.map (d ≫ b).op (v k j))))) :
+        (Set.range (fun k ↦ Scheme.Modules.wedge (M := M) (r := n) (U := W') (fun j ↦ M.val.map (d
+            ≫ b).op (v k j))))) :
     Q.presheaf.map d.op (f.val.app (op (Over.mk (b ≫ a₁))) z) =
       Q.presheaf.map d.op (g.val.app (op (Over.mk (b ≫ a₂))) z) := by
   have hf := PresheafOfModules.naturality_apply f.val
@@ -101,10 +100,10 @@ private theorem exterior_over_restrict_eq_on_span
   have hg := PresheafOfModules.naturality_apply g.val
     (Over.homMk d : Over.mk (d ≫ b ≫ a₂) ⟶ Over.mk (b ≫ a₂)).op z
   change f.val.app (op (Over.mk (d ≫ b ≫ a₁)))
-      ((Scheme.Modules.exteriorSheaf M n).val.map d.op z) =
+      ((Scheme.Modules.exteriorPower M n).val.map d.op z) =
     Q.presheaf.map d.op (f.val.app (op (Over.mk (b ≫ a₁))) z) at hf
   change g.val.app (op (Over.mk (d ≫ b ≫ a₂)))
-      ((Scheme.Modules.exteriorSheaf M n).val.map d.op z) =
+      ((Scheme.Modules.exteriorPower M n).val.map d.op z) =
     Q.presheaf.map d.op (g.val.app (op (Over.mk (b ≫ a₂))) z) at hg
   rw [← hf, ← hg]
   exact exterior_over_eq_on_span M Q n L₁ L₂ L W' a₁ a₂ (d ≫ b) f g v hgen _ hz
@@ -114,21 +113,19 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem local_wedge_agreement_of_ideal_generators
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ) (Q : Z.Modules)
     (φ : ∀ U : Y.affineOpens,
-      (Scheme.Modules.exteriorSheaf
+      (Scheme.Modules.exteriorPower
         ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n).over (i ⁻¹ᵁ U.1) ⟶
           Q.over (i ⁻¹ᵁ U.1))
     (hgen : ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)
       (b : Fin n → i.ker.toModules.val.obj (op V.1)),
       (φ U).val.app (op (Over.mk (homOfLE (i.preimage_mono h))))
-          (Scheme.Modules.exteriorSheafSection
-            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n (i ⁻¹ᵁ V.1)
-            (fun j ↦ ((Classical.choose
+          (Scheme.Modules.wedge (M := ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)) (r
+              := n) (U := (i ⁻¹ᵁ V.1)) (fun j ↦ ((Classical.choose
               (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
                 i.ker.toModules).val.app (op V.1) (b j))) =
         (φ V).val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))
-          (Scheme.Modules.exteriorSheafSection
-            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n (i ⁻¹ᵁ V.1)
-            (fun j ↦ ((Classical.choose
+          (Scheme.Modules.wedge (M := ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)) (r
+              := n) (U := (i ⁻¹ᵁ V.1)) (fun j ↦ ((Classical.choose
               (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
                 i.ker.toModules).val.app (op V.1) (b j)))) :
     ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)
@@ -139,12 +136,12 @@ private theorem local_wedge_agreement_of_ideal_generators
         Q.presheaf.map (homOfLE hW').op
             ((φ U).val.app (op (Over.mk (homOfLE
               (hW.trans ((TopologicalSpace.Opens.map i.base).monotone h)))))
-              (Scheme.Modules.exteriorSheafSection
-                ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n W a)) =
+              (Scheme.Modules.wedge (M := ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))
+                  (r := n) (U := W) a)) =
           Q.presheaf.map (homOfLE hW').op
             ((φ V).val.app (op (Over.mk (homOfLE hW)))
-              (Scheme.Modules.exteriorSheafSection
-                ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n W a)) := by
+              (Scheme.Modules.wedge (M := ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))
+                  (r := n) (U := W) a)) := by
   let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
   let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
     i.ker.toModules
@@ -157,11 +154,10 @@ private theorem local_wedge_agreement_of_ideal_generators
     (homOfLE (i.preimage_mono h)) (𝟙 _)
     (homOfLE hW) (homOfLE hW') (φ U) (φ V)
     (fun b j ↦ η.val.app (op V.1) (b j)) (hgen V U h)
-    (Scheme.Modules.exteriorSheafSection N n W a) hspan
+    (Scheme.Modules.wedge (M := N) (r := n) (U := W) a) hspan
   exact heq
 
 
--- Retain the existing quantified membership binder verbatim as part of the public API.
 set_option linter.unusedVariables false in
 /-- Normalized affine coordinates agree locally on a single pure wedge. This assertion
 provides neither equality on general exterior sections nor equality of module maps.
@@ -208,7 +204,7 @@ theorem exists_local_wedge_selfTor_coordinates
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
           (S.obj B ⊗ S.obj B))
-    let E := Scheme.Modules.exteriorSheaf
+    let E := Scheme.Modules.exteriorPower
       ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n
     let T := fun U : Y.affineOpens ↦
       tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
@@ -228,12 +224,12 @@ theorem exists_local_wedge_selfTor_coordinates
           Q.presheaf.map (homOfLE hW').op
               ((φ U).val.app (op (Over.mk (homOfLE
                 (hW.trans ((TopologicalSpace.Opens.map i.base).monotone h)))))
-                (Scheme.Modules.exteriorSheafSection
-                  ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n W a)) =
+                (Scheme.Modules.wedge (M := ((Scheme.Modules.tensorPullback i).obj
+                    i.ker.toModules)) (r := n) (U := W) a)) =
             Q.presheaf.map (homOfLE hW').op
               ((φ V).val.app (op (Over.mk (homOfLE hW)))
-                (Scheme.Modules.exteriorSheafSection
-                  ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n W a)) := by
+                (Scheme.Modules.wedge (M := ((Scheme.Modules.tensorPullback i).obj
+                    i.ker.toModules)) (r := n) (U := W) a)) := by
   obtain ⟨s, t, hgen⟩ := exists_ideal_wedge_selfTor_coordinates.{u, w} i n
   refine ⟨s, t, ?_⟩
   intro φ V U h W hW a x hx
