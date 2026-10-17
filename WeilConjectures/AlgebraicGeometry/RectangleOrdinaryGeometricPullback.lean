@@ -25,7 +25,6 @@ open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
 -- Keep the derived construction folded while restricting its comparisons.
-attribute [local irreducible] derivedPullback
 
 /-- The canonical upper pullback comparison and equivalence for an iterated fiber product.
 No quasi-compactness or ordinary base-change invertibility is needed here.

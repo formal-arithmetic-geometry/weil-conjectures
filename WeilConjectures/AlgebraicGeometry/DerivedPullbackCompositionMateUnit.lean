@@ -27,7 +27,7 @@ set_option backward.defeqAttrib.useBackward true
 universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
-attribute [local irreducible] derivedPullback Scheme.Modules.tensorPullback
+attribute [local irreducible] Scheme.Modules.tensorPullback
   schemeHomPullbackAdjunction
   CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Functor.rightDerivedFunctorUnit
   CategoryTheory.Adjunction.comp DerivedCategory.Qh
