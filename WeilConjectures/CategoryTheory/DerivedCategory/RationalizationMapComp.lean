@@ -104,4 +104,56 @@ lemma mapOfRingHomIdIso_hom_app (e : F ≅ 𝟭 C₁) (X : C₁) :
 
 end Id
 
+section Assoc
+
+variable {R₄ : Type*} [CommRing R₄] {M₄ : Submonoid R₄}
+  {C₄ : Type*} [Category C₄] [Preadditive C₄] [Linear R₄ C₄] [HasZeroObject C₄]
+  [HasShift C₄ ℤ] [∀ n : ℤ, (shiftFunctor C₄ n).Additive]
+  [∀ n : ℤ, (shiftFunctor C₄ n).Linear R₄] [Pretriangulated C₄] [IsTriangulated C₄]
+  {ψ₁ : R₁ →+* R₂} {hM₁ : M₁ ≤ M₂.comap ψ₁} {F₁ : C₁ ⥤ C₂} [F₁.CommShift ℤ] [F₁.IsTriangulated]
+  {hF₁ : ∀ (r : R₁) {X Y : C₁} (f : X ⟶ Y), F₁.map (r • f) = ψ₁ r • F₁.map f}
+  {ψ₂ : R₂ →+* R₃} {hM₂ : M₂ ≤ M₃.comap ψ₂} {F₂ : C₂ ⥤ C₃} [F₂.CommShift ℤ] [F₂.IsTriangulated]
+  {hF₂ : ∀ (r : R₂) {X Y : C₂} (f : X ⟶ Y), F₂.map (r • f) = ψ₂ r • F₂.map f}
+  {ψ₃ : R₃ →+* R₄} {hM₃ : M₃ ≤ M₄.comap ψ₃} {F₃ : C₃ ⥤ C₄} [F₃.CommShift ℤ] [F₃.IsTriangulated]
+  {hF₃ : ∀ (r : R₃) {X Y : C₃} (f : X ⟶ Y), F₃.map (r • f) = ψ₃ r • F₃.map f}
+  {ψ₁₂ : R₁ →+* R₃} {hM₁₂ : M₁ ≤ M₃.comap ψ₁₂} {F₁₂ : C₁ ⥤ C₃} [F₁₂.CommShift ℤ]
+  [F₁₂.IsTriangulated]
+  {hF₁₂ : ∀ (r : R₁) {X Y : C₁} (f : X ⟶ Y), F₁₂.map (r • f) = ψ₁₂ r • F₁₂.map f}
+  {ψ₂₃ : R₂ →+* R₄} {hM₂₃ : M₂ ≤ M₄.comap ψ₂₃} {F₂₃ : C₂ ⥤ C₄} [F₂₃.CommShift ℤ]
+  [F₂₃.IsTriangulated]
+  {hF₂₃ : ∀ (r : R₂) {X Y : C₂} (f : X ⟶ Y), F₂₃.map (r • f) = ψ₂₃ r • F₂₃.map f}
+  {ψ₁₂₃ : R₁ →+* R₄} {hM₁₂₃ : M₁ ≤ M₄.comap ψ₁₂₃} {F₁₂₃ : C₁ ⥤ C₄} [F₁₂₃.CommShift ℤ]
+  [F₁₂₃.IsTriangulated]
+  {hF₁₂₃ : ∀ (r : R₁) {X Y : C₁} (f : X ⟶ Y), F₁₂₃.map (r • f) = ψ₁₂₃ r • F₁₂₃.map f}
+
+/-- The composition isomorphisms `mapOfRingHomCompIso` inherit the associativity (cocycle)
+condition from the integral composition isomorphisms. -/
+lemma mapOfRingHomCompIso_assoc (e₁₂ : F₁ ⋙ F₂ ≅ F₁₂) (e₂₃ : F₂ ⋙ F₃ ≅ F₂₃)
+    (e₁₃ : F₁ ⋙ F₂₃ ≅ F₁₂₃) (e₀₃ : F₁₂ ⋙ F₃ ≅ F₁₂₃)
+    (h : Functor.isoWhiskerRight e₁₂ F₃ ≪≫ e₀₃ =
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft F₁ e₂₃ ≪≫ e₁₃) :
+    Functor.isoWhiskerRight (mapOfRingHomCompIso ψ₁ hM₁ F₁ hF₁ ψ₂ hM₂ F₂ hF₂ ψ₁₂ hM₁₂ F₁₂ hF₁₂ e₁₂)
+        (mapOfRingHom ψ₃ hM₃ F₃ hF₃) ≪≫
+      mapOfRingHomCompIso ψ₁₂ hM₁₂ F₁₂ hF₁₂ ψ₃ hM₃ F₃ hF₃ ψ₁₂₃ hM₁₂₃ F₁₂₃ hF₁₂₃ e₀₃ =
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (mapOfRingHom ψ₁ hM₁ F₁ hF₁)
+        (mapOfRingHomCompIso ψ₂ hM₂ F₂ hF₂ ψ₃ hM₃ F₃ hF₃ ψ₂₃ hM₂₃ F₂₃ hF₂₃ e₂₃) ≪≫
+      mapOfRingHomCompIso ψ₁ hM₁ F₁ hF₁ ψ₂₃ hM₂₃ F₂₃ hF₂₃ ψ₁₂₃ hM₁₂₃ F₁₂₃ hF₁₂₃ e₁₃ := by
+  have hX := fun X ↦ NatTrans.congr_app (congrArg Iso.hom h) X
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp] at hX
+  ext1
+  refine Localization.natTrans_ext (Q M₁ C₁) (W M₁ C₁) (fun X ↦ ?_)
+  let L₁ := Localization.Lifting.iso (Q M₁ C₁) (W M₁ C₁) (F₁ ⋙ Q M₂ C₂)
+    (mapOfRingHom ψ₁ hM₁ F₁ hF₁)
+  have n₂₃ := (mapOfRingHomCompIso ψ₂ hM₂ F₂ hF₂ ψ₃ hM₃ F₃ hF₃ ψ₂₃ hM₂₃ F₂₃ hF₂₃ e₂₃).hom.naturality
+    (L₁.hom.app X)
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp]
+  sorry
+
+end Assoc
+
 end CategoryTheory.Rationalization

@@ -138,22 +138,39 @@ lemma derivedRestrictScalarsCompIso_assoc :
       (Functor.associator _ _ _).symm ≪≫
         Functor.isoWhiskerRight (derivedRestrictScalarsCompIso J h₂₃)
           (derivedRestrictScalars J f₁) ≪≫ derivedRestrictScalarsCompIso J h₁₃ := by
-  have e₁ := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft (restrictScalars J f₃)
-    (restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂)
-  have e₂ := Functor.mapDerivedCategoryNatIso_isoWhiskerRight
-    (restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃) (restrictScalars J f₁)
-  have e₃ := Functor.mapDerivedCategoryCompIso_assoc (restrictScalars J f₃)
-    (restrictScalars J f₂) (restrictScalars J f₁)
-  have e₄ := restrictScalarsCompIso_assoc J h₁₂ h₂₃ h₁₃ h₀₃
-  ext1
+  have e₄ : Functor.isoWhiskerLeft (restrictScalars J f₃)
+        (restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂) ≪≫ restrictScalarsCompIso J f₁₂ f₃ f₁₂₃ h₀₃ =
+      Functor.isoWhiskerRight (restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃) (restrictScalars J f₁) ≪≫
+        restrictScalarsCompIso J f₁ f₂₃ f₁₂₃ h₁₃ := by
+    ext F : 2
+    apply (fullyFaithfulSheafToPresheaf J _).map_injective
+    ext U x
+    rfl
+  ext K
+  have e₁ := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft
+    (restrictScalars J f₃) (restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂)) K
+  have e₂ := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight
+    (restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃) (restrictScalars J f₁)) K
+  have e₃ := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_assoc (restrictScalars J f₃)
+    (restrictScalars J f₂) (restrictScalars J f₁)) K
+  have e₅ := NatTrans.congr_app (congrArg Iso.hom (congrArg Functor.mapDerivedCategoryNatIso e₄)) K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at e₁ e₂ e₃
+  rw [Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_trans,
+    NatTrans.comp_app, NatTrans.comp_app] at e₅
   simp only [derivedRestrictScalarsCompIso, Iso.trans_hom, Iso.symm_hom,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_comp,
-    Functor.whiskerRight_comp, Category.assoc]
-  rw [← cancel_epi (Functor.whiskerLeft (restrictScalars J f₃).mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso (restrictScalars J f₂) (restrictScalars J f₁)).hom),
-    ← cancel_epi (Functor.mapDerivedCategoryCompIso (restrictScalars J f₃)
-      (restrictScalars J f₂ ⋙ restrictScalars J f₁)).hom]
-  sorry
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,
+    Functor.map_comp, Category.assoc, Category.id_comp]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso (restrictScalars J f₂)
+      (restrictScalars J f₁)).hom.app ((restrictScalars J f₃).mapDerivedCategory.obj K)),
+    ← cancel_epi ((Functor.mapDerivedCategoryCompIso (restrictScalars J f₃)
+      (restrictScalars J f₂ ⋙ restrictScalars J f₁)).hom.app K)]
+  simp only [Iso.hom_inv_id_app_assoc]
+  rw [← reassoc_of% e₁, Iso.hom_inv_id_app_assoc, reassoc_of% e₃]
+  erw [Category.id_comp]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+    ← reassoc_of% e₂, Iso.hom_inv_id_app_assoc]
+  exact e₅
 
 end Assoc
 
@@ -192,9 +209,9 @@ variable (φ₁ : Λ →+* Λ') (φ₂ : Λ' →+* Λ'') (φ : Λ →+* Λ'')
 uniqueness of the left adjoints of the restrictions of scalars. -/
 noncomputable def derivedBaseChangeCompIso (hφ : φ = φ₂.comp φ₁) :
     derivedBaseChange φ₁ X h₁ ⋙ derivedBaseChange φ₂ X h₂ ≅ derivedBaseChange φ X h :=
-  (((derivedBaseChangeAdjunction φ₁ X h₁).comp (derivedBaseChangeAdjunction φ₂ X h₂)).ofNatIsoRight
-    (Sheaf.derivedRestrictScalarsCompIso X.smallEtaleTopology hφ)).leftAdjointUniq
-      (derivedBaseChangeAdjunction φ X h)
+  Adjunction.leftAdjointCompIso (derivedBaseChangeAdjunction φ₁ X h₁)
+    (derivedBaseChangeAdjunction φ₂ X h₂) (derivedBaseChangeAdjunction φ X h)
+    (Sheaf.derivedRestrictScalarsCompIso X.smallEtaleTopology hφ)
 
 /-- Derived base change along the identity is the identity. -/
 noncomputable def derivedBaseChangeIdIso (ψ : Λ →+* Λ) (hψ : ψ = RingHom.id Λ)
@@ -203,6 +220,42 @@ noncomputable def derivedBaseChangeIdIso (ψ : Λ →+* Λ) (hψ : ψ = RingHom.
     derivedBaseChange ψ X h₀ ≅ 𝟭 _ :=
   ((derivedBaseChangeAdjunction ψ X h₀).ofNatIsoRight
     (derivedRestrictScalarsIdIso X ψ hψ)).leftAdjointUniq Adjunction.id
+
+section Assoc
+
+variable {Λ₀ Λ₁ Λ₂ Λ₃ : Type (u + 1)} [CommRing Λ₀] [CommRing Λ₁] [CommRing Λ₂] [CommRing Λ₃]
+  {ρ₁ : Λ₀ →+* Λ₁} {ρ₂ : Λ₁ →+* Λ₂} {ρ₃ : Λ₂ →+* Λ₃} {ρ₁₂ : Λ₀ →+* Λ₂} {ρ₂₃ : Λ₁ →+* Λ₃}
+  {ρ₁₂₃ : Λ₀ →+* Λ₃}
+  (k₁ : ∀ K : 𝐃(X, Λ₀), ∃ (K' : 𝐃(X, Λ₁)) (η : K ⟶ (derivedRestrictScalars ρ₁ X).obj K'),
+    IsDerivedBaseChange η)
+  (k₂ : ∀ K : 𝐃(X, Λ₁), ∃ (K' : 𝐃(X, Λ₂)) (η : K ⟶ (derivedRestrictScalars ρ₂ X).obj K'),
+    IsDerivedBaseChange η)
+  (k₃ : ∀ K : 𝐃(X, Λ₂), ∃ (K' : 𝐃(X, Λ₃)) (η : K ⟶ (derivedRestrictScalars ρ₃ X).obj K'),
+    IsDerivedBaseChange η)
+  (k₁₂ : ∀ K : 𝐃(X, Λ₀), ∃ (K' : 𝐃(X, Λ₂)) (η : K ⟶ (derivedRestrictScalars ρ₁₂ X).obj K'),
+    IsDerivedBaseChange η)
+  (k₂₃ : ∀ K : 𝐃(X, Λ₁), ∃ (K' : 𝐃(X, Λ₃)) (η : K ⟶ (derivedRestrictScalars ρ₂₃ X).obj K'),
+    IsDerivedBaseChange η)
+  (k₁₂₃ : ∀ K : 𝐃(X, Λ₀), ∃ (K' : 𝐃(X, Λ₃)) (η : K ⟶ (derivedRestrictScalars ρ₁₂₃ X).obj K'),
+    IsDerivedBaseChange η)
+  (hρ₁₂ : ρ₁₂ = ρ₂.comp ρ₁) (hρ₂₃ : ρ₂₃ = ρ₃.comp ρ₂) (hρ₁₃ : ρ₁₂₃ = ρ₂₃.comp ρ₁)
+  (hρ₀₃ : ρ₁₂₃ = ρ₃.comp ρ₁₂)
+
+/-- The composition isomorphisms of the derived base changes satisfy the associativity
+(cocycle) condition: the two identifications of `((K ⊗ᴸ Λ₁) ⊗ᴸ Λ₂) ⊗ᴸ Λ₃` with `K ⊗ᴸ Λ₃`
+agree. -/
+lemma derivedBaseChangeCompIso_assoc :
+    Functor.isoWhiskerLeft (derivedBaseChange ρ₁ X k₁)
+        (derivedBaseChangeCompIso X ρ₂ ρ₃ ρ₂₃ k₂ k₃ k₂₃ hρ₂₃) ≪≫
+      derivedBaseChangeCompIso X ρ₁ ρ₂₃ ρ₁₂₃ k₁ k₂₃ k₁₂₃ hρ₁₃ =
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (derivedBaseChangeCompIso X ρ₁ ρ₂ ρ₁₂ k₁ k₂ k₁₂ hρ₁₂)
+        (derivedBaseChange ρ₃ X k₃) ≪≫
+      derivedBaseChangeCompIso X ρ₁₂ ρ₃ ρ₁₂₃ k₁₂ k₃ k₁₂₃ hρ₀₃ :=
+  Adjunction.leftAdjointCompIso_assoc _ _ _ _ _ _ _ _ _ _
+    (Sheaf.derivedRestrictScalarsCompIso_assoc _ hρ₁₂ hρ₂₃ hρ₁₃ hρ₀₃)
+
+end Assoc
 
 end Integral
 
