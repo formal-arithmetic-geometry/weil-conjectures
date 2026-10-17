@@ -254,7 +254,7 @@ lemma topologicalKrullDim_geometricFiber (Y : Scheme.{u}) [Y.Over (Spec (CommRin
   topologicalKrullDim_pullback_eq_of_field _ (Scheme.specAlgebraicClosure k₀).hom
 
 variable (k₀ l) in
-/-- Blueprint `prop-cohomological-finiteness` (constant-sheaf clause): if the geometric fiber
+/-- **Compactly supported cohomology of `ℚ̄_ℓ` in high degrees.** If the geometric fiber
 `X ⊗ k̄` of a separated `k₀`-scheme of finite type has dimension at most `e`, then
 `H_c^r(X ⊗ k̄, ℚ̄_ℓ) = 0` for `r < 0` and for `r > 2e`.
 
