@@ -183,6 +183,46 @@ theorem exists_points_kummer (hϖ : Irreducible ϖ) (σ : R →ₐ[A] A) {k : �
     simp only [Algebra.TensorProduct.includeRight_apply, hΞtmul, map_one] at h2
     exact hincR h2
   · intro j g t
-    sorry
+    have hζR : algebraMap A R ζ ^ n = 1 := by rw [← map_pow, hζ, map_one]
+    let Γ := Multiplicative (ZMod n)
+    letI := AdjoinRoot.kummerAction n (algebraMap A R ϖ) hζR
+    have : SMulCommClass Γ R R' := AdjoinRoot.smulCommClass_kummerAction n (algebraMap A R ϖ) hζR
+    letI := AdjoinRoot.kummerAction n ϖ hζ
+    have : SMulCommClass Γ A A₂ := AdjoinRoot.smulCommClass_kummerAction n ϖ hζ
+    letI := Algebra.IsInvariant.tensorAction (R := A) (R' := A₂) (M := K) Γ
+    letI := Algebra.IsInvariant.tensorAction (R := R) (R' := R') (M := M) Γ
+    -- `σ'` is equivariant
+    have he1 (a : R') : σ' (g • a) = g • σ' a := by
+      have key : σ'.comp (AdjoinRoot.kummerAut n (algebraMap A R ϖ) hζR g.toAdd).toRingHom =
+          (AdjoinRoot.kummerAut n ϖ hζ g.toAdd).toRingHom.comp σ' := by
+        refine AdjoinRoot.ringHom_ext (RingHom.ext fun r ↦ ?_) ?_
+        · have h := hσ'alg r
+          rw [AdjoinRoot.algebraMap_eq] at h
+          exact (congrArg σ' (AdjoinRoot.kummerAut_of n (algebraMap A R ϖ) hζR _ r)).trans
+            (h.trans (((AdjoinRoot.kummerAut n ϖ hζ g.toAdd).commutes (σ r)).symm.trans
+              (congrArg (AdjoinRoot.kummerAut n ϖ hζ g.toAdd) h.symm)))
+        · have h := hσ'alg (algebraMap A R ζ ^ (Multiplicative.toAdd g).val)
+          rw [AdjoinRoot.algebraMap_eq] at h
+          rw [RingHom.comp_apply, RingHom.comp_apply, AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom,
+            AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom, AdjoinRoot.kummerAut_root, map_mul, h,
+            hσ'root, AdjoinRoot.kummerAut_root, ← map_pow, σ.commutes, AdjoinRoot.algebraMap_eq,
+            Algebra.algebraMap_self, RingHom.id_apply]
+      exact congr($key a)
+    -- `Ξⱼ` is equivariant
+    have he2 (x : R' ⊗[R] M) : Ξ j (g • x) = g • Ξ j x := by
+      induction x with
+      | zero => simp only [smul_zero, map_zero]
+      | add x y hx hy => rw [smul_add, map_add, map_add, hx, hy, smul_add]
+      | tmul a m =>
+        rw [Algebra.IsInvariant.tensorAction_smul_tmul, hΞtmul, hΞtmul,
+          Algebra.IsInvariant.tensorAction_smul_tmul, he1]
+    have he3 : ρh j (Algebra.IsInvariant.integralClosureMap Γ g t) = g • ρh j t := hinjK₂ <|
+      calc algebraMap A₂ K₂ (ρh j (Algebra.IsInvariant.integralClosureMap Γ g t))
+          = Ξ j (g • (t : R' ⊗[R] M)) := hρh j _
+        _ = g • Ξ j t := he2 _
+        _ = g • algebraMap A₂ K₂ (ρh j t) := by rw [hρh]
+        _ = algebraMap A₂ K₂ (g • ρh j t) := Algebra.IsInvariant.tensorAction_smul_algebraMap g _
+    rw [hψ, hψ, he3, AdjoinRoot.residue_kummerAction_smul n ϖ hζ
+      (AdjoinRoot.root_mem_maximalIdeal n ϖ) g]
 
 end Algebra.TraitSection
