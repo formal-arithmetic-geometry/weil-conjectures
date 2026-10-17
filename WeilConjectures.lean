@@ -3886,6 +3886,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Sections
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.BaseChange.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
+public import WeilConjectures.SixFunctors.Etale.ArtinVanishing
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation
@@ -4165,6 +4166,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
+public import WeilConjectures.SixFunctors.Etale.Perverse.AffineDirectImage
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.SixFunctors.Etale.Perverse.Operations
 public import WeilConjectures.SixFunctors.Etale.Perverse.StalkSupport
