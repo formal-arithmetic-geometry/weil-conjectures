@@ -13,20 +13,28 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 /-!
 # Lisse `ℓ`-adic sheaves extend uniquely over a dense open
 
-Let `C` be a scheme with regular local rings and `j : U ⟶ C` a quasi-compact open immersion with
-dense image. For a lisse `ℓ`-adic sheaf `F` on `C` the unit `F ⟶ j_* j^* F` of the adjunction
-`j^* ⊣ j_*` is an isomorphism
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`).
+Let `C` be a scheme with regular local rings, or more generally with local rings integrally
+closed domains, and `j : U ⟶ C` a quasi-compact open immersion with dense image. For a lisse
+`ℓ`-adic sheaf `F` on `C` the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
+isomorphism (see the main statements below).
 
 For the constant sheaf `ℚ̄_ℓ` and a weakly étale `T ⟶ C`, the unit is the restriction of locally
 finite functions from `T` to the preimage of `U`, which is bijective: `T` has integral local
-rings (`AlgebraicGeometry.isDomain_stalk_of_weaklyEtale`), so locally finite functions extend
-uniquely over the preimage of a dense open
+rings (`AlgebraicGeometry.isDomain_stalk_of_weaklyEtale`,
+`AlgebraicGeometry.isDomain_stalk_of_weaklyEtale_of_isIntegrallyClosed`), so locally finite
+functions extend uniquely over the preimage of a dense open
 (`AlgebraicGeometry.bijective_locallyFiniteFunctionsComp_of_isOpenImmersion`). The same holds
 over every weakly étale `C`-scheme `V`, for the preimage of `U` in `V`. A lisse sheaf is, over
 the members `V` of a pro-étale cover, a finite direct sum of copies of `ℚ̄_ℓ`, and the components
 of the unit at `F` over weakly étale `C`-schemes factoring through `V` are components of the unit
 over `V` at the restriction of `F`.
+
+## Main statements
+
+- `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`:
+  the regular case.
+- `ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed`:
+  the normal case (blueprint `lem-wf-dense-open-pi1-surjective`, part (3)).
 -/
 
 @[expose] public section
@@ -71,14 +79,16 @@ lemma openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app {A : Type*}
     Adjunction.sheafPushforwardContinuous]
 
 /-- **The constant `ℓ`-adic sheaf is the direct image of its restriction to the preimage of a
-dense open.** Let `p : X ⟶ C` be weakly étale, `C` with regular local rings, `j : U ⟶ C` a
-quasi-compact open immersion with dense image and `ι : V ⟶ X` an open immersion onto
-`p⁻¹(j(U))`. Then the unit `ℚ̄_ℓ,X ⟶ ι_* ι^* ℚ̄_ℓ,X` of the restriction adjunction is an
-isomorphism: over a weakly étale `T ⟶ X` it is the restriction of locally finite functions from
-`T` to the preimage of `j(U)`. -/
+dense open.** Let `p : X ⟶ C` be weakly étale, `C` such that schemes weakly étale over `C`
+have integral local rings (e.g. `C` regular or normal), `j : U ⟶ C` a quasi-compact open
+immersion with dense image and `ι : V ⟶ X` an open immersion onto `p⁻¹(j(U))`. Then the unit
+`ℚ̄_ℓ,X ⟶ ι_* ι^* ℚ̄_ℓ,X` of the restriction adjunction is an isomorphism: over a weakly étale
+`T ⟶ X` it is the restriction of locally finite functions from `T` to the preimage of `j(U)`. -/
 theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_adicConstantSheaf
     {X C U V : Scheme.{u}} (p : X ⟶ C) [WeaklyEtale p]
-    (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C) [IsOpenImmersion j]
+    (hC : ∀ ⦃W : Scheme.{u}⦄ (f : W ⟶ C) [WeaklyEtale f] (w : W),
+      IsDomain (W.presheaf.stalk w))
+    (j : U ⟶ C) [IsOpenImmersion j]
     [QuasiCompact j] (hj : Dense (Set.range j)) (ι : V ⟶ X) [IsOpenImmersion ι]
     (hι : Set.range ι = p ⁻¹' Set.range j) :
     IsIso ((openImmersionRestrictionLowerStarAdjunction (WeilCoefficients.{u} l) ι).unit.app
@@ -95,7 +105,7 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_adicConstantS
     ConcreteCategory.isIso_iff_bijective]
   have : WeaklyEtale T.hom := T.prop
   have hb := bijective_locallyFiniteFunctionsComp_of_isOpenImmersion (l := l) (T.hom ≫ p)
-    (isDomain_stalk_of_weaklyEtale (T.hom ≫ p) hC) j hj (pullback.fst T.hom ι)
+    (hC (T.hom ≫ p)) j hj (pullback.fst T.hom ι)
     (by
       rw [Scheme.Pullback.range_fst]
       ext x
@@ -111,7 +121,9 @@ of the restriction adjunction is an isomorphism at every sheaf isomorphic to a f
 of copies of `ℚ̄_ℓ,X`. -/
 theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_iso_biproduct
     {X C U V : Scheme.{u}} (p : X ⟶ C) [WeaklyEtale p]
-    (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C) [IsOpenImmersion j]
+    (hC : ∀ ⦃W : Scheme.{u}⦄ (f : W ⟶ C) [WeaklyEtale f] (w : W),
+      IsDomain (W.presheaf.stalk w))
+    (j : U ⟶ C) [IsOpenImmersion j]
     [QuasiCompact j] (hj : Dense (Set.range j)) (ι : V ⟶ X) [IsOpenImmersion ι]
     (hι : Set.range ι = p ⁻¹' Set.range j) {H : Sheaf (Scheme.ProEt.topology X)
       (WeilCoefficients.{u} l)} {n : ℕ} (e : H ≅ ⨁ fun _ : Fin n ↦ adicConstantSheaf l X) :
@@ -123,18 +135,21 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_iso_biprod
       isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_adicConstantSheaf p hC j hj ι hι
   exact NatTrans.isIso_app_of_iso _ e
 
-/-- **Sheaves locally free of finite rank extend uniquely over a dense open.** Let `C` have
-regular local rings, `j : U ⟶ C` be a quasi-compact open immersion with dense image and `G` a
-sheaf on the pro-étale site of `C` whose restrictions to the members `V i` of a pro-étale cover
-are finite direct sums of copies of `ℚ̄_ℓ`. Then the unit `G ⟶ j_* j^* G` of the restriction
-adjunction is an isomorphism.
+/-- **Sheaves locally free of finite rank extend uniquely over a dense open.** Let schemes
+weakly étale over `C` have integral local rings, `j : U ⟶ C` be a quasi-compact open immersion
+with dense image and `G` a sheaf on the pro-étale site of `C` whose restrictions to the members
+`V i` of a pro-étale cover are finite direct sums of copies of `ℚ̄_ℓ`. Then the unit
+`G ⟶ j_* j^* G` of the restriction adjunction is an isomorphism.
 
 By conservativity of the restrictions to a cover it suffices to check this over each `V i`.
 Over a weakly étale `T ⟶ V i`, the unit at `G` is the restriction of sections of `G` from `T` to
 `T ×_C U`, which is, up to the identification `T ×_C U ≅ T ×_{V i} (V i ×_C U)`, the unit over
 `V i` at the restriction of `G`, along the preimage `V i ×_C U ⟶ V i` of `U`. -/
 theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_cover
-    {C U : Scheme.{u}} (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C)
+    {C U : Scheme.{u}}
+    (hC : ∀ ⦃W : Scheme.{u}⦄ (f : W ⟶ C) [WeaklyEtale f] (w : W),
+      IsDomain (W.presheaf.stalk w))
+    (j : U ⟶ C)
     [IsOpenImmersion j] [QuasiCompact j] (hj : Dense (Set.range j))
     (G : Sheaf (Scheme.ProEt.topology C) (WeilCoefficients.{u} l)) {ι : Type*}
     {V : ι → Scheme.{u}} (g : ∀ i, V i ⟶ C) [∀ i, WeaklyEtale (g i)]
@@ -216,13 +231,16 @@ lemma isIso_upperStarLowerStarAdjunction_unit_app_iff {A : Type*} [Category.{u +
   exact ⟨fun _ ↦ IsIso.of_isIso_comp_right _ ((ι)_*[A].map ((adj.leftAdjointUniq adj').inv.app G)),
     fun _ ↦ inferInstance⟩
 
-/-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open.** Let `C` be a scheme with
-regular local rings, `j : U ⟶ C` a quasi-compact open immersion with dense image and `F` a lisse
-`ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
-isomorphism. This is the `ℓ`-adic content of blueprint `lem-a1-lisse-middle-extension`. -/
-theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app {C U : Scheme.{u}}
-    (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C) [IsOpenImmersion j]
-    [QuasiCompact j] (hj : Dense (Set.range j)) {F : AdicSheaf l C} (hF : IsAdicLisseSheaf F) :
+/-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open**, for a scheme `C` such that
+every scheme weakly étale over `C` has integral local rings (e.g. `C` regular or normal). Let
+`j : U ⟶ C` be a quasi-compact open immersion with dense image and `F` a lisse `ℓ`-adic sheaf
+on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an isomorphism. -/
+theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isDomain_stalk
+    {C U : Scheme.{u}}
+    (hC : ∀ ⦃W : Scheme.{u}⦄ (f : W ⟶ C) [WeaklyEtale f] (w : W),
+      IsDomain (W.presheaf.stalk w))
+    (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] (hj : Dense (Set.range j))
+    {F : AdicSheaf l C} (hF : IsAdicLisseSheaf F) :
     IsIso ((adicUpperStarLowerStarAdjunction l j).unit.app F) := by
   obtain ⟨R, hR, hRF⟩ := hF
   obtain ⟨ι, V, f, rfl⟩ := R.exists_eq_ofArrows
@@ -241,5 +259,33 @@ theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app {C U : 
     rw [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
     exact h
   exact isIso_of_reflects_iso _ (Mod.forget _)
+
+/-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open of a normal scheme** (blueprint
+`lem-wf-dense-open-pi1-surjective`, part (3), `ℓ`-adic level). Let `C` be a scheme whose local
+rings are integrally closed domains, `j : U ⟶ C` a quasi-compact open immersion with dense image
+and `F` a lisse `ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction
+`j^* ⊣ j_*` is an isomorphism: schemes weakly étale over `C` have integral local rings
+(`AlgebraicGeometry.isDomain_stalk_of_weaklyEtale_of_isIntegrallyClosed`). -/
+theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed
+    {C U : Scheme.{u}}
+    (hC : ∀ c : C, IsDomain (C.presheaf.stalk c) ∧ IsIntegrallyClosed (C.presheaf.stalk c))
+    (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] (hj : Dense (Set.range j))
+    {F : AdicSheaf l C} (hF : IsAdicLisseSheaf F) :
+    IsIso ((adicUpperStarLowerStarAdjunction l j).unit.app F) :=
+  hF.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isDomain_stalk
+    (fun _ f _ ↦ isDomain_stalk_of_weaklyEtale_of_isIntegrallyClosed f hC) j hj
+
+/-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open.** Let `C` be a scheme with
+regular local rings, `j : U ⟶ C` a quasi-compact open immersion with dense image and `F` a lisse
+`ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
+isomorphism. This is the `ℓ`-adic content of blueprint `lem-a1-lisse-middle-extension`; the
+normal case is
+`IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed`. -/
+theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app {C U : Scheme.{u}}
+    (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C) [IsOpenImmersion j]
+    [QuasiCompact j] (hj : Dense (Set.range j)) {F : AdicSheaf l C} (hF : IsAdicLisseSheaf F) :
+    IsIso ((adicUpperStarLowerStarAdjunction l j).unit.app F) :=
+  hF.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isDomain_stalk
+    (fun _ f _ ↦ isDomain_stalk_of_weaklyEtale f hC) j hj
 
 end AlgebraicGeometry.ProEtale
