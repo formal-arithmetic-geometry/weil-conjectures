@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectHomTransport
 
-
 public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
@@ -265,7 +264,6 @@ theorem affineModel_scalarConjugation_nat
     affineModel_scalarConjugation f g h hc E K H G L δ
       αE αK βE βK (ε.app p) (ε.app q) hE hK a
 
-
 section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -384,7 +382,6 @@ structure AffineModelCoherentObjects where
 
 end
 
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable abbrev affineModel_coordinate
@@ -411,7 +408,7 @@ private noncomputable abbrev affineModel_coordinate
       simp only [Iso.refl_hom, Category.comp_id, Category.id_comp,
         affineModelLocalizedTilde_map, Functor.comp_map])
 
-attribute [local irreducible] perfectHomComposition derivedPullback
+attribute [local irreducible] perfectHomComposition
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -633,6 +630,5 @@ theorem exists_affineModelCoherentObjectComparisons
         (perfectHomComparison_triangle s _ _ _ ht Q)
       simpa only [affineModelScalarAssocIso, Iso.trans_assoc] using tr
   exact ⟨⟨αE, αK, βE, βK, θ, θlim, hstage, hlim⟩⟩
-
 
 end AlgebraicGeometry
