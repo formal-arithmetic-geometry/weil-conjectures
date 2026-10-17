@@ -11,7 +11,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-bousfield-kan-comparison-calculus"
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-double-cylinder-weak-equivalence-gluing"
  ],
  "proof": [
   {
@@ -140,5 +141,35 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-96ff1f096 (reviewer sub-agent of L); spot-checked: I read the delivery in full and the mathematics is correct. I checked that BK_W of a walking span realizes to the two mapping cylinders glued at the vertex c. The coordinates w/2, 1-w/2 and 1/2 agree with the nerve coordinates, the d_0 gluing agrees with u_a and u_b, and the cases C empty, A empty (which forces C empty) and the constant point are consistent. The gluing lemma holds for arbitrary spaces: cover the double cylinder by two open halves and apply the gluing theorem for excisive triads (May, Concise, ch. 10 §7). The item's statement matches what the parent lem-coef-double-mapping-cylinder-space-pushout uses in its steps 2 and 3. Everything cited is in unit sk-prop-sf-biduality-general apart from the definition node def-cbc. There is no SGA, no duplicate (searched with rg; read lem-coef-sset-gluing-filtered-equivalences, triangular-bar-excision, homotopy-equivalence-weak and topological-serre-model) and no restatement of a parent clause. The literature has no homotopy-theory text, so both WANTED lines are justified. I repaired three faults in fixes/: (1) B2/B1 in lem-coef-singular-bar-realization-cylinder: σ and σ(s) were undefined for a general U, and the statement carried a proof hint. The statement now uses [σ,s] and Ψ_U, gives explicit naturality, and its stmt_deps are reduced to def-cbc and BK-calculus. (2) B2/B3 in lem-coef-double-cylinder-weak-equivalence-gluing: D(f,g), the induced map and the weak equivalence of spaces were not defined. The statement is restated for arbitrary topological spaces with these defined inline and with explicit functoriality of D(e). (3) In the item, step 1 now writes Φ = D(e)∘Ψ_V and also uses the counit node, and step 3 derives continuity, the weak equivalence and naturality explicitly; proof_deps is unchanged. The new nodes' search records are summaries that I could not match to a search log on this machine.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-96b444e63",
+  "group": "N1",
+  "result": "pass",
+  "note": "Reviewed all node statements, dependencies, source/proof records, Lean declarations, docstrings, edge cases, report sections, and reproduced both module compiles via scompile.py with no errors; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SingularSpanBarCylinderGluing",
+  "declaration": "SSet.SingularSpanBar.singular_span_bar_cylinder_gluing",
+  "declarations": [
+   "SSet.SingularSpanBar.realizedSpan",
+   "SSet.SingularSpanBar.diagram",
+   "SSet.SingularSpanBar.bar",
+   "SSet.SingularSpanBar.diagramMap",
+   "SSet.SingularSpanBar.barMap",
+   "SSet.SingularSpanBar.centralWeight",
+   "SSet.SingularSpanBar.cylinderTime",
+   "SSet.SingularSpanBar.realizationPoint",
+   "SSet.SingularSpanBar.simplexFormula",
+   "SSet.SingularSpanBar.singular_span_bar_cylinder_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SingularSpanBarCylinderGluing.lean",
+  "statement": "theorem singular_span_bar_cylinder_gluing : ∃ Φ : ∀ (A B C : SSet.{u}) (f : |C| ⟶ |A|) (g : |C| ⟶ |B|), C(|bar (realizedSpan A B C f g)|, Space (realizedSpan A B C f g)), ∀ (A B C : SSet.{u}) (f : |C| ⟶ |A|) (g : |C| ⟶ |B|), (∀ (n : SimplexCategory) (z : (bar (realizedSpan A B C f g)).obj (op n)) (s : _root_.stdSimplex ℝ (Fin (n.len + 1))), Φ A B C f g (realizationPoint _ n z s) = simplexFormula (realizedSpan A B C f g) n z s) ∧ IsWeakEquivalence (Φ A B C f g) ∧ ∀ (A' B' C' : SSet.{u}) (f' : |C'| ⟶ |A'|) (g' : |C'| ⟶ |B'|) (e : Hom (realizedSpan A B C f g) (realizedSpan A' B' C' f' g')), TopCat.DoubleMappingCylinder.map e ∘ Φ A B C f g = Φ A' B' C' f' g' ∘ (SSet.toTop.map (barMap e))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

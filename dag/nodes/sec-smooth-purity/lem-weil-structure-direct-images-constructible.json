@@ -203,5 +203,28 @@
   "result": "pass"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9d5af3845",
+  "group": "Q33",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes and edge cases checked. Restored required proof-dependency imports and corrected the report; complete replacements supplied. Both versions pass scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectImagesConstructible",
+  "file": "lean/Sheaf/Paper/DirectImagesConstructible.lean",
+  "declaration": "WeilConjectures.directImages_constructible",
+  "declarations": [
+   "WeilConjectures.finiteFieldDatumPrimeUnit",
+   "WeilConjectures.directImages_constructible"
+  ],
+  "statement": "theorem directImages_constructible (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E₀ : Padic.FiniteCoefficientFields l Ω) (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] (c : Compactification (Y ↘ Spec (CommRingCat.of D.k))) {Kₙ : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)} (hKₙ : intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y Kₙ) {K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) Y} (L : @SfIntegralDirectImage l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance)) : intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn (Spec (CommRingCat.of D.k)) ((proEtaleConstantDerivedDirectImage (Y ↘ Spec (CommRingCat.of D.k)) (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)).obj Kₙ) ∧ intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn (Spec (CommRingCat.of D.k)) ((@AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) c (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n) _ (Padic.finite_coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n hn)).obj Kₙ) ∧ sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance) L) ∧ sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (by exact finiteFieldDatumPrimeUnit D l hl) c K).obj ∧ ∃ M : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)), M.obj.obj = (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance) L) ∧ ∃ M : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)), M.obj.obj = (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K).obj ∧ ∃ M : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (CommRingCat.of D.k)), M.stage = E₀ ∧ HEq M.obj.obj (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance) L) ∧ ∃ M : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (CommRingCat.of D.k)), M.stage = E₀ ∧ HEq M.obj.obj ((sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K).obj)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-9d5af3845"
+ }
 }
