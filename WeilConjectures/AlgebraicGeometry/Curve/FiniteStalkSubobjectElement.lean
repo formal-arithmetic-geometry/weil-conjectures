@@ -8,7 +8,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
-import WeilConjectures.AlgebraicGeometry.AbelianSheavesGModules
+import WeilConjectures.AlgebraicGeometry.EtaleSheafDiscreteContinuousRep
 import Mathlib.FieldTheory.Galois.Profinite
 import Mathlib.Topology.Algebra.OpenSubgroup
 import Mathlib.GroupTheory.GroupAction.Quotient
@@ -108,7 +108,8 @@ theorem torsion_exists_finite_stalk_subobject_element
   let Φ := (pointSmallEtale
     (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))))).sheafFiber
       (A := AddCommGrpCat.{u + 1})
-  obtain ⟨E, Eset, i, j, h⟩ := abelianSheaves_equiv_discreteGModules.{u, 0}
+  let E := etaleSheafEquivDiscreteContinuousRep K (SeparableClosure K)
+  let i := etaleSheafEquivDiscreteContinuousRepForgetIso
     K (SeparableClosure K) (AlgebraicClosure K)
   let U := ObjectProperty.ι (fun X : Rep.{u + 1} ℤ (Gal(SeparableClosure K/K)) ↦
     ∀ x : X.V, IsOpen {g | X.ρ g x = x})

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.Topology.Algebra.OpenSubgroup
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.AbelianSheavesGModules
+import WeilConjectures.AlgebraicGeometry.EtaleSheafDiscreteContinuousRep
 import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 import WeilConjectures.Mathlib.FieldTheory.KrullTopology
 
@@ -256,8 +256,10 @@ theorem nonempty_primaryFixedFieldComparison
     exact hc.1.comp (continuous_subtype_val.subtype_mk _)
   have hi : Continuous e.symm := by
     exact (continuous_subtype_val.comp hc.2).subtype_mk _
-  obtain ⟨E, _, i, _, _, haction, _⟩ :=
-    abelianSheaves_equiv_discreteGModules.{u, 0} L Ks Ω
+  have : IsSepClosed Ks := IsSepClosure.sep_closed K
+  have : Algebra.IsSeparable L Ks := Algebra.isSeparable_tower_top_of_isSeparable K L Ks
+  let E := etaleSheafEquivDiscreteContinuousRep L Ks
+  let i := etaleSheafEquivDiscreteContinuousRepForgetIso L Ks Ω
   let D := reindexDiscreteEquiv ℤ e he hi
   let C : PrimaryFixedFieldEquivalence K Ks H := E.trans D
   let i' : C.functor ⋙ primaryModuleForget K Ks H ≅
@@ -278,6 +280,6 @@ theorem nonempty_primaryFixedFieldComparison
       τL.toRingHom.comp (algebraMap Ks Ω) := by
     ext a
     exact DFunLike.congr_fun hτ a
-  exact haction F (e g) τL hτL X x x' hx z
+  exact etaleSheafEquivDiscreteContinuousRepForgetIso_ρ L Ks Ω F (e g) τL hτL X x x' hx z
 
 end AlgebraicGeometry.Scheme

@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.GroupTheory.PGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
-import WeilConjectures.AlgebraicGeometry.AbelianSheavesGModules
+import WeilConjectures.AlgebraicGeometry.EtaleSheafDiscreteContinuousRep
 import WeilConjectures.RepresentationTheory.FinitePrimaryDecomposition
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
@@ -31,9 +31,10 @@ open CategoryTheory CategoryTheory.Limits ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite torsion abelian sheaf on a field has finitely many primary summands, with projection
-and inclusion maps whose composites sum to the identity. Only the geometric stalks are
-asserted finite; no curve, extension, filtration or cohomology is involved.
+/-- An abelian sheaf on a field with finite geometric stalk (hence torsion) has finitely many
+primary summands, with projection and inclusion maps whose composites sum to the identity.
+Only the geometric stalks are asserted finite; no curve, extension, filtration or cohomology
+is involved.
 
 Source: blueprint `lem-sc-affine-generic-second`, proof paragraph 1.
 
@@ -56,7 +57,6 @@ and all summands stay in the original coefficient universe; no field extension i
 theorem exists_finite_primary_sheaf_decomposition
     (K : Type u) [Field K]
     (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hM : M.IsTorsion)
     (hfinite : Finite (((pointSmallEtale
       (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))))).sheafFiber
         (A := AddCommGrpCat.{u + 1})).obj M)) :
@@ -72,10 +72,9 @@ theorem exists_finite_primary_sheaf_decomposition
       ∃ (a : ∀ i, M ⟶ N i) (b : ∀ i, N i ⟶ M),
         ∑ i, a i ≫ b i = 𝟙 M := by
   classical
-  have _ := hM
-  let Ks := separableClosure K (AlgebraicClosure K)
-  obtain ⟨E, Eset, i, j, hcompat, haction, hset⟩ :=
-    abelianSheaves_equiv_discreteGModules.{u, 0} K Ks (AlgebraicClosure K)
+  let Ks := SeparableClosure K
+  let E := etaleSheafEquivDiscreteContinuousRep K Ks
+  let i := etaleSheafEquivDiscreteContinuousRepForgetIso K Ks (AlgebraicClosure K)
   let U : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)) ⥤
       AddCommGrpCat.{u + 1} :=
     ObjectProperty.ι _ ⋙ Rep.RepToAction ℤ (Gal(Ks/K)) ⋙
