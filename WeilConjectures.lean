@@ -3487,6 +3487,7 @@ public import WeilConjectures.Mathlib.RingTheory.Idempotents
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
+public import WeilConjectures.Mathlib.RingTheory.Invariant.Reynolds
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
@@ -3679,6 +3680,7 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
 public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
+public import WeilConjectures.RingTheory.Etale.InvariantsDescent
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftEtaleFP
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftReduction
@@ -3862,6 +3864,7 @@ public import WeilConjectures.RingTheory.UniversalFirstOrderThickeningUniqueness
 public import WeilConjectures.RingTheory.UnramifiedSmoothConormalChartFlat
 public import WeilConjectures.RingTheory.ZariskiPairFlatIntegralIsomorphism
 public import WeilConjectures.RingTheory.ZariskiPairRankOnePropagation
+public import WeilConjectures.ScratchKummer
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
