@@ -11,9 +11,119 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First ignore cofibrancy and put $a=\\operatorname{colim}A$, $b=\\operatorname{colim}B$. A cocone from $Z$ to any simplicial set $M$ restricts to maps $c:C\\to M$ and $v:b\\to M$ agreeing on $a$. Conversely, such a pair defines the component at $S\\supsetneq U$ by $c\\circ Z(U\\subseteq S')$ if $s\\notin U$, and by $v\\circ\\iota_{U\\setminus\\{s\\}}$ if $s\\in U$. Here $S'=S\\setminus\\{s\\}$, as in the statement. For an arrow crossing from $s\\notin U$ to $s\\in V$, one has $U\\subseteq V\\setminus\\{s\\}\\subsetneq S'$; factor the arrow through $U\\cup\\{s\\}$ and use agreement on $a$ and the $B$-cocone relation. Arrows in a single face satisfy the cocone relation already; there are no arrows from the containing face back to the non-containing face. These constructions are inverse, so the universal property gives the specified isomorphism $C\\amalg_a b\\cong\\operatorname{colim}Z$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.3 and Proposition 6.4, printed pp.11-12: pushout square; cocone correspondence expanded."
+   }
+  },
+  {
+   "text": "We now prove the finite latching induction needed for the injectivity assertions, before applying it to either face. For a diagram $F:J\\to\\mathrm{sSet}$ on a finite poset, write $L_qF=\\operatorname{colim}_{r<q}F_r$, and assume all maps $L_qF\\to F_q$ are degreewise injective. A subset $I\\subseteq J$ is downward closed if $q\\in I$ and $r\\leq q$ imply $r\\in I$. For downward closed $I\\subseteq H\\subseteq J$ we prove that $\\operatorname{colim}_I F\\to\\operatorname{colim}_H F$ is degreewise injective, by induction on $|H\\setminus I|$. At zero it is the identity. At a positive value choose a minimal $q\\in H\\setminus I$; finiteness gives such a $q$, every $r<q$ lies in $I$, and $I^+=I\\cup\\{q\\}$ is downward closed.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Proof of Proposition 6.4, printed p.12: explicit induction setup on finite downsets; agent expansion of the indicated finite induction."
+   }
+  },
+  {
+   "text": "In this induction, $\\operatorname{colim}_{I^+}F$ is the pushout $(\\operatorname{colim}_I F)\\amalg_{L_qF}F_q$. Indeed a cocone on $I^+$ is exactly a cocone on $I$ and a map $F_q\\to M$ agreeing on every $F_r$ for $r<q$, equivalently agreeing on $L_qF$. These are all the conditions: no arrow leaves $q$ for an object of $I$, since downward closure of $I$ would then imply $q\\in I$. This proves the pushout assertion from the colimit definition, without assuming any structure map $F_r\\to F_q$ separately injective.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Proof of Proposition 6.4, printed p.12: one-object latching attachment, with its full cocone verification."
+   }
+  },
+  {
+   "text": "Compute the attachment pushout degreewise. Apply [lem-coef-set-pushout-injective] with $X=(L_qF)_n$, $Y=(F_q)_n$, $W=(\\operatorname{colim}_I F)_n$: its injective map $f$ is the assumed latching map, while the map to $W$ may be arbitrary. It gives injectivity of $\\operatorname{colim}_I F\\to\\operatorname{colim}_{I^+}F$ in every degree. The induction hypothesis for $I^+\\subseteq H$ applies because $|H\\setminus I^+|$ decreased by one, and composing these injections completes the finite induction. All latching objects used are those in $J$, since $H$ and each intermediate subset are downward closed in $J$.",
+   "uses": [
+    "lem-coef-set-pushout-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Proof of Proposition 6.4, printed p.12: pushout stability supplies the induction step, specialized to sets in each degree."
+   }
+  },
+  {
+   "text": "Return to $J=\\mathcal P_{<}(S)$ and $F=Z$. For $T\\subsetneq S'$, the latching diagram for $A$ at $T$ is exactly $(Z_R)_{R\\subsetneq T}$, so its latching map is the assumed one for $Z_T$. Thus $A$ is cofibrant. The map $a\\to C$ is the latching map for the proper subset $S'\\subsetneq S$, hence is degreewise injective as well.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.3 cofibrancy definition and Proposition 6.4, left vertical map, printed pp.11-12."
+   }
+  },
+  {
+   "text": "For $T\\subsetneq S'$ put $V=T\\cup\\{s\\}$, a proper subset of $S$, and let $H_T=\\mathcal P_{<}(V)$ and $D_T=H_T\\setminus\\{T\\}$. Both are downward closed in $J$: $T$ is maximal in $H_T$, since $V$ adds only the element $s$ to $T$. Restricting cocones gives $\\operatorname{colim}_{D_T}Z\\cong\\operatorname{colim}_{R\\subsetneq T}Z_{R\\cup\\{s\\}}$. To verify this directly, every object $U$ of $D_T$ not containing $s$ satisfies $U\\subsetneq T$ and has the arrow $U\\to U\\cup\\{s\\}\\in D_T$; extend a cocone on the containing objects using this arrow. For a cross-face inclusion $U\\subseteq W$, the factorization through $U\\cup\\{s\\}\\subseteq W$ verifies compatibility. Restriction and extension are inverse. By steps 2-4 the map from this colimit to $\\operatorname{colim}_{H_T}Z$ is degreewise injective. Composing with the assumed latching injection $\\operatorname{colim}_{H_T}Z\\to Z_V$ proves precisely that the latching map of $B$ at $T$ is injective. Thus $B$ is cofibrant; when $T=\\varnothing$, $D_T$ and its containing subcategory are both empty, so the argument still applies.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.3 shifted face X′ and Proposition 6.4 induction, printed pp.11-12: shifted cofibrancy expanded using the proved downset induction."
+   }
+  },
+  {
+   "text": "Let $D=\\mathcal P_{<}(S)\\setminus\\{S'\\}$ and $I=\\{R:R\\subsetneq S'\\}$. These are downward closed in $J$, because $S'$ is maximal in $J$. The same explicit restriction-and-extension formula as in step 6 gives $\\operatorname{colim}_D Z\\cong b$: for $U\\in D$ without $s$, use $U\\to U\\cup\\{s\\}$, which lies in the containing face indexed by $\\mathcal P_{<}(S')$. Consequently the injective map $\\operatorname{colim}_I Z\\to\\operatorname{colim}_D Z$ of steps 2-4 is the canonical map $a\\to b$, since on every $Z_R$, $R\\subsetneq S'$, it is the structure map $Z_R\\to Z_{R\\cup\\{s\\}}$ followed by its colimit map.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.3 natural map of face diagrams, printed p.11: monicity on face colimits via the same finite latching induction."
+   }
+  },
+  {
+   "text": "In the pushout of step 1 use the already proved injection $a\\to C$. For every degree, [lem-coef-set-pushout-injective] with $X=a_n$, $Y=C_n$, and $W=b_n$ proves that $b_n\\to(C\\amalg_a b)_n$ is injective. The comparison with $\\operatorname{colim}Z$ of step 1 therefore proves degreewise injectivity of the required canonical map $b\\to\\operatorname{colim}Z$.",
+   "uses": [
+    "lem-coef-set-pushout-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Proposition 6.4, right vertical map, printed p.12: cobase change of the latching injection."
+   }
+  },
+  {
+   "text": "All comparison maps above are induced by the displayed structure cocones. For a natural transformation $Z\\to\\widetilde Z$, the two composites in the comparison square agree after precomposition with every $Z_U$: at a non-containing object both use the component into $\\widetilde C$, and at a containing object both use the component into $\\operatorname{colim}\\widetilde B$. Colimit uniqueness makes the square commute, and also gives commutation with every simplicial operator when the constructions are formed degreewise. Thus the isomorphism and all canonical maps are natural in $Z$; the finite ordering chosen to prove injectivity defines no comparison map. If $|S|=1$, then $S'=\\varnothing$, $a=b=\\varnothing$, $C=Z_\\varnothing$, and the pushout is $C\\amalg_\\varnothing\\varnothing=C=\\operatorname{colim}Z$; the two face cofibrancy conditions are vacuous and all three asserted maps with empty source are injective.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Proposition 6.4, naturality and finite-induction base case, printed p.12; explicit singleton and simplicial-operator checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-set-pushout-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+  "place": "Section 6.3 and Proposition 6.4, printed pp.11-12, read online 2026-10-17. Agent expansion: cocone classification, one-object attachment and finite-downset induction, shifted-face cofibrancy and naturality. Archival copy WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +175,46 @@
    "results": "{\"t\": \"2026-10-17T01:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"A cofibrant diagram on the strict subsets of a finite set has a pushout decomposition into its two faces, and the face diagrams have injective latching maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"HomotopicalAlgebra.instCofibrationInrOfIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instCofibrationInlOfIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instCofibrationInrOfIsCofibrant\", \"SSet.horn.isColimit\", \"HomotopicalAlgebra.instCofibrationInlOfIsCofibrant\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\"], \"digest\": \"44ddafc16ed43a3a\"}",
    "date": "2026-10-17",
    "verdict": "no match: Subcomplex.BicartSq.isPushout requires specified subcomplexes and intersection/union equalities. It neither identifies the finite-face colimit nor proves shifted latching injectivity; the other hits concern ordinary cofibration stability and horn colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"mono\"",
+   "results": "{\"t\": \"2026-10-17T02:18:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"pushout\\\", \\\"mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushout.instIsSplitMonoInl\", \"CategoryTheory.Limits.pushout.instIsSplitMonoInr\", \"CategoryTheory.MorphismProperty.pushouts_monotone\", \"CategoryTheory.Abelian.mono_pushout_of_mono_f\", \"CategoryTheory.Abelian.mono_pushout_of_mono_g\", \"AddMonoidAlgebra.instIsPushout\", \"AddMonoidAlgebra.instIsPushout'\", \"MonoidAlgebra.instIsPushout\"], \"digest\": \"a0236407020adb1e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern pushouts of already specified subcomplexes, filtered or discrete colimits, or ordinary pushout injectivity. They do not state the finite face cocone decomposition and the shifted latching argument. The pushout-injectivity hit is used separately as the new Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram indexed by proper subsets of a finite set with injective latching maps decomposes as a pushout of its face colimits and the complementary face",
+   "results": "{\"t\": \"2026-10-17T02:18:12Z\", \"tool\": \"leanfinder\", \"query\": \"A diagram indexed by proper subsets of a finite set with injective latching maps decomposes as a pushout of its face colimits and the complementary face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.Arrow.cechConerve_map\", \"CategoryTheory.Arrow.cechConerve\", \"CategoryTheory.Arrow.cechConerve_obj\"], \"digest\": \"819bc3ad33986c40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern pushouts of already specified subcomplexes, filtered or discrete colimits, or ordinary pushout injectivity. They do not state the finite face cocone decomposition and the shifted latching argument. The pushout-injectivity hit is used separately as the new Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|Reedy|punctured.*cube|cofibrant.*diagram",
+   "results": "{\"t\": \"2026-10-17T02:18:29Z\", \"tool\": \"grep\", \"query\": \"latching|Reedy|punctured.*cube|cofibrant.*diagram\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern pushouts of already specified subcomplexes, filtered or discrete colimits, or ordinary pushout injectivity. They do not state the finite face cocone decomposition and the shifted latching argument. The pushout-injectivity hit is used separately as the new Mathlib leaf.",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimit of a cofibrant finite subset diagram is a pushout with injective face inclusions",
+   "results": "{\"t\": \"2026-10-17T02:18:29Z\", \"tool\": \"leansearch\", \"query\": \"Colimit of a cofibrant finite subset diagram is a pushout with injective face inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CofanTypes.inj_injective_of_isColimit\", \"CategoryTheory.Limits.Cofan.inj_injective_of_isColimit\", \"CategoryTheory.Limits.Types.pushoutCocone_inr_injective_of_isColimit\", \"CategoryTheory.IsPushout.of_isColimit\", \"CategoryTheory.Limits.pushoutIsPushout\", \"CategoryTheory.IsPushout.isColimit\", \"CategoryTheory.IsPushout.isLimitFork\", \"CategoryTheory.Square.IsPushout.isColimit\"], \"digest\": \"ef9805df26bbbb97\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern pushouts of already specified subcomplexes, filtered or discrete colimits, or ordinary pushout injectivity. They do not state the finite face cocone decomposition and the shifted latching argument. The pushout-injectivity hit is used separately as the new Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite direct diagram of sets whose latching maps are injective has injective maps from colimits over downward closed subposets",
+   "results": "{\"t\": \"2026-10-17T02:18:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite direct diagram of sets whose latching maps are injective has injective maps from colimits over downward closed subposets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone.injective\", \"CategoryTheory.Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered\", \"CategoryTheory.Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered'\", \"PartOrdEmb.Limits.CoconePt.desc\", \"CategoryTheory.Limits.Cofan.inj_injective_of_isColimit\", \"PartOrdEmb.Limits.cocone\", \"CategoryTheory.Limits.CofanTypes.inj_injective_of_isColimit\", \"CategoryTheory.Limits.colimitLimitToLimitColimit_injective\"], \"digest\": \"673af89adb92789d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these hits concern pushouts of already specified subcomplexes, filtered or discrete colimits, or ordinary pushout injectivity. They do not state the finite face cocone decomposition and the shifted latching argument. The pushout-injectivity hit is used separately as the new Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sharp-special-colimit-gluing",
@@ -100,5 +246,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cofibrant-subset-colimit-decomposition",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Replaced the empty proof by nine steps: explicit face pushout cocones, a fully based finite-downset latching induction, both face cofibrancy checks, all three injections and canonical naturality including the singleton case. One new node is an exact Mathlib leaf for one-sided pushout injectivity of sets; no new unsplit lemma duplicates a clause of the item.",
+  "blueprint": "Serves the inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 derived coefficient adjunction/coherent comparison, through the recorded finite-coefficient mapping-complex and Rezk sharp-gluing ancestry. The local source place is Rezk Section 6.3 and Proposition 6.4: step 1 realizes its pushout square, steps 2-4 expand its finite latching induction, steps 5-8 establish the cofibrant-face injections used in Proposition 8.1(3), and step 9 supplies naturality and the singleton base case. The current main-20261015 ancestor file has only the statement; the proof ancestry is retained from the imported/split DAG."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-bc006a393",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-bc006a393 (reviewer sub-agent of L); spot-checked: I read the whole item and new node and checked every step myself. Step 1 (pushout): the two-face cocone correspondence holds, and arrows that cross from one face to the other factor through U∪{s}. Steps 2-4 (finite downset induction): base case, minimal missing object and downward closure are all set up; latching objects are computed in J; the new leaf is applied with the right orientation. Step 5: A cofibrant and a→C injective follow directly from the hypothesis. Step 6 (B cofibrant): D_T = P_<(T∪{s})∖{T} is downward closed, the containing objects are final in it, and the composite into Z_V is the B-latching map; T=∅ works. Step 7 (a→b injective): J∖{S'} is downward closed and its colimit is b. Step 8: b→colim Z is injective by one-sided pushout stability. Step 9: naturality and |S|=1 hold. Small cases checked: |S|=1, the span case |S|=2, and T={t} in |S|=3. New node lem-coef-set-pushout-injective is an exact Mathlib leaf: Mathlib/CategoryTheory/Limits/Types/Pushouts.lean lines 243-246, pushoutCocone_inr_injective_of_isColimit (variables at line 32), which needs only f injective; the line number agrees in the live and slopmaster2 Mathlib. Its form is correct (B1-B9), three kinds of search are recorded, and the blueprint ancestor and via chain are right. No duplicate in the DAG: I read the hits for latching, proper subsets, set pushout and cobase change, including the abelian pushout-mono and Reedy nodes. The item has every clause its parent lem-coef-sharp-special-colimit-gluing uses. No off-unit statements and no SGA, so no tool_uses to accept. No changes made. Reservation: the cited Rezk sharp-maps §6.3/Prop 6.4 is not in literature/, and the URL was unreachable from this machine. The only local Rezk copies are a different paper (math/9811037). So I could not check the source place; the node is marked as an agent proof with the archive WANTED, and the maintainer should archive that PDF."
  }
 }
