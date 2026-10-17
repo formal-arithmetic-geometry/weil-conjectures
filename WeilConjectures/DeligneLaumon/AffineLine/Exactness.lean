@@ -9,7 +9,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.WeilSheaf.DirectImageStalkMap
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.LowerStarTriangulated
-public import WeilConjectures.WeilSheaf.Semicontinuity
+public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 
 /-!
@@ -36,14 +36,14 @@ Purity of the middle term is not needed: only the outer two terms enter the weig
 
 ## Implementation notes
 
-The curve is assumed separated, quasi-compact and geometrically connected over `k₀`, the
-hypotheses under which boundary semicontinuity
-(`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage_of_curve`) is stated; quasi-compactness
-is also needed for the derived direct image `Rj_*` to be defined. The blueprint reduces the
-general case to this one by restricting to a connected affine neighbourhood of the missing point
-and replacing `k₀` by its algebraic closure in the function field; neither the compatibility of
-`j_*` and `R¹j_*` with restriction to opens nor the change of the base field of Weil sheaves is
-available, and the case needed (`C₀ = 𝔸¹_{k₀}`) satisfies these hypotheses.
+The curve is assumed separated, quasi-compact and geometrically connected over `k₀`; boundary
+semicontinuity (`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`) is stated
+for geometrically connected curves, and quasi-compactness is needed for the derived direct
+image `Rj_*` to be defined. The blueprint reduces the general case to this one by restricting to
+a connected affine neighbourhood of the missing point and replacing `k₀` by its algebraic closure
+in the function field; neither the compatibility of `j_*` and `R¹j_*` with restriction to opens
+nor the change of the base field of Weil sheaves is available, and the case
+needed (`C₀ = 𝔸¹_{k₀}`) satisfies these hypotheses.
 -/
 
 @[expose] public section
@@ -139,10 +139,10 @@ theorem shortExact_map_directImage (ι : PadicAlgCl l →+* ℂ)
         FrobeniusModule.HasWeightsAtMost.of_surjective
           (WeilSheaf.stalkAtMap _ _ _ (WeilSheaf.homologySheafZeroDerivedLowerStarIso j S.X₃).inv)
           (WeilSheaf.stalkAtMap_frobenius _ _ _ _) (WeilSheaf.surjective_stalkAtMap _ _ _ _)
-          (WeilSheaf.hasWeightsAtMost_directImage_of_curve j S.X₃ h₃ p₃.hasWeightsAtMost x)
+          (h₃.hasWeightsAtMost_directImage j j.denseRange p₃.hasWeightsAtMost x)
       -- `(j_*F₁^∨)_s̄` has weights at most `-w`, `F₁^∨` being pure of weight `-w`
-      have hD := WeilSheaf.hasWeightsAtMost_directImage_of_curve (ι := ι) j (S.X₁.dual h₁)
-        h₁.dual (β := -w) (fun y ↦ by
+      have hD := h₁.dual.hasWeightsAtMost_directImage (ι := ι) j j.denseRange
+        (β := -w) (fun y ↦ by
           obtain ⟨e⟩ := WeilSheaf.nonempty_equiv_stalk_dual h₁ y
           exact (((p₁ y).dual).of_equiv e).hasWeightsAtMost) x
       have e₁ := WeilSheaf.higherDirectImage_obj_eq j S.X₁ 1

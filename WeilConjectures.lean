@@ -4606,7 +4606,6 @@ public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.CurveEndpoints
-public import WeilConjectures.WeilSheaf.CurveTopCohomology
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DenseOpen
 public import WeilConjectures.WeilSheaf.DerivedHom
@@ -4674,7 +4673,6 @@ public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.WeilSheaf.Realizable
-public import WeilConjectures.WeilSheaf.Semicontinuity
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkCharpoly

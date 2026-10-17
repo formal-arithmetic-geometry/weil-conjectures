@@ -124,16 +124,15 @@ end WeilSheaf
 Weil sheaf on `C₀`, punctually `ι`-pure of weight `w`, then `H_c^2(C, G)` has weights at most
 `w + 2`. For `C₀` geometrically connected, `H_c^2(C, G)` is the Tate twist `(-1)` of the geometric
 coinvariants of `G`, which are pure of weight `w`, so it is pure of weight `w + 2`
-(`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two`); the general
-case reduces to this one over the fields of constants of the connected components.
+(`WeilSheaf.IsPunctuallyPureOfWeight.isPureOfWeightOver_compactlySupportedCohomology_two`);
+the general case reduces to this one over the fields of constants of the connected components.
 (blueprint: `lem-a1-curve-hc2-bound`) -/
 theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
     (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
     (hw : G.IsPunctuallyPureOfWeight ι w) :
     (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
   by_cases hC : GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))
-  · exact (WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two ι G hG
-      hw).hasWeightsAtMostOver
+  · exact (hw.isPureOfWeightOver_compactlySupportedCohomology_two hG).hasWeightsAtMostOver
   · exact hasWeightsAtMostOver_compactlySupportedCohomology_two_of_not_geometricallyConnected hC
       ι G hG hw
 
