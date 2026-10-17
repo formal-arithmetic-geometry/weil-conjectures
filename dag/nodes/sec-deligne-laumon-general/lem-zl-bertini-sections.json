@@ -343,5 +343,23 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-14f666eee (reviewer sub-agent of L); spot-checked: I read the delivery in full. The item restates Stacks 0FD5 (varieties.tex lemma-generate-over-complement, statement and whole proof) with every hypothesis and the full conclusion, not weakened. Steps 1-10 are correct and each one uses only what its cited nodes state. def-sc-ample (current update) gives a closed immersion j with j^*O(1)=L^r. lem-weil-pbc-projective-ample-invertible makes L^r absolutely ample, which passes to L. Y is Noetherian, and the ideal I is coherent by kernel-cokernel (2). The twist global-generation lemma gives generation on U, and lem-pc-coherent-hi gives finite dimension. s_1 in V_{n-r} with n>=a+r, and Y_s=Y_{s_1}∩Y_{t_j0}⊂U by the tensor-fibre formula. q is built from polynomial chart coordinates, and qh=j|_{Y_s} via the bijection for maps into affine schemes. Cancellation (07RK(1)) makes h an immersion, and locality over target opens (0FCZ) finishes. The worker's source-error note is a real Stacks typo (V_1 should be V_{n_1}), and the proof avoids it. Edge cases checked: Y empty, Z empty, Z=Y with V_n=0, nonreduced Z, finite or imperfect k. New node lem-zl-immersion-cancellation is an exact match for Mathlib IsImmersion.of_comp (Immersion.lean:218, no hypothesis on g). New node lem-zl-immersion-near-image-locality is a one-line specialization of IsZariskiLocalAtTarget.of_range_subset_iSup (Basic.lean:169), using the instance at Immersion.lean:111 and comp at 146; all line numbers verified. Both new nodes are statement-only and self-contained, with correct blueprint from/via. I found no duplicates: lem-cbc-qc-immersion-cancellation, lem-weil-pbc-closed-immersion-cancellation, lem-weil-pbc-closed-finite-etale-zariski-local and the immersion-gluing nodes all differ, and a blueprint grep found no statement of either fact. Neither new node restates a clause of the item. The route matches the second paragraph of the parent lem-zl-bertini-finite-cover-curve (its 0FD5 input); no SGA is used, and the target base-change check does not apply. I accept all 13 declared tool_uses as generic tools. Fix (B3): the statement now cites def-weil-pbc-morphism-to-projective-space-by-sections for the associated morphism to P(V_n), and that id is added to stmt_deps, in fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-bertini-sections.json; the mathematics is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dde65b95f",
+  "group": "NA",
+  "result": "pass",
+  "note": "Reviewed packet, source Tag 0FD5, all dependencies, Lean declaration/docstrings, edge cases, route-pivot compliance, and report sections. Per-file scompile.py compilation succeeded for sandbox and library overlays with no errors or warnings; review.md records all checks."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.BertiniSections",
+  "declaration": "AlgebraicGeometry.exists_eventual_immersion_vanishingSections",
+  "file": "lean/Sheaf/DeligneLaumon/BertiniSections.lean",
+  "statement": "theorem exists_eventual_immersion_vanishingSections (k : Type u) [Field k] {Y : Scheme.{u}} [Y.Over (Spec (.of k))] [IsProper (Y ↘ Spec (.of k))] (L : Y.Modules) [L.IsInvertible] (hL : IsAmple (Y ↘ Spec (.of k)) L) {Z : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] : ∃ (n₀ : ℕ) (U : Y.Opens), (∀ y : Y, y ∈ U ↔ y ∉ Set.range i.base) ∧ ∀ (n : ℕ), n₀ ≤ n → letI : Module k Γ(L.tensorPow n, ⊤) := Module.compHom _ ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ (Y ↘ Spec (CommRingCat.of k)).appTop).hom ∃ (V : Submodule k Γ(L.tensorPow n, ⊤)) (I : Type u) (_hI : Finite I) (s : I → (L.tensorPow n).sections) (t : I → ((Scheme.Modules.pullback U.ι).obj (L.tensorPow n)).sections), (∀ v : Γ(L.tensorPow n, ⊤), v ∈ V ↔ (AlgebraicGeometry.pullbackΓ i (L.tensorPow n)) v = 0) ∧ Submodule.span k (Set.range (fun j : I ↦ (s j).val (Opposite.op ⊤)) : Set Γ(L.tensorPow n, ⊤)) = V ∧ LinearIndependent (M := Γ(L.tensorPow n, ⊤)) k (fun j : I ↦ (s j).val (Opposite.op ⊤)) ∧ (∀ j : I, (t j).val (Opposite.op ⊤) = (AlgebraicGeometry.pullbackΓ U.ι (L.tensorPow n)) ((s j).val (Opposite.op ⊤))) ∧ ∃ (ht : Epi ((SheafOfModules.freeHomEquiv ((Scheme.Modules.pullback U.ι).obj (L.tensorPow n))).symm t)), IsImmersion (@ProjectiveSpace.homOfGeneratingSections I _ U.toScheme (Spec (.of k)) (U.ι ≫ (Y ↘ Spec (.of k))) ((Scheme.Modules.pullback U.ι).obj (L.tensorPow n)) inferInstance t ht)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
