@@ -29,9 +29,71 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Check the endpoint inclusion from the definition of categorical equivalence in [lem-coef-joyal-model-structure]. We have $J_n=\\{0,1\\}^{n+1}$, with operators selecting or repeating entries. The object rule $k(0,s)=0$, $k(1,s)=s$ defines a functor $\\mathcal J\\times\\mathcal J\\to\\mathcal J$, since all target hom sets are singletons, and hence a simplicial map $k:J\\times J\\to J$. For any quasicategory $C$, let $E:\\operatorname{Fun}(J,C)\\to C$ be evaluation at $0$ and $c:C\\to\\operatorname{Fun}(J,C)$ the constant-diagram map. Then $Ec=1$. Precomposition with $k$ gives $H:\\operatorname{Fun}(J,C)\\times J\\to\\operatorname{Fun}(J,C)$ from $cE$ to the identity. This gives a natural isomorphism $h(cE)\\cong1$: its component at $F$ is the image of $01$, its inverse the image of $10$, and the images of $010,101$ give both inverse equations. For an edge $a:F\\to G$, the two triangles of $\\Delta^1\\times\\Delta^1$ mapped by $H(a,01)$ equate the composites in the naturality square. Naturality follows for every word of edges, hence for the presented category $h\\operatorname{Fun}(J,C)$. Thus $hE$ is an equivalence of ordinary categories for every $C$. Since $E$ is restriction along $u_0$, this says precisely that $u_0$ is a categorical equivalence. It is degreewise injective, hence a trivial cofibration. Inner horns are also trivial cofibrations by the model-structure node. Its right lifting characterization proves that a Joyal fibration has both required lifting properties.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Section 1, Theorem 1.9 and Proposition 1.13; direct walking-groupoid contraction and necessity argument supplied here."
+   }
+  },
+  {
+   "text": "Now assume the two lifting properties. First make extension of an exact equivalence edge to $J$ available. The inclusion $v:\\Delta^1\\hookrightarrow J$ is degreewise injective: it sends a monotone sequence of zeroes and ones to that same sequence. Let $w:J\\to\\Delta^1$ be constant at $0$. The functor $[1]\\times[1]\\to[1]$ with object rule $(t,s)\\mapsto\\min(t,s)$ gives a simplicial homotopy from $wv$ to $1_{\\Delta^1}$. The functor $[1]\\times\\mathcal J\\to\\mathcal J$ with object rule $(0,s)\\mapsto0$, $(1,s)\\mapsto s$ gives a simplicial homotopy from $vw$ to $1_J$. The nerve of a product is the product of nerves degreewise, since a string in a product category is a pair of strings; swap the factors to put the interval last. By [lem-cbc-simplicial-homotopy-equivalence-weak], $v$ is a weak homotopy equivalence. In the Kan model structure of [lem-coef-kan-quillen-right-proper], it is consequently a trivial cofibration, so lifts against maps of Kan complexes to the point.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13, simplicial homotopy equivalence implies weak homotopy equivalence; explicit contractions and existing Kan model structure."
+   }
+  },
+  {
+   "text": "For any quasicategory $D$, the map $D\\to *$ is an isofibration in the explicit sense of [lem-coef-infinity-core-kan-fibration]: inner horns fill, and the sole base equivalence lifts at each vertex to its identity. That node gives a Kan fibration $D^\\simeq\\to *$, so its core is Kan. Let $e:p(x)\\to y$ be an equivalence edge in $Q'$. This edge belongs to $(Q')^\\simeq$, because its other edge restrictions are degenerate identities. Step 2 extends the prescribed map $\\Delta^1\\to(Q')^\\simeq$ along $v$ to $g:J\\to(Q')^\\simeq$, whose restriction to $01$ is exactly $e$. Lift the square with left arrow $u_0$, top vertex $x$, and bottom map $g$, using the assumption on $p$. The resulting $\\widetilde g:J\\to Q$ has $\\widetilde g(01)$ starting at $x$ and mapping exactly to $e$. It is an equivalence: the images of $10,010,101$ give its inverse and both inverse triangles. Together with inner-horn lifting, this says that $p$ is an isofibration as defined in [lem-coef-infinity-isofibration-exponentiation].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 1.13; passage from walking-isomorphism lifting to exact equivalence-edge lifting, using Step 2 and the independent core theorem."
+   }
+  },
+  {
+   "text": "Since $p$ lifts every inner horn inclusion by assumption, Step 3 shows that $p$ satisfies both conditions of clause (1) of [lem-coef-joyal-quasicategory-characterizations]: it has the right lifting property against every $\\Lambda_i^n\\hookrightarrow\\Delta^n$, $0<i<n$, and for every vertex $x$ of $Q$ and every equivalence edge $e:p(x)\\to y$ of $Q'$ there is an equivalence edge $\\widetilde e:x\\to\\widetilde y$ of $Q$ with $p(\\widetilde e)=e$, namely $\\widetilde g(01)$. The quasicategories $Q,Q'$ lie in one universe, as that clause requires. Its conclusion is that $p$ is a Joyal fibration, which completes the converse. No preimages of arbitrary vertices of $Q'$ have been chosen.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 1.13, converse direction; isofibration-to-fibration supplied by the existing DAG node lem-coef-joyal-quasicategory-characterizations, clause (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-model-structure",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-joyal-quasicategory-characterizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/0607820",
+  "place": "Proposition 1.13: statement checked online; no proof is provided there. Agent proof: endpoint contraction for the forward direction; Kan-core extension of an equivalence edge over the full nerve J for the isofibration property, then clause (1) of lem-coef-joyal-quasicategory-characterizations (maintainer review FIX replaced the retract argument by this existing node)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +129,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.quasicategory_of_filler\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ (S : SSet),\\n  (∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n      0 < i →\\n        i < Fin.last (n + 2) →\\n          ∃ σ,\\n            ∀ (j : Fin (n + 3)) (h : j ≠ i),\\n              CategoryTheory.SimplicialObject.δ S j σ =\\n                σ₀.app (Opposite.op (SimplexCategory.\", \"doc\": \"A simplicial set $ S $ is a quasicategory if for every inner horn $ \\\\Lambda^k[n] \\\\to S $ with $ 0 < k < n $, there exists a filler $ \\\\Delta[n] \\\\to S $ extending it.\"}",
    "date": "2026-10-17",
    "verdict": "no match: SSet.InnerFibration and quasicategory_of_innerFibration give inner-horn lifting, while modelCategoryQuillen.fibration_iff describes Kan fibrations. Neither identifies Joyal fibrations using the walking-isomorphism test; CoherentIso constructs the interval but not this lifting characterization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Joyal fibration between quasicategories is an inner fibration lifting the endpoint inclusion into the nerve of the walking isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe Kan fibrations, ordinary categorical lifts, or WalkingIso/coherentIso constructions, not this characterization of Joyal fibrations. Read CategoryWithFibrations.lean:35-111, CoherentIso.lean:16-26,40-65,137-142 and JoyalTrick.lean:40-82. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"HasLiftingProperty\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe Kan fibrations, ordinary categorical lifts, or WalkingIso/coherentIso constructions, not this characterization of Joyal fibrations. Read CategoryWithFibrations.lean:35-111, CoherentIso.lean:16-26,40-65,137-142 and JoyalTrick.lean:40-82. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal.*fibration|categoricalFibration|walking.*isomorphism",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Extensive.lean\", \"line\": \"423\", \"text\": \"    [PreservesColimitsOfShape (Discrete WalkingPair) F] [F.ReflectsIsomorphisms] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Extensive.lean\", \"line\": \"425\", \"text\": \"  have : ReflectsLimitsOfShape WalkingCospan F := reflectsLimitsOfShape_of_reflectsIsomorphisms\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"line\": \"40\", \"text\": \"/-- Joyal's trick: that cofibrations have the left lifting property\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"line\": \"69\", \"text\": \"/-- Joyal's trick (dual): that trivial cofibrations have the left lifting\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"16\", \"text\": \"We define the free walking isomorphism `WalkingIso`; the category with objects `zero` and\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"64\", \"text\": \"/-- Functors out of `WalkingIso` define isomorphisms in the target category. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"118\", \"text\": \"/-- An equivalence between the type of `WalkingIso`s in `C` and the type of isomorphisms in `C`. -/\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe Kan fibrations, ordinary categorical lifts, or WalkingIso/coherentIso constructions, not this characterization of Joyal fibrations. Read CategoryWithFibrations.lean:35-111, CoherentIso.lean:16-26,40-65,137-142 and JoyalTrick.lean:40-82. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical fibrations of quasicategories lift equivalences with a prescribed source",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"CategoryTheory.IsHomLift.lift_comp_id\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HomLift\", \"type\": \": p.IsHomLift (f ≫ 𝟙 S) φ\", \"doc\": \"For categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor satisfies the hom-lifting property: given morphisms $R \\\\to S$ in $\\\\mathcal{S}$ and $a \\\\to b$ in $\\\\mathcal{X}$, there exists a corresponding li\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \": Functor.IsEquivalence (inducedFunctor p S)\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ and an object $ S \\\\in \\\\mathcal{S} $, the induced functor from the fiber category $ \\\\text{Fib}_p(S) $ to the fiber $ \\\\mathcal{X}_S $ over $ S $\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": Fibration f ↔ J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Over\", \"type\": \"[CategoryWithWeakEquivalences C] [CategoryWithFibrations C] : trivialFibrations (Over S) = (trivialFibrations C).over\", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with both weak equivalences and fibrations, and for any object $S \\\\in \\\\mathcal{C}$, the trivial fibrations in the over category $\\\\mathcal{C}/S$ are precisely those\"}\n  {\"name\": \"HasFibers.homLift\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"{S : 𝒮} {a b : Fib p S} (φ : a ⟶ b) : IsHomLift p (𝟙 S) ((ι S).map φ)\", \"doc\": \"For a fibered category $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, any morphism $ \\\\phi $ in the fiber category $ \\\\text{Fib}_p(S) $ over an object $ S \\\\in \\\\mathcal{S} $ satisfies the hom-lifting property with\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.JoyalTrick\", \"type\": \"[HasFactorization (trivialCofibrations C) (fibrations C)] [HasPullbacks C] [(fibrations C).IsStableUnderComposition]\\n  [(fibrations C).IsStableUnderBaseChange]\\n  (h :\\n    ∀ {A B X Y : C} (i : A ⟶ B) (p : X ⟶ Y) [Cofibration i] [WeakEquivalence p] [Fibration p], HasLiftingProperty i p)\\n  {A B X Y : C\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe Kan fibrations, ordinary categorical lifts, or WalkingIso/coherentIso constructions, not this characterization of Joyal fibrations. Read CategoryWithFibrations.lean:35-111, CoherentIso.lean:16-26,40-65,137-142 and JoyalTrick.lean:40-82. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of infinity categories is a categorical fibration if it is an inner fibration and has the isomorphism lifting property",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.Fibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → {X Y : C} → (X ⟶ Y) → [HomotopicalAlgebra.CategoryWithFibrations C] → Prop\", \"doc\": \"A proposition asserting that a morphism $ f : X \\to Y $ in a category with cofibrations is a fibration.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.fibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [HomotopicalAlgebra.CategoryWithFibrations C] → CategoryTheory.MorphismProperty C\", \"doc\": \"A predicate assigning to each morphism in the category a proposition indicating whether it is a fibration, as part of the category's structure equipped with fibrations.\"}\n  {\"name\": \"HomotopicalAlgebra.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y)\\n  [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C],\\n  HomotopicalAlgebra.Fibration f ↔ HomotopicalAlgebra.fibrations C f\", \"doc\": \"In a category with cofibrations, a morphism $ f $ is a fibration if and only if it satisfies the fibration predicate of the category.\"}\n  {\"name\": \"HomotopicalAlgebra.CategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"An inductive definition of a category equipped with a class of cofibrations, where objects are in Type u and morphisms between objects form types in Type (max u (v + 1)).\"}\n  {\"name\": \"HomotopicalAlgebra.CategoryWithFibrations.fibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    [self : HomotopicalAlgebra.CategoryWithFibrations C] → CategoryTheory.MorphismProperty C\", \"doc\": \"A predicate assigning to each morphism in the category a proposition indicating whether it is a fibration, as part of the category's structure equipped with fibrations.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"HomotopicalAlgebra.Fibration.mem\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {X Y : C} {f : X ⟶ Y}\\n  {inst_1 : HomotopicalAlgebra.CategoryWithFibrations C} [self : HomotopicalAlgebra.Fibration f],\\n  HomotopicalAlgebra.fibrations C f\", \"doc\": \"In a category equipped with a class of fibrations, a morphism that is endowed with the structure of a fibration is indeed contained within the designated class of fibrations for the category.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe Kan fibrations, ordinary categorical lifts, or WalkingIso/coherentIso constructions, not this characterization of Joyal fibrations. Read CategoryWithFibrations.lean:35-111, CoherentIso.lean:16-26,40-65,137-142 and JoyalTrick.lean:40-82. The second semantic phrasing also gives no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-categorical-constancy",
@@ -78,5 +175,29 @@
   "group": "Q06"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-joyal-walking-isomorphism-fibration-test",
+  "worker": "stage1",
+  "summary": "Zero new nodes. Checked Joyal–Tierney Proposition 1.13 and absence of a project attachment. Wrote the full retract argument using existing exponentiation and relative cylinder lemmas. Extended the prescribed equivalence edge through the full walking-isomorphism nerve by Kan core lifting. Checked cited statements, hypotheses and dependency closures, and reran four Mathlib search kinds plus a second semantic phrasing. No statement correction. Maintainer review: the retract argument of former Steps 4-6 re-proved clause (1) of the existing lem-coef-joyal-quasicategory-characterizations and was replaced by a citation of it.",
+  "blueprint": "Realizes the walking-isomorphism fibration test in the foundational Joyal–Tierney comparison supporting prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite mapping-complex adjunction before R lim), through the chain in blueprint.from.via. Generic quasicategorical tool below the unit; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Step 2 uses only that explicit simplicial inverse homotopies imply a realization weak homotopy equivalence; the unit has no corresponding realization lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-5b31c5ca9",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-5b31c5ca9 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node statement, and Joyal–Tierney (arXiv math/0607820, fetched PDF), Thm 1.9 and Prop 1.13. Prop 1.13 says a mid fibration between quasicategories is a quasi-fibration iff it has RLP against {0}⊂J. The item states this faithfully: both quasicategories, full nerve J, no surjectivity. Statement unchanged. Steps 1-3 are correct. Step 1: the contraction k gives a natural iso h(cE)≅1, so u0 is a trivial cofibration. Step 2: v:Δ1→J is mono and a simplicial homotopy equivalence, hence a Kan trivial cofibration (accepted tool use of lem-cbc-simplicial-homotopy-equivalence-weak). Step 3: D^≃ is Kan, the exact edge extends over J and the u0 lift gives prescribed-source equivalence lifting, so p is an isofibration. The retract argument of Steps 4-6 (factorization, relative cylinder, exponential-corner correction r→r') is also correct; I checked every hypothesis. But it re-proves the converse of clause (1) of the existing split node lem-coef-joyal-quasicategory-characterizations in the same unit, and that node's closure does not contain the item, so there is no cycle. FIX: Steps 1-3 kept verbatim; Steps 4-6 replaced by one step citing that clause, with its hypotheses checked. proof_deps updated: lem-coef-relative-categorical-cylinder-criterion dropped, the characterizations node added. proof_origin.place and split_report.summary noted. No duplicate of the item itself: interval-boundary-tests uses a finite J and different tests. Edge cases checked: empty Q, a point into a discrete two-point set, a point into J, and Q'=∗. No new nodes, no SGA. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
