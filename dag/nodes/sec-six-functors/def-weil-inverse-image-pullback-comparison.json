@@ -137,5 +137,52 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-0d06d0465 (reviewer sub-agent of L); spot-checked: Read the item, all 19 dependency statements, chapter/unit route, delivery instructions, and cited Stacks/Bhatt–Scholze sources. Finite and integral comparison constructions, coefficient transport, cone signs, transitions, hypotheses, and edge cases check out. No new nodes, duplicates, citation gaps, or repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c459fad9f",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Read node, 19 stmt deps, sources (Stacks 03D6, 08TC; BS 6.5), both snapshot modules, report (real Worker report + Second reading by Q111). Finite c_A from section-normalized ∃!; completed c is limit.lift of g⁻¹(π_m)≫c_{A_m}; module action via inv c; exact mapDerivedCategory on unbounded D. Finite κ: x↦x⊗1 via adjunction unit + comma arrow, fixed on all sections; intrinsic variant to finiteDerivedPullback inherits that decl's Type t restriction. Integral κ: recorded tower/transitions/Roos, θ_m = (1⊗x) then finite unit, mappingCocone.lift with zero homotopy, roof [θ̃]∘[g⁻¹q]⁻¹ moved into integralDerivedPullback via the good-representative comparison. §1(B) dependency repair of lem-weil-proetale-isomorphism-inverse-image justified (proEtaleSheafInverseImage needs Category.{u+1} D); only lean changed, old module re-exported; site/coefficient universes stay independent. No hollow defs, only sorry proofs, no Classical/axiom/Nonempty; docstrings carry source and blueprint tags; lean.statement verbatim for both records; all declarations present; no statement_change. nt_compile.py on both files: exit 0, no errors or warnings (2.9 s, 9.5 s)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.inverseImagePullbackComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteIntrinsicPullbackComparison",
+   "AlgebraicGeometry.ProEtale.inverseImageCoefficient_hasDerived",
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteCoefficientMap",
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent",
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent_naturality",
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap",
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap_isIso",
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteModules",
+   "AlgebraicGeometry.ProEtale.inverseImageIntegralModules",
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteDerived",
+   "AlgebraicGeometry.ProEtale.inverseImageIntegralDerived",
+   "AlgebraicGeometry.ProEtale.inverseImageFinitePullback_exact",
+   "AlgebraicGeometry.ProEtale.inverseImageFinitePullback_limits",
+   "AlgebraicGeometry.ProEtale.inverseImageFinitePullback_colimits",
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteComparisonComplex",
+   "AlgebraicGeometry.ProEtale.inverseImagePullbackComparisonFinite",
+   "AlgebraicGeometry.ProEtale.inverseImagePullbackComparisonFiniteIntrinsic",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionTheta_existsUnique",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionTheta",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionTheta_compatible",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionProduct",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionProduct_lift_condition",
+   "AlgebraicGeometry.ProEtale.inverseImageRoosComparisonComplex",
+   "AlgebraicGeometry.ProEtale.inverseImageResolution_isIso",
+   "AlgebraicGeometry.ProEtale.inverseImagePullbackComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/InverseImagePullbackComparison.lean",
+  "statement": "def inverseImagePullbackComparison (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (K : CochainComplex (integralTowerModules l E Y) ℤ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (q : P.obj ⟶ K) [QuasiIso q] : (inverseImageIntegralDerived l E g).obj (DerivedCategory.Q.obj K) ⟶ (integralDerivedPullback l E g).obj (DerivedCategory.Q.obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading replaces the arbitrary comparison-data structure by the actual finite coefficient maps, completed limit lift, exact sectionwise inverse image, uniquely section-normalized finite and reduction maps, strict recorded tower, zero-homotopy mapping-cocone lift, and localization through the chosen good resolution. The finiteIntrinsic declaration has exactly finiteDerivedPullback as target, through the canonical unit-preserving left-adjoint comparison. Site and coefficient universes are independent; positive exponent n+1. Naturality, independence, and constructible invertibility remain separate assertions."
  }
 }

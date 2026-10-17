@@ -11,7 +11,8 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category",
   "def-sp-filtration",
-  "def-kun-truncations"
+  "def-kun-truncations",
+  "def-trf-uniform-finite-filtered-localization"
  ],
  "proof": [
   {
@@ -305,5 +306,31 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c3e498af3 (reviewer sub-agent of L); spot-checked: Read in full: the item JSON, every cited node statement, unit sk-i-additivity and its transitive uses, the steps of the parent lem-trf-filtered-operations-hom that cite the item, Stacks derived.tex 05S4/05S5/05S6 (lines 4375-4480) and dga.tex 09QJ (line 3545). The statement is unchanged. Its uniformly finite filtrations and its localizations of cochain-bounded complexes are kept apart from Stacks' per-term Fil^f category, never identified with it, and every construction keeps uniform bounds. Step checks: steps 1-2, I worked out the quotient grade formula gr^p(K^c/I)=coker(gr^p v) and the kernel identity F^p cap v^-1(F^{p+1})=(Z cap F^p)+F^{p+1} from the strictness given by lem-trf-finite-filtered-graded-exactness, with hypotheses H^{c-1}=0 and H^{d+1}=0. The good-truncation convention is the one in def-kun-truncations. Step 4, the cylinder K+C(1_K): t is a chain map, t j0=g, t j1=f, and the contraction H(y,z)=(0,y) preserves the filtration. Step 5, dg axioms A/B/C: [m][l]=[m+l] holds strictly and pi d(s)=f for the cone, as in 09QJ. Step 6, the gradewise-acyclic subcategory is triangulated (via the long exact sequence) and its cone class is exactly the graded quasi-isomorphisms (cone criterion applied to each gr^p); lem-trf-triangulated-subcategory-cone-system, a Mathlib leaf, gives both calculi of fractions. Steps 7-10, the left and right fraction leaves have the right orientation, the bound moves correctly through the denominator, and pre- or post-composing with the truncations keeps W and both equations; the final Hom-bijection cancellation is elementary. Step 11 keeps the fixed interval. Edge cases: the zero complex, a=b, an acyclic complex, and the identity map with raised filtration, where the hypothesis rightly fails. No new nodes and no cycle. Not duplicates: lem-trf-bounded-filtered-localization-embedding (a consequence that already cites the item), lem-trf-filtered-cone-localization (bounded below only), lem-kun-filtered-quasi-isomorphism-fractions (R-modules only). FIX (C8/route): lem-trf-finite-filtered-graded-exactness belongs to unit sk-i-global-additivity, which is not in the transitive uses of sk-i-additivity. The second reader removed it from tool_uses as same-unit, which was wrong. I re-declared it as a generic Stacks 05QH tool in split_report.tool_uses in fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-bounded-localization-comparison.json; nothing else changed. Accepted tool_uses: lem-coef-dg-abc-homotopy-category-triangulated, lem-pur-quasi-iso-cone-acyclic, lem-trf-finite-filtered-graded-exactness.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredBoundedLocalizationComparison",
+  "declaration": "CategoryTheory.uniformFiltered_bounded_localization_comparison",
+  "declarations": [
+   "CategoryTheory.uniformFilteredTruncGE",
+   "CategoryTheory.uniformFilteredTruncGEπ",
+   "CategoryTheory.uniformFilteredTruncLE",
+   "CategoryTheory.uniformFilteredTruncLEι",
+   "CategoryTheory.uniformFiltered_bounded_localization_comparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FilteredBoundedLocalizationComparison.lean",
+  "statement": "theorem uniformFiltered_bounded_localization_comparison (C : Type u) [Category.{v} C] [Abelian C] (B : Option (ℤ × ℤ)) : Nonempty ((uniformFilteredComparison (C := C) B (P := uniformCochainBounded) (R := fun _ ↦ True) (fun _ _ ↦ True.intro)).FullyFaithful) ∧ Nonempty ((uniformFilteredComparison (C := C) B (P := CochainComplex.plus C) (R := fun _ ↦ True) (fun _ _ ↦ True.intro)).FullyFaithful) ∧ Nonempty ((uniformFilteredComparison (C := C) B (P := CochainComplex.minus C) (R := fun _ ↦ True) (fun _ _ ↦ True.intro)).FullyFaithful) ∧ Nonempty ((uniformFilteredComparison (C := C) B (P := uniformCochainBounded) (R := CochainComplex.plus C) (fun _ h ↦ h.1)).FullyFaithful) ∧ Nonempty ((uniformFilteredComparison (C := C) B (P := uniformCochainBounded) (R := CochainComplex.minus C) (fun _ h ↦ h.2)).FullyFaithful) ∧ (∀ X : UniformFilteredDerived C B (fun _ ↦ True), (uniformFilteredComparison B (P := uniformCochainBounded) (R := fun _ ↦ True) (fun _ _ ↦ True.intro)).essImage X ↔ ∃ c d : ℤ, c ≤ d ∧ uniformLocalizedSupport B (Set.Icc c d) X) ∧ (∀ X : UniformFilteredDerived C B (fun _ ↦ True), (uniformFilteredComparison B (P := CochainComplex.plus C) (R := fun _ ↦ True) (fun _ _ ↦ True.intro)).essImage X ↔ ∃ c : ℤ, uniformLocalizedSupport B (Set.Ici c) X) ∧ (∀ X : UniformFilteredDerived C B (fun _ ↦ True), (uniformFilteredComparison B (P := CochainComplex.minus C) (R := fun _ ↦ True) (fun _ _ ↦ True.intro)).essImage X ↔ ∃ d : ℤ, uniformLocalizedSupport B (Set.Iic d) X) ∧ (∀ (K : UniformFilteredComplexes C B (fun _ ↦ True)) (c : ℤ), uniformGradedSupport (Set.Ici c) K.obj → (∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps (uniformFilteredTruncGEπ K.obj c) p)) ∧ uniformFilteredProperty B (fun _ ↦ True) (uniformFilteredTruncGE K.obj c) ∧ (∀ n : ℤ, n < c → IsZero ((K.obj.obj.truncGE c).X n)) ∧ (∀ n : ℤ, c < n → IsIso ((K.obj.obj.πTruncGE c).f n))) ∧ (∀ (K : UniformFilteredComplexes C B (fun _ ↦ True)) (d : ℤ), uniformGradedSupport (Set.Iic d) K.obj → (∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps (uniformFilteredTruncLEι K.obj d) p)) ∧ uniformFilteredProperty B (fun _ ↦ True) (uniformFilteredTruncLE K.obj d) ∧ (∀ n : ℤ, d < n → IsZero ((K.obj.obj.truncLE d).X n)) ∧ (∀ n : ℤ, n < d → IsIso ((K.obj.obj.ιTruncLE d).f n)))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-39f066cbc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39f066cbc",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Checked every clause against the node and Stacks 05S2/05S4-05S6. Correct: abelian C with free universes; uniformly finite filtrations with optional fixed interval B; graded qis via gradedMapSteps; formal localizations for True/plus/minus/bounded; localized-inclusion comparisons; 5 FullyFaithful claims; 3 essential images with a common graded bound; GE/LE good truncations with image/pullback filtrations, graded-qis, bounds kept, components zero/iso. Edge cases fine. No hollow defs, sorry only in the theorem, docstrings and records OK, report sections real. H4 fault: uniformCochainMinus duplicates upstream CochainComplex.minus. Fixes: helper and item modules use CochainComplex.minus; item also imports the now-stated proof-dep module Sheaf.Paper.FiniteFilteredGradedExactness; new-node JSON, item lean-record.json and report updated. nt_compile clean on delivered and fixed files."
  }
 }

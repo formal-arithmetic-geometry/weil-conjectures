@@ -218,36 +218,36 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-admissible",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleIsoInverseImage_equivalence",
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.isoSectionwiseInverseImage_equivalence",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleIsoPostcompose",
-   "AlgebraicGeometry.Scheme.proEtaleIsoPostcompose_equivalence",
-   "AlgebraicGeometry.Scheme.proEtaleIsoCommaArrow",
-   "AlgebraicGeometry.Scheme.existsUnique_proEtaleIsoInverseImageIdentification",
-   "AlgebraicGeometry.Scheme.proEtaleIsoInverseImageIdentification",
-   "AlgebraicGeometry.Scheme.proEtaleIsoInverseImage_equivalence",
-   "AlgebraicGeometry.Scheme.proEtaleIso_inverseLimitComparison",
-   "AlgebraicGeometry.Scheme.proEtaleIso_constantComparison",
-   "AlgebraicGeometry.Scheme.proEtaleIsoConstantRingComparison",
-   "AlgebraicGeometry.Scheme.proEtaleIso_constantModuleEquivalence",
-   "AlgebraicGeometry.Scheme.proEtaleIso_constantRingModuleEquivalence"
+   "AlgebraicGeometry.Scheme.proEtaleIsoPostcompose_isContinuous",
+   "AlgebraicGeometry.Scheme.isoSectionwiseInverseImage",
+   "AlgebraicGeometry.Scheme.isoSectionwiseInverseImage_equivalence",
+   "AlgebraicGeometry.Scheme.isoSectionwiseConstantMap_existsUnique",
+   "AlgebraicGeometry.Scheme.isoSectionwiseConstantMap",
+   "AlgebraicGeometry.Scheme.isoSectionwiseConstantMap_isIso",
+   "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage",
+   "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage_exact",
+   "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage_additive",
+   "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage_limits",
+   "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage_colimits"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIsomorphismInverseImage.lean",
-  "statement": "theorem proEtaleIsoInverseImage_equivalence {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D] [HasWeakSheafify (ProEt.topology X) D] : (proEtaleSheafInverseImage f D).IsEquivalence ∧ IsIso (proEtaleSheafAdjunction f D).unit ∧ IsIso (proEtaleSheafAdjunction f D).counit ∧ PreservesLimitsOfSize.{w', w} (proEtaleSheafInverseImage f D) ∧ PreservesColimitsOfSize.{w', w} (proEtaleSheafInverseImage f D)",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/IsoSectionwiseInverseImage.lean",
+  "statement": "theorem isoSectionwiseInverseImage_equivalence {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] (D : Type d) [Category.{v} D] : (isoSectionwiseInverseImage g D).IsEquivalence ∧ PreservesLimitsOfSize.{w', w} (isoSectionwiseInverseImage g D) ∧ PreservesColimitsOfSize.{w', w} (isoSectionwiseInverseImage g D)",
   "branch": "newtargets-dag",
-  "by": "N3",
-  "date": "2026-10-16",
+  "by": "Q111",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "The genuine dependency had no lean record or Mathlib match. This module supplies the covering-preserving site equivalence, its canonical section identification normalized by the actual comma-object coprojection, equivalence with the recorded direct image as quasi-inverse, preservation of limits and colimits, the canonical tower-limit comparison, constant-ring comparison and its naturality, and the module-sheaf equivalence. The second reading adds the general RingCat coefficient case: an equivalence of the recorded ringedSiteModules categories whose inverse is exactly the canonical sectionwise module direct image, without a commutativity assumption."
+  "note": "Repair under brief-stage2 section 1(B). The original proEtaleIsoInverseImage_equivalence specializes coefficient Hom size to site universe t+1, so it cannot be instantiated with RingCat or module coefficients of size max u (t+1) when E has an independent larger universe. The module publicly imports the original module, retaining every old site equivalence, comma-normalized comparison, canonical constant-ring comparison/naturality and module-equivalence declaration. It additionally exposes the same canonical sectionwise inverse-image model U ↦ F(U,g∘u) for arbitrary coefficient Hom size, its equivalence and limit/colimit preservation, the uniquely constant-section-normalized coefficient map, and exact module action transport through a coefficient-ring isomorphism. No site universe equality or new hypothesis is imposed; the small site remains object size t+1 and Hom size t."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-49def78b2",
-  "group": "N3",
+  "reviewer": "NT-stage2-cc-c459fad9f",
+  "group": "Q111",
   "result": "pass",
-  "note": "Statement, dependencies, docstrings, edge cases, source alignment, and all three per-file scompile checks passed; no fixes required."
+  "note": "Read node, 19 stmt deps, sources (Stacks 03D6, 08TC; BS 6.5), both snapshot modules, report (real Worker report + Second reading by Q111). Finite c_A from section-normalized ∃!; completed c is limit.lift of g⁻¹(π_m)≫c_{A_m}; module action via inv c; exact mapDerivedCategory on unbounded D. Finite κ: x↦x⊗1 via adjunction unit + comma arrow, fixed on all sections; intrinsic variant to finiteDerivedPullback inherits that decl's Type t restriction. Integral κ: recorded tower/transitions/Roos, θ_m = (1⊗x) then finite unit, mappingCocone.lift with zero homotopy, roof [θ̃]∘[g⁻¹q]⁻¹ moved into integralDerivedPullback via the good-representative comparison. §1(B) dependency repair of lem-weil-proetale-isomorphism-inverse-image justified (proEtaleSheafInverseImage needs Category.{u+1} D); only lean changed, old module re-exported; site/coefficient universes stay independent. No hollow defs, only sorry proofs, no Classical/axiom/Nonempty; docstrings carry source and blueprint tags; lean.statement verbatim for both records; all declarations present; no statement_change. nt_compile.py on both files: exit 0, no errors or warnings (2.9 s, 9.5 s)."
  },
  "split_report": {
   "date": "2026-10-16",

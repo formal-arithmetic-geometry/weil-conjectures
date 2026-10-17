@@ -178,15 +178,36 @@
  "chapter": "sec-smooth-purity",
  "unit": null,
  "lean": {
-  "module": "WeilConjectures.WeilSheaf.Category",
-  "declaration": "AlgebraicGeometry.WeilSheaf",
-  "branch": "slopmaster2",
-  "line": 164,
+  "module": "Sheaf.Paper.SfWeilSheafComplex",
+  "declaration": "WeilConjectures.sfWeilComplex",
   "declarations": [
-   "AlgebraicGeometry.WeilSheaf",
-   "AlgebraicGeometry.WeilComplex"
+   "WeilConjectures.FiniteFieldDatum.geometricFiber_coefficientPrimeInvertible",
+   "WeilConjectures.sfWeilPrimeInvertible",
+   "WeilConjectures.sfWeilFrobeniusPullback",
+   "WeilConjectures.sfWeilComplex",
+   "WeilConjectures.sfWeilForget",
+   "WeilConjectures.sfWeilSheaf",
+   "WeilConjectures.sfCommonStageWeilFrobeniusPullback",
+   "WeilConjectures.sfCommonStageWeilComplex",
+   "WeilConjectures.sfCommonStageWeilForget",
+   "WeilConjectures.sfCommonStageWeilSheaf",
+   "WeilConjectures.sfWeilStagePullbackIdentification",
+   "WeilConjectures.sfWeilStageObject"
   ],
-  "sorry_free": true,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  "file": "lean/Sheaf/Paper/SfWeilSheafComplex.lean",
+  "statement": "abbrev sfWeilComplex",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B): the recorded upstream WeilComplex is a subcategory of the derived category of Weil sheaves, with Ext morphisms. The node explicitly requires fixed pairs in the constructible derived category and expressly excludes that derived-of-pairs construction. This module uses the existing IsoAlgebra fixed-pair category on the recorded rationalDerivedPullback and commonStageDerivedPullback, supplies faithful forgetful functors and full heart-carrier subcategories, and includes the canonical finite-stage object construction. No separatedness is imposed, and invertibility of l on the geometric fibre is derived from the finite-field datum rather than assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba594b39f",
+  "group": "ND",
+  "result": "pass",
+  "note": "All 5 clauses checked against node 1510. c_n is proEtaleIsoConstantRingComparison with the reduction compatibility for all n (exponent n+1). c_O is the recorded isomorphismCompletedCoefficientComparison. theta_O is normalized by a strict ∃! chain unit into the recorded pullback Roos complex (1↦unit of 1⊗1, zero shifted part), which is plausibly true and canonical; theta = c_O∘lambda by construction. E_Y = sfRationalConstructibleLocalization of the integral object, theta_E its image, IsoAlgebra pair, heart membership and For stated. Qlb object at finiteCoefficientBase with literal For pair, no stage-independence added. Both §1(B) repairs justified: upstream WeilComplex is the Ext-valued derived-of-Weil-sheaves category the node excludes; IsoAlgebra equals the fixed-pair mathlib_match; old heart is on the legacy rationalConstructibleCategory and the same classes are restated on the sf categories. Nodes differ only in lean; statements verbatim; no hollow defs; sorry-only proofs; docstrings and line width OK. nt_compile --json of all three files: exit 0, no error or warning diagnostics (6.8 s, 6.1 s, 17.0 s). Minor non-blocking: standard classes restated as helpers in the heart module; current-category wrappers parallel the legacy ones."
  }
 }
