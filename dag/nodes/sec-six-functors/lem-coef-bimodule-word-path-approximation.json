@@ -28,9 +28,156 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\mathsf{Step}_k$ and $O=\\mathsf W_k^\\otimes$. Form the ordinary mapping cylinder $J$ with full subcategories $O,S$, no arrows from $S$ to $O$, and $\\operatorname{Hom}_J(w,f)=\\operatorname{Hom}_O(w,\\Phi_k f)$ for $w\\in O,f\\in S$. Composition uses $\\Phi_k$. Let $i:O\\hookrightarrow J$ and $r:J\\to O$ be the inclusion and retraction, with $r|_S=\\Phi_k$. The identity of $\\Phi_k f$ gives a bridge $b_f:i\\Phi_k f\\to f$. These bridges, and identities on $O$, give a natural transformation $b:ir\\to1_J$, with $ri=1_O$ and $rb=1_r$. Equip $J$ with its length functor to $\\Delta^{\\mathrm{op}}$. All bridges lie over identity arrows. For a cross arrow $\\alpha:w\\to\\Phi_k f$, composing with $u:w'\\to w$ gives $\\alpha u$, and composing with $v:f\\to g$ gives $\\Phi_k(v)\\alpha$. The associativity equations reduce to associativity in $O$ and $S$ and functoriality of $\\Phi_k$; for example $\\Phi_k(v)(\\alpha u)=(\\Phi_k(v)\\alpha)u$. Also $b_g\\Phi_k(v)=v b_f$ and $b_f\\alpha=\\alpha$ as cross arrows, which verifies naturality on all arrow types. These formulas include empty blocks. Only ordinary categories and their nerves, as in [def-cbc-enhanced-diagrams-cones], have been used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed p. 568: mapping cylinder and retraction."
+   }
+  },
+  {
+   "text": "For a word $w=(x_1,\\ldots,x_n)$ put $K_w=S\\times_J J_{w/}$. An object is a path $f:[m]\\to[k]$ and an operation $\\alpha:w\\to\\Phi_k f$ with opposite base map $h:[m]\\to[n]$. Let $I_w\\subset K_w$ be the full subcategory where $\\alpha$ is inert, that is, $h(t)=a+t$ and the selected word is exactly the adjacent-pair word of $f$. Its objects are composable consecutive subwords of $w$; a zero-length subword at each position $a$ carries, in addition, any vertex label $v\\in[k]$. Define $R(\\alpha)$ by the hull interval $[h(0),h(m)]$. If it has positive length, the blocks of $\\alpha$ concatenate to make this selected subword composable: endpoints match across nonempty blocks, and any intervening nullary block forces equal consecutive vertices of $f$. Its unique vertex path $d$ satisfies $d(h(t)-h(0))=f(t)$. If the hull has length zero, all blocks are empty, so $f$ is constant; use that constant vertex as its label. The shifted map $h-h(0)$ gives $R(\\alpha)\\to\\alpha$ in $K_w$. For an inert interval object $e$ of $I_w$, a map $e\\to\\alpha$ exists uniquely precisely when the values of $h$ lie in its interval and its vertex path restricts to $d$. This is also precisely the condition for a map $e\\to R(\\alpha)$. The zero-length labelled intervals satisfy the same test. Hence $R$ is a right adjoint to $I_w\\hookrightarrow K_w$, with the described counit; this Hom test also verifies its functoriality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed pp. 569-570: inert factorization subcategory J2 and its right adjoint; explicit ordered-block hull."
+   }
+  },
+  {
+   "text": "Fix an inert-preserving $F_0:N(S)\\to\\mathcal X^\\otimes$ over lengths. For each $\\alpha\\in K_w$, the comma $(I_w\\downarrow\\alpha)$ has terminal object $R(\\alpha)\\to\\alpha$, by step 2; its nerve contracts along its terminal arrows. The opposite form of [lem-coef-infinity-cofinal-comma-criterion], with the opposite conventions of [lem-coef-infinity-relative-cone-equivalence], therefore identifies coherent cone categories on $K_w$ and $I_w$, both in $\\mathcal X^\\otimes$ and in the base. This also identifies the relative universal properties: by the limit dual of [lem-coef-infinity-relative-cone-constant-test], test against each constant source diagram, and apply that coinitial restriction equivalence to the upper-right and lower-right corners of the testing square. These equivalences are natural and compatible with $p$. For existence with exact data, start with the prescribed relative limit cone on $I_w$. Essential surjectivity of the total cone comparison produces a cone on $K_w$ and an equivalence of its restriction with that cone, fixing the boundary. In the base, full faithfulness of the cone comparison identifies the image cone with the prescribed base cone: their restrictions are equivalent, and every equivalence in an ordinary cone category valued in $\\Delta^{\\mathrm{op}}$ has identity components, so these base cones are equal. Put $A=N(K_w)\\cup_{N(I_w)}N(I_w)^{\\triangleleft}\\subset N(K_w)^{\\triangleleft}$. The comparison equivalence specifies an equivalence from the constructed restriction to $A$ to the prescribed data on $A$, identity on $N(K_w)$ and over the fixed base cone. The exponential corner isofibration [lem-coef-infinity-isofibration-exponentiation] for this inclusion lifts that equivalence, producing a cone with exactly the prescribed boundary and restriction. Equivalence invariance from [lem-coef-infinity-relative-cone-equivalence] preserves its relative limit property. Its categorical pullback interpretation is [lem-coef-infinity-isofibration-pullback-limit]. Here $p$ is an isofibration: it is inner by assumption and equivalences in $N(\\Delta^{\\mathrm{op}})$ are identities, lifted by identities. Thus the local $p$-limit problem on $K_w$ reduces to that on $I_w$ without assuming any other limits.",
+   "uses": [
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed pp. 569-570: right-cofinal inert reduction; exact relative cone justification."
+   }
+  },
+  {
+   "text": "Let $E_w\\subset I_w$ consist of the $n$ singleton-edge projections of $w$, a discrete category. An interval path of length $m$ has exactly its $m$ edge projections as its outgoing comma with $E_w$. For $m=0$ this comma is empty, including every labelled zero-length interval. The boundary diagram on $I_w$ induced by $F_0$ carries these projections to inert cocartesian edges. The relative product clause of [def-coef-monoidal-infinity-category] makes each such projection cone a $p$-limit. To use it in the diagram sense, apply [lem-coef-infinity-relative-cone-constant-test]: over the discrete mapping sets of the base, its constant-source square is a homotopy pullback exactly when, for every base arrow $\\phi$, the displayed $\\operatorname{Map}^{\\phi}$-to-product map is an equivalence. For $m=0$ this is the empty relative product over $[0]$. Hence this boundary diagram is a pointwise relative right Kan extension from $E_w$. The cone comparison in [lem-coef-relative-right-kan-universal-restriction] reduces its limit to $E_w$. Essential surjectivity of the fiber Segal equivalence supplies an object $x$ over $[n]$ with cocartesian singleton projections $x\\to y_i$ and equivalences $y_i\\simeq F_0([1]\\xrightarrow{x_i}[k])$ in the fiber over $[1]$. Compose each projection with this equivalence. The mapping criterion [lem-coef-infinity-cocartesian-mapping-criterion] makes an equivalence over identity cocartesian, and [lem-coef-infinity-cocartesian-composition-initiality] makes the composites cocartesian. Thus their targets are exactly the prescribed boundary values, and the relative product condition makes this cone the required $p$-limit over the prescribed base cone. The cone comparison extends it with the exact boundary over $I_w$, and step 3 extends it over $K_w$. For $n=0$, $E_w$ is empty; the empty relative product over $[0]$ supplies the apex even though $I_w$ contains all k+1 labelled vertex paths.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed p. 570: J2 to J3, followed by the operadic product; zero-output case included."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-relative-right-kan-universal-restriction] to the full inclusion $N(S)\\subset N(J)$, $p:\\mathcal X^\\otimes\\to N(\\Delta^{\\mathrm{op}})$ and the length functor. All indexing categories are small. For $w\\in O$, step 4 supplies the required local relative limit. For $f\\in S$, its local comma is $S_{f/}$ with initial object $1_f$. For each $\\alpha:f\\to g$ there is exactly one arrow $1_f\\to\\alpha$, so the comma for the inclusion $\\{1_f\\}\\subset S_{f/}$ is a point. The opposite cofinal-comma criterion therefore identifies the constant-source mapping spaces for this comma diagram with those for its value $F_0(f)$ at $1_f$, in both total and base categories. The cone with apex $F_0(f)$ restricts to the identity edge, whose constant-source square is a homotopy pullback; the constant-test criterion proves that its full local cone is a relative limit. This verifies the theorem's existence hypothesis for every inert-preserving $F_0$. Moreover, the calculations show that a diagram $F$ on $J$ restricting to $F_0$ is pointwise right Kan extended exactly when, for every word $w$, its cone on the maps $\\beta_i:w\\to f_i$ is the relative product cone, where $f_i:[1]\\to[k]$ has colour $x_i$. Each $\\beta_i$ is the singleton projection in $O$ followed by $b_{f_i}$. The 'exactly when' follows by both directions of the cone comparison in the cited theorem, the coinitial constant-test comparison in step 3, and the identity local cones at objects of $S$. Thus restriction from this full right-Kan subcategory to inert-preserving diagrams on $S$ is an equivalence, including all transformations.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-cone-constant-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed pp. 569-570: assertions (a) and (b prime), with full categorical restriction."
+   }
+  },
+  {
+   "text": "Let $\\mathcal A$ be the full subcategory of diagrams $F:N(J)\\to\\mathcal X^\\otimes$ over lengths such that $F|_O$ preserves inert arrows and every $F(b_f)$ is an equivalence. Its restriction to $S$ preserves inert arrows: $b$ gives a pointwise equivalence from $(F|_O)\\Phi_k$ to $F|_S$, and the mapping-space criterion [lem-coef-infinity-cocartesian-mapping-criterion] is invariant under these equivalences at the two endpoints. For such $F$, each $F(\\beta_i)$ is cocartesian, as a singleton inert projection followed by an equivalence over identity; the criterion just cited makes an equivalence over identity cocartesian, and [lem-coef-infinity-cocartesian-composition-initiality] gives composition. The relative product axiom and constant-test comparison in step 4 now give the product criterion of step 5. Hence every $F\\in\\mathcal A$ is one of those right Kan extensions.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-relative-cone-constant-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed p. 570: A is contained in A prime."
+   }
+  },
+  {
+   "text": "Conversely let $F$ be a right Kan extension with $F|_S$ inert-preserving. For a path $f:[m]\\to[k]$, step 5 identifies $F(\\Phi_k f)$ as a relative product of the $m$ singleton path values. The inert projections of $f$ make $F(f)$ the same relative product. The bridge $b_f$ is a map between these cones, because $b$ is natural. The universal property [def-coef-infinity-relative-cone], read through [lem-coef-infinity-relative-cone-constant-test], gives an inverse comparison over $1_{[m]}$ fixing the boundary: each space of comparisons over the fixed identity data is contractible, so the two composites are identities up to all coherent homotopies. Thus $F(b_f)$ is an equivalence. This includes $m=0$, where both apices lie in the point-equivalent zero fiber. For a word $w$, its maps $F(\\beta_i)$ in step 5 are inert projections: compare the relative product cone to the tuple supplied by the fiber Segal equivalence, obtaining an equivalence over $1_{[n]}$ fixing the boundary: the constant-test square gives a contractible space of comparisons over the identity base cone, and applying it in both directions gives inverse comparisons. The tuple with the exact singleton targets is constructed in step 4. The mapping criterion and cocartesian composition [lem-coef-infinity-cocartesian-mapping-criterion], [lem-coef-infinity-cocartesian-composition-initiality] then identify these maps with cocartesian projections. Since $\\beta_i=b_{f_i}\\rho_i$, and the bridge images are equivalences, the images $F(\\rho_i)$ of all singleton inert maps in $O$ are cocartesian as well.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed p. 570: essential uniqueness of the products, bridge equivalences, and singleton inert maps."
+   }
+  },
+  {
+   "text": "The singleton conclusion implies preservation of every inert map $a:w\\to w'$ of $O$. Choose a cocartesian lift $u:F(w)\\to y$ over its base map. Initiality in the lift category, from [lem-coef-infinity-cocartesian-composition-initiality], factors $F(a)$ through $t:y\\to F(w')$ over identity. Write $v_j:F(w')\\to z_j$ for its singleton projections from step 7, and choose cocartesian singleton projections $q_j:y\\to y_j$. Initiality of $q_j$ factors $v_jt$ as $s_jq_j$, where $s_j:y_j\\to z_j$ lies over identity. The map $v_jF(a)$ is the image under $F$ of $a$ followed by the $j$th singleton projection of $w'$, so is cocartesian by step 7. The map $q_ju$ is cocartesian by composition. The triangle $s_jq_ju\\simeq v_jF(a)$ therefore compares two initial lifts of the same base map. Initial-lift uniqueness makes $s_j$ an equivalence. Under the Segal fiber functor of [def-coef-monoidal-infinity-category], the $s_j$ are the components of $t$, by the defining triangles $s_jq_j\\simeq v_jt$. That functor is an equivalence and hence reflects equivalences; explicitly, apply its quasi-inverse and the two natural equivalences to an inverse of the tuple $(s_j)_j$. Thus $t$ is an equivalence. For a zero-length target the empty tuple detects this in the point-equivalent fiber. The mapping criterion [lem-coef-infinity-cocartesian-mapping-criterion] and cocartesian composition imply that $F(a)$ is cocartesian. This proves $F\\in\\mathcal A$. Steps 6-8 identify the full right-Kan subcategory in step 5 with $\\mathcal A$, and therefore restriction $\\mathcal A\\to\\mathcal D_k(\\mathcal X)$ is an equivalence of full infinity categories.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-relative-right-kan-universal-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed p. 570: A prime is contained in A; detection of arbitrary inert maps."
+   }
+  },
+  {
+   "text": "Restriction $i^*:\\mathcal A\\to\\operatorname{Alg}_{\\mathsf W_k}(\\mathcal X)$ has inverse up to equivalence $r^*$. Indeed $i^*r^*=1$ strictly, while $F(b)$ gives a coherent transformation $r^*i^*F\\to F$, natural also in transformations $F\\to G$. All its components are equivalences by the definition of $\\mathcal A$. By [lem-cbc-enhanced-functor-cone-calculus] it is a functor equivalence on diagram categories. The relative functor categories here are quasicategories by [lem-coef-infinity-isofibration-exponentiation]; the equivalence is over the fixed base diagram since $b$ is over identity. To check the inverse data over the base explicitly, the functor simplicial set into $N(\\Delta^{\\mathrm{op}})$ is the nerve of the ordinary functor category: an $r$-simplex is a functor $J\\times[r]\\to\\Delta^{\\mathrm{op}}$, that is, a chain of natural transformations. The image of any inverse to $F(b)$ is consequently an inverse to the identity natural transformation, hence the identity. Its inverse-triangle witnesses also project to degenerate triangles, since a triangle in an ordinary nerve is determined by its edges. The inverse and its witnesses therefore belong to the strict fiber over the length diagram. Thus the equivalence is in the relative categories too. The full subcategories defining $\\mathcal A$ and the algebra categories retain all these equivalences. Compose $r^*$ with the restriction equivalence of step 8. Its actual composite is precomposition by $r|_S=\\Phi_k$, proving the claimed equivalence including arbitrary coherent transformations.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-relative-right-kan-universal-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.4.1.17, printed p. 569: comparison through A; explicit deformation-retraction argument in place of the left-Kan invocation."
+   }
+  },
+  {
+   "text": "The forward comparison is the actual restriction $\\Phi_k^*$. Postcomposition with an inert-preserving target map commutes with it on every functor simplex. Inclusion of a nonempty consecutive vertex interval commutes with $\\Phi$: both orders send each path to its list of adjacent pairs and each map to the same consecutive block operations. Hence the corresponding restriction squares commute on objects, transformations and all higher simplices. This proves both naturalities without requiring these target maps to preserve auxiliary limits. The argument includes k=0, singleton intervals, all k+1 separate length-zero paths, and nullary loop blocks. Only the relative products required by the operad axioms were used; no target colimits or presentability were assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 4.4.1.12 and Proposition 4.4.1.17: actual precomposition and its interval restrictions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-relative-right-kan-universal-restriction",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Direct planar mapping-cylinder proof of Proposition 4.4.1.17, printed pp. 568-570; full relative right Kan restriction theorem and explicit inert-hull/edge-product reductions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +220,52 @@
    "results": "{\"t\": \"2026-10-16T21:41:42Z\", \"tool\": \"grep\", \"query\": \"operad|Segal\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Category/Quiv.lean:269-272 (ordinary path-category universal property), Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict set-valued Segal data and ordinary nerves). These do not compare marked coherent operadic functor categories. The second phrasing returns ordinary nerves; grep found no operadic approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction along a composable path presentation of a planar bimodule infinity operad induces equivalence of algebra infinity categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.ComposableArrows C 0 ≃ C\", \"doc\": \"There is a canonical equivalence between the category of 0-length composable arrows in $\\\\mathcal{C}$ (which corresponds to the objects of $\\\\mathcal{C}$) and the category $\\\\mathcal{C}$ itself. This est\"}\n  {\"name\": \"CategoryTheory.nerve.homEquiv_comp\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {x₀ x₁ x₂ : CategoryTheory.ComposableArrows C 0}\\n  {e₀₁ : SSet.Edge x₀ x₁} {e₁₂ : SSet.Edge x₁ x₂} {e₀₂ : SSet.Edge x₀ x₂} (h : e₀₁.CompStruct e₁₂ e₀₂),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.nerve.homEquiv e₀₁) (CategoryTheory.n\", \"doc\": \"For any three objects $x_0, x_1, x_2$ in a category $\\\\mathcal{C}$, and edges $e_{01}$ (corresponding to a morphism $x_0 \\\\to x_1$) and $e_{12}$ (corresponding to $x_1 \\\\to x_2$) in the nerve of $\\\\mathca\"}\n  {\"name\": \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] → (classifyingSpaceUniversalCover.compForgetAugmented.toModule k G).ExtraDegeneracy\", \"doc\": \"For a commutative ring $k$ and monoid $G$, this constructs an extra degeneracy structure on the augmented simplicial $k$-module object obtained by lifting the classifying space universal cover (compos\"}\n  {\"name\": \"CategoryTheory.nerve.homEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {x y : CategoryTheory.ComposableArrows C 0} →\\n      SSet.Edge x y ≃ (CategoryTheory.nerveEquiv x ⟶ CategoryTheory.nerveEquiv y)\", \"doc\": \"For any two objects $x$ and $y$ in a category $\\\\mathcal{C}$, there is a canonical equivalence between the set of edges (1-simplices) between the corresponding 0-simplices in the nerve of $\\\\mathcal{C}$\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {X Y : SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C))} (f : X ⟶ Y),\\n  SSet.OneTruncation₂.nerveHomEquiv f =\\n    CategoryTheory.CategoryStruct.comp (CategoryTheory.eqToHom ⋯)\\n      (CategoryTheory.CategoryStruct.comp (\", \"doc\": \"For any two objects $X$ and $Y$ in the 2-truncated nerve of a category $\\\\mathcal{C}$, applying the hom-set equivalence to a morphism $f : X \\to Y$ yields the composition of three maps: first, an identi\"}\n  {\"name\": \"CategoryTheory.nerve.homEquiv_apply\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {x y : CategoryTheory.ComposableArrows C 0}\\n  (e : SSet.Edge x y),\\n  CategoryTheory.nerve.homEquiv e =\\n    CategoryTheory.CategoryStruct.comp (CategoryTheory.eqToHom ⋯)\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.ComposableArrows\", \"doc\": \"For any two objects $x$ and $y$ in a category $\\\\mathcal{C}$, there is a canonical equivalence between the set of 1-simplices (edges) between the corresponding 0-simplices in the nerve of $\\\\mathcal{C}$\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.comp SSet.hoFunctor ≅ CategoryTheory.Functor.id CategoryTheory.Cat\", \"doc\": \"The composition of the nerve functor from small categories to 2-truncated simplicial sets and the homotopy category functor is naturally isomorphic to the identity functor on the category of small cat\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict simplicial spine/ordinary nerve), and Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,356-366 (ordinary internal bimodules and coequalizer tensor). These are not coherent infinity-operadic algebra comparison theorems. The model-category weak-equivalence hits and absolute-value weak-approximation section concern different notions; grep has only bibliography mentions of operads."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) : Prop\", \"doc\": \"For `X` a simplicial set, `IsStrictSegal X` asserts the mere existence of\\nan inverse to `spine X n` for all `n : ℕ`. \"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) : Type u\", \"doc\": \"A simplicial set `X` satisfies the strict Segal condition if its simplices\\nare uniquely determined by their spine. \"}\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) (n : ℕ) : Type u\", \"doc\": \"Helper structure in order to show that a simplicial set is strict Segal. \"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) : X.IsStrictSegal\", \"doc\": \"The unique existence of an inverse to `spine X n` forall `n : ℕ` implies\\nthe mere existence of such an inverse. \"}\n  {\"name\": \"SSet.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) [X.IsStrictSegal] : X.StrictSegal\", \"doc\": \"Given `IsStrictSegal X`, a choice of inverse to `spine X n` for all `n : ℕ`\\ndetermines an inhabitant of `StrictSegal X`. \"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"Simplices in the nerve of categories are uniquely determined by their spine.\\nIndeed, this property describes the essential image of the nerve functor. \"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set `X`, this constructs a `StrictSegal` structure for `X` from\\n`StrictSegalCore` structures for all `n : ℕ`. \"}\n  {\"name\": \"SSet.Truncated.IsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {n : ℕ} (X : SSet.Truncated (n + 1)) : Prop\", \"doc\": \"For an `n + 1`-truncated simplicial set `X`, `IsStrictSegal X` asserts the\\nmere existence of an inverse to `spine X m` for all `m ≤ n + 1`. \"}\n  {\"name\": \"SSet.Truncated.StrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {n : ℕ} (X : SSet.Truncated (n + 1)) : Type u\", \"doc\": \"An `n + 1`-truncated simplicial set satisfies the strict Segal condition if\\nits `m`-simplices are uniquely determined by their spine for all `m ≤ n + 1`. \"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) {n : ℕ} : X.Path n → X.obj (Opposite.op { len := n })\", \"doc\": \"The inverse to `spine X n`. \"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.spine n (sx.spineToSimplex f) = f\", \"doc\": \"\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict simplicial spine/ordinary nerve), and Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,356-366 (ordinary internal bimodules and coequalizer tensor). These are not coherent infinity-operadic algebra comparison theorems. The model-category weak-equivalence hits and absolute-value weak-approximation section concern different notions; grep has only bibliography mentions of operads."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|WeakApproximation|weakApproximation",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"55\", \"text\": \"  monoids in monoidal categories, in: Operads: Proceedings of Renaissance\"}\n  {\"file\": \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"line\": \"39\", \"text\": \"[F. Chapoton, M. Livernet, *Pre-Lie algebras and the rooted trees operad*][chapoton_livernet_2001]\"}\n  {\"file\": \"Mathlib/Analysis/AbsoluteValue/Equivalence.lean\", \"line\": \"392\", \"text\": \"section WeakApproximation\"}\n  {\"file\": \"Mathlib/Analysis/AbsoluteValue/Equivalence.lean\", \"line\": \"437\", \"text\": \"end WeakApproximation\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict simplicial spine/ordinary nerve), and Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,356-366 (ordinary internal bimodules and coequalizer tensor). These are not coherent infinity-operadic algebra comparison theorems. The model-category weak-equivalence hits and absolute-value weak-approximation section concern different notions; grep has only bibliography mentions of operads."
+  },
+  {
+   "tool": "leansearch",
+   "query": "weak approximation of nonsymmetric infinity operads induces equivalence of categories of algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.weakEquivalences_op_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": WeakEquivalence f.op ↔ WeakEquivalence f\", \"doc\": \"A morphism $ f $ in a category with weak equivalences is a weak equivalence if and only if its corresponding morphism $ f^{\\text{op}} $ in the opposite category is a weak equivalence.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": (localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"HomotopicalAlgebra.WeakEquivalence\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : C} → (X ⟶ Y) → [HomotopicalAlgebra.CategoryWithWeakEquivalences C] → Prop\", \"doc\": \"Given a homotopical category $\\\\mathcal{C}$, this defines the proposition that a morphism $f: X \\\\to Y$ is a weak equivalence in $\\\\mathcal{C}$.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    [self : HomotopicalAlgebra.ModelCategory C] → HomotopicalAlgebra.CategoryWithWeakEquivalences C\", \"doc\": \"Given a model category $ \\\\mathcal{C} $, this constructs the category with weak equivalences by taking the class of weak equivalences from the model category structure.\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceOppositeOp\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"[WeakEquivalence f] : WeakEquivalence f.op\", \"doc\": \"For any morphism $ f $ in a category with weak equivalences, if $ f $ is a weak equivalence, then its opposite morphism $ f^{\\text{op}} $ in the opposite category is also a weak equivalence.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": CategoryWithWeakEquivalences (CofibrantObject.HoCat C)\", \"doc\": \"The homotopy category of cofibrant objects in a model category is equipped with a category with weak equivalences structure, where the weak equivalences are those morphisms that are weak equivalences \"}\n  {\"name\": \"HomotopicalAlgebra.weakEquivalence_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y)\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C],\\n  HomotopicalAlgebra.WeakEquivalence f ↔ HomotopicalAlgebra.weakEquivalences C f\", \"doc\": \"In a homotopical category $\\\\mathcal{C}$, a morphism $f: X \\\\to Y$ is a weak equivalence if and only if it belongs to the designated class of weak equivalences in $\\\\mathcal{C}$'s structure.\"}\n  {\"name\": \"HomotopicalAlgebra.weakEquivalences_over_def\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Over\", \"type\": \": weakEquivalences (Over S) = (weakEquivalences C).over\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with weak equivalences and an object $S \\\\in \\\\mathcal{C}$, the weak equivalences in the over category $\\\\mathcal{C}/S$ coincide with those morphisms whose underlyin\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict simplicial spine/ordinary nerve), and Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,356-366 (ordinary internal bimodules and coequalizer tensor). These are not coherent infinity-operadic algebra comparison theorems. The model-category weak-equivalence hits and absolute-value weak-approximation section concern different notions; grep has only bibliography mentions of operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inert preserving functors on strings of adjacent edges encode coherent associative algebras and bimodules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Bimod.AssociatorBimod.homAux\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Limits.HasCoequalizers C] →\\n        [inst_3 :\\n            ∀ (X : C),\\n              CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n  \", \"doc\": \"A morphism in the base monoidal category $\\\\mathcal{C}$ that relates the tensor product $(P \\\\otimes_\\\\mathcal{B} Q) \\\\otimes_\\\\mathcal{C} L$ to $P \\\\otimes_\\\\mathcal{B} (Q \\\\otimes_\\\\mathcal{C} L)$, construct\"}\n  {\"name\": \"Bimod.AssociatorBimod.invAux\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Limits.HasCoequalizers C] →\\n        [inst_3 :\\n            ∀ (X : C),\\n              CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n  \", \"doc\": \"In a monoidal category $\\\\mathcal{C}$ with coequalizers, this morphism represents the inverse of the associator isomorphism $\\\\alpha_{P,Q,L}^{-1}$ for the tensor product of three bimodules $P: \\\\mathcal{\"}\n  {\"name\": \"Bimod.monBicategory\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [CategoryTheory.Limits.HasCoequalizers C] →\\n        [∀ (X : C),\\n              CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n                (CategoryTheory.\", \"doc\": \"The bicategory structure on the category of monoids in a monoidal category $\\\\mathcal{C}$, where: \\n- Objects are monoids in $\\\\mathcal{C}$;\\n- 1-morphisms $X \\\\to Y$ are $X\\\\text{-}Y$-bimodules;\\n- 2-morphi\"}\n  {\"name\": \"Bimod.AssociatorBimod.inv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Limits.HasCoequalizers C] →\\n        [inst_3 :\\n            ∀ (X : C),\\n              CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n  \", \"doc\": \"In a monoidal category $\\\\mathcal{C}$ with coequalizers, this morphism represents the inverse of the associator isomorphism $\\\\alpha_{P,Q,L}^{-1}$ for the tensor product of three bimodules $P: \\\\mathcal{\"}\n  {\"name\": \"Bimod.AssociatorBimod.hom\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Limits.HasCoequalizers C] →\\n        [inst_3 :\\n            ∀ (X : C),\\n              CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n  \", \"doc\": \"A morphism in the base monoidal category $\\\\mathcal{C}$ that provides an isomorphism between $(P \\\\otimes_\\\\mathcal{B} Q) \\\\otimes_\\\\mathcal{C} L$ and $P \\\\otimes_\\\\mathcal{B} (Q \\\\otimes_\\\\mathcal{C} L)$, con\"}\n  {\"name\": \"Bimod.triangle_bimod\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Limits.HasCoequalizers C]\\n  [inst_3 :\\n    ∀ (X : C),\\n      CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n        (CategoryTheory.MonoidalCategory\", \"doc\": \"For monoids $X,Y,Z$ in a monoidal category $\\\\mathcal{C}$ with coequalizers, and bimodules $M: X\\\\text{-}Y$ and $N: Y\\\\text{-}Z$, the composition of the associator isomorphism $(M \\\\otimes_Y \\\\text{regular\"}\n  {\"name\": \"Bimod.associatorBimod\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Limits.HasCoequalizers C] →\\n        [inst_3 :\\n            ∀ (X : C),\\n              CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n  \", \"doc\": \"Given three bimodules $ L: \\\\mathcal{A}-\\\\mathcal{B} $, $ M: \\\\mathcal{B}-\\\\mathcal{C} $, and $ N: \\\\mathcal{C}-\\\\mathcal{D} $ in a monoidal category $ \\\\mathcal{C} $ with coequalizers, the associator provid\"}\n  {\"name\": \"Bimod.AssociatorBimod.inv_hom_id\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Bimod\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Limits.HasCoequalizers C]\\n  [inst_3 :\\n    ∀ (X : C),\\n      CategoryTheory.Limits.PreservesColimitsOfSize.{0, 0, v₁, v₁, u₁, u₁}\\n        (CategoryTheory.MonoidalCategory\", \"doc\": \"The composition of the inverse associator isomorphism $\\\\alpha_{P,Q,L}^{-1}$ and the associator morphism $\\\\alpha_{P,Q,L}$ for the tensor product of three bimodules $P: \\\\mathcal{A}-\\\\mathcal{B}$, $Q: \\\\ma\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict simplicial spine/ordinary nerve), and Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,356-366 (ordinary internal bimodules and coequalizer tensor). These are not coherent infinity-operadic algebra comparison theorems. The model-category weak-equivalence hits and absolute-value weak-approximation section concern different notions; grep has only bibliography mentions of operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a fully faithful inclusion admits right Kan extensions determined by limits on comma categories",
+   "results": "{\"t\": \"2026-10-16T23:35:08Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a fully faithful inclusion admits right Kan extensions determined by limits on comma categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesRightKanExtension.mk'\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.ranObjObjIsoLimit\", \"CategoryTheory.Functor.HasRightKanExtension.mk\", \"CategoryTheory.Functor.PreservesRightKanExtension.mk_of_preserves_isUniversal\", \"CategoryTheory.Functor.isUniversalOfIsRightKanExtension\", \"CategoryTheory.Functor.limitIsoOfIsRightKanExtension\", \"CategoryTheory.Functor.instIsRightKanExtensionObjRanAppRanCounit\"], \"digest\": \"d0f98f8958845f8a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. Returned ordinary categorical Kan-extension declarations, including ranObjObjIsoLimit and limitIsoOfIsRightKanExtension. Their Category/Functor types do not compare marked quasicategory diagrams, so they are not an exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-composable-bimodule-operad-segal",
@@ -84,5 +273,34 @@
   "group": "Q77"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-bimodule-word-path-approximation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Direct mapping-cylinder/right-Kan proof of HA 4.4.1.17: explicit inert-hull right adjoint, reduction to singleton edges, operadic relative products, bridge equivalences and preservation of all inert arrows. Includes full transformations, zero words and both naturalities. No new nodes or attachments. Removed the initial general-approximation route after preflight exposed its transitive cycle through operadic presentability and bar monadicity. Second reading expands mapping-cylinder composition, exact relative cones and tuple targets, the initial-object local cone, arbitrary inert-arrow detection, and fixed-base inverse data; no statement change or new node.",
+  "blueprint": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Coherent two-sided bar from a bimodule and a left module. Operadic Segal encoding of composable bimodules, before forming or realizing any bar. Supporting input: Replace the ordered-word algebra diagram by its composable-path presentation, before gluing short paths.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Ordinary nerve and coherent-functor definitions already used by the statement."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise equivalence detection and quasicategory calculus for the mapping-cylinder deformation-retraction on full coherent diagram categories; no node of this unit supplies this general calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-80418f264",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-80418f264 (reviewer sub-agent of L); spot-checked: I read all 10 steps of the item and the full statement of each of its 12 proof dependencies. There are no new nodes; the statement and unit are unchanged, and the only citer (lem-coef-composable-bimodule-operad-segal) uses the k=2 case and both naturalities, which the statement gives. The mathematics checks out. Steps 1-2: I redid the hull right-adjoint Hom test, including zero hulls, labelled empty intervals and empty blocks, which force equal vertices. Step 3: the commas have a terminal object, so the opposite cofinal criterion and the constant test apply; exact cone data come from the identity-only equivalences of the base and the exponential corner isofibration. Step 4: the singleton commas are discrete and the operad's product clause gives the relative limits, including n=0. Step 5: the restriction theorem applies to the full inclusion of S in J, which has no arrows S to O, and the local cone at a path has initial object 1_f. Steps 6-8: cocartesianness follows from the composition and initial-lift statements, the bridge maps are maps of cones, and the Segal equivalence reflects equivalences. Step 9: the deformation retraction stays over the fixed base. Step 10: the naturalities are strict. The target is an isofibration because Delta^op has no non-identity isomorphisms. Small cases: for k=0, Phi_0 is an isomorphism with Delta^op; for k=1, Step_1 is (Delta_{/[1]})^op; the path (0,1,2) cannot map to the non-colour (0,2). The proof-dependency closure (413 nodes) does not reach the item, so there is no cycle. The two declared tool uses from sk-prop-sf-cbc (def-cbc-enhanced-diagrams-cones and lem-cbc-enhanced-functor-cone-calculus) are accepted. lem-coef-operadic-weak-approximation-algebras would be a generalization, but citing it creates a cycle; there is no duplicate. No SGA source is used. Source limitation: HA Prop. 4.4.1.17, pp. 568-570, is not archived and network access is blocked here, so I judged the argument on its own merits rather than against HA's pages. The WANTED request and proof_origin=agent stand. No fixes were made."
+ }
 }
