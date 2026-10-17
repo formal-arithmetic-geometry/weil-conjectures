@@ -1566,7 +1566,10 @@ public import WeilConjectures.AlgebraicGeometry.PopescuDelocalizeWeakLocalizatio
 public import WeilConjectures.AlgebraicGeometry.PowerSetComplexContractible
 public import WeilConjectures.AlgebraicGeometry.PrimitiveRootsCover
 public import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+public import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedCoverExtension
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
@@ -3787,6 +3790,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Stabilizer
 public import WeilConjectures.RingTheory.IdempotentsDeterminedModuloRadical
 public import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
+public import WeilConjectures.RingTheory.IndPrincipalZariski
 public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
@@ -3830,6 +3834,9 @@ public import WeilConjectures.RingTheory.PopescuStandardReductionFactorCore
 public import WeilConjectures.RingTheory.PowerSeriesOntoCompletion
 public import WeilConjectures.RingTheory.ProEtale.Bijective
 public import WeilConjectures.RingTheory.ProEtale.ClosedLift
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftAdjunction
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftMap
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftUnits
 public import WeilConjectures.RingTheory.ProEtale.Contraction.Covers
 public import WeilConjectures.RingTheory.ProEtale.Etale
 public import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
