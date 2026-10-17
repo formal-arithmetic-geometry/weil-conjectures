@@ -14,17 +14,17 @@
  ],
  "proof": [
   {
-   "text": "For a profinite S and a ring A, ring maps LC(S,A) to an A-algebra B are determined by their restriction from LC(S,Z). Construct the inverse by LocallyConstant.liftPrimeSpectrum from the integer-map spectrum projection. Characteristic functions show equality after localization at every prime. This gives the ring pushout from the integers and hence an isomorphism Spec LC(S,A) to the specified relative test scheme, with both projection equations.",
+   "text": "For a profinite S and a ring A, ring maps LC(S,A) to an A-algebra B are determined by restriction from LC(S,Z). Construct the inverse by LocallyConstant.liftPrimeSpectrum from the first coordinate of the LC(S,Z) prime-spectrum homeomorphism. Characteristic functions show equality after localization at every prime. Separate universes for S, A and B allow the integer coefficients without a universe mismatch. This gives the ring pushout from ULift Z and the isomorphism Spec LC(S,A) to the specified relative test scheme, with both projection equations.",
    "uses": [
     "lem-weil-pbc-locally-constant-prime-spectrum"
    ],
    "elementary": false
   },
   {
-   "text": "Over a field K, Spec LC(S,K) is homeomorphic to S. Its connected-component space is S. Apply the proved affine map correspondence and its naturality from proEtale_point_components_maps to show that the specified functor map on every Hom is bijective. No weak-contractibility hypothesis is used: the imported proved private pointComponentsEquiv applies to every affine source.",
+   "text": "Reuse the proved specMapEquiv and specMapEquiv_apply from ProEtalePointComponentsMaps for maps from an affine spectrum to Spec LC(S,Z), and relativeMapEquiv and relativeMapEquiv_target there for the relative pullback correspondence. Transport the affine source along the explicit test-scheme isomorphism and the homeomorphism Spec LC(S,K) with S. Reuse the imported profiniteProjection_natural to identify the spectrum projection after a target map. Thus the resulting Hom equivalence sends the specified functor map of f to f, giving full faithfulness for every field K. The connected-component correspondence itself is not needed.",
    "uses": [
-    "lem-weil-pbc-proetale-point-components-maps",
-    "lem-weil-pbc-locally-constant-prime-spectrum"
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "lem-weil-pbc-proetale-point-components-maps"
    ],
    "elementary": false
   },
@@ -39,7 +39,7 @@
    "elementary": false
   },
   {
-   "text": "An affine pro-etale object is Spec of its global sections; the preceding algebra isomorphism, followed by the specified test-scheme isomorphism, is an isomorphism over Spec K. The cover-dense affine ind-etale basis consequently factors through the test functor, proving cover density.",
+   "text": "For an affine pro-etale object U, put R = Gamma(U,top) and take the K-algebra structure induced by Spec.preimage of U.isoSpec.inv followed by its structural map. The weakly-etale Spec/algebra criterion makes R a weakly-etale K-algebra. Absolute flatness and the clopen basis make S = Spec R profinite. Apply the proved classification LC(S,K) isomorphic to R. The composite of U.isoSpec, the spectrum of that algebra isomorphism, and the explicit relative test-scheme isomorphism is over Spec K: its structural equation follows from the algebra isomorphism commuting with constants and the pullback second-projection equation. The cover-dense affine ind-etale basis consequently factors through the test functor, proving cover density.",
    "uses": [
     "lem-weil-pbc-ind-etale-basis"
    ],
@@ -66,7 +66,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Examples 4.1.10 and 4.2.11; local-ring proof of the affine algebra calculation using Stacks Tags 092Q, 096D, 096T; E4 implements the argument constructively from the cited source-library and Mathlib declarations."
+  "place": "Examples 4.1.10 and 4.2.11; local-ring proof of the affine algebra calculation using Stacks Tags 092Q, 096D, 096T; E4 implements the argument constructively from the cited source-library and Mathlib declarations. R2 repairs the upstream-sync API break and closes the six active holes of the post-sync source. The second reading removes the duplicate specMapEquiv, specMapEquiv_apply and profiniteProjection_natural and the now-unused ringMapEquiv, reusing the existing imported private helpers together with relativeMapEquiv and relativeMapEquiv_target. No public statement or unit route changes."
  },
  "mathlib_searches": [
   {
@@ -138,12 +138,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261015T201714-L-1447509",
+  "landing": "20261017T013736-L-115246",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
