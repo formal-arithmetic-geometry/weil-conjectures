@@ -25,11 +25,11 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 -- Use the constructed functors through their interfaces during the mate calculation.
-attribute [local irreducible] singleComplexOpenDirectImageIso
-  singleComplexOpenPullbackIso CategoryTheory.Functor.mapDerivedCategory
-  CategoryTheory.Functor.rightDerivedFunctor singleComplexRestrictedCoefficient
-  singleComplexOpenBaseChangeSourceIso singleComplexOpenPullbackSquareIso
-  schemeDerivedBaseChangeMap singleComplexOpenSquareComparison
+attribute [local irreducible] singleComplexOpenDirectImageIso singleComplexOpenPullbackIso
+  CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.rightDerivedFunctor
+  singleComplexRestrictedCoefficient singleComplexOpenBaseChangeSourceIso
+  singleComplexOpenPullbackSquareIso schemeDerivedBaseChangeMap singleComplexOpenSquareComparison
+
 
 private theorem compose_of_equal
     {C : Type*} [Category* C] {A B D E H : C}

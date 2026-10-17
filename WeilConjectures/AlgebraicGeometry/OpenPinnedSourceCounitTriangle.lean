@@ -58,7 +58,6 @@ def openPinnedHomotopySourceCompositionIso
     (.up ℤ)).symm
 
 -- Keep the selected pullback data abstract while comparing its canonical maps.
-
 attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
   Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
@@ -131,6 +130,7 @@ private theorem compositionCounit
       (pinnedPullbackCounit f).app
         (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj P) ≫ v)
     hm.symm)
+
 
 private theorem openCounit
     (X : Scheme.{u}) (U : X.Opens)
