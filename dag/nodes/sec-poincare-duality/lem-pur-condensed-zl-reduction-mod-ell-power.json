@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-condensed-zl-reduction-mod-ell-power",
+ "kind": "statement",
+ "title": "Reduction of the pulled-back condensed ell-adic integers",
+ "statement": "Let $\\ell$ be a prime, let $X$ be any scheme, and let $r\\ge1$, with $\\mathbf Z_\\ell$ as in [def-weil-l-adic-numbers]. On the small pro-etale site of $X$ [def-weil-pbc-proetale-site], put $R_X=p_X^*\\underline{\\mathbf Z}_\\ell$ using the coefficient pullback [sk-def-sfb-pullback-from-point], where $\\underline{\\mathbf Z}_\\ell(S)=C(S,\\mathbf Z_\\ell)$ is the continuous-function condensed ring [def-sfb-padic-int-condensed-ring], and put $A_{r,X}=(\\mathbf Z/\\ell^r\\mathbf Z)_X$ for the constant sheaf [def-weil-pbc-constant-sheaf]. Let $\\rho_r\\colon R_X\\to A_{r,X}$ be the reduction map: the composite of the canonical ring isomorphism $R_X\\cong\\varprojlim_{n\\geq1}A_{n,X}$ of [sk-prop-sfb-qlbar-colimit-x] in the case $E=\\mathbf Q_\\ell$ (the limit taken along the reduction maps $A_{n+1,X}\\to A_{n,X}$) with the projection to the index $r$. Then $\\rho_r$ induces an isomorphism of sheaves of rings and $R_X$-modules $$R_X/\\ell^rR_X\\xrightarrow{\\sim}A_{r,X}.$$ Here $\\ell^rR_X$ is the image ideal sheaf of multiplication by $\\ell^r$, and the quotient is the sheaf quotient, with quotient-ring operations as in [def-weil-pbc-algebra-hom-quotient]. These isomorphisms are compatible with the reduction maps for all $r$: $\\rho_r$ is $\\rho_{r+1}$ followed by $A_{r+1,X}\\to A_{r,X}$, so the quotient map $R_X/\\ell^{r+1}R_X\\to R_X/\\ell^rR_X$ corresponds to the reduction $A_{r+1,X}\\to A_{r,X}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Integral limit and coefficient extension; the quotient comparison needed to identify the exact upstream Tate construction"
+ },
+ "stmt_deps": [
+  "def-sfb-padic-int-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-numbers",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On the small pro-etale site of any scheme the pulled back condensed p-adic integer ring modulo p^r is the constant sheaf Z/p^r, compatibly with reductions",
+   "results": "CondensedMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functorToPresheaves; Condensed.profiniteFree; no theorem for this pulled-back sheaf quotient",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed locally constant and profinite-free constructions do not state the sheaf quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient by p^n of the sheaf of continuous p-adic integer valued functions on a scheme's pro etale site is the constant finite residue ring",
+   "results": "PadicInt.toZModPow, PadicInt.ker_toZModPow, PadicInt.residueField, Condensed.lanSheafProfinite; none states the pulled-back sheaf isomorphism",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has the pointwise p-adic quotient kernel but no pro-etale sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.toZModPow, Function.Surjective",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|ProEtale).*(quotient|ZMod)|(quotient|ZMod).*(Condensed|ProEtale)",
+   "results": "Mathlib/Condensed/Light/TopCatAdjunction.lean:42; Mathlib/Condensed/TopCatAdjunction.lean:38; neither concerns this quotient",
+   "date": "2026-10-17",
+   "verdict": "no match: only unrelated condensed quotient-topology declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_toZModPow|toZModPow_surjective|toZModPow.*surjective in NumberTheory/Padics",
+   "results": "Mathlib/NumberTheory/Padics/RingHoms.lean:459 ker_toZModPow and related p-adic lemmas; no sheaf quotient",
+   "date": "2026-10-17",
+   "verdict": "generalization: pointwise kernel calculation only, not the sheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of a pulled back condensed p-adic coefficient sheaf modulo a prime power is the constant finite sheaf on the small proetale site",
+   "results": {
+    "t": "2026-10-17T08:22:31Z",
+    "tool": "leanfinder",
+    "query": "Reduction of a pulled back condensed p-adic coefficient sheaf modulo a prime power is the constant finite sheaf on the small proetale site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PreTilt.coeff_def",
+     "PreTilt.untiltAux_smodEq_untiltFun",
+     "BDeRhamPlus",
+     "BDeRham",
+     "PreTilt.coeff",
+     "PreTilt.mk_comp_untilt_eq_coeff_zero",
+     "WittVector.mk_fontaineTheta",
+     "PreTilt.exists_smodEq_untiltAux"
+    ],
+    "digest": "2e206bbba5ea131b"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: PreTilt, untilt and period-ring constructions do not identify the pro-etale sheaf quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "nt-target-poincare-tate-bc",
+  "date": "2026-10-17",
+  "group": "Q95"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-sp-tate-twist",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The target proof's coefficient comparison step: identify the quotient of the pulled-back continuous-function condensed ring of ell-adic integers by ell^r with the constant residue sheaf",
+   "via": [
+    "nt-target-poincare-tate-bc"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
