@@ -15,9 +15,120 @@
   "def-trf-projective-bundle-morphism",
   "def-nagata-relative-proj"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal E'=\\mathcal E\\otimes\\mathcal L^{\\otimes n}$, with $\\mathcal L^{\\otimes0}=\\mathcal O_S$. By [def-sc-invertible-module] choose local generators $e_i$ of $\\mathcal L$ on an open cover; refine to affine opens $U_i$ using [lem-weil-pbc-affine-opens-basis]. The tensor definition [def-pur-sheaf-tensor-product] gives inverse module maps $\\tau_i:\\mathcal E|_{U_i}\\to\\mathcal E'|_{U_i}$, $v\\mapsto v\\otimes e_i^{\\otimes n}$, and $v\\otimes a e_i^{\\otimes n}\\mapsto av$. For $n=0$ these are the unit identifications. In particular $\\mathcal E'$ is quasi-coherent and of finite type: near any point these maps identify it with $\\mathcal E$, so the affine module presentation and the finite generating surjection in [pqf-def-coherent] also present $\\mathcal E'$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pur-sheaf-tensor-product",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 02NC, label lemma-twisting-and-proj, proof: trivialize the invertible module and glue; specialization to the symmetric algebra and the tensor power of the line bundle"
+   }
+  },
+  {
+   "text": "Let $\\mathcal A=\\operatorname{Sym}(\\mathcal E)$ and $\\mathcal B=\\operatorname{Sym}(\\mathcal E')$. The sheaf symmetric-algebra theorem [lem-weil-pbc-quasi-coherent-symmetric-algebra] supplies these quasi-coherent algebras and their functoriality. Applying its universal property to $\\tau_i$ and $\\tau_i^{-1}$ gives inverse algebra maps $\\beta_i:\\mathcal A|_{U_i}\\xrightarrow{\\sim}\\mathcal B|_{U_i}$: each composite fixes the degree-one generators, hence is the identity by uniqueness. The monomial description of [lem-weil-pbc-symmetric-algebra-graded] makes these maps degree preserving and the identity in degree zero. On any affine $V\\subseteq U_i$ they are graded $R$-algebra isomorphisms $A\\to B$, where $R=\\Gamma(V,\\mathcal O_S)$, $A=\\Gamma(V,\\mathcal A)$ and $B=\\Gamma(V,\\mathcal B)$; the affine-section clause of the sheaf symmetric-algebra theorem identifies these with the ordinary symmetric algebras and their symmetric gradings.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CG (lemma-local-tensor-algebra), 01CL (lemma-whole-tensor-algebra-permanence); symmetric-algebra construction used in constructions.tex Tag 02NC (lemma-twisting-and-proj)"
+   }
+  },
+  {
+   "text": "Here is the local isomorphism induced by any $\\beta_i:A\\xrightarrow{\\sim}B$ of step 2. Apply [lem-nagata-affine-proj-scalar-extension] with both base rings equal to $R$ and the identity $R\\to R$, so that $R\\otimes_RA=A$, and with the graded $R$-algebra isomorphism $\\beta_i$ (both unit maps land in degree zero by step 2). It gives a canonical morphism $r_{\\beta_i}:\\operatorname{Proj}(B)\\to\\operatorname{Proj}(A)$ over $\\operatorname{Spec}R$ such that, for $f\\in A_d$ with $d>0$, the inverse image of $D_+(f)$ is $D_+(\\beta_i(f))$, and on it $r_{\\beta_i}$ is the spectrum morphism of\n$$A_{(f),0}\\longrightarrow B_{(\\beta_i(f)),0},\\qquad a/f^m\\longmapsto\\beta_i(a)/\\beta_i(f)^m\\quad(a\\in A_{md})$$\n[def-nagata-homogeneous-localization-degree-zero]. These opens cover $\\operatorname{Proj}(B)$, and the chart formulas determine $r_{\\beta_i}$ uniquely. No non-zero-divisor hypothesis on $f$ is used.",
+   "uses": [
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj) with identity base map and Tag 01MY (lemma-morphism-proj), property (2), explicit degree-zero chart map; Tag 02NC (lemma-twisting-and-proj), local trivial case"
+   }
+  },
+  {
+   "text": "Applying the same lemma to $\\beta_i^{-1}$ gives $r_{\\beta_i^{-1}}:\\operatorname{Proj}(A)\\to\\operatorname{Proj}(B)$. On every chart, each composite $r_{\\beta_i}\\circ r_{\\beta_i^{-1}}$ or $r_{\\beta_i^{-1}}\\circ r_{\\beta_i}$ is the spectrum morphism of the composite fraction map, i.e. of the identity map $a/f^m\\mapsto a/f^m$ [def-weil-affine-spectrum]. These chart opens cover, so both composites are identities by the uniqueness in [lem-weil-pbc-scheme-morphism-gluing]. Hence $r_{\\beta_i}$ is an isomorphism over $\\operatorname{Spec}R$. For $V=U_i$, the affine restriction isomorphisms $i_{U_i}$ in [def-nagata-relative-proj] for $\\operatorname{Sym}\\mathcal E$ and $\\operatorname{Sym}\\mathcal E'$ thus give an isomorphism $g_i:\\mathbf P_S(\\mathcal E')|_{U_i}\\xrightarrow{\\sim}\\mathbf P_S(\\mathcal E)|_{U_i}$ over $U_i$.",
+   "uses": [
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-nagata-relative-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), uniqueness of the chart-determined morphism; Tag 02NC (lemma-twisting-and-proj), local trivial case: the identity when L is trivial"
+   }
+  },
+  {
+   "text": "Check a change of generator on any affine $W\\subseteq U_i\\cap U_j$. Write $e_j=u e_i$ with $u\\in\\Gamma(W,\\mathcal O_S)^\\times$; the inverse scalar comes from the inverse change of the two rank-one frames [def-sc-invertible-module]. Then $\\tau_j=u^n\\tau_i$. Since a homogeneous degree-$k$ element is a sum of degree-$k$ monomials [lem-weil-pbc-symmetric-algebra-graded], $\\beta_j(a)=u^{nk}\\beta_i(a)$ for $a\\in A_k$. Thus $D_+(\\beta_j(f))=D_+(\\beta_i(f))$ and on each such chart the two ring maps in step 3 satisfy\n$$\\frac{\\beta_j(a)}{\\beta_j(f)^m}=\\frac{u^{nmd}\\beta_i(a)}{(u^{nd}\\beta_i(f))^m}=\\frac{\\beta_i(a)}{\\beta_i(f)^m}\\qquad(a\\in A_{md}).$$\nThe equality only cancels powers of the unit $u$, using the localization fractions of [def-nagata-homogeneous-localization-degree-zero]; it does not cancel $f$. For $n=0$ both powers are $1$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 02NC, label lemma-twisting-and-proj, proof: trivialize the invertible module and glue; specialization to the symmetric algebra and the tensor power of the line bundle"
+   }
+  },
+  {
+   "text": "The same local formulas respect restrictions of the affine base. For an affine $V\\subseteq U_i$, the module map sends $v$ to $v\\otimes(e_i|_V)^{\\otimes n}$; this is the restriction of $\\tau_i$. Its symmetric-algebra map therefore restricts $\\beta_i$ by uniqueness in [lem-weil-pbc-quasi-coherent-symmetric-algebra]. On Proj charts, coefficient restriction $\\rho$ sends $\\beta_i(a)/\\beta_i(f)^m$ to $\\rho\\beta_i(a)/\\rho\\beta_i(f)^m$, equal to applying the restricted algebra map after restriction. This is exactly the compatibility with the restriction maps specified in [def-nagata-relative-proj]. It also holds for the inverse maps. Thus the restriction of $g_i$ to $V$ is the map constructed there from $e_i|_V$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "def-nagata-relative-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 02NC, label lemma-twisting-and-proj, proof: trivialize the invertible module and glue; specialization to the symmetric algebra and the tensor power of the line bundle"
+   }
+  },
+  {
+   "text": "Cover each $U_i\\cap U_j$ by affine opens using [lem-weil-pbc-affine-opens-basis]. Steps 5 and 6, equality of affine spectrum maps [def-weil-affine-spectrum], and the covering by standard charts [prop-nagata-proj-standard-open] show that $g_i$ and $g_j$ agree on each of these restrictions; uniqueness in [lem-weil-pbc-scheme-morphism-gluing] gives agreement on the whole overlap. Apply that lemma to glue $g_i$ to $g:\\mathbf P_S(\\mathcal E')\\to\\mathbf P_S(\\mathcal E)$. Their inverses agree on the corresponding overlaps, so they glue too, and the two composites are identities by local uniqueness. The equality of the structure morphisms holds locally because each $g_i$ is over $U_i$, hence globally by the same uniqueness. Any other cover and any other local generators compare on affine refinements by steps 5 and 6, so give the same $g$. Its inverse is the requested canonical isomorphism $\\mathbf P_S(\\mathcal E)\\cong\\mathbf P_S(\\mathcal E')$ over $S$, with the projective-bundle meanings in [def-trf-projective-bundle-morphism].",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-affine-spectrum",
+    "prop-nagata-proj-standard-open",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 02NC, label lemma-twisting-and-proj, proof: trivialize the invertible module and glue; specialization to the symmetric algebra and the tensor power of the line bundle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-nagata-affine-proj-scalar-extension",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-nagata-relative-proj",
+  "prop-nagata-proj-standard-open",
+  "def-trf-projective-bundle-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 02NC, label lemma-twisting-and-proj, proof: trivialize the invertible module and glue; specialization to the symmetric algebra and the tensor power of the line bundle"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +157,112 @@
    "results": "8 hits: Module.Invertible.rTensorEquiv; Projectivization.Subspace.submodule; Projectivization.map; Submodule.projectivization; LinearAlgebra.Projectivization.termℙ; Projectivization.map.congr_simp; lTensorHomEquivHomLTensor; TensorPower.cast. None states the relative-Proj isomorphism.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "twisting.and.proj|relative.*[Pp]roj.*invertible|[Pp]roj.*[Tt]ensor",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "directory": "Mathlib/AlgebraicGeometry"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern affine Proj charts, projective points or tensor equivalences of ordinary modules, not the canonical relative projective-bundle twisting isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a quasi coherent module by a line bundle does not change its relative projective bundle",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Module.Invertible.rTensorEquiv",
+     "Module.Projective.tensorProduct",
+     "rTensorHomEquivHomRTensor",
+     "Module.Invertible.instTensorProduct_2",
+     "lTensorHomEquivHomLTensor",
+     "Module.Invertible.instTensorProduct",
+     "TensorProduct",
+     "TensorProduct.tensorQuotientEquiv_apply_mk_tmul"
+    ],
+    "digest": "6fe1a375eefc691c"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern affine Proj charts, projective points or tensor equivalences of ordinary modules, not the canonical relative projective-bundle twisting isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, SymmetricAlgebra",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern affine Proj charts, projective points or tensor equivalences of ordinary modules, not the canonical relative projective-bundle twisting isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative projective bundles P(E) and P(E tensor L) are canonically isomorphic when L is an invertible sheaf",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec"
+    ],
+    "digest": "540a50c552cf1e14"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern affine Proj charts, projective points or tensor equivalences of ordinary modules, not the canonical relative projective-bundle twisting isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "twist|[Tt]ensor|[Ss]cal",
+   "results": {
+    "count": 6,
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean"
+    ],
+    "digest": "2d60d4da5e3f7561",
+    "directory": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern affine Proj charts, projective points or tensor equivalences of ordinary modules, not the canonical relative projective-bundle twisting isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proj is unchanged by scaling each degree d by u to the power d for a unit u; line bundle twist projective spectrum",
+   "results": {
+    "count": 8,
+    "hits": [
+     "WeierstrassCurve.Projective.smul_eq",
+     "AlgebraicGeometry.projIsoSpec",
+     "WeierstrassCurve.Projective.smul_equiv",
+     "AlgebraicGeometry.projIsoSpecTopComponent",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec"
+    ],
+    "digest": "d4abced27edbec5e"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern affine Proj charts, projective points or tensor equivalences of ordinary modules, not the canonical relative projective-bundle twisting isomorphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-projective-bundle-to-h-projective",
@@ -73,5 +286,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-proj-invertible-twist",
+  "worker": "stage1",
+  "summary": "Expanded the trivialize-and-glue argument of Stacks 02NC into seven steps, including the symmetric-algebra maps, their degree-zero localization formulas, agreement under a unit change of frame, affine-base restriction and gluing of inverse maps. Reused existing nodes throughout; no new nodes and no statement change. No matching project declaration or Mathlib theorem was found.",
+  "blueprint": "The inherited ancestry is lem-trf-local-term-locality, through the projective-bundle-to-H-projective tool chain. This split realizes the 02NC twisting input in step 2 of lem-trf-projective-bundle-to-h-projective, within the inherited 087S projectivity-conversion argument; it changes no unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Generic quasi-coherent symmetric-algebra construction, universal property and affine sections; the curve local-term unit supplies no algebra construction."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Generic symmetric-degree grading and monomial generators for the local unit-scaling computation; the curve local-term unit supplies no grading lemma."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "Generic standard affine chart description and covering of Proj, used to prove equality of the local isomorphisms; no such scheme-theoretic tool is supplied by the local-term unit."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Generic affine-Proj functoriality: a graded algebra isomorphism over the same base induces a Proj morphism with the explicit degree-zero chart formulas, chart cover and uniqueness; used with the identity base map for each local trivialization in steps 3-4. The curve local-term unit supplies no Proj functoriality lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-proj-standard-open",
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-dfb12bb42",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-dfb12bb42 (reviewer sub-agent of L); spot-checked: I read Stacks 02NC (constructions.tex lemma-twisting-and-proj, around l.4585, including its proof), 01MY (l.2054), 01N2 (l.2245), every cited node's statement, the unit sk-i-curve-zero and the parent's use of the item. The statement is a true specialization of 02NC: Sym^d(E⊗L^n)=Sym^d E⊗L^{nd}. No hypothesis is added and nothing in it changed. Steps 1, 2, 5, 6 and 7 are correct: local frames refined to affines, Sym maps from the universal property with inverses by uniqueness, the degree-k scaling u^{nk} cancelling exactly in a/f^m with a∈A_{md}, compatibility with coefficient restriction, and affine-refinement gluing. I checked n=0, trivial L, E=0, empty S, nonreduced bases and zero-divisor f, and a non-quasi-separated S. One fault (C4/C5) is fixed. Step 4 glued the chart maps using lemma-nagata-proj-chart-ring-cocycle, but that node only states ring-level localization equivalences, not D_+(f)∩D_+(g)=D_+(fg) with the localization inclusion that the gluing needs. The existing reviewed node lem-nagata-affine-proj-scalar-extension (01N2/01MY, taken with the identity base map) states the whole conclusion of steps 3-4: a Proj morphism over Spec R with the explicit chart formula, chart cover and uniqueness. The fixed item now cites that node in steps 3-4. Step 4 also builds the inverse from beta^{-1} and proves the composites are identities by uniqueness. proof_deps was recomputed (cocycle node out, scalar-extension node in), and the cocycle node's tool_uses entry was replaced by the scalar-extension node. There are no new nodes and nothing to drop. I accepted four generic tool_uses: the two Sym nodes (sk-thm-p1), prop-nagata-proj-standard-open and lem-nagata-affine-proj-scalar-extension. No SGA is cited and there is no cycle. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
