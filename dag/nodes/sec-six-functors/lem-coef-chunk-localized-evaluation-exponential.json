@@ -11,9 +11,118 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-simplicial-localization-comparison-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=U_f^I$. Its objects are objectwise fibrant, because projective fibrations are objectwise [lem-coef-simplicial-projective-model-calculus]. On mapping simplicial sets define evaluation at $v$ by sending $(\\alpha,u)$, with $\\alpha:F\\to G$ and $u:j\\to k$ of the same simplicial degree, to $G(vu)\\alpha_{vj}=\\alpha_{vk}F(vu)$. The equality is enriched naturality. The enriched unit and composition equations show that this defines a simplicial functor $A\\times J\\to U^f$. A distinguished $(w,1_j)$ maps to $w_{vj}$, a model weak equivalence. Composing with $U^f\\to X_U$ therefore inverts all of $V$, and the enriched localization construction gives the asserted map $P_U(I,J)\\to X_U$. The same argument applied to the two projections defines the left map to $E_U(I)\\times J$.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.3.6.16, evaluation spans, printed pp.904-905."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-inversion-product-parameter] with $C=A$, $D=J$, $W=W_I$. Smallness holds and its marked arrows are exactly $V$. Its comparison is Step 1's left map, so that map is a DK equivalence. Here is also the ordinary-product comparison, including non-Kan factors. Write $R=\\operatorname{Ex}^{\\infty}$. By [lem-coef-ex-infinity-finite-products], $R$ preserves finite products, $RX$ is Kan, and $j_X:X\\to RX$ is a natural weak equivalence. Naturality and two-out-of-three imply $Rf$ is weak whenever $f$ is. For a weak $f:X\\to Y$, the map $Rf\\times1_{RZ}$ is the pullback of $Rf$ along $RY\\times RZ\\to RY$; this projection is a Kan fibration since $RZ$ is Kan. Right properness [lem-coef-kan-quillen-right-proper] makes this pullback weak. Under the product comparison $j_X\\times j_Z$ equals $j_{X\\times Z}$, and likewise for $Y$, so two-out-of-three makes $f\\times1_Z$ weak. Thus products preserve local weak equivalences of simplicial categories; their component categories are the products of the component categories (apply $R$ to the mapping sets), so they preserve DK equivalences. Replace both categories by fibrant ones. The product of these fibrant replacements computes their derived product: on a discrete pair of objects fibrant replacement is coordinatewise. The original product maps to it by a DK equivalence. Hence the ordinary product represents the homotopy product, in the derived-limit convention of [lem-coef-simplicial-localization-comparison-calculus].",
+   "uses": [
+    "lem-coef-simplicial-inversion-product-parameter",
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.14; first verification in the proof of Proposition A.3.6.16, printed pp.896,905."
+   }
+  },
+  {
+   "text": "Restriction $r^*:U_f^I\\to U_f^{I'}$ along $r:I'\\to I$ preserves fibrant objects and weak equivalences because they are objectwise. A change $s:J'\\to J$ changes the evaluation index to $vs$, while a commuting square $rv'=vs$ gives $(r^*F)(v'j')=F(vsj')$. Full inclusions $U\\subseteq U'$ preserve the same fibrant diagrams and distinguished arrows. The identical equations on enriched maps show that evaluation and both projections commute with these operations. Functoriality of enriched localization supplies the stated functorial diagrams, whenever the specified chunks exist. This argument uses no preservation of projectively cofibrant diagrams by restriction.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Evaluation spans in the proof of Proposition A.3.6.16, printed p.904."
+   }
+  },
+  {
+   "text": "For the exponential assertion assume $I$ cofibrant and set $B=(U^I)^{cf}$ and $K=U^{cf}$. Here $cf$ for $B$ refers to the projective model structure. Apply [lem-coef-chunk-bifibrant-localization] first to the chunk $U$ in $\\mathcal M$, then to the chunk $U^I$ in the combinatorial simplicial model category $\\mathcal M^I$. These are precisely the two chunk assumptions on $U$. It gives Dwyer--Kan equivalences $\\eta:K\\to X_U$ and $\\theta:B\\to E_U(I)$. Evaluation preserves bifibrancy by [lem-coef-simplicial-projective-model-calculus], so it gives $e:B\\times I\\to K$. By Step 2's product argument the products $B\\times I$ and $E_U(I)\\times I$ are homotopy products and $\\theta\\times1_I$ is a DK equivalence. The inclusion $B\\times I\\to U_f^I\\times I$ followed by localization gives $k:B\\times I\\to P_U(I,I)$. Its composite with the left map is $\\theta\\times1_I$ and its composite with evaluation is $\\eta e$, by the formulas in Step 1. Thus the localized evaluation span agrees in $h\\mathrm{sCat}$ with the actual enriched evaluation $e$ under these equivalences.",
+   "uses": [
+    "lem-coef-chunk-bifibrant-localization",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.6.17 and the final comparison of evaluation spans in the proof of Proposition A.3.6.16, printed pp.904-905."
+   }
+  },
+  {
+   "text": "First compute unrestricted evaluation. Put $\\widehat B=(\\mathcal M^I)^{cf}$ and $\\widehat K=\\mathcal M^{cf}$. For every small $T$, [lem-coef-simplicial-diagram-equivalence-classes], applied to the combinatorial projective model $\\mathcal M^I$ and then to $\\mathcal M$, gives\n$$\\operatorname{Hom}_{h\\mathrm{sCat}}(T,\\widehat B)\\cong\\pi_0((\\mathcal M^I)^T)\\cong\\pi_0(\\mathcal M^{I\\times T})\\cong\\operatorname{Hom}_{h\\mathrm{sCat}}(I\\times T,\\widehat K).$$\nThe middle isomorphism curries $F:T\\to\\mathcal M^I$ into $(i,t)\\mapsto F(t)(i)$, with action in the two variables commuting by enriched naturality. It preserves and reflects weak equivalences, since both classes are objectwise at $(i,t)$. The two projective structures have the same objectwise fibrations and weak equivalences, so also the same cofibrations by their lifting characterization. Evaluation on a bifibrant representative is therefore the map giving this bijection; the mapping-end description of enriched diagrams identifies its full simplicial action with Step 1's formula. Both class bijections are natural, hence so is this bijection. No cofibrancy of $I\\times T$ is required for the unrestricted class theorem.",
+   "uses": [
+    "lem-coef-simplicial-diagram-equivalence-classes",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.4.13 and its proof using Proposition A.3.4.12, printed p.890."
+   }
+  },
+  {
+   "text": "The inclusions $b:B\\hookrightarrow\\widehat B$ and $a:K\\hookrightarrow\\widehat K$ are fully faithful on mapping simplicial sets: they are full enriched subcategories. Apply [lem-coef-simplicial-fully-faithful-homotopy-image] with sources $T$ and $I\\times T$, respectively. It says that both induced maps on Hom sets are injective, and their images consist exactly of maps whose object values, up to isomorphism in the corresponding $\\pi_0$ category, belong to the respective subcategory. Under Step 5's bijection, an element in the image of $b_*$ has every row $I\\to\\widehat K$ represented by an object of $B$. Every such row takes values in $K$, by preservation of bifibrancy under evaluation. Thus its image is in the image of $a_*$.",
+   "uses": [
+    "lem-coef-simplicial-fully-faithful-homotopy-image",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.4.11 and the proof of Corollary A.3.4.14, printed pp.889-890."
+   }
+  },
+  {
+   "text": "Conversely let $\\alpha:I\\times T\\to\\widehat K$ denote a derived morphism in the image of $a_*$, and let $\\beta:T\\to\\widehat B$ be its inverse image under Step 5. Fix an object $t$ of $T$. Naturality under $\\{t\\}\\to T$ says that the object class $\\beta(t)$ corresponds to the row $\\alpha_t:I\\to\\widehat K$. Every object of this row is in the essential image of $K$. The image criterion of [lem-coef-simplicial-fully-faithful-homotopy-image], now with source $I$, gives a class $\\gamma_t:I\\to K$ mapping to $\\alpha_t$. Since $I$ is cofibrant and $U$ is an $I$-chunk, the restricted bijection of [lem-coef-simplicial-diagram-equivalence-classes] represents $\\gamma_t$ by a diagram in $U^I$. Cofibrant and fibrant replacement within $U^I$ (the empty-family chunk factorizations) gives an object $F_t\\in B$. Compatibility of the restricted and unrestricted bijections says that $\\beta|_{\\{t\\}}$ equals the derived map selecting $F_t$. The image criterion for $b$ with source $\\{t\\}$ therefore puts $\\beta(t)$ in the essential image of $\\pi_0b$. Applying that criterion with source $T$ puts $\\beta$ in the image of $b_*$. The separate choices $F_t$ establish this image condition only; that criterion supplies the coherent derived map into $B$, so no incoherent assembly of chosen rows is assumed.",
+   "uses": [
+    "lem-coef-simplicial-fully-faithful-homotopy-image",
+    "lem-coef-simplicial-diagram-equivalence-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.4.14 via Corollary A.3.4.11 and the restricted class bijection, printed p.890."
+   }
+  },
+  {
+   "text": "Steps 6-7 identify exactly the two image subsets of the unrestricted bijection in Step 5. Its restriction is consequently a bijection\n$$\\operatorname{Hom}_{h\\mathrm{sCat}}(T,B)\\cong\\operatorname{Hom}_{h\\mathrm{sCat}}(I\\times T,K).$$\nIt is induced by $e$, because the square with the two injective inclusion maps commutes with evaluation, and it is natural in $T$, because the unrestricted bijection and the two inclusions are natural. Step 2 identifies ordinary products with homotopy products; interchange of factors identifies $I\\times T$ with $T\\times^h I$. Step 4's isomorphisms $[B]\\cong[E_U(I)]$ and $[K]\\cong[X_U]$ transfer this natural bijection to exactly the one asserted in the item. The equality of the two evaluation composites in Step 4 shows it is induced by the displayed localized evaluation span. Every evaluation used here was defined on actual enriched mapping simplicial sets in Step 1; no coherent-nerve evaluation was substituted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Final paragraph of the proof of Proposition A.3.6.16, printed p.905."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-chunk-bifibrant-localization",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-diagram-equivalence-classes",
+  "lem-coef-simplicial-fully-faithful-homotopy-image",
+  "lem-coef-simplicial-inversion-product-parameter",
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Corollary A.3.4.14, Lemmas A.3.5.14 and A.3.6.17, proof of Proposition A.3.6.16, printed pp.890,896,904-905. Read online; not archived in literature/. Explicit enriched-evaluation and essential-image argument following this route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,7 +182,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-projective-diagram-simplicial-descent",
@@ -104,5 +213,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-chunk-localized-evaluation-exponential",
+  "worker": "stage1",
+  "summary": "Retained the enriched evaluation and eight-step weak-exponential proof. Reused the current DAG localization/product lemma instead of the earlier duplicate proposed node, and wrote the ordinary-product comparison from finite-product Kan replacement and right properness. One new statement-only node remains: the chunk bifibrant-localization comparison. The existing diagram-class and essential-image foundations still have dependency paths back to this item; acceptance awaits their authorized repair.",
+  "blueprint": "The displayed derived coefficient-adjunction/inverse-limit comparison in proof paragraph 2 of prop-coef-integral-exceptional-adjoint uses the enriched-diagram descent foundation. Steps 1-3 realize evaluation/product/naturality, Step 4 realizes the bifibrant comparison, and Steps 5-8 realize its weak-exponential assertion, matching HTT Proposition A.3.6.16.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-25641f062",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-25641f062 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-chunk-bifibrant-localization and the full statements of all 8 cited nodes, and checked every step. Nothing needed fixing. (1) No cycle at this branch: I recomputed reachability over stmt_deps and proof_deps, and none of the 8 proof deps reaches the item. diagram-equivalence-classes and fully-faithful-homotopy-image are unsplit here, so the SCC described in the report is historical. (2) The unit route holds: every cited node is in sk-prop-sf-biduality-general. No tool_uses are declared, accepted or needed. (3) The steps are sound. Step 1's enriched evaluation sends V to objectwise weak equivalences, so localization functoriality applies. Step 2: inversion-product-parameter with C=A, D=J has W_D=V exactly. Its product argument is valid for non-Kan factors: Rf×1 is a base change along a Kan fibration, then right properness, Ex-infinity product compatibility and two-out-of-three. Step 4 applies the new node to U in M and to U^I in M^I; U^I is small and its weak equivalences between fibrant objects are W_I. Its composites k→θ×1 and k→ηe check out. Step 5's currying (M^I)^T≅M^{I×T} is valid with the same projective classes. Its claim that the bijection is evaluation holds because every class has a strict bifibrant representative. Steps 6-7 use the injectivity and essential-image criterion correctly, and the restricted bijection under exactly I cofibrant and U an I-chunk. The empty-family chunk replacement stays in U^I. Step 8 is elementary. (4) Edge cases T, I, J or U empty all hold. (5) The new node is a correct simplicial-set case of HTT A.3.6.17 and needs U to contain cofibrant replacements and path objects. It generalizes the whole-model clause of localization-comparison-calculus, and no existing node states it. It does not restate a clause of the item. It is statement-only and self-contained, with all four search kinds and blueprint provenance. (6) The source is HTT A.3.4/A.3.6, which is not archived (WANTED), so I checked the mathematics directly. proof_origin=agent is correct. No SGA is used and no statement is weakened. Minor notes, not faults: Step 5 could cite lem-coef-simplicial-derived-exponential instead of re-deriving it; the new node lacks a lean_audit field."
  }
 }

@@ -11,9 +11,112 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-universally-localizing-simplicial-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the finite simplicial set $Q$ and its map $e:\\Delta^1\\to Q$ from [lem-coef-simplicial-edge-inversion-pushout]. For each pair $(C,W)$ form its explicit degreewise pushout $D(C,W)=C\\amalg_{\\coprod_W\\Delta^1}\\coprod_WQ$, with structure map $j_{C,W}:C\\to D(C,W)$. The cited statement says exactly that $j_{C,W}^*$ is a coherent functor equivalence onto the full category of $W$-inverting diagrams, for every quasicategory target, even though $D(C,W)$ need not yet be a quasicategory.",
+   "uses": [
+    "lem-coef-simplicial-edge-inversion-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZL",
+    "place": "Corollary 6.3.2.9; online source read, archive WANTED"
+   }
+  },
+  {
+   "text": "For a map of pairs $a:(C,W)\\to(C',W')$, send the summand indexed by $w$ to that indexed by $a(w)$ by the identity of $\\Delta^1$ or $Q$, and use $a$ on $C$. The representing-edge maps commute with these assignments. The pushout property therefore defines $D(a)$ with $D(a)j_{C,W}=j_{C',W'}a$. On all coproduct summands and on $C$, the maps for an identity and a composite agree with the corresponding identity and composite. Uniqueness in the degreewise pushout gives $D(1)=1$ and $D(ba)=D(b)D(a)$.",
+   "uses": [
+    "lem-coef-simplicial-edge-inversion-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZP",
+    "place": "Proposition 6.3.2.11, functoriality of the pushout construction; online source read, archive WANTED"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-filtered-inner-horn-factorization] to $f:D(C,W)\\to\\Delta^0$. Put $R(X)=T(X\\to\\Delta^0)$ and $r_X=u_{X\\to\\Delta^0}$. The map $R(X)\\to\\Delta^0$ is an inner fibration, so its lifting property says precisely that $R(X)$ is a quasicategory. Naturality of $T$ gives $R(a)r_X=r_Ya$ and the exact functor laws. Define $L(C,W)=R(D(C,W))$ and $F_{C,W}=r_{D(C,W)}j_{C,W}$. The two functor laws and the two naturality equations now give all three strict functoriality equations required for $L$ and $F$.",
+   "uses": [
+    "lem-coef-filtered-inner-horn-factorization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 applied over the terminal simplicial set; online source read, archive WANTED"
+   }
+  },
+  {
+   "text": "Each $r_X$ is inner anodyne. By [lem-coef-joyal-model-structure], every inner horn inclusion is a Joyal trivial cofibration. Thus every Joyal fibration is an inner fibration. The left lifting property defining $r_X$ gives its left lifting property against every Joyal fibration; the weak factorization system in that node identifies it as a Joyal trivial cofibration. By [lem-coef-joyal-functor-equivalence-test], for every quasicategory $E$ the actual restriction $r_X^*:\\operatorname{Fun}(R(X),E)\\to\\operatorname{Fun}(X,E)$ is a coherent functor equivalence.",
+   "uses": [
+    "lem-coef-filtered-inner-horn-factorization",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZP",
+    "place": "Proposition 6.3.2.11: inner-anodyne replacement does not change the localization; online source read, archive WANTED"
+   }
+  },
+  {
+   "text": "For every quasicategory $E$, restriction along $F_{C,W}$ is the composite $j_{C,W}^*r_{D(C,W)}^*$. The second factor is a coherent equivalence by the preceding step and [lem-coef-joyal-functor-equivalence-test]; the first factors as a coherent equivalence onto the full subcategory of $W$-inverting diagrams by [lem-coef-simplicial-edge-inversion-pushout]. Compose their quasi-inverses and their coherent inverse equivalences. This is exactly the localization property in [def-coef-universally-localizing-simplicial-map], with quasicategory target $L(C,W)$ already established.",
+   "uses": [
+    "lem-coef-simplicial-edge-inversion-pushout",
+    "lem-coef-joyal-functor-equivalence-test",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZP",
+    "place": "Proposition 6.3.2.11: composite localization; online source read, archive WANTED"
+   }
+  },
+  {
+   "text": "For the filtered diagram in the statement, the map $\\operatorname{colim}_i W_i\\to W$ is surjective by the definition of $W$. If $w_i,w_j$ have the same image in $C_1$, the description of a set colimit as a quotient gives a finite zigzag of transition relations identifying them. A cocone on that finite zigzag provides one stage at which their edge images agree. Their images still belong to that stage's marking, so they are equal there as elements of the subset $W_k\\subseteq(C_k)_1$. This proves injectivity. The same argument shows that any compatible family of functions $W_i\\to S$ gives a unique function $W\\to S$. No transition map is assumed injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZP",
+    "place": "Proposition 6.3.2.11: filtered colimit of the markings; online source read, archive WANTED"
+   }
+  },
+  {
+   "text": "In degree $n$, a map $D(C,W)_n\\to S$ is exactly a function $C_n\\to S$ and a family of functions $Q_n\\to S$ indexed by $W$, agreeing on the corresponding copies of $(\\Delta^1)_n$. By the colimit property of $C_n$ and the preceding identification $\\operatorname{colim}W_i=W$, these data are exactly compatible families of such data for $(C_i,W_i)$. Consequently the canonical map $\\operatorname{colim}_iD(C_i,W_i)\\to D(C,W)$ is bijective in each degree. Its compatibility with operators and with the maps from $C_i$ follows by restriction on the same summands. It is therefore an isomorphism of simplicial sets carrying $\\operatorname{colim}j_{C_i,W_i}$ to $j_{C,W}$.",
+   "uses": [
+    "lem-coef-simplicial-edge-inversion-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZP",
+    "place": "Proposition 6.3.2.11: the explicit pushout commutes with filtered colimits; online source read, archive WANTED"
+   }
+  },
+  {
+   "text": "The constant diagram at $\\Delta^0$ has colimit $\\Delta^0$: the index category is nonempty and any two objects have a common recipient, so its set of components is a singleton. Therefore the colimit of the arrows $D(C_i,W_i)\\to\\Delta^0$ is $D(C,W)\\to\\Delta^0$, under the preceding degreewise isomorphism. Apply the filtered-colimit and structural-map clauses of [lem-coef-filtered-inner-horn-factorization]. They give the canonical isomorphism $\\operatorname{colim}_i R(D(C_i,W_i))\\to R(D(C,W))$, and identify the colimit of the $r_{D(C_i,W_i)}$ with $r_{D(C,W)}$. Composing with the identified colimit of the $j_{C_i,W_i}$ gives precisely $F_{C,W}$. This is the required comparison map and its asserted compatibility with $F$.",
+   "uses": [
+    "lem-coef-filtered-inner-horn-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZP",
+    "place": "Proposition 6.3.2.11: compose the two filtered-colimit-preserving constructions; online source read, archive WANTED"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-edge-inversion-pushout",
+  "lem-coef-filtered-inner-horn-factorization",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-functor-equivalence-test",
+  "def-coef-universally-localizing-simplicial-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05ZP",
+  "place": "Proposition 6.3.2.11, expanded using Corollary 6.3.2.9 and Proposition 4.1.3.2. Online source read; no local archive, WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +166,45 @@
    "results": "{\"t\": \"2026-10-17T06:11:55Z\", \"tool\": \"leanfinder\", \"query\": \"There is a fibrant replacement of a marked simplicial set that preserves filtered colimits and presents the infinity categorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.FibrantObject.ι\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.BifibrantObject.ι\"], \"digest\": \"8d546afd03371278\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits give Kan-Quillen horn fibrations or generic fibrant objects (CategoryWithFibrations.lean:35-86 read); Loogle and grep return zero hits. None constructs coherent edge localization with a strict functorial choice preserving filtered colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*filtered|filtered.*localization",
+   "results": "{\"t\": \"2026-10-17T06:32:13Z\", \"tool\": \"grep\", \"query\": \"localization.*filtered|filtered.*localization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern homotopy categories, ordinary localization, or simplicial primitives rather than the coherent localization construction with strict functoriality and filtered-colimit preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial quasicategory localization of a simplicial set at marked edges",
+   "results": "{\"t\": \"2026-10-17T06:32:14Z\", \"tool\": \"leansearch\", \"query\": \"Functorial quasicategory localization of a simplicial set at marked edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.Localization\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q'\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.MorphismProperty.Q\", \"CategoryTheory.Localization.Construction.lift\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.Q\", \"CategoryTheory.MorphismProperty.HasLocalization.standard\"], \"digest\": \"7b753b2000db53f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern homotopy categories, ordinary localization, or simplicial primitives rather than the coherent localization construction with strict functoriality and filtered-colimit preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"localization\"",
+   "results": "{\"t\": \"2026-10-17T06:32:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern homotopy categories, ordinary localization, or simplicial primitives rather than the coherent localization construction with strict functoriality and filtered-colimit preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial localization of a simplicial set at selected edges preserving filtered colimits",
+   "results": "{\"t\": \"2026-10-17T06:32:15Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial localization of a simplicial set at selected edges preserving filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"SSet.sk\", \"SSet.Truncated.HomotopyCategory.lift\", \"SSet.cosk\", \"SSet.QCat\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"2af8a5d1f530406e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern homotopy categories, ordinary localization, or simplicial primitives rather than the coherent localization construction with strict functoriality and filtered-colimit preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinity category localization is a strictly functorial filtered colimit preserving construction on marked simplicial sets",
+   "results": "{\"t\": \"2026-10-17T06:32:39Z\", \"tool\": \"leanfinder\", \"query\": \"Infinity category localization is a strictly functorial filtered colimit preserving construction on marked simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"SSet.QCat\", \"SSet.QCat.strictBicategory\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"SSet.cosk\"], \"digest\": \"30c07c0aade717c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern homotopy categories, ordinary localization, or simplicial primitives rather than the coherent localization construction with strict functoriality and filtered-colimit preservation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-localization-filtered-colimit",
@@ -101,5 +239,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-localization-existence",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded the Kerodon construction into its finite inverse-gadget pushout and a general filtered-colimit-preserving inner-horn factorization. Proved strict functoriality and both colimit comparisons from their explicit universal properties, including noninjective transitions and the marking colimit. Used existing Joyal lifting and functor-equivalence statements for replacement invariance. Two new statement-only nodes; no Mathlib match.",
+  "blueprint": "Supporting filtered-union input in the ancestor proof: Kerodon Proposition 6.3.2.11 (05ZP), existence and functoriality of C[W^{-1}] and commutation with filtered colimits. The eight steps supply the supporting 05ZP construction, preserving the inherited ancestor route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-c7d4bbe74",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-c7d4bbe74 (reviewer sub-agent of L); spot-checked: I read in full the item, both new nodes and the statements of the four cited nodes. I checked Kerodon online: 05ZP (proof: combine 6.3.2.9 with 4.1.3.2), 05ZL (any simplicial set C and any W; D need not be an infinity-category), 05ZJ (Q = Delta^3 with edges 02 and 13 collapsed to separate points), 05ZK (e = edge 12) and 01BP (factorization of any arrow, functorial and commuting with filtered colimits). The item's statement is unchanged, a faithful precise form of 05ZP. Edge-inversion node: matches 05ZL exactly; tested on W empty, C=Delta^1 with W={01}, and a degenerate edge. Factorization node: matches 01BP and is true by the small-object argument with finite generators. Steps: 1-3 build L = R(D) with strict functoriality, and the summand map w to a(w) handles merged markings. Step 4: inner horns are Joyal trivial cofibrations and the weak factorization system makes r a trivial cofibration, so joyal-functor-equivalence-test (i)=>(ii) applies. Step 5 composes the two equivalences, as the definition requires. Step 6 holds because filtered colimits of sets preserve injections and W_k is a subset of (C_k)_1. Steps 7-8 are the degreewise pushout and the colimit clause, using connectedness for colim Delta^0. Duplicate search with rg (05ZL/05ZJ/05ZK/05ZP/01BP, inner anodyne, filtered-colimit factorization) found no existing statement; the closest candidates (relative-marked-anodyne-replacement, coherent-inner-anodyne-equivalences, universal-localization-pushout, joyal-model-structure) are different. Proof route stays in unit sk-prop-sf-biduality-general, with no cycle, no SGA and no tool_uses. No fixes."
  }
 }

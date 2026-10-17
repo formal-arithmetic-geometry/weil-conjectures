@@ -11,9 +11,186 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-simplicial-localization-comparison-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The model structure is the one specified in the localization-calculus statement. The interval-lifting node supplies local presentability and the small generating sets $I,J$, and interval-cell stability supplies their acyclicity, so it is combinatorial. An $I$-injective functor is surjective on objects by lifting against $\\varnothing\\to\\{0\\}$; lifting against $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ says exactly that every mapping-set map is a trivial Kan fibration. Conversely those properties solve all these lifting problems. These are precisely the trivial fibrations of the generated model, and cofibrations are their left lifting class. To see that this is the stated model's trivial-fibration class directly, a local Kan fibration which is a Dwyer--Kan equivalence is locally trivial. Essential surjectivity followed by its isomorphism-lifting property lifts each target object, giving actual surjectivity. Conversely a surjective locally trivial functor lifts an equivalence vertex between any prescribed source and a chosen object over its target by local vertex surjectivity; local full faithfulness on components makes the lift invertible. Thus it is a model fibration and a Dwyer--Kan equivalence.",
+   "uses": [
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2.4, A.3.2.24--25; explicit lifting against the generators."
+   }
+  },
+  {
+   "text": "For a small ordinary $J$, evaluation at $j$ has left adjoint $(F_jA)(k)=\\coprod_{J(j,k)}A$. For the two generating sets $I,J_1$ just established, use $\\{F_j i\\}$ and $\\{F_j t\\}$. Adjunction identifies their right lifting classes with objectwise trivial fibrations and fibrations. Domains are small: choose a presentability rank for each ground domain and a common regular upper bound; evaluation preserves the pointwise ordinal colimits, so $\\operatorname{Hom}(F_jA,-)=\\operatorname{Hom}(A,\\operatorname{ev}_j-)$ preserves those chains: the chosen ordinal is filtered for each of the smaller presentability ranks. The small-object factorizations therefore exist. A relative $F_jJ_1$-cell map is objectwise a trivial cofibration: at each object it is built from coproducts, pushouts and transfinite composites of ground trivial cofibrations, all in their left lifting class (a coproduct lifting problem is solved on each summand). These factorizations and the retract argument give the projective model structure with objectwise weak equivalences. Evaluation preserves its cofibrations, since the same assertion holds on the $F_ji$ generators. Colimit is left Quillen, since its right adjoint is the constant diagram functor, which preserves the objectwise fibrations and trivial fibrations.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.8.2 projective proof, expanded for an ordinary index; no simplicial-model hypothesis used."
+   }
+  },
+  {
+   "text": "Strict Cartesian product preserves Dwyer--Kan equivalences: on mapping sets it is the product of weak homotopy equivalences, and on component categories it is the product of equivalences. The former follows from the Cartesian Kan model structure and Brown's factorization argument, since every simplicial set is cofibrant. Products of fibrant simplicial categories are fibrant and their product cones compute derived products (the product functor is right Quillen from the product model category). Comparing with fibrant replacements now shows that every strict product represents the derived Cartesian product. Hence the derived product in the statement can be computed using the displayed strict products.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.5--8; specialization to Cartesian Kan simplicial sets."
+   }
+  },
+  {
+   "text": "For a poset diagram $p$ and a fixed simplicial category $D$, the formulas defining the simplicial Grothendieck construction give $E(p\\times D)=E(p)\\times D$: objects are $(a,x,d)$ and the nonempty mapping sets on both sides are $p(b)(p_{ab}x,y)\\times D(d,e)$. Composition agrees componentwise. Its transport arrows are exactly $(w,1_d)$ for $w\\in W(p)$. The Grothendieck homotopy-colimit formula, followed by localization/product compatibility, gives\n$$\\operatorname{hocolim}(p\\times D)\\cong L_{W(p)_D}(E(p)\\times D)\\cong L_{W(p)}E(p)\\times D\\cong(\\operatorname{hocolim}p)\\times D.$$\nThe cocone clause of that formula identifies this with the comparison of the given cocones. Step 3 identifies all these products with derived products. This proves precisely the multiplication assertion, including the empty diagram.",
+   "uses": [
+    "lem-coef-simplicial-grothendieck-hocolimit",
+    "lem-coef-simplicial-inversion-product-parameter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.5.11--15 and Example A.3.6.8; the product comparison is expanded on objects, mapping sets and transport arrows."
+   }
+  },
+  {
+   "text": "Replace $X,Y,Z$ by functorial fibrant replacements. Step 3 shows that the map $P(a,b)\\to RZ(a)\\times RY(b)$ is still a weak equivalence. Factor $P(a,b)\\to RX\\times RZ(a)\\times RY(b)$ functorially as a trivial cofibration followed by a fibration; call its middle object $P'(a,b)$. Its projection to $RZ(a)\\times RY(b)$ is a fibration because $RX$ is fibrant, and a weak equivalence by two-out-of-three. All factorizations commute with the $B$-diagram maps. We can therefore assume $X,Y(a),Z(a)$ fibrant and $p_{ab}:P(a,b)\\to Z(a)\\times Y(b)$ a trivial fibration. These replacements are objectwise weak equivalences of the original spans, so the diagonal bijections persist in $h\\mathrm{sCat}$; derived (co)limit cones persist by the projective and injective derived-functor definitions.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.1--3; simultaneous standardization written as a functorial factorization."
+   }
+  },
+  {
+   "text": "Fix a cofibrant $C$ and a cosimplicial resolution $U^\\bullet\\to C$. In the Reedy model on $(\\mathrm{sCat}^{K}_{\\mathrm{proj}})^\\Delta$, take a Reedy cofibrant replacement $W^\\bullet\\to U^\\bullet\\times Y$. Each level is projectively cofibrant and objectwise equivalent to $C\\times Y$; step 3 makes the target homotopically constant. Thus $W^\\bullet(a)$ is a resolution of $C\\times Y(a)$, and it has compatible projections to $U^\\bullet$ and to $Y(a)$. For $D_a=\\{b:b\\leq a\\}$, restriction preserves projective cofibrations: a free generator at $i\\notin D_a$ restricts to the initial map, while one at $i\\in D_a$ is the same free generator. The same holds for $K_0$. Hence $W^\\bullet|D_a$ is a Reedy cofibrant resolution in the projective diagram model. For any such resolution $V^\\bullet$, the coend $V\\otimes L=\\int^{[n]}V^n\\cdot L_n$ has right adjoint $T\\mapsto\\operatorname{Hom}(V^\\bullet,T)$. Its boundary maps are latching cofibrations and its simplex collapses are weak equivalences. The boundary-collapse test makes this a Quillen adjunction, in the ground or projective diagram model as appropriate.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.15, corrected resolution construction; ordinary-model frames replace the simplicial-presentation reduction; Hovey 5.2 and 5.4."
+   }
+  },
+  {
+   "text": "For every simplicial set $L$, the compatible projections give\n$$W^\\bullet(a)\\otimes L\\longrightarrow (U^\\bullet\\otimes L)\\times Y(a).$$\nThis is a weak equivalence. For $L=\\Delta^n$ it is the chosen resolution comparison. Both coend functors in $L$ are left Quillen by step 6. A left Quillen functor preserves these derived colimits: its pointwise functor on projective diagrams is left Quillen by the free generators of step 2, commutes with strict colimits by adjunction, and therefore carries a projectively cofibrant replacement to a computation of the derived colimit. The right-hand expression preserves coproduct homotopy colimits, homotopy pushouts and sequential homotopy colimits by step 4. Consequently the class of $L$ for which the comparison is an equivalence is closed under these operations, using the natural maps of the displayed comparison. Every boundary and every simplex skeleton is obtained from coproducts of simplices by the boundary-cell pushout squares; their attaching maps are cofibrations under the left Quillen coends. Induction on dimension, then the sequential colimit of skeleta, proves the claim for all $L$, including $\\varnothing$. Step 3 identifies its target with a homotopy product.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of A.3.6.10 and the cell induction of A.3.6.9, using step 4 for the required homotopy colimits."
+   }
+  },
+  {
+   "text": "Write $G(a)=\\operatorname{Hom}(U^\\bullet,Z(a))$ and $F(a)=\\operatorname{Hom}(W^\\bullet(a),X)$. Define $H(a)$ as the simplicial set whose $n$-simplices are pairs $(u,v)$ with $u:U^n\\to Z(a)$ and a natural transformation $v:W^n|D_a\\to P(a,-)$, satisfying\n$$p_{ab}v_b=(u\\circ\\operatorname{pr}_U,\\operatorname{pr}_Y):W^n(b)\\to Z(a)\\times Y(b)\\quad(b\\leq a).$$\nPrecomposition gives its simplex operators. Equivalently this is the pullback of $\\operatorname{Hom}_{\\mathrm{sCat}^{D_a}}(W^\\bullet|D_a,P(a,-))$ over the analogous Hom into $Z(a)\\times Y(-)$ along $G(a)$. The map of these two target diagrams is a projective trivial fibration. Step 6's frame adjunction therefore makes the projection $H(a)\\to G(a)$ a trivial Kan fibration. Evaluation of $v_a$ followed by $P(a,a)\\to X$ defines $H(a)\\to F(a)$. All the expressions now have the correct variance: no map from $Y(a)$ to $Y(b)$ is required.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.15 displayed pullback, repaired by mapping whole lower-subposet diagrams rather than the ill-typed single value W(a)."
+   }
+  },
+  {
+   "text": "For $a'\\leq a$, send a lift in $H(a)$ to its restriction to $D_{a'}$, postcomposed with $P(a,b)\\to P(a',b)$; send $u$ through $Z(a)\\to Z(a')$. These maps compose strictly, so $H$ is a diagram on $K^{\\mathrm{op}}$ and $H\\to G$ is natural. To check $H\\to F$, evaluate the restriction at $a'$. Naturality of $v$ along $a'\\to a$ says that $W^n(a')\\to P(a,a')\\to P(a,a)\\to X$ equals $W^n(a')\\to W^n(a)\\to P(a,a)\\to X$. Naturality of $P\\to X$ in the first coordinate identifies the former with $W^n(a')\\to P(a',a')\\to X$. This is precisely the required naturality equation, in every simplicial degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Explicit compatibility check for the corrected lower-subposet construction."
+   }
+  },
+  {
+   "text": "Let $E_a$ be the pullback defining $H(a)$ with only $b=a$ retained. Evaluation gives $H(a)\\to E_a$ over $G(a)$; both projections to $G(a)$ are trivial Kan fibrations, so this map is a weak equivalence. For every simplicial set $L$, step 6's derived frame adjunction identifies $[L,G(a)]$ with $[U^\\bullet\\otimes L,Z(a)]$ and $[L,F(a)]$ with $[W^\\bullet(a)\\otimes L,X]$. Step 7 identifies the source in the latter with $(U^\\bullet\\otimes L)\\times^hY(a)$. Under $[L,E_a]\\cong[L,G(a)]$, evaluation $E_a\\to F(a)$ is exactly the diagonal weak-exponential map: lifts through the trivial fibration $p_{aa}$ implement its inverse product identification, with homotopic lifts giving the same class. The assumed bijection for the test object $U^\\bullet\\otimes L$ makes $[L,E_a]\\to[L,F(a)]$ bijective for every $L$. For $L=F(a)$ this gives a right inverse in the homotopy category; injectivity for $L=E_a$ makes it a left inverse. Both spaces are Kan, so a simplicial homotopy inverse induces inverse homotopy groups, proving a weak equivalence. We have constructed the natural objectwise equivalence zigzag $G\\leftarrow H\\to F$; the evaluation maps are asserted to be weak equivalences, not fibrations.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.10--11, tensor test and two-out-of-three; corrected evaluation direction in A.3.6.15."
+   }
+  },
+  {
+   "text": "By step 4 and the assumed homotopy-colimit cone for $Y$, the diagram $a\\mapsto C\\times Y(a)$ has homotopy-colimit apex $C\\times Y(\\infty)$. The compatible resolution $W^\\bullet$ presents this same cone. The framed derived diagram adjunction therefore identifies\n$$F(\\infty)\\simeq\\operatorname{holim}_{a\\in K_0^{\\mathrm{op}}}F(a),$$\nwith exactly the cocone-induced comparison. Its compatibility with maps of diagram resolutions permits the specific frames $W^\\bullet(a)$ chosen in step 6. The natural zigzag of step 10 and homotopy invariance of injective derived limits now give the same comparison for $G$.",
+   "uses": [
+    "lem-coef-scat-framed-diagram-adjunction",
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Hirschhorn Theorem 19.4.4(1) and frame invariance 19.4.3; replaces the unsupported simplicial-model adjunction."
+   }
+  },
+  {
+   "text": "Take an injectively fibrant replacement of $Z|K_0^{\\mathrm{op}}$ and let $L_Z$ be its strict limit; the original cone induces $z:Z(\\infty)\\to L_Z$. The second framed diagram adjunction identifies $\\operatorname{Map}^h(C,L_Z)$ with $\\operatorname{holim}_a\\operatorname{Map}^h(C,Z(a))$, compatibly with this cone. For the resolution $U^\\bullet$ this is the homotopy limit of $G$ just obtained. Thus $\\operatorname{Map}^h(C,z)$ is an equivalence for every cofibrant $C$. Taking components gives a bijection $[C,Z(\\infty)]\\to[C,L_Z]$ for every $C$ in the model homotopy category, since every object has a cofibrant replacement. Ordinary Yoneda makes $z$ an isomorphism there, Its induced component-category functor is an equivalence, since components send each inverted DK equivalence to an equivalence. The actual-representative clause of the model-target-test statement then makes $z$ a Dwyer--Kan weak equivalence. The injective-model definition says precisely that the given cone is homotopy limiting. For $K_0=\\varnothing$, all formulas still apply: $D_\\infty$ contains $\\infty$, the right-hand homotopy limit of spaces is terminal, and $L_Z$ is terminal. This proves the empty case as well as the full model-category conclusion.",
+   "uses": [
+    "lem-coef-scat-framed-diagram-adjunction",
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-combinatorial-injective-diagram-model",
+    "lem-coef-simplicial-model-target-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Hirschhorn Theorem 19.4.4(2) and homotopy-category Yoneda; external test replaces the unrelated internal-mapping-set criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-combinatorial-injective-diagram-model",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-scat-framed-diagram-adjunction",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-grothendieck-hocolimit",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-inversion-product-parameter",
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-model-target-test",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "A.3.5.11--15 and A.3.6.9--15, with an explicit lower-subposet resolution repair of the variance and fibration errors of the printed A.3.6.15 proof; independent ordinary-model frame input from Hirschhorn 19.4.4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,7 +250,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-projective-diagram-simplicial-descent",
@@ -104,5 +281,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dk-weak-exponential-limit-criterion",
+  "worker": "Q61-second-reader",
+  "summary": "Replaced the withdrawn circular/ill-typed proof with independent ordinary-model frames. Proved ordinary projective models from generators; proved Cartesian homotopy-colimit preservation from enriched Grothendieck localization and product localization. Constructed natural lower-subposet lift diagrams, checked evaluation by all simplicial tensor tests, and concluded via external framed mapping-space adjunctions and ordinary Yoneda. Removed unused triangular right-Kan child; two genuinely smaller unsplit inputs, no Mathlib leaves, no statement change.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient-adjunction and inverse-limit comparison; independent simplicial-diagram foundation below lem-coef-unstraightening-homotopy-descent. Supporting Dwyer--Kan weak exponentials and the homotopy-limit criterion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-a276b9a9d",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-a276b9a9d (reviewer sub-agent of L); spot-checked: I read the whole item, all 12 steps, both new nodes and the full statements of all 19 dependencies. The item statement is unchanged from the base and live copies, which are still unsplit, and it holds on small cases (K0 empty gives Z(inf) terminal; K={0<inf} gives an equivalence by Yoneda). Steps: (1) Bergner trivial fibrations are I-inj, proved both ways. (2) Projective model from free generators. (3) Strict products preserve DK equivalences (Brown's lemma in the Cartesian Kan model). (4) E(p x D)=E(p) x D, then the Grothendieck node and product-parameter give the multiplication clause. (5) Functorial standardization. (6) Reedy W over U x Y; restriction to the down-closed D_a keeps generators and V(x)- is left Quillen by boundary-collapse. (7) Cell induction proves W(a)(x)L ~ (U(x)L) x Y(a). (8-9) H(a) has the right variance, H->G is a trivial fibration, and naturality on K^op checks out. (10) Weak equivalence via E_a and Yoneda over all U(x)L tests. (11-12) Framed adjunctions, then Yoneda in h sCat and the target-test representative clause. New nodes simplicial-grothendieck-hocolimit (HTT A.3.5.11-13) and scat-framed-diagram-adjunction (Hirschhorn 19.4.4) are true on empty, singleton and discrete/chain tests, strictly smaller than the item, statement-only, and not duplicates (rg over 19.4.x, A.3.5/A.3.6, Grothendieck construction, hocolim/holim and Hirschhorn). The dependency closure has 230 nodes and does not reach the item, so there is no cycle. All dependencies are in unit sk-prop-sf-biduality-general, so no tool_uses are needed or accepted. No SGA is cited. I could not read HTT or Hirschhorn at the cited places: neither is in literature/ (both WANTED) and the reviewer has no network. I checked the mathematics independently instead, and the report's Source error claims about the printed A.3.6.15 proof are unverified against the page. Minor, not blocking: the new nodes record leanfinder, loogle and grep but no LeanSearch, and the grep directory is not recorded. I confirmed absence from Mathlib by my own rg. The report's Files-written header is stale. No fixes."
  }
 }

@@ -12,9 +12,135 @@
   "lem-coef-simplicial-interval-cell-stability",
   "lem-coef-simplicial-derived-pushout-mapping"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=[1]$. It is cofibrant: first attach its two objects using $\\varnothing\\to\\{0\\}$, then its single arrow using $U(\\partial\\Delta^0)\\to U(\\Delta^0)$. In the Bergner model structure factor $i$ as a cofibration $j:A\\to E$ followed by a trivial fibration $q:E\\to\\mathbb J$. Thus $E$ is cofibrant and $q$ is a cofibrant replacement of $\\mathbb J$ compatible with $i$. The equivalence $\\pi_0E\\to\\pi_0\\mathbb J$ reflects isomorphisms, so $j(a)$ is invertible in $\\pi_0E$. This uses invertibility of a class, not a strictly chosen inverse in $E$.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1; elementary generator and model-factorization argument."
+   }
+  },
+  {
+   "text": "Construct compatible frames with prescribed degree zero. Give the arrow category of $\\mathrm{sCat}$ the direct Reedy structure on $0\\to1$. Its cofibrant objects are precisely cofibrations with cofibrant source, so $j$ is cofibrant. In its cosimplicial Reedy model category factor the initial-object map to $\\operatorname{const}(j)$ as a cofibration followed by a trivial fibration, keeping its degree-zero factorization equal to $\\varnothing\\to j\\xrightarrow{1}j$. The degree-by-degree extension clause of the Reedy theorem permits this prescription. Write the resulting arrow of frames as $A^\\bullet\\to E^\\bullet$, with $A^0=A$, $E^0=E$. Both augmentations are objectwise weak equivalences, and the relative latching conditions are $L_nA^\\bullet\\to A^n$ and $A^n\\amalg_{L_nA^\\bullet}L_nE^\\bullet\\to E^n$ being cofibrations. These are therefore frames in the sense of the derived-pushout node.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent construction by the Reedy factorization and prescribed-degree-zero clauses of lem-coef-reedy-model-structure; cf. cosimplicial resolutions in HTT A.2.9."
+   }
+  },
+  {
+   "text": "For a fibrant $RT$ put $Y=\\operatorname{Hom}(A^\\bullet,RT)$ and $X=\\operatorname{Hom}(E^\\bullet,RT)$ and let $p:X\\to Y$ be restriction. They represent the stipulated derived mapping spaces. To check the fibration assertion, let $V(K)$ be the arrow $A^\\bullet\\otimes_\\Delta K\\to E^\\bullet\\otimes_\\Delta K$, where the tensor is the coend of copies indexed by the simplices of $K$. It preserves colimits. The coend of $\\Delta^n$ is $X^n$: send the copy of $X^r$ indexed by $\\alpha:[r]\\to[n]$ via $X(\\alpha)$, with inverse the copy indexed by the identity. For the boundary each $\\alpha$ factors through a proper injective face, and the coend relations identify its surjective factor, giving $L_nX^\\bullet$. Thus $V(\\partial\\Delta^n)\\to V(\\Delta^n)$ is a cofibration in the direct arrow model: its source component is $L_nA^\\bullet\\to A^n$ and its corner component is $A^n\\amalg_{L_nA^\\bullet}L_nE^\\bullet\\to E^n$. The collapse maps $V(\\Delta^n)\\to V(\\Delta^0)$ are objectwise weak equivalences, since their composites with the augmentations are weak equivalences. The boundary-collapse theorem in this arrow model makes $V(\\Lambda_k^n)\\to V(\\Delta^n)$ a trivial cofibration. Its corner $A^n\\amalg_{A^\\bullet\\otimes_\\Delta\\Lambda_k^n}(E^\\bullet\\otimes_\\Delta\\Lambda_k^n)\\to E^n$ is consequently a trivial cofibration in $\\mathrm{sCat}$. By the coend adjunction, a horn-lifting problem for $p$ is exactly a lifting problem from this corner against $RT\\to1$, which has a solution. Thus $p$ is a Kan fibration.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent relative-frame horn calculation; uses the coend form of the boundary-collapse criterion, not a simplicial enrichment of the Bergner model category."
+   }
+  },
+  {
+   "text": "The comparison $\\pi_0Y\\cong\\operatorname{Hom}_{h\\mathrm{sCat}}(A,T)$ identifies homotopic vertices with the same induced functor $\\pi_0A\\to\\pi_0RT$ up to natural isomorphism. Naturality conjugates the distinguished arrow by endpoint isomorphisms, and conjugation preserves invertibility. Hence the subset of invertible-arrow vertices is a union of components, namely $E_T$. A vertex of $X$ is a functor $E\\to RT$; it sends the invertible class of $j(a)$ to an invertible class. Every simplex has all its vertices in a single component, so $p$ factors through $E_T$.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.3.5.3, necessity; representative independence from the natural pi_0 comparison and elementary conjugation."
+   }
+  },
+  {
+   "text": "Let $f:A\\to RT$ represent an invertible-arrow vertex of $Y$. Apply the inverse-adjunction pushout lemma with $C=RT$ and this exact $f$. The canonical inclusion $b:RT\\to RT\\amalg_A E$ is a trivial cofibration. In the square with top map $1_{RT}$ and right map the fibration $RT\\to1$, a lift gives a retraction $h:RT\\amalg_A E\\to RT$ with $hb=1$. The restriction $E\\to RT$ of $h$ extends $f$ exactly and hence is a vertex of $X$ above $f$. Thus $X\\to E_T$ is surjective on vertices. This argument allows the two endpoints of $f$ to coincide.",
+   "uses": [
+    "lem-coef-simplicial-invertible-arrow-pushout",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Remark A.3.2.15 and Lemma A.3.5.3: trivial-cofibration retraction argument, with the invertibility hypothesis explicit."
+   }
+  },
+  {
+   "text": "Form $P=E\\amalg_A E$. Both legs of this span are the cofibration $j$, and all three objects are cofibrant, so $P$ is a homotopy pushout under the conventions of the derived-pushout node. Apply the inverse-adjunction lemma with $C=E$ and $f=j$, whose distinguished class is invertible by step 1. The first inclusion $u:E\\to P$ is a weak equivalence. The fold $v:P\\to E$ satisfies $vu=1_E$, so it too is a weak equivalence. Homotopy invariance and the natural restriction comparison give weak equivalences\n$$\\operatorname{Map}^h(E,T)\\xrightarrow{v^*}\\operatorname{Map}^h(P,T)\\simeq X\\times_Y^h X.$$\nThe composites with both projections are the identity, since the fold restricts to the identity on both copies. By compatibility of the comparison with maps of spans, their composite is the homotopy diagonal of $p$.",
+   "uses": [
+    "lem-coef-simplicial-invertible-arrow-pushout",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent strengthening of the double-inversion cylinder argument in HTT Proposition A.3.5.5 to full function complexes."
+   }
+  },
+  {
+   "text": "Since $p$ is a Kan fibration, the path comparison $k:X\\times_Y X\\to X\\times_Y^h X$ is a weak equivalence. Its composite with the ordinary diagonal $d:X\\to X\\times_Y X$ is the homotopy diagonal of step 6, so $d$ is a weak equivalence by two-out-of-three. The first projection $\\operatorname{pr}_1:X\\times_Y X\\to X$ is a Kan fibration, being a pullback of $p$, and $\\operatorname{pr}_1d=1_X$. It is therefore a weak equivalence and a trivial Kan fibration. For any vertex $x$ of $X$, pulling this trivial fibration back to $x$ gives $p^{-1}(p(x))\\to\\Delta^0$ as a trivial Kan fibration. In particular every nonempty vertex fiber of $p$ is weakly contractible. These pullback assertions follow directly from the right lifting characterizations of fibrations and trivial fibrations: a square over a pullback composes to a square for the original map and its lift pairs with the fixed base map.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent diagonal-to-fiber argument; path comparison for a Kan fibration and the Kan model lifting characterizations."
+   }
+  },
+  {
+   "text": "The union $E_T$ of components of the Kan complex $Y$ is Kan: a horn with all vertices in those components has every filler in the same components. The factor $p_E:X\\to E_T$ is also a Kan fibration, since any lift for its composite with $E_T\\hookrightarrow Y$ remains a lift over $E_T$. By step 5, every vertex $y$ of $E_T$ equals $p(x)$ for some $x$; step 7 makes its fiber contractible. The Kan-fibration fiber criterion now makes $p_E$ a weak equivalence and a trivial Kan fibration. A vertex outside $E_T$ has empty strict fiber by step 4. Strict fibers represent homotopy fibers for this fibration by the path comparison. Thus the required homotopy fibers are contractible on $E_T$ and empty outside it. This also covers $T=\\varnothing$, where $X=Y=E_T=\\varnothing$.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent completion using the Kan-fibration fiber criterion; no identification from pi_0 alone."
+   }
+  },
+  {
+   "text": "For an enriched functor $T\\to T'$, the induced functor on path-component categories sends isomorphisms to isomorphisms. Hence restriction comparisons preserve the selected unions of components. Use the natural replacement/frame comparisons of the derived-pushout node to compare any stipulated function-complex models with $X\\to Y$. They commute with restriction up to the specified comparison homotopies, and their bijections on components preserve the invertibility condition by the induced-functor clause. Therefore they restrict to weak equivalences on $E_T$ and carry the factorization and its equivalence to the arbitrary models in the statement. Homotopy fibers are unchanged under these comparisons by homotopy-pullback invariance. The explicit relative frames of steps 2-3 give the promised compatible choices with $A^0=A$ and a Kan fibration. No saturation assumption or strict inverse choice entered any step.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent naturality and change-of-function-complex-model argument using the stipulated natural comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-invertible-arrow-pushout",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Remark A.3.2.14, Example A.3.2.18, Lemma A.3.5.3 and the double-pushout idea of Proposition A.3.5.5. Full mapping-space strengthening proved here by the homotopy diagonal; compatible frames constructed by Reedy factorization. WANTED: archival HTT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,10 +205,52 @@
    "results": "Executed search: 8 hits. AlgebraicTopology.DoldKan.homotopyPInftyToId; CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv; AlgebraicTopology.DoldKan.homotopyQToZero; AlgebraicTopology.DoldKan.homotopyPInftyToId_hom; AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId; AlgebraicTopology.DoldKan.homotopyPToId; AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId; SSet.hoFunctor.terminalIso Returned signatures concern homotopy classes or additive Dold--Kan homotopies; none gives the framed mapping comparisons or the walking-groupoid restriction theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "walking.*(isomorphism|groupoid)|Bergner|homotopy.function.complex",
+   "results": "{\"t\": \"2026-10-17T06:30:20Z\", \"tool\": \"grep\", \"query\": \"walking.*(isomorphism|groupoid)|Bergner|homotopy.function.complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Extensive.lean\"], \"digest\": \"faa530354cb19a4f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary walking-isomorphism, arrow-category and model-category declarations do not state the full Bergner derived restriction theorem; CoherentIso.lean lines 118-130 and 181-195 were read and do not give inverse-adjunction invariance or the derived fiber criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of derived mapping spaces from the walking isomorphism to the walking arrow has contractible fibers at invertible arrows",
+   "results": "{\"t\": \"2026-10-17T06:30:20Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of derived mapping spaces from the walking isomorphism to the walking arrow has contractible fibers at invertible arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.isIso_of_isIso\", \"CategoryTheory.Limits.IsImage.ofArrowIso\", \"CategoryTheory.StructuredArrow.mapIso_inverse_map_left\", \"CategoryTheory.ComposableArrows.instIsIsoOfNatNatTwoδ₂Toδ₁\", \"CategoryTheory.Arrow.isIso_right\", \"AlgebraicGeometry.morphismRestrictEq\", \"CategoryTheory.Limits.ImageFactorisation.ofArrowIso\", \"CategoryTheory.CostructuredArrow.mapIso_inverse_map_right\"], \"digest\": \"da01d22151741ee5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary walking-isomorphism, arrow-category and model-category declarations do not state the full Bergner derived restriction theorem; CoherentIso.lean lines 118-130 and 181-195 were read and do not give inverse-adjunction invariance or the derived fiber criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.coherentIso",
+   "results": "{\"t\": \"2026-10-17T06:30:20Z\", \"tool\": \"loogle\", \"query\": \"SSet.coherentIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.coherentIso\", \"SSet.coherentIso.hom\", \"SSet.coherentIso.inv\", \"SSet.coherentIso.invStructHom\", \"SSet.coherentIso.homInvId\", \"SSet.coherentIso.invHomId\", \"SSet.coherentIso.invStructHom_inv\", \"SSet.coherentIso.x₀\"], \"digest\": \"e682e30fb5e34353\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary walking-isomorphism, arrow-category and model-category declarations do not state the full Bergner derived restriction theorem; CoherentIso.lean lines 118-130 and 181-195 were read and do not give inverse-adjunction invariance or the derived fiber criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived space of functors from the walking groupoid restricts by a trivial Kan fibration to the components of invertible arrows in the derived arrow space of a simplicial category",
+   "results": "{\"t\": \"2026-10-17T06:30:55Z\", \"tool\": \"leanfinder\", \"query\": \"The derived space of functors from the walking groupoid restricts by a trivial Kan fibration to the components of invertible arrows in the derived arrow space of a simplicial category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\"], \"digest\": \"e95a02ab0d1ce364\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary walking-isomorphism, arrow-category and model-category declarations do not state the full Bergner derived restriction theorem; CoherentIso.lean lines 118-130 and 181-195 were read and do not give inverse-adjunction invariance or the derived fiber criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial category adjoining a homotopy coherent inverse to an arrow already invertible in the homotopy category is a Dwyer Kan equivalence",
+   "results": "{\"t\": \"2026-10-17T06:29:50Z\", \"tool\": \"leanfinder\", \"query\": \"In a simplicial category adjoining a homotopy coherent inverse to an arrow already invertible in the homotopy category is a Dwyer Kan equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.mkNatIso_inv_app_mk\", \"HomotopyCategory.quotient_inverts_homotopyEquivalences\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"SSet.Truncated.HomotopyCategory.mkNatIso\"], \"digest\": \"05613d75273ac52f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all eight hits concern ordinary nerve/homotopy-category adjunctions or their truncations; none states the full Bergner derived mapping-space restriction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushout along the inclusion of the walking arrow into a cofibrant walking equivalence does not change a simplicial category when the chosen arrow is already an equivalence",
+   "results": "{\"t\": \"2026-10-17T06:30:08Z\", \"tool\": \"leanfinder\", \"query\": \"Pushout along the inclusion of the walking arrow into a cofibrant walking equivalence does not change a simplicial category when the chosen arrow is already an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.AttachCells.ofArrowIso\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.instCofibrationInlOfIsCofibrant\"], \"digest\": \"02aeeacf5b3f1d6c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all eight hits concern ordinary nerve/homotopy-category adjunctions or their truncations; none states the full Bergner derived mapping-space restriction theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-inversion-universal-property",
@@ -114,5 +282,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-walking-groupoid-components",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the full mapping-space assertion via compatible Reedy frames, exact extension using simplicial invertibility, and the double-pushout homotopy diagonal; one new statement-only inverse-adjunction lemma. Avoided the coherent-nerve and cosimplicial-frame-mapping comparison nodes, which would introduce a cycle. Searched the whole DAG and blueprint, both source checkouts and Mathlib; no attachment or Mathlib match.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent realization of the adjunction calculation, through the existing ancestry ending in simplicial inversion. Steps 1-5 construct and test the walking-groupoid restriction; steps 6-8 justify the full mapping-space assertion; step 9 gives naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-reedy-model-structure",
+    "why": "Constructs the relative cosimplicial frames with degree zero prescribed; the biduality unit has no arbitrary-model diagram theorem."
+   },
+   {
+    "node": "lem-coef-simplicial-boundary-collapse-test",
+    "why": "Converts relative-frame latching cofibrations and augmentation equivalences into the horn lifting condition without assuming simplicial enrichment."
+   },
+   {
+    "node": "lem-coef-kan-quillen-right-proper",
+    "why": "Provides the Kan and trivial-fibration lifting characterizations used for relative frames and pullback stability."
+   },
+   {
+    "node": "lem-coef-kan-pullback-path-comparison",
+    "why": "Identifies the strict pullback of the framed restriction fibration with its homotopy pullback and similarly identifies its fibers."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Concludes that the surjective framed fibration with contractible vertex fibers is a weak equivalence."
+   },
+   {
+    "node": "lem-coef-kan-homotopy-pullback-invariance",
+    "why": "Makes the homotopy-fiber assertion invariant under the stipulated natural weak equivalences of function-complex models."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-01da90039",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-01da90039 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, its 9 steps, the new node and the statement of every cited node. HTT is not in literature/, so I fetched the public PDF and read pp. 861-863 and 891-893. The new node lem-coef-simplicial-invertible-arrow-pushout is exactly Remark A.3.2.14 (*') for sSet (Example A.3.2.18, Dwyer-Kan): arbitrary C, no cofibration condition on f, and pi_0 invertibility is the same as invertibility in hC. Its cofibration clause is cobase change of j. It is not a duplicate of inversion-universal-property, cofibrant-simplicial-inversion or cofibrant-homotopy-groupoid-completion, and it does not restate a clause of the item. Step checks: step 1 builds [1] from the I-generators and uses that an equivalence reflects isomorphisms. Step 2 builds the arrow-category Reedy frames with the degree-zero prescription. Step 3 obtains the horn lift from the boundary-collapse test in Arr(sCat); the collapse is a weak equivalence because the degree-zero augmentation is the identity. Step 4 shows the union of components is well defined. Step 5 is the retraction of HTT Lemma A.3.5.3. Step 6 uses the double pushout of A.3.5.5, whose span hypothesis holds. Step 7 goes from the diagonal to contractible fibers via the path comparison. Step 8 applies the fiber criterion and covers T empty. Step 9 is naturality. Edge cases tested: T empty, a noninvertible arrow, a one-object group, coincident endpoints. No cycle (DFS run), every cited id exists, uses equal proof_deps. Accepted tool use: lem-cbc-kan-fibration-fiber-criterion. The other five declared tool uses are in the item's own unit and need no record. No target is affected. No changes made."
  }
 }
