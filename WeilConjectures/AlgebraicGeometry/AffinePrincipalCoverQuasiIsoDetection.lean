@@ -191,8 +191,8 @@ private theorem quasiIso_over_of_cover (X : RingedSpace.{u})
     (U : TopologicalSpace.Opens X) {I : Type*} (V : I → TopologicalSpace.Opens X)
     (hsub : ∀ i, V i ≤ U) (hcover : ∀ x : X, x ∈ U → ∃ i, x ∈ V i)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ} (β : K ⟶ L)
-    (h : ∀ i, QuasiIso (((SheafOfModules.overFunctor.{u} (moduleRings X) (V i)).mapHomologicalComplex
-      (ComplexShape.up ℤ)).map β)) :
+    (h : ∀ i, QuasiIso (((SheafOfModules.overFunctor.{u} (moduleRings X)
+      (V i)).mapHomologicalComplex (ComplexShape.up ℤ)).map β)) :
     QuasiIso (((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapHomologicalComplex
       (ComplexShape.up ℤ)).map β) := by
   rw [quasiIso_iff]
