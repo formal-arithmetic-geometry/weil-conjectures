@@ -179,5 +179,24 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-1fb4d75c5 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-sf-field-stage-ordinary-realization, all cited statements, the master and main-20261015 blueprint text (they are the same), unit sk-prop-sf-rf-shriek-preservation, Stacks 09C2 (lemma-describe-constructible-complexes) and Bhatt–Scholze Prop. 6.8.14. STATEMENT-DISPUTED is confirmed. The blueprint applies def-weil-derived-tensor, which is over the discrete constant ring A_Y, to objects of the raw localization of D(Mod(hat O_{E,Y})) or of the pair category, so the formula is ill-typed. The repair is not a weakening. It keeps the categorical clause K in D^b_ctf(Y,F), and that is all both citers use (prop-base-linear and lem-fd-inversion use the item only for the finite-Tor domain of the projection formula). It also keeps the ordinary-tensor clause for the explicit realization J_F(K), with no new hypotheses and with both cases E and Qlb. Step 1 is pure substitution of the definition's field-stage equalities (the definition's ℓ-invertible preamble only matters at torsion stages). Step 2 gets boundedness from the new node, with the interval chosen before M. Step 3 is correct: a K-flat resolution, then lem-exc-constant-field-sheaf-tensor-cohomology, whose hypotheses (small site, any field, any module sheaf) hold on Y_proet. I checked that the new node is true: C is bounded because it is derived complete with uniform reduction bounds on the replete topos (the same argument as 09C2(1)); E_Y is flat over (O_E)_Y; the finite-free O_L/O_E comparison holds (cf. lem-weil-finite-free-completed-scalar-comparison); and J_Qlb on the pair category is well defined. I tested the zero object, the torsion object (A_{E,1})_Y, which goes to 0, the unit object, the empty scheme and the identity extension. The new node is statement-only and self-contained, sources are read and honestly marked as agent formulation, it has no SGA citation, and it does not duplicate lem-weil-pbc-condensed-e-realization, lem-sfb-etale-local-monodromy-realization, def-sfb-site-derived-constant-module-functor or the other existing realization nodes. It does not restate a parent clause and is not circular. I accept the tool_uses lem-pc-kflat-resolution and lem-exc-constant-field-sheaf-tensor-cohomology as generic black boxes. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldTorAmplitude",
+  "declaration": "WeilConjectures.field_tor_amplitude",
+  "file": "lean/Sheaf/Paper/FieldTorAmplitude.lean",
+  "statement": "theorem field_tor_amplitude (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (Y : Scheme.{u}) : (∀ (E : Padic.FiniteCoefficientFields l Ω) (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E), ∃ a b : ℤ, Scheme.HasProEtaleTorAmplitude Y (AlgebraicallyClosedCoefficients.Coefficient l Ω E) ((OrdinaryFieldRealization.System.finite (Classical.choice (OrdinaryFieldRealization.exists_ordinaryFieldRealization D l hl Ω Y)) E).obj K) a b) ∧ (∀ (K : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y), ∃ a b : ℤ, Scheme.HasProEtaleTorAmplitude Y (OrdinaryFieldRealization.Closure l Ω) ((OrdinaryFieldRealization.System.closure (Classical.choice (OrdinaryFieldRealization.exists_ordinaryFieldRealization D l hl Ω Y))).obj K) a b)",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-a0196e9df"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a0196e9df",
+  "group": "Q102",
+  "result": "fix",
+  "note": "Review written to review.md. Complete fixes add the missing proof docstring, proof imports, and report evidence. The theorem signature is unchanged; original and corrected modules compile successfully. No substantive defects found."
  }
 }
