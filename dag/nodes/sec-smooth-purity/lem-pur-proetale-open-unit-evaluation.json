@@ -19,9 +19,117 @@
   "def-weil-proetale-inverse-image",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $u(V)=V\\times_XU$ and let $v(W)$ denote $W\\to U\\to X$. The localization lemma makes $v(W)$ an ambient site object and identifies restriction of sheaves and coefficient rings. First work in the concrete bounded-object categories. For $W\\to U$, let $e_W:W\\to u(v(W))$ have projections $\\mathrm{id}_W$ and $W\\to U$. The first projection is its inverse: the other composite has the same two projections as the identity, since $j$ is a monomorphism. In the category $\\mathcal I_W$ defining the actual pullback, $t_W=(v(W),e_W)$ is initial. Indeed, for $(V,\\phi:W\\to u(V))$ put $a=\\mathrm{pr}_V\\phi:v(W)\\to V$. The equality $u(a)e_W=\\phi$ holds on both fibre-product projections. Conversely this equality forces $a=\\mathrm{pr}_V\\phi$. Thus the required arrow exists uniquely; this uses the actual indexing category, not a different inverse-image functor.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u and its preceding definition of the indexing category; Tag 00XZ, section-localize; specialized using proetale.tex Tag 09BN, lemma-open-immersion"
+   }
+  },
+  {
+   "text": "Write $P F(W)=\\operatorname{colim}_{\\mathcal I_W^{\\mathrm{op}}}F(V)$, with coprojections $\\iota_{V,\\phi}$. The maps $F(a):F(V)\\to F(v(W))$ form a cocone: for an indexing arrow $b:V\\to V'$, the corresponding maps from $v(W)$ satisfy $a'=ba$, and $F(a')=F(a)F(b)$. They therefore define $q_{F,W}:PF(W)\\to F(v(W))$. Its inverse is $\\iota_{t_W}$. One composite is the identity because the arrow $t_W\\to t_W$ is the identity. The other composite is the identity after every coprojection, since the colimit relation for the unique arrow $t_W\\to(V,\\phi)$ says $\\iota_{t_W}F(a)=\\iota_{V,\\phi}$. This proves the isomorphism by the colimit universal property, for sets, abelian groups and rings alike; all maps used are morphisms in the indicated category.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u, and remark-functoriality-presheaves-values; explicit initial-index calculation"
+   }
+  },
+  {
+   "text": "For $b:W'\\to W$, restriction sends $\\iota_{V,\\phi}$ to $\\iota_{V,\\phi b}$. Since $a_{\\phi b}=a_\\phi v(b)$, the formula in step 2 gives $q_{F,W'}PF(b)=F(v(b))q_{F,W}$. Naturality in $F$ follows from $h_{v(W)}F(a)=F'(a)h_V$ for every sheaf map $h:F\\to F'$. Thus $q$ is a natural presheaf isomorphism $PF\\cong F\\circ v$. Its target is a sheaf by the localization lemma. The sheafification universal property extends $q$ uniquely to $\\theta_F:j^{-1}F=(PF)^\\#\\to F\\circ v$. Explicitly its inverse is the composite $F\\circ v\\xrightarrow{q^{-1}}PF\\to(PF)^\\#$. The first inverse law follows from $qq^{-1}=1$; the second follows after precomposition with $PF\\to(PF)^\\#$ from $q^{-1}q=1$, and hence follows by sheafification uniqueness. The same uniqueness gives both naturality laws for $\\theta$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XZ (section-localize), 00WH (proposition-sheafification-adjoint), 00WX (lemma-adjoint-sheaves)"
+   }
+  },
+  {
+   "text": "These calculations apply to the specified small models. For $W$ in the chosen source model, choose a representative $V_0$ of $v(W)$ in the ambient model, with isomorphism $h:V_0\\to v(W)$. Replace $t_W$ by $(V_0,u(h)^{-1}e_W)$, including the chosen base-change comparison isomorphisms. Full faithfulness of the model equivalences identifies arrows from this object with arrows from $t_W$, so they remain unique. The cocone map of step 2 is now $F(V)\\xrightarrow{F(ah)}F(V_0)\\xrightarrow{F(h)^{-1}}F(v(W))$. If a second representative $h':V'_0\\to v(W)$ is chosen, the unique comparison is $h^{-1}h'$, and functoriality cancels $F(h^{-1}h')$ in this formula. Consequently the resulting maps are independent of representatives and commute with restrictions, model unit/counit isomorphisms, and coprojections. Step 3 then extends these very same maps uniquely through sheafification. Hence $\\theta$ identifies the actual small-model inverse image, with its adjunction, rather than merely some isomorphic left adjoint.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u: explicit coprojections and counit, evaluated on the compatible small skeletons of def-weil-proetale-inverse-image"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-proetale-constant-ring-map], for commutative $\\Lambda$ the coefficient sheaves of [def-weil-pbc-proetale-modules] are identified with the constant sheaves $\\Lambda_X,\\Lambda_U$ by the unique constant-section-preserving isomorphisms, under which the canonical map of the constant-exactness theorem is the structure map $c^j_\\Lambda$ of [def-weil-proetale-inverse-image]; we work with the latter. Write $B=v^*\\Lambda_X$ for literal restriction and let $d:\\Lambda_U\\xrightarrow{\\sim}B$ be the unique constant-section-preserving ring isomorphism of the localization lemma. Let $c:j^{-1}\\Lambda_X\\to\\Lambda_U$ be the specified coefficient map. We check $dc=\\theta_{\\Lambda_X}$. In the Kan adjunction the counit on a generator indexed by $(V,\\phi)$ is restriction along $\\phi$; thus under $\\theta_{j_*G,W}$ it is $G(e_W):G(u(v(W)))\\to G(W)$. The definition $c=\\varepsilon\\circ j^{-1}(\\rho^j_\\Lambda)$ consequently identifies $c_W\\theta_{\\Lambda_X,W}^{-1}$ with $G(e_W)\\rho^j_{\\Lambda,v(W)}$, where $G=\\Lambda_U$. This ring map $B\\to\\Lambda_U$ sends every constant section $a$ to $a$, by the defining property of $\\rho^j_\\Lambda$. Its composite with $d$ is the identity by uniqueness of extension from the constant presheaf through sheafification. Since $d$ is invertible, this map equals $d^{-1}$. This proves the claimed coefficient compatibility with the canonical $c$, whose invertibility is also recorded in the constant-exactness theorem.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-sheafification",
+    "prop-weil-pbc-proetale-constant-exact",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE (lemma-adjoints-u: counit on coprojections), 00WH (proposition-sheafification-adjoint), 00XZ (section-localize); sites-modules.tex Tag 03D3 (lemma-adjoint-push-pull-modules)"
+   }
+  },
+  {
+   "text": "Apply $\\theta$ to the underlying abelian sheaf of $M$. It respects the module action under $\\theta_{\\Lambda_X}$: on the colimit cocones the equality is $\\operatorname{res}(rm)=\\operatorname{res}(r)\\operatorname{res}(m)$, and after sheafification it follows by uniqueness. Equivalently, naturality of the set-sheaf comparison on the action map and on both product projections gives the same action square for the finite-product construction in the operations definition. By step 5 this becomes $\\Lambda_U$-linearity after changing scalars along $c$. Concretely the balanced maps $m\\otimes r\\mapsto r\\,\\theta_M(m)$ induce a sheaf map $\\rho_M:j^*M\\to M\\circ v$ using the sheaf tensor product. Its inverse is $n\\mapsto\\theta_M^{-1}(n)\\otimes1$. The inverse composites are identities by $dc=\\theta_{\\Lambda_X}$ and the balancing relation $m\\otimes r=c^{-1}(r)m\\otimes1$; the pure-tensor equalities extend to sheaves by their defining universal property. These maps commute with restrictions and module morphisms by the formulas, giving the required $\\rho_{M,W}$ and both naturalities.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; lemma-adjointness-tensor-restrict; scalar transport along an isomorphism as in def-weil-pbc-proetale-operations"
+   }
+  },
+  {
+   "text": "Finally compute the specified unit. The presheaf Kan adjunction sends a map $\\beta:F\\to u^pG$ to the map whose composite with $\\iota_{V,\\phi}$ is $G(\\phi)\\beta_V$. In particular the unit $F(V)\\to PF(u(V))$ is $\\iota_{V,\\mathrm{id}}$: composing it with any map out of $PF$ recovers exactly that map's adjoint, so this identifies the unit of the stated Hom bijection. Sheafification composes this with its canonical map. For modules the adjunction in the operations definition first uses this abelian adjunction and then tensor extension: the tensor transpose of a linear map $h$ is $m\\mapsto h(m\\otimes1)$. Therefore $\\eta_{j,M}(V)$ sends $m$ to the sheafified coprojection $\\iota_{V,\\mathrm{id}}(m)\\otimes1$. Put $W=u(V)$. The unique arrow $t_W\\to(V,\\mathrm{id})$ of step 1 has underlying map $a:W\\to V$ equal to the projection. Steps 2, 3 and 6 now give $\\rho_{M,W}(\\eta_{j,M}(V)(m))=M(a)(m)$, exactly the asserted restriction. Step 4 shows the same formula after small-model transport. No quasi-compactness, support condition or constructibility was used.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE (lemma-adjoints-u), 00WX (lemma-adjoint-sheaves); sites-modules.tex Tag 03D3 (lemma-adjoint-push-pull-modules) and tensor adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-inverse-image",
+  "def-weil-size-convention",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00VE, 00WH, 00WX, 00XZ; explicit open-immersion calculation of the indexing category and the canonical unit. Proetale Tag 09BN supplies the localization context, not the unit normalization by itself."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +172,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}",
    "date": "2026-10-17",
    "verdict": "no match: Zariski scheme-module restriction and generic sheaf adjunctions do not identify the specified pro-etale module inverse image and its unit on actual site objects"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarIsoOpenImmersionRestriction|localizationRestriction|sheafPushforwardContinuous_unit",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Zariski scheme-module restrictions and generic module/sheaf adjunction interfaces; none identifies this specified pro-etale constant-ring module pullback and all sectionwise unit components"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro-etale module inverse image along an open immersion is restriction with its canonical adjunction unit",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.pullbackRestrictIsoRestrict",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Zariski scheme-module restrictions and generic module/sheaf adjunction interfaces; none identifies this specified pro-etale constant-ring module pullback and all sectionwise unit components"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes, pro-etale inverse image of a module sheaf is restriction and its adjunction unit sends sections to their restrictions",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Zariski scheme-module restrictions and generic module/sheaf adjunction interfaces; none identifies this specified pro-etale constant-ring module pullback and all sectionwise unit components"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_unit_app_app|restrictFunctorIsoPullback|sheafPushforwardContinuous",
+   "results": "OK 25 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Zariski scheme-module restrictions and generic module/sheaf adjunction interfaces; none identifies this specified pro-etale constant-ring module pullback and all sectionwise unit components"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaves on a localized site is precomposition and the unit of pullback pushforward is the restriction map on sections",
+   "results": "OK 8 hits; SheafOfModules.pushforwardNatIso_inv, CategoryTheory.Functor.IsCoverDense.presheafIso_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.Functor.IsCoverDense.sheafIso_inv_val, CategoryTheory.Functor.IsCoverDense.Types.presheafIso_inv_app, CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso_inv_app_app, CategoryTheory.Functor.IsCoverDense.Types.appIso_inv, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Zariski scheme-module restrictions and generic module/sheaf adjunction interfaces; none identifies this specified pro-etale constant-ring module pullback and all sectionwise unit components"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pur-flasque-support",
@@ -84,5 +227,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-proetale-open-unit-evaluation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Evaluated the actual Kan-extension indexing categories at an explicit initial object, checked both inverse maps and naturality, extended through sheafification, and checked small-model representatives. Calculated the canonical coefficient map and tensor unit rather than invoking uniqueness of arbitrary adjoints. Reused existing localization, sheafification and adjunction nodes; no new nodes. No Lean writing or compilation.",
+  "blueprint": "def-pur-flasque-support, definition paragraph defining G_Z as the kernel of M to j_*j^*M and its explicit sectionwise restriction formula; realizes precisely the evaluation and unit calculation separated from that definition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site localization and constant-ring restriction, used to evaluate the open restriction in the supported-kernel definition; the Kummer unit supplies no such site comparison."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Only the stated canonical coefficient identification is used, to identify the actual module functors; no cohomological or purity route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "The generic Kan-extension plus sheafification Hom bijection fixes the actual unit; the Kummer unit has no construction of this elementary site-theoretic tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Only its stated identification of the pro-etale coefficient sheaves with constant sheaves and of the canonical coefficient map with the structure map c^j is used in step 5; the Kummer unit supplies no coefficient comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-b9ffc182d",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-b9ffc182d (reviewer sub-agent of L); spot-checked: I read the whole item. No new nodes. All 7 steps are correct. Step 1: t_W=(v(W),e_W) is initial in I_W (terminal in I_W^op), so e_W is an isomorphism because j is monic (localization lemma (4)). Steps 2-3: the colimit reduces to F(v(W)), natural in W, and extends through sheafification by the universal property only. Step 4: small-model representatives are handled. Step 6: the tensor balancing m⊗r=c^{-1}(r)m⊗1 is checked in both directions. Step 7: the unit is ι_{V,id} followed by ⊗1, which agrees with Stacks sites.tex lemma-adjoints-u (00VE)/lemma-recover. I also read proetale.tex l.5117 lemma-open-immersion (09BN), which is context only. Edge cases j=id, U empty, M=0, Λ=0 and non-quasi-compact U all hold. Duplicate search over pro-etale/open/unit/restriction statements and all 09BN nodes: ringed-open-comparison (no unit formula, leftAdjointUniq), module-inverse-image-underlying (underlying abelian only), exc-proetale-open-unit (different adjunction). None is a duplicate. The item is not a restatement of a clause of its parent def-pur-flasque-support. No SGA source is used. One repairable fault, C1/C4 in step 5: it silently identified Λ_{T,Proet}=(Cont(π0,Λ))^# and the canonical c of prop-constant-exact with the constant sheaf and c^j_Λ of def-weil-proetale-inverse-image and the localization lemma. I fixed it by citing the stated clause of prop-weil-pbc-proetale-constant-ring-map, adding it and def-weil-pbc-proetale-modules to step 5's uses and to proof_deps, and adding a tool_uses entry. That node is split and reviewed and creates no cycle. Statement and metadata are unchanged. Accepted tool uses: localization lemma, prop-constant-exact, 00WX adjunction, prop-constant-ring-map.; 1 file(s) fixed by the reviewer"
  }
 }

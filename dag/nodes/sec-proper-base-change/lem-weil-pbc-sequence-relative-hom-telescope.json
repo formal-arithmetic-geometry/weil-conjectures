@@ -12,9 +12,72 @@
   "def-weil-size-convention",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_n=\\operatorname{Hom}_{\\mathcal T}(K,X_n)$, $A_n^+=\\operatorname{Hom}_{\\mathcal T}(K,X_n[1])$, $D=\\bigoplus_n A_n$ and $D^+=\\bigoplus_n A_n^+$. Write $e_n,e_n^+$ for the direct-sum injections, and $\\beta,\\beta^+$ for the two assumed comparison maps. These are additive, hence are group isomorphisms by the assumed bijectivity. Define $t_n(f)=u_n\\circ f$, $t_n^+(g)=u_n[1]\\circ g$, and $\\sigma(e_nf)=e_{n+1}t_n(f)$, $\\sigma^+(e_n^+g)=e_{n+1}^+t_n^+(g)$. For $a=1-s$, the defining equation for $s$ and additivity give\n$$a_*\\beta(e_nf)=\\iota_nf-\\iota_{n+1}u_nf=\\beta(1-\\sigma)(e_nf).$$\nThe shift is additive [def-weil-triangulated-category], so $a[1]=1-s[1]$ and $s[1]\\iota_n[1]=\\iota_{n+1}[1]u_n[1]$. Thus also $a[1]_*\\beta^+=\\beta^+(1-\\sigma^+)$. The displayed identities on summands imply the identities on every finite sum.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0CRK (lemma-cohomology-of-hocolim), displayed five-term sequence, and 094A (lemma-commutes-with-countable-sums): identify its first and last arrows"
+   }
+  },
+  {
+   "text": "The map $1-\\sigma^+$ is injective by its coordinates. If $(1-\\sigma^+)g=0$ for $g=(g_n)\\in D^+$, its coordinate $0$ says $g_0=0$, and its coordinate $n+1$ says $g_{n+1}=t_n^+(g_n)$. Induction gives $g_n=0$ for all $n$, hence $g=0$. Conjugating by $\\beta^+$ in Step 1 shows that postcomposition by $a[1]$ on $\\operatorname{Hom}(K,B[1])$ is injective. This uses neither injectivity nor surjectivity of any transition $u_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 093W (lemma-compute-colimit), injectivity of identity minus forward shift; coordinate proof for abelian groups"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-hom-into-triangle-exact] to the supplied distinguished triangle $B\\xrightarrow{a}B\\xrightarrow{p}H\\xrightarrow{q}B[1]$. Clause (i) gives $pa=0$. Rotate twice by TR2 of [def-weil-triangulated-category]; the first two maps are $q$ and $-a[1]$, so clause (i) also gives $a[1]q=0$. For any $h:K\\to H$, Step 2 now implies $qh=0$. The once-rotated distinguished triangle has first two maps $p,q$; clause (ii) applied to it gives $h=pb$ for some $b:K\\to B$. Hence $p_*$ is surjective. Clause (ii) applied to the original triangle says that $pb=0$ implies $b=ac$ for some $c:K\\to B$, while $pa=0$ gives the converse. Therefore $\\ker p_*=\\operatorname{im}a_*$. With $\\gamma=p_*\\beta:D\\to\\operatorname{Hom}(K,H)$, Step 1 yields\n$$\\gamma\\text{ is surjective},\\qquad \\ker\\gamma=\\operatorname{im}(1-\\sigma).$$\nIndeed a kernel element $d$ satisfies $\\beta d=ac$; write $c=\\beta c'$ to get $d=(1-\\sigma)c'$ by injectivity of $\\beta$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0146 (lemma-composition-zero) and 0149 (lemma-representable-homological), applied to the telescope triangle and its rotations; Tag 0CRK displayed sequence"
+   }
+  },
+  {
+   "text": "Set $V=D/\\operatorname{im}(1-\\sigma)$, an abelian-group quotient, with quotient map $\\pi$. The maps $v_n=\\pi e_n:A_n\\to V$ satisfy $v_{n+1}t_n=v_n$, since $e_nf-e_{n+1}t_n(f)=(1-\\sigma)e_nf$. Induction extends this successor relation to every transition $n\\leq m$. This cocone is colimiting [def-weil-pbc-category-colimit]: for any compatible family $c_n:A_n\\to G$ of homomorphisms into an abelian group, define $c:D\\to G$ by $c(\\sum_ne_nf_n)=\\sum_nc_n(f_n)$. Compatibility says $c(1-\\sigma)e_n=0$ on every summand, so $c$ kills the image of $1-\\sigma$. It therefore factors through the quotient by $\\bar c(\\pi d)=c(d)$. This is well defined because representatives differ by an element of that image. Factorization and uniqueness follow because $\\pi$ is surjective and every $d$ is a finite sum of summand elements. Thus $V$ realizes $\\varinjlim_n A_n$ with its specified transition maps.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 093W (lemma-compute-colimit), cokernel identification; direct verification of the colimit universal property for abelian groups"
+   }
+  },
+  {
+   "text": "Since $\\ker\\gamma=\\operatorname{im}(1-\\sigma)$, the formula $\\bar\\gamma(\\pi d)=\\gamma(d)$ defines an injective homomorphism $V\\to\\operatorname{Hom}(K,H)$: if its value is zero, $d$ lies in the subgroup by which we quotient. It is surjective by Step 3. On each stage it satisfies\n$$\\bar\\gamma(v_n(f))=\\gamma(e_nf)=p\\iota_nf.$$\nStep 4 and the uniqueness of the colimit map [def-weil-pbc-category-colimit] identify this bijection with exactly the canonical map in the statement. Both comparison hypotheses were used only for the families $X_n$ and $X_n[1]$, in Steps 1 and 2; no other coproduct or compactness assumption enters.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 093W (lemma-compute-colimit), 0CRK (lemma-cohomology-of-hocolim) and 094A (lemma-commutes-with-countable-sums), conclusion and canonical representative formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0CRK (lemma-cohomology-of-hocolim), 094A (lemma-commutes-with-countable-sums) and 093W (lemma-compute-colimit). Sequence-relative adaptation: the two supplied comparison isomorphisms replace global coproduct preservation, and the elementary group calculations are written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +120,52 @@
    "results": "8 hits: AddCommGroup.DirectLimit.of_f, Module.DirectLimit.of_f, FirstOrder.Language.DirectLimit.of_f, AddCommGroup.DirectLimit.map_apply_of, DirectLimit.map₀_def, DirectLimit.map, Module.DirectLimit.map_apply_of, Ring.DirectLimit.of_f",
    "date": "2026-10-17",
    "verdict": "no match: hits concern component cone, direct-limit or general colimit facts; none states the relative two-coproduct telescope comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|homotopy_colimit|telescope",
+   "results": "25 hits: Mathlib/Tactic/Algebraize.lean, Mathlib/Tactic/DefEqTransformations.lean, Mathlib/Tactic/Simproc/ExistsAndEq.lean, Mathlib/Tactic/Simproc/ExistsAndEq.lean, Mathlib/Tactic/MkIffOfInductiveProp.lean, Mathlib/Tactic/MkIffOfInductiveProp.lean, Mathlib/Tactic/MkIffOfInductiveProp.lean, Mathlib/Tactic/Explode.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: general Hom-sequence, colimit, coproduct, mapping-cone or tactic declarations only; none states the two-family relative telescope comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom commutes with a sequential mapping telescope under two coproduct comparison isomorphisms",
+   "results": "8 hits: CategoryTheory.Limits.coprodComparisonNatIso_hom, CategoryTheory.Limits.coprod.mapIso_hom, CategoryTheory.ComposableArrows.homMk.congr_simp, CategoryTheory.Limits.FormalCoproduct.isoOfComponents_hom_φ, CategoryTheory.ComposableArrows.isoMk_hom, CategoryTheory.CatCommSq.iso_hom_naturality, CategoryTheory.ComposableArrows.homMk, CochainComplex.mappingCone.mapHomologicalComplexXIso'",
+   "date": "2026-10-17",
+   "verdict": "no match: general Hom-sequence, colimit, coproduct, mapping-cone or tactic declarations only; none states the two-family relative telescope comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hom\", \"hocolim\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: general Hom-sequence, colimit, coproduct, mapping-cone or tactic declarations only; none states the two-family relative telescope comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a triangulated category Hom from K into a sequential telescope is the direct limit when Hom K preserves the sums of the sequence and its shift",
+   "results": "8 hits: CategoryTheory.Functor.homologySequence_comp, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Functor.homologySequenceδ_comp, CategoryTheory.Pretriangulated.preadditiveYoneda_homologySequenceδ_apply, CategoryTheory.Triangulated.TStructure.triangle_map_exists, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_mor₁, CategoryTheory.Functor.homologySequenceComposableArrows₅",
+   "date": "2026-10-17",
+   "verdict": "no match: general Hom-sequence, colimit, coproduct, mapping-cone or tactic declarations only; none states the two-family relative telescope comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|homotopy_colimit|telescope|compact.*colimit",
+   "results": "0 hits: ; directory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: general Hom-sequence, colimit, coproduct, mapping-cone or tactic declarations only; none states the two-family relative telescope comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping from a relatively compact object into a sequential homotopy colimit is a filtered colimit of morphism groups",
+   "results": "8 hits: HomologicalComplex.isColimitOfEval, localCohomology.hasColimitDiagram, CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂, CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered, CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone, CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered', CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone, CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: general Hom-sequence, colimit, coproduct, mapping-cone or tactic declarations only; none states the two-family relative telescope comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
@@ -81,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-sequence-relative-hom-telescope",
+  "worker": "stage1",
+  "summary": "Kept the statement and all hypotheses unchanged. Expanded the sequence-relative Stacks telescope argument in five steps, using the existing Hom-into-triangle Mathlib leaf for exactness, an explicit shifted coordinate recurrence, and a direct quotient/cocone universal-property computation. Preserved historical searches and added six executed searches. No new nodes, no Lean attachment and no compiler use.",
+  "blueprint": "The historical integral-lattice sentence of thm-weil-pbc-finite-extension (retained blueprint ancestry) needs the Hom/telescope comparison used in the extension-class denominator calculation of lem-weil-pbc-lisse-e-constructible-integral-lattice, steps 3–6. Steps 1–3 realize the five-term Hom argument of Stacks 0CRK/094A; Steps 4–5 realize the 093W colimit identification and canonical formula. Current main-20261015 ancestor has no proof text; the historical master proof and existing from.place were retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-0ea8b12ca",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-0ea8b12ca (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks derived.tex 093W (lemma-compute-colimit, l.10326), 0CRK (lemma-cohomology-of-hocolim, l.10378) and 094A (lemma-commutes-with-countable-sums, l.10406). Statement: no sign it was weakened, and it is self-contained. It keeps only the two coproduct comparisons the 0CRK five-term argument uses (for X_n and for X_n[1] via iota_n[1]), so it is a correct sequence-relative form of 094A and at least as strong. Small cases agree: K=0, all X_n=0, zero transitions, identity transitions, a non-injective u_0. Step 1: (1-s)_*beta = beta(1-sigma) on summands, and the same for the shifted family since shift is an additive functor. Step 2: injectivity of 1-sigma^+ by the coordinate recurrence g_0=0, g_{n+1}=u_n[1]g_n, with no condition on u_n. Step 3: I recomputed the TR2 rotations. Clause (i) of lem-weil-pbc-hom-into-triangle-exact (Mathlib leaf) on the second rotation gives a[1]q=0, so qh=0. Clause (ii) on the first rotation gives surjectivity of p_*, and on the original triangle gives ker p_* = im a_*. Steps 4-5: the 093W quotient is shown to be a colimit through its universal property, and the descended map is identified with [f] -> p iota_n f. Elementary flags are justified, proof_deps equals the union of uses, and there are no new nodes. Not duplicates: lem-pc-compact-hom-hocolim is a special case (compact K); lem-kun-functor-preserves-hocolim and lem-kun-complex-colimit-hocolim state different results. The unit route is respected, no tool uses, no SGA. The parent's step 6 (lisse-e-constructible-integral-lattice) uses the item consistently with its statement. No fixes."
  }
 }

@@ -11,9 +11,90 @@
   "def-pur-integral-derived-operations",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work with arbitrary complexes $U,V$ of sheaves of modules over a commutative ring sheaf. Set $S_r(U,V):\\operatorname{Tot}(U\\otimes V[r])\\to\\operatorname{Tot}(U\\otimes V)[r]$ to multiply the summand $U^i\\otimes V^{j+r}$, where $i+j=k$, by $(-1)^{ri}$. By [def-pc-tensor-complex-sheaves], the source differential has components $d_U\\otimes1$ and $(-1)^{i+r}1\\otimes d_V$, while the target differential is $(-1)^r(d_U\\otimes1+(-1)^i1\\otimes d_V)$. For the first component, $S_rd$ has coefficient $(-1)^{r(i+1)}=(-1)^{ri+r}$, equal to that of $dS_r$. For the second, both coefficients are $(-1)^{ri+i+r}$. These equations on each direct-sum inclusion prove the chain-map identity. The same sign gives its inverse. Every degree-zero map preserves $i$, so these maps are natural in $U,V$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011G (homology-definition-shift-cochain) and 012Z (homology-definition-associated-simple-complex); explicit signed calculation"
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions $P\\to M$ and $Q\\to N$ by [lem-pc-kflat-resolution] on the ringed site $(W_{\\mathrm{proet}},B)$ of [def-pur-integral-derived-operations]. The complex $Q[r]$ still has flat terms, and is K-flat: for any acyclic $F$, step 1 identifies $\\operatorname{Tot}(F\\otimes Q[r])$ with $\\operatorname{Tot}(F\\otimes Q)[r]$, which is acyclic by [def-pc-kflat-complex] since shifting only reindexes kernels and images and multiplies differentials by a unit. The shifted augmentation $Q[r]\\to N[r]$ is a quasi-isomorphism by the same cohomology calculation. Hence $P,Q[r]$ are permissible models for the completed tensor on the left.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-integral-derived-operations",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011G (homology-definition-shift-cochain) and 012Z (homology-definition-associated-simple-complex); explicit signed calculation"
+   }
+  },
+  {
+   "text": "Reduction is termwise tensor with $(A_n)_W$, so $(Q[r])_n=Q_n[r]$ with its signed differential. Write $C_n=\\operatorname{Res}_n\\operatorname{Tot}(P_n\\otimes Q_n)$ and $D_n=\\operatorname{Res}_n\\operatorname{Tot}(P_n\\otimes Q_n[r])$ as in [def-pur-integral-derived-operations]. Step 1 gives $\\alpha_n:D_n\\xrightarrow{\\sim}C_n[r]$. The transition map is induced by the quotient maps on $P_n,Q_n$; each is degree zero, so it preserves $i$ and commutes with $(-1)^{ri}$. Thus $\\alpha_n t^D_n=t^C_n[r]\\alpha_{n+1}$. This is an actual isomorphism of towers of $B$-module complexes, before passing to the derived category.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011G (homology-definition-shift-cochain) and 012Z (homology-definition-associated-simple-complex); explicit signed calculation"
+   }
+  },
+  {
+   "text": "For any tower $C_\\bullet$, put $X=\\prod_n C_n$ and $f=1-s:X\\to X$. The degreewise identification $\\prod_n(C_n[r])\\cong X[r]$ commutes with differentials, since both use $(-1)^rd$, and identifies $1-s$ with $f[r]$. Use the cone convention stated in [def-weil-abstract-derived-category], $d_{\\operatorname{Cone}(f)}(b,a)=(db+f(a),-da)$. The map $h_r:\\operatorname{Cone}(f[r])\\to\\operatorname{Cone}(f)[r]$, $(b,a)\\mapsto(b,(-1)^ra)$, is a chain isomorphism: both $h_rd$ and $dh_r$ give $((-1)^r db+f(a),-da)$, with inverse the same diagonal sign. These equations are natural in commuting squares of chain maps. Shifting $h_r$ by $[-1]$ and identifying $[r][-1]=[-1][r]$ gives $\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet[r])\\cong\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet)[r]$ for the functorial mapping-fiber construction in [def-pur-integral-derived-operations].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (derived-definition-cone) and 08TC (derived-definition-derived-limit); explicit product and cone calculation"
+   }
+  },
+  {
+   "text": "Apply the product and cone functors to the commuting tower isomorphism $\\alpha$ of step 3, obtaining $\\operatorname{Rlim}^{\\mathrm c}(D_\\bullet)\\xrightarrow{\\sim}\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet[r])$. Compose with step 4. By [def-pur-integral-derived-operations], the source computes $M\\widehat\\otimes_R^L(N[r])$ and the final target computes $(M\\widehat\\otimes_R^L N)[r]$. This composite is the asserted $\\sigma^r$ on the chosen resolutions, with exactly the finite-level formula, reduction-transition compatibility, product identification, and cone comparison in the statement. All component maps are chain isomorphisms, so the composite is an isomorphism.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (derived-definition-cone) and 08TC (derived-definition-derived-limit); explicit product and cone calculation"
+   }
+  },
+  {
+   "text": "The chain formulas in steps 1–5 commute with every map of flat-term K-flat representatives. By [lem-pur-integral-operations-well-defined](1), their completed tensor constructions send quasi-isomorphisms between such representatives to quasi-isomorphisms; by (2) they descend to functors on $D(B)^2$ with natural comparison isomorphisms on K-flat representatives. A commuting naturality square with a quasi-isomorphism remains commuting after inverting that map. Hence the same squares commute for all composites and inverses that define the localized functors of (2). They therefore give a natural isomorphism on $D(B)^2$. The unique comparison isomorphisms of functors in (2) commute with this isomorphism, since their components are induced by these same localized comparisons. This proves independence of the resolution choices in the comparison-compatible sense of that node, as well as naturality in arbitrary derived morphisms of $M,N$.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (sites-cohomology-lemma-K-flat-resolution) and 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side); descent applied using lem-pur-integral-operations-well-defined(1),(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "def-pur-integral-derived-operations",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.proof.md",
+  "place": "Last sentence, together with the shift of the second variable; explicit chain calculations for the prescribed completed tensor model, using Stacks Tags 011G, 012Z, 014E, 08TC and the existing well-definedness node"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +144,45 @@
    "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Tor'_obj_obj, CategoryTheory.Sheaf.tensorProd_isSheaf, LightCondensed.instMonoidalCategoryLightCondMod, CategoryTheory.Tor_obj",
    "date": "2026-10-17",
    "verdict": "no match: abstract shift structures, underived sheaf tensors and additive exact-functor shifts do not give the specified completed integral tensor and its reduction-tower comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "totalShift₂Iso|tensor.*shift|shift.*tensor",
+   "results": "9 hits: Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean; directory Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: total-bifunctor and cone shift formulas cover elementary components only; none constructs the completed integral reduction-tower tensor or its resolution-independent comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cochain tensor product with the right complex shifted by an integer r is naturally isomorphic to the shifted total tensor, with Koszul sign (-1) to the r times left degree",
+   "results": "8 hits: CochainComplex.HomComplex.Cochain.shift, HomologicalComplex.rightUnitor', CochainComplex.shiftFunctor, CochainComplex.mappingCone.shiftIso, CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv, CochainComplex.HomComplex.Cochain.leftUnshift_v, CochainComplex.shiftShortComplexFunctorIso, CochainComplex.shiftFunctorAdd'",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: total-bifunctor and cone shift formulas cover elementary components only; none constructs the completed integral reduction-tower tensor or its resolution-independent comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalShift₂Iso\"",
+   "results": "10 hits: HomologicalComplex₂.totalShift₂Iso, HomologicalComplex₂.totalShift₂Iso_hom_naturality, HomologicalComplex₂.totalShift₂Iso_hom_naturality_assoc, HomologicalComplex₂.ι_totalShift₂Iso_inv_f, HomologicalComplex₂.ι_totalShift₂Iso_inv_f_assoc, HomologicalComplex₂.ι_totalShift₂Iso_hom_f, HomologicalComplex₂.ι_totalShift₂Iso_hom_f_assoc, HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: total-bifunctor and cone shift formulas cover elementary components only; none constructs the completed integral reduction-tower tensor or its resolution-independent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed tensor product of integral l-adic complexes, defined as the homotopy inverse limit of finite-reduction derived tensor products, commutes naturally with integer shifts of the right argument",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, HomologicalComplex.HasTensor, HomologicalComplex.ιTensorObj, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: total-bifunctor and cone shift formulas cover elementary components only; none constructs the completed integral reduction-tower tensor or its resolution-independent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaf cochain complexes over a completed integral coefficient ring, the reduction-tower mapping fiber of their derived tensor products commutes with shifting the second factor, naturally and independently of K-flat resolutions",
+   "results": "8 hits: CochainComplex.ι_mapBifunctorShift₂Iso_hom_f, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, CochainComplex.mapBifunctorHomologicalComplexShift₂Iso_hom_f_f, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app, CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: total-bifunctor and cone shift formulas cover elementary components only; none constructs the completed integral reduction-tower tensor or its resolution-independent comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-twist-interchange",
@@ -83,5 +199,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-completed-tensor-shift-right",
+  "worker": "stage1",
+  "summary": "Expanded the completed integral tensor shift into explicit tensor differential, shifted K-flat resolution, transition-map, product/cone, composition and localization arguments. No statement change and no new nodes. Used the actual statements of the integral well-definedness and K-flat resolution nodes to justify model choices and descent, rather than treating the mapping cone as an arbitrary triangulated cone.",
+  "blueprint": "Last sentence of lem-sf-twist-interchange.proof.md: together with the shift of the second variable, for the integral completed coefficient operation. Steps 1–5 provide its signed model and step 6 provides resolution independence.",
+  "tool_uses": [
+   {
+    "node": "def-pur-integral-derived-operations",
+    "why": "Specified completed integral tensor and functorial reduction-tower model; the twist-interchange unit does not redefine this operation."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions on the ringed site; a general homological tool, absent from this unit."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "K-flatness criterion needed to verify Q[r] is an allowed model; not a replacement for the unit route."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Total tensor differential and direct-sum convention for the explicit sign computation."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Quasi-isomorphism invariance and comparison-compatible descent of the prescribed tensor construction; used only to descend the chain-level isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-integral-derived-operations",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-34684d277",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-34684d277 (reviewer sub-agent of L); spot-checked: I read the delivery in full, recomputed every sign identity by hand and made no changes. The delivery splits the existing item into six steps and creates no new node. The statement uses the coefficient category D(W_proet,O_E)=D(B) and the completed tensor Rlim^c Res_n Tot(P_n⊗Q_n) exactly as def-pur-integral-derived-operations defines them, and does not identify it with the Bhatt–Scholze derived-completion tensor. The shift and cone conventions match def-weil-abstract-derived-category. Step 1: the Koszul sign (-1)^{ri} makes a chain map; both components (-1)^{ri+r} and (-1)^{ri+i+r} agree under the Tot convention of def-pc-tensor-complex-sheaves. Step 2: Q[r] is K-flat with flat terms by step 1 and the definition in def-pc-kflat-complex, and resolutions exist by lem-pc-kflat-resolution. Step 3: the transition maps have degree 0, so the towers are isomorphic on the nose. Step 4: h_r(b,a)=(b,(-1)^r a) is a chain isomorphism; both sides equal ((-1)^r db+fa,-da), and [r][-1]=[-1][r] holds exactly. Step 5: composing steps 3 and 4 gives the map. Step 6: naturality on D(B)^2 and resolution independence follow from lem-pur-integral-operations-well-defined clauses (1) and (2), used for what they state. Test cases r=0, r=1 and a one-term complex all check out. Sources: Bhatt–Scholze Definition 3.4.10 and Lemma 3.4.12(4) on pp. 22–23, Stacks tags 011G, 012Z, 014E, 08TC, 06YS and 06YT, and the last sentence of the blueprint main-20261015 lem-sf-twist-interchange proof. No SGA is cited. No duplicate exists: the existing shift nodes are about D(O_X) or ring-level tensors. Accepted tool_uses: lem-pc-kflat-resolution and lem-pur-integral-operations-well-defined; the three cited definitions are notions, so declaring them is harmless."
  }
 }
