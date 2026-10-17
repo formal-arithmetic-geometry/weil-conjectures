@@ -90,11 +90,10 @@
    }
   },
   {
-   "text": "Fix an output simplex $\\tau$ of the whole family, including its parameter-zero prefix. Put $B=N(\\Delta^{\\mathrm{op}})\\times\\Delta^n$ and map $\\Delta^d\\star N(I_r)$ to $B$ by the base of $\\tau$ on its first factor and by the selected stationary inert extensions on its second factor; the cross arrows are their composites with the arrows of $\\pi\\tau$. Set $V=\\mathcal P\\times_B(\\Delta^d\\star N(I_r))$ and let $U$ be its inverse image of the terminal factor $N(I_r)$. The projection $V\\to\\Delta^d\\star N(I_r)$ is inner, and its base is a quasicategory, so $V$ is a quasicategory. The subset $U$ is full, because the terminal factor is full in this join. The lifted simplex $\\bar\\tau$ in the initial factor is nondegenerate and disjoint from $U$, even when its image in the base has degeneracies. Moreover $V_{\\bar\\tau/}\\times_V U$ is exactly $L_\\tau$: its base simplex records precisely the stationary selected intervals, vertices, and endpoint arrows in the definition of $L_\\tau$.  By the opposite of [lem-coef-infinity-slice-right-fibration], $V_{\\bar\\tau/}\\to V$ is a left fibration. Its pullback over the quasicategory $U$ is therefore a quasicategory (fill an inner horn first in $U$, then in this left fibration). This proves the asserted quasicategory property of $L_\\tau$. Its inert-extension base category is $I_r$: an inert $[r]\\to[1]$ selects one adjacent interval, an inert $[r]\\to[0]$ selects one vertex, and an inert map between these selected objects is precisely an endpoint arrow. Consequently there is a projection $\\rho:L_\\tau\\to N(I_r)$ recording the base inert extension. Since $B$ is the nerve of an ordinary category, an extension $\\Delta^d\\star\\Delta^k\\to B$ of $\\pi\\tau$ is determined by its restriction to $\\{d\\}\\star\\Delta^k$; hence restriction $B_{\\pi\\tau/}\\to B_{\\pi\\tau(d)/}$ is an isomorphism, and the inert-extension base simplicial sets of $\\tau$ and of the one-vertex simplex $\\tau(d)$ are both identified with $N(I_r)$. Write $L_{\\tau(d)}$ for the corresponding simplicial subset of $\\mathcal P_{\\tau(d)/}$.",
+   "text": "Form the incidence category $I_r$: objects the adjacent intervals $e_j$ and vertices $v_j$, arrows $e_j\\to v_{j-1},v_j$ besides identities. Put $C=\\Delta^{\\mathrm{op}}\\times[n]$, so the base is $N(C)$, and let $\\pi\\tau(d)=([r],t)$. Send $e_j$ and $v_j$ to $([1],t)$ and $([0],t)$, the cross arrow from $d$ to them to the stationary inert map given by the interval inclusion $[1]\\to[r]$ onto $\\{j-1,j\\}$, respectively the vertex inclusion $[0]\\to[r]$ at $j$, the arrows $e_j\\to v_{j-1},v_j$ to the endpoint inclusions $[0]\\to[1]$, and the cross arrows from earlier vertices to composites with $\\pi\\tau$. The endpoint triangles commute in $\\Delta$, so this is a functor $[d]\\star I_r\\to C$, whose nerve is a map $g:\\Delta^d\\star N(I_r)\\to N(C)$ extending $\\pi\\tau$. Apply [lem-coef-join-pullback-simplex-extension] to $E=\\mathcal P$, $p=\\pi$, this $g$, and $J=I_r$. Its conclusion gives the pullback $V$, full terminal subcategory $U$, lifted simplex $\\bar\\tau$, the isomorphism $L\\cong V_{\\bar\\tau/}\\times_VU$ for $L=\\mathcal P_{\\tau/}\\times_{N(C)_{\\pi\\tau/}}N(I_r)$, the quasicategory structure, the projection $\\rho$, and the base-coslice isomorphism $N(C)_{\\pi\\tau/}\\cong N(C)_{\\pi\\tau(d)/}$. Finally $L=L_\\tau$. The inert maps $[1]\\to[r]$ and $[0]\\to[r]$ are exactly the $r$ interval and $r+1$ vertex inclusions, and the inert maps between such targets compatible with them are identities and the endpoint inclusions $[0]\\to[1]$ (a map $[1]\\to[0]$ is not inert). So the cross edges from $\\tau(d)$ of a $k$-simplex $h$ of $L_\\tau$ determine a unique $\\sigma:\\Delta^k\\to N(I_r)$, and $\\pi h=g\\circ(\\mathrm{id}\\star\\sigma)$ because a simplex of a nerve is determined by its edges. Conversely every $(\\sigma,h)\\in L$ satisfies the conditions defining $L_\\tau$. Both use last-block restriction, so $L\\cong L_\\tau$ over $N(I_r)$.",
    "uses": [
     "def-coef-operadic-correspondence",
-    "def-coef-infinity-fibrations",
-    "lem-coef-infinity-slice-right-fibration"
+    "lem-coef-join-pullback-simplex-extension"
    ],
    "elementary": false,
    "source": {
@@ -103,14 +102,10 @@
    }
   },
   {
-   "text": "Apply [lem-coef-cofinal-relative-join-slice-restriction] to the full subcategory $\\{d\\}\\subseteq\\Delta^d$ (in the role of its $A\\subseteq B$), to the inner fibration of quasicategories $\\pi:\\mathcal P\\to B$, where $B=N(\\Delta^{\\mathrm{op}})\\times\\Delta^n$ as in Step 7 (in the role of its $p:C\\to D$), and to the functor $\\tau:\\Delta^d\\to\\mathcal P$ (its $u$). The vertex $\\{d\\}$ is full in the quasicategory $\\Delta^d$, and for each $b\\in\\Delta^d$ the comma quasicategory of arrows $b\\to d$ is a single vertex, hence weakly contractible; $d=0$ is the identity case. So restriction $\\mathcal P_{\\tau/}\\to\\mathcal P_{\\tau(d)/}\\times_{B_{\\pi\\tau(d)/}}B_{\\pi\\tau/}$ is a trivial Kan fibration, lifting every boundary including dimension zero. By the isomorphism $B_{\\pi\\tau/}\\cong B_{\\pi\\tau(d)/}$ of Step 7, pulling back along the vertex $\\beta_a:\\Delta^d\\star\\Delta^0\\to B$ (the prescribed base extension of $a\\in I_r$) gives a trivial Kan fibration $R_a:J_a\\to J_a^0$, where $J_a=\\mathcal P_{\\tau/}\\times_{B_{\\pi\\tau/}}\\{\\beta_a\\}$ and $J_a^0=\\mathcal P_{\\tau(d)/}\\times_{B_{\\pi\\tau(d)/}}\\{\\beta_a|_{\\{d,*\\}}\\}$, and pulling back along $N(I_r)$ gives a trivial Kan fibration $R:L_\\tau\\to L_{\\tau(d)}$ over $N(I_r)$. The target $J_a^0$ is a quasicategory with the chosen cocartesian edge as an initial object by [lem-coef-infinity-cocartesian-composition-initiality]. Inner-horn lifting first in $J_a^0$ and then along $R_a$ makes $J_a$ a quasicategory. A trivial Kan fibration lifts against all monomorphisms, so it is a trivial fibration of [lem-coef-joyal-model-structure] and in particular a categorical equivalence; by [lem-coef-joyal-quasicategory-characterizations] (2) and the mapping-space preservation clause of [lem-cbc-enhanced-functor-cone-calculus], $R_a$ induces equivalences of mapping spaces, so every lift of that initial edge is initial in $J_a$. In particular an extension with exactly that last edge exists. Choose one, denoted $i(a)$. For each incidence arrow choose its cocartesian comparison; [lem-coef-infinity-cocartesian-composition-initiality] makes the composite from $\\tau(d)$ cocartesian and identifies it with the chosen endpoint extension by an equivalence over its fixed base. The choices form a coherent $i:N(I_r)\\to L_\\tau$: $I_r$ has no nonidentity composable pair, and each required choice and comparison lies in a contractible initial-object mapping space. This includes $r=0$, where $I_0$ has just $v_0$ and the identity lift supplies its initial extension. One may therefore choose the incidence diagram first for the single vertex $\\tau(d)$ and lift it along the trivial Kan fibration $R$; lifting all monomorphisms supplies the whole $N(I_r)$ diagram, with any chosen vertex lifts fixed. This verifies coherence without discarding the prescribed higher faces of $\\tau$.",
+   "text": "Apply [lem-coef-bipartite-cocartesian-simplex-extension] with $C=\\Delta^{\\mathrm{op}}\\times[n]$, $J=I_r$, $E=\\mathcal P$, $p=\\pi$, the fixed simplex $\\tau$, and the base map $g$ from Step 7. The category $I_r$ has no composable pair of nonidentity arrows, and the assumed globally $\\pi$-cocartesian stationary inert lifts supply the specified edges $s_a$ from $\\tau(d)$. The lemma gives the trivial Kan fibration and categorical equivalence $R:L_\\tau\\to L_{\\tau(d)}$, the fixed-base initiality assertions, and a coherent section $i:N(I_r)\\to L_\\tau$ with $\\rho i=\\operatorname{id}$ and the prescribed last edges. It includes $d=0$ and $r=0$ (the identity lift), while retaining the whole simplex $\\tau$.",
    "uses": [
-    "lem-coef-cofinal-relative-join-slice-restriction",
-    "lem-coef-infinity-cocartesian-composition-initiality",
-    "lem-coef-joyal-model-structure",
-    "lem-coef-joyal-quasicategory-characterizations",
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "def-coef-operadic-correspondence"
+    "def-coef-operadic-correspondence",
+    "lem-coef-bipartite-cocartesian-simplex-extension"
    ],
    "elementary": false,
    "source": {
@@ -190,23 +185,23 @@
   }
  ],
  "proof_deps": [
+  "def-coef-operadic-correspondence",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-quasicategory-simplex-join-attachment",
+  "lem-coef-infinity-cocartesian-inner-horn-comparison",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-join-pullback-simplex-extension",
+  "lem-coef-bipartite-cocartesian-simplex-extension",
+  "lem-coef-coinitial-monomorphism-left-anodyne",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-space-transport-classification",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-anodyne-cocones",
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone",
-  "def-coef-operadic-correspondence",
-  "def-weil-pbc-trivial-kan-fibration",
-  "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-cofinal-relative-join-slice-restriction",
-  "lem-coef-coinitial-monomorphism-left-anodyne",
-  "lem-coef-infinity-anodyne-cocones",
-  "lem-coef-infinity-cocartesian-composition-initiality",
-  "lem-coef-infinity-cocartesian-inner-horn-comparison",
-  "lem-coef-infinity-cocartesian-mapping-criterion",
-  "lem-coef-infinity-monomorphism-boundary-cells",
-  "lem-coef-infinity-slice-right-fibration",
-  "lem-coef-joyal-model-structure",
-  "lem-coef-joyal-quasicategory-characterizations",
-  "lem-coef-quasicategory-simplex-join-attachment",
-  "lem-coef-space-transport-classification"
+  "def-weil-pbc-trivial-kan-fibration"
  ],
  "proof_origin": {
   "by": "agent",
@@ -328,7 +323,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-correspondence-kan-filling",
@@ -358,8 +353,8 @@
  "split_report": {
   "date": "2026-10-17",
   "item": "lem-coef-operadic-family-cell-presentation",
-  "worker": "N2 repair worker; independent second reader N2",
-  "summary": "Restores the exact current item statement, including arbitrary inner q and arbitrary f. Twelve source-filtration steps retain mixed source prefixes. Fixed-simplex initiality and the last-vertex slice comparison come from the existing relative join-slice restriction node (with the full vertex {d} of Delta^d), edge initiality and the Joyal statements, so no simplex-extension helper is needed; the maintainer reader split the former long Step 7 into the construction (Step 7) and the initiality/coherent-section argument (Step 8), giving thirteen steps. One new statement-only prerequisite remains: the non-full coinitial monomorphism criterion. Incoming comma spaces and the full terminal pullback justify type-(c) comparison. One new node, zero Mathlib leaves.",
+  "worker": "NC direct-delivery repair worker",
+  "summary": "Repairs the current returned head by extracting the two hidden arguments in its over-2000-character Steps 7 and 8 into the retained generic join-pullback and bipartite cocartesian simplex-extension prerequisites. The item statement, Lean record, source route, and all other proof steps remain unchanged; only these two steps and the dependency union are revised. Two new unsplit statement nodes are delivered and no Mathlib leaves are added.",
   "blueprint": "Realizes the ancestor proof's operadic Kan-extension prerequisite in the source-cell presentation: HA Lemma 3.1.2.5 and Theorem 3.1.2.3 source-domain filtration, its type (a)/(b)/(c) attachments, associate ordering, and printed p. 341 cone-restriction comparison.",
   "tool_uses": [
    {
@@ -374,9 +369,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N2-9530e4796",
-  "group": "N2",
+  "reviewer": "NT-cc-NC-cae1fe5a6",
+  "group": "NC",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-9530e4796 (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, the new node and the full statement of every cited node. I checked the item against HA's proof of Theorem 3.1.2.3 and Lemma 3.1.2.5 (pp.332-341, local HA text): the base filtration and associates, the (u,v,c,w) ordering, the neutral pairs via Lemma 2.4.4.6 and the Y'-induction (horn index p+1+j), and the type-(c) tau_b attachments with the left-anodyne restriction on p.341. The item statement and its protected fields are identical to the base and are not weakened. The new node lem-coef-coinitial-monomorphism-left-anodyne is true: it is the opposite of HTT 4.1.3.1 composed with 4.1.1.3(4). I tested {0} and {1} in Delta^1, the empty set in Delta^0, and the identity. It is not a duplicate: the existing cofinal-relative-join node assumes fullness, which i(N(I_r)) lacks; the other candidates are the cofinal-comma criterion (a cocone conclusion), terminal-anodyne (a special case) and initial-poset-slice. It does not restate a clause of the item. Step 9 (comma calculation; it was Step 8) is correct: Map(i(a),l) = Hom_{I_r}(a,b), so Q_l ~ N(I_r/b). Step 10 (it was Step 9) is genuinely elementary from the reversed pushout-join. Flagged long step 7 (4374 chars) hid a lemma: it proved inline that restriction P_{tau/} -> P_{tau(d)/} x B_{pi tau/} is a trivial Kan fibration. That is exactly the existing same-unit node lem-coef-cofinal-relative-join-slice-restriction, taking its full subcategory to be {d} in Delta^d (every comma is a point). FIX: I split it into Step 7 (construction of V, U, L_tau and rho, 2041 chars) and Step 8 (cites that node, checks its hypotheses, then gives R_a, R, initial lifts and the coherent section i). Old Steps 8-12 are renumbered 9-13 and the step cross-references are updated. proof_deps is still the union of the step uses, with no cycle. I updated the split_report summary and the tool_uses why. The cone-calculus tool use is accepted. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-cae1fe5a6 (reviewer sub-agent of L); spot-checked: Read the item (all 13 steps), both new nodes, every cited statement, the unit record, and HA Theorem 3.1.2.3 printed pp. 335-341 from a machine-local copy at /tmp/q26ha/ha.pdf, since HA is not in the project literature and is WANTED. Source matches: p.340 builds X = M x (tau_b * {1..k}), the lifted tau_b and X^0_{tau_b/}; p.341 gives the initial objects B_i and the left-anodyne cone restriction; p.336 gives the vertex-restriction trivial Kan fibration, used in its last-vertex dual form. New node lem-coef-join-pullback-simplex-extension is true. Checked: V is a quasicategory as a pullback of an inner fibration over N([d]*J); U is full; tau-bar is nondegenerate; the iso L = V_{tau-bar/} x_V U holds because gamma = id*sigma is forced in a join nerve; L is a left fibration over U, so a quasicategory; the nerve-coslice iso holds. Tested on Delta^0/Delta^1 cases, degenerate tau with d=1, and J empty. New node lem-coef-bipartite-cocartesian-simplex-extension is true. R is a trivial fibration because {d} in Delta^d is right anodyne. s_a is initial in J_a^0 = L(x,f_a). The section exists because N(J) has no nondegenerate 2-simplices: fill Lambda^2_0 horns using cocartesian s_a, and 2-out-of-3 makes the third edge cocartesian; prescribed z_a are kept by lifting along R. Its R and initiality clauses overlap the same-unit lem-coef-cofinal-relative-join-slice-restriction and the composition-initiality node, but the coherent section is new. So neither node is a duplicate or a restatement of an item clause (D1). B1-B9 hold for both. Step 8 hypotheses checked: pi is an inner fibration over N(Delta^op x [n]); I_r has no composable nonidentity arrows; the s_a are the globally cocartesian stationary inert lifts. Steps 1-6 and 9-13 are unchanged and agree with HA. Tool use lem-cbc-enhanced-functor-cone-calculus accepted; no SGA; statement not weakened. FIX, one fault in Step 7: it called g a map given by 'lifts' (g is a base map), never checked it is a functor, and asserted V_{tau-bar/} x_V U = L_tau although node 1 gives only L = V_{tau-bar/} x_V U. I rewrote Step 7 (uses unchanged, 1826 chars) to define g explicitly as a functor [d]*I_r -> Delta^op x [n] and to prove L = L_tau over N(I_r) from the list of inert maps into [r]. File: fixes/dag/nodes/sec-six-functors/lem-coef-operadic-family-cell-presentation.json. Full review in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

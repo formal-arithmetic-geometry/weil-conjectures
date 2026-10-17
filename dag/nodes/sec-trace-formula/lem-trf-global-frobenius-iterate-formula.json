@@ -12,9 +12,45 @@
  "stmt_deps": [
   "def-weil-endofunctor-fixed-pair-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the arbitrary-structure-map clause of [def-weil-endofunctor-fixed-pair-category], so $\\varphi:GK\\to K$ need not be invertible. Abbreviate $u_m=\\varphi^{[m]}:G^mK\\to K$ and $v_m=t_K^{[m]}:C(K)\\to C(G^mK)$. The displayed composites in the statement give $u_1=\\varphi$, $v_1=t_K$ and, by applying $G$ to each factor and regrouping,\n$$u_{m+1}=\\varphi\\circ G(u_m),\\qquad v_{m+1}=t_{G^mK}\\circ v_m.$$\nHere $G(u_m):G^{m+1}K\\to GK$ and $t_{G^mK}:C(G^mK)\\to C(G^{m+1}K)$, so both recursions have the required types. These equalities use only functoriality and associativity, with the fixed iterated-composition identifications of the statement.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last proof sentence on Frobenius endomorphisms: expand the ordered iterates in the abstract transport-power identity extracted from returned Step 8."
+   }
+  },
+  {
+   "text": "The induction assertion is $F^m=C(u_m)\\circ v_m$ for positive integers $m$. Its base $m=1$ is $F=C(\\varphi)\\circ t_K$, exactly the definition of $F$. For the successor calculation, substitute the morphism $f=u_m:G^mK\\to K$ in the naturality equation assumed for $t$. With its source object $G^mK$ and target object $K$, that equation reads\n$$t_K\\circ C(u_m)=C(G(u_m))\\circ t_{G^mK}.$$\nBoth sides are morphisms $C(G^mK)\\to C(GK)$. Thus the naturality used here is an explicit instance of the hypothesis, not an additional comparison theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last proof sentence on Frobenius endomorphisms: base case and the naturality square at the iterated structure map."
+   }
+  },
+  {
+   "text": "Assume $F^m=C(u_m)\\circ v_m$ for some $m\\geq1$. In the endomorphism monoid of $C(K)$, the definition of powers gives $F^{m+1}=F\\circ F^m$. Substitute the induction hypothesis and then the naturality equation of Step 2:\n$$\\begin{aligned}\nF^{m+1}&=C(\\varphi)\\circ t_K\\circ C(u_m)\\circ v_m\\\\\n&=C(\\varphi)\\circ C(G(u_m))\\circ t_{G^mK}\\circ v_m\\\\\n&=C(\\varphi\\circ G(u_m))\\circ(t_{G^mK}\\circ v_m)\\\\\n&=C(u_{m+1})\\circ v_{m+1}.\n\\end{aligned}$$\nThe third equality is the composition law for the functor $C$ and associativity; the last uses the two recursions of Step 1. Induction proves the required formula for every $m\\geq1$. No cancellation or inverse occurs, so this also proves the assertion for noninvertible $t$ and $\\varphi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last proof sentence on Frobenius endomorphisms: successor calculation establishing the formula for every positive iterate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence on Frobenius endomorphisms, expanded into the abstract naturality-and-induction calculation requested by the extracted node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +86,59 @@
    "results": "2 hits: Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean; Mathlib/CategoryTheory",
    "date": "2026-10-17",
    "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+  },
+  {
+   "tool": "grep",
+   "query": "(iterate|pow).*(naturality|NatTrans)|naturality.*(iterate|pow)",
+   "results": "2 hits: Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean; searched CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Powers of an endomorphism induced by natural transport t from C to C composed with G on an algebra phi G K to K",
+   "results": "8 hits: Module.End.coe_pow, AlgEquiv.coe_pow, AlgHom.coe_pow, LieModule.toEnd_pow_comp_lieHom, CategoryTheory.Iso.conj_pow, RingHom.coe_pow, LinearMap.baseChange_pow, ContinuousAlgHom.coe_pow",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor.mapEnd",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For categories A and B, functor C from A to B, endofunctor G, natural transformation t from C to C G, powers of C(phi) t equal C(phi G(phi) ... G^(m-1)(phi)) followed by iterated t",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.ofNatTrans, CategoryTheory.SmallObject.SuccStruct.ofNatTrans_succ, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans, CategoryTheory.Equivalence.powNat, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTrans, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTrans_obj_str, CategoryTheory.Functor.mapEnd_apply, CategoryTheory.Functor.mapEnd",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "functorOfNatTrans|mapOfNatTrans|mapEnd|iterate",
+   "results": "5 hits: Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean; searched CategoryTheory/Endofunctor",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"naturality\", \"pow\"",
+   "results": "6 hits: exteriorPower.zeroEquiv_naturality, exteriorPower.oneEquiv_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality, ModuleCat.exteriorPower.iso₀_hom_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality_assoc, ModuleCat.exteriorPower.iso₀_hom_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an arbitrary category, naturality of a transformation H to G followed by H gives the formula for powers of the algebra structure obtained from a G algebra by transport to the identity endofunctor",
+   "results": "8 hits: CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp_hom_app_f, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_str, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_a, CategoryTheory.Endofunctor.Algebra.Hom.h, CategoryTheory.Monad.algebraFunctorOfMonadHom_obj_a, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_map_f, CategoryTheory.Endofunctor.Algebra.Hom.h_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-karoubi-independence",
@@ -68,5 +153,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-global-frobenius-iterate-formula",
+  "worker": "stage1",
+  "summary": "Kept the general arbitrary-morphism statement unchanged. Expanded the extracted power identity into ordered-factor recursions, a typed instance of the assumed naturality square, and an explicit positive-integer induction. All steps are elementary; the only cited node defines arbitrary endofunctor algebras. No new node is needed. Project and Mathlib searches found no exact completed declaration.",
+  "blueprint": "The final sentence of prop-trf-karoubi-independence.proof.md says the Frobenius endomorphisms are transported. This auxiliary item realizes the global-power part extracted from returned Step 8: Step 1 fixes ordered iterates, Step 2 instantiates naturality, and Step 3 proves the power formula, without assuming geometric or derived comparison results."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-eeafad75f",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-eeafad75f (reviewer sub-agent of L); spot-checked: PASS, no changes. The statement is true and the three-step proof is complete. Full checks are in review.md. Statement: (C(phi) t_K)^m = C(phi^[m]) t_K^[m] for t: C => C∘G and an arbitrary G-algebra (K, phi). It is self-contained and true without invertibility. I checked m=1, m=2 (the naturality at phi), G=id, a constant non-invertible phi on Set, and the empty category. The only dependency, def-weil-endofunctor-fixed-pair-category, defines T-algebras with arbitrary structure maps in its last sentence, so the citation supports what the item uses. Step 1: the recursions u_{m+1}=phi∘G(u_m) and v_{m+1}=t_{G^mK}∘v_m are correctly typed and elementary. Step 2: base case m=1, plus naturality at f=u_m: G^mK->K, giving t_K C(u_m) = C(Gu_m) t_{G^mK}; the direction matches the hypothesis. Step 3: the induction F^{m+1}=F F^m is properly set up and uses no inverse. Use in the parent: prop-trf-karoubi-independence applies it with G=Lg*, C=RGamma_c, t=tau_c and handles the pullback identifications itself. Here G^m is a literal composite, so no coherence is hidden. No target, base-change morphism or coefficient category is involved; the item is purely categorical. The delivery adds no new nodes. Duplicate check: I read lem-trf-frobenius-transport-induction, lem-trf-iterated-weil-cocycle, lem-trf-weil-shriek-iterates and lem-trf-local-frobenius-conjugacy; none states this identity. No off-unit statement or SGA source is cited, and no tool_uses are needed. The 12 Mathlib search records cover all three kinds. I agree it is not a leaf: Endofunctor.Algebra in Mathlib gives only the notion. Blueprint source checked: the last sentence of main-20261015 prop-trf-karoubi-independence.proof.md."
  }
 }

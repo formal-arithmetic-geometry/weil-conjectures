@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-determinantal-weight-coefficient-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The determinant weight does not depend on the coefficient field",
@@ -13,30 +13,104 @@
   "place": "node lem-wf-determinantal-weight-coefficient-field, order 2633"
  },
  "stmt_deps": [
-  "def-mg-determinant-line"
+  "def-mg-determinant-line",
+  "def-weil-punctual-weights",
+  "sk-d-real-weil",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [
   {
-   "text": "Punctual $\\iota$-purity of [def-weil-punctual-weights] is the\ncondition that every eigenvalue $\\alpha$ of every local Frobenius\nsatisfy $|\\iota(\\alpha)|=q_y^{a/2}$. The determinant line of\n[def-mg-determinant-line] is the top exterior power of\n$\\mathcal V$, and its local Frobenius operators are obtained from those\nof $\\mathcal V$ by extension of scalars along $E\\subseteq E'$; the\nmatrices of these operators, and therefore their eigenvalues in\n$\\overline{\\mathbf Q}_\\ell$, are unchanged by that extension. Since\n$\\iota$ is a fixed isomorphism on $\\overline{\\mathbf Q}_\\ell$, the\ndisplayed condition is the same for the two coefficient fields.",
+   "text": "Choose the given $E$-model $V_E$ of the Weil representation and an $E$-basis $e_1,\\ldots,e_r$. Reading it over $E'$ means $V_{E'}=E'\\otimes_E V_E$, with $g(b\\otimes v)=b\\otimes\\rho_E(g)v$. The coordinate maps $b\\otimes\\sum_i c_i e_i\\mapsto (bc_i)_i$ and $(b_i)_i\\mapsto\\sum_i b_i\\otimes e_i$ are inverse, so $1\\otimes e_i$ is an $E'$-basis. For a closed point $y$, use its local geometric Frobenius element as in [sk-d-real-weil]. If $A_y$ is its matrix over $E$ and $j:E\\hookrightarrow E'$ is the inclusion, then $F_y(1\\otimes e_j)=\\sum_i j((A_y)_{ij})(1\\otimes e_i)$; hence its matrix over $E'$ is the entrywise image $j(A_y)$.",
    "uses": [
-    "def-weil-punctual-weights",
+    "sk-d-real-weil"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-coefficient-field.md",
+    "place": "Proof: scalar extension of the Frobenius matrices and the punctual-purity equality"
+   }
+  },
+  {
+   "text": "The permutation formula gives $\\det(j(A_y))=\\sum_{\\sigma\\in S_r}\\operatorname{sgn}(\\sigma)\\prod_i j((A_y)_{i,\\sigma(i)})=j(\\sum_{\\sigma\\in S_r}\\operatorname{sgn}(\\sigma)\\prod_i(A_y)_{i,\\sigma(i)})=j(\\det A_y)$, since the inclusion preserves finite sums, products and integer signs. This is a direct finite calculation, with no separability or diagonalizability assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-coefficient-field.md",
+    "place": "Proof: scalar extension of the Frobenius matrices and the punctual-purity equality"
+   }
+  },
+  {
+   "text": "By [def-mg-determinant-line], the local Frobenius on the determinant line is multiplication by $d_y=\\det A_y$ over $E$, and by $j(d_y)$ over $E'$. Each line has precisely that scalar as its eigenvalue in $\\Qlb$: if a nonzero vector $v$ satisfies $dv=\\alpha v$, then $(d-\\alpha)v=0$ forces $d=\\alpha$. The fixed inclusions $E\\subseteq E'\\subseteq\\Qlb$ send $d_y$ and $j(d_y)$ to the very same element $\\alpha_y$ of $\\Qlb$. Thus the two determinant lines have the same local eigenvalue at every $y$.",
+   "uses": [
     "def-mg-determinant-line"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-coefficient-field.md",
+    "place": "Proof: scalar extension of the Frobenius matrices and the punctual-purity equality"
+   }
+  },
+  {
+   "text": "The hypothesis and [def-weil-punctual-weights] give $|\\iota(\\alpha_y)|=q_y^{a/2}$ for each closed point $y$, where $q_y=\\#\\kappa(y)$. The preceding step identifies the $E'$-coefficient determinant eigenvalue with this same $\\alpha_y$ in the fixed algebraic closure. Neither $q_y$, the fixed map $\\iota$, nor $a$ changes. Therefore the identical equality holds at every closed point for the $E'$-coefficient determinant line; the definition says exactly that it is punctually $\\iota$-pure of weight $a$.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-coefficient-field.md",
+    "place": "Proof: scalar extension of the Frobenius matrices and the punctual-purity equality"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-punctual-weights",
-  "def-mg-determinant-line"
+  "sk-d-real-weil",
+  "def-mg-determinant-line",
+  "def-weil-punctual-weights"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-wf-determinantal-weight-coefficient-field.md",
-  "place": "## Proof"
+  "place": "Proof: scalar extension of the Frobenius matrices and the punctual-purity equality"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map_det|det_map|PunctuallyPure|detWeight",
+   "results": "Mathlib/LinearAlgebra/Matrix/Adjugate.lean; Mathlib/LinearAlgebra/Matrix/Adjugate.lean; Mathlib/LinearAlgebra/Matrix/Adjugate.lean; Mathlib/LinearAlgebra/Matrix/Adjugate.lean; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean; Mathlib/LinearAlgebra/Matrix/MvPolynomial.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the Weil-sheaf purity statement; determinant base-change identities are elementary ingredients expanded in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Punctual purity of the determinant of a Weil representation is unchanged by extending the coefficient field",
+   "results": "Matrix.det_map; Matrix.GeneralLinearGroup.map_det; Rat.cast_det; LinearMap.det_conj; LinearMap.det_map; LinearMap.det_toMatrix_eq_det_toMatrix; LinearEquiv.det; Module.Basis.det_reindex",
+   "date": "2026-10-17",
+   "verdict": "no match for the Weil-sheaf purity statement; determinant base-change identities are elementary ingredients expanded in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, RingHom",
+   "results": "RingHom.map_det; Matrix.eval_det_mvPolynomialX; Polynomial.leadingCoeff_det_X_one_add_C; Polynomial.natDegree_det_X_add_C_le; Polynomial.coeff_det_X_add_C_card; Polynomial.coeff_det_X_add_C_zero; eval_det_add_X_smul; eval_det",
+   "date": "2026-10-17",
+   "verdict": "no match for the Weil-sheaf purity statement; determinant base-change identities are elementary ingredients expanded in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Punctual purity of the determinant of a Weil representation is unchanged by extending its finite l-adic coefficient field",
+   "results": "IsBaseChange.det_endHom; LinearEquiv.det_baseChange; LinearMap.det_baseChange; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; LinearMap.det_restrictScalars; LinearMap.finite_of_det_ne_one; FractionalIdeal.abs_det_basis_change; LinearMap.free_of_det_ne_one",
+   "date": "2026-10-17",
+   "verdict": "no match for the Weil-sheaf purity statement; determinant base-change identities are elementary ingredients expanded in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one dimensional Frobenius representation has the same complex absolute value of its eigenvalue after extension of scalars",
+   "results": "spectralNorm_eq_of_equiv; FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgHom; FiniteField.frobeniusAlgEquivOfAlgebraic_apply; spectralNorm_extends_of_finiteDimensional; FiniteField.orderOf_frobeniusAlgHom; FiniteField.frobeniusAlgEquiv_apply; FiniteField.coe_frobeniusAlgHom",
+   "date": "2026-10-17",
+   "verdict": "no match for the Weil-sheaf purity statement; determinant base-change identities are elementary ingredients expanded in the proof"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +133,20 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-detweights"
+ "unit": "sk-d-real-detweights",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-determinantal-weight-coefficient-field",
+  "worker": "stage1",
+  "summary": "Retained the statement, added its punctual-purity, Weil-representation and coefficient-field notion dependencies, and expanded the imported scalar-extension assertion into four elementary steps: tensor coordinates, the determinant permutation formula, the rank-one eigenvalue, and substitution in the purity equality. No new nodes are needed. Searches locate Mathlib determinant identities but no full Weil-sheaf assertion.",
+  "blueprint": "Realizes the entire proof of lem-wf-determinantal-weight-coefficient-field in the master snapshot (unchanged statement in main-20261015): scalar extension of local Frobenius matrices, determinant eigenvalue invariance, and the fixed-iota equality."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-f51fe254a",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-f51fe254a (reviewer sub-agent of L); spot-checked: Read in full: the item, the master and main-20261015 blueprint statement and proof (identical; the report's claim that main has no proof is a small inaccuracy), unit sk-d-real-detweights (no steps), the chapter, and the statements of def-mg-determinant-line, def-weil-punctual-weights (including its blueprint_update), sk-d-real-weil, sk-d-real-setup and def-weil-l-adic-coefficient-extension. The statement is verbatim the same, with no weakening, and the added stmt_deps are justified. Step 1: sk-d-real-weil's statement supplies the E-model and the local Frobenius element; the tensor-coordinate matrix j(A) is correct. Step 2: det commutes with a ring homomorphism by the Leibniz formula, which is elementary. Step 3: by def-mg-determinant-line, det(rho)(g)=det(rho(g)) on the rank-one line, whose unique eigenvalue is that scalar; E⊆E'⊆Qlb gives the same alpha_y. Step 4: def-weil-punctual-weights is exactly |iota(alpha)|=q_y^{w/2}, and q_y, iota and a do not change. Every use is a definition, so there is no off-route statement and no tool_uses. No cycle: a DFS from the deps never reaches the item, and the only citer is def-wf-determinantal-weight. No duplicate found by rg over dag/nodes. Tested E'=E, rank 1, a quadratic extension with a non-split 2x2 matrix, and a Jordan block. No new nodes, no changes."
+ }
 }
