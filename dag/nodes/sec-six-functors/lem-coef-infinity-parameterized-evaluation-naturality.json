@@ -13,9 +13,109 @@
   "lem-coef-infinity-pinch-comparison",
   "lem-coef-space-point-cocone-criterion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a containing universe large enough for $C$, $\\mathcal S_{\\mathcal W}$, its functor category $D=\\operatorname{Fun}(C,\\mathcal S_{\\mathcal W})$, and all parameter objects below. By [lem-coef-kan-coherent-nerve-quasicategory] the target is a quasicategory, and [lem-cbc-enhanced-functor-cone-calculus] makes $D$ a quasicategory. The right-pinch comparisons of [lem-coef-infinity-pinch-comparison] therefore apply to both $C$ and $D$. Put $P=T\\times M_x$. Use the homotopy equivalences $\\beta_{X,Y}:\\operatorname{Fun}(X,Y)\\to U_{\\mathcal S}(X,Y)$ of [lem-coef-point-family-q-counit-identification]. Their statement supplies compatibility with composition and evaluation at a point on full parameter spaces. We use this precise comparison, not an arbitrary equivalence between mapping-space models. Its containing-universe clause permits the parameter $P$ even if $T$ is not $\\mathcal W$-small; the endpoint spaces remain the given $\\mathcal W$-small Kan complexes.",
+   "uses": [
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-point-family-q-counit-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Preparation: internal functor objects and the point-family comparison; Kerodon 03M4 and 038A fix the evaluation convention."
+   }
+  },
+  {
+   "text": "The definitions in [def-cbc-enhanced-diagrams-cones] give a simplicial evaluation map $\\operatorname{ev}:D\\times C\\to\\mathcal S_{\\mathcal W}$: on an $n$-simplex $(h,c)$, evaluate $h:C\\times\\Delta^n\\to\\mathcal S_{\\mathcal W}$ on $(c,\\operatorname{id}_{\\Delta^n})$. Let $k:T\\times\\Delta^1\\to D$ be the universal right-pinch family for $(F,G)$ and $j:M_x\\times\\Delta^1\\to C$ the stipulated family for $(a,x)$. Form the single map\n$$Q:P\\times\\Delta^1_u\\times\\Delta^1_v\\to\\mathcal S_{\\mathcal W},\\qquad Q(t,m,u,v)=\\operatorname{ev}(k(t,v),j(m,u)).$$\nIts four corner restrictions, in order $(0,0),(1,0),(0,1),(1,1)$, are constant at $A=F(a), B=F(x), A'=G(a), B'=G(x)$. Its bottom, right, left and top sides are respectively the full families $F(j)$, $\\alpha_x$, $\\alpha_a$, $G(j)$. This follows by substituting the two endpoint restrictions of $k$ and $j$; the formula is a simplicial map because evaluation and both pinch families are simplicial maps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03M4",
+    "place": "Agent-written universal naturality square from internal evaluation; Kerodon 03M4."
+   }
+  },
+  {
+   "text": "Restrict $Q$ to the two monotone triangles of $\\Delta^1\\times\\Delta^1$. Their vertex lists are $((0,0),(1,0),(1,1))$ and $((0,0),(0,1),(1,1))$. Thus they give maps $h_0:P\\to V(A,B,B')$ and $h_1:P\\to V(A,A',B')$ in [lem-coef-infinity-mapping-composition]. Both long-edge restrictions are exactly the same map $d:P\\to U(A,B')$, the diagonal of $Q$. Write $\\mu$ for the composition class on the arrow spaces, obtained from that node's right-pinched composition using $j$. Its characterization gives\n$$[\\mu(\\alpha_x,F(j))]=[\\ell][\\theta]^{-1}[\\theta h_0]=[\\ell h_0]=[d],$$\n$$[\\mu(G(j),\\alpha_a)]=[\\ell][\\theta]^{-1}[\\theta h_1]=[\\ell h_1]=[d].$$\nHere every equation is between maps out of the entire $P$, not separate equations at its vertices. The homotopies are obtained by precomposing the homotopy inverse equation for $\\theta$ with $h_i$ and postcomposing with $\\ell$. Hence the square has compared the two composites on the full transformation and arrow parameters.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9: triangle restriction characterizes composition; apply to the two explicitly listed triangles of the naturality square."
+   }
+  },
+  {
+   "text": "Choose representatives, using $\\beta^{-1}$ from [lem-coef-point-family-q-counit-identification], of the four side families:\n$$p:M_x\\to\\operatorname{Fun}(A,B),\\quad q:M_x\\to\\operatorname{Fun}(A',B'),\\quad r:T\\to\\operatorname{Fun}(A,A'),\\quad s:T\\to\\operatorname{Fun}(B,B').$$\nEach has its specified comparison homotopy to the corresponding side of $Q$. Pull them to $P$. The composition clause of that node turns Step 3 into\n$$[s(t)\\circ p(m)]=[q(m)\\circ r(t)]\\quad\\text{as maps }P\\to\\operatorname{Fun}(A,B').$$\nIndeed postcomposition with the homotopy equivalence $\\beta_{A,B'}$ carries the two displayed maps to the two composites already compared in Step 3; composing with its homotopy inverse cancels it. Postcompose this homotopy-class equality with the simplicial evaluation map $\\operatorname{ev}_{\\eta}:\\operatorname{Fun}(A,B')\\to B'$. It becomes\n$$[\\,(t,m)\\mapsto s(t)(p(m)(\\eta))\\,]=[\\,(t,m)\\mapsto q(m)(r(t)(\\eta))\\,].$$\nNo inverse to an action map $M_x\\to F(x)$ has been used.",
+   "uses": [
+    "lem-coef-point-family-q-counit-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/038A",
+    "place": "Kerodon 038A and 03M4: compose the full mapping-space comparison with evaluation at the given point."
+   }
+  },
+  {
+   "text": "Identify these two maps with the maps in the statement. The family $F(j)$ is the bottom side of $Q$. Its precomposition with the constant point $\\eta:*\\to A$ is the stipulated cocone. By the precomposition-by-a-point and constant-diagram clauses of [lem-coef-point-family-q-counit-identification], its point map is $m\\mapsto p(m)(\\eta)$, up to homotopy, under exactly the point-family equivalence of [lem-coef-space-point-cocone-criterion]. Thus this is $e^F_{\\eta,x}$. The right side corresponds to $s(t)$, so the first map of Step 4 is $\\alpha_x(e^F_{\\eta,x}(m))$. Similarly $r(t)(\\eta)$ is evaluation of the transformation at $(a,\\eta)$, and the top side corresponds to $q(m)$; the second map is therefore $G(m)(\\alpha_a(\\eta))$. These identifications use the full-family comparison, including its composition homotopies. They are not inferred merely from equality on vertices.",
+   "uses": [
+    "lem-coef-point-family-q-counit-identification",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03M4",
+    "place": "Kerodon 038A action on a point and 03M4 evaluation; apply the specified point-family equivalence."
+   }
+  },
+  {
+   "text": "The homotopy-class calculation yields an actual simplicial homotopy of the two maps $P\\to G(x)$. More explicitly, the comparison homotopies, the two triangle homotopies and their inverses give a finite edge zigzag in $\\operatorname{Fun}(P,G(x))$. This is Kan by [lem-cbc-kan-functor-space-kan], since $G(x)$ is Kan and all objects fit in our containing universe. Reverse an edge by filling a $2$-horn whose other given edge is the degenerate identity; compose consecutive edges by filling an inner $2$-horn. Repeating these operations gives one edge with the required endpoints. By the internal-functor definition of [def-cbc-enhanced-diagrams-cones], that edge is a map $P\\times\\Delta^1\\to G(x)$ with precisely the two required endpoint restrictions. This construction also covers $P=\\varnothing$.",
+   "uses": [
+    "lem-cbc-kan-functor-space-kan",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Agent-written compression of the finite homotopy zigzag using the Kan horn condition."
+   }
+  },
+  {
+   "text": "Retain the square $Q$ and its two triangles as the coherent witness, rather than discarding them after passing to homotopy classes. For any $b:B_0\\to T$ the entire witness is its restriction along $b\\times\\operatorname{id}_{M_x}$: explicitly it is $\\operatorname{ev}(k(b(-),v),j(-,u))$. The homotopy of Step 6 restricts along this same map, so no new vertexwise choices are made for $B_0$. Faces and degeneracies of $b$ are just further precompositions. For the asserted higher compatibilities in $x$, evaluation was defined on all of $D\\times C$ in Step 2. Given any simplex $\\sigma:\\Delta^n\\to C$, its restriction is the same map $\\operatorname{ev}(k(-,v),\\sigma(-))$; restricting $\\sigma$ along $\\delta:[m]\\to[n]$ gives exactly $\\operatorname{ev}(k(-,v),\\sigma\\delta(-))$. Pulling back this identity to the arrow families gives the higher naturality data of $Q$. Composition retains these faces and degeneracies by [lem-cbc-simplicial-composition-spine], and the point-family comparison retains all additional simplicial parameters by [lem-coef-point-family-q-counit-identification]. Consequently the homotopy is furnished with these coherent compatibilities, rather than merely a collection of objectwise equations. This establishes every parameter clause without representability or a Yoneda theorem.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-point-family-q-counit-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Agent-written parameter and internal-evaluation restrictions; Kerodon 01PF Remark 4.6.8.7 retains the higher composition coherences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-point-family-q-counit-identification",
+  "lem-coef-space-point-cocone-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01PF",
+  "place": "Universal evaluation square and its two monotone triangles, expanded here. Kerodon 038A and 03M4 specify the action/evaluation maps; 01PF supplies composition, not a verbatim theorem asserting the whole item. Sources read online; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +158,52 @@
    "results": "9 hits; Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean",
    "date": "2026-10-17",
    "verdict": "no match: ordinary-category or simplicial-set infrastructure only; none states this coherent-nerve assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent natural transformation between space valued infinity functors commutes up to homotopy with evaluation on a parameterized family of arrows",
+   "results": "{\"t\": \"2026-10-17T11:39:40Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent natural transformation between space valued infinity functors commutes up to homotopy with evaluation on a parameterized family of arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty\", \"AlgebraicTopology.DoldKan.QInfty_f_naturality\", \"SSet.Truncated.hoFunctor₂_naturality\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\", \"AlgebraicTopology.DoldKan.hσ'_naturality\"], \"digest\": \"9d1beb99ee8c7c5d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCat.lean:386-406,509-512 and Quasicategory/TwoTruncated.lean:76-110. Hits concern ordinary natural transformations from a 2-truncated homotopy category or individual edges; none gives the full-space parameterized coherent evaluation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-17T11:39:41Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCat.lean:386-406,509-512 and Quasicategory/TwoTruncated.lean:76-110. Hits concern ordinary natural transformations from a 2-truncated homotopy category or individual edges; none gives the full-space parameterized coherent evaluation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*natur|natur.*homotop|evaluation.*natur",
+   "results": "{\"t\": \"2026-10-17T11:39:41Z\", \"tool\": \"grep\", \"query\": \"coherent.*natur|natur.*homotop|evaluation.*natur\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"aba1026c6955a0a8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCat.lean:386-406,509-512 and Quasicategory/TwoTruncated.lean:76-110. Hits concern ordinary natural transformations from a 2-truncated homotopy category or individual edges; none gives the full-space parameterized coherent evaluation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality square in a quasicategory gives a homotopy of composites on full mapping spaces with arbitrary simplicial parameters",
+   "results": "{\"t\": \"2026-10-17T11:41:15Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality square in a quasicategory gives a homotopy of composites on full mapping spaces with arbitrary simplicial parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty_eq_top\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty\", \"SSet.Truncated.Edge.CompStruct.homotopyCategory₂_fac\", \"SSet.Truncated.HomotopicL\"], \"digest\": \"9fcb73703a946dbf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCat.lean:386-406,509-512 and Quasicategory/TwoTruncated.lean:76-110. Hits concern ordinary natural transformations from a 2-truncated homotopy category or individual edges; none gives the full-space parameterized coherent evaluation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a homotopy coherent natural transformation on a family of arrows gives a simplicial homotopy between the two composites",
+   "results": "{\"t\": \"2026-10-17T11:41:16Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation of a homotopy coherent natural transformation on a family of arrows gives a simplicial homotopy between the two composites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"CategoryTheory.SimplicialObject.whiskering_map_app_app\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"SimplicialObject.Split.evalN_map\", \"CategoryTheory.CosimplicialObject.comp_app\", \"SSet.Truncated.HomotopyCategory.mkNatTrans.congr_simp\", \"CategoryTheory.NatTrans.mapHomotopyCategory_comp\", \"CategoryTheory.ComposableArrows.homMk\"], \"digest\": \"d5a4fcc5b8c71cce\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCat.lean:386-406,509-512 and Quasicategory/TwoTruncated.lean:76-110. Hits concern ordinary natural transformations from a 2-truncated homotopy category or individual edges; none gives the full-space parameterized coherent evaluation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "mkNatTrans_app_mk|hoFunctor₂_naturality|homToNerveMk_comp_assoc",
+   "results": "{\"t\": \"2026-10-17T11:41:16Z\", \"tool\": \"grep\", \"query\": \"mkNatTrans_app_mk|hoFunctor₂_naturality|homToNerveMk_comp_assoc\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\"], \"digest\": \"cfb13e1784210ed8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected HomotopyCat.lean:386-406,509-512 and Quasicategory/TwoTruncated.lean:76-110. Hits concern ordinary natural transformations from a 2-truncated homotopy category or individual edges; none gives the full-space parameterized coherent evaluation assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
@@ -87,5 +229,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-parameterized-evaluation-naturality",
+  "worker": "stage1",
+  "summary": "Q105 expanded the universal naturality square on the entire transformation-space times arrow-space parameter, used the two triangle restrictions to compare composition classes, applied the existing full point-family/composition comparison, identified the stipulated action cocone, and retained the internal-evaluation higher coherences. Statement unchanged; no new nodes and no Mathlib leaves. Avoided the cyclic general coherent-nerve-comparison theorem and any Yoneda input.",
+  "blueprint": "Supporting descendant of prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2 beginning For K: coherent evaluation underlying the displayed derived mapping-complex adjunction; specifically the parameterized naturality required in step 4 and small-model transport step 10 of lem-coef-infinity-pointwise-yoneda-evaluation. No unit/key-node or chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only the generic assertion that an internal functor object is a quasicategory is used; the biduality unit contains no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "The generic Kan property of an internal functor space compresses the finite zigzag of homotopies; this is a simplicial-set tool, not a replacement for the biduality route."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic coherent face/degeneracy compatibility of composition retains the higher naturality witness; the unit has no separate result stating this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q105-90c1b6c7e",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-90c1b6c7e (reviewer sub-agent of L); spot-checked: Reviewed item and all seven steps against ten cited node statements, the unit/blueprint route, and Kerodon 038A, 03M4, and 01PF. Checked hypotheses, parameter coherence, arrow orientations, universes, edge cases, Mathlib searches, duplicates, and route/tool uses. No new nodes, repairs, circularity, weakened target, or SGA citation. Review written to review.md."
  }
 }

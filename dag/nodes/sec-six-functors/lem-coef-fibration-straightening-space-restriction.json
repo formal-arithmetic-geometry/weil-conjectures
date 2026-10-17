@@ -36,27 +36,185 @@
   "lem-coef-cat-infinity-colimits-cartesian-closure",
   "lem-coef-cat-infinity-opposite-involution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First use the horn definitions, without invoking a characterization theorem as a black box. A left fibration lifts every inner horn, hence its total space over the quasicategory B is a quasicategory: fill the base inner horn in B and then lift that filler. It lifts every initial outer horn with any prescribed first edge, so every edge is cocartesian by [def-coef-infinity-fibrations]. Lifting the horn with n=1 and i=0 supplies an edge over every base edge with prescribed source. Thus it is a cocartesian fibration. Reversing vertex order exchanges the initial and final horns, giving the Cartesian assertions for right fibrations. Apply the Kan-fiber clause of [lem-coef-infinity-right-fibration-fibers] to a right fibration (with F=E and q=p). For a left fibration apply it to its opposite and reverse the fiber back; reversal permutes all horn indices, so preserves the Kan condition. All these arguments allow empty fibers.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Proposition 2.4.2.4: the (1)-(2) horn calculation and the Kan-fiber assertion; dual for left fibrations."
+   }
+  },
+  {
+   "text": "By [lem-coef-space-transport-classification], the mapping simplicial set between two left fibrations is the Kan complex Fun_{/B}(E,E'). Every map over B preserves cocartesian edges, since all target edges are cocartesian by step 1. The left fibrations therefore span a full subcategory of coCart(B); the right version is identical with Cartesian in place of cocartesian. Also Fun(K,L) is Kan for Kan complexes K,L: apply the mapping-complex clause of [lem-coef-simplicial-right-fibration-presentation] over the point. Every edge of a Kan complex is an equivalence by the converse outer-horn criterion of [lem-cbc-equivalence-outer-horn-filling]. Consequently Fun(K,L) equals its core. The mapping-space model of [lem-coef-marked-point-cartesian-model] and the coherent-nerve mapping comparison of [lem-coef-coherent-nerve-comparison] identify the inclusion of Kan complexes with the coherent fully faithful functor i in the statement.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-cbc-equivalence-outer-horn-filling",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Sections 2.2.1 and 3.1.4: mapping complexes, Cat infinity and the full subcategory of spaces."
+   }
+  },
+  {
+   "text": "Compute the Cartesian comparison first, in the cone presentations of the two straightening equivalences. For a small quasicategory A choose the object-preserving locally Kan replacement I=R C[A] and its Dwyer--Kan equivalence u:C[A] -> I from [lem-coef-coherent-nerve-comparison]. Put C=I^op and phi=u:C[A] -> C^op. The unmarked cone adjunction L_phi dashv U_phi of [lem-coef-unmarked-straightening-quillen] is a Quillen equivalence from the contravariant slice to Kan-model C-diagrams. The marked cone adjunction St^+_phi dashv Un^+_phi of [lem-coef-marked-cone-straightening-quillen] is a Quillen equivalence from the Cartesian marked slice to marked C-diagrams. The identity of underlying cone formulas is literal: both use D_X=C^op amalg_{C[X]} C[X star Delta^0] and the value D_X(c,*). The marked construction adds the specified edges to this same simplicial set, and changes no underlying simplices.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-unmarked-straightening-quillen",
+    "lem-coef-marked-cone-straightening-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Section 2.2.1 and Definition 3.2.1.2: the common cone formula; Theorems 2.2.1.2 and 3.2.0.1 via the cited Quillen-equivalence nodes."
+   }
+  },
+  {
+   "text": "Let F:C -> sSet be objectwise Kan, and mark every edge in each value, giving F^sharp. For any marked X over A, adjunction and step 3 give natural bijections\nHom_+(X,Un^+_phi(F^sharp)) = Nat_+(St^+_phi X,F^sharp) = Nat(L_phi(underlying X),F) = Hom_{/A}(underlying X,U_phi F).\nThe middle equality holds because every target edge is marked; the enriched action is the same cone action. The final set also equals Hom_+(X,(U_phi F)^sharp). Naturality in all X identifies Un^+_phi(F^sharp) with (U_phi F)^sharp, over A, including its markings. Naturality in F follows from postcomposition in these bijections. Apply the same calculation to X times (Delta^n)^sharp: both sides then consist of exactly the same maps on underlying simplices. Thus this comparison respects transformations and every simplex operator, rather than just comparing values at base vertices.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen",
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Definition 3.2.1.2 and the right-adjoint construction: the all-marked-target adjunction calculation."
+   }
+  },
+  {
+   "text": "Pass the comparison of step 4 to infinity localizations using [lem-coef-simplicial-model-nerve-localization]. An objectwise Kan F and F^sharp are projectively fibrant in the two diagram models. Both right adjoints preserve weak equivalences between fibrant diagrams, by [lem-coef-model-infinity-derived-adjunction], so their derived values are the values in step 4. The unmarked output is a right fibration by [lem-coef-unmarked-straightening-quillen], whose every edge is Cartesian by step 1; its natural marking is therefore precisely sharp. Rectification [lem-coef-enriched-diagram-rectification] identifies the two diagram localizations with Fun(A^op,S) and Fun(A^op,Cat_infinity), and sharp with postcomposition by i. Its hypotheses hold: the Kan model is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model] at the terminal category, and the marked model is so by [lem-coef-marked-point-cartesian-model]; the projective structures and the Dwyer--Kan index change are supplied by the two cone nodes and the reversal C[A^op]=C[A]^op in [lem-coef-simplicial-right-fibration-presentation]. The universal property of localization retains the comparison as a coherent natural equivalence. Composing with the inverse straightening equivalences gives Cartesian straightening of a right fibration classified by X equal to i composed with X, on the whole right-fibration category.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-unmarked-straightening-quillen",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Theorems 2.2.1.2 and 3.2.0.1 with Proposition 4.2.4.4: derive the actual adjunction comparison, not merely an equivalence of homotopy categories."
+   }
+  },
+  {
+   "text": "Spell out the harmless opposite on space values needed for the cocartesian convention. There is a natural homeomorphism r_K:|K^op| -> |K|, [sigma;(t_0,...,t_n)] maps to [sigma;(t_n,...,t_0)]. The quotient formula of [def-cbc-enhanced-diagrams-cones] shows this is well-defined: reversal changes alpha:[m] -> [n] to alpha^vee(j)=n-alpha(m-j), exactly the opposite operator; reversing twice is the identity. The natural zigzag K^op -> Sing(|K^op|) -> Sing(|K|) <- K uses r_K in the middle and the realization-singular units on either end. Those units are weak homotopy equivalences by [lem-cbc-realization-singular-unit-weak]. Localizing it in the Kan model therefore identifies the opposite-space functor O with the identity, coherently in K, by [lem-coef-simplicial-model-nerve-localization]. Here O is the restriction of the coherent opposite involution to spaces: it has the same ordinary maps K -> L sent to K^op -> L^op, and localization's functor-category universal property identifies their extensions. In particular op composed with i is naturally equivalent to i, with fiberwise component the usual identification of a space with its opposite. This uses no degreewise identity Fun(K,L)=Fun(K^op,L^op).",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-cat-infinity-opposite-involution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Section 1.2.1 (opposites); direct reversal of realization coordinates, followed by the cited realization-singular and localization results."
+   }
+  },
+  {
+   "text": "For a left fibration p over B, its opposite is a right fibration over B^op. Apply step 5 to that fibration. Take the coherent opposite of its classified categories and use step 6 on the space-valued diagram. By the opposite definition of cocartesian straightening, this yields St_B(p) equivalent to i composed with T_B(p). This also follows directly at the ordinary right-adjoint level: the covariant unstraightening is (U_{B^op}F)^op by [lem-coef-simplicial-right-fibration-presentation]; step 4 gives the identical formula for the marked right adjoint, and step 6 removes the opposite on its Kan values. Thus the comparison uses the specified space-valued transport, including its higher simplices, not an arbitrarily chosen functor with the same vertex values. Evaluate at b and use the two fiber identifications of [lem-coef-space-transport-classification] and [lem-coef-cocartesian-straightening]: the comparison identifies the same fiber E_b with itself. The double coordinate reversal is the identity, so the component is equivalent to that identity. Taking opposites once more and using op squared equivalent to the identity recovers exactly the Cartesian straightening op composed with St_{B^op}(q^op) stated for right fibrations.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-cat-infinity-opposite-involution",
+    "lem-coef-space-transport-classification",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Sections 1.2.1, 2.2.1 and 3.2.1: the covariant dual, with both opposite operations retained."
+   }
+  },
+  {
+   "text": "The cone formulas and the adjunction bijections in step 4 commute with restriction of a base simplex. The base-change isomorphisms of [lem-coef-marked-cone-straightening-quillen] agree for composites and identities; the unmarked comparison has the same substitution, as the base-change clause of [lem-coef-simplicial-right-fibration-presentation] states. After rectification this is precisely the pullback/precomposition comparison in [lem-coef-space-transport-classification] and [lem-coef-cocartesian-straightening]. Since the comparison came from the same natural adjunction bijections before localization, its localization is compatible with these isomorphisms on transformations and all higher simplices. The coordinate reversal in step 6 is also natural and independent of the base. All constructions use small cone simplicial sets, small Kan-valued diagrams, and replacements in the input universe as in the marked-model and unmarked-presentation nodes. The small representative clause of space transport applies because B is U-small. Enlarging only U' changes neither these objects nor their mapping complexes or comparison maps; the opposite node explicitly has the same universe compatibility. This proves the remaining base-change and containing-universe assertions.",
+   "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-space-transport-classification",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-cat-infinity-opposite-involution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+    "place": "Propositions 2.2.1.1 and 3.2.1.4: common cone substitution and its identity/composition laws; universe-relative constructions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-marked-cone-straightening-quillen",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-space-transport-classification",
+  "lem-coef-unmarked-straightening-quillen"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Lurie, Higher Topos Theory, retained sandbox HTT.pdf/HTT.txt (not archived in literature/; WANTED)",
+  "place": "Proposition 2.4.2.4, Section 2.2.1, Definition 3.2.1.2 and Proposition 3.2.1.4; expanded using the existing marked/unmarked cone, rectification and localization nodes."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rniE 'left fibration|right fibration|leftFibration|rightFibration|straighten' Mathlib/",
-   "results": "none",
+   "tool": "leanfinder",
+   "query": "Straightening of left and right fibrations agrees with categorical straightening on space valued diagrams",
+   "results": "Top hits were SSet.modelCategoryQuillen.fibrations_eq, CategoryTheory.Nerve.strictSegal, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃, CategoryTheory.Nerve.isStrictSegal, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, SSet.Truncated.liftOfStrictSegal, CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂, SSet.StrictSegal.isRightKanExtension; none states infinity-categorical straightening.",
    "date": "2026-10-17",
-   "verdict": "no match: Mathlib has no left/right fibrations of simplicial sets or straightening."
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rlniE 'cocartesian|IsCartesian' Mathlib/ ; grep -rln KanComplex Mathlib/",
-   "results": "CategoryTheory/FiberedCategory/{Cartesian,Cocartesian,Fibered,HasFibers}.lean; Monoidal/OfHasFiniteProducts.lean; Distributive/Cartesian.lean; AlgebraicTopology/SimplicialSet/KanComplex.lean; SimplicialSet/AnodyneExtensions/PushoutProduct.lean; Quasicategory/Basic.lean",
+   "query": "straighten|[Ll]eft[Ff]ibration|[Rr]ight[Ff]ibration",
+   "results": "No matches in Mathlib source.",
    "date": "2026-10-17",
-   "verdict": "no match: the fibered-category files concern ordinary categories with Hom-set lifts; KanComplex and Quasicategory only define horn filling. No infinity-categorical straightening. LeanSearch/LeanFinder were not available to the maintainer reader and were not run."
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left fibrations are cocartesian fibrations classified by functors to spaces",
+   "results": "Top hits were CategoryTheory.Functor.IsFibered.toIsPreFibered, CategoryTheory.instIsCartesianCompOfIsFibered, CategoryTheory.Functor.IsFibered, CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian, HomotopicalAlgebra.fibrations, HomotopicalAlgebra.CategoryWithFibrations.fibrations, HomotopicalAlgebra.fibration_iff, HomotopicalAlgebra.cofibrations_op; none is the infinity-categorical statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, SSet.KanComplex",
+   "results": "Only SSet.instQuasicategoryOfKanComplex; it does not state left/right fibrations or straightening.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unstraightening of a Kan complex valued functor is a right fibration and agrees with marked unstraightening",
+   "results": "Top hits were SSet.StrictSegal.isRightKanExtension, SSet.StrictSegal.isPointwiseRightKanExtension, SSet.Truncated.rightExtensionInclusion, SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂, SSet.StrictSegal.isPointwiseRightKanExtensionAt, SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift, CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion, SSet.modelCategoryQuillen.fibrations_eq; none is the infinity-categorical statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-maps-presheaf-extension",
@@ -64,5 +222,34 @@
   "group": "NL"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fibration-straightening-space-restriction",
+  "worker": "stage1",
+  "summary": "Retained and re-read the earlier search log, item statement, citations and source PDF. Replaced the earlier three-step proof by a horn calculation and an explicit marked/unmarked right-adjoint comparison. The common cone formula gives Un^+(F^sharp)=(UF)^sharp before localization; the cited localization and rectification nodes retain all higher simplices. Spelled out the opposite-space comparison by reversal of realization coordinates, then checked duality, base change and universes. No statement change and no new nodes.",
+  "blueprint": "Realizes the blueprint proof place recorded in the item: HTT Proposition 2.4.2.4 and Sections 2.2.1/3.2.1, including the identification of left/right fibrations with space-valued transport inside cocartesian/Cartesian fibrations.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "The outer-horn criterion makes every edge in a Kan mapping complex an equivalence, identifying its core with itself. This is a generic horn lemma, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "The natural realization-singular weak equivalence turns reversal of realization coordinates into the coherent identification of an opposite space with the same space. No theorem of the item unit states this generic topological comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-realization-singular-unit-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-c8ad18e28",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-c8ad18e28 (reviewer sub-agent of L); spot-checked: Read the full item, all 18 cited statements, report, route, and relevant source locations. Verified all eight steps, coherent marked/unmarked comparison, duality, fiber normalization, base change, universes, edge cases, and absence of dependency cycles or duplicates. Accepted both declared generic tool uses. No fixes needed; detailed findings are in review.md."
+ }
 }

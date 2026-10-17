@@ -29,9 +29,76 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_T=\\operatorname{Map}_{\\mathcal C}(T,[a,y])$, $B_T=\\operatorname{Map}_{\\mathcal C}(T,[a,a])$ and $E_T=\\operatorname{Map}_{\\mathcal C}(T,1)$. Apply [lem-coef-infinity-yoneda-presheaf-limits] to the assumed pullback cone (its indexing span is finite). It identifies $\\operatorname{Map}_{\\mathcal C}(T,P_p)$ with $A_T\\times^h_{B_T}E_T$, where the maps are postcomposition by $[a,p]$ and $e$. By terminality, $E_T$ is contractible. Choose its terminal arrow $!_T$ and insert the point $\\{!_T\\}\\to E_T$. This is a weak equivalence; the other two maps of the resulting spans are identities. Thus [lem-coef-kan-homotopy-pullback-invariance] identifies $\\operatorname{hofib}_{e!_T}(A_T\\to B_T)$ with $A_T\\times^h_{B_T}E_T$. All spaces involved are Kan by [lem-cbc-enhanced-functor-cone-calculus]. The inverse comparison gives $\\operatorname{Map}_{\\mathcal C}(T,P_p)\\simeq\\operatorname{hofib}_{e!_T}(A_T\\to B_T)$. In the path model this comparison retains the map to $[a,y]$ and the pullback compatibility path; terminality removes only the contractible choice of the arrow to $1$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UT",
+    "place": "Proposition 7.7.3.13: representability of maps from the product-to-slice functor; explicit mapping-space argument by the worker, using only the pullbacks and exponential adjunction assumed in the statement."
+   }
+  },
+  {
+   "text": "Write $\\alpha_{T,z}:\\operatorname{Map}(T,[a,z])\\simeq\\operatorname{Map}(T\\times a,z)$ for the specified adjunction equivalences. Their given naturality in $z$ supplies the coherent square\n$$\\alpha_{T,a}\\circ([a,p]\\circ-)\\simeq(p\\circ-)\\circ\\alpha_{T,y}.$$\nTheir naturality in $T$, applied to $!_T:T\\to1$, gives\n$$\\alpha_{T,a}(e!_T)\\simeq\\alpha_{1,a}(e)\\circ(!_T\\times\\mathrm{id}_a)=\\mathrm{id}_a\\circ\\operatorname{pr}_a=\\operatorname{pr}_a,$$\nusing $1\\times a\\simeq a$ and the definition of $e$. These are substitutions in the assumed coherent natural equivalence, so they also hold for every simplicial family of maps, rather than just on components.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UT",
+    "place": "Proposition 7.7.3.13: representability of maps from the product-to-slice functor; explicit mapping-space argument by the worker, using only the pullbacks and exponential adjunction assumed in the statement."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-spaces-homotopy-fiber-detection] to the square in step 2 with horizontal maps $\\alpha_{T,y}$ and $\\alpha_{T,a}$. Both horizontal maps are equivalences, and the square carries exactly the specified naturality homotopy. Its forward implication therefore makes the induced map on each homotopy fiber an equivalence. At the point $e!_T$, use the path $\\alpha_{T,a}(e!_T)\\simeq\\operatorname{pr}_a$ from step 2 to obtain\n$$\\operatorname{hofib}_{e!_T}([a,p]\\circ-)\\simeq\\operatorname{hofib}_{\\operatorname{pr}_a}(p\\circ-).$$\nConcretely $(u,\\gamma:[a,p]u\\simeq e!_T)$ goes to $\\alpha_{T,y}(u)$ with the path obtained by the naturality homotopy, $\\alpha_{T,a}(\\gamma)$, and the final path to $\\operatorname{pr}_a$. The cited fiber theorem retains higher simplices and allows empty fibers; it requires no fibration hypothesis on postcomposition. Composing with step 1 proves the first equivalence in the statement.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UT",
+    "place": "Proposition 7.7.3.13: representability of maps from the product-to-slice functor; explicit mapping-space argument by the worker, using only the pullbacks and exponential adjunction assumed in the statement."
+   }
+  },
+  {
+   "text": "Specialize [lem-cbc-enhanced-functor-cone-calculus] to the one-point shape $K=\\Delta^0$ and diagram with value $a$. Its coherent cone category is $\\mathcal C_{/a}$, since a cone is just an arrow to $a$ with its coherent triangles. Take its two cones to be $\\operatorname{pr}_a:T\\times a\\to a$ and $p:y\\to a$. The cited mapping-space formula reads\n$$\\operatorname{Map}_{\\mathcal C_{/a}}((T\\times a,\\operatorname{pr}_a),(y,p))\\simeq\\operatorname{hofib}_{\\operatorname{pr}_a}\\bigl(\\operatorname{Map}_{\\mathcal C}(T\\times a,y)\\xrightarrow{p\\circ-}\\operatorname{Map}_{\\mathcal C}(T\\times a,a)\\bigr).$$\nInvert it to get the second required equivalence. The underlying arrow is the evaluation of $u:T\\to[a,y]$; its homotopy over $a$ is precisely the path described in step 3.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UT",
+    "place": "Proposition 7.7.3.13: representability of maps from the product-to-slice functor; explicit mapping-space argument by the worker, using only the pullbacks and exponential adjunction assumed in the statement."
+   }
+  },
+  {
+   "text": "For clarity, coherence in the varying object $p$ does not require independent choices of arrows between pullbacks. Let $G:\\mathcal C\\to\\mathcal C_{/a}$ send $T$ to $(T\\times a,\\operatorname{pr}_a)$, and let $D_0$ be the full subcategory of objects $p$ for which the assumed pullback exists. Evaluation gives a map $P_p\\times a\\to y$; the pullback path and step 2 give its triangle over $a$, hence a map $\\epsilon_p:G(P_p)\\to p$. Steps 1–4 show that postcomposition with this map induces $\\operatorname{Map}_{\\mathcal C}(T,P_p)\\simeq\\operatorname{Map}_{\\mathcal C_{/a}}(G(T),p)$: it sends $v:T\\to P_p$ to evaluation after $(\\pi_{[a,y]}v)\\times\\mathrm{id}_a$, with the displayed triangle. Thus the hypotheses of [lem-coef-parametric-universal-arrows] hold for $G$ and $D_0$. That lemma assembles these universal arrows coherently, with contractible choice, and gives their mapping-space equivalences for every simplicial parameter $K$, compatibly with restriction in $K$. For an arrow $h:p\\to p'$ its induced map $P_p\\to P_{p'}$ is the one given by $[a,h]$ and the triangle $p'h\\simeq p$: on a test map it sends $(u,\\gamma)$ to $([a,h]u,\\gamma')$, and after evaluation to $(h\\alpha(u),\\alpha(\\gamma'))$. Naturality of $\\alpha$ identifies these two descriptions, including the triangle paths. The representable-limit equivalences are natural in testing objects and diagrams by [lem-coef-infinity-yoneda-presheaf-limits]. These identifications prove the claimed coherent naturality of the actual pullback/evaluation comparison in both variables and all simplicial parameters.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UT",
+    "place": "Proposition 7.7.3.13: representability of maps from the product-to-slice functor; explicit mapping-space argument by the worker, using only the pullbacks and exponential adjunction assumed in the statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05UT",
+  "place": "Proposition 7.7.3.13: representability of maps from the product-to-slice functor; explicit mapping-space argument by the worker, using only the pullbacks and exponential adjunction assumed in the statement."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -102,10 +169,45 @@
    "results": "{\"t\": \"2026-10-17T08:44:26Z\", \"tool\": \"leansearch\", \"query\": \"A pullback of internal Homs along the identity section represents the space of sections in a cartesian closed infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ChosenPullbacksAlong.pullbackId\", \"CategoryTheory.IsPullback.of_id_snd\", \"CategoryTheory.internalizeHom\", \"CategoryTheory.Over.sections\", \"CategoryTheory.Over.pullbackId\", \"AlgebraicGeometry.Scheme.Modules.pullbackId\", \"CategoryTheory.Over.sections_obj\", \"CategoryTheory.ChosenPullbacksAlong.pullbackMap_id\"], \"digest\": \"fea0ab2d9aee5c43\"}",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean:68-71,82-101,138-162,172-173 constructs sections and the toOverSectionsAdj adjunction only for an ordinary Category, with bijections of hom sets. Monoidal/Closed/Basic.lean:143-176 gives ordinary currying. These do not yield equivalences of full coherent mapping spaces or homotopy fibers in a quasicategory. The truncated-homotopy-category hits also retain only homotopy classes. Read these candidates; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponential pullback along the identity section represents the full mapping space in the slice of a cartesian closed infinity category",
+   "results": "{\"t\": \"2026-10-17T12:12:14Z\", \"tool\": \"leanfinder\", \"query\": \"The exponential pullback along the identity section represents the full mapping space in the slice of a cartesian closed infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.sections_obj\", \"CategoryTheory.Over.sections_map\", \"CategoryTheory.Over.sections\", \"CategoryTheory.ExponentiableMorphism.id\", \"CategoryTheory.ExponentiableMorphism.coev\", \"CategoryTheory.ExponentiableMorphism.ev\", \"CategoryTheory.Over.toOverSectionsAdj_unit_app\", \"CategoryTheory.Over.sectionsUncurry\"], \"digest\": \"7879550924a0eff7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean:38-49,68-71,82-101,138-173; sections and toOverSectionsAdj concern ordinary Category hom sets, not full quasicategorical mapping spaces. Other returned candidates are ordinary-category exponentials or truncated homotopy categories, not the asserted coherent homotopy-fiber equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.toOverSectionsAdj",
+   "results": "{\"t\": \"2026-10-17T12:12:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Over.toOverSectionsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Over.toOverSectionsAdj\", \"CategoryTheory.Over.toOverSectionsAdj_counit_app\", \"CategoryTheory.Over.toOverSectionsAdj_unit_app\"], \"digest\": \"1ac3a5206182ce35\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean:38-49,68-71,82-101,138-173; sections and toOverSectionsAdj concern ordinary Category hom sets, not full quasicategorical mapping spaces. Other returned candidates are ordinary-category exponentials or truncated homotopy categories, not the asserted coherent homotopy-fiber equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "toOverSectionsAdj|sectionsCurry|homotopyFiber|mappingSpace",
+   "results": "{\"t\": \"2026-10-17T12:12:15Z\", \"tool\": \"grep\", \"query\": \"toOverSectionsAdj|sectionsCurry|homotopyFiber|mappingSpace\", \"sub\": \"CategoryTheory/LocallyCartesianClosed\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\"], \"digest\": \"dca8797522107ff2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean:38-49,68-71,82-101,138-173; sections and toOverSectionsAdj concern ordinary Category hom sets, not full quasicategorical mapping spaces. Other returned candidates are ordinary-category exponentials or truncated homotopy categories, not the asserted coherent homotopy-fiber equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying in a quasicategory sends the identity section to the product projection and identifies the homotopy fibers of postcomposition",
+   "results": "{\"t\": \"2026-10-17T12:13:26Z\", \"tool\": \"leanfinder\", \"query\": \"Currying in a quasicategory sends the identity section to the product projection and identifies the homotopy fibers of postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"ContinuousMap.Homotopy.curry_one\", \"CategoryTheory.Limits.map_id_left_eq_curry_map\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_map_mkHom_homMk_id\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_map_mkHom_id_homMk\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.left_unitality\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\"], \"digest\": \"4c4dd806b87c784d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean:38-49,68-71,82-101,138-173; sections and toOverSectionsAdj concern ordinary Category hom sets, not full quasicategorical mapping spaces. Other returned candidates are ordinary-category exponentials or truncated homotopy categories, not the asserted coherent homotopy-fiber equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a cartesian closed infinity category the pullback of an exponential along the identity section represents morphisms over the base",
+   "results": "{\"t\": \"2026-10-17T12:13:26Z\", \"tool\": \"leansearch\", \"query\": \"In a cartesian closed infinity category the pullback of an exponential along the identity section represents morphisms over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.pullbackId\", \"CategoryTheory.exp\", \"CategoryTheory.ChosenPullbacksAlong.pullbackId\", \"CategoryTheory.ExponentiableMorphism.pushforward_uncurry_curry\", \"CategoryTheory.internalizeHom\", \"CategoryTheory.Over.coreHomEquivToOverSections\", \"CategoryTheory.ExponentiableMorphism.isExponentiable\", \"CategoryTheory.Over.sectionsCurry\"], \"digest\": \"a85a3c64df7b343a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean:38-49,68-71,82-101,138-173; sections and toOverSectionsAdj concern ordinary Category hom sets, not full quasicategorical mapping spaces. Other returned candidates are ordinary-category exponentials or truncated homotopy categories, not the asserted coherent homotopy-fiber equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-universal-colimits",
@@ -121,5 +223,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-exponential-dependent-product-representation",
+  "worker": "stage1",
+  "summary": "Proved the exponential pullback representation directly on full mapping spaces using existing representable-limit, homotopy-fiber, coherent cone and universal-arrow lemmas. Checked the identity section and postcomposition explicitly and retained coherent naturality. No statement change and no new nodes.",
+  "blueprint": "Realizes the explicit exponential mapping-space comparison extracted from former step 3 of lem-coef-space-universal-colimits, ultimately serving prop-coef-integral-exceptional-adjoint proof paragraph 2 before R lim.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space and coherent cone calculus; the one-point case gives the slice mapping-space formula and Kan mapping spaces. It does not replace any geometric step of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-20f7015fe",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-20f7015fe (reviewer sub-agent of L); spot-checked: Read all five proof steps and cited statements against Kerodon, HTT, lecture notes, and blueprint sources. Coherent naturality and slice mapping formulas are supported; 180 finite-set checks passed. No new nodes, duplicate, cycle, or repair needed. Accepted the declared cone-calculus tool use. Full findings are in review.md."
  }
 }

@@ -23,9 +23,105 @@
   "def-pur-sheaf-tensor-product",
   "lem-weil-pbc-inverse-image-stalk-germ"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_M(W)=\\bigoplus_{s:W\\to V/T}M(W,s)$, $Q=M\\otimes_Ae^*N$, and $H=e_{\\Sigma!}Q$. These are the defining sum presheaves and sheaf tensor product. For each lift $s$, put $u_s(n)=\\Gamma_s^*\\eta_e(W)(n)$, where $\\Gamma_s=(s,\\mathrm{id}_W)$. The constant-coefficient inverse-image adjunction is an adjunction of module sheaves, so $u_s$ is $A$-linear. The rule $b_W(\\sum_s\\iota_sm_s,n)=\\sum_s\\eta_{P_Q,W}(\\iota_s(m_s\\otimes u_s(n)))$ is therefore $A$-bilinear. All sums are finite; the formula respects addition in every summand and $b_W(a\\iota_sm,n)=b_W(\\iota_sm,an)$. For a test morphism $h:W'\\to W$, the graph identity $(\\mathrm{id}_V\\times h)\\Gamma_{sh}=\\Gamma_sh$, naturality of the unit, and the restriction maps in the defining sum and tensor presheaves give $u_s(n)|_{(W',sh)}=u_{sh}(n|_{W'})$. Thus restricting $b_W(\\iota_sm,n)$ gives exactly $b_{W'}(\\iota_{sh}(m|_{W'}),n|_{W'})$, including when several lifts restrict to the same lift (their entries add). This constructs a bilinear morphism of presheaves $P_M\\times N\\to H$.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), pure-tensor construction and restriction check; lift-indexed model as in etale-cohomology.tex Tag 03S5 (proposition-describe-jshriek)"
+   }
+  },
+  {
+   "text": "Apply the bilinear sheafification-extension theorem with ring presheaf the constant presheaf $A$, its sheafification $A_T$, presheaves $\\mathcal F=P_M$ and $\\mathcal G=N$, and target $\\mathcal H=H$. The theorem extends $b$ uniquely to an $A_T$-bilinear morphism $(P_M)^\\#\\times N\\to H$; here $N^\\#=N$ canonically by the sheafification universal property because $N$ is already a sheaf. The sheaf tensor universal property then gives a unique module morphism $p^0_{M,N}:(P_M)^\\#\\otimes_{A_T}N\\to H$. The defining sum extension identifies $(P_M)^\\#=e_{\\Sigma!}M$, and its unit equation reads $p^0(\\eta_{P_M}(\\iota_sm)\\otimes n)=\\eta_{P_Q}(\\iota_s(m\\otimes u_s(n)))$. This is precisely the formula asserted in the statement. Notice that the extension theorem supplies a bilinear map, and the separate tensor universal property supplies the linear map out of the sheaf tensor.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor), bilinear extension and the Hom–Bilin display immediately following it in Section 03EK"
+   }
+  },
+  {
+   "text": "For module morphisms $a:M\\to M'$ and $c:N\\to N'$, both naturality composites send $(\\iota_sm)\\otimes n$ to $\\iota_s(a(m)\\otimes u_s(c(n)))$: naturality of the unit gives $e^*c(u_s(n))=u_s(c(n))$. The uniqueness in bilinear extension, followed by injectivity of the Hom–Bilin bijection, identifies the two sheaf morphisms. Restriction compatibility and balancing were verified for $b$ in Step 1 and are preserved by its bilinear extension and tensor factorization. Thus the constructed map is canonical and natural in both variables.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), compatibility with restrictions and naturality of the pure-tensor construction"
+   }
+  },
+  {
+   "text": "Fix $\\bar t:\\operatorname{Spec}\\Omega\\to T$. The sum-stalk formula identifies the germ of $\\iota_sm$, represented on a pointed neighbourhood $(W,\\bar w)$, with $m_{\\bar v}$ in the summand $\\bar v=s\\bar w$. The tensor-stalk formula identifies its tensor with $n_{\\bar t}$ with the germ of $\\eta_{P_M}(\\iota_sm)\\otimes n$. By Step 2 its image is the germ of $\\iota_s(m\\otimes u_s(n))$, which the target sum-stalk and tensor-stalk formulas send to $m_{\\bar v}\\otimes(u_s(n))_{\\bar v}$. The graph $\\Gamma_s$ maps the pointed neighbourhood $(W,\\bar w)$ of $\\bar v$ into $(V\\times_TW,(\\bar v,\\bar w))$, so restricting the unit image along this pointed morphism does not change its germ. The inverse-image stalk-germ theorem therefore sends $(u_s(n))_{\\bar v}$ to $n_{\\bar t}$. This identification is $A$-linear: its naturality for multiplication-by-$a$ endomorphisms of $N$ gives scalar compatibility for each $a\\in A$. Consequently the actual map $(p^0_{M,N})_{\\bar t}$ becomes $D:(\\bigoplus_{\\bar v\\mapsto\\bar t}M_{\\bar v})\\otimes_AN_{\\bar t}\\to\\bigoplus_{\\bar v\\mapsto\\bar t}(M_{\\bar v}\\otimes_AN_{\\bar t})$, $D(\\iota_{\\bar v}m\\otimes n)=\\iota_{\\bar v}(m\\otimes n)$. These generators determine the map because the stalk and tensor identifications are isomorphisms and ordinary tensors are generated by pure tensors.",
+   "uses": [
+    "lem-amb-etale-sum-stalks",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), geometric-stalk square; etale-cohomology.tex Tags 03S5 and 03Q1 (lemma-stalk-pullback), including the germ formula"
+   }
+  },
+  {
+   "text": "For each $\\bar v$, the bilinear map $(m,n)\\mapsto\\iota_{\\bar v}m\\otimes n$ induces a linear map $M_{\\bar v}\\otimes_AN_{\\bar t}\\to(\\bigoplus M_{\\bar v})\\otimes_AN_{\\bar t}$ by the module tensor universal property. Adding these maps on finite-support tuples defines $E$ on $\\bigoplus(M_{\\bar v}\\otimes_AN_{\\bar t})$. Then $DE$ fixes every $\\iota_{\\bar v}(m\\otimes n)$ and $ED$ fixes every $\\iota_{\\bar v}m\\otimes n$. These generate their respective modules, so both composites are identities. Hence the stalk map $D$ is invertible, with no finiteness or flatness assumption on the modules.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), elementary verification that the lower horizontal direct-sum tensor map is an isomorphism; algebra.tex Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "Every geometric stalk of $p^0_{M,N}$ is an isomorphism by Steps 4–5. The conservativity theorem for geometric stalks makes the underlying morphism of abelian sheaves an isomorphism. Its inverse is $A$-linear since the original bijective morphism is $A$-linear, so it is an isomorphism of $A$-module sheaves. Together with Step 3 and the calculation of Step 4 this proves every clause, including the specified map on geometric stalks.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PU (theorem-exactness-stalks)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-amb-etale-sum-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-module-tensor-product",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF (lemma-f-shriek-projection), pure-tensor construction and stalk square; its elementary sum-model calculation uses etale-cohomology.tex Tag 03S5, sites-modules.tex Tag 0GMW and the following Hom–Bilin display, and etale-cohomology.tex Tags 03Q1 and 03PU"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,10 +171,45 @@
    "results": "{\"t\": \"2026-10-17T09:37:05Z\", \"tool\": \"leansearch\", \"query\": \"projection formula canonical isomorphism etale sheaf lower shriek tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"TopCat.Sheaf.pushforwardForgetIso\"], \"digest\": \"3165cd8bb2acf8f7\"}",
    "date": "2026-10-17",
    "verdict": "no match: formally etale algebra tensor, ordinary module-presheaf tensor, sheafification and scheme structure-sheaf restriction do not state this constant-coefficient etale sum-extension projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek.*(Tensor|Projection)|shriek.*tensor|shriek.*projection",
+   "results": "{\"t\": \"2026-10-17T12:24:45Z\", \"tool\": \"grep\", \"query\": \"etaleLowerShriek.*(Tensor|Projection)|shriek.*tensor|shriek.*projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ring-localization, formally etale differential, module-presheaf tensor and LightCondensed structure lemmas, none the lift-indexed geometric etale projection map with its germ formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-17T12:24:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\"], \"digest\": \"dfb1da0ac422bb0d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ring-localization, formally etale differential, module-presheaf tensor and LightCondensed structure lemmas, none the lift-indexed geometric etale projection map with its germ formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical projection formula for etale sum extension sheaves of modules tensor inverse image",
+   "results": "{\"t\": \"2026-10-17T12:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"canonical projection formula for etale sum extension sheaves of modules tensor inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorCotangentInvFun\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Extension.tensorCotangent\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.Extension.tensorCotangentSpace\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\"], \"digest\": \"80b3700a4bdf6e30\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ring-localization, formally etale differential, module-presheaf tensor and LightCondensed structure lemmas, none the lift-indexed geometric etale projection map with its germ formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula extension by zero etale sheaf tensor inverse image",
+   "results": "{\"t\": \"2026-10-17T12:24:58Z\", \"tool\": \"leansearch\", \"query\": \"projection formula extension by zero etale sheaf tensor inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.ExtendByZero.linearMap\", \"Function.ExtendByZero.linearMap_apply\", \"AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"Finsupp.supportedEquivFinsupp_symm_apply_coe\", \"Algebra.FormallyEtale.instTensorProduct\", \"AlgebraicGeometry.Proj.zero_apply\"], \"digest\": \"5b46b1106e05c266\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ring-localization, formally etale differential, module-presheaf tensor and LightCondensed structure lemmas, none the lift-indexed geometric etale projection map with its germ formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product commutes with extension by zero from a localized site sheaf modules",
+   "results": "{\"t\": \"2026-10-17T12:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"tensor product commutes with extension by zero from a localized site sheaf modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.map_lTensor\", \"IsLocalizedModule.rTensor\", \"IsLocalization.moduleTensorEquiv\", \"PresheafOfModules.Sheafify.mul_smul\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"5eb3d3176dc8ddaa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ring-localization, formally etale differential, module-presheaf tensor and LightCondensed structure lemmas, none the lift-indexed geometric etale projection map with its germ formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-support-map-compatibility",
@@ -97,5 +228,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-sheaf-projection-map",
+  "worker": "stage1",
+  "summary": "Constructed the actual lift-indexed projection map, checked the balancing and restriction equations, extended the bilinear map through constant-presheaf module sheafification and then the sheaf tensor universal property, computed its stalks using the three existing germ-normalized comparisons, and wrote out the inverse of the direct-sum tensor map before using stalk conservativity. Preserved the statement and all imported metadata. No new nodes.",
+  "blueprint": "The from.place of this node: original Step 5 of lem-pur-etale-support-map-compatibility makes the sheaf projection map precise, below Proof Step 3 of lem-pur-co-smooth-etale-locality (canonical maps from counits). This split supplies its sheaf-level construction and germ-normalized invertibility without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic module-sheafification tool extending the explicitly constructed bilinear presheaf map, including passage from constant presheaf A to constant sheaf A_T; this unit supplies no separate bilinear extension theorem."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor Hom–Bilin tool converting the extended bilinear map to a module morphism; it does not substitute a different projection-formula route."
+   },
+   {
+    "node": "lem-amb-etale-sum-stalks",
+    "why": "Generic germ-normalized stalk formula for the chosen lift-indexed sum extension, applied to M and M tensor e*N."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic constant-coefficient etale stalk tensor tool, applied on T and V; no Poincare pairing is used."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic inverse-image unit/germ comparison identifies the graph-restricted section with the original target germ."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic geometric-stalk conservativity tool for the final sheaf isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-amb-etale-sum-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q128-3ccce8e5b",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q128-3ccce8e5b (reviewer sub-agent of L); spot-checked: Reviewed the full item, route, cited DAG statements, and Stacks sources. Tag 0GKF supports the construction and stalk square; all six proof steps correctly handle sheafification, balancing, germs, arbitrary direct sums, and stalk conservativity. Edge cases and coefficient/base-change hypotheses check out. Review written to review.md; no repairs needed."
  }
 }

@@ -11,9 +11,75 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-system-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Factor $\\varnothing\\to X$ functorially as $\\varnothing\\to jQX\\xrightarrow{\\epsilon_X}X$, with the first map a cofibration and the second a trivial fibration, using the model-category conventions of [lem-coef-model-infinity-derived-adjunction]. Thus $QX$ is cofibrant. Applying the chosen functorial factorization to the square induced by $f:X\\to Y$ gives $Qf:QX\\to QY$ and $\\epsilon_Yj(Qf)=f\\epsilon_X$. Identities and composition are respected because the factorization is functorial. This constructs $Q$ and the natural transformation $\\epsilon$ with the stated components.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16, printed p. 116; explicit agent expansion using the full localization universal property."
+   }
+  },
+  {
+   "text": "If $f:X\\to Y$ is a weak equivalence, both $f\\epsilon_X$ and $\\epsilon_Y$ are weak equivalences. The naturality equation from Step 1 and two-out-of-three, part of the model-category axioms in [lem-coef-model-infinity-derived-adjunction], imply $j(Qf)\\in W$. By the definition of $W^c$, this says $Qf\\in W^c$. Inclusion $j$ preserves weak equivalences by the same definition. For a cofibrant object $A$, both $QjA$ and $A$ lie in the full subcategory $\\mathcal M^c$, so $\\epsilon_{jA}$ is a morphism there and belongs to $W^c$. Its naturality equation is also an equation there, since inclusion is fully faithful. Hence restriction of $\\epsilon$ is a natural transformation $\\epsilon^c:Qj\\to\\mathrm{id}_{\\mathcal M^c}$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16, printed p. 116; explicit agent expansion using the full localization universal property."
+   }
+  },
+  {
+   "text": "Put $\\mathcal C=N(\\mathcal M)[W^{-1}]$ and $\\mathcal A=N(\\mathcal M^c)[(W^c)^{-1}]$, and let $q:N(\\mathcal M)\\to\\mathcal C$ and $q_c:N(\\mathcal M^c)\\to\\mathcal A$ be localization maps. The weak equivalences form systems on the ordinary nerves: isomorphisms are weak equivalences, composition follows from two-out-of-three, and homotopy of arrows of an ordinary nerve identifies equal arrows. Step 2 implies that $qNj$ inverts $W^c$ and $q_cNQ$ inverts $W$. Apply the full functor-category universal property of [lem-coef-system-localization-universal] to obtain $j_\\infty:\\mathcal A\\to\\mathcal C$ and $Q_\\infty:\\mathcal C\\to\\mathcal A$ with $j_\\infty q_c\\simeq qNj$ and $Q_\\infty q\\simeq q_cNQ$. Substituting these comparisons gives $(j_\\infty Q_\\infty)q\\simeq qN(jQ)$ and $(Q_\\infty j_\\infty)q_c\\simeq q_cN(Qj)$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16, printed p. 116; explicit agent expansion using the full localization universal property."
+   }
+  },
+  {
+   "text": "The nerves of $\\epsilon$ and $\\epsilon^c$, followed respectively by $q$ and $q_c$, give coherent transformations $qN(jQ)\\to q$ and $q_cN(Qj)\\to q_c$. Every component is an equivalence because the localization maps invert $W$ and $W^c$. By the component criterion of [lem-cbc-enhanced-functor-cone-calculus], these are equivalences in the respective coherent functor categories. Their endpoints invert the relevant weak equivalences by Step 2, so they lie in the full subcategories occurring in [lem-coef-system-localization-universal]. Fullness also puts their inverses and inverse homotopies in those subcategories. Under the equivalences of functor categories supplied by that node, and the comparisons of Step 3, they therefore give $\\alpha:j_\\infty Q_\\infty\\simeq\\mathrm{id}_{\\mathcal C}$ and $\\beta:Q_\\infty j_\\infty\\simeq\\mathrm{id}_{\\mathcal A}$. In particular $j_\\infty$ and $Q_\\infty$ are inverse equivalences; these are precisely the transformations descended from the specified replacement maps.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16, printed p. 116; explicit agent expansion using the full localization universal property."
+   }
+  },
+  {
+   "text": "For any simplicial diagram shape $K$ in the enlarged universe, postcomposition gives $\\operatorname{Fun}(K,j_\\infty)$ and $\\operatorname{Fun}(K,Q_\\infty)$. Whiskering $\\alpha$ and $\\beta$ with each $K$-diagram gives their two composite-to-identity comparisons. At a vertex $k$ of a diagram $D$ the comparison is $\\alpha_{D(k)}$ or $\\beta_{D(k)}$, an equivalence. The component criterion of [lem-cbc-enhanced-functor-cone-calculus] makes each comparison an equivalence in the diagram quasicategory. These comparisons are natural in $D$: a transformation of $K$-diagrams is a map $K\\times\\Delta^1$ into the target, and its naturality prism is obtained simply by composing this map with the coherent transformation $\\alpha$ or $\\beta$; the same composition on $K\\times\\Delta^n$ supplies every higher compatibility. Thus the comparison acts on coherent diagrams and all their transformations. This proves the final clause without replacing a functor category by its homotopy category.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16, printed p. 116; explicit agent expansion using the full localization universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-system-localization-universal",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent derived coefficient-adjunction infrastructure. Agent proof of the functorial-replacement assertion of Higher Algebra Remark 1.3.4.16, using the two cited general coherent-localization tools."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +108,45 @@
    "results": "{\"t\": \"2026-10-17T08:27:31Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of cofibrant objects in a model category induces an equivalence of infinity categorical localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"4bb4b8799aa23dc2\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-245,290-330 and DerivabilityStructureCofibrant.lean:25-65. The localized-equivalence instance and resolution concern ordinary categories and their ordinary homotopy-category localization; they do not give the full coherent functor-category equivalence. Bifibrant.lean defines the cofibrant subcategory only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial cofibrant replacement induces an inverse equivalence to inclusion in the infinity categorical localization",
+   "results": "{\"t\": \"2026-10-17T11:17:22Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial cofibrant replacement induces an inverse equivalence to inclusion in the infinity categorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"6cc20bf634976852\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean:127-245,285-340 and DerivabilityStructureCofibrant.lean:25-65; these give ordinary category localizations and resolutions, not the coherent functor-category assertion. Localization.Predicate functorEquivalence also concerns ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "resolution|IsLocalizedEquivalence|IsLocalization",
+   "results": "{\"t\": \"2026-10-17T11:18:36Z\", \"tool\": \"grep\", \"query\": \"resolution|IsLocalizedEquivalence|IsLocalization\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\"], \"digest\": \"0f71806f3c9ec553\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean:127-245,285-340 and DerivabilityStructureCofibrant.lean:25-65; these give ordinary category localizations and resolutions, not the coherent functor-category assertion. Localization.Predicate functorEquivalence also concerns ordinary categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An objectwise weak equivalence of relative functors gives an equivalence of functors on infinity categorical localizations",
+   "results": "{\"t\": \"2026-10-17T11:18:37Z\", \"tool\": \"leansearch\", \"query\": \"An objectwise weak equivalence of relative functors gives an equivalence of functors on infinity categorical localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.functorEquivalence\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"CategoryTheory.Localization.Construction.objEquiv\", \"CategoryTheory.Functor.IsLocalization.isEquivalence\", \"CategoryTheory.Functor.IsLocalization.of_isEquivalence\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Localization.lift\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isEquivalence\"], \"digest\": \"cd12eb48c795c47e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean:127-245,285-340 and DerivabilityStructureCofibrant.lean:25-65; these give ordinary category localizations and resolutions, not the coherent functor-category assertion. Localization.Predicate functorEquivalence also concerns ordinary categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.CofibrantObject",
+   "results": "{\"t\": \"2026-10-17T11:18:37Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.CofibrantObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.mk\", \"HomotopicalAlgebra.CofibrantObject.ι\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjCofibrantObjects\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.mk_surjective\", \"HomotopicalAlgebra.BifibrantObject.ιCofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.homMk\"], \"digest\": \"3946396c281ba0b3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean:127-245,285-340 and DerivabilityStructureCofibrant.lean:25-65; these give ordinary category localizations and resolutions, not the coherent functor-category assertion. Localization.Predicate functorEquivalence also concerns ordinary categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent natural transformations are equivalences if their components are equivalences and descend along relative category localizations",
+   "results": "{\"t\": \"2026-10-17T11:23:08Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent natural transformations are equivalences if their components are equivalences and descend along relative category localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"51e653fa11a69c1c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean:127-245,285-340 and DerivabilityStructureCofibrant.lean:25-65; these give ordinary category localizations and resolutions, not the coherent functor-category assertion. Localization.Predicate functorEquivalence also concerns ordinary categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sifted-good-diagram-calculus",
@@ -72,5 +173,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cofibrant-inclusion-coherent-localization",
+  "worker": "stage1",
+  "summary": "Expanded the functorial cofibrant-replacement comparison directly: two-out-of-three proves Q is relative; the restricted replacement map has cofibrant endpoints; the full functor-category localization property descends both objectwise equivalences. Reused the existing pointwise criterion, with no new nodes or statement change.",
+  "blueprint": "The inherited ancestor prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2: coherent derived coefficient adjunction. This item supplies the cofibrant-localization comparison used in the intermediate good-diagram calculus; Steps 1-5 expand the Higher Algebra Remark 1.3.4.16 comparison specified in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only the general componentwise criterion for equivalences in coherent functor categories is used, including arbitrary simplicial diagram shapes. The coefficient-adjunction unit has no separate statement for that generic quasicategory fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-bcce87ac4",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-bcce87ac4 (reviewer sub-agent of L); spot-checked: Read the required instructions, item, cited nodes, unit/chapter route, Mathlib search evidence, and Lurie HA sources. Verified all five proof steps, hypotheses, coherent functor-category descent, edge cases, duplicate audit, and route/tool use. Wrote review.md; no repairs needed."
  }
 }

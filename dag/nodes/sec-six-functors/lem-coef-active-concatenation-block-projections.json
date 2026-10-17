@@ -23,7 +23,7 @@
  },
  "kind": "statement",
  "title": "Naturality of block projections of active concatenation",
- "statement": "Use quasicategories, coherent functors, transformations and mapping spaces of [def-cbc-enhanced-diagrams-cones], symmetric infinity-operads, their inert edges and active and inert pointed maps of [lem-coef-operadic-approximation-restriction], and the active concatenation $\\oplus$ of [lem-coef-active-operad-cocartesian-concatenation]. Let $\\mathcal C^\\otimes\\to N(\\mathrm{Fin}_*)$ be a symmetric infinity-operad, let $s\\geq0$, and let $F:(\\mathcal C^\\otimes_{\\mathrm{act}})^s\\to\\mathcal C^\\otimes_{\\mathrm{act}}$ be the $s$-fold ordered concatenation $\\mathbf x=(x_1,\\ldots,x_s)\\mapsto\\bigoplus_{j=1}^sx_j$, the empty tuple when $s=0$. Write $\\iota:\\mathcal C^\\otimes_{\\mathrm{act}}\\to\\mathcal C^\\otimes$ for the inclusion and $\\mathrm{pr}_j$ for the $j$th projection of the product. If $x_j$ lies over $\\langle r_j\\rangle$ and $r=\\sum_jr_j$, then $F(\\mathbf x)$ lies over $\\langle r\\rangle$, and for an active tuple $\\mathbf h=(h_j:x_j\\to x_j')$ with pointed maps $\\gamma_j$ the arrow $F(\\mathbf h)$ lies over the blockwise sum $\\coprod_j\\gamma_j$, which sends the $j$th consecutive input block into the $j$th output block. For each $j$ there is a coherent transformation $p_j:\\iota F\\Rightarrow\\iota\\,\\mathrm{pr}_j$ of functors $(\\mathcal C^\\otimes_{\\mathrm{act}})^s\\to\\mathcal C^\\otimes$, unique up to a contractible space of choices, whose component $p_j(\\mathbf x):F(\\mathbf x)\\to x_j$ is an inert edge over the block projection $q_j:\\langle r\\rangle\\to\\langle r_j\\rangle$ (the identity of the $j$th block onto $\\langle r_j\\rangle$, every other input to the basepoint). In particular, for every active tuple $\\mathbf h:\\mathbf x\\to\\mathbf x'$ there are coherent squares $p_j(\\mathbf x')\\,F(\\mathbf h)\\simeq h_j\\,p_j(\\mathbf x)$, with all higher simplices of these naturality data. Empty blocks $r_j=0$ are included; for $s=1$ the transformation $p_1$ is an equivalence $F\\simeq\\mathrm{id}$, and for $s=0$ there are no projections.",
+ "statement": "Use quasicategories, coherent functors, transformations and mapping spaces of [def-cbc-enhanced-diagrams-cones], symmetric infinity-operads, their inert edges and active and inert pointed maps of [lem-coef-operadic-approximation-restriction], and the active concatenation $\\oplus$ of [lem-coef-active-operad-cocartesian-concatenation]. Let $\\mathcal C^\\otimes\\to N(\\mathrm{Fin}_*)$ be a symmetric infinity-operad, let $s\\geq0$, and let $F:(\\mathcal C^\\otimes_{\\mathrm{act}})^s\\to\\mathcal C^\\otimes_{\\mathrm{act}}$ be the $s$-fold ordered concatenation $\\mathbf x=(x_1,\\ldots,x_s)\\mapsto\\bigoplus_{j=1}^sx_j$, the empty tuple when $s=0$. Write $\\iota:\\mathcal C^\\otimes_{\\mathrm{act}}\\to\\mathcal C^\\otimes$ for the inclusion and $\\mathrm{pr}_j$ for the $j$th projection of the product. If $x_j$ lies over $\\langle r_j\\rangle$ and $r=\\sum_jr_j$, then $F(\\mathbf x)$ lies over $\\langle r\\rangle$, and for an active tuple $\\mathbf h=(h_j:x_j\\to x_j')$ with pointed maps $\\gamma_j$ the arrow $F(\\mathbf h)$ lies over the blockwise sum $\\coprod_j\\gamma_j$, which sends the $j$th consecutive input block into the $j$th output block. For each $j$ there is a coherent transformation $p_j:\\iota F\\Rightarrow\\iota\\,\\mathrm{pr}_j$ of functors $(\\mathcal C^\\otimes_{\\mathrm{act}})^s\\to\\mathcal C^\\otimes$, whose component $p_j(\\mathbf x):F(\\mathbf x)\\to x_j$ is an inert edge over the block projection $q_j:\\langle r\\rangle\\to\\langle r_j\\rangle$ (the identity of the $j$th block onto $\\langle r_j\\rangle$, every other input to the basepoint). In particular, for every active tuple $\\mathbf h:\\mathbf x\\to\\mathbf x'$ there are coherent squares $p_j(\\mathbf x')\\,F(\\mathbf h)\\simeq h_j\\,p_j(\\mathbf x)$, with all higher simplices of these naturality data. Empty blocks $r_j=0$ are included; for $s=1$ the transformation $p_1$ is an equivalence $F\\simeq\\mathrm{id}$, and for $s=0$ there are no projections.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
   "place": "Construction 2.2.4.1, Proposition 2.2.4.9 and Remark 2.2.4.6 (symmetric monoidal envelope; tensor product in the active subcategory computed by concatenation with its inert block projections); online September 2017 edition, archival copy WANTED."
@@ -33,9 +33,106 @@
   "lem-coef-operadic-approximation-restriction",
   "lem-coef-active-operad-cocartesian-concatenation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=N(\\mathsf{Fin}_*)$ and $p:\\mathcal C^\\otimes\\to S$. Apply [lem-coef-active-operad-envelope-cocartesian] to $p$, with $S$ the commutative operad. Its extra equivalence-lifting hypothesis holds: an equivalence in $S$ is a permutation and hence inert, so it has an operadic cocartesian lift. This lift is an equivalence: in the homotopy-pullback mapping square of [lem-coef-infinity-cocartesian-mapping-criterion], precomposition on the bottom is an equivalence, so precomposition on the top is an equivalence for every target. Taking the source as target gives a left inverse; injectivity on components with the original target then gives the right inverse. The inverse-component criterion of [lem-coef-infinity-mapping-composition] makes this an equivalence edge. Thus the envelope $H=\\mathcal C^\\otimes\\times_S\\operatorname{Act}(S)$ has a cocartesian projection $r:H\\to S$, is itself an infinity-operad, and an $r$-cocartesian edge has inert source edge under $u:H\\to\\mathcal C^\\otimes$.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-active-operad-envelope-cocartesian",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Corollary 2.2.4.5 and Remark 2.2.4.6; explicit envelope calculation (agent proof, archive WANTED)."
+   }
+  },
+  {
+   "text": "The fiber $H_{\\langle1\\rangle}$ identifies with $\\mathcal C^\\otimes_{\\mathrm{act}}$. An object is $(x,\\mu_n)$, where $x$ lies over $\\langle n\\rangle$ and $\\mu_n$ is the unique active fold. An arrow has source pointed map $\\gamma:\\langle n\\rangle\\to\\langle m\\rangle$ satisfying $\\mu_m\\gamma=\\mu_n$, precisely the condition that $\\gamma$ is active. The same description of a simplex as a chain in the ordinary base gives the identification in every degree. The operadic Segal equivalence of [lem-coef-operadic-approximation-restriction] for $H$, whose inert edges are supplied by the envelope theorem, identifies $H_{\\langle s\\rangle}$ with $(H_{\\langle1\\rangle})^s$. By [lem-coef-symmetric-monoidal-segal-classification], this is the symmetric monoidal envelope and transport along $\\mu_s$ computes its $s$-ary tensor, hence the active concatenation of [lem-coef-active-operad-cocartesian-concatenation].",
+   "uses": [
+    "lem-coef-active-operad-envelope-cocartesian",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-active-operad-cocartesian-concatenation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Corollary 2.2.4.5 and Remark 2.2.4.6; explicit envelope calculation (agent proof, archive WANTED)."
+   }
+  },
+  {
+   "text": "Let $K=(\\mathcal C^\\otimes_{\\mathrm{act}})^s$, enlarging the ambient universe so it is small. Choose a coherent quasi-inverse $A:K\\to H_{\\langle s\\rangle}$ to the Segal equivalence of step 2, together with its comparison to the identity on $K$. For each $j$, apply [lem-coef-infinity-pointwise-cocartesian-transport] to $r:H\\to S$, the diagram $A$ (viewed in $H$), and the constant base transformation $\\rho_j:\\langle s\\rangle\\to\\langle1\\rangle$. This produces a coherent transformation $L_j:A\\Rightarrow D_j$ with cocartesian components. Here $D_j:K\\to H_{\\langle1\\rangle}$ is the $j$th inert transport; choose the transports used in the Segal comparison, so that comparison supplies a coherent equivalence $D_j\\simeq\\mathrm{pr}_j$. Applying the simplicial functor $u$ yields a transformation $uA\\Rightarrow uD_j$ with inert components, by the envelope edge criterion. Postcomposing with the displayed equivalence gives a coherent transformation $uA\\Rightarrow\\iota\\mathrm{pr}_j$. Composition with this equivalence preserves inertness by [lem-coef-infinity-cocartesian-composition-initiality], since equivalences in a fixed operadic fiber are cocartesian over its identity (the mapping criterion).",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-active-operad-envelope-cocartesian",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Corollary 2.2.4.5 and Remark 2.2.4.6; explicit envelope calculation (agent proof, archive WANTED)."
+   }
+  },
+  {
+   "text": "Here is the finite-set calculation identifying the source diagram and its projections. Write $A(\\mathbf x)=(z,a:\\langle r\\rangle\\to\\langle s\\rangle)$. Its $j$th inert transport has underlying source edge selecting exactly $a^{-1}(j)$: in the envelope square the other map is the active fold on that subset. Thus its color tuple is $x_j$ by the Segal comparison. Label the inputs of $z$ by the consecutive ordered blocks of these color tuples. This is the ordered concatenation convention; it can be imposed on the whole diagram by applying the corresponding permutations, with the permutation comparisons retained. The square over $\\mu_s$ with source edge $1_z$ and target object $(z,\\mu_r)$ is envelope-cocartesian, since $1_z$ is inert. It is defined on every simplex of $A$ simply by composing its active arrow $a$ with $\\mu_s$. Consequently $uA$ is the envelope model of the functor $\\iota F$ in step 2, coherently with its chosen tensor comparison. The source edge of $L_j$ lies over $q_j$, the projection retaining the $j$th block. An arrow of $A$ has pointed map $\\gamma$ satisfying $a'\\gamma=a$; thus it preserves the block index, and its restriction on block $j$ is the pointed map $\\gamma_j$ of $h_j$. Hence the source pointed map of $F(\\mathbf h)$ is exactly $\\coprod_j\\gamma_j$. Under the coherent tensor comparison, the transformations of step 3 are the required $p_j$.",
+   "uses": [
+    "lem-coef-active-operad-envelope-cocartesian",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Corollary 2.2.4.5 and Remark 2.2.4.6; explicit envelope calculation (agent proof, archive WANTED)."
+   }
+  },
+  {
+   "text": "The transformation obtained in step 3 is a simplicial map $K\\times\\Delta^1\\to\\mathcal C^\\otimes$, not a choice of separate objectwise edges. Restriction along an edge $\\mathbf h$ of $K$ gives the square $p_j(\\mathbf x')F(\\mathbf h)\\simeq h_jp_j(\\mathbf x)$. Restriction along every higher simplex gives its higher naturality data; all faces and degeneracies commute because they are restrictions of that same map. This proves the asserted coherence directly from the definition in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Corollary 2.2.4.5 and Remark 2.2.4.6; explicit envelope calculation (agent proof, archive WANTED)."
+   }
+  },
+  {
+   "text": "If $r_j=0$, its block is empty and $q_j$ is still inert: it has no non-basepoint outputs to test. The operadic zero fiber is terminal-equivalent, so the Segal and transport constructions above still apply. For $s=0$, the tensor is the empty tuple by [lem-coef-active-operad-cocartesian-concatenation], the sum of arities is zero, and there is no index $j$. For $s=1$, the envelope Segal comparison is unary and $q_1$ is the identity. Every component of $p_1$ is therefore cocartesian over an identity, hence an equivalence by the mapping-square inverse argument of step 1. Apply [lem-coef-infinity-pointwise-equivalences] to conclude that $p_1:F\\simeq\\mathrm{id}$ is a coherent equivalence.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Corollary 2.2.4.5 and Remark 2.2.4.6; explicit envelope calculation (agent proof, archive WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-active-operad-cocartesian-concatenation",
+  "lem-coef-active-operad-envelope-cocartesian",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-symmetric-monoidal-segal-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Construction 2.2.4.1, Corollary 2.2.4.5 and Remark 2.2.4.6; envelope and pointwise-transport argument written from the cited DAG statements. HA archival copy WANTED; web access failed with HTTP 429."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +147,52 @@
    "results": "only Karoubi envelope (CategoryTheory/Idempotents), Mat_ envelope (CategoryTheory/Preadditive/Mat.lean) and number-theoretic inertia files",
    "date": "2026-10-17",
    "verdict": "no match: no monoidal envelope of an operad and no inert maps of finite pointed sets."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|MonoidalEnvelope|FinPointed",
+   "results": "{\"t\": \"2026-10-17T12:21:25Z\", \"tool\": \"grep\", \"query\": \"operad|MonoidalEnvelope|FinPointed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern ordinary categorical constructions, combinatorial compositions or strict Segal simplicial sets, not symmetric infinity-operads or their monoidal envelopes. Read SequentialProduct.lean:34-58 and SimplicialSet/StrictSegal.lean:520-537; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural block projections from ordered concatenation in the active subcategory of an infinity operad",
+   "results": "{\"t\": \"2026-10-17T12:21:25Z\", \"tool\": \"leansearch\", \"query\": \"Natural block projections from ordered concatenation in the active subcategory of an infinity operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.SequentialProduct.functorObjProj_pos\", \"Composition.append_blocks\", \"CategoryTheory.Limits.SequentialProduct.functorObjProj_neg\", \"CategoryTheory.Limits.SequentialProduct.cone_π_app\", \"FormalMultilinearSeries.applyComposition\", \"Composition.embedding\", \"SSet.StrictSegalCore.concat\", \"Composition.append\"], \"digest\": \"17f504794fac005d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern ordinary categorical constructions, combinatorial compositions or strict Segal simplicial sets, not symmetric infinity-operads or their monoidal envelopes. Read SequentialProduct.lean:34-58 and SimplicialSet/StrictSegal.lean:520-537; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-17T12:21:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern ordinary categorical constructions, combinatorial compositions or strict Segal simplicial sets, not symmetric infinity-operads or their monoidal envelopes. Read SequentialProduct.lean:34-58 and SimplicialSet/StrictSegal.lean:520-537; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent inert block projections from concatenation of active arrows in a symmetric infinity operad are natural in all input blocks",
+   "results": "{\"t\": \"2026-10-17T12:21:29Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent inert block projections from concatenation of active arrows in a symmetric infinity operad are natural in all input blocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.standardσ_comp_standardσ_assoc\", \"AlgebraicTopology.DoldKan.PInfty_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.PInfty_f_naturality\", \"AlgebraicTopology.DoldKan.QInfty_f_naturality\", \"CategoryTheory.ComposableArrows.naturality'\", \"SimplexCategoryGenRel.standardσ_comp_standardσ\", \"SimplexCategoryGenRel.standardσ_cons_assoc\", \"CategoryTheory.ComposableArrows.naturality'_assoc\"], \"digest\": \"7512f488c42ae2cb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern ordinary categorical constructions, combinatorial compositions or strict Segal simplicial sets, not symmetric infinity-operads or their monoidal envelopes. Read SequentialProduct.lean:34-58 and SimplicialSet/StrictSegal.lean:520-537; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal envelope of an infinity operad supplies natural inert projection transformations from tensor concatenations to their factors",
+   "results": "{\"t\": \"2026-10-17T12:24:18Z\", \"tool\": \"leanfinder\", \"query\": \"A monoidal envelope of an infinity operad supplies natural inert projection transformations from tensor concatenations to their factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AugmentedSimplexCategory.tensorHom\", \"AugmentedSimplexCategory.inr_comp_tensorHom\", \"AugmentedSimplexCategory.inr\", \"AugmentedSimplexCategory.inr'\", \"AugmentedSimplexCategory.tensorHomOf\", \"AugmentedSimplexCategory.inl\", \"AugmentedSimplexCategory.inl'\", \"AugmentedSimplexCategory.inr_comp_tensorHom_assoc\"], \"digest\": \"0b69b66034de8b57\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern ordinary categorical constructions, combinatorial compositions or strict Segal simplicial sets, not symmetric infinity-operads or their monoidal envelopes. Read SequentialProduct.lean:34-58 and SimplicialSet/StrictSegal.lean:520-537; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictSegalCore|functorObjProj_pos",
+   "results": "{\"t\": \"2026-10-17T12:24:18Z\", \"tool\": \"grep\", \"query\": \"StrictSegalCore|functorObjProj_pos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct.lean\"], \"digest\": \"f35473c62e77d0b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the logged hits concern ordinary categorical constructions, combinatorial compositions or strict Segal simplicial sets, not symmetric infinity-operads or their monoidal envelopes. Read SequentialProduct.lean:34-58 and SimplicialSet/StrictSegal.lean:520-537; grep operad hits are bibliography only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +209,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-active-concatenation-block-projections",
+  "worker": "stage1",
+  "summary": "Constructed the projections by applying pointwise cocartesian transport to the Segal inverse in the monoidal envelope, then evaluating source edges. Wrote the blockwise base calculation and higher naturality. STATEMENT-DISPUTED: removed the false assertion that all such inert transformations form a contractible space; unary automorphisms give a counterexample, explained in report.md. No new nodes or Lean attachment.",
+  "blueprint": "Realizes the existing blueprint.from place: coherent block comparisons used in step 4 of lem-coef-symmetric-family-block-assembly, beneath the middle derived mapping-complex comparison of prop-coef-integral-exceptional-adjoint proof paragraph 2. The unit and chapter route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-53f2705b0",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-53f2705b0 (reviewer sub-agent of L); spot-checked: Read the full item, report, ten cited statements, and relevant HA/HTT/Kerodon sources. All six proof steps check out; 1,464 finite block-map cases passed. The unary C₂ counterexample justifies removing unqualified contractible uniqueness. No cycles, duplicate nodes, target weakening, or new tool uses found. Detailed review written to review.md."
  }
 }

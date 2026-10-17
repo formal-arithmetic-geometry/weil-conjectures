@@ -12,9 +12,84 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an auxiliary universe $\\mathcal U''$ containing $\\mathcal U'$. Apply [lem-coef-cocartesian-straightening] with object universe $\\mathcal U'$: its total-space smallness assumption is now satisfied by $E$, and $S$ is also $\\mathcal U'$-small. We obtain a classifying coherent functor $\\chi:S\\to\\operatorname{Cat}_{\\infty,\\mathcal U'}$ with $\\chi(s)\\simeq E_s$ at each vertex. Each $\\chi(s)$ is therefore equivalent to a $\\mathcal U$-small quasicategory: compose this equivalence with the assumed small model of $E_s$. No local smallness assumption on the given simplicial set $E$ is needed.",
+   "uses": [
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3: classify in the enlarged universe first"
+   }
+  },
+  {
+   "text": "Let $J:\\operatorname{Cat}_{\\infty,\\mathcal U}\\to\\operatorname{Cat}_{\\infty,\\mathcal U'}$ be the fully faithful universe inclusion of [lem-coef-cocartesian-straightening-universe-change]. Let $H$ be its full replete essential image. All vertices of $\\chi$ belong to $H$ by step 1, so every simplex of $\\chi$ belongs to $H$ by the definition of full subcategory in [def-cbc-enhanced-diagrams-cones]; hence $\\chi$ factors as $\\chi_H:S\\to H$. Apply [lem-coef-infinity-full-essential-image] to $J$, in the auxiliary universe containing both category objects. It gives a coherent quasi-inverse $K:H\\to\\operatorname{Cat}_{\\infty,\\mathcal U}$ to the restriction of $J$. Put $\\psi=K\\chi_H$. Whiskering the given counit $J K\\simeq1_H$ with $\\chi_H$ gives a coherent natural equivalence $J\\psi\\simeq\\chi$. Thus this is a single coherent small-valued diagram, including its higher simplices, rather than unrelated choices of models of the fibers.",
+   "uses": [
+    "lem-coef-cocartesian-straightening-universe-change",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3, (*) and (*′): essential-image factorization of the classifying diagram"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-straightening] with object universe $\\mathcal U$ to $\\psi$. This is legitimate because its indexing quasicategory is the given $\\mathcal U$-small $S$. Choose a simplicial cocartesian fibration $p_0:E_0\\to S$ in $\\operatorname{coCart}_{\\mathcal U}(S)$ with $\\operatorname{St}^{\\mathcal U}_S(p_0)\\simeq\\psi$. In particular $E_0$ is $\\mathcal U$-small, not merely $\\mathcal U'$-small. By [lem-coef-cocartesian-straightening-universe-change], its classifying diagram in $\\mathcal U'$ is equivalent to $J\\psi$, hence to $\\chi$ by step 2. Applying a quasi-inverse of the larger straightening equivalence and its inverse-equivalence data gives an equivalence from $I_S(p_0)$ to $p$ in $\\operatorname{coCart}_{\\mathcal U'}(S)$. This uses essential surjectivity only at the small-universe application and then compares two objects in the same larger cocartesian category.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cocartesian-straightening-universe-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 3.2.0.1 and Remark 3.3.2.1: small-universe unstraightening and comparison in the larger universe"
+   }
+  },
+  {
+   "text": "Use the cocartesian dual of [lem-coef-marked-relative-cartesian-model] in $\\mathcal U'$ to represent the equivalence of step 3 by a cocartesian-edge-preserving simplicial map $F:E_0\\to E$ strictly over $S$, with an edge-preserving inverse $G:E\\to E_0$ up to coherent natural equivalences over $S$. The theorem identifies the relative sharp mapping complexes with cores of the categories of such maps, so these inverse data are actual maps and paths over $S$. Thus $pF=p_0$. Forgetting the condition of being over $S$ leaves a quasi-inverse and two coherent natural equivalences, so $F$ is a functor equivalence in the sense of [def-cbc-enhanced-diagrams-cones]. Restrict the same maps and equivalences degreewise to $s$: because their base maps are constant in the homotopy parameter, they give $F_s,G_s$ with both inverse equivalences. Every $F_s$ is consequently a functor equivalence. These restrictions also make sense for an empty fiber.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.3.2.2: equivalence over the fixed base; marked-model realization and restriction to fibers"
+   }
+  },
+  {
+   "text": "Preservation of cocartesian edges is part of the map $F$ in step 4. To verify reflection, let $e:x\\to y$ be an edge of $E_0$ and suppose $F(e)$ is $p$-cocartesian. For each vertex $z\\in E_0$, apply [lem-coef-infinity-cocartesian-mapping-criterion] in $E$ with test object $Fz$. Its square is a homotopy pullback. The square in $E_0$ for $e,z$ maps to this square, with identity maps on the two base mapping spaces and equivalences on the two total mapping spaces: [lem-cbc-enhanced-functor-cone-calculus] supplies the latter because $F$ is a functor equivalence. In the path-space models of the two pullbacks, [lem-coef-kan-homotopy-pullback-invariance] makes the comparison of the other three corners an equivalence. Two-out-of-three applied to the comparison from the upper left corner therefore makes the $E_0$ square a homotopy pullback. The mapping criterion in $E_0$ proves that $e$ is $p_0$-cocartesian. This tests every required $z$, without requiring a choice of representatives of all objects of $E$. If $S$ is empty, the map $E\\to S$ forces $E$ empty degreewise, and $E_0=\\varnothing$ satisfies the conclusion directly; none of the other steps requires nonempty fibers.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, cocartesian dual: reflection of the mapping-space universal property; empty-base check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cocartesian-straightening-universe-change",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit universe descent and relative equivalence argument following Theorem 3.2.0.1 and Remarks 3.3.2.1–3.3.2.3, with reflection from the dual of Proposition 2.4.4.3. Read online; no archival HTT copy is present. The universe-compatibility comparison is isolated as a statement-only node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +132,38 @@
    "results": "{\"t\": \"2026-10-17T09:02:06Z\", \"tool\": \"grep\", \"query\": \"quasicategory.*(small|fibr)|small.*quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary categorical SmallModel/fibered-category declarations and basic quasicategory definitions do not supply a cocartesian small model over a fixed base. Read Mathlib/CategoryTheory/EssentiallySmall.lean:48-68, CategoryTheory/FiberedCategory/Cocartesian.lean:48-75 and AlgebraicTopology/Quasicategory/Basic.lean (Quasicategory definition)."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.*small|small.*cocartesian|essentially.*small.*fiber",
+   "results": "{\"t\": \"2026-10-17T10:22:31Z\", \"tool\": \"grep\", \"query\": \"cocartesian.*small|small.*cocartesian|essentially.*small.*fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat and SSet.uliftFunctor concern the ordinary category/bicategory of quasicategories or degreewise universe lifting; IsCocartesian and Grothendieck.mapWhiskerRightAsSmallFunctor concern ordinary categories. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-71, AlgebraicTopology/SimplicialSet/Basic.lean:72-74, CategoryTheory/FiberedCategory/Cocartesian.lean:46-74, and CategoryTheory/EssentiallySmall.lean:44-68. None states the infinity-categorical universe comparison for straightening."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocartesian fibration with essentially small fibers over a small base admits a small model",
+   "results": "{\"t\": \"2026-10-17T10:22:31Z\", \"tool\": \"leansearch\", \"query\": \"A cocartesian fibration with essentially small fibers over a small base admits a small model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallModel\", \"CategoryTheory.smallCategorySmallModel\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Equivalence.instPrecoherentSmallModel\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"CategoryTheory.Equivalence.instPreregularSmallModel\", \"CategoryTheory.instLocallySmallSmallModel\", \"CategoryTheory.Functor.IsFibered\"], \"digest\": \"239f9cad00666d40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat and SSet.uliftFunctor concern the ordinary category/bicategory of quasicategories or degreewise universe lifting; IsCocartesian and Grothendieck.mapWhiskerRightAsSmallFunctor concern ordinary categories. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-71, AlgebraicTopology/SimplicialSet/Basic.lean:72-74, CategoryTheory/FiberedCategory/Cocartesian.lean:46-74, and CategoryTheory/EssentiallySmall.lean:44-68. None states the infinity-categorical universe comparison for straightening."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SmallModel",
+   "results": "{\"t\": \"2026-10-17T10:22:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SmallModel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SmallModel\", \"CategoryTheory.smallCategorySmallModel\", \"CategoryTheory.equivSmallModel\", \"CategoryTheory.instLocallySmallSmallModel\", \"CategoryTheory.hasSheafifyEssentiallySmallSite\", \"CategoryTheory.hasSheafComposeEssentiallySmallSite\", \"CategoryTheory.smallSheafify\", \"CategoryTheory.smallSheafificationAdjunction\"], \"digest\": \"ad51587a32d0eed8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat and SSet.uliftFunctor concern the ordinary category/bicategory of quasicategories or degreewise universe lifting; IsCocartesian and Grothendieck.mapWhiskerRightAsSmallFunctor concern ordinary categories. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-71, AlgebraicTopology/SimplicialSet/Basic.lean:72-74, CategoryTheory/FiberedCategory/Cocartesian.lean:46-74, and CategoryTheory/EssentiallySmall.lean:44-68. None states the infinity-categorical universe comparison for straightening."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian fibration over a small quasicategory with essentially small fibers admits a small equivalent total quasicategory over the same base",
+   "results": "{\"t\": \"2026-10-17T10:22:33Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian fibration over a small quasicategory with essentially small fibers admits a small equivalent total quasicategory over the same base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.StructuredArrow.instSmallOfLocallySmall\", \"CategoryTheory.StructuredArrow.essentiallySmall\", \"CategoryTheory.CostructuredArrow.instSmallOfLocallySmall\", \"CategoryTheory.CostructuredArrow.essentiallySmall\", \"SSet.QCat\", \"CategoryTheory.StructuredArrow.locallySmall\", \"CategoryTheory.OrthogonalReflection.instSmallD₁OfIsSmallOfLocallySmall\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"09a88570108ba30c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat and SSet.uliftFunctor concern the ordinary category/bicategory of quasicategories or degreewise universe lifting; IsCocartesian and Grothendieck.mapWhiskerRightAsSmallFunctor concern ordinary categories. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-71, AlgebraicTopology/SimplicialSet/Basic.lean:72-74, CategoryTheory/FiberedCategory/Cocartesian.lean:46-74, and CategoryTheory/EssentiallySmall.lean:44-68. None states the infinity-categorical universe comparison for straightening."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-monoidal-full-subcategory",
@@ -87,5 +190,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-cocartesian-model",
+  "worker": "stage1",
+  "summary": "Kept the full statement, including strict over-base comparison, fiber equivalences and reflection. Descended the large classifier through the full essential image of the small-universe category inclusion, unstraightened in the small universe, and realized the resulting equivalence by marked maps over S. One new statement-only universe-comparison lemma; all other inputs reused from the DAG.",
+  "blueprint": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: general categorical input to the enriched tensor cocontinuity foundation; Proposition 7.15; restricted-Yoneda argument in proof of Corollary 7.16; Higher Topos Theory Proposition 5.4.2.2 and section 5.3.5; hidden general monoidal restriction and small-model argument of the compact-density input, old step 5; Chu–Haugseng Proposition 7.15 final sentence and Remark 7.17. General small cocartesian presentation used for the small monoidal model in Remark 7.17. Steps 1–3 supply the small cocartesian presentation used by the monoidal compact-generator input; steps 4–5 verify its specified equivalence and edge clauses.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only the generic assertion that a functor equivalence induces equivalences on mapping spaces is used for reflection; the same-unit mapping criterion does not assert this equivalence operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q75-2a0fc0e19",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q75-2a0fc0e19 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full; checked all five steps, cited statements and sources, universe bounds, strict over-base maps, fiber equivalences, reflection, edge cases, duplicates and cycles. Accepted the declared mapping-space tool use. Master target coefficients and morphism directions checked without assuming a seeded comparison theorem. No fixes needed; details in review.md."
  }
 }

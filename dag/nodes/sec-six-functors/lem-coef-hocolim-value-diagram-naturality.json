@@ -12,11 +12,51 @@
  "stmt_deps": [
   "lem-coef-hocolim-reindexing-zigzags"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each small indexing category $I$, [lem-coef-model-colimit-localization-comparison] supplies the projective diagram model structure with objectwise weak equivalences and the localized colimit cocone associated to a projectively cofibrant replacement. Choose the stipulated functorial replacements $Q_I$. Functoriality gives a map $Q_K(\\eta):Q_KF\\to Q_KG$, and applying the ordinary colimit gives $H_K(\\eta)=\\operatorname{colim}_K Q_K(\\eta)$; its localized class is the induced map of homotopy colimits.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Appendix A.2 and Remark A.3(i), printed pp.197-198; functorial projective replacement and induced homotopy-colimit map."
+   }
+  },
+  {
+   "text": "Let (lambda_F:q(Fg)\to qH_J(Fg)) and (lambda_G:q(Gg)\to qH_J(Gg)) denote the localized colimit cocones supplied by [lem-coef-model-colimit-localization-comparison], and let the restricted (K)-cocones define (g_*^F) and (g_*^G) as in [lem-coef-hocolim-reindexing-zigzags]. Naturality of the replacement augmentations gives, object by object, commuting squares between the (F)- and (G)-cocone legs; after localization these say that (H_K(eta)g_*^F) and (g_*^G H_J(eta g)) induce the same cocone (q(Fg)\to qH_K(G)). This argument does not identify (Q_J(Fg)) with the restriction of (Q_KF); it uses only the localized cocone universal property. The universal property therefore identifies the two maps, yielding (H_K(eta),g_*^F=g_*^G,H_J(eta g)) in the homotopy category.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-hocolim-reindexing-zigzags"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Appendix A.2 and Remark A.3(ii)-(iii), printed pp.197-198; naturality of canonical reindexing comparisons in the value diagram."
+   }
+  },
+  {
+   "text": "If $\\eta g$ is the identity transformation, functoriality of the chosen replacement gives $Q_J(\\eta g)=1$, hence $H_J(\\eta g)=1$ in the homotopy category. Substituting this identity into the square of Step 2 gives $H_K(\\eta)g_*^F=g_*^G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Appendix A.2 and Remark A.3(i)-(iii), printed pp.197-198; identity specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-hocolim-reindexing-zigzags",
+  "lem-coef-model-colimit-localization-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: naturality of the canonical reindexing comparison in the value diagram; Dugger Appendix A.2 and Remark A.3(i)-(iii)."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-canonical-hocolim-degree-reduction",
@@ -70,7 +110,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Proposition 4.6 and its proof in Section 8, especially Proposition 8.2 and Lemma 8.1, printed pp. 186, 193-196; item proof step 1: naturality of the canonical reindexing comparison in its value diagram.",
+   "place": "Proof paragraph 2 sentence: naturality of the canonical reindexing comparison in its value diagram, via projective replacement and the localized colimit universal property.",
    "via": [
     "lem-coef-canonical-hocolim-degree-reduction",
     "lem-coef-dugger-homotopically-surjective-map",
@@ -85,5 +125,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-hocolim-value-diagram-naturality",
+  "worker": "stage1",
+  "summary": "Split the imported naturality assertion into construction of the functorial replacement map, the cocone-universal-property naturality square, and the identity restriction. No new nodes were needed: the model-colimit localization node supplies the projective replacements and localized cocone universal property, while the reindexing-zigzags node supplies the canonical comparison. The statement and hypotheses are unchanged.",
+  "blueprint": "The three steps realize the blueprint proof paragraph 2 sentence asserting naturality of the canonical reindexing comparison in its value diagram."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-e6c15ba6d",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-e6c15ba6d (reviewer sub-agent of L); spot-checked: Step 2 incorrectly assumes Q_J(Fg) is the restriction of Q_KF. The corrected DAG file in fixes/dag/nodes/sec-six-functors/lem-coef-hocolim-value-diagram-naturality.json proves equality via localized cocone universal properties. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }

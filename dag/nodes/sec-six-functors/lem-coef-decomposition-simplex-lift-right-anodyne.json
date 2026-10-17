@@ -14,60 +14,77 @@
  ],
  "proof": [
   {
-   "text": "For a face-stable family $L_m\\subseteq K_m$, let $L_F$ contain all pure-upper simplices and exactly those other simplices whose unique nondegenerate root in $K_F$ has lower block in $L$. Use [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] here for $K_F$, not merely for $K$. This is a simplicial subset: degeneracies preserve the nondegenerate root, and for a face the lower block of its nondegenerate root is an iterated face of the original lower block. Indeed, deleting lower vertices takes faces, deleting upper vertices composes arrows, and removing lower degeneracies can be performed by a monotone section of the corresponding surjection, hence by taking a face. A monotone surjection has such a section by choosing the least element of each nonempty fiber. Face stability therefore gives closure. To construct the filtration, well-order each set $K_m$ and order the disjoint union of ALL the $K_m$ first by dimension and then by these orders; include degenerate simplices as separate elements. Every proper face precedes its simplex. Initial segments are thus face-stable; at a successor we add just one simplex $\\sigma\\in K_m$. The associated $L_F$ start at $N(I)$, end at $K_F$, and commute with unions at limit ordinals because membership is decided by one nondegenerate root. This filtration is not indexed by nondegenerate simplices of $K$: a nondegenerate simplex of $K_a$ may have degenerate image in $K$.",
+   "text": "For a face-stable family $L_r\\subseteq K_r$, include $N(I)$ and every simplex whose unique nondegenerate root in $K_F$ has nonempty lower block in $L$. The unique root exists by [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], applied to $K_F$. These simplices form a simplicial subset: degeneracies preserve the root; taking faces deletes lower vertices, composes upper arrows, or removes a block, by [lem-coef-decomposition-local-colimit-cocones]. Passing from such a face to its root can remove lower degeneracies; choose the least element of each fiber of its monotone surjection to obtain a monotone section, so the new lower block is an iterated face of the original lower block. Removing upper degeneracies does not change the lower block. If the upper block disappears, any additional degeneracy of the resulting base simplex is removed by the same section argument. Face stability of $L$ therefore gives closure. This is precisely $L_F$ as a generated subset in [lem-coef-decomposition-simplex-attachment]: the specified generators and their degeneracies already form a simplicial subset.",
    "uses": [
-    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-decomposition-local-colimit-cocones",
+    "lem-coef-decomposition-simplex-attachment"
    ],
    "elementary": false,
    "source": {
-    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 4.2.3.8, proof, first paragraph (PDF p. 270): the subsets L_F and reduction to adjoining one simplex; Notation 4.2.3.1"
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of HTT 4.2.3.8, first paragraph, printed p. 252; root and face-closure check expanded using Stacks 017R (lemma-splitting-simplicial-sets)."
    }
   },
   {
-   "text": "For any successor $L'=L\\cup\\{\\sigma\\}$ with $\\sigma\\in K_m$, construct the characteristic map $c_\\sigma:\\Delta^m\\star N(I_\\sigma)\\to L'_F$ directly. On a mixed simplex, a monotone map $\\alpha:[r]\\to[m]$ and a chain $(a_0,w_0)\\to\\cdots\\to(a_s,w_s)$ give lower block $\\alpha^*\\sigma$, upper chain $a_0\\to\\cdots\\to a_s$, and lifts $\\alpha^*w_j$; on pure factors use $\\sigma:\\Delta^m\\to K$ and the forgetful nerve map to $N(I)$. These formulas commute with all operators. The boundary-join maps into $L_F$, since its lower block is a proper face of $\\sigma$ or a degeneracy of one. To verify the resulting pushout, examine nondegenerate simplices. A mixed simplex of $K_F$ is nondegenerate exactly when its first lift is nondegenerate and all arrows in its upper chain are nonidentity: a degeneracy wholly in the lower block is precisely a degeneracy of the first lift (and hence of every subsequent lift), one wholly in the upper block repeats an identity arrow, and no degeneracy can cross the two blocks. Nondegenerate simplices of the characteristic join outside its boundary-join have full lower simplex $\\mathrm{id}_{[m]}$; their upper chains retain every lift as data, so distinct such chains have distinct mixed images whenever their first lifts are nondegenerate. If $\\sigma$ is nondegenerate, every lift of it is nondegenerate, since a simplicial map preserves degeneracies. The remaining pure lower simplex also maps to the new nondegenerate simplex $\\sigma$. Thus these are exactly, and bijectively, the nondegenerate simplices of $L'_F$ outside $L_F$. Unique nondegenerate decomposition from Step 1 gives the same pushout degree by degree, including all degeneracies. Consequently this successor is a pushout of $\\partial\\Delta^m\\star N(I_\\sigma)\\hookrightarrow\\Delta^m\\star N(I_\\sigma)$. Apply [lem-coef-contractible-join-right-anodyne] with $A_0=\\partial\\Delta^m$, $A=\\Delta^m$ and $B=N(I_\\sigma)$; its weak-contractibility hypothesis is exactly the assumed nondegenerate-simplex condition.",
+   "text": "Well-order each small set $K_m$ and then order $\\coprod_{m\\geq0}K_m$ first by dimension and then by these orders. Every proper face precedes its simplex. Thus its initial segments $L^\\alpha$ are face-stable; every successor adds just one simplex $\\sigma$, all of whose proper faces are old. Include ALL simplices of $K$, including degenerate ones: a nondegenerate lift can have a degenerate image. The subsets $L_F^\\alpha$ start at $N(I)$ and end at $K_F$. At a limit their union equals the subset for the union of the initial segments, because membership is decided by the single lower simplex of a unique nondegenerate root. The ordinal is small since the disjoint union is small.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of HTT 4.2.3.8, reduction to adding a single simplex, printed p. 252; explicit dimension-first ordering."
+   }
+  },
+  {
+   "text": "Suppose the successor adds a nondegenerate $\\sigma\\in K_m$. Apply the nondegenerate clause of [lem-coef-decomposition-simplex-attachment] to $L=L^\\alpha$, $L'=L^{\\alpha+1}$. Its hypotheses hold by Step 2, and its lift category is exactly $I_\\sigma$ in the statement. It expresses this successor inclusion as a pushout of $\\partial\\Delta^m\\star N(I_\\sigma)\\hookrightarrow\\Delta^m\\star N(I_\\sigma)$. The given nondegenerate-simplex hypothesis says $N(I_\\sigma)$ is weakly contractible. Hence [lem-coef-contractible-join-right-anodyne], with $A_0=\\partial\\Delta^m$, $A=\\Delta^m$ and $B=N(I_\\sigma)$, makes the attaching map right anodyne. This includes $m=0$.",
    "uses": [
+    "lem-coef-decomposition-simplex-attachment",
     "lem-coef-contractible-join-right-anodyne"
    ],
    "elementary": false,
    "source": {
-    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 4.2.3.8, proof, nondegenerate case (PDF p. 270), using Lemma 4.2.3.6"
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of HTT 4.2.3.8, nondegenerate case, using Lemma 4.2.3.6, printed pp. 251-252."
    }
   },
   {
-   "text": "Now let the adjoined $\\sigma\\in K_m$ be degenerate. Use the characteristic map $c_\\sigma$ explicitly defined in Step 2 and set $B=N(I_\\sigma)$, $B_0=N(D_\\sigma)$. A chain belongs to $B_0$ exactly when its first lift is degenerate: that condition is preserved by every $F(u)$, so then every object of the chain lies in the full subcategory $D_\\sigma$. For such a chain, a degeneracy presentation of its first lift supplies a common lower-block degeneracy for every lift, and the resulting mixed simplex of $K_F$ has nondegenerate root with lower dimension less than $m$; it therefore lies in $L_F$. Also the pure lower simplex $\\sigma$ has smaller-dimensional root and is old. Accordingly $c_\\sigma$ maps the subobject $P=(\\partial\\Delta^m\\star B)\\amalg_{\\partial\\Delta^m\\star B_0}(\\Delta^m\\star B_0)$ into $L_F$; the join convention includes the entire pure lower factor in $\\Delta^m\\star B_0$, even when $B_0$ is empty. A nondegenerate simplex outside $P$ must be mixed, with full lower $\\mathrm{id}_{[m]}$ and a nonidentity upper chain whose first lift is nondegenerate. By the criterion in Step 2 its image is nondegenerate with lower block $\\sigma$, and its complete list of lifts and arrows is recovered from that image. Conversely every new nondegenerate simplex of $L'_F$ has these data, so these images are bijectively all the new nondegenerate simplices. Unique decomposition from Step 1 then proves the pushout square with top map $P\\hookrightarrow\\Delta^m\\star B$ degree by degree. The inclusion $B_0\\hookrightarrow B$ is degreewise injective (chains in a full subcategory remain distinct) and a weak homotopy equivalence by the assumed degenerate-simplex condition. Apply [lem-coef-join-pushout-right-anodyne] with $A_0=\\partial\\Delta^m$, $A=\\Delta^m$, $B_0=N(D_\\sigma)$ and $B=N(I_\\sigma)$ to conclude that the attaching map is right anodyne.",
+   "text": "Suppose instead that the successor adds a degenerate $\\sigma\\in K_m$. The degenerate clause of [lem-coef-decomposition-simplex-attachment] expresses it as a pushout of $P_\\sigma\\hookrightarrow\\Delta^m\\star N(I_\\sigma)$, where $P_\\sigma=(\\partial\\Delta^m\\star N(I_\\sigma))\\amalg_{\\partial\\Delta^m\\star N(D_\\sigma)}(\\Delta^m\\star N(D_\\sigma))$. The nerve inclusion $N(D_\\sigma)\\hookrightarrow N(I_\\sigma)$ is degreewise injective: a chain in the full subcategory is the same chain of objects and arrows in $I_\\sigma$, by the nerve definition in [def-cbc-enhanced-diagrams-cones]. It is a weak homotopy equivalence by the degenerate-simplex hypothesis. Both required inclusions are therefore degreewise injective. Apply [lem-coef-join-pushout-right-anodyne] with $A_0=\\partial\\Delta^m$, $A=\\Delta^m$, $B_0=N(D_\\sigma)$, $B=N(I_\\sigma)$ to make the attaching map right anodyne. In particular, the pure lower simplex is already in $L_F^\\alpha$ because its nondegenerate root has dimension less than $m$; the second summand of $P_\\sigma$ retains that factor even when $D_\\sigma$ is empty.",
    "uses": [
+    "lem-coef-decomposition-simplex-attachment",
+    "def-cbc-enhanced-diagrams-cones",
     "lem-coef-join-pushout-right-anodyne"
    ],
    "elementary": false,
    "source": {
-    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 4.2.3.8, proof, degenerate case (PDF p. 270), using Lemma 4.2.3.5"
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of HTT 4.2.3.8, degenerate case, using Lemma 4.2.3.5, printed pp. 251-252."
    }
   },
   {
-   "text": "The disjoint union $\\coprod_{m\\geq0}K_m$ is small, so the dimension-first well-order of ALL simplices in Step 1 has small ordinal type. Each successor inclusion of the continuous filtration is the pushout of a right-anodyne map proved in Step 2 or Step 3. At each limit ordinal its simplicial subset is the degreewise union of the earlier subsets, as established in Step 1. The pushout and transfinite-composition clauses in [def-coef-infinity-right-anodyne] therefore show that the composite $N(I)=L_{F,\\varnothing}\\hookrightarrow L_{F,K}=K_F$ is right anodyne.",
+   "text": "By [def-coef-infinity-right-anodyne], right anodyne maps are closed under pushouts, so Steps 3 and 4 make every successor inclusion right anodyne. The same definition closes this class under transfinite compositions. Apply it to the small continuous filtration in Step 2. Its composite is exactly $N(I)\\hookrightarrow K_F$, which is therefore right anodyne. When $K$ is empty the composite is the identity of $N(I)$, also in the stated class.",
    "uses": [
     "def-coef-infinity-right-anodyne"
    ],
    "elementary": false,
    "source": {
-    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 4.2.3.8, proof, conclusion after the two successor cases (PDF p. 270)"
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of HTT 4.2.3.8, conclusion, printed p. 252; weak saturation made explicit."
    }
   }
  ],
  "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-right-anodyne",
   "lem-coef-contractible-join-right-anodyne",
+  "lem-coef-decomposition-local-colimit-cocones",
+  "lem-coef-decomposition-simplex-attachment",
   "lem-coef-join-pushout-right-anodyne",
   "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-  "place": "Proposition 4.2.3.8 and Notation 4.2.3.7, printed p. 252 (PDF p. 270); agent-expanded face-stable filtration and degreewise pushout checks from online text independently read 2026-10-17; archival copy WANTED."
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "HTT Proposition 4.2.3.8, printed p. 252, with Notations 4.2.3.1 and 4.2.3.7 and Lemmas 4.2.3.5-6. IAS PDF independently read 2026-10-17. Expanded root-defined continuous filtration; extracted the non-elementary attachment comparisons into a statement-only child. Repository archive WANTED."
  },
  "mathlib_searches": [
   {
@@ -118,10 +135,38 @@
    "results": "{\"t\": \"2026-10-17T05:14:30Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|right_anodyne|RightAnodyne|liftCategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned types do not state a right-anodyne decomposition criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "contractible simplex lifting categories imply right anodyne nerve inclusion in decomposition simplicial set",
+   "results": "{\"t\": \"2026-10-17T08:39:19Z\", \"tool\": \"leansearch\", \"query\": \"contractible simplex lifting categories imply right anodyne nerve inclusion in decomposition simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.SimplicialNerve\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.stdSimplex\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\"], \"digest\": \"7ff87ee65759c535\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Quillen all-horn class, ordinary nerves and generic pushout squares, not the right-anodyne simplex-lift criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a diagram of simplicial sets over K the inclusion of the indexing nerve into the decomposition is right anodyne if lift categories are contractible and degenerate lifts have equivalent nerves",
+   "results": "{\"t\": \"2026-10-17T08:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a diagram of simplicial sets over K the inclusion of the indexing nerve into the decomposition is right anodyne if lift categories are contractible and degenerate lifts have equivalent nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.SimplicialNerve\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\"], \"digest\": \"d2ca290d1976e253\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Quillen all-horn class, ordinary nerves and generic pushout squares, not the right-anodyne simplex-lift criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAnodyne|right_anodyne|RightAnodyne|liftCategory",
+   "results": "{\"t\": \"2026-10-17T08:39:18Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|right_anodyne|RightAnodyne|liftCategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Quillen all-horn class, ordinary nerves and generic pushout squares, not the right-anodyne simplex-lift criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, CategoryTheory.IsPushout",
+   "results": "{\"t\": \"2026-10-17T08:39:19Z\", \"tool\": \"loogle\", \"query\": \"SSet, CategoryTheory.IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout\", \"SSet.Subcomplex.unionProd.isPushout\", \"SSet.Subcomplex.Pairing.RankFunction.isPushout\"], \"digest\": \"470e730ab9d1076e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Quillen all-horn class, ordinary nerves and generic pushout squares, not the right-anodyne simplex-lift criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplex-last-vertex-cocone-equivalence",
@@ -158,25 +203,30 @@
   "date": "2026-10-17",
   "item": "lem-coef-decomposition-simplex-lift-right-anodyne",
   "worker": "stage1",
-  "summary": "Expanded HTT Proposition 4.2.3.8 using face-stable families of all base simplices, including degenerate ones. Second reading repaired the dimension-first filtration, defined L_F by nondegenerate roots in K_F, and gave explicit characteristic maps and degreewise pushout checks in both cases. The existing join lemmas and right-anodyne closure finish the argument. Statement and hypotheses unchanged; no new nodes.",
-  "blueprint": "Realizes the auxiliary HTT Proposition 4.2.3.8 application named in prop-coef-integral-exceptional-adjoint, proof paragraph 2: inclusion of the indexing nerve in the decomposition simplicial set, with Notation 4.2.3.7 and the nondegenerate/degenerate successor cases.",
+  "summary": "Statement preserved and checked against HTT 4.2.3.8. Completed continuous filtration over all base simplices. Extracted the two non-elementary attaching pushout comparisons from long steps as one purely combinatorial statement-only node, with actual logged searches; used the existing two join lemmas and right-anodyne saturation. No Lean attachment or Mathlib leaf.",
+  "blueprint": "Inherited ancestry of prop-coef-integral-exceptional-adjoint, paragraph 2: the foundational last-vertex/cofinal-poset input through HTT 4.2.3.14 and 4.2.3.8. Steps realize the face-stable filtration, its two attaching cases, and saturation in the proof of HTT 4.2.3.8; no unit or chapter route changed.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
-    "why": "Unique nondegenerate-degeneracy decomposition in K_F defines the face-stable filtration and verifies the two characteristic-map pushouts; it is a generic simplicial-set Mathlib leaf from another unit."
+    "why": "Generic unique-root theorem (Stacks 017R), already a Mathlib leaf, used only to define and check the filtration; no geometric route is replaced."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic nerve and simplicial-set conventions; used to check degreewise injectivity of the nerve inclusion."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "def-cbc-enhanced-diagrams-cones"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q31-31dcb2711",
-  "group": "Q31",
+  "reviewer": "NT-Codex-Q07-6755e7ef2",
+  "group": "Q07",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-31dcb2711 (reviewer sub-agent of L); spot-checked: Read the item, its cited nodes, the parent's use (steps 5 and 8), the unit and HTT. HTT is not archived; I fetched the online PDF (April 2017) and read Notation 4.2.3.1 (pp. 248-249), Lemmas 4.2.3.5-4.2.3.6 (p. 251), and Notation 4.2.3.7, Proposition 4.2.3.8 with proof and Remark 4.2.3.9 (p. 252). The statement matches 4.2.3.8 hypothesis by hypothesis: I_z and D_z are Iσ and I0σ, and K_F is Notation 4.2.3.1. Direction check: K=Δ^0 gives {1}⊆Δ^1, which is Λ^1_1. The item is not a target, so no base-change morphism or coefficient category applies. Step 1: L_F, defined through roots in K_F, is closed under faces by the section argument, since no degeneracy crosses the cut; its endpoints are N(I) and K_F; the dimension-first order runs over all simplices; it is continuous at limits. Step 2: checked the characteristic map, the boundary going into L_F, the nondegeneracy criterion in both directions, the bijection on new nondegenerate simplices, and the degreewise pushout via Eilenberg-Zilber. The contractible-join lemma's hypothesis is exactly (1), and m=0 is fine. Step 3: B_0 consists of the chains whose first lift is degenerate; Δ^m⋆B_0 lands in L_F because those roots have dimension < m. The join-pushout lemma is applied with full-subcategory injectivity and hypothesis (2). Step 4: the closure clauses of the right-anodyne definition finish it. Long step 2 (2001 characters) is one pushout identification, written out where HTT says 'not difficult to see'. Its generic ingredients are a three-line K_F check and the cited unique-decomposition leaf, so it hides no lemma and is accepted. No new nodes. lem-coef-directed-decomposition-right-anodyne is the directed special case, not a duplicate. Accepted tool_use: the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition. No SGA. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-6755e7ef2 (reviewer sub-agent of L); spot-checked: Read both nodes fully; verified all five steps against HTT 4.2.3.1–8 and Stacks 017R. Degenerate and noninjective small cases passed; no duplicate, missing dependency, cycle, or target weakening found. Detailed checks are in review.md; no fixes required."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
