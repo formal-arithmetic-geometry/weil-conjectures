@@ -249,6 +249,8 @@ instance : (derivedPullback.{u, w} g).IsLeftDerivedFunctor (derivedPullbackCouni
     (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings S.toRingedSpace))
         (ComplexShape.up ℤ))
 
+attribute [irreducible] derivedPullback
+
 /-- **The derived pullback is the left derived functor of the tensor pullback.** For
 `g : T ⟶ S`, `derivedPullback g` is a triangulated left derived functor of the tensor pullback
 `E = Scheme.Modules.tensorPullback g` (with the exact inverse image `I` underlying it), and its

@@ -39,7 +39,7 @@ private theorem exact_restriction_derived_iso {X Y : Scheme.{u}} (g : X ⟶ Y)
     classical
     obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       F, hF, hFmap, hFadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback g)
+      derivedPullback_spec g
     have h : F = Scheme.Modules.tensorPullback g :=
       CategoryTheory.Functor.ext hF (fun M N a ↦ hFmap a)
     subst F
