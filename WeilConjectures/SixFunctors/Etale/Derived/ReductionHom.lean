@@ -117,6 +117,8 @@ set_option maxHeartbeats 1000000 in
 -- the kernel takes long to check the instances of the derived tensor product
 set_option maxHeartbeats 4000000 in
 -- the kernel unfolds the monoidal structures on the derived categories
+set_option maxHeartbeats 1000000 in
+-- the kernel unfolds the monoidal structures on étale sheaves
 /-- The derived extension of scalars is monoidal: `(K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`,
 naturally in `M`. -/
 noncomputable def derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
@@ -131,6 +133,8 @@ set_option maxHeartbeats 1000000 in
 -- the kernel takes long to check the instances of the derived tensor product
 set_option maxHeartbeats 4000000 in
 -- the kernel unfolds the monoidal structures on the derived categories
+set_option maxHeartbeats 1000000 in
+-- the kernel unfolds the monoidal structures on étale sheaves
 /-- The extension–restriction adjunction for internal homs:
 `RHom_Λ(K, Res N) ≅ Res RHom_{Λ'}(K ⊗ᴸ_Λ Λ', N)`, naturally in `N`. Both sides are right
 adjoint to `M ↦ (K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`. -/
