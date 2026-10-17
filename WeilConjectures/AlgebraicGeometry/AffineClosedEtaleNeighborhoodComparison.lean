@@ -46,8 +46,8 @@ private theorem cohomologyMap_comp_leg {Z T S X : Scheme.{u}} (kk : Z ⟶ T) (ι
   rw [cohomologyMap_map]
   dsimp only [Functor.comp_obj]
   rw [(cohomologyPullbackFunctorial kk ι
-    (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply,
-    ← Sheaf.H.map_comp_apply]
+    (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply]
+  erw [← Sheaf.H.map_comp_apply]
   congr 2
   rw [Etale.upperStarComp_hom_app_map_upperStarComp_inv_app_assoc AddCommGrpCat.{u + 1}
     kk ι v (kk ≫ ι) t i rfl hι hs G, Iso.hom_inv_id_app, Category.comp_id]
