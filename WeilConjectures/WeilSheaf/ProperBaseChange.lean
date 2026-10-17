@@ -58,6 +58,18 @@ noncomputable def WeilSheaf.upperStarToComplexIso {k₀ : Type u} [Field k₀] [
   ObjectProperty.isoMk _
     (((ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategorySingleFunctor 0).app F.obj)
 
+/-- The higher direct image `Rⁱφ_* F` is the `i`-th cohomology sheaf of `Rφ_*(F[0])`. Stated
+as a lemma so that rewriting with it avoids unfolding `higherLowerStar` in the kernel. -/
+theorem WeilSheaf.higherLowerStar_obj {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
+    [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    [QuasiCompact φ] [QuasiSeparated φ] [LocallyOfFiniteType φ]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (i : ℕ) (F : WeilSheaf k₀ l X) :
+    (WeilSheaf.higherLowerStar φ i).obj F = (WeilComplex.homologySheaf i).obj
+      ((WeilComplex.derivedLowerStar φ).obj (WeilSheaf.toComplex.obj F)) :=
+  rfl
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X Y X' Y' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] [X'.Over (Spec (CommRingCat.of k₀))]
@@ -65,7 +77,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
   [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
   [f'.IsOver (Spec (CommRingCat.of k₀))] [g'.IsOver (Spec (CommRingCat.of k₀))]
-  [IsProper f] [IsProper f']
+  [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
+  [QuasiCompact f'] [QuasiSeparated f'] [LocallyOfFiniteType f']
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
@@ -76,7 +89,7 @@ isomorphism being a morphism of Weil complexes by `prop-weil-operations`): for a
 of `k₀`-schemes `X' = X ×_Y Y'` with `f : X ⟶ Y` proper, and a Weil complex `K` on `X`, there is
 an isomorphism of Weil complexes `g^* Rf_* K ≅ Rf'_* g'^* K`. -/
 theorem WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper
-    (h : IsPullback g' f' f g) (K : WeilComplex k₀ l X) :
+    (hf : IsProper f) (h : IsPullback g' f' f g) (K : WeilComplex k₀ l X) :
     Nonempty ((WeilComplex.upperStar g).obj ((WeilComplex.derivedLowerStar f).obj K) ≅
       (WeilComplex.derivedLowerStar f').obj ((WeilComplex.upperStar g').obj K)) :=
   sorry
@@ -87,11 +100,12 @@ Weil sheaves `g^* Rⁱf_* F ≅ Rⁱf'_* g'^* F`: the cohomology sheaves of the 
 isomorphism of Weil complexes, the pullback of Weil complexes being induced by the exact pullback
 of Weil sheaves. -/
 theorem WeilSheaf.nonempty_upperStar_higherLowerStar_iso_of_isProper
-    (h : IsPullback g' f' f g) (F : WeilSheaf k₀ l X) (i : ℕ) :
+    (hf : IsProper f) (h : IsPullback g' f' f g) (F : WeilSheaf k₀ l X) (i : ℕ) :
     Nonempty ((WeilSheaf.upperStar g).obj ((WeilSheaf.higherLowerStar f i).obj F) ≅
       (WeilSheaf.higherLowerStar f' i).obj ((WeilSheaf.upperStar g').obj F)) := by
-  obtain ⟨e⟩ := WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper h
+  obtain ⟨e⟩ := WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper hf h
     (WeilSheaf.toComplex.obj F)
+  rw [WeilSheaf.higherLowerStar_obj, WeilSheaf.higherLowerStar_obj]
   exact ⟨(WeilComplex.homologySheafUpperStarIso g i _).symm ≪≫
     (WeilComplex.homologySheaf i).mapIso
       (e ≪≫ (WeilComplex.derivedLowerStar f').mapIso (WeilSheaf.upperStarToComplexIso g' F))⟩
