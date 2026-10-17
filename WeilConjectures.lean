@@ -3326,6 +3326,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.Bousfield
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+public import WeilConjectures.Mathlib.CategoryTheory.Monad.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Reflection
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp

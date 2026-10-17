@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism.P
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionPoint
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
+public import WeilConjectures.Mathlib.CategoryTheory.Monad.Adjunction
 
 /-!
 # All rational points have the same class
@@ -119,6 +120,60 @@ lemma restrictSupportedClass_comp_counit {Λ : Type (u + 1)} [CommRing Λ] {U X 
   rw [restrictSupportedClass, Category.assoc, Category.assoc]
   erw [h]
   rw [Functor.map_comp_assoc]
+
+/-- **The class of a section generates.** Let `x` be a section of `a : X ⟶ S` which is a closed
+immersion, and `γ : Λ_X ⟶ Rx_! Rx^! L` a class supported on `x` whose adjoint
+`Λ_S ⟶ Rx^! L` (`AlgebraicGeometry.Etale.supportedClassMap`) is an isomorphism. Then its image
+`Λ_S ⟶ Ra_* Λ_X ⟶ Ra_* Rx_! Rx^! L` in `H^0(S, Ra_* Rx_! Rx^! L)` is an isomorphism: up to the
+forget-supports isomorphism it is the unit of `La^* ⋙ Lx^* ⊣ Rx_* ⋙ Ra_*`, whose left adjoint
+is `L(x ≫ a)^* = 𝟭`, followed by `Ra_* Rx_*` of the adjoint of `γ`. -/
+lemma isIso_unit_comp_map_of_isIso_supportedClassMap {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+    {X S : Scheme.{u}} (a : X ⟶ S) (x : S ⟶ X) [IsClosedImmersion x] (hx : x ≫ a = 𝟙 S)
+    {L : DerivedCategoryModule Λ X} {U : DerivedCategoryModule Λ S}
+    (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj U ≅ constantComplex Λ X)
+    (γ : constantComplex Λ X ⟶
+      (R(x)_![ModuleCat.{u + 1} Λ]).obj ((R(x)^![ModuleCat.{u + 1} Λ]).obj L))
+    (h : IsIso (supportedClassMap Λ x γ)) :
+    IsIso ((derivedUpperStarLowerStarAdjunction _ a).unit.app U ≫
+      (R((a)_*[ModuleCat.{u + 1} Λ])).map (e.hom ≫ γ)) := by
+  let c := HasCompactification.compactification x
+  let adjGI := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.g).comp
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.i)
+  let adjC := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).comp adjGI
+  have hu : IsIso adjC.unit := adjC.isIso_unit_of_iso_id
+    (Functor.isoWhiskerLeft _ (leftDerivedUpperStarComp _ c.i c.g x c.comm).symm ≪≫
+      leftDerivedUpperStarCompSectionIso _ x a hx)
+  let F := (rightDerivedLowerShriekToLowerStarComp (ModuleCat.{u + 1} Λ) x).app
+    ((R(x)^![ModuleCat.{u + 1} Λ]).obj L)
+  have hfc : γ ≫ F = adjGI.unit.app _ ≫
+      (R((c.i)_*[ModuleCat.{u + 1} Λ]) ⋙ R((c.g)_*[ModuleCat.{u + 1} Λ])).map
+        ((compactificationConstantComplexIso Λ x).hom ≫ supportedClassMap Λ x γ) := by
+    rw [supportedClassMap, Iso.hom_inv_id_assoc, rightDerivedLowerShriekTranspose]
+    exact ((Adjunction.homEquiv_unit _ _ _ _).symm.trans (Equiv.apply_symm_apply _ _)).symm
+  have hn := adjGI.unit.naturality e.hom
+  simp only [Functor.id_map, Functor.comp_map] at hn
+  have inner : e.hom ≫ γ =
+      adjGI.unit.app _ ≫
+        (R((c.i)_*[ModuleCat.{u + 1} Λ]) ⋙ R((c.g)_*[ModuleCat.{u + 1} Λ])).map
+          ((L((c.g)^*[ModuleCat.{u + 1} Λ]) ⋙ L((c.i)^*[ModuleCat.{u + 1} Λ])).map
+            e.hom ≫
+          (compactificationConstantComplexIso Λ x).hom ≫ supportedClassMap Λ x γ) ≫ inv F := by
+    rw [← cancel_mono F]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [hfc]
+    simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hn ⊢
+    rw [reassoc_of% hn]
+  have key : (derivedUpperStarLowerStarAdjunction _ a).unit.app U ≫
+      (R((a)_*[ModuleCat.{u + 1} Λ])).map (e.hom ≫ γ) =
+      adjC.unit.app _ ≫ (R((a)_*[ModuleCat.{u + 1} Λ])).map
+        ((R((c.i)_*[ModuleCat.{u + 1} Λ]) ⋙ R((c.g)_*[ModuleCat.{u + 1} Λ])).map
+          ((L((c.g)^*[ModuleCat.{u + 1} Λ]) ⋙ L((c.i)^*[ModuleCat.{u + 1} Λ])).map
+            e.hom ≫
+          (compactificationConstantComplexIso Λ x).hom ≫ supportedClassMap Λ x γ) ≫ inv F) := by
+    rw [inner]
+    simp only [adjC, adjGI, Adjunction.comp_unit_app, Functor.map_comp, Category.assoc]
+  rw [key]
+  infer_instance
 
 section PointClass
 
