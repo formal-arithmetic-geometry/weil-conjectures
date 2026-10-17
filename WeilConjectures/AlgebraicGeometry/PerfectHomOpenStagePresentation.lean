@@ -119,6 +119,6 @@ theorem perfect_hom_open_stage_presentation
   · rw [Scheme.Hom.opensRange_comp, Scheme.Opens.opensRange_ι,
       Scheme.Hom.image_preimage_eq_opensRange_inf, inf_eq_right.mpr ht]
   · rw [hs, Category.assoc]
-  · exact perfect_hom_open_stage_maps R c i X s₀ W hW Y t ht s hs P Q hP hQ F d h n
+  · exact perfect_hom_open_stage_maps R c i X W Y t s P Q F d h n
 
 end AlgebraicGeometry
