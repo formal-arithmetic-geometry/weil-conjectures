@@ -15,11 +15,137 @@
   "def-kun-derived-tensor",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any scheme $V$, any $R$-module sheaf $M$ on $V_{\\mathrm{et}}$, and any $k$-module sheaf $N$, put $\\bar M=M/\\ell M$. The sheaf tensor construction gives inverse maps\n$$\\phi_{M,N}:M\\otimes_R U_VN\\longrightarrow U_V(\\bar M\\otimes_kN),\\quad x\\otimes y\\longmapsto\\bar x\\otimes y,$$\n$$\\bar x\\otimes y\\longmapsto x\\otimes y.$$\nFor the inverse, a local lift of $\\bar x$ exists because $M\\to\\bar M$ is a sheaf quotient. Two lifts differ locally by $\\ell z$, and $\\ell z\\otimes y=z\\otimes\\ell y=0$. Local lifts of a $k$-scalar to $R$ give the balancing identity $ax\\otimes y=x\\otimes ay$; different lifts differ by a multiple of $\\ell$. Thus the rules agree on overlaps and define maps of the sheafified tensors. Both composites fix pure tensors and hence are the identity, by the sheafification universal property. They commute with restrictions and with maps in both $M$ and $N$, since both naturality composites send $x\\otimes y$ to the tensor of the images of $\\bar x$ and $y$. This is an elementary quotient/balancing calculation; it does not assume that $M(U)/\\ell M(U)=\\bar M(U)$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section Tag 03EK (section-tensor-product), sheafification and bilinear universal property; elementary quotient calculation expanding the coefficient identity of Tag 0F1J"
+   }
+  },
+  {
+   "text": "Restriction of scalars is exact: its underlying abelian sheaf, kernels, and sheafified cokernels are unchanged, by the module-sheaf forgetful lemma. Hence it preserves short exact sequences and reflects their exactness. For a short exact sequence of $k$-module sheaves, apply this restriction and tensor with the given flat $R$-module sheaf $\\mathcal E$. This sequence remains exact by the definition of sheaf flatness. The natural maps $\\phi_{\\mathcal E,N}$ of Step 1 identify it with restriction of the sequence obtained by tensoring with $\\overline{\\mathcal E}$. Exactness is reflected back to $k$-sheaves, so $\\overline{\\mathcal E}$ is flat. This proves the flatness clause without any flatness assumption on $R\\to k$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition of flat sheaves and elementary application of the quotient tensor identity to exact sequences"
+   }
+  },
+  {
+   "text": "For $u=p$ and for $u=p\\circ h$, apply flat pullback for ringed topoi with constant ring $R$. These are morphisms of topoi by the exactness of the etale inverse image on sheaves of sets. The constant-coefficient module inverse-image lemma identifies $u^*$ with $u^{-1}$, and states its exactness. Consequently $A=p^{-1}\\mathcal E$ and $A_Y=h^{-1}A$ are flat. The same argument over $k$, using Step 2, gives flatness of $\\bar A=p^{-1}\\overline{\\mathcal E}$ and $\\bar A_Y=h^{-1}\\bar A$. Exactness identifies $\\bar A=A/\\ell A$ and $\\bar A_Y=A_Y/\\ell A_Y$: apply $u^{-1}$ to the cokernel presentation $\\mathcal E\\xrightarrow{\\ell}\\mathcal E\\to\\overline{\\mathcal E}\\to0$. These identifications take the quotient map to the quotient map, so their pure-tensor formulas agree with Step 1. The geometric or coefficient flatness of the morphisms $p,h$ is not required.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD (lemma-pullback-flat); applied to the constant rings and the inverse images in the coefficient identity"
+   }
+  },
+  {
+   "text": "For any flat $R$-module sheaf $M$ occurring above, $M[0]$ is K-flat by clause (1) of the K-flat criterion, and its quotient $\\bar M[0]$ is K-flat over $k$ by Steps 2--3 and the same criterion. Thus the derived tensor definition computes $M\\otimes_R^{\\mathbf L}U_VC$ and $\\bar M\\otimes_k^{\\mathbf L}C$ by their ordinary termwise tensors for any complex $C$ of $k$-sheaves. Apply $\\phi_{M,C^q}$ in each degree. Since the first factor has degree zero, its tensor differential is $1\\otimes d_C$, and naturality in Step 1 gives\n$$\\phi_{M,C^{q+1}}(x\\otimes d_Cy)=\\bar x\\otimes d_Cy=(1\\otimes d_C)\\phi_{M,C^q}(x\\otimes y).$$\nThe inverse maps also commute with the differential. Localizing this chain isomorphism gives\n$$\\Phi_{M,C}:M\\otimes_R^{\\mathbf L}U_VC\\xrightarrow{\\sim}U_V(\\bar M\\otimes_k^{\\mathbf L}C).$$\nIt is natural for derived morphisms of $C$: chain-map naturality was proved above, both sides preserve quasi-isomorphisms because their flat degree-zero first factors are K-flat, and naturality for a roof follows by inverting its quasi-isomorphism. For bounded-below $C$ all these termwise tensors remain bounded below. No degreewise annihilation assertion is made about an independently chosen $R$-injective resolution.",
+   "uses": [
+    "lem-kun-kflat-criteria",
+    "def-kun-derived-tensor",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), Tag 06YU (definition-derived-tor); coefficient identity of Tag 0F1J"
+   }
+  },
+  {
+   "text": "Write $G=Rg_{*,k}\\mathcal F\\in D^+(S'_{\\mathrm{et}},k)$. The canonical scalar-restriction comparison, first for $g$ and then for $(f')^{-1}$, gives\n$$v:(f')^{-1}Rg_{*,R}U_T\\mathcal F\\xrightarrow{\\sim}U_{X'}(f')^{-1}G.$$\nChoose a bounded-below $k$-complex representing $G$; exact derived inverse image computes $(f')^{-1}G$ termwise. Apply Step 4 to $M=A$ and $C=(f')^{-1}G$ after tensoring $v$ with $A$. The resulting map\n$$a:A\\otimes_R^{\\mathbf L}(f')^{-1}Rg_{*,R}\\mathcal F\\xrightarrow{\\sim}U_{X'}\\bigl(\\bar A\\otimes_k^{\\mathbf L}(f')^{-1}G\\bigr)$$\nis the first asserted isomorphism (the notation on the left suppresses $U_T$). All direct-image comparisons are used on bounded-below inputs, as required by their statement. This argument uses a $k$-coefficient model through the comparison $v$, rather than asserting that every $R$-coefficient model is degreewise killed by $\\ell$.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J(3) (lemma-modules-abelian-unbounded), Tag 03FD (lemma-cohomology-modules-abelian-agree); canonical bounded-below coefficient comparison"
+   }
+  },
+  {
+   "text": "On $Y$ the inverse-image coefficient comparison identifies $e_R^{-1}U_T\\mathcal F$ with $U_Ye_k^{-1}\\mathcal F$. Step 4 with $M=A_Y$ gives\n$$t:B_R:=A_Y\\otimes_R^{\\mathbf L}e_R^{-1}\\mathcal F\\xrightarrow{\\sim}U_YB_k,\\qquad B_k:=\\bar A_Y\\otimes_k^{\\mathbf L}e_k^{-1}\\mathcal F.$$\nThese objects are represented by sheaves in degree zero, so are bounded below. Apply $Rh_{*,R}$ to $t$ and then the canonical scalar-restriction direct-image comparison for $h$. Their composite\n$$b:Rh_{*,R}B_R\\xrightarrow{\\sim}U_{X'}Rh_{*,k}B_k$$\nis the second asserted isomorphism. Naturality follows from that of $\\Phi$, the inverse-image comparison, and the direct-image comparison.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J(3) (lemma-modules-abelian-unbounded); the other term in the coefficient reduction of Tag 0F1J"
+   }
+  },
+  {
+   "text": "Put $L_R=A\\otimes_R^{\\mathbf L}(f')^{-1}Rg_{*,R}\\mathcal F$ and $L_k=\\bar A\\otimes_k^{\\mathbf L}(f')^{-1}G$. The tensor and composition comparisons identify\n$$h_R^{-1}L_R\\cong A_Y\\otimes_R^{\\mathbf L}e_R^{-1}g_R^{-1}Rg_{*,R}\\mathcal F.$$\nHere $h^{-1}(f')^{-1}\\cong e^{-1}g^{-1}$ uses the equality $f'h=ge$ and the adjunction-compatible inverse-image composition. The defining adjoint map is\n$$\\alpha_R=1\\otimes e_R^{-1}\\varepsilon_{g,R}:h_R^{-1}L_R\\longrightarrow B_R,$$\nand similarly $\\alpha_k:h_k^{-1}L_k\\to B_k$. Let $c_h:h_R^{-1}U_{X'}L_k\\xrightarrow{\\sim}U_Yh_k^{-1}L_k$ be the scalar inverse-image comparison. The counit identity for $g$ in the scalar-restriction adjunction lemma, pulled back by $e^{-1}$, together with derived naturality of $\\Phi$ from Step 4 gives the equation\n$$t\\circ\\alpha_R=U_Y(\\alpha_k)\\circ c_h\\circ h_R^{-1}(a).$$\nIndeed the first tensor factor on both sides is the quotient $A_Y\\to\\bar A_Y$, and the second factor is the counit identified by that lemma. The tensor and inverse-image composition maps respect these quotient maps by their naturality, so they introduce no further factor in this equation.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-sbc-restrict-scalars-derived-adjunction-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), with Tag 03CB for site composition; definition of the counit adjoint in Tag 0F1J"
+   }
+  },
+  {
+   "text": "Let $\\kappa_R:L_R\\to Rh_{*,R}B_R$ and $\\kappa_k:L_k\\to Rh_{*,k}B_k$ be the two comparisons. By the adjunction formula, $\\kappa_R=Rh_{*,R}(\\alpha_R)\\circ\\eta_{h,R,L_R}$. Substitute Step 7 in this formula, and use naturality of the direct-image scalar comparison $V_h:Rh_{*,R}U_Y\\cong U_{X'}Rh_{*,k}$. The unit identity for $h$ in the scalar-restriction adjunction lemma is exactly\n$$V_h(h_k^{-1}L_k)\\circ Rh_{*,R}(c_h)\\circ\\eta_{h,R,U_{X'}L_k}=U_{X'}(\\eta_{h,k,L_k}).$$\nNaturality of the unit with respect to $a$ now gives\n$$b\\circ\\kappa_R=U_{X'}Rh_{*,k}(\\alpha_k)\\circ U_{X'}(\\eta_{h,k,L_k})\\circ a=U_{X'}(\\kappa_k)\\circ a.$$\nThis is the claimed equality under the displayed source and target isomorphisms. It is an equation obtained from units and counits, and does not require restriction on derived categories to be full or faithful. All tensor identifications have the ordinary representative formula $x\\otimes y\\mapsto\\bar x\\otimes y$ of Step 1.",
+   "uses": [
+    "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change); explicit mate calculation using the scalar unit and counit identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sheafification",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-kflat-criteria",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-weil-pbc-site-morphism-composition",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1j.proof.md",
+  "place": "Reduction to prime torsion paragraph; explicit quotient, K-flat and coefficient-adjunction details supplied from the cited Stacks interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,10 +188,52 @@
    "results": "{\"t\": \"2026-10-17T08:55:07Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*(pushforward|derived|directImage)|(pushforward|derived|directImage).*restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\"], \"digest\": \"76790a87274c1a73\"}",
    "date": "2026-10-17",
    "verdict": "no match: "
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(derived|tensor)|(derived|tensor).*restrictScalars",
+   "results": "{\"t\": \"2026-10-17T11:38:18Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*(derived|tensor)|(derived|tensor).*restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/Action.lean\", \"Mathlib/Algebra/Algebra/Epi.lean\", \"Mathlib/LinearAlgebra/DirectSum/TensorProduct.lean\", \"Mathlib/LinearAlgebra/DirectSum/TensorProduct.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\"], \"digest\": \"89c144f0b5058119\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary module tensor/flatness or generic sheaf scalar-restriction infrastructure; no derived etale coefficient comparison with its mate normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For flat sheaves of Z/n modules tensoring a complex of F_l sheaves commutes with coefficient restriction and derived direct image",
+   "results": "{\"t\": \"2026-10-17T11:38:18Z\", \"tool\": \"leansearch\", \"query\": \"For flat sheaves of Z/n modules tensoring a complex of F_l sheaves commutes with coefficient restriction and derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"SheafOfModules.restrictScalars\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\"], \"digest\": \"1dc763ea778fd09f\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary module tensor/flatness or generic sheaf scalar-restriction infrastructure; no derived etale coefficient comparison with its mate normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-17T11:38:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"restrictScalars\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.restrictScalars_curry\", \"TensorProduct.AlgebraTensorModule.restrictScalars_lTensor\", \"TensorProduct.AlgebraTensorModule.restrictScalars_rTensor\", \"Algebra.TensorProduct.restrictScalars_lift\", \"Algebra.TensorProduct.map_restrictScalars_comp_includeRight\"], \"digest\": \"3536a547b10f9088\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary module tensor/flatness or generic sheaf scalar-restriction infrastructure; no derived etale coefficient comparison with its mate normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of sheaves commutes with restriction of scalars and the tensor quotient isomorphism for a flat module",
+   "results": "{\"t\": \"2026-10-17T11:38:20Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image of sheaves commutes with restriction of scalars and the tensor quotient isomorphism for a flat module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"439360d07e88b5cd\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary module tensor/flatness or generic sheaf scalar-restriction infrastructure; no derived etale coefficient comparison with its mate normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|rightDerived",
+   "results": "{\"t\": \"2026-10-17T11:39:08Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|rightDerived\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"d6440073342ced2b\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary module tensor/flatness or generic sheaf scalar-restriction infrastructure; no derived etale coefficient comparison with its mate normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural coefficient change for etale sheaf derived tensor product and adjunction counit over a quotient coefficient ring",
+   "results": "{\"t\": \"2026-10-17T11:39:10Z\", \"tool\": \"leanfinder\", \"query\": \"Natural coefficient change for etale sheaf derived tensor product and adjunction counit over a quotient coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"StandardEtalePresentation.toPresentation_algebra_smul\", \"StandardEtalePresentation.toPresentation_σ'\"], \"digest\": \"c93be501a12e8664\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary module tensor/flatness or generic sheaf scalar-restriction infrastructure; no derived etale coefficient comparison with its mate normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0f1j",
@@ -77,10 +245,64 @@
  "blueprint": {
   "from": {
    "node": "lem-kun-0f1j",
-   "place": "the prime-torsion reduction paragraph: passing from a Z/n-module sheaf F killed by a divisor to the F_l-vector-space case",
+   "place": "Reduction to prime torsion: displayed coefficient identity, \"and similarly for the other term\", and the counit-adjoint map in the statement",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-0f1j-prime-torsion-coefficient-reduction",
+  "worker": "stage1",
+  "summary": "Expanded the coefficient identity using elementary mutually inverse sheaf tensor maps; proved quotient flatness, pulled back flatness, passed to K-flat models, used canonical scalar restriction for derived direct images, and proved equality of the actual comparisons using the counit at g and unit at h. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes precisely the prime-torsion reduction paragraph of lem-kun-0f1j: the displayed coefficient identification and its counterpart on Y, including the compatibility with the canonical counit-adjoint comparison. The elementary quotient calculation remains a step instead of a new node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exactness and reflection of exactness on underlying abelian sheaves justify exact scalar restriction in the elementary quotient-flatness argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic flat module pullback is needed for p and ph, independently of any geometric flatness; the unit supplies no separate flat-sheaf inverse-image theorem."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "Generic geometric-morphism input for applying ringed-topos flat pullback on small etale sites."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic constant-coefficient inverse-image exactness and identification with ringed-topos pullback, needed to identify pullbacks of quotient sheaves."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Generic bounded-below coefficient restriction comparison for g, h and inverse images; it transports the coefficient model without using smooth base change."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic adjunction-compatible composition of inverse images identifies h inverse f-prime inverse with e inverse g inverse."
+   },
+   {
+    "node": "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "why": "Generic scalar unit/counit identities prove compatibility of the actual tensor comparison morphisms, without invoking any smooth base-change conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-d49fc7914",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-d49fc7914 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the parent lem-kun-0f1j (including blueprint_update), unit sk-prop-sf-kunneth-ordinary, the main-20261015 blueprint proof (lines 53-75) and Stacks etale-cohomology.tex Tag 0F1J lemma-punctual-base-change-upgrade (prime-torsion paragraph, 'similarly for the other term'). I also read the statement of each of the 18 cited nodes. The delivery has no new nodes and leaves the statement unchanged. Every cited node exists, uses equal proof_deps, there is no cycle and no SGA source. S1: the quotient/balancing map is well defined (l z⊗y=0; scalars in k lift locally) and the inverse glues. S2: Ebar is flat because restriction of scalars is exact and reflects exactness (forgetful lemma (1)). S3: pullback of flat sheaves along p and ph uses flat-module-pullback with c iso and u^*=u^{-1} (prop-weil-pbc-inverse-image-modules-exact (1)-(3)); the topos morphism comes from the sets inverse-image lemma. S4: by kflat-criteria (1) the derived tensor is computed termwise, and phi is a chain isomorphism. S5/S6: a and b are built from the canonical comparisons V_g, U_f', U_e, V_h on bounded-below inputs. S7: the counit identity of lem-sbc-restrict-scalars-derived-adjunction-identities, pulled back by e^{-1}, gives t∘alpha_R=U(alpha_k)∘c_h∘h^{-1}(a); I checked the types. S8: I redid the chase b∘kappa_R=U(kappa_k)∘a using naturality of eta and V_h plus the unit identity; the direction conventions are consistent. Edge cases: n=l (trivial); n=l^2 with E=R (consistent), where E=k non-flat shows the flatness hypothesis is needed; E=0, F=0, n=1 (vacuous). Duplicate check: lem-kun-change-of-rings-tensor covers ordinary modules only (the blueprint's citation; the sheaf version is supplied in-unit by S1-S4), and lem-trf-site-derived-tensor-restriction covers only degree-zero N, is off-route and has no map compatibility, so neither duplicates the item. I accept all 7 declared tool_uses: the forgetful lemma, flat pullback, sets inverse image, module inverse image, the restrict-scalars comparisons, site composition and the adjunction identities. All are generic black-box tools and none invokes a base-change theorem. No fixes were made."
  }
 }
