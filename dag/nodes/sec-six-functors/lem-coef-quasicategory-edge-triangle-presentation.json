@@ -167,5 +167,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-faa503ac2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "existing:true reuse of landed SSet.homotopyCategory_triangle_calculus (node lem-coef-homotopy-category-triangle-calculus, Q20, reviewed_lean pass). Clause check: SSet.{u} plus Quasicategory only; Truncated.HomotopyCategory on the 2-truncation is FreeRefl (degenerate edge = id) modulo HoRel₂ triangle relations, i.e. the node's generated hQ; mk_surjective makes vertex endpoints cover all morphisms; Edge.CompStruct f g h fixes all three faces; ≫ orientation matches [v]∘[u]; iff reversed only. Edge cases (empty, degenerate, identity) covered. lean.statement verbatim in the file; node changed only in lean; report has Worker report and Second reading by NJ. nt_compile of the module: rc=0, no diagnostics. No fixes; duplicate nodes could be consolidated by the maintainer."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.HomotopyCategoryTriangleCalculus",
+  "declaration": "SSet.homotopyCategory_triangle_calculus",
+  "statement": "theorem homotopyCategory_triangle_calculus (D : SSet.{u}) [Quasicategory D] :\n    (∀ (x y : D _⦋0⦌)\n      (a : Truncated.HomotopyCategory.mk (V := (truncation 2).obj D) x ⟶\n        Truncated.HomotopyCategory.mk (V := (truncation 2).obj D) y),\n      ∃ f : Edge x y, Truncated.HomotopyCategory.homMk f.toTruncated = a) ∧\n    (∀ (x y z : D _⦋0⦌) (f : Edge x y) (g : Edge y z) (h : Edge x z),\n      (Truncated.HomotopyCategory.homMk f.toTruncated ≫\n        Truncated.HomotopyCategory.homMk g.toTruncated =\n          Truncated.HomotopyCategory.homMk h.toTruncated) ↔\n        Nonempty (Edge.CompStruct f g h))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Reuses the landed theorem of lem-coef-homotopy-category-triangle-calculus. Its category on the two-truncation is definitionally hoFunctor.obj D; HomotopyCategory.mk_surjective covers arbitrary objects, so vertex endpoint quantifiers express every morphism. Its second conjunct is the same exact-face triangle criterion with the biconditional reversed. The duplicate sandbox theorem was dropped under H4."
  }
 }

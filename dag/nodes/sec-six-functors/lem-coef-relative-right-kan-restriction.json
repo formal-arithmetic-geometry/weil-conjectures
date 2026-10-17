@@ -27,7 +27,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-cocartesian-section-colimits"
  ],
  "proof": [
   {
@@ -254,5 +257,30 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-1b1f0644e (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged and correct. All eight delivered steps are mathematically valid against the cited statements. I checked them as follows. Step 1: strict fibers of an inner fibration are quasicategories, and fullness gives the subcategory K. Steps 3-4: r_n v = uj holds exactly, t_c-finality of H_n l_c, and the final-vertex boundary filler for n>0. Step 5: a simplex outside the boundary is vertex-surjective with last vertex n. The new child is the correct opposite dual of Kerodon 02XK. I opened that page online: it is stated for a functor F, a simplicial subset A of B, and evaluation at sigma(0), with an F'-colimit conclusion. I tested the child on T=Delta^1 with P empty, the endpoints, or P=T. Steps 6-8 check against relative-kan-existence, 08NM and the Joyal nodes. Edge cases A empty, A=C, C empty and n=1 hold. Fault (C5, existing generalization): the snapshot DAG already contains lem-coef-relative-right-kan-universal-restriction, a reviewed split node in the same unit; its own reviewer noted that the item is a special case of it. It proves that R -> T is a trivial Kan fibration. Here R = K, and under the item's existence hypothesis T is the whole fiber Fun_sj(A,D): the cone H l_c restricts to h a_c and lies over s l_c. That node's dependency closure (376 nodes) does not contain the item, so there is no cycle. Fix: the item's proof now has three steps. Step 1 is the delivered step 1 with the fullness argument written out. Step 2 specializes universal-restriction and cites def-weil-pbc-trivial-kan-fibration for the r=0 clause. Step 3 is the delivered step 8, giving the categorical and mapping-space equivalences. proof_deps, proof_origin and split_report are updated. The child corner-limits node is now unused and is dropped; no other file cites it. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (steps 1 and 3). No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edc8bcebd",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q12 present), module and all used declarations (kanSlice/kanSliceCone/IsKanSliceCone, sectionCategory/sectionUnderlying/fiber, IsIsofibration, IsRelativeLimitDiagram, fullSubcomplex, mappingSpaceMap, IsFullyFaithful, IsFunctorEquivalence, Mathlib modelCategoryQuillen.I). Every clause matches exactly: full subcategory via vertex predicate, strict fibers Fun_s/Fun_sj, J_c = kanSlice false with canonical left cone, pointwise p-limit predicate, hext with exact Hj=h, canonical restriction via pullback.map/pre j, I.rlp includes r=0, quasicategory+functor-equivalence+mapping-space clauses on the actual map. One universe u, no completeness or extra hypotheses. Edge cases (A empty, A=C, C empty, D empty, p=id, B=pt, r=0) covered. Helpers have real data, docstrings carry source and blueprint, only sorry is main proof, statement verbatim, no duplicates found. Added stmt_deps own the used declarations and form no cycle. nt_compile.py --json on the side overlay: exit 0, no diagnostics. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeRightKanRestriction",
+  "declaration": "SSet.Enhanced.relative_rightKan_restriction",
+  "declarations": [
+   "SSet.Enhanced.sectionRestriction",
+   "SSet.Enhanced.relativeRightKanCategory",
+   "SSet.Enhanced.relativeRightKanRestriction",
+   "SSet.Enhanced.relative_rightKan_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeRightKanRestriction.lean",
+  "statement": "theorem relative_rightKan_restriction {C D B : SSet.{u}} [Quasicategory C] [Quasicategory D] [Quasicategory B] (P : C _⦋0⦌ → Prop) (p : D ⟶ B) (s : C ⟶ B) (hp : IsIsofibration p) (hext : ∀ h : (sectionCategory p ((fullSubcomplex C P).ι ≫ s)) _⦋0⦌, ∃ H : (sectionCategory p s) _⦋0⦌, (∀ c : C _⦋0⦌, IsRelativeLimitDiagram p (kanSliceCone (fullSubcomplex C P) c ≫ sectionUnderlying H)) ∧ (sectionRestriction (fullSubcomplex C P).ι p s).app _ H = h) : Quasicategory (relativeRightKanCategory P p s).toSSet ∧ Quasicategory (sectionCategory p ((fullSubcomplex C P).ι ≫ s)) ∧ modelCategoryQuillen.I.rlp (relativeRightKanRestriction P p s) ∧ IsFunctorEquivalence (relativeRightKanRestriction P p s) ∧ IsFullyFaithful (relativeRightKanRestriction P p s)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing fixed-base sectionCategory and sectionUnderlying, canonical kanSliceCone, relative-limit predicate, and IsIsofibration. Adds their three landed owning nodes to stmt_deps. The three helper definitions belong to this restriction statement; no notion is duplicated or arbitrary map chosen. The conclusion includes quasicategory closure, all boundary lifts (including dimension zero), coherent functor equivalence and the actual induced mapping-space equivalences."
  }
 }

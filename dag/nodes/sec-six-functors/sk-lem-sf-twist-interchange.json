@@ -82,5 +82,30 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca2934520",
+  "group": "ND",
+  "result": "pass",
+  "note": "Existing-only delivery: lean.statement of nonempty_iso_derivedHom_tensor matches Perfect/Dual.lean lines 154-157 verbatim, with exact hypotheses (IsDualizable K, IsInvertible T, arbitrary M) and the node's direction. Canonical map recorded: derivedHomTensorMap = ihomTensorToIhom (evaluation transpose), isIso_derivedHomTensorMap has a real proof, derivedHomTensorIso is its inverse (rfl-checked). Final clause = derivedHomIsoCoefficientDualTensor applied with isInvertible_shift plus commShiftIso; the TateTwist specialization's HasInvertibleExponent assumption is confined to that concrete theorem. Node and source text identical, stmt_deps empty, report has both sections. nt_compile probes clean, ModuleCat specializations clean, axioms standard. Restating the primary's type by hand at ModuleCat times out (known instance issue documented in the module); not a delivery fault. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual",
+  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor",
+  "declarations": [
+   "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor",
+   "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap",
+   "AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap",
+   "AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorIso",
+   "AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor"
+  ],
+  "statement": "theorem nonempty_iso_derivedHom_tensor\n    {K T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)\n    (_hT : IsInvertible T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :\n    Nonempty ((RHom(X)[A].obj (op K)).obj (M ⊗ T) ≅ (RHom(X)[A].obj (op K)).obj M ⊗ T)",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The primary existing theorem has exactly dualizable K, invertible T and arbitrary M. Canonicality is supplied by derivedHomTensorMap, isIso_derivedHomTensorMap and derivedHomTensorIso: the stated map is the inverse of the evaluation transpose. The final clause is derivedHomIsoCoefficientDualTensor applied to the invertible shifted Tate object, followed by the tensor shift isomorphism. Perfect.TateTwist.nonempty_iso_derivedHom_tateObject_shift separately spells out the concrete torsion-coefficient specialization; see the report for its full signature and coefficient assumptions."
  }
 }
