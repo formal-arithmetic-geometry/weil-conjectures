@@ -13,9 +13,68 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-realization-finite-limits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $W$ be the walking span with objects $a,c,b$ and nonidentity arrows $c\\to a$, $c\\to b$, and let $V:W\\to\\mathsf{sSet}$ be the strict diagram $V(a)=\\operatorname{Sing}|A|$, $V(c)=\\operatorname{Sing}|C|$, $V(b)=\\operatorname{Sing}|B|$ with arrows $\\operatorname{Sing}(f),\\operatorname{Sing}(g)$; this is literally the span of homotopy types in the statement. Work in the Kan model structure of [lem-coef-kan-quillen-right-proper]: its cofibrations are the monomorphisms, so every value of $V$ is cofibrant, and by [lem-coef-simplicial-presheaf-projective-model] it is combinatorial and simplicial for the Cartesian enrichment, with $X\\otimes K=X\\times K$. Hence [lem-coef-simplicial-bar-projective-resolution] applies with $I=W$: it gives the projectively cofibrant replacement $QV\\to V$ (an objectwise weak equivalence) and $\\operatorname{colim}_WQV\\cong R_W(V)=\\int^{[p]}(\\coprod_{i_0\\to\\cdots\\to i_p}V(i_0))\\times\\Delta^p$. By [lem-coef-model-colimit-localization-comparison], after the localization $q$ this ordinary colimit cocone is a coherent colimit cocone of $qV$, and [lem-coef-simplicial-model-nerve-localization] identifies the localization of the Kan model structure with the infinity category $\\mathcal S$ of spaces, so this is the colimit in spaces. The legs: the chain $(i)$ with identity final arrow is a section $V(i)\\to QV(i)$ of the augmentation, hence its inverse after localization, and its composite to $R_W(V)$ is the inclusion $j_i$ of the summand of the $0$-chain $(i)$; the strict cocone triangles of $QV$ become the $1$-simplices $V(c)\\times\\Delta^1\\to R_W(V)$ given by the summands of the chains $c\\to a$ and $c\\to b$, whose ends are $j_aV(c\\to a)$, $j_bV(c\\to b)$ and $j_c$. Finally, elementary (co-Yoneda): in degree $r$ the coend gives $R_W(V)_r=\\int^{[p]}(\\coprod_{i_0\\to\\cdots\\to i_p}V(i_0)_r)\\times\\operatorname{Hom}([r],[p])=\\coprod_{i_0\\to\\cdots\\to i_r}V(i_0)_r$, with the faces and degeneracies of $\\mathrm{BK}_W(V)$ of [lem-coef-bousfield-kan-comparison-calculus]; so $R_W(V)=\\mathrm{BK}_W(V)=B_W$ naturally, with $j_i$ the $0$-chain summands.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-bar-projective-resolution",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; strict bar/simplicial-replacement computation of the coherent colimit."
+   }
+  },
+  {
+   "text": "Let $\\Phi:|B_W|\\to D(f,g)$ be the weak homotopy equivalence of [lem-coef-singular-span-bar-cylinder-gluing] and define its transpose $\\Phi^\\flat:B_W\\to\\operatorname{Sing}D(f,g)$ by $\\Phi^\\flat(x)=(s\\mapsto\\Phi[x,s])$; this is continuous in $s$ and commutes with simplicial operators by the realization relations. Directly from the definitions, $\\varepsilon_{D}\\circ|\\Phi^\\flat|=\\Phi$, where $\\varepsilon_D:|\\operatorname{Sing}D|\\to D$ is the evaluation map. By [lem-coef-singular-counit-weak-equivalence] $\\varepsilon_D$ induces bijections on $\\pi_0$ and isomorphisms on all $\\pi_r$; since $\\Phi$ does too, two-out-of-three for isomorphisms (at the basepoints $x$, $|\\Phi^\\flat|(x)$, $\\Phi(x)$) shows that $|\\Phi^\\flat|$ does, i.e. $\\Phi^\\flat$ is a weak homotopy equivalence of simplicial sets and $q(B_W)\\simeq q\\operatorname{Sing}D(f,g)$. Composing the cocone of step 1 with $\\Phi^\\flat$: for $\\sigma\\in V(a)_r$ the formula of the cited node gives $\\Phi^\\flat(j_a\\sigma)=\\operatorname{incl}_{|A|}\\circ\\sigma$, so the leg at $a$ is $\\operatorname{Sing}$ of the inclusion $|A|\\to D(f,g)$; likewise at $b$, and at $c$ it is $\\operatorname{Sing}(y\\mapsto[(y,1/2)])$. On the chain $c\\to a$, a simplex $(\\sigma,\\theta)$ of $V(c)\\times\\Delta^1$ goes to $s\\mapsto[(\\sigma(s),\\tfrac12\\sum_{\\theta(j)=0}s_j)]$, and on $c\\to b$ to $s\\mapsto[(\\sigma(s),1-\\tfrac12\\sum_{\\theta(j)=0}s_j)]$. By the cylinder homeomorphism [lem-coef-simplicial-realization-cylinder] (for $K=\\Delta^r$, the coordinate $\\sum_{\\theta(j)=1}s_j$), these are $\\operatorname{Sing}$ of the two halves of the homotopy $(y,t)\\mapsto[(y,t)]$ on $|C|\\times[0,1]$, and the map $V(c)\\times\\Delta^2\\to\\operatorname{Sing}D$, $(\\sigma,\\theta)\\mapsto(s\\mapsto[(\\sigma(s),\\tfrac12\\sum_{\\theta(j)=1}s_j+\\sum_{\\theta(j)=2}s_j)])$ is a $2$-simplex in $\\operatorname{Fun}(V(c),\\operatorname{Sing}D)$ with vertices at positions $0,\\tfrac12,1$: its edge $\\{1,2\\}$ is the $c\\to b$ edge, its edge $\\{0,1\\}$ is the reverse of the $c\\to a$ edge (which runs from $j_c$ at position $\\tfrac12$ to $j_aV(c\\to a)$ at position $0$), and its edge $\\{0,2\\}$ is $\\operatorname{Sing}$ of $c\\mapsto[(c,t)]$; all edges are invertible since $\\operatorname{Sing}D$ is Kan. Hence the colimit cocone of step 1, transported along the equivalence $\\Phi^\\flat$, is the cocone of the statement: the two inclusions and the homotopy $c\\mapsto[(c,t)]$ from $\\operatorname{incl}_{|A|}f$ to $\\operatorname{incl}_{|B|}g$. If $C=\\varnothing$ then $D=|A|\\amalg|B|$ and $B_W=V(a)\\amalg V(b)$; if $A$ or $B$ is empty then so is $C$, and the same formulas apply.",
+   "uses": [
+    "lem-coef-singular-span-bar-cylinder-gluing",
+    "lem-coef-singular-counit-weak-equivalence",
+    "lem-coef-simplicial-realization-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, explicit realization of the walking-span simplicial replacement and identification with the double mapping cylinder."
+   }
+  },
+  {
+   "text": "For a strictly commuting map of spans $(\\alpha_A,\\alpha_C,\\alpha_B)$, applying $\\operatorname{Sing}$ gives a strict map of $W$-diagrams $V\\to V'$. The projective bar replacement, the isomorphism $\\operatorname{colim}QV\\cong R_W(V)$, the formula $R_W(V)=\\mathrm{BK}_W(V)$ and the localized colimit cocone are functorial in maps of $W$-diagrams by the cited statements. The map $\\Phi$ is natural by [lem-coef-singular-span-bar-cylinder-gluing], so $\\Phi^\\flat$ is natural (its definition is pointwise); the counit is natural by [lem-coef-singular-counit-weak-equivalence]. Since $\\alpha_A\\amalg(\\alpha_C\\times1)\\amalg\\alpha_B$ commutes with both inclusions and with $c\\mapsto[(c,t)]$, the equivalence of step 2 and all specified cocone data are natural in the span.",
+   "uses": [
+    "lem-coef-singular-span-bar-cylinder-gluing",
+    "lem-coef-singular-counit-weak-equivalence",
+    "lem-coef-simplicial-bar-projective-resolution",
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; naturality clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-simplicial-bar-projective-resolution",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-singular-counit-weak-equivalence",
+  "lem-coef-singular-span-bar-cylinder-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent middle derived adjunction; generic topological input is agent-formulated because the blueprint supplies context rather than a source theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-triangular-bar-excision",
@@ -71,7 +130,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof. Generic topological input: double mapping cylinder models the pushout of homotopy types.",
+   "place": "Paragraph 2, coherent middle derived adjunction; generic topological input: strict walking-span bar realization and double mapping cylinder model the pushout of homotopy types.",
    "via": [
     "lem-coef-triangular-bar-excision",
     "lem-coef-directed-three-face-mapping-pushout",
@@ -93,5 +152,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-double-mapping-cylinder-space-pushout",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting the ill-formed coherent-diagram bar node and using the existing strict Bousfield--Kan and projective bar-resolution statements. Added one narrower unsplit node for the singular walking-span bar realization to the double mapping cylinder, including the realization-unit, interval-cylinder, quotient gluing and naturality clauses. The item now explicitly compares the strict bar colimit with the coherent colimit and supplies endpoint and connecting maps. Maintainer reader Q134 (2026-10-18): step 1 now cites the Kan model structure as a combinatorial simplicial model category and the identification of its localization with spaces, and writes out the co-Yoneda identification R_W(V)=BK_W(V); step 2 adds the statement-only counit theorem lem-coef-singular-counit-weak-equivalence to pass from the topological weak equivalence to Sing D(f,g), and identifies the cocone legs and homotopy explicitly; the new gluing node now gives Phi by an explicit formula on both interval chains.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: coherent middle derived adjunction, specifically the strict walking-span bar computation and its topological double-cylinder comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-6b52371cf",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-6b52371cf (reviewer sub-agent of L); spot-checked: I read the whole item, the new node and the full statement of every cited node, plus the blueprint source paragraph and the unit route. The item statement is true and unchanged: I checked it on C empty, A or B empty (which forces C empty), the point/interval case and the suspension case. Three repairable faults, all fixed under fixes/dag/nodes/sec-six-functors/. (1) C1/E1, step 1: it applied the bar-resolution node and the model-colimit node to sSet without citing that the Kan model structure is a combinatorial simplicial model category, and without identifying its localization with spaces. Step 1 now cites lem-coef-kan-quillen-right-proper, lem-coef-simplicial-presheaf-projective-model and lem-coef-simplicial-model-nerve-localization. It also names the cocone legs explicitly and writes out R_W(V)=BK_W(V) as an elementary co-Yoneda step. (2) C1/E5, step 2: it went from the topological weak equivalence |R_W(V)|->D(f,g) to the homotopy type Sing D(f,g) without the counit theorem. D is not a realization, so the cited unit theorem does not give this, and neither the DAG nor Mathlib has the counit theorem (SingularSet.lean only defines sSetTopAdj). I added the statement-only node lem-coef-singular-counit-weak-equivalence; its archived source is WANTED. Step 2 now builds the transpose Phi^flat, checks eps_D∘|Phi^flat|=Phi, applies two-out-of-three, and identifies the legs as Sing of the two inclusions. It also builds a 2-simplex showing that Sing of c->[(c,t)] is the composite of the two chain edges. Step 2 no longer uses the off-route lem-cbc-realization-singular-unit-weak, so no tool_uses are needed and all proof_deps are in sk-prop-sf-biduality-general. (3) B2/E5: the new node lem-coef-singular-span-bar-cylinder-gluing left the map on its two interval chains unspecified. It now gives Phi by an explicit formula on BK_W(V) (positions w/2, 1-w/2 and 1/2). I checked the formula against faces and degeneracies. It is true by the counit maps eps_{|X|} and the gluing lemma, it is not a restatement of the item, and it duplicates no existing node (rg and blueprint_refs searches). After the fixes, every cited id exists, proof_deps equals the union of the step uses, and there is no cycle. No SGA is cited. Full details are in review.md.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

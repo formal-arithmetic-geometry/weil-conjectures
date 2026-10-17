@@ -18,9 +18,99 @@
   "lem-exc-closed-ambient",
   "lem-sf-etale-generic-immersion-projection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every scheme morphism $u$, [prop-weil-pbc-inverse-image-modules-exact] gives the underived module adjunction $u^*=u^{-1}\\dashv u_*$, with $u^{-1}$ additive and exact; on derived categories $u^*$ is applied termwise, since an exact functor preserves quasi-isomorphisms. Derived adjunction $s^*\\dashv Rs_*$: let $C$ be a complex on $X$ and $H\\in D(S_{\\mathrm{et}},A)$, and choose a K-injective resolution $H\\to I$ [prop-weil-pbc-kinjective-resolutions-exist]. Since $s^{-1}$ is an exact left adjoint of $s_*$, the termwise complex $s_*I$ is K-injective [lem-weil-pbc-right-adjoint-preserves-kinjective], and $Rs_*H=Q(s_*I)$ because a K-injective complex computes the total right derived functor of $Q\\circ s_*$ [lem-weil-pbc-kinjective-total-derived]. Hence $\\operatorname{Hom}_{D(S)}(s^*C,H)=\\operatorname{Hom}_{K(S)}(s^{-1}C,I)\\cong\\operatorname{Hom}_{K(X)}(C,s_*I)=\\operatorname{Hom}_{D(X)}(C,Rs_*H)$, the outer equalities by [lem-weil-pbc-kinjective-hom-derived] and the middle bijection on homotopy classes $f\\mapsto s_*(f)\\circ\\eta_C$, with inverse $g\\mapsto\\varepsilon_I\\circ s^{-1}(g)$, by [lem-weil-pbc-termwise-adjunction-homotopy](b). Each identification is natural in $C\\in K(X)$, and both outer functors invert quasi-isomorphisms in $C$, so the bijection is natural in $C\\in D(X_{\\mathrm{et}},A)$; it is natural in $H$ by functoriality of K-injective resolutions. This is the canonical adjunction $s^*\\dashv Rs_*$; its counit $\\varepsilon^*_{s,H}$ is represented by the termwise counit $s^{-1}s_*I\\to I$. Open factor: [lem-weil-pbc-extension-by-zero-adjunction] gives $j_!\\dashv j^{-1}=j^*$ on module sheaves, $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact] and $j^{-1}$ is exact by [prop-weil-pbc-inverse-image-modules-exact], so both act termwise on derived categories. For $N\\in D(X_{\\mathrm{et}},A)$ with K-injective resolution $N\\to I$, the complex $j^{-1}I$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective] applied to the exact left adjoint $j_!$, and represents $j^*N$ since $j^{-1}$ preserves quasi-isomorphisms. The same three identifications [lem-weil-pbc-kinjective-hom-derived], [lem-weil-pbc-termwise-adjunction-homotopy](b) give $\\operatorname{Hom}_{D(X)}(j_!P',N)\\cong\\operatorname{Hom}_{D(U)}(P',j^*N)$ naturally, the derived pair $j_!\\dashv j^*$. Closed factor: $i_*\\dashv Ri^!$ by [lem-exc-closed-ambient]. Composing the derived open and closed adjunctions gives $Rs_!=j_!i_*\\dashv Ri^!j^*=Rs^!$, with counit $\\varepsilon^!_{s,M}$ the composite of the two counits.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), adjunction of derived inverse and direct image on unbounded derived categories, written out through K-injective resolutions; Tag 08FJ (lemma-adjoint-lower-shriek-restrict) for the open factor; composition of adjunctions"
+   }
+  },
+  {
+   "text": "For every C, the closed symmetric-monoidal statement lem-sf-ringed-derived-closed-symmetric-monoidal gives a natural tensor-Hom bijection from maps C\\to\\mathscr H_X(Rs_!P,M) to maps C\\otimes_A^LRs_!P\\to M, with evaluation as its counit. The projection isomorphism lem-sf-etale-generic-immersion-projection rewrites the latter as maps Rs_!(s^*C\\otimes_A^LP)\\to M. The adjunction Rs_!\\dashv Rs^! from step 1 rewrites these as maps s^*C\\otimes_A^LP\\to Rs^!M, and the same closed tensor-Hom bijection on S rewrites them as maps s^*C\\to H=\\mathscr H_S(P,Rs^!M). Thus the resulting bijection from Hom_X(C,\\mathscr H_X(Rs_!P,M)) to Hom_S(s^*C,H) is natural in C.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-etale-generic-immersion-projection",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), tensor-Hom transposition combined with the immersion projection formula"
+   }
+  },
+  {
+   "text": "The derived inverse-image/direct-image adjunction s^*\\dashv Rs_* from step 1 identifies maps s^*C\\to H with maps C\\to Rs_*H. Composing this bijection with the natural bijection of step 2 gives, for every C, a bijection Hom_X(C,\\mathscr H_X(Rs_!P,M))\\cong Hom_X(C,Rs_*H), natural in C. Yoneda therefore defines a unique morphism \\theta_{s,P,M}:\\mathscr H_X(Rs_!P,M)\\to Rs_*H whose postcomposition sends each map from C to the corresponding map under this bijection; since every component is bijective, \\theta is an isomorphism. This defines \\theta directly from the adjunction chain and does not invoke the unspecified isomorphism of lem-weil-stratum-ambient-hom.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-etale-generic-immersion-projection",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-exc-closed-ambient",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "prop-weil-pbc-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), Yoneda construction from the tensor-adjunction chain"
+   }
+  },
+  {
+   "text": "Let u:C\\to Rs_*H and let \\widetilde u:s^*C\\to H be its adjoint under s^*\\dashv Rs_*. Tracing the inverse of the Yoneda bijection in step 3, and using the evaluation-counit clause of lem-sf-ringed-derived-closed-symmetric-monoidal, says that the tensor transpose of \\theta_{s,P,M}^{-1}\\circ u is exactly the composite $$C\\otimes_A^LRs_!P\\xrightarrow{\\pi_s}Rs_!(s^*C\\otimes_A^LP)\\xrightarrow{Rs_!(\\widetilde u\\otimes1)}Rs_!(H\\otimes_A^LP)\\xrightarrow{Rs_!\\mathrm{ev}}Rs_!Rs^!M\\xrightarrow{\\varepsilon^!_{s,M}}M.$$ Every arrow is the corresponding map in the adjunction chain, so its naturality in C, P and M follows from naturality of the closed tensor-Hom bijections, the projection isomorphism, the two adjunctions, evaluation, and the counit; no boundedness or constructibility hypothesis is introduced.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-etale-generic-immersion-projection",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-exc-closed-ambient",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "prop-weil-pbc-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
+    "place": "Mate calculation and final Yoneda sentence, with evaluation normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-closed-ambient",
+  "lem-sf-etale-generic-immersion-projection",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9; tensor-Hom transposition of the closed/open immersion adjunctions, using the existing ambient Hom and immersion projection nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,7 +170,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-generic-exchange-algclosed",
@@ -92,12 +182,36 @@
  "blueprint": {
   "from": {
    "node": "thm-weil-etale-geometric-biduality",
-   "place": "Proof paragraph 4, \"The induction hypothesis over ... together with [lem-weil-geometric-generic-duality]\"; tensor-adjoint evaluation formula for the stratum Hom identification",
+   "place": "Proof paragraph 4 of thm-weil-etale-geometric-biduality: the stratum internal-Hom identification used in the generic-fibre argument, with its tensor-adjoint evaluation normalization.",
    "via": [
     "lem-sf-etale-generic-exchange-algclosed"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-generic-stratum-mate",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deriving the open and inverse-image adjunctions from the on-route underived module adjunctions and exactness, defining theta by Yoneda from the tensor-Hom/projection/exceptional-adjunction chain, and explicitly using the ringed-site evaluation counit. Removed the unspecified ambient Hom comparison and all off-route etale-sum citation. Maintainer-reader fix (2026-10-18): step 1 now derives s^*\\dashv Rs_* and the derived j_!\\dashv j^* through K-injective resolutions (termwise adjunction, right adjoints preserve K-injectives, K-injective Hom and total-derived computation) instead of the abstract derived-adjunction lemma, whose absoluteness hypothesis on Rs_* was not supplied.",
+  "blueprint": "Realizes the tensor-adjoint stratum Hom identification in proof paragraph 4 of thm-weil-etale-geometric-biduality; theta is the Yoneda map induced by the displayed tensor-adjunction chain.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Its statement supplies the underived constant-coefficient module adjunction u^* = u^{-1} \\dashv u_* and exactness needed to derive the unbounded s^* \\dashv Rs_* adjunction; no node in the biduality unit states this generic module-site input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-b243aa58c",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-b243aa58c (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the whole item (no new nodes), every cited statement, Stacks sites-cohomology 08J9 (lemma-internal-hom), 07A6 (lemma-adjoint) and 08FJ, and the blueprint lem-weil-stratum-ambient-hom (master and main-20261015 copies agree). The item follows that blueprint's Hom chain and finishes with Yoneda. The statement is correct. Small cases checked: s=id gives theta=id and the formula reduces to ev(u tensor 1); S empty gives 0 on both sides; an open s and a closed s give the standard formulas. The coefficient category is the ordinary constant-A etale module category throughout. The arrow directions in steps 2 and 4 are right: tracing the inverse bijections gives exactly eps^! o Rs_!ev o Rs_!(u~ tensor 1) o pi_s, which is what the citers lem-sf-etale-generic-evaluation-coherence and lem-sf-etale-generic-exchange-algclosed use. Fault E1/C1 in step 1: it got s^* -| Rs_* and the derived j_! -| j^* from lem-sc-derived-adjunction-from-underived, which is Mathlib Adjunction.derived and needs absolute derived functors; no cited node shows Rs_* is absolute (lem-weil-pbc-kinjective-total-derived only gives the Kan-extension property). I repaired this in fixes/dag/nodes/sec-six-functors/lem-sf-etale-generic-stratum-mate.json. Step 1 now proves both adjunctions through K-injective resolutions, citing prop-weil-pbc-kinjective-resolutions-exist, lem-weil-pbc-right-adjoint-preserves-kinjective, lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-kinjective-hom-derived and lem-weil-pbc-termwise-adjunction-homotopy(b), all on the unit's route, with source Stacks 07A6+08FJ. lem-sc-derived-adjunction-from-underived is removed from steps 1, 3 and 4 and from proof_deps, and a sentence is appended to split_report.summary; the statement is unchanged. Every proof dep is on the route of sk-prop-sf-biduality-general. The declared tool_use prop-weil-pbc-inverse-image-modules-exact (sk-def-exchange) is actually on route; accepted as harmless. Duplicate check: lem-weil-stratum-ambient-hom gives only an unspecified isomorphism, so the item strengthens it rather than restating it. No SGA is cited. Minor point left alone: the statement does not cite a definition node for Rs_*, same wording as the accepted sibling projection node; the fixed step 1 now spells out the K-injective construction.; 1 file(s) fixed by the reviewer"
  }
 }
