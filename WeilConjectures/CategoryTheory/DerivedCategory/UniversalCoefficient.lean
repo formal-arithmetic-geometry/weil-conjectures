@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Flat.TorsionFree
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-!
@@ -64,11 +65,11 @@ lemma smul_span_singleton_top_le_ker (hf : (x • 𝟙 A) ≫ f = 0) :
   rw [Submodule.ideal_span_singleton_smul]
   rintro _ ⟨a, -, rfl⟩
   have := congr($(hf).hom a)
-  simpa using this
+  exact this
 
 lemma smul_apply_eq_zero (hg : g ≫ (x • 𝟙 A') = 0) (b : B) : x • g.hom b = 0 := by
   have := congr($(hg).hom b)
-  simpa using this
+  exact this
 
 /-- The map `A ⊗_R R/(x) ⟶ B` induced by `f : A ⟶ B` when `f ∘ x = 0`. -/
 noncomputable def tensorQuotLift (hf : (x • 𝟙 A) ≫ f = 0) :
@@ -134,7 +135,7 @@ theorem universalCoefficientShortComplex_shortExact (hf : (x • 𝟙 A) ≫ f =
       (smul_span_singleton_top_le_ker x f hf) hker)).comp
       (LinearEquiv.injective _)
   · rintro ⟨a', ha'⟩
-    obtain ⟨b, hb⟩ := (h₃ a').1 (by simpa using ha')
+    obtain ⟨b, hb⟩ := (h₃ a').1 ((Submodule.mem_torsionBy_iff _ _).1 ha')
     exact ⟨b, Subtype.ext hb⟩
 
 end
@@ -164,7 +165,8 @@ noncomputable def quotSpanSingletonResolutionComplex : ChainComplex (ModuleCat.{
 lemma quotSpanSingletonResolutionComplex_d_one_zero :
     (quotSpanSingletonResolutionComplex x).d 1 0 =
       ofHom (x • LinearMap.id : R →ₗ[R] R) :=
-  (ChainComplex.of_d (quotSpanSingletonResolutionX (R := R)) (quotSpanSingletonResolutionD x) 0).trans rfl
+  (ChainComplex.of_d (quotSpanSingletonResolutionX (R := R)) (quotSpanSingletonResolutionD x)
+    0).trans rfl
 
 lemma quotSpanSingletonResolutionComplex_d_succ_succ (n : ℕ) :
     (quotSpanSingletonResolutionComplex x).d (n + 2) (n + 1) = 0 :=
@@ -277,6 +279,24 @@ noncomputable def torOneQuotSpanSingletonIso (hx : x ∈ nonZeroDivisors R) (M :
       rw [quotSpanSingletonResolutionComplex_d_one_zero, hom_whiskerLeft, hom_ofHom]) ≪≫ₗ
       kerLTensorSmulEquiv M x))
 
+omit [Small.{u} R] in
+/-- The `x`-torsion of a flat module vanishes, for a nonzerodivisor `x`. -/
+lemma isZero_torsionBy_of_flat (hx : x ∈ nonZeroDivisors R) (M : ModuleCat.{u} R)
+    (hM : Module.Flat R M) : IsZero (ModuleCat.of R (Submodule.torsionBy R M x)) := by
+  have := hM
+  have h := (isSMulRegular_iff_torsionBy_eq_bot M x).1
+    (Module.Flat.isSMulRegular_of_nonZeroDivisors hx)
+  have : Subsingleton (Submodule.torsionBy R M x) := by
+    rw [h]
+    infer_instance
+  exact ModuleCat.isZero_of_subsingleton _
+
+/-- `Tor₁^R(M, R/(x))` vanishes for a flat module `M` and a nonzerodivisor `x`. -/
+lemma isZero_torOneQuotSpanSingleton_of_flat (hx : x ∈ nonZeroDivisors R) (M : ModuleCat.{u} R)
+    (hM : Module.Flat R M) :
+    IsZero (((Tor (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ Ideal.span {x}))) :=
+  (isZero_torsionBy_of_flat hx M hM).of_iso (torOneQuotSpanSingletonIso hx M)
+
 end Tor
 
 end ModuleCat
@@ -328,3 +348,30 @@ theorem universalCoefficientSequence_shortExact :
     (HomologySequence.exact₁ _ hT n₀ n₁ hn)
 
 end DerivedCategory
+
+namespace CategoryTheory.ShortComplex
+
+variable {C : Type*} [Category* C] [HasZeroMorphisms C] (S : ShortComplex C) {A₁ A₂ A₃ : C}
+  (e₁ : S.X₁ ≅ A₁) (e₂ : S.X₂ ≅ A₂) (e₃ : S.X₃ ≅ A₃)
+
+/-- The short complex `A₁ ⟶ A₂ ⟶ A₃` obtained from `S` by transport along isomorphisms
+`S.Xᵢ ≅ Aᵢ` of its objects. -/
+@[simps]
+def transport : ShortComplex C where
+  X₁ := A₁
+  X₂ := A₂
+  X₃ := A₃
+  f := e₁.inv ≫ S.f ≫ e₂.hom
+  g := e₂.inv ≫ S.g ≫ e₃.hom
+  zero := by simp
+
+/-- A short complex is isomorphic to its transport along isomorphisms of its objects. -/
+@[simps!]
+def transportIso : S ≅ S.transport e₁ e₂ e₃ :=
+  isoMk e₁ e₂ e₃ (by simp) (by simp)
+
+variable {S} in
+lemma ShortExact.transport (h : S.ShortExact) : (S.transport e₁ e₂ e₃).ShortExact :=
+  shortExact_of_iso (S.transportIso e₁ e₂ e₃) h
+
+end CategoryTheory.ShortComplex
