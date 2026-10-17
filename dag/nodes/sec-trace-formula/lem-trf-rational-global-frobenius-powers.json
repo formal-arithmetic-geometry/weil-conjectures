@@ -12,9 +12,74 @@
   "def-weil-rationalization-karoubi",
   "prop-trf-rational-frobenius-integral-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_r=L(g_\\gamma^r)^*$. By [lem-trf-integral-compact-transport-recurrence], applied to an integral representative $M_{\\mathcal O}\\in D^b_c(X,\\mathcal O_E)$ of an arbitrary object $M$ of $D^b_c(X,E)$ (the objects of the two categories are the same, [def-weil-rationalization-karoubi]), the levelwise direct transports $\\tau^{(r)}_{c,M_n}$ of [lem-trf-compact-frobenius-transport-composition] form morphisms of the coherent reduction towers, natural in $M_{\\mathcal O}$. The recurrence of that finite-level lemma holds there as an equality of tower morphisms. Their realizations $V_{r,M_{\\mathcal O}}$ therefore satisfy, integrally, $V_{m+1,M_{\\mathcal O}}=R\\Gamma_c(X,c_{m})\\circ V_{1,P_mM_{\\mathcal O}}\\circ V_{m,M_{\\mathcal O}}$. The same lemma identifies $V_{1}$ with the integral transport $\\tau_c$ of [def-weil-frobenius-cohomology-transport] and $V_{r}$ with the integral base-change isomorphism $g^{r,*}_{\\gamma,c}$. [prop-trf-rational-frobenius-integral-model] states that its stage-$E$ transports $B_{r,-}$ are the rationalizations of these. By [prop-weil-pbc-rational-transport] the stage-$E$ functors $R\\Gamma_c$, $P_r$ and the comparisons $c_m$ are the unique $E$-linear extensions of the integral ones. That proposition also extends the natural transformations $V_r$ uniquely, with components $V_{r,M_{\\mathcal O}}\\otimes1=B_{r,M}$. Since extension is a functor, it preserves composition, and the integral identity gives $B_{m+1,M}=B_{1,G^mM}\\circ B_{m,M}$ under the identification of $G^m$ with $P_m$ by the composition maps. The recurrence is proved before rationalization; scalar extension only transports it. Naturality of $B_{1,-}$ for rational morphisms is the extended naturality of $\\tau_c$, which is natural in $M_{\\mathcal O}$ by [def-weil-frobenius-cohomology-transport].",
+   "uses": [
+    "lem-trf-integral-compact-transport-recurrence",
+    "lem-trf-compact-frobenius-transport-composition",
+    "prop-weil-pbc-rational-transport",
+    "prop-trf-rational-frobenius-integral-model",
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: naturality and composition of the rationalized base-change transports"
+   }
+  },
+  {
+   "text": "Set $G=Lg_\\gamma^*$, $C=R\\Gamma_c(X,-)$ and $t=B_{1,-}:C\\Rightarrow C\\circ G$. The morphism $\\varphi_E:GK_E\\to K_E$ and its iterates are exactly the $G$-algebra data and the maps $\\varphi_E^{[m]}$ in [prop-trf-rational-frobenius-integral-model]. By the generic transport-power lemma [lem-trf-global-frobenius-iterate-formula], the endomorphism $F=C(\\varphi_E)\\circ t_{K_E}$ satisfies $F^m=C(\\varphi_E^{[m]})\\circ t_{K_E}^{[m]}$, where $t_{K_E}^{[m]}$ is the successive composite of the degree-one transports.",
+   "uses": [
+    "lem-trf-global-frobenius-iterate-formula",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: apply the transport-power identity to the rationalized compact-support functor"
+   }
+  },
+  {
+   "text": "The recurrence from Step 1 identifies the successive composite $t_{G^{m-1}K_E}\\circ\\cdots\\circ t_{K_E}$ with the direct transport $B_{m,K_E}$ by induction on $m$: the base case is $B_{1,K_E}=t_{K_E}$, and the successor case is exactly $B_{m+1,K_E}=B_{1,G^mK_E}\\circ B_{m,K_E}$. Substituting this identification into the equality of Step 2 gives $F^m=R\\Gamma_c(X,\\varphi_E^{[m]})\\circ B_{m,K_E}$. By the operator formula in [prop-trf-rational-frobenius-integral-model], this composite is the specified $F_{c,K_E}^{\\,m}$, while $F=F_{c,K_E}^{\\,1}$; therefore $F_{c,K_E}^{\\,m}=(F_{c,K_E}^{\\,1})^m$.",
+   "uses": [
+    "lem-trf-integral-compact-transport-recurrence",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: identify the iterated transport with B_m and conclude the displayed global power identity"
+   }
+  },
+  {
+   "text": "The generic transport-power lemma requires neither $\\varphi_E$ nor the transport maps to be invertible. Thus the argument applies to the arbitrary morphism allowed in the statement, and no integral Weil structure or invertibility on a lattice has been introduced.",
+   "uses": [
+    "lem-trf-global-frobenius-iterate-formula",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: no integrality or invertibility assumption is used"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-compact-frobenius-transport-composition",
+  "lem-trf-global-frobenius-iterate-formula",
+  "lem-trf-integral-compact-transport-recurrence",
+  "prop-trf-rational-frobenius-integral-model",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 1, Global powers: expands the naturality, rationalization, transport recurrence and application of the generic transport-power identity"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +125,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-l-function-euler-product",
@@ -77,5 +142,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-rational-global-frobenius-powers",
+  "worker": "stage1",
+  "summary": "Repaired the global powers split by adding lem-trf-integral-compact-transport-recurrence. The new lemma explicitly assembles the specified finite-level transports into coherent reduction-tower morphisms, proves the recurrence as an equality of tower maps before derived realization, and only then realizes it integrally. Step 1 now tensors that established integral identity to the rational stage using the specified rationalized transports; the generic power calculation and arbitrary-morphism conclusion remain unchanged.",
+  "blueprint": "Realizes Step 1 (Global powers) of thm-trf-l-function-euler-product.proof.md: rationalized transport naturality and composition, the transport-power calculation, identification with B_m, and the no-invertibility clause.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Its statement supplies unique rational extension of the integral functors and natural transformations, needed only after the integral recurrence is established."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-rational-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-eb9524391",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-eb9524391 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-trf-integral-compact-transport-recurrence, every cited statement, the blueprint thm-trf-l-function-euler-product.proof.md Step 1 'Global powers' (lines 35-54), and prop-trf-rational-frobenius-integral-model.proof.md clause (3). The item matches the blueprint: same hypotheses as the integral-model proposition, an arbitrary phi_E, coefficient category D^b_c(X,O_E)[1/varpi], and the specified compact-support transport g^{m,*}_{gamma,c}; the target is not weakened. Steps 2-4 are correct: the generic iterate lemma needs no invertibility, Step 3 is an elementary induction, and F^m_{c,K_E} is the proposition's definition. The new node is not a duplicate (rg over dag/nodes found only the finite-level composition lemma, generic transport induction, field-change and pullback-coherence lemmas) and is strictly smaller than the item. Tested: m=1, X empty, M=0, X_0=Spec F_q, and phi_E=diag(1,l) giving F^m=diag(1,l^m). Fixes (3): (1) C3/C4 in Step 1: it took from the integral-model proposition the identification of B_r with the rationalization of the new node's U_r, but that proposition's statement does not say it (only its proof does), and its U_m is the operator, not the transport. I added a clause to the new node identifying V_1 with the integral tau_c of def-weil-frobenius-cohomology-transport and V_r with the integral g^{r,*}_{gamma,c}, i.e. the successive composite of def-trf-frobenius-operators and the derived limit of the levelwise ones. I renamed U_r to V_r and rewrote Step 1 to cite this. (2) The new node covered only K_O with ctf reductions while the item asserts the recurrence for every M; it is now stated for all M in D^b_c(X,O_E), natural in M, and self-contained. (3) B4: the new node had literal backslash-n from doubled backslashes and no TeX delimiters; I rewrote it and fixed stmt_deps. I trimmed split_report.tool_uses to prop-weil-pbc-rational-transport (accepted: generic rational extension from the off-route unit sk-thm-properbasechange). No cycles; every cited id exists; no SGA. The corrected files are in fixes/dag/nodes/sec-trace-formula/.; 2 file(s) fixed by the reviewer"
  }
 }

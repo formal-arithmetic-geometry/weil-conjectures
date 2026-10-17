@@ -1,0 +1,107 @@
+{
+ "id": "lem-trf-integral-compact-transport-recurrence",
+ "kind": "statement",
+ "title": "Coherent integral compact-support transport recurrence",
+ "statement": "Fix the global finite-field datum and coefficient conventions of [def-trf-coefficient-conventions]: $k_0=\\mathbf F_q$ with $q=p^a$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$. Let $X_0$ be separated of finite type over $k_0$, $X=X_0\\times_{k_0}k$, and $g=g_\\gamma=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ the geometric Frobenius of [def-trf-scheme-frobenius]. At every coefficient level write $P_r=L(g^r)^*$ for the derived pullback of [def-weil-derived-pullback-tensor-hom], $c_{m}:P_1P_m\\xrightarrow{\\sim}P_{m+1}$ for the inverse of the canonical pullback-composition identification of [lem-weil-pbc-proetale-derived-pullback-composition], and $d_r:P_r\\xrightarrow{\\sim}P_1^{\\,r}$ for the iterated canonical identification ($d_1=\\mathrm{id}$). Fix one compactification $c_0$ of $X_0\\to\\operatorname{Spec}k_0$ [def-weil-compactifications-refinements] and use its base change for $R\\Gamma_c(X,-)$ at every level: at the finite levels as in [def-trf-coefficient-conventions], and on $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] as the derived limit [def-weil-integral-rational-qbar-compact-support] of the coherent reduction tower of [lem-weil-compact-support-reduction-tower-functor]. For $M\\in D^b_c(X,\\mathcal O_E)$ put $M_n=M\\otimes^L_{\\mathcal O_E}A_n$ [def-weil-integral-derived-reduction], identify $(P_rM)_n$ with $P_r(M_n)$ by the canonical pullback/reduction comparison, and let\n$$\\tau_{n,r,M}=\\tau^{(r)}_{c,M_n}:R\\Gamma_c(X,M_n)\\longrightarrow R\\Gamma_c(X,P_rM_n)$$\nbe the direct transport along $g^r$ of [lem-trf-compact-frobenius-transport-composition], formed with $c_0$. Then, for every $r\\geq1$:\n\n1. The family $(\\tau_{n,r,M})_{n\\geq1}$ is the family of evaluations of a morphism from the coherent reduction tower of $R\\Gamma_c(X,M)$ to that of $R\\Gamma_c(X,P_rM)$, with transitions formed before passage to the derived categories of the individual levels, and natural in $M$. Let $V_{r,M}:R\\Gamma_c(X,M)\\to R\\Gamma_c(X,P_rM)$ be its derived-limit realization; it is natural in $M$.\n2. For $m\\geq1$ the equality of tower morphisms\n$$\\tau_{\\bullet,m+1,M}=R\\Gamma_c(X,c_{m,M_\\bullet})\\circ\\tau_{\\bullet,1,P_mM}\\circ\\tau_{\\bullet,m,M}$$\nholds, and hence, before any rationalization,\n$$V_{m+1,M}=R\\Gamma_c(X,c_{m,M})\\circ V_{1,P_mM}\\circ V_{m,M}.$$\n3. $V_{1,M}$ is the integral compact-support transport $\\tau_{c,M}$ of [def-weil-frobenius-cohomology-transport] for $\\Lambda=\\mathcal O_E$. Consequently $V_{r,M}=R\\Gamma_c(X,d_{r,M}^{-1})\\circ\\tau_{c,P_1^{r-1}M}\\circ\\cdots\\circ\\tau_{c,M}$, the formula of [def-trf-frobenius-operators] at the stage $\\mathcal O_E$. This is the integral compact-support base-change isomorphism $g^{r,*}_{\\gamma,c}$ along $g^r$ whose rationalization is used at the stage $E$ in [prop-trf-rational-frobenius-integral-model]. It is also the derived limit of the levelwise isomorphisms $g^{r,*}_{\\gamma,c}$ of [def-trf-frobenius-operators] on the $M_n$.\n\nNo Weil structure on $M$ and no finite Tor-amplitude assumption on the $M_n$ is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3) of the proof: the integral base-change isomorphism g^{m,*}_{gamma,c} is the derived limit of the levelwise ones, carried along the reduction towers; together with Step 1 (Global powers) of thm-trf-l-function-euler-product.proof.md, compatibility with composition before rationalization"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-frobenius-operators",
+  "def-trf-scheme-frobenius",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-trf-compact-frobenius-transport-composition",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-trf-rational-frobenius-integral-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral compact-support Frobenius transport maps on a derived complete coefficient tower satisfy the direct m plus one recurrence before rationalization",
+   "results": "PreTilt.coeff_iterate_frobenius' (Mathlib/RingTheory/Perfection), PreTilt.coeff_iterate_frobenius (Mathlib/RingTheory/Perfection), Perfection.coeff_iterate_frobenius and related ring Frobenius coefficient identities; no compact-support or derived-tower transport result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral compact-support Frobenius transport maps on a derived complete coefficient tower satisfy the direct m plus one recurrence before rationalization",
+   "results": "iterateFrobeniusEquiv_add and related Frobenius identities in Mathlib.FieldTheory.Perfect; no derived compact-support transport theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RΓ_c transport recurrence derived limit tower",
+   "results": "0 hits; the query identifier RΓ_c is unknown to Loogle.",
+   "date": "2026-10-17",
+   "verdict": "no match (unavailable identifier)"
+  },
+  {
+   "tool": "grep",
+   "query": "derived limit.*compact|compact.*transport.*tower|Frobenius.*transport.*recurrence in Mathlib/",
+   "results": "0 hits in Mathlib/.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of compatible finite-level compact support base change maps preserves the Frobenius composition identity",
+   "results": "frobeniusEquiv_symm_comp_frobenius and other perfect-ring Frobenius identities; no inverse-limit compact-support transport result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of compatible finite-level compact support base change maps preserves the Frobenius composition identity",
+   "results": "InverseSystem.limit and CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, but no theorem combining them with compact-support Frobenius transports.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.comp_eq",
+   "results": "0 hits; unknown identifier.",
+   "date": "2026-10-17",
+   "verdict": "no match (unavailable identifier)"
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|inverse.limit|NatTrans in Mathlib/CategoryTheory",
+   "results": "0 relevant hits for a compact-support transport recurrence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-rational-global-frobenius-powers",
+  "date": "2026-10-17",
+  "group": "N9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: the base-change isomorphisms at stage E are rationalizations of the integral ones and are compatible with composition",
+   "via": [
+    "lem-trf-rational-global-frobenius-powers"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

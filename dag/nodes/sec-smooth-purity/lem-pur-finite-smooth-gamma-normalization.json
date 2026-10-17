@@ -2,7 +2,7 @@
  "id": "lem-pur-finite-smooth-gamma-normalization",
  "kind": "statement",
  "title": "Dimension-zero diagonal/deformation orientation and tensor-map normalization",
- "statement": "Let $\\ell$ be prime, $n\\geq1$, $A=\\mathbf Z/\\ell^n\\mathbf Z$, and let $f:X\\to Y$ be a separated etale morphism of finite type between Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]) on which $\\ell$ is invertible. Assume $f$ is compactifiable [def-asd-compactifiable]. Work in the ordinary etale derived categories of constant $A$-module sheaves. Write $f_A^\\times$ for the right adjoint of $Rf_{!,A}$ and $\\omega_f=f_A^\\times A_Y$. Identify this adjunction with the etale sum-extension adjunction $Df_{\\Sigma!}\\dashv f^*$, including its sum counit, by [lem-asd-etale-compact-support-normalization]. Put $W=X\\times_YX$ with projections $p_1,p_2$, diagonal $\\Delta$ and rank-zero normal bundle $\\pi:N_\\Delta=X\\to X$ with zero section $z=1_X$. Form $\\alpha_f:\\omega_f\\to A_X$ as the composite of (i) $\\Delta^*$ of the exceptional base-change isomorphism $p_2^*\\omega_f\\to\\omega_{p_1}$ [prop-asd-smooth-base-change], (ii) the normalized deformation comparison $\\delta_{p_1,\\Delta}$ [lem-pur-noetherian-etale-section-specialization], and (iii) $z^*$ of the inverse vector-bundle purity isomorphism [thm-amb-vector-bundle-purity], with the rank-zero integration of [def-amb-vector-integration]. Under the above adjunction-preserving identifications, each factor, and hence $\\alpha_f$, is the identity of $A_X$. For every $K\\in D(Y_{\\mathrm{et}},A)$, let $\\phi_{f,K}:f^*K\\otimes_A^L\\omega_f\\to f_A^\\times K$ be the canonical projection-and-counit tensor map of [thm-asd-smooth-tensor]. Then\n$$\\phi_{f,K}\\circ(1\\otimes\\alpha_f^{-1}):f^*K\\longrightarrow f_A^\\times K$$\nis the canonical comparison of right adjoints preserving the sum counit. In particular its adjoint $Rf_{!,A}f^*K\\to K$ is exactly the sum/evaluation counit.",
+ "statement": "Let $\\ell$ be prime, $n\\geq1$, $A=\\mathbf Z/\\ell^n\\mathbf Z$, and let $f:X\\to Y$ be a separated etale morphism of finite type between Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]) on which $\\ell$ is invertible. Assume $f$ is compactifiable [def-asd-compactifiable]. Work in the ordinary etale derived categories of constant $A$-module sheaves. Write $f_A^\\times$ for the right adjoint of $Rf_{!,A}$ and $\\omega_f=f_A^\\times A_Y$. Identify this adjunction with the etale sum-extension adjunction $Df_{\\Sigma!}\\dashv f^*$, including its sum counit, using the canonical proper-support comparison of [lem-sfb-quasifinite-compact-support-exact], with its graph normalization and specified-map compatibilities of [lem-pur-etale-support-map-compatibility]. Put $W=X\\times_YX$ with projections $p_1,p_2$, diagonal $\\Delta$ and rank-zero normal bundle $\\pi:N_\\Delta=X\\to X$ with zero section $z=1_X$. Form $\\alpha_f:\\omega_f\\to A_X$ as the composite of (i) $\\Delta^*$ of the exceptional base-change isomorphism $p_2^*\\omega_f\\to\\omega_{p_1}$ [prop-asd-smooth-base-change], (ii) the normalized deformation comparison $\\delta_{p_1,\\Delta}$ [lem-pur-noetherian-etale-section-specialization], and (iii) $z^*$ of the inverse vector-bundle purity isomorphism [thm-amb-vector-bundle-purity], with the rank-zero integration of [def-amb-vector-integration]. Under the above adjunction-preserving identifications, each factor, and hence $\\alpha_f$, is the identity of $A_X$. For every $K\\in D(Y_{\\mathrm{et}},A)$, let $\\phi_{f,K}:f^*K\\otimes_A^L\\omega_f\\to f_A^\\times K$ be the canonical projection-and-counit tensor map of [thm-asd-smooth-tensor]. Then\n$$\\phi_{f,K}\\circ(1\\otimes\\alpha_f^{-1}):f^*K\\longrightarrow f_A^\\times K$$\nis the canonical comparison of right adjoints preserving the sum counit. In particular its adjoint $Rf_{!,A}f^*K\\to K$ is exactly the sum/evaluation counit.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
   "place": "Three-factor purity formula, specialized to relative dimension zero; returned item Step 7 expands the etale sum-counit normalization"
@@ -11,7 +11,6 @@
   "def-asd-compactifiable",
   "def-weil-pbc-derived-categories",
   "thm-amb-etale-exceptional-adjoint",
-  "lem-asd-etale-compact-support-normalization",
   "prop-asd-smooth-base-change",
   "lem-pur-noetherian-etale-section-specialization",
   "def-amb-vector-integration",
@@ -19,43 +18,205 @@
   "lem-pur-diagonal-regular-immersion",
   "thm-amb-vector-bundle-purity",
   "def-pc-scheme",
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-pur-etale-support-map-compatibility"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the following normalization for any separated finite-type etale map $e:V\\to T$ between Noetherian schemes and a compactification $c$. Write $F_e=Re_!$, $S_e=D(e_{\\Sigma!})$. The canonical comparison $c_e:F_e\\xrightarrow{\\sim}S_e$ exists on the whole unbounded category by [lem-sfb-quasifinite-compact-support-exact]. We use its graph-normalized comparison, exactly the $c_e^c$ of [lem-pur-etale-support-map-compatibility], not an arbitrary functor isomorphism. The sum adjunction $S_e\\dashv e^*$ is [lem-amb-etale-adjoint-locality], and $F_e\\dashv e^\\times$ is [thm-amb-etale-exceptional-adjoint]. The Hom bijections send $a:F_eM\\to K$ first to $a c_e(M)^{-1}:S_eM\\to K$, then to its sum-adjoint. They give the unique natural isomorphism $\\rho_{e,K}:e^\\times K\\to e^*K$ satisfying\n$$\\epsilon^c_{e,K}=\\epsilon^\\Sigma_{e,K}\\,c_e(e^*K)\\,F_e(\\rho_{e,K}).$$\nIndeed start with the counit, which corresponds to the identity of $e^\\times K$ under the first adjunction; naturality then gives the displayed counit equation. The inverse Hom bijections and the triangle identities give its inverse. This specifies the adjunction-preserving coordinates, including $\\omega_e\\cong A_V$.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-etale-adjoint-locality",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-base-change-finite-limits](1) to $f$ along $f$: $p_1:W=X\\times_YX\\to X$ is etale. It is separated and finite type by [lem-pod-separated-finite-type-base-change], and $W$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [def-sbc-smooth-morphisms], both $f$ and $p_1$ are smooth of pure relative dimension zero. The diagonal is a section of $p_1$. Applying [lem-weil-pbc-etale-section-clopen-immersion] shows it is an isomorphism onto an open and closed component $\\Delta(X)\\subset W$. Thus $W=\\Delta(X)\\amalg V_0$ with $V_0$ open and closed. The regular-immersion assertion [lem-pur-diagonal-regular-immersion] supplies regular codimension zero and normal rank zero; equivalently the ideal is zero on $\\Delta(X)$ and the whole structure sheaf on $V_0$, so $\\mathcal I/\\mathcal I^2=0$, $N_\\Delta=X$ and $\\pi=z=1_X$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-pur-diagonal-regular-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "We compute exceptional base change in the coordinates of Step 1. For a square with etale vertical map $e$, write $h:V'\\to V$, $g:T'\\to T$, $e':V'\\to T'$, and $\\chi:h^*e^*\\cong e'^*g^*$. By [lem-pur-etale-support-map-compatibility](1), the actual proper/open exchange $C:g^*F_e\\to F_{e'}h^*$ becomes the specified sum exchange $b:g^*S_e\\to S_{e'}h^*$. Its inverse is the conjugate defined in [def-weil-pbc-etale-shriek-base-change-map]. That conjugate's unit--exchange--counit formula, with the two triangle identities, gives\n$$g^*\\epsilon^\\Sigma_{e,K}\\circ b_{e^*K}^{-1}=\\epsilon^\\Sigma_{e',g^*K}\\circ S_{e'}(\\chi_K).\\tag{E}$$\nConcretely the underived exchange is the restriction identification of [lem-weil-pbc-etale-underived-exchange-restriction]; both composites evaluate the section on the pulled-back lift. This is an equality of sheaf maps, hence degreewise of complexes, and of their descended maps for the exact sum and inverse-image functors. Substituting (E) and the counit equation of Step 1 into the defining transpose $g^*\\epsilon^c\\circ C^{-1}$ of [prop-asd-smooth-base-change] shows that $\\beta_{e,g,K}$ becomes precisely $\\chi_K$. For $K=A_T$ it is the unit identification $h^*A_V\\to A_{V'}$. Applying this to $e=f$, $g=f$, and pulling back by $\\Delta$ proves that the first factor of $\\alpha_f$ is the identity in these coordinates.",
+   "uses": [
+    "lem-pur-etale-support-map-compatibility",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-underived-exchange-restriction",
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "Compute the rank-zero deformation directly from its definition in [lem-pur-noetherian-etale-section-specialization]. On $\\Delta(X)$ the ideal is zero, so the Rees subalgebra is $\\mathcal O_X[t]$. On $V_0$ it is $\\mathcal O_{V_0}$, so adjoining $\\mathcal I/t$ adjoins $t^{-1}$, and the algebra is $\\mathcal O_{V_0}[t,t^{-1}]$. The two pieces are disjoint open and closed pieces of $W$, so these calculations give\n$$D=\\mathbf A^1_X\\amalg(V_0\\times\\mathbf G_m),$$\nwith $\\widetilde g$ equal to the identity on the first component and to the restriction of $p_1\\times1$ on the second. The deformed section is the inclusion of the first component. The fibre at $1$ is $W$ with section $\\Delta$; at $0$ only the first component remains, giving $(X,1_X)$. These identifications send $t$ to the base parameter and preserve the section; they are the fibre identifications of the defining Rees algebra.",
+   "uses": [
+    "lem-pur-noetherian-etale-section-specialization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "Here are the hypotheses for the specialization theorem, before using its conclusion. The component $V_0$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The map $\\widetilde g$ in Step 4 is etale: on the first component it is the identity, and on the second it is the base change of $p_1$ followed by restriction to an open subscheme, by [lem-weil-pbc-etale-base-change-finite-limits] and [lem-weil-pbc-etale-composition-cancellation]. It is separated and finite type: $W\\times\\mathbf A^1\\to\\mathbf A^1_X$ has these properties by [lem-pod-separated-finite-type-base-change]; the displayed $D$ is its open subscheme obtained by deleting $V_0\\times\\{0\\}$. Restriction preserves the locally finite-type affine presentations, and quasi-compactness follows from the Noetherian open-subscheme lemma. Its relative diagonal is the restriction of the ambient closed diagonal, hence is closed. The ambient scheme and $\\mathbf A^1_X$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and $D$ is Noetherian by the open-subscheme lemma. All have $\\ell$ invertible by pullback. Noetherian schemes are quasi-compact by definition and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Therefore [thm-nagata-compactification] applies to $p_1$, $\\widetilde g$ and $\\pi=1_X$. They are compactifiable. Etaleness gives smooth relative dimension zero by [def-sbc-smooth-morphisms], and Step 2 gives the required regular closed section.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "Apply the coordinates of Step 1 to the three etale maps $p_1$, $\\widetilde g$ and $\\pi$. Thus $C=\\Delta^*\\omega_{p_1}=A_X$ and $F=\\widetilde\\Delta^*\\omega_{\\widetilde g}=A_{\\mathbf A^1_X}$. Step 3 at the inclusions $t=1,0$ says that the canonical exceptional fibre comparisons are the identity unit comparisons. Consequently the identity $A_{\\mathbf A^1_X}\\to a^*A_X$ is an isomorphism $F\\to a^*C$ whose fibre at $1$ is $1_C$ under exactly the specified fibre maps. The uniqueness clause of [lem-pur-noetherian-etale-section-specialization] forces $\\kappa_{p_1,\\Delta}$ to be this map. Restricting at $0$ and inverting proves $\\delta_{p_1,\\Delta}=1_{A_X}$. No assertion about an unspecified locality isomorphism is used to determine this scalar.",
+   "uses": [
+    "lem-pur-noetherian-etale-section-specialization",
+    "lem-pur-etale-support-map-compatibility",
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "For $\\pi=1_X$, the rank-zero clause of [def-amb-vector-integration] prescribes the identity adjunction trace. By [thm-amb-vector-bundle-purity], the vector-bundle purity map at $A_X$ is its adjoint. Under Step 1, the identity morphism's compact-support comparison is the identity by [lem-sfb-quasifinite-compact-support-exact], its projection map is the tensor-unit map by [lem-pur-etale-support-map-compatibility](2), and its sum adjunction is the identity adjunction. The adjoint of the rank-zero trace is therefore $1_{A_X}$. Its inverse and zero-section pullback are also identities. Together with Steps 3 and 6 this proves every factor of $\\alpha_f$ is the identity, or, before changing coordinates, $\\alpha_f=\\rho_{f,A_Y}$.",
+   "uses": [
+    "def-amb-vector-integration",
+    "thm-amb-vector-bundle-purity",
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-pur-etale-support-map-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "We now identify the actual projection map in the tensor transpose of [thm-asd-smooth-tensor]. For a chosen compactification $c=(j,r)$, let $P^c_{f,M,K}$ and $p^\\Sigma_{f,M,K}$ be exactly the proper-counit/open-tensor and sum-extension maps of [lem-pur-etale-support-map-compatibility](2). The projection in [lem-amb-shriek-tensor-composition] is constructed from exactly that proper projection and open-extension tensor map, with the two tensor factors switched to put $f^*K$ first; hence its inverse is the projection in the defining transpose of $\\phi$. In the notation $Q$ for its inverse in this order, that lemma's equality, inverted and conjugated by the natural tensor symmetry [lem-kun-tensor-sym], gives\n$$(1_K\\otimes c_f(M))\\,Q^c_{K,M}=Q^\\Sigma_{K,M}\\,c_f(f^*K\\otimes^L M).\\tag{P}$$\nThis follows by multiplying $c_f P^c=p^\\Sigma(c_f\\otimes1)$ on either side by the inverse projections and then applying the two switches. Thus it concerns the specified compactification projection, not a map chosen from its endpoints. ",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-kun-tensor-sym",
+    "lem-amb-shriek-tensor-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "Let $v_K=\\phi_{f,K}(1\\otimes\\alpha_f^{-1})$, inserting the tensor-unit isomorphism $f^*K\\cong f^*K\\otimes A_X$. By the defining transpose in [thm-asd-smooth-tensor], its adjoint is $\\lambda(1_K\\otimes\\epsilon^c_{f,A_Y})Q^c_{K,\\omega_f}F_f(1\\otimes\\alpha_f^{-1})$. Naturality of the projection moves $\\alpha_f^{-1}$ through $Q^c$. The counit equation of Step 1 and Step 7 give $\\epsilon^c_{f,A_Y}F_f(\\alpha_f^{-1})=\\epsilon^\\Sigma_{f,A_Y}c_f(A_X)$. Substituting (P) therefore identifies this adjoint with\n$$\\lambda(1_K\\otimes\\epsilon^\\Sigma_{f,A_Y})Q^\\Sigma_{K,A_X}\\,c_f(f^*K).\\tag{T}$$\nThe first three maps equal $\\epsilon^\\Sigma_{f,K}$. Indeed the generator formula of [lem-pur-etale-support-map-compatibility](2) sends $(s,k_s\\otimes a)$ through the inverse projection and evaluation to $a k_s$ in $K$, exactly the sum/evaluation counit from $S_f\\dashv f^*$ [lem-amb-etale-adjoint-locality]. This is a sheaf-map identity on the sheafified lift-indexed sums [def-weil-pbc-etale-sum-extension], degreewise for any complex representing $K$. It computes the derived maps: $A_X$ is flat in degree zero, and its sum extension is K-flat by [lem-pur-etale-sum-flat-kflat]. There is no sign from the degree-zero factor. Thus (T) is exactly $\\epsilon^\\Sigma_{f,K}c_f(f^*K)$. The bijection for $F_f\\dashv f^\\times$ now makes $v_K=\\rho_{f,K}^{-1}$, the unique adjunction-preserving comparison of Step 1. This proves the specified-map and adjoint clauses for every unbounded $K$.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-etale-sum-extension",
+    "lem-pur-etale-sum-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-shriek-tensor-composition",
+  "lem-kun-tensor-sym",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "prop-asd-smooth-base-change",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "For an etale morphism the diagonal deformation orientation is the identity and the smooth tensor purity map is adjoint to the sum counit",
-   "results": "{\"t\": \"2026-10-17T10:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism the diagonal deformation orientation is the identity and the smooth tensor purity map is adjoint to the sum counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.Etale.formallyEtale\", \"RingHom.formallyEtale_algebraMap\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"f91fa2e06ffc6dbc\"}",
+   "results": "[\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.Etale.formallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.IsEtale.of_comp\"]",
    "date": "2026-10-17",
-   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Dimension zero smooth purity agrees with etale inverse image and compact support sum extension adjunction",
-   "results": "{\"t\": \"2026-10-17T10:52:31Z\", \"tool\": \"leansearch\", \"query\": \"Dimension zero smooth purity agrees with etale inverse image and compact support sum extension adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"HasCompactSupport.extend_zero\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\"], \"digest\": \"dfe33dfd2148e9e3\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
+   "verdict": "no match: returned generic etale algebra, Kähler differential, and support results; none states the ordinary-etale deformation/tensor normalization."
   },
   {
    "tool": "loogle",
-   "query": "\"Etale\", \"Adjunction\"",
-   "results": "{\"t\": \"2026-10-17T10:52:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "Etale, Adjunction",
+   "results": "[]",
    "date": "2026-10-17",
-   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
+   "verdict": "unavailable: query rejected with unknown identifier Etale; not evidence of absence"
   },
   {
    "tool": "grep",
    "query": "etale.*[Aa]djunction|[Aa]djunction.*etale|deformation.*orientation",
-   "results": "{\"t\": \"2026-10-17T10:52:30Z\", \"tool\": \"grep\", \"query\": \"etale.*[Aa]djunction|[Aa]djunction.*etale|deformation.*orientation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "[]",
    "date": "2026-10-17",
-   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
+   "verdict": "no match: grep found no theorem matching etale adjunction/deformation orientation normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension zero smooth purity agrees with etale inverse image and compact support sum extension adjunction",
+   "results": "[\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"HasCompactSupport.extend_zero\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\"]",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic etale algebra, Kähler differential, and support results; none states the ordinary-etale deformation/tensor normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-smooth-adjunction-general-base",
@@ -75,5 +236,144 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-finite-smooth-gamma-normalization",
+  "worker": "stage1",
+  "summary": "Repair of all four reviewer objections: replaced the forbidden normalization dependency by the Stacks proper-support and specified-map comparison; removed the duplicate new projection lemma and the inapplicable inverse-image/direct-image adjunct lemma; supplied base-change permanence citations; computed the actual exceptional exchange and final tensor transpose in sum/evaluation coordinates. Retained the earlier logged Mathlib searches.",
+  "blueprint": "Expands the main-20261015 three-factor formula of sk-thm-smooth-purity and the diagonal/deformation/vector-bundle argument of sk-prop-sp-orientation in relative dimension zero. Historical ancestry and current unit are retained from current main.",
+  "tool_uses": [
+   {
+    "node": "def-amb-vector-integration",
+    "why": "Existing definition or generic theorem used only for the indicated rank-zero normalization; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-etale-shriek-base-change-map",
+    "why": "Definition of the actual sum-extension comparison whose conjugate formula fixes the counit equation (E)."
+   },
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic natural tensor switch needed to invert the specified projection identity with the correct factor order."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Scheme-theoretic separated and finite-type permanence needed for the diagonal and deformation hypotheses."
+   },
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pur-etale-sum-flat-kflat",
+    "why": "K-flatness needed to compute the unbounded derived tensor with sum extension of the coefficient unit."
+   },
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Generic Stacks graph-normalized compatibility for the actual compactification exchange and projection; it fixes the maps, without replacing the diagonal/deformation purity route."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Generic comparison with exact proper-support/sum extension on entire derived categories, needed to fix adjunction-preserving coordinates without the forbidden normalization source."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Scheme-theoretic etale permanence under the specific base changes used in the diagonal and deformation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Etaleness after restriction to the open deformation component."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Scheme-theoretic clopen decomposition of the etale diagonal."
+   },
+   {
+    "node": "lem-weil-pbc-etale-underived-exchange-restriction",
+    "why": "The actual restriction formula for underived exchange used in computing the conjugate (E)."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of the actual fibre products and deformation ambient schemes."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Quasi-separatedness of the Noetherian targets required by Nagata."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Noetherianity and quasi-compactness of the open pieces in the explicit deformation."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "Existing definition or generic theorem used only for the indicated rank-zero normalization; no step of the unit route is replaced."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existing definition or generic theorem used only for the indicated ordinary-etale diagonal/deformation argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "Identifies the ordinary unbounded compact-support projection as the specified proper-counit/open-tensor construction, fixing the map used in the tensor transpose; its composition theorem is not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-vector-integration",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-adjoint-locality",
+  "lem-kun-tensor-sym",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "prop-asd-smooth-base-change",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification",
+  "lem-amb-shriek-tensor-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-030d09a11",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-030d09a11 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and the statement of every one of its 25 proof deps and 13 statement deps. The delivery has no new nodes and I made no fixes. Route: this is the main-20261015 three-factor orientation of sk-thm-smooth-purity and sk-prop-sp-orientation at d=0, with no SGA citation; the forbidden normalization node is replaced by lem-sfb-quasifinite-compact-support-exact and lem-pur-etale-support-map-compatibility (Stacks 0F4Y and 0GKM labels checked). Checks: Step 1, the counit equation for the comparison rho follows from the Hom bijections. Step 2, W splits as Delta(X) plus a clopen V0, the normal bundle is X and pi=z=1_X. Step 3, I substituted (E) and compatibility (1) into the transpose defining beta in prop-asd-smooth-base-change and get beta=chi in coordinates; the conventions g'=p2, f'=p1 and the directions of beta and rho are consistent. Step 4, the Rees computation gives D = A^1_X plus V0 x G_m, with fibres W at t=1 and X at t=0. Step 5, etale, separated, finite type, Noetherian and Nagata hypotheses all hold. Step 6, the uniqueness clause forces delta=id. Step 7, the d=0 identity-adjunction trace (read in lem-amb-affine-space-top-trace) gives alpha_f=rho. Steps 8-9, the projection matches thm-asd-smooth-tensor's construction, the Koszul sign is trivial in degree 0, K-flatness makes the derived computation valid, and v_K=rho_K^{-1}. Edge cases (empty X, identity, fold map, open immersion, K=0 and unbounded K) are consistent. Accepted tool uses: lem-sfb-quasifinite-compact-support-exact, lem-pur-etale-support-map-compatibility, lem-pur-etale-sum-flat-kflat and lem-kun-tensor-sym. The remaining declared tool uses are on route or are definitions and Mathlib leaves and need no record; several have boilerplate whys, which is harmless."
  }
 }

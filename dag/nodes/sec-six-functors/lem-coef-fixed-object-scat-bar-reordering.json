@@ -9,11 +9,89 @@
  },
  "stmt_deps": [
   "def-nagata-category",
-  "lem-coef-fixed-object-scat-pushout-coproduct"
+  "lem-coef-fixed-object-scat-pushout-coproduct",
+  "def-galois-finite-coproduct",
+  "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the category $\\mathcal C_O$ of small categories on $O$ and functors fixing $O$. The coproduct convention is precisely [def-galois-finite-coproduct]: a family of functors from its factors to a fixed target extends uniquely to a functor from their coproduct. Iterating this property shows that a functor out of a parenthesized finite coproduct is uniquely determined by its restriction to every factor: apply the binary property successively down the parentheses. In $B_n$ call the distinguished copy inside $A*_O F$ the factor $X_0$, and call the remaining displayed copies $X_k=A_k$ for $1\\leq k\\leq n$. Write $R_n=F*_O A_0*_O\\cdots*_O A_n*_O V$. All the copies $X_k,A_k$ carry their specified identification with $A$.",
+   "uses": [
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002J, definition-coproduct: universal property, applied repeatedly to the finite list of factors."
+   }
+  },
+  {
+   "text": "Define $\\theta_n:B_n\\to R_n$ by its restrictions: $F,V$ go identically to their named factors, and $X_k$ goes identically to $A_k$ for $0\\leq k\\leq n$. Define $\\eta_n:R_n\\to B_n$ by reversing those restrictions. The defining property in [def-galois-finite-coproduct] gives both functors. Each composite restricts to the identity on every factor, hence uniqueness gives $\\eta_n\\theta_n=1$ and $\\theta_n\\eta_n=1$. A coproduct braiding is the functor interchanging the two coprojections and an associativity map preserves each of the three coprojections. Therefore braiding the initial $A,F$ and reassociating has exactly the restrictions defining $\\theta_n$ and equals it. This also fixes the comparison for any choice of parentheses, without a separate coherence theorem.",
+   "uses": [
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002J, definition-coproduct: construction and uniqueness for the two inverse maps."
+   }
+  },
+  {
+   "text": "For $n\\geq1$ and $0\\leq i<n$, compare $\\theta_{n-1}d_i^B$ and $d_i^R\\theta_n$ by their factor restrictions, using [def-galois-finite-coproduct]. Both fix $F,V$. On $X_k$ both are the identity of $A$ into target copy $A_k$ if $k\\leq i$, and into $A_{k-1}$ if $k>i$. In particular $X_i,X_{i+1}$ both go to $A_i$. For $i=0$, the first face of $B$ sends $X_1$ by $j$ into the distinguished $X_0$ inside $A*_O F$ and preserves $X_0$; this is exactly that same rule. For $i=n$, both composites preserve the copies indexed $k<n$ and send $X_n$ into $V$ by $v$; both again fix $F,V$. Uniqueness therefore proves $\\theta_{n-1}d_i^B=d_i^R\\theta_n$ for every face, including the first and terminal faces when $n=1$.",
+   "uses": [
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002J, definition-coproduct: equality checked on each factor; explicit expansion of the bar comparison."
+   }
+  },
+  {
+   "text": "For $n\\geq0$ and $0\\leq i\\leq n$, the degeneracy of the original bar inserts an unused $A$ immediately after $X_i$ (after the whole initial factor when $i=0$). Thus $\\theta_{n+1}s_i^B$ and $s_i^R\\theta_n$ both fix $F,V$ and send $X_k$ identically into $A_k$ for $k\\leq i$ and into $A_{k+1}$ for $k>i$. Target copy $A_{i+1}$ is unused. The universal property [def-galois-finite-coproduct] equates these functors. In degree zero this says both degeneracies preserve the distinguished copy as $A_0$ and skip $A_1$; no arrow is chosen in the unused factor.",
+   "uses": [
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002J, definition-coproduct: equality by restrictions; explicit degeneracy positions in degree zero and in general."
+   }
+  },
+  {
+   "text": "Let $P=(A*_O F)\\amalg_A V$. Apply [lem-coef-fixed-object-scat-pushout-coproduct], using the braiding $A*_O F\\cong F*_O A$ with the restrictions of step 2. It gives an isomorphism $\\theta_{-1}:P\\to F*_O V$ whose composite with the structure map from $A*_O F$ fixes $F$ and sends $X_0$ by $v$ into $V$, and whose composite with the structure map from $V$ is its coprojection. Consequently $\\theta_{-1}\\varepsilon_n^B$ and $\\varepsilon_n^R\\theta_n$ both fix $F,V$ and send every $X_k$ to $V$ by $v$. By [def-galois-finite-coproduct] these are equal for every $n\\geq0$, in particular at $n=0$. This checks the specified augmentation, rather than merely an isomorphism between its targets.",
+   "uses": [
+    "lem-coef-fixed-object-scat-pushout-coproduct",
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002J, definition-coproduct; augmentation target and structure maps supplied by the cited pushout-coproduct node."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-simplicial-object], a morphism of simplicial objects is a family commuting with all order-preserving operators. Any order-preserving map factors through its ordered image as a surjection followed by an injection. Delete the missing image positions successively to express the injection by elementary faces; merge each repeated value successively to express the surjection by elementary degeneracies. Thus the equalities in steps 3 and 4 imply naturality for every operator by composition. Step 5 is compatibility with the augmentation, which by definition is a map to the constant simplicial object (Stacks Tag 018G). The inverse family is also natural: from $\\theta_m u_B=u_R\\theta_n$ multiply by $\\eta_m$ on the left and $\\eta_n$ on the right. The same calculation applies in degree $-1$. The two families compose to the identity in every degree by step 2 and the inverse isomorphism in step 5. This proves the claimed isomorphism of augmented simplicial categories, with the asserted restrictions on $F,V$ and the labelled $A$ factors.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016A, definition-simplicial-object, parts (1),(4); Tag 018G, definition-augmentation. The elementary ordinal factorization and inverse-naturality calculation are written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-finite-coproduct",
+  "lem-coef-fixed-object-scat-pushout-coproduct",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002J (definition-coproduct), expanded factor-by-factor; simplicial and augmented conventions in simplicial.tex Tags 016A and 018G. Dwyer–Kan Proposition 8.2 motivates this comparison but leaves the operators implicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +127,59 @@
    "results": "{\"t\": \"2026-10-17T13:51:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"coprod.braiding\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coprod.braiding\", \"CategoryTheory.Limits.coprod.braiding_hom\", \"CategoryTheory.Limits.coprod.braiding_inv\"], \"digest\": \"35262bdfd471fae1\"}",
    "date": "2026-10-17",
    "verdict": "no match: coprod.braiding gives the degreewise isomorphism, but does not identify the face, degeneracy and augmentation operators of this bar. The full specialized simplicial comparison remains unsplit."
+  },
+  {
+   "tool": "grep",
+   "query": "bar.*reorder|reorder.*bar|coproduct.*bar|bar.*coproduct",
+   "results": "{\"t\": \"2026-10-17T15:02:53Z\", \"tool\": \"grep\", \"query\": \"bar.*reorder|reorder.*bar|coproduct.*bar|bar.*coproduct\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coproduct bar construction is isomorphic to the augmented simplicial object obtained by permuting and reassociating its factors",
+   "results": "{\"t\": \"2026-10-17T15:02:53Z\", \"tool\": \"leansearch\", \"query\": \"A coproduct bar construction is isomorphic to the augmented simplicial object obtained by permuting and reassociating its factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.Limits.coprod.braiding\", \"CategoryTheory.CosimplicialObject.augment\", \"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.augment_left\", \"CategoryTheory.Limits.coprod.associator\", \"CategoryTheory.Limits.FormalCoproduct.coproductIsoSelf\", \"AugmentedSimplexCategory.associator\"], \"digest\": \"c80a06d3420ce2ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: augment, braiding, associator and formal-coproduct isomorphisms do not state the specialized bar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coprod.braiding\"",
+   "results": "{\"t\": \"2026-10-17T15:02:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"coprod.braiding\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coprod.braiding\", \"CategoryTheory.Limits.coprod.braiding_hom\", \"CategoryTheory.Limits.coprod.braiding_inv\"], \"digest\": \"35262bdfd471fae1\"}",
+   "date": "2026-10-17",
+   "verdict": "related only: degreewise coproduct braiding; the simplicial operator and augmentation compatibility is not this declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reordering finite coproduct factors gives an isomorphism of augmented simplicial bar constructions compatible with the folding face maps and insertion degeneracy maps",
+   "results": "{\"t\": \"2026-10-17T15:02:57Z\", \"tool\": \"leanfinder\", \"query\": \"Reordering finite coproduct factors gives an isomorphism of augmented simplicial bar constructions compatible with the folding face maps and insertion degeneracy maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\"], \"digest\": \"710cbc96896ba23c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Dold–Kan summand or algebra free-product declarations do not state this ordinary fixed-object category bar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "coprod.associator|def braiding|def hom_ext",
+   "results": "{\"t\": \"2026-10-17T15:03:52Z\", \"tool\": \"grep\", \"query\": \"coprod.associator|def braiding|def hom_ext\", \"sub\": \"CategoryTheory/Limits/Shapes/BinaryProducts\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category with finite coproducts the two sided bar for a free extension A to A coproduct F is canonically the coproduct bar F coproduct A power n plus one coproduct V",
+   "results": "{\"t\": \"2026-10-17T15:03:55Z\", \"tool\": \"leanfinder\", \"query\": \"In a category with finite coproducts the two sided bar for a free extension A to A coproduct F is canonically the coproduct bar F coproduct A power n plus one coproduct V\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearAlgebra.FreeProduct.asPowers\", \"LinearAlgebra.FreeProduct.rel'\", \"CategoryTheory.categoryFree\", \"PresheafOfModules.freeYonedaCoproduct\", \"PresheafOfModules.ιFreeYonedaCoproduct\", \"ModuleCat.free_δ_freeMk\", \"LinearAlgebra.FreeProduct.rel\", \"LinearAlgebra.FreeProduct.rel.prod\"], \"digest\": \"5f3c9c158da6c597\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Dold–Kan summand or algebra free-product declarations do not state this ordinary fixed-object category bar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "coprod.braiding|def associator|theorem hom_ext",
+   "results": "{\"t\": \"2026-10-17T15:04:11Z\", \"tool\": \"grep\", \"query\": \"coprod.braiding|def associator|theorem hom_ext\", \"sub\": \"CategoryTheory/Limits/Shapes/BinaryProducts.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"1015\", \"1022\", \"1025\"], \"digest\": \"d9cdb660ddf1e755\"}",
+   "date": "2026-10-17",
+   "verdict": "related only: generic coproduct braiding at BinaryProducts.lean:1015; no augmented coproduct-bar comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-scat-left-proper",
@@ -76,9 +203,26 @@
     "lem-coef-semilinear-derived-sections",
     "lem-coef-finite-adjunction-diagram-realization"
    ],
-   "place": "Parent proof step 6: the factor-reordering sentence identifying the free-extension bar with the labelled coproduct bar, including agreement of faces, degeneracies and augmentation."
+   "place": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, derived coefficient-adjunction/inverse-limit calculation and its naturality: coherent localization foundation; specifically parent lem-coef-fixed-object-scat-left-proper proof step 6, factor-reordering identification with all bar operators."
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fixed-object-scat-bar-reordering",
+  "worker": "stage1",
+  "group": "Q112",
+  "summary": "Kept the statement and supplied the degreewise comparison and its inverse by coproduct restrictions; checked all faces, all degeneracies including degree zero, and the augmentation using the existing pushout-coproduct Mathlib leaf. Added existing definition dependencies; no new nodes. Expanded the source’s implicit operator comparison without freeness or fibrancy assumptions.",
+  "blueprint": "Serves the coherent localization foundation under the second paragraph of prop-coef-integral-exceptional-adjoint, through the recorded ancestry. Precisely realizes the first comparison sentence of parent lem-coef-fixed-object-scat-left-proper step 6, without proving its extra-degeneracy or weak-equivalence claims.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-11a2b8ed8",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-11a2b8ed8 (reviewer sub-agent of L); spot-checked: I read the item, its report and every cited node's statement in full. Cited nodes: def-galois-finite-coproduct, def-weil-pbc-simplicial-object and lem-coef-fixed-object-scat-pushout-coproduct (all three Mathlib leaves), plus def-nagata-category. I also read the parent lem-coef-fixed-object-scat-left-proper, steps 1, 5 and 6, and the consumer bar in lem-coef-split-coproduct-bar-extra-degeneracy. The delivery creates no new nodes. Statement: B_n=(A*F)*A_1*...*A_n*V matches the parent's step 5 bar with C~=A*F. The target bar R (faces d_i for i<n fold, d_n through v, s_i inserting immediately after A_i) is exactly the bar the extra-degeneracy node defines. The unspecified degeneracy positions in B are forced by d_i s_i=d_{i+1}s_i=1. Steps: step 1 sets up uniqueness of maps out of finite coproducts (Stacks 002J, categories.tex:1421). Step 2 builds theta and eta, inverse by uniqueness, with no coherence theorem used. Step 3 checks every face by hand, including d_0 (X_1 sent by j into X_0, matching the fold of A_0 and A_1), the internal folds, d_n through v, and n=1. Step 4 checks the degeneracies, including n=0. Step 5 checks the augmentation through the pushout-coproduct leaf: its inverse iso has the right restrictions (F included, A sent by v into V, V coprojection), A*F versus F*A is handled by the braiding, and its hypotheses (small categories on O, v fixing O) hold. Step 6 passes from faces and degeneracies to all operators by the surjection–injection factorization, with augmentation as a map to the constant object (Stacks 018G, simplicial.tex:2777) and the inverse natural by conjugation. Edge cases checked: n=0, n=1, empty O, one-object categories, the identity-only category; no freeness is used. No duplicate was found (searched for braiding, reorder and coproduct bar; read the ordinary two-sided bar and enriched fixed-set model nodes). The item does not restate a parent clause. The route is unaffected, tool_uses is empty and no SGA is cited. Dwyer–Kan is not in literature/; it is listed as WANTED and proof_origin is agent. Mathlib searches cover all three kinds, with the Loogle parse failure recorded as unavailable. No fixes were made."
  }
 }

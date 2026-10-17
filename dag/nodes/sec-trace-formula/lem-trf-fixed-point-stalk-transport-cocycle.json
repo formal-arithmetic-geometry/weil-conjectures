@@ -15,9 +15,66 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "prop-trf-scheme-galois-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J=J_z$ and $S=R\\Gamma(s_{\\mathrm{proet}},-)$. If $j=rd$ with $r\\geq1$, induction gives $\\Phi^{rd}z=z$: the base is the hypothesis and $\\Phi^{(r+1)d}z=\\Phi^{rd}(\\Phi^dz)=\\Phi^{rd}z$. By [lem-trf-constant-coefficient-composition], the canonical constant ring identifications used here agree with the composite ones required by [lem-weil-pbc-proetale-derived-pullback-composition]. Thus $\\rho_{j,L}=S(c_{z,\\Phi^j,L})$, with $L(\\Phi^jz)^*L=Lz^*L$ identified by the displayed equality. This is an isomorphism, and naturality of the cited functor isomorphism gives\n$$J(Q_ju)\\circ\\rho_{j,L}=\\rho_{j,M}\\circ J(u).$$\nHere $J=S\\circ Lz^*$ is exactly the functor in [pur9-def-derived-stalk]; applying a functor preserves the naturality equality.",
+   "uses": [
+    "lem-trf-constant-coefficient-composition",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "pur9-def-derived-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
+    "place": "Step 1: functoriality and naturality of the fixed-point identifications; explicit agent calculation"
+   }
+  },
+  {
+   "text": "By [prop-trf-scheme-galois-comparison], $\\kappa^{(j)}$ is a natural isomorphism on the ordinary derived category. Its coefficient hypothesis holds because $A=\\mathcal O_E/\\varpi_E^n$ is a finite commutative ring killed by a power of $\\ell$, which is invertible in $k$. Applying $J$ to its naturality equation and then using Step 1 gives\n$$\\begin{aligned}\nJ(P_ju)\\circ t_{j,L}\n&=J(P_ju)\\circ J(\\kappa^{(j)}_L)\\circ\\rho_{j,L}\\\\\n&=J(\\kappa^{(j)}_M)\\circ J(Q_ju)\\circ\\rho_{j,L}\\\\\n&=J(\\kappa^{(j)}_M)\\circ\\rho_{j,M}\\circ J(u)\n=t_{j,M}\\circ J(u).\n\\end{aligned}$$\nEach $t_{j,L}$ is an isomorphism since its two factors are isomorphisms.",
+   "uses": [
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
+    "place": "Step 1: functoriality and naturality of the fixed-point identifications; explicit agent calculation"
+   }
+  },
+  {
+   "text": "Let $e_{a,b}:Q_{a+b}\\xrightarrow{\\sim}Q_aQ_b$ denote $c_{\\Phi^a,\\Phi^b}$. Apply [lem-trf-derived-pullback-coherence] with $j=z:s\\to X$, $h=\\Phi^a:X\\to X$, $k=\\Phi^b:X\\to X$ and $M=L$. Its equality reads\n$$Lz^*(e_{a,b,L})\\circ c_{z,\\Phi^{a+b},L}=c_{z,\\Phi^a,Q_bL}\\circ c_{\\Phi^az,\\Phi^b,L}.$$\nThe constant coefficient normalization is precisely the one in that cited statement. Since $a,b,a+b$ are positive multiples of $d$, Step 1 identifies $\\Phi^az=z$, $\\Phi^bz=z$ and $\\Phi^{a+b}z=z$. In particular $c_{\\Phi^az,\\Phi^b,L}=c_{z,\\Phi^b,L}$ after substitution. Apply the functor $S$ to obtain\n$$J(e_{a,b,L})\\circ\\rho_{a+b,L}=\\rho_{a,Q_bL}\\circ\\rho_{b,L}.$$\nThe cited lemma is for the unbounded derived categories and for arbitrary scheme morphisms, so it applies also to the geometric point $z$.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
+    "place": "Step 1: functoriality and naturality of the fixed-point identifications; explicit agent calculation"
+   }
+  },
+  {
+   "text": "Write $\\kappa_r=\\kappa^{(r)}$. Multiplicativity of the specified family in [prop-trf-scheme-galois-comparison], with the composition comparisons displayed, means\n$$c_{a,b,L}\\circ\\kappa_{a+b,L}=\\kappa_{a,P_bL}\\circ Q_a(\\kappa_{b,L})\\circ e_{a,b,L}.$$\nEquivalently one may write $P_a(\\kappa_{b,L})\\circ\\kappa_{a,Q_bL}$ on the right before $e_{a,b,L}$; the two expressions are equal by naturality of $\\kappa_a$ for the arrow $\\kappa_{b,L}:Q_bL\\to P_bL$. Hence Step 3 and Step 1's naturality for that same arrow give\n$$\\begin{aligned}\nJ(c_{a,b,L})\\circ t_{a+b,L}\n&=J(\\kappa_{a,P_bL})\\circ J(Q_a(\\kappa_{b,L}))\\circ J(e_{a,b,L})\\circ\\rho_{a+b,L}\\\\\n&=J(\\kappa_{a,P_bL})\\circ J(Q_a(\\kappa_{b,L}))\\circ\\rho_{a,Q_bL}\\circ\\rho_{b,L}\\\\\n&=J(\\kappa_{a,P_bL})\\circ\\rho_{a,P_bL}\\circ J(\\kappa_{b,L})\\circ\\rho_{b,L}\\\\\n&=t_{a,P_bL}\\circ t_{b,L}.\n\\end{aligned}$$\nOnly functoriality, naturality and composition of isomorphisms are used after the cited multiplicative law. All arrows are in $D(A)$ after applying $J$; there is no Weil map, trace or finiteness condition on $L$.",
+   "uses": [
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
+    "place": "Step 1: functoriality and naturality of the fixed-point identifications; explicit agent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "pur9-def-derived-stalk",
+  "prop-trf-scheme-galois-comparison",
+  "lem-trf-derived-pullback-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
+  "place": "Step 1: functoriality and naturality of the fixed-point identifications; explicit agent calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +124,52 @@
    "results": "0 hits: ; No fixed-point cocycle mixing scheme-Frobenius and Galois-Frobenius derived pullbacks. Read SheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, and PresheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142: these give underived pullback associativity only, not the specified Frobenius comparison on a derived geometric stalk.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical stalk transports from a fixed point of scheme Frobenius to geometric Galois pullbacks are natural and multiplicative under addition of positive iterate exponents",
+   "results": "8 hits: iterateFrobeniusEquiv_add, iterateFrobeniusEquiv_symm_add, iterateFrobeniusEquiv_add_apply, iterateFrobeniusEquiv_symm_add_apply, coe_iterateFrobeniusEquiv, IsPurelyInseparable.iterateFrobeniusₛₗ, iterateFrobeniusEquiv_one, iterateFrobeniusEquiv_apply; No exact match: ring Frobenius identities, underived sheaf pullbacks, or ordinary topological stalks do not state the finite-coefficient derived pro-etale fixed-point transport cocycle.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.associator",
+   "results": "0 hits: ; No exact match: ring Frobenius identities, underived sheaf pullbacks, or ordinary topological stalks do not state the finite-coefficient derived pro-etale fixed-point transport cocycle.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(cocycle|multiplic)|[Ff]robenius.*stalk|stalk.*[Ff]robenius",
+   "results": "0 hits: ; No exact match: ring Frobenius identities, underived sheaf pullbacks, or ordinary topological stalks do not state the finite-coefficient derived pro-etale fixed-point transport cocycle.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical stalk identifications for iterated pullback at a fixed geometric point commute with composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.stalkMap_comp, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.PresheafedSpace.stalkMap.comp, AlgebraicGeometry.Scheme.Hom.stalkMap_comp, AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp, TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.germToPullbackStalk; No exact match: ring Frobenius identities, underived sheaf pullbacks, or ordinary topological stalks do not state the finite-coefficient derived pro-etale fixed-point transport cocycle.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative natural isomorphism between two derived pullback actions induces a cocycle of isomorphisms on a fixed geometric fiber",
+   "results": "8 hits: CategoryTheory.Functor.IsFibered.pullbackPullbackIso, CategoryTheory.PreGaloisCategory.fiberPullbackEquiv, CategoryTheory.PresheafOfGroups.OneCocycle, CategoryTheory.Grothendieck.isoMk_hom_fiber, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso, CategoryTheory.PresheafOfGroups.OneCochain, CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_snd_apply; No exact match: ring Frobenius identities, underived sheaf pullbacks, or ordinary topological stalks do not state the finite-coefficient derived pro-etale fixed-point transport cocycle.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(coherence|assoc)|upperStarComp.*assoc",
+   "results": "25 hits: Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Ring/InjSurj.lean; No exact match: ring Frobenius identities, underived sheaf pullbacks, or ordinary topological stalks do not state the finite-coefficient derived pro-etale fixed-point transport cocycle.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-frobenius-degree-formula",
@@ -87,5 +186,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-fixed-point-stalk-transport-cocycle",
+  "worker": "stage1",
+  "summary": "Expanded the fixed-point transports into canonical pullback comparisons. Naturality and the cocycle follow by the explicit triple-composition identity for (z, Phi^a, Phi^b), then multiplicativity and naturality of kappa. Reused existing coherence and constant-coefficient lemmas; no new nodes, no statement changes.",
+  "blueprint": "Realizes Step 1 of lem-trf-frobenius-degree-formula: naturality of the canonical stalk identifications and the assertion that the identification for rd is the r-fold iteration for d.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-constant-coefficient-composition",
+    "why": "Checks the canonical constant ring identifications meet the composite-coefficient hypothesis; a generic ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Provides the normalized natural comparison for (z, Phi^j), used in the definition of rho; a generic derived-pullback tool."
+   },
+   {
+    "node": "lem-trf-derived-pullback-coherence",
+    "why": "Provides the triple-composition equation specialized to (z, Phi^a, Phi^b); a generic coherence tool, not a replacement trace argument."
+   },
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Provides exactly the specified natural multiplicative Frobenius comparison used in the ancestor blueprint Step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-derived-pullback-coherence",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-abf73a685",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-abf73a685 (reviewer sub-agent of L); spot-checked: I read all the mathematics in full and made no fixes. The statement is unchanged and every type checks; c_{a,b}: L(g^b g^a)^* -> P_aP_b follows the composition lemma's c_{h,k} convention. The hypotheses meet the cited nodes: A=O_E/varpi^n is finite and killed by a power of ell, which is invertible in k; k is algebraically closed, as pur9 needs; ell is invertible on X and on s. Step 1: lem-trf-constant-coefficient-composition supplies the composite coefficient identification the composition lemma assumes. rho_j is S(c_{z,Phi^j}) with Phi^j z=z an equality of morphisms. J=S∘Lz^* is exactly pur9's definition, and its pullback is the same pbc-operations pullback. Step 2: kappa^{(j)} is natural on the unbounded D(X_proet,A); the chase is correct. Step 3: I re-derived lem-trf-derived-pullback-coherence with j=z, h=Phi^a, k=Phi^b. The factors are e_{a,b}, c_{z,Phi^{a+b}}, c_{z,Phi^a}(Q_bL), and c_{Phi^a z,Phi^b}=c_{z,Phi^b}, which give the rho-cocycle after S. Step 4: the prop states only 'multiplicative iterate'. Its proof (Step 8) and blueprint_update give kappa^{(m+n)}=G_m(kappa^{(n)})∘kappa^{(m)}_{T_n} under the composition comparisons. That is the item's second form, and it equals the first by naturality of kappa_a. The four-line chain checks, using rho_a naturality at kappa_{b,L}. Source: main-20261015 lem-trf-frobenius-degree-formula.proof.md Step 1, and Stacks 0D6D (sites-cohomology.tex l.3657, K-flat proof). Small cases tested: X_0=Spec F_q (Phi=id, reduces to kappa multiplicativity), a=b=d, a=d with b=2d, L=0, X empty, nonreduced X_0, and z not over a closed point. There are no new nodes and no duplicate: lem-trf-local-frobenius-transport-normalization is a single-m identity and lem-trf-frobenius-pullback-comparison-coherence concerns only g. There is no cycle, proof_deps equals the union of the uses, and nothing cites SGA. Accepted tool_uses: lem-trf-constant-coefficient-composition, lem-weil-pbc-proetale-derived-pullback-composition, lem-trf-derived-pullback-coherence, and prop-trf-scheme-galois-comparison (named by the ancestor). Observation for the parent: def-trf-frobenius-operators defines the stalk as Fib_s(Lx^*M), while this item uses RΓ(s,Lz^*). The parent's claim t_{j,K}=tau_{z_j,j} implicitly identifies the two; that is not a fault of this delivery."
  }
 }

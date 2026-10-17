@@ -17,15 +17,130 @@
   "def-weil-proetale-constructible-sheaf",
   "def-weil-proetale-tor-amplitude",
   "det-sp-scalar-extension-functor",
-  "lem-pur-derived-change-of-rings",
   "def-pc-sheaf-restrict-scalars",
   "lem-sf-compact-support-restriction-of-scalars",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "det-sp-reduction-direct-image"
+  "det-sp-reduction-direct-image",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout in the ordinary ambient derived categories, and abbreviate restriction by $r$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction] the adjunction $T_W\\dashv r_W$ exists on these unbounded categories, with its specified tensor normalization. Thus the transpose of $v:M\\to r_WH$ is\n$$v^\\sharp=\\epsilon_W(H)\\circ T_W(v).$$\nPut $Z=\\overline X$, $P_R=h_R^*$, $R_R=Rh_{*,R}$ and $J_R=j_{!,R}$. The geometric adjunction $P_R\\dashv R_R$ is the one in [def-weil-pbc-proetale-operations]; denote its counit by $e^R$, reserving $\\epsilon$ for scalar adjunctions. The constant-ring maps needed for these adjunctions are canonical by [prop-weil-pbc-proetale-constant-ring-map]. Write\n$$D:R_A r_Z\\xrightarrow{\\sim}r_YR_B$$\nfor the inverse of the comparison called $d$ in [lem-weil-pbc-ring-sheaf-change-adjunction], and $\\chi:P_BT_Y\\xrightarrow{\\sim}T_ZP_A$ for the canonical pullback/scalar comparison. The proper part of the comparison in [det-sp-reduction-direct-image] is $\\gamma_N:T_YR_AN\\to R_BT_ZN$, characterized by\n$$e^B_{T_ZN}\\circ P_B(\\gamma_N)=T_Z(e^A_N)\\circ\\chi_{R_AN}.$$\nNo assertion that $r_Z$ preserves finite Tor amplitude is made or needed.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-proetale-operations",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+   }
+  },
+  {
+   "text": "For $H\\in D(Z_{\\mathrm{proet}},B)$ the two factorizations of the same ringed-topos morphism $(Z,B_Z)\\to(Y,A_Y)$ have composite adjunctions\n$$P_BT_Y\\dashv r_YR_B,\\qquad T_ZP_A\\dashv R_Ar_Z.$$\nTheir canonical left comparison is $\\chi$, and their right comparison is $D^{-1}$. The adjunction-compatible composition and composite-counit assertion of [lem-sfb-ringed-derived-monoidal-comparisons], applied to this square, gives explicitly\n$$e^B_H\\circ P_B(\\epsilon_Y(R_BH))\\circ\\chi^{-1}_{r_YR_BH}\n=\\epsilon_Z(H)\\circ T_Z(e^A_{r_ZH})\\circ T_ZP_A(D_H^{-1}).$$\nHere the right comparisons are precisely the direct-image coefficient comparison by [lem-weil-pbc-ring-sheaf-change-adjunction]. Precompose by $\\chi_{r_YR_BH}\\circ P_BT_Y(D_H)$ and use naturality of $\\chi$. The factors $T_ZP_A(D_H^{-1})$ and $T_ZP_A(D_H)$ cancel. Hence the $P_B\\dashv R_B$ transpose of $\\epsilon_Y(R_BH)\\circ T_Y(D_H)$ is\n$$\\epsilon_Z(H)\\circ T_Z(e^A_{r_ZH})\\circ\\chi_{R_Ar_ZH}.$$\nThe transpose of $R_B(\\epsilon_Z(H))\\circ\\gamma_{r_ZH}$ is the same: move $R_B(\\epsilon_Z(H))$ through the geometric counit by naturality and use Step 1. Injectivity of this Hom bijection therefore proves\n$$\\epsilon_Y(R_BH)\\circ T_Y(D_H)=R_B(\\epsilon_Z(H))\\circ\\gamma_{r_ZH}.$$\nThis calculation is on arbitrary $H$, even when $r_ZH$ is unbounded or has infinite Tor amplitude.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+   }
+  },
+  {
+   "text": "Let $a_L:J_Ar_XL\\xrightarrow{\\sim}r_ZJ_BL$ be the open restriction comparison of [lem-cbc-proetale-extension-zero], and let $E_M:T_ZJ_AM\\xrightarrow{\\sim}J_BT_XM$ be the canonical open tensor comparison used in [det-sp-reduction-direct-image]. It satisfies\n$$\\epsilon_Z(J_BL)\\circ T_Z(a_L)=J_B(\\epsilon_X(L))\\circ E_{r_XL}.$$\nIndeed the domain is identified by $E_{r_XL}$ with $J_BT_Xr_XL$. Under $J_B\\dashv j^{-1}$ from [lem-cbc-proetale-extension-zero], maps from this domain to $J_BL$ are determined by restriction to $X$. The unit $M\\to j^{-1}J_BM$ is the identity: in [def-weil-extension-by-zero], the defining presheaf on every object over $X$, and on every covering of it, is $M$, so its sheafification restricts to $M$. This holds degreewise and descends since the two functors are exact. After restriction, $a$ and $E$ are the identity comparisons of restriction and tensor on $X$. Both displayed maps then become $\\epsilon_X(L)$ by the representative normalization of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. The Hom bijection gives the claimed equality without a stalk-detection argument.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "det-sp-reduction-direct-image",
+    "def-weil-extension-by-zero",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+   }
+  },
+  {
+   "text": "By [lem-sf-compact-support-restriction-of-scalars], the specified compact-support comparison is $R_A(a_L)$ followed by the direct-image comparison of [lem-weil-proetale-direct-image-restriction-of-scalars] at $J_BL$. That comparison is $D$: for a K-injective complex $I$ of $B_Z$-modules and a K-injective resolution $r_ZI\\to I'$, its value is the inverse of $r_Yh_*I=h_*r_ZI\\to h_*I'$. By the normalization of $\\kappa$ in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] applied to the two factorizations of Step 2 (the factor $r_Y$ being exact), the comparison $d$ of [lem-weil-pbc-ring-sheaf-change-adjunction] at $I$ is the class of that same map. Hence\n$$d_f(L)=D_{J_BL}\\circ R_A(a_L).$$\nBy the proper-counit and open-tensor normalization of [det-sp-reduction-direct-image], its scalar-extension comparison is\n$$b_f(M)=R_B(E_M)\\circ\\gamma_{J_AM}.$$\nApply Step 2 to $H=J_BL$, then use naturality of $\\gamma$ at $a_L$ and Step 3. It gives\n$$\\begin{aligned}\n\\epsilon_Y(F_{f,B}L)\\,T_Y(d_f(L))\n&=R_B(\\epsilon_Z(J_BL))\\,\\gamma_{r_ZJ_BL}\\,T_YR_A(a_L)\\\\\n&=R_B\\bigl(\\epsilon_Z(J_BL)\\,T_Z(a_L)\\bigr)\\,\\gamma_{J_Ar_XL}\\\\\n&=R_BJ_B(\\epsilon_X(L))\\,R_B(E_{r_XL})\\,\\gamma_{J_Ar_XL}\\\\\n&=F_{f,B}(\\epsilon_X(L))\\,b_f(r_XL).\n\\end{aligned}$$\nNaturality of $\\gamma$ follows directly from its defining transpose in Step 1: for $u:N\\to N'$ both transposes are $T_Z(u\\,e^A_N)\\chi_{R_AN}$, by naturality of $e^A$ and $\\chi$. Thus its use here is valid in the ambient categories, without assuming that $r_XL$ is in $\\Dctf$. This proves precisely the required counit equation.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+   }
+  },
+  {
+   "text": "Now use the scalar transpose formula of Step 1, the counit equation of Step 4, and naturality of $b_f$ at $t:K\\to r_XL$:\n$$\\begin{aligned}\n\\bigl(d_f(L)F_{f,A}(t)\\bigr)^\\sharp\n&=\\epsilon_Y(F_{f,B}L)\\,T_Y(d_f(L))\\,T_YF_{f,A}(t)\\\\\n&=F_{f,B}(\\epsilon_X(L))\\,b_f(r_XL)\\,T_YF_{f,A}(t)\\\\\n&=F_{f,B}\\bigl(\\epsilon_X(L)T_X(t)\\bigr)\\,b_f(K)\n=F_{f,B}(t^\\sharp)\\,b_f(K).\n\\end{aligned}$$\nThe ambient naturality used here follows from $b_f=R_B(E)\\gamma J_A$: $E$ is the natural tensor comparison and naturality of $\\gamma$ was checked in Step 4. The scalar adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] is natural in both variables, so this equality is natural in $K,L,t$. Conversely, setting $K=r_XL$, $t=1$, in this ambient calculation recovers Step 4, since $t^\\sharp=\\epsilon_X(L)$. This substitution is in the ambient categories and does not assert finite Tor amplitude for $r_XL$. Invertibility on $\\Dctf$ input is exactly the assertion of [det-sp-reduction-direct-image]; no inversion was used in the calculation.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+   }
+  },
+  {
+   "text": "For $A\\to B\\to C$, write $T^{A,B}$ and $r^{A,B}$ for the scalar functors. The composite scalar adjunction has counit\n$$\\epsilon_W^{B,C}\\circ T_W^{B,C}(\\epsilon_W^{A,B}):T_W^{B,C}T_W^{A,B}r_W^{A,B}r_W^{B,C}\\longrightarrow1.$$\nBy the composition normalization of [lem-sfb-ringed-derived-monoidal-comparisons], this is the $A\\to C$ counit under the tensor associator $\\alpha$ of [det-sp-scalar-extension-functor]. In particular two successive transposes of a map $K\\to r_X^{A,B}r_X^{B,C}L$ are its direct $A\\to C$ transpose, precomposed with $\\alpha_K$. The restriction comparisons compose by [lem-sf-compact-support-restriction-of-scalars]. Finally [det-sp-reduction-direct-image] gives the explicit equality of the coefficient transformations on $K\\in\\Dctf(X,A)$:\n$$b_{A,C}(K)\\alpha_{F_{f,A}K}=F_{f,C}(\\alpha_K)\\,b_{B,C}(T_X^{A,B}K)\\,T_Y^{B,C}(b_{A,B}(K)).$$\nThese three equations identify respectively the transposes, the mixed-coefficient input maps, and the comparison factors in the formula of Step 5 for successive and composite coefficient change. They prove its required compatibility. The intermediate $T_X^{A,B}K$ lies in $\\Dctf(X,B)$ by [det-sp-scalar-extension-functor]. All scalar counits themselves are ambient maps, so no hypothesis on the Tor amplitude of a restricted $C$-object is introduced.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "det-sp-scalar-extension-functor",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+   }
+  },
+  {
+   "text": "For an identity coefficient map, the canonical identity normalization of [lem-sfb-ringed-derived-monoidal-comparisons] identifies scalar extension, restriction and their adjunction with the identity adjunction. The comparison $d_f$ is the identity: the open restriction comparison is the identity on the defining presheaf [def-weil-extension-by-zero], and the proper comparison is the canonical direct-image identity comparison. In the counit equation of Step 4 this gives $b_f=1$. Hence the formula of Step 5 becomes $F_{f,A}(t)$, and if $t=1_K$ it is $1_{F_{f,A}K}$ by functoriality. The derivation used no flatness of $B/A$: the scalar and geometric adjunctions and composite normalizations used above are unbounded and permit nonflat ring maps, as stated in [lem-pur-sheaf-ring-derived-coefficient-adjunction] and [lem-sfb-ringed-derived-monoidal-comparisons].",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-extension-by-zero",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "det-sp-reduction-direct-image",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-cbc-proetale-extension-zero",
+  "def-weil-extension-by-zero",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written mixed-coefficient mate calculation for the Levels paragraph of det-sp-tower-gluing."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +176,45 @@
    "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"RestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\"], \"note\": \"\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "(compactSupport|shriek).*(scalar|adjoint)|scalar.*(compactSupport|shriek)",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension restriction of scalars transpose commutes with compact support direct image and its tensor comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"AlgHom.restrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"LinearMap.restrictScalarsₗ\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"RestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate and scalar-adjunction results do not identify the specified proper/open derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar adjunction transpose of compactly supported direct image applied to a mixed coefficient morphism agrees with the counit-defined coefficient tensor comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_apply\", \"LightCondMod.LocallyConstant.adjunction\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate and scalar-adjunction results do not identify the specified proper/open derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of adjoint transposes with a natural transformation between right adjoints and its mate, counit equation",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans_app\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.conjugateEquiv_apply_app\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans\", \"CategoryTheory.conjugateEquiv_symm_apply_app\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate and scalar-adjunction results do not identify the specified proper/open derived comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-coefficient-tower-shriek-calculus",
@@ -81,5 +231,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-restriction-transition-transpose",
+  "worker": "stage1",
+  "summary": "Wrote the scalar-adjunction calculation with the actual normalized proper and open comparisons, including an explicit composite-counit equation, its compact-support expansion, arbitrary mixed maps, coefficient composition and identities. Reused existing general derived adjunction/coherence nodes; no new nodes. Kept restricted objects in ambient derived categories, without imposing finite Tor amplitude on restriction of scalars. Item statement unchanged.",
+  "blueprint": "det-sp-tower-gluing, Levels paragraph: compatibility of the actual tower transitions with the finite coefficient comparisons; realizes the scalar transpose identity used by lem-sp-coefficient-tower-shriek-calculus step 7.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Ambient normalized scalar adjunction for arbitrary ring maps, rather than a purity or tower theorem."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Defines the geometric derived adjunctions used for the proper normalization."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical constant-ring identifications allow the ringed-topos square."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic geometric adjunction compatibility of the restriction/direct-image comparison."
+   },
+   {
+    "node": "det-sp-reduction-direct-image",
+    "why": "The unit route explicitly uses the reduction unit; its statement specifies b, the proper/open normalization and the coefficient cocycle."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic unbounded ringed-topos composition normalization supplies the exact composite counits for the commuting scalar/geometric square and successive scalar changes."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Exact open adjunction and restriction-of-scalars identity, used only for the open part of the specified comparison."
+   },
+   {
+    "node": "def-weil-extension-by-zero",
+    "why": "Explicit presheaf definition identifies restriction to the open with the original sheaf."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Specified ambient compact-support restriction comparison and its coefficient composition law."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Specified tensor associators and preservation of finite-Tor constructible input."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "Its representative formula is the direct-image half of d_f in the statement of lem-sf-compact-support-restriction-of-scalars; used only to identify it with D (added by the cc reviewer)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "det-sp-reduction-direct-image",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-cbc-proetale-extension-zero",
+  "def-weil-extension-by-zero",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "det-sp-scalar-extension-functor",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-e5c6cc0e2",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-e5c6cc0e2 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node statement, unit sk-prop-sp-tower-geometric, parent step 7, the blueprint main-20261015 det-sp-tower-gluing Levels paragraph and det-sp-reduction-direct-image Step 1 (the source of b's proper-counit and open-tensor normalization), and Stacks 07A6/0D6D/0D6E (sites-cohomology l.3990/3658/4011) and 0E8I (sites-modules l.4051). The coefficient category (uncompleted unbounded constant-ring pro-etale) and b_f match the master source, and the statement is unchanged. Steps 1-3, 5 and 7: I recomputed every composite (composite counits of the two factorizations of (Z,B)->(Y,A), the chi and e naturality cancellations, the open Hom test with identity unit, the transpose expansion) and they are correct ambiently, with invertibility used only on Dctf; the non-flat Z/l^2->Z/l case is handled. Step 6: I checked the cocycle chain explicitly. One fault, C4/E5 in Step 4: d_f = D o R_A(a) cited only lem-sf-compact-support-restriction-of-scalars, which builds d_f from the iso of lem-weil-proetale-direct-image-restriction-of-scalars, while D was defined from lem-weil-pbc-ring-sheaf-change-adjunction. Fixed: the identification is now written on K-injective representatives using the kappa normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition, the citations are added, proof_deps is updated, and a tool_uses entry is added for lem-weil-proetale-direct-image-restriction-of-scalars. Accepted tool_uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-weil-proetale-direct-image-restriction-of-scalars, both generic normalizations outside the unit's route. No new nodes, no duplicates, no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
