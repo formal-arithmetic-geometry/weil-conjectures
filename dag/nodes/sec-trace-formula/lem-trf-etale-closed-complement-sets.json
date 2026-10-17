@@ -2,7 +2,7 @@
  "id": "lem-trf-etale-closed-complement-sets",
  "kind": "statement",
  "title": "Closed immersion on small etale sheaves of sets",
- "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] and $j:U=X\\setminus i(Z)\\hookrightarrow X$ its complementary open immersion [def-weil-open-immersion]. On the small etale topoi [def-weil-pbc-etale-site], the direct image $i_*:\\operatorname{Sh}(Z_{\\mathrm{Et}})\\to\\operatorname{Sh}(X_{\\mathrm{Et}})$ on sheaves of sets is fully faithful, and its essential image consists exactly of the sheaves $F$ whose restriction $j^{-1}F$ is the terminal sheaf on $U_{\\mathrm{Et}}$. The counit $i^{-1}i_*\\to\\operatorname{id}$ is an isomorphism. Here inverse and direct image are the geometric-morphism adjoints [def-trf-geometric-morphism].",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] and $j:U=X\\setminus i(Z)\\hookrightarrow X$ its complementary open immersion [def-weil-open-immersion]. On the small etale topoi [def-weil-pbc-etale-site], the direct image $i_*:\\operatorname{Sh}(Z_{\\mathrm{Et}})\\to\\operatorname{Sh}(X_{\\mathrm{Et}})$ on sheaves of sets [def-weil-pbc-etale-sheaf-of-sets] is fully faithful, and its essential image consists exactly of the sheaves $F$ whose restriction $j^{-1}F$ is the terminal sheaf on $U_{\\mathrm{Et}}$. The counit $i^{-1}i_*\\to\\operatorname{id}$ is an isomorphism. Here inverse and direct image are the geometric-morphism adjoints [def-trf-geometric-morphism], concretely the set-sheaf adjunction of [lem-weil-pbc-sets-etale-inverse-image-composition-units].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 04CA, proposition-closed-immersion-pushforward, part (1) and final assertion (sheaves of sets, not only abelian sheaves)."
@@ -12,11 +12,115 @@
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
   "def-weil-pbc-etale-site",
-  "def-trf-geometric-morphism"
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with sheaves of sets and the small representatives fixed by [def-weil-size-convention]. Write $L=i^{-1}$, $R=i_*$, and $\\eta,\\varepsilon$ for their adjunction unit and counit. The set-valued construction of [lem-weil-pbc-sets-etale-inverse-image-composition-units] gives $(RG)(V)=G(V\\times_X Z)$ and defines $i^*a$ as the image of a section $a$ under $\\eta$. We use this construction for $i$ and $j$. The adjunction in [def-trf-geometric-morphism] supplies naturality and the triangle identities. The empty open subscheme is an etale object by [lem-weil-pbc-open-immersion-etale]. The empty family covers it, so the equalizer sheaf condition in [def-weil-pbc-etale-sheaf-of-sets] says $G(\\varnothing)$ is a singleton. These constructions and equalities hold also for empty schemes.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA, proposition-closed-immersion-pushforward, setup; empty-cover observation in the proof of Tag 04FX, lemma-stalk-pushforward-closed-immersion"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar z$ of $Z$ and put $\\bar x=i\\bar z$. The initiality assertion of [lemma-openclosed-stalk-lowerstar] concerns the categories of pointed etale neighbourhoods, independently of coefficients: $\\Phi:\\mathrm N(\\bar x)\\to\\mathrm N(\\bar z)$ sends $V$ to $V_Z$. The stalk definition and step 1 give a canonical comparison\n$$r_{G,\\bar z}:(RG)_{\\bar x}=\\operatorname{colim}_{\\mathrm N(\\bar x)^{op}}G(V_Z)\\longrightarrow G_{\\bar z}.$$\nHere is why the existing initiality assertion gives a bijection for sets, without using an abelian-coefficient theorem. For every set $A$, apply [lem-weil-pbc-initial-functor-limit] to $\\Phi$ and the covariant diagram $W\\mapsto\\operatorname{Hom}(G(W),A)$ on $\\mathrm N(\\bar z)$. By the colimit universal property [def-weil-pbc-category-colimit], its limit is $\\operatorname{Hom}(G_{\\bar z},A)$, and its restricted limit is $\\operatorname{Hom}((RG)_{\\bar x},A)$. Thus precomposition with $r_{G,\\bar z}$ is bijective for every $A$. Taking $A$ to be its source gives a left inverse; injectivity for $A$ its target shows this inverse is also a right inverse. The map $r$ sends the germ of $b\\in G(V_Z)$ at $(V,\\bar v)$ to the germ of the same $b$ at $(V_Z,(\\bar v,\\bar z))$; it is natural in $G$.",
+   "uses": [
+    "lemma-openclosed-stalk-lowerstar",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-initial-functor-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FX, lemma-stalk-pushforward-closed-immersion, on-Z calculation; the coefficient-independent initiality is supplied by lemma-openclosed-stalk-lowerstar, and the limit theorem is Categories Tag 002R"
+   }
+  },
+  {
+   "text": "For a set sheaf $G$ on $Z$, let $c=c_{i,\\bar z,RG}:(LRG)_{\\bar z}\\xrightarrow{\\sim}(RG)_{\\bar x}$ be the bijection of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ]. We claim that the stalk of the actual counit $\\varepsilon_G:LRG\\to G$ is $r_{G,\\bar z}\\circ c$. Indeed, take $b\\in(RG)(V)=G(V_Z)$. The right triangle identity $R\\varepsilon_G\\circ\\eta_{RG}=1_{RG}$, evaluated at $V$, says that $\\varepsilon_G$ sends $i^*b\\in(LRG)(V_Z)$ to $b$. On germs this agrees with $r\\circ c$, by the germ formulas for $c$ and step 2. These germs exhaust $(LRG)_{\\bar z}$: their images under the bijection $c$ are every represented germ of $(RG)_{\\bar x}$. Therefore $(\\varepsilon_G)_{\\bar z}$ is bijective. Applying [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] on $Z$ shows that every $\\varepsilon_G$ is an isomorphism. The counit is consequently a natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA, proposition-closed-immersion-pushforward, first sentence of proof; Tag 03Q1, lemma-stalk-pullback (3), for the germ-compatible inverse-image comparison"
+   }
+  },
+  {
+   "text": "The counit isomorphisms of step 3 make $R$ fully faithful. Explicitly, the adjunction sends a morphism $\\alpha:RG\\to RH$ to $\\varepsilon_H\\circ L\\alpha:LRG\\to H$. Precomposing with $\\varepsilon_G^{-1}:G\\to LRG$ gives a bijection $\\operatorname{Hom}(RG,RH)\\to\\operatorname{Hom}(G,H)$. Its inverse is $\\beta\\mapsto R\\beta$, since naturality gives $\\varepsilon_H\\circ LR\\beta=\\beta\\circ\\varepsilon_G$. This proves both fullness and faithfulness and retains the specified counit, rather than only an unspecified left-inverse isomorphism.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA, proposition-closed-immersion-pushforward, formal full-faithfulness inference in proof"
+   }
+  },
+  {
+   "text": "The open immersion $j$ is an etale object by [lem-weil-pbc-open-immersion-etale]. For a geometric point $\\bar x$ in $U$, any pointed etale neighbourhood $(V,\\bar v)$ can be restricted to $(V\\times_XU,(\\bar v,\\bar x))$; this is again a pointed etale neighbourhood, by the fibre products in [def-weil-pbc-etale-site]. It is disjoint from $Z$. Thus every germ of $RG$ restricts to the unique element of $G(\\varnothing)$, and any two such germs agree on the common pointed refinement $(V_1\\times_XV_2)\\times_XU$. The neighbourhood $U$ itself supplies that element, so $(RG)_{\\bar x}$ is a singleton, by the stalk colimit [def-weil-pbc-geometric-stalks] and step 1. The germ-compatible inverse-image comparison [lem-weil-pbc-sets-etale-inverse-image-stalk-germ], applied to $j$, now shows that every geometric stalk of $j^{-1}RG$ is a singleton. The terminal sheaf $1$ assigns a singleton to every object; its stalk is a singleton as well. The unique map $j^{-1}RG\\to1$ is an isomorphism by [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] on $U$. Hence every sheaf in the essential image has terminal open restriction.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FX, lemma-stalk-pushforward-closed-immersion, off-Z paragraph; Tag 04CA, proposition-closed-immersion-pushforward, essential-image inclusion"
+   }
+  },
+  {
+   "text": "Conversely let $F$ be a set sheaf with $j^{-1}F\\cong1$, and consider its actual unit $\\eta_F:F\\to RLF$. At $\\bar x=i\\bar z$, compose its stalk map with the bijections from step 2 and the inverse-image germ comparison:\n$$F_{\\bar x}\\xrightarrow{(\\eta_F)_{\\bar x}}(RLF)_{\\bar x}\\xrightarrow{r_{LF,\\bar z}}(LF)_{\\bar z}\\xrightarrow{c_{i,\\bar z,F}}F_{\\bar x}.$$\nA germ represented by $a\\in F(V)$ is sent first to the germ of $i^*a$ viewed as a section of $RLF$ at $V$, then to its germ at $V_Z$, and finally back to the germ of $a$. This is precisely the unit-section formula of [lem-weil-pbc-sets-etale-inverse-image-composition-units] and the germ formula of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ]. The composite is the identity, so $(\\eta_F)_{\\bar x}$ is bijective. At a point in $U$, the source stalk is a singleton by the same inverse-image comparison for $j$ and the assumption on $j^{-1}F$; the target stalk is a singleton by step 5 applied to $G=LF$. Every geometric point of $X$ is of one of these two kinds: in the closed image it factors uniquely through $Z$, since locally $Z=\\operatorname{Spec}(B/I)$ and the field-valued map kills $I$ [def-weil-closed-immersion]. Stalk detection [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] gives $\\eta_F$ an isomorphism. Therefore $F\\cong i_*(i^{-1}F)$ lies in the essential image, as required.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA, proposition-closed-immersion-pushforward, converse essential-image argument using the unit; Tag 03Q1, lemma-stalk-pullback (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-open-immersion-etale",
+  "lemma-openclosed-stalk-lowerstar",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-initial-functor-limit",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "def-weil-pbc-etale-site",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04CA, proposition-closed-immersion-pushforward, proof of (1), with the calculation of Tag 04FX, lemma-stalk-pushforward-closed-immersion; counit and unit compatibility on represented germs is written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +156,45 @@
    "results": "{\"t\": \"2026-10-17T19:17:39Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subscheme small etale topos is equivalent to sheaves restricting to the final sheaf on the open complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\"], \"digest\": \"0e853eff3e4c8ea3\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of schemes direct image of sheaves of sets essential image terminal on complementary open",
+   "results": "{\"t\": \"2026-10-17T19:38:33Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersion of schemes direct image of sheaves of sets essential image terminal on complementary open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.instIsClosedImmersionMorphismRestrict\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\"], \"digest\": \"0f2476e70341656f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern schemes, sheaves on topological spaces, or general site definitions, not the set-valued closed-immersion essential-image theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-17T19:38:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern schemes, sheaves on topological spaces, or general site definitions, not the set-valued closed-immersion essential-image theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion|fullyFaithful.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-17T19:38:34Z\", \"tool\": \"grep\", \"query\": \"IsClosedImmersion|fullyFaithful.*[Ss]heaf\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern schemes, sheaves on topological spaces, or general site definitions, not the set-valued closed-immersion essential-image theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of sets on a closed subscheme small etale site are the sheaves terminal on the open complement",
+   "results": "{\"t\": \"2026-10-17T19:38:45Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of sets on a closed subscheme small etale site are the sheaves terminal on the open complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.topIso\", \"TopCat.Sheaf\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"TopCat.Sheaf.isTerminalOfEqEmpty\", \"TopCat.Presheaf.IsSheaf\", \"CategoryTheory.Sheaf.isTerminalOfBotCover\", \"CategoryTheory.hasLimitsEssentiallySmallSite\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"e93f820592758861\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern schemes, sheaves on topological spaces, or general site definitions, not the set-valued closed-immersion essential-image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaf pushforward along closed immersion is fully faithful and inverse image is left inverse with supported essential image",
+   "results": "{\"t\": \"2026-10-17T19:38:47Z\", \"tool\": \"leanfinder\", \"query\": \"Etale sheaf pushforward along closed immersion is fully faithful and inverse image is left inverse with supported essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\"], \"digest\": \"3a226182951e19cd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern schemes, sheaves on topological spaces, or general site definitions, not the set-valued closed-immersion essential-image theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-source-localization",
@@ -79,5 +218,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-closed-complement-sets",
+  "worker": "stage1",
+  "summary": "Proved the sets version of Stacks 04CA in six steps with no new nodes. Reused only the coefficient-independent initiality clause of the existing closed-pushforward stalk node, converting it to a set-valued comparison by the existing initial-functor limit theorem and the colimit universal property. Verified the actual counit and actual essential-image unit on represented germs, and terminal restriction by the empty-cover and off-closed-image stalk calculation. The abelian-only full-faithfulness and essential-image results are not used. Added explicit references for set sheaves and the set-valued adjunction; mathematical statement unchanged.",
+  "blueprint": "Realizes the open/closed source-localization input in the normal-cone specialization route of lem-trf-local-term-locality, current main-20261015 proof paragraph (1) and (2): specialization to the normal cone and reduction via the open-closed decomposition. The inherited ancestry through lem-trf-oriented-source-localization is preserved; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Uses only initiality of the geometric neighbourhood base-change functor, independent of abelian coefficients, to compute set-valued closed pushforward stalks. This generic etale-site tool is not supplied by the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Supplies the explicit set-sheaf direct-image formula and unit sections of the scheme-induced adjunction. This generic etale-site tool is not supplied by the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Supplies the set-valued inverse-image stalk comparison with its precise unit-germ formula. This generic etale-site tool is not supplied by the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-openclosed-stalk-lowerstar",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-0c6c446fe",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-0c6c446fe (reviewer sub-agent of L); spot-checked: Read in full: the item, all six steps, and the statement of every cited node; there are no new nodes. Statement: matches Stacks Tag 04CA (etale-cohomology.tex, proposition-closed-immersion-pushforward), part (1) and its final left-inverse sentence, for sheaves of sets. No hypothesis is added or dropped and nothing is weakened. Step 1: G(empty) is a singleton because the empty family covers the empty open (open-immersion leaf). Step 2: uses only the initiality clause of lemma-openclosed-stalk-lowerstar, turned into a bijection of set-valued stalks through the Hom(G(W),A) limit (initial-functor-limit leaf plus the colimit universal property). This is the same argument as the blueprint's prop-openclosed-lowerstar-fully-faithful proof. Step 3: the triangle identity gives eps(i^*b)=b, so the counit stalk equals r composed with c, and stalk detection on Z finishes. Step 4: standard adjunction algebra. Step 5: neighbourhoods refined by V x_X U miss Z, so stalks over U are singletons. Step 6: c composed with r composed with the unit is the identity on germs; stalks over U are singletons on both sides; the closed-immersion affine clause gives the dichotomy of geometric points. Edge cases checked: X, Z or U empty, non-reduced Z, empty stalks on Z. Duplicates: lem-kun-04ca is the abelian version, prop-openclosed-lowerstar-fully-faithful is the counit clause only, and no set-valued 04CA node exists. Accepted tool_uses: lemma-openclosed-stalk-lowerstar and the two set-sheaf inverse-image nodes, all Lean-closed generic tools. No SGA source. No fixes made."
  }
 }

@@ -2,7 +2,7 @@
  "id": "lem-trf-finite-cech-augmentation-modules",
  "kind": "statement",
  "title": "Exact finite Čech augmentation for module sheaves",
- "statement": "Let $\\Lambda$ be a commutative ring, let $p:Z\\to Y$ be finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism], and let $F$ be a sheaf of $\\Lambda_Y$-modules on $Y_{\\mathrm{Et}}$ [def-weil-sheaf-of-modules-category, def-weil-pbc-etale-site]. For the fibre products $Z_q=Z^{\\times_Y(q+1)}$ [def-pc-fibre-product] and projections $p_q:Z_q\\to Y$, the augmented alternating Čech complex of $\\Lambda_Y$-module sheaves $0\\to F\\to (p_0)_*p_0^{-1}F\\to (p_1)_*p_1^{-1}F\\to\\cdots$ is exact in $\\operatorname{Mod}(Y_{\\mathrm{Et}},\\Lambda)$. The construction is natural in $F$ and in morphisms of finite surjective covers.",
+ "statement": "Let $\\Lambda$ be a commutative ring, let $p:Z\\to Y$ be finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism], and let $F$ be a sheaf of $\\Lambda_Y$-modules on $Y_{\\mathrm{Et}}$ [def-weil-sheaf-of-modules-category, def-weil-pbc-etale-site], where $\\Lambda_Y$ is the constant ring sheaf [def-weil-pbc-constant-sheaf], and inverse and direct image are those of [def-weil-pbc-inverse-image, def-weil-pbc-direct-image]. For the fibre products $Z_q=Z^{\\times_Y(q+1)}$ [def-pc-fibre-product] and projections $p_q:Z_q\\to Y$, the augmented alternating Čech complex of $\\Lambda_Y$-module sheaves $0\\to F\\to (p_0)_*p_0^{-1}F\\to (p_1)_*p_1^{-1}F\\to\\cdots$ is exact in $\\operatorname{Mod}(Y_{\\mathrm{Et}},\\Lambda)$. The construction is natural in $F$ and in morphisms of finite surjective covers.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09Z2, lemma-cohomological-descent-finite, geometric-stalk proof; the same finite-product contraction in the category of Λ-modules"
@@ -12,11 +12,122 @@
   "def-weil-surjective-morphism",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Put $C^{-1}=F$ and $C^q=p_{q*}p_q^{-1}F$ for $q\\ge0$. The constant-coefficient module inverse-image theorem gives the module structures and the adjunction units, compatible with abelian inverse image; module direct image commutes with forgetting coefficients. For a coordinate-deleting projection $r_i:Z_{q+1}\\to Z_q$, define $\\delta_i:C^q\\to C^{q+1}$ by $p_{q*}$ of the unit $p_q^{-1}F\\to r_{i*}r_i^{-1}p_q^{-1}F$, followed by the composition identification $r_i^{-1}p_q^{-1}F\\cong p_{q+1}^{-1}F$. Use the composition isomorphisms with their unit equations; on underlying sets these respect addition and every constant scalar because the inverse-image algebraic structures are transported by the same functor. Consequently these maps are module-linear. The augmentation $\\epsilon:F\\to C^0$ is the unit for $p$. Set $d^q=\\sum_{i=0}^{q+1}(-1)^i\\delta_i$. Deleting two coordinates in either order gives the same projection. The composition-unit and associativity equations therefore pair the terms of $d^{q+1}d^q$ with opposite signs, and identify the two terms of $d^0\\epsilon$; both composites are zero.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, construction of cofaces and augmentation; sites.tex Tag 03CB, composition and units; sites-modules.tex Tag 04JC, constant coefficients"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$, with $\\Omega$ algebraically closed, and set $E=\\{e:\\operatorname{Spec}\\Omega\\to Z\\mid pe=\\bar y\\}$. Every $p_q$ is finite: adjoining one factor is a base change of $p$, and then compose finite morphisms. The finite-stalk restriction formula makes $E$ finite; the finite geometric-point lifting theorem makes it nonempty, using exactly the assumed surjectivity of $p$. The fibre-product universal property identifies the lifts of $\\bar y$ to $Z_q$ with the tuples $E^{q+1}$. Apply the finite-stalk restriction formula to the underlying abelian sheaf of $p_q^{-1}F$, and then the inverse-image stalk isomorphism to each factor. With $M=F_{\\bar y}$ this gives additive isomorphisms $(C^q)_{\\bar y}\\cong\\operatorname{Map}(E^{q+1},M)$. We use products, so no choice of an ordering or conversion to direct sums is involved.",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-finite-geometric-point-lift",
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, finite nonempty set E and stalk display; Tags 03QP, 03Q1; morphisms.tex Tags 01WK and 01WL"
+   }
+  },
+  {
+   "text": "Under these isomorphisms the augmentation is $m\\mapsto((e)\\mapsto m)$, by the germ formula for the inverse-image unit. The $i$th coface sends $a$ to the function $(e_0,\\ldots,e_{q+1})\\mapsto a(e_0,\\ldots,\\widehat e_i,\\ldots,e_{q+1})$. Indeed, the finite-stalk isomorphism's component is restriction of a section germ to the pointed base-changed neighbourhood. Applying the unit for $r_i$ restricts that germ to the further base change, whose tuple of geometric lifts is carried by $r_i$ to the tuple with entry $i$ deleted. On the geometric fibre, inverse image of the coefficient sheaf is the constant sheaf of $M$, naturally in every $\\Omega$-morphism; hence that coefficient map is the identity on $M$. Apply this sets-valued comparison to the underlying sheaf and its addition, zero and negation; naturality in these structure maps makes it the same additive comparison as above. Thus the stalk differential is explicitly $(d^q a)(e_0,\\ldots,e_{q+1})=\\sum_{i=0}^{q+1}(-1)^i a(e_0,\\ldots,\\widehat e_i,\\ldots,e_{q+1})$.",
+   "uses": [
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, identification of the differentials with coordinate projections; Tag 03QP, restriction components; Tag 03Q1, unit germs; Tag 0A3H, lemma-sections-upstairs, final paragraph"
+   }
+  },
+  {
+   "text": "Choose $e_*\\in E$. Define $h^0:\\operatorname{Map}(E,M)\\to M$ by $h^0(a)=a(e_*)$, and for $q\\ge1$ define $(h^q a)(e_0,\\ldots,e_{q-1})=a(e_*,e_0,\\ldots,e_{q-1})$. Then $h^0\\epsilon=\\mathrm{id}_M$. For $q\\ge0$, evaluation on $(e_0,\\ldots,e_q)$ gives $(h^{q+1}d^q a)(e_0,\\ldots,e_q)=a(e_0,\\ldots,e_q)+\\sum_{i=0}^{q}(-1)^{i+1}a(e_*,e_0,\\ldots,\\widehat e_i,\\ldots,e_q)$. For $q\\ge1$ the second sum is $-d^{q-1}h^q a$; for $q=0$ it is $-\\epsilon h^0a$. Hence $h^{q+1}d^q+d^{q-1}h^q=\\mathrm{id}$, taking $d^{-1}=\\epsilon$. Every cycle $a$ is therefore $d^{q-1}h^q a$, and the augmentation is injective. This proves exactness of the augmented stalk complex in all degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, final paragraph: direct contraction of the finite nonempty-set complex, written explicitly"
+   }
+  },
+  {
+   "text": "Forget coefficients in the augmented complex. Geometric stalks are exact on abelian etale sheaves, so they commute with its kernels, cokernels and hence homology objects. Step 4 makes every stalk of every homology object zero, including the kernel at the augmentation. For any such abelian sheaf $H$, the map from the zero sheaf to $H$ is bijective on all underlying geometric stalks. The geometric-stalk isomorphism criterion for sheaves of sets therefore makes it an isomorphism, so $H=0$. Thus the underlying abelian complex is exact. The faithful exact module-to-abelian forgetful functor preserves kernels and cokernels; its faithfulness also detects the zero object, since the identity of an object with zero underlying sheaf is zero. Consequently the module homology objects vanish and the given augmented complex is exact in $\\operatorname{Mod}(Y_{\\mathrm{Et}},\\Lambda)$.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, use of Tag 03PU (theorem-exactness-stalks); sites-modules.tex Tag 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "For a morphism $\\alpha:F\\to G$, use $\\alpha$ in augmentation degree and $p_{q*}p_q^{-1}\\alpha$ in degree $q$. Naturality of each adjunction unit and of the inverse-image composition comparison shows that these maps commute with every $\\delta_i$ and with $\\epsilon$, hence with the finite alternating sums. Identities and composites agree because inverse and direct image are functors. This gives a natural augmented complex in $F$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, canonical augmentation and coface construction; naturality of units and composition comparisons"
+   }
+  },
+  {
+   "text": "Let $a:Z'\\to Z$ be a morphism over $Y$ between two finite surjective covers $p':Z'\\to Y$ and $p:Z\\to Y$. In degree $q$ it induces $a_q:(Z')_q\\to Z_q$ by applying $a$ to each coordinate, and $p_q a_q=p'_q$. Define $C_p^q(F)\\to C_{p'}^q(F)$ by $p_{q*}$ of the unit for $a_q$, then the composition comparison $a_q^{-1}p_q^{-1}F\\cong(p'_q)^{-1}F$; the augmentation component is $\\mathrm{id}_F$. For a coordinate deletion $r_i$ and its primed version, $a_qr'_i=r_i a_{q+1}$. The two composites of units are therefore the unit for this same composite morphism, by the composition-unit equation and its associativity. This proves each coface square, and the equation $p a=p'$ proves the augmentation square. The maps commute with $\\alpha:F\\to G$ by unit naturality. For two successive cover morphisms their degreewise maps compose to the one for the composite, by the same unit equation; the identity cover morphism gives the identity. Thus the construction is contravariantly natural in morphisms of covers over $Y$. The choices $e_*$ used to prove exactness impose no choices on these maps.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, coface construction by projections; sites.tex Tag 03CB composition-unit and associativity equations, applied to maps of finite covers"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-finite-geometric-point-lift",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z2, lemma-cohomological-descent-finite, geometric-stalk proof of the exact augmentation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,12 +186,55 @@
    "date": "2026-10-18",
    "verdict": "no match: the hits give generic nerve, ordinary sections, abstract derived functor, or object-resolution APIs; none states this module-valued finite-cover or strict resolved-diagram assertion.",
    "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact augmented Cech complex of module sheaves for a finite surjective morphism of schemes",
+   "results": "{\"t\": \"2026-10-17T19:39:19Z\", \"tool\": \"leanfinder\", \"query\": \"Exact augmented Cech complex of module sheaves for a finite surjective morphism of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\"], \"digest\": \"8a6da0d28d5f8cd8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern generic nerves, module categories, Mayer-Vietoris squares or coherent-topology covers, not this finite-surjective etale module-sheaf augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(descent|[Cc]ech)|([Cc]ech|[Čč]ech).*finite",
+   "results": "{\"t\": \"2026-10-17T19:39:27Z\", \"tool\": \"grep\", \"query\": \"finite.*(descent|[Cc]ech)|([Cc]ech|[Čč]ech).*finite\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern generic nerves, module categories, Mayer-Vietoris squares or coherent-topology covers, not this finite-surjective etale module-sheaf augmentation.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules exact augmented resolution finite surjective Cech nerve geometric stalks",
+   "results": "{\"t\": \"2026-10-17T19:39:28Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of modules exact augmented resolution finite surjective Cech nerve geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.augmentedCechNerve\", \"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.noConfusionType\", \"SheafOfModules\", \"SheafOfModules.mk\", \"CategoryTheory.Arrow.augmentedCechConerve\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.instAbelian\"], \"digest\": \"edf24712aa03f48f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern generic nerves, module categories, Mayer-Vietoris squares or coherent-topology covers, not this finite-surjective etale module-sheaf augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"exact\"",
+   "results": "{\"t\": \"2026-10-17T19:39:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern generic nerves, module categories, Mayer-Vietoris squares or coherent-topology covers, not this finite-surjective etale module-sheaf augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-17T19:39:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"cech\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern generic nerves, module categories, Mayer-Vietoris squares or coherent-topology covers, not this finite-surjective etale module-sheaf augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological descent finite surjective cover exact Cech sequence checked on geometric stalks",
+   "results": "{\"t\": \"2026-10-17T19:39:41Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomological descent finite surjective cover exact Cech sequence checked on geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"AlgebraicGeometry.Scheme.jointlySurjectiveTopology\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\"], \"digest\": \"131e5e8fa60a8f5e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern generic nerves, module categories, Mayer-Vietoris squares or coherent-topology covers, not this finite-surjective etale module-sheaf augmentation."
   }
  ],
  "mathlib_match": null,
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-base-cech-hypercohomology",
@@ -102,5 +256,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-cech-augmentation-modules",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 09Z2 finite-cover augmentation argument, using existing finite-stalk restriction and inverse-image germ nodes, explicit prepend-a-point contraction, coefficient forgetting, and unit-based naturality. No new nodes. Added the constant ring and direct/inverse-image definition dependencies without changing the assertion.",
+  "blueprint": "The inherited ancestry to lem-trf-local-term-locality serves the finite-surjective descent input in the nearby-cycle specialization branch. This item realizes the exact augmentation used in step 1 of lem-trf-finite-base-cech-hypercohomology, following Tag 09Z2; it does not change the contracting-correspondence unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-trf-finite-radicial-basechange",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-geometric-point-lift",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic finite-stalk, inverse-image, geometric-point or coefficient-forgetting tool used for the Tag 09Z2 finite-cover augmentation; no node of sk-i-curve-zero supplies this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-finite-geometric-point-lift",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-bf72c82f0",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-bf72c82f0 (reviewer sub-agent of L); spot-checked: I read all seven steps in full, against Stacks Tag 09Z2 (etale-cohomology.tex lemma-cohomological-descent-finite, statement and proof) and the statement of each of the 13 cited nodes. The delivery has no new nodes and the unit and chapter files are unchanged. Hypotheses: only finite and surjective, as in 09Z2. The module version follows from the abelian one through the faithful exact forgetful functor (step 5). Naturality in F and in maps of covers is added, and steps 6-7 prove it correctly. Step 1: the cofaces come from the units and the composition isomorphism. d∘d=0 follows from r_i r_j = r_{j-1} r_i and the composition-unit and associativity equations; d^0∘ε=0 because both terms equal the unit for p_1. The identification p_{q*}r_{i*}≅p_{(q+1)*} is a harmless gloss. Step 2: p_q is finite by base change and composition. E is finite by the finite-stalk formula and nonempty by the geometric-point lift, which uses surjectivity. All points use the same field Ω, and the lifts to Z_q are the tuples E^{q+1}. Step 3: the coordinate-deletion formula follows from the stalk-germ isomorphism (surjective onto germs of unit images) and composition-unit equation (1). Step 4: I recomputed the contraction h d + d h = id, including q=0 and h^0∘ε=id. Step 5: stalks are exact (03PU), the isomorphism criterion on geometric stalks applied to 0→H kills each homology sheaf, and forgetful faithfulness carries this back to modules. Edge cases checked: empty Y, zero F, p an isomorphism, radicial or nonreduced p (|E|=1), a two-point fibre (simplex complex), and non-surjective p (augmentation M→0 fails, so the hypothesis is needed). Duplicate search: the 09Z2 hits are the parent, the nearby-descent node and the sheaf-of-sets finite-descent equalizer lemmas; lem-trf-proper-hypercover-etale-descent is derived and torsion-only. No duplicate. The tool uses (generic étale inverse/direct image, stalk and forgetful nodes from sec-proper-base-change) are accepted; three of them are Mathlib leaves and need no declaration. No SGA source is used. Minor points, left unchanged: step 1's source place names the tangential Tag 04JC, and the item has no lean_audit field from its creation by Q46. No fixes written."
  }
 }

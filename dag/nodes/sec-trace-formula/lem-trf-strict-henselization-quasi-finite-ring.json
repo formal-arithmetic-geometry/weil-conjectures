@@ -12,11 +12,120 @@
   "def-weil-finite-integral-morphism",
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-finite-purely-inseparable-extension"
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-strict-henselization-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A_p^{\\mathrm{sh}}$, $H=B_q^{\\mathrm{sh}}$, $K=\\kappa(R)$ and $L=\\kappa(H)$. Apply strict-henselization functoriality to $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ and the specified compatible geometric points. Its clauses (1)--(3) give strictly henselian local rings $R,H$, embeddings $K\\subset L\\subset\\Omega$, and the canonical local map $h:R\\to H$ over $A\\to B$ inducing this inclusion. These are the pointed-neighbourhood colimits in the statement. Set $C=R\\otimes_A B$ and let $\\epsilon:C\\to\\Omega$ send $r\\otimes b$ to the product of their given images in $\\Omega$. The prime $\\mathfrak n=\\ker\\epsilon$ contracts to $\\mathfrak m_R$ in $R$ and to $q$ in $B$: the respective maps to $\\Omega$ factor through the injectively embedded residue fields. Set $D=C_{\\mathfrak n}$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring), and the functoriality paragraph following Tag 03PS; algebra.tex Tag 05WR, setup"
+   }
+  },
+  {
+   "text": "Apply the four-rings lemma with the original rings $A,B$ and their base changes $R,C$. The canonical map $B\\otimes_A R\\to C$ is the tensor symmetry isomorphism, hence surjective; $A\\to B$ is of finite type and quasi-finite at the contraction $q$ of $\\mathfrak n$. Consequently $R\\to C$ is of finite type and quasi-finite at $\\mathfrak n$, which lies over the maximal ideal $\\mathfrak m_R$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-four-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PN (lemma-four-rings), as used in the second paragraph of the proof of Tag 05WR"
+   }
+  },
+  {
+   "text": "Apply the henselian finite-type product decomposition to $R\\to C$, obtaining $C\\cong A_1\\times\\cdots\\times A_s\\times C_0$ with each $A_i$ local finite over $R$ and $C_0$ not quasi-finite over $R$ at any prime over $\\mathfrak m_R$. A prime of a finite product selects exactly one factor: modulo a prime the orthogonal idempotents have values $0$ or $1$, and exactly one is $1$. If $\\mathfrak n$ selected $C_0$, the four-rings lemma applied to the quotient $C\\to C_0$ would make that prime quasi-finite over $R$, a contradiction. Thus it selects $A_i$. The corresponding prime of $A_i$ is maximal: its quotient is a finite-dimensional domain over $K$, hence a field, since multiplication by a nonzero element is injective and therefore surjective on that finite-dimensional vector space. As $A_i$ is local, this prime is its maximal ideal and $D=C_{\\mathfrak n}\\cong A_i$. In particular $D$ is finite over $R$, is local with maximal ideal $\\mathfrak nD$, and $R\\to D$ is local by the contraction computed in Step 1. The finite-local henselian lemma makes $D$ henselian.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-quasi-finite-four-rings",
+    "lem-weil-pbc-finite-local-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GJ (lemma-mop-up) and Tag 04GH (lemma-finite-over-henselian), (2)--(3); reconstructing (3) from the existing decomposition nodes"
+   }
+  },
+  {
+   "text": "Let $E=D/\\mathfrak nD$. Because $R\\to D$ is local and module finite, any finite set of $R$-module generators of $D$ maps to a spanning set of the $K$-vector space $E$: $\\mathfrak m_RD$ acts trivially in this quotient. Thus $E/K$ is a finite field extension. The finite-extension lemma for a separably closed field gives that $E$ is separably closed. For pure inseparability apply the separable-first lemma to $E/K$. Its separable intermediate field is $K$: every separable element generates a finite separable extension of $K$, which is trivial by the definition of separably closed. Hence $E/K$ is purely inseparable, and it is finite as already shown. Since $D$ is henselian and its residue field $E$ is separably closed, $D$ is strictly henselian.",
+   "uses": [
+    "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-pc-separably-closed",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030K (lemma-separable-first); algebra.tex Tags 04GF (definition-henselian) and 05WR, finite purely inseparable residue-field argument"
+   }
+  },
+  {
+   "text": "The affine-chart ind-etale theorem applied to $\\operatorname{Spec}A$ and $\\operatorname{Spec}B$ gives that $A\\to R$ and $B\\to H$ are ind-etale. By base-change stability $B\\to C=R\\otimes_A B$ is ind-etale. The localization $C\\to D$ is ind-etale as well: $C_{\\mathfrak n}=\\varinjlim_{f\\notin\\mathfrak n}C_f$, with the system directed by taking products of denominators. A fraction $c/f$ is represented in $C_f$, and an equality of two fractions holds after further inverting one element outside $\\mathfrak n$, which verifies the colimit description. Each $C\\to C_f$ is etale of finite presentation by the principal-localization clause applied to the identity etale $C$-algebra. Thus it is ind-etale by definition. Composition stability now makes $B\\to D$ ind-etale. We have exhibited $D$ and $H$ as ind-etale algebras over the same ring $B$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-weakly-etale-stability/lem-weil-pbc-ind-etale-stability.proof.md",
+    "place": "Base-change and composition assertions; algebra.tex Tag 00U2 (lemma-etale), (1); Tag 05WR, localization as a filtered colimit of etale algebras"
+   }
+  },
+  {
+   "text": "The maps $h:R\\to H$ and $B\\to H$ give a ring map $g:C\\to H$ by $g(r\\otimes b)=h(r)b$. Its composite with the residue embedding $H\\to L\\hookrightarrow\\Omega$ is $\\epsilon$, so $g^{-1}(\\mathfrak m_H)=\\mathfrak n$. Every $f\\notin\\mathfrak n$ therefore maps to a unit of the local ring $H$, giving a unique $B$-algebra map $\\widetilde g:D=C_{\\mathfrak n}\\to H$ with $\\widetilde g(c/f)=g(c)g(f)^{-1}$. Its inverse image of $\\mathfrak m_H$ is exactly $\\mathfrak nD$, so it is local. Since $D$ and $H$ are ind-etale over $B$, the relative assertion of ind-etale stability makes this $B$-algebra map ind-etale, hence weakly etale. Apply the weakly-etale strict-local theorem to $\\widetilde g$: its source $D$ is strictly henselian by Step 4 and both rings are local, so $\\widetilde g$ is an isomorphism. Its composite with $R\\to D$ is precisely the original $h$, by its tensor formula.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "thm-weil-pbc-weak-etale-strict-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Z (theorem-olivier); the relative assertion of ind-etale stability realizes the uniqueness step in algebra.tex Tag 05WR"
+   }
+  },
+  {
+   "text": "Every element of $A\\setminus p$ is already a unit in $R$, and every $b\\in B\\setminus q$ has nonzero image in $\\Omega$, so its image in $C$ lies outside $\\mathfrak n$. The localization universal property therefore identifies $C_{\\mathfrak n}$ canonically with the localization of $R\\otimes_{A_p}B_q$ at the kernel of its induced map to $\\Omega$: in both rings exactly the elements outside that kernel are inverted. The isomorphism of Step 6 identifies this ring with $H$ via its structural maps. It carries the finite local map $R\\to D$ to $h:R\\to H$ and the finite purely inseparable extension $E/K$ to its residue extension. This proves every clause. In the parenthetical finite case, the finite-ring-map lemma supplies both finite type and quasi-finiteness at $q$, so the same proof applies.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-map-quasi-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WR (lemma-quasi-finite-strict-henselization), localization identification; Tag 00PM (lemma-quasi-finite) for finite ring maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separably-closed",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-finite-local-henselian",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "thm-weil-pbc-weak-etale-strict-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05WR (lemma-quasi-finite-strict-henselization), with its henselian-local construction expanded using Tags 00PN, 04GJ and 04GH; the final uniqueness is implemented by more-algebra.tex Tag 092Z using existing ind-etale tool nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +154,67 @@
    "results": "RingHom.QuasiFinite; Algebra.instFiniteResidueFieldOfQuasiFiniteAt; no strict henselization declaration.",
    "date": "2026-10-18",
    "verdict": "no match: only quasi-finite residue-field finiteness ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsHenselianLocalRing, Module.Finite",
+   "results": "{\"t\": \"2026-10-17T19:38:41Z\", \"tool\": \"loogle\", \"query\": \"IsHenselianLocalRing, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsHenselianLocalRing'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: valid Henselian name searches give root-lifting classes and no finite strict-henselization theorem; an unknown-identifier query is only a failed preliminary query, not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.?[Hh]ensel|[Hh]enselization|[Hh]enselisation",
+   "results": "{\"t\": \"2026-10-17T19:38:41Z\", \"tool\": \"grep\", \"query\": \"strict.?[Hh]ensel|[Hh]enselization|[Hh]enselisation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no strict-henselization construction was found; the broader Henselian search finds only Henselian.lean, inspected, with root-lifting classes and no comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type ring map quasi-finite at a prime, the map of strict henselizations is finite local with purely inseparable residue extension and is the localization of the base change",
+   "results": "{\"t\": \"2026-10-17T19:38:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type ring map quasi-finite at a prime, the map of strict henselizations is finite local with purely inseparable residue extension and is the localization of the base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"RingHom.EssFiniteType.residueFieldMap\", \"AlgHom.IsArithFrobAt.isArithFrobAt_localize\", \"Algebra.QuasiFiniteAt\", \"RingHom.finiteType_isLocal\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Algebra.QuasiFinite.instResidueField\", \"Algebra.QuasiFinite.finite_fiber\"], \"digest\": \"f009e091f9819808\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned quasi-finite base-change and residue-finiteness declarations concern ordinary localization and do not construct or compare strict henselizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-finite homomorphism induces a finite local map on strict henselizations with purely inseparable residue fields",
+   "results": "{\"t\": \"2026-10-17T19:38:42Z\", \"tool\": \"leansearch\", \"query\": \"A quasi-finite homomorphism induces a finite local map on strict henselizations with purely inseparable residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.QuasiFinite\", \"Algebra.QuasiFinite.recOn\", \"Algebra.QuasiFinite.casesOn\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Algebra.QuasiFinite.finite_fiber\", \"RingHom.QuasiFinite.toAlgebra\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.QuasiFinite.propertyIsLocal\"], \"digest\": \"8530dbca4cce9400\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations define quasi-finite maps or give finite residue fields; none states the strict-henselization comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Henselian|Henselization|Henselisation",
+   "results": "{\"t\": \"2026-10-17T19:38:55Z\", \"tool\": \"grep\", \"query\": \"Henselian|Henselization|Henselisation\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\"], \"digest\": \"0a8c1b4cf81f8079\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no strict-henselization construction was found; the broader Henselian search finds only Henselian.lean, inspected, with root-lifting classes and no comparison theorem.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hensel\"",
+   "results": "{\"t\": \"2026-10-17T19:38:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hensel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"hensels_lemma\", \"HenselianLocalRing\", \"Field.henselian\", \"HenselianRing\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"IsAdicComplete.henselianRing\", \"HenselianRing.jac\"], \"digest\": \"3f3343a90406f115\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: valid Henselian name searches give root-lifting classes and no finite strict-henselization theorem; an unknown-identifier query is only a failed preliminary query, not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselisation commutes with a quasi-finite local homomorphism after localizing the tensor product, and the resulting ring is module finite",
+   "results": "{\"t\": \"2026-10-17T19:39:00Z\", \"tool\": \"leanfinder\", \"query\": \"Strict henselisation commutes with a quasi-finite local homomorphism after localizing the tensor product, and the resulting ring is module finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt.baseChange\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.QuasiFinite.propertyIsLocal\", \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"Algebra.QuasiFinite.baseChange\", \"Algebra.QuasiFiniteAt\", \"Algebra.QuasiFinite.of_isLocalization\", \"instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl\"], \"digest\": \"6b0d28004bf1fe8d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned quasi-finite base-change and residue-finiteness declarations concern ordinary localization and do not construct or compare strict henselizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Module.Finite",
+   "results": "{\"t\": \"2026-10-17T19:39:41Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: valid Henselian name searches give root-lifting classes and no finite strict-henselization theorem; an unknown-identifier query is only a failed preliminary query, not evidence of absence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-base-strict-localization",
@@ -60,7 +226,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Supporting strict-local geometry input used in the finite-base strict-localization argument of the item; see the item proof step below.",
+   "place": "Supporting strict-local geometry in the finite-base strict-localization argument below the specialization proof of lem-trf-local-term-locality: construct the localization of the strict-henselization tensor product and prove its finite-local and purely inseparable residue properties (Stacks Tag 05WR).",
    "via": [
     "lem-trf-finite-base-strict-localization",
     "lem-trf-finite-cover-tube-comparison",
@@ -73,5 +239,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-strict-henselization-quasi-finite-ring",
+  "worker": "stage1",
+  "summary": "Kept the statement and split Tag 05WR into the explicit finite henselian factor construction, finite purely inseparable residue calculation, ind-etale comparison, and localization identification. Reused existing nodes throughout; no new nodes. Read the exact statements of all citations, checked edge cases and all comparison-map hypotheses, and ran logged Mathlib searches in two phrasings.",
+  "blueprint": "Supporting algebra under the finite-base strict-localization dependency of the specialization argument of lem-trf-local-term-locality (current blueprint proof, clauses (1) and (2)); inherited ancestry retained. Steps 1--4 construct the strict-local finite factor; steps 5--6 identify it with the pointed colimit; step 7 gives the structural-map-compatible tensor localization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "why": "The statement explicitly includes the finite-ring-map special case. This is a generic tool within the strict-local ring argument; the trace-formula unit has no separate statement of this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "why": "Finite-local factor of a finite-type algebra over a henselian base. This is a generic tool within the strict-local ring argument; the trace-formula unit has no separate statement of this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Base-change/composition permanence and relative cancellation for ind-etale maps. This is a generic tool within the strict-local ring argument; the trace-formula unit has no separate statement of this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-four-rings",
+    "why": "Quasi-finite permanence under the tensor base change and a factor quotient. This is a generic tool within the strict-local ring argument; the trace-formula unit has no separate statement of this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Ind-etaleness of both affine strict henselizations. This is a generic tool within the strict-local ring argument; the trace-formula unit has no separate statement of this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Canonical local map, residue-field embeddings and strict henselianity of the colimits. This is a generic tool within the strict-local ring argument; the trace-formula unit has no separate statement of this ring-theoretic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-5aaf0aba2",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-5aaf0aba2 (reviewer sub-agent of L); spot-checked: PASS with no fixes; review.md is written. I read the delivery and the cited sources in full: algebra.tex Tag 05WR (statement and proof), more-algebra.tex Tag 092Z (Olivier's theorem), the main-20261015 blueprint statement and proof of ind-etale stability, and the statement of every cited node, including the two blueprint_update texts. The statement is equivalent to 05WR. Stacks' separable closure is replaced by the induced separable closures inside Omega, which gives the same kernel because the embedding into Omega is injective. The explicit finite-type hypothesis is part of the quasi-finite definition, as in Stacks. Nothing is weakened. Step 1: the map epsilon is well defined because functoriality (1) gives the kappa(p)-algebra identification and the geometric points are compatible; n contracts to m_R and to q. Step 2: the 00PN four-rings hypotheses hold because the tensor map is an isomorphism. Step 3: 04GJ applies; the four-rings lemma applied to the quotient onto the residual factor C_0 rules that factor out; the chosen prime is maximal by the finite-domain argument; 04GH(2) then makes D henselian. Step 4: E is separably closed by the finite-extension lemma, and purely inseparable over K by 030K with separable part equal to K, including characteristic 0. Step 5: the affine-chart lemma applies with the identity chart; base change, localization as a colimit of the C_f, and composition are all valid. Step 6: g is well defined by functoriality (3); g inverse of m_H equals n; the map D to H is a local B-algebra map; the relative ind-etale clause makes it weakly etale; the 092Z node's hypotheses hold exactly, so it is an isomorphism compatible with h. This valid agent route replaces the 08HV-plus-uniqueness ending of 05WR and is declared by=agent. Step 7: the localization identification is elementary, and the finite case follows from 00PM. Edge cases checked: B=A_f, a purely inseparable field extension over an imperfect field, a split etale double cover, and nonreduced fibres or several local factors. All cited units lie on the route of sk-i-curve-zero, so the six declared tool_uses are harmless; I accept them. There is no cycle, no new node, and no duplicate (05WR and strict-henselization search over dag/nodes)."
  }
 }
