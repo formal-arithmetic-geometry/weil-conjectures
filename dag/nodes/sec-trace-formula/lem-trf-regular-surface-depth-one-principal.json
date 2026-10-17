@@ -12,9 +12,75 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-depth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because a regular system of parameters of A has length 2 and is a regular sequence, while the depth of every nonzero finite module is at most the dimension of its support, depth(A)=2. Hence I cannot be zero: if I=0 then A/I=A would have depth 2, contrary to the depth-one hypothesis.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, proof of part (2), opening reduction I != 0; depth definitions and the regular-local parameter sequence are supplied by the cited nodes."
+   }
+  },
+  {
+   "text": "Since A is Noetherian, choose a finite generating list f_1,...,f_r of the nonzero ideal I. The regular-local UFD statement [lem-trf-regular-local-ufd-boundary-factorization] gives a nonzero common gcd f and elements g_i with f_i=f g_i, where the g_i have no common nonunit divisor. Thus I=fJ for J=(g_1,...,g_r).",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, proof of part (2), paragraph beginning 'Assume I not = 0. Write I=(f_1,...,f_r)' and the gcd factorization."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coprime-generators-mprimary-or-unit] to the residual generators. If J=A, then I=fJ=(f), and f is nonzero and lies in n, giving the conclusion.",
+   "uses": [
+    "lem-trf-coprime-generators-mprimary-or-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, proof of part (2), the sentence 'Then either (g_1,...,g_r)=A which implies I=(f)'."
+   }
+  },
+  {
+   "text": "It remains to treat the case sqrt(J)=n. The class z of f in M=A/I is annihilated by every g_i, hence J is contained in Ann_A(z). If z were nonzero, the cyclic submodule P=Az (isomorphic to A/Ann_A(z)) would be finite and its support would have the unique minimal prime n, because the radical of Ann_A(z) is n. The minimal-support associated-prime theorem gives n in Ass_A(P), and the associated-prime inclusion for a submodule P -> M gives n in Ass_A(M). But depth(M)=1 means that n is not associated: otherwise every element of n would be a zerodivisor on M, so no nonempty M-regular sequence in n could exist. Therefore z=0, so f belongs to I; since I=fJ, this yields I=(f).",
+   "uses": [
+    "lem-trf-coprime-generators-mprimary-or-unit",
+    "lem-weil-pbc-minimal-support-prime-associated",
+    "lem-weil-pbc-associated-primes-exact-sequence",
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, proof of part (2), final paragraph: depth one excludes the maximal associated prime, so the class of f annihilated by the residual generators is zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-depth",
+  "def-weil-regular-scheme",
+  "lem-trf-coprime-generators-mprimary-or-unit",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-associated-primes-exact-sequence",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-minimal-support-prime-associated",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, part (2), with the gcd/height-one paragraph and the associated-prime depth argument written against the cited DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-formal-jacobian-quadratic-criterion",
@@ -80,5 +146,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-regular-surface-depth-one-principal",
+  "worker": "stage1",
+  "summary": "Read Curves Tag 0C48 and its full proof. Added one statement-only auxiliary node for the coprime residual-generator dichotomy used in the dimension-two UFD argument; the rest of the proof cites the existing regular-local UFD, regular-parameter/depth, minimal-support associated-prime, exact-sequence associated-prime, and zero-divisor nodes. The item statement is unchanged.",
+  "blueprint": "The four steps realize Tag 0C48 part (2): exclude I=0 by the depth of a regular surface, extract a common gcd, apply the coprime-generator m-primary dichotomy, and use the maximal-associated-prime obstruction from depth one to force the gcd into I.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-a88c41893",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-a88c41893 (reviewer sub-agent of L); spot-checked: I read Stacks curves.tex Tag 0C48 (lemma-reduced-quotient-regular-ring-dim-2) part (2) and its full proof. The item states it exactly: regular local, Krull dimension 2, I in n, depth(A/I)=1, giving I=(f) with f nonzero and in n. Nothing is weakened. Step 1: n has 2 generators, which form a regular sequence (lem-weil-pbc-regular-local-generators-regular-sequence), so depth A>=2 and I=0 is ruled out. Step 2: the UFD node gives the gcd extraction I=fJ in a few lines. Step 3: the case J=A gives I=(f). Step 4: J kills the class z of f. If z were nonzero, Supp(Az)={n}, so n is in Ass(Az) by the minimal-support Mathlib leaf and in Ass(A/I) by the exact-sequence node. Then every element of n is a zerodivisor on A/I, which contradicts depth 1. So f is in I. All hypotheses were checked where used. Item tested on F[[u,v]] with I=0, n, (u^2,uv), (u), (uv), (u^2-v^3). New node lem-trf-coprime-generators-mprimary-or-unit (J=A or sqrt J=n for generators with no common nonunit divisor) is true: a height-one prime over J would be principal (lem-trf-ufd-height-one) and its generator would divide every g_i. It is vacuous in the edge cases where the list is empty or all zero, and was tested on (u,v), (u^2,v^3) and (u,uv). It is the source's intermediate sentence, strictly smaller than the item, statement-only, with blueprint from/via correct. An rg search of dag/nodes found no duplicate. The route is fine: sk-thm-p1 is in the transitive uses of sk-i-curve-zero. No tool_uses, no SGA. The parent's use of the item matches its hypotheses. The recorded Mathlib searches are summaries I could not check against the search log. FIX: I removed lem-trf-regular-local-ufd-boundary-factorization from the item's stmt_deps because the statement does not use it; it stays in step 2 and proof_deps. The whole corrected file is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

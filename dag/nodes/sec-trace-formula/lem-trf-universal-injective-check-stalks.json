@@ -12,9 +12,59 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an R-module N and a prime q of A with p=q∩R, and put S=A∖q. By [def-weil-pbc-module-localization] every element of S acts bijectively on M_q, and every element of R∖p maps into S; hence every element of R∖p acts bijectively on M_q, so M_q is an R_p-module, and likewise M'_q. (a) The localization-tensor comparison [lem-weil-pbc-localization-tensor-over-base], applied to the A-module M, the multiplicative subset S and the R-module N, gives the A-isomorphism (M⊗_R N)_q ≅ M_q⊗_R N, (m⊗n)/s ↦ (m/s)⊗n, and the same for M'. On generators (u(m)⊗n)/s ↦ (u(m)/s)⊗n = u_q(m/s)⊗n, so under these isomorphisms the localization (u⊗_R id_N)_q is u_q⊗_R id_N. (b) Apply [lem-weil-pbc-localization-tensor-product] to R, the multiplicative subset R∖p, the localization R→R_p, the R-modules M_q and N, the identity M_q→M_q (a localization of M_q at R∖p, since R∖p acts bijectively on M_q, conditions (b),(c) being trivial for the identity) and the localization map N→N_p, n↦n/1. It says that λ:M_q⊗_R N→M_q⊗_{R_p}N_p, x⊗n↦x⊗(n/1), is a localization of M_q⊗_R N at R∖p. Since each s∈R∖p acts bijectively on M_q⊗_R N (s acts as (s·)⊗id_N, with inverse (s^{-1}·)⊗id_N), λ is injective by condition (c) and surjective by condition (b) (s^{-1}λ(z)=λ(s^{-1}z)); so λ is an isomorphism, and likewise for M'_q. On pure tensors λ'∘(u_q⊗_R id_N)=(u_q⊗_{R_p}id_{N_p})∘λ. Combining (a) and (b): under these isomorphisms (u⊗_R id_N)_q is u_q⊗_{R_p}id_{N_p}. If N is already an R_p-module, every element of R∖p acts bijectively on N, so the localization map N→N_p is bijective by [def-weil-pbc-module-localization] (n/1=0 iff tn=0 for some t∈R∖p, and n/s=(s^{-1}n)/1); hence N_p=N.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-tensor-product",
+    "def-weil-pbc-module-localization",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 05CL proof, displayed localization-tensor identities"
+   }
+  },
+  {
+   "text": "Assume every u_q is universally injective over R_p. For an arbitrary R-module N let K be the kernel of u⊗_R id_N, an A-submodule of M⊗_R N since u⊗_R id_N is A-linear. The sequence 0→K→M⊗_R N→M'⊗_R N of A-modules is exact at K and at M⊗_R N; by [lem-weil-pbc-localization-module-exact], applied at both places (the sequences 0→K→M⊗_R N and K→M⊗_R N→M'⊗_R N), its localization at A∖m is exact for every maximal ideal m of A. Step 1 with q=m and p=m∩R identifies the localized last map with u_m⊗_{R_p}id_{N_p}, which is injective by the hypothesis applied to the R_p-module N_p. So K_m injects into the kernel of an injective map, and K_m=0 for every maximal m. The zero map K→0 is therefore bijective after every maximal localization, so [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] gives that K→0 is bijective, i.e. K=0. Thus u⊗_R id_N is injective for every N, so u is universally injective over R.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 05CL proof, converse from localized kernels and Tag 00HN"
+   }
+  },
+  {
+   "text": "Conversely assume u is universally injective over R. Fix q∈Spec(A), put p=q∩R, and let L be any R_p-module, regarded as an R-module by restriction of scalars. The A-linear map u⊗_R id_L is injective, i.e. 0→M⊗_R L→M'⊗_R L is exact. Its localization at A∖q is exact by [lem-weil-pbc-localization-module-exact], so (u⊗_R id_L)_q is injective. Step 1 with N=L, together with L_p=L (Step 1, last sentence), identifies this localized map with u_q⊗_{R_p}id_L. Thus u_q⊗_{R_p}id_L is injective for every R_p-module L, which is universal injectivity of u_q over R_p.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 05CL proof, implication (1)⇒(4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05CL (lemma-universally-injective-check-stalks), proof: localization-tensor identities, exact localization, and local kernel criterion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-free-subtraction-flatness",
@@ -58,7 +108,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Algebra Tag 05CL, lemma-universally-injective-check-stalks.",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL.",
    "via": [
     "lem-trf-free-subtraction-flatness",
     "lem-trf-flattening-module-by-admissible-blowup",
@@ -74,5 +124,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-universal-injective-check-stalks",
+  "worker": "stage1",
+  "summary": "Kept the imported prime-localization statement (Stacks 05CL, (1)⇔(4)). The proof follows Tag 05CL: tensor maps localize to the maps on M_q, M'_q (localization-tensor comparison), the R- versus R_p-tensor identification is the localization-tensor-product leaf applied to the identity of M_q, and exactness of module localization plus the maximal-localization criterion detects the kernel. Maintainer review: the delivered new localization-exactness leaf duplicated lem-weil-pbc-localization-module-exact (same statement, same Mathlib declaration LocalizedModule.map_exact) and was dropped; Step 1 now cites lem-weil-pbc-localization-tensor-product for M_q⊗_R N≅M_q⊗_{R_p}N_p.",
+  "blueprint": "Realizes the clause of lem-trf-local-term-locality's proof chain (via lem-trf-free-subtraction-flatness, step 2) where universal injectivity of the localized maps is globalized by Algebra 05CL; Steps 1-3 are the displayed identities and the implications (5)⇒(1), (1)⇒(4) of the 05CL proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-9f17fa5e2",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-9f17fa5e2 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 05CL (algebra.tex line 20106, the statement and the whole proof). The item is (1)<=>(4) with the source's hypotheses unchanged. I tested it on A=0, on multiplication by 2 on Z, and on Z->Q. Step 2 (localize the kernel at maximal ideals, then apply bijective_of_localized_maximal to K->0) and Step 3 (an R_p-module L with L_p=L) are correct, and every cited node is a definition or a Mathlib leaf, so there is no route problem and no tool_uses are needed. Three faults, all repaired. (1) The new node lem-trf-localization-exact-for-modules duplicates the existing Mathlib leaf lem-weil-pbc-localization-module-exact: same statement, same match LocalizedModule.map_exact at Exact.lean line 37, which I read. The report's not-duplicates list missed it (C5). I dropped the new node and Steps 2 and 3 now cite the existing leaf; Step 2 also states that exactness is needed at both positions. (2) Step 1's identification of M_q tensor_R N with M_q tensor_{R_p} N_p was garbled fraction formulas with no node behind them (C1/E5). It now cites lem-weil-pbc-localization-tensor-product, applied to the identity of M_q and to N->N_p. The resulting map is bijective because R minus p already acts bijectively on M_q. The step also writes out compatibility with u from the explicit formula of lem-weil-pbc-localization-tensor-over-base, and derives L_p=L from def-weil-pbc-module-localization. (3) The item's blueprint.from had via [] and a Stacks tag as its place. Via is now [lem-trf-free-subtraction-flatness, followed by the parent's via], with the parent's 05CL globalization place; split_report is updated to match. Left unchanged: the creator's plain-text TeX in the statement and the spurious flat-ring-map stmt_dep. No SGA is cited and no target is touched.; 1 file(s) fixed by the reviewer"
  }
 }
