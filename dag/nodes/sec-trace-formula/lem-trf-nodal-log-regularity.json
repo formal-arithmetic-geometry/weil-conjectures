@@ -17,7 +17,8 @@
   "def-weil-geometric-fibre",
   "def-sbc-smooth-morphisms",
   "def-weil-closed-immersion",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-trf-nodal-geometric-fibres"
  ],
  "proof": [
   {
@@ -172,5 +173,23 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-14fc8a8be (reviewer sub-agent of L); spot-checked: I read all of it: the item, the 3 new nodes, the cited definitions (def-trf-log-regular-pair, def-trf-fs-log-blowup, def-trf-nodal-geometric-fibres), ILO VI 1.1-1.9 (printed pp. 68-71) including the full proof of Prop. 1.9, and Stacks 0CBY (curves.tex:5077). The item statement is unchanged from main, so nothing is weakened. Step checks: (1) every hypothesis of the etale-chart child is in the item, and projectivity is not used. (2) P and P+N are fs, the group maps are injective with cokernel Z, the comparison maps are f and the etale map (f,z) to A^1_Y, and the triviality locus is X minus B, by the local-homomorphism argument. (3) R=Z+P is still a chart; Q to O_U is a monoid map because uv=h=eps*alpha(a); the comparison is the etale uv=h map. This is ILO's cartesian square, with both branch generators, which correctly reads ILO's 'image inverse' as the divisorial structure. (4) All hypotheses of the preservation node hold, and the triviality locus was checked in both directions. (5) Gluing and density follow because etale maps are open; the elementary mark is accepted. New nodes: etale-chart is true (0CBY; h is invertible off T after shrinking V; dz generates the relative differentials along D, so z is etale). The nodal monoid lemma I proved by hand: Q embeds in Zu+Ze+P^gp as {q in P, q-max(0,-m)a in P}, so it is fs; the cokernel is Z; the monoid ring of the pushout is A[u,v]/(uv-eps*alpha(a)); the cases a=0 and uv=t^n also check. log-smooth-log-regular is Kato 1988 Thm 3.5 plus ILO VI 1.8 and VI 1.4. None is a duplicate (greps for 0CBY, log smooth, nodal, chart, snc and log-regular nodes), none restates a clause of the item, and there is no SGA, no off-unit statement citation and no tool_uses. Searches and blueprint fields are complete. FIX: lem-trf-log-smooth-log-regular now requires the charts P and Q to be fine saturated monoids, because Kato's criterion needs fine charts. Every chart the item uses is fs, so the item's proof is unchanged. The corrected file is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.NodalLogRegularity",
+  "declaration": "AlgebraicGeometry.nodal_log_regular",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/NodalLogRegularity.lean",
+  "statement": "theorem nodal_log_regular {X Y : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y] (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (hgeom : HasNodalGeometricFibres f) (T : Set Y) (hT : IsClosed T) (U : Y.Opens) (hU : (U : Set Y) = Tᶜ) (hUdense : DenseRange U.ι) (hYlog : IsDivisorialFineSaturatedLogRegularPair Y U U.ι hUdense) (hfsmooth : ∀ x : X, f x ∉ T → x ∈ f.smoothLocus) (D : Scheme.{u}) (i : D ⟶ X) (hD : IsEffectiveCartierCenter i) (hDsmooth : ∀ d : D, i d ∈ f.smoothLocus) [Etale (i ≫ f)] : IsNowhereDense (Set.range i ∪ f ⁻¹' T) ∧ ∃ (V : X.Opens) (hV : (V : Set X) = (Set.range i ∪ f ⁻¹' T)ᶜ) (hVdense : DenseRange V.ι), IsDivisorialFineSaturatedLogRegularPair X V V.ι hVdense",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a6ad3dc3b",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, route-pivot compliance, report sections, and per-file compilation all checked; no substantive or mechanical errors found."
  }
 }

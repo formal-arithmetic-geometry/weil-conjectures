@@ -202,5 +202,23 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-c008a74ef (reviewer sub-agent of L); spot-checked: Read the mandated DAG, unit, item, cited nodes, Stacks Tags 0CNI/01YX/01SD/01SC, blueprint route, and searches. The finite-product induction, affine transition proof, directed inverse-limit application, and universal property are correct, with edge cases checked. No duplicate, citation, route, long-step, or mathematical faults found. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineInfiniteProductExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineInfiniteProductExistence.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_infinite_product",
+  "statement": "theorem exists_affine_infinite_product (S : Scheme.{u}) (J : Type u) (T : J → Scheme.{u}) (g : ∀ j : J, T j ⟶ S) (h_affine : ∀ j : J, IsAffineHom (g j)) : ∃ c : Cone (ProductsFromFiniteCofiltered.liftToFinsetObj (Discrete.functor (fun j : J => Over.mk (g j)))), Nonempty (IsLimit c) ∧ (∀ F : (Finset (Discrete J))ᵒᵖ, IsAffineHom (c.π.app F).left) ∧ (∀ (Y : Over S) (hY : ∀ j : J, Y ⟶ Over.mk (g j)), ∃! q : Y ⟶ c.pt, (∀ j : J, q ≫ (c.π.app (op ({Discrete.mk j} : Finset (Discrete J))) ≫ Pi.π (fun x : ({Discrete.mk j} : Finset (Discrete J)) => Over.mk (g x.1.as)) ⟨Discrete.mk j, by simp⟩) = hY j))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3a30d689d",
+  "group": "N6",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable files match the commit; statements, dependencies, source, universes, edge cases, docstrings, and route-pivot checks pass. Per-file scompile.py reproduction exited 0 without diagnostics. No fixes required."
  }
 }
