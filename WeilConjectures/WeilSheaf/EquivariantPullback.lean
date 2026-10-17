@@ -5,40 +5,35 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.ConstantExtension
-public import WeilConjectures.WeilSheaf.FrobeniusTwist
-public import WeilConjectures.WeilSheaf.UpperStarExact
+public import WeilConjectures.WeilSheaf.CurvePullback
 public import WeilConjectures.WeilSheaf.StalkComparison
-public import WeilConjectures.WeilSheaf.EquivariantPullbackExchange
 
 /-!
-# Pulling Weil sheaves back to a scheme over a finite extension
+# Stalks of Weil sheaves pulled back to a scheme over a finite extension
 
-Let `k₀ ⊆ L` be finite fields, `[L : k₀] = N`, let `X₀` be a `k₀`-scheme with geometric fiber `X̄`
-and geometric Galois Frobenius `Fr`, and let `Y` be an `L`-scheme with geometric fiber `Ȳ` and
-geometric Galois Frobenius `Fr_Y`. A morphism `j : Ȳ ⟶ X̄` with `j ≫ Fr^N = Fr_Y ≫ j` (for
-instance the base change of an `L`-scheme `Y ⊆ X₀ ⊗ L`, such as a curve defined over `L`) carries
-a Weil sheaf `F` on `X₀`, through the iterated Weil structure `φ_N : (Fr^N)^* F̄ ≅ F̄`, to a Weil
-sheaf on `Y` over `L` with underlying sheaf `j^* F̄`
-(`AlgebraicGeometry.WeilSheaf.curvePullback`). The same applies to a subsheaf `P ⊆ F̄` which is
-only defined over `L`, i.e. fixed by the `N`-th iterate of the Frobenius twist
-(`AlgebraicGeometry.WeilSheaf.curvePullbackSub`).
+Let `j : Ȳ ⟶ X̄` intertwine `Fr^N` and `Fr_Y`, with `N = [L : k₀]`, and let
+`AlgebraicGeometry.WeilSheaf.curvePullback j hj` be the induced pullback of Weil sheaves on `X`
+over `k₀` to Weil sheaves on `Y` over `L`. This file compares stalks.
 
-This is how the blueprint restricts a Weil sheaf and its geometric constituents to a curve which is
-only defined over a finite constant extension (`thm-zl-real-mixed-by-curves`,
-`lem-zl-curve-testing-irreducibility`). The stalks of the pullback at a geometric point `s'` of
-`Ȳ` are those of `F` at the corresponding geometric point `s` of `X̄`, with the Frobenius relative
-to `𝔽_{q^{N n}}` (`AlgebraicGeometry.WeilSheaf.exists_equiv_stalkAt_curvePullback`).
+## Main statements
 
-## Main definitions
-
-- `AlgebraicGeometry.ProEtaleWeilSheaf.equivariantPullback`: the pullback along `j` of sheaves
-  with a structure `g^* A ≅ A` for an automorphism `g` with `j ≫ g = Fr_Y ≫ j`.
-- `AlgebraicGeometry.WeilSheaf.curvePullback`: the pullback `WeilSheaf k₀ l X₀ ⥤ WeilSheaf L l Y`.
-- `AlgebraicGeometry.WeilSheaf.curvePullbackSub`: the pullback of a subsheaf defined over `L`.
+- `AlgebraicGeometry.WeilSheaf.exists_equiv_stalkAt_curvePullback`: the stalk of the pullback at a
+  geometric point `s'` of `Ȳ`, with its Frobenius relative to `L_n`, is the stalk of `F` at the
+  corresponding geometric point of `X̄` with its Frobenius relative to `𝔽_{q^{N n}}`.
+- `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_curvePullback_of_iSup_eq_top`: purity of
+  the pullback from purity of the pullbacks of spanning subsheaves defined over `L`.
+- `AlgebraicGeometry.WeilSheaf.IsReal.curvePullback`: the pullback of an `ι`-real sheaf is
+  `ι`-real.
 -/
 
 @[expose] public section
+
+-- The Weil sheaf stalks and the `ℓ`-adic pullbacks used here are elaborated without these
+-- instances; elaborating the statements through them would produce terms which the kernel
+-- compares slowly with the imported ones.
+attribute [-instance] ModuleCat.instIsRightAdjointForgetLinearMapIdCarrier
+  ModuleCat.isGrothendieckAbelian_of_commRing
+  CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape
 
 universe u
 
@@ -60,314 +55,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] [Fact (ringChar k₀ ≠ l)]
   (hj : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
     (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
 
-/-- The pullback of Weil sheaves along `j : Ȳ ⟶ X̄` with `j ≫ Fr^N = Fr_Y ≫ j`: the pullback
-`j^* F̄` with the Weil structure induced by the iterated Weil structure `φ_N` of `F`. -/
-noncomputable def curvePullback : WeilSheaf k₀ l X ⥤ WeilSheaf L l Y where
-  obj F := ⟨(ProEtaleWeilSheaf.equivariantPullback _ j hj).obj (F.powIsoAlgebra N),
-    F.isAdicConstructibleSheaf_carrier.upperStar j⟩
-  map φ := ObjectProperty.homMk ((ProEtaleWeilSheaf.equivariantPullback _ j hj).map
-    (ObjectProperty.homMk ⟨φ.hom.hom.f, frobeniusPowIso_hom_naturality φ N⟩))
-  map_id _ := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
-    (Algebra.Hom.ext ((j)^*ᵃ[l].map_id _)))
-  map_comp _ _ := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
-    (Algebra.Hom.ext ((j)^*ᵃ[l].map_comp _ _)))
-
-
-lemma curvePullback_obj (F : WeilSheaf k₀ l X) :
-    (curvePullback j hj).obj F = ⟨(ProEtaleWeilSheaf.equivariantPullback _ j hj).obj
-      (F.powIsoAlgebra N), F.isAdicConstructibleSheaf_carrier.upperStar j⟩ :=
-  rfl
-@[simp]
-lemma curvePullback_obj_obj_carrier (F : WeilSheaf k₀ l X) :
-    ((curvePullback j hj).obj F).obj.carrier = (j)^*ᵃ[l].obj F.obj.carrier :=
-  rfl
-
-/-- The Weil structure of the curve pullback is transported from the iterated Weil structure. -/
-lemma curvePullback_obj_obj_obj_str (F : WeilSheaf k₀ l X) :
-    ((curvePullback j hj).obj F).obj.obj.str =
-      (adicUpperStarCompFrobeniusIsoOfComm _ j hj).hom.app (F.powIsoAlgebra N).carrier ≫
-        (j)^*ᵃ[l].map (F.powIsoAlgebra N).obj.str :=
-  IsoAlgebra.mapOfNatIso_obj_obj_str _ _
-
-
-/-- The iterated Weil structure, on the underlying sheaves, in terms of the algebra
-`AlgebraicGeometry.WeilSheaf.powIsoAlgebra`. -/
-lemma frobeniusPowStr_eq_powIsoAlgebra (F : WeilSheaf k₀ l X) (M : ℕ) :
-    F.frobeniusPowStr M = (ProEtale.upperStarIsoLowerStarInv _ _).hom.app
-      (F.powIsoAlgebra M).carrier.X ≫
-        (ProEtale.AdicSheaf.forget _).map (F.powIsoAlgebra M).obj.str :=
-  rfl
-
-private lemma upperStarIsoLowerStarInv_hom_inv_id_app_curvePullback (F : WeilSheaf k₀ l X) :
-    (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).hom.app
-        ((curvePullback j hj).obj F).obj.carrier.X ≫
-    (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).inv.app
-        ((j)^*ᵃ[l].obj (F.powIsoAlgebra N).carrier).X = 𝟙 _ :=
-  Iso.hom_inv_id_app _ _
-
-/-- The Weil structure of the curve pullback, on the underlying sheaves: the pullback along `j`
-of the iterated Weil structure `φ_N`, through
-`Fr_Y^* j^* ≅ (Fr_Y ≫ j)^* = (j ≫ Fr^N)^* ≅ j^* (Fr^N)^*`. -/
-lemma frobeniusStr_curvePullback (F : WeilSheaf k₀ l X) :
-    ((curvePullback j hj).obj F).frobeniusStr =
-      (ProEtale.upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom
-          j).inv.app (F.powIsoAlgebra N).carrier.X ≫
-        (ProEtale.upperStarCongr _ hj.symm).hom.app (F.powIsoAlgebra N).carrier.X ≫
-        (ProEtale.upperStarComp _ j
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom).hom.app
-          (F.powIsoAlgebra N).carrier.X ≫
-        (j)^*[WeilCoefficients.{u} l].map
-          ((ProEtale.upperStarIsoLowerStarInv _ _).hom.app (F.powIsoAlgebra N).carrier.X ≫
-            (ProEtale.AdicSheaf.forget _).map (F.powIsoAlgebra N).obj.str) := by
-  rw [frobeniusStr, IsoAlgebra.str_hom, curvePullback_obj_obj_obj_str, Functor.map_comp,
-    Mod.forget_map, Mod.forget_map, adicUpperStar_map_hom,
-    adicUpperStarCompFrobeniusIsoOfComm_hom_app_hom, Functor.map_comp,
-    Mod.forget_map, Category.assoc]
-  rw [← Category.assoc, upperStarIsoLowerStarInv_hom_inv_id_app_curvePullback, Category.id_comp]
-  simp only [Category.assoc]
-
-/-- The identity `j^* F̄ ⟶ j^* F̄` of the underlying sheaves of the curve pullback is compatible
-with the Weil structure of the pullback and the iterated Weil structure `φ_N` of `F`. -/
-lemma curvePullback_frobeniusStr_compatible (F : WeilSheaf k₀ l X) :
-    (ProEtale.upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom
-        j).hom.app (F.powIsoAlgebra N).carrier.X ≫
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom)^*[_].map
-        (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
-          ((curvePullback j hj).obj F).obj.carrier.X) ≫
-      ((curvePullback j hj).obj F).frobeniusStr =
-    (ProEtale.upperStarCongr _ hj.symm).hom.app (F.powIsoAlgebra N).carrier.X ≫
-      (ProEtale.upperStarComp _ j
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom).hom.app
-          (F.powIsoAlgebra N).carrier.X ≫
-      (j)^*[_].map (F.frobeniusPowStr N) ≫
-      (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
-          ((curvePullback j hj).obj F).obj.carrier.X) := by
-  rw [frobeniusStr_curvePullback, frobeniusPowStr_eq_powIsoAlgebra, CategoryTheory.Functor.map_id]
-  erw [Category.id_comp, Category.comp_id]
-  rw [Iso.hom_inv_id_app_assoc]
-
-
-/-- `j` intertwines the powers `Fr_Yᵐ` and `Fr^{N m}` of the geometric Galois Frobenii. -/
-lemma comp_geometricGaloisFrobenius_pow_mul_eq
-    (hj' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j) (m : ℕ) :
-    j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom =
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom ≫ j := by
-  induction m with
-  | zero =>
-    rw [Nat.mul_zero, pow_zero, pow_zero]
-    exact (Category.comp_id _).trans (Category.id_comp _).symm
-  | succ m ih =>
-    rw [Nat.mul_succ, ← Aut.pow_hom_comp_pow_hom, reassoc_of% hj', ih,
-      ← Aut.pow_hom_comp_pow_hom _ m 1, pow_one, Category.assoc]
-
-/-- The comparison of stalks `Γ(t^* F̄) ⟶ Γ(t'^* j^* F̄)` along a square `Θ ≫ t = t' ≫ j`
-intertwines the transports along the iterated Weil structure `φ_N` of `F` and along the Weil
-structure of its curve pullback. -/
-lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback_one (F : WeilSheaf k₀ l X)
-    {Θ : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure k₀))}
-    {t₁ t₂ : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {t₁' t₂' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
-    {τ : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))}
-    {τ' : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure L))}
-    (h₁ : Θ ≫ t₁ = t₁' ≫ j) (h₂ : Θ ≫ t₂ = t₂' ≫ j)
-    (hX : τ ≫ t₁ = t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom)
-    (hY : τ' ≫ t₁' = t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ 1).hom)
-    (hΘ : τ' ≫ Θ = Θ ≫ τ) :
-    ProEtale.globalSectionsTransport _ hX (F.frobeniusPowStr N) ≫
-        ProEtale.globalSectionsTransport _ h₂
-          (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
-            ((curvePullback j hj).obj F).obj.carrier.X) =
-      ProEtale.globalSectionsTransport _ h₁
-          (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
-            ((curvePullback j hj).obj F).obj.carrier.X) ≫
-        ProEtale.globalSectionsTransport _ hY (((curvePullback j hj).obj F).frobeniusPowStr 1) := by
-  have pY := congrArg Iso.hom (pow_one (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius)
-  rw [ProEtale.globalSectionsTransport_congr _ hY pY _ _ (frobeniusPowStr_one _ pY)]
-  exact ProEtale.globalSectionsTransport_comm_of_upperStar_of_comp _ j _ _
-    hj.symm _ _ _ (curvePullback_frobeniusStr_compatible j hj F) h₁ h₂ hX _ hΘ
-
-/-- The comparison of stalks `Γ(t^* F̄) ⟶ Γ(t'^* j^* F̄)` along a square `Θ ≫ t = t' ≫ j`
-intertwines the transports along the iterated Weil structures `φ_{N m}` of `F` and `φ_m` of its
-curve pullback, `m ≥ 1`. -/
-lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback (hN : 1 ≤ N)
-    (F : WeilSheaf k₀ l X) (m : ℕ) (hm : 1 ≤ m)
-    {Θ : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure k₀))}
-    {t₁ t₂ : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {t₁' t₂' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
-    {τ : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))}
-    {τ' : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure L))}
-    (h₁ : Θ ≫ t₁ = t₁' ≫ j) (h₂ : Θ ≫ t₂ = t₂' ≫ j)
-    (hX : τ ≫ t₁ = t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom)
-    (hY : τ' ≫ t₁' = t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom)
-    (hΘ : τ' ≫ Θ = Θ ≫ τ) :
-    ProEtale.globalSectionsTransport _ hX (F.frobeniusPowStr (N * m)) ≫
-        ProEtale.globalSectionsTransport _ h₂
-          (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
-            ((curvePullback j hj).obj F).obj.carrier.X) =
-      ProEtale.globalSectionsTransport _ h₁
-          (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
-            ((curvePullback j hj).obj F).obj.carrier.X) ≫
-        ProEtale.globalSectionsTransport _ hY (((curvePullback j hj).obj F).frobeniusPowStr m) := by
-  induction m, hm using Nat.le_induction generalizing t₁ t₂ t₁' t₂' τ τ' with
-  | base =>
-    have hX' : τ ≫ t₁ =
-        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom := by
-      rw [hX, Nat.mul_one]
-    rw [globalSectionsTransport_frobeniusPowStr_congr F (Nat.mul_one N) rfl hX hX']
-    exact globalSectionsTransport_frobeniusPowStr_comp_curvePullback_one j hj F h₁ h₂ hX' hY hΘ
-  | succ m hm ih =>
-    have pc' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv =
-        ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv ≫ j := by
-      rw [← cancel_mono ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom,
-        Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id,
-        comp_geometricGaloisFrobenius_pow_mul_eq j hj m, Iso.inv_hom_id_assoc]
-    have haX : (Iso.refl _).hom ≫ t₁ =
-        (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv) ≫
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom := by
-      simp
-    have hbX : τ ≫ (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv) =
-        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom := by
-      rw [← cancel_mono ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom,
-        Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, hX, Category.assoc,
-        Aut.pow_hom_comp_pow_hom, Nat.mul_succ]
-    have haY : (Iso.refl _).hom ≫ t₁' =
-        (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv) ≫
-          ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom := by
-      simp
-    have hbY : τ' ≫ (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv) =
-        t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ 1).hom := by
-      rw [← cancel_mono ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom,
-        Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, hY, Category.assoc,
-        Aut.pow_hom_comp_pow_hom]
-    have hmid : Θ ≫ (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv) =
-        (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv) ≫ j := by
-      rw [← Category.assoc, h₁, Category.assoc, pc', Category.assoc]
-    have hΘ₀ : (Iso.refl _).hom ≫ Θ = Θ ≫ (Iso.refl _).hom := by simp
-    have hX'' : τ ≫ t₁ =
-        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m + N)).hom := by
-      rw [hX, Nat.mul_succ]
-    rw [globalSectionsTransport_frobeniusPowStr_congr F (Nat.mul_succ N m) rfl hX hX'',
-      ← F.globalSectionsTransport_frobeniusPowStr_comp (N * m) N hN haX hbX (Category.comp_id τ)
-        hX'',
-      ← ((curvePullback j hj).obj F).globalSectionsTransport_frobeniusPowStr_comp m 1 le_rfl haY
-        hbY (Category.comp_id τ') hY, Category.assoc,
-      globalSectionsTransport_frobeniusPowStr_comp_curvePullback_one j hj F hmid h₂ hbX hbY hΘ,
-      ← Category.assoc, ih h₁ hmid haX haY hΘ₀, Category.assoc]
-
-/-- The underlying sheaf of the curve pullback is the pullback of the underlying sheaf. -/
-noncomputable def curvePullbackCompForgetIso :
-    curvePullback (l := l) j hj ⋙ (WeilSheaf.objectProperty L l Y).ι ⋙ IsoAlgebra.forget _ ≅
-      (WeilSheaf.objectProperty k₀ l X).ι ⋙ IsoAlgebra.forget _ ⋙ (j)^*ᵃ[l] :=
-  NatIso.ofComponents (fun F ↦ eqToIso (curvePullback_obj_obj_carrier j hj F)) fun _ ↦
-    (Category.comp_id _).trans (Category.id_comp _).symm
-
-instance : (curvePullback (l := l) j hj).Additive where
-  map_add := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
-    (Algebra.Hom.ext ((j)^*ᵃ[l].map_add)))
-
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    PreservesFiniteLimits (curvePullback (l := l) j hj) := by
-  have : PreservesFiniteLimits ((curvePullback (l := l) j hj ⋙
-      (WeilSheaf.objectProperty L l Y).ι) ⋙ IsoAlgebra.forget _) :=
-    preservesFiniteLimits_of_natIso
-      (Functor.associator _ _ _ ≪≫ curvePullbackCompForgetIso j hj).symm
-  have : PreservesFiniteLimits (curvePullback (l := l) j hj ⋙
-      (WeilSheaf.objectProperty L l Y).ι) :=
-    preservesFiniteLimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
-  have : ReflectsFiniteLimits (WeilSheaf.objectProperty L l Y).ι :=
-    ReflectsLimitsOfSize.reflectsFiniteLimits.{0, 0} _
-  exact preservesFiniteLimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty L l Y).ι
-
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    PreservesFiniteColimits (curvePullback (l := l) j hj) := by
-  have : PreservesFiniteColimits ((curvePullback (l := l) j hj ⋙
-      (WeilSheaf.objectProperty L l Y).ι) ⋙ IsoAlgebra.forget _) :=
-    preservesFiniteColimits_of_natIso
-      (Functor.associator _ _ _ ≪≫ curvePullbackCompForgetIso j hj).symm
-  have : PreservesFiniteColimits (curvePullback (l := l) j hj ⋙
-      (WeilSheaf.objectProperty L l Y).ι) :=
-    preservesFiniteColimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
-  have : ReflectsFiniteColimits (WeilSheaf.objectProperty L l Y).ι :=
-    ReflectsColimitsOfSize.reflectsFiniteColimits.{0, 0} _
-  exact preservesFiniteColimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty L l Y).ι
-
-/-- The pullback of a lisse Weil sheaf is lisse. -/
-theorem IsLisse.curvePullback {F : WeilSheaf k₀ l X} (hF : F.IsLisse) :
-    ((WeilSheaf.curvePullback j hj).obj F).IsLisse :=
-  IsAdicLisseSheaf.upperStar j hF
-
-/-- The pullback along `j` of a lisse subsheaf `P ⊆ F̄` fixed by the `N`-th iterate of the
-Frobenius twist: a lisse Weil sheaf on `Y` over `L`, with underlying sheaf `j^* P`. -/
-noncomputable def curvePullbackSub (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
-    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
-    WeilSheaf L l Y :=
-  ⟨(ProEtaleWeilSheaf.equivariantPullback _ j hj).obj (F.stableIsoAlgebra P hP),
-    hPl.isAdicConstructibleSheaf.upperStar j⟩
-
-/-- The inclusion `j^* P ⟶ j^* F̄` of the pullback of a subsheaf defined over `L`. -/
-noncomputable def curvePullbackSubι (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
-    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
-    curvePullbackSub j hj F P hP hPl ⟶ (curvePullback j hj).obj F :=
-  ObjectProperty.homMk ((ProEtaleWeilSheaf.equivariantPullback _ j hj).map
-    (F.stableIsoAlgebraι P hP))
-
-@[simp]
-lemma curvePullbackSub_obj_carrier (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
-    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
-    (curvePullbackSub j hj F P hP hPl).obj.carrier = (j)^*ᵃ[l].obj (Subobject.underlying.obj P) :=
-  rfl
-
-lemma curvePullbackSubι_hom_hom_f (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
-    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
-    (curvePullbackSubι j hj F P hP hPl).hom.hom.f = (j)^*ᵃ[l].map P.arrow :=
-  rfl
-
-instance (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
-    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
-    Mono (curvePullbackSubι j hj F P hP hPl) := by
-  have : Mono (curvePullbackSubι j hj F P hP hPl).hom.hom.f := by
-    rw [curvePullbackSubι_hom_hom_f]
-    infer_instance
-  have : Mono (curvePullbackSubι j hj F P hP hPl).hom.hom :=
-    (Algebra.forget _).mono_of_mono_map this
-  have : Mono (curvePullbackSubι j hj F P hP hPl).hom :=
-    (IsoAlgebra.ι _).mono_of_mono_map this
-  exact (WeilSheaf.objectProperty L l Y).ι.mono_of_mono_map this
-
-/-- The pullback of a subsheaf defined over `L` is lisse. -/
-theorem isLisse_curvePullbackSub (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
-    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
-    (curvePullbackSub j hj F P hP hPl).IsLisse :=
-  IsAdicLisseSheaf.upperStar j hPl
-
-/-- If the pullback `j^* P` is an irreducible local system, then the Weil sheaf
-`curvePullbackSub j hj F P` is irreducible lisse. -/
-theorem isIrreducibleLisse_curvePullbackSub [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of L))]
-    (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
-    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P))
-    (hirr : IsIrreducibleAdicLocalSystem ((j)^*ᵃ[l].obj (Subobject.underlying.obj P))) :
-    (curvePullbackSub j hj F P hP hPl).IsIrreducibleLisse := by
-  refine ⟨isLisse_curvePullbackSub j hj F P hP hPl,
-    fun h ↦ hirr.2.1 (isZero_iff_isZero_carrier.mp h), fun H i hi hH ↦ ?_⟩
-  have : Mono (((WeilSheaf.objectProperty L l Y).ι ⋙ IsoAlgebra.forget _).map i) :=
-    Functor.map_mono _ i
-  have : Mono i.hom.hom.f := this
-  have hm : Mono (i.hom.hom.f ≫ eqToHom (curvePullbackSub_obj_carrier j hj F P hP hPl)) :=
-    mono_comp _ _
-  rcases hirr.2.2 _ _ hm hH with h | h
-  · exact Or.inl (isZero_iff_isZero_carrier.mpr h)
-  · have : IsIso i.hom.hom.f := IsIso.of_isIso_comp_right _
-      (eqToHom (curvePullbackSub_obj_carrier j hj F P hP hPl))
-    have : IsIso ((Algebra.forget _).map i.hom.hom) := this
-    have : IsIso i.hom.hom := isIso_of_reflects_iso _ (Algebra.forget _)
-    have : IsIso ((IsoAlgebra.ι _).map i.hom) := this
-    have : IsIso i.hom := isIso_of_reflects_iso _ (IsoAlgebra.ι _)
-    have : IsIso ((WeilSheaf.objectProperty L l Y).ι.map i) := this
-    exact Or.inr (isIso_of_fully_faithful (WeilSheaf.objectProperty L l Y).ι i)
-
 /-- If finitely many subsheaves defined over `L` span `F̄` and the pullback of each is punctually
 `ι`-pure of weight `w`, so is the pullback of `F`: it is a quotient of their direct sum. -/
 theorem isPunctuallyPureOfWeight_curvePullback_of_iSup_eq_top
@@ -378,13 +65,152 @@ theorem isPunctuallyPureOfWeight_curvePullback_of_iSup_eq_top
     (hpure : ∀ n, (curvePullbackSub j hj F (Q n) (hQN n) (hQl n)).IsPunctuallyPureOfWeight ι w) :
     ((curvePullback j hj).obj F).IsPunctuallyPureOfWeight ι w := by
   intro y
+  have hs := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+    (Y ↘ Spec (CommRingCat.of L)) y
   exact FrobeniusModule.IsPureOfWeight.of_iSup_range_eq_top
-    (fun n ↦ stalkAtMap _ _ _ (curvePullbackSubι j hj F (Q n) (hQN n) (hQl n)))
-    (fun n x ↦ stalkAtMap_frobenius _ _ _ _ x)
+    (fun n ↦ stalkAtMap _ _ hs (curvePullbackSubι j hj F (Q n) (hQN n) (hQl n)))
+    (fun n ↦ LinearMap.ext fun x ↦ stalkAtMap_frobenius _ _ hs _ x)
     (ProEtale.iSup_range_adicStalkMap_adicUpperStar_eq_top j _ Q hQ) (fun n ↦ hpure n y)
+
+/-- The map induced on the stalks at `s'` by the inclusion `j^* P ⟶ j^* F̄` of the pullback of a
+subsheaf, on the global sections of the pullbacks along `s'`. -/
+lemma stalkAtMap_curvePullbackSubι (F : WeilSheaf k₀ l X)
+    {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber} {n : ℕ}
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
+      (specGeometricFrobenius L ^ n).hom ≫ s')
+    (P : Subobject F.obj.carrier) (hP : (⇑F.frobeniusTwist)^[N] P = P)
+    (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
+    stalkAtMap s' n hs' (curvePullbackSubι j hj F P hP hPl) =
+      ((WeilCoefficients.toModuleCat l).map ((Sheaf.Γ _ _).map ((s')^*[WeilCoefficients.{u} l].map
+        ((j)^*[WeilCoefficients.{u} l].map ((ProEtale.AdicSheaf.forget _).map P.arrow))))).hom :=
+  rfl
+
+omit [Finite L] [Fact (ringChar L ≠ l)] in
+/-- The comparison of stalks along `Θ ≫ s = s' ≫ j` is natural in the subsheaf `P ⊆ F̄`. -/
+lemma toModuleCat_map_comp_globalSectionsTransport_id (F : WeilSheaf k₀ l X)
+    {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
+    {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {Θ : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure k₀))}
+    (hsq : Θ ≫ s = s' ≫ j) (P : Subobject F.obj.carrier) :
+    ((WeilCoefficients.toModuleCat l).map ((Sheaf.Γ _ _).map ((s')^*[WeilCoefficients.{u} l].map
+        ((j)^*[WeilCoefficients.{u} l].map ((ProEtale.AdicSheaf.forget _).map P.arrow))))).hom ∘ₗ
+      ((WeilCoefficients.toModuleCat l).map (ProEtale.globalSectionsTransport _ hsq
+        (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (Subobject.underlying.obj P).X)))).hom =
+    ((WeilCoefficients.toModuleCat l).map (ProEtale.globalSectionsTransport _ hsq
+        (𝟙 ((j)^*[WeilCoefficients.{u} l].obj F.obj.carrier.X)))).hom ∘ₗ
+      ((WeilCoefficients.toModuleCat l).map ((Sheaf.Γ _ _).map ((s)^*[WeilCoefficients.{u} l].map
+        ((ProEtale.AdicSheaf.forget _).map P.arrow)))).hom := by
+  rw [← WeilCoefficients.toModuleCat_map_comp_hom, ← WeilCoefficients.toModuleCat_map_comp_hom]
+  exact congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom)
+    (ProEtale.globalSectionsTransport_id_naturality _ hsq
+      ((ProEtale.AdicSheaf.forget _).map P.arrow))
+
+omit [Finite L] [Fact (ringChar L ≠ l)] in
+/-- The comparison of stalks along `Θ ≫ s = s' ≫ j`, for the identity of the underlying sheaf
+`j^* F̄`, in terms of the algebra `AlgebraicGeometry.WeilSheaf.powIsoAlgebra`. -/
+lemma globalSectionsTransport_id_powIsoAlgebra (F : WeilSheaf k₀ l X)
+    {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
+    {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {Θ : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure k₀))}
+    (hsq : Θ ≫ s = s' ≫ j) :
+    ProEtale.globalSectionsTransport _ hsq
+        (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X)) =
+      ProEtale.globalSectionsTransport _ hsq
+        (𝟙 ((j)^*[WeilCoefficients.{u} l].obj F.obj.carrier.X)) :=
+  rfl
+
+/-- The comparison of stalks `F_s ⟶ (j^* F̄)_{s'}` along `Θ ≫ s = s' ≫ j`, `Θ` an isomorphism,
+carries the stalk `P_s` of a subsheaf `P` defined over `L` onto the image of the stalk of its
+pullback. -/
+lemma range_stalkAtMap_curvePullbackSubι (F : WeilSheaf k₀ l X)
+    {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
+    {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    (Θ : Spec (.of (AlgebraicClosure L)) ≅ Spec (.of (AlgebraicClosure k₀)))
+    (hsq : Θ.hom ≫ s = s' ≫ j) {n : ℕ}
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
+      (specGeometricFrobenius L ^ n).hom ≫ s')
+    (P : Subobject F.obj.carrier) (hP : (⇑F.frobeniusTwist)^[N] P = P)
+    (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
+    LinearMap.range (stalkAtMap s' n hs' (curvePullbackSubι j hj F P hP hPl)) =
+      (F.stalkSubspace s P).map ((WeilCoefficients.toModuleCat l).map
+        (ProEtale.globalSectionsTransport _ hsq
+          (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X)))).hom := by
+  have : IsIso (ProEtale.globalSectionsTransport _ hsq
+      (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (Subobject.underlying.obj P).X))) :=
+    ProEtale.isIso_globalSectionsTransport _ _ hsq _
+  rw [stalkAtMap_curvePullbackSubι, stalkSubspace, ← LinearMap.range_comp,
+    ← LinearMap.range_comp_of_range_eq_top _ (LinearMap.range_eq_top.2
+      ((ModuleCat.epi_iff_surjective ((WeilCoefficients.toModuleCat l).map
+        (ProEtale.globalSectionsTransport _ hsq
+          (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (Subobject.underlying.obj P).X))))).1
+        inferInstance)),
+    toModuleCat_map_comp_globalSectionsTransport_id j F hsq P]
+  rfl
+
+/-- A geometric point `s` of `X̄` under a geometric point `s'` of `Ȳ` fixed by `Fr_Yⁿ` up to
+reparametrisation, through `Spec θ : Spec k̄_L ≅ Spec k̄₀`, is fixed by `Fr^{N n}` up to
+reparametrisation, `N = [L : k₀]`. -/
+lemma comp_geometricGaloisFrobenius_pow_mul_of_comp_eq [Algebra k₀ L]
+    (hj' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
+      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
+    (hN : N = Module.finrank k₀ L) (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure L)
+    {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
+    {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    (hss' : s' ≫ j = (specAlgHomAlgebraicClosureIso θ).hom ≫ s) {n : ℕ}
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
+      (specGeometricFrobenius L ^ n).hom ≫ s') :
+    s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).hom =
+      (specGeometricFrobenius k₀ ^ (N * n)).hom ≫ s := by
+  have hΘ : (specGeometricFrobenius L ^ n).hom ≫ (specAlgHomAlgebraicClosureIso θ).hom =
+      (specAlgHomAlgebraicClosureIso θ).hom ≫ (specGeometricFrobenius k₀ ^ (N * n)).hom := by
+    rw [hN, specAlgHomAlgebraicClosureIso_hom]
+    exact specGeometricFrobenius_pow_hom_comp_spec_map_algHom θ n
+  rw [← cancel_epi (specAlgHomAlgebraicClosureIso θ).hom, ← Category.assoc, ← hss',
+    Category.assoc, comp_geometricGaloisFrobenius_pow_mul_eq j hj' n, ← Category.assoc, hs',
+    Category.assoc, hss', ← Category.assoc, hΘ, Category.assoc]
 
 variable [Algebra k₀ L] (hN : N = Module.finrank k₀ L)
   (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure L)
+
+include hN in
+/-- The comparison of stalks `F_s ⟶ (j^* F̄)_{s'}` along `Spec θ ≫ s = s' ≫ j` intertwines the
+Frobenius of `F` relative to `𝔽_{q^{N n}}` and that of the curve pullback relative to `L_n`. -/
+lemma toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_curvePullback
+    (F : WeilSheaf k₀ l X)
+    {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
+    {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    (hsq : (specAlgHomAlgebraicClosureIso θ).hom ≫ s = s' ≫ j) {n : ℕ}
+    (hs' : s' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ n).hom =
+      (specGeometricFrobenius L ^ n).hom ≫ s')
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).hom =
+      (specGeometricFrobenius k₀ ^ (N * n)).hom ≫ s) :
+    ((WeilCoefficients.toModuleCat l).map (ProEtale.globalSectionsTransport _ hsq
+        (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
+          ((curvePullback j hj).obj F).obj.carrier.X))).hom ∘ₗ
+      (F.stalkAt s (N * n) hs).frobeniusEnd =
+    (((curvePullback j hj).obj F).stalkAt s' n hs').frobeniusEnd ∘ₗ
+      ((WeilCoefficients.toModuleCat l).map (ProEtale.globalSectionsTransport _ hsq
+        (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
+          ((curvePullback j hj).obj F).obj.carrier.X))).hom := by
+  have : Module.Finite k₀ L := Module.Finite.of_finite
+  have hΘ : (specGeometricFrobenius L ^ n).hom ≫ (specAlgHomAlgebraicClosureIso θ).hom =
+      (specAlgHomAlgebraicClosureIso θ).hom ≫ (specGeometricFrobenius k₀ ^ (N * n)).hom := by
+    rw [hN, specAlgHomAlgebraicClosureIso_hom]
+    exact specGeometricFrobenius_pow_hom_comp_spec_map_algHom θ n
+  rw [frobeniusEnd_stalkAt, frobeniusEnd_stalkAt,
+    ← WeilCoefficients.toModuleCat_map_comp_hom, ← WeilCoefficients.toModuleCat_map_comp_hom]
+  refine congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom) ?_
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · have h₀ : (specGeometricFrobenius k₀ ^ 0).hom ≫ s =
+        s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom := by
+      rw [pow_zero, pow_zero]
+      rfl
+    rw [globalSectionsTransport_frobeniusPowStr_congr F (Nat.mul_zero N)
+      (by rw [Nat.mul_zero]) hs.symm h₀, globalSectionsTransport_frobeniusPowStr_zero F
+      (by rw [pow_zero]; rfl), globalSectionsTransport_frobeniusPowStr_zero _
+      (by rw [pow_zero]; rfl), Category.id_comp, Category.comp_id]
+  · exact globalSectionsTransport_frobeniusPowStr_comp_curvePullback j hj
+      (hN ▸ Module.finrank_pos) F n hn hsq hsq hs.symm hs'.symm hΘ
 
 include hN in
 /-- **Stalks of the pullback.** Let `s'` be a geometric point of `Ȳ` fixed by `Fr_Yⁿ` up to
@@ -407,56 +233,23 @@ theorem exists_equiv_stalkAt_curvePullback (F : WeilSheaf k₀ l X)
         (LinearMap.range (stalkAtMap s' n hs' (curvePullbackSubι j hj F P hP hPl))).map
             e.toLinearEquiv.toLinearMap =
           F.stalkSubspace s P := by
-  have : Module.Finite k₀ L := Module.Finite.of_finite
-  have hN₁ : 1 ≤ N := hN ▸ Module.finrank_pos
-  have hΘ : (specGeometricFrobenius L ^ n).hom ≫ (specAlgHomAlgebraicClosureIso θ).hom =
-      (specAlgHomAlgebraicClosureIso θ).hom ≫ (specGeometricFrobenius k₀ ^ (N * n)).hom := by
-    rw [hN, specAlgHomAlgebraicClosureIso_hom]
-    exact specGeometricFrobenius_pow_hom_comp_spec_map_algHom θ n
-  have hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * n)).hom =
-      (specGeometricFrobenius k₀ ^ (N * n)).hom ≫ s := by
-    rw [← cancel_epi (specAlgHomAlgebraicClosureIso θ).hom, ← Category.assoc, ← hss',
-      Category.assoc, comp_geometricGaloisFrobenius_pow_mul_eq j hj hj n, ← Category.assoc, hs',
-      Category.assoc, hss', ← Category.assoc, hΘ, Category.assoc]
+  have hs := comp_geometricGaloisFrobenius_pow_mul_of_comp_eq j hj hN θ hss' hs'
   have hsq : (specAlgHomAlgebraicClosureIso θ).hom ≫ s = s' ≫ j := hss'.symm
-  let T := ProEtale.globalSectionsTransport _ hsq (𝟙 ((j)^*[_].obj F.obj.carrier.X))
-  have : IsIso T := ProEtale.isIso_globalSectionsTransport _ _ hsq _
-  have hT : ((WeilCoefficients.toModuleCat l).map T).hom ∘ₗ
-      (F.stalkAt s (N * n) hs).frobeniusEnd =
-      (((curvePullback j hj).obj F).stalkAt s' n hs').frobeniusEnd ∘ₗ
-        ((WeilCoefficients.toModuleCat l).map T).hom := by
-    rw [frobeniusEnd_stalkAt, frobeniusEnd_stalkAt,
-      ← WeilCoefficients.toModuleCat_map_comp_hom, ← WeilCoefficients.toModuleCat_map_comp_hom]
-    refine congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom) ?_
-    rcases Nat.eq_zero_or_pos n with rfl | hn
-    · have h₀ : (specGeometricFrobenius k₀ ^ 0).hom ≫ s =
-          s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom := by
-        rw [pow_zero, pow_zero]
-        rfl
-      rw [globalSectionsTransport_frobeniusPowStr_congr F (Nat.mul_zero N)
-        (by rw [Nat.mul_zero]) hs.symm h₀, globalSectionsTransport_frobeniusPowStr_zero F
-        (by rw [pow_zero]; rfl), globalSectionsTransport_frobeniusPowStr_zero _
-        (by rw [pow_zero]; rfl), Category.id_comp, Category.comp_id]
-    · exact globalSectionsTransport_frobeniusPowStr_comp_curvePullback j hj hN₁ F n hn hsq hsq
-        hs.symm hs'.symm hΘ
-  let e' : (F.stalkAt s (N * n) hs).Equiv (((curvePullback j hj).obj F).stalkAt s' n hs') :=
-    .ofComp (WeilCoefficients.linearEquivOfIso (asIso T)) hT
-  refine ⟨hs, e'.symm, fun P hP hPl ↦ ?_⟩
-  let TP := ProEtale.globalSectionsTransport _ hsq
-    (𝟙 ((j)^*[_].obj (Subobject.underlying.obj P).X))
-  have : IsIso TP := ProEtale.isIso_globalSectionsTransport _ _ hsq _
-  have hn := congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom)
-    (ProEtale.globalSectionsTransport_id_naturality _ hsq
-      ((ProEtale.AdicSheaf.forget _).map P.arrow))
-  simp only [WeilCoefficients.toModuleCat_map_comp_hom] at hn
-  have hr : LinearMap.range (stalkAtMap s' n hs' (curvePullbackSubι j hj F P hP hPl)) =
-      (F.stalkSubspace s P).map e'.toLinearEquiv.toLinearMap := by
-    refine (LinearMap.range_comp_of_range_eq_top _
-      (LinearMap.range_eq_top.2 (WeilCoefficients.linearEquivOfIso (asIso TP)).surjective)).symm.trans
-      ?_
-    rw [stalkSubspace, ← LinearMap.range_comp]
-    exact congrArg LinearMap.range hn
-  rw [hr, Equiv.symm_toLinearEquiv, Submodule.map_symm_eq_iff]
+  have : IsIso (ProEtale.globalSectionsTransport _ hsq
+      (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X))) :=
+    ProEtale.isIso_globalSectionsTransport _ _ hsq _
+  let e : (F.stalkAt s (N * n) hs).Equiv (((curvePullback j hj).obj F).stalkAt s' n hs') :=
+    .ofComp (WeilCoefficients.linearEquivOfIso (asIso (ProEtale.globalSectionsTransport _ hsq
+      (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X)))))
+      (by
+        rw [WeilCoefficients.linearEquivOfIso_toLinearMap, asIso_hom]
+        exact toModuleCat_map_globalSectionsTransport_comp_frobeniusEnd_curvePullback j hj hN θ F
+          hsq hs' hs)
+  refine ⟨hs, e.symm, fun P hP hPl ↦ ?_⟩
+  rw [range_stalkAtMap_curvePullbackSubι j hj F _ hsq hs' P hP hPl,
+    FrobeniusModule.Equiv.symm_toLinearEquiv, Submodule.map_symm_eq_iff]
+  exact congrArg (fun f ↦ Submodule.map f (F.stalkSubspace s P))
+    (WeilCoefficients.linearEquivOfIso_toLinearMap _)
 
 include hN in
 /-- The pullback of an `ι`-real Weil sheaf is `ι`-real: at a closed point of `Y` of degree `n`

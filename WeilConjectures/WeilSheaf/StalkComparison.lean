@@ -126,7 +126,7 @@ of some `M i`: otherwise `F - α` is bijective on every `M i`, so its image on `
 image of `g i`, hence is all of `N`, and `F - α` is injective on `N`. -/
 theorem hasEigenvalue_of_iSup_range_eq_top {ι : Type*} {M : ι → FrobeniusModule.{u, v} K}
     {N : FrobeniusModule.{w, v} K} (g : ∀ i, (M i).carrier →ₗ[K] N.carrier)
-    (hg : ∀ i x, g i ((M i).frobenius x) = N.frobenius (g i x))
+    (hg : ∀ i, g i ∘ₗ (M i).frobeniusEnd = N.frobeniusEnd ∘ₗ g i)
     (hsup : ⨆ i, LinearMap.range (g i) = ⊤) {α : K} (hα : N.frobeniusEnd.HasEigenvalue α) :
     ∃ i, (M i).frobeniusEnd.HasEigenvalue α := by
   by_contra hM
@@ -134,7 +134,8 @@ theorem hasEigenvalue_of_iSup_range_eq_top {ι : Type*} {M : ι → FrobeniusMod
   let T : Module.End K N.carrier := N.frobeniusEnd - α • LinearMap.id
   have hTi (i : ι) (z : (M i).carrier) :
       g i ((M i).frobeniusEnd z - α • z) = T (g i z) := by
-    simp [T, frobeniusEnd, hg]
+    rw [map_sub, map_smul, ← LinearMap.comp_apply, hg, LinearMap.comp_apply]
+    rfl
   have hsurj (i : ι) : Function.Surjective
       ((M i).frobeniusEnd - α • (LinearMap.id : Module.End K (M i).carrier)) := by
     refine LinearMap.injective_iff_surjective.mp fun a b hab ↦ ?_
@@ -162,7 +163,7 @@ theorem hasEigenvalue_of_iSup_range_eq_top {ι : Type*} {M : ι → FrobeniusMod
 pure of weight `w` is pure of weight `w`. -/
 theorem IsPureOfWeight.of_iSup_range_eq_top {ι : Type*} {M : ι → FrobeniusModule.{u, v} K}
     {N : FrobeniusModule.{w, v} K} (g : ∀ i, (M i).carrier →ₗ[K] N.carrier)
-    (hg : ∀ i x, g i ((M i).frobenius x) = N.frobenius (g i x))
+    (hg : ∀ i, g i ∘ₗ (M i).frobeniusEnd = N.frobeniusEnd ∘ₗ g i)
     (hsup : ⨆ i, LinearMap.range (g i) = ⊤) {ι' : K →+* ℂ} {q : ℕ} {w' : ℝ}
     (h : ∀ i, (M i).IsPureOfWeight ι' q w') : N.IsPureOfWeight ι' q w' := fun α hα ↦ by
   obtain ⟨i, hi⟩ := hasEigenvalue_of_iSup_range_eq_top g hg hsup hα
@@ -239,6 +240,13 @@ lemma _root_.AlgebraicGeometry.WeilCoefficients.toModuleCat_map_comp_hom
       ((WeilCoefficients.toModuleCat l).map g).hom ∘ₗ
         ((WeilCoefficients.toModuleCat l).map f).hom := by
   rw [Functor.map_comp]
+  rfl
+
+/-- The linear isomorphism underlying an isomorphism of `ℚ̄_ℓ`-modules, as a linear map. -/
+lemma _root_.AlgebraicGeometry.WeilCoefficients.linearEquivOfIso_toLinearMap
+    {M N : WeilCoefficients.{u} l} (e : M ≅ N) :
+    (WeilCoefficients.linearEquivOfIso e).toLinearMap =
+      ((WeilCoefficients.toModuleCat l).map e.hom).hom :=
   rfl
 
 /-- An `ι`-real Weil sheaf is `ι`-real at every geometric point `s` with `s ≫ Frᵐ = σᵐ ≫ s`,
