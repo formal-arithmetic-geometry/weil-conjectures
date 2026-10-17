@@ -12,10 +12,136 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-infinity-hom-bifunctor-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Put $B=N(A)$, $K=N(E_W)$ and $p=N(\\pi)$. These are $\\mathcal V$-small: their simplices are finite strings in small sets. An ordinary nerve is a quasicategory: an inner 2-horn is filled by composition, and in higher dimensions the composable string determines the simplex, with its required faces by associativity. We verify directly that $p$ is a right fibration, using [def-coef-infinity-fibrations]. Over a chain $a_0\\to\\cdots\\to a_n$, a simplex of $K$ is uniquely determined by its last element $w_n$, setting $w_j=W(a_j\\to a_n)(w_n)$. A right horn $\\Lambda_i^n$ with $i>0$ includes the last vertex. For $n=1$ that vertex determines its filler. For $n=2,i=1$, the horn gives the edges $0\\to1\\to2$, whose equations imply the formula for $w_0,w_1$; for $i=2$ it gives $0\\to2$ and $1\\to2$, giving those formulas directly. For $n\\geq3$, each edge $j\\to n$ belongs to some face other than the omitted face, so the horn again forces these formulas. Each supplied face is the unique lift of its base string with its given last element; the formula therefore restricts to every supplied face and is a filler. The formula commutes with faces and degeneracies. Transport along $r:a\\to a'$ with target $w'$ has the unique source $W(r)(w')$; uniqueness of these lifted strings gives exactly the strict functor's higher composition data. For $\\eta:W\\to W'$, naturality gives the map over $A$ sending $(a,w)$ to $(a,\\eta_a(w))$, and hence the specified map of nerves.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, elementary category-of-elements horn calculation for the coherent comma-cocone foundation; written out after the relative-nerve citation acquired a cyclic dependency."
+   }
+  },
+  {
+   "text": "Use the specific comparison of [lem-coef-cone-straightening-coherent-evaluation]. It identifies enriched evaluation $N_{\\mathrm{hc}}(\\mathsf D_B^{cf})\\to\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S_{\\mathcal V})$ with the specified ordered-cone adjunction $T\\dashv U_B$ and gives an equivalence $\\Phi_B:N_{\\mathrm{hc}}(\\mathsf{RFib}(B))\\simeq\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S_{\\mathcal V})$. Its natural comparison $\\Phi_B(q)\\simeq m_q$ is a comparison of whole coherent diagrams, with fibre evaluation and every parameter simplex specified. In particular $\\Phi_B(p)\\simeq W$: by the unique-lift formula in Step 1 and the definition of $m_q$ in [lem-coef-right-fibration-section-limit], transport for $p$ is exactly $W$, including all higher composition data. We use this cone-compatible equivalence throughout the rest of the proof. No identification of coherent diagrams is inferred merely from their values on vertices.",
+   "uses": [
+    "lem-coef-cone-straightening-coherent-evaluation",
+    "lem-coef-right-fibration-section-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Specific cone/evaluation compatibility isolated in lem-coef-cone-straightening-coherent-evaluation, with transport for the discrete fibration calculated directly in Step 1."
+   }
+  },
+  {
+   "text": "Let $S_z=\\mathcal C_{/z}$ be the join slice and form $q:Y=B\\times_{F,\\mathcal C}S_z\\to B$. By [lem-coef-infinity-slice-right-fibration] this is a right fibration, whose fibre at $a$ is exactly the right-pinched space $\\operatorname{Map}_{\\mathcal C}(F(a),z)$. Apply the concrete-slice compatibility clause of [lem-coef-cone-straightening-coherent-evaluation] with $S=B$, $C=\\mathcal C$, $v=F$ and $c=z$. It gives $\\Phi_B(q)\\simeq H_{\\mathcal C}(F(-),z)=Q_{F,z}$ as coherent functors, preserving the underlying edge and all parameter simplices. The equality on the right is the definition of $Q_{F,z}$ in the item using [lem-coef-infinity-hom-bifunctor-functoriality]. Thus the comparison with that specific Hom bifunctor is a cited theorem; agreement on precomposition of edges alone is not used to identify two coherent diagrams. The hypotheses hold because $B$ is a small nerve and hence a quasicategory, and $\\mathcal C$ is $\\mathcal V$-small. The pullback $Y$ is also $\\mathcal V$-small degree by degree.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-cone-straightening-coherent-evaluation",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Concrete-slice and canonical-Hom compatibility of lem-coef-cone-straightening-coherent-evaluation; join slice from Section 2.1.2."
+   }
+  },
+  {
+   "text": "For completeness, pass from the straightening equivalence to its concrete mapping complexes as follows. If $\\mathcal D$ is any locally Kan simplicial category and $x,y$ are its objects, the rigidification/nerve adjunction gives a simplicial identification $\\operatorname{Map}^{R}_{N_{\\mathrm{hc}}\\mathcal D}(x,y)=\\operatorname{Sing}_Q(\\mathcal D(x,y))$: an $n$-simplex on the left is an enriched functor from $\\mathfrak C[(\\Delta^n\\star\\{y\\})\\amalg_{\\Delta^n}\\{x\\}]$, so its only nonidentity mapping datum is $Q^n\\to\\mathcal D(x,y)$. This identification respects simplex operators and enriched functors. By [lem-coef-pinched-rigidification-resolution], the zigzag $\\operatorname{Sing}_Q(T)\\leftarrow|\\operatorname{Sing}_Q(T)|_Q\\to T$ consists of weak equivalences for Kan $T$ (the first map is $p_{\\operatorname{Sing}_QT}$ and the second the evaluation counit). Both ends are Kan: the nerve is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory], and its mapping spaces are Kan by [lem-cbc-enhanced-functor-cone-calculus]. Apply this directly to the locally Kan simplicial category $\\mathsf{RFib}(B)$ of [lem-coef-simplicial-right-fibration-presentation]. The mapping complex of right fibrations is the Kan complex $\\operatorname{Fun}_{/B}(K,Y)$ by [lem-coef-simplicial-right-fibration-presentation]. Since a functor equivalence induces equivalences on all mapping spaces by [lem-cbc-enhanced-functor-cone-calculus], the equivalence $\\Phi_B$ of [lem-coef-cone-straightening-coherent-evaluation] and Steps 1--3 give\n$$\\operatorname{Map}_{\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S_{\\mathcal V})}(W,Q_{F,z})\\simeq\\operatorname{Fun}_{/B}(K,Y).$$\nThe fibre-evaluation compatibility of that same node identifies restriction of the map of right fibrations with the component of the transformation, including all its simplicial parameters.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-cone-straightening-coherent-evaluation",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2 and Proposition 2.2.3.11; coherent-nerve mapping comparison derived explicitly from the pinched resolution, without using the cyclic general coherent-nerve node."
+   }
+  },
+  {
+   "text": "Put $G=F p$. By the defining pullback of $Y$, the right side of Step 4 is, in every degree, the space of lifts $K\\times\\Delta^n\\to S_z$ of $G\\,\\mathrm{pr}_K$. Replace the join slice $S_z\\to\\mathcal C$ by the target-fixed arrow fibration $T_z=\\operatorname{Fun}(\\Delta^1,\\mathcal C)\\times_{\\operatorname{ev}_1,\\mathcal C}\\{z\\}\\to\\mathcal C$. The map $\\delta_z:S_z\\to T_z$ of [lem-coef-infinity-slice-arrow-equivalence] is over $\\mathcal C$ and is an equivalence; both projections are right fibrations by [lem-coef-infinity-slice-right-fibration] and [lem-coef-infinity-arrow-target-right-fibration]. By [lem-coef-infinity-right-fibration-fibers] it is a weak equivalence on each Kan fibre. The fibrewise criterion of [lem-coef-simplicial-right-fibration-presentation] now gives an inverse and simplicial homotopies over $\\mathcal C$. Composing with those maps and homotopies gives an equivalence between the spaces of lifts of $G$ to $S_z$ and to $T_z$, with the entire boundary diagram fixed. This argument uses an inverse over the base, so it justifies the strict-fibre restriction; an arbitrary equivalence of total categories alone would not justify it.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VT",
+    "place": "Arrow-to-join slice comparison (Kerodon 02VT, Construction 02GH); HTT Lemma 2.2.3.6 for the fibrewise inverse over the base."
+   }
+  },
+  {
+   "text": "Currying is a degreewise simplicial isomorphism from the last lift space to the arrow mapping space\n$$U_{\\operatorname{Fun}(K,\\mathcal C)}(G,\\Delta_Kz).$$\nIndeed an $n$-simplex on either side is exactly a map $K\\times\\Delta^n\\times\\Delta^1\\to\\mathcal C$ whose restriction at the initial interval endpoint is $G\\,\\mathrm{pr}_K$ and whose restriction at the final endpoint is constant at $z$; permutations of the two parameter factors identify the conventions. Its face and degeneracy maps restrict the same $\\Delta^n$ factor. By [lem-cbc-enhanced-functor-cone-calculus], $\\operatorname{Fun}(K,\\mathcal C)$ is a quasicategory. The natural pinch equivalence of [lem-coef-infinity-pinch-comparison] then identifies this arrow mapping space with $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(G,\\Delta_Kz)$. Composing with Steps 4--5 proves the displayed equivalence in the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Internal-functor adjunction and the right-pinch comparison; the currying equality is written out degreewise."
+   }
+  },
+  {
+   "text": "Track evaluation through this comparison. By the fibre-evaluation and concrete-slice compatibilities of [lem-coef-cone-straightening-coherent-evaluation], a transformation $t:W\\to Q_{F,z}$ gives a map $K\\to Y$ over $B$ whose map on the fibre at $a$ is $t_a$. The vertex $(a,w)$ therefore goes to the right-pinched arrow $t_a(w):F(a)\\to z$. The map $\\delta_z$ sends its $0$-simplex to that same edge, and the pinch comparison also sends a $0$-simplex to its corresponding edge. Hence the resulting cocone has the required leg. The same calculation with $K\\times\\Delta^n$ tracks every parameter simplex, not only the vertices. For $\\eta:W\\to W'$, Step 1 gives $N(E_W)\\to N(E_{W'})$; composition of maps of right fibrations becomes restriction of lifts, and the degreewise currying in Step 6 turns it into restriction of cocones. Thus the two maps in the naturality square agree through the constructed comparison, in every parameter degree.",
+   "uses": [
+    "lem-coef-cone-straightening-coherent-evaluation",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Straightening naturality and explicit slice/pinch maps. Evaluation and weight-naturality calculation written here."
+   }
+  },
+  {
+   "text": "Naturality in $F$ and $z$ uses the same construction with these variables retained. For $F$, form the pullback along the evaluation map $B\\times\\operatorname{Fun}(B,\\mathcal C)\\to\\mathcal C$, rather than separately for each vertex $F$. For $z$, retain the target variable of $\\operatorname{Fun}(\\Delta^1,\\mathcal C)$ and the second variable of the coherent Hom bifunctor of [lem-coef-infinity-hom-bifunctor-functoriality]. Restriction of these constructions to any parameter simplex is the construction above; all face and degeneracy restrictions commute with the pullback, evaluation and currying maps. The cone/evaluation and specific Hom comparisons of [lem-coef-cone-straightening-coherent-evaluation] are coherently natural under base pullback and in $F,z$. Thus the equivalences are induced by one comparison with parameters, giving the asserted coherent naturality in $F,z$; no independent objectwise inverses are chosen. Only right fibrations, mapping spaces and functor categories were used, so no colimit in $\\mathcal C$ was required. If $W$ is empty, $K$ is empty and both transformation spaces are the one-point space of maps out of an empty domain; this also treats $A=\\varnothing$. All categories of fibrations and functors are formed in a universe containing $\\mathcal V$.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-cone-straightening-coherent-evaluation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Parameterized pullback and transport calculation, supplementing Cisinski Proposition 6.4.9; no colimit existence is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cone-straightening-coherent-evaluation",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent scalar adjunction: direct right-fibration proof of the discrete-weight calculation, checked against Cisinski Corollary 6.2.16 and Proposition 6.4.9 and HTT Sections 2.2, 3.2.5, 3.3.3, read online; these sources are not archived."
+ },
+ "status": "split",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "created": {
@@ -44,6 +170,48 @@
    "results": "{\"t\": \"2026-10-17T03:07:34Z\", \"tool\": \"grep\", \"query\": \"categoryOfElements|weighted|Weighted\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No exact match. The returned Kan-extension, presheaf and Coyoneda declarations require ordinary Category instances and Type-valued Hom sets. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:33-103 and Mathlib/CategoryTheory/Yoneda.lean:39-90. They do not assert equivalences of spaces of coherent transformations into arbitrary quasicategories. The AlgebraicTopology grep hits are ordinary simplicial-object/coskeletal Kan extensions, or no hits as recorded; no quasicategorical declaration matches."
+  },
+  {
+   "tool": "grep",
+   "query": "weighted|categoryOfElements|coherent.*cocone",
+   "results": "{\"t\": \"2026-10-17T03:51:50Z\", \"tool\": \"grep\", \"query\": \"weighted|categoryOfElements|coherent.*cocone\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern ordinary Type-valued presheaves and Hom sets, not spaces of coherent transformations into an arbitrary quasicategory. Read Elements.lean:216-255, Limits/Presheaf.lean:650-680 and Functor/FunctorHom.lean:35-130. The AlgebraicTopology grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A space of natural transformations from a set valued weight into Hom F z is the space of homotopy coherent cocones on its category of elements",
+   "results": "{\"t\": \"2026-10-17T03:51:50Z\", \"tool\": \"leansearch\", \"query\": \"A space of natural transformations from a set valued weight into Hom F z is the space of homotopy coherent cocones on its category of elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.cocones_obj_obj\", \"CategoryTheory.Cat.Hom₂\", \"CategoryTheory.Functor.elementsFunctor\", \"CategoryTheory.Limits.Cocone.ι\", \"CategoryTheory.Functor.costructuredArrowMapCocone\", \"CategoryTheory.Limits.limit.homIso\", \"CategoryTheory.Functor.HomObj\"], \"digest\": \"39b609741336c269\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern ordinary Type-valued presheaves and Hom sets, not spaces of coherent transformations into an arbitrary quasicategory. Read Elements.lean:216-255, Limits/Presheaf.lean:650-680 and Functor/FunctorHom.lean:35-130. The AlgebraicTopology grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryOfElements\"",
+   "results": "{\"t\": \"2026-10-17T03:51:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryOfElements\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CategoryOfElements.π\", \"CategoryTheory.CategoryOfElements.fromStructuredArrow\", \"CategoryTheory.CategoryOfElements.structuredArrowEquivalence\", \"CategoryTheory.CategoryOfElements.toStructuredArrow\", \"CategoryTheory.CategoryOfElements.map\", \"CategoryTheory.CategoryOfElements.id_val\", \"CategoryTheory.CategoryOfElements.fromStructuredArrow_obj\", \"CategoryTheory.CategoryOfElements.costructuredArrowULiftYonedaEquivalence\"], \"digest\": \"a840dc3d10f93e7c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern ordinary Type-valued presheaves and Hom sets, not spaces of coherent transformations into an arbitrary quasicategory. Read Elements.lean:216-255, Limits/Presheaf.lean:650-680 and Functor/FunctorHom.lean:35-130. The AlgebraicTopology grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent transformations from a discrete set valued presheaf to a mapping space functor correspond to cocones over its category of elements",
+   "results": "{\"t\": \"2026-10-17T03:51:51Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent transformations from a discrete set valued presheaf to a mapping space functor correspond to cocones over its category of elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.coconeOfRepresentable\", \"CategoryTheory.Presheaf.coconeOfRepresentable_pt\", \"CategoryTheory.Presheaf.tautologicalCocone'\", \"CategoryTheory.Presheaf.coconeOfRepresentable_ι_app\", \"CategoryTheory.Presieve.compatibleYonedaFamily_toCocone\", \"CategoryTheory.Presheaf.tautologicalCocone\", \"CategoryTheory.Presheaf.tautologicalCocone'_pt\", \"CategoryTheory.Presheaf.tautologicalCocone_pt\"], \"digest\": \"8f1e7656e5eef05f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern ordinary Type-valued presheaves and Hom sets, not spaces of coherent transformations into an arbitrary quasicategory. Read Elements.lean:216-255, Limits/Presheaf.lean:650-680 and Functor/FunctorHom.lean:35-130. The AlgebraicTopology grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Functor.HomObj|tautologicalCocone|costructuredArrowYonedaEquivalence",
+   "results": "{\"t\": \"2026-10-17T03:52:06Z\", \"tool\": \"grep\", \"query\": \"Functor.HomObj|tautologicalCocone|costructuredArrowYonedaEquivalence\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Elements.lean\", \"Mathlib/CategoryTheory/Elements.lean\", \"Mathlib/CategoryTheory/Elements.lean\", \"Mathlib/CategoryTheory/Elements.lean\", \"Mathlib/CategoryTheory/Elements.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\"], \"digest\": \"7beb7871e403edc9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern ordinary Type-valued presheaves and Hom sets, not spaces of coherent transformations into an arbitrary quasicategory. Read Elements.lean:216-255, Limits/Presheaf.lean:650-680 and Functor/FunctorHom.lean:35-130. The AlgebraicTopology grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps of right fibrations classify natural transformations of space valued presheaves and sections describe coherent cocones",
+   "results": "{\"t\": \"2026-10-17T03:52:09Z\", \"tool\": \"leanfinder\", \"query\": \"Maps of right fibrations classify natural transformations of space valued presheaves and sections describe coherent cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.presheafFiberDesc\", \"CategoryTheory.Presheaf.tautologicalCocone'\", \"CategoryTheory.Presheaf.tautologicalCocone\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiberNatTrans\", \"CategoryTheory.Presheaf.coconeOfRepresentable\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_app\"], \"digest\": \"03e883e46229efd0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern ordinary Type-valued presheaves and Hom sets, not spaces of coherent transformations into an arbitrary quasicategory. Read Elements.lean:216-255, Limits/Presheaf.lean:650-680 and Functor/FunctorHom.lean:35-130. The AlgebraicTopology grep returned no hits."
   }
  ],
  "mathlib_match": null,
@@ -68,5 +236,29 @@
    ]
   },
   "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-discrete-weight-coherent-cocones",
+  "worker": "stage1",
+  "summary": "Repair of the C4/E5 and E6 return: replaced the unsupported coning sketch with one statement-only model-comparison lemma, asserting the explicit enriched-evaluation equivalence compatible with T adjoint U and the canonical Hom pairing. The proof uses this cone-compatible equivalence consistently. Kept the statement, category-of-elements calculation and slice/arrow/currying argument; no cyclic general rectification or transport lemma is cited. One new unsplit node, no Mathlib leaves. The shared relative-nerve node acquired a dependency through space-valued-straightening back to this item during the repair; replaced that citation by an explicit elementary right-horn/unique-lift calculation, without a new node.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction, at the ordinary pointwise Kan-extension foundation: discrete-weight transformations are actual coherent comma cocones, with their evaluation maps.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory functor/mapping-space calculus used to compare actual coherent mapping spaces; no geometric step of the biduality unit is replaced and its own nodes do not provide this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-955e13439",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-955e13439 (reviewer sub-agent of L); spot-checked: Read the item and its 8 steps in full, the new node lem-coef-cone-straightening-coherent-evaluation in full, and the statement of every cited node. Both returned points are repaired. Step 2 (C4/E5): the new node gives a whole-diagram comparison Phi_B(q) ~ ev(P_q) ~ m_q; for p the lifts are unique, so m_p is the strict W. Step 3 (E6): the new node's Hom clause applied with S=B, v=F, c=z gives exactly the H_C(F(-),z)=Q_{F,z} of the item's definition. Universe check: U=V, since C is V-small. Step 1 is a correct elementary horn check (n=1; n=2 with i=1,2; n>=3, where each edge j->n lies in a supplied face). Step 4: Map^R_{N_hc D}=Sing_Q D(x,y), using that C[J^n] has two objects and hom(x,y)=Q^n; then the pinched-resolution zigzag, Kan ends, and RFib(B) locally Kan by presentation. Step 5: delta_z is an equivalence over C, right-fibration-fibers gives fibrewise equivalences, and presentation's fibrewise criterion gives an inverse and homotopies over C. Step 6: degreewise currying into U_{Fun(K,C)}(G,Delta z), then the pinch comparison. Steps 7-8: legs and naturality follow from the stated formulas and the new node's naturality clauses. New node: true (HTT 4.2.4.4 for sSet plus straightening, with T_q cofibrant, P_q cf, and q->U P_q an equivalence between fibrant objects). Small cases S=pt, S empty and S=Delta^1 check out. Statement only, self-contained through 5 stmt_deps; blueprint, created and search fields are correct. Not a restatement of an item clause. Duplicate sweep: the ev_S clause is a special case of enriched-diagram-rectification, and Phi_S is the right-fibration form of space-valued-straightening, but my reachability computation shows both reach the item (1270 nodes reach it; neither delivered node has a dep among them). The non-cyclic unstraightening-DK nodes stop at D_S^cf ~ RFib(S). So no usable duplicate exists; the later split of the new node must avoid the rectification/coherent-nerve nodes. proof_deps equals the union of the step uses exactly, and all steps are under 2000 characters. HTT, Cisinski and Kerodon are not archived, so I could not open them at the cited places; both nodes are honestly agent-formulated, WANTED lines are in the report, and I checked the mathematics directly. No SGA. I accept the proposed tool use of lem-cbc-enhanced-functor-cone-calculus for the maintainer to record. No fixes were made."
  }
 }

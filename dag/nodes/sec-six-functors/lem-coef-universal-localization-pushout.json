@@ -11,9 +11,112 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-universally-localizing-simplicial-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=A_0\\amalg_{A_{01}}A_1$, $B=B_0\\amalg_{B_{01}}B_1$, and $f:A\\to B$ for the induced map. Fix any small map $g:T\\to B$. For $i=0,1,01$ put $\\bar B_i=T\\times_B B_i$, $\\bar A_i=T\\times_B A_i$, where $A_i\\to B$ is the composite through $f_i$. Then $\\bar A_i\\cong\\bar B_i\\times_{B_i}A_i$, with both maps given by the same pair of coordinates. The induced $\\bar f_i:\\bar A_i\\to\\bar B_i$ is universally localizing: a further pullback along $R\\to\\bar B_i$ is exactly $R\\times_{B_i}A_i\\to R$, covered by the definition for $f_i$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02LZ",
+    "place": "Proposition 6.3.5.14 (02MA), proof; base-change reduction, canonical edge collections and categorical pushout gluing. The categorical gluing argument is expanded using the existing isofibration and functor-calculus nodes."
+   }
+  },
+  {
+   "text": "Both pulled-back spans have the original monomorphic leg: equality of pairs reduces injectivity to the corresponding map $A_{01}\\to A_0$ or $B_{01}\\to B_0$. Their degreewise pushouts are respectively $\\bar A=T\\times_B A$ and $\\bar B=T$. Explicitly, a degree-$n$ pair $(t,[a])$ with equal images in $B_n$ is sent to the class of $(t,a)$ for a representative $a$ in either summand. Every generating pushout relation comes from an element of $A_{01,n}$; it preserves the image in $B_n$ and hence lifts to the relation for that element paired with $t$. This defines the inverse of the pushout comparison and commutes with all simplicial operators. The identical argument applies to the $B_i$. Thus it suffices to prove localization for this new map of monomorphic pushout spans.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02LZ",
+    "place": "Proposition 6.3.5.14 (02MA), proof; base-change reduction, canonical edge collections and categorical pushout gluing. The categorical gluing argument is expanded using the existing isofibration and functor-calculus nodes."
+   }
+  },
+  {
+   "text": "For each $i$ let $W_i$ consist of edges of $\\bar A_i$ having degenerate image under $\\bar f_i$ in $\\bar B_i$. By [lem-coef-universal-localization-degenerate-edges], for every quasicategory $\\mathcal E$, restriction is a functor equivalence $L_i:\\operatorname{Fun}(\\bar B_i,\\mathcal E)\\to M_i$, where $M_i\\subseteq\\operatorname{Fun}(\\bar A_i,\\mathcal E)$ is the full edge-inverting subcategory. If $u_i:\\bar A_{01}\\to\\bar A_i$ is a span leg and $w\\in W_{01}$, then $\\bar f_i(u_iw)$ is the image of a degenerate edge under the corresponding simplicial map $\\bar B_{01}\\to\\bar B_i$, so it is degenerate. Hence $u_i(W_{01})\\subseteq W_i$. Restriction therefore gives a cospan $M_0\\to M_{01}\\leftarrow M_1$. All its objects are quasicategories by [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "lem-coef-universal-localization-degenerate-edges",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02LZ",
+    "place": "Proposition 6.3.5.14 (02MA), proof; base-change reduction, canonical edge collections and categorical pushout gluing. The categorical gluing argument is expanded using the existing isofibration and functor-calculus nodes."
+   }
+  },
+  {
+   "text": "Fix $\\mathcal E$. The degreewise functor definition identifies $\\operatorname{Fun}(\\bar B,\\mathcal E)$ with the strict pullback of $\\operatorname{Fun}(\\bar B_0,\\mathcal E)\\to\\operatorname{Fun}(\\bar B_{01},\\mathcal E)\\leftarrow\\operatorname{Fun}(\\bar B_1,\\mathcal E)$: maps out of the pushout times $\\Delta^n$ are compatible pairs of maps on its summands. Products with $\\Delta^n$ preserve this pushout by the same representative calculation as step 2. Since $\\bar B_{01}\\to\\bar B_0$ is degreewise injective, [lem-coef-infinity-isofibration-exponentiation] says the left restriction is an isofibration. Apply [lem-coef-infinity-isofibration-pullback-limit]: this strict pullback, with these restriction maps, is the coherent pullback in $\\mathrm{Cat}_\\infty$. The same degreewise identification and isofibration assertion hold for the full functor categories on the $\\bar A_i$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02LZ",
+    "place": "Proposition 6.3.5.14 (02MA), proof; base-change reduction, canonical edge collections and categorical pushout gluing. The categorical gluing argument is expanded using the existing isofibration and functor-calculus nodes."
+   }
+  },
+  {
+   "text": "The restricted left map $M_0\\to M_{01}$ is still an isofibration. For an inner horn with vertices in $M_0$, use the ambient isofibration to fill it; every vertex of the filler is already a horn vertex, so fullness puts the filler in $M_0$. For an equivalence from the restriction of $F\\in M_0$ to $G\\in M_{01}$, lift in the ambient functor categories to an equivalence $F\\to F^{\\prime}$. Its components are equivalences by [lem-cbc-enhanced-functor-cone-calculus]. For $w:x\\to y$ in $W_0$, the naturality square in $h\\mathcal E$ reads $[F^{\\prime}(w)][\\eta_x]=[\\eta_y][F(w)]$. Composition and the equivalence criterion of [lem-coef-infinity-mapping-composition] show $F^{\\prime}(w)$ is an equivalence, since the other three edges have invertible classes. Thus $F^{\\prime}\\in M_0$; fullness retains the lifted equivalence and its inverse witnesses. This proves both lifting conditions without requiring either $\\bar A_i$ to be a quasicategory.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02LZ",
+    "place": "Proposition 6.3.5.14 (02MA), proof; base-change reduction, canonical edge collections and categorical pushout gluing. The categorical gluing argument is expanded using the existing isofibration and functor-calculus nodes."
+   }
+  },
+  {
+   "text": "Let $j_i:\\bar A_i\\to\\bar A$ be the pushout inclusions and put $W=j_0(W_0)\\cup j_1(W_1)$, a collection of degree-one simplices of $\\bar A$. Let $M$ be the full subcategory of $\\operatorname{Fun}(\\bar A,\\mathcal E)$ inverting $W$. Under step 4's strict pullback identification for $\\bar A$, an object belongs to $M$ exactly when both of its summand restrictions belong to $M_0,M_1$. Those restrictions then belong to $M_{01}$ on the overlap by step 3. The same equality holds on all simplices, because all these subcategories are full, defined by their vertices. Consequently $M=M_0\\times_{M_{01}}M_1$ as simplicial sets, compatibly with both projections. Step 5 and [lem-coef-infinity-isofibration-pullback-limit] show this is also the coherent pullback of the edge-inverting cospan.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02LZ",
+    "place": "Proposition 6.3.5.14 (02MA), proof; base-change reduction, canonical edge collections and categorical pushout gluing. The categorical gluing argument is expanded using the existing isofibration and functor-calculus nodes."
+   }
+  },
+  {
+   "text": "Put $X_i=\\operatorname{Fun}(\\bar B_i,\\mathcal E)$ with the strict pullback $\\operatorname{Fun}(T,\\mathcal E)=X_0\\times_{X_{01}}X_1$ of step 4, and $M=M_0\\times_{M_{01}}M_1$ of step 6. For $G:\\bar B_i\\to\\mathcal E$ and $v_i:\\bar B_{01}\\to\\bar B_i$, $(G\\bar f_i)u_i=(Gv_i)\\bar f_{01}$, so the $L_i$ of step 3 commute strictly with overlap restriction and induce $\\varphi=(L_0,L_1)$ between the strict pullbacks with $\\operatorname{pr}_i\\varphi=L_i\\operatorname{pr}_i$. On $G:T\\to\\mathcal E$ its $j_i$-restrictions are those of $G\\bar f$, so $\\varphi=\\bar f^*$. By steps 4–6 and [lem-coef-infinity-isofibration-pullback-limit] both projection squares are pullback squares in $\\mathrm{Cat}_\\infty$. The $L_i$ are equivalences in $\\mathrm{Cat}_\\infty$, and by the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] for the cospan shape they form an equivalence of cospan diagrams. Composed with it, the square of $\\operatorname{Fun}(T,\\mathcal E)$ is a square over $M_0\\to M_{01}\\leftarrow M_1$, still limiting by the invariance under equivalences of cospan diagrams in [lem-coef-infinity-terminal-pullback-criterion]. Then $\\varphi$ is a map of cones between two limiting squares on that cospan; by the naturality of the comparisons in maps of cones in the same node, for every small quasicategory $Q$ postcomposition $\\operatorname{Fun}(Q,\\operatorname{Fun}(T,\\mathcal E))^\\simeq\\to\\operatorname{Fun}(Q,M)^\\simeq$ is homotopic to one comparison equivalence followed by an inverse of the other. With $Q=M$ choose $\\psi$ with $\\varphi\\psi$ naturally equivalent to the identity; with $Q=\\operatorname{Fun}(T,\\mathcal E)$, $\\varphi\\psi\\varphi\\simeq\\varphi$ gives $\\psi\\varphi\\simeq\\mathrm{id}$. So $\\bar f^*:\\operatorname{Fun}(T,\\mathcal E)\\to M$ is a functor equivalence. As $W$ does not depend on $\\mathcal E$, by [def-coef-universally-localizing-simplicial-map], $\\bar f$ exhibits $T$ as the localization of $T\\times_BA$ at $W$; since $g$ was arbitrary, $f$ is universally localizing.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-infinity-terminal-pullback-criterion",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02LZ",
+    "place": "Proposition 6.3.5.14 (02MA), proof, last sentence: categorical-pullback invariance (Kerodon 4.5.5.11, 6.3.5.3) expanded through the existing pullback-limit and limit-invariance nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-terminal-pullback-criterion",
+  "lem-coef-universal-localization-degenerate-edges"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02LZ",
+  "place": "Proposition 6.3.5.14 (02MA), proof read online; its categorical pushout/localization gluing expanded through strict functor pullbacks, repleteness and isofibrations. Archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +145,38 @@
    "results": "{\"t\": \"2026-10-17T03:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"Universally localizing simplicial maps are stable under pushouts of spans with monomorphism legs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts\", \"CategoryTheory.MorphismProperty.llp_isStableUnderCobaseChange\", \"CategoryTheory.MorphismProperty.pushouts_mk\", \"CategoryTheory.MorphismProperty.pushouts_monotone\", \"CategoryTheory.MorphismProperty.pushout_inl\", \"CategoryTheory.MorphismProperty.of_pushout_inl_of_codescendsAlong\", \"CategoryTheory.MorphismProperty.pushout_inr\"], \"digest\": \"47a46a417e9aa0ed\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits are ordinary category or ring localization and simplicial primitives, not universal localization of simplicial sets. Candidate types read; source checked in Mathlib/CategoryTheory/Localization/Predicate.lean:40-58, Prod.lean:115-145 and AlgebraicTopology/Quasicategory/Basic.lean:29-57."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*pushout|pushout.*localiz",
+   "results": "{\"t\": \"2026-10-17T04:38:20Z\", \"tool\": \"grep\", \"query\": \"localiz.*pushout|pushout.*localiz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"9715308f466296d5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern monomorphism cobase stability, ordinary simplicial pushouts, ring localizations or ordinary categorical localizations. Read CategoryTheory/Localization/Predicate.lean:40-90 and Algebra/Category/Ring/Constructions.lean:162-171; these do not establish universally localizing simplicial maps or their coherent functor-category gluing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"pushout\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-17T04:38:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"pushout\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern monomorphism cobase stability, ordinary simplicial pushouts, ring localizations or ordinary categorical localizations. Read CategoryTheory/Localization/Predicate.lean:40-90 and Algebra/Category/Ring/Constructions.lean:162-171; these do not establish universally localizing simplicial maps or their coherent functor-category gluing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing localizations in the Joyal model structure for a commutative map between two simplicial pushout diagrams",
+   "results": "{\"t\": \"2026-10-17T04:38:21Z\", \"tool\": \"leansearch\", \"query\": \"Gluing localizations in the Joyal model structure for a commutative map between two simplicial pushout diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.isPushout_of_isLocalization\", \"CategoryTheory.Limits.pushout.map\", \"CategoryTheory.LocalizerMorphism.catCommSq\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"IsLocalization.map_comp_map\", \"Submonoid.LocalizationMap.ofMulEquivOfLocalizations_comp\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"CategoryTheory.Limits.pushoutPushoutRightIsPushout\"], \"digest\": \"973a2710a47988db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern monomorphism cobase stability, ordinary simplicial pushouts, ring localizations or ordinary categorical localizations. Read CategoryTheory/Localization/Predicate.lean:40-90 and Algebra/Category/Ring/Constructions.lean:162-171; these do not establish universally localizing simplicial maps or their coherent functor-category gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal localization of simplicial sets is preserved by pushout gluing along monomorphisms in both spans",
+   "results": "{\"t\": \"2026-10-17T04:38:22Z\", \"tool\": \"leanfinder\", \"query\": \"Universal localization of simplicial sets is preserved by pushout gluing along monomorphisms in both spans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.horn₂₂.isPushout\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.instIsStableUnderCoproductsMonomorphismsOfHasCoproductsType\"], \"digest\": \"a27f264c53241ebc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern monomorphism cobase stability, ordinary simplicial pushouts, ring localizations or ordinary categorical localizations. Read CategoryTheory/Localization/Predicate.lean:40-90 and Algebra/Category/Ring/Constructions.lean:162-171; these do not establish universally localizing simplicial maps or their coherent functor-category gluing."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-embedded-simplex-resolution",
@@ -77,5 +208,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-universal-localization-pushout",
+  "worker": "stage1",
+  "summary": "Statement preserved. Expanded Kerodon 02MA into seven steps: degreewise base change, canonical edge choice, isofibration computations of whole functor categories and edge-inverting subcategories, and natural-equivalence invariance of their coherent pullbacks. One new statement-only canonical-edge theorem (Kerodon 02M2), no Mathlib match. All citations checked against node statements.",
+  "blueprint": "Historical ancestry from prop-coef-integral-exceptional-adjoint, paragraph 2: coherent finite-stage mapping-complex adjunction before derived inverse limits; presentability input uses finite cofinal resolutions. Realizes the supporting Kerodon 02MA pushout-gluing sentence in the finite embedded simplex resolution, retaining the imported unit and ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory/full-subcategory and componentwise-equivalence calculus, needed to retain all transformations in the functor pullbacks; the unit gives no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-bd10eb9a9",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-bd10eb9a9 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Kerodon online (02MA, Proposition 6.3.5.14; 02M2, Corollary 6.3.5.5); Kerodon is not under literature/ and the report lists it as WANTED. Item: its statement is unchanged against the live side copy and matches 02MA hypothesis by hypothesis. Both faces are degreewise pushouts, only the 0-legs are monomorphisms, all three vertical maps are universally localizing, and no quasicategory hypothesis is imposed. New node lem-coef-universal-localization-degenerate-edges matches 02M2: same degenerate-image edge set W_f, every quasicategory target. It is genuinely non-elementary (it needs 02M1) and statement-only. It is not a duplicate: I searched dag/nodes for 'universally localizing' and for degenerate together with localization, and the only hits are the item, the definition, contractible-factor-universal-localization, localization-homotopy-category and brown-right-exact-extension, none of which states it. Small cases: identity, Δ^1→Δ^0, and the empty map, which is not universally localizing. Steps 1–2 (pullback stability, pullback commuting with the pushouts, monomorphisms preserved) are elementary and correct, checked including empty and collapsing legs. Steps 3–6 check against the cited statements: the exponentiation node's isofibration clause has no hypothesis on the indexing simplicial sets, M_0→M_01 is an isofibration through fullness, the componentwise criterion and the mapping-composition criterion, and M is a strict pullback because all the subcategories are full. Step 7 had one fault (C1/C3): it used an uncited claim that postcomposing cones with an equivalence of diagrams gives equivalent cone categories. I fixed it by rewriting step 7 to cite the same-unit lem-coef-infinity-terminal-pullback-criterion (limiting squares are invariant under equivalences of cospan diagrams; comparisons are natural in maps of cones), together with a Yoneda argument through Fun(Q,-)^≃ that gives a quasi-inverse. The new citation creates no cycle, and proof_deps is updated. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, generic quasicategory calculus from unit sk-prop-sf-cbc. There is no SGA source and no target statement is affected. The fix is at fixes/dag/nodes/sec-six-functors/lem-coef-universal-localization-pushout.json; details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
