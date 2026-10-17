@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
-import all Sheaf.AlgebraicGeometry.CoherentFormalModule
+import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Interchanging two ideal-power quotients
 
@@ -35,10 +35,22 @@ private def quotientSwapMap {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
     formalModuleQuotient I n (formalModuleQuotient K e H) ⟶
       formalModuleQuotient K e (formalModuleQuotient I n H) := by
-  sorry
+  let qI := formalModuleQuotientπ I n H
+  let qK := formalModuleQuotientπ K e H
+  let pK := formalModuleQuotientπ K e (formalModuleQuotient I n H)
+  let bK := Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι e).2 H
+  have hK : bK ≫ qI ≫ pK = 0 :=
+    (idealModuleProduct_quotient_comp_zero_iff _ qI pK).mp (cokernel.condition _)
+  let t := cokernel.desc bK (qI ≫ pK) hK
+  let bI := Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2
+    (formalModuleQuotient K e H)
+  have hI : bI ≫ t = 0 := by
+    apply (idealModuleProduct_quotient_comp_zero_iff _ qK t).mpr
+    dsimp [qK, t, formalModuleQuotientπ]
+    rw [cokernel.π_desc]
+    simp [qI, formalModuleQuotientπ]
+  exact cokernel.desc bI t hI
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 @[reassoc (attr := simp)]
 private theorem quotientSwapMap_projection {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
@@ -48,10 +60,7 @@ private theorem quotientSwapMap_projection {X : Scheme.{u}} (I K : X.IdealSheafD
     formalModuleQuotientπ I n H ≫
       formalModuleQuotientπ K e (formalModuleQuotient I n H) := by
   simp [quotientSwapMap, formalModuleQuotientπ]
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private def quotientSwapIso {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
     formalModuleQuotient I n (formalModuleQuotient K e H) ≅
@@ -68,7 +77,6 @@ private def quotientSwapIso {X : Scheme.{u}} (I K : X.IdealSheafData)
     apply (cancel_epi (formalModuleQuotientπ I n H)).1
     simp only [quotientSwapMap_projection_assoc,
       quotientSwapMap_projection, Category.comp_id]
--/
 
 /-- The canonical quotient interchange, natural in both positive indices.
 Source: Stacks Project, Tag 088A, the quotient by I^n + K^e
@@ -96,7 +104,32 @@ theorem grothendieckDevissage_secondAdicSystem_comparison
           (θ.hom.app (op e)).app (op n) =
         formalModuleQuotientπ I (n + 1) H ≫
           formalModuleQuotientπ K (e + 1) (formalModuleQuotient I (n + 1) H) := by
-  sorry
+  let θ : formalCompletionSystem K H ⋙ formalCompletionFunctor I ≅
+      (formalCompletionSystem I H ⋙ formalCompletionFunctor K).flip :=
+    NatIso.ofComponents
+      (fun e ↦ NatIso.ofComponents
+        (fun n ↦ quotientSwapIso I K H (e.unop + 1) (n.unop + 1)) (by
+          intro a b f
+          apply (cancel_epi
+            (formalModuleQuotientπ I (a.unop + 1)
+              (formalModuleQuotient K (e.unop + 1) H))).1
+          apply (cancel_epi (formalModuleQuotientπ K (e.unop + 1) H)).1
+          simp [quotientSwapIso, quotientSwapMap, formalCompletionSystem,
+            formalCompletionFunctor, formalCompletionMap, formalModuleQuotientMap,
+            formalModuleQuotientπ, Category.assoc])) (by
+        intro a b f
+        apply NatTrans.ext
+        funext n
+        apply (cancel_epi
+          (formalModuleQuotientπ I (n.unop + 1)
+            (formalModuleQuotient K (a.unop + 1) H))).1
+        apply (cancel_epi (formalModuleQuotientπ K (a.unop + 1) H)).1
+        simp [quotientSwapIso, quotientSwapMap, formalCompletionSystem,
+          formalCompletionFunctor, formalCompletionMap, formalModuleQuotientMap,
+          formalModuleQuotientπ, Category.assoc])
+  refine ⟨θ, ?_⟩
+  intro e n
+  exact quotientSwapMap_projection I K H (e + 1) (n + 1)
 
 end
 

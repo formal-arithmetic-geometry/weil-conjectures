@@ -12,7 +12,7 @@
  },
  "proof": [
   {
-   "text": "Reuse the proved idealModuleProduct_quotient_comp_zero_iff from CoherentFormalModule through a proof-only import all. It identifies vanishing on a quotient ideal product with vanishing after the original epimorphic quotient projection. Its existing proof uses image factorization, multiplication naturality, and preservation of epimorphisms by tensoring.",
+   "text": "Reuse the proved idealModuleProduct_quotient_comp_zero_iff from WeilConjectures.AlgebraicGeometry.CoherentFormalModule through a proof-only import all of that defining module, rather than its retired Sheaf wrapper. It identifies vanishing on a quotient ideal product with vanishing after the original epimorphic quotient projection. Its existing proof uses image factorization, multiplication naturality, and preservation of epimorphisms by tensoring. No duplicate local theorem is needed.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
@@ -61,10 +61,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "D3",
+  "agent": "N4",
   "document": "literature/stacks-project/coherent.tex",
   "place": "Tag 088A, quotient by I^n + K^e",
-  "note": "Existing universal-property route implemented and compiled in Lean by D3. Repair reuses the private descent theorem of CoherentFormalModule with import all, removes all four duplicate helpers, and uses Mathlib cokernel equations directly for naturality. No new proof dependency or hole."
+  "note": "Repair of the duplicate-helper return: remove multiplicationNaturality and quotientIdealProduct_comp_zero_iff; import all the upstream defining CoherentFormalModule and use its existing idealModuleProduct_quotient_comp_zero_iff directly in both cokernel descents. The quotient interchange construction, inverse laws, and two naturality proofs are complete. No new theorem, proof dependency, or hole.",
+  "date": "2026-10-17"
  },
  "mathlib_searches": [
   {
@@ -150,12 +151,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261012T235110-L-2171290",
+  "landing": "20261017T003426-L-3316755",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
