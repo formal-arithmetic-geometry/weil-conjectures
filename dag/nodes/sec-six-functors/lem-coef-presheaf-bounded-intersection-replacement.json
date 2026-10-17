@@ -29,9 +29,177 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the generators as $i:D_i\\hookrightarrow E_i$, indexed by the small set $\\Lambda$. Apply [lem-coef-small-family-regular-bound] to the small family consisting of $\\mathbf N$, $\\operatorname{Mor}(A)$, $\\Lambda$, and the total-element sets of all $D_i,E_i$. Obtain an infinite regular cardinal $\\lambda$ strictly greater than every one of these sizes. Fix this cardinal independently of the input presheaf. All Hom sets of presheaves are small: a natural transformation is a family of functions indexed by the small object set, satisfying equations indexed by the small arrow set. In particular the set of pairs $(i,u)$ with $u:D_i\\to F$ is small for every $F$.",
+   "uses": [
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "Small presheaf colimits are computed objectwise. Indeed form at each $a$ the quotient of the disjoint union of the values of a small diagram by its arrow relations. Restrictions send relations to relations and hence descend; the functor laws hold on representatives. Compatible maps to any presheaf descend uniquely at each object, and their uniqueness proves naturality. This verifies exactly the colimit universal property of [def-weil-pbc-category-colimit]. For a presheaf $F$ form\n$$S(F)=\\coprod_{(i,u:D_i\\to F)}D_i,\\qquad C(F)=\\coprod_{(i,u:D_i\\to F)}E_i,\\qquad Q(F)=F\\amalg_{S(F)}C(F),$$\nwhere $S(F)\\to F$ evaluates $u$ and $S(F)\\to C(F)$ is the coproduct of the $i$. Denote the first pushout leg by $q_F:F\\to Q(F)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "We first check the elementwise meaning of a monomorphism: for $a\\in A$ let $h_a(b)=\\operatorname{Hom}_A(b,a)$ with restrictions by composition. An element $d\\in D(a)$ defines a natural map $h_a\\to D$, taking $g:b\\to a$ to $D(g)(d)$. If $i_a(d)=i_a(d')$, these two maps have equal composites with $i$ by naturality, so monicity makes them equal; evaluation at $1_a$ gives $d=d'$. Conversely componentwise injections cancel any two natural transformations componentwise and hence are monomorphisms. Thus all generator components are injective. Because each $i$ is injective objectwise, the quotient realizing the colimit universal property [def-weil-pbc-category-colimit] for this pushout has the following bijective normal form at every object $a$:\n$$Q(F)(a)=F(a)\\amalg\\coprod_{(i,u:D_i\\to F)}\\big(E_i(a)\\setminus i(D_i(a))\\big).$$\nTo verify it, send an old element to its first-summand value, send $(i,u,i(d))$ to $u(d)$, and keep every $(i,u,e)$ with $e$ outside the image as its own distinct new symbol. These maps identify exactly the pushout relations and give mutually inverse maps of the quotient and the displayed set. Restrictions of new symbols use restriction in $E_i$; if that restriction lands in $i(D_i)$, use its unique preimage and then $u$. Thus $q_F$ is a monomorphism. For $f:F\\to G$, send old $x$ to $f(x)$ and new $(i,u,e)$ to $(i,fu,e)$. This respects the quotient relations and restrictions, gives $Q(f)$, and proves identity, composition and $Q(f)q_F=q_Gf$ directly.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "If $f$ is monic, $u\\mapsto fu$ is injective, so the normal form in Step 3 makes $Q(f)$ injective at every object. For $S,T\\subseteq Y$, the old elements in both $Q(S)$ and $Q(T)$ are exactly $S\\cap T$. A new symbol $(i,u,e)$ of $Q(Y)(a)$ is in $Q(S)$ precisely when $u$ factors through $S$, and similarly for $T$. Both factorizations exist precisely when every component value of $u$ lies in $S\\cap T$; these component maps then give the unique natural factorization through $S\\cap T$. Hence the common new symbols are exactly those of $Q(S\\cap T)$. Old symbols never equal new ones. This proves both monomorphism preservation and preservation of intersections for the one-step functor, including empty domains and empty intersections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-transfinite-recursion] on the small ordinal $\\lambda+1$ to construct functors $F_\\beta$ and compatible natural transition maps for $0\\leq\\beta\\leq\\lambda$: $F_0=\\mathrm{id}$, $F_{\\beta+1}=QF_\\beta$, and $F_\\delta(F)=\\varinjlim_{\\beta<\\delta}F_\\beta(F)$ at every nonzero limit $\\delta$. The successor transition is $q_{F_\\beta(F)}$; all earlier transitions are its composites. At a limit the transition maps are the coprojections of the objectwise colimit of Step 2. For a morphism $f$, use $Q(F_\\beta(f))$ at successors and the map induced by the colimit cocone at limits. The successor functor laws follow from Step 3; the limit laws follow because the two maps agree after every coprojection. The same checks give naturality of all transitions and their composite identities. This specifies the recursion on coherent prefixes; give any fixed dummy output on an incoherent prefix, and the displayed induction shows it is never used. Set $R=F_\\lambda$ and let $\\eta:F_0\\to F_\\lambda$ be the natural transition.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "Transfinite induction shows all transition maps are monic, each $F_\\beta$ preserves monomorphisms, and $F_\\beta(S\\cap T)=F_\\beta(S)\\cap F_\\beta(T)$ inside $F_\\beta(Y)$. The successor assertions follow from Steps 3-4 applied to the already monic images at the previous stage. At a nonzero limit all transitions are injective, so the objectwise colimit is their union: the equivalence relation generated by transitions identifies two representatives precisely when they become equal at a common later stage: a finite zigzag of transition identifications has an upper bound below the limit, where all its equalities hold. This quotient is the colimit of [def-weil-pbc-category-colimit], by Step 2. This also makes the induced map for a monomorphism injective, since equality can be tested at that stage. An element in both limiting images of $S$ and $T$ has representatives at two stages; pass to a common stage below the limit at which their images in the ambient chain agree, where the inductive intersection assertion puts it in the image for $S\\cap T$. The reverse inclusion follows from the two inclusions. This proves (2) for $R$ and also justifies all subobject identifications below.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "Each $q_F$ belongs to $\\operatorname{wsat}(\\Lambda)$. Well-order its small attaching set $(i,u)$ by [lem-weil-pbc-well-ordering-theorem], with small ordinal order type $\\rho$. For $\\gamma\\leq\\rho$ let $P_\\gamma$ be the pushout attaching only the copies indexed by ordinals $<\\gamma$, using their original maps to $F$. Then $P_0=F$, each successor $P_\\gamma\\to P_{\\gamma+1}$ is a pushout of the single generator indexed by $\\gamma$, and the diagram is continuous at limits. These assertions follow from the universal property in [def-weil-pbc-category-colimit]: a map out of any such stage is a map out of $F$ and one map out of each attached $E_i$ agreeing with $u$ on its $D_i$; at a limit this is precisely a compatible family of the preceding data. The final stage is the simultaneous pushout $Q(F)$ by the same test. Weak saturation therefore gives $q_F$, including the isomorphism when the attaching set is empty. The continuous $\\lambda$-chain defining $\\eta_F$ consists of these maps, so closure under small transfinite compositions gives $\\eta_F\\in\\operatorname{wsat}(\\Lambda)$.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "For $i:D_i\\hookrightarrow E_i$ and $u:D_i\\to R(F)$, choose for every total element of $D_i$ a stage $\\beta<\\lambda$ representing its image. There are fewer than $\\lambda$ elements, so regularity gives one $\\beta<\\lambda$ containing all their images. Since $F_\\beta(F)\\hookrightarrow R(F)$ is monic, $u$ factors uniquely as a natural map $u_\\beta:D_i\\to F_\\beta(F)$: restrictions agree after this monomorphism and hence before it. The copy of $E_i$ labelled by $(i,u_\\beta)$ at the next attachment supplies an extension $E_i\\to F_{\\beta+1}(F)\\to R(F)$. The initial ordinal of the infinite cardinal $\\lambda$ is a limit, so $\\beta+1<\\lambda$. This proves $\\Lambda$-injectivity and completes (1). The stage choices are legitimate: well-order $\\lambda$ and take each least representing stage.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-weil-pbc-well-ordering-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "Let $\\theta\\in\\mathcal U$ be the cardinal of the disjoint union of the initial ordinal $\\lambda$, $\\mathbf N$, and the total-element set of $B$; thus $\\theta$ is infinite and at least $\\lambda,|B|$. By [lem-coef-infinite-cardinal-square-power], $\\theta\\theta=\\theta$, $\\theta<2^\\theta$, and $(2^\\theta)^\\theta=2^\\theta$. Put $\\mu=2^\\theta$ and $\\alpha=\\mu^+$. By [lem-coef-infinite-cardinal-successor-regular], $\\alpha$ is infinite regular in $\\mathcal U$. In particular $\\lambda<\\alpha$, $\\alpha>|B|$, and $\\alpha>|\\operatorname{Mor}(A)|$. The same square identity applied to any infinite bound $\\nu$ gives $\\nu\\nu=\\nu$; consequently products and disjoint unions of at most $\\nu$ sets each of size at most $\\nu$ have size at most $\\nu$, by injections into $\\nu\\times\\nu$. We use this counting form below.",
+   "uses": [
+    "lem-coef-infinite-cardinal-square-power",
+    "lem-coef-infinite-cardinal-successor-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "If $|F|<\\alpha$ then $|F|\\leq\\mu$. Whenever $|H|\\leq\\mu$, a natural transformation $D_i\\to H$ is determined by its function on total elements, so there are at most $\\mu^{|D_i|}\\leq\\mu^\\theta=\\mu$ choices (the empty domain gives one choice). The normal form of Step 3 therefore gives $|Q(H)|\\leq\\mu$: there are $|\\Lambda|<\\lambda\\leq\\theta<\\mu$ generator indices, at most $\\mu$ attaching maps for each index, and each $E_i$ has size $<\\lambda$, so the set of new total symbols injects into a product of three sets of size at most $\\mu$. At a limit $\\delta\\leq\\lambda$, the union of at most $\\lambda\\leq\\mu$ total-element sets of size at most $\\mu$ again has size at most $\\mu$. Transfinite induction gives $|R(F)|\\leq\\mu<\\alpha$. Finally the total-element set of $B\\times R(F)$ injects into the product of the two total-element sets (retain the common object label), so it too has size at most $\\mu\\mu=\\mu<\\alpha$. This is (3).",
+   "uses": [
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "For every $\\beta\\leq\\lambda$, every $a\\in A$, every $Y$, and every $z\\in F_\\beta(Y)(a)$, prove by transfinite induction the support assertion: there exists a subpresheaf $T\\subseteq Y$ of total size $<\\lambda$ such that $z$ lies in $F_\\beta(T)(a)\\subseteq F_\\beta(Y)(a)$. At $\\beta=0$, take the subpresheaf generated by $z$; its total elements are restrictions of $z$ along arrows with target $a$, so its size is at most $|\\operatorname{Mor}(A)|<\\lambda$. At a limit $\\beta$, $z$ has a representative at an earlier stage; its supporting subpresheaf remains a support after the transition. For the successor induction assume the assertion at $\\beta$ simultaneously for all objects and elements. If $z$ is an old element, its existing support works. If it is a new symbol $(i,u,e)$, for each total element $d$ of $D_i$ choose a support $T_d$ for $u(d)\\in F_\\beta(Y)$. Such choices can be made by well-ordering the small set of subpresheaves of $Y$ (coded by subsets of its total-element set) and taking the least suitable support for each $d$, using [lem-weil-pbc-well-ordering-theorem]. Put $T=\\bigcup_d T_d$. There are fewer than $\\lambda$ choices, each of size $<\\lambda$, so regularity gives $|T|<\\lambda$. Each $u(d)$ then lies in $F_\\beta(T)$ by functoriality and Step 6. The monic inclusion $F_\\beta(T)\\hookrightarrow F_\\beta(Y)$ ensures these component values give a natural map $u_T:D_i\\to F_\\beta(T)$. The symbol $(i,u_T,e)$ of $QF_\\beta(T)$ maps to $z$. This completes the induction, including $D_i=\\varnothing$, where $T=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "Apply the support assertion at $\\beta=\\lambda$. Every total element of $R(Y)$ belongs to $R(T)$ for a subpresheaf $T\\subseteq Y$ of size $<\\lambda<\\alpha$. Conversely every such image is a subpresheaf of $R(Y)$ by (2). Their objectwise union is therefore exactly $R(Y)$, proving (4). This is an actual small union: the subpresheaves of $Y$ form a subset of the power set of its total-element set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "For (5) put $V=\\bigcup_{\\xi<\\lambda}T_\\xi\\subseteq Y$. Any $z\\in R(V)(a)$ has, by Step 11 applied with $V$ in place of $Y$, a support $S\\subseteq V$ of size $<\\lambda$. Every total element of $S$ lies in some $T_\\xi$. Choose its least such ordinal; fewer than $\\lambda$ ordinals have been chosen, so regularity bounds them by one $\\xi<\\lambda$ (use $0$ when $S$ is empty). Hence $S\\subseteq T_\\xi$ as subpresheaves. Functoriality puts $z$ in the image of $R(T_\\xi)$ in $R(V)$ and then in $R(Y)$. The reverse inclusion follows from $T_\\xi\\subseteq V$. Since $R$ preserves monomorphisms, this is exactly the canonical identification of the stated union with $R(V)$, rather than just a noncanonical bijection.",
+   "uses": [
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  },
+  {
+   "text": "All presheaf values, Hom sets, attaching sets, objectwise quotients and power sets above belong to $\\mathcal U$. All recursion and colimit indices are small ordinals in $\\mathcal U$: the fixed $\\lambda$-iteration and the well-orders of the small attaching sets. The cardinal constructions use small disjoint unions, power sets and successor cardinals in $\\mathcal U$. Grothendieck-universe closure in [def-weil-size-convention] thus keeps every construction and colimit in the input universe. The resulting single $R,\\eta,\\lambda,\\alpha$ satisfy all five clauses simultaneously, with no assumption on the size of $Y$ other than its membership in $\\mathcal P$. To compare with the source size convention, define $A/F$ to have objects $(a,x)$ with $x\\in F(a)$, and an arrow $(a,x)\\to(b,y)$ to be $g:a\\to b$ with $F(g)(y)=x$. Identity arrows embed the total-element set of $F$ in $\\operatorname{Mor}(A/F)$, and an arrow is determined by $(g,y)$, giving $|F|\\leq|\\operatorname{Mor}(A/F)|\\leq|\\operatorname{Mor}(A)|\\cdot|F|$. Since $\\alpha$ is infinite and $|\\operatorname{Mor}(A)|<\\alpha$, the counting argument of Step 9 makes the two size-below-$\\alpha$ conventions equivalent, including $F=\\varnothing$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65; agent supplies the omitted details."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention",
+  "lem-coef-infinite-cardinal-square-power",
+  "lem-coef-infinite-cardinal-successor-regular",
+  "lem-coef-small-family-regular-bound",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-well-ordering-theorem"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Explicit expansion of Cisinski 2.4.36-2.4.37: labelled-complement pushout calculation, lambda-stage iteration, support induction and alpha=(2^theta)^+ size bound. Online source read 2026-10-17; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -102,10 +270,73 @@
    "results": "{\"t\": \"2026-10-16T21:51:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a small set of monomorphisms of presheaves there is a functorial injective replacement preserving binary intersections, bounded size, small supports, and unions of a sufficiently long regular chain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity\", \"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor\", \"CategoryTheory.IsGrothendieckAbelian.exists_isIso_of_functor_from_monoOver\", \"CategoryTheory.presheaf_mono_of_mono\", \"CategoryTheory.MorphismProperty.presheaf_monomorphisms_le_monomorphisms\"], \"digest\": \"76b68d4761e27fa3\"}",
    "date": "2026-10-17",
    "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial injective replacement of presheaves preserves monomorphisms intersections filtered colimits and bounded cardinal size",
+   "results": "{\"t\": \"2026-10-16T23:01:55Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial injective replacement of presheaves preserves monomorphisms intersections filtered colimits and bounded cardinal size\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity\", \"CategoryTheory.presheaf_mono_of_mono\", \"TopCat.Presheaf.stalkFunctor_preserves_mono\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_injective\", \"CategoryTheory.IsGrothendieckAbelian.preservesColimit_coyoneda_obj_of_mono\", \"CategoryTheory.MorphismProperty.presheaf_monomorphisms_le_monomorphisms\", \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\"], \"digest\": \"e08f5f5edffb7372\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "SmallObject, Presheaf, PreservesPullbacks",
+   "results": "{\"t\": \"2026-10-16T23:01:56Z\", \"tool\": \"loogle\", \"query\": \"SmallObject, Presheaf, PreservesPullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SmallObject'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported loogle: unknown identifier 'SmallObject'; this invocation provides no negative search evidence. The later quoted-string query ran successfully."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial injective replacement for presheaves preserving intersections and cardinal bounds",
+   "results": "{\"t\": \"2026-10-16T23:01:56Z\", \"tool\": \"leansearch\", \"query\": \"Functorial injective replacement for presheaves preserving intersections and cardinal bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesInjectiveObjects\", \"CategoryTheory.Functor.PreservesInjectiveObjects.casesOn\", \"CategoryTheory.Functor.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects.mk\", \"CategoryTheory.Functor.injective_obj_of_injective\", \"CategoryTheory.Sheaf.functorialLocallySurjectiveInjectiveFactorization\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\"], \"digest\": \"5ebf2fd25b4c814a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small set of presheaf monomorphisms admits an intersection preserving injective replacement with small supports and uniform cardinal size control",
+   "results": "{\"t\": \"2026-10-16T23:09:40Z\", \"tool\": \"leanfinder\", \"query\": \"A small set of presheaf monomorphisms admits an intersection preserving injective replacement with small supports and uniform cardinal size control\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀\", \"CategoryTheory.IsGrothendieckAbelian.instIsSmallGeneratingMonomorphismsOfSmallSubobject\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity\", \"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\", \"CategoryTheory.MorphismProperty.presheaf_monomorphisms_le_monomorphisms\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver_obj\", \"CategoryTheory.MorphismProperty.presheaf_mono_of_le\", \"CategoryTheory.ObjectProperty.IsCoseparating.mk_of_exists_mono\"], \"digest\": \"3a8641e4f4ffd645\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "fibrantReplacement|preserv.*intersections",
+   "results": "{\"t\": \"2026-10-16T23:09:40Z\", \"tool\": \"grep\", \"query\": \"fibrantReplacement|preserv.*intersections\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Set-valued functor category small object argument functor preserves pullbacks of subobjects and bounded supports",
+   "results": "{\"t\": \"2026-10-16T23:29:22Z\", \"tool\": \"leanfinder\", \"query\": \"Set-valued functor category small object argument functor preserves pullbacks of subobjects and bounded supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.succStruct\", \"CategoryTheory.Subobject.functor\", \"CategoryTheory.SmallObject.succStruct_prop_le_propArrow\", \"CategoryTheory.SmallObject.instSmallιAttachCellsιFunctorObj\", \"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\", \"CategoryTheory.Subobject.wideCospan\", \"CategoryTheory.SmallObject.obj\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\"], \"digest\": \"c028ec4d2bf5f824\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "preserv.*[Ii]ntersection|[Ii]ntersection.*preserv|SmallObject.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-16T23:29:43Z\", \"tool\": \"grep\", \"query\": \"preserv.*[Ii]ntersection|[Ii]ntersection.*preserv|SmallObject.*[Pp]ullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean\", \"Mathlib/MeasureTheory/Measure/RegularityCompacts.lean\"], \"digest\": \"c0f6c8c9a1d843b6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An accessible endofunctor on set valued presheaves giving injective objects for chosen monomorphisms preserves binary intersections",
+   "results": "{\"t\": \"2026-10-16T23:30:49Z\", \"tool\": \"leansearch\", \"query\": \"An accessible endofunctor on set valued presheaves giving injective objects for chosen monomorphisms preserves binary intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesInjectiveObjects.casesOn\", \"CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects\", \"CategoryTheory.Injective.mk\", \"CategoryTheory.Functor.injective_obj_of_injective\", \"CategoryTheory.Injective.under\", \"CategoryTheory.Functor.injective_of_map_injective\", \"CategoryTheory.Functor.PreservesInjectiveObjects.mk\"], \"digest\": \"442029dbdca1f2fb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SmallObject\", \"Subobject\"",
+   "results": "{\"t\": \"2026-10-16T23:30:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SmallObject\\\", \\\"Subobject\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the logged hits give generic small-object constructions, ordinary monomorphism or subobject facts, sheaf conditions, or preservation of already injective objects; none states this replacement with intersections and simultaneous support/cardinal bounds. SmallObject/Construction.lean:80-145 and IsCardinalForSmallObjectArgument.lean:65-125 were read; their statements do not assert these bounds."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presheaf-weak-mono-bounded-enlargement",
@@ -125,5 +356,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-presheaf-bounded-intersection-replacement",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved all five clauses directly by the explicit all-cell one-step functor, transfinite iteration, distinct-complement labels, small supports, and separate iteration and size cardinals. Reused existing recursion, well-ordering, colimit and cardinal Mathlib leaves. No new nodes. Read the source and every cited statement; checked empty indexing/category/domain/intersection cases. Second reading clarified the attaching-index count, proved the source size-convention comparison, and made the colimit arguments/citations explicit; no statement change.",
+  "blueprint": "Expands the supporting construction in blueprint.from.place for prop-coef-integral-exceptional-adjoint proof paragraph 2: preserves the inherited small-object route before bounded weak-monomorphism enlargement. Steps 2-8 realize Cisinski 2.4.36; steps 3-6 and 9-14 supply the details of 2.4.37 that the source leaves to the reader.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NB-63afc4ff9",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-63afc4ff9 (reviewer sub-agent of L); spot-checked: I read the item (its statement is unchanged from the side DAG), all 14 steps, the full statements of the 7 cited nodes and the parent's uses of clauses (1)-(5). I checked every step myself: the objectwise normal form of the one-step pushout Q(F)(a)=F(a) ⊔ the labelled complements; that Q preserves monos and intersections (old and new symbols never collide, and u factors through S∩T); the transfinite induction at limit stages; that eta_F is in wsat(Lambda) as a continuous composite of single-generator pushouts; Lambda-injectivity from the regularity of lambda; the size bound with alpha=(2^theta)^+, using mu^theta=mu, at most mu new symbols, at most lambda unions at limits and |B x R(F)|<=mu; supports of size below lambda by simultaneous induction; and clauses (4) and (5) from those supports. Edge cases checked: A empty, Lambda empty, an empty-domain generator with S∩T empty, a non-injective attaching map u, B empty or large. The delivery has no new nodes. Every dependency is a definition or a Mathlib leaf, so there are no off-unit tools (tool_uses=[]), no cycle, and proof_deps equals the union of the uses. No SGA source is used. The small-object factorization nodes and good-subset-enlargement do not state this item, so it is not a duplicate. Caveat: Cisinski 2.4.36-2.4.37 is not in literature/ and network access is blocked here, so I could not read the source; the proof is marked agent-written and its WANTED entry stands. Unverified: source.place still says PDF pp. 79-80, though the report claims a correction to 80-81; no change made. No fixes."
+ }
 }

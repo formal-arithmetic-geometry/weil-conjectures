@@ -29,9 +29,93 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose one universe containing $E,B$ and their fibers, and put $K=E_{b'}$. The fiber $E_b$ is a quasicategory: apply the inner-horn lifting property of $p$ over the constant simplex at $b$. Let $T$ consist of all $p$-cartesian edges of $E$. It contains all degenerate edges: a degenerate edge has itself as inverse with degenerate inverse triangles, so [lem-cbc-inner-fibration-equivalence-outer-horn-lift] fills every final outer horn with this final edge, which is exactly the cartesian criterion. Thus $E^T=(E,T)$ is a marked simplicial set. Use the coordinatewise product markings of [lem-coef-marked-endpoint-prism-generation], and put $U=(\\Delta^1)^\\sharp\\times K^\\flat$, with base map $f\\operatorname{pr}_{\\Delta^1}$, and $A=\\{1\\}^\\sharp\\times K^\\flat$. The only marked edges of $U$ have constant $K$-coordinate at a vertex; hence the given $h_j$ are marked maps $U\\to E^T$ over $B$, both restricting to $a=i_{b'}$ on $A$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "lem-coef-marked-endpoint-prism-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13 for degenerate cartesian edges; the marked witness construction uses the explicit markings in HTT Proposition 3.1.1.5."
+   }
+  },
+  {
+   "text": "The marked map $E^T\\to B^\\sharp$ lifts all the generators $I\\cup F$ of [lem-coef-marked-endpoint-prism-generation]. An $I$-problem is an inner-horn problem for $p$, and has no nondegenerate marked edges to check. For $F$ in dimension $n=1$, the problem prescribes a target and a base edge, so the cartesian-fibration hypothesis gives a marked lift. For $F$ in dimension $n\\geq2$, its final edge already lies in the horn and is sent to a $p$-cartesian edge, so its filler is precisely the final-horn condition of [def-coef-infinity-fibrations]; the only nondegenerate edge required to be marked was already specified. The right lifting property persists under the closure operations defining $\\langle I\\cup F\\rangle$: for a pushout restrict the problem to the attached domain and glue its filler; for a transfinite composite choose fillers successively, taking the compatible colimit map at each limit ordinal; for a retract compose a filler with the two retraction maps. Hence $E^T\\to B^\\sharp$ lifts every member of $\\langle I\\cup F\\rangle$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-marked-endpoint-prism-generation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5, classes (1) and (2); direct horn lifting and the elementary closure of a right lifting property."
+   }
+  },
+  {
+   "text": "Define a simplicial set $W$ by taking its $n$-simplices to be marked maps\n$$(\\Delta^1)^\\sharp\\times(K\\times\\Delta^n)^\\flat\\longrightarrow E^T$$\nover the fixed base $f\\operatorname{pr}_{\\Delta^1}$ whose restriction at interval endpoint $1$ is $i_{b'}\\operatorname{pr}_K$. Operators restrict the $\\Delta^n$ parameter. Its vertices include $h_0,h_1$. For a prescribed boundary $\\partial\\Delta^n\\to W$, its compatible faces and the fixed terminal diagram give a marked map on\n$$((\\Delta^1)^\\sharp\\times(K\\times\\partial\\Delta^n)^\\flat)\\amalg_{\\{1\\}^\\sharp\\times(K\\times\\partial\\Delta^n)^\\flat}(\\{1\\}^\\sharp\\times(K\\times\\Delta^n)^\\flat).$$\nThe inclusion of this domain into $(\\Delta^1)^\\sharp\\times(K\\times\\Delta^n)^\\flat$ is $P(K\\times\\partial\\Delta^n\\hookrightarrow K\\times\\Delta^n)$, so [lem-coef-marked-endpoint-prism-generation] places it in $\\langle I\\cup F\\rangle$. Step 2 supplies its marked filler over the same base. This extends the boundary to an $n$-simplex of $W$, including $n=0$. Thus $W\\to\\Delta^0$ is a trivial Kan fibration in the boundary-lifting sense of [def-weil-pbc-trivial-kan-fibration]. No relative marked model structure or mapping-space theorem is used.",
+   "uses": [
+    "lem-coef-marked-endpoint-prism-generation",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5, class (2-double-prime), applied to K times a boundary inclusion; Stacks 08NL, label definition-trivial-kan, for the resulting lifting terminology."
+   }
+  },
+  {
+   "text": "Apply boundary lifting for $W\\to\\Delta^0$ in dimension one twice, to the ordered endpoint pairs $(h_0,h_1)$ and $(h_1,h_0)$, obtaining edges $\\gamma:h_0\\to h_1$ and $\\delta:h_1\\to h_0$. Next prescribe a full two-simplex boundary whose vertices are $(h_0,h_1,h_0)$, whose successive edges are $(\\gamma,\\delta)$, and whose long edge is the degenerate edge of $h_0$. The vertices match, so this is a well-defined boundary map and lifts in dimension two. Repeat with vertices $(h_1,h_0,h_1)$, successive edges $(\\delta,\\gamma)$ and the degenerate long edge of $h_1$. The two resulting $2$-simplices supply both inverse triangles in $W$, always with the terminal diagram fixed.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Stacks Tag 08NL, label definition-trivial-kan, in dimensions one and two."
+   }
+  },
+  {
+   "text": "Restriction to interval endpoint $0$ defines a simplicial map\n$$\\operatorname{ev}_0:W\\longrightarrow\\operatorname{Fun}(K,E_b).$$\nIndeed an $n$-simplex of $W$ restricts to a map $K\\times\\Delta^n\\to E$ with constant base $b$, which uniquely factors through the degreewise fiber $E_b$. The factorization commutes with all parameter operators. Both $K$ and the parameter have minimal marking, so no edge of $K$ is being required to be cartesian. The vertices $h_j$ map to $R_j$. Let $s=\\operatorname{ev}_0(\\gamma)$ and $t=\\operatorname{ev}_0(\\delta)$. The two triangles in step 4 restrict to triangles with successive edges $(s,t)$ and $(t,s)$ and degenerate long edges $1_{R_0}$ and $1_{R_1}$. These are simplices of the full internal functor object, rather than just objectwise comparisons.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, printed p.14, definition of the internal mapping simplicial set; explicit degreewise evaluation."
+   }
+  },
+  {
+   "text": "By [lem-cbc-internal-hom-quasicategory], $\\operatorname{Fun}(K,E_b)$ is a quasicategory, since $E_b$ is a quasicategory by step 1. By the equivalence-edge definition of [def-cbc-enhanced-diagrams-cones], the edge $s$ with inverse $t$ and these two triangles is an equivalence in that functor quasicategory. Edges there are coherent transformations, and the triangles are exactly $ts\\simeq1_{R_0}$ and $st\\simeq1_{R_1}$. This proves every clause with $K=E_{b'}$. The construction used only cartesian lifts and the specified coherent witnesses.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, basic facts (1) and (3), printed p.14; the resulting conclusion is Kerodon Proposition 5.2.2.17 (019X)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-coef-marked-endpoint-prism-generation",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-internal-hom-quasicategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Direct marked endpoint-prism lifting proof from Proposition 3.1.1.5; the inner and final horn fillers come directly from the cartesian-fibration definition. Supplemented by Kerodon 01H0 and the archived Scholze Lecture II p.14. This is the uniqueness conclusion of Kerodon 019X, not an appeal to the parent adjunction or a relative model structure."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +151,66 @@
    "results": "{\"t\": \"2026-10-16T22:31:07Z\", \"tool\": \"leanfinder\", \"query\": \"Any two choices of cartesian parallel transport over an arrow define equivalent functors between the fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom\", \"CategoryTheory.Grothendieck.congr\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso\", \"CategoryTheory.Grothendieck.fiber_eqToHom\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom_isHomLift\", \"HasFibers.inducedMap\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"HasFibers.pullbackMap.isCartesian\"], \"digest\": \"a331354922990179\"}",
    "date": "2026-10-16",
    "verdict": "No match: domainUniqueUpToIso and Grothendieck results concern ordinary cartesian lifts and ordinary categories; none compares coherent functors between quasicategorical fibers."
+  },
+  {
+   "tool": "grep",
+   "query": "transport|cartesian",
+   "results": "{\"t\": \"2026-10-16T22:58:07Z\", \"tool\": \"grep\", \"query\": \"transport|cartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"b426e533d62f56e0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fibered categories (Cartesian.lean:54-87,141-151), ordinary functor uniqueness or terminal-object constructions; focused quasicategory grep finds only StrictBicategory.lean:28,56, not coherent cartesian transport uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of cartesian lifts in functor quasicategories yields natural equivalence of transport functors",
+   "results": "{\"t\": \"2026-10-16T22:58:08Z\", \"tool\": \"leansearch\", \"query\": \"Uniqueness of cartesian lifts in functor quasicategories yields natural equivalence of transport functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.WithTerminal.liftToTerminalUnique\", \"CategoryTheory.Functor.IsStronglyCartesian.map_uniq\", \"CategoryTheory.Functor.IsCartesian.ext\", \"CategoryTheory.WithTerminal.liftUnique\", \"CategoryTheory.Functor.IsStronglyCartesian.map\", \"CategoryTheory.Quotient.lift_unique\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift.congr_simp\"], \"digest\": \"c934ae22abfb0b75\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fibered categories (Cartesian.lean:54-87,141-151), ordinary functor uniqueness or terminal-object constructions; focused quasicategory grep finds only StrictBicategory.lean:28,56, not coherent cartesian transport uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCartesian\"",
+   "results": "{\"t\": \"2026-10-16T22:58:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsCartesianDistributive\", \"CategoryTheory.IsCartesianDistributive.monoCoprod\", \"CategoryTheory.IsCartesianDistributive.of_isMonoidalLeftDistrib\", \"CategoryTheory.Functor.IsCartesian\", \"CategoryTheory.Functor.IsCartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.isCartesian_of_isStronglyCartesian\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso\", \"CategoryTheory.Functor.IsCartesian.map\"], \"digest\": \"8a7f3fc99cc16b43\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fibered categories (Cartesian.lean:54-87,141-151), ordinary functor uniqueness or terminal-object constructions; focused quasicategory grep finds only StrictBicategory.lean:28,56, not coherent cartesian transport uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two coherent cartesian transport functors along the same edge of a quasicategory cartesian fibration are naturally equivalent",
+   "results": "{\"t\": \"2026-10-16T22:58:10Z\", \"tool\": \"leanfinder\", \"query\": \"Two coherent cartesian transport functors along the same edge of a quasicategory cartesian fibration are naturally equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso\", \"CategoryTheory.Functor.IsStronglyCartesian.domainIsoOfBaseIso_hom\", \"CategoryTheory.Functor.IsStronglyCartesian.domainIsoOfBaseIso\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom_isHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.domainUniqueUpToIso_hom_isHomLift\", \"CategoryTheory.Functor.IsCartesian.ext\", \"CategoryTheory.Functor.IsStronglyCartesian.ext\"], \"digest\": \"a194b35b864c2d53\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fibered categories (Cartesian.lean:54-87,141-151), ordinary functor uniqueness or terminal-object constructions; focused quasicategory grep finds only StrictBicategory.lean:28,56, not coherent cartesian transport uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "domainUniqueUpToIso|class IsCartesian",
+   "results": "{\"t\": \"2026-10-16T22:58:42Z\", \"tool\": \"grep\", \"query\": \"domainUniqueUpToIso|class IsCartesian\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\"], \"digest\": \"95d450077fb8f886\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fibered categories (Cartesian.lean:54-87,141-151), ordinary functor uniqueness or terminal-object constructions; focused quasicategory grep finds only StrictBicategory.lean:28,56, not coherent cartesian transport uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The space of coherent cartesian lifts of a diagram with prescribed terminal endpoint is contractible",
+   "results": "{\"t\": \"2026-10-16T22:58:44Z\", \"tool\": \"leanfinder\", \"query\": \"The space of coherent cartesian lifts of a diagram with prescribed terminal endpoint is contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CechNerveTerminalFrom.uniqueToWideCospanNone\", \"CategoryTheory.Functor.IsCartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCartesian.universal_property'\", \"CategoryTheory.Functor.IsStronglyCartesian.universal_property\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_inv_isHomLift\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCartesian.map_uniq\"], \"digest\": \"1d5a4c343032d9d5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fibered categories (Cartesian.lean:54-87,141-151), ordinary functor uniqueness or terminal-object constructions; focused quasicategory grep finds only StrictBicategory.lean:28,56, not coherent cartesian transport uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness up to equivalence of lifts against the endpoint inclusion of a simplicial interval",
+   "results": "{\"t\": \"2026-10-16T23:32:08Z\", \"tool\": \"leanfinder\", \"query\": \"Uniqueness up to equivalence of lifts against the endpoint inclusion of a simplicial interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.RelStruct.mk.inj\", \"CategoryTheory.SimplicialThickening.mk.inj\", \"CategoryTheory.SimplicialThickening.Path.mk.inj\", \"SSet.stdSimplex.ext₀\", \"SSet.Path.ext₀\", \"SSet.PtSimplex.MulStruct.mk.inj\", \"SSet.Path.ext'\", \"SSet.stdSimplex.ext₀_iff\"], \"digest\": \"8ade63a46a28a97b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern equality of pointed-simplex structures, paths or maps to the terminal simplex, rather than cartesian fibrations or coherent transport."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartesian|cartesian|transport",
+   "results": "{\"t\": \"2026-10-16T23:32:47Z\", \"tool\": \"grep\", \"query\": \"Cartesian|cartesian|transport\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CompStruct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CompStruct.lean\"], \"digest\": \"ec3f74242cf357b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected CompStruct.lean:134-141,299-311, where transport means substitution along equality; remaining hits concern the cartesian monoidal structure, not cartesian fibrations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-bicartesian-interval-adjunction",
@@ -78,5 +218,34 @@
   "group": "NB"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-transport-uniqueness",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Gave a direct horn-lifting split: cartesian marking, lifting against inner and final marked horns, endpoint-prism fillers for every boundary in the simplicial set of coherent witnesses with fixed terminal diagram, explicit reverse edges and inverse triangles, then initial-endpoint evaluation. No new nodes or Mathlib leaves. Repaired the first preflight cycle by removing the relative marked-anodyne-calculus citation and all model-category dependencies.",
+  "blueprint": "Realizes the derived coefficient adjunction paragraph of prop-coef-integral-exceptional-adjoint (current main-20261015 sk-thm-sf-package proof, second paragraph), at the existing ancestry point beneath lem-coef-infinity-bicartesian-interval-adjunction: compares its given cartesian transport with the restricted coreflector, without invoking that parent or an adjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic final-outer-horn filling along a degenerate equivalence proves that the cartesian marking contains identities; this is a simplicial tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-cbc-internal-hom-quasicategory",
+    "why": "Generic internal-Hom quasicategory theorem identifies the target functor object as a quasicategory; no statement of this unit supplies this foundational fact without stronger dependencies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-internal-hom-quasicategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-0dbe13768",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-0dbe13768 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. It is one commit holding the report and the item, with no new nodes and no unit edit; review.md has the step-by-step checks. HTT and Kerodon are not archived, so I checked the HTT 3.1.1.5 / Kerodon 5.2.2.17 steps mathematically rather than against the page text; WANTED lines and proof_origin.by=agent are recorded. STATEMENT: unchanged and true. It is the uniqueness clause of Kerodon 5.2.2.17 (019X) for cartesian transport, with the right orientation: the cartesian edges Delta^1 x {x} have target x over f. It gives exactly the inverse-triangle equivalence the parent lem-coef-infinity-bicartesian-interval-adjunction uses, with B=Delta^1. It is not a target node, so the base-change and coefficient checks do not apply. Tested on K empty, B=Delta^0 and K=Delta^0. STEPS: S1: degenerate edges are equivalences, so the Lambda^n_n clause of lem-cbc-inner-fibration-equivalence-outer-horn-lift makes them cartesian. The fiber E_b is a quasicategory by constant-base inner fillers. The marked edges of (Delta^1)^sharp x K^flat are degenerate or h_j(Delta^1 x {x}). S2 (elementary): I gives inner fillers. F at n=1 is the cartesian lift with prescribed target. F at n>=2 has its edge [n-1,n] already in face d0 of the horn, so the filler is the definition of a cartesian edge. Closure of the lifting property is standard. S3: the boundary data glue to exactly the domain of P(K x boundary -> K x Delta^n). The final clause of lem-coef-marked-endpoint-prism-generation gives the filler, and n=0 gives surjectivity, so W->Delta^0 is a trivial Kan fibration. Checked against Stacks 08NL, simplicial.tex:5533-5545 and the tags/tags line. S4: the 1- and 2-dimensional boundaries are well formed. S5: ev_0 factors uniquely through E_b, sends h_j to R_j and keeps degenerate long edges degenerate. S6: lem-cbc-internal-hom-quasicategory is a Mathlib leaf, and Scholze Lecture II p.14 facts (1) and (3) match in the archived PDF. DUPLICATES AND CYCLE: I read the marked-anodyne, relative-marked, cocartesian-lifting, pointwise-transport, mapping-fiber and relative-cartesian-model nodes; none states the item. The dependency closure (15 nodes) does not reach the item, so there is no cycle. ROUTE: sk-prop-sf-cbc is not in the transitive uses of sk-prop-sf-biduality-general. Accepted tool_use: lem-cbc-inner-fibration-equivalence-outer-horn-lift, used as a black box for 'degenerate edges are cartesian' in step 1; two existing sec-six-functors nodes already record it the same way. The declared internal-Hom tool use is a Mathlib leaf and needs no entry. No SGA source is used."
+ }
 }
