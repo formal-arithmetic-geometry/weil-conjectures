@@ -73,7 +73,19 @@ lemma pullHom_map ⦃X₁ : C⦄ ⦃M₁ M₂ : F.obj (.mk (op X₁))⦄ (a : M�
 
 /-- The pullback `pullHom φ l (p₁ ≫ r₁) (p₂ ≫ r₂)` of a morphism `φ : w₁^* M₁ ⟶ w₂^* M₂` along
 `l`, seen as a morphism `p₁^* (r₁^* M₁) ⟶ p₂^* (r₂^* M₂)` via the comparison isomorphisms
-`(p₁ ≫ r₁)^* ≅ p₁^* r₁^*` and `(p₂ ≫ r₂)^* ≅ p₂^* r₂^*`. -/
+`(p₁ ≫ r₁)^* ≅ p₁^* r₁^*` and `(p₂ ≫ r₂)^* ≅ p₂^* r₂^*`.
+The two squares commute (`hl₁`, `hl₂`):
+```
+         p₁        p₂
+   X₁' ←──── Y ────→ X₂'
+    │        │        │
+ r₁ │        │ l      │ r₂
+    ↓        ↓        ↓
+   X₁ ←───── Z ─────→ X₂
+         w₁        w₂
+```
+Compare `pullHom_mapComp'_conj`, which computes the pullback of a morphism conjugated by
+`mapComp'`; here it is the pullback that is conjugated. -/
 noncomputable def pullHomMapComp' ⦃X₁ X₂ Z : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
     ⦃M₂ : F.obj (.mk (op X₂))⦄ ⦃w₁ : Z ⟶ X₁⦄ ⦃w₂ : Z ⟶ X₂⦄
     (φ : (F.map w₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map w₂.op.toLoc).toFunctor.obj M₂)
