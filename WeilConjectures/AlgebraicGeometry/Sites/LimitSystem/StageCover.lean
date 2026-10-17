@@ -148,8 +148,9 @@ lemma exists_stageModel {k : I} {V₀ : (D.obj (op k)).Etale} [CompactSpace V₀
     rw [← Scheme.Hom.comp_apply, ← MorphismProperty.Comma.comp_left, Category.assoc,
       Iso.inv_hom_id, Category.comp_id]
   have : IsAffine V'.left := ‹IsAffine U'.left›
-  obtain ⟨iO, hiO⟩ := exists_hasStageModel (D := D') (π := πV) (c := c') hc' (pullback.fst V₀.hom P)
-    (fun m ↦ by simp [c', πV]) V' (hN.preimage e.hom.left) (by rintro _ ⟨x, rfl⟩; exact hVN x) (𝟙 V₀.left) (𝟙 V₀.left)
+  obtain ⟨iO, hiO⟩ := exists_hasStageModel (D := D') (π := πV) (c := c') hc'
+    (pullback.fst V₀.hom P) (fun m ↦ by simp [c', πV]) V' (hN.preimage e.hom.left)
+    (by rintro _ ⟨x, rfl⟩; exact hVN x) (𝟙 V₀.left) (𝟙 V₀.left)
     ((g ≫ e.inv).left ≫ pullback.fst V₀.hom P) (by simp [V'])
     ((g ≫ e.inv).left ≫ pullback.fst V₀.hom P) (by simp [V'])
   refine ⟨iO.left.unop, fun l hkl hil ↦ ?_⟩
@@ -177,10 +178,13 @@ lemma exists_stageModel {k : I} {V₀ : (D.obj (op k)).Etale} [CompactSpace V₀
     rw [Category.assoc]
     erw [IsPullback.isoPullback_hom_fst_assoc]
     rw [hpb.w_assoc]
-    simp [c', V']
+    simp only [c', V', baseChangeOverCone_π_app]
+    erw [pullback.lift_fst, Category.comp_id]
+    rfl
   · simp [ι, p', Y', stageBaseChangeIso, Scheme.Hom.Etale, MorphismProperty.Over.pullback]
     erw [pullback.lift_snd, IsPullback.isoPullback_hom_snd]
     simp [V']
+    rfl
 
 include hc in
 /-- Every covering sieve of a stage object contains a stage family generating a covering sieve.

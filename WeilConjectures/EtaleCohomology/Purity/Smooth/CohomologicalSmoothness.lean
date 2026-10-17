@@ -163,6 +163,7 @@ theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ constantComplex Λ X) :=
   nonempty_dualizingComplex_iso_of_etale e
 
+omit [HasTateTwist Λ] in
 /-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
 ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of `sk-prop-cohsm` (b) for `e`,
 smooth of relative dimension zero, together with `ω_e ≅ Λ_X`

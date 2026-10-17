@@ -130,8 +130,42 @@ lemma map_derivedOpenImmersionLowerShriekToLowerStar_app_comp_counit {U Z : Sche
   simp only [Functor.comp_map, Functor.id_map] at hn
   simp only [derivedOpenImmersionLowerShriekToLowerStar, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app,
-    NatIso.isIso_inv_app, Category.id_comp, Functor.map_comp, Category.assoc, hn]
-  rw [← Category.assoc, Adjunction.left_triangle_components, Category.id_comp]
+    NatIso.isIso_inv_app, Category.id_comp, Functor.map_comp]
+  rw [Category.assoc]
+  erw [hn]
+  rw [← Category.assoc]
+  erw [Adjunction.left_triangle_components]
+  rw [Category.id_comp]
+
+/-- The composition map `Rq_* ⋙ R(c.i)_* ... `: conjugate, under the levelwise derived
+adjunctions, of the composition isomorphism `D(k^*) ≅ D(q^*) ⋙ D(j^*)`. -/
+noncomputable abbrev rightDerivedLowerStarCompHom' {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R)
+    (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂) :
+    R((g₁)_*[A]) ⋙ R((g₂)_*[A]) ⟶ R((g₁₂)_*[A]) :=
+  conjugateEquiv ((mapDerivedUpperStarLowerStarAdjunction A g₂).comp
+      (mapDerivedUpperStarLowerStarAdjunction A g₁)) (mapDerivedUpperStarLowerStarAdjunction A g₁₂)
+    (Functor.mapDerivedCategoryNatIso (upperStarComp A g₁ g₂ g₁₂ hg) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _).hom
+
+/-- **The comparison `D(j_!) ⟶ Rj_*` along a refinement**: for a refinement `r` of
+compactifications with cartesian square over `X` and `q = r.hom`, the comparison for `d.i` is
+the unit of `D(q^*) ⊣ Rq_*`, followed by `Rq_*` of the inverse base change
+`D(d.i)_! ⋙ D(q^*) ≅ D(c.i)_!` and of the comparison for `c.i`, and by the composition map
+`R(c.i)_* ⋙ Rq_* ⟶ R(d.i)_*`. -/
+lemma derivedOpenImmersionLowerShriekToLowerStar_app_eq_of_refinement
+    (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (derivedOpenImmersionLowerShriekToLowerStar A d.i).app M =
+      (mapDerivedUpperStarLowerStarAdjunction A r.hom).unit.app (D((d.i)_!open[A]).obj M) ≫
+        R((r.hom)_*[A]).map ((refinementLowerShriekBaseChangeDerivedIso A r hcart).inv.app M ≫
+          (derivedOpenImmersionLowerShriekToLowerStar A c.i).app M) ≫
+        (rightDerivedLowerStarCompHom' A c.i r.hom d.i r.i_hom.symm).app M := by
+  apply ((mapDerivedUpperStarLowerStarAdjunction A d.i).homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit]
+  rw [map_derivedOpenImmersionLowerShriekToLowerStar_app_comp_counit, Functor.map_comp,
+    Functor.map_comp, Category.assoc, Category.assoc, conjugateEquiv_counit,
+    Adjunction.comp_counit_app]
+  done
 
 end Etale
 

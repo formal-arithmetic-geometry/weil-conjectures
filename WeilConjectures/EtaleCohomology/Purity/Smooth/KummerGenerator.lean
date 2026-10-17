@@ -79,7 +79,8 @@ noncomputable def kummerGenerator :
           (tateObject Λ (multiplicativeGroupOpen Y).toScheme 1)) :=
   (_root_.DerivedCategory.homologyFunctor _ 0).map (kummerGeneratorDerived Λ Y ≫
       ((R((multiplicativeGroupProj Y)_*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app _) ≫
-    ((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso 1 0 1 (by norm_num)).hom.app _
+    ((_root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      0).shiftIso (1 : ℤ) 0 1 (by norm_num)).hom.app _
 
 /-- Blueprint `pur9-def-kummer-generator-proet`: The pro-étale Kummer generator
 

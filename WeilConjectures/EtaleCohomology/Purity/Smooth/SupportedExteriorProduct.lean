@@ -36,47 +36,36 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
-  {X Y Z W T : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+  {X Y Z W P Z₁ W₁ T : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+  (p₁ : P ⟶ X) (p₂ : P ⟶ Y) (hw : p₂ ≫ aY = p₁ ≫ aX)
   (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
-  (ι : T ⟶ pullback aX aY) [IsClosedImmersion ι]
+  (i₁ : Z₁ ⟶ P) (g₁ : Z₁ ⟶ Z) (hg₁ : IsPullback g₁ i₁ i p₁)
+  (j₁ : W₁ ⟶ P) (g₂ : W₁ ⟶ W) (hg₂ : IsPullback g₂ j₁ j p₂)
+  [IsClosedImmersion i₁] [IsClosedImmersion j₁] (ι : T ⟶ P) [IsClosedImmersion ι]
+  (h : Set.range ι.base = Set.range i₁.base ∩ Set.range j₁.base)
 
 /-- Blueprint `def-pur-supported-exterior-product`: The supported exterior product
 
-For closed immersions `i : Z ⟶ X`, `j : W ⟶ Y` over a field `k` and a closed immersion
-`ι : T ⟶ X ×_k Y` onto `Z × W` (`h`: the range of `ι` is the intersection of the preimages of `Z`
-and `W`), the supported exterior product
+Let `P = X ×_k Y` with projections `p₁`, `p₂` (any square `p₂ ≫ a_Y = p₁ ≫ a_X`), let
+`i : Z ⟶ X`, `j : W ⟶ Y` be closed immersions with preimages `i₁ : Z₁ ⟶ P`, `j₁ : W₁ ⟶ P`, and
+`ι : T ⟶ P` a closed immersion onto their intersection `Z × W`. The supported exterior product
 
 `κ^{Z,W}_{K,L} : RΓ_Z(X, K) ⊗ᴸ RΓ_W(Y, L) ⟶ RΓ_{Z × W}(X ×_k Y, K ⊠ L)`,
 
-with `RΓ_Z(X, K) = Ra_{X*}(Ri_! Ri^! K)` in `D((Spec k)_ét)`: the Künneth map at
+with `RΓ_Z(X, K) = Ra_{X*}(Ri_! Ri^! K)` in `D((Spec k)_ét)`, is the Künneth map at
 `Ri_! Ri^! K` and `Rj_! Rj^! L`, followed by `Rc_*` of the restriction of supports along the
-projections and of the product of supports `Ri'_! Ri'^! p^*K ⊗ Rj'_! Rj'^! q^*L ⟶
-Rι_! Rι^!(K ⊠ L)`. -/
+projections and of the product of supports
+`Ri₁_! Ri₁^! p₁^*K ⊗ Rj₁_! Rj₁^! p₂^*L ⟶ Rι_! Rι^!(K ⊠ L)`. -/
 noncomputable def supportedExteriorProduct
-    (h : Set.range ι.base = Set.range (pullback.snd i (pullback.fst aX aY)).base ∩
-      Set.range (pullback.snd j (pullback.snd aX aY)).base)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
-        ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj
-          ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)))).obj
-        ((R((aY)_*[ModuleCat.{u + 1} Λ])).obj
-          ((R(j)_![ModuleCat.{u + 1} Λ]).obj ((R(j)^![ModuleCat.{u + 1} Λ]).obj L))) ⟶
-      (R((pullback.fst aX aY ≫ aX)_*[ModuleCat.{u + 1} Λ])).obj
-        ((R(ι)_![ModuleCat.{u + 1} Λ]).obj ((R(ι)^![ModuleCat.{u + 1} Λ]).obj
-          (((derivedTensor (ModuleCat.{u + 1} Λ) (pullback aX aY)).obj
-            ((L((pullback.fst aX aY)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-              ((L((pullback.snd aX aY)^*[ModuleCat.{u + 1} Λ])).obj L)))) :=
-  kunnethMap (ModuleCat.{u + 1} Λ) (pullback.fst aX aY) (pullback.snd aX aY) aX aY
-      (pullback.fst aX aY ≫ aX) rfl pullback.condition.symm _ _ ≫
-    (R((pullback.fst aX aY ≫ aX)_*[ModuleCat.{u + 1} Λ])).map
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  kunnethMap (ModuleCat.{u + 1} Λ) p₁ p₂ aX aY (p₁ ≫ aX) rfl hw
+      ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))
+      ((R(j)_![ModuleCat.{u + 1} Λ]).obj ((R(j)^![ModuleCat.{u + 1} Λ]).obj L)) ≫
+    (R((p₁ ≫ aX)_*[ModuleCat.{u + 1} Λ])).map
       (derivedTensorHom (ModuleCat.{u + 1} Λ)
-          (supportedRestriction (ModuleCat.{u + 1} Λ) (pullback.fst aX aY) i
-            (pullback.snd i (pullback.fst aX aY)) (pullback.fst i (pullback.fst aX aY))
-            (IsPullback.of_hasPullback _ _) K _ (Iso.refl _))
-          (supportedRestriction (ModuleCat.{u + 1} Λ) (pullback.snd aX aY) j
-            (pullback.snd j (pullback.snd aX aY)) (pullback.fst j (pullback.snd aX aY))
-            (IsPullback.of_hasPullback _ _) L _ (Iso.refl _)) ≫
-        supportedProduct (ModuleCat.{u + 1} Λ) _ _ ι h _ _)
+          (supportedRestriction (ModuleCat.{u + 1} Λ) p₁ i i₁ g₁ hg₁ K _ (Iso.refl _))
+          (supportedRestriction (ModuleCat.{u + 1} Λ) p₂ j j₁ g₂ hg₂ L _ (Iso.refl _)) ≫
+        supportedProduct (ModuleCat.{u + 1} Λ) i₁ j₁ ι h _ _)
 
 end AlgebraicGeometry.Etale

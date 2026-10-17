@@ -137,7 +137,7 @@ theorem ProEtaleWeilSheaf.isZero_upperStar_rightDerivedLowerStar_extensionByZero
       ((ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroCompForgetIso k₀ l a).app M))
     exact (Functor.isZero_mapDerivedCategory_obj
       (adicOpenImmersionLowerShriek l ab ⋙ adicUpperStar l fb) _
-      fun F ↦ isZero_adicUpperStar_adicOpenImmersionLowerShriek _ _ hdisj F).of_iso
+      fun _ ↦ isZero_adicUpperStar_adicOpenImmersionLowerShriek _ _ hdisj _).of_iso
         (((adicOpenImmersionLowerShriek l ab).mapDerivedCategoryCompIso
           (adicUpperStar l fb)).symm.app _)
   have h₂ := isZero_adicUpperStar_rightDerivedLowerStar_of_isProper
@@ -177,8 +177,8 @@ theorem ProEtaleWeilSheaf.nonempty_rightDerivedLowerStar_extensionByZero_iso
   have hiso := (Triangle.isZero₃_iff_isIso₁ _ hw).1 h₃
   obtain ⟨e⟩ := ProEtaleWeilSheaf.nonempty_upperStar_rightDerivedLowerStar_extensionByZero_iso
     (k₀ := k₀) (l := l) j a g hag M
-  exact ⟨(asIso ((ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).counit.app
-    N)).symm ≪≫ (ProEtaleWeilSheaf.upperStarLeftAdjoint k₀ l j).mapDerivedCategory.mapIso e⟩
+  exact ⟨(@asIso _ _ _ _ ((ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).counit.app
+    N) hiso).symm ≪≫ (ProEtaleWeilSheaf.upperStarLeftAdjoint k₀ l j).mapDerivedCategory.mapIso e⟩
 
 end Compactification
 

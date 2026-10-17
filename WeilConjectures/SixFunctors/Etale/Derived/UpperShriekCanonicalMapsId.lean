@@ -67,7 +67,8 @@ lemma isIso_rightDerivedUpperShriekAdjunction_unit_id :
   obtain ⟨e⟩ := nonempty_rightDerivedLowerShriek_id_iso Λ X
   have : (R(𝟙 X)_![ModuleCat.{u + 1} Λ]).Full := Functor.Full.of_iso e.symm
   have : (R(𝟙 X)_![ModuleCat.{u + 1} Λ]).Faithful := Functor.Faithful.of_iso e.symm
-  exact (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X)).unit_isIso_of_L_fully_faithful
+  exact
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X)).unit_isIso_of_L_fully_faithful
 
 /-- The counit of `R(𝟙)_! ⊣ R(𝟙)^!` is an isomorphism: `R(𝟙)^!` is right adjoint to
 `R(𝟙)_! ≅ 𝟭`, hence isomorphic to `𝟭` and fully faithful. -/
@@ -79,7 +80,8 @@ lemma isIso_rightDerivedUpperShriekAdjunction_counit_id :
       (Adjunction.id.ofNatIsoLeft e.symm)
   have : (R(𝟙 X)^![ModuleCat.{u + 1} Λ]).Full := Functor.Full.of_iso e'.symm
   have : (R(𝟙 X)^![ModuleCat.{u + 1} Λ]).Faithful := Functor.Faithful.of_iso e'.symm
-  exact (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X)).counit_isIso_of_R_fully_faithful
+  exact
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X)).counit_isIso_of_R_fully_faithful
 
 /-- For the identity `𝟙 X`, the canonical tensor map `θ_{𝟙,K}` is an isomorphism: it is the
 adjoint transpose of an isomorphism along the adjoint equivalence `R(𝟙)_! ⊣ R(𝟙)^!`. -/

@@ -201,9 +201,8 @@ theorem exists_hypercoverStageData : ∃ i, Nonempty (HypercoverStageData D c U 
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Iso.app_hom]
   rw [reassoc_of% (hφ n)]
-  simp only [ψ, Functor.const_obj_obj, Scheme.Etale.forget_map, Category.assoc,
-    NatIso.cancel_natIso_hom_left]
-  exact Category.comp_id _
+  simp only [ψ, Category.assoc, Iso.inv_hom_id_app]
+  exact congrArg _ (congrArg _ (Category.comp_id _))
 
 end Stage
 

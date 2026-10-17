@@ -162,7 +162,9 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
     (ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).counit.app K.obj)
   obtain ⟨C, g₁, h₁, hT⟩ := distinguished_cocone_triangle f₁
   refine ⟨_, hT, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩, ?_⟩
-  obtain ⟨φ, -, -⟩ := exists_iso_of_arrow_iso _ _ hT hw (Arrow.isoMk e (Iso.refl _) (by
+  have hT' : (WeilComplex.objectProperty k₀ l X).ι.mapTriangle.obj (Triangle.mk f₁ g₁ h₁) ∈
+      distTriang _ := hT
+  obtain ⟨φ, -, -⟩ := exists_iso_of_arrow_iso _ _ hT' hw (Arrow.isoMk e (Iso.refl _) (by
     simp [f₁]))
   exact ⟨ObjectProperty.isoMk _ (Triangle.π₃.mapIso φ)⟩
 

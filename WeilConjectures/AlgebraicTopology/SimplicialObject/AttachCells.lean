@@ -290,6 +290,49 @@ lemma isIso_inl_of_isColimit {W X Y Z : C} {f : W ⟶ X} {g : W ⟶ Y} {inl : X 
     change inr ≫ d ≫ inl = inr ≫ 𝟙 Z
     rw [reassoc_of% h₂, Category.comp_id, w, IsIso.inv_hom_id_assoc]
 
+/-- In a pushout of `f : ∐_{a // p a} N ⟶ Z` along the summand inclusion
+`∐_{a // p a} N ⟶ ∐_A N`, the pushout is the coproduct of `Z` and of the copies of `N`
+indexed by the complement `{a // q a}` of `p`. -/
+def isColimitBinaryCofanOfIsPushout {A : Type} [Finite A] (p q : A → Prop)
+    (hq : ∀ a, q a ↔ ¬ p a) (N : C) {Z P : C} (f : (∐ fun _ : {a // p a} ↦ N) ⟶ Z)
+    {inl : Z ⟶ P} {inr : (∐ fun _ : A ↦ N) ⟶ P}
+    {w : f ≫ inl = Sigma.map' (f := fun _ : {a // p a} ↦ N) (g := fun _ : A ↦ N) Subtype.val
+      (fun _ ↦ 𝟙 N) ≫ inr}
+    (h : IsColimit (PushoutCocone.mk inl inr w)) :
+    IsColimit (BinaryCofan.mk inl
+      (Sigma.desc fun a : {a // q a} ↦ Sigma.ι (fun _ : A ↦ N) a.1 ≫ inr)) := by
+  classical
+  let d : ∀ (s : BinaryCofan Z (∐ fun _ : {a // q a} ↦ N)), (∐ fun _ : A ↦ N) ⟶ s.pt :=
+    fun s ↦ Sigma.desc fun a ↦
+      if ha : p a then Sigma.ι (fun _ : {a // p a} ↦ N) ⟨a, ha⟩ ≫ f ≫ s.inl
+      else Sigma.ι (fun _ : {a // q a} ↦ N) ⟨a, (hq a).2 ha⟩ ≫ s.inr
+  have hd : ∀ s, f ≫ s.inl = Sigma.map' (f := fun _ : {a // p a} ↦ N)
+      (g := fun _ : A ↦ N) Subtype.val (fun _ ↦ 𝟙 N) ≫ d s := fun s ↦ by
+    refine Sigma.hom_ext _ _ (fun a ↦ ?_)
+    simp [d, a.2]
+  refine BinaryCofan.IsColimit.mk _ (fun s ↦ PushoutCocone.IsColimit.desc h s.inl (d s) (hd s))
+    (fun s ↦ PushoutCocone.IsColimit.inl_desc h _ _ _) (fun s ↦ ?_) (fun s m h₁ h₂ ↦ ?_)
+  · refine Sigma.hom_ext _ _ (fun a ↦ ?_)
+    have ha : ¬ p a.1 := (hq a.1).1 a.2
+    simp only [colimit.ι_desc_assoc, Discrete.functor_obj_eq_as, Cofan.mk_pt, Cofan.mk_ι_app,
+      Category.assoc, PushoutCocone.IsColimit.inr_desc h]
+    simp [d, ha]
+  · refine PushoutCocone.IsColimit.hom_ext h ?_ ?_
+    · rw [PushoutCocone.IsColimit.inl_desc h]
+      exact h₁
+    · rw [PushoutCocone.IsColimit.inr_desc h]
+      refine Sigma.hom_ext _ _ (fun a ↦ ?_)
+      by_cases ha : p a
+      · have := Sigma.ι (fun _ : {a // p a} ↦ N) ⟨a, ha⟩ ≫= w
+        simp only [Sigma.ι_comp_map'_assoc, Category.id_comp] at this
+        change Sigma.ι (fun _ : A ↦ N) a ≫ inr ≫ m = _
+        rw [reassoc_of% this.symm]
+        simp [d, ha, h₁]
+      · have := Sigma.ι (fun _ : {a // q a} ↦ N) ⟨a, (hq a).2 ha⟩ ≫= h₂
+        simp only [BinaryCofan.mk_inr, colimit.ι_desc_assoc, Discrete.functor_obj_eq_as,
+          Cofan.mk_pt, Cofan.mk_ι_app, Category.assoc] at this
+        simp [d, ha, this]
+
 variable {W : SimplicialObject C} {n : ℕ} {N : C} (c : BoundaryCone W n N)
 
 instance (k : SimplexCategoryᵒᵖ) :
@@ -394,6 +437,24 @@ lemma isIso_attachInl_app (k : SimplexCategoryᵒᵖ) (hk : k.unop.len < n) :
     exact ⟨Sigma.map' e.symm (fun _ ↦ 𝟙 N), Sigma.hom_ext _ _ (fun s ↦ by simp [e]),
       Sigma.hom_ext _ _ (fun s ↦ by simp [e])⟩
   exact isIso_inl_of_isColimit (c.isColimitAttachApp k)
+
+
+/-- In each degree `k`, `c.attach` is the coproduct of `W _k` and of copies of `N` indexed
+by the surjections `k ⟶ ⦋n⦌`. -/
+def isColimitAttachBinaryCofan (k : SimplexCategoryᵒᵖ) :
+    IsColimit (BinaryCofan.mk (c.attachInl.app k)
+      (Sigma.desc fun s : {s : k.unop ⟶ ⦋n⦌ // Epi s} ↦
+        Sigma.ι (fun _ : k.unop ⟶ ⦋n⦌ ↦ N) s.1 ≫ c.attachInr.app k)) :=
+  isColimitBinaryCofanOfIsPushout (fun s : k.unop ⟶ ⦋n⦌ ↦ ¬ Epi s) (fun s ↦ Epi s)
+    (fun _ ↦ not_not.symm) N _ (c.isColimitAttachApp k)
+
+lemma attach_sigmaDesc_eq (k : SimplexCategoryᵒᵖ) :
+    (Sigma.desc fun s : {s : k.unop ⟶ ⦋n⦌ // Epi s} ↦
+        Sigma.ι (fun _ : k.unop ⟶ ⦋n⦌ ↦ N) s.1 ≫ c.attachInr.app k) =
+      Sigma.desc fun s : {s : k.unop ⟶ ⦋n⦌ // Epi s} ↦ c.attachι ≫ c.attach.map s.1.op := by
+  refine Sigma.hom_ext _ _ (fun s ↦ ?_)
+  simp only [colimit.ι_desc, Cofan.mk_pt, Cofan.mk_ι_app]
+  exact c.ι_attachInr_app k s.1
 
 end BoundaryCone
 

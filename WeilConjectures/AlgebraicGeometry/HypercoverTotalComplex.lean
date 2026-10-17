@@ -37,6 +37,8 @@ variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (U : SplitEta
   {A : Type u'} [Category.{u + 1} A] [Abelian A]
   (L : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ)
 
+attribute [local instance] Abelian.hasFiniteBiproducts
+
 /-- The term `L^r(U_p)` of the double complex. -/
 abbrev dObj (p r : ℕ) : A := (L.X r).obj.obj (op (U.simplicial _⦋p⦌))
 
@@ -116,36 +118,34 @@ lemma totObj_hom_ext' {n : ℕ} {Z : A} {f g : Z ⟶ U.totObj L n}
     (h : ∀ p r (hpr : p + r = n), f ≫ U.totπ L p r n hpr = g ≫ U.totπ L p r n hpr) : f = g :=
   biproduct.hom_ext _ _ fun x ↦ h x.1.1 x.1.2 (Finset.mem_antidiagonal.1 x.2)
 
+lemma totι_π (p r n : ℕ) (h : p + r = n) (x : TotIdx n) :
+    U.totι L p r n h ≫ biproduct.π (fun x : TotIdx n ↦ U.dObj L x.1.1 x.1.2) x =
+      if hx : (p, r) = x.1 then eqToHom (by rw [← hx]) else 0 := by
+  split_ifs with hx
+  · obtain ⟨⟨p', r'⟩, hx'⟩ := x
+    simp only [Prod.mk.injEq] at hx
+    obtain ⟨rfl, rfl⟩ := hx
+    exact biproduct.ι_π_self _ _
+  · exact biproduct.ι_π_ne _ (fun e ↦ hx (congrArg Subtype.val e))
+
 lemma totι_totD (p r n : ℕ) (h : p + r = n) :
     U.totι L p r n h ≫ U.totD L n =
       U.dHor L p r ≫ U.totι L (p + 1) r (n + 1) (by omega) +
         ((-1 : ℤ) ^ p) • U.dVert L p r ≫ U.totι L p (r + 1) (n + 1) (by omega) := by
-  apply totObj_hom_ext'
-  intro p' r' hpr'
-  rw [totι, totD, Category.assoc, biproduct.ι_matrix_assoc, totπ, biproduct.lift_π]
-  simp only [Preadditive.add_comp, Preadditive.zsmul_comp, Category.assoc]
-  rw [totEntry]
+  apply biproduct.hom_ext
+  rintro ⟨⟨p', r'⟩, hpr'⟩
+  rw [totι, totD, Category.assoc, biproduct.ι_matrix_assoc, biproduct.lift_π]
+  simp only [Preadditive.add_comp, Preadditive.zsmul_comp, Category.assoc, totι_π, totEntry]
   by_cases h₁ : (p', r') = (p + 1, r)
-  · obtain ⟨rfl, rfl⟩ := Prod.ext_iff.1 h₁
-    rw [dif_pos rfl, dif_neg (by simp), add_zero, eqToHom_refl, Category.comp_id,
-      ← totπ, totι_totπ, Category.comp_id, ← totπ, totι_totπ_of_ne _ _ _ _ _ _ _ _ (by omega),
-      comp_zero, smul_zero, add_zero]
-  · rw [dif_neg h₁]
-    by_cases h₂ : (p', r') = (p, r + 1)
-    · obtain ⟨rfl, rfl⟩ := Prod.ext_iff.1 h₂
-      rw [dif_pos rfl, eqToHom_refl, Category.comp_id, zero_add, ← totπ,
-        totι_totπ_of_ne _ _ _ _ _ _ _ _ (by omega), comp_zero, zero_add, ← totπ, totι_totπ,
-        Category.comp_id]
-    · rw [dif_neg h₂, add_zero]
-      have e₁ : U.totι L (p + 1) r (n + 1) (by omega) ≫ U.totπ L p' r' (n + 1) hpr' = 0 := by
-        apply totι_totπ_of_ne
-        intro e
-        exact h₁ (Prod.ext e.symm (by omega))
-      have e₂ : U.totι L p (r + 1) (n + 1) (by omega) ≫ U.totπ L p' r' (n + 1) hpr' = 0 := by
-        apply totι_totπ_of_ne
-        intro e
-        exact h₂ (Prod.ext e.symm (by omega))
-      rw [← totπ, ← totπ, e₁, e₂, comp_zero, comp_zero, smul_zero, add_zero]
+  · simp only [Prod.mk.injEq] at h₁
+    obtain ⟨rfl, rfl⟩ := h₁
+    simp
+  · by_cases h₂ : (p', r') = (p, r + 1)
+    · simp only [Prod.mk.injEq] at h₂
+      obtain ⟨rfl, rfl⟩ := h₂
+      simp
+    · rw [dif_neg h₁, dif_neg h₂, dif_neg (Ne.symm h₁), dif_neg (Ne.symm h₂)]
+      simp
 
 lemma totD_totD (n : ℕ) : U.totD L n ≫ U.totD L (n + 1) = 0 := by
   apply totObj_hom_ext

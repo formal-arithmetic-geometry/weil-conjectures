@@ -252,6 +252,8 @@ instance {V W : Scheme.{u}} (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] :
     IsOpenImmersion (diagonalToPullback e) :=
   inferInstanceAs (IsOpenImmersion (pullback.diagonal e))
 
+/-- The diagonal step of smooth duality for étale morphisms, from the invertibility of the tensor
+maps of the diagonal and of the identity. -/
 theorem isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd_aux
     {V W : Scheme.{u}} (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e]
     [HasCompactification e] [HasCompactification (diagonalToPullback e)]
@@ -294,7 +296,8 @@ theorem isIso_leftDerivedUpperStar_diagonal_map_dualizingComplexTensorMap_snd {V
   have : HasCompactification (diagonalToPullback e) :=
     (Compactification.ofIsOpenImmersion _).hasCompactification
   exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map
-    (diagonalToPullback e) (isIso_dualizingComplexTensorMap_of_isOpenImmersion (diagonalToPullback e))
+    (diagonalToPullback e)
+    (isIso_dualizingComplexTensorMap_of_isOpenImmersion (diagonalToPullback e))
     ((isInvertible_iff_exists_derivedTensor _).2
       (isInvertible_dualizingComplex_of_isOpenImmersion (diagonalToPullback e))) _
     (isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd e P)
