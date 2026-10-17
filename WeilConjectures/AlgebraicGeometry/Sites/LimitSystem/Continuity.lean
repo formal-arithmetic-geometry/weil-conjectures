@@ -374,7 +374,8 @@ theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousA
           ((MorphismProperty.Over.pullback @Etale ⊤ (D.map (𝟙 i).op)).obj T₀)).op
           (Sheaf.H.equiv₀ _ terminalIsTerminal y)
       erw [hη]
-      convert h₁ using 3
+      refine Eq.trans ?_ h₁
+      congr 2
       exact presheaf_map_map_of_isTerminal _ hΦ _ _ _ _ _
     obtain ⟨k, a, l, b, hab⟩ := S.exists_stageTransition_stageTransition_app_eq_zero hc T₀
       (𝟙 i) _ ht

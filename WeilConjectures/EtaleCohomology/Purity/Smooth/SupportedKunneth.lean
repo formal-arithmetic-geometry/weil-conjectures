@@ -191,6 +191,7 @@ theorem isIso_rightDerivedUpperShriek_map_counit_tensor_left
   exact ((R(b₁)^![ModuleCat.{u + 1} Λ]).map_isZero hz).of_iso (heq.app _ ≪≫ c.app _ ≪≫
     (R(b₁)^![ModuleCat.{u + 1} Λ]).mapIso ((R(i₁)^![ModuleCat.{u + 1} Λ]).mapIso
       ((β.app _).app _)))
+
 omit [Finite Λ] [IsClosedImmersion i₁] in
 include hi in
 /-- The pullback along `p₁` of an object `Ri_! N` vanishes on every scheme over `X × Y` missing

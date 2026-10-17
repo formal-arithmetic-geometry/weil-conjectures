@@ -44,6 +44,8 @@ universe u
 
 open CategoryTheory Limits
 
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry
 
 /-- A scheme which is locally quasi-finite and quasi-compact over a field has finitely many
