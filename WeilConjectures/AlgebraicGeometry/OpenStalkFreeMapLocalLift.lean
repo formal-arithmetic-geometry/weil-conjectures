@@ -107,7 +107,10 @@ theorem exists_open_stalk_free_map_local_lifts
   refine ⟨g, ?_⟩
   exact restriction_lift_stalk c d a
     (openModuleStalkRestrictionComparison X U W hWU x hxU hxW)
-    (fun M ↦ by simpa [c] using hd M) t k hk
+    (fun M ↦ by
+      simp only [c, NatIso.ofComponents_hom_app, Iso.refl_hom, Functor.map_id,
+        Category.id_comp]
+      exact hd M) t k hk
 
 end
 end AlgebraicGeometry.Scheme

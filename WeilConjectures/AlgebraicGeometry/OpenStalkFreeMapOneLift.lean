@@ -120,7 +120,10 @@ theorem exists_open_stalk_free_map_one_lift
       (homOfLE (hVD i))
     let c : Rᵢ ⋙ Q ≅ R := NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
     refine ⟨c.inv.app L ≫ Q.map (k i) ≫ c.hom.app N, ?_⟩
-    exact restriction_lift_stalk c d (a i) E (fun M ↦ by simpa [c] using hd M)
+    exact restriction_lift_stalk c d (a i) E (fun M ↦ by
+      simp only [c, NatIso.ofComponents_hom_app, Iso.refl_hom, Functor.map_id,
+        Category.id_comp]
+      exact hd M)
       (ti i) (k i) (hk i)
   choose g hg using hi
   let K : R.obj F ⟶ R.obj N := ∑ i : I, R.map (SheafOfModules.freeπ i) ≫ g i

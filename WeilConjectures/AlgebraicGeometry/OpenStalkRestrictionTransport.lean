@@ -151,8 +151,9 @@ theorem exists_openStalk_restriction_transport
     rw [hd M]
     dsimp [t]
     simp only [Category.id_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-    rfl
-  simpa [c, restriction_comp_iso] using hlaw
+  have h1 : S.map (c.hom.app M) = 𝟙 _ := S.map_id _
+  rw [h1, Category.id_comp] at hlaw
+  exact hlaw
 
 end
 end AlgebraicGeometry.Scheme

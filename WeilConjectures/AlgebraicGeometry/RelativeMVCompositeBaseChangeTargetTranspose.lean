@@ -132,7 +132,6 @@ private theorem comparison_witness_eq
         (relativeMVOpenLift_fst g' i))) := by
   congr 1
 
-set_option linter.unusedVariables false in
 /-- Transposing the target restriction removes the direct-image composition mates.
 Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
 (blueprint: new-relative-mv-composite-base-change-target-transpose).
@@ -157,15 +156,9 @@ theorem relativeMV_composite_baseChange_target_transpose
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (hpull : IsPullback g' f' f g)
     (K : schemeDerivedCategory X) (W U : X.Opens) (i : W ≤ U) :
-    let C := (schemeDerivedDirectImage U.ι).obj ((derivedPullback U.ι).obj K)
-    let A := (schemeDerivedDirectImage (U.ι ≫ f)).obj ((derivedPullback U.ι).obj K)
     let c' := relativeMVComp (relativeMVOpenLift g' i) (pullback.fst g' U.ι) ≪≫
       eqToIso (congrArg (fun t : pullback g' W.ι ⟶ X' ↦ derivedPullback t)
         (pullback.lift_fst _ _ _))
-    let θ := (relativeMVComp (pullback.snd g' U.ι) U.ι).hom.app K ≫
-      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)
-        (pullback.condition (f := g') (g := U.ι)).symm) ≫
-      (relativeMVComp (pullback.fst g' U.ι) g').inv.app K
     ((relativeMVAdj (pullback.fst g' W.ι ≫ f')).homEquiv _ _).symm
       ((relativeMVLocalArrow f f' g g' hpull K ((derivedPullback g').obj K)
           (𝟙 _) U).hom ≫
