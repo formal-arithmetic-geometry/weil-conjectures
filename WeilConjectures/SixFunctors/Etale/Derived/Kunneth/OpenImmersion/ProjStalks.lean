@@ -16,7 +16,8 @@ Consider a cube of cartesian squares over `u : S' ⟶ S` as in
 `AlgebraicGeometry.Etale.baseChange_app_cube`, whose side faces satisfy base change. For a
 geometric point `s` of `X'`, the base change map of the pulled-back square is an isomorphism on
 the stalk at `s` if and only if the base change map of the original square is an isomorphism on
-the stalk at the image `s ≫ uX` (`AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_cube_iff`).
+the stalk at the image `s ≫ uX`
+(`AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_cube_iff`).
 Moreover, whether a morphism of sheaves is an isomorphism on the stalk at a geometric point only
 depends on the underlying point (`AlgebraicGeometry.Etale.isIso_sheafFiber_map_of_apply_eq`).
 These are the inputs for transporting the hypothesis of the projective case of blueprint

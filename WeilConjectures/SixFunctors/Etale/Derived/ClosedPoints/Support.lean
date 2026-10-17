@@ -268,6 +268,34 @@ lemma coe_openComplOfFinite {S : Set X} (hS : S.Finite) (hS' : S ⊆ closedPoint
     (openComplOfFinite hS hS' : Set X) = Sᶜ :=
   rfl
 
+omit [IsSepClosed K] in
+/-- **The sheaves of sections supported on finite sets of closed points cover `F`.** Under the
+hypotheses of `AlgebraicGeometry.Etale.exists_finite_forall_mem_sectionVanishingLocus`, every
+section of `F` is, étale locally, a section of the subsheaf `F_S` of sections supported on some
+finite set `S` of closed points. -/
+theorem exists_supportedSectionsι_app_eq_map (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
+    (hF : ∀ x ∉ closedPoints X,
+      IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F))
+    {W : X.Etale} (s : F.obj.obj (op W)) (w : W.left) :
+    ∃ (V : X.Etale) (g : V ⟶ W), w ∈ Set.range g.left ∧ ∃ (S : Set X) (hS : S.Finite)
+      (hS' : S ⊆ closedPoints X)
+      (z : (supportedSections F (openComplOfFinite hS hS')).obj.obj (op V)),
+        (supportedSectionsι F (openComplOfFinite hS hS')).hom.app (op V) z =
+          F.obj.map g.op s := by
+  obtain ⟨O', hO, hwO, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+    W.left.isBasis_affineOpens) (show w ∈ (⊤ : W.left.Opens) from trivial)
+  let O : W.left.Opens := O'
+  have : Etale W.hom := W.prop
+  let V : X.Etale := Scheme.Etale.mk (O.ι ≫ W.hom)
+  let g : V ⟶ W := MorphismProperty.Over.homMk O.ι rfl
+  have : IsAffine O := hO
+  have : CompactSpace V.left := inferInstanceAs (CompactSpace O)
+  obtain ⟨S, hSf, hSc, hS⟩ :=
+    exists_finite_forall_mem_sectionVanishingLocus F p hF (F.obj.map g.op s)
+  obtain ⟨z, hz⟩ := exists_supportedSectionsι_app_eq F (openComplOfFinite hSf hSc)
+    (F.obj.map g.op s) fun v hv ↦ hS v hv
+  exact ⟨V, g, ⟨⟨w, hwO⟩, rfl⟩, S, hSf, hSc, z, hz⟩
+
 /-- Blueprint `lem-kun-0f1f-gen`: **global generation for sheaves supported on closed
 points.** Let `K` be a separably closed field, `X` a scheme locally of finite type over `K` and
 `F` an étale sheaf of `Λ`-modules on `X` whose stalks at the geometric points over the
@@ -304,20 +332,9 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
     refine (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) (Sigma.desc ψ)).1 ⟨fun {W} s ↦ ?_⟩
     rw [mem_smallEtaleTopology_iff]
     intro w
-    obtain ⟨O', hO, hwO, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp
-      W.left.isBasis_affineOpens) (show w ∈ (⊤ : W.left.Opens) from trivial)
-    let O : W.left.Opens := O'
-    have : Etale W.hom := W.prop
-    let V : X.Etale := Scheme.Etale.mk (O.ι ≫ W.hom)
-    let g : V ⟶ W := MorphismProperty.Over.homMk O.ι rfl
-    have : IsAffine O := hO
-    have : CompactSpace V.left := inferInstanceAs (CompactSpace O)
-    obtain ⟨S, hSf, hSc, hS⟩ :=
-      exists_finite_forall_mem_sectionVanishingLocus F p hF (F.obj.map g.op s)
-    obtain ⟨z, hz⟩ := exists_supportedSectionsι_app_eq F (U ⟨S, hSf, hSc⟩) (F.obj.map g.op s)
-      fun v hv ↦ hS v hv
-    refine ⟨V, g, ⟨(Sigma.ι G ⟨S, hSf, hSc⟩).hom.app (op V) z, ?_⟩, ⟨⟨w, hwO⟩, rfl⟩⟩
-    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← Sheaf.Hom.comp_hom, Sigma.ι_desc]
+    obtain ⟨V, g, hw, S, hSf, hSc, z, hz⟩ := exists_supportedSectionsι_app_eq_map F p hF s w
+    refine ⟨V, g, ⟨(Sigma.ι G ⟨S, hSf, hSc⟩).hom.app (op V) z, ?_⟩, hw⟩
+    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom, Sigma.ι_desc]
     exact hz
   exact isGloballyGenerated_of_epi_sigmaDesc Λ ψ hG
 

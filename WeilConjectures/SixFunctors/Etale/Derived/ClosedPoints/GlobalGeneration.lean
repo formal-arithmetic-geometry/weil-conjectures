@@ -201,6 +201,82 @@ lemma epi_upperStar_map_globalSectionsEvaluation {X : Scheme.{u}} {k : Type u} [
   obtain ⟨x, hx⟩ := hc y
   exact ⟨_, (ConcreteCategory.comp_apply _ _ x).symm.trans hx⟩
 
+/-- **Sheaves supported on finitely many closed points split.** Let `U` be an open subset of a
+scheme `X` whose complement is a finite set of closed points, and `G` an étale sheaf of
+`Λ`-modules on `X` whose restriction to `U` vanishes. Writing `iₓ : Spec κ(x) ⟶ X` for the
+points `x ∉ U`, the units assemble to an isomorphism `G ≅ ⨁ₓ iₓ_* iₓ^* G`, as can be checked
+after restricting to `U` and to every point `x` (compare
+`AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar`). -/
+theorem isIso_biproductLift_unit_of_isZero_upperStar {X : Scheme.{u}} (U : X.Opens)
+    [Finite {x : X // x ∉ U}] [HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))]
+    (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hG : IsZero ((U.ι)^*[ModuleCat.{u + 1} Λ].obj G)) :
+    IsIso (biproduct.lift fun x : {x : X // x ∉ U} ↦
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)).unit.app G) := by
+  let ι := {x : X // x ∉ U}
+  have (x : ι) : IsClosedImmersion (X.fromSpecResidueField x.1) :=
+    isClosed_singleton_iff_isClosedImmersion.1 (hcl x.1 x.2)
+  let adj (x : ι) := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)
+  let G' (x : ι) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    (X.fromSpecResidueField x.1)_*[ModuleCat.{u + 1} Λ].obj
+      ((X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ].obj G)
+  let φ : G ⟶ ⨁ G' := biproduct.lift fun x ↦ (adj x).unit.app G
+  let V : Option ι → Scheme.{u} := fun o ↦ o.elim (U : Scheme.{u})
+    fun x ↦ Spec (X.residueField x.1)
+  let a : ∀ o, V o ⟶ X := fun o ↦ match o with
+    | none => U.ι
+    | some x => X.fromSpecResidueField x.1
+  have ha (y : X) : ∃ (o : Option ι) (z : V o), (a o).base z = y := by
+    by_cases hy : y ∈ U
+    · exact ⟨none, ⟨y, hy⟩, rfl⟩
+    · exact ⟨some ⟨y, hy⟩, IsLocalRing.closedPoint _, X.fromSpecResidueField_apply _ _⟩
+  have := Fintype.ofFinite ι
+  change IsIso φ
+  refine isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ) a ha φ
+    fun o ↦ ?_
+  rcases o with _ | x
+  · let P := (U.ι)^*[ModuleCat.{u + 1} Λ]
+    have hz (x : ι) : IsZero (P.obj (G' x)) :=
+      isZero_upperStar_lowerStar_of_disjoint_range _ U.ι (X.fromSpecResidueField x.1)
+        (by
+          rw [Scheme.range_fromSpecResidueField, Set.disjoint_singleton_right]
+          simpa using x.2) _
+    have : IsZero (P.obj (⨁ G')) := by
+      rw [IsZero.iff_id_eq_zero, ← P.map_id, ← IsBilimit.total (biproduct.isBilimit G'),
+        P.map_sum]
+      exact Finset.sum_eq_zero fun j _ ↦ by
+        rw [P.map_comp, (hz j).eq_of_tgt (P.map (biproduct.π G' j)) 0, zero_comp]
+    exact (hG.eq_of_src (P.map φ) (hG.iso this).hom) ▸ Iso.isIso_hom _
+  · let P := (X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ]
+    have hz (y : ι) (hxy : y ≠ x) : IsZero (P.obj (G' y)) := by
+      -- `iₓ` factors through the open complement `V` of `y`, over which `G' y` vanishes
+      let V : X.Opens := ⟨{y.1}ᶜ, (hcl y.1 y.2).isOpen_compl⟩
+      have hV : Set.range (X.fromSpecResidueField x.1) ⊆ Set.range V.ι := by
+        rw [Scheme.range_fromSpecResidueField, Scheme.Opens.range_ι, Set.singleton_subset_iff]
+        exact fun h ↦ hxy (Subtype.ext h).symm
+      have h0 := isZero_upperStar_lowerStar_of_disjoint_range _ V.ι (X.fromSpecResidueField y.1)
+        (by rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]; simp [V])
+        ((X.fromSpecResidueField y.1)^*[ModuleCat.{u + 1} Λ].obj G)
+      exact (Functor.map_isZero (IsOpenImmersion.lift V.ι _ hV)^*[ModuleCat.{u + 1} Λ]
+        h0).of_iso ((upperStarComp (ModuleCat.{u + 1} Λ) (IsOpenImmersion.lift V.ι _ hV)
+          V.ι _ (IsOpenImmersion.lift_fac _ _ _).symm).app _)
+    have hπ : IsIso (P.map (biproduct.π G' x)) := by
+      refine ⟨P.map (biproduct.ι G' x), ?_, ?_⟩
+      · rw [← P.map_comp, ← P.map_id, ← IsBilimit.total (biproduct.isBilimit G'), P.map_sum,
+          Finset.sum_eq_single x (fun y _ hxy ↦ ?_) (by simp)]
+        rw [P.map_comp, (hz y hxy).eq_zero_of_tgt (P.map (biproduct.π G' y)), zero_comp]
+      · rw [← P.map_comp, biproduct.ι_π_self, P.map_id]
+    have hunit : IsIso (P.map ((adj x).unit.app G)) := by
+      have : IsIso (P.map ((adj x).unit.app G) ≫ (adj x).counit.app (P.obj G)) := by
+        rw [(adj x).left_triangle_components G]
+        exact IsIso.id _
+      exact IsIso.of_isIso_comp_right _ ((adj x).counit.app (P.obj G))
+    have : IsIso (P.map φ ≫ P.map (biproduct.π G' x)) := by
+      rw [← P.map_comp, biproduct.lift_π]
+      exact hunit
+    exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ hπ this
+
 /-- **Sheaves supported on finitely many closed points are globally generated.** Let `U` be
 an open subset of a scheme `X` whose complement is a finite set of closed points with separably
 closed residue fields, and `G` an étale sheaf of `Λ`-modules on `X` whose restriction to `U`
@@ -239,50 +315,7 @@ theorem isGloballyGenerated_of_isZero_upperStar {X : Scheme.{u}} (U : X.Opens)
     by_cases hy : y ∈ U
     · exact ⟨none, ⟨y, hy⟩, rfl⟩
     · exact ⟨some ⟨y, hy⟩, IsLocalRing.closedPoint _, X.fromSpecResidueField_apply _ _⟩
-  have hφ : IsIso φ := by
-    refine isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ) a ha φ
-      fun o ↦ ?_
-    rcases o with _ | x
-    · let P := (U.ι)^*[ModuleCat.{u + 1} Λ]
-      have hz (x : ι) : IsZero (P.obj (G' x)) :=
-        isZero_upperStar_lowerStar_of_disjoint_range _ U.ι (X.fromSpecResidueField x.1)
-          (by
-            rw [Scheme.range_fromSpecResidueField, Set.disjoint_singleton_right]
-            simpa using x.2) _
-      have : IsZero (P.obj (⨁ G')) := by
-        rw [IsZero.iff_id_eq_zero, ← P.map_id, ← IsBilimit.total (biproduct.isBilimit G'),
-          P.map_sum]
-        exact Finset.sum_eq_zero fun j _ ↦ by
-          rw [P.map_comp, (hz j).eq_of_tgt (P.map (biproduct.π G' j)) 0, zero_comp]
-      exact (hG.eq_of_src (P.map φ) (hG.iso this).hom) ▸ Iso.isIso_hom _
-    · let P := (X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ]
-      have hz (y : ι) (hxy : y ≠ x) : IsZero (P.obj (G' y)) := by
-        -- `iₓ` factors through the open complement `V` of `y`, over which `G' y` vanishes
-        let V : X.Opens := ⟨{y.1}ᶜ, (hcl y.1 y.2).isOpen_compl⟩
-        have hV : Set.range (X.fromSpecResidueField x.1) ⊆ Set.range V.ι := by
-          rw [Scheme.range_fromSpecResidueField, Scheme.Opens.range_ι, Set.singleton_subset_iff]
-          exact fun h ↦ hxy (Subtype.ext h).symm
-        have h0 := isZero_upperStar_lowerStar_of_disjoint_range _ V.ι (X.fromSpecResidueField y.1)
-          (by rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]; simp [V])
-          ((X.fromSpecResidueField y.1)^*[ModuleCat.{u + 1} Λ].obj G)
-        exact (Functor.map_isZero (IsOpenImmersion.lift V.ι _ hV)^*[ModuleCat.{u + 1} Λ]
-          h0).of_iso ((upperStarComp (ModuleCat.{u + 1} Λ) (IsOpenImmersion.lift V.ι _ hV)
-            V.ι _ (IsOpenImmersion.lift_fac _ _ _).symm).app _)
-      have hπ : IsIso (P.map (biproduct.π G' x)) := by
-        refine ⟨P.map (biproduct.ι G' x), ?_, ?_⟩
-        · rw [← P.map_comp, ← P.map_id, ← IsBilimit.total (biproduct.isBilimit G'), P.map_sum,
-            Finset.sum_eq_single x (fun y _ hxy ↦ ?_) (by simp)]
-          rw [P.map_comp, (hz y hxy).eq_zero_of_tgt (P.map (biproduct.π G' y)), zero_comp]
-        · rw [← P.map_comp, biproduct.ι_π_self, P.map_id]
-      have hunit : IsIso (P.map ((adj x).unit.app G)) := by
-        have : IsIso (P.map ((adj x).unit.app G) ≫ (adj x).counit.app (P.obj G)) := by
-          rw [(adj x).left_triangle_components G]
-          exact IsIso.id _
-        exact IsIso.of_isIso_comp_right _ ((adj x).counit.app (P.obj G))
-      have : IsIso (P.map φ ≫ P.map (biproduct.π G' x)) := by
-        rw [← P.map_comp, biproduct.lift_π]
-        exact hunit
-      exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ hπ this
+  have hφ : IsIso φ := isIso_biproductLift_unit_of_isZero_upperStar Λ U hcl G hG
   -- each unit `G ⟶ iₓ_* iₓ^* G` is a split epimorphism, hence surjective on global sections
   have hsurj (x : ι) : Function.Surjective ((terminalSections Λ X).map ((adj x).unit.app G)) := by
     have hφπ : φ ≫ biproduct.π G' x = (adj x).unit.app G := biproduct.lift_π _ x

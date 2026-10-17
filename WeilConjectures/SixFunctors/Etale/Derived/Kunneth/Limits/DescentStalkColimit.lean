@@ -79,7 +79,8 @@ variable (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
 
 include hc in
 /-- Every element of the stalk `F_x̄` comes from the stalk of some `pᵢ^* pᵢ_* F`. -/
-lemma exists_sheafFiber_map_counit_eq (y : (pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ) |>.obj F) :
+lemma exists_sheafFiber_map_counit_eq
+    (y : (pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ) |>.obj F) :
     ∃ (i : I) (z : (pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ) |>.obj
         ((c.π.app i)^*[ModuleCat.{u + 1} Λ].obj ((c.π.app i)_*[ModuleCat.{u + 1} Λ].obj F))),
       (pointSmallEtale x).sheafFiber.map

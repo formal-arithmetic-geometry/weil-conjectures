@@ -15,7 +15,8 @@ Let `q : X ⟶ Y` be a morphism of schemes, `x̄ : Spec Ω ⟶ X` a geometric po
 sheaf on `X`. Under the identification `(q^* G)_x̄ ≅ G_{q x̄}` of
 `AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`, this file computes on germs:
 
-- the unit of `q^* ⊣ q_*` (`AlgebraicGeometry.Etale.toPresheafFiber_upperStarCompSheafFiberIso_inv`);
+- the unit of `q^* ⊣ q_*`
+  (`AlgebraicGeometry.Etale.toPresheafFiber_upperStarCompSheafFiberIso_inv`);
 - the counit `q^* q_* F ⟶ F`: the germ of a section `t ∈ (q_* F)(V) = F(V ×_Y X)` at a point
   `v` of `V` over `q x̄` is sent to the germ of `t` at the point `(v, x̄)` of `V ×_Y X`
   (`AlgebraicGeometry.Etale.toPresheafFiber_comp_sheafFiber_map_counit`);

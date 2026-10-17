@@ -58,36 +58,35 @@ noncomputable def homologyRightDerivedFunctorObjSingleFunctorIsoSelf (X : C) (n 
       (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj X)) ≪≫
     F.homologyRightDerivedFunctorObjSingleFunctorIso X 0 ≪≫ F.rightDerivedZeroIsoSelf.app X
 
-open DerivedCategory in
 /-- **The first cohomology of a bounded below complex.** For a left exact functor `F` and an
 object `E` of `D(C)` without homology in degrees `< i`, `H^i(RF(E)) ≅ F(H^i(E))`. -/
 theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_isGE (E : DerivedCategory C) (i : ℤ)
     [E.IsGE i] :
-    Nonempty ((homologyFunctor D i).obj (F.rightDerivedFunctor.obj E) ≅
-      F.obj ((homologyFunctor C i).obj E)) := by
-  let t := TStructure.t (C := C)
+    Nonempty ((DerivedCategory.homologyFunctor D i).obj (F.rightDerivedFunctor.obj E) ≅
+      F.obj ((DerivedCategory.homologyFunctor C i).obj E)) := by
+  let t := DerivedCategory.TStructure.t (C := C)
   let T := (t.triangleLTGE (i + 1)).obj E
   have hT : T ∈ distTriang _ := t.triangleLTGE_distinguished (i + 1) E
   let R := F.rightDerivedFunctor
   have hRT := R.map_distinguished T hT
   have h₃ : (R.obj T.obj₃).IsGE (i + 1) := F.isGE_rightDerivedFunctor_obj _ _
-  have hmono : Mono ((homologyFunctor D i).map (R.map T.mor₁)) :=
-    ((homologyFunctor D 0).homologySequence_mono_shift_map_mor₁_iff _ hRT (i - 1) i
-      (by lia)).2 (IsZero.eq_of_src (isZero_of_isGE (R.obj T.obj₃) (i + 1) _ (by lia)) _ _)
-  have hepi : Epi ((homologyFunctor D i).map (R.map T.mor₁)) :=
-    ((homologyFunctor D 0).homologySequence_epi_shift_map_mor₁_iff _ hRT i).2
-      (IsZero.eq_of_tgt (isZero_of_isGE (R.obj T.obj₃) (i + 1) _ (by lia)) _ _)
-  have : IsIso ((homologyFunctor D i).map (R.map T.mor₁)) := isIso_of_mono_of_epi _
-  have : T.obj₁.IsGE i := inferInstanceAs ((t.truncLT (i + 1)).obj E).IsGE i
+  have hmono : Mono ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁)) :=
+    ((DerivedCategory.homologyFunctor D 0).homologySequence_mono_shift_map_mor₁_iff _ hRT (i - 1) i
+      (by lia)).2 (IsZero.eq_of_src (DerivedCategory.isZero_of_isGE (R.obj T.obj₃) (i + 1) _ (by lia)) _ _)
+  have hepi : Epi ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁)) :=
+    ((DerivedCategory.homologyFunctor D 0).homologySequence_epi_shift_map_mor₁_iff _ hRT i).2
+      (IsZero.eq_of_tgt (DerivedCategory.isZero_of_isGE (R.obj T.obj₃) (i + 1) _ (by lia)) _ _)
+  have : IsIso ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁)) := isIso_of_mono_of_epi _
+  have : T.obj₁.IsGE i := (inferInstance : ((t.truncLT (i + 1)).obj E).IsGE i)
   have : T.obj₁.IsLE i := t.isLE_of_le _ (i + 1 - 1) i (by lia)
   obtain ⟨A, ⟨e⟩⟩ := T.obj₁.exists_iso_singleFunctor_obj_of_isGE_of_isLE i
-  have : IsIso ((homologyFunctor C i).map T.mor₁) :=
-    isIso_homologyFunctor_map_truncLTι_app E (i + 1) i (by lia)
-  let eA : A ≅ (homologyFunctor C i).obj E :=
-    ((singleFunctorCompHomologyFunctorIso C i).app A).symm ≪≫
-      (homologyFunctor C i).mapIso e.symm ≪≫ asIso ((homologyFunctor C i).map T.mor₁)
-  exact ⟨(asIso ((homologyFunctor D i).map (R.map T.mor₁))).symm ≪≫
-    (homologyFunctor D i).mapIso (R.mapIso e) ≪≫
+  have : IsIso ((DerivedCategory.homologyFunctor C i).map T.mor₁) :=
+    DerivedCategory.isIso_homologyFunctor_map_truncLTι_app E (i + 1) i (by lia)
+  let eA : A ≅ (DerivedCategory.homologyFunctor C i).obj E :=
+    ((DerivedCategory.singleFunctorCompHomologyFunctorIso C i).app A).symm ≪≫
+      (DerivedCategory.homologyFunctor C i).mapIso e.symm ≪≫ asIso ((DerivedCategory.homologyFunctor C i).map T.mor₁)
+  exact ⟨(asIso ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁))).symm ≪≫
+    (DerivedCategory.homologyFunctor D i).mapIso (R.mapIso e) ≪≫
       F.homologyRightDerivedFunctorObjSingleFunctorIsoSelf A i ≪≫ F.mapIso eA⟩
 
 end CategoryTheory.Functor
