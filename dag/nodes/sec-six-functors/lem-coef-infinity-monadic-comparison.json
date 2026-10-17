@@ -24,7 +24,8 @@
   "place": "Higher Algebra (2017) Corollary 4.7.3.16 and Remark 4.7.3.17, printed pp. 689-690; stronger geometric-realization hypotheses imply the split-simplicial hypotheses there. This is the comparison criterion cited as Corollary 4.7.4.16 in Haugseng Proposition 5.2 (older numbering). Online source read; not archived in literature/. No Stacks tag states this homotopy-coherent theorem."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "lem-coef-model-infinity-derived-adjunction"
  ],
  "proof": [
   {
@@ -254,5 +255,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d7576620a",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical adjunct construction, universes, edge cases, docstrings, and policy gates checked; scompile.py local/server compilation passed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityMonadicComparison",
+  "declaration": "SSet.Enhanced.infinity_monadic_comparison",
+  "declarations": [
+   "SSet.Enhanced.ReflectsEquivalenceEdges",
+   "SSet.Enhanced.HasGeometricRealizations",
+   "SSet.Enhanced.PreservesGeometricRealizations",
+   "SSet.Enhanced.comparisonComponent",
+   "SSet.Enhanced.freeAdjunctionComparison",
+   "SSet.Enhanced.infinity_monadic_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityMonadicComparison.lean",
+  "statement": "theorem infinity_monadic_comparison {C E B : SSet.{v}} [Quasicategory C] [Quasicategory E] [Quasicategory B] (U : C ⟶ B) (V : E ⟶ B) (H : C ⟶ E) (hU : ReflectsEquivalenceEdges U) (hV : ReflectsEquivalenceEdges V) (eta : ((ihom C).obj B) _⦋1⦌) (eta_src : ((ihom C).obj B).δ 1 eta = diagramVertex U) (eta_tgt : ((ihom C).obj B).δ 0 eta = diagramVertex (H ≫ V)) (heta : IsEquivalenceEdge ((ihom C).obj B) eta) (hC : HasGeometricRealizations C) (hE : HasGeometricRealizations E) (hUr : PreservesGeometricRealizations U) (hVr : PreservesGeometricRealizations V) (F : B ⟶ C) (G : B ⟶ E) (aF : CoherentAdjunction F U) (aG : CoherentAdjunction G V) (hfree : ∀ b : B _⦋0⦌, IsIso ((SSet.hoFunctor.map V).toFunctor.map (freeAdjunctionComparison aF aG eta eta_src eta_tgt b))) : IsFunctorEquivalence H",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical mate components are constructed by applying G to the specified first unit component and natural equivalence component, then composing with the G–V counit component in the homotopy category of E. IsIso after V is exactly the equivalence test of Remark 4.7.3.17; no arbitrary comparison is assumed. The existing coherent-adjunction node is added to stmt_deps solely to reuse its published structure; no model-category hypotheses are imposed. Realization and conservativity predicates are helpers of this comparison criterion."
  }
 }

@@ -16,7 +16,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "def-coef-monoidal-infinity-category"
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-infinity-cocartesian-composition-initiality"
  ],
  "proof": [
   {
@@ -198,5 +199,37 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c8d327d11 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 5 steps, the 9 Mathlib searches and the blueprint and source fields. I also read the full statements of its four dependencies (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, def-coef-monoidal-infinity-category, lem-coef-infinity-cocartesian-composition-initiality), the parent lem-coef-inert-operad-color-reconstruction and the main-20261015 ancestor proof. GH and HTT are WANTED; the item is elementary nerve combinatorics plus one existing lemma, so it was checked mathematically and proof_origin=agent is correct. Step 1: inner horns fill in a nerve (composite, associativity, then forced), inert maps compose and include identities, and the fibration lifts along s. This makes C and A quasicategories, which the initiality lemma requires. Step 2: an inert [n]->[1] has offset 0<=a<=n-1, so it is exactly one rho_i; the only inert endomorphism of [1] is the identity, so A is full. Step 3: the base of an r-simplex of J_x is the chain (rho_i,1,...,1). This is the constant r-simplex at rho_i in B_[n]/, and operators fixing the first vertex respect it, so J_x is a simplicial disjoint union. Step 4: the lemma's L(x,f)=E_x/ x_{B_p(x)/} {f} is literally the summand. Its hypotheses come from step 1, and alpha_i is a cocartesian lift, so alpha_i is initial. Step 5: the same simplex is used on both sides; for n=0 no inert [0]->[1] exists, so J_x is empty. I tested n=0,1,2, r=0, a product fibration BxD and empty C. Duplicate check by rg over dag/nodes: the symmetric Fin_* family lemma, relative-limit-initial-components and the incidence comparison are different statements. There are no new nodes. The item does not restate a clause of its parent (it is consumed by parent step 3), and there is no cycle. proof_deps equals the union of the step uses. All proof dependencies are in the unit or are the def-cbc definition, so no tool_uses are needed. No SGA is cited, and LeanSearch, Loogle/LeanFinder and grep searches are all recorded. It is not a target node, so the base-change and coefficient checks do not apply. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a91a6c47",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Audited packet, node, dependencies, source, Lean module, report, edge cases, docstrings, and searches. scompile.py passed sandbox and library compilation with no errors; no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InertColorCosliceComponents",
+  "declaration": "SSet.Enhanced.inert_color_coslice_components",
+  "declarations": [
+   "SSet.Enhanced.inertSimplexProperty",
+   "SSet.Enhanced.inertSimplexProperty_multiplicative",
+   "SSet.Enhanced.inertSimplexBase",
+   "SSet.Enhanced.inertSimplexVertex",
+   "SSet.Enhanced.inertSimplexRho",
+   "SSet.Enhanced.colorCosliceTarget",
+   "SSet.Enhanced.colorCoslice",
+   "SSet.Enhanced.colorCosliceSimplex",
+   "SSet.Enhanced.inertColorLiftCategory",
+   "SSet.Enhanced.inertColorLiftSimplex",
+   "SSet.Enhanced.inert_color_coslice_components"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InertColorCosliceComponents.lean",
+  "statement": "theorem inert_color_coslice_components {C : SSet.{u}} (s : C ⟶ inertSimplexBase.{u}) (hs : cocartesianFibrationOver s) : Subcomplex.range (pullback.snd (SSet.const (X := Δ[0]) (inertSimplexVertex 1)) s) = fullSubcomplex C (fun y ↦ s.app (op ⦋0⦌) y = inertSimplexVertex 1) ∧ ∀ (n : ℕ) (x : C _⦋0⦌) (hx : s.app (op ⦋0⦌) x = inertSimplexVertex n), (∃ e : colorCoslice s x ≅ ∐ (fun i : Fin n ↦ inertColorLiftCategory s x hx i), ∀ (i : Fin n) (r : SimplexCategoryᵒᵖ) (t : (inertColorLiftCategory s x hx i).obj r), colorCosliceSimplex s x (((Sigma.ι (fun j : Fin n ↦ inertColorLiftCategory s x hx j) i) ≫ e.inv).app r t) = inertColorLiftSimplex s x hx i t) ∧ (∀ i : Fin n, Quasicategory (inertColorLiftCategory s x hx i) ∧ ∀ α : (inertColorLiftCategory s x hx i) _⦋0⦌, IsCocartesianEdge s (SSet.yonedaEquiv.symm (inertColorLiftSimplex s x hx i α)) → IsInitial (inertColorLiftCategory s x hx i) α) ∧ (n = 0 → ∀ r : SimplexCategoryᵒᵖ, IsEmpty ((colorCoslice s x).obj r))",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical inert wide-subcategory nerve and local color-coslice helpers. The lift summands reuse the recorded fixed-source cocartesianLiftCategory; the isomorphism is normalized on the entire underlying simplex, preserving target and cone."
  }
 }

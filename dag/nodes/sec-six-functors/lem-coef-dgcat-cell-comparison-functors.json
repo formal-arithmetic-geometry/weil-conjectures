@@ -25,7 +25,8 @@
  },
  "stmt_deps": [
   "lem-coef-dgcat-free-cell-calculus",
-  "lem-coef-dgcat-formal-cone-enlargement"
+  "lem-coef-dgcat-formal-cone-enlargement",
+  "lem-coef-dgcat-cone-word-normal-form"
  ],
  "proof": [
   {
@@ -245,5 +246,30 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-ef65ec0ca (reviewer sub-agent of L); spot-checked: I read the item in full (statement and 9 steps), both cited statements, the parent equivalence-cell-calculus, the sibling cone-word-normal-form, the unit and chapter records, and the source: Tabuada arXiv:0710.4303 Prop. 1.7 on p. 27 and Lemma 1.10 on pp. 28-30, fetched and read through pdftotext. The source builds L0..L3 by adjoining s, taking cone(s) and freely adjoining h with dh=1, and gives the M<->L3 inverse functors. The item states that construction for an arbitrary small dg category A and closed degree-0 u, and correctly marks this generalization by:agent. I recomputed every sign by hand. Step 2 gives d(iota_y)=d(pi_x)=0, d(iota_x)=iota_y u and d(pi_y)=-u pi_x. Step 3 gives dv_h=0, da_h=v_h u-1, db_h=u v_h-1 and dw_h=u a_h-b_h u. In step 6, with n=-1 the entry degrees match, and dH=DH+HD has entries (-db+uv, -dw+ua-bu; -dv, vu-da)=1. In step 9, H iota_y=(-b,v) and H iota_x=(-w,a), which returns v, a, b, w. The worker's reported source error holds: Tabuada's displayed matrix [[r2,r12],[g,r1]] gives (1,1)=2fg-1 and (1,2)=2 f r1. The item's matrix with two minus signs is correct, and no statement was changed. In steps 4 and 7, the free-extension universal property is argued from the cited word description; this is acceptable and the steps are not marked elementary. Edge cases tested: x=y with u=1, u=0, characteristic 2 and R=0. There are no new nodes. Both dependencies are reviewed, split and in the same unit, so there is no route or tool-use issue and no cycle. No duplicate exists in the DAG; the sibling is a generation/uniqueness statement, not this construction. Mathlib searches cover LeanSearch, LeanFinder, Loogle and grep. Not a target node. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a1c22310d",
+  "group": "Q94",
+  "result": "fix",
+  "note": "Lean statement matches all node clauses; compilation passed without diagnostics. Wrote review.md and a complete replacement report under fixes/ correcting H11’s missing substantive second reading. No Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCategoryCellComparisonFunctors",
+  "declaration": "CategoryTheory.Dg.cellComparisonFunctors",
+  "declarations": [
+   "CategoryTheory.Dg.InverseCellEquations",
+   "CategoryTheory.Dg.RelativeInverseCell",
+   "CategoryTheory.Dg.CellComparisonFunctors",
+   "CategoryTheory.Dg.cellComparisonFunctors"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgCategoryCellComparisonFunctors.lean",
+  "statement": "theorem cellComparisonFunctors {A : Cat R} (K : FormalConeCalculus R) (c : ClosedArrow R A) (E : ConeContractingCell R K c) (B : RelativeInverseCell R A c) : CellComparisonFunctors R K c E B",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Universal in the existing FormalConeCalculus, any ArrowCell realization of dh=1_Z, and the relative free four-generator presentation. Reuses the landed cone-word node only for its exact labelled-category and component definitions; its generation theorem is not used. The existential proposition gives F, G, all coefficient and generator values, and the full cone extension with matrix [[-b,-w],[v,a]]."
  }
 }
