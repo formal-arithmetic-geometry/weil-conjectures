@@ -355,6 +355,125 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
+/-- The dual formula of `prop-coef-integral-exceptional-adjoint`: for integral dualizing
+complexes `ω_X`, `ω_Y` and a completed pullback `φ : Lf^* 𝔻_Y L ⟶ N` (an isomorphism modulo
+`ϖ`), the derived limit `c.pt = G_f L` is `𝔻_X N = RHom(N, ω_X)`. It is
+`nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionModIdeal`
+for `L ≅ 𝔻_Y 𝔻_Y L` (`thm-coef-integral-verdier`) and `γ : Rf^! ω_Y ≅ ω_X`. -/
+theorem nonempty_iso_derivedHom_of_isHomotopyLimit {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
+    (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
+    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
+      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c)
+    (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+      R(aX)^![ModuleCat.{u + 1} Λ])) (hωX : IsHomotopyLimit ωX)
+    (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+      R(aY)^![ModuleCat.{u + 1} Λ])) (hωY : IsHomotopyLimit ωY)
+    (N : 𝐃(X, Λ)) (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
+      (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt) ⟶ N)
+    (hφ : IsIso ((reductionModIdeal Λ X I).map φ)) :
+    Nonempty (c.pt ≅ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX.pt) := by
+  subst hI
+  have : Finite (Λ ⧸ Ideal.span {ϖ} ^ 1) := by rw [pow_one]; infer_instance
+  have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
+  have hϖI : ϖ ∈ Ideal.span {ϖ} := Ideal.mem_span_singleton_self ϖ
+  have : (R(aX)^![ModuleCat.{u + 1} Λ]).Additive :=
+    (rightDerivedUpperShriekAdjunction _ aX).right_adjoint_additive
+  have : (R(aY)^![ModuleCat.{u + 1} Λ]).Additive :=
+    (rightDerivedUpperShriekAdjunction _ aY).right_adjoint_additive
+  obtain ⟨e, -⟩ := exists_iso_rightDerivedUpperShriek _ f hL.1 hc
+  obtain ⟨γ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_dualizing (Ideal.span {ϖ}) hϖ rfl
+    aX aY f hf ωX hωX ωY hωY
+  obtain ⟨e'⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionModIdeal
+    f hϖ (rightOrthogonal_smulInvertible_of_isHomotopyLimit_quotPowFunctor hϖI _ hωY)
+    (boundedConstructibleIntegral_derivedHom_dualizing (Ideal.span {ϖ}) hϖ rfl aY ωY hωY
+      hL).2.2.2
+    (rightOrthogonal_smulInvertible_of_isHomotopyLimit_quotPowFunctor hϖI _ hωX) γ φ hφ
+  exact ⟨e.symm ≪≫ e'⟩
+
+include hϖ hI in
+/-- Constructibility and the Tor interval in `prop-coef-integral-exceptional-adjoint`: the
+derived limit `c.pt = G_f L` lies in `Dᵇc(X, Λ)`, and if the reductions of `L` have Tor amplitude
+in `[a, b]`, those of `G_f L` have Tor amplitude in `[a - 2 dim X, b + 2 dim Y]`. As in the
+blueprint, `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L`
+(`AlgebraicGeometry.Etale.nonempty_iso_derivedHom_of_isHomotopyLimit`) for the dualizing
+complexes of `prop-coef-integral-dualizing` and the derived completion of `Lf^* 𝔻_Y L`, and
+integral Verdier duality (`thm-coef-integral-verdier`) applies twice. -/
+theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
+    (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
+    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
+      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+    DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
+    ∀ dX dY : ℕ, topologicalKrullDim X ≤ (dX : WithBot ℕ∞) →
+      topologicalKrullDim Y ≤ (dY : WithBot ℕ∞) → ∀ a b : ℤ,
+        (∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
+          ((reductionModIdeal Λ Y (I ^ (n + 1))).obj L)) →
+        ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X
+          (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ))
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj c.pt) := by
+  subst hI
+  -- the dualizing complexes and a completed pullback of `𝔻_Y L`
+  obtain ⟨ωX, hωX, -⟩ := exists_isHomotopyLimit_dualizing (Ideal.span {ϖ}) hϖ rfl aX
+  obtain ⟨ωY, hωY, -⟩ := exists_isHomotopyLimit_dualizing (Ideal.span {ϖ}) hϖ rfl aY
+  have hVY := boundedConstructibleIntegral_derivedHom_dualizing (Ideal.span {ϖ}) hϖ rfl aY ωY
+    hωY hL
+  obtain ⟨N, C, φ, g, h, hT, hN, hC⟩ :=
+    _root_.DerivedCategory.exists_distTriang_derivedComplete_smulInvertible
+      (J := X.smallEtaleTopology) hϖ rfl ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
+        (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt))
+  have hφ (n : ℕ) : IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).map φ) :=
+    (Triangle.isZero₃_iff_isIso₁ _ ((reductionModIdeal Λ X _).map_distinguished _ hT)).1
+      (isZero_reductionModIdeal_of_smulInvertible hϖ n C hC)
+  obtain ⟨eN⟩ := nonempty_iso_derivedHom_of_isHomotopyLimit (Ideal.span {ϖ}) hϖ rfl aX aY f hf hL
+    hc ωX hωX ωY hωY N φ (by have := hφ 1; rwa [pow_one] at this)
+  have hNred (n : ℕ) {a b : ℤ}
+      (hab : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+          ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ (n + 1))).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt)) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
+          ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ (n + 1))).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt))) :
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+          ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj N) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+          ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj N) := by
+    have h := boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ
+      rfl f n hab
+    have := hφ (n + 1)
+    let ι := asIso ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).map φ)
+    exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso ι h.1,
+      (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso ι h.2⟩
+  obtain ⟨a', b', hab'⟩ := hVY.1.2
+  have hNc : DerivedCategory.boundedConstructibleIntegral (Ideal.span {ϖ}) X N :=
+    ⟨hN, a', b', fun n ↦ hNred n (hab' n)⟩
+  have hVX := boundedConstructibleIntegral_derivedHom_dualizing (Ideal.span {ϖ}) hϖ rfl aX ωX
+    hωX hNc
+  have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral (X := X) hϖ rfl
+  refine ⟨(DerivedCategory.boundedConstructibleIntegral _ X).prop_of_iso eN.symm hVX.1,
+    fun dX dY hdX hdY a b hab n ↦ ?_⟩
+  have hDY := hVY.2.2.1 dY hdY a b hab
+  have hDX := hVX.2.2.1 dX hdX (-b - 2 * (dY : ℤ) - 1) (-a - 1)
+    (fun n ↦ (hNred n ⟨(hab' n).1, hDY n⟩).2) n
+  have h₁ : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * (dX : ℤ))
+      (b + 2 * (dY : ℤ)) ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj
+        (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX.pt)) :=
+    hDX.mono (by omega) (by omega)
+  have h₂ := (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X _ _).prop_of_iso
+    ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).mapIso eN.symm) h₁
+  exact h₂
+
+include hϖ hI in
 /-- Blueprint `prop-coef-integral-exceptional-adjoint`: The integral exceptional adjoint on
 constructible complexes.
 
@@ -410,86 +529,16 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
         ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X
           (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ))
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj c.pt) := by
+  have hBT := boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit I hϖ hI aX aY
+    f hf hL hc
   subst hI
-  have : Finite (Λ ⧸ Ideal.span {ϖ} ^ 1) := by rw [pow_one]; infer_instance
   have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
-  have hϖI : ϖ ∈ Ideal.span {ϖ} := Ideal.mem_span_singleton_self ϖ
-  have : (R(aX)^![ModuleCat.{u + 1} Λ]).Additive :=
-    (rightDerivedUpperShriekAdjunction _ aX).right_adjoint_additive
-  have : (R(aY)^![ModuleCat.{u + 1} Λ]).Additive :=
-    (rightDerivedUpperShriekAdjunction _ aY).right_adjoint_additive
   obtain ⟨e, he⟩ := exists_iso_rightDerivedUpperShriek _ f hL.1 hc
-  -- the dual formula
-  have hS3 : ∀ (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology
-        (Ideal.span {ϖ}) ⋙ R(aX)^![ModuleCat.{u + 1} Λ])) (_ : IsHomotopyLimit ωX)
-      (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology
-        (Ideal.span {ϖ}) ⋙ R(aY)^![ModuleCat.{u + 1} Λ])) (_ : IsHomotopyLimit ωY)
-      (N : 𝐃(X, Λ)) (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
-        (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt) ⟶ N),
-      IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ})).map φ) →
-        Nonempty (c.pt ≅ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX.pt) := by
-    intro ωX hωX ωY hωY N φ hφ
-    obtain ⟨γ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_dualizing (Ideal.span {ϖ}) hϖ rfl
-      aX aY f hf ωX hωX ωY hωY
-    obtain ⟨e'⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionModIdeal
-      f hϖ (rightOrthogonal_smulInvertible_of_isHomotopyLimit_quotPowFunctor hϖI _ hωY)
-      (boundedConstructibleIntegral_derivedHom_dualizing (Ideal.span {ϖ}) hϖ rfl aY ωY hωY
-        hL).2.2.2
-      (rightOrthogonal_smulInvertible_of_isHomotopyLimit_quotPowFunctor hϖI _ hωX) γ φ hφ
-    exact ⟨e.symm ≪≫ e'⟩
-  -- the dualizing complexes and a completed pullback of `𝔻_Y L`
-  obtain ⟨ωX, hωX, -⟩ := exists_isHomotopyLimit_dualizing (Ideal.span {ϖ}) hϖ rfl aX
-  obtain ⟨ωY, hωY, -⟩ := exists_isHomotopyLimit_dualizing (Ideal.span {ϖ}) hϖ rfl aY
-  have hVY := boundedConstructibleIntegral_derivedHom_dualizing (Ideal.span {ϖ}) hϖ rfl aY ωY
-    hωY hL
-  obtain ⟨N, C, φ, g, h, hT, hN, hC⟩ :=
-    _root_.DerivedCategory.exists_distTriang_derivedComplete_smulInvertible
-      (J := X.smallEtaleTopology) hϖ rfl ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
-        (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt))
-  have hφ (n : ℕ) : IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).map φ) :=
-    (Triangle.isZero₃_iff_isIso₁ _ ((reductionModIdeal Λ X _).map_distinguished _ hT)).1
-      (isZero_reductionModIdeal_of_smulInvertible hϖ n C hC)
-  obtain ⟨eN⟩ := hS3 ωX hωX ωY hωY N φ (by have := hφ 1; rwa [pow_one] at this)
-  have hNred (n : ℕ) {a b : ℤ}
-      (hab : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-          ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ (n + 1))).obj
-            (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt)) ∧
-        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
-          ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ (n + 1))).obj
-            (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt))) :
-      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-          ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj N) ∧
-        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
-          ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj N) := by
-    have h := boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ
-      rfl f n hab
-    have := hφ (n + 1)
-    let ι := asIso ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).map φ)
-    exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso ι h.1,
-      (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso ι h.2⟩
-  obtain ⟨a', b', hab'⟩ := hVY.1.2
-  have hNc : DerivedCategory.boundedConstructibleIntegral (Ideal.span {ϖ}) X N :=
-    ⟨hN, a', b', fun n ↦ hNred n (hab' n)⟩
-  have hVX := boundedConstructibleIntegral_derivedHom_dualizing (Ideal.span {ϖ}) hϖ rfl aX ωX
-    hωX hNc
-  have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral (X := X) hϖ rfl
-  refine ⟨⟨(DerivedCategory.boundedConstructibleIntegral _ X).prop_of_iso eN.symm hVX.1,
-    fun n ↦ ?_⟩, ⟨e, he⟩, fun ωX hωX ωY hωY N φ _ hφ ↦
-      hS3 ωX hωX ωY hωY N φ (by have := hφ 1; rwa [pow_one] at this),
-    fun dX dY hdX hdY a b hab n ↦ ?_⟩
-  · obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
-    exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
-  · have hDY := hVY.2.2.1 dY hdY a b hab
-    have hDX := hVX.2.2.1 dX hdX (-b - 2 * (dY : ℤ) - 1) (-a - 1)
-      (fun n ↦ (hNred n ⟨(hab' n).1, hDY n⟩).2) n
-    have h₁ : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * (dX : ℤ))
-        (b + 2 * (dY : ℤ)) ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj
-          (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX.pt)) :=
-      hDX.mono (by omega) (by omega)
-    have h₂ := (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X _ _).prop_of_iso
-      ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).mapIso eN.symm) h₁
-    exact h₂
-
+  refine ⟨⟨hBT.1, fun n ↦ ?_⟩, ⟨e, he⟩, fun ωX hωX ωY hωY N φ _ hφ ↦
+    nonempty_iso_derivedHom_of_isHomotopyLimit (Ideal.span {ϖ}) hϖ rfl aX aY f hf hL hc ωX hωX ωY
+      hωY N φ (pow_one (Ideal.span {ϖ}) ▸ hφ 1), hBT.2⟩
+  obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
+  exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
 
 end Constructible
 
