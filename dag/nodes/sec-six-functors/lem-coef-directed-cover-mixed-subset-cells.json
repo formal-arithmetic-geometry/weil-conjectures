@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-join-slice-cocone-comparison"
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-directed-union-local-colimits"
  ],
  "proof": [
   {
@@ -256,5 +257,29 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-a6de125c4 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all nine proof steps, cited nodes, HTT source locations, unit route, downstream citers, edge cases, searches, and duplicate/cycle checks. The empty-family union correction is valid and downstream uses remain sound. Full details are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b37f4ed84",
+  "group": "Q143",
+  "result": "fix",
+  "note": "Reviewed statements, dependencies, HTT source, edge cases, universes and declarations. Complete fixes remove a duplicate constructor and replace the second-reading placeholder. Final module compiles cleanly through scompile.py. Details are in review.md; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DirectedCoverMixedSubsetCells",
+  "declaration": "SSet.Enhanced.directed_cover_mixed_subset_cells",
+  "declarations": [
+   "SSet.Enhanced.localUnionOver",
+   "SSet.Enhanced.directed_cover_mixed_subset_cells"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DirectedCoverMixedSubsetCells.lean",
+  "statement": "theorem directed_cover_mixed_subset_cells (K : SSet.{u}) (I : Type u) [PartialOrder I] (U : I → K.Subcomplex) (hmono : Monotone U) : (∀ (n : ℕ) (x : K _⦋n⦌), (orderedJoinInl K (nerve I)).app _ x ∈ (localUnionCollage U).obj _) ∧ (∀ (n : ℕ) (tau : (nerve I) _⦋n⦌), (orderedJoinInr K (nerve I)).app _ tau ∈ (localUnionCollage U).obj _) ∧ (∀ (a b : ℕ) (x : K _⦋a⦌) (tau : (nerve I) _⦋b⦌), joinGenerator K (nerve I) (op (.of ⦋a⦌)) (op (.of ⦋b⦌)) ((inv (AugmentedSimplexCategory.inclusion.op.ranCounit.app K)).app (op ⦋a⦌) x, (inv (AugmentedSimplexCategory.inclusion.op.ranCounit.app (nerve I))).app (op ⦋b⦌) tau) ∈ (localUnionCollage U).obj _ ↔ x ∈ (U (tau.obj 0)).obj _) ∧ (∀ Y : (nerve I).Subcomplex, localUnionOver U Y ≤ localUnionCollage U ∧ (∀ (n : ℕ) (x : K _⦋n⦌), (orderedJoinInl K (nerve I)).app _ x ∈ (localUnionOver U Y).obj _) ∧ (∀ (n : ℕ) (tau : (nerve I) _⦋n⦌), (orderedJoinInr K (nerve I)).app _ tau ∈ (localUnionOver U Y).obj _ ↔ tau ∈ Y.obj _) ∧ (∀ (a b : ℕ) (x : K _⦋a⦌) (tau : (nerve I) _⦋b⦌), joinGenerator K (nerve I) (op (.of ⦋a⦌)) (op (.of ⦋b⦌)) ((inv (AugmentedSimplexCategory.inclusion.op.ranCounit.app K)).app (op ⦋a⦌) x, (inv (AugmentedSimplexCategory.inclusion.op.ranCounit.app (nerve I))).app (op ⦋b⦌) tau) ∈ (localUnionOver U Y).obj _ ↔ x ∈ (U (tau.obj 0)).obj _ ∧ tau ∈ Y.obj _)) ∧ localUnionOver U ⊥ = Subcomplex.range (orderedJoinInl K (nerve I)) ∧ localUnionOver U ⊤ = localUnionCollage U ∧ (∀ (A : Type v) [Preorder A] (Y : A → (nerve I).Subcomplex), Monotone Y → localUnionOver U (iSup Y) = Subcomplex.range (orderedJoinInl K (nerve I)) ⊔ ⨆ a : A, localUnionOver U (Y a)) ∧ (∀ (A : Type v) [Preorder A] [Nonempty A] (Y : A → (nerve I).Subcomplex), Monotone Y → localUnionOver U (iSup Y) = ⨆ a : A, localUnionOver U (Y a)) ∧ (∀ (Y : (nerve I).Subcomplex) (n : ℕ) (tau : (nerve I) _⦋n⦌), StrictMono tau.obj → tau ∉ Y.obj _ → Subcomplex.range ((boundary n).ι ≫ yonedaEquiv.symm tau) ≤ Y → ∃ (h : localUnionOver U Y ≤ localUnionOver U (Y ⊔ Subcomplex.ofSimplex tau)) (top : orderedJoinFunctor.obj ((U (tau.obj 0)).toSSet, (boundary n).toSSet) ⟶ (localUnionOver U Y).toSSet) (bottom : orderedJoinFunctor.obj ((U (tau.obj 0)).toSSet, Δ[n]) ⟶ (localUnionOver U (Y ⊔ Subcomplex.ofSimplex tau)).toSSet), top ≫ (localUnionOver U Y).ι = orderedJoinFunctor.map (CategoryTheory.Prod.mkHom (𝟙 (U (tau.obj 0)).toSSet) (boundary n).ι) ≫ localUnionCell U n tau ∧ bottom ≫ (localUnionOver U (Y ⊔ Subcomplex.ofSimplex tau)).ι = localUnionCell U n tau ∧ IsPushout top (orderedJoinFunctor.map (CategoryTheory.Prod.mkHom (𝟙 (U (tau.obj 0)).toSSet) (boundary n).ι)) (Subcomplex.homOfLE h) bottom)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed localUnionCollage and localUnionCell, adding their owning node to stmt_deps. localUnionOver is the actual intersection with the image of K star Y, and mixedSubsetSimplex is the existing convolution generator in normal-form degrees. The canonical maps in each attachment are uniquely specified by their composites with the ambient subcomplex inclusions. All clauses include the empty and vertex cases; no statement correction. Independent maintainer review: removed mixedSubsetSimplex, which duplicated the landed sliceConeJoinSimplex, and wrote the existing joinGenerator application directly in the two membership clauses. This reuses the original join dependency without a second definition or a new dependency edge; no mathematical clause or hypothesis changes.",
+  "fixed_by": "NT-stage2-Codex-b37f4ed84"
  }
 }
