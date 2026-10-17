@@ -12,9 +12,94 @@
   "def-sp-filtration",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J_n=\\operatorname{gr}^n I$ for $a\\le n\\le b$, so these objects are injective by hypothesis and their required graded-piece isomorphisms are identities. For $a\\le n\\le b+1$ put $B_n=\\bigoplus_{n\\le k\\le b}J_k$; these finite biproducts exist by [def-sp-abelian]. Write $u_{p,n}:F^pI\\to F^nI$ for the filtration inclusion and $j_{p,n}:B_p\\to B_n$ for the tail inclusion when $n\\le p\\le b+1$. Construct, by induction on the nonnegative integer $b+1-n$, isomorphisms $\\theta_n:F^nI\\xrightarrow{\\sim}B_n$ satisfying $\\theta_n u_{p,n}=j_{p,n}\\theta_p$ for every $n\\le p\\le b+1$. The base $n=b+1$ is the unique isomorphism from $F^{b+1}I=0$ to the empty biproduct $B_{b+1}=0$; its sole compatibility equation is the identity.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+   }
+  },
+  {
+   "text": "Suppose the compatible isomorphisms have been constructed for indices $n+1,\\ldots,b+1$, where $a\\le n\\le b$. The biproduct $B_{n+1}$ is also the product of the finite family $(J_k)_{n+1\\le k\\le b}$. By [lem-weil-pbc-product-injectives] it is injective, including when this family is empty. Consequently $F^{n+1}I$ is injective: for a monomorphism $v:M\\to N$ and a map $f:M\\to F^{n+1}I$, extend $\\theta_{n+1}f$ to $g:N\\to B_{n+1}$ and then use $\\theta_{n+1}^{-1}g$ as the extension of $f$. This verifies exactly the extension property of [def-sp-injective-resolutions].",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-product-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0137, lemma-product-injectives; applied to finite biproducts in the induction for derived.tex Tag 05TP"
+   }
+  },
+  {
+   "text": "Let $i_n=u_{n+1,n}$ and let $q_n:F^nI\\to J_n=F^nI/F^{n+1}I$ be the quotient. By the definition of a subobject quotient in an abelian category, $i_n$ is the kernel of $q_n$, $q_n$ is its cokernel, and hence $0\\to F^{n+1}I\\xrightarrow{i_n}F^nI\\xrightarrow{q_n}J_n\\to0$ is short exact. The first object is injective by Step 2, so [lem-weil-pbc-ses-injective-kernel-splits] gives $r_n:F^nI\\to F^{n+1}I$ and $s_n:J_n\\to F^nI$ with $r_ni_n=1$, $q_ns_n=1$, and $i_nr_n+s_nq_n=1$. It is the injectivity of the first term, established by descending induction, that permits this application.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "lem-weil-pbc-ses-injective-kernel-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0136, lemma-characterize-injectives, (1) implies (3); the injection-splitting fact used by derived.tex Tag 05TP"
+   }
+  },
+  {
+   "text": "The splitting identities also give $r_ns_n=0$: composing $i_nr_n+s_nq_n=1$ with $s_n$ yields $i_nr_ns_n=0$, and $i_n$ is monic. Therefore the maps $(q_n,r_n):F^nI\\to J_n\\oplus F^{n+1}I$ and $(s_n,i_n):J_n\\oplus F^{n+1}I\\to F^nI$ are inverse: the composite on $F^nI$ is $s_nq_n+i_nr_n=1$, and the four blocks of the other composite are $q_ns_n=1$, $q_ni_n=0$, $r_ns_n=0$, $r_ni_n=1$. Compose the first isomorphism with $1_{J_n}\\oplus\\theta_{n+1}$ and identify $J_n\\oplus B_{n+1}$ with $B_n$, using the same coordinates indexed by $k=n,\\ldots,b$. This defines $\\theta_n$.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-ses-injective-kernel-splits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+   }
+  },
+  {
+   "text": "Since $q_ni_n=0$ and $r_ni_n=1$, the just-constructed map satisfies $\\theta_ni_n=j_{n+1,n}\\theta_{n+1}$. If $n+1\\le p\\le b+1$, the inclusions satisfy $u_{p,n}=i_nu_{p,n+1}$, so the induction hypothesis gives $\\theta_nu_{p,n}=j_{n+1,n}\\theta_{n+1}u_{p,n+1}=j_{n+1,n}j_{p,n+1}\\theta_p=j_{p,n}\\theta_p$. For $p=n$ the equation is the identity. Thus the whole compatibility invariant is preserved. All equations here are equations of morphisms; as $\\theta_p$ is an isomorphism, they identify the subobject $F^pI\\subseteq F^nI$ with precisely the tail sub-biproduct $B_p\\subseteq B_n$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+   }
+  },
+  {
+   "text": "After the finite descent to $n=a$, use $F^aI=I$ to set $\\theta=\\theta_a:I\\xrightarrow{\\sim}\\bigoplus_{k=a}^bJ_k$. Step 5 proves the required subobject identification for $a\\le p\\le b+1$. For $p<a$, decreasingness gives $I=F^aI\\subseteq F^pI\\subseteq I$, so $F^pI=I$ and every index $k\\in[a,b]$ satisfies $k\\ge p$. For $p>b+1$, decreasingness gives $F^pI\\subseteq F^{b+1}I=0$, while the specified index set is empty. Hence the same $\\theta$ works for every integer $p$, with the injective $J_n$ and their identity graded-piece isomorphisms chosen in Step 1.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-product-injectives",
+  "lem-weil-pbc-ses-injective-kernel-splits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TP, lemma-filtered-injective: expand the omitted finite-filtration splitting argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +142,45 @@
    "results": "12 hits: Ideal.Filtration, Ideal.Filtration.Stable, Ideal.Filtration.instBot, Ideal.Filtration.instCompleteLattice, Ideal.Filtration.instInfSet, Ideal.Filtration.instInhabited, Ideal.Filtration.instMax, Ideal.Filtration.instMin",
    "date": "2026-10-17",
    "verdict": "no match: module filtration/graded decomposition APIs assume additional module or grading data; ShortComplex.ShortExact.splittingOfInjective splits one short exact sequence, not an entire filtration. A descending induction and compatible filtration identifications are required."
+  },
+  {
+   "tool": "grep",
+   "query": "(filtration|filtered).{0,50}(split|biproduct)|injective.{0,50}(quotient|graded)",
+   "results": "Q10: 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire finite-filtration splitting: splittingOfInjective handles one short exact sequence only; the compatible descending induction is additional. Module and Grothendieck-category hits do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split a finite filtered object in an abelian category as a direct sum of its injective associated graded pieces",
+   "results": "Q10: 8 hits: CategoryTheory.ShortComplex.ShortExact.splittingOfInjective, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.AB4.of_AB5, CategoryTheory.ShortComplex.Splitting, CategoryTheory.IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom, CategoryTheory.ShortComplex.ShortExact.splittingOfProjective, CategoryTheory.Abelian.epiWithInjectiveKernel_iff",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire finite-filtration splitting: splittingOfInjective handles one short exact sequence only; the compatible descending induction is additional. Module and Grothendieck-category hits do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Filtration, CategoryTheory.Injective",
+   "results": "Q10: 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire finite-filtration splitting: splittingOfInjective handles one short exact sequence only; the compatible descending induction is additional. Module and Grothendieck-category hits do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite decreasing filtration of an object in an abelian category with injective graded quotients admits a splitting compatible with every filtration subobject",
+   "results": "Q10: 8 hits: CategoryTheory.ShortComplex.ShortExact.splittingOfInjective, IsModuleFiltration.mk_int, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.Retract.hasInjectiveDimensionLT, Ideal.Filtration.Stable.of_le, CategoryTheory.Retract.injectiveDimension_le, IsModuleFiltration.toIsFiltration",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire finite-filtration splitting: splittingOfInjective handles one short exact sequence only; the compatible descending induction is additional. Module and Grothendieck-category hits do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object with a finite chain of subobjects and injective successive quotients decomposes as their biproduct preserving the entire chain",
+   "results": "Q10: 8 hits: CategoryTheory.Indecomposable, CategoryTheory.instHasInjectiveDimensionLTBiprod, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver_obj, CategoryTheory.ObjectProperty.isoModSerre, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor, CategoryTheory.not_strictMono_of_isNoetherianObject, CategoryTheory.Injective.instBiproduct, CategoryTheory.indecomposable_of_simple",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire finite-filtration splitting: splittingOfInjective handles one short exact sequence only; the compatible descending induction is additional. Module and Grothendieck-category hits do not state this result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-enough-strict-filtered-injectives",
@@ -81,5 +201,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-injective-graded-filtration-splits",
+  "worker": "stage1",
+  "summary": "Expanded the omitted argument of Stacks Tag 05TP into a finite descending induction, using the existing product-injectivity and injective-kernel splitting Mathlib leaves. Explicit inverse biproduct maps and an inclusion-map invariant prove simultaneous compatibility with every filtration subobject. Statement and original searches retained; no new nodes, no Lean attachment, no source discrepancy.",
+  "blueprint": "Supports prop-trf-trace-additivity-open-closed, current blueprint proof Step 3 (common filtered origin): split filtered-injective objects in the filtered localization model via the existing ancestry lem-trf-filtered-derived-operation-lifts, lem-trf-filtered-localization-injective-model, lem-trf-enough-strict-filtered-injectives. The unit route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-269dcfef5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-269dcfef5 (reviewer sub-agent of L); spot-checked: I read the full item, all five cited node statements, Stacks derived.tex:7852 lemma-filtered-injective (Tag 05TP), the unit sk-i-global-additivity and how the parent lem-trf-enough-strict-filtered-injectives uses the item in its Step 1. The statement is 05TP (=>) with the bounds a<=b fixed and J_n=gr^n I; it is neither weakened nor given an extra hypothesis, and it needs only an abelian category. I rechecked the six-step descending induction. Step 2: a finite or empty biproduct is a product, so it is injective by Injective/Basic.lean:139, and injectivity is carried across theta. Step 3: the kernel F^{n+1} is injective, so the sequence splits by ShortExact.splittingOfInjective. Step 4: rs=0 follows because i is mono, and I checked all four blocks. Step 5: theta_n i_n = j theta_{n+1}, and the inclusion order is correct. Step 6: the cases p<a and p>b+1 hold. Small cases checked: I=0, a=b, a two-step filtration, zero graded pieces, negative bounds. There are no new nodes. rg for 05TP finds only the ancestry chain, and no node duplicates the item. The two tools are Mathlib leaves, so tool_uses is correctly empty. No SGA is cited. No fixes were needed."
  }
 }
