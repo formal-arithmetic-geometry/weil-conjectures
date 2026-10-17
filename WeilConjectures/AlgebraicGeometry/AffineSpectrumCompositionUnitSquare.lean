@@ -187,7 +187,6 @@ end AffineSpectrumCoherence
 
 namespace AlgebraicGeometry
 
-attribute [local irreducible] derivedPullback
   Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 attribute [local implicit_reducible] Scheme.isoSpec asIso
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
