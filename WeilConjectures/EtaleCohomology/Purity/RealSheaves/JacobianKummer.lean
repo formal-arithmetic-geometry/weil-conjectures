@@ -28,6 +28,9 @@ transition maps `μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}`, `z ↦ z ^ l`, and multiplicatio
 - `AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_restrictMuH`: Galois equivariance.
 - `AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_map_rootsOfUnityPowMap`: compatibility
   with the transition maps.
+- `AlgebraicGeometry.JacobianTorsionDatum.exists_kummerEquiv_eq`: for a datum whose comparison
+  maps are induced by the representing isomorphism of the Jacobian, `kummerEquiv` is the Kummer
+  identification followed by that representing isomorphism.
 -/
 
 @[expose] public section
@@ -155,6 +158,35 @@ theorem kummerEquiv_map_rootsOfUnityPowMap (d : JacobianTorsionDatum p l) (hl : 
       (natCast_pow_ne_zero hl _), ← natCast_zsmul]
     simp [equivTorsion_kummerEquiv]
   rw [key, d.equivTorsion_symm_zsmul, AddEquiv.symm_apply_apply]
+
+variable (p l) in
+/-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module`: Kummer identifies curve cohomology
+with the Jacobian torsion, through the representing isomorphism of the Jacobian.
+
+There is a Jacobian torsion datum `d` and an injective homomorphism `φ : J₀(K̄) → Pic(C)`
+determined by the representing isomorphism `d.representableBy` of the Jacobian (a geometric
+point `x` of `J₀` is the point which it attaches to the class of `φ x`), such that the
+isomorphism `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` of `d`
+(`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv`, Galois-equivariant by
+`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_restrictMuH` and compatible with the
+transition maps by `AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_map_rootsOfUnityPowMap`)
+is the Kummer identification `H¹(C, μ_{lⁿ}) ≅ Pic(C)[lⁿ]`
+(`AlgebraicGeometry.Scheme.kummerTorsionEquiv`) followed by the inverse of `φ`. -/
+theorem exists_kummerEquiv_eq [SmoothOfRelativeDimension 1 p] (hl : (l : K) ≠ 0) :
+    ∃ (d : JacobianTorsionDatum p l)
+      (φ : (Scheme.specAlgebraicClosure K ⟶ d.J) →* p.geometricFiber.Pic),
+      (∀ x, ∃ h, x = d.representableBy.homEquiv.symm
+        ((toSheafify (Scheme.fppfTopology.over (Spec (.of K)))
+          (picardSubfunctorDegree p 0).toFunctor).app _
+            ⟨Scheme.Pic.map (IsPullback.of_hasPullback p
+              (Scheme.specAlgebraicClosure K).hom).isoPullback.inv (φ x), h⟩)) ∧
+      Function.Injective φ ∧
+      ∀ (n : ℕ) (x : Sheaf.H (p.geometricFiber.rootsOfUnitySheaf (l ^ n)) 1),
+        Additive.ofMul (φ (d.kummerEquiv hl n x :
+            Additive (Scheme.specAlgebraicClosure K ⟶ d.J)).toMul) =
+          Scheme.kummerTorsionEquiv (l ^ n) (natCast_pow_ne_zero hl n) x := by
+  obtain ⟨d, φ, hφr, hinj, hφ⟩ := exists_equivTorsion_eq_restrict p l
+  exact ⟨d, φ, hφr, hinj, fun n x ↦ by rw [← equivTorsion_kummerEquiv d hl, hφ]⟩
 
 end JacobianTorsionDatum
 

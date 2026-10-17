@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GaloisGroupLaw
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.RationalTateModule
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 public import WeilConjectures.AlgebraicGeometry.Curve
@@ -51,6 +52,10 @@ resulting identification `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` is
 ## Main statements
 
 - `AlgebraicGeometry.JacobianTorsionDatum.nonempty_tateModuleEquiv`
+- `AlgebraicGeometry.exists_jacobian_galoisAction`: the semilinear Galois action on the geometric
+  Jacobian, preserving the group law (blueprint `lem-wf-geometric-jacobian-galois-action`).
+- `AlgebraicGeometry.JacobianTorsionDatum.exists_equivTorsion_eq_restrict`: a Jacobian torsion
+  datum whose comparison isomorphisms are induced by the representing isomorphism.
 -/
 
 @[expose] public section
@@ -417,6 +422,58 @@ lemma geometricFiberGaloisMap_id :
 
 end Scheme.Hom
 
+namespace Scheme
+
+/-- On the unit object of `Over (Spec K̄)`, the endomorphism `Spec σ⁻¹` lies over a section of
+`Spec σ`, for `σ ∈ Gal(K̄ / K)`. This is the condition needed to transport points along
+semilinear maps over `Spec σ` (`AlgebraicGeometry.SemilinearGrpHom.mapPoints`). -/
+lemma specAlgebraicClosureMap_inv_left_comp (σ : Gal(AlgebraicClosure K/K)) :
+    (specAlgebraicClosureMap σ⁻¹.toAlgHom).left ≫
+        (𝟙_ (Over (Spec (.of (AlgebraicClosure K))))).hom ≫
+          (specAlgebraicClosureMap σ.toAlgHom).left =
+      (𝟙_ (Over (Spec (.of (AlgebraicClosure K))))).hom := by
+  rw [Over.tensorUnit_hom]
+  exact (Category.id_comp _).trans
+    (congrArg Over.Hom.left (specAlgebraicClosureMap_symm_comp_self σ))
+
+variable (A : Over (Spec (.of K))) [GrpObj A]
+
+/-- Blueprint `lem-wf-geometric-jacobian-galois-action` (Galois module of points): for a group
+scheme `A` over `K` and `σ ∈ Gal(K̄ / K)`, transporting a `K̄`-point `P` of `A_{K̄}` along the
+semilinear automorphism `σ_A = 𝟙 × Spec σ`
+(`AlgebraicGeometry.Scheme.geometricFiberGaloisGrpHom`), `P ↦ σ_A ∘ P ∘ Spec σ⁻¹`, is the
+action of `σ⁻¹` by coordinates on `A(K̄) = A_{K̄}(K̄)`
+(`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`). -/
+theorem geometricPointsAddEquivBaseChangePoints_symm_mapPoints (σ : Gal(AlgebraicClosure K/K))
+    (x : Additive (Scheme.specAlgebraicClosure K ⟶ A)) :
+    (geometricPointsAddEquivBaseChangePoints A).symm
+        ((geometricFiberGaloisGrpHom A σ.toAlgHom).mapPoints
+          (specAlgebraicClosureMap σ⁻¹.toAlgHom).left
+          (specAlgebraicClosureMap_inv_left_comp σ)
+          (geometricPointsAddEquivBaseChangePoints A x)) =
+      IsAbelianVariety.geometricPointsAddEquiv σ⁻¹ x := by
+  refine Additive.toMul.injective (Over.OverMorphism.ext ?_)
+  have h1 (y : Additive (𝟙_ (Over (Spec (.of (AlgebraicClosure K)))) ⟶
+      baseChangeAlgebraicClosure A)) :
+      ((geometricPointsAddEquivBaseChangePoints A).symm y).toMul.left =
+        y.toMul.left ≫ pullback.fst _ _ := rfl
+  have h2 : ((geometricPointsAddEquivBaseChangePoints A) x).toMul.left ≫ pullback.fst _ _ =
+      x.toMul.left :=
+    congrArg (fun z ↦ z.toMul.left)
+      ((geometricPointsAddEquivBaseChangePoints A).symm_apply_apply x)
+  have h3 (y : Additive (𝟙_ (Over (Spec (.of (AlgebraicClosure K)))) ⟶
+      baseChangeAlgebraicClosure A)) :
+      ((geometricFiberGaloisGrpHom A σ.toAlgHom).mapPoints
+          (specAlgebraicClosureMap σ⁻¹.toAlgHom).left
+          (specAlgebraicClosureMap_inv_left_comp σ) y).toMul.left =
+        (specAlgebraicClosureMap σ⁻¹.toAlgHom).left ≫ y.toMul.left ≫
+          A.hom.geometricFiberGaloisMap σ.toAlgHom := rfl
+  rw [h1, h3]
+  erw [Category.assoc, Category.assoc, Hom.geometricFiberGaloisMap_comp_geometricFiberProj, h2]
+  rfl
+
+end Scheme
+
 /-- An injective homomorphism `f : M →+ N` whose image contains the `n`-torsion of `N` restricts
 to an isomorphism `M[n] ≃+ N[n]` of `n`-torsion subgroups. -/
 theorem _root_.AddSubgroup.exists_addEquiv_torsionBy_of_injective {M N : Type*}
@@ -441,10 +498,10 @@ variable (K) in
 the geometric Jacobian.
 
 Let `C₀` be a smooth proper geometrically connected curve over a field `K` (given by
-`p : C₀ ⟶ Spec K`) and `C = C₀ ×_K K̄` its geometric fiber. There is a commutative group scheme
-`J₀` over `K` representing `Pic⁰_{C₀/K}` by `r` (the Jacobian of `C₀`), whose base change
-`J = J₀ ×_K K̄` (`J₀.hom.geometricFiber`) represents `Pic⁰_{C/K̄}` by the base change `rK` of
-`r`, i.e. is the Jacobian of `C`. Moreover:
+`p : C₀ ⟶ Spec K`) and `C = C₀ ×_K K̄` its geometric fiber. There is an abelian variety (a
+commutative group scheme) `J₀` over `K` representing `Pic⁰_{C₀/K}` by `r` (the Jacobian of
+`C₀`), whose base change `J = J₀ ×_K K̄` (`J₀.hom.geometricFiber`) represents `Pic⁰_{C/K̄}`
+by the base change `rK` of `r`, i.e. is the Jacobian of `C`. Moreover:
 
 * the identification `φ : J₀(K̄) ≅ Pic⁰(C) ⊆ Pic(C)` is induced by the representing data: a
   geometric point `x` of `J₀` is the point which `r` attaches to the class of `φ x`; `φ` is an
@@ -454,11 +511,18 @@ Let `C₀` be a smooth proper geometrically connected curve over a field `K` (gi
   `J` over `Spec σ` inducing the Galois action `σ_C^*` on the represented functor
   `Pic⁰_{C/K̄}` (`AlgebraicGeometry.Scheme.Hom.geometricFiberPicardGaloisMap`), by Yoneda;
 * `σ ↦ σ_J` is an action: `σ_J` for `σ τ` is `σ_J ≫ τ_J` (`Spec` is contravariant);
+* `σ_J` preserves the group laws: it underlies a homomorphism of group schemes semilinear over
+  `Spec σ` (`AlgebraicGeometry.SemilinearGrpHom`, for the base-changed group law on `J`). The
+  induced action on `K̄`-points, `P ↦ σ_J ∘ P ∘ Spec σ⁻¹`, is the coordinate action of `σ⁻¹` on
+  `J(K̄) = J₀(K̄)`, so that `J₀(K̄)` is a Galois module, and componentwise it is the
+  `ℤ_l`-linear Galois action on the Tate module `T_l J`
+  (`AlgebraicGeometry.IsAbelianVariety.galoisRepresentation`), making `T_l J` a
+  `ℤ_l[Gal(K̄ / K)]`-module;
 * `φ` is Galois equivariant: `φ (Spec σ ≫ x) = σ_C^* (φ x)` for the action `σ_C = 𝟙 × Spec σ` of
   `σ` on `C`, and so are its restrictions `J₀[n](K̄) ≅ Pic⁰(C)[n]` to `n`-torsion, `n ≠ 0`. -/
 theorem exists_jacobian_galoisAction (p : C ⟶ Spec (.of K)) [SmoothOfRelativeDimension 1 p]
     [IsProper p] [GeometricallyConnected p] :
-    ∃ (J₀ : Over (Spec (.of K))) (_ : CommGrpObj J₀)
+    ∃ (J₀ : Over (Spec (.of K))) (_ : CommGrpObj J₀) (_ : IsAbelianVariety J₀)
       (r : (picardFunctorDegree p 0).obj.RepresentableBy J₀)
       (rK : (picardFunctorDegree p.geometricFiberToAlgebraicClosure 0).obj.RepresentableBy
         (Over.mk J₀.hom.geometricFiberToAlgebraicClosure))
@@ -491,6 +555,26 @@ theorem exists_jacobian_galoisAction (p : C ⟶ Spec (.of K)) [SmoothOfRelativeD
       (∀ σ τ : Gal(AlgebraicClosure K/K),
         J₀.hom.geometricFiberGaloisMap (σ * τ).toAlgHom =
           J₀.hom.geometricFiberGaloisMap σ.toAlgHom ≫ J₀.hom.geometricFiberGaloisMap τ.toAlgHom) ∧
+      -- `σ_J` preserves the group law: it is a homomorphism of group schemes over `Spec σ`;
+      -- transporting `K̄`-points along it is the coordinate action of `σ⁻¹` on `J₀(K̄)`, and so
+      -- `σ_J` induces the `ℤ_l`-linear Galois action on the Tate module `T_l J`
+      (∀ σ : Gal(AlgebraicClosure K/K), ∃ g : SemilinearGrpHom
+          (S := Spec (.of (AlgebraicClosure K))) (Scheme.specAlgebraicClosureMap σ.toAlgHom).left
+          (Scheme.baseChangeAlgebraicClosure J₀) (Scheme.baseChangeAlgebraicClosure J₀),
+        g.hom = J₀.hom.geometricFiberGaloisMap σ.toAlgHom ∧
+        (∀ x, (Scheme.geometricPointsAddEquivBaseChangePoints J₀).symm
+            (g.mapPoints (Scheme.specAlgebraicClosureMap σ⁻¹.toAlgHom).left
+              (Scheme.specAlgebraicClosureMap_inv_left_comp σ)
+              (Scheme.geometricPointsAddEquivBaseChangePoints J₀ x)) =
+          IsAbelianVariety.geometricPointsAddEquiv σ⁻¹ x) ∧
+        ∀ (l : ℕ) [Fact l.Prime] (t : IsAbelianVariety.tateModule l J₀) (n : ℕ),
+          ((IsAbelianVariety.galoisRepresentation l J₀ σ⁻¹ t : IsAbelianVariety.tateModule l J₀) :
+              ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ J₀)) n =
+            (Scheme.geometricPointsAddEquivBaseChangePoints J₀).symm
+              (g.mapPoints (Scheme.specAlgebraicClosureMap σ⁻¹.toAlgHom).left
+                (Scheme.specAlgebraicClosureMap_inv_left_comp σ)
+                (Scheme.geometricPointsAddEquivBaseChangePoints J₀
+                  ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ J₀)) n)))) ∧
       -- `φ` is Galois equivariant
       (∀ (σ : Gal(AlgebraicClosure K/K)) (x : Scheme.specAlgebraicClosure K ⟶ J₀),
         φ (Scheme.specAlgebraicClosureMap σ.toAlgHom ≫ x) =
@@ -518,9 +602,13 @@ theorem exists_jacobian_galoisAction (p : C ⟶ Spec (.of K)) [SmoothOfRelativeD
   have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of K)) := ‹SmoothOfRelativeDimension 1 p›
   have : IsProper (C ↘ Spec (.of K)) := ‹IsProper p›
   have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
-  obtain ⟨J₀, _, r, -, -, -, -, ⟨rK, hrK⟩, e, he, hσ⟩ := exists_jacobian_descent K
+  obtain ⟨J₀, _, r, hP, hS, hG, -, ⟨rK, hrK⟩, e, he, hσ⟩ := exists_jacobian_descent K
     (separableClosure K (AlgebraicClosure K)) (AlgebraicClosure K) C _ rfl p.geometricFiber
     p.geometricFiberProj (IsPullback.of_hasPullback _ _)
+  have : Smooth J₀.hom := SmoothOfRelativeDimension.smooth (Scheme.arithmeticGenus K C) _
+  have : IrreducibleSpace J₀.left := GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+    (f := J₀.hom)
+  have hJ : IsAbelianVariety J₀ := ⟨⟩
   let φ : (Scheme.specAlgebraicClosure K ⟶ J₀) →* p.geometricFiber.Pic :=
     (picardZero (AlgebraicClosure K) p.geometricFiber).subtype.comp e.symm.toMonoidHom
   have hinj : Function.Injective φ := Subtype.val_injective.comp e.symm.injective
@@ -553,9 +641,12 @@ theorem exists_jacobian_galoisAction (p : C ⟶ Spec (.of K)) [SmoothOfRelativeD
     rw [show Scheme.specAlgebraicClosureMap σ.toAlgHom ≫ x = specAlgEquivOver σ ≫ x from rfl,
       ← hx, hact₁, hγ]
     rfl
-  refine ⟨J₀, inferInstance, r, rK, φ, hrK, fun x ↦ ?_, hinj, htors,
+  refine ⟨J₀, inferInstance, hJ, r, rK, φ, hrK, fun x ↦ ?_, hinj, htors,
     fun σ f hf ↦ Scheme.Hom.homEquiv_galoisTwistHom_iff hrK σ.toAlgHom f hf,
-    fun σ τ ↦ ?_, hφσ, fun n hn ↦ ?_⟩
+    fun σ τ ↦ ?_, fun σ ↦ ⟨Scheme.geometricFiberGaloisGrpHom J₀ σ.toAlgHom, rfl,
+      Scheme.geometricPointsAddEquivBaseChangePoints_symm_mapPoints J₀ σ,
+      fun l _ t n ↦ (Scheme.geometricPointsAddEquivBaseChangePoints_symm_mapPoints J₀ σ _).symm⟩,
+    hφσ, fun n hn ↦ ?_⟩
   · obtain ⟨h, hx⟩ := he (e.symm x)
     exact ⟨h, (e.apply_symm_apply x).symm.trans hx⟩
   · rw [show (σ * τ).toAlgHom = σ.toAlgHom.comp τ.toAlgHom from AlgHom.ext fun _ ↦ rfl]
@@ -570,5 +661,51 @@ theorem exists_jacobian_galoisAction (p : C ⟶ Spec (.of K)) [SmoothOfRelativeD
     refine ⟨eₙ, heₙ, fun σ x ↦ ?_⟩
     rw [heₙ, heₙ]
     exact congrArg Additive.ofMul (hφσ σ x.1.toMul)
+
+namespace JacobianTorsionDatum
+
+variable [Finite K] {p : C ⟶ Spec (.of K)} [IsCurve p] [Smooth p] [IsProper p]
+  [GeometricallyIntegral p] {l : ℕ} [Fact l.Prime]
+
+variable (p l) in
+/-- Blueprint `lem-wf-geometric-jacobian-galois-action` (torsion clause), as used in
+`lem-wf-curve-kummer-jacobian-tate-module`: the comparison isomorphisms of a Jacobian torsion
+datum can be taken to be induced by the representing isomorphism.
+
+There is a Jacobian torsion datum `d` together with an injective homomorphism
+`φ : J₀(K̄) → Pic(C)` determined by the representing isomorphism `d.representableBy` of `J₀`
+(a geometric point `x` is the point which it attaches to the class of `φ x`), such that every
+comparison isomorphism `J₀(K̄)[lⁿ] ≃ Pic(C)[lⁿ]` of `d` is the restriction of `φ`. This is the
+datum obtained from `AlgebraicGeometry.exists_jacobian_galoisAction`. -/
+theorem exists_equivTorsion_eq_restrict [SmoothOfRelativeDimension 1 p] :
+    ∃ (d : JacobianTorsionDatum p l)
+      (φ : (Scheme.specAlgebraicClosure K ⟶ d.J) →* p.geometricFiber.Pic),
+      (∀ x, ∃ h, x = d.representableBy.homEquiv.symm
+        ((toSheafify (Scheme.fppfTopology.over (Spec (.of K)))
+          (picardSubfunctorDegree p 0).toFunctor).app _
+            ⟨Scheme.Pic.map (IsPullback.of_hasPullback p
+              (Scheme.specAlgebraicClosure K).hom).isoPullback.inv (φ x), h⟩)) ∧
+      Function.Injective φ ∧
+      ∀ (n : ℕ) (x : AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ d.J))
+          ((l : ℤ) ^ n)),
+        (d.equivTorsion n x : Additive p.geometricFiber.Pic) = Additive.ofMul (φ x.1.toMul) := by
+  have : GeometricallyConnected p := .of_geometricallyIrreducible p
+  obtain ⟨J₀, _, hJ, r, -, φ, -, hφr, hinj, htors, -, -, -, hφσ, -⟩ :=
+    exists_jacobian_galoisAction K p
+  choose eT heT using fun n : ℕ ↦
+    AddSubgroup.exists_addEquiv_torsionBy_of_injective φ.toAdditive hinj (n := (l : ℤ) ^ n)
+      fun y hy ↦ by
+        have h3 := congrArg Additive.toMul (show ((l : ℤ) ^ n) • y = 0 from hy)
+        rw [toMul_zsmul, toMul_zero, ← Nat.cast_pow, zpow_natCast] at h3
+        obtain ⟨x, hx⟩ := htors (l ^ n) _ (pow_ne_zero n (Fact.out : l.Prime).ne_zero) h3
+        exact ⟨Additive.ofMul x, congrArg Additive.ofMul hx⟩
+  refine ⟨@JacobianTorsionDatum.mk _ _ _ _ p _ _ _ _ l _ J₀ _ hJ r eT (fun n σ x ↦ ?_)
+    (fun n x ↦ ?_), φ, hφr, hinj, heT⟩
+  · rw [heT, heT]
+    exact congrArg Additive.ofMul (hφσ σ x.1.toMul)
+  · rw [heT, heT]
+    exact map_zsmul φ.toAdditive _ _
+
+end JacobianTorsionDatum
 
 end AlgebraicGeometry
