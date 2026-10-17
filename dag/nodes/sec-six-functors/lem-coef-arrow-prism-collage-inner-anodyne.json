@@ -275,5 +275,39 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-08562fb27 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and its report, no new nodes. Compared with the current unsplit node in weil-newtargets: only split-owned fields changed (proof, proof_deps, proof_origin, mathlib_searches, split_report, status); statement, stmt_deps, source, created and blueprint are identical, so nothing was weakened. I decoded J=B⋆_X X from def-coef-infinity-relative-join: the data (q in Fun(Δ^1,X)_i, σ, q(1,-)=σ|[i]) match the statement. Step 1 is correct: P_m={(r,y): e(y)≤r}, the simplicial subset of Δ^1×J, via the canonical representative (id,r) in P_y. Step 2: Q={1}×J ∪ Δ^1×J_0 and P_H=P∩(Δ^1×H), correct. Step 3: degeneracy in P equals degeneracy in Δ^1×J; with the uniqueness clauses of the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition this gives the adjacent-equality test. Step 4: the only missing simplices are A_{x,j} and B_{x,j}, j≤i<n. Step 5: I checked every face of B_{x,j} by hand; the horn is Λ^{n+1}_{j+1} with 0<j+1<n+1, so it is inner. Step 6: global gluing holds by the unique support, so identified faces of x cause no harm. Step 7: the lift is built directly from the LLP definition of inner anodyne in lem-coef-inner-anodyne-pushout-product, with no hidden saturation theorem. Steps 8-9: the evaluation glues on {1}×J_0 (both sides give v) and the diagonal is d(y)=(e(y),y); both correct. Small cases: X=B=Δ^0 gives P=Δ^2 and Q=Λ^2_1; J=Δ^2 with i=0 and with i=1 attach by Λ^2_1, Λ^3_1, Λ^3_2 and exhaust P_x; H=∅, H=J, X=∅ and B=∅ are trivial. The citer lem-coef-infinity-arrow-join-geometry steps 5-7 use exactly the clauses provided. Only definitions and Mathlib leaves are cited, so there is no route issue and no tool_uses. Duplicate check: rg for 'inner anodyne' over dag/nodes; I read six candidates (relative-join-prism-comparison, filtered-inner-horn-factorization, inner-horn-cell-generation, gapped-face, final-face-edge, twisted-pullback-boundary); none is a duplicate. Searches cover grep, LeanSearch, Loogle and LeanFinder. Kerodon 0302 is not in literature/: the report carries a WANTED line and proof_origin.by=agent. No SGA source is used. Not a target node, so the base-change/coefficient-category check does not apply. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87781d11c",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Delivered arrowPrismQ used Mathlib Subcomplex.unionProd (= ⊤.prod T ⊔ S.prod ⊤), so (ofSimplex 1).unionProd ⊤ ⊔ ⊤.unionProd J₀ = ⊤ (proved arrowPrismQ = ⊤ by a compiled scratch lemma); hence arrowPrismQH_le_P (⊤ ≤ P) was false and the inner-anodyne conjunct and ev domain were wrong. fixes/ArrowPrismCollage.lean replaces both unionProd by prod (Q = {1}×J ∪ Δ¹×J₀, membership characterization compiled), docstring updated; main signature equals node lean.statement verbatim and the 13 lean.declarations are unchanged, so no JSON fix is needed. All other clauses checked against the node and the RelativeJoin/EnhancedDiagramsCones declarations: real target evaluation, e orientation (0 = initial block), normal-form P from node step 1 with corrected inequality orientation, P_H, ev restrictions (σ on the target row, ihom.ev on the inl prism), d = (e(y),y), arbitrary H, no quasicategory or universe restriction, sorry-only proofs, source/blueprint docstrings, no duplicate. nt_compile: delivered and fixed files compile with no errors."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ArrowPrismCollage",
+  "declaration": "SSet.Enhanced.arrowPrismCollageInnerAnodyne",
+  "file": "lean/Sheaf/CategoryTheory/ArrowPrismCollage.lean",
+  "statement": "theorem arrowPrismCollageInnerAnodyne (X : SSet.{u}) (B : ((ihom Δ[1]).obj X).Subcomplex) (H : (relativeJoin (arrowPrismTarget X B) (𝟙 X)).Subcomplex) : SSet.innerAnodyneExtensions (arrowPrismQHToP X B (arrowPrismTarget X B) H) ∧ ∃ (ev : (arrowPrismQ X B (arrowPrismTarget X B) : SSet) ⟶ X) (d : relativeJoin (arrowPrismTarget X B) (𝟙 X) ⟶ arrowPrismP X B (arrowPrismTarget X B)), (∀ (n : SimplexCategoryᵒᵖ) (z : (arrowPrismQ X B (arrowPrismTarget X B)).obj n), z.val.1 = SSet.stdSimplex.objEquiv.symm (SimplexCategory.const n.unop ⦋1⦌ 1) → ev.app n z = (relativeJoinProjection (arrowPrismTarget X B) (𝟙 X)).app n z.val.2) ∧ (∀ (n : SimplexCategoryᵒᵖ) (z : (arrowPrismQ X B (arrowPrismTarget X B)).obj n) (b : B.obj n), z.val.2 = (relativeJoinInl (arrowPrismTarget X B) (𝟙 X)).app n b → ev.app n z = ((ihom.ev Δ[1]).app X).app n (z.val.1, B.ι.app n b)) ∧ (∀ (n : SimplexCategoryᵒᵖ) (y : (relativeJoin (arrowPrismTarget X B) (𝟙 X)).obj n), (d.app n y).val = ((relativeJoinSnd (arrowPrismTarget X B) (𝟙 X) ≫ fst _ _).app n y, y))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.arrowPrismIntervalLE",
+   "SSet.Enhanced.arrowPrismP_map",
+   "SSet.Enhanced.arrowPrismP",
+   "SSet.Enhanced.arrowPrismInitial_map",
+   "SSet.Enhanced.arrowPrismInitial",
+   "SSet.Enhanced.arrowPrismQ",
+   "SSet.Enhanced.arrowPrismPH_map",
+   "SSet.Enhanced.arrowPrismPH",
+   "SSet.Enhanced.arrowPrismQH",
+   "SSet.Enhanced.arrowPrismQH_le_P",
+   "SSet.Enhanced.arrowPrismQHToP",
+   "SSet.Enhanced.arrowPrismTarget",
+   "SSet.Enhanced.arrowPrismCollageInnerAnodyne"
+  ],
+  "fixed_by": "NT-stage2-cc-87781d11c"
  }
 }
