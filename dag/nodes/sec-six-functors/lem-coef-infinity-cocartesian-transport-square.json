@@ -13,9 +13,91 @@
   "lem-coef-infinity-mapping-composition",
   "lem-coef-infinity-pointwise-cocartesian-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the chosen $F$ and $\\lambda$ from the statement, rather than choosing a different transport. The vertex components $\\lambda_x:x\\to F(x)$ and $\\lambda_y:y\\to F(y)$ are cocartesian. Restricting the simplicial map $E_0\\times\\Delta^1\\to E$ representing $\\lambda$ to $u\\times\\Delta^1$ gives a coherent square over the constant square on $f$, hence $\\lambda_yu\\simeq F(u)\\lambda_x$. The edge $F(u)$ lies in $E_1$. To apply the mapping-space formulation of [lem-coef-infinity-pointwise-cocartesian-transport] later, [lem-coef-infinity-cocartesian-mapping-criterion] identifies the horn-cocartesian edges of the hypotheses with the mapping-space-cocartesian edges used in that node. Thus its hypotheses hold for this same $p$ and these same lifts.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.1, opposite-category dual, specialized to K=Delta^0 and its coherent transformation component."
+   }
+  },
+  {
+   "text": "For the fixed source $x$ and base edge $f$, form the lift category $L(x,f)$ of [lem-coef-infinity-cocartesian-composition-initiality]. Both $\\lambda_x:x\\to F(x)$ and $R:x\\to x'$ are cocartesian lifts of $f$, so both are initial objects of $L(x,f)$. The universal comparison between these initial lifts is an equivalence over $1_{b_1}$; after forgetting the triangle it is an equivalence $c_R:F(x)\\to x'$ and gives $c_R\\,\\lambda_x\\simeq R$. Applying the same argument at $y$ to $\\lambda_y$ and $T$ gives an equivalence $c_T:F(y)\\to y'$ with $c_T\\,\\lambda_y\\simeq T$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9, opposite-category dual: cocartesian lifts are initial in the fixed-source lift category."
+   }
+  },
+  {
+   "text": "Put $E_f=E\\times_{B,f}\\Delta^1$, the degreewise pullback along $f:\\Delta^1\\to B$, with projection $p_f:E_f\\to\\Delta^1$; a simplex of $E_f$ is a simplex $\\sigma$ of $E$ with a map $\\tau:\\Delta^n\\to\\Delta^1$ such that $p\\sigma=f\\tau$. Since $\\Delta^1$ is the nerve of $[1]$, every horn of $\\Delta^1$ extends uniquely, so the inner-horn lifting of $p$ gives that $E_f$ is a quasicategory and $p_f$ an inner fibration; the same argument with $\\Lambda^n_0$ shows that an edge of $E_f$ whose image in $E$ is $p$-cocartesian is $p_f$-cocartesian. The fibers of $p_f$ over $0$ and $1$ are $E_0$ and $E_1$ (also when $f$ is degenerate, where $\\tau$ records the coordinate). Taking $\\tau$ to be the horizontal coordinate, the supplied square, the square of Step 1 and the comparison $2$-simplices of Step 2 (which lie over $f$ composed with the degeneracy $\\Delta^2\\to\\Delta^1$ sending $0\\mapsto0$, $1,2\\mapsto1$) are maps into $E_f$; $\\lambda_x,\\lambda_y,R,T$ are $p_f$-cocartesian. In $\\Delta^1$ the right-pinched mapping spaces from $0$ to $1$ and from $1$ to $1$ have exactly one simplex in each degree, so both are $\\Delta^0$. A simplex of $\\operatorname{Map}_{E_f}(F(x),y')$ has all its vertices over $1$, so its $\\tau$ is constant at $1$; hence $\\operatorname{Map}_{E_f}(F(x),y')=\\operatorname{Map}_{E_1}(F(x),y')$, and likewise for any two objects of $E_1$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Base change of inner fibrations and of (co)cartesian edges along $\\Delta^1\\to B$ (HTT Remark 2.4.1.4 dual); written out from the definitions."
+   }
+  },
+  {
+   "text": "Choose, in the quasicategory $E_1$, $2$-simplices with edges $(c_R,v,a)$ and $(F(u),c_T,d)$, so $a:F(x)\\to y'$ and $d:F(x)\\to y'$ are composites $v\\,c_R$ and $c_T\\,F(u)$ in $E_1$. Work in the homotopy category $hE_f$ of [lem-coef-infinity-mapping-composition], in which a $2$-simplex with edges $u,v,w$ gives $[v][u]=[w]$ and composition is associative. The square of Step 1 consists of two $2$-simplices with common diagonal, giving $[\\lambda_y][u]=[F(u)][\\lambda_x]$; the supplied square gives $[T][u]=[v][R]$; the triangles of Step 2 give $[c_R][\\lambda_x]=[R]$ and $[c_T][\\lambda_y]=[T]$. Hence in $\\pi_0\\operatorname{Map}_{E_f}(x,y')$\n$$[a][\\lambda_x]=[v]([c_R][\\lambda_x])=[v][R]=[T][u]=[c_T]([\\lambda_y][u])=[c_T]([F(u)][\\lambda_x])=[d][\\lambda_x].$$\nThe simplices from $E_1$ are simplices of $E_f$, so $[a]=[v][c_R]$ and $[d]=[c_T][F(u)]$ hold in $hE_f$ as well as in $hE_1$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Composition in the homotopy category of a quasicategory (Kerodon 4.6.8 / Tag 01PF); applied to the supplied square, the naturality square and the comparison triangles in $E_f$."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cocartesian-mapping-criterion] to the inner fibration $p_f:E_f\\to\\Delta^1$ of quasicategories, the $p_f$-cocartesian edge $\\lambda_x:x\\to F(x)$ and $z=y'$. Both base mapping spaces $\\operatorname{Map}_{\\Delta^1}(1,1)$ and $\\operatorname{Map}_{\\Delta^1}(0,1)$ are $\\Delta^0$ (Step 3), so the path-space homotopy fiber product of the square is $\\operatorname{Map}_{E_f}(x,y')\\times_{\\Delta^0}\\operatorname{Fun}(\\Delta^1,\\Delta^0)\\times_{\\Delta^0}\\Delta^0=\\operatorname{Map}_{E_f}(x,y')$, and the criterion says that precomposition with $\\lambda_x$,\n$$\\operatorname{Map}_{E_1}(F(x),y')=\\operatorname{Map}_{E_f}(F(x),y')\\longrightarrow\\operatorname{Map}_{E_f}(x,y'),$$\nis a weak homotopy equivalence. On components it is $[g]\\mapsto[g][\\lambda_x]$ by [lem-coef-infinity-mapping-composition], and it is bijective. By Step 4, $[a][\\lambda_x]=[d][\\lambda_x]$, so $[a]=[d]$ in $\\pi_0\\operatorname{Map}_{E_1}(F(x),y')$: there is a path from $a$ to $d$ in this Kan complex, that is $v\\,c_R\\simeq c_T\\,F(u)$ in $E_1$. No base-path data has to be tracked, because the base mapping spaces of $p_f$ are points.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, opposite-category dual (mapping-space criterion for cocartesian edges), applied to $E_f\\to\\Delta^1$."
+   }
+  },
+  {
+   "text": "The comparisons $c_R,c_T$ come with their triangles and higher simplices as morphisms of $L(x,f)$ and $L(y,f)$ of [lem-coef-infinity-cocartesian-composition-initiality]; since their sources are initial, the spaces of such comparisons are contractible, so they are determined up to contractible choice. The compatibility is a path in the Kan complex $\\operatorname{Map}_{E_1}(F(x),y')$; since precomposition with $\\lambda_x$ is a weak homotopy equivalence (Step 5), paths from $a$ to $d$ correspond up to homotopy to paths from $a\\lambda_x$ to $d\\lambda_x$ in $\\operatorname{Map}_{E_f}(x,y')$, among them the one assembled in $E_f$ from the supplied square, the naturality square and the triangles by the composition homotopies of [lem-coef-infinity-mapping-composition]. Nothing requires $f$ to be nondegenerate (Step 3 covers a degenerate $f$), and only mapping spaces are spaces: $E_0,E_1$ need not be.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Composition and coherence of morphisms, with the initial-lift statement of HTT Proposition 2.4.1.7 / Remark 2.4.1.9 dual."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Propositions 2.4.1.7, 2.4.4.3 and 3.1.2.1, opposite-category duals; the comparison-square argument is written out above. WANTED: archive these HTT/Kerodon sources in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-active-operad-cocartesian-concatenation",
@@ -52,7 +134,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex adjunction before inverse limit; supporting terminal-active/free-module criterion, HA Remark 2.2.4.8: identify the color component of the vertical comparison through the two cocartesian lifts.",
+   "place": "Proof paragraph 2, middle derived mapping-complex adjunction before inverse limit: identify the color component of the vertical comparison through the two cocartesian lifts and its naturality square.",
    "via": [
     "lem-coef-active-operad-cocartesian-concatenation",
     "lem-coef-relative-operadic-terminal-active-mapping",
@@ -66,5 +148,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocartesian-transport-square",
+  "worker": "stage1",
+  "summary": "Six steps: the chosen coherent lift and its naturality square; initiality for the universal comparison equivalences and triangles; base change to $E_f=E\\times_B\\Delta^1$, where the base mapping spaces are points; the identity $[a][\\lambda_x]=[d][\\lambda_x]$ in $hE_f$ from the supplied square, the naturality square and the triangles; and the mapping-space criterion for $\\lambda_x$ over $\\Delta^1$, whose precomposition equivalence gives $v\\,c_R\\simeq c_T\\,F(u)$ in $E_1$. No new nodes. Maintainer reader (2026-10-17) replaced the earlier homotopy-fiber argument over $B$, which asserted without support that the composite homotopy lies over the constant base path, by the base change to $\\Delta^1$.",
+  "blueprint": "Proof paragraph 2, middle derived mapping-complex adjunction before inverse limit: the six steps realize the comparison of the two cocartesian lifts and the induced naturality square before the derived inverse-limit argument."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-ec6e28c51",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-ec6e28c51 (reviewer sub-agent of L); spot-checked: I read the item in full, together with the statements of all six cited nodes, the citer lem-coef-active-operad-cocartesian-concatenation (it applies the item to E_i->Delta^1, which is consistent) and the unit sk-prop-sf-biduality-general. All cited statements are in the unit, so there are no tool_uses. HTT/Kerodon are not archived: HTT 2.4.4.3, 2.4.1.7/2.4.1.9 duals and Kerodon 4.6.8 stay WANTED, and the proof is agent-written. No SGA is cited and there are no new nodes. The statement is true: I checked a nerve of an ordinary opfibration (uniqueness of factorization through lambda_x), the identity fibration, a degenerate f and an empty E_0. The nearest existing nodes (prism-comparison, straightening, arrow-source-fibers) are not duplicates. Steps 1-3 are correct: the naturality square comes from lambda restricted to u x Delta^1, the mapping criterion converts the two notions of cocartesian edge, and initiality in L(x,f) gives c_R and c_T in E_1 with their triangles. Fault (E5/C4): step 4 claimed that the composite homotopy of step 3 lies over the constant base path, so that it gives a path in hofib_f. The composition classes of lem-coef-infinity-mapping-composition do not support this, and pi_1(Map_B(b0,b1),f) may be non-trivial. Repaired by rewriting steps 3-5 as steps 3-6. Step 3 (elementary) base-changes to E_f = E x_B Delta^1: E_f is a quasicategory and p_f an inner fibration, cocartesian edges pull back, all the data factor through E_f, the base mapping spaces are Delta^0, and Map_{E_f}(F(x),y') = Map_{E_1}(F(x),y'). Step 4 shows [a][lambda_x] = [d][lambda_x] in hE_f. Step 5 applies the mapping criterion to p_f: precomposition with lambda_x is a weak equivalence and bijective on pi_0, so v c_R ~ c_T F(u). Step 6 covers coherence and the degenerate case. proof_deps is updated (the two definitions are added) and so is split_report. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-cocartesian-transport-square.json; the review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

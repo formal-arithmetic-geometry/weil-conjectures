@@ -2,7 +2,7 @@
  "id": "lem-trf-lattice-reduction-tower-normalized",
  "kind": "statement",
  "title": "Reduction tower from an integral lattice is normalized",
- "statement": "Fix the finite-field and coefficient conventions of [def-trf-coefficient-conventions]: $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\geq1$. Let $X_0$ be a separated finite-type $k_0$-scheme and $X=X_0\\times_{k_0}k$. On $X_{\\mathrm{proet}}$ use the completed coefficient sheaf $R_X=\\widehat{\\mathcal O}_{E,X}=\\varprojlim_n(A_n)_X$ and its quotient projections of [def-weil-completed-integral-coefficients]. Let $K_{\\mathcal O}\\in D^b_c(X,\\mathcal O_E)$ be an integral object of [def-weil-derived-complete-integral-detailed], and suppose its derived reductions $K_n=K_{\\mathcal O}\\otimes^L_{R_X}(A_n)_X$ of [def-weil-integral-derived-reduction] lie in $D^b_{ctf}(X,A_n)$ for all $n$. Give these reductions the quotient-induced transitions of [def-weil-integral-reduction-tower], regarded as $t_{n+1,n}:K_{n+1}\\to r_{n+1,n}K_n$ in $D(X,A_{n+1})$, where $r_{n+1,n}$ is restriction of scalars as in [def-trf-adic-system].\n\nFor every $n\\geq j\\geq1$, the map adjoint to the composite transition $t_{n,j}$ is the canonical derived associativity isomorphism\n$$\\nu_{n,j}:K_n\\otimes^L_{A_n}A_j\\xrightarrow{\\sim}K_{\\mathcal O}\\otimes^L_{R_X}(A_j)_X=K_j.$$\nThese are the actual adjoints of the quotient transitions, with $\\nu_{n,n}=1$ and $\\nu_{n,i}=\\nu_{j,i}\\circ(\\nu_{n,j}\\otimes^L_{A_j}A_i)$ under derived associativity for $n\\geq j\\geq i$. Thus the reduction tower with these transitions is a normalized $A_\\bullet$-system in the sense of [def-trf-adic-system].",
+ "statement": "Fix the finite-field and coefficient conventions of [def-trf-coefficient-conventions]: $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\geq1$. Let $X_0$ be a separated finite-type $k_0$-scheme and $X=X_0\\times_{k_0}k$. On $X_{\\mathrm{proet}}$ use the completed coefficient sheaf $R_X=\\widehat{\\mathcal O}_{E,X}=\\varprojlim_n(A_n)_X$ and its quotient projections of [def-weil-completed-integral-coefficients]. Let $K_{\\mathcal O}\\in D^b_c(X,\\mathcal O_E)$ be an integral object of [def-weil-derived-complete-integral-detailed], and suppose its derived reductions $K_n=K_{\\mathcal O}\\otimes^L_{R_X}(A_n)_X$ of [def-weil-integral-derived-reduction] lie in $D^b_{ctf}(X,A_n)$ for all $n$. Give these reductions the quotient-induced transitions of [def-weil-integral-reduction-tower], regarded as $t_{n+1,n}:K_{n+1}\\to r_{n+1,n}K_n$ in $D(X,A_{n+1})$, where $r_{n+1,n}$ is restriction of scalars as in [def-trf-adic-system].\n\nFor every $n\\geq j\\geq1$, the map adjoint to the composite transition $t_{n,j}$ is the canonical derived associativity isomorphism\n$$\n\\nu_{n,j}:K_n\\otimes^L_{A_n}A_j\\xrightarrow{\\sim}K_{\\mathcal O}\\otimes^L_{R_X}(A_j)_X=K_j.$$\nThese are the actual adjoints of the quotient transitions, with $\\nu_{n,n}=1$ and $\\nu_{n,i}=\\nu_{j,i}\\circ(\\nu_{n,j}\\otimes^L_{A_j}A_i)$ under derived associativity for $n\\geq j\\geq i$. Thus the reduction tower with these transitions is a normalized $A_\\bullet$-system in the sense of [def-trf-adic-system].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
   "place": "(2), reduction-tower paragraph"
@@ -15,9 +15,87 @@
   "def-weil-integral-reduction-tower",
   "def-trf-adic-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=R_X$ and $B_n=(A_n)_X$. By [lem-pc-kflat-resolution], choose a quasi-isomorphism $P\\to K_{\\mathcal O}$ with $P$ K-flat over $R$ and flat in every degree. In [def-weil-integral-reduction-tower] use this choice, so $P_n=P\\otimes_R B_n$ represents $K_n$ and the adjacent transitions are $\\mathrm{id}_P\\otimes\\rho_{n+1,n}$. For $n\\geq j$, their composite is the chain map $\\tau_{n,j}(x\\otimes a)=x\\otimes\\rho_{n,j}(a)$, by composing the adjacent quotient maps. This is $B_n$-linear with the target restricted along $\\rho_{n,j}$, since $\\pi_j=\\rho_{n,j}\\pi_n$, and therefore represents the specified $t_{n,j}$ before forgetting to $D(R)$. For $j=n$ it is the identity.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; quotient-transition construction of def-weil-integral-reduction-tower"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-kflat-change-of-rings] to the sheaf-ring map $R\\to B_n$ on $X_{\\mathrm{proet}}$. Its hypotheses hold because Step 1 chose both K-flatness and flat terms. Thus $P_n$ is K-flat over $B_n$ and has flat terms. By [lem-pur-derived-change-of-rings], $K_n\\otimes^L_{B_n}B_j$ is computed by $P_n\\otimes_{B_n}B_j$, and $K_j$ is computed by $P\\otimes_R B_j$. These computations use the same $P$ for every index and are canonical under changes of K-flat resolution. No flatness of $R\\to B_n$ or $B_n\\to B_j$ is asserted or needed.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat, and Tag 06YY, lemma-derived-base-change, for identity-topos coefficient changes"
+   }
+  },
+  {
+   "text": "On these models let $\\alpha_{n,j}:(P\\otimes_R B_n)\\otimes_{B_n}B_j\\to P\\otimes_R B_j$ be the $B_j$-linear map whose adjunct under the ordinary extension/restriction adjunction along $\\rho_{n,j}$ [def-sfb-modobj-extend-restrict-adjunction] is the $B_n$-linear map $\\tau_{n,j}$ of Step 1; on local sections $(x\\otimes a)\\otimes b\\mapsto x\\otimes\\rho_{n,j}(a)b$. Let $\\beta_{n,j}$ be the $B_j$-linear map whose adjunct along $\\pi_j$ is the $R$-linear map $P\\to(P\\otimes_RB_n)\\otimes_{B_n}B_j$, $x\\mapsto(x\\otimes1)\\otimes1$; it is $R$-linear because $\\pi_j=\\rho_{n,j}\\pi_n$ and the balancing relations of [def-pur-sheaf-tensor-product] give $(xr\\otimes1)\\otimes1=(x\\otimes1)\\otimes\\pi_j(r)$. By uniqueness of adjuncts, $\\alpha\\beta=1$ since $\\alpha\\beta(x\\otimes1)=x\\otimes1$, and $\\beta\\alpha=1$ since both are $B_j$-linear and, after the unit $z\\mapsto z\\otimes1$, are $B_n$-linear maps out of $P\\otimes_RB_n$ agreeing on $x\\otimes1$. Naturality of the adjunction makes $\\alpha,\\beta$ chain maps (the differential is $d\\otimes1$). The same construction applies with any K-flat flat-term complex over any of the rings in place of $P$ over $R$. Thus $\\alpha_{n,j}$ represents the change-of-rings composition (associativity) isomorphism $\\nu_{n,j}$ on the models of Step 2.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-sfb-modobj-extend-restrict-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary mixed-ring balancing calculation"
+   }
+  },
+  {
+   "text": "Use the derived extension/restriction adjunction of [def-sfb-derived-extend-restrict-adjunction] in the category of abelian sheaves on $X_{\\mathrm{proet}}$, as [def-trf-adic-system] specifies; that node verifies the Grothendieck, closed symmetric monoidal, additive tensor and functorial flat-resolution hypotheses, and restriction of scalars is exact. Its module objects over $B_n$, $B_j$ are the sheaves of modules and its relative tensor product is the sheaf tensor product, so $L\\operatorname{Ext}$ is the derived change of rings of Step 2, and the derived adjunction is the one induced by the ordinary adjunction [def-sfb-modobj-extend-restrict-adjunction]: on a K-flat complex with flat terms its unit is the class of the ordinary unit $z\\mapsto z\\otimes1$. This is the normalization of [lem-pur-sheaf-ring-derived-coefficient-adjunction] for $\\rho_{n,j}:B_n\\to B_j$ (same functors, same unit, hence the same adjunction), whose clause (2) says: for the morphism of complexes $\\tau_{n,j}:P_n\\to\\operatorname{Res}P_j$, the adjunct of its class is the class of $P_n\\otimes_{B_n}B_j\\to P_j$, $z\\otimes b\\mapsto b\\,\\tau_{n,j}(z)$, which is $\\alpha_{n,j}$ of Step 3. Hence the map adjoint to the specified transition $t_{n,j}=[\\tau_{n,j}]$ of Step 1 is $\\nu_{n,j}$, an isomorphism; it is the actual adjoint, not a chosen isomorphism with the same endpoints.",
+   "uses": [
+    "def-sfb-derived-extend-restrict-adjunction",
+    "def-trf-adic-system",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+    "place": "(2), reduction-tower paragraph"
+   }
+  },
+  {
+   "text": "For $n\\geq j\\geq i$: by [lem-pur-kflat-change-of-rings] applied to $P_n$ along $\\rho_{n,j}$, the complex $P_n\\otimes_{B_n}B_j$ is again K-flat with flat terms over $B_j$, so by [lem-pur-derived-change-of-rings] $(K_n\\otimes^L_{A_n}A_j)\\otimes^L_{A_j}A_i$ is computed by $(P_n\\otimes_{B_n}B_j)\\otimes_{B_j}B_i$, and $\\nu_{n,j}\\otimes^L_{A_j}A_i$ by $\\alpha_{n,j}\\otimes1$. The associativity identification with $K_n\\otimes^L_{A_n}A_i$ is the map of Step 3 with $P_n$ over $B_n$ in place of $P$ over $R$: $((x\\otimes a)\\otimes b)\\otimes c\\mapsto(x\\otimes a)\\otimes\\rho_{j,i}(b)c$. Following it by $\\alpha_{n,i}$, and alternatively applying $\\alpha_{n,j}\\otimes1$ then $\\alpha_{j,i}$, both send $((x\\otimes a)\\otimes b)\\otimes c$ to $x\\otimes\\rho_{n,i}(a)\\rho_{j,i}(b)c$, using $\\rho_{j,i}\\rho_{n,j}=\\rho_{n,i}$; as all maps are $B_i$-linear and determined by these values (uniqueness of adjuncts as in Step 3), the cocycle equation holds on models and hence in the derived category. For $n=j$, $\\alpha_{n,n}$ is the unit identification $P_n\\otimes_{B_n}B_n\\cong P_n$, so $\\nu_{n,n}=1$. The levels lie in $D^b_{ctf}(X,A_n)$ by hypothesis; with Step 4 these are exactly the normalization requirements of [def-trf-adic-system].",
+   "uses": [
+    "def-trf-adic-system",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+    "place": "(2), reduction-tower paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-derived-extend-restrict-adjunction",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-trf-adic-system",
+  "def-weil-integral-reduction-tower",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+  "place": "Proof (2), reduction-tower paragraph, expanded using Stacks Tags 06YS, 0G7E, 06YY and the explicit tensor/adjunction formulas"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,10 +159,59 @@
    "results": "8 hits: Algebra.TensorProduct.assoc_toLinearEquiv, Algebra.TensorProduct.assoc_tmul, Algebra.TensorProduct.assoc_aux_1, Algebra.TensorProduct.assoc, TensorProduct.AlgebraTensorModule.assoc_eq, TensorProduct.AlgebraTensorModule.assoc_tmul, TensorProduct.AlgebraTensorModule.assoc_symm_tmul, Algebra.TensorProduct.assoc_symm_tmul; returned objects concern ordinary tensor products, classical adic completion, or generic sheaf module maps, not the stated derived reduction tower.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*associat|associat.*derived|tensor.*quotient",
+   "results": "0 hits in Mathlib/Mathlib/CategoryTheory: ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scalar extension, adic completion or abstract derived-functor infrastructure does not state normalization of the specified sheaf coefficient tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, tensor, associator, IsIso",
+   "results": "0 hits: ; loogle: unknown identifier 'tensor'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'tensor'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived associativity isomorphism for iterated extension of scalars along quotient rings",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc, Ideal.pi_mkQ_rTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.tensorQuotMapSMulEquivTensorQuot, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scalar extension, adic completion or abstract derived-functor infrastructure does not state normalization of the specified sheaf coefficient tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived reductions of a complete integral sheaf complex form a normalized adic system with canonical change of rings transition maps",
+   "results": "8 hits: AdicCompletion, Hausdorffification, IsAdicComplete, AdicCompletion.AdicCauchySequence, AdicCompletion.of_apply, IsAdicComplete.toIsPrecomplete, localCohomology, AdicCompletion.eval_of",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scalar extension, adic completion or abstract derived-functor infrastructure does not state normalization of the specified sheaf coefficient tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars_assoc",
+   "results": "1 hits: ModuleCat.extendScalars_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scalar extension, adic completion or abstract derived-functor infrastructure does not state normalization of the specified sheaf coefficient tower"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|derived.*associat|associat.*derived",
+   "results": "4 hits in Mathlib/CategoryTheory: Mathlib/CategoryTheory/Bicategory/Free.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scalar extension, adic completion or abstract derived-functor infrastructure does not state normalization of the specified sheaf coefficient tower"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc",
+   "results": "7 hits in Mathlib/Algebra/Category/ModuleCat: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scalar extension, adic completion or abstract derived-functor infrastructure does not state normalization of the specified sheaf coefficient tower"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-integral-adic-coefficient-morphism-trace-formula",
@@ -99,7 +226,63 @@
    "place": "Proof (2): the reduction tower paragraph, where the transitions are the associativity isomorphisms and the tower is declared normalized",
    "via": []
   },
-  "same_as": [],
+  "same_as": [
+   "det-sp-reduction-tower-normalized"
+  ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-lattice-reduction-tower-normalized",
+  "worker": "stage1",
+  "summary": "Retained the earlier K-flat-model approach and repaired its mixed-ring associativity gap: choose flat terms, cite existing K-flat change-of-rings preservation, write the comparison and its inverse, compute its actual adjunct and verify the cocycle on tensors. No new nodes. The statement is unchanged mathematically; literal newline escapes are rendered as newlines. Maintainer-reader FIX: restored the TeX escapes \\ne and \\nu that the newline conversion had turned into line breaks in the statement; Step 3 now defines the comparison and its inverse by adjuncts; Step 4 cites lem-pur-sheaf-ring-derived-coefficient-adjunction for the derived unit and adjunct on K-flat models; Step 5 cites the K-flat lemmas for the second-level models.",
+  "blueprint": "Steps 1--2 compute the quotient tower in paragraph (2); Steps 3--5 prove the associativity-isomorphism and normalization assertion there. det-sp-reduction-tower-normalized records the analogous blueprint assertion using ell-power indexing.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat resolution existence on any ringed site; the trace-transport unit supplies no resolution theorem."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic preservation of K-flat complexes with flat terms under a sheaf-ring coefficient change; used to compute a second derived reduction without assuming the quotient map flat."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation and independence of the derived coefficient change along the completed integral and finite quotient sheaves."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic sheaf tensor/change-of-rings construction, used for the explicitly verified balancing formulas."
+   },
+   {
+    "node": "def-sfb-derived-extend-restrict-adjunction",
+    "why": "Generic derived adjunction to identify the actual adjoint of the quotient transition; its applicability to the abelian sheaf setting is recorded in def-trf-adic-system."
+   },
+   {
+    "node": "def-sfb-modobj-extend-restrict-adjunction",
+    "why": "Explicit unit and hom-bijection of ordinary extension/restriction, used on the K-flat model to compute the derived adjunct."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalization of the derived extension/restriction adjunction on K-flat flat-term representatives (unit x->x(x)1 and explicit adjuncts); no node of the trace-transport unit computes the derived adjunct of the quotient transition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-derived-extend-restrict-adjunction",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-8f6f020b1",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-8f6f020b1 (reviewer sub-agent of L); spot-checked: Read the item in full, all 12 cited nodes, the blueprint main-20261015 thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md (2) lines 30-37, Stacks sites-cohomology 06YS (l.3206), 0G7E (l.3508) and 06YY (l.3585), and the unit sk-thm-trace-transport. The item states the blueprint's normalization assertion with the actual adjoints, matches how the parent cites it, uses the completed R_X (not the discrete O_E sheaf) and gives nu the direction of def-trf-adic-system. No target is weakened and there are no new nodes. Three repairs in fixes/dag/nodes/sec-trace-formula/lem-trf-lattice-reduction-tower-normalized.json. (1) Statement corruption: turning every literal backslash-n into a newline also hit the JSON escapes in \\ell\\ne p and \\nu, so the decoded statement read 'ell<newline>e p' (ell != p lost) and all five nu became '<newline>u'. I restored them; otherwise the text is identical. (2) Step 4 relied on 'the derived unit on a K-flat model is z->z(x)1', which the statement of def-sfb-derived-extend-restrict-adjunction does not give (C3/C4). Step 4 now cites the existing lem-pur-sheaf-ring-derived-coefficient-adjunction, whose clauses (1) unit and (2) adjunct x(x)a->a g(x) give exactly alpha_{n,j}; it is declared in split_report.tool_uses and has no proof deps, so there is no cycle. Step 3 now defines alpha and its inverse beta as adjuncts under def-sfb-modobj-extend-restrict-adjunction, so the claim that a section formula descends through sheafification is no longer needed; I checked beta's R-linearity and alpha beta = beta alpha = 1. (3) Step 5 needed P_n(x)B_j to be K-flat over B_j to model nu(x)^L A_i; it now cites lem-pur-kflat-change-of-rings and lem-pur-derived-change-of-rings and is marked non-elementary. Checked by hand: both sides of the cocycle send ((x(x)a)(x)b)(x)c to x(x)rho_{n,i}(a)rho_{j,i}(b)c, and nu_{n,n}=1. Small cases checked: n=j=i; K=Z/ell over Z_ell (derived reduction keeps H^-1); ramified E; K=0. Overlap noted, no action: lem-sfb-successive-derived-quotient-normalization (Q48, unsplit) states the general R->S->T version, and det-sp-reduction-tower-normalized is correctly recorded as same_as. Tool uses accepted: lem-pc-kflat-resolution, lem-pur-kflat-change-of-rings, lem-pur-derived-change-of-rings, def-pur-sheaf-tensor-product, both def-sfb adjunction nodes, and the added lem-pur-sheaf-ring-derived-coefficient-adjunction.; 1 file(s) fixed by the reviewer"
  }
 }

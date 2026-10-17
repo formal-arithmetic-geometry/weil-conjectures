@@ -1,0 +1,74 @@
+{
+ "id": "lem-sfb-ringed-projection-first-shift",
+ "kind": "statement",
+ "title": "The ringed projection mate commutes with shifts in its direct-image input",
+ "statement": "Let $f:(\\mathscr X,A_X)\\to(\\mathscr Y,A_Y)$ be a morphism of ringed topoi presented by sites small in the coefficient universe, with sheaves of commutative rings and a map $f^{-1}A_Y\\to A_X$. Use the unbounded derived module-sheaf categories, ordinary K-flat derived tensor, K-injective derived direct image, and canonical derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact]. Write $U=Lf^*$, $R=Rf_*$ and $\\varepsilon:UR\\to1$. Give $U$ its canonical integer-shift structure and $R$ the unique unit/counit-compatible shift structure of [lem-weil-pbc-adjunction-shift-compatibility-unique]. Let $\\mu:U(M\\otimes^{\\mathbf L}_{A_Y}N)\\cong UM\\otimes^{\\mathbf L}_{A_X}UN$ be the canonical pullback tensor comparison. For $K\\in D(A_X)$ and $P\\in D(A_Y)$ let\n$$\\pi_{K,P}:RK\\otimes^{\\mathbf L}_{A_Y}P\\longrightarrow R(K\\otimes^{\\mathbf L}_{A_X}UP)$$\nbe the adjunct of $(\\varepsilon_K\\otimes1)\\circ\\mu_{RK,P}$.\n\nFor each fixed $P$, the functors $F_P(K)=RK\\otimes^{\\mathbf L}_{A_Y}P$ and $G_P(K)=R(K\\otimes^{\\mathbf L}_{A_X}UP)$ are exact, and $\\pi_{-,P}$ is a natural transformation commuting with their induced shift isomorphisms. Explicitly, writing $s_F:F_P(K[1])\\cong F_P(K)[1]$ and $s_G:G_P(K[1])\\cong G_P(K)[1]$, one has\n$$s_G\\circ\\pi_{K[1],P}=\\pi_{K,P}[1]\\circ s_F.$$\nThus it gives a morphism of distinguished triangles in the $K$ variable, including the connecting square. No invertibility of $\\pi_{K,P}$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map, using Tag 07A4, lemma-pullback-tensor-product; first-variable shift compatibility assembled by an agent using derived.tex Tag 0A8D, lemma-adjoint-is-exact and the explicit unit/counit-compatible shift theorem."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ringed-topos derived right adjoint projection mate commutes with shifts in the direct-image input E when tensor comparison and adjunction counit commute with shifts",
+   "results": "8 hits: CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift_assoc, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit",
+   "date": "2026-10-17",
+   "verdict": "no match: commShiftIso counit identities are inputs, not the derived projection mate in its first variable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi the canonical projection comparison R K tensor P to R of K tensor U P commutes with shifting K and defines a morphism of distinguished triangles",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ', CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Functor.comp_homologySequenceδ_assoc, CategoryTheory.Functor.homologySequenceδ_naturality, CategoryTheory.Functor.homologySequence_comp, CochainComplex.mappingCone.mapTriangleIso",
+   "date": "2026-10-17",
+   "verdict": "no match on second phrasing: triangulated adjunction and spectral-object connecting-map lemmas do not state the projection-mate comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For fixed L the canonical derived projection map Rf_* K tensor L to Rf_*(K tensor Lf* L) is a natural transformation of triangulated functors in K",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.Functor.leftDerivedNatTrans, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.Functor.rightDerivedNatTrans",
+   "date": "2026-10-17",
+   "verdict": "no match: derived natural-transformation constructors require a supplied transformation, without this tensor/counit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"counit\"",
+   "results": "9 hits: CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Equivalence.CommShift.instCommShiftHomFunctorCounitIso, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift_assoc, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: CompatibilityCounit and its consequences give adjunction shift coherence only"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|counit|homEquiv",
+   "results": "18 hits: Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Shift contains counit and shifted-Hom identities, no projection mate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-thm-sf-pf-adic-projection",
+  "date": "2026-10-17",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-pf-adic-projection",
+   "place": "Proof paragraph (2), extension first in K; former split step 7: substituting the shifted counit into the canonical projection transpose proves shift compatibility in K",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

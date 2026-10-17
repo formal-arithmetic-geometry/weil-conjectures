@@ -85,15 +85,48 @@
    }
   },
   {
-   "text": "A finite free module is flat: its tensor functor is a finite direct sum of the identity functor, hence preserves exact sequences componentwise. Thus the bounded-above complexes $P$ over $A$ and $P_n$ over $A_n$ are K-flat by the bounded-flat K-flat criterion. On the category with one object and only its identity morphism, a presheaf is its value at that object and the identity-cover sheaf condition imposes no restriction. Ring sheaves, module sheaves, their complexes and tensor products are therefore ordinary rings, modules, complexes and tensor products. Derived change of rings on this site computes $Q(P)\\otimes_A^L A_n$ by the ordinary tensor complex $P\\otimes_A A_n$. Under the projection-respecting isomorphism in step 5, the projection-induced comparison is represented by the chain map $P\\otimes_A A_n\\to P_n$, $x\\otimes a\\mapsto a\\,\\mathrm{pr}_n(x)$, followed by $\\beta_n$. To justify that this is the specified derived map, use the scalar-extension Hom bijection degreewise: $f:P\\to P_n$ corresponds to $\\widetilde f:P\\otimes_A A_n\\to P_n$, $\\widetilde f(x\\otimes a)=af(x)$. The chain-map equations correspond under this bijection by evaluating on $x\\otimes1$, and a homotopy $h$ corresponds to $\\widetilde h(x\\otimes a)=ah(x)$, since $d\\widetilde h+\\widetilde h d$ is the transpose of $dh+hd$. Hence it is a bijection on homotopy classes. Every finite free module is projective: lift a map through a surjection by choosing a preimage for each basis vector. Both $P$ over $A$ and $P\\otimes_A A_n$ over $A_n$ are bounded above projective. The derived-map-representative lemma identifies both homotopy Hom sets with their derived Hom sets. We therefore obtain a bijection $\\operatorname{Hom}_{D(A_n)}(Q(P\\otimes_A A_n),Q(P_n))\\cong\\operatorname{Hom}_{D(A)}(Q(P),Q(P_n))$, computed by composition with $x\\mapsto x\\otimes1$. In particular the transpose of the projection is exactly the displayed chain map. Composing with the markings and the projection-respecting isomorphism of step 5 gives precisely the projection-induced derived comparison. This calculation also justifies the transition-map representation from the marking equation in step 2, with $A_{n+1}\\to A_n$ in place of $A\\to A_n$. Step 4 proves this chain map is an isomorphism, so the derived comparison is an isomorphism. Finally $P$ is bounded above finite free by step 4 and represents $E$ by step 5, which proves pseudo-coherence by its definition and all the more precise clauses.",
+   "text": "Every term of $P$ and $P_n$ is finite free by steps 2–4. Free modules are flat and projective by the two cited module lemmas. Therefore the bounded-above complexes $P$ and $P_n$ are K-flat by the bounded-flat criterion. These are the hypotheses needed for the scalar-extension comparisons below.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pur-derived-change-of-rings",
-    "def-pc-ring-pseudo-coherent-complex",
-    "lem-weil-pbc-scalar-extension-hom",
-    "lem-pc-ring-derived-map-representative"
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-free-module-projective",
+    "lem-pc-module-bounded-flat-kflat"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
+   }
+  },
+  {
+   "text": "Apply the punctual-site module comparison with $R=A$ and $S=A_n$. Evaluation identifies the sheaf extension, restriction, complexes and tensor units with their ordinary-module counterparts. Derived change of rings, applied to the K-flat complex $P$ from step 6, consequently identifies $Q(P)\\otimes_A^L A_n$ with $Q(P\\otimes_A A_n)$. The same statements apply to $P_{n+1}$ over $A_{n+1}$ and its reduction to $A_n$.",
+   "uses": [
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
+   }
+  },
+  {
+   "text": "Use the normalized sheaf-ring derived coefficient adjunction on the punctual site, transported by step 7, with $R=A$, $S=A_n$ and the flat-term K-flat model of step 6. It supplies $\\gamma_n: (Q(P)\\otimes_A^L A_n)\\xrightarrow{\\sim}Q(P\\otimes_A A_n)$ normalized by the chain unit $x\\mapsto x\\otimes1$. Let $p_n:P\\to P_n$ be the projection, an $A$-linear chain map to the restriction of $P_n$, and $\\widetilde p_n:P\\otimes_A A_n\\to P_n$, $x\\otimes a\\mapsto a\\,p_n(x)$. Clause (2) of the adjunction, with $g=p_n$ and $H=P_n$, identifies the actual adjunction transpose of $Q(p_n)$ with $Q(\\widetilde p_n)\\gamma_n$. Compose with $\\beta_n$ and transport the source through the projection-respecting isomorphism $Q(P)\\simeq E$ of step 5. Naturality of the adjunction then identifies this composite with the projection-induced comparison $E\\otimes_A^L A_n\\to E_n$. Applying the same cited adjunction to $A_{n+1}\\to A_n$ makes the marking equation in step 2 identify the specified transitions themselves.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-singleton-site-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
+   }
+  },
+  {
+   "text": "The map $\\widetilde p_n$ is exactly the reduction chain isomorphism of step 4. Hence its image under localization is an isomorphism, and step 8 expresses the projection-induced comparison as a composite of isomorphisms. Finally steps 4–5 exhibit $E$ as represented by the bounded-above finite-free complex $P$, so it is pseudo-coherent by definition. The same models, cutoffs, transitions, projections and reduction chain isomorphisms give every more precise clause of the statement.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
     "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
@@ -108,10 +141,12 @@
   "def-weil-derived-limit",
   "def-weil-triangulated-category",
   "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-free-module-projective",
   "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-singleton-site-module-comparison",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-scalar-extension-hom",
-  "lem-pc-ring-derived-map-representative"
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "proof_origin": {
   "by": "document",
@@ -198,7 +233,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-rlim-perfect-complete",
   "by": "worker",
@@ -207,10 +242,10 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
   "worker": "stage1",
-  "summary": "Retained the statement and split Stacks 0CQF using existing nilpotent invariance, marked free-complex lifting, and surjective tower computation. Wrote compatible bases, common upper bound, Roos triangle identification preserving projections, and derived comparison calculations explicitly. No new nodes.",
+  "summary": "Repair of the returned long step 6: preserve the statement, Lean record, route and first five proof steps verbatim. Replace step 6 by steps 6–9 citing existing free-module flatness/projectivity and a statement-only lemma for the punctual-site module comparison; reuse the existing normalized sheaf-ring derived coefficient adjunction for the derived comparison. All non-elementary steps are shorter than 2000 characters. Maintainer reader (2026-10-17): removed the unused homotopy-class step and its new node; the transpose formula is clause (2) of lem-pur-sheaf-ring-derived-coefficient-adjunction.",
   "blueprint": "Realizes the first sentence of thm-weil-pbc-finite-extension ('Choose an integral lattice for K'), via the existing rlim-perfect-complete ancestry: finite-level pseudo-coherent algebraic reconstruction before the residue-field perfectness argument.",
   "tool_uses": [
    {
@@ -226,8 +261,8 @@
     "why": "Generic two-out-of-three for morphisms of distinguished triangles to preserve the projections when identifying derived limits."
    },
    {
-    "node": "lem-pc-ring-derived-map-representative",
-    "why": "Generic Hom computation for bounded-above projective source complexes, used to identify the projection-induced tensor comparison; the unit has no other such Hom statement."
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic K-flat unit and transpose normalization for derived scalar extension; used on the punctual site to identify projection and transition comparisons."
    }
   ]
  },
@@ -235,15 +270,16 @@
   "lem-pc-module-bounded-flat-kflat",
   "lem-pur-derived-change-of-rings",
   "lem-sf-triangle-morphism-iso",
-  "lem-pc-ring-derived-map-representative"
+  "lem-pc-ring-derived-map-representative",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NP-9a6d699ec",
-  "group": "NP",
+  "reviewer": "NT-cc-Q100-32a9a276a",
+  "group": "Q100",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9a6d699ec (reviewer sub-agent of L); spot-checked: Read the full item, report, required stage files, unit route, every cited node, and cited Stacks/Mathlib sources. All six proof steps are valid; hypotheses, nilpotent lifting, compatible bases, Roos triangle, coefficient category, and derived base-change morphisms check out. Edge cases and tool-use declarations were verified. Review written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-32a9a276a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the unit sk-thm-properbasechange and its chapter, and the sources: Stacks 0CQF (more-algebra.tex lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, statement and proof), 00X9 (punctual topos paragraph) and 05DQ. No SGA source is used. The item statement is the nilpotent, n0=1 case of 0CQF and is unchanged; it is not weakened. The coefficient category is ordinary modules, reached through the one-object site. The comparison map is the adjunction transpose of pr_n∘p_E, which matches the Lean record. Steps 1–5 are correct: hypotheses of the nilpotent invariance and marked lift are supplied; the basis lift was checked, including rank 0 and the zero ring; the Roos-triangle comparison uses (1,v,v), TR3 and 2-of-3. Steps 6, 7 and 9 are correct: free ⇒ projective ⇒ flat, then bounded-flat K-flat; punctual-site transport; derived coefficient adjunction clauses (1) and (2) applied to g=p_n, plus naturality. New node lem-weil-pbc-singleton-site-module-comparison is true (sheaves equal presheaves, sheafification is the identity), has a proper source, three kinds of search, and is not a duplicate; I scanned all one-object-site nodes. New node lem-weil-pbc-scalar-extension-homotopy-adjunction is true but unneeded: its only citer, old step 8, feeds no later step, because the transpose formula is clause (2) of the existing lem-pur-sheaf-ring-derived-coefficient-adjunction. Fix: dropped that node and old step 8; moved the definitions of p_n and p̃_n into the new step 8; renumbered the step reference; removed a step-6 sentence that is now unused; recomputed proof_deps; removed lem-pc-ring-derived-map-representative from split_report.tool_uses. Accepted tool uses: bounded-flat K-flat, derived change of rings, triangle-morphism iso, derived coefficient adjunction.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

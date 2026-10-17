@@ -3,39 +3,108 @@
  "blueprint": {
   "is": "cor-weil-pbc-geometric-fiber-qbar",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Qbar-l geometric-fiber formula",
- "statement": "In the setup of the finite-level geometric-fiber corollary, let\n$K\\in\\Dbc(X,\\Qlb)$. The descended exchange morphism is an isomorphism\n$$\n L\\bar y^*Rf_*K\\xrightarrow{\\sim}\n Ra_{\\bar y,*}Li_{\\bar y}^*K\n \\quad\\text{in }\\Dbc(\\operatorname{Spec}\\Omega,\\Qlb).\n$$\nFor a representative $(E,K_E)$, this is represented over a finite overfield\nby the finite-extension formula of\n[cor-weil-pbc-geometric-fiber-finite-extension] applied to $T_{M/E}K_E$.",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, with the finite-stage pair categories $\\Dbc(T,\\Qlb)$ of [def-weil-pbc-qbar-category]. Let $f:X\\to Y$ be proper [def-weil-proper-morphism] and let $\\bar y:P=\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point]. Put $X_{\\bar y}=X\\times_Y P$, with projections $i_{\\bar y}:X_{\\bar y}\\to X$ and $a_{\\bar y}:X_{\\bar y}\\to P$ [def-pc-fibre-product]. Use the scheme hypotheses of [cor-weil-pbc-geometric-fiber-finite-extension]: $X,Y,X_{\\bar y},P$ are noetherian and finite-dimensional, $\\ell$ is invertible on all four, $a_{\\bar y}$ is proper, and the geometric fibers of $f$ have dimension at most some $e\\geq0$ [def-pc-dimension]. Take the cartesian square $(f,a_{\\bar y},\\bar y,i_{\\bar y},\\mathrm{id})$ of [def-weil-pbc-cartesian-square]. Use the descended direct images, pullbacks and exchange of [prop-weil-pbc-descent-functors], from the raw rational finite-stage operations specified in [cor-weil-pbc-geometric-fiber-finite-extension].\nFor every $K\\in\\Dbc(X,\\Qlb)$ the descended exchange is an isomorphism\n$$\n L\\bar y^*Rf_*K\\xrightarrow{\\sim}Ra_{\\bar y,*}Li_{\\bar y}^*K\n \\quad\\text{in }\\Dbc(P,\\Qlb).\n$$\nIf $K$ is represented by $(E,K_E)$, with $E\\subset\\Qlb$ finite over $\\Ql$ and $K_E\\in\\Dbc(X,E)$, this morphism is represented over a finite overfield $M\\subset\\Qlb$ containing $E$ by the $M$-coefficient geometric-fiber exchange of [cor-weil-pbc-geometric-fiber-finite-extension] applied to $T_{M/E}K_E$, where $T_{M/E}$ is the scalar-extension functor of [prop-weil-pbc-scalar-extension].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-qbar.md",
   "place": "node cor-weil-pbc-geometric-fiber-qbar, order 1360"
  },
  "stmt_deps": [
-  "cor-weil-pbc-geometric-fiber-finite-extension"
+  "def-weil-pbc-qbar-category",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "cor-weil-pbc-geometric-fiber-finite-extension",
+  "def-pc-dimension",
+  "def-weil-pbc-cartesian-square",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-scalar-extension"
  ],
  "proof": [
   {
-   "text": "Specialize [thm-weil-pbc-qbar] to the geometric-point base change; the\nrepresentative statement is the displayed form in [thm-weil-pbc-qbar].",
+   "text": "In [thm-weil-pbc-qbar] substitute $Y'=P$, $X'=X_{\\bar y}$, $g=\\bar y$, $g'=i_{\\bar y}$ and $f'=a_{\\bar y}$. The chosen fiber product makes this exactly the cartesian square $(f,a_{\\bar y},\\bar y,i_{\\bar y},\\mathrm{id})$. The scheme and coefficient hypotheses are those already imposed in the statement; in particular $f$ is proper and the base-change map $g=\\bar y$ is permitted because that theorem allows arbitrary $g$. Its descended exchange component therefore gives an isomorphism $L\\bar y^*Rf_*K\\to Ra_{\\bar y,*}Li_{\\bar y}^*K$ in $\\Dbc(P,\\Qlb)$. This is the specified exchange, rather than merely an unspecified isomorphism, since the theorem refers to the same descended exchange transformation.",
    "uses": [
     "thm-weil-pbc-qbar"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-qbar.md",
+    "place": "## Proof: specialize thm-weil-pbc-qbar to the geometric-point base change; current main-20261015 statement, displayed exchange"
+   }
+  },
+  {
+   "text": "For a representative $(E,K_E)$, the representative clause of [thm-weil-pbc-qbar] supplies a finite overfield $M\\supset E$ at which this very component is represented by the $M$-coefficient exchange on $T_{M/E}K_E$, with the theorem's specified comparison identifications. By [prop-weil-pbc-scalar-extension], $T_{M/E}K_E$ belongs to $\\Dbc(X,M)$. Apply [cor-weil-pbc-geometric-fiber-finite-extension] with coefficient field $M$ and this object: all its scheme hypotheses were imposed above, independently of the finite coefficient field. Its square is the same $(f,a_{\\bar y},\\bar y,i_{\\bar y},\\mathrm{id})$, so its displayed formula is precisely the finite-stage map supplied by the general theorem. This proves the representative clause. No passage from an etale finite-ring category to a rational category, and no identification with a condensed-coefficient category, is being asserted here.",
+   "uses": [
+    "thm-weil-pbc-qbar",
+    "prop-weil-pbc-scalar-extension",
+    "cor-weil-pbc-geometric-fiber-finite-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-qbar.md",
+    "place": "statement, final sentence; master ## Proof, representative statement"
+   }
   }
  ],
  "proof_deps": [
-  "thm-weil-pbc-qbar",
-  "cor-weil-pbc-geometric-fiber-finite"
+  "cor-weil-pbc-geometric-fiber-finite-extension",
+  "prop-weil-pbc-scalar-extension",
+  "thm-weil-pbc-qbar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-qbar.md",
-  "place": "## Proof"
+  "place": "## Proof, specialization and representative formula, checked against the unchanged statement in main-20261015"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|geometric.*fiber.*cohomology",
+   "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/AffineSpace.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern scheme morphism base change, ordinary stalk maps, categorical isomorphisms, or the coefficient field, not the stated derived constructible Qbar exchange and its finite-stage representative"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper base change geometric fiber formula for constructible l-adic sheaves",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine; AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget; AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk; AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange; AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern scheme morphism base change, ordinary stalk maps, categorical isomorphisms, or the coefficient field, not the stated derived constructible Qbar exchange and its finite-stage representative"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern scheme morphism base change, ordinary stalk maps, categorical isomorphisms, or the coefficient field, not the stated derived constructible Qbar exchange and its finite-stage representative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change geometric fiber formula for constructible Q_l algebraic closure sheaves",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.ofPointTensor; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.tensor; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern scheme morphism base change, ordinary stalk maps, categorical isomorphisms, or the coefficient field, not the stated derived constructible Qbar exchange and its finite-stage representative"
+  },
+  {
+   "tool": "grep",
+   "query": "Qbar|padicAlgCl|properBaseChange|proper_base_change|geometric.fiber.*cohomology",
+   "results": "Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/CategoryTheory/Abelian/Pseudoelements.lean; Mathlib/CategoryTheory/Abelian/Pseudoelements.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern scheme morphism base change, ordinary stalk maps, categorical isomorphisms, or the coefficient field, not the stated derived constructible Qbar exchange and its finite-stage representative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of proper derived direct image equals cohomology of geometric fibre for l-adic constructible complexes",
+   "results": "TopCat.Presheaf.stalkPushforward_germ_apply; TopCat.Presheaf.stalkPushforward_germ; TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc; TopCat.Presheaf.stalkPushforward_germ_assoc; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; TopCat.Presheaf.stalkSpecializes_stalkPushforward; TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk; TopCat.Presheaf.stalkPushforward",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern scheme morphism base change, ordinary stalk maps, categorical isomorphisms, or the coefficient field, not the stated derived constructible Qbar exchange and its finite-stage representative"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -65,5 +134,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-weil-pbc-geometric-fiber-qbar",
+  "worker": "stage1",
+  "summary": "Made the finite-stage scheme and coefficient hypotheses explicit after the earlier finite-extension corollary repair; expanded the specialization of the general Qbar theorem and its finite-stage representative clause, using existing nodes only. Removed the unused finite-torsion proof dependency. No new nodes.",
+  "blueprint": "Master ## Proof: geometric-point specialization and representative statement; unchanged main-20261015 statement, displayed isomorphism and final sentence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-974bfa082",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-974bfa082 (reviewer sub-agent of L); spot-checked: Read the master and main-20261015 blueprint text (identical statement; one-line proof 'specialize thm-weil-pbc-qbar'), the unit and chapter records, and the statements of all cited nodes, including the blueprint_updates. Statement repair: the source's 'setup of the finite-level corollary' leaves Dbc(-,Qlb) undefined (e.g. ell=2 on Spec F_2). The added hypotheses are those of cor-weil-pbc-geometric-fiber-finite-extension. Once X and Y are in the Qbar domain (noetherian, finite-dimensional, ell invertible), each one follows: a_ybar is proper by base change; X_ybar is of finite type over Omega, so noetherian and finite-dimensional; ell is invertible on P; and the fiber dimension is at most dim X, since O_{X_y,x} is a quotient of O_{X,x}. So the statement is not narrowed or weakened, and the conclusion and representative clause are verbatim. The only citer, prop-zl-smooth-proper-relative-purity, satisfies all of these hypotheses. The square (f,a_ybar,ybar,i_ybar,id) matches def-weil-pbc-cartesian-square and def-pc-fibre-product in orientation. The coefficient category is the pair category P_T of def-weil-pbc-qbar-category, with exchange descended by prop-weil-pbc-descent-functors; it is not a target, and no condensed identification is claimed. Step 1 is a literal instance of thm-weil-pbc-qbar (f proper, g arbitrary; its implicit domain is now explicit), so elementary is correct. Step 2: the representative clause of thm-weil-pbc-qbar names the M-exchange of thm-weil-pbc-finite-extension at T_{M/E}K_E, and the finite-extension corollary over M names the same exchange for the same square; this is an identification by definition. proof_deps equal the union of uses. Dropping the unused cor-weil-pbc-geometric-fiber-finite edge is correct. There is no cycle, no new node and no duplicate (rg for geometric-fiber nodes found only the finite-ring and rational-E corollaries, which use other coefficients). All citations stay inside unit sk-thm-properbasechange, so no tool_uses are needed. No SGA. Edge cases checked: K=0, f=id, empty fiber, char Omega = ell excluded, M=E. No fixes."
+ }
 }

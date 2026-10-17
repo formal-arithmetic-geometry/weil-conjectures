@@ -107,16 +107,13 @@
    }
   },
   {
-   "text": "We verify that the map in the statement is a transformation of exact functors in both variables. The small pro-étale sites and the coefficient universe satisfy the hypotheses of [lem-weil-pbc-sheaf-tensor-closed]; its exact sheafification and monoidal local equivalences allow [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. This identifies internal module objects with module sheaves over the section-ring sheaf of the very same coefficient object, preserving underlying sheaves and sections. The tensor is identified by its balanced bilinear universal property; no change to a discrete coefficient ring occurs. The formula in [def-sfb-module-upper-star] and the final paragraph of [sk-prop-sfb-cartesian-coefficients] identify the module pullback with ringed-topos inverse image and give its exactness. The derived adjunction is [sk-def-sfb-module-derived-pushpull]. Write $U=p^*$, $R=Rp_*$ and $\\varepsilon:UR\\to1$. By [lem-weil-pbc-ringed-projection-mate-exact] the canonical map $\\pi_{K,L}$ is the adjoint of\n$$U(RK\\otimes^{\\mathbf L}L)\\xrightarrow{\\mu}URK\\otimes^{\\mathbf L}UL\\xrightarrow{\\varepsilon_K\\otimes1}K\\otimes^{\\mathbf L}UL,$$\nnaturally in both inputs. Give $U$ its usual shift structure and $R$ the unique adjunction-compatible shift structure of [lem-weil-pbc-adjunction-shift-compatibility-unique](iii). With these shifts, $R$ is exact by [lem-sf-triangulated-right-adjoint]. In particular\n$$\\varepsilon_{K[1]}=\\varepsilon_K[1]\\circ e_{U,RK}\\circ U(e_{R,K}).$$\nSubstitute this equality in the displayed transpose at $(K[1],L)$ and use the shift compatibility of $\\mu$ in the ringed projection-mate node: after the tensor shift identifications it is exactly the shift of the transpose at $(K,L)$. At $(K,L[1])$ the counit is unchanged and the same shift compatibility of $\\mu$ gives the corresponding equality. The adjunction bijection commutes with shifts because its unit and counit do, so in each variable the canonical map satisfies $s_G\\pi_{-[1]}=\\pi_{-}[1]s_F$. Naturality then supplies all squares of the morphism of distinguished triangles, including the connecting square. These structures restrict to the full triangulated localizing categories of step 6.",
+   "text": "Apply [lem-pd-module-ringed-topos-derived-comparison] to the proper $k$-morphism $p$ of standing schemes and $\\Lambda=\\underline{\\mathcal O_E}$, with $R_T=\\mathcal O_{E,T}$ and its section-ring sheaf. Its equivalences $D(E_X)$, $D(E_Y)$ are termwise extensions of exact additive equivalences, so they commute with shifts, cones and small sums; it identifies the module-object $Lp^*\\dashv Rp_*$ with its unit and counit, and the K-flat tensors, with the ringed-topos ones, and it carries the module-object projection map of the statement to the ringed-topos map $\\alpha_{K,L}$ of [lem-weil-pbc-ringed-projection-mate-exact] itself. Use the canonical shift on $U=p^*$ and the adjunction-compatible shift on $R=Rp_*$ supplied by [lem-weil-pbc-adjunction-shift-compatibility-unique](iii); [lem-sf-triangulated-right-adjoint] gives exactness of $R$ with this shift. In the $L$ variable the mate is a transformation of exact functors by [lem-weil-pbc-ringed-projection-mate-exact]; in the $K$ variable it is one by [lem-sfb-ringed-projection-first-shift]. Transport these shift structures through the exact equivalences to our module-object categories. Therefore the actual canonical map is natural and shift compatible in each input, including the connecting square of each distinguished triangle. The structures restrict to the full triangulated localizing subcategories of step 6, since the equivalences preserve sums and triangles.",
    "uses": [
-    "lem-weil-pbc-sheaf-tensor-closed",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-sfb-module-upper-star",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pd-module-ringed-topos-derived-comparison",
     "lem-weil-pbc-adjunction-shift-compatibility-unique",
-    "lem-sf-triangulated-right-adjoint"
+    "lem-sf-triangulated-right-adjoint",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-ringed-projection-first-shift"
    ],
    "elementary": false,
    "source": {
@@ -159,14 +156,11 @@
   "sk-lem-int-tensor",
   "det-proper-base-change-unbounded-pullback",
   "det-proper-image-localizing-proper",
-  "lem-weil-pbc-sheaf-tensor-closed",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-sfb-module-upper-star",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-module-derived-pushpull",
-  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pd-module-ringed-topos-derived-comparison",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
   "lem-sf-triangulated-right-adjoint",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-ringed-projection-first-shift",
   "sk-lem-sf-determination"
  ],
  "proof_origin": {
@@ -226,7 +220,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -247,8 +241,8 @@
   "date": "2026-10-17",
   "item": "det-thm-sf-pf-adic-projection",
   "worker": "stage1",
-  "summary": "Reused existing bounded integral proper formula and all generic inputs; no new nodes. Made the standing setting and coefficient categories explicit, corrected the ambiguous phrase underived completion to without completion, and expanded tensor closure, operation restrictions, canonical mate shift compatibility and both determination applications. Reported stale unit metadata, absent umbrella node sk-prop-int-compactness and the incorrect Tag 099I label.",
-  "blueprint": "Step 2 realizes paragraph (1) through the existing integral proper theorem. Steps 1,3–5 realize paragraph (2) tensor closure; step 6 realizes its operation/sum hypotheses; step 7 checks the canonical map; steps 8–9 realize its two determination applications. Follows the current main-20261015 source; the older master unit record is not overwritten.",
+  "summary": "Repaired the returned 2193-character step 7 by extracting the internal/section-ring derived-operations comparison and first-variable shift compatibility into two strictly smaller statement-only lemmas. Existing ringed-projection-mate-exact supplies the second variable. Statement, Lean/audit records, route and all other proof steps are unchanged. Maintainer review (Q99 reader): the new section-module comparison duplicated the existing lem-pd-module-ringed-topos-derived-comparison (same equivalence, adjunction, tensor and projection-map identification); it is dropped and step 7 cites the existing node, declared as a tool use.",
+  "blueprint": "Preserves the existing realization: step 2 proves paragraph (1); steps 1,3–5 prove tensor closure in paragraph (2); step 6 gives the operation/sum hypotheses; step 7 now cites the existing module-object/ringed-topos comparison and the new first-variable shift lemma for the same canonical map; steps 8–9 are the two determination applications. main-20261015 is followed, without editing stale unit metadata.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-qcqs-over-affine",
@@ -279,10 +273,6 @@
     "why": "Existing proper-image restriction with its explicit integral coefficient assertion, replacing the missing umbrella node sk-prop-int-compactness."
    },
    {
-    "node": "lem-weil-pbc-sheaf-tensor-closed",
-    "why": "Generic sheafification/monoidal hypotheses for identifying internal modules with module sheaves."
-   },
-   {
     "node": "lem-weil-pbc-ringed-projection-mate-exact",
     "why": "Generic exact tensor and canonical projection mate with shift-compatible pullback tensor comparison."
    },
@@ -297,6 +287,10 @@
    {
     "node": "sk-lem-sf-determination",
     "why": "Generic extension of invertibility from generators, explicitly used twice in the current blueprint paragraph (2)."
+   },
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic comparison of module-object and ringed-topos derived operations, carrying the module-object projection map to the ringed-topos mate; replaces the duplicate section-module comparison node that this delivery had created, dropped at review."
    }
   ]
  },
@@ -312,15 +306,16 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
   "lem-sf-triangulated-right-adjoint",
-  "sk-lem-sf-determination"
+  "sk-lem-sf-determination",
+  "lem-pd-module-ringed-topos-derived-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NW-7a445fff4",
-  "group": "NW",
+  "reviewer": "NT-cc-Q99-b8acf44fc",
+  "group": "Q99",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-7a445fff4 (reviewer sub-agent of L); spot-checked: I read the statement, all nine steps and the full statements of every cited node against main-20261015 sk-thm-sf-pf-adic-projection (.md and .proof.md). The delivery has no new nodes. Statement: same two clauses. It writes out the standing setting and coefficient categories. 'Underived completion' becomes 'without completion', which matches sk-lem-int-tensor; this does not weaken the statement, because Dbc tensors are already complete. Step 2 reuses det-thm-sfb-proper-base-change-integral(3), which is reviewed and on the current unit route (sk-thm-sf-pf-adic -> sk-prop-proper-base-change-unbounded -> sk-prop-proper-image-localizing -> sk-thm-sfb-proper-base-change). It is the same map: both are the adjunct of (eps x 1) after the comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The coefficient is the same: A_T = O_{E,T} by that node's step 1. The tensor is uncompleted in both. There is no cycle (transitive closure walked). Steps 4-5: localizing-preimage arguments, minimality checked, quantifier order right. Step 6: the O_E clause of det-proper-image-localizing-proper rests on det-prop-int-compactness-direct-sums(3), which realizes the blueprint's sk-prop-int-compactness. Step 7: shift compatibility in K is written out via adjunction-shift-compatibility (iii); in L it is given by the mate node. Steps 8-9: every hypothesis of sk-lem-sf-determination is checked. Stacks tags checked: 099I is not Nakayama (the report's source error is correct); 0F0G and 0B56 are correct. No SGA citation. All 12 declared tool_uses accepted. The unit record dag/units/sk-thm-sf-pf-adic.json is stale (master snapshot); this is for the maintainer and is not a delivery fault. No fixes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-b8acf44fc (reviewer sub-agent of L); spot-checked: I read the item statement, all nine steps, both new nodes, every cited statement and the main-20261015 blueprint .md/.proof.md. The statement is unchanged; it uses the module-object O_{E,T} coefficient category and the canonical map, the adjunct of (eps x 1) after mu, so the target is not weakened. Steps 1-6 and 8-9 are correct; I checked the hypotheses of ctf-equals-bc(2), localizing-closure-existence(1-2), sfb-proper-base-change-integral(3), int-tensor, unbounded-pullback, image-localizing-proper (its O_E clause) and sf-determination. Fault 1 (C5, duplicate): the new lem-sfb-section-module-derived-operations duplicates the existing lem-pd-module-ringed-topos-derived-comparison (Q94, created earlier on 2026-10-17, on this delivery's base). That node states the exact symmetric-monoidal D(E_T) and the identification of Lf^*, Rf_*, their unit, counit and tensor comparison. It also carries the module-object projection map to the alpha_{K,L} of ringed-projection-mate-exact, for a standing k-morphism and any commutative condensed Lambda. The report's not-duplicates list misses it. The dropped node also took f^{-1}A_Y=A_X from cartesian-coefficients, which states it only for admissible Lambda. Fix: dropped; step 7 is rewritten to cite the existing node, proof_deps is recomputed, and the node is declared in split_report.tool_uses. No cycle: its 630 transitive dependencies do not reach the item. Fault 2: lem-sfb-ringed-projection-first-shift listed lem-sf-triangulated-right-adjoint in stmt_deps although its statement does not use it; removed. That lemma itself is kept. It is true: I checked K=0, shift 0 and f=id, and the signs (both sides use the unsigned first-variable tensor shift with R's shift, and it follows from eps_{K[1]}=eps_K[1] and the shift compatibility of mu). It is not a clause of the item or of mate-exact, which covers the P variable, and it is not a duplicate of lem-sc-projection-comparison-exact or lem-sf-finite-exchange-projection-commshift. No SGA is cited. I accept the twelve tool uses (the eleven declared plus the added one). Corrected files are in fixes/dag/nodes/sec-six-functors-basics/; details are in review.md.; 2 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

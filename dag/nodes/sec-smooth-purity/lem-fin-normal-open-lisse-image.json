@@ -92,15 +92,9 @@
    }
   },
   {
-   "text": "The finite clopen partition $Y=\\coprod_aY_a$ and its constant finite module restrictions witness constructibility of $E$ by [def-weil-pbc-etale-constructible-sheaf]. Each stratum is constructible: a clopen subset is retrocompact, since its intersection with any quasi-compact open is closed in that open and hence quasi-compact. The same immersed partition witnesses [def-constructible-constructible] in the coefficient category of $\\Lambda$-modules, which is the precise constructibility hypothesis of the finite-pushforward theorem below; finite constant values are finitely generated modules, and the displayed constant charts provide their local constancy. These constant charts also show that all its geometric stalks are finite by [lem-weil-pbc-finite-locally-constant-module-values](1) implies (2). For the underlying set sheaf these stalks have the same finite values. Explicitly, the set stalk and the underlying set of the module stalk have the same representatives (sections over pointed etale neighbourhoods) and the same eventual-equality relation, by [lem-weil-pbc-filtered-colimit-sets-elementwise] and [lem-weil-pbc-filtered-colimit-modules-elementwise]. The canonical map sending each set germ to the same module germ is therefore bijective. This argument applies also to separably closed points, so finiteness obtained for set stalks below is finiteness of module stalks as sets. Apply [lem-galois-finite-stalks-comparison] to this underlying set sheaf to obtain finiteness also at every separably closed geometric point, as required by the next theorem; no algebraic-closedness hypothesis is silently substituted for separable closedness. Apply [lem-weil-pbc-finite-pushforward-finite-stalk-module] to $g$, $E$, and the Noetherian target $X$ established in step 1. Its finite-stalk hypothesis, as well as constructibility as a module sheaf, has just been checked. It gives that $g_*E$ is constructible as a $\\Lambda$-module sheaf. This uses a module-valued finite-pushforward statement, rather than treating the abelian-valued statement of lem-fin-finite-constant-pushforward as if it already asserted module constructibility.",
+   "text": "The finite clopen partition $Y=\\coprod_aY_a$ and the componentwise constant finite module restrictions define the sheaf $E$ in step 5. The new node [lem-fin-normal-clopen-constructible-module] states that this partition is a constructibility stratification, so $E$ is constructible.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-constructible-constructible",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-finite-locally-constant-module-values",
-    "lem-galois-finite-stalks-comparison",
-    "lem-weil-pbc-finite-pushforward-finite-stalk-module"
+    "lem-fin-normal-clopen-constructible-module"
    ],
    "elementary": false,
    "source": {
@@ -109,7 +103,45 @@
    }
   },
   {
-   "text": "The monomorphism $k_*L\\hookrightarrow g_*E$ from step 5 has constructible target by step 6. Apply [lem-weil-pbc-constructible-subobjects-noetherian], with the Noetherian scheme $X$ and the given finite commutative ring $\\Lambda$, to conclude that $k_*L$ is constructible.",
+   "text": "The clopen etale cover $\\{Y_a\\to Y\\}$ and the finite constant module restrictions of step 5 satisfy (1) of [lem-weil-pbc-finite-locally-constant-module-values]. Its last assertion identifies every algebraically closed module stalk of $E$ with the corresponding finite $M_a$. The Mathlib leaf [lem-fin-normal-underlying-stalk-finite] identifies its underlying set with the set-sheaf stalk; hence those set stalks are finite.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-fin-normal-underlying-stalk-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-finite-stalks-comparison] to the underlying set sheaf of $E$, whose algebraically closed stalks are finite by step 7. Its set stalks are therefore finite at every separably closed point. The bijection at these points supplied by [lem-fin-normal-underlying-stalk-finite] transfers this finiteness to the underlying sets of the module stalks, as required by the next theorem.",
+   "uses": [
+    "lem-galois-finite-stalks-comparison",
+    "lem-fin-normal-underlying-stalk-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
+   }
+  },
+  {
+   "text": "The morphism $g:Y\\to X$ is finite by step 5. By step 6, $E$ is constructible in the coefficient-category sense [def-constructible-constructible], and by step 8 all its separably closed module stalks are finite. The target $X$ is Noetherian by step 1. Thus [lem-weil-pbc-finite-pushforward-finite-stalk-module] applies and gives constructibility of $g_*E$ in the coefficient-category sense [def-constructible-constructible]. Since $\\Lambda$ is finite, [lem-weil-pbc-constructible-etale-module-sheaf-comparison] converts this into constructibility of $g_*E$ in the sense of [def-weil-pbc-etale-constructible-sheaf], the hypothesis of the subobject theorem used in step 10.",
+   "uses": [
+    "def-constructible-constructible",
+    "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
+   }
+  },
+  {
+   "text": "The monomorphism $k_*L\\hookrightarrow g_*E$ from step 5 has constructible target by step 9. Apply [lem-weil-pbc-constructible-subobjects-noetherian], with the Noetherian scheme $X$ and the given finite commutative ring $\\Lambda$, to conclude that $k_*L$ is constructible.",
    "uses": [
     "lem-weil-pbc-constructible-subobjects-noetherian"
    ],
@@ -121,32 +153,33 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "fin2-lem-lisse-trivialized-finite-etale",
-  "lem-fin-etale-normal-components",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-abelian-inverse-image-comparison",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-geometric-stalks-detect-mono",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-constructible-constructible",
   "def-fin-normalization-extension",
-  "lem-fin-normalization-extends-cover",
-  "lem-fin-normalization-extension-finite",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-normalization-in-residue-field-extension",
-  "lem-fin-normal-constant-open-image",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-constructible-constructible",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-finite-locally-constant-module-values",
+  "fin2-lem-lisse-trivialized-finite-etale",
+  "lem-fin-etale-normal-components",
+  "lem-fin-normal-clopen-constructible-module",
+  "lem-fin-normal-constant-open-image",
+  "lem-fin-normal-underlying-stalk-finite",
+  "lem-fin-normalization-extends-cover",
+  "lem-fin-normalization-extension-finite",
   "lem-galois-finite-stalks-comparison",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-constructible-subobjects-noetherian",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-locally-constant-module-values",
   "lem-weil-pbc-finite-pushforward-finite-stalk-module",
-  "lem-weil-pbc-constructible-subobjects-noetherian"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geometric-stalks-detect-mono",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lemma-weil-pbc-finite-stalk-formula"
  ],
  "proof_origin": {
   "by": "agent",
@@ -233,7 +266,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -271,11 +304,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-fin-normal-open-lisse-image",
   "worker": "stage1",
-  "summary": "Expanded the two imported paragraphs into seven checked steps. Reused existing nodes for finite-type Noetherianity, normal integral components, unit/stalk comparisons, finite normalizations and module-valued finite pushforward. Combined the finite factors into one finite map from their disjoint union. Statement unchanged; no new nodes. Current-DAG repair after an unrelated landing-lock timeout: reread all 26 distinct proof citations and six statement dependencies; every saved proof-citation statement is unchanged. Expanded the affine kernel argument in step 3 to use reducedness of the integral base explicitly.",
-  "blueprint": "Steps 1-2 realize paragraph 1 (finite etale trivialization and diagonal unit); step 3 checks the implicit generic-field extension; steps 4-6 realize paragraph 2 (finite normalizations, constant extension and finite constructible images); step 7 is its final subobject argument.",
+  "summary": "Extracted the returned long step into four short steps citing a new finite-clopen constructibility lemma, a new Mathlib leaf for canonical set/module stalk comparison, the existing finite-constant-module stalk theorem, Galois finiteness comparison, and finite pushforward. Corrected the retained partial repair at separably closed points and its definition citations/status/references. Statement, Lean record, and original steps 1-5 unchanged.",
+  "blueprint": "Steps 1-2 realize paragraph 1 (finite etale trivialization and diagonal unit); steps 3-5 retain paragraph 2 (generic fields, finite normalizations, and constant extension). Steps 6-9 replace the returned long step by finite-clopen constructibility, set/module stalk comparison, separably closed finiteness, and finite pushforward. Step 10 retains the final subobject argument.",
   "tool_uses": [
    {
     "node": "lem-fin-etale-normal-components",
@@ -340,6 +373,10 @@
    {
     "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
     "why": "Generic representative and eventual-equality description of filtered colimits; identifies set stalks with the underlying sets of module stalks in step 6."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "why": "Generic equivalence of the two global constructibility predicates for finite coefficient rings; converts the coefficient-category conclusion of the finite-pushforward theorem into the predicate required by the subobject theorem. Added by the maintainer reader."
    }
   ]
  },
@@ -359,15 +396,16 @@
   "lem-weil-pbc-constructible-subobjects-noetherian",
   "lem-galois-finite-stalks-comparison",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q36-86d21fd99",
-  "group": "Q36",
+  "reviewer": "NT-cc-Q39-e538a2a02",
+  "group": "Q39",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-86d21fd99 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route in full. All seven steps are sound, including canonical unit compatibility, finite normalization hypotheses, and module-valued constructibility. Checked edge cases, generalization candidates, dependency cycles, and exact archived target categories. No new nodes or repairs. Concrete audit and accepted tool uses recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-e538a2a02 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, the statements of all cited nodes, the master and main-20261015 blueprint proof, the unit sk-prop-a1-kummer, and the Mathlib source (Point/Basic.lean:354 sheafFiberCompIso, EtalePoint.lean:33/64 pointSmallEtale with IsSepClosed, ModuleCat FilteredColimits.lean:202). Steps 1-5 are byte-identical to the base proof. I reread them and every hypothesis holds: P is Noetherian, V is normal integral, P_a is connected finite etale, K_a/K is finite, Y_a is Noetherian, normal and integral, g is finite. New steps 6-8 are correct. Step 7 uses the finite-locally-constant-module-values (1) clause and its 'moreover' clause with the clopen cover. Step 8 goes through the Galois algebraically-closed to separably-closed comparison and then the leaf, which gives exactly the finite-stalk hypothesis that the finite-pushforward node needs. One fault (C1/C4, already present in the old step 6): finite-pushforward-finite-stalk-module concludes IsConstructibleSheaf, but the subobject theorem in step 10 needs IsConstructibleEtaleModuleSheaf, and the comparison node between them was not cited. Fixed step 9 to cite lem-weil-pbc-constructible-etale-module-sheaf-comparison (Λ is finite) and def-weil-pbc-etale-constructible-sheaf; recomputed proof_deps; added a split_report.tool_uses entry. There is no cycle. The clopen child is true: clopen sets are retrocompact and so constructible; restricting along the open immersion gives the constant M_a. I tested it with an empty Y, an empty Y_a, zero modules and the zero ring. It is not a restatement of the parent, and the DAG search found no duplicate. The stalk child is a valid one-line Mathlib specialization with no duplicate in the DAG. Its id mentions 'finite' but the statement has no finiteness clause; that is cosmetic only. Accepted tool uses: the existing split_report list plus the comparison node. Replacing the blueprint's abelian lem-fin-finite-constant-pushforward with the module-valued theorem is accepted. No target is weakened. The coefficient category is ModuleCat Λ throughout. No SGA source is used.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

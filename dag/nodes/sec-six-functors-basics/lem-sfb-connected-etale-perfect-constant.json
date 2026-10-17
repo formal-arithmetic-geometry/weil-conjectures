@@ -71,30 +71,79 @@
    }
   },
   {
-   "text": "Let W\\to X be affine and weakly contractible. The geometric comparison inverse image preserves constant sheaves: the constant sheaf of a set is the sheaf coproduct of that many copies of the terminal object; inverse image preserves these coproducts and the terminal object. Preservation of finite products identifies the ring and module operations as well, for arbitrary R. The cited classical-module comparison supplies exactness on R-module sheaves, so it acts termwise on derived categories. Next, \\nu^* commutes with restriction to each étale V_i. Write u:V_i\\to X. For an object T\\to V_i of (V_i)_{proét}, the indexing category of the pro-étale inverse-image colimit at T has the initial object (T\\to X,(\\mathrm{str},\\mathrm{id}_T):T\\to V_i\\times_XT): a map from it to (V,\\varphi) must be \\mathrm{pr}_2\\varphi, because a map into V_i\\times_XV over V_i is determined by its second component. So the presheaf inverse image along u is F\\mapsto F(T\\to X), which is already a sheaf by the weakly-étale localization lemma; hence u_{proét}^{-1} is restriction to X_{proét}/V_i\\simeq(V_i)_{proét}. The same initial-object argument identifies u_{ét}^{-1} with restriction to X_{ét}/V_i, which the étale localization lemma identifies with (V_i)_{ét}. The cited comparison-pullback isomorphism \\nu_{V_i}^*u_{ét}^{-1}\\simeq u_{proét}^{-1}\\nu_X^* therefore gives (\\nu_X^*G)|_{V_i}\\simeq\\nu_{V_i}^*(G|_{V_i}), natural in the sheaf G. By naturality it respects addition and every scalar endomorphism, so it is an isomorphism of module sheaves, and it is exact. Apply it termwise, then use relocalization along W\\times_XV_i\\to V_i. Step 2 then gives (\\nu_X^*L)|_{W\\times_XV_i}\\simeq\\underline E there. The projections W\\times_XV_i\\to W are étale and jointly surjective by the cited covering base-change lemma. As W is affine, the refinement lemma gives a finite affine refinement {U_j\\to W}. Each U_j still has this local isomorphism, by exact restriction and the constant-restriction isomorphism. Let U=\\coprod_{j=1}^m U_j, with q:U\\to W. The scheme-coproduct lemma makes its summands pairwise disjoint and clopen. U is affine, being a finite coproduct of affines. So q is an étale map of affine schemes, given by an étale ring map. That map is ind-étale (a constant filtered colimit), hence weakly étale by the ind-étale stability lemma. Its composite with the weakly étale W\\to X is weakly étale by the composition lemma, so U is an object of X_proét over W, as in the localization lemma. The covering {U_j\\to W} gives an epimorphism h_U\\to h_W: any map T\\to W lifts after the covering {T\\times_WU_j\\to T}. The pro-étale topology is subcanonical, so weak contractibility gives a sheaf section h_W\\to h_U and Yoneda identifies it with a scheme map s:W\\to U satisfying q\\circ s=id_W.",
+   "text": "Let $W\\to X$ be affine and weakly contractible. Apply [lem-sfb-geometric-inverse-image-constant-module] to the comparison morphisms $\\nu_X$ and $\\nu_{V_i}$ (each a geometric morphism by [def-weil-pbc-site-comparison-morphism]): it identifies $\\nu_X^*\\underline M$ with $\\underline M$, and likewise $\\nu_{V_i}^*\\underline M$ with $\\underline M$, naturally in every $R$-module $M$. The exactness in [lem-pe-constant-left-module-inverse-image] permits termwise application to complexes and quasi-isomorphisms. Thus the constant comparison also holds for the perfect complex $E$ from Step 2.",
    "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
     "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-constant-sheaf",
-    "det-pe-classical-sheaves-modules",
-    "lem-weil-pbc-etale-covering-affine-refinement",
-    "def-weil-pbc-ringed-derived-restriction",
-    "lem-weil-pbc-site-constant-restriction",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-proetale-weakly-etale-localization",
-    "det-pe-topos-functoriality-site",
-    "sk-def-pe-weak-contractible",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J and 00YV, constant sheaves and inverse image of algebraic structures"
+   }
+  },
+  {
+   "text": "For $u:V_i\\to X$, use [lem-weil-pbc-etale-inverse-image-restriction] for the etale inverse image and clause 1 of [lem-sfb-proetale-object-inverse-image-restriction] (the object $V_i\\to X$ of $X_{\\mathrm{proet}}$; the scheme-base-change inverse image is restriction, for sheaves of sets and abelian groups, naturally in the sheaf) for the pro-etale inverse image. Substitute these identifications into [lem-weil-pbc-comparison-pullback]. Its natural isomorphism becomes $(\\nu_X^*G)|_{V_i}\\simeq\\nu_{V_i}^*(G|_{V_i})$. Naturality with respect to addition and the scalar maps makes it $R$-linear; exact module inverse image induces the same comparison termwise on derived categories. Apply it to the isomorphisms of Step 2, and restrict further to $W\\times_XV_i$, using relocalization and constant restriction. This gives $(\\nu_X^*L)|_{W\\times_XV_i}\\simeq\\underline E$ on that slice.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-sfb-proetale-object-inverse-image-restriction",
     "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-inverse-image",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-weakly-etale-composition-base-change"
+    "lem-pe-constant-left-module-inverse-image",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-site-constant-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C6, lemma-connected-adic-lisse, proof at the weakly contractible covering W_t; sites.tex Tag 090K, lemma-w-contractible; topologies.tex Tag 0218, lemma-etale-affine; sites.tex Tag 00XZ (section-localize) and proetale.tex Tags 09A5, 099R (functoriality, comparison) for restriction to étale objects; morphisms.tex Tag 02GO; more-morphisms.tex Tag 094T"
+    "place": "Tag 09A5, section-morphism, comparison square; sites.tex Tag 00XZ, localized restriction"
+   }
+  },
+  {
+   "text": "The projections $W\\times_XV_i\\to W$ form an etale covering by [lem-weil-pbc-etale-covering-base-change]. Since $W$ is affine, [lem-weil-pbc-etale-covering-affine-refinement] gives a finite refining cover $\\{U_j\\to W\\}_{j=1}^m$ with each $U_j$ affine. Restricting the preceding isomorphisms gives $(\\nu_X^*L)|_{U_j}\\simeq\\underline E|_{U_j}$, because derived restriction is exact and constant restriction is natural in the differentials of $E$.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0218, lemma-etale-affine; proetale.tex Tag 09C6, weakly contractible covering passage"
+   }
+  },
+  {
+   "text": "Put $U=\\coprod_{j=1}^mU_j$ with its induced map $q:U\\to W$. Each $U_j\\to W$ is an etale map of affines, hence its ring map is ind-etale (the constant filtered diagram) and weakly etale by [lem-weil-pbc-ind-etale-stability]. Composition with $W\\to X$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. The finite-family geometry lemma therefore applies to the affine objects $U_j$ of $X_{\\mathrm{proet}}$: their scheme coproduct $U$ is an affine pro-etale object. The scheme-coproduct statement gives its disjoint clopen summands, and [lem-sc-etale-coproduct-etale] gives that $q$ is etale. For every affine open $T\\subset W$, base change gives the etale cover $\\{U_j\\times_W T\\to T\\}$. Apply the same affine-refinement lemma to it: finitely many affine opens in these fibre products cover $T$, and they are affine opens in the corresponding $U_j$. Thus $\\{U_j\\to W\\}$ satisfies the covering condition in [def-weil-pbc-proetale-site].",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sc-etale-coproduct-etale",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A1, lemma-w-contractible-hypercovering, finite-family geometry; morphisms.tex Tag 02GJ, lemma-etale-characterize"
+   }
+  },
+  {
+   "text": "The sheaf map $h_U\\to h_W$ is an epimorphism: if two sheaf maps $h_W\\rightrightarrows F$ agree after $h_U$, their corresponding sections of $F(W)$ agree on each $U_j$, since each $U_j\\to W$ factors through $U$. The sheaf equalizer axiom for the cover $\\{U_j\\to W\\}$ makes these sections equal. Yoneda then makes the two maps equal. By weak contractibility, this epimorphism has a section. Subcanonicity and Yoneda identify that section with a scheme map $s:W\\to U$ satisfying $q\\circ s=\\mathrm{id}_W$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-galois-yoneda-hom-bijection",
+    "sk-def-pe-weak-contractible",
+    "det-pe-topos-functoriality-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 090K, lemma-w-contractible; proetale.tex Tag 098Z, lemma-proetale-subcanonical"
    }
   },
   {
@@ -112,35 +161,38 @@
   }
  ],
  "proof_deps": [
-  "def-pur-localized-ringed-site",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-ringed-derived-restriction",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-weil-proetale-inverse-image",
-  "det-pe-classical-sheaves-modules",
-  "det-pe-topos-functoriality-site",
-  "lem-fix-geometric-stalk-topos-point",
   "lem-pc-kflat-resolution",
-  "lem-weil-bounded-finite-tor-perfect",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-etale-cover-geometric-point-lift",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-site-bounded-constant-model",
-  "lem-weil-pbc-site-constant-restriction",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-bounded-constant-model",
   "prop-weil-pbc-geometric-stalks-exact",
-  "sk-def-pe-weak-contractible"
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-comparison-pullback",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sc-etale-coproduct-etale",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-galois-yoneda-hom-bijection",
+  "sk-def-pe-weak-contractible",
+  "det-pe-topos-functoriality-site"
  ],
  "proof_origin": {
   "by": "document",
@@ -220,7 +272,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-residue-lisse-perfect-lift",
@@ -233,7 +285,7 @@
   "date": "2026-10-17",
   "item": "lem-sfb-connected-etale-perfect-constant",
   "worker": "stage1",
-  "summary": "Second reading: four-step proof using existing DAG tools only. Stacks 09BI gives the connectedness argument; exact stalk and tensor interfaces give the Tor upgrade. The weakly contractible clause is expanded through a finite affine refinement, a representable split coproduct covering, componentwise derived roofs, and restriction along the section. Arbitrary Noetherian coefficients are retained; no semantic statement change or new node. Maintainer reader (2026-10-17): step 3 now cites the comparison/étale-inverse-image compatibility, étale covering base change and étale-implies-weakly-étale.",
+  "summary": "Q47 repair of returned 2773-character step 3: preserve the statement, Lean record, route, and original steps 1, 2 and 4 verbatim. Replace step 3 by five short steps citing two new statement-only lemmas for constant-module inverse image and pro-etale inverse-image/restriction. Reuse the existing finite-family geometry and etale-coproduct lemmas, and prove the covering epimorphism directly by Yoneda and the sheaf equalizer axiom. No coefficient finiteness, connectivity of W, or other new hypothesis. Maintainer-reader fix: the delivery's new pro-etale inverse-image/restriction node duplicated the existing lem-sfb-proetale-object-inverse-image-restriction (same identification for every object of X_proet, all sheaves of sets/abelian groups/modules; the derived clause is the one-line termwise extension already written in step 4); it is dropped and step 4 cites the existing node.",
   "blueprint": "Realizes the local perfect-model input in det-lem-integral-models-stacks, first sentence invoking sk-prop-integral-criterion, along its ancestry through lem-sfb-integral-cohomological-adic-criterion, lem-sfb-adic-stratified-perfect and lem-sfb-adic-residue-lisse-perfect-lift. Steps 1–2 implement Stacks 09BI; steps 3–4 justify the weakly contractible trivialization used in Stacks 09C6.",
   "tool_uses": [
    {
@@ -335,6 +387,38 @@
    {
     "node": "lem-weil-pbc-ind-etale-stability",
     "why": "Generic ring fact: an ind-étale (in particular étale) ring map is weakly étale; used for U\\to W."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic site or scheme infrastructure used to expose the same weakly contractible covering argument; no replacement of the integral-models route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic site or scheme infrastructure used to expose the same weakly contractible covering argument; no replacement of the integral-models route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic site or scheme infrastructure used to expose the same weakly contractible covering argument; no replacement of the integral-models route."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic site or scheme infrastructure used to expose the same weakly contractible covering argument; no replacement of the integral-models route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "why": "Generic site or scheme infrastructure used to expose the same weakly contractible covering argument; no replacement of the integral-models route."
+   },
+   {
+    "node": "lem-sc-etale-coproduct-etale",
+    "why": "Generic site or scheme infrastructure used to expose the same weakly contractible covering argument; no replacement of the integral-models route."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic site or scheme infrastructure used to expose the same weakly contractible covering argument; no replacement of the integral-models route."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Its clause 1 identifies pro-etale inverse image along an object V_i\\to X of X_proet with slice restriction, naturally in the sheaf; this generic site fact (Stacks 03CE) is not supplied by the integral-models unit. It replaces the duplicate pro-etale restriction node this delivery had created, which the reviewer dropped."
    }
   ]
  },
@@ -363,15 +447,23 @@
   "lem-weil-pbc-etale-cover-geometric-point-lift",
   "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-sc-etale-coproduct-etale",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-sfb-proetale-object-inverse-image-restriction"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q12-2d1e96eac",
-  "group": "Q12",
+  "reviewer": "NT-cc-Q47-480d37135",
+  "group": "Q47",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-2d1e96eac (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its four steps and the statement of every cited node. Sources checked at the cited places: Stacks 09BI (etale-cohomology.tex l.13850), 09C6 (the weakly contractible W_t passage), 090K and 094G. The statement matches 09BI hypothesis by hypothesis: connected, Noetherian R, bounded cohomology, locally constant with finitely generated values, uniform Tor interval. Its extra conclusions (E≃L_x̄ for every geometric point, and the weakly contractible trivialisation that 09C6 uses) are proved. R need not be finite, and the parent lem-sfb-adic-residue-lisse-perfect-lift needs exactly that. Step 1 is correct: the 094G local model, open images, overlap via the 03PR prescribed-point lift, and one class by connectedness. Step 2 is correct: the topos point gives Lp^*=p^*, 07A4 gives Tor amplitude in [a,b], 0658 gives perfectness, and exact sheafification makes the constant-sheaf functor exact. Step 4 is an acceptable elementary assembly over a finite disjoint cover. Repaired in step 3 (C1/E5): (a) the move from L|V_i≅E to (ν^*L)|_{W×V_i}≅E used without citation that ν^* commutes with restriction to an étale V_i. I added lem-weil-pbc-comparison-pullback, def-weil-proetale-inverse-image, def-weil-pbc-inverse-image and lem-weil-pbc-etale-site-localization-open, and wrote out the initial-object argument identifying u^{-1} with restriction. (b) Two facts had no citation: base change of the étale cover, and étale implies weakly étale for U→W. I added lem-weil-pbc-etale-covering-base-change, lem-weil-pbc-ind-etale-stability and lem-weil-pbc-weakly-etale-composition-base-change. proof_deps is updated, there is no cycle, and three tool_uses are added. The statement is unchanged. There are no new nodes and no duplicate in the DAG; lem-weil-pbc-finite-ring-derived-local-constancy covers only finite rings. Edge cases tested: L=0, R=0, a=b, R=Z with Z/2 over a field, empty or disconnected W. No SGA is cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-480d37135 (reviewer sub-agent of L); spot-checked: Read the item, its 8 steps and both new nodes in full, plus the statement of every cited node. Sources checked: Stacks 09BI (etale-cohomology.tex l.13850), the weakly contractible W_t sentence in 09C6, 0H7J, 00YV and 03CE (sites.tex l.6094). Statement, Lean record and the old steps 1, 2 and 4 are unchanged; nothing is weakened. New steps 3-7 are correct. Step 4 puts the étale restriction identification and the pro-étale inverse-image/restriction identification into lem-weil-pbc-comparison-pullback, then uses R-linearity from scalar naturality and exactness to pass to complexes. Step 5 uses étale base change and the 0218 affine refinement. Step 6 shows U_j→W is weakly étale (ind-étale), that the finite coproduct U is an affine pro-étale object, and that {U_j→W} meets the covering condition of def-weil-pbc-proetale-site via affine opens of U_j×_W T. Step 7 shows h_U→h_W is an epimorphism by Yoneda and the sheaf equalizer axiom, then gets a section from weak contractibility and turns it into s:W→U by subcanonicity. Edge cases hold: W empty, W disconnected, R=0. New node lem-sfb-geometric-inverse-image-constant-module is true: f^{-1} preserves the terminal object, coproducts and finite products, so the constant sheaf of M, a coproduct of M copies of the terminal sheaf, goes to the constant sheaf, with addition and scalars. It holds with no finiteness on M and is not a duplicate: existing nodes cover only étale scheme maps or the constant ring. Mathlib ConstantSheaf.lean l.157 has an explicit TODO for this result, confirming no Mathlib match. FIX (C5): new node lem-sfb-proetale-inverse-image-restriction duplicates the existing lem-sfb-proetale-object-inverse-image-restriction (created 2026-10-17 by Q150 for det-proper-heart-bound-lattice). For every object of X_proet, that node already identifies the scheme-base-change inverse image with restriction, for sheaves of sets, abelian groups, rings and A-modules; the report's claimed difference is wrong. The only extra clause, the derived one, is one line and is already written in step 4. I dropped the new node and repointed step 4 to clause 1 of the existing node, which creates no cycle. I updated proof_deps, declared it in split_report.tool_uses (generic Stacks 03CE fact), and made step 3 say explicitly that the constant-module lemma is applied to both ν_X and ν_{V_i}. The corrected item is under fixes/dag/nodes/sec-six-functors-basics/ and no longer cites the dropped node. Declared tool uses accepted. No SGA is cited.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

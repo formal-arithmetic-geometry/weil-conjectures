@@ -1,0 +1,123 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "status": "mathlib",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+  "how": "specializes in one line: evaluate (Phi.sheafFiberCompIso (forget (ModuleCat Lambda))).app F at Phi = AlgebraicGeometry.Scheme.pointSmallEtale s. sheafFiberCompIso is at lines 354-357; presheafFiberCompIso at lines 333-339 constructs the same canonical colimit comparison, with its germ compatibility at lines 342-349. Filtered-colimit preservation is the instance ModuleCat.FilteredColimits.forget_preservesFilteredColimits in Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean:202-204. The point construction for separably closed Omega is Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64-92, with IsSepClosed variable at line 33. Both fibre functors are by definition pointed-neighbourhood colimits; the component is an isomorphism of types, hence a bijection. No finiteness or clopen assertion is included in this leaf.",
+  "line": 354
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-fin-normal-open-lisse-image",
+  "date": "2026-10-17",
+  "group": "Q39"
+ },
+ "id": "lem-fin-normal-underlying-stalk-finite",
+ "kind": "statement",
+ "title": "Underlying set and module geometric stalks agree",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $\\Lambda$ a commutative ring and $F$ a sheaf of $\\Lambda$-modules on its small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Let $s:\\operatorname{Spec}\\Omega\\to Y$ with $\\Omega$ a separably closed field [def-pc-separably-closed]. Define set and module stalks by the pointed-neighbourhood colimit [def-weil-pbc-geometric-stalks], also for separably closed $\\Omega$. The canonical map from the stalk of the underlying sheaf of sets of $F$ to the underlying set of the module stalk $F_s$ is a bijection, natural in $F$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section Tag 04EM (section-stalks), paragraphs after lemma-stalk-exact constructing algebraic structures on stalks with the same underlying set; separably closed small-etale-point formulation is the specialization of Mathlib Point.sheafFiberCompIso."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-pc-separably-closed",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of modules on the small etale site of a scheme, the stalk of the underlying sheaf of sets is canonically the underlying set of the module stalk",
+   "results": "Hits: ModuleCat.Tilde.toStalk and ModuleCat.Tilde.stalkIso_hom; no exact etale sheaf stalk theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"forget\"",
+   "results": "Hits: smoothSheafCommRing.forgetStalk; no module-sheaf geometric stalk theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*forget|forget.*stalk|stalk.*[Uu]nderlying|[Uu]nderlying.*stalk",
+   "results": "Hits in Mathlib/AlgebraicGeometry/Scheme.lean and unrelated smooth-sheaf files; no exact theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor from modules to sets commutes with stalks of sheaves on a scheme",
+   "results": "Hits: smoothSheafCommRing.forgetStalk; no exact etale module-sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor ModuleCat to Type preserves filtered colimits and hence geometric stalks",
+   "results": "Hit: ModuleCat.FilteredColimits.forget_preservesFilteredColimits; this is only the categorical ingredient, not the full etale stalk statement.",
+   "date": "2026-10-17",
+   "verdict": "generalization: ModuleCat.FilteredColimits.forget_preservesFilteredColimits (Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean:202) supplies preservation of filtered colimits, while the pointed-neighbourhood stalk identification is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "forget_preservesFilteredColimits|forget₂AddCommGroup_preservesFilteredColimits",
+   "results": "ModuleCat.FilteredColimits.forget₂AddCommGroup_preservesFilteredColimits at line 194 and forget_preservesFilteredColimits at line 202.",
+   "date": "2026-10-17",
+   "verdict": "generalization: preservation of filtered colimits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a point of any site and a ring R, the stalk of the underlying sheaf of sets of a sheaf of R modules is naturally isomorphic to the underlying set of its module stalk",
+   "results": "ModuleCat.Tilde.stalkIso_hom; ModuleCat.Tilde.toStalk; ModuleCat.Tilde.stalkIso_inv; ModuleCat.Tilde.stalkIso; ModuleCat.Tilde.stalkToFiberLinearMap_toStalk; ModuleCat.Tilde.stalkToFiberLinearMap; ModuleCat.Tilde.toOpen_germ_apply; ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_hom_app; CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_inv_app",
+   "date": "2026-10-17",
+   "verdict": "match: canonical comparison by one-line specialization; see mathlib_match for instance and point construction"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberCompIso|presheafFiberCompIso",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "match: canonical comparison by one-line specialization; see mathlib_match for instance and point construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a sheaf of modules on the etale site, forgetting to sets commutes with the stalk at a separably closed geometric point",
+   "results": "SheafOfModules.forget; SheafOfModules.toSheaf_obj_val; smoothSheafCommRing.forgetStalk; SheafOfModules.forgetToSheafModuleCat_obj_val; SheafOfModules.forgetToSheafModuleCat; SheafOfModules.forgetToSheafModuleCat_map_val; AlgebraicGeometry.Scheme.Modules.toPresheafOfModules; SheafOfModules.forget_obj",
+   "date": "2026-10-17",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a componentwise finite constant module sheaf on a finite clopen union of schemes, the set stalk equals the underlying module stalk at separably closed points, and the stalk is finite at algebraically closed points",
+   "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.LocallyOfFiniteType.stalkMap; ModuleCat.Tilde.toStalk; AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgebraicGeometry.germ_stalkClosedPointIso_hom; AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux; AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full statement"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-fin-normal-open-lisse-image",
+   "place": "proof, second paragraph: constructibility of the finite direct images; module-valued version",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

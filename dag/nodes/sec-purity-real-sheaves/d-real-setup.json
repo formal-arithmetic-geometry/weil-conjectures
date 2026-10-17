@@ -3,22 +3,85 @@
  "blueprint": {
   "is": "d-real-setup",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-d-real-setup"
+  ]
  },
  "kind": "definition",
  "title": "Fields, curves and Frobenius",
- "statement": "Fix $q=p^a$, $a\\ge1$, an algebraic closure $k=\\overline{\\Fq}$, a prime\n$\\ell\\ne p$, and a field embedding $\\iota:\\Qlb\\hookrightarrow\\mathbf C$.\nA curve $C_0/\\Fq$ is a nonempty, separated, smooth scheme of finite type,\nof pure dimension one, whose base change $C=C_0\\times_{\\Fq}k$ is connected.\nFor a closed point $x$, put $e_x=[k(x):\\Fq]$ and $q_x=q^{e_x}$.\nThroughout, Frobenius means *geometric* Frobenius, the inverse of\nthe field automorphism $t\\mapsto t^q$. Its local version at $x$ is $F_x$.\nAn affine open means a nonempty open subscheme isomorphic to the spectrum\nof a finitely generated $\\Fq$-algebra.",
+ "statement": "Fix a prime $p$, an integer $a\\geq1$, and put $q=p^a$. Let $k_0=\\mathbf F_q$ be the fixed field with $q$ elements [def-weil-finite-field-q-elements], and choose an algebraic closure $k=\\overline{\\mathbf F}_q$ of $k_0$ [def-weil-algebraic-closure]. Fix a prime $\\ell\\ne p$, write $\\mathbf Q_\\ell$ for the field of $\\ell$-adic numbers [def-weil-l-adic-numbers], choose an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ [def-weil-algebraic-closure], and fix a field embedding $\\iota:\\overline{\\mathbf Q}_\\ell\\hookrightarrow\\mathbf C$ (an injective unital field homomorphism, with no continuity condition).\n\nIn this chapter a *curve* $C_0/\\mathbf F_q$ is a nonempty scheme [def-pc-scheme] over $k_0$ [def-weil-scheme-over-base] whose structure morphism is separated [def-weil-proper-morphism], smooth [def-sbc-smooth-morphisms], and of finite type [def-weil-finite-type-morphism], such that $C_0$ has pure dimension one [def-weil-pure-dimension] and its base change $C=C_0\\times_{k_0}\\operatorname{Spec}k$ [def-pc-base-change] is connected [def-weil-connected-scheme].\n\nFor a closed point $x$ of $C_0$ [def-weil-closed-points], write $\\kappa(x)$ for its residue field [def-weil-residue-field], and put $e_x=[\\kappa(x):k_0]$ [def-weil-closed-point-degree] and $q_x=q^{e_x}$.\n\nThroughout this chapter, *Frobenius* means geometric Frobenius $F=\\varphi_q^{-1}$ on $k$, where $\\varphi_q(t)=t^q$ [def-weil-frobenius-substitution]. Its local version $F_x$ is geometric Frobenius of the finite residue field $\\kappa(x)$: on a chosen algebraic closure of $\\kappa(x)$ it is the inverse of $t\\mapsto t^{q_x}$ [def-weil-algebraic-closure, def-weil-frobenius-substitution].\n\nAn *affine open* of $C_0$ in this chapter means a nonempty open subscheme $U_0\\hookrightarrow C_0$ [def-weil-open-immersion] isomorphic over $k_0$ to $\\operatorname{Spec}A$ [def-weil-affine-spectrum] for a finitely generated $k_0$-algebra $A$ (one generated as a $k_0$-algebra by finitely many elements, as in [def-weil-finite-type-morphism]).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-setup/d-real-setup.md",
   "place": "node d-real-setup, order 2920"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-numbers",
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-closed-point-degree",
+  "def-weil-frobenius-substitution",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite field algebraic closure geometric Frobenius and smooth geometrically connected separated curves of dimension one",
+   "results": "; FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.frobeniusAlgEquiv, FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow, FiniteField.bijective_frobeniusAlgHom_pow, Algebra.FormallySmooth.of_perfectField, FunctionField, Algebra.IsGeometricallyReduced",
+   "date": "2026-10-17",
+   "verdict": "No match for the combined setup; Frobenius component already covered by def-weil-frobenius-substitution. Other hits concern smooth algebras and function fields, not this definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.frobeniusAlgEquivOfAlgebraic",
+   "results": "; FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow",
+   "date": "2026-10-17",
+   "verdict": "No match for the combined setup; arithmetic Frobenius and its inverse supply only the existing Frobenius notion."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFrobenius|frobeniusAlgEquivOfAlgebraic|IsSmoothCurve",
+   "results": "; Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Trace.lean",
+   "date": "2026-10-17",
+   "verdict": "No match for the combined setup. Frobenius automorphism is at Mathlib/FieldTheory/Finite/Basic.lean:363; reused through def-weil-frobenius-substitution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth separated geometrically connected curve over a finite field with geometric Frobenius and an embedding of algebraic ell-adic numbers into complex numbers",
+   "results": "; FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp, NumberField.canonicalEmbedding, NumberField.InfinitePlace.embedding, FiniteField.frobeniusAlgEquiv, NumberField.ComplexEmbedding.lift_algebraMap_apply, NumberField.InfinitePlace.Completion.extensionEmbedding",
+   "date": "2026-10-17",
+   "verdict": "No match for the combined setup. Frobenius and number-field embeddings cover only individual or different notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of a nonempty smooth geometrically connected curve over a finite field with an embedding of the algebraic closure of the ell-adic numbers into the complex numbers",
+   "results": "; WeierstrassCurve, WeierstrassCurve.instInhabitedSubtypeIsElliptic, WeierstrassCurve.instInhabited, WeierstrassCurve.Affine, WeierstrassCurve.IsElliptic, WeierstrassCurve.ofJ, WeierstrassCurve.IsIntegral, WeierstrassCurve.integralModel",
+   "date": "2026-10-17",
+   "verdict": "No match. WeierstrassCurve and elliptic-curve predicates are restricted classes, not this chapter convention for arbitrary smooth curves."
+  },
+  {
+   "tool": "grep",
+   "query": "class (Smooth|GeometricallyConnected)|def degreeOver|PadicAlgCl|def.*Curve",
+   "results": "; Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+   "date": "2026-10-17",
+   "verdict": "No match for the combined setup. Smooth (Morphisms/Smooth.lean:62) and GeometricallyConnected (Geometrically/Connected.lean:40) are individual predicates, not the chapter datum."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -38,5 +101,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "d-real-setup",
+  "worker": "stage1",
+  "summary": "Q108 read the current blueprint definition and unit, checked project declarations and searched Mathlib twice by concept. This definition has no proof obligations: all constituent notions now cite existing definition nodes; no new nodes are needed. Explicitly unpacked the prime, coefficient closure, closed-point notation, and local q_x-power Frobenius convention without changing the curve hypotheses. STATEMENT-DISPUTED: made the missing explicit assumption that p is prime, as required by the finite-field and coefficient intent; p=4, a=1, ell=2 otherwise satisfies ell != p but ell is the characteristic. Recorded the identical unit definition as same_as and realized the unit statement.",
+  "blueprint": "All clauses of main-20261015 sec-purity-real-sheaves/sk-d-real-setup/d-real-setup.md and the identical _section.md: finite-field and coefficient choices; nonempty separated smooth finite-type pure-one-dimensional curve with connected geometric base change; e_x and q_x; geometric and local Frobenius; nonempty finite-type affine opens. The unit has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-c51f28c8a",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-c51f28c8a (reviewer sub-agent of L); spot-checked: Read the main-20261015 source d-real-setup.md (order 2920) and _section.md, identical in main-20261017; macros \\Fq and \\Qlb are at blueprint.toml:54/96. Read the unit and chapter records, the report, and the statements of all 17 cited nodes. Every source clause is kept: nonempty, separated (def-weil-proper-morphism, separated clause only), smooth (def-sbc-smooth-morphisms), finite type, pure dimension one (def-weil-pure-dimension, which admits the empty scheme, hence the kept nonempty clause), and connected base change to k (def-pc-base-change, def-weil-connected-scheme). e_x and q_x come from def-weil-closed-point-degree; finite type gives deg>=1. Geometric Frobenius is phi_q^{-1} by def-weil-frobenius-substitution. Local F_x is the same node applied to kappa(x), a field with q_x elements; no scheme Frobenius or path is introduced. iota is a plain field embedding. Affine open 'over k_0' is equivalent to the source wording for opens of a finite-type k_0-scheme, since Gamma of an affine open is finitely generated over k_0. The added 'p prime' is a faithful clarification matching def-weil-finite-field-q-elements: p=4, a=1, ell=2 shows the need. It is not a weakening. Edge cases: P^1 and A^1 are admitted. Empty, Spec F_q, P^1 disjoint union Spec F_q, A^1 over F_{q^2} viewed over F_q, A^1 disjoint union A^1, and non-reduced curves are excluded. Duplicate search: sk-d-real-setup is the identical sketch twin, correctly recorded as same_as; d-curve-pieces and def-weil-smooth-proper-datum are different data. No new nodes. Six searches of all three kinds are recorded, and a split rather than a Mathlib leaf is right. The unit realized fields are correct. Definition with no proof, no tool_uses, no SGA, not a target. No fixes."
  }
 }

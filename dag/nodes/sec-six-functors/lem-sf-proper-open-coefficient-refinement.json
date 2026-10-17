@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-proper-open-coefficient-refinement",
+ "kind": "statement",
+ "title": "Coefficient extension respects the proper/open refinement arrow",
+ "statement": "Let $A\\to B$ be a unital map of finite commutative rings. Let $X,T_1,T_2$ be Noetherian schemes, meaning schemes admitting finite affine open covers by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]. Let $u:T_1\\to T_2$ be proper and $j_i:X\\hookrightarrow T_i$ open immersions such that $uj_1=j_2$ [def-weil-proper-morphism, def-weil-open-immersion]. Work with ordinary constant-ring module sheaves on the small etale sites and their derived categories [def-weil-pbc-etale-site, def-weil-pbc-derived-categories]. Write $Q_T=-\\otimes_A^L B$ [lem-pur-derived-change-of-rings], $L_{v,D}=v_D^{-1}$, $R_{v,D}=Rv_{*,D}$ and $I_{j,D}=j_{!,D}$ for $D=A,B$ [def-weil-pbc-inverse-image, def-weil-pbc-direct-image, def-weil-pbc-extension-by-zero]. Use the inverse-image/direct-image and open adjunctions [prop-weil-pbc-inverse-image-modules-exact, lem-amb-etale-adjoint-locality]. Let $K\\in D^+(X_{\\mathrm{et}},A)$ and assume $Q_XK\\in D^+(X_{\\mathrm{et}},B)$; neither constructibility nor finite Tor amplitude is required.\n\nNormalize the maps as follows. For $v:W\\to T$ let $\\lambda_v:L_{v,B}Q_T\\xrightarrow{\\sim}Q_WL_{v,A}$ be the canonical tensor/pullback identification [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define $\\chi_{v,M}:Q_TR_{v,A}M\\to R_{v,B}Q_WM$ by its $L_{v,B}\\dashv R_{v,B}$ transpose $Q_W(\\varepsilon_{v,A,M})\\circ\\lambda_{v,R_{v,A}M}$. For an open $j:W\\hookrightarrow T$, let $\\beta_j:Q_TI_{j,A}\\xrightarrow{\\sim}I_{j,B}Q_W$ be the open tensor identification; its inverse has $I_{j,B}\\dashv L_{j,B}$ transpose $\\lambda_{j,I_{j,A}M}^{-1}\\circ Q_W(\\eta_{j,A,M})$, where $\\eta_{j,A}:1\\to L_{j,A}I_{j,A}$ is the open unit. Let $\\alpha_{u,D,M}:I_{j_2,D}M\\to R_{u,D}I_{j_1,D}M$ be exactly the proper/open comparison defined as the open-adjunction transpose of $\\theta_{u,D,M}^{-1}$ in [def-weil-pbc-proper-open-comparison], including its clopen-section normalization.\n\nThen the following equality holds in $D(T_{2,\\mathrm{et}},B)$:\n$$\nR_{u,B}(\\beta_{j_1,K})\\circ\\chi_{u,I_{j_1,A}K}\\circ Q_{T_2}(\\alpha_{u,A,K})\n=\\alpha_{u,B,Q_XK}\\circ\\beta_{j_2,K}.\n$$\nBoth sides have source $Q_{T_2}I_{j_2,A}K$ and target $R_{u,B}I_{j_1,B}Q_XK$. The commutative square $uj_1=j_2$ is not assumed cartesian, and no isomorphism assertion for $\\chi_u$ on arbitrary inputs is included.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7I (lemma-shriek-well-defined), proper/open refinement construction, and Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); agent-explicit coefficient naturality of that construction with the normalized comparison of def-weil-pbc-proper-open-comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-proper-open-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with the canonical proper refinement map from extension by zero into proper direct image of extension by zero",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.ExtendScalars.map'_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|extensionByZero",
+   "results": "0 hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars is compatible with the adjunction-defined proper open comparison for a proper map that restricts to identity on an open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(square|vcomp|hcomp)",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient change preserves the canonical proper open refinement comparison on etale sheaves",
+   "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Differential.mapCoeffs_C, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, CategoryTheory.Meq.refine, AlgebraicGeometry.Scheme.etalePretopology, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|properOpen",
+   "results": "0 hits: ; Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of a finite coefficient ring commutes with the adjunction defined proper refinement map j2 extension by zero to Ru pushforward j1 extension by zero",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δAux_ofComp, IsAdicComplete.StrictMono.factorPow_comp_extend, Algebra.Generators.H1Cotangent.δAux_toAlgHom, Algebra.Generators.H1Cotangent.δ_map, Algebra.Extension.Cotangent.map_comp, Algebra.Extension.CotangentSpace.map_comp, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.Generators.Hom.toExtensionHom_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with the canonical proper open refinement comparison on etale derived categories",
+   "results": "8 hits: AlgHom.extendScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.extendScalars_id_comp, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.extendScalarsComp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar extension for ordinary modules or abstract mate calculus; none states the specified derived proper/open refinement coefficient square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-compact-coefficient-composition",
+  "date": "2026-10-17",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-exceptional",
+   "place": "Proof paragraph 2, 'The transposes are consequently the same compact-support coefficient comparison': independence of the proper/open tensor comparison from the compactification, specifically the proper-refinement arrow used in step 7 of lem-sf-compact-coefficient-composition.",
+   "via": [
+    "lem-sf-compact-coefficient-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
