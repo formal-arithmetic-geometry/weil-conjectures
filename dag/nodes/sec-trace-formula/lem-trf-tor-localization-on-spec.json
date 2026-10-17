@@ -12,9 +12,61 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n\\geq0$ and put $T=\\operatorname{Tor}^R_n(M,A)$. In the resolution computation of [def-weil-pbc-tor-modules], multiplication on the coefficient factor $A$ commutes with the differentials, so it makes $T$ an $A$-module. Set $S=A\\setminus\\mathfrak p$. Apply [lem-weil-pbc-localization-tensor-over-base] with its base ring and algebra both $A$, its first module $A$, and its second module $T$. Under $A\\otimes_A T\\cong T$, $a\\otimes t\\mapsto at$, it identifies $T_{\\mathfrak p}$ with $A_{\\mathfrak p}\\otimes_A T$. Interchanging the tensor factors gives the isomorphism $\\eta:T_{\\mathfrak p}\\xrightarrow{\\sim}T\\otimes_A A_{\\mathfrak p}$, $t/s\\mapsto t\\otimes(1/s)$; its inverse sends $t\\otimes(a/s)$ to $at/s$. These formulas also follow directly from the fraction relations in [def-weil-pbc-module-localization], and show that $\\eta$ carries $t/1$ to $t\\otimes1$.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LY (section-tor), 00DK (lemma-tensor-localization), and 00D2 (lemma-tensor-with-bimodule)."
+   }
+  },
+  {
+   "text": "The map $A\\to A_{\\mathfrak p}$ is localization at the multiplicative subset $S$ by [def-weil-pbc-localization-at-prime], hence is flat by [lem-weil-pbc-localization-flat]. Apply [lem-trf-tor-flat-base-change] to $R\\to A\\to A_{\\mathfrak p}$ and $M$. It gives an isomorphism $\\beta:T\\otimes_A A_{\\mathfrak p}\\xrightarrow{\\sim}\\operatorname{Tor}^R_n(M,A_{\\mathfrak p})$. The composite $\\beta\\eta$ is the canonical map in the statement: using any projective resolution $F_\\bullet$ of $M$ as in [def-weil-pbc-tor-modules], a cycle $z\\in F_n\\otimes_R A$ represents $t\\in T$, and both maps send $t/s$ to the homology class of $s^{-1}z$ in $F_\\bullet\\otimes_R A_{\\mathfrak p}$. Here each pure tensor $f\\otimes a$ in $z$ is sent to $f\\otimes(a/s)$, so boundaries are sent to boundaries because the differential is coefficient-linear. Thus the displayed canonical map is an isomorphism for every $n\\geq0$, including degree zero.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-flat",
+    "lem-trf-tor-flat-base-change",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (lemma-flat-localization), Tag 00M8 (lemma-flat-base-change-tor, its free-resolution argument), and Tag 00LY (section-tor)."
+   }
+  },
+  {
+   "text": "If $T=0$, every fraction module $T_{\\mathfrak p}$ is zero by [def-weil-pbc-module-localization], and Step 2 gives $\\operatorname{Tor}^R_n(M,A_{\\mathfrak p})=0$. Conversely, assume these latter Tor groups vanish for all primes of $A$. Step 2 gives $T_{\\mathfrak p}=0$ for all such primes. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to the zero map $T\\to0$. Every maximal ideal is prime (the quotient is a field), and its localized map is $0\\to0$, hence bijective. The cited statement makes $T\\to0$ bijective, so $T=0$. This also covers the zero coefficient ring: the cited criterion imposes no nonzero-ring hypothesis.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HN (lemma-characterize-zero-local), parts (2) and (6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-tor-modules",
+  "lem-trf-tor-flat-base-change",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00M8 free-resolution argument specialized via the existing flat-coefficient-base-change node, with Tag 00DK for tensor localization, Tag 00HT for flatness, and Tag 00HN for local vanishing."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +95,52 @@
    "results": "LocalizedModule.AtPrime and IsLocalization.tensorProduct_isLocalizedModule; no exact Tor statement.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*localiz|localiz.*Tor|Tor.*baseChange|Tor.*base_change",
+   "results": "25 hits: Mathlib/Topology/Convenient/Localization.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the coefficient module commutes with Tor at every degree, and Tor vanishing is local on Spec of the coefficient ring",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.rTensor, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.tensor, RingHom.Flat.ofLocalizationSpanTarget, ModuleCat.Tilde.Localizations, Module.Basis.ofIsLocalizedModule_repr_apply, ModuleCat.localizedModule_functor_map_exact",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, IsLocalization",
+   "results": "0 hits: none",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map R to A and an R module M, Tor over R of M and A localized at a prime of A is Tor over R of M and the localized coefficient ring",
+   "results": "8 hits: IsLocalizedModule.map_lTensor, IsLocalizedModule.rTensor, Module.rankAtStalk_baseChange, Module.rankAtStalk_eq_finrank_tensorProduct, IsLocalization.tensorProduct_isLocalizedModule, IsLocalizedModule.map_linearMap_of_isLocalization, IsLocalization.moduleTensorEquiv, Module.rankAtStalk_tensorProduct_of_isScalarTower",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat extension of scalars on the second argument of Tor over a fixed commutative ring commutes with Tor homology",
+   "results": "8 hits: Module.Flat.baseChange, Module.Flat.instTensorProduct, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.of_flat_tensorProduct, Module.Flat.rTensor_shortComplex_exact, Module.Flat.isBaseChange, Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|Tor\\x27",
+   "results": "7 hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean. Source read: Mathlib/CategoryTheory/Monoidal/Tor.lean, lines 12--66; definitions and projective vanishing only.; directory CategoryTheory/Monoidal",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-regular-monomial-tor",
@@ -72,5 +166,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-tor-localization-on-spec",
+  "worker": "stage1",
+  "summary": "Kept the statement. Used the existing flat coefficient-base-change node, the existing tensor-localization and flat-localization Mathlib leaves, and the existing maximal-localization bijectivity criterion. Specified the A-module structure on Tor, the fraction/tensor isomorphism, the map on resolution cycles, and both directions of local vanishing. No new nodes or attachments. Recorded new item searches and retained all inherited searches.",
+  "blueprint": "Realizes Proof (1)--(2) of lem-trf-local-term-locality through the existing ancestry: the local-to-global Tor vanishing required in Step 2 of lem-trf-log-regular-monomial-tor. Does not replace any unit-level argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-d2fc21d66",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-d2fc21d66 (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no changes; review.md has the details. The delivery is one commit containing only the report and the item, with no new nodes, no SGA citation and no tool_uses. The statement is unchanged and true. It is the B=A_p case of the fixed-base flat coefficient change: Stacks 00M8 (algebra.tex l.18735) changes R as well, and the source note says so instead of misquoting it. Small cases check out: n=0 matches 00DK; R=Z[x], A=Z with x->0 and M=Z gives Tor_1=Z, whose localization at (l) is Z_(l); R=Z, A=Z/2, M=Z/2 shows a non-flat A over R causes no problem; A=0 makes the criterion vacuous. Step 1: lem-weil-pbc-localization-tensor-over-base applied with R:=A, A:=A, M:=A, N:=T and S=A minus p gives T_p = A_p (x)_A T. The fraction formulas match def-weil-pbc-module-localization. Step 2: A_p is S^{-1}A, which is flat over A by lem-weil-pbc-localization-flat. That meets every hypothesis of the same-unit node lem-trf-tor-flat-base-change, and the composite map is identified with the canonical map explicitly on cycles. Step 3: lem-weil-pbc-linear-map-bijective-at-maximal-localizations (00HN(6), l.4051) applied to T->0 gives the converse with no extra hypotheses. All 00D2/00DK/00HN/00HT/00LY/00M8 tags match tags/tags. The flat-base-change node does not cite the item, so there is no cycle, and it is in the same unit; the sec-proper-base-change citations are Mathlib leaves and definitions. The duplicate search found lem-pc-derived-tensor-flat-second-localization, a derived generalization in another unit; citing it would leave the unit's route, so it is correctly not used. Parent lem-trf-log-regular-monomial-tor Step 2 uses the item exactly as stated. One minor point, not changed: an inherited Loogle record says 'unavailable', but its result was a query error (unknown identifier), not a service outage; a later Loogle search with 0 hits is recorded."
  }
 }
