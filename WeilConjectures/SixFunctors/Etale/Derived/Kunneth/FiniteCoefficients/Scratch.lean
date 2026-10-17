@@ -48,14 +48,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 of `M_W` at every geometric point is `M`. -/
 instance preservesFlat_constantSheaf (W : Scheme.{u}) :
     (constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesFlat where
+  flat_obj {M} hM := (flat_iff_forall_flat_sheafFiber_obj _).2 fun s ↦
+    ObjectProperty.prop_of_iso _
+      ((pointSmallEtale s).ulift.{u + 1}.sheafFiberConstantSheafIso M).symm hM
 
 noncomputable def testA (W : Scheme.{u}) (M N : DerivedCategory (ModuleCat.{u + 1} Λ)) :=
-  ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).leftDerivedTensorComparison.app M).app N
-
-noncomputable def testB (W : Scheme.{u}) (M N : DerivedCategory (ModuleCat.{u + 1} Λ)) :
-    L(constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M ⊗ N) ⟶
-      L(constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M ⊗
-        L(constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N :=
   ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).leftDerivedTensorComparison.app M).app N
 
 end Etale

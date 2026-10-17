@@ -95,6 +95,7 @@ lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h
     NatIso.isIso_map_iff (rightDerivedLowerStarIdIso Λ X')]
   exact Iff.rfl
 
+set_option maxHeartbeats 0 in
 /-- The base change map at the unit of a commutative square `hᵢ ≫ π' = ρ ≫ h` is an isomorphism
 if the derived base change map `Lπ'^* Rh_* K ⟶ Rhᵢ_* Lρ^* K` is. -/
 lemma isIso_tensorBaseChangeMap_tensorUnit {X' Y X'ᵢ Yᵢ : Scheme.{u}} (h : Y ⟶ X')
