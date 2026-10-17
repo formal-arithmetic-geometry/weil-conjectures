@@ -128,7 +128,7 @@ private theorem modulePullbackComparison_homology_degree_isIso
   have hP := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
     Y.toRingedSpace P ⟨n, hbound⟩ hflat
   obtain ⟨I, hI, hImap, _, _, _, _, E, hE, hEmap, hEadd, ε₀, hL, _, hKflat⟩ :=
-    derivedPullback_spec a
+    (derivedPullback_spec a)
   have he : E = F := CategoryTheory.Functor.ext hE (fun M N f ↦ hEmap f)
   subst E
   have : (derivedPullback a).IsLeftDerivedFunctor ε₀

@@ -140,7 +140,7 @@ private theorem tensorUnit_counit_kFlat_isIso {T X : Scheme.{uModel}} (g : T ⟶
   subst F
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       F₀, hF₀, hmap₀, hF₀add, ε₀, hderived₀, htri, hε₀⟩ :=
-    derivedPullback_spec g
+    (derivedPullback_spec g)
   have hF₀E : F₀ = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF₀ (fun _ _ a ↦ hmap₀ a)
   subst F₀

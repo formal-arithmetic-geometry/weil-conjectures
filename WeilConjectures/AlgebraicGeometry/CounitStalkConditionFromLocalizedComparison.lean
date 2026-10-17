@@ -36,7 +36,7 @@ private theorem resolution_counit_isIso
     IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      derivedPullback_spec g'
+      (derivedPullback_spec g')
   have h : E = Scheme.Modules.tensorPullback g' :=
     CategoryTheory.Functor.ext hE (fun M N a => hEmap a)
   subst E
