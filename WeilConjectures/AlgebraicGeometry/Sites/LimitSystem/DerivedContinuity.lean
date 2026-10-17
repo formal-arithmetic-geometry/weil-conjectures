@@ -97,11 +97,11 @@ lemma isHyperHContinuousAt_of_subsingleton
   obtain ⟨i⟩ := IsCofiltered.nonempty (C := I)
   refine ⟨fun x ↦ ⟨i, 0, Subsingleton.elim _ _⟩, fun i y _ ↦ ⟨i, 𝟙 i, Subsingleton.elim _ _⟩⟩
 
-/-- Continuity is transported along invertible morphisms `β : K ⟶ L[m]`. -/
+omit [IsCofiltered I] in
+/-- Continuity is transported along morphisms `β : K ⟶ L[m]` with a right inverse. -/
 lemma IsHyperHContinuousAt.of_shiftedHom
     {K L : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} {m m' n n' : ℤ}
-    (β : ShiftedHom K L m) (γ : ShiftedHom L K m') (hm : m' + m = 0) (hm' : m + m' = 0)
-    (hβγ : β.comp γ hm = ShiftedHom.mk₀ 0 rfl (𝟙 K))
+    (β : ShiftedHom K L m) (γ : ShiftedHom L K m') (hm' : m + m' = 0)
     (hγβ : γ.comp β hm' = ShiftedHom.mk₀ 0 rfl (𝟙 L)) (h : m + n = n')
     (hK : IsHyperHContinuousAt D c K n) : IsHyperHContinuousAt D c L n' := by
   have h' : m' + n' = n := by omega
@@ -117,11 +117,11 @@ lemma IsHyperHContinuousAt.of_shiftedHom
     rw [overRestrict_overPostcomp] at hg
     rw [← hγβ' _ y, overRestrict_overPostcomp, overRestrict_overPostcomp, hg, map_zero]
 
+omit [IsCofiltered I] in
 lemma IsHyperHContinuousAt.of_iso
     {K L : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} (e : K ≅ L)
     {n : ℤ} (hK : IsHyperHContinuousAt D c K n) : IsHyperHContinuousAt D c L n :=
   hK.of_shiftedHom (ShiftedHom.mk₀ 0 rfl e.hom) (ShiftedHom.mk₀ 0 rfl e.inv) (add_zero 0)
-    (add_zero 0) (by rw [ShiftedHom.mk₀_comp_mk₀, e.hom_inv_id])
     (by rw [ShiftedHom.mk₀_comp_mk₀, e.inv_hom_id]) (zero_add n)
 
 /-- **The five lemma for continuity.** -/
@@ -261,17 +261,17 @@ lemma subsingleton_hyperH_of_isGE (T : Over S)
     (show _ ⟶ _ from x) 0 1, DerivedCategory.TStructure.t.zero
     (X := (DerivedCategory.singleFunctor _ 0).obj _) (show _ ⟶ _ from y) 0 1]
 
+omit [IsCofiltered I] in
 /-- Continuity is stable under shifts. -/
 lemma IsHyperHContinuousAt.shift
     {K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} (m : ℤ) {n : ℤ}
     (hK : IsHyperHContinuousAt D c K (n + m)) : IsHyperHContinuousAt D c (K⟦m⟧) n := by
   refine hK.of_shiftedHom (m := -m) (m' := m)
     ((shiftFunctorCompIsoId _ m (-m) (add_neg_cancel m)).inv.app K : K ⟶ K⟦m⟧⟦-m⟧)
-    (𝟙 (K⟦m⟧) : K⟦m⟧ ⟶ K⟦m⟧) (add_neg_cancel m) (neg_add_cancel m) ?_ ?_ (by omega)
-  · simp [ShiftedHom.comp, ShiftedHom.mk₀, shiftFunctorCompIsoId, shiftFunctorZero']
-  · simp only [ShiftedHom.comp, ShiftedHom.mk₀, CategoryTheory.Functor.map_id, Category.id_comp]
-    rw [shift_shiftFunctorCompIsoId_inv_app]
-    simp [shiftFunctorCompIsoId, shiftFunctorZero']
+    (𝟙 (K⟦m⟧) : K⟦m⟧ ⟶ K⟦m⟧) (neg_add_cancel m) ?_ (by omega)
+  simp only [ShiftedHom.comp, ShiftedHom.mk₀, Category.id_comp]
+  rw [shift_shiftFunctorCompIsoId_inv_app]
+  simp [shiftFunctorCompIsoId, shiftFunctorZero']
 
 variable (D c) in
 /-- Hypothesis: continuity for single sheaves in degree `0`. -/
@@ -279,6 +279,7 @@ def SingleContinuity : Prop :=
   ∀ (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℤ),
     IsHyperHContinuousAt D c ((DerivedCategory.singleFunctor _ 0).obj F) n
 
+omit [IsCofiltered I] in
 lemma isHyperHContinuousAt_singleFunctor (hs : SingleContinuity D c)
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (a n : ℤ) :
     IsHyperHContinuousAt D c ((DerivedCategory.singleFunctor _ a).obj F) n :=
@@ -365,8 +366,8 @@ lemma singleContinuity_of_isLimit (hc : IsLimit ((Over.forget S).mapCone c)) :
       obtain ⟨i, y, hy⟩ := hs e
       refine ⟨i, sheafHEquivHyperH F (D.obj i) q y, ?_⟩
       rw [overRestrict_sheafHEquivHyperH]
-      dsimp only [coneπ]
-      rw [hy, ← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app, Sheaf.H.map_id_apply]
+      congr 1
+      erw [hy, ← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app, Sheaf.H.map_id_apply]
     · obtain ⟨e, rfl⟩ := (sheafHEquivHyperH F (D.obj i) q).bijective.2 y
       rw [overRestrict_sheafHEquivHyperH, ← sheafHEquivHyperH_zero F c.pt q] at hy
       have h0 := (sheafHEquivHyperH F c.pt q).bijective.1 hy

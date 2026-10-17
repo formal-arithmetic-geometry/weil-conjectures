@@ -114,9 +114,14 @@ lemma bijective_shiftedHom_map_comparisonUpperStar {U : Scheme.{u}}
   have hplus : DerivedCategory.TStructure.t.plus (L⟦n⟧) :=
     ⟨a - n, DerivedCategory.TStructure.t.isGE_shift L a n (a - n) (by omega)⟩
   have h := bijective_comparisonUpperStar_mapDerivedCategory_map P (L⟦n⟧) hplus
-  have he := (Iso.homToEquiv (Iso.refl (D(ν^*(U)[AddCommGrpCat.{u + 1}]).obj P))
-    ((D(ν^*(U)[AddCommGrpCat.{u + 1}]).commShiftIso n).app L)).bijective
-  exact he.comp h
+  have e : (fun x : ShiftedHom P L n ↦ x.map D(ν^*(U)[AddCommGrpCat.{u + 1}])) =
+      (Iso.homToEquiv (Iso.refl (D(ν^*(U)[AddCommGrpCat.{u + 1}]).obj P))
+        ((D(ν^*(U)[AddCommGrpCat.{u + 1}]).commShiftIso n).app L)) ∘
+        (fun g : P ⟶ L⟦n⟧ ↦ D(ν^*(U)[AddCommGrpCat.{u + 1}]).map g) := by
+    ext x
+    simp [ShiftedHom.map, Iso.homToEquiv]
+  rw [e]
+  exact (Equiv.bijective _).comp h
 
 /-- Blueprint `det-sf-comparison-affine-continuity`: Pro-étale cohomology of a pro-étale affine.
 
@@ -136,7 +141,9 @@ theorem proEtaleHyperH_affine_continuity {X : Scheme.{u}} {I : Type u} [SmallCat
   refine ⟨isHyperHContinuousAt_of_isLimit D c hc K a n, ?_⟩
   have : (D(Etale.upperStar AddCommGrpCat.{u + 1} c.pt.hom).obj K).IsGE a :=
     Functor.isGE_mapDerivedCategory_obj _ K a
-  exact (bijective_mk₀_comp _ n).comp ((bijective_shiftedHom_comp_mk₀ _ n).comp
+  exact (bijective_mk₀_comp (comparisonUnitSheafIso c.pt.left) n).comp
+    ((bijective_shiftedHom_comp_mk₀
+      ((mapDerivedCategoryComparisonUpperStarRestrictIso c.pt.hom).app K).symm n).comp
     (bijective_shiftedHom_map_comparisonUpperStar _ _ a n))
 
 end AlgebraicGeometry.ProEtale

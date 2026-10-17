@@ -95,22 +95,64 @@ lemma prism_comp {l m n : ℕ} (θ' : ⦋l⦌ ⟶ ⦋m⦌) (θ : ⦋m⦌ ⟶ ⦋
     rfl
   · have h1 : (θ'.toOrderHom k).val ≤ (θ'.toOrderHom ⟨i.val - 1, by simp at *; omega⟩).val :=
       toOrderHom_val_mono θ' (by simp only; omega)
-    rw [prismFun_of_lt θ' k i (by omega), prismFun_of_lt _ _ _ (by simp; omega),
+    rw [prismFun_of_lt θ' k i (by omega), prismFun_of_lt _ _ _ (by simp <;> omega),
       prismFun_of_lt _ k i (by omega)]
     simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply]
     congr 2
+
+lemma δ_val {n : ℕ} (i : Fin (n + 2)) (x : Fin (n + 1)) :
+    ((δ i).toOrderHom x).val = if x.val < i.val then x.val else x.val + 1 := by
+  simp only [δ, mkHom, Hom.toOrderHom_mk, OrderEmbedding.toOrderHom_coe,
+    Fin.succAboveOrderEmb_apply, Fin.succAbove]
+  split_ifs with h₁ h₂ h₂ <;> simp_all [Fin.lt_def]
+
+lemma σ_val {n : ℕ} (i : Fin (n + 1)) (x : Fin (n + 2)) :
+    ((σ i).toOrderHom x).val = if x.val ≤ i.val then x.val else x.val - 1 := by
+  change (i.predAbove x).val = _
+  split_ifs with h
+  · rw [Fin.predAbove_of_le_castSucc _ _ (by rw [Fin.le_def]; simpa using h)]
+    simp
+  · rw [Fin.predAbove_of_castSucc_lt _ _ (by rw [Fin.lt_def]; simp; omega)]
+    simp
 
 /-- The faces between consecutive prism simplices agree. -/
 lemma δ_comp_prism_succ {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (j : Fin m) :
     δ j.succ.castSucc ≫ prism θ j.succ = δ j.succ.castSucc ≫ prism θ j.castSucc := by
   ext x : 3
   simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply, prism_apply]
+  have hδ := δ_val j.succ.castSucc x
+  simp only [Fin.val_castSucc, Fin.val_succ] at hδ
   by_cases hx : x.val ≤ j.val
-  · have hδ : ((δ j.succ.castSucc).toOrderHom x).val = x.val := by
-      simp [δ, Fin.succAbove, Fin.lt_def]; omega
-    rw [prismFun_of_le _ _ _ (by simp; omega), prismFun_of_le _ _ _ (by simp; omega)]
-  · have hδ : ((δ j.succ.castSucc).toOrderHom x).val = x.val + 1 := by
-      simp [δ, Fin.succAbove, Fin.lt_def]; omega
-    rw [prismFun_of_lt _ _ _ (by simp; omega), prismFun_of_lt _ _ _ (by simp; omega)]
+  · rw [if_pos (by omega)] at hδ
+    rw [prismFun_of_le _ _ _ (by rw [hδ, Fin.val_succ]; omega),
+      prismFun_of_le _ _ _ (by rw [hδ, Fin.val_castSucc]; omega)]
+  · rw [if_neg (by omega)] at hδ
+    rw [prismFun_of_lt _ _ _ (by rw [hδ, Fin.val_succ]; omega),
+      prismFun_of_lt _ _ _ (by rw [hδ, Fin.val_castSucc]; omega)]
+
+lemma δ_zero_comp_prism_zero {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) :
+    δ 0 ≫ prism θ 0 = θ ≫ δ 0 := by
+  ext x : 3
+  simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply, prism_apply]
+  generalize hy : (δ 0).toOrderHom x = y
+  have hyv : y.val = x.val + 1 := by rw [← hy, δ_val]; simp
+  rw [prismFun_of_lt _ _ _ (by rw [Fin.val_zero, hyv]; omega)]
+  apply Fin.ext
+  rw [Fin.val_succ, δ_val, if_neg (by simp)]
+  congr 1
+  exact congrArg Fin.val (toOrderHom_congr θ (by simp <;> omega))
+
+lemma δ_last_comp_prism_last {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) :
+    δ (Fin.last (m + 1)) ≫ prism θ (Fin.last m) = θ ≫ δ (Fin.last (n + 1)) := by
+  ext x : 3
+  simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply, prism_apply]
+  generalize hy : (δ (Fin.last (m + 1))).toOrderHom x = y
+  have hx := x.isLt
+  simp only [len_mk] at hx
+  have hyv : y.val = x.val := by rw [← hy, δ_val, if_pos (by simp <;> omega)]
+  rw [prismFun_of_le _ _ _ (by rw [hyv, Fin.val_last]; omega)]
+  apply Fin.ext
+  rw [Fin.val_castSucc, δ_val, if_pos (by simp <;> omega)]
+  exact congrArg Fin.val (toOrderHom_congr θ (by simp <;> omega))
 
 end SimplexCategory
