@@ -17,7 +17,7 @@
 | `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 7 | proof |
-| `Sheaf.CategoryTheory.SetGeneratedDerivedSolutionSet` | 4 | 1 | proof |
+| `Sheaf.CategoryTheory.DerivedPerfectSmallClass` | 6 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitCore` | 14 | 1 | proof |
 
