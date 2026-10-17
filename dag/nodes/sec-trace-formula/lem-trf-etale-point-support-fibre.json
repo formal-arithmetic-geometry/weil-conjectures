@@ -15,11 +15,69 @@
   "def-trf-geometric-morphism",
   "def-weil-geometric-point",
   "lem-trf-etale-topos-points-geometric",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "lem-trf-etale-point-morphism-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-trf-etale-topos-points-geometric], every point of S_Et is represented by a geometric point x̄:Spec Ω→S, and its inverse image is the geometric stalk colimit. For two such representatives, [lem-trf-etale-point-morphism-classification] identifies 2-morphisms of the associated topos points with the unique morphisms of geometric points over S; [lem-weil-pbc-geometric-point-morphism-stalk-bijection] supplies the bijectivity of the induced stalk maps. Thus the point category may be computed using geometric representatives and their field maps.",
+   "uses": [
+    "lem-trf-etale-topos-points-geometric",
+    "lem-trf-etale-point-morphism-classification",
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04HU and 04FN"
+   }
+  },
+  {
+   "text": "If x̄ lies over s, its structure map factors through the canonical residue-field point i_s:Spec κ(s)→S: the map κ(s)→Ω induced by the geometric point gives Spec Ω→Spec κ(s), and composition with i_s is x̄. Conversely every geometric point obtained by postcomposition with i_s has underlying support s. Therefore the postcomposition functor has essential image exactly the points supported at s.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definition 04FS (geometric point over s) and Lemma 04HU"
+   }
+  },
+  {
+   "text": "For two residue-field points, a 2-morphism after postcomposition with i_s is, by Step 1 and the morphism-classification statement, exactly the same field morphism over κ(s) as the corresponding 2-morphism before postcomposition. Composition with i_s does not change the pointed étale-neighbourhood functor: a neighbourhood of Spec κ(s) is sent to the same étale S-scheme with the composed geometric lift. Hence the induced map on every Hom-set is bijective, so postcomposition is fully faithful.",
+   "uses": [
+    "lem-trf-etale-point-morphism-classification",
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 04FN and Definition 04FS"
+   }
+  },
+  {
+   "text": "Given any two objects in the support-s fibre subcategory, factor geometric representatives through i_s by Step 2. The common-extension lemma [lem-trf-family-common-extension-field] embeds their two algebraically closed residue fields over κ(s) into one field K. Choosing an algebraic closure of K gives a geometric point whose stalk point receives morphisms from both representatives. By [lem-weil-pbc-geometric-point-morphism-stalk-bijection] these induce invertible 2-morphisms, so the two original objects are isomorphic. The same argument with one object on both sides shows every endomorphism is invertible; Step 3 gives the unique lift of each automorphism to the residue-field point.",
+   "uses": [
+    "lem-trf-family-common-extension-field",
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+    "lem-trf-etale-point-morphism-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ common-extension construction; literature/stacks-project/etale-cohomology.tex Tag 04FN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-point-morphism-classification",
+  "lem-trf-etale-topos-points-geometric",
+  "lem-trf-family-common-extension-field",
+  "lem-weil-pbc-geometric-point-morphism-stalk-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HU and 04FN, expanded with the common-extension construction of Tag 0CNJ and the point-category 2-morphism calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-point-normalized-stratum",
@@ -70,7 +128,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Fixed-second-support reduction in Orgogozo, proof of Lemma 8.3.2, printed p. 18; generic point support and its automorphisms, before the normal-base transitivity argument in the nearby-cycle input to lem-trf-local-term-locality (1)–(2).",
+   "place": "Fixed-second-support reduction in Orgogozo, proof of Lemma 8.3.2, printed p. 18: geometric representatives over a fixed support, their automorphisms, and the residue-field point comparison.",
    "via": [
     "lem-trf-oriented-point-normalized-stratum",
     "lem-trf-oriented-maximal-point-finiteness",
@@ -84,5 +142,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-point-support-fibre",
+  "worker": "stage1",
+  "summary": "Split the fixed-support point-category assertion into four proof steps. Existing Stacks-derived nodes classify geometric topos points and give bijective stalk maps for geometric-point morphisms; a new statement-only auxiliary records the converse classification of 2-morphisms by field maps. The residue-field factorization gives the essential image and full faithfulness, while the existing common-extension field node proves connectedness and invertibility. No statement correction was needed.",
+  "blueprint": "Fixed-second-support reduction in Orgogozo Lemma 8.3.2, printed p. 18: geometric representatives over one scheme point and their residue-field automorphisms.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-280398348",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-280398348 (reviewer sub-agent of L); spot-checked: Read the complete delivery, unit/chapter route, cited nodes, and Stacks sources 04HU, 04FN, and 0CNJ. Verified all four proof steps, hypotheses, residue-field factorization, full faithfulness, common-field connectedness, invertibility, edge cases, duplicate searches, acyclicity, and route-pivot compliance. The auxiliary converse-classification lemma is a proper smaller statement-only node. Review written to review.md; no repairs or tool uses accepted."
  }
 }

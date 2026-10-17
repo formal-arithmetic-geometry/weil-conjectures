@@ -12,9 +12,60 @@
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By clause (iii) in the definition of a Krull domain, the nonzero element b belongs to only finitely many height-one primes. Enumerate precisely those primes as P_1, ..., P_t. If t=0, this list is empty and the later intersection convention is D.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Definition 4.10.1 and Proposition 4.10.3, printed p. 89"
+   }
+  },
+  {
+   "text": "Fix i. By the height-one localization dimension statement [lem-weil-pbc-localization-dimension-chains-below-prime], D_{P_i} is one-dimensional; clause (i) of the Krull definition makes it Noetherian and normal, and localization at P_i makes it local. Therefore [lem-sc-normal-dim1-dvr] makes D_{P_i} a discrete valuation ring. Since b∈P_i, b/1 is a nonunit. The existing DVR power statement [lem-weil-pbc-dvr-unit-times-uniformizer-power] gives bD_{P_i}=π_i^{n_i}D_{P_i} with n_i≥1, and its radical is the maximal ideal: writing m=(π_i), one has (π_i^{n_i})⊆m, so its radical is contained in the prime ideal m; conversely π_i^{n_i} belongs to (π_i^{n_i}), so π_i belongs to its radical and m is contained in that radical. The exponent is positive because exponent zero would make b/1 a unit. The localization-contraction statement [lem-trf-localization-maximal-contraction] identifies the contraction of that maximal ideal with P_i. Since J_i is the contraction of bD_{P_i}, contraction commutes with taking the radical here: x∈√J_i iff x/1∈√(bD_{P_i}). Hence √J_i=P_i.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-sc-normal-dim1-dvr",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-trf-localization-maximal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Definition 4.10.1 and Proposition 4.10.3 with proof, printed p. 89; localization and DVR radical calculation expanded by the worker"
+   }
+  },
+  {
+   "text": "For x∈bD, write x=bd. Then x/1 belongs to bD_{P_i} for every i, so bD is contained in every J_i. Conversely, let x belong to every J_i. Then x/b lies in D_{P_i} for each height-one prime P_i containing b. If P is any other height-one prime, b∉P, so b is a unit in D_P and x/b∈D_P automatically. Thus x/b lies in every height-one localization of D. Clause (ii) of the Krull-domain definition gives x/b∈D, and therefore x∈bD. Hence bD=⋂_{i=1}^t J_i.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Definition 4.10.1(ii) and Proposition 4.10.3 proof, printed p. 89"
+   }
+  },
+  {
+   "text": "When t=0, every height-one localization makes b a unit, so the same intersection argument gives bD=D; this is exactly the stipulated empty-intersection convention. The radicals statement is asserted only for the listed primes, so all clauses hold in the unit case as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proposition 4.10.3 proof, printed p. 89"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-normal-dim1-dvr",
+  "lem-trf-localization-maximal-contraction",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Worker-written expansion of Definition 4.10.1 and Proposition 4.10.3 (printed p. 89); local PDF unavailable, with the imported statement checked against the cited result."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +104,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-normalization-principal-minimal-primes",
@@ -65,7 +116,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Orgogozo Lemma 8.3.2 proof, final finite-type alternative: Heinzer’s Corollary for the normalization of a Noetherian integral domain supplies the Noetherian normalization spectrum. Algebraic input for the Noetherian induction proving the Heinzer normalization assertion. Specifically: the Krull-domain primary decomposition of a nonzero principal ideal from Swanson–Huneke Proposition 4.10.3, used before the explicit finite-radical calculation.",
+   "place": "Orgogozo Lemma 8.3.2 proof, final finite-type alternative: the Krull-domain primary decomposition of a nonzero principal ideal from Swanson–Huneke Proposition 4.10.3, used before the explicit finite-radical calculation.",
    "via": [
     "lem-trf-normalization-principal-minimal-primes",
     "lem-trf-integral-extension-noetherian-spectrum",
@@ -81,5 +132,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-krull-principal-primary-decomposition",
+  "worker": "stage1",
+  "summary": "Reviewer repair: reuse the existing localization-height Mathlib leaf, and write the elementary radical-of-uniformizer-power calculation directly in step 2. Drop the two unnecessary new support nodes.",
+  "blueprint": "Realizes the inherited blueprint algebraic input used before the finite-radical calculation: finite height-one support, contractions bD_P∩D, equality by the Krull intersection property, and radicals equal to P.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "The Krull route needs the standard theorem that a one-dimensional Noetherian normal local domain is a DVR; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-ceee4cef5",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-ceee4cef5 (reviewer sub-agent of L); spot-checked: Verified all four proof steps, three new nodes, cited statements, Swanson–Huneke p. 89, Stacks, Mathlib sources, and edge cases. Reused the existing localization-dimension leaf, expanded the elementary radical calculation inline, and corrected the retained contraction node’s source and ancestry. Corrected JSON files and detailed checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer"
  }
 }
