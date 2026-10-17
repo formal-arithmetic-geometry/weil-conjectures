@@ -12,9 +12,84 @@
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-isofibration-exponentiation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a vertex $z\\in E$. Put $A=\\operatorname{Map}_E(y,z)$, $C=\\operatorname{Map}_E(x,z)$, $U=\\operatorname{Map}_B(p(y),p(z))$, and $V=\\operatorname{Map}_B(p(x),p(z))$. These are Kan complexes by [lem-coef-infinity-pinch-comparison]. Write $a:A\\to C$ for precomposition by $u$, $k:U\\to V$ for precomposition by $p(u)$, and $r:C\\to V$ for the map induced by $p$. Apply [lem-coef-infinity-cocartesian-mapping-criterion] to the given inner fibration and the single horn-cocartesian edge $u$: the resulting square has a weak homotopy equivalence $A\\to P(k,r)$ as its comparison map, where $P(k,r)=U\\times_{V,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,V)\\times_{\\operatorname{ev}_1,V}C$. Its projection to $C$ is $a$. No other lift has been chosen.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, opposite-category dual, as an alternative proof of the forward implication of Proposition 2.4.1.5."
+   }
+  },
+  {
+   "text": "Choose an inverse edge $v:p(y)\\to p(x)$ of $p(u)$, with its two inverse triangles. By the associative and unital composition classes of [lem-coef-infinity-mapping-composition], precomposition by $v$ is a homotopy inverse of $k$: the composites are precomposition by $v\\circ p(u)$ and by $p(u)\\circ v$, respectively, and the triangles identify these with identity classes. Thus for every Kan complex $W$, precomposition by $k$ is a bijection on $\\pi_0^{\\mathrm e}\\operatorname{Fun}(-,W)$: an inverse is induced by its homotopy inverse, since precomposing a simplicial homotopy with a map to $W$ gives an edge between the resulting maps. The Kan-target testing criterion [lem-cbc-realization-weak-equivalence] therefore says that $k$ is a weak homotopy equivalence. This deduction uses only composition and the testing criterion, and does not replace the horn-cocartesian hypothesis by a property of the ordinary homotopy category.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Propositions 4.6.8.11 and 4.6.8.12 (unitality and associativity); Notation 4.6.8.15 (precomposition). Kan-target criterion: Kerodon Corollary 3.6.4.3 (03X7)."
+   }
+  },
+  {
+   "text": "Compare the two cospans $U\\xrightarrow{k}V\\xleftarrow{r}C$ and $V\\xrightarrow{\\mathrm{id}}V\\xleftarrow{r}C$ by the three maps $(k,\\mathrm{id}_V,\\mathrm{id}_C)$. These commute strictly and are weak homotopy equivalences. By [lem-coef-kan-homotopy-pullback-invariance] they induce a weak homotopy equivalence $F:P(k,r)\\to P(\\mathrm{id}_V,r)$; explicitly $F(t,\\gamma,c)=(k(t),\\gamma,c)$. The constant-path map $j:C=V\\times_V C\\to P(\\mathrm{id}_V,r)$ is a weak homotopy equivalence by [lem-coef-kan-pullback-path-comparison], since $\\mathrm{id}_V$ lifts every horn. Projection $q:P(\\mathrm{id}_V,r)\\to C$ satisfies $qj=\\mathrm{id}_C$, so $q$ is a weak homotopy equivalence by two-out-of-three. Composing the weak equivalences $A\\to P(k,r)\\xrightarrow{F}P(\\mathrm{id}_V,r)\\xrightarrow{q}C$ proves that $a$ is a weak homotopy equivalence. Two-out-of-three here follows directly on components and all based homotopy groups. All path spaces are Kan by the cited comparison statement; neither $r$ nor $p$ has been assumed to be an isofibration.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/032B",
+    "place": "Proposition 3.4.0.9 (invariance), specialized to the three displayed maps, and Proposition 3.4.0.7 (0329), specialized to an identity leg. The displayed application is agent-written."
+   }
+  },
+  {
+   "text": "The components comparison in [lem-coef-kan-realization-serre] turns Step 3 into bijections $\\pi_0\\operatorname{Map}_E(y,z)\\to\\pi_0\\operatorname{Map}_E(x,z)$ for every $z$. Work in the ordinary category $hE$ provided by [lem-coef-infinity-mapping-composition]. At $z=x$, surjectivity gives a class $[w]:y\\to x$ with $[w][u]=1_x$; it has an edge representative $w$. At $z=y$, the classes $[u][w]$ and $1_y$ have the same image under precomposition by $[u]$, since $([u][w])[u]=[u]([w][u])=[u]=1_y[u]$. Injectivity gives $[u][w]=1_y$. Thus $[u]$ is invertible. The same composition node identifies invertibility of its component class with the two inverse-triangle witnesses defining an equivalence edge, so $u$ is an equivalence in $E$. The inverse construction and cancellation are elementary ordinary-category calculations; the cited nodes supply the component comparison and its interpretation as equivalence edges.",
+   "uses": [
+    "lem-coef-kan-realization-serre",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Remark 4.6.8.14 (homotopy category), Notation 4.6.8.15, and the inverse-triangle interpretation of Definition 1.4.6.1. The explicit two-object cancellation argument is agent-written."
+   }
+  },
+  {
+   "text": "Now assume that $p:E\\to B$ is a cocartesian fibration. For a vertex $x$ and an equivalence edge $\\alpha:p(x)\\to b$, the existence clause in [def-coef-infinity-fibrations] supplies a $p$-cocartesian edge $\\widetilde\\alpha:x\\to y$ with $p(\\widetilde\\alpha)=\\alpha$, hence $p(y)=b$ exactly. Steps 1-4 applied to this edge make $\\widetilde\\alpha$ an equivalence. The same definition already supplies that $p$ is an inner fibration between quasicategories. These are exactly the inner-fibration and source-fixed equivalence-lifting clauses of isofibration in [lem-coef-infinity-isofibration-exponentiation]. The first assertion used only the specified cocartesian edge; existence of lifts is used only in this final consequence.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.5, dualized, and Definition 2.4.2.1, dualized; immediate source-fixed lifting consequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-realization-serre",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-isofibration-exponentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting infinity-categorical foundation of paragraph 2, the coherent derived mapping-complex calculation. Explicit alternative mapping-space proof of HTT Proposition 2.4.1.5 via Proposition 2.4.4.3; online references read, archive WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +132,45 @@
    "results": "{\"t\": \"2026-10-17T13:22:05Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian arrow over an invertible base arrow is an equivalence in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\"], \"digest\": \"a5c19243cd7245cc\"}",
    "date": "2026-10-17",
    "verdict": "no match: the leading hit IsStronglyCocartesian.isIso_of_base_isIso (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:343) assumes ordinary categories and strict factorization. The node concerns horn-cocartesian edges in quasicategories and their equivalence lifts."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_base_isIso|cocartesian.*equivalence|cocartesian.*[Ii]so",
+   "results": "{\"t\": \"2026-10-17T13:42:15Z\", \"tool\": \"grep\", \"query\": \"isIso_of_base_isIso|cocartesian.*equivalence|cocartesian.*[Ii]so\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\"], \"digest\": \"bedf53de2be474c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; the closest declaration CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:343-354) is about ordinary categories and strict factorization. Horn-cocartesian quasicategory edges require a separate comparison theorem, so this is not a one-line specialization. Other hits concern Kan fibrations or ordinary cocartesian universal properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocartesian fibration of quasicategories lifts equivalences to equivalences",
+   "results": "{\"t\": \"2026-10-17T13:42:16Z\", \"tool\": \"leansearch\", \"query\": \"A cocartesian fibration of quasicategories lifts equivalences to equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\"], \"digest\": \"d9dac28e070766aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; the closest declaration CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:343-354) is about ordinary categories and strict factorization. Horn-cocartesian quasicategory edges require a separate comparison theorem, so this is not a one-line specialization. Other hits concern Kan fibrations or ordinary cocartesian universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso",
+   "results": "{\"t\": \"2026-10-17T13:42:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\"], \"digest\": \"f3f3adad3cb58ad6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; the closest declaration CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:343-354) is about ordinary categories and strict factorization. Horn-cocartesian quasicategory edges require a separate comparison theorem, so this is not a one-line specialization. Other hits concern Kan fibrations or ordinary cocartesian universal properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian edge of an inner fibration between quasicategories over an equivalence is an equivalence",
+   "results": "{\"t\": \"2026-10-17T13:42:17Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian edge of an inner fibration between quasicategories over an equivalence is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"f1fd853f0c518c97\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; the closest declaration CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:343-354) is about ordinary categories and strict factorization. Horn-cocartesian quasicategory edges require a separate comparison theorem, so this is not a one-line specialization. Other hits concern Kan fibrations or ordinary cocartesian universal properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration with cocartesian lifts has the equivalence lifting property of an isofibration",
+   "results": "{\"t\": \"2026-10-17T13:42:32Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration with cocartesian lifts has the equivalence lifting property of an isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"2b5b1ec4115395bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types; the closest declaration CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:343-354) is about ordinary categories and strict factorization. Horn-cocartesian quasicategory edges require a separate comparison theorem, so this is not a one-line specialization. Other hits concern Kan fibrations or ordinary cocartesian universal properties."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-colored-operation-section-reconstruction",
@@ -86,5 +196,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocartesian-equivalence-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the base-equivalence implication using the existing horn-cocartesian mapping-space criterion, composition classes, Kan-target weak-equivalence test and path-pullback invariance; constructed an explicit inverse in the homotopy category and then obtained exact source-fixed lifts. No new nodes and no Lean attachment. Recorded fresh logged searches and verbatim citations.",
+  "blueprint": "The inherited ancestry is prop-coef-integral-exceptional-adjoint, proof paragraph 2, the coherent derived mapping-complex comparison: this item supplies the cocartesian-base-equivalence/isofibration verification in step 4 of lem-coef-colored-operation-section-reconstruction, below its coherent section construction. It changes neither the coefficient adjunction nor a unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Step 2 uses only its general Kan-target characterization of weak homotopy equivalences to turn a simplicial homotopy inverse into a weak homotopy equivalence. This generic simplicial-set test is not a replacement of any coefficient or duality step; no same-unit node states that test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-weak-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-4ebeb6fea",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-4ebeb6fea (reviewer sub-agent of L); spot-checked: I read the item, the report and the full statement of every cited node; I made no fixes. The statement is unchanged and is the cocartesian dual of HTT Prop. 2.4.1.5. HTT and Kerodon are not in literature/: the report lists them as WANTED and the proof is marked agent-written, which is the correct handling. Step 1: the cocartesian-mapping-criterion ('only if' direction, for one horn-cocartesian edge of an inner fibration) and pinch-comparison (mapping spaces are Kan) give a weak equivalence A->P(k,r) whose C-coordinate is a. Step 2: the inverse v of p(u), with associativity and unitality from mapping-composition, makes precomposition by v a homotopy inverse of k; the Kan-target test (lem-cbc-realization-weak-equivalence (ii)=>(i)) then makes k a weak equivalence. Step 3: pullback-invariance applies to (k,id,id), and both commutations hold strictly. Path-comparison applies with the identity leg, so j:C->P(id_V,r) is a weak equivalence, qj=id, and two-out-of-three gives q. The composite is exactly a. Step 4: the components clause of kan-realization-serre gives bijections on pi_0. At z=x and z=y these give a two-sided inverse in hE, and mapping-composition identifies an invertible class with an equivalence edge. Step 5: the existence clause of def-coef-infinity-fibrations gives a lift with fixed source, and isofibration is used only through its definition clause. Small cases: B a point; N([1])->pt, where the non-identity edge is not cocartesian, so that hypothesis is needed; a point inside a contractible groupoid, which is not an isofibration; E empty. There is no cycle. No duplicate: the closest nodes are marked-cocartesian-lifting, inert-marked-restriction-fibration and left-cone-restriction-cocartesian. The Mathlib candidate IsStronglyCocartesian.isIso_of_base_isIso is for ordinary categories, so the no-leaf verdict is right. All proof dependencies are in the item's unit except lem-cbc-realization-weak-equivalence (sk-prop-sf-cbc). I accept that declared tool use: it is a generic black-box test, and lem-coef-kan-homotopy-pullback-invariance already uses it the same way."
  }
 }
