@@ -21,7 +21,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-cartesian-fibration",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-cofiltered-coherent-equivalence-diagrams"
  ],
  "proof": [
   {
@@ -264,5 +265,48 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianSectionsLimit",
+  "declaration": "SSet.Enhanced.cocartesian_sections_limit",
+  "declarations": [
+   "SSet.Enhanced.strictBaseMap",
+   "SSet.Enhanced.strictRestriction",
+   "SSet.Enhanced.sectionPostcomposition",
+   "SSet.Enhanced.strictDiagramFunctor",
+   "SSet.Enhanced.StrictTransformation",
+   "SSet.Enhanced.strictPullbackFibration",
+   "SSet.Enhanced.strictHolimApex",
+   "SSet.Enhanced.strictTransformationDiagram",
+   "SSet.Enhanced.strictCylinderIndex",
+   "SSet.Enhanced.strictTransformationEdge",
+   "SSet.Enhanced.strictGrothendieckMap",
+   "SSet.Enhanced.strictConstant",
+   "SSet.Enhanced.strictConstantMap",
+   "SSet.Enhanced.constantSectionEvaluation",
+   "SSet.Enhanced.sectionConeEdge",
+   "SSet.Enhanced.SectionConeTriangle",
+   "SSet.Enhanced.IsSectionLimitComparison",
+   "SSet.Enhanced.strictGrothendieckBaseMap",
+   "SSet.Enhanced.cocartesianSectionEvaluation",
+   "SSet.Enhanced.sectionApexMapEdge",
+   "SSet.Enhanced.SectionConeSquare",
+   "SSet.Enhanced.cocartesian_sections_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocartesianSectionsLimit.lean",
+  "statement": "theorem cocartesian_sections_limit {C : Type u} [Category.{v} C] (D : StrictQuasicategoryFunctor.{u, v, w} C) {Q : SSet.{max u v w}} [Quasicategory Q] (q : Q ⟶ SSet.uliftFunctor.{w}.obj (nerve C)) (hq : ∃ (_hbase : Quasicategory (SSet.uliftFunctor.{w}.obj (nerve C))), cocartesianFibration q) (φ : StrictPresentation q hq D) : Quasicategory (cocartesianSections q).toSSet ∧ ∃ t : {t : (coneCategory (strictCoherentDiagram D)) _⦋0⦌ // IsLimiting (strictCoherentDiagram D) t}, ∃ e : (cocartesianSections q).toSSet ⟶ strictHolimApex D t, IsSectionLimitComparison D q hq φ t e ∧ (∀ (C' : Type u) [Category.{v} C'] (u : C' ⥤ C), ∃ (hQ' : Quasicategory (pullback (strictBaseMap u) q)) (hq' : ∃ (_hbase' : Quasicategory (SSet.uliftFunctor.{w}.obj (nerve C'))), cocartesianFibration (strictPullbackFibration q u)) (φ' : @StrictPresentation C' _ (pullback (strictBaseMap u) q) hQ' (strictPullbackFibration q u) hq' (strictRestriction D u)), φ'.1 ≫ pullback.snd (strictBaseMap u) q = strictGrothendieckBaseMap D u ≫ φ.1 ∧ ∃ t' : {t' : (coneCategory (strictCoherentDiagram (strictRestriction D u))) _⦋0⦌ // IsLimiting (strictCoherentDiagram (strictRestriction D u)) t'}, ∃ (r : (cocartesianSections q).toSSet ⟶ (cocartesianSections (strictPullbackFibration q u)).toSSet) (e' : (cocartesianSections (strictPullbackFibration q u)).toSSet ⟶ strictHolimApex (strictRestriction D u) t') (m : strictHolimApex D t ⟶ strictHolimApex (strictRestriction D u) t'), @IsSectionLimitComparison C' _ (strictRestriction D u) (pullback (strictBaseMap u) q) hQ' (strictPullbackFibration q u) hq' φ' t' e' ∧ (𝟙 _ ⊗ₘ r) ≫ cocartesianSectionEvaluation (strictPullbackFibration q u) ≫ pullback.snd (strictBaseMap u) q = (strictBaseMap u ⊗ₘ 𝟙 _) ≫ cocartesianSectionEvaluation q ∧ SectionConeTriangle _ (sectionApexMapEdge C' ((holim (strictCoherentDiagram D) t).2.1 _) ((holim (strictCoherentDiagram (strictRestriction D u)) t').2.1 _) m) (sectionConeEdge (strictRestriction D u) t'.1) (((MonoidalClosed.pre (SSet.uliftFunctor.{max u v w + 1}.map (nerveMap u))).app CatInfinity).app _ (sectionConeEdge D t.1)) ∧ AreNaturallyEquivalent (e ≫ m) (r ≫ e')) ∧ (∀ {Q' : SSet.{max u v w}} [Quasicategory Q'] (D' : StrictQuasicategoryFunctor.{u, v, w} C) (q' : Q' ⟶ SSet.uliftFunctor.{w}.obj (nerve C)) (hq' : ∃ (_hbase' : Quasicategory (SSet.uliftFunctor.{w}.obj (nerve C))), cocartesianFibration q') (φ' : StrictPresentation q' hq' D') (g : Q ⟶ Q') (η : StrictTransformation D D') (comm : g ≫ q' = q) (_gcomp : φ.1 ≫ g = strictGrothendieckMap η ≫ φ'.1) (_pres : preservesCocartesianEdges q q' g comm), ∃ t' : {t' : (coneCategory (strictCoherentDiagram D')) _⦋0⦌ // IsLimiting (strictCoherentDiagram D') t'}, ∃ (e' : (cocartesianSections q').toSSet ⟶ strictHolimApex D' t') (gstar : (cocartesianSections q).toSSet ⟶ (cocartesianSections q').toSSet) (m : strictHolimApex D t ⟶ strictHolimApex D' t'), IsSectionLimitComparison D' q' hq' φ' t' e' ∧ gstar ≫ (cocartesianSections q').ι = (cocartesianSections q).ι ≫ sectionPostcomposition g comm ∧ SectionConeSquare _ (sectionConeEdge D t.1) (strictTransformationEdge η) (sectionApexMapEdge C ((holim (strictCoherentDiagram D) t).2.1 _) ((holim (strictCoherentDiagram D') t').2.1 _) m) (sectionConeEdge D' t'.1) ∧ AreNaturallyEquivalent (e ≫ m) (gstar ≫ e'))",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reading repaired the missing canonical evaluation-cone identification and both naturality squares. StrictTransformation abbreviates Mathlib NatTrans. All auxiliary constructions are explicit data; the strict roof represents the same coherent cone, with comparison over the base on every Grothendieck simplex. The existing coherentTransformationEdge helper is reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c23890f0c",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Node unchanged except added stmt_dep lem-cbc-cofiltered-coherent-equivalence-diagrams (landed, acyclic) and lean record; lean.statement verbatim, 22 declarations present. All hypotheses (small C, strict quasicategory D, Q in max u v w, cocartesian q, StrictPresentation phi) exact, no extra assumptions or universe equations. Conclusion: full cocartesianSections quasicategory; supplied limiting cone t; IsFunctorEquivalence-strength e; cone pinned to evaluation by strict roof (a fibrewise equivalence, triangle with actual coherentTransformationEdge cone edge, vertices checked against comma/constantDiagrams/strictCoherentDiagram) plus over-base equivalence edge comparing phi(f,s0x) with section edges. Pullback clause: phi' fixed by canonical equation, r by evaluation equation, m by cone triangle, commuting square. Postcomposition clause: _gcomp is exactly g phi = phi' G_C(eta), gstar by sectionPostcomposition, SectionConeSquare and square. Edge cases (empty, point, discrete, identities) fine. Helpers real, docstrings with source and blueprint, single sorry, no duplicates, proof-dep import required by brief section 3 rule 7. nt_compile.py --json: rc 0, no errors. Non-blocking: stage 3 should add lem-coef-simplicial-model-coherent-diagrams (HTT 4.2.4.4) to proof_deps for the roof; Kerodon/HTT sources still WANTED."
  }
 }
