@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1287**, closure **34**, holes in definitions **33**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1277**, closure **24**, holes in definitions **26**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -17,13 +17,6 @@ Definitions with holes (def/instance/structure field):
 - `WeilConjectures.PoincareDuality.ProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleExceptionalProjectionMorphism` (instance, line 301)
 - `WeilConjectures.PoincareDuality.ProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.isIso_openImmersionProjectionComparison` (instance, line 148)
 - `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek::AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (instance, line 177)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AddCommGrpCat.hasFunctorialFlatResolution` (instance, line 150)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt` (instance, line 258)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar` (instance, line 305)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar` (instance, line 301)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp` (instance, line 394)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt` (instance, line 203)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme` (instance, line 187)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 426)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 420)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal::AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor` (instance, line 343)
@@ -74,20 +67,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1090 | 8 |
-| WeilConjectures | 197 | 26 |
+| Sheaf | 1087 | 5 |
+| WeilConjectures | 190 | 19 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1679 | 772 | 907 | 735 | 18 |
-| 660345513 (Application of proof-dependency imports) | library | 1675 | 770 | 905 | 681 | 18 |
-| 660345513 (Application of proof-dependency imports) | closure | 1434 | 33 | 1401 | 604 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 1679 | 762 | 917 | 735 | 18 |
+| 660345513 (Application of proof-dependency imports) | library | 1675 | 760 | 915 | 681 | 18 |
+| 660345513 (Application of proof-dependency imports) | closure | 1434 | 23 | 1411 | 604 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3800 |
+| proved | 3801 |
 | decomposed | 52 |
 | moved | 4050 |
 | pruned | 136 |
@@ -186,6 +179,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | XRa0a656f89c54729e | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XRa2c5451bd4aff80a | 1 | 0 | 2 | -2 | 0/1 (0.0%) |
 | XRa3e07659d1a5d330 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| XRaf46747ed5a82c85 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | XRb0cc22400e136910 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XRb44ad0154cf1285a | 1 | 3 | 0 | 3 | 0/1 (0.0%) |
 | XRbb9b20b2b4a981ff | 2 | 0 | 0 | 0 | 0/2 (0.0%) |
@@ -208,16 +202,12 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek | 1 | 3 | C1 |
 | WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 5 | XRc39ef8e606392165 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | B2 |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic | 3 | 7 | C2 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal | 3 | 5 | A3 |
-| Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal | 5 | 1 | XR291a8355654e3127 |
-| Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence | 10 | 1 | XRaf46747ed5a82c85 |
 | Sheaf.Paper.IntegralResidueTensorRouteModel | 11 | 1 | XRccf6c7bd0b0fb2f2 |
 | Sheaf.Paper.IntegralResidueTensorPullCounitModel | 13 | 1 | B4 |
 | WeilConjectures.SixFunctors.Etale.Derived.UpperShriek | 14 | 1 | XRdbb7091a3d1839f4 |
 | Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison | 15 | 1 | XR35ddb455bbc41f35 |
 | Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized | 15 | 1 | A2 |
-| Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation | 30 | 1 | XRb396add65317f377 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | XR3a255efb8dcd202c |
 
 Modules pruned since the imports baseline:
