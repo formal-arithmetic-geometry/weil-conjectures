@@ -225,14 +225,15 @@ def transportLowerStarIso :
       have nat := (adicLowerStarSquareIso l hsq).hom.naturality (K.frobeniusPowIso r).hom
       simp only [Functor.comp_map] at nat
       rw [nat]
-      exact reassoc_of% (adicLowerStarSquareIso_cube θ.hom θY.hom
+      have cube := (adicLowerStarSquareIso_cube θ.hom θY.hom
         (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
         (Scheme.Hom.geometricFiberMap φ' (comp_over φ' _)) _ _ _ _ hsq
         (hom_comp_geometricGaloisFrobenius_inv θ r hθ)
         (hom_comp_geometricGaloisFrobenius_inv θY r hθY)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow_inv φ (comp_over φ _) r)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ' (comp_over φ' _))
-        K.carrier) _))
+        K.carrier)
+      simpa only [Category.assoc] using cube =≫ _))
     (fun f ↦ IsoAlgebra.hom_ext ((adicLowerStarSquareIso l hsq).hom.naturality f.hom.f))
 
 include hsq in
@@ -245,6 +246,8 @@ end Transport
 
 section Constant
 
+set_option maxHeartbeats 1600000 in
+-- The constant Weil sheaf unfolds through module-object isomorphisms.
 variable (k₀ l) in
 /-- The iterated Weil structure of the constant Weil sheaf is the identification
 `(Frᵐ⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
@@ -275,6 +278,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (hθ : θ.hom ≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
     ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
 
+set_option maxHeartbeats 1600000 in
+-- The constant Weil sheaf unfolds through module-object isomorphisms.
 /-- The transport of the constant Weil sheaf `ℚ̄_ℓ` on `X` along `θ` is the constant Weil sheaf
 on `X'`: on underlying sheaves, `ℚ̄_ℓ ≅ θ_* ℚ̄_ℓ`. -/
 def adicConstantTransportIso :
