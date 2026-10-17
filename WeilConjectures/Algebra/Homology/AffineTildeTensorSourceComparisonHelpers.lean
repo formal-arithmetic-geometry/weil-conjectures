@@ -69,9 +69,7 @@ local instance helperSourceComparisonPullbackAdditive {X Y : Scheme.{u}} (f : X 
 
 attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
   affineTildePushforwardComparison Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
-  Scheme.Modules.tensorPullback derivedPullback
-  schemeDerivedBaseChangeMap
-  moduleHomotopyBaseChange
+  Scheme.Modules.tensorPullback schemeDerivedBaseChangeMap moduleHomotopyBaseChange
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in

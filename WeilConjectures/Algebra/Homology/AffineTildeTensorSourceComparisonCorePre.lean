@@ -50,9 +50,8 @@ local instance prePullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
   affineTildePushforwardComparison Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
-  Scheme.Modules.tensorPullback derivedPullback schemeDerivedBaseChangeMap
-  moduleHomotopyBaseChange affineTildeTensorOrdinarySourceIso
-  affineTildeTensorDerivedCounit
+  Scheme.Modules.tensorPullback schemeDerivedBaseChangeMap moduleHomotopyBaseChange
+  affineTildeTensorOrdinarySourceIso affineTildeTensorDerivedCounit
 
 set_option maxHeartbeats 800000 in
 -- Comparing affine tensor units and counits requires substantial reduction.
