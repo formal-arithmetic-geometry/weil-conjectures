@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pur9-def-exact-transformation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Morphism of exact functors",
@@ -12,13 +12,69 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/pur9-def-exact-transformation.md",
   "place": "node pur9-def-exact-transformation, order 2193"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "class CommShift|def CommShift|commShift_iff|commShift_of_one",
+   "results": "Located Functor.CommShift at Mathlib/CategoryTheory/Shift/CommShift.lean:147 and NatTrans.CommShift at :346; read nearby CommShiftCore at :286-288.",
+   "date": "2026-10-17",
+   "verdict": "candidate; exact single-degree predicate found by reading source"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift",
+   "results": "Loogle returned zero hits: unknown identifier 'NatTrans.CommShift'. Retried with the fully qualified name of CommShiftCore.",
+   "date": "2026-10-17",
+   "verdict": "no match: unqualified identifier rejected"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between triangulated functors commuting with shift by one",
+   "results": "Eight hits including CategoryTheory.NatTrans.CommShiftCore.shift_app_comm, CommShiftCore.shift_comm and CommShiftCore.app_shift (Mathlib.CategoryTheory.Shift.CommShift).",
+   "date": "2026-10-17",
+   "verdict": "match: CommShiftCore expresses compatibility at one degree"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of exact functors between triangulated categories is compatible with the shift commutation isomorphisms",
+   "results": "Eight hits including Functor.mapTriangleCommShiftIso, Functor.mapTriangleIso and Functor.isTriangulated_of_precomp_iso; these concern induced triangle functors rather than the definition itself.",
+   "date": "2026-10-17",
+   "verdict": "related results; refined query required"
+  },
+  {
+   "tool": "grep",
+   "query": "structure CommShiftCore|lemma shift_app_comm|shift_comm :",
+   "results": "Single-file grep returned source line numbers 286 (CommShiftCore), 287 (shift_comm) and 301 (shift_app_comm). Read Mathlib/CategoryTheory/Shift/CommShift.lean:275-304: the field is equality of natural transformations and shift_app_comm evaluates it at X.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShiftCore",
+   "results": "Twelve hits led by CategoryTheory.NatTrans.CommShiftCore, its constructor and shift_comm field, and CommShiftCore.shift_app_comm, all in Mathlib.CategoryTheory.Shift.CommShift.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "NatTrans CommShiftCore compatibility of a natural transformation with one specified shift",
+   "results": "Eight hits led by CategoryTheory.NatTrans.CommShiftCore; also CommShift.of_core, CommShiftCore.app_shift, shift_app, shift_app_comm and shift_comm. Read the definition and field in Mathlib/CategoryTheory/Shift/CommShift.lean:286-288.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.NatTrans.CommShiftCore",
+  "file": "Mathlib/CategoryTheory/Shift/CommShift.lean",
+  "how": "specializes in one line: CategoryTheory.NatTrans.CommShiftCore α (1 : ℤ), definition at lines 286-288, with C = T, D = T′, F₁ = Φ, F₂ = Ψ and the given exact functors’ shift structures. Its sole field evaluates at X to s^Φ_X ≫ α_X[1] = α_{X[1]} ≫ s^Ψ_X (also written explicitly by CommShiftCore.shift_app_comm at lines 301-304). Lean’s f ≫ g means g ∘ f; symmetry of equality gives exactly s^Ψ_X ∘ α_{X[1]} = α_X[1] ∘ s^Φ_X. Conversely the objectwise equations give the field by natural-transformation extensionality. A morphism is a natural transformation α equipped with this Prop. No preservation-of-triangles result or extension of compatibility to all integer shifts is used: a is fixed at 1. The ambient triangulated categories and exact functors use the Mathlib interfaces recorded in def-weil-triangulated-category; the predicate itself works for arbitrary categories with shifts."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -40,5 +96,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur9-def-exact-transformation",
+  "worker": "stage1",
+  "summary": "Read the current blueprint definition and both chapter/unit records; found no exact project declaration. Mathlib CommShiftCore at a = 1 is precisely the displayed degree-one square, so classified the item as a Mathlib leaf with source lines and all seven actual searches recorded. Added the existing triangulated-category/exact-functor definition as statement dependency. No new nodes or proof steps.",
+  "blueprint": "The entire statement of pur9-def-exact-transformation in main-20261015: natural transformation α and the displayed compatibility square. This is a definition, so there are no proof paragraphs to realize."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-8384e9d5b",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-8384e9d5b (reviewer sub-agent of L); spot-checked: I read the whole delivery and made no fixes; the review is in review.md. (1) Statement: matches main-20261015 sec-smooth-purity/sk-prop-sf-localization/pur9-def-exact-transformation.md (order 2193) word for word and is unchanged. The master snapshot has no file for this node. (2) Dependency: the delivery added stmt_deps def-weil-triangulated-category. That node is a reviewed Mathlib leaf and defines the triangulated categories and the exact functors with F(X[1]) ≅ F(X)[1] that the statement uses. (3) Mathlib leaf: CategoryTheory.NatTrans.CommShiftCore at Mathlib/CategoryTheory/Shift/CommShift.lean:286-288, read in the pinned Mathlib. Its field shift_comm, evaluated by shift_app_comm (301-304) at a = 1, gives (Φ.commShiftIso 1).hom.app X ≫ (α.app X)⟦1⟧' = α.app (X⟦1⟧) ≫ (Ψ.commShiftIso 1).hom.app X. That is s^Φ_X ≫ α_X[1] = α_{X[1]} ≫ s^Ψ_X, which is the blueprint square read in ∘ order. The converse holds by NatTrans.ext. The predicate is at one degree only, does not require α to be invertible, and is a one-line specialization; the recorded line numbers are correct. (4) Searches: 7 recorded, covering grep, loogle, leansearch and leanfinder. (5) Small cases: identity, zero, a scalar multiple of the identity (not invertible) and unequal shift isomorphisms all behave as the definition says; source and target types agree and there is no sign. (6) Duplicates: a scan of all definition nodes for this notion found none; nodes using NatTrans.CommShift are statements, so same_as=[] is correct. (7) No proof steps, no route or unit realization needed, no new nodes, no tool_uses, no SGA, and no target, coefficient category or base-change morphism touched."
  }
 }
