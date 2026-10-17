@@ -37,14 +37,15 @@
    }
   },
   {
-   "text": "First construct the coefficient comparison as a morphism of $B$-complexes. Choose a K-flat resolution $P\\to M$ with flat terms by [lem-pc-kflat-resolution]. The ordinary sheaf identity of [lem-weil-pbc-ringed-slice-extension-tensor], for the open object $X$ of $\\bar X_{\\mathrm{proét}}$ (whose localized-site identification is part of [def-weil-extension-by-zero]), gives $(j_!G)\\otimes Q\\simeq j_!(G\\otimes j^*Q)$. It extends to total tensor complexes: $j_!$ preserves direct sums because it is a left adjoint [lem-cbc-proetale-extension-zero]. For any acyclic complex $Q$, $j^*Q$ is acyclic by exact pullback [def-weil-pbc-proetale-operations], then $P\\otimes j^*Q$ is acyclic by K-flatness, and $j_!(P\\otimes j^*Q)$ is acyclic by exactness of $j_!$. Hence $j_!P$ is K-flat. The same identity on sheaves shows each $j_!P^i$ is flat, since both $j^*$ and $j_!$ are exact. Thus scalar extension on the two sides is computed by $j_!P\\otimes_A B$ and $j_!^B(P\\otimes_A B)$. Their termwise tensor comparison is $B$-linear (it preserves multiplication on the right $B$-factor), and is an isomorphism by the cited ordinary identity. It yields the canonical\n$$e_M^{A,B}:T_{\\bar X}^{A,B}j_!^A M\\xrightarrow{\\sim}j_!^B T_X^{A,B}M.$$\nAfter restriction of scalars, this is the derived open tensor comparison [lem-trf-open-tensor]; compatibility of $j_!$ with restriction of scalars is included in [lem-cbc-proetale-extension-zero]. Its restriction to $X$ is the tensor identity. Define\n$$b_{A,B}(M)=Rp_*^B(e_M^{A,B})\\circ\\gamma_{j_!^AM}^{A,B}.$$\nThese canonical derived comparisons are natural in $M$, without making a functorial choice of the resolution.",
+   "text": "First construct the coefficient comparison as a morphism of $B$-complexes. Choose a K-flat resolution $P\\to M$ with flat terms by [lem-pc-kflat-resolution]. The ordinary sheaf identity of [lem-weil-pbc-ringed-slice-extension-tensor], for the open object $X$ of $\\bar X_{\\mathrm{proét}}$ (whose localized-site identification is part of [def-weil-extension-by-zero] and clause (1) of [lem-weil-proetale-weakly-etale-localization]), gives $(j_!G)\\otimes Q\\simeq j_!(G\\otimes j^*Q)$. It extends to total tensor complexes: $j_!$ preserves direct sums because it is a left adjoint [lem-cbc-proetale-extension-zero]. For any acyclic complex $Q$, $j^*Q$ is acyclic by exact pullback [def-weil-pbc-proetale-operations], then $P\\otimes j^*Q$ is acyclic by K-flatness, and $j_!(P\\otimes j^*Q)$ is acyclic by exactness of $j_!$. Hence $j_!P$ is K-flat. The same identity on sheaves shows each $j_!P^i$ is flat, since both $j^*$ and $j_!$ are exact. Thus scalar extension on the two sides is computed by $j_!P\\otimes_A B$ and $j_!^B(P\\otimes_A B)$. Their termwise tensor comparison is $B$-linear (it preserves multiplication on the right $B$-factor), and is an isomorphism by the cited ordinary identity. It yields the canonical\n$$e_M^{A,B}:T_{\\bar X}^{A,B}j_!^A M\\xrightarrow{\\sim}j_!^B T_X^{A,B}M.$$\nAfter restriction of scalars, this is the derived open tensor comparison [lem-trf-open-tensor]; compatibility of $j_!$ with restriction of scalars is included in [lem-cbc-proetale-extension-zero]. Its restriction to $X$ is the tensor identity. Define\n$$b_{A,B}(M)=Rp_*^B(e_M^{A,B})\\circ\\gamma_{j_!^AM}^{A,B}.$$\nThese canonical derived comparisons are natural in $M$, without making a functorial choice of the resolution.",
    "uses": [
     "lem-trf-open-tensor",
     "lem-cbc-proetale-extension-zero",
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-ringed-slice-extension-tensor",
     "def-weil-pbc-proetale-operations",
-    "def-weil-extension-by-zero"
+    "def-weil-extension-by-zero",
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": false,
    "source": {
@@ -96,17 +97,38 @@
    }
   },
   {
-   "text": "We check that the map just proved invertible is the underlying map of $\\gamma_N^{A,B}$, not an arbitrarily chosen isomorphism. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_T=A_T$, $S_T=B_T$, and the constant-ring identifications from Step 1. The square of ring maps commutes since all its maps preserve constant sections. That lemma gives the canonical restriction/direct-image comparison and, explicitly, its compatibility with adjoint transposes. Consequently, after forgetting $B$, the transpose of $\\gamma_N^{A,B}$ is $\\varepsilon_N^A\\otimes1_B$ under tensor pullback. Thus the underlying comparison is the ordinary $A$-projection map for $N$ and $B_{\\bar X}$.\n\nFor clarity write $v_T=\\nu_T^*$, $l=p_{\\mathrm{et}}^*$, $r=Rp_{\\mathrm{et},*}^A$, $P=p_{\\mathrm{proét}}^*$, $S=Rp_{\\mathrm{proét},*}^A$. The comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] supplies $a:v_{\\bar X}l\\simeq Pv_Y$ and $\\beta_H:v_YrH\\simeq Sv_{\\bar X}H$ with\n$$\\varepsilon^p\\,P(\\beta_H)\\,a_{rH}=v_{\\bar X}(\\varepsilon^e_H).$$\nIt applies to $H=K$ and $H=K\\otimes_A^L B$ by Step 3; $p$ is proper, hence quasi-compact and quasi-separated. Tensor pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies the source and target of $v_Y\\pi_K$ with $SN\\otimes_A^L B_Y$ and $S(N\\otimes_A^L B_{\\bar X})$, using these $\\beta$'s. Here is the mate calculation explicitly. Put $Q=rK\\otimes_A^L B_Y$ and $H=K\\otimes_A^L B_{\\bar X}$ on the etale sites, and suppress only the canonical tensor-pullback identifications in the following formulas. The resulting map is $t=\\beta_H\\,v_Y(\\pi_K)\\,(\\beta_K^{-1}\\otimes1)$. Its transpose is\n$$\\begin{aligned}\n\\varepsilon^p_{v_{\\bar X}H}\\,P(t)\n&=v_{\\bar X}(\\varepsilon^e_H)\\,a_{rH}^{-1}\\,P(v_Y\\pi_K)\\,P(\\beta_K^{-1}\\otimes1)\\\\\n&=v_{\\bar X}(\\varepsilon^e_H\\,l\\pi_K)\\,a_Q^{-1}\\,P(\\beta_K^{-1}\\otimes1)\\\\\n&=\\bigl(v_{\\bar X}(\\varepsilon^e_K)\\,a_{rK}^{-1}\\,P(\\beta_K^{-1})\\bigr)\\otimes1\\\\\n&=\\varepsilon^p_N\\otimes1.\n\\end{aligned}$$\nThe first and last equalities are the normalization at $H$ and $K$; the second is naturality of $a$ at $\\pi_K$; the third uses the defining etale projection transpose $\\varepsilon^e_H\\,l\\pi_K=\\varepsilon^e_K\\otimes1$ and naturality of tensor pullback. Thus, without suppressed identifications, the transpose is\n$$P(SN\\otimes_A^L B_Y)\\simeq PSN\\otimes_A^L B_{\\bar X}\\xrightarrow{\\varepsilon_N^p\\otimes1}N\\otimes_A^L B_{\\bar X}.$$\nThis is exactly the preceding transpose of $\\operatorname{Res}\\gamma_N^{A,B}$. The adjunction bijection makes the maps equal. As $\\pi_K$, both $\\beta$'s, and the tensor comparisons are isomorphisms, $\\operatorname{Res}\\gamma_N^{A,B}$ is an isomorphism. Restriction of scalars reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. Thus $\\gamma_N^{A,B}$ is an isomorphism in $D(Y_{\\mathrm{proét}},B)$, and Step 2 proves the same for $b_{A,B}(M)$.",
+   "text": "Let $d:r_YRp_{*,B}\\xrightarrow{\\sim}Rp_{*,A}r_{\\bar X}$ be the restriction/direct-image comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. By [lem-sp-direct-image-change-ring-transpose], for every $N\\in D(\\bar X_{\\mathrm{proét}},A)$ the $A$-linear map $d\\circ r_Y(\\gamma_N^{A,B}):Rp_{*,A}N\\otimes^{\\mathbf L}_AB_Y\\to Rp_{*,A}(N\\otimes^{\\mathbf L}_AB_{\\bar X})$ is the pro-étale projection morphism, i.e. its adjoint transpose under $p_A^*\\dashv Rp_{*,A}$, after the tensor-pullback identification, is $\\varepsilon^A_N\\otimes^{\\mathbf L}1_{B_{\\bar X}}$. We use this at $N=j_!^AM$.",
    "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sp-direct-image-change-ring-transpose",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, counit normalization of the proper coefficient map after restriction of scalars"
+   }
+  },
+  {
+   "text": "Take the bounded etale $A$-complex $K$ of Step 3 with $\\nu_{\\bar X}^*K\\simeq N=j_!^AM$; Step 3 also shows $H=K\\otimes^{\\mathbf L}_AB_{\\bar X,\\mathrm{et}}$ is bounded, so $K,H\\in D^+$ as required by [lem-sp-direct-image-etale-mate-isomorphism]. That node gives the map $t=\\beta_H\\,\\nu_Y^*(\\pi_K)\\,(\\beta_K^{-1}\\otimes1)$ whose adjoint transpose is $\\varepsilon^p_N\\otimes1$, and $t$ is an isomorphism because $\\pi_K$ is invertible by Step 5. The map of Step 6 has the same source, target and adjoint transpose (transported along $\\nu^*K\\simeq N$ by naturality of both transposes), so by injectivity of the adjunction bijection of [def-weil-pbc-proetale-operations] it equals $t$. Hence $d\\circ r_Y(\\gamma_N^{A,B})$ is an isomorphism.",
+   "uses": [
+    "lem-sp-direct-image-etale-mate-isomorphism",
     "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Canonical morphism comparison; blueprint Step 1 normalization, together with sites-cohomology.tex derived tensor/pushforward comparisons"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, normalized etale/pro-etale mate calculation"
+   }
+  },
+  {
+   "text": "The comparison $d$ is an isomorphism by [lem-weil-pbc-ring-sheaf-change-adjunction], so Step 7 makes $r_Y(\\gamma_N^{A,B})$ invertible. Restriction of scalars reflects isomorphisms by the same statement; hence $\\gamma_N^{A,B}$ is an isomorphism in the $B$-linear pro-étale derived category. With $N=j_!^AM$, Step 2's definition $b=Rp_*^B(e_M)\\circ\\gamma_{j_!M}^{A,B}$ is a composite of isomorphisms, hence an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, reflection of the normalized comparison and conclusion for b"
    }
   },
   {
@@ -136,11 +158,12 @@
    }
   },
   {
-   "text": "The open tensor maps satisfy the same cocycle. After restriction to $X$, both composites from $T^{B,C}T^{A,B}j_!^AM$ to $j_!^C T^{A,C}M$ give $((m\\otimes b)\\otimes c)\\mapsto m\\otimes\\varphi(b)c$. The domain is canonically $j_!^C(T^{B,C}T^{A,B}M)$ by Step 2, and $j_!^C\\dashv j^{-1}$ by [lem-cbc-proetale-extension-zero]. The unit $F\\to j^{-1}j_!^CF$ is the identity: in the presheaf construction [def-weil-extension-by-zero], an object $V\\to X$ and every object covering it already factor through $X$, so the presheaf and its sheafification restrict to $F$ on $X_{\\mathrm{proét}}$. This holds degreewise and hence in the derived categories, since both functors are exact. For $Z=T^{B,C}T^{A,B}M$ the adjunction now identifies $\\operatorname{Hom}(j_!^CZ,j_!^CT^{A,C}M)$ with $\\operatorname{Hom}(Z,T^{A,C}M)$, and sends a map to its restriction. Thus equality after restriction proves equality of the two maps in question. This proves, under $\\alpha$, $e_M^{A,C}=e_{T^{A,B}M}^{B,C}\\circ T^{B,C}(e_M^{A,B})$.\n\nFinally expand $b=Rp_*(e)\\gamma$. Naturality of $\\gamma^{B,C}$ with respect to $e_M^{A,B}$ gives, after suppressing the same $\\alpha$'s,\n$$\\begin{aligned}\nb_{B,C}(M_B)\\,T_Y^{B,C}(b_{A,B}(M))\n&=Rp_*^C(e_{M_B}^{B,C})\\,\\gamma^{B,C}_{j_!^BM_B}\\,T_Y^{B,C}(Rp_*^B e_M^{A,B})\\,T_Y^{B,C}(\\gamma^{A,B}_{j_!^AM})\\\\\n&=Rp_*^C(e_{M_B}^{B,C})\\,Rp_*^C(T_{\\bar X}^{B,C}e_M^{A,B})\\,\\gamma^{B,C}_{T^{A,B}j_!^AM}\\,T_Y^{B,C}(\\gamma^{A,B}_{j_!^AM})\\\\\n&=Rp_*^C(e_M^{A,C})\\,\\gamma^{A,C}_{j_!^AM}=b_{A,C}(M).\n\\end{aligned}$$\nThe second equality uses naturality, and the third uses the open cocycle and Step 8. Reinsert $\\alpha$ using its naturality from [det-sp-scalar-extension-functor]; the result is exactly the equation in the statement.",
+   "text": "The open tensor maps satisfy the same cocycle. After restriction to $X$, both composites from $T^{B,C}T^{A,B}j_!^AM$ to $j_!^C T^{A,C}M$ give $((m\\otimes b)\\otimes c)\\mapsto m\\otimes\\varphi(b)c$. The domain is canonically $j_!^C(T^{B,C}T^{A,B}M)$ by Step 2, and $j_!^C\\dashv j^{-1}$ by [lem-cbc-proetale-extension-zero]. The unit $F\\to j^{-1}j_!^CF$ is the identity: in the presheaf construction [def-weil-extension-by-zero], by clause (4) of [lem-weil-proetale-weakly-etale-localization] an object $V\\to X$ and every object covering it already factor through $X$, so the presheaf and its sheafification restrict to $F$ on $X_{\\mathrm{proét}}$. This holds degreewise and hence in the derived categories, since both functors are exact. For $Z=T^{B,C}T^{A,B}M$ the adjunction now identifies $\\operatorname{Hom}(j_!^CZ,j_!^CT^{A,C}M)$ with $\\operatorname{Hom}(Z,T^{A,C}M)$, and sends a map to its restriction. Thus equality after restriction proves equality of the two maps in question. This proves, under $\\alpha$, $e_M^{A,C}=e_{T^{A,B}M}^{B,C}\\circ T^{B,C}(e_M^{A,B})$.\n\nFinally expand $b=Rp_*(e)\\gamma$. Naturality of $\\gamma^{B,C}$ with respect to $e_M^{A,B}$ gives, after suppressing the same $\\alpha$'s,\n$$\\begin{aligned}\nb_{B,C}(M_B)\\,T_Y^{B,C}(b_{A,B}(M))\n&=Rp_*^C(e_{M_B}^{B,C})\\,\\gamma^{B,C}_{j_!^BM_B}\\,T_Y^{B,C}(Rp_*^B e_M^{A,B})\\,T_Y^{B,C}(\\gamma^{A,B}_{j_!^AM})\\\\\n&=Rp_*^C(e_{M_B}^{B,C})\\,Rp_*^C(T_{\\bar X}^{B,C}e_M^{A,B})\\,\\gamma^{B,C}_{T^{A,B}j_!^AM}\\,T_Y^{B,C}(\\gamma^{A,B}_{j_!^AM})\\\\\n&=Rp_*^C(e_M^{A,C})\\,\\gamma^{A,C}_{j_!^AM}=b_{A,C}(M).\n\\end{aligned}$$\nThe second equality uses naturality, and the third uses the open cocycle and Step 8. Reinsert $\\alpha$ using its naturality from [det-sp-scalar-extension-functor]; the result is exactly the equation in the statement.",
    "uses": [
     "lem-cbc-proetale-extension-zero",
     "det-sp-scalar-extension-functor",
-    "def-weil-extension-by-zero"
+    "def-weil-extension-by-zero",
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": true,
    "source": {
@@ -150,27 +173,29 @@
   }
  ],
  "proof_deps": [
-  "def-kun-cd",
-  "def-weil-extension-by-zero",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-pbc-proetale-operations",
   "det-sp-scalar-extension-functor",
-  "lem-cbc-proetale-extension-zero",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-kun-0f10",
-  "lem-pc-kflat-resolution",
-  "lem-sf-projection-finite-constant",
   "lem-trf-open-tensor",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-injective-module-direct-image-acyclic",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-cbc-proetale-extension-zero",
+  "lem-pc-kflat-resolution",
   "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lemma-weil-pbc-leray-acyclicity",
-  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-extension-by-zero",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
   "prop-weil-pbc-site-comparison-finite-level",
+  "lem-kun-0f10",
+  "def-kun-cd",
+  "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sf-projection-finite-constant",
+  "lem-sp-direct-image-change-ring-transpose",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sp-direct-image-etale-mate-isomorphism",
   "sk-prop-sf-rf-shriek-preservation"
  ],
  "proof_origin": {
@@ -244,7 +269,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -258,11 +283,11 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "det-sp-reduction-direct-image",
   "worker": "stage1",
-  "summary": "STATEMENT-DISPUTED: the standalone import omits the standing finite-type-over-k scheme setting and its Dctf claim is false without a uniform bound (disjoint union of projective spaces of increasing dimension). Restored the setting explicitly. Removed the out-of-domain A_E,n flat-model invocation, retaining the finite-free/finite-window route through the existing general constant-coefficient etale projection lemma. Added explicit B-linear construction, bounded comparison hypotheses, module/abelian cohomological-dimension bridge, counit normalization, Dctf membership and cocycle computations. No new nodes or Lean work.",
-  "blueprint": "Original Step 1 is Steps 1–2 and 6; original Steps 2–3 are Steps 3–6, applying the existing finite-window lemma after the finite-type bound; original Step 4 is Steps 7–9. The invalid flat-constructible-model use is replaced by the already available general finite-constant projection theorem, which proves the same finite-free/finite-window argument.",
+  "summary": "Repaired the returned split by replacing the 2860-character Step 6 with three short steps. The hidden identification of the restricted proper comparison with the etale projection and the normalized etale/pro-etale mate calculation are now separate statement-only nodes; the final reflection of isomorphisms cites the existing ring-sheaf change-adjunction node. The item statement and all other steps are unchanged; no Lean or compiler work was done. Reviewer fix (S1 maintainer reader): new nodes restated within their actual domains (pro-etale projection map for node 1; K and K tensor B in D^+ and a transpose statement for node 2); Steps 6-8 rewritten to compare t with the restricted comparison by equal adjoint transposes; localization lemma cited in Steps 2 and 11.",
+  "blueprint": "Steps 1–2 and 7–9 retain the prior realization. The returned Step 6 is realized by the new nodes lem-sp-direct-image-change-ring-transpose and lem-sp-direct-image-etale-mate-isomorphism, followed by a short reflection step using the existing coefficient-adjunction node.",
   "tool_uses": [
    {
     "node": "prop-weil-pbc-proetale-constant-ring-map",
@@ -335,6 +360,10 @@
    {
     "node": "lem-weil-pbc-module-sheaves-enough-injectives",
     "why": "Generic supply of injective resolutions in both module and abelian etale sheaf categories for the uniform dimension comparison."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the open pro-etale site with the localized site and gives uniqueness of factorization through an open; same unit as def-weil-extension-by-zero, cited so the item does not depend on the localization clause that the blueprint_update of def-weil-extension-by-zero removes."
    }
   ]
  },
@@ -356,15 +385,16 @@
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-module-sheaves-enough-injectives"
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-proetale-weakly-etale-localization"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q15-aa4cca3e9",
-  "group": "Q15",
+  "reviewer": "NT-cc-Q69-11ed64c6a",
+  "group": "Q69",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-aa4cca3e9 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. All nine steps check out, including finite-window hypotheses, the canonical B-linear comparison, Dctf membership, and coefficient cocycles. No new nodes, cycles, duplicate replacements, or repairs. Accepted generic tool uses and detailed checks are recorded in review.md; no target weakening or coefficient-category identification."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-11ed64c6a (reviewer sub-agent of L); spot-checked: I read the full item, the main-20261015 blueprint statement and proof (Steps 1-4), the parent unit and setting, every cited statement, and Stacks 09AL (proetale.tex lemma-compare-constructible-derived) and 0F10 (etale-cohomology.tex lemma-finite-cd). The statement is not weakened: it keeps arbitrary finite ell-primary A->B, the full Dctf conclusion, naturality and the alpha-cocycle; the restored standing setting is a correct STATEMENT-DISPUTED repair (the disjoint union of P^n has unbounded R^{2n}). Steps 1-5 and 9-11 check against their cited statements. Faults in the repair, fixed: (1) lem-sp-direct-image-change-ring-transpose called Res(gamma_N) the 'etale' projection morphism for arbitrary pro-etale N, through the D^+-only mate lemma. That clause is ill-posed. It is restated as: d∘r(gamma_N) is the pro-etale projection map with transpose eps^A_N⊗1, via the adjunct clause of lem-weil-pbc-ring-sheaf-change-adjunction. (2) lem-sp-direct-image-etale-mate-isomorphism assumed only bounded-below K. Then H=K⊗^L B can be unbounded below (Z/l^2->F_l, K=F_l), so beta_H is outside the cited D^+ lemma, invertibility of pi_K is unsupported (lem-sf-projection-finite-constant needs D^-), and its last sentence restated item Step 8. It is restated with K,H in D^+: t has transpose eps^p_N⊗1, and t is an isomorphism if pi_K is. Its dependencies on the projection lemma and on node 1 are dropped. (3) Item Steps 6-8 are rewritten: t (an isomorphism by Steps 3 and 5) equals d∘r(gamma) because the adjoint transposes are equal; Res reflects isomorphisms, so b is an isomorphism. I also added lem-weil-proetale-weakly-etale-localization to Steps 2 and 11, because the pending blueprint_update of def-weil-extension-by-zero drops the localization clause those steps quote. There is no cycle and neither new node duplicates an existing one. The report's claim that det-prop-scalar-six-direct-image excludes general finite A->B is inaccurate: it includes them, but in the condensed framework, so it is not the same statement. No SGA source is used. Corrected files are in fixes/dag/nodes/sec-smooth-purity/ and the details are in review.md.; 3 file(s) fixed by the reviewer"
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sp-reduction",

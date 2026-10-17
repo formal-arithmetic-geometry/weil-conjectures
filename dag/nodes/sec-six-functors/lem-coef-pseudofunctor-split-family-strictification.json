@@ -1,0 +1,79 @@
+{
+ "id": "lem-coef-pseudofunctor-split-family-strictification",
+ "kind": "statement",
+ "title": "Split-family strictification with a compatible coherent map",
+ "statement": "Use categories in the sense of [def-nagata-category] and universes of [def-weil-size-convention], enlarged to contain all the families below. Let $J$ be a small category. A normalized covariant category-valued pseudofunctor $P$ assigns a category $P(j)$ to each object, a functor $P(a):P(j)\\to P(k)$ to each $a:j\\to k$, and natural isomorphisms $\\mu_{b,a}:P(b)P(a)\\xrightarrow{\\sim}P(ba)$. Require $P(1)=1$, identity comparisons when either arrow is an identity, and\n$$\\mu_{c,ba}\\circ P(c)(\\mu_{b,a})=\\mu_{cb,a}\\circ(\\mu_{c,b}P(a)).$$\nLet $H:J\\to\\mathsf{Cat}$ be a strict functor. Suppose functors $\\alpha_j:H(j)\\to P(j)$ have natural isomorphisms $\\theta_a:P(a)\\alpha_j\\xrightarrow{\\sim}\\alpha_k H(a)$, identity at identities, satisfying\n$$\\theta_{ba}\\circ(\\mu_{b,a}\\alpha_j)=(\\theta_b H(a))\\circ P(b)(\\theta_a).$$\nHere a strict functor preserves identities and composition by equality, and an equivalence of categories is a functor with a quasi-inverse and inverse natural isomorphisms.\n\nDefine $\\widetilde P(j)$ to have objects families $X_a\\in P(k)$ for every arrow $a:j\\to k$, with isomorphisms $\\gamma_{b,a}:P(b)X_a\\xrightarrow{\\sim}X_{ba}$ for each composable $b$, satisfying $\\gamma_{1,a}=1$ and\n$$\\gamma_{c,ba}\\circ P(c)(\\gamma_{b,a})=\\gamma_{cb,a}\\circ\\mu_{c,b}(X_a).$$\nA morphism $X\\to Y$ is a family $t_a:X_a\\to Y_a$ with $t_{ba}\\gamma^X_{b,a}=\\gamma^Y_{b,a}P(b)(t_a)$. Evaluation $E_j(X)=X_{1_j}$ is an equivalence of categories, and reindexing $X_a\\mapsto X_{aa_0}$ along $a_0:j\\to j_1$ makes $\\widetilde P$ a strict functor on $J$. There are coherent natural isomorphisms $\\kappa_a:P(a)E_j\\xrightarrow{\\sim}E_k\\widetilde P(a)$ with components $\\gamma_{a,1_j}$. The formulas\n$$\\widetilde\\alpha_j(z)_a=\\alpha_k(H(a)z),\\qquad \\gamma_{b,a}=\\theta_b(H(a)z)$$\n(and the same formula on morphisms) define a strictly natural transformation $\\widetilde\\alpha:H\\to\\widetilde P$, with $E_j\\widetilde\\alpha_j=\\alpha_j$; its comparison along $a$ under $\\kappa_a$ is $\\theta_a$.\n\nMore precisely, let $v:I\\to J$ be a functor for which $P\\circ v$ is strict, all its $\\mu$ are identities, and $\\alpha\\circ v$ is strictly natural with all its $\\theta$ identities. There is a strict functor $K:I\\to\\mathsf{Cat}$, a natural transformation $H\\circ v\\to K$, and strictly natural functors\n$$\\widetilde P\\circ v\\longleftarrow K\\longrightarrow P\\circ v$$\nwhich are objectwise equivalences. Their composites on $H\\circ v$ are respectively $\\widetilde\\alpha\\circ v$ and $\\alpha\\circ v$. Thus the comparison also holds for diagrams equipped with these specified maps, not only object by object.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 004A, lemma-fibred-strict, lines 7747-7802: splitting a fibred category, dualized for covariant diagrams. The statement specifies the split-family model and compatibility with a given coherent map and strict restrictions. Compare Toën, The homotopy theory of dg-categories and derived Morita theory, https://arxiv.org/pdf/math/0408337, Section 4, printed pp. 21-22, the standard rectification paragraph immediately before Sublemma 4.6. That PDF was read online and is absent locally."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictif|split.*[Ff]ibration|[Pp]seudofunctor.*[Ee]quivalence",
+   "results": "{\"t\": \"2026-10-17T07:18:35Z\", \"tool\": \"grep\", \"query\": \"strictif|split.*[Ff]ibration|[Pp]seudofunctor.*[Ee]quivalence\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Bicategory/Coherence.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\"], \"digest\": \"425831448a8f2777\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected StrictPseudofunctor.lean:12-21,40-85,105-165 and Coherence.lean:13-35. StrictPseudofunctor constructors assume strict composition data already; toFunctor forgets a supplied strict pseudofunctor; Functor.toPseudoFunctor converts an already strict diagram in the opposite direction. Coherence proves local thinness of a free bicategory. None replaces an arbitrary Cat-valued pseudofunctor by a strict diagram or gives the comparison compatible with a specified coherent map. Two semantic phrasings, Loogle, LeanSearch and source grep found no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudofunctor from an ordinary category to categories is pseudonaturally equivalent to a strict functor",
+   "results": "{\"t\": \"2026-10-17T07:18:35Z\", \"tool\": \"leansearch\", \"query\": \"A pseudofunctor from an ordinary category to categories is pseudonaturally equivalent to a strict functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.StrictPseudofunctor.toFunctor_obj\", \"CategoryTheory.StrictPseudofunctorPreCore.mk.injEq\", \"CategoryTheory.StrictPseudofunctor.mk.noConfusion\", \"CategoryTheory.Functor.toPseudoFunctor'\", \"CategoryTheory.StrictPseudofunctor.mk.injEq\", \"CategoryTheory.Pseudofunctor.mk.inj\", \"CategoryTheory.Pseudofunctor.ObjectProperty.fullsubcategory_toPrelaxFunctor_toPrelaxFunctorStruct_map₂_toNatTrans\", \"CategoryTheory.Functor.toPseudoFunctor\"], \"digest\": \"400f19951b30b88c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected StrictPseudofunctor.lean:12-21,40-85,105-165 and Coherence.lean:13-35. StrictPseudofunctor constructors assume strict composition data already; toFunctor forgets a supplied strict pseudofunctor; Functor.toPseudoFunctor converts an already strict diagram in the opposite direction. Coherence proves local thinness of a free bicategory. None replaces an arbitrary Cat-valued pseudofunctor by a strict diagram or gives the comparison compatible with a specified coherent map. Two semantic phrasings, Loogle, LeanSearch and source grep found no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pseudofunctor\"",
+   "results": "{\"t\": \"2026-10-17T07:18:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pseudofunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor\", \"CategoryTheory.Pseudofunctor.id\", \"CategoryTheory.Pseudofunctor.instInhabited\", \"CategoryTheory.Pseudofunctor.toLax\", \"CategoryTheory.Pseudofunctor.toOplax\", \"CategoryTheory.Pseudofunctor.toPrelaxFunctor\", \"CategoryTheory.Pseudofunctor.hasCoeToLax\", \"CategoryTheory.Pseudofunctor.hasCoeToOplax\"], \"digest\": \"112138e9a6ee71bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected StrictPseudofunctor.lean:12-21,40-85,105-165 and Coherence.lean:13-35. StrictPseudofunctor constructors assume strict composition data already; toFunctor forgets a supplied strict pseudofunctor; Functor.toPseudoFunctor converts an already strict diagram in the opposite direction. Coherence proves local thinness of a free bicategory. None replaces an arbitrary Cat-valued pseudofunctor by a strict diagram or gives the comparison compatible with a specified coherent map. Two semantic phrasings, Loogle, LeanSearch and source grep found no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every category valued pseudofunctor on an ordinary category is equivalent to a strict functor by families over outgoing arrows, compatibly with coherent maps from a strict functor",
+   "results": "{\"t\": \"2026-10-17T07:18:37Z\", \"tool\": \"leanfinder\", \"query\": \"Every category valued pseudofunctor on an ordinary category is equivalent to a strict functor by families over outgoing arrows, compatibly with coherent maps from a strict functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toPseudoFunctor'\", \"CategoryTheory.StrictPseudofunctor.mk''\", \"CategoryTheory.StrictPseudofunctor\", \"CategoryTheory.LocallyDiscrete.mkPseudofunctor_map\", \"CategoryTheory.StrictPseudofunctor.toFunctor\", \"CategoryTheory.StrictPseudofunctor.mk'\", \"CategoryTheory.StrictPseudofunctorCore\", \"CategoryTheory.StrictPseudofunctorPreCore\"], \"digest\": \"f5855072efbbe7be\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected StrictPseudofunctor.lean:12-21,40-85,105-165 and Coherence.lean:13-35. StrictPseudofunctor constructors assume strict composition data already; toFunctor forgets a supplied strict pseudofunctor; Functor.toPseudoFunctor converts an already strict diagram in the opposite direction. Coherence proves local thinness of a free bicategory. None replaces an arbitrary Cat-valued pseudofunctor by a strict diagram or gives the comparison compatible with a specified coherent map. Two semantic phrasings, Loogle, LeanSearch and source grep found no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence theorem strictification of category valued pseudo functors and compatible sections",
+   "results": "{\"t\": \"2026-10-17T07:18:38Z\", \"tool\": \"leanfinder\", \"query\": \"Coherence theorem strictification of category valued pseudo functors and compatible sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.StrictPseudofunctor.mk''_mapComp\", \"CategoryTheory.StrictPseudofunctor.mk'_mapComp\", \"CategoryTheory.StrictPseudofunctor.mk''\", \"CategoryTheory.Pseudofunctor.mapComp'_id_comp_inv_app_assoc\", \"CategoryTheory.StrictlyUnitaryPseudofunctor.mk'_mapComp\", \"CategoryTheory.StrictPseudofunctor.mapComp_eq_eqToIso\", \"CategoryTheory.Pseudofunctor.mapComp'_comp_id_inv_app_assoc\", \"CategoryTheory.Functor.toPseudoFunctor'_mapComp\"], \"digest\": \"93ed456c75ef948e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected StrictPseudofunctor.lean:12-21,40-85,105-165 and Coherence.lean:13-35. StrictPseudofunctor constructors assume strict composition data already; toFunctor forgets a supplied strict pseudofunctor; Functor.toPseudoFunctor converts an already strict diagram in the opposite direction. Coherence proves local thinness of a free bicategory. None replaces an arbitrary Cat-valued pseudofunctor by a strict diagram or gives the comparison compatible with a specified coherent map. Two semantic phrasings, Loogle, LeanSearch and source grep found no match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dgcat-bimodule-mapping-space",
+  "date": "2026-10-17",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite mapping-complex adjunction before total inverse limit; strictification of the dg-bimodule moduli diagram in the mapping-space comparison. This is the standard rectification called for in Toën Section 4, printed pp. 21-22.",
+   "via": [
+    "lem-coef-dgcat-bimodule-mapping-space",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

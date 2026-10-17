@@ -1,0 +1,100 @@
+{
+ "id": "lem-sp-direct-image-etale-mate-isomorphism",
+ "kind": "statement",
+ "title": "The etale projection mate has the normalized pro-etale counit transpose",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$; let $\\bar X$ and $Y$ be separated schemes of finite type over $k$ and $p:\\bar X\\to Y$ a proper $k$-morphism [sk-def-sfb-dc-setting]. Let $A\\to B$ be a homomorphism of finite commutative rings killed by powers of $\\ell$. On the small étale and pro-étale sites use the ordinary uncompleted constant-ring module derived categories and the exact comparison pullbacks $\\nu_T^*$, with $\\nu_T^{-1}A_{T,\\mathrm{et}}=A_T$ and $\\nu_T^{-1}B_{T,\\mathrm{et}}=B_T$ [def-weil-pbc-proetale-modules], [def-weil-pbc-derived-categories]; on both sites use the derived adjunctions with counits $\\varepsilon^{e}$ and $\\varepsilon^{p}$ of [def-weil-pbc-proetale-operations], and regard $B$ as an $A$-module. Let $K\\in D^+(\\bar X_{\\mathrm{et}},A)$ be such that $H=K\\otimes^{\\mathbf L}_{A}B_{\\bar X,\\mathrm{et}}$ (étale derived tensor [def-kun-derived-tensor]) also lies in $D^+(\\bar X_{\\mathrm{et}},A)$, and put $N=\\nu_{\\bar X}^*K$. Let $\\beta_K:\\nu_Y^*Rp_{\\mathrm{et},*}K\\xrightarrow{\\sim}Rp_{*}N$ and $\\beta_H:\\nu_Y^*Rp_{\\mathrm{et},*}H\\xrightarrow{\\sim}Rp_*\\nu_{\\bar X}^*H$ be the canonical normalized comparison isomorphisms of [lem-weil-pbc-comparison-direct-image-canonical-mate] for $u=p$ and $\\Lambda=A$, and identify $\\nu_{\\bar X}^*H\\simeq N\\otimes^{\\mathbf L}_{A}B_{\\bar X}$ and $\\nu_Y^*(Rp_{\\mathrm{et},*}K\\otimes^{\\mathbf L}_AB_{Y,\\mathrm{et}})\\simeq\\nu_Y^*Rp_{\\mathrm{et},*}K\\otimes^{\\mathbf L}_AB_Y$ by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let\n$$\\pi_K:Rp_{\\mathrm{et},*}K\\otimes^{\\mathbf L}_AB_{Y,\\mathrm{et}}\\longrightarrow Rp_{\\mathrm{et},*}\\bigl(K\\otimes^{\\mathbf L}_AB_{\\bar X,\\mathrm{et}}\\bigr)$$\nbe the étale projection morphism of [def-kun-projection-formula-map] (with $E=K$ and coefficient object $B_{Y,\\mathrm{et}}$, $p^{-1}B_{Y,\\mathrm{et}}=B_{\\bar X,\\mathrm{et}}$), and define the $A$-linear pro-étale map\n$$t=\\beta_H\\circ\\nu_Y^*(\\pi_K)\\circ(\\beta_K^{-1}\\otimes^{\\mathbf L}1):Rp_*N\\otimes^{\\mathbf L}_AB_Y\\longrightarrow Rp_*\\bigl(N\\otimes^{\\mathbf L}_AB_{\\bar X}\\bigr).$$\nThen the adjoint transpose of $t$ under $p^*\\dashv Rp_*$ on $A$-modules, composed with the tensor-pullback identification $p^*(Rp_*N\\otimes^{\\mathbf L}B_Y)\\simeq p^*Rp_*N\\otimes^{\\mathbf L}B_{\\bar X}$, is $\\varepsilon^p_N\\otimes^{\\mathbf L}1_{B_{\\bar X}}$. In particular $t$ is an isomorphism whenever $\\pi_K$ is.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Step 1, mate calculation identifying the canonical comparison with the finite-window etale projection"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-operations",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars identifies a proper derived direct image coefficient comparison with the etale projection map via adjoint counit transposes",
+   "results": "PresheafOfModules.restrictScalarsObj; ModuleCat.RestrictionCoextensionAdj.counit'; RestrictScalars; ModuleCat.restrictCoextendScalarsAdj; no derived etale/pro-etale comparison",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic module restriction/coextension adjunctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Limits",
+   "results": "0 hits; Loogle reported unknown identifier CategoryTheory.Limits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper derived direct image scalar extension projection formula etale pro-etale adjoint transpose",
+   "results": "Condensed.profiniteSolidCounit; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; no target comparison",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf adjunctions only"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*pushforward|pushforward.*tensor",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale projection mate under the pro-etale comparison is an isomorphism and has transpose the counit tensor coefficient map",
+   "results": "CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv; CategoryTheory.frobeniusMorphism_mate; no site comparison theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate identities only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Adjunction",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mate calculation identifies etale and pro-etale derived pushforward comparison",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; Scheme.Etale.forget; Scheme.Etale.forgetFullyFaithful; no derived comparison",
+   "date": "2026-10-17",
+   "verdict": "no match: etale morphism declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction|mapIso|tensor.*pushforward",
+   "results": "25 generic CategoryTheory hits (FiberedCategory, Localization, Endofunctor); none states the target",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-direct-image",
+  "date": "2026-10-17",
+  "group": "Q69"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Step 1 with Steps 2-3: identification of the counit-defined map with the etale finite-window projection map (used in item Step 7)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

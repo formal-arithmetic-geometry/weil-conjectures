@@ -1,145 +1,440 @@
 {
-  "id": "thm-pur-projective-bundle-formula",
-  "blueprint": {
-    "is": "thm-pur-projective-bundle-formula",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Projective-bundle formula without purity",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $F$ be a\nvector bundle of rank\n$n+1$ on $B$, let $p:\\mathbf P_B(F)\\to B$, and put\n$h_F=c_1(\\mathcal O(1))$ of [lem-pur-kummer-additivity].\nThen the morphism\n\n$$\n(1,h_F,\\ldots,h_F^n):\n\\bigoplus_{a=0}^{n}\\Lambda_B(-a)[-2a]\n\\xrightarrow{\\ \\sim\\ }Rp_*\\Lambda_{\\mathbf P_B(F)}\n$$\n\nis an isomorphism, base-change compatible. This statement uses no\npurity isomorphism.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.md",
-    "place": "node thm-pur-projective-bundle-formula, order 1986"
-  },
-  "stmt_deps": [
-    "def-pur-conventions",
+ "id": "thm-pur-projective-bundle-formula",
+ "blueprint": {
+  "is": "thm-pur-projective-bundle-formula",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Projective-bundle formula without purity",
+ "statement": "Use the finite-coefficient purity conventions [def-pur-conventions], with $\\Lambda=A=A_{E,r}$, $r\\geq1$. Let $B$ be a separated finite-type $k$-scheme, let $n\\geq0$, and let $F$ be a locally free $\\mathcal O_B$-module of constant rank $n+1$ [def-amb-finite-locally-free-module]. Put $p:P=\\mathbf P_B(F)=\\operatorname{Proj}_B(\\operatorname{Sym}^{\\bullet}F)\\to B$, with its tautological invertible module $\\mathcal O_P(1)$ [lem-pur-projective-bundle-tautological-geometry], and put $h_F=c_{1,A}(\\mathcal O_P(1))$ [lem-pur-kummer-additivity]. In the ordinary pro-etale derived category of constant-$A$ modules, the adjoints of its cup powers give an isomorphism\n$$(1,h_F,\\ldots,h_F^n):\\bigoplus_{a=0}^{n}A_B(-a)[-2a]\\xrightarrow{\\sim}Rp_*A_P,$$\nwith the twists of [def-coefficient-twists-detailed] and the derived operations of [def-weil-pbc-proetale-operations]. For every $g:B'\\to B$ between separated finite-type $k$-schemes, proper base change and the tautological pullback identification identify the pullback of this morphism with the same morphism for $g^*F$ on $B'$. This is the finite-coefficient statement; it uses no smooth or higher-codimension purity isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.md",
+  "place": "node thm-pur-projective-bundle-formula, order 1986"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-amb-finite-locally-free-module",
+  "lem-pur-projective-bundle-tautological-geometry",
+  "lem-pur-kummer-additivity",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pur-projective-bundle-tautological-geometry], $p$ is proper, $P$ is separated finite type over $k$, and $\\mathcal O_P(1)$ is a global line bundle whose restriction to every trivialization is the usual $\\mathcal O(1)$. Form $h_F$ by [lem-pur-kummer-additivity]. For $a\\geq0$, tensor $a$ copies of $h_F:A_P\\to A_P(1)[2]$, multiply the coefficient twists, and use evaluation to view the result as $p^*A_B(-a)[-2a]\\to A_P$; $a=0$ is the identity. The twists are invertible, locally free rank one by [lem-pur-twist-sheaf-locally-free]. Adjunction in [def-weil-pbc-proetale-operations] gives the displayed component into $Rp_*A_P$; the finite direct sum gives the asserted morphism $\\Phi_F$. No gluing of derived-category morphisms is used.",
+   "uses": [
+    "lem-pur-projective-bundle-tautological-geometry",
     "lem-pur-kummer-additivity",
-    "def-coefficient-twists-detailed",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [
-    {
-      "text": "The vanishing of a bounded cone will be checked on its cohomology sheaves in the sense of [def-weil-derived-cohomology-sheaves].\nStep 1: the field case. Let the base be an algebraically closed\nfield and write $H=\\mathbf P^{n-1}$ for the hyperplane at infinity\nof $\\mathbf P^n$, with complement $\\mathbf A^n$. By\n[thm-pur-rank-one-thom] on the fiber-wise structure, the Künneth\nformula for compactly supported cohomology\n[cor-kun-compact-kunneth] of the Künneth chapter — the\n*compact-support* statement, which is not the closed-support Künneth\n[lem-pur-kunneth-supported]: cohomology with support in the whole space\nis ordinary cohomology, whereas $R\\Gamma_c$ is computed on a\ncompactification — and induction,\n\n$$\nR\\Gamma_c(\\mathbf A^n,\\Lambda)\\;\\cong\\;\\Lambda(-n)[-2n].\n$$",
-      "uses": [
-        "def-weil-derived-cohomology-sheaves",
-        "thm-pur-rank-one-thom",
-        "cor-kun-compact-kunneth",
-        "lem-pur-kunneth-supported"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the open–closed localization triangle of\n[def-weil-open-closed-recollement] to\n$\\mathbf A^n\\subset\\mathbf P^n$. By induction on $n$,\nrestriction to $H$ identifies $1,h,\\ldots,h^{n-1}$ with the\ncorresponding basis of $R\\Gamma(H,\\Lambda)$, and the remaining class\n$h^n$ restricts to zero on $H$. Choose $n$ hyperplanes whose\nintersection is the origin of the affine chart; the product of their\nlocalized Kummer classes is supported at the origin, and after\nforgetting support and extending to $\\mathbf P^n$ it is\n$h^n$; under the Künneth isomorphism this supported product is the\ngenerator of\n$R\\Gamma_c(\\mathbf A^n,\\Lambda)=\\Lambda(-n)[-2n]$ fixed by the\nrank-one normalization ([thm-pur-rank-one-local-calculation]).\nTherefore\n\n$$\n\\bigoplus_{a=0}^{n}\\Lambda(-a)[-2a]\n\\xrightarrow{\\ (1,h,\\ldots,h^n)\\ }R\\Gamma(\\mathbf P^n,\\Lambda)\n$$\n\nis an isomorphism.",
-      "uses": [
-        "def-weil-open-closed-recollement",
-        "thm-pur-rank-one-local-calculation"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 2: the general base. The Kummer class $h_F$ is global; the\nclass of the divisors in Step 1 is the one of\n[lem-pur-divisor-class] (the frame class of the\n$\\mathbf P^n$-bundle, with the independence of\n[lem-pur-frame-independence]), so the morphism of the statement\nis defined before taking any fiber. Proper base change\n([prop-weil-proet-finite-proper-base-change]) with\n[cor-weil-pbc-geometric-fiber-finite] identifies its pullback to\neach geometric point of $B$ with the calculation of Step 1; the\ncone is bounded constructible with zero geometric stalks, hence zero.\nThe same argument for the pullbacks proves base-change compatibility.\nThis proof used only the rank-one Thom calculation, Künneth,\nlocalization, and proper base change.",
-      "uses": [
-        "lem-pur-divisor-class",
-        "lem-pur-frame-independence",
-        "prop-weil-proet-finite-proper-base-change",
-        "cor-weil-pbc-geometric-fiber-finite"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-derived-cohomology-sheaves",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 2, global Kummer class before taking fibres"
+   }
+  },
+  {
+   "text": "We may calculate the same morphism on the ordinary etale sites. The definition in [lem-pur-kummer-additivity] constructs $h_F$ by applying $\\nu_P^*$ to the etale Kummer morphism, with its prescribed twist identification. The counit-mate isomorphism of [lem-weil-pbc-comparison-direct-image-canonical-mate] identifies $\\nu_B^*Rp_{\\mathrm{et},*}A_P$ with $Rp_{\\mathrm{proet},*}A_P$. Its displayed counit equality says that the adjunct of the image of a component is exactly the image of its adjunct, so it identifies $\\nu_B^*\\Phi_F^{\\mathrm{et}}$ with $\\Phi_F$. Pullback and tensor comparisons respect these cup powers by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-weil-pbc-comparison-pullback], and finite etale twists pull back as in [lem-asd-etale-finite-twist-pullback]. The comparison functor is fully faithful by [thm-weil-pbc-site-comparison], hence reflects isomorphisms. The compact and supported calculations below may be made in either site using the named comparisons in [lem-pur-compact-product-proper-support-compatibility].",
+   "uses": [
+    "lem-pur-kummer-additivity",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-asd-etale-finite-twist-pullback",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-compact-product-proper-support-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1 and Step 2, finite-coefficient etale/pro-etale interpretation"
+   }
+  },
+  {
+   "text": "Work over the fixed $k$. Apply [thm-pur-rank-one-thom] to the trivial line over $\\operatorname{Spec}k$: $R\\Gamma_c(\\mathbf A^1_k,A)=A(-1)[-2]$, and $\\tau_E$, the compact direct image of the zero-section class precomposed with $A=R\\Gamma(\\{0\\},A)$, is invertible; this is $u_{\\{0\\}}$ of [lem-pur-compact-product-proper-support-compatibility], so $u_{\\{0\\}}(\\partial\\kappa(t))$ generates $H^2_c(\\mathbf A^1_k,A(1))$. The class is $\\partial\\kappa(t)$ by [lem-pur-divisor-class], with residue $1$ by [thm-pur-rank-one-local-calculation]. [lem-weil-pbc-geometric-point-cohomology] gives $R\\Gamma_c(\\operatorname{Spec}k,A)=A$. Coefficients are twists of Tor amplitude $[0,0]$; iterating the compact isomorphism $\\kappa_c$ on $\\mathbf A^n_k=\\mathbf A^{n-1}_k\\times_k\\mathbf A^1_k$ gives\n$$R\\Gamma_c(\\mathbf A^n_k,A)=A(-n)[-2n].$$\nBy [lem-pur-supported-cup-functoriality] the pullback of $\\partial\\kappa(t)$ along the $i$th projection is $\\partial\\kappa(t_i)$, and pullback preserves supported cups [def-pur-supported-cup]. The cup clause of the compact lemma (degrees even) and associativity identify $\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_n)$, supported at the origin $o$, with the supported exterior product [def-pur-supported-exterior-product] of $\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_{n-1})$ and $\\partial\\kappa(t)$. The supports are points, hence proper, so $u_{Z\\times W}\\circ\\kappa^{Z,W}=\\kappa_c\\circ(u_Z\\otimes_A^Lu_W)$ and invertibility of $\\kappa_c$ between free rank-one modules show by induction on $n$ that $u_o(\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_n))$ generates $H^{2n}_c(\\mathbf A^n_k,A(n))$, not merely that the group is free of rank one. All shifts are even.",
+   "uses": [
     "thm-pur-rank-one-thom",
-    "cor-kun-compact-kunneth",
-    "lem-pur-kunneth-supported",
-    "def-weil-open-closed-recollement",
+    "lem-pur-divisor-class",
     "thm-pur-rank-one-local-calculation",
-    "lem-pur-divisor-class",
-    "lem-pur-frame-independence",
-    "prop-weil-proet-finite-proper-base-change",
-    "cor-weil-pbc-geometric-fiber-finite"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.md",
-    "place": "## Proof"
+    "lem-pur-compact-product-proper-support-compatibility",
+    "lem-weil-pbc-geometric-point-cohomology",
+    "lem-pur-supported-cup-functoriality",
+    "def-pur-supported-cup",
+    "def-pur-supported-exterior-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1, compact affine-space calculation and normalization"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1986,
-  "blueprint_uses": [
-    "cor-kun-compact-kunneth",
-    "cor-weil-pbc-geometric-fiber-finite",
-    "def-coefficient-twists-detailed",
-    "def-pur-conventions",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-open-closed-recollement",
-    "def-weil-scheme-morphism-properties",
+  {
+   "text": "Set up induction on $n$ for $\\Phi_n$ on $\\mathbf P^n_k$. At $n=0$ this is the identity. For $n\\geq1$, write $H=\\{T_0=0\\}\\cong\\mathbf P^{n-1}_k$, $U=\\{T_0\\ne0\\}\\cong\\mathbf A^n_k$, and $o=[1:0:\\cdots:0]$, using [lem-pur-projective-bundle-tautological-geometry]. The $n$ divisors $D_i=\\{T_i=0\\}$ for $1\\leq i\\leq n$ have common intersection $o$ and $\\mathcal O(D_i)=\\mathcal O(1)$. By [lem-pur-divisor-class], forgetting support sends each localized class to $h=c_1(\\mathcal O(1))$. Form their supported cup product as in [def-pur-supported-cup]. Its restriction to $U$ is the coordinate product from step 3, by [lem-pur-supported-cup-functoriality] and the local-equation description of the divisor class. Excision and the support-to-compact comparison of [lem-pur-compact-product-proper-support-compatibility] identify its image in $H^{2n}(\\mathbf P^n_k,A(n))$ with the image of that compactly supported coordinate product. Forgetting support in the tensor-morphism definition multiplies the underlying ordinary classes, so this image is exactly $h^n$. In particular the compact generator maps to $h^n$.",
+   "uses": [
+    "lem-pur-projective-bundle-tautological-geometry",
     "lem-pur-divisor-class",
-    "lem-pur-frame-independence",
+    "def-pur-supported-cup",
+    "lem-pur-supported-cup-functoriality",
+    "lem-pur-compact-product-proper-support-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1, coordinate hyperplanes and the top class"
+   }
+  },
+  {
+   "text": "Apply the actual open--closed triangle of [prop-sf-open-closed-triangle-all-stages] to $U\\subset\\mathbf P^n_k$ and the constant complex, then proper direct image to $\\operatorname{Spec}k$. It is\n$$R\\Gamma_c(U,A)\\longrightarrow R\\Gamma(\\mathbf P^n_k,A)\\longrightarrow R\\Gamma(H,A)\\longrightarrow R\\Gamma_c(U,A)[1].$$\nHere $R\\Gamma(\\mathbf P^n_k,j_!A)=R\\Gamma_c(U,A)$ for the compactification $U\\subset\\mathbf P^n_k$ by [def-compact-support-direct-image-detailed]. The first term is concentrated in degree $2n$ by step 3. The induction hypothesis puts the last term in even degrees $0,2,\\ldots,2n-2$. The long exact cohomology sequence of [lem-sf-derived-homology-long-exact] therefore identifies restriction with an isomorphism in every degree below $2n$, and identifies $H_c^{2n}(U,A)$ with $H^{2n}(\\mathbf P^n_k,A)$; all other groups vanish. Naturality of $c_1$ in [lem-pur-kummer-additivity] gives $h|_H=c_1(\\mathcal O_H(1))$, so $1,h,\\ldots,h^{n-1}$ are the required generators in the lower degrees. Step 4 gives $h^n$ as the top generator. Consequently $\\Phi_n$ is an isomorphism on every cohomology sheaf and hence its pro-etale realization is an isomorphism by clause 3 of [lem-cbc-proetale-stalk-conservative], using the point sections/stalk identification of step 3. Full faithfulness from step 2 makes the etale morphism an isomorphism as well; cohomology is [def-weil-derived-cohomology-sheaves]. This proves the induction without a claimed splitting of a triangle or a purity isomorphism.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
     "lem-pur-kummer-additivity",
-    "lem-pur-kunneth-supported",
-    "prop-weil-proet-finite-proper-base-change",
-    "thm-pur-rank-one-local-calculation",
-    "thm-pur-rank-one-thom"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "def-weil-derived-cohomology-sheaves",
+    "lem-sf-derived-homology-long-exact",
+    "lem-cbc-proetale-stalk-conservative",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 1, localization induction"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-an",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $F$ be a\nvector bundle of rank\n$n+1$ on $B$, let $p:\\mathbf P_B(F)\\to B$, and put\n$h_F=c_1(\\mathcal O(1))$ of [lem-pur-kummer-additivity].\nThen the morphism\n\n$$\n(1,h_F,\\ldots,h_F^n):\n\\bigoplus_{a=0}^{n}\\Lambda_B(-a)[-2a]\n\\xrightarrow{\\ \\sim\\ }Rp_*\\Lambda_{\\mathbf P_B(F)}\n$$\n\nis an isomorphism, base-change compatible.",
-    "proof": [
-      {
-        "text": "The vanishing of a bounded cone will be checked on its cohomology sheaves in the sense of [def-weil-derived-cohomology-sheaves].\nStep 1: the field case. Let the base be an algebraically closed\nfield and write $H=\\mathbf P^{n-1}$ for the hyperplane at infinity\nof $\\mathbf P^n$, with complement $\\mathbf A^n$. By\n[thm-pur-rank-one-thom] on the fiber-wise structure, the Künneth\nformula for compactly supported cohomology\n[cor-kun-compact-kunneth] of the Künneth chapter — the\n*compact-support* statement, which is not the closed-support Künneth\n[lem-pur-kunneth-supported]: cohomology with support in the whole space\nis ordinary cohomology, whereas $R\\Gamma_c$ is computed on a\ncompactification — and induction,\n\n$$\nR\\Gamma_c(\\mathbf A^n,\\Lambda)\\;\\cong\\;\\Lambda(-n)[-2n].\n$$",
-        "uses": [
-          "def-weil-derived-cohomology-sheaves",
-          "thm-pur-rank-one-thom",
-          "cor-kun-compact-kunneth",
-          "lem-pur-kunneth-supported"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Apply the open–closed localization triangle of\n[def-weil-open-closed-recollement] to\n$\\mathbf A^n\\subset\\mathbf P^n$. By induction on $n$,\nrestriction to $H$ identifies $1,h,\\ldots,h^{n-1}$ with the\ncorresponding basis of $R\\Gamma(H,\\Lambda)$, and the remaining class\n$h^n$ restricts to zero on $H$. Choose $n$ hyperplanes whose\nintersection is the origin of the affine chart; the product of their\nlocalized Kummer classes is supported at the origin, and after\nforgetting support and extending to $\\mathbf P^n$ it is\n$h^n$; under the Künneth isomorphism this supported product is the\ngenerator of\n$R\\Gamma_c(\\mathbf A^n,\\Lambda)=\\Lambda(-n)[-2n]$ fixed by the\nrank-one normalization ([thm-pur-rank-one-local-calculation]).\nTherefore\n\n$$\n\\bigoplus_{a=0}^{n}\\Lambda(-a)[-2a]\n\\xrightarrow{\\ (1,h,\\ldots,h^n)\\ }R\\Gamma(\\mathbf P^n,\\Lambda)\n$$\n\nis an isomorphism.",
-        "uses": [
-          "def-weil-open-closed-recollement",
-          "thm-pur-rank-one-local-calculation"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 2: the general base. The Kummer class $h_F$ is global; the\nclass of the divisors in Step 1 is the one of\n[lem-pur-divisor-class] (the frame class of the\n$\\mathbf P^n$-bundle, with the independence of\n[lem-pur-frame-independence]), so the morphism of the statement\nis defined before taking any fiber. Proper base change\n([prop-weil-proet-finite-proper-base-change]) with\n[cor-weil-pbc-geometric-fiber-finite] identifies its pullback to\neach geometric point of $B$ with the calculation of Step 1; the\ncone is bounded constructible with zero geometric stalks, hence zero.\nThe same argument for the pullbacks proves base-change compatibility.\nThis proof used only the rank-one Thom calculation, Künneth,\nlocalization, and proper base change.",
-        "uses": [
-          "lem-pur-divisor-class",
-          "lem-pur-frame-independence",
-          "prop-weil-proet-finite-proper-base-change",
-          "cor-weil-pbc-geometric-fiber-finite"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For arbitrary geometric fields use the same Kummer construction without imposing finite type over $k$ on the extension. For any scheme map $v:T'\\to T$, pullback of a line bundle takes its frame torsor to the extension of its inverse-image torsor along the units comparison (on transition functions this is just $g_{ij}\\mapsto v^*g_{ij}$); the torsor--$H^1$ bijection is functorial by [lem-sc-etale-torsor-h1-functoriality]. The unit-pullback map gives a morphism from the inverse-image Kummer sequence to the Kummer sequence on $T'$ [lem-amb-kummer-any-base]. Naturality of connecting maps in [lem-weil-pbc-site-cohomology-pullback], followed by $z\\mapsto z\\otimes1$, proves $v^*c_1(M)=c_1(v^*M)$. Twist evaluation commutes with this by [lem-asd-etale-finite-twist-pullback]. These are three applications of the cited statements, so the calculation also applies to $T'=\\mathbf P^n_\\Omega$ for every algebraically closed extension $\\Omega/k$. Now [lem-pur-projective-bundle-tautological-geometry] identifies $\\mathbf P^n_\\Omega$ and its $\\mathcal O(1)$ with the base changes from $k$. Ordinary etale proper base change [prop-weil-proet-finite-proper-base-change] for $\\mathbf P^n_k\\to\\operatorname{Spec}k$ identifies the pullback of $\\Phi_n^{\\mathrm{et}}$ with the same cup-power morphism over $\\Omega$, hence with an isomorphism. Here [lem-weil-pbc-exchange-forget-coefficients] supplies the A-linear exchange and says its invertibility is detected by the underlying abelian exchange. The rank-one and Kunneth theorems themselves were used only over $k$.",
+   "uses": [
+    "lem-sc-etale-torsor-h1-functoriality",
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-projective-bundle-tautological-geometry",
+    "prop-weil-proet-finite-proper-base-change",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 2, arbitrary geometric fields"
+   }
+  },
+  {
+   "text": "For the given $B$, use $\\Phi_F^{\\mathrm{et}}$ from step 2. At a geometric point $\\bar b:\\operatorname{Spec}\\Omega\\to B$, proper base change [cor-weil-pbc-geometric-fiber-finite] identifies its target stalk with $R\\Gamma(P_{\\bar b},A)$. The geometric fibre is $\\mathbf P^n_\\Omega$, with the tautological $\\mathcal O(1)$, by [lem-pur-projective-bundle-tautological-geometry]. The Kummer construction [lem-pur-kummer-additivity], with its arbitrary-scheme pullback calculation of step 6, identifies the stalk map with the map proved invertible in step 6. Its source and target are bounded-below etale module complexes. Clause 3 of [lem-cbc-proetale-stalk-conservative] therefore makes $\\nu_B^*\\Phi_F^{\\mathrm{et}}$ an isomorphism, identified with $\\Phi_F$ by step 2. The detector is explicitly restricted to etale-origin morphisms; no geometric-stalk assertion for arbitrary pro-etale sheaves is used.",
+   "uses": [
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-pur-projective-bundle-tautological-geometry",
+    "lem-pur-kummer-additivity",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 2, geometric-fibre detection"
+   }
+  },
+  {
+   "text": "Finally let $g:B'\\to B$ be as in the statement. The geometry lemma identifies $P'=B'\\times_BP$ and $\\mathcal O_{P'}(1)=g'^*\\mathcal O_P(1)$. By [lem-pur-kummer-additivity] and [lem-asd-etale-finite-twist-pullback], the adjunct of the $a$th pulled-back etale component is $g'^*h_F^a=h_{g^*F}^a$ after evaluation of opposite twists. The A-module exchange of clause 3 of [lem-weil-pbc-exchange-forget-coefficients] is defined by pulling back the counit and transposing; thus composing the pulled-back component with exchange has precisely this adjunct, and adjunction identifies it with the $a$th component of $\\Phi_{g^*F}^{\\mathrm{et}}$. This proves equality of the maps, including $a=0$, and not just fibrewise isomorphy. Proper base change [prop-weil-proet-finite-proper-base-change] makes exchange invertible. Pullback comparison [lem-weil-pbc-comparison-pullback] and the counit equality of [lem-weil-pbc-comparison-direct-image-canonical-mate] carry that same equality to pro-etale coefficients. This proves the stated base-change compatibility.",
+   "uses": [
+    "lem-pur-projective-bundle-tautological-geometry",
+    "lem-pur-kummer-additivity",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "prop-weil-proet-finite-proper-base-change",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+    "place": "Step 2, base-change compatibility of the named morphism"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pur-projective-bundle-tautological-geometry",
+  "lem-pur-kummer-additivity",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-asd-etale-finite-twist-pullback",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-compact-product-proper-support-compatibility",
+  "thm-pur-rank-one-thom",
+  "lem-pur-divisor-class",
+  "thm-pur-rank-one-local-calculation",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "def-pur-supported-cup",
+  "lem-pur-supported-cup-functoriality",
+  "prop-sf-open-closed-triangle-all-stages",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-sf-derived-homology-long-exact",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "prop-weil-proet-finite-proper-base-change",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-pur-supported-exterior-product",
+  "def-compact-support-direct-image-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+  "place": "Step 1 (rank-one, compact Kunneth, hyperplanes, localization) and Step 2 (proper base change); supplied finite-ring and map-normalization details"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The projective bundle formula in etale cohomology, powers of the first Chern class of O(1) form a basis of the derived pushforward of constant finite torsion coefficients",
+   "results": "AlgebraicGeometry.Proj.pow_apply; Rep.standardComplex.x_projective; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; CommRing.relPic; CommRing.Pic.mk; Rep.FiniteCyclicGroup.resolution; Rep.isZero_Tor_succ_of_projective; CommRing.Pic.mapAlgebra_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the specified etale theorem or relative bundle with tautological twists"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.?bundle|chern.?class|kunneth|künneth",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the specified etale theorem or relative bundle with tautological twists"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of projective space with finite torsion coefficients is free on powers of the hyperplane class",
+   "results": "Algebra.Etale.finitePresentation; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; RingHom.Etale; Algebra.Etale.formallyEtale; AlgebraicGeometry.Scheme.etaleTopology; LinearAlgebra.Projectivization.termℙ; Algebra.instEtaleOfIsStandardEtale",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the specified etale theorem or relative bundle with tautological twists"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"ProjectiveSpace\"",
+   "results": "No hits; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: unknown namespace, not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale direct image of the constant sheaf on projective n-space splits as the direct sum of Tate twists shifted by even degrees, via powers of the Kummer hyperplane class",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι; AlgebraicGeometry.Proj.awayMap_awayToSection; AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE; AlgebraicGeometry.projIsoSpec; AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the specified etale theorem or relative bundle with tautological twists"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1986,
+ "blueprint_uses": [
+  "cor-kun-compact-kunneth",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-open-closed-recollement",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-divisor-class",
+  "lem-pur-frame-independence",
+  "lem-pur-kummer-additivity",
+  "lem-pur-kunneth-supported",
+  "prop-weil-proet-finite-proper-base-change",
+  "thm-pur-rank-one-local-calculation",
+  "thm-pur-rank-one-thom"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $F$ be a\nvector bundle of rank\n$n+1$ on $B$, let $p:\\mathbf P_B(F)\\to B$, and put\n$h_F=c_1(\\mathcal O(1))$ of [lem-pur-kummer-additivity].\nThen the morphism\n\n$$\n(1,h_F,\\ldots,h_F^n):\n\\bigoplus_{a=0}^{n}\\Lambda_B(-a)[-2a]\n\\xrightarrow{\\ \\sim\\ }Rp_*\\Lambda_{\\mathbf P_B(F)}\n$$\n\nis an isomorphism, base-change compatible.",
+  "proof": [
+   {
+    "text": "The vanishing of a bounded cone will be checked on its cohomology sheaves in the sense of [def-weil-derived-cohomology-sheaves].\nStep 1: the field case. Let the base be an algebraically closed\nfield and write $H=\\mathbf P^{n-1}$ for the hyperplane at infinity\nof $\\mathbf P^n$, with complement $\\mathbf A^n$. By\n[thm-pur-rank-one-thom] on the fiber-wise structure, the Künneth\nformula for compactly supported cohomology\n[cor-kun-compact-kunneth] of the Künneth chapter — the\n*compact-support* statement, which is not the closed-support Künneth\n[lem-pur-kunneth-supported]: cohomology with support in the whole space\nis ordinary cohomology, whereas $R\\Gamma_c$ is computed on a\ncompactification — and induction,\n\n$$\nR\\Gamma_c(\\mathbf A^n,\\Lambda)\\;\\cong\\;\\Lambda(-n)[-2n].\n$$",
+    "uses": [
+     "def-weil-derived-cohomology-sheaves",
+     "thm-pur-rank-one-thom",
+     "cor-kun-compact-kunneth",
+     "lem-pur-kunneth-supported"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the open–closed localization triangle of\n[def-weil-open-closed-recollement] to\n$\\mathbf A^n\\subset\\mathbf P^n$. By induction on $n$,\nrestriction to $H$ identifies $1,h,\\ldots,h^{n-1}$ with the\ncorresponding basis of $R\\Gamma(H,\\Lambda)$, and the remaining class\n$h^n$ restricts to zero on $H$. Choose $n$ hyperplanes whose\nintersection is the origin of the affine chart; the product of their\nlocalized Kummer classes is supported at the origin, and after\nforgetting support and extending to $\\mathbf P^n$ it is\n$h^n$; under the Künneth isomorphism this supported product is the\ngenerator of\n$R\\Gamma_c(\\mathbf A^n,\\Lambda)=\\Lambda(-n)[-2n]$ fixed by the\nrank-one normalization ([thm-pur-rank-one-local-calculation]).\nTherefore\n\n$$\n\\bigoplus_{a=0}^{n}\\Lambda(-a)[-2a]\n\\xrightarrow{\\ (1,h,\\ldots,h^n)\\ }R\\Gamma(\\mathbf P^n,\\Lambda)\n$$\n\nis an isomorphism.",
+    "uses": [
+     "def-weil-open-closed-recollement",
+     "thm-pur-rank-one-local-calculation"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: the general base. The Kummer class $h_F$ is global; the\nclass of the divisors in Step 1 is the one of\n[lem-pur-divisor-class] (the frame class of the\n$\\mathbf P^n$-bundle, with the independence of\n[lem-pur-frame-independence]), so the morphism of the statement\nis defined before taking any fiber. Proper base change\n([prop-weil-proet-finite-proper-base-change]) with\n[cor-weil-pbc-geometric-fiber-finite] identifies its pullback to\neach geometric point of $B$ with the calculation of Step 1; the\ncone is bounded constructible with zero geometric stalks, hence zero.\nThe same argument for the pullbacks proves base-change compatibility.\nThis proof used only the rank-one Thom calculation, Künneth,\nlocalization, and proper base change.",
+    "uses": [
+     "lem-pur-divisor-class",
+     "lem-pur-frame-independence",
+     "prop-weil-proet-finite-proper-base-change",
+     "cor-weil-pbc-geometric-fiber-finite"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-pur-projective-bundle-formula",
+  "worker": "stage1",
+  "summary": "Made the finite-coefficient setting explicit; supplied rank-one normalized compact-product induction, localization cohomology argument, arbitrary geometric-field passage, and equality of base-change maps. Replaced definition-only localization and misleadingly named etale base-change citations by their actual statements. Two statement-only nodes isolate tautological bundle geometry and the compact/support external-product comparison.",
+  "blueprint": "Current main-20261015 proof Step 1 is realized by steps 3–5 (with comparison setup in step 2); Step 2 by steps 1 and 6–8. Same rank-one/Kunneth/localization/proper-base-change route; no SGA or higher-rank purity.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kummer-additivity",
+    "why": "Generic Kummer functoriality and named finite Chern class used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic counit-normalized comparison of etale and pro-etale proper direct images used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-topos/torsor/Kummer cohomology tool used as stated to track the actual finite Chern-class map, including arbitrary geometric fields; no purity statement is imported."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison of the two site pullbacks used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic finite etale twist pullback and evaluation used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic fully faithful finite site comparison used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "thm-pur-rank-one-thom",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-pur-divisor-class",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "thm-pur-rank-one-local-calculation",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-cohomology",
+    "why": "Generic exact cohomology/stalk or triangle-cohomology tool, used in precisely its stated coefficient and derived category to implement the localization induction."
+   },
+   {
+    "node": "def-pur-supported-cup",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-pur-supported-cup-functoriality",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Generic existence of the finite open–closed distinguished triangle used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "def-weil-derived-cohomology-sheaves",
+    "why": "Generic cohomology detection of derived isomorphisms used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic exact cohomology/stalk or triangle-cohomology tool, used in precisely its stated coefficient and derived category to implement the localization induction."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Generic finite-module site-comparison/stalk/exchange tool, used with its exact stated category and named maps to implement the proper-base-change route."
+   },
+   {
+    "node": "lem-sc-etale-torsor-h1-functoriality",
+    "why": "Generic ringed-topos/torsor/Kummer cohomology tool used as stated to track the actual finite Chern-class map, including arbitrary geometric fields; no purity statement is imported."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic ringed-topos/torsor/Kummer cohomology tool used as stated to track the actual finite Chern-class map, including arbitrary geometric fields; no purity statement is imported."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Generic ringed-topos/torsor/Kummer cohomology tool used as stated to track the actual finite Chern-class map, including arbitrary geometric fields; no purity statement is imported."
+   },
+   {
+    "node": "prop-weil-proet-finite-proper-base-change",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic finite-module site-comparison/stalk/exchange tool, used with its exact stated category and named maps to implement the proper-base-change route."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Generic rank-one, supported-class, or proper-base-change tool used as stated, without replacing the unit's rank-one/compact-product/localization/fibre route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kummer-additivity",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-asd-etale-finite-twist-pullback",
+  "thm-weil-pbc-site-comparison",
+  "thm-pur-rank-one-thom",
+  "lem-pur-divisor-class",
+  "thm-pur-rank-one-local-calculation",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "def-pur-supported-cup",
+  "lem-pur-supported-cup-functoriality",
+  "prop-sf-open-closed-triangle-all-stages",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-sf-derived-homology-long-exact",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "prop-weil-proet-finite-proper-base-change",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "cor-weil-pbc-geometric-fiber-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-7ff1b0811",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-7ff1b0811 (reviewer sub-agent of L); spot-checked: Read the whole delivery against the main-20261015 blueprint statement and proof, unit sk-prop-an, the Stacks constructions.tex tags 01OB, 01O3 (r and θ on twists) and 01OE, and the full statement of every cited node. Faithfulness: the item statement matches the blueprint and the conventions (finite A, B separated finite type, quotient Proj Sym F). Nothing is weakened. Edge cases: n=0, empty B, ramified E with A not flat over Z/ℓ^N. Steps 1, 2 and 4–8 are correct: the mate normalization and full faithfulness, divisor-class restriction and excision, the localization long exact sequence (H^{2n-1}=0 and the top-degree isomorphism), Kummer naturality over Ω without finite type, the clause-3 stalk detector, and exchange-forget for the A-linear mate. The DFS from the item finds no cycle. Two repairable faults were fixed. (1) C1/E5 in step 3: the step treated the internal supported cup ∂κ(t_1)∪…∪∂κ(t_n) (def-pur-supported-cup, pro-étale) as if it were the supported exterior product κ^{Z,W} that the compact lemma speaks about. No DAG node identifies the two. I added an even-degree twisted cup clause to the delivery's own new lemma lem-pur-compact-product-proper-support-compatibility: κ^{Z,W}(α⊗β)=pr^*α∪pr^*β. I rewrote step 3 to use it with lem-pur-supported-cup-functoriality and u_{0}=τ_E (1708 characters). (2) The same lemma defined u_Z only on cohomology classes but asserted a derived equation. u_Z is now defined in D(A) via C_i⊣RΓ_Z and RΓ_c(ε_i), with Z proper so that j_!i_*=ī_*. The excision extension is now made precise. Small: step 5 now cites def-compact-support-direct-image-detailed for RΓ(P^n,j_!A)=RΓ_c(U,A). The geometry lemma is true clause by clause and is not a duplicate of the nagata Proj/base-change nodes. Neither new node is a duplicate or restates a clause of the item. Every proof dependency is on the transitive unit route, so the declared tool_uses are unnecessary but harmless; I accept them. Corrected files: fixes/dag/nodes/sec-smooth-purity/{thm-pur-projective-bundle-formula,lem-pur-compact-product-proper-support-compatibility}.json. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
