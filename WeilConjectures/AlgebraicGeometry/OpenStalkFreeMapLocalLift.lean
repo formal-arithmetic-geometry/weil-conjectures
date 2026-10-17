@@ -98,16 +98,12 @@ theorem exists_open_stalk_free_map_local_lifts
     X U x hxU m N t
   refine ⟨V, hxV, hVU, ?_⟩
   intro W hxW hWV hWU
-  obtain ⟨d, hd⟩ := he V hxV hVU a W hxW hWV hWU
-  let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU)
+  obtain ⟨c, d, -, hc⟩ := he V hxV hVU a W hxW hWV hWU
   let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWV)
-  let P := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU)
-  let c : R ⋙ Q ≅ P := NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
   let g := c.inv.app F ≫ Q.map k ≫ c.hom.app N
   refine ⟨g, ?_⟩
   exact restriction_lift_stalk c d a
-    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW)
-    (fun M ↦ by simpa [c] using hd M) t k hk
+    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) hc t k hk
 
 end
 end AlgebraicGeometry.Scheme

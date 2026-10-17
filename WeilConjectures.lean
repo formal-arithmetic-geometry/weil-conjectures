@@ -622,7 +622,6 @@ public import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalarsModule
 public import WeilConjectures.Algebra.Homology.TensorShiftOneAssociator
 public import WeilConjectures.Algebra.Homology.TensorTotalExtendNat
 public import WeilConjectures.Algebra.Homology.TensorTotalExtendNaturalIso
-public import WeilConjectures.Algebra.Homology.TensorTotalExtensionCoordinates
 public import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
 public import WeilConjectures.Algebra.Homology.TorIndependentKFlatResolutionTensor
 public import WeilConjectures.Algebra.Homology.TorIndependentKFlatTensorComparison
