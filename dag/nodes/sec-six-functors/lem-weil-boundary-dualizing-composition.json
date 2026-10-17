@@ -11,17 +11,135 @@
   "def-weil-closed-immersion",
   "def-weil-pbc-derived-categories",
   "def-amb-etale-compact-support",
-  "def-weil-exceptional-inverse-image"
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
   "place": "First proof paragraph: independently formal costalk comparison, including the dualizing-object identification from composition of the structure map with the closed immersion; returned step 1."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prepare the ordinary etale adjunctions. A field is Noetherian, so the finite-type-over-Noetherian lemma makes each of the schemes Noetherian; they are quasi-compact, and the locally-Noetherian quasi-separatedness lemma makes them quasi-separated. Nagata therefore gives a compactification $c_h=(j_h,p_h)$ for each $h=f,g,gf$. Here $p_h$ is proper, hence finite type. Finite-type composition makes its source $\\overline X_h$ finite type over $k$. The finite-dimension lemma gives an integer $d_h\\geq0$ with $\\dim\\overline X_h\\leq d_h$ (take $d_h=0$ for an empty compactification). The ordinary etale exceptional-adjoint theorem supplies $F_h=Rp_{h,*}j_{h,!}\\dashv h^\\times$ on the unbounded ordinary etale categories. The same preparation applies to the structure maps below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-kun-dimension-finite-type",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T3 (lemma-composition-finite-type); Nagata and finite-dimension inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Verify the restriction of the right adjoint, without assuming its output is already bounded below. Write $S_V=\\nu_V^*$ and $U_V=R\\nu_{V,*}$. For $h:V\\to W$ and $L\\in D^+(W_{\\mathrm{et}},A)$, the comparison unit $\\eta_L:L\\xrightarrow{\\sim}U_WS_WL$ gives an isomorphism $S_Vh^\\times L\\cong S_Vh^\\times U_WS_WL$. The right side is bounded below by clause 2 of thm-sf-ambient-adjoint-class, since $S_WL$ is bounded below and the compactification bound $d_h$ was just checked. Exactness of $S_V$ gives $\\mathcal H^r(S_Vh^\\times L)=S_V\\mathcal H^r(h^\\times L)$. The functor $S_V$ detects zero module sheaves: a sheaf in degree zero is in $D^+$, where $S_V$ is fully faithful, so $S_VM=0$ forces $\\operatorname{id}_M=0$. Thus the vanishing of the left side below a fixed degree implies the same vanishing for $h^\\times L$. This proves $h^\\times L\\in D^+$.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "thm-weil-pbc-site-comparison",
+    "def-sf-comparison-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.6 (bounded-below comparison unit), with the existing thm-sf-ambient-adjoint-class clause 2; agent-written reflection argument using exactness on cohomology."
+   }
+  },
+  {
+   "text": "The compact-support comparison theorem gives $\\alpha:F_gF_f\\xrightarrow{\\sim}F_{gf}$ on $D^+$ and identifies the chosen-compactification candidates independently of refinements. Each $F_h$ preserves $D^+$: exact open extension is computed termwise, and the right derived proper direct image of a bounded-below complex is computed by a bounded-below injective resolution. Its ambient adjunction therefore restricts to the full $D^+$ categories, because both functors preserve this class. Apply the right-adjoint-composition lemma to these restricted adjunctions and the isomorphism $\\alpha$. It gives the natural isomorphism $\\theta:(gf)^\\times|_{D^+}\\xrightarrow{\\sim}f^\\times g^\\times|_{D^+}$. Explicitly its Hom bijection is $\\operatorname{Hom}(K,(gf)^\\times L)\\cong\\operatorname{Hom}(F_{gf}K,L)\\cong\\operatorname{Hom}(F_gF_fK,L)\\cong\\operatorname{Hom}(K,f^\\times g^\\times L)$. Thus it is exactly the mate of the specified composition map. Since these Hom bijections use the canonical compactification comparisons, their representing isomorphism is independent of the choices.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-compact-comparisons.md",
+    "place": "Bounded-below composition construction, followed by the formal adjunction composition of Stacks Tag 0DV0 (categories-lemma-compose-counits)."
+   }
+  },
+  {
+   "text": "Write $\\epsilon_h:F_hh^\\times\\to\\operatorname{id}$ for the counits. The pasted-counit assertion of the right-adjoint-composition lemma gives, for every $L\\in D^+$, the precise identity\n$$\\epsilon_{gf,L}\\circ\\alpha_{(gf)^\\times L}=\\epsilon_{g,L}\\circ F_g(\\epsilon_{f,g^\\times L})\\circ F_gF_f(\\theta_L).$$\nBoth sides have source $F_gF_f(gf)^\\times L$ and target $L$. Equivalently, first use $\\alpha^{-1}$ to express the left functor as $F_gF_f$ and then use $\\theta$ to express the right functor as $f^\\times g^\\times$; the counit becomes the two pasted counits. This also fixes the orientation of $\\theta$.",
+   "uses": [
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+    "place": "Adjunction.comp and comp_counit_app, lines 567–582 (Stacks Tag 0DV0, categories-lemma-compose-counits); Adjunction/Unique.lean, rightAdjointUniq, lines 102–108"
+   }
+  },
+  {
+   "text": "The closed-immersion properness lemma makes $i$ separated and finite type. Apply steps 1–4 to $Z\\xrightarrow{i}T\\xrightarrow{a_T}\\operatorname{Spec}k$, whose composite is $a_Z$. The coefficient sheaf $A$ in degree zero belongs to $D^+$, so $\\omega_{T,e}=a_T^\\times A$ and $\\omega_{Z,e}=a_Z^\\times A$ are bounded below. Define $\\kappa_e=\\theta_A^{-1}:i^\\times\\omega_{T,e}\\xrightarrow{\\sim}\\omega_{Z,e}$. Evaluation of the identity in step 4 at $A$ proves its claimed counit compatibility. This is a specialization of the already constructed natural isomorphism and adds no purity or biduality premise.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "First proof paragraph: independently formal costalk comparison, including the dualizing-object identification from composition of the structure map with the closed immersion; returned step 1."
+   }
+  },
+  {
+   "text": "Let $s=\\operatorname{Spec}k$ and identify the constant pro-etale coefficient sheaf $A_p$ with $S_sA_e$; apply the canonical ring-sheaf identification in lem-pe-constant-left-module-inverse-image to the geometric morphism $\\nu_s$. From the finite formula in def-weil-exceptional-inverse-image and the comparison unit at $A_e$, obtain the explicit natural isomorphisms\n$$\\lambda_W:S_W\\omega_{W,e}\\xrightarrow{\\ S_Wa_W^\\times(\\eta_{A_e})\\ }S_Wa_W^\\times U_sS_sA_e=\\omega_{W,p}\\qquad(W=T,Z).$$\nFor every $H\\in D^+(T_{\\mathrm{et}},A)$ the same formula gives\n$$\\rho_H=S_Zi^\\times(\\eta_H):S_Zi^\\times H\\xrightarrow{\\sim}Ri_p^!S_TH.$$\nThe unit is used only on the bounded-below etale objects $A_e,H$; all the displayed arrows are isomorphisms because functors preserve isomorphisms. In particular step 2 justifies their bounded-below codomains.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.6; explicit substitution into the finite formula of def-weil-exceptional-inverse-image, with constant-module pullback supplied by the cited lemma."
+   }
+  },
+  {
+   "text": "The required pro-etale identification is the following composite, so the site transport is fully specified:\n$$Ri_p^!\\omega_{T,p}\\xrightarrow{Ri_p^!(\\lambda_T^{-1})}Ri_p^!S_T\\omega_{T,e}\\xrightarrow{\\rho_{\\omega_{T,e}}^{-1}}S_Zi^\\times\\omega_{T,e}\\xrightarrow{S_Z\\kappa_e}S_Z\\omega_{Z,e}\\xrightarrow{\\lambda_Z}\\omega_{Z,p}.$$\nEvery factor is an isomorphism by steps 5–6. More generally for any $H\\in D^+(s_{\\mathrm{et}},A)$, replace $A_e$ everywhere by $H$ and use $\\theta_H^{-1}$; the same formula gives the composition identification on etale-origin inputs. Naturality follows from the naturality of $\\eta$, $\\theta$ and functoriality. On Hom sets it inserts the comparison-unit isomorphisms into the restricted etale adjunction bijections of step 3, which are exactly the comparison-class bijections of thm-sf-ambient-adjoint-class. Thus it is the same identification under site comparison, with the counit normalization inherited from step 4.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "First proof paragraph: independently formal costalk comparison, including the dualizing-object identification from composition of the structure map with the closed immersion; returned step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-dimension-finite-type",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-sf-ambient-adjoint-class",
+  "thm-weil-pbc-site-comparison",
+  "def-sf-comparison-derived-pullback",
+  "lem-amb-etale-compact-comparisons",
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-cat-right-adjoint-composition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+  "place": "First proof paragraph, independently formal costalk comparison; formal composition and comparison-unit argument made explicit using existing DAG statements and Mathlib Adjunction.comp/rightAdjointUniq."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-weil-boundary-duality-discharge",
@@ -77,6 +195,34 @@
    "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; searched Mathlib/CategoryTheory/Adjunction",
    "date": "2026-10-17",
    "verdict": "no exact match; Adjunction.comp, its counit formula and rightAdjointUniq handle formal adjunction composition, already represented by lem-cat-right-adjoint-composition; they do not assert bounded-below restriction or identify the etale and comparison-class dualizing objects."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|rightAdjointUniq|dualizingComplex",
+   "results": "Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic adjunction composition and uniqueness are already represented by lem-cat-right-adjoint-composition; the hits do not give the etale bounded-below restriction and site-comparison dualizing-object clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint of composite compact support functors on bounded below etale sheaf derived categories",
+   "results": "CategoryTheory.Coreflective.comp; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; CategoryTheory.Adjunction.ofIsRightAdjoint; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; CategoryTheory.instIsRightAdjointSheafΓ; CategoryTheory.Sheaf.adjunction; CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic adjunction composition and uniqueness are already represented by lem-cat-right-adjoint-composition; the hits do not give the etale bounded-below restriction and site-comparison dualizing-object clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.comp_map_bijective_iff; CategoryTheory.Adjunction.left_triangle_components; CategoryTheory.Adjunction.map_comp_bijective_iff; CategoryTheory.Adjunction.right_triangle_components; CategoryTheory.Adjunction.compCoyonedaIso; CategoryTheory.Adjunction.compUliftCoyonedaIso; CategoryTheory.Adjunction.left_triangle_components_assoc",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic adjunction composition and uniqueness are already represented by lem-cat-right-adjoint-composition; the hits do not give the etale bounded-below restriction and site-comparison dualizing-object clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below etale exceptional inverse image composition identifies dualizing objects with pasted counits",
+   "results": "localCohomology.diagramComp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.GlueData.ι_gluedIso_inv; CategoryTheory.OverPresheafAux.counitBackward_counitForward; CategoryTheory.OverPresheafAux.counitForward_counitBackward; CategoryTheory.ExponentiableMorphism.coev_ev; AlgebraicTopology.DoldKan.Compatibility.υ_inv_app",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic adjunction composition and uniqueness are already represented by lem-cat-right-adjoint-composition; the hits do not give the etale bounded-below restriction and site-comparison dualizing-object clauses."
   }
  ],
  "chapter": "sec-six-functors",
@@ -89,5 +235,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-boundary-dualizing-composition",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Prove bounded-below restriction from the existing comparison-class adjoint and exact conservative comparison pullback; compose only the D+ adjunctions, write the pasted-counit equation, evaluate at A, and spell out each comparison-unit map giving the pro-etale identification.",
+  "blueprint": "cor-weil-boundary-duality-discharge, first proof paragraph: the independently formal costalk comparison uses the identification of dualizing objects for a closed immersion; steps 1–4 construct the normalized composition mate, step 5 evaluates it, and steps 6–7 transport it to the comparison class.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme finiteness input makes the etale adjoint and compact-support comparison hypotheses available."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic quasi-separatedness input for applying Nagata to the Noetherian target."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Supplies the compactifications required by the ordinary etale adjoint; this is a tool, not a substitute biduality route."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "The proper part of a compactification is finite type by definition."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Ensures each compactification source remains finite type over k."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies the finite dimension bound demanded by the comparison-class adjoint theorem."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Provides ambient right adjoints on ordinary etale module categories."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Provides the existing bounded-below comparison composite and its normalized Hom bijections; no theorem in this unit states that generic existence fact."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "The comparison unit and full faithfulness are generic tools for reflecting bounds and transporting the etale composition."
+   },
+   {
+    "node": "def-sf-comparison-derived-pullback",
+    "why": "Exact unbounded comparison pullback commutes with cohomology, so boundedness can be reflected on sheaves."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "The finite-coefficient D+ etale compact-support composition is the input whose mate is constructed."
+   },
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Fixes the ordinary etale chosen-compactification functor, with no ambient pro-etale substitution."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Open extension in a compactification preserves cohomological lower bounds."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "A bounded-below injective representative computes the proper derived image within D+."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic adjunction composition and its normalized counits; reused Mathlib leaf."
+   },
+   {
+    "node": "def-weil-exceptional-inverse-image",
+    "why": "The finite formula specifies the comparison-class exceptional functor being identified."
+   },
+   {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "Defines the inverse image and the constant-coefficient comparison adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Checks that the closed immersion satisfies the separated finite-type hypotheses before specializing composition."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Identifies the constant ring module under the site inverse image, including its scalar action."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-dimension-finite-type",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-sf-ambient-adjoint-class",
+  "thm-weil-pbc-site-comparison",
+  "def-sf-comparison-derived-pullback",
+  "lem-amb-etale-compact-comparisons",
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-cat-right-adjoint-composition",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-2a71e23ca",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-2a71e23ca (reviewer sub-agent of L); spot-checked: Read the item, cited statements and source passages in full. All seven steps check: bounded-below restriction, composition mate, counit equation and explicit site transport. No circularity, duplicate node, coefficient-category substitution or target weakening found. No repairs needed; concrete checks and accepted tool uses are recorded in review.md."
  }
 }

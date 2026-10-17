@@ -14,9 +14,114 @@
   "lem-coef-infinity-isofibration-exponentiation",
   "lem-coef-joyal-functor-equivalence-test"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in one universe containing $V$, $S$, and the small indexing sets. For any small $T\\to S$, put $C_T=\\operatorname{Fun}(T,V)$, $D_T=\\operatorname{Fun}(T,S)$ and $E_T=C_T\\times_{D_T}\\{s_T\\}$. Apply [lem-coef-infinity-isofibration-exponentiation] to $\\varnothing\\hookrightarrow T$: $C_T\\to D_T$ is an isofibration between quasicategories. Every inner-horn problem in $E_T$ is precisely an inner-horn problem in $C_T$ above the constant simplex at $s_T$; its filler therefore remains in $E_T$. Thus $E_T$ is a quasicategory, including when it is empty. This applies to $P,M$ and the intermediate $Q$ below.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Proposition 4.4.5.1 (Kerodon tag 01F1), applied with empty A; pullback lifting written explicitly."
+   }
+  },
+  {
+   "text": "By [lem-coef-joyal-functor-equivalence-test], $i$ is a Joyal weak equivalence. Factor it by [lem-coef-joyal-model-structure] as $P\\xrightarrow{j}Q\\xrightarrow{q}M$, with $j$ a trivial cofibration and $q$ a fibration. Two-out-of-three makes $q$ a trivial fibration, so it lifts every degreewise injective map. Give $Q$ the structure map $s_Q=s_Mq$. Since $M$ is fibrant, composing $q$ with $M\\to *$ shows that $Q$ is fibrant and hence a quasicategory. Explicitly, any lifting problem for this composite is solved first in $M$ and then against $q$. By [lem-coef-joyal-quasicategory-characterizations], the given isofibration $p:V\\to S$ is a Joyal fibration. No quasicategory hypothesis on $P$ is used.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 2.2.5.8; agent application of the model factorizations over S."
+   }
+  },
+  {
+   "text": "We show directly that $j^*:E_Q\\to E_P$ lifts every degreewise injective $a:A\\hookrightarrow B$. A square for this map is, by the internal-Hom formula, exactly the extension problem against $p$ for the prescribed map on $(Q\\times A)\\amalg_{P\\times A}(P\\times B)$, above $Q\\times B\\to Q\\to S$. Its inclusion into $Q\\times B$ is the pushout-product $j\\square a$. By [lem-coef-joyal-cartesian-pushout-product] it is a trivial cofibration. The fibration property of $p$ gives the desired filler with the specified base map. Thus $j^*$ is a trivial fibration by the weak factorization system in [lem-coef-joyal-model-structure]. Its source and target are quasicategories by step 1, so [lem-coef-joyal-quasicategory-characterizations](2) makes this specified restriction a coherent functor equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-cartesian-pushout-product",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4 and Theorem 2.2.5.1; the relative exponential lifting square is written out."
+   }
+  },
+  {
+   "text": "The lifting property of $q$ against $\\varnothing\\hookrightarrow M$ gives a section $t:M\\to Q$ with $qt=\\mathrm{id}_M$. Let $L$ be the nerve of the groupoid with two objects and exactly one morphism between each ordered pair, as in [lem-coef-quasicategory-invertible-interval]. Lift against the degreewise injective inclusion $Q\\times\\{0,1\\}\\hookrightarrow Q\\times L$, prescribing $\\mathrm{id}_Q$ and $tq$ at the endpoints and prescribing $q\\operatorname{pr}_Q$ in $M$. This gives $H:Q\\times L\\to Q$ over $M$. Precomposition with $t$ is an inverse to $q^*:E_M\\to E_Q$: one composite is exactly the identity, and precomposition with $H$ gives a coherent equivalence from the other to the identity. Indeed the reverse edge and the two inverse triangles of $L$ supply its inverse and both triangle witnesses after evaluation in $V$. The equation $qH=q\\operatorname{pr}_Q$ ensures that every parameter remains strictly over $S$. Consequently $q^*$ is an equivalence and $i^*=j^*q^*$ is an equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-quasicategory-invertible-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark A.4.2, categorical-equivalence replacement; agent proof by the model lifting properties and the walking-isomorphism nerve."
+   }
+  },
+  {
+   "text": "Fix $T=P$ or $M$ and $F,G\\in E_T$. For a quasicategory $B$, write $U_B(x,y)=\\{x\\}\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{\\operatorname{ev}_1,B}\\{y\\}$. Unpacking the degreewise pullbacks gives the exact equality $U_{E_T}(F,G)=U_{C_T}(F,G)\\times_{U_{D_T}(s_T,s_T)}\\{\\mathrm{id}_{s_T}\\}$. Here the identity means the constant arrow and all its degeneracies. By the final assertion of [lem-coef-infinity-isofibration-exponentiation], the map $U_{C_T}(F,G)\\to U_{D_T}(s_T,s_T)$ is a Kan fibration of Kan complexes, since $C_T\\to D_T$ is an inner fibration. By [lem-coef-kan-pullback-path-comparison], inserting the constant path identifies the displayed strict fiber with the path-space homotopy fiber up to weak homotopy equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01P8",
+    "place": "Proposition 4.6.1.22 (01P8) and Proposition 3.4.0.7 (0329); these are Kerodon tags, not Stacks tags."
+   }
+  },
+  {
+   "text": "Apply the natural right-pinch equivalences of [lem-coef-infinity-pinch-comparison] to $E_T,C_T,D_T$. They take the identity vertex in $\\operatorname{Map}_{D_T}(s_T,s_T)$ to the identity vertex in $U_{D_T}(s_T,s_T)$. Thus [lem-coef-kan-homotopy-pullback-invariance], with the third factor the one-point space, compares their path-space homotopy fibers. Combining this with step 5 gives the natural zigzag of weak equivalences $\\operatorname{Map}_{E_T}(F,G)\\to U_{E_T}(F,G)\\to\\operatorname{hofib}_{\\mathrm{id}}(U_{C_T}(F,G)\\to U_{D_T}(s_T,s_T))\\leftarrow\\operatorname{hofib}_{\\mathrm{id}}(\\operatorname{Map}_{C_T}(F,G)\\to\\operatorname{Map}_{D_T}(s_T,s_T))$. This proves precisely the asserted mapping-space equivalence using the right-pinched convention; it does not assume that the right-pinched map itself is a Kan fibration.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10 (01L5) and Proposition 3.4.0.9 (032B), applied to the natural pinch square."
+   }
+  },
+  {
+   "text": "Every arrow of the zigzag in step 6 is given by restriction, evaluation, the pinch map, or insertion of a constant path. For restriction along $i$, the equations $(pF)i=p(Fi)$ and $(pG)i=p(Gi)$ make the two mapping-space squares commute; the identity vertex restricts to the identity vertex. The same equations hold degree by degree for a functor $V\\to V\\prime$ over $S$, whenever both targets satisfy the hypotheses. Pinching a parameterized simplex and then restricting is the same map as restricting and then pinching, since both are precomposition with the same product map. Inserting a constant path also commutes exactly with these operations. Thus the entire zigzag is compatible with restriction and postcomposition, with all coherent transformation parameters retained. The restriction equivalence of steps 1-4 is the specified simplicial map $i^*$, which has the same strict naturality. No natural choice of the auxiliary section or of an inverse functor is being asserted.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Naturality of the pinch maps and the degreewise internal-Hom and path-space formulas; direct parameter check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-joyal-cartesian-pushout-product",
+  "lem-coef-quasicategory-invertible-interval",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Remark A.4.2 motivates the over-base comparison; the argument here expands it using the cited Joyal and mapping-space tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +171,52 @@
    "results": "{\"t\": \"2026-10-17T08:57:05Z\", \"tool\": \"grep\", \"query\": \"marked|isofibration|categoricalEquivalence|homotopyLimit|mappingSpace\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: only opposite equivalences of simplicial sets and ordinary homotopy-category equivalences; no coherent incidence or relative-functor assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces of the strict fiber of an inner fibration of quasicategories are homotopy fibers of the map of mapping spaces",
+   "results": "{\"t\": \"2026-10-17T11:23:28Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces of the strict fiber of an inner fibration of quasicategories are homotopy fibers of the map of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.quasicategory'\", \"HomotopicalAlgebra.fibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.fibrations_over_def\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.fibrations_over_iff\"], \"digest\": \"27f5c29bee3f6eec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical fibers, strict bicategory infrastructure, or generic fibrations; none states the relative coherent-functor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between two diagrams of quasicategories with isofibration legs induces equivalences of their strict fibers",
+   "results": "{\"t\": \"2026-10-17T11:23:31Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence between two diagrams of quasicategories with isofibration legs induces equivalences of their strict fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.strictBicategory\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal.quasicategory'\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_fiber\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor_obj_fiber\"], \"digest\": \"2de9186db55e4298\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical fibers, strict bicategory infrastructure, or generic fibrations; none states the relative coherent-functor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a categorical equivalence of simplicial sets induces equivalence of strict functor quasicategories over a base into an isofibration",
+   "results": "{\"t\": \"2026-10-17T11:23:36Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a categorical equivalence of simplicial sets induces equivalence of strict functor quasicategories over a base into an isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.strictBicategory\", \"SSet.StrictSegal.quasicategory'\", \"SSet.StrictSegal.quasicategory\", \"SSet.QCat.bicategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.StrictSegal.isRightKanExtension\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"32ec794ed134f843\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical fibers, strict bicategory infrastructure, or generic fibrations; none states the relative coherent-functor assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|[Cc]ategorical[Ee]quivalence|[Hh]omotopy[Ff]iber",
+   "results": "{\"t\": \"2026-10-17T11:23:38Z\", \"tool\": \"grep\", \"query\": \"isofibration|[Cc]ategorical[Ee]quivalence|[Hh]omotopy[Ff]iber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical fibers, strict bicategory infrastructure, or generic fibrations; none states the relative coherent-functor assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsEquivalenceFibFiberInducedFunctor",
+   "results": "{\"t\": \"2026-10-17T11:54:18Z\", \"tool\": \"grep\", \"query\": \"instIsEquivalenceFibFiberInducedFunctor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical fibers, strict bicategory infrastructure, or generic fibrations; none states the relative coherent-functor assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "HasFibers|strictBicategory|StrictSegal.quasicategory",
+   "results": "{\"t\": \"2026-10-17T11:56:39Z\", \"tool\": \"grep\", \"query\": \"HasFibers|strictBicategory|StrictSegal.quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"16b07cf430cb3fd7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical fibers, strict bicategory infrastructure, or generic fibrations; none states the relative coherent-functor assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-collage-comparison",
@@ -95,5 +242,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-collage-relative-overbase-equivalence",
+  "worker": "stage1",
+  "summary": "Proved the over-base restriction by a Joyal trivial-cofibration/trivial-fibration factorization and explicit exponential lifting, then compared unpinched strict fibers with right-pinched path-space fibers. Reused existing nodes throughout; no new nodes. Retained all original hypotheses and statement text.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: derived coefficient adjunction before R lim and compatibility of its specified maps; the relative functor comparison supports the Remark A.4.2 collage replacement in the existing descendant chain.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic definitions of coherent diagrams, quasicategories, right-pinched mapping spaces and path-space homotopy fibers; the coefficient unit has no separate replacement definitions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q105-d4aa5281c",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-d4aa5281c (reviewer sub-agent of L); spot-checked: The seven-step mathematics, hypotheses, cited node statements, route, edge cases, and duplicate checks pass. Repair the node metadata: `created.item` and `created.group` incorrectly identify Q113; corrected JSON is in `fixes/dag/nodes/sec-six-functors/lem-coef-operadic-collage-relative-overbase-equivalence.json`. The packet also claims absent citations.json/report.md artifacts.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,120 @@
   "lem-coef-infinity-slice-right-fibration",
   "lem-coef-infinity-cocartesian-mapping-criterion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C_c=M_0^\\otimes\\times_{M^\\otimes}M^\\otimes_{/c}$, allowing arbitrary incoming arrows. The fiber $M_0^\\otimes$ is a replete full subcategory of $M^\\otimes$: a simplex of $\\Delta^n$ all of whose vertices are $0$ is constant, and equivalences in $\\Delta^n$ are identities. Thus $C_c$ is the full subcategory of the join slice on sources in $M_0^\\otimes$, and is a small quasicategory. For calculations use its equivalent fixed-target arrow model from [lem-coef-infinity-slice-arrow-equivalence], over the source category. The cone mapping-space formula of [lem-cbc-enhanced-functor-cone-calculus] identifies a map from $u:x\\to c$ to $v:z\\to c$ with $h:x\\to z$ in $M_0^\\otimes$ and a specified triangle $vh\\simeq u$, retaining its homotopies. The active objects form a full subcategory: if $u,v$ are active and $vh\\simeq u$, their pointed maps satisfy $\\alpha=\\beta\\delta$; $\\delta(t)=*$ for $t\\ne *$ would imply $\\alpha(t)=*$, a contradiction. Therefore $h$ is active, and this full subcategory is exactly $J_c$, on every simplex.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  },
+  {
+   "text": "Fix the chosen inert output arrow $t_j:b\\to b_j$. Apply [lem-coef-infinity-relative-slice-sections] to $\\mathcal C=M^\\otimes$, the replete full subcategory $D=M_0^\\otimes$, and the diagram $t_j:\\Delta^1\\to M^\\otimes$. Smallness supplies its local-smallness and universe requirements. Its cocartesian slice transport gives a coherent postcomposition functor $Q_j:C_b\\to C_{b_j}$, taking $a$ to $c_j=t_ja$ and a triangle $a'h\\simeq a$ to $t_ja'h\\simeq t_ja$. This is transport of entire coherent slice diagrams, so includes their comparison homotopies. The source projections are unchanged. The join-slice/arrow equivalence of [lem-coef-infinity-slice-arrow-equivalence] identifies this construction with the join slices in the statement.",
+   "uses": [
+    "lem-coef-infinity-relative-slice-sections",
+    "lem-coef-infinity-slice-arrow-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  },
+  {
+   "text": "For an active $\\alpha:\\langle k\\rangle\\to\\langle s\\rangle$ let $D_j=\\alpha^{-1}(j)$. Define $\\rho_{D_j}:\\langle k\\rangle\\to(D_j)_+$ to retain $D_j$ and send its complement to $*$. It is inert. The composite $\\rho_j\\alpha$ factors as $\\gamma_j\\rho_{D_j}$, where $\\gamma_j:(D_j)_+\\to\\langle1\\rangle$ sends every element of $D_j$ to $1$. It is active even when $D_j=\\varnothing$. These are literal equalities of pointed maps. For a triangle $a'h\\simeq a$ let $\\delta$ be the pointed map of $h$; then $\\alpha=\\alpha'\\delta$ implies $\\delta(D_j)\\subseteq D'_j$ and gives an active restriction $\\delta_j:(D_j)_+\\to(D'_j)_+$ satisfying $\\delta_j\\rho_{D_j}=\\rho_{D'_j}\\delta$.",
+   "uses": [
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  },
+  {
+   "text": "For any $c:x\\to b_j$ in $C_{b_j}$, the family factorization theorem [lem-coef-symmetric-family-inert-active-orthogonality] supplies $x\\xrightarrow{p}x_D\\xrightarrow{r(c)}b_j$, with $p$ stationary inert, $r(c)$ active, and a composition triangle. Stationarity puts $x_D$ in $M_0^\\otimes$, so $r(c)\\in J_{b_j}$. For $c=c_j$ of step 2, the retained set is exactly $D_j$ of step 3. The particular inert lift $p_j$ chosen in the question may be used: apply [lem-coef-infinity-cocartesian-mapping-criterion] to this $\\pi$-cocartesian edge and $z=b_j$. The base factorization $(\\gamma_j,0\\to t)\\circ(\\rho_{D_j},1_0)$ and the point $c_j$ determine a point of the homotopy pullback. Its homotopy fiber is contractible; it consists of the required $a_j:x_j\\to b_j$ over $(\\gamma_j,0\\to t)$ with its triangle $a_jp_j\\simeq c_j$. Hence $a_j$ is active. The criterion applies because the family's categorical fibration is an inner fibration between quasicategories; it does not require lifts of all other base edges.",
+   "uses": [
+    "lem-coef-symmetric-family-inert-active-orthogonality",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  },
+  {
+   "text": "The triangle in step 4 gives a universal arrow $c\\to i_jr(c)$ for the full inclusion $i_j:J_{b_j}\\hookrightarrow C_{b_j}$. To verify this, take an arbitrary $q:z\\to b_j$ in $J_{b_j}$. The orthogonality statement of [lem-coef-symmetric-family-inert-active-orthogonality], applied to the stationary inert $p:x\\to x_D$ and active $q$, gives\n$$\\operatorname{Map}_{M^\\otimes}(x_D,z)\\simeq\\operatorname{Map}_{M^\\otimes}(x,z)\\times^h_{\\operatorname{Map}_{M^\\otimes}(x,b_j)}\\operatorname{Map}_{M^\\otimes}(x_D,b_j).$$\nTake its homotopy fiber over $r(c)$ in the last factor. On the left this is the space of triangles $qh\\simeq r(c)$; on the right it is the space of triangles $qv\\simeq c$, using the specified triangle $r(c)p\\simeq c$. By the slice mapping formula in step 1 these are $\\operatorname{Map}_{J_{b_j}}(r(c),q)$ and $\\operatorname{Map}_{C_{b_j}}(c,i_jq)$. Sources and targets here lie in the full $M_0^\\otimes$, so the source mapping spaces are unchanged by restricting to that fiber. The comparison is precisely precomposition with the unit triangle, and is natural in $q$.",
+   "uses": [
+    "lem-coef-symmetric-family-inert-active-orthogonality",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-slice-arrow-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  },
+  {
+   "text": "Apply the opposite (partial left adjoint) assertion of [lem-coef-parametric-universal-arrows] to $T=i_j$, with its whole target $C_{b_j}$ as the allowed full subcategory. Step 5 verifies its universal-arrow hypothesis for every object, without assuming functorial factorization in advance. We obtain a coherent reflector $R_j:C_{b_j}\\to J_{b_j}$ and coherent unit $1\\to i_jR_j$; the space of universal-arrow choices is contractible. Its diagram clause holds for every $K$, and commutes with every $K'\\to K$. Thus $P_j=R_jQ_j|_{J_b}$ is a coherent functor, and its unit triangles give the comparison with $t_ja$. Each prescribed $p_j$ and its factorization from step 4 is a universal-arrow presentation by step 5, and consequently is identified with this one through the same contractible space of choices. This identifies the object value with $a_j$ with its comparison triangle, rather than merely identifying its class in the homotopy category.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  },
+  {
+   "text": "Explicitly, a slice edge $h:(a:x\\to b)\\to(a':x'\\to b)$ supplies the square with left edge $p_j:x\\to x_j$, right edge $a'_j:x'_j\\to b_j$, top edge $p'_jh:x\\to x'_j$, and bottom edge $a_j:x_j\\to b_j$. Its commutation homotopy is the composite of $a'_jp'_j\\simeq t_ja'$, $a'h\\simeq a$, and $t_ja\\simeq a_jp_j$, including the composition homotopies of $Q_j$. Orthogonality gives the contractible space of fillers $h_j:x_j\\to x'_j$ with both triangles $h_jp_j\\simeq p'_jh$ and $a'_jh_j\\simeq a_j$. In the pointed-set base these force the block map $\\delta_j$ of step 3, so $h_j$ is active and stationary. The coherent unit from step 6 supplies these fillers simultaneously. Its diagram mapping-space equivalence, applied for $K=\\Delta^r$ and restricted along faces and degeneracies, retains all their higher compatibilities. It therefore proves that these fillers are the morphisms and higher simplices of $P_j$, without an independent choice of a filler for each triangle.",
+   "uses": [
+    "lem-coef-symmetric-family-inert-active-orthogonality",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  },
+  {
+   "text": "Take $P=(P_1,\\ldots,P_s)$, defined degreewise by these coherent functors; restriction in every simplicial degree acts componentwise. This is the required functor to $\\prod_jJ_{b_j}$, with the block triangles of step 7 and their contractible coherent choices of step 6. No step required a nonempty $D_j$: at $D_j=\\varnothing$ the inert map is $\\langle k\\rangle\\to\\langle0\\rangle$, the active factor is the nullary map $\\langle0\\rangle\\to\\langle1\\rangle$, and the same arguments apply. If $s=0$ there are no $j$ to choose and $P$ is the unique map to the empty product $\\Delta^0$. An active arrow to $\\langle0\\rangle$ must have $k=0$; this is consistent with the construction and imposes no nonemptiness claim on $J_b$.",
+   "uses": [
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337: forward direction of the output-product comparison; agent expansion of the omitted slice factorization argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-symmetric-operadic-family",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-relative-slice-sections",
+  "lem-coef-symmetric-family-inert-active-orthogonality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived mapping-complex comparison; inherited coherent operadic infrastructure. Explicit expansion of HA Theorem 3.1.2.3 proof step (1), pp.336-337; online HA is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +175,45 @@
    "results": "{\"t\": \"2026-10-17T08:49:35Z\", \"tool\": \"leanfinder\", \"query\": \"Cutting the source of an active operadic operation by the inverse images of its outputs is functorial on coherent triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.compFunctor\", \"SimplicialObject.Splitting.IndexSet.pull\", \"CategoryTheory.ComposableArrows.mapFunctorArrows\", \"CategoryTheory.GradedObject.TriangleIndexData.ρ₁₂\", \"CategoryTheory.GradedObject.TriangleIndexData.ρ₂₃\", \"SSet.Edge.CompStruct.map\", \"CategoryTheory.GradedObject.TriangleIndexData.hp₂₃\", \"SSet.Truncated.Edge.CompStruct.map\"], \"digest\": \"6652845f86c5f497\"}",
    "date": "2026-10-17",
    "verdict": "No match: ordinary composable arrows or strict Segal spine concatenation do not give symmetric operadic block restriction or assembly. Loogle has no hits; grep returns incidental occurrences."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|inert.*active|active.*inert",
+   "results": "{\"t\": \"2026-10-17T10:25:05Z\", \"tool\": \"grep\", \"query\": \"operad|inert.*active|active.*inert\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. Mathlib has ordinary category factorization/overcategories and strict Segal/quasicategory definitions, not symmetric infinity-operadic families or this active block-slice functor. Read MorphismProperty/Comma.lean:1-45, AlgebraicTopology/SimplicialSet/StrictSegal.lean:41-60, AlgebraicTopology/Quasicategory/Basic.lean:33-43 and FiberedCategory/Cocartesian.lean:52-74."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a symmetric infinity operadic operation to the input blocks of its output induces a coherent functor of active overcategories",
+   "results": "{\"t\": \"2026-10-17T10:25:05Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of a symmetric infinity operadic operation to the input blocks of its output induces a coherent functor of active overcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.restrictFunctor\", \"Action.res\", \"CategoryTheory.SmallObject.restrictionLE_obj\", \"CategoryTheory.SmallObject.restrictionLT\", \"CategoryTheory.SmallObject.restrictionLE\", \"ComplexShape.Embedding.restrictionFunctor\", \"IsSymmOp.rec\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\"], \"digest\": \"136a72384cdc8a18\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. Mathlib has ordinary category factorization/overcategories and strict Segal/quasicategory definitions, not symmetric infinity-operadic families or this active block-slice functor. Read MorphismProperty/Comma.lean:1-45, AlgebraicTopology/SimplicialSet/StrictSegal.lean:41-60, AlgebraicTopology/Quasicategory/Basic.lean:33-43 and FiberedCategory/Cocartesian.lean:52-74."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric infinity operadic family inert output projections give a functor from an incoming active slice to the product of active input block slices",
+   "results": "{\"t\": \"2026-10-17T10:25:06Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric infinity operadic family inert output projections give a functor from an incoming active slice to the product of active input block slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.WalkingMultispan.inclusionOfLinearOrder\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.Limits.SequentialProduct.functorObjProj_neg\", \"SimplicialObject.Splitting.IndexSet.e\", \"CategoryTheory.Limits.SequentialProduct.functorObjProj_pos\", \"AugmentedSimplexCategory.inl'\", \"CategoryTheory.Limits.SequentialProduct.functorMap\", \"AugmentedSimplexCategory.inr'\"], \"digest\": \"123f7dda7ca3cec6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. Mathlib has ordinary category factorization/overcategories and strict Segal/quasicategory definitions, not symmetric infinity-operadic families or this active block-slice functor. Read MorphismProperty/Comma.lean:1-45, AlgebraicTopology/SimplicialSet/StrictSegal.lean:41-60, AlgebraicTopology/Quasicategory/Basic.lean:33-43 and FiberedCategory/Cocartesian.lean:52-74."
+  },
+  {
+   "tool": "grep",
+   "query": "Operad|inert.*active|active.*inert|active.*slice",
+   "results": "{\"t\": \"2026-10-17T10:25:39Z\", \"tool\": \"grep\", \"query\": \"Operad|inert.*active|active.*inert|active.*slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/Tactic/CategoryTheory/Slice.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\"], \"digest\": \"34ef596eaef6031f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. Mathlib has ordinary category factorization/overcategories and strict Segal/quasicategory definitions, not symmetric infinity-operadic families or this active block-slice functor. Read MorphismProperty/Comma.lean:1-45, AlgebraicTopology/SimplicialSet/StrictSegal.lean:41-60, AlgebraicTopology/Quasicategory/Basic.lean:33-43 and FiberedCategory/Cocartesian.lean:52-74."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inert active factorization in a quasicategory is a reflector on overcategories and gives coherent restriction to input blocks of an operadic operation",
+   "results": "{\"t\": \"2026-10-17T10:25:41Z\", \"tool\": \"leanfinder\", \"query\": \"Inert active factorization in a quasicategory is a reflector on overcategories and gives coherent restriction to input blocks of an operadic operation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"CategoryTheory.MorphismProperty.HasFactorization.over\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"HomotopicalAlgebra.instHasFactorizationOverTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instHasFactorizationOverCofibrationsTrivialFibrations\", \"SimplexCategoryGenRel.exists_P_σ_P_δ_factorization\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\"], \"digest\": \"b2f404241901b8b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. Mathlib has ordinary category factorization/overcategories and strict Segal/quasicategory definitions, not symmetric infinity-operadic families or this active block-slice functor. Read MorphismProperty/Comma.lean:1-45, AlgebraicTopology/SimplicialSet/StrictSegal.lean:41-60, AlgebraicTopology/Quasicategory/Basic.lean:33-43 and FiberedCategory/Cocartesian.lean:52-74."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-family-active-slice-calculus",
@@ -95,5 +241,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-family-block-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three statement dependencies. Proved forward block restriction by postcomposition to each output, stationary inert-active factorization, its mapping-space universal property in the incoming slice, and the existing partial parametric left-adjoint criterion. Wrote the finite pointed-set block equations and the triangle-filler formula explicitly, including higher coherence and all zero-arity cases. No new node; no Lean attachment exists.",
+  "blueprint": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, through the coherent free-module criterion: the symmetric operadic zeroth-horn argument, HA Theorem 3.1.2.3(B), proof step (1), printed pp.336-337. Steps 1-8 expand the forward block-restriction part of the active-slice comparison in the cited HA argument.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent-slice mapping-space and full-subcategory calculus, used to verify the universal-arrow formula; the unit gives no alternative foundational mapping-space formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q111-add9ecbcc",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-add9ecbcc (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, every cited node statement, sources and unit/chapter route. The reflector argument establishes coherent block restriction, including empty blocks and zero outputs. Finite-set checks passed; no reachable dependency cycle or duplicate requiring repair was found. Accepted cone-calculus tool use. Concrete checks are recorded in review.md; no corrections needed."
  }
 }

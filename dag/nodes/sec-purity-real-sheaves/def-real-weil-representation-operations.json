@@ -1,66 +1,141 @@
 {
-  "id": "def-real-weil-representation-operations",
-  "blueprint": {
-    "is": "def-real-weil-representation-operations",
-    "from": null,
-    "same_as": null
+ "id": "def-real-weil-representation-operations",
+ "blueprint": {
+  "is": "def-real-weil-representation-operations",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Operations on Weil representations",
+ "statement": "Let $X_0$ be as in [def-wf-fundamental-representation], with Weil group\n$W=W(X_0)$ and degree map $\\deg:W\\to\\mathbf Z$ of [def-wf-weil-group]. A\n*Weil representation* is a finite-dimensional $\\Qlb$-vector space $V$ with a\nhomomorphism $\\rho:W\\to\\operatorname{GL}(V)$ whose restriction to the\ngeometric subgroup $\\pi_1(X)$ is continuous; the Weil fundamental\nrepresentation of [def-wf-fundamental-representation] is one by\n[lem-wf-weil-fundamental-representation]. For Weil representations $V,V'$,\nuse the ordinary representation operations of [sk-d-linear] and\n[sk-d-real-operations]:\n\n- the *direct sum* $V\\oplus V'$ and the *tensor product* $V\\otimes V'$\n  carry the actions $g(v,v')=(gv,gv')$ and $g(v\\otimes v')=gv\\otimes gv'$;\n- the *exterior power* $\\bigwedge^rV$ carries\n  $g(v_1\\wedge\\cdots\\wedge v_r)=gv_1\\wedge\\cdots\\wedge gv_r$; the top\n  exterior power is the determinant line $\\det V$ of [def-mg-determinant-line];\n- the *dual* $V^\\vee=\\operatorname{Hom}(V,\\Qlb)$ carries\n  $(g\\lambda)(v)=\\lambda(g^{-1}v)$.\n\nA Weil representation is *irreducible* if it is simple in the sense of\n[def-mg-weil-composition-series]. Its *constituents* are the composition\nfactors of a composition series of [def-mg-weil-composition-series], counted\nwith multiplicity, and their direct sum is the semisimplification $V^{\\mathrm{ss}}$\nof [def-mg-weil-semisimplification]. For a\nsubgroup $I\\subseteq W$ the *invariants* and *coinvariants* are\n\n$$\nV^I=\\{v\\in V:gv=v\\text{ for all }g\\in I\\},\\qquad\nV_I=V/\\langle gv-v:g\\in I,\\ v\\in V\\rangle .\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-operations/def-real-weil-representation-operations.md",
+  "place": "node def-real-weil-representation-operations, order 2586"
+ },
+ "stmt_deps": [
+  "def-wf-fundamental-representation",
+  "def-wf-weil-group",
+  "def-mg-determinant-line",
+  "def-mg-weil-composition-series",
+  "def-mg-weil-semisimplification",
+  "lem-wf-weil-fundamental-representation",
+  "sk-d-linear",
+  "sk-d-real-operations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def (dual|tprod|prod|invariants|Coinvariants)|abbrev (dual|exteriorPower)|def exteriorPower",
+   "results": "Grep in Mathlib/RepresentationTheory returned 25 hits including Basic.lean:606 Representation.prod, :624 Representation.tprod, :678 Representation.dual; Invariants.lean:76 Representation.invariants; Coinvariants.lean:54 Coinvariants.ker and :58 Coinvariants. Read these definitions; they give the individual algebraic clauses, not the Weil datum or constituents with multiplicities.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
   },
-  "kind": "definition",
-  "title": "Operations on Weil representations",
-  "statement": "Let $X_0$ be as in [def-wf-fundamental-representation], with Weil group\n$W=W(X_0)$ and degree map $\\deg:W\\to\\mathbf Z$ of [def-wf-weil-group]. A\n*Weil representation* is a finite-dimensional $\\Qlb$-vector space $V$ with a\nhomomorphism $\\rho:W\\to\\operatorname{GL}(V)$ whose restriction to the\ngeometric subgroup $\\pi_1(X)$ is continuous; the Weil fundamental\nrepresentation of [def-wf-fundamental-representation] is one. For Weil\nrepresentations $V,V'$:\n\n- the *direct sum* $V\\oplus V'$ and the *tensor product* $V\\otimes V'$\n  carry the actions $g(v,v')=(gv,gv')$ and $g(v\\otimes v')=gv\\otimes gv'$;\n- the *exterior power* $\\bigwedge^rV$ carries\n  $g(v_1\\wedge\\cdots\\wedge v_r)=gv_1\\wedge\\cdots\\wedge gv_r$; the top\n  exterior power is the determinant line $\\det V$ of [def-mg-determinant-line];\n- the *dual* $V^\\vee=\\operatorname{Hom}(V,\\Qlb)$ carries\n  $(g\\lambda)(v)=\\lambda(g^{-1}v)$.\n\nA Weil representation is *irreducible* if it is simple in the sense of\n[def-mg-weil-composition-series]. Its *constituents* are the composition\nfactors of a composition series of [def-mg-weil-composition-series], counted\nwith multiplicity, and their direct sum is the semisimplification $V^{\\mathrm{ss}}$\nof [def-mg-weil-semisimplification]. For a\nsubgroup $I\\subseteq W$ the *invariants* and *coinvariants* are\n\n$$\nV^I=\\{v\\in V:gv=v\\text{ for all }g\\in I\\},\\qquad\nV_I=V/\\langle gv-v:g\\in I,\\ v\\in V\\rangle .\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-operations/def-real-weil-representation-operations.md",
-    "place": "node def-real-weil-representation-operations, order 2586"
+  {
+   "tool": "leansearch",
+   "query": "Weil representations direct sum tensor exterior power dual invariants coinvariants",
+   "results": "Representation.toCoinvariants, Representation.Coinvariants, Representation.directSum, Rep.instAdditiveModuleCatCoinvariantsFunctor, Representation.dual, Representation.Coinvariants.mk_tmul_inv, Rep.coinvariantsTensor and Rep.toCoinvariants. Partial matches; read Basic.lean:589-684 and Coinvariants.lean:54-58. No declaration also supplies the geometric continuity condition and composition factors with multiplicity.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
   },
-  "stmt_deps": [
-    "def-wf-fundamental-representation",
-    "def-wf-weil-group",
-    "def-mg-determinant-line",
-    "def-mg-weil-composition-series",
-    "def-mg-weil-semisimplification"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2586,
-  "blueprint_uses": [
-    "def-mg-determinant-line",
-    "def-mg-weil-composition-series",
-    "def-mg-weil-semisimplification",
-    "def-wf-fundamental-representation",
-    "def-wf-weil-group"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "uses_line",
-      "text": "Uses: [def-mg-determinant-line], [def-mg-weil-composition-series], [def-mg-weil-semisimplification], [def-wf-fundamental-representation], [def-wf-weil-group]",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "Representation",
+   "results": "Representation in RepresentationTheory/Basic.lean is a monoid homomorphism to module endomorphisms; the other eleven hits include trivial, IsTrivial, asModule and regular actions. This gives the underlying algebraic representation, not the complete Weil definition.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
   },
-  "chapter": "sec-purity-real-sheaves",
-  "unit": "sk-d-real-operations",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X_0$ be as in [def-wf-fundamental-representation], with Weil group\n$W=W(X_0)$ and degree map $\\deg:W\\to\\mathbf Z$ of [def-wf-weil-group]. A\n*Weil representation* is a finite-dimensional $\\Qlb$-vector space $V$ with a\nhomomorphism $\\rho:W\\to\\operatorname{GL}(V)$ whose restriction to the\ngeometric subgroup $\\pi_1(X)$ is continuous; the Weil fundamental\nrepresentation of [def-wf-fundamental-representation] is one. For Weil\nrepresentations $V,V'$:\n\n- the *direct sum* $V\\oplus V'$ and the *tensor product* $V\\otimes V'$\n  carry the actions $g(v,v')=(gv,gv')$ and $g(v\\otimes v')=gv\\otimes gv'$;\n- the *exterior power* $\\bigwedge^rV$ carries\n  $g(v_1\\wedge\\cdots\\wedge v_r)=gv_1\\wedge\\cdots\\wedge gv_r$; the top\n  exterior power is the determinant line $\\det V$ of [def-mg-determinant-line];\n- the *dual* $V^\\vee=\\operatorname{Hom}(V,\\Qlb)$ carries\n  $(g\\lambda)(v)=\\lambda(g^{-1}v)$.\n\nA Weil representation is *irreducible* if it is simple in the sense of\n[def-mg-weil-composition-series]. Its *constituents* are the composition\nfactors of a composition series of [def-mg-weil-composition-series], counted\nwith multiplicity, and their direct sum is the semisimplification $V^{\\mathrm{ss}}$\nof [def-mg-weil-semisimplification]. For a\nsubgroup $I\\subseteq W$ the *invariants* and *coinvariants* are\n\n$$\nV^I=\\{v\\in V:gv=v\\text{ for all }g\\in I\\},\\qquad\nV_I=V/\\langle gv-v:g\\in I,\\ v\\in V\\rangle .\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "Operations on finite dimensional group representations: diagonal action on direct sum and tensor, exterior power, inverse dual action and fixed vectors and quotient by differences",
+   "results": "Eight hits concerning coinvariants of tensor products with the left regular representation, including Representation.coinvariantsTprodLeftRegularLEquiv and Representation.ofCoinvariantsTprodLeftRegular. These are narrower coinvariant comparison results, not the whole definition.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil representation finite dimensional continuous on geometric subgroup direct sum tensor product exterior power contragredient invariants coinvariants composition factors",
+   "results": "Eight hits: Rep.coindToInd, FDRep.scalar_product_char_eq_finrank_equivariant, TannakaDuality.FiniteGroup.sumSMulInv, ofRightFDRep, ofRightFDRep_hom, FDRep.instFiniteDimensionalHom, sumSMulInv_apply and Rep.coindToInd_apply. None defines the full Weil representation datum or all the listed operations.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilGroup|Weil representation|def (directSum|prod|tprod|dual)|def invariants|def Coinvariants",
+   "results": "Grep in Mathlib/RepresentationTheory returned 25 hits including Basic.lean:589 directSum and :606 prod, Invariants.lean:76 invariants and Coinvariants.lean:54 ker, :58 Coinvariants. No complete Weil representation definition among the hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation.dual\"",
+   "results": "Representation.dual, Representation.dualTensorHom_comm and Representation.dual_apply, all in RepresentationTheory/Basic.lean. Read dual at lines 678-684: the inverse dual action agrees with the dual clause, but is only part of the item.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group representation whose restriction to a specified subgroup is continuous in the l-adic topology",
+   "results": "Eight hits: cyclotomicCharacter.continuous and ContinuousCohomology.invariants, instLinearActionTopModuleCatInvariants, I, I_obj_ρ_apply, Iobj_ρ_apply, MultiInd.functor and Iobj. These concern particular continuous characters or continuous actions; none is this Weil representation definition.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; algebraic clauses have the partial matches recorded in results"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2586,
+ "blueprint_uses": [
+  "def-mg-determinant-line",
+  "def-mg-weil-composition-series",
+  "def-mg-weil-semisimplification",
+  "def-wf-fundamental-representation",
+  "def-wf-weil-group"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "uses_line",
+   "text": "Uses: [def-mg-determinant-line], [def-mg-weil-composition-series], [def-mg-weil-semisimplification], [def-wf-fundamental-representation], [def-wf-weil-group]",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-d-real-operations",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X_0$ be as in [def-wf-fundamental-representation], with Weil group\n$W=W(X_0)$ and degree map $\\deg:W\\to\\mathbf Z$ of [def-wf-weil-group]. A\n*Weil representation* is a finite-dimensional $\\Qlb$-vector space $V$ with a\nhomomorphism $\\rho:W\\to\\operatorname{GL}(V)$ whose restriction to the\ngeometric subgroup $\\pi_1(X)$ is continuous; the Weil fundamental\nrepresentation of [def-wf-fundamental-representation] is one. For Weil\nrepresentations $V,V'$:\n\n- the *direct sum* $V\\oplus V'$ and the *tensor product* $V\\otimes V'$\n  carry the actions $g(v,v')=(gv,gv')$ and $g(v\\otimes v')=gv\\otimes gv'$;\n- the *exterior power* $\\bigwedge^rV$ carries\n  $g(v_1\\wedge\\cdots\\wedge v_r)=gv_1\\wedge\\cdots\\wedge gv_r$; the top\n  exterior power is the determinant line $\\det V$ of [def-mg-determinant-line];\n- the *dual* $V^\\vee=\\operatorname{Hom}(V,\\Qlb)$ carries\n  $(g\\lambda)(v)=\\lambda(g^{-1}v)$.\n\nA Weil representation is *irreducible* if it is simple in the sense of\n[def-mg-weil-composition-series]. Its *constituents* are the composition\nfactors of a composition series of [def-mg-weil-composition-series], counted\nwith multiplicity, and their direct sum is the semisimplification $V^{\\mathrm{ss}}$\nof [def-mg-weil-semisimplification]. For a\nsubgroup $I\\subseteq W$ the *invariants* and *coinvariants* are\n\n$$\nV^I=\\{v\\in V:gv=v\\text{ for all }g\\in I\\},\\qquad\nV_I=V/\\langle gv-v:g\\in I,\\ v\\in V\\rangle .\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-real-weil-representation-operations",
+  "worker": "stage1",
+  "summary": "Audited this definition against the current main-20261015 text and its unit. Retained every hypothesis, operation formula and multiplicity convention. Added references to the existing generic representation and operation definitions, and to the existing theorem justifying the fundamental-representation example. All other notions already have explicit definitions or existing statement dependencies. No new nodes and no proof steps: this is a definition split. Project searches find no exact complete attachment; Mathlib supplies algebraic clauses only.",
+  "blueprint": "Realizes all clauses of def-real-weil-representation-operations in sk-d-real-operations: Weil representation with geometric continuity; direct sum, tensor, exterior, determinant and inverse dual actions; simple factors with multiplicities and semisimplification; subgroup invariants and coinvariants. This node is not the whole unit: the constant and Tate lines are separate existing definitions. No unit proof steps or route are changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-cc23a076c",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-cc23a076c (reviewer sub-agent of L); spot-checked: Read the full definition, all eight cited statements and sources, and unit/chapter route. Operation formulas, continuity, multiplicities, and edge cases check out; no new nodes or dependency cycle. Report incorrectly claims source metadata changed, but retained master text agrees mathematically with current blueprint. Detailed checks recorded in review.md."
+ }
 }

@@ -13,9 +13,131 @@
   "lem-coef-operadic-algebra-presentability",
   "lem-coef-operadic-block-incidence-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F_b=\\operatorname{hofib}_b(R)$. By the path-fiber definition, its datum is $(a:D\\to C,h)$, where $h$ is a path from the tuple of restricted operations to $b$. A path in each operation groupoid consists of an equivalence $v_i:D|_i\\simeq D_i$ over the identity and its triangle $b_iv_i\\simeq a|_i$, with all higher data. These equivalences force the block arities to be $n_i$. If $\\gamma:[m]\\to[k]$ is the base of $a$, active means $\\gamma^{\\mathrm{op}}(0)=0$ and $\\gamma^{\\mathrm{op}}(k)=m$. Its consecutive differences are therefore $n_i$, so $m=n$ and $\\gamma=\\alpha$. This argument uses the identity-base restriction on source changes; allowing arbitrary active source maps would not give this fiber.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Erratum before Corollary E.0.1, corrected operation groupoid; explicit path-fiber and arity calculation."
+   }
+  },
+  {
+   "text": "For any fixed source $D$ occurring in $F_b$, add its cocartesian inert block and vertex projections and their incidence triangles. They exist by the inert-lift axiom. Composite projections are cocartesian by the composition clause of [lem-coef-infinity-cocartesian-composition-initiality]. Each alternative lift is initial in the corresponding lift category, so the space of its comparisons with a fixed lift, including the triangle, is contractible. The initial-object clause of [lem-cbc-enhanced-functor-cone-calculus] makes the whole space of initial lifts contractible. Thus choosing a whole incidence projection diagram adds contractible coherent choices: choose its arrows and compare each composite to the direct lift in its initial-lift category. For parameter families use [lem-coef-infinity-pointwise-cocartesian-transport] on the pullback of $Q$ to the subcategory of inert base maps. That pullback is an inner fibration with every required lift, by the inert-lift axiom; its universal mapping squares are the restrictions of those in $Q$. The cited theorem supplies coherent lifts for every small parameter shape and compatible composites. No cocartesian lift of an active base arrow is assumed.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(i), 3.1.13(i); explicit use of cocartesian initial-lift and diagram transport tools."
+   }
+  },
+  {
+   "text": "For a chosen inert edge $q:X\\to Y$ and a prescribed map $g:X\\to Z$ whose base factors through $p(q)$, the space of factorizations $(f:Y\\to Z,fq\\simeq g)$ over that specified base factorization is contractible. Indeed, the cocartesian mapping square of [lem-coef-infinity-cocartesian-mapping-criterion] identifies the upper-left mapping space with the path pullback of the other three corners. Fixing $g$ and the base factor gives a homotopy fiber of an equivalence, equivalently the path space with fixed final endpoint, which contracts by shortening the path. Applying this to the first and last vertex projections of each $D_i$ gives the endpoint maps $u_i^\\pm$ and their factorization witnesses, with contractible choices. This remains true for $n_i=0$: use the same identity vertex projection twice, retaining both prescribed endpoint witnesses rather than identifying or discarding them.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(i), 3.1.13(i); endpoint factorization via the cocartesian mapping-space universal property."
+   }
+  },
+  {
+   "text": "Keep $(a,h)$ and these choices fixed. For each source vertex $t_j$, composing $a$ with $C\\to V_j$ and factoring through $D\\to D(t_j)$ gives a map $w_j:D(t_j)\\to V_j$. For each incidence $j=i-1,i$, factor the block equivalence $v_i$ through the corresponding source endpoint projection. This gives an equivalence $r_i^\\pm:D(t_j)\\to s(D_i),t(D_i)$, together with its triangle. The comparison is invertible because both projections are cocartesian lifts of the same inert map after the equivalence $v_i$; their initial-lift comparison is an equivalence. Factoring the endpoint of $h_i$ gives $u_i^\\pm r_i^\\pm\\simeq w_j$. All these are factorizations of specified composites, so the mapping-square argument of step 3 gives contractible choices of their triangles as well. At a junction the common object is $D(t_i)$, even when several $t_i$ coincide. This identifies the common-source endpoint description without imposing an equality of endpoints in $Q_{[0]}$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(i),(iii), 3.1.13; endpoint restrictions of the fixed operation-path triangle."
+   }
+  },
+  {
+   "text": "The junction data are obtained by replacing the two comparisons from the common vertex with one comparison between their targets. More explicitly, $e_i:t(D_i)\\to s(D_{i+1})$ is specified together with $e_i r_i^+\\simeq r_{i+1}^-$; composition with the endpoint triangles gives $u_{i+1}^-e_i\\simeq u_i^+$. There is a contractible space of such comparisons with the displayed witness, since both endpoint lifts are initial in the same lift category of step 4. This is exactly the junction together with its coherent identification required in $L(b)$. The endpoint homotopy is induced by those retained triangles; it is not an additional independently chosen loop at $V_i$. The source part of $L(b)$ is the same $D$, its block projections and $v_i$, now written with these junctions. Consequently this operation neither reconstructs a new source from its components nor invokes the Segal-product theorem that cites the present item.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Erratum proof of E.0.1, expansion of the product comparison; explicit common-vertex junction comparison."
+   }
+  },
+  {
+   "text": "The maps $w_j$, block maps $b_iv_i$ and endpoint triangles of steps 3-5 are a point $z$ of the incidence homotopy limit for $D,C,\\alpha$. Retaining $a$ and its identification with $z$ is exactly the last homotopy-fiber datum in $L(b)$, by [lem-coef-operadic-block-incidence-lifting]. Its statement includes coherence in source equivalences and projection diagrams, so it applies also when $D$ varies along a triangle in the operation space. In using this presentation, a homotopy in the incidence limit comprises its edge, vertex and compatibility coordinates together. Hence the restriction identification in $F_b$ is its edge part; the other coordinates are precisely the factorizations just added. No second independent incidence homotopy is appended to the same data. We do not forget $a$ or replace its last homotopy fiber by a point.",
+   "uses": [
+    "lem-coef-operadic-block-incidence-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(iii), 3.1.13(iii); fixed-source block-incidence comparison, reorganized with its full homotopy-fiber coordinates."
+   }
+  },
+  {
+   "text": "Let $\\widehat F_b$ be the coherent space of $(a,h)\\in F_b$ together with the projection diagrams, endpoint factorizations, vertex comparisons and their composition witnesses just specified. Reading its data in the order endpoint, junction, source, incidence gives the data defining $L(b)$. Reading a point of $L(b)$ in reverse order gives $a$ and, by composing its incidence edge identification with the specified block equivalences, the path $h:R(a)\\to b$. Its retained source/junction identifications supply the vertex comparisons of step 4. The two readings preserve every witness; the triangular identifications of factorizations are the comparisons from the same initial-lift categories. Their composites are identified with the original triangles by the contractible comparison spaces in steps 2-5. This gives inverse coherent equivalences $L(b)\\simeq\\widehat F_b$. In particular it compares full diagram spaces, not their components.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-operadic-block-incidence-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the operation-groupoid fiber in the product assertion of the Erratum proof of E.0.1."
+   }
+  },
+  {
+   "text": "The forgetful map $p:\\widehat F_b\\to F_b$ removes only the auxiliary factorization and comparison data. For each fixed $(a,h)$, steps 2-5 give a finite succession of contractible choice spaces: inert lifts, factorizations of specified endpoint maps, and comparisons of the endpoint lifts with fixed source vertices. These assertions concern homotopy fibers with their identification with $(a,h)$ retained. For each forgetful map $f:A\\to B$, apply [lem-coef-spaces-homotopy-fiber-detection] with $u=r=f$ and $q=v=\\operatorname{id}_B$. Every fiber map goes from the contractible choice space to the contractible homotopy fiber of the identity. Thus each forgetful map is an equivalence, and so is $p$. The spaces are Kan: use cores of the coherent diagram categories and the Kan-core clause of [lem-cbc-enhanced-functor-cone-calculus]. Composing step 7 with $p$ proves the asserted equivalence, whose forward map is the one specified in the statement.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Erratum proof of E.0.1; homotopy-fiber test applied only to auxiliary choices over a fixed operation and restriction path."
+   }
+  },
+  {
+   "text": "For a simplicial map $K\\to K\\prime$, restriction of a coherent family precomposes every coordinate $K\\prime\\times\\Delta^m\\to Q$ by $K\\times\\Delta^m\\to K\\prime\\times\\Delta^m$. It commutes with every source, block, endpoint and incidence restriction and with the composition of their triangle witnesses. Thus the two readings in step 7 and the forgetful map in step 8 commute with parameter restriction. Step 2 supplies the coherent choices in families, so no independently selected inverse at individual vertices is used. Zero-length blocks have the identity endpoint projection; repeated partial sums leave the common-source-vertex argument unchanged. No discreteness of $Q_{[0]}$ was used: its paths and every junction witness were retained. The contraction in step 8 takes place over each fixed $(a,h)$, so it makes no assertion that $F_b$ or $L(b)$ itself is contractible.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1 and 3.1.13; explicit parameter-restriction, zero-input, and non-discrete-zero-fiber checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-operadic-block-incidence-lifting",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Definitions 2.4.1, 3.1.13 and Erratum proof of Corollary E.0.1, read online 2026-10-17; source not archived in literature/. Explicit comparison by auxiliary coherent factorizations over a fixed operation and restriction path."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +166,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.GlueData.mk'\", \"module\": \"Mathlib.Topology.Gluing\", \"type\": \"(h : MkCore.{u}) : TopCat.GlueData\", \"doc\": \"Given a core gluing data structure containing an indexing set $J$, families of open subsets $U_i$ and $V_{i,j}$, inclusion maps $V_{i,j} \\to U_i$, and transition maps $t_{i,j}: V_{i,j} \\to V_{j,i}$ sati\"}\n  {\"name\": \"TopCat.GlueData\", \"module\": \"Mathlib.Topology.Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type `GlueData` represents the data required to glue topological spaces, typically including open subsets and equivalence relations between them.\"}\n  {\"name\": \"CategoryTheory.GlueData.noConfusion\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \"{P : Sort u} →\\n  {C : Type u₁} →\\n    {inst : CategoryTheory.Category.{v, u₁} C} →\\n      {t : CategoryTheory.GlueData C} →\\n        {C' : Type u₁} →\\n          {inst' : CategoryTheory.Category.{v, u₁} C'} →\\n            {t' : CategoryTheory.GlueData C'} →\\n              C = C' → inst ≍ inst' → t ≍ t' → C\", \"doc\": \"An inductive type constructor that, given a category $\\\\mathcal{C}$, encodes the data required to glue categorical structures. This includes an index type $J$, functors $U,V$, morphisms $f_{ij}$ satisf\"}\n  {\"name\": \"CategoryTheory.GlueData'.mk\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v, u₁} C] →\\n    (J : Type v) →\\n      (U : J → C) →\\n        (V : (i j : J) → i ≠ j → C) →\\n          (f : (i j : J) → (h : i ≠ j) → V i j h ⟶ U i) →\\n            autoParam (∀ (i j : J) (h : i ≠ j), CategoryTheory.Mono (f i j h))\\n                Categor\", \"doc\": \"Given a category $\\\\mathcal{C}$, an index type $J$, families of objects $U: J \\\\to \\\\mathcal{C}$ and $V: (i \\\\neq j) \\\\to \\\\mathcal{C}$, monomorphisms $f_{ij}: V(i,j) \\\\to U(i)$ for $i \\\\neq j$, and pullback \"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.GlueData\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u (v + 1))\", \"doc\": \"An inductive type defining the data required to glue presheafed spaces over a category $\\\\mathcal{C}$, consisting of objects and morphisms indexed by a covering family, together with coherence conditio\"}\n  {\"name\": \"TopCat.GlueData.MkCore.mk\", \"module\": \"Mathlib.Topology.Gluing\", \"type\": \"{J : Type u} →\\n  (U : J → TopCat) →\\n    (V : (i : J) → J → TopologicalSpace.Opens ↑(U i)) →\\n      (t :\\n          (i j : J) →\\n            (TopologicalSpace.Opens.toTopCat (U i)).obj (V i j) ⟶ (TopologicalSpace.Opens.toTopCat (U j)).obj (V j i)) →\\n        (∀ (i : J), V i i = ⊤) →\\n          (∀ (i : J),\", \"doc\": \"This constructor builds the core gluing data for topological spaces by specifying: (1) a family of topological spaces $\\\\{U_i\\\\}_{i \\\\in J}$, (2) for each pair $i,j$, an open subset $V_{i,j} \\\\subseteq U_\"}\n  {\"name\": \"TopCat.GlueData.mk\", \"module\": \"Mathlib.Topology.Gluing\", \"type\": \"(toGlueData : CategoryTheory.GlueData TopCat) →\\n  (∀ (i j : toGlueData.J), Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom (toGlueData.f i j))) →\\n    TopCat.GlueData\", \"doc\": \"Given gluing data for the category of topological spaces and a proof that for every pair of objects in the indexing category, the corresponding morphism is an open embedding, this constructor produces\"}\n  {\"name\": \"CategoryTheory.GlueData'.noConfusionType\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \"Sort u →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v, u₁} C] →\\n      CategoryTheory.GlueData' C →\\n        {C' : Type u₁} → [inst' : CategoryTheory.Category.{v, u₁} C'] → CategoryTheory.GlueData' C' → Sort u\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a type family $P$ over gluing data structures, this function constructs a map from $\\\\mathcal{C}$-gluing data to $P$ by specifying how to handle the index type $J$, o\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: StrictSegal and ordinary nerve hits concern set-level spine bijections, not coherent operadic mapping/lifting-space comparisons. HomologicalComplex.homotopyFiber is for complexes, and GlueData is ordinary open gluing. Candidate files were read. Loogle reports an unknown identifier for the putative IsPullback name."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy fiber of restriction of active operations in a generalized infinity operad is the space of coherent endpoint junction and inert block lifting data",
+   "results": "{\"t\": \"2026-10-17T11:40:57Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy fiber of restriction of active operations in a generalized infinity operad is the space of coherent endpoint junction and inert block lifting data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore.spineToSimplexAux\", \"SSet.Path.interval\", \"SSet.Path\", \"SSet.StrictSegalCore.concat\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerve\", \"SSet.Truncated.Path.interval\", \"SSet.Truncated.StrictSegal.spineToDiagonal\"], \"digest\": \"5ef38ab30a305c4a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read candidate sources; strict Segal spine bijections, set fibers, ordinary fibered categories and homological-complex fibers do not give this coherent operadic comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?fiber|operad.*(restriction|lifting)",
+   "results": "{\"t\": \"2026-10-17T11:42:48Z\", \"tool\": \"grep\", \"query\": \"homotopy.?fiber|operad.*(restriction|lifting)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Precylinder.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\"], \"digest\": \"57cb9f63da0b129c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read candidate sources; strict Segal spine bijections, set fibers, ordinary fibered categories and homological-complex fibers do not give this coherent operadic comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent fiber of restriction of operations is equivalent to its space of endpoint and block factorization witnesses",
+   "results": "{\"t\": \"2026-10-17T11:42:49Z\", \"tool\": \"leansearch\", \"query\": \"A coherent fiber of restriction of operations is equivalent to its space of endpoint and block factorization witnesses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"Equiv.ofFiberEquiv\", \"HomotopicalAlgebra.instFibrationPTrivialCofibrationsFibrations\", \"Bundle.instCoeTCTotalSpace\", \"CategoryTheory.PreGaloisCategory.endEquivSectionsFibers\", \"FiberBundleCore.fiberBundle\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CompHausLike.LocallyConstant.instHasPropCarrierToTopFiber\"], \"digest\": \"92fa6fe7f9221f13\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read candidate sources; strict Segal spine bijections, set fibers, ordinary fibered categories and homological-complex fibers do not give this coherent operadic comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.StrictSegal",
+   "results": "{\"t\": \"2026-10-17T11:42:49Z\", \"tool\": \"loogle\", \"query\": \"SSet.StrictSegal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.StrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"SSet.StrictSegal.spineEquiv\"], \"digest\": \"6b047282c1b06ae8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read candidate sources; strict Segal spine bijections, set fibers, ordinary fibered categories and homological-complex fibers do not give this coherent operadic comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adding coherent cocartesian endpoint and block factorizations to an arrow with a fixed restriction path gives an equivalent Kan space",
+   "results": "{\"t\": \"2026-10-17T11:44:22Z\", \"tool\": \"leanfinder\", \"query\": \"Adding coherent cocartesian endpoint and block factorizations to an arrow with a fixed restriction path gives an equivalent Kan space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"4618a37902fb9596\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read candidate sources; strict Segal spine bijections, set fibers, ordinary fibered categories and homological-complex fibers do not give this coherent operadic comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-operation-segal-product",
@@ -74,5 +231,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-operation-lifting-fiber",
+  "worker": "stage1",
+  "summary": "Q16 identifies the lifting space with the path homotopy fiber by retaining the operation and restriction path and forgetting only contractible inert endpoint/comparison choices. Source arities, zero blocks, vertex homotopies and arbitrary simplicial parameters are checked. No new nodes or statement changes.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite-coefficient mapping-complex adjunction infrastructure; through the inherited many-object operad localization route and the E.0.1 operation-product comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic Kan-core and contractibility of the initial-object space, used on cocartesian lift categories; no statement in this unit supplies these general diagram-space facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-ea7030e8c",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-ea7030e8c (reviewer sub-agent of L); spot-checked: Read the item, all cited nodes, unit/chapter route, blueprint sources, and Gepner–Haugseng definitions/Erratum. Verified each proof step, hypotheses, identity-base restriction, coefficient setting, edge cases, non-circularity, and Mathlib audit. Review written to review.md; no repairs needed."
  }
 }

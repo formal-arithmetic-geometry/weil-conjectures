@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "cor-fd-plancherel",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Plancherel identity",
@@ -13,38 +13,69 @@
   "place": "node cor-fd-plancherel, order 2709"
  },
  "stmt_deps": [
-  "def-fd-transform"
+  "sk-def-ft",
+  "sk-def-trace"
  ],
  "proof": [
   {
-   "text": "Apply $\\iota$ to the finite Fourier sum of [thm-fd-fourier-trace], multiply it by its complex conjugate, and sum over $y$; since $\\iota\\psi_n(z)$ is a complex root of unity, $\\overline{\\iota\\psi_n(x'y)}=\\iota\\psi_n(-x'y)$, so\n\n$$\n\\sum_{y}\\Bigl|\\sum_x \\iota t_K(x)\\,\\iota\\psi_n(xy)\\Bigr|^2\n=\\sum_{y}\\sum_{x,x'}\\iota t_K(x)\\,\\overline{\\iota t_K(x')}\\ \\iota\\psi_n((x-x')y).\n$$",
+   "text": "Apply $\\iota$ to the finite Fourier sum of [sk-thm-fourier-trace-formula]. The global minus sign disappears after taking absolute squares. Multiply by the complex conjugate and sum over $y$; since $\\iota\\psi_n(z)$ is a complex root of unity, $\\overline{\\iota\\psi_n(x'y)}=\\iota\\psi_n(-x'y)$, so\n\n$$\n\\sum_{y}\\Bigl|\\sum_x \\iota t_K(x)\\,\\iota\\psi_n(xy)\\Bigr|^2\n=\\sum_{y}\\sum_{x,x'}\\iota t_K(x)\\,\\overline{\\iota t_K(x')}\\,\\iota\\psi_n((x-x')y).\n$$",
    "uses": [
-    "thm-fd-fourier-trace"
+    "sk-thm-fourier-trace-formula"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-cor-plancherel/cor-fd-plancherel.proof.md",
+    "place": "first paragraph and displayed expansion"
+   }
   },
   {
-   "text": "The orthogonality relation [lem-fd-additive-orthogonality] (an identity in $\\Qlb$, transported by $\\iota$) makes the inner $y$-sum equal to $q^n$ when $x=x'$ and zero otherwise. The surviving diagonal sum is exactly the right-hand side written with the absolute values of the trace function of [def-fd-trace-function].",
+   "text": "The orthogonality relation [sk-lem-orthogonality] (an identity in $\\Qlb$, transported by $\\iota$) makes the inner $y$-sum equal to $q^n$ when $x=x'$ and zero otherwise. The surviving diagonal sum is exactly the right-hand side, using the trace-function definition [sk-def-trace] and $a\\overline a=|a|^2$ in $\\mathbf C$.",
    "uses": [
-    "lem-fd-additive-orthogonality",
-    "def-fd-trace-function"
+    "sk-lem-orthogonality",
+    "sk-def-trace"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-cor-plancherel/cor-fd-plancherel.proof.md",
+    "place": "second paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "thm-fd-fourier-trace",
-  "lem-fd-additive-orthogonality",
-  "def-fd-trace-function"
+  "sk-thm-fourier-trace-formula",
+  "sk-lem-orthogonality",
+  "sk-def-trace"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-cor-plancherel/cor-fd-plancherel.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-cor-plancherel/cor-fd-plancherel.proof.md",
+  "place": "Entire proof; expansion, orthogonality, and diagonal identification"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite field Fourier transform trace function Plancherel identity sum of squared absolute values",
+   "results": "Generic Fourier declarations only; no exact Weil trace-function identity",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finite Fourier transform, AddChar, orthogonality, sum of squares",
+   "results": "0 hits; Fourier identifier unavailable",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Plancherel|fourier.*orthogonality|sum.*AddChar (Mathlib/Analysis/Fourier)",
+   "results": "no exact Weil trace-function identity",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -133,5 +164,20 @@
   }
  },
  "chapter": "sec-fourier-transform",
- "unit": "sk-cor-plancherel"
+ "unit": "sk-cor-plancherel",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-fd-plancherel",
+  "worker": "stage1",
+  "summary": "Audited the finite Fourier expansion and character orthogonality argument against the current blueprint route; corrected citations to the unit's sk-thm-fourier-trace-formula, sk-lem-orthogonality, sk-def-trace, added proof source places, and retained the exact Plancherel statement.",
+  "blueprint": "Realizes the sole proof paragraph of cor-fd-plancherel: expand the Fourier trace sum, apply orthogonality, and identify the diagonal with the squared trace sum."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q123-3b78234b1",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-3b78234b1 (reviewer sub-agent of L); spot-checked: The delivered proof cites old def-fd/thm-fd nodes outside sk-cor-plancherel’s current route and omits required source places on both steps. Corrected DAG JSON uses sk-thm-fourier-trace-formula, sk-lem-orthogonality, sk-def-trace, adds explicit handling of the Fourier sign, and preserves the exact target statement.; 1 file(s) fixed by the reviewer"
+ }
 }

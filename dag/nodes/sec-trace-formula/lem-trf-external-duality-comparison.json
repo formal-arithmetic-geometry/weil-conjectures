@@ -14,48 +14,98 @@
   "def-sf-kv-maps",
   "lem-trf-cohomological-evaluation-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=f_{X\\times X}$, $f=f_X$, and write $\\bar p_i$ for the projections on $\\bar X\\times\\bar X$. Tensor--Hom uncurrying tests the desired equality after tensoring $Q$ with $\\bar p_2^*K'$. With the signed symmetry, use the common source\n$$S=\\bar p_2^*fD_XK\\otimes\\bar p_2^*fK\\otimes\\bar p_1^*fK$$\nand target $\\bar p_1^!fK$. The uncurrying of $\\theta F(\\kappa)\\Pi$ first applies the three ordinary comparisons, combines them by $t_{X\\times X}$, applies $F$ to second-factor evaluation followed by $\\alpha_{\\operatorname{id}_X,a_X}$, and finally applies $\\beta_{p_1}(K)$. This follows by expanding $r_{X\\times X}$ and $\\Pi$ from [def-trf-cohomological-comparison], naturality of $t$, and associativity and signed commutativity (I). The uncurrying of $\\bar\\kappa J$ applies $\\bar p_2^*d_X$ to the dual factor, evaluates that factor against $\\bar p_2^*fK$, then applies the barred exceptional Künneth map with $\\bar p_1^*fK$. These descriptions are exactly [def-sf-kv-maps](iii),(iv). They are diagram (4.14) with BOTH projection indices interchanged; in particular the exceptional target is indexed by $1$, not $2$.",
+   "uses": [
+    "def-sf-kv-maps",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.3, reduction of the left square of (4.12) to the uncurried maps and diagram (4.14)"
+   }
+  },
+  {
+   "text": "Write $e:D_XK\\otimes K\\to\\omega_X$ for evaluation. Apply axiom (IV) of [def-trf-cohomological-comparison] to $g=p_2$ and $M=D_XK,N=K$. Its well-typed equation is\n$$\\alpha_{p_2}(M\\otimes N)\\circ\\bar p_2^*t_X(M,N)\n=t_{X\\times X}(p_2^*M,p_2^*N)\\circ(\\alpha_{p_2}(M)\\otimes\\alpha_{p_2}(N)).$$\nNaturality of $\\alpha_{p_2}$ for $e$ identifies the first tensor/evaluation segment of the unbarred route with $\\alpha_{p_2}(\\omega_X)\\circ\\bar p_2^*(f(e)\\circ t_X)$. Tensor with the remaining factor $\\bar p_1^*fK$; associativity of $t$ in (I) makes this the left square of the factor-swapped (4.14). Thus it remains to compare the exceptional segments on\n$$B=\\bar p_2^*f\\omega_X\\otimes\\bar p_1^*fK.$$\nNo exceptional-tensor theorem is used in this step.",
+   "uses": [
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.3, left inner square of (4.14), with both projection indices interchanged"
+   }
+  },
+  {
+   "text": "Let $T=T_{p_1}$ and $\\chi:p_2^*\\omega_X\\to p_1^!A_X$. By [lem-trf-projection-kunneth-tensor], the unbarred exceptional Künneth map, after the signed swap, is $T\\circ(\\chi\\otimes1)$; the barred map has the identical description. The unbarred exceptional segment on $B$ is therefore\n$$L=\\beta_{p_1}(K)\\circ F(T)\\circ t_{X\\times X}\\circ(F(\\chi)\\alpha_{p_2}(\\omega_X)\\otimes\\alpha_{p_1}(K)).$$\nNaturality of $t$ and identity (a) of [lem-trf-cohomological-evaluation-calculus], used as an ASSUMED identity at $g=p_1,M=A_X,N=K$, give\n$$L=\\bar p_1^!(t_X)\\circ T_{\\bar p_1}\\circ(\\beta_{p_1}(A_X)F(\\chi)\\alpha_{p_2}(\\omega_X)\\otimes1).$$\nSubstitute the assumed identity (d), then use naturality of $T_{\\bar p_1}$ in its first argument, to obtain\n$$L=\\bar p_1^!\\bigl(t_X\\circ(j_X\\otimes1)\\bigr)\\circ T_{\\bar p_1}\\circ(\\bar\\chi\\,\\bar p_2^*\\delta_X\\otimes1)\n=T_{\\bar p_1}\\circ(\\bar\\chi\\,\\bar p_2^*\\delta_X\\otimes1).$$\nThe last equality is the assumed tensor-unit identity (c); its left-unit version follows from signed commutativity (I). All displayed equalities include the canonical unit and signed symmetry identifications. This proves the exceptional square of the factor-swapped (4.15). Finally the definition of $d_X$ as $r_X$ followed by $\\delta_X$ gives, by its evaluation transpose,\n$$\\delta_X\\circ f(e)\\circ t_X(D_XK,K)=\\operatorname{ev}_{fK}\\circ(d_X\\otimes1).$$\nCombining this with Step 2 identifies the full unbarred route with the uncurrying of $\\bar\\kappa J$. Compactifiability is not invoked: only the identities (a),(c),(d) explicitly assumed in the item are used.",
+   "uses": [
+    "lem-trf-cohomological-evaluation-calculus",
+    "lem-trf-projection-kunneth-tensor",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.3, diagrams (4.14)--(4.15), with both projection indices interchanged; Lemma 4.2.4(b),(f), Lemma 4.2.2(a), and (0.4)"
+   }
+  },
+  {
+   "text": "The two uncurried composites are equal by Steps 2 and 3. The tensor–Hom uncurrying map is injective, so the original morphisms $\\theta\\,f_{X\\times X}(\\kappa)\\,\\Pi_{K,D_XK}$ and $\\bar\\kappa\\,J$ are equal. The argument compares the maps before any cancellation and therefore remains valid when $\\Pi_{K,D_XK}$ is not an isomorphism; no trace-class assertion is used.",
+   "uses": [
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.3, conclusion from (4.14) and tensor–Hom adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-kv-maps",
+  "def-trf-cohomological-comparison",
+  "lem-trf-cohomological-evaluation-calculus",
+  "lem-trf-projection-kunneth-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§4.4.3, diagrams (4.14)--(4.15)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A comparison of six functor diagrams preserving evaluation and exceptional tensor exchange commutes with the canonical external Verdier duality morphism.",
-   "results": "8 hits: CategoryTheory.coev_expComparison, CategoryTheory.expComparison_whiskerLeft, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.ExactPairing.coevaluation_evaluation', CategoryTheory.ExactPairing.coevaluation_evaluation, CategoryTheory.ExactPairing.evaluation_coevaluation', CategoryTheory.tensorRightHomEquiv_tensor; full returned signatures in lem-trf-external-duality-comparison.search-output.txt",
+   "query": "Evaluation-compatible external duality comparison commutes with tensor Hom evaluation under a cohomological comparison",
+   "results": "8 hits: CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft",
    "date": "2026-10-17",
-   "verdict": "no match: expComparison_ev is for binary-product-preserving functors between Cartesian monoidal categories; rigid tensor-Hom identities concern duals to the tensor unit; neither gives the geometric external Verdier-duality comparison for these lax tensor data"
+   "verdict": "no match: generic monoidal comparison and rigid tensor-Hom declarations do not state the geometric external Verdier-duality comparison"
   },
   {
    "tool": "loogle",
-   "query": "\"expComparison_ev\"",
-   "results": "1 hits: CategoryTheory.expComparison_ev; full returned signatures in lem-trf-external-duality-comparison.search-output.txt",
+   "query": "CategoryTheory.expComparison_ev, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.MonoidalClosedFunctor.comparison_iso",
+   "results": "0 hits",
    "date": "2026-10-17",
-   "verdict": "no match: expComparison_ev is for binary-product-preserving functors between Cartesian monoidal categories; rigid tensor-Hom identities concern duals to the tensor unit; neither gives the geometric external Verdier-duality comparison for these lax tensor data"
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "expComparison_ev|external.*[Dd]ual|[Vv]erdier|kunnethVerdier",
-   "results": "25 hits: Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean; full returned signatures in lem-trf-external-duality-comparison.search-output.txt",
+   "query": "expComparison_ev|external.*[Dd]ual|[Vv]erdier (Mathlib/CategoryTheory)",
+   "results": "0 hits",
    "date": "2026-10-17",
-   "verdict": "no match: expComparison_ev is for binary-product-preserving functors between Cartesian monoidal categories; rigid tensor-Hom identities concern duals to the tensor unit; neither gives the geometric external Verdier-duality comparison for these lax tensor data"
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Compatibility of a lax tensor functor with the evaluation defined external duality map under pullback and exceptional pullback comparisons.",
-   "results": "8 hits: CategoryTheory.LaxMonoidalFunctor.noConfusion, CategoryTheory.ExactPairing.evaluation_coevaluation', CategoryTheory.tensorLeftAdjunction, CategoryTheory.Functor.LaxMonoidal, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.Functor.LaxMonoidal.ofTensorHom, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.rightAdjointMate_comp_evaluation; full returned signatures in lem-trf-external-duality-comparison.search-output.txt",
+   "query": "Compatibility of external Verdier duality evaluation with tensor and exceptional pullback comparison maps",
+   "results": "8 hits: CategoryTheory.rightAdjointMate_comp_evaluation, CategoryTheory.Limits.pullbackComparison, CategoryTheory.Equivalence.sheafCongr.functor_map_val_app, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, map_dualTensorHom, CategoryTheory.ExactPairing.evaluation_coevaluation', SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.expComparison_ev",
    "date": "2026-10-17",
-   "verdict": "no match: expComparison_ev is for binary-product-preserving functors between Cartesian monoidal categories; rigid tensor-Hom identities concern duals to the tensor unit; neither gives the geometric external Verdier-duality comparison for these lax tensor data"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The tensor Hom transpose of external Verdier duality intertwines a dualizing comparison with ordinary and extraordinary base change maps.",
-   "results": "8 hits: CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorRightAdjunction; full returned signatures in lem-trf-external-duality-comparison.search-output.txt",
-   "date": "2026-10-17",
-   "verdict": "no match: expComparison_ev is for binary-product-preserving functors between Cartesian monoidal categories; rigid tensor-Hom identities concern duals to the tensor unit; neither gives the geometric external Verdier-duality comparison for these lax tensor data"
+   "verdict": "no match: returned generic adjunction, pullback and monoidal identities do not provide the geometric six-functor statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-specialization",
@@ -74,5 +124,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-external-duality-comparison",
+  "worker": "stage1",
+  "summary": "Read Varshavsky §4.4.3 and checked the item against the existing comparison and evaluation-calculus nodes. The proof is split into the tensor–Hom uncurrying reduction, the axiom-(IV) left square, the dualizing/tensor/Künneth factorization of the right square, and the final injectivity step. No new node is needed: each structural identity is already stated by an existing node, and the argument never cancels Pi or asserts a trace conclusion. Mathlib searches found only generic monoidal and adjunction declarations. Maintainer-reader correction: interchanged both projection indices throughout the uncurrying proof, corrected the t_X/t_{X×X} subscripts in (IV), and displayed the exceptional-segment equalities using the already cited identities. The statement is unchanged.",
+  "blueprint": "The item is an auxiliary realization of the tensor–Hom comparison used in the proof of lem-trf-trace-specialization (its blueprint ancestor is lem-trf-local-term-locality); the four steps realize Varshavsky §4.4.3 diagrams (4.14)--(4.15).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-ddb6d99b6",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-ddb6d99b6 (reviewer sub-agent of L); spot-checked: Read mathematics in full against Varshavsky §4.4.3, diagrams (4.14)–(4.15), cited node statements, and current blueprint route. Corrected two local proof faults: unswapped projection indices and ill-typed tensor-comparison subscripts. Added explicit typed composites. Statement, hypotheses, and dependency set unchanged. Review and whole corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
  }
 }

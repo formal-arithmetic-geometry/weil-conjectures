@@ -10,9 +10,115 @@
  "stmt_deps": [
   "def-sfb-monoidal-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H=[X,Y]$, and let $a:J\\otimes I\\xrightarrow{\\sim}\\mathbf1$ and $b:I\\otimes J\\xrightarrow{\\sim}\\mathbf1$ be the specified isomorphisms. Define $T_J(A)=A\\otimes J$, $T_I(A)=A\\otimes I$, with maps $f\\otimes1$. The composites have natural isomorphisms $T_I T_J(A)\\xrightarrow{\\alpha}A\\otimes(J\\otimes I)\\xrightarrow{1\\otimes a}A\\otimes\\mathbf1\\xrightarrow{\\rho}A$ and $T_J T_I(A)\\xrightarrow{\\alpha}A\\otimes(I\\otimes J)\\xrightarrow{1\\otimes b}A\\otimes\\mathbf1\\xrightarrow{\\rho}A$. Each is natural because associators and unitors are natural and tensor is a bifunctor. No triangle identity relating $a$ to $b$ is asserted or required.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-quasi-inverse-hom-bijection] to $F=T_J,G=T_I$ and the natural isomorphisms of step 1. Thus $f\\mapsto f\\otimes1_J$ is bijective on each Hom set. Also every object $Z$ is isomorphic to $W\\otimes J$ with $W=Z\\otimes I$: use the second displayed composite of step 1 at $Z$. In all subsequent calculations associators are these specified associators; rearranging parentheses is their naturality and the pentagon and triangle identities, not any assumption on the chosen inverse-factor isomorphisms.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "For any $A$, write $U_X(h)=e_{X,Y}\\circ(h\\otimes1_X)$ for the adjunction bijection $\\operatorname{Hom}(A,[X,Y])\\to\\operatorname{Hom}(A\\otimes X,Y)$. Naturality of the assumed adjunction gives $U_X(h\\circ k)=U_X(h)\\circ(k\\otimes1_X)$ and $U_{X\\prime}([f,g]\\circ h)=g\\circ U_X(h)\\circ(1_A\\otimes f)$ for $f:X\\prime\\to X$, $g:Y\\to Y\\prime$. Here $[f,g]:[X,Y]\\to[X\\prime,Y\\prime]$ denotes the induced internal-Hom map. Define $t$ and $s$ as the unique transposes of the two evaluation composites in the statement. This proves their defining equations and existence without using invertibility.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "Fix $W$ and test $t:H\\otimes J\\to[X,Y\\otimes J]$ on maps from $W\\otimes J$. By full faithfulness of $T_J$, every $k:W\\otimes J\\to H\\otimes J$ is uniquely $h\\otimes1_J$ for $h:W\\to H$. Put $d=U_X(h):W\\otimes X\\to Y$. The defining equation for $t$, tensor functoriality and naturality of $\\sigma$ give $U_X(t\\circ k)=(d\\otimes1_J)\\circ\\chi_{W,J,X}$, where $\\chi_{W,J,X}:(W\\otimes J)\\otimes X\\xrightarrow{\\alpha}W\\otimes(J\\otimes X)\\xrightarrow{1\\otimes\\sigma_{J,X}}W\\otimes(X\\otimes J)\\xrightarrow{\\alpha^{-1}}(W\\otimes X)\\otimes J$. Every operation in the chain $k\\leftrightarrow h\\leftrightarrow d\\leftrightarrow d\\otimes1_J\\leftrightarrow(d\\otimes1_J)\\circ\\chi\\leftrightarrow t\\circ k$ is bijective: the first and third use [lem-sf-quasi-inverse-hom-bijection] for $T_J$, the second and last are the assumed closed adjunctions, and the fourth is composition with a specified isomorphism. Thus postcomposition with this particular evaluation-normalized $t$ is bijective on these test objects, not just a comparison between abstract representing objects.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "For arbitrary $Z$, precompose with the isomorphism $(Z\\otimes I)\\otimes J\\cong Z$ of step 2 on both Hom sets. This conjugates postcomposition with $t$ to the bijection of step 4, so $\\operatorname{Hom}(Z,t)$ is bijective. Here is the elementary isomorphism test, which will also be used for $s$: if $f:A\\to B$ has every $\\operatorname{Hom}(Z,f)$ bijective, take $Z=B$ to obtain $r:B\\to A$ with $f\\circ r=1_B$. Then injectivity at $Z=A$, applied to $f\\circ(r\\circ f)=f\\circ1_A$, gives $r\\circ f=1_A$. Hence $t$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "For $s:H\\to[X\\otimes J,Y\\otimes J]$ and arbitrary $Z$, the defining equation and naturality in the test object give $U_{X\\otimes J}(s\\circ h)=(U_X(h)\\otimes1_J)\\circ\\alpha^{-1}_{Z,X,J}$ for $h:Z\\to H$. Consequently postcomposition with $s$ is the composite of the bijections $\\operatorname{Hom}(Z,H)\\cong\\operatorname{Hom}(Z\\otimes X,Y)\\cong\\operatorname{Hom}((Z\\otimes X)\\otimes J,Y\\otimes J)\\cong\\operatorname{Hom}(Z\\otimes(X\\otimes J),Y\\otimes J)\\cong\\operatorname{Hom}(Z,[X\\otimes J,Y\\otimes J])$. The middle tensoring bijection is [lem-sf-quasi-inverse-hom-bijection] for $T_J$; the others are the given adjunctions and the associator. The elementary isomorphism test of step 5 now proves that this specified $s$ is invertible.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "For $f:X\\prime\\to X$ and $g:Y\\to Y\\prime$, the naturality identities are $t_{X\\prime,Y\\prime,J}\\circ([f,g]\\otimes1_J)=[f,g\\otimes1_J]\\circ t_{X,Y,J}$ and $s_{X\\prime,Y\\prime,J}\\circ[f,g]=[f\\otimes1_J,g\\otimes1_J]\\circ s_{X,Y,J}$. Apply the injective uncurrying bijection to each identity. For the first, both sides become $(g\\circ e_{X,Y}\\circ(1_H\\otimes f))\\otimes1_J$ after precomposition by the permutation $(H\\otimes J)\\otimes X\\prime\\to(H\\otimes X\\prime)\\otimes J$ defined as $\\chi$ in step 4. This follows from $\\sigma_{J,X}\\circ(1_J\\otimes f)=(f\\otimes1_J)\\circ\\sigma_{J,X\\prime}$. For the second, both sides become $(g\\circ e_{X,Y}\\circ(1_H\\otimes f))\\otimes1_J$ on $H\\otimes(X\\prime\\otimes J)$, with the inverse associator understood. This proves the two asserted variable naturalities.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "Let $u:J\\xrightarrow{\\sim}J\\prime$ be any isomorphism of invertible factors; no compatibility with chosen inverse data is needed because the definitions of $t,s$ do not use that data. The precise factor-compatibility equations are $t_{X,Y,J\\prime}\\circ(1_H\\otimes u)=[1_X,1_Y\\otimes u]\\circ t_{X,Y,J}$ and $s_{X,Y,J\\prime}=[1_X\\otimes u^{-1},1_Y\\otimes u]\\circ s_{X,Y,J}$. After uncurrying, both sides of the first equation equal $(e_{X,Y}\\otimes u)\\circ(1_H\\otimes\\sigma_{J,X})$ by naturality of the braiding. For the second, uncurrying its right side gives $(1_Y\\otimes u)\\circ(e_{X,Y}\\otimes1_J)\\circ(1_H\\otimes1_X\\otimes u^{-1})=e_{X,Y}\\otimes1_{J\\prime}$ since $u\\circ u^{-1}=1$. This is the uncurry of its left side. Injectivity of transposition proves both equations.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  },
+  {
+   "text": "Put $q=t^{-1}$ and $c=s^{-1}$. Compose the first defining evaluation equation on the right with $q\\otimes1_X$ to obtain $e_{X,Y\\otimes J}=(e_{X,Y}\\otimes1_J)\\circ(1_H\\otimes\\sigma_{J,X})\\circ(q\\otimes1_X)$. Similarly the second gives $e_{X\\otimes J,Y\\otimes J}=(e_{X,Y}\\otimes1_J)\\circ(c\\otimes1_{X\\otimes J})$. These are precisely the inverse evaluation normalizations. Multiplying the naturality and factor-compatibility identities of steps 7–8 by the inverse maps proves the corresponding identities for $q,c$. Thus $c:[X\\otimes J,Y\\otimes J]\\xrightarrow{\\sim}[X,Y]$ is the canonical natural cancellation isomorphism.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible), 0GWJ (categories-remark-internal-hom-monoidal); agent argument using the displayed evaluation transposes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "lem-sf-quasi-inverse-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Agent consequence of Tags 0FFM and 0GWJ; the Hom-set proof also follows the categorical-core explanation in WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:302–345, extending it to simultaneous cancellation and explicit naturality."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +173,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-twisted-bidual-transport",
@@ -86,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-invertible-factor-hom-cancellation",
+  "worker": "stage1",
+  "group": "Q106",
+  "summary": "Kept the statement and existing searches. Proved both evaluation-normalized comparison maps invertible by tensor equivalence and Hom-set bijections; wrote out variable naturality, factor-isomorphism compatibility including the inverse in the contravariant slot, and inverse evaluation equations. One generic Mathlib leaf supplies full faithfulness from arbitrary quasi-inverse data. No Lean written or compiled.",
+  "blueprint": "thm-weil-etale-geometric-biduality proof paragraph 4, returned step 7: the formal invertible-factor cancellation underlying the alpha/gamma comparisons of lem-sf-etale-twisted-bidual-transport. All nine steps refine this local formal argument, without changing its geometric or coefficient route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q106-5bc628a03",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-5bc628a03 (reviewer sub-agent of L); spot-checked: Read the complete item, new node, cited statements and source passages. All nine steps, evaluation normalizations, naturalities and the exact Mathlib leaf check out; no duplicate or circular split found. Small-case checks and route scope are documented in review.md. No repairs required."
  }
 }
