@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pod-point-dualizing-complex",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Dualizing complex of the point",
- "statement": "In the Poincare duality conventions of this chapter (the fixed setting),\nthe exceptional inverse image of the identity is the identity functor,\n\n$$\n\\omega_{s,\\Lambda}=Ra_s^!\\Lambda\\cong\\Lambda_s,\n$$\n\nand, for every object $C$ of the\ncategory at the point,\n\n$$\nD_sC:=R\\mathcal Hom_s\\bigl(C,\\omega_{s,\\Lambda}\\bigr)\\cong C^\\vee.\n$$",
+ "statement": "Use the Poincare duality conventions [def-pod-conventions], with $s=\\operatorname{Spec}k$, $a_s=\\operatorname{id}_s$, and $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$. On the bounded constructible point category $D^b_c(s,\\Lambda)$ of [def-weil-finite-coefficient-point], the constructible exceptional inverse image [def-weil-exceptional-inverse-image] of the identity is naturally isomorphic to the identity. In particular,\n$$\n\\omega_{s,\\Lambda}=Ra_s^!\\Lambda_s\\cong\\Lambda_s.\n$$\nFor every $C\\in D^b_c(s,\\Lambda)$ put $c=\\operatorname{Fib}_s(C)$, using the point fibre equivalence [lem-weil-point-fibre-equivalence], and define $D_sC=R\\mathcal Hom_s(C,\\omega_{s,\\Lambda})$ using [def-weil-derived-pullback-tensor-hom]. Then there is a canonical isomorphism\n$$\n\\operatorname{Fib}_s(D_sC)\\cong R\\operatorname{Hom}_\\Lambda(c,\\Lambda)=c^\\vee.\n$$\nHere $c^\\vee$ is the derived coefficient-module dual of [def-pod-perfect-point-complex]. At finite and integral coefficients the evaluation on the left means termwise sections $\\Gamma(s,-)$ on the ambient derived category, as in [lem-weil-point-proetale-sections-exact]; at $E$ it means its rationalization, and at $\\Qlb$ it means its common finite-stage version. Thus this formula spells out $D_sC\\cong C^\\vee$ under the point-category identifications, rather than identifying a sheaf complex with a coefficient-module complex without evaluation.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.md",
   "place": "node lem-pod-point-dualizing-complex, order 2247"
@@ -15,32 +15,248 @@
  "stmt_deps": [
   "def-pod-conventions",
   "def-weil-finite-coefficient-point",
-  "def-weil-geometric-hypotheses"
+  "def-weil-exceptional-inverse-image",
+  "def-pod-perfect-point-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-proetale-sections-exact"
  ],
  "proof": [
   {
-   "text": "By the construction of the exceptional inverse image of [def-weil-exceptional-inverse-image], $Rf^!$ is the right adjoint\nof $Rf_!$; for $f=\\operatorname{id}_s$ the functor $Rf_!$ is the\nidentity, whose right adjoint is the identity, so\n$Ra_s^!\\Lambda\\cong\\Lambda_s$. The displayed identification of\n$D_s$ is then the definition of $C^\\vee$ in\n[def-pod-perfect-point-complex], $R\\mathcal Hom$ at the point\nbeing computed over the coefficient ring by\n[def-weil-derived-pullback-tensor-hom].",
+   "text": "Choose the compactification $s\\xrightarrow{\\mathrm{id}}s\\xrightarrow{\\mathrm{id}}s$. The formula $Rf_{!,n}=Rp_*j_!$ of [def-compact-support-direct-image-detailed] is the identity here, since direct image and extension by zero along the identity act termwise as the identity. At the integral stage the formula of [def-weil-integral-rational-qbar-compact-support] is $R\\varprojlim_n\\operatorname{Res}_n C_n\\cong C$ by derived completeness [def-weil-derived-complete]. The natural unit into this total limit is the reduction/limit adjunction unit [lem-coef-derived-system-evaluation-calculus]; its composites to all levels are the original reduction maps. The normalized reduction tower has the canonical counit isomorphisms of [lem-coef-normalized-dvr-effectivity]. Write these functors as $\\mathcal R\\dashv\\mathcal L$, with unit $u$ and counit $e$. Since $e_N$ is invertible for normalized $N$, the triangle equation $\\mathcal L(e_N)u_{\\mathcal L N}=1$ makes $u_{\\mathcal L N}$ invertible. Derived completeness supplies some isomorphism $h:C\\xrightarrow{\\sim}\\mathcal L\\mathcal R C$; naturality gives $u_{\\mathcal L\\mathcal R C}h=\\mathcal L\\mathcal R(h)u_C$, so $u_C$ is invertible as well. Thus the canonical natural unit, rather than a separately chosen completeness isomorphism, identifies integral identity compact support with the identity functor. The natural isomorphism $u^{-1}$ descends to the rational category: naturality for an integral arrow $v$ gives naturality for $v\\otimes a$ after multiplying both sides by $a$, and hence for sums of such arrows. For descent to the common-stage category, check compatibility with $E\\subset L$. The completed scalar comparison [lem-weil-finite-free-completed-scalar-comparison] identifies integral scalar extension with ordinary derived tensor by the finite free completed coefficient sheaf. Tensor by this sheaf commutes with the products and cones in the total-limit model: after a choice of basis it is a finite direct sum, so the identification acts componentwise. On a flat-term K-flat representative $P$, the canonical completion map has the reduction maps as its product component and zero as its shifted-product component, exactly as specified in that comparison. Tensoring this map and applying the coefficient comparison yields the completion map for the extended representative, with the same reduction and zero components. Thus the square formed by scalar extension, the compact-support scalar comparison, and the two units $u$ commutes as an equality of chain maps, not merely after projecting to each reduction. Its inverse square gives the same compatibility for $u^{-1}$. At a common field the naturality square is therefore the rational naturality square already proved; extending that field preserves its equality. This gives a natural identity normalization of $Ra_{s!}$ in all four point categories. Use the constructible adjunction $Rf_!\\dashv Rf^!$ of [def-pod-conventions, def-weil-exceptional-inverse-image], which that definition records as a theorem rather than a part of the definition; for $f=a_s$ it is supplied stage by stage as follows. At $\\Lambda=A_{E,n}$, take the compactification $c=(\\mathrm{id},\\mathrm{id})$ with $\\dim s=0$ in [thm-sf-ambient-adjoint-class], clause 2: there $P_c=Ra_{s!,n}$ and $R_c=\\nu_s^*a_s^{\\times}R\\nu_{s,*}=Ra^!_{s,n}$, and every $K\\in D^b_c(s,A_{E,n})$ has an etale-origin witness by [lem-sf-proetale-constructible-origin] (ii), so $\\operatorname{Hom}(Ra_{s!}K,L)\\cong\\operatorname{Hom}(K,Ra_s^!L)$ naturally for $K,L\\in D^b_c(s,A_{E,n})$, the categories being full. At $\\Lambda=\\mathcal O_E$, the separated finite-type morphism $a_s$ of [prop-coef-integral-exceptional-adjoint] gives $G_{a_s}$, with the object formula $R\\varprojlim_n\\operatorname{Res}_nRa^!_{s,n}L_n$ of the integral exceptional functor, right adjoint to integral $Ra_{s!}$ on $D^b_c(s,\\mathcal O_E)$. At $\\Lambda\\in\\{E,\\Qlb\\}$ the finite-Tor categories are by definition the bounded constructible ones, and [lem-sf-constructible-exceptional-adjunction-coefficients] gives the natural adjunction $Ra_{s!,\\Lambda}\\dashv Ra^!_{s,\\Lambda}$ on them. For any $K,L$ in that category, its natural Hom bijection becomes $\\operatorname{Hom}(K,Ra_s^!L)\\cong\\operatorname{Hom}(K,L)$. Write the resulting natural bijection as $\\Phi_K:\\operatorname{Hom}(K,Ra_s^!L)\\to\\operatorname{Hom}(K,L)$. Set $u=\\Phi_{Ra_s^!L}(1)$ and $v=\\Phi_L^{-1}(1)$. Naturality in $K$ gives $uv=1$ and $\\Phi_{Ra_s^!L}(vu)=u=\\Phi_{Ra_s^!L}(1)$, hence $vu=1$ by injectivity. Thus $u$ is an isomorphism; naturality of the original bijections in $L$ makes it a natural isomorphism. At $L=\\Lambda_s$ it gives $\\omega_{s,\\Lambda}\\cong\\Lambda_s$. This concerns the constructible adjoint, not the comparison composite on arbitrary pro-etale complexes.",
    "uses": [
+    "def-compact-support-direct-image-detailed",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-complete",
+    "def-pod-conventions",
     "def-weil-exceptional-inverse-image",
-    "def-pod-perfect-point-complex",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "thm-sf-ambient-adjoint-class",
+    "lem-sf-proetale-constructible-origin",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "first sentence: identity compact support and uniqueness of its constructible right adjoint"
+   }
+  },
+  {
+   "text": "The coefficient DVR theorem [lem-weil-l-adic-extension-integers-dvr] applies; its principal-ideal property makes $\\mathcal O_E$ and its quotients Noetherian. For the finite and integral cases write $(R,B)=(A_{E,n},(A_{E,n})_s)$ or $(\\mathcal O_E,\\widehat{\\mathcal O}_{E,s})$. Let $\\underline M$ be the constant sheaf and set $L_R(M)=B\\otimes_{\\underline R}\\underline M$. Exact sheafification [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] makes the constant module functor exact; at finite level $L_R(M)=\\underline M$, and at integral level flatness of $B$ over $\\underline R$ [lem-weil-pbc-completed-constant-sheaf-reduction] makes $L_R$ exact. Sections $\\Gamma(s,-)$ are exact by [lem-weil-point-proetale-sections-exact]. The continuous-coefficient description [lem-weil-pbc-continuous-coefficients-immersion-restriction] gives $\\Gamma(s,\\widehat{\\mathcal O}_{E,s})=C(\\{*\\},\\mathcal O_E)=\\mathcal O_E$. The reduction theorem identifies $B/\\varpi_E^n B$ with $(A_{E,n})_s$; multiplication by $\\varpi_E^n$ is injective on $B$, since $\\mathcal O_E$ is a domain and $B$ is flat. Exact sections therefore identify $\\Gamma(s,(A_{E,n})_s)=A_{E,n}$, through the canonical constant-value map. Thus in both cases $\\Gamma(s,B)=R$. There is an explicit adjunction $L_R\\dashv\\Gamma(s,-)$: a map $v:L_RM\\to F$ gives $m\\mapsto v_s(1\\otimes m)$; a linear map $t:M\\to F(s)$ gives $b\\otimes m\\mapsto b\\,t(m)|_U$ on every object $U$. Balancing and sheafification make the latter a sheaf map. The formulas are inverse and natural, and their termwise versions commute with the complex differentials.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EI (lemma-sheafification-exact), 093M (lemma-completion-flat); explicit extension-of-scalars/sections adjunction"
+   }
+  },
+  {
+   "text": "These exact functors act termwise on derived categories. For a finitely presented $R$-module $M$, apply the two exact functors and sections to a presentation $R^a\\to R^b\\to M\\to0$. Since $\\Gamma(s,B)=R$, the adjunction unit identifies $M\\xrightarrow{\\sim}\\Gamma(s,L_RM)$. Exactness then makes the unit an isomorphism for every complex whose cohomology modules are finitely presented. Noetherian finite modules are finitely presented [lem-sc-noetherian-finite-module-finite-presentation]. At finite level, $L_R$ sends a complex with bounded finite cohomology to a complex with constant finite cohomology sheaves. Their geometric stalks are finite by [lem-weil-proetale-constant-sheaf-stalk], so this complex is constructible by [def-weil-finite-torsion-constructibility]. At integral level every bounded complex with finitely generated cohomology over the DVR $R$ is perfect: [lem-weil-pbc-finite-free-resolution-noetherian] gives $R^a\\twoheadrightarrow M$ with finitely generated kernel; the kernel is torsion free as a submodule of a free module, so [lem-sc-dvr-fg-torsionfree-free] makes it finite free. Thus each cohomology module has a length-one finite-free resolution, and [lem-sf-perfect-cohomology-assembly] gives a bounded finite-projective representative $P$ of the complex. The integral stratified-perfect characterization [lem-weil-pbc-integral-stratified-perfect-characterization], applied to the single stratum $s$, puts $L_RP=B\\otimes_R P$ in $D^b_c(s,R)$. Here $s$ is Noetherian of dimension zero and $\\ell\\ne p$. Now take $C\\in D^b_c(s,R)$ and $c=\\Gamma(s,C)$. Its bounded finite/finite-generation properties are part of the target of [def-weil-finite-coefficient-point]. We have proved $L_Rc$ is constructible. The adjunction triangle identity makes $\\Gamma(s,L_Rc\\to C)$ inverse to the unit at $c$, hence an isomorphism. Conservativity of the equivalence [lem-weil-point-fibre-equivalence] therefore makes the actual adjunction counit $L_Rc\\to C$ an isomorphism. This justifies replacing $C$ by $L_Rc$, without treating all pro-etale sheaves as coefficient modules.",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sf-perfect-cohomology-assembly",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "second sentence, with its point-category identification made explicit"
+   }
+  },
+  {
+   "text": "Choose a K-injective resolution $B\\to I$ for [def-pur-derived-internal-hom]. The complex $\\Gamma(s,I)$ is K-injective over $R$: if $Q$ is acyclic, exactness of $L_R$ makes $L_RQ$ acyclic, and the termwise adjunction identifies a map $Q\\to\\Gamma(s,I)$ with a map $L_RQ\\to I$, homotopic to zero by [def-pur-kinjective-complex]; the adjunction sends that homotopy back to a homotopy. Exact sections make $R=\\Gamma(s,B)\\to\\Gamma(s,I)$ a quasi-isomorphism. Thus $\\Gamma(s,I)$ is a K-injective resolution of $R$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "K-injective Hom-complex construction preceding Tag 0A94, lemma-RHom-into-K-injective; exact-left-adjoint argument written explicitly"
+   }
+  },
+  {
+   "text": "Represent $c$ by a coefficient-module complex and $C$ by $L_Rc$ using step 3. The derived internal Hom is represented by $\\mathcal Hom^\\bullet_B(L_Rc,I)$ [def-pur-derived-internal-hom]. Its sections have terms $\\prod_p\\operatorname{Hom}_B(L_Rc^p,I^{p+j})=\\prod_p\\operatorname{Hom}_R(c^p,\\Gamma(s,I^{p+j}))$ by the adjunction of step 2. Naturality makes the differentials on both sides $d_I\\circ f-(-1)^j f\\circ d_c$, as in [def-pur-hom-complex]. Therefore these are isomorphic as complexes, not merely as their cohomology groups. Step 4 identifies the right complex with a representative of $R\\operatorname{Hom}_R(c,R)$. Together with step 1 this gives $\\Gamma(s,D_sC)\\cong R\\operatorname{Hom}_R(c,R)=c^\\vee$ [def-pod-perfect-point-complex], naturally in $C$, at finite and integral coefficients. No finite projective representative of $c$ was required in this computation at finite level. At integral level, use the bounded finite-projective model $P$ from step 3. Termwise sheaf Hom from $L_RP^i$ is a direct summand of a finite power of the identity functor, hence exact. The finite total Hom complex therefore sends an acyclic second input to an acyclic complex: filter by the finitely many degrees of $P$, whose successive quotients are shifted exact Hom complexes. Consequently $\\mathcal Hom_B^\\bullet(L_RP,B)\\to\\mathcal Hom_B^\\bullet(L_RP,I)$ is a quasi-isomorphism. Its source is $L_R(\\operatorname{Hom}_R^\\bullet(P,R))$, a bounded finite-projective model, so [lem-weil-pbc-integral-stratified-perfect-characterization] puts the internal Hom itself in $D^b_c(s,R)$. This verifies the domain required for its rationalization in step 6.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-pod-perfect-point-complex",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A94, lemma-RHom-into-K-injective, and the Hom-complex definition; adjunction identifies every term and differential"
+   }
+  },
+  {
+   "text": "At the rational stage represent $C_E$ by an integral object $C$ as prescribed by [def-weil-derived-pullback-tensor-hom, def-weil-finite-coefficient-point]. Step 3 supplies a bounded finite-projective $R=\\mathcal O_E$ complex $P$ representing $c=\\Gamma(s,C)$. Rationalizing the isomorphism of step 5 gives $\\Gamma(s,R\\mathcal Hom_R(C,B))\\otimes_R E\\cong\\operatorname{Hom}_R^\\bullet(P,R)\\otimes_R E\\cong\\operatorname{Hom}_E^\\bullet(P\\otimes_R E,E)$; the last isomorphism is [lem-pc-base-change-rhom-perfect]. This is the required $E$-coefficient formula, including inputs whose chosen integral representatives have torsion. An arrow $u\\otimes a$ acts on the dual by precomposition with $u$ and multiplication by $a$ on both sides, so naturality holds on the localized morphisms. For algebraically closed coefficients represent $C$ by $(E,C_E)$ and compute the unit and internal Hom at that same finite field, as in [def-weil-derived-pullback-tensor-hom]. The displayed isomorphism then defines the claimed arrow at stage $E$. To check independence of stage, choose a common finite extension $L$ for any input arrow. The fibre scalar comparison [lem-weil-point-sections-scalar-extension] identifies its coefficient complex with $c_E\\otimes_E L$. To identify the internal-Hom comparison itself, use the completion comparison [lem-weil-finite-free-completed-scalar-comparison] on the bounded finite-projective model $B\\otimes_R P$ of step 3 and its dual model from step 5. Ordinary completed-ring extension then acts termwise on these models. Take the internal-Hom scalar comparison of [lem-pur-integral-operations-scalar-extension] to be the transpose of scalar-extended evaluation. For a finite free term, evaluation on a basis gives $f\\otimes a\\mapsto(x\\otimes b\\mapsto f(x)\\otimes ab)$; passage to the image of a splitting idempotent gives the identical formula for a finite-projective term. There are finitely many terms, so these formulas identify the total Hom complexes and commute with their signed differentials. Sections of this map have the displayed module scalar-Hom formula, since the point-sections comparison is the inverse of the sections-tensor map followed by completion. Thus this calculation identifies the comparison used by the common-stage construction, beyond merely giving an abstract isomorphism of its source and target. Precomposition by a map of models commutes with this formula. For $E\\subset L\\subset M$, both successive scalar comparisons send $((f\\otimes a)\\otimes b)(x\\otimes t)$ to $f(x)\\otimes abt$. The internal-Hom comparisons and fibre comparisons have these same identity and composition compatibilities [lem-pur-integral-operations-scalar-extension, lem-weil-point-sections-scalar-extension]. Hence the two stage representatives give the same arrow after extension to $M$, and an arrow represented over $L$ has the same naturality square there. This proves the common-stage formula with the specified, rather than arbitrary, coefficient comparisons.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "second sentence, with its point-category identification made explicit"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-exceptional-inverse-image",
+  "def-compact-support-direct-image-detailed",
+  "def-pod-conventions",
   "def-pod-perfect-point-complex",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-weil-derived-complete",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "prop-coef-integral-exceptional-adjoint",
+  "thm-sf-ambient-adjoint-class"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "complete proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "dualizing object of identity morphism at a point",
+   "results": "CategoryTheory.CartesianClosed.curry_id_eq_coev; CategoryTheory.MonoidalClosed.uncurry_id_eq_ev; CategoryTheory.rightAdjointMate_id; no dualizing-complex declaration",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.coefficientDual, dualizingComplex, CategoryTheory.Functor.id",
+   "results": "0 hits; loogle reported unknown identifier DerivedCategory.coefficientDual",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|coefficientDual|rightDerivedUpperShriek Mathlib",
+   "results": "0 hits in Mathlib; project-specific declarations are outside Mathlib",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "identity morphism exceptional inverse image is identity dualizing complex point",
+   "results": "CategoryTheory.Iso.refl_inv; TopCat.Presheaf.Pushforward.id_inv_app; CategoryTheory.IsIso.inv_id; no matching point-duality statement",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|coefficientDual|ihom.*Equivalence",
+   "results": "Mathlib/Tactic/Translate/ToDual.lean; Mathlib/Data/Set/Defs.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean; Mathlib/CategoryTheory/Category/Cat/Op.lean; Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; generic categorical tools only, not the point coefficient comparison",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app; generic categorical tools only, not the point coefficient comparison",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal equivalence preserves internal hom right adjoints tensor",
+   "results": "CategoryTheory.tensorRightAdjunction; CategoryTheory.MonoidalClosed.ofEquiv; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.tensorRightHomEquiv_naturality; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj; generic categorical tools only, not the point coefficient comparison",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|coefficientDual|rightDerivedUpperShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction, ordinary sheaf pullback, condensed Hom or finite-dimensional duality; none states the exceptional identity and evaluated derived coefficient dual in these four concrete categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom of constructible sheaves on an algebraically closed point is derived Hom of coefficient modules",
+   "results": "8 hits: LightCondensed.ihomPoints_apply; AlgebraicGeometry.Scheme.Modules.Hom; LightCondensed.ihomPoints; CategoryTheory.sheafHom; FGModuleCat.ihom_obj; instMonoidalClosedLightCondSet; CategoryTheory.Sheaf.Hom; LightCondensed.ihomPoints_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction, ordinary sheaf pullback, condensed Hom or finite-dimensional duality; none states the exceptional identity and evaluated derived coefficient dual in these four concrete categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dualizing complex of a geometric point equals the coefficient ring and Verdier dual equals derived module dual",
+   "results": "8 hits: CondensedMod.LocallyConstant.functorIsoDiscreteAux₁; FGModuleCat.exactPairing; LightCondMod.LocallyConstant.functorIsoDiscreteAux₁; FGModuleCat.FGModuleCatDual_obj; FGModuleCat.rightDual; FGModuleCat.FGModuleCatCoevaluation; FGModuleCat.FGModuleCatDual_coe; FGModuleCat.rightRigidCategory",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction, ordinary sheaf pullback, condensed Hom or finite-dimensional duality; none states the exceptional identity and evaluated derived coefficient dual in these four concrete categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity exceptional pullback and derived sheaf dual evaluated at a geometric point",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.pullbackId; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_comp_id",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction, ordinary sheaf pullback, condensed Hom or finite-dimensional duality; none states the exceptional identity and evaluated derived coefficient dual in these four concrete categories"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|sheafHom.*[sS]ection|[sS]ection.*sheafHom",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary constant-sheaf/global-sections adjunction and sheaf-Hom sections, or generic uniqueness of right adjoints; none states the four-stage derived point duality comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections derived sheaf Hom exact constant sheaf left adjoint coefficient ring geometric point",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓHomEquiv; CategoryTheory.Sheaf.ΓObjEquivHom; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; CategoryTheory.constantSheafΓAdj; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; CategoryTheory.Sheaf.ΓNatIsoSheafSections; CategoryTheory.Sheaf.ΓObjEquivSections; SheafOfModules.unitHomEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary constant-sheaf/global-sections adjunction and sheaf-Hom sections, or generic uniqueness of right adjoints; none states the four-stage derived point duality comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +288,114 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package"
+ "unit": "sk-thm-sf-package",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-point-dualizing-complex",
+  "worker": "stage1",
+  "summary": "Revalidated and repaired the inherited six-step split. Made the natural integral reconstruction unit argument explicit and verified integral internal-Hom constructibility before rationalization. Preserved the necessary explicit point-fibre typing correction. No new nodes or Mathlib leaves. Second reading refreshed a stale conventions quote and wrote the scalar-extension squares and model formulas explicitly. Maintainer reading (Q76) cited the stagewise constructible exceptional adjunction theorems in step 1 instead of taking the adjunction from definitions.",
+  "blueprint": "Realizes both sentences of the main-20261015 proof. Step 1 proves the first sentence; steps 2-6 supply the point-category comparison suppressed in the second. The displayed statement now writes its implicit fibre evaluation explicitly, with no new perfectness hypothesis.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Supplies the canonical reduction/limit adjunction and natural unit; used only to make integral identity compact support functorial. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Supplies invertibility of the normalized reconstruction counit, needed for the canonical integral identity map. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Conservativity on the concrete constructible point category identifies the actual extension/sections counit. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact point sections permit the K-injective comparison on ambient complexes. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Supplies the specified coherent fibre comparisons for common finite coefficient stages. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Supplies the specified coherent internal-Hom comparisons for common finite coefficient stages. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-pc-base-change-rhom-perfect",
+    "why": "Generic derived coefficient Hom base change on the perfect integral module model. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic constructibility test for the explicitly built finite-projective completed-sheaf model. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Generic completed coefficient flatness and quotient calculation in the extension/sections argument. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Identifies the completed coefficient sections at s with the valuation ring. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "why": "Generic exact sheafification makes the constant-module functor exact. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient valuation-ring structure supplies Noetherianity and the integral length-one resolution. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-module-finite-presentation",
+    "why": "Generic module presentation fact for the extension/sections unit. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Generic DVR algebra makes the kernel of a finite free cover finite free. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-sf-perfect-cohomology-assembly",
+    "why": "Generic finite-cohomology assembly gives the bounded projective integral model. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Generic Noetherian resolution theorem supplies a finite free cover with finite kernel. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Generic constant-sheaf stalk calculation checks finite-level constructibility. No statement of this unit supplies this foundational calculation; it does not replace either sentence of the unit proof."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic canonical completed scalar comparison identifies actual completion maps and finite-projective scalar-Hom models in steps 1 and 6; no other statement in this unit supplies this foundational coefficient calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-f9a14fe74",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-f9a14fe74 (reviewer sub-agent of L); spot-checked: Read the item in full: the typed statement and all six steps, with the master and main-20261015 blueprint statement and two-sentence proof, unit sk-thm-sf-package, all 30 cited statements (including their blueprint_update texts), the direct citer thm-pod-global-verdier-duality, and Stacks 03EI, 093M (sites-modules.tex:8261), 0A94, 08JA, 00LP, 0AUW and 066U at their labels. There are no new nodes. The STATEMENT-DISPUTED repair, Fib_s(D_sC) ≅ RHom_Λ(c,Λ) with the evaluation fixed at each stage, only clarifies the typing: all four coefficient stages and Ra_s^! ≅ id are kept, and the citer's step 2 uses exactly this form. Small cases agree: zero; the unit; residue modules over A_{E,2} (self-injective, so the dual is bounded); the integral torsion case, whose dual sits in degree 1 and rationalizes to 0. Steps 2–6 are correct: the L_R ⊣ Γ adjunction holds because s is final; the unit is invertible on finitely presented modules; the integral perfect model comes from the DVR and the stratified-perfect criterion at T=s; the counit is an isomorphism by conservativity of Fib_s; Γ(s,I) is K-injective; the Hom-complex calculation and integral constructibility are right; rational and Q̄ℓ naturality follow from the explicit scalar-Hom formula. In step 1, the unit/counit argument for the identity compact support and the Yoneda argument are correct. Fault fixed (C3/C4): step 1 took the constructible adjunction Rf_! ⊣ Rf^! from the definitions def-pod-conventions and def-weil-exceptional-inverse-image, but that definition says the adjunction is a theorem stated elsewhere. Step 1 now cites thm-sf-ambient-adjoint-class clause 2 at c=(id,id) with étale origin from lem-sf-proetale-constructible-origin (ii) at the finite stage (D^b_c(s,A_{E,n}) is not finite-Tor), prop-coef-integral-exceptional-adjoint at O_E, and lem-sf-constructible-exceptional-adjunction-coefficients at E and Q̄ℓ (where D^b_ctf = D^b_c by def-weil-finite-tor-amplitude). None of these reaches the item, so there is no cycle, and all are on the unit's transitive route. The eight declared tool_uses are also on route; I accept them as harmless. The corrected item is in fixes/dag/nodes/sec-six-functors/lem-pod-point-dualizing-complex.json, with proof_deps now 34; the statement and steps 2–6 are unchanged. Nothing is dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

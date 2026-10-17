@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, mapping-complex adjunction infrastructure through lem-coef-presentable-infinity-adjoints, lem-coef-small-saturated-arrow-accessibility and lem-coef-filtered-presentation-common-refinement; HTT Lemma 5.5.4.13, relative lifting construction on printed pp. 479-480; the two compact left fibrations in the paragraph beginning According to Corollary 5.3.4.14",
+   "place": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph, the coherent mapping-complex adjunction before R lim; supporting presentable-adjoint infrastructure through the inherited via chain, specifically the compact left fibrations used in HTT Lemma 5.5.4.13, printed pp.479-480. Here HTT Corollary 5.3.4.14 is proved using Proposition 5.3.4.13, not by assuming a colimit of the boundary diagram.",
    "via": [
     "lem-coef-compact-relative-cocone-factorization",
     "lem-coef-filtered-presentation-common-refinement",
@@ -33,9 +33,84 @@
   "lem-cbc-relative-coslice-left-fibration",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=\\operatorname{Fun}(L,\\mathcal E)$ and write $\\Delta_L:\\mathcal E\\to H$ for the constant-diagram functor. The coherent functor calculus makes $H$ a quasicategory. Since $L$ is small and $\\mathcal E$ fits in $\\mathcal U'$, its internal functor simplicial set fits there too. Apply the space-valued transport classification in a containing universe to obtain the coherent corepresented functor $H(q,-):H\\to\\mathcal S_{\\mathcal U'}$. The join-slice comparison identifies the entire left fibration $\\mathcal E_{q/}\\to\\mathcal E$, naturally over its apex, with the coherent cocone category, whose fiber at $t$ is $\\operatorname{Map}_H(q,\\Delta_Lt)$. Its apex naturality includes postcomposition: for $v:t\\to t'$ the fiber map is $u\\mapsto\\Delta_L(v)\\circ u$, with all higher compatibilities. More explicitly, let $A_q=\\{q\\}\\times_{H,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,H)$, with target projection to $H$. Source-fixed arrow classification makes $A_q\\to H$ the left fibration classified by $H(q,-)$. Its pullback $P_q=\\mathcal E\\times_{H,\\Delta_L}A_q$ is exactly the coherent cocone category just used: an $n$-simplex is an apex $t:\\Delta^n\\to\\mathcal E$ and a transformation from the constant $q$-diagram to $\\Delta_Lt$. Compatibility of classification with base pullback says that $P_q$ is classified by $H(q,-)\\circ\\Delta_L$. The join-slice comparison is an equivalence over $\\mathcal E$ between $\\mathcal E_{q/}$ and this $P_q$, so full coherent classification gives a coherent natural equivalence\n$$\\alpha:G_q\\simeq F_q,\\qquad F_q=H(q,-)\\circ\\Delta_L.$$\nThis identifies functors and their actual transformations, rather than only unrelated equivalences of vertex spaces.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-transport-classification",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.14, first two sentences and displayed pullback; Proposition 4.2.1.5, Corollaries 4.2.1.7-4.2.1.8 and coherent space-valued classification"
+   }
+  },
+  {
+   "text": "Let $I$ be any small $\\kappa$-filtered quasicategory, and let $\\lambda:p\\to\\Delta_Ic$ be any colimiting coherent cocone in $\\mathcal E$. The pointwise colimit theorem gives $I$-colimits in $H$ and characterizes their cocones by evaluation at every vertex of $L$. At each vertex $l$, evaluation of\n$$\\Delta_L\\lambda:\\Delta_Lp\\longrightarrow\\Delta_I(\\Delta_Lc)$$\nis exactly $\\lambda$, including its legs and higher simplices, because evaluation composed with the constant-diagram functor is the identity. Hence this displayed cocone is colimiting in $H$. Thus the diagonal preserves the tested colimits. No colimit with shape $L$ in $\\mathcal E$ has been used.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.14, last sentence; Corollary 5.1.2.3, pointwise colimit detection"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-pointwise-compact-diagrams] with $K=L$, $\\mathcal C=\\mathcal E$ and $a=q$. Its cardinal is the given infinite regular $\\kappa$; its shape bound and vertex compactness are precisely the hypotheses on $L,q$; its filtered colimits exist by the hypothesis on $\\mathcal E$. It says that $q$ is compact in the entire functor category $H$. Unpack the compactness definition and apply it to the specific colimiting $I$-cocone of step 2. It follows that\n$$F_qp=\\operatorname{Map}_H(q,\\Delta_Lp(-))\\longrightarrow\\Delta_I\\operatorname{Map}_H(q,\\Delta_Lc)=\\Delta_IF_q(c)$$\nis colimiting in $\\mathcal S_{\\mathcal U'}$. Its leg at $i$ is exactly postcomposition by $\\Delta_L(\\lambda_i)$, since compactness is defined using the image of the given coherent cocone.",
+   "uses": [
+    "lem-coef-pointwise-compact-diagrams",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.14, use of Proposition 5.3.4.13 and Definition 5.3.4.5"
+   }
+  },
+  {
+   "text": "Naturality of the equivalence $\\alpha$ from step 1 gives, on the whole $I$-cocone, the commutative comparison with components\n$$\\alpha_c\\circ G_q(\\lambda_i)\\simeq F_q(\\lambda_i)\\circ\\alpha_{p(i)}.$$\nThe homotopies here are restrictions of one coherent natural equivalence, so retain compatibility on every simplex of $I$. For every test space $Z$, precomposition with the equivalences $\\alpha_{p(i)}$ and $\\alpha_c$ identifies the map\n$$\\operatorname{Map}(G_q(c),Z)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal S_{\\mathcal U'})}(G_qp,\\Delta_IZ)$$\ninduced by the actual image cocone with the corresponding map for $F_q$. Precomposition is an equivalence on both sides: a coherent quasi-inverse of $\\alpha$ supplies the inverse maps and the two inverse homotopies. The latter map is an equivalence by step 3 and the coherent cocone criterion. The same criterion now makes the actual cocone $G_qp\\to\\Delta_IG_q(c)$ colimiting. Since $I,p,\\lambda$ were arbitrary, this is the required preservation, including the asserted maps.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.14, equivalence of the two left-fibration models; coherent cocone universal property"
+   }
+  },
+  {
+   "text": "All steps allow $L=\\varnothing$. In that case $H=\\operatorname{Fun}(\\varnothing,\\mathcal E)$ is the terminal quasicategory by the internal-functor definition, $q$ is its unique object, and $F_q$ is terminal-space-valued. Step 2 still applies by vacuous pointwise detection, and the empty-shape clause of the pointwise-compact-diagram theorem still supplies step 3. Thus no separate assumption on the filtered colimit of terminal spaces is hidden. If $L=\\Delta^0$, step 1 reduces to the corepresented functor of its one value and step 3 to its given compactness. No step forms a colimit of $q$, for empty or nonempty $L$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-pointwise-compact-diagrams"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.14 and Proposition 5.3.4.13, empty and singleton indexing shapes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-space-transport-classification",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-pointwise-compact-diagrams",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent expansion of the proof of Corollary 5.3.4.14, printed p.401: compact diagram in Fun(L,E), diagonal preserves filtered colimits, then identify the classified functor and its actual cocones. Online source read; archive WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +167,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "no match in Mathlib/AlgebraicTopology for left-fibration, covariant-model or homotopy-colimit vocabulary; this does not replace checking the semantic-search hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent cocone space functor of a kappa small diagram of compact objects preserves kappa filtered colimits",
+   "results": "{\"t\": \"2026-10-17T00:37:57Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent cocone space functor of a kappa small diagram of compact objects preserves kappa filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"LightCondensed.instHasColimitsOfShapeCostructuredArrowOppositeFintypeCatLightProfiniteOpToLightProfiniteType\", \"LightCondensed.fintypeCatAsCofanIsColimit\", \"Set.instPreservesColimitsOfShapeFunctorToTypesOfIsFilteredOrEmpty\", \"Condensed.fintypeCatAsCofanIsColimit\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"Profinite.hasColimits\"], \"digest\": \"a4c5b145c24cd7d9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Basic.lean:149 and 286-313 concern Hom-set presentability in an ordinary Category, not coherent mapping-space compactness in a quasicategory. Limits.lean:40-52 concerns ordinary Type-valued functors. FunctorCategory/Basic.lean gives ordinary pointwise colimits only. SimplicialSet/Presentable.lean:51 concerns finite simplicial sets as objects of the ordinary category SSet, not compact diagrams valued in an arbitrary quasicategory. The second semantic phrasing does not supply a coherent functor-category compactness theorem. These are ingredients or analogues, not one-line specializations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cocone, CategoryTheory.Limits.PreservesColimit",
+   "results": "{\"t\": \"2026-10-17T00:37:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.Cocone, CategoryTheory.Limits.PreservesColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitOfPreserves\", \"CategoryTheory.Limits.preservesColimit_of_preserves_colimit_cocone\", \"CategoryTheory.Limits.PreservesColimit.mk\", \"CategoryTheory.Limits.PreservesColimit.preserves\", \"CategoryTheory.Limits.preservesColimit_iff_isColimit_mapCocone\", \"CategoryTheory.Limits.isIso_app_coconePt_of_preservesColimit\", \"CategoryTheory.preserves_desc_mapCocone\", \"CategoryTheory.preservesColimitIso_inv_comp_desc\"], \"digest\": \"460eaa39863197d7\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Basic.lean:149 and 286-313 concern Hom-set presentability in an ordinary Category, not coherent mapping-space compactness in a quasicategory. Limits.lean:40-52 concerns ordinary Type-valued functors. FunctorCategory/Basic.lean gives ordinary pointwise colimits only. SimplicialSet/Presentable.lean:51 concerns finite simplicial sets as objects of the ordinary category SSet, not compact diagrams valued in an arbitrary quasicategory. The second semantic phrasing does not supply a coherent functor-category compactness theorem. These are ingredients or analogues, not one-line specializations."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*cocone|cocone.*compact|[Qq]uasicategory|[Ll]eftFibration",
+   "results": "{\"t\": \"2026-10-17T00:37:50Z\", \"tool\": \"grep\", \"query\": \"compact.*cocone|cocone.*compact|[Qq]uasicategory|[Ll]eftFibration\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Basic.lean:149 and 286-313 concern Hom-set presentability in an ordinary Category, not coherent mapping-space compactness in a quasicategory. Limits.lean:40-52 concerns ordinary Type-valued functors. FunctorCategory/Basic.lean gives ordinary pointwise colimits only. SimplicialSet/Presentable.lean:51 concerns finite simplicial sets as objects of the ordinary category SSet, not compact diagrams valued in an arbitrary quasicategory. The second semantic phrasing does not supply a coherent functor-category compactness theorem. These are ingredients or analogues, not one-line specializations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left fibration of cocones under compact objects classifies a filtered colimit preserving space valued functor",
+   "results": "{\"t\": \"2026-10-17T00:37:54Z\", \"tool\": \"leansearch\", \"query\": \"A left fibration of cocones under compact objects classifies a filtered colimit preserving space valued functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.Functor.IsFinitelyAccessible\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.PreservesColimit.mk\", \"CategoryTheory.Limits.isColimitOfPreserves\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CommMonCat.FilteredColimits.colimitCocone\"], \"digest\": \"9858a6b443ebd888\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Basic.lean:149 and 286-313 concern Hom-set presentability in an ordinary Category, not coherent mapping-space compactness in a quasicategory. Limits.lean:40-52 concerns ordinary Type-valued functors. FunctorCategory/Basic.lean gives ordinary pointwise colimits only. SimplicialSet/Presentable.lean:51 concerns finite simplicial sets as objects of the ordinary category SSet, not compact diagrams valued in an arbitrary quasicategory. The second semantic phrasing does not supply a coherent functor-category compactness theorem. These are ingredients or analogues, not one-line specializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The source fixed mapping space functor of a compact diagram composed with the constant diagram functor preserves filtered colimits",
+   "results": "{\"t\": \"2026-10-17T00:37:57Z\", \"tool\": \"leanfinder\", \"query\": \"The source fixed mapping space functor of a compact diagram composed with the constant diagram functor preserves filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.instPreservesColimitsOfShapeFunctorIndLimOfFinCategoryOfHasColimitsOfShape\", \"Set.instPreservesColimitsOfShapeFunctorToTypesOfIsFilteredOrEmpty\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\"], \"digest\": \"ac4395d6915ae75d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Basic.lean:149 and 286-313 concern Hom-set presentability in an ordinary Category, not coherent mapping-space compactness in a quasicategory. Limits.lean:40-52 concerns ordinary Type-valued functors. FunctorCategory/Basic.lean gives ordinary pointwise colimits only. SimplicialSet/Presentable.lean:51 concerns finite simplicial sets as objects of the ordinary category SSet, not compact diagrams valued in an arbitrary quasicategory. The second semantic phrasing does not supply a coherent functor-category compactness theorem. These are ingredients or analogues, not one-line specializations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-compact-relative-cocone-factorization",
@@ -103,5 +213,29 @@
   "group": "Q77"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-compact-diagram-cocone-transport",
+  "worker": "stage1",
+  "summary": "Kept the statement and its four statement dependencies. Expanded HTT Corollary 5.3.4.14 into five steps: coherent identification with Map(q,Delta(-)), pointwise preservation by the diagonal, compactness in the entire functor category, image-cocone comparison via natural equivalence, and edge cases. Added exactly one statement-only node for HTT Proposition 5.3.4.13 after DAG, blueprint, Lean and logged Mathlib searches. No colimit of q or accessibility of E is assumed.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph, the coherent mapping-complex adjunction before R lim; supporting presentable-adjoint infrastructure through the inherited via chain, specifically the compact left fibrations used in HTT Lemma 5.5.4.13, printed pp.479-480. Here HTT Corollary 5.3.4.14 is proved using Proposition 5.3.4.13, not by assuming a colimit of the boundary diagram.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor and cocone mapping-space criterion, applied to identify the actual image cocone under a natural equivalence; this is a foundational tool from sk-prop-sf-cbc, not a change to the integral-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-bed6a2e88",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-bed6a2e88 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the full statements of all seven cited nodes, the unit and the current ancestor proof. Not checked against a copy: HTT is not archived and the network is blocked, so Def 5.3.4.5, Prop 5.3.4.13 and Cor 5.3.4.14 were checked from my knowledge of the standard text, plus independent proof checks and small cases. The item's statement and stmt_deps are unchanged against the side DAG (read-only diff). Its hypotheses match HTT 5.3.4.14 one by one, and it is not a target node, so there is no base-change morphism or coefficient category to check. Step 1: the source-fixed arrow fibration A_q classifies H(q,-); its pullback along the diagonal is exactly the def-cbc cocone category, classified by H(q,-)∘Δ_L through the pullback compatibility of the classification node; the join-slice comparison is an equivalence over E; the vertex-component criterion from the cone calculus makes G_q≃F_q. The classification node is applied with universes (U',U''). Step 2: the objectwise functor-category colimit clause of lem-coef-infinity-yoneda-presheaf-limits applies, since ev_l∘Δ_L=id; vacuous for L=∅. Step 3: every hypothesis of the new lemma holds with the same κ, and the definition uses the actual image cocone into S_{U'}. Step 4: the dual cocone mapping-space criterion of the cone calculus transports colimiting cocones along α, so 'transport' is spelled out (E5). Step 5 is genuinely elementary: Fun(∅,E)=Δ^0. The new node lem-coef-pointwise-compact-diagrams is HTT 5.3.4.13 and is true. Small cases: K empty, a point, finite discrete, Δ^1 with κ=ω (a finite homotopy pullback commuting with filtered colimits), and C empty. It is statement-only (B1-B7 pass, 9 logged searches with no Mathlib match) and does not restate the item, which is about a different functor (D1). Duplicate search covered rg for 5.3.4.1[34] and compact/Fun/filtered statements across the whole DAG, plus blueprint_refs. lem-coef-accessible-diagram-presentations has the conclusion as a clause only under stronger accessibility and cardinal hypotheses. accessible-compact-cocones and spine-tower contain pieces of the proof only in their proofs. same_as=[] is correct. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, generic coherent-functor and cocone infrastructure; the same tool_use is already on lem-coef-join-slice-cocone-comparison in this unit. The new node has no lean_audit field, as about half of recent new nodes; tools/lean_status.py fills it, so it is not a fault. No fixes were made."
+ }
 }

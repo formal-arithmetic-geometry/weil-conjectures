@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, the finite coefficient mapping-complex adjunction before derived inverse limit, realized through lem-coef-many-object-operad-accessibility and its corrected active-operation localization criterion; Theorem A.6.5 (equivalence of full algebra infinity categories, not only their cores)",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint in main-20261015: the finite-level mapping-complex adjunction; supporting operadic algebra-category invariance in the inherited enrichment ancestry, realized by the categorical-fibration, slice and relative Kan-extension argument of Gepner–Haugseng A.6.5.",
    "via": [
     "lem-coef-operadic-localization-operation-criterion",
     "lem-coef-many-object-operad-accessibility",
@@ -30,9 +30,188 @@
   "lem-coef-operadic-algebra-presentability",
   "def-coef-operadic-weak-approximation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Factor $f$ as $M\\xrightarrow{e}C\\xrightarrow{g}O$ using [def-coef-operadic-weak-approximation], with $e$ an equivalence of generalized operads and $g$ a categorical-fibration weak approximation. The unary-fiber restriction of $e$ is an equivalence, so $g_{[1]}$ is an equivalence by composing quasi-inverses. A quasi-inverse to $e$ over $\\Delta^{\\mathrm{op}}$, and its coherent inverse transformations, give inverse precomposition functors on the full functor categories over the base. They restrict to inert-preserving objects because both directions of an operadic equivalence preserve inert edges. Thus it suffices to prove the assertion for $g:C\\to O$. Write $B=\\Delta^{\\mathrm{op}}$, $p:O\\to B$ and $q:P\\to B$. Both inner fibrations $p$ and $q$ are isofibrations: every equivalence of $B$ is an identity and has an identity lift.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), reduction to a categorical fibration; nonsymmetric version is Gepner–Haugseng A.6.5."
+   }
+  },
+  {
+   "text": "Apply the opposite of [lem-coef-cocartesian-straightening] to the diagram $C\\xrightarrow{g}O$ indexed by $(\\Delta^1)^{\\mathrm{op}}$. Obtain a Cartesian fibration $u:E\\to\\Delta^1$ with $E_0=O$ and $E_1=C$. For $c\\in C$, its Cartesian edge is $g(c)\\to c$. The Cartesian mapping-square criterion identifies the space of cross-fiber edges $X\\to c$ with $\\operatorname{Map}_O(X,g(c))$, compatibly with compositions: restrict that square to the base edge $0\\to1$, whose mapping space is a point. Thus $C\\times_E E_{X/}$ identifies with $O_{X/}\\times_O^h C$, including coherent triangles. The colimit of the arrow $C\\to O$ is $O$: a cocone to $T$ is a functor $O\\to T$ together with its already specified composite from $C$, so its universal comparison is an equivalence. Hence [lem-coef-cartesian-colimit-localization] supplies $r:E\\to O$, with $r|_O=1$, $r|_C=g$, and an equivalence $\\operatorname{Fun}(O,T)\\simeq\\operatorname{Fun}_{\\mathrm{Cart}(u)}(E,T)$ for every target $T$. Put $s=pr:E\\to B$. These are coherent constructions over $B$; they may be represented with the prescribed endpoint restrictions strictly, using the exponential isofibration of [lem-coef-infinity-isofibration-exponentiation].",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-colimit-localization",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.266: Cartesian cylinder and retraction; generic construction via Cartesian straightening."
+   }
+  },
+  {
+   "text": "Let $\\mathcal X$ be the full subcategory of $\\operatorname{Fun}_s(E,P)$ on functors $F$ such that $F|_O$ is an $O$-algebra and $F$ sends every $u$-Cartesian edge to an equivalence. Apply the preceding localization equivalence both to $T=P$ and to $T=B$, and take its fiber at $p:O\\to B$, corresponding to $s:E\\to B$. This gives an equivalence of the functor categories over these base maps. To justify using degreewise fibers, postcomposition by the isofibration $q$ is an isofibration by [lem-coef-infinity-isofibration-exponentiation], and [lem-coef-infinity-isofibration-pullback-limit] identifies its degreewise fibers with the infinity-categorical fibers. Restricting to the stated full subcategories gives $r^*:\\operatorname{Alg}_O(P)\\simeq\\mathcal X$, with inverse restriction to $O$. In particular this equivalence retains noninvertible transformations; no inference from contractible object fibers is being made.",
+   "uses": [
+    "lem-coef-cartesian-colimit-localization",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.266: the category X and its restriction to O."
+   }
+  },
+  {
+   "text": "Fix an algebra $A:C\\to P$ and $X\\in O_{[n]}$. Set $K_X=C\\times_E E_{X/}\\simeq O_{X/}\\times_O^h C$. Its objects are edges $a:X\\to g(c)$, and its arrows are coherent triangles induced by arrows of $C$. Let $I_X\\subseteq K_X$ be the full subcategory where $a$ is an inert edge in $O$. For an object $a:X\\to g(c)$ of $K_X$, the comma category $(I_X)_{/a}$ is exactly $\\mathcal F_g(c,a)$: its objects are $b:d\\to c$ and inert $h:X\\to g(d)$ with $g(b)h\\simeq a$, and its higher simplices are the compatible triangles in the definition. It is weakly contractible by [def-coef-operadic-weak-approximation]. The opposite form of [lem-coef-infinity-cofinal-comma-criterion], using the opposite conventions of [lem-coef-infinity-relative-cone-equivalence], therefore says that restriction from $K_X$ to $I_X$ induces equivalences of cone categories and of constant-source mapping spaces, both in $P$ and in $B$.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.267: weak approximation gives the coinitial inert subcategory."
+   }
+  },
+  {
+   "text": "Introduce a distinct full subcategory $H_X\\subseteq K_X$: its objects are all $a:X\\to g(c)$ whose BASE map is inert, without requiring $a$ to be cocartesian in $O$. Then $I_X\\subseteq H_X\\subseteq K_X$. For every object $a$ of $H_X$, its comma category under $I_X$ is the same $\\mathcal F_g(c,a)$ as above, since $H_X$ is full. The same opposite comma criterion gives equivalences on cone categories and constant-source mapping spaces from $H_X$ to $I_X$. The restriction from $K_X$ to $I_X$ factors through $H_X$, so two-out-of-three gives these equivalences from $K_X$ to $H_X$ as well. Apply [lem-coef-infinity-relative-cone-constant-test] to the constant-source mapping-space squares in $P$ and $B$: a cone on $A|_{K_X}$ is a $q$-limit iff its restriction to $H_X$ is. A prescribed relative limit cone on $H_X$ extends to one on $K_X$: the equivalence of cone categories provides the extension up to equivalence, and the exponential corner isofibration rectifies its boundary and base cone to the prescribed ones. Here [lem-coef-infinity-isofibration-pullback-limit] identifies the fixed-base cone category with that homotopy fiber. This also applies when the boundary category is empty.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.267: coinitiality, with distinct actual-inert and base-inert subcategories to correct the literal slice comparison."
+   }
+  },
+  {
+   "text": "Let $J_X\\subseteq H_X$ consist of the objects with $c\\in C_{[1]}$. For $a:X\\to g(c)$ in $H_X$, with $c\\in C_{[m]}$, the category $J_X\\times_{H_X}(H_X)_{a/}$ is the disjoint union, for $1\\le j\\le m$, of the categories of arrows $c\\to d$ over $\\rho_j:[m]\\to[1]$. Indeed the opposite of the base of $a$ is an interval inclusion; a composite of this inclusion with a map $[1]\\to[m]$ is an interval inclusion exactly when the latter map is a consecutive length-one inclusion. In each component, a chosen cocartesian inert projection $c\\to c_j$ is initial: the cocartesian mapping-square criterion identifies its outgoing mapping spaces over the identity of $[1]$ with those of all the arrows over $\\rho_j$, giving the required unique factorization space. Use [lem-coef-cocartesian-straightening] for that criterion and [lem-coef-operadic-algebra-presentability] for existence of these projections. For the inclusion of such an initial object into its component, each limit-comma category is the contractible space of arrows from that initial object. The opposite comma criterion of [lem-coef-infinity-cofinal-comma-criterion], with the duality of [lem-coef-infinity-relative-cone-equivalence], therefore identifies restriction on constant-source cone mapping spaces with evaluation at that object, in both $P$ and $B$. Since $A$ preserves them, $A(c)\\to A(c_j)$ are inert in $P$ and form the $q$-product cone. The ordinary-operad mapping-space product axiom says precisely that this is the relative limit of the displayed comma diagram. Thus $A|_{H_X}$ is the pointwise $q$-right Kan extension of $A|_{J_X}$, in the definition of [lem-coef-relative-right-kan-universal-restriction]. For $m=0$ this comma category is empty and $A(c)$ is $q$-final over $[0]$ by the ordinary target's zero-arity axiom; no terminality of $C_{[0]}$ is assumed.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.267: right Kan extension from unary projections; replace the printed final-object wording by the cocartesian initial-object criterion."
+   }
+  },
+  {
+   "text": "Decompose $J_X=\\coprod_{i=1}^n J_{X,i}$ by the standard base projection $\\rho_i:[n]\\to[1]$. Put $O(X,i)=(O_{X/})\\times_{B_{[n]/}}\\{\\rho_i\\}$, with target functor to $O_{[1]}$. By the cross-edge description in step 2, $J_{X,i}\\simeq O(X,i)\\times_{O_{[1]}}^h C_{[1]}$. Since $g_{[1]}$ is an equivalence, projection to $O(X,i)$ is an equivalence (pull back its quasi-inverse and its inverse homotopies). A chosen inert edge $X\\to X_i$ is an initial object of $O(X,i)$, by its cocartesian mapping-square criterion. Choose $c_i\\in C_{[1]}$ and an equivalence $g(c_i)\\simeq X_i$. It gives an initial object $a_i:X\\to g(c_i)$ of $J_{X,i}$. Thus the diagram on $J_{X,i}$ has relative limit value $A(c_i)$ over $[1]$: its initial object gives the cone by its outgoing arrows. As in step 6, the opposite comma criterion of [lem-coef-infinity-cofinal-comma-criterion], using [lem-coef-infinity-relative-cone-equivalence], identifies the cone mapping spaces with their value at this object, for the diagram in $P$ and its constant base diagram in $B$. Choose $Y\\in P_{[n]}$ with inert projections $Y\\to A(c_i)$. It exists by $P_{[n]}\\simeq P_{[1]}^n$, including $n=0$. The mapping-space product axiom in [lem-coef-operadic-algebra-presentability] proves that these cones combine to a $q$-limit over the prescribed base cone on $J_X$. By the cone-comparison clause of [lem-coef-relative-right-kan-universal-restriction], applied to $J_X\\subseteq H_X$ and step 6, this cone extends to a $q$-limit on $H_X$. Step 5 extends it to $K_X$. Moreover these comparisons retain the cone's maps to $A(c_i)$, so a given cone on $K_X$ is limiting iff each of its legs to these $A(c_i)$ is inert: on $J_X$, inert legs give a $q$-limit by the ordinary-operad product mapping-space axiom; conversely a $q$-limit cone over the same base cone is equivalent, by uniqueness of relative limits, to the cone with apex $Y$, so its legs are inert legs composed with equivalences over identities, hence inert. Steps 5 and 6 detect this universal property by restriction. This criterion is independent of the chosen inert unary cross-edges. Indeed, any inert $a:X\\to g(c)$ over $\\rho_i$ is initial in $O(X,i)$ by the cocartesian mapping-square criterion, hence initial in $J_{X,i}$ under the displayed equivalence. Between $a$ and $a_i$ the unique comparison is an equivalence in $J_{X,i}$; its image in $C_{[1]}$, and then under $A$, is an equivalence. The two legs of a cone differ by postcomposition with this equivalence and a coherent triangle. Postcomposition with an equivalence preserves and reflects the homotopy-pullback square defining a cocartesian edge. Thus a limiting cone has inert legs along every inert unary cross-edge, and testing one such edge for each $i$ suffices.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed pp.267–268: case (1), unary slices, product existence and criterion (b prime)."
+   }
+  },
+  {
+   "text": "Let $\\mathcal R\\subseteq\\operatorname{Fun}_s(E,P)$ be the full subcategory on pointwise $q$-right Kan extensions whose restriction to $C$ is an algebra. The inclusion $C\\subseteq E$ is full. For a vertex of the $O$-fiber, step 7 supplies the required relative limit on $K_X=C\\times_E E_{X/}$. For a vertex $c$ of the $C$-fiber, this comma category is $C_{c/}$ with initial object $1_c$, and the canonical cone with apex $A(c)$ is the required relative limit: evaluation at $1_c$ identifies constant-source cone mapping spaces with maps to $A(c)$, and identifies the relative-limit test square with the identity square over the prescribed base cone. The target $q$ is an isofibration by step 1; all shapes are small. Thus [lem-coef-relative-right-kan-universal-restriction] applies and gives an equivalence $\\mathcal R\\to\\operatorname{Alg}_C(P)$, in fact the stated trivial Kan fibration, on all transformations and higher simplices. The extension criterion from step 7 says that $F\\in\\mathcal R$ iff $F|_C$ is an algebra and, for every $X\\in O_{[n]}$, the maps $F(X)\\to F(c)$ along every inert unary cross-edge $X\\to c$ are inert; by step 7 it suffices to test one such edge over each $\\rho_i$.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed pp.266–268: assertions (a) and (b prime), applied via HTT 4.3.2.15."
+   }
+  },
+  {
+   "text": "If $F\\in\\mathcal X$, its images of the Cartesian edges $g(c)\\to c$ give a coherent equivalence $(F|_O)g\\simeq F|_C$. The factor $g$ is a map of generalized nonsymmetric operads in the factorization of [def-coef-operadic-weak-approximation], so it preserves inert edges; $F|_O$ preserves them, and composing with the componentwise equivalence $(F|_O)g\\simeq F|_C$ preserves the cocartesian mapping-square criterion. Hence $F|_C$ is an algebra. For any chosen inert cross-edge $X\\to c_i$, its factorization in $E$ is the inert edge $X\\to g(c_i)$ followed by the Cartesian edge $g(c_i)\\to c_i$. The image of the former is inert since $F|_O$ is an algebra, and the latter is an equivalence. The composite is inert: postcomposition by an equivalence preserves the cocartesian mapping-square criterion. Consequently step 8 gives $F\\in\\mathcal R$. These statements include all arities; at arity zero the product criterion is the empty one.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-operadic-weak-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.268: forward direction of (b)."
+   }
+  },
+  {
+   "text": "Conversely let $F\\in\\mathcal R$. For $c\\in C_{[m]}$ choose inert projections $c\\to c_j$; $F(c)\\to F(c_j)$ are inert because $F|_C$ is an algebra. For $X=g(c)$ the extension criterion of step 8 makes all the composite maps $F(g(c))\\to F(c)\\to F(c_j)$ inert. These are two $q$-product cones over the same unary objects and the same base cone, so the comparison $F(g(c))\\to F(c)$ is an equivalence. Explicitly, the product mapping-space axiom identifies the comparison on each mapping-space fiber with the identity of the product of the unary mapping spaces; the inverse comparisons supplied by the two universal properties have identity composites by uniqueness. For $m=0$ both objects are the relative terminal object over $[0]$, giving the same conclusion. Every Cartesian edge of $u$ factors as a Cartesian lift $g(c)\\to c$ and an equivalence in a fiber, or is already an equivalence in a fiber; its image is therefore an equivalence. This proves condition (ii) for $\\mathcal X$.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.268: reverse direction of (b), inversion of Cartesian edges."
+   }
+  },
+  {
+   "text": "For an inert edge $a:X\\to Y$ of $O$, over $\\alpha:[n]\\to[k]$, choose inert unary projections $Y\\to Y_j$ and identifications $Y_j\\simeq g(c_j)$ supplied by $g_{[1]}$. The cross-edges $Y\\to c_j$ and $X\\to Y\\to c_j$ correspond to inert edges of $O$, since the composite of their cocartesian mapping squares is a homotopy-pullback square and their base maps are consecutive interval projections. Thus step 8 makes $\\beta_j:F(Y)\\to F(c_j)$ and $\\beta_jF(a):F(X)\\to F(c_j)$ inert. Choose a cocartesian inert lift $u:F(X)\\to Z$ of $\\alpha$ and factor $F(a)=vu$ with $v:Z\\to F(Y)$ over $1_{[k]}$, by the cocartesian mapping-square criterion. Choose inert projections $z_j:Z\\to Z_j$. Both $z_ju$ and $\\beta_jvu$ are cocartesian over $\\rho_j\\alpha$. Comparing their universal mapping squares gives an equivalence $t_j:Z_j\\to F(c_j)$ over $1_{[1]}$ with $t_jz_ju\\simeq\\beta_jvu$. Precomposition with $u$ is an equivalence on the relevant mapping-space fibers, so $t_jz_j\\simeq\\beta_jv$. Under the Segal equivalence $P_{[k]}\\simeq P_{[1]}^k$, with the unary components of $F(Y)$ identified with $F(c_j)$ by $\\beta_j$, these $t_j$ are precisely the components of $v$. They are equivalences, so $v$ is an equivalence. For $k=0$, the fiber $P_{[0]}$ is contractible and $v$ is an equivalence without unary tests. Composing $u$ with $v$ preserves its cocartesian mapping square, so $F(a)$ is inert. Hence $F|_O$ is an algebra and $F\\in\\mathcal X$. Together with step 10 this proves $\\mathcal R=\\mathcal X$ as full subcategories.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, printed p.268: reverse direction of (b), preservation of all inert arrows."
+   }
+  },
+  {
+   "text": "Compose $\\operatorname{Alg}_O(P)\\xrightarrow{r^*}\\mathcal X=\\mathcal R\\xrightarrow{\\mathrm{res}_C}\\operatorname{Alg}_C(P)$. Steps 3 and 8 show both functors are equivalences of the full infinity categories. Since $r|_C=g$, the composite is exactly $g^*$. Finally $f^*=e^*g^*$, and the inverse precomposition equivalence from step 1 proves the required equivalence for $f$. Composition of coherent functors makes this identification on every simplex, so no noninvertible transformation has been discarded. Restriction commutes with postcomposition into every ordinary target operad by associativity of composition, also on transformations and their higher simplices.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-cartesian-colimit-localization",
+    "def-coef-operadic-weak-approximation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), conclusion; Gepner–Haugseng Theorem A.6.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-operadic-weak-approximation",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cartesian-colimit-localization",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-relative-right-kan-universal-restriction",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), Theorem 2.3.3.23(1), printed pp.266–268, and Gepner–Haugseng Theorem A.6.5. Primary sources read online during second reading. The agent-written nonsymmetric adaptation distinguishes actual-inert from base-inert slice subcategories and corrects the initial-object direction; see the report source-error section."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +268,87 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) : Type u\", \"doc\": \"A simplicial set `X` satisfies the strict Segal condition if its simplices\\nare uniquely determined by their spine. \"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) : X.IsStrictSegal\", \"doc\": \"The unique existence of an inverse to `spine X n` forall `n : ℕ` implies\\nthe mere existence of such an inverse. \"}\n  {\"name\": \"SSet.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) [X.IsStrictSegal] : X.StrictSegal\", \"doc\": \"Given `IsStrictSegal X`, a choice of inverse to `spine X n` for all `n : ℕ`\\ndetermines an inhabitant of `StrictSegal X`. \"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"Simplices in the nerve of categories are uniquely determined by their spine.\\nIndeed, this property describes the essential image of the nerve functor. \"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set `X`, this constructs a `StrictSegal` structure for `X` from\\n`StrictSegalCore` structures for all `n : ℕ`. \"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) {n : ℕ} : X.Path n → X.obj (Opposite.op { len := n })\", \"doc\": \"The inverse to `spine X n`. \"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.spine n (sx.spineToSimplex f) = f\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) (n : ℕ) : X.obj (Opposite.op { len := n }) ≃ X.Path n\", \"doc\": \"The fields of `StrictSegal` define an equivalence between `X _⦋n⦌`\\nand `Path X n`. \"}\n  {\"name\": \"SSet.StrictSegal.spineToDiagonal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.obj (Opposite.op { len := 1 })\", \"doc\": \"In the presence of the strict Segal condition, a path of length `n` can be\\n\\\"composed\\\" by taking the diagonal edge of the resulting `n`-simplex. \"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (Δ : X.obj (Opposite.op { len := n })) : sx.spineToSimplex (X.spine n Δ) = Δ\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : X.spine n ∘ self.spineToSimplex = id\", \"doc\": \"`spineToSimplex` is a right inverse to `spine X n`. \"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : self.spineToSimplex ∘ X.spine n = id\", \"doc\": \"`spineToSimplex` is a left inverse to `spine X n`. \"}\n",
    "date": "2026-10-17",
    "verdict": "No match: SSet.StrictSegal and its spine maps concern simplices of a single strict Segal simplicial set; they do not state a result about generalized operads or their active-operation spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition functor on quasicategories along a final functor gives equivalence for right Kan extensions",
+   "results": "{\"t\": \"2026-10-16T23:51:56Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition functor on quasicategories along a final functor gives equivalence for right Kan extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.RightExtension.isUniversalPrecompEquiv\", \"CategoryTheory.Functor.instIsEquivalenceRightExtensionCompPrecomp\", \"CategoryTheory.Functor.isRightKanExtension_iff_precomp\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.LeftExtension.isUniversalPrecompEquiv\", \"CategoryTheory.Functor.RightExtension.isUniversalPostcomp₁Equiv\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Functor.instIsEquivalenceLeftExtensionCompPrecomp\"], \"digest\": \"670cb351325fb5a6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: returned Kan-extension declarations are for ordinary categories or strict Segal simplicial sets; the grep hits concern absolute-value weak approximation. None states the weak-approximation theorem for generalized nonsymmetric infinity operads."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartesian.*fibration|cartesian.*unstraightening|WeakApproximation",
+   "results": "{\"t\": \"2026-10-16T23:55:36Z\", \"tool\": \"grep\", \"query\": \"Cartesian.*fibration|cartesian.*unstraightening|WeakApproximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/AbsoluteValue/Equivalence.lean\", \"Mathlib/Analysis/AbsoluteValue/Equivalence.lean\"], \"digest\": \"0725313c3ce3d467\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: returned Kan-extension declarations are for ordinary categories or strict Segal simplicial sets; the grep hits concern absolute-value weak approximation. None states the weak-approximation theorem for generalized nonsymmetric infinity operads."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T23:55:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionId\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"CategoryTheory.Functor.IsRightKanExtension\", \"CategoryTheory.Functor.coneOfIsRightKanExtension\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.limitIsoOfIsRightKanExtension\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\"], \"digest\": \"de71b04be3f89c8c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: returned Kan-extension declarations are for ordinary categories or strict Segal simplicial sets; the grep hits concern absolute-value weak approximation. None states the weak-approximation theorem for generalized nonsymmetric infinity operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak approximation of nonsymmetric infinity operads with equivalent colors induces equivalence on full algebra categories",
+   "results": "{\"t\": \"2026-10-17T00:32:26Z\", \"tool\": \"leanfinder\", \"query\": \"Weak approximation of nonsymmetric infinity operads with equivalent colors induces equivalence on full algebra categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"SSet.OneTruncation₂.nerveEquiv\", \"SimplicialObject.opEquivalence\", \"CategoryTheory.simplicialCosimplicialAugmentedEquiv_functor\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀\", \"CategoryTheory.SimplicialObject.IsCoskeletal\"], \"digest\": \"bce06d9f03940185\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern the simplex-category skeleton, nerves and ordinary simplicial diagrams; none states the nonsymmetric infinity-operadic approximation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\"",
+   "results": "{\"t\": \"2026-10-17T00:32:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for the quoted Operad name pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Operad|WeakApproximation|weakApproximation",
+   "results": "{\"t\": \"2026-10-17T00:32:30Z\", \"tool\": \"grep\", \"query\": \"operad|Operad|WeakApproximation|weakApproximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/Analysis/AbsoluteValue/Equivalence.lean\", \"Mathlib/Analysis/AbsoluteValue/Equivalence.lean\"], \"digest\": \"4d1634788d97fc17\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: exactly four hits, two bibliography mentions of operads and two boundaries of the absolute-value WeakApproximation section."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along weak approximations of infinity operads is an equivalence of algebra categories",
+   "results": "{\"t\": \"2026-10-17T00:32:31Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along weak approximations of infinity operads is an equivalence of algebra categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn\", \"algEquivIsoAlgebraIso\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.mk.noConfusion\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.ctorIdx\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.weakEquivalences_op\"], \"digest\": \"abaf61249ea31c11\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern localization of ordinary model categories and ordinary ring-algebra isomorphisms; neither weak operadic approximation nor its algebra restriction appears."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inert preserving coherent functors from operads extend uniquely across an operadic approximation",
+   "results": "{\"t\": \"2026-10-17T00:33:50Z\", \"tool\": \"leanfinder\", \"query\": \"Inert preserving coherent functors from operads extend uniquely across an operadic approximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Functor.Comp.ext\", \"PFunctor.M.ext'\", \"CategoryTheory.Quotient.lift_unique'\", \"PFunctor.Approx.CofixA.intro.hinj\", \"CategoryTheory.Cat.FreeRefl.lift_unique'\", \"Functor.ext\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.ext\", \"PFunctor.MIntl.mk.inj\"], \"digest\": \"945ead4fcbc4a556\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned declarations concern ordinary quotient functors and polynomial-functor approximations, not infinity operads or inert-preserving algebra functors."
+  },
+  {
+   "tool": "grep",
+   "query": "nonsymmetric|NonSymmetric|Quasicategory.*KanExtension|Operadic",
+   "results": "{\"t\": \"2026-10-17T01:11:36Z\", \"tool\": \"grep\", \"query\": \"nonsymmetric|NonSymmetric|Quasicategory.*KanExtension|Operadic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for this operad/quasicategorical vocabulary query."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\"",
+   "results": "{\"t\": \"2026-10-17T01:11:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for this operad/quasicategorical vocabulary query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of inert preserving functors between nonsymmetric operads is an equivalence when the colors are equivalent",
+   "results": "{\"t\": \"2026-10-17T01:11:38Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of inert preserving functors between nonsymmetric operads is an equivalence when the colors are equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.induced\", \"CategoryTheory.Equivalence.induced_functor\", \"CategoryTheory.Equivalence.induced_inverse_map\", \"Action.resEquiv_functor\", \"CategoryTheory.GradedObject.comapEquiv_functor\", \"CategoryTheory.Equivalence.changeInverse_functor\", \"CategoryTheory.Equivalence.congrFullSubcategory_functor\", \"CategoryTheory.Equivalence.changeFunctor\"], \"digest\": \"52faf983d1f2e66d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary induced-category equivalences, action restriction and reindexing results do not state the coherent nonsymmetric infinity-operad theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-localization-operation-criterion",
@@ -112,5 +368,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-weak-approximation-algebras",
+  "worker": "stage1",
+  "summary": "Recovered and audited the existing twelve-step split against GH A.6.1/A.6.5 and HA 2.3.3.23(1), pp.266–268. Reused the existing Cartesian straightening/localization, comma coinitiality, relative-cone and relative right-Kan statements; made evaluation at initial unary objects an explicit application of the opposite comma criterion. Distinguished actual-inert and base-inert slices and retained all nullary cases and noninvertible transformations. Rewrote the stale report, recorded fresh actual Mathlib searches, and regenerated verbatim citations. No new nodes or Mathlib leaves. Independent second reading made the unary-edge criterion independent of choices and wrote the component comparisons detecting arbitrary inert-edge preservation.",
+  "blueprint": "Main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-level mapping-complex adjunction, through the inherited enrichment ancestry. Steps 1–3 construct the Cartesian restriction comparison; steps 4–8 construct pointwise relative right Kan extensions; steps 9–12 identify their full category with operadic algebras and conclude the supporting A.6.5 equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence and coherent functor/cone calculus used in steps 9–11; the own-unit route does not state this foundational calculus. This supplies no alternative to an operadic proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-5c88208d1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-5c88208d1 (reviewer sub-agent of L); spot-checked: I read all twelve steps and the statement of each of the 11 cited nodes. Source: Gepner–Haugseng arXiv:1312.3178, fetched read-only to /tmp. Definition A.6.1 takes an arbitrary α with γ required inert, which matches def-coef-operadic-weak-approximation. The item matches Theorem A.6.5 hypothesis by hypothesis: generalized M, ordinary O and P, weak approximation, f_[1] an equivalence, equivalence of the full algebra categories. It is not weakened. Higher Algebra was not available on this machine, so I checked the HA 2.3.3.23 argument on its own merits. Checks: the comma (I_X)_{/a} equals F_g(c,a), so I_X is coinitial. H_X is full with the same commas, and two-out-of-three applies. The unary comma components are exactly the ρ_j, the cocartesian projections are initial, and the product axiom gives the q-limit. J_{X,i} ≃ O(X,i) because g_[1] is an equivalence. The hypotheses of the relative right-Kan theorem all hold (C_{c/} has initial object 1_c). The arguments for 𝒳 ⊆ R and R ⊆ 𝒳 (t_j components, k=0 and m=0) are correct. The poset {0<1}, min example confirms the actual-inert/base-inert distinction. There are no new nodes. The duplicate candidates are symmetric, Fin_*-based approximation nodes and the active-lift criterion; none duplicates this theorem. proof_deps equals the union of the uses, and there is no cycle (the 577-node closure excludes the item). I accept the tool use of lem-cbc-enhanced-functor-cone-calculus, which is generic cone/equivalence calculus. Two small repairs in fixes/: step 9 now says that g preserves inert edges, which is why F|_C is an algebra (cite def-coef-operadic-weak-approximation, already in proof_deps); step 7 now has the converse of the inert-leg criterion, by uniqueness of relative limits. The statement, stmt_deps and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

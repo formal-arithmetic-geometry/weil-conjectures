@@ -1,88 +1,360 @@
 {
-  "id": "lem-pur-kummer-additivity",
-  "blueprint": {
-    "is": "lem-pur-kummer-additivity",
-    "from": null,
-    "same_as": null
+ "id": "lem-pur-kummer-additivity",
+ "blueprint": {
+  "is": "lem-pur-kummer-additivity",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kummer additivity",
+ "statement": "Use the finite-coefficient purity conventions [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ for any $n\\geq1$, and the specified pro-etale Tate twist [def-coefficient-twists-detailed]. Let $T$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. A line bundle means an invertible $\\mathcal O_T$-module [def-sc-invertible-module]. Choose $N\\geq1$ with $\\ell^N A=0$ and put $m=\\ell^N$. On $T_{\\mathrm{et}}$, let $\\delta_{m,T}:H^1(T,\\mathbf G_m)\\to H^2(T,\\mu_m)$ be the connecting homomorphism of the ordinary Kummer short exact sequence [lem-amb-kummer-any-base], with the injective-resolution convention [lem-weil-pbc-horseshoe-delta-functor]. Put $L_{m,A,T}=\\mu_m\\otimes_{\\mathbf Z/m}A_T$ and $\\varphi_{m,A,T}:\\mu_m\\to L_{m,A,T}$, $z\\mapsto z\\otimes1_A$ [def-pur-kummer-module-coefficients].\n\nFor a line bundle $M$, let $\\alpha_T(M)\\in H^1(T_{\\mathrm{et}},\\mathbf G_m)$ be the class of its frame torsor $\\underline{\\operatorname{Isom}}(\\mathcal O_T,M)$ [lem-sc-line-bundle-torsor, lem-sc-torsor-h1]. Define\n$$c^{\\mathrm{et}}_{1,A}(M)=H^2(\\varphi_{m,A,T})(\\delta_{m,T}(\\alpha_T(M)))\\in H^2(T_{\\mathrm{et}},L_{m,A,T}).$$\nInterpret this as a morphism $A_T\\to L_{m,A,T}[2]$ in the ordinary etale derived category, using [lem-weil-pbc-etale-module-cohomology-forget, lem-pur-rhom-global-sections]. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism]. Pull this morphism through [def-sf-comparison-derived-pullback], and use the canonical projection-induced identification $\\nu_T^*L_{m,A,T}\\cong A_T(1)$ supplied by the root-tower reductions [lem-pur-twist-sheaf-locally-free]. Denote the result by\n$$c_{1,A}(M):A_T\\longrightarrow A_T(1)[2].$$\nThis class is independent of the chosen killing exponent $N$. For any two line bundles $M,P$ on $T$,\n$$c_{1,A}(M\\otimes_{\\mathcal O_T}P)=c_{1,A}(M)+c_{1,A}(P).$$\nFor every morphism $f:T'\\to T$ between separated finite-type $k$-schemes, $f^*c_{1,A}(M)=c_{1,A}(f^*M)$, under the canonical constant-coefficient and Tate-twist comparisons. In particular this equality holds when $f$ is the projection from a base change $T'=T\\times_B B'$ with $T'$ in this class. The same additivity and pullback equalities hold for $c^{\\mathrm{et}}_{1,A}$ under the comparisons [lem-asd-etale-finite-twist-pullback].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-additivity.md",
+  "place": "node lem-pur-kummer-additivity, order 1944"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-weil-scheme-morphism-properties",
+  "def-sc-invertible-module",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "def-pur-kummer-module-coefficients",
+  "lem-sc-line-bundle-torsor",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-pur-rhom-global-sections",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sf-comparison-derived-pullback",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The construction is defined for every $n\\geq1$: since $\\ell$ belongs to the maximal ideal $(\\varpi_E)$, $\\ell^n A_{E,n}=0$, so a killing exponent exists without requiring the ramification index to divide $n$. The integer $m=\\ell^N$ is invertible on $T$, since $\\ell\\ne\\operatorname{char}k$. Thus the ordinary Kummer sequence is short exact by lem-amb-kummer-any-base. The coefficient morphism $\\varphi(z)=z\\otimes1_A$ is a homomorphism of abelian sheaves by the tensor relations in def-pur-kummer-module-coefficients. No tensor product of $\\mathbf G_m$ with $A$ is used.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "def-pur-kummer-module-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer; Lemma 03PL, lemma-kummer-sequence"
+   }
   },
-  "kind": "statement",
-  "title": "Kummer additivity",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $T$ be a\nseparated finite-type\n$k$-scheme. For a line bundle $M$ on $T$ let\n\n$$\nc_1(M):\\Lambda_T\\longrightarrow\\Lambda_T(1)[2]\n$$\n\nbe the class of the $A$-torsor of height $\\ell^N$-th roots of a\ntrivialization of $M$, i.e. the image of the class of $M$ in\n$H^1(T_{\\Et},\\mathbf G_m\\otimes_{\\mathbf Z}A)$ under the connecting\nmorphism of the Kummer exact sequence of\n[def-pur-affine-line-datum] (the identification\n$H^1(T_{\\Et},\\mathbf G_m)=\\operatorname{Pic}(T)$ is the standard one:\nthe $A$-torsor of isomorphisms $\\mathcal O_T\\to M$ recovers $M$\nas $(T\\times M)/\\mathbf G_m$; it is recorded for curves in\nlem:sc-line-bundle-torsor, lem:sc-h1-gm-pic and its proof is the\nsame over any base, cf. the source note to lem:sc-h1-gm-pic).\nThen\n\n$$\nc_1(M\\otimes N)=c_1(M)+c_1(N),\n$$\n\nand $c_1$ is compatible with pullback and with base change.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-additivity.md",
-    "place": "node lem-pur-kummer-additivity, order 1944"
+  {
+   "text": "By lem-sc-line-bundle-torsor the frame construction applies to arbitrary schemes, and carries tensor product to contracted product. By lem-sc-torsor-h1 contracted product is addition in $H^1$. Hence $\\alpha_T(M\\otimes P)=\\alpha_T(M)+\\alpha_T(P)$. More explicitly, on a common trivializing cover, frames $s_i,t_i$ with transitions $g_{ij},h_{ij}$ give frames $s_i\\otimes t_i$ with transitions $g_{ij}h_{ij}$; the map from the contracted product of frame torsors sends $[s,t]$ to $s\\otimes t$. This checks the sign and product convention without using the curve-only Picard identification.",
+   "uses": [
+    "lem-sc-line-bundle-torsor",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03AJ (lemma-torsors-h1) and 040E (lemma-h1-invertible)"
+   }
   },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "def-pur-affine-line-datum",
+  {
+   "text": "The categories of constant-coefficient module sheaves, including abelian sheaves at integer coefficients, have enough injectives by lem-weil-pbc-module-sheaves-enough-injectives. Global sections is additive and left exact because it is evaluation at the final object and kernels of sheaves are computed objectwise. Apply lem-weil-pbc-horseshoe-delta-functor to global sections of abelian etale sheaves and to the Kummer short exact sequence. Its degree-one connecting morphism is a morphism of abelian groups, and its degree-two derived functor is additive. Therefore both $\\delta_{m,T}$ and $H^2(\\varphi)$ preserve addition. Applying these two homomorphisms to the equality in step 2 gives $c^{\\mathrm{et}}_{1,A}(M\\otimes P)=c^{\\mathrm{et}}_{1,A}(M)+c^{\\mathrm{et}}_{1,A}(P)$. By lem-weil-pbc-etale-module-cohomology-forget the target abelian cohomology is the cohomology of the underlying $A$-module sheaf. Its identification with $\\operatorname{Hom}_{D(A)}(A_T,L_{m,A,T}[2])$ is additive: use lem-pur-rhom-global-sections with first input $A_T$, noting that $\\mathcal Hom_A(A_T,I)=I$ by evaluation at $1$ in each degree of an injective resolution. Thus the same equality holds for etale derived morphisms.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), Tag 08JA (lemma-section-RHom-over-U); connecting maps as in derived.tex Tags 015B, 05TE"
+   }
+  },
+  {
+   "text": "For $f:T'\\to T$, inverse image of the frame torsor followed by extension along $f^{-1}\\mathbf G_{m,T}\\to\\mathbf G_{m,T'}$ is the frame torsor of $f^*M$. To see this, send a pulled-back frame to its pullback as a local basis of $f^*M$; on a trivializing cover both torsors are the units sheaf, with the same transition units $f^*g_{ij}$. The two clauses of lem-sc-etale-torsor-h1-functoriality therefore give $H^1(c_{\\mathbf G_m})f^*\\alpha_T(M)=\\alpha_{T'}(f^*M)$. Pullback of an invertible module is invertible directly from its local rank-one trivializations.",
+   "uses": [
+    "lem-sc-etale-torsor-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1, applied to inverse image and extension of the structure group"
+   }
+  },
+  {
+   "text": "Pull the Kummer sequence back to $T'_{\\mathrm{et}}$. Its comparison to the Kummer sequence of $T'$ has vertical maps $c_\\mu,c_{\\mathbf G_m},c_{\\mathbf G_m}$: the squares commute because pullback of units commutes with $m$-th powers and inclusion of roots. By lem-weil-pbc-site-cohomology-pullback (3) and naturality for morphisms of short exact sequences in lem-weil-pbc-horseshoe-delta-functor (1),\n$$H^2(c_\\mu)f^*\\delta_{m,T}=\\delta_{m,T'}H^1(c_{\\mathbf G_m})f^*.$$\nHere inverse image is exact, as required in that pullback theorem. By lem-asd-etale-finite-twist-pullback the roots and tensor twists have the requisite canonical comparisons. They commute with $\\varphi$ because both composites send $z$ to $c_\\mu(z)\\otimes1_A$. Naturality in the coefficient sheaf, part (2) of the site-cohomology-pullback theorem, and step 4 now yield\n$$f^*c^{\\mathrm{et}}_{1,A}(M)=c^{\\mathrm{et}}_{1,A}(f^*M).$$ To check that this is also pullback of the derived morphism in step 3, choose injective $A$-module resolutions $L_{m,A,T}\\to I^\\bullet$ and $f^{-1}L_{m,A,T}\\to J^\\bullet$, and a comparison $\\beta:f^{-1}I^\\bullet\\to J^\\bullet$ over the identity. Module inverse image agrees naturally with abelian inverse image by lem-weil-pbc-etale-module-pullback-forget-naturality, so is exact here. By lem-weil-pbc-etale-module-cohomology-forget the underlying abelian sheaves of the terms of these resolutions have zero positive global cohomology. They therefore compute abelian cohomology by lemma-weil-pbc-leray-acyclicity (2). Comparing them to abelian injective resolutions computes the same pullback formula of lem-weil-pbc-site-cohomology-pullback: the two comparison maps into a target injective resolution are homotopic because they lift the same augmentation. A degree-two cocycle $s\\in\\Gamma(T,I^2)$ represents under lem-pur-rhom-global-sections the chain map $A_T[0]\\to I^\\bullet[2]$, $1\\mapsto s$. Its exact inverse image followed by $\\beta[2]$ sends $1$ to $\\beta(f^{-1}s)$, precisely the cocycle in that cohomological pullback formula. Hence the equality just proved is the equality of pulled-back etale derived morphisms as well.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, Kummer sequence; cohomology.tex Tag 01F8 (lemma-functoriality), with the explicit site pullback and horseshoe naturality interfaces; sites-modules.tex Tags 03D3/03D7 for module inverse image, sites-cohomology.tex Tags 03FD/08JA, and derived.tex Tag 015E (lemma-leray-acyclicity) for the explicit resolution comparison"
+   }
+  },
+  {
+   "text": "Identify the pulled etale twist with the specified pro-etale twist as follows. A primitive $m$-th root $\\zeta\\in k$ trivializes both etale and pro-etale roots sheaves by $a\\mapsto\\zeta^a$. Indeed $X^m-1$ splits over $k$ into distinct linear factors, so its roots on any $k$-scheme are locally constant choices among these $m$ roots. By lem-sf-comparison-pullback-exact (1), comparison pulls the finite constant coefficient sheaves to the same constants; hence the natural roots comparison is the identity in these coordinates. Tensoring with the finite constant $A$ also gives the identity: a presentation of the finite $\\mathbf Z/m$-module $A$ expresses this tensor as a cokernel of maps of finite sums of the roots sheaf, and the exact additive comparison functor of part (2) preserves that presentation. On the pro-etale side, lem-pur-twist-sheaf-locally-free (2),(3) identify the projection from the root tower after tensoring with $A$ with\n$$\\mathbf Z_\\ell(1)_T\\otimes_{\\widehat{\\mathbf Z}_\\ell}A_T\\ \\xrightarrow{\\sim}\\ \\mu_{m,T}\\otimes_{\\mathbf Z/m}A_T,$$\nsince $mA=0$. This is the same $A_T(1)$ as in def-coefficient-twists-detailed; its inverse defines the canonical identification in the statement. The auxiliary primitive root only checks invertibility, and does not enter the projection-defined map. Applying the additive functor def-sf-comparison-derived-pullback to step 3 proves pro-etale additivity. For pullback, the site inclusions defining $\\nu$ commute with base change on underlying schemes: both orders send an etale $V\\to T$ to $V\\times_TT'$. The composition isomorphism of inverse images in lem-weil-pbc-site-morphism-composition therefore identifies $f^{-1}\\nu_T^*$ with $\\nu_{T'}^*f^{-1}$. It is exact on the module complexes here. The projection comparison commutes with $f^{-1}$: in the finite roots and tensor coordinates this is precisely $z\\otimes a\\mapsto f^*z\\otimes a$, and these are the canonical Tate-twist pullback comparisons of det-prop-sfb-cartesian-coefficients-twists. Applying this identification to step 5 proves $f^*c_{1,A}(M)=c_{1,A}(f^*M)$. A base-change projection is such an $f$, so it gives the base-change clause.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-pur-twist-sheaf-locally-free",
     "def-coefficient-twists-detailed",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [
-    {
-      "text": "The boundary used here is the Kummer boundary of [def-pur-affine-line-datum], with its cohomology interpreted as in [def-weil-derived-cohomology-sheaves].\nThe connecting morphism of the Kummer exact sequence is a morphism of\n$\\Lambda$-modules on the group structure defined by the torsor\nproduct, which corresponds under the identification\n$H^1(T,\\mathbf G_m)=\\operatorname{Pic}(T)$ to the tensor product of\nline bundles; it therefore satisfies $c_1(M\\otimes N)=c_1(M)+c_1(N)$. Functoriality is the functoriality of the\nconnecting morphism of the exact sequence and of the torsor\nidentification.",
-      "uses": [
-        "def-pur-affine-line-datum",
-        "def-weil-derived-cohomology-sheaves"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pur-affine-line-datum",
-    "def-weil-derived-cohomology-sheaves"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-additivity.md",
-    "place": "## Proof"
+    "def-sf-comparison-derived-pullback",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-site-morphism-composition",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Section 099R (section-comparison); roots and coefficient reduction as in the cited twist interfaces; sites.tex Tag 03CB for composition"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1944,
-  "blueprint_uses": [
-    "def-coefficient-twists-detailed",
-    "def-pur-affine-line-datum",
-    "def-pur-conventions",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1-kummer",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $T$ be a\nseparated finite-type\n$k$-scheme. For a line bundle $M$ on $T$ let\n\n$$\nc_1(M):\\Lambda_T\\longrightarrow\\Lambda_T(1)[2]\n$$\n\nbe the class of the $A$-torsor of height $\\ell^N$-th roots of a\ntrivialization of $M$, i.e. the image of the class of $M$ in\n$H^1(T_{\\Et},\\mathbf G_m\\otimes_{\\mathbf Z}A)$ under the connecting\nmorphism of the Kummer exact sequence of\n[def-pur-affine-line-datum] (the identification\n$H^1(T_{\\Et},\\mathbf G_m)=\\operatorname{Pic}(T)$ is the standard one:\nthe $A$-torsor of isomorphisms $\\mathcal O_T\\to M$ recovers $M$\nas $(T\\times M)/\\mathbf G_m$).\nThen\n\n$$\nc_1(M\\otimes N)=c_1(M)+c_1(N),\n$$\n\nand $c_1$ is compatible with pullback and with base change.",
-    "proof": [
-      {
-        "text": "The boundary used here is the Kummer boundary of [def-pur-affine-line-datum], with its cohomology interpreted as in [def-weil-derived-cohomology-sheaves].\nThe connecting morphism of the Kummer exact sequence is a morphism of\n$\\Lambda$-modules on the group structure defined by the torsor\nproduct, which corresponds under the identification\n$H^1(T,\\mathbf G_m)=\\operatorname{Pic}(T)$ to the tensor product of\nline bundles; it therefore satisfies $c_1(M\\otimes N)=c_1(M)+c_1(N)$. Functoriality is the functoriality of the\nconnecting morphism of the exact sequence and of the torsor\nidentification.",
-        "uses": [
-          "def-pur-affine-line-datum",
-          "def-weil-derived-cohomology-sheaves"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Finally let $N'\\geq N$ and $d=\\ell^{N'-N}$. Map the Kummer sequence for $\\ell^{N'}$ to that for $\\ell^N$ by $z\\mapsto z^d$ on the roots and middle units sheaves, and the identity on the last units sheaf. The right square commutes because $(z^d)^{\\ell^N}=z^{\\ell^{N'}}$. Naturality in lem-weil-pbc-horseshoe-delta-functor gives $H^2((\\cdot)^d)\\delta_{\\ell^{N'},T}=\\delta_{\\ell^N,T}$. After tensoring with $A$ the power map is the canonical isomorphism of finite etale twists in lem-asd-etale-finite-twist-pullback. Inserting $1_A$ commutes with it. The tower projections in step 6 have exactly these power transitions; hence the etale and pro-etale classes agree for the two exponents. Any pair of killing exponents can be compared to their maximum, proving independence.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer; morphism between its Kummer sequences for two powers of ell"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-amb-kummer-any-base",
+  "def-pur-kummer-module-coefficients",
+  "lem-sc-line-bundle-torsor",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-sf-comparison-pullback-exact",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-site-morphism-composition",
+  "det-prop-sfb-cartesian-coefficients-twists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-kummer-additivity.proof.md",
+  "place": "Expanded Kummer-boundary argument, corrected coefficient typing; Stacks Tags 03PK, 03AJ, 040E, 03FD, 08JA, 01F8 and 099R supply the cited foundations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The first Chern class defined by the etale Kummer boundary is additive for tensor products of line bundles and natural under pullback",
+   "results": "8 hits: Scheme.Modules.instAdditivePullback, cotangent-complex maps and CommRing.Pic.mk_tensor; none constructs the etale Kummer H^2 class.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, PicardGroup",
+   "results": "0 hits; unknown identifier 'PicardGroup'.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]ummer|[Cc]hern|firstChern",
+   "results": "25 hits, principally NumberTheory/KummerDedekind, padic valuations and FieldTheory/KummerExtension. No etale Chern class.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer first Chern class of a tensor product of invertible sheaves is the sum of their first Chern classes",
+   "results": "8 hits: CommRing.Pic.mul_eq_tensor, CommRing.Pic.mk_tensor, invertible-module tensor instance, meromorphic divisors, tensor definitions. These concern modules over a ring, not the Kummer class.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a scheme gives a class in second etale cohomology with roots of unity coefficients through the connecting homomorphism",
+   "results": "8 hits: PresheafOfGroups.OneCocycle.class, Sheaf.H, cohomologyPresheaf, nonabelian H1, Hilbert90 and HomComplex cohomology. No line-bundle Kummer boundary theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRing.Pic.mk_tensor",
+   "results": "1 hit: CommRing.Pic.mk_tensor, Mathlib.RingTheory.PicardGroup. This is the ring-module Picard group tensor identity only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mk_tensor|mul_eq_tensor|chern|Chern",
+   "results": "Searched subpath RingTheory/PicardGroup.lean: 5 hits, lines 504, 519, 520, 559, 561. Read lines 495-522: CommRing.Pic.mk_tensor and mul_eq_tensor identify the ring-module Picard product with tensor product; no etale Kummer class.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology connecting homomorphism sends tensor product of invertible sheaves to sum of classes in roots of unity H2",
+   "results": "8 hits: cotangent and group-cohomology connecting maps, Hilbert90 and group-cohomology functoriality; none states the etale line-bundle Kummer H^2 theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1944,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-affine-line-datum",
+  "def-pur-conventions",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $T$ be a\nseparated finite-type\n$k$-scheme. For a line bundle $M$ on $T$ let\n\n$$\nc_1(M):\\Lambda_T\\longrightarrow\\Lambda_T(1)[2]\n$$\n\nbe the class of the $A$-torsor of height $\\ell^N$-th roots of a\ntrivialization of $M$, i.e. the image of the class of $M$ in\n$H^1(T_{\\Et},\\mathbf G_m\\otimes_{\\mathbf Z}A)$ under the connecting\nmorphism of the Kummer exact sequence of\n[def-pur-affine-line-datum] (the identification\n$H^1(T_{\\Et},\\mathbf G_m)=\\operatorname{Pic}(T)$ is the standard one:\nthe $A$-torsor of isomorphisms $\\mathcal O_T\\to M$ recovers $M$\nas $(T\\times M)/\\mathbf G_m$).\nThen\n\n$$\nc_1(M\\otimes N)=c_1(M)+c_1(N),\n$$\n\nand $c_1$ is compatible with pullback and with base change.",
+  "proof": [
+   {
+    "text": "The boundary used here is the Kummer boundary of [def-pur-affine-line-datum], with its cohomology interpreted as in [def-weil-derived-cohomology-sheaves].\nThe connecting morphism of the Kummer exact sequence is a morphism of\n$\\Lambda$-modules on the group structure defined by the torsor\nproduct, which corresponds under the identification\n$H^1(T,\\mathbf G_m)=\\operatorname{Pic}(T)$ to the tensor product of\nline bundles; it therefore satisfies $c_1(M\\otimes N)=c_1(M)+c_1(N)$. Functoriality is the functoriality of the\nconnecting morphism of the exact sequence and of the torsor\nidentification.",
+    "uses": [
+     "def-pur-affine-line-datum",
+     "def-weil-derived-cohomology-sheaves"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-kummer-additivity",
+  "worker": "stage1",
+  "summary": "Corrected the ill-typed torsor/tensored-units definition to the ordinary degree-one-to-degree-two Kummer boundary followed by coefficient insertion and etale-to-pro-etale comparison. Preserved all finite coefficient levels, proved additivity, arbitrary scheme pullback, base-change projections and killing-exponent independence using existing nodes only.",
+  "blueprint": "Realizes the current blueprint proof: contracted product and boundary additivity in steps 2-3; connecting-map and frame functoriality in steps 4-5; coefficient/site typing in steps 1,6-7. The containing unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "The arbitrary-scheme frame-torsor/tensor correspondence is a generic tool; the unit has no replacement proof of descent."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "The abelian H^1 group law is contracted product, needed for the unit's Kummer argument."
+   },
+   {
+    "node": "lem-sc-etale-torsor-h1-functoriality",
+    "why": "Generic H^1 functoriality under inverse image and extension of structure group; it makes frame pullback precise."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Exactness of the ordinary Kummer sequence on the arbitrary scheme T is the input already used in the unit."
+   },
+   {
+    "node": "lem-weil-pbc-horseshoe-delta-functor",
+    "why": "Generic connecting homomorphisms and naturality for short exact sequences, with the same convention as the site-pullback theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Generic exact inverse-image pullback of cohomology commutes with horseshoe boundaries; no purity or affine-line computation is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic agreement of abelian and constant-coefficient module cohomology needed to type the derived class."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic derived Hom/global cohomology comparison needed to represent the class as a morphism."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Root-tower reductions identify the etale-origin finite twist with the specified pro-etale coefficient twist for arbitrary n."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact additive comparison on finite coefficient modules transports the derived morphism and finite presentations."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Canonical finite etale roots/twist pullback and exponent transitions provide the coefficient comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic composition of inverse images identifies the two routes in the etale/pro-etale pullback square."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Canonical pro-etale finite twist comparisons identify the transported naturality equality with the chapter convention."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives input discharging the hypotheses of the cohomology and connecting-map tools; no unit computation is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-pullback-forget-naturality",
+    "why": "Generic natural identification of constant-coefficient module and abelian inverse image, used in the resolution check of derived-morphism pullback."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic computation by acyclic resolutions identifies the module resolution with the abelian cohomological pullback formula; it replaces no unit computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-line-bundle-torsor",
+  "lem-sc-torsor-h1",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sf-comparison-pullback-exact",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-site-morphism-composition",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-9b3415c8c",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-9b3415c8c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item JSON, the current blueprint statement and proof, the unit sk-prop-a1-kummer and the cited Kummer unit, every cited node statement (none missing or merged), the three citers, and Stacks 03PL and 040E. The statement correction (E7) is justified. By 03PL the m-th power map is etale-surjective, so G_m tensor A = 0 when mA=0, and the blueprint's H^1(G_m tensor A) class would vanish; O(1) on P^1 shows the class must be nonzero. The repair is the standard class: the frame torsor in H^1(G_m), the Kummer boundary into H^2(mu_m), insertion z -> z tensor 1, then nu^* with the projection identification to A_T(1). It holds for every n >= 1 (N=n kills A, and the e|n condition of def-pur-affine-line-datum is not imported). It keeps the type Lambda_T -> Lambda_T(1)[2] with Lambda=A, keeps additivity, pullback and base change, and adds exponent independence, which is proved. Steps checked: (1) exponent and Kummer exactness; (2) the contracted product of frame torsors, with the sign checked; (3) horseshoe additivity and H^2 = Hom_D(A_T, L[2]) via rhom-global-sections and module/abelian forget; (4) both clauses of torsor H^1 functoriality, no flatness needed; (5) the composite of site pullback (3) and horseshoe (1) gives f^* delta_T = delta_T' f^*, plus the passage to derived morphisms; (6) nu^{-1} mu = mu in the coordinates of a primitive root, tensor with A via a finite presentation, twist-sheaf-locally-free (2),(3), commutation of f^{-1} with nu^* via site composition, and the cartesian twists; (7) the power-map diagram of Kummer sequences, whose right square commutes because (z^d)^{l^N} = z^{l^N'}. No cycle, no new nodes, no SGA, route unchanged. All 16 declared tool uses are accepted as generic tools; lem-amb-kummer-any-base is needed because the unit's own route node covers only curves. Note for later: the unsplit citer lem-pur-divisor-class cites this item for the degree-one kappa additivity, which neither the old nor the new statement asserts; that should be fixed when that citer is split. No fixes written."
+ }
 }

@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-sf-cup",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-pod-mixed-support-cup-product"
+  ]
  },
  "kind": "definition",
  "title": "Mixed-support cup product",
- "statement": "In the setting of [def-sf-datum], let $K,L\\in D^b_{ctf}(X,\\Lambda)$.\nThe *mixed-support cup product* is the composite\n\n$$\n\\smile_c:R\\Gamma_c(X,K)\\otimes^L_\\Lambda R\\Gamma(X,L)\\longrightarrow\nR\\Gamma_c\\bigl(X,K\\otimes^L_{\\Lambda_X}L\\bigr)\n$$\n\nof the projection transformation for $Ra_{X!}$ applied to the pair $(K,L)$\nand the map induced by the counit $La_X^*Ra_{X*}L\\to L$; the same\nconstruction at the other coefficient stages is obtained by levelwise\napplication and transport, and it is associative, unital and\ngraded-commutative.",
+ "statement": "Fix a six-functor datum as in [def-sf-datum], including a separated finite-type\nmorphism $a_X:X\\to s=\\operatorname{Spec}k$ and a coefficient stage\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell}\\}$; write\n$\\Lambda_X$ and $\\Lambda_s$ for the coefficient units on $X$ and on $s$. Let\n$K,L\\in D^b_{ctf}(X,\\Lambda)$, and write\n$R\\Gamma_c(X,-)=Ra_{X!}(-)$ and $R\\Gamma(X,-)=Ra_{X*}(-)$, with values in the\npoint category over $s$ at the stage $\\Lambda$. The *mixed-support cup product* is\nthe composite\n\n$$\n\\begin{aligned}\nR\\Gamma_c(X,K)\\otimes^L_\\Lambda R\\Gamma(X,L)\n&=Ra_{X!}K\\otimes^L_{\\Lambda_s}Ra_{X*}L\\\\\n&\\xrightarrow{\\ \\operatorname{PF}_{a_X,K,Ra_{X*}L}\\ }Ra_{X!}\\bigl(K\\otimes^L_{\\Lambda_X}La_X^*Ra_{X*}L\\bigr)\\\\\n&\\xrightarrow{\\ Ra_{X!}(1_K\\otimes\\varepsilon_L)\\ }Ra_{X!}\\bigl(K\\otimes^L_{\\Lambda_X}L\\bigr)\n=R\\Gamma_c\\bigl(X,K\\otimes^L_{\\Lambda_X}L\\bigr),\n\\end{aligned}\n$$\n\nwhere $\\operatorname{PF}$ is the projection transformation of the datum for\n$a_X$ (the transformation of type (A3)), applied with first input $K$ and second\ninput $Ra_{X*}L$ on the point (not $L$), and\n$\\varepsilon_L:La_X^*Ra_{X*}L\\to L$ is the counit of the adjunction\n$La_X^*\\dashv Ra_{X*}$ of (A1). It is denoted\n$\\smile_c:R\\Gamma_c(X,K)\\otimes^L_\\Lambda R\\Gamma(X,L)\\to\nR\\Gamma_c(X,K\\otimes^L_{\\Lambda_X}L)$. At each of the four stages the composite\nis formed with the datum's own operations at that stage (the derived-complete\nintegral operations at $\\mathcal O_E$, the rationalized ones at $E$, and the\ncommon-finite-stage ones at $\\overline{\\mathbf Q}_\\ell$, as the datum specifies);\nno separate levelwise construction is part of this definition. The further\nassertions of the source sentence (agreement with the levelwise and transported\nconstruction, associativity, unitality, and graded-commutativity, the last of\nwhich needs a support-order convention because exchanging the factors moves the\ncompact support) are properties of this map, not clauses of this definition,\nand are not asserted here.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-identification/def-sf-cup.md",
   "place": "node def-sf-cup, order 2184"
@@ -19,9 +21,66 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mixedSupportCupProduct|projectionMap|derivedTensor",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mixed-support cup product on compactly supported derived etale cohomology via projection formula and adjunction counit",
+   "results": "Hits were Mayer–Vietoris/sheaf cohomology declarations; none defines this derived geometric cup product.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mixed-support cup product for compactly supported derived etale cohomology",
+   "results": "Hits were compact-support topology and continuous-map multiplication declarations; none matches.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mixedSupportCupProduct, projectionMap, derivedTensor",
+   "results": "0 hits; unknown identifier 'mixedSupportCupProduct'.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|mixedSupportCupProduct",
+   "results": "No Mathlib/CategoryTheory hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived projection transformation and adjunction counit cup product",
+   "results": "Generic CategoryTheory.Adjunction counit/derived-counit hits; no geometric mixed-support cup product.",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic adjunction counit declarations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.MonoidalCategory",
+   "results": "Generic monoidal-adjunction identities; no geometric projection/cup construction.",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic monoidal adjunction identities only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula followed by pullback pushforward counit defines cup product in a derived sheaf category",
+   "results": "SheafOfModules pullback/pushforward adjunction declarations; no derived compact-support cup product.",
+   "date": "2026-10-16",
+   "verdict": "generalization: underived sheaf adjunctions only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +105,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-identification"
+ "unit": "sk-thm-sf-identification",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sf-cup",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the current main-20261015 blueprint node (order 2528), the chapter/unit route, and the project source. The source declaration AlgebraicGeometry.Etale.mixedSupportCupProduct (PoincarePairing.lean:138-145) constructs the projection-map composite with second input Ra_*L followed by the La^* ⊣ Ra_* counit, but it does not state the item’s additional coefficient-stage transport or associativity/unital/graded-commutativity clauses, so this is a split definition rather than an attachment. The item is built from the six-functor datum and derived tensor already named in stmt_deps; no new node is needed. To satisfy the standalone-node requirement, the statement explicitly fixes the six-functor datum, the morphism a_X, the point s, the coefficient stage, and the RΓ_c/RΓ notation. The imported phrase applying projection to (K,L) was ill-typed and has been repaired to display the intermediate Ra_!(K ⊗^L La^*Ra_*L). The analogous blueprint node def-pod-mixed-support-cup-product was recorded in same_as; it is a distinct fixed-setting formulation with explicit right-support and coefficient-change clauses. Required Mathlib searches found no exact match; generic adjunction/sheaf hits were recorded as generalizations only. Maintainer reader (2026-10-17): repaired the displayed composite's TeX (literal \\n sequences in place of line breaks), named both arrows explicitly with the point tensor over Lambda_s, replaced the vague 'levelwise application and transport' clause by the datum's stage operations, and moved the source's associativity/unitality/graded-commutativity assertions out of the definition as unasserted properties (no citer uses them; thm-sf-identification and def-sf-pairing use only the composite).",
+  "blueprint": "node def-sf-cup, order 2528; definition composite and its stated coefficient-stage/coherence clauses",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-4812334ec",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-4812334ec (reviewer sub-agent of L); spot-checked: I read the full delivery: the def-sf-cup item and report, with no new nodes. The blueprint def-sf-cup text is word for word the same in master (order 2184) and main-20261015 (order 2528). I also read unit sk-thm-sf-identification, the cited nodes def-sf-datum (A1 counit of La^*⊣Ra_*, A3 type of PF with second input on the target) and def-weil-derived-tensor, the PF data in def-fix-six-functor-datum, def-exchange-projection and def-sf-pf, the citers def-sf-pairing and thm-sf-identification, the same_as node def-pod-mixed-support-cup-product, and the Lean mixedSupportCupProduct at PoincarePairing.lean:138-145. The second reader's correction of the PF input from L to Ra_{X*}L is right: (A3) for a_X needs its second argument on s. It matches the Lean and def-pod. Forming PF does not need Ra_*L to have finite Tor, because the PF of def-exchange-projection is defined on the ambient categories. Edge cases (X empty, X=s, K=Λ_X) behave as expected. The only duplicate candidate is def-pod; it is a different setting and both are blueprint nodes, so same_as is the right relation. Not attaching the Lean is correct, since it is étale and finite-level only. The Mathlib searches cover all three kinds, there is no SGA citation and no tool_uses. I repaired three faults in fixes/dag/nodes/sec-six-functors/def-sf-cup.json. (1) B4: the display had literal \\n sequences and missing line breaks and & alignment marks, so it did not render; I rewrote it with both arrows labelled and the point tensor written over Λ_s. (2) E5: the clause 'levelwise application and transport' now says the composite is formed with the datum's own operations at each stage. (3) The definition asserted that the product is associative, unital and graded-commutative, with no statement node. These do not follow from axioms A1-A6, and graded-commutativity has no meaning for a mixed-support product until a support-order convention is fixed. Following def-pod, they are now marked as properties this definition does not assert. No citer uses them, so no target is affected. I added one sentence to split_report.summary recording these repairs.; 1 file(s) fixed by the reviewer"
+ }
 }

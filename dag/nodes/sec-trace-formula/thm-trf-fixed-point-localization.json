@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-fixed-point-localization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Fixed-point localization",
@@ -22,73 +22,254 @@
   "def-trf-correspondence",
   "def-trf-fixed-scheme",
   "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "sk-d-trace"
  ],
  "proof": [
   {
-   "text": "All morphisms below are separated and of finite type between separated\nfinite-type $k$-schemes, hence exceptionally admissible at the finite\nstage ([thm-sf-preservation-class]).",
+   "text": "Write $a_X:X\\to s$, $a_C=a_Xc_2=a_Xc_1$ and $a_F:F\\to s$. The composition clause of [lem-weil-pbc-proper-fp-permanence] makes $a_C$ proper. Its base-change and composition clauses make $X\\times_sX$ proper over $s$: its second projection is a base change of $a_X$, and its structure map is that projection followed by $a_X$. Thus $s,X,C,F,X\\times_sX$ are all proper over $s$ (properness of $F$ is a hypothesis). For any $s$-morphism between these schemes, [lem-weil-pbc-proper-to-separated] applies with its source structure map and its separated target, and makes that morphism proper. This covers the legs, total correspondence map, fixed-square maps, diagonals and structure maps needed below, and also the maps to the point correspondence. In particular the two projections $X\\times_sX\\to X$ are maps from the proper product to the separated scheme $X$, so are proper by the same cited statement; the projections of $s\\times_ss$ are identities under its canonical identification with $s$. In particular they are separated finite type by [def-weil-proper-morphism].",
    "uses": [
-    "thm-sf-preservation-class"
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-to-separated",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, opening paragraph and The pushforward to the point: properness of the source and all relevant maps"
+   }
   },
   {
-   "text": "*The pushforward to the point.* Since $a_C=a_Xc_2$ with $a_X$ and $c_2$\nproper, $C$ is proper over $s$, and $a_C=a_Xc_1$ as well. Let\n$b=(\\operatorname{id}_s,\\operatorname{id}_s):s\\to s\\times_ss$ be the\npoint correspondence. Then $(f,g)=(a_X,a_C):(C,c)\\to(s,b)$ is a proper\npushforward diagram of [def-trf-coefficient-pushforward]\n($b_ig=a_C=a_Xc_i$). Its fixed scheme is $\\operatorname{Fix}(b)=s$, and\nthe induced map of fixed schemes is the structure morphism\n$h=a_F:F\\to s$. Put $K'=Ra_{X*}K$; since $a_X$ is proper,\n$Ra_{X*}=Ra_{X!}$ ([prop-functor-package], clause (3)), so\n$K'=R\\Gamma_c(X,K)$, a perfect $A$-complex by\n[prop-trf-compact-support-perfectness].",
+   "text": "At $Y=D=s$ take $b_1=b_2=\\operatorname{id}_s$. With $f=a_X$ and $g=a_C$, both maps are proper by step 1 and $b_ig=a_C=a_Xc_i$ for $i=1,2$. These are exactly the conditions of [def-trf-coefficient-pushforward]. [def-trf-fixed-scheme] defines the fixed scheme as the scheme-theoretic inverse image of the diagonal, with its fibre-product projections and relation $c\\circ i_F=\\Delta_X\\circ d$; its separated finite-type hypotheses hold by step 1. In particular this construction retains the scheme structure of the inverse image, including nilpotents. For $b$, this gives $F_b=s\\times_{s\\times_ss,b,\\Delta_s}s$. Identify $s\\times_ss$ with $s$; then $b$ and $\\Delta_s$ are identities. The two projections $i_b,d_b:F_b\\to s$ consequently agree. The universal property gives $e:s\\to F_b$ with $i_be=d_be=\\operatorname{id}_s$, and $ei_b=\\operatorname{id}_{F_b}$ because both its projections equal those of the identity. Thus $d_b=i_b$ identifies $F_b$ with $s$. The fixed-map equations in [def-trf-coefficient-pushforward] give $d_bh=a_Xd_c=a_F$, so under this identification the induced fixed map is precisely $h=a_F:F\\to s$.",
    "uses": [
     "def-trf-coefficient-pushforward",
+    "def-trf-fixed-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, The pushforward to the point: the diagram (a_X,a_C) and its fixed map"
+   }
+  },
+  {
+   "text": "The finite-coefficient constructible-domain exceptional adjunction in [prop-functor-package], together with the preservation assertion of [thm-sf-preservation-class], supplies the exceptional adjunction on $D^b_{ctf}$ for each separated finite-type map in step 1. Thus all the exceptional admissibility conditions required by [def-trf-kernel-pushforward-maps] hold for this diagram: $c,b$, the structure maps of $X,s,F,s$, and $f,g,h,i_c,i_b,d_c,d_b$, together with the projections from $X\\times_sX$ and $s\\times_ss$ used in external duality, are among those maps. The same observation verifies the exceptional admissibility required for the diagonal pair at $s$. Only the constructible exceptional inverse image is used here. Moreover $K'=Ra_{X*}K$ belongs to $D^b_{ctf}(s,A)$ by clause (iii) of [thm-sf-ctf-stability], so the pushed correspondence is within the coefficient domain of the trace comparison. Clauses (i) and (v) of [thm-sf-ctf-stability] also give $Lc_2^*K,Rc_1^!K\\in D^b_{ctf}(C,A)$. These complexes and $K$ are bounded constructible, so the explicit etale-origin assertion in [thm-sf-preservation-class] supplies bounded etale antecedents for them. Choose those antecedents with their comparison isomorphisms. Thus the inputs to the compact-support composition law in step 6 lie in its stated bounded-below etale-origin domain.",
+   "uses": [
     "prop-functor-package",
-    "prop-trf-compact-support-perfectness"
+    "thm-sf-preservation-class",
+    "def-trf-kernel-pushforward-maps",
+    "thm-sf-ctf-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, opening admissibility paragraph; hypotheses for Proper pushforward compatibility and Point normalization"
+   }
   },
   {
-   "text": "*The pushed coefficient map is the global operator.* In\n[def-trf-coefficient-pushforward], the ordinary half $\\gamma$ is the unit\n$\\eta_{a_C}$ followed by $Ra_{C*}c_2^*\\varepsilon_{a_X}$. Because\n$a_C=a_Xc_2$, the unit $\\eta_{a_C}$ is $\\eta_{a_X}$ followed by\n$Ra_{X*}\\eta_{c_2}a_X^*$, and the triangle identity\n$(Ra_{X*}\\varepsilon_{a_X})\\circ(\\eta_{a_X}Ra_{X*})=\\operatorname{id}$ of\n[fix-prop-adjunctions] cancels the counit; hence\n$\\gamma=Ra_{X*}\\eta_{c_2}$, followed by $Ra_{X*}Rc_{2*}=Ra_{C*}$ and\n$Rc_{2*}=Rc_{2!}$. These are the first two arrows of\n[def-trf-global-operator]. For $b_1=\\operatorname{id}_s$ the exceptional\nadjoint in the exceptional half is the identity, so $\\delta$ is the\ncomposition isomorphism $\\Xi_1$ of [thm-sf-comp-composition] followed by\n$Ra_{X!}\\varepsilon_{c_1}$, which are the last two arrows of\n[def-trf-global-operator]. Therefore\n\n$$\n[a_X,a_C]_!u=T_c(u):R\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K)\n$$\n\nas an endocorrespondence of $K'$ with support $s$.",
+   "text": "Proper coincidence in clause (3) of [prop-functor-package] gives $K'=Ra_{X*}K\\cong Ra_{X!}K$ as a sheaf complex on $s$. Put $P=\\operatorname{Fib}_s(K')$. The convention [def-trf-coefficient-conventions] identifies $P$ with $R\\Gamma_c(X,K)$; it does not identify the sheaf complex $K'$ itself with an ordinary module complex. Apply [lem-trf-global-operator-perfect] to the given admissible $(C,c,u)$, proper $c_2$ and $K\\in D^b_{ctf}(X,A)$. Its conclusion is explicitly in the sense of [def-trf-categorical-trace], whose category is $\\operatorname{Perf}(A)$, so $P$ is perfect and the endomorphism $T_c(u)$ has its categorical trace. This avoids inferring perfectness from bounded finite cohomology alone. The coevaluation, endomorphism tensor identity, symmetry and evaluation in [def-trf-categorical-trace] are exactly the four arrows defining the ordinary categorical trace of [sk-d-trace], specialized to $\\operatorname{Perf}(A)$; thus this is also the trace specified by the current unit.",
+   "uses": [
+    "prop-functor-package",
+    "def-trf-coefficient-conventions",
+    "lem-trf-global-operator-perfect",
+    "def-trf-categorical-trace",
+    "sk-d-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, The pushforward to the point: proper coincidence and perfectness"
+   }
+  },
+  {
+   "text": "Expand the ordinary half $\\gamma:K'\\to Ra_{C*}Lc_2^*K$ of [def-trf-coefficient-pushforward]. In this step set $F=La_X^*$, $R=Ra_{X*}$, $L=Lc_2^*$ and $S=Rc_{2*}$; these letters denote functors only in this calculation. Under the adjunction-compatible composition identifications of clause (3) of [fix-prop-adjunctions], its value at $K$ is\n$$\\gamma_K=RS L(\\varepsilon_{a_X,K})\\circ R\\eta_{c_2,FRK}\\circ\\eta_{a_X,RK}.$$\nNaturality of the unit $\\eta_{c_2}:\\operatorname{id}\\to SL$, applied to $\\varepsilon_{a_X,K}:FRK\\to K$, gives\n$$RS L(\\varepsilon_{a_X,K})\\circ R\\eta_{c_2,FRK}=R\\eta_{c_2,K}\\circ R\\varepsilon_{a_X,K}.$$\nThe ordinary triangle identity in clause (1) of [fix-prop-adjunctions] says $R\\varepsilon_{a_X,K}\\circ\\eta_{a_X,RK}=1_{RK}$. Hence $\\gamma_K=Ra_{X*}(\\eta_{c_2,K})$, with target identified by $Ra_{X*}Rc_{2*}\\cong Ra_{C*}$.",
    "uses": [
     "def-trf-coefficient-pushforward",
-    "fix-prop-adjunctions",
-    "def-trf-global-operator",
-    "thm-sf-comp-composition"
+    "fix-prop-adjunctions"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, The pushed coefficient map is the global operator: ordinary half gamma"
+   }
   },
   {
-   "text": "*Proper pushforward compatibility.* By\n[thm-trf-trace-proper-compatibility],\n\n$$\n(a_F)_*\\operatorname{Tr}_c(u)=\\operatorname{Tr}_b\\bigl(T_c(u)\\bigr)\n\\qquad\\text{in }\\operatorname{Hom}(A_s,\\omega_s)=A .\n$$\n\nSince $F$ is proper over $s$, the left side is the integral\n$\\int_F\\operatorname{Tr}_c(u)$ by [lem-trf-integration-as-pushforward].",
+   "text": "For the exceptional half in [def-trf-coefficient-pushforward], $b_1=\\operatorname{id}_s$. Identify the right adjoint to the identity with the identity by its counit; its inverse is its unit, since the two triangle equations for an adjunction with the identity say that their two composites are identities. Naturality of that counit says that, under this identification, the exceptional transpose is the original arrow. Use also the identity normalization of the composition law [thm-sf-comp-composition], on the etale-origin inputs verified in step 3. Consequently $\\delta$ is exactly\n$$Ra_{C*}Rc_1^!K\\cong Ra_{C!}Rc_1^!K\\xrightarrow{\\alpha_{a_X,c_1}^{-1}}Ra_{X!}Rc_{1!}Rc_1^!K\\xrightarrow{Ra_{X!}\\varepsilon_{c_1}}Ra_{X!}K\\cong K'.$$\nHere the starred-to-shriek identifications for $a_X,a_C,c_2$ are the proper-coincidence identifications of [prop-functor-package]. Write $j_C:Ra_{C*}\\xrightarrow{\\sim}Ra_{C!}$ for proper coincidence. Its naturality at $u$ is the equation $j_{C,Rc_1^!K}\\circ Ra_{C*}(u)=Ra_{C!}(u)\\circ j_{C,Lc_2^*K}$. The composition coherence of [prop-functor-package] identifies $j_C$ after $Ra_{X*}Rc_{2*}\\cong Ra_{C*}$ with proper coincidence for $a_X,c_2$ followed by $\\alpha_{a_X,c_2}$. Thus $v=[a_X,a_C]_!u=\\delta\\circ Ra_{C*}(u)\\circ\\gamma$ starts with the ordinary unit of step 5, uses $Rc_{2*}\\cong Rc_{2!}$ and compact-support composition to reach $Ra_{C!}Lc_2^*K$, applies $Ra_{C!}(u)$, and ends with the displayed exceptional counit. Applying $\\operatorname{Fib}_s$ therefore gives every arrow, in its specified order, of [def-trf-global-operator]. In particular\n$$\\operatorname{Fib}_s(v)=T_c(u):P\\to P.$$\nThe coefficient morphism $v$ itself is an endomorphism of $K'$ on the point correspondence. More explicitly, in the notation now specified by [def-trf-global-operator], write $p_{c_2}:Rc_{2!}\\xrightarrow{\\sim}Rc_{2*}$ and $\\gamma_{c_i}:Ra_{X!}Rc_{i!}\\xrightarrow{\\sim}Ra_{C!}$. The ordinary-side identification is $\\operatorname{Fib}_s(\\gamma_{c_2})\\circ\\operatorname{Fib}_s(Ra_{X!}(p_{c_2}^{-1}))$, and the exceptional-side identification is $\\operatorname{Fib}_s(\\gamma_{c_1}^{-1})$. These are exactly the comparisons just used; its remaining arrows are the same unit, $u$, and counit. All its separated finite-type and constructible-adjunction hypotheses were checked in steps 1 and 3.",
+   "uses": [
+    "def-trf-coefficient-pushforward",
+    "thm-sf-comp-composition",
+    "prop-functor-package",
+    "def-trf-global-operator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, The pushed coefficient map is the global operator: exceptional half delta and equality of the composites"
+   }
+  },
+  {
+   "text": "Apply [thm-trf-trace-proper-compatibility] to the proper pushforward diagram of step 2, with its exceptional hypotheses verified in step 3. Since its induced fixed map is $a_F$, the result is\n$$(a_F)_*\\operatorname{Tr}_c(u)=\\operatorname{Tr}_b(v).$$\nBy step 1 the structure map $a_F$ is separated finite type and by hypothesis is proper; its exceptional admissibility was checked in step 3. Therefore [lem-trf-integration-as-pushforward], at $T=F$ and $\\alpha=\\operatorname{Tr}_c(u)$, identifies the left side with $\\int_F\\operatorname{Tr}_c(u)$ in $\\operatorname{Hom}(A_s,\\omega_s)=A$.",
    "uses": [
     "thm-trf-trace-proper-compatibility",
     "lem-trf-integration-as-pushforward"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, Proper pushforward compatibility"
+   }
   },
   {
-   "text": "*Point normalization.* The correspondence $b$ is the diagonal of $s$, so\nby [lem-trf-trace-class-diagonal-pairing] the trace class\n$\\operatorname{Tr}_b(T_c(u))$ is the supported pairing\n$\\langle T_c(u),1_{K'}\\rangle_{\\mathrm{LV}}$, and by\n[prop-trf-pairing-point-normalization], applied to the perfect complex\n$P=K'$ with $u=T_c(u)$ and $v=1_{K'}$, this pairing is\n$\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma_c(X,K))$. Combining the three\ndisplays gives\n\n$$\n\\operatorname{tr}_A\\bigl(T_c(u)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\int_F\\operatorname{Tr}_c(u).\n$$",
+   "text": "The point correspondence $b$ is the diagonal of $s$. Apply [lem-trf-trace-class-diagonal-pairing] with $X=C=s$, coefficient $K'$, and coefficient morphism $v$. The finite-Tor and exceptional hypotheses hold by steps 1 and 3. It gives $\\operatorname{Tr}_b(v)=\\langle v,1_{K'}\\rangle_{\\mathrm{LV}}$. Since $k$ is algebraically closed, $\\operatorname{Fib}_s=\\Gamma(s,-)$ is an equivalence $D^b_c(s,A)\\to D^b_{\\mathrm{fin}}(A)$ by [lem-weil-point-fibre-equivalence]; hence $K'$ is isomorphic to the coefficient-sheaf version of the perfect complex $P=\\operatorname{Fib}_s(K')$ of step 4, and under this isomorphism $v$ corresponds to $\\operatorname{Fib}_s(v)$ and $1_{K'}$ to $1_P$. Transport of structure along this isomorphism leaves the supported pairing unchanged. The point normalization [prop-trf-pairing-point-normalization] therefore applies to this pair, whose underlying coefficient complex is the perfect $P$ of step 4. Its right-hand side is the ordinary categorical trace of $1_P\\circ\\operatorname{Fib}_s(v)$ on $P$. By step 6 this is $\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma_c(X,K))$. Substitute into step 7 and reverse the equality to obtain the required formula. No component decomposition, reducedness, smoothness, or Frobenius hypothesis is used.",
    "uses": [
     "lem-trf-trace-class-diagonal-pairing",
-    "prop-trf-pairing-point-normalization"
+    "prop-trf-pairing-point-normalization",
+    "lem-weil-point-fibre-equivalence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, Point normalization and the final equality"
+   }
   }
  ],
  "proof_deps": [
-  "thm-sf-preservation-class",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-to-separated",
+  "def-weil-proper-morphism",
   "def-trf-coefficient-pushforward",
+  "def-trf-fixed-scheme",
   "prop-functor-package",
-  "prop-trf-compact-support-perfectness",
+  "thm-sf-preservation-class",
+  "def-trf-kernel-pushforward-maps",
+  "thm-sf-ctf-stability",
+  "def-trf-coefficient-conventions",
+  "lem-trf-global-operator-perfect",
+  "def-trf-categorical-trace",
+  "sk-d-trace",
   "fix-prop-adjunctions",
-  "def-trf-global-operator",
   "thm-sf-comp-composition",
+  "def-trf-global-operator",
   "thm-trf-trace-proper-compatibility",
   "lem-trf-integration-as-pushforward",
   "lem-trf-trace-class-diagonal-pairing",
-  "prop-trf-pairing-point-normalization"
+  "prop-trf-pairing-point-normalization",
+  "lem-weil-point-fibre-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
-  "place": "## Proof"
+  "place": "Proof, expanded along the current sk-c-proper-global route; compare Varshavsky, Corollary 1.2.6 and its proof (leg indices interchanged)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier formula trace of a cohomological correspondence equals integral of its trace class over the fixed scheme",
+   "results": "8 hits: Algebra.intTraceAux, Algebra.trace_localization, LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero, Algebra.isIntegral_trace, SlashInvariantForm.coe_trace, LieModule.trace_comp_toEnd_genWeightSpace_eq, LieModule.traceForm_eq_sum_genWeightSpaceOf, Algebra.intTrace_eq_trace. These are ring, linear algebra, Lie or modular-form trace results.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, trace",
+   "results": "OK 0 hits; loogle: unknown identifier 'AlgebraicGeometry'. Query rejected; not evidence of absence.",
+   "verdict": "inconclusive: query rejected for an unknown identifier; the service responded",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "Lefschetz|Verdier|traceClass|trace_globalOperator",
+   "results": "25 hits, all registerTraceClass declarations in Mathlib tactics/utilities; no mathematical trace class or formula.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper cohomological correspondence categorical trace equals integral of Verdier trace class on fixed points",
+   "results": "8 hits: Algebra.intTrace_eq_trace, Matrix.trace_permutation, Algebra.intTrace.congr_simp, LinearMap.trace_eq_contract, LinearMap.trace_prodMap, LinearMap.trace_eq_contract', LinearMap.trace_eq_sum_trace_restrict, LinearMap.trace_eq_contract_apply. Ordinary module/matrix or algebra trace only.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Lefschetz trace formula cohomology with compact support of an etale sheaf",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; groupCohomology.Hilbert90.aux; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, exists_appTop_π_eq_of_isLimit, exists_app_map_eq_map_of_isLimit, exists_appTop_map_eq_zero_of_isLimit, exists_of_res_zero_of_qcqs_of_top, exists_of_res_eq_of_qcqs_of_top. No sheaf trace formula.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalCategory.trace",
+   "results": "OK 0 hits; loogle: unknown identifier 'MonoidalCategory.trace'. Query rejected; not evidence of absence.",
+   "verdict": "inconclusive: query rejected for an unknown identifier; the service responded",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "Lefschetz|Verdier|cohomological.*correspondence|borelMoore",
+   "results": "OK 0 hits in Mathlib/AlgebraicGeometry.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"cohom\"",
+   "results": "OK 0 hits.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lefschetz trace formula for etale sheaves on a proper scheme fixed point trace class",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instIsProperOfIsFinite, trace_eq_sum_automorphisms, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, Matrix.trace_permutation. Properness, etale definitions and field/permutation traces do not state this item.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace of an endomorphism on compactly supported cohomology equals the integral of its cohomological correspondence trace class",
+   "results": "OK 8 hits: SlashInvariantForm.coe_trace, FDRep.character, ModularForm.coe_trace, Algebra.normalizedTrace_eq_of_fininteDimensional, Algebra.normalizedTrace_eq_of_finiteDimensional, CuspForm.coe_trace, Algebra.normalizedTrace_eq_of_finiteDimensional_apply, Algebra.normalizedTrace_eq_of_fininteDimensional_apply. Modular-form traces, a representation character and normalized field traces; none concerns sheaf cohomology or trace classes.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"DerivedCategory\"",
+   "results": "OK 0 hits; valid quoted-name pattern.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "traceClass|supportedPairing|cohomologicalCorrespondence|globalOperator",
+   "results": "OK 25 returned hits, all registerTraceClass tracing infrastructure. This substring query is noisy; rerun with word boundaries recorded separately.",
+   "verdict": "inconclusive: noisy substring hits; refined grep follows",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(traceClass|supportedPairing|cohomologicalCorrespondence|globalOperator)\\b",
+   "results": "OK 0 hits in the full Mathlib source, using word boundaries to avoid registerTraceClass.",
+   "verdict": "no match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(Lefschetz|Verdier|cohomologicalCorrespondence|traceClass)\\b",
+   "results": "OK 25 returned hits. Lefschetz-principle references and citations of Verdier on homotopy/triangulated categories; no cohomological correspondence or trace-class formula among the returned hits. This broad-name query is not evidence of exhaustive absence.",
+   "date": "2026-10-17",
+   "verdict": "no match among returned hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz formula for the trace of compact support cohomology of a proper correspondence and its fixed locus",
+   "results": "OK 8 hits: CompactlySupportedContinuousMap.compLinearMap, continuousCohomology, CompHausLike.LocallyConstant.incl_comap, LocallyConstant.comapₗ, Profinite.NobelingProof.Linear_CC'₀, FDRep.average_char_eq_finrank_invariants, groupCohomology.map_H0Iso_hom_f_apply, LocallyConstant.comapₗ_apply_apply. Compactly supported continuous functions, continuous/group cohomology, locally constant functions and representation characters; none states a sheaf-correspondence trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match among returned hits"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -138,5 +319,20 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-c-proper-global"
+ "unit": "sk-c-proper-global",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-fixed-point-localization",
+  "worker": "stage1",
+  "summary": "Q110 checked the current blueprint statement and unit, the older detailed proof, Varshavsky 1.2.2–1.2.6, and every cited DAG statement. Eight explicit steps reuse existing nodes only. Properness supplies all geometric hypotheses; constructible exceptional admissibility and the point coefficient domain are verified, the ordinary-unit cancellation is written out, and the sheaf complex is kept distinct from its fibre. Perfectness uses lem-trf-global-operator-perfect in the precise category of def-trf-categorical-trace, not the weaker unqualified finite-cohomology assertion. No statement change or new node. The matching abstract Lean theorem ends in sorry and is not attached. The generic trace definition sk-d-trace is explicitly reached by comparing its four defining arrows with the perfect-complex model. Independent second reading made the bounded etale-origin inputs to compact-support composition explicit using the already cited preservation/stability statements, and wrote the proper-coincidence naturality equation used in the operator comparison. No additional dependency or statement change. Repair of return at c10da8c708: re-read the current fixed-scheme definition and all cited statements; replaced the obsolete fixed-scheme citation witness with its present diagonal, fibre-product and projection clauses. Step 2 now explicitly constructs the point fixed-scheme isomorphism from its projections and identifies the induced fixed map. Its separated finite-type hypotheses were checked in step 1. No statement, dependency, unit route or new-node change. The first rebased dry run additionally detected a newly updated global-operator definition; its explicit proper-coincidence/composition maps agree with step 6, which now identifies them by name. Refreshed that witness too. Continuation of the returned-delivery repair: all 24 witnesses were checked against the present shared DAG, and every full cited statement was re-read. Step 2 explicitly retains the scheme structure in the inverse-image construction. The latest global-operator definition is used only for its composite in D(A); perfectness continues to come from the separately cited lemma. The current source theorem remains sorried. The rebased citation gate detected a subsequent kernel-pushforward-definition update: refreshed its hypothesis witness and explicitly included the product projections in steps 1 and 3, applying the same proper-source-to-separated-target lemma. Fresh second reading refreshed the three coefficient-pushforward witnesses to its current fixed-map, ordinary-half and exceptional-half clauses; the formulas used by the proof are unchanged. Two independent Mathlib searches were run and their actual returned hits recorded.",
+  "blueprint": "Current main-20261015 sk-c-proper-global and thm-trf-fixed-point-localization: proper pushforward to the point, identification of the pushed coefficient map with the global operator, integration on fixed supports and point normalization. The older detailed node proof is realized by steps 1–3 (geometry/admissibility), 4 (perfectness and point fibre), 5–6 (ordinary and exceptional halves), 7 (pushforward), and 8 (normalization)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-127d3aea5",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-127d3aea5 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit with the item, the unit realized fields and the report, and no new nodes. The statement is word for word the main-20261015 and master statement, with no hypothesis dropped. The unit's added 'RΓ_c perfect' assumption is proved in step 4 through lem-trf-global-operator-perfect, whose category def-trf-categorical-trace fixes as Perf(A). The route is the blueprint's: proper pushforward to the point, the pushed coefficient map equals the global operator, then trace–proper compatibility, integration, the diagonal pairing and point normalization. This matches Varshavsky Cor. 1.2.6 and its proof (via 1.1.7(a), 1.2.3, Prop. 1.2.5), with his ordinary leg c_1 being the project's c_2. Every cited statement's unit is in the transitive closure of sk-c-proper-global, so no tool_uses are needed. I checked each step: step 1 properness via the 01W3/01W4 leaves and IsProper.of_comp; step 2 F_b≅s and h=a_F through the fibre-product universal property; step 3 the ctf domains (stability (i),(iii),(v), preservation (2), étale origin); step 4 perfectness; step 5 I recomputed γ=Ra_{X*}η_{c_2} from fix-prop-adjunctions (1) and (3) plus naturality; step 6 matches def-trf-global-operator arrow for arrow (p_{c_2}^{-1}, γ_{c_2}, u, γ_{c_1}^{-1}, ε), with proper coincidence compatible with composition through the compactification cocycle; step 7 all hypotheses discharged. Edge cases checked: X=C=F=s, K=0, X empty, F empty, nilpotent C, n=1. No duplicate in the DAG; thm-trf-lefschetz-verdier is the component-sum user. FIX (C1): step 8 applied prop-trf-pairing-point-normalization, stated for perfect A-complexes, to the sheaf complex K' on s, using the equivalence Fib_s=Γ(s,–) without citing it. I added lem-weil-point-fibre-equivalence (reviewed, on route via sk-def-sf-admissible, no cycle) to step 8's uses and proof_deps, with the transport sentence. Corrected file: fixes/dag/nodes/sec-trace-formula/thm-trf-fixed-point-localization.json.; 1 file(s) fixed by the reviewer"
+ }
 }

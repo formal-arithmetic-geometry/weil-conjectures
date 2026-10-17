@@ -32,9 +32,90 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the precise pushout cocones supplied by localization. Pass to $\\mathcal A^{op}$, with terminal object $0$, fibrations $C^{op}$ and weak equivalences $W^{op}$. The factorization reverses to a weak equivalence followed by a fibration; every terminal map is a fibration; and the two pullback-stability assumptions are exactly the opposites of the two pushout-stability assumptions. Thus [lem-coef-brown-fibrant-localization-pullbacks] applies. Taking opposites gives a localization $q':N\\mathcal A\\to L'$ sending $0$ to an initial object and each pushout along $C$ to a coherent pushout. Here opposite simplicial sets are formed by reversing the ordinals: this exchanges inner horns and identifies $\\operatorname{Fun}(U^{op},V)$ with $\\operatorname{Fun}(U,V^{op})^{op}$. It therefore exchanges the defining cone and cocone categories and preserves the localization universal property. To check the mapping-space convention in this reversal, [lem-coef-infinity-pinch-comparison] identifies right-pinched spaces with arrow mapping spaces; ordinal reversal identifies the latter with the reversed arrow spaces, whose realizations are homeomorphic by reversing barycentric coordinates. Hence the contractibility defining initial and terminal objects is exchanged as required. Since $q$ and $q'$ have the entire-functor-category localization property, factor each through the other. Full faithfulness of restriction lifts the identity comparisons to coherent natural equivalences of the composites with the identities. This gives an equivalence $L'\\simeq L$ compatible with $q',q$. An equivalence and its quasi-inverse induce inverse equivalences on cocone categories; by [lem-cbc-enhanced-functor-cone-calculus] they preserve initial objects there. Consequently $q0$ is initial in $L$, and the actual image under $q$ of every ordinary cofibration pushout square is a pushout cocone.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.5.6, first part, dualized; Definition 7.1.2 for uniqueness of localization. Agent expansion of opposite and cocone conventions."
+   }
+  },
+  {
+   "text": "Let $K$ be the span simplicial set consisting of two copies of $\\Delta^1$ glued along their source, and let $d:K\\to L$ have legs $\\alpha:d_a\\to d_x$ and $\\beta:d_a\\to d_y$. By [lem-coef-brown-left-fractions], choose equivalences $qA\\simeq d_a$, $qX\\simeq d_x$, and $qY\\simeq d_y$. Apply [lem-coef-infinity-isofibration-exponentiation] to the inclusion of the three vertices into $K$: restriction $\\operatorname{Fun}(K,L)\\to\\operatorname{Fun}(K_0,L)$ is an isofibration. Lift the chosen inverse vertex equivalences, starting at $d$. This gives an actual span $d_0=(qX\\xleftarrow{\\alpha_0}qA\\xrightarrow{\\beta_0}qY)$ and a coherent equivalence $d\\simeq d_0$, not just a diagram in $hL$.\nThe fraction assertion of [lem-coef-brown-left-fractions] gives\n$$[\\alpha_0]=[q(s)]^{-1}[q(f)],\\quad [\\beta_0]=[q(t)]^{-1}[q(g)],$$\nwhere $f:A\\to Z_x$, $g:A\\to Z_y$, $s:X\\to Z_x$ and $t:Y\\to Z_y$, with $s,t\\in C\\cap W$. Lift the vertex equivalence $(1_{qA},q(s),q(t))$ through the same restriction isofibration starting at $d_0$. This produces a coherent equivalence $d_0\\simeq d_1$, where $d_1$ has vertices $qA,qZ_x,qZ_y$ and legs $h_x,h_y$. Each of its two naturality squares consists of two triangles; the triangle-composition assertion of [lem-coef-infinity-mapping-composition] gives $[h_x]=[q(s)][\\alpha_0]=[q(f)]$ and $[h_y]=[q(t)][\\beta_0]=[q(g)]$.\nThese equalities give paths between the respective edges in the right-pinched mapping spaces. By [lem-coef-infinity-pinch-comparison] they give paths in the Kan arrow spaces $U_L(qA,qZ_x)$ and $U_L(qA,qZ_y)$. The fiber of $\\operatorname{Fun}(K,L)\\to\\operatorname{Fun}(K_0,L)$ over these vertices is exactly their product: a map on $K\\times\\Delta^n$ is precisely two maps on $\\Delta^1\\times\\Delta^n$ agreeing on their common constant source. A path component in a Kan complex is represented by a single edge, using outer 2-horn fillers to reverse and concatenate finite edge paths. Thus the two paths define a coherent transformation $d_1\\to qN(D)$ with identity vertex components, where $D=(Z_x\\xleftarrow{f}A\\xrightarrow{g}Z_y)$. It is an equivalence by [lem-cbc-enhanced-functor-cone-calculus]. Composing in the quasicategory $\\operatorname{Fun}(K,L)$ gives $d\\simeq qN(D)$.\nFactor $f$ as $A\\xrightarrow{i}X'\\xrightarrow{p}Z_x$, with $i\\in C$ and $p\\in W$. The strict span $D'=(X'\\xleftarrow{i}A\\xrightarrow{g}Z_y)$ maps to $D$ by $(p,1_A,1_{Z_y})$, hence becomes a coherent equivalence after $q$ by the same componentwise criterion. Form the ordinary pushout $P=X'\\amalg_A Z_y$, which exists because $i\\in C$. Step 1 says its specified square is a pushout cocone on $qN(D')$. Therefore every coherent span has a pushout model with a coherent equivalence to its underlying span.",
+   "uses": [
+    "lem-coef-brown-left-fractions",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.5.6, proof on printed p. 373, dualized: fraction representation of spans followed by cofibration factorization. Agent expansion of the coherent span comparison using the cited restriction-isofibration and mapping-space statements."
+   }
+  },
+  {
+   "text": "Write $F=\\overline T$ and let $\\beta:Fq\\simeq T$ be the coherent natural equivalence furnished by localization. Let $\\sigma:d\\to\\Delta_Kp$ be a specified pushout cocone on a span $d$ in $L$. Step 2 gives an ordinary cofibration pushout with apex $P$, underlying span $c=qN(D')$, and a coherent equivalence $e:c\\simeq d$. Put $\\mathscr D=\\operatorname{Fun}(K,L)$. By [lem-coef-infinity-isofibration-exponentiation], endpoint restriction $\\operatorname{Fun}(\\Delta^1,\\mathscr D)\\to\\mathscr D\\times\\mathscr D$ is an isofibration. Starting at the arrow $\\sigma$, lift the equivalence $(e^{-1},1_{\\Delta_Kp})$ of endpoint pairs. Its target is a cocone $\\sigma_0:c\\to\\Delta_Kp$, and the lifted equivalence compares the full cocones $\\sigma,\\sigma_0$, including their coherence and with identity apex component. The dual invariance clause of [lem-coef-infinity-terminal-pullback-criterion] implies that $\\sigma_0$ is colimiting.\nThe canonical cocone $\\lambda:c\\to\\Delta_K(qP)$ is colimiting by step 1. Both $\\sigma_0$ and $\\lambda$ are therefore initial objects of the same cocone category. By [lem-cbc-enhanced-functor-cone-calculus], its full subcategory of initial objects is a contractible Kan complex, so there is an equivalence of these cocones. Applying $F$ preserves its inverse edges and triangle witnesses. Restricting $\\beta$ to the canonical square gives a coherent equivalence of its $Fq$-image with its $T$-image. The latter is a pushout by the hypothesis on $T$, since the ordinary square is along $i\\in C$. The dual invariance clause just cited first makes $F\\lambda$ colimiting, then $F\\sigma_0$ colimiting, and finally $F\\sigma$ colimiting via the image of the lifted equivalence. This proves preservation of every specified pushout cocone with its legs and compatibility homotopies. Also $F(q0)\\simeq T0$ is initial. Every initial object in $L$ is equivalent to $q0$ by the initial-object contractibility assertion of cone calculus; applying $F$ and invariance of initiality proves preservation of every initial object.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-terminal-pullback-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.5.6, last assertion, printed p. 373 (dualized); explicit cocone and natural-equivalence argument."
+   }
+  },
+  {
+   "text": "The pushout $B\\amalg_0 D$ in either $L$ or $\\mathcal E$ is a binary coproduct. Indeed the dual mapping-space criterion of [lem-coef-infinity-terminal-pullback-criterion] gives, for every target $z$,\n$$\\operatorname{Map}(B\\amalg_0D,z)\\simeq\\operatorname{Map}(B,z)\\times^h_{\\operatorname{Map}(0,z)}\\operatorname{Map}(D,z)\\simeq\\operatorname{Map}(B,z)\\times\\operatorname{Map}(D,z),$$\nsince $0$ is initial and its mapping space to $z$ is contractible. The equivalence is induced by the two cocone legs, hence is the coproduct universal property by [lem-cbc-enhanced-functor-cone-calculus]. Step 3 sends the defining square to a pushout square over the initial object $F0$, so it sends these same two legs to coproduct legs. Starting with the empty coproduct $0$ and adjoining one summand at a time proves preservation of coproducts indexed by every finite set: at the induction step the mapping space out of the iterated binary coproduct is the product of the mapping spaces out of all summands, with its specified projection maps. Uniqueness of initial objects in each cocone category then gives preservation for every coproduct cocone, independently of the chosen ordering or binary presentation.",
+   "uses": [
+    "lem-coef-infinity-terminal-pullback-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.3.28, finite-product reduction used in its proof, dualized; binary coproduct argument from the mapping-space criterion (Theorem 6.6.9)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-limits-products-pullbacks] with $\\kappa=\\aleph_0$ to $F^{op}:L^{op}\\to\\mathcal E^{op}$. Its existence hypotheses hold because $L$ and $\\mathcal E$ admit colimits of all simplicial diagrams with finitely many nondegenerate simplices, and ordinal reversal preserves this finiteness. Step 3 gives preservation of pullbacks after reversal, and step 4 gives preservation of products indexed by every finite set, including the empty product. The cited node explicitly includes $\\kappa=\\aleph_0$ and concludes preservation of all such limiting cones. Reversing again, using the cone/cocone and mapping-space identifications of step 1, shows that $F$ sends every finite coherent colimiting cocone to a colimiting cocone. This is exactly preservation of finite coherent colimits by $\\overline T$.",
+   "uses": [
+    "lem-coef-infinity-limits-products-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.3.28 applied to opposites, as used in Example 7.5.4 and the last assertion of Proposition 7.5.6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-brown-fibrant-localization-pullbacks",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-brown-left-fractions",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-terminal-pullback-criterion",
+  "lem-coef-infinity-limits-products-pullbacks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Agent expansion of the dual of Proposition 7.5.6, printed pp. 372-373; Proposition 7.3.28 for finite preservation. The PDF was read online; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +159,145 @@
    "results": "{\"t\": \"2026-10-16T21:49:53Z\", \"tool\": \"leanfinder\", \"query\": \"A functor preserving finite homotopy colimits extends over localization of a cofibration category and its derived functor preserves finite homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"1f332edbe0604f3f\"}",
    "date": "2026-10-16",
    "verdict": "No match: derived-category exact-functor lifts concern ordinary derived categories of abelian categories; CofibrantObject.HoCat.toLocalization and the derivability-structure instances require ModelCategory and ordinary localization. None provides extension of a coherent Brown functor with preservation of finite coherent colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from a category of cofibrant objects to a quasicategory preserving initial objects and cofibration pushouts induces a finite colimit preserving functor on its infinity localization",
+   "results": "{\"t\": \"2026-10-16T22:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"A functor from a category of cofibrant objects to a quasicategory preserving initial objects and cofibration pushouts induces a finite colimit preserving functor on its infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"df1f80208074bdf2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteColimits|preserves.*[Pp]ushout",
+   "results": "{\"t\": \"2026-10-16T22:23:51Z\", \"tool\": \"grep\", \"query\": \"PreservesFiniteColimits|preserves.*[Pp]ushout\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567.",
+   "sub": "CategoryTheory/Localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An infinity localization of a Brown cofibration category universally extends right exact functors to finite coherent colimit preserving functors",
+   "results": "{\"t\": \"2026-10-16T22:23:51Z\", \"tool\": \"leansearch\", \"query\": \"An infinity localization of a Brown cofibration category universally extends right exact functors to finite coherent colimit preserving functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.rightExactFunctor\", \"CategoryTheory.RightExactFunctor\", \"CategoryTheory.rightExactFunctor_iff\", \"CategoryTheory.RightExactFunctor.of\", \"CategoryTheory.instPreservesFiniteColimitsObjFunctorRightExactFunctor\", \"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsoOfIsLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"a6bbaa2f037979d2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"PreservesFiniteColimits\"",
+   "results": "{\"t\": \"2026-10-16T22:23:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"PreservesFiniteColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopical functor preserving initial objects and homotopy pushouts descends to a right exact functor on the quasicategorical localization",
+   "results": "{\"t\": \"2026-10-16T22:23:53Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopical functor preserving initial objects and homotopy pushouts descends to a right exact functor on the quasicategorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"CategoryTheory.Functor.IsRightDerivedFunctor\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'\"], \"digest\": \"7bbac37c240a7456\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567."
+  },
+  {
+   "tool": "grep",
+   "query": "toLocalization|instIsLocalizationCompιWeakEquivalences",
+   "results": "{\"t\": \"2026-10-16T22:25:04Z\", \"tool\": \"grep\", \"query\": \"toLocalization|instIsLocalizationCompιWeakEquivalences\", \"sub\": \"AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"249\", \"254\", \"258\", \"261\", \"263\"], \"digest\": \"872491d8aa54a66e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567.",
+   "sub": "AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteColimits_of_preservesInitial_and_pushouts",
+   "results": "{\"t\": \"2026-10-16T22:25:09Z\", \"tool\": \"grep\", \"query\": \"preservesFiniteColimits_of_preservesInitial_and_pushouts\", \"sub\": \"CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"556\", \"569\"], \"digest\": \"230ad7dcd1d520ed\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567.",
+   "sub": "CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "rightExactFunctor|variable",
+   "results": "{\"t\": \"2026-10-16T22:25:19Z\", \"tool\": \"grep\", \"query\": \"rightExactFunctor|variable\", \"sub\": \"CategoryTheory/Limits/ExactFunctor.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"30\", \"34\", \"40\", \"65\", \"68\"], \"digest\": \"51e178adbe87cd22\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits concern ordinary Category functors/localizations or model-category homotopy categories, not a Brown infinity localization or coherent colimits. Read Mathlib/CategoryTheory/Limits/ExactFunctor.lean:30,65-72, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252, and Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567.",
+   "sub": "CategoryTheory/Limits/ExactFunctor.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteColimits|preserves.*[Pp]ushout",
+   "results": "{\"t\": \"2026-10-17T00:31:57Z\", \"tool\": \"grep\", \"query\": \"PreservesFiniteColimits|preserves.*[Pp]ushout\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion.",
+   "sub": "CategoryTheory/Localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"PreservesFiniteColimits\"",
+   "results": "{\"t\": \"2026-10-17T00:31:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"PreservesFiniteColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor on a category of cofibrant objects preserving weak equivalences initial objects and cofibration pushouts induces a finite colimit preserving functor of quasicategories",
+   "results": "{\"t\": \"2026-10-17T00:31:58Z\", \"tool\": \"leansearch\", \"query\": \"A functor on a category of cofibrant objects preserving weak equivalences initial objects and cofibration pushouts induces a finite colimit preserving functor of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.createsFiniteColimitsOfCreatesInitialAndPushouts\", \"CategoryTheory.Limits.preservesFiniteColimits_of_preservesInitial_and_pushouts\", \"CategoryTheory.Limits.PreservesFiniteColimits.casesOn\", \"CategoryTheory.Limits.IsInitial.isInitialObj.congr_simp\", \"HomotopicalAlgebra.CofibrantObject.ι\", \"CategoryTheory.Limits.isColimitOfHasInitialOfPreservesColimit\", \"CategoryTheory.Limits.IsInitial.isInitialObj\", \"CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor\"], \"digest\": \"c5074410426eb496\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right exact functor on a Brown cofibration category descends to an infinity localization and preserves finite coherent colimits",
+   "results": "{\"t\": \"2026-10-17T00:31:59Z\", \"tool\": \"leanfinder\", \"query\": \"A right exact functor on a Brown cofibration category descends to an infinity localization and preserves finite coherent colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.Derives.hasPointwiseRightDerivedFunctor\", \"CategoryTheory.Functor.IsRightDerivedFunctor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"697efae3fd6fc593\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinity localization of a cofibration category is universal for functors preserving homotopy pushouts and initial objects",
+   "results": "{\"t\": \"2026-10-17T00:32:37Z\", \"tool\": \"leanfinder\", \"query\": \"Infinity localization of a cofibration category is universal for functors preserving homotopy pushouts and initial objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"7ae0bca50f913b2e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "guitartExact_of_isRightDerivabilityStructure|guitartExact_of_isLeftDerivabilityStructure",
+   "results": "{\"t\": \"2026-10-17T00:32:37Z\", \"tool\": \"grep\", \"query\": \"guitartExact_of_isRightDerivabilityStructure|guitartExact_of_isLeftDerivabilityStructure\", \"sub\": \"CategoryTheory/Localization/DerivabilityStructure\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\"], \"digest\": \"90046993675f818c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion.",
+   "sub": "CategoryTheory/Localization/DerivabilityStructure"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteColimits_of_preservesInitial_and_pushouts",
+   "results": "{\"t\": \"2026-10-17T00:32:38Z\", \"tool\": \"grep\", \"query\": \"preservesFiniteColimits_of_preservesInitial_and_pushouts\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/MorphismProperty.lean\"], \"digest\": \"5c61aafb52ff8119\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion.",
+   "sub": "CategoryTheory/Limits"
+  },
+  {
+   "tool": "grep",
+   "query": "toLocalization",
+   "results": "{\"t\": \"2026-10-17T00:32:38Z\", \"tool\": \"grep\", \"query\": \"toLocalization\", \"sub\": \"AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"249\", \"254\", \"258\", \"261\", \"263\"], \"digest\": \"872491d8aa54a66e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Inspected Mathlib CategoryTheory/Localization/DerivabilityStructure/Basic.lean:119-125,176-182, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:244-252 and CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:556-567. These are ordinary-category localization, derivability or finite-colimit results; none states the Brown quasicategorical extension or finite coherent colimit conclusion.",
+   "sub": "AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|QuasiCategory",
+   "results": "{\"t\": \"2026-10-17T01:14:09Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|QuasiCategory\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The semantic hits concern ordinary model categories, homotopy-category localization or finite-colimit existence. Read CofibrantObjectHomotopy.lean:244-252 and LimitsOfProductsAndEqualizers.lean:556-567; these do not state the Brown quasicategorical extension. The grep found no quasicategory terminology in CategoryTheory/Localization.",
+   "sub": "CategoryTheory/Localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between relative categories inducing an infinity localization preserves finite homotopy colimits if it preserves the initial object and cobase changes of cofibrations",
+   "results": "{\"t\": \"2026-10-17T01:14:11Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between relative categories inducing an infinity localization preserves finite homotopy colimits if it preserves the initial object and cobase changes of cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\"], \"digest\": \"c18d2d59219ab01c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The semantic hits concern ordinary model categories, homotopy-category localization or finite-colimit existence. Read CofibrantObjectHomotopy.lean:244-252 and LimitsOfProductsAndEqualizers.lean:556-567; these do not state the Brown quasicategorical extension. The grep found no quasicategory terminology in CategoryTheory/Localization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-localization-products",
@@ -101,5 +317,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-right-exact-extension",
+  "worker": "stage1",
+  "summary": "Preserved the statement and Brown hypotheses. Five steps construct localized cofibration pushouts, rectify arbitrary spans using Brown fractions and explicit lifts through vertex restriction, compare full pushout cocones under the localized functor, establish finite coproduct preservation, and invoke the finite coherent limit-preservation criterion on opposites. Reused all foundational nodes; no new nodes, Mathlib leaves or project attachment. Second reading expands cocone comparison through endpoint isofibration and the stated invariance criterion.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient adjunction before the inverse limit: coherent-diagram foundations through the existing products-of-Brown-localizations branch. Current main-20261015 proof has the same mapping-limit calculation. The five steps realize the dual of Cisinski Proposition 7.5.6, last assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-83d1aa624",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-83d1aa624 (reviewer sub-agent of L); spot-checked: Read in full the item, its five steps, the full statements of all nine cited nodes, and the unit sk-prop-sf-biduality-general. Source: Cisinski's book is not in literature/ (the WANTED line stands) and network is blocked, so I read a local text copy at /tmp/catlr-nd/c.txt at Def 7.5.2, Ex 7.5.4, Prop 7.5.6 with its full proof (pp. 370-373), Prop 7.3.28 (p. 357) and Def 7.1.2. Statement: the item is exactly the dual of the last assertion of 7.5.6, read as preservation of finite coherent colimits via 7.3.28. It is unchanged, with nothing weakened. Step 1: every hypothesis of brown-fibrant-localization-pullbacks holds on A^op; C-then-W factorization is the dual of W-then-F. Step 2: uses only two clauses of brown-left-fractions. The isofibration node gives actual coherent span equivalences. Each naturality square is two 2-simplices, so mapping-composition gives [h_x]=[q(f)]. The fiber over the fixed vertices is UxU, so a single Kan edge gives the transformation, and the componentwise criterion makes it an equivalence. The step correctly avoids brown-finite-direct-rectification, which cites this item and would make a cycle. Step 3: endpoint isofibration plus the invariance clause of terminal-pullback-criterion, and contractibility of initial objects, carry the argument; F's preservation is never assumed. Step 4: the pushout over 0 is the coproduct, because a homotopy pullback over a contractible base is the product; this is routine in the cited path-space model and I accept it inside the step. Step 5: limits-products-pullbacks applied to F^op; it covers kappa=aleph_0 and the empty product. No new nodes; no duplicate or generalization found in the DAG; no cycle. Accepted tool_use for the merge to record: lem-cbc-enhanced-functor-cone-calculus, which is off the unit's route but is the generic cone calculus already accepted on sibling nodes of this unit. No changes made."
  }
 }

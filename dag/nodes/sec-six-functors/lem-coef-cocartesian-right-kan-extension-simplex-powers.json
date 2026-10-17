@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Gepner--Haugseng Proposition 4.2.3(3), using Remark 4.1.2: the right Kan extension i_* along i:{[0]}→Δ^op and the adjunction i^*⊣i_* used to construct the comparison map from the string nerve.",
+   "place": "Proof, second paragraph of prop-coef-integral-exceptional-adjoint.proof.md in main-20261015/sk-thm-sf-package: the displayed finite-coefficient derived mapping-complex adjunction before taking R lim. Through the recorded support ancestry, this item supplies the right-Kan adjunction used by lem-coef-simplicial-operator-nerve step 6 to realize the enriched diagram comparison.",
    "via": [
     "lem-coef-simplicial-operator-nerve",
     "lem-coef-many-object-operad-accessibility",
@@ -30,41 +30,158 @@
   "def-coef-infinity-fibrations",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J=N(\\Delta^{\\mathrm{op}})$ and let $A=\\{[0]\\}\\subseteq J$. This is a full subcategory: the only endomorphism of $[0]$ is the identity. For a vertex $[n]$ of $J$, the coslice $L_n=A\\times_J J_{[n]/}$ is discrete with objects the arrows $\\rho_j:[n]\\to[0]$, $0\\leq j\\leq n$. Indeed such an arrow is opposite to a monotone map $[0]\\to[n]$, hence a choice of vertex $j$; a simplex whose entire tail lies in $A$ has all tail arrows identities, so it is a degeneracy of that chosen arrow. Consequently, for $h:A\\to\\operatorname{Cat}_\\infty$ with value $C$, the diagram $h|_{L_n}$ is the constant $n+1$-term discrete diagram. The finite-product clause of [lem-coef-cocartesian-straightening] supplies its limit $P_n=C^{n+1}$ with the coordinate projections. In mapping-space form this says $\\operatorname{Map}(T,P_n)\\simeq\\prod_{j=0}^n\\operatorname{Map}(T,C)$. Apply the dual constant-source test in [lem-coef-infinity-relative-cone-constant-test] to $p:\\operatorname{Cat}_\\infty\\to *$: both lower mapping spaces in its square are points, so the product cone is exactly the required $p$-limit lift over the unique base cone. All $L_n$ and their cones are small in the fixed input universe. At $n=0$ this is the one-factor cone $C\\xrightarrow{\\mathrm{id}}C$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-relative-cone-constant-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.1.1 and Remark 4.1.2: calculation of the right-Kan indexing categories and their product limits."
+   }
+  },
+  {
+   "text": "Apply the right-hand dual of [lem-coef-infinity-relative-kan-existence] with full subcategory $A\\subseteq J$, $\\mathcal D=\\operatorname{Cat}_\\infty$, $\\mathcal B=*$, $s:J\\to *$ the unique diagram and $h([0])=C$. The map $p:\\mathcal D\\to *$ is an isofibration: its inner lifting problems are those of the quasicategory $\\mathcal D$, and the only base equivalence lifts by an identity. Step 1 provides all its prescribed local $p$-limit lifts, including the cone at $[0]$. Thus there is a coherent functor $G_C:J\\to\\operatorname{Cat}_\\infty$ with $G_C|_A=h$ exactly and whose canonical cones on every $L_n$ are limiting. No assertion that products alone automatically specify a coherent diagram is used. These are precisely pointwise right Kan extensions along $i$, and the limiting cones identify $G_C([n])$ with $C^{n+1}$ together with every projection $G_C(\\rho_j)$. Only these finite products are needed, rather than arbitrary large limits in $\\operatorname{Cat}_\\infty$.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.1.1, expanded using the existing right-hand relative Kan-existence theorem."
+   }
+  },
+  {
+   "text": "For any coherent $F:J\\to\\operatorname{Cat}_\\infty$, apply [lem-coef-infinity-kan-mapping-restriction] with full subcategory $A\\subseteq J$, source $F$ and target $G_C$. Its right-Kan hypothesis is exactly the limit-cone property obtained in step 2. It gives restriction itself as a natural equivalence\n$$\\operatorname{Map}_{\\operatorname{Fun}(J,\\operatorname{Cat}_\\infty)}(F,G_C)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(A,\\operatorname{Cat}_\\infty)}(F|_A,h)=\\operatorname{Map}_{\\operatorname{Cat}_\\infty}(F([0]),C).$$\nThe final identification follows from $A=\\Delta^0$: an $r$-simplex of its functor category is simply an $r$-simplex of the target. Hence for each $C$, the presheaf $F\\mapsto\\operatorname{Map}(i^*F,C)$ is represented by $G_C$. The existing pointwise-adjoint criterion [lem-coef-infinity-pointwise-adjoint-criterion] assembles these representing objects and the representing maps to a coherent right adjoint $i_*$, with the displayed natural equivalence as adjunction. Use these restriction equivalences as the representing data and choose the representatives $i_*C=G_C$. The counit at $C$ is the image of $1_{G_C}$ under the displayed equivalence; restriction sends it to $1_{G_C|_A}=1_C$, so the counit $i^*i_*C\\to C$ is the identity under the fixed boundary identification. The criterion may be applied in larger fixed universes containing $J$, $\\operatorname{Cat}_{\\infty,\\mathcal U}$ and its functor category and all their mapping spaces; this changes neither the $\\mathcal U$-small objects $G_C([n])$ nor the small total fibrations. The comparison is natural in both $F$ and $C$, with transformations and all higher parameter simplices retained.",
+   "uses": [
+    "lem-coef-infinity-kan-mapping-restriction",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Remark 4.1.5 and Proposition 4.2.3(3): right adjoint to fibre-at-[0], with its full mapping-space universal property."
+   }
+  },
+  {
+   "text": "Let $\\beta:[m]\\to[n]$ in $\\Delta^{\\mathrm{op}}$ be opposite to $\\alpha:[n]\\to[m]$. Precomposition sends the vertex $\\rho_i^n:[n]\\to[0]$ to $\\rho_i^n\\beta=\\rho_{\\alpha(i)}^m:[m]\\to[0]$. The limiting cones of step 2 therefore give\n$$\\operatorname{pr}_i\\,G_C(\\beta)\\simeq G_C(\\rho_i^n\\beta)=\\operatorname{pr}_{\\alpha(i)}.$$\nThe universal property of the target product identifies this functor with $(c_j)_{j\\in[m]}\\mapsto(c_{\\alpha(i)})_{i\\in[n]}$, on objects and every mapping simplex. For the identity base arrow each coordinate is unchanged. If $\\beta':[n]\\to[r]$ is opposite to $\\gamma:[r]\\to[n]$, then the $k$th coordinate of $G_C(\\beta')G_C(\\beta)$ is the $\\gamma(k)$th coordinate after $G_C(\\beta)$, hence the original $\\alpha(\\gamma(k))$th coordinate. This is exactly the coordinate for $\\beta'\\beta$, opposite to $\\alpha\\circ\\gamma:[r]\\to[m]$; the already constructed coherent functor and its cones supply the higher compatibilities. The elementary faces omit a coordinate and the degeneracies repeat one. In particular transport along $\\rho_j$ is the $j$th projection and at $[0]$ the one-factor product is $C$. The displayed equality $(i_*C)_{[n]}=C^{n+1}$ uses these specified product identifications; no strict equality of arbitrary choices of limits is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Remark 4.1.2: explicit projections, diagonals and the vertex projection formula."
+   }
+  },
+  {
+   "text": "By [lem-coef-cocartesian-straightening], $i_*C$ is classified by a cocartesian fibration $\\Delta^{\\mathrm{op}}_C\\to J$. For any $q:E\\to J$, the same equivalence takes $q$ to its coherent fibre diagram $F=\\operatorname{St}_J(q)$, with $F([0])=E_{[0]}$, and takes cocartesian-edge-preserving maps over $J$ to transformations of these diagrams. It therefore identifies the mapping space of such maps $E\\to\\Delta^{\\mathrm{op}}_C$ with $\\operatorname{Map}_{\\operatorname{Fun}(J,\\operatorname{Cat}_\\infty)}(F,i_*C)$. Step 3 identifies the latter with $\\operatorname{Map}_{\\operatorname{Cat}_\\infty}(E_{[0]},C)$. Straightening commutes coherently with base restriction, in particular with $\\{[0]\\}\\to J$; since the counit of step 3 is the identity on $C$, this composite equivalence is exactly restriction to the zeroth fibres. The fibre and edge-preservation conventions are those of [def-coef-infinity-fibrations]. Finally the straightening and adjunction equivalences are natural, so this restriction equivalence is natural in $q$ and $C$, not merely a bijection of homotopy classes. Size: [lem-coef-cocartesian-straightening] is stated for $\\mathcal U$-small total categories. If $E$ is only $\\mathcal U'$-small, run steps 1--5 verbatim with $\\mathcal U'$ in place of $\\mathcal U$ (and a larger universe in place of $\\mathcal U'$): $C$ is also $\\mathcal U'$-small, the inclusion $\\operatorname{Cat}_{\\infty,\\mathcal U}\\subseteq\\operatorname{Cat}_{\\infty,\\mathcal U'}$ is fully faithful and preserves the finite products $C^{n+1}$ of step 1 (the product mapping property of step 1 holds for every test object $T$ of the larger category, since $\\operatorname{Map}(T,C^{n+1})$ is computed coordinatewise), so the same $G_C$ is the right Kan extension in either universe, and the resulting restriction equivalence is the stated one.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.1.1 and Proposition 4.2.3(3): cocartesian classification and the adjoint comparison map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-infinity-kan-mapping-restriction",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Agent expansion of Gepner--Haugseng Definition 4.1.1, Remarks 4.1.2 and 4.1.5 and Proposition 4.2.3(3), read online 2026-10-17; archival copy WANTED. The non-elementary coherent existence and mapping-restriction inputs are existing cited DAG theorems."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Right Kan extension along inclusion of the point into Delta opposite yields the diagram of finite powers with projection faces and diagonal degeneracies",
-   "results": "Returned SSet.Truncated.rightExtensionInclusion, SSet.StrictSegal right-Kan declarations and ordinary simplicial right extensions; none states the Cat_∞ finite-power diagram or the i^* ⊣ i_* adjunction.",
+   "tool": "grep",
+   "query": "right[ -]Kan|cocartesian|coCartesian|fibrewise|fiberwise",
+   "results": "{\"t\": \"2026-10-17T00:37:20Z\", \"tool\": \"grep\", \"query\": \"right[ -]Kan|cocartesian|coCartesian|fibrewise|fiberwise\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "inconclusive: the requested subdirectory Mathlib/ produced zero hits; corrected by the recorded CategoryTheory/Functor/KanExtension and AlgebraicTopology/SimplicialObject searches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right Kan extension along inclusion of the point into Delta opposite yields finite powers with projection faces and diagonal degeneracies; second phrasing: right Kan extension point evaluation finite products in infinity categories",
+   "results": "{\"t\": \"2026-10-17T00:37:21Z\", \"tool\": \"leansearch\", \"query\": \"Right Kan extension along inclusion of the point into Delta opposite yields finite powers with projection faces and diagonal degeneracies; second phrasing: right Kan extension point evaluation finite products in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.pointwiseRightKanExtension\", \"CategoryTheory.Functor.RightExtension\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\", \"CategoryTheory.Functor.pointwiseRightKanExtensionIsPointwiseRightKanExtension\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"a4a41cee8e296286\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory functors, Kan extensions and simplicial coskeleta do not assert a coherent right Kan extension in Cat_infinity or its cocartesian mapping-space adjunction. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-323, CategoryTheory/Functor/KanExtension/Adjunction.lean:290-319 and Pointwise.lean:45-80."
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Functor.ran, CategoryTheory.Functor.RightExtension",
-   "results": "0 hits.",
+   "results": "{\"t\": \"2026-10-17T00:37:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.ran, CategoryTheory.Functor.RightExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: ordinary CategoryTheory functors, Kan extensions and simplicial coskeleta do not assert a coherent right Kan extension in Cat_infinity or its cocartesian mapping-space adjunction. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-323, CategoryTheory/Functor/KanExtension/Adjunction.lean:290-319 and Pointwise.lean:45-80."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension along inclusion of the point into Delta opposite yields finite powers with projection faces and diagonal degeneracies",
+   "results": "{\"t\": \"2026-10-17T00:37:21Z\", \"tool\": \"leanfinder\", \"query\": \"Right Kan extension along inclusion of the point into Delta opposite yields finite powers with projection faces and diagonal degeneracies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.cosk\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation\"], \"digest\": \"b7eb55be2477d522\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory functors, Kan extensions and simplicial coskeleta do not assert a coherent right Kan extension in Cat_infinity or its cocartesian mapping-space adjunction. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-323, CategoryTheory/Functor/KanExtension/Adjunction.lean:290-319 and Pointwise.lean:45-80."
   },
   {
    "tool": "grep",
-   "query": "right[ -]Kan|cocartesian|coCartesian|fibrewise|fiberwise",
-   "results": "Mathlib AlgebraicTopology hits are ordinary truncated simplicial-object right extensions (Basic.lean:315,346,360; Coskeletal.lean:18,21,57; SimplicialSet/Basic.lean:160); none is the asserted infinity-categorical finite-power right Kan extension.",
+   "query": "cosk|rightExtensionInclusion",
+   "results": "{\"t\": \"2026-10-17T00:47:02Z\", \"tool\": \"grep\", \"query\": \"cosk|rightExtensionInclusion\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"3928c5baae286d7b\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: ordinary CategoryTheory functors, Kan extensions and simplicial coskeleta do not assert a coherent right Kan extension in Cat_infinity or its cocartesian mapping-space adjunction. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-323, CategoryTheory/Functor/KanExtension/Adjunction.lean:290-319 and Pointwise.lean:45-80."
+  },
+  {
+   "tool": "grep",
+   "query": "rightKanExtension|pointwiseRightKanExtension",
+   "results": "{\"t\": \"2026-10-17T00:47:03Z\", \"tool\": \"grep\", \"query\": \"rightKanExtension|pointwiseRightKanExtension\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\"], \"digest\": \"90b13838899e900b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory functors, Kan extensions and simplicial coskeleta do not assert a coherent right Kan extension in Cat_infinity or its cocartesian mapping-space adjunction. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-323, CategoryTheory/Functor/KanExtension/Adjunction.lean:290-319 and Pointwise.lean:45-80."
   },
   {
    "tool": "leansearch",
-   "query": "Right Kan extension along inclusion of the point into Delta opposite yields the diagram of finite powers with projection faces and diagonal degeneracies; second phrasing: right Kan extension point evaluation finite products in infinity categories",
-   "results": "Returned ordinary CategoryTheory.Functor.RightExtension, rightKanExtension and pointwiseRightKanExtension declarations; these do not state the Cat_∞ claim.",
+   "query": "Right Kan extension from the singleton zero simplex to the opposite simplex category in the infinity category of small categories",
+   "results": "{\"t\": \"2026-10-17T00:47:03Z\", \"tool\": \"leansearch\", \"query\": \"Right Kan extension from the singleton zero simplex to the opposite simplex category in the infinity category of small categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ran\", \"CategoryTheory.Functor.IsRightKanExtension.mk\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.IsRightKanExtension\", \"CategoryTheory.Functor.RightExtension\", \"CategoryTheory.Functor.HasRightKanExtension.mk\", \"CategoryTheory.Functor.HasRightKanExtension\"], \"digest\": \"d0e100c4f8853eff\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: ordinary CategoryTheory functors, Kan extensions and simplicial coskeleta do not assert a coherent right Kan extension in Cat_infinity or its cocartesian mapping-space adjunction. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-323, CategoryTheory/Functor/KanExtension/Adjunction.lean:290-319 and Pointwise.lean:45-80."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at a vertex of a simplicial infinity category has right adjoint the coskeleton with degree n the product of n plus one copies",
+   "results": "{\"t\": \"2026-10-17T00:47:04Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at a vertex of a simplicial infinity category has right adjoint the coskeleton with degree n the product of n plus one copies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.coskAdj\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.SimplicialObject.skAdj\", \"SSet.skAdj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.cosk\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"2a07a4a481ecddd3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory functors, Kan extensions and simplicial coskeleta do not assert a coherent right Kan extension in Cat_infinity or its cocartesian mapping-space adjunction. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-323, CategoryTheory/Functor/KanExtension/Adjunction.lean:290-319 and Pointwise.lean:45-80."
+  },
+  {
+   "tool": "grep",
+   "query": "coskAdj|rightKanExtension|evaluation",
+   "results": "{\"t\": \"2026-10-17T01:15:30Z\", \"tool\": \"grep\", \"query\": \"coskAdj|rightKanExtension|evaluation\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"fa15468a91bd8829\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-340, especially coskAdj at line 330. The declarations concern ordinary categories with Hom sets and ordinary natural transformations, not coherent Cat_infinity diagrams and their cocartesian mapping spaces; no one-line specialization gives this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coskAdj\"",
+   "results": "{\"t\": \"2026-10-17T01:15:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"coskAdj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.SimplicialObject.Truncated.coskAdj.reflective\", \"CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation\", \"SSet.Truncated.coskAdj.reflective\", \"SSet.coskAdj\", \"CategoryTheory.SimplicialObject.instIsIsoAppUnitTruncatedCoskAdj\"], \"digest\": \"aece69964d2d6819\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-340, especially coskAdj at line 330. The declarations concern ordinary categories with Hom sets and ordinary natural transformations, not coherent Cat_infinity diagrams and their cocartesian mapping spaces; no one-line specialization gives this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zero coskeleton of a simplicial category is right adjoint to evaluation in degree zero; its simplices are products indexed by vertices",
+   "results": "{\"t\": \"2026-10-17T01:15:32Z\", \"tool\": \"leanfinder\", \"query\": \"The zero coskeleton of a simplicial category is right adjoint to evaluation in degree zero; its simplices are products indexed by vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.cosk\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.Truncated.coskAdj.reflective\", \"CategoryTheory.SimplicialObject.Truncated.cosk\", \"CategoryTheory.SimplicialObject.Truncated.cosk_reflective\", \"SSet.Truncated.cosk\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.SimplicialObject.Truncated.coskAdj.reflective\"], \"digest\": \"afa925392ba6dde1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:296-340, especially coskAdj at line 330. The declarations concern ordinary categories with Hom sets and ordinary natural transformations, not coherent Cat_infinity diagrams and their cocartesian mapping spaces; no one-line specialization gives this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-operator-nerve",
@@ -81,5 +198,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-right-kan-extension-simplex-powers",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Computed the discrete vertex coslices and product cones; applied existing relative right-Kan existence, mapping-space restriction and pointwise adjoint assembly; derived coordinate reindexing and transferred the adjunction through cocartesian straightening. Corrected the draft to cite both the existence and the mapping-restriction interfaces rather than treating pointwise products alone as a proof of coherent representability. No new nodes or Mathlib leaves. Second reader clarified typed composition and the identity counit, repaired the exact blueprint proof location, and consolidated citation evidence. Maintainer reader (cc, 2026-10-17): step 5 now also covers a cocartesian fibration E that is only U'-small, by rerunning the argument one universe up.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2 (finite-coefficient derived mapping-complex adjunction before R lim), through the recorded enriched-nerve support ancestry. The item supplies the right-Kan adjunction used in lem-coef-simplicial-operator-nerve step 6, as in Gepner--Haugseng Definition 4.1.1, Remarks 4.1.2 and 4.1.5, and Proposition 4.2.3(3)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-911558794",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-911558794 (reviewer sub-agent of L); spot-checked: FIX with one repair. The delivery adds no new nodes, has no cycle, and all six dependencies are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. Source: I read Gepner–Haugseng arXiv:1312.3178v4 (Def. 4.1.1, Rem. 4.1.2, Rem. 4.1.5, Prop. 4.2.3(iii), pp. 36–38) from the arXiv PDF; the item statement matches it clause by clause (C^{n+1}, projection faces and diagonal degeneracies, variance via alpha, adjunction with the fibre at [0], cocartesian-edge-preserving maps). Step 1: the coslice A x_J J_{[n]/} is literally discrete on rho_0..rho_n because End([0]) = {id}, and the dual constant test over Cat_inf -> * reduces the p-limit condition to the product property. Step 2: Cat_inf -> * is an isofibration and the right-dual Kan existence gives an exact G_C with limit cones. Step 3: the limit-cone alternative of mapping-restriction plus the pointwise-adjoint criterion give the adjunction, and the counit is the identity. Step 4: I checked rho^n_i beta = rho^m_{alpha(i)}, faces omit and degeneracies repeat a coordinate, and composition works; the step is elementary as marked. Step 5: straightening, its compatibility with base change to [0] and the identity counit give the equivalence by restriction. Fault repaired: step 5 used straightening, which is stated only for U-small total categories, while the item covers any cocartesian fibration E. I appended a size sentence to step 5 that reruns the argument one universe up (the inclusion of small into larger Cat_inf is fully faithful and preserves C^{n+1}, so G_C is unchanged), in fixes/dag/nodes/sec-six-functors/lem-coef-cocartesian-right-kan-extension-simplex-powers.json. No statement change. No duplicate found (ordinary pointwise left Kan, relative Kan tools, Delta^op_X for spaces); no Mathlib leaf. Edge cases n=0, empty C, terminal C and non-groupoid C hold.; 1 file(s) fixed by the reviewer"
  }
 }

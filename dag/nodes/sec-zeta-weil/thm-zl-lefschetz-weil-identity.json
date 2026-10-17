@@ -3,7 +3,10 @@
  "blueprint": {
   "is": "thm-zl-lefschetz-weil-identity",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "prop-trace-determinant",
+   "sk-thm-tracetodeterminant"
+  ]
  },
  "kind": "statement",
  "title": "Trace-to-determinant identity",
@@ -19,63 +22,167 @@
   "def-weil-frobenius-detailed",
   "def-weil-geometric-hypotheses",
   "def-weil-global-geometric-frobenius",
-  "def-weil-weil-sheaf-complex"
- ],
- "proof": [
-  {
-   "text": "Step 1: the point-count identity. The scheme $X_0$ is proper, so by\n[cor-trf-point-counting] applied to the constant Weil sheaf\n$(\\Qlb)_X$, for every $n\\geq1$,\n\n$$\nN_n:=\\#X_0(\\mathbf F_{q^n})\n=\\sum_{i\\in\\mathbf Z}(-1)^i\\Tr\\bigl(F^n\\mid H^i(X,\\Qlb)\\bigr)\n=\\sum_{i=0}^{2d}(-1)^i\\Tr(F_i^n\\mid V_i),\n$$\n\nthe second identity being the finite-dimensionality, the vanishing\noutside $0\\leq i\\leq2d$, and the identification\n$V_i=H^i(X,\\Qlb)$, $F_i=F|_{V_i}$, supplied by\n[def-weil-ordinary-compact-cohomology] (compactly supported\ncohomology being the ordinary one for proper $X_0$, per that\ndefinition) and by [def-weil-smooth-proper-cohomological-family]\nafter scalar extension to $\\Qlb$.",
-   "uses": [
-    "cor-trf-point-counting",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-smooth-proper-cohomological-family"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 2: the logarithm of the zeta series. By\n[def-weil-point-counts-zeta],\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}N_n\\frac{T^n}{n}\\right),\n$$\n\nso that, the formal logarithm and the exponential being mutually\ninverse on $T\\Qlb[[T]]$ and $1+T\\Qlb[[T]]$,\n\n$$\n\\log Z(X_0,T)=\\sum_{n\\geq1}N_n\\frac{T^n}{n}.\n$$",
-   "uses": [
-    "def-weil-point-counts-zeta"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 3: substitution and interchange. Inserting Step 1 and using that\nthe sum over $i=0,\\ldots,2d$ is finite while the coefficientwise sums\nover $n$ are formal,\n\n$$\n\\log Z(X_0,T)\n=\\sum_{n\\geq1}\\sum_{i=0}^{2d}(-1)^i\\Tr(F_i^n\\mid V_i)\\frac{T^n}{n}\n=\\sum_{i=0}^{2d}(-1)^i\n\\left(\\sum_{n\\geq1}\\Tr(F_i^n\\mid V_i)\\frac{T^n}{n}\\right).\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Step 4: the per-degree logarithm. For every $i$, the pair\n$(V_i,F_i)$ is a Frobenius module, so [lem-zl-log-det-identity]\ngives\n\n$$\n\\sum_{n\\geq1}\\Tr(F_i^n\\mid V_i)\\frac{T^n}{n}\n=-\\log P_{i,\\ell}(T).\n$$",
-   "uses": [
-    "lem-zl-log-det-identity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Hence, by the additivity of the formal logarithm on finite products of\nseries with constant coefficient $1$,\n\n$$\n\\log Z(X_0,T)\n=\\sum_{i=0}^{2d}(-1)^{i+1}\\log P_{i,\\ell}(T)\n=\\log\\left(\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\\right).\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Step 5: exponentiation. Both sides of the identity of Step 4 have the\nsame logarithm and lie in $1+T\\Qlb[[T]]$, so applying the formal\nexponential, which is inverse to the logarithm on that set, gives the\ndisplayed identity.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "cor-trf-point-counting",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constant-weil-structure",
   "def-weil-ordinary-compact-cohomology",
   "def-weil-smooth-proper-cohomological-family",
   "def-weil-point-counts-zeta",
-  "lem-zl-log-det-identity"
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-formal-power-series",
+  "def-weil-polynomial-as-power-series",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-coefficientwise-ring-hom-map"
+ ],
+ "proof": [
+  {
+   "text": "Work in $K=\\Qlb$, a characteristic-zero field since it extends $\\Ql$ [def-weil-l-adic-numbers]. The smooth, proper, geometrically connected, pure-dimension-$d$ hypotheses include the separated finite-type hypothesis through [def-weil-geometric-hypotheses]. Apply [prop-cohomological-finiteness] with $E=\\Ql$ and the constant Weil sheaf on $X$: the groups $H^i(X,\\Ql)$ are finite-dimensional, Frobenius is an automorphism, and these groups vanish for $i\\notin[0,2d]$. By [lem-weil-cohomology-scalar-extension-qlbar], for every integer $i$ the isomorphism $H^i(X,\\Ql)\\otimes_{\\Ql}K\\simeq H^i(X,K)$ intertwines Frobenius. A finite basis extends to a basis after scalar extension [def-weil-vector-space-scalar-extension]; a zero space extends to zero, and the inverse of Frobenius extends to its inverse. Consequently the $V_i$ of the statement are finite-dimensional, $F_i$ is invertible, and $H^i(X,K)=0$ outside $[0,2d]$. The determinant polynomial under this identification is exactly the statement's $P_{i,\\ell}$.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-weil-geometric-hypotheses",
+    "prop-cohomological-finiteness",
+    "lem-weil-cohomology-scalar-extension-qlbar",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 27.3 and Theorem 27.6, pp. 155-156 (finite cohomological range); scalar-extension identification as in the statement of the blueprint item"
+   }
+  },
+  {
+   "text": "Use the point-counting formula [cor-trf-point-counting] which the statement explicitly assumes for the constant Weil sheaf. Its proper case gives, for every $n\\geq1$, $N_n=\\#X_0(\\mathbf F_{q^n})=\\sum_{i\\in\\mathbf Z}(-1)^i\\operatorname{Tr}(F^n\\mid H^i(X,K))$. This uses the assumed conclusion of that corollary; no compactification admissibility is inferred from properness. By step 1 all summands outside $0\\leq i\\leq2d$ vanish, and on $V_i$ the operator is $F_i$, so $N_n\\cdot1_K=\\sum_{i=0}^{2d}(-1)^i\\operatorname{Tr}(F_i^n\\mid V_i)$.",
+   "uses": [
+    "cor-trf-point-counting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 27.3, p. 155; Theorem 27.6, proof, second displayed equality, p. 156"
+   }
+  },
+  {
+   "text": "Let $\\varphi:\\mathbf Q[[T]]\\to K[[T]]$ be coefficientwise inclusion [def-weil-coefficientwise-ring-hom-map], and set $U=\\sum_{n\\geq1}N_nT^n/n\\in T\\mathbf Q[[T]]$. By the defining formula of [sk-def-zeta], which agrees with [def-weil-point-counts-zeta] for this finite-type scheme, $Z(X_0,T)=\\exp(U)$. The coefficient-map compatibility [lem-weil-exp-coefficientwise-map] gives $\\varphi(Z(X_0,T))=\\exp(\\varphi(U))$, where $\\varphi(U)=\\sum_{n\\geq1}(N_n\\cdot1_K)T^n/n$. Here $U(0)=0$, so the compatibility applies; all integers $n\\geq1$ are invertible in the characteristic-zero field $K$. Henceforth $Z$ in $K[[T]]$ means this image, as in the statement.",
+   "uses": [
+    "def-weil-coefficientwise-ring-hom-map",
+    "sk-def-zeta",
+    "def-weil-point-counts-zeta",
+    "lem-weil-exp-coefficientwise-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 27.6, proof, first equality, and Corollary 27.8, proof, p. 156 (rational zeta coefficients read in a coefficient field)"
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq2d$ set $A_i(T)=\\sum_{n\\geq1}\\operatorname{Tr}(F_i^n\\mid V_i)T^n/n\\in TK[[T]]$. In degree $n\\geq1$, the coefficient of $\\sum_{i=0}^{2d}(-1)^iA_i$ is $\\frac1n\\sum_{i=0}^{2d}(-1)^i\\operatorname{Tr}(F_i^n\\mid V_i)=(N_n\\cdot1_K)/n$ by step 2, and both constant coefficients are zero. Equality of coefficients therefore gives $\\varphi(U)=\\sum_{i=0}^{2d}(-1)^iA_i$, and step 3 becomes $Z(X_0,T)=\\exp(\\sum_{i=0}^{2d}(-1)^iA_i)$. This exchanges only the finite degree-index sum with coefficient extraction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 27.6, proof, third equality, p. 156 (move the inner sum outside)"
+   }
+  },
+  {
+   "text": "By step 1 each $(V_i,F_i)$ is a Frobenius module in [def-zl-frobenius-trace-series]. Apply the unit's logarithmic identity [lem-zl-log-det-identity] to get $\\log P_{i,\\ell}=-A_i$, hence $A_i=-\\log P_{i,\\ell}$. All its hypotheses hold over $K=\\Qlb$, including invertibility of $F_i$. To evaluate the exponential of this logarithmic expression, apply [lem-weil-exp-trace-determinant] to the same finite-dimensional space and endomorphism: it gives $P_{i,\\ell}\\exp(A_i)=1$ and says that $P_{i,\\ell}$ is a unit. Substituting $A_i=-\\log P_{i,\\ell}$ gives $\\exp(-\\log P_{i,\\ell})=P_{i,\\ell}^{-1}$. This makes the exponentiation of the unit's log-determinant step explicit, with no semisimplicity hypothesis and no uncited general log/exp inversion theorem.",
+   "uses": [
+    "def-zl-frobenius-trace-series",
+    "lem-zl-log-det-identity",
+    "lem-weil-exp-trace-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Lemma 27.5 and its proof, pp. 155-156; Theorem 27.6, proof, fourth equality, p. 156"
+   }
+  },
+  {
+   "text": "Each $A_i$ has constant coefficient zero. Apply the finite-family integer-weight formula of [lem-weil-power-series-exp-hom] with $\\varepsilon_i=(-1)^i$ to step 4 and then substitute both identities from step 5:\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}\\exp(A_i)^{(-1)^i}=\\prod_{i=0}^{2d}\\exp(-\\log P_{i,\\ell})^{(-1)^i}\n=\\prod_{i=0}^{2d}(P_{i,\\ell}^{-1})^{(-1)^i}\n=\\prod_{i=0}^{2d}P_{i,\\ell}^{(-1)^{i+1}}.\n$$\nFor the last equality, if $i$ is even the factor is $P_{i,\\ell}^{-1}$, and if $i$ is odd it is $P_{i,\\ell}$. All integer powers are powers of units by step 5. This proves the required equality in $K[[T]]$.",
+   "uses": [
+    "lem-weil-power-series-exp-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 27.6 and its four-line proof, p. 156"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-geometric-hypotheses",
+  "prop-cohomological-finiteness",
+  "lem-weil-cohomology-scalar-extension-qlbar",
+  "def-weil-vector-space-scalar-extension",
+  "cor-trf-point-counting",
+  "def-weil-coefficientwise-ring-hom-map",
+  "sk-def-zeta",
+  "def-weil-point-counts-zeta",
+  "lem-weil-exp-coefficientwise-map",
+  "def-zl-frobenius-trace-series",
+  "lem-zl-log-det-identity",
+  "lem-weil-exp-trace-determinant",
+  "lem-weil-power-series-exp-hom"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/thm-zl-lefschetz-weil-identity.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Proposition 27.3, Lemma 27.5 and Theorem 27.6, pp. 155-156; Corollary 27.8, p. 156, for the coefficient-field interpretation. The Qbar_l scalar extension uses the existing explicit comparison node."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The zeta function of a smooth proper variety over a finite field equals the alternating product of determinants of one minus Frobenius on its cohomology",
+   "results": "8 hits: ZMod.LFunction, NumberField.dedekindZeta and residue results, jacobiSum_one_one and jacobiSum_trivial_trivial. These concern analytic number-field L-functions and finite-field character sums; none gives geometric cohomology or the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.exp, LinearMap.charpolyRev",
+   "results": "0 hits; loogle reports unknown identifier 'LinearMap.charpolyRev'. This query provides no evidence of absence.",
+   "date": "2026-10-17",
+   "verdict": "no match: invalid identifier in query; corrected query below"
+  },
+  {
+   "tool": "grep",
+   "query": "zetaSeries|trace.*charpolyRev|charpolyRev.*trace",
+   "results": "3 hits in Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:138,336,337. Matrix.coeff_charpolyRev_eq_neg_trace identifies only the coefficient of degree 1, not the determinant factorization or the geometric trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lefschetz trace formula gives determinant factorization of zeta function of a variety",
+   "results": "8 hits: NumberField.dedekindZeta; trace_eq_finrank_mul_minpoly_nextCoeff; det_traceForm_ne_zero; LinearMap.det_eq_sign_charpoly_coeff; det_traceMatrix_ne_zero'; Algebra.normalizedTrace_eq_of_finiteDimensional_apply; Matrix.coeff_det_one_add_X_smul_one; ArithmeticFunction.LSeries_zeta_eq. None states the geometric formula or the finite trace-series determinant identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An alternating finite sum of traces of powers of linear maps exponentiates to the alternating product of reciprocal characteristic polynomials",
+   "results": "8 hits: LinearMap.det_eq_sign_charpoly_coeff, LinearMap.eval_charpoly, Matrix.coeff_det_one_add_X_smul_one, Matrix.det_one_add_X_smul, FiniteField.trace_pow_card, Matrix.trace_eq_sum_roots_charpoly, Matrix.derivative_det_one_add_X_smul_aux, Matrix.trace_eq_neg_charpoly_coeff. These are characteristic-polynomial coefficient, evaluation, root and finite-field identities, not the full trace-to-determinant formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.charpolyRev, Matrix.trace",
+   "results": "1 hit: Matrix.coeff_charpolyRev_eq_neg_trace, Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff; only coefficient 1 is identified.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coeff_charpolyRev_eq_neg_trace|coeff_det_one_add_X_smul_one|det_eq_sign_charpoly_coeff|dedekindZeta",
+   "results": "18 hits, including NumberField.dedekindZeta at Mathlib/NumberTheory/NumberField/DedekindZeta.lean:47, Matrix.coeff_det_one_add_X_smul_one at Matrix/Charpoly/Coeff.lean:193, Matrix.coeff_charpolyRev_eq_neg_trace doc reference at :138, and LinearMap.det_eq_sign_charpoly_coeff at LinearAlgebra/Charpoly/BaseChange.lean:35. The returned declarations and search types do not state the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -115,5 +222,34 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-tracetodeterminant"
+ "unit": "sk-thm-tracetodeterminant",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-zl-lefschetz-weil-identity",
+  "worker": "stage1",
+  "summary": "No new nodes. Kept the statement and its explicit trace-formula assumption unchanged. Replaced the incorrect use of a family definition as finiteness/vanishing by prop-cohomological-finiteness and the existing Frobenius-equivariant Qbar_l scalar-extension comparison. Made the rational-to-Qbar_l coefficient map explicit. Expanded the finite coefficient interchange and applied the existing per-degree exponential determinant identity and finite-family exponential homomorphism law. Searches found no exact geometric Lean attachment or Mathlib match. Server preflight required the named unit inputs to remain explicitly reached: step 3 now uses sk-def-zeta, and step 5 applies lem-zl-log-det-identity before evaluating its exponential with the existing exp-det identity.",
+  "blueprint": "Realizes the single proof step of sk-thm-tracetodeterminant: alternating point-count traces (steps 1-2), zeta exponential and finite interchange (3-4), per-degree log-determinant identity in its equivalent exponential form (5), and exponentiation/product (6). The old item proof paragraphs 2-5 are implemented using exp directly, as in Milne 27.6, using the named log-determinant input explicitly and without adding uncited formal-logarithm laws.",
+  "tool_uses": [
+   {
+    "node": "prop-cohomological-finiteness",
+    "why": "Finite-dimensionality, Frobenius automorphisms and the exact [0,2d] vanishing interval; the family definition explicitly excludes proving these properties."
+   },
+   {
+    "node": "lem-weil-cohomology-scalar-extension-qlbar",
+    "why": "Identifies the statement's Qbar_l cohomology and Frobenius with extension of the Q_l family; this is a coefficient-comparison tool, not a replacement for the unit's trace-to-determinant argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-cohomological-finiteness",
+  "lem-weil-cohomology-scalar-extension-qlbar"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-e7c6c17ae",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e7c6c17ae (reviewer sub-agent of L); spot-checked: I read the whole delivery against its sources. The mathematics is correct and complete; I fixed one missing statement citation in fixes/. Statement: identical to blueprint main-20261015 order 3222 (and to master 2879), not weakened. cor-trf-point-counting, lem-weil-cohomology-scalar-extension-qlbar and the item all mean the same H^i(X,Qbar_l) in the same algebraically closed coefficient category, through def-weil-ordinary-compact-cohomology. Step 1: properness gives separated finite type, so prop-cohomological-finiteness applies with E=Q_l; its explicit clause gives vanishing outside [0,2d] for this X_0, plus finite dimension and the Frobenius automorphism. The scalar-extension lemma carries these to Qbar_l in every degree, Frobenius-equivariantly. This corrects the old proof's use of definitions as theorems and agrees with the family definition's blueprint_update. Step 2: uses only the assumed conclusion of cor-trf (proper case), truncated by step 1. Step 3: sk-def-zeta and def-weil-point-counts-zeta give the same exp formula; lem-weil-exp-coefficientwise-map applies (Q to Qbar_l is a map of Q-algebras, U(0)=0). Step 4: elementary coefficient comparison over a finite sum. Step 5: lem-zl-log-det-identity gives the log form; lem-weil-exp-trace-determinant (characteristic 0, any endomorphism, no semisimplicity) gives P*exp(A)=1. Step 6: lem-weil-power-series-exp-hom with eps_i=(-1)^i; signs checked (even i gives P^-1, odd i gives P). The route is the unit's and follows Milne Theorem 27.6's exp proof (PDF p.156). Accepted tool_uses: prop-cohomological-finiteness (generic finiteness, which the family definition delegates to it) and lem-weil-cohomology-scalar-extension-qlbar (comparison forced by the Qbar_l convention; unsplit, so no cycle). No new nodes; prop-trace-determinant is recorded in same_as and is not a new duplicate. The dependency closure does not contain the item, so there is no cycle. Edge cases checked: d=0, zero-dimensional V, a unipotent Jordan block, P^1, and the n=0 coefficient. FIX: added def-weil-constant-weil-structure to stmt_deps, because the statement uses the canonical Weil structure on the constant sheaf and def-weil-weil-sheaf-complex does not define it. Report inaccuracy, not a mathematical fault: second-reading change 1 claims the source was moved to main-20261015 with blueprint_snapshot set, but the delivered file still cites the master source (order 2879) and has no blueprint_snapshot. The statement text is the same in both snapshots, so I left it for the maintainer.; 1 file(s) fixed by the reviewer"
+ }
 }

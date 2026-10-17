@@ -34,9 +34,82 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-simplicial-space-reedy-cartesian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M(B)=\\operatorname{Map}(B,V)$, including $M(\\varnothing)=*$. Every inclusion $B\\subseteq C$ is a bidegree monomorphism and hence a Reedy cofibration by [lem-coef-simplicial-space-reedy-cartesian]. Apply that node to $V\\to *$, a Reedy fibration by hypothesis: $M(C)\\to M(B)$ is a Kan fibration. In particular every $M(B)$ is Kan by taking $B=\\varnothing$. If $B,C$ are subobjects, their union is their pushout over $B\\cap C$: degree by degree a map on the union is precisely two maps agreeing on the intersection. Products with $c\\Delta^q$ preserve this union and intersection degree by degree. Thus, compatibly with all simplicial operators, $M(B\\cup C)=M(B)\\times_{M(B\\cap C)}M(C)$. Also $F(S)\\cap F(T)=F(S\\cap T)$, with $F(\\varnothing)=\\varnothing$, since a monotone map has image in both sets exactly when it has image in their intersection.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 2.3-2.5 and Lemma 11.11, printed p.27: mapping-space fibrations and the degreewise union/pullback calculation."
+   }
+  },
+  {
+   "text": "We now prove a finite gluing assertion used twice below; its proof is steps 2-4, rather than an additional assumed result. Let $\\mathcal H$ be any finite family of nonempty vertex subsets closed under nonempty intersections, put $Y=\\bigcup_{T\\in\\mathcal H}F(T)$, and let $D\\subseteq Y$. Assume only that $M(F(T))\\to M(D\\cap F(T))$ is a trivial Kan fibration for every $T\\in\\mathcal H$. The claim is that $M(Y)\\to M(D)$ is a trivial Kan fibration. Induct strongly on $|\\mathcal H|$, uniformly in $D$ and in the ambient simplex. The empty case is the identity of $*$. In the nonempty case choose an inclusion-maximal $S\\in\\mathcal H$ and set $\\mathcal H'=\\mathcal H\\setminus\\{S\\}$, $Y'=\\bigcup_{T\\in\\mathcal H'}F(T)$, $D'=D\\cap Y'$, $E=D\\cap F(S)$, and $K=Y'\\cap F(S)$. The family $\\mathcal H'$ is intersection-closed: an intersection of its members cannot equal $S$, since this would make each contain the maximal member $S$ and hence equal $S$. Define $\\mathcal K$ to consist of the distinct nonempty sets $T\\cap S$ with $T\\in\\mathcal H'$. These are proper subsets of $S$ by maximality, belong to $\\mathcal H'$ by intersection-closure, and are closed under nonempty intersections, since $(T_1\\cap S)\\cap(T_2\\cap S)=(T_1\\cap T_2)\\cap S$. Thus $|\\mathcal K|\\leq|\\mathcal H'|<|\\mathcal H|$, and $K=\\bigcup_{U\\in\\mathcal K}F(U)$. Both induction applications are therefore legitimate. The local hypothesis for $Y',D'$ is the given hypothesis for $T\\in\\mathcal H'$. For $K,D\\cap K$, it is the given hypothesis for $U\\in\\mathcal K$, because $F(U)\\subseteq K$. Consequently $M(Y')\\to M(D')$ and $M(K)\\to M(D\\cap K)$ are trivial Kan fibrations. No interval-cover hypothesis is used in this induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 10.1 proof, printed p. 23, for the finite face-union argument; the generalized strong-induction assertion and overlap family are proved explicitly here."
+   }
+  },
+  {
+   "text": "Continue the induction step of step 2. Set $B=E\\cup K\\subseteq F(S)$. Then $E\\cap K=D\\cap K$, so step 1 identifies $M(B)\\to M(E)$ with the pullback of the trivial Kan fibration $M(K)\\to M(D\\cap K)$ supplied by induction. Trivial Kan fibrations have the right lifting property against all boundary inclusions by [lem-coef-kan-quillen-right-proper]. A square against a pullback projection is a square against the original map with its fixed map to the pullback base; a filler for the latter, paired with that fixed map, is a filler for the former. Thus pullbacks of trivial Kan fibrations are trivial Kan fibrations. The composite $M(F(S))\\to M(B)\\to M(E)$ is the locally assumed trivial Kan fibration, while its second factor is trivial. Two-out-of-three in the model-category axioms of [lem-coef-reedy-model-structure], applied to the Kan model structure of [lem-coef-kan-quillen-right-proper], makes $M(F(S))\\to M(B)$ a weak homotopy equivalence. It is a Kan fibration by step 1, hence a trivial Kan fibration. This argument applies even if $K$ is empty or disconnected.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Expanded pullback, boundary-lifting and two-out-of-three argument for the finite gluing step; the relevant model-category facts are cited by node, and no arbitrary-limit claim is used."
+   }
+  },
+  {
+   "text": "Set $Z=D\\cup Y'$. Because $D\\subseteq Y=Y'\\cup F(S)$, we have $Z=Y'\\cup E$, $Z\\cap F(S)=K\\cup E=B$, and $D\\cap Y'=D'$. Step 1 therefore identifies $M(Y)\\to M(Z)$ with the pullback of the trivial Kan fibration $M(F(S))\\to M(B)$ from step 3, and identifies $M(Z)\\to M(D)$ with the pullback of the trivial Kan fibration $M(Y')\\to M(D')$ from induction. The pullback argument in step 3 makes both maps trivial Kan fibrations. Their composite is one too: to solve a boundary-lifting square against a composite $P\\to Q\\to R$, first lift against $Q\\to R$ with the boundary map to $Q$ obtained from the given boundary map to $P$, then lift against $P\\to Q$. The characterization in [lem-coef-kan-quillen-right-proper] concludes the induction and proves the finite gluing assertion of steps 2-4.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Expanded successive pullbacks completing the finite-gluing proof; analogous to the pullback pattern in Lemma 11.11, printed p. 27."
+   }
+  },
+  {
+   "text": "For a nonempty ordered vertex set $S$, define its spine $G(S)$ to be the union of its vertices and its consecutive edges. The increasing bijection $[m]\\cong S$, $m=|S|-1$, identifies $F(S)$ with $F(m)$. A $q$-simplex of $M(F(m))$ is determined by evaluation at $1_{[m]}$: an element $v\\in (V_m)_q$ gives the map whose value on $(\\alpha:[k]\\to[m],\\beta:[r]\\to[q])$ is $V(\\alpha)(v|_\\beta)$, and evaluation reverses this construction. Maps out of $G(S)$ are strings of $m$ maps out of $F(1)$ whose adjacent endpoints agree, by the union calculation in step 1. Hence restriction to $G(S)$ is precisely the displayed Segal map. By the standing hypothesis that $V_m\\to V_1\\times_{V_0}\\cdots\\times_{V_0}V_1$ is a weak homotopy equivalence for every $m\\geq2$, this restriction is a weak homotopy equivalence for $m\\geq2$, and it is an identity for $m=0,1$. It is a Kan fibration by step 1, so $M(F(S))\\to M(G(S))$ is a trivial Kan fibration in every case.\n\nLet $C\\subseteq F(S)$ be a subobject that is a union of full faces on consecutive intervals in the induced order on $S$ and contains every vertex and consecutive edge of $F(S)$. Choose all nonempty intervals $I$ of $S$ for which $F(I)\\subseteq C$; there are finitely many, their faces cover $C$, and their nonempty intersections are again such intervals. Since $I$ is consecutive in $S$, $G(S)\\cap F(I)=G(I)$: a consecutive pair in $I$ is a consecutive pair in $S$, and conversely a spine simplex of $S$ lying in $I$ is a vertex or such an edge or its degeneracy. Apply the gluing assertion proved in steps 2-4 to this interval family with $Y=C$ and $D=G(S)$. Its local hypotheses are exactly the spine trivial fibrations just proved, including singleton intersections. It follows that $M(C)\\to M(G(S))$ is a trivial Kan fibration. Its composite with $M(F(S))\\to M(C)$ is the spine map, already a weak equivalence. Two-out-of-three from [lem-coef-reedy-model-structure] makes $M(F(S))\\to M(C)$ a weak equivalence; step 1 makes it a Kan fibration. Thus it is a trivial Kan fibration. This proves the interval-cover case by an actual argument, without assuming it as another node.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 4.1 equation (4.1) and Lemma 10.1, printed p. 23, for the spine/cover comparison; the generalized interval-family gluing is expanded in steps 2–4."
+   }
+  },
+  {
+   "text": "Apply the finite gluing assertion proved in steps 2-4 to $\\mathcal H=\\mathcal F$, $Y=X$, and $D=A$. For every $S\\in\\mathcal F$, the hypothesis on $A$ says exactly that $A\\cap F(S)$ is an interval cover, so step 5 supplies its local trivial Kan fibration. The supplied intersection-closure is exactly the hypothesis needed in step 2 for every overlap, even when two original faces are not intervals of the ambient $[n]$. Therefore restriction $M(X)\\to M(A)$ is a trivial Kan fibration. For the empty family, $A=X=\\varnothing$ and the restriction is the identity of $*$, as in the induction base. For a singleton vertex family the local map is an identity; no nonempty-edge convention is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Application of the finite-gluing argument to the interval-cover local comparisons from Lemma 10.1; the application is written explicitly here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-space-reedy-cartesian",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Rezk Lemmas 10.1 and 11.11, printed pp.23,27, read online. Expanded finite gluing proof written here; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +145,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"(n : ℕ) : (rightExtensionInclusion X 2).IsPointwiseRightKanExtensionAt ⟨⦋n⦌⟩\", \"doc\": \"For a strict Segal space $X$ and natural number $n$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at the object $[n]$. This means\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spine_δ_arrow_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(hij : j = i.succ.castSucc) :\\n  (X.spine m _ (X.map (tr (δ j)).op (sx.spineToSimplex (m + 1) _ f))).arrow i =\\n    sx.spineToDiagonal 2 (by lia) (f.interval i 2 (by lia))\", \"doc\": \"For an $(n+1)$-truncated simplicial set $X$, a natural number $m$, and indices $i,j$ satisfying $j = i+1$, the composition of the spine-to-simplex map with the opposite face map $\\\\delta^j$ acting on a\"}\n  {\"name\": \"SSet.stdSimplex.face\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex\", \"type\": \"{n : ℕ} (S : Finset (Fin (n + 1))) : (Δ[n] : SSet.{u}).Subcomplex\", \"doc\": \"For a finite subset $ S \\\\subseteq \\\\{0, 1, \\\\dots, n\\\\} $, the face subcomplex $ \\\\Delta^n(S) $ of the standard $ n $-simplex $ \\\\Delta^n $ consists of all simplices $ f $ such that the image of $ f $ unde\"}\n  {\"name\": \"SSet.StrictSegal.casesOn\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"{X : SSet} →\\n  {motive : X.StrictSegal → Sort u_1} →\\n    (t : X.StrictSegal) →\\n      ((spineToSimplex : {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))) →\\n          (spine_spineToSimplex : ∀ (n : ℕ), X.spine n ∘ spineToSimplex = id) →\\n            (spineToSimplex_spine : ∀ (n : ℕ), sp\", \"doc\": \"Given a strict Segal space $X$, this function performs case analysis on its structure by specifying: (1) a family of functions $\\\\text{spineToSimplex}_n: X_{\\\\text{Path}}(n) \\\\to X([n])$ for each $n \\\\in \"}\n  {\"name\": \"SSet.StrictSegal.rec\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"{X : SSet} →\\n  {motive : X.StrictSegal → Sort u_1} →\\n    ((spineToSimplex : {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))) →\\n        (spine_spineToSimplex : ∀ (n : ℕ), X.spine n ∘ spineToSimplex = id) →\\n          (spineToSimplex_spine : ∀ (n : ℕ), spineToSimplex ∘ X.spine n = id) →\", \"doc\": \"Given a simplicial set $ X $ and a type family $ P $ over $ X.\\\\text{StrictSegal} $, if there is a way to construct an element of $ P $ from the data of spine-to-simplex isomorphisms $ \\\\text{spineToSim\"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"∀ {X : SSet} (self : X.StrictSegal) (n : ℕ), X.spine n ∘ self.spineToSimplex = id\", \"doc\": \"For any strict Segal space $ X $ and natural number $ n $, the composition of the truncation map $ X.\\\\text{spine}(n) $ and the spine-to-simplex map $ \\\\text{spineToSimplex} $ is equal to the identity f\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(h : ∀ n, X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set $X$ such that for every natural number $n$, the strict Segal condition at level $n$ holds (i.e., $X_n$ decomposes as a product of $X_1$ and $X_0$ respecting composition), this c\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: the Segal hits concern a single strict Segal simplicial set with a bijective spine map, not a Reedy fibrant simplicial space with weakly equivalent spine mapping spaces. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-57,275-325 and Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:34-35. Ordinary category equivalences and structured-arrow precomposition do not give weak equivalences of these Kan mapping complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal.*(cover|descent)|Rezk|SegalSpace",
+   "results": "{\"t\": \"2026-10-17T00:12:08Z\", \"tool\": \"grep\", \"query\": \"Segal.*(cover|descent)|Rezk|SegalSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\"], \"digest\": \"815092eb62aa2ccf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictSegal.lean:42-57,275-325; the hits concern strict Segal simplicial sets, not Reedy fibrant simplicial spaces and weak equivalences of Kan mapping spaces. The grep hit PushoutProduct.lean:22 is a bibliography reference, not a Segal descent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reedy fibrant simplicial space Segal condition mapping spaces finite face cover descent",
+   "results": "{\"t\": \"2026-10-17T00:12:09Z\", \"tool\": \"leansearch\", \"query\": \"Reedy fibrant simplicial space Segal condition mapping spaces finite face cover descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore.mk\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.Truncated.IsStrictSegal.segal\", \"SSet.IsStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.Truncated.IsStrictSegal.mk\", \"SSet.StrictSegal.quasicategory\", \"SSet.IsStrictSegal.casesOn\"], \"digest\": \"c4dd67d82ebb72b8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictSegal.lean:42-57,275-325; the hits concern strict Segal simplicial sets, not Reedy fibrant simplicial spaces and weak equivalences of Kan mapping spaces. The grep hit PushoutProduct.lean:22 is a bibliography reference, not a Segal descent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"spine\"",
+   "results": "{\"t\": \"2026-10-17T00:12:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\", \\\"spine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.StrictSegal.spineToSimplex\", \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"SSet.StrictSegal.spineEquiv\", \"SSet.StrictSegalCore.spineToSimplex\", \"SSet.StrictSegalCore.spine_spineToSimplex\", \"SSet.StrictSegal.spineToDiagonal\", \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"SSet.StrictSegal.spine_spineToSimplex\"], \"digest\": \"0f95a0d9517ac796\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictSegal.lean:42-57,275-325; the hits concern strict Segal simplicial sets, not Reedy fibrant simplicial spaces and weak equivalences of Kan mapping spaces. The grep hit PushoutProduct.lean:22 is a bibliography reference, not a Segal descent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Reedy fibrant Segal simplicial space restriction from a finite union of simplex faces to a subcomplex covering every face by consecutive intervals is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-17T00:12:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a Reedy fibrant Segal simplicial space restriction from a finite union of simplex faces to a subcomplex covering every face by consecutive intervals is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.Truncated.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"1787d2e274dd617b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictSegal.lean:42-57,275-325; the hits concern strict Segal simplicial sets, not Reedy fibrant simplicial spaces and weak equivalences of Kan mapping spaces. The grep hit PushoutProduct.lean:22 is a bibliography reference, not a Segal descent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping out of a simplicial spine into a Segal space is a weak homotopy equivalence and this property glues along finite unions of faces",
+   "results": "{\"t\": \"2026-10-17T00:12:12Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping out of a simplicial spine into a Segal space is a weak homotopy equivalence and this property glues along finite unions of faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.spineEquiv\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.Truncated.StrictSegal.spineToSimplex_interval\", \"SSet.IsStrictSegal\", \"SSet.Truncated.spine_surjective\", \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"SSet.Truncated.StrictSegal.spineToDiagonal\"], \"digest\": \"6bfe610f384ffdb9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictSegal.lean:42-57,275-325; the hits concern strict Segal simplicial sets, not Reedy fibrant simplicial spaces and weak equivalences of Kan mapping spaces. The grep hit PushoutProduct.lean:22 is a bibliography reference, not a Segal descent theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-equivalence-outer-horn",
@@ -83,5 +191,20 @@
   "group": "Q23"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-finite-cover-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved finite mapping-space gluing by strong induction with explicit overlap families and two successive pullbacks; derived the interval-cover comparison from the Segal spine map; applied gluing to the given family. No new nodes: all model and restriction facts are existing statements, and all auxiliary gluing arguments are written in the proof. Checked empty families, singleton faces, disconnected overlaps, and nonconsecutive ambient faces. No exact sorry-free project declaration or Mathlib match found.",
+  "blueprint": "Technical foundation of prop-coef-integral-exceptional-adjoint proof paragraph 2 (displayed derived coefficient adjunction), through the retained from/via chain. Realizes the finite-cover gluing used by lem-coef-segal-equivalence-outer-horn; Rezk Lemmas 10.1 and 11.11, not an additional claim of the ancestor paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-d9ff41d4b",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-d9ff41d4b (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full, and Rezk's paper online (pdftotext); the paper is not archived and the delivery has a WANTED line for it. Lemma 10.1 is on printed p.23: a cover is a union of interval faces with the same 0-space, and the proof uses a colimit over a poset of faces with G(n)∩α_iF(k)=α_iG(k). Lemma 11.11 is on printed p.27: C(k) is a colimit of faces containing vertices 0 and 1, each meeting d0H∪α0F(1) in a cover. The item states the general finite, intersection-closed face-family form of both. Its interval-cover definition requires every vertex and every consecutive edge, which fixes Rezk's 'same 0-space' condition: F([0,1])∪F([2,3]) in F(3) contains all vertices but misses edge 12. Step 1 is correct: monomorphisms are Reedy cofibrations and V→* is a Reedy fibration, so restrictions are Kan fibrations; Map(-,V) turns a union into a pullback over the intersection because sS is a presheaf category; F(S)∩F(T)=F(S∩T). Step 2 sets up the strong induction properly: with S maximal, H' and the overlap family {T∩S} are intersection-closed and strictly smaller, and the local hypotheses follow because F(U)⊆K. In step 3, E∩K=D∩K, pullbacks of trivial fibrations are trivial by the boundary-lifting characterization in kan-quillen, and 2-out-of-3 comes from the reedy-model-structure axioms. In step 4, Z=Y'∪E, Z∩F(S)=B and Y=Z∪F(S); two pullbacks and the composite lifting argument close the induction. In step 5, Yoneda gives M(F(m))=V_m, the spine restriction is the Segal map (identity for m=0,1), intervals are closed under intersection, G(S)∩F(I)=G(I), and 2-out-of-3 finishes; this proves Rezk 10.1 inside the item. Step 6 applies the gluing claim, with the empty and singleton cases covered. I tested the empty family, a singleton, the n=2 spine case (the Segal map), a family missing an intersection, and the S_J family used in outer-horn step 4. The statement is unchanged, nothing is weakened, and it is not a target, so the base-change check does not apply. There are no new nodes, all citations are in unit sk-prop-sf-biduality-general, there is no cycle and no SGA, and no tool_uses are needed. Mathlib searches cover all three kinds with no match (only StrictSegal hits). One duplicate candidate for the maintainer, outside this delivery: the existing unsplit node lem-coef-segal-interval-cover (Q89, 2026-10-17) is exactly step 5 and is the case F={[m]} of this item. It should become a one-step specialization of this item or be merged into it. The report's claim that created was changed to NZ is inaccurate, but the node's created field (outer-horn, Q23) is correct. No fixes written."
+ }
 }

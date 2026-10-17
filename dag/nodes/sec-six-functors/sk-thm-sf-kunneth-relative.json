@@ -3,43 +3,234 @@
  "blueprint": {
   "is": "sk-thm-sf-kunneth-relative",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Relative product theorem",
- "statement": "Let $B$ be a separated finite-type $k$-scheme, let $f:X\\to B$ and $g:Y\\to B$ be\nseparated of finite type, let $p,q$ be the projections of $X\\times_BY$, so\nthat $f\\times_Bg=g\\circ q=f\\circ p$, and put\n$K\\boxtimes L=p^*K\\otimes^L_\\Lambda q^*L$ for $K\\in\\Dctf(X,\\Lambda)$,\n$L\\in\\Dctf(Y,\\Lambda)$. Define the *relative Künneth map*\n$\\kappa^{\\mathrm{rel}}_{K,L}$ as the composite\n\n$$\n\\begin{aligned}\nR(f\\times_Bg)_!\\bigl(K\\boxtimes L\\bigr)\n&\\xrightarrow{\\ \\alpha_{g,q}^{-1}\\ }Rg_!Rq_!\\bigl(p^*K\\otimes^L q^*L\\bigr)\n\\xrightarrow{\\ Rg_!(\\operatorname{PF}_{q,p^*K,L})^{-1}\\ }\nRg_!\\bigl(Rq_!p^*K\\otimes^L L\\bigr)\\\\\n&\\xrightarrow{\\ Rg_!(\\operatorname{Ex}_!^{-1}\\otimes1)\\ }\nRg_!\\bigl(Lg^*Rf_!K\\otimes^L L\\bigr)\n\\xrightarrow{\\ Rg_!(\\sigma)\\ }\nRg_!\\bigl(L\\otimes^L Lg^*Rf_!K\\bigr)\\\\\n&\\xrightarrow{\\ (\\operatorname{PF}_{g,L,Rf_!K})^{-1}\\ }\nRg_!L\\otimes^L_\\Lambda Rf_!K\n\\xrightarrow{\\ \\sigma\\ }Rf_!K\\otimes^L_\\Lambda Rg_!L ,\n\\end{aligned}\n$$\n\nwhere $\\alpha_{g,q}$ is the composition isomorphism of\n[sk-thm-sf-comp-composition], $\\operatorname{PF}$ the projection\ntransformation and $\\operatorname{Ex}_!:Lg^*Rf_!\\to Rq_!Lp^*$ the exchange\ntransformation of [sk-def-sf-exchanges] for the Cartesian square\n$(p,q,f,g)$, and $\\sigma$ the symmetry of $\\otimes^L$; the second variable\n$Rf_!K$ of $\\operatorname{PF}_{g,L,Rf_!K}$ lies in $\\Dctf(B,\\Lambda)$, as the\ntyping of [sk-def-sf-exchanges] requires, by [sk-thm-sf-ctf-stability]. Then every arrow is an isomorphism\n([sk-thm-sf-comp-composition], [sk-rem-sf-pf-done],\n[sk-prop-sf-cbc]), so\n\n$$\n\\kappa^{\\mathrm{rel}}_{K,L}:R(f\\times_Bg)_!\\bigl(K\\boxtimes L\\bigr)\\xrightarrow{\\ \\sim\\ }\nRf_!K\\otimes^L_\\Lambda Rg_!L\n$$\n\nis an isomorphism in the ambient category $D^+(B,\\Lambda)$, natural in $K$ and\n$L$, compatible with finite reduction, scalar extension, and with the\nidentifications $Rf_!\\cong Rf_*$ for proper $f$. Moreover\n$\\kappa^{\\mathrm{rel}}$ is coherent: (i) *symmetry* — under the swap\n$X\\times_BY\\cong Y\\times_BX$ and $\\sigma$, $\\kappa^{\\mathrm{rel}}_{L,K}$\ncorresponds to $\\sigma\\circ\\kappa^{\\mathrm{rel}}_{K,L}$ (with the Koszul\nsigns of $\\sigma$); (ii) *triple products* — for a third\n$h:W\\to B$ and $M\\in\\Dctf(W,\\Lambda)$ the two iterated isomorphisms\n$R(f\\times_Bg\\times_Bh)_!(K\\boxtimes L\\boxtimes M)\\cong\nRf_!K\\otimes^LRg_!L\\otimes^LRh_!M$ agree after the associativity of\n$\\otimes^L$; (iii) *base change* — for $b:B'\\to B$, $Lb^*$ of\n$\\kappa^{\\mathrm{rel}}_{K,L}$ is $\\kappa^{\\mathrm{rel}}$ of the base-changed\ndata, through $\\operatorname{Ex}_!$ for $f$, $g$, $f\\times_Bg$ and the\nmonoidality of $Lb^*$; (iv) *projection formula* — for $Y=B$,\n$g=\\mathrm{id}_B$ one has $\\kappa^{\\mathrm{rel}}_{K,L}=\n\\operatorname{PF}_{f,K,L}^{-1}$. For $B=\\mathrm{Spec}\\,k$ and closed\nimmersions $i_Z:Z\\hookrightarrow X$, $i_W:W\\hookrightarrow Y$ it gives the\ncompact-support product on the closed subschemes\n$\\RG_c(Z,i_Z^*K)\\otimes^L_\\Lambda\\RG_c(W,i_W^*L)\\cong\n\\RG_c\\bigl(Z\\times_kW,(i_Z\\times i_W)^*(K\\boxtimes L)\\bigr)$; More generally, over\nany $B$ as above, for closed immersions $i:Z\\hookrightarrow X$,\n$j:W\\hookrightarrow Y$, with $i\\times_Bj:Z\\times_BW\\hookrightarrow X\\times_BY$\nand $h=f\\times_Bg$, there is a supported product isomorphism\n\n$$\nRf_!\\bigl(i_*i^*K\\bigr)\\otimes^L_{\\Lambda_B}Rg_!\\bigl(j_*j^*L\\bigr)\\cong\nRh_!\\bigl((i\\times_Bj)_*(i\\times_Bj)^*(K\\boxtimes L)\\bigr).\n$$\n\nCohomology with\nsupports $\\RG_Z(X,K)=\\RG(Z,Ri_Z^!K)$ is a different object and is not\nasserted here.",
+ "statement": "Use the standing field, coefficient categories and operations of [sk-def-sf-operations]: $k=\\overline{\\mathbf F}_{p_0^a}$, $a\\geq1$, $\\ell\\ne p_0$, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $\\Lambda\\in\\{\\mathcal O_E/\\varpi_E^n,\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Integral pullbacks and tensors are completed; rational and algebraically closed coefficients use the specified scalar localization and common finite stages. Let $B$ be a separated finite-type $k$-scheme, let $f:X\\to B$ and $g:Y\\to B$ be\nseparated of finite type, let $p,q$ be the projections of $X\\times_BY$, so\nthat $f\\times_Bg=g\\circ q=f\\circ p$, and put\n$K\\boxtimes L=p^*K\\otimes^L_\\Lambda q^*L$ for $K\\in\\Dctf(X,\\Lambda)$,\n$L\\in\\Dctf(Y,\\Lambda)$. Define the *relative Künneth map*\n$\\kappa^{\\mathrm{rel}}_{K,L}$ as the composite\n\n$$\n\\begin{aligned}\nR(f\\times_Bg)_!\\bigl(K\\boxtimes L\\bigr)\n&\\xrightarrow{\\ \\alpha_{g,q}^{-1}\\ }Rg_!Rq_!\\bigl(p^*K\\otimes^L q^*L\\bigr)\n\\xrightarrow{\\ Rg_!(\\operatorname{PF}_{q,p^*K,L})^{-1}\\ }\nRg_!\\bigl(Rq_!p^*K\\otimes^L L\\bigr)\\\\\n&\\xrightarrow{\\ Rg_!(\\operatorname{Ex}_!^{-1}\\otimes1)\\ }\nRg_!\\bigl(Lg^*Rf_!K\\otimes^L L\\bigr)\n\\xrightarrow{\\ Rg_!(\\sigma)\\ }\nRg_!\\bigl(L\\otimes^L Lg^*Rf_!K\\bigr)\\\\\n&\\xrightarrow{\\ (\\operatorname{PF}_{g,L,Rf_!K})^{-1}\\ }\nRg_!L\\otimes^L_\\Lambda Rf_!K\n\\xrightarrow{\\ \\sigma\\ }Rf_!K\\otimes^L_\\Lambda Rg_!L ,\n\\end{aligned}\n$$\n\nwhere $\\alpha_{g,q}$ is the composition isomorphism of\n[thm-sf-comp-composition] at finite coefficients and its completed and transported forms on the domains of [fix-lem-exchanges], $\\operatorname{PF}$ the projection\ntransformation and $\\operatorname{Ex}_!:Lg^*Rf_!\\to Rq_!Lp^*$ the exchange\ntransformation of [sk-def-sf-exchanges] for the Cartesian square\n$(p,q,f,g)$, and $\\sigma$ the symmetry of $\\otimes^L$; the second variable\n$Rf_!K$ of $\\operatorname{PF}_{g,L,Rf_!K}$ lies in $\\Dctf(B,\\Lambda)$, as the\ntyping of [sk-def-sf-exchanges] requires, by [thm-sf-ctf-stability]. Then every arrow is an isomorphism\n([thm-sf-comp-composition], [sk-rem-sf-pf-done],\n[fix-lem-exchanges]), so\n\n$$\n\\kappa^{\\mathrm{rel}}_{K,L}:R(f\\times_Bg)_!\\bigl(K\\boxtimes L\\bigr)\\xrightarrow{\\ \\sim\\ }\nRf_!K\\otimes^L_\\Lambda Rg_!L\n$$\n\nis an isomorphism in the ambient category $D^+(B,\\Lambda)$, natural in $K$ and\n$L$, compatible with finite reduction, scalar extension, and with the\nidentifications $Rf_!\\cong Rf_*$ for proper $f$. Moreover\n$\\kappa^{\\mathrm{rel}}$ is coherent: (i) *symmetry* — under the swap\n$X\\times_BY\\cong Y\\times_BX$ and $\\sigma$, $\\kappa^{\\mathrm{rel}}_{L,K}$\ncorresponds to $\\sigma\\circ\\kappa^{\\mathrm{rel}}_{K,L}$ (with the Koszul\nsigns of $\\sigma$); (ii) *triple products* — for a third\nseparated finite-type $h:W\\to B$ and $M\\in\\Dctf(W,\\Lambda)$ the two iterated isomorphisms\n$R(f\\times_Bg\\times_Bh)_!(K\\boxtimes L\\boxtimes M)\\cong\nRf_!K\\otimes^LRg_!L\\otimes^LRh_!M$ agree after the associativity of\n$\\otimes^L$; (iii) *base change* — for $b:B'\\to B$ with $B'$ a separated finite-type $k$-scheme, $Lb^*$ of\n$\\kappa^{\\mathrm{rel}}_{K,L}$ is $\\kappa^{\\mathrm{rel}}$ of the base-changed\ndata, through $\\operatorname{Ex}_!$ for $f$, $g$, $f\\times_Bg$ and the\nmonoidality of $Lb^*$; (iv) *projection formula* — for $Y=B$,\n$g=\\mathrm{id}_B$ one has $\\kappa^{\\mathrm{rel}}_{K,L}=\n\\operatorname{PF}_{f,K,L}^{-1}$. For $B=\\mathrm{Spec}\\,k$ and closed\nimmersions $i_Z:Z\\hookrightarrow X$, $i_W:W\\hookrightarrow Y$ it gives the\ncompact-support product on the closed subschemes\n$\\RG_c(Z,i_Z^*K)\\otimes^L_\\Lambda\\RG_c(W,i_W^*L)\\cong\n\\RG_c\\bigl(Z\\times_kW,(i_Z\\times i_W)^*(K\\boxtimes L)\\bigr)$; More generally, over\nany $B$ as above, for closed immersions $i:Z\\hookrightarrow X$,\n$j:W\\hookrightarrow Y$, with $i\\times_Bj:Z\\times_BW\\hookrightarrow X\\times_BY$\nand $h=f\\times_Bg$, there is a supported product isomorphism\n\n$$\nRf_!\\bigl(i_*i^*K\\bigr)\\otimes^L_{\\Lambda_B}Rg_!\\bigl(j_*j^*L\\bigr)\\cong\nRh_!\\bigl((i\\times_Bj)_*(i\\times_Bj)^*(K\\boxtimes L)\\bigr).\n$$\n\nCohomology with\nsupports $\\RG_Z(X,K)=\\RG(Z,Ri_Z^!K)$ is a different object and is not\nasserted here.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
   "place": "node sk-thm-sf-kunneth-relative, order 2509"
  },
  "stmt_deps": [
+  "sk-def-sf-operations",
   "sk-def-sf-exchanges",
+  "def-weil-finite-tor-amplitude",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-comp-composition",
+  "fix-lem-exchanges",
+  "thm-sf-ctf-stability",
   "sk-rem-sf-pf-done"
  ],
  "proof": [
   {
-   "text": "Four steps, each an instance of one ingredient, and they are the arrows of\nthe composite.\n*(1)* By the composition law, $R(f\\times_Bg)_!\\cong Rg_!\\circ Rq_!$, so\n$R(f\\times_Bg)_!(K\\boxtimes L)\\cong Rg_!\\bigl(Rq_!(p^*K\\otimes^Lq^*L)\\bigr)$.\n*(2)* The projection formula for $q$ (proved in this section,\n[sk-rem-sf-pf-done]) gives\n$Rq_!(p^*K\\otimes^Lq^*L)\\cong Rq_!(p^*K)\\otimes^L_\\Lambda L$.\n*(3)* Base change for the Cartesian square ([sk-prop-sf-cbc]) gives\n$Rq_!(p^*K)\\cong Lg^*Rf_!K$.\n*(4)* The projection formula for $g$, with $Rf_!K\\in\\Dctf(B,\\Lambda)$ by\n[sk-thm-sf-ctf-stability], gives\n$Rg_!\\bigl(L\\otimes^LLg^*Rf_!K\\bigr)\\cong Rg_!L\\otimes^LRf_!K$. The\nreference to [sk-thm-sf-ctf-stability] is a forward one, but not circular:\nits $Rf_!$ clause is [sk-lem-sf-open-ctf] for $j_!$ and\n[sk-thm-sf-direct-image-tor-amplitude] ([sk-cor-sf-direct-image-ctf] on\nthe pro-étale site) for the proper part, assembled along a compactification,\nand neither these nor anything they depend on uses the present theorem. The\ncompact-support form on closed subschemes is the case of the morphisms\n$Z\\to\\mathrm{Spec}\\,k$, $W\\to\\mathrm{Spec}\\,k$ and the objects $i_Z^*K$,\n$i_W^*L$ (pullback preserves $\\Dctf$), using\n$i_Z^*K\\boxtimes i_W^*L=(i_Z\\times i_W)^*(K\\boxtimes L)$. The supported product over a general base $B$ is\n$\\kappa^{\\mathrm{rel}}$ applied to $i_*i^*K$ and $j_*j^*L$ (which lie in\n$\\Dctf$, since $i^*$ and the exact functor $i_*$ preserve constructibility and\nTor amplitude), using that the exterior product of extensions by zero along\nclosed immersions is the extension by zero of the exterior product:\n$(i_*i^*K)\\boxtimes(j_*j^*L)\\cong(i\\times_Bj)_*(i\\times_Bj)^*(K\\boxtimes L)$.\nSince $i$ and $j$ are proper, $Rf_!i_*=R(fi)_!$ and $Rg_!j_*=R(gj)_!$, so for\n$B=\\mathrm{Spec}\\,k$ this recovers the compact-support form above. Coherence:\n(iv) holds by construction, since $\\alpha_{\\mathrm{id},f}$,\n$\\operatorname{Ex}_!$ of an identity square and $\\operatorname{PF}_{\\mathrm{id}}$\nare identities ([sk-thm-sf-comp-composition], [sk-prop-sf-cbc],\n[sk-prop-sf-pf-coherence]) and the two symmetries cancel; (i)–(iii) are\nidentities between composites of $\\alpha$, $\\operatorname{Ex}_!$ and\n$\\operatorname{PF}$ attached to the same pasted Cartesian squares, and follow\nfrom the associativity of the composition law, the pasting compatibility of\n$\\operatorname{Ex}_!$ ([sk-prop-sf-cbc]), the associativity pentagon of\n$\\operatorname{PF}$ and its compatibility with base change through\n$\\operatorname{Ex}_!$ (the pentagon and the base-change clause of\n[sk-prop-sf-pf-coherence]), the symmetry and associativity of $\\otimes^L$,\nand the mate identity of [sk-lem-sf-mate]. Explicitly: (iii) is the\nbase-change clause for $\\operatorname{PF}_q$ along the base change of $b$ to\n$Y$ and for $\\operatorname{PF}_g$ along $b$, combined with the pasting of\n$\\operatorname{Ex}_!$ for the three squares over $b$; (i) uses the mate\ndescription of $\\operatorname{PF}\\circ(\\operatorname{Ex}_!\\otimes1)$ recorded\nin the proof of that clause: after reduction to proper $f,g$ (independence of\nthe compactification), both $\\kappa^{\\mathrm{rel}}_{K,L}$ and\n$\\sigma\\circ\\kappa^{\\mathrm{rel}}_{L,K}$ are inverse to the transpose of the\nsymmetric map $Lp^*Lf^*Rf_*K\\otimes^LLq^*Lg^*Rg_*L\\to Lp^*K\\otimes^LLq^*L$\ngiven by the two counits (lem:sf-kunneth-coherence spells this out).",
+   "text": "First instantiate the abstract framework used by the existing expanded theorem, rather than assuming an unproved datum merely because the operations have been defined. The concrete package [prop-functor-package] supplies compact-support composition and proper coincidence (clause 3), compact-support base change (clause 4), projection (clause 5), and coefficient comparisons (clauses 1--2 and the concluding coherence assertion); its last paragraph supplies constructible exceptional adjunction and geometric biduality. The ordinary adjunction with its pasted units and counits is [fix-prop-adjunctions](1),(3), and the comparison coherence is [fix-prop-coherence]. These statements, restricted to their finite-Tor domains, give the clauses (A1)--(A6) required by [def-sf-datum] for the concrete coefficient operations. No unrestricted ambient exceptional adjoint is required. We use this established concrete instance solely to discharge the framework hypothesis of the already-existing formal results below; it is not an extra hypothesis on this theorem. The existing expanded theorem [thm-sf-kunneth-relative] is in this very unit and uses exactly this ordered canonical composite: inverse composition, inverse projection for $q$, inverse exchange for $(p,q,f,g)$, symmetry, inverse projection for $g$, symmetry. Its statement gives invertibility, naturality, finite reduction, scalar extension and the proper identifications for these separated finite-type maps and finite-Tor inputs. Apply it to the concrete datum just specified and to $f,g,K,L$. Its canonical map, not an unspecified isomorphism, is the displayed map here.",
    "uses": [
-    "sk-rem-sf-pf-done",
-    "sk-lem-sf-open-ctf",
-    "sk-thm-sf-direct-image-tor-amplitude"
+    "prop-functor-package",
+    "fix-prop-adjunctions",
+    "fix-prop-coherence",
+    "def-sf-datum",
+    "thm-sf-kunneth-relative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Four arrows (1)--(4), naturality and coefficient/proper compatibility"
+   }
+  },
+  {
+   "text": "Apply the existing coherence lemma [lem-sf-kunneth-coherence] to the same canonical composite. Its clauses (i), (ii), (iii), (iv) assert respectively the signed swap identity, agreement of the two triple products after the canonical associators, base change through the three compact-support exchanges and monoidal pullback, and the identity-factor projection formula. These are exactly the four coherence assertions here. The third map $h$ has the separated finite-type hypothesis required in clause (ii); clause (iii) is used only for a separated finite-type $B'$, so all corners remain in the specified categories. Both existing nodes use the standing six-functor framework and canonical coefficient comparisons; no assertion about arbitrary discrete integral etale coefficients is made.",
+   "uses": [
+    "lem-sf-kunneth-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Coherence paragraph (i)--(iv)"
+   }
+  },
+  {
+   "text": "For $B=\\operatorname{Spec} k$, the closed-subscheme compact-support conclusion is already explicitly the final displayed conclusion of [thm-sf-kunneth-relative]. Apply it to $i_Z,i_W,K,L$ and invert the relative map as in that display. Its statement identifies the pullback of the external product with the external product of the restrictions and identifies the output with coefficient cohomology. Hence it proves the claimed $\\RGamma_c$ formula at each of the four coefficient stages. This is ordinary restriction to the closed subschemes, with no extraordinary restriction.",
+   "uses": [
+    "thm-sf-kunneth-relative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Compact-support specialization after (4)"
+   }
+  },
+  {
+   "text": "For the general supported product put $A=Li^*K$, $C=Lj^*L$, $T=X\\times_BY$, $U=Z\\times_BY$, $V=X\\times_BW$, and $D=Z\\times_BW$. Let $a:U\\to T$, $b:V\\to T$, $c:D\\to U$, $d:D\\to V$ be the natural maps; then the square $(c,d,a,b)$ is Cartesian and $r=ac=bd=i\\times_Bj$. Each of $a,b,c,d$ is a base change of $i$ or $j$, hence is closed by [lem-weil-pbc-closed-immersion-base-change]; their composite $r$ is closed by [lem-weil-pbc-closed-immersion-comp]. All these maps are proper and separated finite type by [lem-weil-pbc-closed-immersion-proper]. The projections are separated finite type by [lem-pod-separated-finite-type-base-change]. All sources are separated finite-type $k$-schemes: composites of separated morphisms are separated and composites of morphisms locally of finite type are locally of finite type by clause (e) of [lem-weil-pbc-proper-fp-permanence], and a composite of quasi-compact morphisms is quasi-compact because the preimage of a quasi-compact open under the second map is quasi-compact, hence has quasi-compact preimage under the first.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Supported-product paragraph, geometry and hypotheses"
+   }
+  },
+  {
+   "text": "The restriction objects $A,C$, the direct images $Ri_*A,Rj_*C$, their pullbacks to $T$, and all tensors used next lie in the finite-Tor constructible domains. At finite coefficients these are clauses (i), (iii), (ii) of [thm-sf-ctf-stability], respectively. At integral coefficients, pullback and completed tensor preserve bounded constructibility by [lem-pur-integral-operations-preserve-constructible], and direct image does so by [lem-sf-integral-direct-image-constructible]; clause (vii) of [thm-sf-ctf-stability] identifies integral bounded constructibility with the finite-Tor category. The rational and common-stage versions follow from the explicit objectwise operations and linear extension in [def-weil-derived-pullback-tensor-hom] and the coefficient-passage clauses of stability. At finite coefficients [lem-sf-proetale-constructible-origin](ii) supplies the etale-origin witnesses needed for compact support and base change. Use the same statement on every finite reduction of integral inputs. Thus the following proper base changes are on witnessed finite or completed/transported domains, not arbitrary pro-etale complexes.",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Supported-product paragraph: preservation for the closed-immersion inputs"
+   }
+  },
+  {
+   "text": "Write $u:U\\to Z$, $v:V\\to W$. Proper base change gives $Lp^*Ri_*A\\cong Ra_*Lu^*A$, $Lq^*Rj_*C\\cong Rb_*Lv^*C$, and $La^*Rb_*Lv^*C\\cong Rc_*Ld^*Lv^*C$. At finite coefficients these are compact-support base change [thm-cbc-finite-level-proetale] through the proper identification [cor-cbc-proper-coincidence]. Integrally use [thm-cbc-complete-proetale], and rationally and at the common stage [thm-cbc-finite-extension], [thm-cbc-qbar], with the proper compactification (open factor the identity). All schemes are noetherian by [lem-weil-pbc-finite-type-over-noetherian] over the field, and finite-dimensional by [lem-kun-dimension-finite-type]; $\\ell$ is invertible because $\\ell\\ne p_0$. The witnessed and constructible hypotheses were checked in step 5. Therefore each of these three displayed proper base-change maps is available at the coefficient stage under consideration.",
+   "uses": [
+    "thm-cbc-finite-level-proetale",
+    "cor-cbc-proper-coincidence",
+    "thm-cbc-complete-proetale",
+    "thm-cbc-finite-extension",
+    "thm-cbc-qbar",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Supported-product paragraph: base change for the closed immersions"
+   }
+  },
+  {
+   "text": "Now abbreviate $A_U=Lu^*A$ and $C_V=Lv^*C$. The three comparisons of step 6 and the proper projection formula [fix-prop-projection-formula], read in the appropriate direction and using tensor symmetry, give the explicit calculation\n$$\n\\begin{aligned}\nLp^*Ri_*A\\otimes^L Lq^*Rj_*C\n&\\cong Ra_*A_U\\otimes^L Rb_*C_V\\\\\n&\\cong Ra_*\\bigl(A_U\\otimes^L La^*Rb_*C_V\\bigr)\\\\\n&\\cong Ra_*\\bigl(A_U\\otimes^L Rc_*Ld^*C_V\\bigr)\\\\\n&\\cong Ra_*Rc_*\\bigl(Lc^*A_U\\otimes^L Ld^*C_V\\bigr)\\\\\n&\\cong Rr_*\\bigl(Lz^*A\\otimes^L Lw^*C\\bigr)\\\\\n&\\cong Rr_*Lr^*\\bigl(K\\boxtimes L\\bigr).\n\\end{aligned}\n$$\nHere $z:D\\to Z$, $w:D\\to W$ are the projections. The penultimate comparison is the ordinary direct-image composition [lem-weil-derived-direct-image-composition]. For the last one use monoidal pullback and its composition comparison [lem-pur-derived-pullback-tensor-iso], together with $p\\circ r=i\\circ z$ and $q\\circ r=j\\circ w$. Projection for the proper $a,c$ is the direct-image instance of the cited compact-support projection formula. All its second variables are finite-Tor by step 5. This is a few-line application of already cited statements, so the exterior-product identity is a proof step, not a new node.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-weil-derived-direct-image-composition",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Supported-product paragraph: exterior product of extensions by zero"
+   }
+  },
+  {
+   "text": "Apply the already established relative formula of [thm-sf-kunneth-relative] to $Ri_*Li^*K$ and $Rj_*Lj^*L$, which satisfy its finite-Tor hypotheses by step 5. Invert it and apply $Rh_!$ to the final isomorphism of step 7. The result is exactly\n$$Rf_!(Ri_*Li^*K)\\otimes^L Rg_!(Rj_*Lj^*L)\\cong Rh_!Rr_*Lr^*\\bigl(K\\boxtimes L\\bigr).$$\nThis is the asserted supported product, with the conventional $i_*,j_*,r_*$ notation for closed-immersion extension. The field compact-support interpretation is step 3. The separate $\\RGamma_Z(X,K)=\\RGamma(Z,Ri_Z^!K)$ object in the statement is not used or identified with these restrictions.",
+   "uses": [
+    "thm-sf-kunneth-relative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Supported-product conclusion"
+   }
   }
  ],
  "proof_deps": [
-  "sk-rem-sf-pf-done",
-  "sk-lem-sf-open-ctf",
-  "sk-thm-sf-direct-image-tor-amplitude"
+  "cor-cbc-proper-coincidence",
+  "def-sf-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "fix-prop-adjunctions",
+  "fix-prop-coherence",
+  "fix-prop-projection-formula",
+  "lem-kun-dimension-finite-type",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-kunneth-coherence",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "prop-functor-package",
+  "thm-cbc-complete-proetale",
+  "thm-cbc-finite-extension",
+  "thm-cbc-finite-level-proetale",
+  "thm-cbc-qbar",
+  "thm-sf-ctf-stability",
+  "thm-sf-kunneth-relative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+  "place": "Four-arrow argument, coherence paragraph, compact-support specialization, and supported-product paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative Kunneth isomorphism for compact support pushforward and external derived tensor product",
+   "results": "8 hits; ; Rep.torIso, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, PresheafOfModules.pushforward₀CompToPresheaf, SheafOfModules.pushforwardComp_inv_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp', CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit . Read the returned hits: functor-diagram external products, ordinary sheaf pushforward, algebraic tensor products or function compact support; none states scheme etale compact-support Kunneth.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived compact support direct image external product over a base scheme",
+   "results": "8 hits; ; AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.Modules.pushforwardComp . Read the returned hits: functor-diagram external products, ordinary sheaf pushforward, algebraic tensor products or function compact support; none states scheme etale compact-support Kunneth.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kunneth\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.externalProductCompDiagIso",
+   "results": "4 hits; ; CategoryTheory.MonoidalCategory.externalProductCompDiagIso, CategoryTheory.MonoidalCategory.externalProductCompDiagIso_hom_app_app, CategoryTheory.MonoidalCategory.externalProductCompDiagIso_inv_app_app, CategoryTheory.IsSifted.factorization_prodComparison_colim . Read the returned hits: functor-diagram external products, ordinary sheaf pushforward, algebraic tensor products or function compact support; none states scheme etale compact-support Kunneth.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|Künneth|LowerShriek|externalProduct",
+   "results": "25 hits; ; Mathlib/CategoryTheory/Limits/Sifted.lean, Mathlib/CategoryTheory/Limits/Sifted.lean, Mathlib/CategoryTheory/Limits/Sifted.lean, Mathlib/CategoryTheory/Limits/Sifted.lean, Mathlib/CategoryTheory/Limits/Sifted.lean, Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean . Read the returned hits: functor-diagram external products, ordinary sheaf pushforward, algebraic tensor products or function compact support; none states scheme etale compact-support Kunneth.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|externalProduct",
+   "results": "0 hits; ; ",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived compact support direct image of external tensor product is tensor of direct images",
+   "results": "8 hits; ; CategoryTheory.MonoidalCategory.externalProductCompDiagIso, HasCompactSupport.comp_isClosedEmbedding, TensorProduct.finsuppLeft, PiTensorProduct.ofDFinsuppEquiv_tprod_apply, TensorProduct.exists_finsupp_right, HasCompactMulSupport.mul, SSet.Subcomplex.range_tensorHom, TensorProduct.finsuppRight . Read the returned hits: functor-diagram external products, ordinary sheaf pushforward, algebraic tensor products or function compact support; none states scheme etale compact-support Kunneth.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|Künneth|LowerShriek|externalProduct",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "0 hits in AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -121,5 +312,69 @@
    "missing": [],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-sf-kunneth-relative",
+  "worker": "stage1",
+  "summary": "Reused the existing expanded core relative-product theorem and coherence lemma in this unit. Filled the standing coefficient conventions and corrected the out-of-domain base-change quantifier. Proved the general supported product by a Cartesian factorization, three proper base-change comparisons, two projection formulas, and ordinary pushforward composition; the earlier proposed exterior-product child is elementary from these existing nodes and was removed. No new nodes. All search entries are from the actual msearch log; all cited statements have verbatim citations.",
+  "blueprint": "Steps 1--2 cover (1)--(4), coefficient/proper compatibility and (i)--(iv) through the existing realizations in the same unit; step 3 is its compact-support specialization; steps 4--8 expand its supported-product paragraph.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Finite-Tor typing of closed restrictions and direct images; the unit itself invokes this forward preservation result."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic preservation of integral pullback and completed tensor; needed to check the higher-coefficient inputs, not replace the product route."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Integral closed direct images must remain constructible before applying the relative formula."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic monoidal pullback and composition comparison identifies the restriction of the exterior product."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic ordinary pushforward composition combines the two closed extensions in the explicit projection calculation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type noetherian permanence checks the rational base-change domains."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic dimension bound checks the rational base-change hypotheses."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Discharges the concrete-instance hypotheses of the existing abstract formal theorem and coherence lemma; no package assertion replaces their four-arrow argument."
+   },
+   {
+    "node": "fix-prop-coherence",
+    "why": "Verifies the canonical concrete comparison coherence required to instantiate the existing formal relative-product results."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ctf-stability",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "prop-functor-package",
+  "fix-prop-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-1edd8bf7e",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-1edd8bf7e (reviewer sub-agent of L); spot-checked: Read the whole delivery against main-20261015 sk-thm-sf-kunneth-relative (_section, proof, thm-sf-kunneth-relative and lem-sf-kunneth-coherence with their proofs), the unit record, every cited node's statement, and the underlying datum/exchange/composition nodes. Mechanical checks: proof_deps equals the union of the steps' uses; every cited id exists and none is merged; replacing the dangling sk-* references with real nodes is correct; the transitive closure (14037 nodes) never reaches the item, so there is no cycle; every off-route statement is declared in tool_uses; no SGA. The statement matches the blueprint composite and all its clauses. Restricting B' to separated finite type is a forced domain correction, not a weakening: kappa of the base-changed data is defined only over such a base, and the existing reviewed thm and lemma already carry it. It is correctly reported as STATEMENT-DISPUTED. Step 1: the def-sf-datum instance is discharged by prop-functor-package clauses 3-5 and its final paragraph, fix-prop-adjunctions (1),(3) and fix-prop-coherence. These are the same Ex/PF/alpha as the item's. Step 2: lem-sf-kunneth-coherence (i)-(iv) match the item's (i)-(iv) exactly. Step 3: the B=Spec k display is literally in thm-sf-kunneth-relative. Steps 4-8: I checked the Cartesian squares (U x_T V = Z x_B W, r = ac = bd), the stagewise finite-Tor typing, the proper base change at all four stages (noetherian, finite dimension and witness hypotheses checked), and recomputed the step-7 chain of two PFs, two base changes, composition and monoidal pullback. All correct; step 8 gives exactly the displayed supported product. Small cases tested: empty Z or W, identity immersions, g=id, B=Spec k, origin in A^1, nonreduced Z, Z/ell^2. There are no new nodes, and the step-7 calculation is rightly a step rather than a node. Two repairs are in fixes/: (1) B4/C1: step 4 had 9 literal TAB characters where \\times and \\to had been corrupted, which the second reading claimed were fixed. I restored the TeX and replaced the hand-made composition argument with lem-weil-pbc-proper-fp-permanence (e), a Mathlib leaf, plus a one-line quasi-compactness remark, and updated uses and proof_deps. (2) B2/E1: statement (ii) now reads 'separated finite-type h:W->B', the hypothesis that Rh_! and lem-sf-kunneth-coherence (ii) need and that step 2 already relied on. All nine declared tool_uses accepted.; 1 file(s) fixed by the reviewer"
  }
 }

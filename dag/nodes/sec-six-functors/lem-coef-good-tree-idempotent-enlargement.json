@@ -32,9 +32,107 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the ordinary category $\\mathcal K=X/\\mathcal A$ throughout; compositions below are written right to left. All its Hom sets are small. It has every small colimit: adjoin a new initial indexing vertex with value $X$ and the structural arrows to the given underlying diagram, and take its colimit in $\\mathcal A$. Cocones on this augmented diagram are precisely cocones under $X$, by [def-weil-pbc-category-colimit]. For a nonempty filtered diagram the underlying colimit itself suffices: the maps from $X$ into its apex agree because any two indices have a common successor. Thus the forgetful functor $U:\\mathcal K\\to\\mathcal A$ creates small $\\tau$-filtered colimits. If downward-closed subsets increase with union $E$, their $Y$-objects have colimit $Y_E$ in $\\mathcal K$: each vertex and each order arrow of $E$ occurs in one member, and compatible cocones agree at larger members. This also covers the empty tree, using $Y_\\varnothing=1_X$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.2-3 and the union-colimit calculations used in A.1.5.8-9; explicit universal-property argument."
+   }
+  },
+  {
+   "text": "For a $\\tau$-presentable object $P$ of $\\mathcal A$, put $F(P)=(X\\to X\\amalg P)$. A map under $X$ from $F(P)$ to $Z$ is exactly a map $P\\to UZ$. Step 1 and presentability of $P$ show that $F(P)$ is $\\tau$-presentable in $\\mathcal K$. Its initial object $1_X$ is also $\\tau$-presentable: its Hom functor is the singleton set, whose colimit over a nonempty filtered category is singleton (all representatives agree at a common successor). By well-founded induction, each $Y_t$ is $\\tau$-presentable in $\\mathcal K$. Indeed its strict predecessor diagram has fewer than $\\tau$ morphisms: for an infinite set of objects use $\\theta\\cdot\\theta=\\theta$ from [lem-coef-infinite-cardinal-square-power], and the finite case is immediate. Its values are presentable by induction, so [lem-coef-ordinary-small-colimit-presentable] makes $Y_{T_{<t}}$ presentable, including the empty case. The specified cell square is the pushout in $\\mathcal K$ of $Y_{T_{<t}}\\leftarrow F(P_t)\\to F(Q_t)$: maps from this pushout correspond exactly to maps from the original square in $\\mathcal A$ that fix $X$. The same small-colimit lemma makes $Y_t$ presentable. Finally, for any downward-closed $E$ of size less than $\\tau$, apply that lemma to the restricted diagram to obtain $\\tau$-presentability of $Y_E$ in $\\mathcal K$. No claim of presentability of its underlying object is made.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-ordinary-small-colimit-presentable",
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.8 proof, sentence asserting compactness in the undercategory; expanded using the small-colimit presentability theorem, printed pp. 802-803."
+   }
+  },
+  {
+   "text": "Let $\\mathscr P$ be the poset of downward-closed subsets $E\\subseteq T$ of size less than $\\tau$. It is small, being a subcollection of the power set of $T$. For any $S\\subseteq T$ of size less than $\\tau$, its downward closure is $\\bigcup_{t\\in S}(T_{<t}\\cup\\{t\\})$ and has size less than $\\tau$ by regularity. Also a union of fewer than $\\tau$ members of $\\mathscr P$ is a member, so $\\mathscr P$ is $\\tau$-filtered, including the empty upper-bound requirement. The diagrams $E\\mapsto Y_E$ and $E\\mapsto Y_{B\\cap E}$ in $\\mathcal K$ have colimits $Y_T$ and $Y_B$, respectively. To check this, a compatible family of cocones gives a leg for each vertex by taking its downward closure; legs are independent of this choice by unions. Every order arrow lies in one such subset, so its cocone relation holds. Conversely, restricting a cocone gives that family. The same argument applies inside $B$, since it is downward-closed. Every tail $E\\supseteq E_*$ of $\\mathscr P$ has these same colimits: extend a cocone on the tail by using $E\\cup E_*$ for each missing $E$; unions prove independence and uniqueness.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.8-9, the posets of small downward-closed subsets and their tails; explicit smallness, filteredness and cocone verification."
+   }
+  },
+  {
+   "text": "If $Z$ is $\\tau$-presentable in $\\mathcal K$, its Hom functor sends either of the two tail presentations in Step 3 to a colimit of sets. Apply clauses (1)-(3) of [lem-weil-pbc-filtered-colimit-sets-elementwise]. Every map $Z\\to Y_T$ factors through some $Y_E$ in the chosen tail, and every map $Z\\to Y_B$ factors through some $Y_{B\\cap E}$. Two maps from $Z$ into stages of one of these presentations which agree in its total colimit become equal after transition to a larger member of $\\mathscr P$. Finitely many such factorizations and equality witnesses can all be imposed at one larger member, by taking the union of their indices. These statements concern maps in $\\mathcal K$, so both factorizations and witnesses fix $X$. They apply to every small-subtree object from Step 2, without an assumption on $X$ or $Y_B$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.8 and A.1.5.9 compactness arguments; factorization and equality detection are expanded using Hom preservation and filtered-set clauses (1)-(3)."
+   }
+  },
+  {
+   "text": "Choose $C_0$ as the downward closure of the prescribed $E_0$ and set $H_n=B\\cap C_n$ whenever $C_n$ is chosen. We recursively construct increasing $C_n\\in\\mathscr P$ and maps $a_n:Y_{C_n}\\to Y_{C_{n+1}}$, $b_n:Y_{H_n}\\to Y_{H_{n+1}}$ in $\\mathcal K$. Write $c_n=i_{C_n,C_{n+1}}$, $h_n=i_{H_n,H_{n+1}}$, and $j_n=i_{H_n,C_n}$. Require $i_{C_{n+1},T}a_n=e_Ti_{C_n,T}$, $i_{H_{n+1},B}b_n=e_Bi_{H_n,B}$, and $a_nj_n=j_{n+1}b_n$ for every $n$. For $n\\ge1$ additionally require\n$$a_nc_{n-1}=c_na_{n-1},\\quad a_na_{n-1}=c_na_{n-1},\\quad b_nh_{n-1}=h_nb_{n-1},\\quad b_nb_{n-1}=h_nb_{n-1}.$$\nThese are delayed compatibility and idempotence equations; the individual maps $a_n,b_n$ are between different stages and are not asserted to be idempotents.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.8-9, countable enlargement invariant; equivalent direct construction with partial maps instead of idempotents at intermediate stages."
+   }
+  },
+  {
+   "text": "Here is the recursion step, including existence of all its equations. Once $C_n$ is given, Step 2 makes $Y_{C_n}$ and $Y_{H_n}$ presentable in $\\mathcal K$. Use Step 4 on the tail above $C_n$ to factor $e_Ti_{C_n,T}$ and $e_Bi_{H_n,B}$ through $Y_F$ and $Y_{B\\cap F}$ for a common $F\\supseteq C_n$. Call these preliminary maps $a,b$. The maps $aj_n$ and $i_{B\\cap F,F}b$ from $Y_{H_n}$ agree in $Y_T$, since $e_Ti_{B,T}=i_{B,T}e_B$. Enlarge $F$ using Step 4 to make them equal. If $n\\ge1$, the maps $ac_{n-1}$ and $i_{C_n,F}a_{n-1}$ agree in $Y_T$ by the already chosen global factorization for $a_{n-1}$. The maps $aa_{n-1}$ and $i_{C_n,F}a_{n-1}$ agree there because their composites are $e_T^2i_{C_{n-1},T}$ and $e_Ti_{C_{n-1},T}$. Their source $Y_{C_{n-1}}$ is presentable, so Step 4 makes both equalities literal after enlargement. Likewise $bh_{n-1}$ and $i_{H_n,B\\cap F}b_{n-1}$, and $bb_{n-1}$ and that same map, agree in $Y_B$ by the global factorization and $e_B^2=e_B$; use the $Y_B$-presentation to impose these two equalities, with presentable source $Y_{H_{n-1}}$. Take a common larger $F$, postcompose $a,b$ with the transition maps, and set $C_{n+1}=F$, $a_n=a$, $b_n=b$. Enlargements preserve every equation already imposed, since the inclusion squares commute. At $n=0$ only the first compatibility equality is imposed. Thus all stages exist, using equality witnesses rather than cancellation of nonmonic canonical maps.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.9 proof, conditions (iii)-(v), printed pp. 804-805; explicit expansion of the omitted compactness argument, using the two-stage equations of A.1.5.8."
+   }
+  },
+  {
+   "text": "Put $D=\\bigcup_{n<\\omega}C_n$ and $H=\\bigcup_{n<\\omega}H_n=B\\cap D$. Both are downward-closed, contain the required initial elements where appropriate, and have size less than $\\tau$ by uncountable regularity. Step 1 identifies their objects with the colimits of the two chains. Let $u_n:Y_{C_n}\\to Y_D$ and $v_n:Y_{H_n}\\to Y_H$ be the canonical legs. The equations $a_{n+1}c_n=c_{n+1}a_n$ show that $u_{n+1}a_n$ are a cocone; hence they define $e_D:Y_D\\to Y_D$ with $e_Du_n=u_{n+1}a_n$. Similarly obtain $e_Hv_n=v_{n+1}b_n$. Compute\n$$e_D^2u_n=u_{n+2}a_{n+1}a_n=u_{n+2}c_{n+1}a_n=u_{n+1}a_n=e_Du_n.$$\nThe colimit uniqueness clause yields $e_D^2=e_D$. The identical calculation with $b,h,v$ gives $e_H^2=e_H$. All these are morphisms in $\\mathcal K$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.8-9, passage to the countable union and verification of idempotence, printed pp. 803-805; explicit calculation on colimit legs."
+   }
+  },
+  {
+   "text": "Precomposing with $u_n$ and using its defining equation gives\n$$i_{D,T}e_Du_n=i_{C_{n+1},T}a_n=e_Ti_{C_n,T}=e_Ti_{D,T}u_n.$$\nUniqueness for $Y_D$ proves the first required equation. The analogous computation with $v_n,b_n$ gives $i_{H,B}e_H=e_Bi_{H,B}$. Finally put $j=i_{H,D}$ and use $jv_n=u_nj_n$. Then\n$$e_Djv_n=u_{n+1}a_nj_n=u_{n+1}j_{n+1}b_n=jv_{n+1}b_n=je_Hv_n.$$\nUniqueness for $Y_H$ gives $je_H=e_Dj$. Since $E_0\\subseteq C_0\\subseteq D$, $|D|<\\tau$, and $H=B\\cap D$, these are exactly the three requested compatibility equations. The empty-tree case has every object equal to $1_X$ and both induced maps its identity; the construction still applies.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.9 conclusion, printed p. 805; all three equations checked on canonical cocone legs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-ordinary-small-colimit-presentable",
+  "lem-coef-infinite-cardinal-square-power",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemmas A.1.5.8-9, printed pp. 802-805; online source read 2026-10-17, not archived in literature/. Direct simultaneous partial-map construction with all equality witnesses written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -105,10 +203,52 @@
    "results": "{\"t\": \"2026-10-16T23:39:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"idempotent\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork\", \"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork_section_\"], \"digest\": \"3e0411d5086306e9\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. LeanFinder returns small-object iteration and filtered-cocone tools, not invariant subtrees. The Presentable grep has no hit. Loogle returns splitEpiOfIdempotentOfIsColimitCofork and its generated projection; read Equalizers.lean:1398-1412. These split one idempotent, the elementary calculation already written in Step 7, and do not simultaneously restrict idempotents on a subtree and its intersection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pair of compatible idempotents on colimits of a good cellular tree descends to a small subtree and its intersection with an invariant subtree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w'} [inst_1 : LinearOrder J] [inst_2 : OrderBot J]\\n  [inst_3 : SuccOrder J] [inst_4 : WellFoundedLT J] {α : J → Type t} {A B : (j : J) → α j → C}\\n  {basicCell : (j : J) → (i : α j) → A j i ⟶ B j i} {X Y : C} {f : X ⟶ Y}\\n  {c : Homoto\", \"doc\": \"In a relative cell complex over a well-ordered index set $ J $, the index $ j $ of each cell is not the maximum element of $ J $. This holds under the conditions that $ J $ is a linearly ordered set w\"}\n  {\"name\": \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [inst_3 : I.IsCardinalForSmallObjectArgument κ] →\\n              {X Y : \", \"doc\": \"A relative cell complex constructed by transfinite composition using the successor structure and initial morphism $\\\\iota$ in the small object argument, parameterized by a regular cardinal $\\\\kappa$. Th\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] (o : Ordinal.{u}),\\n  (fun p => ↑p) ∘ (Profinite.NobelingProof.GoodProducts.range_equiv_smaller C o).toFun =\\n    ⇑(Profinite.NobelingProof.πs C o) ∘ fun p => ↑p\", \"doc\": \"The theorem establishes a bijection between the image of the Nobeling projection restricted to ordinal level $ o $ and the set of locally constant $ \\\\mathbb{Z} $-valued functions on $ C $ whose values\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n \", \"doc\": \"For a cell $\\\\gamma$ in a relative cell complex over a category $\\\\mathcal{C}$ with well-ordered index set $J$, this morphism maps the object $B_{\\\\gamma.j}(\\\\gamma.i)$ to $Y$ by composing the cell's atta\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n \", \"doc\": \"For each cell in a relative cell complex over a well-ordered index set $ J $ (equipped with linear order, order bot, successor order, and well-foundedness), this function returns the morphism associat\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n \", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered index set $J$ with a least element and successor structure, and families of objects $A_j(i)$ and $B_j(i)$ in $\\\\mathcal{C}$ indexed by $j \\\\in J$ and $i \\\\i\"}\n  {\"name\": \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [inst_3 : I.IsCardinalForSmallObjectArgument κ] →\\n              {F G : \", \"doc\": \"Given a natural transformation $\\\\phi: F \\\\Rightarrow G$ between functors $F, G: \\\\mathcal{C}^\\\\to \\\\to \\\\mathcal{C}^\\\\to$ satisfying the successor structure property for a morphism class $I$ and regular car\"}\n  {\"name\": \"CategoryTheory.SmallObject.ιObj_πObj\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [inst_3 : I.IsCardinalForSmallObjectArgument κ] {X Y : C}\\n  (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (CategoryTh\", \"doc\": \"For a morphism $f : X \\to Y$ in a category equipped with a morphism property satisfying cardinal constraints relative to a regular cardinal $\\\\kappa$, the composition of the embedding morphism $\\\\iota_{\\\\\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned cellular-complex structure and small-object construction declarations, or unrelated Profinite/linear-algebra/Karoubi declarations; none asserts simultaneous small-subtree descent with the intersection equations. Read RelativeCellComplex/Basic.lean:40-120 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505 to reject the nearby structural results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalPresentable, \"idempotent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent|Idempotent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in CategoryTheory/Presentable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous descent of compatible idempotent endomorphisms to small cellular subdiagrams",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.IsIdempotentElem.commute_iff\", \"module\": \"Mathlib.LinearAlgebra.Projection\", \"type\": \"(hf : IsIdempotentElem f) : Commute f T ↔ (range f ∈ Module.End.invtSubmodule T ∧ ker f ∈ Module.End.invtSubmodule T)\", \"doc\": \"For an idempotent linear endomorphism $ f $, $ f $ commutes with another endomorphism $ T $ if and only if both the range of $ f $ and the kernel of $ f $ are invariant under $ T $.\"}\n  {\"name\": \"Submodule.isIdempotentElemEquiv\", \"module\": \"Mathlib.LinearAlgebra.Projection\", \"type\": \": { f : Module.End R E // IsIdempotentElem f ∧ range f = p } ≃ { f : E →ₗ[R] p // ∀ x : p, f x = x }\", \"doc\": \"There is a canonical equivalence between the type of idempotent linear endomorphisms of an $ R $-module $ E $ with image equal to a fixed submodule $ p $, and the type of linear maps from $ E $ to $ p\"}\n  {\"name\": \"CategoryTheory.Idempotents.Karoubi.decompId_assoc\", \"module\": \"Mathlib.CategoryTheory.Idempotents.Karoubi\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (P : CategoryTheory.Idempotents.Karoubi C)\\n  {Z : CategoryTheory.Idempotents.Karoubi C} (h : P ⟶ Z),\\n  h = CategoryTheory.CategoryStruct.comp P.decompId_i (CategoryTheory.CategoryStruct.comp P.decompId_p h)\", \"doc\": \"For any object $ P = (X, e) $ in the Karoubi envelope of a category $ \\\\mathcal{C} $ and any morphism $ h : P \\\\to Z $ in the Karoubi envelope, the morphism $ h $ equals the composition of the decomposi\"}\n  {\"name\": \"CategoryTheory.Idempotents.Karoubi.decomposition\", \"module\": \"Mathlib.CategoryTheory.Idempotents.Biproducts\", \"type\": \"(P : Karoubi C) : P ⊞ P.complement ≅ (toKaroubi _).obj P.X\", \"doc\": \"For any object $ P = (X, e) $ in the Karoubi envelope of a preadditive category $ \\\\mathcal{C} $, the biproduct of $ P $ and its complement $ P^\\\\perp = (X, \\\\mathrm{id}_X - e) $ is isomorphic to the ima\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{M N : F.obj (.mk (op S))} :\\n  Subtype\\n      (Presieve.Arrows.Compatible (F.presheafHom M N) (X := fun i ↦ Over.mk (f i)) (B := Over.mk (𝟙 S))\\n        (fun i ↦ Over.homMk (f i))) ≃\\n    ((F.toDescentData f).obj M ⟶ (F.toDescentData f).obj N)\", \"doc\": \"An equivalence between the subtype of compatible morphisms in a presieve and the hom-set of objects in the descent data category. Specifically, it establishes a bijection between compatible families o\"}\n  {\"name\": \"CategoryTheory.Idempotents.Karoubi.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Idempotents.Karoubi\", \"type\": \"{P : Sort u} →\\n  {C : Type u_1} →\\n    {inst : CategoryTheory.Category.{v_1, u_1} C} →\\n      {t : CategoryTheory.Idempotents.Karoubi C} →\\n        {C' : Type u_1} →\\n          {inst' : CategoryTheory.Category.{v_1, u_1} C'} →\\n            {t' : CategoryTheory.Idempotents.Karoubi C'} →\\n              C = \", \"doc\": \"The Karoubi envelope (or idempotent completion) of a category $\\\\mathcal{C}$, whose objects are pairs $(X, e)$ where $X$ is an object of $\\\\mathcal{C}$ and $e : X \\\\to X$ is an idempotent morphism ($e \\\\c\"}\n  {\"name\": \"CategoryTheory.IsIdempotentComplete.idempotents_split\", \"module\": \"Mathlib.CategoryTheory.Idempotents.Basic\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} [self : CategoryTheory.IsIdempotentComplete C] (X : C)\\n  (p : X ⟶ X),\\n  CategoryTheory.CategoryStruct.comp p p = p →\\n    ∃ Y i e,\\n      CategoryTheory.CategoryStruct.comp i e = CategoryTheory.CategoryStruct.id Y ∧\\n        CategoryTheory.\", \"doc\": \"In an idempotent complete category $\\\\mathcal{C}$, every idempotent morphism $p: X \\\\to X$ (satisfying $p \\\\circ p = p$) splits as a retract. Specifically, there exists an object $Y$ and morphisms $i: Y \"}\n  {\"name\": \"CategoryTheory.Idempotents.Karoubi.idem\", \"module\": \"Mathlib.CategoryTheory.Idempotents.Karoubi\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (self : CategoryTheory.Idempotents.Karoubi C),\\n  CategoryTheory.CategoryStruct.comp self.p self.p = self.p\", \"doc\": \"For any object $(X, e)$ in the Karoubi envelope of a category $\\\\mathcal{C}$, the idempotent morphism $e : X \\\\to X$ satisfies $e \\\\circ e = e$.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned cellular-complex structure and small-object construction declarations, or unrelated Profinite/linear-algebra/Karoubi declarations; none asserts simultaneous small-subtree descent with the intersection equations. Read RelativeCellComplex/Basic.lean:40-120 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505 to reject the nearby structural results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible idempotents restrict to small downward closed subsets of a cellular diagram and their intersection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.DoldKan.P_idem\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Projections\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {X : CategoryTheory.SimplicialObject C} (q : ℕ),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicTopology.DoldKan.P q) (AlgebraicTopology.DoldKan.P q) =\\n    AlgebraicTopology.DoldKan.P q\", \"doc\": \"For any natural number $ q $, the chain map $ P(q) $ associated with the Dold-Kan correspondence satisfies $ P(q) \\\\circ P(q) = P(q) $, demonstrating its idempotent property.\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.P_f_idem\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Projections\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {X : CategoryTheory.SimplicialObject C} (q n : ℕ),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicTopology.DoldKan.P q).f n) ((AlgebraicTopology.DoldKan.P q).f n) =\\n    (AlgebraicTopology.DoldKa\", \"doc\": \"For any natural numbers $q$ and $n$, the component map $(P(q))_n$ of the chain map $P(q)$ satisfies the idempotent property: $(P(q))_n \\\\circ (P(q))_n = (P(q))_n$, where $(P(q))_n: X_n \\\\to X_n$ denotes\"}\n  {\"name\": \"DirectSum.isIdempotentElem_idempotent\", \"module\": \"Mathlib/Algebra/DirectSum/Idempotents\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} [inst : Semiring R] [inst_1 : DecidableEq I] (V : I → Ideal R)\\n  [inst_2 : DirectSum.Decomposition V] (i : I), IsIdempotentElem (DirectSum.idempotent V i)\", \"doc\": \"For each index $i$, the element $e_i$ in the direct sum decomposition of the semiring $R$ satisfies $e_i^2 = e_i$, establishing that it is an idempotent element.\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.P_is_eventually_constant\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/PInfty\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {X : CategoryTheory.SimplicialObject C} {q n : ℕ},\\n  n ≤ q → (AlgebraicTopology.DoldKan.P (q + 1)).f n = (AlgebraicTopology.DoldKan.P q).f n\", \"doc\": \"For any natural numbers $q$ and $n$ with $n \\\\leq q$, the component at index $n$ of the chain map $P(q+1)$ equals the corresponding component of $P(q)$. This shows that for fixed $n$, the sequence of c\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.P_f_idem_assoc\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Projections\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {X : CategoryTheory.SimplicialObject C} (q n : ℕ) {Z : C}\\n  (h : (AlgebraicTopology.AlternatingFaceMapComplex.obj X).X n ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicTopology.DoldKan.P q\", \"doc\": \"For any preadditive category $\\\\mathcal{C}$, simplicial object $X$, natural numbers $q,n$, and morphism $h: K[X]_n \\\\to Z$ in $\\\\mathcal{C}$, the composition of the chain map $P(q)_n$ with itself followe\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.P_idem_assoc\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Projections\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {X : CategoryTheory.SimplicialObject C} (q : ℕ) {Z : ChainComplex C ℕ}\\n  (h : AlgebraicTopology.AlternatingFaceMapComplex.obj X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicTopology.DoldK\", \"doc\": \"For any category $ \\\\mathcal{C} $, simplicial object $ X $, natural number $ q $, and chain complex $ Z $, the composition of the chain map $ P(q) $ with itself followed by a morphism $ h $ equals the \"}\n  {\"name\": \"CategoryTheory.Idempotents.Karoubi.HomologicalComplex.p_idem\", \"module\": \"Mathlib/CategoryTheory/Idempotents/HomologicalComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] {ι : Type u_2}\\n  {c : ComplexShape ι} (P : CategoryTheory.Idempotents.Karoubi (HomologicalComplex C c)) (n : ι),\\n  CategoryTheory.CategoryStruct.comp (P.p.f n) (P.p.f n) = P.p.f n\", \"doc\": \"For any index $ n $, the morphism $ p.f(n) $ satisfies $ p.f(n) \\\\circ p.f(n) = p.f(n) $, demonstrating its idempotent property in the Karoubi envelope's homological complex.\"}\n  {\"name\": \"Profinite.NobelingProof.proj_eq_of_subset\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) (J K : I → Prop) [inst : (i : I) → Decidable (J i)]\\n  [inst_1 : (i : I) → Decidable (K i)],\\n  (∀ (i : I), J i → K i) → Profinite.NobelingProof.π (Profinite.NobelingProof.π C K) J = Profinite.NobelingProof.π C J\", \"doc\": \"If $ J \\\\subseteq K $, then applying the Nobeling projection map $ \\\\text{Proj}(K) $ followed by $ \\\\text{Proj}(J) $ to a set $ C \\\\subseteq (I \\\\to \\\\{\\\\bot, \\\\top\\\\}) $ yields the same result as directly app\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned Dold-Kan projections, linear projections, Profinite projections, Karoubi structures and smallness of subobjects have different objects and conclusions; none restricts compatible idempotents along a cellular tree and its intersection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small cellular subobjects closed under idempotent endomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Idempotents.Karoubi\", \"module\": \"Mathlib.CategoryTheory.Idempotents.Karoubi\", \"type\": \"(C : Type u_1) → [CategoryTheory.Category.{v_1, u_1} C] → Type (max u_1 v_1)\", \"doc\": \"The Karoubi envelope (or idempotent completion) of a category $\\\\mathcal{C}$, whose objects are pairs $(X, e)$ where $X$ is an object of $\\\\mathcal{C}$ and $e : X \\\\to X$ is an idempotent morphism ($e \\\\c\"}\n  {\"name\": \"Submodule.isIdempotentElemEquiv\", \"module\": \"Mathlib.LinearAlgebra.Projection\", \"type\": \": { f : Module.End R E // IsIdempotentElem f ∧ range f = p } ≃ { f : E →ₗ[R] p // ∀ x : p, f x = x }\", \"doc\": \"There is a canonical equivalence between the type of idempotent linear endomorphisms of an $ R $-module $ E $ with image equal to a fixed submodule $ p $, and the type of linear maps from $ E $ to $ p\"}\n  {\"name\": \"CategoryTheory.Idempotents.Karoubi.mk\", \"module\": \"Mathlib.CategoryTheory.Idempotents.Karoubi\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (X : C) →\\n      (p : X ⟶ X) →\\n        autoParam (CategoryTheory.CategoryStruct.comp p p = p) CategoryTheory.Idempotents.Karoubi.idem._autoParam →\\n          CategoryTheory.Idempotents.Karoubi C\", \"doc\": \"Given an object $X$ in a category $\\\\mathcal{C}$ and an idempotent morphism $p : X \\\\to X$ (i.e., $p \\\\circ p = p$), this constructor creates an object $(X, p)$ in the Karoubi envelope of $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.Idempotents.instIsIdempotentCompleteSimplicialObject\", \"module\": \"Mathlib.CategoryTheory.Idempotents.SimplicialObject\", \"type\": \": IsIdempotentComplete (SimplicialObject C)\", \"doc\": \"The category of simplicial objects in any category $\\\\mathcal{C}$ is idempotent complete, meaning every idempotent morphism in this category splits into a retract. This structure ensures that for any i\"}\n  {\"name\": \"CategoryTheory.Idempotents.instIsIdempotentCompleteCosimplicialObject\", \"module\": \"Mathlib.CategoryTheory.Idempotents.SimplicialObject\", \"type\": \": IsIdempotentComplete (CosimplicialObject C)\", \"doc\": \"The category of cosimplicial objects in a category $\\\\mathcal{C}$ is idempotent complete, meaning every idempotent morphism in this category splits into a retract. This structure is inherited from the \"}\n  {\"name\": \"CategoryTheory.small_subobject\", \"module\": \"Mathlib.CategoryTheory.Subobject.WellPowered\", \"type\": \"[LocallySmall.{w} C] [WellPowered C] (X : C) : Small.{w} (Subobject X)\", \"doc\": \"In a locally small category $\\\\mathcal{C}$ that is well-powered, the collection of subobjects of any object $X \\\\in \\\\mathcal{C}$ forms a small type. This means that for any object $X$, the isomorphism c\"}\n  {\"name\": \"CategoryTheory.WellPowered.subobject_small\", \"module\": \"Mathlib.CategoryTheory.Subobject.WellPowered\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v, u₁} C} {inst_1 : CategoryTheory.LocallySmall.{w, v, u₁} C}\\n  [self : CategoryTheory.WellPowered.{w, v, u₁} C] (X : C), Small.{w, max u₁ v} (CategoryTheory.Subobject X)\", \"doc\": \"In a well-powered category, the subobject of any object $X$ forms a small type, meaning the collection of subobjects for $X$ is a set rather than a proper class.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instEssentiallySmallOfSmall\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Small\", \"type\": \"(P : ObjectProperty C) [ObjectProperty.Small.{w} P] : ObjectProperty.EssentiallySmall.{w} P\", \"doc\": \"If the collection of objects in category $\\\\mathcal{C}$ satisfying property $P$ forms a small type, then $P$ is essentially small, meaning it holds for all objects isomorphic to those in a small full s\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned Dold-Kan projections, linear projections, Profinite projections, Karoubi structures and smallness of subobjects have different objects and conclusions; none restricts compatible idempotents along a cellular tree and its intersection."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-weak-saturation-tree-presentation",
@@ -116,5 +256,20 @@
   "group": "Q15"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-good-tree-idempotent-enlargement",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved relative presentability of small subtrees in the undercategory, exhibited the two small tau-filtered subset presentations, and constructed compatible partial maps with explicit delayed naturality, idempotence and intersection equations. Passing to their countable colimits supplies the two idempotents and all three compatibilities. Reused the existing small-colimit-presentability, cardinal-square and filtered-set Mathlib leaves; no new nodes.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the displayed derived-limit comparison. This auxiliary realizes the compatible-idempotent small-block input below its model-recognition chain, via HTT A.1.5.8-9; it changes no unit-level route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-01dc1b945",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-01dc1b945 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and all four cited nodes in full (category-colimit definition; Mathlib leaves for small-colimit presentability, cardinal squares and filtered colimits of sets) against HTT Def. A.1.5.1, Not. A.1.5.2 and Lemmas A.1.5.8-9 (pp. 799-805). The statement matches A.1.5.9 hypothesis by hypothesis and is not weakened. The parent (weak-saturation-tree-presentation) uses exactly its three equations. Step 1: undercategory colimits come from adjoining X as an initial vertex; filtered colimits are created by the forgetful functor; increasing unions give Y_E. Step 2: free objects X->X+P give Hom_K(F P,Z)=Hom_A(P,UZ). Induction then makes each Y_t and each small Y_E presentable: the predecessor diagram has at most theta*theta=theta<tau morphisms, and the cell square is a pushout in K. No presentability of X or Y_B is used. Step 3: the poset of small downward-closed sets is small and tau-filtered; its colimits are Y_T and Y_B (checked via down-sets of b in B), and tails are cofinal. Step 4: clauses (1)-(3) give factorizations and eventual equalities. Steps 5-6: I recomputed every type and every equality in Y_T or Y_B, including the intersection equation via e_T i_{B,T}=i_{B,T}e_B, the delayed naturality and idempotence equations, and the n=0 case. No cancellation of non-monic maps is used. Steps 7-8: D is small because tau is uncountable and regular; the cocone and idempotence calculations hold, and all three equations follow on colimit legs by uniqueness. Edge cases checked: T, E_0 or B empty, B=T, identity idempotents, and tau=aleph_0 excluded. No new nodes, no cycle (all dependencies are leaves, so no route or tool_uses issue), and no duplicates (searched for A.1.5.8/9, idempotent+presentable, coslice+presentable; opened four candidates). No SGA used. HTT is not archived in literature/; the report's WANTED and proof_origin by=agent cover this. No fixes."
+ }
 }

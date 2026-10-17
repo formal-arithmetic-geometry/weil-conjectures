@@ -33,9 +33,171 @@
   "lem-coef-weak-saturation-tree-presentation",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a small $\\tau$-filtered presentation of $X$ by $\\tau$-presentable objects. By [lem-coef-cardinal-filtered-poset-reindex], reindex it as $X=\\operatorname{colim}_{i\\in I}X_i$, with $I$ a small $\\tau$-filtered poset. For every $i$, the tail $I_{\\ge i}$ is $\\tau$-filtered and still presents $X$. Indeed upper bounds are obtained by adjoining $i$ to the prescribed set of indices. A cocone on the tail extends to $I$ by sending $X_j$ through any $X_k$ with $k\\ge i,j$; a common upper bound proves independence of $k$ and naturality. Thus the universal property proves the assertion about this tail, rather than requiring a cofinality assertion without a size check.",
+   "uses": [
+    "lem-coef-cardinal-filtered-poset-reindex",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, first paragraph of proof, printed p. 806; explicit tail argument."
+   }
+  },
+  {
+   "text": "We will repeatedly use the following colimit calculations. Compute a colimit under a root $R$ by adjoining a root vertex with value $R$ and its structure maps to the indexing diagram in $\\mathcal A$. A cocone on the augmented diagram is precisely a cocone under $R$, including for the empty diagram. Base change sends $R\\to V$ to $R'\\to V\\amalg_R R'$ and preserves such colimits and all specified pushout squares: maps out are pairs of maps agreeing on $R$. This same description gives $(V\\amalg_R R')\\amalg_{R'}R''\\cong V\\amalg_R R''$, compatible with all legs. For a nonempty filtered index, a cocone on a constant diagram is a single map, since any two indices have a common upper bound. Finally, iterated colimits commute whenever they exist: both sides represent families of maps compatible in both indices. We use these cocone descriptions below also when the support varies.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.3 and universal-property calculations in A.1.5.11, printed pp. 800, 806-807; agent expansion."
+   }
+  },
+  {
+   "text": "Call a descent a tuple $(i,S,V)$, where $i\\in I$, $S\\subseteq T$ is downward-closed with $|S|<\\tau$, and $V$ is an $L$-tree on $S$ rooted at $X_i$, using exactly the specified $P_t\\to Q_t$, equipped with a map of labelled trees to the original restriction on $S$. Require that its base change to $X$ is that original restriction, respecting every cell square. Every object of $V$, every predecessor colimit, and its total colimit $V_S$ is $\\tau$-presentable. To check this, induct on the well-founded order: a predecessor colimit is the augmented colimit from Step 2; it has fewer than $\\tau$ morphisms and presentable values. Apply [lem-coef-ordinary-small-colimit-presentable], then apply it to the finite span defining the cell pushout. Apply it once more to the augmented total diagram. The bound follows because an infinite set of cardinality less than $\\tau$ has its square of that same cardinality; finite sets cause no problem. The root and both endpoints of every cell are presentable by hypothesis and the definition of a good tree. The empty-support descent at any $i$ has total object $X_i$.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "lem-coef-ordinary-small-colimit-presentable",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.1 and A.1.5.11, printed pp. 799-800, 806-807; presentability of all descended objects made explicit."
+   }
+  },
+  {
+   "text": "Form a category $D$ of these descents. A morphism $(i,S,V)\\to(j,S',V')$ requires $i\\le j$, $S\\subseteq S'$, has root map $X_i\\to X_j$ from the fixed presentation, and is a map of the trees on $S$ to the restriction of $V'$ on $S$, fixing $P_t,Q_t$ and commuting with the maps to the original tree. Such a morphism, if it exists, is unique. On predecessors uniqueness follows from the colimit property; at a cell it follows from the pushout property and the fixed map on $Q_t$. Well-founded induction proves uniqueness throughout $S$. Composites have exactly the same restrictions and fixed cell maps, so $D$ is a preorder. It can be made small: [lem-coef-presentable-canonical-density] gives a small set of representatives of presentable objects. Represent each nonroot vertex of a descent by one of them, leaving its root $X_i$ fixed. There is a small set of choices of $i,S$, vertices, structure maps and comparison maps to the fixed $Y_t$, because $I,T$ and all Hom sets are small. The requirements on pushouts and comparisons are properties of these data. Every descent is isomorphic to one of these representatives; henceforth $D$ denotes this small preorder.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-presentable-canonical-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, labelled descent data (a)-(c), printed pp. 806-807; agent category and smallness construction."
+   }
+  },
+  {
+   "text": "Here is the construction of common upper descents, including prescribed support and root index. Given fewer than $\\tau$ descents $d_a=(i_a,S_a,V^a)$, a set $E\\subseteq T$ of size less than $\\tau$, and an index $i_*\\in I$, let $S$ be the downward closure of $E\\cup\\bigcup_a S_a$. It has size less than $\\tau$: each individual element has fewer than $\\tau$ predecessors and $\\tau$ is regular. Choose $j_0\\in I$ above $i_*$ and all $i_a$. Well-order the set $S$, then enumerate it by repeatedly selecting the first minimal remaining element. Until $S$ is exhausted, well-foundedness supplies a minimal remaining element, and the chosen well-order makes its choice definite. The selected elements are distinct, so the process stops before the successor cardinal of $|S|$; its stopping ordinal $\\mu$ has cardinality $|S|<\\tau$, hence $\\mu<\\tau$. If $S$ is empty take $\\mu=0$. Every predecessor of a selected element lies in $S$ and was selected earlier, so all initial subsets $S_\\alpha$ are downward-closed in $T$. We construct increasing $j_\\alpha\\in I$ and trees $W^\\alpha$ on $S_\\alpha$ over $X_{j_\\alpha}$. The invariants are: base change to $X$ is the original tree on $S_\\alpha$; all earlier constructed trees base change to the corresponding restrictions; and there are compatible morphisms from the restrictions of every $V^a$ on $S_a\\cap S_\\alpha$, fixing their cells. At zero take the empty tree over $X_{j_0}$. The following two steps give the successor and limit operations, so [lem-weil-pbc-transfinite-recursion] supplies the construction.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-transfinite-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, subsets (i)-(iv) and construction (a)-(c), printed pp. 806-807; agent extension with prescribed descents."
+   }
+  },
+  {
+   "text": "At a successor let $t$ be the next cell, $B=\\{s:s<t\\}$, $j=j_\\alpha$, and $A=W^\\alpha_B$. Step 2 and the invariant identify $Y_B$ with $A\\amalg_{X_j}X$ and with the colimit of $A\\amalg_{X_j}X_k$ over $k\\ge j$. This is a small $\\tau$-filtered colimit by Step 1. Presentability of $P_t$ and clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] factor its original attaching map as $b:P_t\\to A\\amalg_{X_j}X_k\\to Y_B$. For each $a$ with $t\\in S_a$, downward closure gives $B\\subseteq S_a$. The existing predecessor comparison gives another map $c_a:P_t\\to V^a_B\\to A$, whose image in $Y_B$ equals the original attaching map. Push $c_a$ to stage $k$. In the Hom-set colimit these maps and $b$ agree. Clause (3) of the cited elementwise lemma supplies a stage where each equality holds. There are fewer than $\\tau$ such requirements; choose a single upper bound $l$ of all their witness indices in $I$. Base-change the processed tree to $X_l$ and attach the cell $P_t\\to Q_t$ using the image of $b$. The equalities just enforced induce maps from each $V^a_t$ to this new cell by its defining pushout, with the identity on $Q_t$ and $P_t$. For $t\\notin S_a$ no new component is required. The new attaching map becomes the specified original one after pushing out to $X$, so uniqueness of pushouts extends that comparison. All order-map and composition conditions follow by equality on predecessor cocone legs and the $Q_t$ leg. This proves the full successor invariant, not just existence of an unlabeled pushout.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, successor displayed tail colimit and factorization, printed p. 807; simultaneous equality uses Stacks 04AX, section-directed-colimits, and its existing node."
+   }
+  },
+  {
+   "text": "At a nonzero limit $\\lambda\\le\\mu$, take an upper bound $j_\\lambda$ of $\\{j_\\alpha:\\alpha<\\lambda\\}$. There are fewer than $\\tau$ indices. Base-change the earlier processed trees to $X_{j_\\lambda}$. For a cell choose any earlier stage containing it; the transition invariant identifies the choices by the unique isomorphisms fixing the root and all cell legs. Every order arrow occurs in an earlier stage containing its target, and each entire predecessor set occurs as soon as that target does. Consequently these diagrams and their pushout squares glue to a tree on $S_\\lambda=\\bigcup_{\\alpha<\\lambda}S_\\alpha$. The maps from the $V^a$ glue as well, since their restrictions are unique by Step 4. This preserves all invariants. At $\\mu$ we obtain a descent on $S$ over $X_{j_\\mu}$, with morphisms from all $d_a$ and with $j_\\mu\\ge i_*$. Its objects and total object are presentable by Step 3. This proves the upper-bound assertion of Step 5, including the case of no given descents and $S=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, limit stage, printed p. 807; agent expansion of compatibility and prescribed-descent invariant."
+   }
+  },
+  {
+   "text": "By Steps 5-7, every subset of $D$ of size less than $\\tau$, including the empty one, has an upper bound. Thus this small preorder is $\\tau$-filtered. Quotient its objects by $d\\sim d'$ if $d\\le d'\\le d$, to obtain a small $\\tau$-filtered poset $P$, and select one representative for each class. Equivalent descents have the same root index and support, since $I$ and the inclusion order on subsets are antisymmetric. Their unique inverse maps are isomorphisms fixing every label. Therefore representatives give a genuine diagram of descents on $P$: for $p\\le p'$ use the unique morphism in $D$. Compositions and identities agree by uniqueness. Put $M_p=X_{i(p)}$, $N_p=V^p_{S_p}$, and $h_p:M_p\\to N_p$. The total maps are induced by the common-cell maps and the inclusions of the supports. Step 3 gives presentable endpoints. Root comparisons, pushout identifications, and compatibility with both legs of every cell are precisely the data defining $D$. Taking no prescribed descents in Step 5 shows that every $E$ of size less than $\\tau$ is contained in some $S_p$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.11, compatible descent data; agent preorder-to-poset construction for A.2.6.9 observation (ii)."
+   }
+  },
+  {
+   "text": "The root diagram $p\\mapsto M_p$ has colimit $X$. For each $i\\in I$ there is an empty-support descent $e_i$, and $i\\le j$ gives $e_i\\le e_j$. Any descent $d$ at root $X_i$ receives a morphism $e_i\\to d$ acting as the identity on that root. Hence a cocone on the roots of the $P$-diagram is exactly a cocone on $(X_i)_{i\\in I}$: restrict to the classes $[e_i]$; in the other direction assign to a descent at $i$ the leg at $i$. The empty-support morphisms force the two operations to be inverse, even when a different representative of $[e_i]$ was selected, since its root is still $X_i$. Step 1 and the colimit universal property now identify the root colimit with $X$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent cocone argument for the compact-root presentation in A.2.6.9 observation (ii)."
+   }
+  },
+  {
+   "text": "Let now $Q\\subseteq P$ be any nonempty filtered subposet, with no $\\tau$-filteredness assumption. Set $S=\\bigcup_{q\\in Q}S_q$ and $M=\\operatorname{colim}_{q\\in Q}M_q$. For $t\\in S$ let $J_t=\\{q\\in Q:t\\in S_q\\}$. It is nonempty and filtered, and every $q\\in Q$ has an upper bound in $J_t$, by taking a common upper bound with an index containing $t$. Restriction to $J_t$ does not change a colimit: extend a tail cocone using such an upper bound, with independence checked at a second common upper bound as in Step 1. Define $Z_t=\\operatorname{colim}_{q\\in J_t}V^q_t$. These carry maps from $M$ because $\\operatorname{colim}_{J_t}M_q=M$. For $s<t$ one has $J_t\\subseteq J_s$, so the component order maps induce $Z_s\\to Z_t$; their composition laws follow on the colimit legs. The predecessor object $Z_{<t}$ in $M/\\mathcal A$ equals $\\operatorname{colim}_{q\\in J_t}V^q_{<t}$. Indeed every $q\\in J_t$ contains all of $B=\\{s:s<t\\}$. Applying the augmented-cocone description of Step 2, cocones on either object are exactly a map from $M$ and compatible maps on the $s$-vertices for $s\\in B$, with their root and order relations. One may compute every $Z_s$ here over $J_t$, which is cofinal in $J_s$ by the same common-upper-bound argument. This proves the predecessor comparison including $B=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent filtered-union construction expanding the compatible descent use in A.2.6.9 (ii); only cocone universal properties."
+   }
+  },
+  {
+   "text": "For $t\\in S$, the maps on fixed cell labels are identities, so the colimits of the constant $P_t$ and $Q_t$ diagrams on $J_t$ are $P_t$ and $Q_t$. Take the colimit of the specified cell squares there. Maps from its proposed apex to $H$ are compatible pairs of maps from $V^q_{<t}$ and $Q_t$ agreeing on $P_t$; filteredness makes the $Q_t$-map independent of the index. Step 10 therefore identifies the result with the pushout square $P_t\\to Q_t$, $Z_{<t}\\to Z_t$. This proves that $Z$ is an $L$-tree on $S$, with exactly the specified cells and root $M$. Its total colimit is $\\operatorname{colim}_{q\\in Q}N_q$: a compatible cocone on the latter is a compatible family on every descended tree, including roots. Such families are precisely cocones on the augmented union diagram with vertices $M,Z_t$. Every cell occurs somewhere and every finite collection of root, cell or order relations occurs at a common upper index in $Q$. This gives inverse assignments of cocones and proves the claimed identification. It also identifies its root arrow with the arrow-category colimit $h_Q$: a commuting square out of that arrow is exactly compatible squares out of the $h_q$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent cocone proof of cellularity for arbitrary filtered subposets; fixed-label compatibility is essential here."
+   }
+  },
+  {
+   "text": "Push the union tree of Steps 10-11 out along $M\\to X$. By Step 2 it is the colimit of the base-changed descended trees. At each stage these are the given restrictions on $S_q$. Their union colimit is the original restriction on $S$: a cocone under $X$ on that restriction is exactly compatible cocones on those restrictions, since each vertex and each order relation occurs in some $S_q$, and common upper bounds impose precisely their agreements. More explicitly, a map from $(\\operatorname{colim}_qN_q)\\amalg_M X$ to $H$ consists of a map $X\\to H$ and maps $N_q\\to H$ whose root restrictions are its composites $M_q\\to X\\to H$; the stagewise pushout identifications turn this into such compatible restricted cocones. Thus $N_Q\\amalg_{M_Q}X\\cong Y_S$ with the asserted legs, with its comparison to $Y_S$ induced by the specified stage maps. For an objectwise identification, fix $t\\in S$ and restrict to the nonempty filtered subposet $J_t$. For every $q\\in J_t$, the specified comparison is a pushout identification $V^q_t\\amalg_{M_q}X\\cong Y_t$, compatible with the transitions and fixed cell legs. A map $Z_t\\amalg_M X\\to H$ is a map $X\\to H$ together with compatible maps $V^q_t\\to H$ whose root restrictions are $M_q\\to X\\to H$. The stage identifications identify these with compatible maps from the constant object $Y_t$ to $H$. Since $J_t$ is nonempty filtered, these maps are one map $Y_t\\to H$. Thus $Z_t\\amalg_M X\\cong Y_t$ with the specified legs. For the predecessor colimit use its augmented diagram: maps from its pushout are a map $X\\to H$ and compatible maps from all $Y_s$, $s<t$, so its pushout is $Y_{<t}$. These identifications respect each order arrow, attaching map and $Q_t$ leg because their restrictions at every stage are the specified original legs, and the colimit universal property detects equality on those restrictions. Apply the weak-saturation conclusion of [lem-coef-weak-saturation-tree-presentation] to this actual $L$-tree, with $\\varnothing\\subseteq S$, to put $h_Q$ in the weakly saturated closure of $L$. This does not assume closure of that class under arbitrary filtered colimits. Finally take $Q=P$. Step 8 gives $S=T$ and Step 9 gives $M_P\\cong X$, with the isomorphism induced by the root maps. The pushout comparison now gives $N_P\\cong Y_T$. Together with Step 11's arrow-colimit calculation, this proves that the stated cocone to $X\\to Y_T$ is colimiting. For $T=\\varnothing$ every tree is empty and every $h_p$ and $h_Q$ is an identity, so all these arguments still apply.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.6 and A.1.5.3, printed pp. 800-801; agent filtered-union and pushout calculation supplying A.2.6.9 observation (ii)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-weak-saturation-tree-presentation",
+  "lem-coef-ordinary-small-colimit-presentable",
+  "lem-coef-presentable-canonical-density",
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expansion of HTT A.1.5.11 (printed pp. 806-807) to simultaneous labelled descents and filtered unions, supplying A.2.6.9 proof observation (ii), printed p. 822. Online source read; not archived locally. Universal-property calculations and the simultaneous equality argument are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +254,66 @@
    "results": "{\"t\": \"2026-10-16T23:16:06Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered colimit presentation of a cellular morphism by presentable cellular morphisms with compatible fixed generating cells and pushout squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"CategoryTheory.SmallObject.attachCellsιFunctorObjOfSmall\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\"], \"digest\": \"5affd403a4c368a1\"}",
    "date": "2026-10-16",
    "verdict": "no match: the eight hits are RelativeCellComplex, its Cells/attachCells interfaces, and SmallObject constructions. Read Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean:40-139 and Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:453-505; they describe a given well-ordered cell complex or construct a new factorization, not a compatible presentable-root approximation of a specified tree."
+  },
+  {
+   "tool": "grep",
+   "query": "presentab|filtered|colimit",
+   "results": "{\"t\": \"2026-10-17T00:38:56Z\", \"tool\": \"grep\", \"query\": \"presentab|filtered|colimit\", \"sub\": \"AlgebraicTopology/RelativeCellComplex\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean\"], \"digest\": \"f94a1b41b519288e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:45-56 describes a given well-ordered cell complex; AttachCells.lean:45-68 describes one layer. SmallObject constructions form a factorization, and Presentable/Directed supplies only reindexing. None gives the labelled descents, variable supports and arbitrary filtered-subposet cellularity of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalPresentable\", \"RelativeCellComplex\"",
+   "results": "{\"t\": \"2026-10-17T00:38:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalPresentable\\\", \\\"RelativeCellComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:45-56 describes a given well-ordered cell complex; AttachCells.lean:45-68 describes one layer. SmallObject constructions form a factorization, and Presentable/Directed supplies only reindexing. None gives the labelled descents, variable supports and arbitrary filtered-subposet cellularity of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible presentable rooted approximations of a fixed diagram of cell attachments indexed by a well founded poset",
+   "results": "{\"t\": \"2026-10-17T00:38:56Z\", \"tool\": \"leansearch\", \"query\": \"Compatible presentable rooted approximations of a fixed diagram of cell attachments indexed by a well founded poset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.mk\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.mk\", \"HomotopicalAlgebra.AttachCells.\\u03b9\", \"HomotopicalAlgebra.AttachCells.cell\"], \"digest\": \"5fec7dbc56ce3c0e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:45-56 describes a given well-ordered cell complex; AttachCells.lean:45-68 describes one layer. SmallObject constructions form a factorization, and Presentable/Directed supplies only reindexing. None gives the labelled descents, variable supports and arbitrary filtered-subposet cellularity of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good cellular tree is a cardinal filtered diagram of small labeled cellular descents over presentable roots with compatible pushouts",
+   "results": "{\"t\": \"2026-10-17T00:38:58Z\", \"tool\": \"leanfinder\", \"query\": \"A good cellular tree is a cardinal filtered diagram of small labeled cellular descents over presentable roots with compatible pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.W\", \"HomotopicalAlgebra.RelativeCellComplex\", \"CategoryTheory.SmallObject.relativeCellComplex\\u03b9Obj\", \"CategoryTheory.SmallObject.attachCells\\u03b9FunctorObjOfSmall\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\"], \"digest\": \"644e3cb615ec936d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:45-56 describes a given well-ordered cell complex; AttachCells.lean:45-68 describes one layer. SmallObject constructions form a factorization, and Presentable/Directed supplies only reindexing. None gives the labelled descents, variable supports and arbitrary filtered-subposet cellularity of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A labeled well founded pushout diagram is a directed system of small diagrams with compact roots; maps fix all attaching cells and filtered unions remain cellular",
+   "results": "{\"t\": \"2026-10-17T00:40:52Z\", \"tool\": \"leanfinder\", \"query\": \"A labeled well founded pushout diagram is a directed system of small diagrams with compact roots; maps fix all attaching cells and filtered unions remain cellular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\", \"CategoryTheory.SmallObject.relativeCellComplex\\u03b9Obj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.j\", \"HomotopicalAlgebra.nonempty_attachCells_iff\"], \"digest\": \"fca6e3dab41f7ab2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:45-56 describes a given well-ordered cell complex; AttachCells.lean:45-68 describes one layer. SmallObject constructions form a factorization, and Presentable/Directed supplies only reindexing. None gives the labelled descents, variable supports and arbitrary filtered-subposet cellularity of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeCellComplex|AttachCells|IsCardinalPresentable",
+   "results": "{\"t\": \"2026-10-17T01:15:38Z\", \"tool\": \"grep\", \"query\": \"RelativeCellComplex|AttachCells|IsCardinalPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"f8447bf21ef5bb74\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits describe a given relative cell complex, its cells, or a small-object factorization. RelativeCellComplex/Basic.lean:45-56 and :60-68 contain no compatible presentable-root descent family. Loogle returned zero hits; the broad grep returned presentability infrastructure, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RelativeCellComplex\", \"IsCardinalPresentable\"",
+   "results": "{\"t\": \"2026-10-17T01:15:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"RelativeCellComplex\\\", \\\"IsCardinalPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits describe a given relative cell complex, its cells, or a small-object factorization. RelativeCellComplex/Basic.lean:45-56 and :60-68 contain no compatible presentable-root descent family. Loogle returned zero hits; the broad grep returned presentability infrastructure, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally presentable category, express a relative cell complex with well founded cell dependencies as a directed colimit of small cell complexes with presentable source and target, preserving each cell label.",
+   "results": "{\"t\": \"2026-10-17T01:15:39Z\", \"tool\": \"leanfinder\", \"query\": \"In a locally presentable category, express a relative cell complex with well founded cell dependencies as a directed colimit of small cell complexes with presentable source and target, preserving each cell label.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\"], \"digest\": \"4603da3b059bd06d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits describe a given relative cell complex, its cells, or a small-object factorization. RelativeCellComplex/Basic.lean:45-56 and :60-68 contain no compatible presentable-root descent family. Loogle returned zero hits; the broad grep returned presentability infrastructure, not this assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-good-subset-enlargement",
@@ -103,5 +321,20 @@
   "group": "Q11"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cellular-tree-presentable-approximations",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof by a construction over a fixed small filtered presentation of the root. The small preorder of labelled descents has common upper bounds by simultaneous factorization and equality of attaching maps; its quotient is the requested poset. Cocone calculations prove arbitrary filtered-union cellularity and pushout compatibility. No statement change, new node, or Lean attachment. Second reading made the short enumeration bound and objectwise pushout comparisons explicit; independent searches and citation verification recorded in the report.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph beginning For K in D^b_c(X,R), before the first derived-limit comparison: this is the already-seeded generic small-good-block input below coefficient adjunction. Steps 1-9 construct its compatible compact-root approximations; Steps 10-12 provide the filtered small blocks needed by lem-coef-good-subset-enlargement. No replacement of a unit step or SGA source is used."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-eaabf10f5",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-eaabf10f5 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 12 steps, the statements of all 8 cited nodes, Stacks 002V and 04AX in categories.tex, and the Mathlib lines behind the leaves (Presentable/Limits.lean:185-195 with its arrow-count bound, Directed.lean:527-539, CardinalFilteredPresentation.lean:174-178, Types/Filtered.lean:153), plus the citer good-subset-enlargement. The statement and stmt_deps are byte-identical to the side-DAG base, and the citer uses exactly the clauses stated. There are no new nodes and no cycle. The only non-leaf dependency, weak-saturation-tree-presentation, is in the same unit, so no tool_uses are needed. No SGA. small-cellular-tree-descent (a single descent for |T|<tau) is strictly weaker, not a duplicate. Mathematics checked: the tail is tau-filtered; presentability is proved by induction using the arrow-count bound; descent maps are unique by the colimit, the pushout and the fixed Q_t leg, which gives a small preorder via essential smallness; the predecessor-closed enumeration stops below tau; in the successor step, presentability of P_t and clauses (1) and (3) at a common stage equalize fewer than tau attaching maps, and attaching at stage l gives the labelled comparison maps and base change Y_t; the limit step glues by uniqueness; the poset quotient and root colimit are correct; the filtered-union tree over J_t uses only ordinary filteredness; and the pushout identification and weak saturation follow from the L-tree clause with E empty. The standing hypothesis on C in the weak-saturation node is satisfiable with C = isomorphisms, so that clause is usable. Edge cases checked: T empty, one cell, incomparable cells, a chain, a singleton Q, Q filtered but not tau-filtered, non-monic cells. HTT could not be opened (not in literature/, network blocked); the proof is marked agent-written with a WANTED line and does not depend on HTT statements. No fixes; review.md written."
+ }
 }

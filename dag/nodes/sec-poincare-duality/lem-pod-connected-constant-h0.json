@@ -7,7 +7,7 @@
    "place": "step 9 of its split (source: (1.11)-(1.12), pp. 277-278 (F^* on a sheaf coming from X_0, identity on the constant sheaf's sections); the blueprint ## Proof, Step 7)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Degree-zero cohomology of the constant coefficients on a connected scheme",
@@ -25,11 +25,146 @@
   "def-weil-completed-integral-coefficients",
   "def-weil-derived-direct-image",
   "lem-weil-constant-coefficient-objects-constructible",
-  "def-weil-finite-coefficient-point"
+  "def-weil-finite-coefficient-point",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-rationalization-karoubi"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $s=\\operatorname{Spec}k$ and $F_n=(A_{E,n})_Y$. The module-sheaf categories on the chosen small pro-etale sites are Grothendieck by [prop-pur-kinjective-resolutions-exist], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. Choose $F_n\\to I_n^\\bullet$ with $I_n^j=0$ for $j<0$ using [lem-weil-pbc-left-exact-injective-resolution-degree-zero](1). This bounded-below injective complex is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so [def-weil-derived-direct-image] computes $Ra_{Y*,n}F_n$ by $a_{Y*}I_n^\\bullet$. Direct image is left exact by [lem-weil-proetale-module-direct-image-left-exact], and part (2) of the degree-zero lemma gives $\\mathcal H^0(Ra_{Y*,n}F_n)=a_{Y*}F_n$. Exact point sections [lem-weil-point-proetale-sections-exact] identify $H^0(\\Gamma(s,a_{Y*}I_n^\\bullet))$ with $\\Gamma(s,a_{Y*}F_n)=F_n(Y)$; the last equality is the evaluation formula in [def-weil-proetale-module-direct-image], since $s\\times_sY=Y$. By [def-weil-finite-coefficient-point] and [def-weil-ordinary-compact-cohomology] this is $H^0(Y,A_{E,n})$. All complexes used have zero terms in negative degrees, so $H^{-1}(Y,A_{E,n})=0$ as well. The identifications are induced by the resolution augmentation and evaluation, hence send constant sections to their degree-zero classes.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-weil-derived-direct-image",
+    "lem-weil-proetale-module-direct-image-left-exact",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K, 05TD, 070J: lemma-injective-resolutions-exist, lemma-left-exact-higher-derived, lemma-bounded-below-injectives-K-injective; point-section and direct-image definitions"
+   }
+  },
+  {
+   "text": "Give the additive group $T=A_{E,n}$ the discrete topology. Addition and negation are continuous because every map between discrete spaces is continuous. The existing Mathlib leaf [lem-cbc-continuous-functions-fpqc-sheaf] says that $L_T(U)=C(|U|,T)$, with pointwise addition and restrictions by precomposition, is an fpqc sheaf on schemes. Every pro-etale covering is fpqc by [def-weil-pbc-proetale-site], so restriction to $Y_{\\mathrm{proet}}$ is a sheaf. A map to a discrete space is continuous exactly when it is constant on some open neighbourhood of every point: inverse images of singletons are open, and conversely the inverse image of any subset is the union of those open fibres. Pointwise multiplication and the constant function $1$ make $L_T$ a sheaf of rings as well: these operations preserve continuity into the discrete ring, and all ring identities are pointwise equalities.",
+   "uses": [
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, p. 30, continuous-function sheaf assertion; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:102-119"
+   }
+  },
+  {
+   "text": "The map from the constant presheaf $P_T(U)=T$ to $L_T$ sends $t$ to the constant function with value $t$. It exhibits $L_T$ as the sheafification in [def-weil-pbc-sheafification]: for any presheaf map $P_T\\to G$ with $G$ a sheaf, and any $f\\in L_T(U)$, cover $U$ by the open fibres $f^{-1}(t)$ and glue the images in $G$ of their constant values $t$. These are pro-etale coverings by [def-weil-pbc-proetale-site]; intersections with different values are empty and an abelian sheaf has only its zero section on the empty object. On overlaps with the same value the images agree by naturality. Intersecting two such open covers proves independence, and pulling back the cover proves compatibility with restrictions; intersecting the covers for two functions proves additivity. Every extension must have these local values, so uniqueness follows from the sheaf condition. For a map $P_T\\to G$ of ring-valued presheaves into a sheaf of rings, the same extension preserves multiplication by intersecting the constant-value covers of two functions, and preserves $1$ on every member of the cover. Thus the ring version of [def-weil-pbc-constant-sheaf] identifies $(A_{E,n})_Y$ with $L_T$, carrying each constant section to its constant function. This construction commutes with a coefficient homomorphism $T\\to T'$: on every open where $f=t$ both composites give the image of $t$, and uniqueness of gluing gives equality globally.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, p. 30, last assertion; universal-property gluing argument"
+   }
+  },
+  {
+   "text": "Choose $y\\in Y$, possible by the nonemptiness in [def-weil-connected-scheme]. For $f\\in L_T(Y)$ the fibre $f^{-1}(f(y))$ is nonempty and clopen, since both it and its complement are inverse images of open subsets of the discrete space $T$. Connectedness makes its complement empty. Therefore $f$ is the constant function $f(y)$. Conversely distinct constants give distinct functions by evaluation at $y$. Together with Steps 1 and 3 this proves that $A_{E,n}\\to H^0(Y,A_{E,n})$ is an isomorphism of additive groups, equal to $a\\mapsto a\\cdot1$. It is $A_{E,n}$-linear: multiplication by $a$ sends the constant section $b$ to the constant section $ab$, which can be checked before sheafification and then on the same open covers. The coefficient-naturality at the end of Step 3 shows that the reduction maps send the section $a$ to the section $a\\bmod\\varpi_E^n$; hence these isomorphisms identify the entire inverse system with $(A_{E,n})_n$.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, connected case of the discrete continuous-function description"
+   }
+  },
+  {
+   "text": "Let $B_n=\\operatorname{Res}_n Ra_{Y*,n}F_n$ in the derived category of modules over $\\widehat{\\mathcal O}_{E,s}$. By [def-weil-completed-integral-coefficients], [lem-weil-constant-coefficient-objects-constructible](2), and [def-weil-derived-direct-image], the integral object $B=Ra_{Y*}\\widehat{\\mathcal O}_{E,Y}$ is $R\\varprojlim_n B_n$ with the canonical projection maps. Apply [lem-kun-site-rgamma-derived-limit] on the ringed site $s_{\\mathrm{proet}}$, with ring sheaf $\\widehat{\\mathcal O}_{E,s}$ and object $s$. By [lem-weil-point-proetale-sections-exact], derived sections on this site are the termwise sections functor: sections preserve any quasi-isomorphism to a K-injective resolution. Thus the cited lemma gives $\\Gamma(s,B)\\simeq R\\varprojlim_n\\Gamma(s,B_n)$ in $D(\\operatorname{Ab})$, with the original limit projections. Restriction of scalars does not change the underlying sections, so [def-weil-finite-coefficient-point] and [def-weil-ordinary-compact-cohomology] identify $\\Gamma(s,B_n)$ with the complexes defining $H^i(Y,A_{E,n})$ and $\\Gamma(s,B)$ with the integral cohomology complex. The tower maps $B_{n+1}\\to B_n$ of [def-weil-derived-direct-image] are $\\operatorname{Res}$ of $R(a_Y)_*$ applied to the reduction $F_{n+1}\\to F_n$, followed by the identification of [lem-weil-proetale-direct-image-restriction-of-scalars] for the finite rings $A_{E,n+1}\\to A_{E,n}$; on K-injective representatives that identification is the inverse of the map $a_{Y*}\\operatorname{Res}J\\to a_{Y*}I$ induced by a resolution, so it commutes with the degree-zero augmentations of Step 1. Hence, under the identifications of Step 1, the map $H^0(\\Gamma(s,B_{n+1}))\\to H^0(\\Gamma(s,B_n))$ is the restriction of sections $F_{n+1}(Y)\\to F_n(Y)$ along the reduction map of sheaves, which Step 4 identifies with $A_{E,n+1}\\to A_{E,n}$. Step 1 gives $H^{-1}(\\Gamma(s,B_n))=0$, a finite group. The Milnor lemma [lem-weil-pbc-mittag-leffler] therefore applies at $i=0$ and gives $H^0(Y,\\mathcal O_E)\\xrightarrow{\\sim}\\varprojlim_n H^0(Y,A_{E,n})$, induced by those projections. No finiteness of higher cohomology is needed.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-derived-direct-image",
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-weil-pbc-mittag-leffler",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim, applied on the target point site; Milnor at degree zero"
+   }
+  },
+  {
+   "text": "Apply [lem-pod-adic-limit-finite-modules](2) to $M=\\mathcal O_E$, generated by $1$ as an $\\mathcal O_E$-module. It gives the canonical isomorphism $\\mathcal O_E\\xrightarrow{\\sim}\\varprojlim_n\\mathcal O_E/\\varpi_E^n\\mathcal O_E=\\varprojlim_n A_{E,n}$; the quotient rings and transition maps are exactly those of [def-weil-l-adic-coefficient-extension]. By the inverse-system compatibility of Step 4 and the projection comparison of Step 5, this proves clause (2). Its distinguished element $1_{\\mathcal O_E}$ maps to the system $(1\\bmod\\varpi_E^n)_n$, so the inverse isomorphism $\\mathcal O_E\\to H^0(Y,\\mathcal O_E)$ is $a\\mapsto a\\cdot1_{\\mathcal O_E}$.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA, lemma-completion-tensor (3), via the converse finite-module reconstruction statement; Milne pp. 123-124"
+   }
+  },
+  {
+   "text": "By [def-weil-rationalization-karoubi], the rational coefficient object is represented by the integral coefficient object and $Ra_{Y*}$ at $E$ is its rationalization, as stipulated in [def-weil-derived-direct-image]. By [def-weil-finite-coefficient-point](3), its cohomology complex is $C^\\bullet\\otimes_{\\mathcal O_E}E$, where $C^\\bullet=\\Gamma(s,Ra_{Y*}\\widehat{\\mathcal O}_{E,Y})$. In [def-weil-l-adic-coefficient-extension], every nonzero element of $E$ is $u\\varpi_E^m$ for a unit $u\\in\\mathcal O_E$ and $m\\in\\mathbf Z$, so $E=\\mathcal O_E[1/\\varpi_E]$. Its inclusion satisfies the localization conditions (every element is a fraction, powers of $\\varpi_E$ are invertible, and the kernel is zero), hence [lem-weil-pbc-localization-flat] gives flatness. Flat tensor product preserves the kernel of $d^0$ and the image of $d^{-1}$, and preserves the quotient of the former by the latter. Therefore $H^0(C^\\bullet\\otimes E)=H^0(C^\\bullet)\\otimes E$, which is the equality in clause (3) by [def-weil-ordinary-compact-cohomology]. Tensor the unit isomorphism of Step 6 with $E$: its inverse tensors to an inverse, and $1_{\\mathcal O_E}\\otimes1=1_E$, so the resulting isomorphism is precisely $\\lambda\\mapsto\\lambda\\cdot1_E$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-direct-image",
+    "def-weil-finite-coefficient-point",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-localization-flat",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, lemma-flat-localization (1); finite-coefficient point definition at E; Milne p. 126"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-connected-scheme",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-rationalization-karoubi",
+  "lem-cbc-continuous-functions-fpqc-sheaf",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+  "place": "Proof, Step 7, last paragraph: connected constant sections; completed integral and rational definitions made explicit using Bhatt-Scholze 4.2.12, Stacks 0D6K and Milne pp. 124, 126"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -44,10 +179,66 @@
    "results": "CategoryTheory/Sites/ConstantSheaf.lean (constantSheaf functor and its adjunction with global sections for a site); Topology/Sheaves/* (locally constant sheaves on topological spaces); no computation of global sections of a constant sheaf on the pro-etale site of a connected scheme, no derived limit over the coefficients",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of constant sheaf on connected qcqs scheme pro-etale",
+   "results": "Hits included Scheme.Γ_obj and generic sheaf constructions; no declaration computing constant pro-etale sections on connected schemes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheaf, ConnectedSpace, sections",
+   "results": "0 hits; loogle reported unknown identifier constantSheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf|connected|proetale [Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites]",
+   "results": "No matching declarations in the searched Mathlib directories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections of a constant sheaf on a connected quasi-compact quasi-separated scheme",
+   "results": "Hits were generic CategoryTheory.Sheaf.Γ, Sheaf.ΓObjEquivHom, and constantSheafΓAdj declarations; none gives the pro-etale connected-scheme calculation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a site, global sections of a sheafification of the constant presheaf are locally constant maps to a discrete abelian group",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, LightCondensed.discrete_obj, CompHausLike.LocallyConstant.functorToPresheavesIso, Condensed.discrete_obj, CompHausLike.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor, CategoryTheory.Sheaf.isConstant_iff_forget, CategoryTheory.Sheaf.IsConstant",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the three-clause item; condensed and generic constant-sheaf hits are different sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"LocallyConstant\"",
+   "results": "8 hits: CondensedMod.LocallyConstant.instFaithfulSheafCompHausCoherentTopologyTypeConstantSheaf, CondensedMod.LocallyConstant.instFullSheafCompHausCoherentTopologyTypeConstantSheaf, LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf, LightCondMod.LocallyConstant.instFullSheafLightProfiniteCoherentTopologyTypeConstantSheaf, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the three-clause item; condensed and generic constant-sheaf hits are different sites"
+  },
+  {
+   "tool": "grep",
+   "query": "toSheafify.*[Pp]ro[Ee]t|[Pp]ro[Ee]t.*[Ll]ocally[Cc]onstant|[Cc]onstant[Ss]heaf.*[Pp]ro[Ee]t|[Pp]ro[Ee]t.*[Cc]onstant[Ss]heaf",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the three-clause item; condensed and generic constant-sheaf hits are different sites"
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_fpqcTopology_continuousMapPresheafAb|continuousMapPresheafEquivOfTotallyDisconnectedSpace",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "existing Mathlib leaf found: continuous-function sheaf used in Step 2; full item is not one declaration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +258,59 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-connected-constant-h0",
+  "worker": "stage1",
+  "summary": "Second reading removed the new connected-section prerequisite: an existing Mathlib leaf supplies the continuous-function sheaf; explicit sheafification, clopen-fibre and coefficient-naturality arguments supply finite-level sections. Seven steps also give the K-injective degree-zero comparison, the limit comparison on the target point site, adic reconstruction and flat rationalization. Only presentation escapes in the statement were normalized; its hypotheses and three conclusions are unchanged.",
+  "blueprint": "Current main-20261015 prop-cohomological-finiteness proof Step 7, last paragraph (connected constant sections); integral and rational identifications justify the coefficient stages used there. Historical Step 9 refers to the parent DAG split, not the current blueprint.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site module-category theorem supplies the Grothendieck hypothesis for enough injectives in Step 1."
+   },
+   {
+    "node": "lem-weil-proetale-module-direct-image-left-exact",
+    "why": "Generic pro-etale direct-image exactness input for the degree-zero calculation; does not invoke cohomological finiteness."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic point-site exactness permits termwise sections in Steps 1 and 5, including on the unrestricted limit tower."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic coefficient construction supplies the finite reductions of the completed constant object."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Generic ringed-site limit theorem applied on the target point site in Step 5."
+   },
+   {
+    "node": "lem-weil-pbc-mittag-leffler",
+    "why": "Generic Milnor comparison applied only to the zero degree-minus-one groups of the finite-level tower."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "Generic finite-ring restriction-of-scalars identification that defines the derived-limit tower maps in def-weil-derived-direct-image; Step 5 reads its explicit value on K-injective representatives to identify the degree-zero transition maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-a7ca44d09",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-a7ca44d09 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, all 7 steps, and the statement of every cited node. There are no new nodes: the second reader removed lem-pod-proetale-constant-sections-connected, and that removal is correct because its content is the existing Mathlib leaf lem-cbc-continuous-functions-fpqc-sheaf plus the elementary gluing argument (Step 3) and clopen-fibre argument (Step 4). The item statement is byte-identical to the base, so no target is weakened; the two stmt_deps added (l-adic coefficient extension, rationalization) are notions the statement uses. Sources checked: Bhatt-Scholze Lemma 4.2.12 (p.30); Mathlib ConstantSheaf.lean lines 100-106 and 116-119; Stacks 0D6K (Milnor sequence) and the 00HT/00MA/013K/05TD/070J labels; Milne pdf pp.123-124 and 126. The inherited source.place says p.124 for the rational formula, which is on p.126; this is presentation only. I also read the current blueprint prop-cohomological-finiteness Step 7, whose 'H^0(Y,E)=E' this item writes out. Hypotheses: nonemptiness is part of def-weil-connected-scheme, and separated finite type, l != p and n >= 1 are kept. The coefficient category is the completed sheaf O^_{E,Y}, not the discrete (O_E)_Y, and the E stage is the raw rationalization with Fib_s = Gamma(s,-) tensor E. Small cases: Spec k, two points (connectedness is needed), Spec k[eps] (reducedness is not needed), n = 1. Searches over the DAG for 4.2.12 and for connected/constant-sheaf/H^0 found only etale-site, strictly henselian, quotient-formula or noetherian continuous-coefficient nodes, so there is no duplicate. There is no cycle and no SGA source. Fault repaired in fixes/: Step 5 identified the H^0 transition maps of the derived tower with reduction of sections, but did not cite lem-weil-proetale-direct-image-restriction-of-scalars, the identification that def-weil-derived-direct-image uses to define those tower maps. That node's explicit value commutes with the degree-zero augmentations. The fix adds that passage and the citation, updates proof_deps, and adds the node to split_report.tool_uses. I accept the six declared tool uses (generic site, coefficient and limit facts) plus this one. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }

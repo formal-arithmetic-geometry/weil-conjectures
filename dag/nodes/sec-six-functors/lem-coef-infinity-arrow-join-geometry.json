@@ -30,9 +30,106 @@
   "def-coef-infinity-relative-join",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], the arrow simplicial set and its full subcategory $K$ are quasicategories. An inner-horn lifting problem for $u$ adjoints to a map from $(\\Delta^1\\times\\Lambda_i^n)\\cup(\\{1\\}\\times\\Delta^n)$ to $C$. Its inclusion in $\\Delta^1\\times\\Delta^n$ is inner anodyne by [lem-coef-inner-anodyne-pushout-product], applied to the inner horn inclusion and $\\{1\\}\\subseteq\\Delta^1$. The inner horn inclusion is inner anodyne by its defining lifting property. Since $C\\to\\Delta^0$ is an inner fibration, a filler exists. All source vertices belong to the given horn, hence lie in $A$; fullness puts the filler in $K$. Thus $u$ is an inner fibration. For $e:a\\to c$ and $v:c\\to c'$, fill the inner $2$-horn $(e,v)$, obtaining $h:a\\to c'$ and its composition triangle. Together with the degenerate triangle at the source this gives a square, hence an edge $s:e\\to h$ of $K$, with source side $1_a$ and target side $v$. Fix $z:b\\to d$ in $K$. By [lem-coef-infinity-arrow-morphism-square] and fullness, the mapping spaces from $e$ and $h$ to $z$ are respectively\n$$\\operatorname{Map}_C(a,b)\\times^h_{\\operatorname{Map}_C(a,d)}\\operatorname{Map}_C(c,d),\\qquad\n\\operatorname{Map}_C(a,b)\\times^h_{\\operatorname{Map}_C(a,d)}\\operatorname{Map}_C(c',d).$$\nThe maps to the middle space are postcomposition with $z$ and precomposition with $e$ or $h$. By [lem-coef-infinity-mapping-composition], precomposition depends only on component classes, is associative up to homotopy, and the composition triangle gives $[v][e]=[h]$, so $e^*v^*\\simeq h^*$ on $\\operatorname{Map}_C(c',d)$. Hence the composition triangle identifies the second space with the homotopy pullback of the first along $v^*:\\operatorname{Map}_C(c',d)\\to\\operatorname{Map}_C(c,d)$: its data are a map $a\\to b$, a map $c'\\to d$, and a path between their composites $a\\to d$, with all higher paths. One can eliminate the intermediate map $c\\to d$ and its path to the composite with $v$, because the space of such choices with its specified path is contractible. Endpoint compatibility and naturality in the cited arrow-mapping theorem identify this pullback with the square of [lem-coef-infinity-cocartesian-mapping-criterion]. Therefore $s$ is $u$-cocartesian. The definition [def-coef-infinity-fibrations] now gives a cocartesian fibration. A horn in the strict fiber $K_c$ is a lifting problem for $u$ over the constant simplex at $c$; its filler stays in that fiber, so $K_c$ is a quasicategory.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, arrow correspondence; Corollary 5.3.7.3 (0478), with the mapping-space verification written out."
+   }
+  },
+  {
+   "text": "Write $S_c=C_{/c}$ and $E_c=\\operatorname{Fun}(\\Delta^1,C)\\times_C\\{c\\}$. The prism formula and the equivalence $\\delta_c:S_c\\to E_c$ over $C$ are exactly [lem-coef-infinity-slice-arrow-equivalence]. The source maps $S_c\\to C$ and $E_c\\to C$ are right fibrations by [lem-coef-infinity-slice-right-fibration] and [lem-coef-infinity-arrow-target-right-fibration]. Apply [lem-coef-infinity-right-fibration-fibers] to $\\delta_c$: its map on each strict source fiber is a homotopy equivalence of Kan complexes. Pull back the two right fibrations and this map along $A\\subseteq C$. Right-horn lifting is preserved by a degreewise pullback: compose a lifting square with $A\\to C$, fill it in the original right fibration, and pair that filler with the given simplex in $A$. The resulting source fibers are unchanged. The fiberwise equivalence criterion in [lem-coef-simplicial-right-fibration-presentation] gives a simplicial homotopy inverse over $A$ to the pulled-back map $\\psi_c:I_c\\to K_c$. Every vertex component of these homotopies is in a strict source fiber, hence in a Kan complex by [lem-coef-infinity-right-fibration-fibers]. All its edges are equivalences: the two outer $2$-horn fillers give inverse edges and their inverse triangles. Thus [lem-cbc-enhanced-functor-cone-calculus] turns the two homotopies into coherent natural equivalences, and $\\psi_c$ is an equivalence of quasicategories. Both pullbacks are quasicategories, since they are full subcategories of $S_c,E_c$: a simplex lies in the pullback precisely when all its source vertices belong to $A$, equivalently its entire source face lies in $A$. The prism leaves that face unchanged, proving the exact equality of source projections. No assumption that $A$ is closed under equivalences of objects of $C$ is used.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, slice diagonal restriction; Theorem 4.6.4.19 and Corollary 4.6.4.20 (02VT)."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-slice-equivalence-final], the identity $1_a$ is final in $C_{/a}$. The source restriction $I_a$ is a full subcategory containing it. Its right-pinched mapping spaces into $1_a$ equal those in $C_{/a}$: every vertex of a defining mapping simplex is one of its two endpoints, so fullness includes every such simplex. They are therefore contractible, and $1_a$ is final in $I_a$. The equivalence $\\psi_a$ of step 2 takes this vertex to the identity-arrow vertex of $K_a$. Equivalences induce equivalences on mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. Precomposition with an equivalence edge is a homotopy equivalence of mapping spaces by [lem-coef-infinity-mapping-composition] (its component class is invertible, and composition is associative and unital up to homotopy). Applying a quasi-inverse and its unit and counit therefore identifies the mapping space from any object of $K_a$ into this vertex, up to equivalence, with a mapping space into $1_a$ in $I_a$. It is contractible, which is precisely finality in [def-cbc-enhanced-diagrams-cones]. This does not assume that $a$ is final in $C$.",
+   "uses": [
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 4.7.3.20 (02J2), identity-arrow finality."
+   }
+  },
+  {
+   "text": "The relative-join definition [def-coef-infinity-relative-join] supplies $J$, its inclusions and $j_c$. It is a quasicategory: apply [lem-coef-infinity-relative-join-cartesian-realization] to $u^{\\mathrm{op}}:K^{\\mathrm{op}}\\to C^{\\mathrm{op}}$ and reverse vertex order. This reverses the two ordered join blocks and identifies the opposite of $C^{\\mathrm{op}}\\star_{C^{\\mathrm{op}}}K^{\\mathrm{op}}$ with $J$. Reversal takes an inner horn of index $j$ to one of index $n-j$, so opposites of quasicategories are quasicategories.\n\nEndpoint maps alone do not specify a map out of a join. We construct the mixed simplices and the required exact normalizations. An $n$-simplex $x$ of $J$ with initial block $[i]$ consists of an arrow prism $q:\\Delta^1\\times\\Delta^i\\to C$ and a simplex $\\sigma:\\Delta^n\\to C$ such that $q(1,-)=\\sigma|_{[i]}$. The cases $i=-1,n$ are the pure $C,K$ cases. Let $P_x$ be the nerve of the poset with ordered lists $s_0,\\ldots,s_i$ and $t_0,\\ldots,t_n$, with cross relations $s_j\\leq t_l$ exactly when $j\\leq l$, and no relations from a $t$ to an $s$. Let $Q_x\\subseteq P_x$ be the union of the prism on $s_0,\\ldots,s_i,t_0,\\ldots,t_i$ and the target simplex on all $t_l$. Evaluate these pieces by $q$ and $\\sigma$, which agree on their common target face. Simplex operators send source and target vertices to source and target vertices at their image indices. Form $P,Q$ by taking these diagrams over all simplices of $J$ and identifying their simplex operators; this is a degreewise quotient of disjoint unions of sets, with its induced operators. Their evaluations give $Q\\to C$. The chains\n$$s_0<\\cdots<s_i<t_{i+1}<\\cdots<t_n$$\ngive a simplicial map $d:J\\to P$; repeated indices give repeated vertices and hence degeneracies. For pure $K,C$ its evaluation is respectively source evaluation and the identity.\n\nPrescribe additional values as follows. Let $H\\subseteq J$ be the union of the images of $\\delta\\star1:A\\star_C C\\to J$ and all $j_c\\psi_c^{\\triangleright}$. These are simplicial subsets: the first map is injective, and the prism comparison is injective because its prism contains a maximal chain mapping onto the full simplex $\\Delta^{r+1}$. On a simplex in the first image evaluate $P_x$ by sending $s_j,t_j$ to vertex $j$ of $\\sigma$. On a simplex in the second image, represented by a base slice simplex $\\tau:\\Delta^{i+1}\\to C$ ending at $c$ followed by apex vertices, evaluate it by $s_j\\mapsto j$ and $t_l\\mapsto i+1$, followed by $\\tau$. The formulas agree with $Q_x$. They agree on intersections: if an identity-arrow prism also has constant target, its source is constant with that same value, and the top chain in the slice prism forces $\\tau$ to be constant. The pure-factor cases agree as well. These formulas commute with simplex operators, including operators discarding one block. Thus they define $Q\\cup P_H\\to C$, where $P_H$ is the image of the subdiagram supported on $H$.\n\nHere is an inner-horn extension of this prescribed map to $P$. Use [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] for the unique nondegenerate representative of each supporting simplex, and [lem-coef-infinity-monomorphism-boundary-cells] for the relative skeletal filtration of $H\\subseteq J$. Filter $P$ by these support cells. The diagrams $P_x,Q_x$ and their prescribed maps commute with degeneracy operators; consequently degenerate supports add no cells. On attaching a support simplex, its proper faces have already been identified with the earlier support pieces, exactly as in that boundary-cell filtration. At a support $x$ discard chains in $Q_x$, in its support boundary, or in the already prescribed $P_H$. A remaining chain contains a source vertex and a target vertex with index greater than $i$. If $s_j$ is its last source vertex, pair the chain without $t_j$ with the chain obtained by inserting $t_j$. The inserted vertex is strictly between a source vertex and a later target. Both chains use the same set of supporting indices, since $s_j$ already carries index $j$; hence both or neither lie over a proper support face. Supports in $H$ are prescribed in full, and the same pairing therefore respects that subdiagram too. For a fixed support order pairs first by $j$, then by the dimension of the larger chain. Deleting the last source gives a chain with smaller last-source index, or a pure target chain in $Q_x$; deleting any other vertex except $t_j$ gives a smaller-dimensional paired chain, a support-boundary chain, or a chain in $Q_x$. Thus each larger chain attaches along the inner horn missing $t_j$, adding its paired face at the same time. This describes every remaining chain exactly once. The inclusion $Q\\cup P_H\\subseteq P$ is consequently a succession of inner-horn attachments. Fill those horns in $C$ using [def-cbc-enhanced-diagrams-cones], to obtain $F:P\\to C$, and set $S=Fd$. The pure-factor formulas give $Si_K=\\pi$, $Si_C=1_C$. The prescribed slice pieces give $Sj_c\\psi_c^{\\triangleright}=k_c$ on all simplices, and the identity-arrow pieces give\n$$S(\\delta\\star1)(\\epsilon,\\sigma)=\\sigma.$$\nThese are exact equalities, with no choice of composition left on these prescribed subdiagrams.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-join-cartesian-realization",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, map S; agent-written normalized inner-horn construction expanding the omitted mixed-simplex details."
+   }
+  },
+  {
+   "text": "The simplicial map $\\delta$ sends every simplex of $A$ to its prism constant in the arrow direction. The induced relative-join formula of [def-coef-infinity-relative-join], applied to $A\\star_A A=\\Delta^1\\times A$, defines $\\beta$. Its endpoints are $i_K\\delta$ and $i_C|_A$, and the last equation of step 4 makes $S\\beta$ constant. Since $A$ is full, $A\\star_C C$ identifies with the full simplicial subset of $\\Delta^1\\times C$ whose vertices over $0$ lie in $A$. Thus $(b,k_c)$ factors through it and defines $T_c$. Define $\\gamma_c^+$ on $\\Delta^1\\times I_c^{\\triangleright}$ by sending $(t,w)$ to\n$$(\\max\\{t,b(w)\\},k_c(w))\\in A\\star_C C$$\nand then applying $\\delta\\star1$. Maximum is monotone, so this is a simplicial map. At $t=0,1$ it gives $T_c,T_c^+$. Its base-vertex component is $\\beta_a$ and its apex component is the identity.\n\nFor $\\gamma_c^-$, an $n$-simplex of $\\Delta^1\\times I_c^{\\triangleright}$ consists of $\\epsilon:[n]\\to[1]$ and a cone simplex with base indices $0,\\ldots,r$, represented by $\\tau:\\Delta^{r+1}\\to C$ ending at $c$, and apex indices $r+1,\\ldots,n$. For $r=-1$, send it to the constant simplex $i_C(c)$. Otherwise its image in $J$ has the same cut $r$. Its initial $K$-simplex is the arrow prism $\\tau\\rho$, where\n$$\\rho(t,j)=\\begin{cases}r+1&t=1\\text{ and }\\epsilon(j)=1,\\\\ j&\\text{otherwise},\\end{cases}\\qquad t\\in[1],\\ j\\in[r].$$\nIts target-coordinate simplex is $\\tau\\nu$, where $\\nu(j)=j$ if $j\\leq r$ and $\\epsilon(j)=0$, and $\\nu(j)=r+1$ otherwise; its final $C$-block is constant at $c$. Both indexing maps are monotone, and the target of the prism equals the initial face of $\\tau\\nu$, so this is an actual relative-join simplex. For a simplex operator $\\alpha$, let $\\bar\\alpha$ be its restriction on retained base vertices extended by sending the new slice apex to the old apex. The identities $\\bar\\alpha\\rho_{\\epsilon\\alpha}=\\rho_\\epsilon(1\\times\\alpha)$ on the base prism and $\\bar\\alpha\\nu_{\\epsilon\\alpha}=\\nu_\\epsilon\\alpha$ on the target coordinates follow in the two cases $\\epsilon\\alpha=0,1$. They also hold when the operator discards the base or apex block. Thus the formulas commute with faces and degeneracies. At constant $\\epsilon=0$ the initial arrows are identities and the target coordinate is $k_c$, giving $T_c$; at constant $\\epsilon=1$ they are the slice-diagonal prism and constant target $c$, giving $T_c^-$. This is a coherent transformation by [def-cbc-enhanced-diagrams-cones]. At $e:a\\to c$ its square has source side $1_a$ and target side $e$, so its image under $\\pi$ is $1_a$. At the apex it is constant. This gives all asserted components together with their higher compatibility data.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, beta, T, gamma-plus and gamma-minus constructions; explicit extension across the apex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-join",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-join-cartesian-realization",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0302",
+  "place": "Proposition 7.3.5.5; agent-expanded normalized map S and simplicial gamma formulas. Supporting Kerodon tags 0478, 02VT and 02J2; these are not Stacks tags."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -103,10 +200,101 @@
    "results": "{\"t\": \"2026-10-16T19:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial sets slice category compared with the fiber of evaluation of the path category and the categorical join over a base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.OneTruncation₂.nerveEquiv\"], \"digest\": \"5b7cce3c297edb2d\"}",
    "date": "2026-10-16",
    "verdict": "No match. Independent second reading: returned signatures concern ordinary categories, Quillen Kan fibrations, nerves, or the primitive inner-horn property. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-123. None states this relative quasicategorical assertion; no one-line specialization. The exact-name global grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a full subcategory of a quasicategory target evaluation of arrows is a cocartesian fibration and slice diagonals and relative join compare its fiber cones",
+   "results": "{\"t\": \"2026-10-16T23:14:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a full subcategory of a quasicategory target evaluation of arrows is a cocartesian fibration and slice diagonals and relative join compare its fiber cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"CategoryTheory.Functor.IsCocartesian\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"SSet.StrictSegal.isRightKanExtension\"], \"digest\": \"fab204a8024c1fa1\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned signatures. The semantic hits are ordinary-category joins/cocartesian morphisms, truncated-simplex Kan extensions, or model-category cylinders. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:60-123, AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-90, CategoryTheory/FiberedCategory/Cocartesian.lean:43-78, and CategoryTheory/Join/Final.lean:23-50. None states the quasicategorical relative-join geometry or specializes to it in one line. Both focused greps have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Quasicategory\", \"SSet.innerFibrations\"",
+   "results": "{\"t\": \"2026-10-16T23:14:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Quasicategory\\\", \\\"SSet.innerFibrations\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned signatures. The semantic hits are ordinary-category joins/cocartesian morphisms, truncated-simplex Kan extensions, or model-category cylinders. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:60-123, AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-90, CategoryTheory/FiberedCategory/Cocartesian.lean:43-78, and CategoryTheory/Join/Final.lean:23-50. None states the quasicategorical relative-join geometry or specializes to it in one line. Both focused greps have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeJoin|sliceDiagonal|cocartesianFibration|orientedFiber",
+   "results": "{\"t\": \"2026-10-16T23:14:19Z\", \"tool\": \"grep\", \"query\": \"relativeJoin|sliceDiagonal|cocartesianFibration|orientedFiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned signatures. The semantic hits are ordinary-category joins/cocartesian morphisms, truncated-simplex Kan extensions, or model-category cylinders. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:60-123, AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-90, CategoryTheory/FiberedCategory/Cocartesian.lean:43-78, and CategoryTheory/Join/Final.lean:23-50. None states the quasicategorical relative-join geometry or specializes to it in one line. Both focused greps have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasicategory arrow correspondence source full subcategory relative join coherent cone comparison",
+   "results": "{\"t\": \"2026-10-16T23:14:19Z\", \"tool\": \"leansearch\", \"query\": \"Quasicategory arrow correspondence source full subcategory relative join coherent cone comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.arrowMap_ofCocone_to_top\", \"CategoryTheory.Join.mapPairComp\", \"CategoryTheory.Join.inclRightFullyFaithful\", \"CategoryTheory.Limits.Cocone.fromStructuredArrow_obj_ι\", \"CategoryTheory.Limits.Cocone.toCostructuredArrowCompProj_hom_app\", \"CategoryTheory.Limits.Cone.toCostructuredArrow\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Join.costructuredArrowEquiv\"], \"digest\": \"9f2fc8a22900d5a9\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned signatures. The semantic hits are ordinary-category joins/cocartesian morphisms, truncated-simplex Kan extensions, or model-category cylinders. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:60-123, AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-90, CategoryTheory/FiberedCategory/Cocartesian.lean:43-78, and CategoryTheory/Join/Final.lean:23-50. None states the quasicategorical relative-join geometry or specializes to it in one line. Both focused greps have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent mapping cylinder evaluation for an infinity category arrow functor, with normalized identity and slice cones",
+   "results": "{\"t\": \"2026-10-16T23:16:34Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent mapping cylinder evaluation for an infinity category arrow functor, with normalized identity and slice cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.trans\", \"HomotopicalAlgebra.Precylinder.π\", \"HomotopicalAlgebra.Precylinder.i₁\", \"HomotopicalAlgebra.Precylinder.i₀\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData_I\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData_i₀\", \"CategoryTheory.PreOneHypercover.cylinderf\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData_i₁\"], \"digest\": \"607edfd33bb98300\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned signatures. The semantic hits are ordinary-category joins/cocartesian morphisms, truncated-simplex Kan extensions, or model-category cylinders. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:60-123, AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-90, CategoryTheory/FiberedCategory/Cocartesian.lean:43-78, and CategoryTheory/Join/Final.lean:23-50. None states the quasicategorical relative-join geometry or specializes to it in one line. Both focused greps have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.join|cocartesian|slice.diagonal|oriented",
+   "results": "{\"t\": \"2026-10-16T23:16:33Z\", \"tool\": \"grep\", \"query\": \"relative.join|cocartesian|slice.diagonal|oriented\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned signatures. The semantic hits are ordinary-category joins/cocartesian morphisms, truncated-simplex Kan extensions, or model-category cylinders. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:60-123, AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-90, CategoryTheory/FiberedCategory/Cocartesian.lean:43-78, and CategoryTheory/Join/Final.lean:23-50. None states the quasicategorical relative-join geometry or specializes to it in one line. Both focused greps have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Quasicategory\", \"SSet.innerFibrations\"",
+   "results": "{\"t\": \"2026-10-16T23:05:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Quasicategory\\\", \\\"SSet.innerFibrations\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned signatures: StrictSegal hits are ordinary right Kan extensions of simplicial presheaves along truncated simplex categories; IsStronglyCocartesian is for ordinary categories; the remaining hits concern cochain cones, cosimplicial identities or abstract cylinders. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-125 provide primitive horn lifting, not the arrow-correspondence and normalized relative-join transformations. Focused AlgebraicTopology grep and Loogle returned no hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Quasicategory\", \"SSet.innerFibrations\"",
+   "results": "{\"t\": \"2026-10-17T00:10:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Quasicategory\\\", \\\"SSet.innerFibrations\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned signatures: StrictSegal hits are ordinary right Kan extensions of simplicial presheaves along truncated simplex categories; IsStronglyCocartesian is for ordinary categories; the remaining hits concern cochain cones, cosimplicial identities or abstract cylinders. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-125 provide primitive horn lifting, not the arrow-correspondence and normalized relative-join transformations. Focused AlgebraicTopology grep and Loogle returned no hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Quasicategory\", \"SSet.innerFibrations\"",
+   "results": "{\"t\": \"2026-10-17T00:23:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Quasicategory\\\", \\\"SSet.innerFibrations\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned signatures: StrictSegal hits are ordinary right Kan extensions of simplicial presheaves along truncated simplex categories; IsStronglyCocartesian is for ordinary categories; the remaining hits concern cochain cones, cosimplicial identities or abstract cylinders. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-125 provide primitive horn lifting, not the arrow-correspondence and normalized relative-join transformations. Focused AlgebraicTopology grep and Loogle returned no hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?join|slice.?diagonal|arrow.?correspondence|cocartesian.?fibration",
+   "results": "{\"t\": \"2026-10-17T00:49:38Z\", \"tool\": \"grep\", \"query\": \"relative.?join|slice.?diagonal|arrow.?correspondence|cocartesian.?fibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned signatures: StrictSegal hits are ordinary right Kan extensions of simplicial presheaves along truncated simplex categories; IsStronglyCocartesian is for ordinary categories; the remaining hits concern cochain cones, cosimplicial identities or abstract cylinders. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-125 provide primitive horn lifting, not the arrow-correspondence and normalized relative-join transformations. Focused AlgebraicTopology grep and Loogle returned no hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation on a simplicial infinity category mapping cylinder compatible with identities and slice cocones",
+   "results": "{\"t\": \"2026-10-17T00:49:38Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation on a simplicial infinity category mapping cylinder compatible with identities and slice cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.\\u03b4_comp_\\u03c3_self_assoc\", \"CategoryTheory.PreOneHypercover.cylinderHom_s\\u2081\", \"CochainComplex.mappingCone.map_id\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"CochainComplex.mappingCone.inl_v_fst_v\", \"SimplicialObject.Split.evalN_map\", \"CategoryTheory.SimplicialObject.id_left_app\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData\"], \"digest\": \"b2b735d32bb9736e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned signatures: StrictSegal hits are ordinary right Kan extensions of simplicial presheaves along truncated simplex categories; IsStronglyCocartesian is for ordinary categories; the remaining hits concern cochain cones, cosimplicial identities or abstract cylinders. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-125 provide primitive horn lifting, not the arrow-correspondence and normalized relative-join transformations. Focused AlgebraicTopology grep and Loogle returned no hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Quasicategory\", \"SSet.innerFibrations\"",
+   "results": "{\"t\": \"2026-10-17T00:49:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Quasicategory\\\", \\\"SSet.innerFibrations\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned signatures: StrictSegal hits are ordinary right Kan extensions of simplicial presheaves along truncated simplex categories; IsStronglyCocartesian is for ordinary categories; the remaining hits concern cochain cones, cosimplicial identities or abstract cylinders. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-125 provide primitive horn lifting, not the arrow-correspondence and normalized relative-join transformations. Focused AlgebraicTopology grep and Loogle returned no hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory arrow correspondence for a full subcategory, target cocartesian fibration, slice diagonal equivalence and relative join cone comparisons",
+   "results": "{\"t\": \"2026-10-17T00:49:40Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory arrow correspondence for a full subcategory, target cocartesian fibration, slice diagonal equivalence and relative join cone comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2083\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2081\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk\\u2082\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2082\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"29c84d55a5e8deac\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned signatures: StrictSegal hits are ordinary right Kan extensions of simplicial presheaves along truncated simplex categories; IsStronglyCocartesian is for ordinary categories; the remaining hits concern cochain cones, cosimplicial identities or abstract cylinders. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-125 provide primitive horn lifting, not the arrow-correspondence and normalized relative-join transformations. Focused AlgebraicTopology grep and Loogle returned no hits. No exact or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-kan-existence",
@@ -126,5 +314,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-arrow-join-geometry",
+  "worker": "stage1",
+  "summary": "Five proof steps: cocartesian lifts verified by mapping spaces, restriction of the slice diagonal using right fibrations, identity finality, a normalized inner-horn construction of S, and full simplicial beta/T/gamma formulas. No statement changes and no new nodes. Refreshed citation quotes against current shared statements. The nondegenerate support filtration explicitly cites the two existing Mathlib leaves for decomposition and boundary cells.",
+  "blueprint": "Expands the derived coefficient-adjunction support in paragraph 2 of prop-coef-integral-exceptional-adjoint, through the inherited stable-enhancement/finite-grid ancestry. The local arrow-correspondence proof realizes the geometry of Kerodon 0302 without asserting Kan existence or any coefficient-category equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic closure of functor quasicategories, componentwise equivalences, and mapping-space invariance; not a replacement of the coefficient-adjunction route."
+   },
+   {
+    "node": "lem-coef-simplicial-right-fibration-presentation",
+    "why": "Only its generic fiberwise equivalence criterion for right fibrations is used to restrict the slice diagonal along a possibly non-replete full subcategory."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-simplicial-right-fibration-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-b9e2b1ffc",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-b9e2b1ffc (reviewer sub-agent of L); spot-checked: Read in full: the item, all 16 cited node statements, the parent lem-coef-infinity-relative-kan-existence (steps 0, 1, 3, 4 use this item), the unit sk-prop-sf-biduality-general, and Kerodon 0302 Prop. 7.3.5.5, which gives the same route: K, J=K*_C C, S, beta, psi_0, T, gamma+/- via rho/rho'. The statement is true and unchanged. Small cases tested: A empty, A=C=point, C=Delta^1 with A={0}, and A non-replete. Step 1: inner fibration via the pushout-product leaf plus fullness; the cocartesian lift (1_a,v) via the arrow-square and mapping criterion is correct. Step 2: strict-fiber equivalences, pullback along A and the fiberwise criterion of the presentation node give the equivalence without assuming A replete; the source equation is exact. Step 3: 1_a is final in the slice, carried over to K_a by psi_a. Step 4: J is a quasicategory via the opposite of the cartesian realization. P_x/Q_x are checked; the pairing by inserting t_j is inner and keeps the support, and the order by j then dimension is valid. The prescribed values on H are monotone and agree on overlaps, and S i_K=pi, S i_C=1, S j_c psi^=k_c, S(delta*1)=pr all hold exactly. Step 5: rho and nu are monotone, the endpoints are T_c and T_c^-, the component at e is the square (1_a,e), and gamma+ by max is correct. FIX: added the same-unit lem-coef-infinity-mapping-composition to step 1 (e*v* ~ h* from the composition triangle) and step 3 (precomposition with an equivalence edge, used with the quasi-inverse). Neither cited statement covered these. Its dependency closure does not reach the item, so no cycle; proof_deps updated. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (generic tool from another unit) and lem-coef-simplicial-right-fibration-presentation (same unit; only its fiberwise criterion is used). No new nodes, no duplicate, no SGA, no coefficient category or base-change morphism involved.; 1 file(s) fixed by the reviewer"
  }
 }

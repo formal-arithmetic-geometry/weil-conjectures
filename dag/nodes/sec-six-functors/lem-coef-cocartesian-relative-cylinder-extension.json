@@ -33,9 +33,89 @@
   "def-coef-infinity-relative-join",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First verify the source geometry rather than assuming that an arbitrary relative join is a quasicategory. Reversing the two ordered vertex blocks in [def-coef-infinity-relative-join] identifies $(T_a)^{\\mathrm{op}}$ with $X^{\\mathrm{op}}\\star_{X^{\\mathrm{op}}}K^{\\mathrm{op}}$, formed with $\\mathrm{id}$ and $a^{\\mathrm{op}}$. Apply [lem-coef-infinity-relative-join-cartesian-realization] to $a^{\\mathrm{op}}$ and the opposite-quasicategory clause of [lem-coef-infinity-relative-cone-equivalence]. Thus $T_a$ is a quasicategory and its $K$-copy is full. Put $J_c=K\\times_{T_a}(T_a)_{/c}$ and let $r_c:J_c\\to K$ be its source projection and $k_c:J_c^{\\triangleright}\\to T_a$ its canonical cocone. If $c=i_X(x)$, the simplex formula identifies $J_c$ exactly with $L_x$: an $n$-simplex has its first $n+1$ vertices in the $K$ block and last vertex $x$, so its data are $\\tau\\in K_n$ and $\\sigma:\\Delta^{n+1}\\to X$ with $\\sigma|_{[n]}=a\\tau$ and $\\sigma(n+1)=x$. Operators restrict the first $n+1$ vertices and retain the last. Under this identification $r_c$ is the projection of $L_x$, and $\\pi k_c$ is the canonical slice cocone in $X$. If $c=i_K(k)$, all vertices are in the full $K$-copy, so $J_c=K_{/k}$ and $k_c$ is its canonical cocone followed by $i_K$. These identifications commute with every simplicial operator, including degeneracies.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "lem-coef-infinity-relative-join-cartesian-realization",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 5.4.4.2, relative cylinder T(K) and the slices at its vertices; Kerodon 024K supplies the opposite relative-join realization."
+   }
+  },
+  {
+   "text": "The map $q$ is an isofibration. It is an inner fibration by [def-coef-infinity-fibrations]. Given an equivalence $\\alpha:q(y)\\to x$, choose a $q$-cocartesian lift $e:y\\to y\\prime$ with the prescribed source. By [lem-coef-infinity-cocartesian-mapping-criterion], for every $z$ its precomposition square on mapping spaces is a homotopy pullback. The bottom horizontal map is an equivalence, since precomposition with an inverse of $\\alpha$ is its homotopy inverse. Consequently the top horizontal map $e^*:\\operatorname{Map}_Y(y\\prime,z)\\to\\operatorname{Map}_Y(y,z)$ is an equivalence: in the path-pullback model the projection along a homotopy equivalence has contractible fibers. On connected components take $z=y$ to obtain $r:y\\prime\\to y$ with $re=1_y$. Taking $z=y\\prime$, injectivity of $e^*$ and $(er)e=e=1_{y\\prime}e$ give $er=1_{y\\prime}$ in the homotopy category. Thus $e$ is an equivalence and lifts $\\alpha$ exactly, as required.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.3.2.13, categorical-fibration hypothesis; dual mapping-space criterion for cocartesian edges."
+   }
+  },
+  {
+   "text": "At a $K$-vertex $k$, the category $J_{i_K(k)}=K_{/k}$ is a quasicategory by [lem-coef-infinity-slice-right-fibration]. Its object $t=1_k$ is final by [lem-coef-infinity-slice-equivalence-final], because $1_k$ is an equivalence. Every fiber $Y_z$ is a quasicategory: an inner-horn lifting problem in it is a problem for $q$ over a constant simplex at $z$, and its filler stays in the fiber by [def-coef-infinity-fibrations]. Let $d:K_{/k}\\to\\mathcal C$ be any diagram in a quasicategory $\\mathcal C$. By [lem-coef-infinity-final-index-colimit] there is a colimiting cocone $\\mu_0$ with vertex $d(t)$ and identity leg at $t$; hence colimits of shape $K_{/k}$ exist in every fiber. By the cocone form of [lem-cbc-enhanced-functor-cone-calculus], $\\mu_0$ colimiting means that $a\\mapsto\\Delta(a)\\circ\\mu_0$ is an equivalence $\\operatorname{Map}(d(t),w)\\to\\operatorname{Map}(d,\\Delta w)$ for every $w$; its composite with evaluation at $t$ is homotopic to the identity, so evaluation at $t$ is an equivalence by two-out-of-three. Consequently a cocone $\\mu$ with vertex $l$ and leg $u:d(t)\\to l$ at $t$ is colimiting if and only if $u$ is an equivalence: the composite of $a\\mapsto\\Delta(a)\\circ\\mu$ with evaluation at $t$ is precomposition with $u$, which is an equivalence on all mapping spaces exactly when $u$ is an equivalence (for the converse take $w=d(t)$ and $w=l$ on components, as in Step 2); two-out-of-three and the characterization of colimiting cocones in the same node finish both directions. Now let $\\lambda$ be any colimiting cocone of $d$ in $Y_z$ and $e_!$ any edge transport. The leg of $\\lambda$ at $t$ is an equivalence, a simplicial map carries an equivalence with its two inverse $2$-simplices to an equivalence, so the leg of $e_!\\lambda$ at $t$ is an equivalence and $e_!\\lambda$ is colimiting in $Y_{z'}$. Hence all fibers have colimits of shape $J_{i_K(k)}$ and every edge transport preserves them. This verifies the local hypotheses at $K$-vertices directly from the final object; no additional fiber colimit assumption is introduced.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Remark 4.3.2.3 (vertices already in the full subcategory); final-object colimit calculation."
+   }
+  },
+  {
+   "text": "For each vertex $c$ of $T_a$, apply [lem-coef-cocartesian-prescribed-cone-colimit-lifting] with $p=q$, $J=J_c$, $h=fr_c$ and $g=\\pi k_c$. The compatibility is exact: $qfr_c=ar_c=(\\pi k_c)|_{J_c}$. For $c=i_X(x)$ the required fiber colimits and preservation are precisely the hypotheses for $L_x$ in the statement, using the exact slice identification in Step 1. For $c=i_K(k)$ they were verified in Step 3. All these simplicial sets are small in the common containing universe. The cited lemma gives a $q$-colimit diagram $v_c:J_c^{\\triangleright}\\to Y$ with $v_c|_{J_c}=fr_c$ and $qv_c=\\pi k_c$ exactly. In particular these cones lie over the varying canonical base cones; a cone entirely inside $Y_x$ would not by itself have that property. For an empty $L_x$ the same lemma uses the assumed preserved initial objects.",
+   "uses": [
+    "lem-coef-cocartesian-prescribed-cone-colimit-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 4.3.1.11 applied to each local cone in Lemma 4.3.2.13."
+   }
+  },
+  {
+   "text": "Now apply [lem-coef-infinity-relative-kan-existence] with $\\mathcal A=K$, $\\mathcal C=T_a$, $\\mathcal D=Y$, $\\mathcal B=X$, $p=q$, $h=f$ and $s=\\pi$. Step 1 gives a full subcategory of a quasicategory; Step 2 verifies the isofibration; the equation $qf=a=\\pi|_K$ is the given equality; and Step 4 supplies every local $q$-colimit lift with the required exact boundary and base. The conclusion is a simplicial map $F:T_a\\to Y$ with $F|_K=f$ and $qF=\\pi$ exactly. No filteredness, extra colimits, or size condition outside the containing universe was used.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.3.2.13, applied as in the final paragraph of Lemma 5.4.4.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-join",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cocartesian-prescribed-cone-colimit-lifting",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-join-cartesian-realization",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-infinity-slice-right-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Historical blueprint ancestor, proof paragraph 2: coherent finite-coefficient adjunction infrastructure. The one-level proof follows the online HTT 5.4.4.2 route through 4.3.1.11 and 4.3.2.13; these texts are not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -141,10 +221,45 @@
    "results": "{\"t\": \"2026-10-16T23:03:45Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise colimits in fibers preserved by pushforward construct a relative left Kan extension into a cocartesian infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\"], \"digest\": \"e539b6e5939e19cb\"}",
    "date": "2026-10-16",
    "verdict": "Fresh independent second reading: no match. The quasicategory grep and Loogle return no hits. LeanFinder returns ordinary CategoryTheory pointwise Kan extensions, whose Category instances require Hom sets, and strict-Segal coskeletal extension of a simplicial set from its 2-truncation. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:40-51, FiberedCategory/Cocartesian.lean:43-78 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:35-89. None states a cone lift through arbitrary cocartesian quasicategorical fibers or the prescribed-base relative-cylinder extension."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?colimit|cocartesian|coCartesian",
+   "results": "{\"t\": \"2026-10-17T00:54:33Z\", \"tool\": \"grep\", \"query\": \"relative.?colimit|cocartesian|coCartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned CategoryTheory.LiftsToColimit and CreatesColimit.lifts are for ordinary categories and a colimit already in the base, whereas the present base cone is arbitrary and the fibers are quasicategories. Read CategoryTheory/Limits/Creates.lean:29-37,239-256 and FiberedCategory/Cocartesian.lean:43-78. The second phrasing returned colimits of simplicial sets as objects of an ordinary presheaf category, not coherent colimits inside a quasicategory. Quasicategory/Basic.lean:33-57 supplies inner horn fillers only. The focused grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a prescribed cone through a cocartesian fibration using fiber colimits preserved by pushforward",
+   "results": "{\"t\": \"2026-10-17T00:54:33Z\", \"tool\": \"leansearch\", \"query\": \"Lift a prescribed cone through a cocartesian fibration using fiber colimits preserved by pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftableCone.mk\", \"CategoryTheory.Over.liftCone\", \"CategoryTheory.CreatesColimit.lifts\", \"CategoryTheory.Limits.isLimitOfCoconeOfConeUnop_lift\", \"CategoryTheory.Under.liftCone\", \"CategoryTheory.LiftsToColimit\", \"CategoryTheory.Over.isLimitLiftCone\", \"CategoryTheory.liftColimit\"], \"digest\": \"0dd0395fcf2d3c38\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned CategoryTheory.LiftsToColimit and CreatesColimit.lifts are for ordinary categories and a colimit already in the base, whereas the present base cone is arbitrary and the fibers are quasicategories. Read CategoryTheory/Limits/Creates.lean:29-37,239-256 and FiberedCategory/Cocartesian.lean:43-78. The second phrasing returned colimits of simplicial sets as objects of an ordinary presheaf category, not coherent colimits inside a quasicategory. Quasicategory/Basic.lean:33-57 supplies inner horn fillers only. The focused grep and Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-17T00:54:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned CategoryTheory.LiftsToColimit and CreatesColimit.lifts are for ordinary categories and a colimit already in the base, whereas the present base cone is arbitrary and the fibers are quasicategories. Read CategoryTheory/Limits/Creates.lean:29-37,239-256 and FiberedCategory/Cocartesian.lean:43-78. The second phrasing returned colimits of simplicial sets as objects of an ordinary presheaf category, not coherent colimits inside a quasicategory. Quasicategory/Basic.lean:33-57 supplies inner horn fillers only. The focused grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian fibration has relative colimit lifts of any prescribed base cone when its fibers admit the indexing colimits and transport preserves them",
+   "results": "{\"t\": \"2026-10-17T00:54:34Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian fibration has relative colimit lifts of any prescribed base cone when its fibers admit the indexing colimits and transport preserves them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftsToColimit.toLiftableCocone\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.LiftsToColimit\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\"], \"digest\": \"a0c2a31981da32f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned CategoryTheory.LiftsToColimit and CreatesColimit.lifts are for ordinary categories and a colimit already in the base, whereas the present base cone is arbitrary and the fibers are quasicategories. Read CategoryTheory/Limits/Creates.lean:29-37,239-256 and FiberedCategory/Cocartesian.lean:43-78. The second phrasing returned colimits of simplicial sets as objects of an ordinary presheaf category, not coherent colimits inside a quasicategory. Quasicategory/Basic.lean:33-57 supplies inner horn fillers only. The focused grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a p colimit extending a simplicial diagram over a fixed cone in the base infinity category",
+   "results": "{\"t\": \"2026-10-17T00:54:34Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of a p colimit extending a simplicial diagram over a fixed cone in the base infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.hasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.Truncated.instHasColimits\"], \"digest\": \"a690ec20fea09139\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned CategoryTheory.LiftsToColimit and CreatesColimit.lifts are for ordinary categories and a colimit already in the base, whereas the present base cone is arbitrary and the fibers are quasicategories. Read CategoryTheory/Limits/Creates.lean:29-37,239-256 and FiberedCategory/Cocartesian.lean:43-78. The second phrasing returned colimits of simplicial sets as objects of an ordinary presheaf category, not coherent colimits inside a quasicategory. Quasicategory/Basic.lean:33-57 supplies inner horn fillers only. The focused grep and Loogle returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-cocartesian-section-cofinality",
@@ -152,5 +267,29 @@
   "group": "N1"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-relative-cylinder-extension",
+  "worker": "stage1",
+  "summary": "Repaired the earlier three-step attempt: its fiber cone did not lie over the canonical varying base cone, coherent transport was uncited, and quasicategoricity of T_a was asserted without a lemma. Reused the opposite relative-join realization, mapping-space cocartesian criterion, slice/final-object calculus and relative Kan theorem. Created one statement-only local cone-lifting input, HTT 4.3.1.11, with five logged searches in two phrasings; no Mathlib leaves. Statement unchanged.",
+  "blueprint": "Realizes the blueprint.from HTT 5.4.4.2 final-paragraph extension of f from K to T(K): identify K×_X X_{/x}, lift its prescribed base cone using fiber colimits and transport preservation, and assemble via 4.3.2.13.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic uniqueness of colimiting cocones and preservation of equivalences in the final-object calculation; no unit-specific coefficient argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-4d7ff2846",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-4d7ff2846 (reviewer sub-agent of L); spot-checked: I read the item, the new node (HTT Cor. 4.3.1.11), every cited statement, the unit/parent route and delivery-errors A–F. The item statement is unchanged and true; the edge cases K=∅, a=id and point base check out. The new node matches 4.3.1.11 hypothesis by hypothesis; its edge cases J=∅, J=pt, p=id and B=pt check out. It duplicates no existing node: I grepped 4.3.1.11 and read the 7 hits, which are all detection or absolute-colimit results. It is strictly smaller than the item (D1 ok). Steps 1, 2, 4 and 5 are correct: the T_a^op = E_{a^op} realization, the exact identification J_{i_X(x)} = L_x, the isofibration via the mapping criterion, the exact boundary/base equations, and the relative Kan existence hypotheses. Fault repaired (C4/E5): the second reading changed Step 3 to infer that transports preserve K_{/k}-colimits from the merely existential final-index-colimit lemma. I rewrote Step 3: a cocone over a diagram with final object t is colimiting iff its leg at t is an equivalence, using the mapping-space characterization in lem-cbc-enhanced-functor-cone-calculus plus Yoneda on π0, and transports preserve equivalences. That node is restored to the step's uses and to proof_deps. The stale tool_use for it is now accurate and accepted. Fixed file: fixes/dag/nodes/sec-six-functors/lem-coef-cocartesian-relative-cylinder-extension.json. HTT is not archived; the WANTED line and agent proof_origin are correct. No SGA is used. Not a target node, so the base-change and coefficient-category check does not apply.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -33,9 +33,87 @@
  "stmt_deps": [
   "lem-coef-simplicial-space-reedy-cartesian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every inclusion $A\\subseteq B$ of small simplicial spaces, the monomorphism/cofibration clause and the mapping-space clause of [lem-coef-simplicial-space-reedy-cartesian], applied to the Reedy fibration $V\\to *$, give a Kan fibration $\\operatorname{Map}(B,V)\\to\\operatorname{Map}(A,V)$. Here $\\operatorname{Map}(A,*)=\\operatorname{Map}(B,*)=*$ directly from the definition. In particular all these mapping spaces are Kan, by taking $A=\\varnothing$. By the Kan model structure of [lem-coef-kan-quillen-right-proper] and the meaning of trivial in [lem-coef-reedy-model-structure], a restriction which is also a weak homotopy equivalence is a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 2.3-2.5, printed pp. 5-7; mapping-space axiom used in Lemma 10.1."
+   }
+  },
+  {
+   "text": "We will use two explicit closure calculations. If $p:E\\to B$ is a trivial Kan fibration, it lifts against every $\\partial\\Delta^q\\hookrightarrow\\Delta^q$, including $q=0$, by [lem-coef-kan-quillen-right-proper]. A square against its pullback $T\\times_BE\\to T$ projects to a square against $p$; a filler $e:\\Delta^q\\to E$ pairs with the prescribed map $t:\\Delta^q\\to T$ to give the filler $(t,e)$ in the pullback. Thus pullbacks are trivial Kan fibrations by the same boundary-lifting criterion. For a composite $E\\xrightarrow{p}B\\xrightarrow{q}C$ of trivial Kan fibrations, first fill a boundary square against $q$ with boundary map obtained by applying $p$, then fill against $p$ over this chosen simplex of $B$. Hence finite composites, including the identity, are trivial Kan fibrations. Also, if $U=A\\cup_KB$ is the union of two subobjects with intersection $K$, then\n$$\\operatorname{Map}(U,V)=\\operatorname{Map}(A,V)\\times_{\\operatorname{Map}(K,V)}\\operatorname{Map}(B,V).$$\nIndeed in each inner degree $q$, a map $U\\times c\\Delta^q\\to V$ is exactly a pair of maps from $A\\times c\\Delta^q$ and $B\\times c\\Delta^q$ agreeing on $K\\times c\\Delta^q$. The union and intersection assertions hold in each bidegree, and all operators preserve them, so these bijections commute with the inner simplicial operators. This uses the mapping-space definition in [lem-coef-simplicial-space-reedy-cartesian].",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-space-reedy-cartesian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 10.1, printed p. 23: expansion of the passage from unions of interval faces to mapping spaces, using the Section 2.3 mapping-space formula."
+   }
+  },
+  {
+   "text": "Evaluation at $1_{[r]}$ identifies $\\operatorname{Map}(F(r),V)$ with $V_r$ as simplicial sets. Explicitly, a $q$-simplex $v\\in V_{r,q}$ gives the map $F(r)\\times c\\Delta^q\\to V$ whose value on $(\\alpha:[k]\\to[r],\\beta:[s]\\to[q])$ is $V(\\alpha,\\beta)(v)$; evaluating at $(1_{[r]},1_{[q]})$ gives the inverse. Naturality proves both inverse identities. The consecutive edges of $G(r)$ form a chain of copies of $F(1)$, meeting adjacent copies in their common endpoint $F(0)$ and nonadjacent copies in the empty subobject. Thus the degreewise gluing calculation of step 2 identifies $\\operatorname{Map}(G(r),V)$ with the iterated fibre product of $r$ copies of $V_1$ over $V_0$, using the target of one edge and the source of the next. Under these identifications, restriction is exactly the consecutive-edge comparison in the hypothesis, so it is a weak homotopy equivalence for $r\\geq2$. For $r=1$ it is the identity since $G(1)=F(1)$. In every case it is also a Kan fibration by step 1, hence a trivial Kan fibration. The representables and mapping formula used here are those of [lem-coef-simplicial-space-reedy-cartesian].",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 4.1 and Lemma 10.1, printed pp. 11 and 23: the spine comparison, expanded by evaluation and degreewise gluing."
+   }
+  },
+  {
+   "text": "Prove the stated conclusion by strong induction on $m\\geq1$, for the fixed $V$ and all interval collections in $F(m)$. If $m=1$, spine containment forces $H=F(1)$, giving an identity. At an inductive stage $m>1$, the case $H=F(m)$ is likewise an identity. Otherwise each interval $I=[a,b]$ in $\\mathcal I$ has length $\\ell=b-a<m$, because the only interval of length $m$ is $[0,m]$. Enumerate the finite collection as $I_1,\\ldots,I_N$, and put $H_0=G(m)$ and $H_j=G(m)\\cup\\bigcup_{i\\leq j}F(I_i)$. Spine containment gives $H_N=H$. For $I_j=[a,b]$ put $K_j=H_{j-1}\\cap F(I_j)$. Then $K_j$ is a finite union of consecutive interval faces in $F(I_j)\\cong F(\\ell_j)$ and contains its entire spine. To check this, a simplex of $F([a,b])$ is a monotone map whose image lies in $[a,b]$. Hence $F([a,b])\\cap F([c,d])$ is empty if $\\max(a,c)>\\min(b,d)$, and otherwise is the full face on $[\\max(a,c),\\min(b,d)]$. The intersection $G(m)\\cap F([a,b])$ is exactly the spine on $[a,b]$: edges wholly in the interval give its consecutive edges; any endpoint contributed by an edge outside the interval already belongs to that spine since $a<b$. Any singleton interval arising from an intersection is likewise already in the spine and may be discarded. Translating indices by $a$ therefore expresses $K_j$ using intervals with distinct endpoints in $[0,\\ell_j]$, exactly as required by the induction hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 10.1, printed p. 23: the interval-intersection argument, expanded as strong induction on ambient simplex length."
+   }
+  },
+  {
+   "text": "For each $j$, apply the induction hypothesis at $1\\leq\\ell_j<m$ to the interval union $K_j\\subseteq F(I_j)\\cong F(\\ell_j)$ from step 4. The same Reedy fibrant $V$ satisfies every Segal comparison needed there, so $\\operatorname{Map}(F(I_j),V)\\to\\operatorname{Map}(K_j,V)$ is a weak homotopy equivalence. It is also a Kan fibration by step 1 and is therefore trivial. The union square $H_j=H_{j-1}\\cup_{K_j}F(I_j)$ and step 2 identify $\\operatorname{Map}(H_j,V)\\to\\operatorname{Map}(H_{j-1},V)$ with its pullback along $\\operatorname{Map}(H_{j-1},V)\\to\\operatorname{Map}(K_j,V)$. The boundary-filler calculation of step 2 makes this restriction a trivial Kan fibration. Composing for $j=1,\\ldots,N$ gives a trivial Kan fibration $\\operatorname{Map}(H,V)\\to\\operatorname{Map}(G(m),V)$. The ingredients used are the mapping-space fibration clause of [lem-coef-simplicial-space-reedy-cartesian] and the trivial-Kan-fibration characterization of [lem-coef-kan-quillen-right-proper]; the only inductive application has strictly smaller ambient length, so no assertion at $m$ is assumed.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 10.1, printed p. 23: finite gluing of interval faces; explicit trivial-fibration pullback argument replaces an unstated homotopy-colimit assertion."
+   }
+  },
+  {
+   "text": "The composite\n$$\\operatorname{Map}(F(m),V)\\longrightarrow\\operatorname{Map}(H,V)\\longrightarrow\\operatorname{Map}(G(m),V)$$\nis the spine restriction, a weak homotopy equivalence by step 3. Its second factor is a weak homotopy equivalence by step 5. Apply the two-out-of-three axiom in [lem-coef-reedy-model-structure] to the Kan model structure of [lem-coef-kan-quillen-right-proper]. The first factor is a weak homotopy equivalence, which proves the induction claim and the item. All arrows are the specified restriction maps because their composites precompose with the composed inclusions.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 10.1, printed p. 23: final two-out-of-three argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-space-reedy-cartesian",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Rezk Lemma 10.1, printed p. 23, with Sections 2.3-2.5 and 4.1; read online, not archived. Explicit strong induction and boundary-lifting gluing argument by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +170,59 @@
    "results": "Independent second reading: verbatim msearch.py log record:\n{\"t\": \"2026-10-16T23:13:30Z\", \"tool\": \"grep\", \"query\": \"Segal.*[Ww]eak|[Ww]eak.*Segal|[Ii]nterval[Cc]over|[Ss]egal[Ss]pace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match. LeanFinder returns StrictSegal spineToSimplex naturality and inverse laws for a single simplicial set, not homotopy Segal bisimplicial mapping complexes (read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:275-325). Loogle and source grep return zero hits for their respective queries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unions of consecutive interval faces containing the spine induce weak equivalences of mapping spaces into a Reedy fibrant Segal space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        (h : autoParam (m ≤ n + 1) _auto_36✝) →\\n          X.obj (Opposite.op { obj := SimplexCategory.mk m, property := h }) ≃ X.Path m\", \"doc\": \"For each natural number $ m \\\\leq n+1 $ and $(n+1)$-truncated simplicial set $ X $, this defines an equivalence between the $ m $-dimensional spine inclusion $ X.\\\\text{spine}_m $ and the path space $ \\\\\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → (n : ℕ) → X.obj (Opposite.op (SimplexCategory.mk n)) ≃ X.Path n\", \"doc\": \"For each natural number $ n $, this defines a bijection between the $ n $-simplices of a strict Segal space $ X $ evaluated at the opposite simplex $[n]^\\text{op}$ and the space of paths $ \\\\text{Path}(\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_interval\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) (j l : ℕ) (hjl : j + l ≤ n),\\n  X.map (SimplexCategory.subinterval j l hjl).op (sx.spineToSimplex f) = sx.spineToSimplex (f.interval j l hjl)\", \"doc\": \"In a strict Segal space $X$, for any natural number $n$, path $f$ in the 1-truncated simplicial set at level $n$, and indices $j, l$ satisfying $j + l \\\\leq n$, the spine-to-simplex map commutes with s\"}\n  {\"name\": \"SSet.StrictSegal.spineToDiagonal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk 1))\", \"doc\": \"Given a strict Segal space $ X $, a natural number $ n $, and a path in the 1-truncated simplicial set $ X $ at level $ n $, this function constructs an element of $ X_1 $ by first mapping the path to\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineToDiagonal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        autoParam (m ≤ n + 1) _auto_44✝ → X.Path m → X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := ⋯ })\", \"doc\": \"The function composes the spine-to-simplex map with the action of the opposite diagonal morphism on an $(n+1)$-truncated simplicial set $X$, sending a path of $m$-simplices to the corresponding 1-simp\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_edge\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) (j l : ℕ) (hjl : j + l ≤ n),\\n  X.map (SimplexCategory.intervalEdge j l hjl).op (sx.spineToSimplex f) = sx.spineToDiagonal (f.interval j l hjl)\", \"doc\": \"For a strict Segal space $X$, natural numbers $j, l, n$ with $j + l \\\\leq n$, and a path $f$ in the 1-truncated simplicial set $X$ at level $n$, the map induced by the interval edge morphism $[1] \\\\to [\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineToSimplex_interval\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {n : ℕ} {X : SSet.Truncated (n + 1)} (sx : X.StrictSegal) (m : ℕ) (h : m ≤ n + 1) (f : X.Path m) (j l : ℕ)\\n  (hjl : j + l ≤ m),\\n  X.map (SimplexCategory.Truncated.Hom.tr (SimplexCategory.subinterval j l hjl) ⋯ h).op (sx.spineToSimplex m h f) =\\n    sx.spineToSimplex l ⋯ (f.interval j l hjl)\", \"doc\": \"For an $(n+1)$-truncated simplicial set $X$, a path $f$ at level $m$, and natural numbers $j,l$ satisfying $j + l \\\\leq m$, the application of the truncated subinterval morphism to the spine-to-simplex\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"Given a strict Segal space $ X $, a natural number $ n $, and a path in the 1-truncated simplicial set $ X $ at level $ n $, this function constructs an element of $ X $ evaluated at the opposite of t\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:275-325 states bijective spine maps for a single simplicial set, not weak homotopy equivalences of mapping spaces into Reedy fibrant simplicial spaces. The semantic hits and Loogle hits give no interval-cover restriction theorem; the grep returned no hits. Read StrictSegal.lean and Reedy/Basic.lean:21-24 (Reedy functor model structure is TODO)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Segal spaces satisfy descent for finite covers of a simplex by overlapping subinterval simplices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.Truncated.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} → SSet.Truncated (n + 1) → Prop\", \"doc\": \"An $(n+1)$-truncated simplicial set satisfies the strict Segal condition, which imposes constraints on its simplicial structure to ensure compatibility with categorical composition laws at all levels \"}\n  {\"name\": \"SSet.StrictSegal.isCoskeletal'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} [X.IsStrictSegal], CategoryTheory.SimplicialObject.IsCoskeletal X 2\", \"doc\": \"Any simplicial set satisfying the strict Segal condition is 2-coskeletal, meaning all simplices of dimension greater than 2 are uniquely determined by their boundary maps.\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    (n : ℕ) →\\n      (SSet.Truncated.rightExtensionInclusion X 2).IsPointwiseRightKanExtensionAt (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"For a strict Segal space $X$ and natural number $n$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at the object $[n]$. This means\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:275-325 states bijective spine maps for a single simplicial set, not weak homotopy equivalences of mapping spaces into Reedy fibrant simplicial spaces. The semantic hits and Loogle hits give no interval-cover restriction theorem; the grep returned no hits. Read StrictSegal.lean and Reedy/Basic.lean:21-24 (Reedy functor model structure is TODO)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"spine\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) {n : ℕ} : X.Path n → X.obj (Opposite.op { len := n })\", \"doc\": \"The inverse to `spine X n`.\"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.spine n (sx.spineToSimplex f) = f\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) (n : ℕ) : X.obj (Opposite.op { len := n }) ≃ X.Path n\", \"doc\": \"The fields of `StrictSegal` define an equivalence between `X _⦋n⦌`\\nand `Path X n`.\"}\n  {\"name\": \"SSet.StrictSegalCore.spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) {n : ℕ} (p : X.Path n) : X.obj (Opposite.op { len := n })\", \"doc\": \"Auxiliary definition for `StrictSegal.ofCore`.\"}\n  {\"name\": \"SSet.StrictSegalCore.spine_spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) {n : ℕ} (p : X.Path n) : X.spine n (SSet.StrictSegalCore.spineToSimplex h p) = p\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spineToDiagonal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.obj (Opposite.op { len := 1 })\", \"doc\": \"In the presence of the strict Segal condition, a path of length `n` can be\\n\\\"composed\\\" by taking the diagonal edge of the resulting `n`-simplex.\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (Δ : X.obj (Opposite.op { len := n })) : sx.spineToSimplex (X.spine n Δ) = Δ\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : X.spine n ∘ self.spineToSimplex = id\", \"doc\": \"`spineToSimplex` is a right inverse to `spine X n`.\"}\n  {\"name\": \"SSet.StrictSegalCore.spineToSimplex_spine\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) {n : ℕ} (s : X.obj (Opposite.op { len := n })) : SSet.StrictSegalCore.spineToSimplex h (X.spine n s) = s\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegalCore.spineToSimplexAux\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) {n : ℕ} (p : X.Path n) : { s // X.spine n s = p }\", \"doc\": \"Auxiliary definition for `StrictSegalCore.spineToSimplex`.\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spine_spineToSimplex_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {n : ℕ} {X : SSet.Truncated (n + 1)} (sx : X.StrictSegal) (m : ℕ) (h : m ≤ n + 1) (f : X.Path m) : X.spine m h (sx.spineToSimplex m h f) = f\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : self.spineToSimplex ∘ X.spine n = id\", \"doc\": \"`spineToSimplex` is a left inverse to `spine X n`.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:275-325 states bijective spine maps for a single simplicial set, not weak homotopy equivalences of mapping spaces into Reedy fibrant simplicial spaces. The semantic hits and Loogle hits give no interval-cover restriction theorem; the grep returned no hits. Read StrictSegal.lean and Reedy/Basic.lean:21-24 (Reedy functor model structure is TODO)."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|Segal.*cover|cover.*Segal|spine.*union|union.*spine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:275-325 states bijective spine maps for a single simplicial set, not weak homotopy equivalences of mapping spaces into Reedy fibrant simplicial spaces. The semantic hits and Loogle hits give no interval-cover restriction theorem; the grep returned no hits. Read StrictSegal.lean and Reedy/Basic.lean:21-24 (Reedy functor model structure is TODO)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A consecutive interval face cover containing the spine is a local weak equivalence for Segal simplicial spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.spineInjective\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \": Function.Injective (sx.spineEquiv n)\", \"doc\": \"The spine equivalence function $\\\\text{spineEquiv}_n$ for a strict Segal space is injective, mapping $n$-simplices of $X([n]^\\\\text{op})$ to paths in its 1-truncation without collapsing distinct element\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \": (X _⦋m⦌ₙ ₊ ₁) ≃ Path X m\", \"doc\": \"For each natural number $ m \\\\leq n+1 $ and $(n+1)$-truncated simplicial set $ X $, this defines an equivalence between the $ m $-dimensional spine inclusion $ X.\\\\text{spine}_m $ and the path space $ \\\\\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(n : ℕ) : X _⦋n⦌ ≃ Path X n\", \"doc\": \"For each natural number $ n $, this defines a bijection between the $ n $-simplices of a strict Segal space $ X $ evaluated at the opposite simplex $[n]^\\text{op}$ and the space of paths $ \\\\text{Path}(\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spine_δ_arrow_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(hij : j = i.succ.castSucc) :\\n  (X.spine m _ (X.map (tr (δ j)).op (sx.spineToSimplex (m + 1) _ f))).arrow i =\\n    sx.spineToDiagonal 2 (by lia) (f.interval i 2 (by lia))\", \"doc\": \"For an $(n+1)$-truncated simplicial set $X$, a natural number $m$, and indices $i,j$ satisfying $j = i+1$, the composition of the spine-to-simplex map with the opposite face map $\\\\delta^j$ acting on a\"}\n  {\"name\": \"SSet.Truncated.IsStrictSegal.mk\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"∀ {n : ℕ} {X : SSet.Truncated (n + 1)},\\n  (∀ (m : ℕ) (h : autoParam (m ≤ n + 1) SSet.Truncated.IsStrictSegal._auto_1), Function.Bijective (X.spine m h)) →\\n    X.IsStrictSegal\", \"doc\": \"Let $X$ be an $(n+1)$-truncated simplicial set. This constructor establishes that $X$ satisfies the strict Segal condition, given that for every natural number $m \\\\le n+1$, the spine map from the set \"}\n  {\"name\": \"SSet.StrictSegalCore.spineToSimplex_spine\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(s : X _⦋n⦌) : spineToSimplex h (X.spine _ s) = s\", \"doc\": \"For a simplicial set $X$ satisfying the strict Segal condition and any $n$-simplex $s$ in $X$, applying the spine-to-simplex reconstruction function to the spine of $s$ recovers the original simplex $\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(h : ∀ n, X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set $X$ such that for every natural number $n$, the strict Segal condition at level $n$ holds (i.e., $X_n$ decomposes as a product of $X_1$ and $X_0$ respecting composition), this c\"}\n  {\"name\": \"SSet.IsStrictSegal.segal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"∀ {X : SSet} [self : X.IsStrictSegal] (n : ℕ), Function.Bijective (X.spine n)\", \"doc\": \"For any simplicial set $ X $ satisfying the strict Segal condition, the spine function $ X.\\text{spine}(n) $ is bijective for every natural number $ n $.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:275-325 states bijective spine maps for a single simplicial set, not weak homotopy equivalences of mapping spaces into Reedy fibrant simplicial spaces. The semantic hits and Loogle hits give no interval-cover restriction theorem; the grep returned no hits. Read StrictSegal.lean and Reedy/Basic.lean:21-24 (Reedy functor model structure is TODO)."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|Segal.*(cover|restriction)|Reedy.*fibrant",
+   "results": "{\"t\": \"2026-10-17T01:17:19Z\", \"tool\": \"grep\", \"query\": \"SegalSpace|Segal.*(cover|restriction)|Reedy.*fibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:275-325: IsStrictSegal and spineEquiv assert bijective spine maps for one simplicial set, not homotopy equivalences of enriched mapping simplicial sets into Reedy fibrant bisimplicial sets. Reedy/Basic.lean:21-24 leaves the Reedy diagram model construction as TODO. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a simplicial spine or finite union of subinterval faces is a weak homotopy equivalence on enriched Hom into a Reedy fibrant bisimplicial set satisfying the Segal maps",
+   "results": "{\"t\": \"2026-10-17T01:17:20Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a simplicial spine or finite union of subinterval faces is a weak homotopy equivalence on enriched Hom into a Reedy fibrant bisimplicial set satisfying the Segal maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.spineEquiv\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.StrictSegal.spineToSimplex_spine\", \"SSet.Truncated.StrictSegal.spineToDiagonal\", \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"SSet.StrictSegal.spineToSimplex_map\", \"SSet.StrictSegal.spine_spineToSimplex\", \"SSet.Truncated.IsStrictSegal.spine_bijective\"], \"digest\": \"2b26e9eed9e1a419\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:275-325: IsStrictSegal and spineEquiv assert bijective spine maps for one simplicial set, not homotopy equivalences of enriched mapping simplicial sets into Reedy fibrant bisimplicial sets. Reedy/Basic.lean:21-24 leaves the Reedy diagram model construction as TODO. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-spine-interval-test",
@@ -103,5 +230,20 @@
   "group": "Q89"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-interval-cover",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim; no new nodes. Read Rezk Lemma 10.1 online and the statements of all three cited existing nodes. Six steps give mapping restriction fibrations, explicit boundary-lifting and gluing calculations, the spine comparison, strong induction with interval intersections, finite trivial-fibration attachment, and two-out-of-three. Fresh logged searches in Mathlib and project Lean found neither a leaf nor an attachment. No general homotopy-colimit or localization theorem is silently used.",
+  "blueprint": "Retain the complete inherited ancestry through lem-coef-segal-spine-interval-test to prop-coef-integral-exceptional-adjoint, paragraph 2, displayed derived coefficient adjunction (current main-20261015 blueprint). This auxiliary lemma supplies the consecutive-interval gluing comparison used by Rezk Lemma 10.3 and hence the prescribed mapping-space foundation chain; it is not a literal geometric claim of the ancestor. Steps 1-6 expand Rezk Lemma 10.1 and its Section 4 spine hypothesis. Whole-blueprint searches for Segal, interval and cover found no imported duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-7b3c836af",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-7b3c836af (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, plus the full statements of the three cited nodes (lem-coef-simplicial-space-reedy-cartesian, lem-coef-kan-quillen-right-proper, lem-coef-reedy-model-structure), the citing parent lem-coef-segal-spine-interval-test step 2, and the generalization candidate lem-coef-segal-finite-cover-descent. Source: fetched the recorded Rezk PDF and ran pdftotext to /tmp. The Segal space definition (4.1) is on printed p.11 and Lemma 10.1 with its cover definition on p.23, so the cited places are correct. Rezk's all-vertices cover condition is not enough: for F([0,1]) and F([2,3]) in F(3) with the discrete nerve of BC2, the restriction goes from C2^3 to C2^2 and is not a weak equivalence. The item's inherited hypothesis G(m) ⊆ H is the correct statement, and it is unchanged here. All steps check out. Step 1 uses the cartesian Map-fibration clause with p = V→*, where Map(A,*) = * by definition. Step 2's boundary-lifting closure of trivial fibrations under pullback and composition, and its subobject-union gluing, are checked. Step 3 is Yoneda on the representable F(r)×cΔ^q, with the chain of edges meeting in single vertices. Step 4: F([a,b])∩F([c,d]) is the face on [max,min] or empty, and G(m)∩F([a,b]) is the local spine because a<b. If H≠F(m), then [0,m] is not in the collection, so every length is below m, and the strong induction is properly quantified. Step 5 applies the induction hypothesis only at strictly smaller length and gets triviality by pullback. Step 6 is two-out-of-three. Edge cases m=1, m=2, overlapping {[0,2],[1,3]}, touching, repeated or contained intervals, and empty or terminal V all pass. No new nodes. proof_deps equals the union of step uses. All citations are in the same unit, so no tool_uses are needed, and there is no cycle. There is no duplicate. lem-coef-segal-finite-cover-descent is an unsplit, more general sibling (its specialization to the family {[0..m]}), not the same statement, so this direct proof is legitimate. Searches cover all three kinds, with no Mathlib leaf (only StrictSegal). No SGA is used. No fixes."
+ }
 }

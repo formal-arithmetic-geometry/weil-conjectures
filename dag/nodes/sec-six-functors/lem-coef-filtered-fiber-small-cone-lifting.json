@@ -34,9 +34,87 @@
   "def-coef-infinity-fibrations",
   "lem-coef-marked-relative-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=K\\star\\Delta^0$ and let $T=K\\diamond\\Delta^0=K\\amalg_{K\\times\\{0\\}}(K\\times\\Delta^1)\\amalg_{K\\times\\{1\\}}\\Delta^0$. The inclusions and block-restriction map $c:T\\to C$ are those of [lem-coef-infinity-blunt-sharp-join-equivalence]; its restriction to $K$ is the identity. Let $x=b(*)$, $C_0=pa$, and $D=\\Delta_Kx$. The composite $bc$ corresponds, degree by degree, to an edge $e:C_0\\to D$ of $\\operatorname{Fun}(K,S)$ and the chosen vertex $x$. To give a lift $u:T\\to E$ of $bc$ extending $a$ is exactly to give a vertex $y\\in E_x$ and an edge $\\widetilde e:a\\to\\Delta_Ky$ projecting to $e$: these maps glue on the two identified ends of the displayed cylinder. This follows directly from the pushout and the definition $\\operatorname{Fun}(K,E)_n=\\operatorname{Hom}(K\\times\\Delta^n,E)$ in [def-cbc-enhanced-diagrams-cones]. We first construct this cylinder lift, and then rectify along $c$ in Step 5.",
+   "uses": [
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.1, printed p. 431, cylinder reformulation; blunt cone explicitly as in HTT 4.2.1."
+   }
+  },
+  {
+   "text": "Write $p^{\\mathrm{op}}:E^{\\mathrm{op}}\\to S^{\\mathrm{op}}$ with its cartesian marking. The opposite convention and relative lifting assertion of [lem-coef-relative-marked-anodyne-calculus] apply since $p$ is cocartesian, also when $S$ is not a quasicategory. The map $\\{1\\}^{\\sharp}\\hookrightarrow(\\Delta^1)^{\\sharp}$ is the $n=1$ final-horn generator in [lem-coef-marked-anodyne-lifting-calculus]. Its pushout product with $\\varnothing\\hookrightarrow(K^{\\mathrm{op}})^{\\flat}$ is again marked anodyne, so the relative lifting assertion gives a lift of the reversed cylinder $e^{\\mathrm{op}}$ with the prescribed end $a^{\\mathrm{op}}$. There is no marking condition on the nondegenerate edges of $K^{\\mathrm{op}}$, since it is minimally marked, and all base edges are marked. Reverse the interval and take opposites back. This gives an edge $\\widetilde e_0:a\\to D_0$ in the simplicial exponential $\\operatorname{Fun}(K,E)$ projecting exactly to $e$. Its target lies in $\\operatorname{Fun}(K,E_x)$: for every simplex of $K$, its image under $p$ is the constant simplex at $x$. No theorem that the whole exponential is a cocartesian fibration is needed.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.1, printed p. 431, first lifted edge; the needed case of Proposition 3.1.2.1 follows from Propositions 3.1.1.6 and 3.1.2.3."
+   }
+  },
+  {
+   "text": "The fiber $E_x$ is $\\rho$-filtered and $K$ is $\\rho$-small. Apply precisely the cocone clause of [def-coef-presentable-infinity-category] to $D_0:K\\to E_x$. It gives a vertex $y\\in E_x$ and a cocone $\\widetilde e_{00}:D_0\\to\\Delta_Ky$. By [def-cbc-enhanced-diagrams-cones], a cocone means an edge in the functor simplicial set, so this is a map $K\\times\\Delta^1\\to E_x$. Its composite to $S$ is constant, hence it lies over the degenerate edge at $D$. For $K=\\varnothing$, this use still chooses $y$, since the empty diagram is explicitly included in filteredness; its functor-simplicial-set edge alone would not specify an apex.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.1, printed p. 431, filteredness supplies the second edge and its constant target."
+   }
+  },
+  {
+   "text": "The edges $\\widetilde e_0$ and $\\widetilde e_{00}$ define a map $K\\times\\Lambda^2_1\\to E$ over $s_1e:K\\times\\Delta^2\\to S$: the base edges on $01,12$ are respectively $e$ and the degenerate edge at $D$. The minimally marked inner horn is a generator of [lem-coef-marked-anodyne-lifting-calculus]. Its product with $K^{\\flat}$ is marked anodyne by the pushout-product clause, using $\\varnothing\\hookrightarrow K^{\\flat}$. Apply the opposite of the relative marked lifting property [lem-coef-relative-marked-anodyne-calculus]; inner horns and their minimal markings are invariant under this reversal. It gives $\\sigma:K\\times\\Delta^2\\to E$ over $s_1e$, extending both given edges. Restrict to the long edge $02$. The result is $\\widetilde e:a\\to\\Delta_Ky$ over exactly $e$, since $(s_1e)|_{02}=e$. With the vertex $y$ from Step 3, it glues as in Step 1 to $u:T\\to E$ satisfying $u|_K=a$ and $pu=bc$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.1, printed p. 432, displayed inner-horn lifting problem and long-edge restriction; Proposition 3.1.2.3 gives the needed product horn lift."
+   }
+  },
+  {
+   "text": "Rectify over the prescribed base, without assuming either $S$ or $E$ a quasicategory. By [lem-coef-infinity-blunt-sharp-join-equivalence], precomposition along $c:T\\to C$ is a functor equivalence against every quasicategory; [lem-coef-joyal-functor-equivalence-test] therefore makes $c$ a Joyal weak equivalence. Factor $c=rj$ using [lem-coef-joyal-model-structure], with $j:T\\hookrightarrow Z$ a cofibration and $r:Z\\to C$ a trivial fibration. Two-out-of-three makes $j$ a trivial cofibration. The new interface [lem-coef-cocartesian-joyal-fibration] makes $p$ a Joyal fibration over its arbitrary base. Lift the square with top $u:T\\to E$, left $j$, bottom $br:Z\\to S$, and right $p$, obtaining $v:Z\\to E$ with $vj=u$ and $pv=br$. Let $k:K\\hookrightarrow T$ and $i:K\\hookrightarrow C$ be the inclusions; $rjk=i$. The map $i$ is degreewise injective by the pure-factor description in [def-coef-infinity-relative-cone], hence a cofibration. Lift its square against the trivial fibration $r$, with top $jk:K\\to Z$ and bottom $1_C$, obtaining $s:C\\to Z$ with $si=jk$ and $rs=1_C$. Then $\\bar a=vs$ satisfies $\\bar a i=vjk=uk=a$ and $p\\bar a=pvs=brs=b$. These are strict equalities. All factorizations occur in the containing universe, and none uses a cardinal bound on $E$ or on its fibers.",
+   "uses": [
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-cocartesian-joyal-fibration",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.1, first sentence (Proposition A.2.3.1), expanded using model factorizations; Proposition 3.3.1.7 supplies relative Joyal fibrancy; the blunt-to-sharp comparison is HTT Proposition 4.2.1.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-cocartesian-joyal-fibration",
+  "lem-coef-infinity-blunt-sharp-join-equivalence",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-relative-marked-anodyne-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Online HTT Lemma 5.4.4.1, printed pp. 431-432, with its model-category reduction expanded by factorization and product lifts expanded using existing marked-anodyne nodes. HTT is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -142,10 +220,45 @@
    "results": "{\"t\": \"2026-10-16T23:03:45Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise colimits in fibers preserved by pushforward construct a relative left Kan extension into a cocartesian infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\"], \"digest\": \"e539b6e5939e19cb\"}",
    "date": "2026-10-16",
    "verdict": "Fresh independent second reading: no match. The quasicategory grep and Loogle return no hits. LeanFinder returns ordinary CategoryTheory pointwise Kan extensions, whose Category instances require Hom sets, and strict-Segal coskeletal extension of a simplicial set from its 2-truncation. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:40-51, FiberedCategory/Cocartesian.lean:43-78 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:35-89. None states a cone lift through arbitrary cocartesian quasicategorical fibers or the prescribed-base relative-cylinder extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian fibration with filtered fibers extends small simplicial diagrams over an exactly prescribed right cone",
+   "results": "{\"t\": \"2026-10-17T00:42:39Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian fibration with filtered fibers extends small simplicial diagrams over an exactly prescribed right cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.isFiltered_structuredArrow_of_isFiltered_of_exists\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.isFiltered_of_isFiltered_costructuredArrow\"], \"digest\": \"21826a6a3208b445\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the displayed signatures give ordinary CategoryTheory cocartesian arrows, ordinary LiftableCone/LiftableCocone, or StrictSegal right coskeletal extension. Read FiberedCategory/Cocartesian.lean:43-78, Functor/KanExtension/Pointwise.lean:40-51 and SimplicialSet/Coskeletal.lean:35-89. None states relative small right-cone lifting for coherent simplicial diagrams and filtered quasicategorical fibers. Loogle and quasicategory grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"cone\"",
+   "results": "{\"t\": \"2026-10-17T00:42:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the displayed signatures give ordinary CategoryTheory cocartesian arrows, ordinary LiftableCone/LiftableCocone, or StrictSegal right coskeletal extension. Read FiberedCategory/Cocartesian.lean:43-78, Functor/KanExtension/Pointwise.lean:40-51 and SimplicialSet/Coskeletal.lean:35-89. None states relative small right-cone lifting for coherent simplicial diagrams and filtered quasicategorical fibers. Loogle and quasicategory grep have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered|cocartesian|cone",
+   "results": "{\"t\": \"2026-10-17T00:42:35Z\", \"tool\": \"grep\", \"query\": \"filtered|cocartesian|cone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the displayed signatures give ordinary CategoryTheory cocartesian arrows, ordinary LiftableCone/LiftableCocone, or StrictSegal right coskeletal extension. Read FiberedCategory/Cocartesian.lean:43-78, Functor/KanExtension/Pointwise.lean:40-51 and SimplicialSet/Coskeletal.lean:35-89. None states relative small right-cone lifting for coherent simplicial diagrams and filtered quasicategorical fibers. Loogle and quasicategory grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent small diagram lifts over a prescribed cone when a cocartesian fibration has filtered fibers",
+   "results": "{\"t\": \"2026-10-17T00:42:36Z\", \"tool\": \"leansearch\", \"query\": \"A coherent small diagram lifts over a prescribed cone when a cocartesian fibration has filtered fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftableCocone.mk.noConfusion\", \"CategoryTheory.LiftableCocone.noConfusion\", \"CategoryTheory.LiftableCocone.noConfusionType\", \"CategoryTheory.LiftableCocone\", \"CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux\", \"CategoryTheory.LiftableCone.liftedCone\", \"CategoryTheory.LiftableCone.mk\", \"CategoryTheory.LiftableCocone.mk\"], \"digest\": \"23148481363cc3c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the displayed signatures give ordinary CategoryTheory cocartesian arrows, ordinary LiftableCone/LiftableCocone, or StrictSegal right coskeletal extension. Read FiberedCategory/Cocartesian.lean:43-78, Functor/KanExtension/Pointwise.lean:40-51 and SimplicialSet/Coskeletal.lean:35-89. None states relative small right-cone lifting for coherent simplicial diagrams and filtered quasicategorical fibers. Loogle and quasicategory grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered quasicategorical fibers provide extensions of diagrams along small right cone inclusions relative to a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T00:50:26Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered quasicategorical fibers provide extensions of diagrams along small right cone inclusions relative to a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.RightExtension.coneAt\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"618860e6921adcc2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the displayed signatures give ordinary CategoryTheory cocartesian arrows, ordinary LiftableCone/LiftableCocone, or StrictSegal right coskeletal extension. Read FiberedCategory/Cocartesian.lean:43-78, Functor/KanExtension/Pointwise.lean:40-51 and SimplicialSet/Coskeletal.lean:35-89. None states relative small right-cone lifting for coherent simplicial diagrams and filtered quasicategorical fibers. Loogle and quasicategory grep have zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-cocartesian-section-cofinality",
@@ -153,5 +266,21 @@
   "group": "N1"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-filtered-fiber-small-cone-lifting",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-base cone-lifting statement. Wrote the blunt-cylinder lift, derived its two required lifts from existing marked-anodyne calculus, used filteredness with an explicit apex, and rectified by two strict model lifts. Replaced the previous incomplete absolute strictification and erroneous exponentiation source with one general statement-only child: arbitrary-base (co)cartesian fibrations are Joyal fibrations.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 is realized through its finite-coefficient coherent adjunction infrastructure and the existing chain through HTT 5.4.4.2 and Lemma 5.4.4.1. Steps 1 and 5 expand the latter first sentence; Steps 2-4 realize its first edge, filtered-fiber edge and inner-horn filler. The unit and chapter route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-029421752",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-029421752 (reviewer sub-agent of L); spot-checked: Read in full: the item, the one new node lem-coef-cocartesian-joyal-fibration, the statements of all ten cited nodes, the parent's citing step and the unit record. HTT is not archived in literature/; both nodes record the online place with proof_origin agent, and the report has WANTED lines. The item matches HTT Lemma 5.4.4.1 clause by clause (any simplicial base, K empty allowed, strict lift) and is not weakened. Step 1: the blunt cone K⋄Δ^0 from the blunt-sharp join node; a map from it is a vertex y plus an edge a→Δ_K y (elementary). Step 2: generator (ii) at n=1, {1}^♯→(Δ^1)^♯, times ∅→(K^op)^♭ is marked anodyne, and the relative right-lifting property over any base S applies to p^op; all markings check. Step 3: the cocone clause of filteredness, with K empty still giving y (elementary). Step 4: the edges of s_1e are e, the degenerate edge at Δ_K x, and e; the inner horn times K^♭ gives σ, and its 02 edge lies over e. Step 5: the functor-equivalence test (ii)⇒(i) makes c a Joyal equivalence; factor c=rj; two lifting squares give vj=u, pv=br, si=jk, rs=1, so āi=a and pā=b hold strictly. The new node is HTT Proposition 3.3.1.7 plus its opposite and is true, including the empty-source case. It generalizes the quasicategory-base clause of lem-coef-relative-marked-anodyne-calculus; my searches for categorical/Joyal fibration, isofibration and 3.3.1.7 (54 files) found no duplicate. It is statement-only, self-contained, cites the right definitions, records searches of all three kinds, and has correct blueprint.from/via. All cited lemmas are in the item's unit, with no tool uses and no SGA. No fixes written."
+ }
 }

@@ -1,167 +1,366 @@
 {
-  "id": "thm-sf-dual-perfect",
-  "blueprint": {
-    "is": "thm-sf-dual-perfect",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The dual of a perfect complex",
-  "statement": "In the Poincare duality conventions of [def-pod-conventions] (an\ninstance of the setting of [def-sf-datum], with $X$ smooth,\nseparated of finite type and of pure dimension $d$), let\n$K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$, at any\ncoefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$.\nThe smooth dualizing-complex identification\n$\\eta_X:\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d]$ of the\npurity chapter (the orientation of [def-sf-orientation] for $f=a_X$)\nand the twist interchange give a canonical isomorphism\n\n$$\n\\mathbb D_XK\\xrightarrow{\\ \\sim\\ }K^\\vee(d)[2d],\n$$\n\nnatural in $K$, compatible with finite reduction, scalar extension,\nshifts, and the canonical evaluation. Moreover $K^\\vee$ is perfect, the\ncanonical map $K\\to K^{\\vee\\vee}$ is an isomorphism, and consequently\n$\\mathbb D_X$ restricts to an anti-equivalence on the perfect objects,\nthe biduality $K\\to\\mathbb D_X\\mathbb D_XK$ being, under this\nidentification, the coefficient-dual biduality $K\\to K^{\\vee\\vee}$.\n\n*Relative form.* The same holds for a smooth separated finite-type\n$f:X\\to Y$ of pure relative dimension $d$ over an arbitrary base $Y$ of the\nsetting: with the orientation $\\gamma_f:\\Lambda_X(d)[2d]\\xrightarrow{\\sim}\nRf^!\\Lambda_Y$ of [def-sf-orientation] and\n$\\mathbb D_{X/Y}K=R\\mathcal Hom_X(K,Rf^!\\Lambda_Y)$, the composite of\n$R\\mathcal Hom_X(K,\\gamma_f^{-1})$ with the twist interchange is a natural\nisomorphism $\\mathbb D_{X/Y}K\\xrightarrow{\\sim}K^\\vee(d)[2d]$ for perfect\n$K$, with the same biduality statement; the absolute case is $f=a_X$. The\nproof below uses nothing about the base beyond the orientation.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.md",
-    "place": "node thm-sf-dual-perfect, order 2178"
-  },
-  "stmt_deps": [
-    "def-pod-conventions",
-    "def-sf-datum",
-    "def-sf-orientation"
-  ],
-  "proof": [
-    {
-      "text": "Step 1: the definition. By [def-pod-conventions],\n$\\mathbb D_XK=R\\mathcal Hom_X(K,\\omega_{X,\\Lambda})$ with\n$\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$, and\n$K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$.",
-      "uses": [
-        "def-pod-conventions"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 2: the smooth purity input. The smooth dualizing-complex\nidentification of [cor-pur-finite-stage-smooth-dualizing-complex]\n(at the finite stage $A=A_{E,n}$) and its transport\n[cor-pur-adic-and-rational-smooth-dualizing-complexes] (at the\n$\\mathcal O_E$-, $E$- and $\\overline{\\mathbf Q}_\\ell$-stages) provide the\ncanonical orientation\n\n$$\n\\eta_X:\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d],\n$$\n\nwhich is the case $f=a_X$ of an orientation datum as in\n[def-sf-orientation], compatible with finite reduction, scalar\nextension, and shifts.",
-      "uses": [
-        "cor-pur-finite-stage-smooth-dualizing-complex",
-        "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-        "def-sf-orientation"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 3: substitution and interchange. Substituting $\\eta_X$ into the\ninternal Hom and using the shift of the second variable,\n\n$$\n\\mathbb D_XK\\cong R\\mathcal Hom_X\\bigl(K,\\Lambda_X(d)[2d]\\bigr)\n\\cong\\bigl(R\\mathcal Hom_X(K,\\Lambda_X(d))\\bigr)[2d]\n\\cong K^\\vee(d)[2d],\n$$\n\nthe second isomorphism being the shift axiom of the derived internal Hom\nof [def-weil-derived-pullback-tensor-hom], the third being\n[lem-sf-twist-interchange] with $m=d$ (its hypothesis is the\nperfectness of $K$ over $\\Lambda_X$).",
-      "uses": [
-        "def-weil-derived-pullback-tensor-hom",
-        "lem-sf-twist-interchange"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 4: canonicality and compatibilities. The composite is canonical\nbecause its ingredients are: the orientation is the canonical one of the\npurity chapter, and the twist interchange and the shift identification\nare canonical maps of the tensor–internal-Hom adjunction (natural in\n$K$; on the generators $K=\\Lambda_X^r$ they are the coordinate\nisomorphisms; the shift index is the constant $2d$). Naturality in $K$\nand compatibility with finite reduction, scalar extension and shifts\nfollow from the corresponding properties of $\\eta_X$ recorded in\n[cor-pur-finite-stage-smooth-dualizing-complex] and\n[cor-pur-adic-and-rational-smooth-dualizing-complexes], and of the\nderived tensor and internal Hom recorded in\n[def-weil-derived-pullback-tensor-hom]. The compatibility with the\ncanonical evaluation is the compatibility of the twist interchange with\nthe tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom]: the evaluation is the counit,\nand the interchange carries the counit for $K\\otimes^L\\Lambda_X(d)$ to\nthe counit for $K$ tensored with the identity of $\\Lambda_X(d)$, after\nunwinding $K^\\vee(d)\\otimes\\Lambda_X(d)$ through the associativity and\ncommutativity coherence of the derived tensor product.",
-      "uses": [
-        "cor-pur-finite-stage-smooth-dualizing-complex",
-        "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-        "def-weil-derived-pullback-tensor-hom"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 5: biduality and the anti-equivalence. By [prop-sf-dualizable],\n$K^\\vee$ is perfect and the evaluation $K\\otimes^L_{\\Lambda_X}K^\\vee\\to\\Lambda_X$\nis defined. Choose locally a bounded complex $P^\\bullet$ of finite\nprojective $\\Lambda_X$-modules with a quasi-isomorphism $P^\\bullet\\to K$.\nBy [prop-sf-dualizable-hom] (with $M=\\Lambda_X$) the dual $K^\\vee$ is\nrepresented by $P^{\\bullet\\vee}$, again bounded with finite projective\nterms, and applying this once more $K^{\\vee\\vee}$ is represented by\n$P^{\\bullet\\vee\\vee}$; the canonical map $K\\to K^{\\vee\\vee}$ is then\ntermwise the double-dual map $P^j\\to P^{j\\vee\\vee}$, an isomorphism by\n[lem-sf-hom-finite-projective], compatible with the differentials,\nso $K\\to K^{\\vee\\vee}$ is an isomorphism (the statement being local on\nthe site). Applying Step 3 twice,\n$\\mathbb D_X\\mathbb D_XK\\cong\\bigl(K^\\vee(d)[2d]\\bigr)^\\vee(d)[2d]\\cong K^{\\vee\\vee}$,\nwhere $\\bigl(K^\\vee(d)[2d]\\bigr)^\\vee\\cong R\\mathcal Hom_X(K^\\vee,\\Lambda_X(-d)[-2d])\\cong K^{\\vee\\vee}(-d)[-2d]$\nby the tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom] (moving the invertible twist\n$\\Lambda_X(d)$ of the first variable to $\\Lambda_X(-d)$ in the second)\nand [lem-sf-twist-interchange] with $m=-d$ applied to the perfect\ncomplex $K^\\vee$; and\nunder this identification the biduality map is $K\\to K^{\\vee\\vee}$.\nHence $K\\mapsto\\mathbb D_XK\\cong K^\\vee(d)[2d]$ preserves perfect\nobjects and is its own quasi-inverse on them, i.e. an anti-equivalence of\nthe perfect objects.",
-      "uses": [
-        "prop-sf-dualizable",
-        "prop-sf-dualizable-hom",
-        "lem-sf-hom-finite-projective",
-        "def-weil-derived-pullback-tensor-hom",
-        "lem-sf-twist-interchange"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pod-conventions",
-    "cor-pur-finite-stage-smooth-dualizing-complex",
-    "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-    "def-sf-orientation",
+ "id": "thm-sf-dual-perfect",
+ "blueprint": {
+  "is": "thm-sf-dual-perfect",
+  "from": null,
+  "same_as": [
+   "sk-thm-sf-dual-perfect"
+  ]
+ },
+ "kind": "statement",
+ "title": "The dual of a perfect complex",
+ "statement": "In the Poincare duality conventions of [def-pod-conventions] (an\ninstance of the setting of [def-sf-datum], with $X$ smooth,\nseparated of finite type and of pure dimension $d$), let\n$K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$, at any\ncoefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$.\nThe smooth dualizing-complex identification\n$\\eta_X:\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d]$ of the\npurity chapter (the orientation of [def-sf-orientation] for $f=a_X$)\nand the twist interchange give a canonical isomorphism\n\n$$\n\\mathbb D_XK\\xrightarrow{\\ \\sim\\ }K^\\vee(d)[2d],\n$$\n\nnatural in $K$, compatible with finite reduction, scalar extension,\nshifts, and the canonical evaluation. Moreover $K^\\vee$ is perfect, the\ncanonical map $K\\to K^{\\vee\\vee}$ is an isomorphism, and consequently\n$\\mathbb D_X$ restricts to an anti-equivalence on the perfect objects,\nthe biduality $K\\to\\mathbb D_X\\mathbb D_XK$ being, under this\nidentification, the coefficient-dual biduality $K\\to K^{\\vee\\vee}$.\n\n*Relative form.* The same holds for a smooth separated finite-type\n$f:X\\to Y$ of pure relative dimension $d$ over an arbitrary base $Y$ of the\nsetting: with the orientation $\\gamma_f:\\Lambda_X(d)[2d]\\xrightarrow{\\sim}\nRf^!\\Lambda_Y$ of [def-sf-orientation] and\n$\\mathbb D_{X/Y}K=R\\mathcal Hom_X(K,Rf^!\\Lambda_Y)$, the composite of\n$R\\mathcal Hom_X(K,\\gamma_f^{-1})$ with the twist interchange is a natural\nisomorphism $\\mathbb D_{X/Y}K\\xrightarrow{\\sim}K^\\vee(d)[2d]$ for perfect\n$K$, with the same biduality statement; the absolute case is $f=a_X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.md",
+  "place": "node thm-sf-dual-perfect, order 2178"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-sf-datum",
+  "def-sf-orientation",
+  "def-weil-site-perfect-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Work first with the relative orientation already supplied in the statement. Write $\\mathbf1=\\Lambda_X$, $H(A,B)=R\\mathcal Hom_X(A,B)$, $T=\\Lambda_X(d)$, $L=T[2d]$, $W=Rf^!\\Lambda_Y$, and $\\lambda=\\gamma_f^{-1}:W\\xrightarrow{\\sim}L$. Tensor products below are derived over the coefficient unit. The tensor--internal-Hom adjunction is part (i) of [sk-def-sf-operations]; its coefficient meanings are those of [def-weil-derived-pullback-tensor-hom], including the completed integral unit and the rational/common-stage operations. Thus $D_WK=H(K,W)$ and $K^\\vee=H(K,\\mathbf1)$. In the absolute case [def-pod-conventions] identifies $W=\\omega_{X,\\Lambda}$ and $\\lambda=\\eta_X$. We use the supplied orientation and its comparison maps from [def-sf-orientation]; we do not reconstruct purity or assume general Verdier biduality.",
+   "uses": [
+    "sk-def-sf-operations",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-sf-twist-interchange",
+    "def-pod-conventions",
+    "def-sf-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "First arrow; relative and absolute notation"
+   }
+  },
+  {
+   "text": "Put $V=K^\\vee=H(K,\\mathbf1)$. The site's perfectness hypothesis is exactly the local finite-projective condition of [def-weil-site-perfect-complex], with its completed, localized and common-stage interpretations. By [prop-sf-dualizable], $V$ is site-perfect and the evaluation $e:K\\otimes V\\to\\mathbf1$ is defined. The coefficient unit and its Tate twists are in the stated $D^b_{ctf}$ coefficient category: at finite level they are constructible locally free rank-one modules; at the integral stage they have the derived-complete lattice and finite free reductions of [def-coefficient-twists-detailed], and at the field stages they are its prescribed images. By [lem-sf-twist-interchange], $T$ is invertible locally constant of rank one, so the same applies to $L=T[2d]$. By [thm-sf-ctf-stability](ii),(vii), $V=H(K,\\mathbf1)$ is in $D^b_{ctf}$ at all four stages. For every $M\\in D^b_{ctf}$, [prop-sf-dualizable-hom] gives the isomorphism $a_M:V\\otimes M\\xrightarrow{\\sim}H(K,M)$, namely the transpose of $e\\otimes1_M$. We need it only for $M=K,\\mathbf1,W,L$, all of which are in this domain: $W\\cong L$ by the supplied orientation. In particular let $z:\\mathbf1\\to H(K,K)$ be the transpose of $1_K$ and define $c=a_K^{-1}z:\\mathbf1\\to V\\otimes K$. Uncurrying $a_Kc=z$ gives $(e\\otimes1_K)(1_K\\otimes c)=1_K$, the first triangle. For the second set $r=(1_V\\otimes e)(c\\otimes1_V):V\\to V$. The uncurrying of $a_{\\mathbf1}r$ is $e(1_K\\otimes r)=(e\\otimes e)(1_K\\otimes c\\otimes1_V)=e$, using the first triangle; tensor bifunctoriality permits either evaluation to be applied first. This is also the uncurrying of $a_{\\mathbf1}$. Injectivity of uncurrying and invertibility of $a_{\\mathbf1}$ imply $r=1_V$. The uncurrying laws here are [lem-pod-closed-uncurry-laws]. We have constructed a global dual pair $(K,V,e,c)$ in each actual coefficient category from the canonical evaluation comparison, without inferring any equivalence from a definition or gluing local morphisms.",
+   "uses": [
+    "def-weil-site-perfect-complex",
     "prop-sf-dualizable",
     "prop-sf-dualizable-hom",
-    "lem-sf-hom-finite-projective"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.md",
-    "place": "## Proof"
+    "thm-sf-ctf-stability",
+    "lem-pod-closed-uncurry-laws",
+    "def-coefficient-twists-detailed",
+    "lem-sf-twist-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "Expanded theorem proof, Step 5; perfect-duality unit prop-sf-dualizable and prop-sf-dualizable-hom, with coevaluation and both triangles derived from the canonical comparison at M=K"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2178,
-  "blueprint_uses": [
-    "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-    "cor-pur-finite-stage-smooth-dualizing-complex",
-    "def-pod-conventions",
-    "def-sf-datum",
+  {
+   "text": "Apply $H(K,-)$ to $\\lambda$ and then [lem-sf-twist-interchange] with $m=d$ and $n=2d$ to obtain $\\theta_{f,K}:H(K,W)\\xrightarrow{H(K,\\lambda)}H(K,L)\\xrightarrow{\\sim}K^\\vee(d)[2d]$. The first arrow has inverse $H(K,\\lambda^{-1})$ and the second is an isomorphism by that lemma since $K$ is perfect. Equivalently, under $K^\\vee(d)[2d]=K^\\vee\\otimes L$, this composite is $(1_{K^\\vee}\\otimes\\lambda)a_W^{-1}$: both versions of the twist comparison are inverse to the canonical evaluation comparison $a_L$ constructed in step 2. This proves exactly the prescribed composite, not merely the existence of an isomorphism.",
+   "uses": [
+    "lem-sf-twist-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "First and second arrows, m=d and n=2d"
+   }
+  },
+  {
+   "text": "The evaluation compatibility is the typed equality $\\lambda\\,\\mathrm{ev}_{K,W}=(\\mathrm{ev}_{K,\\mathbf1}\\otimes1_L)(1_K\\otimes\\theta_{f,K})$ of maps $K\\otimes H(K,W)\\to L$; the right side uses associativity to put the last factor $L$ after $K\\otimes K^\\vee$. Indeed the defining uncurrying equation for $a_W$ is $\\mathrm{ev}_{K,W}(1_K\\otimes a_W)=e\\otimes1_W$. Precompose the proposed equality with the isomorphism $1_K\\otimes a_W$; both sides become $e\\otimes\\lambda$. The uncurrying equation and its functoriality are [lem-pod-closed-uncurry-laws]. For naturality, let $u:K\\to K'$ and write $u^\\vee=H(u,\\mathbf1)$. Compare $\\theta_{f,K}H(u,W)$ and $(u^\\vee\\otimes1_L)\\theta_{f,K'}$, both from $H(K',W)$ to $K^\\vee\\otimes L$, by composing them with the isomorphism $a_L:K^\\vee\\otimes L\\to H(K,L)$. Uncurrying these resulting maps gives, in both cases, $\\lambda\\,\\mathrm{ev}_{K',W}(u\\otimes1)$, by the displayed evaluation equation and naturality of evaluation. Injectivity of uncurrying and cancellation of $a_L$ prove the naturality square. The formula characterizes the comparison uniquely by evaluation.",
+   "uses": [
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "Naturality of both arrows and identification of the actual evaluation"
+   }
+  },
+  {
+   "text": "For a finite-reduction or scalar-extension functor $F$, let $u:F\\mathbf1\\xrightarrow{\\sim}\\mathbf1'$, $w:FW\\xrightarrow{\\sim}W'$, $l:FL\\xrightarrow{\\sim}L'$, and $h_{K,B}:FH(K,B)\\xrightarrow{\\sim}H(FK,FB)$ for $B=\\mathbf1,W$ denote its prescribed comparisons; only these perfect-first-variable comparisons are used. [lem-fix-operation-reduction] supplies tensor and internal-Hom comparisons preserving evaluations, units, counits and associativity; between finite quotient rings its first-variable site-perfect hypothesis is satisfied by $K$. Its rationalization and common-stage clauses handle the two field stages with their prescribed, rather than discrete, coefficient operations. [def-sf-orientation] gives $\\lambda' w=l F\\lambda$. Define $v_K=H(FK,u)h_{K,\\mathbf1}:F(K^\\vee)\\xrightarrow{\\sim}(FK)^\\vee$ and $r_K=H(FK,w)h_{K,W}:F(D_WK)\\xrightarrow{\\sim}D_{W'}(FK)$. Under the tensor comparison the desired square is $\\theta'_{f,FK}r_K=(v_K\\otimes l)F(\\theta_{f,K})$. Compose both sides with $a'_{L'}:(FK)^\\vee\\otimes L'\\xrightarrow{\\sim}H(FK,L')$ and uncurry. By preservation of evaluation, the left side is $\\lambda'wF(\\mathrm{ev}_{K,W})$ and the right side is $lF(\\lambda)F(\\mathrm{ev}_{K,W})$, with the prescribed tensor comparisons inserted. They agree by $\\lambda'w=lF\\lambda$; injectivity of uncurrying and cancellation of $a'_{L'}$ give the square. This proves the coefficient compatibilities, including their identity and tower compatibilities because each square is an equality for the prescribed comparisons. For shifts, [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives $H(K[s],W)=H(K,W)[-s]$ at finite and completed integral levels, and [def-weil-derived-pullback-tensor-hom] gives their rational/common-stage images. Here is the sign check for the resulting equality $\\theta_{K[s]}=\\theta_K[-s]$. Use cohomological shifts $C[s]^i=C^{i+s}$, $d_{C[s]}=(-1)^s d_C$. For any representative complex $P$ of $K$ and K-injective target complex $I$, in degree $n$ the first-variable comparison $\\operatorname{Hom}^\\bullet(P[s],I)\\to\\operatorname{Hom}^\\bullet(P,I)[-s]$ reindexes $j=i+s$ and multiplies a component by $(-1)^{sn}$: substituting $d(f)=d_I f-(-1)^n f d_P$ checks that this is a chain map. Naturality in the second variable first replaces $W$ by $L$ using $\\lambda$. To check the remaining canonical comparison on global complex models, take $I$ K-injective representing the unit. Tensoring with the invertible sheaf $T$ preserves K-injectivity: maps from an acyclic complex $A$ into $I\\otimes T$ are maps from the acyclic complex $A\\otimes T^{-1}$ into $I$, hence form an acyclic Hom complex. Thus $(I\\otimes T)[2d]$ represents $L$ and computes the required internal Hom. At integral coefficients, this ordinary tensor with the line also computes the completed tensor used here. Indeed $-\\otimes T$ is an exact equivalence with inverse $-\\otimes T^{-1}$, so it commutes with products and mapping cones. Applying it to the functorial shifted-cone-of-$1-s$ construction of [def-pur-integral-derived-operations] identifies the completed tensor of a derived-complete object $C$ with $T$ with $(R\\varprojlim C_n)\\otimes T\\cong C\\otimes T$, using the completeness condition of [def-weil-derived-complete]. This applies to the unit and to $C=H(K,\\mathbf1)$, whose integral constructible membership, hence completeness, was checked in step 2. The identification is induced by the tensor/reduction maps on the whole tower, so its evaluation comparison is the sheaf-Hom comparison computed below. The canonical sheaf-Hom comparison $\\mathcal Hom^\\bullet(P,I)\\otimes T\\to\\mathcal Hom^\\bullet(P,I\\otimes T)$ is an isomorphism: locally trivializing the degree-zero line makes it the identity, component by component. In degree $n$ of $\\mathcal Hom^\\bullet(P,(I\\otimes T)[2d])$, the corresponding degree of $\\mathcal Hom^\\bullet(P,I)$ is $n+2d$. The two ways around the shift square multiply this component by $(-1)^{sn}$ and $(-1)^{s(n+2d)}$, respectively, which agree. This is equality of sheaf-component maps of the global complexes, so passage to the derived category gives equality of the global comparison morphisms. The calculation applies at finite and completed integral coefficients; rationalization sends equal maps to equal maps, and the common-stage definition represents the equality over a finite field stage. The evaluation characterization in step 4 identifies these comparisons with $\\theta$.",
+   "uses": [
+    "lem-fix-operation-reduction",
     "def-sf-orientation",
+    "lem-pod-closed-uncurry-laws",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-sf-hom-finite-projective",
-    "lem-sf-twist-interchange",
-    "prop-sf-dualizable",
-    "prop-sf-dualizable-hom"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "def-pur-integral-derived-operations",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "Naturality and coefficient/shift compatibilities of the two arrows, expanded"
+   }
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-thm-sf-dual-perfect",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the Poincare duality conventions of [def-pod-conventions] (an\ninstance of the setting of [def-sf-datum], with $X$ smooth,\nseparated of finite type and of pure dimension $d$), let\n$K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$, at any\ncoefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$.\nThe smooth dualizing-complex identification\n$\\eta_X:\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d]$ of the\npurity chapter (the orientation of [def-sf-orientation] for $f=a_X$)\nand the twist interchange give a canonical isomorphism\n\n$$\n\\mathbb D_XK\\xrightarrow{\\ \\sim\\ }K^\\vee(d)[2d],\n$$\n\nnatural in $K$, compatible with finite reduction, scalar extension,\nshifts, and the canonical evaluation. Moreover $K^\\vee$ is perfect, the\ncanonical map $K\\to K^{\\vee\\vee}$ is an isomorphism, and consequently\n$\\mathbb D_X$ restricts to an anti-equivalence on the perfect objects,\nthe biduality $K\\to\\mathbb D_X\\mathbb D_XK$ being, under this\nidentification, the coefficient-dual biduality $K\\to K^{\\vee\\vee}$.\n\n*Relative form.* The same holds for a smooth separated finite-type\n$f:X\\to Y$ of pure relative dimension $d$ over an arbitrary base $Y$ of the\nsetting: with the orientation $\\gamma_f:\\Lambda_X(d)[2d]\\xrightarrow{\\sim}\nRf^!\\Lambda_Y$ of [def-sf-orientation] and\n$\\mathbb D_{X/Y}K=R\\mathcal Hom_X(K,Rf^!\\Lambda_Y)$, the composite of\n$R\\mathcal Hom_X(K,\\gamma_f^{-1})$ with the twist interchange is a natural\nisomorphism $\\mathbb D_{X/Y}K\\xrightarrow{\\sim}K^\\vee(d)[2d]$ for perfect\n$K$, with the same biduality statement; the absolute case is $f=a_X$.",
-    "proof": [
-      {
-        "text": "Step 1: the definition. By [def-pod-conventions],\n$\\mathbb D_XK=R\\mathcal Hom_X(K,\\omega_{X,\\Lambda})$ with\n$\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$, and\n$K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$.",
-        "uses": [
-          "def-pod-conventions"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 2: the smooth purity input. The smooth dualizing-complex\nidentification of [cor-pur-finite-stage-smooth-dualizing-complex]\n(at the finite stage $A=A_{E,n}$) and its transport\n[cor-pur-adic-and-rational-smooth-dualizing-complexes] (at the\n$\\mathcal O_E$-, $E$- and $\\overline{\\mathbf Q}_\\ell$-stages) provide the\ncanonical orientation\n\n$$\n\\eta_X:\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d],\n$$\n\nwhich is the case $f=a_X$ of an orientation datum as in\n[def-sf-orientation], compatible with finite reduction, scalar\nextension, and shifts.",
-        "uses": [
-          "cor-pur-finite-stage-smooth-dualizing-complex",
-          "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-          "def-sf-orientation"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 3: substitution and interchange. Substituting $\\eta_X$ into the\ninternal Hom and using the shift of the second variable,\n\n$$\n\\mathbb D_XK\\cong R\\mathcal Hom_X\\bigl(K,\\Lambda_X(d)[2d]\\bigr)\n\\cong\\bigl(R\\mathcal Hom_X(K,\\Lambda_X(d))\\bigr)[2d]\n\\cong K^\\vee(d)[2d],\n$$\n\nthe second isomorphism being the shift axiom of the derived internal Hom\nof [def-weil-derived-pullback-tensor-hom], the third being\n[lem-sf-twist-interchange] with $m=d$ (its hypothesis is the\nperfectness of $K$ over $\\Lambda_X$).",
-        "uses": [
-          "def-weil-derived-pullback-tensor-hom",
-          "lem-sf-twist-interchange"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 4: canonicality and compatibilities. The composite is canonical\nbecause its ingredients are: the orientation is the canonical one of the\npurity chapter, and the twist interchange and the shift identification\nare canonical maps of the tensor–internal-Hom adjunction (natural in\n$K$; on the generators $K=\\Lambda_X^r$ they are the coordinate\nisomorphisms; the shift index is the constant $2d$). Naturality in $K$\nand compatibility with finite reduction, scalar extension and shifts\nfollow from the corresponding properties of $\\eta_X$ recorded in\n[cor-pur-finite-stage-smooth-dualizing-complex] and\n[cor-pur-adic-and-rational-smooth-dualizing-complexes], and of the\nderived tensor and internal Hom recorded in\n[def-weil-derived-pullback-tensor-hom]. The compatibility with the\ncanonical evaluation is the compatibility of the twist interchange with\nthe tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom]: the evaluation is the counit,\nand the interchange carries the counit for $K\\otimes^L\\Lambda_X(d)$ to\nthe counit for $K$ tensored with the identity of $\\Lambda_X(d)$, after\nunwinding $K^\\vee(d)\\otimes\\Lambda_X(d)$ through the associativity and\ncommutativity coherence of the derived tensor product.",
-        "uses": [
-          "cor-pur-finite-stage-smooth-dualizing-complex",
-          "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-          "def-weil-derived-pullback-tensor-hom"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 5: biduality and the anti-equivalence. By [prop-sf-dualizable],\n$K^\\vee$ is perfect and the evaluation $K\\otimes^L_{\\Lambda_X}K^\\vee\\to\\Lambda_X$\nis defined. Choose locally a bounded complex $P^\\bullet$ of finite\nprojective $\\Lambda_X$-modules with a quasi-isomorphism $P^\\bullet\\to K$.\nBy [prop-sf-dualizable-hom] (with $M=\\Lambda_X$) the dual $K^\\vee$ is\nrepresented by $P^{\\bullet\\vee}$, again bounded with finite projective\nterms, and applying this once more $K^{\\vee\\vee}$ is represented by\n$P^{\\bullet\\vee\\vee}$; the canonical map $K\\to K^{\\vee\\vee}$ is then\ntermwise the double-dual map $P^j\\to P^{j\\vee\\vee}$, an isomorphism by\n[lem-sf-hom-finite-projective], compatible with the differentials,\nso $K\\to K^{\\vee\\vee}$ is an isomorphism (the statement being local on\nthe site). Applying Step 3 twice,\n$\\mathbb D_X\\mathbb D_XK\\cong\\bigl(K^\\vee(d)[2d]\\bigr)^\\vee(d)[2d]\\cong K^{\\vee\\vee}$,\nwhere $\\bigl(K^\\vee(d)[2d]\\bigr)^\\vee\\cong R\\mathcal Hom_X(K^\\vee,\\Lambda_X(-d)[-2d])\\cong K^{\\vee\\vee}(-d)[-2d]$\nby the tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom] (moving the invertible twist\n$\\Lambda_X(d)$ of the first variable to $\\Lambda_X(-d)$ in the second)\nand [lem-sf-twist-interchange] with $m=-d$ applied to the perfect\ncomplex $K^\\vee$; and\nunder this identification the biduality map is $K\\to K^{\\vee\\vee}$.\nHence $K\\mapsto\\mathbb D_XK\\cong K^\\vee(d)[2d]$ preserves perfect\nobjects and is its own quasi-inverse on them, i.e. an anti-equivalence of\nthe perfect objects.",
-        "uses": [
-          "prop-sf-dualizable",
-          "prop-sf-dualizable-hom",
-          "lem-sf-hom-finite-projective",
-          "def-weil-derived-pullback-tensor-hom",
-          "lem-sf-twist-interchange"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The perfectness of $V=K^\\vee$ is the conclusion of [prop-sf-dualizable] applied to $K$, and its $D^b_{ctf}$ membership was checked in step 2. Swap the dual pair of step 2 using the symmetry: its evaluation is $e'=e\\sigma_{V,K}:V\\otimes K\\to\\mathbf1$ and its coevaluation is $c'=\\sigma_{V,K}c:\\mathbf1\\to K\\otimes V$. Naturality and the hexagon law for the symmetry identify the two swapped triangle composites with the original ones: $(e'\\otimes1_V)(1_V\\otimes c')=(1_V\\otimes e)(c\\otimes1_V)=1_V$ and $(1_K\\otimes e')(c'\\otimes1_K)=(e\\otimes1_K)(1_K\\otimes c)=1_K$, with associators and unitors inserted. Thus both swapped triangles follow from the two explicit equations of step 2. Put $Z=H(V,\\mathbf1)=K^{\\vee\\vee}$. Define $d:K\\to Z$ to be the transpose of $e'$, so $d$ is precisely the canonical coefficient bidual map $\\delta_K$. Define $t:Z\\to K$ by $Z\\xrightarrow{c'\\otimes1_Z}K\\otimes V\\otimes Z\\xrightarrow{1_K\\otimes\\mathrm{ev}_{V,\\mathbf1}}K$. For $td$, replace $\\mathrm{ev}_{V,\\mathbf1}(1_V\\otimes d)$ by $e'$; the result is the $K$ triangle, hence $td=1_K$. The uncurrying of $dt$ is $e'(1_V\\otimes t)$; inserting the formula for $t$ and evaluating the first $V,K$ factors first reduces it, by the $V$ triangle, to $\\mathrm{ev}_{V,\\mathbf1}$. By [lem-pod-closed-uncurry-laws], $dt=1_Z$. Thus the actual canonical $\\delta_K$ is an isomorphism. All these maps use the coefficient operations of step 1 and the global pair established by [prop-sf-dualizable-hom] in step 2; no claim that arbitrary dualizable objects are site-perfect is used.",
+   "uses": [
+    "prop-sf-dualizable",
+    "prop-sf-dualizable-hom",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "Expanded theorem proof, Step 5; unit coefficient biduality, using the two triangles obtained from prop-sf-dualizable-hom"
+   }
+  },
+  {
+   "text": "By [prop-sf-dualizable], $V=K^\\vee$ is site-perfect. Choose its local bounded finite-projective models from [def-weil-site-perfect-complex]. By [lem-sf-twist-interchange], $T=\\Lambda_X(d)$ is an invertible locally constant rank-one coefficient module. On a common refinement trivializing $T$, tensoring any model term with $T$ gives the same finite-projective term, since a direct-summand presentation of a finite sum of units is preserved under tensoring with a rank-one line. Tensoring the bounded complex and shifting by $[2d]$ therefore proves $V\\otimes L$ site-perfect directly, at the completed integral stage and in the localized/common-stage presentations as well. In particular no dualizable-implies-site-perfect claim is required. Both $\\mathbf1$ and $L$ belong to the stated coefficient category: at finite level a rank-one locally constant finite module is constructible and flat; at integral level its derived-complete lattice and finite free reductions are the ones specified in [def-coefficient-twists-detailed], and at the field stages take its prescribed images. Since $K\\in D^b_{ctf}$, [thm-sf-ctf-stability](ii) for finite coefficients and (vii) for the integral and field stages give $V=H(K,\\mathbf1)$ and $D_WK=H(K,W)$ in $D^b_{ctf}$, using $W\\cong L$. Thus the isomorphism of step 3 proves that $D_WK$ is both site-perfect and in the required bounded constructible finite-Tor category.\n\nThe negative-twist construction [def-coefficient-twists-detailed] gives $L^{-1}=\\Lambda_X(-d)[-2d]$, the tensor inverse of $L$. Its evaluation and coevaluation are rank-one contraction and its inverse with opposite shifts. Their two triangle composites are identities, as can be checked in a local generator; these are equalities of the sheaf maps constructing the line pair, before passing to the derived category.\n\nTo identify the actual bidual map, put $V=K^\\vee$ and define $i_K:K^{\\vee\\vee}\\to H(V\\otimes L,L)$ as the transpose of\n$$(V\\otimes L)\\otimes K^{\\vee\\vee}\\xrightarrow{1_V\\otimes\\sigma_{L,K^{\\vee\\vee}}}V\\otimes K^{\\vee\\vee}\\otimes L\\xrightarrow{\\mathrm{ev}_{V,\\mathbf1}\\otimes1_L}L.$$\nFor an explicit inverse put $Z=H(V\\otimes L,L)$ and let $j_K:Z\\to H(V,\\mathbf1)=K^{\\vee\\vee}$ be the transpose of the following pairing: start from $V\\otimes Z$, insert the line coevaluation to obtain $V\\otimes Z\\otimes L\\otimes L^{-1}$, exchange $Z,L$, evaluate $(V\\otimes L)\\otimes Z\\to L$, and contract $L\\otimes L^{-1}\\to\\mathbf1$. Uncurrying $j_Ki_K$ cancels the inserted line coevaluation against its contraction and leaves $\\mathrm{ev}_{V,\\mathbf1}$, so $j_Ki_K=1$. Uncurrying $i_Kj_K$ cancels them in the other order and leaves $\\mathrm{ev}_{V\\otimes L,L}$, so $i_Kj_K=1$. Thus $i_K$ is an isomorphism with inverse $j_K$. Let $\\beta_K=H(\\theta_{f,K}^{-1},\\lambda):D_W^2K\\xrightarrow{\\sim}H(V\\otimes L,L)$. This is exactly applying the orientation/twist comparison twice and cancelling the inverse twist, expressed by the tensor--Hom adjunction. Define the canonical $W$-biduality $\\delta_{W,K}$ as the transpose of $\\mathrm{ev}_{K,W}\\sigma_{D_WK,K}$. Uncurrying $\\beta_K\\delta_{W,K}$ gives, by step 4, the map\n$$(V\\otimes L)\\otimes K\\xrightarrow{1_V\\otimes\\sigma_{L,K}}V\\otimes K\\otimes L\\xrightarrow{(e\\sigma_{V,K})\\otimes1_L}L.$$\nUncurrying $i_K\\delta_K$ gives the same map, because $\\mathrm{ev}_{V,\\mathbf1}(1_V\\otimes\\delta_K)=e\\sigma_{V,K}$ is the defining equation of $\\delta_K$ from step 6. Thus $\\beta_K\\delta_{W,K}=i_K\\delta_K$ by [lem-pod-closed-uncurry-laws]. Consequently $i_K^{-1}\\beta_K$ identifies the actual $W$-biduality with coefficient biduality. The symmetries in these displayed formulas retain the Koszul signs; the line shift is even, so moving it past a homogeneous degree $r$ contributes $(-1)^{2dr}=1$. No unsigned double-dual identification is used. Step 6 now proves that $\\delta_{W,K}$ is an isomorphism.",
+   "uses": [
+    "prop-sf-dualizable",
+    "lem-sf-twist-interchange",
+    "def-coefficient-twists-detailed",
+    "def-weil-site-perfect-complex",
+    "thm-sf-ctf-stability",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "Twice-theta and inverse-twist argument of the unit proof; expanded theorem Step 5, including explicit site-perfect and constructible preservation"
+   }
+  },
+  {
+   "text": "Let $\\mathcal P$ be the full category of site-perfect objects in $D^b_{ctf}(X,\\Lambda)$. Step 7 has separately checked site-perfectness and $D^b_{ctf}$ membership of $D_WK$ using [def-weil-site-perfect-complex] and [thm-sf-ctf-stability](ii),(vii). Thus internal Hom defines $F=D_W:\\mathcal P^{\\mathrm{op}}\\to\\mathcal P$. Its opposite is $G:\\mathcal P\\to\\mathcal P^{\\mathrm{op}}$. The biduality maps are natural: for $u:A\\to B$, both $D_W^2(u)\\delta_{W,A}$ and $\\delta_{W,B}u$ transpose to evaluation with $u$ in its $A$ input, by naturality of evaluation and [lem-pod-closed-uncurry-laws]. Step 7 proves these natural maps invertible, hence $FG\\cong\\mathrm{id}_{\\mathcal P}$; taking opposites gives $GF\\cong\\mathrm{id}_{\\mathcal P^{\\mathrm{op}}}$. These are the equivalence data. Setting $f=a_X$, $W=\\omega_{X,\\Lambda}$ and $\\lambda=\\eta_X$ gives every absolute clause by [def-pod-conventions]. The proof works over every base in the setting with the supplied relative orientation.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "thm-sf-ctf-stability",
+    "def-pod-conventions",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "Anti-equivalence and the absolute specialization"
+   }
   }
+ ],
+ "proof_deps": [
+  "sk-def-sf-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pod-conventions",
+  "def-sf-orientation",
+  "def-weil-site-perfect-complex",
+  "prop-sf-dualizable",
+  "prop-sf-dualizable-hom",
+  "thm-sf-ctf-stability",
+  "lem-pod-closed-uncurry-laws",
+  "def-coefficient-twists-detailed",
+  "lem-sf-twist-interchange",
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "Current main unit and expanded theorem proof; formal construction of coevaluation from the reviewed canonical evaluation comparison, explicit triangles, signed shifts and inverse-twist cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "verdierDual|coefficientDual|dualizingComplex",
+   "results": "No hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For perfect sheaf complexes on a smooth scheme, Verdier duality is the shifted Tate twist of coefficient duality and is an involutive anti-equivalence.",
+   "results": "Hits as logged: SheafOfModules.conjugateEquiv_pullbackId_hom, HomologicalComplex.opEquivalence_inverse, CategoryTheory.ShortComplex.opEquiv, CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_inv_app_val_app, CategoryTheory.Equivalence.sheafCongr.inverse, LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.flip, CategoryTheory.Equivalence.sheafCongr_inverse. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Verdier dual of a perfect complex on a smooth scheme is its coefficient dual tensored with the Tate twist and shifted by twice the dimension, compatibly with biduality.",
+   "results": "Hits as logged: FGModuleCat.exactPairing, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.isKProjective_of_op, HomologicalComplex.dgoEquivHomologicalComplex, FGModuleCat.rightRigidCategory, CommRing.Pic.mk_dual, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instCommShiftCochainComplexIntQ. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsDualizable, CategoryTheory.MonoidalClosed",
+   "results": "Hits as logged: . loogle: unknown identifier 'CategoryTheory.IsDualizable'",
+   "date": "2026-10-17",
+   "verdict": "no match: unknown identifier; retried with ExactPairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing",
+   "results": "Hits as logged: CategoryTheory.ExactPairing, CategoryTheory.HasLeftDual.mk, CategoryTheory.HasRightDual.mk, CategoryTheory.HasLeftDual.exact, CategoryTheory.HasRightDual.exact, CategoryTheory.exactPairingUnit, CategoryTheory.exactPairingCongrLeft, CategoryTheory.exactPairingCongrRight. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|Tate.twist|coefficient.dual|dualizing.complex",
+   "results": "Hits as logged: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean, Mathlib/Algebra/Homology/SpectralObject/Differentials.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean.  Displayed matches are bibliographic Verdier references and Verdier localization, not duality of sheaf complexes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal derived category a dualizable object has internal Hom into a shifted invertible object equal to its dual tensor that object; twisting duality is involutive.",
+   "results": "Hits as logged: CategoryTheory.ihom.ev_coev, CategoryTheory.exp.ev_coev, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv_symm_naturality.  Read Closed/Basic.lean evaluation/coevaluation and Rigid/Basic.lean dual comparison definitions: abstract dual-pair identities only; no coefficient-site perfectness, orientation, Tate shift or coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class.*(Closed|ExactPairing)|def.*(leftDualIso|rightDualIso)|theorem.*ev_coev",
+   "results": "Hits as logged: Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*[Bb]idual|[Bb]idual.*[Ii]so|leftDual.*[Tt]ensor|rightDual.*[Tt]ensor",
+   "results": "5 actual hits: Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean. Read Rigid/Basic.lean:275-285,707-717; these are abstract tensor-dual comparisons, not the oriented geometric statement or coefficient comparison squares.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; existing exact-pairing leaf retained"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorLeftHomEquiv",
+   "results": "8 actual hits: CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_symm_naturality, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorLeftHomEquiv_tensor. Read Rigid/Basic.lean:275-285,707-717; these are abstract tensor-dual comparisons, not the oriented geometric statement or coefficient comparison squares.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; existing exact-pairing leaf retained"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dual pair in a symmetric monoidal closed category has invertible canonical double dual map and tensoring by an invertible even shift gives a duality",
+   "results": "CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.HasRightDual.exact; CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft; CategoryTheory.leftDualIso; CategoryTheory.exactPairingCongrLeft; CategoryTheory.exactPairingCongrRight",
+   "date": "2026-10-17",
+   "verdict": "Generic rigid-category adjunction and uniqueness results; no declaration gives the site-perfect four-coefficient statement with orientation, shift and canonical biduality compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDualIso|rightDualIso|tensorLeftHomEquiv",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "Generic rigid-category adjunction and uniqueness results; no declaration gives the site-perfect four-coefficient statement with orientation, shift and canonical biduality compatibilities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2178,
+ "blueprint_uses": [
+  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "cor-pur-finite-stage-smooth-dualizing-complex",
+  "def-pod-conventions",
+  "def-sf-datum",
+  "def-sf-orientation",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-hom-finite-projective",
+  "lem-sf-twist-interchange",
+  "prop-sf-dualizable",
+  "prop-sf-dualizable-hom"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the Poincare duality conventions of [def-pod-conventions] (an\ninstance of the setting of [def-sf-datum], with $X$ smooth,\nseparated of finite type and of pure dimension $d$), let\n$K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$, at any\ncoefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$.\nThe smooth dualizing-complex identification\n$\\eta_X:\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d]$ of the\npurity chapter (the orientation of [def-sf-orientation] for $f=a_X$)\nand the twist interchange give a canonical isomorphism\n\n$$\n\\mathbb D_XK\\xrightarrow{\\ \\sim\\ }K^\\vee(d)[2d],\n$$\n\nnatural in $K$, compatible with finite reduction, scalar extension,\nshifts, and the canonical evaluation. Moreover $K^\\vee$ is perfect, the\ncanonical map $K\\to K^{\\vee\\vee}$ is an isomorphism, and consequently\n$\\mathbb D_X$ restricts to an anti-equivalence on the perfect objects,\nthe biduality $K\\to\\mathbb D_X\\mathbb D_XK$ being, under this\nidentification, the coefficient-dual biduality $K\\to K^{\\vee\\vee}$.\n\n*Relative form.* The same holds for a smooth separated finite-type\n$f:X\\to Y$ of pure relative dimension $d$ over an arbitrary base $Y$ of the\nsetting: with the orientation $\\gamma_f:\\Lambda_X(d)[2d]\\xrightarrow{\\sim}\nRf^!\\Lambda_Y$ of [def-sf-orientation] and\n$\\mathbb D_{X/Y}K=R\\mathcal Hom_X(K,Rf^!\\Lambda_Y)$, the composite of\n$R\\mathcal Hom_X(K,\\gamma_f^{-1})$ with the twist interchange is a natural\nisomorphism $\\mathbb D_{X/Y}K\\xrightarrow{\\sim}K^\\vee(d)[2d]$ for perfect\n$K$, with the same biduality statement; the absolute case is $f=a_X$.",
+  "proof": [
+   {
+    "text": "Step 1: the definition. By [def-pod-conventions],\n$\\mathbb D_XK=R\\mathcal Hom_X(K,\\omega_{X,\\Lambda})$ with\n$\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$, and\n$K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$.",
+    "uses": [
+     "def-pod-conventions"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: the smooth purity input. The smooth dualizing-complex\nidentification of [cor-pur-finite-stage-smooth-dualizing-complex]\n(at the finite stage $A=A_{E,n}$) and its transport\n[cor-pur-adic-and-rational-smooth-dualizing-complexes] (at the\n$\\mathcal O_E$-, $E$- and $\\overline{\\mathbf Q}_\\ell$-stages) provide the\ncanonical orientation\n\n$$\n\\eta_X:\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d],\n$$\n\nwhich is the case $f=a_X$ of an orientation datum as in\n[def-sf-orientation], compatible with finite reduction, scalar\nextension, and shifts.",
+    "uses": [
+     "cor-pur-finite-stage-smooth-dualizing-complex",
+     "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+     "def-sf-orientation"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 3: substitution and interchange. Substituting $\\eta_X$ into the\ninternal Hom and using the shift of the second variable,\n\n$$\n\\mathbb D_XK\\cong R\\mathcal Hom_X\\bigl(K,\\Lambda_X(d)[2d]\\bigr)\n\\cong\\bigl(R\\mathcal Hom_X(K,\\Lambda_X(d))\\bigr)[2d]\n\\cong K^\\vee(d)[2d],\n$$\n\nthe second isomorphism being the shift axiom of the derived internal Hom\nof [def-weil-derived-pullback-tensor-hom], the third being\n[lem-sf-twist-interchange] with $m=d$ (its hypothesis is the\nperfectness of $K$ over $\\Lambda_X$).",
+    "uses": [
+     "def-weil-derived-pullback-tensor-hom",
+     "lem-sf-twist-interchange"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 4: canonicality and compatibilities. The composite is canonical\nbecause its ingredients are: the orientation is the canonical one of the\npurity chapter, and the twist interchange and the shift identification\nare canonical maps of the tensor–internal-Hom adjunction (natural in\n$K$; on the generators $K=\\Lambda_X^r$ they are the coordinate\nisomorphisms; the shift index is the constant $2d$). Naturality in $K$\nand compatibility with finite reduction, scalar extension and shifts\nfollow from the corresponding properties of $\\eta_X$ recorded in\n[cor-pur-finite-stage-smooth-dualizing-complex] and\n[cor-pur-adic-and-rational-smooth-dualizing-complexes], and of the\nderived tensor and internal Hom recorded in\n[def-weil-derived-pullback-tensor-hom]. The compatibility with the\ncanonical evaluation is the compatibility of the twist interchange with\nthe tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom]: the evaluation is the counit,\nand the interchange carries the counit for $K\\otimes^L\\Lambda_X(d)$ to\nthe counit for $K$ tensored with the identity of $\\Lambda_X(d)$, after\nunwinding $K^\\vee(d)\\otimes\\Lambda_X(d)$ through the associativity and\ncommutativity coherence of the derived tensor product.",
+    "uses": [
+     "cor-pur-finite-stage-smooth-dualizing-complex",
+     "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+     "def-weil-derived-pullback-tensor-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 5: biduality and the anti-equivalence. By [prop-sf-dualizable],\n$K^\\vee$ is perfect and the evaluation $K\\otimes^L_{\\Lambda_X}K^\\vee\\to\\Lambda_X$\nis defined. Choose locally a bounded complex $P^\\bullet$ of finite\nprojective $\\Lambda_X$-modules with a quasi-isomorphism $P^\\bullet\\to K$.\nBy [prop-sf-dualizable-hom] (with $M=\\Lambda_X$) the dual $K^\\vee$ is\nrepresented by $P^{\\bullet\\vee}$, again bounded with finite projective\nterms, and applying this once more $K^{\\vee\\vee}$ is represented by\n$P^{\\bullet\\vee\\vee}$; the canonical map $K\\to K^{\\vee\\vee}$ is then\ntermwise the double-dual map $P^j\\to P^{j\\vee\\vee}$, an isomorphism by\n[lem-sf-hom-finite-projective], compatible with the differentials,\nso $K\\to K^{\\vee\\vee}$ is an isomorphism (the statement being local on\nthe site). Applying Step 3 twice,\n$\\mathbb D_X\\mathbb D_XK\\cong\\bigl(K^\\vee(d)[2d]\\bigr)^\\vee(d)[2d]\\cong K^{\\vee\\vee}$,\nwhere $\\bigl(K^\\vee(d)[2d]\\bigr)^\\vee\\cong R\\mathcal Hom_X(K^\\vee,\\Lambda_X(-d)[-2d])\\cong K^{\\vee\\vee}(-d)[-2d]$\nby the tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom] (moving the invertible twist\n$\\Lambda_X(d)$ of the first variable to $\\Lambda_X(-d)$ in the second)\nand [lem-sf-twist-interchange] with $m=-d$ applied to the perfect\ncomplex $K^\\vee$; and\nunder this identification the biduality map is $K\\to K^{\\vee\\vee}$.\nHence $K\\mapsto\\mathbb D_XK\\cong K^\\vee(d)[2d]$ preserves perfect\nobjects and is its own quasi-inverse on them, i.e. an anti-equivalence of\nthe perfect objects.",
+    "uses": [
+     "prop-sf-dualizable",
+     "prop-sf-dualizable-hom",
+     "lem-sf-hom-finite-projective",
+     "def-weil-derived-pullback-tensor-hom",
+     "lem-sf-twist-interchange"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-dual-perfect",
+  "worker": "stage1",
+  "summary": "Repair: removed all uses of sk-def-perfect and the unjustified cross-category equivalence. Reused prop-sf-dualizable for site-perfectness of the actual coefficient dual and prop-sf-dualizable-hom for canonical evaluation isomorphisms at all four stages. Constructed the global coevaluation from the inverse comparison at M=K and proved both triangles explicitly; derived coefficient biduality from that pair. Proved site-perfectness of the twisted dual using local finite-projective models and verified D^b_ctf membership using thm-sf-ctf-stability (ii),(vii). Retained evaluation, comparison and sign computations; aligned statement with blueprint_update by dropping its trailing proof remark. No new nodes. Second reading makes both swapped triangles explicit, checks ordinary versus completed tensor with the integral line through its reduction tower, and refreshes citation quotes against the current shared statements.",
+  "blueprint": "Current main-20261015 sk-thm-sf-dual-perfect unit proof: steps 1--4 realize its two arrows and naturality; step 5 expands coefficient and shift compatibilities; steps 6--7 realize coefficient biduality and the twice-theta inverse-twist argument using the existing prop-sf-dualizable route; step 8 realizes anti-equivalence. The repaired route follows the expanded theorem proof's prop-sf-dualizable and prop-sf-dualizable-hom dependencies and the unit orientation/twist route.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Supplies the prescribed coefficient comparisons for internal Hom, tensor and evaluation; the unit itself has no node stating their finite-reduction and scalar-extension compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "The general ringed-site theorem states the signed internal-Hom shift identities, which the definition of the operations does not prove."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Only clauses (ii) and (vii) provide the D^b_ctf membership of coefficient internal Homs and the prescribed integral/field stages. No general geometric biduality or anti-equivalence clause is used; perfectness and biduality follow the unit dual-pair route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "thm-sf-ctf-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-3844dfd7a",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-3844dfd7a (reviewer sub-agent of L); spot-checked: Read in full, all source only: the item, the unit, main-20261015 _section.md, sk proof and thm-sf-dual-perfect.md (diffed against master), and the full statements of all 15 cited nodes. The statement equals blueprint_update.statement verbatim. The only difference from master is the dropped trailing proof remark, so no target is weakened. Coefficient categories (finite constant sheaf, completed integral unit, rational and common-stage images) and the base morphism (smooth separated finite type f with supplied orientation; absolute case f=a_X with eta_X) match def-pod-conventions and def-sf-orientation. Step 2: I re-derived both triangle identities of the dual pair from prop-sf-dualizable-hom at M=K,1, using invertibility of a_1. The needed M=K,1,W,L lie in D^b_ctf (twists via def-coefficient-twists-detailed and stability (vii); W iso L in D^b_ctf). Step 3 is exactly the unit composite (lem-sf-twist-interchange, whose twist arrow is the inverse evaluation comparison). Step 4: evaluation compatibility checked by precomposing with 1 tensor a_W. Step 5: re-derived lambda'w=l F(lambda) from orientation clause 3. lem-fix-operation-reduction's site-perfect first variable is satisfied by K. The shift sign (-1)^{sn} is a chain map and the even 2d shift adds nothing. Step 6: td=1 and dt=1 via the swapped triangles. Step 7: D_WK is site-perfect by local trivialization of the line; D^b_ctf membership from stability (ii),(vii). I checked beta_K delta_{W,K}=i_K delta_K by uncurrying both sides. Step 8: anti-equivalence on P. Mechanical: no cycle (own traversal), all ids exist and are unmerged, proof_deps equals the union of uses, no new nodes, no SGA, sk-def-perfect no longer cited. The unit realized fields are correct. Accepted tool_uses: thm-sf-ctf-stability (ii),(vii) membership only (vi not used), lem-fix-operation-reduction, lem-weil-pbc-ringed-internal-hom-exact-restriction. The previous return's C3/C4/E6, C7 and E5 are repaired. No fixes written."
+ }
 }

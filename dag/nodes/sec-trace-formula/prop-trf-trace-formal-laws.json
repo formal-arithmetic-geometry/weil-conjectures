@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-trf-trace-formal-laws",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Formal laws for the categorical trace",
- "statement": "Fix the global finite-field datum\nand the coefficient\nconventions. The categorical\ntrace has the following properties, all with $A=A_{E,n}$ and\n$\\Lambda\\in\\{E,\\Qlb\\}$ when infinite coefficients occur:\n\n1. *Conjugacy invariance.* If $w:P_1\\xrightarrow{\\sim}P_2$ is\nan isomorphism and $v_2\\circ w=w\\circ v_1$, then\n$\\operatorname{tr}_A(v_1\\mid P_1)=\\operatorname{tr}_A(v_2\\mid P_2)$.\n1. *Filtered (triangle) additivity.* Let $P'\\to P\\to P''\\to P'[1]$ be a\ndistinguished triangle in $D^b_{\\mathrm{fin}}(A)$ and $(v',v,v'')$ an\nendomorphism of it *of filtered origin*: the triangle is the cofibre\nsequence of a two-step filtered object $P'\\subset P$ with graded pieces\n$P'$ and $P''$, and $(v',v,v'')$ is induced by an endomorphism of this\nfiltered object in the filtered derived category $DF(A)$ (for instance by\na chain endomorphism of a short exact sequence $0\\to P'\\to P\\to P''\\to0$\nof bounded complexes of finite projective modules, strictly compatible\nwith the maps). Then\n$$\n\\operatorname{tr}_A(v\\mid P)=\n\\operatorname{tr}_A(v'\\mid P')+\\operatorname{tr}_A(v''\\mid P'').\n$$\nThe filtered origin cannot be dropped: for an endomorphism of a\ndistinguished triangle in the Verdier derived category whose squares\ncommute only up to unspecified homotopy, additivity fails (Ferrand's\nexample, cf. [Stacks, Tag 087J](https://stacks.math.columbia.edu/tag/087J):\nover $R=\\mathbf Z/4$, the sequence $0\\to R[-1]\\to[R\\xrightarrow{2}R]\\to R\\to0$\nwith $(v',v,v'')=(0,(0,2),0)$, where $(0,2)$ is $0$ in degree $0$ and\n$2$ in degree $1$, has $\\operatorname{tr}_A(v\\mid P)=-2\\neq0$).\n1. *Scalar extension.* For a ring homomorphism\n$\\rho:A\\to B$, $\\rho\\bigl(\\operatorname{tr}_A(v\\mid P)\\bigr) =\\operatorname{tr}_B\\bigl(v\\otimes_A^LB\\mid P\\otimes_A^LB\\bigr)$.\n1. *Supertrace over a field.* For\n$\\Lambda\\in\\{E,\\Qlb\\}$ and $P\\in D^b_{\\mathrm{fin}}(\\Lambda)$,\n$$\n\\operatorname{tr}_\\Lambda(v\\mid P)=\n\\sum_{i\\in\\mathbf Z}(-1)^i\\operatorname{Tr}\n\\bigl(H^i(v)\\mid H^i(P)\\bigr).\n$$",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] and coefficient conventions [def-trf-coefficient-conventions], with $A=A_{E,n}$. Use the categorical trace of [def-trf-categorical-trace] on perfect ordinary module complexes [def-pc-perfect-ring-complex], and its same signed dual-frame construction over any commutative coefficient ring. In this proposition $D^b_{\\mathrm{fin}}(A)$ means $\\operatorname{Perf}(A)$, as in that trace definition; it does not mean all complexes with finite cohomology. For a field $F$, $D^b_{\\mathrm{fin}}(F)=D^b_{\\mathrm{fd}}(F)$ has bounded finite-dimensional cohomology [def-weil-point-fd-complexes]. For $\\Lambda=\\Qlb$, in the common-stage notation [def-weil-point-fd-qlbar-category]: compute the endomorphism, cohomology and scalar trace at a common finite coefficient-field stage and extend scalars to $\\Qlb$.\n\n1. Conjugacy invariance. For perfect $P_1,P_2$ and endomorphisms $v_i$ in $D(A)$, if $w:P_1\\xrightarrow{\\sim}P_2$ satisfies $v_2\\circ w=w\\circ v_1$, then $\\operatorname{tr}_A(v_1\\mid P_1)=\\operatorname{tr}_A(v_2\\mid P_2)$.\n2. Filtered additivity. Suppose $P'\\to P\\to P''\\to P'[1]$ is a distinguished triangle of perfect complexes and $(v',v,v'')$ has filtered origin: the triangle and these endomorphisms are induced by a pair of complexes $K'\\subset K$ and an endomorphism in the category obtained by inverting filtration-preserving quasi-isomorphisms on both $K'$ and $K/K'$ in the filtered homotopy category. Then $\\operatorname{tr}_A(v\\mid P)=\\operatorname{tr}_A(v'\\mid P')+\\operatorname{tr}_A(v''\\mid P'')$. In particular this applies to a filtration-preserving chain endomorphism of a short exact sequence of bounded finite-projective complexes. The corresponding assertion for arbitrary endomorphisms of Verdier distinguished triangles is false: over $R=\\mathbf Z/4$, the triangle from $0\\to R[-1]\\to[R\\xrightarrow{2}R]\\to R\\to0$, with middle endomorphism $(0,2)$ in degrees $0,1$ and zero endomorphisms on the ends, has middle trace $-2\\neq0$ (Stacks Tag 087J).\n3. Scalar extension. For any ring homomorphism $\\rho:A\\to B$ of commutative rings, any perfect $P$ and its endomorphism $v$, the extended complex is perfect and $\\rho(\\operatorname{tr}_A(v\\mid P))=\\operatorname{tr}_B(v\\otimes_A^LB\\mid P\\otimes_A^LB)$, where $-\\otimes_A^LB:D(A)\\to D(B)$ is the total left derived functor [def-weil-abstract-derived-category] of termwise extension of scalars along $\\rho$ [def-weil-module-base-change].\n4. Supertrace over a field. For $\\Lambda\\in\\{E,\\Qlb\\}$, $P\\in D^b_{\\mathrm{fin}}(\\Lambda)$ and $v:P\\to P$, $\\operatorname{tr}_\\Lambda(v\\mid P)=\\sum_{i\\in\\mathbf Z}(-1)^i\\operatorname{Tr}(H^i(v)\\mid H^i(P))$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.md",
   "place": "node prop-trf-trace-formal-laws, order 2307",
@@ -23,65 +23,238 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-finite-field-fiber",
   "def-trf-coefficient-conventions",
-  "def-weil-finite-field-fiber"
+  "def-trf-categorical-trace",
+  "def-pc-perfect-ring-complex",
+  "def-weil-point-fd-complexes",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
  ],
  "proof": [
   {
-   "text": "In this proof all traces are the categorical traces of\n[def-trf-categorical-trace], computed with the explicit model\nconventions of [lem-trf-chain-supertrace]; throughout, $w^\\vee$\ndenotes the natural isomorphism\n$R\\operatorname{Hom}_A(w,A):P_2^\\vee\\xrightarrow{\\sim}P_1^\\vee$ induced\nby an isomorphism $w:P_1\\xrightarrow{\\sim}P_2$ (the internal Hom is a\nbifunctor of the derived category, [def-weil-derived-tensor]).",
+   "text": "Choose bounded finite-projective representatives for the perfect complexes, using [def-pc-perfect-ring-complex]. By [lem-pc-ring-derived-map-representative], each derived morphism between them has a chain representative, and equal derived morphisms give homotopic representatives. Use the explicit signed dual-frame evaluation and coevaluation of [def-trf-categorical-trace]; [lem-trf-chain-supertrace] identifies their trace with $\\sum_i(-1)^i\\operatorname{Tr}(v^i)$ and makes it independent of homotopies and representatives. These are ordinary module complexes, not pro-etale sheaf complexes.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-ring-derived-map-representative",
+    "def-trf-categorical-trace",
+    "lem-trf-chain-supertrace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Introductory model paragraph"
+   }
+  },
+  {
+   "text": "For clause (1), choose the representative $\\alpha_1:Q(M)\\cong P_1$, and use $\\alpha_2=w\\alpha_1$ as representative isomorphism for $P_2$. Its dual is $\\alpha_2^\\vee=\\alpha_1^\\vee w^\\vee$. Substitution into the two transport composites of [def-trf-categorical-trace] gives $\\operatorname{coev}_2=(w\\otimes(w^\\vee)^{-1})\\operatorname{coev}_1$ and $\\operatorname{ev}_2((w^\\vee)^{-1}\\otimes w)=\\operatorname{ev}_1$. The signed symmetry commutes with degree-zero maps, since on $x\\otimes\\varphi$ both orders give $(-1)^{|x||\\varphi|}(w^\\vee)^{-1}\\varphi\\otimes wx$. Insert these identities and $v_2w=wv_1$ into the trace composite and cancel $w,w^{-1}$ and $w^\\vee,(w^\\vee)^{-1}$. This gives the asserted equality; changing the representative choice is allowed by [lem-trf-chain-supertrace].",
    "uses": [
     "def-trf-categorical-trace",
+    "lem-trf-chain-supertrace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Clause (1), the two duality squares and trace-composite calculation"
+   }
+  },
+  {
+   "text": "For clause (2), the filtered-origin hypothesis gives an object and endomorphism to which [lem-trf-filtered-projective-model] applies: its graded pieces are precisely the perfect $P'$ and $P''$. Obtain $M'\\subset M$ with quotient $M''$ and a filtration-preserving chain endomorphism. Split $M^i=M'^i\\oplus M''^i$ degreewise; its component has blocks $\\left(\\begin{smallmatrix}\\beta^i&s^i\\\\0&\\alpha^i\\end{smallmatrix}\\right)$. Using dual frames on the two summands, the frame expression for its trace is the sum of the diagonal frame expressions: the dual functionals from the second summand vanish on the off-diagonal image in the first. Thus $\\operatorname{Tr}(\\bar v^i)=\\operatorname{Tr}(\\beta^i)+\\operatorname{Tr}(\\alpha^i)$. Multiply by $(-1)^i$, sum over the finite degree range, and apply [lem-trf-chain-supertrace] on each of the three complexes. This gives the required additivity, with clause (1) identifying the chosen models with the given objects.",
+   "uses": [
+    "lem-trf-filtered-projective-model",
+    "def-trf-categorical-trace",
+    "lem-trf-chain-supertrace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Clause (2), filtered model and block-triangular calculation; Stacks Tag 03TJ"
+   }
+  },
+  {
+   "text": "The warning in (2) is verified directly. The degreewise split sequence gives a distinguished triangle: the cone-to-quotient map has contractible kernel, by the explicit calculation in step 7 and the cone definition [def-weil-abstract-derived-category]. For $R=\\mathbf Z/4$ and $M=[R\\xrightarrow{2}R]$ in degrees $0,1$, $v=(0,2)$ is a chain map because $2\\cdot2=0$. For the inclusion $i:R[-1]\\to M$, the map $vi$ is null-homotopic via $h^1=1:R\\to M^0=R$; the projection $p:M\\to R[0]$ satisfies $pv=0$ strictly. The last triangle square has zero maps on both sides. Hence $(0,v,0)$ is an endomorphism of this distinguished triangle, while [lem-trf-chain-supertrace] gives middle trace $0-2=-2\\neq0$ and both end traces zero. Its restriction to the subcomplex is $2$, not the prescribed zero; it is therefore not this triple's filtered lift.",
+   "uses": [
     "lem-trf-chain-supertrace",
-    "def-weil-derived-tensor"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples.tex",
+    "place": "Tag 087J (examples-section-non-additive), explicit counterexample"
+   }
   },
   {
-   "text": "*(1) Conjugacy invariance.* The duality data\n$\\operatorname{coev}_{P_i},\\operatorname{ev}_{P_i}$ are natural in\nisomorphisms: the squares\n\n$$\n\\begin{array}{ccc}\nA & \\xrightarrow{\\operatorname{coev}_{P_1}} & P_1\\otimes^LP_1^\\vee\\\\\n\\| & & \\downarrow w\\otimes^L(w^\\vee)^{-1}\\\\\nA & \\xrightarrow{\\operatorname{coev}_{P_2}} & P_2\\otimes^LP_2^\\vee\n\\end{array}\n\\qquad\n\\begin{array}{ccc}\nP_1^\\vee\\otimes^LP_1 & \\xrightarrow{\\operatorname{ev}_{P_1}} & A\\\\\n\\downarrow (w^\\vee)^{-1}\\otimes^Lw & & \\|\\\\\nP_2^\\vee\\otimes^LP_2 & \\xrightarrow{\\operatorname{ev}_{P_2}} & A\n\\end{array}\n$$\n\ncommute, and the braiding\n$\\operatorname{sim}$ is natural in both variables; these are the\ncompatibilities of the tensor–internal-Hom adjunction and of the\nsymmetric monoidal structure with the identification\n$P^\\vee=R\\operatorname{Hom}_A(P,A)$. Hence, if\n$v_2\\circ w=w\\circ v_1$, then with the abbreviations\n$\\iota_w=w\\otimes^L(w^\\vee)^{-1}$ and\n$\\iota^w=(w^\\vee)^{-1}\\otimes^Lw$:\n\n$$\n\\begin{aligned}\n\\operatorname{tr}_A(v_2\\mid P_2)\n&=\\operatorname{ev}_{P_2}\\circ\\operatorname{sym}\\circ\n(v_2\\otimes^L1)\\circ\\operatorname{coev}_{P_2}\\\\\n&=\\operatorname{ev}_{P_2}\\circ\\operatorname{sym}\\circ\n\\iota_w\\circ(v_1\\otimes^L1)\\circ\\operatorname{coev}_{P_1}\\\\\n&=\\operatorname{ev}_{P_1}\\circ\\operatorname{sym}\\circ\n(v_1\\otimes^L1)\\circ\\operatorname{coev}_{P_1}\n=\\operatorname{tr}_A(v_1\\mid P_1),\n\\end{aligned}\n$$\n\nwhere the second equality uses $v_2\\otimes^L1=\\iota_w\\circ(v_1\\otimes^L1) \\circ\\iota_w^{-1}$ together with the first square, and the third the\nnaturality of $\\operatorname{sym}$ and the second square.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(2) Filtered additivity.* This is the additivity of the trace on the\nfiltered derived category of perfect complexes,\n[Stacks, Tag 03TJ](https://stacks.math.columbia.edu/tag/03TJ). Concretely,\nan object of $DF(A)$ with a two-step filtration and perfect graded pieces is\nrepresented by a filtered bounded complex of finite projective modules\n$M'\\subset M$ with $M'$ and $M''=M/M'$ bounded complexes of finite\nprojectives (the sequence $0\\to M'\\to M\\to M''\\to0$ is then degreewise\nsplit), and a morphism in $DF(A)$ between such filtered complexes is\nrepresented by a strict morphism of filtered complexes (filtered\nquasi-isomorphisms are inverted, and a filtered map out of a filtered\ncomplex of projectives with projective graded pieces lifts along a filtered\nquasi-isomorphism). A strict endomorphism $\\bar v$ of $M'\\subset M$ is, in\ndegree $n$ and for a splitting $M^n=M'^n\\oplus M''^n$, block triangular,\n\n$$\n\\bar v^n=\\begin{pmatrix}\\beta^n & s^n\\\\ 0 & \\alpha^n\\end{pmatrix},\n$$\n\nwith $\\beta$ the restricted chain endomorphism of $M'$, which represents\n$v'$, $\\alpha$ the induced chain endomorphism of $M''$, which represents\n$v''$, and $s^n:M''^n\\to M'^n$ some family of maps. The trace of a\nblock-triangular matrix is the sum of the traces of its diagonal blocks, so\nby the chain-level formula of [lem-trf-chain-supertrace]\n\n$$\n\\begin{gathered}\n\\operatorname{tr}_A(v\\mid P)\n=\\sum_i(-1)^i\\operatorname{Tr}(\\bar v^i\\mid M^i)\\\\\n=\\sum_i(-1)^i\\operatorname{Tr}(\\beta^i\\mid M'^i)\n+\\sum_i(-1)^i\\operatorname{Tr}(\\alpha^i\\mid M''^i)\n=\\operatorname{tr}_A(v'\\mid P')+\\operatorname{tr}_A(v''\\mid P''),\n\\end{gathered}\n$$\n\nthe traces being independent of the chosen representatives by (1) and\n[lem-trf-chain-supertrace]. The flaw of the naive argument for an\narbitrary endomorphism $(v',v,v'')$ of the triangle in the plain derived\ncategory is visible here: one then only knows that $v$ is represented by a\nchain map $M\\to M$ whose squares with $M'\\to M$ and $M\\to M''$ commute up\nto homotopy, and such a map need not be block triangular with diagonal\nblocks representing $v'$ and $v''$. In Ferrand's example above every chain\nrepresentative of $v$ acts on the subcomplex $M'=R[-1]$ by $2$, which\nrepresents $2\\neq v'=0$ (the square commutes only up to the homotopy\n$\\mathrm{id}:M'^1\\to M^0$), and the supertraces differ by $-2$.",
+   "text": "For clause (3), write $P=Q(M)$ with $M$ bounded finite projective. Projective terms are flat by [lem-weil-pbc-projective-module-flat], so [lem-pc-module-bounded-flat-kflat] makes $M$ K-flat; consequently the counit of the derived functor at $M$ is an isomorphism by [lem-pc-kflat-scalar-extension-counit], so $Q(M\\otimes_A B)$ computes $P\\otimes_A^L B$ without assuming $B$ flat, and by naturality of the counit the chain map $v\\otimes1$ represents $v\\otimes_A^LB$. Tensor a finite splitting $M^i\\xrightarrow{\\iota}A^N\\xrightarrow{\\pi}M^i$ with $B$: the equation $\\pi\\iota=1$ remains true, so the extended terms are finite projective. If $(e_a,\\epsilon_a)$ is its dual frame, then $(e_a\\otimes1,\\epsilon_{a,B})$ is the extended frame with $\\epsilon_{a,B}(x\\otimes b)=\\rho(\\epsilon_a(x))b$. Hence $\\operatorname{Tr}_B(v^i\\otimes1)=\\sum_a\\rho(\\epsilon_a(v^ie_a))=\\rho(\\operatorname{Tr}_A(v^i))$. Apply [lem-trf-chain-supertrace] over $A$ and over $B$ and move $\\rho$ through the finite signed sum. This proves (3) and identifies exactly the defining dual-frame trace after extension.",
    "uses": [
-    "lem-trf-chain-supertrace"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*(3) Scalar extension.* The derived scalar extension\n$F=-\\otimes_A^LB:D(A)\\to D(B)$ is exact (it is the derived tensor\nproduct with the $K$-flat complex $B$) and monoidal: the canonical\ncomparison isomorphism\n\n$$\nF(P)\\otimes_B^LF(Q)=(P\\otimes_A^LB)\\otimes_B^L(Q\\otimes_A^LB)\n\\xrightarrow{\\ \\sim\\ }(P\\otimes_A^LQ)\\otimes_A^LB=F(P\\otimes_A^LQ)\n$$\n\nis the associativity of the derived tensor product (no flatness of\n$B$ over $A$ is needed in the derived setting, as both sides\ncompute the same absolute derived tensor $P\\otimes_A^LQ\\otimes_A^LB$),\nand it is compatible with the braidings, with the shifts, and with\ndistinguished triangles. It also carries the duals: the canonical\nisomorphism\n\n$$\nF(P)^\\vee=R\\operatorname{Hom}_B(P\\otimes_A^LB,B)\n\\xrightarrow{\\ \\sim\\ }R\\operatorname{Hom}_A(P,A)\\otimes_A^LB=F(P^\\vee)\n$$\n\n(the standard base-change statement for finite projective modules,\nwith the derived-tensor form valid for all $P\\in D^b_{\\mathrm{fin}}(A)$\nvia the projective resolution), and it identifies\n$\\operatorname{coev}_{F(P)}$, $\\operatorname{ev}_{F(P)}$,\nand the braiding with the $F$-images of\n$\\operatorname{coev}_P,\\operatorname{ev}_P$ and the braiding;\nconsequently the composite of\n[def-trf-categorical-trace] for $F(P)$ is the $F$-image\nof the composite for $P$, and identifying\n$\\operatorname{End}_{D(B)}(B)\\cong B$ with the application of\n$\\rho:\\operatorname{End}_{D(A)}(A)\\cong A\\to B$ gives\n$\\rho(\\operatorname{tr}_A(v\\mid P))= \\operatorname{tr}_B(v\\otimes_A^LB\\mid P\\otimes_A^LB)$.\nThe same argument applies to the scalar extensions\n$A\\to A_{E'\\!,n'}$, $A\\to\\mathcal O_E$, $\\mathcal O_E\\to E$, and\n$E\\to\\Qlb$ of the coefficient passages of Blueprints 01 and 02,\nthe latter two being the monoidal functors of the rationalized\n([def-weil-rationalization-karoubi]) and common-stage\n([def-weil-algebraically-closed-coefficients])\nconstructions.",
-   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-kflat-scalar-extension-counit",
     "def-trf-categorical-trace",
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*(4) Supertrace over a field.* Let $\\Lambda\\in\\{E,\\Qlb\\}$ (for\n$\\Lambda=E$, $D^b_{\\mathrm{fin}}(E)$ is the bounded derived category\nof finite-dimensional $E$-vector spaces by\n[def-weil-finite-coefficient-point]). Every\n$P\\in D^b_{\\mathrm{fin}}(\\Lambda)$ is represented by a bounded\ncomplex $P^\\bullet$ of finite-dimensional $\\Lambda$-vector spaces\ntogether with a chain map $v^\\bullet$ inducing $v$. For an integer\n$i$ let $P^{\\leq i}$ be the canonical truncation\n\n$$\nP^{\\leq i}=\\bigl(\\cdots\\to P^{i-2}\\to P^{i-1}\\to\\ker d^i\\to0\\bigr)\n$$\n\n(a subcomplex stable under $v^\\bullet$), so that\n$P^{\\leq i+1}/P^{\\leq i}$ is the two-term complex\n\n$$\nC_i=\\bigl(\\operatorname{im}d^i\\xrightarrow{d}\\ker d^{i+1}\\bigr)\n\\qquad\\text{(degrees }i,i+1\\text{)}\n$$\n\nwith the induced endomorphism; it carries the induced endomorphism\nand is quasi-isomorphic to\n$\\mathcal H^{i+1}(P)[-(i+1)]$ because the arrow\n$\\operatorname{im}d^i\\hookrightarrow\\ker d^{i+1}$ is injective with\ncokernel $\\mathcal H^{i+1}(P)$. Since all terms are vector spaces,\nthe short exact sequences\n\n$$\n0\\to P^{\\leq i}\\to P^{\\leq i+1}\\to C_i\\to0\n$$\n\nare degreewise split short exact sequences of complexes with strictly\ncompatible chain endomorphisms, hence give distinguished triangles of\n$D^b_{\\mathrm{fin}}(\\Lambda)$ with endomorphisms of filtered origin in the\nsense of (2). By (2), and by the chain-level computation of\n[lem-trf-chain-supertrace] applied to $C_i$,\n\n$$\n\\begin{aligned}\n\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i+1})\n&=\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i})\n+\\operatorname{tr}_\\Lambda(v\\mid C_i)\\\\\n&=\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i})\n+(-1)^i\\operatorname{Tr}\\bigl(v\\mid\\operatorname{im}d^i\\bigr)\n+(-1)^{i+1}\\operatorname{Tr}\\bigl(v\\mid\\ker d^{i+1}\\bigr)\\\\\n&=\\operatorname{tr}_\\Lambda(v\\mid P^{\\leq i})\n+(-1)^{i+1}\\operatorname{Tr}\n\\bigl(\\mathcal H^{i+1}(v)\\mid\\mathcal H^{i+1}(P)\\bigr),\n\\end{aligned}\n$$\n\nthe last equality using the split exact sequence\n$0\\to\\operatorname{im}d^i\\to\\ker d^{i+1}\\to\\mathcal H^{i+1}(P)\\to0$\nof vector spaces with the induced endomorphisms, which gives\n$\\operatorname{Tr}(v\\mid\\ker d^{i+1})- \\operatorname{Tr}(v\\mid\\operatorname{im}d^i)= \\operatorname{Tr}(\\mathcal H^{i+1}(v))$. Induction over the finite\ncohomological range of $P^\\bullet$ (starting from\n$P^{\\leq i}=0$ below the lowest degree) gives\n\n$$\n\\operatorname{tr}_\\Lambda(v\\mid P)\n=\\sum_{i\\in\\mathbf Z}(-1)^i\\operatorname{Tr}\n\\bigl(\\mathcal H^{i}(v)\\mid\\mathcal H^{i}(P)\\bigr),\n$$\n\nwhich is the displayed formula.",
-   "uses": [
-    "def-weil-finite-coefficient-point",
     "lem-trf-chain-supertrace"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Clause (3), scalar extension; corrected K-flat representative argument"
+   }
+  },
+  {
+   "text": "For clause (4) over a field $F$, first justify the bounded finite-dimensional chain model from the cohomological definition [def-weil-point-fd-complexes]. Every vector-space quotient is projective by [lem-weil-pbc-vector-space-projective]; lift its identity through the quotient surjection using [def-weil-pbc-projective-module], obtaining a section and hence a complement. In any representative $C$, choose such complements $Z^i=B^i\\oplus H_i$ and $C^i=Z^i\\oplus L^i$, where $Z^i=\\ker d^i$, $B^i=\\operatorname{im}d^{i-1}$ and $d:L^i\\cong B^{i+1}$. Inclusion of the zero-differential complex $H=(H_i)$ into $C$ is a quasi-isomorphism, since it induces $H_i\\cong H^i(C)$; $H$ is bounded and finite-dimensional by the defining hypotheses. Thus $P$ is perfect. Choose a bounded finite-dimensional representative $M$ and a chain endomorphism representing $v$ by [lem-pc-ring-derived-map-representative].",
+   "uses": [
+    "def-weil-point-fd-complexes",
+    "def-weil-abstract-derived-category",
+    "lem-pc-ring-derived-map-representative",
+    "lem-weil-pbc-vector-space-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Clause (4), justification of the bounded finite-dimensional representative"
+   }
+  },
+  {
+   "text": "For this bounded $M$, define $T_i^j=M^j$ for $j<i$, $T_i^i=\\ker d^i$, and $T_i^j=0$ for $j>i$. These subcomplexes are stable under the chain endomorphism. The quotient $C_i=T_{i+1}/T_i$ is zero except for $M^i/\\ker d^i\\cong\\operatorname{im}d^i$ in degree $i$ and $\\ker d^{i+1}$ in degree $i+1$; its differential is inclusion. Each $0\\to T_i\\to T_{i+1}\\to C_i\\to0$ splits degreewise, by [lem-weil-pbc-vector-space-projective] and the identity-lifting definition [def-weil-pbc-projective-module], and its induced endomorphisms have filtered origin. Its cone triangle is the given short-exact-sequence triangle: the natural map $\\operatorname{Cone}(T_i\\to T_{i+1})\\to C_i$ has kernel the cone of $1_{T_i}$, with terms $T_i^n\\oplus T_i^{n+1}$ and differential $(x,y)\\mapsto(d x+y,-d y)$. The degree-minus-one map $h(x,y)=(0,x)$ satisfies $dh+hd=1$, so this kernel is acyclic. The cone-to-quotient map is a quasi-isomorphism: to lift a quotient cycle, lift it arbitrarily and subtract a kernel element whose differential is the resulting kernel-valued defect; a lifted cycle mapping to a quotient boundary is itself a boundary after the same correction in the acyclic kernel. This verifies the distinguished-triangle hypothesis in [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-vector-space-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Clause (4), canonical truncations and explicit two-term quotient"
+   }
+  },
+  {
+   "text": "Apply the already proved filtered-additivity calculation of step 3 over $F$ (the calculation used only a commutative ring) to $T_i\\subset T_{i+1}$. On $C_i$, [lem-trf-chain-supertrace] gives $(-1)^i\\operatorname{Tr}(v|\\operatorname{im}d^i)+(-1)^{i+1}\\operatorname{Tr}(v|\\ker d^{i+1})$. Using [lem-weil-pbc-vector-space-projective] and [def-weil-pbc-projective-module] to lift the identity of the quotient, split $0\\to\\operatorname{im}d^i\\to\\ker d^{i+1}\\to H^{i+1}(M)\\to0$; the endomorphism is block triangular and its diagonal trace is the sum of the subspace and quotient traces. The displayed increment is therefore $(-1)^{i+1}\\operatorname{Tr}(H^{i+1}(v))$. If $M$ is supported in $[a,b]$, then $T_{a-1}=0$ and $T_b=M$. Summing the increments for $i=a-1,\\ldots,b-1$ telescopes and proves (4) over $E$, and over any field.",
+   "uses": [
+    "lem-trf-chain-supertrace",
+    "lem-weil-pbc-vector-space-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Clause (4), increment calculation and finite induction"
+   }
+  },
+  {
+   "text": "For the common-stage interpretation at $\\Qlb$, [def-weil-point-fd-qlbar-category] represents $P$ at a finite field $E_0$ and $v$ at some finite common extension $L$. Apply the preceding field calculation at $L$ and embed the resulting scalar in $\\Qlb$. On extending $L$ further, [def-weil-finite-dimensional-complex-scalar-extension] identifies cohomology with its scalar extension; the dual-frame calculation of step 5 shows that the trace on both the complex and each cohomology space extends by the same field inclusion. Thus both sides are independent of the common stage. The same formula holds in the actual ordinary-module category $D^b_{\\mathrm{fd}}(\\Qlb)$ directly by steps 6--8; no equivalence of these two categories is assumed.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category",
+    "def-weil-finite-dimensional-complex-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+    "place": "Clause (4), common-stage coefficient interpretation"
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-perfect-ring-complex",
   "def-trf-categorical-trace",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-dimensional-complex-scalar-extension",
+  "def-weil-pbc-projective-module",
+  "def-weil-point-fd-complexes",
+  "def-weil-point-fd-qlbar-category",
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-derived-map-representative",
   "lem-trf-chain-supertrace",
-  "def-weil-derived-tensor",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-finite-coefficient-point"
+  "lem-trf-filtered-projective-model",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-vector-space-projective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+  "place": "Clauses (1)--(4), with explicit model and coefficient corrections recorded in report.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "categorical trace formal laws conjugacy filtered additivity scalar extension supertrace",
+   "results": "8 hits: LinearMap.trace_conj', LinearMap.trace_conj, Algebra.trace_trace, LinearMap.trace_comp_cycle, LinearMap.trace_comp_cycle', Algebra.trace_trace_of_basis, LinearMap.trace_map, Algebra.traceForm_apply",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: module-level conjugacy and base-change traces do not state the derived categorical trace, filtered-origin additivity or cohomological supertrace"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.trace trace_comp LinearMap.trace",
+   "results": "0 hits: ; loogle: Unknown identifier `CategoryTheory.trace`",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; this search provides no absence evidence. The other recorded semantic and source searches supply the search evidence."
+  },
+  {
+   "tool": "grep",
+   "query": "trace|supertrace|coevaluation|evaluation",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean, Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Action/End.lean; source subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: module-level conjugacy and base-change traces do not state the derived categorical trace, filtered-origin additivity or cohomological supertrace"
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal laws for categorical trace of perfect complexes",
+   "results": "8 hits: DerivedCategory.instIsTriangulated, CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.ObjectProperty.instIsMultiplicativeTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.Equivalence.IsTriangulated.trans, CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.IsTriangulated.mk, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: module-level conjugacy and base-change traces do not state the derived categorical trace, filtered-origin additivity or cohomological supertrace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alternating trace of perfect complex invariant under conjugation compatible with ring base change and filtered exact sequences",
+   "results": "8 hits: LinearMap.trace_map, Algebra.trace_eq_of_equiv_equiv, LinearMap.trace_comp_cycle', LinearMap.trace_comp_cycle, LinearMap.trace_baseChange, LinearMap.trace_conj, LinearMap.trace_conj', LinearMap.trace_eq_contract'",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: module-level conjugacy and base-change traces do not state the derived categorical trace, filtered-origin additivity or cohomological supertrace"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"baseChange\"",
+   "results": "2 hits: LinearMap.trace_baseChange, LieModule.traceForm_baseChange",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: module-level conjugacy and base-change traces do not state the derived categorical trace, filtered-origin additivity or cohomological supertrace"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_baseChange|trace_conj|trace.*complex",
+   "results": "11 hits: Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean; source subdirectory: LinearAlgebra",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: module-level conjugacy and base-change traces do not state the derived categorical trace, filtered-origin additivity or cohomological supertrace"
+  },
+  {
+   "tool": "grep",
+   "query": "supertrace|categorical.?trace|trace.*[Cc]omplex",
+   "results": "0 hits: ; source subdirectory: Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: ordinary module or algebra traces and ordinary derived-category results do not give the four categorical perfect-complex trace laws, including filtered-origin additivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"complex\"",
+   "results": "1 hits: Algebra.trace_complex_apply",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: ordinary module or algebra traces and ordinary derived-category results do not give the four categorical perfect-complex trace laws, including filtered-origin additivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "trace of perfect complex equals alternating trace of cohomology and commutes with scalar extension",
+   "results": "8 hits: Algebra.trace_comp_trace, LinearMap.trace_baseChange, Algebra.trace_trace, Algebra.trace, Algebra.trace_comp_trace_of_basis, LinearMap.trace, LinearMap.trace_tensorProduct, Algebra.intTrace_eq_trace",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: ordinary module or algebra traces and ordinary derived-category results do not give the four categorical perfect-complex trace laws, including filtered-origin additivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical trace of perfect complexes invariant under isomorphism additive on filtered objects commutes with scalar extension",
+   "results": "8 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.Functor.IsHomological.of_iso, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Functor.mapExactFunctor_smul, Algebra.trace_eq_of_equiv_equiv, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, LinearMap.trace_comp_cycle'",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: ordinary module or algebra traces and ordinary derived-category results do not give the four categorical perfect-complex trace laws, including filtered-origin additivity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -119,5 +292,84 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-p-trace"
+ "unit": "sk-p-trace",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-trace-formal-laws",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: made the perfect ordinary-module domain explicit, following the reviewed trace definition; finite cohomology alone over A need not be perfect. Kept all four laws and the filtered-origin restriction. Replaced three elementary support nodes by explicit duality transport, dual-frame scalar extension, and canonical truncation calculations. Retained only the substantive two-step filtered finite-projective model lemma. Removed mismatched pro-etale tensor and fibre-functor citations, justified field representatives, and treated common-stage Qlbar coefficients explicitly. Corrected the source claim that B is K-flat for an arbitrary A to B. Completion audit clarified that the bounded filtered replacement assertion comes from the blueprint, whereas the Stacks tags supply full faithfulness/projective comparison, and recorded fresh searches. Second reading refreshed citations against the repaired general-ring supertrace statement and made the cone contraction explicit.",
+  "blueprint": "Steps 1--2 realize the introductory paragraph and clause (1); 3--4 realize clause (2) and its counterexample; 5 realizes clause (3); 6--9 realize clause (4), its truncation induction and common-stage reading.",
+  "tool_uses": [
+   {
+    "node": "def-pc-perfect-ring-complex",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "def-trf-categorical-trace",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "def-weil-finite-dimensional-complex-scalar-extension",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "def-weil-point-fd-complexes",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "def-weil-point-fd-qlbar-category",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "lem-pc-ring-derived-map-representative",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Supplies the ordinary-module notion or generic representative, flatness, or coefficient-stage statement used explicitly in the proof; the trace unit has no separate node for this infrastructure, and its dual-frame/truncation route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-vector-space-projective",
+    "why": "Supplies projectivity of vector spaces and its identity-lifting meaning, used to obtain the vector-space complements in the existing canonical-truncation route."
+   },
+   {
+    "node": "def-weil-pbc-projective-module",
+    "why": "Supplies projectivity of vector spaces and its identity-lifting meaning, used to obtain the vector-space complements in the existing canonical-truncation route."
+   },
+   {
+    "node": "lem-pc-kflat-scalar-extension-counit",
+    "why": "Step 5 takes from its statement that the universal derived extension of scalars is computed termwise on a K-flat complex (counit an isomorphism, no flatness of rho); the trace unit has no node for derived scalar extension of ordinary modules. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-perfect-ring-complex",
+  "def-trf-categorical-trace",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-dimensional-complex-scalar-extension",
+  "def-weil-point-fd-complexes",
+  "def-weil-point-fd-qlbar-category",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-derived-map-representative",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-vector-space-projective",
+  "def-weil-pbc-projective-module",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-768757fe0",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-768757fe0 (reviewer sub-agent of L); spot-checked: I read the whole item, all 9 steps, the new node lem-trf-filtered-projective-model and every cited statement. Sources checked: blueprint main-20261015 prop-trf-trace-formal-laws statement and proof, unit sk-p-trace, and Stacks 03TB (trace.tex lemma-filtered-derived-category), 03TJ (section-filtrations-perfect) and 087J (examples.tex section-non-additive). The perfect-domain wording matches def-trf-categorical-trace and its blueprint_update, the Z/4 non-perfect example holds, and both reported source errors are correct (B is not K-flat; there is no unital map A_{E,n}->O_E). Step 2: I recomputed the alpha-transport and the cancellation. Step 3: the block-triangular frame trace equals the sum of the diagonal traces. Step 4: in the Z/4 Ferrand variant, (0,2) is a chain map, the left square is null-homotopic with h^1=1, pv=0, the connecting map is 2 and the last square is zero on both sides; the middle trace is -2. Step 7: the kernel is Cone(1), with dh+hd=1. Step 8: the telescoping endpoints T_{a-1}=0 and T_b=M are right. Step 9: the common-stage Qlbar category is not identified with D(Qlbar). New node: statement only, true (filtered K-projective replacement, with 03TB for fullness), not a duplicate of the lem-kun filtered nodes, does not restate clause (2), and creates no cycle. FIX, C1/B3 in step 5 and clause (3): the claim that M⊗B computes P⊗^L B had no citation, and -⊗^L_A B had no definition node. I added lem-pc-kflat-scalar-extension-counit to step 5 and proof_deps, defined -⊗^L_A B in clause (3) via def-weil-module-base-change and added that node to stmt_deps, and declared the new tool use. Accepted tool_uses: lem-pc-module-bounded-flat-kflat and lem-pc-kflat-scalar-extension-counit. No SGA cited.; 1 file(s) fixed by the reviewer"
+ }
 }

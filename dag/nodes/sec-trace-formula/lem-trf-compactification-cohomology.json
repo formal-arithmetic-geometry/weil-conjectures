@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-compactification-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology on a chosen compactification",
@@ -16,38 +16,231 @@
   "def-trf-coefficient-conventions",
   "def-weil-compactifications-refinements",
   "def-weil-extension-by-zero",
-  "def-weil-finite-torsion-constructibility"
- ],
- "proof": [
-  {
-   "text": "For the chosen compactification,\n[def-weil-compact-support-candidate] gives\n$Ra_{X!}^{\\,j}K=R\\bar a_*j_!K$. The comparison in\n[def-compact-support-direct-image-detailed], with the cocycle identity\nof [prop-compactification-coherence-detailed], identifies $Ra_{X!}K$\nwith this candidate. The witness $K\\simeq\\nu_X^*L$, with\n$L\\in D^+(X_{\\mathrm{et}},A)$, from\n[def-weil-pbc-etale-origin-witness] puts $K$ in precisely\nthe domain on which compactification coherence has been proved.\nNeither etale descent of all constructible pro-etale complexes nor\ncoherence for arbitrary pro-etale objects is asserted here.\nApply the fiber functor of\n[def-weil-finite-coefficient-point]. By\n[def-weil-ordinary-compact-cohomology], the source becomes\n$R\\Gamma_c(X,K)$ and the target becomes\n$R\\Gamma(\\bar X,j_!K)$. This is $C_{j,K}$.\nNaturality is the naturality of the candidate comparisons.\nTheir cocycle identity proves the asserted compatibility when the\ncompactification is changed.",
-   "uses": [
-    "def-weil-compact-support-candidate",
-    "def-compact-support-direct-image-detailed",
-    "prop-compactification-coherence-detailed",
-    "def-weil-pbc-etale-origin-witness",
-    "def-weil-finite-coefficient-point",
-    "def-weil-ordinary-compact-cohomology"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-compact-support-candidate",
-  "def-compact-support-direct-image-detailed",
-  "prop-compactification-coherence-detailed",
+  "def-weil-finite-torsion-constructibility",
   "def-weil-pbc-etale-origin-witness",
+  "def-sf-etale-origin-subcategory",
+  "def-compact-support-direct-image-detailed",
   "def-weil-finite-coefficient-point",
   "def-weil-ordinary-compact-cohomology"
  ],
+ "proof": [
+  {
+   "text": "Work with the coefficient and geometric data of [def-trf-coefficient-conventions]: $A=A_{E,n}$, $k=\\overline{k_0}$ of characteristic $p\\ne\\ell$, and $a_X:X\\to s=\\operatorname{Spec}k$ separated of finite type. Thus $X$ and $s$ are finite-type $k$-schemes and $\\ell$ is invertible in $k$. Let $c=(j,\\bar a)$ be the given compactification in [def-weil-compactifications-refinements]. Retain the specified witness $(L,\\alpha)$, $L\\in D^+(X_{\\mathrm{et}},A)$ and $\\alpha:\\nu_X^*L\\xrightarrow{\\sim}K$, as in [def-weil-pbc-etale-origin-witness]. Since $K$ is bounded it is bounded below; with this witness it is an object of $\\mathcal D^+_{\\mathrm{et}}(X,A)$ of [def-sf-etale-origin-subcategory], whose morphisms are all ambient morphisms between the underlying complexes. If $c_*$ is the compactification used to define $Ra_{X!}$, [def-compact-support-direct-image-detailed] and [def-weil-compact-support-candidate] give $Ra_{X!}=Ra_{X!}^{c_*}$ and $Ra_{X!}^{c}=R\\bar a_*j_!$, where $j_!$ is the termwise extension by zero specified by the candidate definition.",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "def-weil-compactifications-refinements",
+    "def-weil-pbc-etale-origin-witness",
+    "def-sf-etale-origin-subcategory",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-compact-support-candidate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "First paragraph, candidate formula and explicit etale-origin domain"
+   }
+  },
+  {
+   "text": "Apply [prop-compactification-coherence-detailed] with base field $K_0=k$, $f=a_X$, and compactifications $c_*,c$. Its hypotheses hold by Step 1, including the finite coefficient $A_{E,n}$ and the explicit etale-origin witness. It gives a natural comparison isomorphism $\\theta_{c_*,c}:Ra_{X!}^{c_*}\\xrightarrow{\\sim}Ra_{X!}^{c}$ on that domain, independent of the common refinement used. Hence its component is an isomorphism $\\theta_{c_*,c,K}:Ra_{X!}K\\xrightarrow{\\sim}R\\bar a_*j_!K$ in the derived category over $s$. This uses the natural comparison and independence asserted in the proposition's statement, not a property merely postulated in a definition.",
+   "uses": [
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "First paragraph, comparison with the chosen candidate"
+   }
+  },
+  {
+   "text": "The bounded constructible hypothesis on $K$, with exactly the finite-torsion convention of [def-weil-finite-torsion-constructibility], permits [prop-finite-compact-support-constructibility] to be applied to $a_X:X\\to s$, with $K_0=k$ and coefficient $A=A_{E,n}$. Its restriction $Ra_{X!}:D^b_c(X,A)\\to D^b_c(s,A)$ gives $Ra_{X!}K\\in D^b_c(s,A)$. By the isomorphism in Step 2 the object $R\\bar a_*j_!K$ is also in $D^b_c(s,A)$: an isomorphism preserves each cohomology sheaf up to isomorphism, so it preserves both the finite nonzero range and constructibility. Thus the functor $\\operatorname{Fib}_s:D^b_c(s,A)\\to D^b_{\\mathrm{fin}}(A)$ of [def-weil-finite-coefficient-point] applies to both sides. Set $C_{j,K}=\\operatorname{Fib}_s(\\theta_{c_*,c,K})$. Its inverse is $\\operatorname{Fib}_s(\\theta_{c_*,c,K}^{-1})$, by the functor laws. By the formulas in [def-weil-ordinary-compact-cohomology], its source is $R\\Gamma_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K)$ and its target is $R\\Gamma(\\bar X,j_!K)=\\operatorname{Fib}_s(R\\bar a_*j_!K)$. For the input of the ordinary-cohomology notation, also apply [prop-finite-compact-support-constructibility] to the separated finite-type open immersion $j:X\\to\\bar X$. Here $\\bar a$ is separated and of finite type because it is proper, by [def-weil-proper-morphism]. In the triangle $X\\xrightarrow{j}\\bar X\\xrightarrow{\\bar a}s$, the finite-type morphism $a_X$ and separated target morphism $\\bar a$ satisfy [lemma-nagata-open-immersion-qc-over-separated-target], so $j$ is quasi-compact. (Equivalently, its current quasi-compact/quasi-separated formulation applies: finite type implies quasi-compact, and a closed diagonal is quasi-compact.) Thus [lem-weil-pbc-qc-open-immersion-finite-type] makes $j$ finite type. The open immersion identifies $X$ with an open subscheme of $\\bar X$, hence $X\\times_{\\bar X}X=X$ and $\\Delta_j$ is the identity, a closed immersion; $j$ is separated by [def-weil-proper-morphism]. Its compactification $(j,\\operatorname{id}_{\\bar X})$ has candidate $R(\\operatorname{id}_{\\bar X})_*j_!=j_!$ by [def-weil-compact-support-candidate]: direct image by the identity is the identity exact functor, so its derived functor is the identity. Coherence on our witnessed object identifies this candidate with the compact-support functor for $j$. Thus the same restriction theorem gives $j_!K\\in D^b_c(\\bar X,A)$, as required to use the ordinary-cohomology definition. These are precisely the coefficient complexes in the assertion.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "prop-finite-compact-support-constructibility",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-compact-support-candidate",
+    "prop-compactification-coherence-detailed",
+    "def-weil-proper-morphism",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "Second paragraph, apply the fibre functor; domain justified by compact-support bounded constructibility"
+   }
+  },
+  {
+   "text": "For any morphism $h:K\\to K'$ between bounded constructible complexes with witnesses, it is a morphism of the witnessed domain by [def-sf-etale-origin-subcategory]. Naturality in [prop-compactification-coherence-detailed] says $(R\\bar a_*j_!)(h)\\circ\\theta_{c_*,c,K}=\\theta_{c_*,c,K'}\\circ Ra_{X!}(h)$. Apply $\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point] and its preservation of composition. The resulting equality is $R\\Gamma(\\bar X,j_!h)\\circ C_{j,K}=C_{j,K'}\\circ R\\Gamma_c(X,h)$, with notation given by [def-weil-ordinary-compact-cohomology]. This proves naturality for all such $h$, without imposing an extra compatibility hypothesis on $h$.",
+   "uses": [
+    "def-sf-etale-origin-subcategory",
+    "prop-compactification-coherence-detailed",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "Final paragraph, naturality"
+   }
+  },
+  {
+   "text": "For two compactifications $c_i=(j_i,\\bar a_i)$, let $\\theta_{c_1,c_2}$ be the natural comparison of [prop-compactification-coherence-detailed]. Its cocycle identity gives $\\theta_{c_1,c_2,K}\\circ\\theta_{c_*,c_1,K}=\\theta_{c_*,c_2,K}$. All three values lie in $D^b_c(s,A)$ by Step 3. Apply the functor of [def-weil-finite-coefficient-point] to obtain $\\operatorname{Fib}_s(\\theta_{c_1,c_2,K})\\circ C_{j_1,K}=C_{j_2,K}$. The proposition asserts that $\\theta_{c_1,c_2}$ is independent of the common refinement, is the prescribed comparison for a refinement, and is the identity for an identity refinement. The same assertions survive applying a functor, and the displayed equality gives precisely the asserted compatibility under changes of compactification, including their compositions.",
+   "uses": [
+    "prop-compactification-coherence-detailed",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+    "place": "Final paragraph, cocycle compatibility under changes of compactification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sf-etale-origin-subcategory",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-candidate",
+  "prop-compactification-coherence-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "prop-finite-compact-support-constructibility",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-proper-morphism",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-weil-pbc-qc-open-immersion-finite-type"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.proof.md",
+  "place": "Entire proof; explicit naturality and cocycle equations, and fibre-functor domain check expanded from its two paragraphs"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported cohomology of an etale complex equals cohomology of extension by zero on a proper compactification",
+   "results": "8 hits: groupCohomologyIsoExt; Rep.standardResolution.extIso; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; Rep.barResolution.extIso; Condensed.lanSheafProfinite; LightCondensed.lanLightCondSet; groupCohomologyIso; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit. Returned types concern group cohomology, scheme limits, or condensed sheaves, not the stated comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, Functor",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.NatIso'. Repeated with the name-fragment query below.",
+   "date": "2026-10-17",
+   "verdict": "unavailable: rejected identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|compactlySupported|compactSupport",
+   "results": "0 hits in AlgebraicGeometry (msearch subdirectory argument).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported etale cohomology on a compactification is the cohomology of extension by zero",
+   "results": "8 hits: HasCompactSupport.extend_zero; HasCompactSupport.continuous_extend_zero; Finsupp.restrictSupportEquiv_symm_apply_coe; Finsupp.supportedEquivFinsupp_symm_apply_coe; HasCompactSupport.comp_isClosedEmbedding; ContDiffMapSupportedIn.zero_on_compl; ContMDiff.extend_zero; hasCompactSupport_def. Returned types concern functions and topological compact support, not derived etale cohomology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections with compact support canonically compare with proper pushforward of extension by zero independently of compactification",
+   "results": "8 hits: topCatToSheafCompHausLike_map_val_app; TopCat.toSheafCompHausLike_val_map; SheafOfModules.pushforwardSections_coe; SheafOfModules.pushforwardSections_unitHomEquiv; TopCat.Sheaf.pushforward_forget; LightCondensed.lanLightCondSet; LightCondensed.ihomPoints_symm_comp; TopCat.Sheaf.pushforwardForgetIso. None of the returned types gives compactification independence of derived compact supports.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|compactlySupportedCohomology",
+   "results": "0 hits in all Mathlib (no subdirectory argument).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale derived lower shriek is independent of the proper compactification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; RingHom.Etale.propertyIsLocal; Algebra.Etale.formallyEtale; RingHom.Etale.respectsIso; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology. Returned types define etale morphisms/topologies and their permanence, not this comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported cohomology on a chosen compactification equals cohomology of extension by zero",
+   "results": "8 hits: CompactlySupportedContinuousMap.ContinuousMap.liftCompactlySupported; groupCohomologyIsoExt; ZeroAtInftyContinuousMap.ContinuousMap.liftZeroAtInfty; HasCompactSupport.extend_zero; CompactlySupportedContinuousMap.continuousMapEquiv; Rep.standardResolution.extIso; HasCompactMulSupport.extend_one; groupCohomology.coindIso. None state derived etale compactification comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, IsIso, Functor",
+   "results": "0 hits; loogle: unknown identifier 'IsIso'.",
+   "date": "2026-10-17",
+   "verdict": "unavailable: rejected identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|compactlySupportedCohomology|extensionByZero",
+   "results": "0 hits in AlgebraicGeometry (msearch subdirectory argument).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived compactly supported etale cohomology is independent of proper compactification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etalePretopology; compactlySupported_eq_top_of_isCompact; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; compactlySupported_eq_top_iff; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instFormallyUnramified. None state the comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp",
+   "results": "0 hits; loogle: unknown identifier 'Functor.map_comp'.",
+   "date": "2026-10-17",
+   "verdict": "unavailable: rejected identifier; not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- _ ≅ _",
+   "results": "12 hits including CategoryTheory.Iso.refl, CategoryTheory.Iso.symm, CategoryTheory.Iso.trans, CategoryTheory.Functor.mapIso, CategoryTheory.Iso.app; none state derived etale compactification comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of a sheaf extended by zero along an open immersion into a proper scheme computes cohomology with proper support",
+   "results": "8 hits concerning structure-sheaf sections, scheme limits and module restriction functors. None states the derived finite-coefficient compactification comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactSupport\"",
+   "results": "12 hits concerning HasCompactSupport for functions and topological support. None states the derived etale comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|compactification|openImmersionLowerShriek",
+   "results": "25 returned hits, all from topology compactifications and their imports; no derived lower-shriek or etale compactification statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -84,5 +277,34 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-formula"
+ "unit": "sk-thm-trace-formula",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-compactification-cohomology",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the existing compactification-comparison route into five steps: identify the witnessed domain and candidates; invoke the existing natural coherent comparison; verify the bounded-constructible fibre-functor domain using the existing finite compact-support theorem; apply the fibre functor; spell out naturality and change-of-compactification equations. No new nodes or Mathlib leaves. Searched the project source and Mathlib; no full attachment or Mathlib match.",
+  "blueprint": "main-20261015 lem-trf-compactification-cohomology.proof.md: first paragraph is Steps 1-2, fibre-functor paragraph is Step 3, final naturality/cocycle sentences are Steps 4-5. This supports the compactification identification in sk-thm-trace-formula Step 2; this item is not the unit key statement.",
+  "tool_uses": [
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic natural comparison and cocycle laws for the existing compact-support candidates; this is exactly the compactification-cohomology route of the item, and its trace-formula unit has no separate coherence theorem."
+   },
+   {
+    "node": "prop-finite-compact-support-constructibility",
+    "why": "Only the finite-level restriction to bounded constructible complexes is used to check the domain of the fibre functor, not to replace a trace-formula step. The item unit has no boundedness theorem for compact direct image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-compactification-coherence-detailed",
+  "prop-finite-compact-support-constructibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-13193f799",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-13193f799 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, with the current main-20261015 blueprint statement and proof and the master snapshot. The item statement is verbatim and not weakened. The delivery has 0 new nodes and one commit. proof_deps equals the union of the step uses, and a DFS over the snapshot DAG finds no cycle. I opened the statement of every cited node: def-trf-coefficient-conventions, def-weil-compactifications-refinements, def-weil-pbc-etale-origin-witness, def-sf-etale-origin-subcategory (a full induced subcategory, so all ambient morphisms count), def-compact-support-direct-image-detailed, def-weil-compact-support-candidate, prop-compactification-coherence-detailed (natural iso, independence and cocycle all in the statement, on the witnessed domain), prop-finite-compact-support-constructibility (only its restriction to D^b_c is used), def-weil-finite-coefficient-point (Fib_s item 1), def-weil-ordinary-compact-cohomology, def-weil-proper-morphism, lemma-nagata-open-immersion-qc-over-separated-target (the blueprint_update form also applies) and lem-weil-pbc-qc-open-immersion-finite-type. The hypotheses hold at each use: field k, finite type, separated, ell != p invertible, A_{E,n} with n>=1. j is quasi-compact, of finite type and separated (its diagonal is an isomorphism), and (j,id) is a compactification with candidate j_!. That gives j_!K and both direct-image values in D^b_c, because D^b_c is isomorphism-closed. Only minor wording: R(id)_* is the identity up to natural isomorphism, which is harmless. Naturality and cocycle are Fib_s applied to the cited equations. Coefficient categories stay pro-etale A_{E,n} throughout. Stacks 0GL0 (more-etale.tex:4711) is background for the cited DAG proposition only. No finite-Tor or SGA route is used. Every cited unit is in the transitive route of sk-thm-trace-formula, so the two declared tool_uses (prop-compactification-coherence-detailed, prop-finite-compact-support-constructibility) are redundant but accurate; accepted. No duplicate found: prop-weil-proper-compact-coincidence is only the proper special case. Edge cases checked: K=0, X proper with the identity compactification, empty X, an extra disjoint component of Xbar, n=1. No fixes; review.md written."
+ }
 }

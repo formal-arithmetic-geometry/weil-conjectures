@@ -31,9 +31,100 @@
   "def-coef-infinity-relative-cone",
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We prove the limit orientation first, because [lem-coef-infinity-join-cone-calculus] states its varying-boundary formula for left cones. Write a left cone $q$ as $(x,f,\\alpha:\\Delta_Kx\\to f)$ and an arbitrary source cone $t$ as $(z,g,\\beta:\\Delta_Kz\\to g)$. Put\n$$A_D=\\operatorname{Map}_{\\operatorname{Fun}(K,D)}(g,f),\\quad C_D=\\operatorname{Map}_{\\operatorname{Fun}(K,D)}(\\Delta_Kz,f),\\quad M_D=\\operatorname{Map}_D(z,x),$$\nand define $A_B,C_B,M_B$ by applying $p$. The join-cone formula gives, naturally with the boundary projection,\n$$\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleleft},D)}(t,q)\\simeq A_D\\times^h_{C_D}M_D.$$\nHere the two maps are $a\\mapsto a\\beta$ and $u\\mapsto\\alpha\\Delta_K(u)$; the path is the coherence of a map of cones. The same formula holds in $B$, and its naturality identifies postcomposition by $p$ with the map between these two path pullbacks. This is the varying-boundary formula, rather than the fixed-boundary cone-fiber formula. All six spaces are Kan by [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, condition (2); mapping-space reformulation; agent proof using the existing varying-boundary join-cone mapping formula."
+   }
+  },
+  {
+   "text": "For $t$ constant at $z$, its boundary is $\\Delta_Kz$ and $\\beta$ is the identity. Thus $A_D=C_D$ and the first map into $C_D$ is the identity; the constant-path map\n$$M_D\\longrightarrow C_D\\times^h_{C_D}M_D$$\nis a weak equivalence by [lem-coef-kan-pullback-path-comparison], since an identity is a Kan fibration. This equivalence is over $C_D$, with the map $u\\mapsto\\alpha\\Delta_K(u)$, and the same holds naturally in $B$. The invariance theorem [lem-coef-kan-homotopy-pullback-invariance] therefore identifies the constant-source all-diagrams square with the apex square $M_D\\to C_D$ over $M_B\\to C_B$. The comparison retains the coherence path and every higher simplex. In particular the all-diagrams condition of [def-coef-infinity-relative-cone] implies the displayed constant-source criterion, and testing only constant source diagrams is equivalent to testing this apex square.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, (2) implies (3), and apex identification; agent proof using the existing varying-boundary join-cone mapping formula."
+   }
+  },
+  {
+   "text": "Assume now that the apex square is a homotopy pullback for every $z$. Fix $t=(z,g,\\beta)$ as in step 1. The assumption says\n$$M_D\\simeq C_D\\times^h_{C_B}M_B.$$\nApply homotopy-pullback invariance [lem-coef-kan-homotopy-pullback-invariance] to pull back this equivalence along $A_D\\to C_D$. In the resulting iterated pullbacks one can compute by fibrations, as follows. Replace $M_B\\to C_B$ by a weak equivalence followed by a Kan fibration $\\widehat M_B\\to C_B$, using [lem-coef-kan-quillen-right-proper]. The pullback $C_D\\times_{C_B}\\widehat M_B\\to C_D$ is already a fibration. The same statement and [lem-coef-kan-pullback-path-comparison] compute its homotopy pullbacks by strict pullbacks. Degreewise associativity now identifies both\n$$A_D\\times^h_{C_D}(C_D\\times^h_{C_B}M_B)\\quad\\hbox{and}\\quad A_D\\times^h_{A_B}(A_B\\times^h_{C_B}M_B)$$\nwith $A_D\\times_{C_B}\\widehat M_B$: the intermediate $C_D$ or $A_B$ coordinate is forced to be the image of the $A_D$ coordinate. For a specified commutation homotopy $H:Z\\times\\Delta^1\\to W$ between $ru$ and $vs$, use [lem-coef-space-path-fibration-replacement] on $r:Y\\to W$: the map $z\\mapsto(u(z),H(z,-))$ lands in $E_r=Y\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)$ and its terminal evaluation is exactly $vs(z)$. Thus the square with top map to $E_r$ strictly commutes, and $Y\\to E_r$ by constant paths is a weak equivalence. Apply this construction to the specified coherence squares before the fibration computations; projection back to $Y$ recovers the original maps and their specified paths. Strict invariance [lem-coef-kan-homotopy-pullback-invariance] and independence of replacement in [lem-coef-kan-quillen-right-proper] then justify the same calculation for those coherent squares. In particular no strictly commuting invariance assertion is applied directly to a merely homotopy-commuting square. The identifications preserve the comparison induced by $p$. Together with step 1 this proves\n$$\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleleft},D)}(t,q)\\simeq A_D\\times^h_{A_B}\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleleft},B)}(pt,pq).$$\nThis is exactly the all-diagrams square of [def-coef-infinity-relative-cone], for arbitrary $t$. Thus the constant-source criterion implies that $q$ is a $p$-limit diagram. No fibration hypothesis on $p$ has entered: only the auxiliary replacements of maps of Kan spaces were fibrations.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-pullback-path-comparison",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-space-path-fibration-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, (3) implies (2); explicit pullback argument; agent proof using the existing varying-boundary join-cone mapping formula."
+   }
+  },
+  {
+   "text": "We give the opposite construction explicitly to prove the colimit assertion. For an operator $a:[m]\\to[n]$, write $\\rho_n(i)=n-i$ and replace $a$ by $\\rho_na\\rho_m$. This operation preserves composition, squares to the identity, and carries horn $i$ to horn $n-i$. Hence it preserves quasicategories and Kan complexes. Reversing the two join blocks in [def-coef-infinity-relative-cone] gives $(K^{\\triangleright})^{\\mathrm{op}}\\cong(K^{\\mathrm{op}})^{\\triangleleft}$; reversing product simplices gives $(\\operatorname{Fun}(K,D))^{\\mathrm{op}}\\cong\\operatorname{Fun}(K^{\\mathrm{op}},D^{\\mathrm{op}})$. Thus a cocone $f\\to\\Delta_Kx$ becomes a cone in $D^{\\mathrm{op}}$.\nFor the arrow spaces $U$ of [lem-coef-infinity-pinch-comparison], reversing the parameter simplex and exchanging the two interval endpoints gives the strict natural isomorphism $U_{D^{\\mathrm{op}}}(z,x)\\cong U_D(x,z)^{\\mathrm{op}}$. The opposite on the right is essential. To compare a Kan complex $T$ with $T^{\\mathrm{op}}$, use [lem-coef-subdivision-face-poset-calculus]: on the summand of $\\sigma:\\Delta^n\\to T$, send a flag $(S_0\\subseteq\\cdots\\subseteq S_k)$ to $(\\rho_nS_0\\subseteq\\cdots\\subseteq\\rho_nS_k)$ in the reversed simplex. Since $\\rho_na=(\\rho_na\\rho_m)\\rho_m$, this respects the colimit relations and gives a natural isomorphism $\\operatorname{Sd}T\\cong\\operatorname{Sd}(T^{\\mathrm{op}})$. The last-vertex maps are weak equivalences by [lem-coef-subdivision-last-vertex-equivalence], giving $T\\leftarrow\\operatorname{Sd}T\\cong\\operatorname{Sd}(T^{\\mathrm{op}})\\to T^{\\mathrm{op}}$. Apply [lem-coef-ex-infinity-finite-products] to obtain the all-Kan zigzag $T\\to\\operatorname{Ex}^{\\infty}T\\leftarrow\\operatorname{Ex}^{\\infty}\\operatorname{Sd}T\\cong\\operatorname{Ex}^{\\infty}\\operatorname{Sd}(T^{\\mathrm{op}})\\to\\operatorname{Ex}^{\\infty}(T^{\\mathrm{op}})\\leftarrow T^{\\mathrm{op}}$. Its arrows are weak equivalences: the unit is one, and naturality of the unit and two-out-of-three in the model structure of [lem-coef-kan-quillen-right-proper] show that $\\operatorname{Ex}^{\\infty}$ preserves weak equivalences. Combine this with the two pinch equivalences to obtain a natural zigzag of Kan weak equivalences $\\operatorname{Map}_{D^{\\mathrm{op}}}(z,x)\\simeq\\operatorname{Map}_D(x,z)$, also in the functor quasicategories.\nThe product compatibility needed for composition can be checked from the same cited statements. Put $R(T)=\\operatorname{Ex}^{\\infty}\\operatorname{Sd}T$ and $E(T)=\\operatorname{Ex}^{\\infty}T$. Product projections give $R(S\\times T)\\to R(S)\\times R(T)$, and the last-vertex maps give a commuting triangle from this map to $E(S)\\times E(T)=E(S\\times T)$. The direct arrow is a weak equivalence, since the last-vertex map is one and $E$ preserves weak equivalences as proved above. The arrow from $R(S)\\times R(T)$ is also a weak equivalence: it is a product of weak equivalences between Kan complexes, hence factors as two pullbacks along Kan fibrations to a point, to which right properness applies. Two-out-of-three proves that the product comparison is a weak equivalence. The subdivision reversal respects these product projections degree by degree, and $E$ preserves products. Thus the natural opposite zigzags identify products as well as individual mapping spaces in the homotopy category of Kan complexes.\nThese comparisons respect composition: in the triangle spaces $V(a,b,d)$ of [lem-coef-infinity-mapping-composition], reversal exchanges edges $01$ and $12$ and reverses $02$. Therefore it exchanges precomposition with postcomposition under the canonical composition classes. The calculation is by precomposition on every parameter simplex, so retains the associated higher homotopies. In particular the cone map becomes $u\\mapsto\\Delta_K(u)\\alpha$ on the colimit boundary space $\\operatorname{Map}_{\\operatorname{Fun}(K,D)}(f,\\Delta_Kz)$, and postcomposition by $p$ gives the specified base row.\nFor completeness reversal preserves weak equivalences: the degreewise formula $[\\sigma,(t_0,\\ldots,t_n)]\\mapsto[\\sigma,(t_n,\\ldots,t_0)]$ gives a natural homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$, respecting the realization relations of [def-cbc-enhanced-diagrams-cones] by the same operator conjugation formula. Reversal also identifies $P(u,v)^{\\mathrm{op}}$ with $P(v^{\\mathrm{op}},u^{\\mathrm{op}})$, by exchanging factors and interval endpoints, and preserves the constant-path comparison. Thus reversal, followed by [lem-coef-kan-homotopy-pullback-invariance] along the all-Kan zigzags, preserves and reflects homotopy pullback tests. It takes the all-source test to the all-target test of [def-coef-infinity-relative-cone]; the quantifier over diagrams is unchanged because reversal is involutive. Applying the limit result to $p^{\\mathrm{op}}$ proves exactly the colimit assertion and constant-target equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-subdivision-face-poset-calculus",
+    "lem-coef-subdivision-last-vertex-equivalence",
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Opposite dual of Proposition 7.1.6.19; agent proof using the existing varying-boundary join-cone mapping formula."
+   }
+  },
+  {
+   "text": "The comparison in step 1 is natural in the indexing simplicial set, the target quasicategory, and both cones by [lem-coef-infinity-join-cone-calculus]. For $L\\to K$, precomposition restricts $f,g,\\alpha,\\beta$, sends a boundary transformation $a$ to $a|_L$, and leaves the apex maps $u$ unchanged. The identity $(a\\beta)|_L=(a|_L)(\\beta|_L)$, and the corresponding identity for $\\alpha\\Delta(u)$, identify the horizontal maps and their coherence paths with their restrictions. Postcomposition by $p$ commutes with each of these operations. The path-pullback maps apply these operations to all three entries, including the path; hence the apex identifications and the test comparisons commute naturally with them. The same calculation after the opposite construction gives colimit naturality. This is naturality of the comparisons between tests; it does not assert that a relative colimit or limit remains universal after changing its indexing shape.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Naturality of the test comparisons, with the apex unchanged; agent proof using the existing varying-boundary join-cone mapping formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-space-path-fibration-replacement",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-subdivision-face-poset-calculus",
+  "lem-coef-subdivision-last-vertex-equivalence",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02X1",
+  "place": "Proposition 7.1.6.19, (2) iff (3), and its opposite dual; alternative mapping-space proof using existing varying-boundary cone calculus. Online source read; archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +181,80 @@
    "results": "{\"t\": \"2026-10-16T20:52:21Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|RightAnodyne|IsRelativeColimit|RelativeLimit|homotopyPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Loogle and the source grep returned zero hits. LeanFinder returned ordinary Van Kampen/universal colimits or the all-horn Quillen generators, primitive Quasicategory and KanComplex definitions, and model-category lifting lemmas. Their returned types do not assert relative mapping-space universality or a right-anodyne factorization of an indexing equivalence. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?colimit|constant.?target|homotopy.?pullback",
+   "results": "{\"t\": \"2026-10-16T23:23:12Z\", \"tool\": \"grep\", \"query\": \"relative.?colimit|constant.?target|homotopy.?pullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types. Ordinary categorical colimit hom equivalences and Van Kampen conditions do not give the quasicategory relative-cone assertion; primitive horn filling and Cech nerves are not matches. Loogle reports an unknown unqualified identifier; grep returned no hits. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-75."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative colimit diagram in a quasicategory can be tested against constant target diagrams by homotopy pullback mapping spaces",
+   "results": "{\"t\": \"2026-10-16T23:23:13Z\", \"tool\": \"leansearch\", \"query\": \"A relative colimit diagram in a quasicategory can be tested against constant target diagrams by homotopy pullback mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\", \"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.Limits.IsColimit.homEquiv\", \"CategoryTheory.Limits.colimit.homIso'\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.IsVanKampenColimit\", \"CategoryTheory.Limits.IsColimit.homIso'\", \"CategoryTheory.Limits.colimit.homIso\"], \"digest\": \"966ff03094e0477b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types. Ordinary categorical colimit hom equivalences and Van Kampen conditions do not give the quasicategory relative-cone assertion; primitive horn filling and Cech nerves are not matches. Loogle reports an unknown unqualified identifier; grep returned no hits. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-75."
+  },
+  {
+   "tool": "loogle",
+   "query": "Quasicategory, IsColimit, Map",
+   "results": "{\"t\": \"2026-10-16T23:23:13Z\", \"tool\": \"loogle\", \"query\": \"Quasicategory, IsColimit, Map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Quasicategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported an unknown identifier, so this attempt gives no evidence of absence. The later successful quoted-name Loogle queries, LeanFinder searches and source grep supply the search evidence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative universal cone diagrams in quasicategories are characterized by homotopy pullback mapping-space squares tested on constant target diagrams",
+   "results": "{\"t\": \"2026-10-16T23:23:13Z\", \"tool\": \"leanfinder\", \"query\": \"Relative universal cone diagrams in quasicategories are characterized by homotopy pullback mapping-space squares tested on constant target diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.Arrow.cechNerve_obj\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling'\", \"CategoryTheory.SimplicialObject.cechNerve_obj\"], \"digest\": \"42381d8f60b2e3a2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types. Ordinary categorical colimit hom equivalences and Van Kampen conditions do not give the quasicategory relative-cone assertion; primitive horn filling and Cech nerves are not matches. Loogle reports an unknown unqualified identifier; grep returned no hits. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-75."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ll]imit|relative.?[Cc]olimit|constant.?[Ss]ource|constant.?[Tt]arget",
+   "results": "{\"t\": \"2026-10-17T00:33:42Z\", \"tool\": \"grep\", \"query\": \"relative.?[Ll]imit|relative.?[Cc]olimit|constant.?[Ss]ource|constant.?[Tt]arget\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary categorical cones, limits and pullbacks, or simplicial horn-colimit presentations and the homotopy category functor. These do not state relative universality for arbitrary quasicategories and coherent mapping spaces. Loogle and grep returned zero hits; Basic.lean and InnerFibration.lean were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"limit\"",
+   "results": "{\"t\": \"2026-10-17T00:33:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary categorical cones, limits and pullbacks, or simplicial horn-colimit presentations and the homotopy category functor. These do not state relative universality for arbitrary quasicategories and coherent mapping spaces. Loogle and grep returned zero hits; Basic.lean and InnerFibration.lean were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative universal cones in infinity categories characterized by homotopy cartesian squares of representable mapping spaces",
+   "results": "{\"t\": \"2026-10-17T00:33:43Z\", \"tool\": \"leansearch\", \"query\": \"Relative universal cones in infinity categories characterized by homotopy cartesian squares of representable mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.ofRepresentableBy\", \"CategoryTheory.IsPullback.isLimit\", \"CategoryTheory.Limits.limYoneda\", \"CategoryTheory.Square.IsPullback.isLimit\", \"CategoryTheory.Limits.Cone.ofPullbackCone\", \"CategoryTheory.CommSq.cocone\", \"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.IsPullback.cone\"], \"digest\": \"901b31353db99113\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary categorical cones, limits and pullbacks, or simplicial horn-colimit presentations and the homotopy category functor. These do not state relative universality for arbitrary quasicategories and coherent mapping spaces. Loogle and grep returned zero hits; Basic.lean and InnerFibration.lean were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any functor of quasicategories relative limit cones can be tested by homotopy pullback squares of mapping spaces from constant source diagrams",
+   "results": "{\"t\": \"2026-10-17T00:33:57Z\", \"tool\": \"leanfinder\", \"query\": \"For any functor of quasicategories relative limit cones can be tested by homotopy pullback squares of mapping spaces from constant source diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isLimitMapConePullbackConeEquiv\", \"LightDiagram.isLimit\", \"CategoryTheory.Limits.isLimitOfIsPullbackOfIsConnected\", \"SSet.hasLimits\", \"CategoryTheory.LiftsToLimit.toLiftableCone\", \"CategoryTheory.LiftsToLimit\", \"SSet.hoFunctor.preservesTerminal\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\"], \"digest\": \"584d0bd001327bda\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary categorical cones, limits and pullbacks, or simplicial horn-colimit presentations and the homotopy category functor. These do not state relative universality for arbitrary quasicategories and coherent mapping spaces. Loogle and grep returned zero hits; Basic.lean and InnerFibration.lean were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant object tests for relative universal cocones in quasicategories via homotopy cartesian mapping space squares",
+   "results": "{\"t\": \"2026-10-17T00:36:26Z\", \"tool\": \"leanfinder\", \"query\": \"Constant object tests for relative universal cocones in quasicategories via homotopy cartesian mapping space squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\", \"CategoryTheory.Limits.Cocone.toCostructuredArrowCocone\", \"CategoryTheory.Limits.Cocone.fromCostructuredArrow\", \"CategoryTheory.LiftableCocone\", \"CategoryTheory.Functor.costructuredArrowMapCocone\"], \"digest\": \"eb679c6aa480cb83\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary categorical cones, limits and pullbacks, or simplicial horn-colimit presentations and the homotopy category functor. These do not state relative universality for arbitrary quasicategories and coherent mapping spaces. Loogle and grep returned zero hits; Basic.lean and InnerFibration.lean were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable mapping spaces detect relative universal cones for an arbitrary functor of infinity categories",
+   "results": "{\"t\": \"2026-10-17T01:18:13Z\", \"tool\": \"leanfinder\", \"query\": \"Representable mapping spaces detect relative universal cones for an arbitrary functor of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.relativelyRepresentable\", \"CategoryTheory.MorphismProperty.relative.rep\", \"CategoryTheory.Functor.representableByCompYonedaObjOfIsLimit\", \"CategoryTheory.Limits.IsLimit.ofRepresentableBy\", \"CategoryTheory.Limits.IsLimit.representableBy\", \"CategoryTheory.RepresentablyFlat\", \"CategoryTheory.RepresentablyCoflat\", \"CategoryTheory.Limits.IsLimit.OfNatIso.coneOfHom\"], \"digest\": \"1b095cc9ef22e620\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read the returned types. Functor.relativelyRepresentable concerns ordinary categorical morphism properties; IsLimit.ofRepresentableBy and IsLimit.representableBy concern ordinary cone functors. None states the arbitrary-quasicategory relative mapping-space criterion or a one-line specialization of it."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-cone-equivalence",
@@ -113,5 +274,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-cone-constant-test",
+  "worker": "stage1",
+  "summary": "Replaced the earlier unsupported fixed-boundary mapping-space argument and removed its never-delivered auxiliary node, whose comma clause repackaged the conclusion. Five steps use the existing varying-boundary join-cone formula, path-pullback invariance and fibration replacements to prove the constant-source criterion, then dualize and check naturality. No statement changes and no new nodes. Second reading expanded opposite duality with the subdivision/Ex-infinity zigzag and explicit composition and path reversal; no new node. Current resumption checked every dependency and added the existing path-fibration replacement citation with an explicit strictification of a specified square homotopy; no new nodes or statement changes. Independent second reading wrote out product compatibility for the opposite mapping-space zigzags, corrected an invalid Loogle-query verdict, and recorded a fresh representability search; creation provenance and the permitted split_report.tool_uses declaration are preserved.",
+  "blueprint": "Supporting constant-source/target mapping-space test in the ancestry of proof paragraph 2 of prop-coef-integral-exceptional-adjoint, via relative cone equivalence, relative Kan existence and suspension-square comparison. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic functor-quasicategory closure and Kan mapping-space facts, used for arbitrary small K; this unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-ebd5f31fa",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-ebd5f31fa (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps, all 13 cited statements and Kerodon 7.1.6.19 (02X1, read online; not archived, WANTED recorded). The item is (2)<=>(3) of 02X1 plus the apex form and colimit dual. The project defines a p-limit by condition (2). The statement assumes no fibration on p and allows any small K, as the source does. Step 1: substituting (z,g,beta) and (x,f,alpha) into the varying-boundary formula of lem-coef-infinity-join-cone-calculus gives A_D x^h_{C_D} M_D with maps a beta and alpha Delta(u). Step 2: for a constant source, beta=id is a fibration. The constant-path map is an equivalence by lem-coef-kan-pullback-path-comparison. It commutes strictly over C_D, so invariance applies and gives the apex square. Step 3: correct pasting through the fibrant replacement A_D x_{C_B} hat M_B, from right properness and the path comparison. Homotopy-commuting squares are made strict through E_r before strict invariance is used. Step 4: checked the operator reversal and U_{D^op}(z,x) = U_D(x,z)^op. Checked the Sd/last-vertex/Ex^infinity zigzag, product compatibility, and triangle-space reversal: alpha Delta(u) becomes Delta(u) alpha, which is the item's colimit variance. Step 5: elementary from join-cone naturality, and it does not claim restriction preserves universality. Edge cases: K empty gives a p-initial object; K a point; p=id; terminal B; empty mapping spaces. All consistent. No new nodes, no cycle (157-node closure excludes the item), proof_deps equals the union of step uses. Duplicate candidates (relative-cocone-parameters, relative-cone-initial-corner, fiber-relative-colimit-criterion, relative-limit-initial-components) state different results. No SGA. Not a target node, so no base-change or coefficient-category check applies. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, for generic Kan mapping spaces and functor quasicategories. No fixes."
  }
 }

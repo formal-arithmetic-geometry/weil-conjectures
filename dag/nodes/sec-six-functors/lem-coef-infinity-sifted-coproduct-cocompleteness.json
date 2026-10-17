@@ -29,9 +29,67 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $K$ be an arbitrary small simplicial set and $F:K\\to\\mathcal E$ an arbitrary coherent diagram. Apply [lem-coef-infinity-finite-coproduct-envelope] to obtain a small quasicategory $J$, a map $i:K\\to J$, a finite-coproduct-preserving $\\widehat F:J\\to\\mathcal E$, and $\\eta:F\\simeq\\widehat F i$, with the displayed left Kan mapping-space equivalence against every $H:J\\to\\mathcal E$. The hypothesis needed on $\\mathcal E$ is only its given finite coproducts. In particular we have not used local smallness to build a full subcategory of $\\mathcal E$: the envelope $J$ is small independently of the sizes of its image's mapping spaces.",
+   "uses": [
+    "lem-coef-infinity-finite-coproduct-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 5.3.5.9 and Proposition 5.3.6.2, finite-coproduct completion; agent application to the indexing shape."
+   }
+  },
+  {
+   "text": "For $a,b\\in J$, let $Q_{a,b}=((a,b)\\downarrow\\operatorname{diag}_J)$ be the coherent category of cospans $a\\to z\\leftarrow b$. This is the cocone category of the discrete two-object diagram. The coproduct cospan $q$ is initial: for any cospan $\\gamma$ with apex $z$, [lem-cbc-enhanced-functor-cone-calculus] identifies $\\operatorname{Map}_{Q_{a,b}}(q,\\gamma)$ with the homotopy fiber over $\\gamma$ of the coproduct equivalence $\\operatorname{Map}_J(a\\amalg b,z)\\to\\operatorname{Map}_J(a,z)\\times\\operatorname{Map}_J(b,z)$, hence it is contractible. Apply [lem-coef-parametric-universal-arrows] to $T:\\Delta^0\\to Q_{a,b}$ selecting $q$, with $\\mathcal D_0=Q_{a,b}$. Its hypothesis is precisely $\\operatorname{Map}_{Q_{a,b}}(q,\\gamma)\\simeq *$. Its counit supplies a coherent transformation $\\operatorname{const}_q\\to\\operatorname{id}_{Q_{a,b}}$, a simplicial map $Q_{a,b}\\times\\Delta^1\\to Q_{a,b}$. Realizing its simplex prisms gives a homotopy from the constant map at $q$ to the identity, so $Q_{a,b}$ is weakly contractible. The implication (3) to (1) of [lem-coef-infinity-cofinality-space-test], with $u=\\operatorname{diag}_J:J\\to J\\times J$, proves that the diagonal is final.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1; elementary coproduct-cospan calculation and contraction using the cited coherent calculus."
+   }
+  },
+  {
+   "text": "The initial object of $J$ makes $J$ nonempty. By step 2 its diagonal is final, so [lem-coef-sifted-nerve-index-calculus] makes $J$ sifted in the space-valued sense, including preservation of the empty product. The assumed existence of all small sifted colimits in $\\mathcal E$ therefore gives a colimiting cocone $\\beta:\\widehat F\\to\\Delta_J L$. Restrict it along $i$ and compose with $\\eta$ to get the actual cocone $\\alpha=(\\beta i)\\eta:F\\to\\Delta_K L$. All index data are in the smaller universe.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.8.1, Lemma 5.5.8.11 and Remark 5.5.8.12; application of the given sifted-colimit hypothesis."
+   }
+  },
+  {
+   "text": "For every $x\\in\\mathcal E$, the cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], applied to the colimiting $\\beta$, gives an equivalence $\\operatorname{Map}_{\\mathcal E}(L,x)\\to\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal E)}(\\widehat F,\\Delta_Jx)$, sending $a$ to $(\\Delta_Ja)\\beta$. Apply the full mapping-space equivalence in [lem-coef-infinity-finite-coproduct-envelope] with $H=\\Delta_Jx$. Its composite with the preceding equivalence is\n$$\\operatorname{Map}_{\\mathcal E}(L,x)\\xrightarrow{\\sim}\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(F,\\Delta_Kx),\\qquad a\\longmapsto (\\Delta_Ka)(\\beta i)\\eta=(\\Delta_Ka)\\alpha.$$\nThe equality identifies the comparison induced by our actual cocone, on whole mapping spaces and naturally in $x$, rather than only a bijection on homotopy classes. The dual cocone clause of [lem-cbc-enhanced-functor-cone-calculus] now proves that $\\alpha$ is colimiting. Since $K$ and $F$ were arbitrary, this proves every required colimit. For $K=\\varnothing$ the same argument produces an initial object: the target transformation space is a point; equivalently one may use the assumed empty coproduct directly.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-finite-coproduct-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 4.3.2 (left Kan universal property), applied to constant target functors; agent two-map calculation of the cocone universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-finite-coproduct-envelope",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-sifted-nerve-index-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Finite-coproduct-envelope proof using Remark 5.3.5.9, the existing coherent cocone and universal-arrow calculus, Theorem 4.1.3.1, and the sifted diagonal criterion; explicit realization of Remark 5.5.8.16(2),(3)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +146,38 @@
    "results": "{\"t\": \"2026-10-16T23:43:32Z\", \"tool\": \"grep\", \"query\": \"hasCoproducts_of_finite_and_filtered|has_colimits_of_finite_and_filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\"], \"digest\": \"b333a4310cd6a4d6\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading; the logged hits are ordinary CategoryTheory declarations with set-valued Hom functors, or the horn-filling definition SSet.Quasicategory. Read Filtered.lean lines 123-130, StrongGenerator.lean lines 31-110, LocallyPresentable.lean lines 35-57 and Quasicategory/Basic.lean lines 34-42; none asserts coherent infinity-categorical cocompleteness or mapping-space compact generation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicategory admitting finite coproducts and small sifted colimits admits every small colimit",
+   "results": "{\"t\": \"2026-10-17T00:33:53Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory admitting finite coproducts and small sifted colimits admits every small colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"SSet.Truncated.hasColimits\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Limits.has_colimits_of_finite_and_filtered\", \"CategoryTheory.Limits.HasFiniteColimits.out\", \"SSet.finite_of_isColimit\", \"CategoryTheory.Limits.hasCoproducts_of_finite_and_filtered\", \"CategoryTheory.Limits.hasColimitsOfShape_of_hasFiniteColimits\"], \"digest\": \"8f6bd0c361f7ebbf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.hasColimits concerns the ordinary category of simplicial sets, and Limits.has_colimits_of_finite_and_filtered (Constructions/Filtered.lean:127) assumes finite colimits in an ordinary category. IsSifted in Limits/Sifted.lean:55-64,103-121 concerns ordinary categories and set-valued colimits. None states cocompleteness inside a quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Limits.HasColimits",
+   "results": "{\"t\": \"2026-10-17T00:33:44Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.Limits.HasColimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.hasColimits concerns the ordinary category of simplicial sets, and Limits.has_colimits_of_finite_and_filtered (Constructions/Filtered.lean:127) assumes finite colimits in an ordinary category. IsSifted in Limits/Sifted.lean:55-64,103-121 concerns ordinary categories and set-valued colimits. None states cocompleteness inside a quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "sifted.*coproduct|coproduct.*sifted|has_colimits_of_finite_and_filtered",
+   "results": "{\"t\": \"2026-10-17T00:33:43Z\", \"tool\": \"grep\", \"query\": \"sifted.*coproduct|coproduct.*sifted|has_colimits_of_finite_and_filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean\"], \"digest\": \"821336914deedb78\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.hasColimits concerns the ordinary category of simplicial sets, and Limits.has_colimits_of_finite_and_filtered (Constructions/Filtered.lean:127) assumes finite colimits in an ordinary category. IsSifted in Limits/Sifted.lean:55-64,103-121 concerns ordinary categories and set-valued colimits. None states cocompleteness inside a quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An infinity category with finite sums and homotopy sifted colimits is cocomplete",
+   "results": "{\"t\": \"2026-10-17T00:33:44Z\", \"tool\": \"leansearch\", \"query\": \"An infinity category with finite sums and homotopy sifted colimits is cocomplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.has_colimits_of_finite_and_filtered\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.Limits.hasFiniteColimits_of_hasFiniteColimits_of_size\", \"CategoryTheory.Limits.hasCoproducts_of_finite_and_filtered\", \"CategoryTheory.instHasColimitsIndOfHasFiniteColimits\", \"CategoryTheory.IsSifted.isSifted_of_hasBinaryCoproducts_and_nonempty\", \"CategoryTheory.Limits.hasFiniteColimits_of_hasColimitsOfSize\"], \"digest\": \"019cf12518e344eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.hasColimits concerns the ordinary category of simplicial sets, and Limits.has_colimits_of_finite_and_filtered (Constructions/Filtered.lean:127) assumes finite colimits in an ordinary category. IsSifted in Limits/Sifted.lean:55-64,103-121 concerns ordinary categories and set-valued colimits. None states cocompleteness inside a quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-monadic-sifted-presentability",
@@ -99,5 +185,29 @@
   "group": "NO"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-sifted-coproduct-cocompleteness",
+  "worker": "stage1",
+  "summary": "Retained the statement and its size hypotheses. Four steps: form the finite-coproduct envelope; contract its diagonal comma categories using coproducts and existing coherent calculus; take the resulting sifted colimit; verify the actual restricted cocone on whole mapping spaces. Only the independent finite-coproduct-envelope prerequisite is new; the elementary sifted-index child was folded into the proof.",
+  "blueprint": "Realizes the supporting cocompleteness input to prop-coef-integral-exceptional-adjoint proof paragraph 2 through the existing blueprint.from.via chain, below the unit route. Step 1 forms the finite-coproduct extension; steps 2–3 establish siftedness and take its colimit; step 4 verifies the coherent cocone comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space criterion for an actual colimiting cocone, valid without local smallness and for arbitrary simplicial shapes; the unit supplies no replacement for this basic quasicategory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-4a57606da",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-4a57606da (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-infinity-finite-coproduct-envelope and all six cited statements in full. There is no local HTT archive, so I fetched the Harvard PDF and read Remark 5.3.5.9, Prop 5.3.6.2, Prop 4.3.2.17, Def 5.5.8.1, Lemma 5.5.8.4, Lemma 5.5.8.11 with Remark 5.5.8.12, Prop 5.5.8.15, Remark 5.5.8.16(1)-(3) and Cor 5.5.8.17 with its proof. The item is true and not weakened; it is HTT Remark 5.5.8.16(3). Its proof follows HTT's own Cor 5.5.8.17 argument: a small finite-coproduct closure J of the representables, extension by Remark 5.3.5.9, then a sifted colimit. Step 1 uses only finite coproducts in E and no local smallness. Step 2: Q_{a,b} is literally the def-cbc cocone category of the two-point discrete diagram and also the comma (b|diag) of cofinality-test (3); the coproduct cospan is initial; parametric-universal-arrows with C=Delta^0 has exactly that hypothesis, so const_q->id contracts Q, and (3)=>(1) makes the diagonal final, with J and JxJ small. Step 3: sifted-nerve-index-calculus gives siftedness from 'nonempty and diagonal final', the hypothesis gives the colimiting beta, and alpha=(beta i)eta. Step 4: the colimit equivalence for beta composed with the envelope's equivalence against H=Delta_J x (not coproduct-preserving) is postcomposition with alpha, so alpha is colimiting by the dual cone criterion; K empty checked. The envelope node is true: its pointwise Kan comma over a finite coproduct of representables is a disjoint union of slices with terminal objects, so only finite coproducts are needed, and HTT 4.3.2.17 gives the equivalence against arbitrary H. Small cases checked: K empty, a point, two points, a groupoid with nontrivial automorphisms. B1-B9 pass: self-contained, inline definition of finite coproducts, correct blueprint.from and via, same_as [] with no 'sifted' hit in main-20261015, eight logged searches of all three kinds. It is not a duplicate: lem-coef-infinity-relative-colimit-completion needs a cocomplete target, and a DAG-wide scan found no other match. It is not a restated clause of the item. The removed child is cited nowhere. There is no cycle (transitive closure of every cited node checked). Accepted tool use: lem-cbc-enhanced-functor-cone-calculus from sk-prop-sf-cbc, a generic cocone mapping-space criterion. No SGA is cited. No fixes were written."
+ }
 }

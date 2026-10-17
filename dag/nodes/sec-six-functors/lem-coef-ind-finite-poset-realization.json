@@ -32,9 +32,158 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $A=\\varnothing$, take $I=\\Delta^0$ and the unique functor to $\\operatorname{Fun}(\\varnothing,C)$, which is terminal even when $C$ is empty; evaluation requirements are vacuous. Assume henceforth $A\\ne\\varnothing$. Put $P=\\mathcal P(C)$ and let $C_0\\subset P$ be the replete full essential image of $j$. Presheaf free cocompletion makes $P$ locally small and cocomplete. Yoneda evaluation and pointwise colimits give $\\operatorname{Map}_P(jc,-)\\simeq\\operatorname{ev}_c$, which preserves all small colimits, also after inclusion into larger-universe spaces. Thus each $jc$ is $\\kappa$-compact in $P$. Yoneda is fully faithful, and the full-essential-image theorem supplies a coherent quasi-inverse $h:C_0\\to C$ with $jh\\simeq1_{C_0}$ and $hj\\simeq1_C$. In particular $C_0$ is essentially small. Compactness passes to an equivalent object by precomposing the mapping-space functors with that equivalence, so every object of $C_0$ is $\\kappa$-compact in $P$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-full-essential-image",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 5.1.2.2 and 5.1.3.1; compactness argument of Proposition 5.3.5.5, in P rather than Ind; read online, archive WANTED."
+   }
+  },
+  {
+   "text": "For $X\\in P$ let $R_X=C_0\\times_P P_{/X}$, using the join-slice model: its $n$-simplices are maps $\\Delta^{n+1}\\to P$ with final vertex $X$ whose initial face lies in $C_0$, and the source projection restricts to that face. By the slice right-fibration theorem $P_{/X}$ is a quasicategory, and $R_X$ is its full simplicial subset on the vertices with source in $C_0$, so every inner horn of $R_X$ fills inside $R_X$; thus $R_X$ is a quasicategory. Apply representable-slice density with $D=C$, $y=j$ and $A=C_0$, the full subcategory of objects equivalent to some $j(c)$ (Step 1); then $A_{/X}$ is exactly $R_X$. It gives that $R_X$ is essentially small and that the canonical cocone $\\delta_X:(R_X)^{\\triangleright}\\to P$, obtained by appending $X$ to the source projection, is colimiting with apex $X$. This is the specified tautological cocone with all its higher simplices, not merely some presentation of $X$ as a colimit of representables; this is the density assertion used below.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-presheaf-representable-slice-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.3 and Corollary 5.3.5.4, canonical representable slice and its tautological colimit; read online, archive WANTED."
+   }
+  },
+  {
+   "text": "If $X$ has a small $\\kappa$-filtered representable presentation, then $R_X$ is $\\kappa$-filtered. Reindex that presentation by a small $\\kappa$-directed poset using the cofinal-poset theorem in the cocomplete category $P$. A diagram $q:K\\to R_X$ with $K$ $\\kappa$-small is a source diagram in $C_0$ and a specified coherent cocone to $X$. Apply compact relative cocone factorization in $P$ to this presentation, with $K'=\\varnothing$ and all source vertices compact by Step 1. It produces a stage $jc$, a coherent source cocone to $jc$, and its full compatibility with the original cocone to $X$. These are a cocone in $R_X$. The fixed-boundary join/cone comparison, applied in the opposite quasicategory for right cocones, keeps the prescribed diagram $q$; the opposite/cone identifications are those of the relative-cone equivalence theorem. For $K=\\varnothing$, choose any stage of the nonempty presentation index, giving $jc\\to X$. This verifies the definition of $\\kappa$-filteredness including the empty case. In particular every $R_{F(a)}$ is $\\kappa$-filtered by the hypotheses of the item. By Step 2 its tautological cocone to $F(a)$ is colimiting in $P$.",
+   "uses": [
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-compact-relative-cocone-factorization",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, (2) implies (1), expanded using Proposition 5.3.4.16; read online, archive WANTED."
+   }
+  },
+  {
+   "text": "Let $D$ be the coherent comma category of diagrams $H:N(A)\\to C_0$ with a transformation $H\\to F$. The relative-slice theorem identifies it with a section quasicategory and makes it essentially small, since $C_0$ is essentially small, $P$ is locally small and $N(A)$ is small. We use the equivalent join-slice model in $\\operatorname{Fun}(N(A),P)$; the join/cone comparison commutes with both the boundary and the source, including fixed-boundary pullbacks. The source projection and tautological transformation define a cocone with apex $F$. Evaluation at $a$ gives a functor $e_a:D\\to R_{F(a)}$, with the join and arrow versions identified by that comparison. We prove that $D$ is $\\kappa$-filtered and that each $e_a$ is cofinal; this will identify the evaluation of its tautological cocone with the colimit of Step 3.",
+   "uses": [
+    "lem-coef-infinity-relative-slice-sections",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, definition of D and reduction to (a) and (b); read online, archive WANTED."
+   }
+  },
+  {
+   "text": "Apply the poset-cone test to $D$. Let $|B|<\\kappa$ and let $N(B)\\to D$ be a diagram. In the join model, currying its transformation to $F$ gives $U_0:N(A\\times(B\\amalg\\{\\infty'\\}))\\to P$, where $b<\\infty'$ for all $b\\in B$, its $\\infty'$ row is $F$, and every $B$ row lies in $C_0$. Choose a linear ordering $a_1,\\ldots,a_n$ of $A$ extending its partial order. Adjoin $\\infty$ between $B$ and $\\infty'$. The induction claim is that there is an extension $U_k$ to the full subposet $Q_k=(A\\times(B\\amalg\\{\\infty'\\}))\\cup(\\{a_1,\\ldots,a_k\\}\\times\\{\\infty\\})$ whose new vertices lie in $C_0$, agreeing exactly with $U_{k-1}$. The base is $U_0$. At $a=a_k$, the lower link of the new vertex $(a,\\infty)$ is $M=(A_{\\leq a}\\times B)\\cup(A_{<a}\\times\\{\\infty\\})$ and its upper link is $T=A_{\\geq a}\\times\\{\\infty'\\}$. Every new chain is a chain of $M$, then the new vertex, then a chain of $T$. Consequently the prescribed boundary is exactly a diagram $v:N(M)\\to C_{0,/F|_{N(A_{\\geq a})}}$, and filling it is exactly a cocone on $v$ in this join slice. This identification is obtained degreewise by concatenating the indicated three chains; all faces and degeneracies preserve the concatenation. The least element of $A_{\\geq a}$ is $a$, so initial-poset slice restriction supplies a trivial Kan fibration $r:C_{0,/F|_{N(A_{\\geq a})}}\\to R_{F(a)}$.",
+   "uses": [
+    "lem-coef-filtered-poset-cone-test",
+    "lem-coef-initial-poset-slice-restriction",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, proof (a), construction of Q_k and M; Remark 5.3.1.12 and dual Proposition 2.1.2.5; read online, archive WANTED."
+   }
+  },
+  {
+   "text": "The simplicial set $N(M)$ is $\\kappa$-small. For $\\kappa=\\aleph_0$ both $A$ and $B$ are finite, and a nondegenerate chain has bounded length. For uncountable $\\kappa$, $|M|<\\kappa$ and its finite chains form a union over countably many lengths of sets of cardinality less than $\\kappa$; regularity gives the bound. By Step 3, $R_{F(a)}$ is $\\kappa$-filtered, so $rv$ has a cocone on $N(M)^{\\triangleright}$. Lift it through $r$, fixing $N(M)$, using the arbitrary-boundary clause of initial-poset slice restriction. Its cone vertex has source in $C_0$, and the chain identification in Step 5 gives exactly $U_k$. This proves the induction. For $B=\\varnothing$ the same argument starts with empty lower link at the first vertex and uses nonemptiness of $R_{F(a_1)}$. At $k=n$ the row at $\\infty$ and its transformations from the $B$ rows, with their compatibility to $F$, give a cocone on the original diagram $N(B)\\to D$. The poset-cone test proves that $D$ is $\\kappa$-filtered.",
+   "uses": [
+    "lem-coef-initial-poset-slice-restriction",
+    "lem-coef-filtered-poset-cone-test",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, proof (a), completion of the vertex insertion induction; read online, archive WANTED."
+   }
+  },
+  {
+   "text": "Fix $a\\in A$ and an object $d=(R\\to F(a))$ of $R_{F(a)}$. Let $E=(d\\downarrow e_a)$, the coherent comma category of pairs $(H\\to F,\\,d\\to H(a))$. The source-fixed arrow left fibration classified by the mapping-space functor, pulled back along $e_a$, presents $E$. It is a quasicategory: fill an inner horn in the base $D$ and then lift through this left fibration. On small representatives of $D$ and $R_{F(a)}$ its classifier has a small base and small space values, so transport classification supplies a small representative for $E$. We verify the poset-cone test for $E$, supplying the variation omitted in HTT. Work in the equivalent join-coslice model of the comma data, using the join/cone comparison with its source and boundary fixed. This change of model suffices for the original diagram: apply the coherent inverse comparison to it, construct a cocone there, and precompose the image cocone with the unit natural equivalence on the original boundary. Given $N(B)\\to E$ with $|B|<\\kappa$, carry out the induction of Steps 5-6. For each vertex preceding $a$ in the chosen linear extension, form its lower link and tail slice as in Step 5, choose the cocone of its restriction in the corresponding $R_{F(a_k)}$, and lift it with the lower-link boundary fixed as in Step 6. The prescribed arrows from $d$ concern only the $a$-row, so none of these earlier insertions changes them. At that insertion the data in $E$ give a map $N(B)^{\\triangleleft}\\to R_{F(a)}$ with initial vertex $d$ and boundary the $a$-evaluations of the $B$ rows, including the entire prescribed triangle to $F(a)$. Restriction $r:C_{0,/F|_{N(A_{\\geq a})}}\\to R_{F(a)}$ lifts this map fixing $N(B)$, where the existing map is the restriction of $v$ in Step 5 to $\\{a\\}\\times B$. Adjoin a vertex $z$ to $M$ lying below exactly the vertices $(a,b)$ and their successors within $M$. Since $a$ is maximal among the first coordinates occurring in $M$ at a $B$ vertex, these successors are again $(a,b')$; there are no edges from $z$ to the previously inserted $\\infty$ vertices. Its nerve is $N(M)\\cup_{N(B)}N(B)^{\\triangleleft}$. The lifted data therefore give a diagram on this union in the tail join slice. This union is $\\kappa$-small, by the same chain count as Step 6. Cone off its restriction to $R_{F(a)}$, then lift that cone through $r$ fixing the union. The resulting new source at $(a,\\infty)$ comes with a map from $d$, and the cone contains the prescribed homotopies $d\\to H_b(a)\\to H_\\infty(a)$ for all $b$, together with all higher compatibilities. For every later vertex $a_k$, form the lower link $M_k=(A_{\\leq a_k}\\times B)\\cup(A_{<a_k}\\times\\{\\infty\\})$ and the tail slice over $F|_{N(A_{\\geq a_k})}$. The rows already constructed give its boundary diagram. Choose a cocone after restriction to $R_{F(a_k)}$ and lift it fixing all of $N(M_k)$. Concatenating the lower-link, new-vertex and tail chains gives the next extension. In particular the existing $a$-row, its map from $d$, and the triangles from that map to every $B$-row evaluation remain fixed; no additional comma data are required at $a_k$. This gives a cocone in $E$ on the original diagram. When $B=\\varnothing$ the augmented lower link at $a$ still contains $z$, so the argument gives an object of $E$. Thus $E$ is $\\kappa$-filtered.",
+   "uses": [
+    "lem-coef-filtered-poset-cone-test",
+    "lem-coef-initial-poset-slice-restriction",
+    "lem-coef-infinity-join-cone-calculus",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, proof (b), explicit expansion of the minor variation establishing filteredness of each evaluation comma category; read online, archive WANTED."
+   }
+  },
+  {
+   "text": "Choose small representatives for $D$, $R_{F(a)}$ and each comma category when invoking the small-index cofinality statements. A small $\\kappa$-filtered quasicategory is weakly contractible by the coslice-colimit theorem. Step 7 therefore makes every comma $(d\\downarrow e_a)$ weakly contractible. The coherent cofinal-comma criterion shows that restriction along $e_a$ preserves and detects colimiting cocones, with the same vertex and the specified legs. Apply it to the tautological source diagram $R_{F(a)}\\to P$, whose cocone to $F(a)$ is colimiting by Steps 2-3. Its restriction is precisely evaluation at $a$ of the source cocone on $D$. Hence every evaluation of that cocone is colimiting. The pointwise-colimit criterion then says that the cocone on $D\\to\\operatorname{Fun}(N(A),P)$ itself is colimiting with apex $F$. No colimit is formed in $C$ or $C_0$.",
+   "uses": [
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-relative-slice-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, proof (b), Theorem 4.1.3.1 and Lemma 5.3.1.20; read online, archive WANTED."
+   }
+  },
+  {
+   "text": "Choose a small quasicategory $I$ and an equivalence $u:I\\to D$, with coherent inverse $v:D\\to I$ and unit $\\eta:1_I\\simeq vu$. For a $\\kappa$-small simplicial set $K$ and diagram $q:K\\to I$, filteredness of $D$ gives a cocone on $uq$. Applying $v$ gives a cocone on $vuq$; precomposing its legs with $\\eta q$ gives a coherent cocone on the original diagram $q$. Thus $I$ is $\\kappa$-filtered. Write $S:D\\to\\operatorname{Fun}(N(A),C_0)$ for the source functor. Restrict the tautological cocone along $u$, giving its specified apex $F$ and source $Su$. For each testing target, restriction along $u$ induces an equivalence of cocone spaces: reindexing along $v$ and whiskering with the unit and counit give an inverse. The mapping-space colimit criterion therefore shows that this reindexed cocone and each of its evaluations remain colimiting. Compose the source functor $I\\to\\operatorname{Fun}(N(A),C_0)$ with postcomposition by the quasi-inverse $h:C_0\\to C$ from Step 1. This defines $G:I\\to\\operatorname{Fun}(N(A),C)$. The coherent natural equivalence $jh\\simeq1_{C_0}$, whiskered with the source functor, composes with the tautological transformation to give $j_*G\\to\\Delta_I F$. Its evaluation cocones differ from those of Step 8 by this natural equivalence. Mapping-space equivalences and the colimit criterion show that they remain colimiting, with their prescribed apex $F(a)$. This constructs the same filtered index, all arrows and all higher compatibility simplices required in the statement.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-relative-slice-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, essential smallness of D and extraction of its filtered presentation; read online, archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-coef-infinity-full-essential-image",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-presheaf-representable-slice-density",
+  "lem-coef-infinity-cofinal-kappa-poset",
+  "lem-coef-compact-relative-cocone-factorization",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-slice-sections",
+  "lem-coef-filtered-poset-cone-test",
+  "lem-coef-initial-poset-slice-restriction",
+  "lem-coef-space-transport-classification",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 5.3.5.15, proof (a)-(b), printed pp.410-411, read online. HTT is not archived in literature/; canonical-slice and relative-comma arguments expanded by Q90."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -105,10 +254,45 @@
    "results": "{\"t\": \"2026-10-16T22:40:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"IndObjectPresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndObjectPresentation\", \"CategoryTheory.Limits.IndObjectPresentation.I\", \"CategoryTheory.Limits.IndObjectPresentation.instSmallCategoryI\", \"CategoryTheory.Limits.IndObjectPresentation.ℐ\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\", \"CategoryTheory.Limits.IndObjectPresentation.F\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda\"], \"digest\": \"b0d72c360c34ca2a\"}",
    "date": "2026-10-16",
    "verdict": "No exact match. Read the returned IndObjectPresentation and IndParallelPairPresentation signatures: their input is an ordinary Category and their presheaves take values in Type; ParallelPair.lean:37-62 and FilteredColimits.lean:140-145. These do not assert coherent finite-poset diagram realization for space-valued presheaves on an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent diagram on a finite poset with values in filtered representable space valued presheaves is a single filtered colimit of diagrams in the original quasicategory",
+   "results": "{\"t\": \"2026-10-16T23:24:05Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent diagram on a finite poset with values in filtered representable space valued presheaves is a single filtered colimit of diagrams in the original quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_I\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.IsFiltered.cocone\"], \"digest\": \"bce466bca8595db0\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. IndObjectPresentation and IndParallelPairPresentation are ordinary Type-valued presheaf constructions (Indization/IndObject.lean:18-48 and ParallelPair.lean:32-62); the nerve functor full-faithfulness results concern strict ordinary categories. None gives coherent space-valued finite-poset diagram realization for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "IndParallelPairPresentation|IsIndObject",
+   "results": "{\"t\": \"2026-10-16T23:24:03Z\", \"tool\": \"grep\", \"query\": \"IndParallelPairPresentation|IsIndObject\", \"sub\": \"CategoryTheory/Limits/Indization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\"], \"digest\": \"7d5f442c48d85205\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. IndObjectPresentation and IndParallelPairPresentation are ordinary Type-valued presheaf constructions (Indization/IndObject.lean:18-48 and ParallelPair.lean:32-62); the nerve functor full-faithfulness results concern strict ordinary categories. None gives coherent space-valued finite-poset diagram realization for arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndObjectPresentation\"",
+   "results": "{\"t\": \"2026-10-16T23:24:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IndObjectPresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndObjectPresentation\", \"CategoryTheory.Limits.IndObjectPresentation.I\", \"CategoryTheory.Limits.IndObjectPresentation.instSmallCategoryI\", \"CategoryTheory.Limits.IndObjectPresentation.ℐ\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\", \"CategoryTheory.Limits.IndObjectPresentation.F\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda\"], \"digest\": \"b0d72c360c34ca2a\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. IndObjectPresentation and IndParallelPairPresentation are ordinary Type-valued presheaf constructions (Indization/IndObject.lean:18-48 and ParallelPair.lean:32-62); the nerve functor full-faithfulness results concern strict ordinary categories. None gives coherent space-valued finite-poset diagram realization for arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite direct diagram in the Ind completion of an infinity category has a common filtered presentation by representable diagrams",
+   "results": "{\"t\": \"2026-10-16T23:25:05Z\", \"tool\": \"leansearch\", \"query\": \"A finite direct diagram in the Ind completion of an infinity category has a common filtered presentation by representable diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndObjectPresentation.mk\", \"CategoryTheory.instHasColimitsOfShapeDiscreteIndOfFinite\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ\", \"CategoryTheory.instPreservesLimitsOfShapeFunctorIndLimOfFinCategoryOfHasLimitsOfShape\"], \"digest\": \"5400bec2371b106f\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. IndObjectPresentation and IndParallelPairPresentation are ordinary Type-valued presheaf constructions (Indization/IndObject.lean:18-48 and ParallelPair.lean:32-62); the nerve functor full-faithfulness results concern strict ordinary categories. None gives coherent space-valued finite-poset diagram realization for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor Ind kappa Fun nerve finite poset C to Fun nerve finite poset Ind kappa C is essentially surjective for quasicategories",
+   "results": "{\"t\": \"2026-10-16T23:25:06Z\", \"tool\": \"leanfinder\", \"query\": \"The functor Ind kappa Fun nerve finite poset C to Fun nerve finite poset Ind kappa C is essentially surjective for quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveFunctor.full\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\"], \"digest\": \"a0af18c897d14242\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. IndObjectPresentation and IndParallelPairPresentation are ordinary Type-valued presheaf constructions (Indization/IndObject.lean:18-48 and ParallelPair.lean:32-62); the nerve functor full-faithfulness results concern strict ordinary categories. None gives coherent space-valued finite-poset diagram realization for arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-kappa-presentability",
@@ -116,5 +300,29 @@
   "group": "Q20"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ind-finite-poset-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved canonical representable-slice density and filteredness inside the proof, then performed the finite-poset vertex induction and wrote out its relative comma variant. Added only the general poset filteredness test and initial-vertex join-slice restriction as statement-only lemmas, with actual logged Mathlib searches and no matches. Checked smallness, empty shapes, exact boundary data, all cited statements and absence of dependency cycles.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction: auxiliary presentable-category infrastructure reached through the retained finite-adjunction-realization, enrichment, presentable-adjoint and saturated-arrow ancestry. The Ind argument is a supporting HTT lemma, not text explicitly in that blueprint paragraph. Supporting finite-poset diagram realization for the Ind construction, used to construct pushouts; HTT Proposition 5.3.5.15. Steps 1-3 provide the canonical slices, Steps 4-7 realize the auxiliary HTT finite-poset construction, and Steps 8-9 yield its simultaneous realization. This is supporting infrastructure for the retained derived-adjunction ancestry; it does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic equivalence and cocone mapping-space calculus needed to reindex the final coherent presentation; no step of the biduality unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-ea47ee218",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-ea47ee218 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, both new nodes and every cited statement in full. HTT is not in literature/, so I checked the online-sourced, agent-written proof (with its WANTED line) against my own knowledge of HTT 5.3.5.15, 5.3.1.12 and 2.1.2.5. The item statement is unchanged against the side DAG and matches HTT 5.3.5.15 essential surjectivity: finite poset A, infinite regular kappa including aleph-0, no colimits in C. Steps 1, 3, 4, 8 and 9 use only what the cited statements say. I checked the product-order links in Step 5 myself: the lower link is A<=a x B together with A<a x {inf}, the upper link is A>=a x {inf'}, M lies entirely below T, and the nerve splits as stated. Step 6 is right on chain counts and on the empty B case. Step 7 is right on comma orientation, the vertex z (its successors in M are exactly {a} x B) and preservation of the a-row. The new node lem-coef-filtered-poset-cone-test is true (HTT Remark 5.3.1.12) and is neither a duplicate nor a restatement. The new node lem-coef-initial-poset-slice-restriction is true: the least-element inclusion is left anodyne and restricting the source to E0 is a base change. It is not a duplicate; I compared it with initial-evaluation-trivial-fibration, slice-right-fibration and marked-initial-vertex. Small cases checked: B empty, T a point, E0 empty, kappa = aleph-0. FIX (C5): Step 2 re-proved the statement of the existing same-unit node lem-coef-infinity-presheaf-representable-slice-density. I rewrote Step 2 to cite it, together with slice-right-fibration for the quasicategory claim, and dropped coherent-nerve-comparison from proof_deps because only the old Step 2 used it. The closure has 452 nodes and no cycle; in the side DAG the density node's closure contains neither the item nor its parent. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, generic, for Step 9. No node dropped, no statement changed.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -3,42 +3,168 @@
  "blueprint": {
   "is": "lem-pur-coprojection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Co-projection for a closed immersion",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $i:Z\\hookrightarrow W$ be a\nclosed immersion, let\n$K$ be an object on $W$ and $L$ an invertible object on $W$. Then\nthe canonical co-projection\n\n$$\nRi^!(K\\otimes^L_{\\Lambda_W}L)\\xrightarrow{\\ \\sim\\ }Ri^!K\\otimes^L_{\\Lambda_Z}Li^*L\n$$\n\nis an isomorphism.",
+ "statement": "In the finite-coefficient purity setting [def-pur-conventions], put $\\Lambda=A_{E,n}$ and let $i:Z\\hookrightarrow W$ be a closed immersion of separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Work on the small pro-etale sites [def-weil-pbc-proetale-site]. Let $K\\in D^b_c(W,\\Lambda)$ [def-weil-finite-torsion-constructibility] and let $L$ be tensor-invertible in $D^b_{ctf}(W,\\Lambda)$ [def-weil-finite-tor-amplitude]: there is $M\\in D^b_{ctf}(W,\\Lambda)$ with $L\\otimes^L M\\cong\\Lambda_W$ (and hence $M\\otimes^L L\\cong\\Lambda_W$ by symmetry), as in [pur9-cs-def-invertible]. Use the derived operations [def-weil-derived-pullback-tensor-hom] and the constructible exceptional inverse image [def-weil-exceptional-inverse-image]. Then the canonical co-projection is an isomorphism\n$$\n Ri^!(K\\otimes^L_{\\Lambda_W}L)\\xrightarrow{\\ \\sim\\ }\n Ri^!K\\otimes^L_{\\Lambda_Z}Li^*L.\n$$\nHere the canonical map is the comparison of the right adjoints induced by the projection isomorphism $Ri_!(-)\\otimes^L M\\cong Ri_!(-\\otimes^L Li^*M)$, whose underlying projection transformation is [def-exchange-projection].\nNo unrestricted ambient pro-etale exceptional adjunction is asserted.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-coprojection.md",
   "place": "node lem-pur-coprojection, order 2006"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-tensor",
+  "def-weil-scheme-morphism-properties",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "pur9-cs-def-invertible",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-exchange-projection"
  ],
  "proof": [
   {
-   "text": "For a test object $A$ on $Z$, tensor-Hom adjunction, the projection\nformula of [def-exchange-projection] for $Ri_!$, and the inverse\nof $L$ identify maps $A\\to Ri^!(K\\otimes^LL)$ with maps\n$Ri_!(A\\otimes^LLi^*L^{-1})\\to K$; Yoneda gives the assertion.",
+   "text": "Write $P=Li^*$, $F=Ri_!$, $G=Ri^!$, and write $\\otimes$ for the finite derived tensor. Choose the inverse $M$ in the statement. By [lem-sf-pullback-tor-amplitude], $PL,PM$ lie in $D^b_{ctf}(Z,\\Lambda)$. By the tensor and unit compatibility of [lem-pur-derived-pullback-tensor-iso], the images of $M\\otimes L\\cong\\Lambda_W$ and $L\\otimes M\\cong\\Lambda_W$ give $PM\\otimes PL\\cong\\Lambda_Z$ and $PL\\otimes PM\\cong\\Lambda_Z$. By [lem-sf-tensor-ctf], tensoring a bounded constructible complex by any of $L,M,PL,PM$ stays bounded constructible. Thus all the tensor functors used below have the stated constructible domains.",
    "uses": [
-    "def-exchange-projection"
+    "lem-sf-pullback-tor-amplitude",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-sf-tensor-ctf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
+    "place": "Hom calculation and final Yoneda paragraph; expanded categorical argument"
+   }
+  },
+  {
+   "text": "The total tensor and its derived descent have the closed symmetric monoidal structure of [lem-coef-sheaf-flat-model], with the ordinary sheaf derived tensor used here. The associator and the two inverse isomorphisms give natural isomorphisms $(B\\otimes M)\\otimes L\\cong B$ and $(B\\otimes L)\\otimes M\\cong B$. Thus $T_M=(-\\otimes M)$ and $T_L=(-\\otimes L)$ are quasi-inverse functors; the same holds for $T_{PM},T_{PL}$ on $Z$. Apply [lem-weil-pbc-quasi-inverse-adjoint] on $W$ to choose an adjointification; use on $Z$ its pullback under $P$. Concretely the unit and counit on $Z$ are obtained by applying $P$ to those on $W$ and inserting its tensor and unit comparisons; their triangle equations are the images of those on $W$, since those comparisons respect composition and associativity as in [lem-pur-derived-pullback-tensor-iso]. This consistent choice gives natural Hom bijections $\\operatorname{Hom}(B,C\\otimes L)\\cong\\operatorname{Hom}(B\\otimes M,C)$ and their counterparts on $Z$. This cites an adjoint-equivalence theorem, rather than assuming an arbitrary pair of evaluation isomorphisms already satisfies the triangle identities.",
+   "uses": [
+    "lem-coef-sheaf-flat-model",
+    "lem-weil-pbc-quasi-inverse-adjoint",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
+    "place": "Hom calculation and final Yoneda paragraph; expanded categorical argument"
+   }
+  },
+  {
+   "text": "Use the constructible exceptional functor of [def-weil-exceptional-inverse-image]. The adjunction $F\\dashv G$ is the bounded constructible restriction of [thm-sf-ambient-adjoint-class]: every bounded constructible input has etale origin, as explicitly included in that theorem. A finite-dimensional compactification required there exists by [thm-nagata-compactification] and [lem-kun-dimension-finite-type]. We use only this restriction, not an adjunction on all pro-etale complexes. For a constructible pro-etale sheaf, choose its constructible etale representative by [lem-sf-proetale-constructible-origin]. On the etale site, [sbc-thm-finiteness-finite-type] gives its bounded constructible compact-support image. The comparison [lem-sf-class-compact-support-comparison] identifies the exact pro-etale realization of this image with $F$ of the original sheaf, and [lem-sf-proetale-constructible-origin] shows it is bounded constructible. Next use [lem-compact-support-direct-image-triangulated] to apply $F$ to the finite sequence of truncation triangles for any bounded constructible complex. Each triangle adds one shifted bounded constructible sheaf image, and a finite union of their cohomological intervals is bounded. Thus $F$ really is a functor between the bounded constructible categories used in steps 3 and 5. For any $A\\in D^b_c(Z,\\Lambda)$ and $K\\in D^b_c(W,\\Lambda)$, apply the genuine projection-formula theorem [fix-prop-projection-formula] at the finite-Tor object $M$. Together with step 2 and the two exceptional adjunctions it gives\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(A,G(K\\otimes L))\n&\\cong\\operatorname{Hom}_W(FA,K\\otimes L)\\\\\n&\\cong\\operatorname{Hom}_W(FA\\otimes M,K)\\\\\n&\\cong\\operatorname{Hom}_W(F(A\\otimes PM),K)\\\\\n&\\cong\\operatorname{Hom}_Z(A\\otimes PM,GK)\\\\\n&\\cong\\operatorname{Hom}_Z(A,GK\\otimes PL).\n\\end{aligned}\n$$\nAll bijections are natural in $A$ and $K$. The projection theorem is applied with $A$ bounded constructible and $M$ finite-Tor; it is not inferred from the definition of the projection map.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-ambient-adjoint-class",
+    "thm-nagata-compactification",
+    "lem-kun-dimension-finite-type",
+    "fix-prop-projection-formula",
+    "sbc-thm-finiteness-finite-type",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-class-compact-support-comparison",
+    "lem-compact-support-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
+    "place": "Hom calculation and final Yoneda paragraph; expanded categorical argument"
+   }
+  },
+  {
+   "text": "Fix $K$ and put $X=G(K\\otimes L)$ and $Y=GK\\otimes PL$. Both are objects of $D^b_c(Z,\\Lambda)$, by the constructible typing in [def-weil-exceptional-inverse-image] and step 1. By [lem-galois-yoneda-fully-faithful], the natural bijections in step 3 are postcomposition with a unique map $c_K:X\\to Y$. Apply the same statement to the inverse bijections to get $d_K:Y\\to X$. Their composites induce the identity transformations of both representable Hom functors; injectivity of Yoneda gives $d_Kc_K=1_X$ and $c_Kd_K=1_Y$. Therefore $c_K$ is invertible. Naturality in $K$ follows by applying the same injectivity to the naturality squares of the Hom bijections.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
+    "place": "Hom calculation and final Yoneda paragraph; expanded categorical argument"
+   }
+  },
+  {
+   "text": "Identify the canonical map rather than just an unspecified isomorphism. Put $H_1(A)=FA\\otimes M$ and $H_2(A)=F(A\\otimes PM)$. Step 3 supplies adjunctions $H_1\\dashv(K\\mapsto G(K\\otimes L))$ and $H_2\\dashv(K\\mapsto GK\\otimes PL)$. The natural projection isomorphism $H_1\\xrightarrow{\\sim}H_2$ is precisely the finite composite defined in [def-exchange-projection], whose invertibility was supplied by the theorem in step 3. Transport the second Hom bijection across that isomorphism, so that both right functors are now right adjoint to $H_1$. By [det-sp-unique-right-adjoint], the counit-compatible comparison between those right adjoints is unique. Its component at $K$ induces exactly the composite of the five Hom bijections of step 3, hence equals $c_K$ by the uniqueness in step 4. This is the canonical co-projection specified in the statement, and it is an isomorphism by step 4. The direction printed in the blueprint is the right-adjoint comparison for the inverse projection identification, so the comparison in the opposite direction is its inverse.",
+   "uses": [
+    "def-exchange-projection",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
+    "place": "Hom calculation and final Yoneda paragraph; expanded categorical argument"
+   }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection"
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-tensor-ctf",
+  "lem-coef-sheaf-flat-model",
+  "lem-weil-pbc-quasi-inverse-adjoint",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "fix-prop-projection-formula",
+  "sbc-thm-finiteness-finite-type",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-class-compact-support-comparison",
+  "lem-compact-support-direct-image-triangulated",
+  "lem-galois-yoneda-fully-faithful",
+  "def-exchange-projection",
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-coprojection.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
+  "place": "Hom calculation and final Yoneda paragraph; expanded categorical argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to a functor with projection formula commutes with tensoring by an invertible complex of sheaves",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat",
+   "date": "2026-10-17",
+   "verdict": "no match for the pro-etale constructible exceptional co-projection; ordinary sheaf adjoints, tensor adjunction and coproduct coprojections do not state this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory.tensorRight",
+   "results": "1 hits: CategoryTheory.tensorRightAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match for the pro-etale constructible exceptional co-projection; ordinary sheaf adjoints, tensor adjunction and coproduct coprojections do not state this item"
+  },
+  {
+   "tool": "grep",
+   "query": "coprojection|upperShriek|exceptional.*inverse|tensorRightCompIso",
+   "results": "15 hits: Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Cartesian.lean, Mathlib/CategoryTheory/Distributive/Cartesian.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean, Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the pro-etale constructible exceptional co-projection; ordinary sheaf adjoints, tensor adjunction and coproduct coprojections do not state this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image co-projection formula for invertible complexes of sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Hom.inv_app, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, HomologicalComplex₂.total.mapIso_inv, CategoryTheory.ShortComplex.opcyclesIsoX₂_inv",
+   "date": "2026-10-17",
+   "verdict": "no match for the pro-etale constructible exceptional co-projection; ordinary sheaf adjoints, tensor adjunction and coproduct coprojections do not state this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible tensor factor passes through the exceptional inverse image functor for a closed immersion on the small proetale site",
+   "results": "8 hits: Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t, AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom",
+   "date": "2026-10-17",
+   "verdict": "no match for the pro-etale constructible exceptional co-projection; ordinary sheaf adjoints, tensor adjunction and coproduct coprojections do not state this item"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|shriek|exceptional",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the pro-etale constructible exceptional co-projection; ordinary sheaf adjoints, tensor adjunction and coproduct coprojections do not state this item",
+   "subdirectory": "AlgebraicGeometry/Sites"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -71,5 +197,89 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-coprojection"
+ "unit": "sk-lem-coprojection",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-coprojection",
+  "worker": "stage1",
+  "summary": "Expanded the five natural Hom bijections, restricted them to the constructible domain, cited the actual projection theorem, proved representability gives inverse morphisms, and identified the canonical co-projection as the unique counit-compatible right-adjoint comparison. No new nodes. Recorded the implicit-domain correction and etale/pro-etale mismatch of the source Lean in the report.",
+  "blueprint": "Steps 1-2 supply the inverse tensor and restriction used by the unit; step 3 is its five-line Hom calculation; steps 4-5 expand its final naturality, canonical-map and Yoneda sentence. The core lemma does not claim the unit’s separate twist and diagonal consequences.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Checks the finite-Tor domain for the pullback of the two invertible factors; a generic preservation tool, not a replacement of the Hom argument."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Supplies the canonical tensor and unit comparisons needed to restrict an inverse and identify the prescribed projection maps."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Ensures the displayed tensors remain bounded constructible; domain tool for the Hom proof."
+   },
+   {
+    "node": "lem-coef-sheaf-flat-model",
+    "why": "Supplies the symmetric derived tensor structure on the ordinary module-sheaf derived category; only its monoidal structure is used."
+   },
+   {
+    "node": "def-weil-exceptional-inverse-image",
+    "why": "Specifies the constructible functor and its typing, distinguishing it from the unavailable unrestricted pro-etale ambient adjoint."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "The finite constructible Hom adjunction used twice in the unit calculation."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Provides a finite-type compactification to instantiate the finite-level adjunction theorem."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Provides the finite compactification dimension required by that adjunction theorem."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The actual natural compact-support projection isomorphism, missing from the definition cited by the imported proof."
+   },
+   {
+    "node": "sbc-thm-finiteness-finite-type",
+    "why": "Supplies bounded constructibility of compact support for sheaves, extended to bounded complexes by their finite truncation filtration."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies bounded constructible etale representatives and carries the compact-support result to the intrinsic pro-etale category."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Identifies pro-etale compact support on constructible inputs with the realization of the ordinary etale functor, allowing use of the etale finiteness theorem."
+   },
+   {
+    "node": "lem-compact-support-direct-image-triangulated",
+    "why": "Carries the finite cohomology filtration triangles to triangles, extending compact-support finiteness from sheaves to bounded complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-tensor-ctf",
+  "lem-coef-sheaf-flat-model",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "fix-prop-projection-formula",
+  "sbc-thm-finiteness-finite-type",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-class-compact-support-comparison",
+  "lem-compact-support-direct-image-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-3e9e32ffb",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-3e9e32ffb (reviewer sub-agent of L); spot-checked: I read the item's statement and all five proof steps in full, against the main-20261015 blueprint node and proof, the unit sk-lem-coprojection (_section and proof), and the full statements of every stmt/proof dependency. Statement: K in D^b_c contains the unit's D^b_ctf, so the item generalizes the unit. L is invertible in D^b_ctf with a ctf inverse M, which matches the unit (an inverse in D is RHom(L,Λ), which is ctf anyway). Coefficients are A_{E,n} on pro-étale sites, as def-pur-conventions prescribes. The 'separated schemes' hypothesis is the chapter convention and the only citer (lem-pur-immersion-twist) satisfies it. Small cases checked: i=id, Z empty, K=0, L=Λ[r], L=Λ(m)[2m]. Step 1: lem-sf-pullback-tor-amplitude, lem-pur-derived-pullback-tensor-iso and lem-sf-tensor-ctf(i) give the inverse PM and keep every tensor in D^b_c. Step 2: lem-coef-sheaf-flat-model gives the ambient monoidal structure and lem-weil-pbc-quasi-inverse-adjoint gives the tensor adjunctions. Step 3: thm-sf-ambient-adjoint-class(2) applies, since G=ν^*f^×Rν_* is def-weil-exceptional-inverse-image and the inputs are D^b_c of étale origin, by lem-sf-proetale-constructible-origin. FA is in D^b_c by the cited finiteness, comparison and triangle nodes. fix-prop-projection-formula applies with (A in D^b_c(Z), M in D^b_ctf(W)), and the PF direction matches def-exchange-projection. All five Hom bijections match the unit's display. Step 4: Yoneda in D^b_c(Z), with the typing taken from def-weil-exceptional-inverse-image. Step 5: det-sp-unique-right-adjoint identifies the canonical map in the stated direction. The route is the unit's. The tool_uses are accepted as black boxes. No new nodes; no cycle (checked over the full closure); no duplicate found by grep for co-projection, invertible and i^!. No SGA. One inaccuracy, not repaired: the report says source metadata was moved to main-20261015 with blueprint_snapshot added, but source.document still names master (order 2006) and there is no blueprint_snapshot field. The statement text is identical in both snapshots. No fixes written."
+ }
 }
