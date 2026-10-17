@@ -90,10 +90,30 @@
    }
   },
   {
-   "text": "Let $\\alpha:[n]\\to[k]$ have $\\alpha^{\\mathrm{op}}(j)=n_1+\\cdots+n_j$. For the $D$ obtained in step 5, form maps $D\\to C_i$ over $\\rho_i\\alpha$ by its inert block projections followed by $b_i$. Their endpoint composites agree, with the homotopies fixed in step 5, with the maps $D\\to V_j$ obtained from the corresponding source vertex and its map to $V_j$. Thus these maps are a point of the entire incidence limit in [lem-coef-operadic-algebra-presentability], not just a tuple of maps to the colors. Its mapping-space axiom gives\n$$\\operatorname{Map}_Q^\\alpha(D,C)\\simeq\\lim_{\\gamma\\in I_k}\\operatorname{Map}_Q^{\\gamma\\alpha}(D,C_\\gamma).$$\nThe homotopy fiber over that incidence datum is contractible. Hence it supplies an active arrow $a:D\\to C$ together with the identifications of its restrictions with every $b_i$, with contractible choice of all those data. Conversely an arrow $a$ with these restriction identifications supplies exactly the vertex factorizations, junction homotopies, source Segal lift and incidence lift just listed: use the mapping-space equivalences of [lem-coef-infinity-cocartesian-mapping-criterion] to recover each endpoint factorization. These two descriptions are inverse because restriction and extension are inverse equivalences at each of the specified mapping-space and Segal comparisons. This computation also applies to a family of triangles or higher simplices, since the fibers and limits used throughout are homotopy fibers and coherent limits. It therefore computes the full homotopy fiber of $R$, including its higher homotopy, and shows that it is contractible. More explicitly, forget the successive choices in reverse order of construction: first the incidence lift, then the source lift, then the junction data, and finally the endpoint factorizations. Each forgetful map has the contractible homotopy fibers described in steps 4-6. Apply [lem-coef-spaces-homotopy-fiber-detection] at each stage, comparing the forgetful map to the identity of its base, to make it an equivalence. Their composite identifies the entire space of lifting data with a point. This justifies the assertion about successive contractible choices without requiring the forgetful maps to be fibrations.",
+   "text": "Let $\\alpha:[n]\\to[k]$ be the active map with $\\alpha^{\\mathrm{op}}(j)=n_1+\\cdots+n_j$. For $D$ from step 5, take the block maps $b_i$, and the vertex maps induced by the endpoint factorizations of step 4 and the junction homotopies of step 5. These are exactly a compatible block-and-vertex datum for [lem-coef-operadic-block-incidence-lifting]. Its comparison identifies maps $D\\to C$ over $\\alpha$ with the homotopy limit retaining these endpoint compatibilities. The fiber over our specified datum is therefore contractible; it supplies $a:D\\to C$ with its incidence identifications. This invocation uses the whole incidence diagram, including its vertex objects, and includes zero-length blocks.",
    "uses": [
-    "lem-coef-operadic-algebra-presentability",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-operadic-block-incidence-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(iii), 3.1.13(iii); expansion of the incidence/mapping-space part of the product assertion in the proof of E.0.1."
+   }
+  },
+  {
+   "text": "Let $L(b)$ be the coherent lifting space of [lem-coef-operadic-operation-lifting-fiber] for the fixed tuple $b=(b_i)$. The endpoint factorizations in step 4, junctions and source lift in step 5, and incidence lift in step 6 are precisely its successive data. The cited comparison gives $L(b)\\simeq\\operatorname{hofib}_b(R)$ on the full spaces, and is compatible with parameter simplices. In particular it supplies the restriction/extension identification of the full homotopy fiber, including coherent triangles and higher homotopies, without replacing the groupoids by their components. Its hypotheses hold: $Q$ is small and $Q_{[0]},Q_{[1]}$ are spaces, and the source changes lie over identities.",
+   "uses": [
+    "lem-coef-operadic-operation-lifting-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(iii), 3.1.13(iii); expansion of the incidence/mapping-space part of the product assertion in the proof of E.0.1."
+   }
+  },
+  {
+   "text": "Forget in reverse order the incidence lift, source lift, junction data, and endpoint factorizations in $L(b)$. At each stage the homotopy fiber over every fixed remaining datum is the contractible choice space established in steps 4-6. For each forgetful map $p:A\\to B$, apply [lem-coef-spaces-homotopy-fiber-detection] with $u=r=p$ and $q=v=\\operatorname{id}_B$: the two fibers are contractible, hence their comparison is an equivalence. Thus $p$ is an equivalence. The finite composite of these maps identifies $L(b)$ with the point of empty lifting data, so step 7 shows $\\operatorname{hofib}_b(R)$ is contractible. All fibers here are homotopy fibers; no fibration hypothesis is used.",
+   "uses": [
     "lem-coef-spaces-homotopy-fiber-detection"
    ],
    "elementary": false,
@@ -130,7 +150,9 @@
   "lem-coef-infinity-cocartesian-mapping-criterion",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-mapping-composition",
-  "lem-coef-spaces-homotopy-fiber-detection"
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-operadic-block-incidence-lifting",
+  "lem-coef-operadic-operation-lifting-fiber"
  ],
  "proof_origin": {
   "by": "agent",
@@ -231,7 +253,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-localization-operation-criterion",
@@ -256,15 +278,15 @@
   "date": "2026-10-17",
   "item": "lem-coef-operadic-operation-segal-product",
   "worker": "stage1",
-  "summary": "Preserved every statement clause. Expanded the erratum product assertion into a coherent restriction map, contractible endpoint gluing, block regrouping of the source Segal equivalence, and lifting through the target incidence mapping-space equivalence. Proved the empty-output case separately; retained nullary blocks, arity grading and map naturality. Reused existing universal mapping and homotopy-fiber nodes; no new nodes or Mathlib leaves. Reran five logged Mathlib searches and read the strict-Segal candidate source.",
-  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: finite-coefficient mapping-complex adjunction before derived inverse limit (current main-20261015 sk-thm-sf-package proof, second paragraph and displayed calculation). This item fills the inert product-decomposition argument inside the existing many-object operad/localization subroute, specifically Erratum E.0.1. Steps 1-2 set up the operation groupoids and restriction, 3 treats the empty tuple, 4-7 expand the product assertion through vertex gluing and incidence, and 8 records grading and naturality. No unit or chapter route changed."
+  "summary": "Repair of the 2026-10-17 return: preserved the statement, Lean record, original steps 1-5 and final two steps. Replaced the 2225-character step 6 with three short steps citing two new statement-only nodes: a fixed-source block/incidence mapping-space comparison and the identification of coherent lifting data with the full restriction fiber. The final successive-contractible-choice argument now explicitly applies the existing homotopy-fiber criterion at each forgetful map. The original proof route and all endpoint, zero-block, grading and naturality clauses are retained.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: finite-coefficient mapping-complex adjunction before derived inverse limit, now in main-20261015 sk-thm-sf-package. The existing many-object-operad/localization subroute uses the product assertion in Gepner–Haugseng Erratum E.0.1. Steps 1-2 set up the operation groupoids and restriction, step 3 proves the empty-output case, steps 4-5 are the retained endpoint/source gluing argument, repaired steps 6-8 make the incidence and full-fiber comparisons explicit via new nodes and apply the existing fiber criterion, and steps 9-10 retain equivalence detection, grading and naturality. No chapter or unit route changes."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q12-6e5703f38",
-  "group": "Q12",
+  "reviewer": "NT-cc-Q115-2bd7c7a94",
+  "group": "Q115",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-6e5703f38 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full. Source: Gepner–Haugseng arXiv:1312.3178, which I read from the PDF because the HTML page has no appendices. In Appendix E, the proof of Cor. E.0.1 says 'as M[0] is a space we have an equivalence M_triv,act/C ≃ ∏_i M_triv,act/C_i', with M[0] and M[1] spaces. The preceding paragraph shows that source changes lie over identities. Definition 3.1.13 (i)–(iii) matches lem-coef-operadic-algebra-presentability (i)–(iii). The statement is faithful and nothing is weakened. I checked it independently: the Segal regrouping plus the incidence limit leave a contractible based-path gluing at the inner vertices. I tested k=0 (only n=0 is possible; Op(C) is the homotopy fiber of the identity), k=1, all-nullary blocks, the block pattern (0,2,0), Q=Δ^op (endpoint-preserving maps correspond to arity tuples), Δ_X^op with non-discrete X, and an empty right-hand side. In step 2, ρ_iα=β_iσ_i, and the homotopy pullback square's fibers line up over the discrete base. Steps 6 and 7 apply the fiber-detection node with q=v=id in the correct orientation; the empty case is allowed. In step 8, inert-preserving maps keep activity and cocartesian lifts. There are no new nodes. I found no duplicate after an rg search for active-operation, Op and inert-projection nodes and reading 5 near candidates. Every cited statement is in unit sk-prop-sf-biduality-general and def-cbc is a definition, so there is no route departure and no tool_uses. There is no cycle and no SGA. One fault (C1) is repaired in fixes/: step 5 inferred contractible homotopy fibers from postcomposition being an equivalence without a node. It now cites lem-coef-spaces-homotopy-fiber-detection (u=r=postcomposition, q=v=id); proof_deps is unchanged. Also, the report says created.item was changed to the item itself, but the JSON correctly keeps the parent lem-coef-operadic-localization-operation-criterion. That matches blueprint via, so no change is needed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-2bd7c7a94 (reviewer sub-agent of L); spot-checked: Read in full: the item (all 10 steps), both new nodes, and the full statement of every cited node (operadic-algebra-presentability axioms (i)-(iii), cocartesian-mapping-criterion, spaces-homotopy-fiber-detection, infinity-mapping-composition, def-cbc-enhanced-diagrams-cones, def-coef-complete-algebroid). Source: I fetched Gepner–Haugseng arXiv:1312.3178 and read Def. 2.4.1(iii), Def. 3.1.13, the Appendix E paragraph before E.0.1 (source changes lie over identities and are equivalences when M[1] is a space), and the proof of E.0.1 ('as M[0] is a space ... M_triv,act/C ≃ ∏ M_triv,act/C_i'). The item's hypotheses (Q[0] and Q[1] spaces) match the source and nothing is weakened. The item is not a target, so no base-change morphism is involved. Checks: step 2 base identity ρ_iα=β_iσ_i; step 3 k=0 forces n=0, giving a contractible path space; steps 4-5 endpoint and junction choices are contractible homotopy fibres; step 6 uses the block-incidence equivalence; step 7 uses L(b)≃hofib_b(R); step 8 applies fibre detection layer by layer with u=r=p, q=v=id; step 9 shows R is an equivalence, empty case allowed; step 10 covers grading and naturality. Block-incidence is GH 2.4.1(iii) with the edge terms replaced by cocartesian precomposition. It is true and not a restatement; I checked η'β_iσ_i=η_jα, k=1, blocks (0,2,0) and Q=Δ^op. Lifting-fiber gives a layered description of hofib_b(R). It is true, has no contractibility claim and does not depend on the item, so it is not circular. I rg-searched the DAG and read 6 nearby nodes: no duplicates, no cycle, all citations in unit sk-prop-sf-biduality-general, no tool_uses, no SGA. Fix: lem-coef-operadic-block-incidence-lifting uses holim and homotopy fibre but cited def-cbc-enhanced-diagrams-cones only transitively; I added it to the statement and stmt_deps in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

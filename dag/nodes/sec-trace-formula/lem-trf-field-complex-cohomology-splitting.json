@@ -1,0 +1,89 @@
+{
+ "id": "lem-trf-field-complex-cohomology-splitting",
+ "kind": "statement",
+ "title": "Cohomology models and retracts of complexes over a field",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Let $F$ be a field, let $D(F)$ be the derived category of cochain complexes of $F$-vector spaces [def-weil-abstract-derived-category], and let $H^i$ be its cohomology functors [def-weil-derived-category-cohomology-functor]. A homotopy between chain maps $f,g:P\\to Q$ means maps $h^i:P^i\\to Q^{i-1}$ with $f-g=dh+hd$; a homotopy equivalence means chain maps inverse up to such homotopies. For any complex $P$, choosing vector-space complements $Z^i=B^i\\oplus V^i$ and $P^i=Z^i\\oplus T^i$, where $Z^i=\\ker d^i$ and $B^i=\\operatorname{im}d^{i-1}$, gives a homotopy equivalence between $P$ and its zero-differential cohomology complex $H(P)$ with $H(P)^i=H^i(P)$. Every quasi-isomorphism of $F$-complexes is a homotopy equivalence, and the induced map\n$$\\operatorname{Hom}_{D(F)}(P,Q)\\longrightarrow\\prod_{i\\in\\mathbf Z}\\operatorname{Hom}_F(H^i(P),H^i(Q))$$\nis bijective. In particular every object of $D^b_{\\mathrm{fd}}(F)$ [def-weil-point-fd-complexes] is isomorphic to a bounded finite-dimensional zero-differential complex and is perfect [def-pc-perfect-ring-complex].\n\nLet $P$ be such an object and let $e:P\\to P$ satisfy $e^2=e$. Then $e$ has a splitting $S\\xrightarrow{i}P\\xrightarrow{r}S$ in $D(F)$, with $ri=1_S$, $ir=e$, in which $S$ is represented by the zero-differential complex $\\operatorname{im}H^i(e)$; the complementary summand is represented by $\\ker H^i(e)$. If $v:P\\to P$ commutes with $e$, then under this decomposition $ve$ acts as $rvi$ on $S$ and zero on the complementary summand. For two splittings $(S,i,r)$ and $(S',i',r')$ of the same $e$, the map $r'i:S\\to S'$ is invertible with inverse $ri'$ and satisfies $(r'i)(rvi)=(r'vi')(r'i)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "First sentence: isomorphism of transported perfect complexes and compatible idempotents; field cohomology/retract argument extracted from returned proof Step 2."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-category-cohomology-functor",
+  "def-weil-point-fd-complexes",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of vector spaces is equivalent by cohomology to graded vector spaces; every complex splits into its cohomology and a contractible complex",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, groupCohomologyIsoExt, CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, Rep.standardResolution.extIso, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a field the graded cohomology functor on the derived category is fully faithful and every idempotent splits as graded image and kernel",
+   "results": "8 hits: DerivedCategory.instFullSingleFunctor, DerivedCategory.instFaithfulSingleFunctor, CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CochainComplex.instFullIntSingleFunctor, CategoryTheory.Idempotents.karoubiCochainComplexEquivalence, CochainComplex.IsKInjective.Qh_map_bijective",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every cochain complex over a semisimple ring is homotopy equivalent to its graded cohomology and cohomology is fully faithful on the derived category",
+   "results": "8 hits: HasDerivedCategory.standard, CategoryTheory.InjectiveResolution.homotopyEquiv, CochainComplex.of, CochainComplex.ofHom, CochainComplex.HomComplex, CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CochainComplex.HomComplex.CohomologyClass.toHom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv.toHomologyIso",
+   "results": "1 hits: HomotopyEquiv.toHomologyIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomotopyEquiv",
+   "results": "0 hits: ; loogle: unknown identifier 'HomologicalComplex.HomotopyEquiv'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|homology.*[Ff]aithful|homotopyEquiv.*homology",
+   "results": "3 hits: Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyEquiv|split.*[Cc]omplex|[Cc]omplex.*split|[Ss]emisimple",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-karoubi-independence",
+  "date": "2026-10-17",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "First sentence: isomorphism of transported perfect complexes and compatible idempotents; field cohomology/retract argument extracted from returned proof Step 2.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

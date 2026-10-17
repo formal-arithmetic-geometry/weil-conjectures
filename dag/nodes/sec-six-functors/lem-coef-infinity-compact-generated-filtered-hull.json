@@ -70,13 +70,47 @@
    }
   },
   {
-   "text": "We prove all-colimit preservation with the relative free cocompletion, whose universal property allows the present target $\\mathcal E$. Choose a small collection $R$ of representatives of all $\\kappa$-small colimiting cocones in $C$. Such a collection is small: a $\\kappa$-small simplicial set has fewer than $\\kappa$ nondegenerate simplices, hence, as every simplex is a degeneracy of a unique nondegenerate one and $\\kappa$ is infinite, at most $\\kappa$ simplices in all (for $\\kappa=\\omega$ a finite simplicial set has countably many simplices); so shapes can be represented up to isomorphism by simplicial sets whose simplices form a subset of one fixed set of cardinality $\\kappa$, and $\\kappa\\in\\mathcal U$; the collection of their structures and simplicial maps $K\\to C$ is small because $C$ and $\\kappa$ are small; the possible extensions $K\\times\\Delta^1\\to C$ and apices also form a small set. Use [lem-coef-infinity-relative-colimit-completion] to realize $P_R(C)$ as the replete full subcategory of $\\mathcal P(C)$ local for the maps $s_\\lambda:\\operatorname{colim}_K y p\\to y(a)$ induced by these cocones. For $X\\in\\mathcal P(C)$, the Yoneda evaluation and mapping-space colimit tests identify $\\operatorname{Map}(s_\\lambda,X)$ with\n$$X(a)\\longrightarrow\\lim_{k\\in K^{\\mathrm{op}}}X(p(k)).$$\nBy [lem-coef-infinity-presheaf-ind-criterion], requiring these maps to be equivalences is exactly membership in $I$. Representatives suffice since the property is invariant under equivalence of cocones. Hence $P_R(C)$ and $I$ are the same replete full subcategory of $\\mathcal P(C)$. Every representable is local, since $\\operatorname{Map}_C(-,c)$ takes existing colimits to limits. Thus the generator $j_R=Ly$ identifies with $j:C\\to I$: the reflector fixes an object already in its full reflective subcategory, by the adjunction and the triangle identities. Step 2 shows that $i$ sends every member of $R$ to a colimiting cocone in $\\mathcal E$. The universal property of $P_R(C)$ therefore supplies a functor $T:I\\to\\mathcal E$ preserving all small colimits and satisfying $Tj\\simeq i$.",
+   "text": "Apply [lem-coef-infinity-small-cocone-representatives] to the small quasicategory $C$ of step 2. Its colimiting subfamily gives a small collection $R$ representing all $\\kappa$-small colimiting cocones in $C$, including the empty one. Apply the small-data clause of [lem-coef-infinity-relative-colimit-completion]. It realizes $P_R(C)$ as the full reflective subcategory of $\\mathcal P(C)$ local for $s_\\lambda:\\operatorname{colim}_Kyp\\to y(a)$, for $\\lambda\\in R$, with generator $j_R=Ly$.",
    "uses": [
+    "lem-coef-infinity-small-cocone-representatives",
+    "lem-coef-infinity-relative-colimit-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2 and its proof, printed pp. 412-415; Corollary 5.3.5.4(3), p. 404; Example 5.3.6.8, p. 415. The local-presheaf identification is written out rather than applying Proposition 5.5.1.9 to a nonpresentable ambient category."
+   }
+  },
+  {
+   "text": "For every $X\\in\\mathcal P(C)$, [lem-coef-infinity-presheaf-colimit-locality] identifies locality for $s_\\lambda$ with the comparison $X(a)\\to\\lim_{K^{\\mathrm{op}}}X(p(k))$ being an equivalence, with its specified cocone maps. The representatives from step 4 suffice for all $\\kappa$-small colimiting cocones: pulling a cocone back along an isomorphism of shapes only relabels the comparison and its limiting cone. Since $C$ admits $\\kappa$-small colimits by step 2, [lem-coef-infinity-presheaf-ind-criterion] identifies this condition exactly with membership in $I=\\operatorname{Ind}_\\kappa(C)$. Thus $P_R(C)$ and $I$ have the same objects as replete full subcategories of $\\mathcal P(C)$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-colimit-locality",
+    "lem-coef-infinity-small-cocone-representatives",
+    "lem-coef-infinity-presheaf-ind-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2 and its proof, printed pp. 412-415; Corollary 5.3.5.4(3), p. 404; Example 5.3.6.8, p. 415. The local-presheaf identification is written out rather than applying Proposition 5.5.1.9 to a nonpresentable ambient category."
+   }
+  },
+  {
+   "text": "Every representable $y(c)$ is local by the last clause of [lem-coef-infinity-presheaf-colimit-locality], since each member of $R$ is colimiting in $C$. Let $J:I\\hookrightarrow\\mathcal P(C)$ be inclusion. For $z\\in I$, adjunction and fullness give $\\operatorname{Map}_I(Ly(c),z)\\simeq\\operatorname{Map}_{\\mathcal P(C)}(y(c),Jz)\\simeq\\operatorname{Map}_I(j(c),z)$, naturally in $c,z$. The Yoneda full-faithfulness in [lem-coef-infinity-yoneda-presheaf-limits], applied also to $I^{\\mathrm{op}}$, identifies the representing functors coherently: $Ly\\simeq j$. Hence the generator $j_R$ identifies with $j$ under step 5. This is just uniqueness of representing objects, not a new preservation assertion.",
+   "uses": [
+    "lem-coef-infinity-presheaf-colimit-locality",
     "lem-coef-infinity-relative-colimit-completion",
-    "lem-coef-infinity-presheaf-ind-criterion",
-    "lem-coef-infinity-pointwise-yoneda-evaluation",
-    "lem-coef-infinity-yoneda-presheaf-limits",
-    "def-coef-presentable-infinity-category"
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2 and its proof, printed pp. 412-415; Corollary 5.3.5.4(3), p. 404; Example 5.3.6.8, p. 415. The local-presheaf identification is written out rather than applying Proposition 5.5.1.9 to a nonpresentable ambient category."
+   }
+  },
+  {
+   "text": "By step 2, $i:C\\to\\mathcal E$ sends every member of $R$ to a colimiting cocone. The universal property of [lem-coef-infinity-relative-colimit-completion] therefore gives $T:I\\to\\mathcal E$ preserving all small colimits, with $Tj\\simeq i$, using the identification of categories in step 5 and of generators in step 6. Its target hypothesis is existence of all small colimits, which holds for $\\mathcal E$; presentability of $\\mathcal E$ is not needed.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion"
    ],
    "elementary": false,
    "source": {
@@ -99,7 +133,7 @@
    }
   },
   {
-   "text": "The subcategory $\\mathcal A$ lies in $\\mathcal H$ because $Fj\\simeq i$ and $q$ is essentially surjective. For $h\\in\\mathcal H$, choose $x\\in I$ with $h\\simeq F(x)$. A defining small $\\kappa$-filtered Yoneda presentation of $x$, from [lem-coef-ind-kappa-presentability], is sent by $F$ to an ambient presentation of $h$ by objects of $\\mathcal A$. The category $\\mathcal H$ is locally small by fullness. Its filtered colimits are ambient by step 5, and for $a\\in\\mathcal A$ the functor $\\operatorname{Map}_{\\mathcal H}(a,-)$ is the restriction of $\\operatorname{Map}_{\\mathcal E}(a,-)$. Ambient $\\kappa$-compactness from step 2 therefore implies compactness in $\\mathcal H$. Essential smallness of $\\mathcal A$ and these presentations establish exactly the definition of $\\kappa$-accessibility, as well as the stronger ambient presentation required in the statement.",
+   "text": "The subcategory $\\mathcal A$ lies in $\\mathcal H$ because $Fj\\simeq i$ and $q$ is essentially surjective. For $h\\in\\mathcal H$, choose $x\\in I$ with $h\\simeq F(x)$. A defining small $\\kappa$-filtered Yoneda presentation of $x$, from [lem-coef-ind-kappa-presentability], is sent by $F$ to an ambient presentation of $h$ by objects of $\\mathcal A$. The category $\\mathcal H$ is locally small by fullness. Its filtered colimits are ambient by step 8, and for $a\\in\\mathcal A$ the functor $\\operatorname{Map}_{\\mathcal H}(a,-)$ is the restriction of $\\operatorname{Map}_{\\mathcal E}(a,-)$. Ambient $\\kappa$-compactness from step 2 therefore implies compactness in $\\mathcal H$. Essential smallness of $\\mathcal A$ and these presentations establish exactly the definition of $\\kappa$-accessibility, as well as the stronger ambient presentation required in the statement.",
    "uses": [
     "lem-coef-ind-kappa-presentability",
     "def-coef-presentable-infinity-category",
@@ -112,7 +146,7 @@
    }
   },
   {
-   "text": "Finally $G\\subseteq\\mathcal A\\subseteq\\mathcal H$. If $\\mathcal B\\subseteq\\mathcal E$ is any replete full subcategory containing $G$ and closed under ambient small colimits, the induction in step 2 gives $\\mathcal A\\subseteq\\mathcal B$. Each object of $\\mathcal H$ has the small filtered presentation of step 6 with values in $\\mathcal A$, so closure and repleteness give $\\mathcal H\\subseteq\\mathcal B$. This proves minimality. If $G$ is empty, step 1 still adjoins the initial object by the empty colimit; the argument never uses an empty filtered index.",
+   "text": "Finally $G\\subseteq\\mathcal A\\subseteq\\mathcal H$. If $\\mathcal B\\subseteq\\mathcal E$ is any replete full subcategory containing $G$ and closed under ambient small colimits, the induction in step 2 gives $\\mathcal A\\subseteq\\mathcal B$. Each object of $\\mathcal H$ has the small filtered presentation of step 9 with values in $\\mathcal A$, so closure and repleteness give $\\mathcal H\\subseteq\\mathcal B$. This proves minimality. If $G$ is empty, step 1 still adjoins the initial object by the empty colimit; the argument never uses an empty filtered index.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "def-coef-presentable-infinity-category"
@@ -130,9 +164,10 @@
   "lem-coef-compact-small-colimits",
   "lem-coef-ind-kappa-extension",
   "lem-coef-ind-kappa-presentability",
-  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-presheaf-colimit-locality",
   "lem-coef-infinity-presheaf-ind-criterion",
   "lem-coef-infinity-relative-colimit-completion",
+  "lem-coef-infinity-small-cocone-representatives",
   "lem-coef-infinity-small-full-subcategory",
   "lem-coef-infinity-yoneda-presheaf-limits",
   "lem-coef-locally-small-infinity-size-calculus"
@@ -243,7 +278,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-monadic-sifted-presentability",
@@ -256,17 +291,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-compact-generated-filtered-hull",
   "worker": "stage1",
-  "summary": "Repaired the regular-cardinal hypothesis to match HTT, corrected the created-item metadata, and made the ambient-colimit comparison explicit in step 2. Reused existing small-full-subcategory, bounded-colimit size, compact-colimit, Ind, relative cocompletion and presheaf recognition nodes; no new nodes. Wrote the transfinite small closure, full faithful filtered extension, relative-localization proof of all-colimit preservation, ambient presentations and minimality. Checked all citations and empty generators.",
+  "summary": "Q92 repair of the human return: retained the statement and Lean record verbatim, retained the route and original steps 1-3 and 5-7 (with references renumbered), and replaced the 2094-character step 4 by four short steps. Created two statement-only supporting lemmas for bounded coherent-cocone representatives and the coherent Yoneda colimit-relation test. The reflector-on-representables identification is now an explicit elementary representing-object calculation. Re-read HTT 5.3.6.2 and 5.3.5.4, audited every citation and all smallness hypotheses.",
   "blueprint": "Realizes the supporting compact-generation input below prop-coef-integral-exceptional-adjoint, current main-20261015 second proof paragraph (derived coefficient adjunction), through the recorded operadic presentability ancestry. Does not alter the unit or chapter route.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q03-3226b2333",
-  "group": "Q03",
+  "reviewer": "NT-cc-Q92-aecfa7c65",
+  "group": "Q92",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-3226b2333 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the full statements of all 11 cited nodes (all in unit sk-prop-sf-biduality-general apart from the definition def-cbc-enhanced-diagrams-cones). I also read the citer lem-coef-infinity-monadic-sifted-presentability and the main-20261015 ancestor proof of prop-coef-integral-exceptional-adjoint. HTT is not archived, so I checked the cited results against my knowledge of them, not against the printed pages: Cor 5.3.4.15, Cor 5.3.5.4, Props 5.3.5.10-11, Prop 5.3.6.2, Prop 5.4.1.7 and Thm 5.5.1.1 (6)=>(1). The item is true. The second reader changed 'uncountable' to 'infinite regular', which is a strict generalisation: every cited node assumes only infinite regular kappa, the citer uses an uncountable rho, and no target is weakened. Step 1: the size-calculus bounded-colimit clause needs only local smallness, and regularity bounds the stages of the vertices. Step 2: compact-small-colimits plus the mapping-space colimit test. Step 3: the extension and full-faithfulness clauses of ind-kappa-extension need only a locally small target with filtered colimits; the presentable-target clause is correctly not used. Step 4: the local presheaves of relative-colimit-completion are identified with Ind_kappa through pointwise Yoneda and presheaf-ind-criterion, and the universal property allows any cocomplete target. Steps 5-7: F is equivalent to T, closure of H under ambient colimits, accessibility, and minimality. Edge cases checked: empty G, terminal E, E={0<1}, |G|>=kappa. No new nodes, no duplicates (lem-coef-accessible-ind-colimit-extension needs presentable E), no route departure, tool_uses empty, no SGA. One fault fixed: after the generalisation, step 4's smallness sentence ('simplicial sets on sets of size less than kappa') was false for kappa=omega because of degenerate simplices. The fix file rewrites it to say there are at most kappa simplices in all, inside one fixed set of cardinality kappa in U. No other field changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-aecfa7c65 (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, 10 steps; steps 1-3 and 8-10 are the earlier steps renumbered. I read both new nodes, the full statements of all 12 cited nodes, and HTT Prop 5.3.6.2 with its whole proof, pp. 412-415, plus Def 5.3.6.5 and Ex 5.3.6.8 (local copy; HTT is not in literature/, WANTED recorded). Step 4: the colimiting subfamily of the new representatives node gives the small R required by the small-data clause of relative-colimit-completion (S-local presheaves, j_R=Ly), matching HTT p.413. Step 5: the new locality node plus presheaf-ind-criterion; C admits kappa-small colimits by step 2, and criterion (1) is exactly the Ind_kappa definition. Step 6: elementary representing-object argument (adjunction, fullness, Yoneda on I^op), correct. Step 7: universal property with Z=E, which needs only small colimits. Step 8: F≃T by the ind-kappa-extension restriction equivalence. New node lem-coef-infinity-small-cocone-representatives is true: fewer than kappa nondegenerate simplices give at most kappa*aleph0 simplices, so shapes have a small set of carriers and cocones K x Delta^1 -> C into a small C form a small set; holds for kappa=omega and empty K or C. New node lem-coef-infinity-presheaf-colimit-locality is true: checked K=point (precomposition is X(lambda)), K empty (initial presheaf, terminal limit), and the representable clause, which is the colimit Map criterion and matches HTT p.415. Neither node is a duplicate: closest are lem-coef-small-simplicial-diagram-cardinality (a different cardinal bound) and pointwise-yoneda-evaluation (evaluation only); both nodes are strictly smaller than the item. proof_deps equals the union of uses; all cited nodes are in the unit or are definitions; no cycle; no statement weakened; no SGA source; no tool_uses. Missing lean_audit on the new nodes is a maintainer field and not a fault. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.InfinityCompactGeneratedFilteredHull",

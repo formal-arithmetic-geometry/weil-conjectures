@@ -1,0 +1,83 @@
+{
+ "id": "lem-coef-infinity-presheaf-colimit-locality",
+ "kind": "statement",
+ "title": "Presheaf test for a Yoneda colimit relation",
+ "statement": "Use the universes and local smallness of [def-coef-presentable-infinity-category] and the spaces, coherent functors, transformations, mapping spaces and colimits of [def-cbc-enhanced-diagrams-cones]. Let $C$ be a small quasicategory, let $\\mathcal S$ be the infinity category of small spaces, and let $\\mathcal P(C)=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$, with Yoneda $y(c)=\\operatorname{Map}_C(-,c)$. Let $K$ be any small simplicial set and $\\lambda:p\\to\\Delta_Ka$ any coherent cocone in $C$, not necessarily colimiting. The presheaf colimit exists; put $B_\\lambda=\\operatorname{colim}_K(yp)$ and let $s_\\lambda:B_\\lambda\\to y(a)$ be induced by $y\\lambda$. For every $X\\in\\mathcal P(C)$ there are equivalences of spaces, natural coherently in $X$ and the cocone,\n$$\\operatorname{Map}_{\\mathcal P(C)}(y(a),X)\\simeq X(a),\\qquad \\operatorname{Map}_{\\mathcal P(C)}(B_\\lambda,X)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}X(p(k)).$$\nUnder these equivalences precomposition with $s_\\lambda$ is the comparison map $X(a)\\to\\lim_{K^{\\mathrm{op}}}X(p(k))$ whose components are $X(\\lambda_k)$ and whose coherences are supplied by $X\\lambda$. In particular $X$ is local for $s_\\lambda$, meaning that this precomposition map is an equivalence, if and only if that comparison is an equivalence. The empty base is included and its limit is terminal. For $X=y(c)$, if $\\lambda$ is colimiting in $C$, this comparison is an equivalence.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 5.3.6.2, proof of (3), printed pp. 414-415, the mapping-space test for the relation s_alpha; Proposition 5.1.3.1 (Yoneda) and the colimit mapping-space criterion identify the actual comparison, including its coherences. Agent-formulated auxiliary consequence; read the April 9, 2017 HTT text online. Not archived in literature/. No Stacks tag states this infinity-categorical assertion."
+ },
+ "stmt_deps": [
+  "def-coef-presentable-infinity-category",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a presheaf of spaces X and a cocone p to a the map out of colim Yoneda p to Yoneda a is sent by Map into X to X a mapping to the limit X p",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.colimitYonedaHomEquiv_π_apply; CategoryTheory.Limits.IndObjectPresentation.yoneda_isColimit_desc; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom; CategoryTheory.Presheaf.colimitOfRepresentable; AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp; AlgebraicGeometry.PresheafedSpace.colimitPresheafObjIsoComponentwiseLimit_hom_π; AlgebraicGeometry.PresheafedSpace.colimitCocone_ι_app_c; CategoryTheory.Presheaf.isColimitTautologicalCocone. Logged digest 5b1bab17cc4d7d93.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or simplicial-set finiteness, not the stated coherent infinity-categorical assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yoneda, CategoryTheory.Limits.colimit",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.final_of_isTerminal_colimit_comp_yoneda; CategoryTheory.yonedaYonedaColimit; CategoryTheory.yonedaYonedaColimit_app_inv; CategoryTheory.CostructuredArrow.toOverCompYonedaColimit; CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered; CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit; CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit; CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.compYonedaColimitIsoColimitCompYoneda. Logged digest fde17bef42db6cf7.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or simplicial-set finiteness, not the stated coherent infinity-categorical assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda.*colimit|colimit.*yoneda|coyoneda.*limit",
+   "results": "[grep] OK 25 hit(s); Mathlib/CategoryTheory/Generator/Indization.lean; Mathlib/CategoryTheory/Galois/Prorepresentability.lean; Mathlib/CategoryTheory/Galois/Prorepresentability.lean; Mathlib/CategoryTheory/Galois/Prorepresentability.lean; Mathlib/CategoryTheory/Galois/Prorepresentability.lean; Mathlib/CategoryTheory/Galois/Prorepresentability.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean. Logged digest 9d65ac579d8484dd.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or simplicial-set finiteness, not the stated coherent infinity-categorical assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a space valued presheaf infinity category orthogonality to a map from a colimit of representables is equivalent to preserving that specified cocone as a limit",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Limits.isIndObject_limit_comp_yoneda_comp_colim; CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit; CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit; CategoryTheory.SmallObject.preservesColimit; CategoryTheory.Limits.Cocone.isColimitYonedaEquiv; CategoryTheory.Sieve.forallYonedaIsSheaf_iff_colimit; CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.iso; CategoryTheory.Presheaf.colimitOfRepresentable. Logged digest dc1d4ddd3a5c7265.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or simplicial-set finiteness, not the stated coherent infinity-categorical assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf of spaces is local for the map from a colimit of representables if and only if it sends that cocone to a limit",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.PresheafedSpace.colimitCocone; AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit; CategoryTheory.Presheaf.colimitOfRepresentable; AlgebraicGeometry.PresheafedSpace.colimitCocone_pt; CategoryTheory.Presheaf.isColimitTautologicalCocone; TopCat.Presheaf.isLimitOpensLeEquivGenerate₁; AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc; PresheafOfModules.colimitCocone. Logged digest 1d0b57c2a79a4c23.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or simplicial-set finiteness, not the stated coherent infinity-categorical assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-compact-generated-filtered-hull",
+  "date": "2026-10-17",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph beginning For K in D^b_c(X,R): supporting compact-generation input to the operadic-algebra presentability infrastructure for the coherent finite-coefficient mapping-complex adjunction, through the retained blueprint.from.via chain. This auxiliary compact-hull argument is not text explicitly in that paragraph. Extracted from the compact-hull proof, original step 4: HTT Proposition 5.3.6.2, proof of (3), printed pp. 414-415, the mapping-space test for the relation s_alpha; Proposition 5.1.3.1 (Yoneda) and the colimit mapping-space criterion identify the actual comparison, including its coherences.",
+   "via": [
+    "lem-coef-infinity-compact-generated-filtered-hull",
+    "lem-coef-infinity-monadic-sifted-presentability",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
