@@ -345,5 +345,30 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-32ebe305e (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and its report, no new nodes, statement unchanged. The statement matches blueprint main-20261015 sk-def-exchange lines 56-64 and generalizes it: unbounded K, any commutative ring Lambda, constant-coefficient module sheaves, any K-injectives. Its last clause recovers the blueprint's bounded below injective case through prop-weil-pbc-kinjective-resolutions-exist (Stacks 070J). The exchange morphism is the def-kun-unbounded-exchange mate, the same construction as Stacks 07A7 (sites-cohomology.tex l.4033). I rederived all six steps. Step 1: the chain map and the counit identity eps_{f',J} f'^{-1}(e) = jH. Step 2: Q composed with u_* is exact, so the gammas are isomorphisms, and phi has the right direction. Step 3: u_*P is K-injective (08BJ hypotheses met), and the Hom chain is exactly the 0FND colimit chain collapsed at K-injective targets with exact G; the inverse image of gamma Q(a) is Q(eps u^{-1}a) phi_N. Step 4: the descent formula of localization-universal-property clause (2) with the composite phis gives B = g'^{-1}(s^{-1})(phi^{g'}_I)^{-1}Q(H)beta. Step 5: the other side has the same transpose, since t^{-1}Q(j) = g'^{-1}(s^{-1})(phi^{g'}_I)^{-1}. Step 6: cancelling the isomorphisms gives choice independence. Small cases checked: Lambda=0 and empty schemes, the identity square, acyclic K, unbounded K. No duplicate: I compared the abelian D+ termwise, replacement, injective-representative, unbounded-agrees, forget-coefficients and transport nodes. The three declared tool uses (def-kun-unbounded-exchange, lem-weil-pbc-kinjective-total-derived, prop-weil-pbc-kinjective-resolutions-exist) are accepted. One fault, C8: step 1 cites lem-weil-pbc-underived-exchange-module-linear (unit sk-thm-p1, split, not closed) without declaring it, and the report wrongly calls it on-route. The unit's key node sk-def-exchange already has this node in its accepted tool_uses, so I added it to split_report.tool_uses in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-derived-exchange-module-termwise.json and accept it; nothing else changed. A minor accepted point is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedExchangeModuleTermwise",
+  "declaration": "AlgebraicGeometry.Etale.derivedExchangeModuleTermwise",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleExchangeDirectImageIso",
+   "AlgebraicGeometry.Etale.moduleExchangeReplacementIso",
+   "AlgebraicGeometry.Etale.moduleExchangeRepresentativeMap",
+   "AlgebraicGeometry.Etale.derivedExchangeModuleTermwise"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedExchangeModuleTermwise.lean",
+  "statement": "theorem derivedExchangeModuleTermwise (Λ : Type (u + 1)) [CommRing Λ] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (K : DerivedCategoryModule Λ X) (I : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) [I.IsKInjective] (s : K ≅ DerivedCategory.Q.obj I) (J : CochainComplex (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) [J.IsKInjective] (j : (((g')^*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso j] : ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.inv.app ((((f)_*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (.up ℤ)).obj I) ≫ (D((g)^*[ModuleCat.{u + 1} Λ])).map (moduleExchangeDirectImageIso Λ f I s).hom ≫ (exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K = DerivedCategory.Q.map (moduleExchangeRepresentativeMap Λ sq I j) ≫ (moduleExchangeDirectImageIso Λ f' J (moduleExchangeReplacementIso Λ g' s j)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three real-data auxiliary definitions spell out the node’s chi, t and e from existing canonical comparisons and the existing underived mate. The theorem uses exactDerivedBaseChangeMap of def-kun-unbounded-exchange, without boundedness or inverse-image K-injectivity assumptions. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5c158158",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node and all 7 stmt_deps: the square is ChosenCartesianSquare/CommSq; the exchange map is exactDerivedBaseChangeMap (mateEquiv of the descended squareUpperStarIso); the termwise map is baseChangeMap (mate of squareUpperStarIso); the direct-image comparison is rightDerivedFunctorObjQIso, the canonical inverse of the derived-functor unit; the inverse-image comparison mapDerivedCategoryFactors and the order of t match the node; the equation's two sides agree. No boundedness assumption and no K-injectivity of g'^-1 I; Lambda : Type (u+1) is the recorded DerivedCategoryModule convention. Edge cases (Lambda=0, empty schemes, unbounded complexes) are covered. #print axioms: the three helper definitions are sorry-free and only the theorem uses sorry. The recorded lean.statement matches the file verbatim, all declarations exist, and the four new names do not occur elsewhere. The delivery changes only the item node's lean field, and the dependency copies are unchanged. nt_compile.py on the snapshot module gives rc 0 and no errors; a deliberately broken copy confirmed the tool reports faults. The report has a real Worker report and a Second reading by Q32; the latter is an explicitly labelled self-check, which is substantive and accepted. No blocking findings."
  }
 }

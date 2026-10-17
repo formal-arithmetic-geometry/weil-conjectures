@@ -313,5 +313,27 @@
   "group": "Q133",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-0ced0d337 (reviewer sub-agent of L); spot-checked: I read the item in full: statement, 3 steps, searches and blueprint fields. The mathematics is correct, and there are no new nodes. Statement: every morphism type checks. Both sides go from FS⊗(FT⊗FP) to N'. λ=Φ^{-1}((1⊗e_N)μ^{-1}) is well defined. The hypotheses are only a bifunctor ⊗, a natural iso μ and an adjunction normalized by Φ(h)=e∘F(h); the statement is not weakened. Step 1: Φ=Ψ^{-1} of lem-weil-pbc-adjunction-of-natural-bijection, whose statement gives Ψ^{-1}(b)=ε∘F(b) and counit naturality; then e_{N'}FG(g)=g e_B. Step 2: μ-naturality at (1_S,f) and F(1)=1, then cancelling μ^{-1}μ, gives g(1⊗e_N)(1⊗Ff); this uses only the category laws of def-nagata-category. Step 3: bifunctoriality gives g(1⊗f^♯) with no rebracketing. All three steps are elementary, and proof_deps equals the union of the step uses. Edge cases checked: identity adjunction on (Set,×), where both sides are (s,(t,p))↦g(s,f(t,p)); the terminal category; and noninvertible λ or counit, which the proof never inverts. The citer lem-coef-derived-system-evaluation-calculus step 16 uses the item with F=R, G=L, S=LK, which matches the statement. Duplicate search: rg over dag/nodes found only the sibling lem-coef-closed-adjunction-naturality, which is a different statement needing closed structure, and prop-sf-pf-coherence, which is unrelated. The Mathlib searches cover all kinds; Adjunction.map_μ_comp_counit_app_tensor needs monoidal and lax structure, so 'no match' is accepted. Route: both cited nodes are Mathlib leaves; no tool_uses are needed. FIX: the report says the source was moved to Tag 0037, but the delivered `source` still cites derived.tex Tag 0FND as 'the closed monoidal consequence'. I read Tag 0FND (line 9517ff); it states only a derived Hom isomorphism. I corrected `source` to categories.tex Tag 0037 (definition-adjoint), lines 3343–3383, where item (3) gives α=ε∘u(β). The fix is in fixes/dag/nodes/sec-six-functors/lem-coef-monoidal-adjunction-parameter-composition.json; only `source` changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TensorParameterComposition",
+  "declaration": "CategoryTheory.tensorParameterComposition",
+  "declarations": [
+   "CategoryTheory.tensorParameterMate",
+   "CategoryTheory.tensorParameterComposition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TensorParameterComposition.lean",
+  "statement": "theorem tensorParameterComposition {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] (tensorC : C × C ⥤ C) (tensorD : D × D ⥤ D) {F : C ⥤ D} {G : D ⥤ C} (μ : F.prod F ⋙ tensorD ≅ tensorC ⋙ F) (adj : F ⊣ G) (S T P : C) (N N' : D) (f : tensorC.obj (T, P) ⟶ G.obj N) (g : tensorD.obj (F.obj S, N) ⟶ N') : tensorD.map (𝟙 (F.obj S) ×ₘ μ.hom.app (T, P)) ≫ μ.hom.app (S, tensorC.obj (T, P)) ≫ (adj.homEquiv (tensorC.obj (S, tensorC.obj (T, P))) N').symm (tensorC.map (𝟙 S ×ₘ f) ≫ tensorParameterMate tensorC tensorD μ adj S N ≫ G.map g) = tensorD.map (𝟙 (F.obj S) ×ₘ (μ.hom.app (T, P) ≫ F.map f ≫ adj.counit.app N)) ≫ g",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da4aa373a",
+  "group": "NM",
+  "result": "pass",
+  "note": "Each clause matches the Lean: tensors are plain bifunctors, μ : F.prod F ⋙ tensorD ≅ tensorC ⋙ F in the node's direction, Φ = (adj.homEquiv _ _).symm with Φ(h)=F.map h ≫ counit, λ = tensorParameterMate (real canonical transpose with the specified Φ-image), f♯ inlined, bracketing S⊗(T⊗P) kept on both sides; no extra hypotheses; four independent universes, all bound. lean.statement is verbatim the signature; the node copy differs from the landed node only in lean. nt_compile --json (side overlay) compiles clean in 0.7 s; a complete scratch proof in /tmp also compiles, confirming the statement is true as typed. Docstrings carry source and blueprint tags and the three proof steps; theorem only by sorry; no hollow definition; dependencies are the Mathlib leaves Category and Adjunction/homEquiv; my rg found no duplicate. Report has a real Worker report; the Second reading section is the standard 2026-10-17 direct-delivery note. Non-blocking: the landed node's source field still cites Tag 0FND (stage-1 correction not applied, not a stage-2 fault); the downstream user orients μ the other way and will need μ.symm."
  }
 }

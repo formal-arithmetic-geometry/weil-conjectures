@@ -357,5 +357,40 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-be05dbcf7 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node lem-coef-scat-injective-universe-generators and the statement of every cited node in full. I also checked the citer lem-coef-common-chunk-filtered-approximation; it uses the item exactly as stated. HTT is not under literature/: the worker recorded a WANTED line and set proof_origin.by=agent, and I judged the steps against the cited DAG statements. No SGA source is cited. Every cited statement is in the item's unit sk-prop-sf-biduality-general or is a Mathlib leaf or definition, so no tool_uses are needed. The item has no base-change morphism or coefficient category of its own. The statement is unchanged and checked on D empty, D terminal, equal universes and non-monic filtered transitions. Step 1 correctly derives the Bergner model structure: I-inj = W ∩ J-inj and I-cof ∩ W = J-cof, from interval-lifting, cell-stability and the Kan trivial-fibration criterion. Steps 2-11 are a correct bounded small-object argument: an uncountable regular delta in U, an elementwise presentability count, the delta-filtered stage factorization for right lifting, Fubini and copower preservation, and a canonical universe comparison by the degreewise category presentation. The new node is the true bounded-generation input (Beke/HTT A.2.8.3 with U-small representatives). It is self-contained and statement-only, and it is not a restatement of the item. It is not a duplicate: lem-coef-enriched-diagram-size-generation needs a simplicially tensored category and a fixed universe, and accessible-small-object-factorization, small-right-lifting-accessibility and finite-pattern-universe-comparison state different things. Fix (C4): Step 4 credited lem-coef-combinatorial-injective-diagram-model with pointwise diagram colimits, which its statement does not say. I replaced this with a short argument: existence from the model-category cocompleteness, and pointwise computation from the componentwise universal property. I added def-weil-pbc-category-colimit to Step 4's uses (it was already in proof_deps). Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-scat-diagram-factorization-uniform-bound.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScatDiagramFactorizationUniformBound",
+  "declaration": "SSet.Bergner.UniformFactorization.scat_diagram_factorization_uniform_bound",
+  "declarations": [
+   "SSet.Bergner.UniformFactorization.liftCategory",
+   "SSet.Bergner.UniformFactorization.liftMap",
+   "SSet.Bergner.UniformFactorization.inclusion",
+   "SSet.Bergner.UniformFactorization.cofibrations",
+   "SSet.Bergner.UniformFactorization.trivialCofibrations",
+   "SSet.Bergner.UniformFactorization.diagramData",
+   "SSet.Bergner.UniformFactorization.generatorBounds",
+   "SSet.Bergner.UniformFactorization.bound",
+   "SSet.Bergner.UniformFactorization.Factorizations",
+   "SSet.Bergner.UniformFactorization.PreservesFiltered",
+   "SSet.Bergner.UniformFactorization.diagramInclusion",
+   "SSet.Bergner.UniformFactorization.Compatible",
+   "SSet.Bergner.UniformFactorization.scat_diagram_factorization_uniform_bound"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ScatDiagramFactorizationUniformBound.lean",
+  "statement": "theorem scat_diagram_factorization_uniform_bound (D : Type u) [SmallCategory D] : ∃ (_ : Fact (bound D).IsRegular) (F : Factorizations.{u, v} D) (G : Factorizations.{u, max v w} D), PreservesFiltered F (bound D) ∧ PreservesFiltered G (bound D) ∧ Nonempty (Compatible F.cofibration G.cofibration (diagramInclusion.{u, v, w} D)) ∧ Nonempty (Compatible F.fibration G.fibration (diagramInclusion.{u, v, w} D))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The regular cardinal is the explicit base-universe infimum of bounded-generator ranks; it has no larger-universe parameter. The theorem provides both factorization systems in arbitrary nested containing universes with preservation and natural comparison of both legs. All helper constructions are real data belonging to the node; SCat, Bergner generating maps, DK equivalences and functorial-factorization records are the recorded dependency/Mathlib notions.",
+  "fixed_by": "NT-stage2-cc-7e70e37a7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e70e37a7",
+  "group": "Q57",
+  "result": "fix",
+  "note": "Clause-by-clause match against the node: U-small D; SCat.{max u v} / SCat.{max u v w} for nested universes, including equal ones; objectwise I.rlp.llp and I.rlp.llp ⊓ dwyerKanEquivalences as the injective left classes, with their rlp as trivial fibrations / fibrations; Mathlib FunctorialFactorizationData for both WFS; PreservesFiltered over every J : Type (max u v) with IsCardinalFiltered (fewer-than-δ-arrows tests); Compatible natural isos with both triangle equations through a real ULift inclusion (liftBundle cannot enlarge SCat.{u}). δ = bound D = sInf generatorBounds D is a named base-universe cardinal; I accept this as the Lean form of 'same δ in every V' and judge it provable. Edge cases checked: D empty, D = {*}, v = 0/w = 0, non-monic transitions. No hollow defs, one sorry, docstrings OK, statement verbatim, node changed only in lean. FIX (H8): theorem docstring Step 3's loose 'small subdiagram' transfer argument replaced by an exact derivation (S_I ⊆ sat_U(S) by the retract argument; ι preserves U-small colimits (step 11); hence sat_V(ιS) = L_V). Statement unchanged, so no record fix. nt_compile.py: delivered and fixed modules both exit 0, no errors. Parallel Q10 delivery of this item has not landed (side clone lean null)."
  }
 }

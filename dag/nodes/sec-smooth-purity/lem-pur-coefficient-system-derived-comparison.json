@@ -24,7 +24,9 @@
   "def-weil-pbc-site-comparison-morphism",
   "thm-weil-pbc-site-comparison",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "def-weil-pbc-algebraic-inverse-image"
  ],
  "proof": [
   {
@@ -482,5 +484,34 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-57e3d5b58 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 13 steps and the statement of all 24 cited nodes. Against the source: Zheng p.21 (Construction 4.1) and p.23 (Lemma 4.10, (4.10.1)) match the statement after reindexing Λ_n=O/m^{n+1} to A_{n+1}, with the same hypotheses (λ a non-zero-divisor, O complete). The base-change map u_A^* is Zheng's f^{N*}. The item's 'normalized' (every m≥n) is equivalent to Zheng's weak normalization (4.12.2) on p.24. Nothing is weakened. The delivery creates no new nodes, so there are no duplicate or restated splits. Confirmed source error on Zheng p.24: the claim that e_n^{-1} of ∏e_{n*}I(n) is injective is false (for k[[t]], k is not an injective k[t]/t^2-module). The item does not use it; step 5 uses Zheng's own left-adjoint Hom chain instead. I recomputed both unit/counit identities in step 6. Steps 10 and 12 use only full faithfulness on D^+, and step 12 correctly handles the unbounded derived tensor C_mn N_m (infinite Tor dimension, e.g. for k[[t]]). The unit sk-def-sf-operations has no uses and no steps. I accept all declared tool_uses, which are generic Stacks-type machinery plus thm-weil-pbc-site-comparison. Two repairable faults, both fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-coefficient-system-derived-comparison.json: (1) step 3 cited a derived-only tensor-pullback theorem for a strict termwise isomorphism; I added the elementary argument that P⊗A_q is the cokernel of λ^q and u^{-1} is exact. (2) Step 13 silently identified the constant sheaf (A_n) with the theorem's ring Λ_{T,Proet}=(Cont(π0(|W|),Λ))^#; I added the argument that the two presheaves have the same sheafification and cited def-weil-pbc-proetale-modules and def-weil-pbc-sheafification. The statement is unchanged and no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientSystemDerivedComparison",
+  "declaration": "SheafOfModules.coefficientSystemDerivedComparison",
+  "declarations": [
+   "SheafOfModules.coefficientUnderlying",
+   "SheafOfModules.coefficientConstantSection",
+   "SheafOfModules.coefficientRestrictionUnderlying",
+   "SheafOfModules.CoefficientDerivedImage",
+   "SheafOfModules.CoefficientSystemOrdinaryImage",
+   "SheafOfModules.IsNormalizedCoefficientSystem",
+   "SheafOfModules.CoefficientSystemDerivedImage",
+   "SheafOfModules.coefficientSystemDerivedComparison"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientSystemDerivedComparison.lean",
+  "statement": "theorem coefficientSystemDerivedComparison [PreservesFiniteLimits L] (hregular : ∀ x : O, ell * x = 0 → x = 0) [IsAdicComplete (Ideal.span ({ell} : Set O)) O] : ∃ (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj) (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell)) (PX : CoefficientEvaluationDerivedPackage (J := K) (O := O) (ell := ell)), Nonempty (CoefficientSystemDerivedImage O ell L V adj S PY PX)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical ordinary geometric lifts, universal total derived images, evaluated unit/counit and quotient mate equations, and bounded-below origin/normalization. Reuses the recorded strict CoefficientSystem and CoefficientEvaluationDerivedPackage; n is the positive exponent n+1. Auxiliary structures specify conclusions, not additional assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aece971b4",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, report, module, dependency packages (CoefficientEvaluationDerivedPackage, AlgebraicInverseImage, pro-etale comparison). All hypotheses (PreservesFiniteLimits L, hregular, IsAdicComplete) and every conclusion clause (u_A^* ⊣ Ru_{A,*} via K-injectives, e_n comparisons with unit/counit equations, transition squares, derived tensor compatibility, D+ origin counit iso, bounded below, normalization preserved) match the node with correct directions; existential packages are pinned by universal properties and normalization equations, so not hollow. Universes independent and bound; n is exponent n+1. stmt_deps additions (evaluation lemma, algebraic inverse image) justified, acyclic. lean.statement verbatim; 8 declarations present with source/blueprint docstrings; proof sorry. nt_compile.py on snapshot: exit 0, 45.3 s, no errors. Minor, not blocking: nu_T clause is an application remark, not a separate corollary; docstring summarizes node step 13 briefly; second reading is self-review."
  }
 }

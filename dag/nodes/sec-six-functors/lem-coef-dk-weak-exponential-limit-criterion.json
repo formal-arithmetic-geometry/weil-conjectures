@@ -297,5 +297,37 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-a276b9a9d (reviewer sub-agent of L); spot-checked: I read the whole item, all 12 steps, both new nodes and the full statements of all 19 dependencies. The item statement is unchanged from the base and live copies, which are still unsplit, and it holds on small cases (K0 empty gives Z(inf) terminal; K={0<inf} gives an equivalence by Yoneda). Steps: (1) Bergner trivial fibrations are I-inj, proved both ways. (2) Projective model from free generators. (3) Strict products preserve DK equivalences (Brown's lemma in the Cartesian Kan model). (4) E(p x D)=E(p) x D, then the Grothendieck node and product-parameter give the multiplication clause. (5) Functorial standardization. (6) Reedy W over U x Y; restriction to the down-closed D_a keeps generators and V(x)- is left Quillen by boundary-collapse. (7) Cell induction proves W(a)(x)L ~ (U(x)L) x Y(a). (8-9) H(a) has the right variance, H->G is a trivial fibration, and naturality on K^op checks out. (10) Weak equivalence via E_a and Yoneda over all U(x)L tests. (11-12) Framed adjunctions, then Yoneda in h sCat and the target-test representative clause. New nodes simplicial-grothendieck-hocolimit (HTT A.3.5.11-13) and scat-framed-diagram-adjunction (Hirschhorn 19.4.4) are true on empty, singleton and discrete/chain tests, strictly smaller than the item, statement-only, and not duplicates (rg over 19.4.x, A.3.5/A.3.6, Grothendieck construction, hocolim/holim and Hirschhorn). The dependency closure has 230 nodes and does not reach the item, so there is no cycle. All dependencies are in unit sk-prop-sf-biduality-general, so no tool_uses are needed or accepted. No SGA is cited. I could not read HTT or Hirschhorn at the cited places: neither is in literature/ (both WANTED) and the reviewer has no network. I checked the mathematics independently instead, and the report's Source error claims about the printed A.3.6.15 proof are unverified against the page. Minor, not blocking: the new nodes record leanfinder, loogle and grep but no LeanSearch, and the grep directory is not recorded. I confirmed absence from Mathlib by my own rg. The report's Files-written header is stale. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DkWeakExponentialLimitCriterion",
+  "declaration": "CategoryTheory.DkWeakExponential.dk_weak_exponential_limit_criterion",
+  "declarations": [
+   "CategoryTheory.DkWeakExponential.multiplication",
+   "CategoryTheory.DkWeakExponential.first",
+   "CategoryTheory.DkWeakExponential.second",
+   "CategoryTheory.DkWeakExponential.IsDerivedColimit",
+   "CategoryTheory.DkWeakExponential.belowTop",
+   "CategoryTheory.DkWeakExponential.intervals",
+   "CategoryTheory.DkWeakExponential.productDiagram",
+   "CategoryTheory.DkWeakExponential.topCocone",
+   "CategoryTheory.DkWeakExponential.topCone",
+   "CategoryTheory.DkWeakExponential.localizedProductCone",
+   "CategoryTheory.DkWeakExponential.IsWeakExponential",
+   "CategoryTheory.DkWeakExponential.dk_weak_exponential_limit_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DkWeakExponentialLimitCriterion.lean",
+  "statement": "theorem dk_weak_exponential_limit_criterion (B : BergnerModelData.{u}) : @CombinatorialModelCategory.{_, _, u} SCat.{u} inferInstance B.model ∧ (∀ (A C : SCat.{u}) (p : A ⟶ C), (B.model.categoryWithFibrations.fibrations p ∧ B.model.categoryWithWeakEquivalences.weakEquivalences p) ↔ Function.Surjective p.obj ∧ ∀ x y : A, trivialFibrations SSet.{u} (p.map x y)) ∧ (∀ (A C : SCat.{u}) (i : A ⟶ C), B.model.categoryWithCofibrations.cofibrations i ↔ ∀ (V W : SCat.{u}) (p : V ⟶ W), (Function.Surjective p.obj ∧ ∀ x y : V, trivialFibrations SSet.{u} (p.map x y)) → HasLiftingProperty i p) ∧ (∀ (J : Type u) [SmallCategory J], ∃ S : ModelCategory (J ⥤ SCat.{u}), S.categoryWithWeakEquivalences.weakEquivalences = B.model.categoryWithWeakEquivalences.weakEquivalences.functorCategory J ∧ S.categoryWithFibrations.fibrations = B.model.categoryWithFibrations.fibrations.functorCategory J) ∧ (∀ (J : Type u) [PartialOrder J] (D : SCat.{u}) (F : J ⥤ SCat.{u}) (c : Cocone F), IsDerivedColimit B c → IsDerivedColimit B (((multiplication B).obj D).mapCocone c)) ∧ (∀ (K : Type u) [PartialOrder K] [OrderTop K] (X : SCat.{u}) (Y : K ⥤ SCat.{u}) (Z : Kᵒᵖ ⥤ SCat.{u}) (P : (intervals K).FullSubcategory ⥤ SCat.{u}) (p : P ⟶ productDiagram B Y Z) (q : P ⟶ (Functor.const _).obj X) (hp : ∀ a : (intervals K).FullSubcategory, IsLimit (localizedProductCone B (p.app a))), (∀ a : K, IsWeakExponential B (p.app ⟨(op a, a), le_refl a⟩) (q.app ⟨(op a, a), le_refl a⟩) (hp ⟨(op a, a), le_refl a⟩)) → IsDerivedColimit B (topCocone Y) → IsDerivedLimit B.model.categoryWithWeakEquivalences.weakEquivalences B.model.categoryWithCofibrations.cofibrations (topCone Z))",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a29d4e37",
+  "group": "Q53",
+  "result": "pass",
+  "note": "All clauses match the node. Model data: BergnerModelData fixes all three classes; trivial-fibration and cofibration tests and the objectwise projective models are correct; trivialFibrations SSet checked by Iff.rfl to be Kan-Quillen J.rlp plus realization weak equivalence. Multiplication: strict D x - on poset cocones, justified by proof step 3. IsDerivedColimit is the exact dual of IsDerivedLimit (projectively cofibrant replacement) and duplicates no existing definition. Criterion: K with OrderTop and K0 = {a != top}, possibly empty; interval full subcategory b <= a; spans as natural transformations with correct variances; homotopy product as an IsLimit binary fan in W.Q at every pair; diagonal weak exponential is the displayed bijection (existential cone equivalent to universal); conclusion is the full injective-replacement IsDerivedLimit. Edge cases checked: K0 empty, empty index poset, empty test hom sets, universe u. Gates: no hollow definitions, only the main theorem is sorry, docstrings and blueprint tags present, statement verbatim, imports per convention, lines <= 100. nt_compile --json on the snapshot module: rc 0, no errors or warnings; an injected bad proof was reported as an error. Not blocking: HTT not readable locally (WANTED); Second reading section is the 2026-10-17 protocol placeholder."
  }
 }

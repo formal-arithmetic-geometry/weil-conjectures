@@ -262,5 +262,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanRelativeNerveLeftFibration",
+  "declaration": "SSet.Enhanced.KanRelativeNerve.kan_relative_nerve_left_fibration",
+  "declarations": [
+   "SSet.Enhanced.KanRelativeNerve.Simplex",
+   "SSet.Enhanced.KanRelativeNerve.restrict",
+   "SSet.Enhanced.KanRelativeNerve.restrict_identity",
+   "SSet.Enhanced.KanRelativeNerve.total",
+   "SSet.Enhanced.KanRelativeNerve.projection",
+   "SSet.Enhanced.KanRelativeNerve.TransportData",
+   "SSet.Enhanced.KanRelativeNerve.IsClassified",
+   "SSet.Enhanced.KanRelativeNerve.kan_relative_nerve_left_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanRelativeNerveLeftFibration.lean",
+  "statement": "theorem kan_relative_nerve_left_fibration : ∀ (C : Type u) [Category.{u} C] (F : C ⥤ SSet.{u}), (∀ c : C, KanComplex (F.obj c)) → leftFibration (projection F) ∧ Quasicategory (total F) ∧ cocartesianFibrationOver (projection F) ∧ (∀ e : Δ[1] ⟶ total F, IsCocartesianEdge (projection F) e) ∧ Nonempty (TransportData F) ∧ ∀ S : SpaceStraightening.Straightening.{u}, SpaceStraightening.IsOrdinaryComparison S C → IsClassified S F",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The finite-subset data are encoded equivalently on all monotone chains, including degeneracies. The final classification clause is for every straightening equipped with the recorded ordinary-base comparison, which normalizes its image; such a straightening exists by the dependency theorem. All fiber and transport maps are normalized by their actual simplex formulas."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-606997bfc",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Read the node (statement and 8 steps), the three statement dependencies with their Lean (EnhancedDiagramsCones, InfinityFibrations/OverSimplicialBases, SpaceValuedStraightening incl. IsOrdinaryComparison/CommaPresentation), SpaceTransportClassification and Mathlib KanComplex/Quasicategory. One commit, 3 files; only the node's lean field changed; statement field verbatim. The all-chains Simplex encoding is in bijection with the node's subset data (checked both round trips); restrict = t'_J. Clauses: leftFibration; cocartesianFibrationOver plus Quasicategory(total), required by the dependency's definition; all edges cocartesian; fiber iso and H_sigma fixed by explicit formulas with the theta coherence; classification for every S with IsOrdinaryComparison, which the dependency supplies and which holds for each such S via the counit and comparison clause. Edge cases: empty C, empty values, n=0, n=1/i=0, theta dropping 0, single universe u. No duplicate definition (own rg searches). No hollow defs; map_id goes through the named sorry theorem restrict_identity. Docstrings, conventions and imports ok. nt_compile.py: rc 0, no errors or warnings. Second-reading section is the launcher placeholder used in 11 landed reports; not a fault. No findings."
  }
 }
