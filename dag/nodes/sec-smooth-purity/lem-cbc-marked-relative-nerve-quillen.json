@@ -26,7 +26,10 @@
   "lem-coef-marked-relative-cartesian-model",
   "lem-coef-simplicial-model-coherent-diagrams",
   "lem-coef-cocartesian-straightening",
-  "lem-coef-marked-cone-straightening-quillen"
+  "lem-coef-marked-cone-straightening-quillen",
+  "lem-coef-kan-relative-nerve-left-fibration",
+  "lem-cbc-relative-nerve-cone-left-comparison",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -447,5 +450,42 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-d3f920319 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 12 cited statements, the unit and chapter records, and HTT 3.2.5.2-3.2.5.21, 3.2.1.14 and §2.2.2 (Q and pi) in full. HTT is not in the project literature, so I used an existing read-only text copy on this machine; the WANTED for an archived HTT stands. The item statement agrees with HTT Definitions 3.2.5.2/.12, Proposition 3.2.5.18(2), Corollary 3.2.5.20 and Proposition 3.2.5.21 in cocartesian variance, with no added cofibrancy hypothesis. Step 2: the explicit left adjoint X x_{N(C)} N(C_/c) matches Example 3.2.5.6 and Remark 3.2.5.8; I checked the left Kan extension colimit, the Hom bijection and the marking. Step 3 follows Lemma 3.2.5.15(2), with the boundary-cell leaf covering arbitrary monomorphisms. Steps 4-6 follow the proof of 3.2.5.18 and Corollary 3.2.5.20: T preserves all weak equivalences because every relative object is cofibrant, two-out-of-three gives the same for L, the mate direction is correct, and conservativity plus localization detection make beta a weak equivalence. In steps 7-8 the base identities come from the cone node and the new node. I checked that alpha_* (smallest element, Remark 3.2.5.10(3)) is the op-conjugate of pi (largest element), the map of 3.2.1.14, so the point clause is true. The new node is HTT Lemma 3.2.5.17(2) taken through the valuewise opposite: true, self-contained, statement-only, strictly smaller than the item and not a restatement of it (B1-B7 pass). It duplicates nothing: lem-coef-space-valued-straightening is the unmarked 3.2.5.17(1) and lem-coef-kan-relative-nerve-left-fibration covers Kan-valued diagrams. Small cases checked: C=[1] with X=Delta^1, terminal C, empty C, and the item's edges over 0->1. The 11 declared tool_uses are generic sec-six-functors foundations, and the unit has no steps they could replace, so I accept them. The fix file is the whole item: in step 4 I added the elementary reason the valuewise opposite is a projective Quillen automorphism and added the point model to its uses; in step 5 I cited lem-coef-quillen-derived-counit-criterion for the counit eps_C being a Dwyer-Kan equivalence. proof_deps is unchanged and no statement changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8607df9da",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, universes, and markings checked; both delivered modules reproduced cleanly via scompile.py.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedRelativeNerveQuillen",
+  "declaration": "SSet.MarkedRelativeNerve.marked_relative_nerve_quillen",
+  "declarations": [
+   "SSet.MarkedRelativeNerve.underlying",
+   "SSet.MarkedRelativeNerve.total",
+   "SSet.MarkedRelativeNerve.value",
+   "SSet.MarkedRelativeNerve.object",
+   "SSet.MarkedRelativeNerve.IsFibrant",
+   "SSet.MarkedRelativeNerve.FibrantDiagrams",
+   "SSet.MarkedRelativeNerve.restriction",
+   "SSet.MarkedRelativeNerve.AdjunctionData",
+   "SSet.MarkedRelativeNerve.DerivedComparison",
+   "SSet.MarkedRelativeNerve.BaseChange",
+   "SSet.MarkedRelativeNerve.PointNormalization",
+   "SSet.MarkedRelativeNerve.totalMap",
+   "SSet.MarkedRelativeNerve.pointFunctor",
+   "SSet.MarkedRelativeNerve.pointDiagramIso",
+   "SSet.MarkedRelativeNerve.Statement",
+   "SSet.MarkedRelativeNerve.marked_relative_nerve_quillen"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedRelativeNerveQuillen.lean",
+  "statement": "theorem marked_relative_nerve_quillen : Nonempty Statement.{u}",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the existing all-chains relative nerve without any Kan hypothesis on its construction, and the normalized marked cone/comma left comparison. Defines real marked values and projection; states exact marking, normalized right functor and adjunction, projective model and Quillen equivalence, the actual right mate with its full infinity-localization normalization, canonical base isomorphisms and identity/composite equations, and normalized point/fiber comparisons. No choice of an object from a mere existence theorem. Repair of H3: the canonical base isomorphism is explicitly fixed on its base string and every chain value, independently of adjunction choices. Point restriction is tied to fiberIso, the cone fiber identification is projection-normalized, and fiber_comparison identifies the actual fiber map with the normalized point mate."
  }
 }
