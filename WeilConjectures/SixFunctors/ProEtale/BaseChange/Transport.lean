@@ -80,7 +80,8 @@ lemma leftDerivedUpperStarComparisonIso_square (sq : CommSq g' f' f g)
     (ModuleCat.{u + 1} Λ) sq (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj (DerivedCategory.Plus.ι.obj M))
   rw [Etale.ι_map_pullbackSquareComparison_hom_app]
   simp only [leftDerivedUpperStarComparisonIso_hom_app, Functor.map_comp, Category.assoc]
-  erw [← (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g').inv.naturality_assoc,
+  erw [
+    ← (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g').inv.naturality_assoc,
     ← (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f').inv.naturality_assoc]
   erw [reassoc_of% hcube]
   erw [hsq]
@@ -107,11 +108,13 @@ theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [Qua
     [QuasiSeparated f'] (sq : IsPullback g' f' f g)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     D(ν^*(Y')[ModuleCat.{u + 1} Λ]).map
-        (DerivedCategory.Plus.ι.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L)) ≫
+        (DerivedCategory.Plus.ι.map
+          ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L)) ≫
       (baseChangeTargetComparisonIso g' f' Λ).hom.app L =
     (baseChangeSourceComparisonIso f g Λ).hom.app L ≫
       (ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-        ((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj L)) := by
+        ((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
+          (DerivedCategory.Plus.ι.obj L)) := by
   -- the comparison of direct images is the mate of the comparison of pullbacks
   have hA : ∀ {X₀ Y₀ : Scheme.{u}} (h : X₀ ⟶ Y₀) [QuasiCompact h] [QuasiSeparated h]
       (M : DerivedCategory.Plus (Sheaf X₀.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -138,7 +141,8 @@ theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [Qua
         D+(Etale.upperStar (ModuleCat.{u + 1} Λ) g').map
           ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).counit.app
             L) := by
-    rw [Etale.baseChange_app_eq_mateEquiv, Etale.derivedUpperStarLowerStarAdjunctionPlus_eq_derivedPlus,
+    rw [Etale.baseChange_app_eq_mateEquiv,
+      Etale.derivedUpperStarLowerStarAdjunctionPlus_eq_derivedPlus,
       Etale.derivedUpperStarLowerStarAdjunctionPlus_eq_derivedPlus]
     exact mateEquiv_counit _ _ _ L
   -- the pro-étale exchange map is the mate of `θ_P`
@@ -172,7 +176,8 @@ theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [Qua
     simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
     exact hC.trans (by erw [CategoryTheory.Functor.map_id, Category.comp_id])
   -- transpose both sides under `Lf'^* ⊣ Rf'_*`
-  apply ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv _ _).symm.injective
+  apply ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv
+    _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, baseChangeTargetComparisonIso,
     baseChangeSourceComparisonIso, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,

@@ -31,7 +31,8 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {R : Type w}
 /-- If the underlying abelian sheaf of a sheaf of modules `F` is torsion, then the colimit of
 the rationalization diagram `F --1--> F --2--> F --3--> ⋯` of `F` is zero: a section `x` of `F`
 is, locally, killed by some `N > 0`, and its image in the colimit at stage `k` is the image of
-`(k + 1) ⋯ (k + N) • x` at stage `k + N`, which vanishes as `N` divides `(k + 1) ⋯ (k + N)`. -/
+`(k + 1) ⋯ (k + N) • x` at stage `k + N`, which vanishes as `N` divides
+`(k + 1) ⋯ (k + N)`. -/
 lemma IsTorsion.isZero_colimit_rationalizationDiagram {F : Sheaf J (ModuleCat.{w} R)}
     (hF : ((sheafCompose J (forget₂ (ModuleCat.{w} R) AddCommGrpCat.{w})).obj F).IsTorsion)
     [HasColimit (rationalizationDiagram F)] :
