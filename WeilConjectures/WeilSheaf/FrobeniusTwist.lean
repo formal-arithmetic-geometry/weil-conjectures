@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubobjectStalk
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 
 /-!
 # The Frobenius twist of subsheaves of a Weil sheaf
@@ -183,6 +184,36 @@ theorem exists_mono_of_frobeniusTwist_eq {P : Subobject F.obj.carrier}
     inferInstanceAs (Mono P.arrow), Subobject.mk_arrow P⟩
 
 end IsoAlgebra
+
+section Monodromy
+
+open Scheme.FiniteEtale
+
+variable (F : WeilSheaf k₀ l X)
+
+/-- The underlying sheaf of a lisse Weil sheaf, as a lisse sheaf. -/
+noncomputable abbrev lisseCarrier (hF : F.IsLisse) :
+    LisseSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  ⟨F.obj.carrier, hF⟩
+
+/-- The iterated Weil structure `φ_n : (Frⁿ)^* F ⟶ F`, as a morphism of lisse sheaves. -/
+noncomputable def frobeniusPowLisseHom (hF : F.IsLisse) (n : ℕ) :
+    (F.lisseCarrier hF).upperStar l
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom ⟶
+      F.lisseCarrier hF :=
+  ObjectProperty.homMk
+    ((adicUpperStarIsoLowerStarInv l ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n)
+      ).hom.app _ ≫ (F.frobeniusPowIso n).hom)
+
+/-- The iterated Weil structure as a morphism of lisse sheaves is `frobeniusPowStr` on the
+underlying sheaves. -/
+lemma frobeniusPowLisseHom_hom_hom (hF : F.IsLisse) (n : ℕ) :
+    (F.frobeniusPowLisseHom hF n).hom.hom = F.frobeniusPowStr n := by
+  rw [frobeniusPowLisseHom, ObjectProperty.homMk_hom, Mod.comp_hom',
+    adicUpperStarIsoLowerStarInv_hom_app_hom]
+  rfl
+
+end Monodromy
 
 section Constituents
 

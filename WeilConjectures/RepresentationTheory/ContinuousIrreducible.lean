@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Instances.Matrix
 public import Mathlib.Topology.Algebra.Group.Pointwise
+public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 
 /-!
@@ -24,7 +25,6 @@ finite matrix witness of `lem-zl-finite-matrix-irreducibility`, used for curve t
 
 ## Main statements
 
-- `Representation.isIrreducible_iff`: irreducibility in terms of invariant subspaces.
 - `Representation.IsIrreducible.of_comp_range`: irreducibility transported along a group
   homomorphism and an equivariant linear isomorphism.
 - `Representation.exists_mem_nhds_one_forall_isIrreducible`.
@@ -40,28 +40,6 @@ section Irreducible
 
 variable {k G H V W : Type*} [Field k] [AddCommGroup V] [Module k V] [AddCommGroup W]
   [Module k W]
-
-/-- A representation is irreducible if and only if it is nonzero and its only invariant subspaces
-are `0` and the whole space. -/
-theorem isIrreducible_iff [Monoid G] (ρ : Representation k G V) :
-    IsIrreducible ρ ↔
-      Nontrivial V ∧ ∀ S : Submodule k V, (∀ g, ∀ v ∈ S, ρ g v ∈ S) → S = ⊥ ∨ S = ⊤ := by
-  constructor
-  · intro h
-    refine ⟨?_, fun S hS ↦ ?_⟩
-    · by_contra hV
-      rw [not_nontrivial_iff_subsingleton] at hV
-      exact (bot_ne_top : (⊥ : Subrepresentation ρ) ≠ ⊤) (Subrepresentation.toSubmodule_injective
-        (Submodule.eq_bot_of_subsingleton (p := (⊤ : Submodule k V))).symm)
-    · rcases h.eq_bot_or_eq_top ⟨S, fun g v hv ↦ hS g v hv⟩ with h' | h'
-      · exact Or.inl (congrArg Subrepresentation.toSubmodule h')
-      · exact Or.inr (congrArg Subrepresentation.toSubmodule h')
-  · rintro ⟨hV, h⟩
-    refine { exists_pair_ne := ⟨⊥, ⊤, fun h' ↦ bot_ne_top congr(($h').toSubmodule)⟩
-             eq_bot_or_eq_top := fun S ↦ ?_ }
-    rcases h S.toSubmodule (fun g v hv ↦ S.apply_mem_toSubmodule g hv) with h' | h'
-    · exact Or.inl (Subrepresentation.toSubmodule_injective h')
-    · exact Or.inr (Subrepresentation.toSubmodule_injective h')
 
 /-- **Transport of irreducibility.** Let `φ : H →* G` and let `e : V ≃ W` intertwine `ρ ∘ φ` with
 `σ`. If the image of `φ` acts irreducibly through `ρ`, then `σ` is irreducible. -/
@@ -123,7 +101,7 @@ theorem exists_mem_nhds_one_forall_isIrreducible {k G V : Type*} [Field k] [Topo
     simpa only [D, mul_inv_cancel_left, Set.mem_preimage, Set.mem_compl_iff,
       Set.mem_singleton_iff] using this
   have hspan := b.span_range_eq_top_of_det_ne_zero (fun q ↦ ρ (γ q)) hdet
-  have : Nontrivial V := ((isIrreducible_iff ρ).1 inferInstance).1
+  have : Nontrivial V := (isIrreducible_iff.1 (inferInstance : ρ.IsIrreducible)).1
   refine isIrreducible_of_span_range_eq_top _
     (eq_top_iff.2 (hspan.ge.trans (Submodule.span_mono ?_)))
   rintro _ ⟨q, rfl⟩
