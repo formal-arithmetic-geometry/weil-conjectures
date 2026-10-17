@@ -71,7 +71,7 @@
  },
  "id": "lem-trf-constant-family-defect-finite-projection",
  "title": "A linear projection finite on a proper affine closed subset, avoiding infinity",
- "statement": "Let $k$ be an infinite field, let $m\\geq1$, and let $Y\\subsetneq\\mathbf A^m_k$ be a proper reduced closed subscheme [def-sbc-affine-space, def-weil-closed-immersion]. There is a one-dimensional linear subspace $l\\subset k^m$ such that the quotient projection $q:\\mathbf A^m_k\\to\\mathbf A^m_k/l\\simeq\\mathbf A^{m-1}_k$ restricts to a finite morphism on $Y$ [def-weil-finite-integral-morphism]. After choosing a linear complement to $l$, identify $\\mathbf A^m_k$ with $\\mathbf A^1_k\\times\\mathbf A^{m-1}_k$ over the quotient. The scheme-theoretic closure of $Y$ in $\\mathbf P^1_k\\times\\mathbf A^{m-1}_k$ is disjoint from the infinity section $\\{\\infty\\}\\times\\mathbf A^{m-1}_k$.",
+ "statement": "Let $k$ be an infinite field, let $m\\geq1$, and let $Y\\subsetneq\\mathbf A^m_k$ be a\nproper reduced closed subscheme [def-sbc-affine-space, def-weil-closed-immersion]. There\nexist a one-dimensional linear subspace $l\\subset k^m$ and a $k$-linear equivalence\n$\\varphi:k^m\\simeq k\\times k^{m-1}$ whose second component has kernel $l$. There is an\nisomorphism, over $\\operatorname{Spec}k$, from $\\mathbf A^m_k$ to the fibre product\n$\\mathbf A^1_k\\times_k\\mathbf A^{m-1}_k$, whose two pullback components are the affine\nmaps induced by the first and second components of $\\varphi$. The resulting quotient\nprojection $q:\\mathbf A^m_k\\to\\mathbf A^{m-1}_k$ restricts to a finite morphism on $Y$\n[def-weil-finite-integral-morphism]. Under the affine-chart map into\n$\\mathbf P^1_k\\times_k\\mathbf A^{m-1}_k$, the scheme-theoretic image closure of $Y$ is\ndisjoint from the infinity section $\\{\\infty\\}\\times_k\\mathbf A^{m-1}_k$ [def-sc-p1-standard].",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "§3.2.4 (finite projection and support argument)"
@@ -187,5 +187,41 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-9acc56137 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited sources. Corrected scalar normalization, recognized the direction lemma as a Mathlib funext_set specialization, and expanded the monic criterion into explicit finiteness and homogenization steps. Statement unchanged; corrected dependency closure is acyclic. Details in review.md; corrected JSON files under fixes/.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3516cbd4e",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement, dependencies, source argument, helpers, edge cases, docstrings, report sections, and local/server compilation all checked; no substantive findings.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q07 stage 2",
+  "old_statement": "Let $k$ be an infinite field, let $m\\geq1$, and let $Y\\subsetneq\\mathbf A^m_k$ be a proper reduced closed subscheme [def-sbc-affine-space, def-weil-closed-immersion]. There is a one-dimensional linear subspace $l\\subset k^m$ such that the quotient projection $q:\\mathbf A^m_k\\to\\mathbf A^m_k/l\\simeq\\mathbf A^{m-1}_k$ restricts to a finite morphism on $Y$ [def-weil-finite-integral-morphism]. After choosing a linear complement to $l$, identify $\\mathbf A^m_k$ with $\\mathbf A^1_k\\times\\mathbf A^{m-1}_k$ over the quotient. The scheme-theoretic closure of $Y$ in $\\mathbf P^1_k\\times\\mathbf A^{m-1}_k$ is disjoint from the infinity section $\\{\\infty\\}\\times\\mathbf A^{m-1}_k$.",
+  "what": "The old Lean allowed an arbitrary scheme isomorphism e and used Limits.prod, which is product over Spec ℤ. Thus l was unrelated to q and for a nontrivial field the target had the wrong dimension. The corrected statement uses pullbacks over Spec k, a k-linear equivalence whose second component has kernel l, and requires e to have exactly the affine maps induced by both components and to be over Spec k.",
+  "source": {
+   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+   "place": "§3.2.4 (finite linear projection and relative projective compactification)"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-specialization-zero-section",
+    "holds": true,
+    "note": "Its finite projection and infinity-avoidance use remains valid with the corrected fibre products and l-induced coordinates."
+   }
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LinearProjectionFiniteClosure",
+  "declaration": "AlgebraicGeometry.exists_linearProjection_finite_closure_avoids_infinity",
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearProjectionFiniteClosure.lean",
+  "statement": "theorem exists_linearProjection_finite_closure_avoids_infinity (k : Type u) [Field k] [Infinite k] (m : ℕ) (hm : 1 ≤ m) (Y : Scheme.{u}) (i : Y ⟶ 𝔸(ULift.{u} (Fin m); Spec (.of k))) [IsClosedImmersion i] [IsReduced Y] (hproper : ¬ Function.Surjective i.base) : ∃ (l : Submodule k (Fin m → k)), Module.finrank k l = 1 ∧ ∃ (φ : (Fin m → k) ≃ₗ[k] k × (Fin (m - 1) → k)), LinearMap.ker ((LinearMap.snd k k (Fin (m - 1) → k)).comp φ.toLinearMap) = l ∧ ∃ (e : 𝔸(ULift.{u} (Fin m); Spec (.of k)) ≅ Limits.pullback (𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) (𝔸(ULift.{u} (Fin (m - 1)); Spec (.of k)) ↘ Spec (.of k))), e.hom ≫ Limits.pullback.snd (𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) (𝔸(ULift.{u} (Fin (m - 1)); Spec (.of k)) ↘ Spec (.of k)) = affineLinearRestMap k m ((LinearMap.snd k k (Fin (m - 1) → k)).comp φ.toLinearMap) ∧ e.hom ≫ Limits.pullback.fst (𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) (𝔸(ULift.{u} (Fin (m - 1)); Spec (.of k)) ↘ Spec (.of k)) = affineLinearScalarMap k m ((LinearMap.fst k k (Fin (m - 1) → k)).comp φ.toLinearMap) ∧ e.hom ≫ Limits.pullback.fst (𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) (𝔸(ULift.{u} (Fin (m - 1)); Spec (.of k)) ↘ Spec (.of k)) ≫ (𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) = 𝔸(ULift.{u} (Fin m); Spec (.of k)) ↘ Spec (.of k) ∧ IsFinite (i ≫ affineLinearRestMap k m ((LinearMap.snd k k (Fin (m - 1) → k)).comp φ.toLinearMap)) ∧ Disjoint (Set.range (i ≫ e.hom ≫ Limits.pullback.map (𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) (𝔸(ULift.{u} (Fin (m - 1)); Spec (.of k)) ↘ Spec (.of k)) (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) (𝔸(ULift.{u} (Fin (m - 1)); Spec (.of k)) ↘ Spec (.of k)) (ProjectiveLine.affineChart (Spec (.of k))) (𝟙 _) (𝟙 _) (by simp) (by simp)).imageι.base) (Set.range (Limits.pullback.lift ((𝔸(ULift.{u} (Fin (m - 1)); Spec (.of k)) ↘ Spec (.of k)) ≫ ProjectiveLine.infinity (Spec (.of k))) (𝟙 _) (by simp [ProjectiveLine.infinity_over])).base)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

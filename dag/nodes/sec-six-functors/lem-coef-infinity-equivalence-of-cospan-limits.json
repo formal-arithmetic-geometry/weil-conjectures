@@ -207,5 +207,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-51eab66e9 (reviewer sub-agent of L); spot-checked: Read in full: the item, the five cited nodes (including all ten proof steps of terminal-pullback-criterion and all ten of cartesian-closure), the citer lem-coef-localization-monomorphic-pushout and the unit sk-prop-sf-biduality-general. Source: Kerodon 01N7 (Prop. 6.3.5.3), read online since there is no archived copy; its proof compares homotopy pullback squares of the cores Fun(-,E)^≃ through Cor. 3.4.1.13, and the item is the covariant analogue for cospan limits. The statement is true (limits are invariant under equivalence of diagrams) and not a duplicate. I tested it on the identity equivalence, an empty apex, Q=Δ^0, Q=∅ and the degenerate cospan. It has no new nodes. There were three repairable faults; the corrected item is in fixes/dag/nodes/sec-six-functors/. (1) C1/C3, steps 1, 2 and 5: the identification Map_{Cat∞}(Q,X) ≃ Fun(Q,X)^≃ compatible with composition, and 'equivalence edge of Cat∞ = functor equivalence', were used without a citation; that identification appears only in the proof of cartesian-closure. I now cite def-cbc-enhanced-cartesian-fibration (which defines Cat∞ as a coherent nerve) and lem-coef-coherent-nerve-comparison (mapping spaces of the coherent nerve, composition-compatible). (2) C4, steps 2 and 3: step 3 cited terminal-pullback-criterion for the claim that the map of path pullbacks is an equivalence, but that node only states that the limiting criterion is invariant. I now cite lem-coef-kan-homotopy-commuting-pullback-invariance, whose specified homotopies come from step 1. (3) B4, steps 4 and 5: a JSON '\\to' had become a TAB followed by 'o'; fixed. I also added def-cbc-enhanced-cartesian-fibration to stmt_deps for Cat∞ and removed the unused sentence 'Let C and C′ be quasicategories', which clashed with the cospan vertex C′; no hypothesis or conclusion changed. The added nodes are in the item's own unit or are definitions, and none of them reaches the item or its parent, so there is no cycle. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b8e91c47a",
+  "group": "N9",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, canonical apex map, core conclusion, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py reproduced clean sandbox and library checks. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityEquivalenceOfCospanLimits",
+  "declaration": "SSet.Enhanced.infinity_equivalence_of_cospan_limits",
+  "file": "lean/Sheaf/CategoryTheory/InfinityEquivalenceOfCospanLimits.lean",
+  "statement": "theorem infinity_equivalence_of_cospan_limits (F G : (horn.{u + 1} 2 2).toSSet ⟶ CatInfinity.{u}) (α : ((ihom (horn.{u + 1} 2 2).toSSet).obj CatInfinity.{u}) _⦋1⦌) (hα₁ : ((ihom (horn.{u + 1} 2 2).toSSet).obj CatInfinity.{u}).δ 1 α = diagramVertex F) (hα₀ : ((ihom (horn.{u + 1} 2 2).toSSet).obj CatInfinity.{u}).δ 0 α = diagramVertex G) (hα : ∀ k : (horn.{u + 1} 2 2).toSSet _⦋0⦌, IsEquivalenceEdge CatInfinity ((evaluation (horn.{u + 1} 2 2).toSSet CatInfinity k).app _ α)) (p : (coneCategory F) _⦋0⦌) (q : (coneCategory G) _⦋0⦌) (τ : SuspensionComparison.ConeTransformation p q α) (hp : IsLimiting F p) (hq : IsLimiting G q) : IsFunctorEquivalence (SSet.CatInfinityCalculus.nerveArrow (τ.edge.1).1) ∧ ∀ (Q : SSet.{u}) [Quasicategory Q], IsWeakHomotopyEquivalence (coreMap ((ihom Q).map (SSet.CatInfinityCalculus.nerveArrow (τ.edge.1).1)))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -308,5 +308,29 @@
   "group": "Q144",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-448c3a071 (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps and every cited statement, plus Stacks 0F09 (etale-cohomology.tex l.17975) and 0F1C (l.18032) and the current blueprint proof of lem-weil-geometric-generic-exchange (separable limit plus inseparable step; 0F1C uses this same argument internally). The mathematics is correct. The statement is a true composite of 0F09 at the generic point and 0F1C for L/Q. I tested it with N=1, E=0, T empty, h an identity or open immersion, the nonseparated doubled-origin curve, and inseparable L/Q. All hypotheses are met: B is Noetherian and quasi-separated; the U_i->B are smooth and qcqs, and so are their base changes Y_i; limit-fibre-products gives Y_Q as the limit with affine transitions; N^{-1} lies in Gamma(Y,O_Y) and N is a unit in Q; inverse image is exact, so E_Q stays in D^+. Invertibility passes from the abelian maps to the module maps through t∘U(Ex)=Ex∘s and conservativity, without identifying coefficient categories. There is no cycle and no duplicate (lem-weil-geometric-generic-exchange, lem-sc-*-direct-image-exchange and lem-kun-0f1c are weaker or different). No new nodes. Two repairs, in fixes/.../lem-sf-etale-generic-direct-image-exchange.json. (1) B3: the item's exchange is the unbounded module mate, but only def-weil-pbc-derived-exchange was cited; I added [def-kun-unbounded-exchange] to the statement and stmt_deps (citation only). (2) E5: 0F1C is stated for the corners (Y_Q)x_Q L and (T_Q)_L, which differ from the statement's chosen Y x_B L and T_L; step 5 had identified the squares without argument. Step 4 now defines the square for k:Y_L->Y_Q, cartesian by pasting, and shows its exchange is invertible: the square along the corner isomorphisms has invertible exchange by lem-weil-mate-iso-along-equivalences and lem-weil-pbc-inverse-image-composition (2),(3), then lem-fin-module-exchange-composite-base-change applies. Step 5 now pastes literally to the statement's square. proof_deps recomputed. I accept all 13 declared tool uses and added one, lem-weil-pbc-inverse-image-composition.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c488bd938",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Checked all hypotheses, both canonical exchange clauses, dependency interfaces, sources, universes, edge cases, docstrings, and verbatim statement record. scompile.py reproduced a clean compile. Branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange",
+  "declaration": "AlgebraicGeometry.Etale.genericDirectImageExchange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.genericDirectImageFirstSquare",
+   "AlgebraicGeometry.Etale.genericDirectImageSecondSquare",
+   "AlgebraicGeometry.Etale.genericDirectImageExchangeConclusion",
+   "AlgebraicGeometry.Etale.genericDirectImageExchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean",
+  "statement": "theorem genericDirectImageExchange (F : Type u) [Field F] [IsAlgClosed F] (N : ℕ) (hN : 1 ≤ N) (hNF : IsUnit (N : F)) (A : Type (u + 1)) [CommRing A] [Finite A] (hNA : ∀ a : A, N • a = 0) (B : Scheme.{u}) [B.Over (Spec (.of F))] [Smooth (B ↘ Spec (.of F))] [IsIntegral B] [LocallyOfFiniteType (B ↘ Spec (.of F))] [QuasiCompact (B ↘ Spec (.of F))] (hBdim : topologicalKrullDim B = 1) (U : B.Opens) (hU : IsAffineOpen U) [Nonempty U] (Q : Type u) [Field Q] [Algebra (B.presheaf.obj (op U)) Q] [IsFractionRing (B.presheaf.obj (op U)) Q] (L : Type u) [Field L] [Algebra Q L] [IsAlgClosed L] [Algebra.IsAlgebraic Q L] (T Y : Over B) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (h : T ⟶ Y) [QuasiCompact h.left] [QuasiSeparated h.left] (E : _root_.DerivedCategory.Plus (Sheaf T.left.smallEtaleTopology (ModuleCat.{u + 1} A))) : genericDirectImageExchangeConclusion A h (Spec.map (CommRingCat.ofHom (algebraMap (B.presheaf.obj (op U)) Q)) ≫ hU.fromSpec) (Spec.map (CommRingCat.ofHom (algebraMap Q L))) E.obj",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

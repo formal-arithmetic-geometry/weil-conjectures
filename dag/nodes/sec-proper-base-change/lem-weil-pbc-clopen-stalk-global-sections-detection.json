@@ -198,5 +198,34 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-5eeade3ad (reviewer sub-agent of L); spot-checked: I read the whole item: its unchanged statement, all 4 steps, and the full statement of each of its 6 cited nodes. The delivery has no new nodes. Step 1: the clopen neighbourhoods of z form a cofiltered poset (it contains E and is closed under intersection). The cofinality lemma (same unit, split and reviewed, with the same hypotheses: separably closed K, K->C_z an isomorphism, clopen basis, any geometric point) gives conditions (i) and (ii) of the cofiltered criterion. For (ii) it takes W1=W2=W in the agreement clause. The criterion then gives the canonical colimit isomorphism with germ components. Its pointed neighbourhoods match those in the geometric-stalks definition. Step 2: W and its complement are open, etale and jointly surjective, so they cover E. G(empty)=0 follows from the empty cover, and W x_E W^c is empty, so extension by zero is unique and additive. Step 3: the quotient argument for surjectivity is elementary and correct. Step 4: the case C=K has one point and a one-object diagram. Small cases tested: C=0, C=K with K imperfect, C=KxK (surjective but not injective), and locally constant functions on a profinite set. The statement is exactly what the parent lem-weil-pbc-strict-local-geometric-fibre-test uses. Sources read: Stacks etale-cohomology 03PN, 03PQ, 040R, 09AY and the proof of 0EZV. The node is correctly labelled an agent-written refinement. Route: cofinality is in the same unit and the other citations are mathlib leaves or definitions. No cycle (the cofinality node does not depend on this item), no tool_uses, no SGA. A duplicate search with rg (clopen+stalk, strictly henselian+global sections) found no node that states the item. Error lists A-F are clean. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-63e127b0e",
+  "group": "NH",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, module, report, edge cases, and exact declarations; scompile.py passed locally and with server confirmation. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.ClopenStalkGlobalSectionsDetection",
+  "declaration": "AlgebraicGeometry.Scheme.clopenStalkGlobalSectionsDetection",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ClopenNeighbourhood",
+   "AlgebraicGeometry.Scheme.clopenNeighbourhoodPartialOrder",
+   "AlgebraicGeometry.Scheme.clopenEtaleObject",
+   "AlgebraicGeometry.Scheme.clopenEtaleMap",
+   "AlgebraicGeometry.Scheme.clopenSectionDiagram",
+   "AlgebraicGeometry.Scheme.clopenPointLift",
+   "AlgebraicGeometry.Scheme.clopenPointMarking",
+   "AlgebraicGeometry.Scheme.geometricGerm",
+   "AlgebraicGeometry.Scheme.clopenStalkGlobalSectionsDetection"
+  ],
+  "file": "lean/Sheaf/EtaleCohomology/ClopenStalkGlobalSectionsDetection.lean",
+  "statement": "theorem clopenStalkGlobalSectionsDetection (K C : Type u) [Field K] [CommRing C] [Algebra K C] [IsSepClosed K] (hlocal : ∀ z : PrimeSpectrum C, Function.Bijective (@algebraMap K (Localization.AtPrime z.1) _ _ _)) (hclopen : ∀ (U : (Spec (.of C)).Opens) (z : PrimeSpectrum C), z ∈ U → ∃ W : (Spec (.of C)).Opens, IsClopen (W : Set (Spec (.of C))) ∧ z ∈ W ∧ W ≤ U) (G : Sheaf (Spec (.of C)).smallEtaleTopology AddCommGrpCat.{u + 1}) : (∀ (z : PrimeSpectrum C) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ Spec (.of C)) (hzbar : zbar.toLRSHom.base = TopCat.ofHom ⟨fun _ : (Spec (.of Ω) : Type u) => z, continuous_const⟩), ∃ e : colimit (clopenSectionDiagram (Spec (.of C)) z G) ≅ (pointSmallEtale zbar).sheafFiber.obj G, ∀ W : ClopenNeighbourhood (Spec (.of C)) z, colimit.ι (clopenSectionDiagram (Spec (.of C)) z G) (Opposite.op W) ≫ e.hom = (pointSmallEtale zbar).toPresheafFiber (clopenEtaleObject (Spec (.of C)) z W) (clopenPointMarking W zbar hzbar) G.1) ∧ (∀ (z : PrimeSpectrum C) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ Spec (.of C)) (hzbar : zbar.toLRSHom.base = TopCat.ofHom ⟨fun _ : (Spec (.of Ω) : Type u) => z, continuous_const⟩), Function.Surjective (geometricGerm zbar G)) ∧ (Subsingleton (G.1.obj (Opposite.op (Etale.mk (𝟙 (Spec (.of C)))))).carrier → ∀ (z : PrimeSpectrum C) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ Spec (.of C)) (hzbar : zbar.toLRSHom.base = TopCat.ofHom ⟨fun _ : (Spec (.of Ω) : Type u) => z, continuous_const⟩), Subsingleton ((pointSmallEtale zbar).sheafFiber.obj G).carrier) ∧ (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (tbar : Spec (.of Ω) ⟶ Spec (.of K)), IsIso (geometricGerm tbar F))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
