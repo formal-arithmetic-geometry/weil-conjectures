@@ -14,9 +14,77 @@
   "def-pc-module-pullback",
   "def-pc-module-stalk-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-iff-integral-lft], the finite morphism $\\pi$ is integral. By [pqf-lem-integral-univclosed], it is universally closed and hence closed. Put $C=Z\\setminus U$. This is closed and $y\\notin\\pi(C)$: a point of $C$ mapping to $y$ would equal $z$, whereas $z\\in U$. Thus $V=Y\\setminus\\pi(C)$ is an open neighbourhood of $y$. If $w\\in\\pi^{-1}(V)$ were outside $U$, then $\\pi(w)\\in\\pi(C)$, a contradiction. This proves the neighbourhood assertion.",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
+   }
+  },
+  {
+   "text": "To prove the module assertion, take any affine open neighbourhood $V_0$ of $y$. By [def-weil-finite-integral-morphism] and [pqf-def-affine-morphism], $W=\\pi^{-1}(V_0)$ is affine and the ring map $A=\\mathcal O_Y(V_0)\\to B=\\mathcal O_Z(W)$ is finite. Use [lem-weil-pbc-affine-open-spec-points] on $V_0$ and $W$ to represent $y,z$ by primes $\\mathfrak p,\\mathfrak q$. A point lies above $y$ precisely when its corresponding prime contracts to $\\mathfrak p$: the point prime consists of sections whose germs lie in the maximal ideal, and the stalk maps of a scheme morphism are local. The singleton-fibre hypothesis therefore makes $\\mathfrak q$ the unique prime of $B$ above $\\mathfrak p$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
+   }
+  },
+  {
+   "text": "Set $M=\\mathcal G(W)$. Since $\\pi$ is affine, clause (1) of [lem-weil-pbc-affine-pushforward-base-change] says $\\pi_*\\mathcal G$ is quasi-coherent (take the auxiliary base change to be the identity). Apply [lem-sbc-affine-module-germ-localization] to this module on $V_0$, and to $\\mathcal G$ on $W$. Using $(\\pi_*\\mathcal G)(V_0)=M$, these identify their actual germ maps with localization maps from $M$: at $y$ one inverts $A\\setminus\\mathfrak p$, and at $z$ one inverts $B\\setminus\\mathfrak q$. Explicitly the resulting identifications are $(\\pi_*\\mathcal G)_y\\cong M\\otimes_A A_{\\mathfrak p}$ and $\\mathcal G_z\\cong M_{\\mathfrak q}$. The map $m\\otimes(a/s)\\mapsto am/s$ and its inverse $m/s\\mapsto m\\otimes(1/s)$ give the tensor description directly from [def-weil-pbc-module-localization] and [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-sbc-affine-module-germ-localization",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-unique-prime-localization] with the finite ring map and unique prime of Step 2. Its module comparison is an isomorphism $M\\otimes_A A_{\\mathfrak p}\\to M_{\\mathfrak q}$. Through Step 3 it sends $m_y/s_y$ to $m_z/(\\pi^\\sharp s)_z$ for $m\\in M$ and $s\\in A\\setminus\\mathfrak p$. The canonical pushforward-to-source germ map sends $m_y$ to $m_z$ and commutes with multiplication by germs of sections of $A$, so it has exactly this fraction formula. Every element is such a fraction, proving equality with the canonical map. Finally [lem-weil-pbc-affine-open-stalk-localization](c) identifies $\\mathcal O_{Y,y}$ with $A_{\\mathfrak p}$ through $a/s\\mapsto a_y/s_y$; the same formula for the ring-sheaf map identifies its action on $\\mathcal G_z$ with restriction along $\\pi_z^\\sharp$. Thus the canonical isomorphism is linear for exactly the action stated in the item.",
+   "uses": [
+    "lem-trf-unique-prime-localization",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-trf-unique-prime-localization",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "pqf-def-affine-morphism",
+  "pqf-lem-integral-univclosed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, assertions (1) and (4)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +120,105 @@
    "results": "ModuleCat.Tilde localizations and IsFinite.finite_preimage_singleton: finite fibres, not singleton-fibre pushforward stalk comparison.",
    "date": "2026-10-18",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism with a singleton fibre has a neighbourhood whose inverse image lies in a prescribed neighbourhood and pushforward stalk equals source stalk",
+   "results": {
+    "t": "2026-10-17T21:52:53Z",
+    "tool": "leanfinder",
+    "query": "finite morphism with a singleton fibre has a neighbourhood whose inverse image lies in a prescribed neighbourhood and pushforward stalk equals source stalk",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.finite_preimage_singleton",
+     "AlgebraicGeometry.exists_lift_of_germInjective_aux",
+     "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+     "AlgebraicGeometry.Scheme.Hom.discrete_fiber",
+     "AlgebraicGeometry.spread_out_of_isGermInjective'",
+     "AlgebraicGeometry.LocallyOfFiniteType.stalkMap",
+     "AlgebraicGeometry.spread_out_of_isGermInjective",
+     "AlgebraicGeometry.LocallyQuasiFinite"
+    ],
+    "digest": "a0b8d49fd41bcdf2"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite.finite_preimage_singleton, IsLocalizedModule, localization at unique prime",
+   "results": {
+    "t": "2026-10-17T21:52:54Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsFinite.finite_preimage_singleton, IsLocalizedModule, localization at unique prime",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: <input>:1:86: expected end of input",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "invalid query; no absence conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*singleton|unique.*prime.*localiz|pushforward.*stalk",
+   "results": {
+    "t": "2026-10-17T21:52:54Z",
+    "tool": "grep",
+    "query": "finite.*singleton|unique.*prime.*localiz|pushforward.*stalk",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 18,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+     "Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean"
+    ],
+    "digest": "e7d141aa7d78e2d7"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite morphism singleton fibre pushforward stalk localization",
+   "results": {
+    "t": "2026-10-17T21:52:54Z",
+    "tool": "leansearch",
+    "query": "finite morphism singleton fibre pushforward stalk localization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk",
+     "AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk",
+     "AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom",
+     "AlgebraicGeometry.IsFinite.finite_preimage_singleton",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
+     "AlgebraicGeometry.localRingHom_comp_stalkIso_apply'",
+     "AlgebraicGeometry.StructureSheaf.stalkIso",
+     "AlgebraicGeometry.StructureSheaf.localizationToStalk"
+    ],
+    "digest": "21c86dcc901f1bd3"
+   },
+   "date": "2026-10-17",
+   "verdict": "no exact match or one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-elementary-devissage-flatness",
@@ -76,5 +239,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-singleton-fibre-localization",
+  "worker": "stage1",
+  "summary": "Four explicit steps follow Stacks 05B8: finite-to-integral and universal closedness; affine coordinates and the unique prime; the two actual module germs as localizations; and the fraction formula proving equality with the canonical linear comparison. One statement-only finite specialization of Stacks 00EA supplies the genuine algebra lemma. The item statement is unchanged. Corrected a missing finite-to-integral citation and the new-node search attribution during the final audit.",
+  "blueprint": "The steps realize the supporting Tag 057U/05B8 finite-pushforward branch of lem-trf-local-term-locality: closed-image neighbourhood shrinking, affine reduction, and the stalk localization comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Only affine pushforward quasi-coherence is used; this generic module theorem does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-spec-points",
+    "why": "Generic affine coordinate correspondence for the points in the two affine neighbourhoods."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic identification of the affine local ring through its germ map, to check the specified scalar action."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q15-31003e7dd",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-31003e7dd (reviewer sub-agent of L); spot-checked: Reviewed the complete item, new algebra node, cited statements, Stacks Tags 05B8 and 00EA, unit/chapter route, edge cases, searches, tool uses, and DAG duplication/cycle risks. The hypotheses and canonical base/module maps are correct; no hidden long-step lemma, route-pivot machinery, forbidden SGA citation, or batch-5 issue was found. Review written to review.md."
  }
 }
