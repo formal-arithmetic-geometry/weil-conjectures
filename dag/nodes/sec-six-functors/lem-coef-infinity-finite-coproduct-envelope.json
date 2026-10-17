@@ -11,11 +11,112 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the universes of [def-coef-presentable-infinity-category], with the coherent conventions of [def-cbc-enhanced-diagrams-cones]. Apply [lem-coef-coherent-nerve-comparison] to the coherent realization $\\mathfrak C[K]$ and its object-preserving locally Kan replacement $A=R\\mathfrak C[K]$. The objects of $\\mathfrak C[K]$ are precisely $K_0$: in its simplex-colimit construction the vertices are identified exactly by the simplicial identifications defining $K_0$. Thus $A$ has object set $K_0$ and remains small. Put $B=N_{\\mathrm{hc}}A$. The adjoint $q:K\\to B$ of $\\mathfrak C[K]\\to A$ is a Joyal equivalence: all simplicial sets are cofibrant, $A$ is fibrant, and the Quillen-equivalence criterion applied to this replacement weak equivalence gives the assertion. The same cited node makes $B$ a small quasicategory. By [lem-coef-joyal-functor-equivalence-test], $q^*:\\operatorname{Fun}(B,\\mathcal E)\\to\\operatorname{Fun}(K,\\mathcal E)$ is a coherent functor equivalence for every allowed target. In particular, a given $F$ has a lift $F_0:B\\to\\mathcal E$ with a specified coherent equivalence $\\eta:F\\simeq F_0q$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5; Theorem 2.2.5.1 (coherent realization/nerve Quillen equivalence). Explicit reduction of arbitrary K, not an assertion made in Remark 5.3.5.9."
+   }
+  },
+  {
+   "text": "Define a simplicial category $D$ with objects the finite lists $a=(a_1,\\ldots,a_m)$ of objects of $A$, including $m=0$, and\n$$D(a,b)=\\coprod_{\\phi:[m]\\to[n]}\\prod_{r=1}^m A(a_r,b_{\\phi(r)}),\\qquad b=(b_1,\\ldots,b_n).$$\nThe index sets here are $[m]=\\{1,\\ldots,m\\}$. Define $(\\psi,(g_s))\\circ(\\phi,(f_r))=(\\psi\\phi,(g_{\\phi(r)}f_r)_r)$ and identities by identity functions and identity arrows. The associativity and unit equations are those in $A$, coordinate by coordinate; simplicial operators act on each $f_r$. Products and disjoint unions of Kan complexes are Kan: fill each product coordinate, and for a horn in a disjoint union its connected nonempty domain lies in one summand. All these sets are small. By [lem-coef-coherent-nerve-comparison], $J=N_{\\mathrm{hc}}D$ is small and its mapping spaces are naturally equivalent to $D(a,b)$, compatibly with composition. Singleton lists identify $B$ with a full subcategory of $J$, since a simplex all of whose vertices are singleton lists has exactly the coherent data of a simplex in $N_{\\mathrm{hc}}A$. Denote the inclusion by $e$ and put $i=eq$. Concatenation $a^{(1)}\\mathbin{\\|}\\cdots\\mathbin{\\|}a^{(r)}$ has inclusion arrows given by the index injections and identity components. Restriction along them gives the simplicial isomorphism\n$$D(a^{(1)}\\mathbin{\\|}\\cdots\\mathbin{\\|}a^{(r)},b)\\cong\\prod_{s=1}^rD(a^{(s)},b).$$\nIt groups a function and its component arrows by its source blocks; its inverse concatenates those data. For $r=0$ this is the one-point space. The mapping-space colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] therefore proves these are coproduct cocones in $J$, including the initial empty list. Every list is the coproduct of its singleton entries, which are images of vertices of $K$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 5.3.5.9 and Proposition 5.3.6.2, finite-discrete-shape case; explicit small finite-family model supplied here. The nerve and mapping-space comparisons use Theorem 2.2.5.1 and Proposition 2.2.4.1."
+   }
+  },
+  {
+   "text": "Fix $a=(a_1,\\ldots,a_m)\\in J$ and put $T_a=B\\times_J J_{/a}$. By [lem-coef-infinity-slice-right-fibration] this is a right fibration over $B$. The mapping-space comparison of [lem-coef-coherent-nerve-comparison] and the singleton-source instance of the displayed formula give a natural equivalence of presheaves on $B$,\n$$\\coprod_{r=1}^m\\operatorname{Map}_B(-,a_r)\\simeq\\operatorname{Map}_J(e(-),a).$$\nIts $r$th map is postcomposition with the $r$th singleton inclusion $e(a_r)\\to a$: the composition compatibility in the cited comparison identifies it with inclusion of that summand of $D((b),a)$. By the right-fibration classification and slice compatibility of [lem-coef-space-transport-classification], these presheaves classify respectively $\\coprod_r B_{/a_r}\\to B$ and $T_a\\to B$. For the first assertion, disjoint union of these right fibrations is a right fibration, with the disjoint union of their fibers and componentwise transport. Consequently the natural map induced by the singleton inclusions is an equivalence over $B$,\n$$v_a:\\coprod_{r=1}^m B_{/a_r}\\simeq T_a.$$\nOn each component it sends $(b\\to a_r)$ to its composite $e(b)\\to e(a_r)\\to a$, with the corresponding coherent simplices. For $m=0$ both sides are empty: the presheaf in question is everywhere empty. This proves a decomposition into slices, not an identification of $T_a$ with a finite discrete category.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Section 2.2.4, applied to the finite-family mapping formula; explicit comma-category calculation for the finite-coproduct case of Remark 5.3.5.9."
+   }
+  },
+  {
+   "text": "For each $r$, the identity arrow of $a_r$ is final in $B_{/a_r}$ by [lem-coef-infinity-slice-equivalence-final]. Apply [lem-coef-infinity-final-index-colimit] to the diagram $B_{/a_r}\\to B\\xrightarrow{F_0}\\mathcal E$: its colimit is $F_0(a_r)$, with the identity leg at that final object. Put $L_a=\\coprod_{r=1}^m F_0(a_r)$, using only the assumed finite coproducts in $\\mathcal E$. The component cocones followed by the coproduct legs give a colimiting cocone on $\\coprod_r B_{/a_r}$. Explicitly, for every $z$ the space of cocones with apex $z$ is the product over $r$ of the component cocone spaces, since a transformation on a disjoint union is exactly one transformation on each component, in every simplicial degree. The cited final-object colimit property identifies this product with $\\prod_r\\operatorname{Map}_{\\mathcal E}(F_0(a_r),z)$, and the coproduct universal property identifies it with $\\operatorname{Map}_{\\mathcal E}(L_a,z)$. The cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] proves the claim. Precomposition by the equivalence $v_a$ of step 3 gives equivalences of functor and cocone categories: precomposing with its coherent quasi-inverse gives an inverse, and the two natural equivalences give the unit and counit after precomposition. Thus the diagram $T_a\\to B\\xrightarrow{F_0}\\mathcal E$ has a colimit. For the empty list the cocone space is a point, and $L_a$ is initial. The same computation shows that restriction from a $T_a$-cocone to its $m$ singleton-summand legs identifies its cocone space with $\\prod_r\\operatorname{Map}_{\\mathcal E}(F_0(a_r),z)$.",
+   "uses": [
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 4.3.2, pointwise colimit condition; finite-discrete-shape specialization of Remark 5.3.5.9. Final-object evaluation also Kerodon Example 7.2.1.4 (03LQ) and Proposition 4.7.3.20 (02J2), carried by the cited existing nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-relative-kan-existence] with full subcategory $B\\subseteq J$, $h=F_0$, $p:\\mathcal E\\to\\Delta^0$ and $s:J\\to\\Delta^0$. This $p$ is an isofibration: the inner horns lift because $\\mathcal E$ is a quasicategory and the only equivalence in the base lifts by an identity. Step 4 supplies its local colimits. To match the theorem's relative join-cone formulation precisely, the opposite version of [lem-coef-infinity-join-cone-calculus] identifies coherent cocones with join cocones while fixing the boundary diagram and apex; opposites are allowed by [lem-coef-infinity-relative-cone-equivalence](4). By [lem-coef-infinity-relative-cone-constant-test], over $\\Delta^0$ the relative test square is a homotopy pullback exactly when its upper row is an equivalence, which is the ordinary cocone criterion of [lem-cbc-enhanced-functor-cone-calculus]. We therefore obtain an actual coherent functor $\\widehat F:J\\to\\mathcal E$ with $\\widehat F|_B=F_0$ and every canonical $T_a$-cocone colimiting. Step 4 identifies its restriction to singleton-summand legs as a coproduct cocone, so $\\widehat F(a)\\simeq\\coprod_r F_0(a_r)$ with those actual legs. For finitely many lists, restriction from all singleton legs to the blocks identifies the testing maps with the canonical regrouping\n$$\\prod_{s,r}\\operatorname{Map}_{\\mathcal E}(F_0(a^{(s)}_r),z)\\cong\\prod_s\\prod_r\\operatorname{Map}_{\\mathcal E}(F_0(a^{(s)}_r),z).$$\nHence the images of the concatenation cocones are colimiting, including the empty case. Any other coproduct cocone on the same objects is equivalent to the concatenation cocone: both are initial in the cocone category, whose initial-object subcategory is contractible by the cited cone-calculus lemma. A functor carries this equivalence of cocones to an equivalence, which preserves initiality. Thus $\\widehat F$ preserves every finite coproduct cocone. The equivalence $\\eta:F\\simeq F_0q=\\widehat F i$ is the one chosen in step 1. This construction has used no colimits in $\\mathcal E$ beyond the finite coproducts and the particular slice colimits proved in step 4.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, over the terminal base, with the finite-family local colimits computed in steps 3-4; HTT Proposition 4.3.2.15. Coherent assembly is supplied by this theorem, not by choosing objectwise coproducts."
+   }
+  },
+  {
+   "text": "For every coherent $H:J\\to\\mathcal E$, apply [lem-coef-infinity-kan-mapping-restriction] with $\\mathcal C=J$, $\\mathcal A=B$, $F=\\widehat F$ and $G=H$. Its left Kan hypothesis is exactly the colimiting canonical $T_a$-cocones obtained in step 5. Restriction itself therefore gives an equivalence\n$$\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal E)}(\\widehat F,H)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal E)}(F_0,He).$$\nPrecomposition by $q$ is a coherent functor equivalence by [lem-coef-joyal-functor-equivalence-test], so it induces equivalences on mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. It identifies the right side with $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(F_0q,Hi)$. Precomposition with the fixed equivalence $\\eta:F\\simeq F_0q$ then gives the required target space; composition with an inverse of $\\eta$ is its inverse up to the coherent inverse equations. The composite comparison is precisely $t\\mapsto(ti)\\eta$. The first comparison is natural restriction by its cited statement, and precomposition by $q$ and $\\eta$ commutes with postcomposition in $H$, with the coherent composition homotopies. Hence the specified map is natural in $H$ on whole mapping spaces, retaining their higher simplices. No coproduct preservation of $H$ has entered any hypothesis.",
+   "uses": [
+    "lem-coef-infinity-kan-mapping-restriction",
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030M",
+    "place": "Corollary 7.3.6.9; HTT Proposition 4.3.2.17. Transport across the specified q and eta is written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-kan-mapping-restriction",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting finite-coproduct extension in proof paragraph 2; agent-written finite-family model and slice computation, following the completion and pointwise Kan-extension method of HTT Remark 5.3.5.9, Proposition 5.3.6.2 and Propositions 4.3.2.15, 4.3.2.17. HTT and Kerodon read online; archival copies WANTED."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-sifted-coproduct-cocompleteness",
@@ -80,6 +181,27 @@
    "results": "{\"t\": \"2026-10-17T01:16:01Z\", \"tool\": \"grep\", \"query\": \"coproduct.*(free|complet)|free.*coproduct|Quasicategory.*KanExtension|KanExtension.*Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/PresentedGroup.lean\", \"Mathlib/GroupTheory/CoprodI.lean\", \"Mathlib/GroupTheory/CoprodI.lean\", \"Mathlib/GroupTheory/CoprodI.lean\", \"Mathlib/GroupTheory/CoprodI.lean\", \"Mathlib/GroupTheory/Coprod/Basic.lean\", \"Mathlib/GroupTheory/Coprod/Basic.lean\", \"Mathlib/GroupTheory/Coprod/Basic.lean\"], \"digest\": \"8d6494110927321a\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:39-58 and Basic.lean:39-115; these require ordinary Category instances and do not construct a coherent finite-sum envelope or its whole mapping spaces. Grep gives no quasicategorical envelope declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Finite(Coprod|Coproduct).*Completion|Fam(ily|ilies).*Category|free.*finite.*sum|Quasicategory.*[Kk]an",
+   "results": "{\"t\": \"2026-10-17T02:24:02Z\", \"tool\": \"grep\", \"query\": \"Finite(Coprod|Coproduct).*Completion|Fam(ily|ilies).*Category|free.*finite.*sum|Quasicategory.*[Kk]an\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"Mathlib/LinearAlgebra/FreeProduct/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean\", \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean\", \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean\", \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean\", \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/WideEqualizers.lean\"], \"digest\": \"bcc46107dfadacb8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FormalCoproduct, its ordinary Category instance and eval in Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean:50-73, 366-379, 386-398. These are ordinary categories with set-valued Hom and arbitrary coproducts, not the finite-family quasicategory or its coherent Kan-extension property. The semantic hits concern ordinary presentability and Ind categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small infinity category admits a free completion under finite sums with the universal property of left Kan extension",
+   "results": "{\"t\": \"2026-10-17T02:24:02Z\", \"tool\": \"leanfinder\", \"query\": \"A small infinity category admits a free completion under finite sums with the universal property of left Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.Cat.instHasColimits\", \"CategoryTheory.instHasCoproductsIndOfHasFiniteCoproducts\", \"CategoryTheory.instHasColimitsIndOfHasFiniteColimits\", \"CategoryTheory.FinallySmall\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.Ind\"], \"digest\": \"7a095698938aeaa6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FormalCoproduct, its ordinary Category instance and eval in Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean:50-73, 366-379, 386-398. These are ordinary categories with set-valued Hom and arbitrary coproducts, not the finite-family quasicategory or its coherent Kan-extension property. The semantic hits concern ordinary presentability and Ind categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.FormalCoproduct.eval",
+   "results": "{\"t\": \"2026-10-17T02:25:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.FormalCoproduct.eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.FormalCoproduct.eval\", \"CategoryTheory.Limits.FormalCoproduct.instPreservesColimitsOfShapeDiscreteObjFunctorEval\", \"CategoryTheory.Limits.FormalCoproduct.instPreservesColimitDiscreteFunctorObjFunctorEval\", \"CategoryTheory.Limits.FormalCoproduct.eval_obj_obj\", \"CategoryTheory.Limits.FormalCoproduct.isColimitEvalMapCoconeCofan\", \"CategoryTheory.Limits.FormalCoproduct.evalCompInclIsoId\", \"CategoryTheory.Limits.FormalCoproduct.eval_obj_map\", \"CategoryTheory.Limits.FormalCoproduct.eval_map_app\"], \"digest\": \"7a2f49ab07c3a8c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FormalCoproduct, its ordinary Category instance and eval in Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean:50-73, 366-379, 386-398. These are ordinary categories with set-valued Hom and arbitrary coproducts, not the finite-family quasicategory or its coherent Kan-extension property. The semantic hits concern ordinary presentability and Ind categories."
   }
  ],
  "blueprint": {
@@ -100,5 +222,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-finite-coproduct-envelope",
+  "worker": "stage1",
+  "summary": "Six-step proof: small coherent realization, explicit finite-family mapping formula, comma right-fibration decomposition, local slice colimits, coherent pointwise Kan extension preserving all finite coproducts, and the specified mapping-space restriction comparison. Second reading repaired the uncited rigidification, the false discrete-comma identification, and the objectwise coherence gap. No new nodes.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2: finite-coproduct extension of an arbitrary indexing diagram before the sifted-colimit argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-e2aeb5e20",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-e2aeb5e20 (reviewer sub-agent of L); spot-checked: I read the item and all 15 cited statements in full. The statement is the finite-discrete case of HTT 5.3.6.2 (the P^K_R completion with R empty) plus the left Kan mapping property of HTT 4.3.2.17. It requires nothing of E beyond finite coproducts, puts no condition on H, and the comparison map is t->(ti)eta. I tested it on K empty, a point, two points and the horn Lambda^2_1, on E terminal, and on the empty E that the hypothesis excludes; all hold. Step 1: the coherent realization of K has object set K_0, the replacement A is fibrant, and the Quillen equivalence makes q a Joyal equivalence; the Joyal test then gives F_0 and eta. Step 2: in the finite-list category D, singleton lists recover A, and the block isomorphism, with the empty case a point, together with the Yoneda colimit criterion gives the coproducts, including the initial empty list. Step 3: the slice T_a decomposes as a disjoint union of the slices of B at the entries, by the transport classification with its pullback and postcomposition clauses; the old claim that this comma category is discrete is correctly removed, with the counterexample B=N[1]. Step 4: identities are final in their slices, the colimit over a final object gives each local colimit, and transport along v_a carries the cocone. Step 5: the relative Kan existence theorem applies over the point; the join and coherent cocone forms are matched through the opposite of the join-cone calculus (allowed by relative-cone-equivalence (4)) and the constant test; preservation is shown for concatenations and then for every coproduct cocone by uniqueness of initial objects. Step 6: kan-mapping-restriction, then q^* and eta, give exactly (ti)eta, naturally in H. There are no new nodes and no duplicate; the nearest nodes (intermediate-presheaf-kan, presheaf-presentability, finite-poset-kan-extension) need other hypotheses. The item does not restate a clause of its parent, there is no cycle, and review_split.py passes. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), which is generic cocone/initial-object calculus with a precedent on finite-poset-kan-extension; the maintainer should record it. HTT and Kerodon are not in literature/, so I could not open them; they are WANTED and proof_origin is agent. Every non-elementary fact is carried by a cited node statement. No SGA is used and no fixes were made."
  }
 }

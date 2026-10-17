@@ -12,9 +12,103 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $s=g(*)$ be the image of the cone vertex and let $\\eta:J\\times\\Delta^1\\to B$ be the coherent transformation from $g|_J$ to the constant diagram at $s$, obtained by restricting $g$ along the map that is the identity at time $0$ and collapses $J\\times\\{1\\}$ to the cone vertex. Since $p$ is an inner fibration with horn-cocartesian lifts of every edge out of every vertex, [lem-coef-infinity-cocartesian-mapping-criterion] shows that these lifts are cocartesian in the mapping-space sense, so $p$ satisfies the hypotheses of [lem-coef-infinity-pointwise-cocartesian-transport]; conversely every edge that node calls cocartesian is $p$-cocartesian in the horn sense of [def-coef-infinity-fibrations]. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to $p$, $K=J$, $A=h$, $G=\\Delta_Js$, and this $\\eta$. It supplies a diagram $h':J\\to E_s$ and a simplicial map $Q_0:J\\times\\Delta^1\\to E$ over $\\eta$, with $Q_0|_{J\\times\\{0\\}}=h$, $Q_0|_{J\\times\\{1\\}}=h'$, and every time edge $Q_0|_{\\{j\\}\\times\\Delta^1}$ $p$-cocartesian. The restriction really is in the strict fiber because $p h'=\\Delta_Js$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.3.1.11 proof, pp. 266-267: form the map $K\\times\\Delta^1\\to K^{\\triangleright}$ and choose its coCartesian lift."
+   }
+  },
+  {
+   "text": "By the fiber hypothesis, choose a colimit cocone $c':J^{\\triangleright}\\to E_s$ whose restriction to $J$ is $h'$. Regard $c'$ as a diagram in $E$ by the fiber inclusion. This choice is available also for $J=\\varnothing$, when it is an initial object of $E_s$; no filteredness or contractibility of $J$ is used.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.3.1.11 proof, p. 267: assumption (1) and the choice of a colimit $q'_0$ in the fiber."
+   }
+  },
+  {
+   "text": "For every edge $f:s\\to s'$ of $B$, the transported cocone $f_!c'$ is colimiting in $E_{s'}$, because $f_!$ preserves $J$-indexed colimits by hypothesis. Hence [lem-coef-infinity-fiber-relative-colimit-criterion], applied to $c'$ and $p$, says that the inclusion of $c'$ into $E$ is a $p$-colimit diagram. In particular the cone vertex of $c'$ is a valid relative colimit apex for the transported diagram.",
+   "uses": [
+    "lem-coef-infinity-fiber-relative-colimit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.3.1.11 proof, p. 267, using Proposition 4.3.1.10 after choosing $q'_0$."
+   }
+  },
+  {
+   "text": "Put $T=J\\times\\Delta^1$, $A=J\\times\\{1\\}$ and $D=T\\amalg_A A^{\\triangleright}$. Since $\\{1\\}=\\Lambda_1^1\\hookrightarrow\\Delta^1$ is right anodyne, [lem-coef-infinity-right-anodyne-product], with second monomorphism $\\varnothing\\hookrightarrow J$, makes $A\\hookrightarrow T$ right anodyne (after interchanging product factors). Apply the pushout-join clause of [lem-coef-infinity-anodyne-cocones] to this inclusion and $\\varnothing\\hookrightarrow\\Delta^0$. Its domain is exactly $D$ and its target is $T^{\\triangleright}$, so $D\\hookrightarrow T^{\\triangleright}$ is inner anodyne. The class of maps with the left lifting property against all inner fibrations, the lifting-class meaning of inner anodyne in [lem-coef-inner-anodyne-pushout-product], contains the inner horn inclusions and is closed under pushouts, transfinite composites and retracts, so it contains every inner anodyne map in the saturated sense of [lem-coef-infinity-anodyne-cocones]; and $p$ is an inner fibration by [def-coef-infinity-fibrations]. On $D$ glue $Q_0$ and $c'$ along their common restriction $h'$ on $A$. Let $a:T\\to J^{\\triangleright}$ be the contraction used in Step 1. Extend $a$ to $\\rho:T^{\\triangleright}\\to J^{\\triangleright}$ by sending the new cone vertex to the old cone vertex: explicitly take $a^{\\triangleright}:T^{\\triangleright}\\to(J^{\\triangleright})^{\\triangleright}=J\\star\\Delta^1$ and then the join map induced by $\\Delta^1\\to\\Delta^0$. The restriction of $g\\rho$ to $A^{\\triangleright}$ is constant at $s$, so the glued map lies over $g\\rho|_D$. Lifting gives $r:T^{\\triangleright}\\to E$ over $g\\rho$ extending both pieces. Define $\\kappa:J^{\\triangleright}\\times\\Delta^1\\to T^{\\triangleright}$ to be the identity on $J\\times\\Delta^1$ and to collapse $\\{*\\}\\times\\Delta^1$ to the new cone vertex. On an $n$-simplex its initial block of $J$-vertices is sent to the corresponding simplex of $J\\times\\Delta^1$ and its remaining cone-vertex block to the new cone vertex; this commutes with every face and degeneracy. Put $Q=r\\kappa$ and $v=Q|_{J^{\\triangleright}\\times\\{0\\}}$. Then $Q|_{J^{\\triangleright}\\times\\{1\\}}=c'$, $Q|_{J\\times\\Delta^1}=Q_0$, and $Q|_{\\{*\\}\\times\\Delta^1}$ is the degenerate edge at $x=c'(*)$. Moreover $\\rho\\kappa$ is the identity at time $0$ and constant at the cone vertex at time $1$, so $v|_J=h$ and $pv=g$ exactly. When $J=\\varnothing$, $D\\to T^{\\triangleright}$ is the identity of $\\Delta^0$ and $v=c'$; no endpoint horn lift is required.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.3.1.11, printed p. 267: the intermediate cone (K times Delta^1)^right and its lift r. The text calls the left inclusion an inner fibration; the required property is inner anodyne, justified by the cited pushout-product and pushout-join statements (Kerodon 4.2.5.3 and 4.3.6.4)."
+   }
+  },
+  {
+   "text": "Write $\\lambda:h\\to h'$ for $Q_0$, $\\eta:g|_J\\to\\Delta_Js$ for its base, and $x=c'(*)=v(*)$. Fix any vertex $z$ of $E$. Set $M_1=\\operatorname{Map}_{\\operatorname{Fun}(J,E)}(h',\\Delta_Jz)$, $M_0=\\operatorname{Map}_{\\operatorname{Fun}(J,E)}(h,\\Delta_Jz)$, $N_1=\\operatorname{Map}_{\\operatorname{Fun}(J,B)}(\\Delta_Js,\\Delta_J(pz))$ and $N_0=\\operatorname{Map}_{\\operatorname{Fun}(J,B)}(g|_J,\\Delta_J(pz))$. By [lem-coef-infinity-pointwise-cocartesian-transport], $p_J:\\operatorname{Fun}(J,E)\\to\\operatorname{Fun}(J,B)$ is a cocartesian fibration and $\\lambda$ is $p_J$-cocartesian. Apply [lem-coef-infinity-cocartesian-mapping-criterion] to $p_J$, $\\lambda$ and the target $\\Delta_Jz$. It gives the homotopy-pullback square with upper row $M_1\\xrightarrow{\\lambda^*}M_0$, lower row $N_1\\xrightarrow{\\eta^*}N_0$, and vertical maps induced by $p$. Unlike the fiber formula for a target lying over $\\Delta_Js$, this full mapping-square criterion allows the arbitrary target $\\Delta_Jz$ lying over $\\Delta_J(pz)$. Let $\\alpha_1:h'\\to\\Delta_Jx$ be the coherent cocone of $c'$. Since $c'$ is a $p$-colimit by Step 3, [lem-coef-infinity-relative-cone-constant-test] gives the homotopy-pullback square with upper row $\\operatorname{Map}_E(x,z)\\xrightarrow{u\\mapsto\\Delta_J(u)\\alpha_1}M_1$ and lower row $\\operatorname{Map}_B(s,pz)\\to N_1$. Both assertions apply to every $z$, with no requirement that $pz=s$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-relative-cone-constant-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.9, printed pp. 264-265: expanded mapping-space proof for a degenerate apex component; uses the existing constant-target criterion (Kerodon Proposition 7.1.6.19, colimit dual)."
+   }
+  },
+  {
+   "text": "The two squares of Step 5 are adjacent in the diagram with upper row $\\operatorname{Map}_E(x,z)\\to M_1\\to M_0$ and lower row $\\operatorname{Map}_B(s,pz)\\to N_1\\to N_0$. By [lem-coef-infinity-homotopy-pullback-pasting], their outer rectangle is a homotopy pullback. Identify its maps and its commutation homotopy as follows. Precompose $Q$ with the product of the contraction $a:J\\times\\Delta^1\\to J^{\\triangleright}$ and the identity of the time interval. This gives a map $J\\times\\Delta^1\\times\\Delta^1\\to E$, hence a coherent square whose four edges are the cocone $\\alpha_0:h\\to\\Delta_Jx$ of $v$, the cocone $\\alpha_1$ of $c'$, $\\lambda$, and the degenerate edge of $\\Delta_Jx$. The two triangles with vertices $(0,0),(1,0),(1,1)$ and $(0,0),(0,1),(1,1)$ share the diagonal. Their composition witnesses, with the unit homotopy for the degenerate edge, give $\\alpha_0\\simeq\\alpha_1\\lambda$. The composition and unit homotopies are those of [lem-coef-infinity-mapping-composition]; these triangles are present as coherent diagrams, not just equalities of component classes. Applying the simplicial map $p$ gives the identical construction for $p\\alpha_0\\simeq(p\\alpha_1)\\eta$. Postcomposition with $u:x\\to z$ consequently identifies the upper composite of the outer rectangle with $u\\mapsto\\Delta_J(u)\\alpha_0$, and the lower composite with the corresponding map defined by $p\\alpha_0$. The triangles retain all $J$-parameters, and their images under $p$ are precisely the base triangles, so this is the specified homotopy-commuting square, including its path coordinate, for the constant-target test of $v$. The homotopy-commuting clause of [lem-coef-infinity-homotopy-pullback-pasting] therefore applies. Since it is a homotopy pullback for every $z$, [lem-coef-infinity-relative-cone-constant-test] says that $v$ is a $p$-colimit diagram in the definition of [def-coef-infinity-relative-cone]. Step 4 already gives $v|_J=h$ and $pv=g$ exactly. For empty $J$, Step 4 gives $v=c'$ directly; for nonempty $J$ the same squares and triangles apply without any contractibility assumption.",
+   "uses": [
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.9 and the conclusion of Corollary 4.3.1.11, printed pp. 264-267; mapping-square argument expanded using Kerodon Proposition 7.1.6.19 and homotopy-pullback pasting (Proposition 3.4.1.11)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-fiber-relative-colimit-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-inner-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 4.3.1.11 and its proof, printed pp. 266-267; Proposition 4.3.1.9-4.3.1.10 for transport invariance and fiberwise criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +144,59 @@
    "results": "{\"t\": \"2026-10-17T00:54:34Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of a p colimit extending a simplicial diagram over a fixed cone in the base infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.hasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.Truncated.instHasColimits\"], \"digest\": \"a690ec20fea09139\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned CategoryTheory.LiftsToColimit and CreatesColimit.lifts are for ordinary categories and a colimit already in the base, whereas the present base cone is arbitrary and the fibers are quasicategories. Read CategoryTheory/Limits/Creates.lean:29-37,239-256 and FiberedCategory/Cocartesian.lean:43-78. The second phrasing returned colimits of simplicial sets as objects of an ordinary presheaf category, not coherent colimits inside a quasicategory. Quasicategory/Basic.lean:33-57 supplies inner horn fillers only. The focused grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fiber colimits lift a prescribed base cone through a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T01:53:00Z\", \"tool\": \"leanfinder\", \"query\": \"Fiber colimits lift a prescribed base cone through a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_pt\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_ι_app\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.LiftsToColimit.toLiftableCocone\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\"], \"digest\": \"eea26b8aad48c9a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category fiberwise colimit and IsCocartesian APIs, not coherent relative colimits in quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "Quasicategory colimit cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T01:53:01Z\", \"tool\": \"loogle\", \"query\": \"Quasicategory colimit cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Quasicategory`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error: the service reported Unknown identifier `Quasicategory`; this query provides no absence evidence. A fresh quoted-identifier Loogle query is recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?colimit|cocartesian|coCartesian",
+   "results": "{\"t\": \"2026-10-17T01:53:01Z\", \"tool\": \"grep\", \"query\": \"relative.?colimit|cocartesian|coCartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: focused Quasicategory sources contain no relative-colimit or cocartesian statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fiber colimits lift a prescribed base cone through a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T01:54:49Z\", \"tool\": \"leansearch\", \"query\": \"Fiber colimits lift a prescribed base cone through a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CreatesColimit.lifts\", \"CategoryTheory.liftColimit\", \"CategoryTheory.LiftsToColimit\", \"CategoryTheory.liftedColimitIsColimit\", \"CategoryTheory.LiftableCocone.noConfusion\", \"CategoryTheory.LiftableCocone.mk.noConfusion\", \"CategoryTheory.liftsToColimitOfCreates\", \"CategoryTheory.LiftsToColimit.mk\"], \"digest\": \"062c4581e1c8e7e0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CreatesColimit and LiftsToColimit concern ordinary categories, not this quasicategorical arbitrary prescribed-base cone."
+  },
+  {
+   "tool": "grep",
+   "query": "pColimit|relativeColimit|coCartesian|cocartesian",
+   "results": "{\"t\": \"2026-10-17T02:24:46Z\", \"tool\": \"grep\", \"query\": \"pColimit|relativeColimit|coCartesian|cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean\"], \"digest\": \"94749722d9183962\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FiberedCategory/Cocartesian.lean:43-78; the hits are ordinary-category IsCocartesian/IsStronglyCocartesian declarations or names containing colimit in other ordinary-category constructions. No quasicategorical relative-colimit theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-17T02:24:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the quoted cocartesian/colimit Loogle query returned zero declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative left Kan extension along inclusion of a simplicial set into its right cone over a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T02:24:49Z\", \"tool\": \"leanfinder\", \"query\": \"Relative left Kan extension along inclusion of a simplicial set into its right cone over a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.rightExtensionInclusion\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion_left\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.rightExtensionInclusion_right_as\"], \"digest\": \"439a66151d2f3850\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rightExtensionInclusion and StrictSegal declarations are ordinary right Kan extensions of simplicial objects; the geometric realization hit is an ordinary left Kan extension."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocartesian-relative-cylinder-extension",
@@ -82,5 +225,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-prescribed-cone-colimit-lifting",
+  "worker": "stage1",
+  "summary": "Retained the statement and Steps 1-3; repaired the cone-on-cylinder inner-anodyne lift and proved relative universality by the full cocartesian mapping square, the constant-target criterion, explicit coherent-square triangles and homotopy-pullback pasting. No new nodes or Mathlib leaves.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the existing accessible-functor-category infrastructure: the local HTT Corollary 4.3.1.11 input is realized by cocartesian transport (Step 1), fiber colimit and preservation (Steps 2-3), the strict cone-on-cylinder lift (Step 4), and relative universality (Steps 5-6).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-25df41e61",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-25df41e61 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, six steps, 12 cited node statements, the parent's Step 4, and HTT 4.3.1.9-4.3.1.11 (pp. 264-267, from a local PDF copy). The statement matches HTT Cor. 4.3.1.11 hypothesis by hypothesis, with exact v|_J=h and pv=g. Checked on J empty, J a point and p=id. Steps 2, 3, 5 and 6 are correct. Steps 5 and 6 are adjacent squares from the mapping criterion for p_J and the constant test for c', pasted with coherent triangles from Q∘(a×id); this is 4.3.1.9 in the needed special case. In Step 4, D→T^▷ is the pushout-join of the right anodyne J×{1}→J×Δ^1 with ∅→Δ^0, so it is inner anodyne; the report is right that HTT's 'inner fibration' should read inner anodyne. Repaired two small faults in fixes/dag/nodes/sec-six-functors/<item>.json. (1) C3/E1: Step 1 applied lem-coef-infinity-pointwise-cocartesian-transport, whose hypothesis needs mapping-space cocartesian lifts, but p is horn-cocartesian; I added lem-coef-infinity-cocartesian-mapping-criterion and def-coef-infinity-fibrations to its uses, with one sentence. (2) Step 4 treated the saturated meaning of inner anodyne (lem-coef-infinity-anodyne-cocones) as the same as the lifting-class meaning; I replaced that sentence with the elementary inclusion. Statement, stmt_deps and proof_deps are unchanged. No new nodes. No duplicate in the DAG: checked relative-cone-equivalence, fiber-relative-colimit-criterion, local-fiber test, filtered-fiber cone lifting and relative-cocone-parameters. Acyclic. All citations are in unit sk-prop-sf-biduality-general or are definitions or a Mathlib leaf; no tool_uses; no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
