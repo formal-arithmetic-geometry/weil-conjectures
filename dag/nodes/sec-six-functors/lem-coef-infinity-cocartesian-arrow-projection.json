@@ -246,5 +246,35 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-bfc081123 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the full statements of the five cited nodes (including the proof of lem-coef-infinity-right-prism-boundary), the parent reflection-assembly step that uses the item, the unit record, and the main-20261015 ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2. Kerodon 01VK and 00TH are not in literature/: they are correctly listed as WANTED and the proof is honestly marked agent. I checked the proof as a self-contained argument, so it does not rest on the online source. Statement: p is only an inner fibration, and Z is full on the vertices that have a cocartesian lift. Edge cases are consistent: for empty E, Y and Z are empty; for p=id, theta is an isomorphism; for E={0} in Delta^1, Z must omit the vertex with no lift. The parent uses the item exactly in this form. Step 1: vertex factorization through Z by fullness, and surjectivity. Step 2: reversing the right-prism filtration sends sigma_q to T_k with k=n-q, horn q+1 to horn k, and X_0 to A, so attachments run k=n down to 0. I checked by computer for n=1..5 that each T_k pulls the current stage back to exactly Lambda_k^{n+1} and that the stages cover the prism. Step 3: uncurrying and gluing on A are correct; n>=1 puts every vertical edge in A, where it is cocartesian. Step 4: horns Lambda_k^{n+1} with 1<=k<=n are inner, and both invariants are kept. Step 5: Lambda_0^{n+1} has the fixed cocartesian vertical edge at vertex 0 as its initial edge, and n+1>=2; I checked n=1 by hand. Step 6: currying lands in Y and gives the boundary a and theta c=b. proof_deps equals the union of the uses lists, and there is no cycle. Route: the only non-definition dependency is in the same unit, so no tool_uses are needed. No duplicate among the cocartesian and trivial-Kan nodes I read, and no SGA. Searches cover all three kinds. Minor, no change: the report wrongly says created.item was corrected, but the kept value reflection-assembly is right; the item has no lean_audit, which is a maintainer field. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9240d086a",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read item node, 3 stmt deps and their modules (fullSubcomplex, diagramVertex, evaluation, IsCocartesianEdge, InnerFibration, modelCategoryQuillen.I.rlp). Hypotheses exactly Quasicategory E, Quasicategory B, InnerFibration p in a fixed universe u. Y = full subcomplex of ihom Δ[1] E on cocartesian edges; cocartesianArrowOfVertex is the exact inverse of diagramVertex. R = pullback (ev_0) p; θ = canonical pullback.lift of ihom map p and ev_0; Z = full subcomplex with the exact existence predicate (source at vertex 0 matches the initial edge of IsCocartesianEdge). Conclusion I.rlp includes n=0 surjectivity and boundary fillers over Z. Statement field verbatim. Edge cases n=0, empty, p=id, vertices outside Z checked. Two postponed helper theorems (_condition, _range) are true, named and have proof docstrings; no hollow data; source/blueprint docstrings and six-step proof present; node differs from side only in lean field; report has Worker report and Second reading by Q119; no duplicate found. nt_compile.py --json on the snapshot module rc 0, 1.9 s, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianArrowProjection",
+  "declaration": "SSet.Enhanced.cocartesianArrowProjection_isTrivialKan",
+  "declarations": [
+   "SSet.Enhanced.cocartesianArrowOfVertex",
+   "SSet.Enhanced.cocartesianArrowSubcomplex",
+   "SSet.Enhanced.cocartesianArrowProjectionTarget",
+   "SSet.Enhanced.cocartesianArrowImageSubcomplex",
+   "SSet.Enhanced.cocartesianArrowCanonicalMap_condition",
+   "SSet.Enhanced.cocartesianArrowCanonicalMap",
+   "SSet.Enhanced.cocartesianArrowCanonicalMap_range",
+   "SSet.Enhanced.cocartesianArrowProjection",
+   "SSet.Enhanced.cocartesianArrowProjection_isTrivialKan"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocartesianArrowProjection.lean",
+  "statement": "theorem cocartesianArrowProjection_isTrivialKan {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] [InnerFibration p] : SSet.modelCategoryQuillen.I.rlp (cocartesianArrowProjection p)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical map has its specified internal-hom and source-evaluation legs; its pullback compatibility and full-image range factorization are named postponed theorems of the map construction clause. The main statement is exactly the Mathlib boundary lifting predicate I.rlp."
  }
 }

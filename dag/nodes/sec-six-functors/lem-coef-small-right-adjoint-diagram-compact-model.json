@@ -27,7 +27,12 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-ind-kappa-presentability",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-space-transport-classification",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-model-infinity-derived-adjunction"
  ],
  "proof": [
   {
@@ -149,5 +154,42 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-8b52ea31e (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited node in full. Sources checked against read-only copies already on the server: HTT (5.2.2.1/5.2.2.5, 5.4.2.9–5.4.2.13, 5.4.7.7, 5.5.2.9, 5.5.3.1–5.5.3.4, 5.5.7.2, 5.5.7.7–5.5.7.10, A.2.6.3) and GHN 1501.02161 (the copy on hand numbers them Thm 9.3 final paragraph, Def 9.4 and Lemma 9.9, i.e. v3's 10.3/10.4). The item statement is unchanged and correct. The uncountable λ is needed because HTT 5.5.7.10 only gives the Ind/compact-object equivalence for κ>ω. Variance is correct: F0(f) is the restriction of the left adjoint of H(f^op). Edge cases checked: empty A, a single Sp, identity arrows. All three new nodes are true, statement-only, strictly smaller than the item, and not duplicates. I compared them with lem-coef-infinity-compact-approximation (finite families only), lem-coef-accessible-system-ranks and lem-coef-accessible-functor-presentability-ranks (ordinary categories), lem-coef-infinity-common-compactness-rank (families of objects), lem-coef-presentable-infinity-adjoints (adjoint existence only), and searched all blueprint nodes. Fixes applied: (1) B3: the rank lemma and the right-adjoint node used 'accessible functor', which no cited node defines; its meaning is now written inline, with the cardinals in U. (2) C4/B3: the duality node said only 'contravariantly equivalent' and used Ind_λ without a definition node. It now states three clauses: L preserves compact objects iff R is λ-continuous; the duality is the identity on objects and sends L to its right adjoint, including on diagrams; Ind_λ with u↦u_! is an equivalence inverse to taking compact objects. It also cites lem-coef-ind-kappa-presentability. (3) C1: step 4 claimed u_! is a left adjoint without a citation; it now also cites lem-coef-presentable-infinity-adjoints (same unit, no cycle). The texts of steps 3 and 5 now name those clauses. Source places are corrected (HTT 5.4.7.7; 5.4.2.9 and A.2.6.3; 5.2.2.5) and the new nodes' blueprint.from.place now names the place in the blueprint proof. All cited nodes are in unit sk-prop-sf-biduality-general, so there are no tool_uses. The report mentions a citations.json that is not in the delivery; this does not affect the DAG.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallRightAdjointDiagramCompactModel",
+  "declaration": "SSet.Presentability.small_right_adjoint_diagram_compact_model",
+  "declarations": [
+   "SSet.Presentability.PreservesKappaFiltered",
+   "SSet.Presentability.PreservesKappaSmall",
+   "SSet.Presentability.HasKappaSmallColimits",
+   "SSet.Presentability.compactCatValue",
+   "SSet.Presentability.compactCatQuasicategory",
+   "SSet.Presentability.compactCatArrow",
+   "SSet.Presentability.compactDiagramValue",
+   "SSet.Presentability.compactDiagramBoundary",
+   "SSet.Presentability.compactDiagramArrow",
+   "SSet.Presentability.compactContravariantArrow",
+   "SSet.Presentability.compactRexSubcomplex",
+   "SSet.Presentability.compactRex",
+   "SSet.Presentability.compactRexValue",
+   "SSet.Presentability.CompactIndModel",
+   "SSet.Presentability.CompactIndRight",
+   "SSet.Presentability.small_right_adjoint_diagram_compact_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallRightAdjointDiagramCompactModel.lean",
+  "statement": "theorem small_right_adjoint_diagram_compact_model (A : SSet.{u}) [Quasicategory A] (H : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op ⟶ Enhanced.CatInfinity.{max (u + 1) v}) (hH : ∀ a : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋0⦌, @IsPresentable.{u, v} (compactDiagramValue H a) (compactCatQuasicategory (H.app _ a))) (hR : ∀ e : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋1⦌, ∃ L : compactDiagramValue H ((SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op.δ 0 e) ⟶ compactDiagramValue H ((SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op.δ 1 e), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (compactDiagramArrow H e))) : ∃ κ : Cardinal.{u}, Cardinal.aleph0 < κ ∧ κ.IsRegular ∧ (∀ a : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋0⦌, @IsKappaAccessible _ (compactCatQuasicategory (H.app _ a)) κ) ∧ (∀ e : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A).op _⦋1⦌, PreservesKappaFiltered κ (compactDiagramArrow H e)) ∧ ∃ (R : CompactIndRight.{u, v} κ) (F0 : SSet.uliftFunctor.{max (u + 1) v + 1}.obj A ⟶ SSet.uliftFunctor.{max (u + 1) v + 1}.obj (compactRex κ)), Enhanced.AreNaturallyEquivalent H (SSet.opFunctor.map F0 ≫ R.diagram) ∧ ∀ a : (SSet.uliftFunctor.{max (u + 1) v + 1}.obj A) _⦋0⦌, ∃ k : SSet.uliftFunctor.{max (u + 1) v}.obj (compactRexValue (F0.app _ a).down) ⟶ (Enhanced.fullSubcomplex (compactDiagramValue H (SSet.opObjEquiv.symm a)) (@IsKappaCompact _ (compactCatQuasicategory (H.app _ (SSet.opObjEquiv.symm a))) κ)).toSSet, Enhanced.IsFunctorEquivalence k",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published CatInfinity, Ind completion, Yoneda and coherent-adjunction interfaces. Helpers belong to the compact-model notion introduced explicitly by this item; the only postponed theorem is the item itself. The containing universe remains independent of the small universe. Added statement dependencies are already landed nodes; no mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1066c60a",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Item node statement unchanged and lean.statement verbatim in the file; the 7 dep node copies are identical to the side clone; the 5 added stmt_deps are landed, reviewed and acyclic. Clause check: A quasicategory in u; H a whole simplicial map into CatInfinity.{max(u+1) v}; hH IsPresentable with CatInfinity's own quasicategory witness; hR is a CoherentAdjunction with L as left adjoint; κ:Cardinal.{u}, aleph0<κ, regular; IsKappaAccessible values and PreservesKappaFiltered (small κ-filtered) edges; compactRex is a real subcomplex with κ-small colimits on every vertex (empty diagram included) and preservation on every mapping 0-simplex; F0 a whole simplicial map; Ind via the published indKappa with Yoneda-normalized models and κ-filtered extensions whose right adjoints are the R-edges (variance checked); H ≃ F0^op≫R as an equivalence edge; per-vertex IsFunctorEquivalence to the IsKappaCompact full subcomplex. No extra assumptions or universe equalities; the only sorry is the item theorem; docstrings carry source and blueprint tags. nt_compile reproduces a clean 3.1 s compile. Non-blocking note: Ind^R's higher coherence is pinned only on objects and arrows, as far as the node states."
  }
 }

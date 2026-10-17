@@ -81,5 +81,39 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac7e50e6d",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Existing-interface delivery: commit ac7e50e6d4 adds only the lean record to sk-d-lines.json and the report (both Worker report and Second reading by Q82 present). Read Line.lean in full plus ProjectiveSpace (pullback of Proj MvPolynomial (ULift (Fin 2)) over ULift Z), Charts (affineChart, standardOpenIso), Frobenius (IsFrobenius) and Mathlib AffineSpace.SpecIso. Every node clause matches: base-change model, A1 = Spec F[t] via SpecIso, cartesian overlap D(t) with z=t^-1 plus chart cover, infinity = zeroSection then infinityChart with singleton complement over any field, Frobenius chart equations via expand (Nat.card F) under IsFrobenius, which determines Phi uniquely and is not vacuous over a finite field. The swapped naming of the homogeneous coordinates (source T0 = upstream index 1) is documented in lean.note and changes no chart, overlap or infinity. lean.statement is verbatim Line.lean:107. Universes generic in u. No hollow definition, no sorry (only propext/Classical.choice/Quot.sound), no extra hypotheses. nt_compile.py refused a probe outside the side lean tree; the probe of all 14 names and the signature compiled with lcompile.py against the live build, exit 0. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.infinityChart",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace",
+   "AlgebraicGeometry.Proj.projectiveSpaceOverAffine",
+   "AlgebraicGeometry.ProjectiveLine",
+   "AlgebraicGeometry.AffineSpace.SpecIso",
+   "AlgebraicGeometry.ProjectiveLine.affineChart",
+   "AlgebraicGeometry.ProjectiveLine.infinityChart",
+   "AlgebraicGeometry.ProjectiveLine.infinity",
+   "AlgebraicGeometry.ProjectiveLine.affineChart_eq_homOfSections",
+   "AlgebraicGeometry.ProjectiveLine.infinityChart_eq_homOfSections",
+   "AlgebraicGeometry.ProjectiveLine.isPullback_affineChart_infinityChart",
+   "AlgebraicGeometry.ProjectiveLine.opensRange_affineChart_sup_opensRange_infinityChart",
+   "AlgebraicGeometry.ProjectiveLine.compl_opensRange_affineChart_eq_singleton",
+   "AlgebraicGeometry.ProjectiveLine.affineChart_comp_eq_of_isFrobenius",
+   "AlgebraicGeometry.ProjectiveLine.infinityChart_comp_eq_of_isFrobenius"
+  ],
+  "statement": "def infinityChart : 𝔸(PUnit.{u + 1}; S) ⟶ ProjectiveLine S",
+  "branch": "slopmaster2",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing interface for the entire definition: ProjectiveLine (Spec (.of F)) is the two-coordinate base-change model; AffineSpace.SpecIso identifies its affine chart domains with Spec F[t]; Line supplies the two charts, inverse-coordinate pullback and covering, singleton infinity complement, and both Frobenius equations. Homogeneous coordinate names are translated as source T_0 = upstream coordinate 1 and source T_1 = upstream coordinate 0; hence source t is upstream affineChart coordinate and source z is upstream infinityChart coordinate. This is a renaming of the two indeterminates of the integral model, not a change to either chart or the marked infinity. The primary declaration infinityChart and all Line declarations are defined in the recorded module; ProjectiveLine, ProjectiveSpace and AffineSpace.SpecIso are imported existing constituents, with their defining modules documented in report.md."
  }
 }

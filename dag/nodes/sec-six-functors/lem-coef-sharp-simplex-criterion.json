@@ -282,5 +282,23 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-165ae7d3d (reviewer sub-agent of L); spot-checked: I read the whole item, its four cited statements (kan-quillen-right-proper, sharp-pullback-calculus, realization-finite-limits, sset-gluing-filtered-equivalences), the unit, and the main-20261015 blueprint ancestor prop-coef-integral-exceptional-adjoint (second paragraph). Rezk's paper is not in the literature directory and network access is blocked, so I could not check it. The proof is correctly marked agent-written with the paper WANTED, and I checked the mathematics independently. The statement matches the standard simplex criterion for sharp maps and is not weakened. Small cases agree: B a point (every map is sharp; condition (iii) holds); the vertex inclusion into Delta^1 (not sharp; (iii) fails at vertex 1); E or B empty; p an identity. Steps 1-6 and 8 are correct. In step 3, right properness is applied along Kan fibrations of the replaced cospan, and no fibrancy of E or B is assumed. In steps 4-5 the induction is properly set up: the intersections D_a with D_j are distinct codimension-one faces of D_j containing v, and the gluing lemma's span map and its monomorphism legs check out. In step 6 the retained faces are exactly those containing vertex k, and outer horns and n=1 are covered. In step 7 every arrow-retract map lies over B. In step 8 the boundary lift for p*t is written out. There are no new nodes. All dependencies are in the item's own unit, so no tool_uses are needed. The dependency graph is acyclic: the item's 159-node dependency closure does not contain it, and its only citer is sharp-special-colimit-gluing. A rg search of the DAG found no duplicate. FIX: step 7 went from 'has the left lifting property against Kan fibrations' to 'trivial cofibration' without justification. I added the retract argument (factor as c then t, lift h, so p*i is a retract of c). This is in fixes/dag/nodes/sec-six-functors/lem-coef-sharp-simplex-criterion.json; no uses or dependencies changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b332f07b8",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Clause-by-clause check of SSet.sharp_simplex_criterion against the node and the side-clone definitions IsSharp, IsHomotopyCartesian (SharpPullbackCalculus.lean:41,55) and Enhanced.IsWeakHomotopyEquivalence: arbitrary p in an unrestricted universe u, no fibrancy or mono hypothesis; (ii) square argument order matches the definition, n=0 included; (iii) quantifies all m, n, arbitrary delta and sigma, and pullback.map p (delta≫sigma) p sigma (𝟙 E) delta (𝟙 B) is the canonical map; full (i↔ii)∧(i↔iii). lean.statement is verbatim the file signature (diffed). Node changes only lean; no new nodes or dependency modules. Edge cases: empty E, empty B, B a point, m=n=0, vertex inclusion into Delta^1 as a non-sharp test. Gates: no definitions, only sorry, source and blueprint docstrings, all 8 proof steps, autoImplicit false, both report sections real, no duplicate notion. nt_compile.py --json rc 0 with no errors or warnings (2.0 s); a control with delta replaced by identity failed as expected. Rezk's paper was not reachable from this server; the source check relies on the standard criterion, the node's earlier review and both reports. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SharpSimplexCriterion",
+  "declaration": "SSet.sharp_simplex_criterion",
+  "file": "lean/Sheaf/AlgebraicTopology/SharpSimplexCriterion.lean",
+  "statement": "theorem sharp_simplex_criterion (E B : SSet.{u}) (p : E ⟶ B) : (IsSharp p ↔ ∀ (n : ℕ) (σ : stdSimplex.{u}.obj ⦋n⦌ ⟶ B), IsHomotopyCartesian (pullback.fst p σ) (pullback.snd p σ) p σ) ∧ (IsSharp p ↔ ∀ (m n : ℕ) (δ : stdSimplex.{u}.obj ⦋m⦌ ⟶ stdSimplex.{u}.obj ⦋n⦌) (σ : stdSimplex.{u}.obj ⦋n⦌ ⟶ B), Enhanced.IsWeakHomotopyEquivalence (pullback.map p (δ ≫ σ) p σ (𝟙 E) δ (𝟙 B) (by simp) (by simp)))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

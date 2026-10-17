@@ -9,7 +9,8 @@
  "kind": "statement",
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "lem-coef-parametric-universal-arrows"
  ],
  "proof": [
   {
@@ -238,5 +239,28 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-e2aeb5e20 (reviewer sub-agent of L); spot-checked: I read the item and all 15 cited statements in full. The statement is the finite-discrete case of HTT 5.3.6.2 (the P^K_R completion with R empty) plus the left Kan mapping property of HTT 4.3.2.17. It requires nothing of E beyond finite coproducts, puts no condition on H, and the comparison map is t->(ti)eta. I tested it on K empty, a point, two points and the horn Lambda^2_1, on E terminal, and on the empty E that the hypothesis excludes; all hold. Step 1: the coherent realization of K has object set K_0, the replacement A is fibrant, and the Quillen equivalence makes q a Joyal equivalence; the Joyal test then gives F_0 and eta. Step 2: in the finite-list category D, singleton lists recover A, and the block isomorphism, with the empty case a point, together with the Yoneda colimit criterion gives the coproducts, including the initial empty list. Step 3: the slice T_a decomposes as a disjoint union of the slices of B at the entries, by the transport classification with its pullback and postcomposition clauses; the old claim that this comma category is discrete is correctly removed, with the counterexample B=N[1]. Step 4: identities are final in their slices, the colimit over a final object gives each local colimit, and transport along v_a carries the cocone. Step 5: the relative Kan existence theorem applies over the point; the join and coherent cocone forms are matched through the opposite of the join-cone calculus (allowed by relative-cone-equivalence (4)) and the constant test; preservation is shown for concatenations and then for every coproduct cocone by uniqueness of initial objects. Step 6: kan-mapping-restriction, then q^* and eta, give exactly (ti)eta, naturally in H. There are no new nodes and no duplicate; the nearest nodes (intermediate-presheaf-kan, presheaf-presentability, finite-poset-kan-extension) need other hypotheses. The item does not restate a clause of its parent, there is no cycle, and review_split.py passes. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), which is generic cocone/initial-object calculus with a precedent on finite-poset-kan-extension; the maintainer should record it. HTT and Kerodon are not in literature/, so I could not open them; they are WANTED and proof_origin is agent. Every non-elementary fact is carried by a cited node statement. No SGA is used and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityFiniteCoproductEnvelope",
+  "declaration": "SSet.Enhanced.infinity_finite_coproduct_envelope",
+  "declarations": [
+   "SSet.Enhanced.FiniteEnvelopeMappingProperty",
+   "SSet.Enhanced.infinity_finite_coproduct_envelope"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityFiniteCoproductEnvelope.lean",
+  "statement": "theorem infinity_finite_coproduct_envelope (K : SSet.{u}) : ∃ J : SSet.{u}, Quasicategory J ∧ ∃ i : K ⟶ J, (∀ (n : ℕ) (P : nerve (Discrete (ULift.{u} (Fin n))) ⟶ J), ∃ c : (coconeCategory P) _⦋0⦌, IsColimiting P c) ∧ (∀ x : J _⦋0⦌, ∃ (n : ℕ) (k : Fin n → K _⦋0⦌) (P : nerve (Discrete (ULift.{u} (Fin n))) ⟶ J) (c : (coconeCategory P) _⦋0⦌), (∀ a : Fin n, P.app (op ⦋0⦌) (nerveEquiv.symm (Discrete.mk (ULift.up.{u} a))) = i.app (op ⦋0⦌) (k a)) ∧ IsColimiting P c ∧ ∃ e : SSet.Edge x c.1.1, IsEquivalenceEdge J e.edge) ∧ ∀ (E : SSet.{max (u + 1) v}) [Quasicategory E], (∀ (n : ℕ) (P : nerve (Discrete (ULift.{max (u + 1) v} (Fin n))) ⟶ E), ∃ c : (coconeCategory P) _⦋0⦌, IsColimiting P c) → ∀ F : SSet.uliftFunctor.{max (u + 1) v}.obj K ⟶ E, ∃ (G : SSet.uliftFunctor.{max (u + 1) v}.obj J ⟶ E) (η : SSet.Edge (diagramVertex F) (diagramVertex (SSet.uliftFunctor.{max (u + 1) v}.map i ≫ G))), IsEquivalenceEdge ((ihom (SSet.uliftFunctor.{max (u + 1) v}.obj K)).obj E) η.edge ∧ (∀ (n : ℕ) (P : nerve (Discrete (ULift.{max (u + 1) v} (Fin n))) ⟶ SSet.uliftFunctor.{max (u + 1) v}.obj J) (c : (coconeCategory P) _⦋0⦌), IsColimiting P c → IsColimiting (P ≫ G) (CategoryTheory.Spaces.mappedCocone G P c)) ∧ FiniteEnvelopeMappingProperty (SSet.uliftFunctor.{max (u + 1) v}.map i) F G η",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The finite-coproduct existence and preservation tests are written explicitly on finite discrete nerves, including the empty shape. The mapping property uses the already landed canonical composition-span and parametric restriction interface, added as a statement dependency; no second mapping-space or composition construction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36eeb746c",
+  "group": "Q59",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause: universes u inside max(u+1) v with no extra equation, any small K, a small quasicategory J with finite coproducts on Fin n shapes including n=0, generation by i(k) up to an equivalence edge, E needing only finite coproducts, an unrestricted F, G preserving every finite cocone via mappedCocone, and eta from F to Gi with both inverse triangles. UniversalArrowAt with right=false makes t -> (ti)eta an equivalence of whole mapping spaces against every H with no condition on H; the version over every parameter T gives naturality with higher simplices. The third conjunct (restriction compatibility) is generic and harmless. The node differs from the shared copy only in lean and in adding the landed lem-coef-parametric-universal-arrows to stmt_deps (brief-stage2 §5). lean.statement is verbatim in the file. All proof-dependency modules are imported; the yoneda-presheaf-limits node has no module and is named in the docstring. The helper is not hollow, docstrings give source and blueprint plus the six proof steps, the only sorry is the theorem proof, the report has both sections, and no duplicate was found. Edge cases checked: empty K, empty or terminal E, non-preserving H, horn K. nt_compile.py --json on the snapshot file: rc=0, no diagnostics (warn.sorry=false in the live lakefile), no lake build."
  }
 }
