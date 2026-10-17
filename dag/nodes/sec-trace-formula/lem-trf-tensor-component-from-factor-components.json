@@ -7,14 +7,108 @@
   "place": "Tag 00EG (lemma-connected-component), applied to both projections and to the idempotent quotient of the tensor product. This supplies the component reduction implicit in Hübner–Schmidt Theorem 6.4, printed p. 13."
  },
  "stmt_deps": [
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the hypotheses for applying the clopen-intersection theorem to affine spectra. For each ring $R$ used below, $\\operatorname{Spec}R$ is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Its covering by the single affine open $\\operatorname{Spec}R$ has quasi-compact pairwise intersection (the whole space); clause (2) of [lem-weil-pbc-quasi-separated-affine-cover-criterion] therefore makes it quasi-separated as a scheme. Apply [lem-weil-pbc-qcqs-scheme-spectral]. In particular its underlying space has all three hypotheses of the clopen-intersection theorem, with no Noetherian or local-connectedness assumption.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 094L (lemma-quasi-compact-quasi-separated-spectral), with Algebra Tag 00E8 (lemma-quasi-compact) and Schemes Tag 01KO (lemma-characterize-quasi-separated)."
+   }
+  },
+  {
+   "text": "Put $T=B_1\\otimes_A B_2$ and $I=I_Z$. Choose $z\\in Z$. By [lem-weil-pbc-quasicompact-components-clopen-intersection], $Z$ is the intersection of the clopen neighbourhoods of $z$ in $\\operatorname{Spec}T$. A clopen containing $z$ contains all of $Z$, since its intersection and its complement would otherwise separate $Z$. By [lem-weil-pbc-spec-clopen-idempotent], every such clopen is $D(u)=V(1-u)$ for an idempotent $u$. Thus the intersection is precisely $\\bigcap_{e^2=e,\\ Z\\subseteq V(e)}V(e)=V(I)$: containing all the generators is equivalent to containing their ideal. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], the quotient $p:T\\twoheadrightarrow C=T/I$ identifies $\\operatorname{Spec}C$ homeomorphically with $Z$. In particular this spectrum is nonempty and connected.",
+   "uses": [
+    "lem-weil-pbc-quasicompact-components-clopen-intersection",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EG (lemma-connected-component), proof; inputs Topology Tag 005F (lemma-connected-component-intersection), Algebra Tag 00EE (lemma-disjoint-decomposition) and Tag 00E5 (lemma-spec-closed)."
+   }
+  },
+  {
+   "text": "Let $\\iota_j:B_j\\to T$ be the canonical tensor maps, and $\\pi_j=\\operatorname{Spec}(\\iota_j)$ their continuous spectrum maps [def-weil-affine-spectrum]. The image $\\pi_j(Z)$ is nonempty and connected: a separation by relatively open subsets would pull back to a separation of $Z$. Let $Z_j$ be the connected component containing $\\pi_j(z)$. The union of $Z_j$ and the connected set $\\pi_j(Z)$, which meet at $\\pi_j(z)$, is connected (any separation would separate one of the two meeting sets). Maximality of $Z_j$ gives $\\pi_j(Z)\\subseteq Z_j$. This proves the required assertion about both projections.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E2 (lemma-spec-functorial); elementary connected-image and maximal-connected-subset arguments for the two projections in the component reduction."
+   }
+  },
+  {
+   "text": "Write $I_j=I_{Z_j}$, $q_j:B_j\\twoheadrightarrow D_j=B_j/I_j$ and $E=D_1\\otimes_A D_2$. For each generating idempotent $e\\in I_j$ vanishing on $Z_j$, $\\iota_j(e)$ is an idempotent vanishing on $Z$, since $\\pi_j(Z)\\subseteq Z_j$. Hence $\\iota_j(e)\\in I$, so $p\\iota_j$ kills $I_j$ and induces an $A$-algebra map $f_j:D_j\\to C$, $f_j(q_j(b))=p(\\iota_j(b))$. The two maps have the same restriction from $A$. Apply [lem-weil-pbc-algebra-tensor-pushout-universal-property] to obtain $r:E\\to C$ with $r(d_1\\otimes d_2)=f_1(d_1)f_2(d_2)$ and the canonical map $q:T\\to E$ with $q(b_1\\otimes b_2)=q_1(b_1)\\otimes q_2(b_2)$. Their composite agrees with $p$ on both factor maps, so uniqueness in that same node gives $rq=p$. The map $q$ is surjective: express an element of $E$ as a finite sum of pure tensors and lift each tensor factor through $q_1,q_2$. Since $p$ is surjective and $rq=p$, $r$ is surjective too.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EG, component-ideal calculation for the projections; the algebra tensor pushout property is recorded in the cited Mathlib leaf, also used in Schemes Tag 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "Let $K=\\ker r$. Because $q$ is surjective and $rq=p$, we have $K=q(I)$ as ideals: an element $q(t)$ belongs to $K$ exactly when $p(t)=0$, that is $t\\in I$. More explicitly, applying $q$ to a finite expression in the idempotent generators of $I$ shows that every element of $K$ is a linear combination over $E$ of their images, and each such image lies in $K$. Consequently $K$ is generated by the idempotents $q(e)$ with $e^2=e$ and $Z\\subseteq V(e)$. This uses no assertion that arbitrary idempotents lift through $q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary kernel and generated-ideal calculation in the idempotent-quotient reduction of Tag 00EG."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] to $q$ and $r$. Write $h=\\operatorname{Spec}q$ and $W=\\operatorname{Spec}r(\\operatorname{Spec}C)=V(K)\\subseteq\\operatorname{Spec}E$. These maps identify $\\operatorname{Spec}C$ homeomorphically with $W$ and $\\operatorname{Spec}E$ with a subspace of $\\operatorname{Spec}T$; since $rq=p$, $h$ takes $W$ bijectively onto $Z$. Thus $W$ is nonempty and connected. If a connected subset $U\\subseteq\\operatorname{Spec}E$ contains $W$, its continuous image $h(U)$ is connected and contains $Z$. Maximality of $Z$ forces $h(U)=Z=h(W)$; injectivity of $h$ forces $U=W$. Therefore $W$ is a connected component of $\\operatorname{Spec}E$. The connected-image argument is the elementary separation argument of step 3.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E5 (lemma-spec-closed), applied to both surjections; maximality of a connected component under the resulting subspace identification."
+   }
+  },
+  {
+   "text": "It remains to identify the ring, rather than only its spectrum. Let $I_W\\subseteq E$ be generated by all idempotents $a\\in E$ with $W\\subseteq V(a)$. Every idempotent generator of $K$ in step 5 vanishes on $W=V(K)$; hence $K\\subseteq I_W$. Conversely, if $a^2=a$ and $W\\subseteq V(a)$, then $r(a)$ belongs to every prime ideal of $C$, by the spectrum identification in step 6. Thus $D(r(a))=\\varnothing=D(0)$ in $\\operatorname{Spec}C$. Uniqueness in [lem-weil-pbc-spec-clopen-idempotent] implies $r(a)=0$, because both $r(a)$ and $0$ are idempotents with this same basic open. Every generator of $I_W$ therefore lies in $K$, giving $I_W=K$. The surjection $r$ induces $E/I_W\\cong C$: the inverse sends $c$ to the class of any lift $d\\in E$ with $r(d)=c$, which is independent of the lift since their difference lies in $K=I_W$. Its composites with the maps $D_j\\to E/I_W$ are $f_j$, by the formula for $r$ in step 4; composing with $q_j$ gives $p\\iota_j$. These are exactly the required compatibilities with $D_j$ and $B_j$. If $T=0$ there is no connected component $Z$, so the original assertion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE (lemma-disjoint-decomposition), uniqueness; comparison of the idempotent-generated ideals in the component reduction of Tag 00EG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit two-factor component reduction, using Tag 00EG and its cited component/clopen route (Topology 005F, Algebra 00EE), quotient spectra 00E5, and the tensor-product universal property. No appeal to Hübner–Schmidt Theorem 6.4 is needed for this elementary ring-theoretic input."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-artin-henselian-tensor-residue-dichotomy",
@@ -51,6 +145,27 @@
    "results": "[grep] OK 1 hit(s): Mathlib/RingTheory/Etale/Finite.lean:110   NatIso.ofComponents (fun A ↦ isoMk (Algebra.TensorProduct.lid _ _)) <| fun {A B} f ↦ by. Spectrum tensor-product projections and module tensor-quotient equivalences do not identify the indicated quotient as a connected component ring; the grep hit is NatIso.ofComponents, unrelated to connected components.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected component of Spec B tensor A C is a component of the tensor product of connected component quotient rings of B and C",
+   "results": "{\"t\": \"2026-10-17T19:38:20Z\", \"tool\": \"leansearch\", \"query\": \"A connected component of Spec B tensor A C is a component of the tensor product of connected component quotient rings of B and C\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.tensorProductTo\", \"Algebra.FormallySmooth.instTensorProduct\", \"PrimeSpectrum.continuous_tensorProductTo\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"PrimeSpectrum.primeSpectrumProdHomeo\", \"PrimeSpectrum.primeSpectrumProd\", \"ConnectedComponents\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\"], \"digest\": \"b8704541a6807d40\"} The spectrum projection and its continuity are ingredients; the embedding hits require additional surjective-on-stalks hypotheses and do not identify the component quotient. None gives all clauses of this node.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient a commutative ring by idempotents vanishing on a connected component; factor a tensor product component quotient through component quotients of both algebras",
+   "results": "{\"t\": \"2026-10-17T19:38:21Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient a commutative ring by idempotents vanishing on a connected component; factor a tensor product component quotient through component quotients of both algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgEquiv.prodQuotientOfIsIdempotentElem_apply\", \"AlgEquiv.prodQuotientOfIsIdempotentElem_apply_snd\", \"AlgEquiv.prodQuotientOfIsIdempotentElem_apply_fst\", \"AlgEquiv.prodQuotientOfIsIdempotentElem\", \"Algebra.TensorProduct.quotIdealMapEquivTensorQuot\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Ideal.pi_mkQ_rTensor\", \"Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk\"], \"digest\": \"13e609a96a85cc88\"} The hits give decompositions for a single idempotent or a tensor-quotient equivalence, not the component assertion. In particular the quotient equivalence does not identify the generated component ideal.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected components of the spectrum of a tensor product arise as component quotients of the tensor product of component rings of both factors",
+   "results": "{\"t\": \"2026-10-17T19:38:23Z\", \"tool\": \"leanfinder\", \"query\": \"Connected components of the spectrum of a tensor product arise as component quotients of the tensor product of component rings of both factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.tensorProductTo\", \"PrimeSpectrum.continuous_tensorProductTo\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"PrimeSpectrum.preimageEquivFiber_symm_apply_coe\", \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\"], \"digest\": \"18d6e6ed7a1f7632\"} The spectrum projection and its continuity are ingredients; the embedding hits require additional surjective-on-stalks hypotheses and do not identify the component quotient. None gives all clauses of this node.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -70,5 +185,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-tensor-component-from-factor-components",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused the existing clopen-intersection, clopen/idempotent, quotient-spectrum and algebra-tensor leaves, with all affine spectrality hypotheses justified. Wrote the factorization, surjectivity, component maximality and equality of the component ideal with the actual kernel explicitly. No new nodes, no new Mathlib leaves, no Lean writing or compilation.",
+  "blueprint": "Realizes the existing ancestry place: the normal-cone specialization argument of lem-trf-local-term-locality, through the Artin tensor input and its reduction from Hübner–Schmidt Theorem 6.4 to Theorem 6.3. This item supplies precisely the component reduction used in step 2 of lem-trf-artin-henselian-tensor-residue-dichotomy; it does not replace a unit-level geometric argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasicompact-components-clopen-intersection",
+    "why": "Generic Topology Tag 005F gives the exact component-as-intersection-of-clopens formula used in the component-ideal argument of Algebra 00EG. No node in sk-i-curve-zero states that underlying topology fact; all hypotheses are checked in step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasicompact-components-clopen-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-da0486767",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-da0486767 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full against the statements of the 8 cited nodes, against Stacks Tag 00EG (algebra.tex l.4008, whose proof is 005F plus 00EE, the same as steps 1-2) and against Tag 005F (topology.tex l.1816; its hypotheses match the node and are checked in step 1 via 01KO(2) on the one-member affine cover and qcqs implies spectral). Step 4: idempotents of I_j map into I_Z because the projection of Z lies in Z_j; pushout clauses (2)/(3) give r, q and rq=p, and q and r are surjective. Step 5: ker r = q(I_Z), without lifting arbitrary idempotents. Step 6: maximality of W comes from injectivity of Spec q. Step 7: K = I_W, using uniqueness in 00EE (D(r(a)) is empty, so r(a)=0), and the compatibilities with D_j and B_j are written out. The statement is unchanged; its I_Z convention agrees with 00EG, and it matches what parent lem-trf-artin-henselian-tensor-residue-dichotomy step 2 uses. Cases tested: k, k×k over k, L⊗_K L for quadratic Galois L/K (E disconnected), k[ε]/ε² (no reduction), infinite products of fields (non-open components). No new nodes; the rg duplicate search found nothing equivalent. No SGA source. Accepted tool_use: lem-weil-pbc-quasicompact-components-clopen-intersection, the generic Topology 005F fact, Lean closed in slopmaster2. No fixes."
  }
 }
