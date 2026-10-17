@@ -2,20 +2,89 @@
  "id": "lem-trf-valuation-flat-finite-module-presentation",
  "kind": "statement",
  "title": "Flat finite modules over valuation algebras are finitely presented",
- "statement": "Let $A$ be a valuation ring, meaning an integral domain whose fraction field $K$ has $a\\in A$ or $a^{-1}\\in A$ for every $a\\in K^\\times$. Let $A\\to B$ be a local homomorphism which is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra]. If $M$ is a finite $B$-module [def-weil-finitely-generated-module] that is flat as an $A$-module [def-weil-pbc-flat-ring-map], then $M$ is finitely presented as a $B$-module [def-sc-finitely-presented-module].",
+ "statement": "Let $A$ be a valuation ring [def-trf-valuation-ring], meaning an integral domain whose fraction field $K$ has $a\\in A$ or $a^{-1}\\in A$ for every $a\\in K^\\times$. Let $A\\to B$ be a local homomorphism which is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra]. If $M$ is a finite $B$-module [def-weil-finitely-generated-module] that is flat as an $A$-module [def-weil-pbc-flat-ring-map], then $M$ is finitely presented as a $B$-module [def-sc-finitely-presented-module].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma Tag 0GSE (lemma-valuation-ring-flat-essentially-finite-type), part (2), statement and proof at lines 6005--6044"
  },
  "stmt_deps": [
+  "def-trf-valuation-ring",
   "def-weil-pbc-essentially-finite-type-algebra",
   "def-weil-pbc-flat-ring-map",
   "def-weil-finitely-generated-module",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-essentially-finite-type-algebra], write B as W^{-1}C for a finite type A-algebra C and multiplicative set W. Choose a surjection P=A[x_1,\\ldots,x_n]\\twoheadrightarrow C from [def-weil-pbc-finite-type-algebra], and let rho:P\\to B be the composite. For q=rho^{-1}(m_B), every element outside q maps to a unit of the local ring B, so rho factors through P_q\\to B. Every fraction c/w in B has c and w represented by p,s in P, and w is a unit because s\\notin q; hence P_q\\to B is surjective. The map P_q\\to B makes B a finite type P_q-algebra.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GSE, proof, first paragraph (lines 6016--6024)"
+   }
+  },
+  {
+   "text": "Choose a finite surjection $P_q^{\\oplus r}\\twoheadrightarrow M$, possible because $M$ is finite over $B$ and hence over $P_q$, and let $K$ be its kernel, so $0\\to K\\to P_q^{\\oplus r}\\to M\\to0$ is exact. Let $L\\subseteq P^{\\oplus r}$ be the inverse image of $K$ under $P^{\\oplus r}\\to P_q^{\\oplus r}$. By [lem-trf-module-submodule-localization], $K=L_q$. Therefore the induced map $N=P^{\\oplus r}/L\\to M$ is injective, so $N$ is a $P$-submodule of $M$.",
+   "uses": [
+    "lem-trf-module-submodule-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GSE, proof, second paragraph (lines 6026--6030)"
+   }
+  },
+  {
+   "text": "The module M is flat over the domain A, so it is torsion-free by [lem-trf-flat-module-torsionfree-domain]. Its P-submodule N is therefore torsion-free, hence flat over the valuation ring A by [lem-trf-valuation-torsionfree-flat]. Since N is finite over the finite type A-algebra P, [lem-trf-valuation-finite-type-module-presentation] gives that N is finitely presented as a P-module.",
+   "uses": [
+    "def-trf-valuation-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-trf-valuation-finite-type-module-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GSE, proof, second paragraph (lines 6031--6035)"
+   }
+  },
+  {
+   "text": "Localize a finite presentation of N at q. By [lem-trf-localization-preserves-finite-presentation], N_q is finitely presented as a P_q-module. Exactness of localization [lem-weil-pbc-localization-module-exact] applied to 0\\to L\\to P^{\\oplus r}\\to N\\to0 identifies N_q with M. Since P_q\\to B is of finite type by Step 1, [lem-trf-finitely-presented-over-subring] upgrades finite presentation of M over P_q to finite presentation over B.",
+   "uses": [
+    "lem-trf-localization-preserves-finite-presentation",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-trf-finitely-presented-over-subring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GSE, proof, second paragraph (lines 6033--6038)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-trf-module-submodule-localization",
+  "def-trf-valuation-ring",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-trf-valuation-finite-type-module-presentation",
+  "lem-trf-localization-preserves-finite-presentation",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-trf-finitely-presented-over-subring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0GSE (lemma-valuation-ring-flat-essentially-finite-type), part (2), proof lines 6016--6038"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -37,10 +106,17 @@
    "results": "0 hits in the searched Mathlib directories",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite module over essentially finite type local algebra flat over valuation ring finitely presented",
+   "results": "instFiniteOfFinitePresentation; Module.FinitePresentation.mk; Module.finitePresentation_of_finite; Module.FinitePresentation.iff_finitePresentation_of_finite; Module.FinitePresentation.of_finite_of_finitePresentation; Module.finitePresentation_iff_finite; Module.FinitePresentation; Module.Presentation.finitePresentation",
+   "date": "2026-10-18",
+   "verdict": "no match: only generic finite-presentation constructions, no theorem with valuation-ring and essentially-finite-type hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-finite-module-injectivity",
@@ -52,7 +128,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The finite-presentation reduction in Tag 0GSG: More on Algebra Lemma 0GSE, part (2), applied to the flat target module M.",
+   "place": "The finite-presentation reduction in Tag 0GSG: More on Algebra Lemma 0GSE, part (2), applied to the flat target module M; the proof realizes the polynomial-localization reduction and the 0GSE(2) argument.",
    "via": [
     "lem-trf-valuation-finite-module-injectivity",
     "lem-trf-flat-relative-associated-specialization",
@@ -70,5 +146,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-flat-finite-module-presentation",
+  "worker": "stage1",
+  "summary": "Split Tag 0GSE(2) faithfully. The proof reduces the essentially finite type local algebra to a quotient of a polynomial localization, pulls the kernel back to a submodule before localization, proves the resulting finite P-module is flat over the valuation ring and hence finitely presented, localizes its presentation, and transfers finite presentation across the finite type quotient map. Added two unsplit Stacks inputs (053E and 0561) and three Mathlib-backed leaves for flat torsion-freeness, submodule localization, and localization of finite presentations.",
+  "blueprint": "The steps realize the ancestor proof's finite-presentation reduction clause: polynomial localization, kernel intersection/localization, finite-type valuation-ring presentation (Tag 053E(2)), and finite-presentation transfer (Tag 0561)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q109-99b07f603",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q109-99b07f603 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but the item has incorrect created provenance (Q147/another item) and all seven delivered nodes lack the claimed lean_audit records. Corrected whole-node files are in fixes/dag/nodes/sec-trace-formula/; review.md records the checks.; 7 file(s) fixed by the reviewer"
  }
 }

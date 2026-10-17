@@ -2,7 +2,7 @@
  "id": "lem-trf-space-etale-module-pushforward-restriction",
  "kind": "statement",
  "title": "Etale localization commutes with direct image of arbitrary space modules",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $g:Y\\prime\\to Y$ be etale. Put $X\\prime=X\\times_Y Y\\prime$, with projections $h:X\\prime\\to X$ and $f\\prime:X\\prime\\to Y\\prime$. For a sheaf $F$ of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], direct image means module direct image on small etale ringed topoi. There is a canonical natural isomorphism $(f_*F)|_{Y\\prime}\\xrightarrow{\\sim}f\\prime_*(F|_{X\\prime})$. For an etale scheme $V\\to Y\\prime$, it identifies both sides with the sections of $F$ over $X\\times_YV=X\\prime\\times_{Y\\prime}V$; sections over this space mean compatible sections on its etale scheme charts. The comparison is the identity on these compatible sections, and is compatible with restriction in $V$ and with module morphisms in $F$. For any etale map $u:Z\\prime\\to Z$ of algebraic spaces, $u^{-1}\\mathcal O_Z\\simeq\\mathcal O_{Z\\prime}$ and the tensor pullback $u^*M=\\mathcal O_{Z\\prime}\\otimes_{u^{-1}\\mathcal O_Z}u^{-1}M$ [def-pur-sheaf-tensor-product] is this restriction of modules on the localized etale sites. For every module $G$ on $Y_{\\mathrm{et}}$, the square also has a canonical natural tensor-pullback comparison $(f^*G)|_{X\\prime}\\simeq f\\prime^*(G|_{Y\\prime})$, where $f^*$ and $f\\prime^*$ are the tensor pullbacks along the induced morphisms of ringed topoi. On local tensors this comparison keeps the restricted section and multiplies the two scalar coefficients; it identifies the two paths from $Y$ to $X\\prime$.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $g:Y\\prime\\to Y$ be an etale morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Put $X\\prime=X\\times_Y Y\\prime$ [lem-trf-space-fibre-products-etale-covers], with projections $h:X\\prime\\to X$ and $f\\prime:X\\prime\\to Y\\prime$. For a sheaf $F$ of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], direct image means module direct image on small etale ringed topoi. There is a canonical natural isomorphism $(f_*F)|_{Y\\prime}\\xrightarrow{\\sim}f\\prime_*(F|_{X\\prime})$. For an etale scheme $V\\to Y\\prime$, it identifies both sides with the sections of $F$ over $X\\times_YV=X\\prime\\times_{Y\\prime}V$; sections over this space mean compatible sections on its etale scheme charts. The comparison is the identity on these compatible sections, and is compatible with restriction in $V$ and with module morphisms in $F$. For any etale map $u:Z\\prime\\to Z$ of algebraic spaces, $u^{-1}\\mathcal O_Z\\simeq\\mathcal O_{Z\\prime}$ and the tensor pullback $u^*M=\\mathcal O_{Z\\prime}\\otimes_{u^{-1}\\mathcal O_Z}u^{-1}M$ [def-pur-sheaf-tensor-product] is this restriction of modules on the localized etale sites. For every module $G$ on $Y_{\\mathrm{et}}$, the square also has a canonical natural tensor-pullback comparison $(f^*G)|_{X\\prime}\\simeq f\\prime^*(G|_{Y\\prime})$, where $f^*$ and $f\\prime^*$ are the tensor pullbacks along the induced morphisms of ringed topoi. On local tensors this comparison keeps the restricted section and multiplies the two scalar coefficients; it identifies the two paths from $Y$ to $X\\prime$.",
  "source": {
   "document": "literature/stacks-project/spaces-properties.tex",
   "place": "Tags 03LX (lemma-pushforward-etale-base-change-modules), degree-zero assertion; 03LV (lemma-etale-exact-pullback) and 03LW (equation-restrict-modules). Section formula also spaces-morphisms.tex Tag 03M8 (lemma-compute-pushforward), proof, and spaces-properties.tex lemma-pushforward-etale-base-change. The pullback comparison is the footnote in Tag 03LX, using composition of the two paths in the ringed-topos square."
@@ -11,11 +11,85 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-fibre-products-etale-covers"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the enlarged etale ringed-site model for $X$ and $Y$. Write $\\mathcal C_X,\\mathcal C_Y$ for its sites and temporarily write $F$ and $\\mathcal O_X$ for their extensions. The continuous functor defining $f$ is $v_f(V)=X\\times_YV$, with its canonical ring map. Thus the hypotheses about a morphism of ringed sites in the localization theorem hold, without a representability hypothesis on $f$. Scheme objects need not be preserved by $v_f$; this is why we use the enlarged sites. The extension theorem interprets sections on an etale space as compatible sections on scheme charts.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G1, 03G2, 03G8 and 03H7, as packaged in the enlarged-site model"
+   }
+  },
+  {
+   "text": "For any etale $u:Z'\\to Z$, the model identifies its ringed topos with localization at $Z'$. The definition of restriction gives $u^{-1}\\mathcal O_Z(T\\to Z')=\\mathcal O_Z(T)=\\mathcal O_{Z'}(T)$, with identical restrictions and ring operations. For modules, the tensor pullback therefore reduces to $\\mathcal O_{Z'}\\otimes_{\\mathcal O_{Z'}}(M|_{Z'})$. The maps $a\\otimes m\\mapsto am$ and $m\\mapsto1\\otimes m$ are inverse: $1\\otimes am=a\\otimes m$ is the tensor balancing relation. These maps commute with restrictions and hence induce inverse maps of the sheafified tensors. They are natural in $M$. This proves that the tensor pullback along an etale map is precisely restriction, including its module structure.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LV (lemma-etale-exact-pullback), 03LW (equation-restrict-modules); the ringed-site identifications come from the cited model"
+   }
+  },
+  {
+   "text": "The family $\\{g:Y'\\to Y,\\operatorname{id}_Y:Y\\to Y\\}$ is jointly surjective and etale: the identity is etale and its image contains every point of $Y$. Apply [lem-trf-space-fibre-products-etale-covers] to this family and the arbitrary morphism $f:X\\to Y$. Each member of the pulled-back family is etale; in particular $h:X'=X\\times_Y Y'\\to X$ is etale. This does not assume that $g$ itself is surjective. Regard $Y'$ as an object of $\\mathcal C_Y$ and $X'=v_f(Y')$ as an object of $\\mathcal C_X$. The enlarged-site model identifies the two localized ringed sites with those of $Y'$ and $X'$. On an object $V\\to Y'$ the localized functor is $(X\\times_YV\\to X\\times_YY')$. This is the functor for $f'$: the isomorphism $X\\times_YV\\cong X'\\times_{Y'}V$ sends $(x,v)$ to $((x,g_V(v)),v)$, with inverse forgetting the $Y'$ coordinate, where $g_V:V\\to Y'$ is the given structure map. The maps are inverse by the fibre-product defining equations. Their maps on regular functions are the same pullbacks on every scheme chart, so the localized ring map is also the canonical one for $f'$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules), via the localization square in the proof of lemma-pushforward-etale-base-change; spaces-topologies.tex Tag 041F (lemma-etale), (3), applied to {g,id_Y}"
+   }
+  },
+  {
+   "text": "Apply the direct-image comparison of the ringed-site localization theorem to $v_f$ at $Y'$. Using the preceding identifications gives $(f_*F)|_{Y'}\\cong f'_*(F|_{X'})$ as module sheaves. More explicitly, for an etale scheme $V\\to Y'$, its component is the identity $F(X\\times_YV)=F|_{X'}(X\\times_YV\\to X')$, after the fibre-product identification of step 3. Both are the equalizer of the two restrictions from the sections on an etale scheme chart $W\\to X\\times_YV$ to those on $W\\times_{X\\times_YV}W$. The enlarged-site model supplies this equalizer even when $X\\times_YV$ is not a scheme. The scalar action on both sides is the same pullback of a regular function on $V$ to those charts. For a map $V_1\\to V_2$ over $Y'$, both restriction maps use $X\\times_YV_1\\to X\\times_YV_2$; for $F\\to H$, both use the induced maps of these equalizers. The identities therefore form the asserted canonical natural module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules), degree zero; Tag 03M8 (lemma-compute-pushforward), proof, for the section description"
+   }
+  },
+  {
+   "text": "The pullback comparison of the same ringed-site localization theorem gives $(f^*G)|_{X'}\\cong f'^*(G|_{Y'})$. Here the localization pullbacks are restrictions by step 2, and their ring maps agree with the original ones by step 3. To specify the comparison, use the common ring map from $(f h)^{-1}\\mathcal O_Y$ to $\\mathcal O_{X'}$, equal to that for $g f'$. Both paths identify with $\\mathcal O_{X'}\\otimes_{(f h)^{-1}\\mathcal O_Y}(f h)^{-1}G$. On local tensors the first identification is $a\\otimes(b\\otimes m)\\mapsto a\\,h^\\sharp(b)\\otimes m$; the second is $c\\otimes(d\\otimes m)\\mapsto c\\,f'^\\sharp(d)\\otimes m$. In each case the inverse is $e\\otimes m\\mapsto e\\otimes(1\\otimes m)$, and the balancing relation proves both inverse identities. These formulas are read locally before sheafification, so they do not assert that every section of a sheaf tensor product is globally a pure tensor. The ring maps commute with restriction, and the formulas leave the section $m$ unchanged; hence the comparison is natural in $G$ and multiplies exactly the scalar coefficients specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX, pullback-comparison footnote, and Tag 03LW; tensor formula as in the proof of Tag 03LV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03LX, 03LV, 03LW; localization argument of lemma-pushforward-etale-base-change and its ringed form, using sites-modules.tex Tag 04J0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +118,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R S] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits do not state the algebraic-space or small-etale comparison result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|pushforward.*restrict|restrict.*pushforward",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/MeasureTheory/Measure/Restrict.lean, Mathlib/MeasureTheory/Measure/Haar/Quotient.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme-only etale sites or Zariski module constructions and abstract site functors do not state the algebraic-space site model or its etale module base-change consequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"baseChange\"",
+   "results": "0 hits: none",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme-only etale sites or Zariski module constructions and abstract site functors do not state the algebraic-space site model or its etale module base-change consequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an etale map of algebraic spaces commutes with module pushforward and tensor pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme-only etale sites or Zariski module constructions and abstract site functors do not state the algebraic-space site model or its etale module base-change consequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change for direct image of arbitrary sheaves of modules on algebraic spaces via localization of ringed sites",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme-only etale sites or Zariski module constructions and abstract site functors do not state the algebraic-space site model or its etale module base-change consequence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-space-section-algebra-etale-base-change",
@@ -77,5 +179,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-etale-module-pushforward-restriction",
+  "worker": "stage1",
+  "summary": "Five-step enlarged-site localization proof, with Y′ explicitly an algebraic space over S. Independent maintainer repair: arbitrary etale base change in Step 3 follows from the existing covering-base-change theorem applied to {g,id_Y}, so no additional base-change node is needed. Added the algebraic-space fibre-product statement dependency.",
+  "blueprint": "Realizes the section-algebra and adjunction-map etale-comparison input in the historical specialization chain below lem-trf-local-term-locality; the existing covering-base-change theorem applied to {g,id_Y} supplies the arbitrary-base-change etaleness used in Step 3, while the existing enlarged-site node supplies localization and ringed-site identifications.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "General ringed-site localization gives the two exchange isomorphisms and the identity component; no algebraic-space or local-term node of this unit states this generic theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q78-0977185a5",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-0977185a5 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements against Stacks sources. Removed the unnecessary étale-base-change helper using the existing covering theorem applied to {g,id_Y}; corrected algebraic-space fibre-product citations. Corrected JSON files and detailed review.md written; dependency closure is acyclic.; 2 file(s) fixed by the reviewer"
  }
 }

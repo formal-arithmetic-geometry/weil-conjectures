@@ -17,9 +17,149 @@
   "def-pc-fibre-product",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict the system to $I_{\\ge i_0}$. It still has limit $B$: given a compatible cone on this tail, its component at an arbitrary $i$ is obtained by choosing $k\\ge i,i_0$ and composing the component at $k$ with $S_k\\to S_i$; a common upper bound proves independence of $k$ and compatibility, and also proves uniqueness. The same argument permits restriction to any later tail below. Every transition map is affine by [lem-weil-pbc-morphism-affine-schemes-affine], since its source and target are affine. Each $S_i$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. By [lem-weil-pbc-limit-affine-transition], the limit $B$ is affine. These verify the inverse-system hypotheses for finite-presentation descent.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation, hypotheses; Tag 01YW, lemma-directed-inverse-system-has-limit"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [thm-pd-spreading-out] to $U\\to B$ on this tail. Obtain $r\\ge i_0$, a morphism $V_r\\to S_r$ of finite presentation, and a $B$-isomorphism $e_r:V_r\\times_{S_r}B\\xrightarrow{\\sim}U$. Since $S_r$ is quasi-compact and quasi-separated and $V_r\\to S_r$ is quasi-compact and quasi-separated, clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] makes $V_r$ quasi-compact and quasi-separated. No target scheme has been descended or replaced.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1)"
+   }
+  },
+  {
+   "text": "The base change of $V_r\\to S_r$ to $B$ is affine: through $e_r$ it is $U\\to B$, a morphism between affine schemes, so use [lem-weil-pbc-morphism-affine-schemes-affine]. Apply [lem-weil-pbc-descend-affine] to $V_r\\to S_r$; its three initial schemes $S_r,V_r,S_r$ are quasi-compact and quasi-separated by steps 1 and 2. At a later stage $r'$, $V_r\\times_{S_r}S_{r'}\\to S_{r'}$ is affine, so its source is affine by clause (2) of [lem-weil-pbc-affine-morphism-permanence]. It is still of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Replace $r,V_r,e_r$ by this stage, source, and the induced isomorphism to $U$; the latter uses the canonical iterated-pullback isomorphism from the universal property [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-descend-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZN, lemma-descend-affine-finite-presentation; Tag 01ZM (1)"
+   }
+  },
+  {
+   "text": "The specified schemes $P_r=P_0\\times_{S_{i_0}}S_r$ and $Q_r=Q_0\\times_{S_{i_0}}S_r$ are affine by [lem-weil-pbc-fibre-product-affine-spectra] and of finite presentation over $S_r$ by [lem-weil-pbc-qcqs-morphism-permanence] (3). Apply [thm-pd-spreading-out] (2), separately, to the two $B$-morphisms $a\\circ e_r$ and $c\\circ e_r$ from $(V_r)_B$ to $(P_r)_B=P_B$ and $(Q_r)_B=Q_B$. Choose a common upper bound $k$ of the two resulting stages and base change both arrows to it. Set $U_k=V_r\\times_{S_r}S_k$. We obtain $S_k$-morphisms $a_k:U_k\\to P_k$ and $c_k:U_k\\to Q_k$ whose base changes are $a\\circ e_k,c\\circ e_k$, with $e_k:(U_k)_B\\cong U$ induced by $e_r$. All identifications with the fixed $P_k,Q_k,P_B,Q_B$ are the unique iterated-pullback comparisons preserving projections [def-pc-fibre-product]; hence these equations concern the actual pullback arrows. The source $U_k$ is affine and finitely presented over $S_k$ by the same two cited permanence statements.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (2); More on Morphisms Tag 0GDX, finite-stage span paragraph"
+   }
+  },
+  {
+   "text": "Check the local finite presentation needed for etaleness descent, without assuming it descends automatically for an arbitrary arrow. Write $R=\\Gamma(S_k,\\mathcal O)$, $C=\\Gamma(U_k,\\mathcal O)$, and $D=\\Gamma(P_k,\\mathcal O)$ (and then repeat with $Q_k$). Since both structure maps to $S_k$ are locally of finite presentation, [lem-weil-pbc-lfp-affine-opens-finite-presentation] gives presentations $C=R[x_1,\\ldots,x_n]/(r_1,\\ldots,r_m)$ and $D=R[t_1,\\ldots,t_v]/(h_1,\\ldots,h_w)$. Choose polynomials $F_i(x)$ representing the images of $t_i$ under $D\\to C$. Then\n$$C\\cong D[x_1,\\ldots,x_n]/(r_1,\\ldots,r_m,t_1-F_1(x),\\ldots,t_v-F_v(x)).$$\nIndeed substitution $t_i=F_i(x)$ and the map sending $x_l$ to its class give inverse maps: each $h_l(F(x))$ already lies in $(r_1,\\ldots,r_m)$ because $D\\to C$ is a ring map. This is a finite presentation over $D$. The full affine source and target are the neighbourhoods in [def-sbc-locally-finite-presentation], so both $a_k$ and $c_k$ are locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TQ, lemma-locally-finite-presentation-characterize, and 02FV, lemma-finite-presentation-permanence (1), affine argument written out"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-descend-etale] twice, to $a_k$ and $c_k$ over the tail starting at $k$. Its initial source, target and base are affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; step 5 supplies local finite presentation and the limit arrows are the given etale arrows. Choose $j$ above the two resulting indices. Both arrows remain etale after this further base change by [lem-weil-pbc-etale-scheme-base-change]. Set $U_j=U_k\\times_{S_k}S_j$ and let $a_j,c_j$ be these pullbacks, retaining the fixed $P_j,Q_j$. The source is affine by [lem-weil-pbc-fibre-product-affine-spectra] and of finite presentation over $S_j$ by [lem-weil-pbc-qcqs-morphism-permanence] (3). Let $e:(U_j)_B\\xrightarrow{\\sim}U$ be $e_k$ composed with the iterated-pullback comparison [def-pc-fibre-product]. The two equations from step 4 continue to hold, since the composites with each pullback projection agree and the universal property determines the induced maps uniquely.",
+   "uses": [
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RP, lemma-descend-etale; Morphisms Tag 02GO, lemma-base-change-etale; More on Morphisms Tag 0GDX, finite-stage span paragraph"
+   }
+  },
+  {
+   "text": "Put $z=e^{-1}(u)$ and let $u_j$ be its image in $U_j$. The point $z$ lies over $b$, since $e$ is over $B$. Evaluate the two pullback equations at $z$: the first gives $a_j(u_j)=x_j$ and the second $c_j(u_j)=y_j$, with $x_j,y_j$ exactly the projections specified in the statement. All three stage points lie over $s_j$, by the commutative squares defining the pullbacks [def-pc-fibre-product].",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, point u_i and its images"
+   }
+  },
+  {
+   "text": "Compare the fibres over $b$ and $s_j$ for each of the three cartesian pairs $(U_j,(U_j)_B)$, $(P_j,P_B)$ and $(Q_j,Q_B)$. By [lem-weil-pbc-fibre-of-base-change] the map between the fibres is the base change of $\\operatorname{Spec}\\kappa(b)\\to\\operatorname{Spec}\\kappa(s_j)$. This is an isomorphism by hypothesis; its inverse induces the inverse between the two fibre products by the universal property [def-pc-fibre-product]. The fibre projections induce isomorphisms on point residue fields by [lem-weil-pbc-fibre-ring-residue-field-iso]: all the schemes here are affine, and [lem-weil-pbc-fibre-product-affine-spectra] identifies a fibre with the spectrum of its coordinate ring tensored with the base residue field. Consequently the canonical residue-field map from a stage point to its given limit point is an isomorphism: write $\\alpha_s:\\kappa(v_j)\\to\\kappa(v_{s_j})$ and $\\alpha_b:\\kappa(v_B)\\to\\kappa(v_b)$ for the two fibre-projection residue maps, and $h^\\kappa:\\kappa(v_{s_j})\\to\\kappa(v_b)$ for the fibre-isomorphism residue map. If $\\gamma:\\kappa(v_j)\\to\\kappa(v_B)$ is the canonical map, commutativity gives $\\alpha_b\\circ\\gamma=h^\\kappa\\circ\\alpha_s$, hence $\\gamma=\\alpha_b^{-1}\\circ h^\\kappa\\circ\\alpha_s$. Applied to $u_j,x_j,y_j$, and identifying $\\kappa(z)$ with $\\kappa(u)$ through $e$, this gives all three asserted canonical isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-ring-residue-field-iso",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V3, proof fibre-base-change display; Algebra Tag 0H9M, remark-local-ring-fibre; pointed field comparison in More on Morphisms Tag 0GDX"
+   }
+  },
+  {
+   "text": "Functoriality of the induced residue maps [def-weil-residue-field] gives the commutative square with top arrow $\\kappa(x_j)\\to\\kappa(u_j)$, bottom arrow $\\kappa(a(u))\\to\\kappa(u)$, and vertical arrows the canonical isomorphisms of step 8. The bottom arrow is an isomorphism by hypothesis. Thus the top arrow equals the bottom arrow conjugated by the two vertical isomorphisms and is an isomorphism. The identical square with $y_j,c(u)$ proves that $c_j$ also induces an isomorphism at $u_j$. Together with step 6, these are the two required elementary etale arrows, and all the asserted data and identities have been constructed.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, residue-field chain after descending the span"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-residue-field",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-descend-affine",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-ring-residue-field-iso",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, finite-stage span paragraph; generalized to the stated affine inverse system using Limits Tags 01ZM, 01ZN and 07RP, with fibre residue comparisons from Algebra Tag 0H9M."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +195,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpan Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"[X.Over Y] (x : X) : Spec.map ((X ↘ Y).residueFieldMap x) |>.IsOver Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n",
    "date": "2026-10-18",
    "verdict": "No match: hits concern single maps, equalities, unpointed etale algebras, or permanence; none asserts simultaneous pointed span descent with fixed, possibly non-etale targets."
+  },
+  {
+   "tool": "grep",
+   "query": "span.*descen|descen.*span|residueField.*[Ii]so.*[Ll]imit|[Ee]tale.*[Ff]ixed",
+   "results": "msearch grep: OK, 0 hits. . Directory: AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "No match: affine limits, individual-map factorization or permanence, and etale algebra models do not assert a simultaneous pointed span with fixed possibly non-etale targets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine etale span over a limit descends to a common stage keeping target models fixed and preserving residue fields at a point",
+   "results": "msearch leansearch: OK, 8 hits. AlgebraicGeometry.Scheme.isAffine_of_isLimit, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.ofLocalizationSpan, AlgebraicGeometry.AffineScheme.hasLimits, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-18",
+   "verdict": "No match: affine limits, individual-map factorization or permanence, and etale algebra models do not assert a simultaneous pointed span with fixed possibly non-etale targets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"exists\"",
+   "results": "msearch loogle: OK, 2 hits. Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt.exists_isStandardEtale",
+   "date": "2026-10-18",
+   "verdict": "No match: affine limits, individual-map factorization or permanence, and etale algebra models do not assert a simultaneous pointed span with fixed possibly non-etale targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously descend an affine etale span to two fixed finitely presented targets over a directed inverse limit, preserving point residue fields",
+   "results": "msearch leanfinder: OK, 8 hits. Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.finitePresentation, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyEtale.instForallOfFinite, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.lift, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-18",
+   "verdict": "No match: affine limits, individual-map factorization or permanence, and etale algebra models do not assert a simultaneous pointed span with fixed possibly non-etale targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pointed common elementary etale neighbourhood descends along an affine limit to prescribed target models",
+   "results": "msearch leanfinder: OK, 8 hits. AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-18",
+   "verdict": "No match: affine limits, individual-map factorization or permanence, and etale algebra models do not assert a simultaneous pointed span with fixed possibly non-etale targets."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-completion-etale-approximation",
@@ -85,5 +260,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fixed-family-etale-span-descent",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and all seeded statement dependencies. Split fixed-target descent into source descent (01ZM), an affine-source refinement (01ZN), two morphism descents into the prescribed target pullbacks, an explicit affine finite-presentation check, simultaneous eventual etaleness (07RP), and fibre-based canonical residue-field comparisons. Reused existing nodes throughout; no new nodes. Read both source-library keyword/tag searches and the actual 01ZM declarations; no exact project attachment covers the pointed fixed-target statement. Fresh searches are appended to the inherited Mathlib evidence.",
+  "blueprint": "Historical approximation branch under lem-trf-local-term-locality: the finite-stage descent paragraph of Tag 0GDX cited through lem-trf-relative-completion-etale-approximation. This item realizes the descent of only the common neighbourhood and its two arrows, retaining the fixed X_i and Y_i, and the residue-field chain. It does not replace the current unit zero-stalk proof, which has already corrected the historical locality route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Provides affineness of the specified affine inverse limit; the trace unit has no inverse-limit existence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-a53dd3394",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-a53dd3394 (reviewer sub-agent of L); spot-checked: Mathematics and all nine proof steps check out against the cited DAG statements and Stacks sources; no route-pivot or SGA violation, duplicate, false statement, or long hidden lemma found. The delivered node has null stmt_deps and proof_deps metadata. Corrected complete JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-fixed-family-etale-span-descent.json; review.md records the checks.; 1 file(s) fixed by the reviewer"
  }
 }

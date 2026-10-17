@@ -14,9 +14,85 @@
   "def-weil-irreducible-components",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=|Y|$. The rings of sections of the given affine charts are their Noetherian chart rings by [def-weil-affine-spectrum]. Thus the assumed cover makes $Y$ locally Noetherian by [pqf-def-locnoeth]. Each of its finitely many affine charts is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Given any open covering of $X$, restrict it to each chart, choose a finite subcover there, and take the union of these finitely many finite subfamilies. Thus $Y$ is quasi-compact in the sense of [def-weil-pbc-quasi-compact-scheme]. Apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]: every nonempty family of closed subsets of $X$ has a minimal member. In particular a descending chain of closed subsets has a minimal term, and every later term equals that term. Hence $X$ is a Noetherian topological space.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OV (definition-noetherian) and 01OZ (lemma-Noetherian-topology); affine quasi-compactness: Algebra Tag 00E8 (lemma-quasi-compact)"
+   }
+  },
+  {
+   "text": "Assume for contradiction that $E$ is not constructible in $X$. Let $\\mathcal S$ be the family of closed subsets $C\\subseteq X$ for which $E\\cap C$ is not constructible in the ambient space $X$. This family is nonempty since $X\\in\\mathcal S$. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] choose an inclusion-minimal $C\\in\\mathcal S$. For every closed $D\\subsetneq C$ in $X$, minimality says that $E\\cap D$ is constructible in $X$. The empty set is constructible as the empty finite union in [def-weil-constructible-subset], so $C\\ne\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 053Z (lemma-characterize-constructible-Noetherian), converse, minimal bad closed subset"
+   }
+  },
+  {
+   "text": "The minimal bad subset $C$ is irreducible. Indeed, if it were reducible, [def-weil-irreducible-components] would give $C=C_1\\cup C_2$ with each $C_i$ a proper relatively closed subset of $C$. Write $C_i=C\\cap F_i$ with $F_i$ closed in $X$; thus both $C_i$ are closed in $X$. Step 2 makes both $E\\cap C_i$ constructible in $X$. Closure under finite unions in [def-weil-constructible-subset] then makes $E\\cap C=(E\\cap C_1)\\cup(E\\cap C_2)$ constructible in $X$, a contradiction.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 053Z (lemma-characterize-constructible-Noetherian), converse, reduction of the minimal bad closed subset to an irreducible one; using a binary closed decomposition"
+   }
+  },
+  {
+   "text": "Apply the hypothesis to the nonempty irreducible closed subset $C$ from Step 3. Choose a nonempty relatively open $V\\subseteq C$ with $V\\subseteq E$ or $V\\cap E=\\varnothing$. Write $V=C\\cap O$ with $O$ open in $X$. Then $D=C\\setminus V=C\\cap(X\\setminus O)$ is closed in $X$, and $D\\subsetneq C$ because $V$ is nonempty. Step 2 implies that $E\\cap D$ is constructible in $X$. Also $V=C\\cap O$ is locally closed by [def-weil-locally-closed-subset], and hence constructible in the Noetherian space $X$ by the finite-union characterization in [def-weil-constructible-subset] (Tag 005L).",
+   "uses": [
+    "def-weil-locally-closed-subset",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 053Z (lemma-characterize-constructible-Noetherian), converse, cases (a) and (b), and 005L (lemma-constructible-Noetherian-space)"
+   }
+  },
+  {
+   "text": "If $V\\subseteq E$, the disjoint partition $C=V\\cup D$ gives $E\\cap C=V\\cup(E\\cap D)$, which is constructible by finite-union closure in [def-weil-constructible-subset] and Step 4. If $V\\cap E=\\varnothing$, the same partition gives $E\\cap C=E\\cap D$, which is constructible by Step 4. Both alternatives contradict $C\\in\\mathcal S$. Therefore $\\mathcal S$ is empty and, taking $C=X$, the subset $E$ is constructible in $X=|Y|$.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 053Z (lemma-characterize-constructible-Noetherian), converse, final contradictions in cases (a) and (b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-constructible-subset",
+  "def-weil-irreducible-components",
+  "def-weil-locally-closed-subset"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 053Z (lemma-characterize-constructible-Noetherian), implication (2) to (1), with Properties Tag 01OZ for the scheme hypothesis. Minimality is expressed using constructibility in the ambient space and reducibility is handled by its binary closed decomposition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +128,45 @@
    "results": "8 hits: AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.instIsLocallyNoetherianXScheme. Definitions of constructible and irreducible closed sets and NoetherianSpace instances only; no generic-closed-subset constructibility criterion.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Nn]oetherian|isConstructible.*[Ii]rreducible|[Ii]rreducible.*isConstructible|characterize.constructible",
+   "results": "{\"t\": \"2026-10-17T20:58:33Z\", \"tool\": \"grep\", \"query\": \"constructible.*[Nn]oetherian|isConstructible.*[Ii]rreducible|[Ii]rreducible.*isConstructible|characterize.constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility criterion on irreducible closed subsets of a Noetherian space",
+   "results": "{\"t\": \"2026-10-17T20:58:34Z\", \"tool\": \"leansearch\", \"query\": \"Constructibility criterion on irreducible closed subsets of a Noetherian space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.IrreducibleCloseds\", \"TopologicalSpace.IrreducibleCloseds.mk\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"IrreducibleSpace\", \"isIrreducible_iff_sUnion_isClosed\", \"irreducibleComponents\", \"TopologicalSpace.IrreducibleCloseds.is_closed'\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\"], \"digest\": \"68529ab38f200800\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, IsIrreducible",
+   "results": "{\"t\": \"2026-10-17T20:58:34Z\", \"tool\": \"loogle\", \"query\": \"Topology.IsConstructible, IsIrreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subset of a Noetherian topological space is constructible if every irreducible closed subset has a nonempty open subset contained in the subset or disjoint from it",
+   "results": "{\"t\": \"2026-10-17T20:58:35Z\", \"tool\": \"leanfinder\", \"query\": \"A subset of a Noetherian topological space is constructible if every irreducible closed subset has a nonempty open subset contained in the subset or disjoint from it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsConstructible\", \"Topology.IsLocallyConstructible\", \"Topology.IsLocallyConstructible.isConstructible\", \"Topology.IsConstructible.isLocallyConstructible\", \"PrimeSpectrum.ConstructibleSetData.isConstructible_toSet\", \"PrimeSpectrum.exists_constructibleSetData_iff\", \"IsRetrocompact.isConstructible\", \"PrimeSpectrum.ConstructibleSetData\"], \"digest\": \"d9f48fb40f005f9c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a set is generically constant on every irreducible closed subspace of a Noetherian space it is a finite union of locally closed subsets, by Noetherian induction",
+   "results": "{\"t\": \"2026-10-17T20:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"If a set is generically constant on every irreducible closed subspace of a Noetherian space it is a finite union of locally closed subsets, by Noetherian induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"Topology.IsConstructible.isLocallyConstructible\", \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"NoetherianSpace.to_quasiSeparatedSpace\", \"Topology.IsLocallyConstructible\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\"], \"digest\": \"a9fb180528b6d93a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-irreducible-fibre-locus",
@@ -87,5 +198,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-noetherian-constructible-subset-criterion",
+  "worker": "stage1",
+  "summary": "Proved the unchanged criterion by the minimal-bad-closed-subset argument of Stacks Tag 053Z, using only existing nodes. Verified finite affine Noetherian charts imply the Noetherian scheme hypothesis, used the existing closed-subset minimal condition, wrote out the binary reducibility contradiction, and handled both nonempty-open alternatives explicitly. All constructibility assertions in the induction are in the ambient space. No new nodes or Mathlib leaves.",
+  "blueprint": "The existing ancestry to lem-trf-local-term-locality, clauses (1)--(2), is retained: through the flattening/Noetherian-approximation branch and the irreducible-fibre-locus argument (Stacks 055B), this supplies its Tag 053Z constructibility criterion. It is a general topology input below those unit steps; it does not alter the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q105-6cd719d57",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-6cd719d57 (reviewer sub-agent of L); spot-checked: Read the complete item, report, instructions, unit/chapter route, cited DAG statements, and Stacks Tags 053Z, 005L, 01OV, 01OZ, and 00E8. The five-step minimal-bad-closed-subset proof is mathematically valid; hypotheses, edge cases, dependencies, source locations, Mathlib searches, route restrictions, and long-step rule all check. No new nodes, duplicates, circularity, weakened statement, SGA citation, or route-pivot machinery. Review written to review.md."
  }
 }

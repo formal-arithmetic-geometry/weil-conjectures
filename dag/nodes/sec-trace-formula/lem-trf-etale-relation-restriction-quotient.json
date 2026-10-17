@@ -14,9 +14,97 @@
   "def-pc-fppf-site",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-pc-fibre-product], for every $S$-scheme $T$ a $T$-point of $R'$ is a triple $(a,r,b)$ with $a,b\\in U'(T)$, $r\\in R(T)$, $s(r)=g(a)$ and $t(r)=g(b)$. Thus the induced relation on $U'(T)$ is $a\\sim' b$ if and only if $g(a)\\sim g(b)$. Reflexivity, symmetry and transitivity follow respectively from these three properties of the relation on $U(T)$. Since $R(T)$ is an equivalence relation, its arrow with specified endpoints is unique, so the triple is determined by $(a,b)$; this also verifies the monomorphism into $U'\\times_SU'$. These identifications are natural in $T$, giving the required equivalence relation over $S$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 02V8 (lemma-restrict-relation) and 02V9 (definition-restrict-relation); explicit fibre-product argument."
+   }
+  },
+  {
+   "text": "For the first projection put $A=U'\\times_{g,U,s}R$, with maps $p:A\\to U'$ and $v=t\\circ\\operatorname{pr}_R:A\\to U$. Then $R'=A\\times_{v,U,g}U'$, and $s':R'\\to U'$ factors as $R'\\to A\\xrightarrow{p}U'$. The first map is a base change of $g$, and the second is a base change of $s$. Both are etale by [lem-weil-pbc-etale-scheme-base-change], so their composite is etale by clause (2) of [lem-weil-pbc-etale-composition-cancellation]. For $t'$ use $B=R\\times_{t,U,g}U'$: the map $R'\\to B$ is a base change of $g$ along $s\\circ\\operatorname{pr}_R$, and $B\\to U'$ is a base change of $t$. The same two cited statements make $t'$ etale. Together with Step 1 this proves that $R'$ is an etale equivalence relation.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WT (lemma-pullback-etale-equivalence-relation), proof: composition of base changes of etale morphisms."
+   }
+  },
+  {
+   "text": "Write $P(T)=U(T)/R(T)$ and $P'(T)=U'(T)/R'(T)$ for the presheaf quotients. The formula $[a]\\mapsto[g\\circ a]$ gives a natural map $v:P'\\to P$ by the relation calculation in Step 1. Moreover it is injective on each $T$: if $[g\\circ a]=[g\\circ b]$, some $r:T\\to R$ has endpoints $g\\circ a,g\\circ b$, so $(a,r,b):T\\to R'$ witnesses $[a]=[b]$. Let $F'=P'^\\#$ and $F=P^\\#$. The universal property in [def-weil-pbc-sheafification] applied to $P'\\xrightarrow{v}P\\to F$ gives the canonical map $\\alpha:F'\\to F$, with $\\alpha(\\eta'[a])=\\eta[g\\circ a]$ for the sheafification units $\\eta',\\eta$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z, relation calculation and canonical quotient map; Tag 02VG (definition-quotient-sheaf)."
+   }
+  },
+  {
+   "text": "To prove injectivity fix $\\xi,\\zeta\\in F'(T)$ with $\\alpha(\\xi)=\\alpha(\\zeta)$. The local-representative assertion of [lem-weil-pbc-site-sheafification-sections-local], applied to $P'$, gives coverings representing each section by a quotient class. Pull back one covering along the other and compose, using the site axioms of [def-weil-pbc-sites-and-cohomology], to obtain a common covering $T_i\\to T$ and representatives $a_i,b_i:T_i\\to U'$ for $\\xi|_{T_i},\\zeta|_{T_i}$. Their images give classes $[g a_i],[g b_i]\\in P(T_i)$ with equal images in $F(T_i)$. The local-equality assertion of [lem-weil-pbc-site-sheafification-sections-local], now applied to $P$, gives a further covering of each $T_i$ where these classes agree. Step 3's injectivity of $v$ then gives $[a_i]=[b_i]$ on that refinement. Hence $\\xi$ and $\\zeta$ agree on a covering of $T$, and the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology] gives $\\xi=\\zeta$. This proves sectionwise injectivity of $\\alpha$ for every $T$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z, injectivity proof; local representatives and local equality supplied by Sites Tags 00WB and 00WK."
+   }
+  },
+  {
+   "text": "Suppose now that $g$ is surjective. By [def-weil-etale-morphism], $g$ is flat and locally of finite presentation, so $\\{g\\}$ is an fppf covering by [def-pc-fppf-site]. For $z\\in F(T)$, [lem-weil-pbc-site-sheafification-sections-local] applied to $P$ supplies an fppf covering $T_i\\to T$ where $z$ is represented by a map $a_i:T_i\\to U$. Pull back the singleton etale surjective family $\\{g\\}$ along $a_i$. By [lem-weil-pbc-etale-covering-base-change], the projection $W_i=T_i\\times_{a_i,U,g}U'\\to T_i$ is etale and surjective, hence again an fppf covering by the same two definitions. Its second projection $b_i:W_i\\to U'$ satisfies $g b_i=a_i\\operatorname{pr}_{T_i}$, so $\\eta'[b_i]\\in F'(W_i)$ maps to $z|_{W_i}$. The site composition axiom of [def-weil-pbc-sites-and-cohomology] makes $\\{W_i\\to T\\}$ a covering. Thus every section of $F$ lifts locally through $\\alpha$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z, surjective-cover clause; explicit pullback lifting of a representative, also the covering clause of Tag 02VH."
+   }
+  },
+  {
+   "text": "For the local lifts from Step 5, their two restrictions to each overlap have the same $\\alpha$-image, namely the restriction of $z$. Step 4, applied to that overlap, makes the restrictions equal. The sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology] therefore glues the lifts uniquely to $\\widetilde z\\in F'(T)$, and separation of $F$ gives $\\alpha(\\widetilde z)=z$. Step 4 gives uniqueness of this preimage. Restricting $\\widetilde z$ along any test-scheme morphism gives the unique preimage of the restricted $z$, so these inverses are natural in $T$. They define an inverse of $\\alpha$, proving the asserted isomorphism when $g$ is surjective.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z, final isomorphism conclusion, with the sheaf gluing argument written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict), proof; Spaces Tag 02WT (lemma-pullback-etale-equivalence-relation)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -136,10 +224,52 @@
    "results": "PartialEquiv.IsImage.restr_apply, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, SheafOfModules.Presentation.map_relations_I, Algebra.Etale.of_equiv, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.of_equiv, InverseSystem.PEquivOn.restrict, AlgebraicGeometry.IsEtale.instFormallyUnramified",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting an etale equivalence relation along an etale morphism preserves the equivalence relation and the quotient sheaf map is injective, and is an isomorphism for a surjective etale morphism",
+   "results": "{\"t\": \"2026-10-17T20:50:49Z\", \"tool\": \"leanfinder\", \"query\": \"Restricting an etale equivalence relation along an etale morphism preserves the equivalence relation and the quotient sheaf map is injective, and is an isomorphism for a surjective etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"StandardEtalePresentation.mapEquiv\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"RingHom.Etale.respectsIso\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"b8849fe514802b80\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: returned scheme gluing or etale ingredients do not state quotient-relation restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsEtale, equivalence relation, quotient sheaf, surjective",
+   "results": "{\"t\": \"2026-10-17T20:50:49Z\", \"tool\": \"loogle\", \"query\": \"IsEtale, equivalence relation, quotient sheaf, surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "query rejected: unknown identifier IsEtale; not evidence of absence; superseded by the second-phrasing semantic and valid AlgebraicGeometry grep searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale equivalence relation restriction and quotient sheaf invariance under surjective etale cover",
+   "results": "{\"t\": \"2026-10-17T20:50:50Z\", \"tool\": \"leansearch\", \"query\": \"Etale equivalence relation restriction and quotient sheaf invariance under surjective etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Con.comapQuotientEquivOfSurj\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"Algebra.Etale.of_equiv\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"CategoryTheory.Presieve.isSheaf_iff_of_nat_equiv\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"CategoryTheory.Presieve.isSheaf_of_nat_equiv\"], \"digest\": \"d474024d7279c907\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: returned scheme gluing or etale ingredients do not state quotient-relation restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*quotient|quotient.*etale|equivalence.relation",
+   "results": "[grep] OK 1 hit(s): Mathlib/AlgebraicGeometry/Gluing.lean:239, equivalence relation on points of an open-gluing datum; read lines 225-260. This concerns open gluing, not an arbitrary etale relation or fppf quotient restriction.",
+   "date": "2026-10-18",
+   "verdict": "no exact match: returned scheme gluing or etale ingredients do not state quotient-relation restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\"",
+   "results": "{\"t\": \"2026-10-17T20:59:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: returned scheme gluing or etale ingredients do not state quotient-relation restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For schemes the quotient sheaf by an etale equivalence relation embeds into the original quotient after restriction of the atlas, and is unchanged for a covering atlas",
+   "results": "{\"t\": \"2026-10-17T20:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"For schemes the quotient sheaf by an etale equivalence relation embeds into the original quotient after restriction of the atlas, and is unchanged for a covering atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.isOpenEmbedding_fromGlued\", \"AlgebraicGeometry.Scheme.Cover.fromGlued_isOpenEmbedding\", \"AlgebraicGeometry.Scheme.Cover.ι_fromGlued\", \"AlgebraicGeometry.Scheme.GlueData.openCover_f\", \"AlgebraicGeometry.Scheme.Cover.fromGlued\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.GlueData.ι_eq_iff\"], \"digest\": \"99f8f2af11830f70\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: returned scheme gluing or etale ingredients do not state quotient-relation restriction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-relation-quotient",
@@ -168,5 +298,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-relation-restriction-quotient",
+  "worker": "stage1",
+  "summary": "Proved the restriction directly: identify the inverse-image equivalence relation on test schemes; factor both projections into base changes of etale maps and invoke etale composition; construct the quotient presheaf injection; prove injectivity after sheafification using local representatives and local equality; lift sections along the pulled-back surjective etale cover and glue a natural inverse. No new nodes or Mathlib leaves are required. The statement is unchanged.",
+  "blueprint": "Realizes the existing blueprint.from.place input to lem-trf-local-term-locality through lem-trf-etale-relation-quotient: Spaces Tag 02WT for etale restriction and Groupoids Tag 045Z (also 02VH in the groupoid case) for quotient restriction. Steps 1-2 verify the restricted relation, Steps 3-4 prove quotient injectivity, and Steps 5-6 prove invariance under a surjective etale refinement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic set-presheaf sheafification theorem supplies local representatives and local equality on the big fppf site. The current unit does not separately state these general sheafification properties."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Only clause (1), the site covering axioms and the equalizer definition of set sheaves, is used for common refinements and gluing; no cohomology or alternate unit proof route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q74-7a17ea351",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-7a17ea351 (reviewer sub-agent of L); spot-checked: Read the item, all cited nodes, unit/chapter route, coordination files, and exact Stacks sources (Tags 02WT and 045Z). All six steps are mathematically sound, hypotheses and etale base-change/composition factorizations check out, quotient sheaf injectivity and surjective-cover gluing are correctly proved, edge cases were tested, searches and tool uses are recorded, and no duplicate/new-node or route violation remains. Review written to review.md."
  }
 }
