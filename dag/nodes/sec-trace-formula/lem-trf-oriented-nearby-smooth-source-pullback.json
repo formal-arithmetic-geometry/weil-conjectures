@@ -9,16 +9,96 @@
  },
  "stmt_deps": [
   "def-trf-oriented-nearby-cycles",
-  "def-trf-oriented-constructible-sheaf",
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-scheme-conventions",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The universal property of the oriented product [lem-trf-oriented-product-universal] applied to the projections $hp'_1$ and $p'_2$ and the composite 2-morphism gives the morphism $\\bar h:V_f\\to V_g$ and the canonical identification $\\bar h\\psi_f\\simeq\\psi_g h$. The counit mate of this identification is exactly the comparison displayed in the statement, by the definition of $R\\Psi$ and of the ordinary comparison in [def-trf-oriented-nearby-cycles]. Smoothness and finite presentation of $h$ persist after every base change, and the coefficient annihilator remains invertible, so all later strict-local diagrams have the same hypotheses.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-product-universal",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XI, 1.4--1.5: functoriality of the vanishing topos and the base-change comparison as a mate."
+   }
+  },
+  {
+   "text": "Fix an oriented-product point $z=z_{x,t,c}$ of $V_f$ [lem-trf-oriented-product-points-conservative]: a geometric point $x$ of $X$, a geometric point $t$ of $S$, and a specialization $c:S_{(t)}\\to S_{(s)}$ with $s=f(x)$. Put $y=h(x)$. Since $p_1\\bar h=hp'_1$ and $p_2\\bar h=p'_2$ compatibly with the $2$-morphisms, the universal property [lem-trf-oriented-product-universal] gives $\\bar h z\\simeq z_{y,t,c}$, the corresponding point of $V_g$. Applying the point-cohomology formula [lem-trf-oriented-point-cohomology] with the second factor $1_S$ (so the strict localization of the second factor at $t$ is $S_{(t)}$), $z^*\\bar h^*R\\Psi_gL\\simeq z_{y,t,c}^*R\\Psi_gL\\simeq R\\Gamma(Y_{(y)}\\times_{S_{(s)}}S_{(t)},L)$ and $z^*R\\Psi_fh^*L\\simeq R\\Gamma(X_{(x)}\\times_{S_{(s)}}S_{(t)},h^*L)$, the fibre products formed through $c$; both are bounded below since $L$ is bounded. Equivalently, through the strict-local description [lem-trf-oriented-nearby-strict-local-description] ($\\sigma_y^g=\\bar h\\sigma_x^f$ on $(S_{(s)})_{\\mathrm{Et}}$), $\\sigma_x^{f*}$ of the comparison is the strict-local direct-image comparison $Rg_{(y)*}L_{(y)}\\to Rf_{(x)*}(h^*L)_{(x)}$ of the square $f_{(x)}=g_{(y)}h_{(x)}$, whose stalk at the point of $S_{(s)}$ given by $c$ is the displayed restriction map. Under these identifications $z^*$ of the comparison is the canonical pullback map along $X_{(x)}\\times_{S_{(s)}}S_{(t)}\\to Y_{(y)}\\times_{S_{(s)}}S_{(t)}$: both are adjuncts of the counit composite in [def-trf-oriented-nearby-cycles], and the cited identifications are induced by restriction from pointed neighbourhoods and are natural.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-point-cohomology",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XI, 1.4 and 4.1--4.3; oriented-point and strict-local descriptions in the existing DAG interfaces."
+   }
+  },
+  {
+   "text": "The map of step 2 is an isomorphism by [lem-trf-smooth-source-constructible-local-acyclicity] applied to $S,X,Y,h,g,\\Lambda,L$ and the data $x,t,c$: $S$ is Noetherian, $g$ is of finite presentation, $h$ is smooth of finite presentation, $m\\Lambda=0$ with $m$ invertible on $S$, and $L$ is bounded constructible.",
+   "uses": [
+    "lem-trf-smooth-source-constructible-local-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 0GJQ and its proof via Lemma 0EZU and Theorem 0EYU."
+   }
+  },
+  {
+   "text": "Therefore every inverse image of the comparison along an oriented-product point of $V_f$ is an isomorphism. The family of such point inverse images is jointly conservative on the derived category by [lem-trf-oriented-product-points-conservative], so the comparison $\\bar h^*R\\Psi_gL\\to R\\Psi_fh^*L$ is an isomorphism on the whole vanishing topos.",
+   "uses": [
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XI, 4.1--4.3, detection by oriented-product points."
+   }
+  },
+  {
+   "text": "Let $S'\\to S$ be a morphism, $X'=X\\times_SS'$, $Y'=Y\\times_SS'$, with $f',g',h'$ the base changes, $u:X'\\to X$, $w:Y'\\to Y$, and $v_f:V_{f'}\\to V_f$, $v_g:V_{g'}\\to V_g$, $\\bar h':V_{f'}\\to V_{g'}$ the induced maps [def-trf-oriented-nearby-cycles]. The two composite squares $X'\\to X\\to Y$ and $X'\\to Y'\\to Y$ over $S'\\to S$ coincide, so by the uniqueness clause of [lem-trf-oriented-product-universal] $\\bar h v_f\\simeq v_g\\bar h'$, compatibly with the identifications $v\\psi\\simeq\\psi(-)$. Each ordinary comparison is the mate, under the adjunctions $\\psi^*\\dashv R\\Psi$, of these identifications composed with the counit. By the pasting clauses 1 and 2 of [lem-weil-pbc-mate-pasting], the comparison of the composite square equals both $\\beta_{u,S'\\to S,h^*L}\\circ v_f^*\\beta_{h,1_S,L}$ and $\\beta_{h',1_{S'},w^*L}\\circ\\bar h'^*\\beta_{w,S'\\to S,L}$ (after $u^*h^*\\simeq h'^*w^*$ and $v_f^*\\bar h^*\\simeq\\bar h'^*v_g^*$). This equality is the asserted compatibility of the smooth-source comparison with the ordinary nearby-cycle comparisons for the base change; it uses no Noetherian hypothesis on $S'$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-product-universal",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XI, 1.4--1.5 and 4.1--4.3, functoriality of the ordinary comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "lem-trf-oriented-nearby-strict-local-description",
+  "lem-trf-oriented-point-cohomology",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-smooth-source-constructible-local-acyclicity",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0GJQ and 0GJR (smooth universal local acyclicity and constructible devissage), combined with the oriented-product interfaces of the DAG."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -92,7 +172,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-proper-surjective-constructibility",
@@ -104,7 +184,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The nearby-cycle constructibility input in the ancestor local-term-locality proof: smooth pullback identifies nearby cycles on the smooth locus of the last semistable curve and on open source restrictions.",
+   "place": "The smooth-source nearby-cycle calculation on the smooth locus used in the ancestor local-term-locality proof; this split realizes the object-level comparison and its arbitrary-base-change functoriality.",
    "via": [
     "lem-trf-psi-proper-surjective-constructibility",
     "lem-trf-psi-good-oriented-cohomology-strata",
@@ -115,5 +195,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-nearby-smooth-source-pullback",
+  "worker": "stage1",
+  "summary": "Split the full oriented nearby-cycle smooth-source comparison into the oriented-product construction, pointwise strict-local identification, smooth local acyclicity for bounded constructible complexes, point conservativity, and base-change mate compatibility. Added one statement-only intermediate lemma for the strict-local constructible-complex comparison; no Lean declaration is finished for the target.",
+  "blueprint": "Realizes the smooth-source calculation used in lem-trf-local-term-locality: after the normal-cone/nearby-cycle setup, smooth pullback identifies the nearby cycles on the smooth source locus, as an isomorphism of vanishing-topos objects and compatibly after base change."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-09a38b925",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-09a38b925 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the Stacks sources (0GJQ l.19167, 0GJR, 0EZU, 0EYU) and the unit sk-i-curve-zero in full. The item statement is true and unweakened. I repaired three faults. (E4) Step 2 and the new node used the geometric fibre X_(x)x_{S_(s)} t. That is Stacks' local-acyclicity fibre, but lem-trf-oriented-point-cohomology (second factor 1_S) and the strict-local description give the stalk at point (x,t,c) as RΓ(X_(x)x_{S_(s)} S_(t)), with S_(t) taken through the specialization c. I rewrote step 2 and the new node with S_(t), and added the missing identification \\bar h z_{x,t,c} = z_{h(x),t,c} through the universal property. The corrected node is true: smooth base change (0EYU) for X x_Y Y_(y) -> Y_(y) against the affine map Y_(y)x_{S_(s)}S_(t) -> Y_(y), then stalks at x (0EZU), which is the proof pattern of 0GJQ. I checked the cases t=s, h étale and X empty. (E1) Step 5 applied the Noetherian-only new node over an arbitrary S'. I rewrote it as pure mate pasting: \\bar h v_f = v_g \\bar h' from uniqueness in the universal property, then mate-pasting clauses 1 and 2. (B9) The new node's blueprint.from.via was missing the item's chain. Small edits: the new node's source now cites 0GJQ/0EZU/0EYU; I removed the unused stmt_dep def-trf-oriented-constructible-sheaf and recomputed proof_deps. I accepted no tool_uses and removed the three declared ones, because no step of the item cites those nodes. Duplicate search found nothing (smooth-source-exchange, the pbc local-acyclicity nodes, exchange-strict-local-cohomology, the sbc derived smooth base change nodes, the blueprint). The new node is strictly smaller than the item and is not a restated clause.; 2 file(s) fixed by the reviewer"
  }
 }
