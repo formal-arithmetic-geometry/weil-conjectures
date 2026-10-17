@@ -407,7 +407,7 @@ of blueprint `thm-a1-fourier-t-exact`). Let `K ≤ m`, so that `FT_ψ(K) ≤ m +
 (`AlgebraicGeometry.exists_isNegCoordOver_ne_zero_of_mem_support`). Distinct points give distinct
 irreducible characters, so there are at most `rank N|_U` of them
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.le_finrank_of_ne_zero`). -/
-theorem support_homologySheaf_fourierTransform_finite' (ψ : AddChar k₀ (PadicAlgCl l))
+theorem support_homologySheaf_fourierTransform_finite (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) {m : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.obj.IsLE m) :
     ((WeilComplex.homologySheaf (m + 1)).obj ((fourierTransform ψ).obj K)).support.Finite := by
   -- the top truncation of `FT_ψ(K) ≤ m + 1`
