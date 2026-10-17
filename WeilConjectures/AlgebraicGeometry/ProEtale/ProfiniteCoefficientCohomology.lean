@@ -106,16 +106,13 @@ surjection `φ : A ⟶ B` of discrete groups. -/
 lemma shortExact_continuousSheafMap (φ : ContinuousAddMonoidHom A B)
     (hφ : Function.Surjective φ) :
     (ShortComplex.mk (continuousSheafMap S (kerSubtype φ)) (continuousSheafMap S φ) (by
+      apply Sheaf.hom_ext
       ext U f
-      apply ULift.ext
-      ext t
-      exact (f.down t).2)).ShortExact := by
+      exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ (f.down t).2))).ShortExact := by
   have := epi_continuousSheafMap S φ hφ
   refine shortExact_of_sections _ (fun U x y h ↦ ?_) (fun U y hy ↦ ?_)
-  · apply ULift.ext
-    ext t
-    exact Subtype.ext (congrArg (fun f : ULift.{u + 1} C(U.unop.left, A) ↦ f.down t) h)
-      congrArg (fun f : ULift.{u + 1} C(U.unop.left, B) ↦ f.down t) hy
+  · exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext
+      (congrArg (fun f : ULift.{u + 1} C(U.unop.left, A) ↦ f.down t) h))
     exact ⟨ULift.up ⟨fun t ↦ ⟨y' t, hy' t⟩, by fun_prop⟩, rfl⟩
 
 /-- **Right exactness of the top cohomology.** For a surjection `φ : A ⟶ B` of discrete
