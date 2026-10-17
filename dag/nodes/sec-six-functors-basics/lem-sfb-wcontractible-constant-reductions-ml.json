@@ -30,7 +30,10 @@
   "lem-pur-derived-change-of-rings",
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
   "def-pc-perfect-ring-complex",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-site-constant-module-hom",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -342,5 +345,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10d3b6ee1",
+  "group": "Q89",
+  "result": "fix",
+  "note": "Read node, Stacks 09C5, all stmt deps, ConstantCompletion API, model-site, citer (lem-sfb-adic-residue-lisse-perfect-lift) and sibling modules. Every clause matches the node (affine W, weak contractibility on ProEt.topology W, Noetherian A, local derived J-completeness via IsComplete at the A→A/J kernel, universal derived reductions, uncoupled constant markings with E_1 perfect, canonical strict tower, sections-of-cohomology = hypercohomology under exact evaluation, all q, Mathlib ML); edge cases fine; docstrings, one sorry, verbatim statement and both report sections ok. Finding: A : Type (u+1) on proEtaleModelTopology forces the coefficient universe to equal the site universe; the citer (landed earlier) uses A : Type (max v (u+1)) on coefficientProEtaleModelTopology.{u,v} and applies this lemma with that A. Fixed: module generalized to coefficientProEtaleModelTopology.{u,v} W and A : Type (max v (u+1)) (identical at v=0); instances and MLAlgebraDerived/MLAlgebraPerfect stated over universe w; new abbrev mlTowerCohomology added to declarations; record statement verbatim; report section appended; stale earlier fixes/lean draft removed. Delivered file and final fix both compile cleanly via nt_compile.py (no errors or warnings)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WContractibleConstantReductionsML",
+  "declaration": "AlgebraicGeometry.Scheme.wcontractible_constant_reductions_mittagLeffler",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.mlConstant",
+   "AlgebraicGeometry.Scheme.mlConstantPresheafPreservesZero",
+   "AlgebraicGeometry.Scheme.mlConstantPreservesZero",
+   "AlgebraicGeometry.Scheme.mlConstantComplex",
+   "AlgebraicGeometry.Scheme.MLAlgebraDerived",
+   "AlgebraicGeometry.Scheme.MLAlgebraPerfect",
+   "AlgebraicGeometry.Scheme.mlConstantDerivedObject",
+   "AlgebraicGeometry.Scheme.mlTowerCohomology",
+   "AlgebraicGeometry.Scheme.mlHypercohomologyTower",
+   "AlgebraicGeometry.Scheme.wcontractible_constant_reductions_mittagLeffler"
+  ],
+  "file": "lean/Sheaf/Paper/WContractibleConstantReductionsML.lean",
+  "statement": "theorem wcontractible_constant_reductions_mittagLeffler (W : Scheme.{u}) [IsAffine W] (_hW : ∀ (F G : Sheaf (ProEt.topology W) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (⊤_ W.ProEt)))) (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A) (H : ConstantCompletion.D (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} W) A)) (_hcomplete : ConstantCompletion.IsComplete (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} W) A J 0) H) (_hconstant : ∀ n : ℕ, ∃ E : MLAlgebraDerived (A ⧸ J ^ (n + 1)), (n = 0 → MLAlgebraPerfect E) ∧ Nonempty ((ConstantCompletion.extend (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} W) A J n)).obj H ≅ mlConstantDerivedObject W (A ⧸ J ^ (n + 1)) E)) : ∀ q : ℤ, (mlHypercohomologyTower W A J H q).IsMittagLeffler",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the existing coefficient-sized small pro-etale model coefficientProEtaleModelTopology.{u, v} (def-weil-proetale-inverse-image), standard derived localizations, exact constant-module realization and the published universally normalized strict quotient tower. The coefficient ring lives in Type (max v (u + 1)), the same convention as the citer lem-sfb-adic-residue-lisse-perfect-lift; the reviewer generalized the delivered Type (u + 1) (proEtaleModelTopology) form, which forced the coefficient universe to equal the site universe. Index n denotes exponent n+1. Completeness is the existing local internal-Hom condition for the kernel of the actual residue quotient. Hypercohomology is computed by exact final-object sections after cohomology on this weakly contractible site; no finite quotient or coherent marking hypothesis is imposed.",
+  "fixed_by": "NT-stage2-cc-10d3b6ee1"
  }
 }
