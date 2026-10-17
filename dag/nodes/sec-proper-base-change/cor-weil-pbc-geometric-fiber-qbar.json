@@ -149,5 +149,23 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-974bfa082 (reviewer sub-agent of L); spot-checked: Read the master and main-20261015 blueprint text (identical statement; one-line proof 'specialize thm-weil-pbc-qbar'), the unit and chapter records, and the statements of all cited nodes, including the blueprint_updates. Statement repair: the source's 'setup of the finite-level corollary' leaves Dbc(-,Qlb) undefined (e.g. ell=2 on Spec F_2). The added hypotheses are those of cor-weil-pbc-geometric-fiber-finite-extension. Once X and Y are in the Qbar domain (noetherian, finite-dimensional, ell invertible), each one follows: a_ybar is proper by base change; X_ybar is of finite type over Omega, so noetherian and finite-dimensional; ell is invertible on P; and the fiber dimension is at most dim X, since O_{X_y,x} is a quotient of O_{X,x}. So the statement is not narrowed or weakened, and the conclusion and representative clause are verbatim. The only citer, prop-zl-smooth-proper-relative-purity, satisfies all of these hypotheses. The square (f,a_ybar,ybar,i_ybar,id) matches def-weil-pbc-cartesian-square and def-pc-fibre-product in orientation. The coefficient category is the pair category P_T of def-weil-pbc-qbar-category, with exchange descended by prop-weil-pbc-descent-functors; it is not a target, and no condensed identification is claimed. Step 1 is a literal instance of thm-weil-pbc-qbar (f proper, g arbitrary; its implicit domain is now explicit), so elementary is correct. Step 2: the representative clause of thm-weil-pbc-qbar names the M-exchange of thm-weil-pbc-finite-extension at T_{M/E}K_E, and the finite-extension corollary over M names the same exchange for the same square; this is an identification by definition. proof_deps equal the union of uses. Dropping the unused cor-weil-pbc-geometric-fiber-finite edge is correct. There is no cycle, no new node and no duplicate (rg for geometric-fiber nodes found only the finite-ring and rational-E corollaries, which use other coefficients). All citations stay inside unit sk-thm-properbasechange, so no tool_uses are needed. No SGA. Edge cases checked: K=0, f=id, empty fiber, char Omega = ell excluded, M=E. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c8e7cd6ff",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Reviewed node/source/dependencies/module/report; all clauses and edge cases match, required report sections exist, and scompile.py passed with local overlay plus server confirmation. No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricFiberQbar",
+  "declaration": "AlgebraicGeometry.Scheme.geometricFiber_qbar_properBaseChange",
+  "file": "lean/Sheaf/Paper/GeometricFiberQbar.lean",
+  "statement": "theorem geometricFiber_qbar_properBaseChange (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] {X Y : Scheme.{u}} (f : X ⟶ Y) (ybar : Spec (.of Ω) ⟶ Y) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian (pullback f ybar)] [IsNoetherian (Spec (.of Ω))] [_dimX : Fact (∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞))] [_dimY : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))] [_dimFiber : Fact (∃ n : ℕ, topologicalKrullDim (pullback f ybar : Scheme.{u}) ≤ (n : WithBot ℕ∞))] [_dimPoint : Fact (∃ n : ℕ, topologicalKrullDim (Spec (.of Ω) : Scheme.{u}) ≤ (n : WithBot ℕ∞))] [_hlX : Fact (∀ t : X, IsUnit (l : X.presheaf.stalk t))] [_hlY : Fact (∀ t : Y, IsUnit (l : Y.presheaf.stalk t))] [_hlFiber : Fact (∀ t : (pullback f ybar : Scheme.{u}), IsUnit (l : (pullback f ybar).presheaf.stalk t))] [_hlPoint : Fact (∀ t : (Spec (.of Ω) : Scheme.{u}), IsUnit (l : (Spec (.of Ω)).presheaf.stalk t))] [IsProper f] [IsProper (pullback.snd f ybar)] (e : ℕ) (_hFibres : ∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (y : Spec (.of Ω') ⟶ Y), topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞)) : ∃ P : PbcQbarExchangePresentation l Ω (geometricFiberSquare f ybar), (∀ K : pbcQbarCategory l Ω X, IsIso ((P.exchange).app K)) ∧ (∀ (M : Padic.FiniteCoefficientFields l Ω) (K : pbcStageCategory l Ω X M), IsIso ((P.Ex.τ M).app K)) ∧ (∀ (K : pbcQbarCategory l Ω X) (M : Padic.FiniteCoefficientFields l Ω) (h : K.stage ≤ M), (P.exchange).app K = PbcQbarExchangePresentation.atStage l Ω (geometricFiberSquare f ybar) P K M h) ∧ (∀ (K L : pbcQbarCategory l Ω X) (h : K ≅ L), (P.Rf.base.functor ⋙ P.Lg.base.functor).map h.hom ≫ (P.exchange).app L = (P.exchange).app K ≫ (P.Lg'.base.functor ⋙ P.Rf'.base.functor).map h.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

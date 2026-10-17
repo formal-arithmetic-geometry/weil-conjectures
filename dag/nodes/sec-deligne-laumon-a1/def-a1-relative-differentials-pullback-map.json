@@ -1,0 +1,100 @@
+{
+ "id": "def-a1-relative-differentials-pullback-map",
+ "kind": "definition",
+ "title": "Canonical pullback map of relative differential sheaves",
+ "statement": "Let $h:X\\to Y$ and $g:Y\\to S$ be morphisms of schemes. Write $\\Omega_{Y/S}$ and $\\Omega_{X/S}$ for the relative differential sheaves [def-sc-relative-differential-sheaf], with their universal derivations $d$, and use tensor module pullback [def-pc-module-pullback]. There exists a unique morphism of $\\mathcal O_X$-modules $d_{h/S}:h^*\\Omega_{Y/S}\\to\\Omega_{X/S}$ such that, for every open $W\\subseteq Y$ and $a\\in\\mathcal O_Y(W)$, it sends the pulled-back section $1\\otimes da$ over $h^{-1}(W)$ to $d(h^\\sharp(a))$. Here $1\\otimes da$ is the image in the sheafified tensor product of the pure tensor of $1$ with the image of $da$ under the unit of the abelian inverse-image adjunction. The canonical differential map $d_{h/S}$ is this unique morphism.",
+ "stmt_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UV, lemma-functoriality-differentials, specialization to identity on the base S; unique characterization on local functions"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorPullbackSection|relativeDifferentialsMap|differentialsPullbackMap|cotangentMap",
+   "results": "{\"t\": \"2026-10-17T16:51:03Z\", \"tool\": \"grep\", \"query\": \"tensorPullbackSection|relativeDifferentialsMap|differentialsPullbackMap|cotangentMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: algebraic maps or unrelated pullbacks only; the canonical map of tensor-pulled-back differential sheaves is absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from the pullback of the relative differentials of Y over S to the relative differentials of X over S sends db to d of its image",
+   "results": "{\"t\": \"2026-10-17T16:51:04Z\", \"tool\": \"leansearch\", \"query\": \"The canonical map from the pullback of the relative differentials of Y over S to the relative differentials of X over S sends db to d of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.map_D\", \"CommRingCat.KaehlerDifferential.d\", \"CommRingCat.KaehlerDifferential.map_d\", \"ModuleCat.Derivation.desc\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"ModuleCat.Derivation.desc_d\", \"CommRingCat.KaehlerDifferential.map\", \"extDerivWithin_pullback\"], \"digest\": \"14088cff0b171652\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: algebraic maps or unrelated pullbacks only; the canonical map of tensor-pulled-back differential sheaves is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical morphism h pullback Omega Y S to Omega X S defined on functions by db maps to d h b",
+   "results": "{\"t\": \"2026-10-17T16:51:14Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical morphism h pullback Omega Y S to Omega X S defined on functions by db maps to d h b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"CategoryTheory.ShortComplex.SnakeInput.L₀X₂ToP\", \"CategoryTheory.ShortComplex.SnakeInput.φ₂\", \"AlgebraicGeometry.Scheme.Pullback.t'\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback_over\", \"AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap\", \"AlgebraicGeometry.Scheme.Pullback.pullbackFstιToV\"], \"digest\": \"e27be65a9542ed85\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: algebraic maps or unrelated pullbacks only; the canonical map of tensor-pulled-back differential sheaves is absent"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-nonzero-differential-generically-etale",
+  "date": "2026-10-17",
+  "group": "Q26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-curve",
+   "place": "Proof, third paragraph: the nonzero differential df used to deduce generic etaleness, as expanded in lem-a1-nonzero-differential-generically-etale.",
+   "via": [
+    "lem-a1-nonzero-differential-generically-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDifferentialsPullbackMap",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.relativeDifferentialsPullbackMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDifferentialsPullbackMap.lean",
+  "statement": "def relativeDifferentialsPullbackMap {X Y S : Scheme.{u}} (g : Y ⟶ S) (h : X ⟶ Y) : (Modules.tensorPullback h).obj g.relativeDifferentials ⟶ (h ≫ g).relativeDifferentials",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.relativeDifferentialsPullbackGenerator",
+   "AlgebraicGeometry.Scheme.Hom.existsUnique_relativeDifferentialsPullbackMap",
+   "AlgebraicGeometry.Scheme.Hom.relativeDifferentialsPullbackMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-66df5a176",
+  "group": "Q26",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-66df5a176",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, helper construction, docstrings, edge cases, report sections, and reproducible per-file compilation all checked successfully."
+ }
+}

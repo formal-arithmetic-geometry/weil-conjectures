@@ -12,7 +12,8 @@
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-kahler-differentials",
   "def-weil-etale-morphism",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "def-a1-relative-differentials-pullback-map"
  ],
  "proof": [
   {
@@ -231,5 +232,23 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-cf36ce73d (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited statement, Stacks curves.tex 0C1C (lemma-generically-etale, l.2347) and 0CCK (lemma-flat, l.86) with both tags checked in tags/tags, and the main-20261015 lem-a1-finite-map-curve proof, paragraph 3. The item's statement is unchanged and is exactly 0C1C (1)<=>(4) over an arbitrary field; it is not weakened. Steps 1, 2, 4, 5, 6 and 7 are correct. Step 2's presentation was checked by both composites. Step 5's two singleton cases were checked: in the generic case trdeg is 1 against 0; in the closed case the map factors through kappa(y), giving an unramified field product that contradicts dimension 1. One fault (C1, repaired): step 3 asserted that the chart map u is exactly dh, which needs h^*(M~) on Spec A = (A⊗_B M)~, and no node was cited. I added lem-weil-pbc-tilde-pullback-base-change (on the route, sk-thm-p1) and def-pc-module-pullback to step 3's text and uses, and added the tilde node to proof_deps. The corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/. New node lem-a1-nonconstant-normal-curve-map-flat is exactly 0CCK, statement-only, with correct blueprint fields and three kinds of search. It is not a duplicate: lem-pur-smooth-curve-map-completion needs an algebraically closed field and completions. It does not restate an item clause, and it is true on small cases: Frobenius is flat but not étale, a cusp target shows normality is needed, a constant map is not flat. Note: lem-sc-smooth-normal's stmt_dep def-sc-curves assumes an algebraically closed field. I accept its use over an arbitrary k because the node is closed by the arbitrary-field slopmaster2 isIntegrallyClosed_stalk_of_smooth (Regular.lean:208), and the parent already uses it over F_q. Every dependency is on the unit's transitive route, so the three declared tool_uses are unnecessary; I record none as accepted. No SGA, no coefficient category or base-change morphism involved.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-66df5a176",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, helper construction, docstrings, edge cases, report sections, and reproducible per-file compilation all checked successfully."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.NonzeroDifferentialGenericallyEtale",
+  "declaration": "AlgebraicGeometry.nonzero_differential_iff_exists_nonempty_etale_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NonzeroDifferentialGenericallyEtale.lean",
+  "statement": "theorem nonzero_differential_iff_exists_nonempty_etale_open {k : Type u} [Field k] (X Y : Over (Spec (.of k))) [IsIntegralCurve X.hom] [IsIntegralCurve Y.hom] [Smooth X.hom] [Smooth Y.hom] (h : X ⟶ Y) : Y.hom.relativeDifferentialsPullbackMap h.left ≫ (Scheme.Hom.relativeDifferentialsCongr (h.left ≫ Y.hom) h.w).hom ≠ 0 ↔ ∃ V : X.left.Opens, (V : Set X.left).Nonempty ∧ Etale (V.ι ≫ h.left)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
