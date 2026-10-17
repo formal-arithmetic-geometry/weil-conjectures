@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
-import WeilConjectures.AlgebraicGeometry.ProjectiveLineTwistExists
 import WeilConjectures.AlgebraicGeometry.ProjTwistTransportedData
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 
 /-!
 # Comparing a Proj twist with a prescribed glued twist
@@ -58,9 +58,9 @@ theorem nonempty_twist_iso_tensorPullback_of_twistData (k : Type v) [Field k]
   let M := twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) d
   let N := (Scheme.Modules.pullback C.iso.inv).obj M
   obtain ⟨TN⟩ := nonempty_twistData_pullback_inv k d C
-  obtain ⟨L₀, T₀, _, huniq⟩ := ProjectiveLine.exists_twistData_unique_iso k d
-  obtain ⟨eN, _, _⟩ := huniq N TN
-  obtain ⟨eL, _, _⟩ := huniq L T
+  let T₀ := ProjectiveLine.twistData (Spec (.of k)) d
+  obtain ⟨eN, _, _⟩ := T₀.existsUnique_iso TN
+  obtain ⟨eL, _, _⟩ := T₀.existsUnique_iso T
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction C.iso.inv
   let epb := adj.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction C.iso.inv)
   let e : (Scheme.Modules.tensorPullback C.iso.inv).obj M ≅ L :=
