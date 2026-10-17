@@ -10,9 +10,59 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $q_{ij}(t)$ to be the quotient of $G_{ij}(t)$ by $\\pi^e$. The divisibility hypothesis and [lem-sfb-continuous-uniformizer-division] give entrywise continuous maps $q:T\\to\\operatorname{Mat}_{n\\times m}(A)$ with $G=\\pi^e q$. At $t_0$, $q_{11}(t_0)$ is a unit; after shrinking to an open neighbourhood $U$ of $t_0$, the same lemma gives that $a(t)=q_{11}(t)$ is unit-valued and $a^{-1}$ is continuous on $U$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sfb-continuous-uniformizer-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: comparison of valuations makes division integral."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-unit-pivot-schur-formula] to $q|_U$ and the pivot $a$. Write the combined left factor supplied there as $L_{\\mathrm{pivot}}(t)=L_0(t)L_1(t)$. Its explicit diagonal and transvection matrices are continuous and invertible with continuous inverses, and they give $L_{\\mathrm{pivot}}(t)q(t)R_0(t)=\\operatorname{diag}(1,H_0(t))$ for a continuous residual block $H_0(t)$.",
+   "uses": [
+    "lem-sfb-unit-pivot-schur-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: elementary row and column elimination after integral division."
+   }
+  },
+  {
+   "text": "Multiply the identity in the previous step by the scalar $\\pi^e$. Define $L=L_{\\mathrm{pivot}}$, $R=R_0$, and $H=\\pi^eH_0$ entrywise. Then $L(t)G(t)R(t)=\\begin{pmatrix}\\pi^e&0\\\\0&H(t)\\end{pmatrix}$, and continuity of $H$ follows from continuity of $H_0$ and scalar multiplication in $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: normalization of the pivot and block identity."
+   }
+  },
+  {
+   "text": "When $n=1$ or $m=1$, the reduced block has zero rows or columns and the same formulas are interpreted as empty matrices; the identities and continuity assertions remain valid. Thus the constructed $U,L,R,H$ satisfy every clause of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent verification of the rectangular edge cases for the pivot calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sfb-continuous-uniformizer-division",
+  "lem-sfb-unit-pivot-schur-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19; explicit continuous integral division, unit-pivot elimination, and scalar normalization."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,7 +114,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-integral-matrix-local-smith",
@@ -84,5 +134,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-continuous-integral-pivot-splitting",
+  "worker": "stage1",
+  "summary": "Split the local pivot assertion into a scalar continuity lemma for division by a fixed uniformizer power and an explicit unit-pivot Schur elimination formula. The item proof normalizes the divisible matrix, shrinks to the unit locus, applies the explicit row/column formulas, rescales the residual block, and checks the one-row and one-column edge cases. No statement was changed.",
+  "blueprint": "Realizes the ancestor's continuous Smith-elimination clause, specifically the imported repair note's continuous integral division, elementary elimination and normalization of one pivot."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-4352635f3",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-4352635f3 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited definitions, all 7 steps of the parent lem-sfb-continuous-integral-matrix-local-smith, the unit record and the HRS Thm 6.12 proof (pp. 18-19). The item statement is unchanged. Its hypotheses match what parent steps 3-4 supply: every entry divisible by pi^e on the neighbourhood, an exact-valuation pivot at y0, and m,n>=1 in the nonempty-list branch. Step 1 meets every hypothesis of lem-sfb-continuous-uniformizer-division, which is true: multiplication by pi^e is a homeomorphism E->E that restricts to A->pi^eA, A^x is open and inversion is continuous. Step 2 meets every hypothesis of lem-sfb-unit-pivot-schur-formula. I checked that formula by direct multiplication: L0*L1*K*R0 = diag(1,H) with H_ij = K_ij - a^{-1}K_i1 K_1j, and the inverses are explicit and continuous. Small cases over Z_5: K=[[2,4],[6,5]] gives diag(1,-7), K=[[2,0],[2,0]] gives diag(1,0), and the 1x1, 1xm and nx1 cases give an empty residual block. The earlier L1L0 order error is fixed. Steps 3 and 4 are elementary: scalar rescaling, and empty blocks when n=1 or m=1. proof_deps equals the union of the step uses and there is no cycle. I searched the DAG with rg and read the candidates (finite-continuous-ultrametric-pivot, continuous-field-matrix-elimination, integral-matrix-entry-properties, the residue-kernel unit-minor nodes); none states either new lemma. Neither new node restates a clause of the item. Both new nodes are statement-only and in the item's unit; the other citations are definitions, so no tool_uses are needed. The HRS valuation-comparison division is cited correctly and proof_origin agent is correct. No SGA citation. Minor, not a fault: the item uses Mat/GL without def-weil-matrix in stmt_deps, as does its imported parent, and this delivery did not change that statement. No fixes written."
  }
 }

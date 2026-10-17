@@ -13,15 +13,151 @@
   "def-weil-derived-complete-integral-detailed",
   "lem-weil-integral-twist-base-change",
   "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pc-sheaf-modules-tensor-closed",
   "def-weil-pbc-proetale-site",
   "def-coefficient-twists-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=R_E$, $B=R_F$, $L=L_E$, and let $\\theta:L\\otimes_R B\\xrightarrow{\\sim}L_F$ be [lem-weil-integral-twist-base-change]. For $H=E,F$, clause 3 of [lem-pur-twist-sheaf-locally-free] trivializes $\\mathcal O_H(1)$ over $R_H$ and identifies its finite reductions with finite locally constant rank-one lines. By [def-coefficient-twists-detailed], positive twists are tensor powers, the zero twist is $R_H$, and negative twists are sheaf duals. Restriction of tensor is [lem-sfb-localized-site-tensor-restriction], and [def-pur-sheaf-hom] computes the dual on the localized site. Thus on a first-line trivializing cover every $L_H$ and its dual are $R_H$. Evaluation $L_H\\otimes L_H^\\vee\\to R_H$ and the reverse-order evaluation are locally multiplication and hence are global isomorphisms: their local inverses agree because an inverse is unique, and glue by the sheaf axiom. Reduction of these same formulas identifies $L_H\\otimes_{R_H}(A_{H,n})_S$ with $A_{H,n}(m)$ for all $n$: tensor powers reduce by balancing, while a dual basis reduces to the dual basis. These reductions are finite locally constant rank-one sheaves, including for $m=0$ and $m<0$.",
+   "uses": [
+    "lem-weil-integral-twist-base-change",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback), 04TT (section-internal-hom); blueprint prop-weil-twist-preserves, first proof paragraph"
+   }
+  },
+  {
+   "text": "For either $H$, tensoring with $L_H$ and $L_H^\\vee$ gives inverse additive equivalences, by the associativity and unit maps of [lem-pc-sheaf-modules-tensor-closed] and the evaluations in step 1. These functors preserve kernels and cokernels: applying the inverse equivalence identifies maps into a proposed kernel (or out of a proposed cokernel) with the corresponding universal problem before tensoring. Hence $T_H=-\\otimes_{R_H}L_H$ and its inverse are exact. In particular $L_H$ and $L_H^\\vee$ are flat by [def-pc-flat-sheaf-modules]. The cohomology formula of [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^i(T_H Q)\\cong T_H\\mathcal H^i(Q)$ for every complex $Q$. Since the inverse equivalence detects zero objects, this preserves precisely each cohomological vanishing interval.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); exact inverse tensor equivalences and kernel/image computation"
+   }
+  },
+  {
+   "text": "Choose the given $P\\to C$ using [lem-pc-kflat-resolution]. The complex $L[0]$ is K-flat: tensoring any acyclic complex with it is its image under the exact $T_E$, acyclic by step 2 and [def-pc-kflat-complex]. The same holds for $L_F[0]$. Moreover $P\\otimes_R L$ is K-flat with flat terms. Its term $P^i\\otimes_R L$ is flat since tensoring by it is the composite of two exact tensor functors. For an acyclic $Q$, associativity gives $Q\\otimes_R(P\\otimes_R L)\\cong(Q\\otimes_R P)\\otimes_R L$, acyclic by K-flatness of $P$ and exactness of $T_E$. Here total tensor uses [def-pc-tensor-complex-sheaves]. Rebracketing its direct sums is valid because the closed tensor adjunction in [lem-pc-sheaf-modules-tensor-closed] makes $-\\otimes_R L$ preserve them: maps from the tensor of a sum correspond to the product of the maps from the tensor of each summand. Since $L$ is concentrated in degree zero, rebracketing changes no differential signs. These arguments apply over $B$ as well.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN (definition-K-flat), 06YS (lemma-K-flat-resolution); degree-zero specialization of lemma-tensor-product-K-flat"
+   }
+  },
+  {
+   "text": "Before using $\\theta$, define\n$$u:(P\\otimes_R L)\\otimes_R B\\longrightarrow(P\\otimes_R B)\\otimes_B(L\\otimes_R B),\\qquad (x\\otimes l)\\otimes b\\longmapsto(x\\otimes b)\\otimes(l\\otimes1).$$\nIts inverse sends $(x\\otimes b)\\otimes(l\\otimes c)$ to $(x\\otimes l)\\otimes bc$. Both formulas are additive and $R$-balanced in $x,l$; moving a $B$-scalar between the two right-hand factors does not change $bc$. The universal properties of [lem-pc-sites-sheaf-tensor-bilinear-universal] and [lem-pc-sites-module-sheafification-bilinear-extension] therefore extend these formulas to morphisms of the sheaf tensors, commuting with restriction. Their composites are identities: on the left the scalar becomes $b\\cdot1$; on the right move $c$ from $l\\otimes c=c(l\\otimes1)$ into $x\\otimes b$. Equality on these pure inputs determines sheaf maps by those same universal properties; no assertion that all global sections are pure tensors is needed. Composing $u$ with $1\\otimes\\theta$ gives exactly the map in the statement. Its inverse is the displayed inverse after $1\\otimes\\theta^{-1}$. Only $x$ has nonzero complex degree, so both maps commute with $d_P$ and are inverse chain maps. This proves the chain-isomorphism clause.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-weil-integral-twist-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), tensor formulas and bilinear universal property"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-site-derived-tensor-descent], the K-flat flat-term complexes from step 3 compute $C(m)=C\\otimes_R^L L$. By [lem-pur-derived-change-of-rings], the source of the chain map in step 4 computes $(C(m))\\otimes_R^L B$. On the other side [lem-pur-kflat-change-of-rings] makes $P\\otimes_R B$ K-flat with flat terms over $B$; together with $L_F[0]$ this computes $(C\\otimes_R^L B)\\otimes_B^L L_F$. Thus step 4 induces an isomorphism\n$$\\alpha_C:(C(m))\\otimes_R^L B\\xrightarrow{\\sim}(C\\otimes_R^L B)(m).$$\nFor a chain map $f:P\\to P'$, the two naturality paths on a pure input both give $(f(x)\\otimes b)\\otimes\\theta(l\\otimes1)$. The localization equivalence in [lem-weil-pbc-site-derived-tensor-descent] extends this naturality from K-flat models, including inverses of quasi-isomorphisms, to all derived morphisms. The change-of-rings comparison is independent of the resolution by [lem-pur-derived-change-of-rings]. Therefore $\\alpha$ is natural in $C$ and independent of the chosen $P$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7D, 06YT, 06YU (K-flat descent and derived tensor), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "Let $H$ be either coefficient field and let $K$ be derived complete over $R_H$. Step 1 verifies the locally free rank-one hypothesis of [lem-sf-integral-line-tensor-comparison], so its canonical map identifies $K\\otimes_{R_H}^L L_H$ with the derived limit of the tensor/reduction tower. Its statement specifies that the map is induced by the natural reduction maps, with the ordinary tensor/reduction comparison at every level. On a K-flat model this comparison sends $(x\\otimes l)\\otimes a$ to $(x\\otimes a)\\otimes(l\\otimes1)$, precisely step 4 with $B=(A_{H,n})_S$. By [lem-pur-kflat-change-of-rings] these level complexes compute the reductions of $K(m)$. Their quotient transitions and maps from $K(m)$ agree on the displayed inputs. Consequently the Roos triangle supplied by that comparison has first map equal to the reduction map $K(m)\\to\\prod_n K(m)_n$, as required in [def-weil-derived-complete]. Thus $K(m)$ is derived complete. This uses the specified natural comparison, without choosing a lift into an arbitrary triangulated derived limit.",
+   "uses": [
+    "lem-sf-integral-line-tensor-comparison",
+    "lem-pur-kflat-change-of-rings",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Definition 3.5.2; existing integral line tensor comparison specialized to L_H"
+   }
+  },
+  {
+   "text": "If $K\\in D^b_c(S,\\mathcal O_H)$, [def-weil-derived-complete-integral-detailed] gives one interval $[r,s]$ for all its constructible reductions $K_n$. Steps 4-5 with the quotient ring identify $(K(m))_n$ with $K_n\\otimes^L_{(A_{H,n})_S}A_{H,n}(m)$. The finite line is flat and its tensor is exact by the inverse-line argument of step 2. The cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology] therefore identifies its cohomology with $\\mathcal H^i(K_n)\\otimes A_{H,n}(m)$ and preserves $[r,s]$. To check constructibility, choose the finite partition for each $\\mathcal H^i(K_n)$ in [def-weil-finite-torsion-constructibility]. On each stratum the tensor restricts to the tensor of restrictions by [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. Refine the local constant cover of the original sheaf with that of the finite line from step 1. There its tensor is $M\\otimes A_{H,n}\\cong M$ with $M$ finite. Thus the same finite partition is a constructible partition for the tensor. Step 6 supplies completeness, so the definition gives $K(m)\\in D^b_c(S,\\mathcal O_H)$. There is no assertion about a finite global trivializing cover or about a discrete integral coefficient sheaf.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback); blueprint prop-weil-twist-preserves, constructibility paragraph"
+   }
+  },
+  {
+   "text": "Both $C$ and $C(m)$ are derived complete by the hypothesis and step 6. Apply [lem-weil-finite-free-completed-scalar-comparison] to them to obtain the specified natural isomorphisms $\\chi_C:C\\otimes_R^L B\\xrightarrow{\\sim}\\operatorname{Ext}_{F/E}C$ and $\\chi_{C(m)}:(C(m))\\otimes_R^L B\\xrightarrow{\\sim}\\operatorname{Ext}_{F/E}(C(m))$. With the notation of [def-weil-integral-scalar-extension], set\n$$\\beta_C=(\\chi_C)(m)\\circ\\alpha_C\\circ\\chi_{C(m)}^{-1}.$$\nEvery factor is an isomorphism; each is natural, so their composite is natural. This is exactly the stated chain map conjugated by the specified ordinary-to-completed comparisons. By [lem-weil-integral-scalar-extension-constructible] and step 7, the source and target of $\\beta_C$ lie in $D^b_c(S,\\mathcal O_F)$. Since this is a full subcategory, the ambient isomorphism is the asserted isomorphism in the completed integral category. The comparison lemma also makes ordinary scalar extension derived complete, so all intermediate twists used above have their claimed complete interpretation.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+    "place": "Proof, final sentence: integral and common-finite-stage coefficients; conjugation by the specified finite-free ordinary-to-completed comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-twist-base-change",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sf-integral-line-tensor-comparison",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+  "place": "Final sentence, expanded by Stacks Tags 03EK/03EL and K-flat descent 06YS/06YU/06YY, and the existing integral line/completed scalar comparison statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,9 +193,58 @@
    "results": "TensorProduct.AlgebraTensorModule.distribBaseChange; TensorProduct.AlgebraTensorModule.distribBaseChange_tmul; TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul; ModuleCat.extendScalars_δ; ModuleCat.extendScalars_μ; Algebra.TensorProduct.distribBaseChange_includeLeftSubRight_apply; Algebra.TensorProduct.distribBaseChange_comp_includeLeftSubRight",
    "date": "2026-10-17",
    "verdict": "no match: generic localization, module base change or colimits of types do not state this completed-sheaf/coefficient-category assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "termwise tensor associativity identifies twisting then finite scalar extension with scalar extension then twisting for K-flat sheaf complexes",
+   "results": "HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/complex/sheaf-free results do not state the completed integral sheaf twist comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.distribBaseChange, ModuleCat.extendScalars, CategoryTheory.MonoidalCategory.associator",
+   "results": "loogle: unknown identifier 'CategoryTheory.MonoidalCategory.associator'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.MonoidalCategory.associator'; corrected by the later single-name distribBaseChange query"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K-flat|distribBaseChange|tensor.*assoc",
+   "results": "Mathlib/Algebra/Azumaya/Defs.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Category/BialgCat/Monoidal.lean; Mathlib/Algebra/Category/HopfAlgCat/Monoidal.lean; Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/complex/sheaf-free results do not state the completed integral sheaf twist comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor twisting commutes with finite scalar extension on K-flat complexes",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Module.Flat.lTensor_shortComplex_exact; Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/complex/sheaf-free results do not state the completed integral sheaf twist comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed change of coefficient rings commutes with tensoring by an invertible rank one sheaf on a site",
+   "results": "SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/complex/sheaf-free results do not state the completed integral sheaf twist comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange; TensorProduct.AlgebraTensorModule.distribBaseChange_tmul; TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul; ModuleCat.extendScalars_δ; ModuleCat.extendScalars_μ; Algebra.TensorProduct.distribBaseChange_includeLeftSubRight_apply; Algebra.TensorProduct.distribBaseChange_comp_includeLeftSubRight",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/complex/sheaf-free results do not state the completed integral sheaf twist comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "distribBaseChange|def assoc|theorem assoc",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Associator.lean; Mathlib/LinearAlgebra/TensorProduct/Associator.lean; Mathlib/LinearAlgebra/TensorProduct/Associator.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/complex/sheaf-free results do not state the completed integral sheaf twist comparison"
   }
  ],
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-twist-preserves",
@@ -77,5 +262,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-integral-twist-derived-scalar",
+  "worker": "stage1",
+  "summary": "Kept the statement and proved the explicit tensor-chain isomorphism with its balanced inverse, K-flat descent and naturality, completeness via the existing integral line comparison, and the specified completion-conjugation formula. Reused existing nodes throughout, with no new nodes and no parent citation.",
+  "blueprint": "Realizes prop-weil-twist-preserves final proof sentence, integral/common-finite-stage compatibility: termwise scalar/twist comparison and its passage to completed integral categories. Historical blueprint ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Generic Coefficient Tate twists tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic Restriction to a localized site commutes with the sheaf tensor product tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Generic Sheaf Hom of sheaves of modules on a site tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic Sheaves of modules on a site form a symmetric monoidal closed category tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Generic Flat sheaf of modules on a ringed site tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic An exact functor commutes with cohomology of cochain complexes tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Generic K-flat complex of modules on a ringed site tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Generic Tensor product of complexes of modules on a ringed site tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic Universal property of sheaf tensor product tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic Bilinear maps extend through module sheafification tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic Derived tensor and K-flat representative descent on a ringed site tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic Change of rings preserves K-flat complexes with flat terms tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-sf-integral-line-tensor-comparison",
+    "why": "Generic Ordinary and completed tensor with an integral coefficient line tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-weil-derived-complete",
+    "why": "Generic Derived complete objects tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Generic Bounded constructible derived-complete integral coefficients tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-weil-finite-torsion-constructibility",
+    "why": "Generic Finite-torsion constructibility tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic Underived tensor comparison for pullback of modules on ringed topoi tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "def-weil-integral-scalar-extension",
+    "why": "Generic Integral scalar extension along a finite extension of l-adic fields tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Generic Integral scalar extension preserves bounded constructible integral complexes tool used in the tensor/K-flat/completion calculation; the exceptional-adjoint unit supplies no such interface, and its geometric route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sf-integral-line-tensor-comparison",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-a97777967",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-a97777967 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, every cited node's statement (8 stmt_deps, 24 proof_deps), the parent prop-weil-twist-preserves with all 13 steps, the unit and chapter records, and the blueprint source. Master and main-20261015 have the same proof text; the item expands its final sentence. Stacks tags 03EK/03EL/04TT/06YN/06YS/06YU/06YY resolve to the cited labels. No SGA source is cited. The statement is unchanged and keeps the right coefficient category: all tensors are over the completed sheaf R_H, Ext_{F/E} is the strict-tower cone functor, and chi is the specified completion map. This matches the consumer lem-weil-integral-twist-scalar-coherence. Step checks: the u map and its inverse compose to the identity on pure inputs, and with theta they give exactly the statement's map. Step 5's K-flat flat-term hypotheses come from step 3 and lem-pur-kflat-change-of-rings. Step 6 meets the hypotheses of lem-sf-integral-line-tensor-comparison (ell invertible, K complete, T locally isomorphic to R), and its specified cone map gives a Roos triangle with first map c. Step 7 keeps one interval [r,s] for all n and keeps the same constructible partition, via stratum pullback and the tensor of constant sheaves. Step 8's beta = chi_C(m) o alpha_C o chi_{C(m)}^{-1} has the right types, and both ends lie in D^b_c(O_F). A dependency traversal finds no cycle through the item or its parent. Edge cases checked: m=0, m<0, E=F, C=0 or empty S, ramified F/E. There are no new nodes. The Mathlib searches are recorded, including one invalid Loogle query marked invalid and corrected. I accept all 23 declared tool_uses as generic tensor, K-flat and coefficient tools; the exceptional-adjoint unit's route is not replaced. No fixes."
  }
 }

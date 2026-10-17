@@ -1,0 +1,69 @@
+{
+ "id": "lem-sfb-unit-pivot-schur-formula",
+ "kind": "statement",
+ "title": "Explicit continuous unit-pivot Schur elimination",
+ "statement": "Let $A$ be a commutative topological ring, let $T$ be a topological space, let $m,n\\geq1$, and let $K:T\\to\\operatorname{Mat}_{n\\times m}(A)$ [def-weil-matrix] have entrywise continuous entries. Suppose $a(t)=K_{11}(t)$ is a unit for every $t$ and $t\\mapsto a(t)^{-1}$ is continuous. Define $L_0(t)$ to be diagonal with $a(t)^{-1}$ in the $(1,1)$ position and $1$ elsewhere, define $R_0(t)$ to be the identity with $(1,j)$ entry $-a(t)^{-1}K_{1j}(t)$ for $j>1$, and define $L_1(t)$ to be the identity with $(i,1)$ entry $-a(t)^{-1}K_{i1}(t)$ for $i>1$. Put $L(t)=L_0(t)L_1(t)$ and $H_{ij}(t)=K_{ij}(t)-a(t)^{-1}K_{i1}(t)K_{1j}(t)$ for $i,j$ in the reduced index sets. Then $L$ and $R_0$ are entrywise continuous maps to $\\operatorname{GL}_n(A)$ and $\\operatorname{GL}_m(A)$ with entrywise continuous inverses, $H$ has continuous entries, and $L(t)K(t)R_0(t)=\\begin{pmatrix}1&0\\\\0&H(t)\\end{pmatrix}$ for every $t$.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: continuous integral division and elementary pivot elimination; the displayed auxiliary statement is written out here because HRS uses it as a standard calculation."
+ },
+ "stmt_deps": [
+  "def-weil-matrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Schur complement obtained by subtracting pivot multiples with continuous coefficients and invertible transvections",
+   "results": "Matrix.isUnit_fromBlocks_iff_of_invertible₂₂ and Matrix.invertibleEquivFromBlocks₂₂Invertible plus generic matrix continuity declarations; no continuous rectangular unit-pivot factorization with explicit elementary factors.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix, GeneralLinearGroup, inv, mul",
+   "results": "No hits; unknown identifier GeneralLinearGroup.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous matrix row and column transvections with a unit upper left entry",
+   "results": "Matrix.fromBlocks_eq_of_invertible₁₁, Matrix.invertibleEquivFromBlocks₁₁Invertible, Matrix.invertibleOfFromBlocks₁₁Invertible and related block results; none states the continuous rectangular formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "transvection.*mul|mul.*transvection|fromBlocks_eq_of_invertible",
+   "results": "Mathlib/LinearAlgebra/Matrix/Transvection.lean and Mathlib/LinearAlgebra/Matrix/SchurComplement.lean contain algebraic ingredients only; no topological family lemma.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-integral-pivot-splitting",
+  "date": "2026-10-17",
+  "group": "Q147"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "continuous Smith elimination clause refined by the item's imported repair note: continuous integral division, elementary elimination and normalization of one pivot",
+   "via": [
+    "lem-sfb-continuous-integral-pivot-splitting",
+    "lem-sfb-continuous-integral-matrix-local-smith",
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

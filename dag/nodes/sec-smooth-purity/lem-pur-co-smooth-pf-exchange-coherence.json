@@ -17,9 +17,81 @@
   "def-weil-extension-by-zero",
   "def-exchange-projection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $G=v^*$, $H=\\bar w^*$, $V=w^*$, $R=Rp_*$, $R'=Rp'_*$. Work in the ordinary unbounded module derived categories over the constant sheaf $\\Lambda$. The operations and adjunctions in [def-weil-pbc-proetale-operations] are those for these ringed topoi, with coefficient identifications induced by inverse image of the constant ring. The Cartesian scheme diagram induces the specified commutation of ringed-topos morphisms, compatible with these identifications. Use $\\mu_a:a^*(A\\otimes^LB)\\cong a^*A\\otimes^La^*B$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the canonical composition comparisons of [lem-weil-pbc-proetale-derived-pullback-composition]. Let $e:GR\\to R'H$ be the mate of $p'^*G\\cong Hp^*$, and let $\\pi_p$ be the proper projection transformation defined in the item. For $Q\\in D(\\overline T_{\\mathrm{proet}},\\Lambda)$ put $b_N:Hj_!N\\cong j'_!VN$ and $\\gamma_j(N,Q):j_!N\\otimes^LQ\\cong j_!(N\\otimes^Lj^*Q)$. By [lem-sf-open-tensor-normalization], these are exactly the canonical open base-change and tensor maps in the item, with identity restrictions under the open units, and $j'_!$ is fully faithful. This theorem is applied only to constant finite ring sheaves, not to its additional strict-system assertion.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), Tag 07A4 (lemma-pullback-tensor-product), and Tag 0GL1 (lemma-j-shriek-and-tensor); notation and ringed-topos specialization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square with vertical maps $p,p'$ and horizontal maps $v,\\bar w$, at $A=j_!N$ and $P$. Its exchange is $e$: it is the mate of the same pullback comparison under the same derived adjunctions. Its projection maps are $\\pi_p,\\pi_{p'}$: both are the specified adjuncts of counit tensor identity. Thus, with source and target tensor comparisons inserted, the theorem gives\n$$e_{A\\otimes^Lp^*P}\\,G\\pi_p(A,P)=\\pi_{p'}(HA,GP)(e_A\\otimes1).$$\nIt applies to arbitrary unbounded objects and commutative ring sheaves. In particular neither proper-base-change invertibility nor a finite Tor-amplitude condition is being used.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48 (remark-compatible-with-diagram); the cited existing node supplies its omitted verification"
+   }
+  },
+  {
+   "text": "For any $Q$ on $\\overline T$, the open comparison identity is\n$$b_{N\\otimes^Lj^*Q}\\,H\\gamma_j(N,Q)=\\gamma_{j'}(VN,HQ)(b_N\\otimes1),$$\nwhere the source comparison is $\\mu_H$ and the target uses $\\mu_w$ and $Vj^*\\cong j'^*H$. To check it, [lem-sf-open-tensor-normalization] identifies the common source $H(j_!N\\otimes^LQ)$ with $j'_!(VN\\otimes^Lj'^*HQ)$ by $\\mu_H$, $b_N\\otimes1$, and $\\gamma_{j'}$. Its target is also in the essential image of $j'_!$. Full faithfulness therefore reduces equality to equality after $j'^*$. The restrictions of $b$ and $\\gamma$ are identities under the stated open units. The remaining maps agree directly under the canonical tensor and composition comparisons: on K-flat representatives supplied by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], both maps in bidegree $(r,s)$ take the inverse image of $x\\otimes y$ to the tensor of the inverse images of $x$ and $y$, with $Vj^*y=j'^*Hy$. The composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition] is the termwise pullback comparison, so it gives exactly this identification. These maps preserve bidegrees and the total differential and hence give the same map of total tensor complexes, locally on sheaf tensor generators and therefore globally. Passing to the derived category proves the restricted equality, and full faithfulness proves the displayed identity.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor); explicit open restriction calculation"
+   }
+  },
+  {
+   "text": "Put $A=j_!N$, $C=A\\otimes^Lp^*P$, $W=N\\otimes^Lu^*P$, and let $\\gamma:C\\to j_!W$ include $j^*p^*\\cong u^*$. Write $\\gamma'$ for the analogous map with inputs $VN,GP$ and $p'^*GP$. Step 3 at $Q=p^*P$, with $Hp^*P\\cong p'^*GP$, says $b_W H\\gamma=\\gamma'(b_N\\otimes1)$. The pullback comparisons here identify $Vj^*p^*P$ with $j'^*Hp^*P$ and then with $j'^*p'^*GP$; these are the identifications of $Vu^*P$ with $u'^*GP$ in the item. Expand the definitions of $E^c$ and $\\operatorname{PF}^c$. Naturality of the exchange transformation $e$ of [lem-weil-pbc-ringed-exchange-tensor-coherence], applied to $\\gamma:C\\to j_!W$, gives\n$$\\begin{aligned}\nE^c_u(W)\\,G\\operatorname{PF}^c_u(N,P)\n &=R'(b_W)e_{j_!W}\\,G(R\\gamma)\\,G\\pi_p(A,P)\\\\\n &=R'(b_W H\\gamma)e_C\\,G\\pi_p(A,P)\\\\\n &=R'(\\gamma')R'(b_N\\otimes1)\\pi_{p'}(HA,GP)(e_A\\otimes1).\n\\end{aligned}$$\nThe last line substitutes the open identity and then the proper-factor identity of step 2. Functoriality of $R'$ accounts for the composition inside $R'$. All tensor and pullback identifications are the ones fixed in steps 1–3.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48 (remark-compatible-with-diagram) and Tag 0GL1 (lemma-j-shriek-and-tensor); paste the two factor squares"
+   }
+  },
+  {
+   "text": "The naturality in the first input of the counit-defined projection transformation is included in [lem-weil-pbc-ringed-projection-mate-exact]. Apply it for $p'$ to $b_N:HA\\to j'_!VN$ and the second input $GP$:\n$$R'(b_N\\otimes1)\\pi_{p'}(HA,GP)=\\pi_{p'}(j'_!VN,GP)(R'b_N\\otimes1).$$\nSubstitution into the last line of step 4 gives\n$$\\begin{aligned}\nE^c_u(W)\\,G\\operatorname{PF}^c_u(N,P)\n &=R'(\\gamma')\\pi_{p'}(j'_!VN,GP)(R'b_N\\,e_A\\otimes1)\\\\\n &=\\operatorname{PF}^{c'}_{u'}(VN,GP)(E^c_u(N)\\otimes1),\n\\end{aligned}$$\nwhich is the required equality with the stated comparisons. Naturality in $N,P$ follows from naturality of $e,\\pi,b,\\gamma$ and the pullback/tensor comparisons. No inverse of $e$ or $\\pi$ occurs.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map); counit-defined projection naturality and completion of the factor calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0E48 (remark-compatible-with-diagram) and 0GL1 (lemma-j-shriek-and-tensor); explicit pasting of existing proper coherence and normalized open maps, realizing the final sentence of lem-pur-co-smooth-composition.proof.md"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,10 +155,45 @@
    "results": "",
    "date": "2026-10-17",
    "verdict": "no match; returned declarations do not identify these compact-support transformations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula map for compact support derived direct image commutes with arbitrary base change exchange on proetale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Hom.map_appLE; AlgebraicGeometry.Scheme.Hom.appLE_map; LightCondensed.ihomPoints_symm_comp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Hom.map_appLE_assoc; AlgebraicGeometry.Scheme.Hom.map_appLE'; AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match; hits are scheme/base-change or abstract adjunction declarations, not this compactification identity"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Ee]xchange|projection.*[Bb]ase[Cc]hange",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match; hits are scheme/base-change or abstract adjunction declarations, not this compactification identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula map for compact support derived direct image commutes with arbitrary base change exchange on proetale sheaves",
+   "results": "TopCat.Presheaf.SheafConditionEqualizerProducts.res_π; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme; RingHom.IsStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match; hits are scheme/base-change or abstract adjunction declarations, not this compactification identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-17",
+   "verdict": "no match; hits are scheme/base-change or abstract adjunction declarations, not this compactification identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a square of pullbacks is compatible with the counit defined projection formula for derived direct images",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev_naturality; CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-17",
+   "verdict": "no match; hits are scheme/base-change or abstract adjunction declarations, not this compactification identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-co-smooth-composition",
@@ -112,5 +219,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-co-smooth-pf-exchange-coherence",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-scheme, finite-ring, unbounded pro-etale statement. Reused the general ringed exchange/tensor coherence and normalized open tensor/base-change statements. Wrote the open restriction calculation and the compactification pasting explicitly; no new nodes and no claim that projection or exchange is invertible.",
+  "blueprint": "Nearest blueprint ancestor lem-pur-co-smooth-composition, final sentence: the same calculation after arbitrary base change gives (3). This split proves its extracted chosen-compactification projection/exchange identity, formerly Step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Supplies canonical ordinary unbounded tensor/pullback comparisons and K-flat representatives, independently of geometric purity; no node of this unit states this general ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Supplies the termwise canonical pullback-composition isomorphism on arbitrary pro-etale schemes; this unit uses but does not reconstruct the operation formalism."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Supplies fully faithful open extension and normalization of the actual open beta and gamma maps, here only for constant finite coefficients on arbitrary schemes; it is an operation-coherence tool, not a different purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Supplies proper-factor projection/exchange compatibility as a general ringed-topos theorem; this unit has no more general replacement and the argument still pastes the supplied compactification factors."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Supplies naturality in the first input of the counit-defined ordinary projection transformation, used to move the open comparison through the proper projection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-f5c86268b",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-f5c86268b (reviewer sub-agent of L); spot-checked: I read the item, all 13 cited statements, the maps of def-exchange-projection (the two lem-cbc nodes, the ambient ringed exchange, the mate definition), the parent lem-pur-co-smooth-composition, unit sk-prop-cohsm, the main-20261015 blueprint sentence 'same calculation after arbitrary base change gives (3)', and Stacks sites-cohomology 0E48 (l.13715), 0GL1 (l.4578) and sites-modules 0E8I (l.4051). The statement is well typed: finite commutative Lambda, arbitrary schemes, arbitrary v, a supplied compactification over S=U. E^c and PF^c are exactly def-exchange-projection's Ex_{*,p} followed by Rp'_*(beta), and pi_p followed by Rp_*(gamma). The beta and gamma maps point the same way as in the open normalization node, and the cbc nodes are stated for arbitrary finite Lambda. The coefficient sheaves (Cont(pi0,Lambda))^# and the constant sheaf agree for finite discrete Lambda, so no master condensed category is identified with another. The item asserts no invertibility and weakens nothing. Small cases pass: N or P zero, T empty, v=id, j=id (exactly the ringed exchange/tensor coherence) and p=id (exactly the step-3 open identity); nothing needs flatness. Step 2 applies the ringed coherence (any commutative square; Ex is the mate of theta; pi is the adjunct of (eps x 1)t) with f=p, g=v, E=j_!N. Step 3: the source is iso to an object j'_!(...); full faithfulness plus the unit reduces the identity to its j'^* restriction, where b and gamma are identities. The remaining compatibility of mu with pullback composition is checked termwise on K-flat flat-term representatives; the composition node states its termwise form and the tensor-pullback node's construction is termwise. This is borderline but acceptable: lem-pur-derived-pullback-tensor-iso covers only A_{E,n}. Steps 4-5: naturality of e along gamma, then steps 3 and 2, then naturality of pi in its first input (projection-mate-exact). I checked each displayed line. No cycle (BFS), all cited nodes exist and none is merged, no new nodes, no SGA. I checked lem-sf-pf-compactification-pasting, prop-sf-pf-coherence, lem-sf-pf-open-factor-coherence and lem-sf-proper-open-projection-mate: none duplicates the item. All five declared tool_uses are accepted: tensor-pullback, pro-etale pullback composition, open tensor normalization, ringed exchange/tensor coherence and projection-mate naturality. No fixes."
  }
 }

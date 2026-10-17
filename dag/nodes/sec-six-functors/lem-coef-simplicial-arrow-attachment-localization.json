@@ -10,9 +10,97 @@
  "stmt_deps": [
   "lem-coef-simplicial-inversion-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In the Dwyer–Kan model structure of the inversion node, factor the arrow-to-isomorphism map [1]→𝕁 as a cofibration i:[1]→K followed by a Dwyer–Kan equivalence r:K→𝕁. The interval-lifting generators show that [1] is cofibrant: adjoin two isolated objects and then the generating arrow, so ∅→[1] is a cofibration. Hence ∅→K is a composite of cofibrations and K is cofibrant. Small coproducts of these cofibrations are cofibrations: a lifting square from a coproduct against a trivial fibration is solved summand by summand and the lifts are assembled by the coproduct universal property, and the empty coproduct is the identity of the initial object, which lifts against everything. Thus A=∐_V[1]→B=∐_VK is a cofibration, and all coproducts and pushouts used below exist in the fixed universe.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1, Remark A.3.5.2 and Proposition A.3.5.5, printed pp.891–893; the strict pushout and its homotopy-category mapping property."
+   }
+  },
+  {
+   "text": "The strict-localization comparison recorded in [lem-coef-simplicial-strict-pushout-derived-comparison] applies to A=∐_V[1]→B=∐_VK and to the arbitrary map A→D: it identifies the actual ordinary pushout P=D amalgamated over A with B with the derived pushout of D←A→B in h sCat, under D. Thus the strict pushout used to define Γ(D,V) is a valid representative of the derived pushout, including repeated or coincident attaching vertices and V=∅. The derived-pushout mapping comparison of the cited node therefore applies to this actual P; no cofibrancy or left-properness hypothesis on D is used.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-strict-pushout-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1, Remark A.3.5.2 and Proposition A.3.5.5, printed pp.891–893; the strict pushout and its homotopy-category mapping property."
+   }
+  },
+  {
+   "text": "Put J_V=∐_V𝕁. The map r_V:B→J_V is a Dwyer–Kan equivalence, checked summand by summand: each mapping map is r, maps between distinct summands are empty on both sides, and essential surjectivity holds in every summand, with the empty coproduct included. The strict-pushout comparison node identifies the ordinary pushout P=D amalgamated over A with B with the derived pushout of D←A→B, naturally under D. (No such claim is made or needed for the ordinary pushout D amalgamated over A with J_V, which in general is not the derived pushout, since A→J_V is not a cofibration.) The map of spans (1_D,1_A,r_V) from D←A→B to D←A→J_V has weak-equivalence components, so by the derived-pushout mapping comparison the homotopy-pullback descriptions of Map^h(−,T) of the two derived pushouts are compared by a natural weak equivalence, using homotopy invariance of Map^h(−,T) in the B-variable; taking π₀ gives natural Hom bijections in h sCat compatible with restriction to D. The Yoneda argument on these bijections makes the induced map of derived pushouts an isomorphism under D. The derived pushout of D←A→J_V is L_VD by the definition in the inversion-universal-property node, so P≅L_VD naturally under D.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-strict-pushout-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1, Remark A.3.5.2 and Proposition A.3.5.5, printed pp.891–893; the strict pushout and its homotopy-category mapping property."
+   }
+  },
+  {
+   "text": "For a map of pairs (F,s):(D,V)→(D′,V′), map the v-copy of [1] and K to the s(v)-copy. The equality F(v)=s(v) makes the cocones compatible, so the pushout universal property supplies Γ(F,s). On identities and composites the two induced maps agree on both coprojections; uniqueness gives strict identity and composition laws. Repeated labels, noninjective s, and coincident endpoints are allowed.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1, Remark A.3.5.2 and Proposition A.3.5.5, printed pp.891–893; the strict pushout and its homotopy-category mapping property."
+   }
+  },
+  {
+   "text": "Assume s is the identity of a common V and F is a Dwyer–Kan equivalence. Since h sCat is the localization at Dwyer–Kan equivalences, precomposition with F is a bijection on Hom sets in h sCat. Because F carries each labelled vertex v to the corresponding labelled vertex, this bijection restricts to a bijection between classes whose induced π₀-functors send every labelled arrow to an isomorphism. The inversion-universal-property node identifies those restricted subsets with Hom(L_VD′,T) and Hom(L_VD,T), naturally in T. Yoneda therefore makes L_VF an isomorphism in h sCat. The strict-pushout comparison node and Step 3's identifications P≅L_VD and P′≅L_VD′ identify Γ(F,1_V) with a representative of this isomorphism, so the image of Γ(F,1_V) in h sCat is an isomorphism; by [lem-coef-model-localization-detects-weak-equivalences], applied to the Dwyer–Kan model structure and its localization h sCat, a map whose image in the homotopy category is an isomorphism is a weak equivalence, hence Γ(F,1_V) is a Dwyer–Kan equivalence.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-strict-pushout-derived-comparison",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1, Remark A.3.5.2 and Proposition A.3.5.5, printed pp.891–893; the strict pushout and its homotopy-category mapping property."
+   }
+  },
+  {
+   "text": "If g:D→T sends each labelled arrow to an identity vertex, its source and target agree at an object t_v. Collapse 𝕁 to its one-object terminal simplicial category at t_v and precompose with r:K→𝕁. On [1] this is exactly g on the labelled arrow, so these maps and g define the specified extension ḡ:P→T by the pushout universal property. For maps of pairs or postcomposition H:T→T′, the proposed extensions agree on D and on each K-copy; uniqueness gives the stated naturality equalities. The empty family returns g itself.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1, Remark A.3.5.2 and Proposition A.3.5.5, printed pp.891–893; the strict pushout and its homotopy-category mapping property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-inversion-universal-property",
+  "lem-coef-simplicial-strict-pushout-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent proof following HTT A.3.5.1–A.3.5.5; Proposition A.3.5.5 is used directly for the strict interval-attachment/derived-pushout comparison, and the inversion universal property proves invariance. Online source read 2026-10-17; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +129,59 @@
    "results": "[leanfinder] OK 8 hit(s); returned names/files: HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism, HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism, HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences, HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences, HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization, HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization, HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso, HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution; digest e6aeea9a7395e1bd",
    "date": "2026-10-17",
    "verdict": "no match: inspected returned signatures and relevant source; ordinary pushout isomorphisms, ordinary localization and the homotopy category of cofibrant objects do not construct this interval-attachment model or its Dwyer--Kan invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict pushout attachment of a cofibrant walking isomorphism computes derived localization of a simplicial category",
+   "results": "Logged result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\"], \"digest\": \"2bc6dda7665c85c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: logged hits concern ordinary pushouts/localizations, general cofibrant homotopy categories, or existing enrichment structures, not the strict Bergner interval attachment theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pushout, HomotopicalAlgebra.ModelCategory, Dwyer Kan",
+   "results": "Logged result: {\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Dwyer`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: Unknown identifier `Dwyer`"
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer.?Kan|walking.*isomorphism|localization.*pushout",
+   "results": "Logged result: {\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Extensive.lean\"], \"digest\": \"3a5dd4f23e4b3da9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: logged hits concern ordinary pushouts/localizations, general cofibrant homotopy categories, or existing enrichment structures, not the strict Bergner interval attachment theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strict pushout attaching a cofibrant walking isomorphism to a simplicial category represents derived localization and preserves Dwyer Kan equivalences",
+   "results": "Logged result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushout_inl_iso_of_right_iso\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Functor.IsLocalization.mk'\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsoOfIsLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"b9615c96fe1e2fd2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: logged hits concern ordinary pushouts/localizations, general cofibrant homotopy categories, or existing enrichment structures, not the strict Bergner interval attachment theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy pushout of simplicial enriched categories computed by cofibration attachment stable under equivalences",
+   "results": "Logged result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"HomotopicalAlgebra.instCofibrationInrOfIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instCofibrationInlOfIsStableUnderCobaseChangeCofibrations\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"HomotopicalAlgebra.AttachCells.pushouts_coproducts\", \"HomotopicalAlgebra.nonempty_attachCells_iff\"], \"digest\": \"f73c812d347b8eab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: logged hits concern ordinary pushouts/localizations, general cofibrant homotopy categories, or existing enrichment structures, not the strict Bergner interval attachment theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\"",
+   "results": "Logged result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\"], \"digest\": \"006e492eaac7b11d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: logged hits concern ordinary pushouts/localizations, general cofibrant homotopy categories, or existing enrichment structures, not the strict Bergner interval attachment theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer|homotopy.*pushout",
+   "results": "Logged result: {\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"6c65635d1779c527\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: logged hits concern ordinary pushouts/localizations, general cofibrant homotopy categories, or existing enrichment structures, not the strict Bergner interval attachment theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-grothendieck-hocolimit",
@@ -77,5 +214,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-arrow-attachment-localization",
+  "worker": "stage1",
+  "summary": "Retained the exact statement and repaired the missing ordinary-to-derived comparison by adding lem-coef-simplicial-strict-pushout-derived-comparison, a statement-only HTT A.3.5.5 interface valid for arbitrary D, repeated attachments and the empty family. Steps 2 and 3 now explicitly use that comparison before invoking framed mapping comparisons, and Step 5 carries it through the localization identifications. The rejected cyclic left-properness route remains removed; strict functoriality and identity-collapse extensions remain pushout universal-property arguments.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction/inverse-limit calculation: foundational simplicial localization input; HTT A.3.5.1–A.3.5.5 supplies the strict interval attachment."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-7e827cec1",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-7e827cec1 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. HTT A.3.5 could not be read: it is not in literature/, the network is blocked, and a filesystem search found no local copy (the delivery records WANTED and proof_origin=agent). So I checked the mathematics independently. The new comparison follows from left properness of the Bergner model structure. The existing node lem-coef-scat-bergner-left-proper-pushouts cannot be cited: BFS shows it reaches the item through coherent-nerve-comparison and the chain below it, so the separate statement-only node is justified. That node is true, is not a restatement of the item (it covers only the attachment of the copies of K), and duplicate search found nothing. Small cases checked: V empty, a labelled identity, repeated labels, the collapse extension. Fixes: (1) E3/C4, step 3: the claim that the new node also identifies the strict pushout with J_V with its derived pushout is false in general (strict groupoidification of a face poset of S^2 against its Dwyer-Kan localization). I rewrote step 3 through the derived span map (1,1,r_V) and the definition of L_VD; that strict pushout was never needed. (2) C1, step 5: the inference from an isomorphism in h sCat to a Dwyer-Kan equivalence was uncited; it now cites the same-unit node lem-coef-model-localization-detects-weak-equivalences, acyclic, also added to proof_deps. (3) B3: the new node now has lem-coef-simplicial-derived-pushout-mapping in stmt_deps for the notion of derived pushout, and its comparison now runs from the derived to the ordinary pushout. (4) B7: the failed Loogle query is now recorded as an invalid query, not no match. Step 1's coproduct-of-cofibrations line is written out. No tool_uses; no SGA; not a target, and no base-change morphism or coefficient category is involved. A future split of the new node must avoid the left-properness and model-cofibrant-colimit-comparison nodes, both of which reach this item.; 2 file(s) fixed by the reviewer"
  }
 }

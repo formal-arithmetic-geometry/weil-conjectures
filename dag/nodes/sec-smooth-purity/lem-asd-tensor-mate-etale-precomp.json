@@ -2,7 +2,7 @@
  "id": "lem-asd-tensor-mate-etale-precomp",
  "kind": "statement",
  "title": "Canonical tensor mate is compatible with etale precomposition",
- "statement": "Let $A$ be a finite commutative ring, let $f:X\\to S$ and $h=f\\circ u:U\\to S$ be compactifiable separated finite-type morphisms between Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings), and let $u:U\\to X$ be separated etale of finite type. Work in the entire ordinary derived categories $D(T_{\\mathrm{et}},A)$ of constant-$A$ module sheaves, with exact inverse image and derived tensor. Use the compactification-independent projections $P_f,P_h$ and the normalized unbounded compact-support composition comparison, and the right adjunctions $Rf_!\\dashv f^\\times$, $Rh_!\\dashv h^\\times$. Put $\\omega_f=f^\\times A_S$ and $\\omega_h=h^\\times A_S$. For each $K\\in D(S_{\\mathrm{et}},A)$ define $\\alpha_{f,K}:f^*K\\otimes_A^L\\omega_f\\to f^\\times K$ to be the transpose of\n$$Rf_!(f^*K\\otimes_A^L\\omega_f)\\xrightarrow{P_f}K\\otimes_A^LRf_!\\omega_f\\xrightarrow{1\\otimes\\epsilon_{f,A_S}}K\\otimes_A^LA_S\\cong K,$$\nand define $\\alpha_{h,K}$ in the same way. Let $\\lambda_B:u^*f^\\times B\\xrightarrow{\\sim}h^\\times B$ be the canonical comparison of right adjoints obtained from the normalized composition $Rf_!Du_!\\cong Rh_!$ and the exact sum/evaluation adjunction $Du_!\\dashv u^*$. Then\n$$\\lambda_K\\circ u^*\\alpha_{f,K}=\\alpha_{h,K}\\circ(1_{h^*K}\\otimes\\lambda_{A_S}),$$\nwhere the source is identified with $h^*K\\otimes_A^Lu^*\\omega_f$ using the canonical inverse-image tensor comparison. Under this comparison the counit for $h$ is the composite $\\epsilon_{f,B}\\circ Rf_!(\\epsilon_{u,f^\\times B})$; all formulas insert the compact-support composition identification. This holds for every unbounded $K$. The notation and functors used here are the ones in [def-weil-pbc-derived-categories] [def-kun-derived-tensor] [def-weil-pbc-inverse-image] [def-amb-etale-compact-support] [def-asd-compactifiable] [thm-amb-etale-exceptional-adjoint] [lem-amb-etale-adjoint-locality] [lem-amb-unbounded-compact-support-comparisons] [lem-amb-shriek-tensor-composition] [def-weil-pbc-etale-sum-extension] [def-weil-etale-morphism] [def-weil-proper-morphism] [def-weil-finite-type-morphism] [def-pc-scheme] [def-weil-pbc-noetherian-ring].",
+ "statement": "Let $A$ be a finite commutative ring, let $f:X\\to S$ and $h=f\\circ u:U\\to S$ be compactifiable separated finite-type morphisms between Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings), and let $u:U\\to X$ be separated etale of finite type. Work in the entire ordinary derived categories $D(T_{\\mathrm{et}},A)$ of constant-$A$ module sheaves, with exact inverse image and derived tensor. Use the compactification-independent projections $P_f,P_h$ and the normalized unbounded compact-support composition comparison, and the right adjunctions $Rf_!\\dashv f^\\times$, $Rh_!\\dashv h^\\times$. Put $\\omega_f=f^\\times A_S$ and $\\omega_h=h^\\times A_S$. For each $K\\in D(S_{\\mathrm{et}},A)$ define $\\alpha_{f,K}:f^*K\\otimes_A^L\\omega_f\\to f^\\times K$ to be the transpose of\n$$Rf_!(f^*K\\otimes_A^L\\omega_f)\\xrightarrow{P_f}K\\otimes_A^LRf_!\\omega_f\\xrightarrow{1\\otimes\\epsilon_{f,A_S}}K\\otimes_A^LA_S\\cong K,$$\nand define $\\alpha_{h,K}$ in the same way. Let $\\lambda_B:u^*f^\\times B\\xrightarrow{\\sim}h^\\times B$ be the canonical comparison of right adjoints obtained from the normalized composition $Rf_!Du_!\\cong Rh_!$ and the exact sum/evaluation adjunction $Du_!\\dashv u^*$. Then\n$$\\lambda_K\\circ u^*\\alpha_{f,K}=\\alpha_{h,K}\\circ(1_{h^*K}\\otimes\\lambda_{A_S}),$$\nwhere the source is identified with $h^*K\\otimes_A^Lu^*\\omega_f$ using the canonical inverse-image tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Under this comparison the counit for $h$ is the composite $\\epsilon_{f,B}\\circ Rf_!(\\epsilon_{u,f^\\times B})$; all formulas insert the compact-support composition identification. This holds for every unbounded $K$. The notation and functors used here are the ones in [def-weil-pbc-derived-categories] [def-kun-derived-tensor] [def-weil-pbc-inverse-image] [def-amb-etale-compact-support] [def-asd-compactifiable] [thm-amb-etale-exceptional-adjoint] [lem-amb-etale-adjoint-locality] [lem-amb-unbounded-compact-support-comparisons] [lem-amb-shriek-tensor-composition] [def-weil-pbc-etale-sum-extension] [def-weil-etale-morphism] [def-weil-proper-morphism] [def-weil-finite-type-morphism] [def-pc-scheme] [def-weil-pbc-noetherian-ring].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
   "place": "Proof paragraph 3: transpose on U and the composite etale/affine-line counit. Agent extraction of the two mate calculations in returned step 5."
@@ -22,11 +22,123 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "def-pc-scheme",
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=Rf_!$, $E=Du_!$, $V=u^*$, $G=f^\\times$ and $H=Rh_!$. Throughout, $\\otimes$ means $\\otimes_A^L$ and composition is right to left. Write $q_a(K,M):Ra_!(a^*K\\otimes M)\\to K\\otimes Ra_!M$ for the inverse-directed projection denoted $P_a$ in the question. It is a natural isomorphism: choose a compactification $a=rj$, apply the open tensor isomorphism of [lem-pur-etale-open-derived-tensor], and then the proper projection isomorphism of [lem-amb-proper-coproducts-projection], using the tensor symmetry [lem-kun-tensor-sym] to put $K$ first. The compactification ambient scheme is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $r$ is proper, hence finite type, over the Noetherian target. These are precisely the factors of the projection used in [lem-amb-shriek-tensor-composition], whose statement includes the refinement compatibility. All these maps exist on the entire unbounded categories.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "lem-amb-proper-coproducts-projection",
+    "lem-kun-tensor-sym",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-amb-shriek-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL5 (lemma-projection-formula-Rf-lower-shriek); sites-cohomology.tex Tag 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "By [lem-amb-etale-adjoint-locality] and [thm-amb-etale-exceptional-adjoint], $E\\dashv V$ and $F\\dashv G$ are adjunctions on the unbounded categories. Since $U$ and $X$ are Noetherian, hence quasi-compact and quasi-separated, and $u$ is separated of finite type, $u$ has a compactification by [thm-nagata-compactification]. Use [lem-asd-etale-compact-support-normalization] and [lem-amb-unbounded-compact-support-comparisons] to fix $c:FE\\xrightarrow{\\sim}H$: first identify $E$ with compact-support direct image of $u$, then apply the proper/open tower composition. Put $e_C=\\epsilon_{u,C}:EVC\\to C$. The composite Hom bijection of [def-weil-pbc-composite-adjunction] sends $b:M\\to VGB$ to $\\epsilon_{f,B}\\circ F(e_{GB})\\circ FE(b)$. On the other hand the specified comparison $\\lambda_B$ sends it to $\\lambda_B\\circ b$, whose $H\\dashv h^\\times$-transpose, precomposed with $c_M$, is $\\epsilon_{h,B}\\circ H(\\lambda_B\\circ b)\\circ c_M$. Taking $M=VGB$ and $b=1$ proves\n$$\\epsilon_{h,B}\\circ H(\\lambda_B)\\circ c_{VGB}=\\epsilon_{f,B}\\circ F(e_{GB}).$$\nThis is exactly the claimed composite-counit identity after identifying the right adjoints; it is not a choice of counit on isomorphic functors. Naturality of $c$ then gives the same identity after precomposition by $FE(b)$ for every $b$.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-pbc-composite-adjunction",
+    "thm-nagata-compactification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+   }
+  },
+  {
+   "text": "Let $Q(B,M):E(VB\\otimes M)\\xrightarrow{\\sim}B\\otimes EM$ be the sum-extension tensor map of [lem-asd-etale-sum-extension-tensor]. Clause (2) of [lem-pur-etale-support-map-compatibility] says that the compactification projection for $u$ becomes the sum-extension projection under its canonical proper-support comparison. Its specified component sends $(s,m)\\otimes b$ to $(s,m\\otimes s^*b)$; after the tensor symmetries and inversion this is $Q(B,M)$. The proper-support comparison is the same one as [lem-asd-etale-compact-support-normalization]: both send a proper-support section to its sheet components, with inverse given by its graph sections. Thus the inverse-projection identity in [lem-amb-shriek-tensor-composition], for the pair $(u,f)$ (both compactifiable: $f$ by hypothesis, $u$ by [thm-nagata-compactification] as in step 2) and this normalization, gives, for every $M\\in D(U_{\\mathrm{et}},A)$,\n$$q_h(K,M)\\circ c_{h^*K\\otimes M}=(1_K\\otimes c_M)\\circ q_f(K,EM)\\circ F(Q(f^*K,M)).$$\nHere $h^*K=Vf^*K$ by the canonical pullback-composition identification. This equation specifies all occurrences of $c$ below; it is an identity of actual transformations, not just the existence of isomorphic objects.",
+   "uses": [
+    "lem-asd-etale-sum-extension-tensor",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-shriek-tensor-composition",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+   }
+  },
+  {
+   "text": "Put $W=GA_S=\\omega_f$, $B=f^*K$, $N=B\\otimes W$, and $D=VB\\otimes VW$. Let $\\theta:D\\xrightarrow{\\sim}VN$ be the inverse-image tensor comparison; its naturality is part of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Apply the counit identity in [lem-asd-etale-sum-extension-tensor] to $(B,W)$. With $Q=Q(B,VW)$ it says exactly\n$$e_N\\circ E(\\theta)=(1_B\\otimes e_W)\\circ Q:E(D)\\longrightarrow N.$$\nIn particular this is the fold/evaluation counit, rather than the counit of $u^*\\dashv Ru_*$. The coefficient objects $B,W$ are arbitrary complexes, as required by that cited statement.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-asd-etale-sum-extension-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+   }
+  },
+  {
+   "text": "Abbreviate $\\alpha_{f,K}$ by $a:N\\to GK$. By its defining transpose,\n$$\\epsilon_{f,K}\\circ F(a)=(1_K\\otimes\\epsilon_{f,A_S})\\circ q_f(K,W).$$\nUsing step 2 and naturality of $c$, the $H\\dashv h^\\times$-transpose of $\\lambda_K\\circ V(a)\\circ\\theta:D\\to h^\\times K$, precomposed with $c_D$, is\n$$\\epsilon_{f,K}\\circ F(e_{GK})\\circ FE(V(a))\\circ FE(\\theta).$$\nNaturality of $e$ at $a:N\\to GK$ rewrites $e_{GK}\\circ EV(a)=a\\circ e_N$. Substitute step 4 into this expression. The resulting transpose is\n$$\\epsilon_{f,K}\\circ F(a)\\circ F(1_B\\otimes e_W)\\circ F(Q).$$\nThese are simply the formula for the Hom bijection, functoriality, and the naturality square for its counit, with all domains fixed in step 4.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+   }
+  },
+  {
+   "text": "Insert the defining equation for $a$ from step 5. Naturality of the inverse projection $q_f$ at $e_W:EVW\\to W$ gives\n$$q_f(K,W)\\circ F(1_B\\otimes e_W)=(1_K\\otimes F(e_W))\\circ q_f(K,EVW).$$\nBifunctoriality of tensor therefore makes the transpose computed in step 5 equal to\n$$(1_K\\otimes[\\epsilon_{f,A_S}\\circ F(e_W)])\\circ q_f(K,EVW)\\circ F(Q).$$\nFinally apply step 3 with $M=VW$ to rewrite this as\n$$T=(1_K\\otimes[\\epsilon_{f,A_S}\\circ F(e_W)])\\circ(1_K\\otimes c_{VW}^{-1})\\circ q_h(K,VW)\\circ c_D:FE(D)\\to K.$$\nThe projection naturality used here is the naturality of the maps in [lem-amb-shriek-tensor-composition] and of their inverses, not an additional projection formula.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+   }
+  },
+  {
+   "text": "The other map is $\\alpha_{h,K}\\circ(1_{h^*K}\\otimes\\lambda_{A_S}):D\\to h^\\times K$. Its transpose, by the definition of $\\alpha_{h,K}$ and naturality of $q_h$ in the coefficient object, is\n$$(1_K\\otimes[\\epsilon_{h,A_S}\\circ H(\\lambda_{A_S})])\\circ q_h(K,VW).$$\nPrecompose with $c_D$ and use the counit equation of step 2 at $B=A_S$, namely\n$$\\epsilon_{h,A_S}\\circ H(\\lambda_{A_S})=[\\epsilon_{f,A_S}\\circ F(e_W)]\\circ c_{VW}^{-1}.$$\nThis gives exactly $T$ from step 6. Since $c_D$ is invertible, the two transposes are equal; since the adjunction in [thm-amb-etale-exceptional-adjoint] is a Hom bijection, the two original maps are equal. Removing $\\theta$ by the canonical source identification gives the equality in the statement. Every projection, comparison and adjunction used above was stated on entire ordinary unbounded derived categories over finite $A$, so the calculation applies to every unbounded $K$ without any smoothness, invertibility-of-exponent, constructibility or Tor-amplitude assumption.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-kun-tensor-sym",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +181,45 @@
    "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:313,337 are rigid-category dual-mate identities, not geometric exceptional pullback"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor mate of compact support adjunction is compatible with etale precomposition and evaluation counit",
+   "results": "CategoryTheory.leftAdjointMate_comp_evaluation; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; LightCondensed.ihomPoints_symm_comp; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.rightAdjointMate_comp_evaluation; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the canonical ordinary-etale compact-support tensor mate with its specified projection and composition comparisons; comp_counit_app supplies only the already-cited abstract composite-counit formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image tensor morphism compatible with composition of compact support adjunctions",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app; TopCat.Presheaf.Pushforward.comp_inv_app; CategoryTheory.MorphismProperty.IsMultiplicative.instInverseImage",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the canonical ordinary-etale compact-support tensor mate with its specified projection and composition comparisons; comp_counit_app supplies only the already-cited abstract composite-counit formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "CategoryTheory.Adjunction.comp_counit_app",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the canonical ordinary-etale compact-support tensor mate with its specified projection and composition comparisons; comp_counit_app supplies only the already-cited abstract composite-counit formula"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|exceptionalPullback",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the canonical ordinary-etale compact-support tensor mate with its specified projection and composition comparisons; comp_counit_app supplies only the already-cited abstract composite-counit formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of a projection-formula transpose with a composite adjunction whose first right adjoint is monoidal",
+   "results": "CategoryTheory.frobeniusMorphism; CategoryTheory.frobeniusMorphism_mate; CategoryTheory.MonoidalClosed.compTranspose; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.ε_comp_map_ε; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the canonical ordinary-etale compact-support tensor mate with its specified projection and composition comparisons; comp_counit_app supplies only the already-cited abstract composite-counit formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-asd-smooth-tensor",
@@ -84,10 +231,64 @@
  "blueprint": {
   "from": {
    "node": "thm-asd-smooth-tensor",
-   "place": "Proof paragraph 3: transpose on U and identify the projection formula followed by the composite counit, for both h=fu and h=p_d e.",
+   "place": "Proof paragraph 3: transpose on U; the projection formula followed by the composite of the etale counit with the affine-line counits. This node proves only the etale-precomposition calculation.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-tensor-mate-etale-precomp",
+  "worker": "stage1",
+  "summary": "Expanded the etale-precomposition mate calculation into seven explicit steps using existing nodes only. Verified the sum-extension/compactification projection agreement, retained the normalized composition comparison in every transpose, and derived the composite counit from the Hom bijection. Statement unchanged. No new nodes. Maintainer review fix: cited the Nagata compactification theorem for the compactification of u used in steps 2-3, and cited the inverse-image tensor comparison node in the statement.",
+  "blueprint": "thm-asd-smooth-tensor.proof.md paragraph 1 (projection and definition of the tensor transpose) and paragraph 3 (transpose on U; composite etale counit). Steps 1-4 fix the normalized projection/adjunction data; steps 5-7 compute the two equal transposes.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Unbounded open-extension tensor comparison supplies the open factor of the ambient projection; the item unit does not reprove this ringed-site identity."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Ensures the proper compactification ambient scheme is Noetherian so the proper projection statement applies."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "The proper factor of the unbounded compact-support projection, explicitly invoked by the ancestor blueprint proof."
+   },
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "Coherence of the actual compact-support projection transformations with normalized composition, exactly the prerequisite already named in the item statement."
+   },
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Its clause (2) identifies the compactification projection for u with the sum-extension tensor projection; locality alone does not state this compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The general ringed-topos tensor-pullback comparison supplies the specified natural source identification."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Supplies the normalized unbounded composition comparison already named in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-open-derived-tensor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-d384acd28",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-d384acd28 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, the statements of the 13 cited nodes plus def-asd-compactifiable and thm-nagata-compactification, and blueprint main-20261015 thm-asd-smooth-tensor.proof.md paragraphs 1 and 3, which the item realizes as the 'transpose on U' and composite étale counit argument. Stacks 0DV0 (categories.tex:3576) is the composite-counit formula used in step 2. The statement is true. It works on unbounded ordinary étale D(-,A) with A finite, the same coefficient category as every cited node. Checked on u=id, U empty, K=0, A=0 and a disjoint union of copies of id. I re-derived each step. Step 2: λ is defined as the comparison of right adjoints through c=α_{f,u}∘F(c_u^{-1}), which gives ε_h H(λ) c = ε_f F(e_G). Step 3: inverting lem-amb-shriek-tensor-composition for (u,f) and using clause (2) of lem-pur-etale-support-map-compatibility gives q_h c = (1⊗c_M) q_f F(Q). Step 4 is the counit identity of lem-asd-etale-sum-extension-tensor with B=f^*K, C=ω_f. Steps 5-7 are naturality and Hom-bijection algebra; I checked their domains. No duplicate (rg over dag/nodes; the nearest hits are lem-amb-etale-adjoint-locality, which gives only an existence isomorphism, and pro-étale/system nodes in other coefficient categories). No cycle, no new nodes, no SGA. I accept all 7 declared tool_uses. Two faults fixed in fixes/dag/nodes/sec-smooth-purity/lem-asd-tensor-mate-etale-precomp.json. (1) C1/E1: steps 2-3 need a compactification of u (for the normalization lemma, for the composition and coherence lemmas, and for Ru_! itself). The item assumes compactifiability only for f and h. Cited thm-nagata-compactification, which applies because U and X are Noetherian and hence qcqs; it is Lean-closed, so it is a tool, not route. (2) B3: the statement now cites lem-weil-pbc-ringed-topoi-derived-tensor-pullback for the inverse-image tensor comparison, in the text and in stmt_deps; this is a citation only. proof_deps and the split_report summary are updated.; 1 file(s) fixed by the reviewer"
  }
 }
