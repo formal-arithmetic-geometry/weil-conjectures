@@ -635,6 +635,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Curve.KummerTransition
 public import WeilConjectures.AlgebraicGeometry.Curve.LocalCommensurable
 public import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
+public import WeilConjectures.AlgebraicGeometry.Curve.NormalSmooth
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
 public import WeilConjectures.AlgebraicGeometry.Curve.OpenLowerShriekConstantFiltrationSteps
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
@@ -2716,6 +2717,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalPolynomial
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsExact
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.NormalCurve
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne

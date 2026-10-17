@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpenNormal
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusConjugacy
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
@@ -343,16 +344,17 @@ The restriction `W(U₀) → W(C₀)` of `AlgebraicGeometry.WeilGroup.restrictio
 any open immersion `j : U₀ ⟶ C₀` of connected, geometrically connected schemes over a finite
 field, not only for curves. It preserves the degrees, it is the map of fundamental groups
 `AlgebraicGeometry.WeilGroup.restrictionMap` on the underlying elements, hence on the geometric
-subgroups `ker deg`, and it is surjective as soon as that map is, e.g. for `C₀` regular
+subgroups `ker deg`, and it is surjective as soon as that map is, e.g. for `C₀` regular or normal
 (blueprint `lem-wf-dense-open-pi1-surjective`, part (2)).
 
 The blueprint states part (2) for `V₀` separated of finite type over `k₀` with `V = V₀ ⊗ k`
-connected and normal. Here normality is replaced by regularity of `V₀` (e.g. `V₀` smooth over
-`k₀`): the surjectivity of `π₁(V'₀) → π₁(V₀)` is
-`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isRegular`, and its
-normal version needs the decomposition of finite étale covers of a normal scheme into normal
-integral pieces (`lem-fin-etale-normal-components`), which is not available. The Weil groups
-are those of `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, built from the arithmetic
+connected and normal. Here normality is asked of `V₀` (its local rings are integrally closed
+domains); it follows from normality of `V` by faithfully flat descent, and is equivalent to it
+over the perfect field `k₀`. The surjectivity of `π₁(V'₀) → π₁(V₀)` is then
+`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk`,
+giving `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`; the
+regular case is `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`. The Weil
+groups are those of `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, built from the arithmetic
 fundamental groups `π₁(V₀, s)`; the structure `AlgebraicGeometry.WeilGroup` itself is only set
 up for curves. -/
 
@@ -375,9 +377,10 @@ lemma weilGroupDeg_restrictionHom (w : weilGroup pU sU GU) :
 
 omit [IsOpenImmersion j] [Nonempty U] in
 /-- The restriction of Weil groups maps the geometric subgroup `ker deg` of `W(U₀)` onto that of
-`W(C₀)` if it is surjective (e.g. for `C₀` regular,
-`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`), since it preserves
-degrees. On the underlying elements of `π₁(U₀)` it is the map of fundamental groups
+`W(C₀)` if it is surjective (e.g. for `C₀` regular or normal,
+`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`,
+`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`), since it
+preserves degrees. On the underlying elements of `π₁(U₀)` it is the map of fundamental groups
 `AlgebraicGeometry.WeilGroup.restrictionMap` (`AlgebraicGeometry.WeilGroup.restrictionHom_apply`),
 so on the geometric subgroups it is the surjection of part (1) of
 `lem-wf-dense-open-pi1-surjective`. -/
@@ -424,6 +427,17 @@ lemma restrictionHom_surjective_of_isRegular [IsRegular C] [IsLocallyNoetherian 
     Function.Surjective (restrictionHom j hj τ GU GC) :=
   restrictionHom_surjective_of_surjective j hj τ GU GC
     (fundamentalGroupMap_surjective_of_isRegular j _ GU GC)
+
+/-- **The restriction of Weil groups along a dense open of a normal scheme is surjective**
+(blueprint `lem-wf-dense-open-pi1-surjective`, part (2)): if the local rings of the locally
+noetherian scheme `C₀` are integrally closed domains, the map of fundamental groups is surjective
+(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk`).
+-/
+lemma restrictionHom_surjective_of_isIntegrallyClosed_stalk [IsLocallyNoetherian C]
+    (hC : ∀ x : C, IsDomain (C.presheaf.stalk x) ∧ IsIntegrallyClosed (C.presheaf.stalk x)) :
+    Function.Surjective (restrictionHom j hj τ GU GC) :=
+  restrictionHom_surjective_of_surjective j hj τ GU GC
+    (fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk j _ GU GC hC)
 
 end RestrictionRegular
 
