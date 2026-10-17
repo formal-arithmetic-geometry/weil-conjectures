@@ -15,13 +15,14 @@ import Sheaf.AlgebraicGeometry.ProjectivePushforwardFiniteTypeIndependent
 import Sheaf.AlgebraicGeometry.ProjectiveAffineFiniteCohomologyIndependent
 import Sheaf.AlgebraicGeometry.ProjectiveGraphTwistVanishing
 import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-! # Finite cohomology of a sufficiently large Chow twist
 
@@ -80,6 +81,55 @@ theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
             Module.compHom _ f.appTop.hom
         Module.Finite Γ(T, ⊤)
           (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q)) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian T :=
+    isLocallyNoetherian_of_isOpenImmersion T.isoSpec.hom
+  have : IsNoetherian T := {}
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  let p := π ≫ i
+  have : IsGrothendieckAbelian.{u} Y.Modules :=
+    SheafOfModules.isGrothendieckAbelian Y.ringCatSheaf
+  have : EnoughInjectives Y.Modules := IsGrothendieckAbelian.enoughInjectives
+  have : HasInjectiveResolutions Y.Modules := by infer_instance
+  dsimp
+  let L := (pullback j).obj
+    ((pullback (ProjectiveSpace.toProjInt N T)).obj
+      (Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1))
+  have hjp : j ≫ (ℙ(N; T) ↘ T) = p ≫ f := by
+    simpa only [p, Category.assoc] using hj
+  obtain ⟨n₀, hn₀⟩ := exists_isZero_higherDirectImage_graph_twist f p N j hjp
+  let k : Y ⟶ ℙ(N; X) := ProjectiveSpace.liftBaseChange p j hjp.symm
+  have hk : k ≫ (ℙ(N; X) ↘ X) = p := ProjectiveSpace.liftBaseChange_over _ _ _
+  have : L.IsInvertible := by infer_instance
+  have : (L.tensorPow n₀).IsQuasicoherent := by infer_instance
+  have : (L.tensorPow n₀).IsFinitePresentation := by
+    have : SheafOfModules.IsInvertible.{u, u, u} (L.tensorPow n₀) :=
+      IsInvertible.sheafOfModules_isInvertible (L.tensorPow n₀)
+    exact SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have hft : ((pushforward p).obj (L.tensorPow n₀)).IsFiniteType :=
+    isFiniteType_projective_pushforward_independent p N k hk (L.tensorPow n₀)
+  have hq : ((pushforward p).obj (L.tensorPow n₀)).IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated p _
+  have hcohP : RingedSpace.IsCoherent X.toRingedSpace
+      ((pushforward p).obj (L.tensorPow n₀)) :=
+    (isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mpr ⟨hq, hft⟩
+  refine ⟨n₀, ?_, ?_⟩
+  · change RingedSpace.IsCoherent X.toRingedSpace ((pushforward p).obj (L.tensorPow n₀))
+    exact hcohP
+  · intro q
+    let : Module Γ(T, ⊤) (((pushforward i).obj
+        ((pushforward π).obj (L.tensorPow n₀))).H q) := Module.compHom _ f.appTop.hom
+    let : Module Γ(T, ⊤) (((pushforward p).obj (L.tensorPow n₀)).H q) :=
+      Module.compHom _ f.appTop.hom
+    have he := nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing
+      p f (L.tensorPow n₀) (hn₀ n₀ le_rfl) q
+    rw [← hjp] at he
+    obtain ⟨e⟩ := he
+    let : Module Γ(T, ⊤) ((L.tensorPow n₀).H q) :=
+      Module.compHom _ (j ≫ (ℙ(N; T) ↘ T)).appTop.hom
+    have : Module.Finite Γ(T, ⊤) ((L.tensorPow n₀).H q) := by
+      exact finite_H_projective_affine_independent N j (L.tensorPow n₀) q
+    exact Module.Finite.equiv e.symm
 
 end AlgebraicGeometry.Scheme.Modules
