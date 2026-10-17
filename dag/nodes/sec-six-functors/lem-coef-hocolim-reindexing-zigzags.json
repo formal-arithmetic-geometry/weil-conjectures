@@ -305,5 +305,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fc49fa2d",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read the node (statement, 9 steps, Dugger A.3-A.5 source place), the dependency declarations CombinatorialModelCategory and modelColimitLocalizationComparison, the module and the report. Every clause matches with no extra assumptions: the projective replacement structure has the same field shape as the dependency, hocolim = replacement ⋙ colim, and hocolimReindex is the explicit replacement-map comparison, not an arbitrary map. Hand-checked the identity, composition, naturality and triangle laws (the triangle holds strictly). hI uses V on f⋙g ~ 𝟭 I, hJ uses g⋙V on g⋙f ~ 𝟭 J; links may go either way and there may be none. Every actual representative is a weak equivalence with no endpoint conditions. Universes all bound, none forced equal. Edge cases (empty index categories, zero-link zigzags, natural isomorphisms, non-cofibrant V) are covered. No duplicate definition in the side clone or Mathlib. Real data, docstrings with source and blueprint, all proofs sorry, lean.statement verbatim, node changed only in its lean field. nt_compile --json: clean, rc 0, 2.2 s, and a control file with a false line did fail. Report has the Worker report and the standard 2026-10-17 Second-reading note. Cosmetic only: a docstring space and pp. 198-200 vs 197-199."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HocolimReindexingZigzags",
+  "declaration": "HomotopicalAlgebra.hocolim_reindexing_zigzags",
+  "declarations": [
+   "HomotopicalAlgebra.ProjectiveHocolimReplacement",
+   "HomotopicalAlgebra.projectiveHocolimReplacement_exists",
+   "HomotopicalAlgebra.ProjectiveHocolimReplacement.hocolim",
+   "HomotopicalAlgebra.hocolim_map_weakEquivalence",
+   "HomotopicalAlgebra.hocolimReindex",
+   "HomotopicalAlgebra.DiagramwiseWeakEquivalenceZigzag",
+   "HomotopicalAlgebra.hocolim_reindexing_calculus",
+   "HomotopicalAlgebra.hocolim_reindexing_zigzags"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HocolimReindexingZigzags.lean",
+  "statement": "theorem hocolim_reindexing_zigzags (hM : CombinatorialModelCategory.{u, v, w} M) {I J : Type v} [SmallCategory I] [SmallCategory J] (RI : ProjectiveHocolimReplacement (M := M) I) (RJ : ProjectiveHocolimReplacement (M := M) J) {H : Type u'} [Category.{v'} H] (L : M ⥤ H) [L.IsLocalization (weakEquivalences M)] (g : J ⥤ I) (f : I ⥤ J) (V : I ⥤ M) (hI : DiagramwiseWeakEquivalenceZigzag V (f ⋙ g) (𝟭 I)) (hJ : DiagramwiseWeakEquivalenceZigzag (g ⋙ V) (g ⋙ f) (𝟭 J)) : IsIso (hocolimReindex hM RI RJ L g V) ∧ (∀ m : RJ.hocolim.obj (g ⋙ V) ⟶ RI.hocolim.obj V, L.map m = hocolimReindex hM RI RJ L g V → weakEquivalences M m)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Specified functorial projective replacements define the actual homotopy-colimit functor. Canonical reindexing is an explicit augmentation/replacement roof in any ordinary localization; the same node records replacement existence, homotopy invariance, identity/composition/naturality, and the finite diagramwise zigzag criterion including all actual representatives. No data are extracted from a postponed mere existence theorem."
  }
 }

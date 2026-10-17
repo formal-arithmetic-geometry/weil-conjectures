@@ -241,5 +241,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-afbfd1cbb",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, def-coef-complete-algebroid and its Lean (CompleteAlgebroid total/universalFamily/TotalSimplex/IsTotalAlgebra/tensorWith), the universal family (transportSourceTarget over coherent-nerve transportSpaces) and the monoidal predicates. Every clause matches the node and none is stronger: IsCocompleteMonoidal is cocomplete plus separately cocontinuous active tensors with no presentability; product monoidal = pullback over Delta-op; hb strong monoidal; hcolim separate (not joint) on the [1]-fibre restriction; Algd = total; conclusion is separate small-colimit preservation via PreservesColimitsIn. The existential over BinaryChangeOfEnrichment is canonical: the cartesian point-family square plus object/algebra formulas on all chains determine H.functor, any two product classifiers give equivalent bifunctors, and the structure is inhabitable (coherent nerve preserves products; pair-cocartesian edges plus hb.2 give IsTotalAlgebra). Edge cases ok: empty index, empty or disconnected object spaces, arity 0, degenerate chains, universes max(u+1) v with no equality imposed. lean.statement verbatim; 12 declarations exist with source/blueprint docstrings; 7-step proof docstring; one sorry; no hollow definitions or duplicates; node otherwise unchanged. Report has worker report and the standard direct-delivery second-reading section. nt_compile --json on the snapshot file: rc 0, no errors or warnings, 3.2-3.5 s."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebroidBilinearColimits",
+  "declaration": "SSet.Enhanced.Algebroid.bilinear_change_preserves_small_colimits",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.binaryCoefficientBase",
+   "SSet.Enhanced.Algebroid.binaryCoefficientInclusion",
+   "SSet.Enhanced.Algebroid.binaryCoefficientFunctor",
+   "SSet.Enhanced.Algebroid.binaryFamilyMap",
+   "SSet.Enhanced.Algebroid.BinaryObjectSpaces",
+   "SSet.Enhanced.Algebroid.binaryDomainLeft",
+   "SSet.Enhanced.Algebroid.binaryDomainRight",
+   "SSet.Enhanced.Algebroid.binaryDomainProduct",
+   "SSet.Enhanced.Algebroid.BinaryChangeOfEnrichment",
+   "SSet.Enhanced.Algebroid.PreservesSmallColimitsSeparately",
+   "SSet.Enhanced.Algebroid.IsCocompleteMonoidal",
+   "SSet.Enhanced.Algebroid.bilinear_change_preserves_small_colimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebroidBilinearColimits.lean",
+  "statement": "theorem bilinear_change_preserves_small_colimits {E F G : SSet.{max (u + 1) v}} [Quasicategory E] [Quasicategory F] [Quasicategory G] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (q : F ⟶ monoidalSimplexBase.{max (u + 1) v}) (r : G ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsCocompleteMonoidal.{u, v} p) (hq : IsCocompleteMonoidal.{u, v} q) (hr : IsCocompleteMonoidal.{u, v} r) (b : pullback p q ⟶ G) (hb : IsStrongMonoidalInfinityFunctor (binaryCoefficientBase p q) r b) (hcolim : PreservesSmallColimitsSeparately.{u} (binaryCoefficientFunctor b hb)) : ∃ H : BinaryChangeOfEnrichment.{u, v} p q r b, PreservesSmallColimitsSeparately.{u} H.functor",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The conclusion packages a coherently normalized representative of the canonical binary change of enrichment and its separate preservation of all small colimits. The product of object spaces is fixed by its actual universal point family, and the algebra formula specifies the whole operad functor in every dimension. The only postponed theorem is this node; all helper data are real structures or explicit maps, with no selection from an unspecified existence assertion."
  }
 }

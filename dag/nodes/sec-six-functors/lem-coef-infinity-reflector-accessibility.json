@@ -284,5 +284,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b688e626",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and HTT 5.5.4.2(3) (iii)=>(i),(ii). Accessible quasicategory C : SSet.{max(u+1)v}. Full subcomplex E on P with repleteness hP over IsEquivalenceEdge. L left adjoint via MappingBifunctorsEquivalent L ι; direction checked: total(1_C,ι)->total(L,1_E) over C×E, fibres Map_C(c,ιe) and Map_E(Lc,e). T = arrows f with (L≫ι) f an equivalence edge; small S₀⊂T; hDetect uses canonicalPrecompositionMap Map(B,Z)->Map(A,Z), which is canonical, not arbitrary. Conclusion: IsAccessible E, and some regular κ for which L≫ι preserves small κ-filtered colimits (the project's standard PreservesColimitsIn form; no duplicate notion). The hE quasicategory instance always holds, so it is not stronger. Edge cases: empty S₀, empty E, empty K in IsKappaFiltered, regular implies infinite, index universe matches HasSmallKappaFilteredColimits. Node record differs from base only in lean; statement verbatim; dependency nodes unchanged; other recorded declarations used (pointwise-adjoint-criterion, reflection-assembly) create no DAG cycle. Docstrings carry source place and blueprint id with the proof summary; only sorry; report has Worker report and Second reading by NA sections. nt_compile.py --json side-overlay compile: exit 0, no errors or warnings. Non-blocking note: PresentableInfinityCategory is imported indirectly through CompleteAlgebroid."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityReflectorAccessibility",
+  "declaration": "SSet.Presentability.infinity_reflector_accessibility",
+  "file": "lean/Sheaf/CategoryTheory/InfinityReflectorAccessibility.lean",
+  "statement": "theorem infinity_reflector_accessibility (C : SSet.{max (u + 1) v}) [SSet.Quasicategory C] (hC : IsAccessible.{u, v} C) (P : C _⦋0⦌ → Prop) [hE : SSet.Quasicategory (SSet.Enhanced.fullSubcomplex C P).toSSet] (hP : ∀ (e : C _⦋1⦌), SSet.Enhanced.IsEquivalenceEdge C e → P (C.δ 1 e) → P (C.δ 0 e)) (L : C ⟶ (SSet.Enhanced.fullSubcomplex C P).toSSet) (hAdj : SSet.Enhanced.MappingBifunctorsEquivalent L (SSet.Enhanced.fullSubcomplex C P).ι) (S₀ : Set (C _⦋1⦌)) [Small.{u} S₀] (hS₀ : ∀ f : C _⦋1⦌, f ∈ S₀ → SSet.Enhanced.IsEquivalenceEdge C ((L ≫ (SSet.Enhanced.fullSubcomplex C P).ι).app _ f)) (hDetect : ∀ Z : C _⦋0⦌, (∀ (f : C _⦋1⦌), f ∈ S₀ → SSet.Enhanced.IsWeakHomotopyEquivalence (SSet.Enhanced.canonicalPrecompositionMap (C := C) (C.δ 1 f) (C.δ 0 f) Z f rfl rfl)) → ∀ (f : C _⦋1⦌), SSet.Enhanced.IsEquivalenceEdge C ((L ≫ (SSet.Enhanced.fullSubcomplex C P).ι).app _ f) → SSet.Enhanced.IsWeakHomotopyEquivalence (SSet.Enhanced.canonicalPrecompositionMap (C := C) (C.δ 1 f) (C.δ 0 f) Z f rfl rfl)) : IsAccessible.{u, v} (SSet.Enhanced.fullSubcomplex C P).toSSet ∧ ∃ (κ : Cardinal.{u}), κ.IsRegular ∧ PreservesColimitsIn (L ≫ (SSet.Enhanced.fullSubcomplex C P).ι) (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I ∧ ∃ (hI : SSet.Quasicategory I), @IsKappaFiltered.{u, max (u + 1) v} κ I hI)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -23,7 +23,10 @@
   "place": "Proposition 1.3.4.22, Corollary 1.3.4.26 and section 4.1.7, especially Proposition 4.1.7.4 and Example 4.1.7.6 Read online where available; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "lem-coef-model-colimit-localization-comparison",
+  "def-coef-symmetric-operadic-approximation",
+  "lem-coef-cosimplicial-frame-mapping"
  ],
  "proof": [
   {
@@ -242,5 +245,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fbba9f219",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean: CombinatorialModelCategory.{u,v,v} + Mathlib ModelCategory + HasLimits/HasColimits for the model hypotheses; coherent FiniteReedy.IsLocalization; IsPresentable.{v,max u t}; monoidal hypotheses (cofibrant unit, Mathlib pushoutProduct cofibration/trivial with inclusive or) quantified only in the second conjunct; HasDerivedSymmetricTensor = cocartesian symmetric infinity-operad over N(Fin*), fiber equivalence to C, binary/nullary operadic transport (activeTensor, finStarRho checked), replacement-tensor comparison as whole coherent functors for every functorial cofibrant replacement, slotwise preservation of IsSmall colimits incl. empty. Universes independent, all bound. No hollow defs, only theorem sorry, docstrings with HA places/blueprint and 8 proof steps, no name collisions or duplicate notion. Node diff: only lean and stmt_deps (three landed, acyclic nodes, permitted); statement verbatim; proof-dep import required by brief. nt_compile.py on snapshot: rc 0, no errors/warnings (warn.sorry=false). Observation only: braiding not tied to M's symmetry, not demanded by node."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CombinatorialLocalizationPresentability",
+  "declaration": "HomotopicalAlgebra.ModelLocalization.combinatorialLocalizationPresentability",
+  "declarations": [
+   "HomotopicalAlgebra.ModelLocalization.activeTensor",
+   "HomotopicalAlgebra.ModelLocalization.localizedPair",
+   "HomotopicalAlgebra.ModelLocalization.replacementTensor",
+   "HomotopicalAlgebra.ModelLocalization.HasDerivedSymmetricTensor",
+   "HomotopicalAlgebra.ModelLocalization.combinatorialLocalizationPresentability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CombinatorialLocalizationPresentability.lean",
+  "statement": "theorem combinatorialLocalizationPresentability {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] (_hM : CombinatorialModelCategory.{u, v, v} M) (C : SSet.{max (v + 1) u t}) [SSet.Quasicategory C] (q : FiniteReedy.largeNerve.{u, v, max (v + 1) u t} M ⟶ C) (_hq : FiniteReedy.IsLocalization.{u, v, max (v + 1) u t} (weakEquivalences M) q) : SSet.Presentability.IsPresentable.{v, max u t} C ∧ ∀ [MonoidalCategory M] [SymmetricCategory M] [MonoidalClosed M], IsCofibrant (𝟙_ M) → (∀ (f g : Arrow M), Cofibration f.hom → Cofibration g.hom → Cofibration ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom ∧ (WeakEquivalence f.hom ∨ WeakEquivalence g.hom → WeakEquivalence ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom)) → HasDerivedSymmetricTensor.{u, v, t} q",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already published combinatorial model structure, full coherent localization, presentability and symmetric operadic transport interfaces. Helpers are the actual active pointed map, localized nerve projections, replacement tensor diagram and the operadic form of this node’s conclusion. The conclusion compares entire coherent functors for every functorial cofibrant replacement and includes the nullary unit and preservation of every small colimit in either variable. The statement is unchanged; statement dependencies gain only already landed owning nodes."
  }
 }

@@ -213,5 +213,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd43c6447",
+  "group": "N3",
+  "result": "fix",
+  "note": "Read the node, its 3 statement deps, the module and the report. Checked every clause against strongSaturation, coherentCoslice, fullSubcomplex and IsAccessible/HasSmallColimits/IsPresentable in the side clone: same hypotheses, same W (the retract clause adds nothing given small arrow-colimit closure), the coslice as the strict ev0 fiber with coherent triangles, conclusion equal to presentability unfolded, consistent u / max(u+1) v universes, edge cases S empty, K empty and no vertices covered, helper not hollow, only sorry, lean.statement verbatim. nt_compile rc=0, clean, for the delivered and the fixed file. Fixes: (1) H8: theorem docstring lacked the source place and the node's four proof steps; replaced in fixes/SmallSaturatedCoslicePresentability.lean, signature unchanged. (2) Report falsely said def-cbc-enhanced-strong-saturation was added to stmt_deps; corrected in fixes/lem-coef-small-saturated-coslice-presentability.report.md. Non-blocking: stmt_deps could also gain the landed def-cbc-enhanced-strong-saturation and lem-coef-infinity-coslice-colimit-formula, whose declarations the module uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallSaturatedCoslicePresentability",
+  "declaration": "SSet.Enhanced.small_saturated_coslice_presentability",
+  "declarations": [
+   "SSet.Enhanced.smallSaturatedCoslice",
+   "SSet.Enhanced.small_saturated_coslice_presentability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallSaturatedCoslicePresentability.lean",
+  "statement": "theorem small_saturated_coslice_presentability (C : SSet.{max (u + 1) v}) [Quasicategory C] (hC : SSet.Presentability.IsPresentable.{u, v} C) (S : Set (C _⦋1⦌)) (hS : Small.{u} S) : ∀ (X : C _⦋0⦌), ∃ hD : Quasicategory (smallSaturatedCoslice.{u, v} C S X).toSSet, @SSet.Presentability.IsAccessible.{u, v} (smallSaturatedCoslice.{u, v} C S X).toSSet hD ∧ SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (smallSaturatedCoslice.{u, v} C S X).toSSet",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper smallSaturatedCoslice is the full coherent subcategory of the existing coherent coslice on arrows in the existing strongSaturation of S. The theorem states accessibility and all small coherent colimits for every fixed source.",
+  "fixed_by": "NT-stage2-cc-bd43c6447"
  }
 }
