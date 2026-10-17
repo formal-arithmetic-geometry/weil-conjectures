@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.Simple
-public import WeilConjectures.Mathlib.Topology.KrullDimension.Specialization
+public import WeilConjectures.Topology.KrullDimension.Specialization
 public import WeilConjectures.Mathlib.Topology.LocallyClosed
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 
