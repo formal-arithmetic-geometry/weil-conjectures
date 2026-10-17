@@ -12,9 +12,101 @@
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The fibers $C,D$ are quasicategories: an inner horn in either fiber is an inner-horn problem for $p$ over the constant simplex at $0$ or $1$, and its lift stays in that fiber. A right-pinched mapping simplex in $\\Delta^1=N([1])$ is a monotone map $[n+1]\\to[1]$ with its first $n+1$ vertices fixed at the source. Consequently its mapping spaces from $0$ to $0$, $0$ to $1$, and $1$ to $1$ are exactly $\\Delta^0$, and from $1$ to $0$ it is empty. If both endpoints of a mapping simplex in $E$ are in one fiber, its base simplex is constant; thus the right-pinched mapping space agrees degreewise with the mapping space in that fiber. There are no mapping simplices from $D$ to $C$. For $x\\in C,z\\in D$ the map on mapping spaces has target $\\Delta^0$, whose path space is also $\\Delta^0$. The defined homotopy fiber therefore identifies with the whole mapping space: put $M_x(z)=\\operatorname{Map}^{01}_E(x,z)=\\operatorname{Map}_E(x,z)$. These identifications preserve restriction of simplices and postcomposition by arrows in $D$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, interval specialization; explicit degreewise calculation from the mapping-space and fiber definitions."
+   }
+  },
+  {
+   "text": "Fix an edge $e:x\\to y$ over $0\\to1$. Apply [lem-coef-infinity-cocartesian-mapping-criterion] to this same inner fibration $p$ between quasicategories. For a test vertex $z\\in C$, the square has empty upper-left and lower-left corners, lower-right corner $\\Delta^0$, and upper-right corner $\\operatorname{Map}_C(x,z)$. Its path-space homotopy pullback is empty, so this test always holds. For $z\\in D$, both bottom corners and their path space are $\\Delta^0$, so the path-space pullback is precisely $M_x(z)$. The upper-left corner is $\\operatorname{Map}_D(y,z)$ by Step 1, and the comparison map is precomposition with $e$. Thus the criterion gives\n$$e\\text{ is }p\\text{-cocartesian}\\quad\\Longleftrightarrow\\quad\\text{for every }z\\in D,\\ e^*:\\operatorname{Map}_D(y,z)\\longrightarrow M_x(z)\\text{ is a weak equivalence}.$$\nThere are no other vertex colors to test. In particular this use of the criterion does not presuppose the existence of any cocartesian lift.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, opposite-category dual, pp. 131–132; base mapping spaces calculated in Step 1."
+   }
+  },
+  {
+   "text": "Write $a$ for an edge of $D$ representing the component $\\epsilon_{x,y}(e)\\in\\operatorname{Map}_D(T_x,y)$. Such a representative exists by [lem-coef-infinity-mapping-composition]. The hypothesis is coherent naturality in $y$, so for the entire parameter space of arrows $g:y\\to z$ it supplies\n$$\\epsilon_{x,z}(g\\circ e)\\simeq g\\circ\\epsilon_{x,y}(e).$$\nThis is a homotopy of maps with domain $\\operatorname{Map}_D(y,z)$, with its higher parameter simplices retained. Since precomposition and postcomposition are restrictions of the canonical composition class, the displayed homotopy says\n$$\\epsilon_{x,z}\\circ e^*\\simeq a^*:\\operatorname{Map}_D(y,z)\\longrightarrow\\operatorname{Map}_D(T_x,z).$$\nReplacing the point $\\epsilon_{x,y}(e)$ by its representative $a$ does not change that composition class. Each $\\epsilon_{x,z}$ is an equivalence. Composing with it and using the displayed homotopy therefore shows that $e^*$ is an equivalence exactly when $a^*$ is. This is just two-out-of-three for the induced maps on components and based homotopy groups (the homotopy identifies them with the usual change of basepoint). No Yoneda theorem or functor $C\\to D$ is used.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Represented specialization of Proposition 2.4.4.3: unpacking the stated coherent naturality hypothesis, with the canonical composition classes."
+   }
+  },
+  {
+   "text": "Suppose $a:T_x\\to y$ is an equivalence. Choose an inverse edge $b:y\\to T_x$ with both inverse-triangle witnesses. Associativity, units and component dependence in [lem-coef-infinity-mapping-composition] give homotopies $b^*a^*\\simeq\\mathrm{id}$ on $\\operatorname{Map}_D(y,z)$ and $a^*b^*\\simeq\\mathrm{id}$ on $\\operatorname{Map}_D(T_x,z)$, for every $z\\in D$. Here $b^*:\\operatorname{Map}_D(T_x,z)\\to\\operatorname{Map}_D(y,z)$ is precomposition by $b$. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to these two maps and homotopies. Hence every $a^*$ is a weak equivalence, including when the mapping spaces are empty. Steps 2–3 imply that $e$ is $p$-cocartesian.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, represented specialization; inverse-edge implication written using associativity and the two inverse equations."
+   }
+  },
+  {
+   "text": "Conversely suppose $e$ is $p$-cocartesian. Steps 2–3 say that $a^*$ is a weak equivalence for every $z\\in D$, hence bijective on components. Work in $hD$ from [lem-coef-infinity-mapping-composition]. At $z=T_x$, surjectivity gives an edge $b:y\\to T_x$ with $[b][a]=1_{T_x}$. At $z=y$, injectivity gives $[a][b]=1_y$, because\n$$([a][b])[a]=[a]([b][a])=[a]=1_y[a].$$\nThus $[a]$ is invertible. The invertible-component criterion in the cited node supplies the two inverse-triangle witnesses, so $a$ is an equivalence edge of $D$. This proves the required recognition in both directions. The argument is the two-object inverse calculation, not a further lemma hidden in an appeal to Yoneda.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, represented specialization; explicit inverse test in the homotopy category."
+   }
+  },
+  {
+   "text": "For each $x\\in C$, the equivalence $\\epsilon_{x,T_x}$ is surjective on components. Choose a component of $M_x(T_x)$ mapping to the component of $\\mathrm{id}_{T_x}$; by [lem-coef-infinity-mapping-composition] it has an edge representative $\\lambda_x:x\\to T_x$ in $E$. Its image under $p$ is the unique $0\\to1$ edge, and Step 1 identifies its component in $M_x(T_x)$ with that representative without extra base-path data. The represented component is the identity component, hence an equivalence by the same invertible-component criterion. Steps 4–5 make $\\lambda_x$ $p$-cocartesian. This proves existence with the stated target $T_x$, not merely a target equivalent to it. The statement's wording up to the mapping-space identification records exactly the chosen component.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, represented specialization; existence obtained from the identity component of each representing object."
+   }
+  },
+  {
+   "text": "Every degenerate edge in $E$ is $p$-cocartesian by [lem-coef-infinity-cocartesian-composition-initiality]. The only edges of $\\Delta^1$ are $\\mathrm{id}_0$, $0\\to1$ and $\\mathrm{id}_1$. For either identity choose the degenerate edge at the specified source. For $0\\to1$ and a specified source $x$ over $0$, use $\\lambda_x$ from Step 6. These are all source-and-base-edge pairs, so the inner fibration $p$ is a cocartesian fibration by [def-coef-infinity-fibrations]. If $C$ is empty there are no mixed lifting requirements; if $C$ is nonempty the assumed vertices $T_x$ already force $D$ nonempty. If $D$ is empty the hypothesis therefore forces $C$ empty as well. Nothing in this proof invokes limits, colimits, or additional nonemptiness assumptions.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.2.1, opposite dual, and Corollary 2.4.1.6, opposite dual: cocartesian lifts of all interval edges."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 2.4.4.3, opposite-category dual, pp. 131–132, read online 2026-10-17; the represented interval specialization, inverse calculation and lift existence are expanded by Q132. The source is not archived in literature/; WANTED archival copy."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +149,87 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Grothendieck.transport\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Grothendieck.toTransport\", \"CategoryTheory.Functor.IsFibered\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\"], \"digest\": \"38756495b1c7ceb8\"}",
    "date": "2026-10-17",
    "verdict": "no match: The two semantic phrasings return CategoryTheory.Functor.IsCocartesian and IsStronglyCocartesian for ordinary categories. Source read at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48-75, 139-161. These use uniqueness of ordinary maps, not represented coherent mapping spaces of an interval correspondence. No exact theorem or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "represented mixed mapping spaces over the interval characterize cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T12:14:25Z\", \"tool\": \"leansearch\", \"query\": \"represented mixed mapping spaces over the interval characterize cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.recOn\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.casesOn\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"c205744dd596f7c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsStronglyCocartesian",
+   "results": "{\"t\": \"2026-10-17T12:14:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsStronglyCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\"], \"digest\": \"9c7259df0a46fbe2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEquivalenceEdge|equivalence",
+   "results": "{\"t\": \"2026-10-17T12:14:26Z\", \"tool\": \"grep\", \"query\": \"IsEquivalenceEdge|equivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"809bb2fc10ad2aaa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an arrow in a quasicategory is an equivalence exactly when precomposition induces equivalences on all mapping spaces",
+   "results": "{\"t\": \"2026-10-17T12:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"an arrow in a quasicategory is an equivalence exactly when precomposition induces equivalences on all mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopicL\", \"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopyCategory₂.Hom\"], \"digest\": \"57baf7e5b940ed60\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian",
+   "results": "{\"t\": \"2026-10-17T12:14:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\"], \"digest\": \"60646e309b2723ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocartesian|cocartesian",
+   "results": "{\"t\": \"2026-10-17T12:14:26Z\", \"tool\": \"grep\", \"query\": \"IsCocartesian|cocartesian\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\"], \"digest\": \"6382579f4820ee3b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arrow in a quasicategory is an equivalence if and only if precomposition with it is an equivalence on every mapping space",
+   "results": "{\"t\": \"2026-10-17T12:15:24Z\", \"tool\": \"leanfinder\", \"query\": \"An arrow in a quasicategory is an equivalence if and only if precomposition with it is an equivalence on every mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\"], \"digest\": \"b3fc7ab3dca95a8a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda criterion: precomposition by a morphism of a quasicategory is an equivalence on all mapping spaces exactly when the morphism is an equivalence",
+   "results": "{\"t\": \"2026-10-17T12:15:24Z\", \"tool\": \"leansearch\", \"query\": \"Yoneda criterion: precomposition by a morphism of a quasicategory is an equivalence on all mapping spaces exactly when the morphism is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isIso_of_yoneda_map_bijective\", \"CategoryTheory.Functor.representableByEquiv\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.isIso_iff_isIso_yoneda_map\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Functor.RepresentableBy.homEquiv_eq\", \"CategoryTheory.Functor.RepresentableBy.homEquiv\", \"CategoryTheory.curriedYonedaLemma'\"], \"digest\": \"a567a0d25d75c78f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "precomposition.*equivalence|equivalence.*precomposition",
+   "results": "{\"t\": \"2026-10-17T12:15:24Z\", \"tool\": \"grep\", \"query\": \"precomposition.*equivalence|equivalence.*precomposition\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration of quasicategories over the interval has cocartesian lifts when its mixed mapping spaces are representable in the target fiber",
+   "results": "{\"t\": \"2026-10-17T12:28:33Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration of quasicategories over the interval has cocartesian lifts when its mixed mapping spaces are representable in the target fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory\"], \"digest\": \"20ec675f7aa84a8e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recognize cocartesian edges of a correspondence by invertibility of the morphism representing them under natural mapping space equivalences",
+   "results": "{\"t\": \"2026-10-17T12:28:34Z\", \"tool\": \"leanfinder\", \"query\": \"Recognize cocartesian edges of a correspondence by invertibility of the morphism representing them under natural mapping space equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\"], \"digest\": \"fe99045fc14de902\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48–76 and 139–161 (ordinary Hom-set cocartesian arrows), AlgebraicTopology/Quasicategory/Basic.lean:33–48 (inner horn fillers), and CategoryTheory/Yoneda.lean:897–907 (ordinary isomorphism detection). None states represented mixed mapping spaces or cocartesian recognition for quasicategories; ordinary Yoneda supplies only the elementary component calculation in Step 5, not the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-module-section-model",
@@ -85,5 +254,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-mixed-mapping-cocartesian-recognition",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three statement dependencies. Seven proof steps calculate the interval mapping spaces, specialize the existing horn-cocartesian mapping criterion, use the full assumed coherent naturality to identify precomposition, prove both directions of the inverse test, choose identity-component lifts with target T_x, and treat identity base edges and empty fibers. No new nodes or Mathlib leaves. Searched project declarations and Mathlib; no attachment or exact match. Resumption rechecked the current cited statements and strengthened citations.json to include the precise fiber, mapping-space, associativity, component-representation, and invertibility clauses actually used; the statement and existing proof route are unchanged.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle derived mapping-complex adjunction before the inverse limit. Through the preserved from.via chain this realizes former step 4 of lem-coef-coherent-module-section-model: representability of mixed maps over one edge gives existence and recognition of cocartesian transport.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Step 4 converts the explicit simplicial homotopy inverses on mapping spaces into realization weak equivalences; this is a general simplicial-set tool, not a replacement of the unit route. The same-unit composition node supplies the homotopies but does not state this realization conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-77380d9b6",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-77380d9b6 (reviewer sub-agent of L); spot-checked: I read the whole item, all seven steps, and the full statements of the six cited nodes. The delivery creates no new nodes and leaves the statement and stmt_deps unchanged. Step 1: the right-pinched mapping spaces of Delta^1 are Map(0,0)=Map(0,1)=Map(1,1)=Delta^0 and Map(1,0) is empty, so the homotopy fibre is the whole Map_E(x,z). Step 2: this is lem-coef-infinity-cocartesian-mapping-criterion, the dual of HTT 2.4.4.3. For z in C both sides of the test are empty; for z in D the test becomes 'e^* is a weak equivalence'. It assumes no other lifts, so there is no circularity. Step 3: the item's own coherent-naturality hypothesis, restricted to e, gives eps∘e^* ≃ a^* with a=eps(e); two-out-of-three then applies. Step 4: associativity, units and component dependence give the two homotopies on the correct domains, and the declared tool lem-cbc-simplicial-homotopy-equivalence-weak needs no nonemptiness. Step 5: surjectivity at z=T_x and injectivity at z=y give the two-sided inverse. Step 6: an identity-component edge lambda_x exists with target exactly T_x; the text says 'Steps 4–5' where Step 4 is meant, which is wording only. Step 7: degenerate edges are cocartesian by the initiality node, and the three edges of Delta^1 are all covered. Edge cases: id on Delta^1, empty mixed maps (the hypothesis fails, as it must), C or D empty, and ordinary nerves. Duplicate scan: discrete-base recognition, interval-equivalence, bicartesian-interval adjunction and edge-pullback mapping fibre all state different things. There is no cycle and no SGA. HTT is not archived, so 'by agent' with a WANTED line is correct. I accept the tool use of lem-cbc-simplicial-homotopy-equivalence-weak. No fixes were made."
  }
 }

@@ -16,9 +16,118 @@
   "def-weil-constructible-subset",
   "def-weil-proetale-locally-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every open subset of X is quasi-compact: otherwise a cover without a finite subcover yields, by successively adjoining a member containing an uncovered point, a strictly increasing chain of finite unions of covering opens, contrary to the descending-chain hypothesis on their closed complements. For the diagonal of X over Spec Z, the inverse image of any affine open is an open subset of X and hence quasi-compact. Thus X is quasi-compact and quasi-separated, using the definition of quasi-separatedness. The affine-open basis now gives a finite affine refinement W_a of the given cover, with each W_a contained in some U_i. Intersect the local partitions with W_a. Their parts remain locally closed and constructible: their open and closed presentations restrict, and every open of a Noetherian space is quasi-compact, hence retrocompact. The same observation makes these parts constructible in X. No intersection of affine opens is asserted affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-quasi-separated-morphism",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095F, lemma-constructible-local, and the affine refinement in lemma-constructible-quasi-compact-quasi-separated; affine basis Tag 01IT"
+   }
+  },
+  {
+   "text": "For an open U in X, the localized site X_proet/U is U_proet: its objects are weakly etale maps V -> X factoring through U, equivalently weakly etale maps V -> U, with the same covering families. One direction follows by base change; the converse follows by composition with the open immersion. This is clause (1) and (4) of the weakly-etale localization lemma, whose clause (2) identifies the constant coefficient rings. The scheme-morphism inverse image along j_U is this localized restriction: the object inverse-image restriction lemma gives j_U^*G = G|_U naturally, for sheaves of sets, rings and A-modules, so pullbacks along open immersions in steps 3 and 4 are restrictions. Restriction j_U^* to this localized ringed site is exact. It therefore preserves kernels, images and quotients, giving j_U^* H^t(K) = H^t(K|_U) from the cohomology-sheaf formula. Apply the ringed-topos derived tensor pullback lemma to this localization, with R=A_X and S=R|_U. Exactness identifies Lj_U^* with termwise restriction and carries a degree-zero sheaf F to F|_U in degree zero. The lemma gives the natural comparison\n$(K\\otimes_A^{\\mathbf L}F)|_U\\simeq (K|_U)\\otimes_A^{\\mathbf L}(F|_U)$.\nIn particular this is valid for the original U_i and for their affine refinements. This uses the cited derived comparison, rather than inferring preservation of K-flatness from exactness alone.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-proetale-inverse-image",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-derived-cohomology-sheaves",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0G7E, lemma-pullback-K-flat; localization in sites-modules.tex Tags 03DH/04IX"
+   }
+  },
+  {
+   "text": "Fix a degree t. For each affine chart W_a use the partition obtained by intersecting its chosen U_i-partition for H^t(K_i) with W_a. The preceding cohomology identification identifies the restricted global sheaf H^t(K) with that local sheaf on W_a. Apply the finite affine stratification-local-gluing lemma: its quasi-compact and quasi-separated hypotheses hold by step 1. We obtain a finite constructible locally closed immersed stratification S of X and, for each stratum S_c, an actual factorization S_c -> T_a,d -> W_a -> X through one of these local strata. We may take the reduced induced structure on each S_c by precomposing its immersion and factorization with reduction; the image, local closedness, constructibility and partition are unchanged. The resulting reduced locally closed subscheme is the reduced induced one: locally its defining radical ideal is the radical of the ideal defining the original immersion. Consequently the pullback of H^t(K) to the reduced S_c is the pullback, along an actual scheme morphism, of the prescribed locally constant sheaf with finite stalks on a local stratum. Step 4 verifies exactly the two properties needed for that pullback. For the empty scheme the empty stratification already suffices.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095F, lemma-constructible-local; finite global refinement argument in lemma-constructible-quasi-compact-quasi-separated"
+   }
+  },
+  {
+   "text": "Here is the transport argument used in steps 1 and 3. For any scheme morphism h:Z -> T, base change carries a pro-etale family trivializing a locally constant sheaf L on T to a covering family on Z, by the covering-preserving base-change construction of pro-etale inverse image. Inverse image preserves constant sheaves: on underlying sets the constant sheaf with value M is the coproduct of M copies of the terminal sheaf; an inverse-image left adjoint preserves this coproduct and the terminal object. Applying inverse image to addition and scalar multiplication identifies this with the constant A-module sheaf with value M. The fixed-ring module inverse-image lemma supplies the coefficient-ring identification and its compatibility with localization. For a member T_j of the trivializing family put Z_j=Z x_T T_j. The localization lemma for ringed site morphisms, applied to u_h, V=T_j and U=u_h(T_j)=Z_j, with ring map c^h_A, gives (h^*L)|_{Z_j} = (h_{T_j})^*(L|_{T_j}) for the localized morphism h_{T_j}. Applying the constant-sheaf argument to h_{T_j} identifies this with the constant module sheaf with value M_j on the localized site. This proves local constancy by its definition. Finally the pro-etale inverse-image stalk lemma identifies each geometric stalk at z of h^*L with the stalk of L at h(z); forgetting module structure suffices to check finiteness. Thus finite stalks are retained. Apply this first to the open intersections of step 1 and then to the factorization morphisms of step 3.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-weil-pbc-localize-ringed-site-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf, and inverse-image adjunction; scheme base change in proetale.tex Tag 09A5"
+   }
+  },
+  {
+   "text": "Let F be any degree-zero A-module sheaf on X and put F_i=F|_{U_i}. For t outside [a,b], the assumed local vanishing and step 2 identify the restriction of H^t(K tensor_A^L F) to every U_i with zero. The U_i form a covering family in X_proet: the open immersions are weakly etale, and for any affine V in X the intersections V intersect U_i admit affine refinements with a finite subcover of V, exactly the covering criterion in the site definition. Covering-family detection of vanishing, clause (1) of the pro-etale conservativity lemma, now gives H^t(K tensor_A^L F)=0. This applies to arbitrary F, not just locally constant coefficients, and the same fixed integers a,b are used on all members. It proves the asserted global Tor interval.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095F locality pattern; pro-etale covering-family detection as in the cited conservativity node"
+   }
+  },
+  {
+   "text": "Take F=A_X in step 5. In the K-flat definition of derived tensor, a representative P of K satisfies P tensor_A A_X = P termwise, with the same differentials; hence K tensor_A^L A_X is K. Thus H^t(K)=0 outside the finite integer interval [a,b]. For each remaining degree, steps 1--4 give its finite partition with locally constant finite stalks. This is the claimed bounded constructibility. The given local boundedness is consistent with, but not needed in addition to, the stronger common Tor bound. If X is empty, the empty covering detection criterion yields the zero sheaf and all conclusions still hold.",
+   "uses": [
+    "def-weil-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Derived tensor via K-flat representatives, tensor unit specialization of the cited definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-constructible-subset",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-quasi-separated-morphism",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095F (lemma-constructible-local) and the finite affine refinement proof of lemma-constructible-quasi-compact-quasi-separated; derived tensor comparison from sites-cohomology.tex Tag 07A4. The pro-etale translation and elementary transport arguments are explicit in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +170,73 @@
    "results": "No hits (under Mathlib/CategoryTheory)",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complex of pro-etale sheaves is bounded constructible with a fixed Tor interval if this holds on a finite open cover",
+   "results": "Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; TopCat.Presheaf.IsSheafOpensLeCover; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; Algebra.FormallyEtale.instTensorProduct; TopCat.Presheaf.IsSheafEqualizerProducts; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; Condensed.lanSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|constructible.*cover|finite.*open.*cover",
+   "results": "No hits (under Mathlib/)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Constructible, TorAmplitude, ProEtale, finite open cover",
+   "results": "No hits; loogle: <input>:1:46: expected end of input",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a finite open cover of a Noetherian scheme, bounded constructibility and a uniform Tor amplitude of a pro-etale complex descend from the restrictions",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.isLocallyNoetherian_iff_openCover; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible|TorAmplitude|proetale",
+   "results": "No hits (under Mathlib/CategoryTheory)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite cover locality of constructible sheaves and Tor amplitude",
+   "results": "Topology.IsLocallyConstructible.of_isOpenCover'; Topology.IsLocallyConstructible.iff_of_isOpenCover; Topology.IsLocallyConstructible.of_isOpenCover; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.QuasicoherentData.coversTop; SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.coversTop",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsConstructible",
+   "results": "No hits; loogle: unknown identifier 'IsConstructible'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite open covering local constructibility uniform Tor amplitude derived sheaf tensor",
+   "results": "SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.isFinitePresentation; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; Topology.IsLocallyConstructible.iff_of_isOpenCover; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsLocallyConstructible",
+   "results": "Topology.IsLocallyConstructible; Topology.IsLocallyConstructible.univ; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isLocallyConstructible; Topology.IsLocallyConstructible.isConstructible; Topology.IsLocallyConstructible.iInter; Topology.IsLocallyConstructible.iUnion",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-tensor-hom",
@@ -76,10 +248,84 @@
  "blueprint": {
   "from": {
    "node": "lem-sf-tensor-hom",
-   "place": "Step 2: the two objects represent the same functor on D^b_ctf; prerequisite finite-cover gluing of constructibility and the uniform Tor bounds, carried inline in the inherited split step 1.",
+   "place": "Step 2 of lem-sf-tensor-hom: finite-cover gluing of constructibility and the uniform Tor interval before the Yoneda argument.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-finite-cover-ctf-locality",
+  "worker": "stage1",
+  "summary": "Retained the earlier split and repaired its K-flat inference by citing the existing unbounded ringed-topos derived tensor pullback theorem. Added the explicit Noetherian quasi-separatedness argument, localized-site identification, constant-sheaf pullback and geometric-stalk transport, and tensor-unit calculation. Statement and hypotheses are unchanged; no new nodes or Mathlib leaves. Maintainer reader fix: step 2 now cites the weakly-etale localization and object inverse-image restriction lemmas; step 4 cites the ringed-site localization square and is no longer marked elementary.",
+  "blueprint": "Realizes the prerequisite locality paragraph of the ancestor lem-sf-tensor-hom: finite-cover gluing of constructibility and one uniform Tor interval before the tensor-Hom Yoneda argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine-basis tool for the finite affine refinement; this unit does not provide scheme topology."
+   },
+   {
+    "node": "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "why": "Generic geometric stratification refinement with actual factorization morphisms; does not assume or prove derived constructibility."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness of localized module restriction; needed for cohomology and degree-zero coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic unbounded derived tensor comparison for ringed topoi; replaces the incomplete K-flat restriction inference."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact inverse image for constant coefficient modules, with composition and localization compatibility."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "Generic pro-etale inverse-image stalk identification; only finite-stalk preservation is used."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic stability theorem needed for identifying the open localized pro-etale site; not a constructibility assertion."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic inverse-image composition isomorphism for the stratum pullback and the trivializing covering family."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Generic covering-family vanishing detection; no claim about arbitrary pro-etale geometric stalk conservativity is used."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic compatibility of inverse image with localization (the localization square of ringed topoi), needed to restrict h^*L to the base-changed trivializing members; no node of this unit gives it."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic identification of pro-etale inverse image along an object (here an open immersion) with localized restriction; used to read stratum pullbacks through the U_i as restrictions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-a1b1ec5a3",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-a1b1ec5a3 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement, plus the ancestor lem-sf-tensor-hom, unit sk-thm-sf-tensor-hom (master and main-20261015), Stacks 095F, 095E and 07A4, and the coefficient definitions. Coefficient categories: def-weil-finite-torsion-constructibility and def-weil-finite-tor-amplitude are intrinsic (pro-etale, constant A_X, no etale origin) and match the item's conclusion exactly. Statement: true and unweakened; tested on empty X with r=0, one point, a disjoint cover, A=0 and the endpoints t=a,b. Step 1 (Noetherian implies qcqs, finite affine refinement), steps 2 and 5 (07A4 comparison applied to the localization, covering-family vanishing from clause 1 of lem-cbc-proetale-stalk-conservative), step 3 (actual factorizations from the gluing lemma's statement, reduced structure) and step 6 (tensor with the unit) are correct. There are no new nodes and no duplicates: the candidates lem-sf-affine-chart-factorization-gluing, lem-sf-kv-affine-locality and lem-weil-pbc-constructible-qcqs-affine-local are etale or about different objects. I repaired two faults. (1) C1/C5, step 2: pullback along an open immersion was used as localized restriction (for H^t(K_i) in steps 3-4) with no citation; I added the reviewed nodes lem-sfb-proetale-object-inverse-image-restriction and lem-weil-proetale-weakly-etale-localization. (2) C2/E5, step 4: it was marked elementary and said 'composition identifications' where it needs the localization square (h^*L)|_{Z_j} = h_{T_j}^*(L|_{T_j}); I cited the reviewed node lem-weil-pbc-localize-ringed-site-morphism, wrote out its application and set elementary to false. proof_deps is again the union of the uses, and two tool_uses were added; a DFS found no cycle. Remark: the statement's 'finite stalks' has no explicit geometric-stalk citation; this matches the parent definition and I left it unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

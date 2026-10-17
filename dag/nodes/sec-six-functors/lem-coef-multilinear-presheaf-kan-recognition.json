@@ -2,18 +2,126 @@
  "id": "lem-coef-multilinear-presheaf-kan-recognition",
  "kind": "statement",
  "title": "Kan recognition of a multilinear extension from representables",
- "statement": "Use quasicategories, coherent functor categories, mapping spaces and colimits from [def-cbc-enhanced-diagrams-cones], and spaces from [def-coef-infinity-category-of-spaces]. Fix a universe $\\mathcal W$ of small objects and a larger universe for presheaf categories. Let $r\\geq0$ be finite, let $A_1,\\ldots,A_r,D$ be $\\mathcal W$-small infinity categories, and let $t:\\prod_{i=1}^r A_i\\to D$ be a coherent functor. Put $P(A)=\\operatorname{Fun}(A^{\\mathrm{op}},\\mathcal S_{\\mathcal W})$ and $y_A(a)=\\operatorname{Map}_A(-,a)$. Let $E:\\prod_iP(A_i)\\to P(D)$ preserve $\\mathcal W$-small colimits separately, with a specified coherent natural equivalence\n$$E(y_{A_1}(a_1),\\ldots,y_{A_r}(a_r))\\simeq y_D(t(a_1,\\ldots,a_r)).$$\nDefine the external product by $(\\boxtimes_i F_i)(x_1,\\ldots,x_r)=\\prod_i F_i(x_i)$. There exists a coherent natural transformation\n$$\\eta_{\\boldsymbol F}:\\boxtimes_iF_i\\longrightarrow E(\\boldsymbol F)\\circ t^{\\mathrm{op}}$$\nwhose restriction to representables sends a tuple of arrows $u_i:x_i\\to a_i$ to $t(\\boldsymbol u):t(\\boldsymbol x)\\to t(\\boldsymbol a)$ under the specified equivalence. The space of extensions with this specified restriction is contractible. For every $H\\in P(D)$, composition with $\\eta$ induces an equivalence\n$$\\operatorname{Map}_{P(D)}(E(\\boldsymbol F),H)\\simeq\\operatorname{Map}_{P(\\prod_i A_i)}(\\boxtimes_iF_i,H\\circ t^{\\mathrm{op}}),$$\nnatural coherently in $\\boldsymbol F$ and $H$. Thus $E(\\boldsymbol F)$ with this unit is the left Kan extension of $\\boxtimes_iF_i$ along $t^{\\mathrm{op}}$, where left Kan extension is defined by this mapping-space property. For $r=0$, both input products are terminal, the external product is the point presheaf on $*$, and the hypothesis specifies $E(*)\\simeq y_D(t(*))$; the same assertion holds. No colimits in the $A_i$ or $D$, no filteredness, and no nonemptiness of the input presheaves are assumed.",
+ "statement": "Use quasicategories, coherent functor categories, mapping spaces and colimits from [def-cbc-enhanced-diagrams-cones], spaces from [def-coef-infinity-category-of-spaces], and presheaves and Yoneda from [def-coef-infinity-presheaf-yoneda]. Fix a universe $\\mathcal W$ of small objects and a larger universe for presheaf categories. Let $r\\geq0$ be finite, let $A_1,\\ldots,A_r,D$ be $\\mathcal W$-small infinity categories, and let $t:\\prod_{i=1}^r A_i\\to D$ be a coherent functor. Put $P(A)=\\operatorname{Fun}(A^{\\mathrm{op}},\\mathcal S_{\\mathcal W})$ and $y_A(a)=\\operatorname{Map}_A(-,a)$. Let $E:\\prod_iP(A_i)\\to P(D)$ preserve $\\mathcal W$-small colimits separately, with a specified coherent natural equivalence\n$$E(y_{A_1}(a_1),\\ldots,y_{A_r}(a_r))\\simeq y_D(t(a_1,\\ldots,a_r)).$$\nDefine the external product by $(\\boxtimes_i F_i)(x_1,\\ldots,x_r)=\\prod_i F_i(x_i)$. There exists a coherent natural transformation\n$$\\eta_{\\boldsymbol F}:\\boxtimes_iF_i\\longrightarrow E(\\boldsymbol F)\\circ t^{\\mathrm{op}}$$\nwhose restriction to representables sends a tuple of arrows $u_i:x_i\\to a_i$ to $t(\\boldsymbol u):t(\\boldsymbol x)\\to t(\\boldsymbol a)$ under the specified equivalence. The space of extensions with this specified restriction is contractible. For every $H\\in P(D)$, composition with $\\eta$ induces an equivalence\n$$\\operatorname{Map}_{P(D)}(E(\\boldsymbol F),H)\\simeq\\operatorname{Map}_{P(\\prod_i A_i)}(\\boxtimes_iF_i,H\\circ t^{\\mathrm{op}}),$$\nnatural coherently in $\\boldsymbol F$ and $H$. Thus $E(\\boldsymbol F)$ with this unit is the left Kan extension of $\\boxtimes_iF_i$ along $t^{\\mathrm{op}}$, where left Kan extension is defined by this mapping-space property. For $r=0$, both input products are terminal, the external product is the point presheaf on $*$, and the hypothesis specifies $E(*)\\simeq y_D(t(*))$; the same assertion holds. No colimits in the $A_i$ or $D$, no filteredness, and no nonemptiness of the input presheaves are assumed.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
   "place": "step 3, representable-evaluation and iterated-density recognition (HA Remark 4.8.1.13; HTT Lemmas 5.1.5.2-5.1.5.3 and Proposition 5.3.6.11). Agent-formulated lemma extracted from the retained proof, not a verbatim source theorem. The indicated source is not archived in literature; WANTED in report.md. No Stacks tag states this quasicategorical result."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=\\prod_i A_i$, $B(\\boldsymbol F)=\\boxtimes_i F_i$, and $t^*(G)=G\\circ t^{\\mathrm{op}}$. The free-cocompletion node gives small colimits and small mapping spaces in every presheaf category here. Colimits in spaces exist by the small-colimits node. Cartesian closedness and the mapping-space colimit criterion show that $X\\times-$ preserves them: for $L=\\operatorname{colim}_jY_j$,\n$$\\operatorname{Map}(X\\times L,Z)\\simeq\\operatorname{Map}(L,\\operatorname{Map}(X,Z))\\simeq\\lim_j\\operatorname{Map}(X\\times Y_j,Z).$$\nThe equivalences include the given cocone maps, so this is the colimit criterion, including an empty diagram or empty $X$. For fixed other inputs, evaluation of $B$ at $\\boldsymbol x$ is the varying space $F_i(x_i)$ times the fixed finite product of the other values. Objectwise colimits therefore prove that $B$ preserves small colimits separately. The same objectwise assertion shows that $t^*$ preserves small colimits: evaluation at $\\boldsymbol x$ is evaluation at $t(\\boldsymbol x)$. Thus $t^*E$ also preserves them separately. All indexing shapes are in $\\mathcal W$; only the ambient functor categories require a larger universe.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-space-presheaf-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Corollary 5.1.2.3 and cartesian closedness of spaces; preparatory colimit calculation. Agent argument; HTT/HA not archived, WANTED in report.md."
+   }
+  },
+  {
+   "text": "For $\\boldsymbol a\\in C$, there is a coherent natural equivalence $B(y_{A_1}(a_1),\\ldots,y_{A_r}(a_r))\\simeq y_C(\\boldsymbol a)$. Here is the coordinate calculation rather than an additional lemma. A right-pinched $n$-simplex in $\\operatorname{Map}_C(\\boldsymbol x,\\boldsymbol a)$ is a map $\\Delta^{n+1}\\to\\prod_i A_i$ constant at $\\boldsymbol x$ on the initial face and ending at $\\boldsymbol a$. Projection identifies it with exactly a tuple of such simplices in the $A_i$; this commutes with every simplicial operator. The inverse takes a tuple of maps to their product map. These projections commute with the precomposition and postcomposition actions of the coherent Hom pairing, so after the Yoneda transpose this is natural in both $\\boldsymbol x$ and $\\boldsymbol a$. The pointwise equivalence criterion gives the asserted equivalence of presheaves, coherently in $\\boldsymbol a$. This includes $r=0$: the mapping space of the terminal category is a point.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-presheaf-yoneda",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Section 5.1.3; coordinate calculation in the right-pinched model. Agent argument; HTT/HA not archived, WANTED in report.md."
+   }
+  },
+  {
+   "text": "Apply finite-variable relative colimit completion with $C_i=A_i$, all $R_i$ empty, and target $P(C)$. Its explicit small-data localization model is $P(A_i)$: there are no locality conditions, and $j_{R_i}=y_{A_i}$. Hence restriction along $\\prod_i y_{A_i}$ is an equivalence from the full coherent category of separately colimit-preserving functors $\\prod_iP(A_i)\\to P(C)$ to $\\operatorname{Fun}(C,P(C))$. The target is cocomplete by free cocompletion, so all hypotheses hold. Step 1 places both $B$ and $t^*E$ in its source. On representables, Step 2 and the transformation on coherent Hom pairings induced by $t$ give\n$$B(\\boldsymbol y(\\boldsymbol a))\\simeq y_C(\\boldsymbol a)\\longrightarrow t^*y_D(t\\boldsymbol a)\\simeq t^*E(\\boldsymbol y(\\boldsymbol a)).$$\nThe last equivalence is the inverse of the specified equivalence after restriction. The middle map sends $\\boldsymbol u$ to $t(\\boldsymbol u)$, including all coherent parameters. Full faithfulness of the finite-variable restriction equivalence lifts this specified transformation to $\\eta:B\\to t^*E$. On mapping spaces restriction is an equivalence; its homotopy fiber over the specified transformation is contractible. This proves existence and the claimed contractible space of extensions, with their specified restriction homotopy.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Proposition 5.3.6.11, empty-relations specialization; HA Remark 4.8.1.13. Agent argument; HTT/HA not archived, WANTED in report.md."
+   }
+  },
+  {
+   "text": "Construct the comparison before using any density presentation. For all $\\boldsymbol F,H$, define\n$$\\alpha_{\\boldsymbol F,H}:\\operatorname{Map}_{P(D)}(E\\boldsymbol F,H)\\longrightarrow\\operatorname{Map}_{P(C)}(B\\boldsymbol F,t^*H),\\qquad v\\longmapsto t^*(v)\\circ\\eta_{\\boldsymbol F}.$$\nThe coherent Hom bifunctor and its functoriality for $t^*$ give the first map into $\\operatorname{Map}(t^*E\\boldsymbol F,t^*H)$; precomposition with the coherent transformation $\\eta$ gives the second. Thus $\\alpha$ is a coherent transformation of space-valued functors on $(\\prod_iP(A_i))^{\\mathrm{op}}\\times P(D)$. Explicitly for $q:\\boldsymbol F'\\to\\boldsymbol F$, naturality of $\\eta$ gives $t^*E(q)\\circ\\eta_{\\boldsymbol F'}\\simeq\\eta_{\\boldsymbol F}\\circ B(q)$, and therefore\n$$t^*(v\\circ E(q))\\circ\\eta_{\\boldsymbol F'}\\simeq (t^*v\\circ\\eta_{\\boldsymbol F})\\circ B(q).$$\nPostcomposition in $H$ commutes by associativity. These are restrictions of the Hom bifunctor action and the simplex $\\eta$ in the coherent functor category, so their higher compatibility homotopies are retained before taking limits. The small mapping-space clause of free cocompletion ensures that both sides take values in $\\mathcal S_{\\mathcal W}$.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT coherent Hom and natural transformation calculus, applied to the unit of Step 3. Agent argument; HTT/HA not archived, WANTED in report.md."
+   }
+  },
+  {
+   "text": "When every $F_i=y_{A_i}(a_i)$, Steps 2 and 3 identify $\\alpha$ with the map\n$$\\operatorname{Map}_{P(D)}(y_D(t\\boldsymbol a),H)\\longrightarrow\\operatorname{Map}_{P(C)}(y_C(\\boldsymbol a),t^*H).$$\nYoneda evaluation identifies both spaces with $H(t\\boldsymbol a)$. On evaluation at $1_{\\boldsymbol a}$ the image of $v$ is $v_{t\\boldsymbol a}(t(1_{\\boldsymbol a}))=v_{t\\boldsymbol a}(1_{t\\boldsymbol a})$, using the identity homotopy for the coherent functor $t$. This is precisely the evaluation of $v$ on the left. Thus the displayed map is an equivalence of whole spaces, not merely a bijection on components. The Yoneda evaluations are coherently natural and the restriction of $\\eta$ was fixed in Step 3, so this calculation also holds with coherent parameters in $\\boldsymbol a$ and $H$.",
+   "uses": [
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Lemma 5.1.5.2; evaluation of the specified representable unit. Agent argument; HTT/HA not archived, WANTED in report.md."
+   }
+  },
+  {
+   "text": "Fix $H$. We prove by induction on $j=0,\\ldots,r$ that $\\alpha_{\\boldsymbol F,H}$ is an equivalence whenever the first $j$ inputs are arbitrary and the remaining inputs are representable. Step 5 is $j=0$. For the induction step fix the first $j-1$ inputs and the last $r-j$ representables. Density gives a small coherent colimiting cocone $y_{A_j}p\\to F_j$. By Step 1 and the hypothesis on $E$, applying $B$ or $E$ in variable $j$ gives colimiting cocones with the indicated apices. The contravariant mapping-space colimit criterion then expresses the source and target of $\\alpha_{\\boldsymbol F,H}$ as limits over the opposite of this same density shape. Step 4 supplies a map between these two limit diagrams and a compatible map of their cones: for each leg $q:y(a)\\to F_j$ the square is exactly its displayed naturality equation, and its higher simplices give compatibility over the whole indexing shape. Every component on the diagram is an equivalence by induction. The pointwise equivalence criterion makes this a coherent equivalence of diagrams; their limit universal properties therefore give an equivalence between the apices (an inverse diagram equivalence induces the inverse map by the same universal properties). It is the actual map $\\alpha$, since its cone map was specified before passing to limits. This completes the induction. No functorial choice of density diagrams in $F_j$ is needed: the natural transformation $\\alpha$ was already constructed globally.",
+   "uses": [
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "HTT Lemma 5.1.5.3 and mapping-space colimit criterion; induction using the pre-existing comparison. Agent argument; HTT/HA not archived, WANTED in report.md."
+   }
+  },
+  {
+   "text": "Step 6 proves that every component of the coherent comparison from Step 4 is an equivalence, so the pointwise equivalence criterion makes it a coherent natural equivalence in $\\boldsymbol F$ and $H$. Since its formula is composition with $\\eta$ after restriction, this is exactly the mapping-space definition of left Kan extension specified in the statement. For $r=0$ the finite-variable restriction in Step 3 is the identity on $P(*)$, not an empty colimit. Step 2 gives $B(*)=y_*(*)$, the point presheaf, and Step 5 is already the full comparison $\\operatorname{Map}(y_D(t(*)),H)\\simeq H(t(*))\\simeq\\operatorname{Map}(y_*( *),t^*H)$; there are no induction steps. Empty-valued input presheaves and empty density shapes are allowed in Steps 1 and 6. At no point was a colimit in an $A_i$ or in $D$ used.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-relative-colimit-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Mapping-space definition in this item; HTT Lemma 5.1.5.2 and empty-list clause of Proposition 5.3.6.11. Agent argument; HTT/HA not archived, WANTED in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-relative-colimit-completion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-space-presheaf-cocompletion",
+  "lem-coef-space-yoneda-density",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Repair of the agent-formulated recognition argument using existing coherent Hom, objectwise colimit, finite-variable completion and density statements. HA Remark 4.8.1.13 and HTT 5.1.5, 5.3.6 are not archived; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +154,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-yoneda-embedding",
@@ -72,5 +180,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-multilinear-presheaf-kan-recognition",
+  "worker": "stage1",
+  "summary": "Repaired all four numbered maintainer faults: proved separate cocontinuity of external product and restriction; used existing finite-variable completion for the unit and contractible uniqueness; calculated product representables and cited contravariant mapping-space colimit preservation; constructed the actual coherent comparison before density induction. Added the missing Yoneda definition dependency. Statement otherwise unchanged; no new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite coefficient derived adjunction before R lim, made coherent by the inherited enriched-localization chain. General tool for the object-space-fibration sublemma: embed an arbitrary monoidal enrichment in larger-universe monoidal presheaves before using the presentable equivalence-nerve calculation. Extracted from returned step 3, representable-evaluation and iterated-density recognition (HA Remark 4.8.1.13; HTT Lemmas 5.1.5.2-5.1.5.3 and Proposition 5.3.6.11).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor and componentwise equivalence calculus, needed to identify natural equivalences and their limit diagrams; it replaces no geometric route step, and this unit has no separate statement giving this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-e51d054c3",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-e51d054c3 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and all 11 cited node statements in full, plus the hom-bifunctor proof, the unit and the parent's step 5. The statement (E separately cocontinuous with E∘y ≃ y_D∘t implies E(F) = Lan_{t^op}(⊠F)) is true. It holds on every edge case I tested: r=0, r=1 with t=id, D=*, empty A_i, and empty-valued inputs. Step 1 gets separate cocontinuity of ⊠ and t^* from objectwise colimits (yoneda-presheaf-limits) and the cartesian-closed adjunction (space-presheaf-cocompletion). Step 2 identifies ⊠y(a) with y_C(a) via T_* for the projections; hom-bifunctor's proof builds H_E from the Yoneda pairing of def-coef-infinity-presheaf-yoneda, so this matches y_C. Step 3 uses the finite-list clause of relative-colimit-completion with all R_i empty; the model clause gives P(A_i), and full faithfulness lifts the specified transformation with a contractible fiber. Step 4 builds the comparison α = η^* ∘ (t^*)_* coherently before any density choice. Step 5 is the Yoneda case, using t(1)=1. Step 6 is a correctly set up induction over the density cocone, with contravariant Hom sending colimits to limits. Step 7 concludes, and handles r=0 as the empty list, not as an empty colimit. The union of step uses equals proof_deps, there are no cycles and all steps are under 2000 characters. The only off-unit statement is lem-cbc-enhanced-functor-cone-calculus, which I accept as a declared generic tool_use. There are no new nodes. Duplicate candidates (presheaf-external-product-kan, operadic-day-convolution, kan-mapping-restriction, product-colimit-fubini, density, free-cocompletion) state different things. HA/HTT are not archived, so the proof is correctly marked agent with WANTED lines. No SGA is used. All earlier return points (1–4) and the r=0 error are repaired. No fixes."
  }
 }

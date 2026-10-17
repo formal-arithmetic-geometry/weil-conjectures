@@ -11,9 +11,85 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=Q^\\natural$, $B=X^\\natural\\times Y^\\natural$, $D=C^\\natural\\times C^\\natural$, and let $p:W\\to D$ be endpoint evaluation. By the cited fibrant-object characterization, $X^\\natural$ and $Y^\\natural$ have the right lifting property against every trivial cofibration. A map from its domain into $B$ therefore extends by extending the two coordinates separately; hence $B$ is fibrant. To extend a marked map $u:S\\to H$ across a trivial cofibration $i:S\\hookrightarrow T$, first extend its $B$ coordinate to $b:T\\to B$. The $W$ coordinate of $u$ and the map $T\\xrightarrow{b}B\\to D$ now form a lifting square against $p$. The assumed fibration $p$ supplies $w:T\\to W$ over this map. The compatible pair $(b,w)$ gives the required extension $T\\to H$. Thus $H$ is fibrant. The same characterization says its underlying simplicial set $R$ is a quasicategory and its marked edges are exactly the equivalences: $H=R^\\natural$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.4.1; elementary coordinate lifting using the stated model structure."
+   }
+  },
+  {
+   "text": "The marked-model theorem supplies the Kan enrichment on fibrant objects. Apply it to the fibrant source $A=Q^\\natural$ and to each of $H=R^\\natural$, $X^\\natural$, $Y^\\natural$, and $C^\\natural$. Consequently $\\operatorname{Map}^\\sharp(A,H)$ and the three mapping complexes on the right of the asserted formula are Kan complexes. All these objects belong to the input universe. This uses the Kan-enrichment assertion of the cited statement, not merely its definition of marked maps.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.1 and Corollary 3.1.4.4, applied over a point."
+   }
+  },
+  {
+   "text": "Put $I=\\Delta^1$ and $M=\\operatorname{Map}^\\sharp(A,C^\\natural)$. In simplicial degree $n$, internal-Hom adjunction, permutation of product factors, and the tensor/enrichment adjunction give the bijections\n$$\\begin{aligned}\n\\operatorname{Map}^\\sharp(A,W)_n\n&=\\operatorname{Hom}_+(A\\times(\\Delta^n)^\\sharp,(C^\\natural)^{I^\\sharp})\\\\\n&\\cong\\operatorname{Hom}_+(A\\times(\\Delta^n)^\\sharp\\times I^\\sharp,C^\\natural)\\\\\n&=\\operatorname{Hom}_+(A\\times(\\Delta^n\\times I)^\\sharp,C^\\natural)\\\\\n&\\cong\\operatorname{Hom}_{\\mathrm{sSet}}(\\Delta^n\\times I,M)\n=\\operatorname{Fun}(I,M)_n.\n\\end{aligned}$$\nHere $\\operatorname{Hom}_+$ denotes marked maps. The middle equality holds because an edge in either product is marked precisely when its $A$ coordinate is marked; both simplex coordinates are fully marked. The last adjunction is the defining tensor adjunction for the enrichment in the cited node, with tensor $A\\otimes K=A\\times K^\\sharp$. Both currying operations have their evaluation operations as inverse. Precomposition by $\\Delta(\\alpha)\\times I$ commutes with these bijections, so they give an isomorphism of simplicial sets. Restricting $I$ to either endpoint commutes with evaluation: the map induced by $W\\to C^\\natural$ becomes $\\operatorname{ev}_e:\\operatorname{Fun}(I,M)\\to M$ for $e=0,1$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, internal Hom and sharp mapping properties preceding Remark 3.1.3.1; Corollary 3.1.4.4 for the tensor convention."
+   }
+  },
+  {
+   "text": "In degree $n$, the strict marked pullback defining $H$ says a marked map $A\\times(\\Delta^n)^\\sharp\\to H$ is uniquely a triple $(x,y,w)$ of marked maps into $X^\\natural,Y^\\natural,W$ with $f\\circ x=\\operatorname{ev}_0\\circ w$ and $g\\circ y=\\operatorname{ev}_1\\circ w$. Indeed its underlying map is the coordinatewise pullback map; it is marked because each projection is marked, and the pullback marking consists exactly of edges marked in every coordinate. Replace $w$ by its curried path $\\gamma:\\Delta^n\\times I\\to M$ from step 3. The two equations become $f_*x=\\operatorname{ev}_0\\gamma$ and $g_*y=\\operatorname{ev}_1\\gamma$. This is exactly an $n$-simplex of the displayed right-hand side. Uncurrying $\\gamma$ and applying the pullback universal property gives the inverse bijection. Restrictions act on $x,y,w$ by the same precomposition, so these inverse bijections commute with all faces and degeneracies. They therefore give the asserted simplicial isomorphism, leaving $x,y$ and the specified interval path unchanged.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, sharp mapping definition; degreewise universal property of the marked pullback, written out."
+   }
+  },
+  {
+   "text": "For a functor $q:Q'\\to Q$, precomposition sends the triple of step 4 to $(x\\circ(q^\\natural\\times\\mathrm{id}),y\\circ(q^\\natural\\times\\mathrm{id}),w\\circ(q^\\natural\\times\\mathrm{id}))$. Its curried path is obtained by applying $q^*$ to $\\gamma$ at every interval simplex. Thus the isomorphism commutes with restriction in $Q$. For a strictly commuting map of cospans given by $a:X\\to X'$, $b:Y\\to Y'$, $c:C\\to C'$ with $cf=f'a$ and $cg=g'b$, postcomposition takes the uncurried triple to $(a\\circ x,b\\circ y,c\\circ\\widetilde\\gamma)$, where $\\widetilde\\gamma$ is the marked map into $C^\\natural$ adjoint to $w$. Currying the last coordinate gives $c_*\\gamma$, so both routes around the naturality square send $(x,y,\\gamma)$ to $(a_*x,b_*y,c_*\\gamma)$. These formulas hold in every degree and also for the inverse bijections; they prove the two stated naturalities.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, naturality of the defining internal-Hom and tensor adjunctions; explicit coordinate formulas."
+   }
+  },
+  {
+   "text": "In a larger input universe the same marked products, pullback tuples, marked maps and currying bijections are obtained on the original small objects, with the canonical universe lifts. The marked-model statement supplies the unchanged fibrant-object assertion there. Thus steps 1-5 and their formulas remain valid. Finally set $U=\\operatorname{Map}^\\sharp(A,X^\\natural)$ and $V=\\operatorname{Map}^\\sharp(A,Y^\\natural)$, with maps $f_*:U\\to M$ and $g_*:V\\to M$. The displayed right side is exactly the path-space model $U\\times_{M,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,M)\\times_{\\operatorname{ev}_1,M}V$ meant by the path-space homotopy pullback in the statement. Step 4 identifies it by an isomorphism, and step 2 makes it a Kan complex. No fibration assumption on $f$ or $g$ was used: the only relative lift was against the stipulated endpoint fibration $p$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3 constructions relative to the input universe; path-space convention of the item (cf. Remark A.2.4.5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-point-cartesian-model",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent mapping-complex foundations of the displayed derived adjunction; detailed marked calculation from HTT Section 3.1.3 and Corollary 3.1.4.4, read online but not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +125,45 @@
    "results": "{\"t\": \"2026-10-17T08:41:47Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces into a strict pullback of quasicategories with isofibration legs form a homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"HomotopicalAlgebra.PathObject.trans_\\u03b9\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PrepathObject.trans_P\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"7be05bbc4571b100\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic abstract model path objects, not the sharp marked cotensor formula."
+  },
+  {
+   "tool": "grep",
+   "query": "MapSharp|mapSharp|MarkedSimplicial|marked.*[Cc]otensor",
+   "results": "{\"t\": \"2026-10-17T12:11:10Z\", \"tool\": \"grep\", \"query\": \"MapSharp|mapSharp|MarkedSimplicial|marked.*[Cc]otensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read curry/uncurry in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:146-184, Path in AlgebraicTopology/SimplicialSet/Path.lean:35-51, and KanComplex in AlgebraicTopology/SimplicialSet/KanComplex.lean:35-47. These give abstract adjunctions, edge chains, or Kan fibrancy; none provides the marked model and sharp mapping-complex formula. The marked source grep found no hit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping from a cofibrant object into a fibrant pullback of marked simplicial sets is a Kan complex and preserves the pullback",
+   "results": "{\"t\": \"2026-10-17T12:11:11Z\", \"tool\": \"leansearch\", \"query\": \"Mapping from a cofibrant object into a fibrant pullback of marked simplicial sets is a Kan complex and preserves the pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.IsCofibrant\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"65fd4caf1ab77833\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read curry/uncurry in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:146-184, Path in AlgebraicTopology/SimplicialSet/Path.lean:35-51, and KanComplex in AlgebraicTopology/SimplicialSet/KanComplex.lean:35-47. These give abstract adjunctions, edge chains, or Kan fibrancy; none provides the marked model and sharp mapping-complex formula. The marked source grep found no hit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"curry\"",
+   "results": "{\"t\": \"2026-10-17T12:11:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalClosed\\\", \\\"curry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.curry'\", \"CategoryTheory.MonoidalClosed.uncurry'\", \"CategoryTheory.MonoidalClosed.uncurry'_curry'\", \"CategoryTheory.MonoidalClosed.curryHomEquiv'\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.MonoidalClosed.uncurry\", \"CategoryTheory.MonoidalClosed.curry'_id\", \"CategoryTheory.MonoidalClosed.curry_injective\"], \"digest\": \"3fd2d92c096a04c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read curry/uncurry in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:146-184, Path in AlgebraicTopology/SimplicialSet/Path.lean:35-51, and KanComplex in AlgebraicTopology/SimplicialSet/KanComplex.lean:35-47. These give abstract adjunctions, edge chains, or Kan fibrancy; none provides the marked model and sharp mapping-complex formula. The marked source grep found no hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sharp mapping complex of marked simplicial sets preserves a strict pullback and takes an interval cotensor to a simplicial path space",
+   "results": "{\"t\": \"2026-10-17T12:11:15Z\", \"tool\": \"leanfinder\", \"query\": \"The sharp mapping complex of marked simplicial sets preserves a strict pullback and takes an interval cotensor to a simplicial path space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Path.map\", \"SSet.Path\", \"SSet.Truncated.Path.map\", \"SSet.spine\", \"SSet.Truncated.Path.map_arrow\", \"SSet.StrictSegal.spineToSimplex_map\", \"CategoryTheory.SimplicialNerve\", \"SSet.ι₁\"], \"digest\": \"df464848dfe36567\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read curry/uncurry in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:146-184, Path in AlgebraicTopology/SimplicialSet/Path.lean:35-51, and KanComplex in AlgebraicTopology/SimplicialSet/KanComplex.lean:35-47. These give abstract adjunctions, edge chains, or Kan fibrancy; none provides the marked model and sharp mapping-complex formula. The marked source grep found no hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom of marked simplicial sets has sharp mapping simplices Hom of the source times the fully marked standard simplex, and commutes with interval cotensor",
+   "results": "{\"t\": \"2026-10-17T12:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"The internal Hom of marked simplicial sets has sharp mapping simplices Hom of the source times the fully marked standard simplex, and commutes with interval cotensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.stdSimplex.objMk\", \"SSet.whiskerLeft_app_apply\"], \"digest\": \"0f34164eceb00e23\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read curry/uncurry in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:146-184, Path in AlgebraicTopology/SimplicialSet/Path.lean:35-51, and KanComplex in AlgebraicTopology/SimplicialSet/KanComplex.lean:35-47. These give abstract adjunctions, edge chains, or Kan fibrancy; none provides the marked model and sharp mapping-complex formula. The marked source grep found no hit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-functor-pushout",
@@ -78,5 +189,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-pullback-mapping-space",
+  "worker": "stage1",
+  "summary": "Six steps, no new nodes. Keeps the statement unchanged and reuses the existing marked-model theorem for fibrant objects and its Kan enrichment. Writes out coordinate lifting for H, both inverse degreewise mapping bijections, endpoint compatibility, strict cospan and source naturality, and universe stability. No Lean attachment exists in the project source.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent mapping-complex foundations for the displayed derived coefficient-adjunction, via the inherited functor-pushout infrastructure. The present auxiliary calculation realizes the returned Step 7 identified in blueprint.from.place; the blueprint does not explicitly state this marked formula."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-542f99226",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-542f99226 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, the full statements of both cited nodes (lem-coef-marked-point-cartesian-model, which is in this item's unit, and def-cbc-enhanced-diagrams-cones), the parent's steps 7-9 and lem-coef-infinity-equivalence-arrow-path-object (it supplies the endpoint-fibration hypothesis, with the same W), the unit record, and blueprint prop-coef-integral-exceptional-adjoint paragraph 2. HTT 3.1.3 and Cor 3.1.4.4 are not archived, so I could not read them at the cited place. The worker recorded WANTED and set proof_origin to agent; no step depends on HTT beyond what the cited marked-model statement says. Step 1: B is fibrant coordinatewise, the lift uses only the hypothesized fibration p, and fibrant objects are exactly the C^natural, so H = R^natural. Step 2: the Kan property comes from the simplicial structure (pushout-product axiom, every object cofibrant) and the stated Kan enrichment; it is correctly marked non-elementary. Step 3: the internal-Hom property, then (Delta^n)^sharp x I^sharp = (Delta^n x I)^sharp from the product-marking rule, then the tensor adjunction with tensor A x K^sharp, give Fun(I,M). Step 4: the degreewise marked pullback plus currying turns the endpoint equations into f_*x = ev_0 gamma and g_*y = ev_1 gamma, with uncurrying as inverse. Step 5: naturality in Q and in strictly commuting cospan maps is direct pre- and postcomposition. Step 6: universe stability holds, and 'path-space homotopy pullback' is literally the displayed model (def-cbc convention). Edge cases checked: Q empty gives a point on both sides; C empty or disjoint discrete images give empty on both sides; C a point gives the product mapping complex; degree 0 checked. No new nodes and no duplicate in the DAG (grep of Map^sharp/ev_0 and homotopy-pullback nodes). The statement is unchanged and not weakened, and no SGA source is used. No tool_uses and no fixes."
  }
 }

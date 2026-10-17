@@ -11,9 +11,53 @@
   "lem-coef-pinched-cube-latching",
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\alpha:[p]\\to[q]$ and write $A=\\alpha^*S$ and $R=S_0=\\{a_0<\\cdots<a_r\\}$. Then $R\\subseteq A_0=S_{\\alpha(0)}$, and $A_p=S_{\\alpha(p)}\\subseteq S_q$. For each consecutive pair in R put $T_b=S_q\\cap[a_{b-1},a_b]$ and $U_b=A_p\\cap[a_{b-1},a_b]$. Both endpoints belong to every $S_t$, since they belong to $S_0$; hence $U_b$ is nonempty and $U_b\\subseteq T_b$. Admissibility of R for S gives $T_b\\in\\mathcal F$, so downward closure gives $U_b\\in\\mathcal F$. Thus the old splitting R is admissible for A. Each restricted flag has the specified endpoints and lies in its support, so the subset-poset mapping-set formula of [lem-coef-pinched-cube-latching] makes all these evaluations defined.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, printed p.90 (PDF page 107, zero indexed), first paragraph and boundary-cube bullets; agent expansion of the simplicial compatibility calculation."
+   }
+  },
+  {
+   "text": "For each b, let $X_b=(S_t\\cap[a_{b-1},a_b])_{t=0}^q$ in $\\mathfrak C[\\Delta^{T_b}](a_{b-1},a_b)_q$, and let $Y_b=(A_t\\cap[a_{b-1},a_b])_{t=0}^p$ in the corresponding mapping set for $U_b$. Nerve operators are restriction of functors, as stated in [def-cbc-enhanced-diagrams-cones]; hence $\\alpha^*X_b$ is the image of $Y_b$ under $U_b\\subseteq T_b$. Strict cocone compatibility therefore gives $f_{U_b}(Y_b)=f_{T_b}(\\alpha^*X_b)=\\alpha^*f_{T_b}(X_b)$: the last equality is naturality of the mapping simplicial map of the enriched functor. Composition in D is itself a simplicial map by [lem-coef-simplicial-interval-lifting], so it commutes with $\\alpha^*$ on each factor. Iterating this defining equation over the r factors gives $E_R(A)=\\alpha^*E_R(S)=\\alpha^*E_q(S)$. Here the object at every endpoint agrees with $d_{a_b}$ by compatibility with its singleton face, so the composites have exactly the required source and target.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, printed p.90 (PDF page 107, zero indexed), first paragraph and boundary-cube bullets; agent expansion of the simplicial compatibility calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-face-cocone-splitting-refinement] to the flag A, with old splitting $R=S_0$ and refined splitting $R'=A_0=S_{\\alpha(0)}$. Step 1 checked admissibility of R for A, and $R\\subseteq R'\\subseteq A_0$ contains both endpoints. The family, order, target and compatible functors are unchanged, so all other hypotheses are precisely those of the item. The cited statement gives that $R'$ is admissible and $E_{R'}(A)=E_R(A)$. By definition $E_p(A)=E_{A_0}(A)$, so Step 2 proves $E_p(\\alpha^*S)=\\alpha^*E_q(S)$. For the first face ($q\\geq1$), $\\alpha(0)=1$ and the refinement is $S_0\\subseteq S_1$; the same argument therefore covers the potentially new splitting vertices. For a degeneracy the initial subset stays $S_0$, and repeated flag entries cause no change to the argument. The proof also allows $p=0$ and $q=0$.",
+   "uses": [
+    "lem-coef-face-cocone-splitting-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, printed p.90 (PDF page 107, zero indexed), first paragraph and boundary-cube bullets; agent expansion of the simplicial compatibility calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-pinched-cube-latching",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-face-cocone-splitting-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "§2.2.5, proof of Theorem 2.2.5.1, boundary-cube description, printed p.90; explicit auxiliary argument, not a lemma stated in HTT. Online source read; local archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +86,59 @@
    "results": "{\"t\": \"2026-10-17T08:39:02Z\", \"tool\": \"grep\", \"query\": \"(refin|cocone|split|naturality).*SimplicialThickening|SimplicialThickening.*(refin|cocone|split|naturality)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. Union composition, order-map functoriality, ordinary cocones and split simplicial objects do not state independence or simplicial compatibility of evaluation on a family of faces. Two distinct semantic phrasings were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "(refin|cocone|split|naturality).*SimplicialThickening|SimplicialThickening.*(refin|cocone|split|naturality)",
+   "results": "{\"t\": \"2026-10-17T12:48:09Z\", \"tool\": \"grep\", \"query\": \"(refin|cocone|split|naturality).*SimplicialThickening|SimplicialThickening.*(refin|cocone|split|naturality)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. SimplicialThickening.functor and functorMap act on vertex orders; naturality lemmas assume an already given simplicial map. None constructs evaluation of a compatible face cocone or proves its compatibility when the initial splitting changes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible simplicial enriched functors on faces evaluate flags naturally under faces and degeneracies",
+   "results": "{\"t\": \"2026-10-17T12:48:09Z\", \"tool\": \"leansearch\", \"query\": \"Compatible simplicial enriched functors on faces evaluate flags naturally under faces and degeneracies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.δ_naturality_assoc\", \"CategoryTheory.SimplicialObject.δ_naturality\", \"SSet.δ_naturality_apply\", \"CategoryTheory.SimplicialObject.σ_naturality\", \"CategoryTheory.SimplicialObject.σ\", \"SSet.σ_naturality_apply\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.δ_comp_σ_of_le_assoc\"], \"digest\": \"0fb59b3ce9e1c7f8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. SimplicialThickening.functor and functorMap act on vertex orders; naturality lemmas assume an already given simplicial map. None constructs evaluation of a compatible face cocone or proves its compatibility when the initial splitting changes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\", \"map\"",
+   "results": "{\"t\": \"2026-10-17T12:48:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.functorMap\", \"CategoryTheory.SimplicialThickening.functor_map\"], \"digest\": \"ba7f4dd1605496cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. SimplicialThickening.functor and functorMap act on vertex orders; naturality lemmas assume an already given simplicial map. None constructs evaluation of a compatible face cocone or proves its compatibility when the initial splitting changes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of compatible enriched simplex face functors on a chain of subsets commutes with every simplicial operator",
+   "results": "{\"t\": \"2026-10-17T12:48:16Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of compatible enriched simplex face functors on a chain of subsets commutes with every simplicial operator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.σ_naturality_apply\", \"SSet.PtSimplex.MulStruct.δ_castSucc_castSucc_map\", \"SSet.PtSimplex.MulStruct.δ_map_of_lt\", \"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_map_of_gt\", \"SSet.δ_naturality_apply\", \"SSet.PtSimplex.MulStruct.δ_succ_castSucc_map\", \"SSet.PtSimplex.RelStruct.δ_castSucc_map_assoc\"], \"digest\": \"cbaa7fe57e6f4820\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. SimplicialThickening.functor and functorMap act on vertex orders; naturality lemmas assume an already given simplicial map. None constructs evaluation of a compatible face cocone or proves its compatibility when the initial splitting changes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An enriched functor from the rigidification of the boundary of a simplex is obtained by composing along the initial subset of a flag; refining this subset gives a simplicial map",
+   "results": "{\"t\": \"2026-10-17T12:48:42Z\", \"tool\": \"leanfinder\", \"query\": \"An enriched functor from the rigidification of the boundary of a simplex is obtained by composing along the initial subset of a flag; refining this subset gives a simplicial map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.functor\", \"SSet.PtSimplex.MulStruct.map\", \"CategoryTheory.SimplicialThickening.functorMap\", \"SSet.stdSimplex.objMk\", \"SSet.stdSimplex.faceRepresentableBy\", \"CategoryTheory.SimplicialThickening.functor_map\", \"SSet.Augmented.stdSimplex\", \"SSet.stdSimplex.asOrderHom\"], \"digest\": \"17b79f7ab149ba59\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. SimplicialThickening.functor and functorMap act on vertex orders; naturality lemmas assume an already given simplicial map. None constructs evaluation of a compatible face cocone or proves its compatibility when the initial splitting changes."
+  },
+  {
+   "tool": "grep",
+   "query": "functorMap|functor_map|def functor|def SimplicialNerve",
+   "results": "{\"t\": \"2026-10-17T12:49:41Z\", \"tool\": \"grep\", \"query\": \"functorMap|functor_map|def functor|def SimplicialNerve\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"136\", \"145\", \"156\", \"159\", \"193\"], \"digest\": \"27be25e1e3f33e5b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. SimplicialThickening.functor and functorMap act on vertex orders; naturality lemmas assume an already given simplicial map. None constructs evaluation of a compatible face cocone or proves its compatibility when the initial splitting changes."
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev functorMap|def SimplicialNerve|lemma functor_comp",
+   "results": "{\"t\": \"2026-10-17T12:50:13Z\", \"tool\": \"grep\", \"query\": \"abbrev functorMap|def SimplicialNerve|lemma functor_comp\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\"], \"digest\": \"a99aafcf19d1b323\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. SimplicialThickening.functor and functorMap act on vertex orders; naturality lemmas assume an already given simplicial map. None constructs evaluation of a compatible face cocone or proves its compatibility when the initial splitting changes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rigidification-boundary-cube",
@@ -76,5 +169,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-face-cocone-evaluation-simplicial",
+  "worker": "stage1",
+  "summary": "Kept the statement. Restricted to the smaller final supports while retaining the old splitting, used strict face compatibility and simpliciality of enriched mapping maps and composition to compute evaluation for that splitting, then applied the existing splitting-refinement lemma to the enlarged initial subset. No new nodes or Mathlib leaves; no Lean attachment found.",
+  "blueprint": "Realizes the returned boundary-cube proof simplicial-operator calculation below prop-coef-integral-exceptional-adjoint paragraph 2, through the recorded ancestry; in the current boundary-cube split this is step 5. No change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-b85d3da09",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-b85d3da09 (reviewer sub-agent of L); spot-checked: I read the item, all cited statements (pinched-cube-latching, simplicial-interval-lifting, def-cbc-enhanced-diagrams-cones, face-cocone-splitting-refinement) and the parent boundary-cube proof in full. Compared with the side DAG, the statement, stmt_deps, blueprint and unit are unchanged; the delivery adds only the proof, status, proof_origin, split_report and searches. Step 1 (elementary): the old splitting S_0 sits inside A_0, and each U_b is a subset of T_b that is in the family, so it stays admissible. Step 2 (elementary): the nerve operators are restrictions (def-cbc), the cocone is strictly compatible on U_b inside T_b, and both the enriched functor and the composition are simplicial maps; together these give E_{S_0}(alpha*S) = alpha*E_q(S). Step 3: the refinement lemma, applied to A with R = S_0 and R' = A_0, matches its hypotheses exactly and gives that R' is admissible and E_p(A) = E_{S_0}(A). Small cases checked: p = q = 0; V = {0,1,2} with the first face from {0,2} to {0,1,2}, which gives the union composite; the proper-subset family, which the admissibility hypothesis correctly excludes; degeneracies; |V| = 1. I also checked admissibility of A_0 directly. No new nodes, no duplicates (grep for face-cocone and splitting set), no cycle; the refinement lemma has no proof deps. Every cited statement is in the unit sk-prop-sf-biduality-general, and def-cbc is a definition, so no tool_uses are needed. HTT is not in the local literature, so proof_origin is agent and HTT is listed as WANTED, which is correct. No fixes."
  }
 }

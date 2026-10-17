@@ -3,38 +3,101 @@
  "blueprint": {
   "is": "lem-tw-multiplicativity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weights multiply under tensor product",
- "statement": "If $\\alpha,\\beta$ are eigenvalues of weights $w_1,w_2$ (as in\n[def-tw-eigenvalue]), then $\\alpha\\beta$ has weight\n$w_1+w_2$, and $\\alpha^{-1}$ has weight $-w_1$ when\n$\\alpha\\neq0$.",
+ "statement": "Fix primes $p$ and $\\ell\\ne p$, an integer $a\\ge1$, and $q=p^a>1$. Choose an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ and a field isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$, as in [def-weil-frobenius-module-weights]. For a scalar $\\gamma\\in\\Qlb$, having $\\iota$-weight $w\\in\\mathbf R$ means $|\\iota(\\gamma)|=q^{w/2}$, using the complex absolute value [def-weil-complex-absolute-value] and positive real powers [def-weil-real-power]. If $\\alpha,\\beta\\in\\Qlb$ have $\\iota$-weights $w_1,w_2$, then $\\alpha\\beta$ has $\\iota$-weight $w_1+w_2$, and $\\alpha^{-1}$ has $\\iota$-weight $-w_1$ when $\\alpha\\ne0$. In particular this applies to nonzero Frobenius eigenvalues with those weights.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-multiplicativity.md",
   "place": "node lem-tw-multiplicativity, order 2598"
  },
  "stmt_deps": [
-  "def-tw-eigenvalue"
+  "def-weil-frobenius-module-weights",
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power"
  ],
  "proof": [
   {
-   "text": "In the absolute-value convention of [def-tw-eigenvalue] the\nabsolute value is multiplicative:\n$|\\alpha\\beta|=|\\alpha||\\beta|=q^{(w_1+w_2)/2}$, and\n$|\\alpha^{-1}|=|\\alpha|^{-1}$; the same holds in every finite extension\nand every embedding.",
+   "text": "The field isomorphism preserves products, and the complex absolute value is multiplicative by [def-weil-complex-absolute-value]. Since $q>1$, the addition law for positive real powers in [def-weil-real-power] applies. Substituting the two hypotheses gives\n$$|\\iota(\\alpha\\beta)|=|\\iota(\\alpha)\\iota(\\beta)|=|\\iota(\\alpha)|\\,|\\iota(\\beta)|=q^{w_1/2}q^{w_2/2}=q^{w_1/2+w_2/2}=q^{(w_1+w_2)/2}.$$\nThis is exactly the stated scalar weight condition for the product.",
    "uses": [
-    "def-tw-eigenvalue"
+    "def-weil-complex-absolute-value",
+    "def-weil-real-power"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-multiplicativity.proof.md",
+    "place": "entire proof, product equality"
+   }
+  },
+  {
+   "text": "Suppose $\\alpha\\ne0$. Since $\\iota$ preserves inverses, multiplicativity in [def-weil-complex-absolute-value] gives $|\\iota(\\alpha^{-1})|\\,|\\iota(\\alpha)|=|1|=1$. The given value $|\\iota(\\alpha)|=q^{w_1/2}$ is positive by [def-weil-real-power]. Its reciprocal is $q^{-w_1/2}$: the power addition law gives $q^{w_1/2}q^{-w_1/2}=q^0=1$, where $q^0=\\exp(0)=1$ by that definition. Dividing the first equality by the positive number $q^{w_1/2}$ therefore yields $|\\iota(\\alpha^{-1})|=q^{-w_1/2}=q^{(-w_1)/2}$, which is weight $-w_1$.",
+   "uses": [
+    "def-weil-complex-absolute-value",
+    "def-weil-real-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-multiplicativity.proof.md",
+    "place": "entire proof, inverse equality"
+   }
   }
  ],
  "proof_deps": [
-  "def-tw-eigenvalue"
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-multiplicativity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-multiplicativity.proof.md",
+  "place": "entire proof; the complex-embedding interpretation is fixed by sk-r-real-linear and sk-d-real-weights"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem rpow_add|theorem rpow_neg|theorem norm_mul|theorem norm_inv",
+   "results": "{\"hits\": 25, \"top\": [\"Mathlib/NumberTheory/Padics/PadicNumbers.lean\", \"Mathlib/NumberTheory/Zsqrtd/Basic.lean\", \"Mathlib/RingTheory/Norm/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/Analysis/CStarAlgebra/Basic.lean\", \"Mathlib/Analysis/CStarAlgebra/Basic.lean\", \"Mathlib/Analysis/Complex/Norm.lean\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "constituent identities only: Complex.norm_mul, norm_inv, Real.rpow_add and Real.rpow_neg; no single statement of both weight clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complex absolute value of a product and inverse, and positive real power of a sum of exponents",
+   "results": "{\"hits\": 8, \"top\": [\"Real.rpow_sum_of_pos\", \"Complex.norm_mul\", \"Complex.instPow\", \"Complex.mul_cpow_ofReal_nonneg\", \"Complex.norm_prod\", \"IsAbsoluteValue.map_prod\", \"AbsoluteValue.map_prod\", \"Real.rpow_sum_of_nonneg\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete scalar-weight assertion; constituent identities only"
+  },
+  {
+   "tool": "loogle",
+   "query": "norm_mul",
+   "results": "{\"hits\": 1, \"top\": [\"norm_mul\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete scalar-weight assertion; constituent identities only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an embedding of a field into the complex numbers, if alpha and beta have absolute values q to the powers w1 over 2 and w2 over 2, then their product has weight w1 plus w2 and inverse has weight minus w1",
+   "results": "{\"hits\": 8, \"top\": [\"NumberField.mixedEmbedding.convexBodyLTFactor\", \"NumberField.mixedEmbedding.norm\", \"NumberField.mixedEmbedding.convexBodyLT'Factor\", \"NumberField.mixedEmbedding.convexBodySumFactor\", \"Height.mulHeight₁_inv\", \"NumberField.mixedEmbedding.fundamentalCone.prod_expMapBasis_pow\", \"NumberField.InfinitePlace.prod_eq_abs_norm\", \"NumberField.prod_abs_eq_one\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete scalar-weight assertion; constituent identities only"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem rpow_add |theorem rpow_neg |theorem rpow_pos_of_pos",
+   "results": "{\"hits\": 3, \"top\": [\"116\", \"207\", \"259\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "constituent identities only: Complex.norm_mul, norm_inv, Real.rpow_add and Real.rpow_neg; no single statement of both weight clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicative absolute values and real exponentials imply that norms q^(u/2) and q^(v/2) multiply to q^((u+v)/2), while reciprocals have norm q^(-u/2)",
+   "results": "{\"hits\": 8, \"top\": [\"MulRingNorm.isPowMul\", \"Function.Periodic.norm_qParam\", \"AbsoluteValue.isEquiv_iff_exists_rpow_eq\", \"Rat.AbsoluteValue.exists_nat_rpow_iff_isEquiv\", \"Rat.AbsoluteValue.exists_pos_eq_pow_neg\", \"seminormFromConst_isPowMul\", \"isPowMul_smoothingFun\", \"Complex.norm_cpow_inv_nat\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete scalar-weight assertion; constituent identities only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +119,20 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-r-real-linear"
+ "unit": "sk-r-real-linear",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-tw-multiplicativity",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: def-tw-eigenvalue demands an ell-adic valuation with v(q)=1 although q=p^a and ell differs from p, so v(q)=0 (already q=2, ell=3). Replaced that undefined normalization in this item by the complex-embedding scalar-weight condition of sk-d-real-weights, sk-r-real-linear and def-weil-frobenius-module-weights. Kept both product and inverse conclusions and made real weights explicit as in the unit. Wrote both calculations as elementary steps using the existing complex-absolute-value and real-power Mathlib leaves. No new nodes, no spectrum comparison, no target change. The separate incorrect definition is reported for its owner, not edited.",
+  "blueprint": "Realizes the complete product and inverse calculation in lem-tw-multiplicativity.proof.md, with the complex absolute value required by the inverse-weight sentence of sk-r-real-linear and the formula in sk-d-real-weights. The item is not the unit key node; its realization record is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-9595de9fc",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-9595de9fc (reviewer sub-agent of L); spot-checked: I read the master and main-20261015 sources for lem-tw-multiplicativity, def-tw-eigenvalue, the unit sk-r-real-linear (_section.md and proof), the three cited nodes in full, and both DAG citers. The STATEMENT-DISPUTED finding is correct. def-tw-eigenvalue's normalization v(q)=1 cannot hold because q=p^a is an l-adic unit; for example |2|_3=1 when q=2 and l=3. The repaired statement uses |iota(gamma)|=q^{w/2} with w real, which is the convention of the unit, of def-weil-frobenius-module-weights and of both citers (lem-tw-dual-negation and lem-tw-tate-twist-weight-shift with q_y=q^m). This does not weaken the item: integer weights become real weights, eigenvalues become arbitrary scalars, and both the product and the inverse clauses are kept. The change is named under the Source error heading. Steps 1 and 2 are elementary and use only what the statements of def-weil-complex-absolute-value (|zw|=|z||w|, |1|=1) and def-weil-real-power (positivity, x^{y1+y2}=x^{y1}x^{y2}, x^y=exp(y log x)) actually say. I checked the cases weights 0, q (weight 2), q^{-1}, roots of unity, a non-integral weight, alpha=0 (excluded because q^{w/2}>0), and the tate-twist shift. There are no new nodes and no duplicate in the DAG. No route departure, cycle or SGA use, and no tool_uses. The Mathlib lines named in the report (Complex.norm_mul Norm.lean:73, norm_inv :77, Real.rpow_add :207, rpow_neg :259) are correct. Follow-up for the maintainer: record the def-tw-eigenvalue normalization error in coord/HUMAN.md."
+ }
 }

@@ -11,9 +11,126 @@
   "def-weil-abstract-derived-category",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Limits and colimits in P are computed in every coordinate, with the universal cones assembled coordinatewise. Put Hom_P(X,Y)=prod_j Hom_j(X_j,Y_j), with coordinatewise differential, composition and identities; tensors and cotensors are coordinatewise. Their enriched adjunctions follow because Hom_Ch(K,-), being a right adjoint, preserves products. The accessible-product clause of lem-coef-accessible-pie-closure applies to the small family of locally presentable, hence accessible, categories M_j. Thus P is accessible and cocomplete, which is exactly local presentability under the definition in the statement.",
+   "uses": [
+    "lem-coef-accessible-pie-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; coordinatewise accessible dg product construction."
+   }
+  },
+  {
+   "text": "Give P the coordinatewise classes C,F,W. Retracts and two-out-of-three are checked in each coordinate, and the given functorial factorizations assemble to functorial factorizations in P. For either proposed lifting pair, its left maps lift against its right maps by choosing the coordinate lifts. Conversely, a map having the left lifting property against all right maps is a retract of the left map in its assembled factorization: lift against the right factor with the identity on the domain and the identity on the codomain. Retract closure gives membership in the left class; the dual factorization argument gives the right class. For each j insert its generating maps in coordinate j and the identity of the initial object in every other coordinate. Squares against these inserted maps are exactly squares in coordinate j, since maps from the other initial objects are unique. Their union is a set and its right lifting class is the asserted coordinatewise right class, for each of the two lifting systems. Initial and terminal maps are coordinatewise, so the cofibrant, fibrant and bifibrant objects have exactly the asserted description.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; coordinatewise model factorizations and generating maps."
+   }
+  },
+  {
+   "text": "For a cofibration i and fibration p, the Hom-complex pullback map in P is the product of the component pullback maps: products commute with these pullbacks degree by degree. It is degreewise surjective by coordinatewise choice of preimages. To check the quasi-isomorphism assertion explicitly, for any family of complexes A_j the cycles of prod_j A_j are prod_j Z(A_j), and its boundaries are prod_j B(A_j): choose a preimage of each boundary coordinate. The quotient map prod_j Z^n(A_j) to prod_j H^n(A_j) is surjective by the same choice, with kernel prod_j B^n(A_j). Therefore H^n(prod_j A_j)=prod_j H^n(A_j), naturally. Products consequently preserve quasi-isomorphisms. If i or p is trivial, every component pullback map is a quasi-isomorphism, so their product is too. This proves the enriched model axiom and completes the construction of the combinatorial dg model structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; product Hom-complex model axiom."
+   }
+  },
+  {
+   "text": "We first identify the derived product of any small family of complexes A_j over Z. By lem-coef-projective-chains-monoidal-model their projective model has every complex fibrant, in particular prod_j A_j, and its coherent localization is D(Z). For a cofibrant complex T choose a frame T^bullet by lem-coef-cosimplicial-frame-mapping. The strict identity Hom(T^n,prod_j A_j)=prod_j Hom(T^n,A_j), compatible with the cosimplicial operators, identifies H(T^bullet,prod_j A_j) with the degreewise product of the Kan complexes H(T^bullet,A_j), the identification being postcomposition with the projections. The frame node says these Kan complexes represent Map(qT,q prod_j A_j) and Map(qT,qA_j), naturally in the target, so the maps induced by the projection cone are represented by these product projections. By lem-coef-kan-nerve-small-products a degreewise product of Kan complexes with its projections is a product in spaces, also for an empty or infinite family; mere horn filling would only show that it is Kan. Every object of D(Z) is equivalent to some qT with T cofibrant (frame node), so for every object x the induced map Map(x,q prod_j A_j) to the product of the Map(x,qA_j) is an equivalence, naturally in x. The limit criterion of lem-coef-infinity-yoneda-presheaf-limits therefore shows that the projections exhibit q(prod_j A_j) as the product prod_j^R A_j in D(Z). The cohomology calculation of step 3 shows in addition that the product complex is invariant under componentwise quasi-isomorphisms.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-kan-nerve-small-products",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; derived enrichment product of mapping complexes."
+   }
+  },
+  {
+   "text": "Write B=P_cf and B_j=(M_j)_cf for the full bifibrant dg categories. By step 2, B is literally their product dg category: objects are tuples of bifibrant objects and its Hom complexes are products. Lem-coef-dg-model-mapping-comparison identifies their derived enrichments with P[W_P^{-1}] and M_j[W_j^{-1}], respectively. Lem-coef-dg-enrichment-rectification makes the strict dg projections B to B_j into coherent enriched functors. By lem-coef-enriched-small-products the derived enrichments of the B_j have a product in Cat_{D(Z)}: its objects are tuples, its mapping objects are the products in D(Z), its composition and units with all coherences are those determined by the projections, and enriched functors and coherent transformations into it are exactly families of them into the factors. Hence the projections assemble into an enriched functor F from the derived enrichment of B to this product, unique with these projections.",
+   "uses": [
+    "lem-coef-dg-model-mapping-comparison",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enriched-small-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; bifibrant product presentation."
+   }
+  },
+  {
+   "text": "For bifibrant tuples X,Y, the map on mapping objects induced by F is the canonical map from the class of prod_j Hom_j(X_j,Y_j) to the product in D(Z) of the classes [Hom_j(X_j,Y_j)], since by lem-coef-enriched-small-products the mapping objects of the product are these products and F has the projections as components. It is an equivalence by step 4 and lem-coef-dg-model-mapping-comparison. Thus F is fully faithful. Each object of every localized factor is equivalent to a bifibrant object by the presentation clause of that comparison node. Choose such representatives for the small tuple of target objects; together they are an object of B, whose image is equivalent to the given tuple because equivalences in the product are coordinatewise (lem-coef-enriched-small-products). Thus F is essentially surjective. By the equivalence criterion in lem-coef-dg-enrichment-rectification (fully faithful and essentially surjective enriched functors), F is an enriched equivalence.",
+   "uses": [
+    "lem-coef-dg-model-mapping-comparison",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enriched-small-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; equivalence of product presentation."
+   }
+  },
+  {
+   "text": "For arbitrary X,Y in P choose cofibrant replacements Q_j X_j to X_j and fibrant replacements Y_j to T_j Y_j. They assemble to replacements in P by step 2. Lem-coef-dg-model-mapping-comparison computes the derived mapping object in P by Hom_P(QX,TY)=prod_j Hom_j(Q_j X_j,T_j Y_j) and computes each factor by Hom_j(Q_j X_j,T_j Y_j). Step 4 identifies this product complex with their derived product. The comparison node gives naturality in both variables and coherent independence of the choices, so these are the displayed natural mapping-object identifications. When X is already cofibrant and Y fibrant, use them directly instead of replacements.",
+   "uses": [
+    "lem-coef-dg-model-mapping-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; derived mapping-complex identification."
+   }
+  },
+  {
+   "text": "The functor prod_j(q_j ev_j) from P to the product of the localized factors, assembled by the universal property of lem-coef-enriched-small-products, is an enriched functor inverting W_P: each coordinate projection is dg and sends W_P into W_j, and equivalences in the product are coordinatewise. By lem-coef-enhanced-localization-universal it descends to the evaluation comparison from P[W_P^{-1}]. On B it is exactly the functor F of step 5, under the bifibrant presentations of lem-coef-dg-model-mapping-comparison. The localized inclusion of B is an equivalence by that node, so step 6 proves that this evaluation comparison is an equivalence. Its mapping comparisons come from the same strict dg projections; hence composition and identities, and their coherent homotopies, agree with the coordinate ones. The universal-property node is fully faithful on transformations and higher homotopies, while the mapping-comparison node gives coherent replacement comparisons, so passage to these presentations preserves the specified evaluations and all this coherence. This uses a single-variable localization property, not a finite-variable assertion iterated over an infinite set.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-model-mapping-comparison",
+    "lem-coef-enriched-small-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; evaluation comparison and coherent localization."
+   }
+  },
+  {
+   "text": "If J is empty, P has one object and zero Hom complex. Every model class contains its only arrow, all model axioms are vacuous, and the generating sets in step 2 are empty. The empty product of complexes in step 4 is zero, which is terminal in D(Z); the empty product of enhanced categories has one object with terminal mapping object. Thus the construction and comparison above also give the asserted terminal enriched category and mapping object in this case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; empty small family."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-pie-closure",
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-kan-nerve-small-products",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-dg-model-mapping-comparison",
+  "lem-coef-dg-enrichment-rectification",
+  "lem-coef-enriched-small-products",
+  "lem-coef-enhanced-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, middle derived coefficient adjunction before inverse limit; componentwise product dg model structure, derived mapping complexes, and enriched product localization."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +166,38 @@
    "results": "{\"t\": \"2026-10-17T08:16:55Z\", \"tool\": \"leanfinder\", \"query\": \"Product of model categories localization preserves bifibrant representatives and derived mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.BifibrantObject.homMk\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"6437928602e835e4\"}",
    "date": "2026-10-17",
    "verdict": "no match: Localization/Pi.lean:31 requires a finite index and ordinary localization. ModelCategory/Instances.lean concerns products of arrows inside one category; neither states an arbitrary small product dg-model structure with enhanced mapping objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary small product of combinatorial differential graded model categories presents the product of enriched localizations with product derived Hom complexes",
+   "results": "{\"t\": \"2026-10-17T09:07:36Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary small product of combinatorial differential graded model categories presents the product of enriched localizations with product derived Hom complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.prod\", \"CategoryTheory.Localization.Construction.prodIsLocalization\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_fac\", \"CategoryTheory.Functor.IsLocalization.pi\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod\", \"CategoryTheory.Localization.HasProductsOfShapeAux.limitFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"00dae0cec9947fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give finite ordinary-category product localization or model-category axioms and internal products, not the arbitrary-small dg-enriched product theorem. Localization/Pi.lean:31 has the explicit Finite J hypothesis; ModelCategory/Instances.lean concerns consequences inside an existing model category."
+  },
+  {
+   "tool": "grep",
+   "query": "product.*model.*categor|model.*categor.*product|IsLocalization.pi",
+   "results": "{\"t\": \"2026-10-17T09:07:43Z\", \"tool\": \"grep\", \"query\": \"product.*model.*categor|model.*categor.*product|IsLocalization.pi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"d1f2094acc3aae51\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give finite ordinary-category product localization or model-category axioms and internal products, not the arbitrary-small dg-enriched product theorem. Localization/Pi.lean:31 has the explicit Finite J hypothesis; ModelCategory/Instances.lean concerns consequences inside an existing model category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of a small family of model categories has coordinatewise weak equivalences and derived mapping objects",
+   "results": "{\"t\": \"2026-10-17T09:07:43Z\", \"tool\": \"leansearch\", \"query\": \"The product of a small family of model categories has coordinatewise weak equivalences and derived mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"CategoryTheory.pi\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.Limits.piObj\", \"CategoryTheory.Pi.monoidalCategory\", \"CategoryTheory.Equivalence.pi\"], \"digest\": \"cd47cf6150c4a49e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give finite ordinary-category product localization or model-category axioms and internal products, not the arbitrary-small dg-enriched product theorem. Localization/Pi.lean:31 has the explicit Finite J hypothesis; ModelCategory/Instances.lean concerns consequences inside an existing model category."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory",
+   "results": "{\"t\": \"2026-10-17T09:07:44Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.cm2\", \"HomotopicalAlgebra.ModelCategory.cm3a\"], \"digest\": \"9db1e647f605debb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give finite ordinary-category product localization or model-category axioms and internal products, not the arbitrary-small dg-enriched product theorem. Localization/Pi.lean:31 has the explicit Finite J hypothesis; ModelCategory/Instances.lean concerns consequences inside an existing model category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-section-rectification",
@@ -64,7 +209,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex adjunction before the inverse limit; returned proof step 7: componentwise product dg model structure and its enhanced product presentation.",
+   "place": "Proof paragraph 2, middle derived coefficient-adjunction calculation before the inverse limit: componentwise product dg model structure, derived mapping-complex product, and coherent enriched localization.",
    "via": [
     "lem-coef-quillen-section-rectification",
     "lem-coef-semilinear-derived-sections",
@@ -73,5 +218,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-product-localization",
+  "worker": "stage1",
+  "summary": "Retained the original statement and ancestry; expanded the componentwise model argument and proved the localization equivalence from the existing bifibrant presentation, rather than assuming enriched replacement functors or using a finite-variable localization assertion on an infinite family. The auxiliary product of complexes is verified with the existing projective-complex model and cosimplicial-frame mapping theorem. Exactness, generating-map support and the empty family are explicit. No new nodes or Mathlib leaves. Maintainer-reader repair (Q03, 2026-10-17): step 4 now cites the small-product theorem for Kan complexes and the mapping-space limit criterion; steps 5, 6 and 8 cite the new statement on small products in Cat_{D(Z)} instead of asserting the product universal property. Two statement-only nodes added: lem-coef-kan-nerve-small-products, lem-coef-enriched-small-products.",
+  "blueprint": "Realizes the blueprint proof paragraph 2 at the middle derived coefficient-adjunction calculation: coordinatewise product dg model structure; coordinatewise cofibrant/fibrant replacements and product derived Hom; and the coherent enriched localization equivalence before the inverse limit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-25bc7a504",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-25bc7a504 (reviewer sub-agent of L); spot-checked: Read the item, all nine steps, every cited statement (accessible-pie-closure, projective-chains-monoidal-model, cosimplicial-frame-mapping, dg-model-mapping-comparison, dg-enrichment-rectification, enhanced-localization-universal, def-weil-abstract-derived-category), the parent's use of the item (quillen-section-rectification step 7) and blueprint main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2. The statement is true and not weakened. Small cases checked: J empty (terminal category, mapping object 0), a singleton, finite and infinite J. Route: everything is in unit sk-prop-sf-biduality-general; no tool uses. Steps 1-3 are correct: the generator trick with the identity on the initial object in the other coordinates works, and products of complexes are exact. Steps 7 and 9 are correct. Two citation faults (C1/C4), repaired. (1) Step 4 claimed that an arbitrary small degreewise product of Kan complexes is the product in S = N_hc(Kan) and justified it only by coordinatewise horn filling, which shows only that the product is Kan. The DAG treats the pullback case as a theorem, and no node states the small-product case. Step 4 also used the mapping-space limit criterion without citing it. Fix: new statement-only node lem-coef-kan-nerve-small-products, and step 4 now also cites lem-coef-infinity-yoneda-presheaf-limits. (2) Steps 5, 6 and 8 asserted the existence, description and universal property of small products in Cat_{D(Z)} (tuples, product mapping objects, coherent data into the product being families), which the cited rectification and comparison nodes do not state. Fix: new statement-only node lem-coef-enriched-small-products (Gepner-Haugseng algebroid argument; includes the empty family), cited in steps 5, 6 and 8. proof_deps is updated; the statement is unchanged. Both new nodes are tested on small cases, have blueprint.from set to prop-coef-integral-exceptional-adjoint paragraph 2 with via [item, ...], same_as [], and no cycle. Their Mathlib grep searches were run and recorded; LeanSearch could not be reached from this server and is recorded as unavailable. lem-coef-brown-localization-products is the unenriched analogue, not a duplicate. Details are in review.md.; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

@@ -12,9 +12,79 @@
   "lem-coef-algebroid-categorical-homotopy",
   "lem-coef-algebroid-equivalence-nerve"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P=[p]$ and $Q=[q]$, viewed only as finite discrete object spaces. By the spatial-action formula, $A_{p,q}=E^p_{\\mathcal V}\\diamond E^q_{\\mathcal S}$ has objects $(i,j)\\in P\\times Q$ and every mapping object is $*\\odot\\mathbf1\\simeq\\mathbf1$; its compositions and units are the unit constraints. The same description holds for $B_{q,p}=E^q_{\\mathcal V}\\diamond E^p_{\\mathcal S}$ on $Q\\times P$. Define $t_{p,q}:A_{p,q}\\to B_{q,p}$ by $(i,j)\\mapsto(j,i)$ and the identity on every unit mapping object. In the defining operadic diagrams this sends a string $((i_0,j_0),\\ldots,(i_r,j_r))$ to $((j_0,i_0),\\ldots,(j_r,i_r))$, retaining the order of the $r$ unit factors. Hence it commutes with each inert restriction, composition and unit insertion, including their coherences. The same rule is its inverse. For finite-set maps $f:P\\to P'$ and $g:Q\\to Q'$, both composites of the naturality square send $(i,j)$ to $(g(j),f(i))$ and have identity unit maps. Thus the $t_{p,q}$ are an equivalence of the two coherent diagrams, with their parameters exchanged; no permutation of tensor factors of $\\mathcal V$ is involved.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-categorical-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, completeness-square tensor exchange; finite indiscrete construction of Definition 5.1.1 and spatial action of Corollary 4.3.17"
+   }
+  },
+  {
+   "text": "Apply the natural cotensor adjunction twice, using $t_{p,q}$ between them:\n$$I_p(C^{E^q_{\\mathcal S}})\\simeq\\operatorname{Map}(A_{p,q},C)\\simeq\\operatorname{Map}(B_{q,p},C)\\simeq I_q(C^{E^p_{\\mathcal S}}).$$\nThe middle equivalence is precomposition with $t_{p,q}^{-1}$. The outside equivalences are those of the mapping-space bifunctors in the cited adjunction, not separate choices in each bidegree. Step 1 gives their middle comparison as a transformation of coherent diagrams. Consequently the composite is natural in $C$ and in both finite-set parameters. Restricting those parameters to the simplex category proves compatibility with every face, degeneracy and their higher coherence, and yields the required equivalence of bisimplicial spaces with exchanged directions.",
+   "uses": [
+    "lem-coef-algebroid-categorical-homotopy",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary 4.3.17 and Definition 4.3.18; Theorem 5.6.2, displayed equivalences in the final completeness paragraph, with p in place of 1"
+   }
+  },
+  {
+   "text": "Fix $p$ and regard step 2 as a coherent transformation of simplicial spaces indexed by $q$. It is an equivalence in that functor category by the vertexwise-equivalence criterion of the cited functor-cone calculus; therefore it has a coherent inverse. Realizing the two transformations gives inverse maps: the composites are identities because the colimit construction takes the two inverse homotopies to homotopies. Equivalently, precomposing cocones with these inverse transformations gives inverse equivalences of their cocone categories, carrying initial objects to initial objects. We obtain\n$$|I_p(D_\\bullet)|\\simeq|I_\\bullet(C^{E^p_{\\mathcal S}})|=I(C^{E^p_{\\mathcal S}}).$$\nHere the realization on the right is precisely the one in the equivalence-nerve statement, so it exists under the stated smallness convention; the equivalent diagram on the left has a colimit by the cocone argument. The indexing category is the small simplex category, and all the spaces are the small mapping spaces stipulated in the item. The construction is natural in $C$ and in $p$ because step 2 was a transformation in those parameters as well.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, final completeness paragraph: passage from the simplicial exchange to geometric realization; expanded universal-property argument"
+   }
+  },
+  {
+   "text": "Let $s_p:E^p\\to E^0$ be collapse, with its indicated enrichment in each occurrence. The map in the item before realization, in degree $q$, is precomposition by $s_p\\diamond1:A_{p,q}\\to A_{0,q}$. Under the swaps of step 1 it becomes $1\\diamond s_p:B_{q,p}\\to B_{q,0}$: both composite maps send $(i,j)$ first to the remaining coordinate $j$, and all their unit mapping maps are identities. Under the natural adjunction of step 2, precomposition by $1\\diamond s_p$ is postcomposition by $C^{s_p}:C^{E^0_{\\mathcal S}}\\to C^{E^p_{\\mathcal S}}$. Identify $C^{E^0_{\\mathcal S}}\\simeq C$ by the cited unit-cotensor equivalence. Thus this map is exactly $I_q(a_p)$. These comparisons are coherent in $q$ by the same finite-set naturality square. Realizing gives exactly $I(a_p)$ under step 3, including the source identification $|I_0(D_\\bullet)|\\simeq I(C)$ obtained by setting $p=0$.",
+   "uses": [
+    "lem-coef-algebroid-categorical-homotopy",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, identification of the left vertical map in the completeness square; explicit collapse-coordinate calculation"
+   }
+  },
+  {
+   "text": "Both $[p]$ and $[0]$ are nonempty finite sets, even when $p=0$. The finite-set assertion of the categorical-homotopy node makes $s_p:E^p_{\\mathcal S}\\to E^0_{\\mathcal S}$ a categorical equivalence. Its cotensor assertion therefore makes $C^{s_p}$ a categorical equivalence of $\\mathcal V$-algebroids. Using the unit identification, the same holds for $a_p$. That node also says that every categorical equivalence is fully faithful and essentially surjective. Apply the equivalence-nerve node's assertion that a fully faithful essentially surjective functor induces an equivalence on $I$. It gives that $I(a_p)$, and hence the realized map in step 4, is an equivalence. Only presentable monoidality of $\\mathcal V$ was used for the action and cotensor results; neither this application nor the nerve criterion requires $C$ to be complete or $\\mathcal V$ to be symmetric monoidal.",
+   "uses": [
+    "lem-coef-algebroid-categorical-homotopy",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary 5.5.6 for nonempty finite sets, Lemma 5.5.7, Proposition 5.5.3 and Proposition 5.3.6, as used in Theorem 5.6.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-algebroid-categorical-homotopy",
+  "lem-coef-algebroid-equivalence-nerve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Expanded argument following Theorem 5.6.2, last completeness paragraph, and Corollary 4.3.17, Definition 4.3.18, Lemma 5.5.7, Proposition 5.3.6. Read online; paper not archived in literature/ (WANTED in report)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +120,45 @@
    "results": "{\"t\": \"2026-10-17T08:37:05Z\", \"tool\": \"leanfinder\", \"query\": \"Interchanging two walking indiscrete category parameters in an enriched category cotensor induces an equivalence of bisimplicial mapping spaces compatible with the degeneracy map on realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.comp_id\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.assoc\", \"SSet.instMonoidalClosed\"], \"digest\": \"b965e5c92e95baff\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary simplicial enrichment/nerve and simplicial-opposite equivalences, not a bisimplicial mapping-space exchange for operadic algebroids. Read Enriched/Basic.lean:51-68 and AlgebraicTopology/SimplicialNerve.lean:187-204; ordinary categorical products of standard simplices do not supply the spatial algebroid action or its coherent parameter exchange."
+  },
+  {
+   "tool": "grep",
+   "query": "algebroid|cotensor|Rezk",
+   "results": "{\"t\": \"2026-10-17T12:47:45Z\", \"tool\": \"grep\", \"query\": \"algebroid|cotensor|Rezk\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary enriched categories, simplicial nerves, standard-simplex products or opposites of diagram categories, not the spatial action on operadic algebroids and its equivalence-nerve exchange. Read Enriched/Basic.lean:51-68, SimplicialNerve.lean:187-204, SimplicialSet/ProdStdSimplex.lean:60-80, and SimplicialCategory/SimplicialObject.lean:30-45."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equivalence nerve of an enriched infinity category cotensored by an indiscrete category has a natural symmetry interchanging its two simplicial parameters",
+   "results": "{\"t\": \"2026-10-17T12:47:45Z\", \"tool\": \"leansearch\", \"query\": \"The equivalence nerve of an enriched infinity category cotensored by an indiscrete category has a natural symmetry interchanging its two simplicial parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Equivalence.symmEquiv\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_symm_apply\", \"CategoryTheory.cosimplicialSimplicialEquiv\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.Equivalence.symmEquiv_inverse\", \"CategoryTheory.simplicialCosimplicialAugmentedEquiv\", \"CategoryTheory.Equivalence.symmEquiv_functor\"], \"digest\": \"f9b9df8279b5eaa0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary enriched categories, simplicial nerves, standard-simplex products or opposites of diagram categories, not the spatial action on operadic algebroids and its equivalence-nerve exchange. Read Enriched/Basic.lean:51-68, SimplicialNerve.lean:187-204, SimplicialSet/ProdStdSimplex.lean:60-80, and SimplicialCategory/SimplicialObject.lean:30-45."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"cotensor\"",
+   "results": "{\"t\": \"2026-10-17T12:47:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"cotensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary enriched categories, simplicial nerves, standard-simplex products or opposites of diagram categories, not the spatial action on operadic algebroids and its equivalence-nerve exchange. Read Enriched/Basic.lean:51-68, SimplicialNerve.lean:187-204, SimplicialSet/ProdStdSimplex.lean:60-80, and SimplicialCategory/SimplicialObject.lean:30-45."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural equivalence I_p(C raised to E_q) equals I_q(C raised to E_p) induces equivalences on realization and identifies the collapse map with the equivalence nerve of a cotensor map",
+   "results": "{\"t\": \"2026-10-17T12:47:56Z\", \"tool\": \"leanfinder\", \"query\": \"A natural equivalence I_p(C raised to E_q) equals I_q(C raised to E_p) induces equivalences on realization and identifies the collapse map with the equivalence nerve of a cotensor map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex.isoNerve\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"SSet.stdSimplex.isoNerve\", \"SSet.stdSimplex.isoNerve_inv_app_apply\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\"], \"digest\": \"5323260640d465ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary enriched categories, simplicial nerves, standard-simplex products or opposites of diagram categories, not the spatial action on operadic algebroids and its equivalence-nerve exchange. Read Enriched/Basic.lean:51-68, SimplicialNerve.lean:187-204, SimplicialSet/ProdStdSimplex.lean:60-80, and SimplicialCategory/SimplicialObject.lean:30-45."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spatial cotensor adjunction for enriched infinity algebroids exchanges the two indiscrete category parameters in a bisimplicial equivalence nerve",
+   "results": "{\"t\": \"2026-10-17T12:47:56Z\", \"tool\": \"leanfinder\", \"query\": \"Spatial cotensor adjunction for enriched infinity algebroids exchanges the two indiscrete category parameters in a bisimplicial equivalence nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.nerveAdjunction\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialThickening.functor\", \"SSet.stdSimplex.isoNerve\"], \"digest\": \"b1afc9a4d7f4b547\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary enriched categories, simplicial nerves, standard-simplex products or opposites of diagram categories, not the spatial action on operadic algebroids and its equivalence-nerve exchange. Read Enriched/Basic.lean:51-68, SimplicialNerve.lean:187-204, SimplicialSet/ProdStdSimplex.lean:60-80, and SimplicialCategory/SimplicialObject.lean:30-45."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -77,5 +182,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-cotensor-nerve-exchange",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the coordinate swap at the level of the defining operadic diagrams, applied the existing natural cotensor adjunction, justified realization by inverse coherent transformations, calculated the collapse map, and used the existing categorical-equivalence and equivalence-nerve criteria. All facts reused from existing nodes; no new nodes or Mathlib leaves. Logged five fresh Mathlib searches and checked the returned ordinary enriched/simplicial constructions.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, retained master proof paragraph 2: finite-level mapping-complex adjunction before R lim, via the recorded enriched-localization/tensor-calculus/completion ancestry. Steps 1-4 supply the E-parameter exchange and left vertical identification in the GH Theorem 5.6.2 completeness square used by lem-coef-algebroid-completion; step 5 supplies its invertibility. The current main-20261015 ancestor retains the same adjunction conclusion but has no proof section, so the exact paragraph reference is to the retained master proof, not an invented current paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General vertexwise-equivalence and cocone calculus for the small simplex-indexed diagrams in step 3; it does not replace any geometric step of the biduality unit, and no algebroid-specific result of the unit states this general criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-10a2cd309",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-10a2cd309 (reviewer sub-agent of L); spot-checked: Read the item and all four cited statements in full: def-coef-complete-algebroid, lem-coef-algebroid-categorical-homotopy, lem-coef-algebroid-equivalence-nerve and lem-cbc-enhanced-functor-cone-calculus. Also read the citer lem-coef-algebroid-completion, which uses the item at p=1 for the left vertical map. GH arXiv:1312.3178v4 is not in literature/, so I fetched it read-only and checked it at the cited places. Cor 4.3.17 and Def 4.3.18 give the tensor and cotensor with Map(D,C^X)=Map(D⊗X,C). Cor 5.5.6, Lemma 5.5.7 and Prop 5.3.6 match. The last paragraph of the proof of Thm 5.6.2 is ι1 C^{E^n}≃Map(E^1⊗E^n,C)≃ιn C^{E^1}, with the left vertical map induced by C→C^{E^1} and inverted by Prop 5.3.6. The item is this with p in place of 1. Hypotheses match: V presentably monoidal, C arbitrary, no completeness, no symmetry. The statement is unchanged and not weakened. Step 1: swap (i,j)↦(j,i) on unit mapping objects; it permutes no V-factors and is natural in finite-set maps. It is described at the level of operadic strings, which goes slightly past the cited description by objects and mapping objects; I accept it as elementary for constant unit diagrams. Step 2: double natural adjunction, correct. Step 3: vertexwise equivalence plus cocone transfer, correct. Step 4: s_p◇1 corresponds to 1◇s_p, which is postcomposition by C^{s_p}, giving I_q(a_p). I checked on objects that both composites send (i,j) to j, and the directions are right. Step 5: [p]→[0] is a nonempty finite-set map, so this is a categorical equivalence, then fully faithful and essentially surjective, so I(a_p) is an equivalence. Edge cases checked: p=0 or q=0, p=q, degeneracies, empty C, non-symmetric V. No new nodes. No cycle and no missing or merged ids among 1099 transitive deps. proof_deps equals the union of the uses. The cotensor search over dag/nodes found no duplicate, and the item restates no parent clause. The route is in-unit except one tool use, lem-cbc-enhanced-functor-cone-calculus (a generic functor/cocone criterion), which I accept. No SGA. The proof is marked agent-written with GH listed as WANTED, which is appropriate. No fixes."
  }
 }

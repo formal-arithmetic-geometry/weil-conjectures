@@ -3,26 +3,55 @@
  "blueprint": {
   "is": "lem-fd-l2-plancherel-shift",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The $L^2$-weight shifts by one under the Fourier transform",
- "statement": "Let $\\mathcal F$ be a Weil complex on $\\mathbf A^1_{k_0}$ and let\n$\\mathcal G=\\operatorname{FT}_\\psi(\\mathcal F)$. Then, in the\n$L^2$-weight parameter $\\|\\cdot\\|$ of\n[def-wf-l2-norm],\n\n$$\n\\|\\mathcal G\\|\\;=\\;\\|\\mathcal F\\|+1.\n$$",
+ "statement": "Let $k_0=\\mathbf F_q$, let $\\ell\\ne\\operatorname{char}(k_0)$, fix a field embedding $\\iota:\\overline{\\mathbf Q}_\\ell\\hookrightarrow\\mathbf C$, and let $\\psi:k_0\\to\\overline{\\mathbf Q}_\\ell^\\times$ be the nontrivial additive character of [def-fd-additive-character]. Use the Fourier–Deligne transform of [def-fd-transform] with its rank-one shift $[1]$.\n\nLet $\\mathcal F$ be a Weil complex ([def-wf-weil-category], with $\\overline{\\mathbf Q}_\\ell$-coefficients) on $\\mathbf A^1_{k_0}$ and let\n$\\mathcal G=\\operatorname{FT}_\\psi(\\mathcal F)$. Then, in the\n$L^2$-weight parameter $\\|\\cdot\\|$ of\n[def-wf-l2-norm],\n\n$$\n\\|\\mathcal G\\|\\;=\\;\\|\\mathcal F\\|+1.\n$$\nThe weight and the addition by $1$ are read in $\\mathbf R\\cup\\{-\\infty,+\\infty\\}$; in particular $-\\infty+1=-\\infty$ and $+\\infty+1=+\\infty$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/lem-fd-l2-plancherel-shift.md",
   "place": "node lem-fd-l2-plancherel-shift, order 2778"
  },
  "stmt_deps": [
-  "def-wf-l2-norm"
+  "def-wf-l2-norm",
+  "def-fd-transform",
+  "def-fd-additive-character",
+  "def-wf-weil-category"
  ],
  "proof": [
   {
-   "text": "By the Plancherel identity of [cor-fd-plancherel] the sums of\nsquares of the trace functions satisfy\n\n$$\n\\|f_{\\mathcal G}\\|_m^2=q^m\\|f_{\\mathcal F}\\|_m^2\n$$\n\nfor every $m$; substituting into the defining ratio of\n[def-wf-l2-norm] shows that the limit superior is positive for a\nparameter $\\beta$ exactly when it is positive for\n$\\beta-1$: the two $L^2$-weights satisfy\n$\\|\\mathcal G\\|=\\|\\mathcal F\\|+1$.",
+   "text": "For $m\\ge1$ put $A_m=\\|f_{\\mathcal F}\\|_m^2$ and $B_m=\\|f_{\\mathcal G}\\|_m^2$, using the squared trace sums of [def-wf-l2-norm], with the same embedding $\\iota$ for both. Apply [cor-fd-plancherel] to the Weil complex $K=\\mathcal F$ on the affine line and to $n=m$. Its left sum is $B_m$ and its right sum is $q^mA_m$, so $B_m=q^mA_m$ for every $m\\ge1$. This uses the nontrivial character and the rank-one Fourier normalization fixed in the statement; it needs no purity or nonzero hypothesis on $\\mathcal F$.",
    "uses": [
     "cor-fd-plancherel",
     "def-wf-l2-norm"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/lem-fd-l2-plancherel-shift.proof.md",
+    "place": "First displayed equality: Plancherel on squared trace sums"
+   }
+  },
+  {
+   "text": "Fix $\\beta\\in\\mathbf R$. Since $q>1$, all denominators below are positive. Substitute the identity from step 1 and cancel powers of the same positive real base:\n$$\\frac{B_m}{q^{m(\\beta+1)}}=\\frac{q^mA_m}{q^{m(\\beta+1)}}=\\frac{A_m}{q^{m\\beta}}=\\frac{A_m}{q^{m((\\beta-1)+1)}}.$$\nThe two normalized sequences are termwise identical for every $m\\ge1$; hence their limit superiors, including the value $+\\infty$, are identical. Define $S_{\\mathcal F}$ and $S_{\\mathcal G}$ to be the sets of real parameters in the supremum of [def-wf-l2-norm]. The identity gives $\\beta\\in S_{\\mathcal G}$ if and only if $\\beta-1\\in S_{\\mathcal F}$, so $S_{\\mathcal G}=\\{\\alpha+1:\\alpha\\in S_{\\mathcal F}\\}$.",
+   "uses": [
+    "def-wf-l2-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/lem-fd-l2-plancherel-shift.proof.md",
+    "place": "Substitution into the defining ratio, with the change of parameter written out"
+   }
+  },
+  {
+   "text": "Take suprema as prescribed by [def-wf-l2-norm]. If $S_{\\mathcal F}$ is empty, then so is $S_{\\mathcal G}$ and both weights are $-\\infty$. If $S_{\\mathcal F}$ is unbounded above, then its translate is unbounded above and both weights are $+\\infty$. Otherwise put $s=\\sup S_{\\mathcal F}\\in\\mathbf R$. Every $\\alpha\\in S_{\\mathcal F}$ satisfies $\\alpha+1\\le s+1$, so $s+1$ is an upper bound for $S_{\\mathcal G}$. Conversely, if $u$ is any real upper bound for $S_{\\mathcal G}$, then $u-1$ is an upper bound for $S_{\\mathcal F}$, giving $s\\le u-1$ and $s+1\\le u$. Thus $\\sup S_{\\mathcal G}=s+1$ also in the finite case. These three cases prove $\\|\\mathcal G\\|=\\|\\mathcal F\\|+1$.",
+   "uses": [
+    "def-wf-l2-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/lem-fd-l2-plancherel-shift.proof.md",
+    "place": "Final supremum equality, including empty and unbounded sets"
+   }
   }
  ],
  "proof_deps": [
@@ -31,12 +60,69 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/lem-fd-l2-plancherel-shift.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-fourier-weight/lem-fd-l2-plancherel-shift.proof.md",
+  "place": "Entire proof; expanded algebraic substitution and least-upper-bound argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "l2Weight|fourierTransform|plancherel",
+   "results": "Hits inspected: Mathlib/MeasureTheory/Measure/CharacteristicFunction.lean, Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean, Mathlib/MeasureTheory/Measure/CharacteristicFunction/TaylorExpansion.lean, Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/Analysis/Complex/Circle.lean, Mathlib/Analysis/Complex/Circle.lean, Mathlib/Analysis/Complex/Circle.lean, Mathlib/Analysis/Complex/Circle.lean.",
+   "date": "2026-10-17",
+   "verdict": "no match: Fourier analysis and L-series results do not state the Fourier–Deligne weight identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "EReal, sSup",
+   "results": "No hits; service reports unknown identifier sSup.",
+   "date": "2026-10-17",
+   "verdict": "no match; malformed name query, replaced by OrderIso.map_sSup"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform shifts L2 weight by one",
+   "results": "Hits inspected: Fourier.fourierIntegral_comp_add_right, SchwartzMap.toLp_fourierTransform_eq, MeasureTheory.Lp.fourier_toTemperedDistribution_eq, MeasureTheory.Lp.norm_fourier_eq, SchwartzMap.toLp_fourier_eq, MeasureTheory.Lp.fourierTransformₗᵢ, FourierTransform.fourierₗ, SchwartzMap.toLp_fourierInv_eq.",
+   "date": "2026-10-17",
+   "verdict": "no match: analytic Fourier integral and Lp-space results, not Weil complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The L2 weight defined as the supremum of exponents with positive limsup of normalized squared trace sums increases by one under Fourier Deligne transform",
+   "results": "Hits inspected: WeakFEPair.k, Real.pow_mul_norm_iteratedFDeriv_fourier_le, VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le, VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le, Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le, WeakFEPair.ε, VectorFourier.norm_iteratedFDeriv_fourierPowSMulRight, HurwitzKernelBounds.f_nat.",
+   "date": "2026-10-17",
+   "verdict": "no match: Fourier analysis and L-series results do not state the Fourier–Deligne weight identity"
+  },
+  {
+   "tool": "grep",
+   "query": "l2Weight|Fourier.Deligne|traceEnergy",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "OrderIso.map_sSup",
+   "results": "OrderIso.map_sSup, Mathlib.Order.CompleteLattice.Basic; arbitrary order isomorphisms preserve suprema.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; only a general order fact, whose needed special case is proved elementarily in step 3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonnegative sequence a n and q greater than one, multiplying a n by q to the n translates by one the supremum of real beta such that limsup of a n divided by q to n times beta plus one is positive",
+   "results": "Hits inspected: ExpGrowth.expGrowthSup, Monotone.expGrowthSup_comp_mul, ExpGrowth.expGrowthSup_def, ExpGrowth.expGrowthSup_exp, ExpGrowth.expGrowthSup_of_eventually_ge, Monotone.expGrowthInf_comp_mul, LinearGrowth.linearGrowthSup_const_mul_self, ExpGrowth.expGrowthSup_pow.",
+   "date": "2026-10-17",
+   "verdict": "no match: ExpGrowth.expGrowthSup is defined through a logarithmic limsup; this is neither the stated weight definition nor a Fourier–Deligne theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_sSup|def expGrowthSup|expGrowthSup_def|norm_fourier_eq",
+   "results": "Mathlib/Analysis/Asymptotics/ExpGrowth.lean:41,47 defines logarithmic exponential growth; Mathlib/Analysis/Fourier/LpSpace.lean:89 is analytic L2 norm preservation; other map_sSup hits concern ideals and order continuity.",
+   "date": "2026-10-17",
+   "verdict": "no match: no Weil complexes or Fourier–Deligne trace energies"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -116,5 +202,20 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-p-dl-a1-fourier-weight"
+ "unit": "sk-p-dl-a1-fourier-weight",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fd-l2-plancherel-shift",
+  "worker": "stage1",
+  "summary": "Expanded Plancherel into a termwise normalized-sequence identity, then proved the supremum translation directly including empty and unbounded parameter sets. Made the ambient finite-field, embedding, nontrivial-character and Fourier-normalization conventions explicit. Current Lean source lacks the audited theorem; no attachment or new nodes.",
+  "blueprint": "The original proof first invokes cor-fd-plancherel, then substitutes in def-wf-l2-norm; steps 1, 2, 3 realize respectively that identity, the beta-to-beta-minus-one substitution, and its supremum conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-6970a99c5",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-6970a99c5 (reviewer sub-agent of L); spot-checked: Read the item in full against the blueprint statement and proof (main-20261015 order 3122 and master order 2778, which agree), the unit sk-p-dl-a1-fourier-weight, the sec-fourier-transform conventions (nontrivial psi, Laumon shift [r]) and the full statements of cor-fd-plancherel (with its sk-cor-plancherel source), def-wf-l2-norm (with its blueprint_update), def-fd-transform, def-fd-additive-character, def-fd-trace-function and def-wf-weil-category. The delivery has no new nodes. Statement: the added conventions (q, l != p, iota, the nontrivial psi, the r=1 shift, extended-real reading) are the chapter's fixed conventions, not new hypotheses. The trivial-character case confirms they are needed: B_m=q^{3m} while q^m A_m=q^{2m}. A Weil complex is in D^b_c, so it is constructible as def-wf-l2-norm requires, and A^1 is a smooth geometrically connected affine curve. The coefficients are the Qbar_l-version throughout; no base change is involved. Step 1 uses only Plancherel's statement: t_K is the alternating trace sum and X_0(k_m)=F_{q^m}, giving B_m=q^m A_m. Step 2 is a correct termwise identity B_m/q^{m(beta+1)}=A_m/q^{m((beta-1)+1)}, so S_G=S_F+1, with the shift in the right direction. Step 3 handles the empty, unbounded and bounded cases correctly. Both are genuinely elementary. Small cases: delta_0 gives weights -1 and 0; E[1] gives 0 and 1, since FT(E[1])=delta_0(-1); the zero complex gives -infinity on both sides. Route: cor-fd-plancherel is in sk-cor-plancherel, which the unit uses. No tool_uses, no SGA, no cycle. Duplicates: rg over dag/nodes finds only cor-fd-l2-plancherel-middle-extension, a stronger statement that cites this item. FIX (B3): the statement uses 'Weil complex' but no cited node defines it. I added [def-wf-weil-category] (Qbar_l-coefficients) to the statement and to stmt_deps in fixes/dag/nodes/sec-deligne-laumon-a1/lem-fd-l2-plancherel-shift.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }

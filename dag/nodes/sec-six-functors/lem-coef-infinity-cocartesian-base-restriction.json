@@ -11,9 +11,93 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an inner-horn lifting problem against $r$ with prescribed simplex $\\beta:\\Delta^n\\to T$, project its horn to $E$. Its image under $p$ is $h\\beta$ on the horn, so the inner-fibration property of $p$ supplies an $E$-simplex over exactly $h\\beta$. Pairing it with $\\beta$ gives a filler in the degreewise pullback $P$. Thus $r$ is an inner fibration. For an inner horn in $P$ without a prescribed base simplex, first fill its $T$-component using that $T$ is a quasicategory and apply the same construction. Hence $P$ is a quasicategory. The operators on these pairs act coordinatewise by [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.2.1 and Proposition 2.4.2.3(2), pullback of an inner fibration and quasicategory."
+   }
+  },
+  {
+   "text": "Let $v$ be any edge of $P$ whose $E$-component $j(v)$ is $p$-cocartesian. Consider a lifting problem $a:\\Lambda_0^n\\to P$, $\\beta:\\Delta^n\\to T$ for $r$, with $n\\geq2$, $a|_{\\{0,1\\}}=v$ and $ra=\\beta|_{\\Lambda_0^n}$. Its projection $ja$ is a horn in $E$ over $h\\beta$, with distinguished edge $j(v)$. The horn-cocartesian definition in [def-coef-infinity-fibrations] gives a filler $\\gamma:\\Delta^n\\to E$ with $p\\gamma=h\\beta$ and $\\gamma|_{\\Lambda_0^n}=ja$. The pair $(\\beta,\\gamma)$ is a simplex of $P$ extending $a$ over $\\beta$. This verifies every required outer horn, so $v$ is $r$-cocartesian.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.3(2), opposite-category dual, written directly with the outer-horn definition."
+   }
+  },
+  {
+   "text": "For a vertex $(t,x)$ of $P$ and an edge $\\alpha:t\\to t\\prime$ in $T$, the stated hypothesis gives a $p$-cocartesian edge $e:x\\to y$ with $p(e)=h(\\alpha)$ exactly. Its endpoints satisfy $p(y)=h(t\\prime)$, so $(\\alpha,e)$ is an edge of the degreewise pullback with source $(t,x)$. Step 2 makes it $r$-cocartesian. Together with the inner fibration in step 1, this is precisely the cocartesian-fibration definition in [def-coef-infinity-fibrations].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.2.1, cocartesian dual; image-edge form of the base-change argument in Proposition 2.4.2.3(2)."
+   }
+  },
+  {
+   "text": "For reflection let $v:(t,x)\\to(t\\prime,y)$ be $r$-cocartesian, and put $\\alpha=r(v)$. Choose a $p$-cocartesian $e:x\\to y\\prime$ over $h(\\alpha)$ as in step 3. Then $\\widetilde e=(\\alpha,e)$ and $v$ are both $r$-cocartesian lifts of $\\alpha$ with source $(t,x)$. The lift-category and initiality clauses of [lem-coef-infinity-cocartesian-composition-initiality], applied to the inner fibration $r$ between the quasicategories of step 1, make both lifts initial in $L((t,x),\\alpha)$. Its universal comparison from $\\widetilde e$ to $v$ gives a triangle in $P$ with first edge $\\widetilde e$, second edge $c:(t\\prime,y\\prime)\\to(t\\prime,y)$, and long edge $v$, lying over the degenerate triangle with edges $\\alpha,1_{t\\prime},\\alpha$ in $T$. The same cited statement says that $c$ is an equivalence in the fiber $P_{t\\prime}$. Thus its inverse and the two inverse triangles map under $j$ to inverse data for $j(c)$ in $E$, by the simplicial-map and equivalence definitions in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9 and Remark 2.4.2.13, opposite-category duals; compare the chosen global lift with the restricted lift."
+   }
+  },
+  {
+   "text": "Apply the initial-outer-horn clause of [lem-cbc-inner-fibration-equivalence-outer-horn-lift] to $p:E\\to B$ and the equivalence $j(c)$. For every $\\Lambda_0^n$ lifting problem over $B$ with edge $01=j(c)$ it supplies a filler, so $j(c)$ is $p$-cocartesian by [def-coef-infinity-fibrations]. Project the triangle of step 4 to $E$; its first edge is $e$, second edge $j(c)$, and long edge $j(v)$. The first edge is $p$-cocartesian by its choice. The composition clause of [lem-coef-infinity-cocartesian-composition-initiality] now says that the second edge is $p$-cocartesian if and only if the long edge is. Hence $j(v)$ is $p$-cocartesian, completing the reverse implication.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Kerodon Proposition 4.4.2.13 (Tag 01H0), initial-horn dual, followed by HTT Proposition 2.4.1.7, cocartesian dual."
+   }
+  },
+  {
+   "text": "Every construction above is relative to a specified simplex of $T$ and therefore also works for constant $h$, for $T=\\Delta^1$, and for $T=\\Delta^0$. In the last case $P$ is the degreewise fiber of $p$. If a fiber is empty, there is no source vertex there for the lift condition, and no horn there to fill; whenever a source exists, the stated hypothesis supplies the endpoint in step 3. If $T$ is empty then $P$ is empty and all horn and lift requirements are vacuous. No choice in the proof asks for a lift of an edge of $B$ outside the image of $h$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.2.1 and the preceding degreewise horn arguments, including empty fibers and constant base maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-written horn proof of the opposite-category forms of Proposition 2.4.1.3(2) and Remark 2.4.2.13, using the existing composition/initiality and equivalence outer-horn nodes. HTT and Kerodon 01H0 read online; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +119,38 @@
    "results": "{\"t\": \"2026-10-17T07:45:33Z\", \"tool\": \"grep\", \"query\": \"cocartesian.*pullback|pullback.*cocartesian|cocartesian.*baseChange|baseChange.*cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:45-80,90-110,280-370 (ordinary categorical cocartesian factorization); Quasicategory/Basic.lean:35-60 (inner horn fillers only); and MorphismProperty/LiftingProperty.lean:67-70 (generic pullback stability). None states the quasicategorical base-restriction edge criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.*pullback|pullback.*cocartesian",
+   "results": "{\"t\": \"2026-10-17T10:54:09Z\", \"tool\": \"grep\", \"query\": \"cocartesian.*pullback|pullback.*cocartesian\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: recorded results read; ordinary fibered-category pullback and cocartesian APIs do not state the horn-cocartesian theorem for quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a cocartesian fibration along a functor with lifts over image edges has componentwise cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T10:54:09Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of a cocartesian fibration along a functor with lifts over image edges has componentwise cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"CategoryTheory.Over.pullback\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"HasFibers.pullbackMap\", \"HasFibers.mkPullback\"], \"digest\": \"0f021da0c7a9b8d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: recorded results read; ordinary fibered-category pullback and cocartesian APIs do not state the horn-cocartesian theorem for quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian, CategoryTheory.Functor.IsPreFibered.pullbackMap",
+   "results": "{\"t\": \"2026-10-17T10:54:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian, CategoryTheory.Functor.IsPreFibered.pullbackMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: recorded results read; ordinary fibered-category pullback and cocartesian APIs do not state the horn-cocartesian theorem for quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base restriction of a cocartesian fibration of quasicategories detects cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T10:54:11Z\", \"tool\": \"leanfinder\", \"query\": \"Base restriction of a cocartesian fibration of quasicategories detects cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\"], \"digest\": \"b8114e5e08e29df1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: recorded results read; ordinary fibered-category pullback and cocartesian APIs do not state the horn-cocartesian theorem for quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-active-operad-cocartesian-concatenation",
@@ -64,5 +176,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocartesian-base-restriction",
+  "worker": "stage1",
+  "summary": "Retained the imported statement. Repaired the earlier mapping-space argument: strict pullback stability was not supplied by homotopy-pullback pasting, so preservation is proved directly by pairing horn fillers. Existence follows from the image-edge lift hypothesis. Reflection uses comparison of two initial lifts, the existing relative outer-horn lemma for equivalences, and cocartesian composition. No new node or Mathlib leaf.",
+  "blueprint": "The steps realize the middle derived mapping-complex adjunction paragraph of prop-coef-integral-exceptional-adjoint: restrict the operadic projection to an inert color edge, use the image-edge lift hypothesis, and compare cocartesian lifts after base restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Step 5 needs the relative outer-horn lifting theorem for an equivalence in E to be p-cocartesian. This generic quasicategory tool is in sk-prop-sf-cbc; the item unit has no statement supplying that implication, and it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-72be915ee",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-72be915ee (reviewer sub-agent of L); spot-checked: I read the item and the 4 cited node statements in full: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-coef-infinity-cocartesian-composition-initiality and lem-cbc-inner-fibration-equivalence-outer-horn-lift. I also read the citer's step, the unit sk-prop-sf-biduality-general and the chapter. The delivery adds no new nodes. The statement is true. It is consistent with the citer's use (T=Delta^1, h=rho_i, degenerate edges lifted degenerately). I tested T=Delta^0 (r-cocartesian edges are the equivalences of E_b), empty T, empty fibres and nerves of ordinary categories. The image-edge lift hypothesis is needed for reflection and is not superfluous. Step 1 (pairing inner fillers) and steps 2 and 3 (pairing Lambda_0^n fillers over h beta; existence from the hypothesis) are correct and fairly marked elementary. In step 4 I checked that a morphism from e~ to v in L((t,x),alpha) is a 2-simplex with edges e~, c, v over s_1 alpha, and that the cited node's initiality clause and its target-equivalence-in-fibre clause give c as an equivalence in P_{t'}. Applying j gives inverse data for j(c). In step 5 the initial-horn clause of the outer-horn tool makes j(c) p-cocartesian. With e p-cocartesian, the composition clause in the correct orientation then gives j(v) p-cocartesian. proof_deps equals the union of the uses. No SGA source is used. LeanSearch, Loogle, LeanFinder and grep searches are all recorded with no match. I accept the tool use of lem-cbc-inner-fibration-equivalence-outer-horn-lift: it is a generic quasicategory lemma used as a black box, and the same tool use was already accepted for composition-initiality. On duplicates, the nearest node is the unsplit lem-coef-cocartesian-local-global; its first clause is the Delta^1 single-source special case of this item's iff, so it is not a duplicate. Its future split can cite this item. HTT and Kerodon are not archived and I had no network, so I checked the mathematics rather than the cited pages. The WANTED entry and proof_origin.by=agent are correctly recorded. This is not a target node, so the base-change and coefficient checks do not apply. No fixes were made."
  }
 }

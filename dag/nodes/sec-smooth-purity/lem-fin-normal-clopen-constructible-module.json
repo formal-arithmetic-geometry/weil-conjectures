@@ -1,10 +1,86 @@
 {
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "For an etale covering $\\{W_i\\to W\\}$ in $Y_{\\Et}$, put $W_a=W\\times_Y Y_a$ and $W_{i,a}=W_i\\times_Y Y_a$. The maps $W_{i,a}\\to W_a$ are again a jointly surjective etale family. A matching family in $E(W_i)$ is exactly, for each $a$, a matching family in $\\underline{M_a}(W_{i,a})$. Glue each such family uniquely in $\\underline{M_a}(W_a)$ and take the tuple. This proves the sheaf axiom for the displayed formula, including the empty covering: a module sheaf has the zero module on the empty scheme. Define the action of $\\lambda\\in\\Lambda_Y(W)$ on a tuple $(s_a)_a$ by $(\\lambda|_{W_a}s_a)_a$. The module identities and semilinearity of restrictions hold componentwise, so $E$ is a sheaf of $\\Lambda_Y$-modules.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.proof.md",
+    "place": "Second paragraph, finite product of the constant sheaves on the normalizations; explicit sheaf construction on their disjoint union."
+   }
+  },
+  {
+   "text": "Write $\\iota_a:Y_a\\hookrightarrow Y$ for a coprojection. It is an open immersion by the disjoint-union hypothesis, hence etale by [lem-weil-pbc-open-immersion-etale]. For $W\\to Y_a$ etale, viewed as an object over $Y$, disjointness gives $W\\times_Y Y_b=\\varnothing$ for $b\\ne a$ and $W\\times_Y Y_a\\cong W$. Thus projection to the $a$th factor is an isomorphism $E(W)\\cong\\underline{M_a}(W)$, inverse to inserting zero in the other factors. These maps commute with every restriction and with the restricted coefficient action. By [lem-weil-pbc-etale-inverse-image-restriction](1), inverse image of the underlying abelian sheaf along the etale map $\\iota_a$ is restriction to these objects. By [lem-weil-pbc-module-abelian-inverse-image-comparison] this is also the underlying abelian sheaf of the fixed-coefficient module inverse image. The comparison is determined by the adjunction unit; its maps on germs commute with multiplication by each $\\lambda\\in\\Lambda$, and hence with local sections of the constant ring sheaf, which are locally represented by such $\\lambda$. Consequently the projection above gives the required module isomorphism $\\iota_a^{-1}E\\cong\\underline{M_a}_{Y_a}$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S2 (section-extension-by-zero), paragraph after Definition 03S3: inverse image along an etale morphism is restriction; modules compared by sites-modules.tex, Tags 03D2 (lemma-pullback-module) and 03D3 (lemma-adjoint-push-pull-modules). The coprojection is etale by morphisms.tex, Tag 02GP (lemma-open-immersion-etale)."
+   }
+  },
+  {
+   "text": "The finitely many images $|Y_a|$ cover $|Y|$, are pairwise disjoint, and are locally closed because they are clopen; the maps $\\iota_a$ realize them as immersed subschemes. This is the stratification of [def-constructible-stratification]. Each $|Y_a|$ is also retrocompact: for a quasi-compact open $U\\subseteq Y$, an open cover of $U\\cap Y_a$, together with $U\\setminus Y_a$, covers $U$ and has a finite subcover; the selected members cover $U\\cap Y_a$. Thus $Y_a$ is open and retrocompact. The empty open is retrocompact, so $|Y_a|=|Y_a|\\cap(Y\\setminus\\varnothing)$ is a constructible subset by [def-weil-constructible-subset]. This argument uses no Noetherian or quasi-compact assumption on $Y$.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005G (definition-constructible) and Tag 09XZ (definition-paritition); explicit clopen specialization."
+   }
+  },
+  {
+   "text": "On each $Y_a$, step 2 exhibits $\\iota_a^{-1}E$ as the constant module sheaf with the finite value $M_a$. The identity cover of $Y_a$ is therefore a finite-value trivialization. Apply implication (1)$\\Rightarrow$(2) of [lem-weil-pbc-finite-locally-constant-module-values], with base $Y_a$, coefficient ring $\\Lambda$, and sheaf $\\iota_a^{-1}E$: it is finite locally constant in the coefficient category of $\\Lambda$-modules, including finiteness of every geometric stalk. Its further assertion identifies those stalks with $M_a$. In particular the finite-value formulation and the finite-stalk formulation used in the two constructibility definitions both hold.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03RU (definition-finite-locally-constant) and 03RW(3) (definition-constructible); finite-value/finite-stalk module bridge is the cited existing node."
+   }
+  },
+  {
+   "text": "Use the single finite clopen stratification from step 3. Its strata are constructible, and the module restrictions have finite constant models by step 2. These are exactly conditions (a) and (b) of [def-weil-pbc-etale-constructible-sheaf]. Thus it witnesses the first constructibility assertion. By step 4 the same restrictions are finite locally constant in the coefficient category of $\\Lambda$-modules, so the same stratification also witnesses [def-constructible-constructible]. Empty components may be omitted. If $r=0$, then $Y=\\varnothing$, $E$ is the zero sheaf given by the empty product, and the empty stratification satisfies both definitions vacuously.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-constructible-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03RU and 03RW: apply the definitions to the finite clopen partition; no appeal to the qcqs equivalence of 095E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.proof.md",
+  "place": "Second paragraph: common finite lisse partition for the finite product; explicit clopen construction, using Stacks 005G, 09XZ, 03S2, 03RU and 03RW."
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -26,7 +102,9 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-constructible-constructible"
+  "def-constructible-constructible",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset"
  ],
  "mathlib_searches": [
   {
@@ -63,15 +141,74 @@
    "results": "SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; these concern finite-type module sheaves, not constructible etale module sheaves.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf constant with finite module values on each member of a finite clopen partition of a scheme is constructible",
+   "results": "Hits: PrimeSpectrum.BasicConstructibleSetData.g, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, CompHausLike.LocallyConstantModule.functor, PrimeSpectrum.ConstructibleSetData, PrimeSpectrum.BasicConstructibleSetData, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, PrimeSpectrum.isConstructible_basicOpen, Topology.IsLocallyConstructible.isConstructible. Constant sheaf/finite-type/topological constructible interfaces only; no theorem stating this etale componentwise constructibility assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"LocallyConstant\"",
+   "results": "Hits: CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.presheaf_ext, Condensed.locallyConstantPresheaf, LightCondensed.locallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.isColimitLocallyConstantPresheaf. Constant sheaf/finite-type/topological constructible interfaces only; no theorem stating this etale componentwise constructibility assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]heaf|[Ss]heaf.*constructible|IsConstructibleSheaf",
+   "results": "No hits. Constant sheaf/finite-type/topological constructible interfaces only; no theorem stating this etale componentwise constructibility assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules on the etale site which is constant with finite values on a finite partition by open and closed subschemes is constructible",
+   "results": "Hits: CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, AlgebraicGeometry.Scheme.Modules, CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.IsConstant, ModuleCat.Tilde.const, CategoryTheory.instIsConstantObjSheafSheafCompose. Constant sheaf/finite-type/topological constructible interfaces only; no theorem stating this etale componentwise constructibility assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally isomorphic to constant sheaves of finite modules on a scheme admits a finite constructibility stratification when the trivializing Zariski cover is a finite clopen partition",
+   "results": "Hits: SheafOfModules.IsFiniteType, Topology.IsLocallyConstructible.isConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.isLocallyConstructible, Topology.IsLocallyConstructible.of_isOpenCover'. Constant sheaf/finite-type/topological constructible interfaces only; no theorem stating this etale componentwise constructibility assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
   "from": {
    "node": "lem-fin-normal-open-lisse-image",
-   "place": "proof, second paragraph: constructibility of the finite direct images; module-valued version",
+   "place": "Proof, second paragraph: \"Each of these sheaves is constructible ... so is their finite product, by a common finite lisse partition\"; componentwise constant module sheaf on the disjoint union of normalizations.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fin-normal-clopen-constructible-module",
+  "worker": "stage1",
+  "summary": "Constructed and restricted the componentwise module sheaf, proved clopen strata constructible directly, and applied the existing finite-value/finite-stalk module bridge before checking both constructibility definitions. Statement unchanged. No new nodes. No qcqs hypothesis or Stacks 095E equivalence used.",
+  "blueprint": "Realizes the second paragraph of lem-fin-normal-open-lisse-image: the componentwise finite constant module sheaf on the finite disjoint union is constructible; the later finite direct image is outside this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic identification of etale inverse image with restriction in step 2; needed for the meaning of restrictions to the clopen strata, not a replacement of the unit route. The unit has no such generic localization statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-94eebd2a3",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-94eebd2a3 (reviewer sub-agent of L); spot-checked: Read the whole item (statement, 5 steps, deps, blueprint, split_report, searches), the current statement of all 13 cited nodes plus the finite/locally-constant/inverse-image definitions they use, the parent lem-fin-normal-open-lisse-image (main-20261015 blueprint paragraph 2 'common finite lisse partition' and DAG steps 5-9, which cite this item exactly as stated), and Stacks 03RU, 03RW, 03S2 ('j^{-1} is just the restriction') and morphisms 02GP. The statement is unchanged and true. Small cases checked: r=0, r=1 (constant sheaf, stratum Y retrocompact), empty Y_a, M_a=0, Lambda=0, and Y neither qcqs nor Noetherian (clopen sets are still retrocompact; 095E is correctly not used). Step 1: the sheaf axiom holds componentwise; elementary. Step 2: Y_a->Y is a monomorphism, W x_Y Y_b is empty for b != a and M_b(empty)=0. Open immersion => etale (02GP leaf). The restriction lemma (1) and the module/abelian comparison apply. Lambda-linearity follows from naturality of the unit and of rho, and local constancy of sections of Lambda_{Y_a}. Step 3: the retrocompactness argument and Y_a = Y_a ∩ (Y∖∅) are correct. Step 4: lem-weil-pbc-finite-locally-constant-module-values (1)=>(2), whose hypotheses (any scheme, finite commutative Lambda) hold, is properly cited, not called elementary. Step 5: both constructibility definitions are assembled correctly from the same partition. No new nodes. No duplicate: rg over dag/nodes for clopen/constant+constructible finds lem-kun-constant-constructible and the etale-free-sheaf lemma, both qcqs with a single constant value, and the abelian clopen-product lemma, which says nothing about constructibility. Coefficient category: Lambda_Y-modules throughout. Not a target node. No SGA cited. I accept the declared tool_use lem-weil-pbc-etale-inverse-image-restriction, a generic restriction interpretation that replaces no route step. No fixes."
  }
 }

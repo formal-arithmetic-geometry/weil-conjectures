@@ -2,7 +2,7 @@
  "id": "lem-pur-etale-sum-tensor-totalization",
  "kind": "statement",
  "title": "Etale sum extension and unbounded total tensor complexes",
- "statement": "Let $A$ be a commutative ring, and let $u:U\\to X$ be a separated etale morphism of finite type of schemes [def-pc-scheme, def-weil-etale-morphism, def-weil-proper-morphism, def-weil-finite-type-morphism]. Work with constant-$A$ module sheaves on the small etale sites [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Write $u_{\\Sigma!}$ for sheafified sum extension [def-weil-pbc-etale-sum-extension] and $u^*=u^{-1}$ for exact inverse image [prop-weil-pbc-inverse-image-modules-exact]. Then $u_{\\Sigma!}$ preserves all small direct sums. For arbitrary unbounded cochain complexes $P$ on $U$ and $H$ on $X$ [def-pc-cochain-complex-modules], there is a canonical isomorphism of complexes, natural in both complexes,\n$$\\Psi_{P,H}:\\operatorname{Tot}((u_{\\Sigma!}P)\\otimes_A H)\\xrightarrow{\\sim}u_{\\Sigma!}\\operatorname{Tot}(P\\otimes_A u^*H).$$\nThe functors $u_{\\Sigma!}$ and $u^*$ on complexes here apply degreewise, and total tensor uses direct sums and differential $d_P\\otimes1+(-1)^p1\\otimes d_H$ [def-pc-tensor-complex-sheaves]. On the $(p,q)$ summand, before sum and tensor sheafification, the component of $\\Psi$ sends $(s,m)\\otimes h$ to $(s,m\\otimes s^*h)$, where $s:W\\to U$ is a lift over an etale test object $W\\to X$, $m\\in P^p(W,s)$, and $h\\in H^q(W)$. It preserves the inclusion of each summand in total degree $p+q$ and the order of the tensor factors. The comparison is compatible with chain homotopies (degree $-1$ maps $h$ satisfying $f-g=dh+hd$) in both variables, hence gives a natural isomorphism on the homotopy categories. No boundedness, constructibility, or flatness hypothesis is imposed.",
+ "statement": "Let $A$ be a commutative ring, and let $u:U\\to X$ be a separated etale morphism of finite type of schemes [def-pc-scheme, def-weil-etale-morphism, def-weil-proper-morphism, def-weil-finite-type-morphism]. Work with constant-$A$ module sheaves on the small etale sites [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Write $u_{\\Sigma!}$ for sheafified sum extension [def-weil-pbc-etale-sum-extension] and $u^*=u^{-1}$ for exact inverse image [prop-weil-pbc-inverse-image-modules-exact]. Then $u_{\\Sigma!}$ preserves all small direct sums. For arbitrary unbounded cochain complexes $P$ on $U$ and $H$ on $X$ [def-pc-cochain-complex-modules], there is a canonical isomorphism of complexes, natural in both complexes,\n$$\\Psi_{P,H}:\\operatorname{Tot}((u_{\\Sigma!}P)\\otimes_A H)\\xrightarrow{\\sim}u_{\\Sigma!}\\operatorname{Tot}(P\\otimes_A u^*H).$$\nThe functors $u_{\\Sigma!}$ and $u^*$ on complexes here apply degreewise, and total tensor uses direct sums and differential $d_P\\otimes1+(-1)^p1\\otimes d_H$ [def-pc-tensor-complex-sheaves]. On the $(p,q)$ summand, before sum and tensor sheafification, the component of $\\Psi$ sends $(s,m)\\otimes h$ to $(s,m\\otimes s^*h)$, where $s:W\\to U$ is a lift over an etale test object $W\\to X$, $m\\in P^p(W,s)$, and $h\\in H^q(W)$. It preserves the inclusion of each summand in total degree $p+q$ and the order of the tensor factors. The comparison is compatible with chain homotopies (degree $-1$ maps $h$ satisfying $f-g=dh+hd$ [def-pur-kinjective-complex]) in both variables, hence gives a natural isomorphism on the homotopy categories (the same complexes, with chain maps taken modulo these homotopies). No boundedness, constructibility, or flatness hypothesis is imposed.",
  "source": {
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tag 0GKF (lemma-f-shriek-projection), canonical tensor-generator construction and sheaf projection isomorphism; agent expansion of its passage to unbounded total tensor complexes and the definition of K-flatness, rather than a verbatim assertion of this lemma."
@@ -18,11 +18,113 @@
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-pc-cochain-complex-modules",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category"
+  "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=u_{\\Sigma!}$ and $R=u^*$. The map $u$ is etale, so [lem-weil-pbc-etale-restriction-injectives] gives $L\\dashv R$ for exactly the lift-indexed sum extension in the statement and constant-$A$ module sheaves. For any small family $(M_i)_{i\\in I}$ apply [lem-weil-pbc-left-adjoint-preserves-colimits] to its discrete indexing category. The module-sheaf categories have all direct sums, as specified in [def-pc-tensor-complex-sheaves]. Thus the canonical map\n$$c_{(M_i)}:\\bigoplus_i LM_i\\xrightarrow{\\sim}L(\\bigoplus_i M_i)$$\nis an isomorphism, characterized by $c\\iota_i=L\\iota_i$. This proves direct-sum preservation, including the empty sum. For a family of maps $a_i:M_i\\to N_i$, the equality $L(\\bigoplus_i a_i)c_M=c_N(\\bigoplus_i La_i)$ follows after precomposing with each $\\iota_i$, since both sides then equal $L(\\iota_i a_i)$. This fixes the naturality of the particular comparison used below.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (1), applied to the etale sum adjunction"
+   }
+  },
+  {
+   "text": "On a morphism $a:M\\to M'$, the definition [def-weil-pbc-etale-sum-extension] sends $(s,m)$ to $(s,a(m))$ before sheafification. It follows on these generators that $L(a+b)=La+Lb$, $L0=0$, and $L(-a)=-La$; these equalities persist on the induced sheaf maps. The functor $R$ is additive by [prop-weil-pbc-inverse-image-modules-exact]. Hence degreewise application of either functor sends $d^{p+1}d^p=0$ to the same equation and sends a chain-map equation to a chain-map equation [def-pc-cochain-complex-modules]. In particular $LP$ and $RH$ in the statement are actual unbounded cochain complexes.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 010V, cochain complexes and additive functors; lift-indexed formula from the cited definition"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-etale-sheaf-projection-map] with $e=u$, $M=P^p$, $N=H^q$. Its hypotheses hold because $u$ is separated etale of finite type and $A$ is commutative. Write its natural sheaf isomorphism as\n$$a_{p,q}:LP^p\\otimes_A H^q\\xrightarrow{\\sim}L(P^p\\otimes_A RH^q).$$\nFor $I_n=\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$, define\n$$\\Psi^n=c_{(P^p\\otimes_A RH^q)_{I_n}}\\circ\\bigoplus_{I_n}a_{p,q}.$$\nBy Step 1 and [def-pc-tensor-complex-sheaves] this is an isomorphism from the degree-$n$ term of the left total tensor to the degree-$n$ term of the right side. Its inverse is $(\\bigoplus a_{p,q}^{-1})c^{-1}$. Moreover $\\Psi^n\\iota_{p,q}=L\\iota_{p,q}\\,a_{p,q}$, so it preserves the specified summand inclusions. On the presheaf generators its formula is exactly $(s,m)\\otimes h\\mapsto(s,m\\otimes s^*h)$ from the cited projection lemma; no tensor factor is permuted.",
+   "uses": [
+    "lem-pur-etale-sheaf-projection-map",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), generator formula; homology.tex Tag 012Z (definition-associated-simple-complex), direct-sum terms"
+   }
+  },
+  {
+   "text": "Naturality of [lem-pur-etale-sheaf-projection-map], applied separately to the two differentials, gives\n$$a_{p+1,q}(Ld_P^p\\otimes1)=L(d_P^p\\otimes1)a_{p,q},\\qquad\n a_{p,q+1}(1\\otimes d_H^q)=L(1\\otimes Rd_H^q)a_{p,q}.$$\nThe second differential has coefficient $(-1)^p$ on both sides, by [def-pc-tensor-complex-sheaves]. By additivity from Step 2, $L$ respects this coefficient and the sum of the two differentials. Precompose the desired equality $d\\Psi^n=\\Psi^{n+1}d$ with $\\iota_{p,q}$; the displayed equations and $c\\iota=L\\iota$ from Step 1 make its two components equal in bidegrees $(p+1,q)$ and $(p,q+1)$. Since a map from a coproduct is determined by its restrictions to the summands, the equality holds. Thus the $\\Psi^n$ form a chain map. Their degreewise inverses also form a chain map: multiply this equality on the left and right by the appropriate inverses. They give the claimed isomorphism of complexes, with the stated sign convention.",
+   "uses": [
+    "lem-pur-etale-sheaf-projection-map",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z (definition-associated-simple-complex), differential; naturality of the generator construction in more-etale.tex Tag 0GKF"
+   }
+  },
+  {
+   "text": "For chain maps $f:P\\to P'$ and $g:H\\to H'$, the same sheaf naturality gives\n$$a'_{p,q}(Lf^p\\otimes g^q)=L(f^p\\otimes Rg^q)a_{p,q}.$$\nUsing the naturality of $c$ proved in Step 1 and taking the direct sum in each degree yields\n$$\\Psi_{P',H'}\\operatorname{Tot}(Lf\\otimes g)=L\\operatorname{Tot}(f\\otimes Rg)\\Psi_{P,H}.$$\nHere the tensor maps are precisely those of [def-pc-tensor-complex-sheaves] and the $a_{p,q}$ are those of [lem-pur-etale-sheaf-projection-map]. This proves naturality in both variables, with identities and compositions inherited from the component formulas.",
+   "uses": [
+    "lem-pur-etale-sheaf-projection-map",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), naturality; agent assembly on the total summands"
+   }
+  },
+  {
+   "text": "Let $h^p:P^p\\to P'^{p-1}$ satisfy $f-g=d_{P'}h+hd_P$, the homotopy equation of [def-pur-kinjective-complex]. For total tensor with fixed $H$, define a degree-$-1$ map on the $(p,q)$ summand by $Lh^p\\otimes1$ on the left, and by $L(h^p\\otimes1)$ on the right (with the sum comparisons of Step 1). Using the differential of [def-pc-tensor-complex-sheaves], the $H$-differential terms in $dS+Sd$ have coefficients $(-1)^{p-1}$ and $(-1)^p$ and cancel. The remaining terms are $L(d_{P'}h+hd_P)\\otimes1=L(f-g)\\otimes1$ on the left, and $L((d_{P'}h+hd_P)\\otimes1)=L((f-g)\\otimes1)$ on the right. Thus these are the induced homotopies. Naturality of [lem-pur-etale-sheaf-projection-map] for the sheaf morphism $h^p$ gives\n$$a_{p-1,q}(Lh^p\\otimes1)=L(h^p\\otimes1)a_{p,q}.$$\nAfter inclusion into total degree $p+q-1$ and summation, this says exactly that $\\Psi$ intertwines these degree-$-1$ maps, not merely their boundaries.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-etale-sheaf-projection-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 010V, displayed cochain homotopy equation; Tag 012Z, signed total differential; agent calculation"
+   }
+  },
+  {
+   "text": "For a homotopy $k^q:H^q\\to H'^{q-1}$ with $f-g=d_{H'}k+kd_H$ [def-pur-kinjective-complex], take on the $(p,q)$ summand the degree-$-1$ maps $(-1)^p1\\otimes k^q$ on the left and $L((-1)^p1\\otimes Rk^q)$ on the right. In $dS+Sd$ the $P$-differential terms have coefficients $(-1)^p$ and $(-1)^{p+1}$ and cancel. Each of the remaining two terms has coefficient $(-1)^{2p}=1$, so their sum is $1\\otimes(d_{H'}k+kd_H)=1\\otimes(f-g)$, or its image under $R$ and $L$, as appropriate. This is the differential convention of [def-pc-tensor-complex-sheaves]. The equality\n$$a_{p,q-1}(1\\otimes k^q)=L(1\\otimes Rk^q)a_{p,q}$$\nis sheaf naturality in [lem-pur-etale-sheaf-projection-map]. Multiplying by $(-1)^p$ and using the sum comparisons proves compatibility of $\\Psi$ with these homotopies as well. The component maps and the homotopies have one target summand for each source summand, and the differential has two, so every construction is defined by coproduct maps for arbitrary unbounded complexes. Steps 6 and 7 show that both bifunctors respect homotopy classes in either variable. Quotienting the naturality equality of Step 5 therefore gives a natural isomorphism on the homotopy categories; the inverse descends since it is already an inverse chain map. No flatness, constructibility, or boundedness was used.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-etale-sheaf-projection-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 010V, cochain homotopies and maps up to homotopy; Tag 012Z, sign convention; agent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pc-cochain-complex-modules",
+  "lem-pur-etale-sheaf-projection-map",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF (lemma-f-shriek-projection), expanded using categories.tex Tag 0038 and homology.tex Section 010V / Tag 012Z"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +160,45 @@
    "results": "{\"t\": \"2026-10-17T08:43:24Z\", \"tool\": \"leansearch\", \"query\": \"Etale extension by zero and direct sum total tensor complexes projection isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directSumLeft\", \"TensorProduct.finsuppLeft\", \"CategoryTheory.ShortComplex.LeftHomologyData.isIso_π\", \"TensorProduct.directSumRight'\", \"HomologicalComplex₂.total.mapIso\", \"HomologicalComplex₂.ιTotalOrZero\", \"HomologicalComplex.ιTensorObj\", \"PiTensorProduct.ofDirectSumEquiv\"], \"digest\": \"a841da482fe6c725\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary modules, graded tensor or free sheaves, not this etale extension assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(etaleLowerShriek|sumExtension).*(Tensor|tensor|Coproduct)|mapCochainComplex.*tensor",
+   "results": "{\"t\": \"2026-10-17T12:31:00Z\", \"tool\": \"grep\", \"query\": \"(etaleLowerShriek|sumExtension).*(Tensor|tensor|Coproduct)|mapCochainComplex.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: tensor totalization, shifts, and homotopy infrastructure do not state the etale sum-extension comparison, its generator normalization, and coproduct comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale extension by zero projection formula for unbounded cochain total tensor complexes",
+   "results": "{\"t\": \"2026-10-17T12:31:01Z\", \"tool\": \"leansearch\", \"query\": \"Etale extension by zero projection formula for unbounded cochain total tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.π'_f_zero_assoc\", \"CochainComplex.fromSingle₀Equiv\", \"HomologicalComplex.extendMap_zero\", \"Algebra.FormallyEtale.instTensorProduct\", \"CategoryTheory.ProjectiveResolution.π_f_succ\", \"CochainComplex.HomComplex.Cochain.ofHom_zero\", \"CochainComplex.HomComplex.Cochain.zero_comp\", \"CochainComplex.mappingCone.inl_snd_assoc\"], \"digest\": \"430c9bcb982ab082\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: tensor totalization, shifts, and homotopy infrastructure do not state the etale sum-extension comparison, its generator normalization, and coproduct comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left adjoint and natural sheaf projection formula induce a signed total tensor isomorphism compatible with cochain homotopies",
+   "results": "{\"t\": \"2026-10-17T12:31:03Z\", \"tool\": \"leanfinder\", \"query\": \"An additive left adjoint and natural sheaf projection formula induce a signed total tensor isomorphism compatible with cochain homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.ι_mapBifunctorShift₁Iso_hom_f\", \"HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom\", \"CochainComplex.ι_mapBifunctorShift₂Iso_hom_f\", \"HomologicalComplex₂.ι_totalShift₂Iso_hom_f\", \"HomologicalComplex₂.ι_totalShift₂Iso_inv_f\", \"HomologicalComplex₂.ι_totalShift₁Iso_inv_f\", \"HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso\", \"CochainComplex.mapBifunctorHomologicalComplexShift₁Iso_hom_f_f\"], \"digest\": \"8baadc02066d6029\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: tensor totalization, shifts, and homotopy infrastructure do not state the etale sum-extension comparison, its generator normalization, and coproduct comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sum extension preserves direct sums and the projection isomorphism commutes with unbounded total tensor complexes",
+   "results": "{\"t\": \"2026-10-17T12:31:04Z\", \"tool\": \"leanfinder\", \"query\": \"Etale sum extension preserves direct sums and the projection isomorphism commutes with unbounded total tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex₂.XXIsoOfEq_hom_ιTotal\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex₂.XXIsoOfEq_inv_ιTotal\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.tensor_unit_d₂\"], \"digest\": \"96d0ca29fdd4bd7e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: tensor totalization, shifts, and homotopy infrastructure do not state the etale sum-extension comparison, its generator normalization, and coproduct comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def ιTensorObj|class HasTensor|def mapIso|def mapBifunctor",
+   "results": "{\"t\": \"2026-10-17T12:50:37Z\", \"tool\": \"grep\", \"query\": \"def ιTensorObj|class HasTensor|def mapIso|def mapBifunctor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"Mathlib/Algebra/Homology/TotalComplex.lean\"], \"digest\": \"a83c6503a8a89fff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: tensor totalization, shifts, and homotopy infrastructure do not state the etale sum-extension comparison, its generator normalization, and coproduct comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-support-map-compatibility",
@@ -80,5 +217,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-sum-tensor-totalization",
+  "worker": "stage1",
+  "summary": "Reused the etale sum adjunction, left-adjoint colimit theorem, and canonical sheaf projection isomorphism; constructed the unbounded comparison degreewise and verified both signed differentials, naturality, and the two explicit induced homotopies. No new nodes or changed hypotheses. Clarified the homotopy quotient and cited the existing homotopy definition.",
+  "blueprint": "Realizes the tensor-totalization argument extracted in original Step 5 of lem-pur-etale-support-map-compatibility, serving lem-pur-co-smooth-etale-locality proof Step 3 (canonical counit-defined projection map). Current unit sk-thm-sf-compatibility collects these compatibilities; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Uses the exact lift-indexed sum functor adjunction on constant-ring etale module sheaves, a generic sheaf tool needed before totalization; the unit supplies no replacement adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-1ac075531",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-1ac075531 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full, plus the full statement of every cited node: the étale sum adjunction (lem-weil-pbc-etale-restriction-injectives), the Mathlib-leaf colimit lemma, def-pc-tensor-complex-sheaves, def-weil-pbc-etale-sum-extension, prop-weil-pbc-inverse-image-modules-exact (3), def-pc-cochain-complex-modules, lem-pur-etale-sheaf-projection-map and the homotopy sentence of def-pur-kinjective-complex. Sources checked at the cited places: Stacks 0GKF (more-etale.tex l.1808, the pure-tensor rule (Z,s)⊗t↦(Z,s⊗f^{-1}t)), Stacks 0038 (1) (categories.tex l.3472), and the 012Z total-complex sign (−1)^p, which matches the convention of def-pc-tensor-complex-sheaves. The hypotheses (commutative A; separated étale finite-type u) satisfy what the projection-map lemma needs. I redid the step 4 differential squares by hand, and the step 6 and 7 homotopy calculations: the mixed terms (−1)^{p−1}/(−1)^p and (−1)^p/(−1)^{p+1} cancel, and the remaining coefficient is (−1)^{2p}=1. Descent to the homotopy category is valid. Small cases checked: U empty, u=id, a single bidegree, A=0. Route: the unit closure of sk-thm-sf-compatibility contains sk-thm-iff, sk-def-exchange and sk-thm-properbasechange. The declared tool use is therefore already on route, and I accept it as harmless. The projection-map node is unsplit with no proof dependencies, so there is no cycle. The only citer, lem-pur-etale-support-map-compatibility, uses exactly this statement. There are no new nodes. An rg duplicate search found only open-immersion/derived analogues (lem-trf-open-tensor, lem-sf-open-tensor-normalization), which are different statements. No statement was weakened, no fixes were written, and no SGA source is cited."
  }
 }

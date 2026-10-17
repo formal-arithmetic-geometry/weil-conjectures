@@ -10,9 +10,71 @@
  "stmt_deps": [
   "def-coef-left-module-operadic-encoding"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the ordered-fibre composition rule, for each $1\\leq i\\leq n$ the $i$-fibre of $T_\\alpha\\circ h$ is the concatenation, in increasing order, of the fibres $C_j$ for $\\alpha(i-1)<j\\leq\\alpha(i)$. The equation with $D^\\eta_\\delta$ therefore identifies this concatenation with the increasing interval $(\\delta(i-1),\\delta(i)]$. Since $\\alpha(0)=0$ and $\\alpha(n)=s$, every output index $j\\in\\{1,\\ldots,s\\}$ occurs in one of these concatenations; repeated values of $\\alpha$ simply give empty concatenations.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11 final cartesian-lift calculation and Remark 4.2.2.8 left-module analogue; ordered-fibre composition."
+   }
+  },
+  {
+   "text": "Define $\\lambda(0)=\\delta(0)$ and $\\lambda(j)=\\delta(0)+\\sum_{l=1}^j|C_l|$. Each $C_j$ is an increasing sublist of the interval in the concatenation containing it. Splitting an increasing consecutive interval into consecutive sublists shows inductively that $C_j=(\\lambda(j-1),\\lambda(j)]$ for every $j$. Taking lengths in the concatenation for the $i$-th output gives $\\lambda(\\alpha(i))-\\lambda(\\alpha(i-1))=\\delta(i)-\\delta(i-1)$; induction on $i$, starting from $\\lambda(\\alpha(0))=\\lambda(0)=\\delta(0)$, yields $\\lambda(\\alpha(i))=\\delta(i)$. Hence $\\lambda\\circ\\alpha=\\delta$ and $\\lambda(s)=\\delta(n)$.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11 final cartesian-lift calculation and Remark 4.2.2.8 left-module analogue; ordered-fibre composition."
+   }
+  },
+  {
+   "text": "The list lengths are nonnegative, so $\\lambda$ is monotone. The interval description of each $C_j$ and the identity $\\lambda(\\alpha(i))=\\delta(i)\\le r$ show that every endpoint $\\lambda(j)$ lies in $[r]$: for any $j$ choose $i$ with $j\\le\\alpha(i)$ and use monotonicity. Thus $\\lambda:[s]\\to[r]$ is a well-defined monotone map, including the case $s=0$.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11 final cartesian-lift calculation and Remark 4.2.2.8 left-module analogue; ordered-fibre composition."
+   }
+  },
+  {
+   "text": "Because $\\alpha(0)=0$ and $\\alpha(n)=s$, the outer arrow $T_\\alpha$ discards no output of $h$. Therefore the inputs discarded by the composite are exactly the inputs discarded by $h$. The right side $D^\\eta_\\delta$ discards precisely the inputs at most $\\delta(0)$ or greater than $\\delta(n)$; when $\\eta=0$ its module input is the final input $r+1$ and is in the latter range. Hence $h$ has exactly the asserted discarded inputs, including the module input in the module-source case.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11 final cartesian-lift calculation and Remark 4.2.2.8 left-module analogue; ordered-fibre composition."
+   }
+  },
+  {
+   "text": "The defining ordered fibres of $D^\\eta_\\lambda$ are $(\\lambda(j-1),\\lambda(j)]$, exactly the lists $C_j$, and its discarded inputs are exactly those just determined. The LM admissibility condition also forces a module input, when present in $X_0(r)$, to be sent to the basepoint when the target is the pure-algebra object $X_1(s)$. Thus $h$ and $D^\\eta_\\lambda$ have the same pointed map and the same ordered fibres, so they are equal. This proves all conclusions, including empty fibres and $s=0$.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Proposition 4.1.2.11 final cartesian-lift calculation and Remark 4.2.2.8 left-module analogue; ordered-fibre composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-left-module-operadic-encoding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Proposition 4.1.2.11 final cartesian-lift calculation and Remark 4.2.2.8, expanded ordered-fibre argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +110,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearOrderedField.cutMap_self\", \"module\": \"Mathlib.Algebra.Order.CompleteField\", \"type\": \"(a : α) : cutMap α a = Iio a ∩ range (Rat.cast : ℚ → α)\", \"doc\": \"For an element $ a $ in a linearly ordered field $ \\\\alpha $, the cut map of $ a $ is equal to the intersection of the open interval $ (-\\\\infty, a) $ in $ \\\\alpha $ and the image of the rational numbers\"}\n  {\"name\": \"Polynomial.fiberEquivQuotient\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Polynomial\", \"type\": \"(f : R[X] →ₐ[R] S) (hf : Function.Surjective f) (p : Ideal R) [p.IsPrime] :\\n  p.Fiber S ≃ₐ[p.ResidueField]\\n    p.ResidueField[X] ⧸ ((RingHom.ker (f : R[X] →+* S)).map (mapRingHom (algebraMap R p.ResidueField)))\", \"doc\": \"Given a surjective algebra homomorphism $ f : R[X] → S $ and a prime ideal $ p $ in $ R $, there is an algebra equivalence between the fiber $ p.Fiber(S) $ (the tensor product of the residue field $ p\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : (f.fiber y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}\n  {\"name\": \"toIntermediateField'_toSubalgebra\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Basic\", \"type\": \"(S : IntermediateField K L) : S.toSubalgebra.toIntermediateField' (Field.toIsField S) = S\", \"doc\": \"For any intermediate field $ S $ between fields $ K $ and $ L $, converting $ S $ to its subalgebra structure over $ K $ in $ L $ and then reconstructing the intermediate field from this subalgebra us\"}\n  {\"name\": \"Ideal.Fiber\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Fiber\", \"type\": \"(p : Ideal R) [p.IsPrime] (S : Type*) [CommRing S] [Algebra R S] : Type _\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ R $ and an $ R $-algebra $ S $, this constructs the tensor product of the residue field of $ p $ with $ S $ over $ R $. The residue field is obtained by\"}\n  {\"name\": \"FiberBundleCore.Fiber\", \"module\": \"Mathlib.Topology.FiberBundle.Basic\", \"type\": \"(_ : FiberBundleCore ι B F) (_x : B)\", \"doc\": \"For a fiber bundle over a topological space $ B $ with fiber $ F $, the fiber at any point $ x \\\\in B $ is the set $ F $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (x : X) : f.fiberι _ (f.asFiber x) = x\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any point $ x \\\\in X $, the composition of the inclusion map of the fiber $ f^{-1}(f(x)) $ into $ X $ with the fiber construction at $ x $ yields $ x $ i\"}\n  {\"name\": \"Function.Fiber.mk\", \"module\": \"Mathlib.Logic.Function.FiberPartition\", \"type\": \"(f : Y → Z) (y : Y) : Fiber f\", \"doc\": \"The function constructs the fiber of $ f $ at the point $ y $, defined as the preimage $ f^{-1}(\\\\{f(y)\\\\}) $, which is the set of all elements in $ Y $ that map to $ f(y) $ under $ f $. This fiber is a\"}",
    "date": "2026-10-17",
    "verdict": "no match: read all hits. SimplexCategory.Hom.mk and toOrderHom only bundle monotone maps (AlgebraicTopology/SimplexCategory/Defs.lean:77-86); the simplex generators-relations epi-mono factorization concerns an already given simplex arrow. Neither reconstructs ordered LM operator fibres from an equation with an active operator. Profinite words, cuts in ordered fields, ordinary factorization categories and module images have different objects and hypotheses. The targeted grep found no ordered LM operator calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordered LM algebra operator fibres reconstruct a monotone interval map from T_alpha composition",
+   "results": "Top hits: Profinite.NobelingProof.πs', HahnEmbedding.Partial.sSupFun, Profinite.NobelingProof.GoodProducts.smaller_factorization, Profinite.NobelingProof.πs, Profinite.NobelingProof.GoodProducts.max_eq_eval_unapply, OrderedFinpartition.compAlongOrderedFinpartitionL, Profinite.NobelingProof.Linear_CC'₁, OrderedFinpartition.compAlongOrderedFinpartitionₗ; none states ordered LM fibre reconstruction.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern unrelated fibres, simplex maps, or ordered partitions and do not state this LM operator lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory.Hom, OrderHom, monotone interval fibres",
+   "results": "No hits; loogle: Unknown identifier `monotone`",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern unrelated fibres, simplex maps, or ordered partitions and do not state this LM operator lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "ordered.*fibre|interval.*fibre|LM.*operator",
+   "results": "No hits in Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern unrelated fibres, simplex maps, or ordered partitions and do not state this LM operator lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given T alpha composed with an ordered fibre operator equals D delta, reconstruct lambda from consecutive ordered fibres",
+   "results": "Top hits: Function.Fiber.image_eq_image_mk, Function.Fiber, OrderedFinpartition.compAlongOrderedFinpartitionₗ_apply_apply, Equiv.ofFiberEquiv, TopologicalSpace.Fiber.sigmaInclIncl, Ordinal.comp_bfamilyOfFamily', Sigma.LE.fiber, Ordinal.comp_familyOfBFamily'; none states ordered LM fibre reconstruction.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern unrelated fibres, simplex maps, or ordered partitions and do not state this LM operator lemma."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-lm-prism-approximation",
@@ -63,7 +153,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Underlying equivalences and operadic colimits of coherent modules. Supporting step: Coherent modules as inert-preserving simplicial sections. Simplicial approximation to the left-module operad, before constructing the fixed-algebra fibration. Hidden calculation of former step 9: algebra-target ordered-fibre reconstruction (including cross competitors). ",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: the hidden algebra-target ordered-fibre reconstruction used in the active cartesian-lift calculation.",
    "via": [
     "lem-coef-lm-prism-approximation",
     "lem-coef-coherent-module-section-model",
@@ -77,5 +167,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-lm-algebra-fibre-reconstruction",
+  "worker": "stage1",
+  "summary": "Audited the ordered-fibre reconstruction statement against the LM encoding and Higher Algebra’s active cartesian-lift calculation. Added a five-step direct proof: composition gives consecutive concatenations, prefix sums recover the monotone lambda, endpoint bounds and discarded inputs follow from the endpoint hypotheses, and equality with D_lambda follows from identical ordered fibres. No new nodes are needed; all non-elementary facts are finite ordered-list calculations from the existing LM definition. No statement change.",
+  "blueprint": "Realizes the hidden algebra-target ordered-fibre reconstruction in the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, before the fixed-algebra fibration and in the active-lift factorization used by lem-coef-lm-prism-approximation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-ad3a70f65",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-ad3a70f65 (reviewer sub-agent of L); spot-checked: I read the full item, the cited def-coef-left-module-operadic-encoding, the parent lem-coef-lm-prism-approximation steps 8-10, and the sibling lem-coef-lm-module-fibre-reconstruction. The delivery adds no new nodes and makes no unit, tool_uses or SGA changes. The arrow directions are consistent. T_beta agrees with the definition's Cut. K_beta is a legal arrow because admissibility sends the module input to * when the target has no module colour. B_beta is part of the shared preamble and is used by the sibling. Step 1 (concatenating fibres under composition) and step 4 (discarded inputs) use only the definition's composition and discard clauses, as cited; the endpoint hypotheses alpha(0)=0 and alpha(n)=s give coverage and are needed. Step 2 is a joint induction on i with base lambda(alpha(0))=delta(0); it gives lambda∘alpha=delta and lambda(s)=delta(n). Step 3 (elementary) shows delta(0)<=lambda<=delta(n)<=r. Step 5 identifies h with D^eta_lambda. I tested r=3,s=2,n=1, alpha=(0,2), delta=(0,3); s=0 (which forces delta constant); n=0; eta=0 with delta(0)>0; repeated alpha values; and empty C_j. None gives a counterexample. The sibling module-target lemma is a different statement, not a duplicate. HA 4.1.2.11 and Rem. 4.2.2.8 are not archived (WANTED is recorded), but the proof needs only the explicit definition. The blueprint ancestor prop-coef-integral-exceptional-adjoint exists. No fixes were needed."
  }
 }
