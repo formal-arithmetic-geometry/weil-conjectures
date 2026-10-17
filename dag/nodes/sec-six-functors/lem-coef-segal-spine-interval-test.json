@@ -30,7 +30,8 @@
   "place": "Rezk, A model for the homotopy theory of homotopy theory, Lemma 10.3 and its proof via Lemma 10.1 and diagram (10.4), printed pp. 23-24; local equivalence is interpreted by Theorem 7.1(3), constructed before proving cartesian compatibility. Read online; not archived in literature/. No Stacks tag states this simplicial-space result."
  },
  "stmt_deps": [
-  "lem-coef-simplicial-space-reedy-cartesian"
+  "lem-coef-simplicial-space-reedy-cartesian",
+  "lem-cbc-spine-inner-anodyne"
  ],
  "proof": [
   {
@@ -214,5 +215,24 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-93a9d6ac0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-segal-interval-cover, the cited statements (lem-coef-simplicial-space-reedy-cartesian, lem-coef-kan-pullback-fibration-invariance) and the citer lem-coef-segal-cartesian-exponent in full. The item's statement, stmt_deps, unit and blueprint match the side-DAG base. The Rezk source (Lemmas 10.1 and 10.3, diagram 10.4) is not in literature/ or anywhere on this machine, and reviewers have no network access. The report files a WANTED line and proof_origin is 'agent', which the brief allows. I therefore checked every step directly against the cited statements. Step 1 is the prism decomposition: chains are covered by C_i (i is the least one-row second coordinate, or n if there is none), and C_i meets the earlier union exactly in D_{i-1}. I checked this by machine for n=2..5, and it is genuinely elementary. Step 2: since p_i is monotone and surjective, each preimage is an interval of length at least 2 and together they contain G(n+1), including at i=0 and i=n; the D_i pullback is G(n). All hypotheses of the new lemma are verified. Step 3: Map of a union of subobjects is a strict pullback in every simplicial degree, and the restrictions are Kan fibrations by the relative clause with V to the terminal object. Step 4 applies the strict-pullback invariance theorem with exactly its hypotheses, with base C_0 and endpoint U_n=P. The new node is statement-only, self-contained, smaller than the item, and has three kinds of Mathlib search (StrictSegal only, no match). It is true by induction on m, and I tested it at m=1, at m=2, on discrete nerves of ordinary categories and on the empty V. It duplicates no DAG or blueprint node (DAG grep for spine, consecutive edge, interval face and Segal cover; blueprint search for Segal and spine returned 0). The E7 source-error counterexample checks out: F([0,1]) union F([2,5]) in F(5), mapped to the two-object discrete nerve, gives 2 maps against 4. The node correctly requires G(m) inside H, and the item is not weakened. Every citation stays in unit sk-prop-sf-biduality-general, and no tool_uses are needed. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalSpineIntervalTest",
+  "declaration": "SSet.SegalSpace.spine_interval_test",
+  "file": "lean/Sheaf/AlgebraicTopology/SegalSpineIntervalTest.lean",
+  "statement": "theorem spine_interval_test (V : SimplicialSpace.{u}) (hV : IsSegal V) (n : ℕ) (hn : 2 ≤ n) : Enhanced.IsWeakHomotopyEquivalence (mappingSpacePre ((𝟙 (discreteRepresentable.{u} 1)) ⊗ₘ Functor.whiskerRight (simplexSpine.{u} n).ι (Functor.const SimplexCategoryᵒᵖ)) V)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published mapping-space and IsSegal interface. Reuses SSet.simplexSpine, made discrete in the inner direction by Functor.whiskerRight; for n ≥ 2 its span-at-most-one condition is exactly the union of the n consecutive edges. No new definition or stronger fibrancy hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8af38efdc",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement clause by clause matches node: IsSegal = IsReedyFibrant ∧ strict-path segalMap w.h.e. for m≥2; discreteRepresentable = F(n); simplexSpine (span≤1) whiskered by Functor.const = union of consecutive edges for n≥2; 𝟙 F(1) ⊗ₘ inclusion is the canonical product inclusion; mappingSpacePre = restriction Map(F1×Fn,V)→Map(F1×Gn,V); conclusion Enhanced.IsWeakHomotopyEquivalence. Edge cases n=2, constant simplices at endpoints, empty/terminal V checked. Node differs from base only in lean and stmt_deps (+landed lem-cbc-spine-inner-anodyne, allowed by §5, acyclic); lean.statement verbatim. No defs, only sorry, docstrings with source and blueprint, worker report and second reading present. nt_compile.py --json: rc 0, 17 modules, no errors/warnings. Cosmetic garbled phrase in second reading only."
  }
 }

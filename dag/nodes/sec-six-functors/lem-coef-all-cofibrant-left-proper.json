@@ -153,5 +153,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AllCofibrantLeftProper",
+  "declaration": "HomotopicalAlgebra.weakEquivalence_pushout_inl_of_all_isCofibrant",
+  "file": "lean/Sheaf/CategoryTheory/AllCofibrantLeftProper.lean",
+  "statement": "theorem weakEquivalence_pushout_inl_of_all_isCofibrant (M : Type u) [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] (_hcof : ∀ X : M, IsCofibrant X) {A B A' : M} (i : A ⟶ B) (w : A ⟶ A') [Cofibration i] [WeakEquivalence w] : WeakEquivalence (pushout.inl i w)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f28413c58",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause. The model-category binders exactly match the recorded dependency simplicial_model_nerve_localization (HasLimits/HasColimits plus both HasFunctorialFactorization), with no enrichment and no stronger assumption. The all-cofibrant hypothesis is ∀ X, IsCofibrant X; the arrow hypotheses are [Cofibration i] [WeakEquivalence w]; the conclusion WeakEquivalence (pushout.inl i w) has the correct B-coprojection direction per HTT A.2.4.1-A.2.4.2. Universes u, v are independent and bound. The docstring's 3-step plan works: clause (b) of modelCofibrantColimitComparison applies with w:=v. The node diff against the side clone is only the lean field, and lean.statement appears verbatim in the file. No definitions, one sorry, source/blueprint docstrings present, Worker report and Second reading by Q68 sections present. nt_compile.py --json on the snapshot file with the side overlay: rc=0, no errors or warnings, 1.2 s. No findings."
  }
 }
