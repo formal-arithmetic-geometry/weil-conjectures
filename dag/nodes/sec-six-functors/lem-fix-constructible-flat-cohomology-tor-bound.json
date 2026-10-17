@@ -1,0 +1,134 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "id": "lem-fix-constructible-flat-cohomology-tor-bound",
+ "kind": "statement",
+ "title": "Flat bounded cohomology gives finite Tor amplitude",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and its residue field $k=R/(\\varpi)$ [def-weil-l-adic-coefficient-extension]. Let $V$ be an affine scheme [def-pc-scheme] weakly contractible for its small pro-etale site [def-weil-pbc-proetale-site], meaning that evaluation on $V$ sends every epimorphism of sheaves of sets to a surjection. Put $B=\\varprojlim_{n\\geq1}(R/\\varpi^n)_V$ [def-weil-completed-integral-coefficients], and let $K\\in D(\\operatorname{Mod}(B))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] be derived complete for its coefficient quotient tower [def-weil-derived-complete]. Write $k_V$ for the constant sheaf of residue fields [def-weil-pbc-constant-sheaf] and $K_1=K\\otimes^L_B k_V$, the derived reduction modulo $\\varpi$ [def-weil-integral-derived-reduction] (here $k_V=(R/\\varpi)_V$). Suppose $a\\leq b$ are integers, $H^q(K_1)=0$ for $q\\notin[a,b]$ [def-weil-derived-cohomology-sheaves], and each $H^q(K_1)$ is locally constant with finite-dimensional $k$-vector-space local models [def-weil-proetale-locally-constant-sheaf]. Then for every object $U\\to V$ of $V_{\\mathrm{proet}}$, every sheaf $L$ of $k_U$-modules, and every $i\\notin[a,b]$, one has\n$$H^i\\bigl((K_1|_U)\\otimes^L_{k_U}L\\bigr)=0,$$\nwhere $k_U=k_V|_U$ and restriction is to the localized site [def-pur-localized-ringed-site, def-weil-pbc-ringed-site-derived-restriction]. Thus the residue complex has Tor amplitude $[a,b]$ on every slice, not just after evaluation on $V$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex), finite residue Tor-amplitude input, specialized to the residue field of O_E; the bounded truncation-filtration justification on every localized site is the argument extracted from returned item proof step 4, rather than an additional conclusion asserted by 09C3."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-integral-derived-reduction"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex whose cohomology sheaves are finite locally constant flat sheaves has finite Tor amplitude equal to its cohomological support",
+   "results": "service unavailable: rate limit exceeded; no result",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Tor, IsFlat, Complex, Homology",
+   "results": "no hits (unknown identifier Tor)",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid Loogle identifier; valid replacement queries are recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor|Flat|homology [Mathlib/Algebra/Homology]",
+   "results": "no hits; the old subdirectory argument included the Mathlib/ prefix and did not search the intended directory; superseded by the correctly rooted searches below",
+   "date": "2026-10-17",
+   "verdict": "no evidence: wrong subdirectory; corrected search recorded below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude bounded complex with flat cohomology sheaves",
+   "results": "DerivedCategory.isGE_iff; DerivedCategory.isLE_iff and related support lemmas (do not state Tor amplitude)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isGE_iff, DerivedCategory.isLE_iff",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGE|IsLE|TorAmplitude [Mathlib/Algebra/Homology]",
+   "results": "no hits; the old subdirectory argument included the Mathlib/ prefix and did not search the intended directory; superseded by the correctly rooted searches below",
+   "date": "2026-10-17",
+   "verdict": "no evidence: wrong subdirectory; corrected search recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|flat.*[Cc]ohomology",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: cohomological-support bounds and ordinary flat-module exactness do not state the sheaf residue Tor-amplitude bound on every slice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of sheaves with flat cohomology in degrees a through b has Tor amplitude a through b on all slice sites",
+   "subdirectory": "",
+   "results": "; 8 hits: CategoryTheory.Sheaf.H, HomologicalComplex.instHasLimitsOfShape, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instHasFiniteLimits, SheafOfModules.hasLimitsOfSize, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-17",
+   "verdict": "no match: cohomological-support bounds and ordinary flat-module exactness do not state the sheaf residue Tor-amplitude bound on every slice"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Module.Flat",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: cohomological-support bounds and ordinary flat-module exactness do not state the sheaf residue Tor-amplitude bound on every slice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded locally constant finite dimensional cohomology of a residue field sheaf complex implies Tor amplitude on every slice of the pro-etale site",
+   "subdirectory": "",
+   "results": "; 8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.isZero_Tor'_succ_of_projective",
+   "date": "2026-10-17",
+   "verdict": "no match: cohomological-support bounds and ordinary flat-module exactness do not state the sheaf residue Tor-amplitude bound on every slice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded residue complex with locally constant finite dimensional cohomology in degrees a to b has Tor amplitude a to b on every slice of the pro etale site",
+   "subdirectory": "",
+   "results": "; 8 hits: CochainComplex.isZero_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CochainComplex.IsStrictlyGE, Algebra.FormallyEtale.instTensorProduct, HomologicalComplex.instHasFiniteLimits, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-17",
+   "verdict": "no match: cohomological-support bounds and ordinary flat-module exactness do not state the sheaf residue Tor-amplitude bound on every slice"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-constructible-tensor-completion",
+  "date": "2026-10-17",
+  "group": "Q113"
+ },
+ "proof_origin": null,
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\": bounded locally constant residue cohomology gives the finite Tor-amplitude hypothesis needed for the local projective-model lemma.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
