@@ -9,11 +9,78 @@
  },
  "stmt_deps": [
   "lem-coef-simplicial-interval-lifting",
-  "lem-coef-fixed-object-free-arrow-adjunction"
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j:C\\to P$ and $v:F^O_{a,b}(L)\\to P$ for the fixed-object pushout maps. Its existence is supplied by the cocompleteness of the fixed-object model category in [lem-coef-simplicial-interval-lifting]. For $M=K,L$, define $e_M:U(M)\\to F^O_{a,b}(M)$ by $0\\mapsto a$, $1\\mapsto b$ and by sending each simplex of $M$ to its length-one word. This preserves identities and composition: in $U(M)$ no two nonidentity arrows are composable, even when their images are loops. The word construction and adjunction of [lem-coef-fixed-object-free-arrow-adjunction] give $F(i)e_K=e_LU(i)$ and $\\bar h e_K=h_U$, by checking objects and the displayed arrow maps. Therefore $j h_U=v e_L U(i)$, so $(j,v e_L)$ is a cocone on the variable-object span. Pushout means the colimit of this three-object span as in [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, horn case, printed p.11; agent supplies the canonical cocone and allows equal endpoints"
+   }
+  },
+  {
+   "text": "Fix a small target $T$ and an object function $f:O\\to\\operatorname{Ob}T$. Define an $O$-object simplicial category $T_f$ by $T_f(x,y)=T(fx,fy)$, with identities and composition those of $T$. The category laws are exactly the corresponding laws in $T$. There is a simplicial functor $q_f:T_f\\to T$ with object function $f$ and identity mapping-set maps. For any $D\\in\\mathrm{sCat}_O$, a functor $D\\to T$ with object function $f$ is exactly an identity-on-$O$ functor $D\\to T_f$: both specify the same maps $D(x,y)\\to T(fx,fy)$ with the same identity and composition equations. These assignments are inverse simply by retaining the mapping-set maps. These are the definitions of simplicial category and functor in [lem-coef-simplicial-interval-lifting]. In particular nothing requires $f$ to be injective.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 1 definitions, printed pp.1-3; explicit reindexing of a target category supplied by the agent"
+   }
+  },
+  {
+   "text": "Given $(G,\\ell)$ in the statement with object function $f$, view $G$ as $G_f:C\\to T_f$ by step 2. The adjunction [lem-coef-fixed-object-free-arrow-adjunction] turns $\\ell$ into $w:F^O_{a,b}(L)\\to T_f$. The two functors $G_f\\bar h$ and $wF(i)$ out of $F^O_{a,b}(K)$ correspond respectively to $G_{a,b}h$ and $\\ell i$, by the stated naturality of the adjunction in both variables. Thus they agree. The fixed-object pushout property [def-weil-pbc-category-colimit] gives a unique $\\widetilde E:P\\to T_f$ with $\\widetilde E j=G_f$ and $\\widetilde E v=w$. Set $E=q_f\\widetilde E$. It has object function $f$, satisfies $Ej=G$, and restricts to $\\ell$ on the length-one generators in the $L$-leg. Conversely any $E':P\\to T$ with these restrictions has object function $f$, since $j$ is identity on $O$. Viewed in $T_f$, its restriction along $v$ must equal $w$ by the same adjunction, and its restriction along $j$ is $G_f$. Uniqueness in the fixed-object pushout forces $E'=E$. Hence restriction is a bijection for each prescribed $f$; ranging over all $f$ gives precisely the asserted bijection for arbitrary enriched functors.",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, horn case, printed p.11; explicit universal-property proof of the fixed/variable-object comparison"
+   }
+  },
+  {
+   "text": "By the definition of $U$ in [lem-coef-simplicial-interval-lifting], a functor $H:U(L)\\to T$ is exactly two objects $t_0,t_1$ and a simplicial map $L\\to T(t_0,t_1)$: its maps on the identity mapping sets are forced to be identities, and on the empty reverse mapping set there is only one map. The equation $H U(i)=G h_U$ forces $t_0=Ga$, $t_1=Gb$ on objects, and says exactly $\\ell i=G_{a,b}h$ on the only nonidentity mapping set. Thus the compatible cocones from the variable-object span are exactly the pairs of step 3. The existence and uniqueness there is the colimit property [def-weil-pbc-category-colimit], so the cocone of step 1 is a pushout in $\\mathrm{sCat}$. Its vertex $P$ has object set $O$ by construction in $\\mathrm{sCat}_O$. Any other chosen pushout is uniquely isomorphic to it preserving the two structure maps; on objects this identifies its object set canonically with $O$.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, horn case, printed p.11, and Section 1 definition of U on printed p.3; unpacking the pushout property"
+   }
+  },
+  {
+   "text": "Finally let $S:T\\to T'$ be any simplicial functor. If $E:P\\to T$ corresponds to $(G,\\ell)$, restriction of $SE$ is $(SG,S_{Ga,Gb}\\ell)$, since restriction is precomposition with $j$ and with the $L$-generator map. The equality $(S_{Ga,Gb}\\ell)i=(SG)_{a,b}h$ follows by applying $S_{Ga,Gb}$ to the original equality. Thus postcomposition commutes with the bijection and, by its uniqueness, with its inverse. Its object function changes from $f$ to $(\\operatorname{Ob}S)f$, which proves the prescribed-object-function compatibility as well. All constructions used literal maps and equalities, not horn fillers or monomorphisms. They apply to arbitrary $i$, to $a=b$, and without any Kan hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, horn case, printed p.11; naturality and hypothesis audit supplied explicitly by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0406507",
+  "place": "Bergner Lemma 3.4, horn case, printed p.11, and Section 1 definitions. The fixed/variable-object comparison, including loops and arbitrary i, is proved explicitly by reindexing the target. Read online; not archived in literature/ (WANTED in report)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +116,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.instHasColimits\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"[HasColimits C] : HasColimits (SimplicialObject C)\", \"doc\": \"If a category $\\\\mathcal{C}$ has all colimits, then the category of simplicial objects in $\\\\mathcal{C}$ also has all colimits, with colimits computed objectwise using the colimits in $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.SmallObject.ιFunctorObj\", \"module\": \"Mathlib.CategoryTheory.SmallObject.Construction\", \"type\": \": X ⟶ functorObj f πX\", \"doc\": \"The morphism from $ X $ to the pushout object $ \\\\coprod B_i \\\\sqcup_{\\\\coprod A_i} X $, constructed as the left inclusion in the pushout diagram formed by the canonical morphism $ \\\\coprod A_i \\\\to X $ an\"}\n  {\"name\": \"CategoryTheory.SimplicialObject\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max v u)\", \"doc\": \"A simplicial object in a category $\\\\mathcal{C}$ is a functor from the opposite of the simplex category $\\\\Delta^\\\\text{op}$ to $\\\\mathcal{C}$. The simplex category $\\\\Delta$ has objects given by finite or\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesPushout.inl_iso_hom\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks\", \"type\": \": pushout.inl _ _ ≫ (PreservesPushout.iso G f g).hom = G.map (pushout.inl _ _)\", \"doc\": \"For a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserving pushouts, and morphisms $ f : A \\\\to B $, $ g : A \\\\to C $ in $ \\\\mathcal{C} $, the composition of the inclusion morphism $ \\\\iota_Y : Y \\\\to \\\\t\"}\n  {\"name\": \"AugmentedSimplexCategory.inclusion_obj\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Augmented.Basic\", \"type\": \"∀ (a : SimplexCategory), AugmentedSimplexCategory.inclusion.obj a = CategoryTheory.WithInitial.of a\", \"doc\": \"The inclusion functor from the simplex category $\\\\Delta$ to the augmented simplex category $\\\\Delta_+$ maps each object of $\\\\Delta$ to itself in $\\\\Delta_+$.\"}\n  {\"name\": \"CategoryTheory.Limits.Types.Pushout.inl\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Pushouts\", \"type\": \": X₁ ⟶ Pushout f g\", \"doc\": \"The canonical inclusion map from $ X_1 $ to the pushout of morphisms $ f $ and $ g $, defined by embedding $ X_1 $ into the disjoint union $ X_1 + X_2 $ via the left injection and then taking equivale\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"{J : Type v} [SmallCategory J] [HasLimitsOfShape J C] : HasLimitsOfShape J (SimplicialObject C)\", \"doc\": \"If a category $\\\\mathcal{C}$ has all limits of shape $J$, then the category of simplicial objects in $\\\\mathcal{C}$ also has all limits of shape $J$.\"}\n  {\"name\": \"AugmentedSimplexCategory.inclusion_map\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Augmented.Basic\", \"type\": \"∀ {X Y : SimplexCategory} (f : X ⟶ Y), AugmentedSimplexCategory.inclusion.map f = f\", \"doc\": \"For any morphism $ f $ in the simplex category $ \\\\Delta $, the inclusion functor into the augmented simplex category $ \\\\Delta_+ $ maps $ f $ to itself, i.e., $ \\\\text{inclusion.map}(f) = f $.\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary free categories, functor-category evaluation and simplicial-set colimits do not state this strict enriched-category assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(enriched|simplicial).*(pushout|fixed.object)|(pushout|fixed.object).*(enriched|simplicial)",
+   "results": "[grep] OK 6 hit(s)\nMathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\nMathlib/AlgebraicTopology/SimplicialSet/PushoutProduct.lean\nMathlib/AlgebraicTopology/SimplicialSet/PushoutProduct.lean\nMathlib/AlgebraicTopology/SimplicialSet/PushoutProduct.lean\nMathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\nMathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general pushout, simplicial-set and enriched-functor declarations do not assert this enriched fixed/variable-object comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCategory, CategoryTheory.Limits.IsPushout",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Limits.IsPushout'\n",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: corrected by the subsequent CategoryTheory.IsPushout search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed object pushout of simplicial categories along a free arrow is also the pushout among enriched functors with arbitrary object functions",
+   "results": "[leansearch] OK 8 hit(s)\nCategoryTheory.Functor.PushoutObjObj.ofHasPushout_pt\nCategoryTheory.Functor.PushoutObjObj.ctorIdx\nCategoryTheory.Functor.PushoutObjObj.pt\nCategoryTheory.Functor.PushoutObjObj.ofHasPushout\nCategoryTheory.Functor.PushoutObjObj.isPushout\nCategoryTheory.Functor.PushoutObjObj\nCategoryTheory.Functor.PushoutObjObj.mk\nCategoryTheory.Limits.pushoutObjIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general pushout, simplicial-set and enriched-functor declarations do not assert this enriched fixed/variable-object comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushouts of free arrow attachments in fixed object simplicial enriched categories are pushouts in all simplicial categories with arbitrary object maps",
+   "results": "[leanfinder] OK 8 hit(s)\nHomotopicalAlgebra.AttachCells.isPushout\nHomotopicalAlgebra.AttachCells.pushouts_coproducts\nCategoryTheory.SmallObject.functorObj_isPushout\nCategoryTheory.Arrow.cechConerve_obj\nHomotopicalAlgebra.nonempty_attachCells_iff\nCategoryTheory.SmallObject.attachCellsιFunctorObj\nCategoryTheory.Arrow.cechConerve_map\nSSet.Subcomplex.BicartSq.isPushout",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general pushout, simplicial-set and enriched-functor declarations do not assert this enriched fixed/variable-object comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindex a simplicial enriched category along an object function to convert arbitrary object enriched functors into identity on objects functors and compute a pushout",
+   "results": "[leanfinder] OK 8 hit(s)\nCategoryTheory.SimplicialThickening.functor\nCategoryTheory.SimplicialThickening.functor_id\nCategoryTheory.CatEnrichedOrdinary.toBase\nCategoryTheory.SimplicialObject.instEnrichedCategorySSet\nCategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\nCategoryTheory.SimplicialNerve\nSSet.QCat.catEnrichedOrdinaryCategory\nCategoryTheory.SimplicialThickening.functor_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general pushout, simplicial-set and enriched-functor declarations do not assert this enriched fixed/variable-object comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCategory, CategoryTheory.IsPushout",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general pushout, simplicial-set and enriched-functor declarations do not assert this enriched fixed/variable-object comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-interval-cell-stability",
@@ -79,5 +188,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-scat-fixed-object-pushout-comparison",
+  "worker": "stage1",
+  "summary": "Q32 writes the full fixed/variable-object pushout comparison by target reindexing and the existing free-arrow adjunction. Proves both inverses of the restriction bijection, its postcomposition naturality and its restriction to every object function, including coincident endpoints. Keeps the statement and inherited fields; adds the existing colimit definition to the notion dependencies. No new nodes.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived coefficient-adjunction calculation and naturality/triangle identities: foundational enhancement carried through the recorded ancestry; specifically lem-coef-simplicial-interval-cell-stability proof step 3, horn-cell comparison. Does not replace any unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-784444d2a",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-784444d2a (reviewer sub-agent of L); spot-checked: I read all of the item, all five steps, the three cited statements (interval-lifting, free-arrow adjunction, colimit leaf), and parent step 3. I checked the source, Bergner math/0406507 (U on p.3; Lemma 3.4, horn case, pp.10-11), against the text I extracted with pdftotext. Bergner assumes the two endpoints are distinct (jx=x, jy=y) and uses O''∐U(V) in SC_O without proving it equals the variable-object pushout. The item proves that comparison for arbitrary i and for a=b, through the reindexed target T_f and the adjunction's stated naturality, so proof_origin=agent is correct. Each step is correct. Step 1: e_M is a functor even with loops, and j h_U = v e_L U(i). Step 2 is definitional. Step 3: the existence and uniqueness of the fixed-object extension use the adjunction's bijection and naturality in both variables. Step 4: functors U(L)->T are forced on objects, giving exactly the pairs (G,l). Step 5: naturality under postcomposition and change of object function. Edge cases tested: a=b with one object, K empty, L empty, i an identity, non-injective i or f, a target with no objects. No hidden lemma, no cycle, proof_deps equals the union of the steps' uses. There are no new nodes and the statement is not a relabelling. No duplicate found: word-filtration needs injective i, and the degreewise-colimit, fixed-vertex-cofibration and left-proper nodes are different statements. The route stays inside sk-prop-sf-biduality-general, so no tool_uses are needed. No SGA is cited. This is not a target, so the base-change checks do not apply. No fixes."
  }
 }
