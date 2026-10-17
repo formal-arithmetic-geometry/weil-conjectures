@@ -31,9 +31,145 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the standard simplex of [def-cbc-enhanced-diagrams-cones]. For a nonempty vertex subset $V\\subseteq[n]$, write $\\Delta^V$ for the simplicial subset of maps with image in $V$, and $F_j^n=\\Delta^{[n]\\setminus\\{j\\}}$. Unions and intersections of these subsets are degreewise unions and intersections: precomposition preserves the condition on images. Every weakly increasing map $[r]\\to[n]$ has nonempty image, so all the following identities can be checked on nonempty subsets of vertices. The spine $I_n$ consists of those maps whose image is contained in a consecutive edge. For the auxiliary dimension-one case below, put $I_1=\\Delta^1$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "For any two simplicial subsets $U,V$ of a fixed simplex, their union is the pushout $U\\amalg_{U\\cap V}V$. Indeed two simplicial maps agreeing on $U\\cap V$ define a unique map on $U\\cup V$ by using the given map on each part; agreement makes it well-defined in every degree and the two simplicial naturality equations imply naturality on the union. This is exactly the colimit universal property of [def-weil-pbc-category-colimit]. Thus a union inclusion is a pushout of the inclusion of the intersection into the newly attached part.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "For $m\\geq2$ put $E_m=I_m\\cup F_m^m$. The intersection $I_m\\cap F_m^m$ is the spine on the ordered vertices $0,\\ldots,m-1$, hence is $I_{m-1}$ under $F_m^m\\cong\\Delta^{m-1}$. By step 2, $I_m\\hookrightarrow E_m$ is a pushout of $I_{m-1}\\hookrightarrow\\Delta^{m-1}$. This latter map is assumed to belong to $\\mathcal A$ when $m>2$; when $m=2$ it is the identity of $\\Delta^1$, which belongs to $\\mathcal A$. Therefore $I_m\\hookrightarrow E_m$ belongs to $\\mathcal A$ for all $m\\geq2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "The composite $I_m\\hookrightarrow E_m\\hookrightarrow\\Delta^m$ is the assumed spine inclusion. Right cancellation applied to this composite and the map established in step 3 gives $E_m\\hookrightarrow\\Delta^m\\in\\mathcal A$, for every $m\\geq2$. All three maps are inclusions of simplicial subsets, hence are monomorphisms, as cancellation requires.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "Put $B_n=F_0^n\\cup F_n^n$. For $n=2$, $B_2=I_2$, so $I_2\\hookrightarrow B_2\\in\\mathcal A$. For $n\\geq3$, first attach $F_n^n$ as in step 3. For the next attachment, the order-preserving bijection $[n-1]\\cong\\{1,\\ldots,n\\}$ identifies $F_0^n\\cap I_n$ with $I_{n-1}$ and $F_0^n\\cap F_n^n$ with $F_{n-1}^{n-1}$. Thus $F_0^n\\cap E_n$ identifies with $E_{n-1}$. Also $E_n\\cup F_0^n=B_n$, because each consecutive edge lies in $F_0^n$ or $F_n^n$. Step 2 and step 4 give $E_n\\hookrightarrow B_n\\in\\mathcal A$ by pushout, and composition with step 3 gives $I_n\\hookrightarrow B_n\\in\\mathcal A$. Transport across the displayed order isomorphism uses only composition with isomorphisms, which are in $\\mathcal A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "We now prove a simultaneous induction claim: for each $n\\geq2$ and each nonempty $S\\subseteq\\{1,\\ldots,n-1\\}$, put $L(n,S)=\\bigcup_{j\\in[n]\\setminus S}F_j^n$; the union contains $B_n$ because $0,n\\notin S$, and therefore contains $I_n$ by step 5; then both $I_n\\hookrightarrow L(n,S)$ and $L(n,S)\\hookrightarrow\\Delta^n$ belong to $\\mathcal A$. Induct strongly on $n$. At $n=2$ the only $S$ is $\\{1\\}$, and $L(2,S)=I_2$, so the two maps are an identity and the assumed spine inclusion. At each larger $n$, prove the first map for all $S$ by induction on $t=(n-1)-|S|$, starting at $t=0$. Once the first map for a given $S$ is proved, right cancellation with $I_n\\hookrightarrow\\Delta^n$ proves its second map. These cancellations involve only subset inclusions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "Fix $n\\geq3$ and assume the whole claim of step 6 for smaller dimensions. When $t=0$, $S=\\{1,\\ldots,n-1\\}$ and $L(n,S)=B_n$. The first map is given by step 5, and its second map follows by the cancellation specified in step 6. This starts the induction on $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "For $t>0$, choose $b\\in\\{1,\\ldots,n-1\\}\\setminus S$ and set $T=S\\cup\\{b\\}$. The value of $t$ for $T$ is $t-1$, so the inner induction gives $I_n\\hookrightarrow L(n,T)\\in\\mathcal A$. Since the indices omitted from the union differ exactly by $b$, $L(n,S)=L(n,T)\\cup F_b^n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "Let $d_b:[n-1]\\to[n]$ be the increasing injection missing $b$, and let $U=d_b^{-1}(T)=d_b^{-1}(S)$. The face $F_b^n$ is identified with $\\Delta^{n-1}$ by $d_b$. Under this identification its intersection with $L(n,T)$ is $L(n-1,U)$. Indeed an $r$-simplex of $F_b^n$ is $d_b\\alpha$ for a unique weakly increasing $\\alpha:[r]\\to[n-1]$. It lies in $L(n,T)$ exactly when its image omits some $j\\notin T$; such a $j$ is different from $b$, hence uniquely $j=d_b(a)$ with $a\\notin U$. This is precisely the condition that $\\alpha$ lie in $L(n-1,U)$. The identification commutes with precomposition, so it is an equality of simplicial subsets, not just of vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "The restriction of $d_b$ gives a bijection from $U$ onto $S$, because $b\\notin S$. Hence $U$ is nonempty. Since $0<b<n$, the endpoints of $[n-1]$ map to $0,n$, neither of which lies in $T$. Thus $U\\subseteq\\{1,\\ldots,n-2\\}$. Also $n-1\\geq2$. These are exactly the hypotheses for the outer induction claim in dimension $n-1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "The outer induction therefore gives $I_{n-1}\\hookrightarrow L(n-1,U)\\in\\mathcal A$. Cancelling it from its composite $I_{n-1}\\hookrightarrow\\Delta^{n-1}\\in\\mathcal A$ gives $L(n-1,U)\\hookrightarrow\\Delta^{n-1}\\in\\mathcal A$. By step 9 and composition with the face isomorphism, this is the inclusion $F_b^n\\cap L(n,T)\\hookrightarrow F_b^n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "By the union pushout of step 2, the map in step 11 pushes out to $L(n,T)\\hookrightarrow L(n,S)\\in\\mathcal A$. Composing with step 8 proves $I_n\\hookrightarrow L(n,S)\\in\\mathcal A$. Cancelling this inclusion from the assumed $I_n\\hookrightarrow\\Delta^n\\in\\mathcal A$ gives $L(n,S)\\hookrightarrow\\Delta^n\\in\\mathcal A$. This closes the induction on $t$, and then the induction on $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  },
+  {
+   "text": "For $0<i<n$ take $S=\\{i\\}$. By the horn definition in [def-cbc-enhanced-diagrams-cones], $L(n,\\{i\\})=\\Lambda_i^n$. The second map in the established claim of step 6 is exactly $\\Lambda_i^n\\hookrightarrow\\Delta^n$, proving the assertion for every $n\\geq2$. No outer horn is claimed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Joyal–Tierney, Quasi-categories vs Segal spaces, Lemma 3.5, proof (read online 2026-10-17; archive WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/0607820",
+  "place": "Expanded proof of Joyal–Tierney Lemma 3.5, read online; document absent from literature/, archive requested in report. All combinatorial steps written out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -104,10 +240,66 @@
    "results": "{\"t\": \"2026-10-16T23:16:07Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial set inner horn inclusions generated by spine inclusions using weak saturation and cancellation of a prefix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.spineId_map_hornInclusion\", \"SSet.horn.spineId\", \"SSet.horn.spineId_arrow_coe\", \"SSet.Truncated.spine_arrow\", \"SSet.Truncated.StrictSegal.spineToSimplex_arrow\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Truncated.StrictSegal.spineToSimplex_edge\", \"SSet.StrictSegalCore.spineToSimplex_succ\"], \"digest\": \"fbe6d85fd5506a4c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading. LeanFinder returns Path.lean horn.spineId and horn.spineId_map_hornInclusion (lines 374-384), which only place the spine inside an inner horn, and StrictSegal filler results, which assume unique spine fillers. Loogle and grep return zero hits. Composition.lean lines 368-377 define of-postcomp/of-precomp properties but do not prove the simplicial generation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "spine.*(anodyne|saturat|cancel)|horn.*spine|HasOfPrecompProperty",
+   "results": "{\"t\": \"2026-10-16T23:55:44Z\", \"tool\": \"grep\", \"query\": \"spine.*(anodyne|saturat|cancel)|horn.*spine|HasOfPrecompProperty\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\"], \"digest\": \"e2073fa042435c77\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib AlgebraicTopology/SimplicialSet/Path.lean:369–384 (spine inside inner horns), Quasicategory/StrictSegal.lean:30–37 (requires unique spine fillers), and AnodyneExtensions/Inner/Basic.lean:39–62 (inner-anodyne lifting class). None states the criterion for an arbitrary saturated class with cancellation. Second semantic phrasing finds low-dimensional horn colimit identities only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any saturated class of simplicial set inclusions containing the spines and satisfying right cancellation contains every inner horn",
+   "results": "{\"t\": \"2026-10-16T23:55:45Z\", \"tool\": \"leansearch\", \"query\": \"Any saturated class of simplicial set inclusions containing the spines and satisfying right cancellation contains every inner horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.quasicategory_of_filler\", \"SSet.KanComplex.hornFilling\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.KanComplex\", \"SSet.Quasicategory.mk\"], \"digest\": \"4aa4750a95fa7f46\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib AlgebraicTopology/SimplicialSet/Path.lean:369–384 (spine inside inner horns), Quasicategory/StrictSegal.lean:30–37 (requires unique spine fillers), and AnodyneExtensions/Inner/Basic.lean:39–62 (inner-anodyne lifting class). None states the criterion for an arbitrary saturated class with cancellation. Second semantic phrasing finds low-dimensional horn colimit identities only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spine\", \"horn\"",
+   "results": "{\"t\": \"2026-10-16T23:55:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"spine\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SSet.horn.spineId\", \"SSet.horn.spineId_map_hornInclusion\", \"SSet.horn.spineId_vertex_coe\", \"SSet.horn.spineId_arrow_coe\"], \"digest\": \"f1e50dc7d3272dc4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib AlgebraicTopology/SimplicialSet/Path.lean:369–384 (spine inside inner horns), Quasicategory/StrictSegal.lean:30–37 (requires unique spine fillers), and AnodyneExtensions/Inner/Basic.lean:39–62 (inner-anodyne lifting class). None states the criterion for an arbitrary saturated class with cancellation. Second semantic phrasing finds low-dimensional horn colimit identities only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly saturated class of simplicial monomorphisms with right cancellation containing all spine inclusions contains all inner horns",
+   "results": "{\"t\": \"2026-10-16T23:55:46Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly saturated class of simplicial monomorphisms with right cancellation containing all spine inclusions contains all inner horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.KanComplex\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.KanComplex.hornFilling\"], \"digest\": \"9c8929f580fd6119\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib AlgebraicTopology/SimplicialSet/Path.lean:369–384 (spine inside inner horns), Quasicategory/StrictSegal.lean:30–37 (requires unique spine fillers), and AnodyneExtensions/Inner/Basic.lean:39–62 (inner-anodyne lifting class). None states the criterion for an arbitrary saturated class with cancellation. Second semantic phrasing finds low-dimensional horn colimit identities only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inner horn inclusion generated by consecutive edge inclusions under pushouts composition and cancellation of a prefix",
+   "results": "{\"t\": \"2026-10-16T23:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"Inner horn inclusion generated by consecutive edge inclusions under pushouts composition and cancellation of a prefix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.ι₂_desc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₁.ι₀_desc\", \"SSet.horn₃₂.ι₀_desc\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.horn₂₀.isPushout\"], \"digest\": \"88df103a8c95839b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib AlgebraicTopology/SimplicialSet/Path.lean:369–384 (spine inside inner horns), Quasicategory/StrictSegal.lean:30–37 (requires unique spine fillers), and AnodyneExtensions/Inner/Basic.lean:39–62 (inner-anodyne lifting class). None states the criterion for an arbitrary saturated class with cancellation. Second semantic phrasing finds low-dimensional horn colimit identities only."
+  },
+  {
+   "tool": "grep",
+   "query": "spine.*(horn|[Aa]nodyne|[Cc]ancel)|[Hh]orn.*spine|[Cc]ancellation.*[Ss]pine",
+   "results": "{\"t\": \"2026-10-17T00:47:15Z\", \"tool\": \"grep\", \"query\": \"spine.*(horn|[Aa]nodyne|[Cc]ancel)|[Hh]orn.*spine|[Cc]ancellation.*[Ss]pine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\"], \"digest\": \"e2073fa042435c77\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader independently searched using morphism-property and monic-prefix vocabulary. Loogle has no hit; grep and LeanFinder find the spine path in an inner horn (Mathlib/AlgebraicTopology/SimplicialSet/Path.lean:369-384) and horn filling for Kan complexes or quasicategories, not generation for an arbitrary class. Read StrictSegal.lean:30-42 (requires strict unique spine fillers) and AnodyneExtensions/Inner/Basic.lean:39-62 (the specific inner-anodyne lifting class); neither states this cancellation criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spine\", \"HasOfPrecompProperty\"",
+   "results": "{\"t\": \"2026-10-17T00:47:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"spine\\\", \\\"HasOfPrecompProperty\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader independently searched using morphism-property and monic-prefix vocabulary. Loogle has no hit; grep and LeanFinder find the spine path in an inner horn (Mathlib/AlgebraicTopology/SimplicialSet/Path.lean:369-384) and horn filling for Kan complexes or quasicategories, not generation for an arbitrary class. Read StrictSegal.lean:30-42 (requires strict unique spine fillers) and AnodyneExtensions/Inner/Basic.lean:39-62 (the specific inner-anodyne lifting class); neither states this cancellation criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism property of simplicial sets closed under pushouts and composition and cancelling monic prefixes contains inner horn embeddings if it contains spine embeddings",
+   "results": "{\"t\": \"2026-10-17T00:47:16Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism property of simplicial sets closed under pushouts and composition and cancelling monic prefixes contains inner horn embeddings if it contains spine embeddings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn.spineId_map_hornInclusion\", \"SSet.Quasicategory.hornFilling\", \"SSet.KanComplex.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"d0f7ce457bd7084e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader independently searched using morphism-property and monic-prefix vocabulary. Loogle has no hit; grep and LeanFinder find the spine path in an inner horn (Mathlib/AlgebraicTopology/SimplicialSet/Path.lean:369-384) and horn filling for Kan complexes or quasicategories, not generation for an arbitrary class. Read StrictSegal.lean:30-42 (requires strict unique spine fillers) and AnodyneExtensions/Inner/Basic.lean:39-62 (the specific inner-anodyne lifting class); neither states this cancellation criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-vertical-restriction-inner",
@@ -123,5 +315,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-spine-cancellation-inner-horns",
+  "worker": "stage1",
+  "summary": "Read the online proof of Joyal–Tierney Lemma 3.5 and expanded its two-end-face pushouts, face-intersection calculation, and two well-founded inductions. No new nodes: each argument is a finite subset calculation, an explicit universal-property check, or a use of the stated closure/cancellation hypotheses. Existing Lean and Mathlib searches give no exact attachment/leaf. Statement and statement dependencies preserved.",
+  "blueprint": "Realizes the recorded ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 before R lim, via the recorded enriched-localization/complete-Segal ancestry, specifically the spine/right-cancellation criterion in the inner-horn mixed-box argument. The two-end-face stage and double induction are Joyal–Tierney Lemma 3.5; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-808343454",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-808343454 (reviewer sub-agent of L); spot-checked: Read the full item (statement, 13 steps), the three cited definition statements (def-weil-pbc-simplicial-set, def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit), the parent lem-coef-segal-vertical-restriction-inner step 5, and the source itself. The source is Joyal–Tierney arXiv:math/0607820: the right-cancellation definition and Lemma 3.5 with its full proof on pp.16–17, the n-chain definition before Lemma 1.21, Definition 1.10 and appendix Definition 7.4. The paper is not in literature/; the report has the WANTED line and proof_origin is agent. The statement is the source's inner-horn case. The item's closure hypotheses (including all arrow retracts) imply the source's saturation, and the parent uses exactly this conclusion. It is unchanged and not weakened. The steps follow the source's i_n/j_n/k_n pushouts and its double induction. They also fill in the m=2 case (I_1=Δ^1) and the n=3 case that the source glosses over, and they state the induction claim, base and step explicitly. Step 9's face-intersection identification is correct on all simplices. Every cancellation is in the correct direction and applied to subset inclusions. All steps marked elementary are justified. The citations say what the steps take from them, and since only definitions are cited there is no route issue. My own script checked every set identity used, for n=2..7 and every S and b: 300 cases, all passed. No duplicate in the DAG: lem-cbc-spine-inner-anodyne is the converse direction, and the labelled-spine node is a different statement. No Mathlib leaf: I checked Path.lean 369-384, StrictSegal and AnodyneExtensions. There are no new nodes, no fixes and no tool_uses."
  }
 }

@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-thm-sf-global-duality",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-sf-global-duality"
+  ]
  },
  "kind": "statement",
  "title": "Global Verdier duality",
@@ -13,28 +15,169 @@
   "place": "node sk-thm-sf-global-duality, order 2507"
  },
  "stmt_deps": [
-  "sk-def-sf-operations"
+  "sk-def-sf-setting",
+  "sk-def-sf-operations",
+  "def-sf-pf",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "def-sbc-smooth-morphisms",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pure-dimension",
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change"
  ],
  "proof": [
   {
-   "text": "Apply [sk-thm-sf-verdier-exchange] with $Y=\\mathrm{Spec}\\,k$ and\n$f=a_X$: $\\mathbb D_s(Ra_{X!}K)\\cong Ra_{X*}\\mathbb D_XK$. Evaluating at the\ngeometric point and using $\\omega_s\\cong\\Lambda$ and\n$\\mathrm{Fib}_s(Ra_{X!}K)=\\RG_c(X,K)$,\n$\\mathrm{Fib}_s(Ra_{X*}K)=\\RG(X,K)$ turns the left-hand side into\n$\\RG_c(X,K)^\\vee$ and the right-hand side into $\\RG(X,\\mathbb D_XK)$.",
+   "text": "Put $s=\\operatorname{Spec}k$, $a=a_X:X\\to s$, $C=Ra_!K$ and $B=Ra_*\\mathbb D_XK$, using [sk-def-sf-operations] and the dualizing-object and duality notation of [def-sf-pf]. The hypotheses make $a$ a separated finite-type morphism between separated finite-type $k$-schemes. The coefficient unit has finite Tor amplitude $[0,0]$. Apply [thm-sf-ctf-stability](v) to the unit to obtain $\\omega_X=Ra^!\\Lambda_s\\in\\Dctf(X,\\Lambda)$, then (ii) to $(K,\\omega_X)$ to obtain $\\mathbb D_XK\\in\\Dctf(X,\\Lambda)$. Clauses (iv) and (iii), applied respectively to $K$ and $\\mathbb D_XK$, give $C,B\\in\\Dctf(s,\\Lambda)$. At finite coefficients these are precisely the displayed preservation assertions; clause (vii) supplies their integral, rational and common-stage versions. Apply (v) also to $\\operatorname{id}_s$ and $\\Lambda_s$ to obtain $\\omega_s\\in\\Dctf(s,\\Lambda)$; then (ii) at $s$ puts $\\mathbb D_s C=R\\mathcal H om_s(C,\\omega_s)$ in $\\Dctf(s,\\Lambda)$. Thus all objects used below lie in the bounded constructible point category, even though the exchange theorem is stated in an ambient category.",
    "uses": [
-    "sk-thm-sf-verdier-exchange"
+    "sk-def-sf-operations",
+    "def-sf-pf",
+    "thm-sf-ctf-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+    "place": "Sole paragraph, before specializing exchange: verify the small-category domains using the existing preservation theorem"
+   }
+  },
+  {
+   "text": "Apply [sk-thm-sf-verdier-exchange] to $f=a$, $Y=s$ and $M=K$. It gives the canonical isomorphism $\\eta_K:\\mathbb D_s C\\xrightarrow{\\sim}B$, natural contravariantly in $K$ and compatible with finite reduction, scalar extension and shifts. Both ends belong to the full bounded constructible subcategory by step 1; the map and its inverse therefore restrict to an isomorphism there. The theorem uses the constructible exceptional adjoint of [sk-def-sf-operations](vi), so its hypotheses require no additional ambient admissibility datum. This application works under either geometric alternative in the item: both supply the same separated finite-type structure morphism.",
+   "uses": [
+    "sk-thm-sf-verdier-exchange",
+    "sk-def-sf-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+    "place": "Sole paragraph, first sentence: specialize Verdier exchange to the structure morphism"
+   }
+  },
+  {
+   "text": "Write $F_\\Lambda=\\operatorname{Fib}_s$. Use the exceptional adjunction of [sk-def-sf-operations](vi) and the counit normalization for the exceptional adjoint of the identity, whose compact-support functor is the identity; thus the point normalization is the adjunction identification, rather than a choice of an arbitrary isomorphism. The point identifications of [lem-sf-point] give $\\omega_s\\cong\\Lambda_s$ and identify the evaluated internal Hom $F_\\Lambda\\mathbb D_s C$ with $R\\operatorname{Hom}_\\Lambda(F_\\Lambda C,\\Lambda)=(F_\\Lambda C)^\\vee$. Use [lem-weil-point-fibre-equivalence] for the exact fibre equivalence at each of the four coefficient stages; this avoids using only the finite-level target $D^b_{\\mathrm{fin}}(A_{E,n})$ in the notation of [lem-sf-point] at an integral or field stage. By [def-weil-ordinary-compact-cohomology], $F_\\Lambda C=R\\Gamma_c(X,K)$ and $F_\\Lambda B=R\\Gamma(X,\\mathbb D_XK)$. Define the asserted arrow $\\gamma_K$ by composing the inverse of the internal-Hom point identification with $F_\\Lambda(\\eta_K)$ and these two global-section identifications. Each factor is invertible, so $\\gamma_K$ is invertible. Through the fibre equivalence this is the asserted isomorphism in $D^b_c(s,\\Lambda)$, not just an isomorphism of cohomology groups.",
+   "uses": [
+    "lem-sf-point",
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-ordinary-compact-cohomology",
+    "sk-def-sf-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+    "place": "Sole paragraph, remaining sentences: evaluate and identify the two sides"
+   }
+  },
+  {
+   "text": "The canonical identifications in step 3 respect the required comparisons as follows. The fibre functor is exact and commutes with shifts by [lem-weil-point-fibre-equivalence]. Its tensor/unit comparison is natural, coherent and compatible with finite reduction and scalar extension by [lem-sf-point-fibre-derived-tensor]. For the finite-Tor point objects of step 1, [thm-sf-ctf-stability](vii) supplies the finite-quotient comparisons for internal Hom and duality, preserving evaluation, and their passage to the higher coefficient constructions. Write $t_{P,Q}:F_\\Lambda(P\\otimes^L Q)\\xrightarrow{\\sim}F_\\Lambda P\\otimes^L F_\\Lambda Q$ for the tensor comparison, $e:C\\otimes^L\\mathbb D_s C\\to\\Lambda_s$ for internal-Hom evaluation followed by the point normalization, and $u:F_\\Lambda\\Lambda_s\\xrightarrow{\\sim}\\Lambda$ for the unit comparison. Under the tensor/internal-Hom adjunction of [sk-def-sf-operations](i), the point comparison $\\alpha_C:F_\\Lambda\\mathbb D_s C\\to R\\operatorname{Hom}_\\Lambda(F_\\Lambda C,\\Lambda)$ is the mate of the explicit composite $F_\\Lambda C\\otimes^L F_\\Lambda\\mathbb D_s C\\xrightarrow{t_{C,\\mathbb D_s C}^{-1}}F_\\Lambda(C\\otimes^L\\mathbb D_s C)\\xrightarrow{F_\\Lambda e}F_\\Lambda\\Lambda_s\\xrightarrow{u}\\Lambda$. This specifies the evaluation-compatible point identification used in step 3. Consequently its naturality and coefficient squares commute: after the adjunction bijection each is the tensor/unit compatibility square, so equality there is equality of the original arrows. In particular the module-side canonical Hom base-change map agrees with the conjugate of the sheaf-side comparison under the point identifications; its invertibility here follows from that comparison, without assuming that arbitrary internal Hom commutes with scalar change. For integral-to-finite passage, the actual comparison $F_{A_{E,n}}(N\\otimes^L A_{E,n})\\cong F_{\\mathcal O_E}(N)\\otimes^L A_{E,n}$ is [lem-pod-point-sections-derived-reduction], applicable because the point objects in step 1 are bounded constructible. The integral and rational scalar comparisons are [lem-weil-point-sections-scalar-extension], including its identity and tower equations; the common-stage definition of [def-weil-finite-coefficient-point] uses these same comparisons for $\\overline{\\mathbf Q}_\\ell$. Thus all point identifications in $\\gamma_K$ commute with the comparisons. The exchange factor has these properties by [sk-thm-sf-verdier-exchange]. Composing its naturality or coefficient square with the point-identification squares proves the corresponding square for $\\gamma_K$; composing the shift squares gives the contravariant shift convention on both sides. This proves naturality, finite-reduction compatibility, scalar-extension compatibility and shift compatibility of the specified canonical arrow.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-sf-point-fibre-derived-tensor",
+    "sk-def-sf-operations",
+    "lem-pod-point-sections-derived-reduction",
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-finite-coefficient-point",
+    "sk-thm-sf-verdier-exchange",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+    "place": "Sole paragraph, canonical point evaluation; make explicit the naturality and coefficient clauses of the statement"
+   }
+  },
+  {
+   "text": "Take $K=\\Lambda_X$, the coefficient object of [def-weil-ordinary-compact-cohomology] (the coefficient unit $\\Lambda_X$ of [def-sf-pf], the tensor unit as in [sk-def-sf-setting]), so that $R\\Gamma_c(X,\\Lambda)=R\\Gamma_c(X,\\Lambda_X)$ by the abbreviation of [def-weil-ordinary-compact-cohomology]. By [def-sf-pf], $\\mathbb D_X\\Lambda_X=R\\mathcal H om_X(\\Lambda_X,\\omega_X)$. This identifies canonically with $\\omega_X$: the adjoint of the tensor unitor $\\Lambda_X\\otimes^L\\omega_X\\to\\omega_X$ gives $\\omega_X\\to R\\mathcal H om_X(\\Lambda_X,\\omega_X)$; in the other direction use the inverse left unitor followed by internal-Hom evaluation. The two composites are identities by the tensor/internal-Hom adjunction identities of [sk-def-sf-operations](i). Substitute this identification into $\\gamma_{\\Lambda_X}$ from step 3 to obtain $R\\Gamma_c(X,\\Lambda)^\\vee\\cong R\\Gamma(X,\\omega_X)$.",
+   "uses": [
+    "sk-def-sf-setting",
+    "def-sf-pf",
+    "sk-def-sf-operations",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+    "place": "Statement, final clause: the constant-coefficient specialization"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-sf-verdier-exchange"
+  "def-sf-pf",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-sf-point",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-sections-scalar-extension",
+  "sk-def-sf-operations",
+  "sk-def-sf-setting",
+  "sk-thm-sf-verdier-exchange",
+  "thm-sf-ctf-stability"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+  "place": "Sole proof paragraph, expanded using lem-sf-point and the existing small-category and coefficient-comparison statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global Verdier duality identifies the derived coefficient dual of compactly supported cohomology with ordinary cohomology of the Verdier dual",
+   "results": "8 hits; returned names/files: CategoryTheory.Sheaf.H, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, DerivedCategory.exists_iso_Q_obj_of_isGE, groupCohomologyIsoExt, DerivedCategory.isGE_Q_obj_iff; read the returned signatures: none states compact-support Verdier duality or its natural coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|verdierDual|compactlySupportedGlobalSections|coefficientDual",
+   "results": "25 hits; returned names/files: Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean; read the returned signatures: none states compact-support Verdier duality or its natural coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual of compactly supported etale cohomology is the cohomology of the Verdier dual",
+   "results": "8 hits; returned names/files: Representation.dual, FGModuleCat.FGModuleCatDual, Module.dual_projective, Module.Dual.congr, AddChar.doubleDualEmb_doubleDualEquiv_symm_apply, Module.dual_free, Module.Basis.dualBasis, Subspace.dualEquivDual; read the returned signatures: none states compact-support Verdier duality or its natural coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Verdier",
+   "results": "0 hits; returned names/files: ; loogle: unknown identifier 'Verdier'; read the returned signatures: none states compact-support Verdier duality or its natural coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|upperShriek|dualizingComplex|VerdierDual",
+   "results": "0 hits; returned names/files: ; directory Mathlib/AlgebraicGeometry; read the returned signatures: none states compact-support Verdier duality or its natural coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism, internal Hom from its compact support pushforward to a coefficient object equals ordinary pushforward of internal Hom into exceptional pullback",
+   "results": "8 hits; returned names/files: LightCondensed.ihomPoints_symm_comp, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.pushforwardUncurry, LightCondensed.ihom_map_val_app, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.ExponentiableMorphism.pushforwardCurry, CategoryTheory.ExponentiableMorphism.homEquiv_symm_apply_eq; read the returned signatures: none states compact-support Verdier duality or its natural coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"duality\"",
+   "results": "12 hits; returned names/files: TannakaDuality.FiniteGroup.rightFDRep, TannakaDuality.FiniteGroup.leftRegular, TannakaDuality.FiniteGroup.rightRegular, TannakaDuality.FiniteGroup.leftRegularFDRepHom, TannakaDuality.FiniteGroup.equivApp, TannakaDuality.FiniteGroup.ofRightFDRep, TannakaDuality.FiniteGroup.forget, TannakaDuality.FiniteGroup.mulRepHom; read the returned signatures: none states compact-support Verdier duality or its natural coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to pushforward with compact support gives duality between compactly supported derived sections and sections of a dualizing complex",
+   "results": "8 hits: ordinary sheaf/module pushforward and pullback adjunction instances, including AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward and SheafOfModules.pushforwardPushforwardAdj. None states derived compact-support duality or its coefficient compatibilities.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -148,5 +291,49 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-sf-global-duality",
+  "worker": "stage1",
+  "summary": "Expanded the structure-morphism specialization of Verdier exchange into five checked steps; reused existing point, preservation and coefficient-comparison nodes; kept the statement and imported metadata unchanged; no new nodes. The recorded Lean declaration proves only Nonempty at finite coefficients and is not an exact attachment.",
+  "blueprint": "The sole paragraph of sk-thm-sf-global-duality.proof.md: step 2 realizes the exchange specialization, step 3 the point evaluation; steps 1 and 4 check the stated categories and compatibilities, and step 5 realizes the constant clause.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Generic preservation and coefficient-passage tool: puts both sides in the bounded constructible point category; the unit gives the duality specialization, not these preservation results."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic exact point equivalence at all four coefficient stages; needed to supplement the finite-stage target displayed in lem-sf-point."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Generic coherent monoidal point comparison, including finite reduction and scalar extension, used to identify evaluation and its internal-Hom mate."
+   },
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Generic integral point-sections/derived-quotient comparison; the unit has no statement of this derived coefficient comparison."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic point scalar-extension comparison with identity and tower coherence; supplies the point side of the scalar compatibility squares."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ctf-stability",
+  "lem-weil-point-fibre-equivalence",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-ac1bc793e",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-ac1bc793e (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is byte-identical to the main-20261015 sketch and agrees hypothesis by hypothesis with the detailed thm-sf-global-duality (same_as); nothing is weakened. The coefficient category is the pro-etale point category of def-weil-finite-coefficient-point, not identified with the etale slopmaster2 setting. There are no new nodes. Step 1: thm-sf-ctf-stability (v), (ii), (iv), (iii) put omega_X, D_X K, Ra_!K, Ra_*D_X K and D_s C in D_ctf; (vii) carries this to O_E, E and Qlbar, and def-weil-ordinary-compact-cohomology presupposes the direct-image membership. Step 2: sk-thm-sf-verdier-exchange with f=a_X, Y=s, M=K matches its hypotheses exactly, with no admissibility datum and no properness, so the descended non-proper case is covered. Step 3: the lem-sf-point clauses for omega_s and the internal Hom, the four-stage lem-weil-point-fibre-equivalence and the RGamma/RGamma_c definitions give gamma_K in the correct direction. The report's STATEMENT-DISPUTED on lem-sf-point (finite-only fibre target) is correct and does not affect this split. Step 4: alpha_C as the mate of the evaluation composite, the tensor comparison, the integral derived reduction (Fib = Gamma(s,-) at O_E) and phi_{L/E} with its tower identity are each stated by the cited nodes. Step 5 is elementary. A transitive closure over the snapshot reaches neither the item nor thm-sf-global-duality, so there is no cycle. Accepted tool_uses: thm-sf-ctf-stability, lem-weil-point-fibre-equivalence, lem-sf-point-fibre-derived-tensor, lem-pod-point-sections-derived-reduction, lem-weil-point-sections-scalar-extension. Small cases checked: X=s, K=0, A^1 with K=Lambda (both sides Lambda(1)[2]), a closed-point pushforward, and an integral torsion K. The slopmaster2 Nonempty declaration is not an exact attachment. FIX: step 5 used the abbreviation RGamma_c(X,Lambda)=RGamma_c(X,Lambda_X) and the pro-etale Lambda_X of def-weil-ordinary-compact-cohomology without citing it; I added that node to step 5's uses and identified Lambda_X with def-sf-pf's coefficient unit. proof_deps is unchanged; the corrected file is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }
