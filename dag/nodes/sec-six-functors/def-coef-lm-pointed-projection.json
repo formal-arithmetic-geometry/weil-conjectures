@@ -1,0 +1,107 @@
+{
+ "id": "def-coef-lm-pointed-projection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "The canonical finite-pointed-set projection used to state the symmetric infinity-operad assertions of module-operad-encoding.",
+   "via": [
+    "lem-coef-module-operad-encoding",
+    "lem-coef-module-universal-arrow-criterion",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical pointed-set projection of the ordered left-module operad",
+ "statement": "Use the ordered-fibre left-module operator category $\\mathsf{LM}^{\\otimes}$ and its nerve $L$ of [def-coef-left-module-operadic-encoding], and the finite-pointed-set category $\\mathrm{Fin}_*$ and lifted nerve of [def-coef-relative-symmetric-operadic-algebras]. Define the forgetful functor $\\mathsf{LM}^{\\otimes}\\to\\mathrm{Fin}_*$ by sending a colour word of arity $n$ to $\\langle n\\rangle$, the basepoint to the basepoint, and an input to the output whose ordered fibre contains it, or to the basepoint if it occurs in no output fibre. Disjointness makes the output unique. Identity singleton fibres give identity maps, and ordered-fibre substitution gives composition of pointed maps. Its nerve is the canonical projection $L\\to N(\\mathrm{Fin}_*)$; no order or colour is retained.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), Notation 4.2.1.6 and Definition 4.2.1.7, canonical forgetful functor to Fin_*."
+ },
+ "stmt_deps": [
+  "def-coef-left-module-operadic-encoding",
+  "def-coef-relative-symmetric-operadic-algebras"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "forget orders functor from left module operad to finite pointed sets",
+   "results": "CategoryTheory.Mod_.forget, ModuleCat.instIsRightAdjointForget and ordinary forgetful functors",
+   "date": "2026-10-17",
+   "verdict": "no LM operator projection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left module infinity operad restriction to algebra and underlying object equivalence",
+   "results": "ModuleCat.monModuleEquivalenceAlgebra and ordinary monoidal module functors",
+   "date": "2026-10-17",
+   "verdict": "no LM operator projection"
+  },
+  {
+   "tool": "grep",
+   "query": "LMOperadCategory|lmPointed|LMZeroOperators",
+   "results": "Mathlib search: zero hits; rg of dag/nodes, lean/Sheaf and source WeilConjectures found the LM category and LM₀ helpers, but no pointed-set projection.",
+   "date": "2026-10-17",
+   "verdict": "genuinely missing canonical map between recorded notions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-module-operad-encoding",
+  "date": "2026-10-17",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LMPointedProjection",
+  "declaration": "SSet.Enhanced.lmPointedProjection",
+  "declarations": [
+   "SSet.Enhanced.lmPointedArrow",
+   "SSet.Enhanced.lmPointedArrow_functorial",
+   "SSet.Enhanced.lmPointedFunctor",
+   "SSet.Enhanced.lmPointedProjection"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LMPointedProjection.lean",
+  "statement": "def lmPointedProjection : lmBase.{u} ⟶ finStarBase.{u}",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc97e7806",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc97e7806",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read the node, both new nodes, both delivered modules, the report and every dependency declaration (LeftModuleOperadicEncoding in full, RelativeSymmetricOperadicAlgebras in full, InfinityFibrations, the LM0 helpers in ModuleUniversalArrowCriterion). All clauses match: three IsSymmetricInfinityOperad and two IsSymmetricOperadMap conjuncts over the canonical lmPointedProjection, cocartesianFibration r, ordered transport via IsLMOrderedOperation including the nullary unit, the LM/LM relative-algebra equivalence f fixed by inclusions (symmetric and LM inertness agree), the LM0 identifications g and e with both coordinates fixed, R as precomposition with R≫e=lift Θ(ev≫moduleIdentification), Θ fixed by lmModuleRestriction and a cartesian fibration, and the strict fibre iso to LMModuleFiber compatible with T.underlying. No extra hypotheses; one universe u per dependency convention; no unbound variables. lmPointedArrow is canonical (disjoint words give a unique witness) and lmPointedArrow_functorial is true and named. lmZeroGenerators length 1 equals the singleton fibre condition. nt_compile.py of both files: exit 0, no warnings (an injected error was reported, so the check is real). Statements verbatim; item changed only in lean and stmt_deps; docstrings, proof steps and line widths OK. Non-blocking: stage-3 import layout (the LM0 helpers live in ModuleUniversalArrowCriterion, whose node proof-depends on this item; the cyclic import is omitted as stage-2 rule 7 allows; move the helpers before proving that criterion); 6 HA section numbers in the report replaced by 'the project server'; the worker report section is explicitly superseded."
+ }
+}

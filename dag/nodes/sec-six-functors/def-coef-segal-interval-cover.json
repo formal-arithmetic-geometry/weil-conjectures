@@ -1,0 +1,117 @@
+{
+ "id": "def-coef-segal-interval-cover",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Supporting finite interval-cover notion used by the finite face-family descent argument; Rezk Lemmas 10.1 and 11.11.",
+   "via": [
+    "lem-coef-segal-finite-cover-descent",
+    "lem-coef-segal-equivalence-outer-horn",
+    "lem-coef-segal-equivalence-classifier",
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-segal-dk-diagonal-equivalence",
+    "lem-coef-diagonal-coherent-nerve-comparison",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Finite interval covers of simplex faces",
+ "statement": "For a finite linearly ordered subset $S\\subseteq\\{0,\\ldots,n\\}$, an interval cover of the face $F(S)$ is a finite union of full faces $F(I)$ indexed by nonempty consecutive intervals $I$ in the induced order on $S$, contained in $F(S)$, and containing every vertex and every edge between consecutive elements of $S$. The empty union is allowed only for the empty ambient face.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Rezk Lemma 10.1, printed p.23, and Lemma 11.11, printed p.27."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite consecutive interval cover of a simplex face as a union of full faces containing vertices and consecutive edges",
+   "results": "Found SSet.stdSimplex.mem_face_iff, SSet.stdSimplex.face, and vertex-face membership lemmas; no interval-cover predicate.",
+   "date": "2026-10-17",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "interval cover of a simplex face as a finite union of consecutive full faces containing vertices and consecutive edges",
+   "results": "Found SSet.stdSimplex.face and SSet.stdSimplex.edge; no interval-cover predicate.",
+   "date": "2026-10-17",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.stdSimplex.face, Subcomplex, interval",
+   "results": "No hits for an interval-cover declaration; Mathlib has the face subcomplex.",
+   "date": "2026-10-17",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "interval.*cover|cover.*interval",
+   "results": "0 hits in Mathlib/AlgebraicTopology, the source repository, and lean/Sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-segal-finite-cover-descent",
+  "date": "2026-10-17",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalFiniteIntervalCover",
+  "declaration": "SSet.SegalSpace.IsIntervalCover",
+  "declarations": [
+   "SSet.SegalSpace.IsConsecutiveInterval",
+   "SSet.SegalSpace.faceUnion",
+   "SSet.SegalSpace.IsIntervalCover"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalFiniteIntervalCover.lean",
+  "statement": "def IsIntervalCover {n : ℕ} (S : Finset (Fin (n + 1))) (A : (SSet.stdSimplex.obj ⦋n⦌ : SSet.{u}).Subcomplex) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c25ee21c",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c25ee21c",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause: n:ℕ, Finset family 𝔽 with member nonemptiness and nonempty-intersection closure; IsReedyFibrant V ∧ segalMap weak for m≥2 (strict consecutive-edge pullback, same notion as recorded IsSegal); X=faceUnion 𝔽 and A≤X made discrete in the inner direction via whiskerRight/const (same convention as discreteRepresentable/outerHornInclusion); IsIntervalCover S (A⊓face S); conclusion I.rlp of mappingSpacePre = trivial Kan fibration. Node statement unchanged; only stmt_deps gains the new def node (§1(A)). The new def node has the exact §5 field set and a real definition: consecutive filtered intervals, a supremum of faces, all vertices and consecutive edges; a singleton forces the full face; empty S forces ⊥. The landed SegalIntervalCover structure (whole F(m), m≥1, in a lemma module) cannot express this general predicate, so no duplicate. Edge cases checked: empty family (faceUnion ∅=⊥ forces A=⊥), n=0, singletons, disjoint members, nonconsecutive S. The six proof steps are sound and carried in the docstring. Dependency node files unchanged; lean.statement verbatim in both files; source/blueprint docstrings; sorry only. nt_compile.py --json on both modules: exit 0, no errors or warnings. No findings."
+ }
+}

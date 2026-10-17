@@ -32,7 +32,8 @@
  },
  "stmt_deps": [
   "lem-coef-kan-quillen-right-proper",
-  "lem-coef-simplicial-space-reedy-cartesian"
+  "lem-coef-simplicial-space-reedy-cartesian",
+  "def-coef-segal-interval-cover"
  ],
  "proof": [
   {
@@ -206,5 +207,26 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-d9ff41d4b (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full, and Rezk's paper online (pdftotext); the paper is not archived and the delivery has a WANTED line for it. Lemma 10.1 is on printed p.23: a cover is a union of interval faces with the same 0-space, and the proof uses a colimit over a poset of faces with G(n)∩α_iF(k)=α_iG(k). Lemma 11.11 is on printed p.27: C(k) is a colimit of faces containing vertices 0 and 1, each meeting d0H∪α0F(1) in a cover. The item states the general finite, intersection-closed face-family form of both. Its interval-cover definition requires every vertex and every consecutive edge, which fixes Rezk's 'same 0-space' condition: F([0,1])∪F([2,3]) in F(3) contains all vertices but misses edge 12. Step 1 is correct: monomorphisms are Reedy cofibrations and V→* is a Reedy fibration, so restrictions are Kan fibrations; Map(-,V) turns a union into a pullback over the intersection because sS is a presheaf category; F(S)∩F(T)=F(S∩T). Step 2 sets up the strong induction properly: with S maximal, H' and the overlap family {T∩S} are intersection-closed and strictly smaller, and the local hypotheses follow because F(U)⊆K. In step 3, E∩K=D∩K, pullbacks of trivial fibrations are trivial by the boundary-lifting characterization in kan-quillen, and 2-out-of-3 comes from the reedy-model-structure axioms. In step 4, Z=Y'∪E, Z∩F(S)=B and Y=Z∪F(S); two pullbacks and the composite lifting argument close the induction. In step 5, Yoneda gives M(F(m))=V_m, the spine restriction is the Segal map (identity for m=0,1), intervals are closed under intersection, G(S)∩F(I)=G(I), and 2-out-of-3 finishes; this proves Rezk 10.1 inside the item. Step 6 applies the gluing claim, with the empty and singleton cases covered. I tested the empty family, a singleton, the n=2 spine case (the Segal map), a family missing an intersection, and the S_J family used in outer-horn step 4. The statement is unchanged, nothing is weakened, and it is not a target, so the base-change check does not apply. There are no new nodes, all citations are in unit sk-prop-sf-biduality-general, there is no cycle and no SGA, and no tool_uses are needed. Mathlib searches cover all three kinds with no match (only StrictSegal hits). One duplicate candidate for the maintainer, outside this delivery: the existing unsplit node lem-coef-segal-interval-cover (Q89, 2026-10-17) is exactly step 5 and is the case F={[m]} of this item. It should become a one-step specialization of this item or be merged into it. The report's claim that created was changed to NZ is inaccurate, but the node's created field (outer-horn, Q23) is correct. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalFiniteCoverDescent",
+  "declaration": "SSet.SegalSpace.finite_cover_descent",
+  "declarations": [
+   "SSet.SegalSpace.finite_cover_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalFiniteCoverDescent.lean",
+  "statement": "theorem finite_cover_descent : ∀ (n : ℕ) (𝔽 : Finset (Finset (Fin (n + 1)))), (∀ S ∈ 𝔽, S.Nonempty) → (∀ S T, S ∈ 𝔽 → T ∈ 𝔽 → (S ∩ T).Nonempty → S ∩ T ∈ 𝔽) → ∀ (V : SimplicialSpace.{u}), IsReedyFibrant V ∧ (∀ m : ℕ, 2 ≤ m → Enhanced.IsWeakHomotopyEquivalence (segalMap V m)) → ∀ (A : (SSet.stdSimplex.obj ⦋n⦌ : SSet.{u}).Subcomplex), (hA : A ≤ faceUnion 𝔽) → (∀ S ∈ 𝔽, IsIntervalCover S (A ⊓ SSet.stdSimplex.face S)) → SSet.modelCategoryQuillen.I.rlp (mappingSpacePre (Functor.whiskerRight (SSet.Subcomplex.homOfLE hA) (Functor.const SimplexCategoryᵒᵖ)) V)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c25ee21c",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause: n:ℕ, Finset family 𝔽 with member nonemptiness and nonempty-intersection closure; IsReedyFibrant V ∧ segalMap weak for m≥2 (strict consecutive-edge pullback, same notion as recorded IsSegal); X=faceUnion 𝔽 and A≤X made discrete in the inner direction via whiskerRight/const (same convention as discreteRepresentable/outerHornInclusion); IsIntervalCover S (A⊓face S); conclusion I.rlp of mappingSpacePre = trivial Kan fibration. Node statement unchanged; only stmt_deps gains the new def node (§1(A)). The new def node has the exact §5 field set and a real definition: consecutive filtered intervals, a supremum of faces, all vertices and consecutive edges; a singleton forces the full face; empty S forces ⊥. The landed SegalIntervalCover structure (whole F(m), m≥1, in a lemma module) cannot express this general predicate, so no duplicate. Edge cases checked: empty family (faceUnion ∅=⊥ forces A=⊥), n=0, singletons, disjoint members, nonconsecutive S. The six proof steps are sound and carried in the docstring. Dependency node files unchanged; lean.statement verbatim in both files; source/blueprint docstrings; sorry only. nt_compile.py --json on both modules: exit 0, no errors or warnings. No findings."
  }
 }

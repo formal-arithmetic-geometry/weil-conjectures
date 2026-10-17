@@ -440,5 +440,34 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-52b747c81 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 18 steps, and the full statements of its 11 proof dependencies and 4 statement dependencies. I also read the blueprint place (main-20261015 prop-coef-integral-exceptional-adjoint proof, paragraph 2) and the unit record. The delivery adds no new nodes. proof_deps equals the union of the step uses. Every dependency is in unit sk-prop-sf-biduality-general, apart from one other-unit definition used as a notion, so no tool_uses are needed. I traversed the full dependency closure (183 nodes) myself: there is no cycle and no path to lem-coef-unmarked-straightening-quillen, the nerve-localization node or the model-infinity-derived-adjunction node, so the Q72 constraint holds. The statement is unchanged from the base. It is the S=sSet case of HTT A.3.3.2/A.3.3.7/A.3.3.8, every simplicial set is cofibrant, and nothing is weakened. HTT is not in literature/ and I could not read its pages, so I verified the self-contained proof instead. Steps 1-7: the accessible monad and free diagrams; the right lifting classes; the λ-filtered bound; SM7 transposed so that no cofibrant domains are needed; the retract proof of D_I=C_I∩W_I; the three cotensor corner-map cases; and the enriched Kan-extension Quillen pair. Steps 8-9: the relative unit is a pushout product with a mono weak equivalence. The transfinite argument with Z_α=HP_α⊔_{P_α}P_λ works without left properness, and H0=0 gives η_P. Steps 10-12: the Whitehead arguments, including the endpoint lift L_1 against an arbitrary cofibration, and the fibrant-only version through cofibrant replacements. Step 13: reflection through π0-invertible vertices on fibrant values. Steps 14-15: the finite-string localization is equivalent to the bifibrant π0 category, which gives saturation and representation by actual maps. The derived adjunction comes from mapping components and Ken Brown via the split factorizations. Step 16: invertible unit, reflection, invertible counit, and [ā]=v^*[a][η_P]. Step 17: in the sCat_O factorization the cofibration is mappingwise monic (free extension plus retract), p is a DK equivalence, and g and s are monic DK equivalences; the empty case is handled. Step 18: s^*p^*=1 and v^*=g^*p^* give the Quillen equivalence criterion. I tested the empty, one-object and discrete index cases and found no faults. The only minor issue is a harmless forward reference from Step 2 to Step 6's tensor. No changes made. HTT still needs archiving in literature/."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialProjectiveModelCalculus",
+  "declaration": "CategoryTheory.simplicial_projective_model_calculus",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialProjectiveModelCalculus.lean",
+  "statement": "theorem simplicial_projective_model_calculus {C : Type w} [Category.{u} C] [ModelCategory C] [SimplicialCategory C] (T : SimplicialTensorCotensor C) (hC : CombinatorialModelCategory.{w, u, u} C) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 C) : (∀ (I : Type u) [Category.{u} I] [SimplicialCategory I], ∃ E : SimplicialDiagramEnrichment I C, Nonempty (ProjectiveSimplicialModelStructure T E)) ∧ (∀ {I J : Type u} [Category.{u} I] [Category.{u} J] [SimplicialCategory I] [SimplicialCategory J] (v : EnrichedFunctor SSet.{u} I J), DwyerKanEquivalence v → ∀ (E : SimplicialDiagramEnrichment I C) (E' : SimplicialDiagramEnrichment J C) (P : ProjectiveSimplicialModelStructure T E) (Q : ProjectiveSimplicialModelStructure T E'), Nonempty (SimplicialQuillenEquivalence v P Q))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SimplicialDiagramEnrichment",
+   "CategoryTheory.SimplicialDiagramEnrichment.Diagrams",
+   "CategoryTheory.SimplicialDiagramEnrichment.value",
+   "CategoryTheory.SimplicialDiagramEnrichment.component",
+   "CategoryTheory.ProjectiveSimplicialModelStructure",
+   "CategoryTheory.simplicialUnderlyingFunctor",
+   "CategoryTheory.SimplicialQuillenEquivalence"
+  ],
+  "note": "Uses canonical CombinatorialModelCategory, SatisfiesSM7, and DwyerKanEquivalence through definition-only imports. Their owning theorem nodes are not mathematical prerequisites: each now has a dependency path back to this item, so adding those theorem dependencies would create cycles. The enriched mapping end represents Mathlib enrichedNatTransYoneda, with canonical componentwise identity and composition, and ForgetEnrichment supplies genuine enriched transformation arrows. Restriction is fixed by enriched precomposition on objects and all mapping objects; its ordinary enriched adjoint is the left Kan extension. All eighteen proof steps and their stated imports are retained.",
+  "fixed_by": "NT-stage2-cc-6d3d0ec44"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d3d0ec44",
+  "group": "N7",
+  "result": "fix",
+  "note": "Read the node, its 4 stmt_deps, the reused SatisfiesSM7/CombinatorialModelCategory/DwyerKanEquivalence/SimplicialTensorCotensor declarations, Mathlib ForgetEnrichment/GradedNatTrans, the module and report (real Worker report + Second reading by N7). Universes (I,J:Type u; C:Type w, Category.{u}; Combinatorial.{w,u,u}), SM7, DK, end enrichment, the projective model fields, objectwise tensor/cotensor/evaluation, the pinned restriction, the enriched left adjoint, Quillen criterion and edge cases all match. H3 fixed: free_diagram fixed only the objects I(i,j)⊗X, leaving the I-action and unit arbitrary. Added the field free_diagram_tensor_unit (action from i composed with the unit = T.tensorUnit (sHom i j) X), which pins the canonical free diagram. Theorem signature, lean.statement and records are unchanged. nt_compile: delivered and fixed modules clean, no warnings; a test file confirmed the instance from E.enrichment and the HEq type equality. Maintainer note: the public imports are definition modules owned by DAG-downstream theorem nodes (11 downstream modules in the closure); no cycle now, but stage 3 needs those definitions split out."
  }
 }

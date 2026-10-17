@@ -1,0 +1,131 @@
+{
+ "id": "def-coef-module-operad-lm-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "The LM₀ suboperad used in the restriction to an algebra and an independent object in the proof of Proposition 4.2.4.2.",
+   "via": [
+    "lem-coef-module-operad-encoding",
+    "lem-coef-module-universal-arrow-criterion",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The LM₀ suboperad of the left-module operad",
+ "statement": "Use the ordered left-module operad `LM^⊗` and its finite ordered fibres from [def-coef-left-module-operadic-encoding]. Define `LM₀^⊗` to have all the same objects and exactly those operations for which every module-coloured output has a singleton ordered fibre consisting of its unique module-coloured input; inputs sent to the basepoint remain unrestricted. Substitution and identities are inherited, so this is a wide subcategory and its nerve `LM₀^⊗` includes into `LM^⊗`. The module-colour object and its vertex in the nerve are retained.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), proof of Proposition 4.2.4.2, the suboperad LM_0 and its identification with Assoc coproduct Triv. Online source read; no local archive."
+ },
+ "stmt_deps": [
+  "def-coef-left-module-operadic-encoding"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "LM_0 suboperad of the left module operad with unary module output operations",
+   "results": "CategoryTheory.Mod_.mod, CategoryTheory.Mod_, CategoryTheory.Mod_Class, CategoryTheory.Mod_.X, CategoryTheory.ModObj, CategoryTheory.Mod_.regular, CategoryTheory.Mod_.instInhabited, CategoryTheory.ModObj.regular",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib declarations are ordinary monoidal module objects, not the coloured infinity-operadic LM_0 suboperad."
+  },
+  {
+   "tool": "loogle",
+   "query": "InducedWideCategory, LMOperadCategory, nerve",
+   "results": "loogle: unknown identifier InducedWideCategory",
+   "date": "2026-10-17",
+   "verdict": "no direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "LM_0|lmZero|moduleColour.*f.hom",
+   "sub": "CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib."
+  },
+  {
+   "tool": "rg",
+   "query": "LM_0|lmZero|module operad",
+   "sub": "lean/Sheaf and WeilConjectures",
+   "results": "only LeftModuleOperadicEncoding.lean; no LM_0 declaration",
+   "date": "2026-10-17",
+   "verdict": "no project/source declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "LM_0 colored operad subcategory unary module operations",
+   "results": "CategoryTheory.Mod_, CategoryTheory.Mod_.instCategory, CategoryTheory.Mod_.mod, CategoryTheory.Mod_.noConfusion, CategoryTheory.Mod_.Hom.ctorIdx, CategoryTheory.ModObj.one_smul, CategoryTheory.ModObj.one_smul'",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module objects and equations, not the coloured LM_0 infinity-operad subcategory."
+  },
+  {
+   "tool": "rg",
+   "query": "LMZeroOperators|lmZeroGenerators|lmZeroBase in lean/Sheaf and source WeilConjectures",
+   "results": "Found ModuleUniversalArrowCriterion.lean:75–115; no upstream or Mathlib counterpart.",
+   "date": "2026-10-17",
+   "verdict": "exact existing project notion; dropped the duplicate module and bound the published helpers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-module-operad-encoding",
+  "date": "2026-10-17",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleUniversalArrowCriterion",
+  "declaration": "SSet.Enhanced.lmZeroGenerators",
+  "declarations": [
+   "SSet.Enhanced.lmZeroGenerators",
+   "SSet.Enhanced.LMZeroOperators",
+   "SSet.Enhanced.lmZeroBase",
+   "SSet.Enhanced.lmZeroInclusion",
+   "SSet.Enhanced.lmAlgebraZeroInclusion",
+   "SSet.Enhanced.lmZeroVertex"
+  ],
+  "statement": "def lmZeroGenerators : MorphismProperty LMOperadCategory",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Reuse the published LM₀ helpers in the universal-arrow module. Length one is exactly a singleton module input by LM admissibility. That module does not import ModuleOperadEncoding, so importing its definitions is acyclic."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc97e7806",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc97e7806",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read the node, both new nodes, both delivered modules, the report and every dependency declaration (LeftModuleOperadicEncoding in full, RelativeSymmetricOperadicAlgebras in full, InfinityFibrations, the LM0 helpers in ModuleUniversalArrowCriterion). All clauses match: three IsSymmetricInfinityOperad and two IsSymmetricOperadMap conjuncts over the canonical lmPointedProjection, cocartesianFibration r, ordered transport via IsLMOrderedOperation including the nullary unit, the LM/LM relative-algebra equivalence f fixed by inclusions (symmetric and LM inertness agree), the LM0 identifications g and e with both coordinates fixed, R as precomposition with R≫e=lift Θ(ev≫moduleIdentification), Θ fixed by lmModuleRestriction and a cartesian fibration, and the strict fibre iso to LMModuleFiber compatible with T.underlying. No extra hypotheses; one universe u per dependency convention; no unbound variables. lmPointedArrow is canonical (disjoint words give a unique witness) and lmPointedArrow_functorial is true and named. lmZeroGenerators length 1 equals the singleton fibre condition. nt_compile.py of both files: exit 0, no warnings (an injected error was reported, so the check is real). Statements verbatim; item changed only in lean and stmt_deps; docstrings, proof steps and line widths OK. Non-blocking: stage-3 import layout (the LM0 helpers live in ModuleUniversalArrowCriterion, whose node proof-depends on this item; the cyclic import is omitted as stage-2 rule 7 allows; move the helpers before proving that criterion); 6 HA section numbers in the report replaced by 'the project server'; the worker report section is explicitly superseded."
+ }
+}
