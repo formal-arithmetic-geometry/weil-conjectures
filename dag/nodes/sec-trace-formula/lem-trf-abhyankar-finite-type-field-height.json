@@ -11,9 +11,61 @@
  "stmt_deps": [
   "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because K is finitely generated over its prime subfield F, a finite transcendence basis exists and its cardinality is the stated finite integer d. Fix the valuation ring A and write Gamma_K for its value group, A_F=A\\cap F for the induced valuation ring on F, and kappa_K=A/m_A and kappa_F=A_F/m_{A_F} for the residue fields.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, setup preceding Lemma 2.1.2; local document copy unavailable"
+   }
+  },
+  {
+   "text": "Apply the relative Abhyankar inequality [lem-trf-abhyankar-inequality] to F\\subseteq K and A. It gives rrk(Gamma_K/Gamma_F)+trdeg_{kappa_F}(kappa_K)\\le d. Since the residue transcendence degree is nonnegative, rrk(Gamma_K/Gamma_F)\\le d.",
+   "uses": [
+    "lem-trf-abhyankar-inequality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, Lemma 2.1.2 (relative form); local document copy unavailable"
+   }
+  },
+  {
+   "text": "The map $\\Gamma_F\\to\\Gamma_K$ is injective, because $A_F^\\times=A^\\times\\cap F^\\times$ (if $x,x^{-1}\\in A$ with $x\\in F$, both lie in $A_F$). Tensoring the short exact sequence $0\\to\\Gamma_F\\to\\Gamma_K\\to\\Gamma_K/\\Gamma_F\\to0$ with the flat $\\mathbf Z$-module $\\mathbf Q$ keeps it exact, so $\\operatorname{rrk}(\\Gamma_K)=\\operatorname{rrk}(\\Gamma_F)+\\operatorname{rrk}(\\Gamma_K/\\Gamma_F)$. By [lem-trf-prime-field-valuation-rank], applied to the valuation ring $A_F$ of the prime field $F$, $\\operatorname{rrk}(\\Gamma_F)\\le1$; with the bound $\\operatorname{rrk}(\\Gamma_K/\\Gamma_F)\\le d$ of Step 2 from [lem-trf-abhyankar-inequality], $\\operatorname{rrk}(\\Gamma_K)\\le d+1$.",
+   "uses": [
+    "lem-trf-abhyankar-inequality",
+    "lem-trf-prime-field-valuation-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, Lemma 2.1.2 and prime-field valuation discussion; local document copy unavailable"
+   }
+  },
+  {
+   "text": "For any finite strictly increasing chain of prime ideals of A with n strict inclusions, [lem-trf-valuation-height-rank] gives n\\le rrk(Gamma_K). Combining this with Step 3 yields n\\le d+1. Since the chain was arbitrary, every chain has length at most d+1, which is the asserted height bound.",
+   "uses": [
+    "lem-trf-valuation-height-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, Corollary 2.1.3(i); local document copy unavailable"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-abhyankar-inequality",
+  "lem-trf-prime-field-valuation-rank",
+  "lem-trf-valuation-height-rank"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§2.1, Lemma 2.1.2 and Corollary 2.1.3(i); the local document copy is unavailable"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-riemann-zariski-finite-refinement",
@@ -71,7 +123,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Ancestor proof (1)--(2), specialization/nearby-cycle branch, via the recorded semistable-alteration expansion: finite-height input of the Temkin proof component. This supplies the arithmetic function-field bound before passing to its separable closure.",
+   "place": "Ancestor proof (1)--(2), specialization/nearby-cycle branch: the Temkin §2.1 finite-height input, namely the relative Abhyankar inequality, prime-field rank bound, and valuation height consequence.",
    "via": [
     "lem-trf-riemann-zariski-finite-refinement",
     "lem-trf-temkin-stable-modification",
@@ -86,5 +138,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-abhyankar-finite-type-field-height",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by replacing the false absolute Abhyankar inequality with the relative inequality for F⊂K and the induced valuation on F, adding the prime-field rational-rank bound, and sharpening the valuation chain bound to n≤rrk. The corrected proof derives d+1 via rrk(Gamma_K)≤1+d and handles mixed characteristic (Q with Z_(p)). Mathlib searches found no matching declarations; the Temkin PDF is unavailable locally and remains WANTED.",
+  "blueprint": "Realizes the ancestor finite-height input in the specialization/nearby-cycle branch: relative Lemma 2.1.2, the prime-field valuation observation, and Corollary 2.1.3(i)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-2dfd6b23f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-2dfd6b23f (reviewer sub-agent of L); spot-checked: The mathematics is correct; I read it all. The item says a valuation ring of a field K finitely generated over its prime field has height at most trdeg+1. That matches how lem-trf-riemann-zariski-finite-refinement uses it in step 8, and small cases agree (F_p; Q with Z_(p), height 1 = d+1; Q(x) with rank-2 valuations, height 2). Steps: 2 applies the relative Abhyankar inequality to get rrk(Gamma_K/Gamma_F) <= d. 3 needs Gamma_F -> Gamma_K injective, since A_F^x = A^x cap F^x, and tensoring with Q exact; then the prime-field node gives rrk(Gamma_F) <= 1, so rrk(Gamma_K) <= d+1. 4 uses height <= rrk. The three new nodes are true standard results, tested on small cases: the relative inequality on Q(x) with the Gauss and x-adic valuations, and Q with Z_(p) (the counterexample to the old absolute form); valuations of Q and F_p; Z_(p), lexicographic Z^2, and value group Q+Q*sqrt2. They are strictly smaller than the item and duplicate no existing node (rg over dag/nodes; the sbc Abhyankar nodes are the tame-ramification lemma; lem-trf-valuation-algebraic-height and lem-trf-valuation-value-group-torsion state different things). Everything is in the same unit, so there are no tool_uses. The Temkin 0707.3953 PDF is not in literature/ and Stacks has no Abhyankar inequality, so I could not check §2.1 / Cor 2.1.3(i) against the text: proof_origin is agent with WANTED, and the mathematics agrees with Bourbaki AC VI §10.3. FIX, in fixes/dag/nodes/sec-trace-formula: (B4) the three new statements were plain text, now TeX; (B3) 'valuation ring' and m_A were used without a definition, now defined inline, and the wrong phrase 'ordered-group quotient' became 'quotient abelian group'; item step 3 now writes out the injectivity and the flatness of Q. No statement's meaning changed and no node is dropped.; 4 file(s) fixed by the reviewer"
  }
 }
