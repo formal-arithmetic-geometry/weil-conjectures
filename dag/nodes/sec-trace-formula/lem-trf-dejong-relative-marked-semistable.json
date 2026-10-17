@@ -21,11 +21,232 @@
   "def-pc-scheme-fibre",
   "def-pc-geometrically-irreducible",
   "def-weil-closed-immersion",
-  "def-weil-finite-integral-morphism"
+  "def-weil-finite-integral-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-stein-smooth-generic-curve] to $f:X\\to Y$. Write its factorization as $X\\xrightarrow{g}Y_0\\xrightarrow{q}Y$, with generic point $\\eta_0$ of $Y_0$. The new base is excellent integral Noetherian, $q$ is finite dominant and projective-bundle, and $g$ is proper with smooth geometrically integral generic curve. Put $K=\\kappa(y)$ and $K_0=\\kappa(\\eta_0)$; the tool identifies $K_0$ with $H^0(X_y,\\mathcal O)$ and makes $K_0/K$ finite separable. We keep the same closed subscheme $Z$ of the same total scheme $X$.",
+   "uses": [
+    "lem-trf-stein-smooth-generic-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX §1.3, printed p. 132, finite Stein-base reduction."
+   }
+  },
+  {
+   "text": "Write the given projective structure as $Y\\to\\operatorname{Spec}R$. On the affine scheme $\\operatorname{Spec}R$, the structure sheaf is ample by [def-weil-pbc-ample-invertible-module]: its section $1$ has the whole affine scheme as its nonvanishing locus. Thus [lem-trf-projective-bundle-to-h-projective] converts this morphism to H-projective if necessary. Now $Y$ has an ample invertible sheaf by [lem-weil-pbc-projective-ample-invertible]. Apply [lem-trf-projective-bundle-to-h-projective] to $q$; then [lem-trf-h-projective-composition] makes $Y_0\\to\\operatorname{Spec}R$ H-projective. Thus $Y_0$ also has an ample invertible sheaf. We use this absolute ampleness when the flatification blowup is converted below.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Projective conventions for the Stein base; Stacks projective-bundle to H-projective comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-chow-noetherian] to $g$. Its proper surjection and immersion into $\\mathbf P^n_{Y_0}$ satisfy [det-chow-projective-closed-immersions], so the immersion is closed and the map to $X$ is projective. Replace the Chow scheme by the reduced closure of the inverse image of its dense isomorphism open in $X$. Call it $C_0$, with $p:C_0\\to X$. This is an integral closed subscheme of the Chow scheme, still proper birational onto $X$, and H-projective over $Y_0$. The generic fibre $(C_0)_{\\eta_0}$ is integral, proper and birational over $X_{\\eta_0}$, and has dimension $1$ by [lem-sc-closed-irreducible-dimension-trdeg], since the two function fields agree. The target is smooth and hence normal by [lem-sc-smooth-normal]. Apply [lem-trf-proper-birational-normal-curve-iso] to conclude that $p_{\\eta_0}$ is an isomorphism. In particular $(C_0)_{\\eta_0}$ is smooth and geometrically integral.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "det-chow-projective-closed-immersions",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-sc-smooth-normal",
+    "lem-trf-proper-birational-normal-curve-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé X, proof of Theorem 3.4, Step 1, printed p. 160; Chow projective preparation preserving the smooth generic curve."
+   }
+  },
+  {
+   "text": "The proper closed subscheme $Z_y$ of the proper curve $X_y$ is proper by [lem-weil-pbc-closed-immersion-proper]. It is etale by hypothesis, hence unramified, flat and locally finitely presented by [def-weil-etale-morphism]. By [lem-weil-pbc-unramified-quasi-finite-at-points] and [pqf-lem-proper-lqf-finite], it is finite etale over $K$. The finite separable extension $K_0/K$ gives an etale map $\\operatorname{Spec}K_0\\to\\operatorname{Spec}K$ by [lem-weil-pbc-finite-separable-extension-etale]. The structure map of $Z_y$ factors through it, so cancellation in [lem-weil-pbc-etale-composition-cancellation](3) makes $Z_{\\eta_0}$ etale over $K_0$. It remains finite: a finite spanning set for its coordinate algebra over $K$ also spans over $K_0$. Via the generic isomorphism of Step 3, take its inverse image in $(C_0)_{\\eta_0}$, and let $H_0$ be its schematic closure in $C_0$. This is exactly the horizontal marking to be flatified; the other components of $p^{-1}Z$ are not asserted to be flat.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-lem-proper-lqf-finite",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé X, Theorem 3.4 proof, horizontal/vertical boundary decomposition and Step 2; Stacks finiteness of proper locally quasi-finite maps."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flatification-horizontal-curve-pair] to $C_0\\to Y_0$ and $H_0$. It gives a projective-bundle birational blowup $v:Y_1\\to Y_0$, with excellent integral Noetherian $Y_1$, and strict transforms $C_1,H_1$. The morphism $h_1:C_1\\to Y_1$ is H-projective, flat and finitely presented of pure relative dimension $1$; $H_1\\to Y_1$ is finite flat finitely presented of pure relative dimension $0$, with empty marking permitted. Their generic fibres are the original smooth geometrically integral curve and finite etale marking. The projection $C_1\\to C_0$ is proper birational. Since $Y_0$ has an ample invertible sheaf, [lem-trf-projective-bundle-to-h-projective] converts $v$ to H-projective; [lem-trf-h-projective-composition] makes $Y_1\\to\\operatorname{Spec}R$ H-projective.",
+   "uses": [
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé X, Theorem 3.4 proof, Step 2, printed p. 160; flatten the two horizontal schemes simultaneously."
+   }
+  },
+  {
+   "text": "Now $(C_1,H_1)$ meets the global flatness, finite-presentation and pure-dimension hypotheses of [lem-trf-stable-modification-flat-curve-pair]. Its generic fibre is smooth with etale marking. Obtain an excellent integral base $Y'$ and an H-projective dominant generically finite $r:Y'\\to Y_1$, and a morphism of closed pairs $(m,n):(X',D)\\to(C_1,H_1)\\times_{Y_1}Y'$. The map $m$ is projective-bundle and is an isomorphism on the generic fibre over $Y'$. The morphism $f':X'\\to Y'$ is flat finitely presented of pure relative dimension $1$ with nodal geometric fibres; $D\\hookrightarrow X'$ is closed and is etale over $Y'$, inside the relative smooth locus. Define $b=qvr$ and let $a$ be the composite $X'\\xrightarrow{m}C_1\\times_{Y_1}Y'\\to C_1\\to C_0\\xrightarrow{p}X$. The morphism of pairs and the projections give $fa=bf'$ as an equality of morphisms.",
+   "uses": [
+    "lem-trf-stable-modification-flat-curve-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé X §3.2.2 and Theorem 3.4 proof, Steps 3--4, printed pp. 158, 160--161; no prime-to-l assertion is used."
+   }
+  },
+  {
+   "text": "The H-projective morphisms $r$ and $Y_1\\to\\operatorname{Spec}R$ make $Y'\\to\\operatorname{Spec}R$ H-projective by [lem-trf-h-projective-composition]. Also $W=C_1\\times_{Y_1}Y'\\to Y'$ is H-projective by [lem-pc-projective-base-change]. Thus $W\\to\\operatorname{Spec}R$ is H-projective and $W$ has an ample invertible sheaf by [lem-weil-pbc-projective-ample-invertible]. Apply [lem-trf-projective-bundle-to-h-projective] to $m:X'\\to W$ and compose with $W\\to Y'$ to make $f'$ H-projective. The same composition lemma makes $b=qvr$ H-projective. A closed embedding in $\\mathbf P^N$ is a projective-bundle embedding with the trivial rank-$N+1$ module, so these conclusions imply exactly the projective-bundle projectivity requested in the item. By [lem-pc-projective-proper], $f'$, $m$ and $b$ are proper.",
+   "uses": [
+    "lem-trf-h-projective-composition",
+    "lem-pc-projective-base-change",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Projective-bundle versus H-projective conventions; projective base change and composition."
+   }
+  },
+  {
+   "text": "The generic-fibre isomorphisms in Steps 3, 5 and 6 identify $X'_{\\eta'}$ with $X_{\\eta_0}\\times_{K_0}\\kappa(\\eta')$. It is geometrically integral by the definition [def-pc-geometrically-irreducible], and smooth by [lem-pc-proper-base-change]. Moreover $X'$ is integral: at $x\\in X'$, put $A=\\mathcal O_{Y',f'(x)}$ and $B=\\mathcal O_{X',x}$. The ring $A$ is a domain, and $B$ is flat over $A$ by [def-weil-flat-morphism]. Tensoring $A\\hookrightarrow\\operatorname{Frac}A$ with $B$, using [def-weil-pbc-flat-ring-map], injects $B$ into $B\\otimes_A\\operatorname{Frac}A$. The latter ring is a localization of the coordinate ring of a nonempty affine open of the integral generic fibre. It is nonzero because $B$ injects into it, and is a domain. Thus every $B$ is a domain, so $X'$ is reduced. The same nonzero localization gives a generalization of every $x$ in the generic fibre; hence that irreducible fibre is dense in $X'$, making $X'$ irreducible as well.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-pc-proper-base-change",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Generic isomorphism of stable modification; flatness injects local rings into their generic-fibre localizations."
+   }
+  },
+  {
+   "text": "The image of the proper $f'$ is closed and contains $\\eta'$, so is all of the integral base $Y'$. Its geometric fibres are therefore nonempty. Apply [lem-weil-pbc-flat-proper-component-count-lower-semicontinuous] to $f'$ (proper, flat and finitely presented). The generic geometric fibre is integral, so its number of connected components is $1$. If any fibre had at least two components, lower semicontinuity would give a nonempty open of $Y'$ on which all fibres had at least two components; this open contains $\\eta'$, a contradiction. Consequently every geometric fibre is connected. Their pure dimension $1$ and ordinary-double-point completed-ring description already come from Step 6.",
+   "uses": [
+    "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Connectedness recovered from the geometrically integral generic fibre; Stacks lower semicontinuity of the number of geometric components."
+   }
+  },
+  {
+   "text": "The projection $W\\to C_1$ is a base change of proper $r$, and $C_1\\to C_0$ and $p$ are proper. Thus [lem-weil-pbc-proper-fp-permanence] makes $a$ proper. The generic curve is unchanged by $p$, the flatification and $m$, while $\\kappa(\\eta')/K_0$ is finite. Therefore $a$ induces a finite extension of the function field of $X$; it is dominant and its fibre over the generic point of $X$ has one point. Likewise $b$ is dominant with finite generic fibre. Apply [lem-weil-pbc-generic-finite-morphism-open-neighborhood] to $a$ and $b$, both proper maps of finite type over Noetherian targets, to find dense opens over which they are finite. This verifies the stated precise generically-finite convention, without an invertibility or prime-to-anything restriction on the degree.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "The composite alteration square and the finite-over-dense-open convention; Stacks generic finiteness."
+   }
+  },
+  {
+   "text": "All base schemes produced by the Stein, flatification and stable-modification tools are excellent integral Noetherian. The total space $X'$ is of finite type over $Y'$, since it is projective; every affine coordinate ring of $X'$ is a finite type algebra over an excellent base chart, after localization as necessary. Thus [lem-exc-finite-type-localization-excellent] proves excellence. Proper finite-type schemes over Noetherian schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Combined with Step 8, this gives exactly the required excellent integral source schemes.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Excellence and Noetherianity under finite type; no regularity of the base is assumed."
+   }
+  },
+  {
+   "text": "Because $D$ is closed in the proper $Y'$-scheme $X'$, [lem-weil-pbc-closed-immersion-proper] makes $D\\to Y'$ proper. The etale property of Step 6 gives flatness, local finite presentation and unramifiedness by [def-weil-etale-morphism]; [lem-weil-pbc-unramified-quasi-finite-at-points] gives local quasi-finiteness. By [lem-trf-nodal-family-fitting-singular], the relative smooth locus $U\\subset X'$ is open. It contains $D$, and $U\\to Y'$ is smooth of relative dimension $1$ because its geometric fibres are the smooth opens in the pure one-dimensional fibres. The closed subscheme $D\\subset U$ satisfies clause (3) of [lem-pc-cartier-criterion], hence is a relative effective Cartier divisor on $U/Y'$. On $X'\\setminus D$ its ideal is the unit ideal. These two open neighbourhoods cover $X'$, so $D$ is an effective Cartier divisor on $X'$ as required; the empty divisor is included.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-pc-cartier-criterion",
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/picard.tex",
+    "place": "Etale marking in the smooth locus gives a Cartier divisor; Stacks Picard Schemes of Curves criterion."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-family-fitting-singular] to $f'$. It gives the open relative smooth locus $U$ and a closed singular subscheme supported on $X'\\setminus U$. Set $T_{\\mathrm{sing}}=f'(X'\\setminus U)$. This is closed because $f'$ is proper. Since the generic fibre is smooth, it omits $\\eta'$, so is nowhere dense. By construction $f'$ is smooth over $Y'\\setminus T_{\\mathrm{sing}}$.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX Theorem 1.2(iv), constructing the closed exceptional subset using properness and the relative smooth locus."
+   }
+  },
+  {
+   "text": "Let $E=a^{-1}(|Z|)$. It is closed and has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Its generic fibre is exactly $|D_{\\eta'}|$, because all the generic maps of pairs used above are isomorphisms. Every component of $E$ dominating $Y'$ has its generic point in this generic fibre, hence in the closed subset $|D|$; its entire closure is therefore in $|D|$. Let $V$ be the union of the remaining, vertical components of $E$. It is closed, and properness of $f'$ makes $T_{\\mathrm{vert}}=f'(V)$ closed. It omits $\\eta'$, so is nowhere dense. Every point of $E$ either lies in $|D|$ or in $V$, giving $E\\subset|D|\\cup f'^{-1}(T_{\\mathrm{vert}})$. Finally take $T'=T_{\\mathrm{sing}}\\cup T_{\\mathrm{vert}}$. This is closed, excludes the generic point of the integral base, and gives both required smoothness and boundary inclusion. This constructs a closed bad set rather than assuming the set-theoretic image of $E\\setminus D$ is closed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX Theorem 1.2(iv),(vi), horizontal versus vertical boundary; Exposé X Theorem 3.4 proof, Step 8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-flat-ring-map",
+  "det-chow-projective-closed-immersions",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-cartier-criterion",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-smooth-normal",
+  "lem-trf-flatification-horizontal-curve-pair",
+  "lem-trf-h-projective-composition",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-trf-stable-modification-flat-curve-pair",
+  "lem-trf-stein-smooth-generic-curve",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "The conclusion is IX Theorem 1.2(i),(iii)--(vi), printed p. 131. The detailed non-equivariant proof follows the alternative preparation/flatification/stable-modification route explicitly used in X Theorem 3.4 Steps 1--4 (pp. 160--161), with the IX §1.3 Stein-base reduction and the cited Stacks tools. No equivariant or prime-to-l assertion is used."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +275,38 @@
    "results": "hits=0; top=[]; note=",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper family of curves with generically smooth fibres admits a semistable marked alteration over an excellent integral base",
+   "results": "hits=8; top=['AlgebraicGeometry.IsSmoothOfRelativeDimension', 'AlgebraicGeometry.isSmooth_isStableUnderBaseChange', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.IsSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth', 'AlgebraicGeometry.Scheme.Etale']; note=; digest=a3b6baac930ff1d1. Read the returned types: none supplies the stated existence or curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nodal semistable reduction of marked curves after a generically finite projective change of base",
+   "results": "hits=8; top=['WeierstrassCurve.Projective.baseChange_nonsingular', 'WeierstrassCurve.baseChange_integralModel_eq', 'AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'WeierstrassCurve.Projective.baseChange_add', 'WeierstrassCurve.Affine.Point.map_some', 'WeierstrassCurve.Affine.baseChange_nonsingular', 'WeierstrassCurve.Projective.baseChange_neg', 'WeierstrassCurve.VariableChange.baseChange']; note=; digest=9c26f4219017320b. Read the returned types: none supplies the stated existence or curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semistable\"",
+   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned types: none supplies the stated existence or curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|nodal|alteration|stableModification",
+   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned types: none supplies the stated existence or curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-marked-nodal-reduction",
@@ -80,5 +329,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-dejong-relative-marked-semistable",
+  "worker": "stage1",
+  "summary": "Expanded the source semistable-alteration theorem through finite Stein-base reduction, a Chow model preserving the smooth generic curve, simultaneous flatification of the curve and horizontal marking, and the stable modification theorem for globally flat multipointed curves. Reused existing projectivity-conversion, connected-component, Cartier and nodal-singular-locus nodes; explicitly constructed the nowhere-dense closed bad set from vertical boundary components. Four new statement-only lemmas, all searched; original item statement unchanged.",
+  "blueprint": "Ancestor lem-trf-local-term-locality proof (1)--(2): the already recorded nearby-duality alteration branch needs the marked semistable existence input. This split realizes that input by ILO IX §1.3 and X Theorem 3.4 Steps 1--4, entirely below the unit route; Steps 12--14 recover the marking and boundary clauses of IX Theorem 1.2.",
+  "tool_uses": [
+   {
+    "node": "det-chow-projective-closed-immersions",
+    "why": "Step 3 uses properness of the original relative curve to make the Chow immersion closed, and its graph makes the modification projective; the unit has no Chow-model construction."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Step 11 takes excellence of finite-type affine coordinate algebras and their localizations; this commutative-algebra permanence is not a trace-formula assertion."
+   },
+   {
+    "node": "lem-pc-cartier-criterion",
+    "why": "Step 12 uses specifically clause (3): a flat locally quasi-finite finitely presented closed subscheme of a smooth relative curve is a relative Cartier divisor. The unit has no substitute for this local curve criterion."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Step 7 uses stability of H-projectivity under base change for C_1 times Y′; this is a generic scheme tool, not a change to the specialization route."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Step 7 takes properness of the H-projective maps after the projectivity conversions. No trace or cohomological assertion is imported."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Step 8 takes the smooth part of the statement: smoothness of the generic curve survives the function-field extension. The unit does not prove scheme-theoretic smooth base change."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Step 3 computes dimension of the entire integral generic Chow curve from its function field; this scheme-dimension tool does not replace a unit step."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Step 3 takes exactly normality of a smooth curve over a field, needed before applying the proper-birational curve lemma. It is not available as an alteration lemma in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-chow-noetherian",
+    "why": "Step 3 takes a proper surjective Chow model, its dense isomorphism open and its projective-space immersion over the Noetherian base. This is projective preparation below the already chosen alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Steps 4 and 12 take properness of a closed subscheme of a proper scheme. This elementary geometric permanence has no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Step 4 uses clause (3), cancelling the etale extension Spec K_0 to Spec K from the etale structure of Z_y. This is the exact missing scheme-theoretic implication, independent of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Step 4 identifies Spec K_0 to Spec K as etale using the separable constants extension from the Stein lemma; the unit supplies no field-to-etale comparison."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 11 takes Noetherianity of a finite-type total space over a Noetherian base. This is a finiteness tool, not a cohomological route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+    "why": "Step 9 uses lower semicontinuity of the number of geometric connected components for a proper flat finitely presented map, without assuming it smooth. It supplies connectedness of the nodal family, not any trace identity."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Step 10 upgrades a finite generic fibre to finiteness over a dense open for the two proper maps, exactly the convention used by the item. The unit does not supply this general algebraic-geometric finiteness statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Step 14 takes finiteness of the irreducible-component set of the closed boundary, so its vertical union is closed. This topological tool is not a replacement of the specialization argument."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Steps 2 and 7 take an absolute ample invertible sheaf on an H-projective scheme over an affine scheme, before converting the next projective-bundle map. The unit has no projectivity-convention comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Step 10 uses base-change and composition stability of properness for the source alteration. The unit does not reprove these morphism properties."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Steps 4 and 12 take local quasi-finiteness from unramifiedness of an etale marking. This general geometric tool is needed for finiteness and the Cartier criterion."
+   },
+   {
+    "node": "pqf-lem-proper-lqf-finite",
+    "why": "Step 4 takes finiteness of the original generic marking from properness and local quasi-finiteness. This is a scheme-finiteness tool with no unit-level substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-chow-projective-closed-immersions",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-cartier-criterion",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-smooth-normal",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-9a8c03dec",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-9a8c03dec (reviewer sub-agent of L); spot-checked: I read all of it: the item's statement and 14 steps, the four new nodes in full, every cited node's statement, the unit sk-i-curve-zero with its via chain, and the sources. Sources: ILO IX Thm 1.2 (p.131) and §1.3 (p.132); ILO X §3.2.2 and Thm 3.4 proof Steps 1-4 (pp.158-161); Stacks 03H0, 0BUG, 0FD1, 0B3I, 07QU, 0AB7, 0BFP, 0AB1, 081R, 0GSJ, 0B9D, each checked against its label in the .tex files. The item statement is identical to the side-project copy; stmt_deps only gain generic-point and dimension. There is no cycle and no SGA source, and the step uses equal proof_deps. Every step's hypotheses hold. Points worth naming: Y is converted to H-projective using the ample structure sheaf on Spec R. The Chow model's generic fibre has dimension 1 by trdeg and maps to a normal target, so the new birational-curve lemma applies. The marking is etale over K_0 by cancellation. The flatification and stable-modification hypotheses are met (flat, pure dimension, closed marking). Step 7 checks projectivity through the H-projective conversions and P(O^{N+1}). Step 8 proves X' integral by flat injectivity into the generic localization. Step 9 has the semicontinuity direction right (n(t)>=n(s) near s, so connected generic fibre forces connected fibres). In Step 10 the generic fibres of a and b are finite. Step 12 uses Cartier criterion clause (3) on the open smooth locus. Step 14 builds T' as T_sing plus the closed images of the finitely many vertical components. The new nodes are all true and none duplicates an existing node or restates an item clause. Stein node: S_0=Spec f_*O is finite, integral, excellent and projective-bundle; K_0 is finite separable over K; C_eta is geometrically integral over K_0 (P^1_C/R shows the constant extension is needed). Birational-curve node: proper+quasi-finite gives finite (0AB7), and finite birational onto a normal curve is an isomorphism (0AB1); non-normal E is allowed. Flatification node: 081R on C plus H after generic flatness; the strict transform is the closure of the generic fibre; 0GSJ gives pure dimension; H_1 is finite. Stable-modification node: matches ILO X §3.2.2 and Step 3 (Temkin 1.5/1.1); a Chow refinement makes r H-projective, and base change preserves the rest by Step 4. Temkin 2010 itself is not in literature/ (WANTED). I accept the 18 declared tool_uses as generic black-box tools. FIX: two B3/B4 wording repairs, no change to the mathematics. (1) lem-trf-flatification-horizontal-curve-pair: the garbled 'proper [def-weil-proper-morphism]ties' now reads 'properties', with the citation moved to 'C_1->C is proper [def-weil-proper-morphism]'. (2) lem-trf-proper-birational-normal-curve-iso: added the missing inline citation [def-pc-curve], which was already in stmt_deps. Corrected files are in fixes/dag/nodes/sec-trace-formula/.; 2 file(s) fixed by the reviewer"
  }
 }
