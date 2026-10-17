@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "prop-cohomological-finiteness",
-   "place": "step 9 of its split (source: (1.11)-(1.12), pp. 277-278 (F^* on a sheaf coming from X_0, identity on the constant sheaf's sections); the blueprint ## Proof, Step 7)",
+   "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; ancestor split Step 9 (the Galois-Frobenius convention and explicit coefficient passage)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The geometric Frobenius fixes the unit class in degree-zero cohomology of the constant Weil sheaf",
@@ -24,9 +24,111 @@
   "def-weil-global-geometric-frobenius",
   "lem-pod-connected-constant-h0"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B_n=(A_{E,n})_Y$. These are constructible sheaves in degree $0$ [lem-weil-constant-coefficient-objects-constructible](1). Applying [lem-sf-integral-direct-image-constructible] to $R_Y=\\widehat{\\mathcal O}_{E,Y}$, whose derived reductions are $B_n$ by [lem-weil-constant-coefficient-objects-constructible](2), gives $N_n=Ra_{Y*,n}B_n\\in D^b_c(s,A_{E,n})$. For this $N_n$, unfold [def-weil-frobenius-cohomology-transport]: $\\tau_{B_n}=\\operatorname{Fib}_s(e_n)\\circ\\iota_{N_n}$ with $e_n=\\operatorname{FrEx}_{Y,*}(B_n)$. The map $e_n$ is the specified unit-square-counit mate, not a chosen base-change isomorphism [def-weil-frobenius-square-exchange](1). The point map is restriction along $g_s$, colimit insertion, then $\\kappa$ [def-weil-frobenius-point-transport]. Apply [lem-pod-frobenius-exchange-degree-zero] to $M=B_n$: on $H^0$, $\\iota$ sends $v$ to the inserted restriction of $v$, tensored with $1$; $e_n$ is the underived exchange mate, and multiplication $\\lambda_n$ removes this tensor factor. Thus, with $p_{g_Y,B_n}$ the restriction--insertion pullback of sections, $$\\Gamma(Y,\\lambda_n)\\,H^0(\\tau_{B_n})=p_{g_Y,B_n}.$$ Exact sections on $s$ justify reading these maps on degree-zero sheaf cohomology [lem-weil-point-proetale-sections-exact].",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-frobenius-point-transport",
+    "lem-pod-frobenius-exchange-degree-zero",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-sf-integral-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+    "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; agent-written computation"
+   }
+  },
+  {
+   "text": "Let $u_n$ denote the constant section with value $1\\in A_{E,n}$, and put $U_n=H^0(\\RGamma(c_n\\lambda_n)\\circ\\tau_{B_n})$. By [def-weil-constant-weil-structure](1), $c_n$ is adjoint to the sheaf map $B_n\\to g_{Y*}B_n$ sending each constant $b$ to the same constant $b$. Pulling back the constant section $b$ gives its restriction at $(Y\\xrightarrow{g_Y}Y)$ and the corresponding colimit coprojection; applying this adjoint $c_n$ returns $b$. Hence $\\Gamma(c_n)p_{g_Y,B_n}(u_n)=u_n$, and the formula in Step 1 gives $U_n(u_n)=u_n$. This computes the finite coefficient action; the Frobenius acts on the scheme, while $c_n$ leaves the coefficient value $1$ fixed. Moreover the stated reduction relation $(r_n)_Yc_{n+1}=c_ng_Y^{-1}((r_n)_Y)$ sends $u_{n+1}$ to $u_n$.",
+   "uses": [
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+    "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; agent-written computation"
+   }
+  },
+  {
+   "text": "Set $R_Y=\\widehat{\\mathcal O}_{E,Y}$ and $N=Ra_{Y*}R_Y$. The coefficient-object theorem gives $R_Y\\in D^b_c(Y,\\mathcal O_E)$ and $R_Y\\otimes^L A_{E,n}\\cong B_n$ [lem-weil-constant-coefficient-objects-constructible](2). The morphism $a_Y:Y\\to\\Spec k$ is a finite-type $k$-morphism and $\\ell$ is invertible in $k$, so [lem-sf-integral-direct-image-constructible] gives $N\\in D^b_c(s,\\mathcal O_E)$, derived complete, with $N\\otimes^L A_{E,n}\\cong N_n$. This verifies the bounded constructible, derived-complete domain needed to apply the integral point-transport theorem. In particular [lem-trf-integral-point-transport-tower-realization] identifies the SPECIFIED $\\iota_N$ with the realization of the restriction--insertion--$x\\mapsto x\\otimes1$ maps $\\iota_{N_n}$ on the coherent reduction tower. All these identifications use the actual completeness and projection maps.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-trf-integral-point-transport-tower-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+    "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; agent-written computation"
+   }
+  },
+  {
+   "text": "Write $c_R=(\\varprojlim_nc_n)\\circ\\mathrm{comparison}$ and $\\theta_R=c_R\\lambda_R$ as in [def-weil-constant-weil-structure](2),(3). The normalization [lem-pod-canonical-coefficient-pullback-reduction] gives $$\\pi_n\\theta_R=\\operatorname{Res}_n(c_n\\lambda_n)\\rho_n.$$ Thus $\\lambda_R$ is the multiplication/completeness comparison with the specified finite multiplication maps; no arbitrary identification of $Lg_Y^*R_Y$ with $g_Y^{-1}R_Y$ is substituted. The integral exchange of [def-weil-frobenius-square-exchange](1) is $\\beta_*\\mathcal L_s(e_{a_Y})\\alpha_*$, formed on strict semilinear systems, whose finite evaluations are $e_n$. The operation comparisons preserve the square identification, units and counits [lem-fix-operation-reduction]. Together with the point-transport realization of Step 3, this gives for the canonical cohomology projections $P_n:H^0(Y,\\mathcal O_E)\\to H^0(Y,A_{E,n})$ and $U_R=H^0(\\RGamma(\\theta_R)\\tau_{R_Y})$ the equation $$P_nU_R=U_nP_n.$$ Indeed, projecting the three arrows of $U_R$ in their order gives $\\iota_{N_n}$, $\\operatorname{Fib}_s(e_n)$, and $\\RGamma(c_n\\lambda_n)$, respectively. Naturality of the specified projection comparisons permits their composition, producing the displayed equation. These are compatible maps of whole systems, not a claim that individual reductions determine arbitrary derived morphisms.",
+   "uses": [
+    "def-weil-constant-weil-structure",
+    "lem-pod-canonical-coefficient-pullback-reduction",
+    "def-weil-frobenius-square-exchange",
+    "lem-fix-operation-reduction",
+    "lem-trf-integral-point-transport-tower-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+    "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; agent-written computation"
+   }
+  },
+  {
+   "text": "By [lem-pod-connected-constant-h0](2), $H^0(Y,\\mathcal O_E)\\to\\varprojlim_n H^0(Y,A_{E,n})$ given by the $P_n$ is an isomorphism and $P_n(1_{\\mathcal O_E})=u_n$. Therefore for every $n$, $$P_n(U_R(1_{\\mathcal O_E}))=U_n(u_n)=u_n=P_n(1_{\\mathcal O_E}).$$ Injectivity of that inverse-limit isomorphism gives $U_R(1_{\\mathcal O_E})=1_{\\mathcal O_E}$. Only equality of degree-zero elements is detected here; no detection of equality of derived morphisms by projections is used.",
+   "uses": [
+    "lem-pod-connected-constant-h0"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+    "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; agent-written computation"
+   }
+  },
+  {
+   "text": "At the rational stage the constant structure is $\\theta_E=\\theta_R\\otimes1$ [def-weil-constant-weil-structure](4). The point transport is explicitly $\\iota_N^E=\\iota_N^{\\mathcal O_E}\\otimes E$ [def-weil-frobenius-point-transport], the exchange is the scalar localization of its integral mate [def-weil-frobenius-square-exchange](1), and operation comparisons commute with rationalization [lem-fix-operation-reduction]. Consequently the endomorphism $F=H^0(\\RGamma(\\theta_E)\\circ\\tau_{E_Y})$ specified by [def-weil-global-geometric-frobenius] is $U_R\\otimes E$ on $H^0(Y,E)=H^0(Y,\\mathcal O_E)\\otimes E$. Clause (3) of [lem-pod-connected-constant-h0] identifies the distinguished unit as $1_E=1_{\\mathcal O_E}\\otimes1$. Hence $$F(1_E)=(U_R\\otimes E)(1_{\\mathcal O_E}\\otimes1)=U_R(1_{\\mathcal O_E})\\otimes1=1_E.$$",
+   "uses": [
+    "def-weil-constant-weil-structure",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-square-exchange",
+    "lem-fix-operation-reduction",
+    "def-weil-global-geometric-frobenius",
+    "lem-pod-connected-constant-h0"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+    "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; agent-written computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-frobenius-point-transport",
+  "lem-pod-frobenius-exchange-degree-zero",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-sf-integral-direct-image-constructible",
+  "def-weil-constant-weil-structure",
+  "lem-trf-integral-point-transport-tower-realization",
+  "lem-pod-canonical-coefficient-pullback-reduction",
+  "lem-fix-operation-reduction",
+  "lem-pod-connected-constant-h0",
+  "def-weil-global-geometric-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.proof.md",
+  "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; explicit pro-etale mate and coefficient computation, following Deligne Weil II (1.1.7), (1.1.10)-(1.1.11), (1.1.14), pp. 150-153 as conceptual background, not Weil I (1.11)-(1.12)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +143,38 @@
    "results": "none in AlgebraicGeometry/ or CategoryTheory/Sites/: Mathlib's Frobenius is the ring-theoretic q-power map only (RingTheory/Frobenius.lean, Algebra/CharP/Frobenius.lean)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric Frobenius fixes the unit section of the constant Weil sheaf in degree zero cohomology",
+   "results": "iterateFrobeniusEquiv_zero; coe_frobenius_comp_coe_frobeniusEquiv_symm; AlgebraicGeometry.StructureSheaf.const_one; WittVector.frobenius_zmodp; frobenius_comp_frobeniusEquiv_symm; WittVector.StandardOneDimIsocrystal.frobenius_apply; CategoryTheory.PresheafOfGroups.Cochain₀.one_apply; WittVector.instIsocrystalStandardOneDimIsocrystal Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FrobeniusModule, globalSections, oneGlobalSection, constant",
+   "results": "No hits. loogle: unknown identifier 'FrobeniusModule' Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*unit|unit.*frobenius|globalSections.*constant",
+   "results": "No hits. Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric Frobenius fixes the unit class in H0 of a constant Weil sheaf on a connected scheme",
+   "results": "iterateFrobeniusEquiv_zero; frobenius_one; iterateFrobeniusEquiv_zero_apply; iterateFrobenius_zero_apply; iterateFrobenius_zero; frobenius_zero; AlgebraicGeometry.StructureSheaf.res_const'; WittVector.frobenius Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +194,49 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pod-frobenius-fixes-unit-section",
+  "worker": "stage1",
+  "summary": "Repair of D3/C1/C3/E5: six steps compute the specified point transport, degree-zero exchange mate and canonical lambda, then c_n, their completed limit and rationalization. Two statement-only technical lemmas are added, without a Weil structure or a cohomological fixed-unit conclusion. The original statement is unchanged. Replaces the erroneous proof citation to Weil I (1.11)-(1.12) by agent-marked pro-etale computations and Weil II Galois transport background. The historical source field is maintainer-owned; its correction is requested in report.md.",
+  "blueprint": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-point-transport-tower-realization",
+    "why": "Generic realization of the specified point map on coefficient towers; the finiteness unit contains no normalization of this map."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic coefficient comparisons preserving units, counits and exchange maps; used to project and rationalize the same operator."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Checks the derived-complete bounded constructible point domain of the integral transport theorem."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Checks constructibility and the actual finite reductions of the coefficient sheaf."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exactness at the geometric point, needed to read H0 of the exchange and point maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-point-transport-tower-realization",
+  "lem-fix-operation-reduction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-a79b81cb0",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-a79b81cb0 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, every cited statement, unit sk-lem-finite and the chapter, main-20261015 Step 7 (l.83-88) and Weil II (1.1.7), (1.1.10)-(1.1.11), (1.1.14). The item statement is unchanged and true. Step 1: lem-sf-integral-direct-image-constructible (K_0=k) puts N_n in D^b_c, and the exchange lemma's equations combine as Gamma(lambda^g)H0(tau)=Gamma(B)Gamma(lambda^h)Gamma(j^h)sigma=p_g. Step 2: c_n=eps∘g^{-1}(phi) returns the constant 1. Step 3: the hypotheses of the tower-realization lemma are verified. Step 4: each of the three arrows is projected using a cited compatibility: tower realization, FrEx=beta L(e) alpha with lem-fix-operation-reduction, and pi_n theta_R=Res(c_n lambda_n)rho_n. Step 5: H0 injectivity from lem-pod-connected-constant-h0(2). Step 6: rationalization. New node lem-pod-frobenius-exchange-degree-zero is true: (Y->^g Y)≅Y x_{s,h}(s->^h s) via (g,a), and it holds for Y=Spec k and M=0. New node lem-pod-canonical-coefficient-pullback-reduction is true: theta_K kappa=F(eta), so lambda kappa=id, and rho_n kappa=theta_n gives the projection formula; checked for g=id and the empty scheme. It states lambda explicitly, matching Step 8 of the proof of lem-weil-isomorphism-derived-pullback. Neither new node restates a clause of the item or duplicates an existing node; the nearest candidates are graph-point-exchange, which needs properness, and the comparison-normalization node, which leaves lambda open. Searches recorded; no SGA. All five declared tool_uses are accepted as generic. Maintainer notes: (1) the item's protected source still cites Weil I (1.11)-(1.12) and should become blueprint Step 7 (agent-written) with Weil II as background; (2) def-weil-constant-weil-structure(3) takes lambda from a statement that only asserts existence, and the item depends on the canonical lambda (Weil II 1.1.14 warning), so stage 2 should bind it to the specified comparison. FIX applied: proof_origin page range changed from pp.150-152 to pp.150-153, since (1.1.14) is on p.153.; 1 file(s) fixed by the reviewer"
+ }
 }

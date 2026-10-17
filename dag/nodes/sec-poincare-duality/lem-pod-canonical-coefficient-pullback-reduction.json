@@ -1,0 +1,86 @@
+{
+ "id": "lem-pod-canonical-coefficient-pullback-reduction",
+ "kind": "statement",
+ "title": "Canonical completed coefficient pullback comparison respects finite quotient projections",
+ "statement": "Fix the finite-field and coefficient data $p,a,q,k_0,k$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ finite, $\\mathcal O_E$, $\\varpi_E$ and $A_n=\\mathcal O_E/\\varpi_E^n$ ($n\\ge1$) [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be an isomorphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $B_{T,n}=(A_n)_T$ and $R_T=\\widehat{\\mathcal O}_{E,T}=\\varprojlim_nB_{T,n}$ for $T=X,Y$, with projections $\\pi_{n,T}$ [def-weil-completed-integral-coefficients]. Use the inverse image and ring isomorphisms $c_n:g^{-1}B_{Y,n}\\to B_{X,n}$ and $c_R:g^{-1}R_Y\\to R_X$ [def-weil-proetale-inverse-image, lem-weil-proetale-isomorphism-inverse-image], where $\\pi_{n,X}c_R=c_ng^{-1}(\\pi_{n,Y})$.\n\nLet $P_g=Lg^*$ be the completed integral pullback [def-pur-integral-derived-operations]. Let $\\kappa_{R_Y}:g^{-1}R_Y\\to P_gR_Y$ be the specified map [def-weil-inverse-image-pullback-comparison](b). Let $\\lambda_R:P_gR_Y\\to g^{-1}R_Y$ be the CANONICAL multiplication/completeness comparison of [lem-weil-isomorphism-derived-pullback]: on a flat-term K-flat model [def-pc-kflat-complex] it is induced on the entire strict quotient cone by the finite maps $x\\otimes b\\mapsto c_n^{-1}(b)x$, the inverse-image comparison for that cone, and the inverse of the canonical completeness map. At finite level let $\\lambda_n:Lg_n^*B_{Y,n}\\to g^{-1}B_{Y,n}$ be $x\\otimes b\\mapsto c_n^{-1}(b)x$; its inverse is $x\\mapsto x\\otimes1$. The coefficient sheaf $R_Y$ and its reductions are derived complete constructible coefficient objects [lem-weil-constant-coefficient-objects-constructible]. Let $\\rho_n:P_gR_Y\\to\\operatorname{Res}_n Lg_n^*B_{Y,n}$ be the specified projection of the completed pullback model, using the canonical reduction $R_Y\\otimes^L A_n\\cong B_{Y,n}$ and restriction of scalars [def-weil-completed-integral-coefficients].\n\nThen the canonical comparison, including its actual cone maps, satisfies\n$$\\lambda_R\\circ\\kappa_{R_Y}=\\mathrm{id}_{g^{-1}R_Y},\\qquad \\kappa_{R_Y}\\circ\\lambda_R=\\mathrm{id}_{P_gR_Y},$$\n$$\\operatorname{Res}_n(\\lambda_n)\\circ\\rho_n=g^{-1}(\\pi_{n,Y})\\circ\\lambda_R,$$\nand consequently, for $\\theta_R=c_R\\circ\\lambda_R$,\n$$\\pi_{n,X}\\circ\\theta_R=\\operatorname{Res}_n(c_n\\circ\\lambda_n)\\circ\\rho_n.$$\nThe equalities are compatible with the specified maps $A_{n+1}\\to A_n$ before passing to the derived inverse limit. When $X=Y=Y_0\\times_{k_0}k$ for a finite-type $k_0$-scheme $Y_0$ and $g=g_Y$, this is the canonical $\\lambda$ and $\\theta_{\\mathcal O_E}$ used in [def-weil-constant-weil-structure](3), not an arbitrary isomorphism $P_gR_Y\\cong g^{-1}R_Y$. This is a statement about coefficient pullback and its reduction projections, without a claim about Frobenius on cohomology.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D6, definition-pushforward (module pullback by tensor); derived.tex Tag 08TC, definition-derived-limit (quotient cone). Agent-formulated normalization of the canonical multiplication/completeness comparison in lem-weil-isomorphism-derived-pullback for coefficient objects, needed in blueprint prop-cohomological-finiteness, Proof Step 7."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-pur-integral-derived-operations",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-constant-weil-structure",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|pullbackObjFreeIso|pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral coefficient sheaf derived pullback canonical comparison commutes with inverse limit projections and finite coefficient multiplication",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso.congr_simp; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical completed derived pullback comparison of a coefficient sheaf along a scheme isomorphism reduces to multiplication x tensor a maps to a x at every finite quotient",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pullbackComp Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a completed constant coefficient ring under a scheme isomorphism agrees with completed derived pullback via the canonical tensor multiplication comparison",
+   "results": "AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc; AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc; AlgebraicGeometry.pullbackSpecIso_inv_fst'; AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc; AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc; AlgebraicGeometry.pullbackSpecIso_inv_snd_assoc Read the hits: underived module pullback, free/unit sheaves, scheme module adjunctions and hypercovers do not state the specified pro-etale derived comparison in this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-frobenius-fixes-unit-section",
+  "date": "2026-10-18",
+  "group": "N7"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; Canonical completed coefficient pullback comparison respects finite quotient projections",
+   "via": [
+    "lem-pod-frobenius-fixes-unit-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
