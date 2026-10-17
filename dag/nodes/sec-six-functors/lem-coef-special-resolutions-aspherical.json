@@ -251,5 +251,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpecialResolutionsAspherical",
+  "declaration": "CategoryTheory.special_resolutions_aspherical",
+  "declarations": [
+   "CategoryTheory.SpecialResolutionOver",
+   "CategoryTheory.SpecialResolutionUnder",
+   "CategoryTheory.specialResolutionAugmentation",
+   "CategoryTheory.specialResolutionCoaugmentation",
+   "CategoryTheory.special_resolutions_aspherical"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpecialResolutionsAspherical.lean",
+  "statement": "theorem special_resolutions_aspherical {C : Type u} [Category.{v} C] [ModelCategory C] [HasLimits C] [HasColimits C] [(cofibrations C).HasFunctorialFactorization (trivialFibrations C)] [(trivialCofibrations C).HasFunctorialFactorization (fibrations C)] {x y : C} {P : SimplexCategory ⥤ C} {Q : SimplexCategoryᵒᵖ ⥤ C} (p : P ⟶ (Functor.const SimplexCategory).obj x) (i : (Functor.const SimplexCategoryᵒᵖ).obj y ⟶ Q) (_hP : HomotopicalAlgebra.Reedy.leftClass (monomorphisms SimplexCategory) (cofibrations C) (initial.to P)) (_hQ : HomotopicalAlgebra.Reedy.rightClass (monomorphisms SimplexCategory).op (fibrations C) (terminal.from Q)) (hp : ∀ m : ℕ, trivialFibrations C (p.app ⦋m⦌)) (hi : ∀ n : ℕ, trivialCofibrations C (i.app (Opposite.op ⦋n⦌))) : RightAspherical (specialResolutionAugmentation p hp) ∧ LeftAspherical (specialResolutionCoaugmentation i hi)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74a280187",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. SpecialResolutionOver/Under are full subcategories of Over x/Under y (trivial fibrations/cofibrations, all maps); the augmentation and coaugmentation functors are real data. Reedy.leftClass (monomorphisms) and rightClass (monomorphisms.op) are the correct latching/matching classes. RightAspherical/LeftAspherical use Costructured/StructuredArrow nerves with IsContractible meaning weak equivalence to Delta^0. Extra assumptions are only the dependency's model-category convention (HasLimits/HasColimits, functorial factorizations); no fibrancy or cofibrancy on x or y; universes u and v independent. Edge cases n=0 and nonempty categories checked. lean.statement equals the file signature verbatim; only the lean field changed in the node; all five declarations listed. No duplicate in the project or Mathlib (SpecialThreeArrow/hammock categories differ). Docstrings give the source and blueprint id, the theorem docstring has the eight proof steps, the only sorry is the theorem proof, and the report has both required sections. nt_compile.py --json with the side overlay: exit 0, no errors or warnings, item 1.3 s. Low's paper is not available locally, so the Lean was checked against the node statement."
  }
 }
