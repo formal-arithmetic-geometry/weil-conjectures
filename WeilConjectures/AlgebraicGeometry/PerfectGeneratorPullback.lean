@@ -72,7 +72,7 @@ theorem perfect_generator_pullback {X X' : Scheme.{u}}
           Subsingleton (((derivedPullback g).obj M.obj)⟦n⟧ ⟶ E.obj) := by
   classical
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨cs, ht⟩, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   let : (derivedPullback g).CommShift ℤ := cs
   obtain ⟨adj⟩ := nonempty_derivedPullbackAdjunction g
   refine ⟨derivedPullback_preserve_perfect g M.obj hperfect, ?_⟩

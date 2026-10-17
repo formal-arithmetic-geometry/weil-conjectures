@@ -53,7 +53,7 @@ private theorem model_same_localization
   let R := schemeDerivedDirectImage i
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       E₀, hE₀, hEmap₀, hEadd₀, ε, hderived, htri, hε⟩ :=
-    Classical.choose_spec (exists_derivedPullback i)
+    (derivedPullback_spec i)
   have hE : E₀ = E := CategoryTheory.Functor.ext hE₀ (fun _ _ f ↦ hEmap₀ f)
   subst E₀
   have he := hε P hP
