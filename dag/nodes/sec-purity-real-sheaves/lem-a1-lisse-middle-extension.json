@@ -3,38 +3,172 @@
  "blueprint": {
   "is": "lem-a1-lisse-middle-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Recovery from a dense lisse open",
- "statement": "If $\\mathcal F$ is lisse on a smooth curve $C_0$ and\n$j:U_0\\hookrightarrow C_0$ is dense, then the adjunction map\n\n$$\n\\mathcal F\\xrightarrow{\\sim}j_*j^*\\mathcal F\n$$\n\nis an isomorphism.",
+ "statement": "Use the finite-field, smooth-curve and coefficient conventions of [def-wf-middle-extension]. Let $C_0$ be a smooth curve over $k_0$, let $j:U_0\\hookrightarrow C_0$ be a dense open immersion, and let $\\mathcal F$ be a lisse $\\overline{\\mathbf Q}_\\ell$-sheaf on all of $C_0$ in the convention of [def-pod-lisse-l-adic-sheaves]. Then the adjunction unit [def-weil-pbc-inverse-image]\n$$\\eta_{j,\\mathcal F}:\\mathcal F\\longrightarrow j_*j^*\\mathcal F$$\nis an isomorphism, where $j_*$ is ordinary sheaf direct image, as in [def-wf-middle-extension].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-a1-lisse-middle-extension.md",
   "place": "node lem-a1-lisse-middle-extension, order 2645"
  },
  "stmt_deps": [
-  "def-wf-middle-extension"
+  "def-wf-middle-extension",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "The assertion is clear on $U_0$. At a removed point, lissity on\n$C_0$ makes the local inertia action trivial, so the invariant-stalk\nformula of [lem-wf-boundary-stalk-invariants] identifies the\ntarget stalk with the original stalk: $(j_*j^*\\mathcal F)_{\\bar x}= ((j^*\\mathcal F)_{\\bar\\eta})^{I_x}=(\\mathcal F_{\\bar x})^{I_x}= \\mathcal F_{\\bar x}$, the last equality because $I_x$ acts trivially\non the stalk of a lisse sheaf. The map is the naturality of the\nadjunction at every geometric point, hence an isomorphism.",
+   "text": "By [def-pod-lisse-l-adic-sheaves], represent $\\mathcal F$ over a finite extension $E/\\mathbf Q_\\ell$ by a lisse integral system $\\mathcal L=(L_n,t_n)$, with $L_n$ a finite locally constant module sheaf over the finite ring $\\Lambda_n=\\mathcal O_E/\\varpi_E^n$. We will prove that the actual units $u_n:L_n\\to j_*j^*L_n$ are isomorphisms for every $n$, and then construct their compatible inverse system. The finite coefficient level may change its trivializing cover with $n$; no finite cover trivializing $\\mathcal F$ is assumed.",
    "uses": [
-    "lem-wf-boundary-stalk-invariants"
+    "def-pod-lisse-l-adic-sheaves"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+    "place": "Proof, Step 3 (lisse sheaves extend from a dense open)"
+   }
+  },
+  {
+   "text": "The field $k_0$ is Noetherian (its ideals are $0$ and $k_0$), and its spectrum is quasi-compact and locally Noetherian. Since $C_0$ is of finite type over $k_0$ in [def-wf-middle-extension], [lem-weil-pbc-finite-type-over-noetherian] makes $C_0$ Noetherian. By [lem-sc-smooth-normal] it is normal. The normal-Noetherian decomposition in [rem-pc-regular-normal] therefore writes $C_0$ as finitely many open-and-closed normal integral components $C_a$. Density of $U_0$ implies that $U_0\\cap C_a$ meets every nonempty open of each $C_a$. The case $C_0=\\varnothing$ has only the unique sheaf morphism, which is invertible; henceforth we treat the nonempty components.",
+   "uses": [
+    "def-wf-middle-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-smooth-normal",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+    "place": "Proof, Step 0 (normality), with the normal-Noetherian decomposition of Stacks Tag 033M"
+   }
+  },
+  {
+   "text": "Fix $n$ and put $L=L_n$. Apply [fin2-lem-lisse-trivialized-finite-etale] on $C_0$ to choose a finite etale surjection $p:P\\to C_0$ such that $p^*L$ is constant with finite module fibre on each connected component. The hypotheses are exactly the finite-type-over-a-field hypothesis of Step 2 and the finite-ring, finite-locally-constant hypotheses of Step 1. The scheme $P$ is Noetherian: finiteness in [def-weil-finite-integral-morphism] gives, over each affine $\\operatorname{Spec}A$ in $C_0$, an affine inverse image $\\operatorname{Spec}B$ with $B$ finite as an $A$-module. Its module generators also generate it as an $A$-algebra, since their linear span already contains every element of $B$. Thus $p$ is of finite type by [def-weil-finite-type-morphism], and [lem-weil-pbc-finite-type-over-noetherian] applies with base $C_0$.",
+   "uses": [
+    "fin2-lem-lisse-trivialized-finite-etale",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+    "place": "Proof, Step 3 (lisse sheaves extend from a dense open)"
+   }
+  },
+  {
+   "text": "For each $a$, $P_a=p^{-1}C_a$ is open and closed in the Noetherian scheme $P$, hence Noetherian. Apply [lem-fin-etale-normal-components] to the etale morphism $P_a\\to C_a$: its base is normal integral and its source is Noetherian, as required. This decomposes $P$ into finitely many open-and-closed normal integral connected components $Q_b$, on each of which $L|_{Q_b}=\\underline{M_b}$ with $M_b$ finite. Put $V_b=Q_b\\times_{C_0}U_0$. For any nonempty open $O\\subseteq Q_b$, its image in $C_0$ is nonempty and open by [lem-weil-pbc-etale-morphism-open-map], so meets the dense open $U_0$; a preimage in $O$ of such a point lies in $V_b$. Thus $V_b$ is a nonempty dense open of $Q_b$. The family $Q_b\\to C_0$ is an etale covering, since its images together are the image of the surjection $p$.",
+   "uses": [
+    "lem-fin-etale-normal-components",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+    "place": "Proof, Step 3 (lisse sheaves extend from a dense open)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-inverse-image-restriction], etale pullback is restriction of the sheaf to the localized etale site, and the open-adjunction unit is the restriction map on sections. Together with [def-weil-pbc-direct-image], this identifies the restriction of $u_n$ to $(Q_b)_{\\mathrm{Et}}$, on every etale object $T\\to Q_b$, with\n$$L(T)\\longrightarrow L(T\\times_{C_0}U_0)=L(T\\times_{Q_b}V_b).$$\nUnder the trivialization $L|_{Q_b}=\\underline{M_b}$, this is the canonical map $\\underline{M_b}_{Q_b}\\to(v_b)_*\\underline{M_b}_{V_b}$. All hypotheses of [lem-fin-normal-constant-open-image] hold: $Q_b$ is Noetherian, normal and integral, $V_b$ is nonempty open, and $M_b$ is a finite module. That node makes this very map an isomorphism. Its inverse respects the module action because it is inverse to a module-linear isomorphism; no freeness of $M_b$ is needed.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-direct-image",
+    "lem-fin-normal-constant-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z5, lemma-push-constant-sheaf-from-open, assertion (2); unit normalization from the existing etale-restriction node"
+   }
+  },
+  {
+   "text": "We now glue the inverses by the sheaf equalizer of [def-weil-pbc-abelian-etale-sheaves], using the covering of [def-weil-pbc-etale-site]. For an arbitrary etale $W\\to C_0$ and a section $s$ of $j_*j^*L$ on $W$, pull $s$ back to the covering $W_b=W\\times_{C_0}Q_b$. Step 5 supplies a unique preimage $r_b\\in L(W_b)$. On $W_b\\times_WW_c$, the two restrictions of these preimages have the same image, namely the restriction of $s$. This overlap is an etale object over $Q_b$, so Step 5 also gives injectivity there; the preimages therefore agree. The equalizer glues them to a unique $r\\in L(W)$. Its image is $s$, since the images agree after the covering and the target is a sheaf. If two sections of $L(W)$ have the same image, Step 5 makes them equal on all $W_b$, hence equal on $W$. We have proved bijectivity on every $W$; the inverses commute with restrictions and module operations by uniqueness. Thus they define an inverse sheaf morphism $u_n^{-1}$.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+    "place": "Proof, Step 3 (lisse sheaves extend from a dense open)"
+   }
+  },
+  {
+   "text": "Write $v_n=u_n^{-1}$. Naturality of section restriction gives $u_n t_n=(j_*j^*t_n)u_{n+1}$, so multiplying by $v_n$ on the left and $v_{n+1}$ on the right gives\n$$t_n v_{n+1}=v_n(j_*j^*t_n).$$\nThe $v_n$ therefore form a morphism of inverse systems, inverse to $(u_n)_n$. Ordinary direct image on systems is obtained by applying its section formula at each level [def-wf-middle-extension, def-weil-pbc-direct-image]; in this case its output system is adic because it is isomorphic, compatibly with transitions, to $\\mathcal L$. This is not an assertion that arbitrary direct images of adic systems remain adic. Under the rationalization and finite-extension colimit of [def-pod-lisse-l-adic-sheaves], the two inverse equations remain inverse equations, giving $\\mathcal F\\simeq j_*j^*\\mathcal F$. The map is the unit, since its finite-level components are the actual units. The construction is natural in $\\mathcal F$: if $h:L\\to L'$ then $u'h=(j_*j^*h)u$ implies $h v=v'(j_*j^*h)$. Consequently any supplied Weil descent isomorphism also commutes with the unit and its inverse.",
+   "uses": [
+    "def-wf-middle-extension",
+    "def-weil-pbc-direct-image",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+    "place": "Proof, Step 3 (lisse sheaves extend from a dense open)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-wf-boundary-stalk-invariants"
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-middle-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-smooth-normal",
+  "rem-pc-regular-normal",
+  "fin2-lem-lisse-trivialized-finite-etale",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-direct-image",
+  "lem-fin-normal-constant-open-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-site"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-a1-lisse-middle-extension.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/_section.md",
+  "place": "Proof, Steps 0 and 3; finite-level argument with explicit unit normalization, cover gluing and inverse-system compatibility. Current main-20261015 unit states the same recovery claim."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lisse|middleExtension|dense.*[Ss]heaf|[Ss]heaf.*dense",
+   "date": "2026-10-17",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean. Read returned types: restriction/counit for structure-sheaf modules, dense subsites, or condensed locally constant functors, not this etale lisse recovery unit.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally constant sheaf on a normal integral scheme is recovered by pushforward from any dense open subscheme",
+   "date": "2026-10-17",
+   "results": "Hits: CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, TopCat.Sheaf.pushforward_sheaf_of_sheaf, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, SheafOfModules.pushforwardSections, CategoryTheory.Functor.IsDenseSubsite.full_sheafPushforwardContinuous, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CompHausLike.LocallyConstant.counit_app_val, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj. Read returned types: restriction/counit for structure-sheaf modules, dense subsites, or condensed locally constant functors, not this etale lisse recovery unit.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"locallyConstant\", \"IsIso\"",
+   "date": "2026-10-17",
+   "results": "Hits: CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor. Read returned types: restriction/counit for structure-sheaf modules, dense subsites, or condensed locally constant functors, not this etale lisse recovery unit.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse l-adic sheaf on a smooth normal curve is isomorphic by the adjunction unit to the direct image of its restriction to a dense open",
+   "date": "2026-10-17",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.ofRestrict_app. Read returned types: restriction/counit for structure-sheaf modules, dense subsites, or condensed locally constant functors, not this etale lisse recovery unit.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a locally constant finite module sheaf on a normal scheme to a dense open is fully faithful and the unit F to j_* j^* F is an isomorphism",
+   "date": "2026-10-17",
+   "results": "Hits: LightCondMod.LocallyConstant.fullyFaithfulFunctor, LightCondSet.LocallyConstant.functorFullyFaithful, CondensedMod.LocallyConstant.fullyFaithfulFunctor, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondMod.LocallyConstant.instFullModuleCatFunctor, LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFullModuleCatFunctor, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf. Read returned types: restriction/counit for structure-sheaf modules, dense subsites, or condensed locally constant functors, not this etale lisse recovery unit.",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -164,5 +298,54 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-i-real-boundary"
+ "unit": "sk-i-real-boundary",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-lisse-middle-extension",
+  "worker": "stage1",
+  "summary": "Expanded the finite-level constant-sheaf argument already specified in unit Step 3, checked normality/Noetherian hypotheses and dense pullbacks, identified the actual unit, glued inverse sections, and verified transition and descent compatibility. Clarified the existing coefficient/open-immersion conventions without changing the mathematical assertion. No new nodes. The old slopmaster2 audit names are stale for the local checkout; its current recovery theorem is finite-coefficient only.",
+  "blueprint": "Realizes sk-i-real-boundary Proof Step 0 and Step 3 (finite-level trivialization, normal constant recovery, compatible adic inverse systems). The optional inertia formulation is not used. The current main-20261015 item and unit state the same claim.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Normality of smooth curves is the generic geometric input in unit Step 0; the unit states it without a separate same-unit lemma."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "The normal-Noetherian decomposition handles possibly disconnected C_0 before applying the unit Step 0 component argument."
+   },
+   {
+    "node": "fin2-lem-lisse-trivialized-finite-etale",
+    "why": "The unit explicitly names this generic finite-level trivialization lemma for Steps 1 and 3."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "The unit explicitly names this generic component lemma for its Step 0."
+   },
+   {
+    "node": "lem-fin-normal-constant-open-image",
+    "why": "The unit explicitly names this constant-sheaf recovery lemma as the detailed input for Step 3."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "This generic site-localization tool identifies the canonical adjunction unit with section restriction; no same-unit node supplies its normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-normal",
+  "rem-pc-regular-normal",
+  "fin2-lem-lisse-trivialized-finite-etale",
+  "lem-fin-etale-normal-components",
+  "lem-fin-normal-constant-open-image",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-a7c95954c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-a7c95954c (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item and its report, no new nodes, so A1-A5 hold. The statement is the blueprint claim (master order 2645, same in main-20261015) with conventions made explicit (F_q, smooth of pure dimension 1, dense open immersion, def-pod adic lisse convention, ordinary underived j_*); no hypothesis added, nothing weakened. Coefficient category: same levelwise adic reading as def-wf-middle-extension (reviewed by Q122) and as unit Step 3 ('j_* of an adic sheaf is formed levelwise'); not a target node, so no base-change morphism to check. Small cases: j=id, empty C_0, F=0, disconnected A^1 with two pieces, a non-free Z/l over Z/l^2 module, the Kummer unipotent sheaf. A nodal curve and a non-dense U_0 are counterexamples, so smoothness and density are both needed. Step checks: S1 def-pod clauses 1/2/4 give finite-ring lisse levels, and C_0 is Noetherian, separated with l invertible. S2: Noetherian (leaf); lem-sc-smooth-normal applies over F_q (statement says any field, def-sc-curves' blueprint_update allows any field, closed Lean Regular.lean:208 holds for any Field with dim<=1); rem-pc-regular-normal's 033M clause matches properties.tex lemma-normal-Noetherian; splitting into components fixes the unit's false 'smooth implies integral' for disconnected C_0 within its route. S3: fin2's hypotheses hold; finite implies finite type is written out, so P is Noetherian. S4: lem-fin-etale-normal-components applies to P_a over C_a (Noetherian source, normal integral base); density of V_b via the open-map leaf; Q_b give an etale covering. S5: clause 2 of the etale-inverse-image-restriction lemma makes the unit the restriction map; lem-fin-normal-constant-open-image's hypotheses hold (rests on Stacks 09Z5(2), checked). S6: gluing over the cover, really elementary. S7: transition identity t_n v_{n+1}=v_n(j_*j^*t_n) checks, inverses pass to E and Qbar, naturality covers Weil data. No duplicate found (rg over dag/nodes; lem-wf-dense-open-pi1-surjective cites this item, so it is rightly not used); no cycle; no SGA. Accepted tool_uses: lem-sc-smooth-normal, rem-pc-regular-normal, fin2-lem-lisse-trivialized-finite-etale, lem-fin-etale-normal-components, lem-fin-normal-constant-open-image, lem-weil-pbc-etale-inverse-image-restriction. Batch-5 flag: def-pod-lisse-l-adic-sheaves is the general Weil II 1.1.1 definition; its 103-node closure has no trace-formula, trace-transport or batch-4 node, only itself and the definition def-pod-ring-scalar-extension from PD, and def-wf-middle-extension already cites it. It is outside the assumptions, so no RETURN. No changes made."
+ }
 }

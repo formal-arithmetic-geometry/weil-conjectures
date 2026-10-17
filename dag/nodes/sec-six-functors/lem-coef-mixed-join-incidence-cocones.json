@@ -12,9 +12,116 @@
   "lem-coef-join-slice-cocone-comparison",
   "lem-coef-directed-cover-mixed-subset-cells"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $\\theta:[m]\\to[n]$, the proposed operator is defined because $\\theta^*\\sigma\\in(K_{i_0})_m\\subseteq(K_{i_{\\theta(0)}})_m$. For $\\phi:[\\ell]\\to[m]$, the two successive operators give $((\\theta\\phi)^*\\sigma,i_{\\theta\\phi(0)}\\leq\\cdots\\leq i_{\\theta\\phi(\\ell)})$, exactly the composite operator; the identity operator is the identity. Thus $V$ is simplicial, and forgetting either coordinate commutes with all operators. Constant index chains likewise give the simplicial maps $v_i$. Their images $W_i$ are simplicial subsets of $V$, and $v_i:K_i\\to W_i$ is a degreewise bijection: the first projection recovers the simplex. For $i\\ne j$ the constant chains differ in every degree, so $W_i\\cap W_j=\\varnothing$. Hence $W=\\bigcup_iW_i\\subseteq V$ is the degreewise disjoint union of the $K_i$, with its specified inclusion. All these sets remain small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent construction from HTT Notation 4.2.3.1, printed pp. 248-249; check of the incidence operators and constant-index subsets."
+   }
+  },
+  {
+   "text": "Define $b:V\\times\\Delta^1\\to H$ by the two-block formula in the statement. If both blocks are nonempty and $r$ is the first position of the final block, the initial block of $\\sigma$ lies in $K_{i_0}\\subseteq K_{i_r}$, so the resulting mixed simplex lies in $H$ by its cited defining condition. An empty block gives the relevant pure simplex, which also belongs to $H$. Restriction along any monotone map restricts the same two ordered blocks; if one disappears, both descriptions use that same pure summand. Thus the formula commutes with every simplicial operator. At time $0$ it is $u$ into $K$; at time $1$ it is $v$ into $N(I)$. Put $a_0=qb$. For a constant chain at $i$, this is precisely the cylinder-to-join map $K_i\\times\\Delta^1\\to K_i\\star\\Delta^0$: keep the initial $K_i$ block and repeat the apex in the final block. The explicitly defined fat-to-sharp comparison of the cited join-slice node therefore identifies this restriction with the associated coherent cocone, with literal equality of its simplex formulas.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-directed-cover-mixed-subset-cells",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent two-block calculation for HTT Notation 4.2.3.1 and the explicit comparison of Proposition 4.2.1.5, printed pp. 241 and 248-249."
+   }
+  },
+  {
+   "text": "Let $e_i$ be the prescribed edge from $a_0|_{W_i\\times\\Delta^1}$ to $\\eta_i$ in the strict apex fiber. Uncurrying the displayed definition of $P_{p|K_i}$ gives a map $h_i:\\Delta^1_s\\times K_i\\times\\Delta^1_t\\to\\mathcal E$. At $s=0,1$ it is respectively the old cocone and $\\eta_i$; at $t=0$ it is $p|_{K_i}$ independently of $s$, and at $t=1$ it is $c(i)$ independently of $s$. Put $B=V\\times\\Delta^1_t$ and $A=(V\\times\\partial\\Delta^1_t)\\cup(W\\times\\Delta^1_t)\\subseteq B$. On $\\Delta^1_s\\times A$ prescribe the $h_i$ on the disjoint $W_i$ cylinders and the constant homotopy of $pu,cv$ on the two endpoint subsets. Their intersections are exactly $W_i\\times\\{0,1\\}$, where the formulas just computed agree. They therefore define a simplicial map degree by degree. At $s=0$ it agrees with $a_0|_A$, so it glues to $a_0$ on $\\{0\\}\\times B$. Every vertex of $B$ has $t=0$ or $1$ and belongs to $A$; its prescribed $s$-edge is degenerate, hence an equivalence (the doubly degenerate simplex witnesses both inverse equations).",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Agent preparation of the lifting square for Proposition 4.4.5.8 (01NX), using the explicit coherent-comma definition."
+   }
+  },
+  {
+   "text": "Apply the cited relative equivalence-prism extension with $\\mathcal C=\\mathcal E$, $\\mathcal D=\\Delta^0$, $p$ the unique map, the inclusion $A\\subseteq B$ of step 3, and $\\epsilon=0$. The terminal simplicial set is a quasicategory, and $\\mathcal E\\to\\Delta^0$ is an inner fibration exactly by the quasicategory horn condition. The inclusion contains all vertices, and all its prescribed vertex edges are equivalences, as verified in step 3. The lower prism map is the unique map to $\\Delta^0$. We obtain $h:\\Delta^1_s\\times B\\to\\mathcal E$ extending the entire prescribed map, exactly. Set $a=h|_{\\{1\\}\\times B}$. Its endpoint restrictions remain $pu,cv$, and its restriction to $W_i\\times\\Delta^1_t$ is exactly $\\eta_i$. Uncurrying $h$ gives an edge from $a_0$ to $a$ in the strict fixed-endpoint fiber, whose restrictions are the chosen edges $e_i$, not merely their homotopy classes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-equivalence-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Proposition 4.4.5.8 (01NX), opposite orientation epsilon=0, with target the point."
+   }
+  },
+  {
+   "text": "Apply the cited fixed-boundary Kan theorem to $B=V\\times\\Delta^1$, $A_0=V\\times\\partial\\Delta^1$, $X=\\mathcal E$ and the endpoint map $f=(pu,cv)$. The subset $A_0$ contains all vertices, so the exact strict fiber in the statement is a Kan complex $Z$. The edge $h$ of step 4 lies in $Z$. For completeness, every edge $e:x\\to y$ of a Kan complex has inverse triangles: fill $\\Lambda^2_0$ with edges $01=e$ and $02=1_x$, obtaining $f:y\\to x$ and a triangle with edges $(e,f,1_x)$. Then fill $\\Lambda^3_0$ on vertices $(x,y,x,y)$, with face $012$ that triangle, face $023$ the degeneracy of $e$ with edges $(1_x,e,e)$, and face $013$ its other degeneracy with edges $(e,1_y,e)$. These three faces agree on overlaps; the missing face $123$ has edges $(f,e,1_y)$. These are exactly the two inverse witnesses required by the definition of equivalence. Apply this within $Z$ to $h$. Thus $h$ is the required equivalence relative to both endpoints, with all chosen local restrictions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-fixed-boundary-functor-kan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01P1",
+    "place": "Proposition 4.6.1.11 (01P1); the final two horn fillings unpack the definition of equivalence in a Kan complex."
+   }
+  },
+  {
+   "text": "Given $\\widetilde\\lambda:H\\star\\Delta^0\\to\\mathcal E$, define $r:V\\times\\Delta^2\\to H\\star\\Delta^0$ as follows. For $(\\sigma,i_0\\leq\\cdots\\leq i_n)$ and $\\rho:[n]\\to[2]$, use the restriction of $\\sigma$ on $\\rho^{-1}(0)$, the index chain on $\\rho^{-1}(1)$, and the repeated final apex on $\\rho^{-1}(2)$, in that order; omit empty blocks. The first two nonempty blocks concatenate to an $H$ simplex: if both occur, the first lies in $K_{i_0}\\subseteq K_{i_j}$ for the first index $j$ of the second block. If only one occurs it is a pure simplex of $H$. Append the third block by the defining ordered-join formula; if the first two are empty, use the pure apex simplex. Under any simplicial operator, the three blocks are restricted in order, including the cases where a block disappears. This gives the same formula after restriction, so $r$ is simplicial. Put $t_0=\\widetilde\\lambda r$. Its $01$ face is $a_0$ by step 2. Its $12$ face keeps the index block followed by the apex and is therefore $(v\\times\\mathrm{id})^*\\nu$. Its $02$ face keeps the $K$ block followed by the apex and is $(u\\times\\mathrm{id})^*\\lambda$. Both equalities are exactly the cylinder formulas defining the associated cocones under the cited join-slice comparison, in every degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-directed-cover-mixed-subset-cells",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent three-block calculation from the ordered join of HTT Notation 4.2.3.1 and the cylinder comparison of Proposition 4.2.1.5."
+   }
+  },
+  {
+   "text": "Now take any $a$ and any specified relative equivalence from $a_0$ to $a$ as in the statement, not necessarily the one constructed above. Its underlying edge uncurries to $e:\\Delta^1_s\\times V\\times\\Delta^1\\to\\mathcal E$, with $s$-ends $a_0,a$, constant in $s$ at the two endpoints of the last factor. Let $B'=V\\times\\Delta^2$ and $A'=V\\times\\partial\\Delta^2$. On $\\Delta^1_s\\times A'$ prescribe $e$ on edge $01$, the constant homotopy of $(v\\times\\mathrm{id})^*\\nu$ on edge $12$, and the constant homotopy of $(u\\times\\mathrm{id})^*\\lambda$ on edge $02$. At their pairwise intersections (the three vertices of the triangle) the maps agree: they are respectively $pu$, $cv$, and the constant diagram at $C$, independently of $s$. Hence they glue degree by degree to a simplicial map, and at $s=0$ agree with $t_0|_{A'}$ by step 6. Every vertex of $B'$ lies in $A'$, and every prescribed $s$-edge at a vertex is degenerate.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Agent boundary preparation for Proposition 4.4.5.8 (01NX); agreement at all three corners is explicit."
+   }
+  },
+  {
+   "text": "Apply the relative equivalence-prism extension again, with inclusion $A'\\subseteq B'$, $\\epsilon=0$, $\\mathcal E\\to\\Delta^0$, the boundary homotopy of step 7, and $t_0$ on $\\{0\\}\\times B'$. The quasicategory and inner-fibration conditions are the same as in step 4; $A'$ contains all vertices, and the prescribed vertex edges are degenerate equivalences. The extension $T:\\Delta^1_s\\times B'\\to\\mathcal E$ therefore exists and preserves the entire boundary homotopy exactly. Its $s=1$ restriction $t$ has faces $d_2t=a$, $d_0t=(v\\times\\mathrm{id})^*\\nu$ and $d_1t=(u\\times\\mathrm{id})^*\\lambda$, by those boundary prescriptions. No use was made of initiality, colimits, directedness or covering. If $I$ or $V$ is empty the maps with source $V$ are the unique empty maps; if $\\mathcal E$ is empty, existence of $q$ already forces its source empty. Thus the stated empty cases are included without an extra hypothesis.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-equivalence-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Proposition 4.4.5.8 (01NX), epsilon=0, applied to the full triangle boundary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-directed-cover-mixed-subset-cells",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-equivalence-prism-extension",
+  "lem-coef-infinity-fixed-boundary-functor-kan"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Ancestral proof paragraph 2, finite-coefficient adjunction infrastructure, via directed-cover assembly. Explicit incidence two-block and three-block formulas, followed by two applications of existing relative equivalence-prism extension (Kerodon 01NX) and the fixed-boundary Kan theorem (01P1). Online HTT 4.2.3.1 and 4.2.1.5 supply the conventions; these sources are not archived locally, so the expanded argument is marked agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +164,52 @@
    "results": "{\"t\": \"2026-10-17T08:42:29Z\", \"tool\": \"grep\", \"query\": \"incidence|mixed|cocone\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonsingularColimit.lean\"], \"digest\": \"4dcaffe1e2d910c0\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures and pinned source. General subcomplex pushouts, skeleton cell decompositions and ordinary-category cocones do not state the mixed join attachment or coherent incidence replacement assertion. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "incidence|mixedJoin|mixed_join|cocone",
+   "results": "{\"t\": \"2026-10-17T13:03:21Z\", \"tool\": \"grep\", \"query\": \"incidence|mixedJoin|mixed_join|cocone\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexEvaluation.lean\"], \"digest\": \"5ec8d937761b2bcf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and the pinned source. Ordinary-category cocones and joins, subcomplex colimits, horn generators and model-category cylinders do not state this mixed-join incidence and exact fixed-apex replacement result; not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A mixed simplicial join induces a coherent incidence cocone and a triangle compatible with replacement of fixed-apex local cocones",
+   "results": "{\"t\": \"2026-10-17T13:03:22Z\", \"tool\": \"leansearch\", \"query\": \"A mixed simplicial join induces a coherent incidence cocone and a triangle compatible with replacement of fixed-apex local cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.pt\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Join.mkNatIso\", \"CategoryTheory.Join.mkNatIso.congr_simp\", \"CategoryTheory.Limits.Types.Pushout.cocone\", \"TopCat.sigmaCofan\", \"CategoryTheory.Limits.WidePushoutShape.mkCocone\", \"CategoryTheory.Limits.Sigma.cocone\"], \"digest\": \"25e1188a57bbee45\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and the pinned source. Ordinary-category cocones and joins, subcomplex colimits, horn generators and model-category cylinders do not state this mixed-join incidence and exact fixed-apex replacement result; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocone\", \"equivalence\"",
+   "results": "{\"t\": \"2026-10-17T13:03:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"cocone\\\", \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.precomposeEquivalence\", \"CategoryTheory.Limits.Cocone.functorialityEquivalence\", \"CategoryTheory.Limits.Cocone.whiskeringEquivalence\", \"CategoryTheory.Limits.Cocone.equivalenceOfReindexing\", \"CategoryTheory.Limits.coconeEquivalenceOpConeOp\", \"CategoryTheory.Limits.coneEquivalenceOpCoconeOp\", \"CategoryTheory.Limits.Cocone.precomposeEquivalence_functor\", \"CategoryTheory.Limits.Cocone.precomposeEquivalence_inverse\"], \"digest\": \"7854639fa094669b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and the pinned source. Ordinary-category cocones and joins, subcomplex colimits, horn generators and model-category cylinders do not state this mixed-join incidence and exact fixed-apex replacement result; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monotone family of simplicial subsets, its mixed join gives an incidence natural transformation; replace local cocones by equivalent ones relative to endpoints and extend the resulting triangle",
+   "results": "{\"t\": \"2026-10-17T13:03:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a monotone family of simplicial subsets, its mixed join gives an incidence natural transformation; replace local cocones by equivalent ones relative to endpoints and extend the resulting triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.SimplicialThickening.compFunctor\", \"SSet.skeletonOfMono\"], \"digest\": \"76e4d649f4d419cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and the pinned source. Ordinary-category cocones and joins, subcomplex colimits, horn generators and model-category cylinders do not state this mixed-join incidence and exact fixed-apex replacement result; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "incidence|mixed|join",
+   "results": "{\"t\": \"2026-10-17T13:03:53Z\", \"tool\": \"grep\", \"query\": \"incidence|mixed|join\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and the pinned source. Ordinary-category cocones and joins, subcomplex colimits, horn generators and model-category cylinders do not state this mixed-join incidence and exact fixed-apex replacement result; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory an incidence simplicial cylinder for a family of subcomplexes maps to their join, and local natural transformations can be substituted while fixing the endpoints",
+   "results": "{\"t\": \"2026-10-17T13:03:56Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory an incidence simplicial cylinder for a family of subcomplexes maps to their join, and local natural transformations can be substituted while fixing the endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"HomotopicalAlgebra.Precylinder.inr_i\", \"HomotopicalAlgebra.Cylinder.trans\", \"HomotopicalAlgebra.Precylinder.inl_i\", \"HomotopicalAlgebra.Precylinder.inl_i_assoc\", \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"HomotopicalAlgebra.Precylinder.inr_i_assoc\", \"HomotopicalAlgebra.Precylinder.trans_I\"], \"digest\": \"79f93e69e9861307\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and the pinned source. Ordinary-category cocones and joins, subcomplex colimits, horn generators and model-category cylinders do not state this mixed-join incidence and exact fixed-apex replacement result; not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-cover-colimit-assembly",
@@ -87,5 +236,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-mixed-join-incidence-cocones",
+  "worker": "stage1",
+  "summary": "Kept every clause and hypothesis. Constructed the incidence simplicial set, the two-block cylinder and the three-block triangle explicitly. Reused existing relative equivalence-prism extension twice to enforce the prescribed local edges and to transport the triangle while fixing its other faces. The existing fixed-boundary Kan theorem proves that the constructed global edge is an equivalence in the strict endpoint fiber. No new nodes, no route change, no Lean attachment.",
+  "blueprint": "Realizes the explicit incidence and fixed-apex representative-transport part of directed-cover assembly, beneath ancestral prop-coef-integral-exceptional-adjoint proof paragraph 2. Steps 1-2 give the incidence interpretation of HTT 4.2.3.1; steps 3-5 give exact local representative replacement, using the 4.2.1.5 comparison; steps 6-8 give the compatible triangle and its relative transport. The inherited blueprint ancestor and via list are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-dddbe49e5",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-dddbe49e5 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the report in full, plus the full statements of the 5 cited nodes (def-cbc-enhanced-diagrams-cones, join-slice-cocone-comparison, directed-cover-mixed-subset-cells, infinity-equivalence-prism-extension, infinity-fixed-boundary-functor-kan), the unit record and the citer directed-cover-colimit-assembly. Steps 1-2: V is simplicial because K_{i_0} is contained in K_{i_theta(0)}. A mixed simplex lies in H by the mixed-subset clause, since sigma is in K_{i_0}, which is contained in K_{i_r}. On constant chains b is literally the comparison's K_i x Delta^1 -> K_i * Delta^0. Step 3: P's strict apex fiber is literally V_f(K_i x Delta^1, E). The pieces glue on A, and the intersections W_i x {0,1} agree. Step 4: the prism extension applies with E -> Delta^0 and epsilon=0, since A contains all vertices and the vertex edges are degenerate, so restriction to W_i gives exactly eta_i and e_i. Step 5: the fixed-boundary fiber is Kan. I recomputed the Lambda^2_0 and Lambda^3_0 inverse witnesses; face 123 has edges (f,1_y,e). Step 6: the three-block map has faces a_0, nu-pullback and lambda-pullback. Steps 7-8: the boundary homotopy agrees at the three vertex cylinders (pu, cv, const C), and the prism extension preserves it, so d_2t=a, d_0t=(v x id)^*nu and d_1t=(u x id)^*lambda. Edge cases tested: I empty, K empty, empty K_i, a single index, repeated or incomparable indices, a non-covering family, and E empty. proof_deps equals the union of uses, and there is no cycle. All non-definition dependencies are in sk-prop-sf-biduality-general, so there are no tool_uses. An rg search over dag/nodes for incidence, fixed-apex and relative-equivalence nodes found no duplicate; decomposition-local-colimit-cocones and directed-union-local-colimits state different things. There are no new nodes and no D1 restatement. HTT and Kerodon are not archived, so WANTED and proof_origin=agent are correct. The item is not a target, involves no coefficient category or base-change morphism, and uses no SGA. No changes."
  }
 }

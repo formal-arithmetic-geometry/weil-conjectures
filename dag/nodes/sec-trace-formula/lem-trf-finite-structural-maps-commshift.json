@@ -107,12 +107,52 @@
    }
   },
   {
-   "text": "Compute clause (3) on compatible compactifications. Starting from a compactification $Y\\xrightarrow{i}\\overline Y\\xrightarrow{s}Z$ of $g$, [lem-weil-pbc-compatible-compactification-triangle] supplies $X\\xrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y$, $V=\\overline X\\times_{\\overline Y}Y$, $b:V\\hookrightarrow\\overline X$, $q:V\\to Y$, and $j:X\\hookrightarrow V$, with $a=bj$ and $f=qj$. On the etale site the canonical construction is the following displayed composite:\n$$Rs_*i_!Rq_*j_!\\xrightarrow{Rs_*\\gamma^e j_!}Rs_*Rp_*b_!j_!\\xrightarrow{\\kappa_{s,p}^{-1}}R(sp)_*b_!j_!\\xrightarrow{R(sp)_*\\operatorname{comp}_{b,j}}R(sp)_*a_!.$$\nThis is the proper/open normalization of [lem-amb-unbounded-compact-support-comparisons], restricted here to $D^+$. Each arrow commutes with shifts by steps 3--4. On pro-etale witnessed input, use the same composite with $\\gamma^p$ defined by the site comparisons of step 5: put $S_Q=i_!^p(b_q)\\circ e_i(Rq_*^e):H_{\\overline Y}i_!^eRq_*^e\\to i_!^pRq_*^pH_V$ and $T_Q=Rp_*^p(e_b)\\circ b_p(b_!^e):H_{\\overline Y}Rp_*^eb_!^e\\to Rp_*^pb_!^pH_V$. Then\n$$\\gamma^p_Q=T_Q\\circ H_{\\overline Y}(\\gamma^e_Q)\\circ S_Q^{-1}.$$\nEvery factor has its shift square by steps 3--5, so this formula proves the square for $\\gamma^p_Q$. It uses the specified counit-mate comparison $b$, rather than an arbitrary site isomorphism. The site direct-image comparisons respect identities and composition by [prop-weil-pbc-comparison-direct-image], and the open site comparisons respect open composition by step 3. Write $F_h^e$ and $P_h$ for the etale and pro-etale compact-support candidates on this tower, and $c_h:H_{\\operatorname{target}(h)}F_h^e\\to P_hH_{\\operatorname{source}(h)}$ for step 5's map. Inserting $c_c=Rp_*(e_j)b_pj_!$ into the displayed three-arrow composite, and cancelling each adjacent inverse comparison, gives, on $H_XL$,\n$$\\alpha^p_{g,f,H_XL}=c_{gf,L}\\,H_Z(\\alpha^e_{g,f,L})\\,c_{g,F_f^eL}^{-1}\\,P_g(c_{f,L}^{-1}).$$\nMore explicitly, the direct-image replacements are justified by\n$$\\kappa^p_{v,u}H\\circ b_{vu}=Rv_*^p(b_u)\\circ b_v(Ru_*^e)\\circ H(\\kappa^e_{v,u}),$$\nand the open-extension replacements by\n$$\\operatorname{comp}^p_{b,j}H_X\\circ b_!^p(e_j)\\circ e_b(j_!^e)=e_a\\circ H_{\\overline X}(\\operatorname{comp}^e_{b,j}).$$\nInsert $\\gamma^p_Q=T_QH(\\gamma^e_Q)S_Q^{-1}$ into the first arrow. The two displayed identities replace the second and third arrows, respectively. Naturality of $b_s$ moves it across $\\gamma^e_Q$; the resulting consecutive $b_q^{-1}b_q$, $e_i^{-1}e_i$ and $e_b^{-1}e_b$ factors cancel. The surviving outer factors are exactly $c_{gf}$ on the target and $c_g^{-1}P_g(c_f^{-1})$ on the source, giving the displayed equation. These formulas construct the canonical compact-support compositor of [thm-sf-comp-composition] on the compatible tower; they use the named proper/open arrows and the canonical direct-image/open-extension composition maps, rather than an unspecified isomorphism. The proper-refinement special cases agree with the prescribed pro-etale maps by the normalization in step 6. Choice-independence in [thm-sf-comp-composition] identifies its value at the originally chosen compactifications by those refinement comparisons. Step 6 shows the conjugating comparisons commute with shifts. Thus $\\alpha_{g,f}$ and its inverse have the required shift equations on the stated domain.",
+   "text": "Choose compatible compactifications by [lem-weil-pbc-compatible-compactification-triangle]: $Y\\xrightarrow i\\overline Y\\xrightarrow sZ$ and $X\\xrightarrow a\\overline X\\xrightarrow p\\overline Y$, with $V$, $b$, $q$, $j$ as there; the square $pb=iq$ is Cartesian. The etale compositor on this tower is the specified normalization of [lem-amb-unbounded-compact-support-comparisons]:\n$$Rs_*i_!Rq_*j_!\\xrightarrow{Rs_*\\Gamma_Q j_!}Rs_*Rp_*b_!j_!\\xrightarrow{\\kappa_{s,p}^{-1}}R(sp)_*b_!j_!\\xrightarrow{R(sp)_*\\operatorname{comp}_{b,j}}R(sp)_*a_!,$$\nwhere $\\Gamma_Q:i_!Rq_*\\to Rp_*b_!$ is its proper/open interchange. By the last sentence of the same statement, on bounded-below inputs this $\\alpha^e_{g,f}$ is the composition isomorphism of [lem-amb-etale-compact-comparisons] with the same normalization; this is the etale compositor used in step 9.",
    "uses": [
     "lem-weil-pbc-compatible-compactification-triangle",
     "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-composition, compatible compactification diagram and four-line construction"
+   }
+  },
+  {
+   "text": "The interchange $\\Gamma_Q$ of step 7 is the map of [lem-amb-unbounded-proper-open-interchange] for the square $pb=iq$. Its specified representative on a K-injective $J$, with a K-injective resolution $b_!J\\to I$, is $i_!q_*J\\cong p_*b_!J\\to p_*I$, where the first map is the canonical sheaf proper-support identification (both sides are the same subsheaf of $(iq)_*J=(pb)_*J$). For $J$ representing an object of $D^+$ this is exactly the representative of $\\gamma^e_Q$ in [lem-cbc-proper-open-interchange-coherence] used in step 4, so $\\Gamma_Q=\\gamma^e_Q$ on $D^+$ and the shift calculation of step 4 applies verbatim; its adjoint description is not needed. Hence each of the three arrows of step 7 commutes with shifts, by steps 3--4, and $\\kappa_{s,p}^{-1}$ does by the inverse calculation of step 6. The composition and whiskering rule [lem-weil-pbc-commshift-nattrans-comp-whisker] gives the shift square for the etale compositor $\\alpha^e_{g,f}$ on $D^+(X_{\\mathrm{et}},A)$.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-composition, compatible compactification diagram and four-line construction"
+   }
+  },
+  {
+   "text": "Write $c_h:H F_h^e\\to P_hH$ for the candidate comparison of step 5. [lem-pur-compact-support-site-coherence] names the same map, $B_h^c=Rp_{p,*}(e_j)\\circ\\beta_{p,j^e_!}$ with the counit-mate $\\beta_p$ and the adjoint open comparison $e_j$, so $B_h=c_h$. Its hypotheses hold here: its datum [def-pur-conventions] is the item's ($k=\\overline{k_0}$, $\\ell\\ne p$, $A=A_{E,n}$), the schemes are finite type over $k$, the three maps are separated finite type, and we use the compatible tower of step 7. Its composition identity on $D^+(X_{\\mathrm{et}},A)$ reads $c_{gf}H_Z(\\alpha^e_{g,f})=\\alpha^p_{g,f}H_X\\circ(P_gc_f)\\circ(c_gF_f^e)$, with $\\alpha^e$ the compositor of [lem-amb-etale-compact-comparisons] (step 7) and $\\alpha^p$ that of [thm-sf-comp-composition]. Since $c_f$ and $c_g$ are invertible (step 5), this is\n$$\\alpha^p_{g,f,H_XL}=c_{gf,L}H_Z(\\alpha^e_{g,f,L})c_{g,F_f^eL}^{-1}P_g(c_{f,L}^{-1}).$$\nStep 8 proves the shift square for the etale middle arrow, and step 5 proves it for each $c_h$. By [lem-weil-pbc-commshift-nattrans-comp-whisker], and step 6 for inverses, the right side has the shift square with exactly the composite canonical shifts of the statement. This proves it for the named pro-etale compositor on $H_XL$.",
+   "uses": [
+    "lem-pur-compact-support-site-coherence",
+    "def-pur-conventions",
+    "lem-amb-etale-compact-comparisons",
     "thm-sf-comp-composition",
-    "prop-weil-pbc-comparison-direct-image"
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-composition, compatible compactification diagram and four-line construction"
+   }
+  },
+  {
+   "text": "For a witness $w:H_XL\\xrightarrow{\\sim}K$, naturality of the compositor conjugates its value at $H_XL$ by $P_gP_f(w)$ and $P_{gf}(w)$. Use the shifted witness $w[1]\\chi_{H_X}(L)$; naturality of both composite shift comparisons cancels those two witness factors just as in step 6. The resulting square is the one at $K$. Choice-independence in [thm-sf-comp-composition] and the cocycle in [prop-compactification-coherence-detailed] conjugate the tower value by the specified refinement comparisons, whose shift squares were proved in step 6. Composition and whiskering preserve the square [lem-weil-pbc-commshift-nattrans-comp-whisker]. Thus the original $\\alpha_{g,f}$ commutes with shifts on the stated domain, and the inverse calculation of step 6 gives its inverse square. This proves clause (3).",
+   "uses": [
+    "thm-sf-comp-composition",
+    "prop-compactification-coherence-detailed",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
    ],
    "elementary": false,
    "source": {
@@ -133,7 +173,7 @@
    }
   },
   {
-   "text": "Identify $e$ with the required constructible counit, including its normalization. By [lem-sf-proetale-constructible-origin], a bounded constructible $M$ has an etale origin $M\\cong H_YN$; by [lem-sf-comparison-tor-amplitude], finite Tor amplitude is preserved and reflected, so $N$ belongs to the etale finite-Tor category when $M$ does. The comparison unit $N\\to U_YH_YN$ is an isomorphism by [thm-weil-pbc-site-comparison]; by step 2 it is compatible with the canonical shifts, so the quasi-inverse $U_Y$ has the very shift used in step 8. The finite coefficient adjunction and its transport by this unit and $c_c$ are stated in [lem-pur-finite-coefficient-adjoint-comparisons]. The transported counit formula in [det-sp-et-proet-adjunction-transfer] says on $H_YN$ exactly $H_Y\\varepsilon^e_N\\circ c_c(G^eN)^{-1}$, after the equivalence identifications. To make the equivalence identification explicit, set $t=\\eta^\\nu_N:N\\xrightarrow{\\sim}U_YH_YN$. Naturality of $c_c$ and $\\varepsilon^e$ gives\n$$e_{H_YN}\\circ P H_XG^e(t)=v_{Y,H_YN}\\circ H_Y(t)\\circ H_Y(\\varepsilon^e_N)\\circ c_c(G^eN)^{-1}=H_Y(\\varepsilon^e_N)\\circ c_c(G^eN)^{-1},$$\nwhere the last equality is the comparison triangle identity $v_{Y,H_YN}\\circ H_Y(t)=1$. The isomorphism $P H_XG^e(t)$ is exactly the source identification from $PH_XG^eN$ to $PH_XG^eU_YH_YN$, so this is the stated transported-counit formula. Thus $e_{H_YN}=\\varepsilon_{f,H_YN}$, and naturality along $H_YN\\cong M$ gives $e_M=\\varepsilon_{f,M}$ for every $M\\in D^b_{ctf}(Y,A)$. These are the constructible maps fixed by [def-trf-admissibility]. If its compact-support functor is expressed at another compactification, the refinement comparison of step 6 is inserted on the left, and preserves the equation. This proves clause (4) for the given adjunction and the given shifts.",
+   "text": "Identify $e$ with the required constructible counit, including its normalization. By [lem-sf-proetale-constructible-origin], a bounded constructible $M$ has an etale origin $M\\cong H_YN$; by [lem-sf-comparison-tor-amplitude], finite Tor amplitude is preserved and reflected, so $N$ belongs to the etale finite-Tor category when $M$ does. The comparison unit $N\\to U_YH_YN$ is an isomorphism by [thm-weil-pbc-site-comparison]; by step 2 it is compatible with the canonical shifts, so the quasi-inverse $U_Y$ has the very shift used in step 11. The finite coefficient adjunction and its transport by this unit and $c_c$ are stated in [lem-pur-finite-coefficient-adjoint-comparisons]. The transported counit formula in [det-sp-et-proet-adjunction-transfer] says on $H_YN$ exactly $H_Y\\varepsilon^e_N\\circ c_c(G^eN)^{-1}$, after the equivalence identifications. To make the equivalence identification explicit, set $t=\\eta^\\nu_N:N\\xrightarrow{\\sim}U_YH_YN$. Naturality of $c_c$ and $\\varepsilon^e$ gives\n$$e_{H_YN}\\circ P H_XG^e(t)=v_{Y,H_YN}\\circ H_Y(t)\\circ H_Y(\\varepsilon^e_N)\\circ c_c(G^eN)^{-1}=H_Y(\\varepsilon^e_N)\\circ c_c(G^eN)^{-1},$$\nwhere the last equality is the comparison triangle identity $v_{Y,H_YN}\\circ H_Y(t)=1$. The isomorphism $P H_XG^e(t)$ is exactly the source identification from $PH_XG^eN$ to $PH_XG^eU_YH_YN$, so this is the stated transported-counit formula. Thus $e_{H_YN}=\\varepsilon_{f,H_YN}$, and naturality along $H_YN\\cong M$ gives $e_M=\\varepsilon_{f,M}$ for every $M\\in D^b_{ctf}(Y,A)$. These are the constructible maps fixed by [def-trf-admissibility]. If its compact-support functor is expressed at another compactification, the refinement comparison of step 6 is inserted on the left, and preserves the equation. This proves clause (4) for the given adjunction and the given shifts.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-tor-amplitude",
@@ -149,7 +189,7 @@
    }
   },
   {
-   "text": "All calculations take place on the required domains. The coefficient ring is finite and killed by a power of $\\ell$, with $\\ell$ invertible on every scheme. The field $k$ is Noetherian because its only ideals are $0$ and $k$; its one-affine spectrum is therefore Noetherian. Finite-type schemes over $k$ and the proper ambient schemes of a compactification are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied first to $\\operatorname{Spec}k$ and then to the proper maps; the starting schemes are qcqs by [lem-weil-pbc-qcqs-over-affine], since they are separated finite type over $\\operatorname{Spec}k$. Thus the compatible-tower and proper/open comparison hypotheses used above hold. The etale-origin categories are preserved by compact support by [thm-sf-comp-composition]; shifting a witness $H_TN\\cong K$ gives $H_T(N[1])\\cong K[1]$ by step 1, so every shift equation stays in its domain. Bounded constructible inputs have such witnesses by [lem-sf-proetale-constructible-origin]. For the exceptional counit the preservation and adjunction on finite-Tor constructibles are supplied by [lem-pur-finite-coefficient-adjoint-comparisons], so each term of steps 8--9 is defined there. No assertion about a right adjoint on all pro-etale complexes is needed. Combining the equations proved above gives exactly $\\chi_G(M)\\tau_{M[1]}=\\tau_M[1]\\chi_F(M)$ for all four specified transformations. The elementary inverse calculation in step 6 gives the two remaining inverse equations.",
+   "text": "All calculations take place on the required domains. The coefficient ring is finite and killed by a power of $\\ell$, with $\\ell$ invertible on every scheme. The field $k$ is Noetherian because its only ideals are $0$ and $k$; its one-affine spectrum is therefore Noetherian. Finite-type schemes over $k$ and the proper ambient schemes of a compactification are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied first to $\\operatorname{Spec}k$ and then to the proper maps; the starting schemes are qcqs by [lem-weil-pbc-qcqs-over-affine], since they are separated finite type over $\\operatorname{Spec}k$. Thus the compatible-tower and proper/open comparison hypotheses used above hold. The etale-origin categories are preserved by compact support by [thm-sf-comp-composition]; shifting a witness $H_TN\\cong K$ gives $H_T(N[1])\\cong K[1]$ by step 1, so every shift equation stays in its domain. Bounded constructible inputs have such witnesses by [lem-sf-proetale-constructible-origin]. For the exceptional counit the preservation and adjunction on finite-Tor constructibles are supplied by [lem-pur-finite-coefficient-adjoint-comparisons], so each term of steps 11--12 is defined there. No assertion about a right adjoint on all pro-etale complexes is needed. Combining the equations proved above gives exactly $\\chi_G(M)\\tau_{M[1]}=\\tau_M[1]\\chi_F(M)$ for all four specified transformations. The elementary inverse calculation in step 6 gives the two remaining inverse equations.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "thm-sf-comp-composition",
@@ -190,8 +230,11 @@
   "prop-compactification-coherence-detailed",
   "lem-weil-pbc-compatible-compactification-triangle",
   "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-pur-compact-support-site-coherence",
+  "def-pur-conventions",
   "thm-sf-comp-composition",
-  "prop-weil-pbc-comparison-direct-image",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
   "lem-sf-proetale-constructible-origin",
   "lem-sf-comparison-tor-amplitude",
@@ -364,7 +407,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-global-operator-triangulated",
@@ -386,7 +429,7 @@
   "date": "2026-10-17",
   "item": "lem-trf-finite-structural-maps-commshift",
   "worker": "stage1",
-  "summary": "Proved the canonical shift squares on shifted resolutions, then expanded proper-refinement and compact-support composition maps, and identified the transported exceptional counit with its specified composite shift. Reused existing DAG tools throughout: no new nodes, no statement change, and no ambient pro-etale exceptional adjunction assumption.",
+  "summary": "Expanded the compactification-composition step into four short arguments: compatible-tower etale construction, pro-etale proper/open transport, the conjugation formula for the compositor, and choice-independence. Added two statement-only lemmas for the hidden site-transport and tower-calculation arguments; the statement is unchanged. Maintainer reader fix (2026-10-17): the delivered tower-calculation node duplicated the existing lem-pur-compact-support-site-coherence (same B_h=c_h, same composition identity on D^+ for the same finite-field datum); step 9 cites that node instead and both new nodes are dropped (the transport node was then unused). Step 7 now cites lem-amb-unbounded-proper-open-interchange to identify the compositor's interchange with the K-injective gamma of step 4 (new step 8).",
   "blueprint": "Realizes lem-trf-global-operator-triangulated.proof.md, sentence 'Each of these constructions is a natural transformation of exact functors in the coefficient object': the ordinary initial unit, compact-support comparisons, and constructible exceptional counit. Expands the missing shift compatibility rather than inferring it from naturality.",
   "tool_uses": [
    {
@@ -494,8 +537,16 @@
     "why": "Generic exactness of etale open extension permits termwise descent of open comparisons; the trace-additivity unit has no such foundational interface."
    },
    {
-    "node": "prop-weil-pbc-comparison-direct-image",
-    "why": "Generic compatibility of the named site direct-image comparison with composition identifies the transported compositor at compatible compactifications; no trace-unit node gives this site-comparison coherence."
+    "node": "lem-amb-unbounded-proper-open-interchange",
+    "why": "Generic tool: its statement gives both the adjoint normalization of the interchange inside the etale compositor of lem-amb-unbounded-compact-support-comparisons and its K-injective representative, identifying it with the gamma of step 4; sk-i-additivity has no such interface."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic tool: names the bounded-below etale compact-support compositor that lem-pur-compact-support-site-coherence uses; lem-amb-unbounded-compact-support-comparisons identifies it with the tower normalization of step 7."
+   },
+   {
+    "node": "lem-pur-compact-support-site-coherence",
+    "why": "Generic tool: the site-comparison coherence of the canonical etale and pro-etale compact-support compositors (B_gf C(alpha^e)=alpha^p C(F_g B_f)(B_g F_f)), used as a black box to express the named pro-etale compositor; sk-i-additivity has no such interface. Replaces the duplicate statement-only node of the delivery."
    }
   ]
  },
@@ -526,14 +577,17 @@
   "lem-pur-finite-coefficient-adjoint-comparisons",
   "det-sp-et-proet-adjunction-transfer",
   "lem-weil-pbc-extension-by-zero-exact",
-  "prop-weil-pbc-comparison-direct-image"
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-amb-etale-compact-comparisons",
+  "lem-pur-compact-support-site-coherence"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q121-80f8fe1e6",
-  "group": "Q121",
+  "reviewer": "NT-cc-Q70-e81c3ed14",
+  "group": "Q70",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-80f8fe1e6 (reviewer sub-agent of L); spot-checked: I read the item (four clauses, unchanged and not weakened), the parent lem-trf-global-operator-triangulated and its main-20261015 proof sentence, the unit sk-i-additivity, and the full statements of all 36 proof_deps and 13 stmt_deps. I also read the proofs of lem-sf-class-compact-support-comparison and thm-sf-comp-composition, and checked Stacks tags 05SU, 0DVC, 0FND, 0A8D, 0F7B, 0F7J and 09AF against the tags file. The coefficient category is ordinary constant A=O_E/varpi^n modules on the small pro-etale sites, and Rf^!=nu_X^* f^x Rnu_{Y,*} matches def-weil-exceptional-inverse-image verbatim. Steps 1-4 are correct calculations: exact functors take degreewise-identity shifts, derived functors take shifted K-injective resolutions, the unit and counit components have degree 0 so shifting changes none of them, kappa is normalized by g_*j, and gamma^e has its K-injective normalization. Step 5: b_u=s_u(q)eta^p is the canonical mate, and c_c=Rp_*(e_j)b_p j_! is exactly the inverse of the comparison c_{G,alpha} that lem-sf-class's proof builds (identity witness). Step 6: the site-normalization equation, witness transport and theta_u are correct, and p_f is theta to (id,f). Step 7: gamma^p=T_Q H(gamma^e) S_Q^{-1} is literally the construction in step 5 of thm-sf-comp-composition's proof. I checked the types of the two coherence identities and the conjugation formula. That node's statement does not state this normalization; since clause (3) names that map, this is acceptable and not a C3 fault. Step 8: the adjoint shift of f^x comes from the uniqueness leaf (ii)-(iii). Step 9: I recomputed e_{H_YN} PH_XG^e(t)=H_Y(eps^e_N)c_c^{-1} by naturality and the triangle identity; it equals the transported counit of det-sp-et-proet-adjunction-transfer and lem-pur-finite-coefficient-adjoint-comparisons. Step 10: the Noetherian, qcqs and domain hypotheses are all present. Small cases (empty scheme, zero complexes, identity opens, n=1, a degree-0 sheaf shifted) behave correctly. There are no new nodes, no SGA citation, and a DFS over the snapshot DAG finds no cycle. I accept all 27 declared tool_uses as generic foundational interfaces that the sk-i-additivity unit does not supply. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-e81c3ed14 (reviewer sub-agent of L); spot-checked: I read all 13 steps of the item and both new nodes in full, together with the sources at the cited places: Stacks 0F7B with its K-injective map, 0F7J with its tower identification and independence argument, and 09AF. I also read the parent's main-20261015 proof sentence, the statements of every cited node and the full proof of thm-sf-comp-composition. Both new nodes are true. Neither restates the item, and no source is SGA. There are two faults, both repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-structural-maps-commshift.json. (1) C5 duplicate: lem-trf-compatible-tower-compositor-calculation duplicates the existing lem-pur-compact-support-site-coherence. That node uses the same map B_h=Rp_*(e_j)∘β_p(j_!), equal to c_h, and states B_gf C(α^e)=α^p C∘(F_g^p B_f)∘(B_g F_f^e) on D^+(X_et,A) for compatible towers. Its datum (k = algebraic closure of F_q, A=A_{E,n}) is exactly the item's, and the packet never compared against it. Step 9 now cites it and inverts the B's to get the delivered conjugation formula. I checked that formula by a diagram chase from step 5 of thm-sf-comp-composition's proof, where γ^p is defined as T H(γ^e) S^{-1}. After this change, lem-trf-proetale-proper-open-transport was used only by old step 8, whose shift square for γ^p nothing afterwards used, so it is no longer needed. Both new nodes are dropped and no file cites them any more. (2) C4 missing citation: step 7 normalizes the étale compositor by lem-amb-unbounded-compact-support-comparisons, whose interchange is defined through the open adjunction, but it claimed shift compatibility from step 4, which is about lem-cbc's K-injective γ^e. New step 8 cites lem-amb-unbounded-proper-open-interchange, which states both descriptions, so the two maps agree on D^+; step 7 also cites lem-amb-etale-compact-comparisons for the bounded-below compositor. The other steps are unchanged and their numbering still holds; the longest step is 1825 characters. proof_deps equals the union of the uses. split_report.tool_uses drops the stale prop-weil-pbc-comparison-direct-image and adds lem-amb-unbounded-proper-open-interchange, lem-amb-etale-compact-comparisons and lem-pur-compact-support-site-coherence; I accept all declared tool uses. A DFS over the snapshot DAG finds no cycle. Clause (4) still uses the canonical shifts, and no target is weakened. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,194 +1,416 @@
 {
-  "id": "lem-a1-local-boundary-duality",
-  "blueprint": {
-    "is": "lem-a1-local-boundary-duality",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Local boundary duality",
-  "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense open immersion of smooth\ncurves over $k_0$, let $i:Z_0\\hookrightarrow C_0$ be the closed\ncomplement with its reduced structure, and let $F$ be a lisse\n$\\Qlb$-Weil sheaf on $U_0$, with dual $F^\\vee$. Put\n$A(F)=i^*Rj_*F$ on $Z$. Then there is a canonical\nFrobenius-equivariant isomorphism\n\n$$\n\\mathbb D_Z A(F)\\;\\simeq\\;A(F^\\vee)(1)[1].\n$$\n\nConsequently, for every missing closed point $s\\in Z_0$, with\ngeometric point $\\bar s$ and local geometric Frobenius $F_s$, there is\na canonical perfect $F_s$-equivariant pairing\n\n$$\n(j_*F^\\vee)_{\\bar s}\\otimes(R^1j_*F)_{\\bar s}\n\\longrightarrow\\Qlb(-1),\n$$\n\nequivalently an isomorphism\n$(R^1j_*F)_{\\bar s}^\\vee\\simeq(j_*F^\\vee)_{\\bar s}(1)$. Here\n$j_*$ is the ordinary direct image.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.md",
-    "place": "node lem-a1-local-boundary-duality, order 2727"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Work on the geometric curves with $\\Qlb$-coefficients and the Weil\nstructures of [lem-fix-weil-operations]. The Verdier duals, their\nbiduality, the exceptional functors $Ri^!$ of\n[def-weil-exceptional-inverse-image] with $Ri_!=Ri_*\\dashv Ri^!$,\nand the identity $Rf^!=\\mathbb D_Xf^*\\mathbb D_Y$ are those of\n[thm-coef-qbar-verdier]. Smooth purity\n[thm-pur-rational-and-qbar-purity] for the structure map of $U$\ngives $\\omega_U\\simeq\\Qlb(1)[2]$, hence, $F$ being lisse,\n$\\mathbb D_UF\\simeq F^\\vee(1)[2]$ (the dual of a lisse sheaf is the\nfinite-rank coefficient dual; see [def-wf-tate-twist] for the twist).\n\n*Step 1: $\\mathbb D_CRj_*\\simeq j_!\\mathbb D_U$.* The exchange\n[fix-cor-verdier-exchange] for $f=j$ gives\n$\\mathbb D_C(j_!M)\\simeq Rj_*\\mathbb D_UM$. Put\n$M=\\mathbb D_UG$ for a constructible $G$ on $U$; biduality on $U$\ngives $Rj_*G\\simeq\\mathbb D_Cj_!\\mathbb D_UG$. In particular\n$Rj_*G$ is bounded constructible, and applying $\\mathbb D_C$ and\nbiduality on $C$ gives $\\mathbb D_CRj_*G\\simeq j_!\\mathbb D_UG$.\n\n*Step 2: $\\mathbb D_Zi^*\\simeq Ri^!\\mathbb D_C$.* By\n[thm-coef-qbar-verdier], $Ri^!=\\mathbb D_Zi^*\\mathbb D_C$, so\nbiduality on $C$ gives\n$Ri^!\\mathbb D_CK\\simeq\\mathbb D_Zi^*K$ for constructible $K$.\n\n*Step 3: $Ri^!j_!G\\simeq i^*Rj_*G[-1]$.* First\n$Ri^!Rj_*G=0$: for every $N$ on $Z$,\n\n$$\n\\operatorname{Hom}(N,Ri^!Rj_*G)\n\\cong\\operatorname{Hom}(i_*N,Rj_*G)\n\\cong\\operatorname{Hom}(j^*i_*N,G)=0,\n$$\n\nsince $j^*i_*=0$, and Yoneda applies. Next, the open–closed\nrecollement triangle ([def-weil-open-closed-recollement]), which exists at $\\Qlb$ with Weil-equivariant arrows by [prop-sf-open-closed-triangle-all-stages] (at a finite stage it is [lem-cbc-open-closed-recollement]), for $K=Rj_*G$, with\n$j^*Rj_*G\\simeq G$ by the unit/counit identities of\n[prop-weil-open-closed-recollement-adjunctions], reads\n\n$$\nj_!G\\longrightarrow Rj_*G\\longrightarrow i_*i^*Rj_*G\n\\xrightarrow{+1}.\n$$\n\nApply the exact functor $Ri^!$. The middle term vanishes, and the\nclosed-immersion unit $Q\\xrightarrow{\\sim}Ri^!Ri_*Q$ at $\\Qlb$,\nclause (4) of [prop-sf-localization-all-stages] (from the full faithfulness of\n[prop-sf-closed-unit-all-stages]; at a finite stage it is\n[prop-sf-closed-immersion-unit]), identifies the third term with\n$i^*Rj_*G$. Hence $Ri^!j_!G\\simeq i^*Rj_*G[-1]$.",
-      "uses": [
-        "lem-fix-weil-operations",
-        "def-weil-exceptional-inverse-image",
-        "thm-coef-qbar-verdier",
-        "thm-pur-rational-and-qbar-purity",
-        "def-wf-tate-twist",
-        "fix-cor-verdier-exchange",
-        "def-weil-open-closed-recollement",
-        "prop-sf-open-closed-triangle-all-stages",
-        "lem-cbc-open-closed-recollement",
-        "prop-weil-open-closed-recollement-adjunctions",
-        "prop-sf-localization-all-stages",
-        "prop-sf-closed-unit-all-stages",
-        "prop-sf-closed-immersion-unit"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 4: the isomorphism.* Combining the steps with\n$G=\\mathbb D_UF\\simeq F^\\vee(1)[2]$,\n\n$$\n\\begin{aligned}\n\\mathbb D_ZA(F)\n&\\simeq Ri^!\\mathbb D_CRj_*F\n\\simeq Ri^!j_!\\mathbb D_UF\\\\\n&\\simeq i^*Rj_*(\\mathbb D_UF)[-1]\n\\simeq A(F^\\vee)(1)[1].\n\\end{aligned}\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 5: the stalks.* The reduced scheme $Z$ is finite over the\nalgebraically closed field $k$, hence a finite disjoint union of\ncopies of $\\operatorname{Spec}k$, smooth of dimension zero. Smooth\npurity [thm-pur-rational-and-qbar-purity] in dimension zero gives\n$\\omega_Z=\\Qlb$, so on the component $\\bar s$ the functor\n$\\mathbb D_Z$ is $R\\operatorname{Hom}_{\\Qlb}(-,\\Qlb)$ on bounded\ncomplexes of finite-dimensional spaces. By\n[lem-pod-cohomology-of-dual-over-field] (at a finite coefficient\nfield over which the stalk complex is defined, then extended to\n$\\Qlb$),\n\n$$\nH^{-1}\\bigl(\\mathbb D_ZA(F)\\bigr)_{\\bar s}\n\\simeq H^1(A(F)_{\\bar s})^\\vee=(R^1j_*F)_{\\bar s}^\\vee.\n$$\n\nOn the other side,\n$H^{-1}\\bigl(A(F^\\vee)(1)[1]\\bigr)_{\\bar s}\n=H^0\\bigl(Rj_*F^\\vee\\bigr)_{\\bar s}(1)=(j_*F^\\vee)_{\\bar s}(1)$,\nbecause the ordinary direct image is $\\mathcal H^0$ of the derived\none. This is the asserted isomorphism; its transpose is the\nasserted perfect pairing, the twist $(1)$ on one side becoming\n$(-1)$ in the target.",
-      "uses": [
-        "thm-pur-rational-and-qbar-purity",
-        "lem-pod-cohomology-of-dual-over-field"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Frobenius equivariance.* Every map used is built from pullbacks,\ndirect images, internal Hom, evaluation, adjunction units and counits,\nand exchange maps, all Weil-equivariant by\n[lem-fix-weil-operations], together with the smooth-purity\norientations, whose equivariance and trace compatibility are\n[prop-pur-rational-purity-trace-coherence]. Hence the isomorphism of\nStep 4 is one of Weil complexes on $Z_0$, and its stalk at $\\bar s$\ncommutes with $F_s$; the twists carry their prescribed Frobenius\nactions.",
-      "uses": [
-        "lem-fix-weil-operations",
-        "prop-pur-rational-purity-trace-coherence"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-fix-weil-operations",
-    "def-weil-exceptional-inverse-image",
+ "id": "lem-a1-local-boundary-duality",
+ "blueprint": {
+  "is": "lem-a1-local-boundary-duality",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local boundary duality",
+ "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense open immersion of smooth\ncurves over $k_0$, let $i:Z_0\\hookrightarrow C_0$ be the closed\ncomplement with its reduced structure, and let $F$ be a lisse\n$\\Qlb$-Weil sheaf on $U_0$, with dual $F^\\vee$; write\n$A(F)=i^*Rj_*F$ on $Z$. Then, for every missing closed point $s\\in Z_0$,\nwith geometric point $\\bar s$, local geometric Frobenius $F_s$ and\n$q_s=\\#k(s)$, there is a perfect $F_s$-equivariant pairing\n\n$$\n(j_*F^\\vee)_{\\bar s}\\otimes(R^1j_*F)_{\\bar s}\n\\longrightarrow\\Qlb(-1),\n$$\n\nthat is, a linear isomorphism\n$e:(j_*F^\\vee)_{\\bar s}\\xrightarrow{\\sim}(R^1j_*F)_{\\bar s}^\\vee$ with\n$e(F_sa)(F_sb)=q_s\\,e(a)(b)$ for all $a,b$; equivalently an isomorphism\n$(R^1j_*F)_{\\bar s}^\\vee\\simeq(j_*F^\\vee)_{\\bar s}(1)$. Here\n$j_*$ is the ordinary direct image.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.md",
+  "place": "node lem-a1-local-boundary-duality, order 2727"
+ },
+ "stmt_deps": [
+  "rem-dl-a1-conventions",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-wf-tate-twist"
+ ],
+ "proof": [
+  {
+   "text": "Work on the geometric curves with the coefficient conventions in the statement; in particular curves are separated and of finite type. Use the actual common-finite-stage $\\Qlb$-category, not discrete non-torsion coefficients on the small etale site. By [thm-coef-qbar-verdier], $D_T=R\\mathcal Hom(-,\\omega_T)$ is an exact anti-equivalence with its evaluation-defined biduality on $D^b_c(T,\\Qlb)$ for $T=U,C,Z$, and $Ri^!=D_Zi^*D_C$. By [prop-sf-localization-all-stages](1), $Rj_*G$ is bounded constructible for bounded constructible $G$. Thus all ensuing uses of biduality, including on the boundary complex, have their required domains. At field coefficients the finite-Tor category in the exchange theorem is exactly $D^b_c$ by [def-weil-finite-tor-amplitude].",
+   "uses": [
     "thm-coef-qbar-verdier",
+    "prop-sf-localization-all-stages",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Opening paragraph and Step 1: domains and coefficient stages"
+   }
+  },
+  {
+   "text": "Apply [thm-sf-verdier-exchange] to the open immersion $j$ and $M=D_UG$, so $Rj_!=j_!$. It gives $D_Cj_!D_UG\\simeq Rj_*D_UD_UG\\simeq Rj_*G$. Apply $D_C$ to this isomorphism and use the biduality of [thm-coef-qbar-verdier] on $j_!D_UG$. We obtain $D_CRj_*G\\simeq j_!D_UG$, naturally in $G$. Likewise, substituting $D_CK$ into $Ri^!=D_Zi^*D_C$ and cancelling $D_C^2K$ gives $Ri^!D_CK\\simeq D_Zi^*K$. The morphisms $j,i$ are separated finite type, so the constructible exceptional adjoints are available; no unrestricted ambient pro-etale exceptional adjoint is assumed.",
+   "uses": [
+    "thm-sf-verdier-exchange",
+    "thm-coef-qbar-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Steps 1 and 2: exchange and exceptional pullback"
+   }
+  },
+  {
+   "text": "The open counit $j^*Rj_*G\\to G$ is an isomorphism. At a finite level $A=A_{E,n}$ on the small pro-etale sites, apply [lem-sfb-proetale-open-restriction-counit] with $Y=C$, $X=W=U$, $f=h=j$ and $R=A_C$. As $j$ is a monomorphism, both projections $g,f_W$ of $U\\times_CU$ are isomorphisms, so its counit formula writes the sheaf counit $j^{-1}j_*M\\to M$ as a composite of isomorphisms. Compute $Rj_{*,n}$ on a K-injective representative $I$; $Lj_n^*$ is $j^{-1}$ termwise [def-weil-derived-pullback-tensor-hom], so the derived counit is this sheaf counit in each degree, an isomorphism. To use it at the stated coefficients, take the finite reductions of an integral representative. Restriction along an immersion is exact and preserves products by [lem-weil-pbc-proetale-immersion-limit-preservation]. Hence it commutes with the shifted-cone-of-$1-s$ model of a sequential derived limit: it preserves the products, the map $1-s$, and the cone termwise. The integral definitions of pullback and direct image in [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image] therefore identify the integral open counit with the derived limit of the finite-level isomorphisms. It is an isomorphism as well. Rationalize and then pass to a common finite coefficient field to obtain the counit at $\\Qlb$. The same restriction argument makes $i^*$ exact and compatible with shifts at these stages.",
+   "uses": [
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Step 3: open counit at the actual coefficient stage"
+   }
+  },
+  {
+   "text": "For any bounded constructible $G$ on $U$, apply [prop-sf-open-closed-triangle-all-stages] at $\\Lambda=\\Qlb$ to $K=Rj_*G$. The counit from step 3 identifies its first term with $j_!G$, giving the distinguished triangle $j_!G\\to Rj_*G\\to i_*i^*Rj_*G\\to j_!G[1]$. By [prop-sf-localization-all-stages](4), $Ri^!Rj_*G=0$ and $Q\\to Ri^!i_*Q$ is an isomorphism. The functor $Ri^!=D_Zi^*D_C$ is exact: the two dualities are exact on the opposite triangulated categories by [thm-coef-qbar-verdier], and $i^*$ is exact by step 3. Applying it gives a triangle $Ri^!j_!G\\to0\\to i^*Rj_*G\\to(Ri^!j_!G)[1]$. In a triangle with zero middle vertex, the third arrow is an isomorphism (its cone is zero). Thus $Ri^!j_!G\\simeq i^*Rj_*G[-1]$. The chosen comparison is the inverse of that specified triangle arrow, with its shift; no arbitrary cone is chosen.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "prop-sf-localization-all-stages",
+    "thm-coef-qbar-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Step 3: apply the exceptional inverse image to recollement"
+   }
+  },
+  {
+   "text": "Smooth purity [thm-pur-rational-and-qbar-purity] for the structure morphism $a_U:U\\to\\operatorname{Spec}k$ and the coefficient unit gives $\\omega_U\\simeq\\Qlb_U(1)[2]$: the relative dimension is one and the unit has its constant normalized integral lattice. Apply [lem-per-dual-lisse-tensor] with $K=\\Qlb_U$ and $\\mathcal L=F$. Since $D_U\\Qlb_U=\\omega_U$, this gives $D_UF\\simeq F^\\vee(1)[2]$. In particular this is the finite-rank lisse coefficient dual in the statement, rather than a new duality notion.",
+   "uses": [
     "thm-pur-rational-and-qbar-purity",
-    "def-wf-tate-twist",
-    "fix-cor-verdier-exchange",
-    "def-weil-open-closed-recollement",
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-cbc-open-closed-recollement",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "prop-sf-localization-all-stages",
-    "prop-sf-closed-unit-all-stages",
-    "prop-sf-closed-immersion-unit",
-    "lem-pod-cohomology-of-dual-over-field",
-    "prop-pur-rational-purity-trace-coherence"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.md",
-    "place": "## Proof"
+    "lem-per-dual-lisse-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Opening paragraph: smooth curve duality"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_remark"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2727,
-  "blueprint_uses": [
-    "def-weil-exceptional-inverse-image",
-    "def-weil-open-closed-recollement",
+  {
+   "text": "Combine steps 2, 4 and 5, using $G=D_UF$, to get $D_ZA(F)\\simeq Ri^!D_CRj_*F\\simeq Ri^!j_!D_UF\\simeq i^*Rj_*(F^\\vee(1)[2])[-1]$. Twisting by the coefficient line commutes here with $i^*$ and $Rj_*$: the twist of [def-wf-tate-twist] is pulled back from the coefficient point; after forgetting the Weil structure and choosing a basis of this one-dimensional line over a common finite coefficient field, the canonical comparison is the identity on $Rj_*F^\\vee$. Changing the basis multiplies both sides by the same scalar, so this verifies invertibility of the basis-independent comparison. Derived direct image is linear on the complexes defining [def-weil-derived-direct-image]. The same termwise comparison commutes with shifts. Consequently $D_ZA(F)\\simeq A(F^\\vee)(1)[1]$, since $[2][-1]=[1]$.",
+   "uses": [
     "def-wf-tate-twist",
-    "fix-cor-verdier-exchange",
-    "lem-cbc-open-closed-recollement",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Step 4: compose the comparisons and compute the shift"
+   }
+  },
+  {
+   "text": "By [lem-sc-dense-open-finite-complement], $C\\setminus U$ is a finite set of closed points. The reduced closed subscheme $Z$ is therefore a finite disjoint union of its one-point open-and-closed subschemes. Each is affine: an affine neighborhood of its sole point is already the whole subscheme. Its ring has only one prime, and that prime is zero because the ring is reduced (the nilradical is the intersection of all primes). It is thus a field. By [lem-weil-pbc-closed-point-residue-field-base] this field is $k$, so each geometric boundary component is $\\operatorname{Spec}k$. This argument uses the reduced structure in the statement. Hence $a_Z:Z\\to\\operatorname{Spec}k$ is smooth and separated of pure relative dimension $0$, and smooth purity [thm-pur-rational-and-qbar-purity] for $a_Z$ and the coefficient unit gives $\\omega_Z\\simeq\\Qlb_Z$, so $D_Z=R\\mathcal Hom(-,\\Qlb_Z)$. An open-and-closed decomposition is a product decomposition of module sheaves and their complexes; restriction to a component is exact and internal Hom into the constant sheaf is computed componentwise. On a component $s$ this is $R\\mathcal Hom_s(-,\\Qlb_s)=D_s$, since $\\omega_s\\simeq\\Qlb_s$ by [lem-pod-point-dualizing-complex], whose fibre comparison identifies $\\operatorname{Fib}_s(D_sC)$ with $R\\operatorname{Hom}(C_s,\\Qlb)$ on bounded finite-dimensional point complexes.",
+   "uses": [
+    "lem-sc-dense-open-finite-complement",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "thm-pur-rational-and-qbar-purity",
+    "lem-pod-point-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Step 5: identify geometric boundary duality with point duality"
+   }
+  },
+  {
+   "text": "Fix a geometric boundary point $\\bar s$. Represent its bounded finite-dimensional complex over a finite coefficient field $E$. By [lem-pod-cohomology-of-dual-over-field] with $i=1$, and then extension of scalars, $H^{-1}(D_ZA(F))_{\\bar s}\\simeq H^1(A(F)_{\\bar s})^\\vee=(R^1j_*F)_{\\bar s}^\\vee$. Taking $H^{-1}$ in the right side of the isomorphism of step 6 instead gives $H^0(A(F^\\vee))_{\\bar s}(1)=(j_*F^\\vee)_{\\bar s}(1)$. Here $H^{-1}(K[1])=H^0(K)$, exact restriction to a component commutes with cohomology, and $H^0$ of the right-derived direct image on a sheaf is its ordinary direct image: a resolution $0\\to F^\\vee\\to I^0\\to I^1$ gives $\\ker(j_*I^0\\to j_*I^1)=j_*F^\\vee$ by left exactness, as in [def-weil-derived-direct-image]. We have proved the required isomorphism of finite-dimensional vector spaces with the indicated twist.",
+   "uses": [
+    "lem-pod-cohomology-of-dual-over-field",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Step 5: take cohomological degree minus one"
+   }
+  },
+  {
+   "text": "The preceding comparisons respect the Weil structures. Indeed [lem-fix-weil-operations] makes evaluation, adjunction units and counits, exchanges and coefficient-line comparisons equivariant. [cor-coef-verdier-weil-equivariance] supplies this assertion specifically for Verdier duality, its biduality and its exceptional adjunction, without requiring a Frobenius-stable integral lattice. The triangle in step 4 has Weil-equivariant arrows by [prop-sf-open-closed-triangle-all-stages], and the exceptional unit is equivariant by [prop-sf-localization-all-stages]. Applying $Ri^!$ and inverting its connecting isomorphism preserves equivariance. Finally [thm-pur-weil-equivariance-of-purity-and-trace] gives equivariance of the smooth-purity orientations used in steps 5 and 7: for $U_0\\to\\operatorname{Spec}k_0$ with $d=1$, and for $Z_0\\to\\operatorname{Spec}k_0$, whose base change $a_Z$ is smooth of relative dimension $d=0$, so that $\\omega_Z\\simeq\\Qlb_Z$ carries the untwisted Frobenius and the point duality of step 8 carries the contragredient action. Thus the isomorphism in step 8 commutes with the local geometric Frobenius, including its action on the coefficient twist. Only the underlying distinguished triangles are used; no triangulated structure on the category of Weil pairs is asserted.",
+   "uses": [
     "lem-fix-weil-operations",
-    "lem-pod-cohomology-of-dual-over-field",
-    "prop-pur-rational-purity-trace-coherence",
-    "prop-sf-closed-immersion-unit",
-    "prop-sf-closed-unit-all-stages",
-    "prop-sf-localization-all-stages",
+    "cor-coef-verdier-weil-equivariance",
     "prop-sf-open-closed-triangle-all-stages",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "rem-dl-a1-conventions",
-    "thm-coef-qbar-verdier",
-    "thm-pur-rational-and-qbar-purity"
-  ],
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.LocalDuality",
-    "declaration": "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage",
-    "branch": "slopmaster2",
-    "line": 77,
-    "sorry_free": false,
-    "body_lines": 1
+    "prop-sf-localization-all-stages",
+    "thm-pur-weil-equivariance-of-purity-and-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Final paragraph: equivariance of each comparison"
+   }
   },
-  "blueprint_lean": [
-    "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.LocalDuality",
-          "lines": [
-            60,
-            91
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-i-dl-a1-local",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense open immersion of smooth\ncurves over $k_0$, let $i:Z_0\\hookrightarrow C_0$ be the closed\ncomplement with its reduced structure, and let $F$ be a lisse\n$\\Qlb$-Weil sheaf on $U_0$, with dual $F^\\vee$; write\n$A(F)=i^*Rj_*F$ on $Z$. Then, for every missing closed point $s\\in Z_0$,\nwith geometric point $\\bar s$, local geometric Frobenius $F_s$ and\n$q_s=\\#k(s)$, there is a perfect $F_s$-equivariant pairing\n\n$$\n(j_*F^\\vee)_{\\bar s}\\otimes(R^1j_*F)_{\\bar s}\n\\longrightarrow\\Qlb(-1),\n$$\n\nthat is, a linear isomorphism\n$e:(j_*F^\\vee)_{\\bar s}\\xrightarrow{\\sim}(R^1j_*F)_{\\bar s}^\\vee$ with\n$e(F_sa)(F_sb)=q_s\\,e(a)(b)$ for all $a,b$; equivalently an isomorphism\n$(R^1j_*F)_{\\bar s}^\\vee\\simeq(j_*F^\\vee)_{\\bar s}(1)$. Here\n$j_*$ is the ordinary direct image.",
-    "proof": [
-      {
-        "text": "Work on the geometric curves with $\\Qlb$-coefficients and the Weil\nstructures of [lem-fix-weil-operations]. The Verdier duals, their\nbiduality, the exceptional functors $Ri^!$ of\n[def-weil-exceptional-inverse-image] with $Ri_!=Ri_*\\dashv Ri^!$,\nand the identity $Rf^!=\\mathbb D_Xf^*\\mathbb D_Y$ are those of\n[thm-coef-qbar-verdier]. Smooth purity\n[thm-pur-rational-and-qbar-purity] for the structure map of $U$\ngives $\\omega_U\\simeq\\Qlb(1)[2]$, hence, $F$ being lisse,\n$\\mathbb D_UF\\simeq F^\\vee(1)[2]$ (the dual of a lisse sheaf is the\nfinite-rank coefficient dual; see [def-wf-tate-twist] for the twist).\n\n*Step 1: $\\mathbb D_CRj_*\\simeq j_!\\mathbb D_U$.* The exchange\n[fix-cor-verdier-exchange] for $f=j$ gives\n$\\mathbb D_C(j_!M)\\simeq Rj_*\\mathbb D_UM$. Put\n$M=\\mathbb D_UG$ for a constructible $G$ on $U$; biduality on $U$\ngives $Rj_*G\\simeq\\mathbb D_Cj_!\\mathbb D_UG$. In particular\n$Rj_*G$ is bounded constructible, and applying $\\mathbb D_C$ and\nbiduality on $C$ gives $\\mathbb D_CRj_*G\\simeq j_!\\mathbb D_UG$.\n\n*Step 2: $\\mathbb D_Zi^*\\simeq Ri^!\\mathbb D_C$.* By\n[thm-coef-qbar-verdier], $Ri^!=\\mathbb D_Zi^*\\mathbb D_C$, so\nbiduality on $C$ gives\n$Ri^!\\mathbb D_CK\\simeq\\mathbb D_Zi^*K$ for constructible $K$.\n\n*Step 3: $Ri^!j_!G\\simeq i^*Rj_*G[-1]$.* First\n$Ri^!Rj_*G=0$: for every $N$ on $Z$,\n\n$$\n\\operatorname{Hom}(N,Ri^!Rj_*G)\n\\cong\\operatorname{Hom}(i_*N,Rj_*G)\n\\cong\\operatorname{Hom}(j^*i_*N,G)=0,\n$$\n\nsince $j^*i_*=0$, and Yoneda applies. Next, the open–closed\nrecollement triangle ([def-weil-open-closed-recollement]), which exists at $\\Qlb$ with Weil-equivariant arrows by [prop-sf-open-closed-triangle-all-stages] (at a finite stage it is [lem-cbc-open-closed-recollement]), for $K=Rj_*G$, with\n$j^*Rj_*G\\simeq G$ by the unit/counit identities of\n[prop-weil-open-closed-recollement-adjunctions], reads\n\n$$\nj_!G\\longrightarrow Rj_*G\\longrightarrow i_*i^*Rj_*G\n\\xrightarrow{+1}.\n$$\n\nApply the exact functor $Ri^!$. The middle term vanishes, and the\nclosed-immersion unit $Q\\xrightarrow{\\sim}Ri^!Ri_*Q$ at $\\Qlb$,\nclause (4) of [prop-sf-localization-all-stages] (from the full faithfulness of\n[prop-sf-closed-unit-all-stages]; at a finite stage it is\n[prop-sf-closed-immersion-unit]), identifies the third term with\n$i^*Rj_*G$. Hence $Ri^!j_!G\\simeq i^*Rj_*G[-1]$.",
-        "uses": [
-          "lem-fix-weil-operations",
-          "def-weil-exceptional-inverse-image",
-          "thm-coef-qbar-verdier",
-          "thm-pur-rational-and-qbar-purity",
-          "def-wf-tate-twist",
-          "fix-cor-verdier-exchange",
-          "def-weil-open-closed-recollement",
-          "prop-sf-open-closed-triangle-all-stages",
-          "lem-cbc-open-closed-recollement",
-          "prop-weil-open-closed-recollement-adjunctions",
-          "prop-sf-localization-all-stages",
-          "prop-sf-closed-unit-all-stages",
-          "prop-sf-closed-immersion-unit"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 4: the isomorphism.* Combining the steps with\n$G=\\mathbb D_UF\\simeq F^\\vee(1)[2]$,\n\n$$\n\\begin{aligned}\n\\mathbb D_ZA(F)\n&\\simeq Ri^!\\mathbb D_CRj_*F\n\\simeq Ri^!j_!\\mathbb D_UF\\\\\n&\\simeq i^*Rj_*(\\mathbb D_UF)[-1]\n\\simeq A(F^\\vee)(1)[1].\n\\end{aligned}\n$$",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 5: the stalks.* The reduced scheme $Z$ is finite over the\nalgebraically closed field $k$, hence a finite disjoint union of\ncopies of $\\operatorname{Spec}k$, smooth of dimension zero. Smooth\npurity [thm-pur-rational-and-qbar-purity] in dimension zero gives\n$\\omega_Z=\\Qlb$, so on the component $\\bar s$ the functor\n$\\mathbb D_Z$ is $R\\operatorname{Hom}_{\\Qlb}(-,\\Qlb)$ on bounded\ncomplexes of finite-dimensional spaces. By\n[lem-pod-cohomology-of-dual-over-field] (at a finite coefficient\nfield over which the stalk complex is defined, then extended to\n$\\Qlb$),\n\n$$\nH^{-1}\\bigl(\\mathbb D_ZA(F)\\bigr)_{\\bar s}\n\\simeq H^1(A(F)_{\\bar s})^\\vee=(R^1j_*F)_{\\bar s}^\\vee.\n$$\n\nOn the other side,\n$H^{-1}\\bigl(A(F^\\vee)(1)[1]\\bigr)_{\\bar s}\n=H^0\\bigl(Rj_*F^\\vee\\bigr)_{\\bar s}(1)=(j_*F^\\vee)_{\\bar s}(1)$,\nbecause the ordinary direct image is $\\mathcal H^0$ of the derived\none. This is the asserted isomorphism; its transpose is the\nasserted perfect pairing, the twist $(1)$ on one side becoming\n$(-1)$ in the target.",
-        "uses": [
-          "thm-pur-rational-and-qbar-purity",
-          "lem-pod-cohomology-of-dual-over-field"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Frobenius equivariance.* Every map used is built from pullbacks,\ndirect images, internal Hom, evaluation, adjunction units and counits,\nand exchange maps, all Weil-equivariant by\n[lem-fix-weil-operations], together with the smooth-purity\norientations, whose equivariance and trace compatibility are\n[prop-pur-rational-purity-trace-coherence]. Hence the isomorphism of\nStep 4 is one of Weil complexes on $Z_0$, and its stalk at $\\bar s$\ncommutes with $F_s$; the twists carry their prescribed Frobenius\nactions.",
-        "uses": [
-          "lem-fix-weil-operations",
-          "prop-pur-rational-purity-trace-coherence"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Write $X_s=(j_*F^\\vee)_{\\bar s}$ and $Y_s=(R^1j_*F)_{\\bar s}$. Inverting the isomorphism $Y_s^\\vee\\simeq X_s(1)$ of step 8 and tensoring by $\\Qlb(-1)$ gives $X_s\\simeq\\operatorname{Hom}(Y_s,\\Qlb(-1))$. Evaluate this map to obtain the asserted perfect pairing $P:X_s\\otimes Y_s\\to\\Qlb(-1)$. Both spaces are finite-dimensional, so evaluation against their full dual is perfect, including when they are zero. By [lem-wf-tate-twist-frobenius] with $m=-1$, the local geometric Frobenius on the target line is multiplication by $q_s$. Thus equivariance reads $P(F_sa,F_sb)=q_sP(a,b)$. Choose a nonzero basis vector of that line to write $P(a,b)=e(a)(b)t$; perfectness says $e:X_s\\to Y_s^\\vee$ is a linear isomorphism and the displayed equality gives $e(F_sa)(F_sb)=q_s e(a)(b)$. This is the scalar formulation of the current blueprint; it makes no claim of a distinguished basis of the Tate line.",
+   "uses": [
+    "lem-wf-tate-twist-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+    "place": "Step 5 and final paragraph: perfect pairing and explicit Frobenius scalar"
+   }
   }
+ ],
+ "proof_deps": [
+  "cor-coef-verdier-weil-equivariance",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-wf-tate-twist",
+  "lem-fix-weil-operations",
+  "lem-per-dual-lisse-tensor",
+  "lem-pod-cohomology-of-dual-over-field",
+  "lem-pod-point-dualizing-complex",
+  "lem-sc-dense-open-finite-complement",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-wf-tate-twist-frobenius",
+  "prop-sf-localization-all-stages",
+  "prop-sf-open-closed-triangle-all-stages",
+  "thm-coef-qbar-verdier",
+  "thm-pur-rational-and-qbar-purity",
+  "thm-pur-weil-equivariance-of-purity-and-trace",
+  "thm-sf-verdier-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-local-boundary-duality.proof.md",
+  "place": "Opening paragraph, Steps 1–5 and Frobenius-equivariance paragraph; with the finite-stage open-counit transport written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Verdier|boundary.dual|local.dual",
+   "results": "Actual returned top hits: Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not assert curve boundary duality or the lisse-sheaf stalk pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local boundary duality for lisse sheaves on smooth curves and the Tate-twisted perfect pairing at a missing closed point",
+   "results": "Actual returned top hits: LinearMap.IsPerfPair.dualEval, LinearMap.apply_symm_toPerfPair_self, LinearMap.IsPerfPair.mk, LinearMap.IsPerfPair.compl₁₂, LinearMap.IsPerfPair.flip, LinearMap.IsPerfPair.restrict, RootPairing.toPerfPair_comp_root, LinearMap.IsPerfectCompl. ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not assert curve boundary duality or the lisse-sheaf stalk pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "Actual returned top hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite. ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not assert curve boundary duality or the lisse-sheaf stalk pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local Verdier duality on a smooth curve gives a perfect pairing of the invariants of the dual lisse sheaf with its first higher direct image at a missing point into a Tate twist.",
+   "results": "Actual returned top hits: FGModuleCat.exactPairing, LinearMap.IsPerfPair.dualEval, rTensor_injective_iff_lcomp_surjective, CharacterModule.dual_rTensor_conj_homEquiv, CategoryTheory.Sheaf.H, FDRep.dualTensorIsoLinHomAux, FDRep.dualTensorIsoLinHom, FGModuleCat.FGModuleCatCoevaluation. ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not assert curve boundary duality or the lisse-sheaf stalk pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|TateTwist|lisse|VerdierDual",
+   "results": "Actual returned top hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not assert curve boundary duality or the lisse-sheaf stalk pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion into a smooth curve, the dual of R^1 j_* of a local system is j_* of the dual local system twisted by one.",
+   "results": "Actual returned top hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply. ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not assert curve boundary duality or the lisse-sheaf stalk pairing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2727,
+ "blueprint_uses": [
+  "def-weil-exceptional-inverse-image",
+  "def-weil-open-closed-recollement",
+  "def-wf-tate-twist",
+  "fix-cor-verdier-exchange",
+  "lem-cbc-open-closed-recollement",
+  "lem-fix-weil-operations",
+  "lem-pod-cohomology-of-dual-over-field",
+  "prop-pur-rational-purity-trace-coherence",
+  "prop-sf-closed-immersion-unit",
+  "prop-sf-closed-unit-all-stages",
+  "prop-sf-localization-all-stages",
+  "prop-sf-open-closed-triangle-all-stages",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "rem-dl-a1-conventions",
+  "thm-coef-qbar-verdier",
+  "thm-pur-rational-and-qbar-purity"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.LocalDuality",
+  "declaration": "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage",
+  "branch": "slopmaster2",
+  "line": 77,
+  "sorry_free": false,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.LocalDuality",
+     "lines": [
+      60,
+      91
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-i-dl-a1-local",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow C_0$ be a dense open immersion of smooth\ncurves over $k_0$, let $i:Z_0\\hookrightarrow C_0$ be the closed\ncomplement with its reduced structure, and let $F$ be a lisse\n$\\Qlb$-Weil sheaf on $U_0$, with dual $F^\\vee$; write\n$A(F)=i^*Rj_*F$ on $Z$. Then, for every missing closed point $s\\in Z_0$,\nwith geometric point $\\bar s$, local geometric Frobenius $F_s$ and\n$q_s=\\#k(s)$, there is a perfect $F_s$-equivariant pairing\n\n$$\n(j_*F^\\vee)_{\\bar s}\\otimes(R^1j_*F)_{\\bar s}\n\\longrightarrow\\Qlb(-1),\n$$\n\nthat is, a linear isomorphism\n$e:(j_*F^\\vee)_{\\bar s}\\xrightarrow{\\sim}(R^1j_*F)_{\\bar s}^\\vee$ with\n$e(F_sa)(F_sb)=q_s\\,e(a)(b)$ for all $a,b$; equivalently an isomorphism\n$(R^1j_*F)_{\\bar s}^\\vee\\simeq(j_*F^\\vee)_{\\bar s}(1)$. Here\n$j_*$ is the ordinary direct image.",
+  "proof": [
+   {
+    "text": "Work on the geometric curves with $\\Qlb$-coefficients and the Weil\nstructures of [lem-fix-weil-operations]. The Verdier duals, their\nbiduality, the exceptional functors $Ri^!$ of\n[def-weil-exceptional-inverse-image] with $Ri_!=Ri_*\\dashv Ri^!$,\nand the identity $Rf^!=\\mathbb D_Xf^*\\mathbb D_Y$ are those of\n[thm-coef-qbar-verdier]. Smooth purity\n[thm-pur-rational-and-qbar-purity] for the structure map of $U$\ngives $\\omega_U\\simeq\\Qlb(1)[2]$, hence, $F$ being lisse,\n$\\mathbb D_UF\\simeq F^\\vee(1)[2]$ (the dual of a lisse sheaf is the\nfinite-rank coefficient dual; see [def-wf-tate-twist] for the twist).\n\n*Step 1: $\\mathbb D_CRj_*\\simeq j_!\\mathbb D_U$.* The exchange\n[fix-cor-verdier-exchange] for $f=j$ gives\n$\\mathbb D_C(j_!M)\\simeq Rj_*\\mathbb D_UM$. Put\n$M=\\mathbb D_UG$ for a constructible $G$ on $U$; biduality on $U$\ngives $Rj_*G\\simeq\\mathbb D_Cj_!\\mathbb D_UG$. In particular\n$Rj_*G$ is bounded constructible, and applying $\\mathbb D_C$ and\nbiduality on $C$ gives $\\mathbb D_CRj_*G\\simeq j_!\\mathbb D_UG$.\n\n*Step 2: $\\mathbb D_Zi^*\\simeq Ri^!\\mathbb D_C$.* By\n[thm-coef-qbar-verdier], $Ri^!=\\mathbb D_Zi^*\\mathbb D_C$, so\nbiduality on $C$ gives\n$Ri^!\\mathbb D_CK\\simeq\\mathbb D_Zi^*K$ for constructible $K$.\n\n*Step 3: $Ri^!j_!G\\simeq i^*Rj_*G[-1]$.* First\n$Ri^!Rj_*G=0$: for every $N$ on $Z$,\n\n$$\n\\operatorname{Hom}(N,Ri^!Rj_*G)\n\\cong\\operatorname{Hom}(i_*N,Rj_*G)\n\\cong\\operatorname{Hom}(j^*i_*N,G)=0,\n$$\n\nsince $j^*i_*=0$, and Yoneda applies. Next, the open–closed\nrecollement triangle ([def-weil-open-closed-recollement]), which exists at $\\Qlb$ with Weil-equivariant arrows by [prop-sf-open-closed-triangle-all-stages] (at a finite stage it is [lem-cbc-open-closed-recollement]), for $K=Rj_*G$, with\n$j^*Rj_*G\\simeq G$ by the unit/counit identities of\n[prop-weil-open-closed-recollement-adjunctions], reads\n\n$$\nj_!G\\longrightarrow Rj_*G\\longrightarrow i_*i^*Rj_*G\n\\xrightarrow{+1}.\n$$\n\nApply the exact functor $Ri^!$. The middle term vanishes, and the\nclosed-immersion unit $Q\\xrightarrow{\\sim}Ri^!Ri_*Q$ at $\\Qlb$,\nclause (4) of [prop-sf-localization-all-stages] (from the full faithfulness of\n[prop-sf-closed-unit-all-stages]; at a finite stage it is\n[prop-sf-closed-immersion-unit]), identifies the third term with\n$i^*Rj_*G$. Hence $Ri^!j_!G\\simeq i^*Rj_*G[-1]$.",
+    "uses": [
+     "lem-fix-weil-operations",
+     "def-weil-exceptional-inverse-image",
+     "thm-coef-qbar-verdier",
+     "thm-pur-rational-and-qbar-purity",
+     "def-wf-tate-twist",
+     "fix-cor-verdier-exchange",
+     "def-weil-open-closed-recollement",
+     "prop-sf-open-closed-triangle-all-stages",
+     "lem-cbc-open-closed-recollement",
+     "prop-weil-open-closed-recollement-adjunctions",
+     "prop-sf-localization-all-stages",
+     "prop-sf-closed-unit-all-stages",
+     "prop-sf-closed-immersion-unit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4: the isomorphism.* Combining the steps with\n$G=\\mathbb D_UF\\simeq F^\\vee(1)[2]$,\n\n$$\n\\begin{aligned}\n\\mathbb D_ZA(F)\n&\\simeq Ri^!\\mathbb D_CRj_*F\n\\simeq Ri^!j_!\\mathbb D_UF\\\\\n&\\simeq i^*Rj_*(\\mathbb D_UF)[-1]\n\\simeq A(F^\\vee)(1)[1].\n\\end{aligned}\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 5: the stalks.* The reduced scheme $Z$ is finite over the\nalgebraically closed field $k$, hence a finite disjoint union of\ncopies of $\\operatorname{Spec}k$, smooth of dimension zero. Smooth\npurity [thm-pur-rational-and-qbar-purity] in dimension zero gives\n$\\omega_Z=\\Qlb$, so on the component $\\bar s$ the functor\n$\\mathbb D_Z$ is $R\\operatorname{Hom}_{\\Qlb}(-,\\Qlb)$ on bounded\ncomplexes of finite-dimensional spaces. By\n[lem-pod-cohomology-of-dual-over-field] (at a finite coefficient\nfield over which the stalk complex is defined, then extended to\n$\\Qlb$),\n\n$$\nH^{-1}\\bigl(\\mathbb D_ZA(F)\\bigr)_{\\bar s}\n\\simeq H^1(A(F)_{\\bar s})^\\vee=(R^1j_*F)_{\\bar s}^\\vee.\n$$\n\nOn the other side,\n$H^{-1}\\bigl(A(F^\\vee)(1)[1]\\bigr)_{\\bar s}\n=H^0\\bigl(Rj_*F^\\vee\\bigr)_{\\bar s}(1)=(j_*F^\\vee)_{\\bar s}(1)$,\nbecause the ordinary direct image is $\\mathcal H^0$ of the derived\none. This is the asserted isomorphism; its transpose is the\nasserted perfect pairing, the twist $(1)$ on one side becoming\n$(-1)$ in the target.",
+    "uses": [
+     "thm-pur-rational-and-qbar-purity",
+     "lem-pod-cohomology-of-dual-over-field"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Frobenius equivariance.* Every map used is built from pullbacks,\ndirect images, internal Hom, evaluation, adjunction units and counits,\nand exchange maps, all Weil-equivariant by\n[lem-fix-weil-operations], together with the smooth-purity\norientations, whose equivariance and trace compatibility are\n[prop-pur-rational-purity-trace-coherence]. Hence the isomorphism of\nStep 4 is one of Weil complexes on $Z_0$, and its stalk at $\\bar s$\ncommutes with $F_s$; the twists carry their prescribed Frobenius\nactions.",
+    "uses": [
+     "lem-fix-weil-operations",
+     "prop-pur-rational-purity-trace-coherence"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-local-boundary-duality",
+  "worker": "stage1",
+  "summary": "Adopted the main-20261015 statement from blueprint_update; decomposed the inherited long first step, checked all coefficient-stage domains, used the actual open counit rather than a finite-only adjunction statement, supplied lisse duality and point-fibre comparisons, and replaced the purity-coherence-only citation by the explicit Weil-equivariance theorem. No new nodes.",
+  "blueprint": "Realizes sk-i-dl-a1-local steps 1–2 and the current item proof opening, Steps 1–5 and final equivariance paragraph. The ramification clause of the unit belongs to the separate Artin–Schreier item.",
+  "tool_uses": [
+   {
+    "node": "lem-per-dual-lisse-tensor",
+    "why": "Finite-rank lisse tensor/dual comparison applied to the coefficient unit; a generic coefficient tool, not the perverse-heart route of its filing unit."
+   },
+   {
+    "node": "lem-sc-dense-open-finite-complement",
+    "why": "Dimension-one geometry makes the reduced boundary a finite set; the local-duality unit does not state this general geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Identifies residues of geometric closed points with the algebraically closed base; generic geometric tool."
+   },
+   {
+    "node": "lem-pod-point-dualizing-complex",
+    "why": "Identifies point Verdier duality under the actual coefficient fibre functor, without replacing the unit recollement proof."
+   },
+   {
+    "node": "lem-pod-cohomology-of-dual-over-field",
+    "why": "Pure linear algebra on the finite-dimensional boundary stalk complex."
+   },
+   {
+    "node": "lem-wf-tate-twist-frobenius",
+    "why": "The standard cyclotomic computation supplies the explicit scalar q_s on the target Tate line."
+   },
+   {
+    "node": "cor-coef-verdier-weil-equivariance",
+    "why": "Gives equivariance of biduality and exceptional adjunction at the common-stage coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Exact restriction preserves products and thus the Roos limit used in the finite-to-integral open-counit argument."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Pro-etale sheaf-level open restriction counit (f=h=j) for the finite-level open counit; lem-exc-open-fully-faithful is stated on the etale site only. Added by the maintainer reader."
+   },
+   {
+    "node": "prop-sf-localization-all-stages",
+    "why": "Rj_* preserves D^b_c, Ri^!Rj_*=0 and the closed exceptional unit at Qlb, used as the blueprint proof does; sk-prop-sf-localization is not among the unit's uses. Added by the maintainer reader."
+   },
+   {
+    "node": "thm-pur-rational-and-qbar-purity",
+    "why": "Smooth purity at Qlb for a_U (d=1) and a_Z (d=0), exactly as the blueprint proof cites it. Added by the maintainer reader."
+   },
+   {
+    "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+    "why": "Weil equivariance of the purity orientations of a_U and a_Z; lem-fix-weil-operations explicitly excludes orientations. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-dual-lisse-tensor",
+  "lem-sc-dense-open-finite-complement",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-pod-point-dualizing-complex",
+  "lem-pod-cohomology-of-dual-over-field",
+  "lem-wf-tate-twist-frobenius",
+  "cor-coef-verdier-weil-equivariance",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-sfb-proetale-open-restriction-counit",
+  "prop-sf-localization-all-stages",
+  "thm-pur-rational-and-qbar-purity",
+  "thm-pur-weil-equivariance-of-purity-and-trace"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-f7db48fa6",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-f7db48fa6 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the whole delivery against the main-20261015 blueprint proof (identical in main-20261017), the unit sk-i-dl-a1-local and the statement of every cited node. The statement is the blueprint_update statement verbatim; the only citer, p-dl-a1-exact, uses only the stalk clause. I checked the sign q_s on the constant rank-one case and the zero case. Steps 1, 2, 4, 5, 6, 8 and 10 are correct as delivered: domains via thm-coef-qbar-verdier and prop-sf-localization(1); exchange plus biduality with directions checked; the zero-middle-term triangle gives shift [-1]; omega_U = Qlb(1)[2] and lem-per-dual-lisse-tensor with K the unit; H^{-1} via lem-pod-cohomology-of-dual-over-field with i=1; m=-1 in lem-wf-tate-twist-frobenius. Two faults, both repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-local-boundary-duality.json. (1) C4, step 3: lem-exc-open-fully-faithful is stated on the etale site (its stmt_deps are def-weil-pbc-derived-categories and def-weil-pbc-inverse-image) but is applied to pro-etale complexes. I replaced it with lem-sfb-proetale-open-restriction-counit (f=h=j, existing, unsplit, no pod/trf reach, no cycle) and wrote out the K-injective termwise counit. (2) C1/E5, steps 7 and 9: going from D_Z to point duality by saying 'all operations componentwise' left omega_Z and its Frobenius unexplained. I restored the blueprint's route: purity in dimension 0 for a_Z via thm-pur-rational-and-qbar-purity gives omega_Z = Qlb_Z, and step 9 now gets its untwisted equivariance from thm-pur-weil-equivariance-of-purity-and-trace with d=0. I also added three missing tool_uses that the blueprint proof itself cites (prop-sf-localization-all-stages, thm-pur-rational-and-qbar-purity, thm-pur-weil-equivariance-of-purity-and-trace) and accepted the worker's other declarations. Batch-5: every base dependency already reached the same generic pod/trf infrastructure, and neither nt-assume leaf is in any closure. Each flagged citation is outside both assumptions. rem-dl-a1-conventions, def-pod-lisse-l-adic-sheaves and the three def-weil operation definitions are general definitions. cor-coef-verdier-weil-equivariance and thm-pur-weil-equivariance-of-purity-and-trace concern Frobenius equivariance, which the PD leaf's scope explicitly excludes and the trace formula does not state. lem-per-dual-lisse-tensor, lem-pod-point-dualizing-complex and lem-wf-tate-twist-frobenius are generic tools, not steps of either theorem. thm-sf-verdier-exchange is the general exchange along the open immersion j with arbitrary M. The PD leaf (smooth p, K = Qlb_X) cannot give that, the same statement was already in the base as fix-cor-verdier-exchange, and it is on the unit route. 'Smooth curve' is read as separated, finite type and of pure dimension one; this is inherited from the blueprint, not a delivery fault. The unit's realized fields are left empty because the separate Artin-Schreier clause is still unsplit. No new nodes, nothing dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

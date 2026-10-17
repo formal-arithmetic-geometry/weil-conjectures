@@ -1,11 +1,150 @@
 {
  "id": "lem-trf-proper-open-site-transport",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the constant-ring structure identifications throughout. They are the canonical isomorphisms preserving constant sections, so the module pullbacks are the inverse images in the comparison theorems. Finite $q,r$ are proper, so the etale proper/open theorem applies. Its coefficient hypothesis holds because $\\Lambda$ is finite, hence torsion. For $s=e,p$ write $\\iota^s_j:1\\to j_s^*j_{s,!}$ for the OPEN-extension unit (distinct from the ordinary pullback/direct-image unit). All comparison pullbacks and open extensions used here are exact; the comparison preserves bounded-below objects. Thus the sheaf open-comparison unit identity of the cited normalization theorem holds termwise on complexes and then in $D^+$, with the same named maps:\n$$j_p^*(e_{j,F})\\circ a_{j,j_{e,!}F}\\circ C_U(\\iota^e_{j,F})=\\iota^p_{j,C_UF}.\\tag{1}$$\nIndeed naturality makes this a chain-map identity in each degree, and localization preserves compositions and equalities. The same formula holds for $j'$.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-finite-proper",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison (canonical adjoint comparison); extension of its open-unit normalization degreewise; finite properness Tag 01WN"
+   }
+  },
+  {
+   "text": "Set $X_N=j'_{e,!}N$, $M_N=Rr_{e,*}N$, and let $E^e_X:j_e^*Rq_{e,*}X\\to Rr_{e,*}j_e'^*X$ be ordinary etale exchange for this open square. Open derived restriction identifies this named map with restriction: on a K-injective representative $I$ of $X_N$ the derived exchange is the underived exchange $j_e^{-1}q_{e,*}I\\to r_{e,*}j_e'^{-1}I$ in each degree ($r$ is finite, so $r_{e,*}$ is exact and computes $Rr_{e,*}$), and the underived exchange along the open (etale) base change $j$ is, on sections, the identity $I(V\\times_ZZ')=I(V\\times_UU')$, an isomorphism. Put\n$$\\delta^e_N=Rr_{e,*}((\\iota^e_{j',N})^{-1})\\circ E^e_{X_N}:j_e^*Rq_{e,*}X_N\\xrightarrow{\\sim}M_N.$$\nHere the open unit is an isomorphism: for a module sheaf on $U'$, restriction of the defining extension-by-zero presheaf has value $F(V)$ at every etale $V\\to U'$; its sheafification is already $F$, and the unit sends $s$ to $s$. This is the same module adjunction specified in the cited theorem. For complexes this description is degreewise, since both open functors are exact. Open derived restriction and this unit isomorphism show that $\\delta^e_N$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-derived-open-restriction",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-etale-underived-exchange-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open; extension-by-zero unit computed on the open subsite"
+   }
+  },
+  {
+   "text": "The proper-support-normalized $\\gamma^e_N$ has open-adjunction transpose $(\\delta^e_N)^{-1}$. Check the normalization as follows. Finite direct image is exact on abelian etale sheaves, hence also on constant-$\\Lambda$ module sheaves: direct image commutes with forgetting the action by evaluation, and the underlying kernels and sheafified cokernels compute module kernels and cokernels. The exact-functor derived comparison therefore computes $Rr_{e,*}$ and $Rq_{e,*}$ termwise. On the K-injective representative $J$ in the proper/open theorem, its map $j_{e,!}r_*J\\cong q_*j'_{e,!}J\\to q_*I$ is consequently the termwise proper-support identification, followed by the canonical resolution isomorphism. On an etale test object $V\\to U$, restriction of this first identification sends a section of $N(V\\times_UU')$ to the identical section on $V\\times_ZZ'\\cong V\\times_UU'$; all these objects lie in the open, so the open units also send each section to itself. The unit--counit ordinary exchange is this same restriction map: by the underived etale exchange-restriction theorem, applied degreewise to $j'_{e,!}J$ for the Cartesian square of $q$ and the open $j$, it is on sections the identity $(j'_{e,!}J)(V\\times_ZZ')=(j'_{e,!}J)(V\\times_UU'\\to Z')$. Applying the identity in every degree gives\n$$\\delta^e_N\\circ j_e^*(\\gamma^e_N)\\circ\\iota^e_{j,M_N}=1_{M_N}.\\tag{2}$$",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-etale-underived-exchange-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, defining K-injective representative; Tag 03QP, etale-cohomology-proposition-finite-higher-direct-image-zero"
+   }
+  },
+  {
+   "text": "Let $E^p$ be ambient pro-etale exchange for the same square, and put\n$$\\delta^p_N=Rr_{p,*}((\\iota^p_{j',C_{U'}N})^{-1})\\circ E^p_{j'_{p,!}C_{U'}N}.$$\nThe pro-etale open unit is invertible directly from extension by zero and restriction: on every object over $U'$, extension followed by restriction has the original module sections and its unit is the identity. By the statement's defining transpose convention,\n$$j_p^*(\\gamma^p_{C_{U'}N})\\circ\\iota^p_{j,Rr_{p,*}C_{U'}N}=(\\delta^p_N)^{-1}.$$\nFor the comparison calculation, apply the transport-identifies-exchange theorem with $f=q$, $f'=r$, $g=j$, $g'=j'$ and input $X=X_N$. All its hypotheses hold: $q,r$ are qcqs, the square is Cartesian, $X_N$ is bounded below because $j'_{e,!}$ is exact, and the coefficient is the finite constant ring fixed in Step 1. Its equation is precisely\n$$E^p_{C_{Z'}X}\\circ j_p^*(b_{q,X})\\circ a_{j,Rq_{e,*}X}\n=Rr_{p,*}(a_{j',X})\\circ b_{r,j_e'^*X}\\circ C_U(E^e_X).\\tag{3}$$\nIt concerns the specified unit--counit exchanges and counit-mate $b$ of this item.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "def-weil-extension-by-zero",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-transport-identifies-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R and 09AF; unit--counit comparison calculation using the named exchange theorem"
+   }
+  },
+  {
+   "text": "Expand $T_N=Rq_{p,*}(e_{j',N})\\circ b_{q,X_N}$. Naturality of $E^p$ at $e_{j',N}:C_{Z'}X_N\\to j'_{p,!}C_{U'}N$, followed by (3), gives\n$$\\begin{aligned}\n\\delta^p_N\\circ j_p^*T_N\\circ a_{j,Rq_{e,*}X_N}\n={}&Rr_{p,*}\\bigl((\\iota^p_{j',C_{U'}N})^{-1}\\circ j_p'^*(e_{j',N})\\circ a_{j',X_N}\\bigr)\\\\\n&\\qquad\\circ b_{r,j_e'^*X_N}\\circ C_U(E^e_{X_N}).\n\\end{aligned}$$\nBy (1) for $j'$, the parenthesized morphism is $C_{U'}((\\iota^e_{j',N})^{-1})$. Naturality of $b_r$ at $(\\iota^e_{j',N})^{-1}$ now makes the right side $b_{r,N}\\circ C_U(\\delta^e_N)$. Thus\n$$\\delta^p_N\\circ j_p^*T_N\\circ a_{j,Rq_{e,*}X_N}=b_{r,N}\\circ C_U(\\delta^e_N).\\tag{4}$$\nThis also proves invertibility of $\\delta^p_N$ on the input at issue: $T_N$, $a_j$, $b_r$ and $C_U(\\delta^e_N)$ are isomorphisms. Invertibility of the specified $b$ comes from its canonical-mate theorem, and that of $e$ from the open-comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, canonical adjoint comparison; explicit substitution of equations (1) and (3) and naturality"
+   }
+  },
+  {
+   "text": "For clarity compare maps whose source is $j_{p,!}C_UM_N$. Put\n$$G_N=T_N\\circ C_Z(\\gamma^e_N)\\circ e_{j,M_N}^{-1}:\n j_{p,!}C_UM_N\\longrightarrow Rq_{p,*}j'_{p,!}C_{U'}N.$$\nIts transpose under $j_{p,!}\\dashv j_p^*$ is\n$$g_N=j_p^*(G_N)\\circ\\iota^p_{j,C_UM_N}.$$\nEquation (1), with $F=M_N$, rewrites this as\n$$g_N=j_p^*T_N\\circ j_p^*C_Z(\\gamma^e_N)\\circ a_{j,j_{e,!}M_N}\\circ C_U(\\iota^e_{j,M_N}).$$\nNaturality of $a_j$ at $\\gamma^e_N$ moves $a_j$ to its target. Postcomposing by $\\delta^p_N$, then using (4) and (2), gives the explicit calculation\n$$\\begin{aligned}\n\\delta^p_N\\circ g_N\n&=b_{r,N}\\circ C_U\\bigl(\\delta^e_N\\circ j_e^*(\\gamma^e_N)\\circ\\iota^e_{j,M_N}\\bigr)\\\\\n&=b_{r,N}.\n\\end{aligned}$$\nTherefore $g_N=(\\delta^p_N)^{-1}\\circ b_{r,N}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, canonical open adjunction; explicit transpose calculation from (1), (2), and (4)"
+   }
+  },
+  {
+   "text": "The transpose of $\\gamma^p_{C_{U'}N}\\circ j_{p,!}(b_{r,N})$ under that same adjunction is also $(\\delta^p_N)^{-1}\\circ b_{r,N}$. Indeed naturality of its open unit gives\n$$j_p^*j_{p,!}(b_{r,N})\\circ\\iota^p_{j,C_UM_N}\n=\\iota^p_{j,Rr_{p,*}C_{U'}N}\\circ b_{r,N},$$\nand the defining transpose of $\\gamma^p$ then gives the assertion. Injectivity of the adjunction Hom bijection implies\n$$\\gamma^p_{C_{U'}N}\\circ j_{p,!}(b_{r,N})\n=T_N\\circ C_Z(\\gamma^e_N)\\circ e_{j,M_N}^{-1}.$$\nPostcompose on the source with $e_{j,M_N}$ to obtain exactly $\\gamma^p_{C_{U'}N}\\circ S_N=T_N\\circ C_Z(\\gamma^e_N)$, with $S_N,T_N$ as in the statement.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF and extension-by-zero adjunction; naturality of the unit and injectivity of its Hom bijection"
+   }
+  },
+  {
+   "text": "Finally $S_N$ and $T_N$ are isomorphisms, since their factors are the canonical comparison isomorphisms. The etale map $\\gamma^e_N$ is an isomorphism by the proper/open theorem, applied to proper $q,r$, open $j,j'$, finite $\\Lambda$ and bounded-below $N$ as checked in Steps 1–2. The proved equality yields\n$$\\gamma^p_{C_{U'}N}=T_N\\circ C_Z(\\gamma^e_N)\\circ S_N^{-1},$$\na composite of isomorphisms. This proves the final assertion as well.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open; final cancellation of the specified comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-finite-proper",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-derived-open-restriction",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-weil-extension-by-zero",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AF and 099R, combined with the defining resolution normalization in more-etale.tex Tag 0F7B; explicit open-adjunction transpose computation"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-horizontal-shriek-mate",
@@ -72,6 +211,62 @@
    "results": "{\"t\": \"2026-10-17T08:44:27Z\", \"tool\": \"leanfinder\", \"query\": \"Under the small site comparison, the proper support subsheaf identification for a finite proper map and open immersion induces the same derived interchange morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso\"], \"digest\": \"c7feb7ea41bf5571\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary module/site or topological support declarations do not identify these specified derived etale/pro-etale maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper open site transport finite coefficient gamma comparison",
+   "results": "{\"t\": \"2026-10-17T12:51:56Z\", \"tool\": \"leanfinder\", \"query\": \"proper open site transport finite coefficient gamma comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"compatiblePreserving_opens_map\", \"Topology.IsOpenEmbedding.compatiblePreserving\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"TopCat.Presheaf.generateEquivalenceOpensLe\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'\"], \"digest\": \"f5250855e32cf018\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, scheme structure-module restriction, finite-proper geometry, or unrelated topology; none states the specified etale/pro-etale derived proper/open compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, proper, open, comparison",
+   "results": "{\"t\": \"2026-10-17T12:51:57Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory, proper, open, comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: <input>:1:28: expected 'scoped' or identifier\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*transport",
+   "results": "{\"t\": \"2026-10-17T12:51:57Z\", \"tool\": \"grep\", \"query\": \"proper.*open.*transport\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, scheme structure-module restriction, finite-proper geometry, or unrelated topology; none states the specified etale/pro-etale derived proper/open compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-17T13:01:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, scheme structure-module restriction, finite-proper geometry, or unrelated topology; none states the specified etale/pro-etale derived proper/open compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale comparison canonical proper open interchange for a finite map and extension by zero",
+   "results": "{\"t\": \"2026-10-17T13:01:09Z\", \"tool\": \"leansearch\", \"query\": \"Etale proetale comparison canonical proper open interchange for a finite map and extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.ExtendByZero.linearMap\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"RingHom.etale_algebraMap\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"9650b0ffe1a793b8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, scheme structure-module restriction, finite-proper geometry, or unrelated topology; none states the specified etale/pro-etale derived proper/open compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of etale and proetale sites intertwines extension by zero followed by finite derived direct image with the canonical proper open interchange, by transposing under the open adjunction",
+   "results": "{\"t\": \"2026-10-17T13:01:17Z\", \"tool\": \"leanfinder\", \"query\": \"A comparison of etale and proetale sites intertwines extension by zero followed by finite derived direct image with the canonical proper open interchange, by transposing under the open adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"Condensed.profiniteSolidification\", \"Condensed.lanSheafProfinite\", \"Condensed.lanCondensedSet\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"digest\": \"90d70324bc60999c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, scheme structure-module restriction, finite-proper geometry, or unrelated topology; none states the specified etale/pro-etale derived proper/open compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "def mateEquiv|theorem unit_mateEquiv|theorem mateEquiv_counit|def restrictAdjunction|def restrictFunctorAdjCounitIso",
+   "results": "{\"t\": \"2026-10-17T13:04:24Z\", \"tool\": \"grep\", \"query\": \"def mateEquiv|theorem unit_mateEquiv|theorem mateEquiv_counit|def restrictAdjunction|def restrictFunctorAdjCounitIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"a0ac1a97fd7a3efc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, scheme structure-module restriction, finite-proper geometry, or unrelated topology; none states the specified etale/pro-etale derived proper/open compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction|restrictFunctorAdjCounitIso",
+   "results": "{\"t\": \"2026-10-17T13:04:24Z\", \"tool\": \"grep\", \"query\": \"restrictAdjunction|restrictFunctorAdjCounitIso\", \"sub\": \"AlgebraicGeometry/Modules/Sheaf.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"416\", \"425\", \"434\", \"435\", \"437\"], \"digest\": \"b070ff4cde193672\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, scheme structure-module restriction, finite-proper geometry, or unrelated topology; none states the specified etale/pro-etale derived proper/open compatibility"
   }
  ],
  "blueprint": {
@@ -84,5 +279,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proper-open-site-transport",
+  "worker": "stage1",
+  "summary": "Proved the specified finite proper/open site-transport equality by identifying the etale support-normalized transpose, applying the named exchange transport theorem, inserting the open-comparison unit equation, and comparing the two explicit open-adjunction transposes. No statement change and no new nodes. All comparisons remain ordinary finite-constant-coefficient operations on D+.",
+  "blueprint": "Realizes the finite proper/open comparison required by the base-change assertion (beta) of lem-trf-weil-shriek-operator-fibres, through lem-trf-finite-horizontal-shriek-mate; keeps its compactification/open/proper route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic Constant coefficients on the pro-etale site used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic Finite morphisms are proper used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Generic Proper/open interchange and its base-change and composition equations used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic Extension by zero on the pro-etale site used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Generic Unit normalization of the etale/pro-etale open-extension comparison used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-open-restriction",
+    "why": "Generic Derived direct image restricted to an open used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "def-weil-pbc-extension-by-zero",
+    "why": "Generic Extension by zero for open immersions used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic Extension by zero is left adjoint to restriction (étale site) used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic Exactness of finite direct image used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic Category of sheaves of modules over a sheaf of rings used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Generic Composition and pullback of the underived sheaf of sections with proper support used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic The derived exchange morphism commutes with forgetting the coefficient ring used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "def-weil-extension-by-zero",
+    "why": "Generic Extension by zero used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Generic Transport identifies the exchange map used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic Comparison of extension by zero with the site morphism used for the specified constant-coefficient open/proper comparison; the Weil-pushforward unit has no separate statement supplying this foundational tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness of constant-module open restriction and its canonical adjunction, needed to descend the etale unit calculation degreewise; no Weil-pushforward unit statement supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-underived-exchange-restriction",
+    "why": "Generic statement that the underived etale exchange along an etale (here open) base change is the identity on sections; used in Steps 2-3 to identify the etale exchange E^e with restriction; the Weil-pushforward unit has no node supplying it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-finite-proper",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-derived-open-restriction",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-weil-extension-by-zero",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-underived-exchange-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-a50ec0f21",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-a50ec0f21 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the statements of all 37 cited nodes, the parent's step that uses the item, the main-20261015 ancestor lem-trf-weil-shriek-operator-fibres proof (β), and Stacks 0F7B (more-etale 2459ff.), 09AF, 0D6G, 03QP, 099R and 01WN at their labels. No SGA source is used. The statement is unchanged and correct. γ^e is lem-cbc-proper-open-interchange-coherence applied with A=U', B=Z', C=U, D=Z, k=j', i=j, p=q (r, q finite hence proper; Λ finite commutative). γ^p is fixed by its transpose (δ^p)^{-1}, and Step 5 proves δ^p invertible at C_{U'}N, the only component the statement uses. The constant-ring and continuous-function coefficients are identified explicitly via prop-weil-pbc-proetale-constant-ring-map. The transport-identifies-exchange specialization (f=q, f'=r, g=j, g'=j', L=j'_!N; qcqs, Cartesian, D^+) gives exactly (3). I recomputed (1)=unit normalization, (2), (4) and the transposes in Steps 6–7, and they are correct. Small cases N=0, U'=∅, j=id, q=r=id and non-field Λ all hold. There are no new nodes and no duplicates: lem-sf-proper-open-comparison-site-normalization is only the r=id special case. No cycle. All off-unit tools are declared, and I accept them. One fault, C4: Steps 2–3 identified the etale exchange E^e with restriction on sections, but cited only lem-weil-pbc-derived-open-restriction, whose statement does not say that. Fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-proper-open-site-transport.json: Steps 2 and 3 now cite lem-weil-pbc-etale-underived-exchange-restriction (reviewed, Lean-closed; underived etale exchange is the identity on sections; r_* is exact since r is finite), proof_deps is updated, and a tool_uses entry is added. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }

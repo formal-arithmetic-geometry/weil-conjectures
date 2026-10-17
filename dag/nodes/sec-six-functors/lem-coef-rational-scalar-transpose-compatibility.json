@@ -18,9 +18,95 @@
   "def-weil-finite-type-morphism",
   "lem-coef-completed-tensor-hom-transpose"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\operatorname{ev}_{E,A}:D_EA\\otimes_E A\\to\\omega_{X,E}$ for evaluation, with the internal-Hom argument moved to the left by the signed symmetry. By [thm-coef-rational-verdier], the specified rational comparison is natural and evaluation-compatible. With the integral dualizing comparison $u$ of [lem-coef-integral-finite-extension] rationalized as in the statement, this means\n$$\\operatorname{ev}_{F,TA}(\\beta_A\\otimes1_{TA})=uT(\\operatorname{ev}_{E,A})c_{D_EA,A}.$$\nNaturality, with its contravariant direction displayed, says for $f:A\\to B$ that\n$$\\beta_A T(D_Ef)=D_F(Tf)\\beta_B.$$\nThese assertions apply to all objects and all rational arrows in the raw categories of [def-weil-rationalization-karoubi], not only to arrows represented without denominators. The field and scheme hypotheses of both comparison statements are exactly those fixed here.",
+   "uses": [
+    "thm-coef-rational-verdier",
+    "lem-coef-integral-finite-extension",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Paragraph 2, scalar-extension comparisons; unpack their evaluation and naturality equations"
+   }
+  },
+  {
+   "text": "The tensor comparison $c$ is natural in both arguments by [lem-pur-integral-operations-scalar-extension], followed by the coefficient passage in [def-weil-derived-pullback-tensor-hom]. Its compatibility with signed symmetry is also the direct coefficient-tensor calculation\n$$T(\\sigma_{A,B})c_{A,B}=c_{B,A}\\sigma_{TA,TB}.$$\nIndeed on homogeneous tensors in the defining coefficient extension, $c$ sends $(x\\otimes\\lambda)\\otimes(y\\otimes\\mu)$ to $(x\\otimes y)\\otimes\\lambda\\mu$. Both routes send it to $(-1)^{rs}(y\\otimes x)\\otimes\\lambda\\mu$ for $\\deg x=r$, $\\deg y=s$ (the coefficient scalars have degree zero and $\\lambda\\mu=\\mu\\lambda$). This calculation is in the total tensor complexes of [def-pc-tensor-complex-sheaves], using the coefficient-passage tensor of the preceding definition: it commutes with the tensor differentials, applies at each finite coefficient quotient, and hence gives the same equality after the specified completed construction and rationalization. It introduces no further existence or comparison assertion.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Paragraph 2, scalar-extension comparisons; elementary signed symmetry of the specified tensor comparison"
+   }
+  },
+  {
+   "text": "The tensor-Hom bijection and its symmetry compatibility in [lem-coef-completed-tensor-hom-transpose] give $b=\\operatorname{ev}_{E,L}(a\\otimes1_L)$. Therefore, using step 1 and naturality of $c$ from step 2,\n$$\\begin{aligned}\n\\operatorname{ev}_{F,TL}((\\beta_LT(a))\\otimes1_{TL})\n&=uT(\\operatorname{ev}_{E,L})c_{D_EL,L}(T(a)\\otimes1_{TL})\\\\\n&=uT(\\operatorname{ev}_{E,L})T(a\\otimes1_L)c_{K,L}\\\\\n&=uT(b)c_{K,L}=b_F.\n\\end{aligned}$$\nApply injectivity of the rational tensor-Hom bijection over $F$. It identifies the first transpose of $b_F$ with exactly $a_F=\\beta_LT(a)$. The internal Homs used are $D_EL,D_F(TL)$, which belong to the indicated constructible categories by [thm-coef-rational-verdier]; thus the domain condition of the transpose node is satisfied over both fields.",
+   "uses": [
+    "lem-coef-completed-tensor-hom-transpose",
+    "thm-coef-rational-verdier"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Paragraph 2, the comparisons carry the pairing and its first transpose"
+   }
+  },
+  {
+   "text": "For the other transpose put $b'=b\\sigma_{L,K}:L\\otimes_EK\\to\\omega_{X,E}$. The symmetry-compatible bijection of [lem-coef-completed-tensor-hom-transpose] makes its first transpose $c:L\\to D_EK$. Step 2 gives\n$$uT(b')c_{L,K}=uT(b)T(\\sigma_{L,K})c_{L,K}=b_F\\sigma_{TL,TK}.$$\nApplying the calculation of step 3 with $L,K,c$ replacing $K,L,a$ shows that this swapped pairing has first transpose $\\beta_KT(c)$. By the same symmetry-compatible bijection this is the second transpose $c_F$ of $b_F$.",
+   "uses": [
+    "lem-coef-completed-tensor-hom-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Paragraph 2, the comparisons carry the other transpose, including the signed symmetry"
+   }
+  },
+  {
+   "text": "Functoriality of $T$ in [def-weil-rationalization-karoubi] gives $T(p)T(i)=T(pi)=1_{TP}$ and $T(q)T(j)=1_{TQ}$. Specialize the naturality equation of step 1 to $j:Q\\to L$ and compose on the right with $T(a)T(i)$. This yields\n$$\\begin{aligned}\n\\beta_QT(D_E(j)ai)\n&=\\beta_QT(D_Ej)T(a)T(i)\\\\\n&=D_F(Tj)\\beta_LT(a)T(i)=D_F(Tj)a_F(Ti).\n\\end{aligned}$$\nThis is the required restricted-transpose identity, using only naturality of [thm-coef-rational-verdier]. Interchanging the pairs gives explicitly $\\beta_PT(D_E(i)cj)=D_F(Ti)c_F(Tj)$. Neither calculation uses an inverse of either restricted map.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "thm-coef-rational-verdier"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Paragraph 2, the comparisons carry the splittings and restricted transposes"
+   }
+  },
+  {
+   "text": "Suppose $a$ is invertible. Naturality of [thm-coef-rational-verdier] at $q:L\\to Q$ gives $\\beta_LT(D_Eq)=D_F(Tq)\\beta_Q$. Multiply on the left by $\\beta_L^{-1}$ and on the right by $\\beta_Q^{-1}$, obtaining\n$$T(D_Eq)\\beta_Q^{-1}=\\beta_L^{-1}D_F(Tq).$$\nBy functoriality in [def-weil-rationalization-karoubi],\n$$\\begin{aligned}\nT(pa^{-1}D_E(q))\\beta_Q^{-1}\n&=T(p)T(a^{-1})T(D_Eq)\\beta_Q^{-1}\\\\\n&=T(p)T(a^{-1})\\beta_L^{-1}D_F(Tq).\n\\end{aligned}$$\nAlso $T(a^{-1})\\beta_L^{-1}$ is the inverse of $a_F=\\beta_LT(a)$: composing in either order cancels $\\beta_L,\\beta_L^{-1}$ and applies $T$ to $aa^{-1}=1$ or $a^{-1}a=1$. The candidate inverse is therefore precisely the image under $T$ of the specified formula, with the necessary duality comparison. If $c$ is invertible instead, the same cancellation at $p:K\\to P$ gives explicitly\n$$T(qc^{-1}D_E(p))\\beta_P^{-1}=T(q)T(c^{-1})\\beta_K^{-1}D_F(Tp).$$\nThese equations assert transport of the candidate formulas only; no adjointness condition on the two idempotents, and no invertibility of a restricted transpose, has entered.",
+   "uses": [
+    "thm-coef-rational-verdier",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Paragraph 2, the comparisons carry every displayed inverse formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-coef-rational-verdier",
+  "lem-coef-integral-finite-extension",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pc-tensor-complex-sheaves",
+  "lem-coef-completed-tensor-hom-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+  "place": "Paragraph 2: explicit evaluation, tensor symmetry, naturality and inverse-cancellation expansion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +142,45 @@
    "results": "Eight hits including CategoryTheory.expComparison_ev and expComparison. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean lines 42–105: both categories must be cartesian monoidal. The other hits are generic curry/evaluation naturality, not the specified rational pairing and comparison identities.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison_ev|curry_natural_right|ev_naturality",
+   "results": "15 hits in Mathlib/CategoryTheory/Monoidal/Closed: expComparison_ev, ev_naturality, curry_natural_right and related formulas. Read Functor.lean 42–105; expComparison_ev requires CartesianMonoidalCategory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural internal Hom comparison commuting with evaluation carries adjoints of bilinear pairings to adjoints after a monoidal functor",
+   "results": "Hits: CategoryTheory.expComparison_ev, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.ihom.ev_naturality, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.expComparison, CategoryTheory.FunctorToTypes.functorHomEquiv_symm_apply_app_app. Read the cartesian exponential-comparison source and the generic tensor-Hom interfaces; none gives this rational coefficient transport with both retract formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor with evaluation compatible natural comparison between duality functors transports the transpose of a pairing and commutes with restriction to split retracts",
+   "results": "Hits: CategoryTheory.coev_expComparison, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.leftAdjointMate_comp_evaluation, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.rightAdjointMate_comp_evaluation. Read the cartesian exponential-comparison source and the generic tensor-Hom interfaces; none gives this rational coefficient transport with both retract formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Functor",
+   "results": "Hits: CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHom_obj, CategoryTheory.MonoidalClosed.internalHom_map, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.cartesianClosedFunctorToTypes. Read the cartesian exponential-comparison source and the generic tensor-Hom interfaces; none gives this rational coefficient transport with both retract formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal scalar extension functor commuting with duality evaluation transports the transpose of a pairing and its retract inverse formulas",
+   "results": "Hits: CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight. Read the cartesian exponential-comparison source and the generic tensor-Hom interfaces; none gives this rational coefficient transport with both retract formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rational-retract-evaluation",
@@ -76,5 +197,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-rational-scalar-transpose-compatibility",
+  "worker": "stage1",
+  "summary": "Kept the complete statement unchanged. Expanded scalar-extension transport into evaluation and naturality equations, both pairing transposes with the signed tensor symmetry, split retractions and both candidate inverse formulas. Reused existing comparison and tensor-Hom nodes; no new nodes. Searched the full DAG, blueprint and project Lean and checked Mathlib hits. No compilation.",
+  "blueprint": "lem-coef-rational-retract-evaluation, proof paragraph 2, sentences beginning “The comparisons” and “Exact functors”: steps 1–4 identify the actual pairing and its two transposes, steps 5–6 carry the splittings and candidate inverse formulas.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-completed-tensor-hom-transpose",
+    "why": "Generic natural rational tensor-Hom transpose bijection and its signed symmetry; the biduality unit needs this formal tool but has no separate statement of that bijection."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic natural tensor comparison for finite coefficient extension, already named in the item; supplies tensor naturality, while this unit supplies the duality comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-56375e197",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-56375e197 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement, stmt_deps and blueprint fields are identical to the live node, the delivery adds no new nodes, and the item does not cite its parent, so there is no cycle. Sources read: master sk-prop-sf-biduality-general/lem-coef-rational-retract-evaluation.md, proof paragraph 2 (the comparisons 'carry these maps and splittings'), and main-20261015 sk-lem-sp-tower lem-coef-rational-retract-evaluation.proof.md and lem-coef-integral-finite-extension.md (u, v and beta commute with evaluation). The item is strictly smaller than parent step 6, which cites it for the transport identities; the inverse equations themselves are proved in parent step 3. So the item does not restate a parent clause (D1). I checked every equation with its source and target. Step 1: beta is natural, β_A T(D f)=D_F(Tf)β_B, and compatible with evaluation through u and c. Step 2: on homogeneous tensors (x⊗λ)⊗(y⊗μ), both sides of the symmetry equation give (-1)^{rs}(y⊗x)⊗λμ, so the c-symmetry holds and the step is elementary. Step 3: b=ev_L(a⊗1), and the chain gives b_F, so injectivity gives a_F=β_L T(a). Step 4: with b'=bσ, its first transpose is c, and step 2 gives uT(b')c_{L,K}=b_Fσ, so c_F=β_K T(c). Step 5: naturality at j gives the restricted identity, and the swapped form also holds. Step 6: naturality at q, cancelling the betas, gives the candidate-inverse formula from D_F(TQ) to TP; the c version at p also holds. Hypotheses match every cited statement: ℓ≠char k, so ℓ is invertible on X; E⊂F are finite inside a fixed closure; D_F(TL) is constructible, as the transpose node requires. Small cases checked: E=F, zero objects, identity splittings, non-adjoint idempotents and empty X. Duplicate search by rg over the DAG found nothing equivalent. Accepted tool uses: lem-pur-integral-operations-scalar-extension (the parent already records it) and lem-coef-completed-tensor-hom-transpose (a generic tensor–Hom bijection that this unit has no node for). There is no SGA citation and no departure from the unit's route. No fixes were made; review.md is written."
  }
 }

@@ -11,9 +11,90 @@
   "lem-coef-bousfield-kan-comparison-calculus",
   "def-coef-zigzag-homotopy-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an $A$-chain write $v_{ab}:x_a\\to x_b$ for its composite, with $v_{aa}=1$. For $\\alpha:[j]\\to[i]$ define the $i$ operator of $V$ by restricting the chain to $x_{\\alpha(0)}\\to\\cdots\\to x_{\\alpha(j)}$ and replacing every $t_a$ by $P(v_{0,\\alpha(0)})t_a$, leaving $c_\\bullet,z$ fixed. This remains a slice chain because $(P(v_{0,\\alpha(0)})t_{a+1})h_{a+1}=P(v_{0,\\alpha(0)})t_a$. For $U$ use the same restricted $A$-chain and replace $y$ by $X(P(v_{0,\\alpha(0)}))y$. These give exactly the stated faces and degeneracies. Identities have $v_{00}=1$; for $\\gamma:[k]\\to[j]$, the two coefficient/postcomposition arrows multiply to $P(v_{\\alpha(0),\\alpha\\gamma(0)})P(v_{0,\\alpha(0)})=P(v_{0,\\alpha\\gamma(0)})$. Thus both families satisfy the contravariant functor laws in the $i$ variable, as required by the definition of simplicial set in [def-weil-pbc-simplicial-set].",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33 (PDF pp.16–17); agent expansion of the chain formulas, with no homotopy-equivalence claim used."
+   }
+  },
+  {
+   "text": "For a fixed $A$-chain, the $q$ row of $V$ is $\\mathrm{BK}_{C/Px_0}(X\\circ\\operatorname{dom})$, where $\\operatorname{dom}(d,t)=d$ and $\\operatorname{dom}(h)=h$; the row of $U$ is $X(Px_0)$. The displayed $\\mathrm{BK}$ operators in [lem-coef-bousfield-kan-comparison-calculus] supply the $q$ simplicial laws. Explicitly, if $\\beta:[r]\\to[q]$ and $h_{ab}:c_a\\to c_b$ denotes the composite in the slice chain, its $V$ operator restricts the chain to $(c_{\\beta(b)},t_{\\beta(b)})$ and sends $z$ to $X(h_{0,\\beta(0)})\\beta^*z$; here $\\beta^*$ is the operator of $X(c_0)$ and the component of $X(h)$ is taken in degree $r$. This commutes with the $i$ operator of step 1: restriction selects the same $t_{\\beta(b)}$, postcomposition applies the same $P(v_{0,\\alpha(0)})$, and neither changes the other's $c,h,z$ operations. For $U$ the mixed identity is $\\beta^*X(Pv)y=X(Pv)\\beta^*y$, since $X(Pv)$ is a simplicial map. Hence $V$ and $U$ are bisimplicial sets.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33 (PDF pp.16–17); agent expansion of the chain formulas, with no homotopy-equivalence claim used."
+   }
+  },
+  {
+   "text": "Evaluation commutes with every $i$ operator of step 1 because $X(P(v_{0,\\alpha(0)}))X(t_0)=X(P(v_{0,\\alpha(0)})t_0)$. For the $q$ operator of step 2 the slice equation is $t_{\\beta(0)}h_{0,\\beta(0)}=t_0$, including $\\beta(0)=0$. Consequently evaluation after that operator sends the coefficient to\n$$X(t_{\\beta(0)})X(h_{0,\\beta(0)})\\beta^*z=X(t_0)\\beta^*z=\\beta^*X(t_0)z,$$\nwhich is the $q$ operator after evaluation. The last equality uses that $X(t_0)$ is a morphism of simplicial sets, that is a natural transformation as defined in [def-weil-pbc-simplicial-set]. The $A$-chain agrees on both sides. Thus the stated $e_{P,X}$ is a bisimplicial map.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33 (PDF pp.16–17); agent expansion of the chain formulas, with no homotopy-equivalence claim used."
+   }
+  },
+  {
+   "text": "The formula for $V'$ is well typed: $H(t'_a):Hc'_a\\to HP'x'_0=PKx'_0$ and $H(t'_{a+1})H(h'_{a+1})=H(t'_a)$. The coefficient has the required type since $\\eta_{c'_0}:X'(c'_0)\\to X(Hc'_0)$ is a simplicial map. The $U'$ coefficient has target $X(HP'x'_0)=X(PKx'_0)$. In the $i$ variable, $K$ preserves the selected composites and\n$$H(P'(v')t')=P(Kv')H(t'),$$\nusing $HP'=PK$ on morphisms; this proves compatibility for $V'$. For $U'$ compatibility is exactly\n$$\\eta_{P'b'}X'(P'v')=X(HP'v')\\eta_{P'a'}=X(PKv')\\eta_{P'a'}$$\nfor the first selected arrow $v':a'\\to b'$. In the $q$ variable, $H$ preserves all selected composites; compatibility on coefficients is\n$$\\eta_{c'_b}X'(h'_{0b})(\\beta^*z)=X(Hh'_{0b})\\beta^*(\\eta_{c'_0}z),\\qquad b=\\beta(0).$$\nThis is naturality of $\\eta$ for $h'_{0b}$ followed by simplicial naturality of its component. For $U'$ only the component's simplicial naturality is needed. Thus $V'$ and $U'$ commute with every operator; by [def-weil-pbc-simplicial-set] they are maps in both simplicial variables.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33 (PDF pp.16–17); agent expansion of the chain formulas, with no homotopy-equivalence claim used."
+   }
+  },
+  {
+   "text": "For a generator $(x'_\\bullet,(c'_\\bullet,t'_\\bullet),z)$ the two composites in the proposed square have the identical $A$-chain $Kx'_\\bullet$. Their coefficients are respectively $\\eta_{P'x'_0}X'(t'_0)z$ and $X(Ht'_0)\\eta_{c'_0}z$. They agree by the defining naturality square of the given $\\eta$ at the arrow $t'_0:c'_0\\to P'x'_0$. The equality holds in every bidegree on every summand, so $U'e_{P',X'}=e_{P,X}V'$ as functions, hence as bisimplicial maps. This is an equality, with no chosen homotopy or equivalence data.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33 (PDF pp.16–17); agent expansion of the chain formulas, with no homotopy-equivalence claim used."
+   }
+  },
+  {
+   "text": "For an identity triple $(1_A,1_C,1_X)$, every chain, slice arrow and coefficient is unchanged, so both induced maps are identities. To check composition, take a further triple $(L:A''\\to A',J:C''\\to C',\\theta:X''\\Rightarrow X'J)$ with $P'L=JP''$. Its composite with $(K,H,\\eta)$ is $(KL,HJ,\\lambda)$, where $\\lambda_d=\\eta_{Jd}\\circ\\theta_d:X''(d)\\to X(HJd)$; the required equality is $PKL=HP'L=HJP''$. Applying the two $V$ maps gives the chains $KLx''_\\bullet$, $HJ(c''_\\bullet,t''_\\bullet)$ and coefficient $\\eta_{Jc''_0}\\theta_{c''_0}z=\\lambda_{c''_0}z$, exactly the direct formula. The two $U$ maps give coefficient $\\eta_{JP''x''_0}\\theta_{P''x''_0}y=\\lambda_{P''x''_0}y$, again the direct formula. Function composition and functor composition are associative and unital, so these identities are strict. All that was used is the given functor and natural-transformation data.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33 (PDF pp.16–17); agent expansion of the chain formulas, with no homotopy-equivalence claim used."
+   }
+  },
+  {
+   "text": "In bidegree $(n,n)$, $U$ is $\\coprod_{x_0\\to\\cdots\\to x_n}X(Px_0)_n$. Applying the same $\\alpha:[m]\\to[n]$ in both directions gives the restricted $A$-chain and coefficient $X(P(v_{0,\\alpha(0)}))\\alpha^*y$. These are precisely the $\\mathrm{BK}_A(XP)$ operators of [lem-coef-bousfield-kan-comparison-calculus], including the first face and identity insertion. Thus $\\operatorname{diag}U=\\mathrm{BK}_A(XP)$ with its displayed model. By the diagonal definition in that node, restriction of each bisimplicial map to bidegrees $(n,n)$ is a simplicial map. Restricting the pointwise equality of step 5 and the identity/composition equalities of step 6 gives the asserted strictly commutative diagonal square and strict functoriality. None of these calculations requires any equivalence assumption.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33 (PDF pp.16–17); agent expansion of the chain formulas, with no homotopy-equivalence claim used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-bousfield-kan-comparison-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: auxiliary ordinary two-sided bar comparison; explicit elementary expansion of Dwyer–Kan proof 9.10, pp.32–33, checked online."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +137,66 @@
    "results": "{\"t\": \"2026-10-17T08:41:51Z\", \"tool\": \"leanfinder\", \"query\": \"evaluation map naturality for Bousfield Kan simplicial replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.P_f_naturality\", \"AlgebraicTopology.DoldKan.Q_f_naturality\", \"AlgebraicTopology.DoldKan.PInfty_f_naturality\", \"AlgebraicTopology.DoldKan.QInfty_f_naturality\", \"AlgebraicTopology.DoldKan.natTransPInfty_f\", \"AlgebraicTopology.DoldKan.P_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.Q_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.natTransPInfty\"], \"digest\": \"1fab67bc9af0fad0\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:500–530 for SimplicialObject.augment; it extends already supplied augmentation data, not this chain-indexed construction. NatTrans.naturality gives only one square for a supplied transformation, not V, its operators and their laws. DoldKan.P_f_naturality and Q_f_naturality concern preadditive chain projections. Neither they nor generic Grothendieck.map_map in the hits state this bisimplicial evaluation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict naturality of evaluation augmentation of the simplicial replacement over a slice category",
+   "results": "{\"t\": \"2026-10-17T13:00:14Z\", \"tool\": \"leanfinder\", \"query\": \"strict naturality of evaluation augmentation of the simplicial replacement over a slice category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment_hom_app\", \"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.SimplicialObject.Augmented.w₀_assoc\", \"CategoryTheory.SimplicialObject.Augmented.whiskering\", \"CategoryTheory.SimplicialObject.Augmented.w₀\", \"CategoryTheory.SimplicialObject.Augmented.whiskeringObj\", \"CategoryTheory.SimplicialObject.augment_hom_zero\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\"], \"digest\": \"15c349387f344b5c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialObject.augment (Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:504–516) and CategoryTheory.nerve, nerveMap (Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:35,53). These give generic augmentations requiring compatibility or ordinary nerves, not V(P,X), its evaluation or the asserted strict functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-17T13:01:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"digest\": \"4b8320ba791eeca4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: NatTrans.naturality (Mathlib/CategoryTheory/NatTrans.lean:59) is the defining equation for a supplied transformation. It supplies neither this slice-chain construction nor its evaluation compatibility; other hits concern pullbacks/pushouts or Grothendieck maps."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|simplicial replacement|augment_hom_app",
+   "results": "{\"t\": \"2026-10-17T13:01:38Z\", \"tool\": \"grep\", \"query\": \"Bousfield|simplicial replacement|augment_hom_app\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bousfield hits concern localization, not the Bousfield–Kan chain construction; augment at Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:504 requires supplied augmentation data and compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bousfield Kan bar construction evaluation over comma categories is natural in the indexing functor and coefficient diagram",
+   "results": "{\"t\": \"2026-10-17T13:01:38Z\", \"tool\": \"leansearch\", \"query\": \"Bousfield Kan bar construction evaluation over comma categories is natural in the indexing functor and coefficient diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.lanEvaluationIsoColim\", \"CategoryTheory.Pi.comapEvalIsoEval\", \"CategoryTheory.Limits.colimit_map_colimitObjIsoColimitCompEvaluation_hom\", \"CategoryTheory.pi.coconeCompEval\", \"CategoryTheory.compEvaluation\", \"CategoryTheory.Limits.DiagramOfCones.ctorIdx\", \"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc\", \"CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation\"], \"digest\": \"504fb24c9caf2b99\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: lanEvaluationIsoColim (Mathlib/CategoryTheory/Functor/Flat.lean:302) compares ordinary left Kan extensions and colimits over costructured arrows, not these bisimplicial sets. Other hits are ordinary evaluation/limit formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial replacement of a diagram over an over category and the canonical evaluation map",
+   "results": "{\"t\": \"2026-10-17T13:01:41Z\", \"tool\": \"leanfinder\", \"query\": \"simplicial replacement of a diagram over an over category and the canonical evaluation map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Augmented.stdSimplex_obj_hom_app\", \"SimplicialObject.Split.natTransCofanInj\", \"SSet.Augmented.stdSimplex\", \"CategoryTheory.SimplicialObject.Augmented.toArrow\", \"CategoryTheory.SimplicialObject.augment_hom_app\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.cechNerve\"], \"digest\": \"f4d848f85c479c4e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialObject.augment (Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:504–516) and CategoryTheory.nerve, nerveMap (Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:35,53). These give generic augmentations requiring compatibility or ordinary nerves, not V(P,X), its evaluation or the asserted strict functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "augment",
+   "results": "{\"t\": \"2026-10-17T13:02:59Z\", \"tool\": \"grep\", \"query\": \"augment\", \"sub\": \"AlgebraicTopology/SimplicialObject/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"395\", \"397\", \"401\", \"406\", \"409\"], \"digest\": \"3674fe3d889f3e6f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: file-scoped grep returned line numbers as file labels; read Basic.lean:395–434 and 502–523 directly. This is augmented-object infrastructure and assumes augmentation compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|simplicial replacement|two.sided.bar",
+   "results": "{\"t\": \"2026-10-17T13:02:59Z\", \"tool\": \"grep\", \"query\": \"Bousfield|simplicial replacement|two.sided.bar\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/Localization/BousfieldTransfiniteComposition.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\"], \"digest\": \"370f458a37ce7791\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bousfield hits concern localization, not the Bousfield–Kan chain construction; augment at Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:504 requires supplied augmentation data and compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "def augment|theorem augment_hom_zero",
+   "results": "{\"t\": \"2026-10-17T13:03:37Z\", \"tool\": \"grep\", \"query\": \"def augment|theorem augment_hom_zero\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"09cb7fadec763e6f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bousfield hits concern localization, not the Bousfield–Kan chain construction; augment at Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:504 requires supplied augmentation data and compatibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ordinary-two-sided-bar-comparison",
@@ -89,5 +226,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ordinary-bar-evaluation-naturality",
+  "worker": "stage1",
+  "summary": "Q132: unchanged statement; checked Dwyer–Kan 9.10 online, both blueprint snapshots, exact project attachment search and Mathlib hits. Seven explicit operator calculations establish the bisimplicial constructions, evaluation, change-of-data maps, strict square and composition, and diagonal identification. No new nodes: each residual calculation uses only the supplied functor/naturality laws and the existing BK/simplicial-set statements.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint (current main-20261015 proof file in sk-thm-sf-package), displayed derived coefficient-adjunction calculation; existing ancestry via lem-coef-ordinary-two-sided-bar-comparison, Dwyer–Kan 9.10 slice evaluation and its strict naturality. No unit step or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-f1b4c50a0",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-f1b4c50a0 (reviewer sub-agent of L); spot-checked: PASS: I read the whole item and its 7 steps and checked each one; I made no fixes. I also read the cited statements (lem-coef-bousfield-kan-comparison-calculus for its BK formulas and diag definition, def-weil-pbc-simplicial-set, and def-coef-zigzag-homotopy-calculus as a statement dependency), the parent lem-coef-ordinary-two-sided-bar-comparison (its step 8 is the only user, and its step 4 regrouping matches V exactly), and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. Every calculation holds. (1) Postcomposing the slice arrows with P(v_{0,alpha(0)}) gives a contravariant functor. (2) The q-rows are BK_{C/Px_0}(X∘dom), and the mixed operators commute. (3) Evaluation commutes in both directions: X(Pv)X(t_0) = X(Pv t_0), and X(t_b)X(h_{0b})beta* = X(t_0)beta* = beta*X(t_0). (4) V' and U' are well typed and compatible with all operators, using strict PK = HP' on morphisms and naturality of eta. (5) The square is the naturality square of eta at t'_0. (6) For composite data, lambda_d = eta_{Jd} theta_d. (7) diag U equals BK_A(XP) literally. I tested the edge cases alpha(0) = 0, the d_0 faces, degeneracies, empty A, C = [0] and non-invertible eta; all hold. No weak-equivalence content of the BK node is used. Nothing is circular, there are no new nodes, and there is no duplicate: an rg over dag/nodes found only unrelated hits, and BK functoriality does not state this result. The Mathlib searches cover all three kinds, and I agree there is no Mathlib match. The route stays in the same unit, and no tool_uses are needed. I could not open Dwyer–Kan 9.10 myself: it is not under literature/ (the report has a WANTED line) and this machine blocks network access. That does not affect the verdict, because proof_origin is 'agent' and every step is an elementary calculation I checked independently. This is not a target node, and no SGA source is used."
  }
 }
