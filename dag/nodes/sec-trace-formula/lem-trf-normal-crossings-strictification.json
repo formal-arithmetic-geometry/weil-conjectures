@@ -16,7 +16,9 @@
   "def-weil-proper-morphism",
   "def-weil-pbc-scheme-reduction",
   "def-weil-etale-morphism",
-  "def-nagata-effective-cartier-ideal"
+  "def-nagata-effective-cartier-ideal",
+  "def-trf-normal-crossings-divisor",
+  "def-trf-smooth-strict-normal-crossings-divisor"
  ],
  "proof": [
   {
@@ -277,5 +279,25 @@
   "group": "Q129",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-cf9da88c3 (reviewer sub-agent of L); spot-checked: I read the whole item and all three new nodes and checked them against ILO VIII 4.1.2-4.1.8, Remark 4.2.2(i), Prop 4.2.8 and Lemma 4.2.9 (pp.117-121), and Stacks 0B8X (varieties.tex 4730-4754). The item's statement is unchanged and not weakened; it is ILO Step 2 with G=1 plus regular-to-smooth over a perfect field. Steps 1-8 each use the statements they cite with every hypothesis met: Cartier density, blowup properness and complement for a finite-type center on a Noetherian scheme, density preservation for a quasi-compact scheme-theoretically dense U, and the coordinate-center condition from the branch lemma. The induction invariants are stated explicitly, the m=1 identity-blowup case is handled, and the tower ends after at most d steps with D_N empty. lem-trf-nc-maximal-branch-blowup is correct by the 4.2.9 charts: strict transform V(prod_{j<=m, j!=i} t_j'). lem-trf-permissible-boundary-preservation is Lemma 4.2.9 with Z=H and V=M; the components of E and of the strict transform of H are globally regular, and I checked the codimension-1 center case. lem-trf-regular-perfect-field-smooth is stated exactly by the sorry-free slopmaster2 declaration AlgebraicGeometry.smooth_of_isRegular at Regular.lean:119-146 (sorry map 7d675a26: s=false, ts=false); the attachment is correct. The rg searches for normal crossings, snc, permissible, smooth_of_isRegular and perfect-field/regular/smooth found no duplicates. Small cases checked: empty Z, smooth Z, xy=0, a nodal curve, xyz=0, and characteristic p. No SGA is cited. I accept the 4 declared tool_uses: lem-pc-cartier-divisor-nowhere-dense and the three closed Nagata blowup nodes. Fixes, under fixes/dag/nodes/sec-trace-formula/: (1) B3 in both geometric nodes: 'Noetherian' cited only pqf-def-locnoeth, which defines locally Noetherian, so I added inline 'and quasi-compact', which the finite maximum m needs; (2) in the branch lemma, 'Near a point of M' now reads 'Etale locally at each point of M'.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a3b89b13f",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Wrote review.md and complete fixes. Mathematical statement passes; original and corrected modules compile cleanly. Reused landed SNC predicate and replaced placeholder second reading. Apply fixes with --drop-nodes def-trf-smooth-strict-normal-crossings-divisor."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalCrossingsStrictification",
+  "declaration": "AlgebraicGeometry.exists_normalCrossings_strictification",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalCrossingsStrictification.lean",
+  "statement": "theorem exists_normalCrossings_strictification (F : Type u) [Field F] [IsAlgClosed F] (V : Scheme.{u}) (f : V ⟶ Spec (.of F)) [IsIntegral V] [LocallyOfFiniteType f] [QuasiCompact f] (hV : ∀ x : V, ∃ U : V.affineOpens, x ∈ U.1 ∧ IsRegularRing Γ(V, U.1)) (Z : V.IdealSheafData) (hZ : Z.IsNormalCrossingsDivisor) : ∃ (V₂ : Scheme.{u}) (f₂ : V₂ ⟶ Spec (.of F)) (q : V₂ ⟶ V), IsIntegral V₂ ∧ Smooth f₂ ∧ LocallyOfFiniteType f₂ ∧ QuasiCompact f₂ ∧ q ≫ f = f₂ ∧ IsProper q ∧ IsIso (q ∣_ Z.support.compl) ∧ Dense ((q ⁻¹ᵁ Z.support.compl : V₂.Opens) : Set V₂) ∧ ((Z.comap q).radical).IsStrictNormalCrossingsDivisor f₂",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed def-trf-strict-normal-crossings-divisor predicate from Sheaf.AlgebraicGeometry.StrictNormalCrossingsDivisor; on the smooth finite-type output its pointwise local dimension codimension condition is the explicit pure-codimension intersection criterion of this node. Drop the duplicate new def-trf-smooth-strict-normal-crossings-divisor with --drop-nodes.",
+  "fixed_by": "NT-stage2-Codex-a3b89b13f"
  }
 }

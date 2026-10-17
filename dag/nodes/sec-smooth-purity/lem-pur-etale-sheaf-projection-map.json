@@ -21,7 +21,11 @@
   "def-weil-pbc-etale-site",
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-inverse-image-stalk-germ"
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "det-def-sfb-sheaf-tensor-structure",
+  "sk-def-sfb-sheaf-tensor",
+  "lemma-openclosed-stalk-upperstar",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
@@ -277,5 +281,39 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q128-3ccce8e5b (reviewer sub-agent of L); spot-checked: Reviewed the full item, route, cited DAG statements, and Stacks sources. Tag 0GKF supports the construction and stalk square; all six proof steps correctly handle sheafification, balancing, germs, arbitrary direct sums, and stalk conservativity. Edge cases and coefficient/base-change hypotheses check out. Review written to review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5acdcff6a",
+  "group": "Q52",
+  "result": "fix",
+  "note": "Review saved to review.md; complete replacements are in fixes/. Mathematics and signature checked. Repaired placeholder second reading, helper declaration inventory, blueprint tags, and stale docstring references. Immutable and corrected modules compile cleanly through scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap",
+  "declaration": "AlgebraicGeometry.Etale.etaleLowerShriekProjectionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSheafTensor",
+   "AlgebraicGeometry.Etale.etaleSheafTensorMap",
+   "AlgebraicGeometry.Etale.etaleSheafTensorSection",
+   "AlgebraicGeometry.Etale.etaleSumSection",
+   "AlgebraicGeometry.Etale.etaleLiftSection",
+   "AlgebraicGeometry.Etale.etaleProjectionSumStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionTensorStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionLiftStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionSourceStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionTargetStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionDirectSumTensorIso",
+   "AlgebraicGeometry.Etale.etaleLowerShriekProjectionMap"
+  ],
+  "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleSheafProjectionMap.lean",
+  "statement": "theorem etaleLowerShriekProjectionMap (A : Type (u + 1)) [CommRing A] {V T : Scheme.{u}} (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] : ∃ p : ∀ (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)), etaleSheafTensor A T ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj M) N ≅ (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj (etaleSheafTensor A V M ((upperStar (ModuleCat.{u + 1} A) e).obj N)), (∀ (M M' : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (N N' : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (f : M ⟶ M') (g : N ⟶ N'), etaleSheafTensorMap A ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).map f) g ≫ (p M' N').hom = (p M N).hom ≫ (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).map (etaleSheafTensorMap A f ((upperStar (ModuleCat.{u + 1} A) e).map g))) ∧ (∀ (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : V.Etale) (m : M.obj.obj (op W)) (n : N.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))), (p M N).hom.hom.app (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W)) (etaleSheafTensorSection A _ N ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W) (etaleSumSection A e M W m) n) = etaleSumSection A e _ W (etaleSheafTensorSection A M _ W m (etaleLiftSection A e N W n))) ∧ (∀ (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T), ((Scheme.pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).map (p M N).hom ≫ (etaleProjectionTargetStalkIso A e t M N).hom = (etaleProjectionSourceStalkIso A e t M N).hom ≫ (etaleProjectionDirectSumTensorIso A e t M N).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Returned-head repair F1–F3: tensor helpers are local to the item module; the general tensor dependency record is unchanged and the landed sfb tensor structure/tensor nodes are cited. The source stalk retains tensor N_t; the section equation uses lanUnit, toSheafify, the inverse-image unit and graph restriction; the stalk square uses fixed canonical comparisons and contains p.hom. The ModuleCat inverse-image repair module was removed; upperStarCompSheafFiberIso is imported from the recorded upstream module. Independent maintainer review: list the three tensor specialization helpers and assign their docstrings to this owning item; correct the obsolete inverseImage_module_stalk_germ documentation reference. Mathematical signatures unchanged.",
+  "fixed_by": "NT-stage2-Codex-5acdcff6a"
  }
 }
