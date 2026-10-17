@@ -25,7 +25,11 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-space-transport-classification",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -229,5 +233,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ef7909be9",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Statement, dependencies, universes, edge cases, docstrings, definitions, report sections, and compiler evidence checked; only theorem proof is sorry."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityYonedaPresheafLimits",
+  "declaration": "SSet.Enhanced.YonedaLimits.infinity_yoneda_presheaf_limits",
+  "declarations": [
+   "SSet.Enhanced.YonedaLimits.ConeComparisonIsEquivalence",
+   "SSet.Enhanced.YonedaLimits.ImageConeComparisonIsEquivalence",
+   "SSet.Enhanced.YonedaLimits.ImageConeIsLimit",
+   "SSet.Enhanced.YonedaLimits.ImageCoconeIsColimit",
+   "SSet.Enhanced.YonedaLimits.coneCylinder",
+   "SSet.Enhanced.YonedaLimits.OppositeImageComparisonIsEquivalence",
+   "SSet.Enhanced.YonedaLimits.PointwiseLimit",
+   "SSet.Enhanced.YonedaLimits.PointwiseColimit",
+   "SSet.Enhanced.YonedaLimits.SpaceValuedLimits",
+   "SSet.Enhanced.YonedaLimits.HomPresentation",
+   "SSet.Enhanced.YonedaLimits.infinity_yoneda_presheaf_limits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityYonedaPresheafLimits.lean",
+  "statement": "theorem infinity_yoneda_presheaf_limits : (∀ (J : SSet.{max (u + 1) v}), Presentability.IsSmall.{u, max (u + 1) v} J → ∀ P : J ⟶ transportSpaces.{u, v}, ∃ t : (coneCategory P) _⦋0⦌, IsLimiting P t) ∧ (∀ (E : SSet.{max (u + 1) v}) [Quasicategory E], TransportLocallySmall.{u, v} E → SpaceValuedLimits.{u, v} E ∧ SpaceValuedLimits.{u, v} E.op ∧ ∃ H : HomPresentation.{u, v} E, IsFullyFaithful (MonoidalClosed.curry H.hom.bifunctor) ∧ ∀ (J : SSet.{max (u + 1) v}), Presentability.IsSmall.{u, max (u + 1) v} J → ∀ P : J ⟶ E, (∀ t : (coneCategory P) _⦋0⦌, IsLimiting P t ↔ ∀ x : E _⦋0⦌, ImageConeComparisonIsEquivalence (transportHomRow H.hom.bifunctor x) P t) ∧ (∀ t : (coconeCategory P) _⦋0⦌, IsColimiting P t ↔ ∀ x : E _⦋0⦌, OppositeImageComparisonIsEquivalence (transportHomColumn H.hom.bifunctor x) P t)) ∧ (∀ (D : SSet.{u}) [Quasicategory D], IsFullyFaithful (CategoryTheory.Spaces.infinityYoneda D)) ∧ (∀ (K V : SSet.{max (u + 1) v}) [Quasicategory V], Presentability.IsSmall.{u, max (u + 1) v} K → ∀ (J : SSet.{max (u + 1) v}), Presentability.IsSmall.{u, max (u + 1) v} J → ∀ P : J ⟶ (ihom K).obj V, PointwiseLimit P ∧ PointwiseColimit P) ∧ (∀ (V : SSet.{max (u + 1) v}) [Quasicategory V], Presentability.HasSmallColimits.{u, max (u + 1) v} V → Presentability.HasSmallColimits.{u, max (u + 1) v} ((ihom Δ[1]).obj V) ∧ ∀ (J : SSet.{max (u + 1) v}), Presentability.IsSmall.{u, max (u + 1) v} J → ∀ (P : J ⟶ (ihom Δ[1]).obj V) (t : (coconeCategory P) _⦋0⦌), IsColimiting P t ↔ ImageCoconeIsColimit (evaluation Δ[1] V (stdSimplex.obj₀Equiv.symm 0)) P t ∧ ImageCoconeIsColimit (evaluation Δ[1] V (stdSimplex.obj₀Equiv.symm 1)) P t)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Independent small and containing universes. Large locally small categories use the normalized HomTransport of the actual twisted-arrow coupling, curried directly; the published small-category infinityYoneda is also covered. Canonical cone comparisons and their opposite cylinders retain all coherent legs. Statement dependencies gain the four already landed interfaces used in the signature. No natural-language statement or proof changes."
  }
 }

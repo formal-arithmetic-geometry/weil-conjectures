@@ -26,7 +26,11 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-bousfield-local-fibrations"
  ],
  "proof": [
   {
@@ -264,5 +268,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b9447689",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Statement, dependencies, source, edge cases, docstrings, report sections, and compiler evidence checked; no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DuggerLocalizationCriterion",
+  "declaration": "CategoryTheory.dugger_localization_criterion",
+  "file": "lean/Sheaf/CategoryTheory/DuggerLocalizationCriterion.lean",
+  "statement": "theorem dugger_localization_criterion {M : Type u} {N : Type u'} [Category.{v} M] [Category.{v'} N] [original : ModelCategory M] [ModelCategory N] [HasLimitsOfSize.{w, w} M] [HasColimitsOfSize.{w, w} M] [HasLimitsOfSize.{w, w} N] [HasColimitsOfSize.{w, w} N] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (hM : CombinatorialModelCategory.{u, v, w} M) (hN : CombinatorialModelCategory.{u', v', w} N) (hSM7 : SatisfiesSM7 M) (leftProper : (weakEquivalences M).IsStableUnderCobaseChangeAgainst (cofibrations M)) (L : M ⥤ N) (R : N ⥤ M) (adj : L ⊣ R) (hL : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → Cofibration (L.map f)) (hLT : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → WeakEquivalence f → Cofibration (L.map f) ∧ WeakEquivalence (L.map f)) (Q : M ⥤ M) (q : Q ⟶ 𝟭 M) (hQ : ∀ X : M, IsCofibrant (Q.obj X) ∧ Fibration (q.app X) ∧ WeakEquivalence (q.app X)) (surjective : ∀ {Y : N}, IsFibrant Y → ∀ {A : M} (r : A ⟶ R.obj Y), IsCofibrant A → Fibration r → WeakEquivalence r → WeakEquivalence (L.map r ≫ adj.counit.app Y)) : ∃ (I : Type w) (A B : I → M) (s : ∀ i : I, A i ⟶ B i), (∀ i : I, WeakEquivalence (L.map (Q.map (s i)))) ∧ ∃ localized : ModelCategory M, localized.categoryWithCofibrations.cofibrations = original.categoryWithCofibrations.cofibrations ∧ localized.categoryWithWeakEquivalences.weakEquivalences = @BousfieldLocalization.localEquivalences M _ original _ Q I A B s ∧ MorphismProperty.HasFunctorialFactorization localized.categoryWithCofibrations.cofibrations (localized.categoryWithFibrations.fibrations ⊓ localized.categoryWithWeakEquivalences.weakEquivalences) ∧ MorphismProperty.HasFunctorialFactorization (localized.categoryWithCofibrations.cofibrations ⊓ localized.categoryWithWeakEquivalences.weakEquivalences) localized.categoryWithFibrations.fibrations ∧ (∀ {X Y : M} (f : X ⟶ Y), localized.categoryWithCofibrations.cofibrations f → Cofibration (L.map f)) ∧ (∀ {X Y : M} (f : X ⟶ Y), localized.categoryWithCofibrations.cofibrations f → localized.categoryWithWeakEquivalences.weakEquivalences f → Cofibration (L.map f) ∧ WeakEquivalence (L.map f)) ∧ (∀ {X : M} {Y : N}, localized.categoryWithCofibrations.cofibrations (initial.to X) → IsFibrant Y → ∀ f : L.obj X ⟶ Y, WeakEquivalence f ↔ localized.categoryWithWeakEquivalences.weakEquivalences (adj.homEquiv X Y f))",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing combinatorial, tensor/cotensor, SM7 and localEquivalences interfaces. The actual localized ModelCategory is existential, with its original-model derived mapping test and its Quillen-equivalence criterion stated explicitly. Small means universe w independently of the object and Hom universes. No target simpliciality is assumed."
  }
 }
