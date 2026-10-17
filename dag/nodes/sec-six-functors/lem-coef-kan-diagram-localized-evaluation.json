@@ -14,9 +14,101 @@
   "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-enriched-diagram-rectification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work relative to $\\mathcal V$, enlarging only the universe containing the categories. The Kan model category of simplicial sets is combinatorial and simplicial for its usual Cartesian enrichment. Every simplicial set is cofibrant, since its map from the empty set is a monomorphism, and the fibrant objects are exactly the Kan complexes. Thus its bifibrant simplicial subcategory is precisely $\\operatorname{Kan}_{\\mathcal V}$, and the simplicial-model localization theorem identifies its coherent nerve with spaces. The projective structure on $\\mathsf D_K$ supplied by the presentation node is simplicial, with weak equivalences and fibrations objectwise. Its fibrant objects are precisely the diagrams with Kan values, so its ordinary fibrant subcategory is exactly $\\mathsf D_K^f$. The coherent nerve of the locally Kan category $\\operatorname{Kan}_{\\mathcal V}$ is a quasicategory; consequently $\\operatorname{Fun}(K,\\mathcal S_{\\mathcal V})$ is a quasicategory for every simplicial set $K$.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.3.2.18; Proposition A.3.3.2; Proposition 1.1.5.10; Scholze, Lecture II, basic fact (1), printed p.14."
+   }
+  },
+  {
+   "text": "For a chain $P_0\\to\\cdots\\to P_n$, define $\\widetilde P(x,i)=P_i(x)$. On a mapping simplicial set with $i\\leq j$, send $f:x\\to y$ to $P_j(f)\\circ a_{ij}(x)$, where $a_{ij}$ is the composite transformation from $P_i$ to $P_j$; for $i>j$ there is no input. Enriched naturality gives $P_j(f)a_{ij}(x)=a_{ij}(y)P_i(f)$ and therefore makes this assignment preserve compositions and identities. Conversely its restrictions recover the diagrams and the chain. The right adjoint $N_{\\mathrm{hc}}$ preserves products and equals the ordinary nerve on the discrete enriched category $[n]$. Hence applying it to $\\widetilde P$ and precomposing with $\\eta_K\\times1$ gives exactly the displayed $K\\times\\Delta^n$ map in the statement. Pulling a chain back along $[m]\\to[n]$ gives the same formula with that index map precomposed. This checks all faces and degeneracies, and constructs $e_K$ with its stated object and arrow formulas.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, coherent-nerve adjunction; elementary enriched evaluation on chains."
+   }
+  },
+  {
+   "text": "Let $a:Q\\to P$ be in $W_K$. Restriction of the map constructed in step 2 to $\\{k\\}\\times\\Delta^1$ is the image of $a(k):Q(k)\\to P(k)$ in the coherent nerve of Kan complexes. The simplicial-model localization comparison for simplicial sets identifies this canonical map on bifibrant objects with localization, so each weak homotopy equivalence $a(k)$ becomes an equivalence edge of $\\mathcal S_{\\mathcal V}$. The pointwise-equivalence theorem applies to the entire transformation $e_K(a)$ and to an arbitrary simplicial set $K$: all these components being equivalences implies that $e_K(a)$ is an equivalence in $\\operatorname{Fun}(K,\\mathcal S_{\\mathcal V})$. In particular $e_K$ inverts $W_K$, rather than merely giving equivalences between individual evaluated objects.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20; Kerodon Theorem 4.4.4.4 (01DK), pointwise detection of equivalence edges."
+   }
+  },
+  {
+   "text": "Put $A=\\mathsf D_K^{cf}$, regarded as a full simplicial subcategory, and write $A_0$ for its ordinary category. Apply enriched-diagram rectification with $\\mathcal M=\\mathsf{sSet}_{\\mathcal V}$, $\\mathcal C=\\mathfrak C[K]$, and $u=1$. This is a Dwyer--Kan equivalence, and the theorem requires no local Kan hypothesis on $\\mathfrak C[K]$ and no quasicategory hypothesis on $K$. Step 1 supplies its model hypotheses; the full-chunk convention in that theorem handles the size of the value category. It gives the enriched-evaluation equivalence $\\Phi:N_{\\mathrm{hc}}A\\simeq\\operatorname{Fun}(K,\\mathcal S_{\\mathcal V})$. Let $c:N(A_0)\\to N_{\\mathrm{hc}}A$ be induced by the simplicial functor from the discrete enrichment of $A_0$ to $A$, including each ordinary map as a constant simplex. Then $\\Phi c$ is the restriction of $e_K$. Indeed on a chain its $\\Delta^n$ parameter is the functor $\\mathfrak C[\\Delta^n]\\to[n]\\to A$; applying enriched evaluation sends a pair of mapping inputs to $P_j(f)a_{ij}(x)$, exactly the formula of step 2. All simplex operators are the restrictions of these same functors, so this identifies the functors on their whole nerves.",
+   "uses": [
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4 and Remark 4.2.4.5; Section 1.1.5. Explicit restriction to the ordinary nerve is an elementary evaluation calculation."
+   }
+  },
+  {
+   "text": "By the full functor-category universal property of homotopy coherent localization [def-coef-coherent-localization-interface], step 3 gives $E_K:\\mathcal L_K\\to\\operatorname{Fun}(K,\\mathcal S_{\\mathcal V})$ with $E_Kq_K\\simeq e_K$. Let $\\mathcal L_{cf}=N(A_0)[W_{cf}^{-1}]_\\infty$, where $W_{cf}$ is the restriction of the projective weak equivalences. Apply the simplicial-model localization theorem to $\\mathsf D_K$. Its assertions for the fibrant and bifibrant inclusions give an equivalence $j:\\mathcal L_{cf}\\simeq\\mathcal L_K$ and the canonical equivalence $\\lambda:\\mathcal L_{cf}\\simeq N_{\\mathrm{hc}}A$ induced by $c$. Step 4 identifies the restrictions of $E_Kj$ and $\\Phi\\lambda$ to $N(A_0)$. Full faithfulness in that universal property for $\\mathcal L_{cf}$ therefore gives $E_Kj\\simeq\\Phi\\lambda$. Both $j$ and $\\Phi\\lambda$ are equivalences, hence $E_K$ is an equivalence: a quasi-inverse is $j\\lambda^{-1}\\Phi^{-1}$, with inverse homotopies obtained from this displayed comparison and the inverse homotopies of $j,\\lambda,\\Phi$. The same comparison proves precisely the claimed agreement with enriched evaluation on projectively cofibrant-fibrant diagrams.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-coef-coherent-localization-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 and Remark 1.3.4.16, including restriction to fibrant and bifibrant objects and the full localization universal property."
+   }
+  },
+  {
+   "text": "Finally a projective cofibrant replacement $a:Q\\to P$ of a fibrant diagram may be chosen as a trivial fibration. Its source is cofibrant and is fibrant: $Q\\to P\\to *$ is a composite of fibrations (solve any lifting problem successively against its two factors). Thus $Q$ is in $A$ and $a$ is an objectwise weak equivalence between Kan-valued diagrams. Step 3 applies verbatim to give an equivalence $e_K(Q)\\to e_K(P)$ in the whole functor quasicategory. This also applies to any map satisfying the more explicit hypotheses in the statement, without requiring that it be the chosen functorial replacement.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16; functorial model factorizations and elementary successive lifting."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-enriched-diagram-rectification",
+  "def-coef-coherent-localization-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent derived Hom comparisons; agent-written deduction of localized evaluation from existing localization and rectification nodes, checked against HTT 4.2.4.4 and HA 1.3.4.20/1.3.4.16 online."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +144,45 @@
    "results": "{\"t\": \"2026-10-17T09:30:35Z\", \"tool\": \"leanfinder\", \"query\": \"Rigidification rectification equivalence between localization of strict enriched functors from the coherent realization of a simplicial set and homotopy coherent diagrams of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveAdjunction\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\"], \"digest\": \"d48daa3ede8e7eae\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary homotopy-category/localization, nerve, Kan-complex or strict-Segal declarations do not state the enriched-evaluation equivalence of infinity categories of whole coherent diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity localization of objectwise Kan simplicial diagrams is equivalent by enriched evaluation to the quasicategory of space valued diagrams",
+   "results": "{\"t\": \"2026-10-17T11:21:11Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity localization of objectwise Kan simplicial diagrams is equivalent by enriched evaluation to the quasicategory of space valued diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.SimplicialNerve\", \"SSet.QCat.bicategory\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"ce9f3c24775c189c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and strict category localization hits do not state this infinity-localized enriched diagram evaluation equivalence; read Mathlib/AlgebraicTopology/SimplicialNerve.lean, whose introduction lists the Kan-valued coherent nerve construction as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "rectif|coherent.*diagram|diagram.*localiz|localiz.*diagram",
+   "results": "{\"t\": \"2026-10-17T11:22:11Z\", \"tool\": \"grep\", \"query\": \"rectif|coherent.*diagram|diagram.*localiz|localiz.*diagram\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and strict category localization hits do not state this infinity-localized enriched diagram evaluation equivalence; read Mathlib/AlgebraicTopology/SimplicialNerve.lean, whose introduction lists the Kan-valued coherent nerve construction as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localization of a projective model category of simplicial diagrams presents the infinity category of functors to spaces",
+   "results": "{\"t\": \"2026-10-17T11:22:11Z\", \"tool\": \"leansearch\", \"query\": \"The localization of a projective model category of simplicial diagrams presents the infinity category of functors to spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.Functor.q_isLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"CategoryTheory.MorphismProperty.locallySmall_of_hasLocalization\", \"CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\"], \"digest\": \"8afdb312eef4aa7d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and strict category localization hits do not state this infinity-localized enriched diagram evaluation equivalence; read Mathlib/AlgebraicTopology/SimplicialNerve.lean, whose introduction lists the Kan-valued coherent nerve construction as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-17T11:22:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and strict category localization hits do not state this infinity-localized enriched diagram evaluation equivalence; read Mathlib/AlgebraicTopology/SimplicialNerve.lean, whose introduction lists the Kan-valued coherent nerve construction as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidification comparison between strict enriched diagrams on coherent realization and homotopy coherent functors with Kan complex values",
+   "results": "{\"t\": \"2026-10-17T11:22:17Z\", \"tool\": \"leanfinder\", \"query\": \"Rigidification comparison between strict enriched diagrams on coherent realization and homotopy coherent functors with Kan complex values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.SimplicialThickening.functor_id\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.StrictSegal.isRightKanExtension\"], \"digest\": \"b3497da67ae7ec3f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and strict category localization hits do not state this infinity-localized enriched diagram evaluation equivalence; read Mathlib/AlgebraicTopology/SimplicialNerve.lean, whose introduction lists the Kan-valued coherent nerve construction as future work."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-universal-left-fibration-identity",
@@ -82,5 +209,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-diagram-localized-evaluation",
+  "worker": "stage1",
+  "summary": "Constructed evaluation on all ordinary chains; proved weak-equivalence inversion by pointwise detection and proved the resulting localization functor is an equivalence by comparison on the bifibrant subcategory. Reused existing nodes; no new nodes and no statement change.",
+  "blueprint": "Realizes the coherent first and last derived Hom comparisons in paragraph 2 of prop-coef-integral-exceptional-adjoint, through the recorded universal-family ancestry, by retaining transformations and all higher diagram simplices.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only the generic closure of Fun(K,C) under quasicategories is used, for arbitrary simplicial K; this is a foundational tool and does not replace the coefficient-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-e1f8b10c0",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-e1f8b10c0 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of every cited node: def-cbc-enhanced-diagrams-cones, coherent-nerve-comparison, simplicial-right-fibration-presentation (covariant D^cov paragraph), simplicial-model-nerve-localization, enriched-diagram-rectification, simplicial-presheaf-projective-model, kan-quillen-right-proper, cbc-enhanced-functor-cone-calculus, infinity-pointwise-equivalences and def-coef-coherent-localization-interface. I also read the users (universal-left-fibration-identity step 6, kan-diagram-evaluation-restriction), the unit and chapter records, and the blueprint ancestor's proof paragraph 2. The statement is correct and unchanged; no target is weakened. Small cases K=empty, Delta^0, Delta^1 and the empty Kan complex all hold. Step 2: I checked the chain functor's compatibility with composition by hand, using enriched naturality of a_jk; N_hc preserves products and N_hc[n]=Delta^n. Step 3: the edge {k}xDelta^1 is a(k), which is an equivalence by the model-localization node; pointwise detection then covers the whole transformation for arbitrary K. Step 4: every rectification hypothesis holds (u=1, no local Kan condition on C[K], sSet combinatorial simplicial, sSet^cf=Kan_V), and Phi composed with c equals e_K strictly on constant-simplex chains. Step 5: the j and lambda argument is correct. Step 6: Q is cofibrant-fibrant by successive lifting. No new nodes. Duplicate check against simplicial-model-coherent-diagrams, cone-straightening-coherent-evaluation, fibrant-subcategory-localization, chunk-localized-evaluation-exponential and space-valued-straightening: none states this result. No cycle. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, used only for 'Fun(K,C) is a quasicategory'. FIX (B3/C1): step 5 uses the functor-category universal property for the localizations L_K and L_cf of subcategories. The model-localization node states it only for N(M)[W^-1]; the defining property is in def-coef-coherent-localization-interface, which the step did not cite. I added it to step 5 uses, proof_deps and the step text in fixes/dag/nodes/sec-six-functors/lem-coef-kan-diagram-localized-evaluation.json; it is an unmerged definition of the same unit and creates no cycle. HTT/HA are online-only (WANTED); no SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }

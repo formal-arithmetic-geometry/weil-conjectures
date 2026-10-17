@@ -16,9 +16,94 @@
   "def-weil-l-adic-numbers",
   "sk-prop-sfb-qlbar-colimit-x"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [sk-prop-sfb-qlbar-colimit-x] with $E=\\mathbf Q_\\ell$: its final assertion identifies $R_X$ with $\\varprojlim_{n\\ge1}A_{n,X}$ as sheaves of rings. By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], this limit has sections the compatible tuples $(a_n)_{n\\ge1}$; the indexing category is the small ordered set of positive integers with arrows towards smaller indices. The coordinatewise ring operations satisfy the limit universal property, so $\\rho_r$ evaluates the $r$-th coordinate and is a ring homomorphism.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/_section.md",
+    "place": "Final paragraph, integral comparison for E = Q_ell; Stacks Tag 00W2 for sectionwise limits"
+   }
+  },
+  {
+   "text": "For $n,r\\ge1$, the additive map $j_{n,r}:\\mathbf Z/\\ell^n\\to\\mathbf Z/\\ell^{n+r}$, $[k]\\mapsto[\\ell^rk]$, is injective with image the kernel of reduction to $\\mathbf Z/\\ell^r$: both claims follow by cancelling $\\ell^r$ in the divisibility relation $\\ell^{n+r}\\mid\\ell^rk$. This gives the same assertion on the constant sheaves of [def-weil-pbc-constant-sheaf]. Indeed, [lem-weil-pbc-site-sheafification-sections-local] represents sections locally by labels, and equality of their images becomes equality of labels after a further cover. Injectivity on labels therefore gives injectivity on sections. A section in the reduction kernel has, after refining, a label divisible by $\\ell^r$; divide that label using $j_{n,r}$. These local divided sections agree on overlaps by injectivity, and hence glue uniquely. Thus every kernel section has a unique divided section in $A_{n,X}$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Example constant-sheaf (Tag 0H7J) and Lemma sections-sheafification (Tag 00WK); explicit finite-label divisibility"
+   }
+  },
+  {
+   "text": "Let $a=(a_n)_n\\in R_X(U)$ with $a_r=0$. For each $n\\ge1$, $a_{n+r}$ reduces to zero at level $r$, so Step 2 gives a unique $b_n\\in A_{n,X}(U)$ with $j_{n,r}(b_n)=a_{n+r}$. Reducing the equation for $b_{n+1}$ to level $n+r$ gives $j_{n,r}(b_{n+1}\\bmod\\ell^n)=a_{n+r}$; uniqueness gives $b_{n+1}\\bmod\\ell^n=b_n$. The sectionwise limit of [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] yields $b\\in R_X(U)$. Reducing $j_{n,r}(b_n)=a_{n+r}$ to level $n$ gives $\\ell^rb_n=a_n$, hence $\\ell^rb=a$. Conversely $(\\ell^rb)_r=0$. Consequently $\\ker\\rho_r(U)=\\ell^rR_X(U)$ for every $U$; this presheaf image is already the kernel sheaf, so it also equals the image ideal sheaf in the statement.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/_section.md",
+    "place": "Integral inverse-limit comparison; explicit compatible-coordinate kernel calculation"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-constant-sheaf] and [lem-weil-pbc-site-sheafification-sections-local], any section of $A_{r,X}$ is locally the image of a label $c\\in\\mathbf Z/\\ell^r$. Choose an integer representative $k$ of $c$. On each covering object the labels $[k]\\in\\mathbf Z/\\ell^n$ define compatible sections of $A_{n,X}$ for all $n$, hence a section of $R_X$ by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] and Step 1. Its $r$-th coordinate is $c$. This proves local surjectivity of $\\rho_r$; no assertion that these lifts themselves glue is needed.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J and 00WK, constant sheaves and local representatives; Tag 00W2 for the compatible tuple"
+   }
+  },
+  {
+   "text": "Form the presheaf of quotient rings $P(U)=R_X(U)/\\ell^rR_X(U)$, with operations and quotient maps of [def-weil-pbc-algebra-hom-quotient]. Step 3 makes its map $\\varphi:P\\to A_{r,X}$ injective on every object; Step 4 makes it locally surjective. Thus [lem-weil-pbc-site-sheafification-iso-locally-bijective], applied to the underlying additive presheaves, makes $\\varphi^\\#:P^\\#\\to A_{r,X}$ an isomorphism. This $P^\\#$ is the sheaf quotient: a morphism from $R_X$ to a sheaf annihilating $\\ell^rR_X$ factors uniquely through each quotient $P(U)$, compatibly with restrictions, and then uniquely through sheafification by [def-weil-pbc-sheafification]. The same argument for ring maps gives its quotient ring operations. The induced map preserves these operations since it is induced locally by the ring maps $\\rho_r$; its inverse preserves them by bijectivity. We have the required ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sheafification universal property (Tag 00WH); local bijectivity criterion as stated in the cited node"
+   }
+  },
+  {
+   "text": "Give $A_{r,X}$ its $R_X$-action through $\\rho_r$. For local representatives $a,x\\in R_X$, the quotient map satisfies $\\overline{ax}\\mapsto\\rho_r(a)\\rho_r(x)$, so the ring isomorphism of Step 5 is $R_X$-linear. Finally the projections in [sk-prop-sfb-qlbar-colimit-x] satisfy $\\rho_r=\\operatorname{red}_{r+1,r}\\rho_{r+1}$. Since $\\ell^{r+1}R_X\\subseteq\\ell^rR_X$, the quotient transition is induced by the identity of $R_X$. Both composites send the class of every local $x$ to $\\rho_r(x)$; local representatives in the sheaf quotients therefore give equality of the two morphisms. This proves the claimed compatibility for all $r$.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/_section.md",
+    "place": "Integral-limit projections and their reduction compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Tate twists, integral coefficient comparison; explicit finite-label division, compatible-coordinate kernel, and sheaf quotient argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +165,127 @@
    },
    "date": "2026-10-17",
    "verdict": "no match: PreTilt, untilt and period-ring constructions do not identify the pro-etale sheaf quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of reduction from the inverse limit of Z modulo ell to n to Z modulo ell to r equals ell to r times the inverse limit, and the reduction is surjective",
+   "results": {
+    "t": "2026-10-17T09:24:02Z",
+    "tool": "leansearch",
+    "query": "The kernel of reduction from the inverse limit of Z modulo ell to n to Z modulo ell to r equals ell to r times the inverse limit, and the reduction is surjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AdicCompletion.surjective_evalₐ",
+     "AdicCompletion.kerProj.congr_simp",
+     "AddCommGrpCat.kernelIsLimit",
+     "Submodule.ker_mkQ",
+     "ModuleCat.kernelIsLimit",
+     "AdicCompletion.kerProj_of",
+     "IsLocalRing.ker_residue",
+     "RingHom.ker_isRadical_iff_reduced_of_surjective"
+    ],
+    "digest": "a6e0ade3e2bef37a"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the listed declarations do not state the pro-etale coefficient sheaf quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.toZModPow, RingHom.ker, Function.Surjective",
+   "results": {
+    "t": "2026-10-17T09:24:02Z",
+    "tool": "loogle",
+    "query": "PadicInt.toZModPow, RingHom.ker, Function.Surjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the listed declarations do not state the pro-etale coefficient sheaf quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient by a prime power of the pulled back condensed p-adic integer ring sheaf on a scheme pro-etale site is the constant finite residue ring sheaf, compatibly with reductions",
+   "results": {
+    "t": "2026-10-17T09:24:10Z",
+    "tool": "leanfinder",
+    "query": "The quotient by a prime power of the pulled back condensed p-adic integer ring sheaf on a scheme pro-etale site is the constant finite residue ring sheaf, compatibly with reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "PadicInt.toZMod_eq_residueField_comp_residue",
+     "PreTilt",
+     "WittVector.mk_pow_fontaineTheta",
+     "PadicInt.residueField",
+     "AlgebraicGeometry.Scheme.residue_descResidueField",
+     "PreTilt.mk_comp_untilt_eq_coeff_zero"
+    ],
+    "digest": "2dac3b22294555a6"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the listed declarations do not state the pro-etale coefficient sheaf quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any site, the inverse limit of constant residue sheaves Z/p^n has kernel of its r-th projection equal to p^r times the limit, by compatible coordinate division",
+   "results": {
+    "t": "2026-10-17T09:41:19Z",
+    "tool": "leanfinder",
+    "query": "On any site, the inverse limit of constant residue sheaves Z/p^n has kernel of its r-th projection equal to p^r times the limit, by compatible coordinate division",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.ker_toZModPow",
+     "BDeRhamPlus",
+     "BDeRham",
+     "WittVector.ker_constantCoeff",
+     "AdicCompletion.kerProj_of",
+     "PadicInt.ker_toZMod",
+     "PadicInt.lift_sub_val_mem_span",
+     "WittVector.ker_map_le_ker_mk_comp_ghostComponent"
+    ],
+    "digest": "cfb810ffd186248c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the listed declarations do not state the pro-etale coefficient sheaf quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_toZModPow|surjective_evalₐ|kerProj_of",
+   "results": {
+    "t": "2026-10-17T10:05:36Z",
+    "tool": "grep",
+    "query": "ker_toZModPow|surjective_evalₐ|kerProj_of",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Padics/RingHoms.lean",
+     "Mathlib/NumberTheory/Padics/RingHoms.lean",
+     "Mathlib/NumberTheory/Padics/RingHoms.lean",
+     "Mathlib/NumberTheory/Padics/RingHoms.lean"
+    ],
+    "digest": "bf360a4420f5348b"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the listed declarations do not state the pro-etale coefficient sheaf quotient"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "nt-target-poincare-tate-bc",
@@ -102,5 +304,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "worker": "stage1",
+  "summary": "Retained the integral inverse-limit route and unchanged statement. Repaired doubled TeX escapes, supplied finite constant-sheaf division by local representatives, distinguished local lifts from quotient classes, and used the precise sheafification local-bijectivity criterion. No new nodes were needed.",
+  "blueprint": "Tate-twist unit, paragraph defining the integral inverse-limit twist and comparing sk-prop-sfb-qlbar-colimit-x: proves the quotient comparison needed by the exact upstream Tate construction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "why": "Generic sectionwise limit lemma for the countable coefficient tower; the Tate-twist unit supplies no site-limit construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local-representative and local-equality lemma for sheafification, used for finite constant coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic local-bijectivity criterion, used only to identify the sheafification of the presheaf quotient with the finite coefficient sheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-265c12994",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-265c12994 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, all 6 steps, split_report and tool_uses. Also read the cited statements: sk-prop-sfb-qlbar-colimit-x (E=Q_l, a ring isomorphism R_X ≅ lim A_n for any scheme), sectionwise-limits 00W2, constant sheaf 0H7J, sections-local 00WK, algebra-hom-quotient, locally-bijective criterion and sheafification 00WH. Checked the main-20261015 Tate-twist unit and sk-prop source texts, and verified the Stacks labels in sites.tex. Coefficient check: R_X = p_X^* C(-,Z_l), the same object as O_{E,X} in sk-prop. rho_r is defined precisely as that isomorphism followed by the r-th projection. There is no base change, the statement is unchanged and not weakened, and the scope is arbitrary X with no l-invertibility needed. Steps: the cancellation l^{n+r} | l^r k <=> l^n | k gives the finite-label injection and its kernel. Labels pass to sections by local representatives and local equality. The identity red∘j_{n+1,r} = j_{n,r}∘red gives the compatible divided tuple, so ker rho_r(U) = l^r R_X(U) on every U. Integer lifts give local surjectivity. The presheaf quotient is sectionwise injective and locally surjective, so its sheafification is A_r; ring and module structures and the transition compatibility are checked on local representatives. All steps are correct and the elementary flags are fair. Small cases: empty X, r=1, characteristic l, a w-contractible U (C(S,Z_l)/l^r = C(S,Z/l^r)). Routes: sk-prop is on the unit's route, the three generic site-lemma tool_uses are accepted, the graph is acyclic, and there are no new nodes. Two notes, not faults: (1) the report missed an overlap with lem-weil-pbc-completed-constant-sheaf-reduction and clause 1 of det-prop-integral-criterion-constant-coefficients; the item is more specific (rho_r-induced ring/module isomorphism plus transitions), so this is a possible future merge or pointer. (2) The existing node lem-weil-pbc-site-sheafification-iso-locally-bijective cites the wrong Stacks tag (00WM is a definition; the right ones are 00WN with 00WK). I left it unedited because this item does not own that node. blueprint.from.node is null, as already accepted at the Q95 target review. No fixes."
  }
 }
