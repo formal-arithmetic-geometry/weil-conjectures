@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-tw-root-of-unity-modulus",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Modulus of a root of unity",
@@ -17,14 +17,20 @@
  ],
  "proof": [
   {
-   "text": "If $\\zeta^m=1$ for some $m\\geq1$, then multiplicativity of the\nabsolute value gives $|\\zeta|^m=1$, hence $|\\zeta|=1$; the same\nargument applies to the complex modulus of $\\iota(\\zeta)$. Weight zero\nis the case $w=0$ of [def-tw-eigenvalue].",
+   "text": "Let $m\\ge1$ with $\\zeta^m=1$. Applying the field isomorphism $\\iota$ gives $(\\iota(\\zeta))^m=1$, and [lem-tw-complex-norm-root-of-unity] gives $\\|\\iota(\\zeta)\\|=1$. By the absolute-value clause of [def-tw-eigenvalue], this is $|\\zeta|=1$; its weight clause then gives weight $0$, since $q^{0/2}=1$. The same norm equality is exactly the asserted modulus-one statement for the complex number $\\iota(\\zeta)$. The hypotheses $m\\ge1$ and hence $m\\ne0$ supply the nonzero-exponent assumption of the cited norm lemma.",
    "uses": [
+    "lem-tw-complex-norm-root-of-unity",
     "def-tw-eigenvalue"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-tw-root-of-unity-modulus.proof.md",
+    "place": "proof paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "lem-tw-complex-norm-root-of-unity",
   "def-tw-eigenvalue"
  ],
  "proof_origin": {
@@ -32,9 +38,45 @@
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-tw-root-of-unity-modulus.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "root of unity has norm one under a field embedding into complex numbers",
+   "results": "8 hits: Complex.norm_eq_one_of_mem_rootsOfUnity, Complex.nnnorm_eq_one_of_pow_eq_one, Complex.norm_eq_one_of_pow_eq_one, IsPrimitiveRoot.nnnorm_eq_one, IsPrimitiveRoot.norm'_eq_one, Circle.norm_coe, Circle.normSq_coe, IsPrimitiveRoot.norm_eq_one_of_linearly_ordered",
+   "date": "2026-10-17",
+   "verdict": "generalization: Complex.norm_eq_one_of_pow_eq_one specializes to the image under the field isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "NormedDivisionRing, IsPrimitiveRoot, norm_eq_one_of_pow_eq_one",
+   "results": "0 hits; loogle reported unknown identifier norm_eq_one_of_pow_eq_one",
+   "date": "2026-10-17",
+   "verdict": "unavailable/invalid query; retried with a Mathlib name query below"
+  },
+  {
+   "tool": "grep",
+   "query": "norm_eq_one_of_pow_eq_one|root of unity.*norm|frobeniusWeight_eq_zero",
+   "results": "0 hits in Mathlib from msearch grep",
+   "date": "2026-10-17",
+   "verdict": "no match in indexed Mathlib scope; project source grep separately found the finished frobeniusWeight theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a root of unity has complex absolute value one under a field isomorphism",
+   "results": "8 hits including Complex.norm_eq_one_of_pow_eq_one, Complex.norm_eq_one_of_mem_rootsOfUnity, Complex.nnnorm_eq_one_of_pow_eq_one, IsPrimitiveRoot.nnnorm_eq_one, IsPrimitiveRoot.norm'_eq_one, Polynomial.map_mem_nthRootsFinset_one, rootsOfUnityCircleEquiv, IsPrimitiveRoot.map_rootsOfUnity",
+   "date": "2026-10-17",
+   "verdict": "generalization: Complex.norm_eq_one_of_pow_eq_one specializes to the image under the field isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusWeight_eq_zero_of_pow_eq_one",
+   "results": "1 hit: /home/ubuntu/weil-src-slopmaster2/WeilConjectures/EtaleCohomology/Purity/RealSheaves/RankOne.lean:56",
+   "date": "2026-10-17",
+   "verdict": "attachment candidate found but rejected: theorem concludes only frobeniusWeight=0, not both modulus clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +98,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-tw-root-of-unity-modulus",
+  "worker": "stage1",
+  "summary": "Read the imported item, its rank-one unit and chapter, the master and main-20261015 blueprint proof, and the pinned source theorem. The imported natural-language statement has both the absolute-value and complex-modulus clauses, whereas the finished source theorem frobeniusWeight_eq_zero_of_pow_eq_one concludes only a weight equality, so it is not an exact attachment. I split the proof into one complete step using the exact Mathlib complex norm theorem and the existing eigenvalue definition; no new non-Mathlib node was needed.",
+  "blueprint": "The single proof step realizes the main-20261015 (and identical master) proof sentence that multiplicativity of absolute value yields modulus one and the final sentence that weight zero is the w=0 case of def-tw-eigenvalue.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-948ab1b4b",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-948ab1b4b (reviewer sub-agent of L); spot-checked: I read the item, the new node, def-tw-eigenvalue, def-weil-complex-absolute-value, the master and main-20261015 blueprint texts (identical), unit sk-p-real-rankone and the chapter. The item statement matches the blueprint word for word. Step 1: ζ^m=1 with m≥1, and ι is a ring homomorphism, so (ιζ)^m=1. Then Complex.norm_eq_one_of_pow_eq_one (Mathlib/Analysis/Complex/Basic.lean:101-102, exact, read directly; it needs n≠0, which m≥1 supplies) gives |ι(ζ)|=1. Since |ζ|_ι:=|ι(ζ)| in def-tw-eigenvalue, this gives |ζ|=1 and weight 0 (q^{0/2}=1), and it holds for every ι. The step realizes the blueprint proof sentence. It cites only a definition and a Mathlib leaf, so it needs no tool_uses. The new node lem-tw-complex-norm-root-of-unity is a correct Mathlib leaf: statement only, self-contained, and strictly smaller than the item (D1 OK). The hypothesis n≠0 is necessary (z=2, n=0 fails). The worked cases z=1, -1 and i all hold. A grep over the DAG for root-of-unity/norm statements found no duplicate (lem-tw-multiplicativity and lem-wf-rank-one-component-modulus state different facts). The worker was right to reject frobeniusWeight_eq_zero_of_pow_eq_one as an attachment: it gives only the weight clause. No SGA citation, no target touched, no fixes."
+ }
 }
