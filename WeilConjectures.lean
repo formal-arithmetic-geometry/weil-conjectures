@@ -1176,6 +1176,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericFiber.GeometricGenericFib
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.ProjectiveCoordinate
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.RadicialSmoothing
 public import WeilConjectures.AlgebraicGeometry.GenericFiniteness
+public import WeilConjectures.AlgebraicGeometry.GenericPointProjection
 public import WeilConjectures.AlgebraicGeometry.GenericStalkVanishingPropagation
 public import WeilConjectures.AlgebraicGeometry.GeometricFiberFiniteEtale
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
@@ -3863,7 +3864,6 @@ public import WeilConjectures.RingTheory.UniversalFirstOrderThickeningUniqueness
 public import WeilConjectures.RingTheory.UnramifiedSmoothConormalChartFlat
 public import WeilConjectures.RingTheory.ZariskiPairFlatIntegralIsomorphism
 public import WeilConjectures.RingTheory.ZariskiPairRankOnePropagation
-public import WeilConjectures.Scratch.artingabber
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
@@ -3886,6 +3886,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Sections
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.BaseChange.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
+public import WeilConjectures.SixFunctors.Etale.ArtinVanishing
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation
@@ -4164,6 +4165,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Finite
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.Perverse.AffineDirectImage
 public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.SixFunctors.Etale.Perverse.Operations
@@ -4188,6 +4190,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionSplitMono
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
