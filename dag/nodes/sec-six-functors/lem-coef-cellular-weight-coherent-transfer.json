@@ -13,48 +13,142 @@
   "lem-coef-enriched-category-tensor-calculus",
   "lem-coef-enriched-simplicial-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the compatible enriched simplicial presentation for the small family consisting of F, G, the h_j, and all specified intertwiners. The presentation represents every functor, transformation, and higher simplex and may be enlarged by the cotensors used by the cellular construction. Apply the flexible-weight enriched-lift theorem to F and to G: for a cellular W it constructs the complete enriched weighted-limit categories, identifies their underlying simplicial categories with strict W-cones, and retains all transformation simplices. Thus the strict cone categories used below are supplied by that theorem; they are not obtained merely by imposing equations in an unproved full subcategory.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-enriched-simplicial-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Agent proof; flexible-weight construction and compatible presentation"
+   }
+  },
+  {
+   "text": "For the representable cell J(j,-), the flexible-weight theorem identifies the weighted construction with the cotensor/evaluation construction at F(j), and similarly at G(j). Apply h_j to the evaluation object and use the specified equivalences G(alpha)h_j ≃ h_kF(alpha), including their unit, composition, and higher simplicial compatibilities. The compatible presentation realizes these data on the entire simplicial set of representable cones. A coherent map of representable cones is sent to its component transformation together with every coherence simplex, so this is an enriched functor and preserves composition and identities at the representable stage.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-enriched-simplicial-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Agent proof; representable-cell case"
+   }
+  },
+  {
+   "text": "Fix a complete $\\mathcal V$-category $B$ as vertex. By the functor-category clause of the flexible-weight theorem, enriched functors $B\\to\\{W,G\\}_J$ and their transformation simplices are the strict enriched $W$-cones with vertex $B$, whose $r$-simplices are natural maps $W\\times\\Delta^r\\to Q_G(-)$, where $Q_G(j)=U\\operatorname{Fun}_{\\mathcal V}(B,G_j)$; likewise for $F$. The presentation realizes $Q_F,Q_G$ as strict simplicial diagrams and postcomposition with $h_j$ as strict maps $Q_F(j)\\to Q_G(j)$, with the intertwiner simplices. Assume the transfer through a cellular stage $W_\\alpha$ and attach a coproduct of cells $J(j,-)\\times\\partial\\Delta^n\\to J(j,-)\\times\\Delta^n$. By the theorem's pushout-to-pullback clause and the Yoneda lemma, extending a strict $W_\\alpha$-cone $c$ over one cell means choosing an $n$-simplex $\\sigma$ of $Q_G(j)$ with $\\sigma|_{\\partial\\Delta^n}$ equal to the boundary prescribed by $c$. The $F$-cone gives an $n$-simplex $\\tau$ of $Q_F(j)$, and $h_j\\tau$ has boundary connected to the prescribed one by the already-constructed equivalence $e$. This $e$ is an edge of $\\operatorname{Fun}(\\partial\\Delta^n,Q_G(j))$ whose vertex components are equivalences, hence an equivalence edge by the componentwise criterion for cotensors in the enriched tensor calculus. Restriction $\\operatorname{Fun}(\\Delta^n,Q_G(j))\\to\\operatorname{Fun}(\\partial\\Delta^n,Q_G(j))$ is an isofibration by the exponential-isofibration theorem (take $\\mathcal C=Q_G(j)$, $\\mathcal D=\\Delta^0$). Lift the inverse of $e$ to an equivalence $h_j\\tau\\to\\sigma$ whose boundary is exactly the prescribed boundary. Choose independently for each cell of the coproduct, since coproducts of cells give products. For $n=0$ the boundary is empty and $\\sigma=h_j\\tau$ may be taken. Data already defined on $W_\\alpha$ are never changed. Applying this with $B=\\{W,F\\}_J$ to its evaluation cone gives a strict $W$-cone on $G$ with that vertex, hence an enriched functor $\\{W,F\\}_J\\to\\{W,G\\}_J$. Its value on each object is the cone transferred with vertex $\\mathbf 1$.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Agent proof; successor cell and uniform boundary lifting"
+   }
+  },
+  {
+   "text": "Higher simplices and maps are transferred in the same way, with the cells already transferred on their faces held fixed. For an $r$-simplex of cones whose faces are already transferred, the extension over a cell is a lift against the corner map for $\\partial\\Delta^n\\subseteq\\Delta^n$ and the restriction $p:\\operatorname{Fun}(\\Delta^r,Q_G(j))\\to\\operatorname{Fun}(\\partial\\Delta^r,Q_G(j))$. Here $p$ is an isofibration by the exponential-isofibration theorem, so the corner map is an isofibration by the same theorem. The equivalence to be lifted is componentwise an equivalence, hence an equivalence edge by the componentwise criterion of the tensor calculus. A coherent map between two specified transformations $h\\Rightarrow h'$ gives a coherent $W\\times\\Delta^1$-shaped datum from $h\\circ\\mathrm{ev}$ to $h'\\circ\\mathrm{ev}$ with vertex $\\{W,F\\}_J$. Its components need not be equivalences. Transferring it, with both ends already transferred, is the case $r=1$. By the functor-category clause of the flexible-weight theorem, the resulting $1$-simplex of strict $W$-cones is an enriched transformation between the transferred enriched functors. Degenerate simplices and $2$-simplices of composites are transferred by the same lifts. The lifted equivalences therefore identify the transfers of identities and composites with identities and composites, coherently. Hence the composition and identity clauses hold; strict equality is not claimed. The relative-cone-equivalence lemma is not needed, since no universal colimit condition is invoked.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Agent proof; coherence and naturality of the successor construction"
+   }
+  },
+  {
+   "text": "At a limit ordinal $\\beta$, a continuous cellular presentation has $W_\\beta=\\operatorname{colim}_{\\alpha<\\beta}W_\\alpha$. A natural map out of $W_\\beta\\times\\Delta^r$ is therefore exactly a compatible family of natural maps out of the $W_\\alpha\\times\\Delta^r$. Each successor choice restricts exactly to the data at earlier stages, because boundaries are held fixed. Hence the family glues to a strict $W_\\beta$-cone, and the component equivalences, each living on a cell attached at some earlier stage, glue likewise. This is an ordinary transfinite recursion with choices at successor stages and unions at limit stages. No homotopy limit of a tower is needed, because the transferred data are strict and agree on restrictions. The flexible-weight theorem says that continuous composites give inverse limits, with mapping objects the corresponding limits; so the glued data are objects and simplices of $\\{W_\\beta,G\\}_J$. By transfinite induction, the transfer exists for every small cellular $W$, including coproducts of cells at one stage. The transferred cone is connected to $h_jb_j$ by the lifted equivalences on every component and every cell restriction. The coherent-end and pullback formulas for mapping objects are functorial in their arguments through precomposition and postcomposition. These equivalences therefore identify the mapping-object diagrams of transferred cones with those of the unrectified component data, including every cell-boundary map.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-enriched-simplicial-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Agent proof; limit stages and transfinite induction"
+   }
+  },
+  {
+   "text": "For a relative cellular inclusion $R\\to W$, begin with the specified strict transferred $R$-cone and its specified coherent equivalence to the proposed component data, as the initial stage $W_0=R$. Then perform the successor construction of Step 3 and the gluing of Step 5 along a relative cellular presentation over $R$. At every cell, the lift has the boundary, including all $R$-data, held fixed exactly. Data on $R$ are therefore never changed, so the resulting $W$-cone restricts exactly to the given $R$-cone and its equivalence extends the given one. Running the construction with an arbitrary vertex $B$, and for $r$-simplices by the corner lifts of Step 4, gives the assertion for enriched families of cones and transformations with all parameter simplices. The flexible-weight functor-category clause identifies these families with enriched functors and transformations.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Agent proof; relative cellular extension"
+   }
+  },
+  {
+   "text": "If R=J(j,-), the representable weighted-limit/cotensor description fixes the evaluation object at j. If R→W is bijective on vertices, strict equivariance fixes every object value forced by those vertices, and only higher cell simplices are extended. The unit and associative comparisons are among the specified coherence simplices and are transported by the same exponential boundary lifting. Finally, the flexible-weight theorem identifies the constructed strict cone categories, with all enriched transformations, with the enriched W-weighted limits whenever those limits are formed. This proves the two special clauses and the full relative assertion.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-enriched-simplicial-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Agent proof; representable and bijective-on-vertices relative cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-enriched-simplicial-presentation",
+  "lem-coef-flexible-weight-enriched-lift",
+  "lem-coef-infinity-isofibration-exponentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Agent-formulated relative transfer argument using enriched tensor/cotensor calculus and transfinite relative cell induction; no cited source states the full theorem verbatim."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "coherent.*transfer|strictif|flexible.*weight|pseudonatural",
-   "results": "{\"t\": \"2026-10-17T12:04:13Z\", \"tool\": \"grep\", \"query\": \"coherent.*transfer|strictif|flexible.*weight|pseudonatural\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Core.lean\", \"Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\"], \"digest\": \"fd8e5735fa949a9e\"}",
+   "query": "weighted.*limit|cellular.*weight|coherent.*transformation|pseudonatural",
+   "results": "Mathlib/CategoryTheory/Core.lean:135; Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean:112; Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean:12,14,16,20,42 (ordinary weighted limits and pseudonaturality only; no cellular coherent transfer).",
    "date": "2026-10-17",
-   "verdict": "no match: grep finds only ordinary pseudonaturality and Bicategory/Monad/Basic.lean:112-125, and LeanFinder finds ordinary Action/Limits and Enriched/FunctorCategory limit cones. CofibrantObject replacement results are generic model-category facts without enriched relative cone transfer. None states the cellular-weight rectification assertion with full coherent parameter diagrams; both semantic phrasings were read."
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "A projectively cofibrant simplicial weight transfers homotopy coherent transformations to strict weighted cones relative to a cellular subweight",
-   "results": "{\"t\": \"2026-10-17T12:04:13Z\", \"tool\": \"leansearch\", \"query\": \"A projectively cofibrant simplicial weight transfers homotopy coherent transformations to strict weighted cones relative to a cellular subweight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.noConfusionType\"], \"digest\": \"b499c9b9e2342c5a\"}",
+   "query": "A cellular simplicial weight admits coherent transfer of enriched weighted cones relative to a subweight",
+   "results": "CategoryTheory.SimplicialObject.instEnrichedCategorySSet; CategoryTheory.instEnrichedCategoryTransportEnrichment; CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory; CategoryTheory.SimplicialObject.instSimplicialCategory; CategoryTheory.TransportEnrichment; StdSimplex.weights; CategoryTheory.Enriched.HasConicalLimit.of_equiv; SSet.instMonoidalClosed. These are generic enrichment/conical-limit declarations.",
    "date": "2026-10-17",
-   "verdict": "no match: grep finds only ordinary pseudonaturality and Bicategory/Monad/Basic.lean:112-125, and LeanFinder finds ordinary Action/Limits and Enriched/FunctorCategory limit cones. CofibrantObject replacement results are generic model-category facts without enriched relative cone transfer. None states the cellular-weight rectification assertion with full coherent parameter diagrams; both semantic phrasings were read."
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.EnrichedFunctor, CategoryTheory.Limits.Weighted",
-   "results": "{\"t\": \"2026-10-17T12:04:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedFunctor, CategoryTheory.Limits.Weighted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.Weighted'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CategoryTheory.Enriched, CategoryTheory.Limits, weighted limit, NatTrans",
+   "results": "0 hits; loogle reports unknown identifier 'CategoryTheory.Enriched'.",
    "date": "2026-10-17",
-   "verdict": "no match: grep finds only ordinary pseudonaturality and Bicategory/Monad/Basic.lean:112-125, and LeanFinder finds ordinary Action/Limits and Enriched/FunctorCategory limit cones. CofibrantObject replacement results are generic model-category facts without enriched relative cone transfer. None states the cellular-weight rectification assertion with full coherent parameter diagrams; both semantic phrasings were read."
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "Coherent equivariant functors and transformations induce strict maps of cellular weighted limits by rectification relative to a subweight",
-   "results": "{\"t\": \"2026-10-17T12:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent equivariant functors and transformations induce strict maps of cellular weighted limits by rectification relative to a subweight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.Functor.mapActionPreservesLimitsOfShapeOfPreserves\", \"Action.Functor.mapActionPreservesLimit_of_preserves\", \"CategoryTheory.NatTrans.Equifibered.whiskerRight\", \"CategoryTheory.preservesLimitNatIso\", \"Action.preservesLimitsOfShape_of_preserves\", \"CategoryTheory.Limits.limit.pre_post\", \"Action.preservesLimit_of_preserves\", \"CategoryTheory.whiskeringRightPreservesLimits\"], \"digest\": \"c3f93254e70fe1cf\"}",
+   "query": "coherent transfer for cellular enriched weighted cones relative to a cellular subweight",
+   "results": "HomotopicalAlgebra.RelativeCellComplex and its Cells/attachCells/toTransfiniteCompositionOfShape declarations; these describe generic relative cell complexes and do not state enriched weighted-cone transfer.",
    "date": "2026-10-17",
-   "verdict": "no match: grep finds only ordinary pseudonaturality and Bicategory/Monad/Basic.lean:112-125, and LeanFinder finds ordinary Action/Limits and Enriched/FunctorCategory limit cones. CofibrantObject replacement results are generic model-category facts without enriched relative cone transfer. None states the cellular-weight rectification assertion with full coherent parameter diagrams; both semantic phrasings were read."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Rectification of homotopy coherent equivariant cones for a flexible weight preserves full enriched transformation objects",
-   "results": "{\"t\": \"2026-10-17T12:04:18Z\", \"tool\": \"leanfinder\", \"query\": \"Rectification of homotopy coherent equivariant cones for a flexible weight preserves full enriched transformation objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt\", \"CategoryTheory.Enriched.HasConicalLimit.of_equiv\", \"CategoryTheory.Enriched.HasConicalLimit.of_equiv_comp\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"CategoryTheory.Enriched.HasConicalLimitsOfShape.of_equiv\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.lift\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.fac\"], \"digest\": \"8c4c387b5a8339dc\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: grep finds only ordinary pseudonaturality and Bicategory/Monad/Basic.lean:112-125, and LeanFinder finds ordinary Action/Limits and Enriched/FunctorCategory limit cones. CofibrantObject replacement results are generic model-category facts without enriched relative cone transfer. None states the cellular-weight rectification assertion with full coherent parameter diagrams; both semantic phrasings were read."
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-linear-monad-tensor-enrichment",
@@ -76,5 +170,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cellular-weight-coherent-transfer",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. Step 1 now cites the flexible-weight theorem for the strict enriched cone categories; Steps 3 and 4 replace the inapplicable relative-cocone and relative-cone arguments by uniform boundary lifting through exponential isofibrations; Step 5 records the isofibration tower condition and Kan-tower homotopy-limit identification; Step 6 uses the local-union transfinite extension lemma for fixed R-data; Step 7 uses the flexible-weight theorem for the weighted-limit identification. No new nodes were needed. Maintainer-reader FIX (2026-10-17): Steps 3-6 rewritten so that transfer is carried out on strict cones with arbitrary vertex B in U Fun_V(B,G_j). The enriched functor now comes from the flexible-weight functor-category clause applied to B={W,F}_J. The componentwise equivalence criterion of lem-coef-enriched-category-tensor-calculus is cited where equivalence edges are lifted. The limit-stage citations of lem-coef-kan-fibration-tower-limit (N-indexed towers only) and lem-coef-infinity-local-union-transfinite-extension (simplicial subsets, not J-diagrams) are replaced by the elementary continuous-colimit gluing together with the flexible-weight inverse-limit clause.",
+  "blueprint": "The steps realize the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 support clause: specify compatible enriched simplicial models, transfer through the cellular coherent-module weight, and extend relative to the regular/representable weight.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-d1537e48c",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-d1537e48c (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the unit sk-prop-sf-biduality-general (every citation is inside the unit, so no tool_uses are needed) and the citer lem-coef-linear-monad-tensor-enrichment. The statement is unchanged and correct: it is the homotopy invariance of flexible/cellular weights for transformations whose intertwiners are equivalences. Small cases check out: a point with weight Δ^0 or Δ^1; J=[1] with weight J(0,-), where the result is equivalent to, not equal to, the literal composite; the empty weight; R=W. I found no duplicate (walking-module-weight-cells, enriched-coend-homotopy-invariance and pseudofunctor-split-family-strictification are different statements). Riehl-Verity is not in literature/, so the proof is correctly marked agent-written with a WANTED line. The core argument is correct: equivalences lift with the boundary held fixed along the isofibrations Fun(Δ^n,Q)→Fun(∂Δ^n,Q) and the corner map (Kerodon 01F1/01F3). Three repairable faults are fixed in fixes/dag/nodes/sec-six-functors/lem-coef-cellular-weight-coherent-transfer.json. (a) Steps 3, 4 and 6 lifted only in UG_j (vertex 1), so the enriched functor and enriched families were not obtained. They now work in U Fun_V(B,G_j) for any vertex B; taking B={W,F}_J with its evaluation cone gives the enriched functor through the flexible-weight functor-category clause, and coherent maps are the r=1 corner lift with both ends held fixed. (b) C1/C4: the componentwise equivalence criterion was used without citation; lem-coef-enriched-category-tensor-calculus is now in the uses of Steps 3, 4 and 6 (no cycle). (c) E1/C4: Step 5 cited lem-coef-kan-fibration-tower-limit, which covers only N-indexed towers, at arbitrary limit ordinals. Step 6 cited lem-coef-infinity-local-union-transfinite-extension, which is about simplicial subsets, for J-indexed weights. Both are replaced by elementary gluing (W_β is the colimit of the earlier stages and the strict choices are compatible) plus the flexible-weight clause that continuous composites give inverse limits. Step 5 now also derives the mapping-object-diagram clause. Both removed nodes have other citers. proof_deps is recomputed as the union of the uses. No SGA is cited and this is not a target node. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
