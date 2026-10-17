@@ -11,9 +11,122 @@
   "lem-coef-sorted-simplicial-algebra-model",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First note that any object-preserving mappingwise weak equivalence $g:A\\to D$ induces a weak equivalence $Ng$. At each fixed nerve degree $p$, $B(g)_{p,\\bullet}$ is a coproduct, indexed by the same strings of objects, of finite products of mappingwise weak equivalences. By [lem-coef-realization-finite-limits], realization preserves those products and coproducts. Paths and based cubical maps into a finite product are tuples, as are their homotopies, so components and based homotopy groups are products of the corresponding components and groups of the factors. A path or based cube in a disjoint union stays in its chosen summand. Consequently the row maps are weak equivalences. Empty products, empty factors, and an empty indexing set satisfy the same assertion. Apply [lem-coef-bisimplicial-diagonal-equivalence] to get $Ng$ a weak equivalence. In particular this proves the forward implication for $u$.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "1.4(vi)-(vii), pp.269; forward implication of Corollary 9.6, p.280."
+   }
+  },
+  {
+   "text": "For the converse suppose $Nu$ is a weak equivalence. Apply $R=\\operatorname{Ex}^{\\infty}$ to each mapping simplicial set and use its canonical finite-product comparisons to define composition and identities. By [lem-coef-ex-infinity-finite-products], this gives locally Kan simplicial categories $C=RU$, $D=RV$, a functor $f=Ru:C\\to D$, and natural mappingwise weak equivalences $U\\to C$, $V\\to D$. Associativity and units hold because the comparisons commute with product projections. The units induce bijections of mapping components preserving composition, so $\\pi_0C$ and $\\pi_0D$ are groupoids. By step 1, $NU\\to NC$ and $NV\\to ND$ are weak equivalences. Their naturality square with $Nu,Nf$ commutes on every string of arrows, hence two-out-of-three in [lem-coef-kan-quillen-right-proper] gives $Nf$ a weak equivalence. Cofibrancy of the replacements is unnecessary.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Corollary 9.6 and Proposition 9.5, p.280; explicit functorial mappingwise Kan replacement before the bar argument."
+   }
+  },
+  {
+   "text": "For $T=C$ or $D$ and a vertex $a\\in T(s,t)_0$, choose $b\\in T(t,s)_0$ in its inverse component. Such a vertex exists: every point of a realized simplex is joined to a vertex, so every component has a vertex representative. The composites $ba,ab$ are joined to the identities by paths in the realized endomorphism sets. Composition and these paths, using the product comparison in [lem-coef-realization-finite-limits], give homotopies from the two composites of $a^*:|T(t,y)|\\to|T(s,y)|$ and $b^*$ to the identity maps. Thus precomposition by $a$ is a weak homotopy equivalence by [lem-coef-homotopy-equivalence-weak]. This holds for each $y$ and for any finite composite of arrows, including an identity. If either mapping set is empty, the existence of both precomposition maps forces the other to be empty as well.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.5 proof, p.280: the groupoidal-component hypothesis makes the bar action maps equivalences."
+   }
+  },
+  {
+   "text": "Fix $y\\in O$. For $T=C,D$ form\n$$E(T,y)_{p,q}=\\coprod_{x_0,\\ldots,x_p\\in O}\\left(\\prod_{i=1}^pT(x_{i-1},x_i)_q\\right)\\times T(x_p,y)_q.$$\nThe nerve operators drop the first arrow, compose adjacent arrows, or compose the last arrow with the final entry; degeneracies insert identities. The other direction acts on the mapping sets. Associativity, units and simplicial composition verify the identities and commutation of the directions. Forget the final entry to obtain $p_T:E(T,y)\\to B(T)$. At each nerve degree this is a map of Kan complexes and is a Kan fibration: each summand is a projection from a product with the Kan complex $T(x_p,y)$. Horn lifts are constructed coordinatewise in the summand selected by the horn. Horns are nonempty and connected, including the single-vertex horns in dimension one, so empty fibers cause no lifting problem. At nerve degree zero, the strict fiber over $x\\in O$ is precisely $T(x,y)$. Applying $f$ to every entry gives a commuting square of the two bar projections.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.5 proof, p.280: N(V,V), restricted to the component with last target y; bisimplicial formula and projection."
+   }
+  },
+  {
+   "text": "For $\\alpha:[m]\\to[n]$ compare the naturality square of $p_T$ with\n$$P=B(T)_{n,\\bullet}\\times_{B(T)_{m,\\bullet}}E(T,y)_{m,\\bullet}.$$\nPut $A=B(T)_{n,\\bullet}$. The projections $E(T,y)_{n,\\bullet}\\to A$ and $P\\to A$ are Kan fibrations between Kan complexes: pullback horn fillers are obtained by projecting the horn and lifting through $p_{T,m}$. Over a vertex $(x_0\\xrightarrow{a_1}\\cdots\\xrightarrow{a_n}x_n)$ the comparison on strict fibers is\n$$T(x_n,y)\\longrightarrow T(x_{\\alpha(m)},y),\\qquad h\\longmapsto h\\,a_n\\cdots a_{\\alpha(m)+1}.$$\nIt is a weak equivalence by step 3. Apply [lem-coef-kan-pullback-path-comparison] to each projection and the map $\\Delta^0\\to A$ selecting this vertex. It identifies each strict fiber with its path-model homotopy fiber by a weak equivalence. These comparisons commute with the map $E_n\\to P$: both insert the constant path at the common basepoint. Thus the homotopy-fiber map is a weak equivalence by two-out-of-three in [lem-coef-kan-quillen-right-proper]. Apply [lem-coef-spaces-homotopy-fiber-detection] with base map $1_A$ and constant commutation homotopy to deduce that $E_n\\to P$ is a weak equivalence. Finally the strict pullback P computes the homotopy pullback by [lem-coef-kan-pullback-path-comparison], since its three entries are Kan and the leg $E_m\\to B_m$ is a Kan fibration. All naturality squares are therefore homotopy pullbacks.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.5 proof, p.280: verify the homotopy-cartesian bar squares explicitly instead of invoking an unspecified quasifibration theorem."
+   }
+  },
+  {
+   "text": "The diagrams in step 4 are small, levelwise Kan, and their projections are levelwise Kan fibrations. Step 5 checks every naturality square, including those for arbitrary monotone maps. Therefore [lem-coef-equifibered-bisimplicial-diagonal] gives a weak equivalence\n$$T(x,y)\\longrightarrow\\operatorname{hofib}_x\\bigl(\\operatorname{diag}E(T,y)\\longrightarrow NT\\bigr).$$\nIts naturality in $p_T$ identifies the induced map of fibers for $C,D$ with $f_{x,y}$, since $f$ fixes $O$ and acts on every entry of the two bars. Homotopy fibers of the possibly non-Kan diagonals are computed after functorial Kan replacement, exactly as required in the cited statement.",
+   "uses": [
+    "lem-coef-equifibered-bisimplicial-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.5 proof, p.280: bar-fiber comparison; Corollary 9.6 uses its naturality for U to V."
+   }
+  },
+  {
+   "text": "For fixed $q$, the simplicial set $E(T,y)_{\\bullet,q}$ is the ordinary nerve of $T_q/y$. Indeed a chain in this slice is uniquely a chain $x_0\\to\\cdots\\to x_p$ with a last map $x_p\\to y$; all other arrows to $y$ are its successive composites. The slice has terminal object $1_y$. Its unique arrows to $1_y$ form a natural transformation from the identity functor to the constant functor. Apply [lem-coef-nerve-natural-homotopy-equivalence] to the functors to and from the terminal category; their composites have the required natural transformations, so $E(T,y)_{\\bullet,q}\\to *$ is a weak equivalence. The exchanged-direction assertion of [lem-coef-bisimplicial-diagonal-equivalence] gives $\\operatorname{diag}E(T,y)\\to *$ a weak equivalence. Two-out-of-three in [lem-coef-kan-quillen-right-proper] now shows that the bar map for $f$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.5 proof, p.280: contractibility of each fixed-target component of N(V,V), expanded via its terminal slices."
+   }
+  },
+  {
+   "text": "The square of diagonal bar projections has a weak equivalence on total spaces by step 7 and on bases by step 2. Apply functorial Kan replacement to that square. Naturality of the unit and two-out-of-three preserve both weak equivalences. The point selecting $x$ is preserved because $f$ fixes $O$. Apply [lem-coef-kan-homotopy-pullback-invariance] to the two cospans consisting of the replaced bar projection and this point: it gives a weak equivalence of homotopy fibers. Together with the natural comparisons in step 6 this proves $f_{x,y}$ a weak equivalence by two-out-of-three. Finally\n$$f_{x,y}\\eta_{U(x,y)}=\\eta_{V(x,y)}u_{x,y}.$$\nBoth units are weak equivalences by [lem-coef-ex-infinity-finite-products], so two-out-of-three proves $u_{x,y}$ a weak equivalence. This works for every pair $x,y$, allowing empty fibers. If $O$ is empty both nerves are empty and there are no mapping assertions to check. No connectedness reduction or initial Kan assumption has been used.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-ex-infinity-finite-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Corollary 9.6, p.280, using the natural bar-fiber argument of Proposition 9.5; explicit comparison and removal of Kan replacement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-equifibered-bisimplicial-diagonal",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Corollary 9.6 and the bar argument of Proposition 9.5, p.280; online source read, archival copy unavailable; explicit replacement and homotopy-fiber proof using existing DAG lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +169,52 @@
    "results": "{\"t\": \"2026-10-17T06:55:41Z\", \"tool\": \"grep\", \"query\": \"simplicial.*(groupoid|localization)|cofibrant.*nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned declarations concern ordinary nerves and homotopy categories of cofibrant objects, not detection of enriched mappingwise equivalences by the diagonal classifying nerve."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(nerve|cofibrant)|nerve.*(groupoid|cofibrant)",
+   "results": "{\"t\": \"2026-10-17T08:00:49Z\", \"tool\": \"grep\", \"query\": \"groupoid.*(nerve|cofibrant)|nerve.*(groupoid|cofibrant)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary (truncated or coherent) nerve definitions and model homotopy-category lemmas do not give the diagonal-nerve criterion for enriched categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal classifying nerve detects mapping space weak equivalences of simplicial categories whose homotopy category is a groupoid",
+   "results": "{\"t\": \"2026-10-17T08:00:49Z\", \"tool\": \"leansearch\", \"query\": \"The diagonal classifying nerve detects mapping space weak equivalences of simplicial categories whose homotopy category is a groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialObject.diagonal\", \"CategoryTheory.nerveFunctor\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerveFunctor_obj\"], \"digest\": \"566ee839cf9d1a22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary (truncated or coherent) nerve definitions and model homotopy-category lemmas do not give the diagonal-nerve criterion for enriched categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve, HomotopicalAlgebra.WeakEquivalence",
+   "results": "{\"t\": \"2026-10-17T08:00:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve, HomotopicalAlgebra.WeakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary (truncated or coherent) nerve definitions and model homotopy-category lemmas do not give the diagonal-nerve criterion for enriched categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor fixing objects between cofibrant simplicial categories with groupoidal component categories is a mapping space weak equivalence if and only if the diagonal classifying nerve is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-17T08:01:00Z\", \"tool\": \"leanfinder\", \"query\": \"A functor fixing objects between cofibrant simplicial categories with groupoidal component categories is a mapping space weak equivalence if and only if the diagonal classifying nerve is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"8a4ef4939dcf70d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary (truncated or coherent) nerve definitions and model homotopy-category lemmas do not give the diagonal-nerve criterion for enriched categories."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|fullyFaithfulNerveFunctor|weakEquivalence_toHoCat_map_iff",
+   "results": "{\"t\": \"2026-10-17T08:32:20Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|fullyFaithfulNerveFunctor|weakEquivalence_toHoCat_map_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\"], \"digest\": \"7d420a0bc3a5ec95\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary (truncated or coherent) nerve definitions and model homotopy-category lemmas do not give the diagonal-nerve criterion for enriched categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces of a simplicial category with invertible component arrows are the homotopy fibers of the representable two sided bar over its classifying nerve",
+   "results": "{\"t\": \"2026-10-17T08:32:30Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces of a simplicial category with invertible component arrows are the homotopy fibers of the representable two sided bar over its classifying nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"CategoryTheory.nerveMap\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"ac01e9383a29acbd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary (truncated or coherent) nerve definitions and model homotopy-category lemmas do not give the diagonal-nerve criterion for enriched categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-invertible-arrow-pushout",
@@ -93,5 +248,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-groupoidal-cofibrant-nerve-detection",
+  "worker": "stage1",
+  "summary": "Proved both directions directly using the representable fixed-target bar, mappingwise Ex-infinity replacement and the existing equifibered-diagonal theorem. All bar naturality squares, terminal slice contractions, and functorial fiber comparisons are explicit. No statement change and no new nodes. Interrupted-attempt recovery: the dry run found that the arbitrary-base fiber theorem acquired a dependency back to this item. Step 5 instead uses the existing homotopy-fiber detection theorem for Kan objects, with the strict-to-path comparison written explicitly; no other node is changed.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent realization of the inverse-limit adjunction calculation; through the recorded via chain, the diagonal-nerve detection input to inverse-adjunction pushout invariance."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-8610b36bb",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-8610b36bb (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full, plus the statements of all 11 cited nodes. All cited nodes are in the item's unit sk-prop-sf-biduality-general and none is merged, so no tool_uses are needed. proof_deps equals the union of the step uses. The dependency closure (194 nodes) does not reach the item, so there is no cycle; the earlier cycle through kan-fibration-arbitrary-base-fibers is gone. The statement is unchanged and true: forward by step 1 (rows plus the diagonal lemma), converse through the per-object fibration E(T,y)->B(T), whose base points are the objects x. Step 3 shows precomposition by a vertex is an equivalence using the groupoid hypothesis and homotopy-equivalence-weak. Step 5 shows each naturality square is a homotopy pullback through fiber detection over the identity base, with the hofib orientation matching def-cbc-enhanced-diagrams-cones. Step 6 checks every hypothesis of equifibered-bisimplicial-diagonal. Step 7 contracts diag E through the terminal object of the slice. Step 8 uses kan-homotopy-pullback-invariance and the Ex-infinity units. Cofibrancy is unused, and keeping it is correct because it is the source's hypothesis. I tested empty O, disconnected O, empty mapping sets, a single object, and one-dimensional horns; none fails. Nothing is duplicated: cofibrant-localization-diagonal-nerve, cofibrant-completion-nerve-equivalence, free-category-groupoid-nerve and cofibrant-simplicial-inversion each treat one canonical map, not detection for an arbitrary functor. The only citer, simplicial-invertible-arrow-pushout step 6, applies the item with exactly its hypotheses. There are no new nodes and no fixes. Minor point, not a fault: the step 3 homotopy relies on |X|x[0,1] being a k-space. Dwyer-Kan Corollary 9.6 is not in literature and the network is blocked, so I checked the mathematics on its own; the source stays WANTED and proof_origin is agent."
  }
 }
