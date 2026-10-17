@@ -5,10 +5,8 @@ Authors: SHEAF group NV
 -/
 module
 public import Sheaf.Paper.CondensedCoefficientComparisons
-public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 import all Sheaf.Paper.CondensedFiniteModelProofAPI
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import Mathlib.Topology.Algebra.Module.FiniteDimension
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
