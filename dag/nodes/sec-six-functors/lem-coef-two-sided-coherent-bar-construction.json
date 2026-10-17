@@ -24,7 +24,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-monoidal-infinity-category"
+  "def-coef-monoidal-infinity-category",
+  "def-coef-coherent-bar-word-data"
  ],
  "proof": [
   {
@@ -257,5 +258,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2206cf6d",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read the item node, the new node def-coef-coherent-bar-word-data, both Lean modules in full, the dependency declarations (IsMonoidalInfinityCategory, fullSubcomplex/diagramVertex/evaluation, fibrations) and the report (real Worker report, New nodes, Second reading by Q66). Every clause matches: IsLeftAction is the Δ/[1] word cocartesian fibration with Segal letter fibers, recorded monoidal 00 restriction and terminal 11 fiber; algebras are inert-preserving pure-0 sections; F is the (B,A)-bimodule P and A-module Q with strictly fixed A and B; arbitrary K gives naturality; Z lands in the strict LMod_B section category; IsBarTransport fixes degree n to the cocartesian contraction P⊗A^n⊗Q with B^r acting through P; faces and degeneracies checked through the fully faithful jointIndex; the pairing D on all Word2 (02 letter = N) gives an augmentation ε pinned by triangle T with long edge pairingLongEdge D. No colimit or stronger assumption, single universe u+1; edge cases n=0, n=1, empty blocks, empty K/M checked; the existence form is true. No hollow definitions, only the theorem's sorry; source/blueprint docstrings and 7-step proof docstring present; lean.statement verbatim; item changed only lean/stmt_deps; new node fields correct. nt_compile.py --json on both files: EXIT 0, no errors or extra warnings. Minor: unused helpers IsModuleBarFamily/jointIndex/moduleForgetToTotal; HA numbers redacted to 'the project server' in report.md only; Q118's later def-coef-left-module-operadic-encoding is a second DAG encoding of left actions for the maintainer to compare."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TwoSidedCoherentBarConstruction",
+  "declaration": "SSet.Enhanced.CoherentBar.two_sided_coherent_bar_construction",
+  "declarations": [
+   "SSet.Enhanced.CoherentBar.two_sided_coherent_bar_construction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TwoSidedCoherentBarConstruction.lean",
+  "statement": "theorem two_sided_coherent_bar_construction {E : SSet.{u + 1}} [Quasicategory E] (p : E ⟶ index.{u} (Word 1)ᵒᵖ) (hp : IsLeftAction p) (A B : barIndex.{u} ⟶ E) (hAlgA : IsAssociativeAlgebra p A) (hAlgB : IsAssociativeAlgebra p B) (K : SSet.{u + 1}) (F : K ⊗ index.{u} LocalWordᵒᵖ ⟶ E) (hF : IsAlgebraFamily p localBase F) (hA : middleAlgebra F = snd _ _ ≫ A) (hB : leftAlgebra F = snd _ _ ≫ B) : ∃ (G : K ⊗ index.{u} CellularWordᵒᵖ ⟶ E) (Z : K ⊗ barIndex.{u} ⟶ moduleCategory p B) (H : (K ⊗ index.{u} MixedWordᵒᵖ) ⊗ Δ[1] ⟶ E), IsAlgebraFamily p cellularBase G ∧ (𝟙 K ⊗ₘ indexMap localInclusion.op) ≫ G = F ∧ IsBarTransport p G (moduleFamily p B Z) H ∧ ∀ D : K ⊗ index.{u} (Word 2)ᵒᵖ ⟶ E, IsBalancedPairing p G D → ∃ (ε : ((K ⊗ barIndex.{u}) ⊗ index.{u} (Word 1)ᵒᵖ) ⊗ Δ[1] ⟶ E) (T : (K ⊗ index.{u} MixedWordᵒᵖ) ⊗ Δ[2] ⟶ E), IsBarAugmentation p F (moduleFamily p B Z) H D ε T",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The equivalent Step/ordered-word presentation of HA 4.4.1.12–17, with explicit coherent module category, total-tensor transport and normalized balanced augmentation. Fixed algebra families and arbitrary simplicial parameters retain coherent module maps and every higher simplex; no colimit assumption."
  }
 }
