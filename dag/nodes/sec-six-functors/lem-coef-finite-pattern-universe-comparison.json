@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-coefficient mapping-complex adjunction before R lim: size compatibility of the operadic tensor used below lem-coef-enriched-category-tensor-calculus; finite-cone model replacements needed for universe comparison in step 5 of lem-coef-nonsymmetric-operadic-tensor-adjunction.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction before R lim: technical pattern models below lem-coef-enriched-category-tensor-calculus; the finite-cone replacement and universe comparison in step 5 of lem-coef-nonsymmetric-operadic-tensor-adjunction.",
    "via": [
     "lem-coef-nonsymmetric-operadic-tensor-adjunction",
     "lem-coef-operadic-algebra-presentability",
@@ -31,9 +31,107 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-categorical-pattern-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In either universe cofibrations are underlying monomorphisms by [lem-coef-categorical-pattern-model-calculus]. Apply the boundary-cell presentation of underlying monomorphisms in [lem-coef-kan-quillen-right-proper] to $X\\hookrightarrow Y$, label each attached simplex by its composite to $B$, and give each attached simplex the flat marking. The pushouts retain exactly the old marked edges; after all underlying simplices have been attached, add the remaining marked edges of $Y$ using $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$. Each added edge maps into $S$, since $Y\\to(B,S)$ preserves markings. This is an $I$-cell presentation; its coproducts and ordinal are small in the universe of $Y$. Conversely each generator is an underlying monomorphism, and this property is preserved by pushouts, transfinite composites and arrow retracts: degreewise these operations adjoin elements without identifying old elements, take unions, and take retracts of injections. Thus retracts of $I$-cell maps are exactly all cofibrations. The index set $\\coprod_{n\\geq0}B_n\\amalg S$ belongs to $\\mathcal U$, and the same labelled maps define $I$ in both universes.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.1.9, proof, generating cofibrations, printed p.1476; degreewise marked refinement of the boundary-cell presentation."
+   }
+  },
+  {
+   "text": "Use the seven explicit types $J_P$ of [lem-coef-pattern-anodyne-generators]. Every domain and codomain has finitely many nondegenerate simplices: this is immediate for simplices, horns and their marking changes; $Q$ is a quotient of the finite simplex $\\Delta^3$; and a nondegenerate simplex in a join is in one factor or is the concatenation of a nondegenerate simplex from each factor. The finite $K_a$ therefore make types (B1) and (C2) finite as well, including $K_a=\\varnothing$. All labels for these finite shapes are maps into the fixed $\\mathcal U$-small $B$, together with $a\\in A$ and a natural number. Thus $J_P$ is a common $\\mathcal U$-small family in both universes. Its lifting characterization and the fibrant-object characterization of [lem-coef-categorical-pattern-model-calculus] give the same fibrancy test in both universes. For a smaller $X$, maps from each domain or codomain to $X$ are literally the same functions with the same face, degeneracy, marking and base conditions. Consequently existence of each extension is unchanged, which proves fibrancy compatibility.",
+   "uses": [
+    "lem-coef-pattern-anodyne-generators",
+    "lem-coef-categorical-pattern-model-calculus",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition B.1.1 and Proposition B.1.6, printed pp.1470-1474; finiteness observation at the start of the proof of Theorem B.0.20, printed p.1485."
+   }
+  },
+  {
+   "text": "Here is an explicit replacement construction in either universe. Put $X_0=X$. For each $m\\geq0$, form the set $T_m(X)=\\{(j,u):j:D_j\\to E_j\\in J_P,\\ u:D_j\\to X_m\\text{ a marked map over }B\\}$. Define $X_{m+1}$ by the pushout\n$$X_m\\amalg_{\\coprod_{(j,u)\\in T_m(X)}D_j}\\coprod_{(j,u)\\in T_m(X)}E_j,$$\nwhere the first attaching map on the summand $(j,u)$ is $u$. Set $RX=\\operatorname{colim}_{m<\\omega}X_m$. These colimits exist directly: take degreewise coproducts and quotients for pushouts, then degreewise sequential colimits; mark exactly the images of the marked edges. The structure maps to $(B,S)$ descend because the attaching maps are over $B$. Every transition is a pushout of a coproduct of generators, so $X\\to RX$ is a countable $J_P$-cell map. Each transition is an underlying injection, including the generator types which change only markings.",
+   "uses": [
+    "lem-coef-pattern-anodyne-generators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem B.0.20, proof, initial finite-cone small-object construction (a)-(c), printed p.1485; construction expanded degreewise."
+   }
+  },
+  {
+   "text": "Any marked $u:D_j\\to RX$ factors through some $X_m$: the transitions are underlying injections, so identify $RX$ degreewise with their union. Choose a common stage containing the images of the finitely many nondegenerate simplices of $D_j$. Every simplex is a degeneracy of a nondegenerate simplex: if it is degenerate, write it as a degeneracy of a simplex of lower dimension and repeat; the dimension strictly decreases until this process stops. Applying the resulting degeneracy maps to the chosen images keeps every image in the same subcomplex. Faces, degeneracies and the base equation are reflected by the inclusion $X_m\\hookrightarrow RX$, giving a simplicial map over $B$ without additional choices. Increase $m$ to witness the marking of the images of the finitely many marked nondegenerate edges; degenerate edges are already marked at every stage. The copy of $E_j$ indexed by this map at stage $m+1$ extends $u$ into $RX$. The lifting theorem [lem-coef-pattern-anodyne-generators] makes $RX$ $P$-fibered, hence fibrant by [lem-coef-categorical-pattern-model-calculus]. The same theorem makes the countable $J_P$-cell map $X\\to RX$ a trivial cofibration, hence a weak equivalence. This proves that the explicit construction is a fibrant replacement in each universe.",
+   "uses": [
+    "lem-coef-pattern-anodyne-generators",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.1.6, Example B.2.2, and proof of Theorem B.0.20 (b)-(c), printed pp.1471-1474,1482,1485; finite-domain extension argument expanded."
+   }
+  },
+  {
+   "text": "For a marked map $f:X\\to Y$ over $B$, construct $f_m:X_m\\to Y_m$ inductively. At a successor stage send the summand labelled $(j,u)$ to the summand labelled $(j,f_m u)$ by the identity of $E_j$, and use the pushout property; at the limit use the induced colimit map. The label formula respects identity maps and compositions, so $R$ is a functor and $\\eta:X\\to RX$ is natural. If $X$ belongs to $\\mathcal U$, every $T_m(X)$ is $\\mathcal U$-small (it is a union, indexed by $J_P$, of subsets of function sets between $\\mathcal U$-sets). Coproducts, quotients and the countable colimit stay in $\\mathcal U$ by its closure axioms. Use these same degreewise set constructions in both universes. Inductively the label sets agree for smaller inputs and the pushout quotients agree, since the equivalence relation generated by the identical attaching identifications is identical. The sequential unions and their markings agree too. These identifications give $\\iota R_{\\mathcal U}\\cong R_{\\mathcal U'}\\iota$. On each cell they are identities on the $E_j$ coordinate and preserve its label, so they commute with $R(f)$ and with $\\eta$. This proves the required naturality and compatibility, as well as smallness of $R_{\\mathcal U}X$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-coef-pattern-anodyne-generators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem B.0.20, proof, finite-cone small-object construction, printed p.1485; explicit functorial and universe-relative expansion of that construction."
+   }
+  },
+  {
+   "text": "For a map $f:F\\to G$ between fibrant marked objects, the mapping-test characterization in [lem-coef-categorical-pattern-model-calculus] implies that $f$ is a weak equivalence if and only if it has a marked homotopy inverse over $B$, with homotopies parameterized by $(\\Delta^1)^\\sharp$. Here are both arguments. If $f$ is weak, test first with $Z=F$: surjectivity on $\\pi_0$ gives $g:G\\to F$ with $gf$ in the component of $1_F$. Test with $Z=G$: injectivity on $\\pi_0$, together with $fgf$ in the component of $f$, puts $fg$ in the component of $1_G$. The mapping complexes are Kan. To identify their path components with vertices modulo edge paths, apply [lem-cbc-kan-realization-mapping-classes] with $K=\\Delta^0$: continuous maps from a point modulo homotopy are precisely path components, and the displayed bijection is natural in the Kan target. Finite edge paths can be replaced by single edges by filling $2$-horns: for $e:x\\to y$, fill $\\Lambda_0^2$ with vertices $(x,y,x)$, edge $01=e$ and edge $02=1_x$ to obtain an edge $12:y\\to x$; for edges $x\\to y\\to z$, fill $\\Lambda_1^2$ to obtain the edge $02:x\\to z$. A path of length zero is represented by the degenerate edge. These edges give the two required marked homotopies. Conversely, for every fibrant $Z$, precomposition with $g$ is a homotopy inverse to precomposition with $f$ on the sharp mapping complexes. Write $H:F\\times(\\Delta^1)^\\sharp\\to F$ for the homotopy from $gf$ to $1_F$ and $J:G\\times(\\Delta^1)^\\sharp\\to G$ for that from $fg$ to $1_G$. If $a:\\Delta^n\\to\\operatorname{Map}^{\\sharp}_B(F,Z)$ corresponds to $\\widetilde a:F\\times(\\Delta^n)^\\sharp\\to Z$ and $t:\\Delta^n\\to\\Delta^1$, send $(a,t)$ to the map $(x,s)\\mapsto\\widetilde a(H(x,t(s)),s)$. This is marked and over $B$, commutes with every simplicial operator, and has endpoints $a\\circ gf$ and $a$. Replacing $(F,H,a)$ by $(G,J,b)$ gives endpoints $b\\circ fg$ and $b$. These formulas are precisely the homotopies between the two composites of precomposition maps and their identities. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude the mapping maps are weak homotopy equivalences, and apply the mapping-test criterion. For smaller $F,G$, all inverse maps and homotopies just described are functions between smaller sets, and the sharp mapping complexes between them have identical simplices in both universes. The criterion is therefore identical in the two universes. The Kan horn-filling assertion used here is [lem-coef-kan-quillen-right-proper]; no test against a larger target is inferred merely from tests against smaller ones.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-cbc-kan-realization-mapping-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, (1) iff (2), printed p.1483; the formal two-test inverse argument and its sharp simplicial homotopies written out."
+   }
+  },
+  {
+   "text": "Finally let $f:X\\to Y$ be any map of smaller marked objects. Naturality gives $R(f)\\eta_X=\\eta_Y f$. By step 4 both units are weak equivalences in each universe, so two-out-of-three in the model structure of [lem-coef-categorical-pattern-model-calculus] says that $f$ is a weak equivalence if and only if $R(f)$ is, separately in each universe. Step 5 identifies the two maps $R(f)$ and keeps their fibrant endpoints smaller; step 6 gives their identical weak-equivalence criterion. Hence $f$ has the same weak-equivalence status in both universes. All clauses of the statement now follow from steps 1, 2, 4 and 5.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem B.0.20, reduction from f to E(f), printed p.1485; two-out-of-three applied to the common replacement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "def-weil-size-convention",
+  "lem-coef-pattern-anodyne-generators",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-kan-realization-mapping-classes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Finite-cone small-object argument in the proof of Theorem B.0.20, expanded to compare universes; Definition B.1.1, Proposition B.1.6 and Lemma B.2.4 read online. Document not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +160,45 @@
    "results": "{\"t\": \"2026-10-16T22:38:10Z\", \"tool\": \"grep\", \"query\": \"categorical.?pattern|marked.?simplicial|[Uu]niverse.*[Mm]odel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Immersion.lean\"], \"digest\": \"fd1ba38adf45fbc9\"}",
    "date": "2026-10-17",
    "verdict": "no match: the semantic hits concern ordinary model categories and their chosen resolutions or Kan simplicial sets; none compares marked categorical-pattern replacements across universes. Loogle returned no hit; grep returned an unrelated manifold universe comment."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universe enlargement preserves fibrant replacement and weak equivalences for finite cone categorical pattern models",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.FibrantObject C),\\n  ∃ Y, ∃ (x : HomotopicalAlgebra.IsFibrant Y), X = HomotopicalAlgebra.FibrantObject.mk Y\", \"doc\": \"The constructor for fibrant objects in the subcategory is surjective, meaning every fibrant object in the subcategory arises from a fibrant object in the original category equipped with a fibration to\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.FibrantObject C),\\n  HomotopicalAlgebra.IsFibrant (HomotopicalAlgebra.FibrantObject.ι.obj X)\", \"doc\": \"Every object in the full subcategory of fibrant objects in a category with cofibrations is fibrant, meaning the unique morphism from the object to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [HomotopicalAlgebra.CategoryWithFibrations C] → [CategoryTheory.Limits.HasTerminal C] → Type u\", \"doc\": \"The full subcategory of a category with cofibrations consisting of objects $X$ for which the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.BifibrantO\", \"doc\": \"For any bifibrant object $X$ in a category $\\\\mathcal{C}$ with cofibrations and fibrations, the image of $X$ under the inclusion functor from the bifibrant objects subcategory to $\\\\mathcal{C}$ is a fib\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.mk\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [inst_2 : CategoryTheory.Limits.HasTerminal C] →\\n        (X : C) → [HomotopicalAlgebra.IsFibrant X] → HomotopicalAlgebra.FibrantObject C\", \"doc\": \"Given an object $X$ in a category with cofibrations that is fibrant (i.e., the unique morphism from $X$ to the terminal object is a fibration), this constructor provides the corresponding object in th\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.mk_surjective\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.BifibrantO\", \"doc\": \"For any bifibrant object $X$ in the full subcategory of bifibrant objects of a category $\\\\mathcal{C}$, there exists an object $Y$ in $\\\\mathcal{C}$ that is both cofibrant (the unique morphism from the \"}\n  {\"name\": \"HomotopicalAlgebra.Cylinder.instIsFibrantIOfIsVeryGood\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : C}\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] (P : HomotopicalAlgebra.Cylinder A)\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [(HomotopicalAlgebra\", \"doc\": \"In a homotopical category with binary coproducts and a terminal object, if an object $A$ is fibrant and its cylinder object satisfies the 'very good' condition (compatibility with cofibrations and fib\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjFibrantObjects\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.FibrantObject C),\\n  HomotopicalAlgebra.IsFibrant X.obj\", \"doc\": \"Every object in the full subcategory of fibrant objects in a category with cofibrations is fibrant by definition, since the subcategory consists precisely of objects for which the unique morphism to t\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern unmarked Kan or quasicategory horns, ordinary model-category lifting, universe lifts, or finite presentability of unmarked simplicial sets; none states the marked categorical-pattern result. The targeted Loogle and grep searches returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small marked simplicial sets have compatible fibrant replacements across Grothendieck universes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.uliftFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \": SSet.{u} ⥤ SSet.{max u v}\", \"doc\": \"The functor from the category of simplicial sets in universe $\\\\mathrm{Type}\\\\, u$ to $\\\\mathrm{Type}\\\\, (\\\\max(u, v))$, constructed by whiskering the universe lifting functor with simplicial objects. It m\"}\n  {\"name\": \"SSet\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \": Type (u + 1)\", \"doc\": \"The category of simplicial sets, defined as simplicial objects in the category of types. A simplicial set is a functor from the opposite of the simplex category $\\\\Delta^\\text{op}$ to the category of ty\"}\n  {\"name\": \"SSet.Truncated.uliftFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \"(k : ℕ) : SSet.Truncated.{u} k ⥤ SSet.Truncated.{max u v} k\", \"doc\": \"The functor that maps each $ n $-truncated simplicial set (functor from $ \\\\Delta_{\\\\leq n}^\\\\text{op} $ to $ \\\\mathrm{Type}\\\\, u $) to its universe-lifted version in $ \\\\mathrm{Type}\\\\, (\\\\max(u, v)) $, by a\"}\n  {\"name\": \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalence\", \"module\": \"Mathlib.CategoryTheory.Grothendieck\", \"type\": \": Grothendieck (F ⋙ Cat.asSmallFunctor.{w}) ≌ Grothendieck F\", \"doc\": \"The Grothendieck category associated to the composition $ F \\\\circ \\\\mathrm{asSmallFunctor} $ is equivalent to the original Grothendieck category of $ F $. This equivalence is established by functors th\"}\n  {\"name\": \"small_ulift\", \"module\": \"Mathlib.Logic.Small.Defs\", \"type\": \"(α : Type u) [Small.{v} α] : Small.{v} (ULift.{w} α)\", \"doc\": \"If a type $\\\\alpha$ is small, then its universe lift $\\\\mathrm{ULift}\\\\ \\\\alpha$ is also small.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"CategoryTheory.IsSifted.isSifted_iff_asSmallIsSifted\", \"module\": \"Mathlib.CategoryTheory.Limits.Sifted\", \"type\": \": IsSifted C ↔ IsSifted (AsSmall.{w} C)\", \"doc\": \"A category $C$ is sifted if and only if its universe-lifted version $\\\\mathrm{AsSmall}(C)$ is sifted. This equivalence establishes that the property of being a sifted category (where filtered colimits \"}\n  {\"name\": \"CategoryTheory.instInhabitedAsSmall\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \"[Inhabited C] : Inhabited (AsSmall C)\", \"doc\": \"The construction $\\\\mathrm{AsSmall} \\\\, C$ equips a category $C$ with a category structure where hom-sets reside in the universe $\\\\max(u, v+1)$, with $u$ as the universe of objects and $v$ as the univer\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern unmarked Kan or quasicategory horns, ordinary model-category lifting, universe lifts, or finite presentability of unmarked simplicial sets; none states the marked categorical-pattern result. The targeted Loogle and grep searches returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fibrant\", \"universe\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern unmarked Kan or quasicategory horns, ordinary model-category lifting, universe lifts, or finite presentability of unmarked simplicial sets; none states the marked categorical-pattern result. The targeted Loogle and grep searches returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Uu]niverse.*[Ff]ibrant|[Pp]attern.*[Mm]odel|marked.?simplicial",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern unmarked Kan or quasicategory horns, ordinary model-category lifting, universe lifts, or finite presentability of unmarked simplicial sets; none states the marked categorical-pattern result. The targeted Loogle and grep searches returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite simplicial lifting generators give universe independent small object replacement for marked categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Finite.instIsFinitelyPresentable\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable\", \"type\": \"∀ (X : SSet) [X.Finite], CategoryTheory.IsFinitelyPresentable X\", \"doc\": \"Every finite simplicial set is finitely presentable, meaning that the hom-functor Hom(X, -) preserves ℵ₀-filtered colimits for any finite simplicial set X.\"}\n  {\"name\": \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable\", \"type\": \"∀ (n : SimplexCategory), CategoryTheory.IsFinitelyPresentable (SSet.stdSimplex.obj n)\", \"doc\": \"For each finite ordinal $[n]$ in the simplex category $\\\\Delta$, the standard simplex $\\\\Delta^n$ (represented by the simplicial set $\\\\mathrm{stdSimplex}.\\\\mathrm{obj}\\\\, n$) is a finitely presentable obj\"}\n  {\"name\": \"SSet.instFiniteInitial\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits\", \"type\": \"(⊥_ SSet).Finite\", \"doc\": \"The initial object in the category of simplicial sets is a finite simplicial set. This follows because the initial object is constructed as the colimit of the empty diagram, and the empty type (which \"}\n  {\"name\": \"SimplexCategoryGenRel.generators\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"CategoryTheory.MorphismProperty SimplexCategoryGenRel\", \"doc\": \"The generators of the simplex category presented by generators and relations are defined as the union (⊔) of the face maps and degeneracy morphisms. This combines the predicates identifying face morph\"}\n  {\"name\": \"CategoryTheory.SmallObject.instSmallFunctorObjIndex\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Construction\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I : Type w} {A B : I → C} (f : (i : I) → A i ⟶ B i) {S X : C}\\n  (πX : X ⟶ S) [CategoryTheory.LocallySmall.{t, v, u} C] [Small.{t, w} I],\\n  Small.{t, max v w} (CategoryTheory.SmallObject.FunctorObjIndex f πX)\", \"doc\": \"In the context of the small object argument construction in category theory, the type $\\\\text{FunctorObjIndex}~f~\\\\pi X$ parameterizing morphisms or structures arising in the construction is a small typ\"}\n  {\"name\": \"SimplexCategory.smallCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Defs\", \"type\": \"CategoryTheory.SmallCategory SimplexCategory\", \"doc\": \"The simplex category $\\\\Delta$, whose objects are finite ordinals represented by natural numbers $n$ (corresponding to the set $[n] = \\\\{0, 1, \\\\dots, n\\\\}$) and whose morphisms are order-preserving funct\"}\n  {\"name\": \"SSet.stdSimplex.instFiniteObjSimplexCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"∀ (n : SimplexCategory), (SSet.stdSimplex.obj n).Finite\", \"doc\": \"For each finite ordinal $[n]$, the standard simplex object $\\\\Delta^n$ in the category of simplicial sets is a finite simplicial set. This follows from the construction of $\\\\Delta^n$ as the representab\"}\n  {\"name\": \"CategoryTheory.SmallObject.SuccStruct\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Iteration/Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"A type constructor for a category $C$ in universe $u$ with morphisms in universe $\\\\max(u, v+1)$, producing types in universe $\\\\max(u, v)$. This structure is used in the iterative process of the small \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern unmarked Kan or quasicategory horns, ordinary model-category lifting, universe lifts, or finite presentability of unmarked simplicial sets; none states the marked categorical-pattern result. The targeted Loogle and grep searches returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-nonsymmetric-operadic-tensor-adjunction",
@@ -73,5 +206,34 @@
   "group": "NS"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-pattern-universe-comparison",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and clause. Proved common generating cofibrations, compared fibrancy via the seven explicit pattern-anodyne types, constructed the compatible replacements by countably adjoining all finite lifting problems, and reduced weak-equivalence comparison to an explicit homotopy-inverse test between smaller fibrant objects. One new statement-only node isolates the pattern-anodyne lifting theorem; no Lean attachment or Mathlib match.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction before R lim: technical pattern models below lem-coef-enriched-category-tensor-calculus; the finite-cone replacement and universe comparison in step 5 of lem-coef-nonsymmetric-operadic-tensor-adjunction. Steps 1-7 supply the finite-cone model-size input used in step 5 of the nonsymmetric-operadic tensor adjunction, without changing the integral-adjoint route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy-inverse implies weak homotopy equivalence, applied only to testing mapping complexes in step 6; this technical model argument does not replace any geometric unit route."
+   },
+   {
+    "node": "lem-cbc-kan-realization-mapping-classes",
+    "why": "The K=Delta^0 case identifies edge components of the Kan testing complexes with path components of their realizations, to justify extracting marked inverse homotopies in step 6; a generic tool, with no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-kan-realization-mapping-classes"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-c0782ba45",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-c0782ba45 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the statements of all seven cited nodes, the unit and chapter records, and the citer's steps 1, 5 and 6. I also read the official Higher Algebra PDF (2017), from a copy already cached on this server, at Def. B.0.19, Thm. B.0.20, Rem. B.0.26, Def. B.1.1, Prop. B.1.6, Prop. B.1.14, Def. B.2.1, Ex. B.2.2, Lemma B.2.4 and the finite-K proof of B.0.20 (printed pp. 1467-1487). New node lem-coef-pattern-anodyne-generators: all seven generators match B.1.1 term by term once every 2-simplex is scaled. C0's first-edge-in-S condition is forced by the domain's marking. Extension against the generators is the same as extension against their weakly saturated class, which is B.1.6, and triviality of that class is B.2.2/B.1.14; no finiteness is needed. It satisfies B1-B7, is not a duplicate of the marked-anodyne, relative-replacement, saturation or small-direct-colimit nodes, and restates no clause of the item. Steps: (1) boundary-cell presentation plus a marking-only pass, giving a U-small label set. (2) Finite shapes, including K_a empty, so the same extension test in both universes. (3)-(4) Explicit all-attaching-maps countable cell construction: finite domains factor at a stage, so RX is P-fibered and X->RX is a trivial cofibration. (5) Identical set constructions give an actual natural isomorphism compatible with eta. (6) B.2.4 (1)<=>(2) expanded: I checked the horn fills, the precomposition homotopy formula and its endpoints (vu=(fg)^*, uv=(gf)^*), and that only F and G serve as test objects. (7) Two-out-of-three. The two tool_uses (lem-cbc-simplicial-homotopy-equivalence-weak, lem-cbc-kan-realization-mapping-classes) are generic and accepted. The statement is unchanged, nothing is weakened, and there is no SGA use. No fixes made. Minor remarks: the new node and the item have no lean_audit field, which the tools maintain; the definition node's universe choice inside 'P-fibered' is loose, but the item uses only the universe-free extension characterization."
+ }
 }
