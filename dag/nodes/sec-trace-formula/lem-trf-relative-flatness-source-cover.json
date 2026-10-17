@@ -2,7 +2,7 @@
  "id": "lem-trf-relative-flatness-source-cover",
  "kind": "statement",
  "title": "Relative module flatness is detected on a flat source cover",
- "statement": "Let $f:Y\\to S$ and $h:X\\to Y$ be morphisms of schemes [def-pc-scheme], and let $\\mathcal G$ be a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. Let $x\\in X$ and put $y=h(x)$. If $h$ is flat at $x$ [def-weil-flat-morphism], then $\\mathcal G$ is flat over $S$ at $y$ if and only if $h^*\\mathcal G$ is flat over $S$ at $x$, where the two structure maps are $f$ and $fh$ respectively [def-pc-scheme-module-flat-over], [def-pc-module-pullback]. Consequently, for any jointly surjective family of flat morphisms $h_i:X_i\\to Y$, the module $\\mathcal G$ is flat over $S$ if and only if every $h_i^*\\mathcal G$ is flat over $S$; jointly surjective means every point of $Y$ has a preimage in some $X_i$. No quasi-compactness, finite-presentation, or Noetherian hypothesis is imposed.",
+ "statement": "Let $f:Y\\to S$ and $h:X\\to Y$ be morphisms of schemes [def-pc-scheme], and let $\\mathcal G$ be a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. Let $x\\in X$ and put $y=h(x)$. If $h$ is flat at $x$ [def-weil-flat-morphism], then $\\mathcal G$ is flat over $S$ at $y$ if and only if $h^*\\mathcal G$ is flat over $S$ at $x$, where the two structure maps are $f$ and $fh$ respectively [def-pc-scheme-module-flat-over], [def-pc-module-pullback]; here $\\mathcal G$ is flat over $S$ at $y$ if the stalk $\\mathcal G_y$, an $\\mathcal O_{S,f(y)}$-module through the stalk map of $f$, is flat [def-weil-pbc-flat-ring-map], and likewise $h^*\\mathcal G$ is flat over $S$ at $x$ if $(h^*\\mathcal G)_x$ is a flat $\\mathcal O_{S,f(h(x))}$-module through the stalk map of $fh$. Consequently, for any jointly surjective family of flat morphisms $h_i:X_i\\to Y$, the module $\\mathcal G$ is flat over $S$ if and only if every $h_i^*\\mathcal G$ is flat over $S$; jointly surjective means every point of $Y$ has a preimage in some $X_i$. No quasi-compactness, finite-presentation, or Noetherian hypothesis is imposed.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 02JZ, lemma-flat-permanence, pointwise equivalence; the family formulation follows pointwise from the displayed equivalence."
@@ -12,11 +12,61 @@
   "pqf-def-coherent",
   "def-weil-flat-morphism",
   "def-pc-scheme-module-flat-over",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix x∈X and write y=h(x), s=f(y), A=𝒪_{S,s}, B=𝒪_{Y,y}, C=𝒪_{X,x}, and N=𝒢_y. The stalk map B→C is local. Since h is flat at x, it is flat; a flat local homomorphism of local rings is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. The stalk-of-pullback isomorphism [lem-weil-pbc-module-stalk-pullback] identifies (h^*𝒢)_x with N⊗_B C, and the induced A-actions agree because the structure map for fh is the composite of those for f and h.",
+   "uses": [
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JZ proof: local rings, faithful flatness of the stalk map, and Sheaves Tag 0098"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flatness-faithfully-flat-extension] to A→B→C and N. It gives that 𝒢_y is flat over A if and only if N⊗_B C is flat over A. Via the stalk isomorphism and the compatible A-actions from Step 1, this is exactly the pointwise equivalence that 𝒢 is flat over S at y if and only if h^*𝒢 is flat over S at x.",
+   "uses": [
+    "lem-trf-flatness-faithfully-flat-extension",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JZ proof, flatness criterion after the faithfully flat local stalk extension"
+   }
+  },
+  {
+   "text": "For a jointly surjective family of flat morphisms h_i:X_i→Y, each h_i^*𝒢 is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], so its relative flatness over S through f h_i is defined. Assume 𝒢 is flat over S. By [lem-pc-relative-flat-module-stalk] every stalk 𝒢_y is flat over 𝒪_{S,f(y)}, i.e. 𝒢 is flat over S at every y. For x∈X_i, Step 2 (h_i is flat at x) gives that h_i^*𝒢 is flat over S at x; so all stalks of h_i^*𝒢 are flat over the base stalks, and [lem-pc-relative-flat-of-stalks], applied to the quasi-coherent module h_i^*𝒢 and the morphism f h_i, shows that h_i^*𝒢 is flat over S. Conversely, assume every h_i^*𝒢 is flat over S. By [lem-pc-relative-flat-module-stalk] applied to f h_i, every stalk (h_i^*𝒢)_x is flat over 𝒪_{S,f h_i(x)}. Given y∈Y, joint surjectivity supplies some i and x∈X_i with h_i(x)=y; Step 2 then gives that 𝒢 is flat over S at y. Since this holds for every y and 𝒢 is quasi-coherent, [lem-pc-relative-flat-of-stalks] shows that 𝒢 is flat over S.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-relative-flat-module-stalk",
+    "lem-pc-relative-flat-of-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JZ, 'In particular' clause (stated there for one surjective flat h; the family form is the same pointwise argument), with Tag 01U3 (definition-flat) and Tag 01U4 (lemma-flat-module-characterize) for the affine-sections versus stalks comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-pc-relative-flat-module-stalk",
+  "lem-pc-relative-flat-of-stalks",
+  "lem-trf-flatness-faithfully-flat-extension",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JZ lemma-flat-permanence and Tag 01U4 affine-local relative flatness criterion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-flattening-descent",
@@ -83,5 +133,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-flatness-source-cover",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Stacks Tag 02JZ. The pointwise proof uses the existing stalk pullback isomorphism and the existing Mathlib-backed fact that a flat local stalk map is faithfully flat, then a new statement-only intermediate-ring flatness lemma. The family clause follows by joint surjectivity and the existing stalkwise criterion lem-pc-relative-flat-of-stalks. No hypotheses were added or dropped. Maintainer reader (2026-10-18): glossed the pointwise notion 'flat over S at a point' inline (Stacks Morphisms Tag 01U3 (definition-flat) clause (2), which def-pc-scheme-module-flat-over states only globally); Step 3 now cites lem-pc-relative-flat-module-stalk for the affine-to-stalk direction and lem-weil-pbc-module-pullback-quasi-coherent for quasi-coherence of the pullbacks.",
+  "blueprint": "Realizes the final sentence of lem-trf-local-term-locality proof (1)--(2), where relative flatness is detected after jointly surjective flat source charts.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-relative-flat-of-stalks",
+    "why": "Step 3 passes from flatness of all stalks to the affine-section relative flatness of def-pc-scheme-module-flat-over; a generic criterion, no node of sk-i-curve-zero states it."
+   },
+   {
+    "node": "lem-pc-relative-flat-module-stalk",
+    "why": "Step 3 passes from affine-section relative flatness to flatness of every stalk; the generic converse criterion, no node of sk-i-curve-zero states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-relative-flat-of-stalks",
+  "lem-pc-relative-flat-module-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-acd4983a8",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-acd4983a8 (reviewer sub-agent of L); spot-checked: Read Stacks Morphisms 02JZ lemma-flat-permanence (morphisms.tex l.4881, statement and proof), 01U3 definition-flat, Algebra 0584 lemma-flatness-descends-more-general (algebra.tex l.8930), and Mathlib FaithfullyFlat/Basic.lean l.575-603. The item matches 02JZ hypothesis by hypothesis; the family clause is the same pointwise argument as 02JZ's 'In particular' clause. The new helper is exactly Algebra 0584(2) and is true: one direction is associativity of the tensor product plus B-flatness of C, the other is that faithful flatness reflects injectivity. Mathlib has only the same-base form (Flat.of_flat_tensorProduct / iff_flat_tensorProduct), so the helper is not a leaf. It is not a duplicate: lem-weil-pbc-flatness-descends-faithfully-flat (00HJ) states a different, same-base result. It is strictly smaller than the item, not a restated clause. Step 1 hypotheses checked: the stalk map is local and flat, so it is faithfully flat (Mathlib-leaf node), and lem-weil-pbc-module-stalk-pullback is Lean-closed. Step 2 uses the helper verbatim. Fixes, three small faults: (1) Step 3 cited only stalks=>affine (lem-pc-relative-flat-of-stalks). It now also cites lem-pc-relative-flat-module-stalk for affine=>stalks in both directions and lem-weil-pbc-module-pullback-quasi-coherent (Lean-closed) for quasi-coherence of h_i^*G (C1/C4). (2) The item statement now defines 'flat over S at a point' inline per 01U3(2), with def-weil-pbc-flat-ring-map added to stmt_deps; the meaning is unchanged (B3). (3) The helper's source is corrected to Algebra Tag 0584(2) (B5). Accepted tool uses: lem-pc-relative-flat-of-stalks and lem-pc-relative-flat-module-stalk, both generic flatness criteria from sk-thm-picard-semicon. Acyclicity checked. No target, no SGA.; 2 file(s) fixed by the reviewer"
  }
 }

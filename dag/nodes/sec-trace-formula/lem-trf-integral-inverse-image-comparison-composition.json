@@ -30,9 +30,85 @@
   "def-weil-inverse-image-pullback-comparison",
   "lem-trf-integral-pullback-comparison-realization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The hypotheses on the schemes and coefficient sheaves are exactly those in the inverse-image and completed-pullback definitions. In particular, the integral pullback operation carries the constructible category on $V$ into that on $W$, so $Lk^*N\\in D^b_c(W,\\mathcal O_E)$. The canonical pseudofunctorial isomorphism of inverse-image functors gives $d_{h,k,N}$; transporting module actions through the structure isomorphisms makes it $\\mathcal O_E$-linear. The compatibility of the canonical coefficient maps with inverse-image composition is the ring-sheaf identity of [lem-trf-constant-coefficient-composition], and the same underlying inverse-image map is applied termwise to $N$.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-trf-constant-coefficient-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: compatibility of the integral base-change identifications with composition"
+   }
+  },
+  {
+   "text": "At a finite coefficient level $A_{E,n}$ choose one flat-term K-flat representative $P$ of $N$ and use its quotient complex. By the finite part of [def-weil-inverse-image-pullback-comparison], each $\\kappa^g_N$ is represented termwise by the unit map $x\\mapsto x\\otimes1$. By [lem-weil-pbc-proetale-derived-pullback-composition], $c_{h,k,N}$ is represented on the same complex by $(kh)^*P\\cong h^*k^*P$. Both composites therefore send a local section $x$ to the same tensor $x\\otimes1\\otimes1$, with the same transported coefficient action; $d_{h,k,N}$ supplies the common source identification. The equality is compatible with all quotient transition maps.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-constant-coefficient-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition 18.13.1, Tag 03D6, unit map for module pullback; combined with the termwise composition map of the cited pro-etale pullback lemma"
+   }
+  },
+  {
+   "text": "For integral coefficients and $g\\in\\{k,kh\\}$ let $P$ be the chosen flat-term K-flat representative of $N$ and let $C_{g,\\bullet}$, $C_{g,m}=\\operatorname{Res}_mg^*(P_m)$, be the strict reduction tower of the integral comparison definition. Its maps $\\theta_{g,m}:g^{-1}P\\to C_{g,m}$, $x\\mapsto\\bar x\\otimes1$, satisfy $t_m\\circ\\theta_{g,m+1}=\\theta_{g,m}$, so they define a strict tower map $\\theta_g^\\Delta:\\Delta g^{-1}P\\to C_{g,\\bullet}$. By [def-weil-inverse-image-pullback-comparison] (b), $\\kappa^g_N=[\\tilde\\theta_g]\\circ[g^{-1}(q)]^{-1}$ with $\\tilde\\theta_g(z)=(0,(\\theta_{g,m}(z))_m)$ landing in the complex $\\operatorname{Cone}(1-s)[-1]$ of $C_{g,\\bullet}$. Countable products of module sheaves on the pro-etale site are exact [lem-weil-proetale-countable-products-exact], so the normalized Roos comparison $\\rho_{C_g}$ of [lem-weil-strict-roos-comparison] (the class of $\\operatorname{Cone}(q_C)$ for a K-injective tower resolution $q_C:C_{g,\\bullet}\\to I_\\bullet$ followed by the inverse of the inclusion $\\lim I_\\bullet\\to\\operatorname{Cone}(1-s)[-1](I_\\bullet)$) identifies this cone complex with $R\\lim C_{g,\\bullet}$; this is the identification under which the counit $\\epsilon_{C_g}$ is applied. Under it, $[\\tilde\\theta_g]$ is the morphism $r_{\\theta_g}$ of [lem-trf-integral-cone-counit-realization], whose counit identity gives $\\epsilon_{C_g}\\circ\\Delta(r_{\\theta_g})=\\theta_g^\\Delta$ in $D(\\operatorname{Tow}(\\operatorname{Mod}(\\widehat{\\mathcal O}_{E,-})))$. Hence $\\epsilon_{C_g}\\circ\\Delta(\\kappa^g_N)=\\theta_g^\\Delta\\circ\\Delta[g^{-1}(q)]^{-1}$: the cone map realizes exactly the compatible family of finite unit maps, before applying any quotient functor or using reduction detection.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-trf-integral-cone-counit-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: compatibility of the integral base-change identifications with composition before rationalization"
+   }
+  },
+  {
+   "text": "Let $M=Lk^*N=R\\lim C_{k,\\bullet}$ and $D_\\bullet=h^*C_{k,\\bullet}$; by the defining formula of [lem-trf-integral-pullback-comparison-realization], $D_m=h^*k^*P_m=Q_{h,k,E}(P)_m$ and $\\eta_{h,k,N}:Lh^*M\\xrightarrow{\\sim}R\\lim D_\\bullet$. Write $X=h^{-1}k^{-1}N$, represented by $h^{-1}k^{-1}P$. On $Z$, the constant-tower functor $\\Delta:\\operatorname{Mod}(\\widehat{\\mathcal O}_{E,Z})\\to\\operatorname{Tow}$ is exact and left adjoint to $\\lim$, and the tower category is abelian [lem-weil-tower-category-levelwise-abelian] with K-injective tower resolutions computing $R\\lim$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Applying [lem-pc-pre-derived-adjoint-functors-general] with $G=\\Delta$ ($L\\Delta=\\Delta$, $\\Delta$ being exact) and $F=\\lim$, $RF=R\\lim$ computed with a K-injective resolution $q_D:D_\\bullet\\to I_\\bullet$, gives a bijection $e:\\operatorname{Hom}(X,R\\lim D_\\bullet)\\cong\\operatorname{Hom}(\\Delta X,D_\\bullet)$; its characterizing formula with $t=\\mathrm{id}$ and a chain map $f:X\\to\\lim I_\\bullet$ gives $e(f)=[q_D]^{-1}\\circ(\\Delta\\lim I_\\bullet\\to I_\\bullet)\\circ\\Delta f$, and by its functoriality in the first variable $e(\\phi)=\\epsilon_D\\circ\\Delta(\\phi)$ for every $\\phi$, with $\\epsilon_D$ the counit normalized in [lem-trf-integral-pullback-comparison-realization]. In particular $\\epsilon_D\\circ\\Delta(-)$ is injective and $\\epsilon$ is natural for strict tower maps. It therefore suffices to compare $\\epsilon_D\\circ\\Delta(-)$ of $\\eta_{h,k,N}$ composed with each side. Left side: $\\eta_{h,k,N}\\circ c^E_{h,k,N}=R\\lim(c_{h,k,\\bullet})$ by the defining formula, so naturality of $\\epsilon$ and Step 3 for $g=kh$ give the tower image $c_{h,k,\\bullet}\\circ\\theta^\\Delta_{kh}\\circ\\Delta(d_{h,k,P})\\circ\\Delta[h^{-1}k^{-1}(q)]^{-1}$, using $d\\circ h^{-1}k^{-1}(q)=(kh)^{-1}(q)\\circ d$. Right side: [lem-trf-integral-pullback-resolution-matching] gives $\\epsilon_D\\circ\\Delta(\\eta_{h,k,N}\\circ\\kappa^h_M)=u_{h,C_k}\\circ h^{-1}(\\epsilon_{C_k})$; precomposing with $\\Delta h^{-1}(\\kappa^k_N)$, using that the exact termwise functor $h^{-1}$ commutes with $\\Delta$, and Step 3 for $g=k$ gives $u_{h,C_k}\\circ h^{-1}(\\theta^\\Delta_k)\\circ\\Delta[h^{-1}k^{-1}(q)]^{-1}$. The two strict tower maps $c_{h,k,m}\\circ\\theta_{kh,m}\\circ d$ and $u_{h,C_{k,m}}\\circ h^{-1}(\\theta_{k,m})$ from $h^{-1}k^{-1}P$ to $h^*k^*P_m$ both send a local section $x$ to $\\bar x\\otimes1\\otimes1$: the first $\\otimes1$ is the $k$-pullback unit and the second the $h$-pullback unit, the termwise compositor being the canonical identification of [lem-weil-pbc-proetale-derived-pullback-composition] and the computation that of Step 2. Hence the two tower images agree, so by injectivity $\\eta_{h,k,N}\\circ c^E_{h,k,N}\\circ\\kappa^{kh}_N\\circ d_{h,k,N}=\\eta_{h,k,N}\\circ\\kappa^h_{Lk^*N}\\circ h^{-1}(\\kappa^k_N)$, and cancelling the isomorphism $\\eta_{h,k,N}$ yields $$c^E_{h,k,N}\\circ\\kappa^{kh}_N\\circ d_{h,k,N}=\\kappa^h_{Lk^*N}\\circ h^{-1}(\\kappa^k_N)$$ in $D(Z_{\\mathrm{proet}},\\mathcal O_E)$, before any reduction detection.",
+   "uses": [
+    "lem-trf-integral-pullback-resolution-matching",
+    "lem-trf-integral-cone-counit-realization",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: compare the two composites by their counit images in the strict quotient tower; both send x to x tensor 1 tensor 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-trf-constant-coefficient-composition",
+  "lem-trf-integral-cone-counit-realization",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-integral-pullback-resolution-matching",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 1, Global powers: integral comparison with composition; finite-level tensor calculation and strict-tower realization"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +143,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-integral-inverse-image-comparison-composition",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by adding the missing category dependency and replacing the ill-typed resolution-matching node with the strict-tower counit identity for eta composed with kappa^h. Step 4 computes the counit images of both composites, identifies both with the termwise map x↦x⊗1⊗1, and concludes by injectivity of postcomposition under the Delta ⊣ Rlim adjunction.",
+  "blueprint": "Realizes Step 1, Global powers of thm-trf-l-function-euler-product.proof.md: finite unit calculation, strict-tower counit/cone realization, and counit comparison of the two integral composites before realization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-ff44de28a",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-ff44de28a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, blueprint thm-trf-l-function-euler-product.proof.md lines 35-54 (Global powers), Stacks sites-cohomology Derived limits / 0941, and the unit route (all cited units are reachable, no tool_uses needed). No false statement and no restated split. Three repairable faults, all repaired in fixes/. (1) C4: Step 4 and lem-trf-integral-pullback-resolution-matching cited lem-coef-derived-system-evaluation-calculus for the adjunction Delta ⊣ Rlim, but that node only states the reduction adjunction R_W ⊣ L_W. Step 4 now cites lem-pc-pre-derived-adjoint-functors-general with G=Delta, F=lim (plus lem-weil-tower-category-levelwise-abelian and K-injective resolutions); the Hom-bijection is f ↦ eps∘Delta(f), which gives injectivity. The new node now defines its counits by the normalization in lem-trf-integral-pullback-comparison-realization. (2) E4/E5: Step 4 gave the left composite's tower image as u∘h^{-1}(eps_{C_k}), which is the right composite's image. It is rewritten: left = c_{h,k,•}∘theta_{kh}∘d, right = u∘h^{-1}(theta_k), both termwise x ↦ x⊗1⊗1, then injectivity and cancelling eta. (3) B2/C4: the cone node left eps_C and r_theta implicit, and the Roos model on C computes Rlim only when products are exact. It now defines both explicitly through a K-injective resolution, valid on any site. Step 3 now cites lem-weil-strict-roos-comparison and lem-weil-proetale-countable-products-exact to identify the literal cone target of kappa with the K-injective Rlim. Both new statements were checked by unwinding the definitions and tested on the zero tower, a constant tower, and h=id. lem-weil-strict-roos-comparison is a near relative of the cone node but assumes exact products and states no counit identity, so the cone node is kept. Not repaired: the resolution-matching node records no LeanSearch entry; I could not run it and did not invent one.; 3 file(s) fixed by the reviewer"
  }
 }

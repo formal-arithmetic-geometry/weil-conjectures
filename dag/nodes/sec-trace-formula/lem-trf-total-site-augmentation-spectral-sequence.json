@@ -18,9 +18,256 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "One may use compatible small site presentations without assuming that the given geometric morphisms arise from functors between the original sites. In each component topos, start with its sheafified representables. Close these sets simultaneously under finite limits and inverse images along all arrows of the diagram, including the augmentation and, when needed, a specified square. Iterate this operation over $\\mathbf N$. There are only set-many arrows and objects, so each resulting full subcategory is small in the fixed containing universe; it contains the original generators and is stable under all these inverse images. Give it the epimorphic-family topology. The equivalence in [lem-weil-pbc-sheaf-subcategory-comparison] identifies its sheaves with the original topos. Restricted inverse images preserve finite limits and epimorphic covering families, and the prescribed coherences restrict with them. Their Grothendieck total category has objects $(p,U)$ and arrows $(q,V)\\to(p,U)$ consisting of $\\alpha:[p]\\to[q]$ and $V\\to u_\\alpha^{-1}U$; use componentwise coverings. Pullback of such a covering along this arrow is its covering pullback over $u_\\alpha^{-1}U$ in degree $q$. This verifies the site axiom for these generators. Restricting a total sheaf gives exactly the stated families: maps on cross-degree arrows are, by adjunction, the maps $u_\\alpha^{-1}F_p\\to F_q$; the sheaf condition only concerns one component. Thus this small total site presents the specified family category, independently of the site presentations.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-sheaf-subcategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WC (lemma-simplicial-site-site), Case A, and Tag 09WF; sites.tex Tag 03A1 (lemma-special-equivalence), with the simultaneous finite-limit/inverse-image closure of the construction in Tag 03A2."
+   }
+  },
+  {
+   "text": "Use the canonical constant-ring comparisons of [lem-pe-constant-left-module-inverse-image]. A total module is consequently a family of component $\\Lambda$-modules with $\\Lambda$-linear transition maps. Kernels and cokernels of a family map are the component kernels and cokernels: exactness of each $u_\\alpha^*$ supplies the induced transitions, and the component universal properties supply the family universal properties. The same formulas give restriction $r_p$, so it is exact. If every component of a family map is invertible, its component inverses commute with transitions by multiplying the compatibility equation by these inverses. Therefore the $r_p$ are jointly conservative. This verifies the constant-module version, for arbitrary geometric transitions, of the abelian component restriction in [lem-trf-total-site-component-restriction].",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-trf-total-site-component-restriction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 09WF--09WG and 0D72 (lemma-restriction-module-to-components-site); constant-ring module variant."
+   }
+  },
+  {
+   "text": "Extend the left-adjoint formula of [lem-trf-total-site-component-restriction] to modules: set $(\\ell_pM)_q=\\bigoplus_{\\alpha:[p]\\to[q]}u_\\alpha^*M$, with transition along $\\beta$ carrying the $\\alpha$ summand to the $\\beta\\alpha$ summand through the prescribed composition isomorphism. A family map $\\ell_pM\\to F$ is recovered from its identity summand $M\\to F_p$, and conversely that map extends by the transitions of $F$; the two operations are inverse. Hence $\\ell_p\\dashv r_p$. There are finitely many maps $[p]\\to[q]$. Each summand functor is exact by [lem-pe-constant-left-module-inverse-image], so finite biproduct identities and Step 2 make $\\ell_p$ exact. The right-adjoint preservation theorem [lem-exc-rg-right-adjoint-preserves-injectives] implies that $r_p$ preserves injective module objects. The complex version [lem-weil-pbc-right-adjoint-preserves-kinjective] also gives preservation of K-injectives.",
+   "uses": [
+    "lem-trf-total-site-component-restriction",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-exc-rg-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D72 (module left adjoint), Tag 0D75 (lemma-exactness-g-shriek-modules); constant coefficients make all transition pullbacks exact."
+   }
+  },
+  {
+   "text": "For $h:\\mathcal C'_\\bullet\\to\\mathcal C_\\bullet$ define $h^*F$ by $(h^*F)_p=h_p^*F_p$, with transitions supplied by $u'^*_\\alpha h_p^*\\simeq h_q^*u_\\alpha^*$. Define $(h_*G)_p=h_{p,*}G_p$. Its transition $u_\\alpha^*h_{p,*}G_p\\to h_{q,*}G_q$ is adjoint to\n$$h_q^*u_\\alpha^*h_{p,*}G_p\\simeq u'^*_\\alpha h_p^*h_{p,*}G_p\\longrightarrow u'^*_\\alpha G_p\\longrightarrow G_q,$$\nusing the component counit. Taking component adjoints now identifies the compatible family maps $h^*F\\to G$ and $F\\to h_*G$: substituting this transition formula makes their compatibility equations identical. The triangle identities make these assignments inverse. Thus the units and counits are componentwise, $r_ph_*=h_{p,*}r'_p$, and $r'_ph^*=h_p^*r_p$. Exactness of $h^*$ follows componentwise from [lem-pe-constant-left-module-inverse-image] and Step 2. This is the explicit constant-module extension of the canonical abelian comparisons in [lem-trf-total-site-derived-components].",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-trf-total-site-derived-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D96 (lemma-morphism-simplicial-sites) and 0DH0 (lemma-morphism-simplicial-sites-modules); component adjunction construction."
+   }
+  },
+  {
+   "text": "For the augmentation set $(a^*G)_p=a_p^*G$, using its coherent composition maps as transitions. Its right adjoint is\n$$a_*F=\\operatorname{Eq}(a_{0,*}F_0\\rightrightarrows a_{1,*}F_1).$$\nIndeed a map from $G$ to this equalizer gives $a_0^*G\\to F_0$ whose two continuations in degree one agree. Continue in degree $p$ along any vertex $[0]\\to[p]$; two vertices are endpoints of an order map $[1]\\to[p]$, so the continuations agree. They commute with all order maps by the family coherence. Conversely a family map restricts to such an equalizer map. These operations are inverse, proving $a^*\\dashv a_*$. This argument works on sets and modules; on sets finite limits are componentwise, and on constant modules exactness is Step 2 and [lem-pe-constant-left-module-inverse-image]. Component equalities $a_p=ag_p$ have the composite adjunction, where $g_p^*=r_p$.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70 (lemma-augmentation-site) and module augmentation construction preceding Tag 0D7B."
+   }
+  },
+  {
+   "text": "The total site from Step 1 and every component site are small in the chosen universe. Their module categories are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. Choose a bounded-below injective representative $I$ of $L$ with $I^q=0$ for $q<c$ using [lem-weil-pbc-dplus-injective-representative]. This representative is K-injective. Step 3 makes $I_p=r_pI$ a bounded-below complex of injectives, and Step 2 makes it a representative of $r_pL$. The derived computation [lem-weil-pbc-right-derived-plus-injective] therefore identifies $Ra_*L$ with $Q(a_*I)$ and $Ra_{p,*}r_pL$ with $Q(a_{p,*}I_p)$, with their canonical resolution comparisons.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F proof; derived.tex Tags 013K and 070J, bounded-below injective representatives."
+   }
+  },
+  {
+   "text": "To compute the asserted component base-change map, choose a bounded-below injective representative $J$ on the primed total site. Step 3 gives the component injective representatives $r'_pJ$. Applying the underived identity of Step 4 termwise yields\n$$r_p(h_*J)=h_{p,*}(r'_pJ).$$\nBy [lem-weil-pbc-right-derived-plus-injective] both sides compute the two derived objects in the statement. This identification is the canonical mate: transpose it under $h_p^*\\dashv Rh_{p,*}$. Its transpose is $h_p^*r_ph_*J\\simeq r'_ph^*h_*J\\to r'_pJ$, the restriction of the counit, which Step 4 identifies with the component counit. The derived adjunctions retain these counits under the composite-adjunction normalization [lem-sfb-derived-composition-adjunction-normalization]. Thus the mate is an isomorphism, rather than merely an unspecified isomorphism of its endpoints, and the calculation is natural in $J$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-trf-total-site-derived-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DH1 (lemma-direct-image-morphism-simplicial-sites-modules), canonical base-change map; derived normalization from derived.tex Tag 09T5."
+   }
+  },
+  {
+   "text": "For every term $I^q$ of Step 6 apply [lem-trf-total-site-injective-cech-resolution]. Its hypotheses hold: the diagram and augmentation are coherent geometric diagrams on small sites, the coefficients are constant $\\Lambda$, and $I^q$ is injective as a total module. It gives the natural exact augmented horizontal row\n$$0\\longrightarrow a_*I^q\\longrightarrow a_{0,*}I_0^q\\longrightarrow a_{1,*}I_1^q\\longrightarrow\\cdots.$$\nThe arrows are alternating cofaces induced by the total transition maps, with augmentation the transposed component counit. No Cartesian condition on $I^q$ or on its transitions is used.",
+   "uses": [
+    "lem-trf-total-site-injective-cech-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7D (lemma-augmentation-cech-complex-modules), applied termwise to the injective representative."
+   }
+  },
+  {
+   "text": "Put $A^{p,q}=a_{p,*}I_p^q$ for $p\\ge0$ and $q\\ge c$, zero elsewhere. Horizontally take the alternating cofaces of Step 8; vertically take the differential of $I$. The face identities cancel terms omitting two vertices in opposite orders, so the horizontal differential squares to zero. The resolution differential squares to zero. Naturality of each coface in $I^q$ makes the two differentials commute. Thus [def-sp-double-complex-total] gives $d_{\\mathrm{Tot}}=d_{\\mathrm{face}}+(-1)^p d_{\\mathrm{resolution}}$. Set $B^{p,t}=A^{p,c+t}$ for $t\\ge0$. This is first-quadrant and $\\operatorname{Tot}(B)^{n-c}=\\operatorname{Tot}(A)^n$ with exactly the same differential; this is a degree relabelling, not a shift with an additional sign. Each total degree has finitely many summands.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F proof, double complex; homology.tex first-quadrant total convention."
+   }
+  },
+  {
+   "text": "Let $T^t=a_*I^{c+t}$. The row augmentations of Step 8 give $T\\to B^{0,\\bullet}$ killed by the horizontal differential, hence a chain map $e:T\\to\\operatorname{Tot}(B)$ landing in the horizontal-degree-zero summands. For each $t$, the map from $T^t$ concentrated in horizontal degree zero to the row $B^{\\bullet,t}$ is a quasi-isomorphism by Step 8. These are exactly the row/resolution-column hypotheses of [lem-sc-first-quadrant-column-augmentation], with $K=B$ and $K.\\mathrm{flip}.X(t)$ the row being tested. The theorem makes $e$ a quasi-isomorphism. Undoing the relabelling and using the canonical derived computation of Step 6 gives $\\operatorname{Tot}(A)\\simeq a_*I\\simeq Ra_*L$. The first comparison is the inverse of this specified row-augmentation quasi-isomorphism.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F proof; homology.tex lemma-double-complex-gives-resolution (Tag 0133)."
+   }
+  },
+  {
+   "text": "Apply [thm-sp-double-complex-spectral-sequences] to $B$, taking the first filtration by its horizontal degree. The degree-$t$ cohomology of column $p$ is $H^{c+t}(a_{p,*}I_p)=H^{c+t}(Ra_{p,*}r_pL)$ by Step 6. Relabel $q=c+t$. This gives\n$$E_1^{p,q}=H^q(Ra_{p,*}r_pL),\\qquad p\\ge0,\\ q\\ge c.$$\nThe first differential is induced by the horizontal differential, hence is the alternating face differential. The abutment is $H^{p+q}(\\operatorname{Tot}A)=H^{p+q}(Ra_*L)$ by Step 10. This proves the spectral-sequence assertion with the specified total sign.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F; homology.tex lemma-first-quadrant-ss (Tag 0130)."
+   }
+  },
+  {
+   "text": "The same double-complex theorem identifies the abutment filtration with the image of cohomology of the column filtration, and identifies its graded pieces with $E_\\infty$. In original total degree $n\\ge c$, the only possible columns are $0\\le p\\le n-c$, so $F^0H^n=H^n$ and $F^{n-c+1}H^n=0$. If $n<c$, the total complex has zero term in degree $n$, hence $H^n=0$; its filtration is zero and $\\max(n-c+1,0)=0$. This proves the stated formula uniformly in $n$ and the asserted graded identification. Only finite diagonals occur; no uniform upper cohomological bound is required.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "homology.tex lemma-first-quadrant-ss (Tag 0130), finite image filtration."
+   }
+  },
+  {
+   "text": "A derived coefficient map $L\\to M$ is represented between bounded-below injective representatives by a chain map, uniquely up to homotopy, by [lem-weil-pbc-kinjective-hom-derived]. Applying $a_{p,*}r_p$ columnwise gives a map of double complexes and hence, by [thm-sp-double-complex-spectral-sequences], a map of pages and abutment filtrations. A homotopy $s$ between representative maps induces a total homotopy $H|_{A^{p,q}}=(-1)^pa_{p,*}r_p(s^q)$. Its vertical terms give $ds+sd$ and its horizontal terms cancel because the cofaces commute with $s$ and $(-1)^p$ reverses when $p$ increases. This homotopy preserves the column filtration. It gives equal maps on column cohomology $E_1$ and on filtered total cohomology, hence on all later pages. Resolution comparisons are homotopy equivalences by the same Hom theorem, so the construction is independent of resolution and functorial in $L$. For two different lower bounds, use their minimum and insert zero terms; the original double complex and filtration are unchanged.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F functoriality; derived.tex Tag 070I, Hom into a K-injective; explicit filtered homotopy calculation."
+   }
+  },
+  {
+   "text": "For a square $ah\\simeq ga'$ choose $I$ for $L$ as before and a bounded-below injective representative $J$ for $h^*L$. Both may be zero below $c$, since $h^*$ is exact. The Hom bijection [lem-weil-pbc-kinjective-hom-derived] represents the derived identification $Q(h^*I)\\simeq QJ$ by a quasi-isomorphism $j:h^*I\\to J$. In degree $(p,q)$ use the composite\n$$g^*a_{p,*}I_p^q\\xrightarrow{\\mathrm{Ex}_p}a'_{p,*}h_p^*I_p^q\\xrightarrow{a'_{p,*}j_p^q}a'_{p,*}J_p^q.$$\nHere $\\mathrm{Ex}_p$ is the underived mate: its transpose is $a_p'^*g^*a_{p,*}I_p^q\\simeq h_p^*a_p^*a_{p,*}I_p^q\\to h_p^*I_p^q$. Naturality makes the vertical differentials commute. For each coface, transposing the two composites gives the same composite of the diagram coherence, the relevant component counits and the transition of $I$; the component transitions of $j$ commute because $j$ is a total-family map. Equivalently this is the two mate-pasting identities [lem-weil-pbc-mate-pasting](1)--(2). Therefore the displayed maps form a double-complex map $t:g^*A\\to A'$ preserving the column filtration.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D99, augmented square; sites-cohomology.tex Remarks 0E46--0E47, ordinary base-change mates. The chain construction is the naturality refinement."
+   }
+  },
+  {
+   "text": "The map on the augmented column is $e_a:a_*'j\\circ\\mathrm{Ex}:g^*a_*I\\to a'_*J$, with $\\mathrm{Ex}$ the total underived mate. It commutes with the row augmentations: transposition gives the same component of the counit in Step 8, by mate pasting. Thus Step 10 identifies the total map of $t$ with $Q(e_a)$ on abutments. Its derived transpose is the counit composite\n$$a'^*g^*Ra_*L\\simeq h^*a^*Ra_*L\\longrightarrow h^*L.$$\nIndeed on $I$ it is $h^*(a^*a_*I\\to I)$ followed by $j$, whose class is the chosen identity of $h^*L$. The normalization theorem [lem-sfb-derived-composition-adjunction-normalization] identifies these chain counits with the specified derived counits. Hence $Q(e_a)$ is exactly the ordinary mate $g^*Ra_*L\\to Ra'_*h^*L$. No component comparison is assumed invertible here.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "sites-cohomology.tex Remark 0E46 (base-change-map) and Remark 0E47; derived.tex Tag 09T5, composite-adjunction normalization."
+   }
+  },
+  {
+   "text": "Exactness of $g^*$ identifies $H^q(g^*A^{p,\\bullet})$ with $g^*H^q(A^{p,\\bullet})$ by [lem-sp-exact-functor-preserves-homology]. Since $I_p$ and $J_p$ are injective representatives and $h_p^*I_p\\to J_p$ is a resolution comparison, transposing the $p$-th column of $t$ gives $a_p'^*g^*Ra_{p,*}r_pL\\simeq h_p^*a_p^*Ra_{p,*}r_pL\\to h_p^*r_pL$. Thus its class is exactly the component ordinary derived comparison in the statement. The double-complex theorem supplies the morphism from $g^*$ of the old spectral sequence to the new one, with those first-page maps and with the abutment map computed in Step 15. The inverse-image cohomology and image-filtration identifications are canonical because exact functors preserve kernels, images and cokernels, as stated in [lem-sp-exact-functor-preserves-homology].",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, double-complex functoriality; sites-cohomology.tex Remarks 0E46--0E47, component comparisons."
+   }
+  },
+  {
+   "text": "For successive squares paste the two underived mate maps; [lem-weil-pbc-mate-pasting](1)--(2) identifies the result with the mate of the pasted square. The composite inverse-image coherence is the given one. The composite of chosen resolution comparisons and any comparison for the pasted square represent the same derived identification into an injective representative, so [lem-weil-pbc-kinjective-hom-derived] makes them homotopic. The filtered-homotopy calculation of Step 13 therefore identifies their maps from $E_1$ onward and on filtered abutments. The identity square uses identity mates by the identity clause of mate pasting. Finally, augmentation units are the transposes of identities, and direct-image composition is normalized by [lem-sfb-derived-composition-adjunction-normalization]; mate pasting with these identities proves the augmentation-unit and composition compatibilities. This finishes the asserted naturality for arbitrary commutative augmented squares.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "sites-cohomology.tex Remarks 0E46--0E47; normalized derived adjunction and identity mates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-trf-total-site-component-restriction",
+  "lem-trf-total-site-derived-components",
+  "lem-trf-total-site-injective-cech-resolution",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-sheaf-subcategory-comparison",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Follows Tag 0D7F and Tags 0DH1, 0D99; adds explicit coherent geometric-diagram presentations, constant-module lifting and ordinary-mate naturality beyond the stated Stacks theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +303,45 @@
    "results": "{\"t\": \"2026-10-17T18:42:24Z\", \"tool\": \"grep\", \"query\": \"spectralSequence|spectral_sequence|SpectralSequence\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived augmentation spectral sequence for a bounded-below complex of modules on a simplicial diagram of sites, with component restriction and functorial base change",
+   "results": "{\"t\": \"2026-10-17T18:59:35Z\", \"tool\": \"leanfinder\", \"query\": \"Derived augmentation spectral sequence for a bounded-below complex of modules on a simplicial diagram of sites, with component restriction and functorial base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.normalizedMooreComplex\", \"AlgebraicTopology.NormalizedMooreComplex.obj\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"CochainComplex.cm5b.I\", \"AlgebraicTopology.NormalizedMooreComplex.obj_d\"], \"digest\": \"1ec63388eb78a6b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; Dold-Kan normalization, augmented objects and generic injective replacements do not assert a simplicial-topos direct-image spectral sequence or its mate naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a simplicial diagram of sites with an augmentation, the derived direct image has a functorial spectral sequence whose E1 page is the derived direct images of the components",
+   "results": "{\"t\": \"2026-10-17T18:59:35Z\", \"tool\": \"leansearch\", \"query\": \"For a simplicial diagram of sites with an augmentation, the derived direct image has a functorial spectral sequence whose E1 page is the derived direct images of the components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.Augmented.point\", \"CategoryTheory.CosimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.SimplicialObject.Augmented.drop\", \"CategoryTheory.SimplicialObject.Augmented.whiskeringObj\", \"CategoryTheory.Arrow.augmentedCechNerve\"], \"digest\": \"b06a622c3b2537ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; Dold-Kan normalization, augmented objects and generic injective replacements do not assert a simplicial-topos direct-image spectral sequence or its mate naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, CategoryTheory.SimplicialObject, rightDerived",
+   "results": "{\"t\": \"2026-10-17T18:59:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SpectralSequence, CategoryTheory.SimplicialObject, rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'rightDerived'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the unqualified rightDerived name."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence|spectral_sequence|augmentation.*site|simplicial.*site",
+   "results": "{\"t\": \"2026-10-17T18:59:36Z\", \"tool\": \"grep\", \"query\": \"spectralSequence|spectral_sequence|augmentation.*site|simplicial.*site\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; Dold-Kan normalization, augmented objects and generic injective replacements do not assert a simplicial-topos direct-image spectral sequence or its mate naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject, CategoryTheory.Injective",
+   "results": "{\"t\": \"2026-10-17T19:06:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject, CategoryTheory.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; Dold-Kan normalization, augmented objects and generic injective replacements do not assert a simplicial-topos direct-image spectral sequence or its mate naturality."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-nearby-hypercover-spectral-sequence",
@@ -83,5 +365,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-total-site-augmentation-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Split the general simplicial-site theorem using explicit component adjunctions, exact constant-module inverse images, an injective augmented-Cech resolution, bounded-below injective representatives and the existing first-quadrant double-complex theorems. Added one statement-only input, Tag 0D7D. Kept the imported statement unchanged and supplied the extra coherent geometric-diagram and base-change naturality arguments explicitly. No Lean attachment or Mathlib leaf matches the item.",
+  "blueprint": "Ancestor lem-trf-local-term-locality proof paragraphs (1)--(2), normal-cone specialization; through the nearby-cycle constructibility/proper-hypercover chain in blueprint.from.via, the general-site spectral-sequence input used in Orgogozo Section 9.2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-subcategory-comparison",
+    "why": "Step 1 presents geometric diagrams by small generator sites; the local-term unit has no general presentation theorem. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact inverse image of constant coefficient modules is generic sheaf infrastructure for the component adjunctions and square comparisons. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-exc-rg-right-adjoint-preserves-injectives",
+    "why": "The generic exact-left-adjoint argument proves component injective preservation. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic adjoint K-injective preservation, applied to the explicit component left adjoint. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Module categories on small sites are Grothendieck, allowing the stated injective resolutions. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives theorem for the module categories. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic representatives with the precise lower bound c. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Canonical derived direct-image computation on bounded-below injective representatives. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Identifies comparison counits and units with the specified composite adjunctions. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "Generic double-complex row-augmentation quasi-isomorphism, not a geometric descent theorem. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic column spectral sequence, functorial finite abutment filtration. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom bijection used for representative maps and homotopy independence. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic calculus of ordinary mates used to identify actual comparisons and their composition. This is a generic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Exact pullback preserves the pages, image filtrations and abutment cohomology. This is a generic tool below the fixed unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-subcategory-comparison",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sc-first-quadrant-column-augmentation",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-cb8bc2307",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-cb8bc2307 (reviewer sub-agent of L); spot-checked: I read the item, all 17 steps, the new node and every cited statement in full. Source checks in spaces-simplicial.tex, tags matched in tags/tags: 0D7C l.2109, 0D7D l.2142, 0D7F l.2178-2218 with its double-complex proof, 0DH1 l.1439, 0D99 l.1185. Statement, stmt_deps and the maintainer fields are unchanged, proof_deps equals the union of uses, there is no cycle and no SGA citation. Step 1: I checked the generator-site closure against every hypothesis of lem-weil-pbc-sheaf-subcategory-comparison, the total-site fibre product (q, V x_{u_a^{-1}U} u_a^{-1}U_i) and the componentwise sheaf condition. Steps 3-5: the explicit module left adjoint l_p is exact, so injectives and K-injectives are preserved without forgetting scalars (matters for non-Z-flat Lambda); h^*/h_* and the a_* equaliser adjunction were checked. Step 7: the termwise identity transposes to the restricted counit, so the map proved invertible is the stated mate. Step 10: the orientation of the column-augmentation lemma matches (K.X 0 is the column, K.flip.X t the row). Steps 11-12: E_1 and the bound F^{max(n-c+1,0)}H^n=0, tested at n<c, n=c and c=-2. Step 13: the filtered homotopy (-1)^p s was recomputed. Steps 14-17: mate pasting (1),(2),(4) and the Hom bijection identify the abutment and E_1 maps as the ordinary mates. New node lem-trf-total-site-injective-cech-resolution: true by 0D7C/0D7D through l_p; tested on cosimplicial modules (rho_p M gives the cochains of Delta[p]) and the zero ring. It is statement-only and self-contained, has all three search kinds, correct blueprint.from and via, and is not a clause of the item. Duplicate check: the report missed lem-trf-total-site-injective-augmentation-exactness (Q60, 0D79, injective abelian sheaves, site morphisms). That node is a special case of the new one and does not imply it, so the new node stays; a later maintainer merge of the Q60 node into it is optional. All 14 declared tool_uses are generic and accepted. No target is affected. No fixes."
  }
 }

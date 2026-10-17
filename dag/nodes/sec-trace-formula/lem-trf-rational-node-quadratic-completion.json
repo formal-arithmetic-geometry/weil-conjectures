@@ -17,9 +17,104 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open neighbourhood $U=\\operatorname{Spec}S$ of $z$. By [lem-weil-pbc-lft-affine-pairs], $S$ is a finitely generated $F$-algebra. The rational point gives an augmentation $S\\to F$ with maximal kernel $\\mathfrak p$. Put $A=S_{\\mathfrak p}=\\mathcal O_{X,z}$, $\\mathfrak m=\\mathfrak pA$, and $K=\\overline F$. The induced point $\\bar z$ corresponds to the maximal kernel $\\mathfrak q$ of $S\\otimes_FK\\to K$, $s\\otimes\\lambda\\mapsto\\bar s\\lambda$; put $B=(S\\otimes_FK)_{\\mathfrak q}$ and write $\\mathfrak n$ for its maximal ideal. Apply [lem-trf-separable-closed-point-formal-presentation] with ground field and residue field both $F$, and extension field $K$: $F/F$ is finite separable. It supplies Noetherian local rings $A,B,\\widehat A$, a faithfully flat local map $A\\to B$ with $\\mathfrak mB=\\mathfrak n$ and closed fibre $K$, and a formal presentation of $\\widehat A$, whose maximal ideal is $\\mathfrak m\\widehat A$ with residue field $F$. The same facts for $\\widehat B$ (Noetherian local, maximal ideal $\\mathfrak n\\widehat B$, residue field $K$) come from the second application of this node, to $S\\otimes_FK$ over $K$ at $\\mathfrak q$, in step 3. The coefficient section $F\\to\\widehat A$ is the structural $F$-algebra map, because the section is itself an $F$-algebra map.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-trf-separable-closed-point-formal-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), affine reduction and arbitrary-field comparison; varieties.tex Tags 0C52 (lemma-complete-local-ring-structure-as-algebra), 0C54 (lemma-base-change-complete-local-ring), 0C4Y and 0C50, rational closed-point case."
+   }
+  },
+  {
+   "text": "Write $M_A=\\Omega_{A/F}$ and $M_B=\\Omega_{B/K}$, with differentials as in [def-weil-pbc-kahler-differentials]. These are finite modules. Indeed, if $s_1,\\ldots,s_d$ generate $S$ over $F$, additivity and Leibniz express every $\\mathrm ds$ as an $S$-linear combination of the $\\mathrm ds_i$; the symbols presentation in that definition says these differentials generate $\\Omega_{S/F}$. The same calculation applies after extending the ground field. By [lem-weil-pbc-kahler-differentials-localization], localization gives the claimed finite modules. Let $J_A=\\operatorname{Fit}_1(M_A)$ and $J_B=\\operatorname{Fit}_1(M_B)$, defined by the presentation-minor construction of [lem-trf-fitting-ideal-independence-base-change] with $k=1$. Apply [lem-weil-pbc-kahler-differentials-base-change] to $F\\to K$ and $F\\to S$, and then [lem-weil-pbc-kahler-differentials-localization] at $\\mathfrak p$ and $\\mathfrak q$. They identify $M_B$ with $M_A\\otimes_AB$. Clause (2) of [lem-trf-fitting-ideal-independence-base-change] therefore gives $J_B=J_AB$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RT (lemma-differentials-localize), part (2), and 00RV (lemma-differentials-base-change); more-algebra.tex Tags 07Z8 (lemma-fitting-ideal) and 07ZA (lemma-fitting-ideal-basics), part (3); curves.tex Tag 0C4D, Fitting-ideal field-extension comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-separable-closed-point-formal-presentation] also to the finitely generated $K$-algebra $S\\otimes_FK$ and its rational point $\\mathfrak q$. Choose its presentation $\\widehat B=K[[t_1,\\ldots,t_N]]/(g_1,\\ldots,g_r)$ with $N\\ge2$ and $(g_1,\\ldots,g_r)\\subseteq(t_1,\\ldots,t_N)$. Its Jacobian cokernel is $M_B\\otimes_B\\widehat B$. The assumed ring isomorphism $\\widehat B\\cong K[[u,v]]/(uv)$ satisfies clause (c) of [lem-trf-formal-jacobian-quadratic-criterion]: take $a=c=0,b=1$, so the discriminant is $1$ in every characteristic. Implication (c) to (a) gives $\\operatorname{depth}(\\widehat B)=1$ and identifies the ideal of the $(N-1)$-minors of this Jacobian with $\\mathfrak n\\widehat B$. By clauses (1) and (2) of [lem-trf-fitting-ideal-independence-base-change], the same ideal is $J_B\\widehat B$: use the displayed cokernel as a presentation and extend $J_B$ along $B\\to\\widehat B$. In the kernel-row formulation of that node, every row is a linear combination of the displayed relation rows; expanding a determinant multilinearly shows that its minors generate exactly the same ideal. Consequently $J_B\\widehat B=\\mathfrak n\\widehat B$. No $K$-linearity of the hypothesized ring isomorphism has been assumed.",
+   "uses": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C4C (lemma-fitting-ideal) and 0C49 (lemma-nodal-algebraic), applied over K to the model uv; Tag 0C4D, algebraically closed case and its Jacobian presentation."
+   }
+  },
+  {
+   "text": "The completion map $B\\to\\widehat B$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat], since $B$ is Noetherian local by step 1. Apply [lem-weil-pbc-faithfully-flat-ideal-contraction] to $J_B$ and $\\mathfrak n$. Their extensions agree by step 3, so $J_B=\\mathfrak n$. Now $A\\to B$ is faithfully flat and $\\mathfrak mB=\\mathfrak n$ by step 1, while $J_AB=J_B$ by step 2. Contracting again with [lem-weil-pbc-faithfully-flat-ideal-contraction], this time along $A\\to B$, gives $J_A=\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat) and 05CK (lemma-faithfully-flat-universally-injective); curves.tex Tag 0C4D, descent of the first Fitting ideal from the geometric point."
+   }
+  },
+  {
+   "text": "Both completion maps $A\\to\\widehat A$ and $B\\to\\widehat B$ are flat by [lem-weil-pbc-local-completion-faithfully-flat]. By [lem-trf-separable-closed-point-formal-presentation], all four rings are Noetherian local, the extended maximal ideals are the maximal ideals of the completions, and their residue fields are respectively $F,K$. Thus the three local flat maps $B\\to\\widehat B$, $A\\to B$, and $A\\to\\widehat A$ have closed fibres $K,K,F$. Each field has depth $0$ by [def-weil-pbc-depth]: its maximal ideal is zero, and zero is not a nonzerodivisor on a nonzero field, so no positive-length regular sequence lies in that ideal. Apply [lem-weil-pbc-flat-local-depth-formula] to the three maps, in that order. The depth-one calculation of step 3 yields $\\operatorname{depth}(B)=1$, then $\\operatorname{depth}(A)=1$, and finally $\\operatorname{depth}(\\widehat A)=1$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0337 (lemma-apply-grothendieck), flat local depth formula, and Tag 00MC (lemma-completion-faithfully-flat); curves.tex Tag 0C4D, arbitrary-field depth descent."
+   }
+  },
+  {
+   "text": "Use the presentation $\\widehat A=F[[t_1,\\ldots,t_n]]/(f_1,\\ldots,f_s)$ from [lem-trf-separable-closed-point-formal-presentation], with $n\\ge2$ and kernel contained in $(t_1,\\ldots,t_n)$. Its Jacobian cokernel is $M_A\\otimes_A\\widehat A$. As in step 3, [lem-trf-fitting-ideal-independence-base-change] identifies the ideal of its $(n-1)$-minors with $J_A\\widehat A=\\mathfrak m\\widehat A$, the equality being step 4. Together with $\\operatorname{depth}(\\widehat A)=1$ from step 5, this is condition (a) of [lem-trf-formal-jacobian-quadratic-criterion]. Its implication (a) to (b) supplies $a,b,c\\in F$ with $b^2-4ac\\ne0$ and a complete local $F$-algebra isomorphism $\\widehat A\\cong F[[u,v]]/(au^2+buv+cv^2)$. The $F$-structure is the original structural one by step 1, so this is the asserted conclusion for $\\widehat{\\mathcal O}_{X,z}$.",
+   "uses": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-trf-formal-jacobian-quadratic-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C4C (lemma-fitting-ideal), condition (3) to (1), and 0C49 (lemma-nodal-algebraic), condition (3); the rational-residue-field instance of 0C4D (3) to (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-formal-jacobian-quadratic-criterion",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), geometric-node to depth-one first-Fitting condition, followed by Tags 0C4C (lemma-fitting-ideal) and 0C49 (lemma-nodal-algebraic), rational residue field case."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +150,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.weierstrassMod\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → Polynomial A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $ and a power series $ g $ over $ A $, this function computes the Weierstrass modulus of $ g $ with respect to another power seri\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        (g : PowerSeries A) → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → Polynomial A\", \"doc\": \"Given a local ring $ A $ and a power series $ g $ over $ A $ whose image under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal) is non-zero, this function returns\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.weierstrassUnit\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        (g : PowerSeries A) → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → PowerSeries A\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, this function retu\"}\n  {\"name\": \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n  (g.weierstrassDistinguished hg).IsDistinguishedAt (IsLocalRing.maximalIdeal A)\", \"doc\": \"For a local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if a power series $ g $ over $ A $ has non-zero image under the residue map $ A \\\\to A/\\\\mathfrak{m} $, then the Weierstrass distinguished pol\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n",
    "date": "2026-10-18",
    "verdict": "No match: the returned Weierstrass preparation declarations concern one-variable division and distinguished polynomials, not descent or the nondegenerate binary quadratic normal form of a geometric node. Other hits concern smoothness, not singular completions."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|nondegenerate.*quadratic|quadratic.*completion",
+   "results": "{\"t\": \"2026-10-17T19:14:26Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|nondegenerate.*quadratic|quadratic.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Basic.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Properties.lean\", \"Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean\"], \"digest\": \"1258a5e577d7048a\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: Lagrange interpolation nodes are unrelated; the quadratic-form classification (Mathlib/LinearAlgebra/QuadraticForm/AlgClosed.lean:51,62) requires invertible 2 and gives no local-ring or geometric-descent statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of the completed local equation of a geometric node at a rational point to a nondegenerate binary quadratic over the ground field",
+   "results": "{\"t\": \"2026-10-17T19:14:26Z\", \"tool\": \"leansearch\", \"query\": \"Descent of the completed local equation of a geometric node at a rational point to a nondegenerate binary quadratic over the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residue_descResidueField\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.toCharNeTwoNF_spec\", \"WeierstrassCurve.IsGoodReduction.mk\"], \"digest\": \"1880f03ef124c7c3\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: Residue-field factorization and Weierstrass reduction/normal-form results do not give the completed nodal local ring over an arbitrary field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-17T19:14:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: MvPowerSeries.toAdicCompletionAlgEquiv identifies the completion of a polynomial ring itself (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344), not descent or a quadratic equation for a singular local ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational ordinary double point with geometric completed ring K[[u,v]]/(uv) has completed local ring F[[x,y]] modulo a binary quadratic form with nonzero discriminant",
+   "results": "{\"t\": \"2026-10-17T19:14:27Z\", \"tool\": \"leanfinder\", \"query\": \"A rational ordinary double point with geometric completed ring K[[u,v]]/(uv) has completed local ring F[[x,y]] modulo a binary quadratic form with nonzero discriminant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"PowerSeries.weierstrassDistinguished\", \"WeierstrassCurve.minimal\", \"PowerSeries.weierstrassMod\", \"WeierstrassCurve.reduction\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"WeierstrassCurve.exists_isMinimal\"], \"digest\": \"d634e36bc71b458e\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: The hits concern one-variable Weierstrass division and preparation, standard etale algebras, or elliptic-curve reduction; none supplies the two-variable nodal equation with descent over the ground field."
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries.*(quotient|Quotient)|[Nn]odal|[Mm]orse",
+   "results": "{\"t\": \"2026-10-17T19:14:37Z\", \"tool\": \"grep\", \"query\": \"MvPowerSeries.*(quotient|Quotient)|[Nn]odal|[Mm]orse\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Morse.lean\", \"Mathlib/RingTheory/Polynomial/Morse.lean\", \"Mathlib/RingTheory/Polynomial/Morse.lean\", \"Mathlib/RingTheory/Polynomial/Morse.lean\", \"Mathlib/RingTheory/Polynomial/Morse.lean\"], \"digest\": \"7e1a6c91bcb1d9e5\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: The five hits are about Galois groups of Morse polynomials (Mathlib/RingTheory/Polynomial/Morse.lean:14-26), not a formal Morse normal form or a geometric node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complete local algebra of an ordinary double point over a field is the quotient of two variable formal power series by a quadratic equation with invertible polar matrix",
+   "results": "{\"t\": \"2026-10-17T19:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"The complete local algebra of an ordinary double point over a field is the quotient of two variable formal power series by a quadratic equation with invertible polar matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.weierstrassMod\", \"StandardEtalePair.Ring\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.weierstrassDistinguished\"], \"digest\": \"c5b9e0679bcb935f\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: The hits concern one-variable Weierstrass division and preparation, standard etale algebras, or elliptic-curve reduction; none supplies the two-variable nodal equation with descent over the ground field."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-point-finite-separable-splitting",
@@ -85,5 +222,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-rational-node-quadratic-completion",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all statement dependencies. Proved the rational geometric-node quadratic completion in six steps using existing affine finite-type, formal-presentation, Jacobian-quadratic, differential/Fitting base-change, faithful-flat ideal-contraction and flat-local depth nodes. The ring-only geometric isomorphism is used through clause (c) of the formal criterion, and the coefficient section is checked to be the structural F-map. No new nodes or Lean files; six logged Mathlib searches supplement the inherited searches.",
+  "blueprint": "Historical nodal local-equation input in Stacks 0CBY (lemma-etale-local-structure-nodal-family), first proof, second paragraph: replace the nodal fibre point by a rational split node using its separable degree-two branch algebra. The current sk-i-curve-zero unit uses contracting correspondences instead; this is the retained historical auxiliary branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "Generic commutative-algebra tool used on B to its completion, A to B, and A to its completion, all with field closed fibre; the nodal auxiliary route has no separate depth-descent node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-710440e4b",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-710440e4b (reviewer sub-agent of L); spot-checked: I read the whole item, the report, every cited node's statement, and the sources: Stacks curves.tex 0C4D in full (the descent over an arbitrary field), 0C4C, 0C49, and algebra.tex 0337. The statement is unchanged and true, and matches 0C4D (3)=>(2) when the residue field is F. Small cases checked: uv over any field, u^2+v^2 over R (discriminant -4), u^2+uv+v^2 over F_2 (polar matrix invertible in characteristic 2); the cusp and the double line fail the hypothesis. It is not a duplicate: lem-trf-nodal-point-local-criterion assumes equidimensionality and concludes something else. There is no cycle; the transitive closure of the dependencies (136 nodes) does not contain the item. Steps 2-6 check against the cited statements. Step 2: the Kahler base-change and localization lemmas plus Fitting clause (2) give J_B=J_A B. Step 3: the formal Jacobian criterion is used from (c) to (a), and its clause (c) needs only the ring isomorphism the item assumes, with a=c=0, b=1; the minors equal the Fitting ideal by multilinearity. Step 4: faithful flatness lets ideal equality be pulled back twice, giving J_B=n and J_A=m. Step 5: the flat local depth formula is applied three times, each closed fibre a field of depth 0. Step 6: the criterion from (a) to (b), using the structural coefficient section. FIX (C4): step 1 credited Noetherianity, maximal ideal and residue field of B-hat to the first application of lem-trf-separable-closed-point-formal-presentation, whose statement does not give them; they come from the second application in step 3. I reworded step 1 in fixes/dag/nodes/sec-trace-formula/lem-trf-rational-node-quadratic-completion.json and changed nothing else. I accept the declared tool use lem-weil-pbc-flat-local-depth-formula (sk-thm-p1, Stacks 0337), a generic algebra result used as a black box. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
