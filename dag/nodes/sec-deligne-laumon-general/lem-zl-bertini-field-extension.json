@@ -207,29 +207,29 @@
  "lean": {
   "module": "Sheaf.FieldTheory.BertiniFieldExtension",
   "declaration": "FieldTheory.bertini_field_extension",
+  "file": "lean/Sheaf/FieldTheory/BertiniFieldExtension.lean",
+  "statement": "theorem bertini_field_extension (k K : Type u) [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) (hgeom : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ) (hn : 1 ≤ n) (g : Fin n → K) (hc : ∃ c : Fin n → k, AlgebraicIndependent k (bertiniFamily k K n g c)) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap (bertiniBaseField k K n g) (bertiniOmega K n))))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false,
   "declarations": [
+   "FieldTheory.bertini_field_extension",
    "FieldTheory.bertiniOmega",
    "FieldTheory.bertiniCoordinate",
    "FieldTheory.bertiniXi",
    "FieldTheory.bertiniDelta",
    "FieldTheory.bertiniFamily",
-   "FieldTheory.bertiniBaseField",
-   "FieldTheory.bertini_field_extension"
+   "FieldTheory.bertiniBaseField"
   ],
-  "file": "lean/Sheaf/FieldTheory/BertiniFieldExtension.lean",
-  "statement": "theorem bertini_field_extension (k K : Type u) [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) (hgeom : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ) (hn : 1 ≤ n) (g : Fin n → K) (hc : ∃ c : Fin n → k, AlgebraicIndependent k (bertiniFamily k K n g c)) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap (bertiniBaseField k K n g) (bertiniOmega K n))))",
-  "branch": "newtargets-dag",
-  "by": "Q137",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "The six helpers construct the precise fraction field, coordinates, two linear forms, ordered family, and generated subfield in this statement, using FractionRing, MvPolynomial.X, Fin.lastCases and IntermediateField.adjoin. No arbitrary choice or new geometric-irreducibility predicate is used."
+  "fixed_by": "NT-stage2-cc-19f1a782b"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-da5609a85",
-  "group": "Q137",
-  "result": "pass",
-  "note": "Matches node and Stacks 0G4D (more-morphisms.tex l.8905-8922) clause by clause: Field/Algebra k K, IntermediateField FG (field generation), Mathlib GeometricallyIrreducible on Spec.map algebraMap, n>=1, Omega=FractionRing(MvPolynomial (Fin n) K), real MvPolynomial.X coordinates, existential c with AlgebraicIndependent of the ordered family (x,xi,delta), conclusion over IntermediateField.adjoin k (x,xi). Probe confirmed family ordering by simp, IsScalarTower k K Omega, axioms only sorryAx+standard, no unbound variables; single universe u is the standard Spec setting, equivalent to the dependency definition. Edge cases n=0 excluded, n=1 and c=0 vacuous, nonvacuous example checked, finite k kept. Helpers non-hollow; docstrings carry source, blueprint id and all 9 proof steps; proof is sorry only; node copy differs only in lean; lean.statement verbatim. nt_compile.py --json: module 2.8 s and both project proof imports clean. Notes only: kun-trdeg record lists only Algebra.trdeg, not AlgebraicIndependent; second-reading section is the author's self-check."
+  "reviewer": "NT-stage2-cc-19f1a782b",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Statement matches Stacks 0G4D (more-morphisms.tex l.8906-8922) and the node clause by clause: finite generation as ⊤.FG, GeometricallyIrreducible on Spec K→Spec k, n≥1, g, Ω=FractionRing(MvPolynomial (Fin n) K), ∃c with AlgebraicIndependent k of (x_1..x_n, ξ, δ), conclusion over adjoin k {x_i, ξ}. Probe lemmas confirmed IsScalarTower k K Ω, the family order and the base field. Universes are equal only as Spec.map forces. No hollow definitions, the only proof is sorry, docstrings and proof steps are present. Delivered and fixed files compile cleanly with nt_compile --json (no diagnostics; sorryAx only). Fixes: removed duplicate and unused imports (two Sheaf imports twice each and Mathlib.FieldTheory.PrimitiveElement, H9), corrected the author line Q137→Q31, and listed the six helpers in lean.declarations via the lean-record. The second reading by Q31 is thin (H11 borderline), but the worker report and this review cover every clause. merge_delivery.py not run."
  }
 }
