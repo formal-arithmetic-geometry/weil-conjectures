@@ -377,5 +377,23 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-09ee69f61 (reviewer sub-agent of L); spot-checked: I read the whole item against main-20261015 sk-lem-induction (_section and proof), the master unit, and Stacks 0F02/0F07/0F08/0EYU second proof (etale-cohomology.tex l.16848, 17079, 17296, 17861) and morphisms 01SH/01S7/01SD/01VB/02NK. I also read the full statements of all cited nodes. The statement is the current blueprint's, not weakened, with Λ-module coefficients and the same base-change map as sk-def-bc, failure-field, universal-datum and vanishing. Step 1 is correct: sk-lem-failure-field applied to a failed preliminary f_0 gives an affine S_1, and the field test map is qcqs by 01SH plus permanence clause (3). Stacks' own 0F08 proof applies 0F07 the same way. Step 2 is correct: affine permanence (1),(2) and smooth permanence (1), with n's inverse pulled back. Step 3 meets every premise of the universal-datum statement exactly. Step 4 had one gap (E1/E5): vanishing needs Spec of a normal domain, but the datum gives an affine integral normal base. I added the argument (localizations normal, so x is in every A_m, so x is in A) and cited def-sbc-normal-dominant-galois and def-weil-pbc-normal-ring in uses and proof_deps. Step 5 is elementary. There are no new nodes and no cycle (DFS). sbc-lem-rel-dim-one-induction is a strict Z/n specialization, so same_as=[] is fine. I accept both declared tool_uses, sk-lem-failure-field and lem-sbc-smooth-relative-dimension-permanence. I checked q=1, Λ=0, n=0/±1/negative and an empty base.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction",
+  "declaration": "AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt",
+  "statement": "theorem Etale.UniversalBaseChangeProperty.of_forall_lt [IsAffine X] [IsAffineHom p]\n    [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0)\n    {q : ℤ} (hq : 1 ≤ q) (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q') :\n    Etale.UniversalBaseChangeProperty Λ p q",
+  "branch": "slopmaster2",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Stage-2 statement reuse only; no stage-1 ATTACH or claim of sorry-free closure. The upstream declaration states the arbitrary-commutative-coefficient, single-degree universal induction step. The natural-number annihilator represents any integer annihilator by its absolute value, preserving invertibility and annihilation including zero. The inherited eleven reachable sorry declarations remain proof obligations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9c756ccf",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Existing reuse of AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt (slopmaster2 Induction.lean; identical in the side clone). Node changes only its lean record; lean.statement is verbatim the signature. Clauses match: IsAffineHom, SmoothOfRelativeDimension 1, IsAffine X, CommRing Λ, IsUnit n on Γ(S,⊤), (n:Λ)=0, integer q≥1, ∀ q'<q universal BC ⇒ universal BC in degree q. Natural-number n is equivalent to an integer n via absolute value, with n=0 kept. sk-def-bc Universal/BaseChangeProperty read: all base changes, qcqs g, Cartesian squares, Λ-module sheaves. Universes follow the recorded sk-def-bc convention (Scheme.{u}, Λ : Type (u+1)). Edge cases q=1, empty schemes, zero ring, n=0 covered. The lean/Sheaf RelativeDimensionOneInduction is the separate ZMod cumulative node, not a duplicate. Probe via nt_compile.py --json compiled cleanly in 4.0 s (only a pp-option style warning); type fully bound; axioms include sorryAx as expected for a stage-2 reuse. Report sections present. No findings."
  }
 }

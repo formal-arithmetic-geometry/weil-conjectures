@@ -192,5 +192,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+  "declaration": "IsWContractibleRing",
+  "declarations": [
+   "WLocalSpace",
+   "IsWLocalRing",
+   "IsWStrictlyLocalRing",
+   "IsWContractibleRing"
+  ],
+  "statement": "class IsWContractibleRing (R : Type*) [CommRing R] extends IsWStrictlyLocalRing R where",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing source declarations jointly define the four notions in the node. WLocalSpace is in WeilConjectures.Topology.SpectralSpace.WLocal.Basic; IsWLocalRing and IsWStrictlyLocalRing are in WeilConjectures.RingTheory.ProEtale.WLocal; IsWContractibleRing is in this module. The primary declaration is the exact w-contractible class signature; the other declarations supply its inherited hierarchy and the preceding w-local definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baee01030",
+  "group": "ND",
+  "result": "pass",
+  "note": "Delivery only sets the lean record (existing: true, slopmaster2) to WLocalSpace/IsWLocalRing/IsWStrictlyLocalRing/IsWContractibleRing; other node fields equal to base; JSON layout OK; report has Worker report and Second reading by ND. Clause check: WLocalSpace extends SpectralSpace with closedPoints closed and unique closed specialization; existence follows from spectrality (compiled proof via IsClosed.exists_closed_singleton). IsWLocalRing is WLocalSpace (PrimeSpectrum R) (CommSemiring binder is more general, no extra hypothesis). IsWStrictlyLocalRing requires IsStrictlyHenselianLocalRing (Localization.AtPrime m) for all maximal m (the recorded dependency declarations). IsWContractibleRing requires ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R)). Primary statement matches the source verbatim; source files identical in slopmaster2 and the side clone; Type*, Prop, no universe restriction. Edge cases (empty space, zero ring, field, connected Spec) correct. Consistent with existing DAG bindings (det-pe-wlocal-strict-contractible, def-weil-pbc-w-local); no duplicate in Mathlib or Sheaf. Check file compiled with exit 0 via lcompile.py. Cosmetic only: the report names a non-existent lemma exists_isClosed_specializes."
  }
 }
