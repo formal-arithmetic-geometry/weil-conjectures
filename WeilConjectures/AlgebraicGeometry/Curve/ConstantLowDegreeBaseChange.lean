@@ -56,9 +56,7 @@ theorem IsConnectedCurve.constant_low_degree_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]
-    (_hfin : (Set.range c.i.base)ᶜ.Finite)
-    (_hclosed : ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z))
-    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0)
+    (n : ℕ) [NeZero n] (hn : (n : k) ≠ 0)
     (r : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q →+
         Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q)
     (hr : (∀ q : ℕ, r q =
@@ -109,18 +107,18 @@ theorem IsConnectedCurve.constant_low_degree_baseChange_bijective
       refine ⟨Sheaf.H.map a.hom 0 x', ?_⟩
       rw [Etale.cohomologyMap_map, hx']
   have hone : Function.Bijective (r 1) := by
-    have : NeZero (n : k) := ⟨_hn⟩
+    have : NeZero (n : k) := ⟨hn⟩
     obtain ⟨_, _, ζ, hζ, hζext⟩ := IsSepClosed.exists_isPrimitiveRoot k n
     have hζK := hζext K (algebraMap k K)
     obtain ⟨_, _, φ, hφ, _⟩ := kummer_base_change_compatibility k K C f P π
-      (pullback.snd f b) (IsPullback.of_hasPullback f b) n _hn
+      (pullback.snd f b) (IsPullback.of_hasPullback f b) n hn
     have hμ : Function.Bijective ((Sheaf.H.map φ.τ₁ 1).comp
         (Etale.cohomologyMap π (C.rootsOfUnitySheaf n) 1)) := by
       obtain hf | hC := isProper_or_isAffine f
       · let : IsProper f := hf
-        exact proper_kummer_degree_one_baseChange_bijective f n _hn φ hφ
+        exact proper_kummer_degree_one_baseChange_bijective f n hn φ hφ
       · let : IsAffine C := hC
-        exact affine_kummer_degree_one_baseChange_bijective f n _hn φ hφ
+        exact affine_kummer_degree_one_baseChange_bijective f n hn φ hφ
     let a := C.constantZModIsoRootsOfUnitySheaf n f hζ
     let aP := P.constantZModIsoRootsOfUnitySheaf n (pullback.snd f b) hζK
     have ha : Function.Bijective (Sheaf.H.map a.hom 1) :=
