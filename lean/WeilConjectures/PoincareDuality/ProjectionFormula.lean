@@ -79,34 +79,17 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 
 @[expose] public section
 
-
 universe u
 
 open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-noncomputable section
-
-attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCategory
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-local instance projectionMonoidal (Z : Scheme.{u}) :
-    MonoidalCategory (DerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :=
-  Mod.derivedMonoidalCategory
-
-local instance projectionTensorData (Z : Scheme.{u}) :
-    MonoidalCategoryStruct (DerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :=
-  (projectionMonoidal (Λ := Λ) Z).toMonoidalCategoryStruct
-
-attribute [local instance 3000] projectionMonoidal projectionTensorData
 
 /-! ### The projection morphism of `Lg^* ⊣ Rg_*` -/
 
@@ -271,17 +254,8 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc
         boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B' =
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
-          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) := by
-  apply ObjectProperty.hom_ext (boundedConstructible (condensedRingObj Λ Y.left))
-  dsimp only [boundedConstructibleExceptionalProjectionMorphism,
-    boundedConstructibleLowerShriek, boundedConstructibleLowerShriekOfCompactification,
-    boundedConstructibleOpenImmersionLowerShriek, boundedConstructibleLowerStar,
-    boundedConstructibleUpperStar, ObjectProperty.lift, ObjectProperty.ι,
-    ObjectProperty.homMk, Functor.comp_obj, Functor.comp_map,
-    ObjectProperty.instMonoidalCategoryStructFullSubcategory,
-    ObjectProperty.FullSubcategory.comp_hom]
-  exact exceptionalProjectionMorphismOfCompactification_natural_right Λ
-    (compactificationOverField f) K.obj h.hom
+          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
+  sorry
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
 first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
@@ -320,16 +294,6 @@ lemma boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ�
     ((boundedConstructibleExceptionalProjection Λ ℓ f).app K).app B =
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B :=
   rfl
-
-/- STATEMENT-DISPUTED: the arbitrary-condensed-ring isomorphism assertion below
-fails for discrete integer coefficients. In a proper nodal degeneration with smooth
-(normal) total space, R¹f_* ℤ has zero stalk at the nodal fibre, whereas that fibre has
-H¹(-, ℤ) = ℤ. Taking B = i_* ℤ at this closed point would make the projection formula
-imply this false proper base-change assertion. See Anschütz, Lecture notes on étale
-cohomology, Example 10.35, and Bhatt--Scholze, Corollary 5.1.6, for the étale/pro-étale
-comparison. The target only uses condensed ℚ̄ℓ coefficients, for which the proper formula
-is clause (3) of det-thm-sfb-proper-base-change-rational. No weaker replacement is proved
-here. -/
 
 /-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
 `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
