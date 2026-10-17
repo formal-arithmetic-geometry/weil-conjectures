@@ -30,9 +30,164 @@
   "lem-pod-point-sections-derived-reduction",
   "lem-trf-point-sections-finite-reduction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restriction of scalars leaves the underlying abelian sheaf and its sections unchanged. Hence $\\Gamma\\operatorname{Res}_{B\\to B'}=\\operatorname{Res}_{R\\to T}\\Gamma$ termwise and on derived categories, using exactness of both functors. Apply the coefficient adjunction on the one-point ringed site $R\\to T$. Define $\\chi_N$ to be the unique adjunct of $\\Gamma(\\eta_N)$. Its defining Hom bijection gives exactly $\\operatorname{Res}(\\chi_N)\\eta_{\\Gamma N}=\\Gamma(\\eta_N)$. It remains to prove that this particular map is invertible; existence of an unspecified isomorphism between the two objects would not suffice.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; derived.tex Tags 0FND and 09T5. Apply the normalized coefficient adjunction also on the one-point site."
+   }
+  },
+  {
+   "text": "In case (1), put $t=\\varpi^n$. The DVR theorem makes $V$ a principal ideal domain, hence Noetherian. The standard quotient theorem gives the augmented free resolution $[V\\xrightarrow{t}V]\\to A_n$. The completed-constant-sheaf theorem identifies its tensor with $B=\\widehat V_s$ with $B'= (A_n)_s$. Thus $0\\to B\\xrightarrow{t}B\\to B'\\to0$ is exact, with last map the actual limit projection. In case (2), put $t=\\varpi^a\\in R=A_b$. Every ideal of $R$ is $(\\varpi^r)$ for $0\\le r\\le b$: its inverse image in $V$ is principal, contains $(\\varpi^b)$, and its generator is a unit times a power of $\\varpi$. Thus $R$ is Noetherian. Exactness of the constant-module functor applied to $R\\xrightarrow{t}R\\to T\\to0$ identifies the actual coefficient projection with $B\\to B/tB=B'$. No injectivity of $t$ in case (2) is asserted.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact) and 093M (lemma-completion-flat), the latter on the augmented finite free quotient resolution."
+   }
+  },
+  {
+   "text": "For a $B$-module sheaf $F$, the identification $B'=B/tB$ gives $F\\otimes_B B'=F/tF$: the balanced maps are $x\\otimes\\bar b\\mapsto bx\\bmod tF$ and $\\bar x\\mapsto x\\otimes1$, defined locally and then sheafified. Exact sections preserve images, since an image is the kernel of a cokernel. Applying sections to $F\\twoheadrightarrow tF$ and $0\\to tF\\to F\\to F/tF\\to0$ therefore gives $\\Gamma(tF)=t\\Gamma F$ and the isomorphism $\\theta_F:(\\Gamma F)/t(\\Gamma F)\\xrightarrow{\\sim}\\Gamma(F/tF)$, sending $[x]$ to the quotient section of $x$. These formulas commute with morphisms and differentials. The same argument applies to any power of $\\varpi$ and the corresponding quotient.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section tensor-product: balanced tensor and sheafification; elementary image/cokernel calculation using the cited exact point-sections theorem."
+   }
+  },
+  {
+   "text": "In case (1), choose a flat-term K-flat resolution $P\\to M$ of a complex representing $N$ and put $C=\\Gamma P$. Exact sections make $C$ a representative of $\\Gamma N$. In case (2), first replace a representative $M$ by its good truncation at an upper cohomological bound $h$: keep $M^i$ for $i<h$, use $\\ker d_M^h$ in degree $h$, and zero above. Its inclusion is a quasi-isomorphism, since cohomology agrees in all degrees and vanishes above $h$. Choose a bounded-above flat resolution $P$ of this truncation. The bounded-above site criterion makes $P$ K-flat, and again put $C=\\Gamma P$. In both cases the derived reduction of $N$ is represented by $P\\otimes_B B'=P/tP$. No boundedness of the underlying integral complex in case (1) is needed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YQ (lemma-bounded-flat-K-flat), and 06YY (lemma-derived-base-change). The displayed good truncation is checked degreewise."
+   }
+  },
+  {
+   "text": "For case (1), choose an ordinary flat-term K-flat resolution $q:Q\\to C$, by the resolution theorem on the one-point ringed site $V$. Flatness of $P^i$ applied to the injection $B\\xrightarrow{t}B$ of step 2 shows that $t$ acts injectively on $P^i$, hence on $C^i$. Similarly flatness of $Q^i$ applied to $V\\xrightarrow{t}V$ makes $t$ injective on $Q^i$. The cone $W=\\operatorname{Cone}(q)$ is acyclic by the cone criterion and has terms $C^i\\oplus Q^{i+1}$, so $t$ is injective on each $W^i$. Reduction gives $W/tW=\\operatorname{Cone}(\\bar q)$, where $\\bar q:Q/tQ\\to C/tC$ is the quotient chain map.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-flat-sheaf-modules",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic and definition-cone; sites-cohomology.tex Tag 06YS on the one-point site; sites-modules.tex Tag 03ER, definition-flat (3)."
+   }
+  },
+  {
+   "text": "Still in case (1), take a cycle $\\bar z\\in(W/tW)^i$ and lift it to $z\\in W^i$. Write $dz=tw$. Then $t\\,dw=0$, hence $dw=0$. Since $W$ is acyclic, $w=dv$ for $v\\in W^i$. Now $z-tv$ is a cycle, so $z-tv=du$ for some $u\\in W^{i-1}$. Modulo $t$ this says $\\bar z=d\\bar u$. Thus $W/tW$ is acyclic in every degree, and the cone criterion in $T$-modules shows that $\\bar q$ is a quasi-isomorphism. This calculation is valid for unbounded complexes.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic; explicit cycle-and-boundary argument, requiring only the injectivity and acyclicity proved in step 5."
+   }
+  },
+  {
+   "text": "In case (2), fix a degree $i$ and put $F=P^i$, $J=(\\varpi^r)\\subset R=A_b$ for $0\\le r\\le b$. Multiplication by $\\varpi^r$ identifies $J$ with $R/(\\varpi^{b-r})$: in $V$, $\\varpi^rx\\in(\\varpi^b)$ if and only if $x\\in(\\varpi^{b-r})$. Constant exactness identifies $J_s\\to B$ with an injection $(R/(\\varpi^{b-r}))_s\\to B$. Flatness of $F$ and the balanced quotient formulas of step 3 give an injection $F/\\varpi^{b-r}F\\to F$, $[x]\\mapsto\\varpi^rx$. Exact sections and step 3 turn it into $C^i/\\varpi^{b-r}C^i\\to C^i$. This is exactly the ideal multiplication map $J\\otimes_R C^i\\to C^i$. The finitely generated ideal criterion therefore makes $C^i$ flat, since step 2 lists all ideals of $R$. The endpoint $r=0$ gives the identity; $r=b$ has zero source. As $C$ is bounded above, the ordinary bounded-above flat criterion makes $C$ K-flat. For this case set $Q=C$ and $q=1_C$, so $\\bar q$ is the identity.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-flat-fg-ideal-criterion",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD, lemma-flat (1) iff (4); sites-modules.tex Tag 093J; more-algebra.tex Tag 064K. The actual cyclic ideal test is written out, including both endpoint ideals."
+   }
+  },
+  {
+   "text": "In either case $Q$ is an ordinary K-flat complex resolving $C=\\Gamma P$. The ordinary derived tensor theorem computes $\\Gamma N\\otimes_R^L T$ by $Q\\otimes_R T=Q/tQ$ in $D(T)$. Derived change of rings and exact sections compute $\\Gamma N_T$ by $\\Gamma(P/tP)$. The chain map\n$$\\beta=\\theta_P\\circ\\bar q:Q/tQ\\longrightarrow\\Gamma(P/tP),\\qquad [x]\\longmapsto[q(x)]$$\nis a quasi-isomorphism: $\\theta_P$ is the degreewise chain isomorphism of step 3, and $\\bar q$ is a quasi-isomorphism by step 6 in case (1) or identity by step 7 in case (2). All these maps are $T$-linear before restriction of scalars.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; more-algebra.tex Tag 06Y6, lemma-derived-base-change. Use the canonical K-flat representative identifications of the cited statements."
+   }
+  },
+  {
+   "text": "The normalized sheaf coefficient adjunction says that, on $P$, the actual unit is represented by $x\\mapsto x\\otimes1$, hence by $P\\to P/tP$. Its sections are represented by $C\\to\\Gamma(P/tP)$ sending $y$ to $[y]$. Precomposing with $q:Q\\to C$ gives $x\\mapsto[q(x)]$. Apply clause (2) of the same normalized adjunction on the one-point ringed site $R\\to T$, with K-flat source $Q$ and target complex $\\Gamma(P/tP)$. Its adjunct sends $x\\otimes\\bar a$ to $\\bar a[q(x)]$, exactly the balanced map $\\beta$ of step 8. Under the canonical derived identifications, and using naturality of the unit for the isomorphism represented by $P\\to N$ and of adjunction for $q$, it follows that $\\beta$ represents precisely the map $\\chi_N$ defined in step 1. Thus $\\chi_N$ is an isomorphism in $D(T)$ satisfying the required unit equation.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; derived.tex Tags 0FND and 09T5. Both representative formulas are clauses of the cited normalized derived coefficient adjunction, not an arbitrary derived adjunction."
+   }
+  },
+  {
+   "text": "For a derived morphism $f:N\\to N'$, naturality of the sheaf unit gives $\\Gamma\\operatorname{Res}(f_T)\\Gamma(\\eta_N)=\\Gamma(\\eta_{N'})\\Gamma(f)$. Naturality of the ordinary scalar-extension Hom bijection takes this equality to $\\Gamma(f_T)\\chi_N=\\chi_{N'}(\\Gamma(f)\\otimes_R^L T)$. Therefore the choices form a natural isomorphism. The same Hom bijection makes the unit equation characterize each component uniquely, so changes of resolutions cannot change these maps. They give specified choices of the natural isomorphisms mentioned in the statement. In particular the result does not identify an unspecified pre-existing choice with this one without a unit calculation.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND and 09T5: natural Hom bijections and injectivity of a bijection; formal conclusion from steps 1 and 9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-flat-fg-ideal-criterion",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 06YS; sites-modules.tex Tags 093J and 093M; derived.tex Tags 0FND, 09T5. Explicit normalization argument for blueprint integral-model proof clause (4)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +209,59 @@
    "results": "0 hits: . Read the module scalar adjunction formulas and ordinary sheaf pullback adjunction: these do not state the derived pro-etale point reduction unit comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(sections|scalar)|sections.*(tensor|flat)",
+   "results": "8 hits: Mathlib/Algebra/Ring/Submonoid/Pointwise.lean, Mathlib/Data/List/Sections.lean, Mathlib/Data/List/Sections.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean.  Read the module adjunction formulas (ChangeOfRings.lean lines 700-740 and 885-922); the hits do not state a derived pro-etale point comparison or its invertibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact global sections commute with derived scalar extension and the tensor restriction adjunction unit",
+   "results": "8 hits: CategoryTheory.Sheaf.Γ, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, AlgebraicGeometry.ΓSpec.adjunction, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app.  Read the module adjunction formulas (ChangeOfRings.lean lines 700-740 and 885-922); the hits do not state a derived pro-etale point comparison or its invertibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.ExtendRestrictScalarsAdj",
+   "results": "0 hits: . loogle: unknown identifier 'ModuleCat.ExtendRestrictScalarsAdj' Invalid namespace as a Loogle identifier; corrected in the later query ModuleCat.extendRestrictScalarsAdj.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections on an algebraically closed proetale point commute with coefficient reduction and the canonical comparison is the adjunct of the scalar extension unit",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.Scheme.residue_descResidueField, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.lift_X_left, StandardEtalePair.HasMap.map, Algebra.Generators.map_comp_cotangentCompAwaySec, StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_apply_coe.  Read the module adjunction formulas (ChangeOfRings.lean lines 700-740 and 885-922); the hits do not state a derived pro-etale point comparison or its invertibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendRestrictScalarsAdj",
+   "results": "6 hits: ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendRestrictScalarsAdj_counit_app_apply_one_tmul, ModuleCat.homEquiv_extendScalarsId, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.homEquiv_extendScalarsComp.  Read the module adjunction formulas (ChangeOfRings.lean lines 700-740 and 885-922); the hits do not state a derived pro-etale point comparison or its invertibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendRestrictScalarsAdj|fromExtendScalars_hom_apply|unit_app",
+   "results": "5 hits: 37, 682, 787, 879, 885.  Read the module adjunction formulas (ChangeOfRings.lean lines 700-740 and 885-922); the hits do not state a derived pro-etale point comparison or its invertibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical base change comparison for derived global sections is the mate of the unit of extension and restriction of scalar adjunction",
+   "results": "8 hits: SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app.  Read the module adjunction formulas (ChangeOfRings.lean lines 700-740 and 885-922); the hits do not state a derived pro-etale point comparison or its invertibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -74,5 +278,84 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-weil"
+ "unit": "sk-d-weil",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-point-reduction-unit-normalization",
+  "worker": "stage1",
+  "summary": "Constructed the unique comparison as the scalar-extension adjunct of sections of the actual sheaf unit, then proved invertibility on quotient models. Integral case uses unbounded K-flat resolutions and the explicit acyclic-cone quotient calculation; finite case uses bounded-above flat models and the cyclic ideal flatness criterion. All required supporting nodes already exist; no new nodes.",
+  "blueprint": "prop-trf-rational-frobenius-integral-model.proof.md clause (4): makes precise the point-sections coefficient reduction used before composition with u. Steps 1 and 9 normalize by the actual unit, steps 2-8 prove invertibility, and step 10 proves naturality and uniqueness.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic coefficient or homological algebra tool for the explicit point quotient model and its adjunction normalization; it does not replace any Frobenius or trace argument of sk-d-weil."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-b2b38d0f2",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-b2b38d0f2 (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, the statement of every cited node, the parent lem-trf-completed-stalk-frobenius-reduction (steps 4 and 6, which cite this item), blueprint main-20261015 prop-trf-rational-frobenius-integral-model.proof.md clause (4), and the Stacks sources. The delivery creates no new nodes. The statement and hypotheses are unchanged and no target is touched. proof_deps equals the union of the step uses. The blueprint from/via/same_as fields agree with the parent. No SGA source is cited. Stacks checked by label: 07A6 lemma-adjoint, 06YS lemma-K-flat-resolution, 06YQ lemma-bounded-flat-K-flat, 093J lemma-constant-exact, 093M lemma-completion-flat, 05RT lemma-acyclic, 00HD lemma-flat. Math checks: step 1 defines chi as the adjunct of Gamma(eta) on the one-point site (allowed, the adjunction node is stated for small sites). Step 2 gets exactness of 0->B->B->B'->0 from the finite-resolution clause of the completed-constant lemma in case (1), and lists the ideals (varpi^r) of A_b in case (2). Step 4 uses an unbounded K-flat model in case (1), which is right because the definition bounds only the reductions; case (2) uses the good truncation. Steps 5-6: t is injective on the terms and the cycle argument shows W/tW is acyclic; I verified it line by line. Step 7: the cyclic ideal test via J=(varpi^r) iso R/(varpi^{b-r}) is correct, including both endpoints. Step 9: adjunction clauses (1)/(2) apply to P and Q, which are K-flat with flat terms in both cases, so beta represents chi and chi is invertible. Step 10: naturality and uniqueness follow from the Hom bijection. Edge cases tested: N=0, a=b (t=0, chi is the identity), b=a=1, n=1, unbounded integral N. Route: only lem-weil-point-proetale-sections-exact is off-route, and it is declared. I accept all 12 declared tool_uses as generic tools that do not replace the sk-d-weil route. Duplicate search: lem-pod-derived-reduction-sheaf-resolution-independence is related but asserts only coherence, not invertibility or unit normalization. lem-trf-point-complex-scalar-extension covers a different domain (ctf, prime to p). Neither duplicates this item. Remark: chi is proved to be a unit-normalized natural isomorphism between the same functors. The finite node's successive-reduction compatibility is not re-proved here; the parent derives it in step 6 from this normalization, so its use is sound. No fixes."
+ }
 }

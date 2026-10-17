@@ -11,9 +11,72 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let \\(\\psi:\\mathfrak C[J\\times\\Delta^1]\\to\\mathbf{Kan}_{\\mathcal V}\\) be the composite of the enriched functor representing \\(\\varphi\\), \\(\\mathfrak C[J]\\times\\mathfrak C[\\Delta^1]\\to\\mathbf{Kan}_{\\mathcal V}\\), with the enriched functor \\((\\mathfrak C[\\mathrm{pr}_1],\\mathfrak C[\\mathrm{pr}_2])\\) induced by the two projections. Here \\(\\mathfrak C[\\Delta^1]\\) has objects \\(0,1\\) and the single vertex \\(\\{0,1\\}\\) in its mapping set from \\(0\\) to \\(1\\), so the functor representing \\(\\varphi\\) is \\(F\\) on \\(\\mathfrak C[J]\\times\\{0\\}\\), \\(G\\) on \\(\\mathfrak C[J]\\times\\{1\\}\\), and sends \\((a,\\{0,1\\})\\) for \\(a\\in\\mathfrak C[J](j,j')\\) to \\(\\varphi_{j'}\\circ F(a)=G(a)\\circ\\varphi_j\\). Since \\(\\mathfrak C[K]\\) is the colimit of the \\(\\mathfrak C[\\Delta^n]\\) over the simplices of \\(K\\) and \\(N_{\\mathrm{hc}}\\) has \\(n\\)-simplices the enriched functors out of \\(\\mathfrak C[\\Delta^n]\\), enriched functors \\(\\mathfrak C[K]\\to\\mathbf{Kan}_{\\mathcal V}\\) correspond to simplicial maps \\(K\\to\\mathcal S_{\\mathcal V}\\), naturally in \\(K\\) (the stipulated coherent-realization/coherent-nerve adjunction). Thus \\(\\psi\\) transposes to \\(\\tau:J\\times\\Delta^1\\to\\mathcal S_{\\mathcal V}\\), and for \\(i:K\\to J\\times\\Delta^1\\) the restriction \\(\\tau\\circ i\\) is the transpose of \\(\\psi\\circ\\mathfrak C[i]\\). For \\(i:J\\cong J\\times\\{0\\}\\subset J\\times\\Delta^1\\) the composite \\((\\mathfrak C[\\mathrm{pr}_1],\\mathfrak C[\\mathrm{pr}_2])\\circ\\mathfrak C[i]\\) is \\((\\mathrm{id},\\text{const}_0)\\), so \\(\\tau|_{J\\times\\{0\\}}\\) is the transpose \\(m_F\\) of \\(F\\); likewise \\(\\tau|_{J\\times\\{1\\}}=m_G\\). For \\(i:\\Delta^1\\cong\\{j\\}\\times\\Delta^1\\) the composite is \\((\\text{const}_j,\\mathrm{id})\\), so the edge \\(\\tau|_{\\{j\\}\\times\\Delta^1}\\) is the enriched functor \\(\\mathfrak C[\\Delta^1]\\to\\mathbf{Kan}_{\\mathcal V}\\) with objects \\(F(j),G(j)\\) and vertex \\(\\varphi_j\\in\\operatorname{Fun}(F(j),G(j))_0\\), i.e. the edge represented by \\(\\varphi_j\\). The coherent-nerve convention is postcomposition in every degree, so this construction retains all higher simplicial parameters and restrictions.",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §§1.1.5 and 2.2.5, coherent-realization/coherent-nerve adjunction and naturality; returned Step 14 transposition construction"
+   }
+  },
+  {
+   "text": "Let \\(f:X\\to Y\\) be any weak homotopy equivalence of \\(\\mathcal V\\)-small Kan complexes (objects of \\(\\mathcal S_{\\mathcal V}\\)); by [def-cbc-enhanced-diagrams-cones] this means its realization induces a bijection on path components and isomorphisms on every based homotopy group at every basepoint of \\(|X|\\), which is exactly the hypothesis of [lem-cbc-kan-whitehead-inverse]. That lemma gives a simplicial map \\(g:Y\\to X\\) and simplicial maps \\(H:X\\times\\Delta^1\\to X\\), \\(K:Y\\times\\Delta^1\\to Y\\) with \\(H|_{X\\times\\{0\\}}=gf\\), \\(H|_{X\\times\\{1\\}}=1_X\\), \\(K|_{Y\\times\\{0\\}}=fg\\), \\(K|_{Y\\times\\{1\\}}=1_Y\\); its statement explicitly allows empty and disconnected Kan complexes. These are simplicial homotopies between \\(gf\\) and \\(1_X\\) and between \\(fg\\) and \\(1_Y\\) in the sense of [lem-coef-kan-coherent-nerve-inverse-equivalence], which then gives the two inverse-triangle \\(2\\)-simplices in \\(\\mathcal S_{\\mathcal V}\\) with boundaries \\((f,g,1_X)\\) and \\((g,f,1_Y)\\); hence the edge represented by \\(f\\), namely its vertex of \\(\\operatorname{Fun}(X,Y)\\), is an equivalence edge. This is the second assertion, including empty \\(X,Y\\) (then \\(X=Y=\\varnothing\\), since \\(f\\) is bijective on components). For every vertex \\(j\\in J_0\\), the hypothesis says that \\(\\varphi_j:F(j)\\to G(j)\\) is a weak homotopy equivalence of \\(\\mathcal V\\)-small Kan complexes, so the edge represented by \\(\\varphi_j\\), which is the component \\(\\tau|_{\\{j\\}\\times\\Delta^1}\\) by Step 1, is an equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-coef-kan-coherent-nerve-inverse-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06QR",
+    "place": "Kerodon 4.6.7.7 and 4.6.8, through the existing Kan weak-equivalence edge lemma"
+   }
+  },
+  {
+   "text": "The simplicial category \\(\\mathbf{Kan}_{\\mathcal V}\\) has Kan mapping simplicial sets, so \\(\\mathcal S_{\\mathcal V}=N_{\\mathrm{hc}}\\mathbf{Kan}_{\\mathcal V}\\) is a quasicategory. Apply the pointwise criterion [lem-coef-infinity-pointwise-equivalences] to the edge \\(\\tau:m_F\\to m_G\\) of \\(\\operatorname{Fun}(J,\\mathcal S_{\\mathcal V})\\). Since all its vertex components are equivalence edges by Step 2, \\(\\tau\\) is an equivalence in the functor quasicategory.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Kerodon Theorem 4.4.4.4, pointwise equivalence criterion; coherent-nerve quasicategory criterion"
+   }
+  },
+  {
+   "text": "Every simplicial map \\(u:J'\\to J\\) restricts the construction in Step 1 by precomposition with \\(u\\times\\mathrm{id}_{\\Delta^1}\\); the endpoint diagrams and component edges are the corresponding restrictions. The same inverse triangles from Step 2 and the pointwise criterion from Step 3 therefore commute with restriction, proving the asserted naturality under restriction of \\(J\\).",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Naturality of the coherent-nerve adjunction under restriction; elementary functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-nerve-infrastructure",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-kan-coherent-nerve-inverse-equivalence",
+  "lem-coef-kan-coherent-nerve-quasicategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT §§1.1.5 and 2.2.5; returned Step 14 passage from an enriched objectwise weak equivalence to a coherent equivalence"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-section-limit",
@@ -82,5 +145,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-kan-diagram-weak-equivalence",
+  "worker": "stage1",
+  "summary": "No new nodes were needed. The four-step proof constructs the coherent transformation by the coherent realization/nerve adjunction, derives each component inverse from the acyclic simplicial Whitehead and coherent-nerve inverse-triangle nodes, applies the existing pointwise equivalence criterion in the coherent functor quasicategory, and checks restriction naturality. The statement, empty/disconnected cases, and universe quantifiers were retained.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 passage from an enriched objectwise weak equivalence to a coherent equivalence (the returned Step 14 inverse-limit mapping-space calculation).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Step 2 takes from its statement the simplicial homotopy inverse of a weak homotopy equivalence of Kan complexes (simplicial Whitehead theorem); this is generic topological input that no node of sk-prop-sf-biduality-general proves, and the same tool use is recorded on lem-coef-kan-weak-equivalence-space-edge."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-53069c8dd",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-53069c8dd (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 4 steps, all 7 cited statements, the unit route, and the citer lem-coef-right-fibration-section-limit (steps 3 and 14 use the item). Source: HTT is not archived, so proof_origin=agent and the WANTED line are right; every fact that needs a source sits in an existing reviewed node. Statement check: C[Δ^1] is the walking arrow, so (F,G,φ) is exactly an enriched functor C[J]×C[Δ^1]→Kan. The adjunction comes from the colimit definition in def-coef-infinity-category-of-spaces. Edge cases J=∅, J=Δ^0, empty values and disconnected values all work. Step 2: the hypothesis of lem-cbc-kan-whitehead-inverse is word for word the def-cbc weak equivalence, and its homotopies are what lem-coef-kan-coherent-nerve-inverse-equivalence needs (V-small values). Step 3: lem-coef-kan-coherent-nerve-quasicategory plus lem-coef-infinity-pointwise-equivalences with K=J. Step 4 (restriction along u) is elementary. Not circular (checked by graph traversal), no new nodes, no duplicate: lem-coef-enriched-nerve-transformation is a different construction. lem-coef-kan-weak-equivalence-space-edge states clause 2, but citing it would close a cycle through its stmt_dep lem-coef-right-fibration-section-limit, which looks unused; that is for the maintainer, outside this delivery. Mathlib's SimplicialNerve.lean has only definitions, so not a leaf. No SGA and no base change involved. Fixes: (1) Step 2 now proves the second assertion for any weak equivalence f:X→Y of V-small Kan complexes, including the empty case; before, it argued only for the components φ_j (E5/C3). (2) The off-route tool use lem-cbc-kan-whitehead-inverse (unit sk-prop-sf-cbc) was undeclared (C8). I accept it as the generic simplicial Whitehead theorem, already recorded on lem-coef-kan-weak-equivalence-space-edge, and declared it in split_report.tool_uses. (3) Step 1 now writes out the endpoint and component restrictions via the adjunction. Statement and deps are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -11,12 +11,85 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration",
   "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-right-straightening-fiber-comparison",
   "lem-coef-pinched-rigidification-resolution",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the ordered cone formula for $T_K$: $T_K(E)(k)=M_q(k,v)$ with $M_q=\\mathfrak C[E\\star\\Delta^0]\\amalg_{\\mathfrak C[E]}\\mathfrak C[K]$. The restriction of $\\varepsilon$ to $E\\subseteq E\\star\\Delta^0$ is $v\\circ q$: for a simplex $(\\sigma,\\tau)$ of $E=K\\times_C C_{/c}$ the restriction of $\\tau$ to the initial face $\\Delta^n$ is $v\\sigma$ by the definition of the fibre product, and $\\varepsilon$ is a simplicial map because the ordered-concatenation operators on mixed simplices (with the repeated final cone vertex collapsed) are precomposition of $\\tau$ with the corresponding monotone maps. Hence $\\mathfrak C[\\varepsilon]$ and $\\mathfrak C[v]$ agree on $\\mathfrak C[E]$ and induce a simplicial functor $M_q\\to\\mathfrak C[C]$ sending $k\\mapsto v(k)$ and the new cone vertex to $c$. Its maps on mapping simplicial sets into the cone vertex are $\\psi_k:T_K(E)(k)=M_q(k,v)\\to\\mathfrak C[C](v(k),c)=R(k)$. Because the functor restricts to $\\mathfrak C[v]$ on $\\mathfrak C[K]$, these maps are compatible with precomposition in $\\mathfrak C[K]$ on the source and with precomposition by $\\mathfrak C[v]$ on the target, so they assemble to an enriched natural transformation $\\psi:T_K(E)\\to R$. If the final cone vertex is repeated, the ordered-cone operators first collapse that repeated block; applying $\\tau$ after this collapse is exactly the compatible formula.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 2.2.2.7 and 2.2.3.15; returned Step 14 cone formula"
+   }
+  },
+  {
+   "text": "For a vertex $k$, the projection $q:E\\to K$ is a right fibration: it is the pullback along $v$ of the right fibration $C_{/c}\\to C$ of [lem-coef-infinity-slice-right-fibration], and the right lifting property against $\\Lambda^n_i\\hookrightarrow\\Delta^n$ is stable under pullback. Its fibre is $E_k=\\{k\\}\\times_KE=\\{v(k)\\}\\times_CC_{/c}=\\operatorname{Map}^R_C(v(k),c)$ by the same node. The cone functor $T_K$ of [lem-coef-simplicial-right-fibration-presentation] and $\\operatorname{St}_K$ of [lem-coef-right-straightening-fiber-comparison] are given by the same formula $M_q(k,v)$ (both joins are the ordered concatenation with $\\Delta^0$ and both $\\mathfrak C$ are the subset-poset rigidification), so $T_K(E)=\\operatorname{St}_K(E)$. Over a point, $\\operatorname{St}_{\\Delta^0}(-)(*)$ is $|{-}|_Q$ (HTT p.~76, before 2.2.2.6): both functors preserve small colimits ($\\operatorname{St}$ by [lem-coef-right-straightening-fiber-comparison], $|{-}|_Q$ as the left adjoint of $\\operatorname{Sing}_Q$ in [lem-coef-pinched-rigidification-resolution]); $\\mathfrak C$ is the left adjoint of the coherent nerve [def-coef-infinity-category-of-spaces] and so preserves the pushout $J^n=\\Delta^{n+1}\\amalg_{\\Delta^n}\\{x\\}$, whence $\\operatorname{St}_{\\Delta^0}(\\Delta^n)(*)=\\mathfrak C[J^n](x,y)=Q^n$; and for monotone $\\alpha:[m]\\to[n]$ the induced map of pushouts restricts to $\\Delta(\\alpha)$ on the initial face and fixes the cone vertex, so it is $Q(\\alpha)$. Writing a simplicial set as the colimit of its simplices gives the natural identification. Therefore the right-straightening fibre comparison, applied to the right fibration $q$ and the vertex $k$, gives a canonical weak equivalence $i_k:|E_k|_Q\\to T_K(E)(k)$, induced by the fibre inclusion. On the $Q^n$ summand indexed by $e\\in(E_k)_n$, i.e. $e:J^n\\to C$ via its cone component, the composite $\\psi_ki_k$ is $\\mathfrak C$ applied to $J^n\\to E_k\\star\\Delta^0\\amalg_{E_k}\\{k\\}\\to C$, which is $e$; so it is the mapping-set map of $\\mathfrak C[J^n]\\to\\mathfrak C[C]$ induced by $e$. By the pinched-rigidification comparison this is precisely $\\theta_{C,v(k),c}$, in every simplicial degree and with all operators.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-right-straightening-fiber-comparison",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT p. 76 (St over a point is ||_{Q^•}, J^n, Q^n) and HTT 2.2.4.1 proof (f = f''∘f'); returned Step 14 pinched-resolution comparison"
+   }
+  },
+  {
+   "text": "Both $i_k$ and $\\theta_{C,v(k),c}=\\psi_k i_k$ are weak homotopy equivalences. The two-out-of-three property therefore makes every component $\\psi_k$ a weak homotopy equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 2.2.4.1, two-out-of-three for weak equivalences"
+   }
+  },
+  {
+   "text": "Let $u_k:R(k)\\to\\operatorname{Sing}|R(k)|$ be the characteristic realization/singular unit. The concrete space-valued representable construction identifies $H(k)$ with $\\operatorname{Sing}|R(k)|$ and gives it the enriched precomposition action. The realization/singular-unit theorem says $u_k$ is a weak homotopy equivalence for every simplicial set $R(k)$. Hence $u_k\\psi_k:T_K(E)(k)\\to H(k)$ is a weak homotopy equivalence by closure under composition, so these maps form an objectwise weak equivalence $T_K(E)\\to H$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-realization-singular-unit-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 2.2.2.7; realization/singular comparison"
+   }
+  },
+  {
+   "text": "All constructions above are functorial in $C,K,c,v$: pullback fibres, the cone map $\\varepsilon$, enriched precomposition, and the maps on $Q^n$ commute with the corresponding maps of inputs. The pinched-rigidification statement supplies naturality in the displayed inputs and all simplex operators, while the cone and space-valued representable constructions supply the same precomposition actions. Thus the equality $\\psi_k i_k=\\theta_{C,v(k),c}$ and the objectwise weak equivalence are natural for the displayed inputs and every face and degeneracy.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-pinched-rigidification-resolution",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 2.2.2.7 and 2.2.4.1; naturality clauses in the explicit constructions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-right-straightening-fiber-comparison",
+  "lem-coef-simplicial-right-fibration-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT 2.2.2.7, 2.2.3.15, 2.2.4.1; returned Step 14"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +125,66 @@
    "results": "8 hits; recorded top names: CategoryTheory.Presheaf.isColimitTautologicalCocone, CategoryTheory.Functor.RightExtension.coneAtFunctor, CategoryTheory.Presheaf.tautologicalCocone, CategoryTheory.Presheaf.tautologicalCocone'_pt, CategoryTheory.Functor.coneOfIsRightKanExtension, CategoryTheory.Functor.RightExtension.coneAt, CategoryTheory.Enriched.HasConicalLimit.of_equiv, CategoryTheory.Presheaf.tautologicalCocone_pt",
    "date": "2026-10-17",
    "verdict": "no match: ordinary enriched functor categories, model-category interfaces or ordinary Kan extension results; none states the specified quasicategory/coherent-nerve comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tautological cone of a right slice induces an objectwise weak equivalence from its straightening to the enriched representable mapping presheaf",
+   "results": "CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt; coneFunctorEnrichedHom_π_app; coneFunctorEnrichedHom; Enriched.HasConicalLimit.of_equiv; unrelated ordinary enriched cone declarations",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the quasicategory right-slice coherent comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "straightening, right fibration, enriched representable, weak homotopy equivalence",
+   "results": "loogle: unknown identifier 'straightening'; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|pinched|right.*slice [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tautological cone of a concrete right slice gives an objectwise weak equivalence of its straightening with the enriched representable presheaf",
+   "results": "CategoryTheory.Presheaf.isColimitTautologicalCocone; Functor.RightExtension.coneAtFunctor; Presheaf.tautologicalCocone; unrelated Kan-extension and ordinary enriched declarations",
+   "date": "2026-10-17",
+   "verdict": "no match: no specified quasicategory/coherent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pinched mapping-space resolution theta compares a right fibration slice fibre with coherent enriched hom",
+   "results": "HomotopicalAlgebra.BifibrantObject.homMk_homMk; CofibrantObject resolutions; PathObject declarations",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.tautologicalCocone, CategoryTheory.Functor.RightExtension, CategoryTheory.Enriched.FunctorCategory",
+   "results": "loogle: unknown identifier 'CategoryTheory.Enriched.FunctorCategory'; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "T_K|Map\\^R|coherent.*nerve|right.*fibration [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right fibration slice fibre coherent enriched mapping space weak equivalence",
+   "results": "HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff; mem_trivialFibrations; RightHomotopyClass.precomp_bijective_of_weakEquivalence; unrelated model-category declarations",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-section-limit",
@@ -85,5 +214,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-slice-straightening-counit",
+  "worker": "stage1",
+  "summary": "Audited the imported tautological right-slice comparison against the explicit cone, slice-fibre, and pinched-rigidification constructions. Added the existing right-straightening fibre-comparison dependency, wrote five proof steps for the enriched map, the fibrewise Q-resolution identity, two-out-of-three, the realization/singular objectwise equivalence, and naturality. No new nodes were needed.",
+  "blueprint": "Realizes the returned Step 14 clause of the blueprint ancestor prop-coef-integral-exceptional-adjoint: tautological cone and pinched-resolution comparison (HTT 2.2.2.7, 2.2.3.15, 2.2.4.1).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Generic realization/singular-unit weak equivalence is used only to turn the enriched mapping comparison into the stated Kan-valued objectwise equivalence; no slice-specific argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-singular-unit-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-c198f9bfc",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-c198f9bfc (reviewer sub-agent of L); spot-checked: I read the whole item (statement and 5 steps), the full statements of all 8 cited nodes and the 8 proof steps of lem-coef-pinched-rigidification-resolution, which are the special case K=C, v=id of this item. I also read the unit and chapter route, the citer lem-coef-right-fibration-section-limit (its step 14), and HTT p.76 (St over a point is |-|_{Q•}) and Prop. 2.2.4.1 with its proof. The statement is true and is not weakened; I tested it on C=K=Δ^0, on an empty fibre (C={a,c} discrete), and on K=C, v=id, which is HTT 2.2.4.1. There are no new nodes. I found no cycle and no duplicate; I checked lem-coef-point-family-q-counit-identification, lem-coef-fibration-straightening-space-restriction and the pinched node, which is the K=C special case. No base-change morphism or coefficient category is involved, and no SGA is cited. Fixes, as a whole corrected node in fixes/dag/nodes/sec-six-functors/lem-coef-slice-straightening-counit.json: (1) Step 1 did not state ε|_E = v∘q, which is needed to glue C[ε] and C[v] on the pushout M_q; now added. (2) Step 2 (C3) quoted the fibre comparison as |E_k|_Q→T_K(E)(k), but that node gives St_{Δ^0}(E_k)(*)→St_K(E)(k) for a right fibration. The step now proves the missing pieces from cited statements: q is a right fibration as a pullback of C_{/c}→C; T_K=St_K since both nodes give the same M_q formula; and St_{Δ^0}(-)(*)≅|-|_Q (HTT p.76), because both preserve colimits and C, as the left adjoint of the coherent nerve, gives C[J^n]=Q^n. To support this, def-coef-infinity-category-of-spaces is added to the step's uses. (3) lem-coef-infinity-mapping-composition was not used in step 5; I removed it from the step and from proof_deps. The statement and stmt_deps are unchanged. I accept the tool use of lem-cbc-realization-singular-unit-weak (sk-prop-sf-cbc) as a generic black box.; 1 file(s) fixed by the reviewer"
  }
 }
