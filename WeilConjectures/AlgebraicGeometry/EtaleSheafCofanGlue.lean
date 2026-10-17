@@ -38,7 +38,7 @@ lemma exists_left_eq_of_isColimit (z : Z.left) : ∃ i y, (c i).left y = z := by
   calc (c i).left y = e.inv (e.hom ((c i).left y)) := by
         rw [← Scheme.Hom.comp_apply, e.hom_inv_id]; rfl
     _ = e.inv ((Sigma.ι (fun k ↦ (T k).left) i) y) := by
-      rw [← h, Scheme.Hom.comp_apply]
+      rw [← h, Scheme.Hom.comp_apply]; rfl
     _ = e.inv (e.hom z) := by rw [hy]
     _ = z := by rw [← Scheme.Hom.comp_apply, e.hom_inv_id]; rfl
 
@@ -73,12 +73,13 @@ omit hc in
 lemma subsingleton_of_isEmpty {W : X.Etale} (hW : IsEmpty W.left) :
     Subsingleton (ToType (G.obj.obj (op W))) := by
   have hP := ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget A)).obj G).property
-  have hmem : Sieve.ofArrows (fun e : PEmpty ↦ W) (fun e ↦ e.elim) ∈
+  have hmem : Sieve.ofArrows (fun e : Empty ↦ W) (fun e ↦ e.elim) ∈
       X.smallEtaleTopology W := by
     rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
     ext x
     exact hW.elim x
-  have hSF := (Presieve.isSheafFor_iff_generate _).2 (((isSheaf_iff_isSheaf_of_type _ _).1 hP) _ hmem)
+  have hSF := (Presieve.isSheafFor_iff_generate _).2
+    (((isSheaf_iff_isSheaf_of_type _ _).1 hP) _ hmem)
   rw [Presieve.isSheafFor_arrows_iff] at hSF
   obtain ⟨t, -, ht⟩ := hSF (fun e ↦ e.elim) (fun e ↦ e.elim)
   exact ⟨fun x y ↦ (ht x (fun e ↦ e.elim)).trans (ht y (fun e ↦ e.elim)).symm⟩
@@ -93,7 +94,8 @@ lemma exists_glue_of_isColimit (t : ∀ i, ToType (G.obj.obj (op (T i)))) :
     obtain ⟨i, y, rfl⟩ := exists_left_eq_of_isColimit c hc z
     simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
     exact ⟨i, y, rfl⟩
-  have hSF := (Presieve.isSheafFor_iff_generate _).2 (((isSheaf_iff_isSheaf_of_type _ _).1 hP) _ hmem)
+  have hSF := (Presieve.isSheafFor_iff_generate _).2
+    (((isSheaf_iff_isSheaf_of_type _ _).1 hP) _ hmem)
   rw [Presieve.isSheafFor_arrows_iff] at hSF
   obtain ⟨s, hs, -⟩ := hSF t (by
     intro i j W a b hab
@@ -103,7 +105,7 @@ lemma exists_glue_of_isColimit (t : ∀ i, ToType (G.obj.obj (op (T i)))) :
       obtain rfl := (cancel_mono (c i)).1 hab
       rfl
     · have := subsingleton_of_isEmpty G (isEmpty_of_comp_eq c hc hij a b hab)
-      exact Subsingleton.elim _ _)
+      exact @Subsingleton.elim _ this _ _)
   exact ⟨s, hs⟩
 
 /-- Sections of a sheaf over a finite coproduct are determined by their restrictions. -/
@@ -116,12 +118,14 @@ lemma ext_of_isColimit {s s' : ToType (G.obj.obj (op Z))}
     obtain ⟨i, y, rfl⟩ := exists_left_eq_of_isColimit c hc z
     simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
     exact ⟨i, y, rfl⟩
-  have hSF := (Presieve.isSheafFor_iff_generate _).2 (((isSheaf_iff_isSheaf_of_type _ _).1 hP) _ hmem)
+  have hSF := (Presieve.isSheafFor_iff_generate _).2
+    (((isSheaf_iff_isSheaf_of_type _ _).1 hP) _ hmem)
   rw [Presieve.isSheafFor_arrows_iff] at hSF
-  obtain ⟨t, -, ht⟩ := hSF (fun i ↦ G.obj.map (c i).op s') (by
-    intro i j W a b hab
-    change ((CategoryTheory.forget A).map _ ≫ (CategoryTheory.forget A).map _) _ = ((CategoryTheory.forget A).map _ ≫ (CategoryTheory.forget A).map _) _
-    simp only [← Functor.map_comp, ← op_comp, hab])
+  obtain ⟨t, -, ht⟩ := hSF
+    (fun i ↦ ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget A)).obj G).obj.map
+      (c i).op s') (by
+      intro i j W a b hab
+      simp only [← FunctorToTypes.map_comp_apply, ← op_comp, hab])
   exact (ht s h).trans (ht s' fun _ ↦ rfl).symm
 
 end AlgebraicGeometry.Scheme.Etale

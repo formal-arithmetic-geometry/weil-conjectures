@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.LimitSystem.Cartesian
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyModuleForget
 
 /-!
 # Continuity of étale cohomology at inverse limits
@@ -22,10 +23,6 @@ affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. The
 `AlgebraicGeometry.Etale.cohomologyMap_isColimit_of_isLimit'` by dimension shifting along systems
 of sheaves (`WeilConjectures.AlgebraicGeometry.Sites.LimitSystem`).
 
-## Main definitions
-
-- `AlgebraicGeometry.Etale.sectionsFunctor`: the global sections functor of the small étale
-  site, the sections over the terminal object.
 -/
 
 @[expose] public section
@@ -37,12 +34,6 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-/-- The global sections functor `Γ(X, -)` on étale sheaves: the sections over the terminal
-object `X` of the small étale site. -/
-noncomputable abbrev sectionsFunctor (X : Scheme.{u}) : Sheaf X.smallEtaleTopology A ⥤ A :=
-  sheafToPresheaf _ A ⋙
-    (evaluation _ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X)))
 
 /-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity.
 
