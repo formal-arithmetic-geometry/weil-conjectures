@@ -147,15 +147,6 @@ noncomputable def WeilSheaf.upperStarArtinSchreierMapImageIso :
       WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
   asIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ)
 
-end Trivialization
-
-/-- The inclusion `ℒ_ψ ⟶ AS_* ℚ̄_ℓ` of the `ψ`-isotypic component. -/
-noncomputable def WeilSheaf.artinSchreierImageι :
-    image (WeilSheaf.artinSchreierIdempotent ψ) ⟶
-      (WeilSheaf.lowerStar (affineLine.artinSchreierMap k₀)).obj
-        (WeilSheaf.adicConstant k₀ l (affineLine k₀)) :=
-  image.ι (WeilSheaf.artinSchreierIdempotent ψ)
-
 /-- The trivialisation `AS^* ℒ_ψ ⟶ ℚ̄_ℓ` of the pullback of `ℒ_ψ` along the Artin–Schreier map,
 as a morphism of Weil sheaves: the adjoint of the inclusion `ℒ_ψ ⟶ AS_* ℚ̄_ℓ` under
 `AS^* ⊣ AS_*`, the evaluation at the point of the fibre given by the cover. -/
@@ -163,10 +154,10 @@ noncomputable def WeilSheaf.upperStarArtinSchreierMapImageHom :
     (WeilSheaf.upperStar (affineLine.artinSchreierMap k₀)).obj
         (image (WeilSheaf.artinSchreierIdempotent ψ)) ⟶
       WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
-  (WeilSheaf.upperStar (affineLine.artinSchreierMap k₀)).map
-      (WeilSheaf.artinSchreierImageι ψ) ≫
-    (WeilSheaf.upperStarLowerStarAdjunction (affineLine.artinSchreierMap k₀)).counit.app
-      (WeilSheaf.adicConstant k₀ l (affineLine k₀))
+  ((WeilSheaf.upperStarLowerStarAdjunction (affineLine.artinSchreierMap k₀)).homEquiv _ _).symm
+    (image.ι (WeilSheaf.artinSchreierIdempotent ψ))
+
+#exit
 
 instance : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ) := by
   have : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ).hom.hom.f :=

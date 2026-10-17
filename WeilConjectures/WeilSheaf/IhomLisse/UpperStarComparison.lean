@@ -158,9 +158,11 @@ lemma adicUpperStarIhomComparison_comp {W : Scheme.{u}} (r : W ⟶ Z) (M N : Adi
   rw [Functor.LaxMonoidal.comp_μ] at hm
   have key : (upperStarComp (WeilCoefficients.{u} l) r g).hom.app ((AdicSheaf.ihom M).obj N).X ▷
         (r)^*[WeilCoefficients.{u} l].obj ((g)^*[WeilCoefficients.{u} l].obj M.X) ≫
-      μ (r)^*[WeilCoefficients.{u} l] ((g)^*[WeilCoefficients.{u} l].obj ((AdicSheaf.ihom M).obj N).X)
+      μ (r)^*[WeilCoefficients.{u} l]
+        ((g)^*[WeilCoefficients.{u} l].obj ((AdicSheaf.ihom M).obj N).X)
         ((g)^*[WeilCoefficients.{u} l].obj M.X) ≫
-      (r)^*[WeilCoefficients.{u} l].map (μ (g)^*[WeilCoefficients.{u} l] ((AdicSheaf.ihom M).obj N).X M.X ≫
+      (r)^*[WeilCoefficients.{u} l].map
+        (μ (g)^*[WeilCoefficients.{u} l] ((AdicSheaf.ihom M).obj N).X M.X ≫
         (g)^*[WeilCoefficients.{u} l].map (Mod.evaluation M N)) =
       ((r ≫ g)^*[WeilCoefficients.{u} l].obj ((AdicSheaf.ihom M).obj N).X ◁
         (upperStarComp (WeilCoefficients.{u} l) r g).inv.app M.X ≫
