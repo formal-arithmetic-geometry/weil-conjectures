@@ -247,7 +247,8 @@
   "def-weil-algebraically-closed-coefficients",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-scalar-extension-composition"
+  "lem-weil-scalar-extension-composition",
+  "def-pur-completed-coefficient-presentation-transport"
  ],
  "mathlib_searches": [
   {
@@ -400,5 +401,53 @@
   "group": "Q152",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-2276ea90f (reviewer sub-agent of L); spot-checked: I read the item in full (statement and all 13 steps), the new node lem-pur-ringed-coefficient-restriction-counit, all 39 cited node statements, fix-prop-adjunctions (its DAG Step 3 and blueprint main-20261015 proof Step 1), unit sk-lem-sf-mate and its route. Sources checked: Stacks 099N (proetale l.4336, clauses 1-5), 0D6E (sites-cohomology l.4011), 07A6 (l.3990), 03D7 and 01T3 labels, Bhatt-Scholze Lemma 6.8.2(1) p.58. Statement: the types check. With u=epsilon_{E,K} the first equation says the canonical b (coefficient transpose of F_E(eta^c) followed by d^{-1}) is the mate of a^{-1}. This is the Beck-Chevalley agreement of the two mates in a commuting square of adjunctions, so it is true; the second equation follows by naturality. Coefficient categories are kept apart (completed R_B modules vs discrete constant, bounded constructible, raw rationalization, common stage). Step 1 correctly gives X the composite k-structure (finite type by Stacks 01T3), which lem-sf-integral-direct-image-constructible needs in Step 11. Step 4's pushout S_W=R_W tensor B_W checks with a basis, t^n O_L=v^{en} and finite limits. Steps 5-8 compute the constant projection transpose, identify the completed b with b^0 through the injective coefficient-adjunction test, and transport through the completion reflector. Step 9 is genuinely elementary. Steps 10, 12 and 13 cover towers, rationalization and the common stage. Small cases L=E, f=id, X empty, K=0 and ramified E in L are fine. New node: statement only, 3 search kinds recorded, blueprint.from correct, no SGA. I verified it on K-injective and K-flat representatives: both sides equal the sheaf counit followed by UI->J, with no flatness used. It is strictly smaller than the item and not a clause of it. It does not duplicate lem-kun-derived-adjoint-square-comparison (that node needs exact left adjoints), lem-weil-proetale-direct-image-restriction-of-scalars, lem-sbc-restrict-scalars-pullback-square-comparison or lem-sbc-completed-operations-linear-natural-exchange. proof_deps equals the union of uses; every cited id exists and is unmerged; no cycle. The off-route uses (lem-sfb-local-field-integral-basis, lem-sp-completed-pullback-adjunction) are declared, and lem-kun-dimension-finite-type is Lean-closed. All 16 declared tool_uses accepted. Minor remark, not a fault: Step 6 describes its use of the new node only briefly. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-19ae07f9e",
+  "group": "Q55",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/. Repaired the H1/H11 placeholder second reading and recorded compiler evidence. Both immutable Lean modules passed scompile.py; no substantive mismatch found. No branch mutation performed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility",
+  "declaration": "WeilConjectures.purOrdinaryAdjunctionScalarCompatibility",
+  "declarations": [
+   "WeilConjectures.purStrictPullComparison",
+   "WeilConjectures.purOrdinaryHom_bijective",
+   "WeilConjectures.purOrdinaryHom",
+   "WeilConjectures.purOrdinaryHom_linear",
+   "WeilConjectures.purScalarComplete",
+   "WeilConjectures.purScalarPullComparison",
+   "WeilConjectures.purScalarRightDerivedComparison",
+   "WeilConjectures.purScalarRightHomotopyComparison",
+   "WeilConjectures.purScalarRightDerivedComparison_normalization",
+   "WeilConjectures.purScalarDirectImage_coefficientAdjunct",
+   "WeilConjectures.purOrdinaryHomLinear",
+   "WeilConjectures.purRationalHom_existsUnique",
+   "WeilConjectures.purRationalHom",
+   "WeilConjectures.purLocalizedCoefficientMap",
+   "WeilConjectures.purRationalScalarMaps_existsUnique",
+   "WeilConjectures.purRationalScalarMaps",
+   "WeilConjectures.purOrdinaryAdjunctionScalarCompatibility",
+   "WeilConjectures.purRationalAdjunctionScalarCompatibility",
+   "WeilConjectures.purOrdinaryAdjunctionScalar_identity",
+   "WeilConjectures.purOrdinaryAdjunctionScalar_tower",
+   "WeilConjectures.purRationalModelHom_existsUnique",
+   "WeilConjectures.purRationalModelHom",
+   "WeilConjectures.purOrdinaryAdjunctionScalar_bounded",
+   "WeilConjectures.purScalarModel_coherence",
+   "WeilConjectures.purCommonStageSourceRelated",
+   "WeilConjectures.purCommonStageTargetRelated",
+   "WeilConjectures.purOrdinaryAdjunction_commonStage"
+  ],
+  "file": "lean/Sheaf/Paper/OrdinaryAdjunctionScalarCompatibility.lean",
+  "statement": "theorem purOrdinaryAdjunctionScalarCompatibility (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (M : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E))) (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete X (pbcIntegralDatum l E))) : (∀ u : (pbcActualStrictCompletedPull (pbcIntegralDatum l E) f).obj M.obj ⟶ K.obj, purOrdinaryHom l L f (purScalarComplete l E L ι Y M) (purScalarComplete l E L ι X K) ((purScalarPullComparison l E f L ι M).inv ≫ (pbcEmbeddingAmbientTensor l E L ι X).map u) = (pbcEmbeddingAmbientTensor l E L ι Y).map (purOrdinaryHom l E f M K u) ≫ (pbcScalarDirectImageIso l E L ι f).hom.app K.obj) ∧ (∀ v : M.obj ⟶ (pbcActualDerivedPush f (pbcIntegralDatum l E)).obj K.obj, (purOrdinaryHom l L f (purScalarComplete l E L ι Y M) (purScalarComplete l E L ι X K)).symm ((pbcEmbeddingAmbientTensor l E L ι Y).map v ≫ (pbcScalarDirectImageIso l E L ι f).hom.app K.obj) = (purScalarPullComparison l E f L ι M).inv ≫ (pbcEmbeddingAmbientTensor l E L ι X).map ((purOrdinaryHom l E f M K).symm v))",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of the returned packet: reuse the landed integralCoefficientULift, integralDetailedCoefficientComparison and integralDetailedTransport; the CommRing helper forgets to that comparison and the explicit inverse restriction is obtained by changeFunctor from the inverse of the landed transport. Completeness is separate from the bounded identification, which carries Noetherian, finite-dimension and ell-invertibility hypotheses. Rational and common-stage compatibility carry the primary theorem geometric hypotheses."
  }
 }

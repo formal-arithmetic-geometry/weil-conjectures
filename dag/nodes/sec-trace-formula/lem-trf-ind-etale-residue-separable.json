@@ -85,11 +85,14 @@
   "is": null
  },
  "lean": {
+  "module": "WeilConjectures.RingTheory.ProEtale.IndEtale",
+  "declaration": "Algebra.IndEtale.isSeparable_residueField",
+  "statement": "instance isSeparable_residueField [IndEtale R S] (p : Ideal R) (q : Ideal S)\n    [q.LiesOver p] [p.IsPrime] [q.IsPrime]\n    [Algebra (Localization.AtPrime p) (Localization.AtPrime q)]\n    [Localization.AtPrime.IsLiesOverAlgebra p q] :\n    Algebra.IsSeparable p.ResidueField q.ResidueField",
   "branch": "slopmaster2",
-  "declarations": [
-   "Algebra.IndEtale.isSeparable_residueField"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 20:33 UTC for group Q50, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: gives separable algebraic residue-field extensions for every prime pair, with the maximal-ideal quotient clause following by canonical residue-field identifications."
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing arbitrary-prime residue-field theorem, read at IndEtale.lean:141-161. The surrounding binders are (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]. For each q set p = q.comap (algebraMap R S); prime and LiesOver instances follow. Use Localization.AtPrime.algebraOfLiesOver p q for the canonical localization algebra; its IsLiesOverAlgebra instance certifies the canonical map, not an extra mathematical assumption. Algebra.IsSeparable.isAlgebraic includes algebraicity. The maximal-quotient clause is the one-line specialization Algebra.isSeparable_residueField_iff.mp of this instance (Mathlib.RingTheory.LocalRing.ResidueField.Instances:55), using the canonical quotient algebra. All clauses were compiled in scratchpad/ExistingChecks.lean through scompile.py; #print axioms reports only propext, Classical.choice, Quot.sound. No new module and no duplicate clause node."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -109,5 +112,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d81deaf1c",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Existing upstream declaration exactly matches the node; dependencies, canonical localization structures, separability/algebraicity, edge cases, universes, docstrings, report sections, route-pivot status, and scompile evidence checked. No fixes needed."
  }
 }
