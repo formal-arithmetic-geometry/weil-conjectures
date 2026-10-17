@@ -139,8 +139,9 @@ lemma sheafTransition_pushforwardStage_proj (q : X ⟶ Y) :
   rw [LimitStage.sheafTransition_app]
   simp only [pushforwardStagePtIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, h1, h2,
     Category.assoc]
-  rw [reassoc_of% n, Iso.inv_hom_id_app_assoc, ← Adjunction.homEquiv_counit,
-    Equiv.eq_symm_apply, Adjunction.homEquiv_unit]
+  rw [reassoc_of% n, Iso.inv_hom_id_app_assoc]
+  erw [← Adjunction.homEquiv_counit]
+  rw [Equiv.eq_symm_apply, Adjunction.homEquiv_unit]
   simp only [Functor.map_comp]
   rw [reassoc_of% (Etale.unit_map_baseChangeMap_app (ModuleCat.{u + 1} Λ)
     (⟨by simp⟩ : CommSq (𝟙 Z) f₀ (f₀ ≫ q) q) (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J))]
@@ -227,7 +228,7 @@ lemma pushforwardStageIso_descentTransition (q : X ⟶ Y) {Y' : Scheme.{u}} (g :
   rw [← cancel_epi ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) q g r hr).hom.app
     (((f₀ ≫ r)_*[ModuleCat.{u + 1} Λ]).obj (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J)))]
   rw [← reassoc_of% hL, ← reassoc_of% hR, descentTransition_counit, ← hr',
-    hq, ← reassoc_of% hc]
+    ← hq, reassoc_of% hc]
 
 end Pushforward
 

@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.LimitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.PerfectSeparable
 public import WeilConjectures.FieldTheory.SeparableSmoothColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleLimitDescent
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniversalHomeomorphism
 
 /-!
 # Higher direct images commute with base change along field extensions
@@ -87,17 +88,22 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension {K L : Type u}
     rfl
   let X := baseChangeOverDiagram D₀ π σ
   let c := baseChangeOverCone D₀ π (Scheme.Spec.mapCone (Subalgebra.cocone 𝒜).op)
-    (Spec.map (CommRingCat.ofHom (algebraMap K L))) hP σ
-  have hc : IsLimit c := isLimitBaseChangeOverCone D₀ π _ _ hP σ hD₀
+    (Spec.map (CommRingCat.ofHom (algebraMap K L))) (fun A ↦ (hP A).symm) σ
+  have hc : IsLimit c := isLimitBaseChangeOverCone D₀ π _ _ (fun A ↦ (hP A).symm) σ hD₀
   let c' := c.extend hS.isoPullback.hom
-  have hc' : IsLimit c' := hc.ofIsoLimit (Cones.extendIso c hS.isoPullback.symm)
+  have hc' : IsLimit c' := hc.ofIsoLimit (Cone.extendIso c hS.isoPullback.symm)
   let pX : X ⟶ (Functor.const 𝒜ᵒᵖ).obj S :=
     { app A := pullback.fst σ (π.app A)
       naturality A B f := by simp [X] }
   have : ∀ A, Smooth (π.app A) := fun A ↦ by
     have : Algebra.Smooth K A.unop.1 := A.unop.2.1
-    exact (HasRingHomProperty.Spec_iff (P := @Smooth)).2
-      ((RingHom.smooth_algebraMap).2 inferInstance)
+    exact (HasRingHomProperty.Spec_iff (P := @Smooth)
+      (φ := CommRingCat.ofHom (algebraMap K A.unop.1))).2
+      ((RingHom.smooth_algebraMap (R := K) (S := A.unop.1)).2 this)
+  have : ∀ A, QuasiCompact (π.app A) := fun A ↦
+    (inferInstance : QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap K A.unop.1))))
+  have : ∀ A, QuasiSeparated (π.app A) := fun A ↦
+    (inferInstance : QuasiSeparated (Spec.map (CommRingCat.ofHom (algebraMap K A.unop.1))))
   have : ∀ A, Smooth (pX.app A) := fun A ↦
     MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ (π.app A)).flip inferInstance
   have : ∀ A, QuasiCompact (pX.app A) := fun A ↦
@@ -130,7 +136,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_fieldExtension {K L : Type u} [Fiel
   -- the perfect closures `K'` of `K` and `L'` of `L` inside an algebraic closure of `L`
   let K' := perfectClosure K (AlgebraicClosure L)
   let L' := perfectClosure L (AlgebraicClosure L)
-  letI : Algebra K' L' := (perfectClosureAlgebraicClosureHom K L).toRingHom.toAlgebra
+  let _ : Algebra K' L' := (perfectClosureAlgebraicClosureHom K L).toRingHom.toAlgebra
   have hsep : Algebra.IsSeparableExtension K' L' :=
     Algebra.isSeparableExtension_of_perfectField K' L'
   let πK : Spec (.of K') ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom (algebraMap K K'))
@@ -143,9 +149,6 @@ theorem Etale.isIso_baseChangeHomologyMap_of_fieldExtension {K L : Type u} [Fiel
   have hcomm : πL ≫ Spec.map (CommRingCat.ofHom (algebraMap K L)) = ι ≫ πK := by
     simp only [πL, πK, ι, ← Spec.map_comp]
     congr 1
-    ext x
-    exact Subtype.ext ((IsScalarTower.algebraMap_apply K L (AlgebraicClosure L) x).symm.trans
-      (IsScalarTower.algebraMap_apply K K' (AlgebraicClosure L) x))
   -- the base changes `S₁ = S_{K'}` and `S₂ = S'_{L'}`
   let p₁ := pullback.fst σ πK
   let σ₁ := pullback.snd σ πK

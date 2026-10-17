@@ -143,7 +143,8 @@ coefficient sheaves.
 In the situation of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`, if for a
 fixed degree `q` every stage base-change map is an isomorphism for every sheaf of `Λ`-modules
 on `Tᵢ`, then the base-change map of the limit square is an isomorphism for every sheaf `F` of
-`Λ`-modules on `T`: such an `F` is the filtered colimit of the pullbacks of its direct images to the stages (blueprint
+`Λ`-modules on `T`: such an `F` is the filtered colimit of the pullbacks of its direct images
+to the stages (blueprint
 `lem-kun-descent-limit`). -/
 @[stacks 0EZT]
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall {I : Type u} [Category.{u} I]
@@ -239,7 +240,8 @@ isomorphic to `F`. -/
 lemma Etale.isIso_baseChangeHomologyMap_iff_of_iso {X S T Y : Scheme.{u}} {p : X ⟶ S}
     {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X} (sq : IsPullback e h g p) (q : ℤ)
     {F F' : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (i : F ≅ F') :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) ↔ IsIso (Etale.baseChangeHomologyMap Λ sq q F') := by
+    IsIso (Etale.baseChangeHomologyMap Λ sq q F) ↔
+      IsIso (Etale.baseChangeHomologyMap Λ sq q F') := by
   have n := Etale.baseChangeHomologyMap_naturality Λ sq q i.hom
   constructor
   · intro _
@@ -261,21 +263,21 @@ variable {S T : Scheme.{u}} (g : T ⟶ S) {I : Type u} [Category.{u} I] (X : I �
 noncomputable def Etale.smoothLimitPullbackFunctor : I ⥤ Scheme.{u} where
   obj i := pullback g (p.app i)
   map {i j} f := pullback.map g (p.app i) g (p.app j) (𝟙 T) (X.map f) (𝟙 S) (by simp)
-    (by simpa using (p.naturality f).symm)
+    (by simp [p.naturality f])
   map_id i := pullback.hom_ext (by simp) (by simp)
   map_comp f f' := pullback.hom_ext (by simp) (by simp)
-
-variable [∀ i, QuasiCompact (p.app i)] [∀ i, QuasiSeparated (p.app i)]
-  [∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)]
 
 lemma Etale.isPullback_smoothLimitPullbackFunctor_map {i j : I} (f : i ⟶ j) :
     IsPullback ((Etale.smoothLimitPullbackFunctor g X p).map f) (pullback.snd g (p.app i))
       (pullback.snd g (p.app j)) (X.map f) := by
   refine IsPullback.of_right ?_ (by simp) (IsPullback.of_hasPullback g (p.app j))
   simp only [Etale.smoothLimitPullbackFunctor_map, pullback.lift_fst, Category.comp_id]
-  have : X.map f ≫ p.app j = p.app i := by simpa using p.naturality f
+  have : X.map f ≫ p.app j = p.app i := by simp [p.naturality f]
   rw [this]
   exact IsPullback.of_hasPullback g (p.app i)
+
+variable [∀ i, QuasiCompact (p.app i)] [∀ i, QuasiSeparated (p.app i)]
+  [∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)]
 
 instance {i j : I} (f : i ⟶ j) : IsAffineHom ((Etale.smoothLimitPullbackFunctor g X p).map f) :=
   MorphismProperty.of_isPullback (P := @IsAffineHom)
@@ -367,7 +369,8 @@ lemma Scheme.IsTorsionSheafOfInvertibleOrder.upperStar {S S' T T' : Scheme.{u}} 
 /-- Smooth base change along a limit of smooth schemes, for a system given as a functor
 `X : I ⥤ Scheme` with a cone of morphisms `p : X ⟶ S` (blueprint `lem-kun-0f09`, see
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth`). The base `S` is
-arbitrary: the statement is local on `S` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`)
+arbitrary: the statement is local on `S`
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`)
 and holds over affine opens by
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} (g : T ⟶ S)

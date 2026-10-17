@@ -133,15 +133,17 @@ lemma isStalkColimit_comapB [IsCofiltered I] (𝒮 : LimitStageSystem B W I)
     (h : 𝒮.IsStalkColimit Λ K q) : (𝒮.comapB b).IsStalkColimit Λ K q := by
   have hcol := isColimitOfPreserves ((b)^*[ModuleCat.{u + 1} Λ]) (𝒮.isColimitOfIsStalkColimit Λ h)
   intro x
-  let e (α : LimitStage B W) := (((b)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso
-      q).app ((LimitStage.functor Λ α).obj K) ≪≫
+  let e (α : LimitStage B W) :=
+    (((b)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).app
+      ((LimitStage.functor Λ α).obj K) ≪≫
     (DerivedCategory.Plus.homologyFunctor _ q).mapIso (LimitStage.comapBIso Λ b α K)
   have he {α β : LimitStage B W} (φ : LimitStage.Hom α β) :
       ((b)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.homologyFunctor _ q).map
         ((LimitStage.transition Λ φ).app K)) ≫ (e α).hom =
       (e β).hom ≫ (DerivedCategory.Plus.homologyFunctor _ q).map
         ((LimitStage.transition Λ (φ.comapB b)).app K) := by
-    have n := (((b)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.naturality
+    have n :=
+      (((b)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.naturality
       ((LimitStage.transition Λ φ).app K)
     simp only [Functor.comp_map] at n
     simp only [e, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc,
@@ -230,7 +232,8 @@ lemma isIso_baseChangeHomologyMap_iff_upperStar {X S T Y : Scheme.{u}} {p : X �
     IsIso (Etale.baseChangeHomologyMap Λ sq q (((w)^*[ModuleCat.{u + 1} Λ]).obj G)) ↔
       IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
         ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-          (D+((w)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))) := by
+          (D+((w)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))) :=
+    by
   let ι := (((w)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G
   have n : (DerivedCategory.Plus.homologyFunctor _ q).map (D+((p)^*[ModuleCat.{u + 1} Λ]).map
         (R+((g)_*[ModuleCat.{u + 1} Λ]).map ι.hom)) ≫
@@ -263,7 +266,8 @@ lemma isIso_baseChangeHomologyMap_iff_upperStar {X S T Y : Scheme.{u}} {p : X �
         (R+((g)_*[ModuleCat.{u + 1} Λ]).map ι.hom)) ≫
       (DerivedCategory.Plus.homologyFunctor _ q).map
         ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj (((w)^*[ModuleCat.{u + 1} Λ]).obj G)))) := by
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj (((w)^*[ModuleCat.{u + 1} Λ]).obj G)))) :=
+    by
       rw [n]
       infer_instance
     exact IsIso.of_isIso_comp_left ((DerivedCategory.Plus.homologyFunctor _ q).map

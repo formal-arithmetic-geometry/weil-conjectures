@@ -56,7 +56,8 @@ lemma exists_of_exact_sheafFiber {X : Scheme.{u}}
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.Exact)
     (x : X) (y : ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj S.X₂)
     (hy : (((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).map S.g).hom y = 0) :
-    ∃ z, (((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).map S.f).hom z = y := by
+    ∃ z, (((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).map S.f).hom z =
+      y := by
   have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
   have : PreservesFiniteLimits ((X.uliftPointSmallEtale x).sheafFiber
     (A := ModuleCat.{u + 1} Λ)) := inferInstance
