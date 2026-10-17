@@ -54,13 +54,14 @@ lemma exists_card_eq_add_one : ∃ m, Fintype.card k₀ = m + 1 :=
 
 variable {k₀ b}
 
-omit [Fact (Irreducible (reciprocalPoly k₀ b))] in
+omit [Field k₀] [Algebra k₀ K] [Fact (Irreducible (reciprocalPoly k₀ b))] in
 lemma eval₂_reciprocalPoly {L : Type*} [CommRing L] (f : K →+* L) (x : L) :
     (reciprocalPoly k₀ b).eval₂ f x =
       x ^ Fintype.card k₀ + (f b⁻¹ * x ^ (Fintype.card k₀ - 1) - f b⁻¹) := by
   simp [reciprocalPoly]
 
 omit [Fact (Irreducible (reciprocalPoly k₀ b))] in
+omit [Algebra k₀ K] in
 /-- An element `v ≠ 0` with `vᵠ - v = b` is the inverse of a root of the reciprocal
 polynomial. -/
 lemma eval₂_inv_reciprocalPoly {L : Type*} [Field L] (f : K →+* L) (hb : b ≠ 0) {v : L}
@@ -79,6 +80,7 @@ lemma eval₂_inv_reciprocalPoly {L : Type*} [Field L] (f : K →+* L) (hb : b �
   rw [h0] at key
   simpa [hfb, hv] using key
 
+omit [Algebra k₀ K] in
 lemma root_ne_zero (hb : b ≠ 0) : root k₀ b ≠ 0 := by
   have h1 := AdjoinRoot.eval₂_root (reciprocalPoly k₀ b)
   obtain ⟨m, hm⟩ := exists_card_eq_add_one k₀
@@ -89,6 +91,7 @@ lemma root_ne_zero (hb : b ≠ 0) : root k₀ b ≠ 0 := by
     neg_eq_zero, map_inv₀, inv_eq_zero] at h1
   exact (map_eq_zero_iff _ (AdjoinRoot.of (reciprocalPoly k₀ b)).injective).1 h1
 
+omit [Algebra k₀ K] in
 /-- The root `u` satisfies the Artin–Schreier equation `uᵠ - u = b`. -/
 lemma root_pow_card_sub_root (hb : b ≠ 0) :
     root k₀ b ^ Fintype.card k₀ - root k₀ b = algebraMap K (Extension k₀ b) b := by
