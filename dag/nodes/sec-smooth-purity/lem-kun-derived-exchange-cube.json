@@ -154,5 +154,23 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-eb7ac1e89 (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements and the sources in full: Stacks sites-cohomology.tex Tag 07A7 remark-base-change and Tag 0E47 remark-compose-base-change-horizontal, where the verification is omitted. The statement is true and well-typed. It needs only the six face equations, and no face has to be cartesian. Both sides agree once f_1^{-1}s^{-1} is identified with x^{-1}f_0^{-1} and y^{-1}e_0^{-1} with e_1^{-1}a^{-1}. Small cases checked: all comparison maps identities (P and Q become canonical identifications, so E_1=E_0), K=0, and the all-identity cube. The delivery creates no new nodes. My search for duplicates found none: sbc-lem-base-change-composition, sbc-lem-identity-and-base-change-composition and lem-kun-higher-exchange-coefficient-cube all state something different. Step 1: I checked the exchange orientations against def-kun-commutative-derived-exchange, namely (g_b,f_b,h_b,e_b) for E_b, (g_0,s,g_1,a) for P and (h_0,x,h_1,y) for Q. Step 3: clause 1 of lem-weil-pbc-mate-pasting gives each side as the mate of the pasted transformation gamma or gamma'. Fixed gap: gamma and gamma' have different source and target functors. Step 2 named only the target identification, and step 3 went from 'the mate assignment is a bijection' straight to equal mates. The proof also needs mates to be compatible with whiskering the side functors by sigma and tau, which follows from naturality of the unit for h_1 and naturality of tau against the counit for g_0. That is elementary from the explicit formula in def-weil-pbc-adjunction-mate, but it is not mate-pasting clause 3. The corrected item file in fixes/ rewrites steps 2 and 3 only: it defines sigma and tau, states gamma∘(h_1^{-1}sigma) = (tau g_0^{-1})∘gamma', and writes out the naturality argument. Statement, uses and proof_deps are unchanged. I accept the tool uses lem-weil-pbc-derived-inverse-image-composition (clause 3) and lem-weil-pbc-mate-pasting. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba33e426c",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement, dependencies, source tags, orientations, universes, edge cases, docstrings, report sections, and compiler evidence all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.DerivedExchangeCube",
+  "declaration": "AlgebraicGeometry.Etale.derivedExchangeCube",
+  "statement": "theorem derivedExchangeCube {X₀ Y₀ S₀ T₀ X₁ Y₁ S₁ T₁ : Scheme.{u}} (h₀ : Y₀ ⟶ X₀) (e₀ : Y₀ ⟶ T₀) (f₀ : X₀ ⟶ S₀) (g₀ : T₀ ⟶ S₀) (h₁ : Y₁ ⟶ X₁) (e₁ : Y₁ ⟶ T₁) (f₁ : X₁ ⟶ S₁) (g₁ : T₁ ⟶ S₁) (h₀e₀ : h₀ ≫ f₀ = e₀ ≫ g₀) (h₁e₁ : h₁ ≫ f₁ = e₁ ≫ g₁) (x : X₁ ⟶ X₀) (y : Y₁ ⟶ Y₀) (s : S₁ ⟶ S₀) (a : T₁ ⟶ T₀) (f₀x : x ≫ f₀ = f₁ ≫ s) (g₀a : a ≫ g₀ = g₁ ≫ s) (h₀y : y ≫ h₀ = h₁ ≫ x) (e₀y : y ≫ e₀ = e₁ ≫ a) : let A := AddCommGrpCat.{u + 1} let E₀ := derivedBaseChangeMapPlus A (CommSq.mk h₀e₀.symm) let E₁ := derivedBaseChangeMapPlus A (CommSq.mk h₁e₁.symm) let P := derivedBaseChangeMapPlus A (CommSq.mk g₀a) let Q := derivedBaseChangeMapPlus A (CommSq.mk h₀y) let α := (upperStarCompDerivedPlus A x f₀ (x ≫ f₀) rfl).symm ≪≫ (eqToIso (by rw [f₀x])) ≪≫ upperStarCompDerivedPlus A f₁ s (x ≫ f₀) f₀x let β := (upperStarCompDerivedPlus A y e₀ (y ≫ e₀) rfl).symm ≪≫ (eqToIso (by rw [e₀y])) ≪≫ upperStarCompDerivedPlus A e₁ a (y ≫ e₀) e₀y Functor.whiskerLeft (lowerStar A g₀).rightDerivedFunctorPlus α.hom ≫ Functor.whiskerRight P (upperStar A f₁).mapDerivedCategoryPlus ≫ Functor.whiskerLeft (upperStar A a).mapDerivedCategoryPlus E₁ = Functor.whiskerRight E₀ (upperStar A x).mapDerivedCategoryPlus ≫ Functor.whiskerLeft (upperStar A e₀).mapDerivedCategoryPlus Q ≫ Functor.whiskerRight β.hom (lowerStar A h₁).rightDerivedFunctorPlus",
+  "by": "NX",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/SecSmoothPurity/DerivedExchangeCube.lean",
+  "branch": "newtargets-dag",
+  "existing": false
  }
 }
