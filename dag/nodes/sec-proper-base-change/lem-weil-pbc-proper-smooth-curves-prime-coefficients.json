@@ -52,7 +52,25 @@
    }
   },
   {
-   "text": "Let $U=D(\\ell)\\subset S$ and $Z=V(\\ell)\\hookrightarrow S$ with its closed subscheme structure. Prime proper base change along both inclusions identifies the restrictions of $A_q$ with the higher direct images of the constant sheaf on $C_U$ and $C_Z$; coefficient comparison gives the module identifications for $G_q$. Properness and smooth relative dimension one persist under base change. The geometric fibres are the given fibres after an algebraically closed field extension, so remain nonempty geometrically connected curves. Both bases are Noetherian. A finite constructible module stratification on each piece gives one on $S$ by concatenation: every locally closed constructible subset of either piece is locally closed and constructible in the Noetherian $S$, and its immersion into the piece composes with that piece's inclusion by clause (e) of [lem-weil-pbc-proper-fp-permanence]. Thus it suffices to treat the two pieces. Empty pieces are permitted. More explicitly, $U$ is locally Noetherian by the open-subscheme clause of [pqf-def-locnoeth], and it is quasi-compact because every open in a Noetherian topological space is quasi-compact. By [pqf-lem-affine-open-locnoeth], every affine open $\\operatorname{Spec}A$ of $S$ has Noetherian coordinate ring $A$. On such an affine open, the corresponding closed piece is $\\operatorname{Spec}(A/(\\ell))$, which is Noetherian: any ascending chain of ideals in the quotient pulls back to an ascending chain of ideals of $A$ and stabilizes. The closed piece is quasi-compact as a closed subset of the Noetherian underlying space. To justify the topological Noetherian assertions, choose a finite affine open cover of $S$. Each affine has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]; an ascending chain of opens stabilizes on each member, hence on their finite union. In such a space every open covering of an open has a finite subcover: the finite unions of its members have a maximal member, which must contain them all. For the quotient-ring check, the ascending-chain condition follows directly from finite generation: the union of a chain is an ideal, and its finite generators lie in one member.",
+   "text": "Put $U=D(\\ell)\\subset S$ and let $i:Z=V(\\ell)\\hookrightarrow S$ be the closed subscheme defined by $(\\ell)$. The minimal-condition lemma for closed subsets of the Noetherian scheme $S$ implies the descending-chain condition on closed subsets: a strictly decreasing chain would have no minimal member. The compact-subsets lemma therefore applies to $|S|$. In particular $|Z|$ and every intersection of an open subset of $S$ with any subset are quasi-compact, so $U$ is retrocompact. The open-subscheme lemma makes $U$ Noetherian. For $Z$, the immersion lemma gives that $i$ is locally of finite type; the locally-Noetherian finite-type lemma makes $Z$ locally Noetherian. Its compact underlying space then makes it Noetherian. Finally $S$ is quasi-separated by the locally-Noetherian quasi-separatedness lemma, and is quasi-compact by hypothesis. These arguments include empty $U$ or $Z$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-closed-immersion",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; Noetherian reduction to cases (a),(b)"
+   }
+  },
+  {
+   "text": "Apply prime proper base change along $U\\to S$ and $Z\\to S$ to the constant $\\mathbf F_\\ell$-sheaf. Pullback preserves constant sheaves; coefficient forgetting and its exchange comparison identify $G_q|_U$ and $G_q|_Z$ with the corresponding module higher direct images for $f_U:C_U\\to U$ and $f_Z:C_Z\\to Z$. Properness and smooth relative dimension one persist under these base changes. For each point of either subscheme, its residue field is the residue field at its image in $S$, so its geometric fibre is a geometric fibre of $f$. Thus the fibres remain nonempty geometrically connected curves. Step 2 supplies Noetherian bases. On $U$ the prime $\\ell$ is invertible, whereas on the full closed subscheme $Z$ its image is zero, even when $Z$ is nonreduced.",
    "uses": [
     "lemma-weil-pbc-prime-proper-base-change",
     "lem-weil-pbc-exchange-forget-coefficients",
@@ -60,12 +78,22 @@
     "lem-weil-pbc-proper-base-change",
     "lem-sbc-smooth-relative-dimension-permanence",
     "def-pc-geometrically-irreducible",
-    "pqf-def-locnoeth",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; Noetherian reduction to cases (a),(b)"
+   }
+  },
+  {
+   "text": "The two immersions $U\\to S$ and $Z\\to S$ have disjoint images covering $S$. These images are constructible: $U$ is retrocompact open by Step 2, and $Z$ is its complement. Suppose finite constructible module stratifications have been obtained on both pieces. For a stratum $a:T\\to U$ (respectively $T\\to Z$) and the piece inclusion $j$, inverse-image composition gives $(j\\circ a)^{-1}G_q\\cong a^{-1}j^{-1}G_q$. Indeed use the abelian composition isomorphism; its naturality for each scalar multiplication makes it $\\mathbf F_\\ell$-linear, using the forgetting comparison. Hence the composite restriction is finite locally constant as a module sheaf. Apply the stratification-assembly lemma to the two piece immersions, with $P(h)$ meaning that $h^{-1}G_q$ is finite locally constant. Its ambient scheme is qcqs by Step 2; its other hypotheses are exactly the disjoint constructible cover and the given piece stratifications. Its conclusion is the global stratification required by the definition of constructibility. It therefore suffices to prove constructibility over $U$ and over $Z$; an empty piece contributes the empty stratification.",
+   "uses": [
     "def-weil-constructible-subset",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-sc-affine-noetherian-underlying-space",
-    "pqf-lem-affine-open-locnoeth",
-    "lem-weil-pbc-proper-fp-permanence"
+    "lem-weil-pbc-constructible-stratification-assembly",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-etale-constructible-sheaf"
    ],
    "elementary": false,
    "source": {
@@ -140,7 +168,7 @@
    }
   },
   {
-   "text": "On each finite abelian constant stratum of $A_1|_Z$, choose its additive constant charts with values $B$. Each element of $B$ is killed by $p$: on a nonempty chart read $pG_1=0$ at a geometric stalk, identified with $B$ by the constant-stalk lemma. Empty charts may be omitted. Give $B$ the forced $\\mathbf F_p$-action $(a\\bmod p)b=ab$, with the right side repeated addition. Every additive chart map commutes with this action, since every element of $\\mathbf F_p$ is an integer multiple of $1$. Thus the same charts are finite constant module charts. Coefficient forgetting commutes with the inverse images on strata, so $G_1|_Z$ is constructible in the module sense. Step 4 treats the other degrees on $Z$, and Step 3 treats every degree on $U$. Concatenate their finite stratifications as in Step 2. This proves every $q\\geq0$ on $S$ without requiring invertibility of $\\ell$; zero sheaves and empty pieces cause no exception.",
+   "text": "On each finite abelian constant stratum of $A_1|_Z$, choose its additive constant charts with values $B$. Each element of $B$ is killed by $p$: on a nonempty chart read $pG_1=0$ at a geometric stalk, identified with $B$ by the constant-stalk lemma. Empty charts may be omitted. Give $B$ the forced $\\mathbf F_p$-action $(a\\bmod p)b=ab$, with the right side repeated addition. Every additive chart map commutes with this action, since every element of $\\mathbf F_p$ is an integer multiple of $1$. Thus the same charts are finite constant module charts. Coefficient forgetting commutes with the inverse images on strata, so $G_1|_Z$ is constructible in the module sense. Step 6 treats the other degrees on $Z$, and Step 5 treats every degree on $U$. Concatenate their finite stratifications by Step 4. This proves every $q\\geq0$ on $S$ without requiring invertibility of $\\ell$; zero sheaves and empty pieces cause no exception.",
    "uses": [
     "def-weil-pbc-constructible-abelian-sheaf",
     "def-weil-pbc-etale-constructible-sheaf",
@@ -158,6 +186,7 @@
   "cor-weil-pbc-geometric-fiber-finite",
   "def-pc-geometrically-irreducible",
   "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
   "def-weil-constructible-subset",
   "def-weil-pbc-constructible-abelian-sheaf",
   "def-weil-pbc-direct-image",
@@ -165,19 +194,24 @@
   "def-weil-proper-morphism",
   "lem-pc-smooth-flat",
   "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-sc-affine-noetherian-underlying-space",
   "lem-sc-artin-schreier-dimension",
   "lem-sc-artin-schreier-scheme-section-data",
   "lem-sc-artin-schreier-scheme-section-exact",
   "lem-sc-c5",
+  "lem-sfb-noetherian-space-compact-subsets",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-constructible-stratification-assembly",
   "lem-weil-pbc-direct-image-left-exact",
   "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
   "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
   "lem-weil-pbc-exchange-forget-coefficients",
   "lem-weil-pbc-frobenius-vector-bundle-kernel",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
   "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-right-derived-universal-delta-functor",
   "lem-weil-pbc-site-sheaves-enough-injectives",
   "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
@@ -185,8 +219,7 @@
   "lemma-constructible-pullback-constant",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "lemma-weil-pbc-prime-proper-base-change",
-  "pqf-def-locnoeth",
-  "pqf-lem-affine-open-locnoeth",
+  "pqf-lem-locnoeth-lft",
   "sbc-lem-higher-direct-image-presheaf"
  ],
  "proof_origin": {
@@ -285,10 +318,45 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*smooth.*constructible|constructible.*smooth.*proper",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructibility of etale cohomology sheaves in a proper smooth family of curves with constant prime coefficients",
+   "results": "8 hits; AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher etale direct images of constant prime field sheaves for proper smooth connected curve families are constructible",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.isConstructible_comap_C, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.exists_range_eq_of_isConstructible, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of smooth proper relative curves with finite constant coefficients is locally constant after finite stratification",
+   "results": "8 hits; Profinite.NobelingProof.Nobeling_aux, Profinite.exists_locallyConstant_finite_aux, LightCondensed.locallyConstantPresheaf, Profinite.exists_locallyConstant_finite_nonempty, Profinite.exists_locallyConstant_fin_two, LocallyConstant.freeOfProfinite, CompHausLike.LocallyConstantModule.functor, Module.isLocallyConstant_rankAtStalk",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
   "by": "worker",
@@ -310,11 +378,11 @@
   }
  },
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
   "worker": "stage1",
-  "summary": "Expanded 0GKV along its invertible-locus and characteristic-prime Artin--Schreier proof. Reused existing proper base change, curve finiteness/vanishing and coefficient comparisons; created four statement-only inputs for specialization, local constancy, coherent curve-family cohomology and Frobenius vector bundles. Statement unchanged. Maintainer-reader repair: Step 2 explicitly cites affine-open Noetherianness and composition of immersions, both existing Mathlib leaves.",
-  "blueprint": "Expands the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper through the 0GKW final prime-coefficient reduction and the Noetherian proof of 0GKV.",
+  "summary": "Repair of the human re-split request dated 2026-10-17: replaced the old 2185-character Step 2 with three short steps citing existing statements for Noetherian/compactness permanence, proper base-change restriction, and constructible stratification assembly. Reused all hidden inputs from the DAG; no new nodes. The statement and Lean record are unchanged, and the other proof steps are retained with final cross-references renumbered.",
+  "blueprint": "Retains the 0GKV Noetherian U=D(ell), Z=V(ell) route in the classical finiteness input of thm-weil-pbc-direct-image-finiteness-proper. New Steps 2--4 expose the permanence, base-change, and stratification arguments previously combined in Step 2; Steps 1 and 5--9 retain the original finite-stalk, invertible-coefficient and Artin--Schreier arguments.",
   "tool_uses": [
    {
     "node": "lemma-constructible-pullback-constant",
@@ -375,6 +443,14 @@
    {
     "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
     "why": "Generic tool: Geometric stalks of a constant etale sheaf. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-stratification-assembly",
+    "why": "Generic finite immersed-partition assembly tool; the curve-family argument needs its explicit constructible-stratum conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic composition isomorphism for abelian etale inverse images, used to identify composite stratum restrictions; scalar linearity follows from naturality."
    }
   ]
  },
@@ -393,15 +469,17 @@
   "lem-weil-pbc-site-sheaves-enough-injectives",
   "lem-weil-pbc-right-derived-universal-delta-functor",
   "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-constructible-stratification-assembly",
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NV-546d340b8",
-  "group": "NV",
+  "reviewer": "NT-cc-NS-d50ffb5be",
+  "group": "NS",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-546d340b8 (reviewer sub-agent of L); spot-checked: Read all item and new-node mathematics against Stacks 0GKV, 0GKU, 0GKC, 0GKD, 0GKA and 03P2. Repaired two Step-2 citation omissions using existing affine-open Noetherianness and immersion-composition nodes. Statements and targets unchanged; no duplicate or new cycle found. Exact master coefficient categories and base-change declarations checked. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-d50ffb5be (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0GKV (more-etale.tex, label lemma-proper-smooth-family-curves): the Noetherian U=D(ell)/Z=V(ell) reduction, case (a) and case (b) with 0GKU. I also read properties.tex, labels lemma-locally-Noetherian-quasi-separated and lemma-Noetherian-topology, and the statements of all 38 cited nodes. The delivery has no new nodes. The statement, Lean record and blueprint ancestry are unchanged, and proof_deps is exactly the union of the step uses. New Step 2: the minimal-closed-subset leaf gives the descending chain condition, the compact-subsets leaf then makes U retrocompact and |Z| compact, the open-subscheme leaf makes U Noetherian, immersion-lft plus locnoeth-lft make Z locally Noetherian and hence Noetherian, and the locally-Noetherian-qs leaf makes S quasi-separated. Every hypothesis matches. New Step 3: prime proper base change (any base map, f proper) plus the forgetting comparison (3) gives the module exchange over U and Z. Residue fields are unchanged on open and closed subschemes, and nonreduced Z is allowed. New Step 4: U is retrocompact open and Z is its complement, so both are constructible. The assembly node's qcqs and disjoint-cover hypotheses hold, and its conclusion with P = finite locally constant module pullback is exactly the module constructibility definition. Composite pullbacks are made F_ell-linear by naturality of the composition isomorphism together with forgetting (1). Steps 5-9 are unchanged apart from renumbering, and I rechecked their hypotheses: ell invertible on U, a Noetherian base, p=0 on Z, and a semilinear Frobenius F that need not be invertible. I checked empty S/U/Z, nonreduced Z, q=0/1/>=2 and genus 0. The newly declared tool uses (assembly, inverse-image-composition) belong to sk-thm-p1, which the unit cites directly, so they are on-route and acceptable. There is no SGA citation and no route departure. Minor, not faults: the report announces preflight output it does not include, and Step 1 takes relative dimension one from the fibre dimension without spelling out irreducibility of the fibre (a pre-existing step). No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients",
