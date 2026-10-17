@@ -246,6 +246,7 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
     IsPerverseGE (f ≫ aY) (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) := by
   -- `X` is noetherian and separated over `k`, so `f` is compactifiable by Nagata
   have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   let c := HasCompactification.compactification (f ≫ aY)
@@ -261,7 +262,10 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
   have hDK : IsPerverseLE (-n) DY :=
     SupportCondition.of_iso (verdierDualShiftIso _ aY K n) hK
   have h₁ := isPerverseLE_upperStar aY d f hDK
+<<<<<<< HEAD
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
+=======
+>>>>>>> origin/bundle/sec-deligne-laumon-a1-b1
   obtain ⟨L₀, _, hL₀, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨-, hL₀f⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L₀ hL₀
   have h₂ := SupportCondition.derivedTensor h₁ (torAmplitudeIn_singleFunctor_zero_of_flat _ L₀ hL₀f)
@@ -337,8 +341,13 @@ theorem isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar (d : 
 compactly supported pushforward carries `ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^{≥n-d}(Y)`, by Verdier
 exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` and the support estimate for `Rf_*`.
 (blueprint: `lem-per-artin-gabber-affine-curve`) -/
+<<<<<<< HEAD
 theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [PerfectField k] [IsAffineHom f]
     [LocallyOfFiniteType f]
+=======
+theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]
+    [PerfectField k]
+>>>>>>> origin/bundle/sec-deligne-laumon-a1-b1
     [HasCompactification f] [QuasiCompact f] [HasCompactification (f ≫ aY)]
     (hf : ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : ℕ∞)) {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

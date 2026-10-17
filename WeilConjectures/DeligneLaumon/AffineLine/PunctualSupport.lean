@@ -50,11 +50,12 @@ theorem mem_support_upperStar_iff (φ : Y ⟶ X) [φ.IsOver (Spec (CommRingCat.o
   have e := asIso (stalkObjHomOfUpperStar φ ((upperStar φ).obj F) (𝟙 _)
     ((Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y))
   have h1 := (nontrivial_stalk_iff_nontrivial_stalkObj F
-    ⟨φ.base y.1, Scheme.Hom.map_mem_finitePoints φ y.2⟩ _ (by
-      rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricFiberProj, ← Category.assoc,
-        Scheme.Hom.comp_base, TopCat.comp_app, (Y ↘ Spec (CommRingCat.of k₀)).
-          geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base]
-      exact comp_over φ _)).1 hx
+    ⟨φ.base y.1, Scheme.Hom.map_mem_finitePoints φ y.2⟩
+    ((Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y ≫
+      Scheme.Hom.geometricFiberMap φ (comp_over φ _)) (by
+      rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricFiberProj, ← Category.assoc]
+      exact congrArg φ.base
+        (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ y))).1 hx
   change Nontrivial ((WeilCoefficients.toModuleCat l).obj (((upperStar φ).obj F).stalkObj
       ((Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y)))
   exact @Equiv.nontrivial _ _ (WeilCoefficients.linearEquivOfIso e).symm.toEquiv h1

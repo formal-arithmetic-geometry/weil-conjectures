@@ -104,7 +104,8 @@ theorem isPerverseLE_fourierTransform
 
 /-- **Perverse amplitude of the Fourier transform**, cosupport side: `FT_ψ` carries
 `ᵖD^{≥0}(V) ∩ Dctf(V)` into `ᵖD^{≥-1}(V')`. (blueprint: `thm-fd-fourier-perverse`) -/
-theorem isPerverseGE_fourierTransform [PerfectField k] [HasCompactification (pullback.fst π π' ≫ π)]
+theorem isPerverseGE_fourierTransform [PerfectField k]
+    [HasCompactification (pullback.fst π π' ≫ π)]
     [HasCompactification (pullback.snd π π' ≫ π')]
     (hfib : ∀ y, topologicalKrullDim ((pullback.snd π π').fiber y) ≤ ((1 : ℕ) : ℕ∞))
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤))

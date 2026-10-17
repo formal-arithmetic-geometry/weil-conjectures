@@ -251,6 +251,8 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
       (ProEtaleWeilSheaf.constantTwistCompLowerStarIso k₀ l φ b).app P.obj ≪≫
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
 
+set_option maxHeartbeats 1000000 in
+-- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 /--
 For a dense open immersion `j : U₀ ↪ C₀` of smooth curves, a lisse Weil sheaf `F` on `U₀` and a
 closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perfect pairing
@@ -284,7 +286,8 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
           ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
         (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
   classical
-  rw [WeilSheaf.higherDirectImage_obj_eq]
+  rw [WeilSheaf.higherDirectImage_obj_eq, show ((1 : ℕ) : ℤ) = 1 from rfl,
+    show WeilSheaf.directImage (k₀ := k₀) (l := l) j = WeilSheaf.lowerStar j from rfl]
   -- the open `U` is a smooth separated curve
   have hjC : j ≫ C ↘ Spec (CommRingCat.of k₀) = U ↘ Spec (CommRingCat.of k₀) := comp_over j _
   have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by rw [← hjC]; infer_instance
@@ -396,17 +399,25 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   simp only [hone, one_smul] at hΨ
   have hΨ' : Ψ.toLinearEquiv ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a) =
       (q ^ d) • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) := by
-    have h1 : q ^ d * (c : PadicAlgCl l) ^ d = 1 := by
-      rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)]
-    rw [← hΨ, smul_smul, h1, one_smul]
-  simp only [LinearEquiv.trans_apply, LinearEquiv.dualMap_apply]
-  erw [hΨ']
-  rw [map_smul]
-  erw [S₅.map_frobenius]
-  erw [LinearEquiv.dualMap_apply, FrobeniusModule.Equiv.symm_map_frobenius ψ b]
-  rw [LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
-    LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply, smul_eq_mul]
-  simp [Scheme.Hom.residueCard, q, d]
+    rw [← hΨ, smul_smul, show q ^ d * (c : PadicAlgCl l) ^ d = 1 by
+      rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)], one_smul]
+  simp only [LinearEquiv.trans_apply]
+  refine (congrArg (fun v ↦ ψ.toLinearEquiv.symm.dualMap (S₅.toLinearEquiv v) _) hΨ').trans ?_
+  rw [map_smul, S₅.map_frobenius]
+  have key (v : Module.Dual (PadicAlgCl l) (H.stalk zf).carrier) :
+      ψ.toLinearEquiv.symm.dualMap (q ^ d • (H.stalk zf).dual.frobenius v)
+          ((((WeilComplex.homologySheaf 1).obj ((WeilComplex.derivedLowerStar j).obj
+            (WeilSheaf.toComplex.obj F))).stalk s).frobenius b) =
+        q ^ d * ψ.toLinearEquiv.symm.dualMap v b := by
+    rw [LinearEquiv.dualMap_apply, LinearEquiv.dualMap_apply, LinearMap.smul_apply,
+      FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
+      FrobeniusModule.Equiv.symm_map_frobenius ψ b, LinearEquiv.coe_coe,
+      LinearEquiv.symm_apply_apply, smul_eq_mul]
+  have hqd : q ^ d = ((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l) := by
+    simp [Scheme.Hom.residueCard, q, d]
+  refine (key _).trans ?_
+  rw [hqd]
+  rfl
 
 set_option maxHeartbeats 1600000 in
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
