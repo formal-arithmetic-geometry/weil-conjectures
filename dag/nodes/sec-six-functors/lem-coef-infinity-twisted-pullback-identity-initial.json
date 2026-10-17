@@ -220,5 +220,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-bef7c23a8 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node lem-coef-infinity-twisted-pullback-boundary-filtration. I checked them against Kerodon 03JW (Prop. 8.1.2.1, read online): the basic sets, pr(S) as a maximum, prioritized, and the ordering by priority then cardinality all match, as do the four horn cases. Those cases are: inner horn; k=d impossible; k=0 with i<n (identity edge); k=0 with i=n (edge f), the last two by Thm 4.4.2.6. Step 1 is correct: applied to P_x->Delta^0, relative-initial-boundary (02WS) gives weak contractibility, because Map_{Delta^0} is the point. Step 2 is correct: d_j omits the pair {n-j,n+1+j}, and the edge {n,n+1} is f, which lies in K_0 even for n=1. Step 4 is correct: d>=n+1>=2 and k<d hold, and for i<n maximality of i forces i+1 into S, so the first edge is the identity at x. My own enumeration for n=1..4, with five random tie orders each, found every attaching intersection equal to Lambda^d_k and S_m=V_n; the counts are 4/13/40/121. I found no duplicate: twisted-arrow-join-horn (H_{n,k}, 03JT) is a different subcomplex. The item statement is unchanged and nothing is weakened. No SGA source is used. Fix: Step 4 cites lem-cbc-equivalence-outer-horn-filling, from unit sk-prop-sf-cbc, which is not on the route of sk-prop-sf-biduality-general, and the delivery had tool_uses []. I added split_report.tool_uses for it in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-twisted-pullback-identity-initial.json. This is Joyal's generic outer-horn filling, the same theorem 03JW invokes, and it is already a tool of other nodes in this unit. I accept that tool use.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09a6afebf",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read node, both stmt_deps, parent TwistedArrowLeftFibration (twistedOrdinal/Map, twistedSource, twistedSourceFiber = fiber pullback, inclusion), EnhancedDiagramsCones (IsEquivalenceEdge orientation, mappingSpace, IsContractible, IsInitial). All 6 clauses exact: P_x is the existing canonical construction (reversed first block = theta^op*theta, whole first block constant at x); explicit [Quasicategory P_x]; for all fiber vertices, IsEquivalenceEdge of the underlying edge implies IsInitial; the identity clause's existential is unique because pullback.snd is mono. One universe, no extra hypotheses; edge cases (empty C, point, n=0, any target y) covered. Sorry-only, no definitions, source/blueprint docstrings with the 6-step proof, imports per §3(7). The node changed only in lean, verbatim statement. The report has Worker report and Second reading by Q82. nt_compile --json on the snapshot: clean, rc 0, 1.2 s. Note: the public import of the parent module without a stmt_dep is unavoidable (a stmt_dep would make a DAG cycle, a copy would break H4); the reverse proof import is listed, and the parent's constructions must be split off before stage 3."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TwistedSourceFiberInitial",
+  "declaration": "SSet.Enhanced.twistedSourceFiber_equivalence_initial",
+  "file": "lean/Sheaf/CategoryTheory/TwistedSourceFiberInitial.lean",
+  "statement": "theorem twistedSourceFiber_equivalence_initial {C : SSet.{u}} [Quasicategory C] (x : C _⦋0⦌) [Quasicategory (twistedSourceFiber C x)] : (∀ f : (twistedSourceFiber C x) _⦋0⦌, IsEquivalenceEdge C ((twistedSourceFiberInclusion C x).app _ f) → IsInitial (twistedSourceFiber C x) f) ∧ (∃ e : (twistedSourceFiber C x) _⦋0⦌, (twistedSourceFiberInclusion C x).app _ e = C.σ 0 x ∧ IsInitial (twistedSourceFiber C x) e)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

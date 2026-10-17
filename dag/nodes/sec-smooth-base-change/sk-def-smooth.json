@@ -283,5 +283,36 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-f5a12de23 (reviewer sub-agent of L); spot-checked: I read the item, its unit, the main-20261015 blueprint section, all 16 stmt_deps and 12 proof_deps, and Stacks 01V8, 01VB, 03CO, 03PU and 03S5 at the cited places. The STATEMENT-DISPUTED change from 'smooth varieties' to the criterion with smooth residue-field fibres is correct and disclosed; I checked the counterexample ⊔_ℕ Spec k → Spec k. Steps 1-2 follow exactly from sbc-lem-smooth-criterion and from sbc-lem-affine-space-smooth with the definition of relative dimension (n=0 included). Steps 3-5 are a valid proof of the restricted union over I_S: I_S contains 1 and is closed under products; the abelian colimit comes from the forgetful lemma; a filtered colimit of monos is mono (the Grothendieck lemma states this); colim(const F)=F is argued; exact stalks give kernel stalks, and with conservativity c is an isomorphism; the inverse is Λ-linear. Step 6: on Spec Z, j_!(Z/2) has stalk Z/2 on D(2) and 0 off it, and the only positive unit of Z is 1. Edge cases checked: n=0, the zero sheaf, S empty, I_S={1}. The current blueprint has no R^q clause, so no target or clause is weakened. No new nodes. lem-kun-invertible-orders-colimit (field case) and lemma-weil-pbc-torsion-filtered-union (all integers) are not duplicates. I accept the six generic-sheaf tool_uses. FIX (B3): 'geometric point' had no definition node; I added [def-weil-geometric-point] to the statement and to stmt_deps in fixes/dag/nodes/sec-smooth-base-change/sk-def-smooth.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6d1a997e",
+  "group": "Q105",
+  "result": "pass",
+  "note": "I read the node, all 17 statement dependency records, the module, report.md (real Worker report and Q105 second-reading sections) and the upstream IsTorsionSheafOfInvertibleOrder class. The smoothness criterion, affine-space smoothness and allowed torsion reuse existing declarations, so nothing is defined twice. The new declarations are exact: I_S = {d>0 with d·1 a global unit}, ordered by divisibility (filteredness stated, proof postponed); F[d] = kernel of d·1_F in the module-sheaf category; the canonical inclusions and kernel-arrow cocone; IsIso of colimit.desc under exactly the allowed-torsion hypothesis. The j_!(Z/2) example on D(2) ⊂ Spec Z uses the existing lower-shriek and constant-sheaf constructions, and both its claims are true. The class's separably closed geometric points are equivalent to the node's algebraically closed ones. Λ : Type (u+1) is the existing convention of the reused class. Edge cases: 1 is in I_S; S=Spec Z gives {1}; empty S; n=0; d=0 excluded. Compile: nt_compile.py --json rc 0 in 4.1 s, no errors. The diagram's only sorryAx comes from the named Prop lemma allowedTorsionSubsheaf_mono, which hollow_defs.sh classes as not hollow. lean.statement matches the file verbatim and all 10 declarations exist. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AllowedTorsion",
+  "declaration": "AlgebraicGeometry.allowedTorsion_colimit_map_isIso",
+  "declarations": [
+   "AlgebraicGeometry.allowedTorsionIntegers",
+   "AlgebraicGeometry.allowedTorsionIntegers_isFiltered",
+   "AlgebraicGeometry.allowedTorsionSubsheaf",
+   "AlgebraicGeometry.allowedTorsionSubsheaf_mono",
+   "AlgebraicGeometry.allowedTorsionDiagram",
+   "AlgebraicGeometry.allowedTorsionCocone",
+   "AlgebraicGeometry.allowedTorsion_colimit_map_isIso",
+   "AlgebraicGeometry.allowedTorsionCounterexampleOpen",
+   "AlgebraicGeometry.allowedTorsionLocalCounterexample",
+   "AlgebraicGeometry.allowedTorsionLocalCounterexample_properties"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AllowedTorsion.lean",
+  "statement": "theorem allowedTorsion_colimit_map_isIso {Λ : Type (u + 1)} [CommRing Λ] (S T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheafOfInvertibleOrder S F] : IsIso (colimit.desc (allowedTorsionDiagram S T F) (allowedTorsionCocone S T F))",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical divisibility diagram, its filteredness and cocone, and the specified colimit isomorphism; also the actual j_!(Z/2) global/local counterexample. Smooth and the smooth fibre criterion reuse def-sbc-smooth-morphisms and sbc-lem-smooth-criterion; affine-space smoothness reuses sbc-lem-affine-space-smooth. Allowed torsion reuses Scheme.IsTorsionSheafOfInvertibleOrder. All new theorem proofs are postponed; definitions contain real constructions."
  }
 }

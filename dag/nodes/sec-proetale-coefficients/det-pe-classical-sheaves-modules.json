@@ -230,5 +230,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-963bef049",
+  "group": "Q19",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: arbitrary X : Scheme.{u}; Λ : Type (u+1) [CommRing Λ] under the recorded fixed-coefficient ModuleCat convention (no Finite); exists adj between comparisonUpperStar/comparisonLowerStar (the functors of the recorded proEtaleSiteComparisonModules, on the real ProEt.topology X); PreservesFiniteLimits and PreservesFiniteColimits (exact); Hom-set bijectivity (fully faithful); IsClassical(underlying set sheaf) iff IsIso counit, and IsClassical iff essential image, which with full faithfulness gives the equivalence with ν_* as quasi-inverse. Uses the existing IsClassical (continuity-map clause 3), no second predicate. Consistent with the stated Unit and Image siblings. Edge cases (empty scheme, zero ring and module, empty diagrams, universes) covered. No hollow definitions, single sorry theorem, docstrings with source and blueprint tag and all five steps, lean.statement verbatim. Mechanical fixes: (1) replaced the stale public import ProEtaleSmallModelComparison with the recorded stmt-dep module ProEtaleSiteComparison (Q67 §1(B) record, already in the snapshot); (2) added non-public import ProEtaleClassicalSheavesImage for the now-stated proof dependency det-pe-classical-sheaves-image (rule 7). Statement unchanged. nt_compile --json: delivered and fixed files both rc 0, no errors or warnings. fixes/ has the complete .lean file and the report with a correction section."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleClassicalSheavesModules",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.proEtaleClassicalSheavesModules"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClassicalSheavesModules.lean",
+  "statement": "theorem proEtaleClassicalSheavesModules (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] : ∃ (adj : comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⊣ comparisonLowerStar (ModuleCat.{u + 1} Λ) X), PreservesFiniteLimits (comparisonUpperStar (ModuleCat.{u + 1} Λ) X) ∧ PreservesFiniteColimits (comparisonUpperStar (ModuleCat.{u + 1} Λ) X) ∧ (∀ F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), Function.Bijective (fun f : F ⟶ G ↦ (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).map f)) ∧ (∀ G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ), IsClassical ((sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} Λ))).obj G) ↔ IsIso (adj.counit.app G)) ∧ (∀ G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ), IsClassical ((sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} Λ))).obj G) ↔ ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F ≅ G))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the fixed-coefficient ModuleCat encoding explicitly allowed by def-weil-pbc-etale-sheaves, with the recorded IsClassical predicate on the underlying set sheaf. The adjunction, exactness, full faithfulness and canonical counit/essential-image characterizations give exactly the module equivalence and its restriction quasi-inverse; no second classicality predicate is defined.",
+  "fixed_by": "NT-stage2-cc-963bef049"
  }
 }
