@@ -12,9 +12,87 @@
   "def-weil-abstract-derived-category",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $U=0$ or $V=0$, functoriality of the derived tensor and the zero object give $U\\otimes_R^{\\mathbf L}V=0$. For the converse assume $U$ and $V$ are both nonzero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Derived tensor definition and zero-object property; Tag 0DJE conventions"
+   }
+  },
+  {
+   "text": "By the Noetherian pseudo-coherence criterion [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion], the bounded-above finitely generated cohomology hypotheses make both $U$ and $V$ pseudo-coherent. The general tensor-closure lemma [lem-trf-pseudocoherent-tensor-closure], applied with upper bounds for $U$ and $V$, shows that $U\\otimes_R^{\\mathbf L}V$ is pseudo-coherent; applying the same Noetherian criterion to this tensor gives the asserted bounded-above finitely generated cohomology.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-trf-pseudocoherent-tensor-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 066E (Noetherian pseudo-coherence criterion) and 0DJE (lemma-tensor-pseudo-coherent)"
+   }
+  },
+  {
+   "text": "Choose bounded-above finite free representatives of $U$ and $V$ from pseudo-coherence. Modify each representative at its highest nonzero term as follows. If the top cohomology vanishes, the outgoing differential is zero and the preceding differential onto the top finite free module is split surjective; its kernel is a finite projective module, hence finite free over the local ring by [lem-trf-projective-over-local-free]. Cancel the resulting contractible free summand. Repeating finitely many times reaches the highest nonzero cohomological degrees $a$ and $b$, giving bounded-above finite free complexes $P^\\bullet,Q^\\bullet$ with $P^i=0$ for $i>a$, $Q^j=0$ for $j>b$, and nonzero finitely generated modules $H^a(P^\\bullet)\\cong H^a(U)$ and $H^b(Q^\\bullet)\\cong H^b(V)$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-trf-projective-over-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0593 (projective modules over local rings are free), together with the bounded-above finite-free definition of pseudo-coherence"
+   }
+  },
+  {
+   "text": "Every term of $P^\\bullet$ and $Q^\\bullet$ is flat, so the bounded-above flat K-flat lemma [lem-pc-module-bounded-flat-kflat] identifies the derived tensor with the ordinary direct-sum total complex $T^\\bullet=\\operatorname{Tot}(P^\\bullet\\otimes_RQ^\\bullet)$, with the stated Koszul differential.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, bounded-above flat complexes compute derived tensor"
+   }
+  },
+  {
+   "text": "Apply the top-degree tensor calculation [lem-trf-local-top-degree-tensor] to $P^\\bullet,Q^\\bullet$. It gives $H^{a+b}(T^\\bullet)\\cong H^a(P^\\bullet)\\otimes_RH^b(Q^\\bullet)$. The two factors are nonzero finite modules over the local ring, so [lem-trf-local-finite-module-tensor-nonzero] makes this cohomology module nonzero. Hence $U\\otimes_R^{\\mathbf L}V$ is nonzero.",
+   "uses": [
+    "lem-trf-local-top-degree-tensor",
+    "lem-trf-local-finite-module-tensor-nonzero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent top-degree calculation, with Nakayama (Tag 00DV) for the finite-module tensor factor"
+   }
+  },
+  {
+   "text": "Thus, when both factors are nonzero, the derived tensor is nonzero; combined with Step 1 this proves $U\\otimes_R^{\\mathbf L}V=0$ if and only if $U=0$ or $V=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Logical combination of the preceding implications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-local-finite-module-tensor-nonzero",
+  "lem-trf-local-top-degree-tensor",
+  "lem-trf-projective-over-local-free",
+  "lem-trf-pseudocoherent-tensor-closure",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent corollary from Tag 0DJE, the bounded-above finite-free top-degree calculation, and Nakayama (Tag 00DV)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,7 +131,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-semidualizing-rhom-conservative",
@@ -65,7 +143,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Tensor nonvanishing for bounded-above coherent complexes over a local ring.",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Complete-local step of that detection: tensor nonvanishing for bounded-above coherent complexes over a local ring.",
    "via": [
     "lem-trf-semidualizing-rhom-conservative",
     "lem-trf-algebraic-relative-dualizing-isomorphism",
@@ -85,5 +163,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-derived-tensor-nonvanishing",
+  "worker": "stage1",
+  "summary": "Audited the imported local tensor statement against More on Algebra Tags 0DJE and 066E. Added three statement-only helpers: the general n-pseudo-coherent tensor-closure theorem, the top-degree total-tensor cohomology calculation, and nonvanishing of tensor products of two nonzero finite modules over a local ring. The item proof now derives pseudo-coherence and closure, cancels split contractible tails of finite-free resolutions over the local ring, computes the top tensor cohomology, and applies Nakayama to prove nonvanishing; zero-factor cases are handled separately. No Lean attachment exists.",
+  "blueprint": "Realizes, in the chain under lem-trf-local-term-locality proof (1)--(2) (the blueprint proof itself does not mention this input; place inherited through via), the complete-local step of the semidualizing detection: closure under tensor from Stacks Tag 0DJE (steps 2) and the top-cohomology/Nakayama nonvanishing argument (steps 3--5)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-58707c9d6",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-58707c9d6 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no mathematical fault; I made three small record repairs. Every step checks against its cited statement. Step 2 uses Stacks 066E(2) (the Noetherian pseudo-coherence criterion) and 0DJE (closure of pseudo-coherence under derived tensor), checked at more-algebra.tex 16487-16514. Step 3 cancels split top terms of a finite free complex; I verified the direct-sum splitting, that the kernel is free by 0593, and that the process stops because U is nonzero with cohomology bounded above. Step 4 uses 064K (bounded-above flat complexes are K-flat). Step 5: the top-degree formula H^{a+b}=H^a(P)⊗H^b(Q) follows from right exactness of tensor, and the two-module lemma follows from Nakayama 00DV. Tested cases: k⊗^L k over a local ring, Z/2⊗^L Z/3 over Z (shows the local hypothesis is needed), Q⊗^L Z/p over Z_(p) (shows finite generation is needed). The item's statement is unchanged and matches how the parent lem-trf-semidualizing-rhom-conservative uses it in its steps 3-4. No target, base-change morphism or coefficient category is involved. Route: the 066E node (sk-thm-properbasechange) and the 064K node (sk-thm-picard-semicon) are inside the unit closure of sk-i-curve-zero. The declared tool_use lem-trf-projective-over-local-free is in sk-i-curve-zero itself, so it is not needed; I did not accept it and removed it. Duplicates: no existing node states 0DJE, the top-degree formula or the two-module lemma. IsLocalRing.subsingleton_tensorProduct (Mathlib/RingTheory/LocalRing/Module.lean:96) covers only one module tensored with the residue field. No new node restates the item. Repairs: (1) lem-trf-pseudocoherent-tensor-closure used ⊗^L with no definition; I added an inline definition through def-pc-module-kflat-complex and def-pc-tensor-complex-sheaves, and added both to stmt_deps. (2) lem-trf-local-top-degree-tensor cited two definitions but had empty stmt_deps; I filled them. (3) The blueprint.from.place of the item and of the three new nodes was an invented phrase ('Auxiliary algebraic input'); I replaced it with the ancestor chain convention and corrected the item's split_report.blueprint.; 4 file(s) fixed by the reviewer"
  }
 }
