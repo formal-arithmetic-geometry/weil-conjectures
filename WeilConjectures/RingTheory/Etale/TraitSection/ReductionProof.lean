@@ -65,8 +65,11 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
         (Localization.AtPrime (q.comap ε) ⊗[B] integralClosure B L) := by
   classical
   let B₁ := B ⊗[R₀] A₁
-  have : Algebra.Smooth A₁ B₁ := sorry
-  have : IsNoetherianRing B₁ := sorry
+  let eB : B₁ ≃ₐ[A₁] A₁ ⊗[R₀] B :=
+    AlgEquiv.ofRingEquiv (f := (Algebra.TensorProduct.comm R₀ B A₁).toRingEquiv)
+    fun a ↦ rfl
+  have : Algebra.Smooth A₁ B₁ := Algebra.Smooth.of_equiv eB.symm
+  have : IsNoetherianRing B₁ := Algebra.FiniteType.isNoetherianRing A₁ B₁
   have : Module.Flat B B₁ := inferInstance
   let Bk₁ := B₁ ⊗[B] Bk
   have hR (r : R₀) (hr : r ∈ nonZeroDivisors R₀) : algebraMap R₀ A₁ r ∈ nonZeroDivisors A₁ :=
