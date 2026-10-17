@@ -96,7 +96,6 @@ noncomputable def koszulCochainAug (f : Fin r → R) :
     simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.id_comp, comp_f,
       koszulCochainAugApp_f, koszulCochainTower_map_f_zero, Category.assoc, Iso.inv_hom_id_assoc])
 
-variable (r) in
 /-- The quotient tower `n ↦ (R ⧸ Iⁿ)[0]` of cochain complexes. -/
 noncomputable def quotCochainTower (I : Ideal R) : ℕᵒᵖ ⥤ CochainComplex (ModuleCat.{u} R) ℤ :=
   Ideal.quotPowFunctor I ⋙ single _ _ 0
@@ -116,7 +115,7 @@ variable (r) in
 /-- The comparison map `K(f^m) ⟶ (R ⧸ Iᵐ)[0]` for `I = (f₁, …, f_r)`, induced in degree `0` by
 the quotient map `⋀⁰ Rʳ ≅ R ⟶ R ⧸ Iᵐ`; it is well defined because `(f₁ᵐ, …, f_rᵐ) ⊆ Iᵐ`. -/
 noncomputable def koszulCochainToQuotApp (f : Fin r → R) (m : ℕ) :
-    (koszulCochainTower f).obj (op m) ⟶ (quotCochainTower r (Ideal.span (Set.range f))).obj (op m) :=
+    (koszulCochainTower f).obj (op m) ⟶ (quotCochainTower (Ideal.span (Set.range f))).obj (op m) :=
   mkHomToSingle ((koszulCochainXZeroIso f m).hom ≫ koszulQuot _ m) fun i hi ↦ by
     obtain rfl : i = -1 := by simp at hi; lia
     rw [extend_d_eq _ koszulEmbedding (i := 1) (j := 0) (by simp) koszulEmbedding_f_zero]
@@ -138,7 +137,7 @@ lemma koszulCochainToQuotApp_f (f : Fin r → R) (m : ℕ) :
 /-- The comparison map `K(f^m) ⟶ (R ⧸ Iᵐ)[0]` from the Koszul tower to the quotient tower, for
 `I = (f₁, …, f_r)`. -/
 noncomputable def koszulCochainToQuot (f : Fin r → R) :
-    koszulCochainTower f ⟶ quotCochainTower r (Ideal.span (Set.range f)) where
+    koszulCochainTower f ⟶ quotCochainTower (Ideal.span (Set.range f)) where
   app m := koszulCochainToQuotApp r f m.unop
   naturality m m' h := to_single_hom_ext (by
     simp only [comp_f, koszulCochainToQuotApp_f, koszulCochainTower_map_f_zero, Category.assoc,
@@ -148,19 +147,25 @@ noncomputable def koszulCochainToQuot (f : Fin r → R) :
     ext x
     rfl)
 
+/-- The quotient maps `R[0] ⟶ (R ⧸ Iᵐ)[0]`, the augmentation of the quotient tower. -/
+noncomputable def quotCochainAug (I : Ideal R) :
+    (Functor.const ℕᵒᵖ).obj ((single (ModuleCat.{u} R) (.up ℤ) 0).obj (ModuleCat.of R R)) ⟶
+      quotCochainTower I where
+  app m := (single _ _ 0).map ((Ideal.quotPowCone I).π.app m)
+  naturality m m' h := by
+    rw [Functor.const_obj_map, Category.id_comp, quotCochainTower, Functor.comp_map,
+      ← Functor.map_comp, Cone.w]
+    rfl
+
 /-- The composite of the augmentation of the Koszul tower and the comparison map to the quotient
-tower is the quotient map `R[0] ⟶ (R ⧸ Iᵐ)[0]`. -/
+tower is the augmentation of the quotient tower. -/
 lemma koszulCochainAug_comp_koszulCochainToQuot (f : Fin r → R) :
-    koszulCochainAug f ≫ koszulCochainToQuot f =
-      { app m := (single _ _ 0).map ((Ideal.quotPowCone (Ideal.span (Set.range f))).π.app m)
-        naturality m m' h := by
-          rw [Functor.const_obj_map, Category.id_comp, ← Functor.map_comp, Cone.w]
-          rfl } := by
+    koszulCochainAug f ≫ koszulCochainToQuot f = quotCochainAug (Ideal.span (Set.range f)) := by
   ext m : 2
   refine from_single_hom_ext ?_
   simp only [NatTrans.comp_app, comp_f, koszulCochainAug, koszulCochainToQuot,
     koszulCochainAugApp_f, koszulCochainToQuotApp_f, Category.assoc, Iso.inv_hom_id_assoc,
-    single_map_f_self]
+    quotCochainAug, single_map_f_self]
   rw [reassoc_of% (koszulUnit_koszulQuot (r := r) (Ideal.span (Set.range f)) m.unop)]
   rfl
 

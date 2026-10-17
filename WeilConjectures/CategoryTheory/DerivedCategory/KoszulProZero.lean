@@ -201,7 +201,7 @@ theorem isProZero_mappingConeFunctor_koszulCochainToQuot [IsNoetherianRing R] (f
     (mappingConeFunctor (koszulCochainToQuot f) ⋙ Q).IsProZero := by
   set u := koszulCochainToQuot f
   have hY (m : ℕᵒᵖ) {p : ℤ} (hp : p ≠ 0) :
-      IsZero ((H p).obj (Q.obj ((quotCochainTower r (Ideal.span (Set.range f))).obj m))) :=
+      IsZero ((H p).obj (Q.obj ((quotCochainTower (Ideal.span (Set.range f))).obj m))) :=
     isZero_homologyFunctor_single _ hp
   have hX (m : ℕᵒᵖ) {p : ℤ} (hp : 0 < p ∨ p < -r) :
       IsZero ((H p).obj (Q.obj ((koszulCochainTower f).obj m))) :=

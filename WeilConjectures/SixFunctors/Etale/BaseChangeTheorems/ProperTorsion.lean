@@ -58,12 +58,22 @@ The general facts used by the dévissage are Mathlib (or earlier project) result
 - `lem-weil-pbc-five-lemma`: `CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono`;
 - `lem-weil-pbc-derived-cohomology-ladder`: `CategoryTheory.Functor.homologySequenceδ_naturality`;
 - `lem-weil-pbc-derived-plus-iso-on-cohomology`: `DerivedCategory.Plus.isIso_iff`;
-- `lem-weil-pbc-dplus-injective-representative`:
-  `DerivedCategory.Plus.exists_injective_nonempty_iso`;
-- `lem-weil-pbc-kinjective-shift`: `CochainComplex.instIsKInjectiveObjIntShiftFunctor`;
+- `lem-weil-pbc-dplus-injective-representative`: (1)
+  `DerivedCategory.Plus.exists_injective_nonempty_iso`; (2)
+  `CochainComplex.isKInjective_of_injective`
+  (a complex of injectives which is strictly `≥ d` is K-injective);
+- `lem-weil-pbc-kinjective-shift`: the instance `CochainComplex.instIsKInjectiveObjIntShiftFunctor`
+  (shifts of K-injective complexes), the converse `CochainComplex.isKInjective_shift_iff`, and,
+  for the shifted resolution, `CochainComplex.quasiIso_shift_iff`;
 - `def-weil-pbc-triangles-with-shift`: `CategoryTheory.Pretriangulated.Triangle`;
-- `lem-weil-pbc-commshift-nattrans-comp-whisker`: `CategoryTheory.NatTrans.CommShift.comp`;
-- `lem-sp-abelian-refinements`: `CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements`;
+- `lem-weil-pbc-commshift-nattrans-comp-whisker`: (i) `CategoryTheory.NatTrans.CommShift.id`,
+  `CategoryTheory.NatTrans.CommShift.comp`; (ii) `CategoryTheory.NatTrans.CommShift.whiskerRight`;
+  (iii) `CategoryTheory.NatTrans.CommShift.whiskerLeft`; (iv)
+  `CategoryTheory.NatTrans.CommShift.associator`; the composite and identity shift structures are
+  `CategoryTheory.Functor.CommShift.comp` and `CategoryTheory.Functor.CommShift.id`;
+- `lem-sp-abelian-refinements`: (a) `CategoryTheory.epi_iff_surjective_up_to_refinements`;
+  (b) `CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements`; (c)
+  `CategoryTheory.Limits.CokernelCofork.IsColimit.comp_π_eq_zero_iff_up_to_refinements`;
 - `def-weil-inverse-system`: `CategoryTheory.Functor.ofOpSequence`,
   `CategoryTheory.NatTrans.ofOpSequence`;
 - `def-weil-preadditive-category`: `CategoryTheory.Preadditive`.
