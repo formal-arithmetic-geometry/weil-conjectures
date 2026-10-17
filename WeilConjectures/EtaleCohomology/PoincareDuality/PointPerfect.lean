@@ -12,7 +12,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
-public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
@@ -221,6 +220,25 @@ def DerivedCategory.boundedConstructibleIntegral (X : Scheme.{u}) :
         DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)
 
+/-- An element `r ∈ J` kills the reduction `K ⊗ᴸ (Λ/J)_X`. (A copy of
+`AlgebraicGeometry.Etale.smul_id_reductionModIdeal`, whose file imports this one.) -/
+private lemma smul_id_reductionModIdeal' {X : Scheme.{u}} {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
+  have hM : r • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
+    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
+    simp only [ModuleCat.hom_smul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
+      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
+    rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul (Ideal.Quotient.mk J),
+      Ideal.Quotient.eq_zero_iff_mem]
+    exact J.mul_mem_right _ hr
+  change r • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
+  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
+    ← (_root_.DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_smul,
+    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_smul, hM,
+    Functor.map_zero, Functor.map_zero, Functor.map_zero]
+
 /-- For a nonzerodivisor `ϖ` generating `I`, the third vertex of a distinguished triangle on the
 multiplication `ϖ : K ⟶ K` is the reduction `K ⊗ᴸ (Λ/I)_X`: tensor the distinguished triangle
 `Λ ⟶ Λ ⟶ Λ/I ⟶ Λ⟦1⟧` with `K`. -/
@@ -342,7 +360,7 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
       rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
       infer_instance
     rw [IsZero.iff_id_eq_zero, ← IsIso.inv_hom_id (ϖ • 𝟙 (F.obj Y)),
-      smul_id_reductionModIdeal hϖmem Y, Limits.comp_zero]
+      smul_id_reductionModIdeal' hϖmem Y, Limits.comp_zero]
   have hFφ : IsIso (F.map φ) :=
     (Triangle.isZero₃_iff_isIso₁ _ (F.map_distinguished _ hY)).1 hFY
   obtain ⟨e₂⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal (Λ := Λ) aX
