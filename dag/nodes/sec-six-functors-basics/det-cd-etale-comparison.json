@@ -187,5 +187,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52d0b364f",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Clauses 1–4 match the node: prime ℓ; qcqs S and g only, nothing assumed of X or Y; c:ℕ; AddCommGrpCat.{u+1} on the recorded sites with no universe equality; IsEllPowerTorsion is the node's local colimit convention. The left sides are the landed sk-def-cd pro-étale definitions (cohomologicalDimension, relativeCohomologicalDimension), the right sides the étale suprema via Etale.cohomology and Etale.lowerStar.rightDerivedFunctor, and clause 4 uses HasTorsionEtaleCohomologicalDimensionLE. comparisonUpperStar is the recorded site-comparison functor. IsClassical on the underlying set sheaf is the same continuity-map notion as the recorded IsClassicalModuleFor (forget reflects isos), as in the landed sk-def-cd. Only the item node and module changed; the private duplicate was removed. Edge cases r=0, empty scheme or zero sheaf (sSup 0, c≥0), q=0, g=id, ℓ=char and ⊤ are covered. The proof is sorry only; docstrings have the source, blueprint tag and proof steps; the statement is verbatim in the file; the report has both sections (worker-report prose is stale but explained). nt_compile.py --json on the snapshot file: 18 overlay modules, rc 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EllCohomologicalDimensionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.ellCohomologicalDimension_etale_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllCohomologicalDimensionComparison.lean",
+  "statement": "theorem ellCohomologicalDimension_etale_comparison (ℓ : ℕ) (hℓ : ℓ.Prime) (S : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S] {X Y : Scheme.{u}} (g : X ⟶ Y) [QuasiCompact g] [QuasiSeparated g] (c : ℕ) : (∀ (F₀ : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (F : Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1}), IsClassical ((sheafCompose (Scheme.ProEt.topology S) (forget AddCommGrpCat.{u + 1})).obj F) → Nonempty (F ≅ (comparisonUpperStar AddCommGrpCat.{u + 1} S).obj F₀) → (IsEllPowerTorsion ℓ hℓ F ↔ IsEllPowerTorsion ℓ hℓ F₀)) ∧ cohomologicalDimension ℓ hℓ S = etaleCohomologicalDimension ℓ hℓ S ∧ relativeCohomologicalDimension ℓ hℓ g = sSup {q : WithTop ℕ | ∃ n : ℕ, q = n ∧ ∃ F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}, IsEllPowerTorsion ℓ hℓ F ∧ ¬ IsZero ((_root_.DerivedCategory.homologyFunctor _ (n : ℤ)).obj ((AlgebraicGeometry.Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))} ∧ (S.HasTorsionEtaleCohomologicalDimensionLE c → cohomologicalDimension ℓ hℓ S ≤ c)",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
