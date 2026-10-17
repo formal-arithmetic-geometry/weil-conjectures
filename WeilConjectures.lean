@@ -3573,6 +3573,7 @@ public import WeilConjectures.RepresentationTheory.CompositionFactors
 public import WeilConjectures.RepresentationTheory.CompositionSeries
 public import WeilConjectures.RepresentationTheory.Constituents
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.Dual
 public import WeilConjectures.RepresentationTheory.ExteriorPower
 public import WeilConjectures.RepresentationTheory.ExteriorPowerDirectSum
 public import WeilConjectures.RepresentationTheory.ExteriorPowerFiltration
