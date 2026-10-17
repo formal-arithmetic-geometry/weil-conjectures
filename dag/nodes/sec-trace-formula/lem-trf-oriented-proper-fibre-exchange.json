@@ -15,9 +15,150 @@
   "def-pc-fibre-product",
   "lem-trf-oriented-product-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct $\\phi_z$ by the universal property: its first component is $i:X_y\\to X$, its second is the constant point $t$, and its orientation is the pullback of $c$ along $X_y\\to\\operatorname{Spec}\\Omega$. Its composite with $\\bar h$ is $z$ followed by the global-sections morphism of $X_y$. In particular $p_{f,1}\\phi_z=i$. Define the restriction map $\\theta_z:z^*R\\bar h_*A\\to R\\Gamma(X_y,\\phi_z^*A)$ to be the mate of this equality of inverse images. In the adjunctions of [def-trf-oriented-nearby-cycles], its adjunct is $\\phi_z^*\\bar h^*R\\bar h_*A\\xrightarrow{\\phi_z^*\\varepsilon_{\\bar h}}\\phi_z^*A$. This specifies the actual map, including its counit normalization.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 9.1.1, proof, printed pp. 19–20; ILO XI 2.3 and 2.7, printed pp. 178–181"
+   }
+  },
+  {
+   "text": "Let $I$ be the small cofiltered category of affine pointed triples at $z$ of [lem-trf-oriented-affine-neighbourhood-limit], with $s=g(y)$. We show that its three component functors, to the affine pointed etale neighbourhoods of $y$ in $Y$, of $s$ in $S$ and of $t$ in $S$, are initial, so that [def-weil-pbc-strict-henselization-limit] gives $\\varprojlim_IU=Y_{(y)}$, $\\varprojlim_IV=S_{(s)}$, $\\varprojlim_IW=S_{(t)}$. By the inverse-image formula of [lem-trf-oriented-product-universal], a point of $(U\\to V\\leftarrow W)$ at $z$ is a lift of $y$ to $U$ and a lift of $t$ to $W$ whose images in $V$ are related by $c$. Nonempty comma categories: given an affine pointed neighbourhood $U_0$ of $y$ (resp. $V_0$ of $s$, $W_0$ of $t$), take an affine pointed neighbourhood $V$ of $s$ (inside $V_0$ in the second case), an affine open $U$ of $U_0\\times_SV$ (in the other two cases, of $Y\\times_SV$) containing the lift of $y$, and an affine open $W$ of $W_0\\times_SV$ (in the other two cases, of $V$) containing the lift of $t$ through $S_{(t)}\\xrightarrow{c}S_{(s)}\\to V$; this pointed triple maps to the given neighbourhood. Connected comma categories: two such arrows are first dominated by one object of $I$, as $I$ is cofiltered; the two resulting pointed maps to $U_0$ (resp. $V_0$, $W_0$) are equalized by a pointed neighbourhood [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]; shrink it to an affine open containing the point and, in the middle case, pull the other two components back to it and shrink them likewise. This gives an object of $I$ connecting the two. The arrow $\\varprojlim W\\to\\varprojlim V$ is $c$ by the compatibility clause of [lem-trf-oriented-affine-neighbourhood-limit], and $\\varprojlim_I(X\\times_YU)=X\\times_YY_{(y)}=X^\\ell$ since fibre products commute with limits.",
+   "uses": [
+    "lem-trf-oriented-affine-neighbourhood-limit",
+    "lem-trf-oriented-product-universal",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 9.1.1, proof, printed pp. 19–20; ILO XI 2.3 and 2.7, printed pp. 178–181"
+   }
+  },
+  {
+   "text": "Put $s=g(y)$, $Y^\\ell=Y_{(y)}$, $S^\\ell=S_{(s)}$, $S^t=S_{(t)}$, and $X^\\ell=X\\times_Y Y^\\ell$. The specialization gives $S^t\\to S^\\ell$. Let $Q=(X^\\ell)_{\\mathrm{Et}}\\overleftarrow\\times_{(S^\\ell)_{\\mathrm{Et}}}(S^t)_{\\mathrm{Et}}$, with restriction $A^\\ell$. Take the small initial cofiltered system of affine pointed triples $(U\\to V\\leftarrow W)$ at $z$ given by [lem-trf-oriented-affine-neighbourhood-limit]. Their inverse images under $\\bar h$ are the sheafified triples $(X\\times_YU\\to V\\leftarrow W)$, by the universal inverse-image formula. Their slices are the corresponding oriented products by [lem-trf-oriented-slice-localization]. Each $X\\times_YU$ is proper over affine $U$, hence qcqs; its arrow to affine $V$ is qcqs. Transitions in all three components are affine: in the first they are base changes of maps between affine $U$'s. Thus [lem-trf-oriented-derived-cohomology-continuity] applies after fixing one triple and restricting to its cofiltered refinement category. The component limits are $X^\\ell,S^\\ell,S^t$ by the preceding step. The exact stalk colimit [lem-trf-site-point-fibre], applied to a K-injective representative, now gives\n$$z^*R\\bar h_*A\\simeq R\\Gamma(Q,A^\\ell).$$\nIndeed, for a K-injective $J$ representing $A$ and a triple $T$ with inverse image $T'$, $(\\bar h_*J)(T)=J(T')=\\operatorname{Hom}(H_{T'},J)=\\Gamma(V_f/H_{T'},j^*J)$; restriction $j^*$ to the slice is exact with exact left adjoint $j_!$ [lem-weil-pbc-ringed-sheaf-slice-adjunction], so a chain map from an acyclic $N$ to $j^*J$ is adjoint to one from the acyclic $j_!N$ to $J$, hence null-homotopic: $j^*J$ is K-injective and computes $R\\Gamma$ of the slice. The composition normalization and continuity give the displayed isomorphism as restriction, not an arbitrary isomorphism of cohomology groups.",
+   "uses": [
+    "lem-trf-oriented-affine-neighbourhood-limit",
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-slice-localization",
+    "lem-trf-oriented-derived-cohomology-continuity",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-trf-site-point-fibre",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 9.1.1, proof, printed pp. 19–20; ILO XI 2.3 and 2.7, printed pp. 178–181"
+   }
+  },
+  {
+   "text": "Let $\\pi:Q\\to(X^\\ell)_{\\mathrm{Et}}$ be the first projection and $i_y:X_y\\to X^\\ell$ the geometric-fibre map. We show that the restriction comparison $i_y^*R\\pi_*A^\\ell\\to\\phi_z^*A$ is an isomorphism. At a geometric point $x$ of $X_y$, compute the stalk of $R\\pi_*A^\\ell$ by affine etale neighbourhoods $U$ of its image in $X^\\ell$. Localization of the oriented product identifies the inverse-image slices with $U_{\\mathrm{Et}}\\overleftarrow\\times_{(S^\\ell)_{\\mathrm{Et}}}(S^t)_{\\mathrm{Et}}$. The exact stalk-colimit formula, K-injectivity of slice restrictions of a K-injective representative (as in the previous step, by [lem-weil-pbc-ringed-sheaf-slice-adjunction]), and continuity identify the stalk complex with\n$$R\\Gamma((X^\\ell)_{(x),\\mathrm{Et}}\\overleftarrow\\times_{(S^\\ell)_{\\mathrm{Et}}}(S^t)_{\\mathrm{Et}},A^\\ell|).$$\nAll schemes and arrows here are qcqs: restrict $U$ inside an affine neighbourhood, and keep $S^\\ell,S^t$ fixed and affine. Their transition maps are affine. The map $(X^\\ell)_{(x)}\\to S^\\ell$ is local between strictly henselian local schemes, since $x$ lies over the closed point $s$. Apply [lem-trf-local-oriented-projection-exact] to its second projection. Its direct image is the exact inverse image by the canonical section. Global sections on $S^t$ are its closed-point stalk by [lem-weil-pbc-strictly-henselian-sections-stalk]; [lem-pe-left-module-derived-evaluation-forget] carries this identity to constant modules. Consequently the displayed complex is exactly $A_{(x,t,c)}$, and the comparison is the germ restriction. Apply [lem-weil-pbc-derived-stalk-conservative] to the underlying abelian complexes; forgetting scalar actions reflects zero kernels and cokernels, so this detects the isomorphism on $X_y$. Notice that $i_y$ need not be a closed immersion if $\\Omega$ extends the strict-local residue field; this argument uses the geometric-fibre map itself.",
+   "uses": [
+    "lem-trf-oriented-slice-localization",
+    "lem-trf-oriented-derived-cohomology-continuity",
+    "lem-trf-site-point-fibre",
+    "lem-trf-local-oriented-projection-exact",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 9.1.1, proof, printed pp. 19–20; ILO XI 2.3 and 2.7, printed pp. 178–181"
+   }
+  },
+  {
+   "text": "Let $h^\\ell:X^\\ell\\to Y^\\ell$ be the base change of $h$. It is proper by [lem-pc-proper-base-change]. Put $C=R\\pi_*A^\\ell\\in D^+(X^\\ell,\\Lambda)$. Every cohomology sheaf of its underlying abelian complex is killed by $m$, since these are $\\Lambda$-module sheaves and $m\\Lambda=0$. Thus ordinary module proper base change [det-properbasechange-modules] applies to $h^\\ell$ and the geometric point $y:\\operatorname{Spec}\\Omega\\to Y^\\ell$. Using exact sections equal to the closed-point stalk on the strictly henselian $Y^\\ell$, it gives\n$$R\\Gamma(X^\\ell,C)\\simeq R\\Gamma(X_y,i_y^*C).$$\nThe sections/stalk equality for modules follows from the abelian equality and [lem-pe-left-module-derived-evaluation-forget]. Compose with the isomorphism of Step 4 and with $R\\Gamma(Q,A^\\ell)\\simeq R\\Gamma(X^\\ell,R\\pi_*A^\\ell)$. The latter is the derived composition comparison for right adjoints to exact inverse images. With Step 3 this proves that $\\theta_z$ is invertible. By mate pasting, all these restriction maps compose to the mate defined in Step 1; hence the result is natural and has the asserted compatibility with direct-image counits.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "det-properbasechange-modules",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 9.1.1, proof, printed pp. 19–20; ILO XI 2.3 and 2.7, printed pp. 178–181"
+   }
+  },
+  {
+   "text": "Fix $T\\to S$ and a point $z'=(y',t',c')$ of $V_{g_T}$, with $y':\\operatorname{Spec}\\Omega\\to Y_T$. Choose its image point $z$ on $V_g$ using the same field $\\Omega$ for the composite $y:\\operatorname{Spec}\\Omega\\to Y$. The scheme fibres $(X_T)_{y'}$ and $X_y$ are canonically identical: specifying an $X_T$-point over $y'$ specifies an $X$-point over $y$, the $T$-coordinate already being fixed by $y'$. The universal property gives $v_f\\phi_{z'}\\simeq\\phi_z$ on this common fibre; its orientation is the image of $c'$. Steps 1–5 apply also to $h_T$, which is proper by base change. Pull back the specified base-change comparison along $z'$. Mate pasting identifies the resulting arrow, under the two fibre formulas, with the identity restriction of $R\\Gamma(X_y,\\phi_z^*A)$, since the square just described is the identity on its fibre and coefficients. Therefore every oriented-point inverse image of this comparison is invertible. The conservativity theorem proves the base-change clause. No extension-of-algebraically-closed-fields theorem is needed: the source and target formulas use the same chosen $\\Omega$.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-mate-pasting",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 9.1.1, proof, printed pp. 19–20; ILO XI 2.3 and 2.7, printed pp. 178–181"
+   }
+  },
+  {
+   "text": "For $B\\in D^+(X_{\\mathrm{Et}},\\Lambda)$ apply ordinary module proper base change [det-properbasechange-modules] at $y$ to $h$ and $B$. Its torsion hypothesis holds because $m\\Lambda=0$. At $z=(y,t,c)$ it identifies the source of the first-projection comparison with $R\\Gamma(X_y,i^*B)$. Steps 1–5 identify its target with $R\\Gamma(X_y,\\phi_z^*p_{f,1}^*B)$. The equality $p_{f,1}\\phi_z=i$ makes these coefficient complexes equal by composition of exact inverse images. Both maps to this fibre complex are adjoint to the pulled-back direct-image counit: mate pasting therefore makes the stalk of the specified first-projection comparison the identity under these identifications. Conservativity of the oriented points proves that comparison invertible. The arguments use only bounded-below complexes, properness, and the torsion supplied by $m\\Lambda=0$; there is no constructibility or Tor-dimension input.",
+   "uses": [
+    "det-properbasechange-modules",
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-mate-pasting",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, Lemma 9.1.1, proof, printed pp. 19–20; ILO XI 2.3 and 2.7, printed pp. 178–181"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-strict-henselization-limit",
+  "det-properbasechange-modules",
+  "lem-pc-proper-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-trf-local-oriented-projection-exact",
+  "lem-trf-oriented-affine-neighbourhood-limit",
+  "lem-trf-oriented-derived-cohomology-continuity",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-oriented-slice-localization",
+  "lem-trf-site-point-fibre",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-sections-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Lemma 9.1.1 and consequences, printed pp. 19–20, read online; expanded bounded-below/module argument with local ILO XI 2.3, 2.7 and ordinary Stacks proper base change. The source PDF has no local archive."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,7 +197,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-proper-image-constructibility",
@@ -80,5 +221,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-proper-fibre-exchange",
+  "worker": "stage1",
+  "summary": "Expanded the three proper-oriented comparison clauses into the canonical mate construction, affine-pointed-site localization, exact local-projection germ calculation, ordinary module proper base change, and two stalkwise mate calculations. Reused the existing oriented-site and proper-base-change infrastructure. Created only the independent qcqs affine-transition cohomology-continuity lemma. No statement change. Maintainer reader (2026-10-18): added step 2 proving initiality of the component functors of the affine pointed triple category (component limits Y_(y), S_(s), S_(t)), and replaced the incorrect K-injectivity justification in the localization steps by restriction to the slice with exact left adjoint j_!.",
+  "blueprint": "lem-trf-local-term-locality proof (1),(2), specialization-to-the-normal-cone paragraph: the nearby-cycle constructibility chain needs the proper-oriented-image computation of Orgogozo Lemma 9.1.1.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-strict-henselization-limit",
+    "why": "Generic Strict henselization from pointed neighbourhoods used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "det-properbasechange-modules",
+    "why": "Generic Étale proper base change for module coefficients used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic Proper and smooth morphisms are stable under base change used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic A separated morphism of schemes is quasi-separated used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic Derived evaluation of arbitrary left-module sheaves commutes with forgetting scalars used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic Derived composition preserves the specified adjunction normalization used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic Affine schemes are quasi-compact and quasi-separated used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks on the derived category used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic Strict henselizations at a geometric point and their functoriality used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic Global sections over a strictly henselian local scheme are the stalk at the closed point used exactly as stated in the oriented-site localization/proper-base-change calculation; the contracting-local-term unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic exactness of slice restriction and of its left adjoint j_! on module sheaves, used to show slice restriction preserves K-injectives in the stalk computations of steps 3 and 4; the contracting-local-term unit supplies no replacement for this infrastructure. (Added by the maintainer reader.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-strict-henselization-limit",
+  "det-properbasechange-modules",
+  "lem-pc-proper-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-3c4d0ec49",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-3c4d0ec49 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct and on route, and I read all of it. I made two small repairs in the corrected item JSON (fixes/dag/nodes/sec-trace-formula/lem-trf-oriented-proper-fibre-exchange.json), changing only proof, proof_deps and split_report. Read: AGENTS.md, stages/1-dag.md, the brief, GOAL.md, dag-sync, delivery-errors A-F, packet, report, unit sk-i-curve-zero and the chapter, the parent's five citing steps, and the statement of every cited node. Source: ILO Exposé XI 2.2-2.7 (Gabber's section sigma, Prop 2.3 and Cor 2.3.2, Lemma 2.5 coherence, the 2.7 limit-localization argument), printed pp. 177-180. Orgogozo 9.1.1 is not held locally, so proof_origin is agent; no SGA is cited. Repair 1 (C4, gap): the old step 2 claimed the component limits Y_(y), S_(s), S_(t) of the affine pointed-triple category 'by the strict-localization limit construction', but the affine-neighbourhood node only gives lim U x_V W, while the continuity node needs componentwise limits. I added a new step 2 proving the three component functors are initial: comma categories are nonempty by explicit triples, with points from the product-universal inverse-image formula; they are connected by I cofiltered plus lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered, shrunk to affine opens. It also identifies the arrow with c and lim X x_Y U = X^l. Repair 2 (C4/E3): the old step 2 justified K-injectivity with 'exact inverse image, so its right adjoint preserves K-injectives', which is the wrong functor. The fix says slice restriction j^* preserves K-injectives because it has the exact left adjoint j_! (lem-weil-pbc-ringed-sheaf-slice-adjunction), and cites this in steps 3 and 4. Step cross-references are renumbered. That node is added to split_report.tool_uses, and the worker's 12 generic tool uses are accepted. Hypotheses checked: X x_Y U is proper over affine U, hence qcqs; arrows to affine V are qcqs; transitions are affine; (X^l)_(x) -> S^l is local and strictly henselian; module proper base change needs only torsion, supplied by m*Lambda=0; (X_T)_{y'}=X_y with the same Omega. New node lem-trf-oriented-derived-cohomology-continuity: true (ILO XI 2.5 and 2.7), statement-only and self-contained, three kinds of search recorded, blueprint from/via correct. It is not a duplicate of the oriented-point-cohomology node, the triple-presentation/affine-slice nodes, or the scheme-limit nodes, and it is strictly smaller than the item. No cycles. Small cases checked: h=id, X empty, m=1, larger Omega, nontrivial specialization.; 1 file(s) fixed by the reviewer"
  }
 }

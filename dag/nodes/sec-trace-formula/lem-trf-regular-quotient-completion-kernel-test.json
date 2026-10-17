@@ -12,9 +12,70 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because a regular local ring is Noetherian, $R$ and $Q$ satisfy the Noetherian hypotheses. Since $I\\subseteq\\mathfrak m_R$, $B=R/I$ is a nonzero local ring with maximal ideal $\\mathfrak m_R/I$ and the quotient map is local. $B$ is Noetherian by [lem-weil-pbc-surjective-image-noetherian], so its completion $\\widehat B$ at $\\mathfrak m_B=\\mathfrak m_R/I=\\mathfrak m_RB$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian], local with maximal ideal $\\mathfrak m_B\\widehat B$ by [lem-weil-pbc-local-completion-local-ring], and $\\mathfrak m_B\\widehat B$-adically complete by clause (1) of [lem-weil-pbc-adic-completion-mod-ideal] ($\\mathfrak m_B$ is finitely generated). The same applies to $R$ and $\\widehat R$; the canonical surjection $\\widehat R\\to\\widehat B$ and its kernel are the subject of step 2. The given surjection $\\pi:Q\\to\\widehat B$ is local: the preimage of the maximal ideal is a maximal ideal of the local ring $Q$, hence is $\\mathfrak m_Q$.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG, 05GI, 0316 and 0325; local quotient setup in Tag 09Q1"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-completion-regular-kernel-preservation] to $(R,\\mathfrak m_R,I)$. It identifies generation of $I$ by an $R$-regular sequence in $\\mathfrak m_R$ with generation of the kernel of the canonical surjection $q_0:\\widehat R\\to\\widehat B$ by a $\\widehat R$-regular sequence in the maximal ideal. The source $\\widehat R$ is regular local by [lem-weil-pbc-completion-regular-local], since $R$ is regular local.",
+   "uses": [
+    "lem-trf-completion-regular-kernel-preservation",
+    "lem-weil-pbc-completion-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09Q1, equivalence (1) and (2), with completion comparison from Tags 00MA and 00MB"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-complete-local-ci-presentation-independence] to the complete Noetherian local ring $A=\\widehat B$ and the two surjective local maps $q_0:\\widehat R\\to A$ and $\\pi:Q\\to A$. It identifies regular-sequence generation of $\\ker q_0$ with regular-sequence generation of $\\ker\\pi$; the empty sequence is permitted in both kernels.",
+   "uses": [
+    "lem-trf-complete-local-ci-presentation-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof and equivalence of the some/every regular-local surjection conditions"
+   }
+  },
+  {
+   "text": "Chaining the equivalence of step 2 with that of step 3 gives exactly the asserted equivalence for $I$ and $\\ker\\pi$, with both sequences contained in the respective maximal ideals.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09Q1, conclusion after the presentation comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-complete-local-ci-presentation-independence",
+  "lem-trf-completion-regular-kernel-preservation",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tags 09Q1 and 09PZ, with completion facts from Algebra 00MA/00MB and More on Algebra 07NY."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,7 +114,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completion-local-complete-intersection",
@@ -65,20 +126,28 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Passage from the local nodal completion to an affine local-complete-intersection neighbourhood in Curves 0C4E, final paragraph, and the converse depth-one input. The comparison of regular-sequence kernels in polynomial-local and completed power-series presentations (Stacks 09PZ and 09Q1).",
+   "place": "Passage from the local nodal completion to an affine local-complete-intersection neighbourhood in Curves 0C4E, final paragraph: comparison of regular-sequence kernels in polynomial-local and completed power-series presentations (Stacks 09PZ and 09Q1).",
    "via": [
-    "lem-trf-completion-local-complete-intersection",
-    "lem-trf-nodal-point-local-criterion",
-    "lem-trf-nodal-curve-lci-criterion",
-    "lem-trf-nodal-family-fitting-singular",
-    "lem-trf-projective-nodal-family-geometry",
-    "lem-trf-plurinodal-alteration",
-    "lem-trf-nearby-cycle-verdier-duality",
-    "lem-trf-specialization-cohomological-comparison",
-    "lem-trf-trace-specialization"
+    "lem-trf-completion-local-complete-intersection"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-regular-quotient-completion-kernel-test",
+  "worker": "stage1",
+  "summary": "Split the regular-kernel comparison into the canonical completion preservation lemma and the independence-of-presentation lemma. The item proof verifies the quotient and completion hypotheses, applies the canonical completion equivalence, applies Stacks 09PZ to replace the canonical regular-local presentation by the given surjection, and chains the two equivalences.",
+  "blueprint": "The four steps realize the final paragraph of Curves 0C4E cited through lem-trf-local-term-locality: completion comparison, independence of the regular-local presentation, and their combination.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-566dd406d",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-566dd406d (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, both new nodes, the parent and every cited node statement, plus Stacks dpa.tex 09PZ and 09Q1 with their proofs and algebra.tex 00MA and 00LN/00MB (tags confirmed in tags/tags). The item is unchanged from the base and true: it is 09Q1 (1)<=>(2) combined with 09PZ. I tested it on I=0, (x^2) in k[x]_(x) against Q=k[[t]] and k[[s,t]], (x^2,xy) in k[x,y]_(x,y) (both sides fail), Z_(p) with I=(p) against Q=F_p and Z_p[[x]], and I=m_R. New node completion-regular-kernel-preservation is true by 00MA (kernel = IR^), faithful flatness and the minimal-generators argument of the 09Q1 proof. New node complete-local-ci-presentation-independence is exactly 09PZ for two surjections; Stacks does not require the source ring to be complete. Both new nodes are strictly smaller than the item and are not restated clauses; each records four searches. I found no duplicates (rg for 09PZ/09Q0/09Q1/ci-well-defined over dag/nodes and checks of the nearby lem-weil-pbc and lem-pur nodes), and no blueprint node states either fact, so same_as is right. Every hypothesis holds where it is used: steps 2 and 3 use only the forward direction of 07NY to make R^ regular local, and pi and q_0 are local because they are surjective. The route is fine: sk-thm-p1 is in the closure of sk-i-curve-zero's uses, and no tool_uses are needed. No SGA source is used. One C4 fault, repaired: step 1 credited adic-completion-mod-ideal with 'R^->B^ is the quotient completion map', which that node does not state. I reworded the step so that each cited node supports exactly its clause and left the canonical surjection to step 2; the uses are unchanged. Whole corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-regular-quotient-completion-kernel-test.json.; 1 file(s) fixed by the reviewer"
  }
 }

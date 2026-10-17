@@ -2,18 +2,170 @@
  "id": "lem-trf-coherent-object-approximation",
  "kind": "statement",
  "title": "Coherent objects: finite images and filtered approximation",
- "statement": "Let $\\mathcal E$ be a coherent Grothendieck topos in the universe convention of [def-weil-size-convention], with coherent objects and coherence of a topos defined in [def-trf-coherent-topos]. Finite coproducts and finite limits of coherent objects are coherent. The image of any morphism $A\\to B$ between coherent objects is coherent, where image means the least subobject of $B$ through which the morphism factors. Every object $G$ of $\\mathcal E$ is a small filtered colimit of coherent objects: there are a small nonempty category $I$ in which every finite diagram admits a cocone, a functor $i\\mapsto C_i$ with coherent values, and a colimit isomorphism $\\operatorname{colim}_{i\\in I}C_i\\simeq G$. No claim is made that arbitrary subobjects of coherent objects are coherent.",
+ "statement": "Let $\\mathcal E$ be a coherent Grothendieck topos in the universe convention of [def-weil-size-convention], with quasi-compact, quasi-separated and coherent objects defined in [def-trf-coherent-topos]. Finite coproducts and finite limits of coherent objects are coherent. The image of any morphism $A\\to B$ between coherent objects is coherent, where image means the least subobject of $B$ through which the morphism factors. Every quasi-separated object $G$ of $\\mathcal E$ is a small filtered colimit of coherent subobjects: there are a small nonempty directed poset $I$, coherent subobjects $C_i\\hookrightarrow G$ and inclusion transition maps, with a colimit isomorphism $\\operatorname{colim}_{i\\in I}C_i\\simeq G$ in the sense of [def-weil-pbc-category-colimit]. In particular this applies to every subobject $G\\hookrightarrow F$ of a coherent object $F$. No claim is made that arbitrary subobjects of coherent objects are coherent.",
  "source": {
   "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
   "place": "Section 8.1, printed pp. 17–18, coherent-object finite-presentation calculus and filtered coherent approximation; image closure is also used explicitly in the last paragraph of the proof of Lemma 8.3.3, printed p. 19. This node isolates the general coherent-topos input; no SGA source is used."
  },
  "stmt_deps": [
   "def-weil-size-convention",
-  "def-trf-coherent-topos"
+  "def-trf-coherent-topos",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a small-site presentation of $\\mathcal E$ from [def-trf-coherent-topos]. The sheafification of the presheaf $U\\mapsto\\coprod_iT_i(U)$ is the coproduct of a small family of sheaves $(T_i)$: its maps to a sheaf are families of maps from the summands, by [def-weil-pbc-sheafification]. By [lem-weil-pbc-site-sheafification-sections-local], every section of this coproduct locally belongs to one summand. Therefore a family $(T_i\\to T)$ is jointly epimorphic exactly when sections of $T$ locally lift to its members, using [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. Sectionwise pullbacks [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] show that these families remain jointly epimorphic after pullback. Refining the local lifts also shows that composites of jointly epimorphic families are jointly epimorphic.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WH (proposition-sheafification-adjoint), 00WK (lemma-sections-sheafification), 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf); local covering calculus."
+   }
+  },
+  {
+   "text": "For a map $f:A\\to B$, form its sectionwise image presheaf $P(U)=f_U(A(U))\\subseteq B(U)$. Its sheafification $P^\\#$ maps monomorphically to $B$: [lem-weil-pbc-sheafification-sets-exact] preserves the identity $P\\times_B P\\simeq P$, which characterizes a monomorphism by its diagonal. Here sheafifying $B$ gives $B$ by [def-weil-pbc-sheafification]. The map $A\\to P^\\#$ is epic: a section of $P^\\#$ locally comes from $P$ by [lem-weil-pbc-site-sheafification-sections-local], and such a representative lifts to $A$ by the definition of $P$, so [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] applies. If $f$ factors through any subobject $D\\hookrightarrow B$, its sectionwise image lies in $D$, and sheafification gives $P^\\#\\to D$ over $B$. Thus $P^\\#$ is exactly the least subobject called the image in the statement.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WH, 00WJ (lemma-sheafification-exact), 00WK, 00WN; explicit construction of the image by sheafifying the sectionwise image."
+   }
+  },
+  {
+   "text": "A finite jointly epimorphic family of quasi-compact objects $(Q_j\\to Q)$ has quasi-compact target. Pull a cover $(R_i\\to Q)$ back to each $Q_j$ by Step 1; quasi-compactness [def-trf-coherent-topos] gives finite index sets $I_j$ covering each $Q_j$. The union of these finite sets covers $Q$, by composition of the covering families. In particular epimorphic images and finite coproducts of quasi-compact objects are quasi-compact. The empty coproduct is also quasi-compact: it is strict by [lem-trf-set-sheaf-finite-extensivity], so the pullback of any covering to it is covered by the empty family.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-trf-set-sheaf-finite-extensivity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WI (lemma-colimit-sheaves), with the finite-cover definition; finite disjoint universal coproducts supplied by the cited extensivity statement."
+   }
+  },
+  {
+   "text": "Fix the small full generating subcategory $\\mathcal D$ of coherent objects, closed under finite limits, in [def-trf-coherent-topos]. Every quasi-compact object $Q$ admits a finite jointly epimorphic family $(D_j\\to Q)$ with $D_j\\in\\mathcal D$: take its given generating cover and select a finite subfamily by quasi-compactness. Also every subobject $T\\hookrightarrow H$ of a quasi-separated $H$ is quasi-separated. For quasi-compact $U,V$ over $T$, the monomorphism identifies $U\\times_TV$ with $U\\times_HV$, which is quasi-compact by the definition of quasi-separatedness. Consequently any quasi-compact subobject of a quasi-separated object is coherent.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent argument directly from coherent generators and the fibre-product definition of quasi-separatedness; no arbitrary subobject is declared quasi-compact."
+   }
+  },
+  {
+   "text": "The terminal object is coherent because it belongs to $\\mathcal D$ [def-trf-coherent-topos]. Its quasi-separatedness makes the product of any two quasi-compact objects quasi-compact. Let $A,B$ be coherent and take quasi-compact $P,Q$ with maps to $A\\times B$. Use Step 4 to cover $P,Q$ by finitely many $U_i,V_j\\in\\mathcal D$. Step 1 gives a finite jointly epimorphic family $U_i\\times_{A\\times B}V_j\\to P\\times_{A\\times B}Q$. For each pair, $T=U_i\\times V_j$ belongs to $\\mathcal D$ and is quasi-separated. Its subobjects $R_A=U_i\\times_A V_j$ and $R_B=U_i\\times_B V_j$ are quasi-compact by quasi-separatedness of $A,B$. Thus $R_A\\times_T R_B$ is quasi-compact by quasi-separatedness of $T$; sectionwise limits [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] identify it with $U_i\\times_{A\\times B}V_j$. Step 3 now makes $P\\times_{A\\times B}Q$ quasi-compact. This proves quasi-separatedness of $A\\times B$, and hence coherence of binary products.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2; direct finite coherent-generator-cover proof for products. The generator product T, rather than the possibly non-quasi-separated P times Q, is the ambient intersection object."
+   }
+  },
+  {
+   "text": "For $f,g:A\\rightrightarrows B$ between coherent objects, their equalizer is $A\\times_{B\\times B}B$, where the maps are $(f,g)$ and the diagonal of $B$; this follows sectionwise from [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Step 5 makes $B\\times B$ coherent, so its quasi-separatedness makes this pullback quasi-compact. It is a subobject of the quasi-separated $A$, hence quasi-separated by Step 4 and coherent. A finite diagram has its limit as the equalizer of the two maps from the product over its objects to the product over its arrows, imposing each arrow equation on the components. This formula is verified sectionwise by the same cited limit statement. Binary products, the terminal object and these equalizers therefore prove the finite-limit clause.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2; equalizers and the explicit product-equalizer construction of finite limits."
+   }
+  },
+  {
+   "text": "Let $(A_i)_{i\\in J}$ be a finite family of coherent objects, with coproduct $A$. Step 3 gives quasi-compactness. For quasi-compact $P,Q$ over $A$, [lem-trf-set-sheaf-finite-extensivity] decomposes $P=\\coprod_iP_i$ and $Q=\\coprod_iQ_i$ into pullbacks to the summands. Each $P_i$ is quasi-compact: adjoin the complementary summand $\\coprod_{j\\ne i}P_j$ to any cover of $P_i$, obtaining a cover of $P$; take a finite subcover and pull it back to $P_i$. Disjointness makes the complement empty, so the selected original members cover $P_i$. The same holds for $Q_i$. Extensivity identifies $P\\times_AQ$ with $\\coprod_i(P_i\\times_{A_i}Q_i)$; each term is quasi-compact by quasi-separatedness of $A_i$, and Step 3 applies. Thus $A$ is quasi-separated. For $J=\\varnothing$, maps to $0$ are isomorphisms by strictness, so the same quasi-separatedness test holds. This proves finite coproduct coherence.",
+   "uses": [
+    "lem-trf-set-sheaf-finite-extensivity",
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WI and 00WJ; disjoint-universal coproducts and a finite-subcover argument, including the empty coproduct."
+   }
+  },
+  {
+   "text": "For $f:A\\to B$ with coherent source and target, Step 2 factors it as an epimorphism $A\\to\\operatorname{im}(f)$ followed by a monomorphism to $B$. Step 3 makes the image quasi-compact, while Step 4 makes it quasi-separated as a subobject of the quasi-separated $B$. It is therefore coherent [def-trf-coherent-topos]. In fact the same reasoning applies to any quasi-compact source and any quasi-separated target.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Direct consequence of Steps 2–4 and the definition of coherence; this is the image argument needed in Orgogozo, Lemma 8.3.3, final paragraph."
+   }
+  },
+  {
+   "text": "Now let $G$ be quasi-separated. Choose a small generating cover $(D_j\\to G)_{j\\in J}$ with $D_j\\in\\mathcal D$ [def-trf-coherent-topos]. Let $I$ be the poset of finite subsets of $J$, ordered by inclusion, and let $C_K$ be the image of $\\coprod_{j\\in K}D_j\\to G$ from Step 2. Its source is quasi-compact by Step 3, so the strengthened conclusion of Step 8 makes $C_K$ coherent. For $K\\subseteq L$, the least-subobject property gives a unique inclusion $C_K\\hookrightarrow C_L$ over $G$. Uniqueness proves the identity and composition laws. The index poset is small in [def-weil-size-convention], is nonempty because it contains $\\varnothing$, and two finite subsets have the finite union as upper bound. Thus it is filtered as in [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-trf-coherent-topos",
+    "def-weil-size-convention",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent construction of a directed system from finite subsets of a small coherent-generator cover; replaces the invalid unrestricted approximation assertion."
+   }
+  },
+  {
+   "text": "We verify the colimit universal property [def-weil-pbc-category-colimit]. Every section $s\\in G(U)$ locally lifts to one $D_j$ by Step 1, and therefore locally belongs to $C_{\\{j\\}}$. Given compatible maps $a_K:C_K\\to H$ to a sheaf $H$, define the image of $s$ locally using any such representative and $a_K$. Two local representatives in $C_K$ and $C_L$ become the same section of $C_{K\\cup L}$ on their overlap: their images in $G$ agree and $C_{K\\cup L}\\hookrightarrow G$ is monic. Compatibility of the $a_K$ then makes the two resulting sections of $H$ agree. The sheaf axiom glues them uniquely. Restrictions commute with this construction, since a restricted representative is still a representative; it defines $a:G\\to H$. If $s$ already belongs to $C_K$, comparison with any local representative in $C_L$ inside $C_{K\\cup L}$ gives $a(s)=a_K(s)$. Finally every section locally has a representative, so a morphism with these restrictions is unique. This proves that $(G,(C_K\\hookrightarrow G)_K)$ is the required colimit; no sectionwise filtered-colimit formula for an arbitrary site has been assumed.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent verification by local representatives and sheaf gluing, using the local covering calculus established in Step 1."
+   }
+  },
+  {
+   "text": "If $G\\hookrightarrow F$ is a subobject of coherent $F$, then $F$ is quasi-separated and Step 4 makes $G$ quasi-separated. Steps 9–10 apply to this $G$. Thus the corrected approximation suffices for the subsheaf $G\\subseteq F$ in the existing application, without any assumption that $G$ itself is coherent or quasi-compact.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Orgogozo, proof of Lemma 8.3.3, final paragraph: the actual use is approximation of a subobject of a constructible/coherent F; elementary specialization of Steps 4, 9–10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-trf-set-sheaf-finite-extensivity",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Agent proof from the stated coherent-object definitions, finite extensivity and Stacks Tags 00W2, 00WH, 00WJ, 00WK, 00WN. The source application is Orgogozo, Section 8.1 and Lemma 8.3.3, read online; its unrestricted approximation is about the specific oriented topoi, not all coherent topoi."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +201,80 @@
    "results": "{\"t\": \"2026-10-17T18:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent objects in a coherent topos are closed under images and give filtered colimit presentations of all sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"CategoryTheory.coherentTopology.subcanonical\", \"CategoryTheory.isSheaf_coherent\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\"], \"digest\": \"2dcd918e8a5b334a\"}",
    "date": "2026-10-18",
    "verdict": "no match: read the returned signatures; these do not state the indicated theorem about Grothendieck topoi or oriented etale products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent Grothendieck topos finite presentation calculus coherent objects finite limits images filtered approximation",
+   "results": "{\"t\": \"2026-10-17T19:08:45Z\", \"tool\": \"leanfinder\", \"query\": \"coherent Grothendieck topos finite presentation calculus coherent objects finite limits images filtered approximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PresheafIsFinite\", \"CategoryTheory.isSheaf_coherent\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"CategoryTheory.presheafIsGeneratedBy_of_isFinite\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"CategoryTheory.coherentTopology.subcanonical\"], \"digest\": \"214868eb5e95739d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.coherentTopology, CategoryTheory.Precoherent, coherent object finite limit image",
+   "results": "{\"t\": \"2026-10-17T19:08:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.coherentTopology, CategoryTheory.Precoherent, coherent object finite limit image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `coherent`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*topos|coherent.*object|filtered.*colimit",
+   "results": "{\"t\": \"2026-10-17T19:08:46Z\", \"tool\": \"grep\", \"query\": \"coherent.*topos|coherent.*object|filtered.*colimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\"], \"digest\": \"943264e0aff0e504\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent objects in a coherent Grothendieck topos are closed under finite limits and images and every object is filtered colimit of coherent objects",
+   "results": "{\"t\": \"2026-10-17T19:08:47Z\", \"tool\": \"leansearch\", \"query\": \"coherent objects in a coherent Grothendieck topos are closed under finite limits and images and every object is filtered colimit of coherent objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Precoherent\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"CategoryTheory.coherentTopology.instIsCoverDense\", \"CategoryTheory.coherentTopology.subcanonical\", \"CategoryTheory.coherentTopology\", \"CategoryTheory.IsGrothendieckAbelian.hasColimits\"], \"digest\": \"7fe3e90cda4bd083\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a coherent Grothendieck topos every quasi separated object is a directed union of coherent subobjects",
+   "results": "{\"t\": \"2026-10-17T19:13:50Z\", \"tool\": \"leanfinder\", \"query\": \"In a coherent Grothendieck topos every quasi separated object is a directed union of coherent subobjects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.extensive_regular_generate_coherent\", \"CategoryTheory.coherentTopology\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover\", \"TopCat.partialSections.directed\", \"CategoryTheory.Precoherent\", \"CompHausLike.precoherent\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\"], \"digest\": \"83d0fa82b8ca5510\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherent\", \"Subobject\"",
+   "results": "{\"t\": \"2026-10-17T19:13:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"coherent\\\", \\\"Subobject\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*object|quasi.?separated|quasi.?compact",
+   "results": "{\"t\": \"2026-10-17T19:13:51Z\", \"tool\": \"grep\", \"query\": \"coherent.*object|quasi.?separated|quasi.?compact\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quasi separated sheaf on a coherent Grothendieck topos is the filtered union of its coherent subsheaves",
+   "results": "{\"t\": \"2026-10-17T19:13:51Z\", \"tool\": \"leansearch\", \"query\": \"Every quasi separated sheaf on a coherent Grothendieck topos is the filtered union of its coherent subsheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.IsSheaf.isSeparated\", \"SheafOfModules.QuasicoherentData.coversTop\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.I\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"CategoryTheory.Presheaf.IsSheaf\", \"SheafOfModules.QuasicoherentData\", \"CategoryTheory.Presieve.IsSeparated.isSheaf\"], \"digest\": \"53c217e1ac86a258\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact images into quasi separated objects are coherent and finite limits finite coproducts preserve coherent topos objects",
+   "results": "{\"t\": \"2026-10-17T19:13:59Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi compact images into quasi separated objects are coherent and finite limits finite coproducts preserve coherent topos objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.precoherent\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"instHasFiniteLimitsCondensed\", \"TopCat.toSheafCompHausLike\", \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts\"], \"digest\": \"607e27e3b28d38bd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*topos|coherent.*object|isCoherent",
+   "results": "{\"t\": \"2026-10-17T19:14:00Z\", \"tool\": \"grep\", \"query\": \"coherent.*topos|coherent.*object|isCoherent\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\"], \"digest\": \"80eb02756b2f8dd3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; coherentTopology describes a topology on a precoherent category, PresheafIsFinite is finite generation of a presheaf, and generic existence of filtered colimits does not assert coherent-object closure or this quasi-separated-object approximation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-constructible-subquotients",
@@ -76,5 +298,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-coherent-object-approximation",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: unrestricted filtered coherent approximation was incorrectly generalized from Orgogozo’s oriented topoi to all coherent topoi. A presheaf counterexample is given in report.md. Corrected to quasi-separated objects, with an explicit directed union of coherent subobjects. The finite-limit, finite-coproduct and image clauses are proved from the definitions and existing set-sheaf facts; zero new nodes. The only existing citer still holds because its G is a subobject of coherent F.",
+  "blueprint": "Realizes the inherited local-term-locality constructibility input, through oriented-constructible-subquotients Step 6 and Orgogozo Lemma 8.3.3: only the relative approximation inside a coherent object is required. No blueprint node elsewhere states the corrected general input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic set-sheaf calculus used exactly as stated; no specialized constructibility theorem or unit-route replacement is involved."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic set-sheaf calculus used exactly as stated; no specialized constructibility theorem or unit-route replacement is involved."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "why": "Generic set-sheaf calculus used exactly as stated; no specialized constructibility theorem or unit-route replacement is involved."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic set-sheaf calculus used exactly as stated; no specialized constructibility theorem or unit-route replacement is involved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-6b37a7258",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6b37a7258 (reviewer sub-agent of L); spot-checked: I read all 11 steps and every cited statement in full. Statement correction (E7, named in the report): the removed clause 'every object of a coherent topos is a filtered colimit of coherent objects' is false. I checked the counterexample myself. In presheaves on finitely presented affine Q-schemes, Z = coeq(id, x↦x+1) on h_{A^1} is finitely presentable. Its kernel pair is covered by the graphs Γ_n but by no finite subfamily, so Z is not quasi-separated. If Z were such a colimit it would be a retract of a coherent object, hence coherent, which is impossible. The new clause (a quasi-separated G is a directed union of coherent images of finite coproducts of generators) is proved correctly. The only citer, lem-trf-oriented-constructible-subquotients Step 6, applies it only to G ⊆ F with F coherent, so it still holds; no other node cites the item. Step checks: coproducts and epi families via sheafification, local sections and the epi criterion; the image P^# is mono by exactness and least among subobjects; finite epi families from quasi-compact objects, including the empty case; products tested inside T = U_i×V_j, with U_i×_{A×B}V_j = R_A×_T R_B checked sectionwise; equalizers as A×_{B×B}B; coproducts via extensivity, the complement trick and strict 0; the colimit property by gluing with monic comparison maps. The Stacks tags 00W2/00WH/00WI/00WJ/00WK/00WM/00WN exist with the cited labels. Orgogozo §8.1 and 8.3.3 are not in literature/ and I could not read them; the WANTED line stands, and the proof is a self-contained agent proof (proof_origin.by = agent). No SGA is cited. There are no new nodes, and the rg duplicate search found none. proof_deps equals the union of the uses. I accept the four tool_uses (sections-local, epi-locally-surjective, limits-sectionwise, sheafification-exact) as generic set-sheaf tools. The node is not a target, so the base-change morphism and coefficient-category check does not apply. No fixes."
  }
 }

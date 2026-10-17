@@ -14,9 +14,63 @@
   "def-trf-geometric-morphism",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an abelian sheaf $G$ on $\\mathcal D$. For each $p\\geq0$ let $E_p=g_{p!}(a_p^{-1}G)$, where $g_{p!}$ is the exact left adjoint to restriction to the $p$-th component, and let $E_0\\to a^{-1}G$ be adjoint to the identity of $a_0^{-1}G=r_0a^{-1}G$. For $p\\ge0$ and $0\\le i\\le p+1$ let $d_i:E_{p+1}\\to E_p$ be adjoint, under $g_{p+1!}\\dashv r_{p+1}$, to the inclusion of $a_{p+1}^{-1}G$ as the factor labelled $\\delta_i:[p]\\to[p+1]$ of $r_{p+1}E_p=\\bigoplus_{\\varphi:[p]\\to[p+1]}a_{p+1}^{-1}G$, and give the resolution the boundary $\\sum_i(-1)^id_i$. In component degree $m$, the restriction of $E_p$ is $\\bigoplus_{\\alpha:[p]\\to[m]}a_m^{-1}G$, and the alternating face maps are the usual boundary maps of the free simplicial abelian sheaf on the standard simplex $\\Delta[m]$. The extra-degeneracy $h(\\alpha)(0)=0$, $h(\\alpha)(j+1)=\\alpha(j)$ gives the contracting-homotopy identity $dh+hd=1-\\eta\\epsilon$ (with the evident augmentation in degree zero). Hence the augmented complex is exact after every component restriction. Exactness and joint conservativity of the component restrictions imply that $\\cdots\\to E_2\\to E_1\\to E_0\\to a^{-1}G\\to0$ is exact. The simplicial identities also give that its alternating differential squares to zero.",
+   "uses": [
+    "lem-trf-total-site-component-restriction",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D79 proof, via the exact augmented simplicial resolution of Lemma 0D78 and the component description of the left adjoints."
+   }
+  },
+  {
+   "text": "For every $p$, the adjunctions $a_p^{-1}\\dashv a_{p,*}$ and $g_{p!}\\dashv r_p$ identify, naturally in $G$ and $I$, $$\\operatorname{Hom}_{\\mathcal D}(G,a_{p,*}I_p)\\cong\\operatorname{Hom}_{\\mathcal C_p}(a_p^{-1}G,I_p)\\cong\\operatorname{Hom}_{\\mathcal C_{\\rm total}}(E_p,I).$$ For $p=-1$ the same identification is $\\operatorname{Hom}_{\\mathcal D}(G,a_*I)\\cong\\operatorname{Hom}_{\\mathcal C_{\\rm total}}(a^{-1}G,I)$. Under these bijections, precomposition by the resolution boundary is exactly the alternating sum of the coface maps $d_i$ in the displayed sequence, and precomposition by $E_0\\to a^{-1}G$ is the map induced by the counit component; therefore it is exactly $e_I$.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-trf-total-site-component-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D79 proof, construction of the Hom complex by adjointness of pullback and pushforward."
+   }
+  },
+  {
+   "text": "Since $I$ is injective, $\\operatorname{Hom}_{\\mathcal C_{\\rm total}}(-,I)$ is exact. Explicitly, a cocycle on $E_p$ vanishes on $\\operatorname{im}(E_{p+1}\\to E_p)=\\ker(E_p\\to E_{p-1})$, so it factors through the monomorphism $\\operatorname{im}(E_p\\to E_{p-1})\\hookrightarrow E_{p-1}$ and extends across that monomorphism to a cochain on $E_{p-1}$. In degree zero a cocycle factors through the epimorphism $E_0\\to a^{-1}G$, and the induced map on Hom is injective, giving exactness at $\\operatorname{Hom}(a^{-1}G,I)$. Thus the Hom complex identified in Step 2 is exact in every degree, including the augmentation degree.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D79 proof, final paragraph: injectivity makes Hom(-, F) exact."
+   }
+  },
+  {
+   "text": "The Hom identifications are functorial in $G$, so Yoneda detection of kernels and cokernels in the abelian category of sheaves on $\\mathcal D$ transfers the exactness of all Hom complexes to the original augmented sequence. This proves that it is a complex and exact in every degree. A morphism of injective sheaves $I\\to I'$ postcomposes every Hom complex and commutes with all adjunction bijections and the coface maps, proving naturality of the augmented exact complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D79 proof, Yoneda construction and functoriality in the injective sheaf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-simplicial-object",
+  "lem-trf-total-site-component-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D79, lemma-augmentation-cech-complex, injective case and its Hom-adjunction construction."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-site-augmentation-spectral-sequence",
@@ -69,6 +123,7 @@
    "node": "lem-trf-local-term-locality",
    "place": "Normal-cone specialization descent input (Orgogozo Lemma 3.1.1 first isomorphism): injective-row exactness used in the Stacks 0D7A double-complex proof of total augmentation descent.",
    "via": [
+    "lem-trf-total-site-injective-augmentation-exactness",
     "lem-trf-site-augmentation-spectral-sequence",
     "lem-trf-site-augmentation-acyclic-cech",
     "lem-trf-site-hypercover-derived-descent",
@@ -82,5 +137,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-total-site-injective-augmentation-exactness",
+  "worker": "stage1",
+  "summary": "Split the injective total-site augmentation lemma directly from Stacks Tag 0D79. The proof constructs the exact augmented free simplicial resolution after component restriction, identifies its Hom complex with the alternating direct-image face complex by the two adjunctions, applies the defining extension property of an injective, and descends exactness by Yoneda. No new node was needed; the existing component-restriction statement supplies the left adjoints, exactness, and conservativity.",
+  "blueprint": "Realizes the injective-row exactness input in the normal-cone specialization route: the Tag 0D79 Hom-adjunction construction used by the total-site augmentation spectral sequence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-02c48e980",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-02c48e980 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full: component-restriction (09WG generalized), geometric-morphism, simplicial-object, injective-resolutions, sites-and-cohomology and size-convention. I also read Stacks spaces-simplicial Tag 0D78 and Tag 0D79 (statement and proof; tags confirmed in tags/tags). The statement is the injective case of 0D79 with the maps written out, plus naturality in I, which the citer lem-trf-site-augmentation-spectral-sequence step 2 needs. No hypothesis is weakened or added. Coefficients are abelian sheaves as in 0D79, and no base change is involved. Step 1: I checked the 0D78 resolution through the component lemma's formula, its exactness and its conservativity, and the extra degeneracy h(alpha)=(0,alpha) gives dh+hd=1-eta eps (I checked degree 0). Step 2: tracing the adjunctions, precomposition with d_i becomes I(delta_i) composed with u_i^{-1}phi, which is the item's d_i, and the p=-1 case gives e_I. Step 3 is the injective extension property and is correct. Step 4 is Yoneda detection of exactness and is genuinely elementary. I tested a constant point site (cosimplicial groups, Moore complex), a constant cosimplicial A and an empty site. The DAG search found no duplicate. No new nodes, no SGA, no tool_uses, all three kinds of Mathlib search recorded, and proof_deps equals the union of the uses. One repair: step 1 relied on 'the alternating face maps' on E_p without defining the d_i: E_{p+1}->E_p, which step 2 needs. I added that definition, following 0D78, and also changed I\\prime to I' in step 4. The corrected item is in fixes/dag/nodes/sec-trace-formula/; statement and dependencies are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
