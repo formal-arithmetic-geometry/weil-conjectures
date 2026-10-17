@@ -10,9 +10,91 @@
  "stmt_deps": [
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $O,a,b,K$ as in the statement. In degree $n$, define a word from $x$ to $y$ to be a finite list of edges of the specified graph whose successive endpoints agree, starting at $x$ and ending at $y$; the empty list is admitted exactly when $x=y$. All these are small sets, since finite lists of elements of the small set $K_n$, with endpoint conditions, form a small set. Concatenation is associative because both parenthesizations give the same ordered list; concatenating the empty list leaves a list unchanged. Thus the prescribed degree-$n$ arrows and objects form an ordinary category. No generator is identified with an identity, even when $a=b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+   }
+  },
+  {
+   "text": "For a simplicial operator $\\theta:[m]\\to[n]$, replace every letter $k$ of a degree-$n$ word by $K(\\theta)(k)$, retaining all its endpoints and retaining each empty word. This defines a map on each mapping set and preserves concatenation and empty words. For two operators, applying the two letter substitutions equals applying their composite by the functor law of $K$; the identity operator fixes every letter. Hence each mapping set is a simplicial set, concatenation is a simplicial composition map, and the constant empty words are the simplicial identities. The associative and unit equations just checked hold in every degree, so these data are precisely a simplicial category in the sense of [lem-coef-simplicial-interval-lifting].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+   }
+  },
+  {
+   "text": "For a simplicial map $u:K\\to L$, define $F^O_{a,b}(u)$ to fix $O$ and substitute $u_n(k)$ for each letter $k$ of each word in degree $n$. Substitution preserves concatenation and empty words, and commutes with every simplicial operator because $u$ does so on each letter. Identity substitutions and successive substitutions give respectively the identity functor and substitution by the composite. This defines the asserted functor $F^O_{a,b}$. Define evaluation $E(T)=T(a,b)$ and $E(v)=v_{a,b}$; the identity and composition laws for enriched functors make $E$ a functor. Both functors land in the claimed categories from [lem-coef-simplicial-interval-lifting].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+   }
+  },
+  {
+   "text": "For $T\\in\\mathrm{sCat}_O$, a fixed-object enriched functor $G:F^O_{a,b}(K)\\to T$ restricts on length-one words to maps $r(G)_n:K_n\\to T(a,b)_n$, $k\\mapsto G_n([k])$. Letterwise simplicial operators take $[k]$ to $[K(\\theta)k]$, so the simplicial-map condition on $G$ gives $T(a,b)(\\theta)r(G)_n(k)=r(G)_m(K(\\theta)k)$. Thus $r(G)$ is a simplicial map. This uses only the meaning of enriched functor and of the mapping simplicial sets in [lem-coef-simplicial-interval-lifting].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+   }
+  },
+  {
+   "text": "Conversely, for a simplicial map $f:K\\to T(a,b)$, fix objects and send an empty word at $x$ to $\\mathrm{id}_x$ in degree $n$, and a nonempty word to the successive composite in $T_n$ of its letters' images $f_n(k)$. This is a recursive definition on word length. Induction on the length of a second word shows that evaluation of a concatenation is the composite of the two evaluations: the empty case is the unit law, and adjoining the last letter uses the associative law in $T_n$. Consequently the extension preserves identities and composition. It is simplicial: induction on length gives $T(x,y)(\\theta)(\\overline f_n(w))=\\overline f_m(\\theta w)$, since the empty case uses the simplicial identity map, and the next letter uses simplicial composition in $T$ and $T(a,b)(\\theta)f_n(k)=f_m(K(\\theta)k)$. Thus $\\overline f$ is an enriched functor, using the associative, unital simplicial composition specified in [lem-coef-simplicial-interval-lifting].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+   }
+  },
+  {
+   "text": "Restriction of $\\overline f$ to $[k]$ is $f_n(k)$ by the unit law, hence $r(\\overline f)=f$. In the other direction, any enriched functor $G$ sends the empty word to its identity; if its value is known on a word $w$, its value on $w$ followed by a letter is $G(w)$ composed with $G([k])$. Induction on length therefore gives $G(w)=\\overline{r(G)}(w)$ for all words in every degree. Object maps are both the identity on $O$. These are inverse maps on the stated Hom sets. The argument uses only functor preservation of identities and composition from [lem-coef-simplicial-interval-lifting].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+   }
+  },
+  {
+   "text": "For $u:K'\\to K$, restriction satisfies $r(G\\circ F^O_{a,b}(u))=r(G)\\circ u$, since both send $k$ to $G([u(k)])$. For a fixed-object enriched functor $v:T\\to T'$, restriction satisfies $r(v\\circ G)=v_{a,b}\\circ r(G)$, since both send $k$ to $v(G([k]))$. Thus the bijection is natural in both variables, which is the Hom-set definition of $F^O_{a,b}\\dashv E$. Explicitly its unit is $k\\mapsto[k]$, and its counit evaluates words of arrows of $T(a,b)$ in $T$. The first triangle replaces each letter by its one-letter word and then evaluates, recovering the original word; the other evaluates a one-letter word, recovering the original arrow. When $a=b$, all finite words are composable loops, and the same calculations cover every length, including zero. For $a\\ne b$ there are no composable lists of length greater than one; neither inverse calculation assumes this distinction. These checks use only the enriched functor laws from [lem-coef-simplicial-interval-lifting].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient-adjunction: elementary finite-word verification of its fixed-object simplicial-category input, supplied by Q17; Bergner Example 3.5 and the adjunction preceding Theorem 4.7 are contextual references, not invoked theorems."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +130,59 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.evaluationLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : D ⥤ C ⥤ D\", \"doc\": \"For a fixed object $c$ in category $\\\\mathcal{C}$, this constructs a left adjoint to the evaluation functor at $c$. It maps an object $d$ in $\\\\mathcal{D}$ to the coproduct $\\\\coprod_{f:c\\\\to t} d$ indexe\"}\n  {\"name\": \"CategoryTheory.evaluationIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : ((evaluation _ D).obj c).IsLeftAdjoint\", \"doc\": \"For any object $ c $ in a category $ \\\\mathcal{C} $, the evaluation functor at $ c $ (which maps a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ to its value $ F(c) $) is a left adjoint functor in the fu\"}\n  {\"name\": \"CategoryTheory.evaluationIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : ((evaluation _ D).obj c).IsRightAdjoint\", \"doc\": \"For any object $ c $ in a category $ \\\\mathcal{C} $, the evaluation functor at $ c $ from the functor category $ [\\\\mathcal{C}, \\\\mathcal{D}] $ to $ \\\\mathcal{D} $ is a right adjoint. This means there exi\"}\n  {\"name\": \"CategoryTheory.evaluationLeftAdjoint_obj_obj\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) (d : D) (t : C),\\n  ((CategoryTheory.evaluationLeftAdjoint D c).obj d).obj t = ∐ fun x => d\", \"doc\": \"For any object $d$ in $\\\\mathcal{D}$ and object $t$ in $\\\\mathcal{C}$, the object component of the left adjoint to the evaluation functor at $c$ applied to $d$ and evaluated at $t$ is the coproduct of $\"}\n  {\"name\": \"MonCat.adj\", \"module\": \"Mathlib.Algebra.Category.MonCat.Adjunctions\", \"type\": \": free ⊣ forget MonCat.{u}\", \"doc\": \"The free monoid functor is left adjoint to the forgetful functor from the category of monoids to the category of types. This establishes a natural bijection between monoid homomorphisms from the free \"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionRight\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c\", \"doc\": \"For a fixed object $c$ in category $\\\\mathcal{C}$, if category $\\\\mathcal{D}$ admits coproducts indexed by every hom-set $\\\\mathrm{Hom}_{\\\\mathcal{C}}(c, t)$ for objects $t \\\\in \\\\mathcal{C}$, then the eval\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionLeft\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : (evaluation _ _).obj c ⊣ evaluationRightAdjoint D c\", \"doc\": \"For a category $\\\\mathcal{C}$ and a complete category $\\\\mathcal{D}$, the evaluation functor $\\\\text{Eval}_c : \\\\mathcal{D}^{\\\\mathcal{C}} \\\\to \\\\mathcal{D}$ at an object $c \\\\in \\\\mathcal{C}$ has a right adjo\"}\n  {\"name\": \"CategoryTheory.evaluationRightAdjoint.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c c_1 : C),\\n  c = c_1 → CategoryTheory.evaluationRightAdjoint D c = CategoryTheory.evaluationRightAdjo\", \"doc\": \"For a category $\\\\mathcal{C}$ and a complete category $\\\\mathcal{D}$, the evaluation functor $\\\\text{Eval}_c : \\\\mathcal{D}^{\\\\mathcal{C}} \\\\to \\\\mathcal{D}$ at an object $c \\\\in \\\\mathcal{C}$ has a right adjo\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary free categories, functor-category evaluation and simplicial-set colimits do not state this strict enriched-category assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*(simplicial|enriched)|((simplicial|enriched).*free)",
+   "results": "{\"t\": \"2026-10-17T08:20:54Z\", \"tool\": \"grep\", \"query\": \"free.*(simplicial|enriched)|((simplicial|enriched).*free)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"c9c5a0e56c5c84a4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Quiv.adj is a degreewise ingredient, not this enriched adjunction in sCat_O; SimplicialCategory.homEquiv' identifies ordinary arrows with vertices; nerve and functor-category evaluation adjunctions have different source/target categories. The item is proved directly by finite-word recursion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of finite composable words on a simplicial graph with fixed objects has a natural free evaluation adjunction",
+   "results": "{\"t\": \"2026-10-17T08:20:55Z\", \"tool\": \"leansearch\", \"query\": \"The category of finite composable words on a simplicial graph with fixed objects has a natural free evaluation adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Quiv.adj\", \"MonCat.adj\", \"GrpCat.adj\", \"CategoryTheory.constantPresheafAdj\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.evaluationAdjunctionLeft\", \"AddMonCat.adj\", \"CategoryTheory.evaluationIsRightAdjoint\"], \"digest\": \"67bbfae25dce508c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Quiv.adj is a degreewise ingredient, not this enriched adjunction in sCat_O; SimplicialCategory.homEquiv' identifies ordinary arrows with vertices; nerve and functor-category evaluation adjunctions have different source/target categories. The item is proved directly by finite-word recursion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-17T08:20:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Quiv.adj is a degreewise ingredient, not this enriched adjunction in sCat_O; SimplicialCategory.homEquiv' identifies ordinary arrows with vertices; nerve and functor-category evaluation adjunctions have different source/target categories. The item is proved directly by finite-word recursion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free simplicial category on arrows from a fixed object a to a fixed object b is left adjoint to evaluation at the simplicial mapping set, including loops",
+   "results": "{\"t\": \"2026-10-17T08:20:58Z\", \"tool\": \"leanfinder\", \"query\": \"The free simplicial category on arrows from a fixed object a to a fixed object b is left adjoint to evaluation at the simplicial mapping set, including loops\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"sSetTopAdj\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\"], \"digest\": \"a5e0dc5e4e9fa963\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Quiv.adj is a degreewise ingredient, not this enriched adjunction in sCat_O; SimplicialCategory.homEquiv' identifies ordinary arrows with vertices; nerve and functor-category evaluation adjunctions have different source/target categories. The item is proved directly by finite-word recursion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free simplicial category on a simplicial graph with fixed object set, adjunction with mapping-space evaluation",
+   "results": "{\"t\": \"2026-10-17T08:31:29Z\", \"tool\": \"leanfinder\", \"query\": \"Free simplicial category on a simplicial graph with fixed object set, adjunction with mapping-space evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.Truncated.nerve₂Adj\", \"SimplexCategoryGenRel.toSimplexCategory\", \"CategoryTheory.SimplicialNerve\", \"SSet.stdSimplex.objEquiv\"], \"digest\": \"56690e7173ff546c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Quiv.adj is a degreewise ingredient, not this enriched adjunction in sCat_O; SimplicialCategory.homEquiv' identifies ordinary arrows with vertices; nerve and functor-category evaluation adjunctions have different source/target categories. The item is proved directly by finite-word recursion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Quiv.adj, CategoryTheory.SimplicialCategory",
+   "results": "{\"t\": \"2026-10-17T08:31:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Quiv.adj, CategoryTheory.SimplicialCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Quiv.adj is a degreewise ingredient, not this enriched adjunction in sCat_O; SimplicialCategory.homEquiv' identifies ordinary arrows with vertices; nerve and functor-category evaluation adjunctions have different source/target categories. The item is proved directly by finite-word recursion."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*category.*free|free.*category.*simplicial",
+   "results": "{\"t\": \"2026-10-17T08:31:29Z\", \"tool\": \"grep\", \"query\": \"simplicial.*category.*free|free.*category.*simplicial\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Quiv.adj is a degreewise ingredient, not this enriched adjunction in sCat_O; SimplicialCategory.homEquiv' identifies ordinary arrows with vertices; nerve and functor-category evaluation adjunctions have different source/target categories. The item is proved directly by finite-word recursion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-interval-cell-stability",
@@ -78,5 +209,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fixed-object-free-arrow-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the statement and gave the degreewise finite-word construction, its simplicial structure and functoriality, restriction and recursive extension, inverse and naturality calculations, and unit/counit triangles. All arguments are elementary finite-list recursion and the stated enriched category laws. No new node, unsupported theorem, model-category theorem or SGA route is needed.",
+  "blueprint": "Realizes the recorded technical free-arrow input beneath paragraph 2 of prop-coef-integral-exceptional-adjoint (derived coefficient-adjunction and compatibility of units/counits), via the unchanged interval-cell-stability ancestry. No unit realization is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-e72251296",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-e72251296 (reviewer sub-agent of L); spot-checked: I read in full the item's statement and its 7 steps; the statement and all 8 steps of the cited lem-coef-simplicial-interval-lifting; the parent lem-coef-simplicial-interval-cell-stability (step 3 is the only use); the citer lem-coef-scat-fixed-object-pushout-comparison; and the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015, paragraph 2). The statement is true. In each degree an object-fixing functor out of the path category on K_n is determined by its values on the generators, and because faces and degeneracies act letter by letter, compatibility with them reduces to the generators. Small cases tested: K empty (discrete category, both Hom sets singletons); a=b with one object (free simplicial monoid); a≠b (no words of length 2 or more); K=Δ^0 with a=b (N); degenerate letters (word length is kept); O empty (excluded since a must be in O). Steps 1-7 (words and concatenation, the letterwise simplicial structure, functoriality, restriction, the recursive extension with a properly set-up induction, the inverse, and naturality with both triangle identities) are each correct and genuinely elementary. They use only the definitional sentence of interval-lifting's statement (same unit, no tool use). There is no cycle: interval-lifting's 197-node dependency closure contains neither the item nor the parent. Duplicate check: lem-coef-sorted-simplicial-algebra-model gives an abstract left adjoint F_s, but the identification of sCat_O with its algebras appears only in a proof step of interval-lifting and it gives no explicit word formula, so it is not a one-line specialization. def-coef-free-category-comonad, lem-coef-fixed-object-simplicial-free-calculus and lem-coef-categorical-algebra-free-monad are different statements. There are no new nodes. Source: Bergner arXiv math/0508152 is not in the literature tree; this is disclosed as WANTED, proof_origin is agent, and the proof does not rely on the article. No SGA is used, no base-change or coefficient-category issue arises for this non-target node, and no fixes were written."
  }
 }

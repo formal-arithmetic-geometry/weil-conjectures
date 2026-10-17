@@ -163,12 +163,43 @@
    }
   },
   {
-   "text": "Take the small family of representatives of those $\\kappa$-presentables of $\\mathcal A$ that belong to $E$, and its category $\\Delta_E/X$ of arrows to a fixed $X\\in E$. Any diagram there with fewer than $\\kappa$ arrows has a cone in $D_X$ by [lem-coef-accessible-presentable-density]; apply step 11 to its apex $T\\to X$, obtaining $T\\to Q\\to X$ with $Q\\in E$ and $Q$ $\\kappa$-presentable. Choose an isomorphism $e:Q'\\to Q$ from its selected representative; take the arrow $Q'\\xrightarrow{e}Q\\to X$ and replace each cone leg $j_a$ by $e^{-1}j_a$. Naturality gives $\\alpha_{Q'}=G(e^{-1})\\alpha_QF(e)=G(e^{-1})\\beta_QF(e)=\\beta_{Q'}$, so the result lies in $\\Delta_E/X$. Fullness makes the composed cone an $E$-cone, so $\\Delta_E/X$ is $\\kappa$-filtered, including nonemptiness. Each object of $D_X$ maps to it by step 11 followed by this representative transport; two such choices over a fixed $P\\to X$ are joined by a cone on $P\\to Q_1,P\\to Q_2$ in $D_X$ followed by step 11 applied to the cone apex and representative transport. For any cocone from the underlying $\\Delta_E/X$-diagram to $Z\\in\\mathcal A$, define its value on $P\\to X$ by choosing an extension $P\\to Q\\to X$ as above and composing with the cocone leg $Q\\to Z$. The joining construction makes this independent of the extension. For an arrow $P\\to P'$ over $X$, precomposing an extension of $P'$ is an extension of $P$, so these values form a cocone on $D_X$. Canonical density gives its unique factorization $X\\to Z$; on an object already in $\\Delta_E/X$, choose its identity extension to recover the original cocone leg. Hence the underlying diagram has colimit $X$ in $\\mathcal A$. If $Z\\in E$, fullness makes this unique factorization a morphism of $E$, proving the colimit assertion in $E$. Step 10 makes its generating objects $\\kappa$-presentable in $E$ and the inclusion $\\kappa$-accessible. This proves (3). The argument is vacuous when $E$ is empty, in which case its empty family generates it. Each of (1)-(3) has now supplied its own witnessing rank, as asserted.",
+   "text": "Take the small representative family of step 3 and retain its members in $E$. For an isomorphism $e:Q\\xrightarrow{\\sim}R$ with $Q\\in E$, naturality gives $\\alpha_R=G(e)\\alpha_QF(e^{-1})=G(e)\\beta_QF(e^{-1})=\\beta_R$, so its selected representative $R$ also belongs to $E$. For each $X\\in E$, let $\\Delta_E/X$ be the full subcategory of the small canonical category $D_X$ on arrows whose sources belong to this retained family. Step 11 followed by representative transport gives an arrow from every object $P\\to X$ of $D_X$ to an object of $\\Delta_E/X$. Explicitly, if $P\\xrightarrow{h}Q\\xrightarrow{q}X$ is the factorization in step 11 and $e:Q\\xrightarrow{\\sim}R$ is the representative isomorphism, use $eh:P\\to R$ and $qe^{-1}:R\\to X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 equifier generation; Positselski, proof of Theorem 3.1 Agent-written expansion; online comparison: https://cahierstgdc.com/wp-content/uploads/2024/10/Positetski-LXV-4.pdf."
+   }
+  },
+  {
+   "text": "The category $\\Delta_E/X$ is $\\kappa$-filtered. Indeed, regard a diagram in it with fewer than $\\kappa$ arrows as a diagram in $D_X$. Canonical density [lem-coef-accessible-presentable-density], with the representatives of step 3, supplies a cocone with apex $T\\to X$ in $D_X$. By step 12 choose an arrow from this apex to an object of $\\Delta_E/X$ and postcompose every cocone leg with it. Fullness puts all these legs in $\\Delta_E/X$, and associativity preserves their cocone equations. The same construction for the empty diagram supplies an object.",
    "uses": [
-    "lem-coef-accessible-presentable-density",
-    "def-weil-pbc-category-colimit"
+    "lem-coef-accessible-presentable-density"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 equifier generation; Positselski, proof of Theorem 3.1 Agent-written expansion; online comparison: https://cahierstgdc.com/wp-content/uploads/2024/10/Positetski-LXV-4.pdf."
+   }
+  },
+  {
+   "text": "The underlying diagram of $\\Delta_E/X$ has colimit $X$ in $\\mathcal A$. Apply clause (1) of [lem-weil-pbc-colimit-initial-full-subcategory] with $\\mathcal I=D_X^{\\mathrm{op}}$, $\\mathcal J=(\\Delta_E/X)^{\\mathrm{op}}$ and with the functor $\\mathcal I^{\\mathrm{op}}=D_X\\to\\mathcal A$ sending $(P,p)$ to $P$. The category $D_X$ is filtered by canonical density [lem-coef-accessible-presentable-density], so $\\mathcal I$ is cofiltered. The subcategory is full, and step 12 gives exactly the required arrows $j\\to i$ in the opposite category. Canonical density and step 3 give the ambient colimit $X$ with legs $p:P\\to X$. The cited clause identifies the restricted colimit with this ambient one by the canonical comparison induced by those same legs. Hence the cocone on $\\Delta_E/X$ with vertex $X$ and legs $p$ is colimiting, rather than merely having a vertex isomorphic to an unrelated colimit.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-coef-accessible-presentable-density"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0BUC (lemma-cofinal-in-filtered) and 04E7 (lemma-cofinal), applied to the opposite of the small canonical presentation; same equifier-generation argument as the original step 12."
+   }
+  },
+  {
+   "text": "For $Z\\in E$, fullness identifies maps $X\\to Z$ and all cocone equations with their counterparts in $\\mathcal A$, so the unique factorization from step 14 is also the unique factorization in $E$; this is the colimit universal property [def-weil-pbc-category-colimit]. By step 13 its index is small and $\\kappa$-filtered. Step 10 makes its sources $\\kappa$-presentable in $E$ and gives all small $\\kappa$-filtered colimits in $E$, preserved by inclusion. The retained small family therefore generates $E$, and both $E$ and its inclusion are accessible. If $E$ is empty there is no $X$ to consider and its empty family generates it. This proves (3); each of (1)-(3) has its own witnessing rank, as asserted.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
     "place": "Paragraph 2 equifier generation; Positselski, proof of Theorem 3.1 Agent-written expansion; online comparison: https://cahierstgdc.com/wp-content/uploads/2024/10/Positetski-LXV-4.pdf."
@@ -180,7 +211,8 @@
   "lem-coef-ordinary-small-colimit-presentable",
   "lem-coef-accessible-set-functor-limits",
   "lem-coef-accessible-presentable-density",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-initial-full-subcategory"
  ],
  "proof_origin": {
   "by": "agent",
@@ -281,7 +313,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-monad-presentability",
@@ -294,17 +326,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-accessible-pie-closure",
   "worker": "stage1",
-  "summary": "Expanded the PIE-accessibility assertion into cardinal choice, canonical presentable density, coordinatewise products, the compatible transfinite construction and canonical filtered generation for inserters, and the equation-killing chain and full-subcategory generation for equifiers. Added one small-system uniformization statement and two Mathlib leaves. No statement change, no Lean edits or compilation. All index categories used for colimits have small representative models.",
+  "summary": "Expanded the PIE-accessibility assertion into cardinal choice, canonical presentable density, coordinatewise products, the compatible transfinite construction and canonical filtered generation for inserters, and the equation-killing chain and full-subcategory generation for equifiers. Added one small-system uniformization statement and two Mathlib leaves. No statement change, no Lean edits or compilation. All index categories used for colimits have small representative models. Q18 repair: retained steps 1-11 verbatim and replaced step 12 by four short steps. Representative transport and cocone postcomposition are explicit elementary calculations; the hidden cocone-descent lemma is the existing Mathlib leaf lem-weil-pbc-colimit-initial-full-subcategory, applied to opposite indexing categories. No new nodes, statement change or Lean record change.",
   "blueprint": "prop-coef-integral-exceptional-adjoint, paragraph 2 before the derived inverse-limit comparison: ordinary accessible-category infrastructure supporting the accessible-monad strict-section models. This categorical input is not stated verbatim in the blueprint; no blueprint duplicate was found.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NE-a90f11add",
-  "group": "NE",
+  "reviewer": "NT-cc-Q18-65d0099d9",
+  "group": "Q18",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-a90f11add (reviewer sub-agent of L); spot-checked: I read the delivery in full. The item statement is unchanged and true; it matches PIE closure of accessible categories (Makkai–Paré / Adámek–Rosický 2.67, 2.72–2.76). All twelve steps were checked by hand. Step 1: the rank node gives λ<κ with |S|<κ. Step 4: products are coordinatewise, the projection ΠD→D_s is final, and the empty cases are handled. Step 5: the inserter forgetful functor creates colimits, and Hom_E is an equalizer of accessible set-valued functors (FP is κ-presentable because F preserves κ-presentables). Steps 6–7: in the chain construction, each required equation (the v_i compatibilities and v_0F(h_a)=G(a_01h_a)w_a) becomes uF(t_j) or uF(p_a) in GX, so eventual equality applies, and the chain colimit is κ-presentable since λ<κ. Steps 8–9: Δ is κ-filtered, cocones descend and representatives transport correctly. Steps 10–12: equifier closure and equation killing, with α_Q=β_Q from FQ=colim FT_i, are correct. New nodes: lem-coef-accessible-system-ranks (unsplit, statement only) is true by taking λ above all ranks and κ sharply above, by AR uniformization for a small set (source WANTED). It is not a clause of the item, and it is not a duplicate: the existing rank nodes are for locally presentable categories or ∞-categories. lem-coef-accessible-presentable-density is an exact match to Mathlib Dense.lean:60–72 (assumes only IsCardinalAccessibleCategory; DenseAt.lean:45–58). It strictly generalizes the existing lem-coef-presentable-canonical-density (locally presentable only), and that generality is needed here. lem-coef-accessible-set-functor-limits is an exact match to Functor.isCardinalAccessible_of_isLimit, Limits.lean:158–168. Route: all cited nodes are in the same unit, a definition or Mathlib leaves; no tool_uses, no SGA. The unit mismatch the worker inherited and reported is left as metadata. One repair (C5), written to fixes/dag/nodes/sec-six-functors/lem-coef-accessible-pie-closure.json: step 2 re-derived, without citing it, the existing Mathlib leaf lem-coef-ordinary-small-colimit-presentable (isCardinalPresentable_of_isColimit, Limits.lean:185, same unit). Step 2 now cites it, and the step's uses and the item's proof_deps were updated. Nothing else was changed and no nodes were dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-65d0099d9 (reviewer sub-agent of L); spot-checked: I read the item in full, all 15 steps, and checked the steps against the statement of every cited node. The delivery keeps the statement, steps 1-11 and the Lean record unchanged. It replaces the returned step 12 with steps 12-15 and adds no new nodes. Step 12 (elementary): equifier membership is invariant under isomorphism, since naturality gives alpha_R = G(e)alpha_Q F(e^-1) = beta_R. The factorization eh, q e^-1 lies over X because q e^-1 e h = qh = p. Step 13 (elementary): Delta_E/X is kappa-filtered. Take a cocone in D_X, postcompose with the single arrow from step 12, and fullness keeps the legs in Delta_E/X; the empty diagram gives nonemptiness. Step 14 cites clause (1) of the Mathlib leaf lem-weil-pbc-colimit-initial-full-subcategory with I = D_X^op and J = (Delta_E/X)^op. I verified its match in Mathlib source: Filtered/Final.lean:176 and :196, Limits/Final.lean:109 and :350/354. All hypotheses hold: I is cofiltered, J is full, and every i receives an arrow j -> i. The ambient colimit exists by presentable density, so the restricted cocone (X, p) is colimiting. This agrees with Stacks 0BUC/04E7, whose tags I checked in categories.tex. Because the cited node is a Mathlib leaf, it is not a route citation and needs no tool_use. Step 15 (elementary): a colimit in a full subcategory, and accessibility then follows from steps 10 and 13. Steps 1-11 are correct on rereading, including the chain equations checked in GX and the alpha_Q = beta_Q computation. I tested E empty, alpha = beta, A terminal, a non-full J (where fullness is essential) and the direction of the opposite on N with the evens. Searches of the DAG for equifier and cofinality found no duplicate. Delivery-errors A-F pass. No fixes."
  },
  "lean_audit": {
   "master": {
