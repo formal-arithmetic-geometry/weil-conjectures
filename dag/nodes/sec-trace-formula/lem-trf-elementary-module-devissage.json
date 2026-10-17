@@ -2,7 +2,7 @@
  "id": "lem-trf-elementary-module-devissage",
  "kind": "statement",
  "title": "Elementary etale devissage of a finite type module",
- "statement": "Let $f:X\\to S$ be a morphism of schemes locally of finite type [def-weil-finite-type-morphism], $\\mathcal F$ a finite-type quasi-coherent $\\mathcal O_X$-module, and $x\\in\\operatorname{Supp}(\\mathcal F_s)$, where $s=f(x)$, $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$, and $\\mathcal F_s$ is its pullback to this fibre. Put $n=\\dim_x\\operatorname{Supp}(\\mathcal F_s)$, where support is the locus of nonzero stalks and dimension is topological Krull dimension [def-kun-dimension]. There are etale pointed neighbourhoods $g:(X',x')\\to(X,x)$ and $e:(S',s')\\to(S,s)$ inducing isomorphisms of residue fields at the distinguished points, with $f g=e f'$ for a map $f':X'\\to S'$, a closed immersion $i:Z'\\to X'$ of finite presentation, a finite map $\\pi:Z'\\to Y'$ over $S'$, and a finite-type quasi-coherent module $\\mathcal G$ on $Z'$. All four schemes $X',Z',Y',S'$ are affine, $i_*\\mathcal G\\cong g^*\\mathcal F$, and $h:Y'\\to S'$ is smooth of relative dimension $n$ with geometrically integral fibres. Here geometrically integral means integral after every extension of the residue field of a fibre. There is a point $z'\\in Z'$ with $i(z')=x'$, and if $y'=\\pi(z')$ then $h(y')=s'$, $\\pi^{-1}(y')=\\{z'\\}$, and $\\kappa(y')/\\kappa(s')$ is purely transcendental. Smooth and etale have the meanings of [def-sbc-smooth-morphisms]; finite and closed immersion have the meanings of [def-weil-finite-integral-morphism], [def-weil-closed-immersion].",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes locally of finite type [def-weil-finite-type-morphism], $\\mathcal F$ a finite-type quasi-coherent $\\mathcal O_X$-module, and $x\\in\\operatorname{Supp}(\\mathcal F_s)$, where $s=f(x)$, $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$, and $\\mathcal F_s$ is its pullback to this fibre. Put $n=\\dim_x\\operatorname{Supp}(\\mathcal F_s)$, where support is the locus of nonzero stalks and dimension is topological Krull dimension [def-kun-dimension]. There are etale pointed neighbourhoods $g:(X',x')\\to(X,x)$ and $e:(S',s')\\to(S,s)$ inducing isomorphisms of residue fields at the distinguished points, with $f g=e f'$ for a map $f':X'\\to S'$, a closed immersion $i:Z'\\to X'$ of finite presentation, a finite map $\\pi:Z'\\to Y'$ over $S'$, and a finite-type quasi-coherent module $\\mathcal G$ on $Z'$. All four schemes $X',Z',Y',S'$ are affine, $i_*\\mathcal G\\cong g^*\\mathcal F$, and $h:Y'\\to S'$ is smooth of relative dimension $n$ with geometrically integral fibres. Here geometrically integral means integral after every extension of the residue field of a fibre. There is a point $z'\\in Z'$ with $i(z')=x'$, and if $y'=\\pi(z')$ then $h(y')=s'$, $\\pi^{-1}(y')=\\{z'\\}$, and $\\kappa(y')/\\kappa(s')$ is purely transcendental. Smooth has the meaning of [def-sbc-smooth-morphisms] and etale that of [def-weil-etale-morphism]; finite and closed immersion have the meanings of [def-weil-finite-integral-morphism], [def-weil-closed-immersion].",
  "source": {
   "document": "literature/stacks-project/flat.tex",
   "place": "Tag 057S, lemma-elementary-devissage."
@@ -10,18 +10,144 @@
  "stmt_deps": [
   "def-pc-scheme",
   "pqf-def-coherent",
-  "def-pc-scheme-module-flat-over",
-  "def-weil-pbc-module-finite-type-presentation",
   "def-weil-finite-type-morphism",
   "def-kun-dimension",
   "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
   "def-weil-closed-immersion",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open neighbourhood $V\\subseteq S$ of $s$, and an affine chart $U\\subseteq f^{-1}(V)$ containing $x$ on which the coordinate algebra is finite type over $\\mathcal O_S(V)$, using the definition of locally finite type. Replace $X,S,\\mathcal F$ by $U,V,\\mathcal F|_U$. This is a finite type morphism of affine schemes. The support in its fibre is the intersection of the original support with the open $U_s$, so its dimension at $x$ is still $n$: the neighbourhoods inside $U_s$ are cofinal among neighbourhoods of $x$ in the original support. An open immersion is etale, preserves residue fields, and restriction of a module is its pullback. At the end compose the constructed neighbourhoods with $U\\hookrightarrow X$ and $V\\hookrightarrow S$; etaleness is preserved by composition and the pullback composition isomorphism identifies the resulting sheaf with the original pullback.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-kun-dimension",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, lemma-elementary-devissage, proof paragraph 1 (affine reduction)."
+   }
+  },
+  {
+   "text": "Apply the supporting-subscheme lemma to get $j:Z\\hookrightarrow X$ of finite presentation and a finite-type quasi-coherent $\\mathcal H$ with $j_*\\mathcal H\\cong\\mathcal F$ and $|Z_s|=\\operatorname{Supp}(\\mathcal F_s)$. The hypothesis on $x$ gives a unique point $z\\in Z_s\\subseteq Z$ mapping to $x$. The scheme $Z$ is affine because $j$ is a closed immersion into an affine scheme. On coordinate rings, if $X=\\operatorname{Spec}B$ and $S=\\operatorname{Spec}A$, then $Z=\\operatorname{Spec}(B/J)$; the images of finitely many $A$-algebra generators of $B$ generate $B/J$. Thus $Z\\to S$ is finite type. The displayed equality of underlying fibre spaces gives $\\dim_zZ_s=n$ by the definition of dimension.",
+   "uses": [
+    "lem-trf-finite-type-sheaf-fp-support",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, proof, general case: apply Tag 057Q (lemma-sheaf-lives-on-subscheme)."
+   }
+  },
+  {
+   "text": "Apply the geometric affine local structure theorem to $Z\\to S$ and $z$. Obtain elementary etale pointed neighbourhoods $b:(W,w)\\to(Z,z)$ and $a:(S_1,s_1)\\to(S,s)$, a finite $\\pi:W\\to Y$ with $\\pi^{-1}(\\{y\\})=\\{w\\}$, and $h:Y\\to S_1$ smooth of relative dimension $n$, with geometrically integral fibres and $\\kappa(y)/\\kappa(s_1)$ purely transcendental. Here $W,Y,S_1$ are affine and $pb=ah\\pi$. This uses the local structure theorem for the scheme $Z$, rather than applying a module-devissage assertion to $\\mathcal H$.",
+   "uses": [
+    "lem-trf-etale-finite-smooth-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, proof paragraphs 2--3: Tags 057K and 057L applied to the supporting scheme $Z$."
+   }
+  },
+  {
+   "text": "Put $T=X\\times_SS_1$ and $D=Z\\times_SS_1$. These are affine by the affine fibre-product formula. The map $D\\to T$ is a closed immersion: writing $T=\\operatorname{Spec}C$ with $C=B\\otimes_A\\mathcal O(S_1)$, its coordinate algebra is $C\\otimes_B(B/J)=C/JC$. The affine finite-presentation criterion supplies a finite presentation of $B/J$ over $B$. Its base change is again finitely presented: a presentation $B/J=B[t_1,\\ldots,t_r]/(q_1,\\ldots,q_m)$ base changes to the finite presentation $C[t_1,\\ldots,t_r]/(q_1,\\ldots,q_m)$. The maps $b:W\\to Z$ and $h\\pi:W\\to S_1$ define $v:W\\to D$. The projection $D\\to Z$ is etale, being the base change of $a$. Since its composite with $v$ is the etale map $b$, etale cancellation shows that $v$ is etale.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, proof, diagram $Z\\prime\to Z\times_SS\\prime\to X\times_SS\\prime$ and the paragraph following it."
+   }
+  },
+  {
+   "text": "Apply affine etale lifting to the closed immersion $D\\hookrightarrow T$ and the affine etale $v:W\\to D$. It supplies an affine scheme $X\\prime$ and an etale map $q:X\\prime\\to T$ such that $W\\cong D\\times_TX\\prime$. The two fibre-product universal properties identify this with $Z\\times_XX\\prime$, compatibly with both projections: a map to either object is a pair of maps to $Z$ and $X\\prime$ with equal composites to $X$. Set $Z\\prime=W$ and let $i:W\\to X\\prime$ be its closed immersion. Explicitly its coordinate ring over an affine $X\\prime=\\operatorname{Spec}C\\prime$ is $C\\prime\\otimes_B(B/J)=C\\prime/JC\\prime$; base changing the finite presentation used in the preceding step gives finite presentation of $i$.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-closed-immersion-lift",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, proof, application of Tag 057R (lemma-lift-etale) after the base change to $S\\prime$."
+   }
+  },
+  {
+   "text": "Let $x\\prime=i(w)$, $s\\prime=s_1$, and $f\\prime:X\\prime\\xrightarrow{q}T\\to S_1$. Let $g:X\\prime\\xrightarrow{q}T\\to X$. The second arrow in $g$ is etale by base change of $a$, so $g$ is etale by composition. The cartesian square implies $g(x\\prime)=j(z)=x$ and $fg=af\\prime$. For both closed immersions $j$ and $i$, the induced residue-field maps are isomorphisms. The elementary neighbourhood $b$ induces $\\kappa(z)\\cong\\kappa(w)$. The equality $gi=jb$ on $W$ therefore gives that $\\kappa(x)\\to\\kappa(x\\prime)$ is an isomorphism, since its composite with the isomorphism $\\kappa(x\\prime)\\to\\kappa(w)$ is the composite of the two isomorphisms $\\kappa(x)\\to\\kappa(z)\\to\\kappa(w)$. Moreover $f\\prime i=h\\pi$, so $\\pi$ is a map over $S\\prime$: by the cartesian square $qi$ is the composite of $v:W\\to D$ with $D\\hookrightarrow T$, and the projection of $D$ to $S_1$ composed with $v$ is $h\\pi$ by the definition of $v$. Also $a(s_1)=ah\\pi(w)=pb(w)=s$. Thus $g$ and $a$ are the required elementary pointed neighbourhoods.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, proof, last paragraph: choose $x\\prime$ corresponding to $z\\prime$."
+   }
+  },
+  {
+   "text": "Set $\\mathcal G=b^*\\mathcal H$ on $Z\\prime=W$. Pullback preserves quasi-coherence and finite type, so $\\mathcal G$ has the required module properties. Apply affine pushforward base change to the affine closed immersion $j:Z\\to X$, the morphism $g:X\\prime\\to X$, and the quasi-coherent module $\\mathcal H$ on $Z$. For the cartesian square constructed above it gives $g^*j_*\\mathcal H\\cong i_*b^*\\mathcal H$. Composing with $j_*\\mathcal H\\cong\\mathcal F$ yields $i_*\\mathcal G\\cong g^*\\mathcal F$. Take $z\\prime=w$ and $y\\prime=y$. The finite map, singleton fibre, purely transcendental residue extension and smooth geometrically integral family are exactly the maps and points obtained in step 3, which have not been restricted or replaced. Together with the affine $X\\prime$, this proves every asserted clause.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, proof, final completed diagram; module identification made explicit using coherent.tex Tag 02KG (lemma-affine-base-change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-kun-dimension",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-pc-module-pullback",
+  "lem-trf-finite-type-sheaf-fp-support",
+  "def-weil-closed-immersion",
+  "lem-trf-etale-finite-smooth-local-structure",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-etale-closed-immersion-lift",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-affine-pushforward-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057S, lemma-elementary-devissage, complete proof; final sheaf identification expanded by Tag 02KG."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +183,38 @@
    "results": "[grep] OK 0 hit(s); ; none states the elementary module devissage assertion. Full responses retained in search-results/elementary-module-devissage-grep.txt.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage",
+   "results": "[grep] OK 0 hit(s); none. These hits do not state the full assertion; responses saved in search-results/item-grep-3.txt.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent module admits elementary etale devissage by a finite map to a smooth scheme with geometrically integral fibres",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.Etale.exists_subalgebra_fg; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmooth.exists_etale_mvPolynomial. These hits do not state the full assertion; responses saved in search-results/item-leanfinder-0.txt.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elementary etale devissage of a finite type quasi coherent module",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; SheafOfModules.isQuasicoherent; SheafOfModules.IsQuasicoherent.recOn; SheafOfModules.QuasicoherentData.I; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.IsQuasicoherent.rec; SheafOfModules.QuasicoherentData.ctorIdx. These hits do not state the full assertion; responses saved in search-results/item-leansearch-1.txt.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "[loogle] OK 0 hit(s); none. These hits do not state the full assertion; responses saved in search-results/item-loogle-2.txt.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flattening-module-by-admissible-blowup",
@@ -87,5 +241,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-elementary-module-devissage",
+  "worker": "stage1",
+  "summary": "Split Stacks 057S by supporting closed subscheme (057Q), scheme-level finite-over-smooth local structure (057K--057L), and existing affine etale lifting (057R). Wrote the base-change, residue-field and module identification checks explicitly; reused existing Mathlib leaves and closed project results. Removed unused flatness and redundant module-finite-presentation statement dependencies. Maintainer review (Q36, 2026-10-18): the etale notion of the statement and of the geometric child is cited as def-weil-etale-morphism, the notion of all etale lemmas used in the steps and of the parent; step 6 now checks that pi lies over S'.",
+  "blueprint": "Retains the recorded lem-trf-local-term-locality proof (1)--(2) flattening/semistable input ancestry, through the existing flattening children. These steps realize the elementary-devissage ingredient of the Stacks 0815 flattening route. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic residue-field identification for the two closed immersions in the lifted diagram; the trace-formula unit has no such geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-777435e82",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-777435e82 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, and the statement of every cited node against the Stacks sources: flat.tex 057Q (lines 446-491), 057S (statement and full proof), 057R, and more-morphisms.tex 057K (1)-(6) and 057L (7). The item matches 057S clause by clause and is not weakened. Its extra hypothesis x in Supp(F_s) was inherited from the item's creator. It makes dim_x meaningful and is harmless. The node lem-trf-finite-type-sheaf-fp-support is exactly 057Q; I tested it on F=0, a hyperplane support, and a non-noetherian base. The node lem-trf-etale-finite-smooth-local-structure is exactly 057K+057L; I tested the n=0 case. It generalizes the existing 02LK node and does not duplicate it. Neither new node restates a clause of the item. Steps 1-7 check out: every hypothesis is present (affine T and W, closed immersion D->T, v etale by cancellation, affine j for 02KG with the right orientation), and the residue-field argument via gi=jb is correct. I accept the declared tool use lem-weil-pbc-closed-immersion-residue-field-iso; the other off-unit citations are Mathlib leaves or Lean-closed nodes, and there is no SGA citation. I made two repairs, written as whole files under fixes/dag/nodes/sec-trace-formula. (a) The item and the 057K node cited def-sbc-smooth-morphisms (smooth of relative dimension 0) for 'etale', but every etale lemma the steps use, and the parent, uses def-weil-etale-morphism, and no step cited a bridge between them. I now cite def-weil-etale-morphism for etale and keep def-sbc for 'smooth of relative dimension n'. The two notions are equivalent, so the meaning is unchanged. (b) Step 6 never checked that pi lies over S'; it now shows f'i=h pi and a(s_1)=s. No node is dropped. Details are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }

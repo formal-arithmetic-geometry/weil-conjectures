@@ -23,9 +23,277 @@
   "def-weil-finite-integral-morphism",
   "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(B)$ and $X=C_\\eta$. This is a proper finite-type $k$-scheme by [lem-weil-pbc-proper-fp-permanence](b) and [def-weil-proper-morphism]. It is integral: over a nonempty affine $\\operatorname{Spec}A\\subset B$, an affine chart $\\operatorname{Spec}R\\subset C$ has generic fibre $\\operatorname{Spec}((A\\setminus\\{0\\})^{-1}R)$; dominance gives injections $A\\subset R\\subset\\kappa(C)$, so this is a nonzero domain with fraction field $\\kappa(C)$, by [lem-sc-integral-function-field-affine-fraction]. These charts have the same generic point, that of $C$, so their union is integral. Its dimension is $1$ by hypothesis. The closed subset $Z_\\eta$ omits this generic point because $Z\\ne C$. Give all closed inverse images below their reduced induced structure [lem-weil-pbc-reduced-induced-closed-subscheme].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX §1.3, p.132: generic-fibre normalization reduction; affine generic-fibre interpretation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normalization-geonormal-insep] to $X$. Obtain a finite purely inseparable extension $k_1/k$ such that the normalization $N_1$ of $(X_{k_1})_{\\mathrm{red}}$ is geometrically normal over $k_1$. By [lem-pc-homeo-pure-insep], $X_{k_1}$ is irreducible and has dimension $1$, so its reduction is integral of dimension $1$. By [lem-sc-normalization-exists], $N_1$ is integral, finite over that reduction, of finite type over $k_1$, and of dimension $1$. Thus [lem-weil-pbc-geonormal-dim-one-smooth] makes $N_1$ smooth. We have not inferred anything about the boundary from this smoothness.",
+   "uses": [
+    "lem-weil-pbc-normalization-geonormal-insep",
+    "lem-pc-homeo-pure-insep",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-geonormal-dim-one-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXT (lemma-finite-extension-geometrically-normal); ILO IX §1.3 p.132"
+   }
+  },
+  {
+   "text": "Let $D_1\\subset N_1$ be the reduced inverse image of $Z_\\eta$. Its underlying set omits the generic point of $N_1$, since the normalization map and the purely inseparable projection send that point to the generic point of $X$. Hence [lem-pc-nowhere-dense-dim-zero] gives $\\dim D_1\\le0$, and [lem-pc-zero-dimensional-closed-subscheme-finite] makes $D_1$ finite over $k_1$. Its finite-dimensional coordinate algebra is Noetherian (chains of ideals are chains of subspaces), so [lem-weil-pbc-noetherian-finitely-many-minimal-primes] gives finitely many irreducible components. Apply [lem-pur-finite-inseparable-geometric-reduction] to $D_1$ to obtain a finite purely inseparable $K/k_1$ such that $D=(D_1\\times_{k_1}K)_{\\mathrm{red}}$ is geometrically reduced over $K$. It is finite over $K$: base change preserves finite morphisms [lem-trf-finite-radicial-basechange], and reduction is a closed immersion, hence finite [lem-weil-pbc-closed-immersion-finite]; compose these finite morphisms.",
+   "uses": [
+    "lem-pc-nowhere-dense-dim-zero",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 04KT (lemma-finite-extension-geometrically-reduced), 06LH (lemma-algebraic-scheme-dim-0); ILO IX §1.3"
+   }
+  },
+  {
+   "text": "Write $D=\\operatorname{Spec}H$, with $H$ finite-dimensional and geometrically reduced over $K$. It is Noetherian, because ascending chains of ideals are ascending chains of finite-dimensional subspaces. Each nonzerodivisor $h\\in H$ is a unit: multiplication by $h$ is injective, hence surjective on the finite-dimensional space $H$, so $hx=1$ for some $x$. Thus $Q(H)=H$. The minimal primes form a finite list by [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. Apply [lem-weil-pbc-reduced-noetherian-total-ring-fractions]: its canonical decomposition of $Q(H)$ identifies $H$ with a finite product $\\prod_j E_j$ of fields. Each projection is surjective, so $E_j$ is finite-dimensional over $K$. For any extension $\\Omega/K$, $E_j\\otimes_K\\Omega$ is a direct factor of the reduced ring $H\\otimes_K\\Omega$, so is reduced. Each $E_j/K$ is separable: if $\\alpha\\in E_j$ were inseparable, its minimal polynomial would have a repeated root over an algebraic closure $\\overline K$; hence $K[\\alpha]\\otimes_K\\overline K$ would contain a nonzero nilpotent, which remains nonzero in $E_j\\otimes_K\\overline K$ since tensoring an injection of vector spaces is injective. By [lem-sc-finite-etale-algebra-criterion], $D$ is finite etale over $K$. If $H=0$, the product is empty and the same criterion applies.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-sc-finite-etale-algebra-criterion",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02LX (lemma-total-ring-fractions-no-embedded-points), 00EU (lemma-minimal-prime-reduced-ring); finite-etale criterion"
+   }
+  },
+  {
+   "text": "Use [lem-trf-normalization-inseparable-base-change] for $X$, $k_1/k$ and $K/k_1$. Its hypothesis is the geometric normality from Step 2. It identifies the normalization $N$ of $(X_K)_{\\mathrm{red}}$ with $N_1\\times_{k_1}K$, over $X_K$, and identifies the reduced inverse image of $D_1$ with $D$. Reduced inverse images depend only on the underlying closed sets [lem-weil-pbc-reduced-induced-closed-subscheme], so $D$ is exactly the reduced inverse image of $Z_\\eta$ in $N$. The scheme $(X_K)_{\\mathrm{red}}$ is integral of dimension $1$ by [lem-pc-homeo-pure-insep]; [lem-sc-normalization-exists] therefore gives $\\dim N=1$. The normalization comparison makes $N$ geometrically normal, so [lem-weil-pbc-geonormal-dim-one-smooth] makes it smooth. Here $K/k$ is finite purely inseparable (degrees multiply, and in positive characteristic one multiplies the exponents that put elements into the bottom field).",
+   "uses": [
+    "lem-trf-normalization-inseparable-base-change",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-pc-homeo-pure-insep",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-geonormal-dim-one-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields); ILO IX §1.3, preservation after the second extension"
+   }
+  },
+  {
+   "text": "Construct $b_1:B_1\\to B$ as the normalization of $B$ in $K$ [def-fin-normalization-extension]. On a nonempty affine $\\operatorname{Spec}A\\subset B$, its coordinate ring is the integral closure $A'$ of $A$ in $K$. The field of fractions of $A$ is $k$ [lem-sc-integral-function-field-affine-fraction]. Excellence implies Nagata by [lem-exc-quasi-excellent-nagata]; taking the prime $(0)$ in [def-weil-pbc-nagata-ring] and then applying [def-weil-pbc-japanese-domain] says exactly that $A'$ is finite over $A$. Thus $b_1$ is finite [def-weil-finite-integral-morphism]. By [lem-weil-pbc-integral-closure-finite-extension-normal], $A'$ is a normal domain with fraction field $K$. These rings glue by [lem-weil-pbc-integral-closure-commutes-localization]. The resulting scheme is integral: all nonempty charts contain the common point with field $K$. Localizing $A'$ by $A\\setminus\\{0\\}$ gives the integral closure of $k$ in $K$, namely $K$. Hence $b_1^{-1}(\\eta)=\\operatorname{Spec}K$ and $b_1$ is dominant.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032R (definition-nagata), 032F (definition-N), 034L (lemma-integral-closure-in-normal), 0307 (lemma-integral-closure-localize); ILO IX §1.3"
+   }
+  },
+  {
+   "text": "Each finite $A$-algebra $A'$ in Step 6 is excellent by [lem-exc-finite-type-localization-excellent]; [lem-trf-excellent-scheme-affine-cover] then gives excellence on every affine open of $B_1$. Since $b_1$ is finite, it is of finite type, so $B_1$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is proper by [lem-weil-pbc-finite-proper], and surjective: its image is closed by properness and dense by dominance. Thus $b_1$ is an alteration, in fact finite everywhere. This construction used no affine, projective or separated structure on the whole of $B$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU (lemma-finite-type-over-excellent); morphisms Tags 01T6, 01WN"
+   }
+  },
+  {
+   "text": "Form $V=C\\times_B B_1$, with projections $p:V\\to C$ and $q:V\\to B_1$. Let $\\xi$ be the generic point of $C$. The fibre $p^{-1}(\\xi)$ is $\\operatorname{Spec}(\\kappa(C)\\otimes_k K)$, since $b_1^{-1}(\\eta)=\\operatorname{Spec}K$. By [lem-pc-homeo-pure-insep] it has one point $z$. A generization of $z$ in $V$ must still map to $\\xi$, so is $z$. Since schemes are sober [lem-sc-scheme-sober], $\\overline{\\{z\\}}$ is an irreducible component: the generic point of any larger irreducible closed set would generize $z$. Let $W$ be its reduced induced closed subscheme [lem-weil-pbc-reduced-induced-closed-subscheme]. It is integral, dominates $C$, and dominates $B_1$, because $z$ maps to the unique point of $b_1^{-1}(\\eta)$.",
+   "uses": [
+    "lem-pc-homeo-pure-insep",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IS (lemma-scheme-sober), 01J3 (lemma-reduced-closed-subscheme); ILO IX §1.3, dominant component"
+   }
+  },
+  {
+   "text": "The map $p$ is finite by base change of the finite $b_1$ [lem-trf-finite-radicial-basechange]. The inclusion $W\\hookrightarrow V$ is finite [lem-weil-pbc-closed-immersion-finite], so $W\\to C$ is finite by the composition clause of [lem-trf-finite-radicial-basechange]. Hence $W$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Over the excellent affine charts of $C$, its coordinate rings are finite algebras, hence excellent by [lem-exc-finite-type-localization-excellent]; these cover $W$, so [lem-trf-excellent-scheme-affine-cover] makes $W$ excellent. Also $q$ is proper by base change of $f$ [lem-weil-pbc-proper-fp-permanence](b); thus $W\\to B_1$ is proper by [lem-weil-pbc-closed-immersion-proper](b).",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL, 01WK (finite base change/composition), 035C (closed-immersion-finite), 01W4, 01W5; more-algebra Tag 07QU"
+   }
+  },
+  {
+   "text": "Normalize $W$ in its function field $F$, obtaining $n:C_1\\to W$ [def-sc-normalization]. For every nonempty affine $\\operatorname{Spec}R\\subset W$, the integral closure $\\overline R^{\\,F}$ is finite over $R$: excellence gives Nagata [lem-exc-quasi-excellent-nagata], and the definitions [def-weil-pbc-nagata-ring, def-weil-pbc-japanese-domain] apply to the degree-one extension $F/F$. It is a normal domain with fraction field $F$ [lem-weil-pbc-integral-closure-finite-extension-normal]; the affine description therefore makes $C_1$ integral and $n$ finite and dominant. Its finite affine chart algebras are excellent [lem-exc-finite-type-localization-excellent, lem-trf-excellent-scheme-affine-cover], and it is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Put $a_1=pn:C_1\\to C$ and $f_1=qn:C_1\\to B_1$, where $p,q$ are restricted to $W$. The first is finite by [lem-trf-finite-radicial-basechange]; the second is proper by [lem-weil-pbc-finite-morphism-permanence](c). Both are dominant from the common generic point; $a_1$ is proper by [lem-weil-pbc-finite-proper] and surjective by closed dense image. Thus $a_1$ is an alteration and $fa_1=b_1f_1$.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032R, 032F, 034L; more-algebra Tags 07QV, 07QU; ILO IX §1.3 total-space normalization"
+   }
+  },
+  {
+   "text": "Let $\\eta_1$ be the generic point of $B_1$. By fibre-product associativity, $V_{\\eta_1}=X_K$. This fibre is irreducible by [lem-pc-homeo-pure-insep]. The point $z$ is its generic point, since it has no proper generization in $V$ (Step 8). The closed subscheme $W_{\\eta_1}$ contains $z$, so has its whole underlying space; it is reduced, since its affine rings are localizations of the domains on $W$. The uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] identifies $W_{\\eta_1}=(X_K)_{\\mathrm{red}}$. To compute $(C_1)_{\\eta_1}$, take $\\operatorname{Spec}A'\\subset B_1$ and an affine chart $\\operatorname{Spec}R\\subset W$ over it; put $T=A'\\setminus\\{0\\}$. Dominance makes the image of $T$ nonzero in $R$. By [lem-weil-pbc-integral-closure-commutes-localization],\n$$T^{-1}(\\overline R^{\\,F})=\\overline{T^{-1}R}^{\\,F}.$$\nThe fraction field remains $F$. These equalities agree on overlaps, and the normalization definition [def-sc-normalization] identifies $(C_1)_{\\eta_1}$ with the normalization $N$ of $(X_K)_{\\mathrm{red}}$, compatibly with its map to $X$. Thus its generic curve is the smooth integral curve of Step 5.",
+   "uses": [
+    "lem-pc-homeo-pure-insep",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); morphisms Tag 035K; ILO IX §1.3 generic-fibre identification"
+   }
+  },
+  {
+   "text": "Let $Z_1=(a_1^{-1}Z)_{\\mathrm{red}}$. It omits the generic point of $C_1$, since that point maps to the generic point of $C$, so it is nowhere dense. Under Step 11, its generic fibre is $D$ from Step 5. Indeed both are the reduced closed subscheme in $N$ on the inverse image of $Z_\\eta$. Reduction commutes with this generic localization: for a ring $R$ and multiplicative set $T$, if $r/t$ is nilpotent in $T^{-1}R$, some $u\\in T$ kills $r^m$, so $(ur)^m=0$ and $r/t=(ur)/(ut)$ comes from the localized nilradical. The reverse inclusion is immediate. Use the uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] for the resulting closed subschemes. By Step 4, $(Z_1)_{\\eta_1}=D$ is finite etale over $K$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Localization of nilradicals (written out); ILO IX §1.3 reduced inverse image"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-stein-smooth-generic-curve] to $f_1:C_1\\to B_1$. Steps 7, 10 and 11 verify all its hypotheses: the schemes are excellent integral Noetherian, the morphism is proper dominant, and its generic fibre is a smooth irreducible curve of dimension $1$. It gives an excellent integral Noetherian $B_0$, a finite dominant $q_0:B_0\\to B_1$, and a proper map $f_0:C_1\\to B_0$ with $f_1=q_0f_0$. Its generic fibre is smooth and geometrically integral of dimension $1$, and $L=\\kappa(B_0)=H^0(N,\\mathcal O_N)$ is finite separable over $K$. The map $f_0$ is dominant: the generic point of $C_1$ maps into the generic fibre of $q_0$, whose sole point is the generic point of $B_0$, as checked next.",
+   "uses": [
+    "lem-trf-stein-smooth-generic-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX §1.3, p.132: Stein factorization"
+   }
+  },
+  {
+   "text": "The fibre of the finite dominant map $q_0$ above $\\eta_1$ is $\\operatorname{Spec}L$: on an affine $\\operatorname{Spec}A'\\subset B_1$, its inverse image is $\\operatorname{Spec}R_0$ for a finite domain $R_0$ with fraction field $L$ [lem-sc-integral-function-field-affine-fraction]. Localizing at $A'\\setminus\\{0\\}$ gives a finite-dimensional domain over $K$, hence a field (multiplication by any nonzero element is injective and therefore surjective). Its fraction field is $L$, so it is $L$. Associativity of fibre products now gives\n$$C_1\\times_{B_0}\\operatorname{Spec}L\\cong C_1\\times_{B_1}\\operatorname{Spec}K=N.$$\nLikewise $(Z_1)_{\\eta_0}$ is the same scheme $D$ with its induced $L$-structure, not the generally larger scheme $D\\times_K L$. These identifications use the finite map, integrality, function field and factorization supplied by [lem-trf-stein-smooth-generic-curve].",
+   "uses": [
+    "lem-trf-stein-smooth-generic-curve",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX §1.3, p.132: generic fibre after Stein factorization"
+   }
+  },
+  {
+   "text": "The decomposition $H=\\prod_jE_j$ in Step 4 is by quotient maps, so the $L$-algebra structure of $H=\\Gamma(D,\\mathcal O_D)$ from Step 14 induces maps $L\\to E_j$. For each nonzero field factor this is an injection. Each $E_j$ is finite over $L$, since a finite $K$-spanning set is also an $L$-spanning set. It is separable over $L$: the minimal polynomial over $L$ of any $\\alpha\\in E_j$ divides its separable minimal polynomial over $K$, and a divisor of a square-free polynomial is square-free. Consequently [lem-sc-finite-etale-algebra-criterion] makes $(Z_1)_{\\eta_0}$ finite etale over $L$. The empty product gives the empty boundary, also allowed by that criterion.",
+   "uses": [
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Separable finite extensions under an intermediate field; finite-etale product criterion"
+   }
+  },
+  {
+   "text": "Set $C_0=C_1$, $a=a_1$ and $b=b_1q_0$. The square commutes because $fa_1=b_1f_1=b_1q_0f_0$. The map $a$ is already a finite alteration. The map $b$ is finite by the composition clause of [lem-trf-finite-radicial-basechange], and proper by [lem-weil-pbc-finite-proper]. It is dominant as a composite of dominant morphisms, so its closed image is the whole of $B$ [def-weil-proper-morphism]. Thus it too is an alteration, finite over all of its target. The schemes have the required excellence, integrality and Noetherian properties by Steps 7, 10 and 13. The generic curve conclusion is Step 13, and $Z_0=Z_1$ is nowhere dense by Step 12 with finite etale generic fibre by Step 15. All arguments include $Z=\\varnothing$.",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX §1.3, p.132: assemble finite normalization and Stein alterations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-sc-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-pc-homeo-pure-insep",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-normalization-exists",
+  "lem-sc-scheme-sober",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-trf-finite-radicial-basechange",
+  "lem-trf-normalization-inseparable-base-change",
+  "lem-trf-stein-smooth-generic-curve",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geonormal-dim-one-smooth",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-normalization-geonormal-insep",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IX §1.3 p.132: purely inseparable generic normalization, reduced boundary, and Stein factorization; arbitrary excellent-base gluing expanded using Stacks 0307, 032F, 032R, 07QU, 07QV, 0BXT and 04KT. The local de Jong 1997 PDF remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +322,94 @@
    "results": "8 hits: smooth/etale and standard-smooth declarations; no alteration theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|geometricallyNormal|geometricallyIntegral|normalization",
+   "results": "19 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alter a proper family of integral curves over an excellent scheme so that the generic fibre is smooth geometrically integral and its reduced boundary finite etale",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isSmooth_iff. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|geometricallyIntegral|alteration|Stein",
+   "results": "19 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper dominant family of curves over an excellent base has finite alterations with smooth geometrically integral generic fibre and finite etale boundary",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsDominant, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsDominant.casesOn, AlgebraicGeometry.IsProper.instOfIsFinite. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper",
+   "results": "0 hits: . Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite purely inseparable extension and normalization make a proper curve smooth; Stein factorization gives geometrically connected generic fibre",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivPi|equiv.*[Pp]rod|[Pp]rod.*equiv|[Pp]i.*quotient|isField.*[Rr]educed|[Rr]educed.*isField",
+   "results": "10 hits: Mathlib/RingTheory/Artinian/Ring.lean, Mathlib/RingTheory/Artinian/Ring.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Instances.lean. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional reduced commutative algebra over a field is a finite product of finite field extensions",
+   "results": "8 hits: Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, fieldOfFiniteDimensional, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, FiniteDimensional.finiteDimensional_subalgebra, Algebra.FinitePresentation.pi, FiniteField.Extension, Algebra.FiniteType.prod. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, IsReduced",
+   "results": "6 hits: IsArtinianRing.isSemisimpleRing_of_isReduced, IsArtinianRing.equivPi, IsArtinianRing.equivPi_apply, IsArtinianRing.instDecompositionMonoid, IsArtinianRing.instDecompositionMonoidPolynomial, IsArtinianRing.isField_of_isReduced_of_isLocalRing. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced finite dimensional commutative algebra over a field is isomorphic to a finite product of finite field extensions",
+   "results": "8 hits: Algebra.Etale.iff_exists_algEquiv_prod, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, fieldOfFiniteDimensional, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyUnramified.isReduced_of_field, IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite, IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, divisionRingOfFiniteDimensional. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def equivPi|theorem equivPi|finite.*MaximalSpectrum|Finite.*MaximalSpectrum",
+   "results": "3 hits: Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced commutative Artinian ring is the product of its quotients by maximal ideals, and there are finitely many maximal ideals",
+   "results": "8 hits: IsArtinianRing.quotNilradicalEquivPi, IsArtinianRing.instDecompositionMonoid, IsArtinianRing.isSemisimpleRing_of_isReduced, IsArtinianRing.isField_of_isReduced_of_isLocalRing, IsArtinianRing.instFiniteMaximalSpectrum, IsArtinianRing.setOf_isMaximal_finite, instIsJacobsonRingOfIsArtinianRing, IsArtinianRing.instFinitePrimeSpectrum. Read results; normalization, smoothness, Artinian and etale APIs supply ingredients but no arbitrary-base alteration-preparation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-excellent-base-marked-semistable-curve",
@@ -82,5 +434,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-excellent-base-generic-curve-preparation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the arbitrary excellent-base generic preparation through two purely inseparable extensions, finite normalization on excellent affine charts, normalization of the dominant base-change component, and Stein factorization. Prepared the boundary separately and checked the actual generic-fibre identification after Stein. Reused all existing nodes; no new nodes.",
+  "blueprint": "Realizes the generic-preparation part of the inherited de Jong/Orgogozo branch below lem-trf-local-term-locality: generic normalization and boundary preparation (Steps 1–5), spreading over arbitrary excellent B (6–12), Stein factorization and assembly (13–16).",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Steps 7, 9 and 10 use stability of excellence under finite type algebras. This commutative-algebra tool certifies the normalization charts; the trace unit has no corresponding ring theorem."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Steps 6 and 10 use excellent implies Nagata to obtain finite integral closures. This is a ring-theoretic tool absent from the trace unit."
+   },
+   {
+    "node": "lem-pc-nowhere-dense-dim-zero",
+    "why": "Step 3 bounds the proper boundary in an integral one-dimensional generic curve. It is a general dimension tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Step 3 turns the dimension-zero generic boundary into a finite field-scheme. This general algebraic-scheme finiteness tool is absent from the trace unit."
+   },
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Step 3 applies the general finite-inseparable geometric-reduction theorem to the boundary only. No trace-unit node gives this field-extension preparation."
+   },
+   {
+    "node": "lem-weil-pbc-geonormal-dim-one-smooth",
+    "why": "Steps 2 and 5 use the general criterion geometrically normal of dimension at most one implies smooth; this geometric tool is absent from the trace unit."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "why": "Steps 3 and 4 use finiteness of minimal primes of a Noetherian ring, equivalently finiteness of affine irreducible components. This is a general algebraic tool absent from the trace unit."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-geonormal-insep",
+    "why": "Step 2 uses the general finite-type field-scheme normalization theorem (0BXT). It is a field-extension tool, not the projective-base preparation node of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Step 4 uses the product-of-fields decomposition of the total ring of fractions, with an explicit finite-dimensional argument identifying it with the algebra itself. No node of the trace unit states that ring decomposition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-weil-pbc-geonormal-dim-one-smooth",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-normalization-geonormal-insep",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-cfcae5797",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-cfcae5797 (reviewer sub-agent of L); spot-checked: I read in full the item (16 steps), the full statements of all 33 cited nodes, unit sk-i-curve-zero, the chapter, and the parent lem-trf-excellent-base-marked-semistable-curve, whose step 1 is the only citer. The delivery has no new nodes, and the statement is unchanged and is not a target. Source check: ILO, Travaux de Gabber, Exposé IX §1.3, printed p.132 (radicial extension η′, normalize Y in η′, normalize X in the fraction field of (X_η′)_red, reduced inverse image of Z, then Stein factorization). The proof follows that sequence. De Jong 1997 is correctly marked WANTED, with proof_origin agent. Every hypothesis of every cited node holds where it is used. In detail: dominance gives (A∖0)^{-1}R a domain, so the generic fibre is integral. Normalization-geonormal-insep and normalization-exists apply to (X_{k1})_red, which is irreducible because the purely inseparable base change is a homeomorphism; geonormal-dim-one-smooth then needs only dim ≤ 1. The boundary is nowhere dense, so dim 0, finite, Noetherian, with finitely many components; pur-finite-inseparable then applies. Q(H)=H gives a product of fields, the separability argument via K̄ is correct, and the finite-étale criterion applies. Normalization-inseparable-base-change has its geometric-normality hypothesis from Step 2. Nagata (p=(0), so N-2) makes the normalization B_1 of B in K finite. p^{-1}(ξ)=Spec(κ(C)⊗_kK) is a single point, so its closure W is a component; W is excellent and finite over C. On the normalization C_1, T^{-1} of the integral closure equals the integral closure of T^{-1}R (0307), which identifies (C_1)_{η1} with N and avoids the false general base change of normalization. Every hypothesis of the Stein node holds. The fibre of q_0 over η_1 is Spec L, so the boundary is finite étale over L because minimal polynomials over L divide those over K. b=b_1q_0 is finite, proper and surjective. Edge cases checked: Z empty, B a field, characteristic 0, an imperfect inseparable boundary point (which needs the second extension), vertical components, nontrivial separable constants. Every dependency lies on the transitive route of sk-i-curve-zero, and I accept the nine declared tool_uses. Not a duplicate of lem-trf-generic-smooth-boundary-preparation, lem-trf-projective-inseparable-spread-normalization or lem-trf-alteration-relative-curve-preparation: those assume a field or trait base with projective Y. There are no SGA citations and no fixes. Full checks are in review.md."
  }
 }
