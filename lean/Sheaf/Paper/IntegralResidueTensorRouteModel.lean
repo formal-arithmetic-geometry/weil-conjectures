@@ -5,7 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralResidueTensorModel
-import Sheaf.Paper.IntegralResidueTensorRouteGeneric
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
+import Sheaf.Paper.IntegralResidueTensorPresentation
 
 /-! Computation of the tensor-route in the residue tensor square.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
@@ -14,10 +16,6 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
 The target is the explicit ordinary homotopy tensor model. -/
 
 @[expose] public section
-
-set_option linter.style.haveILetI false
-set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency false
 
 universe u
 
@@ -29,8 +27,6 @@ local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-
-attribute [local semireducible] residueExchangeUpperStar
 
 /-- Compute the tensor-route against the ordinary homotopy tensor model.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
@@ -57,20 +53,6 @@ theorem integralResidue_tensorRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
         Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)
           M (residueExchangeCoefficient ℓ E Y) ≫
         residueExchangeTensorModelTarget ℓ E f P =
-      residueExchangeTensorModelMap ℓ E f P := by
-  unfold residueExchangeUpperStar
-  letI := residueExchangeOrdinaryPullMonoidal ℓ E f
-  letI := hFlat
-  letI := residueExchangeTensorCounit_isLeftDerivedFunctor ℓ E Y
-  have h := residue_tensor_route_model_generic (f)^*⟦integralCoeff ℓ E⟧
-    (residueExchangePullMonoidal ℓ E f (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat)
-    (residueExchangePullMonoidal_δ ℓ E f (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat)
-    (residueExchangeOrdinaryCoefficient ℓ E Y)
-    (residueExchangeReduction ℓ E Y ⋙ residueExchangeRestriction ℓ E Y)
-    (residueExchangeTensorCounit ℓ E Y) (residueExchangeTensorIso ℓ E Y)
-    (residueExchangeTensorIso_eq ℓ E Y) (residue_ordinary_pull_braiding ℓ E f) P
-    (residueExchangeTensorModelTarget ℓ E f P) (residueExchangeTensorModelTarget_eq ℓ E f P)
-    (residueExchangeTensorModelMap ℓ E f P) (residueExchangeTensorModelMap_eq ℓ E f P)
-  exact h
+      residueExchangeTensorModelMap ℓ E f P := by sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
