@@ -13,9 +13,99 @@
   "def-pc-fibre-product",
   "def-weil-geometric-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=B\\otimes_A C$, $H_A=A_p^{\\mathrm{sh}}$, $H_B=B_q^{\\mathrm{sh}}$, $H_C=C_r^{\\mathrm{sh}}$ and $H_D=D_m^{\\mathrm{sh}}$. Apply strict-henselization functoriality to the four projections of affine spectra at the given geometric points. Its clauses (1)-(3) give local rings, their canonical evaluations $\\epsilon_X:H_X\\to\\Omega$ with maximal-ideal kernels, and local maps between them inducing the inclusions of the separable residue closures inside the same $\\Omega$. The two composites $H_A\\to H_D$ agree: they have the same structural map and residue inclusion, so uniqueness in clause (3) applies. The tensor universal property therefore gives the specified map $c:E=H_B\\otimes_{H_A}H_C\\to H_D$, $b\\otimes z\\mapsto h_{BD}(b)h_{CD}(z)$. Its evaluation is $\\epsilon_E(b\\otimes z)=\\epsilon_B(b)\\epsilon_C(z)$, and $\\epsilon_Dc=\\epsilon_E$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP, lemma-base-change-strict-henselization-quasi-finite, first paragraph; Tag 04GU, lemma-strictly-henselian-functorial."
+   }
+  },
+  {
+   "text": "If $b_1,\\ldots,b_n$ generate $B$ as an $A$-module, then $b_i\\otimes1$ generate $D$ as a $C$-module: expand the first factor of each pure tensor and absorb its $A$-coefficients in the second factor. Thus $C\\to D$ is finite as well. The finite-ring-map lemma makes $A\\to B$ finite type and quasi-finite at $q$, and $C\\to D$ finite type and quasi-finite at $m$. Apply the quasi-finite strict-henselization lemma to both maps, with the compatible residue embeddings into $\\Omega$. It gives $H_B$ finite local over $H_A$, with finite purely inseparable residue extension, and canonical descriptions\n$$H_B=(H_A\\otimes_{A_p}B_q)_Q,\\qquad H_D=(H_C\\otimes_{C_r}D_m)_{P_0},$$\nwhere $Q,P_0$ are the kernels of the respective evaluations into $\\Omega$. Both descriptions commute with the displayed structural ring maps.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "lem-trf-strict-henselization-quasi-finite-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP, case (1), and Tag 05WR, lemma-quasi-finite-strict-henselization."
+   }
+  },
+  {
+   "text": "Write $V=B\\otimes_A H_A$ and $R=B\\otimes_A H_C$, and put $\\widetilde Q=\\ker(V\\to\\Omega)$ and $P=\\ker(R\\to\\Omega)$. The formulas in Step 2 yield $H_B=V_{\\widetilde Q}$ and $H_D=R_P$: passing from $B$ to $B_q$ first only inverts elements whose evaluations are nonzero, and the final prime localization already inverts them; the same argument applies to $D\\to D_m$ and $C\\to C_r$. If $U=V\\setminus\\widetilde Q$ and $\\overline U$ is its image in $R$, the tensor relations identify\n$$E=V_{\\widetilde Q}\\otimes_{H_A}H_C=\\overline U^{-1}R.$$\nExplicitly $(v/u)\\otimes z$ maps to $(v\\otimes z)/\\overline u$ after $V\\otimes_{H_A}H_C=R$; conversely the maps $R\\to E$ and $\\overline u\\mapsto u\\otimes1$ send every denominator to a unit and give the inverse fraction map. Both composites fix pure tensors and inverses, hence all elements. Since $\\overline U\\cap P=\\varnothing$, the map $c$ becomes precisely the localization map $\\overline U^{-1}R\\to R_P$. These are canonical identifications preserving evaluation.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-strict-henselization-quasi-finite-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP, case (1), displayed localization formulas; fraction universal property of Tag 00CO, definition-localization."
+   }
+  },
+  {
+   "text": "By Step 2, $H_A\\to H_B$ is finite local with purely inseparable residue extension, while $H_A\\to H_C$ is local by Step 1. The finite-algebra integrality lemma makes $H_B$ integral over $H_A$. Apply the integral-local tensor lemma with $(R,S,T)=(H_A,H_B,H_C)$ and its first residue-field alternative to conclude that $E$ is local. Also $E$ is finite over $H_C$: if $e_1,\\ldots,e_a$ generate $H_B$ over $H_A$, the tensors $e_i\\otimes1$ generate $E$ over $H_C$, by the same expansion as Step 2. Applying finite-algebra integrality again makes $E$ integral over $H_C$. No Noetherian hypothesis on any ring is used.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-trf-integral-local-tensor-purely-inseparable",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05WR and 092Y, lemma-local-tensor-with-integral, as used in Tag 0GIP case (1)."
+   }
+  },
+  {
+   "text": "The prime $N=\\ker(\\epsilon_E:E\\to\\Omega)$ contracts in $H_C$ to $\\ker\\epsilon_C=\\mathfrak m_{H_C}$ by Step 1. Step 4 says $E$ is integral over $H_C$, so the integral-prime-over-maximal lemma shows $N$ is maximal. Since $E$ is local, $N=\\mathfrak m_E$. Under Step 3 its contraction to $R$ is exactly $P$. Every $a\\in R\\setminus P$ consequently has image outside $\\mathfrak m_E$, hence a unit in $E$. There is therefore a map $d:R_P\\to E$ sending $a/s$ to the image of $a$ times the inverse of the image of $s$. The composites $cd$ and $dc$ fix every element of $R$ and every inverted denominator; the universal property of each fraction ring makes them identities. This proves that the specified $c$, rather than an unrelated ring isomorphism, is invertible. It supplies the small detail omitted in Stacks 0GIP.",
+   "uses": [
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP, case (1), sentence \"Hence it suffices to show ... is local (small detail omitted)\"; Tag 00GS, lemma-integral-over-field; Tag 00CO."
+   }
+  },
+  {
+   "text": "The canonical map $c$ was defined using the two functorial strict-henselization maps, and the localization identifications fixed the maps from $B$, $C$ and $D=B\\otimes_A C$. Thus its spectrum commutes with the structural maps to $\\operatorname{Spec}B$, $\\operatorname{Spec}C$ and $\\operatorname{Spec}D$. The equality $\\epsilon_Dc=\\epsilon_E$ of Step 1 gives preservation of the chosen geometric point. Composing these equalities with the inverse of $c$ gives the same compatibility for the inverse. This proves every compatibility in the statement.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP, its canonical comparison map and defining functorial square; Tag 04GU."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-integral-local-tensor-purely-inseparable",
+  "lem-trf-strict-henselization-quasi-finite-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0GIP, lemma-base-change-strict-henselization-quasi-finite, proof of case (1) specialized to a finite map; Tag 05WR and Tag 092Y. Step 5 writes out the omitted localization detail."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +134,46 @@
    "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; RingHom.finite_isStableUnderBaseChange; no strict henselization comparison.",
    "date": "2026-10-18",
    "verdict": "no match: finite base-change permanence only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of strict henselizations for a finite morphism",
+   "results": "{\"t\": \"2026-10-17T19:37:47Z\", \"tool\": \"leansearch\", \"query\": \"base change of strict henselizations for a finite morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"IsLocalizedModule.isBaseChange\", \"RingHom.IsStableUnderBaseChange\", \"Algebra.Unramified.baseChange\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"RingHom.finite_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.finiteType_isStableUnderBaseChange\"], \"digest\": \"e770cacec9f32eed\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary finite, etale and quasi-finite base-change permanence does not state the strict-henselization tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization tensor product finite ring map",
+   "results": "{\"t\": \"2026-10-17T19:37:53Z\", \"tool\": \"leanfinder\", \"query\": \"strict henselization tensor product finite ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Finite.tensorProductMap\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"Algebra.QuasiFinite.baseChange\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.EssFiniteType.baseChange\", \"Algebra.FormallySmooth.instTensorProduct\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"128fcef1a2de70a7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary finite, etale and quasi-finite base-change permanence does not state the strict-henselization tensor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "StrictHenselization tensor finite",
+   "results": "{\"t\": \"2026-10-17T19:37:54Z\", \"tool\": \"loogle\", \"query\": \"StrictHenselization tensor finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `StrictHenselization`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary finite, etale and quasi-finite base-change permanence does not state the strict-henselization tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|henselization.*tensor|tensor.*henselization",
+   "results": "{\"t\": \"2026-10-17T19:37:54Z\", \"tool\": \"grep\", \"query\": \"strictHenselization|henselization.*tensor|tensor.*henselization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary finite, etale and quasi-finite base-change permanence does not state the strict-henselization tensor comparison.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselizations commute with arbitrary base change along a finite algebra at compatible geometric points",
+   "results": "{\"t\": \"2026-10-17T19:39:31Z\", \"tool\": \"leanfinder\", \"query\": \"Strict henselizations commute with arbitrary base change along a finite algebra at compatible geometric points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.IsStandardOpenImmersion.isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\"], \"digest\": \"821ad187c74c30a7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary finite, etale and quasi-finite base-change permanence does not state the strict-henselization tensor comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-base-strict-localization",
@@ -59,7 +185,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Supporting strict-local geometry input used in the finite-base strict-localization argument of the item; see the item proof step below.",
+   "place": "Proof (1)-(2) of lem-trf-local-term-locality, specialization-to-the-normal-cone route, through trace specialization and nearby-cycle finite descent; lem-trf-finite-base-strict-localization Step 4, the affine tensor comparison for arbitrary Y -> S.",
    "via": [
     "lem-trf-finite-base-strict-localization",
     "lem-trf-finite-cover-tube-comparison",
@@ -72,5 +198,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-strict-henselization-tensor-finite",
+  "worker": "stage1",
+  "summary": "Checked the finite case of Stacks 0GIP against 05WR and 092Y. The statement is unchanged. Wrote both localization models, proved tensor locality and checked the evaluation prime is maximal to justify the omitted inverse-localization detail. Reused existing quasi-finite and commutative-algebra nodes; the only new node states the generic 092Y locality theorem, with an exact sorry-free slopmaster2 attachment candidate.",
+  "blueprint": "Supports Proof (1)-(2) of lem-trf-local-term-locality through the existing specialization/nearby finite-descent chain; realizes the affine comparison invoked in lem-trf-finite-base-strict-localization Step 4. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Canonical local maps, residue closures and uniqueness at geometric points; generic strict-local geometry. No statement of this unit replaces this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "why": "Finite ring maps are quasi-finite at the chosen primes; generic algebra used to apply 05WR. No statement of this unit replaces this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-finite-ring-map-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-5781c53d2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-5781c53d2 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the new node in full, and checked them against Stacks algebra.tex 0GIP (statement and proof of case (1)), 05WR and 092Y. The item statement is unchanged and is the finite case of 0GIP with the canonical tensor base-change map. Steps: (1) the uniqueness in functoriality clause (3) makes the two maps H_A->H_D agree, which gives c with eps_D c = eps_E. (2) C->D is finite by an explicit generator argument, and the quasi-finite-ring node (05WR) gives the two localization models plus finite local H_A->H_B with purely inseparable residue extension. (3) The localization identities H_B=V_Q~, H_D=R_P and E=U^-1 R, with U disjoint from P, are verified and acceptable as elementary. (4) The 092Y node applied to (H_A,H_B,H_C) makes E local, and E is integral over H_C. (5) ker eps_E is maximal (integral over the maximal ideal of H_C), hence equals m_E, so R\\P becomes units and E=R_P; this fills 0GIP's 'small detail omitted' correctly. (6) Spec and geometric-point compatibilities hold. proof_deps equals the union of uses, and no SGA source is cited. The new node lem-trf-integral-local-tensor-purely-inseparable is 092Y with the factors swapped, with exactly its hypotheses (local maps, one map integral, either residue extension purely inseparable). I tested it on R=S; on R=IR, S=T=C, where the hypothesis fails and the tensor product C x C is not local; and on F_p(t^{1/p}) over F_p(t), where the tensor product S[eps]/eps^p is local. It is not a duplicate: grep finds no other node citing 092Y or 0GIP that states it. Its Mathlib searches are logged with no match. The slopmaster2 declaration Algebra.isLocalRing_tensorProduct_of_isPurelyInseparable_residueField (IntegralLocal.lean:510-522, no sorry in the file) states the node exactly and can be attached. I accept both declared tool_uses: lem-weil-pbc-strict-henselization-functoriality and lem-weil-pbc-finite-ring-map-quasi-finite are generic sk-thm-p1 tools that unit sk-i-curve-zero does not cite. No fixes were needed. Full details are in review.md."
  }
 }

@@ -3,51 +3,126 @@
  "blueprint": {
   "is": "lem-wf-proper-curve-compatible-h1-no-fixed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "No fixed compatible $H^1$-system on a proper curve",
- "statement": "Let $C_0/\\mathbf F_Q$ be a smooth projective geometrically connected\ncurve, put $C=C_0\\times_{\\mathbf F_Q}\\overline{\\mathbf F}_Q$, and put\n$A_n=\\mathbf Z/\\ell^n\\mathbf Z$, where $\\ell\\nmid Q$. Then\n\n$$\n\\left(\\varprojlim_nH^1_{\\mathrm{\\acute et}}(C,A_n)\\right)^{\\Phi_Q=1}=0,\n\\tag{4.4}\n$$\n\nwhere $\\Phi_Q$ is the geometric\nFrobenius. The finite-level cohomology is that of\n[def-weil-pbc-etale-cohomology].",
+ "statement": "Let $C_0/\\mathbf F_Q$ be a smooth projective geometrically connected\ncurve, put $C=C_0\\times_{\\mathbf F_Q}\\overline{\\mathbf F}_Q$, and put\n$A_n=\\mathbf Z/\\ell^n\\mathbf Z$, where $\\ell$ is a prime and $\\ell\\nmid Q$. Then\n\n$$\n\\left(\\varprojlim_nH^1_{\\mathrm{\\acute et}}(C,A_n)\\right)^{\\Phi_Q=1}=0,\n\\tag{4.4}\n$$\n\nThe inverse limit is the ordinary inverse limit for the coefficient reduction maps $A_{n+1}\\to A_n$. Write $\\sigma_Q:z\\mapsto z^Q$ and $\\gamma_Q=\\sigma_Q^{-1}$. Here $\\Phi_Q$ acts at each finite level by pullback along the geometric Galois Frobenius $g_C=\\operatorname{id}_{C_0}\\times\\operatorname{Spec}(\\gamma_Q)$ of [def-weil-frobenius-detailed], using the canonical identification of the pullback of the constant sheaf $A_n$ with $A_n$. The finite-level cohomology is that of\n[def-weil-pbc-etale-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-proper-curve-compatible-h1-no-fixed.md",
   "place": "node lem-wf-proper-curve-compatible-h1-no-fixed, order 2623"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-cohomology",
-  "def-tw-frobenius-action"
+  "def-weil-frobenius-detailed"
  ],
  "proof": [
   {
-   "text": "Let $J$ be the Jacobian of $C$, with the semilinear action of arithmetic\nFrobenius $\\sigma_Q$ supplied by\n[lem-wf-geometric-jacobian-galois-action], so that the geometric action\non the Kummer-identified\ntwisted cohomology is $\\sigma_Q^{-1}$. By\n[lem-wf-curve-h1-dual-tate-module], the module in (4.4) is\n\n$$\nT_\\ell J^\\vee:=\\operatorname{Hom}_{\\mathbf Z_\\ell}\n(T_\\ell J,\\mathbf Z_\\ell),\n$$\n\nwith the action determined by the perfect pairing and its twisted\nequivariance in [thm-pod-equivariance-of-the-twisted-pairing]. In a\nchosen $\\mathbf Z_\\ell$-basis of $T_\\ell J$, write the matrix of\n$\\sigma_Q$ as $B$. The geometric action on the second factor of the\npairing is $B^{-1}$. Equivariance of the pairing says that the geometric\naction on the first factor is\n\n$$\n(B^{-1})^{-t}=B^t.\n$$",
+   "text": "Put $H=\\varprojlim_nH^1(C,A_n)$. Choose the geometric Jacobian $J$ with the canonical Galois action supplied by [lem-wf-geometric-jacobian-galois-action], and put $T=T_\\ell J$. Apply [lem-wf-curve-h1-dual-tate-module] over $k_0=\\mathbf F_Q$: the curve is smooth projective geometrically connected and $\\ell\\ne\\operatorname{char}(k_0)$, so its natural Galois-equivariant isomorphism identifies $H$ with $\\operatorname{Hom}_{\\mathbf Z_\\ell}(T,\\mathbf Z_\\ell)$. The action on this dual is $(\\tau f)(t)=f(\\tau^{-1}t)$, since evaluation into the trivial Galois module $\\mathbf Z_\\ell$ is equivariant. By [def-weil-frobenius-detailed], the geometric operator in the statement is the action of $\\gamma_Q=\\sigma_Q^{-1}$. Thus if $x\\in H$ is fixed by $\\Phi_Q$, its image $f$ satisfies\n$$f(\\sigma_Qt)=f(t),\\qquad f((\\sigma_Q-1)t)=0\\quad(t\\in T).$$\nThis uses the twisted pairing only through the cited integral Galois-equivariant comparison; there is no identification of twisted and untwisted cohomology.",
    "uses": [
     "lem-wf-geometric-jacobian-galois-action",
     "lem-wf-curve-h1-dual-tate-module",
-    "thm-pod-equivariance-of-the-twisted-pairing"
+    "def-weil-frobenius-detailed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-proper-curve-compatible-h1-no-fixed.proof.md",
+    "place": "First paragraph: geometric Frobenius and the Galois-equivariant dual-Tate identification"
+   }
   },
   {
-   "text": "By [lem-wf-finite-field-tate-no-fixed], $B-1$ is injective on\nthe finite free module $T_\\ell J$. Over the domain $\\mathbf Z_\\ell$,\nthis says $\\det(B-1)\\ne0$: after tensoring with $\\mathbf Q_\\ell$, an\ninjective endomorphism of a finite-dimensional vector space is invertible.\nSince\n$\\det(B^t-1)=\\det(B-1)\\ne0$, the transpose $B^t-1$ is likewise\ninjective on the finite free dual $T_\\ell J^\\vee$. This is exactly the\nassertion that (4.4) has no $\\Phi_Q$-fixed element.",
+   "text": "By [lem-wf-finite-field-tate-no-fixed], $\\sigma_Q-1$ is an automorphism of $V_\\ell J$. Its curve and prime hypotheses are exactly those already in force. The definitions [def-wf-abelian-tate-module] and [def-tate-module-abelian-group] identify this space with $T[1/\\ell]$, with the componentwise action extended to fractions. For any $t\\in T$, surjectivity gives $v=\\ell^{-b}u$ with $(\\sigma_Q-1)v=t/1$, for some $b\\ge0$ and $u\\in T$. The stated equality criterion for fractions gives $d\\ge0$ such that\n$$\\ell^d((\\sigma_Q-1)u-\\ell^bt)=0\\quad\\text{in }T.$$\nApplying the linear functional $f$ and the equality from Step 1 yields $\\ell^{b+d}f(t)=0$. This argument requires neither a basis of $T$ nor an injectivity assertion for its map to the localization.",
    "uses": [
-    "lem-wf-finite-field-tate-no-fixed"
+    "lem-wf-finite-field-tate-no-fixed",
+    "def-wf-abelian-tate-module",
+    "def-tate-module-abelian-group"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-proper-curve-compatible-h1-no-fixed.proof.md",
+    "place": "Second paragraph: rational invertibility of arithmetic Frobenius minus one; denominators cleared explicitly using the existing rational clause"
+   }
+  },
+  {
+   "text": "The ring of compatible residues $\\mathbf Z_\\ell$ in [def-tate-module-abelian-group] has no $\\ell$-power torsion: if $\\ell^ac=0$, its residue at level $n+a$ is killed by $\\ell^a$, hence is divisible by $\\ell^n$ in $\\mathbf Z/\\ell^{n+a}\\mathbf Z$. Reduction to level $n$ gives $c_n=0$ for every $n\\ge1$, so $c=0$. Apply this to $c=f(t)$ and $a=b+d$ from Step 2. Thus $f(t)=0$ for all $t\\in T$, whence $f=0$. The isomorphism of Step 1 is injective, so $x=0$. Every fixed compatible system is therefore zero, as asserted.",
+   "uses": [
+    "def-tate-module-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-proper-curve-compatible-h1-no-fixed.proof.md",
+    "place": "Second paragraph: injectivity on the integral dual; expanded as an elementary compatible-residue argument"
+   }
   }
  ],
  "proof_deps": [
   "lem-wf-geometric-jacobian-galois-action",
   "lem-wf-curve-h1-dual-tate-module",
-  "thm-pod-equivariance-of-the-twisted-pairing",
-  "lem-wf-finite-field-tate-no-fixed"
+  "def-weil-frobenius-detailed",
+  "lem-wf-finite-field-tate-no-fixed",
+  "def-wf-abelian-tate-module",
+  "def-tate-module-abelian-group"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-proper-curve-compatible-h1-no-fixed.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-proper-curve-compatible-h1-no-fixed.proof.md",
+  "place": "Both paragraphs; use the existing rational-invertibility clause and explicit fractions instead of determinants"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobenius.*cohomology|cohomology.*frobenius|TateModule",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius invariant compatible first etale cohomology classes on a smooth proper curve over a finite field vanish",
+   "results": "groupCohomology.subtype_comp_d₀₁_apply; Algebra.FormallySmooth.subsingleton_h1Cotangent; FiniteField.Extension.frob; Algebra.FormallyEtale.subsingleton_h1Cotangent; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; Perfection.coeff_frobenius; groupCohomology.H1ofAutOnUnitsUnique; groupCohomology.subtype_comp_d₀₁",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"cohomology\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric Frobenius has no fixed vector on the inverse limit of first etale cohomology with Z modulo ell power coefficients of a smooth projective curve over a finite field",
+   "results": "arithFrobAt; IsArithFrobAt.arithFrobAt; IsArithFrobAt.exists_of_isInvariant; WittVector.StandardOneDimIsocrystal; WittVector.exists_frobenius_solution_fractionRing; groupCohomology.Hilbert90.aux_ne_zero; AlgHom.IsArithFrobAt.apply_of_pow_eq_one; WittVector.instIsocrystalStandardOneDimIsocrystal",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ellAdicCohomology|EllAdicCohomology|tateModule|Tate.module|fixedPoints",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; read Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:63-84: pro-etale cohomology definition and empty-scheme vanishing only, no Frobenius fixed-space theorem or comparison to this ordinary inverse limit.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry/Sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ellAdicCohomology\"",
+   "results": "AlgebraicGeometry.Scheme.EllAdicCohomology; AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology; AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat; read Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:63-84: pro-etale cohomology definition and empty-scheme vanishing only, no Frobenius fixed-space theorem or comparison to this ordinary inverse limit.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first l adic cohomology of a smooth proper curve over a finite field is dual to the Tate module of its Jacobian and Frobenius has no invariants",
+   "results": "FunctionField.classNumber; WittVector.isocrystal_classification; WittVector.instIsocrystalStandardOneDimIsocrystal; Algebra.IsStandardSmooth.subsingleton_h1Cotangent; IsArithFrobAt.exists_of_isInvariant; IsArithFrobAt.arithFrobAt; FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers; arithFrobAt",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -77,5 +152,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-proper-curve-compatible-h1-no-fixed",
+  "worker": "stage1",
+  "summary": "No new nodes. Retained the unit route through the integral Galois-equivariant dual-Tate comparison and the no-fixed Tate theorem. Replaced the matrix/determinant shorthand by its existing rational-invertibility clause, cleared denominators using the fraction equality criterion, and proved the needed torsion-freeness of Z_ell by residues. Made the implicit prime condition, coefficient reductions and geometric Galois action explicit; replaced the rational-only Frobenius definition dependency with the existing scheme-level definition. Removed the redundant pairing theorem, whose compatibility is already in the cited comparison. Recorded actual logged Mathlib searches; no exact Lean attachment.",
+  "blueprint": "The first paragraph of the blueprint proof is Step 1 (same Galois-equivariant dual-Tate comparison, including the inverse Frobenius convention). The second paragraph is Steps 2-3: rational invertibility is already stated by lem-wf-finite-field-tate-no-fixed; fraction equality and compatible residues give the integral conclusion without a finite-free matrix argument. This realizes the proper-curve part of sk-p-real-rankone, Steps 1-2. No chapter or unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-b58442735",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-b58442735 (reviewer sub-agent of L); spot-checked: Read the item, the master/main-20261015 blueprint text (identical; main-20261017 only adds a lean name), the unit sk-p-real-rankone and every cited statement. Statement: matches the blueprint and is not weakened. It makes explicit that ell is prime (blueprint convention, needed by def-tate-module-abelian-group), the ordinary inverse limit, and Phi_Q = g_C^* with g_C = id x Spec(gamma_Q) from def-weil-frobenius-detailed (the blueprint_update keeps the same g_Y). The coefficients are constant finite ones on the small étale site, with no pro-étale identification. Replacing def-tw-frobenius-action (rational-only) in stmt_deps is correct. Step 1: lem-wf-curve-h1-dual-tate-module's hypotheses hold. Its Galois action on H^1 is pullback along id x Spec(sigma) (stated in lem-wf-curve-kummer-jacobian-tate-module) and the dual action is contragredient (its proof step 6), so a Phi_Q-fixed x gives f(sigma_Q t)=f(t) whichever way the action is normalized. Dropping thm-pod-equivariance is justified because the comparison already gives integral equivariance. Step 2: lem-wf-finite-field-tate-no-fixed states that sigma_Q-1 is an automorphism of V_ell J. With V = T[1/ell] (last clause of def-wf-abelian-tate-module) and the fraction-equality criterion (c=0), this gives ell^d((sigma-1)u - ell^b t)=0, hence ell^{b+d}f(t)=0; checked. Step 3: Z_ell has no ell-power torsion by the residue argument (level n+a); correctly marked elementary. Route: the cited lemmas are in the item's unit or in sk-d-real-jacobian, which the unit cites; no tool_uses are needed. The item is not reachable from its own deps (no cycle). A DAG-wide scan of no-fixed statements found no duplicate. There are no new nodes. Searches cover all three kinds. slopmaster2 EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper (Frobenius.lean:297-352) states something different and rests on exists_picTorsionPairing, which is sorry, so it is correctly not attached. No fixes written."
+ }
 }

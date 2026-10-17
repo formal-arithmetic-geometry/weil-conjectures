@@ -21,9 +21,120 @@
   "def-weil-pbc-normal-ring",
   "def-weil-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $c\\in C$, and choose a Zariski open neighbourhood $U$ of $c$ admitting the etale chart in the statement over a nonempty open $\\operatorname{Spec}A\\subseteq T$. This base open is principal: the primes of $V$ are a finite chain, so if the open is proper, choose $f$ in the least excluded prime but outside the greatest included prime; its open is exactly $D(f)$. For the whole base take $f=1$. Thus $A=V_f$, with fraction field $K$. The valuation-ring theorem gives that $V$ is a normal domain, and localization gives the same for $A$.",
+   "uses": [
+    "lem-weil-pbc-valuation-ring-normal",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IC and 00GY; the finite-chain principal-open observation is written out in this step"
+   }
+  },
+  {
+   "text": "Consider a nodal chart $h:U\\to W=\\operatorname{Spec}(A[u,v]/(uv-a))$. If $a=0$ and $h(c)$ lies in $N=V(u,v)\\simeq\\operatorname{Spec}A$, then the image $h(U)$ is open: etale means flat and locally of finite presentation, so apply the open-map theorem. Its intersection with $N$ is a nonempty open subset of the spectrum of the domain $A$, hence contains the generic point $n_\\eta$ of $N$. Choose $z\\in U$ above $n_\\eta$. This is a point of $U_\\eta$, mapping to the node $(u,v)$ of $W_\\eta=\\operatorname{Spec}(K[u,v]/(uv))$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Etale Definition Tag 02GI and flat-locally-finitely-presented openness; the generic-node specialization argument expands the strict-chart normality input of Temkin Proposition 4.3.1"
+   }
+  },
+  {
+   "text": "This point $z$ cannot exist. The generic chart is etale by etale base change, hence flat. On affine neighbourhoods, localization of a flat ring map gives a flat local map\n$H=(K[u,v]/(uv))_{(u,v)}\\to\\mathcal O_{U_\\eta,z}$.\nA flat local map is faithfully flat, and the universally injective theorem with module $H$ makes this map injective. In $H$, $u$ and $v$ are nonzero with product zero: before localization their annihilators are respectively $(v)$ and $(u)$, both contained in $(u,v)$, so no element inverted in $H$ kills either one. On the other hand $U_\\eta$ is an open subscheme of the smooth generic fibre; smoothness is local on the source, and the smooth/geometrically-regular criterion with field extension $K/K$ makes its local rings regular. A regular local ring is a domain. The injective map from $H$ contradicts this. Consequently, when $a=0$, $h(c)$ lies in $D(u)\\cup D(v)$, where the chart is respectively $A[u,u^{-1}]$ or $A[v,v^{-1}]$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT, 00HR, 05CK, 00NP; etale base change is Morphisms Tag 02GO and smoothness/regularity is Varieties Tag 038X. These are exactly the cited generic tools; no Noetherian condition is imposed on A."
+   }
+  },
+  {
+   "text": "For $a\\ne0$ put $B=A[u,v]/(uv-a)$ and $F=\\operatorname{Frac}(A)=K$. Reducing each mixed monomial by $uv=a$ writes every class as $c_0+\\sum_{n>0}c_nu^n+\\sum_{m>0}d_mv^m$, with finitely many coefficients in $A$. Under $u\\mapsto u$, $v\\mapsto a/u$ in $F[u,u^{-1}]$, the summands have distinct Laurent exponents; the negative coefficients are $d_ma^m$, so they vanish only if $d_m=0$. This proves injectivity and uniqueness of that normal form. Thus $B$ is a domain, and in $\\operatorname{Frac}(B)=F(u)$ its localizations at $u$ and $v$ are $A[u,u^{-1}]$ and $A[v,v^{-1}]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, pp. 27--28, strict semistable chart input; explicit monomial reduction supplied by the agent (archival copy WANTED)"
+   }
+  },
+  {
+   "text": "The polynomial-normality and localization theorems make $B_u=A[u,u^{-1}]$ and $B_v=A[v,v^{-1}]$ normal domains. Inside $F(u)$ their intersection is $B$: write an element of $B_u$ as $\\sum_n c_nu^n$, $c_n\\in A$. Membership in $B_v$ says that the coefficients after substituting $u=a/v$, namely $c_na^n$, belong to $A$. In particular, for $n=-m<0$, $c_{-m}/a^m\\in A$, so the negative term is $(c_{-m}/a^m)v^m$; the nonnegative terms are already in $A[u]$. Hence the element belongs to the normal form of step 4. Conversely $B$ lies in both localizations. An element of $\\operatorname{Frac}(B)$ integral over $B$ is integral over both localizations, therefore belongs to both by their normality, and so belongs to their intersection $B$. Thus $B$ is integrally closed; localization makes every $B_{\\mathfrak p}$ an integrally closed domain. This is a normal ring by the definition.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-normal-domain",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030A and 00GY; the Laurent coefficient comparison and monic-polynomial argument are written out, rather than cited as a new chart theorem"
+   }
+  },
+  {
+   "text": "The polynomial chart $A[t]$ is a normal domain by polynomial normality, and is a normal ring because all its prime localizations are normal domains. The Laurent charts obtained in step 3 are normal for the same reason, using localization. The nonzero-parameter nodal chart is normal by steps 4--5. In all cases, after restricting $U$ to the inverse image of the indicated chart open containing $h(c)$ and then to an affine open neighbourhood of $c$, its coordinate ring is etale over the corresponding normal chart ring. Etale ascent of normality makes this coordinate ring normal. By the definition of a normal ring its localization at $c$, which is $\\mathcal O_{C,c}$ because $U$ is Zariski open in $C$, is an integrally closed domain.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-normal-domain",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030A, 00GY and 033C (normality goes up along smooth maps, hence along etale maps); the latter is valid without Noetherian hypotheses, unlike Tag 025P"
+   }
+  },
+  {
+   "text": "Since $c$ was arbitrary, every local ring of $C$ is an integrally closed domain, giving normality. If an element of such a local ring is nilpotent, repeated use of the absence of zero divisors makes it zero. Thus every local ring is reduced, which is exactly the definition of a reduced scheme.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, end of first paragraph, pp. 27--28; the reducedness consequence is elementary"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-normal-ring",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-valuation-ring-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 4.3.1, proof, end of first paragraph, pp. 27--28 (normality input). Agent supplies the strict-chart proof using the cited Stacks tools and the explicit Laurent coefficient calculation. Local archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +170,31 @@
    "results": "8 hits; top: WeierstrassCurve.instIsIntegralOfIsMinimal, WeierstrassCurve.IsMinimal, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, WeierstrassCurve.IsGoodReduction, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc; digest=5cf65df7d472cea9. Normalization construction and valuation-ring integral-closure hits do not prove normality of the given nodal total space. Weierstrass integrality and good reduction concern a different object; none states this result.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strictly semistable curve over a finite-height valuation ring with smooth generic fibre is normal",
+   "results": "8 hits; top: WeierstrassCurve.IsMinimal, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.instIsIntegralOfIsMinimal, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.valuation_Δ_aux, WeierstrassCurve.IsGoodReduction.goodReduction, WeierstrassCurve.isGoodReduction_iff, WeierstrassCurve.exists_isMinimal; digest=28316e61e50ff28e.  No hit states normality of this semistable total space. Weierstrass minimality/good-reduction results and normalization constructions have different conclusions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, IsNormal, Scheme.Etale",
+   "results": "0 hits; top: none; digest=4f53cda18c2baa0c. loogle: unknown identifier 'IsNormal' No hit states normality of this semistable total space. Weierstrass minimality/good-reduction results and normalization constructions have different conclusions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strictly semistable curve over a finite-height valuation ring with smooth generic fibre is normal",
+   "results": "8 hits; top: WeierstrassCurve.IsIntegral, WeierstrassCurve.instIsIntegralOfIsMinimal, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, WeierstrassCurve.IsGoodReduction.congr_simp, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, WeierstrassCurve.integralModel, WeierstrassCurve.isGoodReduction_iff, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; digest=7d7663588fd77cad.  No hit states normality of this semistable total space. Weierstrass minimality/good-reduction results and normalization constructions have different conclusions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-strict-semistable-cofinality",
@@ -74,7 +206,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.1, pp. 27--29; forgetting that the dominating modification is a blow-up; Proposition 4.3.1, proof, end of first paragraph, pp. 27--28: normality of semistable curves with smooth generic fibre, restricted to the strict case",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin 2010, Proposition 4.3.1, proof, end of the first paragraph, pp. 27--28, where normality of semistable curves with smooth generic fibre is invoked for the strict case.",
    "via": [
     "lem-trf-valuation-strict-semistable-cofinality",
     "lem-trf-valuation-stable-reduction",
@@ -90,5 +222,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-strict-semistable-model-normal",
+  "worker": "stage1",
+  "summary": "Preserved the statement and blueprint ancestry. Expanded strict-chart normality using existing valuation, polynomial, localization and etale-ascent nodes. Explicitly excluded the zero-parameter node by openness, faithful flatness and regularity of the smooth generic fibre; proved the nonzero-parameter chart by a monomial normal form and intersection of two normal Laurent polynomial rings. No new nodes or Mathlib leaves: the coefficient calculation is elementary from the cited normality statements. No Lean attachment found.",
+  "blueprint": "Temkin Proposition 4.3.1, proof, end of first paragraph (pp. 27--28): normality of semistable curves with smooth generic fibre, restricted to strict charts.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic local algebra/geometry input in steps 3; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic local algebra/geometry input in steps 6; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic local algebra/geometry input in steps 3; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
+    "why": "Generic local algebra/geometry input in steps 3; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic local algebra/geometry input in steps 2; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic local algebra/geometry input in steps 3; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-ring-maps",
+    "why": "Generic local algebra/geometry input in steps 3; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "why": "Generic local algebra/geometry input in steps 3; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic local algebra/geometry input in steps 1, 5, 6; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-normal-domain",
+    "why": "Generic local algebra/geometry input in steps 5, 6; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic local algebra/geometry input in steps 3; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic local algebra/geometry input in steps 1; no node of the curve-zero unit replaces this tool. The exact statement is checked in report.md and quoted in citations.json."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-valuation-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-9e97b1718",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-9e97b1718 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is byte-identical to the live new-targets copy. The source checks out: Temkin arXiv:0707.3953v3, §4.3 p.27 defines strictly semi-stable, and the end of the first paragraph of the proof of Prop 4.3.1 (pp.27-28) uses exactly this normality. I read every cited node's statement: 00IC, 00GY, 030A, 02GO, 00HT, 00HR, 05CK (N=H), 01V6, 038X (L=K), 00NP, and 033C, which needs no Noetherian hypothesis, as a possibly non-Noetherian V requires. Each step checks. Step 1: a nonempty open of a finite chain is D(f) with f in p_{k+1} minus p_k, so A=V_f is a normal domain. Steps 2-3: if a=0 and h(c) lies on the node line, openness of h(U) gives a point z over the generic node. A faithfully flat, hence injective, map from (K[u,v]/(uv))_{(u,v)}, where Ann(u)=(v) and Ann(v)=(u) so u,v stay nonzero, cannot land in a regular local domain of the smooth generic fibre. So when a=0, h(c) lies in a Laurent chart. Steps 4-5: for a nonzero, the normal-form embedding into F[u,u^-1] works, and B_u ∩ B_v = B because a^m divides c_{-m]. I re-derived both, so B is normal. Step 6: the ascent uses a Zariski-open affine and 033C. Step 7: reducedness follows from the definition. Edge cases checked: C empty, V=K, a a unit, a=0 away from the node, disconnected etale charts. There are no new nodes. No DAG or blueprint duplicate turned up from rg on semistable, uv-a, Laurent and normal. There is no cycle, and the only citer is cofinality. No SGA is used. I accept the generic tool_uses from other units (sk-thm-p1, sk-thm-properbasechange, sk-prop-sf-cbc, sk-thm-picard-duality). Minor and not faults: blueprint.from.place was shortened but still names the exact Temkin sentence, and the report mentions a citations.json that is not in the commit. No fixes."
  }
 }

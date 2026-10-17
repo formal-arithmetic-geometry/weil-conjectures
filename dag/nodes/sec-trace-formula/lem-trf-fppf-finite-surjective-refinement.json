@@ -18,9 +18,137 @@
   "def-weil-open-immersion",
   "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-fppf-integral-surjective-refinement] to the given fppf covering. This gives an integral surjection $q:Y\\to X$ and open subschemes $W_\\alpha$ covering $Y$, each equipped with an $X$-morphism $h_\\alpha:W_\\alpha\\to X_{i(\\alpha)}$. The lemma applies to the full small family; no quasi-compactness of the $X_i$ is required.",
+   "uses": [
+    "lem-trf-fppf-integral-surjective-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  },
+  {
+   "text": "An integral morphism is affine by [def-weil-finite-integral-morphism]. Thus $q$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence](3), and $Y$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](2), since $X$ is so. By [lem-weil-pbc-affine-opens-basis], for every $y\\in W_\\alpha$ choose an affine open neighbourhood contained in $W_\\alpha$. These form an open cover of $Y$; quasi-compactness [def-weil-pbc-quasi-compact-scheme] selects finitely many, denoted $V_1,\\ldots,V_r$. Each $V_j$ lies in one selected $W_{\\alpha(j)}$; restrict $h_{\\alpha(j)}$ to obtain an $X$-morphism $a_j:V_j\\to X_{i(j)}$. In particular, each $V_j$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-integral-morphism-limit-of-finite] on $q$ to write $Y=\\varprojlim_\\lambda Y_\\lambda$ as an inverse system over a nonempty directed set, with projections $\\pi_\\lambda:Y\\to Y_\\lambda$, affine transition maps, and finite finitely presented structure morphisms $p_\\lambda:Y_\\lambda\\to X$, satisfying $p_\\lambda\\circ\\pi_\\lambda=q$. Each $Y_\\lambda$ is quasi-compact and quasi-separated: finiteness implies affineness by [def-weil-finite-integral-morphism], affine morphisms are quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence](3), and [lem-weil-pbc-qcqs-morphism-permanence](2) applies over $X$.",
+   "uses": [
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [pqf-lem-limit-qc-open-descends] to each quasi-compact open $V_j\\subset Y$. A common upper bound of the finitely many resulting indices gives a stage $\\lambda_0$ with quasi-compact opens $V_{\\lambda_0,j}\\subset Y_{\\lambda_0}$ whose inverse images are $V_j$. Quasi-compactness is preserved when moving to this common stage by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open], since transition maps are affine and hence quasi-compact by [lem-weil-pbc-affine-morphism-permanence](3). For $\\lambda\\ge\\lambda_0$ let $V_{\\lambda,j}$ be the inverse image of $V_{\\lambda_0,j}$. Clause (3) of [pqf-lem-limit-qc-open-descends] exhibits $V_j=\\varprojlim_{\\lambda\\ge\\lambda_0}V_{\\lambda,j}$ with quasi-compact stages and affine transitions. The stages are also quasi-separated: the affine opens of the open subscheme $V_{\\lambda,j}$ cover it by [lem-weil-pbc-affine-opens-basis], and they are affine opens of the ambient scheme $Y_\\lambda$, so their intersections are quasi-compact by clause (1) of [lem-weil-pbc-quasi-separated-affine-cover-criterion], and clause (2) gives the assertion.",
+   "uses": [
+    "pqf-lem-limit-qc-open-descends",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  },
+  {
+   "text": "The descended opens must still form a covering after increasing the stage. Set $B_{\\lambda_0}=\\bigcup_{j=1}^rV_{\\lambda_0,j}$. This is a quasi-compact open, since from any open cover of this finite union one selects a finite subcover on each of its finitely many quasi-compact constituents [def-weil-pbc-quasi-compact-scheme]. Both $B_{\\lambda_0}$ and $Y_{\\lambda_0}$ have inverse image $Y$ in the limit, because the $V_j$ cover $Y$. Apply the eventual-equality clause (2) of [pqf-lem-limit-qc-open-descends] to these two opens. At some $\\lambda_1\\ge\\lambda_0$ their inverse images agree, so $Y_{\\lambda_1}=\\bigcup_jV_{\\lambda_1,j}$. Every later stage also has this covering, by taking inverse images.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  },
+  {
+   "text": "For each $j$, the target $X_{i(j)}\\to X$ is locally of finite presentation by the given fppf-covering hypothesis [def-pc-fppf-site]. Apply [lem-weil-pbc-finite-presentation-map-limit-factorization] over the fixed base $X$ to the restricted limit $V_j=\\varprojlim_{\\lambda\\ge\\lambda_0}V_{\\lambda,j}$ from step 4 and the map $a_j$. Its hypotheses hold: these stages are quasi-compact and quasi-separated, their transitions are affine, and $a_j$ is an $X$-morphism. Hence for some $\\mu_j\\ge\\lambda_0$ there is an $X$-morphism $b_j:V_{\\mu_j,j}\\to X_{i(j)}$ whose pullback along the limit projection is $a_j$. This uses only local finite presentation of the target, not quasi-compactness or quasi-separatedness of $X_{i(j)}$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  },
+  {
+   "text": "Choose a common upper bound $\\lambda$ of $\\lambda_1$ and all the finitely many $\\mu_j$, and put $X'=Y_\\lambda$, $p=p_\\lambda$ and $U'_j=V_{\\lambda,j}$. The maps $U'_j\\to V_{\\mu_j,j}\\xrightarrow{b_j}X_{i(j)}$ are $X$-morphisms; the first map is the restricted transition morphism. The opens $U'_j$ cover $X'$ by step 5. Finiteness and finite presentation of $p$ are the properties already supplied in step 3. For every $x\\in X$ choose $y\\in Y$ with $q(y)=x$; then $p(\\pi_\\lambda(y))=x$, so $p$ is surjective [def-weil-surjective-morphism]. This proves all conclusions, with the finite and hence small index set $\\{1,\\ldots,r\\}$.",
+   "uses": [
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  },
+  {
+   "text": "If $X$ is empty, take $X'=X$ and $p=\\operatorname{id}_X$ with the empty open covering. The identity is finite (on every affine chart its coordinate algebra is generated by $1$ as a module), finitely presented (the algebra presentation has no generators or relations), and surjective; its diagonal is an isomorphism, so the quasi-separatedness in finite presentation also holds [def-weil-finite-integral-morphism, def-weil-pbc-scheme-conventions, def-weil-surjective-morphism]. There are no indices or lift maps to choose. Thus an empty original indexing set causes no exception: joint surjectivity then forces $X$ empty [def-pc-fppf-site]. All other constructions take place in the size convention [def-weil-size-convention], enlarging the auxiliary universe if necessary, and the delivered open cover is finite. No flatness of $p$ has been used.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-surjective-morphism",
+    "def-pc-fppf-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-integral-surjective-refinement",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "pqf-lem-limit-qc-open-descends",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CP0, lemma-dominate-fppf-finite, proof; the persistence of the covering is made explicit using the eventual-equality part of Limits Tag 01Z4."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +184,38 @@
    "results": "{\"t\": \"2026-10-17T19:28:53Z\", \"tool\": \"leanfinder\", \"query\": \"Given jointly surjective flat locally finitely presented morphisms over a qcqs scheme, find a finite surjective finitely presented morphism with open local lifts to the covering family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"334f4b5b09f12e9d\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits define fppf precoverage, quasi-compact coverings, flat ranks, or descent of morphism properties; none constructs a finite surjection with open local lifts to an arbitrary fppf covering."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*(finite|refin)|finite.*fppf",
+   "results": "{\"t\": \"2026-10-17T19:44:00Z\", \"tool\": \"grep\", \"query\": \"fppf.*(finite|refin)|finite.*fppf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"9b6318529c40d415\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern quasi-compact covers, precoverages, surjectivity definitions and descent; none constructs finite surjective finitely presented local lifts to a general fppf covering."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Find a finite surjective finitely presented scheme over a qcqs scheme whose Zariski covering refines a given fppf covering",
+   "results": "{\"t\": \"2026-10-17T19:44:01Z\", \"tool\": \"leansearch\", \"query\": \"Find a finite surjective finitely presented scheme over a qcqs scheme whose Zariski covering refines a given fppf covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.Scheme.Cover.sigma\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Hom.cover_f\", \"AlgebraicGeometry.Scheme.Hom.cover\", \"AlgebraicGeometry.Surjective.mk\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.zariskiPretopology\"], \"digest\": \"9ee6a4d2353e7437\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern quasi-compact covers, precoverages, surjectivity definitions and descent; none constructs finite surjective finitely presented local lifts to a general fppf covering."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Surjective",
+   "results": "{\"t\": \"2026-10-17T19:44:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern quasi-compact covers, precoverages, surjectivity definitions and descent; none constructs finite surjective finitely presented local lifts to a general fppf covering."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf covering of a quasi compact quasi separated scheme is dominated by a finite surjective morphism of finite presentation with open local lifts",
+   "results": "{\"t\": \"2026-10-17T19:44:08Z\", \"tool\": \"leanfinder\", \"query\": \"An fppf covering of a quasi compact quasi separated scheme is dominated by a finite surjective morphism of finite presentation with open local lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\"], \"digest\": \"1d016ab5c98d56a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern quasi-compact covers, precoverages, surjectivity definitions and descent; none constructs finite surjective finitely presented local lifts to a general fppf covering."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-affine-standard-sieve-basis",
@@ -87,5 +243,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-finite-surjective-refinement",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Followed 0CP0 through the integral local-lift input 0CNZ, the existing 09YZ finite-presentation approximation, descent of quasi-compact opens, eventual equality to descend the covering, and local-finite-presentation factorization of maps. Created only the statement-only integral-refinement input; reused the closed approximation and Mathlib leaves for all limit and permanence tools. Checked the empty case and all source/target quasi-compactness hypotheses.",
+  "blueprint": "Realizes the auxiliary 0CP0 step of lem-trf-ph-affine-standard-sieve-basis under the existing ancestry of lem-trf-local-term-locality: constructs finite surjections with open local lifts for the ph/etale comparison, following the Stacks route already requested. The unit and chapter are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-7cc05cce6",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-7cc05cce6 (reviewer sub-agent of L); spot-checked: I read the whole delivery against more-morphisms.tex 0CP0 and 0CNZ (lemma-dominate-fppf-finite and lemma-dominate-fppf-integral, about lines 13700-13791). The item statement matches 0CP0 hypothesis by hypothesis, with no weakening. The new statement-only node lem-trf-fppf-integral-surjective-refinement matches 0CNZ exactly: any base scheme, an integral surjection with open local lifts. Small cases (empty X with empty or nonempty I, an identity cover, k to k^{1/p}) all hold. It is not a restated clause of the item and has no duplicate in the DAG (searched for 0CNZ, 0CP0, 05WN, dominate-fppf, integral surjective, fppf refine). No Lean declaration exists in slopmaster2 to attach. Step checks: step 2 gets Y qcqs from integral => affine => qc and separated, plus qcqs permanence (2). Step 3 uses the limit-of-finite node (09YZ, Lean-closed), whose hypotheses hold and which gives p_l o pi_l = q. Step 4 uses clauses (1) and (3) of pqf-lem-limit-qc-open-descends on qcqs stages with affine transitions, keeps quasi-compactness at the common stage through the preimage-qc-open node, and does not claim the descended opens are affine. Step 5 applies clause (2) with i=i' to the finite union and the whole stage, so the cover persists at later stages. Step 6 checked against Mathlib AffineTransitionLimit.lean:1232-1237: it needs only the targets X_i to be locally of finite presentation over X. Step 7 gets surjectivity pointwise from p_l(pi_l(y)) = q(y). Step 8 handles the empty case. All off-unit dependencies are Mathlib leaves or Lean-closed, so no tool_uses are needed. One fault, repaired: step 4's quasi-separatedness argument needs the open V_{l,j} to be covered by its affine opens, but step 4 did not cite lem-weil-pbc-affine-opens-basis. I added that citation to step 4 (the id was already in proof_deps). The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-fppf-finite-surjective-refinement.json; the statement and the other steps are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
