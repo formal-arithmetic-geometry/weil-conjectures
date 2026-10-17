@@ -187,5 +187,23 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-eb4e3007a (reviewer sub-agent of L); spot-checked: I read the item, the source and every cited node in full. Source: Stacks curves.tex lines 3816–3849, lemma-reduced-quotient-regular-ring-dim-2; tags/tags line 15218 confirms it is Tag 0C48. The item states exactly the first paragraph of that proof: a regular local ring of dimension 2, generators whose only common divisors are units, and the conclusion J=A or sqrt J = n. It is not weakened and is unchanged from the base. Step 1 uses only the statement of lem-trf-regular-local-ufd-boundary-factorization with the empty sublist (r=0 is allowed); that statement gives a Noetherian UFD domain. The step also shows J is nonzero: an empty or all-zero list would make 0 a common divisor, hence a unit, which is impossible. Step 2 is genuinely elementary: a nonmaximal prime above J with a nonzero prime strictly below it would give a chain 0<q<p<n of length 3, contradicting the definition of dimension in def-weil-pbc-krull-dimension-ring; so the prime has height one in exactly the sense used by lem-trf-ufd-height-one. Step 3 applies the (i)=>(ii) direction of lem-trf-ufd-height-one (a Mathlib leaf, Stacks 0AFT); its Noetherian-domain hypotheses come from Step 1. The prime is then principal, its generator is a unit, and that is a contradiction. Step 4 applies lem-weil-pbc-zero-locus-eq-iff-radical-eq (a Mathlib leaf, Stacks 00E0(7)) to V(J)={n} to get sqrt J = n. proof_deps equals the union of the steps' uses. Route: the two statement citations are in the unit sk-i-curve-zero; the off-unit citations are two definition nodes and one Mathlib leaf. No tool_uses are needed and none were accepted; there is no SGA citation. The item's dependency closure (135 nodes) does not contain the item, so there is no cycle. The only citer, lem-trf-regular-surface-depth-one-principal, uses both alternatives consistently with the statement. A whole-DAG search for 0C48 and its label, 'height one prime', gcd and 'common divisor' found no duplicate or generalization. There are no new nodes. Small cases in k[[x,y]]: (x,y) and (x^2,y^2) have radical n, (x,1+y) is A, (x^2,xy) and a single nonunit break the hypothesis, and in dimension 3 the ideal (x,y) shows the dimension-2 hypothesis is needed. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-eb3d403a5",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, report sections, and absence of prohibited machinery checked. Per-file scompile.py verification succeeded with server confirmation; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CoprimeGeneratorsMprimaryOrUnit",
+  "declaration": "RingTheory.coprimeGeneratorsMprimaryOrUnit",
+  "statement": "theorem coprimeGeneratorsMprimaryOrUnit (A : Type u) [CommRing A] [IsRegularLocalRing A] (hdim : ringKrullDim A = (2 : WithBot ℕ∞)) (r : ℕ) (g : Fin r → A) (hdiv : ∀ d : A, (∀ i : Fin r, d ∣ g i) → IsUnit d) : Ideal.span (Set.range g) = ⊤ ∨ (Ideal.span (Set.range g)).radical = IsLocalRing.maximalIdeal A",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/CoprimeGeneratorsMprimaryOrUnit.lean"
  }
 }
