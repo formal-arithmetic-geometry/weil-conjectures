@@ -67,7 +67,8 @@ lemma isEmpty_of_comp_eq {W : X.Etale} {i j : ι} (hij : i ≠ j) (a : W ⟶ T i
 
 variable {A : Type u'} [Category.{u + 1} A] {FA : A → A → Type*} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)] (G : Sheaf X.smallEtaleTopology A)
+  [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+  (G : Sheaf X.smallEtaleTopology A)
 
 omit hc in
 lemma subsingleton_of_isEmpty {W : X.Etale} (hW : IsEmpty W.left) :

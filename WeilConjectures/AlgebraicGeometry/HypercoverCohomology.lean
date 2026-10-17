@@ -135,7 +135,8 @@ theorem hypercover_cohomology (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparat
           terminalIsTerminal).symm q
     · exact Functor.isoWhiskerRight
         (Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
-          (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u₁ + 1}).rightDerivedFunctorPlusCompatibility.symm)
+          (Sheaf.Γ X.smallEtaleTopology
+            AddCommGrpCat.{u₁ + 1}).rightDerivedFunctorPlusCompatibility.symm)
         (DerivedCategory.homologyFunctor AddCommGrpCat.{u₁ + 1} (q : ℤ)) ≪≫
           (Sheaf.Γ X.smallEtaleTopology
             AddCommGrpCat.{u₁ + 1}).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q

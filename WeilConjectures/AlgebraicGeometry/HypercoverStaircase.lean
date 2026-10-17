@@ -121,7 +121,8 @@ def SuppGE (U : SplitEtaleHypercover X) (n k : ℕ) (x : ToType (U.totObj L n)) 
 
 include hA in
 lemma stair_step (hL : LocallyExactPos L) (U : FiniteSplitEtaleHypercover X) (k b m : ℕ)
-    (hm : k + b = m) (x : ToType (U.totObj L (m + 1))) (hx : SuppGE L U.toSplitEtaleHypercover (m + 1) k x)
+    (hm : k + b = m) (x : ToType (U.totObj L (m + 1)))
+    (hx : SuppGE L U.toSplitEtaleHypercover (m + 1) k x)
     (hd : U.totπ L k (b + 2) (m + 2) (by omega) (U.totD L (m + 1) x) = 0) :
     ∃ (V : FiniteSplitEtaleHypercover X) (f : V.Refinement U) (y : ToType (V.totObj L m)),
       SuppGE L V.toSplitEtaleHypercover (m + 1) (k + 1) (totMapF L f (m + 1) x - V.totD L m y) := by

@@ -82,7 +82,8 @@ variable (Free : Type (u + 1) ⥤ A) (adj : Free ⊣ CategoryTheory.forget A)
 
 include hA adj hfin
 
-lemma rows_of_injective (U : SplitEtaleHypercover X) (L : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ)
+lemma rows_of_injective (U : SplitEtaleHypercover X)
+    (L : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ)
     [∀ r, Injective (L.X r)] :
     (∀ r, Function.Injective (U.resTop (L.X r) 0)) ∧
       (∀ r (s : ToType (U.dObj L 0 r)), U.dHor L 0 r s = 0 →
@@ -241,7 +242,8 @@ lemma cmap_surjective (F : Sheaf X.smallEtaleTopology A)
     have hm := HomologicalComplex.IsCls.map _
       (U₀.toSplitEtaleHypercover.totRow (resι I) (resι_d I)) hx
     rw [hwt] at hm
-    rw [(HomologicalComplex.IsCls.eq_iff hA _ 0 0 (by simp) hm ht).2 ⟨0, by rw [map_zero, sub_self]⟩]
+    rw [(HomologicalComplex.IsCls.eq_iff hA _ 0 0 (by simp) hm ht).2
+      ⟨0, by rw [map_zero, sub_self]⟩]
     exact iso_inv_hom_apply hA _ y₀
   | succ m =>
     obtain ⟨V, f, w, y', hw0, hwt⟩ := exists_refinement_totRow_eq I.cocomplex hA (resι I)

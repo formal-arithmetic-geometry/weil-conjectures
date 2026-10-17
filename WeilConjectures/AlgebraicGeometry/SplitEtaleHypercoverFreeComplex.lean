@@ -477,7 +477,7 @@ theorem quasiIso_augmentation :
         · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
           rfl
         · rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
-          first | exact h | exact h.symm
+          exact h
       · change Epi ((AlgebraicTopology.AlternatingFaceMapComplex.ε.app
           ((SimplicialObject.Augmented.whiskeringObj X.Etale _ (freeSheaf Free)).obj
             (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))).f 0)

@@ -54,7 +54,9 @@ lemma totD_totπ_zero (r n : ℕ) (h : r = n) :
   · subst h₁
     obtain rfl : b = r := by omega
     simp
-  · rw [dif_neg (by simp only [Prod.mk.injEq]; omega), dif_neg (by simp only [Prod.mk.injEq]; omega), dif_neg (by simp only [Prod.mk.injEq]; omega)]
+  · rw [dif_neg (by simp only [Prod.mk.injEq]; omega),
+      dif_neg (by simp only [Prod.mk.injEq]; omega),
+      dif_neg (by simp only [Prod.mk.injEq]; omega)]
     simp
 
 lemma totD_totπ_succ_zero (p n : ℕ) (h : p = n) :
@@ -68,7 +70,9 @@ lemma totD_totπ_succ_zero (p n : ℕ) (h : p = n) :
   · subst h₁
     obtain rfl : b = 0 := by omega
     simp
-  · rw [dif_neg (by simp only [Prod.mk.injEq]; omega), dif_neg (by simp only [Prod.mk.injEq]; omega), dif_neg (by simp only [Prod.mk.injEq]; omega)]
+  · rw [dif_neg (by simp only [Prod.mk.injEq]; omega),
+      dif_neg (by simp only [Prod.mk.injEq]; omega),
+      dif_neg (by simp only [Prod.mk.injEq]; omega)]
     simp
 
 lemma totD_totπ_succ_succ (p s n : ℕ) (h : p + s + 1 = n) :
@@ -89,7 +93,9 @@ lemma totD_totπ_succ_succ (p s n : ℕ) (h : p + s + 1 = n) :
       obtain rfl : b = s := by omega
       rw [dif_neg (by simp), dif_pos rfl, dif_neg (by simp), dif_pos rfl]
       simp
-    · rw [dif_neg (by simp only [Prod.mk.injEq]; omega), dif_neg (by simp only [Prod.mk.injEq]; omega), dif_neg (by simp only [Prod.mk.injEq]; omega),
+    · rw [dif_neg (by simp only [Prod.mk.injEq]; omega),
+        dif_neg (by simp only [Prod.mk.injEq]; omega),
+        dif_neg (by simp only [Prod.mk.injEq]; omega),
         dif_neg (by simp only [Prod.mk.injEq]; omega)]
       simp
 
