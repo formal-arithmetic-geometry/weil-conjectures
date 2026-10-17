@@ -82,9 +82,17 @@ instance preservesFiniteColimits_sheafForget₂ : PreservesFiniteColimits (sheaf
 abelian group preserves monomorphisms, `Λ` being flat over `ℤ`. -/
 lemma preservesMonomorphisms_extendScalarsAddCommGrp [IsAddTorsionFree Λ] :
     (ModuleCat.extendScalarsAddCommGrp Λ).PreservesMonomorphisms := by
-  -- TODO(qbar): `Λ ⊗_ℤ -` is exact (Λ torsion free, hence flat over `ℤ`); the obstacle is the
-  -- `Module ℤ` instance diamond (`Algebra.toModule` vs `AddCommGroup.toIntModule`).
-  sorry
+  have : (ModuleCat.extendScalars.{0, u + 1, u + 1} (Int.castRingHom Λ)).PreservesMonomorphisms :=
+    ⟨fun {M N} f hf ↦ by
+      rw [ModuleCat.mono_iff_injective] at hf ⊢
+      have hflat (inst : Module ℤ Λ) : Module.Flat ℤ Λ := by
+        obtain rfl := Subsingleton.elim inst (AddCommGroup.toIntModule Λ)
+        infer_instance
+      letI : Module ℤ Λ := Module.compHom Λ (Int.castRingHom Λ)
+      have := hflat this
+      exact Module.Flat.lTensor_preserves_injective_linearMap (M := Λ) f.hom hf⟩
+  unfold ModuleCat.extendScalarsAddCommGrp
+  infer_instance
 
 /-- Extension of scalars `Λ ⊗_ℤ -` from abelian pro-étale sheaves to sheaves of `Λ`-modules. -/
 noncomputable abbrev sheafExtendScalarsAddCommGrp :
