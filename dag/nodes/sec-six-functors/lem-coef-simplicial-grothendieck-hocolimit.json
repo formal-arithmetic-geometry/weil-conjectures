@@ -259,5 +259,33 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-cf2017a33 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited statement (simplicial-inversion-universal-property, kan-quillen-right-proper, quillen-derived-counit-criterion, plus the reedy and interval-lifting conventions). I checked them against HTT §A.3.5 (Notation A.3.5.1 through Lemma A.3.5.13, printed pp.891-896), read verbatim from a local copy. The item's statement is unchanged and matches Definition A.3.5.11 and Lemma A.3.5.13. Step 2: E_{<=a} is exactly the mapping cylinder M_{f_a}; I recomputed its mapping sets and composition. Step 3: the cylinder node's (i) and (ii) hold for r_a and W_a, and naturality holds on the attached K copies. Step 4: vertex lifts come from the n=0 boundary-lifting clause, and invariance uses the same label set. Step 5: the projective lifting is a correct free cell attachment at each label's target grade. Step 6: the colimit gluing needs no filteredness. Step 7: colim -| const is Quillen; LL can be computed from any weak equivalence with cofibrant source, and the node's equivalence clause is not used. Step 9: the strict cocone equality Gbar.l = c.rho holds, giving the comparison for any T. Steps 10-11 (naturality, empty A) are correct. The new nodes are HTT A.3.5.1-2 (strict interval-attachment model; true by left properness), A.3.5.9 (filtered cofibrant resolution, all three clauses) and A.3.5.6 (mapping-cylinder localization, (i) and (ii) exact). I tested them on small cases: identity labels, V empty, C=D=*, a free monoid with D=*, A empty. They are statement-only and self-contained, and created/blueprint/same_as are correct. A grep of the whole DAG and the blueprint found no duplicates, and none restates a clause of the item. Everything cited is in the same unit, the graph is acyclic, no tool_uses are needed, and no SGA is cited. HTT stays WANTED, as for the accepted inversion node. Remark: the future split of the attachment node needs left properness of sCat, and lem-coef-scat-bergner-left-proper-pushouts currently reaches this item, so that split needs a proof independent of the coherent nerve (HTT A.3.2.4). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialGrothendieckHocolimit",
+  "declaration": "CategoryTheory.SimplicialGrothendieck.simplicial_grothendieck_hocolimit",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialGrothendieckHocolimit.lean",
+  "statement": "theorem simplicial_grothendieck_hocolimit (A : Type u) [PartialOrder A] (B : BergnerModelData.{u}) (R : Replacement (A := A) B) : ∃ (G : (A ⥤ SCat.{u}) ⥤ Pair.{u}) (D : ∀ p : A ⥤ SCat.{u}, TotalCoordinates p (G.obj p)), NaturalCoordinates G D ∧ ∀ L : LocalizationSystem B, ∃ θ : G ⋙ L.functor ⋙ bergnerHomotopyFunctor ≅ R.H ⋙ bergnerHomotopyFunctor, CoconeNaturality G D L ∧ ∀ (p : A ⥤ SCat.{u}) (c : Cocone p), ∃ F : (G.obj p).category ⟶ c.pt, CoconeCoordinates (D p) c F ∧ (∀ (x y : underlying (G.obj p).category) (f : x ⟶ y), (G.obj p).marked f → ∃ e : @Eq (underlying c.pt) (F.obj x) (F.obj y), F.forget.map f = eqToHom e) ∧ ∃! d : bergnerHomotopyFunctor.obj (L.functor.obj (G.obj p)) ⟶ bergnerHomotopyFunctor.obj c.pt, bergnerHomotopyFunctor.map (L.unit.app (G.obj p)) ≫ d = bergnerHomotopyFunctor.map F ∧ (θ.hom.app p) ≫ bergnerHomotopyFunctor.map (coconeComparison R c) = d",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SimplicialGrothendieck.mapping",
+   "CategoryTheory.SimplicialGrothendieck.TotalCoordinates",
+   "CategoryTheory.SimplicialGrothendieck.NaturalCoordinates",
+   "CategoryTheory.SimplicialGrothendieck.CoconeCoordinates",
+   "CategoryTheory.SimplicialGrothendieck.Replacement",
+   "CategoryTheory.SimplicialGrothendieck.coconeComparison",
+   "CategoryTheory.SimplicialGrothendieck.CoconeNaturality",
+   "CategoryTheory.SimplicialGrothendieck.simplicial_grothendieck_hocolimit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-380d7f5e1",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read node (only lean field differs from clone), module, report (Worker report + Second reading by Q69 present), dependency lem-coef-simplicial-inversion-universal-property and the exact declarations BergnerModelData (W=DK, classes characterized), Pair, LocalizationSystem/Presentation, IsBergnerHomotopyPushout, bergnerHomotopyFunctor. All clauses match HTT A.3.5.10-13 and the node: mapping SSet empty iff a not<= b; TotalCoordinates fixes identities, composition via p_bc then fiber composition, transition identity vertices and marking exactly; projective model with objectwise W/Fib as hypothesis; replacement colimit pinned by IsColimit; natural iso theta in hsCat; strict cocone functor pinned by coordinates sending W to eqToHom identities; derived map = theta followed by the actual colimit comparison; CoconeNaturality covers diagram/cocone/target maps; A empty and empty fibers covered. Single universe u, statement verbatim, 8 declarations listed, docstrings with source and blueprint and 10-step proof, single sorry, no hollow defs; deferred proof imports correct (3 proof-deps lack Lean records); no duplicate notion (TwoSidedSimplicialGrothendieck, ProjectiveSimplicialModelStructure and EnhancedDiagramsCones.hocolim are different notions). nt_compile.py --json on side overlay: exit 0, no errors or warnings. Non-blocking remarks: functorial replacement taken as data (exists, universally quantified); second reading was a self-review."
  }
 }
