@@ -2,7 +2,7 @@
  "id": "lem-trf-finite-singleton-fibre-stalk-ring",
  "kind": "statement",
  "title": "Finite local-ring map at a singleton fibre of a finite morphism",
- "statement": "Let $p:T\\to U$ be a finite morphism of schemes [def-weil-finite-integral-morphism], let $t\\in T$ and $u=p(t)$, and suppose $p^{-1}(\\{u\\})=\\{t\\}$. The canonical local-ring homomorphism $p_t^\\sharp:\\mathcal O_{U,u}\\to\\mathcal O_{T,t}$ [def-weil-pbc-module-stalk] is finite, meaning that $\\mathcal O_{T,t}$ is a finitely generated $\\mathcal O_{U,u}$-module. If $p$ is of finite presentation [def-sbc-locally-finite-presentation], then this ring homomorphism is of finite presentation: for some $a,b\\geq0$ there are polynomials $f_1,\\ldots,f_b\\in\\mathcal O_{U,u}[x_1,\\ldots,x_a]$ and an $\\mathcal O_{U,u}$-algebra isomorphism $\\mathcal O_{T,t}\\cong\\mathcal O_{U,u}[x_1,\\ldots,x_a]/(f_1,\\ldots,f_b)$.",
+ "statement": "Let $p:T\\to U$ be a finite morphism of schemes [def-weil-finite-integral-morphism], let $t\\in T$ and $u=p(t)$, and suppose $p^{-1}(\\{u\\})=\\{t\\}$. The canonical local-ring homomorphism $p_t^\\sharp:\\mathcal O_{U,u}\\to\\mathcal O_{T,t}$ [def-weil-locally-ringed-space-morphism, def-weil-pbc-module-stalk] is finite, meaning that $\\mathcal O_{T,t}$ is a finitely generated $\\mathcal O_{U,u}$-module. If $p$ is of finite presentation [def-sbc-locally-finite-presentation], then this ring homomorphism is of finite presentation: for some $a,b\\geq0$ there are polynomials $f_1,\\ldots,f_b\\in\\mathcal O_{U,u}[x_1,\\ldots,x_a]$ and an $\\mathcal O_{U,u}$-algebra isomorphism $\\mathcal O_{T,t}\\cong\\mathcal O_{U,u}[x_1,\\ldots,x_a]/(f_1,\\ldots,f_b)$.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, parts (2) and (3)."
@@ -10,11 +10,59 @@
  "stmt_deps": [
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-module-stalk",
-  "def-sbc-locally-finite-presentation"
+  "def-sbc-locally-finite-presentation",
+  "def-weil-locally-ringed-space-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open neighbourhood $V=\\operatorname{Spec}A$ of $u$ in $U$ and put $W=p^{-1}(V)$. Because $p$ is finite, $W$ is affine, say $W=\\operatorname{Spec}B$, and $A\\to B$ is finite [def-weil-finite-integral-morphism]. Let $\\mathfrak p\\subset A$ and $\\mathfrak q\\subset B$ be the primes corresponding to $u$ and $t$ under the affine-point correspondence [lem-weil-pbc-affine-open-spec-points]. The equality $p^{-1}(\\{u\\})=\\{t\\}$ says that $\\mathfrak q$ is the unique prime of $B$ contracting to $\\mathfrak p$. The affine stalk-localization comparison [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{U,u}$ with $A_{\\mathfrak p}$, $\\mathcal O_{T,t}$ with $B_{\\mathfrak q}$. For the affine ring map $\\varphi:A\\to B$, the definition of the stalk map [def-weil-locally-ringed-space-morphism, def-weil-pbc-module-stalk] gives $p_t^\\sharp(a_u)=\\varphi(a)_t$. Hence on fractions it sends $a/s$ to $\\varphi(a)/\\varphi(s)$: the germ identifications therefore identify the actual stalk map with the localized ring map, not just its source and target rings. By [lem-trf-unique-prime-localization], $B_{\\mathfrak q}$ is canonically the localization of $B$ at the image of $A\\setminus\\mathfrak p$, compatibly with this stalk map. The localized map is finite by [lem-trf-localization-finite-ring-map], since finite ring maps remain finite after localization. Transporting across the displayed stalk identifications proves that $p_t^\\sharp$ is finite.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-trf-unique-prime-localization",
+    "lem-trf-localization-finite-ring-map",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8, proof of assertions (2)--(3), affine reduction and unique-prime localization"
+   }
+  },
+  {
+   "text": "Assume in addition that $p$ is locally of finite presentation. For the same affine pair $W=\\operatorname{Spec}B\\to V=\\operatorname{Spec}A$, the induced map $A\\to B$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. Localizing at $A\\setminus\\mathfrak p$ preserves finite presentation by [lem-trf-localization-finite-presentation-ring-map]. The unique-prime localization isomorphism [lem-trf-unique-prime-localization] and the stalk-localization identifications [lem-weil-pbc-affine-open-stalk-localization] identify this localized map with $p_t^\\sharp$. Hence $p_t^\\sharp$ is a finitely presented ring map, which by definition has a presentation $\\mathcal O_{T,t}\\cong\\mathcal O_{U,u}[x_1,\\ldots,x_a]/(f_1,\\ldots,f_b)$ for suitable $a,b\\ge0$ and polynomials $f_i$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-trf-unique-prime-localization",
+    "lem-trf-localization-finite-presentation-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8, proof of assertion (3), affine reduction and localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-module-stalk",
+  "lem-trf-localization-finite-presentation-ring-map",
+  "lem-trf-localization-finite-ring-map",
+  "lem-trf-unique-prime-localization",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, assertions (2) and (3), with the affine localization argument made explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-pushforward-module-finite-presentation",
@@ -92,5 +140,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-singleton-fibre-stalk-ring",
+  "worker": "stage1",
+  "summary": "Split the two Stacks 05B8 ring-map clauses. On affine neighbourhoods, the singleton fibre gives a unique prime over the base prime; the existing unique-prime localization node identifies the stalk map with a localized finite map. Two Mathlib leaves supply preservation of finiteness and finite presentation under localization. No statement change.",
+  "blueprint": "Supporting elementary-devissage branch of lem-trf-local-term-locality, proof (1)--(2), through the recorded alteration/flatification ancestry: the ring-map input is Stacks 05B8(2)--(3)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q72-00948e7f6",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-00948e7f6 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, route and source passages in full. Stacks 05B8 and both exact Mathlib localization matches support the proof. Corrected three small citation/definition faults; preserved all hypotheses and conclusions. Wrote review.md and three corrected JSON files under fixes/dag/nodes/sec-trace-formula/.; 3 file(s) fixed by the reviewer"
  }
 }
