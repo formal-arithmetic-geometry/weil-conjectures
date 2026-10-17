@@ -221,21 +221,21 @@
   "note": "definition made precise (Stacks 09XZ partition, constructible strata, finite locally constant in the 03RU form with finite values, Z_k part of the data); three construction steps; four lemmas about it moved to pointers (095E affine-local equivalence, finite-values/finite-stalks/finite-type equivalence, change of ring, agreement with def-weil-pbc-constructible-torsion on curves) and the closed immersion-independence lemma; the source repository IsConstructibleSheaf has only locally closed strata (it states def-constructible-constructible), no attachment"
  },
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf",
+  "module": "Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf",
   "declaration": "AlgebraicGeometry.Scheme.IsConstructibleEtaleModuleSheaf",
   "statement": "def IsConstructibleEtaleModuleSheaf {T : Scheme.{u}} {Λ : Type (u + 1)}\n    [CommRing Λ] [Finite Λ] (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q66",
-  "date": "2026-10-16",
+  "by": "Q142",
+  "date": "2026-10-17",
   "existing": true,
-  "note": "Existing-interface import repair: the recorded upstream module and the published Sheaf module declare the same name with distinct definition bodies (Scheme.Stratification versus LocallyClosedStratification with explicit constructible parts), so importing both fails. Rebind to the existing Sheaf declaration already used by the recorded isBoundedConstructible predicate; it gives exactly the node's finite locally closed constructible partition, immersed stratum schemes and finite constant module values. No notion or declaration is newly defined."
+  "note": "Interface repair under brief-stage2 §1(B): the previous note explicitly prescribed the existing Sheaf declaration with LocallyClosedStratification and constructible parts, but its module field still named the different upstream definition using Scheme.Stratification. Rebind to the published Sheaf module, whose exact finite-value clause is used in this delivery. No new declaration or changed mathematical notion. Importing both modules would duplicate IsConstructibleEtaleModuleSheaf."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fc439098e",
-  "group": "Q66",
+  "reviewer": "NT-stage2-cc-6f37702dc",
+  "group": "Q142",
   "result": "pass",
-  "note": "Item finiteTorConstructible_etale_compact matches every node clause: standing FiniteFieldDatum k, prime ℓ≠p, X locally of finite type + quasi-compact over Spec D.k (no separatedness), finite commutative A : Type (u+1) with ∃ r, ℓ^r=0 (zero ring allowed), ordinary unbounded DerivedCategoryModule A X, recorded isBoundedConstructible and hasTorAmplitudeIn with a≤b, IsCompactObject (DirectSum.toAddMonoid comparison, bijective, all I : Type (u+1)) under ∃ HasCoproducts.{u+1}. It is the first clause of finiteRing_compactGenerators at k=D.k, T=X, C=A, with no extra clauses copied. Edge cases (empty scheme, zero ring, zero complex, empty family) covered. Four one-line import repairs verified necessary: without them ProEtaleFiniteModules fails on the duplicate AlgebraicGeometry.Scheme.IsConstructibleEtaleModuleSheaf; no declaration changed. The def-weil-pbc-etale-constructible-sheaf rebind to the published Sheaf declaration (LocallyClosedStratification + constructible parts + finite constant values) matches the node and is the predicate isBoundedConstructible uses. All six lean.statement records are verbatim substrings of their files. Docstrings carry source place, blueprint tag and the proof; only proof is sorry; no hollow definitions. Reviewer compiled all five files with nt_compile.py: rc 0, no errors or warnings (sorry warnings are off in the live lakefile). Minor, non-blocking: earlier lean.note/by texts of four dependency records were overwritten.; reverted the delivery's change of existing node(s) def-weil-pbc-proetale-modules (--revert-nodes; kept as on newtargets-dag)"
+  "note": "Every node clause matches the theorem, with no stronger assumptions and unrestricted J : Type v. hG and the conclusion are definitionally clause (b) of IsConstructibleEtaleModuleSheaf with S fixed: a check file proving IsConstructibleEtaleModuleSheaf F from the theorem, plus an identity-cover sanity case, compiled. Etale is the morphism property. Only sorry; source and blueprint docstrings with all 4 proof steps; lean.statement verbatim; node diffs touch only lean fields. The lean-only §1(B) rebind of def-weil-pbc-etale-constructible-sheaf to the Sheaf module matches its own note and the side definition; accepted. nt_compile rc 0 with no diagnostics against the live library and with the side definition as sibling (no duplicate). Non-blocking remarks: live Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf is a re-export that diverges from the side source; hSc is redundant because Topology.Stratification already has constructible strata; the Cover.{u} conclusion needs point-indexed re-indexing of the refined cover in the stage-3 proof."
  }
 }

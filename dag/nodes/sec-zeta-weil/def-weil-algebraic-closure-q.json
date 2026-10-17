@@ -83,5 +83,28 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-intfactors"
+ "unit": "sk-thm-intfactors",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a78f1e45",
+  "group": "Q156",
+  "result": "pass",
+  "note": "The definition Qbar ≃ₐ[ℚ] algebraicClosure ℚ C.Qbar matches every node clause: datum D, coefficient datum C (ℓ≠p, Q̄_ℓ), relative closure via mem_algebraicClosure_iff, any fixed IsAlgClosure ℚ Qbar in an independent universe v, AlgEquiv onto the subfield. The ratAlgebra helper is the canonical composite ℚ→Q_ℓ→Q̄_ℓ; a probe proved it equals DivisionRing.toRatAlgebra (Subsingleton.elim) and agrees by rfl. Nothing stronger assumed (algebraic closedness and existence left to lem-weil-realization-exists), not hollow, no sorry, axioms only propext/choice/Quot.sound. Docstrings carry the source place and blueprint id. The node changes only lean, and lean.statement equals the signature verbatim. No existing duplicate. nt_compile.py compiled the module cleanly in 9.6 s; the probe checked membership, universes and instantiation with AlgebraicClosure ℚ. The Second-reading section is the standard post-2026-10-17 direct-delivery note, also found in landed reports. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AlgebraicNumberRealization",
+  "declaration": "WeilConjectures.FiniteFieldDatum.CoefficientDatum.AlgebraicNumberRealization",
+  "declarations": [
+   "WeilConjectures.FiniteFieldDatum.CoefficientDatum.ratAlgebra",
+   "WeilConjectures.FiniteFieldDatum.CoefficientDatum.AlgebraicNumberRealization"
+  ],
+  "file": "lean/Sheaf/Paper/AlgebraicNumberRealization.lean",
+  "statement": "def AlgebraicNumberRealization (D : WeilConjectures.FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (Qbar : Type v) [Field Qbar] [Algebra ℚ Qbar] [IsAlgClosure ℚ Qbar] : Type (max u v)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses algebraicClosure ℚ C.Qbar directly for the relative algebraic closure and AlgEquiv for the realization. The helper ratAlgebra is the composite ℚ → Padic C.l → C.Qbar, not an extra choice. D and C retain the full finite-field and coefficient data; Qbar is any fixed rational algebraic closure."
+ }
 }

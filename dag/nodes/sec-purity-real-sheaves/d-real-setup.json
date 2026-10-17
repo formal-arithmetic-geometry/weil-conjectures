@@ -116,5 +116,35 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-c51f28c8a (reviewer sub-agent of L); spot-checked: Read the main-20261015 source d-real-setup.md (order 2920) and _section.md, identical in main-20261017; macros \\Fq and \\Qlb are at blueprint.toml:54/96. Read the unit and chapter records, the report, and the statements of all 17 cited nodes. Every source clause is kept: nonempty, separated (def-weil-proper-morphism, separated clause only), smooth (def-sbc-smooth-morphisms), finite type, pure dimension one (def-weil-pure-dimension, which admits the empty scheme, hence the kept nonempty clause), and connected base change to k (def-pc-base-change, def-weil-connected-scheme). e_x and q_x come from def-weil-closed-point-degree; finite type gives deg>=1. Geometric Frobenius is phi_q^{-1} by def-weil-frobenius-substitution. Local F_x is the same node applied to kappa(x), a field with q_x elements; no scheme Frobenius or path is introduced. iota is a plain field embedding. Affine open 'over k_0' is equivalent to the source wording for opens of a finite-type k_0-scheme, since Gamma of an affine open is finitely generated over k_0. The added 'p prime' is a faithful clarification matching def-weil-finite-field-q-elements: p=4, a=1, ell=2 shows the need. It is not a weakening. Edge cases: P^1 and A^1 are admitted. Empty, Spec F_q, P^1 disjoint union Spec F_q, A^1 over F_{q^2} viewed over F_q, A^1 disjoint union A^1, and non-reduced curves are excluded. Duplicate search: sk-d-real-setup is the identical sketch twin, correctly recorded as same_as; d-curve-pieces and def-weil-smooth-proper-datum are different data. No new nodes. Six searches of all three kinds are recorded, and a split rather than a Mathlib leaf is right. The unit realized fields are correct. Definition with no proof, no tool_uses, no SGA, not a target. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca258303b",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Read node, source d-real-setup.md (main-20261015, order 2920), all 17 dep records, module and report. Every clause is rendered with the recorded declarations: p prime, a>=1, Fintype field k0 with card p^a, IsAlgClosure k0 k, prime l != p, IsAlgClosure Q_l Qbar, iota : Qbar ->+* C; IsCurve = Nonempty, IsSeparated, Smooth, LocallyOfFiniteType and QuasiCompact, IsPureDimension 1, ConnectedSpace of pullback along Spec k -> Spec k0; e_x = residueDegree, q_x = q^e_x; F = existing geometricFrobeniusAlgEquivOfAlgebraic (exponent card k0 = q); F_x uses the same construction on kappa(x), finite via existing finite_residueField_of_isClosed (exponent q_x); IsAffineOpen = nonempty open immersion over k0, iso over k0 to Spec A with A finite type. Edge cases correct. Universes u/v/w are independent; k in u is forced by Scheme.{u} and harmless. No sorry, no hollow data, docstrings carry source and blueprint tag, lean.statement 'structure Setup' matches the file, no duplicate found. nt_compile --json at Sheaf/Paper/RealSheavesSetup.lean: clean, 20.0 s, no warnings. Second-reading section is the standard post-2026-10-17 note. No findings requiring change."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealSheavesSetup",
+  "declaration": "RealSheaves.Setup",
+  "declarations": [
+   "RealSheaves.Setup",
+   "RealSheaves.Setup.q",
+   "RealSheaves.Setup.geometricCurve",
+   "RealSheaves.Setup.IsCurve",
+   "RealSheaves.Setup.closedPointDegree",
+   "RealSheaves.Setup.closedPointCardinality",
+   "RealSheaves.Setup.frobenius",
+   "RealSheaves.Setup.localFrobenius",
+   "RealSheaves.Setup.IsAffineOpen"
+  ],
+  "file": "lean/Sheaf/Paper/RealSheavesSetup.lean",
+  "statement": "structure Setup",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The structure packages exactly the field choices; the same module supplies the chapter curve convention, e_x and q_x, the existing geometric Frobenius specialized globally and locally, and the nonempty finite-type affine-open convention. All data are explicit, with no sorry."
  }
 }

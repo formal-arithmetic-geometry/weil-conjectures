@@ -8,7 +8,8 @@
   "place": "Corollary 6.3.2.7 (05ZJ): Q to the point is a categorical equivalence, in the whole-functor-category formulation of categorical equivalence. Kerodon identifiers, not Stacks tags; no Stacks tag states this higher categorical assertion. Read online 2026-10-17; archive WANTED."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-finite-inverse-tetrahedron"
  ],
  "proof": [
   {
@@ -244,5 +245,24 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-24d139b48 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited node statements and the unit/parent records, and Kerodon 05ZJ online (archive is WANTED). Q matches the source: Δ^3 with the edges 02 and 13 collapsed to separate points. The statement is the full Fun-equivalence, which is condition (ii) of the Joyal test, so the target is not weakened. Small cases hold: E empty, E terminal, E the nerve of a category (hQ is the contractible groupoid on two objects). Step 1: the min-contraction is monotone and pointwise-equivalences is applied twice; fullness keeps the inverses in H_1(E). Step 2: the coproduct-to-product identity and the degreewise mono check are correct. Step 3: I checked every hypothesis of lem-coef-localization-monomorphic-pushout (spans (A,Δ^3,A)→(A,Δ^3,B), maps (1,1,c), injective zeroth legs, vacuous edge-image conditions), giving localization at {02,13}. Step 4: the two-out-of-six calculation wh=fu is correct and all six edges are covered. Step 5: the contraction b is monotone and correct. Step 6: r∘p*=t strictly, cancellation on homotopy categories, then Joyal test (iii)⇒(ii); this replaces the source's 01MX reduction correctly. There are no new nodes and no cycle; the only user is lem-coef-simplicial-edge-inversion-pushout, consistent with this statement. Duplicate search found none; same_as=[] is right. I accept the tool_use lem-cbc-enhanced-functor-cone-calculus (generic fibrancy of Fun and full subcategories). No SGA source is used. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e008b6f31",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read the node, its stmt_deps (EnhancedDiagramsCones IsFunctorEquivalence/AreNaturallyEquivalent, FiniteInverseTetrahedron inverseTetrahedron), the Joyal test, the citer lem-coef-simplicial-edge-inversion-pushout, the module and the report. The theorem quantifies over all quasicategories E : SSet.{max u v} with v free; the map is (MonoidalClosed.pre (uliftFunctor.map (isTerminalObj0.from inverseTetrahedron))).app E, correct direction, the canonical p, conclusion the full coherent IsFunctorEquivalence, the same form as Joyal test clause (ii). inverseTetrahedron's successive pushouts collapse 02 and 13 to separate points, the same quotient as the node's coproduct pushout. No hypothesis on Q, no nonemptiness, no universe restriction; edge cases E empty, terminal and nerve checked. No definitions, sorry only, docstrings cite 05ZJ and the blueprint with the six proof steps, lean.statement verbatim in the file. Added stmt_dep lem-coef-finite-inverse-tetrahedron is landed, no cycle. nt_compile.py on the snapshot file with the side overlay: exit 0, no errors or warnings (item 8.9 s). Observation, not blocking: a duplicate Q (inverseGadget in SimplicialEdgeInversionPushout) predates this delivery; reuse of inverseTetrahedron is correct because the citer's module must import this one."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.InverseGadgetCategoricalContractibility",
+  "declaration": "SSet.Enhanced.inverse_gadget_categorical_contractibility",
+  "file": "lean/Sheaf/AlgebraicTopology/InverseGadgetCategoricalContractibility.lean",
+  "statement": "theorem inverse_gadget_categorical_contractibility (E : SSet.{max u v}) [Quasicategory E] : IsFunctorEquivalence ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (stdSimplex.isTerminalObj₀.from inverseTetrahedron.{u}))).app E)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses inverseTetrahedron from the landed lem-coef-finite-inverse-tetrahedron node: its successive pushouts give the specified degreewise coproduct pushout. Tests the actual precomposition map after degreewise universe enlargement; no fibrancy or nonemptiness hypothesis on Q or E is added."
  }
 }

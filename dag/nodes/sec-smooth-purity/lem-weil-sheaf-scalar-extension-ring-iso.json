@@ -219,5 +219,27 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-54507cfd9 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is true as written (small site, commutative ring sheaves R and S, an isomorphism c, the transported module M^(c), and a natural isomorphism theta: M⊗_R S -> M^(c) with theta(eta(m⊗s)) = c^{-1}(s)m and inverse m -> eta(m⊗1)). I checked it on S=0, on c=id, on the swap automorphism of A×A (the inverse action is needed and the formula has the right direction) and on empty sites. Steps 1-6 check out against the statements of def-weil-sheaf-of-modules-category, def-weil-pbc-module-tensor-product, def-pur-sheaf-tensor-product and def-weil-presheaf-modules-sheafification. The last one covers an arbitrary site and gives the linear universal property, so the proof uses its statement, not its proof. Step 2 checks the balancing beta(m,c(r)s) = r·beta(m,s). Step 4 verifies both composites ab=1 and ba=1. Step 5 proves psi∘theta=1 by uniqueness after precomposing with eta, with no use of stalks. Step 6 gets naturality from the same uniqueness. Calling the steps elementary is justified. proof_deps equals the union of the steps' uses. Stacks sites-modules.tex matches: 03CZ (line 933) with the change-of-rings construction before it, 03EK (line 3551), 03CY (line 815), with labels checked against tags/tags. The delivery creates no new nodes. The nearest existing node, lem-weil-pbc-etale-module-ring-iso-tensor, only covers small étale sites of schemes with supplied functors, so it is not a duplicate or a generalization. The citer lem-weil-proetale-isomorphism-inverse-image needs exactly this arbitrary-site lemma and its normalization. No route statements or tool_uses are involved because only definitions are cited. The delivery cites no SGA and has no A-F faults. No changes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5eb363d5f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, Stacks 03CZ/03EK/03CY places, delivered module and report, dependency Lean (TensorProductOfUniverses changeOfRings*, SiteTensorFunctoriality, RingedSiteModules, Mathlib restrictScalars/sheafificationAdjunction). Every clause matches: M^(c) = SheafOfModules.restrictScalars along c.inv (correct inverse direction, existing functor); one theta family over changeOfRingsOfUniverses c.hom gives forward formula theta(eta(s⊗x)) = c.inv(s)•x, inverse x ↦ eta(1⊗x), and naturality via changeOfRingsHomOfUniverses. Module universe max r m is the necessary typing, not a restriction; instance hypotheses are those of the existing construction. Helper scalarExtensionRingIsoTmul is the real sheafification unit on a pure tensor, mirroring siteSheafTensorTmul, and duplicates nothing (purScalarSection is pro-etale only). Only sorry is the theorem proof; docstrings carry source, blueprint and 6 steps; lean.statement is verbatim; no statement change or new nodes; both report sections present. nt_compile --json rc=0, clean, 22.3 s. Edge cases (zero module/ring, id, swap on AxA, empty site) are fine. Non-blocking: tensor factor order S⊗M is inherited from the recorded construction and documented."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso",
+  "declaration": "SheafOfModules.exists_scalarExtensionRingIso",
+  "declarations": [
+   "SheafOfModules.scalarExtensionRingIsoTmul",
+   "SheafOfModules.exists_scalarExtensionRingIso"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ScalarExtensionRingIso.lean",
+  "statement": "theorem exists_scalarExtensionRingIso (c : R ≅ S) : ∃ theta : ∀ M : ringedSiteModules.{max r m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), changeOfRingsOfUniverses c.hom M ≅ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map c.inv)).obj M, (∀ (M : ringedSiteModules.{max r m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (U : Cᵒᵖ) (x : M.val.obj U) (s : S.obj.obj U), (theta M).hom.val.app U (scalarExtensionRingIsoTmul c.hom M U x s) = (c.inv.hom.app U) s • x) ∧ (∀ (M : ringedSiteModules.{max r m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (U : Cᵒᵖ) (x : M.val.obj U), (theta M).inv.val.app U x = scalarExtensionRingIsoTmul c.hom M U x 1) ∧ (∀ (M N : ringedSiteModules.{max r m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (h : M ⟶ N), changeOfRingsHomOfUniverses c.hom M h ≫ (theta N).hom = (theta M).hom ≫ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map c.inv)).map h)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

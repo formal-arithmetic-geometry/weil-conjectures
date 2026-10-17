@@ -214,5 +214,31 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-286226c3c (reviewer sub-agent of L); spot-checked: Read the item in full, all 9 cited statements, the citer lem-coef-localization-cartesian-pullback-pushout (steps 2 and 6) and unit sk-prop-sf-biduality-general. There are no new nodes and the statement is unchanged; no hypothesis was dropped and nothing is weakened. Step 1 uses the arbitrary-base sentence of lem-coef-marked-relative-cartesian-model ('every degreewise pullback square of a cartesian fibration is a homotopy pullback in the Joyal model structure'). This matches HTT Cor. 3.3.1.4, which I checked from my own knowledge because HTT is not archived (WANTED; proof_origin agent is correct). Step 2: the Joyal factorizations with S fixed make T and E quasicategories, the comparison h is a categorical equivalence by the 'equivalently' clause, and q inverts W. Step 3: characterization (1) makes the Joyal fibration E->S between quasicategories an isofibration, and lem-coef-infinity-isofibration-pullback-limit applies with no condition on T->S; the move to L uses the identification L=Cat_inf that the statement itself stipulates. Steps 4 and 5 (equivalence invariance of the cone-space criterion, and naturality from q's functoriality plus contractible comparison choices) are acceptable as elementary. Small cases checked: K empty, K a point (fiber = homotopy fiber), S a point, p = id. The Cartesian hypothesis is needed. Searched for duplicates (3.3.1.4, Joyal homotopy pullback, Cartesian fibration with pullback): none. There is no cycle. All cited nodes are in the unit or are definitions, so no tool_uses are needed. No SGA is used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbea2bd2c",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Read the node, all 5 statement dependencies and their Lean, the module and the report. The Lean matches every clause: q is IsLocalization at CoherentNerve.IsCategoricalEquivalence, the Joyal weak equivalences via weak_iff_categorical, on largeNerve of all of SSet.{u}. S and Z have Quasicategory instances, cartesianFibration matches the final-horn node definition, K and a are arbitrary, and u and v are free. IsLimitEdge applies to the exact image of (pullback.cone a p).pi with apex object q (pullback a p); the source of the cone edge is the constant diagram, so the claim is not vacuous. Naturality over maps r with r ≫ a' = a is given by two Composes triangles with a common diagonal. The helpers are canonical (cospanHomMk, pullback.map, Over.pullback), the main theorem is sorry-only with a 5-step proof docstring, and the lean.statement field is verbatim. Edge cases checked: empty K, Z and S; S a point; p = id; K a point; r = id. nt_compile --json on the side overlay: 29 dependencies, then the target in 14.1 s, exit 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DegreewiseCartesianPullbackCatInfinity",
+  "declaration": "SSet.Enhanced.degreewise_cartesian_pullback_catInfinity",
+  "declarations": [
+   "SSet.Enhanced.cartesianPullbackCospanMap",
+   "SSet.Enhanced.cartesianPullbackMap",
+   "SSet.Enhanced.cartesianPullbackCospans",
+   "SSet.Enhanced.cartesianPullbackConeFamily",
+   "SSet.Enhanced.degreewise_cartesian_pullback_catInfinity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DegreewiseCartesianPullbackCatInfinity.lean",
+  "statement": "theorem degreewise_cartesian_pullback_catInfinity {L : SSet.{max (u + 1) v}} (q : largeNerve.{u + 1, u, v} (SSet.{u}) ⟶ L) (hq : IsLocalization (fun _ _ f ↦ CategoryTheory.CoherentNerve.IsCategoricalEquivalence f) q) {S Z : SSet.{u}} [Quasicategory S] [Quasicategory Z] (p : Z ⟶ S) (hp : cartesianFibration p) (K : SSet.{u}) (a : K ⟶ S) : IsLimitEdge (diagram.{u + 1, u, 0, 0, v} q (cospan a p)) (object q (pullback a p)) (transformation.{u + 1, u, 0, 0, v} q ((cartesianPullbackConeFamily p).app (Over.mk a))) ∧ ∀ (K' : SSet.{u}) (a' : K' ⟶ S) (r : K ⟶ K') (hr : r ≫ a' = a), Composes (transformation.{u + 1, u, 0, 0, v} q ((cartesianPullbackConeFamily p).app (Over.mk a))) (transformation.{u + 1, u, 0, 0, v} q (cartesianPullbackCospanMap p a a' r hr)) (transformation.{u + 1, u, 0, 0, v} q ((pullback.cone a p).π ≫ cartesianPullbackCospanMap p a a' r hr)) ∧ Composes (transformation.{u + 1, u, 0, 0, v} q ((Functor.const WalkingCospan).map (cartesianPullbackMap p a a' r hr))) (transformation.{u + 1, u, 0, 0, v} q (pullback.cone a' p).π) (transformation.{u + 1, u, 0, 0, v} q ((pullback.cone a p).π ≫ cartesianPullbackCospanMap p a a' r hr))",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The exact localized projection cone is limiting, with naturality supplied by the actual slice-indexed projection-cone family and explicit coherent composition triangles. K is an arbitrary simplicial set. The helper definitions construct only the canonical maps and family belonging to this node."
  }
 }

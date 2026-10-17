@@ -77,5 +77,25 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-def-roots"
+ "unit": "sk-def-roots",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49c2fa735",
+  "group": "Q157",
+  "result": "fix",
+  "note": "Every clause of def-weil-numbers was checked against the node, the source (order 2864) and all 8 statement dependencies, and is right: α≠0 for Q̄ˣ, IntermediateField.adjoin ℚ {α}, all RingHom τ into ℂ, complex norm, Real.rpow with real w/2, algebraic integer reused as Mathlib IsIntegral ℤ (H4 ok). No sorry or hollow def; docstrings carry the source and blueprint id; node changes only the lean field. Fault H3/H9: bare (p a : ℕ) drops the standing hypotheses p prime and a≥1 from def-weil-finite-field-fiber, and the FiniteFieldFiber import is unused, along with Embeddings, IsIntegral.Defs and the ComplexConjugate open. Fix: complete fixes/WeilNumbers.lean with def IsWeilNumber (D : FiniteFieldDatum.{u}) (α : AlgebraicClosure ℚ) (w : ℝ) : Prop and bound (D.q : ℝ) ^ (w / 2), following the project convention; generator written as AdjoinSimple.gen; imports trimmed. Also fixes/def-weil-numbers.lean-record.json (statement verbatim, note) and fixes/def-weil-numbers.report.md (fix section appended). nt_compile per file: delivered file clean in 14.5s, fixed file clean in 23.2s, no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilNumbers",
+  "declaration": "WeilConjectures.IsWeilNumber",
+  "file": "lean/Sheaf/Paper/WeilNumbers.lean",
+  "statement": "def IsWeilNumber (D : FiniteFieldDatum.{u}) (α : AlgebraicClosure ℚ) (w : ℝ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second-reader fix: the fixed prime power q is taken from the global finite-field datum D : FiniteFieldDatum (dependency def-weil-finite-field-fiber, the project convention) instead of bare p a : ℕ, so the source's standing hypotheses p prime, a ≥ 1, q = p ^ a are carried and the dependency import is used; unused imports removed; the generator of ℚ(α) is IntermediateField.AdjoinSimple.gen. No other mathematical change.",
+  "fixed_by": "NT-stage2-cc-49c2fa735"
+ }
 }

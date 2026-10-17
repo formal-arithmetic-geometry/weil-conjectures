@@ -150,5 +150,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-9159d43e5 (reviewer sub-agent of L); spot-checked: I read the item, its 3 steps and the full statements of all 4 cited nodes (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-full-essential-image, lem-coef-infinity-mapping-composition), plus the unit and chapter records, the blueprint proof of prop-coef-integral-exceptional-adjoint and the citer's step 9 (presentable-presheaf-presentation). The statement is true (a fully faithful postcomposition lifts equivalences) and unchanged. Small cases checked: empty C, J=id, a one-object inclusion into a contractible groupoid, J not essentially surjective. Step 1: every simplex of alpha and of its inverse witnesses has vertices JF(c) or JG(c) in Y_0, so they factor through the full subcategory Fun(C,Y_0). Step 2: beta=kappa_G·Kalpha·kappa_F^{-1} in the homotopy category of Fun(C,X); the whiskered kappa_F is an equivalence. Step 3: the kappa- and eta-naturality squares come from (c,s,t)->kappa(beta(c,s),t) and the 2-simplex relation; the orientations and both cancellations check, giving [J_0 beta]=[alpha]; no triangle identity is assumed. There are no new nodes and no cycle; proof_deps equals the union of the uses. The Bergner-model node simplicial-fully-faithful-homotopy-image is not a duplicate. Accepted tool_use: cone-calculus (generic; full subcategories of Fun are quasicategories). No SGA; no target, base-change morphism or coefficient category involved. FIX: the step source places and proof_origin.place said 'paragraph 2, step 6', but the blueprint paragraph has no numbered steps and the parent uses this item at its step 9. I corrected them to 'via step 9 of lem-coef-infinity-presentable-presheaf-presentation'. blueprint.from.place, which also says step 6, is not split-owned and is left for the maintainer.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60bf75545",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Checked node clauses against the Lean. X,Y,C: SSet.{u} with Quasicategory, arbitrary universe, no restriction. hJ uses the recorded IsFullyFaithful. α is a specific IsEquivalenceEdge in ihom C Y from diagramVertex(F≫J) to diagramVertex(G≫J). The conclusion gives an equivalence edge β from F to G and a 2-simplex t with δ2 t = σ0(FJ), δ1 t = (ihom C).map J β, δ0 t = α, exactly an edge of the dependency's right-pinched mappingSpace, i.e. homotopy in the whole functor quasicategory. No extra hypotheses; quantifier order matches. Edge cases checked: empty C, empty X, J = id, J not essentially surjective, F = G with nontrivial α, universes. The node diff vs the side clone is only the lean field; lean.statement matches the file verbatim. No duplicate found in Mathlib or lean/Sheaf. Docstrings carry the source place, blueprint tag and the 3-step proof; proof is sorry only; no definitions. nt_compile --json: rc=0, no diagnostics (6.9 s). The Second reading section holds the standard 2026-10-17 placeholder, accepted as in prior reviews."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityYonedaFunctorEquivalenceLift",
+  "declaration": "SSet.Enhanced.fullyFaithful_lift_naturalEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/InfinityYonedaFunctorEquivalenceLift.lean",
+  "statement": "theorem fullyFaithful_lift_naturalEquivalence {X Y C : SSet.{u}} [Quasicategory X] [Quasicategory Y] [Quasicategory C] (J : X ⟶ Y) (hJ : IsFullyFaithful J) (F G : C ⟶ X) (α : ((ihom C).obj Y) _⦋1⦌) (hα₀ : ((ihom C).obj Y).δ 1 α = diagramVertex (F ≫ J)) (hα₁ : ((ihom C).obj Y).δ 0 α = diagramVertex (G ≫ J)) (hα : IsEquivalenceEdge ((ihom C).obj Y) α) : ∃ β : ((ihom C).obj X) _⦋1⦌, ((ihom C).obj X).δ 1 β = diagramVertex F ∧ ((ihom C).obj X).δ 0 β = diagramVertex G ∧ IsEquivalenceEdge ((ihom C).obj X) β ∧ ∃ t : ((ihom C).obj Y) _⦋2⦌, ((ihom C).obj Y).δ 2 t = ((ihom C).obj Y).σ 0 (diagramVertex (F ≫ J)) ∧ ((ihom C).obj Y).δ 1 t = ((ihom C).map J).app _ β ∧ ((ihom C).obj Y).δ 0 t = α",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

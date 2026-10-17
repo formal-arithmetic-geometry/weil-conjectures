@@ -245,5 +245,32 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-3235897e4 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, both cited nodes in full (def-cbc-enhanced-diagrams-cones, lem-cbc-realization-cw-subcomplex), the step of the parent lem-coef-pinched-cube-latching that cites the item, the unit record and the docs A-F. The statement is true as written and is self-contained. Under the encoding by labels J (|J|=n+i), the poset D_{n,i} is isomorphic to P(J), so the claim reduces to the characteristic-coordinate triangulation |N(P(J))| ≅ [0,1]^J followed by the linear map [0,1]^J ≅ T_{n,i}. It matches the parent's HTT §2.2.2 cube quotient, where on the face with coordinate i equal to 1, points with equal coordinates above i are identified. HTT itself is not archived; this is recorded as WANTED and proof_origin.by=agent is correct. Small cases checked: n=i=0, i=0, i=n, and n=1 with i=0 or i=1. Step 1: the bijection is order-preserving in both directions. It silently uses the fact that a poset isomorphism induces a homeomorphism of realizations; I accept that as elementary. Step 2: the displayed identity is exactly def-cbc's |alpha|-relation. Step 3: the sorting weights telescope to the input coordinates. Step 4: it uses the statement (not the proof) of lem-cbc-realization-cw-subcomplex for the unique positive nondegenerate representative. Strict chains with positive weights give distinct levels 1>s_1>...>s_r>0, so H is injective. Step 5: the finite closed cover C_sigma plus a written-out closed-set pasting argument correctly gives continuity of the inverse. Step 6: the projection compatibility is correct, and c_{n,i} is well-defined by step 2's identity. Duplicate search over dag/nodes (characteristic vector/coordinate, Boolean, triangulation, [0,1]^, order complex) found nothing that states this result. There are no new nodes, no cycle (neither cited closure reaches the item) and no SGA citation. The search records cover leanfinder, loogle and grep. This is not a target node, so no base-change morphism or coefficient category is involved. I accept the declared tool use of lem-cbc-realization-cw-subcomplex (unit sk-prop-sf-cbc): it is the generic realization normal form, used as a black box, and replaces no step of the biduality route. No changes made; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e6963de3",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Checked every clause against the node: Face and RelationPoset (tail condition as membership in both sets for every j > i, equivalent to equal tail intersections, with product order), CoordinateSpace (p_i=q_i=1, equal tails, unitInterval subspace topology), the homeomorphism fixed by both barycentric coordinate formulas on every simplex and parameter (all simplices included, so not arbitrary), the continuous face chart c fixed by its formula, and both projection identities via nerveMap first/second. Weight-vertex convention checked against toTopHomeo naturality. No added assumptions or universe restriction. Edge cases n=i=0, i=0, i=n, zero weights and degenerate chains covered. Docstrings carry source and blueprint, the six proof steps are in the theorem docstring, only the main theorem is sorry, lean.statement matches the file verbatim, statement dependency imported publicly and proof dependency privately, no new nodes or statement change, no duplicate in live lean/Sheaf. Second-reading section is the standard post-2026-10-17 wording. nt_compile.py --json: module 11.7 s, rc 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CubeRelationRealization",
+  "declaration": "SSet.CubeRelation.realization",
+  "declarations": [
+   "SSet.CubeRelation.Face",
+   "SSet.CubeRelation.RelationPoset",
+   "SSet.CubeRelation.first",
+   "SSet.CubeRelation.second",
+   "SSet.CubeRelation.CoordinateSpace",
+   "SSet.CubeRelation.realization"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CubeRelationRealization.lean",
+  "statement": "theorem realization (n : ℕ) (i : Fin (n + 1)) : ∃ (h : |nerve (RelationPoset n i)| ≃ₜ CoordinateSpace n i) (c : C(|nerve (Face n i)|, Fin (n + 1) → unitInterval)), (∀ (r : ℕ) (σ : (nerve (RelationPoset n i)) _⦋r⦌) (t : |SSet.stdSimplex.obj ⦋r⦌|) (j : Fin (n + 1)), (((h (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t)).val.1 j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val.1.val then 1 else 0) ∧ (((h (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t)).val.2 j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val.2.val then 1 else 0)) ∧ (∀ (r : ℕ) (σ : (nerve (Face n i)) _⦋r⦌) (t : |SSet.stdSimplex.obj ⦋r⦌|) (j : Fin (n + 1)), ((c (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t) j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val then 1 else 0)) ∧ (∀ x : |nerve (RelationPoset n i)|, c (SSet.toTop.map (nerveMap (first n i)) x) = (h x).val.1 ∧ c (SSet.toTop.map (nerveMap (second n i)) x) = (h x).val.2)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary declarations construct exactly the face poset, relation poset, its two projections, and the coordinate subspace introduced in this node. The theorem specifies the homeomorphism and face chart on every characteristic simplex, together with both projection identities; no map is chosen from a mere existence theorem."
  }
 }
