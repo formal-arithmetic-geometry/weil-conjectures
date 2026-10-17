@@ -5,6 +5,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 import all Sheaf.Paper.CondensedOpenClosedRecollement
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement
 
 /-! Componentwise geometric inputs for cartesian extension by zero. -/
 
@@ -227,5 +228,156 @@ theorem boundedConstructibleOpenImmersionLowerShriekBaseChange_app_mono
     infer_instance
   infer_instance
 
+
 end
+
+/-! Shared support and open--closed lemmas for bounded constructible module objects.
+
+These statements are used by both compactification independence and lower-shriek
+composition; keeping one copy avoids duplicate propositions across the import closure. -/
+
+-- Exact derivation and restriction to a full subcategory preserve full faithfulness.
+open scoped CategoryTheory.Obj in
+open CategoryTheory.Limits in
+private abbrev sharedBoundedOpenUnitIsIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
+    {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {U X : Over (Spec (.of k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    (j : U ⟶ X) [IsOpenImmersion j.left] :
+    IsIso (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit := by
+  have := openUnitIsIso Λ j.left
+  have hd : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left).unit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
+  have ff := Adjunction.fullyFaithfulLOfIsIsoUnit
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left)
+  have := ff.full
+  have := ff.faithful
+  have : (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).Full := by
+    unfold boundedConstructibleOpenImmersionLowerShriek
+    infer_instance
+  have : (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).Faithful := by
+    unfold boundedConstructibleOpenImmersionLowerShriek
+    infer_instance
+  exact Adjunction.unit_isIso_of_L_fully_faithful _
+
+set_option backward.isDefEq.respectTransparency false in
+open scoped CategoryTheory.Obj in
+open CategoryTheory.Limits in
+private abbrev sharedOpenRestrictionPushforwardZero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsOpenImmersion j]
+    (hij : Disjoint (Set.range i.base) (Set.range j.base))
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    IsZero ((upperStar Λ j).obj ((lowerStar Λ i).obj M)) := by
+  have hz := ProEtale.isZero_openImmersionRestriction_lowerStar Ab.{u + 1} i j
+    (Set.disjoint_iff_inter_eq_empty.mp hij) M.X
+  have hz' : IsZero ((ProEtale.upperStar Ab.{u + 1} j).obj
+      ((ProEtale.lowerStar Ab.{u + 1} i).obj M.X)) :=
+    hz.of_iso ((ProEtale.upperStarIsoOpenImmersionRestriction Ab.{u + 1} j).app _)
+  have hz'' := hz'.of_iso ((profinitePointModuleForgetPullbackIso Λ j).app
+    ((lowerStar Λ i).obj M))
+  apply (IsZero.iff_id_eq_zero _).2
+  apply (Mod.forget (condensedRingObj Λ U)).map_injective
+  exact hz''.eq_of_src _ _
+
+open scoped CategoryTheory.Obj in
+open CategoryTheory.Limits in
+private abbrev sharedPullbackExtensionZero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U W : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] (g : W ⟶ X)
+    (hgj : Disjoint (Set.range g.base) (Set.range j.base))
+    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)) :
+    IsZero ((upperStar Λ g).obj ((openImmersionLowerShriek Λ j).obj M)) := by
+  apply (IsZero.iff_id_eq_zero _).2
+  apply ((upperStarLowerStarAdjunction Λ g).homEquiv _ _).injective
+  apply ((openImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv _ _).injective
+  exact (sharedOpenRestrictionPushforwardZero Λ g j hgj _).eq_of_tgt _ _
+
+open scoped CategoryTheory.Obj in
+open CategoryTheory.Limits in
+private abbrev sharedDerivedPullbackExtensionZero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U W : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] (g : W ⟶ X)
+    (hgj : Disjoint (Set.range g.base) (Set.range j.base))
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))) :
+    IsZero (L((g)^*⟦Λ⟧).obj (D((j)_!open⟦Λ⟧).obj K)) := by
+  have hz : IsZero (D((g)^*⟦Λ⟧).obj (D((j)_!open⟦Λ⟧).obj K)) :=
+    Functor.isZero_mapDerivedCategory_obj _ _ fun n ↦
+      (sharedPullbackExtensionZero Λ j g hgj
+        ((DerivedCategory.homologyFunctor _ n).obj K)).of_iso
+        ((g)^*⟦Λ⟧.mapIso
+          (((j)_!open⟦Λ⟧.mapDerivedCategoryHomologyFunctorIso n).symm.app K))
+  exact hz.of_iso ((leftDerivedUpperStarIsoMapDerivedCategory Λ g).app _)
+
+open scoped CategoryTheory.Obj in
+open CategoryTheory.Limits in
+private abbrev sharedModuleJointZero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range j = (Set.range i)ᶜ)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hi : IsZero ((upperStar Λ i).obj M))
+    (hj : IsZero ((upperStar Λ j).obj M)) : IsZero M := by
+  have hzj : IsZero ((ProEtale.upperStar Ab.{u + 1} j).obj M.X) :=
+    ((Mod.forget _).map_isZero hj).of_iso
+      ((profinitePointModuleForgetPullbackIso Λ j).app M).symm
+  have hzi : IsZero ((ProEtale.upperStar Ab.{u + 1} i).obj M.X) :=
+    ((Mod.forget _).map_isZero hi).of_iso
+      ((profinitePointModuleForgetPullbackIso Λ i).app M).symm
+  have := (ProEtale.abelian_closed_support i j hij).2 M.X hzj
+  have hzM : IsZero M.X :=
+    ((ProEtale.lowerStar Ab.{u + 1} i).map_isZero hzi).of_iso
+      (asIso ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app M.X))
+  apply (IsZero.iff_id_eq_zero _).2
+  exact Mod.hom_ext _ _ (hzM.eq_of_src _ _)
+
+open scoped CategoryTheory.Obj in
+open CategoryTheory.Limits in
+private abbrev sharedModuleJointIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range j = (Set.range i)ᶜ) :
+    JointlyReflectIsomorphisms (pairFunctor (upperStar Λ i) (upperStar Λ j)) := by
+  refine jointlyReflectIsomorphisms_pairFunctor _ _ fun M N φ hi hj ↦ ?_
+  have := hi
+  have := hj
+  have hker {W : Scheme.{u}} (g : W ⟶ X) [IsIso ((upperStar Λ g).map φ)] :
+      IsZero ((upperStar Λ g).obj (kernel φ)) :=
+    (isZero_kernel_of_mono ((upperStar Λ g).map φ)).of_iso (PreservesKernel.iso _ φ)
+  have hcoker {W : Scheme.{u}} (g : W ⟶ X) [IsIso ((upperStar Λ g).map φ)] :
+      IsZero ((upperStar Λ g).obj (cokernel φ)) :=
+    (isZero_cokernel_of_epi ((upperStar Λ g).map φ)).of_iso (PreservesCokernel.iso _ φ)
+  have : Mono φ := Preadditive.mono_of_isZero_kernel _
+    (sharedModuleJointZero Λ i j hij _ (hker i) (hker j))
+  have : Epi φ := Preadditive.epi_of_isZero_cokernel _
+    (sharedModuleJointZero Λ i j hij _ (hcoker i) (hcoker j))
+  exact isIso_of_mono_of_epi φ
+
+open scoped CategoryTheory.Obj in
+open CategoryTheory.Limits in
+private abbrev sharedDerivedModuleJointIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range j = (Set.range i)ᶜ) :
+    JointlyReflectIsomorphisms (pairFunctor L((i)^*⟦Λ⟧) L((j)^*⟦Λ⟧)) :=
+  (Functor.jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory _ _
+    (sharedModuleJointIso Λ i j hij)).pairFunctor_of_iso
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ i).symm
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ j).symm
+
+
+
 end AlgebraicGeometry.ProEtale.CondensedRing
