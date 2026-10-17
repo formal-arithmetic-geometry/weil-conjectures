@@ -141,3 +141,9 @@ theorem etale_finite_cover :
   exact hk _
 
 end Algebra.TraitSection
+
+/-- The base change `(B ⊗[A] A[t] ⧸ (tⁿ - ϖ)) ⊗[B] L` of a `B`-algebra `L` to
+`B ⊗[A] A[t] ⧸ (tⁿ - ϖ)`. (Naming this type keeps instance synthesis on it cheap.) -/
+abbrev Algebra.TraitSection.kummerCover (A B L : Type*) [CommRing A] [CommRing B] [Algebra A B]
+    [CommRing L] [Algebra B L] (n : ℕ) (ϖ : A) : Type _ :=
+  (B ⊗[A] AdjoinRoot (X ^ n - C ϖ)) ⊗[B] L
