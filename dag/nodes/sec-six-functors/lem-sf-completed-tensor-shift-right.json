@@ -243,5 +243,33 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-34684d277 (reviewer sub-agent of L); spot-checked: I read the delivery in full, recomputed every sign identity by hand and made no changes. The delivery splits the existing item into six steps and creates no new node. The statement uses the coefficient category D(W_proet,O_E)=D(B) and the completed tensor Rlim^c Res_n Tot(P_n⊗Q_n) exactly as def-pur-integral-derived-operations defines them, and does not identify it with the Bhatt–Scholze derived-completion tensor. The shift and cone conventions match def-weil-abstract-derived-category. Step 1: the Koszul sign (-1)^{ri} makes a chain map; both components (-1)^{ri+r} and (-1)^{ri+i+r} agree under the Tot convention of def-pc-tensor-complex-sheaves. Step 2: Q[r] is K-flat with flat terms by step 1 and the definition in def-pc-kflat-complex, and resolutions exist by lem-pc-kflat-resolution. Step 3: the transition maps have degree 0, so the towers are isomorphic on the nose. Step 4: h_r(b,a)=(b,(-1)^r a) is a chain isomorphism; both sides equal ((-1)^r db+fa,-da), and [r][-1]=[-1][r] holds exactly. Step 5: composing steps 3 and 4 gives the map. Step 6: naturality on D(B)^2 and resolution independence follow from lem-pur-integral-operations-well-defined clauses (1) and (2), used for what they state. Test cases r=0, r=1 and a one-term complex all check out. Sources: Bhatt–Scholze Definition 3.4.10 and Lemma 3.4.12(4) on pp. 22–23, Stacks tags 011G, 012Z, 014E, 08TC, 06YS and 06YT, and the last sentence of the blueprint main-20261015 lem-sf-twist-interchange proof. No SGA is cited. No duplicate exists: the existing shift nodes are about D(O_X) or ring-level tensors. Accepted tool_uses: lem-pc-kflat-resolution and lem-pur-integral-operations-well-defined; the three cited definitions are notions, so declaring them is harmless."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98252cb84",
+  "group": "NN",
+  "result": "pass",
+  "note": "Compiled the snapshot module with nt_compile.py --json against the local side overlay: rc=0, no errors or warnings. The Lean matches every node clause through the recorded integralCompletedTensor and its comparison, with no new tensor and no added assumptions. sigma is a natural iso on D(B)^2 for all r in Z. The finite-level (-1)^(ri) formula on all generators, the tower iso (transition compatibility), the product iso, the cone map (inr coefficient 1, inl coefficient (-1)^r, recomputed by hand and the same as Mathlib's mappingCone.shiftIso) and the Roos [-1] interchange are tied to sigma by a normalization quantified over all flat-term K-flat pairs, so sigma is unique and resolution-independent. Edge cases r=0, +-1, i=0, zero complexes, empty W and universes t/u are covered. Every helper is real and docstrings carry source and blueprint tags; the only proof is the item's sorry. lean.statement matches the file verbatim, the node diff is lean-only, no name collisions. The Second reading section carries the standard 2026-10-17 direct-delivery notice found in landed reports."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompletedTensorShiftRight",
+  "declaration": "WeilConjectures.integralCompletedTensorShiftRight",
+  "declarations": [
+   "WeilConjectures.completedTensorShiftSecond",
+   "WeilConjectures.completedTensorShiftProductIso",
+   "WeilConjectures.completedTensorShiftOneSub",
+   "WeilConjectures.completedTensorShiftConeFormula",
+   "WeilConjectures.completedTensorShiftRoosIso",
+   "WeilConjectures.integralCompletedTensorFiniteShiftFormula",
+   "WeilConjectures.integralCompletedTensorRightShiftProperty",
+   "WeilConjectures.integralCompletedTensorShiftRight"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CompletedTensorShiftRight.lean",
+  "statement": "theorem integralCompletedTensorShiftRight (W : AlgebraicGeometry.Scheme.{t}) [∀ w : W, Invertible (l : W.residueField w)] (r : ℤ) : ∃ σ : completedTensorShiftSecond (DerivedCategory (integralTowerModules l E W)) r ⋙ integralCompletedTensor l E W ≅ integralCompletedTensor l E W ⋙ shiftFunctor (DerivedCategory (integralTowerModules l E W)) r, integralCompletedTensorRightShiftProperty l E W r σ",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
