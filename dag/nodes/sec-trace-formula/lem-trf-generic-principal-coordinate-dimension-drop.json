@@ -15,9 +15,92 @@
   "def-weil-ring-localization-away",
   "def-weil-pbc-mv-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $R$ and $S$ are finite type over $\\mathbf Z$, they are Noetherian (the integers are Noetherian and finite type algebras preserve Noetherianity), so $S$ has finitely many minimal primes by [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. For each minimal prime $\\mathfrak q$ of $S$, put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$; $\\mathfrak q$ is a generic point of the corresponding finite-type fibre over $\\kappa(\\mathfrak p)$. Applying the dimension-at-a-point formula [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to that fibre, whose local ring at this generic point has dimension zero, gives the fibre-component dimension $\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)$. Let $\\mathfrak q_1,\\ldots,\\mathfrak q_r$ be the minimal primes for which this value is the maximal value $d$, and put $\\mathfrak p_i=\\varphi^{-1}(\\mathfrak q_i)$. The remaining minimal primes have $\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)<d$. The $\\mathfrak q_i$ are pairwise incomparable. Apply [lem-trf-finite-prime-transcendental-coordinate] with $B=S$, $J=S$, and $k_i=\\kappa(\\mathfrak p_i)$ (embedded in $\\kappa(\\mathfrak q_i)$) to obtain $a\\in S$ whose image is transcendental over $\\kappa(\\mathfrak p_i)$ for every $i$. If the list is empty, take $a=0$; then every generic fibre component already has dimension at most $d-1.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-trf-finite-prime-transcendental-coordinate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTG, proof lines 8832–8843 (minimal maximal-dimensional fibre components and the transcendental coordinate; Tag 00P1 for the dimension calculation)"
+   }
+  },
+  {
+   "text": "Let $f_a:\\operatorname{Spec}(S)\\to\\operatorname{Spec}(R[t])$ be induced by $t\\mapsto a$. The locus where the local dimension of an $f_a$-fibre is at most $d-1$ is open by [lem-weil-pbc-local-fibre-dimension-open]. We verify that it contains every generic point $\\mathfrak q$ of $\\operatorname{Spec}(S)$. Put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ and let $\\xi=f_a(\\mathfrak q)$, so $\\kappa(\\mathfrak p)\\subseteq\\kappa(\\xi)\\subseteq\\kappa(\\mathfrak q)$. Applying [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to the finite-type fibre over $\\kappa(\\xi)$ at its generic point $\\mathfrak q$ gives $\\dim_{\\mathfrak q}(f_a^{-1}(\\xi))=\\operatorname{trdeg}_{\\kappa(\\xi)}\\kappa(\\mathfrak q)$. The tower formula [lem-sbc-transcendence-degree-tower] gives\n$$\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)=\\operatorname{trdeg}_{\\kappa(\\xi)}\\kappa(\\mathfrak q)+\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\xi).$$\nFor a selected $\\mathfrak q_i$, transcendence of $a$ makes $\\kappa(\\xi)=\\kappa(\\mathfrak p_i)(a)$ and the last degree equal to $1$, while the first step gives $\\operatorname{trdeg}_{\\kappa(\\mathfrak p_i)}\\kappa(\\mathfrak q_i)=d$, so the new fibre dimension at $\\mathfrak q_i$ is $d-1$. For every unselected minimal prime, the first step gives $\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)<d$, and the displayed equality makes $\\operatorname{trdeg}_{\\kappa(\\xi)}\\kappa(\\mathfrak q)\\leq\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)<d$. Thus all generic points lie in the open locus; call it $U$.",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTG, proof lines 8844–8855, using Morphisms Tag 02FZ (openness of bounded fibre dimension)"
+   }
+  },
+  {
+   "text": "Set $T=\\operatorname{Spec}(S)\\setminus U$ with its reduced closed subscheme structure. The generic points of every generic fibre of $\\operatorname{Spec}(S)\\to\\operatorname{Spec}(R)$ lie in $U$: if $x$ is a generic point of the fibre over a minimal prime $\\eta$ of $R$, every generization $x'$ of $x$ maps to a generization of $\\eta$, hence to $\\eta$, so $x'$ lies in the same fibre and $x'=x$; thus $x$ is a generic point of $\\operatorname{Spec}(S)$ and lies in $U$ by Step 2, so every irreducible component of a generic fibre of $T\\to\\operatorname{Spec}(R)$ is a proper closed subspace of a component of the original fibre. Any strict chain of irreducible closed subsets in such a proper component extends by its ambient generic point, hence has length at most $d-1$. Thus each generic fibre of $T$ has dimension at most $d-1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTG, proof lines 8852–8859 (removing the generic points lowers the generic-fibre dimension)"
+   }
+  },
+  {
+   "text": "The morphism $T\\to\\operatorname{Spec}(R)$ is of finite type because $T$ is defined by a quotient of the finite-type $R$-algebra $S$. Let $C_1,\\ldots,C_m$ be the finitely many irreducible components of $\\operatorname{Spec}(R)$, and for each $i$ let\n$$W_i=\\operatorname{Spec}(R)\\setminus\\bigcup_{j\\ne i}C_j.$$\nEach $W_i$ is a nonempty irreducible open with generic point $\\eta_i$, and the union of the $W_i$ is dense. Restrict $T$ to $T_i=T\\times_{\\operatorname{Spec}(R)}W_i$. If the generic fibre of $T_i\\to W_i$ is nonempty of dimension $n_i\\le d-1$, apply [lem-trf-generic-fibre-dimension-neighborhood] to obtain a nonempty open $V_i\\subseteq W_i$ on which all fibres have dimension $n_i$. If the generic fibre is empty, apply [lem-sbc-generic-fibre-closed-avoidance] to the restricted morphism at $\\eta_i$ with the closed subset $T_i$ itself; since $\\overline{\\{\\eta_i\\}}=W_i$, this gives a nonempty open $V_i\\subseteq W_i$ on which all fibres are empty. The union $V=\\bigcup_i V_i$ is an open dense subset of $\\operatorname{Spec}(R)$, and every fibre of $T$ over $V$ has dimension at most $d-1.",
+   "uses": [
+    "lem-trf-generic-fibre-dimension-neighborhood",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-sbc-generic-fibre-closed-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTG, proof lines 8857–8863, using Tags 05F7 and 054W"
+   }
+  },
+  {
+   "text": "For $q$ in the affine line over $V$, write $F=f_a^{-1}(q)$. Consider any strict chain of irreducible closed subsets\n$$C_0\\subsetneq\\cdots\\subsetneq C_m\\subseteq F$$\nand let $\\xi$ be the generic point of its top member $C_m$. If $\\xi\\in T$, then $C_m\\subseteq T_q$ because $T$ is closed, so $m\\le\\dim T_q$. Let $\\mathfrak p\\in V$ be the image of $q$ in $\\operatorname{Spec}(R)$; the fibre $T_q$ is, as a topological space, a subspace of the fibre $T_{\\mathfrak p}$. A subspace has Krull dimension at most that of the ambient space (elementary: if $Z_0\\subsetneq\\cdots\\subsetneq Z_m$ are irreducible closed in the subspace, their closures in $T_{\\mathfrak p}$ are irreducible and closed, and they remain distinct because each $Z_i$ is the trace on the subspace of its closure). Hence $m\\le\\dim T_q\\le\\dim T_{\\mathfrak p}\\le d-1$ by Step 4. If $\\xi\\in U$, apply [lem-sc-closed-irreducible-dimension-trdeg] to the finite-type $\\kappa(q)$-scheme $F$ and $C_m$ to get $\\dim C_m=\\operatorname{trdeg}_{\\kappa(q)}\\kappa_F(\\xi)$. The 00P1 formula [lem-weil-pbc-dimension-at-point-local-ring-trdeg] gives $\\operatorname{trdeg}_{\\kappa(q)}\\kappa_F(\\xi)\\le\\dim_\\xi F$, and the definition of $U$ gives $\\dim_\\xi F\\le d-1$. Hence $m\\le\\dim C_m\\le d-1$ in either case, so every such fibre has dimension at most $d-1$. Since $V$ is dense, its closed complement $V(I)$ contains no generic point of $\\operatorname{Spec}(R)$, so $I$ lies in no minimal prime; $R$ is Noetherian and has finitely many minimal primes [lem-weil-pbc-finite-type-algebra-noetherian] [lem-weil-pbc-noetherian-finitely-many-minimal-primes], so prime avoidance [lem-weil-pbc-prime-avoidance] applied to the ideal defining the closed complement of $V$ gives an element $f\\in R$ outside every minimal prime with $D(f)\\subseteq V$. Localizing the base and source at $f$ identifies the fibres over $\\operatorname{Spec}(R_f[t])$ with the fibres over $D(f)$, using the localization convention [def-weil-ring-localization-away]. Therefore $a$ and $f$ satisfy the required conclusion.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance",
+    "def-weil-ring-localization-away",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTG, proof lines 8864–8871 (fibre decomposition, principal-open shrinking and localization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "lem-sbc-generic-fibre-closed-avoidance",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-trf-finite-prime-transcendental-coordinate",
+  "lem-trf-generic-fibre-dimension-neighborhood",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GTG, lemma-weak-relative-noether-normalization, proof lines 8832–8871; the generic-point, dimension-drop, generic-base shrinking and principal-open steps"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,7 +146,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-weak-relative-noether-normalization",
@@ -75,7 +158,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "No sentence in the ancestor lem-trf-local-term-locality states this. Through the recorded via chain, it supplies the generic-open step of the affine normalization core used by lem-trf-local-quasi-finite-projection; specifically Stacks 0GTG proof from the choice of minimal primes to V=D(f).",
+   "place": "The ancestor proof has no sentence for this imported affine-normalization lemma; through the recorded via chain, this node realizes the generic-open coordinate construction corresponding to Stacks Tag 0GTG lines 8832–8871.",
    "via": [
     "lem-trf-weak-relative-noether-normalization",
     "lem-trf-local-quasi-finite-projection",
@@ -90,5 +173,61 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-generic-principal-coordinate-dimension-drop",
+  "worker": "stage1",
+  "summary": "Split the intermediate generic-principal-open assertion in Stacks Tag 0GTG into the finite-prime simultaneous-transcendence input, the generic-fibre dimension-neighborhood input, and the existing empty-generic-fibre shrinking input. The five proof steps then follow the source: choose a transcendental coordinate on maximal-dimensional minimal fibre components, use openness of local fibre dimension, remove the generic points to lower the complement dimension, shrink over each irreducible base component, and choose a principal open avoiding all minimal primes. The target statement and hypotheses are unchanged.",
+  "blueprint": [
+   "Tag 0GTG generic-point choice and shrinking argument (lines 8832–8871) realized by Steps 1–5."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "The source route needs Noetherianity of finite-type algebras to make the minimal-prime and component lists finite; no node of sk-i-curve-zero supplies this ring-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "why": "Step 1 and Step 4 use finiteness of minimal primes of R and S; this is a generic Noetherian tool outside the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Step 1 and Step 2 use the finite-type fibre dimension/transcendence-degree calculation at a generic prime; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-local-fibre-dimension-open",
+    "why": "Step 2 uses the openness of the locus where local fibre dimension is bounded, the geometric input explicitly cited by Tag 0GTG."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Step 5 uses finite prime avoidance to choose f outside all minimal primes; this is a Mathlib leaf generic tool."
+   },
+   {
+    "node": "lem-sbc-generic-fibre-closed-avoidance",
+    "why": "The empty-generic-fibre case of Step 4 is exactly its specialization with the closed subset equal to the source; this generic finite-type shrinking tool is outside sk-i-curve-zero."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Step 5 takes from its statement that an irreducible closed subset of a finite-type scheme over a field has dimension equal to the transcendence degree of its generic point; a generic dimension-theory tool that no node of sk-i-curve-zero gives (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-sbc-generic-fibre-closed-avoidance",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-522c83c6b",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-522c83c6b (reviewer sub-agent of L); spot-checked: I read Stacks 0GTG (more-morphisms.tex 8832-8871), 0GTE (8566-8587) and 05F7 (8411-8432), the item, both new nodes in full, and every cited statement. The item statement equals the intermediate assertion of 0GTG and is not weakened; I tested Z->Z[x] and Z->F_p[x] with d=1. Steps 1-2 are correct: the 00P1 calculation at minimal primes, then 0GTE with B=J=S, then 02FZ with n=d-1>=0, then the trdeg tower. Step 4 is correct: on each irreducible open W_i it applies 05F7, or 054W closed avoidance when the generic fibre is empty. The new 0GTE and 05F7 nodes are true statements, strictly smaller than the item and not duplicates. I made three fixes (files under fixes/dag/nodes/sec-trace-formula). (1) Both new nodes had blueprint.from.via=[]; it is now the item followed by the item's via chain. (2) Step 5 bounded dim T_q by Step 4, which only bounds T_p for p in V. I added the elementary subspace inequality dim T_q <= dim T_p, needed for non-closed q, and cited the noetherian and finitely-many-minimal-primes leaves for prime avoidance. Step 3 now also gives the generization reason that generic points of generic fibres lie in U. (3) lem-sc-closed-irreducible-dimension-trdeg, a tool from unit sk-prop-sf-cbc, was used in Step 5 but not declared; I added it to split_report.tool_uses. I accept the tool uses of 00P1, 02FZ, 054W and that node.; 3 file(s) fixed by the reviewer"
  }
 }

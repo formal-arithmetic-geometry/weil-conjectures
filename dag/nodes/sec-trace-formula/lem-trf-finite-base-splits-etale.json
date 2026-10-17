@@ -16,9 +16,177 @@
   "def-weil-open-immersion",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove the single-map assertion by induction on a bound $d$ for geometric fibre cardinalities, simultaneously for every Noetherian base $B$ and every separated etale finite-presentation $v:E\\to B$; no surjectivity of $v$ is assumed. Such $E$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], hence quasi-compact. On affine charts [lem-weil-pbc-etale-ring-map-quasi-finite] gives local quasi-finiteness, so [lem-weil-pbc-lqf-qc-source-bounded-fibres] bounds the degrees of its fibres. By [lem-weil-pbc-fibre-degree-base-change] the same bound holds after extension to algebraically closed fields. Each geometric fibre is etale by [lem-weil-pbc-etale-scheme-base-change]; [lem-weil-pbc-etale-algebra-over-field-product] identifies its algebra with a finite product of copies of that algebraically closed field, so degree equals geometric cardinality. Thus some $d$ suffices for every input. If $d=0$, $E$ has no points and is empty; the identity of $B$ and the empty coproduct solve this case. For $d>0$ assume the assertion for bound $d-1$ over every Noetherian base and fix $u:U\\to S$ with bound $d$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-fibre-degree-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded); geometric-degree identification as in more-morphisms.tex Tag 09Z0 (lemma-there-is-a-scheme-integral-over), first induction paragraph; Orgogozo Lemma 9.1.3, printed p. 20."
+   }
+  },
+  {
+   "text": "The base $S$ is qcqs: quasi-compact by hypothesis and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Since $u$ is separated, finite type and everywhere quasi-finite by Step 1, [thm-pqf-zmt-factorization] gives $U\\hookrightarrow Y\\to S$ with the first arrow a quasi-compact open immersion and the second finite. Here $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [sk-lem-nagata-sketch-closure] to replace $Y$ by the scheme-theoretic closure $\\overline U$ of $U$. Its closed immersion into $Y$ is finite by [lem-weil-pbc-closed-immersion-finite], so $p:\\overline U\\to S$ remains finite by [lem-weil-pbc-finite-composition] and $\\overline U$ remains Noetherian. Write $j:U\\hookrightarrow\\overline U$. This open is dense: a nonempty open disjoint from $U$ would contradict injectivity of $\\mathcal O_{\\overline U}\\to j_*\\mathcal O_U$, since its unit section would map to zero. Finally $p$ is separated by [lem-weil-pbc-finite-closed-map-finite-fibres].",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-pqf-zmt-factorization",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-lem-nagata-sketch-closure",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05K0 (lemma-quasi-finite-separated-pass-through-finite); morphisms.tex Tag 01RG (lemma-quasi-compact-immersion); Orgogozo Lemma 9.1.3, Zariski-main factorization."
+   }
+  },
+  {
+   "text": "Put $P=U\\times_S\\overline U$, with projections $a$ to $U$ and $b$ to $\\overline U$, and consider the graph $\\gamma=(1,j):U\\to P$. It is closed: the square with top arrow $j:U\\to\\overline U$, bottom arrow $(ja,b):P\\to\\overline U\\times_S\\overline U$, and right arrow $\\Delta_p$ is Cartesian by [def-pc-fibre-product]. The separatedness definition [def-weil-proper-morphism] makes $\\Delta_p$ closed, so [lem-weil-pbc-closed-immersion-base-change] makes $\\gamma$ closed. It is open: inside the open subscheme $U\\times_SU\\subset P$ it is $\\Delta_u$, an open immersion by [def-weil-etale-morphism] and [def-weil-unramified-morphism]; that subscheme is open by [lem-weil-pbc-open-immersion-base-change]. Thus, writing $W$ for the complementary open-and-closed subscheme, we have $P=U\\amalg W$ over $\\overline U$, with first structure map $j$. The map $w:W\\to\\overline U$ is etale by [lem-weil-pbc-etale-scheme-base-change] and [lem-weil-pbc-etale-composition-cancellation]. It is separated because its diagonal is the pullback of the closed diagonal of $b$, which is separated by [lem-weil-pbc-separated-base-change]. The map $b$ is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence], so $P$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The open $W$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Hence $w$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence], and, being separated and etale, is of finite presentation. It is quasi-finite by the same affine-chart argument as Step 1.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KS (lemma-semi-diagonal), proved here by pulling back the separated diagonal; morphisms.tex Tags 02GE (lemma-diagonal-unramified-morphism), 02GO (lemma-base-change-etale), 02GN (lemma-composition-etale); more-morphisms.tex Tag 09Z0, diagonal-complement paragraph."
+   }
+  },
+  {
+   "text": "For a geometric point of the dense open $U\\subset\\overline U$, the fibre of $P\\to\\overline U$ is the corresponding fibre of $u$, with at most $d$ points. The graph summand contributes exactly one point, so the fibre of $w$ has at most $d-1$ points there. To extend this bound, apply [lem-weil-pbc-flat-fp-qf-stratification] to $w$, which is flat and locally of finite presentation because it is etale [def-weil-etale-morphism], and is separated and quasi-finite by Step 3. Let its closed sets be $Z_r$. The universal property applied to residue-field points says that $Z_r$ is exactly the locus of fibre degree at most $r$: every point lies in one stratum and its fibre degree is that stratum's index. By [lem-weil-pbc-fibre-degree-base-change], etale base change [lem-weil-pbc-etale-scheme-base-change], and the product-of-separable-fields description [lem-weil-pbc-etale-algebra-over-field-product], this degree is also the geometric fibre cardinality. Consequently $Z_{d-1}$ contains $U$ and, being closed, equals $\\overline U$. The induction hypothesis of Step 1 now applies to $w:W\\to\\overline U$: its base is Noetherian, its morphism has all the required properties, and its bound is $d-1$. Obtain a finite surjection $q:T'\\to\\overline U$ and an isomorphism $W\\times_{\\overline U}T'\\simeq\\coprod_{\\ell\\in L}A_\\ell$ with $L$ finite and each $A_\\ell\\subseteq T'$ a quasi-compact open. This is an actual application of the smaller-bound assertion, with no surjectivity hypothesis on $w$.",
+   "uses": [
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-fibre-degree-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 07RY (lemma-stratify-flat-fp-lqf-universally-bounded) and 07RZ (lemma-stratify-flat-fp-qf); Tag 09Z0, strict fibre-degree calculation, adapted to the splitting induction of Orgogozo Lemma 9.1.3."
+   }
+  },
+  {
+   "text": "The image $u(U)$ is open by [lem-weil-pbc-etale-morphism-open-map]. Let $C=(S\\setminus u(U))_{\\mathrm{red}}$ be the reduced induced closed subscheme supplied by [lem-weil-pbc-reduced-induced-closed-subscheme], and take $T_u=T'\\amalg C$. Its map to $S$ is finite: $T'\\to S$ is finite by [lem-weil-pbc-finite-composition], and $C\\to S$ by [lem-weil-pbc-closed-immersion-finite]; over an affine of $S$, their disjoint union is the spectrum of the product of two finite algebras, again a finite algebra [def-weil-finite-integral-morphism]. It is surjective: a point in $u(U)$ lifts to $U\\subset\\overline U$ and then along $q$, and every other point lifts to $C$. Base changing the decomposition of Step 3 along $q$ gives, by [def-pc-fibre-product],\n$$U\\times_ST'\\simeq (U\\times_{\\overline U}T')\\amalg(W\\times_{\\overline U}T')\\simeq V\\amalg\\coprod_{\\ell\\in L}A_\\ell,$$\nwhere $V=q^{-1}(U)$ is open by [lem-weil-pbc-open-immersion-base-change]. Since $T'$ is finite over the Noetherian $\\overline U$, it is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; thus $V$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Moreover $U\\times_SC=\\varnothing$, since its underlying points would map both into $u(U)$ and its complement. Pullback distributes over this finite disjoint union, so the same displayed coproduct, viewed as opens in the component $T'\\subset T_u$, is $U\\times_ST_u$. Their maps to $T_u$ are open immersions. This completes the induction and the single-map assertion, including $d=1$ via the $d-1=0$ case.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-closed-immersion-finite",
+    "def-weil-finite-integral-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo Lemma 9.1.3, printed p. 20, adding the closed complement of the image and iterating the coproduct decomposition; the explicit finite induction is written here."
+   }
+  },
+  {
+   "text": "If $I$ is empty, take $T=S$ and all coproducts empty. Otherwise, for each\n$i\\in I$ repeat the five preceding single-map steps for $U_i\\to S$. We obtain a\nfinite surjection $r_i:T_i\\to S$, a finite index set $J_i$, quasi-compact\nopens $W_{ij}\\subseteq T_i$, and an isomorphism\n$U_i\\times_ST_i\\simeq\\coprod_{j\\in J_i}W_{ij}$ over $T_i$. The auxiliary\nstatement includes the cases $U_i=\\varnothing$ and $J_i=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo author draft, Lemma 9.1.3 and its proof, printed p. 20; apply the single-map construction to each member of the finite family."
+   }
+  },
+  {
+   "text": "Take the iterated fibre product $T=\\prod_{i\\in I}T_i$ over $S$, with the empty product interpreted as $S$. By repeated application of [lem-weil-pbc-finite-morphism-permanence] and [lem-weil-pbc-finite-composition], the map $T\\to S$ and each projection $p_i:T\\to T_i$ are finite. Each factor $T_i\\to S$ is surjective, so [lem-weil-pbc-surjective-base-change] and composition of surjective maps show inductively that $T\\to S$ is surjective as well.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 01WK (lemma-composition-finite), and 01S1 (lemma-base-change-surjective)."
+   }
+  },
+  {
+   "text": "For each $i$, pull back the isomorphism of Step 6 along $p_i:T\\to T_i$. Associativity of fibre products and their compatibility with disjoint open unions identify the pullback as\n$$U_i\\times_ST\\simeq\\coprod_{j\\in J_i}(W_{ij}\\times_{T_i}T).$$\nThese identities follow directly from the universal property [def-pc-fibre-product], or by restricting to each open summand and gluing. Each summand maps to $T$ by an open immersion by [lem-weil-pbc-open-immersion-base-change].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo Lemma 9.1.3, finite-family base-change consequence; morphisms of open subschemes under pullback."
+   }
+  },
+  {
+   "text": "Each $W_{ij}$ is quasi-compact by the single-map construction of Step 5, used in Step 6. Cover it by finitely many affine opens. The inverse image of each under the finite map $p_i:T\\to T_i$ is affine: the restricted map is finite by part (a) of [lem-weil-pbc-finite-morphism-permanence], and its source is affine by part (b). Thus $W_{ij}\\times_{T_i}T$ is covered by finitely many affines and is quasi-compact. This proves all required clauses for the common finite surjection $T\\to S$. The coproduct summands need not be disjoint as subsets of $T$ or cover $T$, and the construction also covers empty members and the empty family.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WL (lemma-base-change-finite); Definition 01WH (definition-integral), finite morphisms are affine; finite affine covers of inverse images give quasi-compactness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-fp-qf-stratification",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "sk-lem-nagata-sketch-closure",
+  "thm-pqf-zmt-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Orgogozo Lemma 9.1.3, printed p. 20: finite compactification, diagonal decomposition, and iteration. The full induction over all Noetherian bases uses the degree-bound argument of Stacks 09Z0 without its surjectivity-dependent image/refinement steps."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,7 +225,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-proper-image-constructibility",
@@ -69,7 +237,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Ancestor proof, specialization-to-the-normal-cone paragraph: the nearby-cycle constructibility input along lem-trf-oriented-proper-image-constructibility. Orgogozo author draft, Lemma 9.1.3 and its proof, printed p. 20; the finite-family version follows by successive finite surjective base changes. Local archival PDF WANTED; source read online.",
+   "place": "Ancestor proof, specialization-to-the-normal-cone paragraph: the nearby-cycle constructibility input along lem-trf-oriented-proper-image-constructibility. Orgogozo author draft, Lemma 9.1.3 and its proof, printed p. 20; the finite-family version follows by successive finite surjective base changes.",
    "via": [
     "lem-trf-oriented-proper-image-constructibility",
     "lem-trf-psi-proper-surjective-constructibility",
@@ -81,5 +249,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-base-splits-etale",
+  "worker": "stage1",
+  "summary": "Repaired the returned mathematical gap by induction on a geometric fibre bound over all Noetherian bases, without assuming the etale map is surjective. The diagonal complement over the dense finite compactification has smaller degree by the existing closed-degree stratification node; the induction hypothesis splits that complement. Add the reduced closed complement of the original image to obtain a finite surjection to S. The resulting coproduct is obtained by pullback of the actual diagonal decomposition, not by local sections. Reused existing infrastructure throughout; no new nodes.",
+  "blueprint": "Ancestor lem-trf-local-term-locality, specialization-to-the-normal-cone paragraph supplying lem-trf-oriented-proper-image-constructibility: Steps 1-5 give its finite-base splitting input along Orgogozo Lemma 9.1.3, and Steps 6-9 assemble a common finite base for a finite family.",
+  "tool_uses": [
+   {
+    "node": "thm-pqf-zmt-factorization",
+    "why": "Zariski main gives the finite compactification of the separated quasi-finite map; this is a generic scheme theorem not supplied by sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "The affine-chart etale-to-quasi-finite implication is needed before compactification and induction; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "why": "The universally bounded fibre-degree theorem initializes the finite induction; the unit has no bound theorem."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-degree-base-change",
+    "why": "Fibre degrees must agree with geometric fibre degrees after field extension; this generic comparison is not supplied by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-fp-qf-stratification",
+    "why": "Closed degree loci extend the strict bound from dense U to all of the finite compactification; this generic stratification is not supplied by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The closed complement of the image must carry an actual scheme structure; the generic reduced-induced construction is not supplied by the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pqf-zmt-factorization",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-flat-fp-qf-stratification",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-e317eaa6b",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e317eaa6b (reviewer sub-agent of L); spot-checked: I read the item, all 28 cited node statements, the unit sk-i-curve-zero, the parent's Step 5, and the local Stacks texts of 09Z0 and 07RZ. The statement is unchanged and true (Orgogozo 9.1.3; the splitting form of the degree induction in 09Z0). I tested it on: the empty family, empty U_i, two copies of A^1-0, S ⊔ S' with S' connected finite étale over S, and an open immersion (d=1). Step 1 sets up the induction on the geometric fibre bound over all Noetherian bases, with base case d=0; the bound comes from 03JA plus the fibre-degree and étale-over-field nodes. Step 2 checks the ZMT and Nagata-closure hypotheses; finite gives finite type and Noetherian gives quasi-separated in one line each, and the topological-density argument is correct. In Step 3 the graph is closed (pullback of the diagonal of p, i.e. 01KS proved in the step) and open (the diagonal of u inside the open U x_S U), and W is étale, separated, qc and fp. Step 4: the 07RZ universal property tested on residue fields shows that {degree <= r} is closed, so Z_{d-1} = Ubar; quasi-finiteness holds since the fibres are finite and discrete. The induction then genuinely applies to W -> Ubar without surjectivity. Step 5: T' ⊔ (S - u(U))_red is finite and surjective, U x_S T' = q^{-1}(U) ⊔ W x T' = V ⊔ ⊔A_l, and U x_S C is empty. Steps 6-9: the finite surjective fibre product over S, pullback of the splitting, and qc via affine preimages under the finite maps. No SGA is used, there are no new nodes, and the duplicate search found only the weaker 09Z0 local-factorization node. I accept the six declared tool_uses (ZMT, etale-ring-map-qf, 03JA bound, fibre-degree base change, 07RZ, reduced-induced subscheme) as generic black boxes; the other off-unit nodes are Lean-closed or Mathlib leaves. The Orgogozo PDF is still WANTED, so proof_origin=agent is correct. No changes."
  }
 }
