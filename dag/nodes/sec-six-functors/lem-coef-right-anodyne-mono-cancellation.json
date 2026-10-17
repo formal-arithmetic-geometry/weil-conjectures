@@ -11,9 +11,86 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-right-anodyne-lifting-characterization], a simplicial map is right anodyne in the sense of [def-coef-infinity-right-anodyne] if and only if it has the left lifting property against every right fibration of [def-coef-infinity-fibrations]. Both directions are used below: the forward direction for $gf$ in Step 2 and for the pushout-product map in Step 4, and the converse for $g$ in Step 5.",
+   "uses": [
+    "lem-coef-right-anodyne-lifting-characterization",
+    "def-coef-infinity-right-anodyne",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.1.10, printed p.140; the lifting characterization of right anodyne maps is cited as a node of its own"
+   }
+  },
+  {
+   "text": "If $g$ is right anodyne, so is $gf$: the composite is the transfinite composition of the length-two chain $A\\xrightarrow f B\\xrightarrow g C$, so this is directly the composition closure in [def-coef-infinity-right-anodyne]. For the converse assume $gf$ is right anodyne. Let $q:E\\to S$ be any right fibration and choose a lifting square for $g$, given by $a:B\\to E$ and $b:C\\to S$ with $qa=bg$. Step 1 applied to $gf$ gives $h:C\\to E$ such that $hgf=af$ and $qh=b$. Thus $a$ and $hg$ have exactly the same restriction along $f$ and the same composite with $q$.",
+   "uses": [
+    "def-coef-infinity-right-anodyne",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.1.10, printed p.140; explicit agent lifting argument, composition direction and the initial lift for the converse"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-right-fibration-exponentiation] to the right anodyne map $f$ and the right fibration $q$. The restriction map $\\rho:\\operatorname{Fun}(B,E)\\to\\operatorname{Fun}(B,S)\\times_{\\operatorname{Fun}(A,S)}\\operatorname{Fun}(A,E)$ is a trivial Kan fibration. The vertices $a$ and $hg$ have the same image $(bg,af)$. Use the boundary lifting property for $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ from [def-weil-pbc-trivial-kan-fibration], with upper endpoints $a,hg$ and lower map the constant edge at $(bg,af)$. The lift is a map $H:B\\times\\Delta^1\\to E$ satisfying $H|_{B\\times\\{0\\}}=a$, $H|_{B\\times\\{1\\}}=hg$, $qH=bg\\,\\mathrm{pr}_B$, and $H(f\\times1)=af\\,\\mathrm{pr}_A$. The product interpretation is the defining formula for the internal functor simplicial set in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-weil-pbc-trivial-kan-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.1.10, printed p.140; explicit agent lifting argument, homotopy correcting the restriction of the initial lift"
+   }
+  },
+  {
+   "text": "The endpoint inclusion $e:\\{1\\}\\hookrightarrow\\Delta^1$ is the right horn $\\Lambda_1^1\\hookrightarrow\\Delta^1$, hence right anodyne by [def-coef-infinity-right-anodyne]. Since $g$ is a monomorphism, [lem-coef-infinity-right-anodyne-product], with first variable $e$ and second variable $g$, gives a right anodyne map whose domain is $(\\{1\\}\\times C)\\amalg_{\\{1\\}\\times B}(\\Delta^1\\times B)$ and whose codomain is $\\Delta^1\\times C$. In each degree the bijections $(t,x)\\mapsto(x,t)$ commute with all simplicial operators and with the two gluing inclusions. They therefore induce an isomorphism of this pushout diagram with the diagram defining $j:(B\\times\\Delta^1)\\amalg_{B\\times\\{1\\}}(C\\times\\{1\\})\\to C\\times\\Delta^1$. The map $j$ is right anodyne because conjugation by isomorphisms preserves the class: such a conjugate is a finite composite of the original map and two isomorphisms, all in the class of [def-coef-infinity-right-anodyne]. The maps $H$ and $h$ agree on $B\\times\\{1\\}$ because $H_1=hg$, so they define a map from this pushout to $E$. Its composite with $q$ agrees with the restriction of $b\\,\\mathrm{pr}_C$. Step 1 gives an extension $\\widetilde H:C\\times\\Delta^1\\to E$ over $S$. Put $c=\\widetilde H|_{C\\times\\{0\\}}$. Then $cg=H_0=a$ and $qc=b$, giving the requested diagonal in the arbitrary lifting square for $g$. Notice that the prescribed map on $C$ is at endpoint $1$, precisely the endpoint allowed by the right-horn convention.",
+   "uses": [
+    "def-coef-infinity-right-anodyne",
+    "lem-coef-infinity-right-anodyne-product",
+    "def-weil-pbc-category-colimit",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.1.10, printed p.140; explicit agent lifting argument, extend the correcting homotopy using the final-endpoint pushout product"
+   }
+  },
+  {
+   "text": "Step 4 proves that $g$ has the left lifting property against every right fibration. The converse direction of the characterization in Step 1 therefore makes $g$ right anodyne. Together with Step 2 this proves the claimed equivalence. The argument used only the right anodyne hypothesis on $f$, the right anodyne hypothesis on $gf$ for the reverse direction, and the degreewise injectivity of $g$ in the pushout-product application; it imposed no Kan or quasicategory hypothesis on $A,B,C$.",
+   "uses": [
+    "lem-coef-right-anodyne-lifting-characterization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.1.10, printed p.140; explicit agent lifting argument, conclude by the lifting characterization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-right-anodyne",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-right-anodyne-lifting-characterization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Corollary 4.1.10, printed p.140, read online; the explicit right-horn lifting/homotopy proof here is supplied by the worker. Archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +154,73 @@
    "results": "{\"t\": \"2026-10-17T03:39:12Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|RightAnodyne|right_anodyne|leftAnodyne|LeftAnodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "Independent second reading: no match. Semantic hits are HornColimits face identities and modelCategoryQuillen.J (all horns); Loogle comp hits give all-horn and inner-anodyne saturation, not cancellation for the right-horn class. Read AnodyneExtensions/Basic.lean:63-93 and CategoryWithFibrations.lean:35-106. Broad grep finds ordinary/inner anodyne extensions; the targeted one-sided names grep has zero hits. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAnodyne|RightAnodyne|right_anodyne|anodyne.*cancel|cancel.*anodyne",
+   "results": "{\"t\": \"2026-10-17T04:07:54Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|RightAnodyne|right_anodyne|anodyne.*cancel|cancel.*anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the ordinary Mono cancellation theorem concerns equality of maps, and the simplicial modelCategoryQuillen.J and anodyneExtensions use all horns. Source read at CategoryTheory/Category/Basic.lean:330-363, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-105; neither is an exact match or a one-line specialization to the right-horn class. The second semantic phrasing returned only all-horn or inner-horn facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right anodyne inclusions of simplicial sets satisfy right cancellation among monomorphisms",
+   "results": "{\"t\": \"2026-10-17T04:07:55Z\", \"tool\": \"leansearch\", \"query\": \"Right anodyne inclusions of simplicial sets satisfy right cancellation among monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mono.right_cancellation\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"CategoryTheory.Mono.casesOn\", \"SSet.Subcomplex.instMonoι\", \"CategoryTheory.Mono.rec\", \"CategoryTheory.Mono.recOn\", \"CategoryTheory.Limits.MonoCoprod.instMonoInr\", \"SSet.Subcomplex.instIsIsoToRangeOfMono\"], \"digest\": \"d7f6a2aa933a0913\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the ordinary Mono cancellation theorem concerns equality of maps, and the simplicial modelCategoryQuillen.J and anodyneExtensions use all horns. Source read at CategoryTheory/Category/Basic.lean:330-363, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-105; neither is an exact match or a one-line specialization to the right-horn class. The second semantic phrasing returned only all-horn or inner-horn facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", \"cancel\"",
+   "results": "{\"t\": \"2026-10-17T04:07:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", \\\"cancel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the ordinary Mono cancellation theorem concerns equality of maps, and the simplicial modelCategoryQuillen.J and anodyneExtensions use all horns. Source read at CategoryTheory/Category/Basic.lean:330-363, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-105; neither is an exact match or a one-line specialization to the right-horn class. The second semantic phrasing returned only all-horn or inner-horn facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If f and g are monomorphisms of simplicial sets and f is right anodyne, then g is right anodyne if and only if g composed with f is right anodyne",
+   "results": "{\"t\": \"2026-10-17T04:07:55Z\", \"tool\": \"leanfinder\", \"query\": \"If f and g are monomorphisms of simplicial sets and f is right anodyne, then g is right anodyne if and only if g composed with f is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.I\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\"], \"digest\": \"284ab46cdbdbe1f0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the ordinary Mono cancellation theorem concerns equality of maps, and the simplicial modelCategoryQuillen.J and anodyneExtensions use all horns. Source read at CategoryTheory/Category/Basic.lean:330-363, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-105; neither is an exact match or a one-line specialization to the right-horn class. The second semantic phrasing returned only all-horn or inner-horn facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The weakly saturated class of positive-index horn inclusions in simplicial sets satisfies cancellation on the right for inclusions",
+   "results": "{\"t\": \"2026-10-17T04:08:51Z\", \"tool\": \"leanfinder\", \"query\": \"The weakly saturated class of positive-index horn inclusions in simplicial sets satisfies cancellation on the right for inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.horn.ι_ι\", \"SSet.KanComplex.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.horn.ι_ι_assoc\"], \"digest\": \"78f4cbf9dfb4bcfb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the ordinary Mono cancellation theorem concerns equality of maps, and the simplicial modelCategoryQuillen.J and anodyneExtensions use all horns. Source read at CategoryTheory/Category/Basic.lean:330-363, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-105; neither is an exact match or a one-line specialization to the right-horn class. The second semantic phrasing returned only all-horn or inner-horn facts."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAnodyne|RightAnodyne|right_anodyne|anodyne.*cancel|cancel.*anodyne",
+   "results": "{\"t\": \"2026-10-17T04:20:52Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|RightAnodyne|right_anodyne|anodyne.*cancel|cancel.*anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: no match. Targeted grep and Loogle return zero hits. LeanFinder hits are horn face/colimit identities and all-horn J membership. LeanSearch hits concern generic trivial cofibrations, the all-horn Quillen structure, and ordinary Mono equality cancellation. None identifies the positive-index right-horn class or states its cancellation. Read AnodyneExtensions/Basic.lean:63-105, CategoryWithFibrations.lean:35-106, Category/Basic.lean:330-363, HornColimits.lean:310-330 and 404-417, and ModelCategory/CategoryWithCofibrations.lean definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", \"cancel\"",
+   "results": "{\"t\": \"2026-10-17T04:20:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", \\\"cancel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: no match. Targeted grep and Loogle return zero hits. LeanFinder hits are horn face/colimit identities and all-horn J membership. LeanSearch hits concern generic trivial cofibrations, the all-horn Quillen structure, and ordinary Mono equality cancellation. None identifies the positive-index right-horn class or states its cancellation. Read AnodyneExtensions/Basic.lean:63-105, CategoryWithFibrations.lean:35-106, Category/Basic.lean:330-363, HornColimits.lean:310-330 and 404-417, and ModelCategory/CategoryWithCofibrations.lean definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial sets generated by final horns, cancel a right anodyne inclusion from a right anodyne composite of injective maps",
+   "results": "{\"t\": \"2026-10-17T04:21:02Z\", \"tool\": \"leanfinder\", \"query\": \"For simplicial sets generated by final horns, cancel a right anodyne inclusion from a right anodyne composite of injective maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.ι_ι_assoc\", \"SSet.horn.ι_ι\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₁.ι₂_desc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.horn₃₁.ι₀_desc\"], \"digest\": \"cd176a2d2cc8faca\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: no match. Targeted grep and Loogle return zero hits. LeanFinder hits are horn face/colimit identities and all-horn J membership. LeanSearch hits concern generic trivial cofibrations, the all-horn Quillen structure, and ordinary Mono equality cancellation. None identifies the positive-index right-horn class or states its cancellation. Read AnodyneExtensions/Basic.lean:63-105, CategoryWithFibrations.lean:35-106, Category/Basic.lean:330-363, HornColimits.lean:310-330 and 404-417, and ModelCategory/CategoryWithCofibrations.lean definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right cancellation of trivial cofibrations in the contravariant simplicial set model structure among monomorphisms",
+   "results": "{\"t\": \"2026-10-17T04:22:00Z\", \"tool\": \"leansearch\", \"query\": \"Right cancellation of trivial cofibrations in the contravariant simplicial set model structure among monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialCofibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.instHasFactorizationOppositeCofibrationsTrivialFibrationsOfTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instHasFactorizationOppositeTrivialCofibrationsFibrationsOfCofibrationsTrivialFibrations\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"CategoryTheory.Mono.right_cancellation\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"HomotopicalAlgebra.trivialFibrations_op\"], \"digest\": \"68d742972780fe71\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: no match. Targeted grep and Loogle return zero hits. LeanFinder hits are horn face/colimit identities and all-horn J membership. LeanSearch hits concern generic trivial cofibrations, the all-horn Quillen structure, and ordinary Mono equality cancellation. None identifies the positive-index right-horn class or states its cancellation. Read AnodyneExtensions/Basic.lean:63-105, CategoryWithFibrations.lean:35-106, Category/Basic.lean:330-363, HornColimits.lean:310-330 and 404-417, and ModelCategory/CategoryWithCofibrations.lean definitions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-left-fibration-right-anodyne-base-change",
@@ -111,5 +251,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-anodyne-mono-cancellation",
+  "worker": "stage1",
+  "summary": "The missing item synchronized during this retry. Kept its statement and provenance, checked the exact Corollary 4.1.10 online, and supplied a six-step lifting proof using existing right-horn cellular factorization, exponentiation and pushout-product nodes. Verified finite-horn smallness explicitly, the final-endpoint convention, all cited statements and absence of cycles. No new nodes and no new Mathlib leaves. Review by Q119 (cc reader): the right-anodyne lifting characterization (former Steps 1-2, including the small-object verification) was extracted as the statement-only node lem-coef-right-anodyne-lifting-characterization, cited by Step 1; the remaining steps are unchanged and renumbered.",
+  "blueprint": "Realizes the restored blueprint.from.place: auxiliary right cancellation in the saturation argument for right-anodyne base change, which serves the terminal-fibre twisted-resolution branch of derived coefficient adjunction in proof paragraph 2 of prop-coef-integral-exceptional-adjoint."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-20114f472",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-20114f472 (reviewer sub-agent of L); spot-checked: The proof is correct and I read every step against the full statements of all 10 cited nodes and the parent citer, lem-coef-left-fibration-right-anodyne-base-change. Checks: Step 4 gives rho(a)=rho(hg)=(bg,af), and the n=1 boundary lift yields H with H_0=a, H_1=hg, qH=bg.pr and H(f x 1)=af.pr. Step 5 uses Lambda^1_1={1}; the pushout-product lemma applies with i={1}->Delta^1 and k=g, and the coordinate swap is conjugation by isomorphisms. The glued map gives c=H~_0 with cg=a and qc=b. The Step 2 retract equations pd=1 and dv=j hold. No cycle: the dependency closure has 17 nodes and contains neither the item nor its parent. All uses are in the unit sk-prop-sf-biduality-general; no tool_use is needed. Small cases agree with the statement: identities, empty sets, {1}->Delta^1 versus {0}->Delta^1 (the latter is itself a right fibration with no section), and {2} in Lambda^2_2 in Delta^2. Limitation: I could not open Cisinski Cor. 4.1.10 because network access is blocked here. The statement is the standard cancellation for final monomorphisms, and the delivered proof needs no source. Long-step check: Step 2 (2242 chars) hides a standalone standard lemma. With Step 1 it proves that right anodyne maps are exactly the maps with the left lifting property against right fibrations. Inline it checks the small-object hypotheses (degreewise cocompleteness, finite presentability of horns, coproducts as cell maps) and the retract argument. Mathlib states the all-horn and inner-horn analogues as separate lemmas (AnodyneExtensions/Basic.lean:111-114, Inner/Basic.lean:89-93). Searches with rg over dag/nodes and blueprint_refs found no existing node for it. FIX: added the statement-only unsplit node lem-coef-right-anodyne-lifting-characterization (created.item = this item; blueprint.from = prop-coef-integral-exceptional-adjoint; same_as = []). Its Mathlib searches are only the two greps actually run; its source place is HTT 2.0.0.3/A.1.2 or Cisinski 4.1, and must be confirmed online. In the item, old Steps 1-2 are replaced by Step 1 citing the new node, old Steps 3-6 are renumbered 2-5, and proof_deps is recomputed. The statement is unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
