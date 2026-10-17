@@ -2,22 +2,138 @@
  "id": "lem-trf-flat-fibre-generic-generalization",
  "kind": "statement",
  "title": "Fibre-generic locus of a flat finitely presented morphism is stable under generalization",
- "statement": "Let $f:X\\to S$ be a flat finitely presented morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Here finitely presented means locally of finite presentation, quasi-compact and quasi-separated. For $s\\in S$ let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the scheme-theoretic fibre [def-pc-scheme-fibre]. Let $G_f\\subseteq |X|$ be the union, over $s\\in S$, of the images of the generic points of the irreducible components of $X_s$ [def-weil-irreducible-components]; a generic point of a closed irreducible subset is a point whose closure is that subset. If $x\\in G_f$ and $x\\in\\overline{\\{x^{\\prime}\\}}$ in $X$, then $x^{\\prime}\\in G_f$.",
+ "statement": "Let $V$ be a valuation ring: an integral domain with fraction field $K$ such that, for every $a\\in K^\\times$, either $a\\in V$ or $a^{-1}\\in V$. Put $S=\\operatorname{Spec}V$ [def-weil-affine-spectrum]. Let $f:X\\to S$ be a flat finitely presented morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Here finitely presented means locally of finite presentation, quasi-compact and quasi-separated. For $s\\in S$ let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the scheme-theoretic fibre [def-pc-scheme-fibre]. Let $G_f\\subseteq |X|$ be the union, over $s\\in S$, of the images of the generic points of the irreducible components of $X_s$ [def-weil-irreducible-components]; a generic point of a closed irreducible subset is a point whose closure is that subset. If $x\\in G_f$ and $x\\in\\overline{\\{x^{\\prime}\\}}$ in $X$, then $x^{\\prime}\\in G_f$.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Lemma 3.5.3, printed pp. 20--21. Primary PDF read online; local archival copy WANTED.",
   "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
  },
  "stmt_deps": [
+  "def-weil-affine-spectrum",
   "def-pc-scheme",
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation",
   "def-pc-scheme-fibre",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}B$ of $X$ containing $x$; it also contains $x'$, since opens contain generalizations. Finite presentation implies local finite type directly from the finite polynomial presentations. By [lem-weil-pbc-lft-affine-pairs], $B$ is a finite type $V$-algebra. Write $\\mathfrak q'\\subseteq\\mathfrak q$ for the primes representing $x',x$, and $\\mathfrak p'=\\mathfrak q'\\cap V\\subseteq\\mathfrak p=\\mathfrak q\\cap V$. Here the inclusions follow from $\\overline{\\{\\mathfrak a\\}}=V(\\mathfrak a)$ in a spectrum. By [lem-weil-pbc-affine-chart-base-change-iso], the fibre of $U$ at $\\mathfrak t$ is $\\operatorname{Spec}(B\\otimes_V\\kappa(\\mathfrak t))$. The quotient and localization prime correspondences identify its primes, preserving inclusions, with the primes of $B$ contracting to $\\mathfrak t$. Indeed its ring is $(V\\setminus\\mathfrak t)^{-1}(B/\\mathfrak tB)$; the two maps send $(b\\bmod\\mathfrak tB)/s$ to $b\\otimes(1/s)$ and $b\\otimes(\\bar a/\\bar s)$ to $ab/s$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Q16 affine reduction; Tag 00QK setup, using localization and quotient prime correspondences"
+   }
+  },
+  {
+   "text": "Being a generic point of an irreducible component can be checked in any open neighbourhood of the point. In fact, if $C=\\overline{\\{z\\}}$ and an irreducible closed set $H$ strictly contains $C$, then $H\\cap U$ is irreducible and strictly contains $C\\cap U$: the nonempty open $H\\cap U$ is dense in $H$, so containment in the closed set $C$ would force $H\\subseteq C$. Conversely, a larger irreducible closed set in $U$ has irreducible closure in the whole space. In a spectrum the correspondence between primes and irreducible closed sets reverses inclusion; thus component-generic points are exactly minimal primes. Consequently $\\mathfrak q$ is minimal among the primes over $\\mathfrak p$. Suppose for contradiction that $x'$ is not fibre-generic. The correspondence in step 1 then supplies a prime $\\mathfrak r\\subsetneq\\mathfrak q'$ of $B$ with $\\mathfrak r\\cap V=\\mathfrak p'$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-pc-scheme-fibre",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Q16 elementary open-locality argument; Tag 00KE (definition-Krull), prime/irreducible-closed correspondence"
+   }
+  },
+  {
+   "text": "Set $A=(V/\\mathfrak p')_{\\mathfrak p/\\mathfrak p'}$, $L=\\operatorname{Frac}(A)=\\kappa(\\mathfrak p')$, and $k=A/\\mathfrak m_A=\\kappa(\\mathfrak p)$. This is a valuation ring. To see this without a rank assumption, in a valuation domain any two nonzero elements divide one another in one direction, by applying its defining property to their ratio. Reducing such a divisibility relation modulo a prime proves the same property for the quotient domain. Localizing a domain with this property preserves it: for nonzero $a/s,b/t$, compare $at$ and $bs$. Its maximal ideal is $(\\mathfrak p/\\mathfrak p')A$, so the displayed residue and fraction fields are the usual localization/quotient descriptions of those residue fields.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Q16 elementary quotient/localization calculation for the valuation-ring hypothesis of Tag 00QK"
+   }
+  },
+  {
+   "text": "For $\\mathfrak a\\in\\{\\mathfrak r,\\mathfrak q'\\}$ put $D_{\\mathfrak a}=(V\\setminus\\mathfrak p)^{-1}(B/\\mathfrak a)$. Since $\\mathfrak a\\cap V=\\mathfrak p'$, $D_{\\mathfrak a}$ is a domain containing $A$ injectively: all denominators are nonzero, and the injection $V/\\mathfrak p'\\hookrightarrow B/\\mathfrak a$ remains injective after localization. It is finite type over $A$, generated by the images of the finitely many generators of $B$ over $V$. Write $F_{\\mathfrak a}=D_{\\mathfrak a}\\otimes_Ak$ and $E_{\\mathfrak a}=D_{\\mathfrak a}\\otimes_AL$. Explicitly $F_{\\mathfrak a}\\cong(V\\setminus\\mathfrak p)^{-1}(B/(\\mathfrak a+\\mathfrak pB))$: $\\bar b/s\\otimes\\bar a/\\bar t$ maps to $ab/(st)$, with inverse $\\bar b/s\\mapsto(\\bar b/s)\\otimes1$. These formulas respect the bilinearity and quotient relations and are inverse on their generators. Likewise [lem-weil-pbc-generic-fibre-localization-domain-irreducible] identifies $E_{\\mathfrak a}$ with $(V\\setminus\\mathfrak p')^{-1}(B/\\mathfrak a)$, a nonzero domain. Each $E_{\\mathfrak a}$ is finite type over the field $L$, with the same generating images.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Q16 explicit rings to which Tag 00QK is applied; generic fibres are localizations"
+   }
+  },
+  {
+   "text": "The quotient description of $F_{\\mathfrak a}$ and [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] identify $\\operatorname{Spec}F_{\\mathfrak a}$ with the closed subset of $U_{\\mathfrak p}$ cut out by the images of $\\mathfrak a$. It contains $x$, because $\\mathfrak a\\subseteq\\mathfrak q$. In particular $F_{\\mathfrak a}\\ne0$. Let $C=\\overline{\\{x\\}}$ in $U_{\\mathfrak p}$; it is an irreducible component by the hypothesis and step 2. Every closed subset containing $x$ contains $C$. Moreover $C$ is an irreducible component of each $\\operatorname{Spec}F_{\\mathfrak a}$: any irreducible subset of that closed subset strictly containing $C$ would contradict the maximality of $C$ in $U_{\\mathfrak p}$.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Q16 closed-subset/component argument from the quotient description; Tag 00QK nonzero-special-fibre hypothesis"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-domain-fibre-dimensions] to both $A\\subset D_{\\mathfrak r}$ and $A\\subset D_{\\mathfrak q'}$. Step 3 supplies the valuation ring; step 4 supplies the finite type domains containing it; step 5 supplies nonzero special fibres and the common irreducible component $C$. Its equidimensionality clause gives $\\dim E_{\\mathfrak r}=\\dim C=\\dim E_{\\mathfrak q'}$. These dimensions are finite nonnegative integers by [lem-weil-pbc-finite-type-domain-dimension-trdeg], since the two $E$'s are nonzero finite type domains over $L$. Denote the common dimension by $d$.",
+   "uses": [
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), including equidimensionality; finite dimension of finite type field domains"
+   }
+  },
+  {
+   "text": "Under the localization description in step 4, the quotient $B/\\mathfrak r\\to B/\\mathfrak q'$ induces $E_{\\mathfrak r}\\twoheadrightarrow E_{\\mathfrak q'}$, with prime kernel $I=(V\\setminus\\mathfrak p')^{-1}(\\mathfrak q'/\\mathfrak r)$. The quotient identification follows directly by sending the class of $\\bar b/s$ modulo $I$ to $(b\\bmod\\mathfrak q')/s$, with inverse given by the same fraction. The localization prime correspondence shows $I\\ne(0)$: the distinct primes $(0)$ and $\\mathfrak q'/\\mathfrak r$ of $B/\\mathfrak r$ both avoid the images of $V\\setminus\\mathfrak p'$, so their extensions remain distinct. Thus $E_{\\mathfrak q'}\\cong E_{\\mathfrak r}/I$ with $I$ a nonzero prime.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Q16 fraction calculation and localization prime bijection for the two generic fibres"
+   }
+  },
+  {
+   "text": "As $E_{\\mathfrak q'}$ has finite dimension $d$, there is a prime chain of length $d$ in it: a nonempty set of nonnegative integers with finite supremum has that supremum as maximum. Lift this chain through $E_{\\mathfrak r}\\twoheadrightarrow E_{\\mathfrak q'}$ using [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus]. All its primes contain the nonzero ideal $I$. Prepending the prime $(0)$ of the domain $E_{\\mathfrak r}$ gives a strict prime chain of length $d+1$, contradicting $\\dim E_{\\mathfrak r}=d$. Hence the prime $\\mathfrak r$ posited in step 2 cannot exist, and $x'$ is fibre-generic. This proves the assertion, also when $x'=x$ or $\\mathfrak p'=\\mathfrak p$. Empty fibres contribute no points to $G_f$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Q16 prime-chain contradiction from Tag 00KE (definition-Krull)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-trf-valuation-domain-fibre-dimensions",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Q16 proof using Tag 00QK, replacing the invalid general-base dimension-drop argument in Temkin Lemma 3.5.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +169,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StableUnderGeneralization\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ is stable under generalization if for any points $ x $ and $ y $, whenever $ y $ specializes to $ x $ (i.e., every neighborhood of $ x $ is a neighborhood of $ y $) and $ x \\\\in s $, then $\"}\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] : GeneralizingMap f\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{f : R →+* S} (hf : f.Flat) : GeneralizingMap (comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"IsGenericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : α) (S : Set α) : Prop\", \"doc\": \"The point $ x $ is a generic point of the set $ S $ if the closure of the singleton set $ \\\\{x\\\\} $ in the topological space is equal to $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\nRead these signatures. GeneralizingMap lifts generalizations along a flat map; it does not say that points already generic in their fibres remain fibre-generic on generalizing in the source. genericPoints and StableUnderGeneralization are only definitions.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "valuation.*(generic|[Ff]iber)|([Ff]iber|generic).*valuation AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n\nRead the returned signatures: only generic-point definitions, prime/localization correspondences, valuative specializing-map results or going-down existence. None asserts preservation of fibre-generic points under a prescribed source generalization over a valuation base. The invalid IsValuationRing query was rerun with ValuationRing.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a valuation ring a generalization of a generic point of a scheme fibre is generic in its own fibre",
+   "results": "[leansearch] OK 8 hit(s)\ngenericPoints, IsGenericPoint, genericPoint, genericPoints.isGenericPoint, genericPoints.ofComponent, AlgebraicGeometry.genericPoint_eq_bot_of_affine, isGenericPoint_def, AlgebraicGeometry.Scheme.Hom.fiber\nRead the returned signatures: only generic-point definitions, prime/localization correspondences, valuative specializing-map results or going-down existence. None asserts preservation of fibre-generic points under a prescribed source generalization over a valuation base. The invalid IsValuationRing query was rerun with ValuationRing.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsValuationRing, genericPoints",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsValuationRing'\n\nRead the returned signatures: only generic-point definitions, prime/localization correspondences, valuative specializing-map results or going-down existence. None asserts preservation of fibre-generic points under a prescribed source generalization over a valuation base. The invalid IsValuationRing query was rerun with ValuationRing.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over a valuation ring the generic points of its fibres are stable under generalization",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.eq\nRead the returned signatures: only generic-point definitions, prime/localization correspondences, valuative specializing-map results or going-down existence. None asserts preservation of fibre-generic points under a prescribed source generalization over a valuation base. The invalid IsValuationRing query was rerun with ValuationRing.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, PrimeSpectrum",
+   "results": "[loogle] OK 0 hit(s)\n\nRead the returned signatures: only generic-point definitions, prime/localization correspondences, valuative specializing-map results or going-down existence. None asserts preservation of fibre-generic points under a prescribed source generalization over a valuation base. The invalid IsValuationRing query was rerun with ValuationRing.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a valuation domain has its fibre minimal primes preserved when passing to smaller prime ideals",
+   "results": "[leanfinder] OK 8 hit(s)\nIsLocalRing.primesOverFinset_eq, IsLocalization.minimalPrimes_comap, Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver, Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes, PrimeSpectrum.primesOverOrderIsoFiber, Algebra.HasGoingDown.exists_ideal_le_liesOver_of_lt, PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, Ideal.minimalPrimes_eq_comap\nRead the returned signatures: only generic-point definitions, prime/localization correspondences, valuative specializing-map results or going-down existence. None asserts preservation of fibre-generic points under a prescribed source generalization over a valuation base. The invalid IsValuationRing query was rerun with ValuationRing.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-modification-fibre-centre-finite",
@@ -86,5 +244,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-fibre-generic-generalization",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: exhibited an explicit smooth affine-plane-base counterexample to the imported and source general-base statement. Restricted the base to a valuation spectrum as required by the sole citer. Replaced the invalid going-down dimension-drop argument with an agent proof using the existing Stacks 00QK equidimensionality node for two integral point closures and a finite prime-chain contradiction. No new nodes.",
+  "blueprint": "Retains the imported historical ancestry from lem-trf-local-term-locality via the relative-curve modification branch. Realizes the fibre-generic generalization input used in lem-trf-modification-fibre-centre-finite step 7 (Temkin Lemma 4.2.2), now explicitly over its valuation base. The current unit has moved to the contracting-correspondence route; it and the targets are not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Affine characterization of local finite type, used only to obtain a finite type chart ring over V. No node of this unit gives this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic affine base-change tool identifying the fibre ring B tensor kappa(p). No node of this unit gives this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "why": "Generic quotient-spectrum tool for primes, closed fibre subsets and quotient prime chains. No node of this unit gives this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic localization prime correspondence; no valuation-specific route is replaced. No node of this unit gives this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "why": "Generic algebra tool identifying the generic fibre of an injective domain algebra as a nonzero localization. No node of this unit gives this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic finite-dimensionality theorem for finite type domains over a field, needed for the prime-chain contradiction. No node of this unit gives this generic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-f45de2d4d",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-f45de2d4d (reviewer sub-agent of L); spot-checked: Reviewed the corrected valuation-base statement, all eight proof steps, every cited node, Tag 00QK and supporting Stacks sources, Temkin Lemma 3.5.3, edge cases, route constraints, and the sole downstream citer. The unrestricted-base source statement is false; the explicit counterexample and necessary valuation-spectrum correction are documented. No repairs required."
  }
 }

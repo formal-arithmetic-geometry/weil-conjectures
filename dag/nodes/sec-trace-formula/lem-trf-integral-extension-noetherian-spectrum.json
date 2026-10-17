@@ -13,9 +13,101 @@
   "def-weil-pbc-integral-closure",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the given Noetherian domain $A$. For each prime $\\mathfrak p\\subset A$, let $N(\\mathfrak p)$ assert: for every finite field extension $F/\\operatorname{Frac}(A/\\mathfrak p)$ and every subring $C\\subseteq F$ containing $A/\\mathfrak p$ and integral over it, $\\operatorname{Spec}C$ has descending chain condition on closed subsets. Prove all $N(\\mathfrak p)$ by induction towards larger primes. Such induction is legitimate: in any ascending chain of ideals the union is an ideal; its finitely many generators lie in one term, so the chain stabilizes by [def-weil-pbc-noetherian-ring]. Thus a nonempty set of counterexample primes has a maximal member. Fix $\\mathfrak p$, assuming $N(\\mathfrak q)$ for every $\\mathfrak q\\supsetneq\\mathfrak p$. Set $R=A/\\mathfrak p$; it is a domain and is Noetherian by [lem-weil-pbc-surjective-image-noetherian]. The assertion is vacuous when there are no $C,F$ under consideration. If $\\mathfrak p$ is maximal, $R$ is a field and an integral domain algebra $C$ over $R$ is a field: a minimal-degree monic relation for $0\\ne c$ has nonzero constant term and expresses $c^{-1}$ as a polynomial in $c$. Then its spectrum is one point, giving the induction base.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FM, section-Noetherian; Tag 00FN, lemma-Noetherian-permanence. Explicit ascending-chain induction and field base case; agent proof."
+   }
+  },
+  {
+   "text": "Take $F,C$ in $N(\\mathfrak p)$ and let $D$ be the integral closure of $R$ in $F$. By [def-weil-pbc-integral-closure], $R\\subseteq C\\subseteq D\\subseteq F$ and every element of $D$ is integral over $R$. If $Q\\subset D$ is a nonzero prime, choose $0\\ne x\\in Q$ and a monic relation of least degree for $x$ over $R$. Its constant coefficient $a_0$ is nonzero: otherwise cancel $x$ in the domain $F$ to obtain a smaller-degree monic relation. The relation gives $a_0=-x(x^{d-1}+a_{d-1}x^{d-2}+\\cdots+a_1)\\in Q\\cap R$. Consequently the inverse image $\\mathfrak q\\subset A$ of $Q\\cap R$ is prime and strictly contains $\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GI (integral elements) and 00GP (definition-integral-closure); the nonzero contraction is proved explicitly by a minimal-degree monic relation."
+   }
+  },
+  {
+   "text": "For this nonzero $Q$, apply [lem-trf-almost-finite-residue-field-degree] to the Noetherian domain $R$, the finite field extension $F/\\operatorname{Frac}(R)$, and its integral subring $D$. It says $E=\\operatorname{Frac}(D/Q)$ is finite over $\\operatorname{Frac}(R/(Q\\cap R))=\\operatorname{Frac}(A/\\mathfrak q)$. The equality uses the ring isomorphism $A/\\mathfrak q\\to R/(Q\\cap R)$ sending the class of $a$ to the class of $a+\\mathfrak p$. Reducing a monic relation modulo $Q$ shows each element of $D/Q\\subset E$ is integral over $A/\\mathfrak q$. Since $\\mathfrak q\\supsetneq\\mathfrak p$, the induction hypothesis $N(\\mathfrak q)$ applies and gives Noetherian topology on $\\operatorname{Spec}(D/Q)$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], this spectrum is homeomorphic to the closed subset $V(Q)\\subseteq\\operatorname{Spec}D$, so $V(Q)$ is Noetherian.",
+   "uses": [
+    "lem-trf-almost-finite-residue-field-degree",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proposition 4.8.5, printed p. 85, supplies the finite degree; Stacks algebra.tex Tag 00E5, lemma-spec-closed, identifies the quotient spectrum. The use of induction and reduction of monic equations is written out."
+   }
+  },
+  {
+   "text": "For $0\\ne b\\in D$, [lem-trf-normalization-principal-minimal-primes] supplies prime ideals $Q_1,\\ldots,Q_t$ with $\\sqrt{bD}=\\bigcap_iQ_i$. Thus $V(b)=\\bigcup_iV(Q_i)$: if a prime contains the intersection it contains the product $\\prod_iQ_i$ and therefore contains one factor; the converse is immediate. Each $Q_i$ contains $b$, hence is nonzero, so each $V(Q_i)$ is Noetherian by Step 3. The finite union is Noetherian: a descending closed chain restricts to a stationary chain on each $V(Q_i)$; after the maximum of these finitely many indices every restriction, and hence the chain, is fixed. For $t=0$ this is the empty space. Every proper closed subset $Z=V(J)$ of $\\operatorname{Spec}D$ is contained in such a $V(b)$: $J\\ne0$ since $V(0)$ is the whole spectrum, so take $0\\ne b\\in J$. As $Z$ is closed in $V(b)$, it is Noetherian too.",
+   "uses": [
+    "lem-trf-normalization-principal-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Definition 4.10.1, Proposition 4.10.3 and Theorem 4.10.5 supply the principal-radical input. The finite-union and closed-subspace arguments are elementary and explicit."
+   }
+  },
+  {
+   "text": "It follows that $\\operatorname{Spec}D$ itself has descending chain condition on closed subsets. Indeed, given a descending chain, either every term is the whole spectrum or some term is proper. In the second case the remaining chain lies in that Noetherian closed subspace by Step 4 and therefore stabilizes. No ring-Noetherianity of $D$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0051, definition-noetherian; direct descending-chain argument."
+   }
+  },
+  {
+   "text": "The inclusion $C\\hookrightarrow D$ is integral: each $d\\in D$ satisfies a monic polynomial with coefficients in $R\\subseteq C$, which is also such a polynomial over $C$. Therefore [lem-weil-pbc-integral-injective-lying-over] gives a surjection $\\operatorname{Spec}D\\to\\operatorname{Spec}C$. It is continuous by the spectrum construction [def-weil-affine-spectrum]. A descending chain of closed subsets of $\\operatorname{Spec}C$ pulls back to a stationary chain in $\\operatorname{Spec}D$ by Step 5; surjectivity makes equality of inverse images imply equality of the original subsets. This proves $N(\\mathfrak p)$ for every $F,C$ and completes the induction.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GQ, lemma-integral-overring-surjective, and functorial continuity of Spec; the descent of the closed-chain condition is explicit."
+   }
+  },
+  {
+   "text": "Apply $N(0)$ with $F=L$ and $C=B$, using $A/(0)\\simeq A$. The hypotheses hold because $A$ is a domain, $L/\\operatorname{Frac}(A)$ is finite and $B$ is by definition the subring of elements integral over $A$. Thus the Zariski space of $\\operatorname{Spec}B$ is Noetherian. Descending chain condition is equivalent to the stated minimal-member property: a collection without a minimal member recursively supplies a strictly descending chain; conversely the distinct tail of a nonstationary descending chain has no minimal member. The degree-one extension $L=K$ is included.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0051, definition-noetherian; specialization and equivalence with the minimal-member formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "def-weil-pbc-integral-closure",
+  "lem-trf-almost-finite-residue-field-degree",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-trf-normalization-principal-minimal-primes",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/heinzer-minimal-primes-integral-extensions.pdf",
+  "place": "The seven-step Noetherian-prime induction is written explicitly here and checked against Heinzer, Theorem 2 proof (printed pp. 371–372), together with the principal-radical and finite-residue-degree inputs recorded as separate nodes. Heinzer proves the broader almost-finite-extension theorem by induction on generators and an ascending chain of contractions; the present induction on prime contractions is a faithful specialization route for the stated finite fraction-field integral closure."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,10 +171,45 @@
    "results": "{\"t\": \"2026-10-17T19:45:50Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a Noetherian integral domain has a Noetherian underlying prime spectrum without assuming the domain is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isNoetherian\", \"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"completeIntegralClosure_eq_integralClosure\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"IsDedekindRing.toIsNoetherian\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"IsDedekindDomainInv.isNoetherianRing\"], \"digest\": \"2ef421825e0fc89c\"}",
    "date": "2026-10-18",
    "verdict": "no match: integralClosure.isNoetherianRing and IsIntegralClosure.isNoetherianRing require an integrally closed base and separability (Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, lines 147–175 and 206–208). The spectrum instances require B itself to be a Noetherian ring. None gives the required topological conclusion for normalization of a general Noetherian domain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a Noetherian domain in a finite fraction field extension has Noetherian prime spectrum without being a Noetherian ring",
+   "results": "{\"t\": \"2026-10-17T20:48:21Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a Noetherian domain in a finite fraction field extension has Noetherian prime spectrum without being a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isNoetherian\", \"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"IsIntegralClosure.finite\", \"isDedekindRing_iff\", \"NumberField.RingOfIntegers.extension_isNoetherian\", \"completeIntegralClosure_eq_integralClosure\", \"isDedekindDomain_iff\"], \"digest\": \"427734df832481d0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: normalization Noetherian-ring theorems require IsIntegrallyClosed A and separability (DedekindDomain/IntegralClosure.lean:145–175,206–208); prime-spectrum instances require the normalization ring itself Noetherian. These hypotheses are absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Noetherian\"",
+   "results": "{\"t\": \"2026-10-17T20:49:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Noetherian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherian\"], \"digest\": \"0ac205465b85b041\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: normalization Noetherian-ring theorems require IsIntegrallyClosed A and separability (DedekindDomain/IntegralClosure.lean:145–175,206–208); prime-spectrum instances require the normalization ring itself Noetherian. These hypotheses are absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Nn]oetherian|[Nn]oetherian.*integralClosure",
+   "results": "{\"t\": \"2026-10-17T20:49:01Z\", \"tool\": \"grep\", \"query\": \"integralClosure.*[Nn]oetherian|[Nn]oetherian.*integralClosure\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/Basic.lean\"], \"digest\": \"a4121ad7eb09c375\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: normalization Noetherian-ring theorems require IsIntegrallyClosed A and separability (DedekindDomain/IntegralClosure.lean:145–175,206–208); prime-spectrum instances require the normalization ring itself Noetherian. These hypotheses are absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Heinzer normalization of a Noetherian domain has Noetherian topological spectrum",
+   "results": "{\"t\": \"2026-10-17T20:49:01Z\", \"tool\": \"leansearch\", \"query\": \"Heinzer normalization of a Noetherian domain has Noetherian topological spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"PrimeSpectrum.instNoetherianSpace\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"AlgebraicGeometry.isNoetherian_Spec\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"IsHausdorff.of_isDomain\", \"PrimeSpectrum.irreducibleSpace\"], \"digest\": \"5afeda5219a629c8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: normalization Noetherian-ring theorems require IsIntegrallyClosed A and separability (DedekindDomain/IntegralClosure.lean:145–175,206–208); prime-spectrum instances require the normalization ring itself Noetherian. These hypotheses are absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a Noetherian domain has a Noetherian spectrum even if normalization is not a finite module",
+   "results": "{\"t\": \"2026-10-17T20:49:03Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a Noetherian domain has a Noetherian spectrum even if normalization is not a finite module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isNoetherian\", \"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"completeIntegralClosure_eq_integralClosure\", \"IsDedekindDomainInv.isNoetherianRing\"], \"digest\": \"82455452fc03548e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: normalization Noetherian-ring theorems require IsIntegrallyClosed A and separability (DedekindDomain/IntegralClosure.lean:145–175,206–208); prime-spectrum instances require the normalization ring itself Noetherian. These hypotheses are absent here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-normalized-base-change-noetherian-topology",
@@ -108,5 +235,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-integral-extension-noetherian-spectrum",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the stronger simultaneous induction assertion for all integral subrings of finite fraction-field extensions of prime quotients of A. Two new unsplit algebraic inputs are finite prime decomposition of nonzero principal radicals in normalization (Mori–Nagata) and finite residue-field degrees (Swanson–Huneke 4.8.5). Reused existing quotient-spectrum, quotient-Noetherianity and lying-over Mathlib leaves. Complete source texts for Heinzer and the book remain WANTED locally; book source statements were read online. No Lean writing or compilation.",
+  "blueprint": "Orgogozo Lemma 8.3.2 proof, final finite-type alternative: Heinzer’s Corollary for the normalization of a Noetherian integral domain supplies the Noetherian normalization spectrum. Steps 1–7 realize the algebraic Heinzer input for the finite-type alternative; the blueprint ancestor remains lem-trf-local-term-locality."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-3cd645a9e",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-3cd645a9e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited node statements, unit route, DAG instructions, and delivery report. Verified Heinzer Theorem 2/Corollary and Swanson–Huneke 4.8.5, 4.10.1, 4.10.3, 4.10.5; checked all seven steps, hypotheses, edge cases, induction, quotient spectra, lying-over, and principal-radical decomposition. No duplicates, circularity, long hidden lemma, route-pivot machinery, or batch-5 violation. Review written to review.md; no repairs or tool-use exceptions accepted."
  }
 }
