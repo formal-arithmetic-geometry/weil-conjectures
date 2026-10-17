@@ -53,7 +53,7 @@ theorem rhom_supported_quasiCoherent_pseudo_part
         ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
           X.toRingedSpace.sheaf).obj (op K, L)) ∧
       ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ ∃ a : ℤ, ∀ n : ℤ, n < a →
-        IsZero ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).obj
+        IsZero ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).obj
           ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
               ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)

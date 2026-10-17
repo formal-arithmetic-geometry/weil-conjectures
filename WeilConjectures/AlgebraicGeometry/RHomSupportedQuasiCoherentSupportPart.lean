@@ -101,11 +101,11 @@ theorem rhom_supported_quasiCoherent_support_part
     (K L : schemeDerivedCategory X)
     (T : Set X) (hT : IsClosed T)
     (hzero : ∀ n : ℤ,
-      IsZero ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace)
+      IsZero ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace)
         ⟨Tᶜ, hT.isOpen_compl⟩).obj ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj L))) :
     ∀ n : ℤ,
-      IsZero ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace)
+      IsZero ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace)
         ⟨Tᶜ, hT.isOpen_compl⟩).obj ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
             ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)

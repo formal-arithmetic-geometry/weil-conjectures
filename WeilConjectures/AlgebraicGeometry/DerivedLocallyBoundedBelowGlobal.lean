@@ -40,7 +40,7 @@ theorem derivedLocallyBoundedBelowGlobal (Y : Scheme.{u}) [IsNoetherian Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (E : schemeDerivedCategory Y)
     (hlocal : ∀ y : Y, ∃ U : Y.Opens, y ∈ U ∧ ∃ a : ℤ, ∀ n : ℤ, n < a →
-      IsZero ((SheafOfModules.overFunctor (moduleRings Y.toRingedSpace) U).obj
+      IsZero ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) U).obj
         ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj E))) :
     ∃ a : ℤ, E.IsGE a := by
