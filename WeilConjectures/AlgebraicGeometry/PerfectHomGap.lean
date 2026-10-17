@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 import WeilConjectures.AlgebraicGeometry.QuasiCompactFiniteTorDimension
 import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
+import WeilConjectures.AlgebraicGeometry.OpenDerivedCategorySmall
 import WeilConjectures.AlgebraicGeometry.DerivedTensorQCohClosure
 import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Mathlib.Algebra.Category.Grp.Zero
@@ -227,8 +228,7 @@ theorem exists_subsingleton_hom_of_isPerfect (X : Scheme.{u})
   classical
   have hOpen (U : X.Opens) : Nonempty (HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))) := by
-    obtain ⟨hD, _⟩ := open_derived_localization_adjunction X U
-    exact ⟨hD⟩
+    exact nonempty_openHasDerivedCategory X U
   let (U : X.Opens) : HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
     Classical.choice (hOpen U)
