@@ -14,9 +14,129 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-simplicial-extra-degeneracy-prism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First translate the mapping-space version of the simplicial axiom into the needed pushout-product assertion. For $i:A\\to B$ in $\\mathcal M$ and $j:K\\to L$ in simplicial sets, lifts from $(A\\otimes L)\\amalg_{A\\otimes K}(B\\otimes K)\\to B\\otimes L$ against $q:E\\to F$ correspond, by the tensor adjunction, to lifts of $j$ against $\\operatorname{Map}(B,E)\\to\\operatorname{Map}(A,E)\\times_{\\operatorname{Map}(A,F)}\\operatorname{Map}(B,F)$. If $i,j$ are cofibrations and $q$ a trivial fibration, the latter map is a trivial Kan fibration, hence such lifts exist. If $i$ or $j$ is trivial, the same argument works for every fibration $q$: in the first case the mapping-space map is trivial, in the second case $j$ lifts against any Kan fibration. The defining lifting classes of the two model weak factorization systems therefore make the pushout product a cofibration, trivial in either of these cases. This is only an adjunction of lifting squares, with no cofibrancy assumption on $A$ or $B$.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Section 19.1, printed p.90; elementary adjunction-of-lifting-squares derivation of the pushout-product formulation from the cited mapping-space axiom."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-tensor-coend-skeletal-pushouts] in $\\mathcal M$. It gives $R_{-1}=0$, the sequence $R_n$, the specified pushout squares with attaching maps $B_n\\to X_n\\otimes\\Delta^n$, and $\\operatorname{colim}R_n\\cong|X|$. The latching diagram in that statement is exactly the direct latching diagram for $\\Delta^{\\mathrm{op}}$. Reedy cofibrancy of $X$ thus makes $L_nX\\to X_n$ a cofibration. By the Kan-model node the boundary inclusion $\\partial\\Delta^n\\to\\Delta^n$ is a cofibration, since it is degreewise injective. Step 1 says that $B_n\\to X_n\\otimes\\Delta^n$ is their pushout-product cofibration, including $n=0$ where both latching and boundary objects are initial.",
+   "uses": [
+    "lem-coef-tensor-coend-skeletal-pushouts",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2) and the proof of Theorem 3.5, printed pp.9-10; categorical skeletal formula supplied by the cited supporting node."
+   }
+  },
+  {
+   "text": "The pushout-closure statement of [lem-coef-lifting-class-closure], applied to the left class of ground trivial fibrations, makes every $R_{n-1}\\to R_n$ a cofibration. To pass to the countable colimit without assuming that weak equivalences preserve colimits, apply [lem-coef-small-direct-colimit-lifting] to the category $\\mathbf N$ with its order, the constant initial diagram, and the diagram $n\\mapsto R_n$. Take $T$ to be the class of trivial fibrations. At $n=0$ the relative latching map is $0\\to R_0$; for $n>0$ the predecessor category has terminal object $n-1$, so that map is $R_{n-1}\\to R_n$. These maps are precisely the cofibrations just established. The indexing category is small and every nonidentity arrow strictly increases degree. The cited statement gives $0\\to\\operatorname{colim}R_n$ in the same left class, hence a cofibration. Using Step 2 identifies its codomain with $|X|$, proving the cofibrancy assertion.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-small-direct-colimit-lifting",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proof of Theorem 3.5, printed pp.10-11, with the countable passage justified by the existing general direct-colimit lifting theorem."
+   }
+  },
+  {
+   "text": "Put $A=|X|$. The endpoint inclusion $e_0:\\Delta^0\\to\\Delta^1$ is a one-dimensional horn inclusion, so it has the left lifting property against all Kan fibrations. The Kan-model weak factorization system makes it a trivial cofibration. Apply Step 1 with $0\\to A$: its pushout product with $e_0$ is $i_0:A\\cong A\\otimes\\Delta^0\\to A\\otimes\\Delta^1$, hence a weak equivalence. The tensor representing isomorphism identifies $A\\otimes\\Delta^0$ with $A$, and functoriality gives $pi_0=pi_1=1_A$. Two-out-of-three now gives $p$ a weak equivalence. Finally $\\partial\\Delta^1=\\Delta^0\\amalg\\Delta^0\\to\\Delta^1$ is a monomorphism; Step 1 with $0\\to A$ identifies its pushout product with $i_0\\amalg i_1:A\\amalg A\\to A\\otimes\\Delta^1$ and makes it a cofibration. This proves all cylinder properties. No fibrancy is used.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Section 19.1, printed p.90; endpoint horn and two-out-of-three argument, rather than applying the pushout-product axiom to the non-cofibration interval collapse."
+   }
+  },
+  {
+   "text": "Let $q_r:Y_r\\otimes\\Delta^r\\to|Y|$ be the coend maps, and write $H_j^n:X_n\\to Y_{n+1}$ for the given prism data. Switch the factors in the explicit $\\sigma_j$ of [lem-coef-infinity-right-prism-boundary] to obtain $\\kappa_j:\\Delta^{n+1}\\to\\Delta^n\\times\\Delta^1$ with vertices $(0,0),\\ldots,(j,0),(j,1),\\ldots,(n,1)$. These simplices cover the product: a monotone chain in $[n]\\times[1]$ lies in one of them by choosing $j$ between its last lower coordinate and first upper coordinate (use $j=0$ or $n$ for a chain entirely in one end). On $X_n\\otimes\\Delta^{n+1}$ assign $g_j=q_{n+1}(H_j^n\\otimes1)$. Adjacent simplices meet along the face omitting position $j+1$ in each. On this face the coend relation turns the two restrictions into $q_n(d_{j+1}H_j^n\\otimes1)$ and $q_n(d_{j+1}H_{j+1}^n\\otimes1)$, equal by the middle prism identity. For $j<k$ their common vertices are $(0,0),\\ldots,(j,0),(k,1),\\ldots,(n,1)$, a face contained in every intervening adjacent intersection. Consequently all pairwise restrictions agree. The product is the degreewise union of these simplicial subsets, so its union colimit and the tensor universal property glue the $g_j$ to $F_n:X_n\\otimes(\\Delta^n\\times\\Delta^1)\\to|Y|$. Tensoring in the simplicial-set parameter preserves this colimit since maps out correspond to simplicial maps into $\\operatorname{Map}(X_n,-)$.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary",
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Lemma 3.1.2.12 and proof, explicit sigma maps; agent calculation of intersections and gluing using the given combinatorial prism identities."
+   }
+  },
+  {
+   "text": "The $F_n$ respect every coend relation; here are the generator checks. For a coface $\\delta_i:[n-1]\\to[n]$ and $0\\leq j<n$, the map $(\\delta_i\\times1)\\kappa_j$ is $\\kappa_{j+1}\\delta_i$ if $i\\leq j$ and $\\kappa_j\\delta_{i+1}$ if $i>j$, by their vertex lists. The required equalities of maps to $|Y|$ are respectively $d_iH_{j+1}^n=H_j^{n-1}d_i$ and $d_{i+1}H_j^n=H_j^{n-1}d_i$, exactly the two strict-inequality face identities. For a codegeneracy $\\sigma_i:[n+1]\\to[n]$ and $0\\leq j\\leq n+1$, $(\\sigma_i\\times1)\\kappa_j$ is $\\kappa_{j-1}\\sigma_i$ when $i<j$, and $\\kappa_j\\sigma_{i+1}$ when $i\\geq j$. Compatibility is therefore $s_iH_{j-1}^n=H_j^{n+1}s_i$ and $s_{i+1}H_j^n=H_j^{n+1}s_i$, the two degeneracy identities. After composing with $q$, the coend relations of $Y$ convert these identities into $F_n(1\\otimes(\\Delta^\\alpha\\times1))=F_m(X(\\alpha)\\otimes1)$ for the corresponding $\\alpha:[m]\\to[n]$. Every order-preserving map is a composite of cofaces and codegeneracies (factor it into a surjection and an injection and delete repetitions or missing vertices), so the equality holds for every $\\alpha$.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+    "place": "Lines 48-67, the precise face and degeneracy identities; explicit vertex checks and their translation by the realization coend relation."
+   }
+  },
+  {
+   "text": "Step 6 supplies a map from $\\int^n X_n\\otimes(\\Delta^n\\times\\Delta^1)$ to $|Y|$. This coend is canonically $|X|\\otimes\\Delta^1$. Indeed, for objects $B,T$ and simplicial sets $L,K$, the tensor adjunctions identify maps $(B\\otimes L)\\otimes K\\to T$ and $B\\otimes(L\\times K)\\to T$ with maps $L\\times K\\to\\operatorname{Map}(B,T)$; the mutually inverse representing maps give a natural isomorphism of these tensors. Also $-\\otimes K$ is left adjoint to the cotensor $(-)^K$, so maps from the tensor of a coproduct or coequalizer to $T$ are precisely the compatible families of maps from the tensors of its summands. This directly proves preservation of the coproducts and coequalizer defining $|X|$. Apply these facts with $K=\\Delta^1$ to identify the two coequalizers, summand by summand. The obtained map is the required $\\widetilde H:P_X\\to|Y|$.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2) and Section 19.1: explicit representing-isomorphism and coequalizer universal-property calculation."
+   }
+  },
+  {
+   "text": "The all-zero end of $\\Delta^n\\times\\Delta^1$ is the last face of $\\kappa_n$, so $F_n$ restricts there to $q_n(d_{n+1}H_n^n\\otimes1)=q_n(u_n\\otimes1)$. The all-one end is the zeroth face of $\\kappa_0$, giving $q_n(d_0H_0^n\\otimes1)=q_n(v_n\\otimes1)$. The two face equalities are exactly the endpoint identities of the given combinatorial homotopy. Under the summandwise isomorphism of Step 7, these restrictions are composition with $i_0$ and $i_1$. Thus the coequalizer universal property gives $\\widetilde H i_0=|u|$ and $\\widetilde H i_1=|v|$. The argument did not require $Y$ to be cofibrant, and in particular applies to the Reedy-cofibrant $Y$ assumed in the item.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+    "place": "Lines 55-56, endpoint identities; agent verification of the corresponding all-zero and all-one prism faces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-simplicial-tensor-cotensor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-infinity-right-prism-boundary",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-extra-degeneracy-prism",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-small-direct-colimit-lifting",
+  "lem-coef-tensor-coend-skeletal-pushouts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Coend/skeletal method: formula (3.2) and proof of Theorem 3.5, printed pp.9-11, and SM7 Section 19.1, printed p.90. Prism geometry: Kerodon 00TH. Explicit generator identities and endpoint conventions follow the given Mathlib combinatorial homotopy definition. The exact transfer theorem is agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -30,7 +150,7 @@
    "query": "Reedy, cofibrant, tensor, Homotopy",
    "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Reedy'",
    "date": "2026-10-17",
-   "verdict": "no match: returned cylinder, cofibrant-object, simplicial-set or combinatorial-homotopy declarations, not tensor realization in a simplicial model category."
+   "verdict": "unavailable: query rejected because Reedy is an unknown identifier; this failed query is not evidence of absence. The other valid searches are recorded separately."
   },
   {
    "tool": "grep",
@@ -94,10 +214,38 @@
    "results": "{\"t\": \"2026-10-17T04:00:07Z\", \"tool\": \"leanfinder\", \"query\": \"A coend weighted by standard simplices takes a simplicial object homotopy to a map out of its tensor with the simplicial interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.ι₁\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"AlgebraicTopology.DoldKan.MorphComponents.φ\", \"AlgebraicTopology.DoldKan.N₁_map_f\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"AlgebraicTopology.DoldKan.N₂_map_f_f\"], \"digest\": \"d674004b87d8037e\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. Read SimplicialObject/Homotopy.lean:48-70 (degree-raising homotopy data), SimplicialSet/ProdStdSimplex.lean:37-82 (product-simplex combinatorics), and Reedy/Basic.lean:22-25 (model structure TODO). The returned truncated tensor-unit instance, interval vertex and Dold-Kan declarations do not give realization or its model cylinder."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reedy cofibrant simplicial tensor realization is cofibrant and its combinatorial prism homotopy gives a cylinder map",
+   "results": "[leanfinder] OK 8 hits: HomotopicalAlgebra.Cylinder.instIsCofibrantI, instCofibrationI₀, instCofibrationI₁, exists_very_good and related abstract cylinder declarations; no Reedy tensor-realization theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract cylinder results do not state tensor realization or combinatorial prism transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "Reedy, simplicial tensor, realization, cylinder, homotopy",
+   "results": "[loogle] OK 0 hits; loogle: unknown identifier 'Reedy'.",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected because Reedy is an unknown identifier; this failed query is not evidence of absence. The other valid searches are recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|realization|pushout-product|cylinder in Mathlib/AlgebraicTopology",
+   "results": "[grep] OK 25 hits, chiefly ModelCategory/Cylinder.lean, LeftHomotopy.lean, PathObject.lean; no tensor-realization or Reedy-prism theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has abstract cylinder and homotopy APIs but no stated realization transfer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reedy cofibrant simplicial object tensor realization cofibrant cylinder combinatorial homotopy",
+   "results": "[leansearch] OK 8 hits: HomotopicalAlgebra.Precylinder.ctorIdx, Cylinder.ofFactorizationData, Cylinder.instIsCofibrantI and abstract cylinder declarations; no Reedy realization theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned abstract model-category cylinders, not the requested coend realization result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-reedy-realization-homotopy-invariance",
@@ -128,5 +276,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reedy-realization-prism",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split its proof into eight steps. Added one purely categorical skeletal-coend pushout statement, after logged searches in two phrasings. Reused the existing right-prism triangulation and small-direct-colimit lifting nodes. Derived pushout-product from the cited mapping-space axiom by adjunction of lifting squares, proved the interval collapse weak by an endpoint horn and two-out-of-three, and wrote all face/codegeneracy and endpoint checks explicitly. No new node restates a clause of the item; the added node has no model/cofibrancy or homotopy conclusion.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph beginning 'For K', displayed finite-level derived coefficient adjunction: the existing ancestry supplies model foundations, here the Reedy tensor-realization homotopy transfer. Historical unit and ancestry retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NM-dff29f7ae",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-dff29f7ae (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. The item statement is unchanged. S1: the pushout-product lifting follows from the mapping-space SM7 by transposing lifting squares through the representing isomorphism. S2: the latching category matches the J+/[n] latching of the Reedy node for Delta^op, the boundary inclusion is a Kan cofibration, and n=0 is covered. S3: closure under pushouts, then small-direct-colimit-lifting over N with L_kR=R_{k-1}, gives |X| cofibrant. S4: e0 is the horn Lambda^1_0, so i0 is a trivial cofibration; two-out-of-three makes p weak; boundary of Delta^1 gives i0+i1 a cofibration; no fibrancy used. S5: prism cover and adjacent overlaps (position j+1) checked; overlaps for j<k sit inside every intervening adjacent overlap. S6: recomputed all four coface/codegeneracy vertex identities and matched each to the face/degeneracy identities of the combinatorial-homotopy node. S7: tensor associativity and colimit preservation follow from the representing isomorphisms. S8: last face of kappa_n gives u, zeroth face of kappa_0 gives v, the stated orientation. New node lem-coef-tensor-coend-skeletal-pushouts: true (the Reedy cell filtration; checked independently by applying Hom(-,T), which gives the Tot-tower pullback); compatibility of the attaching maps checked; tested on n=0 and constant X=* (connected latching category, R_n stays Delta^0). B1-B9 hold: statement only, single-escaped TeX (doubled backslashes only in raw search output), four kinds of search recorded, blueprint from/via correct. Not a duplicate (rg for coend/skeletal/latching/realization/pushout-product, including a full-DAG latching scan) and not a restated clause of the item. All citations are in the unit; tool_uses empty. Dugger and Kerodon are not archived; the WANTED notices are correct and the proof is properly marked agent-written. No fixes."
  }
 }
