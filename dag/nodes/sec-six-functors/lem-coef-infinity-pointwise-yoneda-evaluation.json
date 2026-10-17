@@ -27,65 +27,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [
-  {
-   "text": "Let $\\mathcal S'$ be the infinity category of $\\mathcal U'$-small spaces, formed in a further universe. Use the coherent-nerve model $N_{\\mathrm{hc}}(\\mathsf{Kan})$ defined in [def-coef-infinity-category-of-spaces]. The inclusion $\\iota:\\mathcal S\\hookrightarrow\\mathcal S'$ is a full subcategory inclusion: the simplicial category of $\\mathcal U$-small Kan complexes has the same internal mapping complexes as the larger one, and a coherent-nerve simplex with vertices in the smaller category uses only those unchanged mapping complexes. The internal-functor and full-subcategory definitions of [def-cbc-enhanced-diagrams-cones] then show that $\\operatorname{Fun}(K,\\mathcal S)\\hookrightarrow\\operatorname{Fun}(K,\\mathcal S')$ is full for every $\\mathcal U'$-small $K$. Indeed, a simplex is $K\\times\\Delta^n\\to\\mathcal S'$; if each vertex functor lands in $\\mathcal S$, every vertex of its domain does, so fullness makes the entire simplex factor through $\\mathcal S$. Consequently the right-pinched mapping spaces between two such functors are identical in the two functor categories. This is a degreewise statement and includes empty mapping spaces.",
-   "uses": [
-    "def-coef-infinity-category-of-spaces",
-    "def-cbc-enhanced-diagrams-cones"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "https://kerodon.net/tag/03MR",
-    "place": "Universe enlargement and full subcategories; explicit coherent-nerve and internal-functor definitions in the cited nodes."
-   }
-  },
-  {
-   "text": "Apply [lem-coef-infinity-yoneda-evaluation] with its smaller universe equal to $\\mathcal U'$ and $D=\\mathcal E$. Its hypotheses hold because $\\mathcal E$ is $\\mathcal U'$-small. Regard $P$ as $\\iota P:\\mathcal E^{\\mathrm{op}}\\to\\mathcal S'$. The representable $j(a)$ has the same values $\\operatorname{Map}_{\\mathcal E}(x,a)$ and coherent action as $\\iota h_a$; local $\\mathcal U$-smallness ensures these values lie in $\\mathcal S$. The cited node gives the actual identity-evaluation map $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S')}(\\iota h_a,\\iota P)\\simeq P(a)$, natural as an equivalence of coherent functors in the object and presheaf variables. Step 1 identifies its source with $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S)}(h_a,P)$ and leaves evaluation unchanged. This proves the contravariant assertion on full spaces. Choose a homotopy inverse $s$ of this equivalence in spaces, with its two inverse homotopies; no independent choices for individual points are needed.",
-   "uses": [
-    "lem-coef-infinity-yoneda-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://kerodon.net/tag/03M5",
-    "place": "Proposition 8.3.1.3 and Notation 8.3.1.2, via the existing small-category node in the enlarged universe."
-   }
-  },
-  {
-   "text": "Write $\\Phi_x:\\operatorname{Map}(h_x,P)\\simeq P(x)$ for the coherent natural evaluation equivalences supplied by [lem-coef-infinity-yoneda-evaluation] in Step 2. For $f:x\\to a$, naturality in the representable variable gives\n$$P(f)\\big(\\Phi_a(\\alpha)\\big)\\simeq\\Phi_x\\big(\\alpha\\circ j(f)\\big)=\\alpha_x(f).$$\nFor the last equality, evaluate the composite at $\\operatorname{id}_x$: the representable map $j(f):h_x\\to h_a$ sends that identity to $f$ by composition with $f$. The unit homotopy gives the displayed equality in spaces. This square is the restriction of the cited natural equivalence on $\\mathcal E^{\\mathrm{op}}\\times\\mathcal P(\\mathcal E)$, not an independently selected homotopy for each $f$. In particular, restrict it to any simplex of arrows and any simplex of the parameter space $\\operatorname{Map}(h_a,P)$; its faces and degeneracies are the restrictions of that one coherent square. Setting $\\alpha=s(p)$ and using the inverse homotopy $\\Phi_a s\\simeq\\operatorname{id}$ gives the components $f\\mapsto P(f)(p)$ with these coherent homotopies. The other inverse homotopy $s\\Phi_a\\simeq\\operatorname{id}$ reconstructs every $\\alpha$. Thus the formula identifies an already constructed inverse on spaces and does not attempt to assemble transformations from objectwise maps.",
-   "uses": [
-    "lem-coef-infinity-yoneda-evaluation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "https://kerodon.net/tag/038A",
-    "place": "Universal-element action of Definition 5.6.6.1; formal naturality calculation from the coherent equivalence stated in the cited node."
-   }
-  },
-  {
-   "text": "Apply Steps 1-3 to the quasicategory $\\mathcal E^{\\mathrm{op}}$ and the presheaf $Q:(\\mathcal E^{\\mathrm{op}})^{\\mathrm{op}}\\to\\mathcal S$. Its representable at $a$ is the coherent covariant representable of $\\mathcal E$. To check its mapping-space values in the stated convention, use the arrow spaces $U$ and the natural pinch comparisons of [lem-coef-infinity-pinch-comparison]:\n$$\\operatorname{Map}_{\\mathcal E^{\\mathrm{op}}}(x,a)\\xrightarrow{\\ j\\ }U_{\\mathcal E^{\\mathrm{op}}}(x,a)=U_{\\mathcal E}(a,x)^{\\mathrm{op}}\\xleftarrow{\\ j^{\\mathrm{op}}\\ }\\operatorname{Map}_{\\mathcal E}(a,x)^{\\mathrm{op}}.$$\nBoth arrows are homotopy equivalences; reversing a simplicial homotopy reverses its interval and exchanges the endpoints. For a Kan complex $T$, the formula $[t,(r_0,\\ldots,r_n)]\\mapsto[t,(r_n,\\ldots,r_0)]$ gives a natural homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$, directly from the realization relations of [def-cbc-enhanced-diagrams-cones]. It is its own inverse and sends the realized map of a simplicial map to the same map with reversed coordinates. Thus this coherent representable is a model for $h^a(x)=\\operatorname{Map}_{\\mathcal E}(a,x)$ as a space. The coherent functor structure is the representable one on $\\mathcal E^{\\mathrm{op}}$, so it is already supplied before this pointwise identification; one is not asserting a strict isomorphism of the two pinched models. The identity vertex remains the identity. The evaluation equivalence is consequently $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E,\\mathcal S)}(h^a,Q)\\simeq Q(a)$. The arrow $x\\to a$ in $\\mathcal E^{\\mathrm{op}}$ is $f:a\\to x$ in $\\mathcal E$, so Step 3 reads $q\\mapsto(f\\mapsto Q(f)(q))$, including its coherent naturality and both inverse homotopies.",
-   "uses": [
-    "lem-coef-infinity-pinch-comparison",
-    "def-cbc-enhanced-diagrams-cones"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://kerodon.net/tag/03MY",
-    "place": "Remark 8.3.3.6 (Hom-functor duality), with Proposition 4.6.5.10 (01L5), applied to the proved evaluation formula."
-   }
-  }
- ],
- "proof_deps": [
-  "def-coef-infinity-category-of-spaces",
-  "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-yoneda-evaluation",
-  "lem-coef-infinity-pinch-comparison"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-  "place": "Paragraph 2, coherent adjunction foundation. Agent proof reduces to the existing small-category Yoneda evaluation node by explicit full universe enlargement, extracts the inverse from its coherent naturality, and checks the covariant mapping-space convention by pinches. Online Kerodon sources are not archived."
- },
+ "proof": null,
+ "proof_deps": [],
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -243,7 +186,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "split",
+ "status": "unsplit",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-adjoint-criterion",
@@ -252,22 +195,6 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
-  "worker": "stage1",
-  "summary": "Second reader replaced the cyclic right-fibration proof by four steps using full universe enlargement, the existing small-category Yoneda evaluation, its coherent naturality for the inverse, and the covariant dual with a pinch-model check. No new nodes or Mathlib leaves. Made the intended quasicategory hypothesis explicit; normalized inherited TeX only otherwise.",
-  "blueprint": "Realizes the identity-evaluation input to the coherent finite-coefficient adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint, through the historical pointwise-adjoint branch.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-cc-Q78-81e0c2b0c",
-  "group": "Q78",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-81e0c2b0c (reviewer sub-agent of L); spot-checked: I read the item and the four cited nodes in full, plus the only citer (pointwise-adjoint-criterion, steps 1, 2 and 4). The statement agrees with Kerodon 03M5 and 03M4, which I read online: the comparison map is evaluation followed by precomposition with the universal element, here id_a, and the item's form follows by duality. The 'quasicategory' wording added by the second reader only states the intended hypothesis; it matches the DAG convention in lem-coef-infinity-yoneda-presheaf-limits and is not a weakening. Step 1 is correct: Kan_U sits fully inside Kan_U', a simplex of Fun(K,S') whose vertices lie in S factors through S, so the right-pinched mapping spaces are literally equal. Step 2 applies lem-coef-infinity-yoneda-evaluation in the universe pair (U',U''); a third universe is already used in the same unit (lem-coef-algebroid-universe-embeddings), and only the cited node's statement is used. Step 3 is a formal consequence of that node's naturality on D^op x P(D), restricted to simplices of arrows and parameters, with both inverse homotopies. Step 4 is correct: U_{E^op}(x,a) = U_E(a,x)^op, the pinch comparison gives homotopy equivalences that pass to opposites, and |T^op| is homeomorphic to |T|. Small cases checked: point, empty P(a), discrete E, BG, and empty E. I confirmed the cycle through lem-coef-space-transport-classification that the second reader removed; the new 40-node closure has no cycle and nothing missing or merged. proof_deps equals the union of the steps' uses, every cited statement is in the same unit, there are no new nodes and no tool_uses, and no SGA source is used. One existing duplication, outside this delivery, is left for the maintainer: lem-coef-space-yoneda-density and lem-coef-infinity-yoneda-evaluation state the same small-category evaluation result. No changes made."
- },
  "lean_audit": {
   "master": {
    "state": "none",
@@ -279,5 +206,6 @@
    "decls": [],
    "missing": []
   }
- }
+ },
+ "lead_note": "Q09 maintenance 2026-10-17: the former proof reduces pointwise Yoneda to lem-coef-infinity-yoneda-evaluation, but the repaired coherent evaluation uses model/classification foundations that require this pointwise theorem. That reduction is circular in the repaired graph. The complete old split and review are archived at coord/reports/maintenance/Q09-pointwise-yoneda-before.json. Stage 1 is reopened; prove this pointwise foundation independently of the coherent Yoneda item and of any prerequisite that reaches this foundation. Read the route note; the assertion and its universe hypotheses are unchanged."
 }
