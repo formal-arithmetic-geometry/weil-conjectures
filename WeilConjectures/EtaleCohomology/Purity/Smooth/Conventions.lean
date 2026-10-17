@@ -262,8 +262,10 @@ theorem boundedConstructibleFiniteTor_tateObject [HasInvertibleExponent Λ X] (m
     DerivedCategory.boundedConstructibleFiniteTor Λ X (tateObject Λ X m) :=
   HasTateTwist.boundedConstructibleFiniteTor_twistObject X m
 
-/-- The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, tensoring with the twisting object
-`Λ_X(m)`. -/
+/-- Blueprint `pur9-def-tate-twist`: Tate twists
+
+The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, `K(m) = K ⊗^L Λ_X(m)`: the derived tensor
+product with the twisting object `Λ_X(m)` of the twist datum, a sheaf placed in degree zero. -/
 noncomputable def tateTwist (m : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=

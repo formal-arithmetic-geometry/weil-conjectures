@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.LocalizationLowerShriek
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 
@@ -140,8 +141,30 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
     ∃ T ∈ distTriang (WeilComplex k₀ l X),
       Nonempty (T.obj₁ ≅ (derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)) ∧
       Nonempty (T.obj₂ ≅ K) ∧
-      Nonempty (T.obj₃ ≅ (derivedLowerStar i).obj ((upperStar i).obj K)) :=
-  sorry
+      Nonempty (T.obj₃ ≅ (derivedLowerStar i).obj ((upperStar i).obj K)) := by
+  let c := HasCompactification.compactification j (hf := hasCompactification_of_over (k₀ := k₀) j)
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace U := c.i.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact c.i := inferInstance
+  -- `Rj₀! j^* K ≅ j_! j^* K`
+  obtain ⟨e⟩ := ProEtaleWeilSheaf.nonempty_rightDerivedLowerStar_extensionByZero_iso j i c.i c.g
+    c.comm.symm hij ((upperStar j).obj K).obj ((upperStar j).obj K).property
+  -- the open–closed triangle of the underlying complex of `K`
+  obtain ⟨w, hw⟩ := ProEtaleWeilSheaf.exists_distTriang_openClosed j i hij.symm K.obj
+  let A := (derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)
+  let f₁ : A ⟶ K := ObjectProperty.homMk (e.hom ≫
+    (ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).counit.app K.obj)
+  obtain ⟨C, g₁, h₁, hT⟩ := distinguished_cocone_triangle f₁
+  refine ⟨_, hT, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩, ?_⟩
+  obtain ⟨φ, -, -⟩ := exists_iso_of_arrow_iso _ _ hT hw (Arrow.isoMk e (Iso.refl _) (by
+    simp [f₁]))
+  exact ⟨ObjectProperty.isoMk _ (Triangle.π₃.mapIso φ)⟩
 
 
 /-- **Composition of direct images with compact support** (blueprint: `prop-functor-package`,

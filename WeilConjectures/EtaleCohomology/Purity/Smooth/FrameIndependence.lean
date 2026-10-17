@@ -230,7 +230,8 @@ matrix `A`, the frames `t` and `A t` of the zero section have the same class: re
 along the identity section both classes become the coordinate class of `𝔸^c_S`, so `h` is the
 identity along the identity section, hence everywhere, the fibres of `GL_{c,S} ⟶ S` being
 connected. -/
-theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
+theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix {k : Type u} [Field k]
+    (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
     (g : (glAffine c S).zeroLocusSubscheme (Set.range (glCoord c S)) ⟶
       (glAffine c S).zeroLocusSubscheme (Set.range ((glMatrix c S).mulVec (glCoord c S))))
     (hg : IsPullback g ((glAffine c S).zeroLocusSubschemeι (Set.range (glCoord c S)))
@@ -246,7 +247,8 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
     (Set.range fun a : Fin c ↦ AffineSpace.coord S (ULift.up a))
   have ha : IsIso (supportedClassMap Λ ι (kummerBoundaryProduct Λ (glCoord c S))) :=
     isIso_supportedClassMap_kummerBoundaryProduct_coord Λ c _
-  have haS := isIso_supportedClassMap_kummerBoundaryProduct_coord Λ c S
+      ((generalLinearOpen c S).ι ≫ 𝔸(ULift.{u} (Fin c × Fin c); S) ↘ S ≫ aS)
+  have haS := isIso_supportedClassMap_kummerBoundaryProduct_coord Λ c S aS
   set y := restrictSupportedClass (ModuleCat.{u + 1} Λ) (𝟙 _) _ _ g hg
     (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
     (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c)

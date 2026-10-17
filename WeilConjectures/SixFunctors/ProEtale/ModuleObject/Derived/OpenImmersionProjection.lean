@@ -72,7 +72,10 @@ noncomputable def derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction 
   (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).ofNatIsoRight
     (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).symm
 
-/-- The projection map `q_{j,M,N} : Dj_! (M ⊗ᴸ Lj^* N) ⟶ Dj_! M ⊗ᴸ N` of the adjunction
+/-- Blueprint `pur713-def-open-projection-module`: Open-extension projection map, module
+objects.
+
+The projection map `q_{j,M,N} : Dj_! (M ⊗ᴸ Lj^* N) ⟶ Dj_! M ⊗ᴸ N` of the adjunction
 `Dj_! ⊣ Lj^*` along an open immersion `j`, as a natural transformation of bifunctors: the
 transpose of
 ```

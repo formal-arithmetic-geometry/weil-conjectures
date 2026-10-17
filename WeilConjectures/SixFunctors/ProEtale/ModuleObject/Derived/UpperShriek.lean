@@ -144,13 +144,18 @@ variable {X Y : Over (Spec (.of k))}
 
 variable [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint]
 
-/-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
+/-- Blueprint `pur713-def-upper-shriek-module`: Module-object exceptional inverse image.
+
+The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
 complexes: the functor `boundedConstructibleUpperShriekOfCompactification` attached to the chosen
 compactification `compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriek : Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   boundedConstructibleUpperShriekOfCompactification Λ ℓ (compactificationOverField f)
 
-/-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes: the adjunction
+/-- Blueprint `pur456-def-adjoint-datum-module`: Specified constructible exceptional
+adjunction, module objects.
+
+The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes: the adjunction
 `Rf_!(c) ⊣ Rf^!(c)` for the chosen compactification `c = compactificationOverField f`. -/
 noncomputable def boundedConstructibleUpperShriekAdjunction :
     boundedConstructibleLowerShriek Λ ℓ f ⊣ boundedConstructibleUpperShriek Λ ℓ f :=

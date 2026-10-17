@@ -390,7 +390,10 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-! ### The canonical coefficient morphisms -/
 
-/-- The canonical coefficient morphism `α_f : f^* Λ_Y ⟶ Λ_X`: the component at `Λ` of the
+/-- Blueprint `pur713-def-coefficient-map`: Coefficient morphisms along a scheme morphism
+(the morphism `α_f`; its mate `η_f` is `ProEtale.condensedPushforwardHom`).
+
+The canonical coefficient morphism `α_f : f^* Λ_Y ⟶ Λ_X`: the component at `Λ` of the
 comparison isomorphism `f^* ∘ p_Y^* ≅ p_X^*`, which on the test objects is the canonical
 isomorphism `X ×_Y Y[S] ≅ X[S]`. -/
 noncomputable abbrev condensedPullbackHom :
@@ -412,7 +415,10 @@ lemma isIso_condensedPullbackHom_of_isOpenImmersion {U X : Scheme.{u}} (j : U �
     [IsOpenImmersion j] : IsIso (condensedPullbackHom Λ j) :=
   inferInstance
 
-/-- The canonical coefficient morphism `η_f : Λ_Y ⟶ f_* Λ_X`: the mate of `α_f` under the
+/-- Blueprint `pur713-def-coefficient-map`: Coefficient morphisms along a scheme morphism
+(the morphism `η_f`; `α_f` is `ProEtale.condensedPullbackHom`).
+
+The canonical coefficient morphism `η_f : Λ_Y ⟶ f_* Λ_X`: the mate of `α_f` under the
 adjunction `f^* ⊣ f_*`, the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/
 noncomputable def condensedPushforwardHom :
     condensedRingObj Λ Y ⟶ (f)_*[Ab.{u + 1}].obj (condensedRingObj Λ X) :=

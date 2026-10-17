@@ -82,7 +82,9 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 section LowerStar
 
-/-- The pushforward `f_* : Mod_{Λ_X} ⥤ Mod_{Λ_Y}` on module objects over `Λ`:
+/-- Blueprint `pur713-def-module-push`: Module-object direct image.
+
+The pushforward `f_* : Mod_{Λ_X} ⥤ Mod_{Λ_Y}` on module objects over `Λ`:
 `mapMod(f_*)` followed by restriction of scalars along `η_f : Λ_Y ⟶ f_* Λ_X`. The
 underlying sheaf of `f_* M` is `f_* M`, with `Λ_Y` acting through `η_f`. -/
 noncomputable def lowerStar :
@@ -130,7 +132,9 @@ end LowerStar
 
 section UpperStar
 
-/-- The pullback `f^* : Mod_{Λ_Y} ⥤ Mod_{Λ_X}` on module objects over `Λ`:
+/-- Blueprint `pur713-def-module-pull`: Module-object inverse image.
+
+The pullback `f^* : Mod_{Λ_Y} ⥤ Mod_{Λ_X}` on module objects over `Λ`:
 `mapMod(f^*)` followed by extension of scalars along `α_f : f^* Λ_Y ⟶ Λ_X`. The
 underlying sheaf of `f^* M` is `Λ_X ⊗_{f^* Λ_Y} f^* M`. -/
 noncomputable def upperStar :
@@ -294,8 +298,12 @@ noncomputable def lowerStarComp : (f)_*⟦Λ⟧ ⋙ (g)_*⟦Λ⟧ ≅ (f ≫ g)_
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (comapCondensedPushforwardHomComp Λ f g)
 
-/-- The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of pullbacks on module objects over
-`Λ`, obtained from `ProEtale.CondensedRing.lowerStarComp` by uniqueness of left
+/-- Blueprint `pur713-def-pull-composition-module-underived`: Underived composition comparison
+for module-object inverse image.
+
+The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of pullbacks on module objects over
+`Λ` (the inverse of the blueprint's `σ_{g,f} : f^* g^* ≅ (f ≫ g)^*`), natural in the module.
+It is obtained from `ProEtale.CondensedRing.lowerStarComp` by uniqueness of left
 adjoints: both sides are left adjoint to `f_* ⋙ g_*`. -/
 noncomputable def upperStarComp : (f ≫ g)^*⟦Λ⟧ ≅ (g)^*⟦Λ⟧ ⋙ (f)^*⟦Λ⟧ :=
   ((conjugateIsoEquiv (upperStarLowerStarAdjunction Λ (f ≫ g))
