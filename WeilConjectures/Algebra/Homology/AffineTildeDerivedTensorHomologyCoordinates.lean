@@ -30,7 +30,7 @@ local instance (priority := 2000) recoveryCoordinatesCategory (Y : Scheme.{u}) :
 local instance (priority := 2000) recoveryCoordinatesPreadditive (Y : Scheme.{u}) :
     Preadditive Y.Modules := SheafOfModules.instPreadditive Y.ringCatSheaf
 local instance (priority := 2000) recoveryCoordinatesAbelian (Y : Scheme.{u}) :
-    Abelian Y.Modules := SheafOfModules.instAbelian Y.ringCatSheaf
+    Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   affineTildePushforwardComparison

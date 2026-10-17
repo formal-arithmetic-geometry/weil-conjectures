@@ -26,7 +26,7 @@ local instance coreSourceCoordinatesCategory (Y : Scheme.{u}) :
 local instance coreSourceCoordinatesPreadditive (Y : Scheme.{u}) :
     Preadditive Y.Modules := SheafOfModules.instPreadditive Y.ringCatSheaf
 local instance coreSourceCoordinatesAbelian (Y : Scheme.{u}) :
-    Abelian Y.Modules := SheafOfModules.instAbelian Y.ringCatSheaf
+    Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 local instance coreTildeAdditive (C : Type u) [CommRing C] :
     (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
 local instance coreTildeHomology (C : Type u) [CommRing C] :

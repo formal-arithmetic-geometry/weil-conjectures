@@ -23,7 +23,7 @@ local instance (priority := 2000) sourceCoordinatesCategory (Y : Scheme.{u}) :
 local instance (priority := 2000) sourceCoordinatesPreadditive (Y : Scheme.{u}) :
     Preadditive Y.Modules := SheafOfModules.instPreadditive Y.ringCatSheaf
 local instance (priority := 2000) sourceCoordinatesAbelian (Y : Scheme.{u}) :
-    Abelian Y.Modules := SheafOfModules.instAbelian Y.ringCatSheaf
+    Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 
 
 local instance sourceComparisonTildeAdditive (C : Type u) [CommRing C] :
