@@ -217,5 +217,37 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-fdd258e0c (reviewer sub-agent of L); spot-checked: Read the item, the 10 cited nodes' statements, Stacks derived.tex Tag 0141 (lemma-functorial-injective-resolutions l.7623, remark-match l.7691; the bound is preserved via J(0)=0 and I^{p,q}=0 for p<B) and sites-modules.tex Tag 04JC (l.5540), plus the parent's Steps 6–7 and its sibling, which defines res as the map induced by the unit. The statement is true and the coefficient category is Mod(T_Et,Λ) throughout, matching the parent. No base-change invertibility is asserted. Tested h=id (v^{-1}u=id by naturality of η'), A=0, negative a and the augmentation column q=-1. There are no new nodes and no duplicates: rg finds only single-object abelian-sheaf pullback nodes and spectral-sequence nodes. I fixed three gaps in the proof text only; statement, stmt_deps and proof_deps are unchanged. (1) Step 2 (E5): it never said why h^{-1}η is a quasi-isomorphism and proved the claim only for the sheaf map, while the statement's v is the map on sections. Added exactness, two-out-of-three, K-injectivity, and lem-kun-rgamma-unbounded-well-defined for the sections, extending the step's uses. (2) Step 3: the 'restriction on sections' is now spelled out as the unit F→h_*h^{-1}F at Y, with (h_*G)(Y)=G(Y'). (3) Step 6 (E5): it asserted that u is the derived restriction without justification. It now gives res_h's unit recipe, shows u_q is that composite, v_q is the canonical comparison, and w_q=RΓ(b_q). Remark (B2): the statement does not define res_h; I left it unchanged because it is split-owned, and the meaning is now fixed in Step 6. review_split.py on the snapshot: PASS. Accepted tool_uses, the same as the parent's: lem-weil-pbc-module-sheaves-grothendieck-abelian, lem-weil-pbc-grothendieck-functorial-injective-embedding, lem-weil-pbc-functorial-bounded-injective-resolution, prop-weil-pbc-inverse-image-modules-exact, prop-weil-pbc-kinjective-resolutions-exist, lem-kun-rgamma-unbounded-well-defined.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.DerivedCechDiagramFunctorialModules",
+  "declaration": "AlgebraicGeometry.Etale.compatible_roof_of_augmented_cosimplicial_module_complexes",
+  "declarations": [
+   "AlgebraicGeometry.Etale.resolvedCechDiagram",
+   "AlgebraicGeometry.Etale.pulledCechDiagram",
+   "AlgebraicGeometry.Etale.augmentedCechColumn",
+   "AlgebraicGeometry.Etale.augmentedCechColumnMap",
+   "AlgebraicGeometry.Etale.resolvedCechSectionsToDerived",
+   "AlgebraicGeometry.Etale.CompatibleRoof",
+   "AlgebraicGeometry.Etale.CompatibleRoofColumnsGE",
+   "AlgebraicGeometry.Etale.CanonicalRoofU",
+   "AlgebraicGeometry.Etale.CanonicalRoofV",
+   "AlgebraicGeometry.Etale.CompatibleRoofDerivedIdentification",
+   "AlgebraicGeometry.Etale.CompatibleRoof.alternatingMaps"
+  ],
+  "statement": "theorem compatible_roof_of_augmented_cosimplicial_module_complexes (Λ : Type (u + 1)) [CommRing Λ] (Y Y' : Scheme.{u}) (h : Y' ⟶ Y) (I : CochainComplex.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤ CochainComplex.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (I' : CochainComplex.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤ CochainComplex.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (A : CosimplicialObject.Augmented (CochainComplex.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))) (B : CosimplicialObject.Augmented (CochainComplex.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))) (η : CochainComplex.Plus.ι _ ⟶ I ⋙ CochainComplex.Plus.ι _) (hηq : ∀ K : CochainComplex.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)), QuasiIso (η.app K)) (hI : ∀ (K : CochainComplex.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ), Injective ((I.obj K).obj.X n)) (hIbound : ∀ (K : CochainComplex.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ), K.obj.IsStrictlyGE n → (I.obj K).obj.IsStrictlyGE n) (η' : CochainComplex.Plus.ι _ ⟶ I' ⋙ CochainComplex.Plus.ι _) (hη'q : ∀ K : CochainComplex.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)), QuasiIso (η'.app K)) (hI' : ∀ (K : CochainComplex.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ), Injective ((I'.obj K).obj.X n)) (hI'bound : ∀ (K : CochainComplex.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ), K.obj.IsStrictlyGE n → (I'.obj K).obj.IsStrictlyGE n) (b : (pulledCechDiagram Λ h).obj A ⟶ B) (a : ℤ) (hA : ∀ q : Option SimplexCategory, (augmentedCechColumn A q).obj.IsStrictlyGE a) (hB : ∀ q : Option SimplexCategory, (augmentedCechColumn B q).obj.IsStrictlyGE a) : ∃ R : CompatibleRoof Λ Y Y' h I I' A B, CanonicalRoofU Λ Y Y' h I I' A B η' R ∧ CanonicalRoofV Λ Y Y' h I I' A B η R ∧ R.w = (resolvedCechDiagram Λ Y' I').map b ∧ CompatibleRoofColumnsGE Λ Y Y' h I I' A B a ∧ (∀ q : Option SimplexCategory, QuasiIso (augmentedCechColumnMap R.v q)) ∧ CompatibleRoofDerivedIdentification Λ Y Y' h I I' A B η η' b R",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/DerivedCechDiagramFunctorialModules.lean",
+  "note": "Repair of returned head 4946fc328067: resolutions on Plus, canonical whole augmented w, common bounds, and unit-normalized derived restriction/roof equality including augmentation; helper declarations documented and recorded."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-31de91e12",
+  "group": "NR",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source Tag 0141, Lean module, report, edge cases, route-pivot constraints, and docstrings. scompile.py passed sandbox and library compilation with no diagnostics. Wrote review.md."
  }
 }
