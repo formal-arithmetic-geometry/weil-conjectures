@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
 
 /-!
 # Injectivity of the transition maps of higher direct images on geometric stalks
