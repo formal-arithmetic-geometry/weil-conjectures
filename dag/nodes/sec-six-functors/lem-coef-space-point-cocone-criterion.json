@@ -11,8 +11,137 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Put $C=\\mathcal S_{\\mathcal W}$ and $D=\\operatorname{Fun}(K,C)$. All auxiliary constructions involving the category of all small Kan complexes are performed in the containing universe, while $K,Y$ and the eventual test targets remain $\\mathcal W$-small. The enriched morphism sets $\\operatorname{Fun}(X,Z)$ are Kan by [lem-cbc-kan-functor-space-kan]; [lem-coef-kan-coherent-nerve-quasicategory] makes $C$ a quasicategory. The functor/cone calculus makes $D$ a quasicategory. We use the arrow mapping space $U_C(X,Z)$ and its specified equivalence $j:\\operatorname{Map}_C(X,Z)\\to U_C(X,Z)$ from [lem-coef-infinity-pinch-comparison]. The realization criterion [lem-cbc-realization-weak-equivalence] has two useful immediate consequences used below: weak equivalences satisfy two-out-of-three, since precomposition on each Kan-target homotopy-class set does; and simplicially homotopic maps, or maps joined by a zigzag of simplicial homotopies, are weak equivalences simultaneously, since they induce the same maps on these sets.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03F8",
+    "place": "Preparatory hypotheses; Cordier--Porter, Kerodon 2.4.5.1 (00LJ), and right-pinch comparison 4.6.5.10 (01L5)"
+   }
+  },
+  {
+   "text": "Use $J^n,Q^n,|-|_Q,\\operatorname{Sing}_Q$ and the natural weak equivalences $p_A:|A|_Q\\to A$ of [lem-coef-pinched-rigidification-resolution]. We need the explicit maximum map $q^n:Q^n\\to\\Delta^n$, not an unstated choice of $p$. In the subset-poset model of $\\mathfrak C[\\Delta^{n+1}]$, send a subset $B$ in a morphism from an initial vertex to the last vertex to $\\max(B\\setminus\\{n+1\\})$. All morphisms within the initial face go to the identity of one object $x$; the last object is $y$, with morphism set $\\Delta^n$ from $x$ to $y$, singleton endomorphisms and no reverse morphisms. Union with a subset in the initial face does not change this maximum, since its elements precede the source of the final segment. Thus the enriched map factors through $\\mathfrak C[J^n]$, defining $q^n$. Inclusion of subsets makes the maximum monotone. For every monotone $a:[m]\\to[n]$, $\\max(a(B))=a(\\max B)$, proving cosimplicial naturality. This yields $q_A:|A|_Q\\to A$. To compare it with the $p$ supplied by the node, form the simplicial map $r^n=\\max(p^n,q^n):Q^n\\to\\Delta^n$ pointwise in the ordered set $[n]$. The inequalities $p^n\\leq r^n\\geq q^n$ give simplicial homotopies natural in $n$: on a simplex, use the smaller value before the switch in $\\Delta^1$ and the larger afterwards. They descend through the coend to $p_A\\simeq r_A\\simeq q_A$; products with $\\Delta^1$ commute with the displayed coproducts and quotient relations degreewise. Step 1 now shows that every $q_A$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Section 2.2.2, explicit maximum map and coend; comparison with the stated existential p expanded here"
+   }
+  },
+  {
+   "text": "For Kan $X,Z$ put $T=\\operatorname{Fun}(X,Z)$ and $M=\\operatorname{Map}_C(X,Z)$. The coherent-nerve adjunction identifies $M$ exactly with $\\operatorname{Sing}_QT$: a right-pinched simplex is an enriched functor $\\mathfrak C[J^n]\\to\\mathbf{Kan}_{\\mathcal W}$ with endpoints $X,Z$. The collapsed initial face forces its endomorphisms to be identities; the sole remaining datum is its map $Q^n\\to T$. Define $\\alpha:T\\to M$ in degree $n$ by $t\\mapsto t q^n$. This is natural in $n$. The evaluation counit $\\epsilon_T:|\\operatorname{Sing}_QT|_Q\\to T$ is a weak equivalence by [lem-coef-pinched-rigidification-resolution], and $\\epsilon_T|\\alpha|_Q=q_T$, checked on each coend summand by evaluation. Hence $|\\alpha|_Q$ is a weak equivalence. Naturality gives $p_M|\\alpha|_Q=\\alpha p_T$; two-out-of-three proves that $\\alpha$ is a weak equivalence. Both $T$ and $M$ are Kan, by Steps 1 and the pinch comparison. For clarity this gives an actual simplicial homotopy inverse: the realization criterion tested at $T$ gives $g:M\\to T$ with $[g\\alpha]=[1_T]$; its injectivity tested at $M$ gives $[\\alpha g]=[1_M]$. Here brackets mean edge-components of internal functor objects. These objects are Kan by [lem-cbc-kan-functor-space-kan], so each finite zigzag of edges compresses to one edge: reverse an edge by filling an outer $2$-horn with an identity edge, then compose by filling an inner $2$-horn. Thus both class equalities are simplicial homotopies. Composing with $j$ gives a homotopy equivalence $b_{X,Z}=j\\alpha:\\operatorname{Fun}(X,Z)\\to U_C(X,Z)$, taking each map to its corresponding edge.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-realization-weak-equivalence",
+    "lem-cbc-kan-functor-space-kan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06QR",
+    "place": "HTT Section 2.2.2, evaluation counit; Kerodon 4.6.7.7 (06QR), with the right-pinched comparison proved from the existing resolution"
+   }
+  },
+  {
+   "text": "There is an actual degreewise isomorphism $U_D(\\Delta_KX,\\Delta_KZ)=\\operatorname{Fun}(K,U_C(X,Z))$: on both sides an $n$-simplex is a map $K\\times\\Delta^n\\times\\Delta^1\\to C$ whose endpoint restrictions are constant at $X$ and $Z$. Currying and interchanging the two parameter factors give inverse maps, commuting with every restriction map. Postcomposition with $b_{X,Z}$ is a homotopy equivalence on internal functor objects: postcompose with its homotopy inverse, and curry its two homotopies, evaluated at each point of $K$ with the same interval parameter. Together with $j_D$, this gives a natural zigzag of equivalences $\\operatorname{Map}_D(\\Delta_KX,\\Delta_KZ)\\to U_D(\\Delta_KX,\\Delta_KZ)=\\operatorname{Fun}(K,U_C(X,Z))\\leftarrow\\operatorname{Fun}(K,\\operatorname{Fun}(X,Z))$. At $X=*$, evaluation identifies $\\operatorname{Fun}(*,Z)$ with $Z$, giving the required displayed equivalence. An edge cocone $\\lambda$ is a vertex of the middle arrow space; the homotopy inverse supplies a map $e_\\lambda:K\\to Y$ whose image is homotopic to that vertex. It is determined up to homotopy. The constructions commute with restriction in $K$ and preserve all simplicial parameters; no isomorphism between the right-pinched space and the enriched morphism set is asserted.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03F8",
+    "place": "Constant-diagram exponential calculation in the arrow model; right-pinch Proposition 4.6.5.10 (01L5)"
+   }
+  },
+  {
+   "text": "Check composition, which is needed for the particular cocone rather than merely an abstract equivalence of its space. For Kan $X,Y,Z$ and $n$-simplices $f:\\Delta^n\\to\\operatorname{Fun}(X,Y)$, $g:\\Delta^n\\to\\operatorname{Fun}(Y,Z)$, construct a simplex $\\Phi(g,f)$ of $V_C(X,Y,Z)$ from [lem-coef-infinity-mapping-composition]. For a chain of vertices in $[2]\\times[n]$, send the three layers to $X,Y,Z$ and all within-layer morphisms to identities. On a subset $B$ joining layer $0$ to layer $1$, evaluate $f$ at the largest parameter among its layer-$0$ vertices; on a subset joining $1$ to $2$, evaluate $g$ at the largest parameter among its layer-$1$ vertices. On a subset joining $0$ to $2$, put $s=\\max\\{i:(0,i)\\in B\\}$ and $t=\\max\\{i:(a,i)\\in B,\\ a\\leq1\\}$ and assign $g(t)\\circ f(s)$, as a map on the nerve of the subset poset. Both coordinates are monotone under inclusion. Splitting a subset at a layer-$1$ vertex gives precisely the union-composition formula; splitting within layer $0$ or $2$ only inserts an identity. Hence these formulas define enriched functors on every simplex, compatible on faces and degeneracies, and so a map $\\Delta^2\\times\\Delta^n\\to C$. Its edges are $b(f),b(g),b(g\\circ f)$: on the $02$ face there is no layer $1$, so $t=s$. Monotone parameter changes preserve these maxima, proving compatibility in all degrees. The characterization by $V,\\theta,\\ell$ in the cited composition node therefore identifies enriched composition with coherent composition up to homotopy: $\\theta\\Phi=b\\times b$ and $\\ell\\Phi=b\\circ(\\text{composition})$ for this map $\\Phi$, so $[j][c][\\alpha\\times\\alpha]=[\\ell][\\theta]^{-1}[b\\times b]=[\\ell\\Phi]=[j][\\alpha][\\text{composition}]$, and $j$ is a homotopy equivalence.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02LN",
+    "place": "Kerodon Proposition 4.6.8.19 (02LN), right-pinched version of the explicit three-layer construction"
+   }
+  },
+  {
+   "text": "Transfer the composition comparison of Step 5 to constant diagrams. Currying gives $V_D(\\Delta_KX,\\Delta_KY,\\Delta_KZ)=\\operatorname{Fun}(K,V_C(X,Y,Z))$, with the restriction maps $\\theta,\\ell$ given pointwise, so the same compatibility holds for constant diagrams. In particular the test map induced by $\\lambda$ becomes $h\\mapsto h\\circ e_\\lambda$ under Step 4, since $j$ is natural under the simplicial functor $\\Delta_K:C\\to D$ by [lem-coef-infinity-pinch-comparison], so $\\Delta_K$ on mapping spaces becomes the constant-map inclusion $\\operatorname{Fun}(Y,Z)\\to\\operatorname{Fun}(K,\\operatorname{Fun}(Y,Z))$, and the edge $\\lambda$ is a vertex of $\\operatorname{Map}_D$ corresponding to $e_\\lambda$, including every higher parameter; replacing $\\lambda$ by its homotopic representative preserves this test map up to homotopy. This also supplies naturality of the comparison in the space variable and its coherent composition parameters.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02LN",
+    "place": "Kerodon Proposition 4.6.8.19 (02LN) applied pointwise in K; constant-diagram currying as in Kerodon Example 7.1.2.10 (03F8)"
+   }
+  },
+  {
+   "text": "By the dual cocone clause of [lem-cbc-enhanced-functor-cone-calculus], the specified cocone $\\lambda:\\Delta_K*\\to\\Delta_KY$ is colimiting if and only if, for every $\\mathcal W$-small Kan complex $Z$, precomposition induces an equivalence $\\operatorname{Map}_C(Y,Z)\\to\\operatorname{Map}_D(\\Delta_K*,\\Delta_KZ)$. The comparison of Step 3 identifies the source with $\\operatorname{Fun}(Y,Z)$; Step 4 identifies the target with $\\operatorname{Fun}(K,Z)$; Steps 5 and 6 identify the actual arrow with $e_\\lambda^*$. Thus the criterion is exactly that all $e_\\lambda^*:\\operatorname{Fun}(Y,Z)\\to\\operatorname{Fun}(K,Z)$ be weak equivalences. This uses the specified apex $Y$ and assumes no prior existence of another colimit.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03F6",
+    "place": "Kerodon Proposition 7.1.2.8 (03F6), copower criterion"
+   }
+  },
+  {
+   "text": "If $e_\\lambda$ is a weak homotopy equivalence, [lem-cbc-kan-mapping-homotopy-invariance] applies with $A=K$, $B=Y$ and each test Kan complex $Z$. It makes $e_\\lambda^*$ a simplicial homotopy equivalence. The passage to a weak equivalence is precisely [lem-cbc-simplicial-homotopy-equivalence-weak], without a Kan or nonemptiness condition on $K$. Step 7 then makes $\\lambda$ colimiting.",
+   "uses": [
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03F8",
+    "place": "Kerodon Example 7.1.2.10 (03F8), forward direction"
+   }
+  },
+  {
+   "text": "Conversely, a colimiting $\\lambda$ gives weak equivalences $e_\\lambda^*$ for all $\\mathcal W$-small Kan $Z$ by Step 7. Their maps on edge-components are bijections: apply the forward implication of [lem-cbc-kan-mapping-homotopy-invariance] to each of these weak equivalences, and use the two Kan targets equal to its source and its target to construct a homotopy inverse by the two-test argument of Step 3. A homotopy inverse induces inverse functions on edge-components. The converse criterion in [lem-cbc-realization-weak-equivalence], now applied to $v=e_\\lambda:K\\to Y$ in $\\mathcal W$, proves that $e_\\lambda$ induces a bijection on path components and isomorphisms on all based homotopy groups. This is the required weak homotopy equivalence. When $K=\\varnothing$ the test $Z=\\varnothing$ forces $Y=\\varnothing$; if $Y=\\varnothing$ and a cocone exists then $e_\\lambda$ forces $K=\\varnothing$. For disconnected $K$ the criterion retains all components, and for a simplicial circle $K$ and $Y=*$ it fails on higher homotopy. Thus no nonemptiness or connectedness hypothesis was used.",
+   "uses": [
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03F8",
+    "place": "Kerodon Example 7.1.2.10 (03F8), converse; realization detection 3.6.4.3 (03X7)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-pinched-rigidification-resolution"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +177,31 @@
    "results": "{\"t\": \"2026-10-17T02:56:10Z\", \"tool\": \"grep\", \"query\": \"constant.*(punit|singleton)|copower|isColimit.*const\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/Abelian/Subobject.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\"], \"digest\": \"8fde01f8bc63ed95\"}",
    "date": "2026-10-17",
    "verdict": "no match: Limits/IsConnected.lean:88-110 concerns ordinary Type-valued colimits depending on connectedness, not the homotopy type of the index. A circle separates these statements."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyCoherentNerve|mappingSpace|groupoidCompletion|copower",
+   "results": "{\"t\": \"2026-10-17T04:01:35Z\", \"tool\": \"grep\", \"query\": \"homotopyCoherentNerve|mappingSpace|groupoidCompletion|copower\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder returns ordinary nerve/2-truncation equivalences (HomotopyCat.lean:101-107; NerveAdjunction.lean:414-415), whose types do not compare coherent constant-diagram Kan mapping spaces. Grep and Loogle returned zero hits for their recorded queries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the homotopy coherent nerve of Kan complexes, the homotopy colimit of the constant terminal space indexed by a simplicial set is its groupoid completion",
+   "results": "{\"t\": \"2026-10-17T04:01:37Z\", \"tool\": \"leanfinder\", \"query\": \"In the homotopy coherent nerve of Kan complexes, the homotopy colimit of the constant terminal space indexed by a simplicial set is its groupoid completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.OneTruncation₂.ofNerve₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\"], \"digest\": \"3999c01f2970e9be\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder returns ordinary nerve/2-truncation equivalences (HomotopyCat.lean:101-107; NerveAdjunction.lean:414-415), whose types do not compare coherent constant-diagram Kan mapping spaces. Grep and Loogle returned zero hits for their recorded queries."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyCoherent\"",
+   "results": "{\"t\": \"2026-10-17T04:02:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"homotopyCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder returns ordinary nerve/2-truncation equivalences (HomotopyCat.lean:101-107; NerveAdjunction.lean:414-415), whose types do not compare coherent constant-diagram Kan mapping spaces. Grep and Loogle returned zero hits for their recorded queries."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
@@ -63,7 +213,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, the displayed derived coefficient mapping-complex adjunction: evaluation at an identity extracts the universal map from a representing equivalence before applying the local coherent adjoint criterion. Supporting foundation: Cocones on the constant point diagram and their colimit criterion.",
+   "place": "Proof paragraph 2, the displayed derived coefficient mapping-complex adjunction: the point-cocone mapping-space and colimit criterion used to extract universal maps by evaluation.",
    "via": [
     "lem-coef-infinity-pointwise-yoneda-evaluation",
     "lem-coef-infinity-pointwise-adjoint-criterion",
@@ -77,5 +227,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03F8",
+  "place": "Kerodon 7.1.2.10, 7.1.2.8, 4.6.7.7 and 4.6.8.19; agent-written right-pinched expansion using the existing Q resolution; sources read online, archive WANTED"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-point-cocone-criterion",
+  "worker": "stage1",
+  "summary": "Second reading repaired the false degreewise identification. Eight steps derive the nerve mapping equivalence from the existing Q resolution, use exact arrow-space currying, explicitly verify composition, and apply the cocone and Kan-target criteria. No new nodes; statement unchanged; no circular coherent-nerve/transport citation. Maintainer reader (cc review): the former 2032-character Step 5 was divided into the composition comparison in the space category (Step 5) and its transfer to constant diagrams with the identification of the test map (Step 6); later step references renumbered; mathematics unchanged.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint: the supporting foundation “Cocones on the constant point diagram and their colimit criterion,” via the explicit mapping-space adjunction and universal cocone test.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic dual cocone universal mapping-space criterion for the specified cocone; the biduality unit has no separate replacement for this foundational test."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Generic fact that weak equivalences of simplicial sets induce homotopy equivalences on mapping complexes into Kan targets."
+   },
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Generic converse detection of weak homotopy equivalences by precomposition on components of mapping complexes into all Kan targets."
+   },
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Generic Kan property of internal mapping objects, needed for the enriched space category and the homotopy-inverse construction."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic conversion of the supplied simplicial homotopy equivalences to the realization-based weak equivalences in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-fd3bd2084",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-fd3bd2084 (reviewer sub-agent of L); spot-checked: I read the item in full, all 11 cited statements, the unit record, the blueprint ancestor (prop-coef-integral-exceptional-adjoint, paragraph 2) and the report. The statement is unchanged and true. Small cases checked: K empty (colimiting iff Y empty), K a point (Y contractible), K=Δ^1 with Y a point (colimiting), the simplicial circle with Y a point (fails), two discrete points (both components kept). Step 1: two-out-of-three and invariance under homotopy follow from the cited realization criterion. Step 2: the maximum map q^n is well defined on C[J^n], because a union with a subset of the initial face keeps the maximum, and it is natural in n. The comparison with the existing p goes through max(p,q) and pointwise homotopies, which descend through the coend. Step 3: Map_C(X,Z) equals Sing_Q Fun(X,Z) exactly. I checked ε_T|α|_Q = q_T on each summand; two-out-of-three makes α a weak equivalence, and the two-test argument gives a homotopy inverse. Step 4: currying gives U_D = Fun(K,U_C) degreewise. Step 5: I checked Φ on every layer split and face, and θΦ = b×b and ℓΦ = b∘composition, then applied the V/θ/ℓ characterization. Steps 6–8: the dual cocone clause, the forward direction by homotopy invariance plus the homotopy-equivalence-to-weak lemma, and the converse by the realization criterion are all correct. Long step 5 (2032 characters): it held two arguments, so I split it into the composition comparison (new Step 5) and its transfer to constant diagrams with the identification of the test map (new Step 6), and renumbered later references. All steps are now under 2000 characters; proof_deps are unchanged. I did not make the composition comparison a node of its own. It is the Kan case of lem-coef-coherent-nerve-comparison, and that node (with lem-coef-space-transport-classification and lem-coef-diagonal-coherent-nerve-comparison) reaches this item through model-colimit-localization → system-localization → pointwise-adjoint → pointwise-yoneda, checked by searching the dependency graph. So it cannot be cited, and a new special-case node would nearly duplicate it. The explicit computation is the intended acyclic route. There are no new nodes and no duplicates (horn-completion-point-colimit, coslice-colimit-formula, space-valued-pointwise-lan, spaces-small-colimits-universe and others checked). No proof dependency reaches back to the item. I accept the five sk-prop-sf-cbc tool uses: they are generic simplicial and cocone criteria. The searches cover all three required kinds (LeanSearch, LeanFinder/Loogle, grep), with no Mathlib match. The proof is marked agent-written; the Kerodon and HTT sources are WANTED. Minor: the report wrongly calls two of the tool nodes smooth-purity ones; they are sk-prop-sf-cbc.; 1 file(s) fixed by the reviewer"
  }
 }
