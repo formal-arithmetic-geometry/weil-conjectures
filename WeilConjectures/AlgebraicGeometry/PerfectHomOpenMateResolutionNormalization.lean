@@ -325,7 +325,8 @@ theorem perfectHomOpenComparison_counit_resolution
     exact (derivedDirectImage_square_mate f f' B.ι b he).symm
   have : IsIso (perfectHomOpenModuleMate s B r) := perfectHomOpenModuleMate_isIso s B r
   have : PreservesFiniteColimits H := by
-    have := (Scheme.Modules.restrictAdjunction b).leftAdjoint_preservesColimits
+    have : PreservesColimitsOfSize.{0, 0} (Scheme.Modules.restrictFunctor b) :=
+      (Scheme.Modules.restrictAdjunction b).leftAdjoint_preservesColimits
     infer_instance
   have hu : Functor.rightDerivedFunctorCompUnit P F ≫
       Functor.whiskerLeft DerivedCategory.Qh ed.hom =
