@@ -183,6 +183,11 @@ theorem of_surjective (f : ρ.IntertwiningMap σ) (hf : Function.Surjective f) :
 theorem of_equiv (e : ρ.Equiv σ) : ConstituentsLE ρ σ :=
   of_injective e.toIntertwiningMap e.injective
 
+/-- The constituents of a subquotient `S / U` are constituents of `ρ`. -/
+theorem subquotient (U S : Subrepresentation ρ) : ConstituentsLE (S.subquotient U) ρ :=
+  (of_surjective (σ := S.subquotient U) (ρ := S.toRepresentation) ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+    (Submodule.mkQ_surjective _)).trans (of_injective S.subtype S.subtype_injective)
+
 /-- **Constituents of a short exact sequence.** If `σ₁ → ρ → σ₂` is exact, every constituent
 of `ρ` is a constituent of `σ₁` or of `σ₂`. -/
 theorem of_exact {V₁ V₂ : Type*} [AddCommGroup V₁] [Module k V₁] [AddCommGroup V₂] [Module k V₂]

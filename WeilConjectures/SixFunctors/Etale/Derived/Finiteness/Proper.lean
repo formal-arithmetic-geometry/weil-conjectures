@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ProjectiveModification
+public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 
@@ -22,11 +24,16 @@ morphism `f : X ⟶ S` with `S` of finite type over `k`:
   along modifications `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_modification`.
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper`
   (`thm-fin-proper-case`): moreover `Rᵠf_* F = 0` for `q > 2d` if the geometric fibres have
-  dimension at most `d`.
+  dimension at most `d`. The vanishing is checked at geometric points, by proper base change
+  (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`) and the
+  cohomological dimension of the geometric fibres.
 - `AlgebraicGeometry.Etale.isIso_homology_derivedBaseChangeMapPlus_of_isProper`
   (`obl-fin-comparison`): the comparison with the cohomology of geometric fibres.
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper`
-  (`lem-fin-proper-bounded-constructible`): `Rf_*` preserves `D^b_c`.
+  (`lem-fin-proper-bounded-constructible`): `Rf_*` preserves `D^b_c`. The blueprint uses the
+  hypercohomology spectral sequence; we use the dévissage along truncation triangles
+  `AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`, the fibre
+  dimensions being uniformly bounded by `AlgebraicGeometry.exists_topologicalKrullDim_pullback_le`.
 -/
 
 @[expose] public section
@@ -102,6 +109,66 @@ theorem hasConstructibleDirectImages_of_isProper {X S : Scheme.{u}} (aS : S ⟶ 
       exact this hz
   simpa using ih C' hlt _ (U.closedComplement ≫ i) rfl
 
+/-- The cohomology of the geometric fibre of a proper morphism vanishes above twice the
+dimension of the fibre: for `f : X ⟶ S` proper, a point `s : Spec Ω ⟶ S` with `Ω` separably
+closed whose fibre `X_s` has dimension at most `d`, and a sheaf `F` of `Λ`-modules on `X`,
+`Hᵠ(X_s, F|_{X_s}) = 0` for `q > 2d`
+(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`, blueprint
+`fin4-lem-fibrewise-cohomological-dimension`). -/
+lemma isZero_homology_fibre_of_isProper {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S) (d : ℕ)
+    (hd : topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (d : WithBot ℕ∞))
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : (2 * d : ℤ) < q) :
+    IsZero ((Plus.homologyFunctor _ q).obj
+      ((pullback.snd f s)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj
+        (((pullback.fst f s)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
+          ((Plus.singleFunctor _ 0).obj F)))) := by
+  have : IsProper (pullback.snd f s) := MorphismProperty.pullback_snd _ _ inferInstance
+  exact (Etale.isZero_higherDirectImage_of_two_mul_lt isAddTorsion_of_finite (pullback.snd f s)
+    (pullback.snd f s) (𝟙 _) (Category.comp_id _) d hd
+    ((pullback.fst f s)^*[ModuleCat.{u + 1} Λ].obj F) q hq).of_iso
+      ((Plus.homologyFunctor _ q).mapIso
+        ((pullback.snd f s)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.mapIso
+          ((((pullback.fst f s)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor
+            0).app F)))
+
+/-- The homology sheaves of the unbounded derived direct image `Rf_*(F[0])` are those of the
+bounded below derived direct image `R⁺f_*(F[0])`. -/
+noncomputable def homologyRightDerivedLowerStarSingleIsoPlus {X S : Scheme.{u}} (f : X ⟶ S)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    (homologyFunctor _ q).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)) ≅
+      (Plus.homologyFunctor _ q).obj ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj
+        ((Plus.singleFunctor _ 0).obj F)) :=
+  (homologyFunctor _ q).mapIso
+    (((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusCompatibility.app
+      ((Plus.singleFunctor _ 0).obj F)).symm
+
+/-- **Vanishing of proper direct images above twice the fibre dimension.** For `f : X ⟶ S`
+proper all of whose geometric fibres have dimension at most `d`, `Rᵠf_* F = 0` for `q > 2d` and
+every sheaf `F` of `Λ`-modules: at a geometric point `s`, proper base change identifies
+`s^* Rᵠf_* F` with `Hᵠ(X_s, F|_{X_s})`
+(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`), which vanishes by
+`AlgebraicGeometry.Etale.isZero_homology_fibre_of_isProper`, and geometric points detect zero
+sheaves. -/
+lemma isZero_homology_rightDerivedLowerStar_of_isProper {X S : Scheme.{u}} (f : X ⟶ S)
+    [IsProper f] (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S),
+      topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (d : WithBot ℕ∞))
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : (2 * d : ℤ) < q) :
+    IsZero ((homologyFunctor _ q).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) := by
+  refine IsZero.of_iso ?_ (homologyRightDerivedLowerStarSingleIsoPlus f F q)
+  refine Etale.isZero_of_forall_isZero_upperStar_algClosurePoint Λ _ fun t ↦ ?_
+  let x := S.algClosurePoint t
+  let sq := IsPullback.of_hasPullback f x
+  let K := (Plus.singleFunctor _ 0).obj F
+  have := Etale.isIso_baseChange_of_isProper_of_torsionHomology Λ sq K
+    (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X isAddTorsion_of_finite K)
+  exact (isZero_homology_fibre_of_isProper f x d (hd _ x) F q hq).of_iso
+    (((Etale.upperStar (ModuleCat.{u + 1} Λ) x).mapDerivedCategoryPlusHomologyFunctorIso q).app
+        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj K) ≪≫
+      (Plus.homologyFunctor _ q).mapIso
+        (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)))
+
 /-- Blueprint `thm-fin-proper-case`: The proper case: direct images of proper morphisms.
 
 Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, all of whose geometric
@@ -117,7 +184,9 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper {X S : S
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))) ∧
     ∀ q : ℤ, (2 * d : ℤ) < q → IsZero ((homologyFunctor _ q).obj
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) :=
-  sorry
+  ⟨fun q ↦ hasConstructibleDirectImages_of_isProper aS f F inferInstance q,
+    isZero_homology_rightDerivedLowerStar_of_isProper f d hd F⟩
+
 
 /-- Blueprint `obl-fin-comparison`: The comparison and finitude of proper direct images.
 
@@ -151,8 +220,26 @@ theorem isIso_homology_derivedBaseChangeMapPlus_of_isProper {X S : Scheme.{u}}
     (∀ q : ℤ, IsConstructibleSheaf ((homologyFunctor _ q).obj
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))) ∧
     ∀ q : ℤ, (2 * d : ℤ) < q → IsZero ((homologyFunctor _ q).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) := by
+  obtain ⟨h₁, h₂⟩ := isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper aS f d hd F
+  refine ⟨fun Ω _ _ s q ↦ ?_, h₁, h₂⟩
+  let sq := IsPullback.of_hasPullback f s
+  let K := (Plus.singleFunctor _ 0).obj F
+  have := Etale.isIso_baseChange_of_isProper_of_torsionHomology Λ sq K
+    (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X isAddTorsion_of_finite K)
+  refine ⟨inferInstance, ?_, isZero_homology_fibre_of_isProper f s d (hd Ω s) F q⟩
+  have : IsFiniteSheaf ((homologyFunctor _ q).obj
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) :=
-  sorry
+    (h₁ q).isFiniteSheaf
+  have := IsFiniteSheaf.upperStar s ((homologyFunctor _ q).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))
+  exact IsFiniteSheaf.of_iso ((Etale.upperStar (ModuleCat.{u + 1} Λ) s).mapIso
+      (homologyRightDerivedLowerStarSingleIsoPlus f F q) ≪≫
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlusHomologyFunctorIso q).app
+      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj K) ≪≫
+    (Plus.homologyFunctor _ q).mapIso
+      (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)))
+
 
 /-- Blueprint `lem-fin-proper-bounded-constructible`: Bounded constructible complexes under a
 proper direct image.
@@ -165,8 +252,14 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper {Y S : Scheme.{u}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
     Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S
-      ((R((b)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
+      ((R((b)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_pullback_le aS b
+  refine boundedConstructible_obj_of_forall_singleFunctor Λ _ (fun F hF ↦ ?_) hK
+  obtain ⟨h₁, h₂⟩ := isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper aS b d
+    (fun Ω _ _ s ↦ hd Ω s) F
+  exact ⟨⟨⟨0, ((b)_*[ModuleCat.{u + 1} Λ]).isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
+    ⟨2 * d, (isLE_iff _ _).2 fun q hq ↦ h₂ q hq⟩⟩, h₁⟩
+
 
 end Etale
 
