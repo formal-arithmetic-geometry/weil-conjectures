@@ -13,9 +13,134 @@
   "def-weil-proper-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $T$ is empty, take $Z=T$, $r=\\mathrm{id}_T$, and the empty affine cover; every requested factorization is vacuous. The identity is proper directly from the definition (its diagonal, affine ring maps and all base changes are identities) and surjective. Hence assume $T$ nonempty. Surjectivity of $p$ implies $U$ nonempty, so $m>0$. An empty $U_j$ causes no difficulty in the following constructions.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBF, lemma-refine-by-standard-ph (2): empty case made explicit."
+   }
+  },
+  {
+   "text": "For each $j$, the affine scheme $U_j$ is quasi-compact and quasi-separated. Apply projective Chow domination to the proper morphism $q_j:V_j\\to U_j$. It supplies a proper surjection $\\pi_j:W_j\\to V_j$ and a closed immersion $b_j:W_j\\hookrightarrow\\mathbf P^{e_j}_{U_j}$ over $U_j$. The composite $W_j\\to U_j$ is proper by proper composition and surjective by composition of surjective functions. Put $A_{ji}=\\pi_j^{-1}(V_{ji})$. These are open subschemes covering $W_j$, and their maps to $V_j$ factor through $V_{ji}$ by restriction of a morphism to the inverse image of an open subscheme. They need not be affine: affine refinement will be performed only on the final scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "sk-thm-chow-projective",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBF, lemma-refine-by-standard-ph (2), first paragraph of its proof, using limits.tex Tag 0202, lemma-chow-finite-type."
+   }
+  },
+  {
+   "text": "Use projective-space base change to regard $\\mathbf P^{e_j}_{U_j}$ as the inverse-image open of $U_j$ in $P_j=\\mathbf P^{e_j}_U$, and let $g_j:W_j\\to P_j$ be the resulting morphism. Projective-space properness and proper composition make $P_j\\to U\\to T$ proper. Thus $P_j$ is quasi-compact and quasi-separated by the qcqs-over-affine node. The same node applied to the proper morphism $W_j\\to U_j$ makes $W_j$ qcqs. The morphism-permanence node therefore makes $g_j$ quasi-compact and quasi-separated. Take its scheme-theoretic image $\\overline W_j\\hookrightarrow P_j$ using the image-kernel node. Its restriction to the open $\\mathbf P^{e_j}_{U_j}$ is the image of $b_j$, by the open-restriction node; that image is canonically $W_j$, by the closed-immersion-image node. These identifications respect the inclusions. Consequently the factor map identifies $W_j$ with $\\overline W_j\\times_U U_j$, an open subscheme of $\\overline W_j$. Finally $\\overline W_j\\to U$ is proper, being a closed immersion followed by the proper projective-space projection.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lemma-nagata-scheme-image-of-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBF, lemma-refine-by-standard-ph (2), scheme-theoretic closure paragraph; morphisms.tex Tag 01R8, lemma-quasi-compact-scheme-theoretic-image (1)-(3)."
+   }
+  },
+  {
+   "text": "Let $D_j\\hookrightarrow U$ be the reduced induced closed subscheme on the closed subset $|U|\\setminus|U_j|$, supplied by the reduced-closed-subscheme node. Form $C_j=\\overline W_j\\amalg D_j$ over $U$ by the coproduct node. Both summand maps are proper, the second by closed-immersion properness. Their coproduct is proper directly from the proper definition: it is finite type since over each affine target the two finite affine covers combine to a finite cover; its diagonal is closed since the same-summand diagonals are closed and the cross-summand inverse images of the diagonal are empty; after any base change, the two inverse-image summands are clopen and form a disjoint cover, so a closed subset has closed image as the union of its two closed images. The last assertion follows also directly by pulling back the two clopen pieces, whose restricted structure maps are the two base changes. This proves universal closedness. The map $c_j:C_j\\to U$ is surjective: $W_j$ covers $U_j$ and $D_j$ covers its complement. Moreover $c_j^{-1}(U_j)=W_j$ as open subschemes, since the second summand has empty inverse image there and Step 3 identifies the first.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBF, lemma-refine-by-standard-ph (2), construction of the proper surjection over U; schemes.tex Tag 01J3, lemma-reduced-closed-subscheme."
+   }
+  },
+  {
+   "text": "Form the finite fibre product $Z=C_1\\times_U\\cdots\\times_U C_m$. More explicitly start with $Z^{(0)}=U$ and set $Z^{(k)}=Z^{(k-1)}\\times_U C_k$. Its map to $Z^{(k-1)}$ is a base change of $c_k$, hence proper by proper base change and surjective by surjective base change. Inductively $Z^{(k)}\\to U$ is proper by proper composition and surjective by composition of surjective functions, with the identity as base case. For $Z=Z^{(m)}$ the composite $r:Z\\to U\\xrightarrow{p}T$ is therefore proper and surjective. Because $T$ is affine, $Z$ is quasi-compact by qcqs-over-affine. The projections $\\rho_j:Z\\to C_j$ are $U$-morphisms by the fibre-product universal property.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBF, lemma-refine-by-standard-ph (2), final paragraph: finite product of proper surjections."
+   }
+  },
+  {
+   "text": "Regard each $A_{ji}$ of Step 2 as an open subscheme of $C_j$, using $W_j=c_j^{-1}(U_j)$, and put $O_{ji}=\\rho_j^{-1}(A_{ji})\\subseteq Z$. These opens cover $Z$: for any $z\\in Z$, its image $u\\in U$ lies in some $U_j$; then $\\rho_j(z)$ lies in $W_j$, and hence in some $A_{ji}$. Each $O_{ji}$ has a $T$-morphism to $V_{ji}$ by composing its restricted projection with $A_{ji}\\to V_{ji}$. Apply the affine-open-cover node to every open scheme $O_{ji}$. Composing these open inclusions with $O_{ji}\\subseteq Z$ gives an affine open cover of $Z$ subordinate to the $O_{ji}$; the composition is an open immersion directly from its definition. Quasi-compactness selects finitely many members $Z_a$, retaining a chosen pair $(j(a),i(a))$ for each. Restriction of $O_{j(a)i(a)}\\to V_{j(a)i(a)}$ supplies the required morphism $Z_a\\to V_{j(a)i(a)}$. All maps used were over $U$ or over $U_j$ and hence over $T$, so their composites with $V_{ji}\\to U_j\\to T$ equal $r|_{Z_a}$, as required.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-pc-fppf-affine-open-cover",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBF, lemma-refine-by-standard-ph (2), final covering and finite-subcover argument, with affine refinement of inverse-image opens."
+   }
+  },
+  {
+   "text": "The finite products, coproducts and chosen affine open covers are taken in the fixed universes. The opens of each scheme form a set within that convention; taking finitely many such sets, their chosen covers and finite subfamilies preserves smallness. Over a nonempty $T$, the proper surjection $Z\\to T$ forces $Z$ nonempty, so a covering selected in Step 6 cannot have zero members. If some $U_j$ is empty, $V_j$ and $W_j$ are empty as well; $D_j$ has all of $|U|$ as underlying space, and that factor still surjects onto $U$. No choice of an index $i$ for an empty $U_j$ is ever required.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBF, lemma-refine-by-standard-ph (2): smallness and empty-index cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-size-convention",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lem-weil-pbc-surjective-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "lemma-nagata-scheme-image-restrict-open",
+  "sk-thm-chow-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Tag 0DBF, lemma-refine-by-standard-ph (2), proof misnumbered (3); affine refinement of the final inverse-image open cover makes the last argument explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +176,45 @@
    "results": "{\"t\": \"2026-10-17T19:28:53Z\", \"tool\": \"leanfinder\", \"query\": \"Given jointly surjective flat locally finitely presented morphisms over a qcqs scheme, find a finite surjective finitely presented morphism with open local lifts to the covering family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"334f4b5b09f12e9d\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give affine refinements of open covers, finite subcovers, or affine presentations; none refines two successive proper-surjective affine-open families by one such family."
+  },
+  {
+   "tool": "grep",
+   "query": "standardPh|standard_ph|phTopology|phCover",
+   "results": "{\"t\": \"2026-10-17T23:50:54Z\", \"tool\": \"grep\", \"query\": \"standardPh|standard_ph|phTopology|phCover\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: affine refinements, finite subcovers and generic jointly-surjective precoverages do not construct a proper surjective domination of successive standard ph families; properness is not Zariski local at the source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composites of standard ph coverings admit a refinement by affine open restrictions of one proper surjective morphism",
+   "results": "{\"t\": \"2026-10-17T23:50:54Z\", \"tool\": \"leansearch\", \"query\": \"Composites of standard ph coverings admit a refinement by affine open restrictions of one proper surjective morphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-17T23:50:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: affine refinements, finite subcovers and generic jointly-surjective precoverages do not construct a proper surjective domination of successive standard ph families; properness is not Zariski local at the source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine open covers of proper surjections onto an affine scheme have a standard proper surjective refinement after composition",
+   "results": "{\"t\": \"2026-10-17T23:51:04Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine open covers of proper surjections onto an affine scheme have a standard proper surjective refinement after composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.QuasiCompactCover.homCover\"], \"digest\": \"b73234cf99f45cff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: affine refinements, finite subcovers and generic jointly-surjective precoverages do not construct a proper surjective domination of successive standard ph families; properness is not Zariski local at the source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper surjective morphisms over members of a finite affine open cover can be dominated locally by a single proper surjective scheme over the base",
+   "results": "{\"t\": \"2026-10-17T23:51:26Z\", \"tool\": \"leanfinder\", \"query\": \"Proper surjective morphisms over members of a finite affine open cover can be dominated locally by a single proper surjective scheme over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.AffineCover.map_prop\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\"], \"digest\": \"301c687928f2c334\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: affine refinements, finite subcovers and generic jointly-surjective precoverages do not construct a proper surjective domination of successive standard ph families; properness is not Zariski local at the source."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-affine-standard-sieve-basis",
@@ -82,5 +242,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-standard-ph-composite-refinement",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DBF(2) through projective Chow domination, closure over U, complementary closed summands, finite products and subordinate affine refinement. Every input already exists in the DAG; no new nodes. Checked qcqs and properness hypotheses, empty schemes and finite index sets; statement unchanged. No Lean was written or compiled.",
+  "blueprint": "Realizes the standard-composite-refinement input to Step 4 of lem-trf-ph-affine-standard-sieve-basis, on the ph-descent branch of the normal-cone specialization in lem-trf-local-term-locality. The source construction is expanded in Steps 2-6; Steps 1 and 7 treat boundary cases.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-chow-projective",
+    "why": "Generic geometric input in the Stacks 0DBF(2) projective-closure construction; this trace-formula unit has no replacement statement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-restrict-open",
+    "why": "Generic geometric input in the Stacks 0DBF(2) projective-closure construction; this trace-formula unit has no replacement statement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-of-closed-immersion",
+    "why": "Generic geometric input in the Stacks 0DBF(2) projective-closure construction; this trace-formula unit has no replacement statement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic geometric input in the Stacks 0DBF(2) projective-closure construction; this trace-formula unit has no replacement statement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic geometric input in the Stacks 0DBF(2) projective-closure construction; this trace-formula unit has no replacement statement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic geometric input in the Stacks 0DBF(2) projective-closure construction; this trace-formula unit has no replacement statement for this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-chow-projective",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-703c34465",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-703c34465 (reviewer sub-agent of L); spot-checked: Read the full item: statement, 7 steps, 20 proof_deps and 4 stmt_deps statements, the blueprint_updates, unit sk-i-curve-zero, chapter sec-trace-formula, and the parent's transitivity step. Sources read: Stacks topologies.tex 0DBF(2) with 0DBD, and limits.tex 0202. No SGA is used. The statement matches 0DBF(2) hypothesis by hypothesis. Its form (a T-morphism Z_a->V_ji, so r|Z_a factors through V_ji->U_j->T) is exactly what the parent's sieve-transitivity step needs. Step-by-step checks: S2 applies the Chow node correctly over an affine (hence qcqs) U_j; the closed-immersion form agrees with 0202, since an immersion from a proper source is closed. The A_ji are kept non-affine and still map to the original V_ji. S3: P_j and W_j are qcqs by qcqs-over-affine, so g_j is qcqs by morphism-permanence (1). The image-restriction hypotheses hold, including the weaker qc-only blueprint_update. g_W=b_j and SIm(b_j)=W_j, so W_j = W̄_j x_U U_j as an open subscheme. S4: the two-summand coproduct is proper by a short check from the definitions; marking it elementary is acceptable, and no existing node states it. Surjectivity holds and c_j^{-1}(U_j)=W_j. S5: the induction with base Z^(0)=U is set up correctly, using surjective base change. S6: the covering argument and the commutativity over T are both correct. S1 and S7 cover the edge cases: T empty, U_j empty, n_j=0, N>0. Small cases tested: P^1 over a field with two charts, and U=P^1 with identity V_j; the latter gives Z = P^1 ⊔ {0} ⊔ {∞}. Both work. No duplicates in the DAG (rg for 0DBF and standard ph) and no new nodes. All six declared tool_uses are accepted as generic geometric black boxes. Remarks: the report flags a possible Noetherian assumption in the slopmaster2 Lean attached to sk-thm-chow-projective; that is the owner's audit question and not a fault here. No fixes written."
  }
 }
