@@ -273,5 +273,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c65076af7",
+  "group": "Q69",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: relativeFibration false is the cartesian-fibration clause; [Quasicategory Y] is implied; the hcart marking is exactly the degenerate-coordinate edges; hfib uses the canonical fibre map with the same categorical-equivalence predicate as the landed presentation dependency; K is a mono-encoded simplicial subset and hE contains the degeneracies; the selected markings on M_K and Y_K are exact (the degeneracy unions are redundant); qKE is pinned to the canonical pullback map; Marked.weak is the point-model test; the K',E' restriction square uses canonical inclusions. n=0, empty K, empty fibres and degenerate edges are covered; single universe u; nothing unbound. Node differs from base only in lean, and lean.statement is verbatim; no duplicate name or existing statement; no hollow data; sorry only on the theorem; docstrings carry source and blueprint. nt_compile --json rc 0 with no errors or warnings for the delivered and the fixed file. FIX: fixes/CartesianMappingSimplexComparison.lean adds the missing proof-dependency import Sheaf.CategoryTheory.MappingSimplexUniversalEquivalence (landed before the delivery commit) and the Main definitions/statements docstring list; signature unchanged. Stage-3 remark: the universal-equivalence theorem uses equivalent but different interfaces (cartesianFibration, hoFunctor test)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianMappingSimplexComparison",
+  "declaration": "SSet.Enhanced.cartesian_mapping_simplex_comparison",
+  "file": "lean/Sheaf/CategoryTheory/CartesianMappingSimplexComparison.lean",
+  "statement": "theorem cartesian_mapping_simplex_comparison {n : ℕ} {Y : SSet.{u}} (p : Y ⟶ (Δ[n] : SSet.{u})) [Quasicategory Y] (hp : Marked.Over.relativeFibration false p) (A : SimplexChain.{u} n) (q : mappingSimplex A ⟶ Y) (hq : q ≫ p = mappingSimplexProjection A) (hcart : ∀ z ∈ (markedMappingSimplex A).marking, IsCartesianEdge p (SSet.yonedaEquiv.symm (q.app _ z))) (hfib : ∀ i : Fin (n + 1), CoherentNerve.IsCategoricalEquivalence (cartesianMappingSimplexFiber A p q hq i)) {K : SSet.{u}} (k : K ⟶ (Δ[n] : SSet.{u})) (hk : ∀ r : SimplexCategoryᵒᵖ, Function.Injective (k.app r)) (E : Set (K _⦋1⦌)) (hE : ∀ x : K _⦋0⦌, K.σ 0 x ∈ E) : ∃ qKE : restrictedMappingSimplex A k E ⟶ restrictedCartesianFibration p k E, qKE.val = restrictedMappingSimplexUnderlyingMap hq k E ∧ SSet.Marked.weak qKE ∧ (∀ {K' : SSet.{u}} (k' : K' ⟶ (Δ[n] : SSet.{u})) (ι : K' ⟶ K) (hι : ι ≫ k = k') (_hιmono : ∀ r : SimplexCategoryᵒᵖ, Function.Injective (ι.app r)) (E' : Set (K' _⦋1⦌)) (_hE' : ∀ x : K' _⦋0⦌, K'.σ 0 x ∈ E') (_hsub : ∀ e : K' _⦋1⦌, e ∈ E' → (ι.app _ e) ∈ E), ∃ qK'E' : restrictedMappingSimplex A k' E' ⟶ restrictedCartesianFibration p k' E', ∃ iM : restrictedMappingSimplex A k' E' ⟶ restrictedMappingSimplex A k E, ∃ iY : restrictedCartesianFibration p k' E' ⟶ restrictedCartesianFibration p k E, qK'E'.val = restrictedMappingSimplexUnderlyingMap hq k' E' ∧ iM.val = restrictedMappingSimplexInclusionUnderlying ι hι ∧ iY.val = restrictedCartesianFibrationInclusionUnderlying ι hι ∧ qK'E'.val ≫ iY.val = iM.val ≫ qKE.val)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.cartesianMappingSimplexFiber",
+   "SSet.Enhanced.restrictedMappingSimplex",
+   "SSet.Enhanced.restrictedCartesianFibration",
+   "SSet.Enhanced.restrictedMappingSimplexUnderlyingMap",
+   "SSet.Enhanced.restrictedMappingSimplexInclusionUnderlying",
+   "SSet.Enhanced.restrictedCartesianFibrationInclusionUnderlying",
+   "SSet.Enhanced.cartesian_mapping_simplex_comparison"
+  ],
+  "fixed_by": "NT-stage2-cc-c65076af7"
  }
 }

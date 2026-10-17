@@ -30,7 +30,9 @@
   "place": "Definitions 7.4.7 and 7.4.17, Propositions 7.4.8-7.4.10 and 7.4.18-7.4.19, Theorem 7.4.20, Theorem 7.5.18; ordinary-nerve case. No Stacks tag gives this Brown Reedy localization statement. Read online 2026-10-17; WANTED: archived source in literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-brown-reedy-diagrams",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -302,5 +304,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-354aadbcc (reviewer sub-agent of L); spot-checked: I read all 16 steps of the item and the new node lem-coef-fibrant-subcategory-localization in full. Source: Cisinski CatLR.pdf, fetched read-only and run through pdftotext in /tmp because it is not in literature/ (the WANTED line stands). Checked: Def 7.1.2 and Prop 7.1.3 (pp. 323-324), Def 7.4.6 (pp. 360-361), 7.4.7, Def 7.4.12(i)-(ii) (pp. 365-366), 7.4.17, Props 7.4.18-7.4.19, Thm 7.4.20, Thm 7.5.18 (p. 380). Hypotheses of the new node, for an ordinary nerve, are exactly 7.4.6 + 7.4.12(i)-(ii) (isomorphisms in place of identities, harmless) and its conclusion is the first assertion of 7.5.18 with existence from 7.1.3; it is not weakened and contains no Reedy content, so it does not restate a clause of the item. Tested on small cases: all objects fibrant; only 1 fibrant, where L(A,W)=|NA| is contractible because A has a terminal object. Item, step by step: products as two base changes (1); outgoing category at a:k->j is B_j and target-closed restriction keeps it (2); induction on maximal degree with S having no incoming arrows and J target-closed (3); lim_K X = lim_J X x_{prod M_s} prod X_s with the cone bijection checked (4); H and Q_s pullbacks give lim u in P for P=F and P=T (5); 1_k initial in k/K gives u_k in F or T (6); trivial relative matching maps by 2-of-3 on X_k->Q_k->Y_k (7); composition pullback identity (8); objectwise pullback with M_kV = M_kX x_{M_kY} M_kZ, existence before use (9-10); terminal object and W_K axioms (11); nonfunctorial degreewise factorization from an arbitrary source, matching 7.4.19 (12-13); replacement (14); every hypothesis of the new node verified for P = isomorphisms + Reedy fibrations, so the P-fibrant objects are exactly R_K (15); empty case (16). Every statement clause is covered and the statement is unchanged. Elementary steps cite nothing beyond the item's hypotheses and write the arguments out. Searched the DAG for duplicates (brown-fibrant-localization-pullbacks, finite-reedy-localization, model-weak-equivalence-nerve, simplicial-model-nerve-localization, dk/cosimplicial/combinatorial nodes): none states 7.5.18 in this generality. Node form, blueprint from/via/same_as and Mathlib searches (4 kinds; FibrantObject instances need ModelCategory) are correct. The new node lacks lean_audit, consistent with other coef nodes, not treated as a fault. Route: same unit, empty tool_uses, no tool uses accepted, no SGA. Minor: item source.place calls 7.4.7 and 7.4.17 'Definitions' though they are numbered paragraphs; left as is. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98612e2f6",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Every hypothesis and all 10 conclusions match the node: no retract closure, model structure or functorial factorization assumed; IsInverse is exactly strict degree decrease; the boundary is the identity-deleted coslice, keeping parallel arrows; the localization is the full coherent IsLocalization with the triangle through the inclusion nerve; the empty-K case is covered. Universes u v w z t are independent; Discrete PUnit adds two harmless free universes. Definitions have real content; the only sorry is the item theorem (checked with #print axioms). Docstrings carry source, blueprint tag and all 16 proof steps; statement fields match the files verbatim; stmt_deps cover every used declaration; the node statement is unchanged. Both modules recompile cleanly with nt_compile.py. The existing BrownFibrantAxioms differs (adds retract closure, existential terminal object), so it is not a duplicate; noted only as a missing search remark."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownReedyFibrantReplacement",
+  "declaration": "HomotopicalAlgebra.BrownReedy.brown_reedy_fibrant_replacement",
+  "file": "lean/Sheaf/CategoryTheory/BrownReedyFibrantReplacement.lean",
+  "statement": "theorem brown_reedy_fibrant_replacement (C : Type u) [Category.{v} C] (one : C) (W F : MorphismProperty C) (hBrown : BrownAxioms one W F) (K : Type w) [Category.{z} K] [Finite K] [∀ i j : K, Finite (i ⟶ j)] (degree : K → ℕ) (hdegree : FiniteReedy.IsInverse degree) : (∃ ht : IsReedyFibrant F ((Functor.const K).obj one), BrownAxioms (⟨(Functor.const K).obj one, ht⟩ : ReedyDiagrams K F) (reedyWeakEquivalences K W F) (reedyFibrations K F)) ∧ (∀ (X Y Z P : ReedyDiagrams K F) (p : Y ⟶ Z) (f : X ⟶ Z) (a : P ⟶ Y) (b : P ⟶ X), reedyFibrations K F p → IsPullback a b p f → ∀ k : K, IsPullback (a.hom.app k) (b.hom.app k) (p.hom.app k) (f.hom.app k)) ∧ (∀ X : K ⥤ C, ∃ (Y : ReedyDiagrams K F) (u : X ⟶ Y.obj), W.functorCategory K u) ∧ (∃ (L R : SSet.{max u v w z t}) (q : FiniteReedy.largeNerve.{max w u v z, max w v, t} (K ⥤ C) ⟶ L) (r : FiniteReedy.largeNerve.{max w u v z, max w v, t} (ReedyDiagrams K F) ⟶ R) (e : R ⟶ L), FiniteReedy.IsLocalization (W.functorCategory K) q ∧ FiniteReedy.IsLocalization (reedyWeakEquivalences K W F) r ∧ SSet.Enhanced.IsFunctorEquivalence e ∧ SSet.Enhanced.AreNaturallyEquivalent (r ≫ e) (inclusionNerve K F ≫ q)) ∧ (∀ X : K ⥤ C, IsReedyFibrant F X → Nonempty (LimitCone X)) ∧ (∀ (X Y : K ⥤ C) (f : X ⟶ Y), ReedyFibrations F f → ∀ (c : Cone X) (hc : IsLimit c) (d : Cone Y) (hd : IsLimit d), F (hd.lift ((Cone.postcompose f).obj c)) ∧ (W.functorCategory K f → W (hd.lift ((Cone.postcompose f).obj c)))) ∧ (∀ (X Y : K ⥤ C) (f : X ⟶ Y), ReedyFibrations F f → F.functorCategory K f ∧ (W.functorCategory K f ↔ ∀ k : K, RelativeMatching (F ⊓ W) f k)) ∧ (∀ (P : K → Prop), (∀ (i j : K) (f : i ⟶ j), P i → P j) → RestrictionPreserves W F (ObjectProperty.ι P)) ∧ (∀ k : K, RestrictionPreserves W F (boundaryProjection k)) ∧ (IsEmpty K → Nonempty ((K ⥤ C) ≌ Discrete PUnit) ∧ Nonempty (ReedyDiagrams K F ≌ Discrete PUnit) ∧ ∀ (X : K ⥤ C) (c : Cone X), IsLimit c → Nonempty (c.pt ≅ one))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

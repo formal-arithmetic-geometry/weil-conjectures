@@ -28,7 +28,10 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-space-tower-homotopy-limit",
+  "lem-cbc-spine-inner-anodyne",
+  "lem-cbc-simplicial-composition-spine"
  ],
  "proof": [
   {
@@ -277,5 +280,43 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1463ed35",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Item changes only in lean and in stmt_deps (new def node plus two landed nodes whose declarations the signature uses, allowed by brief l.140); statement unchanged. Every clause matches the node: spine restriction is an equivalence of quasicategories and fully faithful, via SSet.simplexSpine and the actual restriction map; union hypotheses are IsSmall, Monotone and iSup = top with nothing extra; the canonical constant-path comparison into the Dwyer path model is a weak equivalence, which is true because the mapping spaces are Kan and the endpoint map is a Kan fibration; naturality in both diagrams is encoded through multiarrow spaces of all degrees with strict compatibility with every ordinal map, checked true including k=0 and non-invertible arrows; local-smallness clause is exact. Universes u and v are independent. New node def-coef-space-tower-homotopy-limit: fields per section 5, real pullback data, two named sorry squares, no duplicate found in lean/Sheaf, the DAG or Mathlib. Every theorem is sorry, docstrings give source and blueprint, lines are at most 100 characters, imports are allowed. Declaration lists match; recorded statements differ only in line breaks. nt_compile --json on both files in dependency order: exit 0, no diagnostics. Cosmetic only: report l.188-189 shows HTT numbers replaced by 'the project server'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FunctorSpineTowerMappingDescent",
+  "declaration": "SSet.Enhanced.functor_spine_tower_mapping_descent",
+  "declarations": [
+   "SSet.Enhanced.finiteSpineRestriction",
+   "SSet.Enhanced.unionStageRestriction",
+   "SSet.Enhanced.unionStageStep",
+   "SSet.Enhanced.unionMappingSpaces",
+   "SSet.Enhanced.unionMappingStep",
+   "SSet.Enhanced.unionMappingProjection",
+   "SSet.Enhanced.unionMappingProjection_compatible",
+   "SSet.Enhanced.unionMappingComparison",
+   "SSet.Enhanced.unionMultiarrowSpaces",
+   "SSet.Enhanced.unionMultiarrowStep",
+   "SSet.Enhanced.unionMultiarrowProjection",
+   "SSet.Enhanced.unionMultiarrowProjection_compatible",
+   "SSet.Enhanced.unionMultiarrowComparison",
+   "SSet.Enhanced.unionMultiarrowRestriction_compatible",
+   "SSet.Enhanced.unionMultiarrowLimitRestriction",
+   "SSet.Enhanced.UnionMappingDescentNaturality",
+   "SSet.Enhanced.functor_spine_tower_mapping_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FunctorSpineTowerMappingDescent.lean",
+  "statement": "theorem functor_spine_tower_mapping_descent (C : SSet.{v}) [Quasicategory C] : (∀ n : ℕ, Quasicategory ((ihom Δ[n]).obj C) ∧ Quasicategory ((ihom (SSet.simplexSpine n).toSSet).obj C) ∧ IsFunctorEquivalence (finiteSpineRestriction C n) ∧ IsFullyFaithful (finiteSpineRestriction C n)) ∧ (∀ (L : SSet.{v}), Presentability.IsSmall.{u, v} L → ∀ (A : ℕ → L.Subcomplex) (hA : Monotone A), (⨆ n, A n) = ⊤ → (∀ F G : ((ihom L).obj C) _⦋0⦌, IsWeakHomotopyEquivalence (unionMappingComparison A hA C F G)) ∧ UnionMappingDescentNaturality A hA C) ∧ (Presentability.IsLocallySmall.{u, v} C → ∀ (L : SSet.{v}), Presentability.IsSmall.{u, v} L → Presentability.IsLocallySmall.{u, v} ((ihom L).obj C))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical restriction comparison to the path-model homotopy limit; complete multiarrow compatibility encodes naturality in both diagrams. All helpers construct the specified restrictions and comparisons; no arbitrary equivalence is chosen."
  }
 }
