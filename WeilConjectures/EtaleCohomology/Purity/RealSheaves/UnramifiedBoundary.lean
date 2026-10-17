@@ -354,4 +354,93 @@ theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.ba
   rw [hdeg] at h
   exact h.of_equiv (E₁.trans E₂)
 
+variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
+  (GU : Type u) [Group GU] [TopologicalSpace GU] [IsTopologicalGroup GU] [CompactSpace GU]
+  [∀ P, MulAction GU ((fiber sU).obj P)] [IsFundamentalGroup (fiber sU) GU]
+  {sC : Spec (.of (AlgebraicClosure K)) ⟶ C} (τ : fiber (sU ≫ j) ≅ fiber sC)
+  (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
+  [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
+
+/-- Blueprint `cor-wf-unramified-boundary-purity` (first clause, inertia form), together with
+`prop-wf-weil-sheaf-representation-equivalence`.
+
+Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
+geometrically connected, with the boundary datum of actual inertia groups and residue Frobenius
+lifts (`AlgebraicGeometry.WeilGroup.boundaryDatum`). There is a lisse sheaf–representation
+equivalence `ℱ ↦ (V, ρ)` for `W(U₀)`, identifying the stalk `ℱ_x̄` with its local Frobenius with
+`V` with `ρ (Frob_x)` at the closed points of `U₀`, such that: if `ℱ` is punctually `ι`-pure of
+weight `w` and the inertia group `I_z` at a boundary point `z` acts trivially on `V` (the boundary
+stalk `V ^ (I_z)` is everything), then the stalk `(j_* ℱ)_z̄` is `ι`-pure of weight `w`.
+
+The equivalence is the Weil fundamental representation at the monodromy of universal covers
+(`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy`). A representation
+trivial on `I_z` is trivial on the kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`
+(`AlgebraicGeometry.WeilGroup.apply_eq_self_of_mem_weilLocalKernel`), which contains the images
+of the loops of `Ū` trivial on `V̄`
+(`AlgebraicGeometry.WeilGroup.BasePointData.geomAut_mem_fixingSubgroup`); so `ℱ` extends to a
+lisse Weil sheaf on `U₀ ∪ {z}` and the stalk is pure
+(`AlgebraicGeometry.WeilGroup.isPureOfWeight_stalk_directImage_of_rep_eq_self`). -/
+theorem exists_equivalence_isLisse_isPureOfWeight_stalk_directImage :
+    ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l U ↦ F.IsLisse) ≌
+        ObjectProperty.FullSubcategory ((ofFundamentalGroup (U ↘ Spec (.of K)) sU GU).isLisseRep l),
+      (∀ (F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l U ↦ F.IsLisse))
+          (x : U.finitePoints),
+        ∃ f : (F.obj.stalk x).carrier ≃ₗ[PadicAlgCl l] (e.functor.obj F).obj.V,
+          ∀ v, f ((F.obj.stalk x).frobenius v) = (e.functor.obj F).obj.ρ
+            ((ofFundamentalGroup (U ↘ Spec (.of K)) sU GU).frobenius x) (f v)) ∧
+      ∀ (F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l U ↦ F.IsLisse))
+        (z : ↥((Set.range j.base)ᶜ)),
+        (boundaryDatum (p := C ↘ Spec (.of K)) j sU GU (comp_over j _) τ GC).boundaryStalk l
+            (e.functor.obj F).obj.ρ z = ⊤ →
+        ∀ {ι : PadicAlgCl l →+* ℂ} {w : ℝ}, F.obj.IsPunctuallyPureOfWeight ι w →
+          ∀ x : C.finitePoints, x.1 = z.1 →
+            (((directImage j).obj F.obj).stalk x).IsPureOfWeight ι
+              ((C ↘ Spec (.of K)).residueCard x.1) w := by
+  have hjU : j ≫ C ↘ Spec (.of K) = U ↘ Spec (.of K) := comp_over j _
+  have : SmoothOfRelativeDimension 1 (U ↘ Spec (.of K)) :=
+    hjU ▸ (zero_add 1) ▸ (inferInstance : SmoothOfRelativeDimension (0 + 1) (j ≫ C ↘ Spec (.of K)))
+  have : Smooth (U ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
+  have : ConnectedSpace (U ↘ Spec (.of K)).geometricFiber :=
+    GeometricallyConnected.geometrically_connectedSpace (f := U ↘ Spec (.of K))
+      (Scheme.specAlgebraicClosure K).hom (U ↘ Spec (.of K)).geometricFiberProj
+      (U ↘ Spec (.of K)).geometricFiberToAlgebraicClosure (IsPullback.of_hasPullback _ _)
+  have : Smooth (U ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (Smooth (Limits.pullback.snd _ _))
+  have := IsRegular.of_smooth (U ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
+  set W := ofFundamentalGroup (U ↘ Spec (.of K)) sU GU
+  obtain ⟨B⟩ := nonempty_basePointData W
+  set M := universalLisseMonodromy l (U ↘ Spec (.of K)).geometricFiber K
+  obtain ⟨e, h₁, -, -, -, hf⟩ := exists_equivalence_isLisse_of_lisseMonodromy W l M B
+    (universalLisseMonodromy_isEquivalenceAt l _ K B.t)
+  refine ⟨e, h₁, fun F z hz ι w hw x hx ↦ ?_⟩
+  obtain ⟨f, hf⟩ := hf F
+  -- inertia acts trivially
+  have hI : ∀ g ∈ boundaryInertia (p := C ↘ Spec (.of K)) (pU := U ↘ Spec (.of K)) j sU GU z,
+      ∀ v, (e.functor.obj F).obj.ρ g v = v := fun g hg v ↦ by
+    have hv : v ∈ (boundaryDatum (p := C ↘ Spec (.of K)) j sU GU hjU τ GC).boundaryStalk l
+        (e.functor.obj F).obj.ρ z := hz ▸ Submodule.mem_top
+    exact (Representation.mem_invariants _ v).1 hv ⟨g, hg⟩
+  refine isPureOfWeight_stalk_directImage_of_rep_eq_self j z F.property B.t
+    (fun σ hσ v ↦ ?_) hw x hx
+  -- the loop `σ` lies in the local kernel at `z`
+  have hmem : (B.geomEquiv σ : W.carrier) ∈
+      weilLocalKernel (p := C ↘ Spec (.of K)) (pU := U ↘ Spec (.of K)) j sU GU z.1 := by
+    refine ⟨?_, (B.geomEquiv σ).2⟩
+    have h : B.geomAut σ ∈ fixingSubgroup sU (toBoundaryOpen (p := C ↘ Spec (.of K)) j z.1) GU :=
+      BasePointData.geomAut_mem_fixingSubgroup sU GU B _ (toBoundaryOpen_comp_over j z.1) hσ
+    have hg := B.weilGroupEquiv_geomHom σ
+    refine Subgroup.mem_comap.2 ?_
+    have h' : ((MonoidHom.fst _ _).comp (weilGroup (U ↘ Spec (.of K)) sU GU).subtype)
+        (B.geomEquiv σ : W.carrier) = B.geomAut σ := congrArg Prod.fst hg
+    rw [h']
+    exact h
+  have := (e.functor.obj F).property.1
+  have hρ := apply_eq_self_of_mem_weilLocalKernel j hjU sU GU τ GC l
+    (e.functor.obj F).property.2 z hI hmem
+  have key := hf (B.geomEquiv σ) (f.symm v)
+  erw [hρ (f.symm v)] at key
+  rw [LinearEquiv.apply_symm_apply, fundamentalRep_geometric] at key
+  erw [ContinuousMulEquiv.symm_apply_apply] at key
+  exact key.symm
+
 end AlgebraicGeometry.WeilGroup
