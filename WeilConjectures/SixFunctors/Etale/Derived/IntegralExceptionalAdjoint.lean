@@ -68,11 +68,12 @@ set_option hygiene false in
 local notation "𝐃(" X ", " Λ ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
-attribute [local instance] derivedBraidedCategory
 
 /-! ### The formal dual formula -/
 
 section General
+
+attribute [local instance] derivedBraidedCategory
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
@@ -481,8 +482,13 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
   · have hDY := hVY.2.2.1 dY hdY a b hab
     have hDX := hVX.2.2.1 dX hdX (-b - 2 * (dY : ℤ) - 1) (-a - 1)
       (fun n ↦ (hNred n ⟨(hab' n).1, hDY n⟩).2) n
-    exact (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso
-      ((reductionModIdeal Λ X _).mapIso eN.symm) (hDX.mono (by omega) (by omega))
+    have h₁ : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * (dX : ℤ))
+        (b + 2 * (dY : ℤ)) ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj
+          (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX.pt)) :=
+      hDX.mono (by omega) (by omega)
+    have h₂ := (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X _ _).prop_of_iso
+      ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).mapIso eN.symm) h₁
+    exact h₂
 
 
 end Constructible
