@@ -152,7 +152,7 @@ private theorem principalOpen_localized_quasiIso
       (Arrow.isoMk (eqpc.app _) (eqpc.app _) (eqpc.hom.naturality _).symm)).mp hpull
   have eqo := NatIso.mapHomologicalComplex (Modules.overFunctorEquiv (X.basicOpen a))
     (ComplexShape.up ℤ)
-  have hover : QuasiIso (((SheafOfModules.overFunctor (moduleRings X.toRingedSpace)
+  have hover : QuasiIso (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace)
       (X.basicOpen a) ⋙ (Modules.overEquiv (X.basicOpen a)).functor).mapHomologicalComplex
         (ComplexShape.up ℤ)).map
           ((T.mapHomologicalComplex (ComplexShape.up ℤ)).map α)) :=
@@ -191,19 +191,19 @@ private theorem quasiIso_over_of_cover (X : RingedSpace.{u})
     (U : TopologicalSpace.Opens X) {I : Type*} (V : I → TopologicalSpace.Opens X)
     (hsub : ∀ i, V i ≤ U) (hcover : ∀ x : X, x ∈ U → ∃ i, x ∈ V i)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ} (β : K ⟶ L)
-    (h : ∀ i, QuasiIso (((SheafOfModules.overFunctor (moduleRings X) (V i)).mapHomologicalComplex
+    (h : ∀ i, QuasiIso (((SheafOfModules.overFunctor.{u} (moduleRings X) (V i)).mapHomologicalComplex
       (ComplexShape.up ℤ)).map β)) :
-    QuasiIso (((SheafOfModules.overFunctor (moduleRings X) U).mapHomologicalComplex
+    QuasiIso (((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapHomologicalComplex
       (ComplexShape.up ℤ)).map β) := by
   rw [quasiIso_iff]
   intro n
   rw [quasiIsoAt_iff, ShortComplex.quasiIso_iff]
   let φ := (HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℤ) n).map β
-  have hiso : IsIso ((SheafOfModules.overFunctor (moduleRings X) U).map
+  have hiso : IsIso ((SheafOfModules.overFunctor.{u} (moduleRings X) U).map
       (ShortComplex.homologyMap φ)) := by
     apply isIso_over_of_cover X U V hsub hcover
     intro i
-    let R := SheafOfModules.overFunctor (moduleRings X) (V i)
+    let R := SheafOfModules.overFunctor.{u} (moduleRings X) (V i)
     have hφ : ShortComplex.QuasiIso (R.mapShortComplex.map φ) := by
       have := h i
       exact (quasiIsoAt_iff ((R.mapHomologicalComplex (ComplexShape.up ℤ)).map β) n).mp
@@ -216,7 +216,7 @@ private theorem quasiIso_over_of_cover (X : RingedSpace.{u})
       rw [he]
       infer_instance
     exact (isIso_comp_right_iff _ ((L.sc n).mapHomologyIso R).inv).mp inferInstance
-  let R := SheafOfModules.overFunctor (moduleRings X) U
+  let R := SheafOfModules.overFunctor.{u} (moduleRings X) U
   have he := ShortComplex.mapHomologyIso_inv_naturality φ R
   have : IsIso (((K.sc n).mapHomologyIso R).inv ≫
       ShortComplex.homologyMap (R.mapShortComplex.map φ)) := by

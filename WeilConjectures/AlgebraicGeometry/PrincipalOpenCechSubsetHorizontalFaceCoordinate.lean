@@ -85,7 +85,7 @@ private theorem transport_restriction
     (x : (modulesSpecToSheaf.obj M).obj.obj (op (principalSubsetOpen A r f S.val))) :
     (principalSubsetSectionTransport A r f M T).hom
         ((modulesSpecToSheaf.obj M).obj.map (homOfLE hle).op x) =
-      ((SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace)
+      ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace)
         (principalSubsetUnion A r f) ⋙
           (Scheme.Modules.overEquiv (principalSubsetUnion A r f)).functor).obj M).presheaf.map
         (homOfLE hW).op ((principalSubsetSectionTransport A r f M S).hom x) := by
@@ -131,7 +131,7 @@ private theorem transport_restriction_cast
           (((modulesSpecToSheaf.map φ).hom.app (op (principalSubsetOpen A r f S.val)))
             x))) =
       ((alternatingCechModulePresheaf.obj
-        ((SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace)
+        ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace)
           (principalSubsetUnion A r f) ⋙
             (Scheme.Modules.overEquiv (principalSubsetUnion A r f)).functor).obj M)).map
               (homOfLE hW).op).hom
@@ -167,7 +167,7 @@ private theorem supported_restriction
     let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)
     let M := J.X (n + 1 - (S₀.val.card : ℤ))
     let P := alternatingCechModulePresheaf.obj
-      ((SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) V ⋙
+      ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) V ⋙
         (Scheme.Modules.overEquiv V).functor).obj M)
     ∀ (W : V.toScheme.Opens)
       (hsrc : W ≤ alternatingCechIntersection U (principalSubsetTuple r S₀))
