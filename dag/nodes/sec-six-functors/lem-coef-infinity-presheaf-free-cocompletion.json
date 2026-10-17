@@ -381,5 +381,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPresheafFreeCocompletion",
+  "declaration": "SSet.Presentability.infinity_presheaf_free_cocompletion",
+  "declarations": [
+   "SSet.Presentability.presheafYonedaInUniverse",
+   "SSet.Presentability.presheafColimitFunctors",
+   "SSet.Presentability.presheafColimitRestriction",
+   "SSet.Presentability.infinity_presheaf_free_cocompletion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityPresheafFreeCocompletion.lean",
+  "statement": "theorem infinity_presheaf_free_cocompletion (D : SSet.{u}) [Quasicategory D] : Quasicategory (CategoryTheory.Spaces.infinityPresheaves D) ∧ IsLocallySmall.{u, u + 1} (CategoryTheory.Spaces.infinityPresheaves D) ∧ HasSmallColimits.{u, u + 1} (CategoryTheory.Spaces.infinityPresheaves D) ∧ (∀ (V : SSet.{max (u + 1) v}) [Quasicategory V], HasSmallColimits.{u, max (u + 1) v} V → IsFunctorEquivalence (presheafColimitRestriction D V) ∧ (∀ (F G : SSet.uliftFunctor.{v, u + 1}.obj (CategoryTheory.Spaces.infinityPresheaves D) ⟶ V), PreservesColimitsIn F (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I) → PreservesColimitsIn G (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I) → AreNaturallyEquivalent (presheafYonedaInUniverse D ≫ F) (presheafYonedaInUniverse D ≫ G) → AreNaturallyEquivalent F G))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the recorded presheaf and Yoneda constructions and the PresentableInfinityCategory predicates publicly imported through CompleteAlgebroid. The four statement dependencies are unchanged. Concrete helpers give the universe lift, full colimit-preserving functor subcomplex and actual coherent restriction map; no data is chosen from a mere existence theorem. The full functor subcategory specializes the existing Coyoneda.cocontinuous construction.",
+  "fixed_by": "NT-stage2-Codex-14b219b9e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-14b219b9e",
+  "group": "N5",
+  "result": "fix",
+  "note": "Reviewed the immutable delivery against its source and dependency declarations. Complete fixes repair the review report and record, reuse the existing cocontinuous subcategory, and add the available proof import. Original and fixed modules compile cleanly through scompile.py; theorem signature unchanged. Findings and evidence are in review.md."
  }
 }

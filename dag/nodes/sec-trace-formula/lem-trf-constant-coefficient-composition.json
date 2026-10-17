@@ -217,5 +217,23 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-dafdb5766 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement in full: def-weil-proetale-inverse-image, prop-weil-pbc-proetale-constant-ring-map, def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification, def-pc-fibre-product, def-weil-pbc-composite-adjunction and lem-weil-pbc-conjugate-iso-unit-equation. I checked the sources sites.tex 03CB, categories.tex 0DV0 and proetale.tex 09A5; their tag labels are verified in tags/tags. No SGA is cited. The statement is unchanged and every type checks. The coefficient category is ring sheaves on small pro-etale sites, the base change is V -> X x_Y V, and c_f is the adjunct of rho^f, which the prop's commutative clause identifies with the definition's map. The math is correct. Step 1: phi_B is a Z-isomorphism with the right variance, giving d=G(phi_B). Step 2: both maps send a to the constant a on the constant presheaf, so uniqueness of sheafification in rings gives the equality. Step 3: the conjugate lemma with delta=d^{-1}:R_kR_h->R_kh gives alpha:L_kh->L_hL_k in the right direction, and the composite unit is R_k(eta_h L_k)eta_k. Step 4: unit naturality at c_k and the triangle identities give R_k(rho^h)rho^k. Step 5: naturality of d, cancelling d and injectivity of the adjunction bijection give the equality. Step 6: the empty case is redundant but correct. Edge cases tested: Z empty, A=0, identity h or k, and a disconnected object. proof_deps equals the union of uses, there is no cycle and no cited node is merged. Accepted tool_use: prop-weil-pbc-proetale-constant-ring-map, a generic coefficient tool. The worker's report says the duplicate lem-pur-proetale-constant-ring-composition is unsplit; in this snapshot it is already split and was reviewed as a pass, with an equivalent statement and an equivalent four-step proof. The item's proof is self-contained, so I kept it. The maintainer should merge the two nodes and repoint the citers."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleCoefficientInverseImageMap_comp",
+  "statement": "theorem proEtaleCoefficientInverseImageMap_comp\n    {Z W V : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)\n    (A : Type u) [CommRing A] [Finite A] :\n    proEtaleCoefficientInverseImageMap (h ≫ k) A =\n      (ProEtale.supportSiteProEtaleComparisonComp CommRingCat.{u + 1} h k).hom.app\n          (proEtaleConstantRing V A) ≫\n        (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map\n          (proEtaleCoefficientInverseImageMap k A) ≫\n        proEtaleCoefficientInverseImageMap h A",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing theorem of lem-pur-proetale-constant-ring-composition. The coefficient maps are the constant-section adjuncts, identified by prop-weil-pbc-proetale-constant-ring-map; the comparison is the adjunction mate of canonical fibre-product associativity. CommRingCat expresses the commutative-ring-sheaf maps in this statement. No nonempty-scheme hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e6e586a90",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Lean statement matches every clause; canonical maps, dependencies, universes and edge cases checked. scompile.py passed without diagnostics. review.md records findings; fixes/lem-trf-constant-coefficient-composition.report.md replaces the placeholder second reading with a complete review."
  }
 }

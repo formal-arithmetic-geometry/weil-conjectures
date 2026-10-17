@@ -252,5 +252,23 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-0b6cfad9a (reviewer sub-agent of L); spot-checked: I read the item and all five new nodes in full against Joyal–Tierney math/0607820, fetched to /tmp (Prop 1.13, §2 Props 2.1–2.10, Props 3.4 and 3.10, Lemmas 4.2–4.3, Prop 4.4, Thm 4.5, Cor 7.11, Lemma 7.14, Prop 7.15). The item statement matches the forward half of Prop 4.4, Prop 3.4(v) for the rows, and the third clause of Thm 4.5, with no fibrancy assumed in the last clause and nothing weakened. All seven steps are correct and follow 2.8, 3.4, 3.10, 4.3, 4.5 and 7.15/7.11. Two faults, repaired (D1/C5). (1) lem-coef-segal-inner-horn-restriction states JT 3.4(ii), which is one transposition away (Prop 2.1) from the existing node lem-coef-segal-vertical-restriction-inner (same unit, 3.4(v): W/T is a quasicategory and W/v an inner fibration). Step 2 now cites that node directly, and step 4 gets the trivial fibrancy of a\\U and a\\V by transposition plus the Kan boundary criterion. (2) lem-coef-model-fibrant-fibration-cofibration-test (Lemma 7.14) is not needed: the existing lem-coef-quillen-fibrant-test (Hirschhorn 8.5.4, the Prop 7.15 form) gives step 6 directly for the identity adjunction. Rezk and horizontal trivial fibrations coincide because both are RLP against all monomorphisms, and step 5 gives fibrations between fibrant objects. The corrected item is in fixes/ with proof_deps recomputed; I checked that there is no cycle and every cited node exists. All proof citations stay in unit sk-prop-sf-biduality-general, so no tool_uses. The three kept new nodes are true, self-contained and not duplicates: division calculus (JT §2), complete-Segal walking-isomorphism (Lemma 4.2, project convention for X_eq; lem-coef-segal-equivalence-classifier is the suggested route for its later split), and Joyal walking-isomorphism test (Prop 1.13; it differs from the equivalence-edge characterization and from the finite-interval boundary tests). Archiving Joyal–Tierney and Rezk in literature/ is still WANTED.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalCategoricalConstancy",
+  "declaration": "SSet.RezkLocalModel.segal_categorical_constancy",
+  "file": "lean/Sheaf/AlgebraicTopology/SegalCategoricalConstancy.lean",
+  "statement": "theorem segal_categorical_constancy : (∀ X : Bisimplicial.{u}, CategoryTheory.SegalSpace.IsComplete (Functor.uncurry.obj X.flip) → ∀ q : ℕ, (X.obj (op ⦋q⦌)).Quasicategory ∧ ∀ C : SSet.{max u v}, C.Quasicategory → Functor.IsEquivalence (hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (X.map (SimplexCategory.isTerminalZero.from ⦋q⦌).op))).app C)).toFunctor) ∧ (∀ {X Y : Bisimplicial.{u}} (f : X ⟶ Y), (∀ (q : ℕ) (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (f.app (op ⦋q⦌)))).app C)).toFunctor).IsEquivalence) → ∀ Z : Bisimplicial.{u}, CategoryTheory.SegalSpace.IsComplete (Functor.uncurry.obj Z.flip) → Enhanced.IsWeakHomotopyEquivalence (eHomWhiskerRight SSet f Z))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aef3b3f2f",
+  "group": "NM",
+  "result": "fix",
+  "note": "Mathematics and Lean statement match the node and source; snapshot compilation passed without diagnostics. review.md records all checks. Complete report replacement in fixes/ repairs H11 by replacing the author’s self-check with independent review and compiler evidence."
  }
 }
