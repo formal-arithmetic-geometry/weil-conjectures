@@ -220,5 +220,27 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-5dde60050 (reviewer sub-agent of L); spot-checked: I read the item and the full three-step proof; there are no new nodes. The statement is unchanged and true. It needs the nonempty hypothesis: for U empty, the empty cover makes the sections of the constant sheaf zero even when T≠0, so the claim would fail; I also checked U a point and U a disjoint union of two points. Step 1 uses the reviewed, Lean-landed lem-sf-constant-module-unit-locally-bijective: the unit is locally injective. Its equalizer sieve contains a covering family of the pro-étale site, which is what the step uses. Sources checked: Stacks 00WB theorem-plus, 00WK, 03CY. Step 2 is elementary: since V is nonempty, the covering condition of def-weil-pbc-proetale-site gives at least one member of the cover, under both the old wording and the blueprint_update wording. Restrictions are the identity by def-sf-site-constant-module-functor. Source: proetale.tex 0989 and the remark after it that a covering is jointly surjective. Step 3 is elementary: restriction to the localized site gives the same sections at U by 04IX(4), and a zero object of the module-sheaf category has zero sections (03CW). The coefficients are discrete constant modules, not adic ones. I accept the declared tool use of lem-sf-constant-module-unit-locally-bijective: its unit sk-prop-sf-comparison is outside the integral-models route, and it is a generic site lemma. I searched the DAG and the blueprint for duplicates and found none; constant-module-section-properties and reflects-isomorphism are different statements. There is no SGA citation, and I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78854d238",
+  "group": "NW",
+  "result": "pass",
+  "note": "Every node clause is rendered: X : Scheme.{u}, the genuine X.ProEt with ProEt.topology, [Nonempty U.left], R : Type (u+1) commutative ring and T : ModuleCat.{u+1} R (universe forced by the recorded siteConstantModuleFunctorGeneral; the node allows enlarging coefficients; site universes not equated). The canonical unit is the sheafificationAdjunction unit at op U on siteConstantModulePresheafGeneral, the same composite as the recorded functor, so not hollow. Conclusions match: injective; IsZero of sections at U -> IsZero T; IsZero (F.over U) -> IsZero T. True by local injectivity plus joint surjectivity of pro-etale covers; the nonempty hypothesis is needed (empty U has terminal sections); X empty, T=0 and the zero ring checked. Only the lean field changed and lean.statement is verbatim. Docstrings carry source, blueprint id and proof steps; no line over 100 characters; no unbound variables; only the theorem uses sorry; no pro-etale substitute. The second reading section defers to the maintainer review, the established direct-delivery wording (74 landed reports); this review is that reading. nt_compile.py --json on the local side overlay: rc=0, 11.8 s, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero",
+  "declaration": "AlgebraicGeometry.ProEtale.constantRealization_detects_zero",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constantRealizationUnit",
+   "AlgebraicGeometry.ProEtale.constantRealization_detects_zero"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/ConstantRealizationDetectsZero.lean",
+  "statement": "theorem constantRealization_detects_zero (X : Scheme.{u}) (R : Type (u + 1)) [CommRing R] (T : ModuleCat.{u + 1} R) (U : X.ProEt) [Nonempty U.left] : Function.Injective (constantRealizationUnit X R T U) ∧ (IsZero (((siteConstantModuleFunctorGeneral (Scheme.ProEt.topology X) R).obj T).val.obj (Opposite.op U)) → IsZero T) ∧ (IsZero (((siteConstantModuleFunctorGeneral (Scheme.ProEt.topology X) R).obj T).over U) → IsZero T)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

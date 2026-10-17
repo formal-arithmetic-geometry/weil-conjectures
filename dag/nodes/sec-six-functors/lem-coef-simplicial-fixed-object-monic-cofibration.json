@@ -154,5 +154,28 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-c9708ced8 (reviewer sub-agent of L); spot-checked: Read the item, its four steps, both cited statements, parent step 17 and the blueprint ancestor's paragraph 2 in full. The statement is unchanged and self-contained. Parent step 17 needs exactly this result: cofibrations in sCat_O are injective on every mapping set. Step 1: adding a disjoint absorbing zero to each hom set still gives a category, with identities and associativity checked hom set by hom set, and the old-arrow inclusion is injective. Step 2: the universal property of freely adjoined arrows extends that inclusion, sending each generator to the zero, so old arrows cannot be identified. This is degreewise only, and the auxiliary functors need not be simplicial. Step 3: for an arrow retract, i u = v f together with p u = id carries injectivity over, and the domains need not coincide. Step 4: lem-coef-simplicial-interval-lifting states that cofibrations are retracts of free simplicial extensions. Its extra degeneracy condition is unused. Only the statement is used. Small cases checked: empty O, empty hom sets, an old group Z/2 with an adjoined loop, existing zero morphisms, no generators, and a retract with different domains. No cycle: neither cited node's dependency closure (220 nodes) contains the item. I confirmed that free-factor-category-normal-form and fixed-object-simplicial-free-calculus do reach the item, so leaving them uncited is correct. No duplicate node found. Both cited nodes are in the same unit, so no tool uses. There are no new nodes. Mathlib searches are recorded for all four tools. The WANTED request for HTT A.3.3.8 is honest. No SGA source is used, and no fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e89ada74",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the node, both statement dependencies (SimplicialIntervalLifting in full, KanQuillenRightProper), the source place, the report and the 93-line module. IsDegreewiseFreeExtension is the free-adjunction half of the dependency's IsFreeExtension without injectivity or degeneracy stability, as the node requires; its Type u target restriction still admits the zero-adjoined auxiliary category of proof step 1, so the proof goes through. The three conjuncts (free extensions, MorphismProperty.retracts of them, fixedCofibrations) each conclude injectivity in every degree including n=0 and Mono of every mapping map; no Kan, nonemptiness or extra assumption; universe u bound. lean.statement equals the file signature verbatim; both declarations recorded; docstrings carry the source place, blueprint tag and all four proof steps; only sorry; no duplicate (FixedObjectSimplicialFreeCalculus.IsDegreewiseFree is a property of a single category and that module depends on this item). Report has Worker report and Second reading by Q22. nt_compile.py --json side-overlay compile: exit 0, no errors or warnings (item 3.4 s). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialFixedObjectMonicCofibration",
+  "declaration": "SSet.Bergner.simplicial_fixed_object_monic_cofibration",
+  "declarations": [
+   "SSet.Bergner.IsDegreewiseFreeExtension",
+   "SSet.Bergner.simplicial_fixed_object_monic_cofibration"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialFixedObjectMonicCofibration.lean",
+  "statement": "theorem simplicial_fixed_object_monic_cofibration (O : Type u) : (∀ (A B : Fixed O) (f : A ⟶ B), IsDegreewiseFreeExtension f → (∀ (a b : O) (n : ℕ), Function.Injective ((f.map a b).app (Opposite.op ⦋n⦌))) ∧ (∀ a b : O, Mono (f.map a b))) ∧ (∀ (A B : Fixed O) (f : A ⟶ B), (MorphismProperty.retracts (fun _ _ g ↦ IsDegreewiseFreeExtension (O := O) g)) f → (∀ (a b : O) (n : ℕ), Function.Injective ((f.map a b).app (Opposite.op ⦋n⦌))) ∧ (∀ a b : O, Mono (f.map a b))) ∧ (∀ (A B : Fixed O) (f : A ⟶ B), fixedCofibrations O f → (∀ (a b : O) (n : ℕ), Function.Injective ((f.map a b).app (Opposite.op ⦋n⦌))) ∧ (∀ a b : O, Mono (f.map a b)))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The inline degreewise free-extension notion uses the dependency DegreeFunctor and its free-adjunction universal property, without assuming injectivity or degeneracy stability. The three clauses retain degreewise injectivity and mappingwise monicity for free extensions, general arrow retracts and fixed-object cofibrations."
  }
 }
