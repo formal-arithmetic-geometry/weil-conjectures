@@ -80,21 +80,22 @@
    }
   },
   {
-   "text": "Apply [sk-lem-sp-tower] to the normalized constructible $D_\\bullet$ of Step 2. It gives $L\\in\\Dbc(Y,\\mathcal O_E)$ and the natural isomorphisms $\\epsilon_n:L\\otimes^L_{R_Y}A_{n,Y}\\xrightarrow{\\sim}D_n$. These are the scalar-extension adjoints of the total-limit projections, hence are comparisons with the specified reductions. To record their tower meaning, the underived functor $N\\mapsto(N\\otimes_{R_Y}A_{n,Y})_n$ is left adjoint to inverse limit: a compatible family of coefficient-linear maps from these tensors to a tower is precisely a map $N\\to\\lim_n\\operatorname{Res}_nD_n$. The tower is a module category on the diagram topos by [det-sp-coefficient-towers-abelian]. To identify its left derived functor, choose a flat-term K-flat resolution $Q\\to N$ by [lem-pc-kflat-resolution]. Applying the underived left adjoint gives $(Q\\otimes_{R_Y}A_{n,Y})_n$, which computes $\\operatorname{red}_YN$ at every evaluation; quasi-isomorphisms between these resolutions remain quasi-isomorphisms after each coefficient extension. For the right derived functor, regard inverse limit and restriction from $A_\\bullet$ to the constant ring system $R_Y$ as direct images of ringed diagram topoi. The composition theorem [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies its value with the total derived inverse limit $L=R\\varprojlim_n\\operatorname{Res}_nD_n$ used in Step 3. Derive the adjunction by [lem-pc-derived-adjoint-functors], with existence as in [sk-def-sfb-derived-categories] and the simultaneous derived section models of [lem-coef-semilinear-derived-sections]. Its counit is an actual morphism $\\epsilon:\\operatorname{red}_YL\\to D_\\bullet$. Its $n$-th evaluation is $\\epsilon_n$, because adjunction evaluates to extension/restriction of scalars at level $n$. For $m\\le n$, projecting the limit first to $D_n$ and then along the transition equals projection to $D_m$; taking these adjoints is exactly the quotient compatibility of $\\epsilon_n$ and $\\epsilon_m$. Thus $\\epsilon$ is invertible by joint conservativity in [det-sp-tower-shriek-levels](3). Step 3 now gives both the canonical reduction isomorphisms of $P$ and $\\operatorname{red}_YP\\simeq D_\\bullet$, proving (2) for the chosen compactification.",
+   "text": "Apply [sk-lem-sp-tower] to the normalized constructible tower $D_\\bullet$ of Step 2: $L=R\\varprojlim_nD_n$ lies in $\\Dbc(Y,\\mathcal O_E)$. To identify the reductions of $L$ as a derived tower, use the adjunction and counit clauses of [det-sp-normalized-equivalence] for $T=Y$. Its hypothesis holds: $\\ell\\ne p$ is invertible on the $k$-scheme $Y$. Its coefficient sheaf $\\varprojlim_n(\\mathcal O_E/\\ell^n)_Y$ is our $R_Y$ by [sk-prop-sfb-qlbar-colimit-x] and the cofinal powers convention of [sk-def-sp-coefficient-towers]; its reduction functor is $\\operatorname{red}_Y$ of [det-sp-reduction-tower-normalized]; its limit functor is the total derived limit of strict towers after restriction of scalars to $R_Y$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit], which is the limit $L_S$ of [lem-weil-ringed-tower-pushforward-limit-comparison] used in Step 3. Only these clauses are used; they concern $D(\\operatorname{Mod}(R_Y))$ and normalized towers. The final constructible restriction of that node, stated for another integral category, is not used. Its counit $\\epsilon:\\operatorname{red}_YL\\to D_\\bullet$ is a morphism of $D(\\operatorname{Tow}(Y,\\mathcal O_E))$, and it is an isomorphism because $D_\\bullet$ is normalized. Its evaluations [det-sp-coefficient-towers-abelian] are isomorphisms $L\\otimes^L_{R_Y}A_{n,Y}\\xrightarrow{\\sim}D_n=Rf_{!,A_n}(M/\\ell^n)$ [det-sp-tower-shriek-levels](1), compatible with the quotient transitions because they are evaluations of one tower morphism. Since $\\operatorname{red}_Y$ is a functor on $D(R_Y)$, the isomorphism $P\\simeq L$ of Step 3 gives $P\\in\\Dbc(Y,\\mathcal O_E)$, $\\operatorname{red}_YP\\simeq\\operatorname{red}_YL\\simeq D_\\bullet=Rf_{!,\\bullet}\\operatorname{red}_XM$, and the level identifications $P\\otimes^L_{R_Y}A_{n,Y}\\simeq Rf_{!,\\mathcal O_E/\\ell^n}(M/\\ell^n)$. This proves (2) for the chosen compactification.",
    "uses": [
     "sk-lem-sp-tower",
+    "det-sp-normalized-equivalence",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-def-sp-coefficient-towers",
+    "det-sp-reduction-tower-normalized",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
     "det-sp-coefficient-towers-abelian",
-    "lem-pc-derived-adjoint-functors",
-    "sk-def-sfb-derived-categories",
-    "lem-coef-semilinear-derived-sections",
-    "det-sp-tower-shriek-levels",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "det-sp-tower-shriek-levels"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
-    "place": "Paragraph (2), reconstruction and reduction-tower conclusion; Bhatt–Scholze Lemma 3.5.7 (reduction/limit adjunction), Stacks 09T5 (derived.tex, lemma-derived-adjoint-functors)"
+    "place": "Paragraph (2), reconstruction and reduction-tower conclusion: \"By (1) and the reconstruction lemma, this limit lies in Dbc(Y,O_E) and reduces to ...\"; the blueprint cites det-sp-normalized-equivalence here"
    }
   },
   {
@@ -140,22 +141,18 @@
    }
   },
   {
-   "text": "Put $C_\\bullet=\\operatorname{red}_XM$, $B_\\bullet=\\operatorname{red}_YK$ and $p=\\bar f$. The normalized reduction theorem used in Step 1, also applied to $K$, gives bounded-below towers with finite-Tor constructible levels. Construct the canonical map\n$$\\Phi:(Rp_{*,\\bullet}j_{!,\\bullet}C_\\bullet)\\otimes^LB_\\bullet\\longrightarrow Rp_{*,\\bullet}j_{!,\\bullet}(C_\\bullet\\otimes^Lf^{-1}B_\\bullet)$$\nas follows. First take the adjoint transpose of the proper counit tensored with $p^{-1}B_\\bullet$, using the derived pullback/tensor comparison; then apply $Rp_{*,\\bullet}$ to the open-extension projection map, and use $j^{-1}p^{-1}=f^{-1}$. The simultaneous enhanced section models of [lem-coef-semilinear-derived-sections] supply these derived adjunction, tensor and open-extension comparisons together with all quotient compatibilities. Thus $\\Phi$ is an actual morphism of derived towers before any evaluation, not a lift inferred from a family of level arrows. Its $n$-th evaluation is\n$$\\begin{aligned}\n(Rp_{*,A_n}j_!C_n)\\otimes^LB_n&\\longrightarrow Rp_{*,A_n}(j_!C_n\\otimes^Lp^{-1}B_n)\\\\\n&\\longrightarrow Rp_{*,A_n}j_!(C_n\\otimes^Lf^{-1}B_n).\n\\end{aligned}$$\nFor the first arrow use [det-thm-sfb-proper-base-change-finite](3). Here $B_n$ is in $\\Dctf(Y,A_n)$. Also $j_!C_n$ is in $\\Dctf(\\bar X,A_n)$: apply [det-sp-tower-bound-uniform] to the quasi-compact open $j$, whose geometric fibres have dimension at most zero, with its compactification $(j,\\mathrm{id}_{\\bar X})$. The given Tor interval for $C_n$ is unchanged by that bound. The schemes are standing schemes and $A_n$ is a finite commutative $\\ell$-primary ring. The second arrow is $Rp_*$ of the canonical isomorphism [lem-cbc-extension-zero-projection-formula], with inputs $C_n$ and $p^{-1}B_n$. It has no constructibility or field restriction beyond those already satisfied. Hence every evaluation of $\\Phi$ is invertible. The unbounded conservativity assertion [det-sp-tower-shriek-levels](3) now makes $\\Phi$ invertible as a tower map. We use its inverse in the direction\n$$Rf_{!,\\bullet}(C_\\bullet\\otimes^Lf^*_\\bullet B_\\bullet)\\xrightarrow{\\sim}(Rf_{!,\\bullet}C_\\bullet)\\otimes^LB_\\bullet.$$\nUse Steps 6–7 to identify its source input with $\\operatorname{red}_X(M\\otimes^Lf^*K)$, and Step 4 for $M$ and for $M\\otimes^Lf^*K$ to identify both sides with the reductions of $Rf_{!,\\mathcal O_E}(M\\otimes^Lf^*K)$ and $P\\otimes^LK$. Apply the forward implication of [sk-lem-integral-models](2) to each of these already-constructible objects in $D_R(Y)$. Both are derived $\\pi_E$-complete; the cofinal powers convention of Step 1 identifies their completion units with the units for the $\\ell^n$ towers. Applying total derived inverse limit to the tower isomorphism and using these units [sk-def-pe-derived-completion] yields\n$$Rf_{!,\\mathcal O_E}(M\\otimes^Lf^*_{\\mathcal O_E}K)\\xrightarrow{\\sim}P\\otimes^LK.$$\nAll constructed maps are natural in $M,K$, so this is the asserted natural projection formula in $\\Dbc(Y,\\mathcal O_E)$. It uses no monoidality of inverse limit. The finite-field-only clause (2)(a) of [det-sp-tower-shriek-levels] is not applied.",
+   "text": "Put $C_\\bullet=\\operatorname{red}_XM$ and $B_\\bullet=\\operatorname{red}_YK$. By [det-sp-reduction-tower-normalized], applied to $M$ and to $K$, both lie in the normalized constructible categories $\\Dctf(-_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)_{\\mathrm{norm}}$: they have uniform cohomological and Tor bounds and finite-Tor constructible levels. Apply [lem-sp-tower-compact-support-projection-formula] to the given compactification $f=\\bar f\\circ j$ and to $C_\\bullet,B_\\bullet$. Both of its projection morphisms are isomorphisms of derived towers. Composing the first with the inverse of the second gives an isomorphism, natural in both towers,\n$$Rf_{!,\\bullet}(C_\\bullet\\otimes^Lf^{-1}B_\\bullet)\\xrightarrow{\\sim}(Rf_{!,\\bullet}C_\\bullet)\\otimes^LB_\\bullet$$\nin $D(\\operatorname{Tow}(Y,\\mathcal O_E))$. As in Step 6, $f^{-1}A_{n,Y}=A_{n,X}$, so $f^{-1}B_\\bullet=f^*_\\bullet B_\\bullet$. By Step 6, $f^*K\\in\\Dbc(X,\\mathcal O_E)$ with $\\operatorname{red}_X(f^*K)\\simeq f^*_\\bullet B_\\bullet$. Then Step 7 identifies the source input with $\\operatorname{red}_X(M\\otimes^Lf^*K)$, where $M\\otimes^Lf^*K\\in\\Dbc(X,\\mathcal O_E)$ by [det-lem-int-tensor-product]. Steps 1–4 hold for every object of $\\Dbc(X,\\mathcal O_E)$. Applied to $M\\otimes^Lf^*K$, they identify the source with $\\operatorname{red}_YRf_{!,\\mathcal O_E}(M\\otimes^Lf^*K)$. Step 4 for $M$ and Step 7 on $Y$ identify the target with $\\operatorname{red}_YP\\otimes^L\\operatorname{red}_YK\\simeq\\operatorname{red}_Y(P\\otimes^LK)$, and $P\\otimes^LK\\in\\Dbc(Y,\\mathcal O_E)$ by [det-lem-int-tensor-product]. $Y$ is Noetherian, so the forward implication of [sk-lem-integral-models](2) makes both constructible objects derived $\\pi_E$-complete. The cofinal powers convention of Step 1 identifies their completion units [sk-def-pe-derived-completion] with the units $N\\xrightarrow{\\sim}R\\varprojlim_n\\operatorname{Res}_n(N/\\ell^n)$, where the limit is the total derived limit of Step 3. Apply that total derived limit to the tower isomorphism and compose with the two completion units. This gives\n$$Rf_{!,\\mathcal O_E}(M\\otimes^Lf^*_{\\mathcal O_E}K)\\xrightarrow{\\sim}P\\otimes^LK=Rf_{!,\\mathcal O_E}M\\otimes^LK$$\nin $\\Dbc(Y,\\mathcal O_E)$. Every map used is natural in $M$ and $K$, so this is the asserted natural projection formula. It uses no monoidality of inverse limits. The finite-field-only clause (2)(a) of [det-sp-tower-shriek-levels] is not applied: the tower projection isomorphism over the general standing field is the cited node.",
    "uses": [
     "det-sp-reduction-tower-normalized",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "det-thm-sfb-proper-base-change-finite",
-    "det-sp-tower-bound-uniform",
-    "lem-cbc-extension-zero-projection-formula",
-    "det-sp-tower-shriek-levels",
+    "lem-sp-tower-compact-support-projection-formula",
+    "det-lem-int-tensor-product",
     "sk-lem-integral-models",
     "sk-def-pe-derived-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
-    "place": "Paragraph (3), the tower projection formula followed by reconstruction"
+    "place": "Paragraph (3), last sentence: \"The tower projection formula (an isomorphism of towers, being levelwise the finite projection formula) applied to red_X M and red_Y K, followed by R lim and (2), gives the integral projection formula\""
    }
   }
  ],
@@ -169,25 +166,24 @@
   "det-sp-tower-bound-uniform",
   "det-sp-reduction-direct-image",
   "sk-def-sp-normalized-towers",
+  "lem-coef-semilinear-derived-sections",
   "sk-def-pe-derived-completion",
   "det-sf-open-closed-extension-zero-limits",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-coef-semilinear-derived-sections",
   "lemma-nagata-open-immersion-qc-over-separated-target",
   "sk-lem-sp-tower",
-  "lem-pc-derived-adjoint-functors",
-  "sk-def-sfb-derived-categories",
-  "lem-pc-kflat-resolution",
+  "det-sp-normalized-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "det-sf-comp-coherence-cocycle",
   "sk-def-localizing-closure",
   "det-lem-int-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "det-lem-int-tensor-product",
   "lem-pur-kflat-change-of-rings",
+  "lem-pc-kflat-resolution",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "det-thm-sfb-proper-base-change-finite",
-  "lem-cbc-extension-zero-projection-formula"
+  "lem-sp-tower-compact-support-projection-formula"
  ],
  "proof_origin": {
   "by": "agent",
@@ -269,7 +265,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -291,7 +287,7 @@
   "date": "2026-10-17",
   "item": "det-sp-integral-direct-image-tower",
   "worker": "stage1",
-  "summary": "Made the standing field/scheme and coefficient conventions explicit. Expanded the three imported paragraphs into eight steps with canonical strict-tower limits, completed-versus-constant coefficient control, reconstruction counits, and the ordinary tensor reduction calculation. Reused existing nodes throughout; the blueprint-only det-sp-normalized-equivalence is absent from the DAG and was replaced by its existing reduction and reconstruction interfaces, with the derived adjunction written out. No new nodes or Lean changes. Repaired the returned stale-citation delivery against the current DAG: revalidated the integral-models opening equality and completeness criterion, made those uses explicit in Steps 1 and 8, and cited its equality directly in Step 5 because the revised localizing-closure definition no longer asserts it. Refreshed the affected verbatim quotes; current-DAG packaging is delegated to the required dry run. Final retained-work revalidation: all 32 baseline dependency statements still agree with the recorded current snapshot. Applied the numbered integral criterion explicitly to M over R_X and to both projection-formula objects over R_Y, stated the cofinal change from uniformizer powers to ell powers, and checked the D+ input of the tower theorem using the existing levelwise-cohomology node. Compared with the returned head, Steps 1, 2, 5 and 8 and the affected citations have substantive repairs. Repaired an intervening tower-shriek statement change found by dry run: use only its general evaluation/conservativity clauses, and explicitly construct the tower projection map from semilinear adjunction models, the existing finite proper projection theorem, and the existing finite open-extension projection theorem. Verify open-extension finite Tor by the existing bound theorem with fibre dimension zero. This preserves the general standing base field despite the revised tower projection clause being finite-field-only. Repair revalidation on 2026-10-17 retained all previous mathematical repairs and checked both Noetherian schemes for the integral-model criterion. The Step 8 citation certificate now quotes exactly criterion (2), rather than the entire integral-model statement.",
+  "summary": "Made the standing field/scheme and coefficient conventions explicit. Expanded the three imported paragraphs into eight steps with canonical strict-tower limits, completed-versus-constant coefficient control, reconstruction counits, and the ordinary tensor reduction calculation. Reused existing nodes throughout; the reduction/limit adjunction of the blueprint's det-sp-normalized-equivalence is cited from that existing node in Step 4 (adjunction and counit clauses only). No new nodes or Lean changes. Repaired the returned stale-citation delivery against the current DAG: revalidated the integral-models opening equality and completeness criterion, made those uses explicit in Steps 1 and 8, and cited its equality directly in Step 5 because the revised localizing-closure definition no longer asserts it. Refreshed the affected verbatim quotes; current-DAG packaging is delegated to the required dry run. Final retained-work revalidation: all 32 baseline dependency statements still agree with the recorded current snapshot. Applied the numbered integral criterion explicitly to M over R_X and to both projection-formula objects over R_Y, stated the cofinal change from uniformizer powers to ell powers, and checked the D+ input of the tower theorem using the existing levelwise-cohomology node. Compared with the returned head, Steps 1, 2, 5 and 8 and the affected citations have substantive repairs. Repaired an intervening tower-shriek statement change found by dry run: use only its general evaluation/conservativity clauses, and explicitly construct the tower projection map from semilinear adjunction models, the existing finite proper projection theorem, and the existing finite open-extension projection theorem. Verify open-extension finite Tor by the existing bound theorem with fibre dimension zero. This preserves the general standing base field despite the revised tower projection clause being finite-field-only. Repair revalidation on 2026-10-17 retained all previous mathematical repairs and checked both Noetherian schemes for the integral-model criterion. The Step 8 citation certificate now quotes exactly criterion (2), rather than the entire integral-model statement. Maintainer-reader repair (2026-10-17): Step 4 cites the adjunction/counit clauses of the existing det-sp-normalized-equivalence instead of re-deriving that adjunction inline; the tower projection formula built inline in Step 8 is the new statement-only node lem-sp-tower-compact-support-projection-formula (general standing field), which Step 8 cites.",
   "blueprint": "Steps 1–2 realize paragraph (1); Steps 3–5 realize paragraph (2), including the compactification independence clause through the existing generic comparison theorem; Steps 6–8 realize paragraph (3).",
   "tool_uses": [
    {
@@ -321,14 +317,6 @@
    {
     "node": "lem-coef-semilinear-derived-sections",
     "why": "Provides simultaneous varying-ring derived models of tensor, inverse image, direct image and adjunction comparisons so comparisons are morphisms of systems."
-   },
-   {
-    "node": "lem-pc-derived-adjoint-functors",
-    "why": "Generic derived-adjunction theorem supplies the reduction/total-limit counit of the coefficient-system calculation."
-   },
-   {
-    "node": "sk-def-sfb-derived-categories",
-    "why": "Generic derived functor existence and exact-functor convention needed for the reduction/limit adjunction."
    },
    {
     "node": "det-sf-comp-coherence-cocycle",
@@ -365,14 +353,6 @@
    {
     "node": "lemma-nagata-open-immersion-qc-over-separated-target",
     "why": "Generic quasi-compactness criterion verifies the open-extension limit theorem hypothesis directly from finite type over k and separated compactification, without an uncited Noetherianity argument."
-   },
-   {
-    "node": "det-thm-sfb-proper-base-change-finite",
-    "why": "The finite proper projection map is invertible between standing schemes over the general field; this verifies the levels of the explicitly constructed tower projection map without applying the finite-field-only tower projection theorem."
-   },
-   {
-    "node": "lem-cbc-extension-zero-projection-formula",
-    "why": "The finite open-immersion tensor comparison supplies the open part of the compactification projection map over any standing base field."
    }
   ]
  },
@@ -399,12 +379,12 @@
   "lem-cbc-extension-zero-projection-formula"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q12-4db323645",
-  "group": "Q12",
+  "reviewer": "NT-cc-Q67-d58228f22",
+  "group": "Q67",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-4db323645 (reviewer sub-agent of L); spot-checked: I read all three blueprint clauses (main-20261015 sk-prop-sp-integral-adjunction-direct-image .md/.proof.md), the unit and chapter records, all 34 cited statements in full, and Stacks 09BP (proetale-lemma-j-shriek-limits). The item statement matches the blueprint and adds one true strengthening, f^*K in Dbc, which is det-lem-int-tensor-pullback(1). The coefficient category is R_T = p_T^* of O_E as in sk-def-sfb-constructible; the constant sheaf C_X is kept separate from R_X, as in sk-lem-integral-models. The base field is the general standing field. Step 8 correctly avoids tower-shriek clause (2)(a), which is restricted to k = F̄_p: it builds Phi on semilinear section models and checks each level with det-thm-sfb-proper-base-change-finite(3), where j_!C_n is in Dctf by det-sp-tower-bound-uniform with d=0 and compactification (j,id), and with lem-cbc-extension-zero-projection-formula; tower conservativity (3) then makes Phi an isomorphism. Other hypotheses checked: Noetherian for integral-models criterion (2) and its equality; j quasi-compact via lemma-nagata-open-immersion-qc-over-separated-target; admissible Λ in comp-coherence-cocycle is the localizing-closure coefficient list, which contains O_E; Y qcqs; no flatness needed for b_{A_n,A_m}; π^n versus ℓ^n cofinality; D+ input. Edge cases: zero inputs, empty X, f = id, d = 0, m = n, ramified E. No cycle, no missing or merged id, proof_deps equals the union of step uses, no new nodes, no SGA. Accepted tool uses: sk-lem-integral-models, det-sf-open-closed-extension-zero-limits, det-lem-int-tensor-pullback, det-lem-int-tensor-product, det-thm-sfb-proper-base-change-finite, all generic coefficient or finite-level black boxes that the blueprint proof itself invokes; the other declared tool uses are on the route or are definitions or closed nodes. Fix, Step 2 only: constructibility of D_n was credited to the tower clause of det-sp-tower-bound-uniform, which only gives Tor and cohomological bounds; it is now credited to the node's main assertion with A = A_n. The step also used, without a citation, that the tower transition of the direct image is the counit transpose b; it now cites lem-coef-semilinear-derived-sections for this, a node already in proof_deps. The report wrongly says det-sp-normalized-equivalence has no DAG node; it exists, unsplit. Not citing it is correct, because it is stated for the other integral category def-weil-derived-complete-integral-detailed, and Step 4 builds that adjunction and counit directly.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-d58228f22 (reviewer sub-agent of L); spot-checked: Read the full item (statement and 8 steps), the statements of all 11 stmt_deps and 28 proof_deps, unit sk-prop-sp-integral-adjunction, chapter sec-smooth-purity, and the main-20261015 blueprint statement and proof (paragraphs (1)-(3)). The statement matches the source. Its one addition, f^*K in Dbc, is true (det-lem-int-tensor-pullback(1)). The coefficient sheaf R_T = p_T^*O_E is kept separate from the constant sheaf; the general standing field k is kept; the Tor interval [a,b+2d] was tested on A^1, G_m, d=0, X empty and ramified E. Hypotheses checked: Noetherian for sk-lem-integral-models; j quasi-compact by the Nagata lemma; O_E admissible via sk-def-localizing-closure; Y qcqs; etale origin of the finite levels via det-pe-finite-tor-comparison-noetherian; ell invertible on Y. Long steps: Step 2 is one argument and stays. Step 4 re-derived inline the red -| R lim adjunction and counit, which is the existing node det-sp-normalized-equivalence in the same unit and is cited by the blueprint (the split_report wrongly called it absent). Fixed: Step 4 now cites its adjunction/counit clauses only, not its constructible clause for the other integral category; no cycle. Step 8 built the tower projection formula inline; the DAG has it only for k = Fbar_p (det-sp-tower-shriek-levels (2)(a)). Fixed: new statement-only node lem-sp-tower-compact-support-projection-formula (general standing field, uniformly bounded Dctf towers), which Step 8 now cites. Its truth was checked: levels by det-thm-sfb-proper-base-change-finite(3), with j_!C_n in Dctf by det-sp-tower-bound-uniform at d=0, and by lem-cbc-extension-zero-projection-formula; conservativity by det-sp-tower-shriek-levels(3). Its Mathlib record has only the three greps that ran; LeanSearch, Loogle and LeanFinder were unreachable here, so the maintainer may add them. Four tool_uses no longer cited were dropped. Accepted tool uses: sk-lem-integral-models, sk-def-pe-derived-completion, det-sf-open-closed-extension-zero-limits, lem-coef-semilinear-derived-sections, det-lem-int-tensor-pullback, det-lem-int-tensor-product. No SGA, acyclic, proof_deps equals the union of step uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {
