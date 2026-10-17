@@ -19,6 +19,7 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # The residue test on the small pro-etale site

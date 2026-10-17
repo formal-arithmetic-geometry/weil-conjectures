@@ -11,6 +11,7 @@ public import Sheaf.Topology.SetsInverseImageComposition
 import Sheaf.Topology.SpectralDirectedLimit
 import Sheaf.Topology.SpectralLimitConstructibleClosedNonempty
 import Sheaf.Topology.SpectralLimitDescendOpens
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Sections of inverse images on spectral limits

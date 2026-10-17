@@ -23,6 +23,7 @@ import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.Paper.KoszulQuotientLimit
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Reduction of adic completion

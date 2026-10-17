@@ -15,6 +15,7 @@ import Sheaf.RingTheory.NoetherianKoszulAugmentationProZero
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # The augmentation comparison of Koszul and quotient completions

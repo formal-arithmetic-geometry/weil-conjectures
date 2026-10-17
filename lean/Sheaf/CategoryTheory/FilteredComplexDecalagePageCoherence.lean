@@ -8,6 +8,8 @@ module
 public import Sheaf.CategoryTheory.FilteredComplexDecalagePageIso
 import Sheaf.CategoryTheory.FilteredComplexDecalageIntervalMaps
 import all Sheaf.CategoryTheory.FilteredComplexDecalagePageData
+import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
+import Sheaf.CategoryTheory.FilteredComplexDecalageTower
 
 /-! # Differential and successor compatibility of the normalized decalage pages
 

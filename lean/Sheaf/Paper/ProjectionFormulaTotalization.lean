@@ -21,6 +21,10 @@ public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Paper.ProjectionFormulaProjectiveSummand
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Paper.RingedTopoiDerivedPullback
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Signed totalization of the perfect projection formula

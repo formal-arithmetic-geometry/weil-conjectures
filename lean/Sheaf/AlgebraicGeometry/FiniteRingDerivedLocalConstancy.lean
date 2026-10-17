@@ -33,6 +33,7 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.Paper.FiniteFreeEtaleLocalActual
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.Paper.SiteBoundedConstantModel
 
 /-!
 # Finite-ring derived local constancy

@@ -33,6 +33,8 @@ public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.HomComplexMappingCone
+import Sheaf.Algebra.Homology.HomTensorTotal
 
 /-!
 # Internal derived Hom calculus on small ringed sites
