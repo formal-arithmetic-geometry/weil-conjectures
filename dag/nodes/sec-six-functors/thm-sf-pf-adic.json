@@ -3,46 +3,193 @@
  "blueprint": {
   "is": "thm-sf-pf-adic",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived-complete reconstruction over $\\mathcal O_E$",
- "statement": "In the setting of [def-sf-datum], let $K,L$ be derived-complete\n$D^b_{ctf}$-objects over $\\mathcal O_E$ of finite Tor amplitude with finite\nreductions $K_n,L_n$. Then the maps $\\operatorname{PF}_{f,K_n,L_n}$ form a\nmorphism of normalized systems and realize a canonical isomorphism\n$\\operatorname{PF}_{f,K,L}$ over $\\mathcal O_E$, compatible with all finite\nreductions.",
+ "statement": "Fix a prime $p$, an integer $a\\geq1$, a field $k_0$ with $q=p^a$ elements, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi_E$. Put $A_{E,n}=R/\\varpi_E^n$ for $n\\geq1$. Let $X,Y$ be finite-type $k$-schemes and let $f:X\\to Y$ be a separated finite-type $k$-morphism, with the six-functor datum of [def-sf-datum]. Integral coefficients on $W=X,Y$ mean the completed coefficient sheaf $\\widehat R_W=\\varprojlim_{n\\geq1}(A_{E,n})_W$ on the small pro-etale site $W_{\\mathrm{proet}}$. Let $K\\in D^b_{ctf}(X,R)$ and $L\\in D^b_{ctf}(Y,R)$: they are derived-complete bounded constructible integral complexes [def-weil-derived-complete-integral-detailed], whose finite derived reductions $K_n=K\\otimes^L_{\\widehat R_X}(A_{E,n})_X$ and $L_n=L\\otimes^L_{\\widehat R_Y}(A_{E,n})_Y$ [def-weil-integral-derived-reduction] have finite Tor amplitude in intervals independent of $n$ [def-weil-finite-tor-amplitude]. Use the completed integral pullback and tensor, compact-support direct image, and specified compactification projection transformations of [def-exchange-projection]. Then the finite projection transformations\n$$\\operatorname{PF}_{f,K_n,L_n}:Rf_{!,n}K_n\\otimes^L_{A_{E,n}}L_n\\longrightarrow Rf_{!,n}(K_n\\otimes^L_{A_{E,n}}Lf_n^*L_n)$$\nform a morphism of normalized reduction systems [def-coef-normalized-dvr-tower] and realize the canonical integral projection isomorphism\n$$\\operatorname{PF}_{f,K,L}:Rf_!K\\widehat\\otimes_R^L L\\xrightarrow{\\sim}Rf_!(K\\widehat\\otimes_R^L Lf^*L).$$\nIts derived reduction at every $n\\geq1$, under the canonical operation comparisons, is $\\operatorname{PF}_{f,K_n,L_n}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-pf-adic/thm-sf-pf-adic.md",
   "place": "node thm-sf-pf-adic, order 2096"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-exchange-projection",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-derived-reduction",
+  "def-coef-normalized-dvr-tower"
  ],
  "proof": [
   {
-   "text": "The projection transformation is that of [def-sf-pf] and derived\ncompleteness is that of [def-weil-derived-complete-integral-detailed].\nBy [thm-sf-pf-finite] each finite-level map is an isomorphism, and by\n[prop-sf-pf-reduction] the maps are mutually compatible under\nreduction, with uniform bounds and amplitudes inherited from $K$ and $L$\n(finite Tor amplitude of a derived-complete object is uniform in $n$).\nDerived completeness of the four complexes in the square together with this\ncompatibility is the hypothesis of the uniform-tower reconstruction of\n[lem-weil-pbc-reconstruction-uniform-tower], which realizes the system\nas a morphism of derived-complete $\\mathcal O_E$-complexes with the given\nreductions; it is an isomorphism because its reductions are isomorphisms\nand the reduction functors are conservative on derived-complete complexes\nof finite Tor amplitude. Finally, the realized map agrees with the\nmate-theoretic projection transformation, since both reduce levelwise to\n$\\operatorname{PF}_{f,K_n,L_n}$ and reductions are conservative.",
+   "text": "Write $R=\\mathcal O_E$, $A_n=R/\\varpi_E^n$, and let $f:X\\to Y$ be the separated finite-type morphism of finite-type $k$-schemes in the datum, with $K$ on $X$ and $L$ on $Y$ [def-sf-datum]. All integral coefficient sheaves are the completed sheaves on the pro-etale sites. By [lem-weil-pbc-finite-type-over-noetherian] and [lem-kun-dimension-finite-type], $X,Y$ are Noetherian and finite-dimensional (a field is Noetherian since its only ideals are $0$ and the whole field); choose an integer $d\\geq0$ bounding $\\dim X$, also when $X$ is empty. By [def-weil-derived-complete-integral-detailed], the reductions $K_n,L_n$ of [def-weil-integral-derived-reduction] are bounded constructible with uniform cohomological bounds. The assumed integral finite Tor amplitude, by [def-weil-finite-tor-amplitude], means precisely that there are intervals $[a,b]$ and $[c,e]$ valid for the Tor amplitude of every $K_n$ and every $L_n$, respectively. This is a hypothesis, not an assertion that arbitrary complete objects have finite Tor amplitude.",
    "uses": [
-    "def-sf-pf",
+    "def-sf-datum",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
     "def-weil-derived-complete-integral-detailed",
-    "thm-sf-pf-finite",
-    "prop-sf-pf-reduction",
-    "lem-weil-pbc-reconstruction-uniform-tower"
+    "def-weil-integral-derived-reduction",
+    "def-weil-finite-tor-amplitude"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+    "place": "First three sentences: input domains and uniform finite-level amplitudes"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-stratified-perfect-characterization] to $K,L$. Its identification with the detailed integral category gives compatible bounded-below etale-origin witnesses, through [def-weil-pbc-bounded-constructible-complete]. By [lem-weil-pbc-finite-ring-constructible-derived-origin] choose bounded constructible etale representatives for each finite reduction; its equivalence preserves and reflects every cohomological interval. Full faithfulness on bounded-below complexes [thm-weil-pbc-site-comparison] identifies the earlier compatible witnesses with these representatives, so the compatible witnesses are themselves bounded constructible. In particular the etale witness for $L_n$ has Tor amplitude $[c,e]$ by clause (ii) of [lem-sf-comparison-tor-amplitude]. Apply [lem-weil-finite-compact-projection-formula] to these bounded constructible etale witnesses, with the Tor interval $[c,e]$ for the second input. Its hypotheses require a separated finite-type morphism of finite-type schemes, as in the datum; the schemes themselves need not be separated. Its explicit pro-etale clause states that their realizations have exactly the finite constant-coefficient projection composite of [def-exchange-projection], and that it is an isomorphism. Thus every $\\operatorname{PF}_{f,K_n,L_n}$ is an isomorphism; the etale and pro-etale categories have not been silently identified.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-bounded-constructible-complete",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-finite-compact-projection-formula",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+    "place": "Finite-level isomorphisms; making the site-comparison domain explicit"
+   }
+  },
+  {
+   "text": "Put $B=Rf_!K$, $H=K\\widehat\\otimes_R^L Lf^*L$, $S=B\\widehat\\otimes_R^L L$, and $T=Rf_!H$. By [lem-coef-integral-compact-support], applied with the interval $[a,b]$ and the chosen $d$, $B$ is integral bounded constructible and its canonical reductions are $Rf_{!,n}K_n$, with Tor amplitude $[a,b+2d]$. By [lem-pur-integral-operations-preserve-constructible], $Lf^*L,H,S$ are integral bounded constructible and their reductions are the finite pullbacks and tensors displayed in that node. To apply compact support to $H$, use [lem-coef-integral-residue-tor]: choose any interval bounding the bounded residue complex $H_1$; the same interval is a Tor interval for every $H_n$. The zero residue complex admits any interval, so this also covers $H=0$. A second application of [lem-coef-integral-compact-support] gives $T$ integral bounded constructible. In particular $S,T$ are derived complete and have uniformly bounded constructible reductions. The canonical operation comparisons identify their levels with $S_n=Rf_{!,n}K_n\\otimes_{A_n}^L L_n$ and $T_n=Rf_{!,n}(K_n\\otimes_{A_n}^L Lf_n^*L_n)$.",
+   "uses": [
+    "lem-coef-integral-compact-support",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+    "place": "Uniform bounds and derived completeness of the projection source and target"
+   }
+  },
+  {
+   "text": "Let $\\alpha:S\\to T$ be the specified integral projection transformation computed at a chosen compactification $f=pj$ by the formula of [def-exchange-projection]. Namely $\\alpha=Rp_*(\\gamma)\\circ\\pi_p$, where $\\pi_p=Rp_*(a_p)\\circ\\eta_p$ and $a_p=(\\varepsilon_p\\otimes1)\\circ\\mu_p$; $\\gamma$ is the open-extension tensor comparison followed by pullback composition. By [lem-fix-operation-reduction], integral reduction commutes with each operation in this composite and preserves its tensor comparisons, units and counits. Reducing the displayed composite therefore gives, in its displayed order, $Rp_{*,n}(\\gamma_n)\\circ Rp_{*,n}(a_{p,n})\\circ\\eta_{p,n}=\\operatorname{PF}_{f,K_n,L_n}$. Thus, if $s_n$ and $t_n$ are the canonical source and target comparisons from step 3, then $t_n\\circ(\\alpha\\otimes_R^L A_n)=\\operatorname{PF}_{f,K_n,L_n}\\circ s_n$. Finite-to-finite compatibility of these arrows is the commutative square in [prop-sf-pf-reduction], with the same canonical operation comparisons. This argument identifies the maps by their defining composite, not by conservativity.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-fix-operation-reduction",
+    "prop-sf-pf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+    "place": "Reduction compatibility and repair of the final map-identification sentence"
+   }
+  },
+  {
+   "text": "Use the actual functor $\\mathcal R_Y$ of [lem-coef-derived-system-evaluation-calculus], applied to $\\alpha$, to obtain a morphism $\\mathcal R_Y\\alpha:\\mathcal R_YS\\to\\mathcal R_YT$ in the derived category of strict varying-coefficient systems. Thus a coherent system morphism exists before passing to its evaluated arrows; it has not been inferred merely from commuting squares in a triangulated category. These reduction systems are normalized in the sense of [def-coef-normalized-dvr-tower]: write $B_n=(A_n)_Y$ and $\\widehat R_Y=\\varprojlim_n B_n$. For one flat-term K-flat $\\widehat R_Y$-representative $Q$ of either integral object the comparison is $(Q\\otimes_{\\widehat R_Y}B_m)\\otimes^L_{B_m}B_n\\cong Q\\otimes_{\\widehat R_Y}B_n$, for $m\\geq n$. Indeed $Q\\otimes_{\\widehat R_Y}B_m$ is K-flat over $B_m$: its tensor with an acyclic $B_m$-complex is $Q$ tensored over $\\widehat R_Y$ with that same underlying acyclic complex. Ordinary tensor associativity then computes the displayed derived comparison. The quotient maps compose strictly, and hence satisfy the quotient cocycle. Under the canonical operation comparisons in step 4 its level maps are exactly $\\operatorname{PF}_{f,K_n,L_n}$. This supplies the coherent meaning of the claimed morphism of normalized systems.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+    "place": "Realizing the compatible finite maps as an actual derived-system morphism"
+   }
+  },
+  {
+   "text": "The reconstruction lemma requires common integral local models, not only uniform cohomological bounds. For each of $S,T$, [lem-weil-pbc-integral-stratified-perfect-characterization] identifies membership in the detailed integral category with membership in [def-weil-pbc-bounded-constructible-complete]. The latter definition supplies precisely the uniformly bounded constructible reduction tower of [def-weil-pbc-bounded-constructible-tower], including a common finite stratification, integral local complexes, and compatible normalization. Thus all hypotheses of [lem-weil-pbc-reconstruction-uniform-tower] hold for these two towers. For $P=S,T$, apply it to the underlying completed-coefficient tower and put $M_P=\\mathcal L_Y\\mathcal R_YP$. It gives intrinsic derived completeness of $M_P$ and canonical isomorphisms $(M_P)_n\\to P_n$ adjoint to the derived-limit projections. By [lem-coef-derived-system-evaluation-calculus] these are exactly the evaluations of the counit $e_{\\mathcal R_YP}:\\mathcal R_Y\\mathcal L_Y\\mathcal R_YP\\to\\mathcal R_YP$. The triangle identity $e_{\\mathcal R_YP}\\circ\\mathcal R_Y(u_P)=1$ therefore makes every evaluation of $\\mathcal R_Y(u_P)$ an isomorphism. Both $P$ and $M_P$ are intrinsically complete, so [lem-weil-pbc-levelwise-isomorphism-cones] implies that $u_P:P\\to M_P$ is an isomorphism. In particular $u_S,u_T$ are isomorphisms. This verifies the actual canonical units without any uniqueness claim for maps with the same finite reductions.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-reconstruction-uniform-tower",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-levelwise-isomorphism-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+    "place": "Uniform-tower reconstruction, with its common-local-model hypotheses supplied"
+   }
+  },
+  {
+   "text": "Apply the total derived limit $\\mathcal L_Y$ to the system morphism of step 5. Naturality of the unit in [lem-coef-derived-system-evaluation-calculus] is the equality $u_T\\circ\\alpha=\\mathcal L_Y(\\mathcal R_Y\\alpha)\\circ u_S$. Consequently the map realized from this coherent finite system, transported to $S,T$ by step 6, is exactly $u_T^{-1}\\circ\\mathcal L_Y(\\mathcal R_Y\\alpha)\\circ u_S=\\alpha$. Every finite reduction of $\\alpha$ is the isomorphism in step 2 by step 4. Since $S,T$ are derived complete (also in the intrinsic sense supplied by the characterization in step 6), [lem-weil-pbc-levelwise-isomorphism-cones] makes $\\alpha$ an isomorphism. The operation comparisons and the reduction functor are canonical and natural, so the formula proves the specified integral projection isomorphism and its compatibility at every finite level. No faithfulness of the family of evaluated reduction functors on morphisms is claimed.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-levelwise-isomorphism-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+    "place": "Conservativity gives invertibility; naturality identifies the realized map with the specified projection"
+   }
   }
  ],
  "proof_deps": [
-  "def-sf-pf",
+  "def-sf-datum",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
   "def-weil-derived-complete-integral-detailed",
-  "thm-sf-pf-finite",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-compact-projection-formula",
+  "def-exchange-projection",
+  "lem-coef-integral-compact-support",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-coef-integral-residue-tor",
+  "lem-fix-operation-reduction",
   "prop-sf-pf-reduction",
-  "lem-weil-pbc-reconstruction-uniform-tower"
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "lem-weil-pbc-levelwise-isomorphism-cones"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-pf-adic/thm-sf-pf-adic.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-sf-pf-adic.proof.md",
+  "place": "Complete proof; finite-level, normalized strict-system reconstruction and conservativity route, with the final equality repaired by naturality"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula for compact support derived complete integral coefficients",
+   "results": "HasCompactSupport.integral_Iic_deriv_eq, HasCompactSupport.deriv, TestFunction.coe_ofSupportedIn, HasCompactSupport.integral_Ioi_deriv_eq, ContDiffMapSupportedIn.coe_of_support_subset, HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.fderiv, ContDiffMapSupportedIn.compact_supp",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary module adic completion, inverse systems of sets, or compactly supported functions; none states the derived sheaf compact-support projection formula or its coherent normalized-system reconstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "hasProjectionFormula|projectionMap|derivedComplete|projection_formula",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible finite coefficient projection isomorphisms reconstruct an integral isomorphism by derived inverse limit",
+   "results": "AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivOfFintype, AdicCompletion.piEquivOfFintype_apply, AdicCompletion.piEquivFin, AdicCompletion.sumEquivOfFintype_symm_apply, InverseSystem.invLimEquiv_symm_apply_coe, InverseSystem.invLimEquiv, AdicCompletion.sumEquivOfFintype_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary module adic completion, inverse systems of sets, or compactly supported functions; none states the derived sheaf compact-support projection formula or its coherent normalized-system reconstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived complete compact support projection formula over integral adic sheaves with finite reductions",
+   "results": "AdicCompletion.eval_comp_of, AdicCompletion.pi_apply_coe, AdicCompletion.eval_of, AdicCompletion.of_apply, AdicCompletion.factor_eval_eq_evalₐ, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.map_val_apply, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary module adic completion, inverse systems of sets, or compactly supported functions; none states the derived sheaf compact-support projection formula or its coherent normalized-system reconstruction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -69,5 +216,89 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-pf-adic"
+ "unit": "sk-thm-sf-pf-adic",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-pf-adic",
+  "worker": "stage1",
+  "summary": "Seven steps over existing nodes. Uniform Tor bounds are read from the hypothesis; finite etale and pro-etale domains are distinguished; constructibility and local models are supplied before reconstruction. The coherent tower map is reduction of the specified projection; adjunction-unit naturality identifies its reconstruction, avoiding the false conservativity-implies-equality inference. No new nodes. The inherited statement is expanded into a self-contained formulation binding f and all coefficient, scheme and category data, without changing its hypotheses or conclusion.",
+  "blueprint": "Current main-20261015 thm-sf-pf-adic.proof.md has the same statement and argument as the recorded master item. Steps 1-2 realize finite projection, steps 3-5 reduction compatibility and bounded normalized systems, step 6 the uniform-tower reconstruction, and step 7 conservativity. The final detailed-proof identification is repaired by naturality without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks the Noetherian scheme hypothesis of integral local-model reconstruction; generic scheme finiteness tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies a finite dimension bound needed by compact-support amplitude and reconstruction."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Supplies compatible etale-origin witnesses and common integral local models, missing from mere uniform bounds."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Supplies and reflects bounded constructibility of the finite etale-origin witnesses."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Transfers the uniform Tor interval to etale-origin witnesses before the ordinary etale finite projection theorem."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Its explicit finite pro-etale realization clause identifies the finite projection theorem with the pro-etale operation composite."
+   },
+   {
+    "node": "lem-coef-integral-compact-support",
+    "why": "Generic preservation, uniform amplitude and canonical finite reduction of integral compact support, applied twice."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic preservation and canonical reduction formulas for completed integral pullback and tensor."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Supplies uniform finite-level Tor amplitude for the tensor input to the second compact-support application."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic coherent reduction functor and reduction-limit adjunction; needed for an actual tower morphism and its naturality identity."
+   },
+   {
+    "node": "lem-weil-pbc-reconstruction-uniform-tower",
+    "why": "The uniform-tower reconstruction explicitly required by the unit route; hypotheses are verified via existing integral local models."
+   },
+   {
+    "node": "lem-weil-pbc-levelwise-isomorphism-cones",
+    "why": "Generic conservativity of finite reduction on intrinsically derived-complete objects."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic full faithfulness on bounded-below finite coefficient complexes identifies compatible etale witnesses with bounded constructible representatives; the unit has no comparison theorem of its own."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-coef-integral-compact-support",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "lem-weil-pbc-levelwise-isomorphism-cones",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-a2366e2dc",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-a2366e2dc (reviewer sub-agent of L); spot-checked: Read in full: the item, the unit and chapter records, all 23 cited statements plus def-sf-pf, thm-sf-pf-finite, def-fix-six-functor-datum, def-weil-pbc-adic-coefficient-datum and the definitions of completeness and constructibility, and the master and main-20261015 blueprint thm-sf-pf-adic plus the sk-thm-sf-pf-adic files. The delivery adds no new nodes. The diff in the unit is limited to realized/realized_by. Citations in steps equal uses, the union of uses equals proof_deps, statement citations equal stmt_deps, no cycle, no SGA. Statement: the expansion of def-sf-datum follows def-fix-six-functor-datum: X and Y are of finite type, only f is separated, so nothing is added. Coefficients are the completed \\widehat R on pro-étale sites, matching Bhatt–Scholze Def 6.5.1. All three conclusions are kept, so the target is not weakened. Edge cases checked: empty X, f=id, K and L the unit objects, L=(A_1)_Y with uniform Tor amplitude [-1,0], n=1, m=n. Steps: (1) Noetherian and finite dimension come from finite type over k, and the uniform Tor intervals are hypotheses. (2) The characterization, finite-ring étale origin and D^+ full faithfulness give étale witnesses. Comparison-Tor (ii) applies with a bounded-below witness. lem-weil-finite-compact-projection-formula has the right domain and its pro-étale clause names the def-exchange-projection composite; avoiding thm-sf-pf-finite is justified because it requires X and Y separated. (3) Two compact-support applications, each with the required d and uniform Tor interval; the second uses the residue-Tor lemma on H. (4) The integral composite is reduced through the supplied reduction data of def-exchange-projection and lem-fix-operation-reduction, and prop-sf-pf-reduction gives the finite square. (5) R_Y is a functor on the derived category; the K-flat normalization argument is correct. (6) U_Y R_Y P is the normalized reduction tower of the adic datum, so the reconstruction hypotheses hold. The counit evaluations are invertible, so by the triangle identity and levelwise-isomorphism-cones the unit u_P is an isomorphism. (7) Unit naturality identifies the reconstructed map with α, and conservativity is used only to show α is an isomorphism. I confirm the reported source error: the blueprint infers that two maps are equal from conservativity, which is invalid (the Bockstein F_p→F_p[1] shows it), and the naturality repair keeps the unit's route. I accept all tool_uses declared in split_report, the pbc reconstruction and characterization nodes, the coef integral and evaluation-calculus nodes, comparison-Tor and site comparison, as generic black boxes. No changes made."
+ }
 }

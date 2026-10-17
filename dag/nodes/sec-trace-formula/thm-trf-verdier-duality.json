@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-verdier-duality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "External duality for the fixed-point trace",
@@ -18,58 +18,160 @@
   "def-trf-dualizing-complex",
   "def-trf-external-product",
   "def-weil-exceptional-inverse-image",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-trf-admissibility",
+  "def-trf-trace-class-source",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "Step 1 (the first comparison). Apply the Kunneth–Verdier isomorphism\n[thm-trf-kunneth-verdier] of the trace-formula chapter to the case\n$X=Y$, $M=N=K$. With the projections $p_1,p_2:X\\times_sX\\to X$,\nits source $M\\boxtimes_A^{\\mathrm L}D_YN$ becomes\n$K\\boxtimes_A^{\\mathrm L}D_XK$ and its target\n$\\RHom_A(p_Y^*N,p_X^!M)$ becomes\n$\\RHom_A(p_2^*K,p_1^!K)$, so\n\n$$\n\\kappa_{K,K}:K\\boxtimes_A^{\\mathrm L}D_XK\n\\xrightarrow{\\ \\sim\\ }\n\\RHom_A(p_2^*K,p_1^!K)\n$$\n\nis the first display, read in the inverse direction.",
+   "text": "Put $Z=X\\times_sX$, $U=Lp_2^*K$, $V=Rp_1^!K$, and $B=K\\boxtimes_A^L D_XK$. The dualizing complex and $D_X$ are those of the current [def-trf-dualizing-complex]: $D_X$ is contravariant from $D^b_{ctf}(X,A)$ into the ambient $D(X_{\\mathrm{proet}},A)$, with $D_XK=R\\mathcal Hom_A(K,Ra_X^!A_s)$. Its setup supplies the required admissibility of the structure morphism of $X$. No preservation or biduality claim for $D_X$ is inferred merely from this definition. The assumed admissibility of $p_1$ supplies the other hypothesis of [thm-trf-kunneth-verdier]. Apply that theorem with $Y=X$ and $M=N=K$. Its specified canonical map is an isomorphism $\\kappa=\\kappa_{K,K}:B\\xrightarrow{\\sim}R\\mathcal Hom_A(U,V)$. Take $\\kappa^{-1}$ for the first displayed isomorphism. In particular the first factor of $B$ is $K$ and its second is $D_XK$; no interchange of these factors is made.",
    "uses": [
+    "def-trf-dualizing-complex",
     "thm-trf-kunneth-verdier"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+    "place": "Step 1: specialize the Kunneth–Verdier map and invert it"
+   }
   },
   {
-   "text": "Step 2 (the second comparison). By [def-trf-trace-class-source],\n\n$$\n\\mathcal H_c(K)=R\\mathcal Hom_A\\bigl(Lc_2^*K,Rc_1^!K\\bigr) .\n$$",
+   "text": "Work at $\\Lambda=A=A_{E,n}$ in the current [def-sf-kv-maps]. The scheme $X$ is separated of finite type by the correspondence setup, so the pairs of schemes $(X,s)$ and $(X,X)$ satisfy that definition's separated finite-type hypotheses. Its finite-stage geometric exceptional functors and counits are expressly the constructible admissibility datum. Clause (iv) puts $\\omega_{X,A}$ and $D_XK$ in the required finite-Tor categories; its external-product and tensor domain assertions put $B=K\\boxtimes_A^L D_XK$ and $T=K\\boxtimes_A^L\\omega_{X,A}$ there too. Here are the compatibility identities for this specified map, rather than for an arbitrary isomorphism of its source and target. By [def-sf-kv-maps] (iii)–(iv), $\\kappa=R\\mathcal Hom(1,\\alpha)\\circ\\beta$, where $\\alpha:K\\boxtimes_A^L\\omega_{X,A}\\to Rp_1^!K$. Consequently evaluation after $\\kappa\\otimes1_U$ is the composite\n$$B\\otimes_A^LU\\simeq Lp_1^*K\\otimes_A^LLp_2^*(D_XK\\otimes_A^LK)\\xrightarrow{1\\otimes Lp_2^*\\operatorname{ev}_K}K\\boxtimes_A^L\\omega_{X,A}\\xrightarrow{\\alpha}V.$$\nIndeed (iii) defines $\\beta$ as the transpose of the two evaluations, and (iv) identifies the first evaluation $R\\mathcal Hom(A_X,K)=K$ with the unit identification. The remaining evaluation is exactly $\\operatorname{ev}_K$ of [def-trf-dualizing-complex]. The identification of $Lp_2^*D_XK\\otimes_A^LLp_2^*K$ with $Lp_2^*(D_XK\\otimes_A^LK)$ is the inverse of the natural derived pullback–tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the constant-coefficient ringed pro-etale sites. All tensor reassociations and symmetries in this identity use the signs specified in (iii). For exceptional adjunction, denote the displayed map before $\\alpha$ by $e:E=B\\otimes_A^LU\\to T=K\\boxtimes_A^L\\omega_{X,A}$, with external products defined in [def-trf-external-product], and put $h=\\alpha\\circ e$. Write $\\varepsilon_{p_1,K}:Rp_{1!}Rp_1^!K\\to K$ and $\\varepsilon_{a_X,A}:Ra_{X!}\\omega_{X,A}\\to A_s$ for the counits. Clause (ii) of [def-sf-kv-maps], with $(f_1,f_2)=(\\operatorname{id}_X,a_X)$, says that the exceptional adjoint of $\\alpha$ is $(1_K\\boxtimes\\varepsilon_{a_X,A})\\circ\\mathrm{Ku}_!$, using the identity-functor and unit identifications. Naturality of the adjunction in its source therefore gives the explicit identity\n$$\\varepsilon_{p_1,K}\\circ Rp_{1!}(h)=(1_K\\boxtimes\\varepsilon_{a_X,A})\\circ\\mathrm{Ku}_!\\circ Rp_{1!}(e):Rp_{1!}E\\longrightarrow K.$$\nThus taking the tensor–Hom transpose of $\\kappa$ gives $h$, and then taking its exceptional adjoint gives exactly the displayed counit composite. This is the exceptional tensor–Hom compatibility. These equalities for $\\kappa$ give the equalities for $\\kappa^{-1}$ by composing with $\\kappa^{-1}$ on the appropriate side. They follow by the defining transpose identities, with no additional dualizability or site-perfectness assertion.",
    "uses": [
-    "def-trf-trace-class-source"
+    "def-sf-kv-maps",
+    "def-trf-dualizing-complex",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-trf-external-product"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+    "place": "Step 3: evaluation and exceptional tensor–Hom compatibility, expanded using the definition of the maps"
+   }
   },
   {
-   "text": "Since $Lc_2^*=c^*p_2^*$ and $Rc_1^!=(p_1c)^!=c^!p_1^!$ by the\ncomposition identities of the six-operation package, the exceptional\ninternal-Hom exchange [lem-trf-exceptional-internal-hom-exchange],\napplied to the admissible $c$ with $M=p_2^*K$ and $N=p_1^!K$, gives\n\n$$\nR\\mathcal Hom_A\\bigl(c^*p_2^*K,c^!p_1^!K\\bigr)\n\\cong\nc^!R\\mathcal Hom_A(p_2^*K,p_1^!K).\n$$",
+   "text": "By [def-trf-trace-class-source], $\\mathcal H_c(K)=R\\mathcal Hom_A(Lc_2^*K,Rc_1^!K)$. Since $c_i=p_i\\circ c$, the pullback composition isomorphism [lem-weil-pbc-proetale-derived-pullback-composition] gives $Lc_2^*K\\simeq Lc^*U$. Its ring-identification hypothesis holds for the constant coefficient sheaves: the canonical constant-ring maps of [prop-weil-pbc-proetale-constant-ring-map] and their composite both send a constant $a\\in A$ to the same constant $a$, so agree by the universal property of the constant sheaf. The current [def-trf-admissibility] explicitly specifies $R(hf)^!\\cong Rf^!Rh^!$ for composable separated finite-type morphisms as the conjugate of compact-support composition. Taking $f=c$ and $h=p_1$, which satisfy these hypotheses by assumption, gives $Rc_1^!K\\simeq Rc^!V$. Thus\n$$\\mathcal H_c(K)\\simeq R\\mathcal Hom_A(Lc^*U,Rc^!V).$$\nOnly constructible exceptional functors and their composition identifications are used here.",
    "uses": [
-    "lem-trf-exceptional-internal-hom-exchange"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Composing with the inverse of Step 1 under $c^!$ yields the second\ndisplay.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Step 3 (compatibilities). The isomorphism of Step 1 is $\\kappa_{K,K}$,\nwhich by its construction in [thm-trf-kunneth-verdier] is the\nadjoint-canonical comparison, hence compatible with evaluation and with\nthe tensor–Hom adjunction; the exchange of Step 2 is likewise\nadjoint-canonical by [def-trf-admissibility]. Both compatibilities\ntherefore hold.",
-   "uses": [
-    "thm-trf-kunneth-verdier",
+    "def-trf-trace-class-source",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "prop-weil-pbc-proetale-constant-ring-map",
     "def-trf-admissibility"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+    "place": "Step 2: identify the trace-class source using the two composition comparisons"
+   }
+  },
+  {
+   "text": "The input $U=Lp_2^*K$ is in $D^b_{ctf}(Z,A)$ by [lem-sf-pullback-tor-amplitude]: $p_2$ is a separated finite-type map of finite-type $k$-schemes by its assumed admissibility. The input $V=Rp_1^!K$ is in the same category because the datum of [def-trf-admissibility] specifies $Rp_1^!$ with precisely this codomain. The total map $c$ is exceptionally admissible by hypothesis, hence admissible at this fixed $A$ and separated of finite type. Its source $C$ and target $Z=X\\times_sX$ are finite-type $k$-schemes. These are exactly the current hypotheses of [lem-trf-exceptional-internal-hom-exchange] with $M=U$ and $N=V$. Its canonical comparison therefore gives the natural isomorphism\n$$\\xi:R\\mathcal Hom_A(Lc^*U,Rc^!V)\\xrightarrow{\\sim}Rc^!R\\mathcal Hom_A(U,V).$$\nThe first variable is the ordinary pullback $Lc^*U$ and the second the exceptional pullback $Rc^!V$, as required by that statement. We use its displayed isomorphism and naturality only.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "def-trf-admissibility",
+    "lem-trf-exceptional-internal-hom-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+    "place": "Step 2: check both finite-Tor inputs before applying exceptional internal-Hom exchange"
+   }
+  },
+  {
+   "text": "Compose the isomorphism of Step 3, $\\xi$ of Step 4, and $Rc^!(\\kappa^{-1})$ of Step 1:\n$$\\mathcal H_c(K)\\xrightarrow{\\sim}R\\mathcal Hom_A(Lc^*U,Rc^!V)\\xrightarrow{\\xi}Rc^!R\\mathcal Hom_A(U,V)\\xrightarrow{Rc^!(\\kappa^{-1})}Rc^!B.$$\nStep 2 places $B$ in the finite-Tor constructible domain of $Rc^!$; Step 4 applies the exchange to the finite-Tor inputs $U,V$, so its displayed $Rc^!R\\mathcal Hom_A(U,V)$ is defined as well. Thus $Rc^!$ applies to $\\kappa^{-1}$ and its inverse on their stated constructible domains. A functor sends an isomorphism and its inverse to inverse morphisms, so the last arrow is invertible. This proves the second display. The comparisons used are natural in their inputs, so their composite is natural as well. Step 2 supplies the evaluation and exceptional tensor–Hom identities for the external-duality identification used in this composite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+    "place": "Step 2, final sentence: apply the exceptional functor to the inverse of Step 1 and compose"
+   }
   }
  ],
  "proof_deps": [
+  "def-trf-dualizing-complex",
   "thm-trf-kunneth-verdier",
+  "def-sf-kv-maps",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-trf-external-product",
   "def-trf-trace-class-source",
-  "lem-trf-exceptional-internal-hom-exchange",
-  "def-trf-admissibility"
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-trf-admissibility",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-trf-exceptional-internal-hom-exchange"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+  "place": "Steps 1–3, with composition hypotheses and the evaluation transpose identities made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier external duality for constructible etale sheaves, external product with Verdier dual is exceptional internal Hom",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, instMonoidalClosedLightCondSet, instMonoidalClosedCondensedSet, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state external Verdier duality for finite-Tor constructible complexes or its trace-source comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|exceptionalInverse|externalHom|kunnethVerdier",
+   "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean, Mathlib/Algebra/Homology/SpectralObject/Differentials.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state external Verdier duality for finite-Tor constructible complexes or its trace-source comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "External tensor product with Verdier dual represents internal Hom from pullback into exceptional pullback for constructible sheaves",
+   "results": "8 hits; CategoryTheory.MonoidalCategory.ExternalProduct.term_⊠_, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.Types.tensorProductAdjunction, CategoryTheory.MonoidalCategory.externalProduct, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Over.tensorObj_hom, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state external Verdier duality for finite-Tor constructible complexes or its trace-source comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "12 hits; CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state external Verdier duality for finite-Tor constructible complexes or its trace-source comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|dualizing|kunneth|Verdier",
+   "results": "0 hits; none; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state external Verdier duality for finite-Tor constructible complexes or its trace-source comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafHom\"",
+   "results": "12 hits; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom, CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom_naturality, CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom_naturality_assoc, CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_presheafHom_uliftYoneda_obj, CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_ι_presheafHom, CategoryTheory.Functor.IsCoverDense.Types.presheafHom, CategoryTheory.Functor.IsCoverDense.sheafHom, CategoryTheory.Functor.IsCoverDense.sheafHom_eq",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state external Verdier duality for finite-Tor constructible complexes or its trace-source comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For separated finite type schemes over a field, Kunneth Verdier isomorphism K external tensor D K equals derived sheaf Hom of projection pullback K into exceptional pullback K",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.instBraidedCategoryScheme, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state external Verdier duality for finite-Tor constructible complexes or its trace-source comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of modules dualizing complex evaluation external tensor product derived internal Hom shriek pullback",
+   "results": "8 hits; SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackPushforwardAdjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match: module-sheaf pullback adjunctions, monoidal closed structures, and unrelated uses of dualizing do not state geometric external Verdier duality or the trace-source comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|upperShriek|kunnethVerdier",
+   "results": "10 hits; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Data/Set/Defs.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: module-sheaf pullback adjunctions, monoidal closed structures, and unrelated uses of dualizing do not state geometric external Verdier duality or the trace-source comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -108,5 +210,49 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-trace-class"
+ "unit": "sk-d-trace-class",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-verdier-duality",
+  "worker": "stage1",
+  "summary": "Kept the statement and current blueprint route; specialized the existing Kunneth–Verdier theorem, expanded its evaluation and exceptional-adjunction identities from the definition of the product maps, cited the pullback and exceptional composition data, checked both finite-Tor inputs to internal-Hom exchange, and wrote the final composite. No new nodes. No exact project attachment or Mathlib match was found. Second reading expanded the exceptional counit equation and cited the external-product definition. Repair after citation drift revalidated the current dualizing definition and admissibility statement, clarified the ambient target of D_X and the exact exceptional composition comparison, and refreshed their verbatim citation quotes. The present landing-return repair revalidates the current exceptional internal-Hom exchange statement and the newer product-map definition, records the finite-stage separated-scheme and constructible-domain checks in Steps 2, 4 and 5, and refreshes both changed citation quotes. The exchange conclusion and its hypotheses remain applicable; only its obsolete attribution of the false-variant warning was removed upstream.",
+  "blueprint": "Step 1 is blueprint proof Step 1; Step 2 expands blueprint Step 3 using def-sf-kv-maps (ii)–(iv); Steps 3–5 realize blueprint Step 2.",
+  "tool_uses": [
+   {
+    "node": "thm-trf-kunneth-verdier",
+    "why": "The general external-duality isomorphism is the exact generic tool explicitly invoked in the blueprint proof; this unit specializes it to M=N=K."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic constant-coefficient derived pullback composition, used to identify the ordinary leg c_2=p_2 c; this trace-class unit does not prove pullback pseudofunctoriality."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic canonical constant-ring identification needed to type the derived pullback composition; it is not a trace-class assertion."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic finite-stage preservation under pullback, needed to check the first input of the unit’s internal-Hom exchange; it is not proved by the trace-class construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic compatibility of derived module pullback with tensor, used only to write the defining external evaluation as a map via p_2^*(D_X K tensor K); no trace construction is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-trf-kunneth-verdier",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-7e94c59a6",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-7e94c59a6 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement (with the main-20261015 updates of def-sf-kv-maps, def-trf-admissibility and lem-sf-pullback-tor-amplitude), the current blueprint statement and proof, and Varshavsky §1.2.2(a) for the leg conventions. The statement matches the blueprint word for word, with A_{E,n}, D^b_ctf, admissible c, p_1 and p_2, ordinary p_2^* and exceptional p_1^!, and factor order K⊠D_XK. Step 1: thm-trf-kunneth-verdier at Y=X, M=N=K has p_X=p_1 (assumed admissible) and p_Y=p_2, so the order is right and inverting κ gives the first display. Step 2: κ=RHom(1,α)∘β by def-sf-kv-maps (iv); unfolding (iii) and (ii) gives the evaluation identity, and the exceptional-adjoint identity ε_{p1}∘Rp_{1!}(αe)=(1⊠ε_{a_X})∘Ku_!∘Rp_{1!}e is correct. The schemes satisfy the separated finite-type hypotheses and the domains are ctf by (ii) and (iv). Step 3: pullback composition L(p_2c)^*≅Lc^*Lp_2^*; the composite ring identification equals the direct constant-ring map because both preserve constants; def-trf-admissibility gives Rc_1^!≅Rc^!Rp_1^!. Step 4: U is in D^b_ctf by lem-sf-pullback-tor-amplitude, V by the typed codomain of Rp_1^!, c is separated finite type and admissible, and the exchange is applied in its stated direction. Step 5 is elementary composition. The route matches the blueprint's three steps; the blueprint's appeal to 'by construction' (C3) is replaced by an explicit unfolding. All four citers use exactly this ξ. proof_deps equals the union of uses, all ids exist and are unmerged, and there is no cycle. There are no new nodes, and the DAG grep found no duplicate. I accept the five declared tool_uses: Künneth–Verdier, pullback composition, constant ring map, pullback Tor amplitude, pullback–tensor. Edge cases checked: point, K=0, empty C, a shift with Koszul signs, singular support. Minor: naturality of κ is only implicit, but it is elementary from the definition. No SGA used. No fixes."
+ }
 }

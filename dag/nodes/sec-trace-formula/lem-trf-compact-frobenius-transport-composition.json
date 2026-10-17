@@ -18,9 +18,125 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-weil-compactifications-refinements"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first with the specified representative $F=Rp_*j_!$ of $Ra_{X!}$ and put $J=j_!$, $R=Rp_*$, $B_r=L(\\bar g^r)^*$, where $\\bar g=\\operatorname{id}_{\\overline X_0}\\times\\operatorname{Spec}(\\gamma)$. The degree-one squares for $p$ and $j$ commute and are Cartesian by [lem-weil-frobenius-square-cartesian], applied to $p_0$ and $j_0$. Their power squares also commute: from $p\\bar g=hp$ and $j g=\\bar g j$ obtain $p\\bar g^r=h^rp$ and $j g^r=\\bar g^rj$ by induction. All horizontal maps are isomorphisms, since their inverses are the corresponding powers of the inverses. Such a commuting square is Cartesian: for maps $x:T\\to\\overline X$ and $y:T\\to s$ with $p x=h^r y$, its unique lift is $\\bar g^{-r}x$, since $p\\bar g^{-r}x=h^{-r}px=y$; for the open square, given $x:T\\to X$ and $y:T\\to\\overline X$ with $jx=\\bar g^ry$, its unique lift is $g^{-r}x$, since $jg^{-r}x=\\bar g^{-r}jx=y$. Thus the power squares have precisely the identifications used in the item. By [lem-weil-isomorphism-derived-pullback], each $P_r$ preserves $D^b_c(X,A)$, so in particular $\\tau^{(1)}_{c,P_mM}$ is defined. No horizontal map is required to be a $k$-morphism.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "lem-weil-isomorphism-derived-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10)-(1.1.11), pp. 151-152; explicit powers and Cartesian-square calculation"
+   }
+  },
+  {
+   "text": "Write $t_m:Q_1Q_m\\xrightarrow{\\sim}Q_{m+1}$, $d_m:B_1B_m\\xrightarrow{\\sim}B_{m+1}$, and $c_m:P_1P_m\\xrightarrow{\\sim}P_{m+1}$ for the inverses of [lem-weil-pbc-proetale-derived-pullback-composition]. These are natural comparisons, not identifications chosen independently for different powers. We will also use that the pullback square comparisons for two successive squares paste to the outer square comparison. Here this follows directly from the stated termwise normalization of that node and [def-weil-proetale-inverse-image]: a pullback section is locally represented by a section $x$ at an inverse-image index and a scalar tensor factor; a successive pullback uses a chain of such indices. Flattening three inverse-image indices in either order composes the same three arrows, and sends the iterated tensor $((x\\otimes a)\\otimes b)\\otimes c$ to $x\\otimes u^*v^*(a)\\,u^*(b)c$ in either order. This uses associativity of multiplication and compatibility of the constant-ring maps, which send each constant scalar to itself by their definition. This also checks equality of the ring-sheaf maps: a section of a constant sheaf is locally represented by constant scalars, and equality can be checked after a cover. Hence the two reassociations agree on every coprojection and every pure tensor, and therefore on their colimits and sheafifications. In the notation $L=Lp^*$ and $\\theta_r:LQ_r\\to B_rL$ for the square comparison of [def-weil-pbc-ambient-ringed-exchange], the resulting equation is explicitly $$\\theta_{m+1}\\circ L(t_m)=(d_mL)\\circ(B_1\\theta_m)\\circ(\\theta_1Q_m):LQ_1Q_m\\longrightarrow B_{m+1}L.$$ Indeed the two routes flatten the inverse-image indices to the same composite $p\\bar g^{m+1}=h^{m+1}p$, and the displayed tensor calculation identifies their scalar factors. This is the equation needed before taking mates. At finite constant coefficients the pullbacks are exact termwise functors by [def-weil-pbc-proetale-operations]; [lem-weil-pbc-localization-universal-property] (2)-(3) carries these equalities to the derived functors with exactly the above comparisons. To check this last identification, evaluate on a K-flat resolution with flat terms, where the composition node specifies precisely these termwise maps; naturality with the resolution quasi-isomorphism then identifies them on any representative, since every pullback here is exact.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; Modules on Sites Tag 03D8, lemma-push-pull-composition-modules; explicit associativity check for the specified comparisons"
+   }
+  },
+  {
+   "text": "Let $N$ be any complex of $A_s$-modules. Clause 1 of [lem-weil-proetale-isomorphism-inverse-image] identifies $(h^r)^{-1}N(U\\xrightarrow{u}s)$ with $N(U\\xrightarrow{h^r u}s)$. In the colimit construction of [def-weil-proetale-inverse-image], this identification sends the coprojection indexed by $(V,\\phi)$ to restriction along the map $U\\to V$ underlying $\\phi$; indeed $\\phi$ is equivalent to a map $(U,h^r u)\\to V$. The object $((U,h^r u),\\operatorname{id})$ is initial in that indexing category, and final after taking its opposite, so its coprojection gives the stated evaluation identification. In particular the distinguished insertion at $U=(s,\\operatorname{id})$, $V=(s,h^r)$ is the identity in these coordinates. Thus [def-weil-frobenius-point-transport] sends $x\\in N^i(s,\\operatorname{id})$ to $\\operatorname{res}_{h^r}(x)\\otimes1$ in $Q_rN$, the tensor factor being exactly the finite-level map of [def-weil-inverse-image-pullback-comparison]. Two successive transports first restrict along $h^m$, then along $h$ in the reindexed sheaf, and give $(\\operatorname{res}_{h^{m+1}}x\\otimes1)\\otimes1$: restrictions compose along $h^m\\circ h=h^{m+1}$. The inverse composition comparison $t_m$ flattens the latter to $\\operatorname{res}_{h^{m+1}}x\\otimes1$ by step 2. Therefore, writing $V=\\operatorname{Fib}_s$, we have\n$$\\iota^{(m+1)}_N=V(t_{m,N})\\circ\\iota^{(1)}_{Q_mN}\\circ\\iota^{(m)}_N.$$\nThese are equalities of maps of complexes in every degree. Restrictions commute with differentials and with a map $N\\to N'$, and tensor insertion does too. They are $A$-linear because constant scalars restrict to the same scalar and $x\\mapsto x\\otimes1$ is linear for the transported action. By [lem-weil-point-proetale-sections-exact], $V$ preserves quasi-isomorphisms; the exact pullbacks in step 2 do as well. Hence the equality and naturality descend by [lem-weil-pbc-localization-universal-property] (2)-(3) to the derived category, including all derived morphisms, rather than only maps of chosen representatives.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-frobenius-point-transport",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), pp. 150-151, transport on a geometric fiber; agent calculation for the explicit restriction-colimit-tensor recipe"
+   }
+  },
+  {
+   "text": "Let $u_r:Q_rR\\to RB_r$ be the direct-image exchange for the power-$r$ square of $p$, as defined in [def-weil-frobenius-square-exchange] (1), or equivalently [def-weil-pbc-ambient-ringed-exchange]. Apply clause 1 of [lem-weil-pbc-mate-pasting] to the degree-$m$ square followed by the degree-one square: all three adjunctions in that clause are $Lp^*\\dashv Rp_*$, the successive functors on the base are $Q_m,Q_1$, and those on the source are $B_m,B_1$. Their left square comparisons are $Lp^*Q_r\\to B_rLp^*$. Step 2 identifies the pasted comparison with the outer one after inserting $t_m,d_m$; [lem-weil-pbc-mate-whisker] moves precisely these changes of the intervening functors through the mate formula (take the source comparison $t_m^{-1}$ and target comparison $d_m$). The mate formula therefore gives the equality, natural in every complex $L$ on $\\overline X$,\n$$u_{m+1,L}\\circ t_{m,RL}=R(d_{m,L})\\circ u_{1,B_mL}\\circ Q_1(u_{m,L}).$$\nThis is an identity of the specified mate maps in the ambient pro-etale module derived categories. The geometric hypotheses needed to name them are provided in step 1, and the adjunctions by [def-weil-pbc-proetale-operations]. In particular this application does not use an etale-only pasting theorem, or a base-change theorem requiring $k$-linear arrows.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-mate-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; its omitted verification supplied by the existing abstract mate-pasting lemma (Mathlib mateEquiv_vcomp, line 170)"
+   }
+  },
+  {
+   "text": "Let $v_r:B_rJ\\xrightarrow{\\sim}JP_r$ be the open-square exchange for the power-$r$ square of $j$. Apply [lem-trf-open-square-exchange] to the Cartesian squares of step 1; its statement includes naturality and pasting, so with the comparisons of step 2 it gives\n$$v_{m+1,M}\\circ d_{m,JM}=J(c_{m,M})\\circ v_{1,P_mM}\\circ B_1(v_{m,M}).$$\nThese are the very open-square maps used in [def-weil-frobenius-square-exchange] (2), on the same $j$ for every power. That definition gives $e_{r,M}=R(v_{r,M})\\circ u_{r,JM}$. Use step 4 at $L=JM$, the displayed open pasting equation, and naturality of $u_1$ at $v_{m,M}:B_mJM\\to JP_mM$ to calculate\n$$\\begin{aligned}\ne_{m+1,M}t_{m,FM}\n &=R(v_{m+1,M}d_{m,JM})u_{1,B_mJM}Q_1(u_{m,JM})\\\\\n &=R(J(c_{m,M})v_{1,P_mM})R(B_1(v_{m,M}))u_{1,B_mJM}Q_1(u_{m,JM})\\\\\n &=F(c_{m,M})R(v_{1,P_mM})u_{1,JP_mM}Q_1(R(v_{m,M}))Q_1(u_{m,JM})\\\\\n &=F(c_{m,M})e_{1,P_mM}Q_1(e_{m,M}).\n\\end{aligned}$$\nAll products here mean composition with the rightmost map first. Thus the identity for $e_r$ is proved from its two factors; it is not assumed as a new compact-support coherence lemma.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.proof.md",
+    "place": "Final paragraph, compatibility under pasting; Stacks Tag 03S6, etale-cohomology.tex lemma-shriek-base-change, for the open factor; explicit substitution into the fixed compactification composite"
+   }
+  },
+  {
+   "text": "Set $N=FM$ and $V=\\operatorname{Fib}_s$, so $H=VF$ by [def-trf-coefficient-conventions]. Naturality of $\\iota^{(1)}$ at the derived morphism $e_{m,M}:Q_mFM\\to FP_mM$ is exactly clause 2 of [lem-weil-frobenius-point-transport-natural] at finite coefficients:\n$$\\iota^{(1)}_{FP_mM}\\,V(e_{m,M})=V(Q_1(e_{m,M}))\\,\\iota^{(1)}_{Q_mFM}.$$\nAll its objects lie in $D^b_c(s,A)$, the domain already specified for these maps in the item; step 1 also verifies the coefficient input $P_mM$. Substitute this identity, step 5 and step 3 into the definition of the two transports:\n$$\\begin{aligned}\nH(c_{m,M})\\tau^{(1)}_{c,P_mM}\\tau^{(m)}_{c,M}\n &=V(F(c_{m,M})e_{1,P_mM})\\iota^{(1)}_{FP_mM}V(e_{m,M})\\iota^{(m)}_{FM}\\\\\n &=V(F(c_{m,M})e_{1,P_mM}Q_1(e_{m,M}))\\iota^{(1)}_{Q_mFM}\\iota^{(m)}_{FM}\\\\\n &=V(e_{m+1,M})V(t_{m,FM})\\iota^{(1)}_{Q_mFM}\\iota^{(m)}_{FM}\\\\\n &=V(e_{m+1,M})\\iota^{(m+1)}_{FM}=\\tau^{(m+1)}_{c,M}.\n\\end{aligned}$$\nThis is the asserted identity, with $c_{m,M}$ in the direction specified in the statement. It uses no morphism $P_1M\\to M$ and no Weil structure.",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "The m-th-iterate assertion, expanded finite-level coherence calculation before composing with any Weil map"
+   }
+  },
+  {
+   "text": "Finally suppose the fixed compact-support functor is represented by another compactification, written $F_d$, and let $C:F_d\\xrightarrow{\\sim}F$ be its specified comparison. The prescription in [def-weil-frobenius-square-exchange] (2) defines its power-$r$ exchange as $C_{P_rM}^{-1}e_{r,M}Q_r(C_M)$. Naturality of $\\iota^{(r)}$, established directly for every $r$ in step 3, then gives $\\tau^{(r)}_{d,M}=V(C_{P_rM}^{-1})\\tau^{(r)}_{c,M}V(C_M)$. In the right side of the composition identity the two middle comparison factors cancel, and naturality of $C$ at $c_{m,M}$ gives $F_d(c_{m,M})C_{P_1P_mM}^{-1}=C_{P_{m+1}M}^{-1}F(c_{m,M})$. Thus both sides are the corresponding sides for $F$, conjugated by $V(C_M)$ and $V(C_{P_{m+1}M}^{-1})$. Step 6 proves their equality. This only transports a specified map on the same $c_0$; no independence of exchange from a varying compactification is asserted or required.",
+   "uses": [
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Compatibility with the representative of compact support, using the explicit conjugation recipe in def-weil-frobenius-square-exchange (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-frobenius-point-transport",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-mate-whisker",
+  "lem-trf-open-square-exchange",
+  "def-trf-coefficient-conventions",
+  "lem-weil-frobenius-point-transport-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "The m-th-iterate clause: explicit point-transport calculation, abstract mate pasting, and open-square pasting for the fixed compactification. Deligne (1.1.7), (1.1.10)-(1.1.11), (1.1.14) supplies the transport interpretation, not this derived finite-level proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -112,6 +228,62 @@
    "results": "25 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
    "date": "2026-10-17",
    "verdict": "no exact match or one-line specialization: read SheafOfModules.pullbackComp and pullback_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-207 and CategoryTheory.mateEquiv_vcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean:170-183. These compare underived module pullbacks or abstract mates; none identifies the specified point-fiber transport followed by compactification exchange along a semilinear automorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|pullback_assoc|compactSupport.*comp",
+   "results": "15 hits: Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived pullback/pushforward or abstract mate pasting; read PullbackContinuous.lean:167-207 and Mates.lean:160-183. The existing DAG mate-pasting leaf supplies the abstract ingredient, but not point transport and the fixed compactification composite."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback transport on compact support cohomology respects composition of scheme automorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pushforwardComp, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, MvPolynomial.comap_comp, CategoryTheory.Over.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived pullback/pushforward or abstract mate pasting; read PullbackContinuous.lean:167-207 and Mates.lean:160-183. The existing DAG mate-pasting leaf supplies the abstract ingredient, but not point transport and the fixed compactification composite."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived pullback/pushforward or abstract mate pasting; read PullbackContinuous.lean:167-207 and Mates.lean:160-183. The existing DAG mate-pasting leaf supplies the abstract ingredient, but not point transport and the fixed compactification composite."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of transport on compactly supported derived sheaf cohomology along powers of geometric Frobenius using the same compactification",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, Condensed.lanSheafProfinite, SheafOfModules.pushforwardSections, SheafOfModules.pushforwardSections_coe, CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived pullback/pushforward or abstract mate pasting; read PullbackContinuous.lean:167-207 and Mates.lean:160-183. The existing DAG mate-pasting leaf supplies the abstract ingredient, but not point transport and the fixed compactification composite."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of variables in sheaf cohomology composes under automorphisms, with compact support represented by proper pushforward of extension by zero",
+   "results": "8 hits: SheafOfModules.pushforwardComp, SheafOfModules.pushforwardCongr, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Functor.sheafPushforwardContinuousIso, CategoryTheory.Functor.sheafPushforwardContinuousComp', SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardCongr_hom_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived pullback/pushforward or abstract mate pasting; read PullbackContinuous.lean:167-207 and Mates.lean:160-183. The existing DAG mate-pasting leaf supplies the abstract ingredient, but not point transport and the fixed compactification composite."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural comparison of inverse image functors for a composite satisfies associativity and induces composition of cohomology transport maps",
+   "results": "8 hits: groupCohomology.map_comp_assoc, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc, groupCohomology.map_comp, groupCohomology.map_id_comp_assoc, groupCohomology.cochainsMap_comp_assoc, groupCohomology.π_map_assoc, groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_assoc, groupCohomology.map_H0Iso_hom_f_assoc",
+   "date": "2026-10-17",
+   "verdict": "Second-reader search: no exact match. The semantic hits concern group cohomology, the Loogle hits concern categorical limits, and the relevant grep hits supply underived pullback associativity or abstract mate pasting, not the specified derived compact-support transport."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|pullback_assoc|sheafPushforwardContinuousComp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-17",
+   "verdict": "Second-reader search: no exact match. The semantic hits concern group cohomology, the Loogle hits concern categorical limits, and the relevant grep hits supply underived pullback associativity or abstract mate pasting, not the specified derived compact-support transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"assoc\"",
+   "results": "12 hits: CategoryTheory.Limits.WidePullback.π_arrow_assoc, CategoryTheory.Limits.WidePullbackCone.condition_assoc, CategoryTheory.Limits.WidePullback.lift_base_assoc, CategoryTheory.Limits.WidePullback.lift_π_assoc, CategoryTheory.Limits.WidePullbackCone.IsLimit.lift_base_assoc, CategoryTheory.Limits.WidePullbackCone.IsLimit.lift_π_assoc, CategoryTheory.Limits.PullbackCone.condition_assoc, CategoryTheory.Limits.PullbackCone.IsLimit.lift_fst_assoc",
+   "date": "2026-10-17",
+   "verdict": "Second-reader search: no exact match. The semantic hits concern group cohomology, the Loogle hits concern categorical limits, and the relevant grep hits supply underived pullback associativity or abstract mate pasting, not the specified derived compact-support transport."
   }
  ],
  "mathlib_match": null,
@@ -120,7 +292,7 @@
   "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
   "how": "Read lines 160-183 (declaration line 170). It proves pasting for abstract mates only. The point-fiber restriction comparison, the extension-by-zero exchange, and their combination into the specified compact-support transport still require proofs, so this is not a one-line specialization."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-frobenius-operator-compact-description",
@@ -137,5 +309,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-compact-frobenius-transport-composition",
+  "worker": "stage1",
+  "summary": "Proved the specified direct finite-level transport composition using only existing nodes: checked point transport on the inverse-image colimit indices, derived pullback comparison normalization, abstract mate pasting for the proper factor and open-square pasting for extension by zero; combined their maps explicitly and checked conjugation under a change of compact-support representative. No statement change or new node.",
+  "blueprint": "Nearest ancestor lem-trf-frobenius-operator-compact-description: the statement's m-th iterate and proof's base-change identification along g_gamma^m, before applying the iterated Weil coefficient morphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Generic geometric input identifying the semilinear power squares; no k-linearity is assumed and the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic preservation of bounded constructibility under a scheme isomorphism, needed to type the iterated transport."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic pro-etale pullback comparison with termwise normalization, used for the precise coherence maps in the statement."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic reindexing description of the inverse image along an isomorphism, used to compute the specified insertion map."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exactness at the algebraically closed point, allowing the point calculation on complexes to represent the derived fiber."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "Generic extension-by-zero pasting for Cartesian open squares, the open factor in the specified compactification recipe."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic naturality of the specified point transport, needed at the actual derived exchange morphism."
+   },
+   {
+    "node": "lem-weil-pbc-mate-whisker",
+    "why": "Generic compatibility of mates with transformations of the intervening functors, used to insert the actual source and target power-pullback comparisons. No node of this unit supplies this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-trf-open-square-exchange",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-pbc-mate-whisker"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-58eb6dbe5",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-58eb6dbe5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement, all 7 steps and all 26 cited statements, plus the main-20261015 ancestor lem-trf-frobenius-operator-compact-description and Deligne Weil II (1.1.7) and (1.1.14), printed pp. 150-153. Deligne's geometric Frobenius is the inverse of x->x^q, which matches gamma in the item. The Stacks tags are correct: 0D6D, 03D8, 0E47 (sites-cohomology line 4094) and 03S6. No SGA source is used. Coefficient category and base-change morphism: H is Fib_s of Ra_X! from def-trf-coefficient-conventions, and e_r is FrEx^c of def-weil-frobenius-square-exchange (2), built from the open-square map b and the ambient mate of theta, on the one fixed compactification c0. The direction of c_m checks against c_{h,k}: L(kh)^* -> Lh^*Lk^*. I re-derived each step. Step 1: inverse-power lifts in both Cartesian squares, and P_r preserves D^b_c. Step 2: the coherence of theta, which by def-weil-pbc-ambient-ringed-exchange is associativity of the c's. Step 3: the reindexing index ((U,h^r u),(u,id)) is initial, restrictions compose to h^{m+1}, so iota^(m+1) = V(t_m) iota^(1) iota^(m), natural for every r. Step 4: mate-pasting (1) with alpha=theta_m and beta=theta_1, then whiskering with t_m^{-1} and d_m, gives u_{m+1}t_m = R(d_m)u_1Q_1(u_m). Step 5: I checked the open pasting and all four lines, including naturality of u_1 at v_m. Step 6: transport naturality (2) at e_m in D^b_c(s,A), then the chain of equalities. Step 7: conjugation by C cancels the middle factors. Edge cases: X empty, X0 = Spec k0 (reduces to step 3), m=1, n=1, and no finite-Tor hypothesis needed. There are no new nodes. No duplicate exists: lem-trf-weil-shriek-iterates concerns the k-linear scheme Frobenius Phi, not geometric Frobenius with point transport. I accept all 8 declared tool_uses as generic black boxes off the sk-d-weil route; two of them are already on the route. Searches cover all three kinds, and proof_deps equals the union of the step uses. Nothing was changed and no fixes were written. Details are in review.md."
  }
 }

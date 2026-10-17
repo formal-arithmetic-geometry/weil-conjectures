@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-exc-open-adjoint",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The right adjoint for an open immersion",
@@ -15,40 +15,106 @@
  "stmt_deps": [
   "def-weil-extension-by-zero",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof": [
   {
-   "text": "The site over the open $U$ is the localization of the site of\n[def-weil-pbc-proetale-site] at the subterminal sheaf represented by\n$U$. Thus restriction $j^*$ is exact. For module sheaves $M,N$,\nthe extension-by-zero adjunction of\n[lem-weil-extension-by-zero-adjunction] gives\n\n$$\n\\operatorname{Hom}(j_!M,N)=\\operatorname{Hom}(M,j^*N).\n$$",
+   "text": "For the open immersion $j:U\\hookrightarrow X$, [lem-weil-proetale-weakly-etale-localization](1)-(3) identifies $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$, identifies $A_U$ with the restriction of $A_X$, and gives restriction of module sheaves. To identify this restriction with the canonical inverse image, use the explicit definition [def-weil-proetale-inverse-image]. For an object $V\\to U$, its inverse-image indexing category $\\mathcal I_V$ has initial object $(V\\to X,\\ (V\\to U,\\mathrm{id}_V):V\\to U\\times_XV)$: the unique arrow from it to $(T,\\phi)$ is the projection $a:V\\xrightarrow{\\phi}U\\times_XT\\to T$. Indeed, the first projection of $\\phi$ is the fixed map $V\\to U$, since both have the same composite to $X$ and $j$ is a monomorphism by localization clause (4); hence $(\\mathrm{id}_U\\times_Xa)\\circ(V\\to U,\\mathrm{id}_V)=\\phi$. The second projection also forces uniqueness of $a$. Thus $\\mathcal I_V^{\\mathrm{op}}$ has a terminal object and the defining colimit is $N(V\\to X)$. These identifications commute with restriction maps, and restriction is already a sheaf by the identified coverings, so the final sheafification changes nothing. Applying this to the underlying abelian sheaf and its action identifies module inverse image with restriction. On constant sections the canonical coefficient map sends $a$ to $a$; write $b:A_U\\xrightarrow{\\sim}A_X|_U$ for localization clause (2). Under the computed inverse-image identification, the canonical coefficient map $c:A_X|_U\\to A_U$ fixes constants, so $bc$ fixes constants and equals the identity, by the sheafification universal property of the constant sheaf. Thus $c=b^{-1}$, giving precisely $j^{-1}A_X\\cong A_U$. This supplies precisely the ring-sheaf identification for module pullback, for the given arbitrary finite commutative $A$. Put $F=j_!$ and $G=j^*$. The sheaf-level adjunction [lem-weil-extension-by-zero-adjunction] supplies natural bijections $\\operatorname{Hom}(FM,N)\\cong\\operatorname{Hom}(M,GN)$. Exactness of $F$ is [lem-weil-extension-by-zero-exact]; additive exact module inverse image along the open immersion is [lem-weil-pbc-proetale-immersion-limit-preservation]. Thus $F$ and $G$ form an additive exact adjoint pair on the full categories of constant-$A$ module sheaves.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-extension-by-zero-adjunction"
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), applied to the proetale localized site of proetale.tex Tag 09AE (definition-extension-zero); the immersion inverse-image tool extends the closed-immersion result of Tag 09AA by open slice restriction."
+   }
   },
   {
-   "text": "Exactness of extension by zero is proved using presheaf kernels,\nlocal lifting, and sheafification in\n[lem-weil-extension-by-zero-exact]. Apply the two exact\nfunctors degree by degree to complexes.\nThey preserve acyclic complexes. Their sheaf-level unit and counit are\nchain maps, still satisfy both triangular identities, and descend through\nlocalization at quasi-isomorphisms. Hence they define the asserted\nadjunction, with inverse image as in\n[def-weil-derived-pullback-tensor-hom].",
+   "text": "Apply $F,G$ termwise to unbounded cochain complexes. By [lem-weil-pbc-termwise-adjunction-homotopy](a)-(b), their degreewise unit $\\eta$ and counit $\\varepsilon$ are natural chain maps satisfying the triangle identities, and the same adjunction holds on homotopy categories. By [lem-weil-pbc-exact-functor-derived-factorization], both termwise functors preserve quasi-isomorphisms and induce functors $\\overline F,\\overline G$ on the ordinary derived categories with natural comparison isomorphisms $\\overline FQ_U\\cong Q_XF$ and $\\overline GQ_X\\cong Q_UG$. Write these comparisons as $p_M:\\overline FQ_UM\\xrightarrow{\\sim}Q_XFM$ and $q_N:\\overline GQ_XN\\xrightarrow{\\sim}Q_UGN$. The composite comparisons are $q_{FM}\\circ\\overline G(p_M)$ and $p_{GN}\\circ\\overline F(q_N)$, respectively. Use these comparisons and [lem-weil-pbc-localization-universal-property](2) to descend $Q_U\\eta$ and $Q_X\\varepsilon$ to $\\overline\\eta:\\mathrm{id}\\to\\overline G\\overline F$ and $\\overline\\varepsilon:\\overline F\\overline G\\to\\mathrm{id}$. Explicitly, $\\overline\\eta_{Q_UM}=(q_{FM}\\circ\\overline G(p_M))^{-1}\\circ Q_U(\\eta_M)$ and $\\overline\\varepsilon_{Q_XN}=Q_X(\\varepsilon_N)\\circ p_{GN}\\circ\\overline F(q_N)$. At $Q_UM$, the composite $\\overline\\varepsilon_{\\overline FQ_UM}\\circ\\overline F(\\overline\\eta_{Q_UM})$, under the displayed comparisons, is $Q_X(\\varepsilon_{FM}\\circ F\\eta_M)=\\mathrm{id}_{Q_XFM}$. At $Q_XN$, the other triangle is $Q_U(G\\varepsilon_N\\circ\\eta_{GN})=\\mathrm{id}_{Q_UGN}$. For the first identity, naturality of $\\overline\\varepsilon$ along $p_M$ moves its evaluation from $\\overline FQ_UM$ to $Q_XFM$; substitution of the two component formulas cancels $\\overline F(q_{FM})$ and its inverse, and naturality of $p$ along $\\eta_M$ leaves $Q_X(\\varepsilon_{FM}\\circ F\\eta_M)$. For the second, naturality of $\\overline\\eta$ along $q_N$ and of $q$ along $\\varepsilon_N$ cancels $\\overline G(p_{GN})$ and its inverse and leaves $Q_U(G\\varepsilon_N\\circ\\eta_{GN})$. These are the original triangle identities; part (3) of the localization universal property extends the identities from images of complexes to the derived functors themselves. Hence $\\overline F\\dashv\\overline G$. The exact-functor characterization [lem-weil-pbc-exact-functor-derived-functor](1) makes these their left and right derived functors. Finally [def-weil-pbc-proetale-operations], with $R_X=A_X$, $R_U=A_U$ and the ring identification from step 1, defines $Lj^*$ as precisely the termwise exact module pullback $\\overline G$. Thus these functors are the displayed $j_!$ and $j^*$ on the full ordinary unbounded derived categories. The construction uses neither constructibility nor finite Tor amplitude.",
    "uses": [
-    "lem-weil-extension-by-zero-exact",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-exc-open-adjoint.proof.md",
+    "place": "Second paragraph, expanded by the existing termwise-adjunction and localization nodes; Stacks derived.tex Tags 015F (lemma-right-derived-exact-functor) and 08BJ (lemma-adjoint-preserve-K-injectives), and categories.tex Tag 04VG (lemma-properties-left-localization). Natural-transformation descent is the cited Mathlib localization node, not an extra assertion of Tag 04VG."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
   "lem-weil-extension-by-zero-adjunction",
   "lem-weil-extension-by-zero-exact",
-  "def-weil-derived-pullback-tensor-hom"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-exc-open-adjoint.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-exc-open-adjoint.proof.md",
+  "place": "Proof paragraphs 1-2, with coefficient identification and both descended triangle identities made explicit. Resumed review also expands the inverse-image indexing-colimit calculation from its definition."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero is left adjoint to inverse image on the full unbounded derived categories of pro etale constant ring module sheaves",
+   "results": "8 hits: condensed free/forgetful or locally constant adjunctions; SheafOfModules.PullbackConstruction.adjunction; scheme-module forgetful adjunction; presheaf sheafification. None constructs this proetale open-extension derived adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open immersion restriction and extension by zero form an exact adjunction of derived categories of sheaves of modules",
+   "results": "8 hits, including Scheme.Modules.restrictAdjunction and SheafOfModules.PullbackConstruction.adjunction. Read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425 and its hypotheses: restrictAdjunction is restriction LEFT adjoint to pushforward on structure-sheaf modules, not extension by zero left adjoint to constant-ring restriction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "3 hits: CategoryTheory.Adjunction.derived, derived_counit, derived_unit. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-151: requires a prior adjunction and absolute derived-functor hypotheses; it does not supply the proetale module adjunction or exactness.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LowerShriek|lowerShriek|extensionByZero|ExtensionByZero|def derived",
+   "results": "Searched subdirectory CategoryTheory. 4 hits in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:52,96,118,144; generic derived adjunction constructions only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LowerShriek|lowerShriek|extensionByZero|ExtensionByZero|derivedOpenImmersion",
+   "results": "0 hits in Mathlib. No open extension-by-zero derived theorem found.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing an adjunction of exact additive functors at quasi isomorphisms gives an adjunction on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, derived', their unit/counit constructions, and the lifting instance for Functor.mapDerivedCategory. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:136-151 and Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:25-49. These supply generic categorical ingredients, not the open-immersion adjunction on intrinsic constant-ring module sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -107,5 +173,59 @@
   "group": "Q01",
   "result": "fix",
   "note": "Review completed in review.md. Complete fixes reuse published canonical operations and remove H4 duplicates. Mathematical statement, hypotheses, universes, edge cases, and mate maps checked. Both replacement modules compile cleanly through scompile.py; merge-tool record and text checks pass. Immutable delivery unchanged."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-exc-open-adjoint",
+  "worker": "stage1",
+  "summary": "Rechecked and repaired the existing two-step split without creating nodes. The current source statement is unchanged. Step 1 uses the localized-site constant-ring identification and the existing exact sheaf adjunction; step 2 explicitly descends both unit/counit triangle identities. Replaced the finite-A_{E,n}-only derived-pullback citation by the general proetale operations definition. Corrected the attachment discussion: the slopmaster2 declaration is generic category-valued sheaves, while the recorded finite-ring Sheaf declaration is outside the eligible WeilConjectures source. Preserved all live Lean metadata. Reran all Mathlib searches through msearch.py. On resumption, expanded the inverse-image indexing-colimit calculation to justify the canonical restriction identification directly from its definition, rather than attributing that extra assertion to the slice-localization statement. Independent second reading makes the open-monomorphism graph check, the direction of the coefficient isomorphism, and the component formulas and cancellations for derived unit/counit explicit.",
+  "blueprint": "Both paragraphs of main-20261015 prop-exc-open-adjoint.proof.md: localized sheaf adjunction and exactness in step 1, termwise unbounded derived adjunction in step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Exact additive module inverse image for an immersion establishes exactness of open restriction; no closed-unit node supplies this generic site tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive adjunction on complexes supplies the unit and counit before localization; the closed-unit route has no separate complexes construction."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic characterization of the induced exact functors as derived functors identifies the ordinary derived operations."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "The exact termwise functors must first factor through quasi-isomorphism localization to define the ordinary derived functors."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Localization descent and equality detection provide the derived unit and counit and their triangle identities."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "The already proved sheaf-level open extension adjunction supplies the input Hom bijection; this closed-unit item does not reprove that open-triangle lemma."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Defines the ordinary derived module pullback for any identified ring sheaves, covering every finite commutative ring rather than only A_{E,n}."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-a24317b85",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-a24317b85 (reviewer sub-agent of L); spot-checked: I read the item and both steps in full. The statement is unchanged against main-20261015 and master: arbitrary finite commutative A, any open immersion, the full unbounded D(Mod(A_U)), and no constructibility or Tor hypothesis. Step 1: localization clauses (1)-(4) are used for what they state. I checked the inverse-image argument from def-weil-proetale-inverse-image: the graph object (V->X,(f,id_V)) is initial in I_V, the unique map is a=pr2(phi), the comparison is compatible with restriction, and sheafification changes nothing. The canonical map c fixes constants, so c=b^{-1} is an isomorphism, and the module pullback is restriction. The extension-by-zero adjunction (Stacks 03DI) and exactness (03DJ, finite commutative A, open immersion) match. The immersion-exactness tool covers open immersions and the identified ring sheaf, with no Noetherian assumption. Step 2: I type-checked the descended unit and counit through localization clause (2) and both triangle reductions through naturality of p and q, with clause (3) for equality. The exact-functor characterization and def-weil-pbc-proetale-operations (R_X=A_X, R_U=A_U, c from step 1) identify the functors as Lj^* and the derived j_!. Replacing the blueprint's def-weil-derived-pullback-tensor-hom is correct, since that node fixes A_{E,n} and requires l invertible. Edge cases pass: identity open, empty U, zero ring, A=F2xF3, complexes unbounded in both directions. There are no new nodes. The candidates lem-sc-derived-open-shriek-derived-adjunction (ringed spaces), def-sfb-finite-derived-extension-by-zero-adjunction (category-valued sheaves with extra hypotheses; using it would need a coefficient-realization theorem) and def-sfb-dc-open-lower-shriek-adjunction (D_cons) are not duplicates. proof_deps equals the union of the step uses, every cited id exists and none is merged, and there is no cycle. No SGA source is used. I accept the six declared tool uses (immersion exactness, termwise adjunction, exact-functor derived functor, the open-closed-triangle extension adjunction, and the Mathlib factorization and localization leaves); the seventh entry is a definition, so it is not route. No fixes."
  }
 }

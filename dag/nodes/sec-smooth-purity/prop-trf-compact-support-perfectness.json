@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-trf-compact-support-perfectness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compact-support perfectness",
- "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $K\\in D^b_{ctf}(X,A)$ with structure morphism\n$a_X:X\\to\\Spec k$ separated finite type. Then\n\n$$\nR\\Gamma_c(X,K)\\in D^b_{\\mathrm{fin}}(A),\n$$\n\nand the derived geometric stalk $K_{\\bar x}=L\\bar x^*K$ lies in\n$D^b_{\\mathrm{fin}}(A)$ for every\ngeometric point\n$\\bar x$ of $X$.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] and the coefficient conventions [def-trf-coefficient-conventions], with $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $n\\geq1$. Let $K\\in D^b_{ctf}(X,A)$ [def-weil-finite-tor-amplitude], where the structure morphism $a_X:X\\to s=\\operatorname{Spec}k$ is separated of finite type [def-weil-scheme-morphism-properties]. Then\n$$\nR\\Gamma_c(X,K)\\in D^b_{\\mathrm{fin}}(A).\n$$\nHere compact-support cohomology is the ordinary coefficient complex $R\\Gamma_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K)$ of [def-trf-coefficient-conventions], with $Ra_{X!}$ as in [def-compact-support-direct-image-detailed], and $D^b_{\\mathrm{fin}}(A)$ means the perfect category of [def-trf-categorical-trace]: objects isomorphic to bounded complexes of finitely generated projective $A$-modules, rather than all bounded finite-cohomology complexes.\n\nFor every geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ [def-weil-geometric-point] (so $\\Omega$ is algebraically closed), its derived geometric stalk is also perfect:\n$$\nK_{\\bar x}:=R\\Gamma\\bigl((\\operatorname{Spec}\\Omega)_{\\mathrm{proet}},L\\bar x^*K\\bigr)\\in D^b_{\\mathrm{fin}}(A),\n$$\nwith the ordinary-module interpretation of [pur9-def-derived-stalk].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.md",
   "place": "node prop-trf-compact-support-perfectness, order 1828",
@@ -17,70 +17,212 @@
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
-  "def-weil-full-cohomological-dimension",
-  "def-weil-scheme-morphism-properties"
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-compact-support-direct-image-detailed",
+  "def-trf-categorical-trace",
+  "pur9-def-derived-stalk",
+  "def-weil-geometric-point"
  ],
  "proof": [
   {
-   "text": "Let $C=R\\Gamma_c(X,K)$, with compact support as in\n[def-compact-support-direct-image-detailed], [def-trf-coefficient-conventions].\nThe finite-level constructibility theorem\n[prop-finite-compact-support-constructibility] gives a bounded\ncomplex on $\\operatorname{Spec}k$ with finite cohomology modules,\nusing the point identification of\n[def-weil-finite-coefficient-point]. This assertion alone does\nnot give perfectness over the finite local ring $A$.",
+   "text": "Put $s=\\operatorname{Spec}k$, $F=Ra_{X!}K$ and $C=\\operatorname{Fib}_s(F)=R\\Gamma_c(X,K)$ [def-trf-coefficient-conventions]. By [def-weil-finite-tor-amplitude], $K$ is bounded constructible. Apply [prop-finite-compact-support-constructibility] with base field $k$, $f=a_X$ and coefficients $A$. Here $X$ is of finite type over $k$ by the hypothesis on $a_X$, $s$ is of finite type over $k$ by its identity structure morphism, $a_X$ is separated of finite type, and $\\ell\\ne p$ makes $\\ell$ invertible in $k$. Thus all the field, scheme, morphism and coefficient hypotheses hold, so $F\\in D^b_c(s,A)$. Clause (1) of [lem-weil-point-sections-finiteness] gives bounded finite cohomology for the ordinary module complex $C$. This is only a finiteness conclusion, not yet perfectness over $A$.",
    "uses": [
-    "def-compact-support-direct-image-detailed",
     "def-trf-coefficient-conventions",
+    "def-weil-finite-tor-amplitude",
     "prop-finite-compact-support-constructibility",
-    "def-weil-finite-coefficient-point"
+    "lem-weil-point-sections-finiteness"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.proof.md",
+    "place": "Paragraph 1: bounded constructible compact-support direct image and finite cohomology"
+   }
   },
   {
-   "text": "Put $\\kappa=A/(\\varpi_E)$. The narrow coefficient-change result\n[lem-fix-compact-support-coefficient-change], applied to\n$A_{E,n}\\to A_{E,1}=\\kappa$, identifies\n\n$$\nC\\otimes_A^L\\kappa\n\\xrightarrow{\\sim}R\\Gamma_c(X,K\\otimes_A^L\\kappa).\n$$",
+   "text": "Put $\\kappa=A_{E,1}=A/(\\varpi_E)$ and $K_1=K\\otimes_A^L\\kappa$, with the derived change of rings of [lem-pur-derived-change-of-rings]. Choose a K-flat representative of $K$ there. After forgetting the $\\kappa$-action its tensor with $\\kappa_X$ is the ordinary derived $A$-tensor $K\\otimes_A^L\\kappa_X$; this is the scalar-tensor identification [lem-pur-change-of-rings-tensor-comparison] applied termwise to that representative. The sheaf $\\kappa_X[0]$ is bounded constructible as an $A$-complex: on the single stratum $X$ it is constant with finite module value, by [def-weil-finite-torsion-constructibility]. Thus [lem-pur-finite-tensor-constructible-cohomology] shows that every cohomology sheaf of the restricted $K_1$ is constructible. An interval $[a,b]$ of Tor amplitude for $K$ in [def-weil-finite-tor-amplitude], tested on the degree-zero $A$-module sheaf $\\kappa_X$, bounds its cohomology. Finally the same stratifications and trivializations are $\\kappa$-linear: the $A$-action factors through the surjection $A\\to\\kappa$, so an $A$-linear trivialization commutes with every scalar of $\\kappa$ by lifting that scalar to $A$. The finite module values killed by $\\varpi_E$ are finite $\\kappa$-modules. Hence $K_1\\in D^b_c(X,\\kappa)$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-comparison",
+    "def-weil-finite-torsion-constructibility",
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.proof.md",
+    "place": "Paragraph 3, first sentence: the bounded constructible residue-coefficient input"
+   }
+  },
+  {
+   "text": "Apply [lem-fix-compact-support-coefficient-change] to $a_X$ and the reduction $A_{E,n}\\to A_{E,1}$. The input $K$ is bounded constructible of finite Tor amplitude, as required, and $1\\leq1\\leq n$. It gives an isomorphism\n$$F\\otimes_A^L\\kappa_s\\xrightarrow{\\sim}Ra_{X!,1}(K_1).$$\nThis is an isomorphism of $\\kappa$-coefficient complexes on $s_{\\mathrm{proet}}$. At this stage we have not interchanged ordinary module tensor and point sections.",
    "uses": [
     "lem-fix-compact-support-coefficient-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.proof.md",
+    "place": "Paragraph 2: coefficient comparison, before taking point sections"
+   }
   },
   {
-   "text": "The input on the right is bounded constructible: finite Tor amplitude\ngives boundedness, and its cohomology is constructible by restricting\nto a finite constructible stratification and taking the derived\ntensor of the finite coefficient modules, as in\n[def-weil-finite-tor-amplitude], [def-weil-finite-torsion-constructibility].\nHence the right side is bounded by\n[prop-finite-compact-support-constructibility] at the residue\ncoefficient stage. The residue-field criterion of\n[lem-exc-residue-tor-test], applied on the point, now proves\nthat $C$ has finite Tor amplitude. Together with its finite\ncohomology, [lem-trf-finite-tor-amplitude-perfect] shows that\n$C$ is represented by a bounded complex of finite free\n$A$-modules.",
+   "text": "By step 2, the residue input $K_1$ satisfies the bounded constructibility hypothesis of [prop-finite-compact-support-constructibility]. Apply that result at coefficient level $1$ to $a_X$. It gives a bounded constructible $\\kappa$-complex $Ra_{X!,1}K_1$. Consequently step 3 makes $F\\otimes_A^L\\kappa_s$ cohomologically bounded, say in $[c,d]$. Since $F\\in D^b_c(s,A)$ by step 1 and $\\ell$ is invertible on $s$, [lem-sf-proetale-residue-tor-test] with $T=s$ gives Tor amplitude in $[c,d]$ for $F$ on the small pro-etale site. Thus $F\\in D^b_{ctf}(s,A)$ by [def-weil-finite-tor-amplitude]. This uses the pro-etale test, rather than applying the etale test to a pro-etale object.",
    "uses": [
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
     "prop-finite-compact-support-constructibility",
-    "lem-exc-residue-tor-test",
-    "lem-trf-finite-tor-amplitude-perfect"
+    "lem-sf-proetale-residue-tor-test",
+    "def-weil-finite-tor-amplitude"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.proof.md",
+    "place": "Paragraph 3: bounded residue direct image implies finite Tor amplitude at the point"
+   }
   },
   {
-   "text": "For $K_{\\bar x}$, the exact inverse-image property\n[prop-weil-pbc-inverse-image-exact] and the finite-stalk\ncondition of [def-weil-finite-torsion-constructibility] give\nbounded finite cohomology. The tensor-vanishing definition\n[def-weil-finite-tor-amplitude] is preserved by this inverse\nimage, so the same module-theoretic perfectness criterion applies.\nThus both objects lie in the perfect category used for categorical\ntrace in [def-trf-categorical-trace].\nNo preservation of finite Tor amplitude by a package summary is used\nin this argument.",
+   "text": "We identify the ordinary-module stalk convention with the geometric stalk used by the finite-free stalk lemma. Let $T$ be a $k$-scheme (so $\\ell$ is invertible on $T$), let $M\\in D^b_c(T_{\\mathrm{proet}},A)$ be intrinsically bounded constructible, and let $\\bar t:P=\\operatorname{Spec}\\Omega\\to T$ be a geometric point. Write $\\nu_T,\\nu_P$ for comparison with the etale site. By [lem-sf-proetale-constructible-origin], choose a bounded constructible etale object $M_{\\mathrm{et}}$ with $M\\simeq\\nu_T^*M_{\\mathrm{et}}$. For an etale module sheaf $G$, [lem-weil-pbc-comparison-pullback] gives $\\bar t_{\\mathrm{proet}}^*\\nu_T^*G\\simeq\\nu_P^*\\bar t_{\\mathrm{et}}^{-1}G$. Evaluating the unit isomorphism of [prop-weil-pbc-site-comparison-finite-level] on the final etale object $P$ identifies $\\Gamma(P_{\\mathrm{proet}},\\nu_P^*H)$ with $\\Gamma(P_{\\mathrm{et}},H)$ for every etale module sheaf $H$. By [lem-weil-pbc-geometric-point-pullback-stalk], the latter for $H=\\bar t^{-1}G$ is $G_{\\bar t}$. By [lem-cbc-proetale-comparison-stalk], this is also $(\\nu_T^*G)_{\\bar t}$, $A$-linearly. All identifications are natural in $G$, so applying them degreewise commutes with the differential of a representing complex for $M_{\\mathrm{et}}$. The finite-coefficient module inverse image is exact by [prop-weil-pbc-proetale-constant-exact], comparison inverse image is exact by [prop-weil-pbc-site-comparison-finite-level], sections on $P_{\\mathrm{proet}}$ are exact by [lem-weil-point-proetale-sections-exact], and the pro-etale geometric stalk is exact by [lem-cbc-proetale-classical-stalk]. Thus these termwise identifications preserve quasi-isomorphisms and give\n$$R\\Gamma(P_{\\mathrm{proet}},L\\bar t^*M)\\simeq M_{\\bar t}^{\\mathrm{geom}}\\quad\\text{in }D(A).$$\nHere the right side is the termwise geometric stalk and the left side is the convention [pur9-def-derived-stalk]. No equivalence between arbitrary pro-etale sheaves and ordinary modules is asserted.",
    "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-finite-tor-amplitude",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-cbc-proetale-comparison-stalk",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-cbc-proetale-classical-stalk",
+    "pur9-def-derived-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AL (lemma-compare-constructible-derived), 0GLZ (lemma-describe-pullback-from-etale); point interpretation supplied by the cited comparison and geometric-point lemmas"
+   }
+  },
+  {
+   "text": "Apply the finite-coefficient assertion of [fix-lem-finite-tor-perfect] to $Y=s$, $M=F$ and the identity geometric point $\\bar s=\\operatorname{id}_s$. Its bounded constructibility and finite Tor hypotheses are steps 1 and 4. It gives a bounded finite free $A$-complex representing the geometric stalk of $F$. Step 5 identifies this stalk with the ordinary derived stalk of [pur9-def-derived-stalk]; for the identity point this is $R\\Gamma(s_{\\mathrm{proet}},F)$. By [lem-weil-point-proetale-sections-exact] this is termwise $\\Gamma(s,F)$, namely $\\operatorname{Fib}_s(F)=C$ in [def-weil-finite-coefficient-point]. Thus $C$ has a bounded finite free model. A finite free module is finitely generated projective, being a direct summand of itself, so this model belongs to the perfect category [def-trf-categorical-trace]. This proves the compact-support assertion. The finite-free stalk lemma supplies the commutative-algebra passage only after step 4 has established finite Tor amplitude; bounded finite cohomology alone has not been used to infer perfectness.",
+   "uses": [
+    "fix-lem-finite-tor-perfect",
+    "pur9-def-derived-stalk",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-finite-coefficient-point",
     "def-trf-categorical-trace"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.proof.md",
+    "place": "Paragraph 3, last sentence: obtain the perfect ordinary coefficient complex at the point"
+   }
+  },
+  {
+   "text": "For any geometric point $\\bar x$ of $X$, apply [fix-lem-finite-tor-perfect] directly with $Y=X$ and $M=K$. Its hypotheses are exactly $K\\in D^b_{ctf}(X,A)$, and its finite-coefficient conclusion supplies a bounded complex of finite free $A$-modules for the geometric stalk. By step 5 this represents $K_{\\bar x}=R\\Gamma((\\operatorname{Spec}\\Omega)_{\\mathrm{proet}},L\\bar x^*K)$ in the ordinary-module convention [pur9-def-derived-stalk]. Hence $K_{\\bar x}$ belongs to the perfect category [def-trf-categorical-trace]. The geometric point's source need not be of finite type over $k$: the stalk lemma quantifies over every geometric point, and step 5 uses only that $\\Omega$ is algebraically closed.",
+   "uses": [
+    "fix-lem-finite-tor-perfect",
+    "pur9-def-derived-stalk",
+    "def-trf-categorical-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.proof.md",
+    "place": "Paragraph 4: perfect geometric stalks"
+   }
   }
  ],
  "proof_deps": [
-  "def-compact-support-direct-image-detailed",
   "def-trf-coefficient-conventions",
-  "prop-finite-compact-support-constructibility",
-  "def-weil-finite-coefficient-point",
-  "lem-fix-compact-support-coefficient-change",
   "def-weil-finite-tor-amplitude",
+  "prop-finite-compact-support-constructibility",
+  "lem-weil-point-sections-finiteness",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison",
   "def-weil-finite-torsion-constructibility",
-  "lem-exc-residue-tor-test",
-  "lem-trf-finite-tor-amplitude-perfect",
-  "prop-weil-pbc-inverse-image-exact",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-sf-proetale-residue-tor-test",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-cbc-proetale-comparison-stalk",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-cbc-proetale-classical-stalk",
+  "pur9-def-derived-stalk",
+  "fix-lem-finite-tor-perfect",
+  "def-weil-finite-coefficient-point",
   "def-trf-categorical-trace"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/prop-trf-compact-support-perfectness.proof.md",
+  "place": "Paragraphs 1-4, with explicit tensor-constructibility citation and the pro-etale residue test before taking ordinary coefficient fibres"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex of finite Tor amplitude has perfect compactly supported cohomology over a separably closed field and perfect geometric stalks",
+   "results": "8 hits: DerivedCategory.IsGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.IsKProjective, DerivedCategory.TStructure.t",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern derived-category support or finite presentation, not this compact-support and geometric-stalk theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, ModuleCat",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-16",
+   "verdict": "invalid initial query: unknown CategoryTheory.DerivedCategory identifier; corrected by the separately recorded DerivedCategory.IsGE query"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupported|constructibleFiniteTor|[Pp]erfectComplex",
+   "results": "25 hits: Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean, Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean, Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: only compactly supported continuous functions, unrelated to cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported cohomology of constructible complexes of finite Tor dimension is a perfect complex",
+   "results": "8 hits: CochainComplex.isStrictlyGE_of_iso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, HomologicalComplex.instIsSupportedOfIsStrictlySupported, compactlySupported_eq_top_of_isCompact, CochainComplex.IsStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern derived-category support or finite presentation, not this compact-support and geometric-stalk theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsGE",
+   "results": "11 hits: DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isZero_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern derived-category support or finite presentation, not this compact-support and geometric-stalk theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support direct image preserves finite Tor amplitude for constructible etale sheaves of modules over a finite ring",
+   "results": "8 hits: SheafOfModules.IsFiniteType, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern derived-category support or finite presentation, not this compact-support and geometric-stalk theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupported|constructibleFiniteTor|[Pp]erfectComplex",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations in AlgebraicGeometry match the pattern"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor amplitude and finite cohomology of compact support direct image of etale sheaves",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFiniteType.mk, AlgebraicGeometry.IsFinite.recOn, Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern derived-category support or finite presentation, not this compact-support and geometric-stalk theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived functor of sections with proper support takes constructible complexes of finite flat dimension to perfect complexes of modules",
+   "results": "8 hits: Ext, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.Q, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, HasDerivedCategory.standard, CategoryTheory.Functor.mapDerivedCategoryFactors, HasDerivedCategory, DerivedCategory.IsGE",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned Ext and general derived-category functor declarations do not state compact-support perfectness or the geometric-stalk clause"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -130,5 +272,94 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-trace-perfectness"
+ "unit": "sk-prop-sf-trace-perfectness",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-compact-support-perfectness",
+  "worker": "stage1",
+  "summary": "Seven steps and no new nodes. Audited finished-source candidates, added the existing tensor-constructibility lemma, tested residue boundedness before coefficient change, used the existing pro-etale residue test, and applied the existing stalk-perfectness theorem only after establishing the compact-support direct image is ctf. Made the ordinary-module meaning of the derived stalk and the perfect meaning of D^b_fin explicit. No full cohomological dimension assertion is used. Explicitly compared the geometric and derived-sections stalks via etale origin and the point comparison, without treating arbitrary pro-etale sheaves as modules.",
+  "blueprint": "Realizes current blueprint proof paragraphs 1-4: step 1 gives bounded finite cohomology, steps 2-4 give residue boundedness and finite Tor amplitude, step 5 verifies the ordinary-module stalk interpretation, step 6 invokes the existing finite-free stalk/commutative-algebra result at the point, and step 7 gives geometric-stalk perfectness. The unit has no numbered steps and already lists this item in realized.statement.",
+  "tool_uses": [
+   {
+    "node": "prop-finite-compact-support-constructibility",
+    "why": "Compact-support boundedness and constructibility used as a black box, preserving the unit route through finiteness and Tor amplitude."
+   },
+   {
+    "node": "lem-weil-point-sections-finiteness",
+    "why": "Point sections finite-cohomology lemma, used for the first finiteness step; no theorem of this unit replaces that point identification."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of coefficient extension, needed only to identify the residue complex."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-comparison",
+    "why": "Generic scalar/tensor identification on a K-flat representative, not a six-functor proof route."
+   },
+   {
+    "node": "lem-pur-finite-tensor-constructible-cohomology",
+    "why": "Generic constructibility of tensor cohomology, filling the residue-input gap in the stated blueprint route."
+   },
+   {
+    "node": "lem-sf-proetale-residue-tor-test",
+    "why": "Generic Artinian coefficient Tor test on the actual pro-etale site; replaces an ill-typed application of the etale-only test, with exactly the same residue route."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact point sections identify the derived coefficient fibre with the ordinary module complex."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic etale-origin theorem used only to compare the two ordinary-module stalk conventions; it does not replace the residue proof of compact-support Tor amplitude."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical comparison of inverse images, used to identify the module-valued derived stalk for finite constructible inputs."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Exact comparison inverse image and its sheaf unit identify point sections of an etale-origin object; a generic comparison tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Point sections of an etale inverse image equal its geometric stalk; needed for the explicit typing of the ordinary-module stalk."
+   },
+   {
+    "node": "lem-cbc-proetale-comparison-stalk",
+    "why": "Generic equality of etale and pro-etale geometric stalks of a comparison pullback."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic finite-coefficient exactness of module inverse image, used to pass the natural stalk comparison to complexes."
+   },
+   {
+    "node": "lem-cbc-proetale-classical-stalk",
+    "why": "Exactness of the pro-etale geometric stalk lets its termwise comparison descend to the derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-finite-compact-support-constructibility",
+  "lem-weil-point-sections-finiteness",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-sf-proetale-residue-tor-test",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-cbc-proetale-comparison-stalk",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-cbc-proetale-classical-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-37f53266b",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-37f53266b (reviewer sub-agent of L); spot-checked: Read in full: the main-20261015 item statement and proof, the unit sk-prop-sf-trace-perfectness, pur9-def-derived-stalk, lem-trf-finite-tor-amplitude-perfect and every cited DAG statement. Stacks tags checked: 0GL0, 09BQ, 0GL6, 09AL, 0GLZ, 0658. Statement: making D^b_fin mean the perfect category of def-trf-categorical-trace, and writing the derived stalk as RGamma of the pullback (pur9), are both faithful and weaken nothing; all hypotheses are kept. Step 1: prop-finite-compact-support-constructibility hypotheses hold (K_0=k, X and s of finite type, a_X separated of finite type, ell != p). Step 2: K_1 is bounded constructible over kappa via K-flat change of rings, the scalar-tensor comparison, the tensor-constructibility lemma with kappa_X in D^b_c, and the Tor bound tested on kappa_X; the kappa-linearity argument is elementary. Step 3: lem-fix-compact-support-coefficient-change with m=1. Step 4: the pro-etale residue test on s gives Tor amplitude for F; this correctly replaces the etale-only lem-exc. Step 5: I checked the etale-origin, comparison-pullback, unit-on-final-object, point-stalk and comparison-stalk identifications plus the four exactness statements; with Omega algebraically closed they give RGamma(P_proet, L t^*M) = geometric stalk. Step 6: fix-lem-finite-tor-perfect at id_s gives C perfect; its own proof uses lem-trf-finite-tor-amplitude-perfect, so the unit route is realized. Step 7: the same lemma on X. No new nodes, no cycle (traversal does not return to the item), no SGA source. Edge cases n=1, X empty, A^1 and n=2 kappa_X all behave. The 14 declared tool_uses are accepted as generic black boxes. One B3 fault fixed: 'geometric point' cited no definition node, while pur9 admits a separably closed Omega and steps 5 and 7 need it algebraically closed. I added [def-weil-geometric-point] to the statement and stmt_deps in fixes/dag/nodes/sec-smooth-purity/prop-trf-compact-support-perfectness.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }

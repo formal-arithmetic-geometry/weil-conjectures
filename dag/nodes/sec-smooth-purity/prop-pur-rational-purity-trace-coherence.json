@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-rational-purity-trace-coherence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Trace and coherence compatibilities of rational purity",
@@ -15,36 +15,196 @@
  "stmt_deps": [
   "thm-pur-rational-and-qbar-purity",
   "def-pur-smooth-trace",
-  "def-pur-conventions"
+  "def-pur-conventions",
+  "thm-pur-composition-coherence",
+  "thm-pur-smooth-base-change-coherence"
  ],
  "proof": [
   {
-   "text": "The smooth trace of [def-pur-smooth-trace] and the composition and\nbase-change coherence statements over $E$ and $\\Qlb$ – those of\n[thm-pur-composition-coherence] and\n[thm-pur-smooth-base-change-coherence] – are the $E$-\nand $\\Qlb$-reductions of the corresponding $\\mathcal O_E$-level\nstatements of [thm-pur-adic-reconstruction] and [prop-pur-adic-reconstruction-trace-coherence], transported along\nthe same exact functors and restricted to the direct summands (the\ntrace of a summand is the summand of the trace, by naturality).",
+   "text": "Fix the setting and the coefficient object of [thm-pur-rational-and-qbar-purity], and an integral lattice presenting it. The rational categories of [def-weil-pbc-rational-category] are defined on noetherian finite-dimensional schemes with $\\ell$ invertible, and their lattices lie in the completed integral category. The schemes $X,Y$ involved are of finite type over the field $k$, hence noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to their structure morphisms (a field is noetherian), and finite-dimensional by [lem-kun-dimension-finite-type]; $\\ell$ is invertible on them since $\\ell\\ne p$. On these schemes [lem-weil-pbc-integral-stratified-perfect-characterization] identifies that category with the derived-complete integral category used by reconstruction. Choose an interval $[a,b]$ bounding the first reduction of the lattice. Then [lem-coef-integral-residue-tor] gives Tor amplitude $[a,b]$ for every reduction, so the lattice belongs to the required uniform finite-Tor domain. Put $F_h=Rh_!$, $G_h=Rh^!$, and $H_h=Lh^*(-)(d_h)[2d_h]$ for each smooth morphism involved. The integral isomorphisms are those of [thm-pur-adic-reconstruction], chosen as the simultaneous natural, scalar-compatible family of [lem-pur-adic-purity-scalar-naturality] used in rational purity. Reconstruction alone asserts no uniqueness of arbitrary coherent lifts, and no such uniqueness is used. Apply [prop-pur-adic-reconstruction-trace-coherence] to obtain the integral counit composite $t_{h,K}=\\epsilon_{h,K}F_h(\\gamma_{h,K})$, the transport of the formula of [def-pur-smooth-trace], and the integral versions of the equalities in [thm-pur-composition-coherence] and [thm-pur-smooth-base-change-coherence]. Thus at integral coefficients the single-map purity and its iterated composition agree, and the two paths around the smooth pullback square agree. These are supplied commutative diagrams, not consequences of detecting equality of morphisms by finite reductions.",
    "uses": [
+    "thm-pur-rational-and-qbar-purity",
+    "thm-pur-adic-reconstruction",
+    "lem-pur-adic-purity-scalar-naturality",
+    "prop-pur-adic-reconstruction-trace-coherence",
     "def-pur-smooth-trace",
     "thm-pur-composition-coherence",
     "thm-pur-smooth-base-change-coherence",
-    "thm-pur-adic-reconstruction",
-    "prop-pur-adic-reconstruction-trace-coherence"
+    "def-weil-pbc-rational-category",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-coef-integral-residue-tor",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "paragraph, corresponding O_E-level statements"
+   }
+  },
+  {
+   "text": "Let $Q_E$ denote scalar localization. The general functor and natural-transformation assertion of [prop-weil-pbc-rational-transport] extends each supplied exact integral linear functor and its comparison transformations. The rational compact-support and exceptional functors are the coefficient-passage operations [def-weil-integral-rational-qbar-compact-support, def-weil-exceptional-inverse-image]; [lem-coef-rational-operations] identifies their adjunction and preserves its units and counits. By [thm-pur-rational-and-qbar-purity], $\\gamma_{h,Q_EK}=Q_E(\\gamma_{h,K})$. Therefore\n$$Q_E(t_{h,K})=Q_E(\\epsilon_{h,K})\\,Q_EF_h(\\gamma_{h,K})=\\epsilon^E_{h,Q_EK}F^E_h(\\gamma^E_{h,Q_EK})=t^E_{h,Q_EK}.$$\nIf the two integral paths in either coherence diagram are $r$ and $s$, Step 1 gives $r=s$, hence $Q_E(r)=Q_E(s)$. The functor equation $Q_E(ba)=Q_E(b)Q_E(a)$ identifies these with the paths in the rational diagram, using the extended comparison transformations. This proves both coherence assertions over E. Naturality also extends to every localized arrow $u/\\varpi_E^j$: apply integral naturality to $u$ and multiply the equation by $\\varpi_E^{-j}$. Thus changing a lattice by a rational isomorphism conjugates both paths by the same source and target identifications, and preserves their equality.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-exceptional-inverse-image",
+    "lem-coef-rational-operations",
+    "thm-pur-rational-and-qbar-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "paragraph, E-reductions transported along the same exact functors"
+   }
+  },
+  {
+   "text": "For a finite inclusion $E\\subset L$, use the exact scalar extension $T=T_{L/E}$ of [prop-weil-pbc-scalar-extension]. Before rationalization write $C$ for the integral ordinary derived-tensor presentation. Use for $c$ the canonical natural comparison of [lem-pur-compact-support-integral-coefficient-comparison], on the finite-Tor domain checked in Step 1; it is the compact-support comparison named in the scalar-naturality helper. Write $a:CH_E\\cong H_LC$, $b:CG_E\\cong G_LC$, $c:CF_E\\cong F_LC$ for the comparisons in [lem-pur-adic-purity-scalar-naturality]. That statement gives $b_K C(\\gamma_{E,K})=\\gamma_{L,CK}a_K$ and specifies $b_K$ as the transpose of $C(\\epsilon_{E,K})c_{G_EK}^{-1}$. The latter specification means\n$$\\epsilon_{L,CK}F_L(b_K)c_{G_EK}=C(\\epsilon_{E,K}).$$\nNaturality of $c$ at $\\gamma_{E,K}$ now gives the explicitly typed trace equation\n$$\\begin{aligned}\nC(t_{E,K})\n&=C(\\epsilon_{E,K})\\,CF_E(\\gamma_{E,K})\\\\\n&=\\epsilon_{L,CK}F_L(b_K)F_LC(\\gamma_{E,K})c_{H_EK}\\\\\n&=\\epsilon_{L,CK}F_L(\\gamma_{L,CK})F_L(a_K)c_{H_EK}\\\\\n&=t_{L,CK}F_L(a_K)c_{H_EK}.\n\\end{aligned}$$\nRationalizing yields the same identity for $T$. It is the required coefficient compatibility of the trace, including its counit, rather than only compatibility of an isomorphism of its endpoints. The helper's unit, associator and shift equations ensure that the identifications used in this equation compose for a tower $E\\subset L\\subset M$. The unit, successive-extension and shift equations for $c$ itself come from [lem-pur-compact-support-integral-coefficient-comparison]. Consequently the comparison for the source $F_EH_E$ is $F_L(a_K)c_{H_EK}$ and is coherent in coefficient towers; the trace equation just proved is precisely its compatibility with the identity comparison on the target.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-adic-purity-scalar-naturality",
+    "prop-weil-pbc-rational-transport",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "paragraph, Qbar-reductions transported along the same exact functors; counit calculation"
+   }
+  },
+  {
+   "text": "In [def-weil-pbc-qbar-category] an object is represented at a finite coefficient field and a morphism is represented over a common finite field. The higher-coefficient diagrams mean the transports prescribed by [def-pur-conventions]. Use [prop-weil-pbc-descent-functors] for the compatible operations and comparison transformations: its statement includes descent of compatible natural transformations and their equations. The scalar-compatible purity family and its inverses are supplied by [thm-pur-rational-and-qbar-purity]; the trace compatibility was proved in Step 3. The coherence comparisons also satisfy the required scalar equations. Indeed, write $\\gamma^{\\mathrm{it}}_{g,f,K}:H_{gf}K\\to G_fG_gK$ for the iterated purity composite in the composition diagram of Steps 1–2, including its canonical pullback, twist and shift reassociations. Solving that diagram gives $c_{g,f}=\\gamma^{\\mathrm{it}}_{g,f}\\gamma_{gf}^{-1}$. Writing $B_{\\square}$ for the canonical left-hand pullback identification in the base-change square, solving its equality gives\n$$\\operatorname{Ex}^{!,\\mathrm{sm}}_{f,v}=\\gamma_{f',Lv^*(-)}B_{\\square}(Lu^*\\gamma_f)^{-1}.$$\nThus these actual coherence comparisons are composites of purity, its inverse and canonical pullback/twist comparisons. Their scalar compatibility follows by substitution from the purity equation of Step 3, the pullback comparisons and their composition/shift equations in [prop-weil-pbc-scalar-extension], and the scalar-extension twist convention [def-coefficient-twists-detailed]. For composite transformations the verification is explicit: if $\\beta_B T(\\eta_E)=\\eta_L\\beta_A$ and $\\beta_D T(\\theta_E)=\\theta_L\\beta_B$, then\n$$\\beta_D T(\\theta_E\\eta_E)=\\theta_L\\beta_B T(\\eta_E)=\\theta_L\\eta_L\\beta_A;$$\nfor an isomorphism $\\eta$, the first equation gives $\\beta_A T(\\eta_E^{-1})=\\eta_L^{-1}\\beta_B$ by multiplying by the inverses on the two sides. This proves compatibility for every path in the two diagrams.\n\nFor a path $r_E:A_EK\\to B_EK$, the precise change-of-stage equation is therefore\n$$T_{L/E}(r_E)=\\beta_{B,L/E,K}^{-1}r_{L,T_{L/E}K}\\beta_{A,L/E,K}.$$\nThe same source and target comparisons occur for the other path $s_E$. Step 2 gives $r_{L,TK}=s_{L,TK}$, so these representatives are equal. In a path with several arrows, inserting the displayed formula for each arrow cancels each intermediate $\\beta\\beta^{-1}$; the representative of its composite is exactly the displayed representative of the whole path. The unit and associator equations of [prop-weil-pbc-descent-functors] and [prop-weil-pbc-scalar-extension] make these representatives independent of enlargement. Hence the trace and both coherence equations descend for every object and every common-stage morphism, without a faithfulness assertion about reduction or scalar extension.",
+   "uses": [
+    "def-weil-pbc-qbar-category",
+    "prop-weil-pbc-descent-functors",
+    "thm-pur-rational-and-qbar-purity",
+    "prop-weil-pbc-scalar-extension",
+    "def-pur-conventions",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "paragraph, E- and Qbar-reductions of the corresponding integral statements"
+   }
+  },
+  {
+   "text": "Finally check the source's direct-summand clause without adding a Karoubi envelope to the coefficient categories. The purity family preserves idempotent summands by [prop-pur-rational-purity-transitivity-summands]. If $i:K\\to M$ and $p:M\\to K$ split a summand, so $pi=1_K$, then for any natural transformation $\\eta:A\\Rightarrow B$ its summand component is\n$$\\eta_K=B(p)\\eta_M A(i).$$\nIndeed naturality at $i$ gives $\\eta_M A(i)=B(i)\\eta_K$, and postcomposing by $B(p)$ gives the formula. Apply this first to $\\gamma$ and then to $t=\\epsilon F(\\gamma)$, which is natural because both $\\gamma$ and the adjunction counit are natural, as in [lem-pur-adic-purity-scalar-naturality] and [def-pur-smooth-trace]. Thus $t_K=p\\,t_M FH(i)$ (the target functor of $t$ is the identity); this is exactly the restricted trace. If $r_M=s_M$ are the two paths of either already proved coherence diagram, multiplying by the common endpoint projections and inclusions gives $B(p)r_M A(i)=B(p)s_M A(i)$, the corresponding equality at the summand. Hence all trace and coherence identities survive the restriction referred to in the blueprint. The zero and identity projectors give respectively the zero restriction and the original identities.",
+   "uses": [
+    "prop-pur-rational-purity-transitivity-summands",
+    "lem-pur-adic-purity-scalar-naturality",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "paragraph, restricted to direct summands; explicit naturality argument"
+   }
   }
  ],
  "proof_deps": [
+  "thm-pur-rational-and-qbar-purity",
+  "thm-pur-adic-reconstruction",
+  "lem-pur-adic-purity-scalar-naturality",
+  "prop-pur-adic-reconstruction-trace-coherence",
   "def-pur-smooth-trace",
   "thm-pur-composition-coherence",
   "thm-pur-smooth-base-change-coherence",
-  "thm-pur-adic-reconstruction",
-  "prop-pur-adic-reconstruction-trace-coherence"
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-coef-integral-residue-tor",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "lem-coef-rational-operations",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-weil-pbc-qbar-category",
+  "prop-weil-pbc-descent-functors",
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "prop-pur-rational-purity-transitivity-summands",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+  "place": "The smooth trace and coherence statements over E and Qbar are reductions of the corresponding O_E-level statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smoothPurityIso|smooth.*trace|base.*change.*coherence",
+   "results": "0 hits; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state sheaf-theoretic purity and trace/coherence transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rational smooth purity isomorphism compatible with trace and composition base change",
+   "results": "Algebra.trace_trace; LinearMap.liftBaseChange_comp; IsBaseChange.endHom_comp; LinearMap.trace_baseChange; IsBaseChange.linearMapRight; Algebra.trace_comp_trace; RingHom.FormallySmooth.respectsIso; IsBaseChange.linearMapLeftRightHom_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state sheaf-theoretic purity and trace/coherence transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, IsIso, smoothPurityIso, trace",
+   "results": "0 hits; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "purity isomorphisms commute with smooth trace composition and base-change coherence",
+   "results": "Algebra.trace_comp_trace; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange; Algebra.Generators.H1Cotangent.δAux_ofComp; LinearMap.trace_baseChange; LinearMap.trace_comp_comm; Algebra.trace_trace; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; Algebra.trace_localization",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state sheaf-theoretic purity and trace/coherence transport"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*naturality|direct.*summand|retract",
+   "results": "0 hits; searched Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state sheaf-theoretic purity and trace/coherence transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.NatTrans.naturality",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state sheaf-theoretic purity and trace/coherence transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "trace of a direct summand is the direct summand of the trace by naturality",
+   "results": "LinearMap.trace_comp_comm; LinearMap.trace_eq_sum_trace_restrict'; LinearMap.trace_eq_sum_trace_restrict; LinearMap.trace_restrict_eq_of_forall_mem; LinearMap.IsProj.trace; Algebra.trace_prod; LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup; LinearMap.trace_prodMap",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state sheaf-theoretic purity and trace/coherence transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of linear categories sends natural isomorphisms and adjunction counits to localized natural transformations and preserves commuting diagrams",
+   "results": "CategoryTheory.Adjunction.localization; CategoryTheory.Adjunction.Localization.η; CategoryTheory.Adjunction.Localization.ε_app; CategoryTheory.Adjunction.Localization.ε; CategoryTheory.Adjunction.Localization.η_app; CategoryTheory.Adjunction.localization_counit_app; CategoryTheory.Adjunction.localization_unit_app; CategoryTheory.Adjunction.hasRightCalculusOfFractions",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic adjunction localization supplies neither smooth purity nor its geometric composition and base-change diagrams; the generic transport is already an existing cited node"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_counit_app",
+   "results": "Mathlib/CategoryTheory/Localization/FiniteProducts.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; direct source read: Adjunction.lean line 125 (generic localized counit), FiniteProducts.lean line 81 (application)",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic adjunction localization supplies neither smooth purity nor its geometric composition and base-change diagrams; the generic transport is already an existing cited node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact linear functor transports a natural isomorphism and an adjunction counit through scalar localization",
+   "results": "CategoryTheory.Adjunction.localization_counit_app; CategoryTheory.Adjunction.Localization.ε_app; CategoryTheory.Localization.functor_linear_iff; CategoryTheory.Adjunction.Localization.η_app; CategoryTheory.Adjunction.localization_unit_app; ModuleCat.localizedModule_functor_map_exact; CategoryTheory.Adjunction.Localization.ε; CategoryTheory.Adjunction.Localization.η; read Mathlib/CategoryTheory/Localization/Adjunction.lean lines 35–135, including localization_counit_app at line 125",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: these generic localization and adjunction declarations do not state geometric smooth purity, trace normalization, or its composition and base-change diagrams; generic transport is already an existing cited tool"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -78,5 +238,59 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pur-rational-purity-trace-coherence",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint transport paragraph into five steps: coherent integral input, exact rationalization with counit normalization, explicit finite-field-extension counit/trace equation, common-stage descent of both coherence equalities, and a direct retract calculation. Reused all needed existing nodes and created none. No uniqueness of an arbitrary coherent lift, faithfulness of finite reduction, or additional Karoubi category is assumed. No statement change or Lean attachment. Second reading adds explicit lattice-category and uniform-Tor premises, the existing integral compact-support coefficient-coherence lemma, and the equations proving scalar compatibility and common-stage transport of both coherence paths.",
+  "blueprint": "Realizes main-20261015 prop-pur-rational-purity-trace-coherence.proof.md in full: integral input (step 1), E reductions and same exact functors (step 2), finite scalar extension and counit (step 3), Qbar reductions/common-stage descent (step 4), direct summands by naturality (step 5). This is the trace/coherence part of sk-thm-purity-transport Step 3, with Step 2 supplying its integral input; no unit record change is needed.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic extension of supplied exact linear functors and natural transformations by scalar localization; the unit uses rationalization but has no separate localization theorem."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Identifies the actual coefficient-passage exceptional adjunction and preserves units/counits; needed to identify the transported trace, not to replace the purity proof."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic descent of compatible functors, natural transformations and equations to the common-stage category; implements the unit Step 3 coefficient descent."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Exact scalar extension and coherent unit/associator/shift comparisons used by the same common-stage transport route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the completed integral lattice category in raw rationalization with the derived-complete notation used by reconstruction; this coefficient-category interface is not supplied by a node of the purity unit."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Converts a bounded first reduction to uniform finite-level Tor amplitude for the chosen lattice, checking the reconstruction domain; it is a coefficient-domain tool rather than a substitute purity argument."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite Krull dimension of the finite-type k-schemes X,Y, needed for the noetherian finite-dimensional hypothesis of the rational category and of the integral characterization lemma; a scheme-finiteness tool, no node of the purity unit states it (also accepted for thm-pur-rational-and-qbar-purity)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-rational-transport",
+  "lem-coef-rational-operations",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-coef-integral-residue-tor",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-159433514",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-159433514 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement (verbatim the main-20261015 statement) and all five steps, against the current blueprint proof, unit sk-thm-purity-transport Step 3, and the statements of all 21 cited nodes. One fault found and repaired (C1). Step 1 asserted that X and Y are noetherian and finite-dimensional, which the rational-category definition and the integral characterization lemma require, but cited nothing for it. The fix adds lem-weil-pbc-finite-type-over-noetherian (a Mathlib leaf) and lem-kun-dimension-finite-type, updates proof_deps, and declares the latter in tool_uses. The corrected file is fixes/dag/nodes/sec-smooth-purity/prop-pur-rational-purity-trace-coherence.json. Step 1: the uniform-Tor domain follows from lem-coef-integral-residue-tor. The gamma family is the scalar-naturality family fixed in the rational-purity split. The integral trace and coherence equalities are taken from the statement of prop-pur-adic-reconstruction-trace-coherence; no equality is detected through finite reductions. Caveat for that node's future split: it must prove coherence for this same fixed family. That is true, either because lim^1 vanishes for finite Hom groups or by a canonical trace construction, but the DAG does not yet state it. Step 2: rational transport, lem-coef-rational-operations (counits preserved) and gamma_E = Q_E(gamma) give Q_E(t) = t^E, and the localized-arrow naturality check is correct. Step 3: the types check. With b the transpose of C(eps)c^{-1}, so that eps_L F_L(b) c = C(eps_E), naturality of c and the purity square give C(t_E) = t_L F_L(a) c, line by line. Step 4: solving the coherence diagrams gives c_{g,f} = gamma^{it} gamma_{gf}^{-1} and Ex = gamma_{f'} B (Lu* gamma_f)^{-1}; this matches the finite Ex^{!,sm} being defined by that composite (its mathlib leaf). The representative formula of prop-weil-pbc-descent-functors is used correctly and no faithfulness is used. Step 5: eta_K = B(p) eta_M A(i) is an elementary consequence of p i = 1 and naturality. There are no new nodes and no duplicates or restatements. No cycle, including through the two added nodes. No SGA source. Seven tool uses accepted. Edge cases checked: K = 0, empty schemes, d = 0, E = L, a three-field tower, and zero or identity projectors.; 1 file(s) fixed by the reviewer"
+ }
 }

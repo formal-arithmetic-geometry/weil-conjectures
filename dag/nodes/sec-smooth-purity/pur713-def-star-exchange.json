@@ -3,24 +3,27 @@
  "blueprint": {
   "is": "pur713-def-star-exchange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Direct-image exchange, finite coefficients",
- "statement": "The finite-coefficient direct-image exchange for $\\square$ is the natural transformation\n\n$$\n\\operatorname{Ex}_{*,\\square,\\mathcal O_E/\\varpi^n}:\nLg^*_{\\mathcal O_E/\\varpi^n}Rf_{*,\\mathcal O_E/\\varpi^n}\n\\longrightarrow Rf'_{*,\\mathcal O_E/\\varpi^n}Lg'^*_{\\mathcal O_E/\\varpi^n}\n$$\n\nof functors $D(X_{\\Proet},\\mathcal O_E/\\varpi^n)\\to D(Y'_{\\Proet},\\mathcal O_E/\\varpi^n)$ whose component at $K$ is the adjoint, under Lemma “Finite-coefficient derived inverse-image adjunction” (`pur713-lem-star-adjunction`) for $f'$, of\n\n$$\nLf'^*_{\\mathcal O_E/\\varpi^n}Lg^*_{\\mathcal O_E/\\varpi^n}Rf_{*,\\mathcal O_E/\\varpi^n}K\n\\xrightarrow{c_{\\square,\\mathcal O_E/\\varpi^n}}\nLg'^*_{\\mathcal O_E/\\varpi^n}Lf^*_{\\mathcal O_E/\\varpi^n}Rf_{*,\\mathcal O_E/\\varpi^n}K\n\\xrightarrow{Lg'^*_{\\mathcal O_E/\\varpi^n}\\varepsilon_{f,K}}Lg'^*_{\\mathcal O_E/\\varpi^n}K,\n$$\n\nwhere $\\varepsilon_f$ is the counit of Lemma “Finite-coefficient derived inverse-image adjunction” (`pur713-lem-star-adjunction`) for $f$ and $c_{\\square,\\mathcal O_E/\\varpi^n}$ is Definition [pur713-def-pullback-comparison]. No invertibility is asserted.",
+ "statement": "Let $\\ell$ be a prime, let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $\\mathcal O_E$ and chosen uniformizer $\\varpi$, and let $n\\geq1$ be an integer. Put $A=\\mathcal O_E/\\varpi^n$, with the coefficient datum of [def-weil-l-adic-coefficient-extension]. Let $\\square$ be a Cartesian square of schemes with arrows $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$ and $g':X'\\to X$, so $fg'=gf'$. For a scheme $T$, $D(T_{\\Proet},A)$ denotes the unbounded derived category of sheaves of modules over the constant ring sheaf $A$ on the small pro-etale site of $T$ [def-weil-pbc-proetale-site]. Use the finite-coefficient derived adjunction of [def-sfb-finite-derived-adjunction], specialized to the coefficient category of $A$-modules.\n\nThe finite-coefficient direct-image exchange for $\\square$ is the natural transformation\n\n$$\n\\operatorname{Ex}_{*,\\square,\\mathcal O_E/\\varpi^n}:\nLg^*_{\\mathcal O_E/\\varpi^n}Rf_{*,\\mathcal O_E/\\varpi^n}\n\\longrightarrow Rf'_{*,\\mathcal O_E/\\varpi^n}Lg'^*_{\\mathcal O_E/\\varpi^n}\n$$\n\nof functors $D(X_{\\Proet},\\mathcal O_E/\\varpi^n)\\to D(Y'_{\\Proet},\\mathcal O_E/\\varpi^n)$ whose component at $K$ is the adjoint, under [def-sfb-finite-derived-adjunction] for $f'$, of\n\n$$\nLf'^*_{\\mathcal O_E/\\varpi^n}Lg^*_{\\mathcal O_E/\\varpi^n}Rf_{*,\\mathcal O_E/\\varpi^n}K\n\\xrightarrow{c_{\\square,\\mathcal O_E/\\varpi^n}}\nLg'^*_{\\mathcal O_E/\\varpi^n}Lf^*_{\\mathcal O_E/\\varpi^n}Rf_{*,\\mathcal O_E/\\varpi^n}K\n\\xrightarrow{Lg'^*_{\\mathcal O_E/\\varpi^n}\\varepsilon_{f,K}}Lg'^*_{\\mathcal O_E/\\varpi^n}K,\n$$\n\nwhere $\\varepsilon_f$ is the counit of [def-sfb-finite-derived-adjunction] for $f$ and $c_{\\square,\\mathcal O_E/\\varpi^n}$ is Definition [pur713-def-pullback-comparison]. No invertibility is asserted.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-star-exchange.md",
   "place": "node pur713-def-star-exchange, order 2354"
  },
  "stmt_deps": [
-  "pur713-def-pullback-comparison"
+  "pur713-def-pullback-comparison",
+  "def-sfb-finite-derived-adjunction",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -44,5 +47,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-star-exchange",
+  "worker": "stage1",
+  "summary": "Made the square, coefficient ring and unbounded pro-etale module categories explicit, and replaced both dangling adjunction references by the existing generic finite derived adjunction specialized to A-modules. The comparison followed by the pulled-back counit is unchanged. This is a definition with no proof steps and no new nodes; no invertibility is asserted.",
+  "blueprint": "Realizes the complete definition in main-20261015 pur713-def-star-exchange.md (order 2354): transpose the comparison followed by the counit under the adjunction for f-prime. The explicit square uses the g/g-prime labels of sk-def-sf-exchanges; the coefficient binders are the standing finite-coefficient datum. No unit proof route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-94832f0f6",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-94832f0f6 (reviewer sub-agent of L); spot-checked: I read the source main-20261015 sk-prop-sp-purity-bc/pur713-def-star-exchange.md (order 2354). The node's displayed Ex_* matches it, along with its functor categories, its component (c_□ followed by Lg'^*ε_{f,K}, transposed under the adjunction for f') and the clause that no invertibility is claimed. The only edits are two. (1) The square and the finite coefficient datum A=O_E/ϖ^n, n≥1, are now stated in the node; the labels follow sk-def-sf-exchanges, with g':X'→X and g:Y'→Y. (2) The dangling pur713-lem-star-adjunction, which has no node in the DAG, is replaced by the existing def-sfb-finite-derived-adjunction. That node gives Lg^*⊣Rg_* on unbounded D(·_proét,𝒜). Mod_A meets the hypotheses on 𝒜 in def-sfb-finite-derived-pullback-iso. Matching Mod_A-valued sheaves with the A_T-modules of def-weil-pbc-proetale-site is the standard short identification. Type check: the counit is Lf^*Rf_*K→K, and the Hom bijection for f' with M=Lg^*Rf_*K and N=Lg'^*K gives Lg^*Rf_*K→Rf'_*Lg'^*K in D(Y'_Proet,A). This is the same as the unit/comparison/counit composite in sk-def-sf-exchanges. pur713-def-pullback-comparison (unsplit) states the needed natural iso with the right orientation. Its own dangling μ references are a matter for its own split, and the report flags them. Edge cases: in the identity square the triangle identity reduces the component to the identity; K=0, empty schemes and n=1 all work. There are no new nodes and no proof steps. The duplicate search found that the -plus variant and the module and shriek exchanges are not duplicates. The transitive dependency closure does not contain the item, so there is no cycle. There are no SGA citations and no Lean attachment. I made no fixes and recorded no tool_uses."
  }
 }

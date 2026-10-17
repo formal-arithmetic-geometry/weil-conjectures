@@ -3,66 +3,174 @@
  "blueprint": {
   "is": "lem-trf-weil-shriek-iterates",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Iterates of the Weil $!$-pushforward",
- "statement": "In the setting of [def-trf-weil-shriek-pushforward], let\n$K\\in D^b_{ctf}(X,A)$ and $m,n\\geq1$.\n\n1. *Base-change composition.* After the pullback composition\nidentifications $L\\Phi^{(m+n)*}\\simeq L\\Phi^{m*}L\\Phi^{n*}$ on $X$\nand on $Y$,\n$$\n\\theta_{f,m+n,K}=\\theta_{f,m,L\\Phi_X^{n*}K}\\circ\nL\\Phi_Y^{m*}\\theta_{f,n,K}:\nL\\Phi_Y^{(m+n)*}Rf_!K\\longrightarrow Rf_!L\\Phi_X^{(m+n)*}K .\n$$\n1. *Iterates.* Let $u:L\\Phi_X^*K\\to K$ be a Frobenius coefficient\nmorphism, with iterates $u_m$ of\n[def-trf-frobenius-coefficient-morphism], and let\n$\\psi=Rf_!u\\circ\\theta_{f,1}$ be the Weil $!$-pushforward. Then the\niterates $\\psi_m$ of the Frobenius coefficient morphism $\\psi$ on\n$Rf_!K$ satisfy\n$$\n\\psi_m=Rf_!u_m\\circ\\theta_{f,m}\\qquad(m\\geq1).\n$$\n\nNeither statement uses invertibility of $u$.",
+ "statement": "Fix distinct primes $p,\\ell$, an integer $a\\geq1$, $q=p^a$, a finite field $k_0$ with $q$ elements and an algebraic closure $k$ of $k_0$. Fix a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and an integer $c\\geq1$, and put $A=\\mathcal O_E/\\varpi_E^c$, with the finite-coefficient categories and derived operations of [def-trf-coefficient-conventions]. Let $f_0:X_0\\to Y_0$ be a separated morphism of separated finite-type $k_0$-schemes. Put $X=X_0\\times_{k_0}k$, $Y=Y_0\\times_{k_0}k$, and let $f:X\\to Y$ be its base change. Let $\\Phi_X,\\Phi_Y$ be the base changes to $k$ of the $q$-power scheme Frobenii of $X_0,Y_0$ [def-trf-scheme-frobenius]. Let $K\\in D^b_{ctf}(X,A)$, the bounded constructible complexes of finite Tor amplitude [def-weil-finite-tor-amplitude]. For every integer $j\\geq1$, let\n$$\\theta_{f,j,K}:L\\Phi_Y^{j*}Rf_!K\\longrightarrow Rf_!L\\Phi_X^{j*}K$$\nbe the specified Frobenius comparison (compact-support exchange followed by the relative-Frobenius adjunction unit and the proper/direct-image and pullback composition comparisons) of [def-trf-weil-shriek-pushforward]. Let $m,n\\geq1$.\n\n1. *Base-change composition.* After the pullback composition\nidentifications $L\\Phi^{(m+n)*}\\simeq L\\Phi^{m*}L\\Phi^{n*}$ on $X$\nand on $Y$,\n$$\n\\theta_{f,m+n,K}=\\theta_{f,m,L\\Phi_X^{n*}K}\\circ\nL\\Phi_Y^{m*}\\theta_{f,n,K}:\nL\\Phi_Y^{(m+n)*}Rf_!K\\longrightarrow Rf_!L\\Phi_X^{(m+n)*}K .\n$$\n1. *Iterates.* Let $u:L\\Phi_X^*K\\to K$ be a Frobenius coefficient\nmorphism, with iterates $u_m$ of\n[def-trf-frobenius-coefficient-morphism], and let\n$\\psi=Rf_!u\\circ\\theta_{f,1}$ be the Weil $!$-pushforward. Then the\niterates $\\psi_m$ of the Frobenius coefficient morphism $\\psi$ on\n$Rf_!K$ satisfy\n$$\n\\psi_m=Rf_!u_m\\circ\\theta_{f,m}\\qquad(m\\geq1).\n$$\n\nNeither statement uses invertibility of $u$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
   "place": "node lem-trf-weil-shriek-iterates, order 2365"
  },
  "stmt_deps": [
   "def-trf-weil-shriek-pushforward",
-  "def-trf-frobenius-coefficient-morphism"
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "*Step 1: factorizing the relative Frobenius.* Paste the Cartesian\nsquare defining $X'_n$ of [d-relative-frob] with the Cartesian\nsquare obtained by pulling $f'_n:X'_n\\to Y$ back along $\\Phi_Y^m$.\nSince $\\Phi_Y^n\\Phi_Y^m=\\Phi_Y^{m+n}$, the outer rectangle identifies\n$$\nX'_{m+n}=Y\\times_{\\Phi_Y^m,Y,f'_n}X'_n,\n\\qquad f'_{m+n}=\\text{first projection},\\qquad\np_{m+n}=p_nq,\n$$\nwhere $q:X'_{m+n}\\to X'_n$ is the second projection. On test points,\n$(y,x)\\in X'_m$ means $\\Phi_Y^my=f(x)$, and\n$t(y,x)=(y,r_n(x))=(y,(f(x),\\Phi_X^nx))$ defines a map\n$t:X'_m\\to X'_{m+n}$. The square\n$$\n\\begin{array}{ccc}\nX'_m&\\xrightarrow{\\ p_m\\ }&X\\\\\n{\\scriptstyle t}\\downarrow&&\\downarrow{\\scriptstyle r_n}\\\\\nX'_{m+n}&\\xrightarrow{\\ q\\ }&X'_n\n\\end{array}\n$$\nis Cartesian: a point of the fiber product is $(y,(y',x'),x)$ with\n$(y',x')=(f(x),\\Phi_X^nx)$, which is exactly a point $(y,x)$ of\n$X'_m$. Moreover $f'_{m+n}t=f'_m$, and\n$$\ntr_m(x)=(f(x),(f(x),\\Phi_X^{m+n}x))=r_{m+n}(x),\n$$\nso $r_{m+n}=t\\circ r_m$, with $t$ finite as a base change of $r_n$.",
+   "text": "Work throughout at the fixed finite coefficient ring $A=A_{E,c}$, with the separated finite-type geometric schemes of [def-trf-weil-shriek-pushforward]. The constructible domains in [prop-functor-package] contain $K$, its displayed pullbacks, and the compact-support direct images used below. In particular these objects are bounded with constructible cohomology. By [lem-weil-pbc-finite-ring-constructible-derived-origin], choose their bounded etale-origin witnesses when applying [fix-lem-exchanges]. Its finite-coefficient pasting formulas are therefore applicable; no completed or rational coefficient category is being identified with this category. Put $P=Lp_n^*K$ and $M=Lr_n^*P=L\\Phi_X^{n*}K$ using the pullback comparison of [lem-weil-pbc-proetale-derived-pullback-composition].",
    "uses": [
-    "d-relative-frob"
+    "def-trf-weil-shriek-pushforward",
+    "prop-functor-package",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "fix-lem-exchanges",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+    "place": "Proof, Step 2: domains of the comparison and of its exchange transformations"
+   }
   },
   {
-   "text": "*Step 2: the comparison.* Put $M=L\\Phi_X^{n*}K=Lr_n^*Lp_n^*K$.\nExpand the right-hand side of (1) using the three arrows of\n[def-trf-weil-shriek-pushforward]. The second factor is\n$L\\Phi_Y^{m*}$ of $\\operatorname{Ex}_!$ for the $\\Phi_Y^n$-square,\nfollowed by $L\\Phi_Y^{m*}Rf'_{n!}(\\eta_{r_n})$ and the composition\nidentification $Rf'_{n!}Rr_{n*}\\simeq Rf_!$. For the first factor,\nwrite the Cartesian square of $f$ along $\\Phi_Y^m$ as the vertical\npasting of the $t$-square above and the square of $f'_n$ along\n$\\Phi_Y^m$. By the pasting identity and the compatibility with the\ncomposition law of [fix-lem-exchanges], clauses (2) and (4), its\n$\\operatorname{Ex}_!$ is the $\\operatorname{Ex}_!$ for $f'_n$ followed\nby the exchange for $r_n$ along $q$. The latter is the ordinary\nexchange $\\operatorname{Ex}_*:Lq^*Rr_{n*}\\to Rt_*Lp_m^*$ of\n[def-exchange-projection], because $r_n$ is proper and one may use\nthe trivial compactification; it is invertible by proper base change\n([prop-functor-package], clause (4)).\n\nBy naturality of $\\operatorname{Ex}_!$ in the coefficient complex\n([fix-lem-exchanges], clause (1)), move\n$\\operatorname{Ex}_!$ for $f'_n$ past $\\eta_{r_n}$. The two\nexchanges for the $\\Phi_Y^n$- and $\\Phi_Y^m$-squares then paste, by\n[fix-lem-exchanges], clause (2), to the exchange for the outer\nrectangle, which is the first arrow of $\\theta_{f,m+n}$. What remains\non $N=Lp_{m+n}^*K=Lq^*Lp_n^*K$ is\n$$\nN\\xrightarrow{Lq^*\\eta_{r_n}}Lq^*Rr_{n*}Lr_n^*Lp_n^*K\n\\xrightarrow{\\operatorname{Ex}_*}Rt_*Lp_m^*Lr_n^*Lp_n^*K\n\\simeq Rt_*Lt^*N\n\\xrightarrow{Rt_*\\eta_{r_m}Lt^*}Rt_*Rr_{m*}Lr_m^*Lt^*N .\n$$\nBy the definition of $\\operatorname{Ex}_*$ as the adjoint of the\ncounit composite in [def-exchange-projection], and the triangle\nidentities of $Lr_n^*\\dashv Rr_{n*}$ of\n[def-weil-derived-direct-image], the composite of the first two\narrows is the unit $\\eta_t$ at $N$, after $Lp_m^*Lr_n^*\\simeq\nLt^*Lq^*$ from $r_np_m=qt$\n([def-weil-derived-pullback-tensor-hom]). The unit of the composite\nadjunction for $r_{m+n}=tr_m$ is $Rt_*\\eta_{r_m}Lt^*\\circ\\eta_t$.\nHence the displayed composite is $\\eta_{r_{m+n}}$ at $N$. Finally,\nall remaining arrows are composition identifications for $Rh_!$ and\n$Lh^*$ ([prop-functor-package], clause (3), and\n[def-weil-derived-pullback-tensor-hom]), which are coherent for\n$f'_{m+n}tr_m=f$ and $p_nqtr_m=\\Phi_X^{m+n}$. Therefore the\nright-hand side of (1) equals the defining composite of\n$\\theta_{f,m+n,K}$, proving (1).",
+   "text": "Use the current defining display and projection identities of [d-relative-frob]: $X'_j=Y\\times_{\\Phi_Y^j,Y,f}X$, $r_j=(f,\\Phi_X^j)$, $p_jr_j=\\Phi_X^j$, $f'_jr_j=f$, and $\\Phi_Y^jf=f\\Phi_X^j$ for $j\\geq1$. Its fibre product is the universal pair construction, so the following coordinate argument concerns scheme morphisms on every test scheme; it does not use the affine-chart paragraph of that node. In nested coordinates identify $X'_{m+n}$ with $Y\\times_{\\Phi_Y^m,Y,f'_n}X'_n$: a test-scheme point is $(y,(z,x'))$ with $z=\\Phi_Y^m y$ and $f(x')=\\Phi_Y^n z$. This is naturally equivalent to the pair $(y,x')$ with $f(x')=\\Phi_Y^{m+n}y$. Write $q(y,(z,x'))=(z,x')$; then $p_{m+n}=p_nq$. Define $t:X'_m\\to X'_{m+n}$ by $t(y,x)=(y,(f(x),\\Phi_X^n x))$. The defining equations hold because $f(x)=\\Phi_Y^m y$ and $f\\Phi_X^n=\\Phi_Y^n f$. For every test scheme, a point of $X'_{m+n}\\times_{X'_n,r_n}X$ consists exactly of $(y,x)$ with $\\Phi_Y^m y=f(x)$; the projections are $t$ and $p_m$. Thus the square with top $p_m$, bottom $q$, and vertical maps $t,r_n$ is Cartesian, as a functorial fibre-product identity, including for nonreduced test schemes. Also $f'_{m+n}t=f'_m$ and\n$$t r_m(x)=(f(x),(f(\\Phi_X^m x),\\Phi_X^{m+n}x))=(f(x),(\\Phi_Y^m f(x),\\Phi_X^{m+n}x)),$$\nwhich is $r_{m+n}(x)$ under the nested-coordinate identification. By [i-relative-frob], $r_n,r_m,r_{m+n}$ are finite. By [lem-weil-pbc-finite-morphism-permanence](a), $t$ is finite. These finite maps are proper: apply its clause (c) to the identity of the target (which is proper directly from its definition). Hence their ordinary and compact-support direct images may be identified as in [prop-functor-package](3).",
+   "uses": [
+    "d-relative-frob",
+    "i-relative-frob",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+    "place": "Proof, Step 1: factorization and Cartesian t-square; corrected nested coordinate of t r_m"
+   }
+  },
+  {
+   "text": "Here is the unit calculation needed for that square. Write $\\beta_Q:Lq^*Rr_{n*}Q\\to Rt_*Lp_m^*Q$ for its ordinary exchange, as defined in [def-exchange-projection]. The adjunctions are supplied by [def-weil-pbc-proetale-operations], and the square comparison $\\alpha:Lt^*Lq^*\\simeq Lp_m^*Lr_n^*$ by [lem-weil-pbc-proetale-derived-pullback-composition]. Transpose $\\beta_{Lr_n^*P}\\circ Lq^*\\eta_{r_n,P}$ under $Lt^*\\dashv Rt_*$. The counit definition of exchange and naturality of $\\alpha$ give the transpose\n$$Lp_m^*\\bigl(\\varepsilon_{r_n,Lr_n^*P}\\circ Lr_n^*\\eta_{r_n,P}\\bigr)\\circ\\alpha_P=\\alpha_P,$$\nby the triangle identity. The transpose of $Rt_*(\\alpha_P)\\circ\\eta_{t,Lq^*P}$ is also $\\alpha_P$. Injectivity of the adjunction hom bijection therefore proves\n$$\\beta_{Lr_n^*P}\\circ Lq^*\\eta_{r_n,P}=Rt_*(\\alpha_P)\\circ\\eta_{t,Lq^*P}.$$\nAfter the indicated pullback identification, this is precisely the unit $\\eta_t$ on $N=Lq^*P$. This calculation needs neither an inverse of $\\beta$ nor invertibility of a coefficient morphism.",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+    "place": "Proof, Step 2: first two remaining arrows; Stacks 07A6 lemma-adjoint and 07A7 remark-base-change"
+   }
+  },
+  {
+   "text": "For clarity also fix the composition normalization of units. By [def-weil-pbc-composite-adjunction], the unit of $Lr_m^*Lt^*\\dashv Rt_*Rr_{m*}$ at $N$ is\n$$Rt_*(\\eta_{r_m,Lt^*N})\\circ\\eta_{t,N}.$$\nUnder $r_{m+n}=tr_m$, the pullback comparison [lem-weil-pbc-proetale-derived-pullback-composition] and the canonical direct-image comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identify this unit with $\\eta_{r_{m+n},N}$. Indeed the composite hom bijection sends the identity of $Lr_m^*Lt^*N$ first to $\\eta_{r_m,Lt^*N}$ and then to the displayed map. This is the canonical comparison just cited, rather than a choice of an unnormalized isomorphism: by [lem-pc-pre-derived-adjoint-functors-general], the derived hom bijection on a fraction representative is the class of the termwise adjoint map followed by its resolution comparisons. For a K-injective $I$ and a resolution $j:r_{m*}I\\to J$, successively taking these adjoints inserts exactly the map $t_*j$; its class is the normalization of the direct-image composition node. The pullback comparison is likewise termwise on the K-flat representative by its cited statement. Thus the normalized comparison identifies this same bijection with the adjunction for $L(tr_m)^*$ of [def-weil-pbc-proetale-operations]; consequently it sends that identity to $\\eta_{tr_m,N}$. This also fixes the direction of every composition comparison used here. For three pullbacks, their canonical comparisons agree because on a K-flat representative with flat terms each is the termwise composition comparison; both parenthesizations have the same action on every local section.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-proetale-operations",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+    "place": "Proof, Step 2: composite-adjunction unit and canonical comparisons; Stacks 0DV0 lemma-compose-counits, 0D6D lemma-derived-pullback-composition, 0D6E lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Expand $\\theta_{f,m,M}\\circ L\\Phi_Y^{m*}\\theta_{f,n,K}$ by [def-trf-weil-shriek-pushforward]. Each expansion consists of compact-support exchange, direct image of the relative-Frobenius unit, and the proper/direct-image and pullback composition identifications. The $\\Phi_Y^m$ square for $f=f'_nr_n$ is the vertical pasting of the $t$-square in step 2 and the $\\Phi_Y^m$ square for $f'_n$. By [fix-lem-exchanges](2),(4), replace its exchange by that of $f'_n$ followed by the exchange for $r_n$ along $q$. The latter is $\\beta$: since $r_n$ is proper, take the compactification $(\\operatorname{id},r_n)$ in the formula of [def-exchange-projection]; the open exchange is the identity, so its compact-support formula is the ordinary exchange. Independence of this choice is [fix-lem-exchanges](4). Naturality in the coefficient morphism $\\eta_{r_n,P}$, clause (1), moves the exchange for $f'_n$ past this unit. The two resulting exchanges for base changes $\\Phi_Y^n$ and $\\Phi_Y^m$ combine by clause (2) into the exchange for their outer rectangle. After that first arrow, the remaining map, before applying $Rf'_{m+n!}$, is\n$$N\\xrightarrow{Lq^*\\eta_{r_n,P}}Lq^*Rr_{n*}Lr_n^*P\\xrightarrow{\\beta}Rt_*Lp_m^*Lr_n^*P\\simeq Rt_*Lt^*N\\xrightarrow{Rt_*\\eta_{r_m,Lt^*N}}Rt_*Rr_{m*}Lr_m^*Lt^*N.$$\nStep 3 identifies the first two arrows with $\\eta_t$; step 4 identifies the whole map with $\\eta_{r_{m+n},N}$. Thus this is the defining unit arrow of $\\theta_{f,m+n,K}$. The remaining comparisons agree by the identity/associativity and coherence assertions of [prop-functor-package](3) and its final paragraph, together with the pullback comparisons of step 4: their composites are $f'_{m+n}tr_m=f$ and $p_nqtr_m=\\Phi_X^{m+n}$. We have proved clause (1), as an equality of the specified maps, not just existence of an isomorphism between their endpoints.",
    "uses": [
     "def-trf-weil-shriek-pushforward",
     "fix-lem-exchanges",
     "def-exchange-projection",
-    "prop-functor-package",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom"
+    "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+    "place": "Proof, Step 2: expand, paste, and identify the comparison"
+   }
   },
   {
-   "text": "*Step 3: iterates.* For $m=1$, $\\psi_1=\\psi=Rf_!u\\circ\\theta_{f,1}$\nis the definition. Assume the formula for $m$. By\n[def-trf-frobenius-coefficient-morphism],\n$\\psi_{m+1}=\\psi\\circ L\\Phi_Y^*\\psi_m$ after the pullback\ncomposition identification. Thus\n$$\n\\psi_{m+1}=Rf_!u\\circ\\theta_{f,1,K}\\circ L\\Phi_Y^*Rf_!u_m\n\\circ L\\Phi_Y^*\\theta_{f,m,K}.\n$$\nNaturality of $\\theta_{f,1}$ in $K$\n([def-trf-weil-shriek-pushforward]) gives\n$\\theta_{f,1,K}\\circ L\\Phi_Y^*Rf_!u_m\n=Rf_!L\\Phi_X^*u_m\\circ\\theta_{f,1,L\\Phi_X^{m*}K}$. Hence\n$$\n\\psi_{m+1}=Rf_!(u\\circ L\\Phi_X^*u_m)\\circ\n\\theta_{f,1,L\\Phi_X^{m*}K}\\circ L\\Phi_Y^*\\theta_{f,m,K}\n=Rf_!u_{m+1}\\circ\\theta_{f,m+1,K},\n$$\nusing the recursive definition of $u_{m+1}$ in\n[def-trf-frobenius-coefficient-morphism] and (1) with the pair\n$(1,m)$. This proves (2) by induction.",
+   "text": "Prove clause (2) by induction on the positive integer $m$. The base $m=1$ is $\\psi=Rf_!u\\circ\\theta_{f,1}$ from [def-trf-weil-shriek-pushforward]. Suppose $\\psi_m=Rf_!u_m\\circ\\theta_{f,m,K}$. The recursion in the current statement of [def-trf-frobenius-coefficient-morphism] is specified for indices at least 2, with the separate base case at 1. Since $m\\geq1$ here, it applies at $m+1$ and gives\n$$\\psi_{m+1}=Rf_!u\\circ\\theta_{f,1,K}\\circ L\\Phi_Y^*Rf_!u_m\\circ L\\Phi_Y^*\\theta_{f,m,K}.$$\nApply the naturality of $\\theta_{f,1}$ in [def-trf-weil-shriek-pushforward], whose current statement explicitly composes the naturality squares for its three defining arrows, to the actual morphism $u_m:L\\Phi_X^{m*}K\\to K$:\n$$\\theta_{f,1,K}\\circ L\\Phi_Y^*Rf_!u_m=Rf_!L\\Phi_X^*u_m\\circ\\theta_{f,1,L\\Phi_X^{m*}K}.$$\nFunctoriality of $Rf_!$, the recursion $u_{m+1}=u\\circ L\\Phi_X^*u_m$, and clause (1) proved in step 5 for $(1,m)$ now give\n$$\\psi_{m+1}=Rf_!u_{m+1}\\circ\\theta_{f,1,L\\Phi_X^{m*}K}\\circ L\\Phi_Y^*\\theta_{f,m,K}=Rf_!u_{m+1}\\circ\\theta_{f,m+1,K}.$$\nThis proves the induction. Every use of $u$ was composition or functoriality; no inverse was used, so the argument includes noninvertible and zero coefficient morphisms.",
    "uses": [
     "def-trf-frobenius-coefficient-morphism",
     "def-trf-weil-shriek-pushforward"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
+    "place": "Proof, Step 3: base, inductive hypothesis, naturality square, and recursion"
+   }
   }
  ],
  "proof_deps": [
-  "d-relative-frob",
   "def-trf-weil-shriek-pushforward",
-  "fix-lem-exchanges",
-  "def-exchange-projection",
   "prop-functor-package",
-  "def-weil-derived-direct-image",
-  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "fix-lem-exchanges",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "d-relative-frob",
+  "i-relative-frob",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-exchange-projection",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-pre-derived-adjoint-functors-general",
   "def-trf-frobenius-coefficient-morphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-iterates.md",
-  "place": "## Proof"
+  "place": "Proof, Steps 1–3, with explicit adjunction calculations and corrected nested coordinates; current main-20261015 statement checked unchanged"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriekExchange|lowerShriekPushCoeff|frobenius.*iterate",
+   "results": "25 hits: Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/Exponent.lean, Mathlib/FieldTheory/PurelyInseparable/Exponent.lean, Mathlib/Algebra/CharP/Reduced.lean, Mathlib/Algebra/CharP/Reduced.lean, Mathlib/Algebra/CharP/Frobenius.lean, Mathlib/Algebra/CharP/Frobenius.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ring Frobenius, underived structure-sheaf pushforward, Dold-Kan naturality or abstract whiskering; none states both clauses for the specified pro-etale compact-support comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius coefficient morphism iterate commutes with compact support direct image",
+   "results": "8 hits: Perfection.coeff_iterate_frobenius', PreTilt.coeff_iterate_frobenius, PreTilt.coeff_iterate_frobenius', Perfection.coeff_iterate_frobeniusEquiv_symm, RingHom.map_iterate_frobenius, PreTilt.coeff_iterate_frobeniusEquiv_symm, RingHom.iterateFrobenius_comm, RingHom.map_iterate_frobeniusEquiv_symm",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ring Frobenius, underived structure-sheaf pushforward, Dold-Kan naturality or abstract whiskering; none states both clauses for the specified pro-etale compact-support comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ring Frobenius, underived structure-sheaf pushforward, Dold-Kan naturality or abstract whiskering; none states both clauses for the specified pro-etale compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterates of the Frobenius comparison with compact support pushforward compose by pasting base change squares",
+   "results": "8 hits: RingHom.iterateFrobenius_comm, iterateFrobeniusEquiv_add, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CategoryTheory.ExponentiableMorphism.comp_pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, iterateFrobeniusEquiv_add_apply, iterateFrobenius_add, CategoryTheory.ExponentiableMorphism.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ring Frobenius, underived structure-sheaf pushforward, Dold-Kan naturality or abstract whiskering; none states both clauses for the specified pro-etale compact-support comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "exchange.*(comp|paste)|(comp|paste).*exchange",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Enriched/HomCongr.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ring Frobenius, underived structure-sheaf pushforward, Dold-Kan naturality or abstract whiskering; none states both clauses for the specified pro-etale compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation intertwining two endofunctors commutes with iterated coefficient maps by induction",
+   "results": "8 hits: AlgebraicTopology.DoldKan.natTransP, AlgebraicTopology.DoldKan.QInfty_f_naturality, AlgebraicTopology.DoldKan.Q_f_naturality, AlgebraicTopology.DoldKan.PInfty_f_naturality, AlgebraicTopology.DoldKan.P_f_naturality, AlgebraicTopology.DoldKan.QInfty_f_naturality_assoc, CategoryTheory.Endofunctor.Coalgebra.functorOfNatTrans_obj_str, AlgebraicTopology.DoldKan.Q_f_naturality_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ring Frobenius, underived structure-sheaf pushforward, Dold-Kan naturality or abstract whiskering; none states both clauses for the specified pro-etale compact-support comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -91,5 +199,54 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-weil-push"
+ "unit": "sk-d-weil-push",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-weil-shriek-iterates",
+  "worker": "stage1",
+  "summary": "Checked both clauses and the degree-one-only existing Lean code. Reused existing nodes, corrected the false nested-coordinate formula in the imported proof, supplied finite base change and etale-origin hypotheses, replaced definition-only adjunction/composition citations with their actual interfaces, and expanded the unit cancellation and positive-integer induction. Expanded the statement's formerly reference-only setting into the same explicit finite-field, coefficient and morphism hypotheses after preflight B2; no mathematical conclusion or hypothesis changed and no new nodes. Repair of the landing refusal: revalidated every proof citation against the current DAG, replaced stale excerpts for d-relative-frob and def-trf-frobenius-coefficient-morphism, made the universal-pair and positive-index recursion uses explicit, and refreshed the compactification excerpt for step 5. Both conclusions and all dependencies are retained. On continuation of the retained repair, re-read the now-expanded naturality calculation in def-trf-weil-shriek-pushforward, refreshed its three stale citation excerpts to full current clauses, and made the precise naturality interface explicit in step 6.",
+  "blueprint": "Realizes master lem-trf-weil-shriek-iterates Proof Step 1 in split step 2 (correcting its nested coordinates), Proof Step 2 in split steps 1 and 3–5, and Proof Step 3 in split step 6. The current main-20261015 file has the same two-clause statement and no Proof section; the unit sk-d-weil-push explicitly prescribes this base-change-composition route. The opening setting reference is expanded faithfully from def-trf-weil-shriek-pushforward; coefficient exponent c is named separately from the iterate n.",
+  "tool_uses": [
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Naturality and horizontal/vertical pasting of the specified finite-coefficient exchange maps; the unit needs this exchange calculus, not a different proof route."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Constructible domains, proper/compact-support comparison and coherent compact-support composition used in defining theta."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Supplies the witnesses explicitly required by the finite pro-etale exchange statement; no own-unit node states constructible etale origin."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical finite-coefficient derived pullback comparisons, including their representative normalization; the old definition citation does not state this theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical ordinary derived direct-image comparison used to identify the composite-adjunction unit; this is general ringed-topos calculus."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Its explicit fraction-level derived hom bijection checks that the normalized derived pushforward comparison in step 4 is the right-adjoint comparison; no own-unit node states this generic calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-lem-exchanges",
+  "prop-functor-package",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-cba21bb69",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-cba21bb69 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps, all 17 cited node statements, both blueprint snapshots (main-20261015 keeps the proof in a separate .proof.md identical to master's, so the report's 'no Proof section' is wrong; this does not affect the DAG), the unit and chapter records, and Stacks 0D6D, 0D6E, lemma-adjoint, 07A7 and 0DV0. Statement: the expansion of 'in the setting of def-trf-weil-shriek-pushforward' is faithful clause by clause, with the same finite coefficient ring A_{E,c} on the pro-etale site and D^b_ctf; nothing is weakened. Step 2: I recomputed the nested coordinates. The Cartesian t-square holds on all test schemes, and t r_m(x)=(f(x),(Phi_Y^m f(x),Phi^{m+n}x))=r_{m+n}(x). This confirms the worker's correction of the blueprint proof's middle coordinate (T vs T^2 on A^1/F_2). t is finite by permanence (a) and proper by (c) with h=id. Step 3: the mate/triangle-identity calculation is checked and correctly marked elementary. Step 4: the composite unit is identified with eta_{t r_m} through the conjugate pushforward comparison (0D6E proof), bridged by the fraction-level adjunction node; correctly non-elementary. Step 5: vertical and horizontal pasting by fix-lem-exchanges (1),(2),(4), with the compactification (id,r_n) so Ex_! is Ex_*; it proves clause (1) rather than restating it. Step 6: the induction with base 1 uses the recursion at index >=2 and explicit naturality of theta; no inverse is needed. Mechanical checks: no new nodes, proof_deps equals the union of uses, every cited id exists and is unmerged, no cycle, no SGA, no duplicate found by rg (sk-d-weil-push is the unit definition; operator-fibres uses this item). All six declared tool_uses (fix-lem-exchanges, prop-functor-package, finite-ring etale origin, pullback composition, pushforward composition, pre-derived adjoint) are accepted as generic tools. Minor remark, not a fault: compatibility of Rh_*=Rh_! with composition rests on package (3) coherence and exchanges (4), at the blueprint's own granularity. No fixes written."
+ }
 }
