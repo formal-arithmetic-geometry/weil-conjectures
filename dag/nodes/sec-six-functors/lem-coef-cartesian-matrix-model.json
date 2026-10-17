@@ -13,9 +13,151 @@
   "def-coef-nonsymmetric-monoid-axiom",
   "def-sfb-monoidal-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=S\\times S$. A cone or cocone in the family category is exactly a family of coordinate cones or cocones; taking their limits or colimits in $\\mathcal V$ has the required universal property, since maps of families are independent coordinate maps. Declare $C_D,F_D,W_D$ coordinatewise. Two-out-of-three and retract closure for $W_D$ hold in every coordinate. Apply each of the two functorial factorizations in $\\mathcal V$ at each $d\\in D$ to obtain functorial factorizations in the family category. Diagonal fillers for the resulting pairs are families of the coordinate fillers. Conversely, testing the right lifting property against a map supported at $d$ (initial objects elsewhere) tests that coordinate; testing the left lifting property against a map equal to the chosen right-hand map at $d$ and the identity of the terminal object elsewhere tests that coordinate. The base weak factorization systems therefore identify both lifting classes exactly. This proves the model axioms of [lem-coef-model-infinity-derived-adjunction] for the stated coordinatewise classes.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2, printed p.1596; product model axioms written out."
+   }
+  },
+  {
+   "text": "For $d\\in D$, let $F_dA$ be $A$ at $d$ and $0$ elsewhere. A map $F_dA\\to H$ is uniquely a map $A\\to H(d)$, so $F_d$ is left adjoint to evaluation. For a map $i:A\\to B$, $F_di$ is $i$ at $d$ and $1_0$ elsewhere. A square from $F_di$ to a family map $p$ is exactly a square from $i$ to $p(d)$, and their fillers correspond. Consequently $(\\bigcup_d F_dI)^{\\square}=F_D\\cap W_D$ and $(\\bigcup_d F_dJ)^{\\square}=F_D$. These are small sets because $D,I,J$ are small. Together with Step 1, these equalities give both set-generated weak factorization systems in the combinatorial convention of [lem-coef-combinatorial-localization-presentability].",
+   "uses": [
+    "lem-coef-combinatorial-localization-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2 and comparison with Remark 2.3; single-coordinate generators."
+   }
+  },
+  {
+   "text": "Regard $D$ as a small discrete category. Its opposite is itself, and $\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal V)$ is precisely the family category: there are no nonidentity arrows and hence no extra action data. The base is locally presentable by hypothesis and has pullbacks because it is a model category. Thus [lem-coef-presheaf-local-presentability] applies and proves that $\\mathcal G_S$ is locally presentable. With Steps 1 and 2 it is combinatorial.",
+   "uses": [
+    "lem-coef-presheaf-local-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2, printed p.1596; local presentability supplied by the existing ordinary-presheaf theorem."
+   }
+  },
+  {
+   "text": "For completeness the displayed generating sets satisfy the usual small-domain condition as well. By [lem-coef-object-presentability-rank], every domain $A$ of a map of $I$ or $J$ has a regular presentability rank $\\tau_A$ in the chosen universe. Apply [lem-coef-small-family-regular-bound] to the underlying sets of these ordinals to choose an infinite regular $\\kappa>\\tau_A$ simultaneously. A $\\kappa$-filtered category is $\\tau_A$-filtered; evaluation preserves its colimits by Step 1, and $\\operatorname{Hom}(F_dA,-)=\\operatorname{Hom}(A,\\operatorname{ev}_d(-))$. Hence every displayed generating domain preserves these colimits. In particular it is small for continuous $\\kappa$-chains of generating cells: regularity makes the ordinal $\\kappa$ a $\\kappa$-filtered index. Every graph is cofibrant since its initial map is a cofibration at every coordinate; thus the displayed generating sources are cofibrant and the structure is tractable. A pushout of a coordinatewise weak equivalence along a coordinatewise cofibration is a weak equivalence at every coordinate by left properness of $\\mathcal V$ and Step 1. This proves left properness.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2, printed p.1596; presentable sources, tractability and left properness with the cardinal bound made explicit."
+   }
+  },
+  {
+   "text": "We first record the distributivity used in constructing $\\star$. Cartesian closedness supplies natural bijections $\\operatorname{Hom}(X\\times A,T)\\cong\\operatorname{Hom}(A,[X,T])$. For any small diagram $(A_i)$, maps from $X\\times\\operatorname{colim}_iA_i$ to $T$ therefore correspond to compatible families of maps $X\\times A_i\\to T$. Thus the canonical cocone exhibits $X\\times\\operatorname{colim}_iA_i$ as their colimit, by its universal property. Interchanging product factors gives the same assertion in the other variable. This includes $X\\times0\\cong0$ and distribution over small coproducts. On arrows define $\\star$ by the coproduct of the product maps in each $(s,t)$; the identity and composition laws follow on every coproduct injection from the product projections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1, printed pp.1595-1596; distributivity from the exponential universal property."
+   }
+  },
+  {
+   "text": "Both $((P\\star Q)\\star T)(s,t)$ and $(P\\star(Q\\star T))(s,t)$ expand, by Step 5 and the coproduct universal property, to the coproduct indexed by $(u,v)\\in S^2$ of $P(v,t)\\times Q(u,v)\\times T(s,u)$. The associator sends the summand with intermediate vertices $(u,v)$ to that same summand, using the product reassociation map $((p,q),z)\\mapsto(p,(q,z))$; this notation specifies the three product projections, rather than assuming elements of objects of $\\mathcal V$. Its inverse uses inverse reassociation and inverse reindexing. The composite maps have the original projections on each summand, hence are identities. These maps are natural because product maps preserve projections and coproduct maps preserve injections. For $E\\star P$, all summands except $u=t$ are initial by Step 5 and the remaining one is $\\mathbf1\\times P(s,t)$; the second projection gives the left unitor. For $P\\star E$, only $u=s$ remains and the first projection from $P(s,t)\\times\\mathbf1$ gives the right unitor. The unique maps to $\\mathbf1$ specify their inverses.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1, printed pp.1595-1596; explicit associator and diagonal-unit maps."
+   }
+  },
+  {
+   "text": "For the pentagon, expand each parenthesization of four graphs at $(s,t)$ as a coproduct over the same three intermediate vertices. Precompose either pentagon composite with one summand injection and then take any of the four product projections in its target summand. Both composites give the corresponding source projection and retain the same three vertices. Product uniqueness then gives equality on that summand, and coproduct uniqueness gives equality of the maps. For the triangle, expand $((P\\star E)\\star Q)(s,t)$; the $E$ coordinate forces its two adjacent vertices to be equal. Both composites delete that terminal factor and preserve the two other projections, so the same uniqueness argument gives equality. These are exactly the pentagon and triangle in [def-sfb-monoidal-category], and prove the monoidal coherence. No interchange of graph factors is used or claimed.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1; coherence of the explicitly constructed matrix monoidal category."
+   }
+  },
+  {
+   "text": "Maps $P\\star Q\\to H$ are families of maps $P(u,t)\\times Q(s,u)\\to H(s,t)$, indexed by $(s,u,t)$. Exponential adjunction and then the product universal property turn these, naturally, into maps $Q(s,u)\\to\\prod_t[P(u,t),H(s,t)]$ for each $(s,u)$. This is precisely a map $Q\\to R_P(H)$. Evaluation gives the inverse correspondence on each summand, so $P\\star-\\dashv R_P$. Alternatively interchange the two cartesian factors before currying the same family; the resulting maps are $P(u,t)\\to\\prod_s[Q(s,u),H(s,t)]$, namely a map $P\\to L_Q(H)$. Evaluation and the cartesian interchange undo this correspondence, giving $-\\star Q\\dashv L_Q$. Functoriality in $H$ is postcomposition inside each exponential and then the induced product map. All bijections commute with these maps and with precomposition, proving the stated natural adjunctions and biclosedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1, printed p.1596; both internal-Hom formulas and their Hom bijections."
+   }
+  },
+  {
+   "text": "Let $i:P\\to P'$ and $j:Q\\to Q'$ be graph cofibrations. For fixed $(s,t)$ put $A_u=P(u,t)$, $B_u=P'(u,t)$, $C_u=Q(s,u)$ and $D_u=Q'(s,u)$. By Step 1 the $(s,t)$ component of their graph pushout product has source $(\\coprod_u B_u\\times C_u)\\amalg_{\\coprod_u A_u\\times C_u}(\\coprod_u A_u\\times D_u)$. Maps from this object to any $Z$ are exactly pairs of maps from $B_u\\times C_u$ and $A_u\\times D_u$ agreeing on $A_u\\times C_u$, separately for each $u$. Hence this source is canonically $\\coprod_u((B_u\\times C_u)\\amalg_{A_u\\times C_u}(A_u\\times D_u))$, and its map to $\\coprod_uB_u\\times D_u$ is the coproduct of the base pushout products $i(u,t)\\mathbin\\square j(s,u)$. This identifies the actual comparison arrow, not just its endpoints.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1 and Remark 10.2; coordinatewise pushout-product comparison written using the pushout universal property."
+   }
+  },
+  {
+   "text": "A small coproduct of maps in a left lifting class is again in that class: a square against a fixed right-hand map restricts to one square for each summand; choose its fillers and assemble them by the coproduct universal property. In the base model category, cofibrations are the left lifting class of trivial fibrations and trivial cofibrations are the left lifting class of fibrations, by [lem-coef-model-infinity-derived-adjunction]. Each summand in Step 9 is a cofibration by the assumed base pushout-product axiom. If $i$ or $j$ is trivial, every corresponding summand is a trivial cofibration by that same axiom. The coproduct argument and Step 1 prove the graph pushout-product axiom in both cases. The unit $E$ is cofibrant since every graph is. The usual unit axiom is satisfied by the identity cofibrant replacement $E\\to E$, whose two tensors are identities.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2 and Definition 4.2; pushout-product and cofibrant-unit verification for this all-cofibrant specialization."
+   }
+  },
+  {
+   "text": "Use the class $G$ of [def-coef-nonsymmetric-monoid-axiom]. Each factor $0\\to X$ in a member of $G$ is a graph cofibration by Step 4. Inducting on the number of factors, Step 10 says that their left-associated pushout product is a cofibration, and becomes trivial as soon as the first trivial-cofibration factor is included; every subsequent factor preserves triviality. This includes a trivial first factor and the one-factor case. Thus $G$ consists of trivial cofibrations. In the graph model category these form ${}^{\\square}F_D$ by Step 1. By [lem-coef-lifting-class-closure] this class is closed under pushouts and arrow retracts; by [lem-coef-transfinite-left-lifting] it is closed under all small continuous transfinite compositions. It is contained in $W_D$. Taking $K={}^{\\square}F_D$ in the equivalent formulation of [def-coef-nonsymmetric-monoid-axiom] proves the nonsymmetric monoid axiom.",
+   "uses": [
+    "def-coef-nonsymmetric-monoid-axiom",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 9.1 and the following all-cofibrant observation, printed p.1591; compare Proposition 10.3, pp.1596-1597."
+   }
+  },
+  {
+   "text": "All indexing sets used above are $S$, its finite powers, and the small generating sets and cardinal bounds of Steps 2-4. The products, coproducts, limits, colimits and exponentials used are those already available in $\\mathcal V$ in the fixed universe conventions; the family category adds only small products of Hom sets. No larger index category has been introduced. If $S$ is empty, there is exactly one family and one family map, both generating sets are empty, and every coordinate assertion is vacuous; the unique category is monoidal biclosed and its unique arrow belongs to all three model classes. If $S$ is a singleton, the convolution, unit and both adjoints are the original cartesian product, terminal object and exponential. Thus the constructions include the empty and singleton cases without imposing nonemptiness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1 and Remark 10.2; explicit smallness and boundary cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "def-sfb-monoidal-category",
+  "def-coef-nonsymmetric-monoid-axiom",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting matrix-graph construction for paragraph 2; explicit proof checked against Muro Definitions 4.2, 9.1, 10.1, Remark 10.2 and Proposition 10.3, read online. Muro archival copy WANTED, so the delivery retains agent origin."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +193,38 @@
    "results": "{\"t\": \"2026-10-17T16:09:51Z\", \"tool\": \"leanfinder\", \"query\": \"Matrix convolution on graphs indexed by a set is a biclosed monoidal model category with objectwise weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"instMonoidalClosedCondensedSet\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.tensorClosed\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"CategoryTheory.GrothendieckTopology.W.monoidal\", \"HomologicalComplex.monoidalCategoryStruct\"], \"digest\": \"1e49dbf0c803a000\"}",
    "date": "2026-10-17",
    "verdict": "no match: Pi/Monoidal.lean:33-81 and Monoidal/Category.lean:960 construct pointwise tensor products, not convolution over intermediate vertices. Enriched/Basic.lean defines enriched objects, and SSet.instMonoidalClosed only supplies closedness of the base; none gives the convolution model structure and nonsymmetric monoid axiom."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Matrix convolution on enriched graphs gives a monoidal model category when every base object is cofibrant",
+   "results": "{\"t\": \"2026-10-17T16:29:58Z\", \"tool\": \"leanfinder\", \"query\": \"Matrix convolution on enriched graphs gives a monoidal model category when every base object is cofibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.Truncated.hoFunctor.monoidal\", \"CategoryTheory.Enriched.HasConicalProducts\", \"SSet.Truncated.instMonoidalOfNatNatCatHoFunctor₂\", \"CategoryTheory.EnrichedCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.EnrichedOrdinaryCategory\", \"CategoryTheory.EnrichedCat\"], \"digest\": \"e607a9a81fcda3ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned enriched-category/cartesian structures or partial Day convolution data, not the simultaneous graph model structure, displayed convolution and nonsymmetric monoid axiom. Read Pi/Monoidal.lean:33-81 and the opening definitions/TODOs of Monoidal/DayConvolution.lean and Monoidal/DayConvolution/Closed.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian model category enriched graph matrix convolution monoidal product coordinatewise model structure",
+   "results": "{\"t\": \"2026-10-17T16:30:11Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian model category enriched graph matrix convolution monoidal product coordinatewise model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.mk\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instHasFiniteProducts\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"CategoryTheory.CartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.tensorProductIsBinaryProduct\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"CategoryTheory.Grp_\"], \"digest\": \"2318473a9cb4c775\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned enriched-category/cartesian structures or partial Day convolution data, not the simultaneous graph model structure, displayed convolution and nonsymmetric monoid axiom. Read Pi/Monoidal.lean:33-81 and the opening definitions/TODOs of Monoidal/DayConvolution.lean and Monoidal/DayConvolution/Closed.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-17T16:30:12Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned enriched-category/cartesian structures or partial Day convolution data, not the simultaneous graph model structure, displayed convolution and nonsymmetric monoid axiom. Read Pi/Monoidal.lean:33-81 and the opening definitions/TODOs of Monoidal/DayConvolution.lean and Monoidal/DayConvolution/Closed.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "matrix|convolution|monoid.?axiom",
+   "results": "{\"t\": \"2026-10-17T16:30:12Z\", \"tool\": \"grep\", \"query\": \"matrix|convolution|monoid.?axiom\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\", \"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\", \"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\"], \"digest\": \"83e847334dd70ac7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned enriched-category/cartesian structures or partial Day convolution data, not the simultaneous graph model structure, displayed convolution and nonsymmetric monoid axiom. Read Pi/Monoidal.lean:33-81 and the opening definitions/TODOs of Monoidal/DayConvolution.lean and Monoidal/DayConvolution/Closed.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-joyal-fixed-object-rectification",
@@ -78,5 +248,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-cartesian-matrix-model",
+  "worker": "stage1",
+  "summary": "Checked the full cartesian statement and the two internal-Hom index orders against Muro online. Gave the coordinate model axioms and single-coordinate generators, used existing Mathlib leaves for local presentability, source ranks and lifting-class closure, and wrote the associator, coherence, adjunction, pushout-product and all-cofibrant monoid arguments explicitly. No new node, statement change, attachment or route change. Empty vertex set retained.",
+  "blueprint": "Realizes the supporting matrix-graph foundation of the derived coefficient-adjunction calculation in paragraph 2 of prop-coef-integral-exceptional-adjoint; keeps the existing chain of created-item ancestors through fixed-object rectification. No geometric or coefficient transport step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-46b9970d8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-46b9970d8 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 12 steps and the statements of all 9 cited nodes. I fetched Muro's AGT 2011 paper from msp.org read-only and checked it at the cited places. Def 10.1 (p.1595) gives the tensor (M⊗N)(x,y)=∐_z M(z,y)⊗N(x,z), the same index order as P⋆Q. The two right adjoints Hom_l and Hom_r (p.1596) match R_P and L_Q exactly. Remark 10.2 gives the coordinatewise product model and presentable generators. The remark after Def 9.1 (p.1591) says that when all objects are cofibrant the monoid axiom follows from the pushout-product axiom, which is Step 11's argument. Prop 10.3 is not needed. I recomputed both bracketings of the associator (∐_{u,v} P(v,t)×Q(u,v)×T(s,u)), the unitors (only u=t, resp. u=s survive, using 0×X≅0), both Hom bijections, and the coordinatewise pushout-product comparison as a coproduct of base pushout products. The coproduct-of-lifting argument, the K=^□F_D closure via the lifting-class-closure and transfinite-left-lifting Mathlib leaves, the lifting tests in Step 1 and the hypotheses of the presheaf, rank and regular-bound leaves all hold. Edge cases S=∅, |S|=1 and |S|=2 check out. proof_deps equals the union of the step uses. The route stays in sk-prop-sf-biduality-general plus definitions and Mathlib leaves, no SGA is cited, and no tool_uses are needed. There are no new nodes. The rg search found no duplicate, and the parent joyal-fixed-object-rectification uses exactly the stated conclusions. No changes."
  }
 }
