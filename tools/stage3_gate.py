@@ -93,8 +93,8 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         if data: bad.append("changes the body of non-theorem declaration(s) " + short(data))
         attrs = [k for k in d["new"] if k in d["old"] and d["old"][k].get("head") != d["new"][k].get("head")]
         if attrs: bad.append("changes attributes of " + short(attrs))
-        sheaf_imp = [i for i in d["added_imports"] if i.startswith("Sheaf.")]
-        if sheaf_imp: bad.append("imports " + short(sheaf_imp))
+        # a private `import Sheaf.*` is allowed: proofs of upstream sorries use our lemmas, and the integration agent sends
+        # the imported modules upstream with the closer (human, 2026-10-17); public import changes stay refused below
         if d["public_imports_changed"]: bad.append("changes public imports " + short(d["public_imports_changed"]))
         if bad:
             refuse.append(f"{m['module']}: " + "; ".join(bad) + f" ({UPNOTE})")
