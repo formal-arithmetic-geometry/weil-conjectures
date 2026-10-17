@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
 
 /-!
 
@@ -79,17 +80,100 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 
 @[expose] public section
 
-universe u
+-- Do not expand the K-injective internal-Hom construction during elaboration.
+attribute [local irreducible] DerivedCategory.monoidalClosed
+  CategoryTheory.Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
 
-open CategoryTheory MonoidalCategory
+attribute [local instance 4000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleAbelian
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleHasDerived
+
+attribute [local instance 5000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionSheafMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionCoefficientMonObj
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleCategory
+
+universe u v₁ v₂ u₁ u₂
+
+open CategoryTheory MonoidalCategory Functor.OplaxMonoidal Functor.LaxMonoidal
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace CategoryTheory.Adjunction
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+private lemma projectionMorphism_natural_left_local {F : D ⥤ C} {G : C ⥤ D}
+    (adj : F ⊣ G) [F.OplaxMonoidal] {A A' : C} (h : A ⟶ A') (B : D) :
+    G.map h ▷ B ≫ adj.projectionMorphism A' B =
+      adj.projectionMorphism A B ≫ G.map (h ▷ F.obj B) := by
+  rw [projectionMorphism, projectionMorphism, ← homEquiv_naturality_left,
+    ← homEquiv_naturality_right]
+  congr 1
+  rw [← δ_natural_left_assoc]
+  simpa only [comp_whiskerRight, Category.assoc, Functor.comp_map, Functor.id_map] using
+    congrArg (fun k ↦ δ F (G.obj A) B ≫ k ▷ F.obj B) (adj.counit.naturality h)
+
+private lemma projectionComparison_natural_left_local {P : C ⥤ D} {S : D ⥤ C}
+    (adj : P ⊣ S) [S.LaxMonoidal] {M M' : C} (h : M ⟶ M') (N : D) :
+    P.map (h ▷ S.obj N) ≫ adj.projectionComparison M' N =
+      adj.projectionComparison M N ≫ P.map h ▷ N := by
+  rw [projectionComparison, projectionComparison, ← homEquiv_naturality_left_symm,
+    ← homEquiv_naturality_right_symm]
+  congr 1
+  rw [Category.assoc, ← μ_natural_left,
+    ← comp_whiskerRight_assoc, ← comp_whiskerRight_assoc]
+  simpa only [Functor.id_map, Functor.comp_map] using
+    congrArg (fun k ↦ k ▷ S.obj N ≫ μ S (P.obj M') N) (adj.unit.naturality h)
+
+end CategoryTheory.Adjunction
+
+namespace CategoryTheory
+
+private lemma compose_map_square_local {C D : Type*} [Category* C] [Category* D] (G : C ⥤ D)
+    {A A' B B' E E' : C} {X X' : D}
+    (s : X ⟶ X') (p : X ⟶ G.obj A) (p' : X' ⟶ G.obj A')
+    (u : A ⟶ A') (q : A ⟶ B) (q' : A' ⟶ B')
+    (v : B ⟶ B') (r : B ⟶ E) (r' : B' ⟶ E') (w : E ⟶ E')
+    (hp : s ≫ p' = p ≫ G.map u) (hq : u ≫ q' = q ≫ v) (hr : v ≫ r' = r ≫ w) :
+    s ≫ (p' ≫ G.map (q' ≫ r')) = (p ≫ G.map (q ≫ r)) ≫ G.map w := by
+  rw [← Category.assoc, hp, Category.assoc, ← G.map_comp]
+  rw [← Category.assoc u, hq, Category.assoc q, hr]
+  simp only [G.map_comp, Category.assoc]
+
+private lemma map_whiskerLeft_square_local {C D E : Type*} [Category* C] [Category* D]
+    [Category* E] [MonoidalCategory C] (P : C ⥤ E) {S R : D ⥤ C} (t : S ⟶ R)
+    (K : C) {B B' : D} (h : B ⟶ B') :
+    P.map (K ◁ S.map h) ≫ P.map (K ◁ t.app B') =
+      P.map (K ◁ t.app B) ≫ P.map (K ◁ R.map h) := by
+  rw [← P.map_comp, ← P.map_comp, ← whiskerLeft_comp, ← whiskerLeft_comp, t.naturality]
+
+private lemma map_whisker_exchange_local {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] (P : C ⥤ D) {K K' A B : C} (φ : K ⟶ K') (t : A ⟶ B) :
+    P.map (φ ▷ A) ≫ P.map (K' ◁ t) = P.map (K ◁ t) ≫ P.map (φ ▷ B) := by
+  rw [← P.map_comp, ← P.map_comp, ← whisker_exchange]
+
+private lemma full_whiskerLeft_hom_local {C : Type*} [Category* C] [MonoidalCategory C]
+    (P : ObjectProperty C) [P.IsMonoidal] (K : P.FullSubcategory)
+    {B B' : P.FullSubcategory} (h : B ⟶ B') :
+    (K ◁ h).hom = K.obj ◁ h.hom := rfl
+
+private lemma full_whiskerRight_hom_local {C : Type*} [Category* C] [MonoidalCategory C]
+    (P : ObjectProperty C) [P.IsMonoidal] {K K' : P.FullSubcategory}
+    (φ : K ⟶ K') (B : P.FullSubcategory) :
+    (φ ▷ B).hom = φ.hom ▷ B.obj := rfl
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+attribute [local instance 3000] projectionDerivedMonoidal
 
 /-! ### The projection morphism of `Lg^* ⊣ Rg_*` -/
 
@@ -117,6 +201,18 @@ lemma properProjectionMorphism_natural_right
       properProjectionMorphism Λ g A B ≫
         (R((g)_*⟦Λ⟧)).map (A ◁ (L((g)^*⟦Λ⟧)).map h) :=
   (derivedUpperStarLowerStarAdjunction Λ g).projectionMorphism_natural_right A h
+
+/-- Naturality of the proper projection morphism in its first argument. -/
+private lemma properProjectionMorphism_natural_left
+    {A A' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))} (φ : A ⟶ A')
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    (R((g)_*⟦Λ⟧)).map φ ▷ B ≫ properProjectionMorphism Λ g A' B =
+      properProjectionMorphism Λ g A B ≫
+        (R((g)_*⟦Λ⟧)).map (φ ▷ (L((g)^*⟦Λ⟧)).obj B) :=
+  Adjunction.projectionMorphism_natural_left_local
+    (derivedUpperStarLowerStarAdjunction Λ g) φ B
 
 end Proper
 
@@ -174,6 +270,31 @@ lemma inv_openImmersionProjectionComparison_natural_right
   rw [IsIso.eq_inv_comp, ← openImmersionProjectionComparison_natural_right_assoc,
     IsIso.hom_inv_id, Category.comp_id]
 
+/-- Naturality of the open projection comparison in its first argument. -/
+@[reassoc]
+private lemma openImmersionProjectionComparison_natural_left
+    {M M' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U))} (φ : M ⟶ M')
+    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    (D((j)_!open⟦Λ⟧)).map (φ ▷ (L((j)^*⟦Λ⟧)).obj N) ≫
+        openImmersionProjectionComparison Λ j M' N =
+      openImmersionProjectionComparison Λ j M N ≫ (D((j)_!open⟦Λ⟧)).map φ ▷ N :=
+  Adjunction.projectionComparison_natural_left_local
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j) φ N
+
+/-- Naturality of the inverse open projection comparison in its first argument. -/
+private lemma inv_openImmersionProjectionComparison_natural_left
+    {M M' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U))} (φ : M ⟶ M')
+    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    (D((j)_!open⟦Λ⟧)).map φ ▷ N ≫ inv (openImmersionProjectionComparison Λ j M' N) =
+      inv (openImmersionProjectionComparison Λ j M N) ≫
+        (D((j)_!open⟦Λ⟧)).map (φ ▷ (L((j)^*⟦Λ⟧)).obj N) := by
+  rw [IsIso.eq_inv_comp, ← openImmersionProjectionComparison_natural_left_assoc,
+    IsIso.hom_inv_id, Category.comp_id]
+
 end OpenImmersion
 
 /-! ### The exceptional projection morphism -/
@@ -212,8 +333,39 @@ lemma exceptionalProjectionMorphismOfCompactification_natural_right
       (condensedRingObj Λ Y))} (h : B ⟶ B') :
     (Rf_!(c)⟦Λ⟧).obj K ◁ h ≫ exceptionalProjectionMorphismOfCompactification Λ c K B' =
       exceptionalProjectionMorphismOfCompactification Λ c K B ≫
-        (Rf_!(c)⟦Λ⟧).map (K ◁ (L((f)^*⟦Λ⟧)).map h) :=
-  sorry
+        (Rf_!(c)⟦Λ⟧).map (K ◁ (L((f)^*⟦Λ⟧)).map h) := by
+  dsimp only [exceptionalProjectionMorphismOfCompactification]
+  refine CategoryTheory.compose_map_square_local (R((c.g)_*⟦Λ⟧))
+    _ _ _ ((D((c.i)_!open⟦Λ⟧)).obj K ◁ (L((c.g)^*⟦Λ⟧)).map h) _ _
+    ((D((c.i)_!open⟦Λ⟧)).map
+      (K ◁ (L((c.i)^*⟦Λ⟧)).map ((L((c.g)^*⟦Λ⟧)).map h)))
+    _ _ _ ?_ ?_ ?_
+  · exact properProjectionMorphism_natural_right Λ c.g _ h
+  · exact inv_openImmersionProjectionComparison_natural_right Λ c.i K
+      ((L((c.g)^*⟦Λ⟧)).map h)
+  · exact CategoryTheory.map_whiskerLeft_square_local (D((c.i)_!open⟦Λ⟧))
+      (leftDerivedUpperStarCompactificationIso Λ c).inv K h
+
+/-- Naturality of the compactification projection morphism in its first argument. -/
+private lemma exceptionalProjectionMorphismOfCompactification_natural_left
+    {K K' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (φ : K ⟶ K')
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    (Rf_!(c)⟦Λ⟧).map φ ▷ B ≫ exceptionalProjectionMorphismOfCompactification Λ c K' B =
+      exceptionalProjectionMorphismOfCompactification Λ c K B ≫
+        (Rf_!(c)⟦Λ⟧).map (φ ▷ (L((f)^*⟦Λ⟧)).obj B) := by
+  dsimp only [exceptionalProjectionMorphismOfCompactification, Functor.comp_map]
+  refine CategoryTheory.compose_map_square_local (R((c.g)_*⟦Λ⟧))
+    _ _ _ ((D((c.i)_!open⟦Λ⟧)).map φ ▷ (L((c.g)^*⟦Λ⟧)).obj B) _ _
+    ((D((c.i)_!open⟦Λ⟧)).map
+      (φ ▷ (L((c.i)^*⟦Λ⟧)).obj ((L((c.g)^*⟦Λ⟧)).obj B)))
+    _ _ _ ?_ ?_ ?_
+  · exact properProjectionMorphism_natural_left Λ c.g _ B
+  · exact inv_openImmersionProjectionComparison_natural_left Λ c.i φ
+      ((L((c.g)^*⟦Λ⟧)).obj B)
+  · exact CategoryTheory.map_whisker_exchange_local (D((c.i)_!open⟦Λ⟧)) φ
+      ((leftDerivedUpperStarCompactificationIso Λ c).inv.app B)
 
 end OfCompactification
 
@@ -242,6 +394,30 @@ noncomputable def boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X
   ObjectProperty.homMk
     (exceptionalProjectionMorphismOfCompactification Λ (compactificationOverField f) K.obj B.obj)
 
+private lemma projection_lower_obj (K : Dᵇc(X.left)⟦Λ⟧) :
+    ((boundedConstructibleLowerShriek Λ ℓ f).obj K).obj =
+      (Rf_!(compactificationOverField f)⟦Λ⟧).obj K.obj := rfl
+
+private lemma projection_lower_map {K K' : Dᵇc(X.left)⟦Λ⟧} (φ : K ⟶ K') :
+    ((boundedConstructibleLowerShriek Λ ℓ f).map φ).hom =
+      (Rf_!(compactificationOverField f)⟦Λ⟧).map φ.hom := rfl
+
+omit [IsEllAdicFinitenessCoefficient ℓ Λ] in
+private lemma projection_upper_obj (B : Dᵇc(Y.left)⟦Λ⟧) :
+    ((boundedConstructibleUpperStar Λ ℓ f).obj B).obj =
+      (L((f.left)^*⟦Λ⟧)).obj B.obj := rfl
+
+omit [IsEllAdicFinitenessCoefficient ℓ Λ] in
+private lemma projection_upper_map {B B' : Dᵇc(Y.left)⟦Λ⟧} (h : B ⟶ B') :
+    ((boundedConstructibleUpperStar Λ ℓ f).map h).hom =
+      (L((f.left)^*⟦Λ⟧)).map h.hom := rfl
+
+private lemma projection_hom (K : Dᵇc(X.left)⟦Λ⟧) (B : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B).hom =
+      exceptionalProjectionMorphismOfCompactification Λ (compactificationOverField f)
+        K.obj B.obj := by
+  simp only [boundedConstructibleExceptionalProjectionMorphism, ObjectProperty.homMk_hom]
+
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
 second variable. It is the image of
 `exceptionalProjectionMorphismOfCompactification_natural_right` under the faithful inclusion;
@@ -254,8 +430,13 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc
         boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B' =
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
-          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
-  sorry
+          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) := by
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom, projection_hom,
+    CategoryTheory.full_whiskerLeft_hom_local, projection_lower_obj,
+    projection_lower_map, projection_upper_map]
+  exact exceptionalProjectionMorphismOfCompactification_natural_right Λ
+    (compactificationOverField f) K.obj h.hom
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
 first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
@@ -267,8 +448,12 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_left {K K' : D�
         boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K' B =
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
-          (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) :=
-  sorry
+          (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) := by
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom, projection_hom,
+    CategoryTheory.full_whiskerRight_hom_local, projection_lower_map, projection_upper_obj]
+  exact exceptionalProjectionMorphismOfCompactification_natural_left Λ
+    (compactificationOverField f) φ.hom B.obj
 
 /-- The **derived exceptional projection morphism** on bounded constructible complexes, as a
 natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`

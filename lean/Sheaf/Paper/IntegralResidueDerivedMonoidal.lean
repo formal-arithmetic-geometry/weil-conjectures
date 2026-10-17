@@ -114,3 +114,72 @@ from an ordinary pullback structure and preservation of flat modules. -/
   exact (f)^*⟦integralCoeff ℓ E⟧.residueDerivedMonoidal
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The canonical derived tensor structure on modules with condensed coefficients.
+This alias caches the existing instance without changing its data or registering an instance. -/
+@[instance_reducible]
+noncomputable def projectionDerivedMonoidal
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) :
+    MonoidalCategory (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
+  inferInstance
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+/-! These caches select the existing internal-module structures and the existing tensor
+colimit instances from `WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory` and
+`WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`. They introduce no new
+choices and are registered only locally by their users. -/
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The existing abelian structure on module objects, cached at the coefficient ring. -/
+@[instance_reducible]
+noncomputable def projectionModuleAbelian (X : Scheme.{u}) :
+    Abelian (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+  inferInstance
+
+/-- The existing relative tensor structure on module objects, cached at the coefficient ring. -/
+@[instance_reducible]
+noncomputable def projectionModuleMonoidal (X : Scheme.{u}) :
+    MonoidalCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :=
+  inferInstance
+
+/-- The existing derived-category model on module objects, cached at the coefficient ring. -/
+@[instance_reducible]
+noncomputable def projectionModuleHasDerived (X : Scheme.{u}) :
+    HasDerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :=
+  inferInstance
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The existing tensor on abelian pro-étale sheaves. -/
+@[instance_reducible]
+noncomputable def projectionSheafMonoidal (X : Scheme.{u}) :
+    MonoidalCategory (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :=
+  inferInstance
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+
+/-- The existing transported multiplication on condensed coefficient objects. -/
+@[instance_reducible]
+noncomputable def projectionCoefficientMonObj (X : Scheme.{u}) : MonObj (condensedRingObj Λ X) :=
+  inferInstance
+
+/-- The existing category of internal modules. -/
+@[instance_reducible]
+noncomputable def projectionModuleCategory (X : Scheme.{u}) :
+    Category.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :=
+  inferInstance
+
+end AlgebraicGeometry.ProEtale.CondensedRing
