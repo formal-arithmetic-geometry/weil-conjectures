@@ -25,7 +25,11 @@
   "place": "Sections 5.5 and 5.7, Lemma 5.8, Theorem 6.2 and its proof in Section 11 (in particular Proposition 11.1). Read online; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-homotopy-segal-space",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-segal-cartesian-exponent"
  ],
  "proof": [
   {
@@ -265,5 +269,42 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-f244a081c (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, plus the full statements of every cited node (the Segal equivalence classifier, the Reedy model structure, the projective model, the localization comparison, Kan-Quillen right properness, the simplicial-model nerve localization, the Eilenberg-Zilber Mathlib leaf and def-cbc). I checked the item against Rezk arXiv math/9811037, which is not archived; I fetched the PDF read-only. Sections checked: 4.1 (Segal = Reedy fibrant plus Segal maps), 5.5 (Ho W, two-sided inverses), 5.7 and Lemma 5.8 (W_hoequiv is a union of components) and section 6 (E = discnerve I[1], Theorem 6.2, the pullback square 6.3). The item is the space-valued form of Theorem 6.2: J is I[1], the edge 0->1 is x->y, W_inv is W_hoequiv, and there is no completeness assumption, so nothing is weakened. Small cases agree: empty W; d N([1]) (2 constant functors and 2 identities); d N(BG) (G and G); cK for a Kan complex K (K and K). The last two are not complete. Step 1: I rederived that the latching map is injective with image the degenerate simplices, that A_n meets L_nB in L_nA, and that the relative latching map of a pushout-product i□j is the pushout-product of the relative latching map of i with j. So Reedy cofibrations are the monomorphisms and the simplicial axiom holds. Step 2: matching objects give V_0 Kan and V_1->V_0^2 a fibration; the right-proper node makes the strict fiber products homotopy fiber products. Step 3: the nerve-localization node applies to cofibrant dE and F(n) against fibrant V; the Yoneda computation for F(n) is correct and restrictions are precomposition. Step 4: the classifier's statement gives exactly the edge-restriction equivalence over V_0^2. Step 5: strict fibers are homotopy fibers because (d_1,d_0) is a fibration, so hV is hW and V_eq is W_inv; naturality holds because the restriction map is natural and an equivalence at each W. Step 6 is an elementary pullback (Rezk 6.3). There are no new nodes. My whole-DAG duplicate scan found only different statements (completeness criterion, Dwyer-Kan cotensor, Rezk model, outer horn). The dependency closure of 348 nodes is acyclic. Every cited statement is in the item's unit apart from a Mathlib leaf and a definition, so no tool_uses are needed. Blueprint fields are correct, the item's created metadata is unchanged, no SGA is used, and no fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36a8e67ac",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read node, report (real Worker report and Second reading by NA), module, and dependency sources (HomotopySegalSpace Composes/identity/simplexFiber/fiberMap, Enhanced fullSubcomplex/homotopyFiber/evaluation, simplicialHomotopyPullbackMap, SegalSpace.IsReedyFibrant, Mathlib coherentIso). Every clause matches the node: homotopy Segal W with no Reedy fibrancy or completeness; Map(dE,W) via mappingComplex into every Reedy fibrant replacement; evaluation at coherentIso.hom.edge; two-sided invertibility via Composes (d2=f, d0=g, d1=h=g∘f) and s0 identity; W_inv as union of components; evaluation weak equivalence over W0^2, fiber statement and naturality. Each asserted clause checked true. Edge cases (empty W, dN[1], dN(BG) not complete, constant Kan complex, x=y, universe u) fine. Node diff vs side clone: only lean plus 4 acyclic stmt_deps; lean.statement verbatim; 16 declarations listed; no hollow defs; only sorry; docstrings present. nt_compile.py --json on the snapshot file: rc=0, no diagnostics, 1.6 s. Non-blocking: naturality equation follows automatically from ι mono; landed strict-fiber SegalCategoricalEquivalence.equivalenceSubcomplex is a different, Reedy-fibrant-only notion, so not reusing it is correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SegalInverseEvaluation",
+  "declaration": "SSet.SegalInverse.segal_inverse_evaluation",
+  "declarations": [
+   "SSet.SegalInverse.mappingComplex",
+   "SSet.SegalInverse.mappingMap",
+   "SSet.SegalInverse.edgeEvaluation",
+   "SSet.SegalInverse.IsInvertibleClass",
+   "SSet.SegalInverse.edgeClass",
+   "SSet.SegalInverse.invertibleArrows",
+   "SSet.SegalInverse.invertibleMappingSpace",
+   "SSet.SegalInverse.inverseEndpoints",
+   "SSet.SegalInverse.derivedMapping",
+   "SSet.SegalInverse.toMappingComplex",
+   "SSet.SegalInverse.derivedEvaluation",
+   "SSet.SegalInverse.derivedEndpoints",
+   "SSet.SegalInverse.derivedMappingMap",
+   "SSet.SegalInverse.evaluationFiberMap",
+   "SSet.SegalInverse.inverseFiberInclusion",
+   "SSet.SegalInverse.segal_inverse_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SegalInverseEvaluation.lean",
+  "statement": "theorem segal_inverse_evaluation : (∀ W : SimplexCategoryᵒᵖ ⥤ SSet.{u}, ∃ (V : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (i : W ⟶ V), SSet.SegalSpace.IsReedyFibrant V ∧ ∀ n : SimplexCategoryᵒᵖ, Enhanced.IsWeakHomotopyEquivalence (i.app n)) ∧ (∀ (W : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (hW : HomotopySegal.IsHomotopySegalSpace W) (V : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (i : W ⟶ V), SSet.SegalSpace.IsReedyFibrant V → (∀ n : SimplexCategoryᵒᵖ, Enhanced.IsWeakHomotopyEquivalence (i.app n)) → Enhanced.IsWeakHomotopyEquivalence (toMappingComplex i) ∧ ∃ e : derivedMapping i ⟶ (invertibleArrows W).toSSet, e ≫ (invertibleArrows W).ι = derivedEvaluation i ∧ Enhanced.IsWeakHomotopyEquivalence e ∧ ∀ x y : (W.obj (op ⦋0⦌)) _⦋0⦌, (∀ he : e ≫ (invertibleArrows W).ι = derivedEvaluation i, Enhanced.IsWeakHomotopyEquivalence (evaluationFiberMap i e he x y)) ∧ ∃ j : Enhanced.homotopyFiber (inverseEndpoints W) ![x, y] ⟶ (invertibleMappingSpace W x y).toSSet, j ≫ (invertibleMappingSpace W x y).ι = inverseFiberInclusion W x y ∧ Enhanced.IsWeakHomotopyEquivalence j) ∧ (∀ (W W' : SimplexCategoryᵒᵖ ⥤ SSet.{u}), HomotopySegal.IsHomotopySegalSpace W → HomotopySegal.IsHomotopySegalSpace W' → ∀ F : W ⟶ W', ∃ f : (invertibleArrows W).toSSet ⟶ (invertibleArrows W').toSSet, f ≫ (invertibleArrows W').ι = (invertibleArrows W).ι ≫ F.app (op ⦋1⦌) ∧ ∀ (V V' : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (i : W ⟶ V) (i' : W' ⟶ V') (G : V ⟶ V') (h : i ≫ G = F ≫ i') (e : derivedMapping i ⟶ (invertibleArrows W).toSSet) (e' : derivedMapping i' ⟶ (invertibleArrows W').toSSet), e ≫ (invertibleArrows W).ι = derivedEvaluation i → e' ≫ (invertibleArrows W').ι = derivedEvaluation i' → derivedMappingMap i i' F G h ≫ e' = e ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Explicit models of the derived edge-evaluation map, using every Reedy fibrant replacement rather than imposing Reedy fibrancy on W. The canonical path pullback retains evaluation in the original W_1 and both endpoints. Its factor through W_inv is uniquely determined by equality after the subcomplex inclusion. Includes endpoint fibers, their invertible-component description and naturality for all commuting replacement squares. All helper definitions have real data and use the recorded enhanced, homotopy-Segal and Reedy interfaces. Reuses SSet.SegalSpace.IsReedyFibrant from the already landed cartesian-exponent interface."
  }
 }
