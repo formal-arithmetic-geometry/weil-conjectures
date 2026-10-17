@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.Restriction
+public import WeilConjectures.ConstructibleSheaf.Simple
+public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 
 /-!
 # Rigidity of morphisms of finite locally constant sheaves
@@ -19,8 +20,6 @@ component, hence is everything.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.mem_stalkZeroLocus_of_isZero`: for a locally constant sheaf, the
-  vanishing of the stalk at one geometric point over `x` gives the vanishing at all of them.
 - `AlgebraicGeometry.Etale.eq_zero_of_sheafFiber_map_eq_zero`: rigidity of morphisms.
 - `AlgebraicGeometry.Etale.eq_of_sheafFiber_map_eq`: two morphisms agreeing at one geometric
   point of every connected component agree.
@@ -39,24 +38,7 @@ open Scheme
 namespace Etale
 
 variable {Λ : Type (u + 1)} [Ring Λ] {X : Scheme.{u}}
-
-/-- For a locally constant sheaf `I`, the vanishing of the stalk of `I` at a single geometric
-point lying over `x` implies its vanishing at every geometric point over `x`: over a member of a
-trivialising cover through `x` all these stalks are the value of a constant sheaf. -/
-lemma mem_stalkZeroLocus_of_isZero (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsLocallyConstantSheaf I] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
-    (hs : IsZero ((pointSmallEtale s).sheafFiber.obj I)) :
-    s.base (IsLocalRing.closedPoint Ω) ∈ stalkZeroLocus I := by
-  obtain ⟨⟨𝒰, hc⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := I)
-  obtain ⟨i, v, hv⟩ := 𝒰.exists_eq (s.base (IsLocalRing.closedPoint Ω))
-  have : Etale (𝒰.f i) := 𝒰.map_prop i
-  obtain ⟨N, ⟨e⟩⟩ := ((isConstant_over_iff_upperStar _ (𝒰.etalePrecoverageToEtale i) I).1
-    (hc i)).mem_essImage
-  have hN : IsZero N := (isZero_sheafFiber_iff_of_iso I (𝒰.f i) e.symm s ⟨v, hv⟩).1 hs
-  intro Ω' _ _ s' hs'
-  exact (isZero_sheafFiber_iff_of_iso I (𝒰.f i) e.symm s' ⟨v, hv.trans hs'.symm⟩).2 hN
-
-variable {L M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+  {L M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
 
 /-- The stalk of the image of `χ` vanishes wherever the stalk of `χ` does: taking stalks is
 exact. -/
@@ -70,16 +52,6 @@ lemma isZero_sheafFiber_image_of_map_eq_zero (χ : L ⟶ M) {Ω : Type u} [Field
     rw [← h₁] at this
     exact IsIso.of_isIso_comp_right _ (PreservesCokernel.iso F χ).hom
   exact (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso F (cokernel.π χ))
-
-/-- A sheaf of `Λ`-modules on `X_ét` all of whose stalks vanish is zero. -/
-lemma isZero_of_forall_mem_stalkZeroLocus (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hall : ∀ x : X, x ∈ stalkZeroLocus I) : IsZero I := by
-  have : IsIso (0 : I ⟶ I) := isIso_of_isIso_sheafFiber_map _ fun x ↦ by
-    have hx : IsZero ((X.uliftPointSmallEtale x).sheafFiber.obj I) :=
-      (hall x _ (X.algClosurePoint x) (X.algClosurePoint_base x _)).of_iso
-        (((pointSmallEtale (X.algClosurePoint x)).uliftSheafFiberIso _).app I)
-    exact ⟨0, hx.eq_of_src _ _, hx.eq_of_src _ _⟩
-  rw [IsZero.iff_id_eq_zero, ← IsIso.hom_inv_id (0 : I ⟶ I), zero_comp]
 
 /-- Blueprint `lem-pur-lisse-morphism-rigidity`: Rigidity of morphisms of finite locally
 constant sheaves
@@ -103,10 +75,12 @@ theorem eq_zero_of_sheafFiber_map_eq_zero
   have hall : ∀ x : X, x ∈ stalkZeroLocus I := by
     intro x
     obtain ⟨Ω, _, _, s, hs, hφ⟩ := h x
-    have hmem := mem_stalkZeroLocus_of_isZero I s (isZero_sheafFiber_image_of_map_eq_zero φ s hφ)
+    have hmem := mem_stalkZeroLocus_of_isLocallyConstantSheaf I s
+      (isZero_sheafFiber_image_of_map_eq_zero φ s hφ)
     exact isPreconnected_connectedComponent.subset_isClopen (isClopen_stalkZeroLocus I)
       ⟨_, hs, hmem⟩ (mem_connectedComponent)
-  have hI : IsZero I := isZero_of_forall_mem_stalkZeroLocus I hall
+  have hI : IsZero I :=
+    (isZero_iff_stalkZeroLocus_eq_univ I).2 (Set.eq_univ_of_forall hall)
   rw [← kernel.lift_ι (cokernel.π φ) φ (cokernel.condition φ),
     hI.eq_of_tgt (kernel.lift _ φ _) 0, zero_comp]
 

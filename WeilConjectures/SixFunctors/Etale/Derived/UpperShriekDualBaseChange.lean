@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 
 /-!
 # Dual base change for the exceptional inverse image
@@ -20,15 +20,15 @@ For a cartesian square of schemes
 ```
 with `f`, `f'` admitting compactifications and torsion coefficients `Λ`, the compact-support
 base change `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). The composite
-`Lg^* Rf_!` has the right adjoint `Rf^! Rg_*`, and `Rf'_! Lg'^*` has the right adjoint
-`Rg'_* Rf'^!`; the conjugate of `Ex_!⁻¹` under these composite adjunctions is the
-*dual base change map*
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). Its conjugate under the
+composite adjunctions `Lg^* Rf_! ⊣ Rf^! Rg_*` and `Rf'_! Lg'^* ⊣ Rg'_* Rf'^!` is the exchange
+`Rg'_* Rf'^! ⟶ Rf^! Rg_*`
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeMap`), an isomorphism. Its
+inverse is the *dual base change isomorphism*
 ```
-  β^∨ : Rf^! Rg_* ⟶ Rg'_* Rf'^!,
+  β^∨ : Rf^! Rg_* ≅ Rg'_* Rf'^!
 ```
-which is an isomorphism, the conjugate of an isomorphism (blueprint
-`prop-exc-ambient-dual-base-change`). Here the right adjoint `Rf^!` of `Rf_!` exists
+of blueprint `prop-exc-ambient-dual-base-change`. Here the right adjoint `Rf^!` of `Rf_!` exists
 unconditionally (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`), so the
 ambient exceptional right adjoint datum of the blueprint is automatic.
 
@@ -37,12 +37,9 @@ The pro-étale analogue is not stated: the pro-étale compact-support base chang
 on complexes of étale origin, not as a natural transformation of functors on the ambient
 derived categories, so its conjugate is not known to be invertible.
 
-## Main definitions and statements
+## Main definitions
 
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualBaseChangeMap`: `β^∨`.
-- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekDualBaseChangeMap`: `β^∨` is an
-  isomorphism.
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualBaseChangeIso`: `β^∨` as an isomorphism.
+- `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualBaseChangeIso`: `β^∨`.
 -/
 
 @[expose] public section
@@ -64,43 +61,21 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
 
-/-- The **dual base change map** `β^∨ : Rf^! Rg_* ⟶ Rg'_* Rf'^!` of a cartesian square
-`g' ≫ f = f' ≫ g`, for torsion coefficients: the conjugate, under the composite adjunctions
-`Lg^* Rf_! ⊣ Rf^! Rg_*` and `Rf'_! Lg'^* ⊣ Rg'_* Rf'^!`, of the inverse of the compact-support
-base change isomorphism `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). In the diagrammatic
-order of composition of functors used here, it is `Rg_* ⋙ Rf^! ⟶ Rf'^! ⋙ Rg'_*`. -/
-noncomputable def rightDerivedUpperShriekDualBaseChangeMap (sq : IsPullback g' f' f g) :
-    R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![ModuleCat.{u + 1} Λ] ⟶
-      R(f')^![ModuleCat.{u + 1} Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=
-  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  conjugateEquiv
-    ((rightDerivedUpperShriekAdjunction _ f).comp (derivedUpperStarLowerStarAdjunction _ g))
-    ((derivedUpperStarLowerStarAdjunction _ g').comp (rightDerivedUpperShriekAdjunction _ f'))
-    (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))
-
 /-- Blueprint `prop-exc-ambient-dual-base-change`: Dual base change for the ambient right
 adjoint is formal.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `f`, `f'` admitting compactifications (and `f'`
 quasi-compact) and `g` arbitrary, and torsion coefficients `Λ`, the right-adjoint mate
-`β^∨ : Rf^! Rg_* ⟶ Rg'_* Rf'^!` of the compact-support base change isomorphism is an
-isomorphism: an isomorphism of left adjoints induces an isomorphism of their right adjoints
-(`CategoryTheory.conjugateEquiv_iso`). The ambient right adjoints `Rf^!`, `Rf'^!` exist for
-torsion coefficients (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`). -/
-instance isIso_rightDerivedUpperShriekDualBaseChangeMap (sq : IsPullback g' f' f g) :
-    IsIso (rightDerivedUpperShriekDualBaseChangeMap Λ sq) := by
-  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  unfold rightDerivedUpperShriekDualBaseChangeMap
-  infer_instance
-
-/-- The dual base change isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!` of a cartesian square, for
-torsion coefficients (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekDualBaseChangeMap`).
--/
+`β^∨ : Rf^! Rg_* ⟶ Rg'_* Rf'^!` of the inverse of the compact-support base change isomorphism
+is an isomorphism. It is the inverse of the exchange isomorphism
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeMap`, the conjugate of
+`Ex_!`. In the diagrammatic order of composition of functors used here, it is
+`Rg_* ⋙ Rf^! ≅ Rf'^! ⋙ Rg'_*`. -/
 noncomputable def rightDerivedUpperShriekDualBaseChangeIso (sq : IsPullback g' f' f g) :
     R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![ModuleCat.{u + 1} Λ] ≅
       R(f')^![ModuleCat.{u + 1} Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=
-  asIso (rightDerivedUpperShriekDualBaseChangeMap Λ sq)
+  have := isIso_rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq
+  (asIso (rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq)).symm
 
 end Etale
 

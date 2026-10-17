@@ -14,9 +14,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 /-!
 # The exceptional inverse image on `Loc(Dctf)`, finite coefficients
 
-Let `Λ` be a finite commutative ring and `k` a field. For a scheme `X` the localizing closure
-`Loc(Dctf(X, Λ))` (blueprint `sk-def-localizing-closure`) is the smallest triangulated
-subcategory of `D(X_proét, Λ)` containing `Dctf(X, Λ)` and closed under direct sums
+Let `Λ` be a finite commutative ring and `k` a field which is finite or separably closed, so
+that `cd_ℓ(k)` is finite (the standing base field of the blueprint). For a scheme `X` the
+localizing closure `Loc(Dctf(X, Λ))` (blueprint `sk-def-localizing-closure`) is the smallest
+triangulated subcategory of `D(X_proét, Λ)` containing `Dctf(X, Λ)` and closed under direct sums
 (`AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor`). It is
 pretriangulated and has direct sums, computed in `D(X_proét, Λ)`.
 
@@ -80,13 +81,16 @@ abbrev DerivedCategoryLocalizingFiniteTor (X : Scheme.{u}) : Type _ :=
 variable {k : Type u} [Field k]
 
 /-- Blueprint `sk-lem-brown-hypotheses`: Hypotheses of Brown representability, for a finite
-coefficient ring `Λ` whose exponent is invertible on a separated finite-type `k`-scheme `X`.
-The category `Loc(Dctf(X, Λ))` is locally small, triangulated and has direct sums (by
-construction); it has split idempotents, and `Dctf(X, Λ)` is essentially small, with a small
-skeleton forming a set of compact generators of `Loc(Dctf(X, Λ))`. -/
+coefficient ring `Λ` whose exponent is invertible on a separated finite-type `k`-scheme `X`,
+over a field `k` which is finite or separably closed (so that `cd_ℓ(k)` is finite). The category
+`Loc(Dctf(X, Λ))` is locally small, triangulated and has direct sums (by construction); it has
+split idempotents, and `Dctf(X, Λ)` is essentially small, with a small skeleton forming a set of
+compact generators of `Loc(Dctf(X, Λ))`. Without a bound on `cd_ℓ(k)` this fails: for `k = ℝ`
+the unit `Λ_X` is not compact. -/
 theorem DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-    [IsSeparated aX] [HasInvertibleExponent Λ X] :
+    [IsSeparated aX] [HasInvertibleExponent Λ X]
+    (hk : Finite k ∨ IsSepClosed k) :
     (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ)
         X).CompactlyGeneratesLocalizingClosure ∧
       IsIdempotentComplete (DerivedCategoryLocalizingFiniteTor Λ X) :=
@@ -167,11 +171,11 @@ end LowerShriek
 section UpperShriek
 
 variable {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-  [IsSeparated aX] [HasInvertibleExponent Λ X]
+  [IsSeparated aX] [HasInvertibleExponent Λ X] (hk : Finite k ∨ IsSepClosed k)
   (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
   [IsSeparated aY] [HasInvertibleExponent Λ Y] {f : X ⟶ Y} (c : Compactification f)
 
-include aX in
+include aX hk in
 /-- Blueprint `det-sf-existence-brown` (1): `Rf_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` is a left
 adjoint, by Brown representability. -/
 theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing :
@@ -179,9 +183,9 @@ theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing :
   have := (DerivedCategory.localizingConstructibleFiniteTor_lowerShriek_of_finiteType
     Λ aY c).2.2
   ObjectProperty.isLeftAdjoint_localizingClosureLift _ _ _ _
-    (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ aX).1
+    (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ aX hk).1
 
-include aX in
+include aX hk in
 /-- Blueprint `det-sf-existence-brown`: the exceptional inverse image
 `f^! : Loc(Dctf(Y, Λ)) ⥤ Loc(Dctf(X, Λ))` attached to a compactification `c` of `f`, a right
 adjoint of `Rf_!` (Brown representability). It is an arbitrary choice of right adjoint, unique
@@ -190,45 +194,46 @@ up to unique isomorphism (`Adjunction.existsUnique_iso_comp_counit`); only the a
 it. -/
 noncomputable def rightDerivedUpperShriekLocalizing :
     DerivedCategoryLocalizingFiniteTor Λ Y ⥤ DerivedCategoryLocalizingFiniteTor Λ X :=
-  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing Λ aX aY c
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing Λ aX hk aY c
   (rightDerivedLowerShriekLocalizing Λ aY c).rightAdjoint
 
 /-- Blueprint `det-sf-existence-brown` (1): the adjunction `Rf_! ⊣ f^!` on the localizing
 closures, `Hom(Rf_! M, N) ≃ Hom(M, f^! N)`. -/
 noncomputable def rightDerivedUpperShriekLocalizingAdjunction :
-    rightDerivedLowerShriekLocalizing Λ aY c ⊣ rightDerivedUpperShriekLocalizing Λ aX aY c :=
-  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing Λ aX aY c
+    rightDerivedLowerShriekLocalizing Λ aY c ⊣ rightDerivedUpperShriekLocalizing Λ aX hk aY c :=
+  have := isLeftAdjoint_rightDerivedLowerShriekLocalizing Λ aX hk aY c
   Adjunction.ofIsLeftAdjoint _
 
 /-- `f^!` commutes with shifts, as a right adjoint of the functor `Rf_!` which commutes with
 shifts. -/
-noncomputable instance : (rightDerivedUpperShriekLocalizing Λ aX aY c).CommShift ℤ :=
-  (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c).rightAdjointCommShift ℤ
+noncomputable instance : (rightDerivedUpperShriekLocalizing Λ aX hk aY c).CommShift ℤ :=
+  (rightDerivedUpperShriekLocalizingAdjunction Λ aX hk aY c).rightAdjointCommShift ℤ
 
 /-- The adjunction `Rf_! ⊣ f^!` is compatible with the shifts. -/
-instance : (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c).CommShift ℤ :=
-  (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c).commShift_of_leftAdjoint ℤ
+instance : (rightDerivedUpperShriekLocalizingAdjunction Λ aX hk aY c).CommShift ℤ :=
+  (rightDerivedUpperShriekLocalizingAdjunction Λ aX hk aY c).commShift_of_leftAdjoint ℤ
 
 /-- Blueprint `det-sf-existence-brown` (2): `f^!` is triangulated. -/
-instance : (rightDerivedUpperShriekLocalizing Λ aX aY c).IsTriangulated :=
-  (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c).isTriangulated_rightAdjoint
+instance : (rightDerivedUpperShriekLocalizing Λ aX hk aY c).IsTriangulated :=
+  (rightDerivedUpperShriekLocalizingAdjunction Λ aX hk aY c).isTriangulated_rightAdjoint
 
-include aX in
+include aX hk in
 /-- Blueprint `det-sf-existence-direct-sums`: `f^!` preserves direct sums, since `Rf_!` maps the
 compact generators `Dctf(X, Λ)` to compact objects `Dctf(Y, Λ)` of `Loc(Dctf(Y, Λ))`. -/
 instance (J : Type (u + 1)) :
-    PreservesColimitsOfShape (Discrete J) (rightDerivedUpperShriekLocalizing Λ aX aY c) :=
+    PreservesColimitsOfShape (Discrete J) (rightDerivedUpperShriekLocalizing Λ aX hk aY c) :=
   have h := DerivedCategory.localizingConstructibleFiniteTor_lowerShriek_of_finiteType
     Λ aY c
   have := h.2.2
   ObjectProperty.preservesColimitsOfShape_of_localizingClosureLift_adjunction _ _ _ _
-    (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ aX).1
-    (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ aY).1 h.2.1
-    (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c) J
+    (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ aX hk).1
+    (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ aY hk).1 h.2.1
+    (rightDerivedUpperShriekLocalizingAdjunction Λ aX hk aY c) J
 
-include aX in
+include aX hk in
 /-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for a finite
-coefficient ring `Λ` whose exponent is invertible on separated finite-type `k`-schemes `X`, `Y`.
+coefficient ring `Λ` whose exponent is invertible on separated finite-type `k`-schemes `X`, `Y`,
+over a field `k` which is finite or separably closed.
 For a compactification `c` of `f : X ⟶ Y`, the coproduct-preserving functor
 `Rf_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` has a right adjoint `f^!`, which commutes with
 shifts compatibly with the adjunction, is exact (triangulated), preserves direct sums and is
@@ -242,9 +247,10 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing :
         (adj' : rightDerivedLowerShriekLocalizing Λ aY c ⊣ G'),
         ∃! e : G ≅ G', ∀ N, (rightDerivedLowerShriekLocalizing Λ aY c).map (e.hom.app N) ≫
           adj'.counit.app N = adj.counit.app N :=
-  ⟨_, rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c, inferInstance, inferInstance,
+  ⟨_, rightDerivedUpperShriekLocalizingAdjunction Λ aX hk aY c, inferInstance, inferInstance,
     inferInstance, fun _ ↦ inferInstance,
-    fun _ ↦ (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c).existsUnique_iso_comp_counit⟩
+    fun _ ↦
+      (rightDerivedUpperShriekLocalizingAdjunction Λ aX hk aY c).existsUnique_iso_comp_counit⟩
 
 end UpperShriek
 

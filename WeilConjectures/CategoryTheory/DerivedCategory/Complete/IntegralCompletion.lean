@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-!
 # The derived completion at the integral stage
@@ -167,7 +168,7 @@ instance : (completion J l E).IsTriangulated :=
   (completionAdjunction J l E).isTriangulated_leftAdjoint
 
 instance : (completion J l E).Linear (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
-  (completionAdjunction J l E).linear_leftAdjoint _
+  (completionAdjunction J l E).left_adjoint_linear
 
 instance : IsIso (completionAdjunction J l E).counit :=
   inferInstanceAs (IsIso (DerivedCategory.derivedCompletionAdjunction J _ _).counit)

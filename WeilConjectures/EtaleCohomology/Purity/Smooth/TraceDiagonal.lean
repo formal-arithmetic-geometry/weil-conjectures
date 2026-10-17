@@ -181,7 +181,11 @@ variable (hl : d.leftTriangle = 𝟙 _) (hr : d.rightTriangle = 𝟙 _)
 
 If the two triangular composites of a trace–diagonal datum are the identity, then the unit and
 counit exhibit `G_L = Lf^*(-) ⊗ᴸ L` as a right adjoint of `Rf_!`: the two assumed equations are
-the triangular identities. -/
+the triangular identities.
+
+This is a variant of the blueprint statement: the triangular identities are assumed on all of
+`D(X_ét, Λ)` and `D(Y_ét, Λ)`, not only on `D^b_ctf` as in the blueprint, and the conclusion is
+the adjunction on the ambient derived categories. -/
 noncomputable def adjunction : R(f)_![ModuleCat.{u + 1} Λ] ⊣ d.functor :=
   Adjunction.mkOfUnitCounit
     { unit := d.unit

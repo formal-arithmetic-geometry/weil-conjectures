@@ -28,7 +28,7 @@ for the comparison map `F [P, Q] ⟶ [F P, F Q]`
 - for `P = 𝟙_ C` if the unit map `ε F` is an isomorphism
   (`CategoryTheory.Functor.LaxMonoidal.isIso_ihomComparison_app_unit`);
 - for `P` isomorphic to an object for which it holds
-  (`CategoryTheory.Functor.LaxMonoidal.isIso_ihomComparison_app_of_iso`);
+  (`CategoryTheory.Functor.LaxMonoidal.isIso_ihomComparison_app_iff_of_iso_left`);
 - for `P` a finite biproduct of objects for which it holds, if `F` is additive
   (`CategoryTheory.Functor.LaxMonoidal.isIso_ihomComparison_app_biproduct`);
 - for `P` the cokernel of a morphism `P₁ ⟶ P₀` between objects for which it holds, if `F`
@@ -187,15 +187,27 @@ theorem isIso_ihomComparison_app_unit [IsIso (ε F)] (Q : C) :
   exact IsIso.of_isIso_comp_right _ ((pre (ε F)).app (F.obj Q) ≫
       (λ_ _).inv ≫ (ihom.ev (𝟙_ D)).app (F.obj Q))
 
-/-- The comparison map `F [P, Q] ⟶ [F P, F Q]` is an isomorphism if it is one for an object
-isomorphic to `P`. -/
-theorem isIso_ihomComparison_app_of_iso {P P' : C} (e : P ≅ P') (Q : C)
-    [IsIso ((ihomComparison F P).natTrans.app Q)] :
-    IsIso ((ihomComparison F P').natTrans.app Q) := by
-  have : IsIso ((ihomComparison F P').natTrans.app Q ≫ (pre (F.map e.hom)).app (F.obj Q)) := by
-    rw [← map_pre_app_comp_ihomComparison_app]
-    infer_instance
-  exact IsIso.of_isIso_comp_right _ ((pre (F.map e.hom)).app (F.obj Q))
+/-- The comparison map `F [A, B] ⟶ [F A, F B]` is an isomorphism at `B` if and only if it is one
+at any `B'` isomorphic to `B`. -/
+lemma isIso_ihomComparison_app_iff_of_iso_right (A : C) {B B' : C} (e : B ≅ B') :
+    IsIso ((ihomComparison F A).natTrans.app B) ↔ IsIso ((ihomComparison F A).natTrans.app B') :=
+  NatTrans.isIso_app_iff_of_iso _ e
+
+/-- The comparison map `F [A, B] ⟶ [F A, F B]` is an isomorphism at `A` if and only if it is one
+at any `A'` isomorphic to `A`
+(`CategoryTheory.Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app`). -/
+lemma isIso_ihomComparison_app_iff_of_iso_left {A A' : C} (e : A ≅ A') (B : C) :
+    IsIso ((ihomComparison F A).natTrans.app B) ↔ IsIso ((ihomComparison F A').natTrans.app B) := by
+  have h := map_pre_app_comp_ihomComparison_app F e.hom B
+  constructor
+  · intro _
+    have : IsIso ((ihomComparison F A').natTrans.app B ≫ (pre (F.map e.hom)).app (F.obj B)) := by
+      rw [← h]; infer_instance
+    exact IsIso.of_isIso_comp_right _ ((pre (F.map e.hom)).app (F.obj B))
+  · intro _
+    have : IsIso (F.map ((pre e.hom).app B) ≫ (ihomComparison F A).natTrans.app B) := by
+      rw [h]; infer_instance
+    exact IsIso.of_isIso_comp_left (F.map ((pre e.hom).app B)) _
 
 section Preadditive
 

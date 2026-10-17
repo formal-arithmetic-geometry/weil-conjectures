@@ -33,8 +33,9 @@ which preserves direct sums and is unique up to unique isomorphism
 blueprint `sk-prop-sf-existence`). This is uniform in `Λ`.
 
 For the three families of `ℓ`-adic coefficient rings, schemes separated of finite type over a
-field `k` in which `ℓ` is invertible, the two inputs are stated as `sorry`ed theorems, and the
-existence theorem follows:
+field `k` in which `ℓ` is invertible and which is finite or separably closed (so that
+`cd_ℓ(k)` is finite; without this, the compact generation fails, e.g. for `k = ℝ`), the two
+inputs are stated as `sorry`ed theorems, and the existence theorem follows:
 
 | `Λ` | `sk-lem-brown-hypotheses` | `det-sf-comp-coherence-single` |
 | --- | --- | --- |
@@ -159,7 +160,8 @@ direct sums (by construction); it has split idempotents, and `Dᵇc(X)⟦E⟧ = 
 essentially small, with a small skeleton forming a set of compact generators. -/
 theorem compactlyGenerates_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}}
-    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
+    (hk : Finite k ∨ IsSepClosed k) :
     (boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E)
         X)).CompactlyGeneratesLocalizingClosure ∧
       IsIdempotentComplete (LocalizingBoundedConstructible (Profinite.continuousMapRingObj E) X) :=
@@ -196,7 +198,7 @@ skeleton forming a set of compact generators. -/
 theorem compactlyGenerates_padicIntegersRingObj (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
     [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-    [IsSeparated aX] :
+    [IsSeparated aX] (hk : Finite k ∨ IsSepClosed k) :
     (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E)
         X)).CompactlyGeneratesLocalizingClosure ∧
       IsIdempotentComplete
@@ -232,7 +234,8 @@ coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `X`: `Loc(D�
 idempotents, and `Dᵇc(X)⟦ℚ̄_ℓ⟧ = Dctf(X, ℚ̄_ℓ)` is essentially small, with a small skeleton
 forming a set of compact generators. -/
 theorem compactlyGenerates_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
+    (hk : Finite k ∨ IsSepClosed k) :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ)
         X)).CompactlyGeneratesLocalizingClosure ∧
       IsIdempotentComplete (LocalizingBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X) :=
@@ -261,8 +264,9 @@ theorem lowerShriek_padicAlgClRingObj_of_finiteType {X Y : Scheme.{u}} (aY : Y �
 variable {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
   [IsSeparated aX] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
   [IsSeparated aY] {f : X ⟶ Y} (c : Compactification f)
+  (hk : Finite k ∨ IsSepClosed k)
 
-include aX in
+include aX hk in
 /-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for the
 coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` (including `ℚ_ℓ`) and separated
 finite-type `k`-schemes `X`, `Y`. For a compactification `c` of `f : X ⟶ Y`, the
@@ -285,10 +289,10 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingO
           (lowerShriek_continuousMapRingObj_of_finiteType ℓ E aY c)).map (e.hom.app N) ≫
             adj'.counit.app N = adj.counit.app N :=
   exists_rightAdjoint_rightDerivedLowerShriekLocalizing _
-    (compactlyGenerates_continuousMapRingObj ℓ E aX).1
-    (compactlyGenerates_continuousMapRingObj ℓ E aY).1
+    (compactlyGenerates_continuousMapRingObj ℓ E aX hk).1
+    (compactlyGenerates_continuousMapRingObj ℓ E aY hk).1
 
-include aX in
+include aX hk in
 /-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for the
 coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (including `ℤ_ℓ`) and
 separated finite-type `k`-schemes `X`, `Y`. For a compactification `c` of `f : X ⟶ Y`, the
@@ -312,10 +316,10 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingO
           (lowerShriek_padicIntegersRingObj_of_finiteType ℓ E aY c)).map (e.hom.app N) ≫
             adj'.counit.app N = adj.counit.app N :=
   exists_rightAdjoint_rightDerivedLowerShriekLocalizing _
-    (compactlyGenerates_padicIntegersRingObj ℓ E aX).1
-    (compactlyGenerates_padicIntegersRingObj ℓ E aY).1
+    (compactlyGenerates_padicIntegersRingObj ℓ E aX hk).1
+    (compactlyGenerates_padicIntegersRingObj ℓ E aY hk).1
 
-include aX in
+include aX hk in
 /-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for the
 coefficient ring `ℚ̄_ℓ` and separated finite-type `k`-schemes `X`, `Y`. For a compactification
 `c` of `f : X ⟶ Y`, the coproduct-preserving functor
@@ -337,7 +341,8 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj 
           (lowerShriek_padicAlgClRingObj_of_finiteType ℓ aY c)).map (e.hom.app N) ≫
             adj'.counit.app N = adj.counit.app N :=
   exists_rightAdjoint_rightDerivedLowerShriekLocalizing _
-    (compactlyGenerates_padicAlgClRingObj ℓ aX).1 (compactlyGenerates_padicAlgClRingObj ℓ aY).1
+    (compactlyGenerates_padicAlgClRingObj ℓ aX hk).1
+    (compactlyGenerates_padicAlgClRingObj ℓ aY hk).1
 
 end EllAdic
 

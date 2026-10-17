@@ -50,7 +50,7 @@ theorem isIso_ihomComparison_app_of_finitePresentation (P : ModuleCat.{u} R)
       (fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) _ Q this
     let e : (⨁ fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) ≅ ModuleCat.of R (Fin n → R) :=
       biproductIsoPi _
-    exact isIso_ihomComparison_app_of_iso F e Q
+    exact (isIso_ihomComparison_app_iff_of_iso_left F e Q).1 inferInstance
   obtain ⟨n, m, π, g, hπ, hexact⟩ := Module.FinitePresentation.exists_fin' R P
   let S : ShortComplex (ModuleCat.{u} R) := ShortComplex.mk (ofHom g) (ofHom π)
     (ModuleCat.hom_ext (LinearMap.ext hexact.apply_apply_eq_zero))

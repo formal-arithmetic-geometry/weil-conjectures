@@ -136,23 +136,6 @@ end ObjectProperty
 
 end Reflector
 
-section Linear
-
-variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
-  (R : Type*) [Semiring R] [Linear R C] [Linear R D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
-
-include adj in
-/-- The left adjoint of an `R`-linear functor between `R`-linear categories is `R`-linear. -/
-lemma Adjunction.linear_leftAdjoint [G.Linear R] : F.Linear R where
-  map_smul {X Y} f r := (adj.homEquiv X (F.obj Y)).injective (by
-    have h := adj.unit.naturality f
-    have h' := adj.unit.naturality (r • f)
-    dsimp at h h'
-    simp only [Adjunction.homEquiv_unit, Functor.map_smul, Linear.comp_smul]
-    rw [← h, ← h', Linear.smul_comp])
-
-end Linear
-
 end CategoryTheory
 
 namespace DerivedCategory
