@@ -11,9 +11,80 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-universally-localizing-simplicial-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $C\\to\\Delta^0$ induces a bijection on components, $C$ has a vertex: otherwise every degree is empty, since every simplex has a vertex, so its realization has no components. Fix $c\\in C_0$ once. Let $g:T\\to B$ be an arbitrary small simplicial map, set $X=T\\times_B A$, and write $h:X\\to T$ for the projection. By [def-coef-universally-localizing-simplicial-map], choose $W\\subseteq X_1$, independent of the target quasicategory, such that $h^*$ identifies $\\operatorname{Fun}(T,\\mathcal E)$ with the full subcategory $\\operatorname{Fun}_W(X,\\mathcal E)$ for every quasicategory $\\mathcal E$. Fix such $\\mathcal E$ temporarily. Put $\\mathcal D=\\operatorname{Fun}(X,\\mathcal E)$; it is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. Apply [lem-cbc-simplicial-groupoid-localization] to the weak homotopy equivalence $C\\to\\Delta^0$ and target $\\mathcal D$ (the point is Kan). It gives an equivalence $\\mathcal D\\to\\operatorname{Fun}_{\\mathrm{eq}}(C,\\mathcal D)$, namely the constant-diagram functor.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M8",
+    "place": "Corollary 6.3.5.12, expanded directly on the functor-category universal property using simplicial groupoid localization (Kerodon 6.3.1.21, tag 01MY)."
+   }
+  },
+  {
+   "text": "Let $p:X\\times C\\to X$, $s_c:X\\to X\\times C$, $x\\mapsto(x,c)$, and let $V\\subseteq(X\\times C)_1$ consist of all edges $(s_0x,v)$ with $x\\in X_0$, $v\\in C_1$. Write $\\mathcal L$ for the full subcategory of $\\operatorname{Fun}(X\\times C,\\mathcal E)$ on diagrams inverting $V$. Currying and permutation of product coordinates identify $\\operatorname{Fun}_{\\mathrm{eq}}(C,\\operatorname{Fun}(X,\\mathcal E))$ with $\\mathcal L$. Explicitly an $n$-simplex on either side is a map $H:X\\times C\\times\\Delta^n\\to\\mathcal E$. On the left, for every edge $v$ of $C$ and parameter vertex $i$, its image is an equivalence in $\\operatorname{Fun}(X,\\mathcal E)$, which by the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] means exactly that $H$ sends $(s_0x,v,i)$ to an equivalence for every $x$. This is the condition on the vertices of $H$ defining the full subcategory on the right. Both descriptions restrict $H$ in the same parameter coordinate, hence agree in every simplicial degree and on all operators. The constant-diagram functor in step 1 becomes restriction $P=p^*:\\mathcal D\\to\\mathcal L$, so $P$ is a functor equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M8",
+    "place": "Corollary 6.3.5.12, expanded directly on the functor-category universal property using simplicial groupoid localization (Kerodon 6.3.1.21, tag 01MY)."
+   }
+  },
+  {
+   "text": "Restriction $R=s_c^*:\\mathcal L\\to\\mathcal D$ satisfies $RP=1_{\\mathcal D}$ strictly. It is a quasi-inverse to $P$. Indeed choose a quasi-inverse $Q$ with natural equivalences $QP\\simeq1_{\\mathcal D}$ and $PQ\\simeq1_{\\mathcal L}$, as in the definition of functor equivalence in [def-cbc-enhanced-diagrams-cones]. Applying $R$ to the latter gives $Q=RPQ\\simeq R$; applying $P$ gives $PQ\\simeq PR$. Combining this with $PQ\\simeq1_{\\mathcal L}$ yields $PR\\simeq1_{\\mathcal L}$. Restriction, postcomposition and whiskering here are composition of the maps $H$ on products with $\\Delta^n$, so these are actual coherent transformations. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] ensures the whiskered transformations are equivalences.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M8",
+    "place": "Corollary 6.3.5.12, expanded directly on the functor-category universal property using simplicial groupoid localization (Kerodon 6.3.1.21, tag 01MY)."
+   }
+  },
+  {
+   "text": "Define $U_g=V\\cup\\{(w,s_0c):w\\in W\\}\\subseteq(X\\times C)_1$ and let $\\mathcal L_0=\\operatorname{Fun}_{U_g}(X\\times C,\\mathcal E)$, a full subcategory of $\\mathcal L$. Let $\\mathcal D_0=\\operatorname{Fun}_W(X,\\mathcal E)$. The functor $P$ maps $\\mathcal D_0$ into $\\mathcal L_0$: it sends $V$ to degenerate edges and sends $(w,s_0c)$ to the image of $w$. Conversely $R$ maps $\\mathcal L_0$ into $\\mathcal D_0$, since $s_c$ sends $w$ exactly to $(w,s_0c)$. Thus $P$ and $R$ restrict to functors between these full subcategories. Their identity $RP=1$ restricts too. The natural equivalence $PR\\simeq1_{\\mathcal L}$ of step 3 restricts to $\\mathcal L_0$: both its endpoint functors take values in $\\mathcal L_0$, and every simplex of the transformation has only vertices in that subcategory. Fullness includes the transformation, its inverse and its two inverse-witness triangles. Therefore the restricted $P:\\mathcal D_0\\to\\mathcal L_0$ is an equivalence of whole functor quasicategories, with no restriction on the transformation edges.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M8",
+    "place": "Corollary 6.3.5.12, expanded directly on the functor-category universal property using simplicial groupoid localization (Kerodon 6.3.1.21, tag 01MY)."
+   }
+  },
+  {
+   "text": "There is a degreewise simplicial isomorphism $T\\times_B(A\\times C)\\cong(T\\times_B A)\\times C=X\\times C$, sending $(t,(a,z))$ to $((t,a),z)$ with the displayed inverse. Under it the pullback projection to $T$ is $hp$. Its restriction functor is exactly $P h^*$ on every parameter simplex. Step 1 makes $h^*:\\operatorname{Fun}(T,\\mathcal E)\\to\\mathcal D_0$ an equivalence, and step 4 makes $P:\\mathcal D_0\\to\\mathcal L_0$ an equivalence. To exhibit the composite equivalence explicitly, choose quasi-inverses \\(Q_h\\) to \\(h^*\\) and \\(Q_P\\) to the restricted \\(P\\), with their two coherent inverse equivalences. The composite \\(Q_hQ_P\\) is a quasi-inverse to \\(P h^*\\): whisker the equivalence \\(Q_hh^*\\simeq1\\) by \\(Q_P\\), and compose it with the equivalence \\(Q_P P\\simeq1\\); on the other side whisker \\(P Q_P\\simeq1\\) by \\(h^*\\), and compose with \\(h^*Q_h\\simeq1\\). The inverse-triangle witnesses are the corresponding composites, so the definition of functor equivalence applies. Hence $hp$ exhibits $T$ as the localization of $X\\times C$ at $U_g$. The collection $U_g$ uses only $g,W,c$ and not $\\mathcal E$, so it works simultaneously for every target. Since $g$ was arbitrary, [def-coef-universally-localizing-simplicial-map] proves the assertion. Empty $X$ or $T$ is included; no fibrancy of $A,B,C,T$ was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M8",
+    "place": "Corollary 6.3.5.12, expanded directly on the functor-category universal property using simplicial groupoid localization (Kerodon 6.3.1.21, tag 01MY)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02M8",
+  "place": "Corollary 6.3.5.12; direct functor-category proof of its contractible projection and composition step from the existing simplicial groupoid-localization theorem (01MY). Online sources read; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +113,59 @@
    "results": "{\"t\": \"2026-10-17T03:59:12Z\", \"tool\": \"leanfinder\", \"query\": \"Product with a weakly contractible simplicial set followed by a universal localization is universally localizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Construction.prodIsLocalization\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"CategoryTheory.Localization.instHasFiniteProductsLocalization'\", \"CategoryTheory.Localization.instHasFiniteProductsLocalization\"], \"digest\": \"7a862ee8f03f9bed\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits are ordinary category or ring localization and simplicial primitives, not universal localization of simplicial sets. Candidate types read; source checked in Mathlib/CategoryTheory/Localization/Predicate.lean:40-58, Prod.lean:115-145 and AlgebraicTopology/Quasicategory/Basic.lean:29-57."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composite of a universally localizing simplicial map with projection from a product by a weakly contractible simplicial set",
+   "results": "{\"t\": \"2026-10-17T04:37:12Z\", \"tool\": \"leanfinder\", \"query\": \"Composite of a universally localizing simplicial map with projection from a product by a weakly contractible simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.ι₁_snd\", \"SSet.ι₀_snd\", \"SSet.ι₁_fst\", \"SSet.ι₀_comp\", \"SSet.ι₀_fst\", \"SSet.ι₁_comp\", \"SSet.ι₀_snd_assoc\", \"SSet.ι₀_fst_assoc\"], \"digest\": \"4b4c953a83184062\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category localization/product comparisons or simplicial primitives, not the universal enhanced localization of arbitrary simplicial maps. Read Localization/Predicate.lean:45-58, Prod.lean:133-145, Composition.lean:62-66."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, CategoryTheory.Localization, IsLocalization",
+   "results": "{\"t\": \"2026-10-17T04:37:12Z\", \"tool\": \"loogle\", \"query\": \"SSet, CategoryTheory.Localization, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Localization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.Localization'; not evidence of absence; replaced by the valid quoted-name Loogle query."
+  },
+  {
+   "tool": "grep",
+   "query": "UniversalLocalization|universally localizing",
+   "results": "{\"t\": \"2026-10-17T04:37:12Z\", \"tool\": \"grep\", \"query\": \"UniversalLocalization|universally localizing\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category localization/product comparisons or simplicial primitives, not the universal enhanced localization of arbitrary simplicial maps. Read Localization/Predicate.lean:45-58, Prod.lean:133-145, Composition.lean:62-66."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal localization after product with a weakly contractible simplicial set",
+   "results": "{\"t\": \"2026-10-17T04:37:13Z\", \"tool\": \"leansearch\", \"query\": \"Universal localization after product with a weakly contractible simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.prod\", \"IsLocalization.instForallPiUniv\", \"CategoryTheory.Localization.Construction.prodIsLocalization\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_uniq\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prodLift\", \"CategoryTheory.Localization.hasProductsOfShape\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_fac\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod\"], \"digest\": \"8d768eef1a2594e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category localization/product comparisons or simplicial primitives, not the universal enhanced localization of arbitrary simplicial maps. Read Localization/Predicate.lean:45-58, Prod.lean:133-145, Composition.lean:62-66."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-17T04:39:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category localization/product comparisons or simplicial primitives, not the universal enhanced localization of arbitrary simplicial maps. Read Localization/Predicate.lean:45-58, Prod.lean:133-145, Composition.lean:62-66."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coherent diagrams from X to X times a contractible simplicial set identifies functors inverting vertical edges",
+   "results": "{\"t\": \"2026-10-17T04:39:48Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of coherent diagrams from X to X times a contractible simplicial set identifies functors inverting vertical edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.hoFunctor.terminalIso\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"SSet.isTerminalHoFunctorDeltaZero\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\"], \"digest\": \"d96be66a6427eb79\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category localization/product comparisons or simplicial primitives, not the universal enhanced localization of arbitrary simplicial maps. Read Localization/Predicate.lean:45-58, Prod.lean:133-145, Composition.lean:62-66."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.prod|theorem comp|lemma comp",
+   "results": "{\"t\": \"2026-10-17T04:39:48Z\", \"tool\": \"grep\", \"query\": \"IsLocalization.prod|theorem comp|lemma comp\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Prod.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Resolution.lean\", \"Mathlib/CategoryTheory/Localization/Resolution.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\"], \"digest\": \"22cfe8cf91c7b88d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category localization/product comparisons or simplicial primitives, not the universal enhanced localization of arbitrary simplicial maps. Read Localization/Predicate.lean:45-58, Prod.lean:133-145, Composition.lean:62-66."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-embedded-simplex-resolution",
@@ -77,5 +197,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-contractible-factor-universal-localization",
+  "worker": "stage1",
+  "group": "Q28",
+  "summary": "Statement unchanged. Five steps prove the full universal localization property after arbitrary base change, with an explicit target-independent set of vertical edges and lifts of W at a fixed vertex. Reused the existing simplicial groupoid-localization theorem and pointwise equivalence calculus; no new nodes and no Mathlib leaf. No Lean attachment exists in the source checkout.",
+  "blueprint": "Preserves the inherited prop-coef-integral-exceptional-adjoint paragraph-2 ancestry, via the finite nonsingular resolution used in HTT 4.2.3.16. Realizes the contractible-factor input to step 6 of lem-coef-finite-embedded-simplex-resolution (Kerodon 02MQ repair) by expanding Corollary 6.3.5.12 (02M8).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Generic all-edge groupoid localization for an arbitrary small simplicial shape; used with C to the point and target Fun(X,E). No node in this unit supplies this existing infinity-categorical foundation."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory structure of functor/full subcategories and componentwise equivalence criterion needed for currying. No unit-specific statement replaces this calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-2d06bae4d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-2d06bae4d (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and the full statements of the 4 cited nodes (def-cbc-enhanced-diagrams-cones, def-coef-universally-localizing-simplicial-map, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-simplicial-groupoid-localization). Statement matches Kerodon 02M8 (Cor. 6.3.5.12) and the definition matches 02M0 (Def. 6.3.5.1, some W per base change), both read online since they are not archived; no hypothesis is added or dropped. The proof is direct rather than Kerodon's 6.3.5.11/.8/.7 route and is valid. Step 1: groupoid localization on C->Delta^0 with target Fun(X,E), which is a quasicategory, and W is fixed before E. Step 2: currying via the exponential law plus the componentwise-equivalence criterion identifies Fun_eq(C,Fun(X,E)) with the V-local subcategory, and the constant functor becomes p^*. Step 3: RP=1 strictly and PR~1 through Q=RPQ~R. Step 4: P and R preserve the U_g/W-local full subcategories and the witnesses restrict by fullness. Step 5: the pullback is X x C with projection hp, so (hp)^*=P h^*, a composite of equivalences, and U_g does not depend on E. Edge cases checked: C=Delta^0, C=Delta^1, non-Kan C, empty C excluded, f=id, empty X or T. The citer (finite-embedded-simplex-resolution step 6) uses exactly this statement. No new nodes. No duplicate found by rg over the DAG; the pushout sibling and the groupoid lemma are different statements. No cycle (the closure of the cited nodes excludes the item). Accepted tool_uses: lem-cbc-simplicial-groupoid-localization and lem-cbc-enhanced-functor-cone-calculus as generic infinity-categorical tools off the biduality unit. No SGA. Not a target node, so the base-change morphism check does not apply. No fixes."
  }
 }

@@ -29,8 +29,217 @@
   "lem-coef-infinity-source-gluing",
   "lem-coef-spaces-homotopy-fiber-detection"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "We first construct strict presentations without using the classification of space-valued fibrations. For a small ordinary category $I$ put $A_I=\\mathfrak C[N(I)]$, and let $r_I:A_I\\to I$ take a string to its composite. Here $I$ has discrete mapping simplicial sets. We check directly that $r_I$ is a Dwyer--Kan equivalence. In the subset-poset formula of [lem-coef-pinched-cube-latching], a mapping simplex is represented by a composable string in $I$ with nested subsets of its intermediate vertices; composition joins strings, with the joints required to belong to every subset. A necklace can be represented in the single simplex given by its whole composable string, since that simplex belongs to $N(I)$. Its cube coordinates record which intermediate vertices belong to a subset. The face with coordinate $0$ composes the two adjacent arrows; the face with coordinate $1$ is the corresponding joint. Removing an identity arrow removes a coordinate or combines adjacent coordinates by maximum. These are exactly the identifications in the colimit defining $A_I$. On the fiber over a fixed arrow $f:i\\to j$, replace each intermediate coordinate $x$ by $\\min(x,s)$, with $s\\in\\Delta^1$. This respects the identifications: it fixes $0$ and commutes with maximum; on a joint it represents the corresponding face of the flattened string. At $s=1$ it is the identity, while at $s=0$ every string becomes its single composite $f$. It fixes that single-arrow vertex. Thus every nonempty fiber of $A_I(i,j)\\to\\operatorname{Hom}_I(i,j)$ contracts simplicially, and every arrow has its single-arrow preimage. The empty Hom set has empty preimage. The single-arrow section and this simplicial contraction satisfy [lem-cbc-simplicial-homotopy-equivalence-weak], so each mapping-set augmentation is a weak homotopy equivalence. Since $r_I$ fixes objects, it is a Dwyer--Kan equivalence. The same calculation applies to $I^{\\triangleright}$, the ordinary category obtained by adding a terminal object.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Agent calculation from the subset-poset realization; preliminary to the weighted construction in §6.2."
+   }
+  },
+  {
+   "text": "Write $\\mathsf{Kan}$ for the simplicially enriched category of small Kan complexes and function complexes; its coherent nerve is the space category used here. A coherent diagram $N(I)\\to N_{\\mathrm{hc}}\\mathsf{Kan}$ corresponds to an enriched functor $F:A_I\\to\\mathsf{Kan}$. Using the subset-poset nerve of [def-coef-coherent-nerve-infrastructure], the correspondence follows directly: the diagram specifies an enriched functor on the subset-poset thickening of every simplex of $N(I)$, compatibly on faces and degeneracies; the colimit defining $A_I$ assembles exactly these data into $F$. The Kan model category is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model]. Apply [lem-coef-simplicial-projective-model-calculus] to $r_I$. Choose a projectively cofibrant replacement $QF\\to F$, a trivial fibration in enriched diagrams, and a projective fibrant replacement $r_{I!}QF\\to Z$. Then $Z:I\\to\\mathsf{Kan}$ is a strict ordinary diagram. The Quillen-equivalence criterion in that node makes the adjoint $QF\\to r_I^*Z$ an objectwise weak equivalence. Since $F$ is objectwise Kan, so is $QF$ (it maps by an objectwise fibration to $F$). Thus both arrows of $F\\leftarrow QF\\to r_I^*Z$ are between Kan-valued enriched diagrams. Their components have simplicial homotopy inverses by [lem-cbc-kan-whitehead-inverse]; these give equivalence edges in the coherent nerve. [lem-cbc-enhanced-functor-cone-calculus] therefore makes the zigzag an equivalence of coherent diagrams, retaining the complete coherent transformations. To present a specified transformation, perform this construction on the ordinary category $I\\times[1]$ and restrict to its two ends; this gives a strict arrow of strict diagrams representing it. This use of $I\\times[1]$ avoids any inference that agreement on edge transport alone determines a coherent functor.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "§6.2, simplicial-model application; HTT A.3.3.2 and A.3.3.7–8, applied directly to the ordinary augmentation of step 1."
+   }
+  },
+  {
+   "text": "We give the independent cocone calculation needed to identify realizations. For $K=N(I)$ put $A=A_I$ and $W=W^+_K$. The new input [lem-coef-join-cone-weight-cofibrancy] says that this right $A$-module is built, up to retract, from free boundary cells. It is objectwise weakly contractible: $K\\star\\Delta^0=N(I^{\\triangleright})$, and step 1 contracts $\\mathfrak C[N(I^{\\triangleright})](i,t)$ onto its unique composite arrow $i\\to t$. Thus $W\\to *$ is an objectwise weak equivalence. Enriched left Kan extension along $r_I^{\\mathrm{op}}$ gives a right $I$-module $W'=r_{I!}^{\\mathrm{op}}W$. By [lem-coef-simplicial-projective-model-calculus], $W'$ is projectively cofibrant and $W'\\to *$ is an objectwise weak equivalence: its adjoint is $W\\to r_I^*(*)=*$, its source is cofibrant and its target is fibrant, so the stated Quillen-equivalence criterion applies. No localization of a model category or classification theorem is used.",
+   "uses": [
+    "lem-coef-join-cone-weight-cofibrancy",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 5.2.8, Lemma 5.2.9 and the opposite construction; ordinary terminal-arrow contraction from step 1."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-enriched-coend-homotopy-invariance] in the enriched diagram categories over $A_I$ and the discrete category $I$. Its cell/retract clause identifies projectively cofibrant objects with retracts of free boundary cell complexes. For a cofibrant left diagram $P$, its left-module clause applies to the objectwise weak equivalence $W'\\to *$ from step 3 and gives $W'\\otimes_I P\\xrightarrow{\\sim}*\\otimes_I P$. Its right-module clause applies to the cofibrant cone weight $W$ whenever the diagram variable is replaced objectwise. These are the two coend-invariance assertions needed below.",
+   "uses": [
+    "lem-coef-enriched-coend-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.2 and Remark A.3.3.5; the independent enriched-coend input."
+   }
+  },
+  {
+   "text": "Let $D:I\\to\\mathsf{Kan}$ be strict, and let $P\\to D$ be a projectively cofibrant replacement which is an objectwise trivial fibration. Then $P$ is Kan-valued. Associativity of the explicit coend quotients gives $W\\otimes_{A_I}r_I^*P\\cong W'\\otimes_I P$. Step 4 and $W'\\to *$ identify its augmentation to $L=\\operatorname{colim}_I P$ as a weak equivalence, since $*\\otimes_I P$ is precisely that colimit. Put $RL=\\operatorname{Ex}^{\\infty}L$ using [lem-coef-ex-infinity-finite-products]. The strict cocone on $P$, composed with $L\\to RL$, gives a weighted cocone $W\\to\\underline{\\operatorname{Map}}(r_I^*P(-),RL)$. For every Kan complex $T$, precomposition with the augmentation gives a weak equivalence\n$$\\underline{\\operatorname{Map}}(RL,T)\\longrightarrow\\underline{\\operatorname{Map}}(W\\otimes_{A_I}r_I^*P,T)\\cong\\underline{\\operatorname{Nat}}(W,\\underline{\\operatorname{Map}}(P(-),T)).$$\n[lem-cbc-kan-mapping-homotopy-invariance] gives a simplicial homotopy equivalence, and [lem-cbc-simplicial-homotopy-equivalence-weak] makes it a weak equivalence; the isomorphism sends a map of the coend to its component maps and the action relations. Apply [lem-coef-coherent-weight-limit-recognition] in the opposite of the Kan-enriched category, reversing the simplex orders: reversal identifies $\\mathfrak C[K^{\\mathrm{op}}]$ with $\\mathfrak C[K]^{\\mathrm{op}}$ and the left cone with the right cone, by reversing the subset-poset formula. Its hypothesis is precisely the displayed equivalence for every $T$. It says that this particular cocone is colimiting, including its join-to-transformation comparison. By step 2 and the pointwise equivalence $P\\to D$, it computes the coherent colimit of $D$. This proves the required ordinary-index model/cocone comparison directly from weights; none of the existing rectification/localization comparison nodes is an input.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-coherent-weight-limit-recognition",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Theorem 6.1.4 and its colimit dual, printed pp.43–49; §6.2 simplicial-model application, with the coend comparison written out."
+   }
+  },
+  {
+   "text": "For small ordinary $C$ and objectwise Kan $Z:C\\to\\mathsf{sSet}$, take the explicit $P_k$ and $QZ$ of [lem-coef-free-bar-cell-filtration]. That statement gives projective cofibrancy and natural terminal extra-degeneracies on each outer simplicial set $P_\\bullet(c)_r\\to\\operatorname{const}Z(c)_r$. Reverse the outer ordinal order; its terminal extra-degeneracies then have precisely the initial identities of [lem-coef-extra-degeneracy-contraction]. This gives a simplicial homotopy equivalence in each fixed inner degree; order reversal preserves realization by reversing barycentric coordinates. By [lem-cbc-simplicial-homotopy-equivalence-weak] these are weak equivalences. Apply [lem-coef-bisimplicial-diagonal-equivalence], with the two directions exchanged, to obtain $QZ\\xrightarrow{\\sim}Z$ objectwise. To use a trivial-fibration replacement as in step 5, factor it as $QZ\\xrightarrow{\\sim}Q'Z\\twoheadrightarrow Z$ in the projective model structure. The first map is a trivial cofibration and the last a trivial fibration by two-out-of-three. Then $Q'Z$ is projectively cofibrant and Kan-valued, since its map to $Z$ is an objectwise fibration; it is therefore a replacement of the precise kind used in step 5. Colimit preserves the first map since its constant-diagram right adjoint preserves objectwise fibrations and trivial fibrations. Finally $\\operatorname{colim}_C C(c,-)=*$: all arrows are images of $1_c$. Interchanging the coend quotients therefore identifies $\\operatorname{colim}_C QZ$ with $\\mathrm{BK}_CZ$, naturally and with its bar cocone. Step 5 identifies its Kan replacement and this cocone as the coherent colimit. For $C=\\Delta^{\\mathrm{op}}$, [lem-coef-bousfield-kan-comparison-calculus] gives the natural weak equivalence to $\\operatorname{diag}Z$, and [lem-coef-ex-infinity-finite-products] gives its natural Kan replacement. Hence $|Z_\\bullet|$ is represented by $\\operatorname{Ex}^{\\infty}\\operatorname{diag}Z$, with the cocone identification checked next.",
+   "uses": [
+    "lem-coef-free-bar-cell-filtration",
+    "lem-coef-extra-degeneracy-contraction",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-ex-infinity-finite-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "§7, printed p.13, explicit free replacement; independent filtration and contraction inputs, then the existing BK comparison."
+   }
+  },
+  {
+   "text": "We fix the canonical cocone maps before using them. The composite of the $[0]$-summand $Z_0\\to\\mathrm{BK}_{\\Delta^{\\mathrm{op}}}Z\\to\\operatorname{diag}Z$ is the outer-degeneracy map in every degree. For $Z$ constant at $K$, it is a natural endomorphism $K\\to K$ fixing vertices, by the degree-zero clause of [lem-coef-bousfield-kan-comparison-calculus]. It is the identity: on $\\Delta^r$ a simplicial self-map fixing all vertices is the identity, and naturality on every simplex $\\Delta^r\\to K$ gives the general case. For arbitrary $Z$, apply naturality to the map $\\operatorname{const}(Z_0)\\to Z$ given by the outer degeneracies. In the bar cocone the arrow $[n]\\to[0]$ of $\\Delta^{\\mathrm{op}}$ selecting vertex $0$ supplies a homotopy from its $n$-th leg to $Z_n\\to Z_0$ followed by its $0$-th leg. Under the comparison the latter is $e_n:Z_n\\to\\operatorname{diag}Z$, restriction to vertex $0$ followed by outer degeneracy. The bar chain of length one gives this cocone homotopy and longer chains give its compatibilities. The construction is natural in a strict arrow $E\\to B$, so these homotopies identify the whole comparison square, including its commutation datum, with the square formed using $e_n$. They also identify the degree-zero cocone map with the outer-degeneracy map. This is the canonical-cocone identification used in both steps 8 and 10.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "§7, explicit chain bar; agent check of the comparison on the [0]-summand and the coherent cocone edge."
+   }
+  },
+  {
+   "text": "Take a strict Kan-valued presentation $Z$ of $X_\\bullet$ from step 2. Steps 6–7 identify its realization cocone with the Kan replacement of the diagonal, whose $0$-th leg is outer degeneracy. This map is the identity on vertices. Every point of a geometric simplex is connected to a vertex inside that simplex, so every component of a simplicial realization contains a vertex. Thus $Z_0\\to\\operatorname{diag}Z$, and hence $X_0\\to|X_\\bullet|$, is surjective on components, including the empty case. Strict finite products of Kan complexes represent products in $\\mathcal S$: apply the discrete-shape instance of [lem-coef-coherent-weight-limit-recognition] to the equality of enriched function complexes and their projections. Apply the second clause of [lem-coef-infinity-relative-cocone-parameters] to $\\mathcal S^{\\mathrm{op}}\\to *$, with parameter $N(\\Delta)$ and finite discrete colimit shape. Taking opposites, using $\\operatorname{Fun}(N(\\Delta),\\mathcal S^{\\mathrm{op}})^{\\mathrm{op}}=\\operatorname{Fun}(N(\\Delta^{\\mathrm{op}}),\\mathcal S)$ by reversal of simplices, says that these pointwise limiting product cones give limiting cones in the required coherent functor category, including the empty product. Consequently $\\prod_a Z^{(a)}$ presents the product of the given simplicial spaces. Diagonal commutes degreewise with these products. The canonical comparisons and unit of [lem-coef-ex-infinity-finite-products], together with naturality in steps 6–7, therefore identify the realization product comparison with an isomorphism followed by equivalences. For zero factors the diagonal is the point and that node supplies the terminal comparison.",
+   "uses": [
+    "lem-coef-coherent-weight-limit-recognition",
+    "lem-coef-infinity-relative-cocone-parameters",
+    "lem-coef-ex-infinity-finite-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.1.2.3 (dual) and finite product comparison; independent parameterized-cone statement supplies the pointwise product inference."
+   }
+  },
+  {
+   "text": "The precise bridge for cartesian squares is [lem-coef-kan-nerve-pullback-recognition]. It identifies limiting square cones in $\\mathcal S=N_{\\mathrm{hc}}(\\mathsf{Kan})$ with the path-pullback weak-equivalence test, retaining the actual commutation homotopy, and states invariance under equivalences of whole coherent square diagrams. Apply step 2 to the specified transformation on $\\Delta^{\\mathrm{op}}\\times[1]$; restriction of its diagram-equivalence zigzag to each naturality square gives exactly such equivalences. The hypothesis that those squares are cartesian in $\\mathcal S$ thus implies that the squares of the strict Kan presentation are homotopy cartesian. Factor its strict arrow in the projective structure as a trivial cofibration followed by an objectwise Kan fibration $p:E_\\bullet\\to B_\\bullet$, using [lem-coef-simplicial-projective-model-calculus]. The target and base rows are Kan, and the same recognition-and-invariance statement shows that all new naturality squares are homotopy cartesian. [lem-coef-bisimplicial-diagonal-equivalence] makes every discarded rowwise weak equivalence a diagonal weak equivalence. This step explicitly transports the hypotheses across rectification; it does not infer cartesianness from four equivalent corner objects alone.",
+   "uses": [
+    "lem-coef-kan-nerve-pullback-recognition",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Theorem 6.1.4 for the cospan Λ²₂ and invariance of the fixed-boundary cone; projective factorization."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-equifibered-bisimplicial-diagonal] to $p$ from step 9. Its hypotheses hold: both rows are Kan, each $p_m$ is a Kan fibration, and all operator squares are homotopy cartesian. Its conclusion is the canonical homotopy-cartesian row-zero square $E_0\\to\\operatorname{diag}E$ over $B_0\\to\\operatorname{diag}B$, with outer-degeneracy horizontal maps. For any $n$, the square $E_n\\to E_0$ over $B_n\\to B_0$ selecting vertex $0$ is an operator square, hence homotopy cartesian. Paste it with the row-zero square, using [lem-coef-infinity-homotopy-pullback-pasting] after functorial Kan replacement; the non-Kan diagonal convention in the cited row-zero statement permits this. The outer rectangle uses exactly the maps $e_n$ of step 7. Thus it is homotopy cartesian. Steps 6–7 identify its entire commutation datum with that of the realization cocone square. The recognition and equivalence-invariance clauses of [lem-coef-kan-nerve-pullback-recognition] now give the required pullback square in $\\mathcal S$, and transport it through step 9 and step 2 back to $Y_n\\to|Y_\\bullet|$ over $X_n\\to|X_\\bullet|$. This proves cartesian realization descent without an inline Puppe lemma.",
+   "uses": [
+    "lem-coef-equifibered-bisimplicial-diagonal",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-kan-nerve-pullback-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Theorem 6.1 and the existing row-zero equifibered-diagonal consequence; pasting with a vertex operator square."
+   }
+  },
+  {
+   "text": "Let $G_\\bullet$ be a groupoid object and put $H_n=G_{n+1}$, extending every operator by fixing a new last vertex. Restriction to the original vertices gives $\\alpha:H_\\bullet\\to G_\\bullet$. For $\\theta:[m]\\to[n]$, choose $i\\in[m]$ and put $j=\\theta(i)$. Form the three-column diagram with top row $H_n\\to H_m\\to G_1$ and bottom row $G_n\\to G_m\\to G_0$. The last column uses restriction to the ordered pairs $\\{j,n+1\\}$ and $\\{i,m+1\\}$, and then to $j$ or $i$. Because the extended $\\theta$ fixes the new vertex, it induces the identity between these ordered pairs; thus the diagram, including its coherent triangles, comes from the original $G$. Its right square is the groupoid-cover pullback for $[m+1]=[m]\\cup\\{i,m+1\\}$, and its outer rectangle is that for $[n+1]=[n]\\cup\\{j,n+1\\}$. Both unions have precisely one common vertex. The converse direction of [lem-coef-infinity-homotopy-pullback-pasting], transported through [lem-coef-kan-nerve-pullback-recognition], makes its left square a pullback. This is the naturality square of $\\alpha$ (with the axes interchanged). The argument allows noninjective $\\theta$: $i$ exists since $[m]$ is nonempty, and its image remains distinct from the new last vertex.",
+   "uses": [
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-kan-nerve-pullback-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 6.1.2.6(4): explicit one-vertex groupoid-cover calculation."
+   }
+  },
+  {
+   "text": "Let $\\Delta_\\infty$ have all finite ordinals $J$, including $\\varnothing$, and maps $J\\sqcup\\{\\infty\\}\\to J'\\sqcup\\{\\infty\\}$ fixing the new greatest element. Define $F:N(\\Delta_\\infty)^{\\mathrm{op}}\\to\\mathcal S$ by $F(J)=G(J\\sqcup\\{\\infty\\})$. Its restriction along $i^{\\mathrm{op}}:\\Delta^{\\mathrm{op}}\\to\\Delta_\\infty^{\\mathrm{op}}$, where $i$ includes the NONEMPTY ordinals and extends maps to fix $\\infty$, is $H_\\bullet$. There is an ordinary adjunction $i\\dashv U$ with $U(J)=J\\sqcup\\{\\infty\\}$: restriction to the ordinary elements gives the natural bijection $\\operatorname{Hom}_{\\Delta_\\infty}(iA,J)=\\operatorname{Hom}_\\Delta(A,UJ)$. On a morphism, $U$ is its underlying monotone map between the nonempty extended ordinals; thus the bijection respects composition. Taking opposites gives $U^{\\mathrm{op}}\\dashv i^{\\mathrm{op}}$. Since $\\varnothing$ is initial in $\\Delta_\\infty$, it is final in the opposite, so [lem-coef-infinity-final-index-colimit] gives a colimit cocone on $F$ with vertex $F(\\varnothing)=G_0$. Its edges are restriction to the last vertex. By [lem-coef-infinity-right-adjoint-reindexing], restricting this cocone along the right adjoint $i^{\\mathrm{op}}$ gives a colimit cocone on $H_\\bullet$, with the same vertex $G_0$. Write $B=|G_\\bullet|$. To specify the augmented transformation, extend $G_\\bullet$ by its realization cocone to $\\overline G:N(\\Delta_+)^{\\mathrm{op}}\\to\\mathcal S$, with $\\overline G(\\varnothing)=B$. On finite ordinals, the natural inclusions $J\\hookrightarrow J\\sqcup\\{\\infty\\}$ give, after applying $\\overline G$ contravariantly, a coherent transformation $\\overline G(J\\sqcup\\{\\infty\\})\\to\\overline G(J)$. Its nonempty restriction is $\\alpha$, its component at the empty ordinal is the original $G_0\\to B$, and its source augmentation is restriction to the last vertex. Naturality of the inclusions supplies all the compatibility homotopies used here. Step 11 gives cartesianness on the unaugmented diagrams. Applying step 10 therefore gives the canonical $G_{n+1}\\simeq G_n\\times_B G_0$ and the induction on the number of factors.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-infinity-right-adjoint-reindexing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemmas 6.1.3.16–17: split right shift and its ordinary reindexing adjunction."
+   }
+  },
+  {
+   "text": "Let $\\overline G:N(\\Delta_+)^{\\mathrm{op}}\\to\\mathcal S$ be the single augmented diagram from step 12, with $\\overline G(\\varnothing)=B$. Its canonical square $G_{n+1}\\to G_n$ over $G_0\\to B$ is cartesian by that step; its maps are restriction to the first $n+1$ vertices and to the last vertex. Apply [lem-coef-augmented-vertex-cone-recognition]. For a cospan $B_1\\to D\\leftarrow B_2$ of Kan complexes, [lem-coef-space-path-fibration-replacement] makes the endpoint map $E_{B_1\\to D}\\to D$ a Kan fibration. Its pullback over $B_2$ is Kan, by lifting a horn first in $B_2$ and then through that fibration. The universal path cone on this pullback has identity comparison, so [lem-coef-kan-nerve-pullback-recognition] makes it limiting. Thus pullbacks in $\\mathcal S$ exist; the vertex-recognition statement gives, inductively from $G_0$, a limiting cone with apex $G_n$ on the $n+1$ augmentation arrows $G_0\\to B$. Its comparison is the canonical vertex map, not an independently chosen equivalence to an iterated pullback. The same statement identifies this condition with the Cech right Kan extension and records its simplicial naturality. Concretely $\\theta:[m]\\to[n]$ sends the vertex $k$ to $\\theta(k)$; under the canonical comparisons its map therefore selects the corresponding coordinates, including repetitions and omissions. All higher compatibilities are those of $\\overline G$ and the cited cone statement. This proves effectiveness, including $G_1\\simeq G_0\\times_BG_0$. Component surjectivity of $G_0\\to B$ is step 8.",
+   "uses": [
+    "lem-coef-augmented-vertex-cone-recognition",
+    "lem-coef-kan-nerve-pullback-recognition",
+    "lem-coef-space-path-fibration-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 6.1.2.11: vertex-star slice limits and right Kan extension; step 12 supplies the actual limiting pullback comparisons."
+   }
+  },
+  {
+   "text": "Let $q:Y\\to P=X\\times_{X'}Y'$ be the comparison of the specified commutative square, viewed over $X$. Apply [lem-coef-space-path-fibration-replacement] functorially to the maps $Y\\to X$ and $P\\to X$; it replaces them by Kan fibrations and realizes their homotopy fibers as strict fibers, compatibly with $q$. Weak-equivalence of the fiber map can be transported along every edge $\\gamma:\\Delta^1\\to X$: pull both fibrations back to $\\Delta^1$. For either endpoint $e$, $\\{e\\}\\to\\Delta^1$ is a weak equivalence, by the explicit contraction of $\\Delta^1$ fixing $e$. Right properness in [lem-coef-kan-quillen-right-proper] says that the fiber over $\\gamma(e)$ maps by a weak equivalence to this entire pullback. The resulting commuting zigzags for $Y$ and $P$, and two-out-of-three, make weak-equivalence of the fiber map at the two endpoints equivalent. Every vertex of $X$ is connected to the image of a vertex of $T$ by a finite zigzag of edges. To justify this last use of component-surjectivity directly: vertices modulo edges give a discrete quotient of the realization, since all vertices of a simplex lie in one edge class and the quotient is constant on each geometric simplex; conversely an edge zigzag gives a path. Thus these edge classes are exactly the path components. The hypothesis over $T$ and the preceding transport therefore give a weak equivalence on the homotopy fiber over every vertex of $X$. Apply [lem-coef-spaces-homotopy-fiber-detection] with base map $1_X$ to conclude that $q$ is an equivalence. If $T$ is empty, component-surjectivity forces $X$ empty, and both $Y$ and $P$ are empty.",
+   "uses": [
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Fiberwise detection after a component-surjective cover; the explicit path-fiber convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-coherent-nerve-infrastructure",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-augmented-vertex-cone-recognition",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-coherent-weight-limit-recognition",
+  "lem-coef-enriched-coend-homotopy-invariance",
+  "lem-coef-equifibered-bisimplicial-diagonal",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-extra-degeneracy-contraction",
+  "lem-coef-free-bar-cell-filtration",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-relative-cocone-parameters",
+  "lem-coef-infinity-right-adjoint-reindexing",
+  "lem-coef-join-cone-weight-cofibrancy",
+  "lem-coef-kan-nerve-pullback-recognition",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-space-path-fibration-replacement",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -108,10 +317,45 @@
    "results": "{\"t\": \"2026-10-16T21:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"Universality of colimits in spaces, effective infinity groupoids, and finite product preservation by homotopy geometric realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"DeltaGenerated.hasColimits\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"DeltaGenerated.deltaGeneratedToTop.createsColimits\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"Condensed.fintypeCatAsCofanIsColimit\"], \"digest\": \"97e36a03a48ca869\"}",
    "date": "2026-10-16",
    "verdict": "no match: the returned ordinary-category Cech nerve, strict SSet pullback, ordinary van Kampen, finite-presentability and homotopy-category finite-product results do not state the homotopy-coherent infinity-category assertion. Read Mathlib/AlgebraicTopology/CechNerve.lean:55-82 and CategoryTheory/Limits/VanKampen.lean:43-61."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*cartesian|equifibered|groupoid.*effective|effective.*groupoid|sharp.*diagonal",
+   "results": "{\"t\": \"2026-10-17T03:41:17Z\", \"tool\": \"grep\", \"query\": \"homotopy.*cartesian|equifibered|groupoid.*effective|effective.*groupoid|sharp.*diagonal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\"], \"digest\": \"469cf31d1134e50f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet colimits, the homotopy-category functor and its product comparisons, ordinary alternating-face-map complexes and topological realization do not state the coherent space-level descent/effective-groupoid assertion. Read HoFunctorMonoidal.lean:438 and the named ordinary statements. The two semantic phrasings, Loogle and targeted grep give no matching declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T03:41:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicTopology.instPreservesMonomorphismsSimplicialObjectChainComplexNatAlternatingFaceMapComplexOfHasPullbacks\"], \"digest\": \"d9732ca8a2b3a156\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet colimits, the homotopy-category functor and its product comparisons, ordinary alternating-face-map complexes and topological realization do not state the coherent space-level descent/effective-groupoid assertion. Read HoFunctorMonoidal.lean:438 and the named ordinary statements. The two semantic phrasings, Loogle and targeted grep give no matching declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian geometric realization of simplicial spaces preserves homotopy pullback natural transformations, and every groupoid object in spaces is effective",
+   "results": "{\"t\": \"2026-10-17T03:41:19Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian geometric realization of simplicial spaces preserves homotopy pullback natural transformations, and every groupoid object in spaces is effective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"SSet.hoFunctor\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"SSet.hoFunctor.preservesTerminal\", \"SSet.QCat\"], \"digest\": \"5d89e55c38fb00f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet colimits, the homotopy-category functor and its product comparisons, ordinary alternating-face-map complexes and topological realization do not state the coherent space-level descent/effective-groupoid assertion. Read HoFunctorMonoidal.lean:438 and the named ordinary statements. The two semantic phrasings, Loogle and targeted grep give no matching declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy geometric realization preserves finite products and equifibered maps and makes Segal groupoids effective",
+   "results": "{\"t\": \"2026-10-17T03:42:16Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy geometric realization preserves finite products and equifibered maps and makes Segal groupoids effective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"FundamentalGroupoidFunctor.preservesProduct\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"FundamentalGroupoidFunctor.piToPiTop_obj_as\", \"SSet.instFiniteTensorObj\"], \"digest\": \"2ba56225af8a5ad9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet colimits, the homotopy-category functor and its product comparisons, ordinary alternating-face-map complexes and topological realization do not state the coherent space-level descent/effective-groupoid assertion. Read HoFunctorMonoidal.lean:438 and the named ordinary statements. The two semantic phrasings, Loogle and targeted grep give no matching declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal colimits of spaces and effective infinity groupoids, detected by homotopy fibers of a simplicial realization",
+   "results": "{\"t\": \"2026-10-17T03:42:18Z\", \"tool\": \"leanfinder\", \"query\": \"Universal colimits of spaces and effective infinity groupoids, detected by homotopy fibers of a simplicial realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"DeltaGenerated.hasColimits\", \"SSet.hoFunctor\", \"SSet.QCat\", \"SSet.Truncated.hasColimits\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hoFunctor.terminalIso\", \"SSet.hoFunctor.preservesTerminal\"], \"digest\": \"d418ae8ced6bd341\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet colimits, the homotopy-category functor and its product comparisons, ordinary alternating-face-map complexes and topological realization do not state the coherent space-level descent/effective-groupoid assertion. Read HoFunctorMonoidal.lean:438 and the named ordinary statements. The two semantic phrasings, Loogle and targeted grep give no matching declaration."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -198,5 +442,49 @@
   "archive": "coord/maintenance/Q60-straightening-1792207711/lem-coef-space-geometric-descent.json",
   "original_sha256": "e64e358427480f0c284ce1312761696b36271bda20776aaa710fb195340a571a"
  },
- "lead_note": "2026-10-17 Q60-straightening-1792207711: circular proof invalidated; statement and Lean interface retained. This is a resplit task, not a completed split. Step 5 uses cartesian-colimit-descent-criterion -> slice-cartesian-colimit-criterion -> space-valued-straightening. The reverse path is straightening -> space-transport-classification -> simplicial-model-nerve-localization -> simplicial-interval-localization -> enriched-marked-realization -> this node (there is also a Rezk-completion route). Rebuild geometric descent with independent simplicial-space tools, without that classification/descent closure."
+ "lead_note": "2026-10-17 Q60-straightening-1792207711: circular proof invalidated; statement and Lean interface retained. This is a resplit task, not a completed split. Step 5 uses cartesian-colimit-descent-criterion -> slice-cartesian-colimit-criterion -> space-valued-straightening. The reverse path is straightening -> space-transport-classification -> simplicial-model-nerve-localization -> simplicial-interval-localization -> enriched-marked-realization -> this node (there is also a Rezk-completion route). Rebuild geometric descent with independent simplicial-space tools, without that classification/descent closure.",
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Independent simplicial-space reconstruction: projective free cells and weighted cocone recognition, explicit bar cocone, the existing equifibered-diagonal theorem plus pasting, then the explicit right-shift ordinary adjunction and the vertex-star Cech characterization."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-geometric-descent",
+  "worker": "stage1",
+  "summary": "Repair of the returned independent split. Statement and Lean interface unchanged. Four new statement-only lower inputs: coend invariance/cells, free-bar filtration and contraction data, Kan-nerve pullback recognition with coherent invariance, augmented vertex-star/Cech recognition. Original join-weight input retained. Reuse existing equifibered-diagonal and relative-cocone-parameters rather than duplicate Puppe or pointwise-product results. Fourteen steps; converse pullback pasting explicit, both groupoid steps non-elementary, corrected provenance and stale report claims. Both dependency types checked against Q60 routes.",
+  "blueprint": "The supporting geometric-descent input below prop-coef-integral-exceptional-adjoint, proof paragraph 2, in the enriched completion/localization chain. No chapter or unit step is replaced. The free node-level proof is rebuilt after Q60 invalidated its circular prerequisite proof.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic simplicial homotopy/coherent-cocone tool used in the explicitly stated proof step; no coefficient or biduality unit step is replaced."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic simplicial homotopy/coherent-cocone tool used in the explicitly stated proof step; no coefficient or biduality unit step is replaced."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Generic simplicial homotopy/coherent-cocone tool used in the explicitly stated proof step; no coefficient or biduality unit step is replaced."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy equivalence implies weak equivalence, used for the fixed-inner-degree outer bar contraction; no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-499de385f",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-499de385f (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes, every cited statement (26 proof deps and 4 statement deps), the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2. HTT, Riehl–Verity and Rezk are not in literature/; the delivery marks them WANTED and sets proof_origin to agent, which is correct. Statement, stmt_deps, source and lean are identical to the side tree, so no target is weakened. A traversal of statement deps, proof deps and step uses reaches 236 nodes with no cycle back to the item and none of the Q60-excluded straightening, localization or descent nodes. proof_deps equals the union of the step uses, and no SGA source is cited. I checked steps 1-14 by hand. Highlights: min(x,s) commutes with max, so the C[N(I)]->I contraction is well defined. Reversing the outer order turns the terminal extra-degeneracies into exactly the identities of extra-degeneracy-contraction. On constant K the [0]-leg is a natural endomorphism that fixes vertices, hence the identity. The groupoid covers [m+1]=[m]u{i,m+1} and [n+1] each meet in one vertex, and the converse of pasting is used correctly. i -| U for the right shift holds, so U^op -| i^op and right-adjoint-reindexing applies. The vertex-star comma category is (j|[n])^op = V_n. The fiber transport uses right properness along {e}->Delta^1. The long step 12 (2090 characters) is one fully cited argument: the right-shift colimit is a three-line adjunction plus two cited nodes, so it may stay. All five new nodes are true, checked on small cases (join weights for K empty, a point and Delta^1; coend cells and pushouts; Reedy attaching maps of the free bar; the loop-space test for pullback recognition; n=0 for vertex stars). None is a duplicate: the existing bar-resolution, model-coherent and diagonal-space-colimit nodes all depend on the item through their proofs, and the terminal-pullback and Kan-pullback nodes do not state recognition in N_hc(Kan) both ways with whole-square invariance. I accept the four declared sk-prop-sf-cbc tool uses: kan-whitehead-inverse, enhanced-functor-cone-calculus, kan-mapping-homotopy-invariance and simplicial-homotopy-equivalence-weak. No fixes were made. One immaterial point: the unchanged source.place still mentions sandbox reading copies."
+ }
 }
