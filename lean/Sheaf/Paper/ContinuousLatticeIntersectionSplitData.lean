@@ -9,15 +9,10 @@ public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import all Sheaf.Paper.FiniteEtaleLocallyFreeModels
-import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Sheaf.Paper.RegularExtensionComparison
 import Sheaf.Paper.ContinuousIntegralUnderivedPushComparison
-import Sheaf.Paper.ProfinitePointPullback
 import Sheaf.Paper.ContinuousIntegralModuleTelescope
 import Sheaf.Paper.ContinuousIntegralLocalizationLegs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 
 /-! # Finite-sheet coordinates for the two canonical adjunction maps -/
 
@@ -244,8 +239,18 @@ private theorem adjoint_coordinate_equation
     asIso_inv, IsIso.hom_inv_id_assoc]
   exact adj.unit.naturality b.hom
 
-set_option maxHeartbeats 800000 in
--- The nested module functors and localization comparisons exceed the default heartbeat limit.
+/-- The counit formula identifies the adjoint with the given invertible map.
+Source: `Adjunction.homEquiv_counit`. Rewrite by the counit formula and the supplied equality. -/
+private theorem adjoint_isIso_of_rationalization
+    {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) (G : D ⥤ C) (adj : F ⊣ G)
+    {B : C} {V : D} (g : B ⟶ G.obj V)
+    (q : F.obj B ⟶ V) [IsIso q]
+    (h : F.map g ≫ adj.counit.app V = q) :
+    IsIso ((adj.homEquiv B V).symm g) := by
+  rw [Adjunction.homEquiv_counit, h]
+  infer_instance
+
 /-- Local trivializations of the two canonical maps attached to a finite etale cover.
 Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph; agent finite-sheet variant.
 (blueprint: lem-weil-pbc-continuous-lattice-intersection-split-data)
@@ -318,8 +323,97 @@ theorem continuousLatticeIntersection_splitData
             T.map (latticeIntersectionUnit (integralScalarMap ℓ E) X P p) ≫ eD.hom ∧
           eB.hom ≫ adj.unit.app (Mod.finiteFree R n) =
             T.map (latticePushedEmbedding (integralScalarMap ℓ E) X P p M e) ≫ eD.hom := by
-  sorry
-
-
+  classical
+  obtain ⟨C, hC⟩ := commonCompactFreeCover
+    P ((lowerStar (integralCoeff ℓ E) p).obj M)
+    (cokernel ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P))
+    hP ((finiteEtale_locallyFree_models (integralCoeff ℓ E) p).1 M hM)
+    ((finiteEtale_locallyFree_models (Profinite.continuousMapRingObj E) p).2 P hP)
+  have : Mono ((upperStarLowerStarAdjunction
+      (Profinite.continuousMapRingObj E) p).unit.app P) :=
+    weaklyEtaleUnit_mono (Profinite.continuousMapRingObj E) p P
+  refine ⟨C, fun s ↦ ?_⟩
+  obtain ⟨hc, hPs, hBs, hQs⟩ := hC s
+  let R := condensedRingObj (integralCoeff ℓ E) (C.X s)
+  let F := Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (C.X s))
+  let G := Mod.comap (D := Sheaf (Scheme.ProEt.topology (C.X s)) Ab.{u + 1})
+    (coefficientMap (integralScalarMap ℓ E) (C.X s))
+  let GX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (coefficientMap (integralScalarMap ℓ E) X)
+  let T := (ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod
+      (condensedRingObj (integralCoeff ℓ E) X) ⋙
+    Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) (C.f s)))
+  let H := upperStar (Profinite.continuousMapRingObj E) (C.f s)
+  let k : GX ⋙ T ≅ H ⋙ G :=
+    Functor.isoWhiskerLeft GX (normalizedPullbackIso (integralCoeff ℓ E) (C.f s)).symm ≪≫
+      (comapUpperStarIso (integralScalarMap ℓ E) (C.f s)).symm
+  obtain ⟨r, ⟨bP⟩⟩ := free_standardPullback (Profinite.continuousMapRingObj E) (C.f s) P hPs
+  obtain ⟨n, ⟨bB⟩⟩ := free_comap
+    (inv (condensedPullbackHom (integralCoeff ℓ E) (C.f s))) hBs
+  obtain ⟨m, ⟨bQ⟩⟩ := free_standardPullback (Profinite.continuousMapRingObj E) (C.f s)
+    (cokernel ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P))
+    hQs
+  let eP := bP ≪≫ (integralFreeExtensionIso ℓ E (C.X s) r).symm
+  let eQ := (PreservesCokernel.iso H
+      ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P)).symm ≪≫
+    bQ ≪≫ (integralFreeExtensionIso ℓ E (C.X s) m).symm
+  let g := latticePushedEmbedding (integralScalarMap ℓ E) X P p M e
+  have : IsIso ((pushHom (integralScalarMap ℓ E) p).app M) :=
+    integralScalarUnderivedPushHom_isIso ℓ E p M
+  have : IsIso (((Mod.extendRestrictAdjunction
+      (coefficientMap (integralScalarMap ℓ E) X)).homEquiv
+      ((lowerStar (integralCoeff ℓ E) p).obj M)
+      ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+        ((upperStar (Profinite.continuousMapRingObj E) p).obj P))).symm g) := by
+    exact adjoint_isIso_of_rationalization _ _ _ g
+      ((pushHom (integralScalarMap ℓ E) p).app M ≫
+        (lowerStar (Profinite.continuousMapRingObj E) p).map e.hom)
+      (latticePushedEmbedding_rationalization (integralScalarMap ℓ E) X P p M e)
+  have : PreservesColimitsOfShape ℕ T :=
+    preservesColimitsOfShape_of_natIso (normalizedPullbackIso (integralCoeff ℓ E) (C.f s))
+  let adj := Mod.extendRestrictAdjunction (coefficientMap (integralScalarMap ℓ E) (C.X s))
+  let q : F.obj (T.obj ((lowerStar (integralCoeff ℓ E) p).obj M)) ⟶
+      H.obj ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+        ((upperStar (Profinite.continuousMapRingObj E) p).obj P)) :=
+    (adj.homEquiv (T.obj ((lowerStar (integralCoeff ℓ E) p).obj M))
+      (H.obj ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+        ((upperStar (Profinite.continuousMapRingObj E) p).obj P)))).symm
+      (T.map g ≫ k.hom.app ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+        ((upperStar (Profinite.continuousMapRingObj E) p).obj P)))
+  have : IsIso q := localizedAdjoint_isIso ℓ E X (C.X s) T
+    ((lowerStar (integralCoeff ℓ E) p).obj M)
+    ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+      ((upperStar (Profinite.continuousMapRingObj E) p).obj P))
+    (H.obj ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+      ((upperStar (Profinite.continuousMapRingObj E) p).obj P)))
+    (k.app ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+      ((upperStar (Profinite.continuousMapRingObj E) p).obj P))) g
+  let d : H.obj ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+      ((upperStar (Profinite.continuousMapRingObj E) p).obj P)) ≅
+      F.obj (Mod.finiteFree R n) := (asIso q).symm ≪≫ F.mapIso bB
+  let i : F.obj (Mod.finiteFree R r) ⟶ F.obj (Mod.finiteFree R n) :=
+    eP.inv ≫ H.map
+      ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P) ≫ d.hom
+  have : Mono (H.map ((upperStarLowerStarAdjunction
+      (Profinite.continuousMapRingObj E) p).unit.app P)) := inferInstance
+  have : Mono i := by dsimp [i]; infer_instance
+  let eA := k.app P ≪≫ G.mapIso eP
+  let eD := k.app ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+    ((upperStar (Profinite.continuousMapRingObj E) p).obj P)) ≪≫ G.mapIso d
+  refine ⟨hc, r, n, m, i, inferInstance, ?_, eA, bB, eD, ?_, ?_⟩
+  · exact ⟨cokernelEpiComp eP.inv _ ≪≫ cokernelCompIsIso
+      (H.map ((upperStarLowerStarAdjunction
+        (Profinite.continuousMapRingObj E) p).unit.app P)) d.hom ≪≫ eQ⟩
+  · exact map_conjugate_naturality GX T H G k
+      ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P) eP d
+  · have hq : adj.unit.app (T.obj ((lowerStar (integralCoeff ℓ E) p).obj M)) ≫ G.map q =
+        T.map g ≫ k.hom.app ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+          ((upperStar (Profinite.continuousMapRingObj E) p).obj P)) :=
+      (adj.homEquiv (T.obj ((lowerStar (integralCoeff ℓ E) p).obj M))
+        (H.obj ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+          ((upperStar (Profinite.continuousMapRingObj E) p).obj P)))).apply_symm_apply _
+    exact adjoint_coordinate_equation F G adj q bB (T.map g)
+      (k.hom.app ((lowerStar (Profinite.continuousMapRingObj E) p).obj
+        ((upperStar (Profinite.continuousMapRingObj E) p).obj P))) hq
 
 end AlgebraicGeometry.ProEtale.CondensedRing

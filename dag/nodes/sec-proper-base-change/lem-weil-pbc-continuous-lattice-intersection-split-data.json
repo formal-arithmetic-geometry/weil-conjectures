@@ -23,14 +23,12 @@
    "elementary": false
   },
   {
-   "text": "The weakly-etale localization functor of a surjective quasi-compact map is cover dense, hence its restriction on abelian sheaves is faithful. Transfer this to module inverse image through the forgetful comparison. Faithfulness and the adjunction triangle make the unit mono.",
-   "uses": [
-    "lem-weil-pbc-profinite-point-pullback"
-   ],
+   "text": "The private weaklyEtalePullback_faithful helper proves that localization along a surjective quasi-compact weakly etale map is cover dense, and hence its restriction on abelian sheaves is faithful, using Mathlib cover-density extensionality. Transfer faithfulness to normalized module inverse image through extendScalarsIsoComapInv. The adjunction unit is then mono. This uses the existing inverse-image framework, without the separate profinite-point coherence theorem.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "The adjoint of the pushed lattice embedding is an isomorphism: the integral scalar/pushforward comparison and e identify its rational extension with p_*p^*P. The rationalization equation of the lattice embedding specifies this adjoint.",
+   "text": "The adjoint of the pushed lattice embedding is an isomorphism: the integral scalar/pushforward comparison and e identify its rational extension with p_*p^*P. The rationalization equation of the lattice embedding specifies this adjoint. The elementary private adjoint_isIso_of_rationalization helper uses the abstract counit formula, so this calculation does not unfold the concrete scalar-extension adjunction.",
    "uses": [
     "lem-weil-pbc-integral-underived-push-comparison",
     "def-weil-pbc-continuous-lattice-intersection"
@@ -38,16 +36,15 @@
    "elementary": false
   },
   {
-   "text": "Show the pulled adjoint is an isomorphism using the prime-localization telescope. Normalized inverse image preserves its colimit. Transport the original localization colimit through the original adjoint isomorphism and the coefficient comparison. The zeroth-leg equation and uniqueness of all localization legs give an isomorphism between the two colimit cocones.",
+   "text": "Show the pulled adjoint is an isomorphism using the prime-localization telescope in localizedAdjoint_isIso. Normalized inverse image preserves countable colimits because it is naturally isomorphic to upperStar, a left adjoint. Transport the original localization colimit through the original adjoint isomorphism and the coefficient comparison. The zeroth-leg equation and uniqueness of all localization legs give an isomorphism between the two colimit cocones.",
    "uses": [
     "lem-weil-pbc-integral-module-telescope",
-    "lem-weil-pbc-integral-localization-legs",
-    "lem-weil-pbc-profinite-point-pullback"
+    "lem-weil-pbc-integral-localization-legs"
    ],
    "elementary": false
   },
   {
-   "text": "Choose the three finite free bases on the common compact cover. The integral basis gives eB; the rational basis and scalar extension of regular modules give eA. The inverse pulled-adjoint isomorphism followed by extension of eB gives eD. Conjugate the pulled rational unit to define i. Monicity and the chosen quotient basis give its finite free cokernel. Naturality of the coefficient comparison proves the first equation; the adjunction unit and its naturality prove the second. Both coordinate equations are applications of private general categorical naturality lemmas, proved in the same module to avoid unfolding the concrete functors in the equality calculations.",
+   "text": "On the common compact cover choose bases bA, bB and bQ for the rational module, integral pushforward and rational unit cokernel. Compose bA and bQ with the inverse integralFreeExtensionIso to express their targets as extended integral finite free modules. Normalize bB using normalizedPullbackIso to obtain eB. Let k compare coefficient restriction followed by normalized pullback with rational upperStar followed by coefficient restriction. The localized adjoint q is invertible by the preceding telescope argument. Put d=(asIso q).symm followed by F.mapIso eB and i=b.inv followed by H.map(unit) followed by d.hom. Exact inverse image preserves the monomorphism and its cokernel; cokernel.mapIso and bQ give the displayed cokernel basis. The eA and eD coordinates are k followed by the restrictions of b and d. map_conjugate_naturality proves the first equation, and adjoint_coordinate_equation proves the second from the adjoint transpose identity. All of these last coordinate calculations are complete Lean proofs in the item module.",
    "uses": [
     "lem-weil-pbc-regular-extension-comparison",
     "def-weil-pbc-continuous-lattice-intersection"
@@ -58,7 +55,6 @@
  "proof_deps": [
   "lem-weil-pbc-finite-etale-locally-free-models",
   "lem-weil-pbc-condensed-constructible-serre",
-  "lem-weil-pbc-profinite-point-pullback",
   "lem-weil-pbc-integral-underived-push-comparison",
   "def-weil-pbc-continuous-lattice-intersection",
   "lem-weil-pbc-integral-module-telescope",
@@ -69,7 +65,7 @@
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant",
-  "note": "Historical B2 proof landed at e84721f760. Upstream-sync repair aabb04015d replaced continuousLatticeIntersection_splitData by sorry after a kernel deterministic timeout; the current proof remains an open stage-3 performance repair. C4 maintenance 2026-10-17: ten subsequent empty NOANSWER sessions ended in provider HTTP 429. The retained sandbox contains the attempted proof; see coord/changes/C4-continuous-lattice-intersection-dispatch-maintenance.md. Original proof provenance: Completed B2 proof. Use finite-sheet local freeness of the pushforward and unit quotient, followed by a common compact free cover. A localization-colimit argument transports invertibility of the pushed embedding adjoint under inverse image. The public statement is unchanged; no new sorry remains. Returned-delivery repair: remove duplicate finite-freeness transport lemmas and reuse the existing private APIs through proof-only import all."
+  "note": "C4 completes the sole remaining theorem from the existing finite-etale local-freeness models, integral pushforward comparison, and localization/naturality helpers. The public statement is unchanged and no new sorry is introduced. Canonical objects are supplied explicitly to the common-cover and coordinate applications, and the adjoint and conjugating isomorphism have explicit types, avoiding expensive kernel conversion of local aliases. An elementary proved categorical helper uses the abstract counit formula. No heartbeat override is needed. The unused direct profinite-point coherence dependency and direct geometric finite-etale splitting import are removed; geometric splitting is already encapsulated by finiteEtale_locallyFree_models."
  },
  "mathlib_searches": [
   {
@@ -160,14 +156,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261016T133215-L-3233263",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12) Historical landing review only: upstream-sync repair aabb04015d subsequently replaced the target proof by sorry after a kernel deterministic timeout; a new successful compile and second reading are required before the repair is delivered."
+  "landing": "20261017T021600-L-693878",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
