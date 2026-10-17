@@ -2,9 +2,17 @@
  "state": "released",
  "stage": "1",
  "item": "sk-thm-rationality",
- "by": "L (human decision)",
- "date": "2026-10-17",
- "note": "re-split (decision of the human, 2026-10-17): step 4 (3112 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged",
- "reason": "re-split (decision of the human, 2026-10-17): step 4 (3112 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.",
- "keep_plan": true
+ "by": "L (batch-5 trace-formula assumption, decision of the human 2026-10-17)",
+ "date": "2026-10-18",
+ "keep_plan": true,
+ "note": "replace sk-thm-trace-transport by the cited assumption nt-assume-trace-formula in steps 3-5, with the bridge (a)-(e); keep the other steps",
+ "reason": "Batch 5 ASSUMES the Grothendieck-Lefschetz trace formula (the human, 2026-10-17): the cited leaf nt-assume-trace-formula (upstream PR #1473, trace_globalOperator_eq_sum_trace_stalkFrobenius) replaces the blueprint trace formula sk-thm-trace-transport, which is NOT to be proved for batch 5. The edge to sk-thm-trace-transport has been removed from this node (proof_deps and the uses of steps 3, 4, 5 now name nt-assume-trace-formula); do not cite sk-thm-trace-transport or any node below it again.\n\nKeep the route and steps 0-2 and 6-9 (stratification into affine pieces, product formula, integrality, Hankel-rank and Fatou steps). Re-split steps 3-5 so that they derive, for each affine stratum Y_{0,j} (separated, finite type over F_q, Y_j = Y_{0,j} x k), the identity iota Z(Y_{0,j},T) = prod_i det(1 - T F | H^i_c(Y_j, Qlb))^{(-1)^{i+1}} from nt-assume-trace-formula. Work over Qlb (the condensed coefficient of #1473) instead of E = Q_l; steps 7-9 only need a characteristic-zero coefficient field, so replace E by Qlb there (or pass through E -> Qlb with lem-weil-matrix-rank-field-extension).\nThe bridge the steps need (state each as a node unless it already exists):\n (a) the constant object Qlb on Y_j with its canonical Weil structure for the model Frobenius is a Weil object (WeilBoundedConstructibleOfEnd) in the sense of #1473 [def-weil-constant-weil-structure, lem-zl-constant-weil-datum, def-weil-weil-sheaf-complex];\n (b) the hypotheses of #1473: the fixed points of Phi_m on Y_j(k) are the F_{q^m}-points of Y_{0,j}, a finite set [lem-weil-point-counts-finite, thm-trf-frobenius-fixed-points if needed]; RGamma_c(Y_j, Qlb) and the stalks have right duals in D^b_c(s)[[Qlb]] because their cohomology is finite-dimensional and bounded [prop-cohomological-finiteness] and a bounded complex with finite-dimensional cohomology over a field is dualizable [lem-pc-dualizable-evaluation-criterion];\n (c) the categorical traces of #1473 are alternating sums of traces on cohomology (NOT part of #1473's statement): the trace of an endomorphism of a dualizable object of D^b_c(s)[[Qlb]] equals sum_i (-1)^i tr(H^i) [def-trf-categorical-trace, lem-trf-chain-supertrace, prop-trf-trace-formal-laws, or a new node];\n (d) the local terms: the stalk of the constant object is Qlb with Frobenius the identity, so tr(F_{x,m}) = 1 and #1473 gives N_m(Y_{0,j}) = sum_i (-1)^i tr(F^m | H^i_c(Y_j, Qlb)) for every m >= 1 [def-weil-local-frobenius-trace];\n (e) from these identities for all m, exp(sum_m N_m T^m / m) = prod_i det(1 - T F | H^i_c)^{(-1)^{i+1}} [lem-weil-exp-trace-determinant, lem-zl-log-det-identity, sk-def-zeta].\nThe Lean statement (zetaSeries_rational) is unchanged.",
+ "removed_deps": [
+  "sk-thm-trace-transport"
+ ],
+ "steps": [
+  3,
+  4,
+  5
+ ]
 }
