@@ -8,6 +8,7 @@ module
 public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.PoincareDuality.ProperProjectionFormulaBounded
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 
 /-!
@@ -764,13 +765,24 @@ lemma boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ�
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B :=
   rfl
 
+attribute [local irreducible] CategoryTheory.Adjunction.projectionMorphism
+  derivedUpperStarLowerStarAdjunction
+
 /-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
 `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
 docstring. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X.left)⟦Λ⟧)
     (B : Dᵇc(Y.left)⟦Λ⟧) :
-    IsIso (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B) :=
-  sorry
+    IsIso (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B) := by
+  have hE : IsIso (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B).hom := by
+    rw [projection_hom]
+    have h (c : Compactification f.left) :
+        IsIso (exceptionalProjectionMorphismOfCompactification Λ c K.obj B.obj) := by
+      have hp := isIso_properProjection_bounded Λ ℓ f c K B
+      dsimp only [exceptionalProjectionMorphismOfCompactification, properProjectionMorphism]
+      exact IsIso.comp_isIso' hp inferInstance
+    exact h (compactificationOverField f)
+  exact (ObjectProperty.isIso_hom_iff _).mp hE
 
 instance isIso_boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ⟧)
     (B : Dᵇc(Y.left)⟦Λ⟧) :

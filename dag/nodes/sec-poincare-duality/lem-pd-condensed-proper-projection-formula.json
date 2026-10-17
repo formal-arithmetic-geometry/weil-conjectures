@@ -1,0 +1,132 @@
+{
+ "id": "lem-pd-condensed-proper-projection-formula",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "nt-target-poincare-isiso Step 2, proper projection factor of the compactification exceptional projection",
+   "via": [
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper projection factor of a compactification on bounded constructible complexes",
+ "statement": "Let $\\ell$ be prime, $k$ a field of positive characteristic different from $\\ell$, and $f:X\\to Y$ a morphism of separated finite-type $k$-schemes with a compactification $X\\xrightarrow{i}Z\\xrightarrow{g}Y$, $i$ open and $g$ proper [def-nagata-compactification, sk-def-sfb-dc-setting, def-weil-proper-morphism]. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] in the class IsEllAdicFinitenessCoefficient: the continuous condensed finite extension $E$ of $\\mathbf Q_\\ell$, its valuation ring (either supported integral presentation), or $\\overline{\\mathbf Q}_\\ell$. Put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. For bounded constructible complexes $K$ on $X$ and $B$ on $Y$, put $A=Di_!K$, bounded constructible by extension by zero [sk-def-sfb-bounded-constructible, def-sfb-dc-open-lower-shriek]. With the relative derived tensor [sk-def-sfb-derived-tensor-hom], the actual projection component $Rg_*A\\otimes^{\\mathbf L}B\\to Rg_*(A\\otimes^{\\mathbf L}Lg^*B)$ is invertible. Here it is precisely the adjoint under $Lg^*\\dashv Rg_*$ [sk-def-sfb-module-derived-pushpull] of the actual oplax pullback tensor comparison followed by $\\varepsilon_A\\otimes 1$, not an unspecified map between these endpoints.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (3), projection formula; integral counterpart sk-thm-sfb-proper-base-change-integral.proof.md (3); canonical module-object comparison in nt-target-poincare-isiso Step 2"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-nagata-compactification",
+  "def-sfb-dc-open-lower-shriek"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact symmetric monoidal derived equivalence in [lem-pd-module-ringed-topos-derived-comparison]. Its compatibility with the specified adjunction, counit and oplax tensor comparison identifies the displayed module-object projection with the actual ringed-topos projection. For valuation-ring coefficients apply clause (3) of [det-thm-sfb-proper-base-change-integral]; the closed-unit-ball presentation is the same valuation ring of a finite extension. For finite extensions of Q_ell and the algebraic closure apply clause (3) of [det-thm-sfb-proper-base-change-rational]. Equivalences reflect invertibility, so these give precisely the stated module-object component.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "det-thm-sfb-proper-base-change-integral",
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), projection formula; integral counterpart sk-thm-sfb-proper-base-change-integral.proof.md (3); canonical module-object comparison in nt-target-poincare-isiso Step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (3), projection formula; integral counterpart sk-thm-sfb-proper-base-change-integral.proof.md (3); canonical module-object comparison in nt-target-poincare-isiso Step 2"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.ProjectionFormula",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "module": "Sheaf.PoincareDuality.ProperProjectionFormulaBounded",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_properProjection_bounded",
+  "file": "lean/Sheaf/PoincareDuality/ProperProjectionFormulaBounded.lean",
+  "statement": "theorem isIso_properProjection_bounded (f : X ⟶ Y) (c : Compactification f.left) (K : Dᵇc(X.left)⟦Λ⟧) (B : Dᵇc(Y.left)⟦Λ⟧) : IsIso ((derivedUpperStarLowerStarAdjunction Λ c.g).projectionMorphism ((D((c.i)_!open⟦Λ⟧)).obj K.obj) B.obj)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper projection formula for derived pushforward of constructible ell adic sheaves",
+   "results": "8 hits including TopCat.Sheaf.pushforward, Scheme.Modules.pushforward_obj_obj and SheafOfModules.pushforwardComp; only underived sheaf pushforwards.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.projectionMorphism",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Adjunction.projectionMorphism'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMorphism",
+   "results": "0 hits in Mathlib. Local library rg found only the definition and naturality, no proper module-object instance.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261017T234739-L-903832",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261017T234739-L-903832",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
