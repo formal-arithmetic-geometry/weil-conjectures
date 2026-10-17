@@ -179,7 +179,7 @@ private theorem card_eq_of_mem_locus {W : Scheme.{u}} {M N : W.Modules}
     ((appLinearEquivOfIso (asIso ψ') ⊤).trans (freeSectionsEquiv J))
   simpa using E.finrank_eq
 
-/-- In simultaneous finite free frames on an affine open, the locally invertible locus
+/-- In simultaneous finite free frames on an open, the locally invertible locus
 is a basic open.
 Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), local matrix argument, and
 Tag 0BDP, final determinant sentence.
@@ -208,17 +208,15 @@ If the cardinalities differ, take f = 0. A point of U in the locus would again g
 invertible residue-field pullback. The global section coordinates of its two free
 sheaves are finite vector spaces indexed by I and J. The induced linear equivalence
 forces equal cardinalities, a contradiction. Thus both sides are empty. Empty U and
-rank zero are included. The argument does not use affineness; the existing hypothesis
-and the entire public signature are retained. -/
+rank zero are included. The argument does not use affineness of U. -/
 theorem moduleMapIsoLocus_inter_eq_basicOpen_of_free {W : Scheme.{u}}
-    {M N : W.Modules} (φ : M ⟶ N) (U : W.Opens) (hU : IsAffineOpen U)
+    {M N : W.Modules} (φ : M ⟶ N) (U : W.Opens)
     {I J : Type u} [Finite I] [Finite J]
     (eM : M.restrict U.ι ≅ SheafOfModules.free I)
     (eN : N.restrict U.ι ≅ SheafOfModules.free J) :
     ∃ f : W.presheaf.obj (.op U),
       (U : Set W) ∩ (moduleMapIsoLocus φ : Set W) = (W.basicOpen f : Set W) := by
   classical
-  have _ := hU
   let := Fintype.ofFinite I
   let := Fintype.ofFinite J
   by_cases h : Fintype.card I = Fintype.card J

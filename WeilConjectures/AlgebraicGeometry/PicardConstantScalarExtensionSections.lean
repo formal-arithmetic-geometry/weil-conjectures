@@ -14,7 +14,7 @@ Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation;
 the representing-object argument in lem-sc-picard-constant-tensor-balanced-sections.
 -/
 
-@[expose] public section
+public section
 universe w
 open CategoryTheory Opposite
 open scoped TensorProduct ChangeOfRings
@@ -172,28 +172,38 @@ Conversely extend such a morphism by a tensor s mapping to a times its value at 
 The scalar-extension Hom equivalence makes these assignments well-defined and inverse.
 Restriction compatibility follows from the same formulas and res(1)=1. They are
 natural in H. Thus E and the chosen pullback represent the same Hom functor;
-uniqueness of representing objects gives a presheaf isomorphism. Its components
-are the displayed linear equivalences, and naturality gives the restriction formula.
+uniqueness of representing objects gives a presheaf isomorphism, whose components
+are these linear equivalences.
 This includes the empty open and zero M; no nonzero ring or geometric assumption
 is used in the scalar-extension adjunction. -/
-theorem exists_picard_constant_scalar_extension_sections
+def picardConstantScalarExtensionSections
     (k : Type w) [Field k] (Y : Scheme.{w})
-    (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) :
-    ∃ q : ∀ V : Y.Opens,
-        (ModuleCat.extendScalars (scalarMap g V)).obj M ≃ₗ[Γ(Y, V)]
-          ((PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
-            (picardConstantVector k Y M)).obj (op V),
-      ∀ {U V : Y.Opensᵒᵖ} (i : U ⟶ V) (a : Γ(Y, U.unop)) (s : M),
-        ((PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
-          (picardConstantVector k Y M)).map i
-            (q U.unop (a ⊗ₜ[k, scalarMap g U.unop] s)) =
-          q V.unop ((Y.presheaf.map i a) ⊗ₜ[k, scalarMap g V.unop] s) := by
+    (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (V : Y.Opens) :
+    (ModuleCat.extendScalars (scalarMap g V)).obj M ≃ₗ[Γ(Y, V)]
+      ((PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
+        (picardConstantVector k Y M)).obj (op V) :=
+  ((PresheafOfModules.evaluation Y.ringCatSheaf.obj (op V)).mapIso
+    ((extensionCorepresentableBy g M).uniqueUpToIso
+      ((PresheafOfModules.pullbackPushforwardAdjunction
+        (picardConstantRingMap k Y g)).corepresentableBy
+          (picardConstantVector k Y M)))).toLinearEquiv
+
+/-- The identifications `picardConstantScalarExtensionSections` commute with restriction:
+restriction of the pullback corresponds to restricting the ring coefficient.
+(blueprint: lem-sc-picard-constant-scalar-extension-sections). -/
+theorem picardConstantScalarExtensionSections_map
+    (k : Type w) [Field k] (Y : Scheme.{w})
+    (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k)
+    {U V : Y.Opensᵒᵖ} (i : U ⟶ V) (a : Γ(Y, U.unop)) (s : M) :
+    ((PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
+      (picardConstantVector k Y M)).map i
+        (picardConstantScalarExtensionSections k Y g M U.unop
+          (a ⊗ₜ[k, scalarMap g U.unop] s)) =
+      picardConstantScalarExtensionSections k Y g M V.unop
+        ((Y.presheaf.map i a) ⊗ₜ[k, scalarMap g V.unop] s) := by
   let e := (extensionCorepresentableBy g M).uniqueUpToIso
     ((PresheafOfModules.pullbackPushforwardAdjunction
       (picardConstantRingMap k Y g)).corepresentableBy (picardConstantVector k Y M))
-  refine ⟨fun V ↦ ((PresheafOfModules.evaluation
-    Y.ringCatSheaf.obj (op V)).mapIso e).toLinearEquiv, ?_⟩
-  intro U V i a s
   change ((PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
       (picardConstantVector k Y M)).map i
         (e.hom.app U (a ⊗ₜ[k, scalarMap g U.unop] s)) =

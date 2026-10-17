@@ -71,7 +71,7 @@ Source: Stacks Project, Tag 09RE, affine proof's equality in the homotopy catego
 Tag 0BC7 (2), finite-component homotopy calculation, and Tag 00CR.
 (blueprint: lem-sc-perfect-open-stalk-inverse-homotopies-spread).
 
-Proof: Work on the affine V. Restriction preserves the finite-free retractions
+Proof: Work on V. Restriction preserves the finite-free retractions
 and the support bounds. For each of the two stalk homotopies only finitely many
 reverse-degree components can be nonzero. Sandwich each component between the
 restricted finite-free retractions, represent its finitely many matrix entries
@@ -85,13 +85,14 @@ Homotopy.zero. Restrict g to W and identify iterated restriction with restrictio
 from U to W through the canonical slice-site comparison; its naturality identifies
 both composites with the stated maps. The same construction handles zero terms,
 disjoint support intervals and arbitrary non-Noetherian rings. No quasi-isomorphism
-hypothesis is used; the two specified homotopies are the input. -/
+hypothesis is used; the two specified homotopies are the input. Affineness of U and V is
+not needed. -/
 theorem exists_affine_perfect_open_stalk_inverse_homotopies_spread
-    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U)
+    (X : Scheme.{u}) (U : X.Opens) (x : X)
     (P Q : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)
-    (f : P ⟶ Q) (V : X.Opens) (hxV : x ∈ V) (hV : IsAffineOpen V) (hVU : V ≤ U)
+    (f : P ⟶ Q) (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)
     (g : ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
         (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q ⟶
       ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
@@ -110,9 +111,6 @@ theorem exists_affine_perfect_open_stalk_inverse_homotopies_spread
       ∃ (gW : R.obj Q ⟶ R.obj P),
         Nonempty (Homotopy (R.map f ≫ gW) (𝟙 _)) ∧
         Nonempty (Homotopy (gW ≫ R.map f) (𝟙 _)) := by
-  have _ := hxU
-  have _ := hU
-  have _ := hV
   let R₀ := SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE hVU)
   let R := R₀.mapHomologicalComplex (.up ℤ)
   have hfg' : Nonempty (Homotopy
