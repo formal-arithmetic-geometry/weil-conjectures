@@ -15,9 +15,111 @@
   "def-sc-discrete-valuation-ring",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check both meanings of dimension needed below. The curve hypothesis gives $\\sup_{y\\in X}\\dim\\mathcal O_{X,y}=1$ by [def-pc-curve, def-pc-dimension]. By [lem-pc-scheme-dimension-local-rings], the topological dimension of $X$ is also $1$. Since $X$ is integral, it is irreducible and has a generic point $\\eta$ by [lem-sc-scheme-sober]. The closed point $x$ differs from $\\eta$: otherwise $X=\\overline{\\{x\\}}=\\{x\\}$ would have dimension zero. The strict generalization $x,\\eta$ and [lem-sc-scheme-stalk-dimension-generalization-chains] give $\\dim A\\geq1$, while the supremum defining the curve dimension gives $\\dim A\\leq1$. Thus $\\dim A=1$. Moreover every open neighbourhood $N$ of $x$ contains $\\eta$ and the strict chain of irreducible closed subsets $\\{x\\}\\subsetneq N$, so $\\dim N\\geq1$. Its dimension is at most $\\dim X=1$: taking closures in $X$ of a strict chain of irreducible closed subsets of $N$ preserves strictness, as intersecting those closures with $N$ recovers the chain. Consequently $\\dim_x X=\\min_{N\\ni x}\\dim N=1$ by [def-kun-dimension].",
+   "uses": [
+    "def-pc-curve",
+    "def-pc-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-sc-scheme-sober",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 04MU (lemma-dimension) and 02IZ (lemma-codimension-local-ring); schemes.tex, Tag 01IS (lemma-scheme-sober); dimension-one specialization in the proof of curves.tex, Tag 0C1E"
+   }
+  },
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}B$ containing $x$, and let $\\mathfrak q$ be the corresponding prime. Restricting the smooth structure morphism to $U$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $B$ is a smooth $k$-algebra. The canonical localization identification [lem-weil-pbc-affine-open-stalk-localization] gives $A\\cong B_{\\mathfrak q}$ as $k$-algebras. Apply [lem-weil-pbc-smooth-over-field-regular-local] to this smooth algebra and this prime: $A$ is regular local, in particular Noetherian. Since Step 1 proved $\\dim A=1$, [lem-sc-regular-dim1-dvr] shows that $A$ is a discrete valuation ring. This proves the asserted discrete valuation ring property of $A$.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E, lemma-uniformizer-works, first proof sentence; algebra.tex, Tags 00TT (lemma-characterize-smooth-over-field) and 00PD (lemma-characterize-dvr); morphisms.tex, Tag 01V6; schemes.tex, Tag 01HV"
+   }
+  },
+  {
+   "text": "For $f:X\\to\\operatorname{Spec}k$, the sole fibre is $X$ itself. Step 1 gives $\\dim_x X=1$, so [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] supplies an affine open $W=\\operatorname{Spec}C$ containing $x$ for which $\\Omega_{C/k}$ is free of rank one. (The affine open of the base in that lemma is the nonempty $\\operatorname{Spec}k$.) Write $\\mathfrak p$ for $x$ in this chart. By [lem-weil-pbc-affine-open-stalk-localization], $A\\cong C_{\\mathfrak p}$; by [lem-weil-pbc-kahler-differentials-localization], $\\Omega_{A/k}\\cong(\\Omega_{C/k})_{\\mathfrak p}$. Localizing an isomorphism $C\\xrightarrow{\\sim}\\Omega_{C/k}$ and its inverse therefore gives an isomorphism $A\\xrightarrow{\\sim}\\Omega_{A/k}$. In particular choose a basis element $e$ of this free rank-one $A$-module. No assertion about the particular differential $dt$ has been made yet.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E, lemma-uniformizer-works, last proof sentence; morphisms.tex, Tag 02G1 (lemma-smooth-omega-finite-locally-free); algebra.tex, Tag 00RT (lemma-differentials-localize), part (2)"
+   }
+  },
+  {
+   "text": "Let $t$ be any uniformizer. By [def-sc-discrete-valuation-ring], $A$ is a local domain, its maximal ideal $\\mathfrak m$ is nonzero, and $\\mathfrak m=tA$. Hence $t\\neq0$ and $t$ is not a unit. Its class in $\\mathfrak m/\\mathfrak m^2$ is nonzero: if $t\\in\\mathfrak m^2=t^2A$, write $t=t^2b$ and cancel the nonzero $t$ in the domain to get $1=tb$, contradicting $t\\in\\mathfrak m$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E, lemma-uniformizer-works, middle proof sentence: the uniformizer gives a nonzero cotangent class; algebra.tex, Tag 00PD"
+   }
+  },
+  {
+   "text": "Put $\\kappa=A/\\mathfrak m=\\kappa(x)$. The hypotheses of [lem-weil-pbc-separable-residue-cotangent-injective] hold: $A$ is a Noetherian local $k$-algebra by Step 2; $k\\to A$ is injective since $A$ is nonzero and $k$ is a field; and the residue extension $\\kappa(x)/k$ is finite separable by assumption. It is finitely generated as a field extension, since any finite $k$-vector-space basis of $\\kappa$ generates it as a field. It is separable over $k$ in the sense of [def-weil-pbc-separable-field-extension], (2): every subextension $k\\subset K'\\subset\\kappa$ is algebraic over $k$, so the empty family is a transcendence basis of $K'/k$ [def-weil-pbc-transcendence-basis] (vacuously algebraically independent, with $k(\\emptyset)=k$), and $K'/k$ is separable algebraic because every element of $K'\\subset\\kappa$ is separable over $k$ by [def-weil-pbc-separable-algebraic-extension]; hence $K'/k$ is separably generated. Thus that node gives an injective map $\\mathfrak m/\\mathfrak m^2\\to\\Omega_{A/k}\\otimes_A\\kappa$ sending $a\\bmod\\mathfrak m^2$ to $da\\otimes1$. Applying it to the nonzero class from Step 4 shows $dt\\otimes1\\neq0$.",
+   "uses": [
+    "lem-weil-pbc-separable-residue-cotangent-injective",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-separable-field-extension",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E, lemma-uniformizer-works, middle proof sentence; algebra.tex, Tag 00TU (lemma-computation-differential)"
+   }
+  },
+  {
+   "text": "Write $dt=ae$ in the basis $e$ chosen in Step 3. Tensoring the basis isomorphism and its inverse with $\\kappa$ identifies $\\Omega_{A/k}\\otimes_A\\kappa$ with $\\kappa$, carrying $dt\\otimes1$ to the residue $\\overline a$. Step 5 therefore says $a\\notin\\mathfrak m$. In a local ring every element outside the maximal ideal is a unit; hence $a$ is a unit. The map $A\\to\\Omega_{A/k}$, $b\\mapsto b\\,dt=ba e$, has inverse $ce\\mapsto ca^{-1}$. Thus it is an isomorphism, and $dt$ is a basis. Since $t$ was arbitrary this proves the assertion for every uniformizer.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E, lemma-uniformizer-works, last proof sentence, expanded by the rank-one coefficient calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-curve",
+  "def-pc-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-scheme-sober",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-dimension",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-dim1-dvr",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-separable-residue-cotangent-injective",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-transcendence-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1E, lemma-uniformizer-works, proof; the dimension-one hypotheses and the final rank-one calculation are made explicit"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +155,45 @@
    "results": "{\"t\": \"2026-10-17T12:48:55Z\", \"tool\": \"leanfinder\", \"query\": \"At a closed point of a smooth curve with separable residue field, the differential of a uniformizer is a basis of the module of Kahler differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.Generators.basisCotangentAway_apply\", \"Algebra.Generators.basisCotangentAway\", \"Algebra.Generators.cotangentSpaceBasis_apply\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.Generators.cotangentSpaceBasis\"], \"digest\": \"adf040abc4782c31\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits supply general algebraic differential constructions, presentations or etale criteria, not this smooth-curve statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a separable closed point of a smooth curve the differential of any uniformizer is a basis of the local Kahler differentials",
+   "results": "{\"t\": \"2026-10-17T15:09:39Z\", \"tool\": \"leanfinder\", \"query\": \"At a separable closed point of a smooth curve the differential of any uniformizer is a basis of the local Kahler differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.SubmersivePresentation.basisKaehler\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.Generators.basisCotangentAway\"], \"digest\": \"d7c24a8bd7407582\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: standard-smooth presentation bases, general differential constructions, and DVR cotangent dimension do not assert that every uniformizer is a differential basis under these scheme hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "uniformi[sz]er.*(differential|Kaehler)|differential.*uniformi[sz]er|basis.*Kaehler",
+   "results": "{\"t\": \"2026-10-17T15:09:55Z\", \"tool\": \"grep\", \"query\": \"uniformi[sz]er.*(differential|Kaehler)|differential.*uniformi[sz]er|basis.*Kaehler\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\"], \"digest\": \"ab3cfe8826e2c4ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: standard-smooth presentation bases, general differential constructions, and DVR cotangent dimension do not assert that every uniformizer is a differential basis under these scheme hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local parameter at a separable closed point of a smooth curve freely generates Kahler differentials",
+   "results": "{\"t\": \"2026-10-17T15:09:55Z\", \"tool\": \"leansearch\", \"query\": \"A local parameter at a separable closed point of a smooth curve freely generates Kahler differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential\", \"KaehlerDifferential.span_range_map_derivation_of_isLocalization\", \"KaehlerDifferential.D_apply\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"instInhabitedKaehlerDifferential\"], \"digest\": \"a3d94d66b8880f63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: standard-smooth presentation bases, general differential constructions, and DVR cotangent dimension do not assert that every uniformizer is a differential basis under these scheme hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-17T15:09:56Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: standard-smooth presentation bases, general differential constructions, and DVR cotangent dimension do not assert that every uniformizer is a differential basis under these scheme hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differentials of a regular local ring of dimension one over a field are generated by the differential of a generator of the maximal ideal when the residue field is separable",
+   "results": "{\"t\": \"2026-10-17T15:10:23Z\", \"tool\": \"leanfinder\", \"query\": \"The differentials of a regular local ring of dimension one over a field are generated by the differential of a generator of the maximal ideal when the residue field is separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_CotangentSpace_eq_one\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Differential.differentialFiniteDimensional\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\"], \"digest\": \"8093e23193fdd1ae\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: standard-smooth presentation bases, general differential constructions, and DVR cotangent dimension do not assert that every uniformizer is a differential basis under these scheme hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-finite-map-curve",
@@ -73,5 +210,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-uniformizer-differential-basis",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0C1E in six steps. Proved the DVR assertion as well as the differential-basis assertion; made both dimension conventions, localization of differentials, the nonzero cotangent class, and unit coefficient explicit. Reused existing nodes throughout; no new nodes. Searched the project declaration tags and concepts, the whole DAG and blueprint, and Mathlib. The statement is unchanged.",
+  "blueprint": "lem-a1-finite-map-curve.proof.md, third paragraph: local-parameter calculation underlying nonvanishing of the differential at the chosen pole (the parent split uses this basis in its Laurent calculation).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Compares the curve dimension convention with topological dimension; a generic dimension theorem, not a replacement of the affine-line unit route."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Supplies the generic point of the integral curve, used only to check its dimension at the closed point."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Computes the closed-point local-ring dimension from the strict generalization to the generic point."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Passes from the restricted smooth scheme morphism to a smooth algebra so that the algebraic regularity theorem applies."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic smooth-algebra regularity input of Stacks 0C1E; the affine-line unit has no such local algebra theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic local smooth differential rank theorem (02G1), the free-module input of 0C1E; no local-basis theorem of the affine-line unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-scheme-sober",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-67641879e",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-67641879e (reviewer sub-agent of L); spot-checked: Read the whole item, every cited statement, and the sources: Stacks curves.tex 0C1E lines 2411-2430, algebra.tex 00TT (final regularity assertion) and 00TU (statement and proof), plus the main-20261015 lem-a1-finite-map-curve proof (third paragraph). The statement is a faithful curve special case of 0C1E and is unchanged; its only citer supplies finite separability of the residue field itself. Step 1 is correct: dim A=1 through the chain x, generic point; dim_x X=1 through the open-neighbourhood chain and closures. Step 2 applies the restriction lemma, the 01V6/02H6 node and stalk-localization (c), then 00TT, then lem-sc-regular-dim1-dvr; that node is closed by IsRegularLocalRing.isDiscreteValuationRing, so it gives the same DVR notion as the item. Step 3 applies the 02G1 node over Spec k (R=k, the fibre is X, d=1) and 00RT(2) at the complement of the prime. Steps 4 and 6 are genuinely elementary (cancellation; unit coefficient with an explicit inverse). One fault, repaired: step 5 applied the 00TU node, which requires kappa to be separable in the separably-generated sense of def-weil-pbc-separable-field-extension (2), but the item assumes separable algebraic and the step never connected the two. I added the argument (every subextension is algebraic, the empty family is a transcendence basis, the subextension is separable algebraic) and added the three definitions to uses and proof_deps. Small cases: uT in k[T]_(T); a nonrational separable point (P); the inseparable point (T^p-a) over F_p(a), where d(T^p-a)=0, shows the separability hypothesis is needed and is not covered by the statement. No new nodes; no duplicate in the DAG or the blueprint (lem-weil-pbc-regular-local-separable-residue-smooth is the converse). Every cited node's unit lies in the transitive route of sk-thm-dl-a1-upper, so the six declared tool_uses are not route departures; accepted as harmless. No SGA used. No target, base-change morphism or coefficient category involved.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -27,9 +27,193 @@
   "lem-weil-pbc-extended-cech-completion-model",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The source ideal is locally finitely generated: inverse image carries a covering epimorphism onto the target ring to a covering epimorphism, and the images of each finite generating list generate its image ideal. Use [lem-weil-pbc-ringed-topos-site-presentation] to obtain $e\\circ f\\cong h\\circ g$ with $g,e$ ringed equivalences and $h$ induced by a continuous finite-limit-preserving functor $u:\\mathcal D\\to\\mathcal C$. The module-equivalence lemma [lem-weil-pbc-ringed-presentation-transport] gives exact derived equivalences and identifies the local Hom tests, hence the full subcategories of locally complete objects. Completion exists by [lem-weil-pbc-extended-cech-completion-model]. An equivalence $E$ identifying these subcategories carries the unit to a reflector unit: for complete $L'$, $\\operatorname{Hom}(E\\Lambda M,L')=\\operatorname{Hom}(\\Lambda M,E^{-1}L')=\\operatorname{Hom}(M,E^{-1}L')=\\operatorname{Hom}(EM,L')$. Thus there is a unique unit-preserving isomorphism $E\\Lambda\\cong\\Lambda' E$. The derived composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $e_*Rf_*$ with $Rh_*g_*$. Conjugating an arrow and its unit equation by these equivalences preserves existence, uniqueness and invertibility. It suffices to prove the assertions for $h$; rename it $f$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099J, lemma-pushforward-derived-complete, opening reduction; Tag 0A0G, construction of comparison"
+   }
+  },
+  {
+   "text": "Suppose $M$ is locally $\\mathcal J_X$-complete [def-weil-pbc-locally-derived-ringed-ideal-complete]. For $V\\in\\mathcal D$, $a\\in\\mathcal J_Y(V)$ and $q\\in\\mathbf Z$, put $U=u(V)$ and $a'=f^\\sharp(a)\\in\\mathcal J_X(U)$. The slice formulas and localized-ring pullback in [lem-weil-pbc-ringed-derived-slice-localization], with the derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact], give\n$$\\operatorname{Hom}_{D(R_Y|_V)}(R_Y|_V[1/a],(Rf_*M)|_V[q])\\cong\\operatorname{Hom}_{D(R_X|_U)}(R_X|_U[1/a'],M|_U[q]).$$\nLocal completeness makes the source-side internal Hom zero, so the sectionwise Hom formula [lem-sfb-derived-internal-hom-sections-model] makes this group zero. The calculation applies to every object over $V$, using its restricted section and localized morphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete",
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099J, local Hom calculation; sites-cohomology.tex Tag 08JA, lemma-section-RHom-over-U"
+   }
+  },
+  {
+   "text": "Put $H=R\\mathcal Hom_{R_Y|_V}(R_Y|_V[1/a],(Rf_*M)|_V)$. Its restriction to any $W\\to V$ is the corresponding internal Hom by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The sectionwise formula [lem-sfb-derived-internal-hom-sections-model] and Step 2 give $H^qR\\Gamma(W,H|_W)=0$ for all $q,W$. Choose a K-injective representative $I$ of $H$ by [prop-pur-kinjective-resolutions-exist]. The derived-evaluation identification [lem-sfb-unbounded-sections-localization] computes $R\\Gamma(W,H|_W)$ by the actual section complex $I(W)$. Every cycle in $I^q(W)$ is a boundary, since its class is in this zero group. The cohomology presheaf is therefore zero, and so is its sheafification $\\mathcal H^q(H)$ for all $q$. Thus $H=0$ in the derived category [def-weil-abstract-derived-category], proving that $Rf_*M$ is locally complete.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "def-weil-abstract-derived-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-unbounded-sections-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099J, vanishing on all objects and shifts; Tag 08JA, section-RHom-over-U"
+   }
+  },
+  {
+   "text": "The object $Rf_*\\Lambda_XM$ is complete by Step 3. The reflector bijection in [lem-weil-pbc-extended-cech-completion-model] gives a unique $\\gamma_{f,M}:\\Lambda_YRf_*M\\to Rf_*\\Lambda_XM$ with $\\gamma_{f,M}\\eta_{Y,Rf_*M}=Rf_*\\eta_{X,M}$. For $M\\to M'$, the two naturality composites out of $\\Lambda_YRf_*M$ have equal composites with $\\eta_{Y,Rf_*M}$ by naturality of the units. The same bijection makes them equal. This constructs the natural comparison with exactly the required normalization and uniqueness.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-completion-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0G, first paragraph"
+   }
+  },
+  {
+   "text": "For a slice $V$, let $K_Y$ be the augmented complex of [lem-weil-pbc-extended-cech-completion-model]. Its restriction has the same augmented extended Cech local description for $\\mathcal J_Y|_V$. The restriction comparison in [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies $(R\\mathcal Hom(K_Y,N))|_V$ with $R\\mathcal Hom(K_Y|_V,N|_V)$ and identifies the maps induced by the augmentation. The reflector characterization in the Cech-model statement therefore identifies $(\\Lambda_YN)|_V$ with $\\Lambda_{Y/V}(N|_V)$, with its unit. The same argument applies on $X$ and further slices. This establishes localization compatibility without assuming that restriction commutes with arbitrary derived limits.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0F, remark-localization-and-completion; augmented Cech construction"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-ringed-derived-slice-localization] on $M$ and $\\Lambda_XM$, and Step 5 on both units. Restricting Step 4 gives $\\gamma|_V\\,\\eta_{Y/V}=R(f_V)_*\\eta_{X/u(V)}$. Uniqueness in Step 4 on the slice identifies $\\gamma|_V$ with $\\gamma_{f_V,M|_{u(V)}}$. For invertibility, take its cone. Exact restriction [def-weil-pbc-ringed-derived-restriction] identifies its cohomology with restricted cohomology sheaves. If these vanish on a covering family of each target object, every section of every cohomology sheaf restricts to zero on that cover and is zero by sheaf separatedness [def-weil-pbc-sites-and-cohomology]. The cone is then zero. Since $\\mathcal J_Y$ is locally finitely generated, it suffices to work on slices with $\\mathcal J_Y=(b_1,\\ldots,b_r)$, where its image ideal is $(c_1,\\ldots,c_r)$ for $c_i=f^\\sharp(b_i)$.",
+   "uses": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0G, local reduction after construction of comparison"
+   }
+  },
+  {
+   "text": "On such a slice put $Q_n^Y=\\bigotimes_i[R_Y\\xrightarrow{b_i^n}R_Y]$ in degrees $[-r,0]$ and $Q_n^X=\\bigotimes_i[R_X\\xrightarrow{c_i^n}R_X]$. Take the strict transitions $(b_i,1)$ and $(c_i,1)$ in degrees $(-1,0)$ and degree-zero chain maps $z_n:R_Y[0]\\to Q_n^Y$, $z'_n:R_X[0]\\to Q_n^X$ from [lem-weil-pbc-ringed-koszul-completion-reflector]. That statement identifies $\\Lambda_YRf_*M$ and $\\Lambda_XM$ with the strict total derived limits $L_Y S_\\bullet$ and $L_X T_\\bullet$ for $S_n=Rf_*M\\otimes^L Q_n^Y$, $T_n=M\\otimes^L Q_n^X$, with exactly the units induced by $z_n,z'_n$. The representative-independent strict-tower comparison and its unit normalization are also explicit in [lem-weil-pbc-ringed-cech-koszul-dual-limit].",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0G, Koszul formula; lemma-derived-completion-koszul"
+   }
+  },
+  {
+   "text": "The K-flat pullback computation [lem-weil-pbc-ringed-topoi-derived-pullback] and tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify $Lf^*Q_n^Y$ with $Q_n^X$: the entries $b_i^n$ of each finite free differential become $c_i^n$. The transition $(b_i,1)$ becomes $(c_i,1)$, and the degree-zero map $1$ remains $1$. Tensoring these identities gives identifications of the entire augmented strict Koszul towers, including their tensor-differential signs, since transitions have degree zero. The explicit two-term factors, transitions and units used here are those of [lem-weil-pbc-ringed-koszul-completion-reflector].",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0G, final Koszul-pullback identity; explicit transition calculation"
+   }
+  },
+  {
+   "text": "The complex $Q_n^Y$ is bounded with finite free terms, so it carries the strict-perfect package $i_r=p_r=\\mathrm{id}$ of [def-weil-pbc-projection-formula-arrows], whose arrow $\\pi_{f,M,Q_n^Y}$ is the adjunct of $(\\varepsilon_M\\otimes1)$ after the canonical tensor/pullback comparison, i.e. the projection transformation $\\alpha$ of [lem-weil-pbc-ringed-projection-mate-exact] at $P=Q_n^Y$. By [lemma-weil-pbc-projection-formula-totalization] it is an isomorphism $\\alpha_n:S_n\\xrightarrow{\\sim}Rf_*T_n$ (with $Lf^*Q_n^Y=Q_n^X$ from Step 8). Naturality of the canonical projection transformation in [lem-weil-pbc-ringed-projection-mate-exact], applied to the transitions $t_n^Y,t_n^X$ identified in Step 8, gives the actual equation\n$$Rf_*(1_M\\otimes t_n^X)\\alpha_{n+1}=\\alpha_n(1_{Rf_*M}\\otimes t_n^Y).$$\nIts naturality at $z_n:R_Y[0]\\to Q_n^Y$ and its tensor-unit equation $\\alpha_{M,R_Y}=1$ give $\\alpha_n(1\\otimes z_n)=Rf_*(1\\otimes z'_n)$. These are the Koszul-transition and levelwise-unit squares.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lemma-weil-pbc-projection-formula-totalization",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0944, lemma-projection-formula; Tag 0A0G, levelwise comparison and transition refinement"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-strict-tower-projection-morphism] to the augmented finite free tower $P_\\bullet=Q_\\bullet^Y$. Step 8 identifies its pullback with $Q_\\bullet^X$, with the actual transitions and units. The resulting $u:S_\\bullet\\to Rf_*^{\\operatorname{Tow}}T_\\bullet$ in $D(\\operatorname{Tow}(R_Y))$ evaluates to the specific $\\alpha_n$ of Step 9. For $a_{f,T}:Rf_*L_XT\\cong L_YRf_*^{\\operatorname{Tow}}T$ of [lem-weil-ringed-tower-pushforward-limit-comparison], set $\\delta=a_{f,T}^{-1}L_Y(u)$. The use of an actual strict derived-tower morphism supplies the coherent derived-limit map and its connecting square.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-projection-morphism",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, tower-topos proof; Tag 0A0G, passage to limit"
+   }
+  },
+  {
+   "text": "Every evaluation of $u$ is invertible by Step 9. Kernels and cokernels in the tower category are levelwise [lem-weil-tower-category-levelwise-abelian], hence so is cohomology. The cone of $u$ has zero cohomology at each index, thus zero cohomology as a tower object. Therefore $u$ is invertible in $D(\\operatorname{Tow}(R_Y))$. The exact functor $L_Y$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] preserves its inverse. Since $a_{f,T}$ is invertible, so is $\\delta$. This does not require exact countable products.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0G, derived-limit isomorphism; levelwise cohomology argument"
+   }
+  },
+  {
+   "text": "The augmented-tower equation in [lem-weil-pbc-ringed-strict-tower-projection-morphism] is $L_Y(u)\\zeta_Y=a_{f,T}Rf_*(\\zeta_X)$. The unit-preserving Koszul identifications of [lem-weil-pbc-ringed-koszul-completion-reflector] give $\\zeta_Y=\\eta_{Y,Rf_*M}$ and $\\zeta_X=\\eta_{X,M}$. Hence\n$$\\delta\\eta_{Y,Rf_*M}=a_{f,T}^{-1}L_Y(u)\\zeta_Y=Rf_*\\eta_{X,M}.$$\nThe reflector bijection of [lem-weil-pbc-extended-cech-completion-model], with complete target $Rf_*\\Lambda_XM$ from Step 3, identifies $\\delta$ with the unique $\\gamma_{f,M}$ of Step 4. Thus that specific comparison is invertible on each generating slice, globally by Step 6, and in the original presentation by Step 1. The unit equation and naturality were already proved in Step 4. The argument allows the empty Koszul list and places no boundedness condition on $M$.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-projection-morphism",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-extended-cech-completion-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0G, normalized comparison and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sfb-unbounded-sections-localization",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-strict-tower-projection-morphism",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topos-site-presentation",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lemma-weil-pbc-projection-formula-totalization",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099J and 0A0G, lemma-pushforward-derived-complete and lemma-pushforward-commutes-with-derived-completion; explicit transition/unit calculations supplied by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,7 +252,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-scalar-extension",
@@ -82,5 +266,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-ringed-pushforward-completion",
+  "worker": "stage1",
+  "summary": "Repair of ae81489ac0: restore origin metadata from main; replace target-specific transport, localization, cover and Roos interfaces with explicit reflector, cycle, restriction, transition and unit calculations. Retain generic ringed equivalence, derived slice and augmented strict-tower morphism lemmas (the levelwise projection isomorphism is the existing lemma-weil-pbc-projection-formula-totalization; the proposed perfect-projection node was dropped by the maintainer reader as an unneeded generalization), with exact statement dependencies, truthful search records and declared off-unit tools.",
+  "blueprint": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "places": [
+    "Last paragraph, “the exchange is the canonical ambient ringed-topos mate ... followed by derived completion and the direct-image/completion comparison”: supporting comparison used in completing the mate."
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic unbounded section/Hom identification on every small ringed slice; the unit has internal-Hom restriction but no sectionwise shifted-Hom formula."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic comparison of total derived composite direct images on the tower ringed topos, normalized by their common underived composite; the unit has strict derived limit but not this arbitrary-ring-map comparison."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective representatives on arbitrary small ringed sites, needed to justify local cycle detection in Step 3; not a replacement for a unit route step."
+   },
+   {
+    "node": "lem-sfb-unbounded-sections-localization",
+    "why": "Generic unbounded derived evaluation formula on a slice; identifies derived sections with I(W) for one fixed K-injective representative, with no exactness of section functors assumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-unbounded-sections-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-f2fdd9f56",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-f2fdd9f56 (reviewer sub-agent of L); spot-checked: I read all of it in full: the item's 12 steps, the 4 new nodes, every cited statement, Stacks 099J (l.981-1015), 0A0F and 0A0G (l.1506-1560), and the tags 0944, 0A07, 08JA and 0D6F. The item statement is unchanged from the current DAG (checked by parsing both files) and matches 0A0G: same hypotheses, and the unit normalization is the canonical map built in 0A0G's proof. No SGA is used. All 12 steps hold under the hypotheses in force. Edge cases checked: r=0, the unit ideal, J=0, f=id, and a ring map that is not an isomorphism. Three new nodes are true and kept: derived-slice-localization, presentation-transport and strict-tower-projection-morphism. None duplicates an existing node; projection-restriction and localize-ringed-site-morphism cover only the pro-etale case or the underived statements. lem-weil-pbc-ringed-perfect-projection-formula is a true generalization but not needed (C5): the item applies it only to Q_n^Y, a global bounded complex of finite free modules, and that case is already proved for any morphism of ringed topoi by the existing reviewed lemma-weil-pbc-projection-formula-totalization in the same unit, whose arrow is the projection map alpha of projection-mate-exact. Fix: Step 9 now cites def-weil-pbc-projection-formula-arrows, lemma-weil-pbc-projection-formula-totalization and projection-mate-exact; proof_deps recomputed; the summary notes the drop. No other file cites the dropped node. The four declared tool uses are accepted as generic: sections-model, tower-pushforward-limit-comparison, kinjective-resolutions-exist and unbounded-sections-localization.; 1 file(s) fixed by the reviewer"
  }
 }
