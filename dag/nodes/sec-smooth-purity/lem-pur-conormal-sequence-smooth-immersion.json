@@ -23,7 +23,8 @@
   "def-sbc-smooth-morphisms",
   "def-sc-relative-differential-sheaf",
   "def-weil-residue-field",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "def-pc-module-stalk-functor"
  ],
  "proof": [
   {
@@ -317,5 +318,31 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-cc85a3a40 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, along with every cited statement. The delivery has no new nodes. The statement agrees with Stacks morphisms.tex:7429 (Tag 06AA), specialized to a closed immersion over k and taken at the fibre at z. X is arbitrary, Z is smooth and z need not be closed; both arrows are stated. I tested it on four cases: Spec k inside the dual numbers (characteristic 2 too), the origin of the cuspidal cubic y^2=x^3, the generic point of a line in A^2, and J=0. Step 1 uses parts (1) and (2) of the closed-immersion criterion leaf. Step 2 lifts through the formal-smoothness clause of def-sbc-smooth-morphisms on the affine first-order thickening Spec B in Spec A/J^2. The lift factors through V because K is nilpotent, and pi sigma = id. Step 3 is the Jacobi-Zariski leaf with (k,A,J); only the right exactness is taken from it. Step 4 is the 02HP derivation D(a)=(a mod J^2)-sigma(a-bar) (algebra.tex:34158); I checked the product calculation and tau delta = id. Steps 5-6 give the splitting identities, which survive tensoring with kappa by functoriality, so no flatness is needed. Step 7 is correct: affine-open stalk (c), the Spec-map stalk lemma and quotient localization give I=JR, and I checked the inverse of the conormal localization map. Step 8 is correct: tilde stalks identify the differentials, and d(j/t)=t^-1 dj - j t^-2 dt gives the first-arrow formula. proof_deps equals the union of the uses, and there is no cycle. Every theorem cited is a Mathlib leaf and the rest are definitions, so the sk-prop-an route is kept and no tool_uses are needed. Candidate duplicates are not the item: lem-weil-pbc-smooth-conormal-sequence-exact, lem-weil-pbc-separable-residue-cotangent-injective, lem-weil-pbc-square-zero-section-conormal-retraction (whose retraction is for B tensor Omega_C, not Omega_A) and lem-weil-pbc-smooth-ring-map-square-zero-lifting. The cited Stacks labels and tags resolve. No SGA is used and no target is touched. I made no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b335ec7a6",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 06AA clause by clause: Field k, Over instances plus IsOver, IsClosedImmersion, Smooth only on Z; R,S,I,κ are the actual stalks, stalk-map kernel and residue field; terms are κ⊗[R]I.Cotangent (canonically ⊗_S since S=R/I and I kills I/I², documented), and κ⊗ the moduleStalkFunctor stalks of relativeDifferentials for X and for Z (via 𝟙 Z); Injective∧Exact∧Surjective is the full short exact sequence; generator clauses determine α ([f]⊗1↦df⊗1 for every f∈I) and β (induced by R→S), so the existential is canonical. No extra assumptions; universes fine. Edge cases (empty Z, I=0, relative dimension 0, dual numbers, char p, non-closed z) covered. Helpers non-hollow with source/blueprint docstrings; proof is sorry only (print axioms: sorryAx); docstring carries the 8 node proof steps; lean.statement verbatim; the added stmt_dep def-pc-module-stalk-functor is legitimate; no duplicate found; both report sections present. nt_compile.py: no errors; probe copy confirms the tool elaborates and the types check. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConormalSequenceSmoothImmersion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.conormalStalkFibre_shortExact_of_smooth",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.conormalStalkFibre",
+   "AlgebraicGeometry.Scheme.Hom.conormalStalkFibreClass",
+   "AlgebraicGeometry.Scheme.Hom.relativeDifferentialsStalkFibre",
+   "AlgebraicGeometry.Scheme.Hom.relativeDifferentialsStalkFibreGerm",
+   "AlgebraicGeometry.Scheme.Hom.conormalStalkFibre_shortExact_of_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalSequenceSmoothImmersion.lean",
+  "statement": "theorem conormalStalkFibre_shortExact_of_smooth {k : Type u} [Field k] {X Z : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] (i : Z ⟶ X) [i.IsOver (Spec (.of k))] [IsClosedImmersion i] [Smooth (Z ↘ Spec (.of k))] (z : Z) : ∃ (α : conormalStalkFibre i z →ₗ[Z.residueField z] relativeDifferentialsStalkFibre (X ↘ Spec (.of k)) i z) (β : relativeDifferentialsStalkFibre (X ↘ Spec (.of k)) i z →ₗ[Z.residueField z] relativeDifferentialsStalkFibre (Z ↘ Spec (.of k)) (𝟙 Z) z), Function.Injective α ∧ Function.Exact α β ∧ Function.Surjective β ∧ (∀ (U : X.Opens) (hz : i z ∈ U) (a : Γ(X, U)) (ha : (i.stalkMap z) (X.presheaf.germ U (i z) hz a) = 0), α (conormalStalkFibreClass i z ⟨X.presheaf.germ U (i z) hz a, ha⟩) = relativeDifferentialsStalkFibreGerm (X ↘ Spec (.of k)) i z U hz a) ∧ (∀ (U : X.Opens) (hz : i z ∈ U) (a : Γ(X, U)), β (relativeDifferentialsStalkFibreGerm (X ↘ Spec (.of k)) i z U hz a) = relativeDifferentialsStalkFibreGerm (Z ↘ Spec (.of k)) (𝟙 Z) z (i ⁻¹ᵁ U) hz (i.app U a))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical arrows are specified by their values on generating differential germs. Helpers package existing tensor products, the stalk functor, ideal cotangent classes, and the existing universal derivation. Since the stalk map is surjective and its kernel annihilates its cotangent quotient, tensoring this quotient over R is canonically tensoring over S = R/I. The landed stalk-functor node is added to stmt_deps."
  }
 }
