@@ -80,8 +80,8 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let A := SheafOfModules.{uAdj} (moduleRings Y.toRingedSpace)
   let B := SheafOfModules.{uAdj} (moduleRings X.toRingedSpace)
-  let : Abelian A := SheafOfModules.instAbelian (moduleRings Y.toRingedSpace)
-  let : Abelian B := SheafOfModules.instAbelian (moduleRings X.toRingedSpace)
+  let : Abelian A := inferInstanceAs (Abelian A)
+  let : Abelian B := inferInstanceAs (Abelian B)
   have := SheafOfModules.isMonoidal_W Y.sheaf
   let : MonoidalCategory A := SheafOfModules.monoidalCategory Y.sheaf
   let : SymmetricCategory A := SheafOfModules.symmetricCategory Y.sheaf
