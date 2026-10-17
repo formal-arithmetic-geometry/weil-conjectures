@@ -20,8 +20,6 @@ public import WeilConjectures.WeilSheaf.FourierTraceAux
 
 @[expose] public section
 
-set_option profiler true
-
 universe u
 
 open CategoryTheory Limits
@@ -55,7 +53,6 @@ theorem fourierKernel_eq_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) :
         (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
   rw [fourierKernel, artinSchreierOf]
   exact Functor.congr_obj (WeilSheaf.upperStar_eq_of_eq affinePlane.mul_eq_homOfSection) _
-
 
 /-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`,
 `sk-lem-kernel-composition`, without forming the convolution kernel). On `𝔸³` with points
