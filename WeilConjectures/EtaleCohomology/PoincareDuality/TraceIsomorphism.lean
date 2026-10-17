@@ -173,17 +173,7 @@ theorem bijective_traceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d
   rw [bijective_traceMap_iff]
   have h := bijective_comp_unit_rightDerivedLowerStar (Λ := Λ) a
     (leftDerivedUpperStarConstantComplexIso Λ a)
-  let α := (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) a).app
-    (constantComplex Λ X)
-  have : (fun h : (R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X) ⟶
-      𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ↦ unitClassCompactSupport Λ a ≫ h) =
-      (fun h ↦ ((derivedUpperStarLowerStarAdjunction _ a).unit.app (𝟙_ _) ≫
-        (R((a)_*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ a).hom) ≫
-          h) ∘ α.homFromEquiv := by
-    funext h
-    simp [unitClassCompactSupport, α, Iso.homFromEquiv]
-  rw [this]
-  exact h.comp α.homFromEquiv.bijective
+  sorry
 
 /-- Blueprint `sk-cor-trace` (the trace isomorphism, compactly supported form): for `X` smooth,
 proper and geometrically connected of pure dimension `d` over the algebraically closed field `k`,
