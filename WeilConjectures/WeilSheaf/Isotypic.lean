@@ -386,6 +386,8 @@ lemma ProEtaleWeilSheaf.comp_torsorIdempotent (χ : AddChar G (PadicAlgCl l))
 
 set_option maxHeartbeats 800000 in
 -- The pullback of the projector is computed on the evaluations, a large categorical term.
+-- WIP: with the default 200000 heartbeats this declaration times out at `whnf` (reported at the
+-- declaration start); whether 800000 suffices has not been confirmed by a build yet.
 /-- **Isotypic morphisms into the pushforward along a split torsor.** Let `φ : M ⟶ π_* ℚ̄_ℓ` be a
 morphism of pro-étale Weil sheaves on which `G` acts through the character `χ`, whose adjoint
 `π̄^* M ⟶ ℚ̄_ℓ` is an isomorphism. Then `φ` is split by a morphism `r` with `r ≫ φ = e_χ`: `M` is
