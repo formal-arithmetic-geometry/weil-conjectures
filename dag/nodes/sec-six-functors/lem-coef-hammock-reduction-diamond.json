@@ -296,5 +296,24 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-f72b11ab4 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 8 steps, the sources, the 18 recorded searches and the blueprint/split_report. I also read the statements of def-coef-zigzag-homotopy-calculus and def-nagata-category, the step of the parent lem-coef-hammock-graph-colimit-presentation that uses this item, and lem-coef-rewrite-common-reduct. Shape: one commit; the delivery holds only the item and its report, adds no new nodes and edits no unit. proof_deps equals the union of the step uses, and nothing cites SGA. Statement: it is self-contained, restricted to the letters +,-, and correctly adds def-nagata-category to stmt_deps. Its conclusion (D1=D2, or a common one-step reduct) is exactly the fork hypothesis r^=/r^* of lem-coef-rewrite-common-reduct as the parent uses it. It does not restate a clause of the parent. Steps: in step 2 the identity-column square gives v_{i-1}=v_i by the unit laws for both signs, the endpoint identities are kept, and deleting the last column forces x=y. I re-derived both pasting equations of step 3 and checked closure of T. Step 4 (same support) is trivial. Step 5 (disjoint or touching supports) holds, including two adjacent identity columns of opposite sign. Step 6 (deletion inside a composed pair) gives equality by the unit laws plus step 2. Step 7 (overlapping compositions) gives a common reduct by associativity in both directions. Step 8 covers every way two supports can sit. All steps are rightly marked elementary. Edge cases tested: length 0 and 1, q=0, composites equal to identities, and nonidentity vertical arrows across an identity column. Route: the item cites only definitions (def-nagata-category, from another unit, is a notion and Mathlib leaf), so tool_uses is empty and nothing needed accepting. There is no cycle. Duplicates: grep over the DAG found nothing that states this; free-factor-category-normal-form, rewrite-common-reduct and the hammock-pair nodes are different statements. No blueprint text mentions hammock, so same_as=[] is correct. Source: Dwyer–Kan dwyer-kan-2.pdf (the usual URL convention) is not in literature/, so the worker filed WANTED and set proof_origin to agent. I could not open it locally and did not check the Def. 2.1 (iv)′/(v)′ place, but the proof is fully elementary and self-contained. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.HammockReductionDiamond",
+  "declaration": "CategoryTheory.hammock_reduction_diamond",
+  "file": "lean/Sheaf/CategoryTheory/Localization/HammockReductionDiamond.lean",
+  "statement": "theorem hammock_reduction_diamond {C : Type u} [Category.{v} C] (T : MorphismProperty C) [T.IsMultiplicative] {q : ℕ} {x y : C} {p p₁ p₂ : Quiver.Path (hammockEndpoint T q x) (hammockEndpoint T q y)} (h₁ : HammockReduction p p₁) (h₂ : HammockReduction p p₂) : p₁ = p₂ ∨ ∃ e, HammockReduction p₁ e ∧ HammockReduction p₂ e",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing HammockChain, HammockStep, hammockEndpoint and HammockReduction helper definitions hosted in Sheaf.CategoryTheory.HammockInfinityLocalization. No use of its localization theorem or additional hypothesis; this is the canonical full-diagram encoding already used by lem-coef-hammock-graph-colimit-presentation. Both original statement-dependency modules are imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a12ab8bbb",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read the node, both statement deps (ZigzagHomotopyCalculus; Mathlib Category), the reused HammockInfinityLocalization helpers and the parent's Lean record. The delivery changes only the module, the report and the node's lean field. Clause by clause the Lean matches the node: u,v independent; T IsMultiplicative; HammockChain Fin(q+1) chains marked in T; forward/backward steps with backward marked; constant endpoints; nil only when x=y; eraseRight/eraseLeft (an all-identity column forces A=B and f=𝟙); composeForward/composeBackward; one-step context; conclusion p1=p2 or a one-step common reduct, with full path equality. Edge cases q=0, lengths 0/1, opposite-sign identity columns, identity composites, deletion/composition overlap and triples all checked. No hollow definitions, sorry only, source/blueprint docstrings with 8-step proof plan, statement field verbatim, no duplicate, no pro-etale. nt_compile.py --json against the local side overlay: exit 0, no errors or warnings. No findings."
  }
 }
