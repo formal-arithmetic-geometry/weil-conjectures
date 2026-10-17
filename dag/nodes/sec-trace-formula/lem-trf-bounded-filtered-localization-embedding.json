@@ -12,7 +12,8 @@
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-trf-uniform-filtered-homotopy-localization"
  ],
  "proof": [
   {
@@ -248,5 +249,32 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-0858c3f68 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its six steps, all 8 cited statements, Stacks derived.tex 05S6 (l.4446) with 05S5 and its proof (l.4386), the 05RW fullness and faithfulness argument (l.3805 ff.), 05S1, and the unit sk-i-curve-zero with its transitive uses. The statement is true and unchanged: it is 05S6/05RW with filtration bounds that are uniform in cochain degree. The 05S5 truncations do not enlarge the interval, and the fixed-interval clause is kept. Step checks: (1) cones use the min/max of the filtration bounds, with closure up to isomorphism as def-weil-triangulated-subcategory allows. (2) The graded-acyclic class is replete and closed under triangles (rotate, then a 0->0 map is in W, then the cone criterion). W equals W_P, so the cone-system trW node gives both fraction calculi and compatibility. (3) Descent comes from part (1) of the universal property. (4) Fullness: a right roof, then the upper truncation clause of lem-trf-filtered-bounded-localization-comparison, which matches 05S5(2). (5) Faithfulness: the 04VJ common refinement, truncated, with the equalities holding in the full subcategory K_F^b. (6) Shift via part (2) of the universal property, additivity via Ore plus 2-out-of-3, exactness via 05r6. Edge cases checked: zero complex, a=b, cutoff below the support, contractible tail, and the hypothesis failing below a nonzero graded H^q (which the steps never use). There are no new nodes; the two dropped children really are duplicates. No SGA is cited, and since the item is generic homological algebra there is no base-change morphism or coefficient category to check. Fixes: (a) the off-route unsplit statements lem-trf-filtered-cone-localization (unit sk-i-global-additivity) and lem-trf-filtered-bounded-localization-comparison (unit sk-i-additivity) lie outside sk-i-curve-zero's closure and were not declared, so I added both to split_report.tool_uses as generic tools; (b) the stale split_report.summary, which claimed two new nodes that were later removed, is rewritten. I accept the four declared tool uses, all Mathlib leaves. Maintainer note: the comparison node already states that D^bF -> D^+F is fully faithful (for localizations of complexes); the overlap with this item is a candidate for a merge, and the comparison node's future split must not cite this item, or it creates a cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedFilteredLocalizationEmbedding",
+  "declaration": "CategoryTheory.boundedFilteredLocalizationEmbedding_fullyFaithful_exact",
+  "declarations": [
+   "CategoryTheory.boundedFilteredHomotopyInclusion",
+   "CategoryTheory.boundedFilteredHomotopyInclusion_commShift",
+   "CategoryTheory.boundedFilteredHomotopyLocalizer",
+   "CategoryTheory.boundedFilteredHomotopyLocalizer_commShift",
+   "CategoryTheory.boundedFilteredLocalizationEmbedding",
+   "CategoryTheory.boundedFilteredLocalizationEmbedding_commShift",
+   "CategoryTheory.boundedFilteredLocalizationEmbedding_fullyFaithful_exact"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/BoundedFilteredLocalizationEmbedding.lean",
+  "statement": "theorem boundedFilteredLocalizationEmbedding_fullyFaithful_exact (B : Option (ℤ × ℤ)) (_hB : ∀ a b : ℤ, B = some (a, b) → a ≤ b) : Nonempty (boundedFilteredLocalizationEmbedding C B).FullyFaithful ∧ (boundedFilteredLocalizationEmbedding C B).Additive ∧ (boundedFilteredLocalizationEmbedding C B).IsTriangulated",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50f51bbf7",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: uniform filtration bounds with a≤b in every cochain degree; Plus plus optional upper bound for the bounded/bounded-below homotopy categories; graded quasi-isos via the upstream finiteFilteredQuasiIso pulled back; localizedFunctor of the real inclusion with its inherited CommShift; Nonempty FullyFaithful ∧ Additive ∧ IsTriangulated; fixed interval via B=some(a,b) with _hB. New node def-trf-uniform-filtered-homotopy-localization is justified (UniformFilteredDerived localizes chain maps, no triangulation) and its fields are correct. No hollow defs; the only sorries are the three helper theorems (true, documented clauses of the new node) and the item theorem. Both files compile clean with nt_compile.py against the local side overlay; a scratch test confirms IsTriangulated on both localizations and the CommShift instance. lean.statement fields verbatim; standard no-worker second-reading note accepted. Maintainer note: overlap with lem-trf-filtered-bounded-localization-comparison."
  }
 }
