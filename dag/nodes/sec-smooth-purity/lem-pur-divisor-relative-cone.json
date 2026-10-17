@@ -226,5 +226,46 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-3c2527e5e (reviewer sub-agent of L); spot-checked: Read the whole item, its parent lem-pur-divisor-class (step 5 is the only citer), the sibling boundary-signs node, lem-amb-relative-torsor-cohomology, the main-20261015 blueprint proof, unit sk-prop-a1-kummer, and Stacks etale-cohomology section-cohomology-support plus sites-cohomology lemma-restriction-along-monomorphism-surjective. The statement is correct and unchanged. Coefficients are abelian sheaves on both sites, matching lem-cbc. The signed cone D(a,b)=(da,ra-db) is Cone(r)[-1] with the sign of B flipped, as lem-amb-relative-torsor step 2 states, and the boundary b->(0,-b) matches the connecting map of 0->K->A->B->0 (D(x,0)=(dx,b)). Small cases Z empty, Z=T, F=0 and q=0 all check. No duplicate node exists. Steps 1 and 2 are correct; I verified the quasi-isomorphism in both directions. I repaired three faults in fixes/dag/nodes/sec-smooth-purity/lem-pur-divisor-relative-cone.json. (1) Step 4 (C1/E5) applied the scheme-level lem-cbc to j^{-1}F on the scheme W, but B=I(W) is cohomology at the object W of the sites of T, and the localization bridge and nu-compatibility were not cited. New step 4 proves the comparison at the object W using lem-weil-pbc-site-cohomology-pullback, lem-cbc-comparison-pullback-sections, lem-cbc-abelian-comparison-injective-acyclicity, lemma-weil-pbc-leray-acyclicity, lem-weil-pbc-site-leray-degenerate and lem-weil-pbc-site-pullback-abelian-exact. (2) Long exact sequences and the five lemma were used without citation; new step 5 cites lem-weil-pbc-complex-ses-homology-long-exact, its naturality node and lem-weil-pbc-five-lemma, and covers coefficient compatibility by the cone homotopy (Ha,-Hb). (3) Independence of the resolution was claimed but not argued; it is now added to step 3 via lem-weil-pbc-derived-functor-map-via-lift. proof_deps is recomputed. The six added generic site and comparison tool uses are declared and accepted, along with the original two. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8c4b6b0b6",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Reviewed node, all dependencies, source, Lean module, report sections, edge cases, route-pivot compliance, and canonical cone/support constructions. Server-confirmed scompile.py passed; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PurityRelativeCone",
+  "declaration": "AlgebraicGeometry.Etale.relativeConeSupportComparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RelativeCone.evaluationFunctor",
+   "AlgebraicGeometry.Etale.RelativeCone.restriction",
+   "AlgebraicGeometry.Etale.RelativeCone.sections",
+   "AlgebraicGeometry.Etale.RelativeCone.restrictionComplex",
+   "AlgebraicGeometry.Etale.RelativeCone.fiber",
+   "AlgebraicGeometry.Etale.RelativeCone.supported",
+   "AlgebraicGeometry.Etale.RelativeCone.computation",
+   "AlgebraicGeometry.Etale.RelativeCone.forgetSupport",
+   "AlgebraicGeometry.Etale.RelativeCone.supportRestriction",
+   "AlgebraicGeometry.Etale.RelativeCone.coefficientMap",
+   "AlgebraicGeometry.Etale.RelativeCone.projection",
+   "AlgebraicGeometry.Etale.RelativeCone.boundary",
+   "AlgebraicGeometry.Etale.RelativeCone.TriangleSquare",
+   "AlgebraicGeometry.Etale.RelativeCone.Realization",
+   "AlgebraicGeometry.Etale.RelativeCone.System",
+   "AlgebraicGeometry.Etale.RelativeCone.pulledResolution",
+   "AlgebraicGeometry.Etale.RelativeCone.pullbackSections",
+   "AlgebraicGeometry.Etale.RelativeCone.IsLift",
+   "AlgebraicGeometry.Etale.RelativeCone.TopologyComparison",
+   "AlgebraicGeometry.Etale.relativeConeSupportComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PurityRelativeCone.lean",
+  "statement": "theorem relativeConeSupportComparison (T : Scheme.{u}) {Z : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) : ∃ (E : RelativeCone.System T.smallEtaleTopology (fun {_ _} f ↦ IsOpenImmersion f.left)) (P : RelativeCone.System (Scheme.ProEt.topology T) (fun {V _} f ↦ IsOpenImmersion f.left ∧ Etale V.hom)) (e : ∀ q : ℕ, relativeCohomology T (Scheme.Etale.mk i.openComplement.ι) I q ≅ supportCohomology i q F), Nonempty (RelativeCone.TopologyComparison T E P) ∧ ∀ q : ℕ, (e q).hom = ((E.realization (supportRestrictionArrow i) (by change IsOpenImmersion i.openComplement.ι; infer_instance) I).e q).hom",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of 796e2f5338c0: normalized kernel/right-derived realizations on both sites; actual derived forget/support/boundary equations; coefficient, resolution and object-square naturality; topology maps are the adjunction unit followed by an augmented lift, including arbitrary pro-etale coefficient postcomposition. No chosen maps from a sorried existence theorem."
  }
 }

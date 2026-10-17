@@ -214,10 +214,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-754809cb0",
-  "group": "Q65",
-  "result": "pass",
-  "note": "Reviewed immutable node, dependencies, source, Lean module, docstrings, report sections, edge cases, route-pivot compliance, and universes. scompile.py compiled both sandbox and library files successfully; no substantive findings."
+  "reviewer": "NT-stage2-Codex-af03b46aa",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Review recorded in review.md; complete replacements are in fixes/. Mathematics matches the node and sources. Repaired the Q31 reading, reused the recorded constructibility predicate, and updated imports and Lean record. Immutable and fixed modules compile cleanly; branch unchanged."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.OrientedNearbySmoothSourcePullback",
@@ -232,12 +232,13 @@
    "AlgebraicGeometry.OrientedNearbyCycles.SmoothSourceBaseChangeCompatible",
    "AlgebraicGeometry.orientedNearby_smoothSource_pullback"
   ],
-  "statement": "theorem orientedNearby_smoothSource_pullback {S X Y : Scheme.{u}} (h : X ⟶ Y) (g : Y ⟶ S) [IsNoetherian S] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] [Smooth h] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ S] (L : EtaleDerived Y Λ) (hL : IsBounded (etaleDatum Y) (Coeff Λ) L) (hLc : ∀ q : ℤ, ∃ F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ)), Scheme.IsConstructibleEtaleModuleSheaf F ∧ Nonempty ( (PresheafOfModules.forgetToPresheafModuleCat (op (⊤_ (EtaleSite.{u, u + 1} Y))) terminalIsTerminal.op).obj ((PresheafOfModules.restrictScalars (Functor.whiskerRight (toSheafify (etaleTopology.{u, u + 1} Y) ((Functor.const (EtaleSite.{u, u + 1} Y)ᵒᵖ).obj (CommRingCat.of (Coeff.{u, u + 1} Λ)))) (forget₂ CommRingCat RingCat))).obj ((DerivedCategory.homologyFunctor ((etaleDatum.{u, u + 1} Y).modules (Coeff.{u, u + 1} Λ)) q).obj L).val) ≅ (AsSmall.down : EtaleSite.{u, u + 1} Y ⥤ Y.Etale).op ⋙ F.obj)) : IsIso (baseChange g (h ≫ g) h (𝟙 S) (by simp) Λ L) ∧ SmoothSourceBaseChangeCompatible h g Λ L",
+  "statement": "theorem orientedNearby_smoothSource_pullback {S X Y : Scheme.{u}} (h : X ⟶ Y) (g : Y ⟶ S) [IsNoetherian S] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] [Smooth h] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ S] (L : EtaleDerived Y Λ) (hL : IsBoundedConstructible Y Λ L) : IsIso (baseChange g (h ≫ g) h (𝟙 S) (by simp) Λ L) ∧ SmoothSourceBaseChangeCompatible h g Λ L",
   "branch": "newtargets-dag",
-  "by": "Q65",
+  "by": "Q31",
   "date": "2026-10-17",
   "existing": false,
   "file": "lean/Sheaf/TraceFormula/OrientedNearbySmoothSourcePullback.lean",
-  "note": "Repair of a0f2677a3df0: degreewise constructibility via the existing AsSmall/Coeff linear transport; coefficient universe justified by the recorded D^b_c interface; object-level IsIso conjoined with the all-Cartesian-base-change ordinary mate-pasting equality. The endpoint identifications are constructed from canonical etale site composition and the unique oriented-product square with both projection equations fixed. Helpers belong to proof step 5 of this node; both postponed theorems have source and proof docstrings."
+  "note": "Uses the recorded IsBoundedConstructible transport directly (definitionally the former hL/hLc conjunction). Canonical projection-normalized square helpers and the full object-level comparison and Cartesian base-change equality are retained. Imports include the now-stated proof dependencies.",
+  "fixed_by": "NT-stage2-Codex-af03b46aa"
  }
 }
