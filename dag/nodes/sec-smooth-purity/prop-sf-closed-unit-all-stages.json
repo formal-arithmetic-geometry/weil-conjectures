@@ -506,5 +506,29 @@
   "group": "Q98",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q98-9e3d57662 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Replaced two unnecessary lemma packages with existing normalized comparison statements and explicit arguments; checked coefficient categories, Roos maps, hypotheses, edge cases and dependency cycles. Statement unchanged. Corrected JSON and review.md written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ClosedUnitAllStages",
+  "declaration": "WeilConjectures.closedUnitAllStages",
+  "declarations": [
+   "WeilConjectures.ClosedDirectImageCoefficientStages",
+   "WeilConjectures.ClosedDirectImageStages",
+   "WeilConjectures.closedUnitAllStages"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ClosedUnitAllStages.lean",
+  "statement": "theorem closedUnitAllStages (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hℓ : IsUnit (l : k)) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] {Z X : Scheme.{u}} [Z.Over (Spec (.of k))] [X.Over (Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (i : Z ⟶ X) [i.IsOver (Spec (.of k))] [IsClosedImmersion i] : Nonempty (ClosedDirectImageStages l Ω i) ∧ ∀ S : ClosedDirectImageStages l Ω i, (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], (∀ (n : ℕ) (hn : 1 ≤ n), ((S.coefficient E).finiteStar n hn).Full ∧ ((S.coefficient E).finiteStar n hn).Faithful) ∧ ((S.coefficient E).integralStar.Full ∧ (S.coefficient E).integralStar.Faithful) ∧ ((S.coefficient E).rationalStar.Full ∧ (S.coefficient E).rationalStar.Faithful) ∧ (∀ (n : ℕ) (hn : 1 ≤ n) (G : (Scheme.intrinsicFiniteTorsionConstructible l E n hn X).FullSubcategory ⥤ (Scheme.intrinsicFiniteTorsionConstructible l E n hn Z).FullSubcategory) (adj : (S.coefficient E).finiteStar n hn ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) ∧ (∀ (G : sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Z) (adj : (S.coefficient E).integralStar ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) ∧ (∀ (G : sfRationalConstructibleCategory l E X ⥤ sfRationalConstructibleCategory l E Z) (adj : (S.coefficient E).rationalStar ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) ∧ (∀ (n : ℕ) (_hn : 1 ≤ n), ∃ G : Scheme.proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n) ⥤ Scheme.proEtaleDerivedCategory Z (Padic.coefficientExtensionRing l E n), ∃ adj : Scheme.proEtaleConstantDerivedDirectImage i (Padic.coefficientExtensionRing l E n) ⊣ G, ∀ Q, IsIso (adj.unit.app Q))) ∧ (S.algebraicallyClosedStar.Full ∧ S.algebraicallyClosedStar.Faithful) ∧ (∀ (G : generalAlgebraicallyClosedConstructibleCategory l Ω X ⥤ generalAlgebraicallyClosedConstructibleCategory l Ω Z) (adj : S.algebraicallyClosedStar ⊣ G), ∀ Q, IsIso (adj.unit.app Q))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 40835f0780d5: the functors are constrained presentations of the actual direct image along i. Finite and integral comparison squares use proEtaleConstantDerivedDirectImage and sfCompletedDerivedDirectImage; the rational square is localized-linear, and the common-stage functor has natural comparison on every finite-field inclusion. Existence of all restrictions is a conclusion, followed by full faithfulness and unconditional unit assertions for every such presentation. The finite ambient right adjoint and invertibility of its unit on all ambient objects are included. The two structures only package these restriction/comparison data; they introduce no replacement coefficient category or chosen functor. Common-stage comparisons include the scalar associator cocycle and compatibility with the canonical StageSystem.transIso arrows, fixing the image of all finite representatives and changes of stage."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9722254af",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Read node, all stmt deps and their recorded declarations (side-clone sources for sfCompletedDerivedDirectImage, proEtaleConstantDerivedDirectImage, GeneralAlgebraicallyClosedCoefficients, StageSystem.transIso/exists_stage_representation). Every hypothesis/clause matches; arbitrary field k with IsUnit l is weaker than source convention. Presentation structures pin functors up to iso: finite/integral via comparison with actual rightDerivedFunctors, rational via linear+localization comparison, common stage via inclusion comparisons+transIso coherence; existence clause checked satisfiable via scalarCoherence at (h, le_rfl). Unit clauses over all right adjoints are equivalent to the node; ambient finite right adjoint stated. Edge cases (n=1, empty schemes, i=id, universes u/v) fine. One sorry, statement verbatim, node differs only in lean, report sections present. nt_compile.py --json: exit 0, 35.5 s, no warnings."
  }
 }
