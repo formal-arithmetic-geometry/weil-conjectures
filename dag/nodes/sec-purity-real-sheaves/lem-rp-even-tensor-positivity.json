@@ -1,87 +1,190 @@
 {
-  "id": "lem-rp-even-tensor-positivity",
-  "blueprint": {
-    "is": "lem-rp-even-tensor-positivity",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Even tensor powers of a real sheaf are positive",
-  "statement": "Let $\\mathcal G_0$ be a lisse\n$\\iota$-real\nWeil sheaf on a\nseparated finite-type\n$k_0$-scheme. Then for every closed point $x$ and every\n$k\\ge1$, with $\\mathcal G_0^{\\otimes k}$ the $k$-fold tensor power of\n[def-real-weil-representation-operations]:\n\n1. **(i)** the local characteristic polynomial\n$\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})$ has real\ncoefficients;\n1. **(ii)** if $k$ is even, the power series\n$$\n\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})^{-1}\n=\\sum_{n\\ge0}a_nt^n\n$$\nhas all coefficients $a_n\\ge0$, and its constant term is $1$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.md",
-    "place": "node lem-rp-even-tensor-positivity, order 2661"
-  },
-  "stmt_deps": [
+ "id": "lem-rp-even-tensor-positivity",
+ "blueprint": {
+  "is": "lem-rp-even-tensor-positivity",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Even tensor powers of a real sheaf are positive",
+ "statement": "Let $\\mathcal G_0$ be a lisse\n$\\iota$-real\nWeil sheaf on a\nseparated finite-type\n$k_0$-scheme. Then for every closed point $x$ and every\n$k\\ge1$, with $\\mathcal G_0^{\\otimes k}$ the $k$-fold tensor power of\n[def-real-weil-representation-operations]:\n\n1. **(i)** the local characteristic polynomial\n$\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})$ has real\ncoefficients;\n1. **(ii)** if $k$ is even, the power series\n$$\n\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})^{-1}\n=\\sum_{n\\ge0}a_nt^n\n$$\nhas all coefficients $a_n\\ge0$, and its constant term is $1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.md",
+  "place": "node lem-rp-even-tensor-positivity, order 2661"
+ },
+ "stmt_deps": [
+  "def-real-weil-representation-operations",
+  "def-weil-pbc-scheme-conventions",
+  "def-wf-weil-category",
+  "def-wf-iota-real"
+ ],
+ "proof": [
+  {
+   "text": "Fix a closed point $x$ and $k\\geq1$. Put $V=\\mathcal G_{0,\\bar x}$ and $A=F_x$ on $V$. The tensor action in [def-real-weil-representation-operations] acts on pure tensors by $A^{\\otimes k}(v_1\\otimes\\cdots\\otimes v_k)=Av_1\\otimes\\cdots\\otimes Av_k$; write $M=A^{\\otimes k}$. Let $S=\\{\\alpha_1,\\ldots,\\alpha_s\\}$ be the eigenvalue multiset of $A$ and put $z_i=\\iota(\\alpha_i)$. By [def-wf-iota-real], $\\{z_i\\}$ is invariant under conjugation. Iterating the tensor clause of [p-linear-spectra] (base $k=1$, and tensor once more for the induction step) gives the eigenvalues of $M$, with multiplicity, as $\\alpha_{i_1}\\cdots\\alpha_{i_k}$. Consequently the local polynomial after $\\iota$ is $B(t)=\\prod_{i_1,\\ldots,i_k}(1-z_{i_1}\\cdots z_{i_k}t)$. Conjugating this product merely permutes its factors, because conjugation permutes each copy of $\\{z_i\\}$. Each coefficient is therefore fixed by conjugation and hence real. This proves (i); also $B(0)=1$.",
+   "uses": [
     "def-real-weil-representation-operations",
-    "def-weil-pbc-scheme-conventions",
-    "def-wf-weil-category"
-  ],
-  "proof": [
-    {
-      "text": "Let $S_x=\\{\\alpha_1,\\ldots,\\alpha_s\\}$ be the multiset of\neigenvalues of $F_x$ on $\\mathcal G_{0,\\bar x}$, counted with\nmultiplicity. By [def-wf-iota-real] the multiset\n$\\iota(S_x)$ is stable under complex conjugation. The eigenvalues\nof $F_x$ on $\\mathcal G^{\\otimes k}_{0,\\bar x}$ are the\n$k$-fold products $\\alpha_{i_1}\\cdots\\alpha_{i_k}$ ([p-linear-spectra]), and the\nmultiset of their $\\iota$-images is again conjugation-stable, which\nproves (i). For (ii), with $k=2k'$ even, the elementary formal\nidentity\n\n$$\n\\det(1-tM)^{-1}=\\exp\\Bigl(\\sum_{n\\ge1}\\operatorname{Tr}(M^n)\\frac{t^n}{n}\\Bigr)\n$$\n\n(valid for every endomorphism $M$ of finite rank; a power-series\nidentity, per the README allowance for elementary infinite-series\ncalculus) gives, for the operator $M=F_x$ on\n$\\mathcal G^{\\otimes k}_{0,\\bar x}$,\n\n$$\n\\operatorname{Tr}(M^n)\n=\\operatorname{Tr}\\bigl((F_x^n)^{\\otimes k}\\bigr)\n=\\operatorname{Tr}(F_x^n)^{k},\n$$\n\nbecause the eigenvalues of $M^n$ are the $k$-fold products\n$\\alpha_{i_1}^n\\cdots\\alpha_{i_k}^n$ and\n$\\sum_{i_1,\\ldots,i_k}\\alpha_{i_1}^n\\cdots\\alpha_{i_k}^n= \\bigl(\\sum_i\\alpha_i^n\\bigr)^k$. Since the conjugate of\n$\\iota(S_x)$ is $\\iota(S_x)$ itself, the number\n$\\iota(\\operatorname{Tr}(F_x^n))$ is real, so\n\n$$\n\\iota(\\operatorname{Tr}(M^n))\n=\\iota(\\operatorname{Tr}(F_x^n))^{2k'}\\ge0,\n$$\n\nand every coefficient of the exponential series is a finite sum of\nproducts of nonnegative reals, hence nonnegative; the constant term\nis $1$.",
-      "uses": [
-        "def-wf-iota-real",
-        "p-linear-spectra"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
     "def-wf-iota-real",
     "p-linear-spectra"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.md",
-    "place": "## Proof"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
+    "place": "proof, first four sentences: conjugation-stable tensor spectra"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2661,
-  "blueprint_uses": [
-    "def-real-weil-representation-operations",
-    "def-weil-pbc-scheme-conventions",
-    "def-wf-iota-real",
-    "def-wf-weil-category",
-    "p-linear-spectra"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions",
-    "def-wf-weil-category"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Choose a basis of $V$ and apply $\\iota$ to every entry of the matrix of $A$, obtaining a complex matrix $A_{\\mathbf C}$. Applying $\\iota$ to the finite determinant formula gives $\\det(1-tA_{\\mathbf C})=\\prod_i(1-z_it)$. The entrywise image of the tensor matrix is $M_{\\mathbf C}=A_{\\mathbf C}^{\\otimes k}$, since its entries are products of entries of $A$. By [p-linear-triangular], choose invariant full flags for $A_{\\mathbf C}$ and $M_{\\mathbf C}$, and bases adapted to those flags. The resulting matrices are upper triangular. Their diagonal entries are respectively the $z_i$ and the products $z_{i_1}\\cdots z_{i_k}$ from step 1, since the determinant of an upper triangular matrix is the product of its diagonal entries. Powers of an upper triangular matrix have the corresponding powers on the diagonal. Thus, for $n\\geq1$, writing $s_n=\\sum_i z_i^n$, we have\n$$\\operatorname{Tr}(M_{\\mathbf C}^n)=\\sum_{i_1,\\ldots,i_k}z_{i_1}^n\\cdots z_{i_k}^n=s_n^k.$$\nThe last equality is finite distributivity. Conjugation permutes the summands of $s_n$, so $s_n\\in\\mathbf R$. If $k=2m$ is even, then $s_n^k=(s_n^m)^2\\geq0$.",
+   "uses": [
+    "p-linear-triangular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
+    "place": "proof, trace computation and even-power inequality"
+   }
   },
-  "chapter": "sec-purity-real-sheaves",
-  "unit": "sk-p-real-rankin",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\mathcal G_0$ be a lisse\n$\\iota$-real\nWeil sheaf on a\nseparated finite-type\n$k_0$-scheme. Then for every closed point $x$ and every\n$k\\ge1$, with $\\mathcal G_0^{\\otimes k}$ the $k$-fold tensor power of\n[def-real-weil-representation-operations]:\n\n**(i)** the local characteristic polynomial\n$\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})$ has real\ncoefficients;\n**(ii)** if $k$ is even, the power series\n$$\n\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})^{-1}\n=\\sum_{n\\ge0}a_nt^n\n$$\nhas all coefficients $a_n\\ge0$, and its constant term is $1$.",
-    "proof": [
-      {
-        "text": "Let $S_x=\\{\\alpha_1,\\ldots,\\alpha_s\\}$ be the multiset of\neigenvalues of $F_x$ on $\\mathcal G_{0,\\bar x}$, counted with\nmultiplicity. By [def-wf-iota-real] the multiset\n$\\iota(S_x)$ is stable under complex conjugation. The eigenvalues\nof $F_x$ on $\\mathcal G^{\\otimes k}_{0,\\bar x}$ are the\n$k$-fold products $\\alpha_{i_1}\\cdots\\alpha_{i_k}$ ([p-linear-spectra]), and the\nmultiset of their $\\iota$-images is again conjugation-stable, which\nproves (i). For (ii), with $k=2k'$ even, the elementary formal\nidentity\n\n$$\n\\det(1-tM)^{-1}=\\exp\\Bigl(\\sum_{n\\ge1}\\operatorname{Tr}(M^n)\\frac{t^n}{n}\\Bigr)\n$$\n\n(valid for every endomorphism $M$ of finite rank; a power-series\nidentity, per the README allowance for elementary infinite-series\ncalculus) gives, for the operator $M=F_x$ on\n$\\mathcal G^{\\otimes k}_{0,\\bar x}$,\n\n$$\n\\operatorname{Tr}(M^n)\n=\\operatorname{Tr}\\bigl((F_x^n)^{\\otimes k}\\bigr)\n=\\operatorname{Tr}(F_x^n)^{k},\n$$\n\nbecause the eigenvalues of $M^n$ are the $k$-fold products\n$\\alpha_{i_1}^n\\cdots\\alpha_{i_k}^n$ and\n$\\sum_{i_1,\\ldots,i_k}\\alpha_{i_1}^n\\cdots\\alpha_{i_k}^n= \\bigl(\\sum_i\\alpha_i^n\\bigr)^k$. Since the conjugate of\n$\\iota(S_x)$ is $\\iota(S_x)$ itself, the number\n$\\iota(\\operatorname{Tr}(F_x^n))$ is real, so\n\n$$\n\\iota(\\operatorname{Tr}(M^n))\n=\\iota(\\operatorname{Tr}(F_x^n))^{2k'}\\ge0,\n$$\n\nand every coefficient of the exponential series is a finite sum of\nproducts of nonnegative reals, hence nonnegative; the constant term\nis $1$.",
-        "uses": [
-          "def-wf-iota-real",
-          "p-linear-spectra"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The endomorphism $M_{\\mathbf C}$ is on a finite-dimensional complex vector space, and $\\mathbf C$ has characteristic zero. Therefore [lem-weil-exp-trace-determinant] applies to it and yields the formal identity\n$$B(t)^{-1}=\\exp U(t),\\qquad U(t)=\\sum_{n\\geq1}\\operatorname{Tr}(M_{\\mathbf C}^n)\\frac{t^n}{n}.$$\nHere $\\det(1-tM_{\\mathbf C})=B(t)$ by the finite determinant formula and step 1, so this is exactly the inverse local factor after applying $\\iota$. More explicitly, applying $\\iota$ coefficientwise to the inverse identity before applying $\\iota$ gives an inverse of $B(t)$; the inverse is unique since $B(0)=1$. No analytic convergence or continuity of $\\iota$ is used. For even $k$, step 2 gives $U(t)=\\sum_{n\\geq1}u_nt^n$ with $u_n=s_n^k/n\\in\\mathbf R_{\\geq0}$.",
+   "uses": [
+    "lem-weil-exp-trace-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
+    "place": "proof, formal trace–determinant identity"
+   }
+  },
+  {
+   "text": "By the coefficient formula in [def-weil-power-series-exponential], for $N\\geq1$ the coefficient of $t^N$ in $\\exp U$ is\n$$\\sum_{r=1}^{N}\\frac1{r!}\\sum_{\\substack{n_1+\\cdots+n_r=N,\\ n_j\\geq1}}u_{n_1}\\cdots u_{n_r}.$$\nEvery inner product is nonnegative by step 3 and each $r!$ is positive. Both sums are finite, so the coefficient is a nonnegative real number. The same definition gives constant coefficient $1$. This proves (ii). If $V=0$, the product defining $B$ is empty and equals $1$, all $s_n$ vanish, and the same formulas give $U=0$ and $B^{-1}=1$.",
+   "uses": [
+    "def-weil-power-series-exponential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
+    "place": "proof, final sentence: coefficientwise positivity and constant term"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-real-weil-representation-operations",
+  "def-wf-iota-real",
+  "p-linear-spectra",
+  "p-linear-triangular",
+  "lem-weil-exp-trace-determinant",
+  "def-weil-power-series-exponential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
+  "place": "complete proof; trace–determinant input also checked against Milne, Lectures on Etale Cohomology, Lemma 27.5, pp. 155–156"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse characteristic polynomial of an even tensor power of a real Weil sheaf has nonnegative coefficients",
+   "results": "spectralValueTerms_nonneg, DirichletCharacter.zetaMul_nonneg, Polynomial.derivRootWeight_nonneg, spectralValue_nonneg, BoundedContinuousFunction.char_mem_charPoly, descPochhammer_nonneg, Polynomial.mahlerMeasure_nonneg, Polynomial.gaussNorm_nonneg",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, Matrix.charpoly",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasNonnegCoeffs|coeff_inv_prod_one_sub|IsReal.*tprod|WeilSheaf",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite multiset of complex numbers invariant under conjugation, the reciprocal determinant for even tensor powers has nonnegative real power series coefficients",
+   "results": "ZetaAsymptotics.term_nonneg, DirichletCharacter.zetaMul_nonneg, LSeries.term_nonneg, spectralValueTerms_nonneg, Complex.det_conjAe, NumberField.mixedEmbedding.convexBodySumFun_nonneg, LSeries.term_pos, Complex.det_conjLIE",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Even tensor powers of a real Weil representation have nonnegative inverse local characteristic polynomial coefficients",
+   "results": "Even.zpow_nonneg, MulChar.IsQuadratic.pow_even, FDRep.char_tensor, WeierstrassCurve.ΨSq_ofNat, exteriorPower.toTensorPower_apply_ιMulti, DirichletCharacter.Even, WeierstrassCurve.ΨSq, TensorProduct.instInnerProductSpace",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2661,
+ "blueprint_uses": [
+  "def-real-weil-representation-operations",
+  "def-weil-pbc-scheme-conventions",
+  "def-wf-iota-real",
+  "def-wf-weil-category",
+  "p-linear-spectra"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions",
+  "def-wf-weil-category"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\mathcal G_0$ be a lisse\n$\\iota$-real\nWeil sheaf on a\nseparated finite-type\n$k_0$-scheme. Then for every closed point $x$ and every\n$k\\ge1$, with $\\mathcal G_0^{\\otimes k}$ the $k$-fold tensor power of\n[def-real-weil-representation-operations]:\n\n**(i)** the local characteristic polynomial\n$\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})$ has real\ncoefficients;\n**(ii)** if $k$ is even, the power series\n$$\n\\iota\\det(1-tF_x,\\mathcal G^{\\otimes k}_{0,\\bar x})^{-1}\n=\\sum_{n\\ge0}a_nt^n\n$$\nhas all coefficients $a_n\\ge0$, and its constant term is $1$.",
+  "proof": [
+   {
+    "text": "Let $S_x=\\{\\alpha_1,\\ldots,\\alpha_s\\}$ be the multiset of\neigenvalues of $F_x$ on $\\mathcal G_{0,\\bar x}$, counted with\nmultiplicity. By [def-wf-iota-real] the multiset\n$\\iota(S_x)$ is stable under complex conjugation. The eigenvalues\nof $F_x$ on $\\mathcal G^{\\otimes k}_{0,\\bar x}$ are the\n$k$-fold products $\\alpha_{i_1}\\cdots\\alpha_{i_k}$ ([p-linear-spectra]), and the\nmultiset of their $\\iota$-images is again conjugation-stable, which\nproves (i). For (ii), with $k=2k'$ even, the elementary formal\nidentity\n\n$$\n\\det(1-tM)^{-1}=\\exp\\Bigl(\\sum_{n\\ge1}\\operatorname{Tr}(M^n)\\frac{t^n}{n}\\Bigr)\n$$\n\n(valid for every endomorphism $M$ of finite rank; a power-series\nidentity, per the README allowance for elementary infinite-series\ncalculus) gives, for the operator $M=F_x$ on\n$\\mathcal G^{\\otimes k}_{0,\\bar x}$,\n\n$$\n\\operatorname{Tr}(M^n)\n=\\operatorname{Tr}\\bigl((F_x^n)^{\\otimes k}\\bigr)\n=\\operatorname{Tr}(F_x^n)^{k},\n$$\n\nbecause the eigenvalues of $M^n$ are the $k$-fold products\n$\\alpha_{i_1}^n\\cdots\\alpha_{i_k}^n$ and\n$\\sum_{i_1,\\ldots,i_k}\\alpha_{i_1}^n\\cdots\\alpha_{i_k}^n= \\bigl(\\sum_i\\alpha_i^n\\bigr)^k$. Since the conjugate of\n$\\iota(S_x)$ is $\\iota(S_x)$ itself, the number\n$\\iota(\\operatorname{Tr}(F_x^n))$ is real, so\n\n$$\n\\iota(\\operatorname{Tr}(M^n))\n=\\iota(\\operatorname{Tr}(F_x^n))^{2k'}\\ge0,\n$$\n\nand every coefficient of the exponential series is a finite sum of\nproducts of nonnegative reals, hence nonnegative; the constant term\nis $1$.",
+    "uses": [
+     "def-wf-iota-real",
+     "p-linear-spectra"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-rp-even-tensor-positivity",
+  "worker": "stage1",
+  "summary": "Q53: retained both clauses and the current blueprint route, split the imported single paragraph into four steps, added the missing reality statement dependency, and reused the existing trace–determinant identity and coefficient formula rather than creating duplicate or elementary nodes. The curve-only tensor-square Lean declaration does not state this item.",
+  "blueprint": "Current main-20261015 proof: step 1 realizes conjugation-stable tensor spectra; step 2 the trace power and even-power inequality; step 3 the formal determinant inverse; step 4 the coefficientwise exponential argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-exp-trace-determinant",
+    "why": "Generic finite-dimensional characteristic-zero trace–determinant identity used verbatim by the unit; no node of this unit states that linear-algebra identity separately."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-exp-trace-determinant"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-7a767d503",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-7a767d503 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited statement; review.md has the details. The statement is word for word the main-20261015 blueprint statement and is not weakened. The only statement-dependency change adds def-wf-iota-real, which the hypothesis uses. Step 1: the tensor action from def-real-weil-representation-operations, the conjugation-stable eigenvalues from def-wf-iota-real and the tensor-product eigenvalues from p-linear-spectra, applied k times, give B(t). A permutation σ with conj z_i = z_{σ(i)} permutes the factors of B(t), so its coefficients are real, which proves (i). Step 2: applying ι entrywise to the matrix commutes with determinants and with the tensor-product matrix. p-linear-triangular is applied over C, which is algebraically closed; its proof, unit and Lean (IsAlgClosed) all carry that hypothesis. This gives Tr(M^n)=s_n^k, with s_n real, so the trace is ≥0 when k is even. Reading the diagonal off det(1-tM) misses zero eigenvalues, but this is harmless: F_x is invertible, and zero entries add nothing to the traces. Step 3: lem-weil-exp-trace-determinant needs a characteristic-zero field, finite dimension and an endomorphism; C and M_C satisfy all three, and the inverse is unique because B(0)=1. Step 4 is elementary: it is the coefficient formula of def-weil-power-series-exponential with R=C. Edge cases tested: V=0, the empty scheme, k=1 (eigenvalue -1 shows parity is needed), a conjugate pair ±i, and a Jordan block. There are no new nodes, no duplicate (searched for 'nonnegative coefficients' and 'even tensor') and no cycle. Accepted tool use: lem-weil-exp-trace-determinant (sec-zeta-weil), a generic identity that is exactly the one the unit's step 1 uses; it cites no trace-formula or Poincaré-duality node. Batch-5 flag on p-linear-triangular (sec-trace-formula): it is genuinely outside both assumptions. It is generic Schur triangularization with no dependencies and closed, sorry-free Lean. It is already in the item's closure through p-linear-spectra, and this unit lists it in its uses and its step 1. It is not a step of the trace-formula or Poincaré-duality proof, so no assumption leaf is needed. Separate observation, not a fault here: the imported statement text of p-linear-triangular omits 'algebraically closed' and should be aligned later. No changes made."
+ }
 }

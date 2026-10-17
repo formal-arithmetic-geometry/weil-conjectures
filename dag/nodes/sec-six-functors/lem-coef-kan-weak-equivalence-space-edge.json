@@ -11,9 +11,56 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-cbc-kan-whitehead-inverse] to $f:A\\to B$. Its hypotheses are precisely the two Kan conditions and the stated component and based homotopy-group conditions on the realization. It supplies a simplicial map $g:B\\to A$ and simplicial homotopies $H:A\\times\\Delta^1\\to A$ from $gf$ to $1_A$ and $J:B\\times\\Delta^1\\to B$ from $fg$ to $1_B$. These are edges of the internal functor simplicial sets by their definition in [def-cbc-enhanced-diagrams-cones]. The cited inverse theorem explicitly permits empty and disconnected Kan complexes.",
+   "uses": [
+    "lem-cbc-kan-whitehead-inverse",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13 (00UB), converse for Kan complexes; Corollary 3.6.4.3 (03X7) for the realization convention"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-coherent-nerve-inverse-equivalence] to the $\\mathcal W$-small Kan complexes $A,B$, the maps $f$ and $g$ of step 1, and the simplicial homotopies $H$ between $gf$ and $1_A$ and $J$ between $fg$ and $1_B$; that statement allows either orientation of the homotopies, so $H$ and $J$ as given (from the composite to the identity) qualify, and it imposes no nonemptiness or connectedness hypothesis. It gives $2$-simplices $\\sigma,\\tau$ of $\\mathcal S_{\\mathcal W}$ with $\\sigma|_{\\Delta^{\\{0,1\\}}}=f$, $\\sigma|_{\\Delta^{\\{1,2\\}}}=g$, $\\sigma|_{\\Delta^{\\{0,2\\}}}=1_A$ and $\\tau|_{\\Delta^{\\{0,1\\}}}=g$, $\\tau|_{\\Delta^{\\{1,2\\}}}=f$, $\\tau|_{\\Delta^{\\{0,2\\}}}=1_B$; their vertex triples are $(A,B,A)$ and $(B,A,B)$. The edge $f$ there is the edge of $\\mathcal S_{\\mathcal W}$ given by the vertex $f$ of $\\operatorname{Fun}(A,B)$, as in the statement, so this actual edge is an equivalence edge in the inverse-triangle sense of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-kan-coherent-nerve-inverse-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00M5",
+    "place": "Proposition 2.4.6.10 (00M5) with Remark 2.4.6.4 (00M0), as recorded in lem-coef-kan-coherent-nerve-inverse-equivalence (project inclusion-poset orientation)"
+   }
+  },
+  {
+   "text": "Let $\\mathcal W\\subseteq\\mathcal W'$ be a containing value universe. The inclusion $\\mathbf{Kan}_{\\mathcal W}\\to\\mathbf{Kan}_{\\mathcal W'}$ of [def-coef-infinity-category-of-spaces] is the identity on objects and on morphism simplicial sets $\\operatorname{Fun}(S,T)$, hence an enriched functor. By [def-coef-coherent-nerve-infrastructure] the coherent nerve acts on enriched functors by postcomposition in every degree, and simplicial operators of the coherent nerve are restrictions along the enriched functors $\\mathfrak C[\\Delta^m]\\to\\mathfrak C[\\Delta^n]$. Postcomposition commutes with these restrictions, so the images of $\\sigma$ and $\\tau$ in $\\mathcal S_{\\mathcal W'}$ have the same faces $f,g,1_A$ and $g,f,1_B$, and the image of the edge $f$ is the same vertex $f$ of $\\operatorname{Fun}(A,B)$. Thus the same edge and witnesses remain valid after the inclusion.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/06QR",
+    "place": "agent-written check from the postcomposition convention for enriched functors in def-coef-coherent-nerve-infrastructure; no Kerodon statement is quoted"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-nerve-infrastructure",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-coef-kan-coherent-nerve-inverse-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/06QR",
+  "place": "Agent extraction: the existing simplicial Whitehead inverse [lem-cbc-kan-whitehead-inverse] followed by the existing coherent-nerve inverse-triangle lemma [lem-coef-kan-coherent-nerve-inverse-equivalence]; Kerodon Example 4.6.7.7 (06QR) and Subsection 4.6.8 (01PF) as background."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,10 +110,52 @@
    "results": "5 hits; Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean",
    "date": "2026-10-17",
    "verdict": "no match: ordinary-category or simplicial-set infrastructure only; none states this coherent-nerve assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weak homotopy equivalence between Kan complexes gives an equivalence edge with inverse triangles in the coherent nerve",
+   "results": "{\"t\": \"2026-10-17T11:38:05Z\", \"tool\": \"leanfinder\", \"query\": \"A weak homotopy equivalence between Kan complexes gives an equivalence edge with inverse triangles in the coherent nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.homEquiv_symm_apply\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\"], \"digest\": \"e4a40593d6d63ab6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary nerves, homotopy quotients or generic coherent-nerve definitions, not inverse triangles in the coherent nerve of Kan complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve, SSet.KanComplex, HomotopyEquiv",
+   "results": "{\"t\": \"2026-10-17T11:38:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve, SSet.KanComplex, HomotopyEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary nerves, homotopy quotients or generic coherent-nerve definitions, not inverse triangles in the coherent nerve of Kan complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "coherentNerve|homotopyCoherent|SimplicialNerve|weakEquivalence.*Kan|Kan.*weakEquivalence",
+   "results": "{\"t\": \"2026-10-17T11:38:06Z\", \"tool\": \"grep\", \"query\": \"coherentNerve|homotopyCoherent|SimplicialNerve|weakEquivalence.*Kan|Kan.*weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary nerves, homotopy quotients or generic coherent-nerve definitions, not inverse triangles in the coherent nerve of Kan complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A realization weak equivalence of Kan complexes has a simplicial homotopy inverse and coherent nerve inverse triangles",
+   "results": "{\"t\": \"2026-10-17T11:38:07Z\", \"tool\": \"leansearch\", \"query\": \"A realization weak equivalence of Kan complexes has a simplicial homotopy inverse and coherent nerve inverse triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyEquiv.inv\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_symm_mk\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopyEquiv.symm\", \"CategoryTheory.ShortComplex.HomotopyEquiv.inv\", \"SimplexCategory.revEquivalence_inverse\", \"CategoryTheory.ShortComplex.HomotopyEquiv.symm_homotopyHomInvId\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\"], \"digest\": \"1dc254a9732784f5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary nerves, homotopy quotients or generic coherent-nerve definitions, not inverse triangles in the coherent nerve of Kan complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally Kan simplicial category a homotopy invertible morphism gives inverse two simplices in its simplicial nerve",
+   "results": "{\"t\": \"2026-10-17T11:57:06Z\", \"tool\": \"leanfinder\", \"query\": \"In a locally Kan simplicial category a homotopy invertible morphism gives inverse two simplices in its simplicial nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv_symm_apply\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.stdSimplex.isoNerve_inv_app_apply\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"CategoryTheory.nerve.homEquiv\", \"SSet.OneTruncation₂.nerveEquiv_symm_apply_map\"], \"digest\": \"d52e1b7db1cd99ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary nerves, homotopy quotients or generic coherent-nerve definitions, not inverse triangles in the coherent nerve of Kan complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence_toHoCat_map_iff|def inv|nerveHomEquiv|def homEquiv",
+   "results": "{\"t\": \"2026-10-17T12:07:23Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence_toHoCat_map_iff|def inv|nerveHomEquiv|def homEquiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\"], \"digest\": \"2a222e42cf134f28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary nerves, homotopy quotients or generic coherent-nerve definitions, not inverse triangles in the coherent nerve of Kan complexes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
@@ -92,5 +181,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-weak-equivalence-space-edge",
+  "worker": "stage1",
+  "summary": "Three-step split, no new nodes. Step 1: simplicial Whitehead inverse gives g, H, J. Step 2: the existing reviewed same-unit lemma lem-coef-kan-coherent-nerve-inverse-equivalence turns g, H, J into the two inverse triangles (maintainer reader's repair: the delivered steps 2-3 re-derived that node's statement inline; replaced by a citation). Step 3: elementary universe-inclusion check by postcomposition. Empty/disconnected cases and hypotheses checked.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent-space inverse-triangle input used when a pointwise mapping-space weak equivalence is promoted to an equivalence edge.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "The generic simplicial Whitehead theorem supplies g and the two homotopies; no node in this biduality unit proves that topological input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-975a56303",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-975a56303 (reviewer sub-agent of L); spot-checked: Read the item, the five cited statements (Whitehead inverse, Kan mapping invariance, def-cbc enhanced diagrams, def-coef-infinity-category-of-spaces, coherent-nerve infrastructure), the unit, the chapter and the main-20261015 ancestor. Kerodon is not archived in literature/, so I checked the Kerodon places against the mathematics rather than the pages. The statement is true and not weakened. Tested on: A empty, which forces B empty, with Fun(empty,empty)=Delta^0; disconnected and discrete complexes; identity f. Step 1: the Whitehead hypotheses match exactly, and it gives g and the homotopies H: gf=>1_A and J: fg=>1_B. Step 2: the outer-horn reversal fills Lambda^2_0 and is correct. Step 3: P_{0,2}={0,2}⊂{0,1,2} and union composition give the long edge 1_A->gf, so H^rev is correctly oriented, and the faces are f,g,1_A; the universe inclusion works by postcomposition. Fault (C5): delivered steps 2-3 reprove the full statement of the existing, reviewed node lem-coef-kan-coherent-nerve-inverse-equivalence in the same unit (Q138 pass, 2026-10-17). The report wrongly says no such node exists. Citing it makes no cycle. Fix: replaced steps 2-3 with a citation of that node plus an elementary universe-inclusion step. proof_deps are now the union of uses, and lem-cbc-kan-mapping-homotopy-invariance and its tool_use are removed. Remaining tool_use lem-cbc-kan-whitehead-inverse is accepted (generic Whitehead, no in-unit node). Statement and metadata unchanged; no new nodes; no SGA.; 1 file(s) fixed by the reviewer"
  }
 }

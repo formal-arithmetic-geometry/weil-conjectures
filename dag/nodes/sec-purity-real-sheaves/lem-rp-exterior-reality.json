@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-rp-exterior-reality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reality of exterior powers",
@@ -14,32 +14,116 @@
  },
  "stmt_deps": [
   "def-real-weil-representation-operations",
-  "def-wf-weil-category"
+  "def-wf-weil-category",
+  "def-wf-iota-real"
  ],
  "proof": [
   {
-   "text": "At a closed point $x$, write the complex eigenvalues of $F_x$ on\n$\\mathcal G_{0,\\bar x}$ as $\\lambda_1,\\ldots,\\lambda_s$, with\nmultiplicity. After triangularizing $F_x$ ([p-linear-triangular]), the eigenvalues on\n$\\bigwedge^r\\mathcal G_{0,\\bar x}$ are the products\n$\\lambda_{i_1}\\cdots\\lambda_{i_r}$ over $r$-element subsets of\n$\\{1,\\ldots,s\\}$, counted with multiplicity ([p-linear-spectra]). Complex conjugation\npermutes the original multiset by $\\iota$-reality, and therefore\npermutes this product multiset. The local characteristic polynomial of\n$\\bigwedge^r\\mathcal G_0$ consequently has real coefficients.\nThis is exactly $\\iota$-reality in the sense of\n[def-wf-iota-real].",
+   "text": "As in [p-real-operations], the lisse Weil sheaves here are those on the curve $C_0$ of [prop-wf-weil-sheaf-representation-equivalence], and the exterior power of [def-real-weil-representation-operations] is applied to them through that exact tensor equivalence: if $\\mathcal G_0$ corresponds to the Weil representation $(V,\\rho)$, then $\\bigwedge^r\\mathcal G_0$ is the lisse Weil sheaf corresponding to $\\bigwedge^rV$, on which $g\\in W(C_0)$ acts by $\\bigwedge^r\\rho(g)$, sending $v_1\\wedge\\cdots\\wedge v_r$ to $\\rho(g)v_1\\wedge\\cdots\\wedge\\rho(g)v_r$; for $r=0$ this is $\\Qlb$ with trivial action. Fix a closed point $x$, a geometric Frobenius element $F_x\\in W(C_0)$ at $x$, and put $f=\\rho(F_x)\\in\\operatorname{GL}(V)$. Applying [p-real-operations] to $\\mathcal G_0$ and to $\\bigwedge^r\\mathcal G_0$ gives, for the local characteristic factors of [def-wf-iota-real], $P_x(\\mathcal G_0,T)=\\det(1-Tf\\mid V)$ and $P_x(\\bigwedge^r\\mathcal G_0,T)=\\det(1-T\\bigwedge^rf\\mid\\bigwedge^rV)$.",
    "uses": [
-    "p-linear-triangular",
-    "p-linear-spectra",
+    "p-real-operations",
+    "prop-wf-weil-sheaf-representation-equivalence",
+    "def-real-weil-representation-operations",
     "def-wf-iota-real"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-rp-exterior-reality.proof.md",
+    "place": "opening sentence: Frobenius on the exterior-power stalk, through the chapter's representation correspondence"
+   }
+  },
+  {
+   "text": "Let $s=\\dim V$ and enumerate the eigenvalues of $f$, after applying $\\iota$, as $\\lambda_1,\\ldots,\\lambda_s$, with repetitions. The coefficient field is algebraically closed and $V$ is finite dimensional. Apply the exterior-power clause of [p-linear-spectra] to $f$ and use that $\\iota$ preserves finite products. The complex eigenvalue multiset of $\\bigwedge^r f$ is therefore $M_r=\\{\\prod_{i\\in I}\\lambda_i: I\\subseteq\\{1,\\ldots,s\\},\\ |I|=r\\}$, with one occurrence for each indexed subset. No diagonalizability assumption is needed in that spectrum formula.",
+   "uses": [
+    "p-linear-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-rp-exterior-reality.proof.md",
+    "place": "first two sentences: exterior-power spectrum"
+   }
+  },
+  {
+   "text": "By [def-wf-iota-real] and step 1, $\\iota P_x(\\mathcal G_0,T)=\\prod_{i=1}^s(1-\\lambda_iT)$ has real coefficients, so complex conjugation of coefficients fixes it and $\\prod_i(1-\\overline{\\lambda_i}T)=\\prod_i(1-\\lambda_iT)$. Since $f$ is invertible, every $\\lambda_i\\neq0$, and the $\\lambda_i$ with multiplicity are the inverses of the roots of this polynomial; hence the multiset $\\{\\lambda_i\\}$ is conjugation stable. Choose a permutation $\\sigma$ of the indexed occurrences with $\\overline{\\lambda_i}=\\lambda_{\\sigma(i)}$. The map $I\\mapsto\\sigma(I)$ bijects the $r$-element subsets. For each $I$, $\\overline{\\prod_{i\\in I}\\lambda_i}=\\prod_{i\\in I}\\overline{\\lambda_i}=\\prod_{j\\in\\sigma(I)}\\lambda_j$. This bijection proves conjugation stability of $M_r$ including multiplicities; it does not require distinct eigenvalues. For $r=0$ there is one subset and its product is $1$.",
+   "uses": [
+    "def-wf-iota-real"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-rp-exterior-reality.proof.md",
+    "place": "third sentence: conjugation permutes the product multiset"
+   }
+  },
+  {
+   "text": "By step 1, the local characteristic factor of the exterior power in [def-wf-iota-real] is $P_{x,r}(T)=\\det(1-T\\bigwedge^rf\\mid\\bigwedge^rV)$, and after applying $\\iota$ step 2 gives $\\iota P_{x,r}(T)=\\prod_{\\mu\\in M_r}(1-\\mu T)$. Conjugating its coefficients gives $\\prod_{\\mu\\in M_r}(1-\\overline\\mu T)=\\iota P_{x,r}(T)$, since the preceding step permutes the factors with multiplicity. Hence every coefficient is real. This holds at every closed point $x$, so the exterior power is $\\iota$-real by the same definition. When $r=s$ the same calculation has the single product of all eigenvalues; if $s=0$, the allowed case $r=0$ has factor $1-T$.",
+   "uses": [
+    "def-wf-iota-real"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-rp-exterior-reality.proof.md",
+    "place": "last two sentences: real local factors and the pointwise conclusion"
+   }
   }
  ],
  "proof_deps": [
-  "p-linear-triangular",
+  "def-real-weil-representation-operations",
+  "p-real-operations",
+  "prop-wf-weil-sheaf-representation-equivalence",
   "p-linear-spectra",
   "def-wf-iota-real"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-rp-exterior-reality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-rp-exterior-reality.proof.md",
+  "place": "entire proof, expanded at the fibre comparison and indexed-subset permutation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If an iota-real lisse Weil sheaf is given, the exterior power of its Frobenius representation is iota-real at every closed point",
+   "results": "WittVector.isocrystal_classification; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.Isocrystal.toModule; IsArithFrobAt.arithFrobAt; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.Isocrystal.frob; WittVector.Isocrystal.frobenius",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern isocrystals or Hermitian/symmetric operators, not exterior reality for Weil sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReal.*exterior|exterior.*IsReal|iota.real|WeilSheaf",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: either zero hits or elementary powerset mapping identities; none states exterior reality for Weil sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exterior powers preserve real coefficients of the characteristic polynomial of a linear map",
+   "results": "ModuleCat.exteriorPower.functor; LinearMap.polyCharpolyAux_coeff_eval; LinearMap.charpoly; LinearMap.polyCharpoly; exteriorPower.map_comp_ιMulti; exteriorPower.map_comp_ιMulti_family; exteriorPower.map_apply_ιMulti_family; Matrix.charpoly_toLin'",
+   "date": "2026-10-17",
+   "verdict": "no match: exterior-power functoriality and characteristic-polynomial definitions do not give the claimed reality theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map, Polynomial.map",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower.*charpoly|charpoly.*exteriorPower|powersetCard_map",
+   "results": "Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean; Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean; Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean; Mathlib/RingTheory/Polynomial/Vieta.lean; Mathlib/Data/Finset/Powerset.lean; Mathlib/Data/Multiset/Powerset.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: either zero hits or elementary powerset mapping identities; none states exterior reality for Weil sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism with complex conjugation invariant eigenvalue multiset has exterior powers with conjugation invariant eigenvalues and real characteristic polynomial",
+   "results": "LinearMap.IsSymmetric.conj_eigenvalue_eq_self; Matrix.IsHermitian.charpoly_cfc_eq; Matrix.IsHermitian.charpoly_eq; Matrix.IsHermitian.roots_charpoly_eq_eigenvalues₀; Matrix.IsHermitian.roots_charpoly_eq_eigenvalues; Matrix.IsHermitian.sort_roots_charpoly_eq_eigenvalues₀; Module.End.mem_eigenspace_intrinsicStar_iff; Matrix.IsHermitian.eigenvalues_eq_eigenvalues_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern isocrystals or Hermitian/symmetric operators, not exterior reality for Weil sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +152,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-r-real-linear"
+ "unit": "sk-r-real-linear",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-rp-exterior-reality",
+  "worker": "stage1",
+  "summary": "Kept the statement and expanded the blueprint proof into four steps. Added the missing reality definition to statement dependencies, identified the Frobenius of the exterior power through the chapter's representation correspondence (p-real-operations; reviewer repair replacing an off-route cor-galois-lisse-representations citation), used the existing exterior-spectrum result without a redundant triangularization invocation, and wrote the occurrence-indexed conjugation permutation and local polynomial calculation. No new nodes.",
+  "blueprint": "Step 1 expands the first sentence’s fibre operation, Step 2 realizes the exterior-spectrum sentences, Step 3 realizes the conjugation sentence, and Step 4 realizes the last two sentences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-7520e5aa8",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-7520e5aa8 (reviewer sub-agent of L); spot-checked: Read in full: the item and its main-20261015 and master blueprint sources (statement unchanged), every cited statement including the blueprint_updates, the unit sk-r-real-linear and its route, the sibling lem-wf-real-semisimplification and the sole citer thm-rp-real-lisse-purity-affine (a curve). Fault (C4/C7) in step 1: it took the Frobenius action on the exterior-power stalk from cor-galois-lisse-representations (2). That corollary is about the pi_1(Y) action on lisse sheaves, applied here on the geometric base where pi_1 contains no Frobenius; it says nothing about the Weil structure or F_x. The unit's route already supplies the fact through p-real-operations (unit sk-p-real-operations, a direct use), which the sibling node also cites. Repair: step 1 rewritten so that the exterior power is the sheaf of (wedge^r V, wedge^r rho) under prop-wf-weil-sheaf-representation-equivalence, and P_x(G_0)=det(1-Tf|V) and P_x(wedge^r G_0)=det(1-T wedge^r f) with f=rho(F_x), both by p-real-operations. Steps 3 and 4 reworded to transfer reality through these polynomials: f is invertible, so the eigenvalues are the inverses of the roots. proof_deps updated and split_report.tool_uses set to [], so the declared tool use is not accepted. Batch-5 flag: cor-galois-lisse-representations is the general equivalence between lisse sheaves and pi_1 representations, not given by the Poincare duality assumption and not a step of the duality isomorphism. It is already in the item's closure through def-real-weil-representation-operations -> def-wf-fundamental-representation and p-real-operations -> prop-wf-..., so it is outside the assumed statements. The direct citation is removed anyway for the content reason. Step 2 uses only the exterior clause of p-linear-spectra; dropping the separate triangularization citation is correct. Tested r=0, r=s, s=0, {i,-i}, {2,i,-i}, the repeated case {i,i,-i,-i} and a Jordan block. No new nodes and no duplicate found by rg over dag/nodes. The slopmaster2 lemma IsReal.exteriorPower_of_charpoly_eq (Operations.lean:311) is stated for representations, not the stalk-based sheaf statement, so it is not an exact attachment. No SGA source is used. Corrected file: fixes/dag/nodes/sec-purity-real-sheaves/lem-rp-exterior-reality.json.; 1 file(s) fixed by the reviewer"
+ }
 }

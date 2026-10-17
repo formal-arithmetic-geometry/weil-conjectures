@@ -13,9 +13,86 @@
   "def-coef-segal-space",
   "lem-coef-segal-homotopy-category-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By Reedy fibrancy, $A=W_0$ and $W_1$ are Kan complexes. In outer degree one the matching object is $A\\times A$: its two indexing maps are the two endpoints and there are no nonidentity arrows between them. Thus the matching map is $e_W=(d_1,d_0):W_1\\to A^2$, a Kan fibration. Products of Kan complexes are Kan by filling a horn in each factor. Apply the component-restriction lemma to $e_W$, with the subset of components defining $W_{\\mathrm{eq}}$ in the source and every component in the target. It makes $W_{\\mathrm{eq}}$ Kan and $p_W$ a Kan fibration. The homotopy-category-components lemma identifies its strict fiber at $(x,y)$ with exactly $E_W(x,y)$, including every simplex, not merely the vertices.",
+   "uses": [
+    "def-coef-segal-space",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-component-restriction-fibration",
+    "lem-coef-segal-homotopy-category-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Rezk, diagram (6.3) and Proposition 6.4, printed pp. 14-15; explicit path-model expansion by the worker."
+   }
+  },
+  {
+   "text": "Apply the internal-hom corner-map lemma to $\\partial\\Delta^1=\\{0\\}\\amalg\\{1\\}\\hookrightarrow\\Delta^1$ and $A\\to\\Delta^0$. Its corner map is $q_A:K_A\\to A^2$, since a map out of the two discrete endpoints is precisely a pair of simplices of $A$. Hence $q_A$ is a Kan fibration. The same lemma with $\\varnothing\\hookrightarrow\\Delta^1$ makes $K_A$ Kan. Apply path-space fibration replacement to $\\mathrm{id}_A:A\\to A$. The resulting $E_{\\mathrm{id}_A}=A\\times_{A,\\mathrm{ev}_0}K_A$ is canonically isomorphic to $K_A$, by $(a,\\gamma)\\mapsto\\gamma$ with inverse $\\gamma\\mapsto(\\mathrm{ev}_0\\gamma,\\gamma)$. Under this isomorphism its weak equivalence $i:A\\to E_{\\mathrm{id}_A}$ is precisely $c_A$. Thus $c_A$ is a weak equivalence and $q_Ac_A=\\Delta_A$. Completeness gives a weak equivalence $s_0:A\\to W_{\\mathrm{eq}}$, and the simplicial identities give $p_Ws_0=\\Delta_A$.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-coef-space-path-fibration-replacement",
+    "def-coef-segal-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Rezk, diagram (6.3) and Proposition 6.4, printed pp. 14-15; explicit path-model expansion by the worker."
+   }
+  },
+  {
+   "text": "Put $B=A^2$ and $b=(x,y)$. For any map $r:Z\\to B$ write its specified homotopy fiber as pairs $(z,\\gamma)$, where $\\gamma:\\Delta^1\\times\\Delta^n\\to B$ starts at $r(z)$ and ends at the constant $n$-simplex $b$. Apply the Kan-pullback-path comparison with $(u,v)=(p_W:\\!W_{\\mathrm{eq}}\\to B,\\,b:\\!\\Delta^0\\to B)$. Its strict pullback is $E_W(x,y)$ by step 1 and its path pullback is $\\operatorname{hofib}_b p_W$. Since $p_W$ is a Kan fibration, the map $a\\mapsto(a,c_B(b))$ is a weak equivalence. Apply the same lemma with $(u,v)=(q_A,b)$. Its strict pullback is $\\operatorname{Path}_A(x,y)$ and its path pullback is $\\operatorname{hofib}_b q_A$; the map $\\alpha\\mapsto(\\alpha,c_B(b))$ is a weak equivalence since $q_A$ is a Kan fibration. The cited lemma also ensures these path-model fibers are Kan complexes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Rezk, diagram (6.3) and Proposition 6.4, printed pp. 14-15; explicit path-model expansion by the worker."
+   }
+  },
+  {
+   "text": "Apply homotopy-pullback invariance to the cospans $A\\xrightarrow{\\Delta_A}B\\xleftarrow{b}\\Delta^0$ and $W_{\\mathrm{eq}}\\xrightarrow{p_W}B\\xleftarrow{b}\\Delta^0$, with comparison maps $(s_0,\\mathrm{id}_{\\Delta^0},\\mathrm{id}_B)$. Their objects are Kan by steps 1-2, the squares commute by $p_Ws_0=\\Delta_A$, and all three comparison maps are weak equivalences. The induced weak equivalence is exactly $(a,\\gamma)\\mapsto(s_0a,\\gamma)$ from $\\operatorname{hofib}_b\\Delta_A$ to $\\operatorname{hofib}_b p_W$. Apply the same lemma to the latter source cospan and $K_A\\xrightarrow{q_A}B\\xleftarrow{b}\\Delta^0$, using $(c_A,\\mathrm{id}_{\\Delta^0},\\mathrm{id}_B)$. This gives the weak equivalence $(a,\\gamma)\\mapsto(c_Aa,\\gamma)$ to $\\operatorname{hofib}_b q_A$. Together with step 3 these are the four arrows in the asserted directions.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Rezk, diagram (6.3) and Proposition 6.4, printed pp. 14-15; explicit path-model expansion by the worker."
+   }
+  },
+  {
+   "text": "For a map $f:W\\to W'$, the induced homotopy-category functor preserves isomorphisms. The component lemma therefore makes $f_1$ restrict to $W_{\\mathrm{eq}}\\to W'_{\\mathrm{eq}}$. Put $v=f_0\\times f_0:B\\to B'$. On the homotopy fibers the three vertical maps are respectively $(a,\\gamma)\\mapsto(f_1a,v\\gamma)$, $(a,\\gamma)\\mapsto(f_0a,v\\gamma)$, and $(\\alpha,\\gamma)\\mapsto(f_0\\alpha,v\\gamma)$; on the strict fibers they are $a\\mapsto f_1a$ and $\\alpha\\mapsto f_0\\alpha$. These are simplicial maps because restriction commutes with postcomposition in every degree. For the two inner arrows their commutation follows respectively from $f_1s_0=s_0f_0$ and $f_0c_A(a)=c_{A'}(f_0a)$; for the outer arrows it follows from $v c_B(b)=c_{B'}(v b)$. These equations hold for parameterized simplices, so the whole zigzag commutes strictly. If $x=y$, its distinguished elements, in order from left to right, are $s_0x$, $(s_0x,c_B(x,x))$, $(x,c_B(x,x))$, $(c_A(x),c_B(x,x))$, and $c_A(x)$, and the four formulas send them to one another. Nothing chooses a point in an off-diagonal fiber. If $A$ is empty there are no pairs of vertices; for vertices in different components the same pullback formulas and comparison lemmas still apply to empty fibers.",
+   "uses": [
+    "lem-coef-segal-homotopy-category-components",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Rezk, diagram (6.3) and Proposition 6.4, printed pp. 14-15; explicit path-model expansion by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-segal-space",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-coef-kan-component-restriction-fibration",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-segal-homotopy-category-components",
+  "lem-coef-space-path-fibration-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Rezk diagram (6.3), Proposition 6.4 (1) implies (4), printed pp. 14-15; explicit functorial path-model proof. Read online; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +128,31 @@
    "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"25\", \"text\": \"* `HomotopyCategory A` has morphisms given by equivalence classes of paths in the underlying\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"119\", \"text\": \"abbrev RightHomotopy [CategoryWithWeakEquivalences C] (P : PathObject Y) (f g : X ⟶ Y) : Type v :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"126\", \"text\": \"variable [CategoryWithWeakEquivalences C] (P : PathObject Y)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"201\", \"text\": \"lemma PathObject.RightHomotopy.rightHomotopyRel [CategoryWithWeakEquivalences C]\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"138\", \"text\": \"/-- In a category with weak equivalences, a path object is the\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"140\", \"text\": \"structure PathObject [CategoryWithWeakEquivalences C] (A : C) extends PrepathObject A where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"149\", \"text\": \"variable {A : C} [CategoryWithWeakEquivalences C] (P : PathObject A)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"15\", \"text\": \"`X.spine n : X _⦋n⦌ → X.Path n` is an equivalence, with equivalence inverse\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: StrictSegal.lean:35-57 treats bijective spines of a single simplicial set; PathObject.lean:138-212 assumes a good path object and proves its structural properties. Neither supplies this natural pointed comparison for complete Segal spaces. Read these returned source interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete Segal space invertible arrows and homotopy fibers of the object diagonal",
+   "results": "{\"t\": \"2026-10-17T11:29:38Z\", \"tool\": \"leansearch\", \"query\": \"Complete Segal space invertible arrows and homotopy fibers of the object diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.ofDiagEquivalence.inverse\", \"CategoryTheory.StructuredArrow.ofDiagEquivalence.inverse\", \"CategoryTheory.CostructuredArrow.ofDiagEquivalence.inverse_obj_hom\", \"CategoryTheory.CostructuredArrow.ofDiagEquivalence\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.CostructuredArrow.ofDiagEquivalence'\", \"CategoryTheory.StructuredArrow.ofDiagEquivalence.inverse_obj_hom\", \"CategoryTheory.StructuredArrow.ofDiagEquivalence'\"], \"digest\": \"3270238ffbf628a3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets, uniform-space completeness, or abstract path objects; none states the complete Segal space fiber zigzag. Read StrictSegal.lean:35-57 and ModelCategory/PathObject.lean:138-162."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completeness of a Segal space identifies invertible mapping components with paths between objects through homotopy fibers",
+   "results": "{\"t\": \"2026-10-17T11:36:20Z\", \"tool\": \"leanfinder\", \"query\": \"Completeness of a Segal space identifies invertible mapping components with paths between objects through homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.spineEquiv\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.StrictSegalCore\", \"SSet.StrictSegalCore.spineToSimplex\", \"SSet.StrictSegal.mk.inj\", \"SSet.StrictSegal.ofCore\", \"SSet.IsStrictSegal.segal\", \"SSet.StrictSegal\"], \"digest\": \"5c37953616379a9e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets, uniform-space completeness, or abstract path objects; none states the complete Segal space fiber zigzag. Read StrictSegal.lean:35-57 and ModelCategory/PathObject.lean:138-162."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completeness compares equivalence fibers of a Segal space with paths in its object Kan complex",
+   "results": "{\"t\": \"2026-10-17T11:37:43Z\", \"tool\": \"leansearch\", \"query\": \"Completeness compares equivalence fibers of a Segal space with paths in its object Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.spineEquiv\", \"SSet.KanComplex\", \"SSet.StrictSegal.quasicategory'\", \"Path.instCompleteSpace\", \"SSet.StrictSegal.spine_spineToSimplex\", \"SSet.StrictSegal.mk.injEq\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"e87c28b66b91175a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets, uniform-space completeness, or abstract path objects; none states the complete Segal space fiber zigzag. Read StrictSegal.lean:35-57 and ModelCategory/PathObject.lean:138-162."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-complete-segal-dk-levelwise",
@@ -83,5 +181,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-complete-segal-path-fiber-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Rezk diagram (6.3) into its specified four-arrow path-model zigzag using existing component restriction, cotensor corner-map, path replacement and homotopy pullback comparison nodes. Checked every simplex of naturality and the identity points; no new nodes.",
+  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction: mapping-space foundation along the inherited cosimplicial-frame/diagonal chain. Rezk Proposition 6.4, diagram (6.3) and its path-space comparison, used inside original step 3 of lem-coef-complete-segal-dk-levelwise; not a literal assertion of the ancestor paragraph. The five steps expand the completeness/path-space comparison required by original step 3 of lem-coef-complete-segal-dk-levelwise."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-9a7afc55f",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-9a7afc55f (reviewer sub-agent of L); spot-checked: Read the item, all five steps, every cited statement, the parent's step 4, and Rezk §5.7, §6, (6.3) and Prop. 6.4 with its (2)⇒(4) proof on printed pp. 14-15 (fetched and checked with pdftotext). The statement is unchanged and matches Rezk 6.4(4), made explicit as a specified natural, pointed zigzag. Its hofib is exactly the path model of def-cbc-enhanced-diagrams-cones, which is P(r,b) of the Kan pullback lemmas. Step 1: Reedy fibrancy gives M_1W = A^2, so (d1,d0) is a Kan fibration; component restriction gives that p_W is a Kan fibration and W_eq is Kan; the components lemma gives fibre = E_W simplexwise. Step 2: the corner-map leaf on the inclusion of the boundary of Δ^1 gives q_A a fibration, and the empty inclusion gives K_A Kan; path replacement for id_A gives c_A a weak equivalence; I checked that p_W s0 and q_A c_A both equal Δ_A. Step 3: pullback-path comparison with the left leg a Kan fibration gives the two outer constant-path arrows. Step 4: homotopy-pullback invariance with (s0,id,id) and (c_A,id,id) gives the inner arrows, in the stated directions. Step 5: naturality and the x=y basepoints are elementary identities, and f_1 preserves W_eq because the induced functor preserves isomorphisms. Edge cases checked: A empty, x and y in different components (empty fibres), constant discrete W, and NC. No new nodes. No cycle: the parent lem-coef-complete-segal-dk-levelwise is not reachable from the item's dependencies. No duplicate among the related Segal/hofib nodes. Route: everything is in unit sk-prop-sf-biduality-general apart from a definition and a Mathlib leaf; no tool_uses needed; no SGA. Searches are complete (three kinds) and proof_deps equals the union of the steps' uses. Only cosmetic point: step 4 says 'latter source cospan' where it means A→B←Δ^0; the formula given removes any ambiguity, so no fix."
  }
 }

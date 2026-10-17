@@ -1,124 +1,304 @@
 {
-  "id": "thm-pod-derived-poincare-duality",
-  "blueprint": {
-    "is": "thm-pod-derived-poincare-duality",
-    "from": null,
-    "same_as": null
+ "id": "thm-pod-derived-poincare-duality",
+ "blueprint": {
+  "is": "thm-pod-derived-poincare-duality",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived Poincare duality",
+ "statement": "In the Poincare duality conventions [def-pod-conventions] of this chapter (the fixed setting; $X_0$ is not assumed proper), let $\\Lambda \\in \\{ A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell }\\}$, let $K\\in D^b_{ctf}(X,\\Lambda )$ be a bounded constructible finite-Tor complex that is perfect over $\\Lambda _X$, let $K^\\vee =R\\mathcal Hom_X(K,\\Lambda _X)$ be its coefficient dual with Tate twist $K^\\vee (d)$, and let $\\beta _K$ be the derived Poincare pairing (the composite of the mixed-support cup product, the evaluation, and the normalized smooth trace). Then $\\beta _K$ is a perfect derived pairing in the sense of [def-pod-perfect-derived-pairing]: the inverse of its tensor–internal-Hom adjoint is the canonical isomorphism\n\n$$\nR\\Gamma _c(X,K)^\\vee \\xrightarrow {\\  \\sim \\  } R\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d].\n$$\n\nThe statement is natural in $K$, compatible with finite reduction, scalar extension, shifts and truncation morphisms whenever all their terms belong to the stated constructible finite-Tor, site-perfect domain, and its transpose form\n\n$$\nR\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda\n$$\n\nis the pairing of [def-pod-derived-poincare-pairing].\n\nHere truncation compatibility means naturality for the canonical truncation maps and their connecting maps (with the shift comparisons). It does not assert that canonical truncation preserves site-perfectness, or that derived cohomology or duality commutes with truncation as a t-exact functor.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.md",
+  "place": "node thm-pod-derived-poincare-duality, order 2438"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-pod-perfect-complex-on-x",
+  "def-pod-coefficient-dual-on-x",
+  "def-coefficient-twists-detailed",
+  "def-weil-ordinary-compact-cohomology",
+  "def-pod-derived-poincare-pairing",
+  "def-pod-perfect-derived-pairing",
+  "def-weil-t-structure"
+ ],
+ "proof": [
+  {
+   "text": "Set $C_K=R\\Gamma_c(X,K)$, $F_K=R\\operatorname{Hom}_\\Lambda(C_K,\\Lambda)$ and $G_K=R\\Gamma(X,K^\\vee(d))[2d]$. The conventions supply smoothness, separated finite type, pure dimension $d$, descent from $k_0$, and the normalized smooth orientation, with no properness hypothesis. The theorem [thm-pod-global-verdier-duality] therefore applies to our bounded constructible finite-Tor $K$ and gives a canonical isomorphism $g_K:F_K\\xrightarrow{\\sim}R\\Gamma(X,\\mathbb D_XK)$. We keep compact-support and ordinary cohomology distinct.",
+   "uses": [
+    "def-pod-conventions",
+    "thm-pod-global-verdier-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+    "place": "Step 1, first constituent isomorphism"
+   }
   },
-  "kind": "statement",
-  "title": "Derived Poincare duality",
-  "statement": "In the Poincare duality conventions of this chapter (the fixed setting; $X_0$ is not assumed proper), let $\\Lambda \\in \\{ A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell }\\}$, let $K\\in D^b_{ctf}(X,\\Lambda )$ be a bounded constructible finite-Tor complex that is perfect over $\\Lambda _X$, let $K^\\vee =R\\mathcal Hom_X(K,\\Lambda _X)$ be its coefficient dual with Tate twist $K^\\vee (d)$, and let $\\beta _K$ be the derived Poincare pairing (the composite of the mixed-support cup product, the evaluation, and the normalized smooth trace). Then $\\beta _K$ is a perfect derived pairing in the sense of Definition 9.18: the inverse of its tensor–internal-Hom adjoint is the canonical isomorphism\n\n$$\nR\\Gamma _c(X,K)^\\vee \\xrightarrow {\\  \\sim \\  } R\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d].\n$$\n\nThe statement is natural in $K$, compatible with finite reduction, scalar extension, shifts and truncations, and its transpose form\n\n$$\nR\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda\n$$\n\nis the pairing of Definition 9.17.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.md",
-    "place": "node thm-pod-derived-poincare-duality, order 2438"
+  {
+   "text": "The additional hypothesis that $K$ is perfect over $\\Lambda_X$ is exactly the hypothesis in [thm-sf-dual-perfect]. Use its orientation-induced isomorphism $\\delta_K:\\mathbb D_XK\\xrightarrow{\\sim}K^\\vee(d)[2d]$. Applying ordinary derived cohomology, with its shift comparison, gives $h_K:R\\Gamma(X,\\mathbb D_XK)\\xrightarrow{\\sim}G_K$. Define $v_K=h_K\\circ g_K$. Its inverse is $g_K^{-1}\\circ h_K^{-1}$: both inverse identities follow by associativity and cancellation. Thus the displayed map in the statement is a specified composite of isomorphisms, at each of the four coefficient stages.",
+   "uses": [
+    "thm-sf-dual-perfect",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+    "place": "Step 1, second constituent and composite"
+   }
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Step 1: the two constituent isomorphisms. By [thm-pod-global-verdier-duality] there is the canonical isomorphism\n\n$$\nR\\Gamma _c(X,K)^\\vee \\xrightarrow {\\  \\sim \\  }R\\Gamma (X,\\mathbb D_XK),\n$$\n\nand by [thm-sf-dual-perfect] (its hypothesis being the perfectness of $K$ over $\\Lambda _X$) there is the canonical identification\n\n$$\nR\\Gamma (X,\\mathbb D_XK)\\xrightarrow {\\  \\sim \\  } R\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d].\n$$",
-      "uses": [
-        "thm-pod-global-verdier-duality",
-        "thm-sf-dual-perfect"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 2: the composite is the inverse of the adjoint of the pairing. By [thm-pod-identification-of-the-comparison], the adjoint of the derived pairing $\\beta _K$ of [def-pod-derived-poincare-pairing] is the inverse of the composite of these two isomorphisms; hence the composite is an isomorphism if and only if the pairing is perfect, by the definition of [def-pod-perfect-derived-pairing]. Step 3: perfectness of the objects. By [thm-pod-point-perfectness], $R\\Gamma _c(X,K)$ is a perfect point complex in the sense of [def-pod-perfect-point-complex]; its dual $R\\Gamma _c(X,K)^\\vee$ is perfect by [def-pod-perfect-point-complex] (the dual of a bounded complex of finite projective modules is again a bounded complex of finite projective modules), and the shift of a perfect point complex is perfect, again by [def-pod-perfect-point-complex]. Step 4: the conclusion. The composite is an isomorphism by Step 1, and its two objects are perfect by Step 3; hence the adjoint of $\\beta _K$ is an isomorphism and $\\beta _K$ is a perfect derived pairing according to [def-pod-perfect-derived-pairing]. Step 5: naturality and compatibility. Both constituent isomorphisms are natural in $K$ and compatible with finite reduction, scalar extension, shifts, and truncations, by the statements of [thm-pod-global-verdier-duality], [thm-sf-dual-perfect], and [thm-pod-point-perfectness], so the composite and the pairing inherit these properties; the transpose form is the pairing of [def-pod-derived-poincare-pairing] itself. Step 6: the inputs, separated. The first isomorphism of Step 1 is the abstract global duality [thm-sf-global-duality] in its concrete form (valid without properness: $Ra_{X!}$ and $Ra_{X*}$ enter as different functors and are never compared), and the second is the smooth-purity orientation [thm-pur-finite-coefficient-smooth-purity] of the purity chapter; the identification consumed in Step 2 is [thm-sf-identification], and the finiteness consumed in Step 3 is [thm-pod-point-perfectness].",
-      "uses": [
-        "thm-pod-identification-of-the-comparison",
-        "def-pod-derived-poincare-pairing",
-        "def-pod-perfect-derived-pairing",
-        "thm-pod-point-perfectness",
-        "def-pod-perfect-point-complex",
-        "thm-pod-global-verdier-duality",
-        "thm-sf-dual-perfect",
-        "thm-sf-global-duality",
-        "thm-pur-finite-coefficient-smooth-purity",
-        "thm-sf-identification"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "By [thm-pod-point-perfectness], both $C_K$ and $F_K=C_K^\\vee$ are perfect point complexes: the hypotheses needed are separated finite type over $k_0$ and $K\\in D^b_{ctf}$, which hold here. This statement explicitly covers finite, integral, rational and common algebraically closed coefficients; it is not merely a finite-level definition of perfectness. At the field stages a bounded complex with finite-dimensional cohomology is quasi-isomorphic to the bounded complex of its cohomology spaces, so these objects are perfect in the sense of [def-pod-perfect-point-complex] at every stage. That definition is invariant under isomorphism in the point category; since $v_K:F_K\\xrightarrow{\\sim}G_K$, the object $G_K$ is perfect as well: compose a bounded finite-projective representative of $F_K$ with this isomorphism. Consequently the two arguments $C_K,G_K$ lie in the domain of [def-pod-perfect-derived-pairing].",
+   "uses": [
+    "thm-pod-point-perfectness",
+    "def-pod-perfect-derived-pairing",
+    "def-pod-perfect-point-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+    "place": "Step 3, perfectness of the objects"
+   }
+  },
+  {
+   "text": "Let $b_K:G_K\\to F_K$ be the tensor–internal-Hom adjoint of $\\beta_K$. The statement of [thm-pod-identification-of-the-comparison] applies at all four stages to the same descended smooth $X$ and site-perfect $K$. It identifies $b_K^{-1}$ with global Verdier duality followed by the smooth-purity identification, precisely $h_K\\circ g_K=v_K$ above. Hence $b_Kv_K=1_{F_K}$ and $v_Kb_K=1_{G_K}$. Together with the perfectness of both arguments, this proves that $\\beta_K$ is perfect by [def-pod-perfect-derived-pairing]. The pairing being identified is the actual mixed-support cup product, evaluation and normalized smooth trace of [def-pod-derived-poincare-pairing]; an arbitrary abstract isomorphism between the objects would not suffice.",
+   "uses": [
+    "thm-pod-identification-of-the-comparison",
+    "def-pod-perfect-derived-pairing",
+    "def-pod-derived-poincare-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+    "place": "Steps 2 and 4, identification of the actual adjoint and conclusion"
+   }
+  },
+  {
+   "text": "Both $g$ and $h$ are natural in $K$ by [thm-pod-global-verdier-duality] and [thm-sf-dual-perfect]. More explicitly, for $u:K\\to L$ between objects in the statement's domain, write $F(u):F_L\\to F_K$ and $G(u):G_L\\to G_K$ for the contravariant maps. Composing the two naturality squares gives $G(u)v_L=v_KF(u)$. Multiplying by the inverses yields $b_KG(u)=F(u)b_L$. For $c=C(u):C_K\\to C_L$, precomposition defines $F(u)$, so evaluation satisfies $\\operatorname{ev}_{C_K}(1\\otimes F(u))=\\operatorname{ev}_{C_L}(c\\otimes1)$: this is the defining transpose equation for precomposition. Using the uncurry formula of [lem-pod-closed-uncurry-laws] therefore gives $\\beta_K(1\\otimes G(u))=\\operatorname{ev}_{C_K}(1\\otimes F(u)b_L)=\\beta_L(c\\otimes1)$. This is precisely naturality of the pairing in its covariant and contravariant arguments.",
+   "uses": [
     "thm-pod-global-verdier-duality",
     "thm-sf-dual-perfect",
-    "thm-pod-identification-of-the-comparison",
-    "def-pod-derived-poincare-pairing",
-    "def-pod-perfect-derived-pairing",
-    "thm-pod-point-perfectness",
-    "def-pod-perfect-point-complex",
-    "thm-sf-global-duality",
-    "thm-pur-finite-coefficient-smooth-purity",
-    "thm-sf-identification"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.md",
-    "place": "## Proof"
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+    "place": "Step 5, naturality"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2438,
-  "blueprint_uses": [
-    "def-pod-derived-poincare-pairing",
-    "def-pod-perfect-derived-pairing",
-    "def-pod-perfect-point-complex",
+  {
+   "text": "For any allowed coefficient change $T$ (finite or integral reduction, rationalization, finite coefficient-field extension, or passage to a common finite field stage), the compatibility clauses of [thm-pod-global-verdier-duality] and [thm-sf-dual-perfect] give comparisons $l:T(F_K)\\xrightarrow{\\sim}F_{TK}$ and $r:T(G_K)\\xrightarrow{\\sim}G_{TK}$ satisfying $r\\,T(v_K)=v_{TK}\\,l$; here $l$ is the canonical comparison $T(R\\operatorname{Hom}_\\Lambda(C_K,\\Lambda))\\to R\\operatorname{Hom}(T(C_K),T(\\Lambda))$ followed by the inverse dual of the compact-support coefficient comparison $m:T(C_K)\\xrightarrow{\\sim}C_{TK}$, the comparisons under which those clauses are stated. Their hypotheses hold because $K$ is site-perfect and $C_K$ is perfect by Step 3. Composing with inverses gives $b_{TK}\\,r=l\\,T(b_K)$. The tensor and internal-Hom comparisons preserve evaluation by [lem-fix-operation-reduction], including its explicit rationalization and common-stage clauses; thus uncurrying gives $\\beta_{TK}(m\\otimes r)=T(\\beta_K)$ under the tensor comparison, the same square for $\\beta$, not just for its adjoint. For shifts, the shift compatibility of $g$ and $\\delta$ gives $v_{K[j]}=v_K[-j]$ under the canonical comparisons, since both $F$ and $G$ are contravariant. Inverting this equality gives the shift comparison for $b$ and hence for its pairing.",
+   "uses": [
     "thm-pod-global-verdier-duality",
-    "thm-pod-identification-of-the-comparison",
-    "thm-pod-point-perfectness",
-    "thm-pur-finite-coefficient-smooth-purity",
     "thm-sf-dual-perfect",
-    "thm-sf-global-duality",
-    "thm-sf-identification"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-fix-operation-reduction",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+    "place": "Step 5, finite reduction, scalar extension and shifts"
+   }
   },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-thm-derived-duality",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the Poincare duality conventions of this chapter (the fixed setting; $X_0$ is not assumed proper), let $\\Lambda \\in \\{ A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell }\\}$, let $K\\in D^b_{ctf}(X,\\Lambda )$ be a bounded constructible finite-Tor complex that is perfect over $\\Lambda _X$, let $K^\\vee =R\\mathcal Hom_X(K,\\Lambda _X)$ be its coefficient dual with Tate twist $K^\\vee (d)$, and let $\\beta _K$ be the derived Poincare pairing (the composite of the mixed-support cup product, the evaluation, and the normalized smooth trace). Then $\\beta _K$ is a perfect derived pairing in the sense of [def-pod-perfect-derived-pairing]: the inverse of its tensor–internal-Hom adjoint is the canonical isomorphism\n\n$$\nR\\Gamma _c(X,K)^\\vee \\xrightarrow {\\  \\sim \\  } R\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d].\n$$\n\nThe statement is natural in $K$, compatible with finite reduction, scalar extension, shifts and truncations, and its transpose form\n\n$$\nR\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda\n$$\n\nis the pairing of [def-pod-derived-poincare-pairing].",
-    "proof": [
-      {
-        "text": "Step 1: the two constituent isomorphisms. By [thm-pod-global-verdier-duality] there is the canonical isomorphism\n\n$$\nR\\Gamma _c(X,K)^\\vee \\xrightarrow {\\  \\sim \\  }R\\Gamma (X,\\mathbb D_XK),\n$$\n\nand by [thm-sf-dual-perfect] (its hypothesis being the perfectness of $K$ over $\\Lambda _X$) there is the canonical identification\n\n$$\nR\\Gamma (X,\\mathbb D_XK)\\xrightarrow {\\  \\sim \\  } R\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d].\n$$",
-        "uses": [
-          "thm-pod-global-verdier-duality",
-          "thm-sf-dual-perfect"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 2: the composite is the inverse of the adjoint of the pairing. By [thm-pod-identification-of-the-comparison], the adjoint of the derived pairing $\\beta _K$ of [def-pod-derived-poincare-pairing] is the inverse of the composite of these two isomorphisms; hence the composite is an isomorphism if and only if the pairing is perfect, by the definition of [def-pod-perfect-derived-pairing]. Step 3: perfectness of the objects. By [thm-pod-point-perfectness], $R\\Gamma _c(X,K)$ is a perfect point complex in the sense of [def-pod-perfect-point-complex]; its dual $R\\Gamma _c(X,K)^\\vee$ is perfect by [def-pod-perfect-point-complex] (the dual of a bounded complex of finite projective modules is again a bounded complex of finite projective modules), and the shift of a perfect point complex is perfect, again by [def-pod-perfect-point-complex]. Step 4: the conclusion. The composite is an isomorphism by Step 1, and its two objects are perfect by Step 3; hence the adjoint of $\\beta _K$ is an isomorphism and $\\beta _K$ is a perfect derived pairing according to [def-pod-perfect-derived-pairing]. Step 5: naturality and compatibility. Both constituent isomorphisms are natural in $K$ and compatible with finite reduction, scalar extension, shifts, and truncations, by the statements of [thm-pod-global-verdier-duality], [thm-sf-dual-perfect], and [thm-pod-point-perfectness], so the composite and the pairing inherit these properties; the transpose form is the pairing of [def-pod-derived-poincare-pairing] itself. Step 6: the inputs, separated. The first isomorphism of Step 1 is the abstract global duality [thm-sf-global-duality] in its concrete form (valid without properness: $Ra_{X!}$ and $Ra_{X*}$ enter as different functors and are never compared), and the second is the smooth-purity orientation [thm-pur-finite-coefficient-smooth-purity] of the purity chapter; the identification consumed in Step 2 is [thm-sf-identification], and the finiteness consumed in Step 3 is [thm-pod-point-perfectness].",
-        "uses": [
-          "thm-pod-identification-of-the-comparison",
-          "def-pod-derived-poincare-pairing",
-          "def-pod-perfect-derived-pairing",
-          "thm-pod-point-perfectness",
-          "def-pod-perfect-point-complex",
-          "thm-pod-global-verdier-duality",
-          "thm-sf-dual-perfect",
-          "thm-sf-global-duality",
-          "thm-pur-finite-coefficient-smooth-purity",
-          "thm-sf-identification"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Use the canonical triangle $A=\\tau^{\\le m}K\\xrightarrow{i}K\\xrightarrow{p}B=\\tau^{\\ge m+1}K\\xrightarrow{\\partial}A[1]$ of [def-weil-t-structure], using the ambient standard t-structure [def-sbc-standard-tstructure-derived-category] at finite coefficients, [prop-weil-pbc-integral-tstructure] at integral coefficients, and [prop-constructible-truncations] at the two field stages. Here $X$ is finite type over a field and thus noetherian of finite dimension, and $\\ell$ is invertible on $X$, as required at the integral stage. Apply the triangle only when $A$ and $B$ belong to the constructible finite-Tor, site-perfect domain. Step 5 applied to $i$ and $p$ gives the two comparison squares; applied to $\\partial:B\\to A[1]$, together with Step 6's shift comparison, it gives the connecting-map square. These three explicit naturality identities are the claimed truncation compatibility. No closure under canonical truncations is used. Finally, [lem-pod-closed-uncurry-laws] says that uncurrying the adjoint returns the original morphism and is $(1_{C_K}\\otimes b_K)$ followed by evaluation. Since Step 4 identified $b_K$ as the adjoint of the specified $\\beta_K$, its transpose is exactly the composite written in [def-pod-derived-poincare-pairing].",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-pod-closed-uncurry-laws",
+    "def-pod-derived-poincare-pairing",
+    "def-sbc-standard-tstructure-derived-category",
+    "prop-weil-pbc-integral-tstructure",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+    "place": "Step 5, truncation maps and the transpose"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pod-conventions",
+  "thm-pod-global-verdier-duality",
+  "thm-sf-dual-perfect",
+  "def-weil-ordinary-compact-cohomology",
+  "thm-pod-point-perfectness",
+  "def-pod-perfect-point-complex",
+  "def-pod-perfect-derived-pairing",
+  "thm-pod-identification-of-the-comparison",
+  "def-pod-derived-poincare-pairing",
+  "lem-pod-closed-uncurry-laws",
+  "lem-fix-operation-reduction",
+  "def-weil-t-structure",
+  "def-sbc-standard-tstructure-derived-category",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-constructible-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-derived-duality/thm-pod-derived-poincare-duality.proof.md",
+  "place": "Steps 1–5, with the domain-correct truncation interpretation and explicit naturality squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "poincare.*duality|verdier.*duality|isPerfectPairing_poincare",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived-category t-structures, ordinary module perfect pairings, categorical closed functors or group cohomology, not this four-stage sheaf duality theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Poincare duality perfect constructible complexes compactly supported cohomology",
+   "results": "LinearMap.IsPerfectCompl; LinearMap.IsPerfPair; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; HomologicalComplex.instIsStrictlySupportedOppositeOpOp; AddChar.doubleDualEquiv; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction; CategoryTheory.ShortComplex.rightHomologyOpIso; HomologicalComplex.isStrictlySupported_op_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived-category t-structures, ordinary module perfect pairings, categorical closed functors or group cohomology, not this four-stage sheaf duality theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.IsIso",
+   "results": "CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; CategoryTheory.Monoidal.Reflective.isIso_tfae; CategoryTheory.MonoidalClosedFunctor.comparison_iso; CategoryTheory.MonoidalClosedFunctor.mk; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.prodComparison_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived-category t-structures, ordinary module perfect pairings, categorical closed functors or group cohomology, not this four-stage sheaf duality theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Poincare duality for perfect constructible complexes on a smooth scheme compact support Verdier duality",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived-category t-structures, ordinary module perfect pairings, categorical closed functors or group cohomology, not this four-stage sheaf duality theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|Poincare|Poincaré",
+   "results": "Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/SpectralObject.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived-category t-structures, ordinary module perfect pairings, categorical closed functors or group cohomology, not this four-stage sheaf duality theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality identifies dual of compact support cohomology with cohomology of the coefficient dual Tate twisted and shifted",
+   "results": "groupCohomologyIsoExt; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.isLE_Q_obj_iff; Rep.standardResolution.extIso; CochainComplex.HomComplex.homologyAddEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived-category t-structures, ordinary module perfect pairings, categorical closed functors or group cohomology, not this four-stage sheaf duality theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2438,
+ "blueprint_uses": [
+  "def-pod-derived-poincare-pairing",
+  "def-pod-perfect-derived-pairing",
+  "def-pod-perfect-point-complex",
+  "thm-pod-global-verdier-duality",
+  "thm-pod-identification-of-the-comparison",
+  "thm-pod-point-perfectness",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "thm-sf-dual-perfect",
+  "thm-sf-global-duality",
+  "thm-sf-identification"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-derived-duality",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the Poincare duality conventions of this chapter (the fixed setting; $X_0$ is not assumed proper), let $\\Lambda \\in \\{ A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell }\\}$, let $K\\in D^b_{ctf}(X,\\Lambda )$ be a bounded constructible finite-Tor complex that is perfect over $\\Lambda _X$, let $K^\\vee =R\\mathcal Hom_X(K,\\Lambda _X)$ be its coefficient dual with Tate twist $K^\\vee (d)$, and let $\\beta _K$ be the derived Poincare pairing (the composite of the mixed-support cup product, the evaluation, and the normalized smooth trace). Then $\\beta _K$ is a perfect derived pairing in the sense of [def-pod-perfect-derived-pairing]: the inverse of its tensor–internal-Hom adjoint is the canonical isomorphism\n\n$$\nR\\Gamma _c(X,K)^\\vee \\xrightarrow {\\  \\sim \\  } R\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d].\n$$\n\nThe statement is natural in $K$, compatible with finite reduction, scalar extension, shifts and truncations, and its transpose form\n\n$$\nR\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda\n$$\n\nis the pairing of [def-pod-derived-poincare-pairing].",
+  "proof": [
+   {
+    "text": "Step 1: the two constituent isomorphisms. By [thm-pod-global-verdier-duality] there is the canonical isomorphism\n\n$$\nR\\Gamma _c(X,K)^\\vee \\xrightarrow {\\  \\sim \\  }R\\Gamma (X,\\mathbb D_XK),\n$$\n\nand by [thm-sf-dual-perfect] (its hypothesis being the perfectness of $K$ over $\\Lambda _X$) there is the canonical identification\n\n$$\nR\\Gamma (X,\\mathbb D_XK)\\xrightarrow {\\  \\sim \\  } R\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d].\n$$",
+    "uses": [
+     "thm-pod-global-verdier-duality",
+     "thm-sf-dual-perfect"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: the composite is the inverse of the adjoint of the pairing. By [thm-pod-identification-of-the-comparison], the adjoint of the derived pairing $\\beta _K$ of [def-pod-derived-poincare-pairing] is the inverse of the composite of these two isomorphisms; hence the composite is an isomorphism if and only if the pairing is perfect, by the definition of [def-pod-perfect-derived-pairing]. Step 3: perfectness of the objects. By [thm-pod-point-perfectness], $R\\Gamma _c(X,K)$ is a perfect point complex in the sense of [def-pod-perfect-point-complex]; its dual $R\\Gamma _c(X,K)^\\vee$ is perfect by [def-pod-perfect-point-complex] (the dual of a bounded complex of finite projective modules is again a bounded complex of finite projective modules), and the shift of a perfect point complex is perfect, again by [def-pod-perfect-point-complex]. Step 4: the conclusion. The composite is an isomorphism by Step 1, and its two objects are perfect by Step 3; hence the adjoint of $\\beta _K$ is an isomorphism and $\\beta _K$ is a perfect derived pairing according to [def-pod-perfect-derived-pairing]. Step 5: naturality and compatibility. Both constituent isomorphisms are natural in $K$ and compatible with finite reduction, scalar extension, shifts, and truncations, by the statements of [thm-pod-global-verdier-duality], [thm-sf-dual-perfect], and [thm-pod-point-perfectness], so the composite and the pairing inherit these properties; the transpose form is the pairing of [def-pod-derived-poincare-pairing] itself. Step 6: the inputs, separated. The first isomorphism of Step 1 is the abstract global duality [thm-sf-global-duality] in its concrete form (valid without properness: $Ra_{X!}$ and $Ra_{X*}$ enter as different functors and are never compared), and the second is the smooth-purity orientation [thm-pur-finite-coefficient-smooth-purity] of the purity chapter; the identification consumed in Step 2 is [thm-sf-identification], and the finiteness consumed in Step 3 is [thm-pod-point-perfectness].",
+    "uses": [
+     "thm-pod-identification-of-the-comparison",
+     "def-pod-derived-poincare-pairing",
+     "def-pod-perfect-derived-pairing",
+     "thm-pod-point-perfectness",
+     "def-pod-perfect-point-complex",
+     "thm-pod-global-verdier-duality",
+     "thm-sf-dual-perfect",
+     "thm-sf-global-duality",
+     "thm-pur-finite-coefficient-smooth-purity",
+     "thm-sf-identification"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-pod-derived-poincare-duality",
+  "worker": "stage1",
+  "summary": "Audited the current main-20261015 proof against the cited statements; retained the global-duality, smooth-orientation and adjoint-identification route. Added statement dependencies, separated the seven proof steps, used the all-stage point-perfectness statement directly, and wrote the naturality and coefficient-comparison equations. STATEMENT-DISPUTED: unrestricted canonical truncation need not preserve site-perfectness; clarified compatibility on truncation maps whose terms lie in the domain. No new nodes. The old unit binding is retained for maintenance; the item is not the key statement of the now degreewise field-duality unit.",
+  "blueprint": "Current main-20261015 node proof: Steps 1 and 2 realize its two constituent isomorphisms; Step 3 realizes its point-perfectness argument; Step 4 its comparison identification and perfectness conclusion; Steps 5–7 its functoriality, coefficient comparisons, shifts, domain-correct truncation maps and transpose. Its final input-separation paragraph is respected by using the concrete all-stage constituent nodes rather than re-proving purity.",
+  "tool_uses": [
+   {
+    "node": "thm-pod-global-verdier-duality",
+    "why": "The existing all-stage global-duality isomorphism is the first constituent explicitly required by the item blueprint proof."
+   },
+   {
+    "node": "thm-sf-dual-perfect",
+    "why": "The existing all-stage smooth-orientation identification is the second constituent explicitly required by the item blueprint proof."
+   },
+   {
+    "node": "thm-pod-point-perfectness",
+    "why": "The existing cohomological finiteness and point-perfectness theorem supplies the domain of the pairing definition."
+   },
+   {
+    "node": "thm-pod-identification-of-the-comparison",
+    "why": "The existing comparison theorem identifies the actual pairing adjoint, as the item blueprint proof explicitly requires."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic evaluation-preserving coefficient comparisons justify transposing coefficient compatibility; no node of the legacy degreewise unit supplies them."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Generic existence of the bounded integral standard t-structure supplies canonical truncation maps, without asserting preservation of site-perfectness."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic constructible field-stage t-structures supply canonical truncation maps at rational and common field coefficients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pod-global-verdier-duality",
+  "thm-sf-dual-perfect",
+  "thm-pod-point-perfectness",
+  "thm-pod-identification-of-the-comparison",
+  "lem-fix-operation-reduction",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-constructible-truncations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-a416eb101",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-a416eb101 (reviewer sub-agent of L); spot-checked: I read the delivery in full against the main-20261015 statement and proof of thm-pod-derived-poincare-duality, every cited node's statement, and the unit route. Two repairable faults, both fixed in fixes/dag/nodes/sec-poincare-duality/thm-pod-derived-poincare-duality.json. (C4) Step 3 needs def-pod-perfect-point-complex and did not cite it: thm-pod-point-perfectness only says 'bounded with finite-dimensional cohomology' at E and Qbar_l, and carrying perfectness from F_K to G_K along v_K also uses that definition. I added the citation and wrote out the field-stage sentence. (E5) Step 6 left the comparison l implicit. I wrote l out as the dual of the compact-support coefficient comparison m, and wrote the resulting square beta_{TK}(m tensor r) = T(beta_K). The statement change is a forced domain correction, not a weakening: truncation compatibility is restricted to truncations that stay in the site-perfect finite-Tor domain. I checked the counterexample: over Z/l^2, K=[A -l-> A] is perfect but tau^{>=0}K=A/l has infinite Tor dimension. At the field stages truncations stay perfect, so nothing is lost there. Every hypothesis, all four coefficient stages and the identification of the inverse adjoint are kept. Step checks: g_K (global Verdier duality) and delta_K (dual-perfect orientation) are natural, shift-compatible and, for site-perfect K, compatible with reduction and scalar extension. thm-pod-identification-of-the-comparison gives b_K^{-1}=v_K, with the directions checked. The naturality algebra in Step 5 is correct, using counit dinaturality and lem-pod-closed-uncurry-laws. Step 7 applies naturality to the canonical triangle maps i, p and the connecting map, and the integral t-structure hypotheses hold (X noetherian of finite dimension, l invertible). Edge cases checked: d=0, A^1 (nonproper), K=0, n=1, n=2 and O_E. No new nodes, no cycle, and no SGA source. Accepted tool_uses: thm-pod-global-verdier-duality, thm-sf-dual-perfect, thm-pod-point-perfectness, thm-pod-identification-of-the-comparison, prop-weil-pbc-integral-tstructure and lem-fix-operation-reduction. The item's own blueprint proof names the first four, and using them in the pod conventions avoids identifying them with the abstract sf-datum ones. The unit binding is stale (the unit is now the field degreewise corollary) and is left to the maintainer.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -12,9 +12,97 @@
   "lem-coef-infinity-isofibration-exponentiation",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $J=K$ or $A$, put $X_J=\\operatorname{Fun}(J,E)$, $Y_J=\\operatorname{Fun}(J,P)$ and $L_J=\\operatorname{Lift}_{f|_J}(J,E)$. Apply [lem-coef-infinity-isofibration-exponentiation] to $\\varnothing\\subseteq J$: $p_J:X_J\\to Y_J$ is a categorical fibration between quasicategories. Degreewise, $L_J=X_J\\times_{Y_J}\\{f|_J\\}$. An inner horn in $L_J$ fills by lifting against $p_J$ over the constant simplex at $f|_J$; hence $L_J$ is a quasicategory. We will also need the following direct check: an edge of $L_J$ which is an equivalence in $X_J$ is an equivalence in $L_J$. Indeed every initial outer horn in $L_J$ whose initial edge is this edge fills over the constant simplex by [lem-cbc-inner-fibration-equivalence-outer-horn-lift]; the converse outer-horn criterion of [lem-cbc-equivalence-outer-horn-filling] applies inside the quasicategory $L_J$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "01F1, empty-subset case; 01H0 and its opposite, followed by the converse equivalence outer-horn criterion"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-isofibration-exponentiation] to $A\\subseteq K$ and $r$, obtaining the categorical fibration $q:X_K\\to T=X_A\\times_{Y_A}Y_K$. The map $L_A\\to T$ sends $h$ to $(h,f)$; its pullback of $q$ is exactly restriction $\\rho:L_K\\to L_A$, in every degree. Inner horns for $\\rho$ fill using $q$ with this prescribed bottom simplex. For an equivalence $u:h\\to h'$ of $L_A$ and $H\\in L_K$ restricting to $h$, the image $(u,1_f)$ is an equivalence of $T$: its inverse and inverse-triangle witnesses are the images of those for $u$. Lift it through $q$ to an equivalence $H\\to H'$ in $X_K$. The equation with $q$ puts this edge, including its endpoint, in $L_K$, and step 1 makes it an equivalence there. Thus $\\rho$ is a categorical fibration with the specified-source convention.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "01F1, corner map and its explicit pullback to the fixed base diagram"
+   }
+  },
+  {
+   "text": "Let $\\eta:H\\to H'$ be an equivalence in $L_K$. The inclusion into $X_K$ preserves its inverse-triangle witnesses, so [lem-coef-infinity-pointwise-equivalences] makes each component $\\eta_x:H(x)\\to H'(x)$ an equivalence in $E$. Each $\\eta_x$ is $r$-cocartesian: for every $n\\geq2$ and initial outer horn with initial edge $\\eta_x$ over a specified simplex of $P$, [lem-cbc-inner-fibration-equivalence-outer-horn-lift] supplies a filler. This is precisely the horn definition in [def-coef-infinity-fibrations], applied to the inner fibration $r$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "01DK and initial-horn dual of 01H0; the cocartesian horn definition"
+   }
+  },
+  {
+   "text": "Suppose $H$ is marked. Fix $m:x\\to y$ in $M$. Restrict $\\eta:K\\times\\Delta^1\\to E$ to $m\\times\\Delta^1$. Its two standard triangles have a common diagonal $d:H(x)\\to H'(y)$, with edge pairs $(H(m),\\eta_y)$ and $(\\eta_x,H'(m))$, respectively. The first triangle and [lem-coef-infinity-cocartesian-composition-initiality] show $d$ cocartesian, since $H(m)$ and $\\eta_y$ are cocartesian. In the second triangle $\\eta_x$ is cocartesian, so the same node's cancellation clause implies that $H'(m)$ is cocartesian. This holds for each $m$, proving that the marked vertices are closed under equivalences in $L_K$. The argument with $K$ replaced by $A$ proves the corresponding assertion for $L_A$. It uses only the stated inner fibration and the given edges.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 2.4.1.7, opposite-category composition and cancellation, applied twice to the naturality square"
+   }
+  },
+  {
+   "text": "The full simplicial subsets $L_K^M\\subseteq L_K$ and $L_A^{M_A}\\subseteq L_A$ are quasicategories: fill an inner horn in the ambient quasicategory; all its vertices are already vertices of the horn, hence are marked, so the filler lies in the full subset by [def-cbc-enhanced-diagrams-cones]. Restricting a marked vertex along $A\\subseteq K$ preserves the required condition because $M_A=M\\cap A_1$. Thus $\\rho$ restricts to the displayed map of full marked subcategories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Agent expansion: inner horns retain their vertices; inherited marking"
+   }
+  },
+  {
+   "text": "For an inner-horn lifting problem for $L_K^M\\to L_A^{M_A}$, step 2 supplies a filler in $L_K$. Every vertex is already in the given horn, so fullness puts that filler in $L_K^M$. For an equivalence in $L_A^{M_A}$ with prescribed source lift $H\\in L_K^M$, step 2 lifts its image in $L_A$ to an equivalence $H\\to H'$ in $L_K$. Step 4 makes $H'$ marked. The lifted edge and its inverse-triangle witnesses have only the vertices $H,H'$, so fullness puts them in $L_K^M$. This proves the categorical equivalence-lifting condition. All fillers were constructed in the degreewise fibers $L_J$, and taking full subsets retains their simplices unchanged; consequently every transformation and higher simplex still lies over the identity of $f|_J$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Agent expansion: restriction to full subsets using the closure proved in step 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-coef-infinity-pointwise-equivalences",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01F1",
+  "place": "01F1 supplies the unmarked corner fibration. The strict-fiber check and marked restriction are agent expansions using the cited existing horn, pointwise-equivalence and cocartesian-composition nodes; sources read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +138,52 @@
    "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|categoricalFibration|Cocartesian|InnerFibration",
+   "results": "{\"t\": \"2026-10-17T12:16:31Z\", \"tool\": \"grep\", \"query\": \"isofibration|categoricalFibration|Cocartesian|InnerFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"68f9223828c07882\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read InnerFibration.lean:30-96, Quasicategory/Basic.lean:30-54, SimplicialSet/CategoryWithFibrations.lean:44-89, and FiberedCategory/Cocartesian.lean:46-74. The results provide inner-horn predicates/fillers, all-horn Quillen fibrations, subcomplex constructions or ordinary categorical cocartesian arrows, not the categorical fibration of full marked coherent lift categories. The second LeanFinder phrasing also gives no such statement. Grep subdirectory: AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of marked coherent lift diagrams along a simplicial subset is an isofibration of quasicategories",
+   "results": "{\"t\": \"2026-10-17T12:16:31Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of marked coherent lift diagrams along a simplicial subset is an isofibration of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Subcomplex.lift\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\"], \"digest\": \"5f1a74f283466272\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read InnerFibration.lean:30-96, Quasicategory/Basic.lean:30-54, SimplicialSet/CategoryWithFibrations.lean:44-89, and FiberedCategory/Cocartesian.lean:46-74. The results provide inner-horn predicates/fillers, all-horn Quillen fibrations, subcomplex constructions or ordinary categorical cocartesian arrows, not the categorical fibration of full marked coherent lift categories. The second LeanFinder phrasing also gives no such statement. Grep subdirectory: "
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.InnerFibration",
+   "results": "{\"t\": \"2026-10-17T12:16:31Z\", \"tool\": \"loogle\", \"query\": \"SSet.InnerFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\", \"SSet.quasicategory_of_innerFibration_quasicategory\", \"SSet.InnerFibration.mem\", \"SSet.InnerFibration.mk\", \"SSet.innerFibration_iff\", \"SSet.quasicategory_iff_of_isTerminal\"], \"digest\": \"52f09c46625d2590\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read InnerFibration.lean:30-96, Quasicategory/Basic.lean:30-54, SimplicialSet/CategoryWithFibrations.lean:44-89, and FiberedCategory/Cocartesian.lean:46-74. The results provide inner-horn predicates/fillers, all-horn Quillen fibrations, subcomplex constructions or ordinary categorical cocartesian arrows, not the categorical fibration of full marked coherent lift categories. The second LeanFinder phrasing also gives no such statement. Grep subdirectory: "
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coherent lifts of a simplicial diagram through a categorical fibration to a simplicial subset remains a categorical fibration on full subcategories preserving marked cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T12:16:35Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of coherent lifts of a simplicial diagram through a categorical fibration to a simplicial subset remains a categorical fibration on full subcategories preserving marked cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.Subcomplex.fromPreimage\", \"SSet.Subcomplex.lift\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.Subcomplex.lift_app_coe\"], \"digest\": \"4d1c24a38ef3c6ce\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read InnerFibration.lean:30-96, Quasicategory/Basic.lean:30-54, SimplicialSet/CategoryWithFibrations.lean:44-89, and FiberedCategory/Cocartesian.lean:46-74. The results provide inner-horn predicates/fillers, all-horn Quillen fibrations, subcomplex constructions or ordinary categorical cocartesian arrows, not the categorical fibration of full marked coherent lift categories. The second LeanFinder phrasing also gives no such statement. Grep subdirectory: "
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A replete full subcategory of a quasicategory inherits inner horn fillers and equivalence lifts from an isofibration",
+   "results": "{\"t\": \"2026-10-17T12:16:36Z\", \"tool\": \"leanfinder\", \"query\": \"A replete full subcategory of a quasicategory inherits inner horn fillers and equivalence lifts from an isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesFullSubcategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"b1d4939196feb799\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read InnerFibration.lean:30-96, Quasicategory/Basic.lean:30-54, SimplicialSet/CategoryWithFibrations.lean:44-89, and FiberedCategory/Cocartesian.lean:46-74. The results provide inner-horn predicates/fillers, all-horn Quillen fibrations, subcomplex constructions or ordinary categorical cocartesian arrows, not the categorical fibration of full marked coherent lift categories. The second LeanFinder phrasing also gives no such statement. Grep subdirectory: "
+  },
+  {
+   "tool": "grep",
+   "query": "marked.*(lift|restriction)|categorical.?fibration|isofibration",
+   "results": "{\"t\": \"2026-10-17T12:52:00Z\", \"tool\": \"grep\", \"query\": \"marked.*(lift|restriction)|categorical.?fibration|isofibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read InnerFibration.lean:30-96, Quasicategory/Basic.lean:30-54, SimplicialSet/CategoryWithFibrations.lean:44-89, and FiberedCategory/Cocartesian.lean:46-74. The results provide inner-horn predicates/fillers, all-horn Quillen fibrations, subcomplex constructions or ordinary categorical cocartesian arrows, not the categorical fibration of full marked coherent lift categories. The second LeanFinder phrasing also gives no such statement. Grep subdirectory: AlgebraicTopology"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-module-section-model",
@@ -78,5 +208,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-inert-marked-restriction-fibration",
+  "worker": "stage1",
+  "summary": "Expanded the strict-fiber corner-map argument, proved marking invariant under equivalences by the two triangles of a naturality square, and checked the inner-horn and equivalence lifts remain inside the full marked categories. All non-elementary inputs already have DAG nodes: no new nodes or Mathlib leaves. Preserved the statement and historical ancestry; reused and read the sandbox search log.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2, middle finite-level derived Hom adjunction before R lim; the historical via chain passes through coherent-module-section-model, whose former step 6 needs marked restriction of the two corner maps. Steps 1-2 supply fixed-diagram categorical lifting; steps 3-4 prove repleteness; steps 5-6 restrict the lifting. This is supporting infinity-categorical infrastructure, not a change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic relative outer-horn lifting along an equivalence, used to recognize strict-fiber equivalences and cocartesian component equivalences; no same-unit node supplies this relative horn statement."
+   },
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic converse outer-horn criterion recognizes equivalences in a strict fiber after relative filling; no same-unit node supplies that criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-dd107e89c",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-dd107e89c (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and every cited statement in full: def-cbc-enhanced-diagrams-cones, lem-coef-infinity-isofibration-exponentiation, lem-cbc-inner-fibration-equivalence-outer-horn-lift, lem-cbc-equivalence-outer-horn-filling, lem-coef-infinity-pointwise-equivalences, def-coef-infinity-fibrations, lem-coef-infinity-cocartesian-composition-initiality. There are no new nodes. Step 1 applies the corner map to the empty subset, so L_J is the strict fiber; equivalences of the ambient functor category are recognized inside L_J by relative Lambda^n_0 filling over the constant simplex plus the converse criterion. Step 2: the restriction map is the degreewise pullback of q along h->(h,f), and equivalences lift with specified source. Step 3: components of an equivalence are equivalences, hence r-cocartesian by the horn definition. Step 4: I checked both triangles of the naturality square and their orientation against the composition/cancellation clause, which gives repleteness. Steps 5-6: fullness retains inner-horn fillers and the equivalence witnesses. Small cases checked: K=A, K empty, A empty, N([1]) over a point (no marked lift claimed), r=id, only degenerate markings. No duplicates: rg over dag/nodes for marked, replete, closed under equivalence, cocartesian image and 01F1; the categorical-pattern and section-restriction nodes differ. The consumer (coherent-module-section-model, step 8) matches the item's form. I accept the two split_report tool_uses (generic horn lemmas of sk-prop-sf-cbc). No SGA is cited; this is not a target node. The sources (Kerodon 01F1/01DK/01H0/019F, HTT 2.4.1.7) are not archived and the guard blocks network access; I checked the tags from memory, and the proof rests only on the DAG statements, with proof_origin agent. Size note: the horn lemma assumes small quasicategories and the item does not; this is covered by the universe convention, so I added no hypothesis. One fix: the item's source.place cited the dual of HTT 2.4.4.3, the mapping-space criterion, which no step uses. I replaced it with 01DK, 01H0/019F and the dual of HTT 2.4.1.7 in fixes/dag/nodes/sec-six-functors/lem-coef-inert-marked-restriction-fibration.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
