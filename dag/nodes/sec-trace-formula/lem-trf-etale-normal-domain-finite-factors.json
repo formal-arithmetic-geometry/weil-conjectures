@@ -11,9 +11,131 @@
   "def-weil-pbc-normal-ring",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If B is the zero ring, take n=0: the unique map from B to the empty product is an A-algebra isomorphism. Henceforth suppose B is nonzero. This case distinction does not impose any extra hypothesis in the conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C, empty finite product convention; elementary zero-ring case"
+   }
+  },
+  {
+   "text": "For every prime p of A, the localization-normal-domain lemma makes A_p a normal domain; hence A is a normal ring by definition. Apply etale normality ascent to A -> B to obtain that B is a normal ring. Thus every B_q is a domain and consequently reduced: if x^m=0 in a domain, repeated cancellation gives x=0. The jointly-injective prime-localizations lemma now gives that B is reduced.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-prime-localizations-jointly-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GY, 00GV, 033C and 00HN: normal localizations, etale ascent and detection of reducedness"
+   }
+  },
+  {
+   "text": "The definition of etale gives that Spec B -> Spec A is locally of finite presentation. Apply the affine-opens finite-presentation lemma to the whole affine opens Spec B and Spec A. By the Spec-map global-sections identification the resulting ring map is the given A -> B. Therefore B is finitely presented, in particular it is generated as an A-algebra by finitely many elements b_1,...,b_r (the images of the presentation variables).",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-spec-map-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ (1) => (2), applied to the whole affine spectra; Schemes Tags 01HV and 01I2 for the natural global-sections identification"
+   }
+  },
+  {
+   "text": "Put S=A\\{0}, K=Frac(A)=S^{-1}A, let W be the image of S in B, and put C=W^{-1}B. The fraction construction gives a K-algebra structure on C by (a/s)(b/t)=ab/(st), where images in B are understood; the fraction equivalence relation makes this well-defined. The images of b_1,...,b_r generate C over K: write any b/t as P(b_1,...,b_r)/t and replace each coefficient a of P by a/t in K. Thus C is a finite-type K-algebra. This constructs the algebra and its generators directly, without invoking a generic-fibre comparison theorem.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00CM and Definition Tag 07JZ: fraction construction and its operations"
+   }
+  },
+  {
+   "text": "Every ideal of the field K is either zero or K (a nonzero element of an ideal has an inverse), so K is Noetherian. Since C is a finite-type K-algebra, the finite-type-algebra Noetherian lemma makes C Noetherian. The Noetherian minimal-prime lemma therefore says that C has finitely many minimal primes. No Noetherian assertion about A or B is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN and 00FR: finite-type algebras over Noetherian rings and finite minimal primes"
+   }
+  },
+  {
+   "text": "Let q be any minimal prime of B, and let p be its contraction to A. The etale-algebra flatness lemma and flat going-down, applied to the primes (0) subset p of the domain A, give a prime q_0 subset q contracting to (0). Minimality of q forces q_0=q, so p=(0). In particular q avoids W: the image of a nonzero s in A cannot belong to q.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS, flat going-down; etale flatness as in Tag 00U2"
+   }
+  },
+  {
+   "text": "Apply clause (1) of the general localization-prime correspondence to B -> C and W. For a minimal prime q of B, Step 6 shows q avoids W, so qC is a prime of C with contraction q. It is minimal: if r is a prime of C contained in qC, its contraction is a prime of B contained in q, hence equals q; the inverse identities of the correspondence then give r=qC. Distinct q give distinct qC because contraction recovers q. We have injected the minimal primes of B into the finite set of minimal primes of C from Step 5. Hence B has finitely many minimal primes.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3: extension and contraction of primes for an arbitrary multiplicative subset; elementary restriction of that bijection to minimal primes"
+   }
+  },
+  {
+   "text": "The ring B is reduced and normal by Step 2, and has finitely many minimal primes by Step 7. Apply implication (1) => (3) of the reduced-normal total-fractions criterion to B. It gives a finite list of normal integral domains B_1,...,B_n and a ring isomorphism theta:B -> product_j B_j. The reducedness and finite-minimal-prime hypotheses of that criterion have both been verified.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C, implication (1) => (3)"
+   }
+  },
+  {
+   "text": "Give each B_j the A-algebra structure a |-> pr_j(theta(a*1_B)). Then theta sends the structure image of a to the tuple of these coordinate images, so theta is an A-algebra homomorphism. Its inverse also respects A because theta is injective and theta(structure_B(a))=structure_product(a). Thus the ring isomorphism in Step 8 is an A-algebra isomorphism. The domains and their normality are unchanged. Together with Step 1 this proves every clause, including n=0 and the absence of any Noetherian hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C, elementary transport of the given A-algebra structure along the resulting ring isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-spec-map-global-sections",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Combination of Tags 033C, 00FN, 00FR, 00HS and 00E3 to verify the hypotheses of Tag 030C (1) => (3); the fraction-generation and A-algebra upgrade arguments are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -28,7 +150,7 @@
    "query": "Algebra.Etale, IsIntegrallyClosed",
    "results": "{\"t\": \"2026-10-17T20:59:56Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
-   "verdict": "no match: hits do not state this henselization theorem",
+   "verdict": "no match: no result for the normal-domain finite-factor statement (the earlier henselization wording was a copied verdict typo)",
    "digest": "4f53cda18c2baa0c"
   },
   {
@@ -36,7 +158,7 @@
    "query": "etale.*normal|normal.*etale|etale.*isDomain|isDomain.*etale",
    "results": "{\"t\": \"2026-10-17T20:59:55Z\", \"tool\": \"grep\", \"query\": \"etale.*normal|normal.*etale|etale.*isDomain|isDomain.*etale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
-   "verdict": "no match: hits do not state this henselization theorem",
+   "verdict": "no match: no result for the normal-domain finite-factor statement (the earlier henselization wording was a copied verdict typo)",
    "digest": "4f53cda18c2baa0c"
   },
   {
@@ -46,10 +168,50 @@
    "date": "2026-10-18",
    "verdict": "no match: field-base decomposition only, not arbitrary normal-domain base",
    "digest": "94485d60b0cb1ffc"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*normal|normal.*etale|Etale.*IsIntegrallyClosed|IsIntegrallyClosed.*Etale",
+   "results": "{\"t\": \"2026-10-17T21:16:35Z\", \"tool\": \"grep\", \"query\": \"etale.*normal|normal.*etale|Etale.*IsIntegrallyClosed|IsIntegrallyClosed.*Etale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: field-base product decompositions and finite-presentation/descent results do not give finite normal-domain factors over an arbitrary normal-domain base",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebra over an integrally closed domain decomposes into finitely many integrally closed domains",
+   "results": "{\"t\": \"2026-10-17T21:16:35Z\", \"tool\": \"leansearch\", \"query\": \"Etale algebra over an integrally closed domain decomposes into finitely many integrally closed domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.recOn\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.comp\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"426a598b23f5cb9b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: field-base product decompositions and finite-presentation/descent results do not give finite normal-domain factors over an arbitrary normal-domain base",
+   "digest": "426a598b23f5cb9b"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-17T21:16:35Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: field-base product decompositions and finite-presentation/descent results do not give finite normal-domain factors over an arbitrary normal-domain base",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale algebra over a normal integral domain is a finite product of normal integral domains",
+   "results": "{\"t\": \"2026-10-17T21:16:37Z\", \"tool\": \"leanfinder\", \"query\": \"An etale algebra over a normal integral domain is a finite product of normal integral domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.etale_algebraMap\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"Algebra.Etale.finitePresentation\", \"Algebra.instEtaleOfIsStandardEtale\"], \"digest\": \"2914b4a3b0469a1d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: field-base product decompositions and finite-presentation/descent results do not give finite normal-domain factors over an arbitrary normal-domain base",
+   "digest": "2914b4a3b0469a1d"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented smooth algebra over an integrally closed integral domain has a finite decomposition into integrally closed domains",
+   "results": "{\"t\": \"2026-10-17T21:16:47Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely presented smooth algebra over an integrally closed integral domain has a finite decomposition into integrally closed domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"instFintypeAlgEquivOfIsDomainOfIsIntegrallyClosedOfFiniteOfIsTorsionFree\", \"IsIntegralClosure.finite\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Ring.instFiniteNormalClosure\", \"Ring.instFiniteNormalClosure_1\"], \"digest\": \"720577bf32231f35\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: field-base product decompositions and finite-presentation/descent results do not give finite normal-domain factors over an arbitrary normal-domain base",
+   "digest": "720577bf32231f35"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-normal-tensor-component-join-model",
@@ -77,5 +239,40 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-normal-domain-finite-factors",
+  "worker": "stage1",
+  "group": "Q76",
+  "summary": "Verified the non-Noetherian statement and split it into normality/reducedness, finite presentation, finite-type localization over the fraction field, going-down and minimal-prime injection, and the finite normal-domain decomposition with its A-algebra upgrade. All ingredients already have nodes; no new nodes or Mathlib leaves. Searches found only the stronger field-base specialization, not the item.",
+  "blueprint": "Historical algebra auxiliary below lem-trf-local-term-locality, through lem-trf-normal-tensor-component-join-model: supplies the normal-domain factors in the etale neighborhood used for the Theorem 6.3 component realization. It does not replace any step of the current contracting-correspondence route of sk-i-curve-zero; blueprint ancestry and via are preserved, and whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic etale ascent of normality; the trace-formula unit has no replacement ring-theoretic normality lemma."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic prime correspondence for an arbitrary multiplicative subset; only clause (1) is used, to inject minimal primes into those of the fraction-field localization."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic reduced normal finite-minimal-prime criterion, precisely implication (1) to (3), after separately verifying its hypotheses; not a replacement of a trace-formula step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q76-9a4a5a568",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q76-9a4a5a568 (reviewer sub-agent of L); spot-checked: Reviewed the item, report, DAG instructions, unit route, all cited nodes and local Stacks sources. The nine-step proof correctly handles the zero ring, normality/reducedness, finite presentation, generic localization, finite minimal primes, flat going-down, prime correspondence, Tag 030C decomposition, and the A-algebra structure. Edge cases and non-Noetherian hypotheses check out; no route-pivot or SGA violation, duplicate, hidden long-step lemma, or repair is required. Review written to review.md."
  }
 }

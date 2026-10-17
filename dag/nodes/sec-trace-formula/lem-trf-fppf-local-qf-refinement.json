@@ -12,11 +12,44 @@
   "def-pc-fppf-site",
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation",
-  "pqf-def-quasifinite"
+  "pqf-def-quasifinite",
+  "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take the empty indexing family; all requested assertions are vacuous. Otherwise, joint surjectivity of the given fppf covering [def-pc-fppf-site] says that for every point $s\\in S$ there are an index $i(s)\\in I$ and a point $x_s\\in S_{i(s)}$ mapping to $s$. Choose these data for all $s$; the point-indexed family is small in the fixed universe of [def-weil-size-convention]. If $I=\\varnothing$, the same joint-surjectivity condition forces $S=\\varnothing$, already covered.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0572 proof, first sentence; Tag 021L fppf-covering definition and the project size convention"
+   }
+  },
+  {
+   "text": "For each chosen pair $(s,x_s)$ over $S_{i(s)}$, apply [lem-trf-fppf-local-qf-neighbourhood] to the flat locally finitely presented morphism $S_{i(s)}\\to S$ and the image point $s$. It gives a scheme $T_s$, a map $T_s\\to S_{i(s)}$, and a structural map $g_s:T_s\\to S$ whose composite is the original map, with $s\\in g_s(T_s)$ and $g_s$ flat, locally of finite presentation, and locally quasi-finite. The family $(g_s)_{s\\in S}$ is jointly surjective because its member indexed by $s$ contains $s$ in its image, and each member factors through the original covering member $S_{i(s)}\\to S$. Thus it is the required small refinement.",
+   "uses": [
+    "lem-trf-fppf-local-qf-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0572, lemma-qf-fp-flat-dominates-fppf, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "lem-trf-fppf-local-qf-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0572, lemma-qf-fp-flat-dominates-fppf, proof; its pointwise input is Tag 0571"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +81,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-etale-finite-free-refinement",
@@ -79,5 +112,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-local-qf-refinement",
+  "worker": "stage1",
+  "summary": "Audited Tag 0572. Added the missing statement-only Tag 0571 neighbourhood lemma, then applied it pointwise to the members of the given fppf covering and assembled the small jointly-surjective refinement. The imported statement is unchanged apart from adding the explicit size-convention dependency needed for the small point-indexed family; empty base and empty indexing cases are handled.",
+  "blueprint": "Tag 0572 proof, first paragraph, in the etale/ph descent chain under lem-trf-local-term-locality: the new node realizes the pointwise Tag 0571 input, and the two item steps realize the pointwise application and assembly of the locally quasi-finite refinement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q89-fca4dc73e",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-fca4dc73e (reviewer sub-agent of L); spot-checked: Read both delivered nodes and all proof steps against Stacks 0571 and 0572. Hypotheses, factorization maps, smallness and empty cases check out; no duplicate or restated split found. No long steps or dropped-route dependencies. No fixes needed; review.md records the checks."
  }
 }

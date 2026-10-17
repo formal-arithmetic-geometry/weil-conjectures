@@ -9,19 +9,104 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-weil-pbc-quasi-compact-scheme",
   "def-sc-invertible-module",
   "def-sc-invertible-section-ring",
   "def-pc-proj",
   "def-weil-pbc-proj-twisting-sheaf",
   "def-pur-sheaf-tensor-product",
   "def-pc-module-pullback",
-  "def-sc-section-generating-locus",
-  "def-weil-pbc-ample-invertible-module"
+  "def-sc-section-generating-locus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P=\\operatorname{Proj}(A)$ and $s_f=\\psi(f)$ for homogeneous $f$ of positive degree $e$. The canonical $r$ and graded comparison in the statement are obtained by extending $\\psi$ after inverting $f$ on $T_{s_f}$. Explicitly, in degree $m\\ge0$ this extension sends $b/f^q\\in(A_f)_m$, with $b\\in A_{m+qe}$, to $\\psi(b)/s_f^q$. Here division means the inverse of tensoring with the generator $s_f^q$; degree zero gives the functions map defining $r$ on this chart. The formula is forced by $f\\cdot f^{-1}=1$ and the prescribed image of every $b/1$. The twisting-sheaf definition identifies these fractions with chart sections and identifies the global section $b$ with $b/1$. In particular $\\theta_m(r^*b)=\\psi(b)$ for $b\\in A_m$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-section-ring",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+   }
+  },
+  {
+   "text": "The opens $W_a=V\\cap T_{\\psi(a)}$, for $a\\in A_d$, cover $V$. Indeed at any $x\\in V$ trivialize the invertible module $L^{\\otimes d}$ and write the germs of $\\psi(a)$ as coefficients $c_a$ times its basis. Generation says that a finite sum $\\sum h_ac_a=1$ in the local ring $\\mathcal O_{T,x}$. If all $c_a$ lay in its maximal ideal so would this sum; hence one is a unit. The corresponding section generates on a neighbourhood of $x$, exactly membership in its generating locus. Tensor powers are locally rank one because tensoring a local basis of $L$ with itself gives a basis. No finite subcover or quasi-compactness is used.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+   }
+  },
+  {
+   "text": "For $a\\in A_d$, multiplication by $a$ gives an isomorphism $\\mathcal O_{D_+(a)}\\to\\mathcal O_P(d)|_{D_+(a)}$. To see this on a basis of subopens $D_+(g)\\subseteq D_+(a)$, use the twisting-sheaf chart formula: the map is $(A_g)_0\\to(A_g)_d$, $u\\mapsto au$. The element $a$ is invertible in $A_g$, with inverse homogeneous of degree $-d$, so $v\\mapsto a^{-1}v$ is its inverse. For completeness, a relation $g^N=ca$ gives $a^{-1}=c/g^N$ of degree $-d$. Localization restrictions commute with multiplication by both $a$ and $a^{-1}$, so these inverse maps define inverse sheaf maps. The global degree-$d$ section $a$ is precisely this basis section, since it restricts to $a/1$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+   }
+  },
+  {
+   "text": "Restrict to $W_a$. The canonical chart construction has $r(W_a)\\subseteq D_+(a)$. Pullback of the inverse maps of Step 3 again gives inverse maps. In the tensor definition of pullback the basis is $1\\otimes a$, since $\\mathcal O_{W_a}\\otimes_{r^{-1}\\mathcal O_P}r^{-1}\\mathcal O_P\\simeq\\mathcal O_{W_a}$ by $u\\otimes v\\mapsto u\\,r^\\sharp(v)$, inverse $u\\mapsto u\\otimes1$. Meanwhile the nonvanishing-section trivialization applied to $L^{\\otimes d}$ identifies $L^{\\otimes d}|_{W_a}$ with $\\mathcal O_{W_a}$ through the basis $\\psi(a)$. Step 1 shows that $\\theta_d$ sends $1\\otimes a$ to $\\psi(a)$, so in these bases it is the identity. It is therefore invertible on every $W_a$. Its local inverses agree on intersections because they invert the same map, and glue by the sheaf condition to a global inverse on $V$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+   }
+  },
+  {
+   "text": "If another $\\mathcal O_V$-linear comparison carries every pulled-back $a\\in A_d$ to $\\psi(a)|_V$, its restriction to $W_a$ agrees with $\\theta_d$ on the basis $1\\otimes a$ of Step 4. Linearity makes the two maps agree on every section on every subopen of $W_a$. Since the $W_a$ cover $V$, the sheaf condition makes the maps equal on $V$. This proves uniqueness among all comparisons, not just among isomorphisms. For empty $V$ all these sheaves have exactly one section on the empty open and the same argument gives the unique isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+   }
+  },
+  {
+   "text": "Finally check graded multiplication directly, without assuming multiplication of Proj twists is globally invertible. On a canonical chart $T_{s_f}$, take fractions $b/f^p$ and $c/f^q$ of degrees $m$ and $n$. Multiplication of the shifted modules is multiplication in $A_f$, hence their product is $bc/f^{p+q}$. The formula of Step 1 gives\n$$\\frac{\\psi(bc)}{s_f^{p+q}}=\\frac{\\psi(b)}{s_f^p}\\,\\frac{\\psi(c)}{s_f^q},$$\nbecause $\\psi$ is a graded ring map and multiplication in the section ring is tensor multiplication. The tensor definition of pullback extends this identity bilinearly to coefficients in $\\mathcal O_T$; the sheaf tensor product is the sheafification of the sectionwise tensor, so pure-tensor equality gives equality of the two sheaf maps. The charts cover $U(\\psi)$, so the equality holds there and after restriction to any common open. In particular the isomorphisms in any positive generated degrees are the components of this same multiplication-compatible comparison, as required.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-section-ring",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction and uniqueness; Tag 01N8 (lemma-converse-construction), local bases and their overlap comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-generating-locus",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK (lemma-invertible-map-into-proj), graded-localization construction; Tag 01N8 (lemma-converse-construction), explicit local bases, uniqueness, and multiplication compatibility."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +128,52 @@
    "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Proj.pullbackAwayιIso, Proj.fromOfGlobalSections",
+   "results": "{\"t\": \"2026-10-17T21:14:18Z\", \"tool\": \"loogle\", \"query\": \"Proj.pullbackAwayιIso, Proj.fromOfGlobalSections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Proj.pullbackAwayιIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Proj morphism from generated sections of an invertible sheaf gives a twist isomorphism",
+   "results": "{\"t\": \"2026-10-17T21:14:19Z\", \"tool\": \"leansearch\", \"query\": \"Canonical Proj morphism from generated sections of an invertible sheaf gives a twist isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.π\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.isIso_toSpecΓ\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\"], \"digest\": \"d25ecfdb22008a36\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an open subscheme where degree d sections of an invertible sheaf generate, the canonical map to Proj pulls back O(d) to the sheaf",
+   "results": "{\"t\": \"2026-10-17T21:14:27Z\", \"tool\": \"leanfinder\", \"query\": \"On an open subscheme where degree d sections of an invertible sheaf generate, the canonical map to Proj pulls back O(d) to the sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc\"], \"digest\": \"00b35586473887bc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Proj.fromOfGlobalSections, Proj.pullbackAwayιIso, Module.Invertible",
+   "results": "{\"t\": \"2026-10-17T21:14:27Z\", \"tool\": \"loogle\", \"query\": \"Proj.fromOfGlobalSections, Proj.pullbackAwayιIso, Module.Invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Proj.fromOfGlobalSections'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|pullbackAwayιIso|twist",
+   "results": "{\"t\": \"2026-10-17T21:14:27Z\", \"tool\": \"grep\", \"query\": \"fromOfGlobalSections|pullbackAwayιIso|twist\", \"sub\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of Proj twisting sheaf along canonical morphism from generated invertible sheaf sections is an isomorphism",
+   "results": "{\"t\": \"2026-10-17T21:14:28Z\", \"tool\": \"leansearch\", \"query\": \"pullback of Proj twisting sheaf along canonical morphism from generated invertible sheaf sections is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso.congr_simp\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\"], \"digest\": \"c6272f6d4d14d319\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proj-canonical-map-twist-comparison",
@@ -58,7 +185,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Section-algebra/Proj ampleness criterion: the graded comparison theta and the final assertion of Tag 01NK, with Tag 01N8 applied on a common positive degree.",
+   "place": "Section-algebra/Proj ampleness criterion: canonical generation-locus map, generated-open twist comparison, and compatibility of comparisons in different positive degrees.",
    "via": [
     "lem-trf-proj-canonical-map-twist-comparison",
     "lem-trf-scheme-ample-canonical-proj-criterion",
@@ -77,5 +204,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proj-invertible-map-twist-iso",
+  "worker": "stage1",
+  "summary": "Proved the generated-open twist comparison directly: localized graded comparison, generating-open cover, explicit inverse multiplication on Proj twists, tensor pullback of bases, uniqueness, and multiplication on homogeneous fractions. Reused existing nodes only; no new nodes or Mathlib leaves. Removed unused quasi-compactness and ampleness statement dependencies; the statement itself is unchanged.",
+  "blueprint": "Realizes the section-algebra/Proj criterion under lem-trf-local-term-locality: canonical generation-locus morphism, Tag 01N8 local pullback comparison, and Tag 01NK uniqueness/compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Step 3 uses its explicit localization restriction and denominator relation to construct inverse sheaf maps on a basic-open basis; this general graded-module sheaf theorem is not supplied by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Step 4 uses the generic trivialization by a nonvanishing invertible-module section, with no quasi-compactness assumption; this is a general sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q114-95369c168",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q114-95369c168 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all cited DAG statements, unit/chapter route, and Stacks Tags 01NK/01N8. Six steps are mathematically sound, dependencies and tool uses are valid, edge cases checked, no duplicate or route violation found, and no new nodes were delivered. Review written to review.md."
  }
 }
