@@ -343,5 +343,31 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-17b231210 (reviewer sub-agent of L); spot-checked: I read the item and all 15 steps in full, plus the statement of every cited node. Shape: one commit, only the item and the report; no new nodes; proof_deps equals the union of the step uses; no cycle (the item is not in its 163-node closure); its only citer is lem-coef-brown-finite-direct-rectification step 6, which uses exactly the section clause. Steps 1-6 are elementary and I rechecked them: the graph factorization gives d in T, and e in T when f is in W; the Brown axioms hold in C(b); pullback preserves weak equivalences between fibrations; the section case of right properness, including the identification j*E_0 = E via dj=1; and the general case through the iterated pullback. Step 3 meets every hypothesis of lem-coef-trivial-fibration-fraction-model (T=F∩W contains isomorphisms and is closed under composition and pullback; split factorization). Step 7: the item's slice is exactly S_y of lem-coef-infinity-slice-arrow-equivalence. Singleton-shape cone calculus gives hofib_p(Map(x,y)->Map(x,d)). Homotopy-fiber detection and the mapping-composition criterion give conservativity. Steps 9-12: I verified the comma isomorphisms (U|a) = R_{C(x)}(1_x,y_a) and (U|a_p) = R_{C(b)}(p,r) on objects and morphisms. The transitions are postcompositions with h_y, which is in W by right properness. B/a_p -> B is a discrete fibration with a contractible domain. The Quillen-B node is applied as stated, and I checked that it is true. The claim in step 12 that the composite is G_b's map is the most condensed point; the naturality clauses of the fraction-model statement support it. Steps 13-15 cover essential surjectivity with arbitrary z, the full-essential-image quasi-inverse, and a strict section ta=s whose slice homotopy keeps the triangle. Small cases b=1, W=isomorphisms, W=all arrows and Kan complexes are all consistent. No duplicate among the Brown/slice nodes. The tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is accepted as a generic cone formula. Not a target node, so no base-change morphism or coefficient category is involved. No SGA. Source: Cisinski CatLR 7.5.18/7.6.13 is not archived in literature/; the delivery records it as WANTED and marks the proof agent-written. I verified the mathematics independently. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-024532933",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Item node vs Lean matched clause by clause: BrownFibrantAxioms fields (terminal with F-arrows, isos in W/F, 2-of-3 incl. composition, retracts, F composition, pullback existence along F, F and F⊓W base change, pointwise W-then-F factorization), fibrant slice via Mathlib overObj/over, IsBrownSliceComparison determines the canonical simplexwise comparison, IsLocalization of j plus induced equivalence clause (equivalent, not stronger), section clause as slice mapping-space vertex with a 2-simplex τ of faces q(s,id), h, q(a,p) and a≫p=s exact. Edge cases (empty category, W=isos, W=F=all, b terminal, p=id, all n) and universes (max u v t, no equalities) are fine. No hollow defs, sorry only in main theorem, docstrings with source/blueprint and 15 steps, statement verbatim, node changed only in lean, report has Worker report and a real Second reading by Q52, no duplicates found in Mathlib or project. nt_compile.py --json on snapshot file against the local side overlay: clean, exit 0 (diagnostics sanity-checked). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownSliceFractionCalculus",
+  "declaration": "HomotopicalAlgebra.brown_slice_fraction_calculus",
+  "declarations": [
+   "HomotopicalAlgebra.BrownFibrantAxioms",
+   "HomotopicalAlgebra.brownFibrantSlice",
+   "HomotopicalAlgebra.brownSliceProperty",
+   "HomotopicalAlgebra.IsBrownSliceComparison",
+   "HomotopicalAlgebra.brown_slice_fraction_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BrownSliceFractionCalculus.lean",
+  "statement": "theorem brown_slice_fraction_calculus (C : Type u) [Category.{v} C] (W F : MorphismProperty C) (h : BrownFibrantAxioms C W F) (L : SSet.{max u v t}) (q : largeNerve.{u, v, t} C ⟶ L) (hq : IsLocalization W q) : (∀ b : C, BrownFibrantAxioms (brownFibrantSlice F b) (brownSliceProperty F W b) (brownSliceProperty F F b) ∧ ∃ j : largeNerve.{max u v, v, t} (brownFibrantSlice F b) ⟶ rightVertexSlice L (object q b), IsBrownSliceComparison F q b j ∧ IsLocalization (brownSliceProperty F W b) j ∧ ∀ (K : SSet.{max u v t}) (r : largeNerve.{max u v, v, t} (brownFibrantSlice F b) ⟶ K), IsLocalization (brownSliceProperty F W b) r → ∃ E : K ⟶ rightVertexSlice L (object q b), IsFunctorEquivalence E ∧ AreNaturallyEquivalent (r ≫ E) j) ∧ ∀ (P T : C) (p : T ⟶ P), F p → ∀ (i e : (rightVertexSlice L (object q P)) _⦋0⦌), i.val = q.app (op ⦋1⦌) (ULift.up (ComposableArrows.mk₁ (𝟙 P))) → e.val = q.app (op ⦋1⦌) (ULift.up (ComposableArrows.mk₁ p)) → ∀ h : (mappingSpace (rightVertexSlice L (object q P)) i e) _⦋0⦌, ∃ (Z : C) (s : Z ⟶ P) (a : Z ⟶ T), F s ∧ W s ∧ a ≫ p = s ∧ ∃ (S A : (rightVertexSlice L (object q P)) _⦋1⦌) (τ : (rightVertexSlice L (object q P)) _⦋2⦌), S.val = q.app (op ⦋2⦌) (ULift.up (ComposableArrows.mk₂ s (𝟙 P))) ∧ A.val = q.app (op ⦋2⦌) (ULift.up (ComposableArrows.mk₂ a p)) ∧ (rightVertexSlice L (object q P)).δ 2 τ = S ∧ (rightVertexSlice L (object q P)).δ 0 τ = h.val ∧ (rightVertexSlice L (object q P)).δ 1 τ = A",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helpers package this node’s Brown hypotheses, its full fibrant slice and underlying morphism classes, and the degreewise canonical slice comparison. Reuses the existing coherent localization, lifted nerve, right-vertex slice, mapping spaces and coherent equivalences. The section conclusion retains its specified slice triangle by a two-simplex with the localized strict fraction legs as faces."
  }
 }

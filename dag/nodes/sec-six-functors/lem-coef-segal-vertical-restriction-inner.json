@@ -262,5 +262,28 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-16afd24a3 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the source in full. The source is Joyal–Tierney arXiv math/0607820, which is not archived and is listed as WANTED; I read it online. Their right cancellation (u and vu in A imply v in A) and Lemma 3.5 (spines I_n give all mid anodyne maps, so all inner horns) agree with the new node. The new node's saturation hypotheses are stronger than Definition 7.4: it adds coproducts and asks for arrow retracts instead of codomain retracts. Proposition 3.4(v), Corollary 3.6 and Proposition 3.10 at X->1 give the item exactly, with no completeness or Kan condition on S or T. Steps: (1) the division node's 'vertical Reedy fibration iff a\\f Kan for every monomorphism a', taken at W->*, gives Kan W_p and endpoint fibrations. (2) P_m is Kan by the explicit horn argument; path-comparison with d_1 as the fibrant leg, invariance with identity on W_1 and W_0, and two-out-of-three make W_m -> I_m\\W a weak equivalence. The homotopy product is read as left-bracketed, which is harmless. (3) Kan fibration plus weak equivalence is a trivial fibration, so lifting against delta_q, q>=0, characterises the class; (vu)\\W=(u\\W)(v\\W) gives right cancellation in the correct direction. (4) The division bijection and two Mathlib leaves give the closures. (5) The new node applies. (6) The transpose lifts against a trivial fibration. (7) W/empty = *. Small cases: n=2, and n=3 with i=1,2 by attaching triangles along their spines; also empty W, empty T, S=T, and discrete nerves. No duplicate in the DAG: lem-cbc-spine-inner-anodyne is the reverse implication. No cycle (the closure of 257 nodes does not contain the item). Everything is in the unit or is a definition or Mathlib leaf, so there are no tool_uses. No SGA. One form fault, B/brief §3: the new node lacked lean_audit. The fix adds master and slopmaster2 state none in fixes/dag/nodes/sec-six-functors/lem-coef-spine-cancellation-inner-horns.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a08037ad5",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Node changes only in its lean field; lean.statement matches the signature verbatim. Every clause matches: Reedy fibrancy via the relative matching of terminal.from W over (monomorphisms Δ).op, which is the usual M_n W; the homotopy Segal hypothesis is the exact definition used by the DK dependency; W/T = W ⋙ coyoneda.obj (op T) and restriction f ↦ v ≫ f, both checked by rfl; degreewise injectivity; Mathlib Quasicategory and InnerFibration (inner horns only). No completeness, Kan or universe restriction added; single universe u. Reedy fibrancy makes the homotopy Segal hypothesis equivalent to the strict one in Joyal-Tierney Prop. 3.4(v), Cor. 3.6 and Prop. 3.10 at X -> 1. Edge cases T empty, W empty, S empty, identity v, non-Kan S and T, n=2 checked. No duplicate definition: SegalInverse.mappingComplex is the left division; the division-calculus node has no Lean. Helpers are real co-Yoneda data with standard axioms only; source and blueprint docstrings present; the theorem docstring gives proof steps 1-7; only sorry. nt_compile clean (rc=0, no warnings; the lakefile sets warn.sorry=false). Report has a Worker report and a Second reading by Q35. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalVerticalRestrictionInner",
+  "declaration": "SSet.segal_vertical_restriction_inner",
+  "declarations": [
+   "SSet.segalVerticalDivision",
+   "SSet.segalVerticalRestriction",
+   "SSet.segal_vertical_restriction_inner"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalVerticalRestrictionInner.lean",
+  "statement": "theorem segal_vertical_restriction_inner (W : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (hReedy : Reedy.rightClass (monomorphisms SimplexCategory).op (fibrations SSet.{u}) (terminal.from W)) (hSegal : HomotopySegal.IsHomotopySegalSpace W) : (∀ T : SSet.{u}, Quasicategory (segalVerticalDivision W T)) ∧ ∀ (S T : SSet.{u}) (v : S ⟶ T), (∀ n : SimplexCategoryᵒᵖ, Function.Injective (v.app n)) → InnerFibration (segalVerticalRestriction W v)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
