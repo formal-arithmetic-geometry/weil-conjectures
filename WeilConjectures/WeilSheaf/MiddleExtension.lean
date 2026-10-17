@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
+public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
@@ -42,17 +43,6 @@ every dense open subset.
 universe u
 
 open CategoryTheory Topology TopologicalSpace
-
-/-- In a Noetherian space, a dense open subset contains the generic points of all irreducible
-components: the complement of the other components is a nonempty open subset of a component,
-which meets the dense open. -/
-theorem genericPoints_subset_of_isOpen_of_dense {α : Type*} [TopologicalSpace α]
-    [NoetherianSpace α] {U : Set α} (hU : IsOpen U) (hd : Dense U) : genericPoints α ⊆ U := by
-  intro c hc
-  obtain ⟨o, ho, hne, hoZ⟩ :=
-    NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent _ hc
-  obtain ⟨v, hvo, hvU⟩ := hd.inter_open_nonempty o ho hne
-  exact (specializes_iff_mem_closure.2 (hoZ hvo)).mem_open hU hvU
 
 namespace AlgebraicGeometry
 
