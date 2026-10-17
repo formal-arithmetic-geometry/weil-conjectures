@@ -226,7 +226,7 @@ lemma isZero_upperStar_supportedSections (U : X.Opens) :
   exact @IsZero.of_mono_eq_zero _ _ _ _ _ _ hmono h0
 
 /-- The unit `F ⟶ j_* j^* F` on sections over `W` is the restriction to `W ×_X U`. -/
-lemma openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app (U : X.Opens)
+lemma openImmersionRestrictionLowerStarAdjunction_ι_unit_app_hom_app (U : X.Opens)
     (W : X.Etale) :
     ((openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).unit.app
         F).hom.app (op W) =
@@ -240,7 +240,7 @@ lemma exists_supportedSectionsι_app_eq (U : X.Opens) {W : X.Etale} (z : F.obj.o
     (hz : ∀ w : W.left, W.hom w ∈ U → w ∈ sectionVanishingLocus F z) :
     ∃ z', (supportedSectionsι F U).hom.app (op W) z' = z := by
   refine exists_kernel_ι_hom_app_eq _ z ?_
-  rw [openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app]
+  rw [openImmersionRestrictionLowerStarAdjunction_ι_unit_app_hom_app]
   let c := (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ U.ι inferInstance trivial).counit.app W
   have key : F.obj.map c.op z = 0 := by
     refine eq_zero_of_forall_mem_sectionVanishingLocus (F := F) fun v ↦
