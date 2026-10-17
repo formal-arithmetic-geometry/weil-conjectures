@@ -62,15 +62,45 @@
    }
   },
   {
-   "text": "We check precisely how the object bijection $e\\mapsto F_e$ treats equivalences. Let $I=N(\\{0\\cong1\\})$ be the invertible interval of the cited interval theorem. For any small $R$, projection $R\\times I\\to R$ is a categorical equivalence. Indeed it has the section at $0$; the unique arrows $0\\to i$ in the two-object groupoid give a natural isomorphism from its constant-$0$ endofunctor to its identity, hence a simplicial homotopy on $R\\times I$. For every quasicategory $Q$, precomposition gives quasi-inverse functors on the functor objects: the remaining composite is naturally equivalent to the identity, because at each vertex its component is the image of an invertible groupoid arrow. The pointwise-equivalence theorem verifies that this is an equivalence edge, and the Joyal functor-equivalence test identifies the projection as a categorical equivalence. Therefore $\\overline B=L\\star(R\\times I)\\to B=L\\star R$ is a categorical equivalence by preservation under joins. The two endpoint sections agree on $L$, have composite identity with this projection, and induce a degreewise injection $B\\amalg_L B\\hookrightarrow\\overline B$: the two pure $R$ copies and mixed $L$-$R$ blocks are disjoint unless in the common pure $L$ summand. Thus this is a categorical mapping cylinder for $B$ relative to $L$. The relative categorical cylinder criterion says that $F_{e_0}$ and $F_{e_1}$ are equivalent vertices in $A_R$ exactly when there is a map $L\\star(R\\times I)\\to\\mathcal E$ restricting to $a$ on $L$ and to those two maps at the endpoints. By the sharp-join universal property this is the same as a map $R\\times I\\to J_a$ with endpoints $e_0,e_1$. Currying and the invertible-interval theorem in the quasicategory $\\operatorname{Fun}(R,J_a)$ say this is equivalent to a coherent natural equivalence between $e_0,e_1$. Here functor objects are quasicategories by the exponential-corner theorem. For completeness, isomorphism in $hQ$ is the same as existence of an equivalence edge: the triangle-calculus theorem represents an isomorphism and its inverse by edges and realizes both inverse equations by the two triangles required by the definition. All maps in this argument fix the prescribed boundary $a$ throughout the homotopy.",
+   "text": "Fix any small $R$ and put $I=N(\\{0\\cong1\\})$, with its two endpoint maps. By [lem-coef-invertible-interval-product-projection], projection $R\\times I\\to R$ is a categorical equivalence, without any quasicategory assumption on $R$.",
    "uses": [
-    "lem-coef-quasicategory-invertible-interval",
-    "lem-coef-infinity-pointwise-equivalences",
-    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-invertible-interval-product-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, expanded recognition of equivalence on sharp/fat adjoints via relative categorical cylinders; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "Put $B=L\\star R$ and $\\overline B=L\\star(R\\times I)$. The preceding projection induces a categorical equivalence $\\pi:\\overline B\\to B$ by [lem-coef-join-preserves-categorical-equivalences], using the identity equivalence on $L$. Its two endpoint sections satisfy $\\pi s_\\varepsilon=1_B$ and agree on $L$. The map $B\\amalg_L B\\to\\overline B$ is degreewise injective: the two pure $R$ summands have different constant $I$ coordinates; each mixed $L$-$R$ summand retains that endpoint coordinate; their only common simplices are the pure $L$ summand. Hence this is a categorical mapping cylinder relative to $L$, in the explicit sense of [lem-coef-relative-categorical-cylinder-criterion].",
+   "uses": [
     "lem-coef-join-preserves-categorical-equivalences",
+    "lem-coef-relative-categorical-cylinder-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, expanded recognition of equivalence on sharp/fat adjoints via relative categorical cylinders; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "Let $e_0,e_1:R\\to J_a$ and let $F_{e_0},F_{e_1}$ be their corresponding maps from $B$ as in step 2. The relative-cylinder criterion, with $A=L$, $Q=\\mathcal E$ and boundary $a$, says that $F_{e_0},F_{e_1}$ admit an equivalence edge in $A_R$ exactly when a map $\\overline B\\to\\mathcal E$ restricts to these maps on the endpoint copies of $B$. Its restriction to $L$ is then $a$. The natural sharp-join correspondence of [lem-coef-infinity-join-cocone-associativity] identifies such extensions bijectively with maps $R\\times I\\to J_a$ with endpoints $e_0,e_1$. This applies to the prescribed endpoints, not to maps merely equivalent on the boundary.",
+   "uses": [
     "lem-coef-relative-categorical-cylinder-criterion",
-    "lem-coef-infinity-join-cocone-associativity",
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, expanded recognition of equivalence on sharp/fat adjoints via relative categorical cylinders; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "Currying identifies these last maps with maps $I\\to\\operatorname{Fun}(R,J_a)$. This functor simplicial set is a quasicategory by [lem-coef-infinity-isofibration-exponentiation], applied to $\\varnothing\\hookrightarrow R$. The invertible-interval theorem says such a map exists with endpoints $e_0,e_1$ exactly when those vertices are isomorphic in its homotopy category. The triangle-calculus theorem identifies this with existence of an equivalence edge: represent an isomorphism and its inverse by edges, then realize both inverse equations by the two asserted triangles. Conversely those triangles imply the inverse equations. Thus the object bijection $e\\mapsto F_e$ preserves and reflects coherent natural equivalence. All cylinder extensions fix $a$ on the entire boundary $L$.",
+   "uses": [
     "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-quasicategory-invertible-interval",
     "lem-coef-homotopy-category-triangle-calculus"
    ],
    "elementary": false,
@@ -80,7 +110,7 @@
    }
   },
   {
-   "text": "For every small $R$, step 3 makes $e\\mapsto F_e$ a bijection on classes of vertices modulo coherent natural equivalence. Step 2's functor equivalence $r_R$ also induces a bijection on such classes, using its quasi-inverse and its two natural-equivalence witnesses. Their composite, by its explicit identification in step 2, is postcomposition with $c:J_a\\to P_a$. Use surjectivity at $R=P_a$ to get $g:P_a\\to J_a$ with $cg\\simeq1_{P_a}$. Whiskering by $c$ gives $c(gc)\\simeq c(1_{J_a})$. Injectivity at $R=J_a$ gives $gc\\simeq1_{J_a}$. These are exactly a quasi-inverse and the two coherent natural equivalences, so $c$ is a functor equivalence. Enlarge the universe once to contain these test shapes when needed; all constructions above hold in that universe. It is over $\\mathcal E$ strictly: restriction to the final block agrees with the apex map in the fat-join quotient in every simplicial degree.",
+   "text": "For every small $R$, steps 3–6 make $e\\mapsto F_e$ a bijection on classes of vertices modulo coherent natural equivalence. Step 2's functor equivalence $r_R$ also induces a bijection on such classes, using its quasi-inverse and its two natural-equivalence witnesses. Their composite, by its explicit identification in step 2, is postcomposition with $c:J_a\\to P_a$. Use surjectivity at $R=P_a$ to get $g:P_a\\to J_a$ with $cg\\simeq1_{P_a}$. Whiskering by $c$ gives $c(gc)\\simeq c(1_{J_a})$. Injectivity at $R=J_a$ gives $gc\\simeq1_{J_a}$. These are exactly a quasi-inverse and the two coherent natural equivalences, so $c$ is a functor equivalence. Enlarge the universe once to contain these test shapes when needed; all constructions above hold in that universe. It is over $\\mathcal E$ strictly: restriction to the final block agrees with the apex map in the fat-join quotient in every simplicial degree.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones"
    ],
@@ -106,7 +136,7 @@
    }
   },
   {
-   "text": "For $u:L'\\to L$ the sharp side restricts by $u\\star\\operatorname{id}$ and the fat side by $u\\diamond\\operatorname{id}$. For $v:R'\\to R$ the same is true in the final block. The collapse commutes with these maps: on a cylinder simplex with interval coordinate $t:[n]\\to[1]$, both composites take the $L$ coordinate on $t^{-1}(0)$ and the final coordinate on $t^{-1}(1)$. Postcomposition by any $\\mathcal E\\to\\mathcal E'$ also commutes with these formulas and all endpoint restrictions. Hence the comparisons are natural in shape, diagram, and target. On fixed-apex fibers these formulas agree with the natural pinch comparison, since both pinch maps split the same interval into its two blocks. For an apex arrow $h:T\\to T'$, the coherent fiber is $U_D(a,\\Delta_LT)$ and its transport sends a cocone $\\lambda$ to the coherent composite $\\Delta_L(h)\\lambda$; this retains the composition homotopies. The cocone projection itself supplies these transport diagrams, and $c$ is a map over $\\mathcal E$, hence takes a diagram over $h$ to the corresponding diagram over $h$. To make the transport interpretation precise, the sharp apex projection is a left fibration by reversing the right-fibration assertion in step 5. On the coherent side the fixed-source arrow projection in $D$ is a left fibration, by applying the fixed-target-arrow right-fibration theorem to $D^{\\mathrm{op}}$ and reversing simplices; $P_a$ is its pullback along $\\Delta_L$. The mapping-space opposite comparison in the opposite theorem identifies the reversed fibers. Thus these diagrams encode the usual coherent composition, including all higher apex compatibilities; no strictly chosen composition functor is required.",
+   "text": "For $u:L'\\to L$ the sharp side restricts by $u\\star\\operatorname{id}$ and the fat side by $u\\diamond\\operatorname{id}$. For $v:R'\\to R$ the same is true in the final block. The collapse commutes with these maps: on a cylinder simplex with interval coordinate $t:[n]\\to[1]$, both composites take the $L$ coordinate on $t^{-1}(0)$ and the final coordinate on $t^{-1}(1)$. Postcomposition by any $\\mathcal E\\to\\mathcal E'$ also commutes with these formulas and all endpoint restrictions. Hence the comparisons are natural in shape, diagram, and target. On fixed-apex fibers these formulas agree with the natural pinch comparison, since both pinch maps split the same interval into its two blocks. For an apex arrow $h:T\\to T'$, the coherent fiber is $U_D(a,\\Delta_LT)$ and its transport sends a cocone $\\lambda$ to the coherent composite $\\Delta_L(h)\\lambda$; this retains the composition homotopies. The cocone projection itself supplies these transport diagrams, and $c$ is a map over $\\mathcal E$, hence takes a diagram over $h$ to the corresponding diagram over $h$. To make the transport interpretation precise, the sharp apex projection is a left fibration by reversing the right-fibration assertion in step 8. On the coherent side the fixed-source arrow projection in $D$ is a left fibration, by applying the fixed-target-arrow right-fibration theorem to $D^{\\mathrm{op}}$ and reversing simplices; $P_a$ is its pullback along $\\Delta_L$. The mapping-space opposite comparison in the opposite theorem identifies the reversed fibers. Thus these diagrams encode the usual coherent composition, including all higher apex compatibilities; no strictly chosen composition functor is required.",
    "uses": [
     "lem-coef-infinity-blunt-sharp-join-equivalence",
     "lem-coef-infinity-pinch-comparison",
@@ -121,7 +151,7 @@
    }
   },
   {
-   "text": "The definition of a colimiting coherent cocone is initiality in $P_a$. A functor equivalence induces equivalences on every mapping space by the enhanced functor/cone calculus, so the equivalence $c$ preserves and reflects initial objects. Explicitly, for an initial $j\\in J_a$ and any $p\\in P_a$, choose $j'$ with $cj'\\simeq p$ by step 4; then $\\operatorname{Map}_{P_a}(cj,p)\\simeq\\operatorname{Map}_{J_a}(j,j')$ is contractible. Here replacing $p$ by the equivalent object $cj′$ induces a mapping-space equivalence: compose with the chosen equivalence and its inverse; the associative and unit homotopies of the mapping-composition theorem show that these two induced maps are homotopy inverses. The reverse implication tests objects $cj'$ and uses the same mapping equivalence. A vertex $j$ is the right-join cocone $L\\star\\Delta^0\\to\\mathcal E$, and its image under $c$ is exactly its induced coherent transformation by step 2. This proves the initial/colimiting characterization. For $L=\\varnothing$, both $L\\star R$ and $L\\diamond R$ are $R$, $D=\\operatorname{Fun}(\\varnothing,\\mathcal E)$ is terminal, and $J_a=P_a=\\mathcal E$ with comparison the identity; both fixed-apex fibers are a point. For nonempty $L$ with $\\mathcal E=\\varnothing$ there is no input $a$; for $L=\\varnothing=\\mathcal E$ the total categories are empty and the assertions about vertices and fibers are vacuous.",
+   "text": "The definition of a colimiting coherent cocone is initiality in $P_a$. A functor equivalence induces equivalences on every mapping space by the enhanced functor/cone calculus, so the equivalence $c$ preserves and reflects initial objects. Explicitly, for an initial $j\\in J_a$ and any $p\\in P_a$, choose $j'$ with $cj'\\simeq p$ by step 7; then $\\operatorname{Map}_{P_a}(cj,p)\\simeq\\operatorname{Map}_{J_a}(j,j')$ is contractible. Here replacing $p$ by the equivalent object $cj′$ induces a mapping-space equivalence: compose with the chosen equivalence and its inverse; the associative and unit homotopies of the mapping-composition theorem show that these two induced maps are homotopy inverses. The reverse implication tests objects $cj'$ and uses the same mapping equivalence. A vertex $j$ is the right-join cocone $L\\star\\Delta^0\\to\\mathcal E$, and its image under $c$ is exactly its induced coherent transformation by step 2. This proves the initial/colimiting characterization. For $L=\\varnothing$, both $L\\star R$ and $L\\diamond R$ are $R$, $D=\\operatorname{Fun}(\\varnothing,\\mathcal E)$ is terminal, and $J_a=P_a=\\mathcal E$ with comparison the identity; both fixed-apex fibers are a point. For nonempty $L$ with $\\mathcal E=\\varnothing$ there is no input $a$; for $L=\\varnothing=\\mathcal E$ the total categories are empty and the assertions about vertices and fibers are vacuous.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-cbc-enhanced-functor-cone-calculus",
@@ -145,12 +175,11 @@
   "lem-coef-infinity-join-cocone-associativity",
   "lem-coef-infinity-mapping-composition",
   "lem-coef-infinity-pinch-comparison",
-  "lem-coef-infinity-pointwise-equivalences",
   "lem-coef-infinity-relative-cone-equivalence",
   "lem-coef-infinity-right-fibration-fibers",
   "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-invertible-interval-product-projection",
   "lem-coef-join-preserves-categorical-equivalences",
-  "lem-coef-joyal-functor-equivalence-test",
   "lem-coef-quasicategory-invertible-interval",
   "lem-coef-relative-categorical-cylinder-criterion"
  ],
@@ -201,10 +230,24 @@
    "results": "{\"t\": \"2026-10-16T23:22:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected returned signatures; ordinary-category joins/cocones, nerve/homotopy-category adjunctions and StrictSegal Kan extensions do not compare sharp/fat quasicategorical slices or fixed-apex Kan fibers. Read Mathlib/CategoryTheory/Join/Final.lean:23-50, AlgebraicTopology/Quasicategory/Basic.lean:34-103, and SimplicialSet/Coskeletal.lean:38-85. No exact or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "categoricalEquivalence|CategoricalEquivalence|walkingIso|WalkingIso|invertibleInterval",
+   "results": "{\"t\": \"2026-10-17T08:06:36Z\", \"tool\": \"grep\", \"query\": \"categoricalEquivalence|CategoricalEquivalence|walkingIso|WalkingIso|invertibleInterval\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\"], \"digest\": \"fc33e89ba6ec6b6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:39-222. WalkingIso, coherentIso and its inverse triangles are defined there, but no categorical-equivalence assertion for the product projection is present. The ordinary-category unitor/nerve results and abstract model-category cylinders do not specialize in one line to this simplicial-set statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherentIso\"",
+   "results": "{\"t\": \"2026-10-17T08:07:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"coherentIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.coherentIso\", \"SSet.coherentIso.hom\", \"SSet.coherentIso.inv\", \"SSet.coherentIso.invStructHom\", \"SSet.coherentIso.homInvId\", \"SSet.coherentIso.invHomId\", \"SSet.coherentIso.invStructHom_inv\", \"SSet.coherentIso.x₀\"], \"digest\": \"e682e30fb5e34353\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:39-222. WalkingIso, coherentIso and its inverse triangles are defined there, but no categorical-equivalence assertion for the product projection is present. The ordinary-category unitor/nerve results and abstract model-category cylinders do not specialize in one line to this simplicial-set statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-cover-colimit-assembly",
@@ -229,8 +272,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-join-slice-cocone-comparison",
   "worker": "stage1",
-  "summary": "Preserved the statement. Seven steps construct the sharp/fat adjunction on diagrams, compare equivalence classes using a relative categorical cylinder and recognize a quasi-inverse, verify both apex isofibrations before fixed-fiber base change, prove Kan structure independently on both fibers, spell out naturality and transfer initiality. Corrected the inherited report and the first draft’s unjustified parameterized-diagram and Kan-fiber inferences. No new nodes.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: generic coherent mapping-space and filtered-subdiagram infrastructure along the recorded ancestry; HTT 4.2.1.5 realized in steps 1-4, 4.2.1.6-8 in step 5, naturality in step 6, initiality in step 7.",
+  "summary": "Re-split on the human repair request of 2026-10-17. Kept the statement, Lean record, original route and the six unaffected proof arguments. Extracted the product-invertible-interval categorical equivalence as a statement-only node; replaced old step 3 by four short steps using it, existing join-preservation and relative-cylinder statements, the sharp-join correspondence, the invertible-interval theorem and triangle calculus. Updated subsequent step references. Every non-elementary step is shorter than 2000 characters.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint along the unchanged ancestry: HTT 4.2.1.5 comparison in steps 1–7, fixed fibers in step 8, naturality in step 9, initiality in step 10. Steps 3–6 expose the original relative-cylinder equivalence-class argument.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -244,10 +287,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N4-7726a4208",
-  "group": "N4",
+  "reviewer": "NT-cc-Q101-9683e290e",
+  "group": "Q101",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-7726a4208 (reviewer sub-agent of L); spot-checked: I read the item, all 18 cited node statements, the unit sk-prop-sf-biduality-general, the main-20261015 ancestor proof paragraph 2, possible duplicates (blunt-join-comparison, join-cone-calculus, join-cocone-associativity, cofinal-coslice-calculus) and the current citers. The statement is unchanged; it is generic quasicategory infrastructure with no coefficient category or base-change morphism. HTT 4.2.1 is not in literature (I checked LIST.md), so the WANTED line and proof_origin=agent are correct. Step 1: exponentiation with the empty map into L and with the boundary of the interval, then a pullback, makes P_a a quasicategory with an isofibration apex map; J_a comes from join-cocone-associativity. Step 2: both restrictions to Fun(L,E) are isofibrations; base change along the vertex a gives r_R; B_R is isomorphic to Fun(R,P_a) because products preserve the pushouts degreewise; r_R(F_e)=ce by naturality of c. Step 3: R x I -> R is a categorical equivalence (homotopy from the groupoid plus pointwise-equivalences plus the Joyal test); join preservation applies; I checked degreewise injectivity of B glued to B along L and that Fun_{f_A}(B,Q)=A_R, so the relative cylinder criterion applies, followed by currying, the invertible interval and triangle calculus. Step 4: the bijection on classes for R=P_a and R=J_a gives a quasi-inverse, strictly over E. Step 5: base change at a vertex T; the coherent fiber is U_D(a, constant T), which pinch-comparison makes Kan; J_a^op is the slice of E^op in the slice-right-fibration convention, its fibers are Kan by right-fibration-fibers, and horn reversal carries this back. Step 6: I checked that the collapse formula commutes with shape restriction and postcomposition; the left-fibration claims come from opposites. Step 7: initiality transfers through mapping-space equivalences and mapping-composition. Empty-L, empty-E and L a point in a nerve are consistent. proof_deps equals the union of uses, the 163-node closure has no cycle, there are no new nodes, and no SGA is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic black box. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-9683e290e (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps and the new node in full, plus the statement of every cited node (17 nodes and def-cbc-enhanced-diagrams-cones), unit sk-prop-sf-biduality-general and the main-20261015 proof paragraph 2 of the ancestor prop-coef-integral-exceptional-adjoint. HTT is not in literature, so HTT 4.2.1.5-4.2.1.8 and Cor. 2.2.5.4 could not be checked at the page; the WANTED line and proof_origin=agent are correct. The item is not a target and has no coefficient category or base-change morphism; its statement is unchanged. The new node lem-coef-invertible-interval-product-projection (R x N(J) -> R is a categorical equivalence) is true: Fun(R x I,C)=Fun(I,Fun(R,C)), e_0^* is a trivial Kan fibration by quasicategory-invertible-interval, and pi^* is its section. Tested on R empty, a point, the boundary of the 1-simplex and the 1-simplex. It introduces all its objects, has no proof, and is strictly smaller than the item, so it is not a restated clause (D1). No duplicate after an rg search of dag/nodes, reading joyal-homotopy-exponentials, walking-iso fibration test, joyal characterizations, functor-equivalence test, coarse-nerve-gluing and segal-dk. New steps 3-6 check out: join-preserves gives id_L * pi_R; the endpoint sections agree on L; B glued to B along L injects into L*(R x I) because the endpoint I-coordinates are constant 0 and 1 in the pure and mixed summands; Fun_{f_A}(B,E) is literally A_R, so the relative-cylinder criterion applies; the sharp-join naturality fixes the endpoints; the invertible interval and triangle calculus identify 'isomorphic in h' with an equivalence edge. Step 7's Yoneda argument (surjectivity at P_a, whiskering, injectivity at J_a) is correct. Steps 8-10 are sound: the op of the sharp slice matches the convention of slice-right-fibration, horn reversal brings back the Kan property, and the L empty and E empty cases hold. proof_deps equals the union of uses, no cited node is missing or merged, the 184-node closure has no cycle, everything is on-route except the accepted tool use lem-cbc-enhanced-functor-cone-calculus (step 10, mapping-space equivalences only), and no SGA is used. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.JoinSliceCoconeComparison",
