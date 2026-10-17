@@ -12,9 +12,95 @@
   "lem-coef-categorical-algebra-free-monad",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\alpha:G_SQ\\to A$ for the adjunct of $u$ and $\\beta=G_Sh$. The fixed-object algebra category $\\mathcal A_S$ is presentable by [lem-coef-categorical-algebra-free-monad], hence has finite coproducts and geometric realizations. Apply [lem-coef-infinity-coproduct-bar-pushout] in this category to construct the actual coherent algebroid diagram\n$$D_n=A\\amalg(G_SQ)^{\\amalg n}\\amalg G_SR.$$\nThe first face applies $\\alpha$, the last applies $\\beta$, the interior faces fold the $G_SQ$ factors and the degeneracies insert unused factors. The bar theorem identifies its realization $C=|D_\\bullet|$ with $B$, preserving the specified span cocone and its degree-one homotopy. This constructs all algebra structure and coherence in the algebra infinity-category.",
+   "uses": [
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-infinity-coproduct-bar-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7 and Theorem 4.4.2.8, finite-coproduct bar specialization; existence of algebra colimits from GH Corollary A.5.7."
+   }
+  },
+  {
+   "text": "Put $P_n=Q^{\\amalg n}\\amalg R$ in the graph category. Since $G_S$ is a left adjoint, its finite coproduct comparison gives $G_SP_n\\simeq(G_SQ)^{\\amalg n}\\amalg G_SR$. Explicitly maps from either algebra into $E$ are the product of the $n$ graph mapping spaces from $Q$ to $V_SE$ and the graph mapping space from $R$; the comparison induces their identity under the free adjunction, so the mapping-space criterion proves it is an equivalence. Thus $D_n\\simeq A\\amalg G_SP_n$. Each $P_n$ is initial off $S_0\\times S_2$, including $n=0$, so [lem-coef-directed-extreme-free-coproduct] gives the canonical equivalences\n$$e_n:V_SA\\amalg Q^{\\amalg n}\\amalg R\\xrightarrow{\\sim}V_SD_n.$$\nThese are equivalences of graphs with the actual algebra-inclusion and generator summand maps.",
+   "uses": [
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-directed-extreme-free-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.9 and the free adjunction; agent application of the separate free-extreme-coproduct lemma in each bar degree."
+   }
+  },
+  {
+   "text": "Under $e_n$, the first face is $u$ on the first $Q$ summand and fixes $V_SA$ and all remaining summands: its algebra map is $\\alpha$ on that free factor, whose generator restriction is $u$ by adjunction. The last face is $h$ on the last $Q$ summand into $R$. Each interior face folds its two $Q$ summands, and every degeneracy includes the old summands while omitting the inserted one. The substitution clause of [lem-coef-directed-extreme-free-coproduct] applies to these algebra maps even for the first face, which sends a generator into $A$. That clause includes all higher homotopies and composition of substitutions, so the $e_n$ assemble to a coherent equivalence\n$$W_\\bullet(V_SA\\leftarrow Q\\to R)\\simeq V_SD_\\bullet$$\nof the full simplicial diagrams, with the same summand cocones. The operators on the left are precisely those of the general coproduct-bar lemma.",
+   "uses": [
+    "lem-coef-directed-extreme-free-coproduct",
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-infinity-coproduct-bar-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.9, adjunct-on-generators formula; explicit comparison of every bar operator using the new coproduct lemma’s coherent substitution clause."
+   }
+  },
+  {
+   "text": "The free-algebra theorem states that $V_S$ preserves geometric realizations (indeed all small sifted colimits). Apply it to $D_\\bullet$ and use Step 3:\n$$V_SC\\simeq|V_SD_\\bullet|\\simeq|W_\\bullet(V_SA\\leftarrow Q\\to R)|.$$\nColimits in $\\mathcal V^{S\\times S}$ are objectwise by [lem-coef-infinity-yoneda-presheaf-limits], since $S\\times S$ is small and $\\mathcal V$ has small colimits. At a pair $(s,t)$ apply [lem-coef-infinity-coproduct-bar-pushout] in $\\mathcal V$ to conclude\n$$C(s,t)\\simeq A(s,t)\\amalg^h_{Q(s,t)}R(s,t).$$\nThe summand and degree-one cocones in Steps 1 and 3 identify the canonical maps, including the map from $R$ induced by its free generators. Off the extreme pairs this is the bar for $A(s,t)\\leftarrow0\\to0$; the degenerate-span clause gives the actual equivalence $A(s,t)\\to C(s,t)$. At an extreme pair it is exactly the claimed homotopy-pushout square.",
+   "uses": [
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-coproduct-bar-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary A.5.4 (sifted colimits); the item explicitly realizes the graph coproduct bar, then evaluates its specified cocone."
+   }
+  },
+  {
+   "text": "The cocone leg $A\\to C$ is a coherent algebra map. For $s\\in S_0,m\\in S_1,t\\in S_2$, both input mapping objects are unchanged by Step 4, so the composition square for this algebra map identifies the composition in $C$ with\n$$A(s,m)\\otimes A(m,t)\\longrightarrow A(s,t)\\longrightarrow C(s,t).$$\nThere is no other string of two nonidentity, noninitial mapping objects except one with these three levels. A factor entering $S_0$, leaving $S_2$, or joining distinct objects in one level is initial; its tensor with any object is initial since tensor preserves colimits separately. The diagonal unit maps are equivalences, since their entries were unchanged. Hence all remaining compositions are unit actions or maps from the initial object. The units, associativity and every higher compatibility belong to the realized coherent algebra $C$ from Step 1. They are never assigned to an objectwise candidate.",
+   "uses": [
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Agent deduction of the binary composition formula from the actual algebra cocone and the graph calculation; coherence is the already constructed algebra of Step 1."
+   }
+  },
+  {
+   "text": "Use the specified equivalence $C\\simeq B$ of Step 1 to regard $C$ as the asserted directed model. All formulas refer to its actual cocone, so this also identifies the claimed canonical squares for $B$. The coproduct bar and its realization comparison are coherently natural on spans; the free-coproduct equivalence and its substitution comparisons are coherently natural; the free adjunction and $V_S$ are functors on the infinity categories in question. These comparisons therefore compose to a natural equivalence of the entire graph cocones used in Step 4. Maps preserving the level sets preserve the support condition, and the composition compatibility in Step 5 is the natural compatibility of the algebra cocone. This proves naturality, including all higher homotopies, of the directed model, the extreme squares and the composition and unit identifications.",
+   "uses": [
+    "lem-coef-directed-extreme-free-coproduct",
+    "lem-coef-infinity-coproduct-bar-pushout",
+    "lem-coef-categorical-algebra-free-monad"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Naturality of the coherent bar (Construction 4.4.2.7) and of the canonical free-coproduct comparison; agent conclusion on the specified cocones."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-categorical-algebra-free-monad",
+  "lem-coef-directed-extreme-free-coproduct",
+  "lem-coef-infinity-coproduct-bar-pushout",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "GH Proposition A.4.9 and Corollaries A.5.4/A.5.7; coherent coproduct bar of HA Construction 4.4.2.7 and Theorem 4.4.2.8. The free-extreme-coproduct input and general bar input are separate statement-only nodes; the application, full bar-operator comparison and realized pushout calculation are written in the item."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,7 +160,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-enriched-edge-square-presentation",
@@ -99,5 +185,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-directed-algebroid-extreme-hom-pushout",
+  "worker": "stage1",
+  "summary": "Full repair of the returned E5/C4 gaps. Two statement-only inputs: adjoining a free graph on extreme pairs has underlying graph V_S A coproduct P, and the general coproduct two-sided bar realizes a span pushout. Six steps construct the actual bar in Alg_S, apply the free-coproduct lemma degreewise, identify every face/degeneracy including generator-to-A substitutions, use sifted-colimit preservation of V_S to realize it objectwise, and deduce the specified canonical cocone and coherent operations. No objectwise characterization of algebra maps is used; the statement is unchanged.",
+  "blueprint": "Proof paragraph 2, mapping-complex adjunction: source-side algebra colimit calculation for the single free-edge square probe, before the collage comparison. This is the inherited supporting branch of paragraph 2 of prop-coef-integral-exceptional-adjoint through the free-edge square presentation; the unit/chapter route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-30520cf20",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-30520cf20 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, both new nodes, the cited statements in full (lem-coef-categorical-algebra-free-monad, lem-coef-infinity-yoneda-presheaf-limits, def-coef-complete-algebroid, def-cbc-enhanced-diagrams-cones), the parent's steps that use the item, and the unit sk-prop-sf-biduality-general. The item statement is unchanged and true. I checked it by the word formula for A ⊔ G_S P: with unit equivalences and strict level increase, a word with one extreme generator reduces to P(s,t), and words with two or more vanish because tensoring with an initial object gives an initial object. The pushout is then computed degreewise by the coproduct bar: V_S preserves geometric realizations and colimits of graphs are objectwise, so each extreme pair gives A(s,t) ⊔_Q R(s,t). The composite formula follows from the composition square of the algebra map A → B. Step by step: Step 1 is the bar lemma in the presentable category A_S. Step 2 uses that the left adjoint G_S preserves coproducts, plus the new free-coproduct lemma, whose hypotheses hold for each P_n including n = 0. Step 3 matches each bar operator to the form [V_S a, v]; the substitution identity is true from the restrictions of e and the adjunct-on-generators formula. Step 4 uses sifted preservation, objectwise colimits, and the degenerate-span clause. Step 5 is fairly marked elementary. Step 6 follows from the stated naturality. lem-coef-directed-extreme-free-coproduct is true; I tested P = 0, S_0 or S_2 empty, and why the unit hypothesis is needed. It is the Q = 0 case, but it is used as the coproduct input of a genuine reduction (pushout as realization of coproducts), so it does not restate a clause (D1 ok). lem-coef-infinity-coproduct-bar-pushout is true: I checked the simplicial identities, the double-cylinder picture in spaces, n = 0, and the constant degenerate span. Neither new node duplicates an existing one: I opened double-mapping-cylinder-space-pushout, fixed-object-scat-pushout-coproduct, scat-fixed-object-pushout-comparison, infinity-colimit-gluing, two-sided-coherent-bar-construction, triangular-bar-excision, fixed-object-dg-free-model and infinity-monadic-bar. Form checks B1–B9 pass (statement only, self-contained TeX, six real searches each, blueprint from/via matching the parent's chain, same_as []). All citations are in the unit, so no tool_uses are needed; there is no cycle and no SGA. This is not a target, so the base-change and coefficient-category check does not apply. GH 1312.3178 and HA 4.4.2 are not in literature/; they are declared WANTED with agent origin, and I checked their uses by my own derivation. Remark, not a fault: the coherence in Step 3 rests on the free-coproduct node's 'composition of substitutions' clause, which its future proof must establish. No fixes."
  }
 }

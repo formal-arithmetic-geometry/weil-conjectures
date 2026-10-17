@@ -2,7 +2,7 @@
  "id": "lem-trf-local-dimension-formula",
  "kind": "statement",
  "title": "Local dimension inequality for an integral dominant morphism",
- "statement": "Let $f:X\\to S$ [def-weil-finite-type-morphism, def-pc-integral-scheme, pqf-def-locnoeth] be a dominant morphism locally of finite type between integral schemes, with $S$ locally Noetherian. For $x\\in X$ and $s=f(x)$, let $\\eta_S$ and $\\eta_X$ be the generic points and write $R(S)=\\mathcal O_{S,\\eta_S}$ and $R(X)=\\mathcal O_{X,\\eta_X}$ for their function fields [def-sc-generic-point, def-weil-pbc-module-stalk], and write $\\kappa(s),\\kappa(x)$ for residue fields [def-weil-residue-field, def-kun-transcendence-degree]. Then [def-weil-pbc-krull-dimension-ring] $$\\dim(\\mathcal O_{X,x})\\leq\\dim(\\mathcal O_{S,s})+\\operatorname{trdeg}_{R(S)}R(X)-\\operatorname{trdeg}_{\\kappa(s)}\\kappa(x).$$",
+ "statement": "Let $f:X\\to S$ [def-weil-finite-type-morphism, def-pc-integral-scheme, pqf-def-locnoeth] be a dominant morphism (its image $f(X)$ is dense in $S$) locally of finite type between integral schemes, with $S$ locally Noetherian. For $x\\in X$ and $s=f(x)$, let $\\eta_S$ and $\\eta_X$ be the generic points and write $R(S)=\\mathcal O_{S,\\eta_S}$ and $R(X)=\\mathcal O_{X,\\eta_X}$ for their function fields [def-sc-generic-point, def-weil-pbc-module-stalk], and write $\\kappa(s),\\kappa(x)$ for residue fields [def-weil-residue-field, def-kun-transcendence-degree]. Then [def-weil-pbc-krull-dimension-ring] $$\\dim(\\mathcal O_{X,x})\\leq\\dim(\\mathcal O_{S,s})+\\operatorname{trdeg}_{R(S)}R(X)-\\operatorname{trdeg}_{\\kappa(s)}\\kappa(x).$$",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 02JU, lemma-dimension-formula (label lemma-dimension-formula; equation (dimension-formula)); the inequality clause."
@@ -17,41 +17,94 @@
   "def-kun-transcendence-degree",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [pqf-def-locnoeth], $S$ has an affine open covering by opens whose rings of sections are Noetherian; choose a member $U$ of this covering with $s\\in U$, so that $A=\\Gamma(U,\\mathcal O_S)$ is a Noetherian ring. Choose an affine open $V\\subseteq f^{-1}(U)$ containing $x$ (affine opens form a basis of $X$) and put $B=\\Gamma(V,\\mathcal O_X)$. By [def-pc-integral-scheme], $A$ and $B$ are domains. By [lem-weil-pbc-affine-open-spec-points] let $\\mathfrak p,\\mathfrak q$ be the primes corresponding to $s,x$, and by [lem-weil-pbc-affine-open-stalk-localization] identify $\\mathcal O_{S,s}=A_{\\mathfrak p}$, $\\mathcal O_{X,x}=B_{\\mathfrak q}$, and likewise every stalk at a point of $U$ (resp. $V$) with the localization at its prime. Generic points: $\\eta_S$ lies in every nonempty open, in particular in $U$; its prime $P$ has closure $V(P)$ in $\\operatorname{Spec}A$ equal to all of $\\operatorname{Spec}A$ (the closure of $\\eta_S$ in $U$ is $\\overline{\\{\\eta_S\\}}\\cap U=U$), so $P$ is contained in the prime $(0)$ of the domain $A$, i.e. $P=(0)$. In the same way $\\eta_X\\in V$ corresponds to $(0)\\subset B$. Hence $R(S)=\\mathcal O_{S,\\eta_S}=A_{(0)}=\\operatorname{Frac}(A)$ and $R(X)=\\operatorname{Frac}(B)$. Dominance: since $X=\\overline{\\{\\eta_X\\}}$ and $f$ is continuous, $f(X)\\subseteq\\overline{\\{f(\\eta_X)\\}}$, so $f(X)$ dense gives $\\overline{\\{f(\\eta_X)\\}}=S$; by the same argument as for $\\eta_S$, $f(\\eta_X)\\in U$ corresponds to the prime $(0)$ of $A$, so $f(\\eta_X)=\\eta_S$. The stalk map $\\mathcal O_{S,\\eta_S}\\to\\mathcal O_{X,\\eta_X}$ is a ring map out of the field $\\operatorname{Frac}(A)$, hence injective, and its composite with the germ map $A\\to\\operatorname{Frac}(A)$ equals the composite of the ring map $\\varphi:A\\to B$ induced by $f$ with $B\\to\\operatorname{Frac}(B)$ (compatibility of $f^\\sharp$ with germs, [def-weil-pbc-module-stalk]); both germ maps are injective, so $\\varphi$ is injective and we regard $A\\subseteq B$, with $\\operatorname{Frac}(A)\\subseteq\\operatorname{Frac}(B)$ the map $R(S)\\to R(X)$ induced by $f$. Finally, $f(V)\\subseteq U$ and local finite type give that $B$ is a finite type $A$-algebra by [lem-weil-pbc-lft-affine-pairs], and $\\mathfrak q\\cap A=\\mathfrak p$ because $f(x)=s$ and the point map $V\\to U$ is contraction along $\\varphi$ (equivalently: $\\varphi^{-1}(\\mathfrak q)$ is the kernel of $A\\to B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}=\\kappa(x)$, which by the local stalk map $\\mathcal O_{S,s}\\to\\mathcal O_{X,x}$ of [def-weil-residue-field] is $\\mathfrak p$).",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "def-sc-generic-point",
+    "def-weil-pbc-module-stalk",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JU, reduction to affine charts in the proof of the dimension formula; Schemes Tag 01HV for stalks."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affine-dimension-inequality] to the Noetherian domain $A$, the finite type extension of domains $A\\subseteq B$, and the primes $\\mathfrak p,\\mathfrak q$ (with $\\mathfrak q\\cap A=\\mathfrak p$). By [lem-weil-pbc-localization-dimension-chains-below-prime], the Krull dimensions of $A_{\\mathfrak p}=\\mathcal O_{S,s}$ and $B_{\\mathfrak q}=\\mathcal O_{X,x}$ are the heights of $\\mathfrak p$ and $\\mathfrak q$. Residue fields: $\\kappa(s)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}\\cong\\operatorname{Frac}(A/\\mathfrak p)=\\kappa(\\mathfrak p)$ [def-weil-residue-field], likewise $\\kappa(x)\\cong\\kappa(\\mathfrak q)$, and these isomorphisms are compatible with $\\kappa(s)\\to\\kappa(x)$ and $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$, both induced by $\\varphi$; so $\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(x)$ [def-kun-transcendence-degree]. Generic term: every $a/b\\in\\operatorname{Frac}(A)$ is a root of the nonzero polynomial $bY-a$ over $A$, and likewise for $\\operatorname{Frac}(B)$ over $B$, so $\\operatorname{trdeg}_A\\operatorname{Frac}(A)=\\operatorname{trdeg}_B\\operatorname{Frac}(B)=0$. The domain tower identity [lem-exc-domain-transcendence-degree-tower] for $A\\subseteq B\\subseteq\\operatorname{Frac}(B)$ and for $A\\subseteq\\operatorname{Frac}(A)\\subseteq\\operatorname{Frac}(B)$ gives $\\operatorname{trdeg}_A B=\\operatorname{trdeg}_A\\operatorname{Frac}(B)=\\operatorname{trdeg}_{\\operatorname{Frac}(A)}\\operatorname{Frac}(B)=\\operatorname{trdeg}_{R(S)}R(X)$ by Step 1. Substitution into the inequality of [lem-trf-affine-dimension-inequality] yields the displayed inequality.",
+   "uses": [
+    "lem-trf-affine-dimension-inequality",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-exc-domain-transcendence-degree-tower",
+    "def-weil-residue-field",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JU, equation (dimension-formula), after applying Algebra Tag 02IJ to affine charts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "lem-exc-domain-transcendence-degree-tower",
+  "lem-trf-affine-dimension-inequality",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JU, lemma-dimension-formula and its reduction to Algebra Tag 02IJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "local dimension formula dim local ring of integral locally finite type scheme over locally Noetherian base",
-   "results": "No exact scheme-level formula; hits include instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian and IsLocalization.AtPrime.ringKrullDim_eq_height.",
+   "query": "local dimension formula for a locally finite type morphism of integral schemes over a locally Noetherian base",
+   "results": "LocallyOfFiniteType.isLocallyNoetherian and stalkMap; no scheme-level dimension formula.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "ringKrullDim trdeg dimension formula",
-   "results": "0 hits; unknown identifier trdeg.",
+   "query": "ringKrullDim, Algebra.trdeg, Ideal.height",
+   "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "dimension-formula|ringKrullDim.*trdeg [Mathlib/AlgebraicGeometry]",
+   "query": "dimension-formula|ringKrullDim.*trdeg|height.*trdeg in Mathlib/AlgebraicGeometry",
    "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "dimension formula for locally finite type morphism integral schemes locally Noetherian",
-   "results": "Hits only general locally finite type/Noetherian declarations; no dimension formula.",
+   "query": "dimension inequality for a finite type morphism of integral schemes locally Noetherian",
+   "results": "Hits include topological dimension monotonicity and ring height bounds, but no scheme-level formula.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-closed-dominant-dimension",
@@ -63,12 +116,33 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), normal-cone specialization: the dimension formula used to bound chains under the integral dominant map.",
+   "place": "Proof (1)--(2), normal-cone specialization: the local dimension formula used to bound chains under the integral dominant map.",
    "via": [
-    "lem-trf-closed-dominant-dimension"
+    "lem-trf-closed-dominant-dimension",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-dimension-formula",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Morphisms Tag 02JU and its algebra input Tag 02IJ. No finished Lean declaration states it. Split the proof into an affine-chart reduction and application of a new statement-only algebraic height/transcendence-degree inequality; existing affine stalk, local finite type, and localization-height nodes supply the chart identifications. The statement and all hypotheses are unchanged. Small cases include identity maps (equality), polynomial extensions over a field (the expected local dimension formula), and finite algebraic extensions (the transcendence-degree terms vanish). Maintainer reader (2026-10-18): step 1 now takes the affine chart U from the Noetherian covering of pqf-def-locnoeth (so A is Noetherian) and writes out the generic-point and dominance argument giving A⊂B and Frac(A)=R(S), Frac(B)=R(X); step 2 cites lem-exc-domain-transcendence-degree-tower for trdeg_A B = trdeg_{R(S)} R(X); the statement spells out 'dominant' (image dense), without change of meaning; blueprint.from.via corrected to the created.item chain.",
+  "blueprint": "Realizes the ancestor proof clause “the local dimension formula used to bound chains under the integral dominant map” through the affine reduction and algebraic inequality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-3286839e7",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-3286839e7 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited node's statement, Stacks Morphisms 02JU (morphisms.tex 13582-13607) and Algebra 02IJ (algebra.tex 27520-27580), and unit sk-i-curve-zero. The mathematics is correct. The item's statement matches 02JU hypothesis by hypothesis (inequality clause only). The new node lem-trf-affine-dimension-inequality is exactly the inequality clause of 02IJ with all its hypotheses. I tested it on R=S, k⊂k[x] at (x) and at 0, k[t]⊂k[t,x], finite algebraic extensions, and Z_(p)⊂Q; all hold. It does not duplicate lem-exc-dimension-formula-universally-catenary-finite-type-domain (that one is the equality under universal catenarity), and it is not a restatement of a clause of the item. I repaired three faults in fixes/: (1) E1/C1: step 1 took an arbitrary affine U, and pqf-def-locnoeth only gives some Noetherian affine cover. U is now taken from that cover, so A is Noetherian. (2) E5/B3: 'dominant' had no definition node, and 'dominance makes A→B injective' and the generic-point identifications were not argued. The statement now spells out 'image dense' (same meaning), and step 1 writes out η_S ↔ (0), f(η_X)=η_S, injectivity through the field stalk map, and q∩A=p. (3) C1: step 2 equated trdeg_A B with trdeg_{R(S)}R(X) without a citation. It now uses the Mathlib leaf lem-exc-domain-transcendence-degree-tower for the two towers, and the new node states the algebra-trdeg convention. I also corrected blueprint.from.via on both nodes to the created.item chain. Route is fine: everything cited is a Mathlib leaf, a definition, or the unit's new node. No tool_uses and no SGA. No node dropped.; 2 file(s) fixed by the reviewer"
  }
 }
