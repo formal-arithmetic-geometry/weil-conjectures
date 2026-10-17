@@ -8,7 +8,10 @@
   "place": "Definitions 6.1–6.3 and Corollary 6.6 with its proof, specialized to the terminal monoidal category; compare Gepner–Haugseng 1312.3178v4, proof of Theorem 5.2.5, and Rezk math/9811037, Remark 10.2. Read online; archival copy WANTED in report.md. No Stacks tag states this infinity-categorical fact."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-homotopy-segal-space",
+  "lem-coef-simplicial-space-reedy-cartesian",
+  "lem-coef-segal-categorical-equivalence-dk"
  ],
  "proof": [
   {
@@ -202,5 +205,24 @@
   "group": "Q155",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-3dc6b24d5 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the full statement of all 7 cited nodes. The item's statement is unchanged, it adds no new nodes, and tool_uses is empty because every cited node is in unit sk-prop-sf-biduality-general. I read the source, Haugseng arXiv:2311.13362v1 section 6, online; it is not archived and the worker's report records it as WANTED. Def 6.2 defines the labelled horn by the same pullback formula as the calculus node. Prop 6.4/Cor 6.5 give the filtration from the spine to the horn by lower-dimensional inner horns, and the proof of Cor 6.6 is the n=2 base case plus induction and two-out-of-three, which Steps 3-4 reproduce with the terminal monoidal category C=*. In Step 3, C_* over Delta is Delta itself, the represented simplex is h_[n]=dDelta^n, and the labelled horn is dK; density plus the colimit-to-limit rule identify restriction along the spine with the Segal map. I hand-checked the n=3 filtrations for i=1 and i=2: all are inner 2-horns. Step 1 gives the local class's closure under pushouts, two-out-of-three and retracts via contravariant representables. Step 2 handles the transfinite limit stage correctly: the index category is weakly contractible, so a constant limit is its value. Step 5 turns degreewise-set saturation into presheaf saturation without assuming d preserves pushouts: the lifting class is weakly saturated, then the Mathlib equality (Inner/Basic.lean:89) gives a cell complex, which meets the exact hypotheses of discrete-inner-cell-transfer. Step 6 is elementary. A transitive dependency closure of 596 nodes does not reach the item, so there is no cycle. lem-coef-segal-external-local-equivalences is a different statement and no duplicate exists. The only citer, algebroid-equivalence-nerve Step 6, uses the statement exactly as written. There is no completeness or Reedy fibrancy assumption and no SGA source. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalSpaceInnerAnodyneLocality",
+  "declaration": "SSet.SegalSpace.segal_space_inner_anodyne_locality",
+  "file": "lean/Sheaf/AlgebraicTopology/SegalSpaceInnerAnodyneLocality.lean",
+  "statement": "theorem segal_space_inner_anodyne_locality : (∀ (W : SimplexCategoryᵒᵖ ⥤ SSet.{u}), HomotopySegal.IsHomotopySegalSpace W → ∀ (V : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (i : W ⟶ V), IsReedyFibrant V → IsReedyWeakEquivalence i → ∀ (K L : SSet.{u}) (f : K ⟶ L), innerAnodyneExtensions f → Enhanced.IsWeakHomotopyEquivalence (mappingSpacePre (Segal.discreteSpaceMap f) V)) ∧ (∀ (K L K' L' : SSet.{u}) (f : K ⟶ L) (f' : K' ⟶ L') (a : K ⟶ K') (b : L ⟶ L'), f ≫ b = a ≫ f' → ∀ V : SimplexCategoryᵒᵖ ⥤ SSet.{u}, mappingSpacePre (Segal.discreteSpaceMap b) V ≫ mappingSpacePre (Segal.discreteSpaceMap f) V = mappingSpacePre (Segal.discreteSpaceMap f') V ≫ mappingSpacePre (Segal.discreteSpaceMap a) V) ∧ (∀ (K L : SSet.{u}) (f : K ⟶ L) (V V' : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (g : V ⟶ V'), mappingSpacePre (Segal.discreteSpaceMap f) V ≫ mappingSpacePost (Segal.discreteSpace K) g = mappingSpacePost (Segal.discreteSpace L) g ≫ mappingSpacePre (Segal.discreteSpaceMap f) V')",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing homotopy Segal predicate and Reedy derived-mapping presentation: every Reedy fibrant replacement of W is quantified, so no Reedy fibrancy or completeness is imposed on W. The two naturality clauses are equalities of the actual simplicial restriction/postcomposition maps. Discrete diagrams, mapping spaces, Reedy predicates and realization weak equivalences are reused, with no new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbdcb3d68",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Statement matches node and Haugseng 2311.13362 Cor 6.6 (terminal monoidal case): innerAnodyneExtensions = Mathlib saturation of inner horns (Inner/Basic.lean:89); IsHomotopySegalSpace = Kan levels + path-model homotopy-pullback comparisons for all n>=2; dK = Segal.discreteSpace; conclusion = weak homotopy equivalence of mappingSpacePre(du) into every Reedy-fibrant V with Reedy weak equivalence W->V (derived mapping space since all objects Reedy cofibrant; non-vacuous; no fibrancy/completeness on W); naturality in u and target as equalities of actual pre/post maps. Edge cases (empty, identity, n=2, W already fibrant) covered. No definitions, sorry only, docstrings with source place/blueprint, statement verbatim, universe u only, added stmt_deps landed and acyclic. nt_compile.py rc=0, no errors (wrapper error reporting verified). Minor non-blocking: IsReedyFibrant comes from lem-coef-segal-cartesian-exponent, not cited in stmt_deps (not expressible as a stage-2 fix; modelling device only)."
  }
 }
