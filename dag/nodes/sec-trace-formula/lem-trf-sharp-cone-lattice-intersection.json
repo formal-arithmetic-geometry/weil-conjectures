@@ -10,9 +10,81 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify $P$ with its image in $G$ using integrality in [def-trf-fs-log-blowup]. Choose finite monoid generators $p_1,\\ldots,p_m$. By the presentation of group completion in that node, every $g\\in G$ is an integer combination of the $p_j$, hence a difference $a-b$ with $a,b\\in P$. Thus $G$ is finitely generated. If $ng=0$ for an integer $n>0$, both $ng$ and $n(-g)$ lie in $P$. Saturation puts both $g$ and $-g$ in $P$. They are additive inverses in $P$, so sharpness gives $g=0$. Consequently $G$ is torsion-free.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent expansion using Expose VIII 3.1.17, printed p. 101 (saturation); compare Expose VI 3.7(a), printed p. 75."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fg-torsionfree-group-free] to the finitely generated torsion-free abelian group $G$ established in Step 1. It gives $r\\in\\mathbf N$ and a basis $e_1,\\ldots,e_r$: every $g$ is uniquely $\\sum_k n_ke_k$ with $n_k\\in\\mathbf Z$. This proves the finite-free assertion in (a).",
+   "uses": [
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.7(a), printed p. 75, finite torsion-free group completion; the finite-basis result is the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "For each basis coordinate $k$, let $\\lambda_k:G\\to\\mathbf Z$ send $\\sum_i n_i e_i$ to $n_k$. The balanced bilinear map $(g,q)\\mapsto q\\lambda_k(g)$ induces $L_k:G\\otimes_{\\mathbf Z}\\mathbf Q\\to\\mathbf Q$ with $L_k(g\\otimes q)=q\\lambda_k(g)$. If $g\\otimes1=0$, then every coordinate $\\lambda_k(g)=L_k(g\\otimes1)$ is zero, whence $g=0$. This proves the injection in (a). Also every tensor is a finite sum of pure tensors, and $g\\otimes q=\\sum_k q\\lambda_k(g)(e_k\\otimes1)$, so every element of $V$ is a rational combination of the $e_k\\otimes1$. For $r=0$, the same description says $G=V=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate calculation from the definition of tensor product and the basis in Step 2; lattice-cone formulation motivated by Expose VIII Remark 3.1.29, printed p. 103."
+   }
+  },
+  {
+   "text": "Write $v_j=p_j\\otimes1$. Each $p\\in P$ is $\\sum_j a_jp_j$ with $a_j\\in\\mathbf N$, so substituting this expression into any nonnegative rational combination of elements of $P$ shows $C=\\{\\sum_j q_jv_j:q_j\\in\\mathbf Q_{\\ge0}\\}$. This proves rational polyhedrality with the lattice generators $p_j\\in G$. Each $e_k$ is an integer combination $\\sum_j b_{kj}p_j$ by Step 1. For $x=\\sum_k t_k(e_k\\otimes1)$, set $c_j=\\sum_k t_kb_{kj}\\in\\mathbf Q$. Then $x=\\sum_j\\max(c_j,0)v_j-\\sum_j\\max(-c_j,0)v_j$, a difference of two elements of $C$. This proves the spanning assertion in (b), including the empty generating family.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent finite-sum expansion of the rational cone; Expose VIII Remark 3.1.29, printed p. 103, motivates the combinatorial description."
+   }
+  },
+  {
+   "text": "Certainly $P\\subseteq C\\cap G$. Conversely, let $g\\in G$ have $g\\otimes1=\\sum_j q_j(p_j\\otimes1)\\in C$ with $q_j\\in\\mathbf Q_{\\ge0}$. Write $q_j=a_j/b_j$ with $a_j\\in\\mathbf N$ and $b_j\\in\\mathbf N_{>0}$. Put $N=\\prod_j b_j>0$ and $A_j=a_j\\prod_{i\\ne j}b_i\\in\\mathbf N$. Multiplying the displayed equality by $N$ gives $(Ng)\\otimes1=(\\sum_j A_jp_j)\\otimes1$. Injectivity from Step 3 gives $Ng=\\sum_j A_jp_j\\in P$. By saturation in [def-trf-fs-log-blowup], $g\\in P$. This proves (c); the empty family has $N=1$ and gives $g=0$.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent denominator-clearing proof using Expose VIII 3.1.17, printed p. 101, saturation."
+   }
+  },
+  {
+   "text": "If $x\\in C\\cap(-C)$, write both $x$ and $-x$ as finite nonnegative rational combinations of the $v_j$. Take $N>0$ to be the product of all denominators in both expressions. There are $a,b\\in P$ with $Nx=a\\otimes1$ and $-Nx=b\\otimes1$. Thus $(a+b)\\otimes1=0$; Step 3 and integrality give $a+b=0$ in $P$. Hence $a$ is a unit of $P$, and sharpness forces $a=0$. Now $Nx=0$ and $N\\ne0$ in $\\mathbf Q$, so $x=0$. Conversely $0\\in C\\cap(-C)$ by the empty sum. This proves pointedness and completes (b). If $P=\\{0\\}$ then Step 1 gives $G=0$, Step 3 gives $V=0$, and the defining sums give $C=\\{0\\}$, as required.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent common-denominator and sharpness argument; Expose VIII 3.1.17 and Remark 3.1.29, printed pp. 101 and 103, motivate the formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-fg-torsionfree-group-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Explicit elementary lattice-cone argument supplied here; Expose VIII 3.1.17 and Remark 3.1.29, printed pp. 101 and 103, give saturation and the fan motivation, not this proof. Expose VI 3.7(a), printed p. 75, motivates the finite-basis input."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +113,52 @@
    "results": "ConvexCone and PointedCone constructors; no saturation theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A saturated sharp finitely generated cancellative additive monoid equals the lattice points of its rational positive cone",
+   "results": "NumberField.mixedEmbedding.fundamentalCone.mem_integerSet and integerSet; IsLinearSet.isProperSemilinearSet and exists_fg_eq_subtypeVal; IsProperLinearSet; ConvexCone.IsGenerating.isReproducing and IsReproducing.isGenerating; PointedCone.toConvexCone_positive. No result states the saturated-monoid lattice-intersection assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sharp saturated affine monoid is the intersection of its group completion with the rational cone it generates",
+   "results": "AddSubgroup.Saturated, Subgroup.Saturated, AddSubgroup.saturated_iff_nsmul, AddSubgroup.saturated_iff_zsmul, IsAffineAddMonoid, IsAffineMonoid, IsAffineMonoid.toIsMulTorsionFree, ConvexCone.ctorIdx. Saturation here concerns subgroups or definitions; none states the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubmonoid, Module.Free",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cone.*lattice|lattice.*cone|IsAffineAddMonoid|PowSaturated",
+   "results": "25 hits: NumberField/CanonicalEmbedding/FundamentalCone integerSet; Geometry/Convex/Cone/Basic and Pointed cone lattice structures; Algebra/AffineMonoid/Basic.lean:20 IsAffineAddMonoid; GroupTheory/Subgroup/Saturated.lean:31 PowSaturated and :35 powSaturated_iff_npow; other category-theoretic lattice hits. Read the affine-monoid and saturation sources: definitions do not state the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A saturated additive submonoid of a torsion free abelian group is the set of integral points of its rational conical hull",
+   "results": "AddGroupCone.toAddSubmonoid and nonneg_toAddSubmonoid; GroupCone.toSubmonoid; ConvexCone.IsGenerating.isReproducing, IsReproducing.isGenerating, isGenerating_iff_isReproducing; PointedCone; PointedCone.mem_span_set. These give cone notions and finite-sum descriptions, not the saturated monoid theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat|cone|hull",
+   "results": "[grep] OK 0 hit(s), subdirectory Algebra/AffineMonoid",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-sharp-fs-orthant-embedding",
@@ -72,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-sharp-cone-lattice-intersection",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved torsion-freeness directly from saturation and sharpness, reused the existing finite-basis Mathlib leaf, checked rationalization injectivity by coordinate functionals, and wrote explicit finite-sum and denominator-clearing arguments for the cone, lattice intersection and pointedness. No new nodes.",
+  "blueprint": "The steps expand the sharp saturated monoid/cone input in the nearby-duality alteration ancestry of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-sharp-fs-orthant-embedding; Expose VIII 3.1.17 and Remark 3.1.29 supply the stated saturation/fan motivation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-798064a25",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-798064a25 (reviewer sub-agent of L); spot-checked: I read the full item, its 6 steps, both cited nodes (def-trf-fs-log-blowup and the Mathlib leaf lem-trf-fg-torsionfree-group-free), the parent lem-trf-sharp-fs-orthant-embedding, the sibling lem-trf-rational-cone-dual-integral-forms, and the unit and chapter records. The delivery has one commit holding only the item and its report, with no new nodes. The statement (finite-free group completion, a pointed spanning rational polyhedral cone, P = C∩G) is true and is exactly what the parent's steps and the sibling's hypotheses need. I tested it on P={0}, N, N^2 and {(a,b): a>=b>=0}. Each hypothesis is needed: Z/2 or Z (not sharp) breaks (a)/(b), and <2,3> in N (not saturated) breaks (c). Step 1: torsion-freeness from saturation, integrality and sharpness, correct. Step 2: finite basis from the Mathlib leaf Module.basisOfFiniteTypeTorsionFree', which I checked in PID.lean around lines 382-383. Step 3: injectivity of G into V through coordinate functionals extended to the tensor product, correct. Step 4: cone generators and spanning with explicit coefficients c_j. Step 5: denominators cleared explicitly with N and A_j, then saturation. Step 6: pointedness from a+b=0 in P and sharpness. The elementary markings are honest, proof_deps is the union of the step uses, and there is no cycle. Sources: I read ILO VIII 3.1.17 (p.101) and Remark 3.1.29 (p.103) in the PDF; they only motivate the lemma, and the node correctly marks the proof as agent-written with Kato 1994 WANTED. Searching the DAG with rg for saturated, cone, sharp and torsion-free found no duplicate; fs-face-sharpening and fine-monoid-finite-saturation are different statements. Route: the item uses only a definition and a Mathlib leaf, so no tool_uses are needed. This is not a target node, so the base-change check does not apply, and no SGA source is used. Minor point, not changed: one Loogle query is recorded as 'unavailable' when it was really a parse error, but a second Loogle query is recorded properly. I made no fixes."
  }
 }
