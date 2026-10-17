@@ -175,11 +175,10 @@ theorem algebraize_finite_structure_algebra
   have hproper0 : Scheme.Modules.HasSupportProperOver
       (pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))))
       (F 0) := Scheme.Modules.finite_structure_proper_support (fnY 0) _
-  -- Normalize the system before using existence with its legacy comparison.
-  let c₀ (n : ℕ) : Scheme.Modules.tensorPullback (j (n + 1)) ⋙
-      Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (j n) :=
-    (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (j (n + 1)))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n))
+  -- Existence comes with its own comparison `c₀`; normalize the system to it.
+  obtain ⟨c₀, -, -, hexist⟩ := grothendieck_existence A I f i hi hp
+    (fun n ↦ Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction (i n)))
+    (fun n ↦ Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction _))
   have hnormalize (n : ℕ) : ∃ s : 𝟭 (Xn n).Modules ≅ 𝟭 (Xn n).Modules,
       ∀ (G : X.Modules) (H : (Xn n).Modules)
         (ψ : (Scheme.Modules.tensorPullback (j n)).obj G ≅ H),
@@ -194,7 +193,7 @@ theorem algebraize_finite_structure_algebra
   choose s hs using hnormalize
   let φ₀ n := φ n ≪≫ ((s n).app (F n)).symm
   obtain ⟨G, hG, hpG, ψ, hψ₀⟩ :=
-    (grothendieck_existence A I f i hi hp c₀ (fun _ ↦ rfl)).2 F φ₀ hF hproper0
+    hexist F φ₀ hF hproper0
   have hψ (n : ℕ) : (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫
       (φ n).hom = (c n).hom.app G ≫ (ψ n).hom := by
     apply (cancel_mono ((s n).inv.app (F n))).1

@@ -201,7 +201,7 @@ theorem finite_structure_unit_lift_existence
     infer_instance
   have hvd := compatible_family_change (i := i) j hj d c G Q hG hQ v hv
   obtain ⟨w, hw, _⟩ :=
-    (grothendieck_existence A I f i hi hp d (fun _ ↦ rfl)).1
+    (grothendieck_existence_fullyFaithful A I f i hi hp d)
       G Q hG hQ hproper hproperQ v hvd
   let η : SheafOfModules.unit X.ringCatSheaf ⟶ G := q ≫ w
   have hη : ∀ (n : ℕ) (U : X.Opens) (r : Γ(X, U)),
@@ -241,7 +241,7 @@ theorem finite_structure_unit_lift_existence
     rw [hη n (unop U) 1, map_one, one_mul]
   have hLeq : L = 𝟙 G := by
     obtain ⟨z, hz, huniq⟩ :=
-      (grothendieck_existence A I f i hi hp d (fun _ ↦ rfl)).1 G G hG hG hproper hproper
+      (grothendieck_existence_fullyFaithful A I f i hi hp d) G G hG hG hproper hproper
       (fun n ↦ 𝟙 ((tensorPullback (j n)).obj G)) (by
         intro n
         exact (Category.comp_id _).trans
