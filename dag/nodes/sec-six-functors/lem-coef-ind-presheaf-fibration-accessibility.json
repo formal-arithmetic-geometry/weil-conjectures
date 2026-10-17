@@ -28,7 +28,15 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-small-right-adjoint-diagram-compact-model",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-infinity-presheaf-representable-slice-density",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-simplex-category-last-vertex",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+  "def-cbc-enhanced-cartesian-fibration"
  ],
  "proof": [
   {
@@ -236,5 +244,44 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-34188d182 (reviewer sub-agent of L); spot-checked: I read GHN arXiv:1501.02161v3 online (it is not archived; the report's WANTED line stands), at Def 9.1, Props 9.12/9.16, Def 9.15, Cor 9.17, Def 10.4, Prop 10.5 with its proof, and Lemmas 10.6/10.7. The item matches Def 10.4/Prop 10.5: Ind_lambda inside Fun(C^op, small spaces), right-adjoint transports H(f^op), the limit-preserving extension along y^op, the category-of-elements formula, and accessibility of the total category and of q. Replacing 'uncountable' with 'infinite regular' follows GHN, where kappa is only regular. That strengthens the item rather than weakening it, and the parent supplies an uncountable lambda, so its call (steps 5-7) still applies. The new realization node matches Cor 9.17: (i) is GHN's pullback square for cocartesian edges, (ii) is the relative limit over (K^{◁▷})^op, and the variance is correct. I tested it on A=*, where the fibre over x is Fun(x, Ind C), as claimed, on an empty K and on lambda=aleph_0. It is the classification theorem, not a restatement of the item's accessibility clause. lem-coef-ind-right-adjoint-coherent is true for every regular lambda: it asserts a functor, not the Pr^L equivalence that fails at aleph_0. It generalizes the uncountable-lambda clauses in lem-coef-small-right-adjoint-diagram-compact-model and lem-coef-compact-model-pr-duality, so it is not a duplicate. Steps 1-5 check out against the cited statements. In step 4 I checked the slice reformulation of (ii), the hypotheses of the products/pullbacks reduction including aleph_0 and the empty product, the smallness of S_0, the locality maps (the span edges exist in E_A^◁), both hypotheses of reflector-accessibility, and the accessibility of i for mu-filtered colimits. proof_deps equals the union of the uses. Every dependency is in unit sk-prop-sf-biduality-general apart from a definition, so no tool_uses are needed; no SGA is cited and there is no cycle. One mechanical fault (B9), repaired in fixes/: in both new nodes blueprint.from.via listed only the item. It now lists the item followed by the item's own via chain up to prop-coef-integral-exceptional-adjoint. Nothing else changed. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IndPresheafFibrationAccessibility",
+  "declaration": "SSet.Enhanced.ind_presheaf_fibration_accessibility",
+  "file": "lean/Sheaf/CategoryTheory/IndPresheafFibrationAccessibility.lean",
+  "statement": "theorem ind_presheaf_fibration_accessibility (A : SSet.{u}) [Quasicategory A] (κ : Cardinal.{u}) (hκ : κ.IsRegular) (F₀ : SSet.uliftFunctor.{u + 1, u}.obj A ⟶ compactRex κ) : ∃ hP : Quasicategory (CategoryTheory.Spaces.infinityPresheaves A), ∃ H : (indExtensionBase A).op ⟶ CatInfinity.{u + 1}, Nonempty (IndDiagramData F₀ H) ∧ ∃ (G : (indExtensionPresheaves A).op ⟶ CatInfinity.{u + 1}) (ε : ((ihom (indExtensionBase A).op).obj CatInfinity.{u + 1}) _⦋1⦌), IndLimitExtension H G ε ∧ IndExtensionUnique H G ε ∧ IndElementsFormula H G ε ∧ ∀ (E : SSet.{u + 1}) (hE : Quasicategory E) (q : E ⟶ CategoryTheory.Spaces.infinityPresheaves A), @cartesianFibration _ _ q hE hP → IndCartesianClassification q G → @IsAccessibleIndFibration E _ hE q",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.indExtensionBase",
+   "SSet.Enhanced.indExtensionPresheaves",
+   "SSet.Enhanced.indExtensionYoneda",
+   "SSet.Enhanced.IndDiagramData",
+   "SSet.Enhanced.IndPreservesSmallLimits",
+   "SSet.Enhanced.IndLimitExtension",
+   "SSet.Enhanced.IndExtensionUnique",
+   "SSet.Enhanced.indElements",
+   "SSet.Enhanced.indElementsProjection",
+   "SSet.Enhanced.indTransformationMap",
+   "SSet.Enhanced.IndOppositeCocone",
+   "SSet.Enhanced.IndElementsFormula",
+   "SSet.Enhanced.indCartesianSections",
+   "SSet.Enhanced.indSectionInclusion",
+   "SSet.Enhanced.IndCartesianClassification",
+   "SSet.Enhanced.IsAccessibleIndFibration",
+   "SSet.Enhanced.ind_presheaf_fibration_accessibility"
+  ],
+  "note": "Uses the published Ind, Cat^{rex}, coherent-adjunction, presheaf/Yoneda, cone and fibration notions. The input cardinal is any infinite regular cardinal, including aleph_0. H and its prescribed Ind models are concluded, not assumed. The extension retains its actual restriction equivalence; uniqueness retains its triangle; the slice formula fixes the canonical prism and pasting; classification retains the entire Cartesian section diagram over the simplex category. Small means u throughout; the containing universes u+1 and u+2 implement the stated size convention. Replaces the earlier saved packet, whose True-valued predicates and arbitrary presheaf base did not state the node. Second reading reuses published cylinder/edge decoding, standard interval reversal, and Cartesian sections of the pulled-back fibration; no duplicate definitions of these notions remain.",
+  "fixed_by": "NT-stage2-cc-9317cf689"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9317cf689",
+  "group": "Q128",
+  "result": "fix",
+  "note": "I read the node, all 11 stmt_deps, the module, the report and every declaration used (CompactIndRight/Model, compactRex, IsAccessible, PreservesKappaFiltered, PreservesLimitsOfShape/IsImageCone, the slice, cartesianSections, strictCoherentDiagram, last-vertex). Every clause matches the node: regular κ including aleph0; H concluded with Ind models and coherent adjunctions, right-adjoint variance checked; extension preserving u-small limits with a pinned ε; uniqueness triangle; canonical slice limit formula with face equations checked; Cartesian-section classifier with variance and universes checked; IsAccessible plus regular μ filtered preservation. No universe restriction; edge cases covered. Only lean and stmt_deps changed; the added stmt_deps are landed nodes and there is no cycle. One H4 fault: IndOppositeCocone duplicated the published Spaces.presheafOppositeCoconeMap. Fixed in fixes/IndPresheafFibrationAccessibility.lean (signature and record unchanged), with a report note in fixes/lem-coef-ind-presheaf-fibration-accessibility.report.md. Both the original and the fixed module compile clean with nt_compile (2.5 s and 2.4 s); an injected-error control confirms errors are reported."
  }
 }

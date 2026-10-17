@@ -486,5 +486,27 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-a7da96105 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the one new node and every cited statement in full. The item statement matches main-20261015 lem-pur-co-smooth-etale-locality word for word, at finite A_{E,n} pro-etale D^b_ctf, with no hypothesis added (Y and Y' only finite type). Route: blueprint Steps 1-4 are carried by delivery Steps 2, 3+5, 4 and 6. Descent is by lem-pur-etale-iso-descent where X is separated and by lem-cbc-proetale-stalk-conservative(1) on the singleton cover for a non-separated X'. No SGA source is used. Checks: c_e from lem-sfb (Stacks 0GKM/0F4Y, read at more-etale.tex l.3622 and l.200) holds for every compactification. Equation (E) has the right types and direction: b_e is the inverse of the 03S6 map e'_Σ! h^{-1} -> g^{-1} e_Σ!. P^c is the same composite as PF^c in def-exchange-projection and as the realization clause of lem-weil-finite-compact-projection-formula. The PF composition is taken from fix-prop-projection-formula, and u_!Q is in D^b_ctf by thm-sf-ctf-stability(iv) since U and X are separated. The exchange pasting is stated in lem-amb-unbounded-compact-support-comparisons (sk-prop-an, a unit sk-prop-cohsm cites) for arbitrary base change. M^dual is in D^b_ctf by cor-weil-finite-constructible-hom. The new node lem-pur-etale-support-map-compatibility is true, non-elementary and statement-only, and the node says it is an agent formulation of Stacks 0F7L/0GKF/0GL5/03S6/0F4L. Its graph section is clopen in \\bar V x_T W. I tested it on e=id, an open immersion with compactification (e,id), finite etale with (id,e), and V empty. It is strictly below the item. Its clause (1) overlaps the SGA-sourced lem-asd-etale-compact-support-normalization, but clause (2), the projection, is in no existing node, and the Stacks c fits the no-SGA lock, so it is not a duplicate. The 32 declared tool_uses are generic black boxes and I accept them all. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CohomologicalSmoothEtaleLocality",
+  "declaration": "AlgebraicGeometry.ProEtale.isCohomologicallySmooth_of_surjective_etale",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isCohomologicallySmooth_of_surjective_etale",
+   "AlgebraicGeometry.ProEtale.isCohomologicallySmooth_etale_and_dualizing"
+  ],
+  "file": "lean/Sheaf/Paper/CohomologicalSmoothEtaleLocality.lean",
+  "statement": "theorem isCohomologicallySmooth_of_surjective_etale (P : WeilConjectures.PurityFiniteSetting.{u}) {U X Y : Scheme.{u}} [U.Over (Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [U.IsSeparated] [X.IsSeparated] [LocallyOfFiniteType (U ↘ Spec (.of P.field.k))] [QuasiCompact (U ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [LocallyOfFiniteType f] [QuasiCompact f] (e : U ⟶ X) [e.IsOver (Spec (.of P.field.k))] [Etale e] [QuasiCompact e] [Surjective e] (h : IsCohomologicallySmoothCompared P (e ≫ f)) : IsCohomologicallySmoothCompared P f",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4c2ed897",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Item statement (2 sorry theorems) matches node clause by clause: U,X separated, Y not; f/e/e≫f separatedness via instances; QuasiCompact e automatic; 2nd theorem needs only IsSeparated e (weaker than node's separated schemes), ω_u≅𝟙_ with the predicate's compactification. §1(B) repair of def-pur-co-smoothness justified: reproduced the import failure of legacy Sheaf.Paper.CohomologicalSmoothness (duplicate upperStarIsoLowerStarInv). New IsCohomologicallySmoothCompared matches the node: ω=ν*f^!Λ; Dctf two-sided inverse; ν* of Etale.dualizingComplexTensorMap (projection inverse then counit) on all étale reps of Dctf; ν* of dualizingComplexBaseChangeMap (mate of inverse Ex_!) for all finite-type Cartesian squares, g unrestricted. Helpers have real data (Nagata, quotient finiteness). Landed citers do not use the old predicate in statements. Only `lean` changed in both nodes; statements verbatim; source/blueprint docstrings present; nt_compile clean (5.3 s, 4.4 s). Maintainer notes: legacy module now unused and unimportable (also breaks PurityDiagonalBaseChange import); stale reviewed_lean on def-pur-co-smoothness."
  }
 }
