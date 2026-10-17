@@ -300,5 +300,30 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-c1934e180 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement, plus the full proof of lem-weil-pbc-ringed-projection-mate-exact. Source: lem-trf-ordinary-kunneth.proof.md (main-20261015), the displayed exchange/projection composite and Step 2 'exact in Q'. The parent DAG node's step 6 uses this item with exactly this scope (bounded flat L, bounded Q in D^+). The statement is a formal shift/triangle compatibility with no invertibility claim, and it is true. Base-change square: def-kun-unbounded-exchange with (f,f',g,g')=(f,h,p_Y,p_X) gives p_Y^{-1}Rf_*L -> Rh_*p_X^{-1}L. The coefficient category is constant-A D(T_et,A) throughout, and the direction of c (h^{-1}p'^{-1} -> p_Z^{-1}) agrees with the module-linear composition node. Step 4: I recomputed the (-1)^p second-variable shift as a chain map and it agrees with the convention in step 2 of the projection-mate node. Step 5: mu and the inverse of the lem-kun-inverse-image-monoidal comparison are the same termwise isomorphism in the same direction, both adjunctions are the canonical derived one, and the constant-A hypotheses hold. Steps 6–8: the termwise c shift identity, the four-equality composition and the explicit connecting square are correct; no unspecified TR3 fill-in is used. Small cases checked: Q=0, Q=M[0] vs M[1] signs, f=id, Z=Spec k. There are no new nodes, no duplicates (lem-sf-supported-external-triangle-comparison is a different statement), no cycle and no SGA citation. FIX: two off-route split statements, lem-weil-pbc-exact-functor-derived-functor and lem-weil-pbc-inverse-image-composition-module-linear, were used without a tool_uses declaration. I appended both to split_report.tool_uses in fixes/dag/nodes/sec-six-functors/lem-trf-external-comparison-triangles.json; nothing else changed. I accept all nine tool uses as generic black boxes. The report mentions a citations.json that is not in the delivered commit; this is not a DAG fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExternalComparisonTriangles",
+  "declaration": "AlgebraicGeometry.Etale.externalComparison_triangles",
+  "declarations": [
+   "AlgebraicGeometry.Etale.externalComparisonSource",
+   "AlgebraicGeometry.Etale.externalComparisonTarget",
+   "AlgebraicGeometry.Etale.externalComparisonExchange",
+   "AlgebraicGeometry.Etale.externalComparisonMap",
+   "AlgebraicGeometry.Etale.externalComparison_triangles"
+  ],
+  "file": "lean/Sheaf/Paper/ExternalComparisonTriangles.lean",
+  "statement": "theorem externalComparison_triangles (L : DerivedCategoryModule A X) (_hL : ∃ (a b : ℤ) (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ), IsBoundedFlatComplex A a b P ∧ Nonempty (L ≅ DerivedCategory.Q.obj P)) : (externalComparisonSource A f b c L).IsTriangulated ∧ (externalComparisonTarget A f b c L).IsTriangulated ∧ ∃ α : externalComparisonSource A f b c L ⟶ externalComparisonTarget A f b c L, (∀ Q, α.app Q = externalComparisonMap A f b c L Q) ∧ (∀ Q, α.app (Q⟦(1 : ℤ)⟧) ≫ ((externalComparisonTarget A f b c L).commShiftIso (1 : ℤ)).hom.app Q = ((externalComparisonSource A f b c L).commShiftIso (1 : ℤ)).hom.app Q ≫ (α.app Q)⟦(1 : ℤ)⟧') ∧ (∀ (T : Triangle (DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)))), T ∈ distTriang _ → (externalComparisonSource A f b c L).mapTriangle.obj T ∈ distTriang _ ∧ (externalComparisonTarget A f b c L).mapTriangle.obj T ∈ distTriang _ ∧ ∃ φ : (externalComparisonSource A f b c L).mapTriangle.obj T ⟶ (externalComparisonTarget A f b c L).mapTriangle.obj T, φ.hom₁ = α.app T.obj₁ ∧ φ.hom₂ = α.app T.obj₂ ∧ φ.hom₃ = α.app T.obj₃)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4e5f82021",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Mathematics, canonical maps, hypotheses, conclusions, universes, edge cases, and verbatim signature checked; per-file compile passed. Complete replacement report in fixes/ repairs H1/H11: the original second reading was an author self-check. Findings recorded in review.md; no Lean or DAG changes needed."
  }
 }
