@@ -1,0 +1,102 @@
+{
+ "id": "def-trf-union-of-irreducible-components",
+ "kind": "definition",
+ "title": "Union of irreducible boundary components",
+ "statement": "Let $X$ be a scheme and $H,B\\subset X$ closed subschemes [def-weil-closed-immersion]. Say that $H$ is a union of irreducible components of $B$ when every irreducible component of $|H|$ is an irreducible component of $|B|$ [def-weil-irreducible-components]. Explicitly, for every irreducible closed subset $Z\\subset |X|$ maximal among those contained in $|H|$, $Z$ is contained in $|B|$ and maximal among the irreducible closed subsets contained there. This condition depends only on the supports, and is unchanged by reduction [def-weil-pbc-scheme-reduction]; it permits $H=\\varnothing$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Remark 4.2.2(i), printed p. 118"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme is a union of irreducible components of another closed subscheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] (s : Closeds α) :\\n  ∃ S : Set (Closeds α), S.Finite ∧ (∀ t ∈ S, IsIrreducible (t : Set α)) ∧ s = sSup S\", \"doc\": \"In a Noetherian topological space, every closed subset can be expressed as the union of finitely many irreducible closed subsets.\"}\n  {\"name\": \"irreducibleComponents\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"(X : Type*) [TopologicalSpace X] : Set (Set X)\", \"doc\": \"The irreducible components of a topological space are the maximal irreducible subsets. This set consists of all subsets $ s $ of $ X $ that are irreducible and maximal with respect to inclusion, meani\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] (s : Closeds α) : ∃ S : Finset (Closeds α), (∀ k : S, IsIrreducible (k : Set α)) ∧ s = S.sup id\", \"doc\": \"In a Noetherian topological space, every closed subset can be expressed as the union of finitely many irreducible closed subsets. Specifically, for any closed set $ s $, there exists a finite collecti\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] {s : Set α} (hs : IsClosed s) :\\n  ∃ S : Set (Set α), S.Finite ∧ (∀ t ∈ S, IsClosed t) ∧ (∀ t ∈ S, IsIrreducible t) ∧ s = ⋃₀ S\", \"doc\": \"In a Noetherian topological space $\\\\alpha$, every closed set $s$ can be expressed as a finite union of irreducible closed subsets. Specifically, there exists a finite collection $S$ of closed irreduci\"}\n  {\"name\": \"isClosed_irreducibleComponent\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"{x : X} : IsClosed (irreducibleComponent x)\", \"doc\": \"The irreducible component of a point $ x $ in a topological space is a closed set, i.e., $ \\\\operatorname{IsClosed}(\\\\operatorname{irreducibleComponent}(x)) $.\"}\n  {\"name\": \"isClosed_of_mem_irreducibleComponents\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"(s) (H : s ∈ irreducibleComponents X) : IsClosed s\", \"doc\": \"If $ s $ is an irreducible component of a topological space $ X $, then $ s $ is a closed set in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IrreducibleSpace X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"exists_mem_irreducibleComponents_subset_of_isIrreducible\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"(s : Set X) (hs : IsIrreducible s) : ∃ u ∈ irreducibleComponents X, s ⊆ u\", \"doc\": \"Every irreducible set $ s $ in a topological space is contained in an irreducible component, i.e., there exists a maximal irreducible subset $ u $ such that $ s \\\\subseteq u $.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme is a union of irreducible components of another closed subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → TopologicalSpace.Closeds ↥X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  PrimeSpectrum.vanishingIdeal s ∈ minimalPrimes R ↔ closure s ∈ irreducibleComponents (PrimeSpectrum R)\", \"doc\": \"For a commutative semiring $ R $ and a subset $ s $ of its prime spectrum $ \\\\operatorname{Spec}(R) $, the vanishing ideal of $ s $ is a minimal prime ideal of $ R $ if and only if the topological clos\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R],\\n  PrimeSpectrum.zeroLocus ∘ SetLike.coe '' minimalPrimes R = irreducibleComponents (PrimeSpectrum R)\", \"doc\": \"The irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ coincide with the zero loci of the minimal prime ideals of $R$. Specifically, the image of the m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.le_support_iff_le_vanishingIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : X.IdealSheafData} {Z : TopologicalSpace.Closeds ↥X},\\n  Z ≤ I.support ↔ I ≤ AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal Z\", \"doc\": \"For an ideal sheaf $ I $ on a scheme $ X $ and a closed subset $ Z $ of $ X $, the inclusion $ Z \\\\subseteq \\\\text{supp}(I) $ holds if and only if the ideal sheaf $ I $ is contained in the vanishing ide\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R},\\n  PrimeSpectrum.zeroLocus ↑I ∈ irreducibleComponents (PrimeSpectrum R) ↔ I.radical ∈ minimalPrimes R\", \"doc\": \"For a commutative semiring $ R $ and an ideal $ I $ of $ R $, the zero locus $ V(I) $ is an irreducible component of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if the radical $ \\\\sqrt{I}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → Set ↥X\", \"doc\": \"Given a scheme $X$ and an ideal sheaf data (a sheaf of ideals on the structure sheaf $\\\\mathcal{O}_X$), this function returns the support set of the ideal sheaf, defined as the set of points in the und\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep 'NormalCrossing|normal.crossing|IsPermissibleCenter|UnionOfIrreducibleComponents'; rg in WeilConjectures and lean/Sheaf; rg -l in dag/nodes; tools/blueprint_refs.py search normal crossings/permissible/irreducible components",
+   "results": "[grep] OK 0 hit(s)\n\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:8:public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsDivisor\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:21:# Resolution of a nodal curve over a smooth normal crossings pair\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:36:/-- A projective nodal curve over a smooth integral strict normal crossings pair has a proper\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:51:2. Apply `lem-trf-snc-divisorial-log-chart` to the smooth normal crossings pair (Y,T).\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:58:image, and reduced inverse-image boundary B1 a normal crossings Cartier divisor.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:59:5. Apply `lem-trf-normal-crossings-strictification` to (X1,B1). It gives a proper q : X2 -> X1,\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:60:with X2 integral smooth over F and reduced inverse-image boundary B2 strict normal crossings,\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:72:    (hT : T.IsStrictNormalCrossingsDivisor (Y ↘ Spec (.of F)))\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean:88:      ((D ⊓ T.comap f).comap r).radical.IsStrictNormalCrossingsDivisor\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/PlurinodalAlteration.lean:126:    requiring its inverse image to lie in a strict normal crossings divisor. In dimension\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/StrictNormalCrossingsDivisor.lean:14:# Strict normal crossings divisors over a field\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/StrictNormalCrossingsDivisor.lean:17:Expose VI, 1.4--1.5 (blueprint: def-trf-strict-normal-crossings-divisor).\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/StrictNormalCrossingsDivisor.lean:33:components are the irreducible components and meet with strict normal crossings.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/StrictNormalCrossingsDivisor.lean:35:(blueprint: def-trf-strict-normal-crossings-divisor). -/\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/StrictNormalCrossingsDivisor.lean:36:def IsStrictNormalCrossingsDivisor {F : Type u} [Field F] {X : Scheme.{u}}\n\nDAG file matches:\ndag/nodes/sec-trace-formula/lem-trf-permissible-boundary-preservation.json\ndag/nodes/sec-trace-formula/lem-trf-regular-local-ufd-boundary-factorization.json\ndag/nodes/sec-trace-formula/lem-trf-permissible-coordinate-chart.json\ndag/nodes/sec-trace-formula/def-trf-strict-normal-crossings-divisor.json\ndag/nodes/sec-trace-formula/lem-trf-free-characteristic-regular-boundary.json\ndag/nodes/sec-trace-formula/lem-trf-log-regular-desingularization.json\ndag/nodes/sec-trace-formula/lem-trf-nodal-etale-chart.json\ndag/nodes/sec-trace-formula/lem-trf-strict-transform-flat-etale-base-change.json\ndag/nodes/sec-trace-formula/lem-trf-normal-crossings-strictification.json\ndag/nodes/sec-trace-formula/lem-trf-etale-regular-intersection-descent.json\ndag/nodes/sec-trace-formula/def-trf-nodal-geometric-fibres.json\ndag/nodes/sec-trace-formula/lem-trf-etale-component-coordinate-identification.json\ndag/nodes/sec-trace-formula/lem-trf-snc-divisorial-log-chart.json\ndag/nodes/sec-trace-formula/lem-trf-nc-maximal-branch-blowup.json\ndag/nodes/sec-trace-formula/lem-trf-regular-perfect-field-smooth.json\ndag/nodes/sec-trace-formula/lem-trf-plurinodal-alteration.json\ndag/nodes/sec-trace-formula/lem-trf-nodal-pair-projective-resolution.json\ndag/nodes/sec-proper-base-change/lem-weil-pbc-dense-open-component-modifications.json\ndag/nodes/sec-smooth-base-change/lem-sbc-generic-fibre-incidence-spread.json\n\nblueprint_refs: 0 nodes for normal crossings, 0 for permissible; 11 generic component-related nodes for irreducible components. The existing strict-normal-crossings-divisor node requires a field and smooth intersections and does not express regular boundaries on arbitrary regular schemes. Generic irreducibleComponents and regular parameters are reused; none of the sources defines this composite predicate.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The permissible boundary modification used by the nodal-pair resolution; ILO VIII 4.1.2, 4.1.4(i), Remark 4.2.2(i), Lemma 4.2.9.",
+   "via": [
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnionOfIrreducibleComponents",
+  "declaration": "AlgebraicGeometry.IsUnionOfIrreducibleComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnionOfIrreducibleComponents.lean",
+  "statement": "def IsUnionOfIrreducibleComponents {X : Scheme.{u}} (H B : X.IdealSheafData) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-permissible-boundary-preservation",
+  "date": "2026-10-17",
+  "group": "NV"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-191379197",
+  "group": "NV",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-191379197",
+  "group": "NV",
+  "result": "fix",
+  "note": "Reviewed the immutable delivery, sources, dependencies, definitions, signatures, and edge cases. Mathematics passes. Complete fixes add three missing proof imports (H9) and correct the report. Original and corrected files compile cleanly through scompile.py with server confirmation. Details in review.md."
+ }
+}

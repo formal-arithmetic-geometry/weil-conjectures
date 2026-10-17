@@ -15,7 +15,11 @@
   "def-nagata-global-blowup",
   "def-weil-pbc-scheme-reduction",
   "def-weil-closed-immersion",
-  "def-nagata-strict-transform"
+  "def-nagata-strict-transform",
+  "def-trf-normal-crossings-divisor",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-trf-permissible-center",
+  "def-trf-union-of-irreducible-components"
  ],
  "proof": [
   {
@@ -179,5 +183,28 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-fa6dfcb10 (reviewer sub-agent of L); spot-checked: Read in full: the item, the 4 new nodes, every cited statement, ILO VIII 4.1.2-4.1.4(i) p.117, Rem 4.2.2(i) p.118, Lemma 4.2.9 chart proof p.121, and Stacks 025N/039S (etale.tex), 081I (morphisms.tex) and 080E/080F (divisors.tex). The item's statement is unchanged. It assumes M in B, which is stronger than ILO's 'V has normal crossings with Z'; that is fine because the item is not a target and its only user, the strictification step, blows up centers inside the boundary. It holds on A^2 axes/origin, a Cartier center, a nodal B, A^3 with M=V(x,z), and H empty. Steps 1-5 check out: J meets {1..r} because (t_J) is prime and contains t_1...t_r. The component lemma is applied only to H on X, and its hypotheses hold. A point over (y,w) exists because the residue-field tensor product is nonzero. Strict-transform flat base change follows from 081I. The descent lemma is applied to the family {E, H_a^st}, then rem-pc-regular-normal passes the result to the components of E. The set equalities for B^+ and H^+ are immediate. All 4 new nodes are true, statement-only and self-contained, with correct blueprint.from/via. No duplicates found by rg over strict transform, 081I/080F, SNC, permissible, RSP and 025N/039S. The strict-transform node's generic-point hypothesis is stronger than needed but harmless, and step 2 supplies it. FIX: the corrected lem-trf-permissible-coordinate-chart.json restores '\\ne', which had become a literal newline followed by 'e' (B4). It also makes the strict-transform clause explicit: on chart j the strict transform of V(t_i) is V(u_i) for i in J\\{j}, empty for i=j and V(t_i) for i not in J. Step 3 uses exactly this identification. Accepted tool uses: thm-nagata-global-blowup-proper, thm-nagata-global-blowup-complement, lemma-nagata-strict-transform-restrict, thm-nagata-blowup-flat-base-change, rem-pc-regular-normal. These are generic blowup and scheme tools that no node of sk-i-curve-zero provides.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-191379197",
+  "group": "NV",
+  "result": "fix",
+  "note": "Reviewed the immutable delivery, sources, dependencies, definitions, signatures, and edge cases. Mathematics passes. Complete fixes add three missing proof imports (H9) and correct the report. Original and corrected files compile cleanly through scompile.py with server confirmation. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PermissibleBoundaryPreservation",
+  "declaration": "AlgebraicGeometry.permissible_boundary_preservation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PermissibleBoundaryPreservation.lean",
+  "statement": "theorem permissible_boundary_preservation (X : Scheme.{u}) [IsNoetherian X] (hX : IsRegularScheme X) (B H M : X.IdealSheafData) (hB : B.IsNormalCrossingsDivisor) (hH : IsStrictNormalCrossingsBoundary H) (hHB : (H.support : Set X) ⊆ (B.support : Set X)) (hHcomponents : IsUnionOfIrreducibleComponents H B) (hM : IsPermissibleCenter B M) : IsRegularScheme M.blowup ∧ ((B.comap M.blowupMap).radical).IsNormalCrossingsDivisor ∧ IsStrictNormalCrossingsBoundary ((H ⊓ M).comap M.blowupMap).radical ∧ (((H ⊓ M).comap M.blowupMap).radical.support : Set M.blowup) ⊆ (((B.comap M.blowupMap).radical).support : Set M.blowup) ∧ IsUnionOfIrreducibleComponents ((H ⊓ M).comap M.blowupMap).radical ((B.comap M.blowupMap).radical) ∧ (B.comap M.blowupMap).radical = strictTransformIdeal M B ⊓ (M.comap M.blowupMap).radical ∧ ((H ⊓ M).comap M.blowupMap).radical = strictTransformIdeal M H ⊓ (M.comap M.blowupMap).radical",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.strictTransformIdeal",
+   "AlgebraicGeometry.permissible_boundary_preservation"
+  ],
+  "fixed_by": "NT-stage2-Codex-191379197"
  }
 }

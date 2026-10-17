@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-kahler-differentials",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "def-trf-continuous-kahler-differentials"
  ],
  "proof": [
   {
@@ -232,5 +233,24 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-787fa72bb (reviewer sub-agent of L); spot-checked: Read the full item and all nine steps, cited statements, Stacks sources, and current unit/chapter route. The shifted truncation comparison and completeness argument prove the exact sequence, including positive-characteristic edge cases. No cycles, duplicate new nodes, or prohibited machinery found. Accepted the declared finite-module completeness tool use. Historical ancestry mismatch documented in review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-694860202",
+  "group": "NK",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, route-pivot compliance, report sections, and scompile evidence all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FormalPowerSeriesContinuousConormal",
+  "declaration": "MvPowerSeries.formal_power_series_continuous_conormal",
+  "file": "lean/Sheaf/TraceFormula/FormalPowerSeriesContinuousConormal.lean",
+  "statement": "theorem formal_power_series_continuous_conormal (F : Type u) [Field F] (n s : ℕ) (J I : Ideal (MvPowerSeries (Fin n) F)) (hJ : J = Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) (f : Fin s → MvPowerSeries (Fin n) F) (hgen : Ideal.span (Set.range f) = I) (hI : I ≤ J) : ∃ (a : (Fin s → MvPowerSeries (Fin n) F ⧸ I) →ₗ[MvPowerSeries (Fin n) F ⧸ I] (MvPowerSeries (Fin n) F ⧸ I) ⊗[MvPowerSeries (Fin n) F] KaehlerDifferential.Continuous F (MvPowerSeries (Fin n) F) J) (b : (MvPowerSeries (Fin n) F ⧸ I) ⊗[MvPowerSeries (Fin n) F] KaehlerDifferential.Continuous F (MvPowerSeries (Fin n) F) J →ₗ[MvPowerSeries (Fin n) F ⧸ I] KaehlerDifferential.Continuous F (MvPowerSeries (Fin n) F ⧸ I) (J.map (Ideal.Quotient.mk I))), (∀ j : Fin s, a (Pi.single j 1) = (1 : MvPowerSeries (Fin n) F ⧸ I) ⊗ₜ[MvPowerSeries (Fin n) F] KaehlerDifferential.continuousD F (MvPowerSeries (Fin n) F) J (f j)) ∧ (∀ (h : MvPowerSeries (Fin n) F) (c : MvPowerSeries (Fin n) F ⧸ I), b (c ⊗ₜ[MvPowerSeries (Fin n) F] KaehlerDifferential.continuousD F (MvPowerSeries (Fin n) F) J h) = c • KaehlerDifferential.continuousD F (MvPowerSeries (Fin n) F ⧸ I) (J.map (Ideal.Quotient.mk I)) (Ideal.Quotient.mk I h)) ∧ Function.Exact a b ∧ Function.Surjective b",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed def-trf-continuous-kahler-differentials, added to stmt_deps. Tensor factors are canonically interchanged as in the recorded base-change dependency."
  }
 }

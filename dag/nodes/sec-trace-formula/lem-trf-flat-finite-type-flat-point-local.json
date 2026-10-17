@@ -2,16 +2,16 @@
  "id": "lem-trf-flat-finite-type-flat-point-local",
  "kind": "statement",
  "title": "Finite type flat module has a finitely presented stalk",
- "statement": "Let $A\\to B$ be a finitely presented homomorphism of commutative rings [def-weil-pbc-finitely-presented-algebra], let $N$ be a finite $B$-module [def-weil-pbc-finite-type-algebra], and let $\\mathfrak q$ be a prime of $B$ [def-weil-pbc-localization-at-prime]. If the localization $N_{\\mathfrak q}$ is flat as an $A$-module [def-weil-pbc-flat-ring-map], then $N_{\\mathfrak q}$ is a finitely presented $B_{\\mathfrak q}$-module [def-weil-pbc-module-finite-type-presentation].",
+ "statement": "Let $A\\to B$ be a finitely presented homomorphism of commutative rings [def-weil-pbc-finitely-presented-algebra], let $N$ be a finite $B$-module [def-weil-finitely-generated-module], and let $\\mathfrak q$ be a prime of $B$ [def-weil-pbc-localization-at-prime]. If the localization $N_{\\mathfrak q}$ is flat as an $A$-module [def-weil-pbc-flat-ring-map], then $N_{\\mathfrak q}$ is a finitely presented $B_{\\mathfrak q}$-module [def-sc-finitely-presented-module].",
  "source": {
   "document": "literature/stacks-project/flat.tex",
   "place": "Tag 05I7, lemma-finite-type-flat-at-point-local, affine translation."
  },
  "stmt_deps": [
   "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
   "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-module-finite-type-presentation",
+  "def-sc-finitely-presented-module",
   "def-weil-pbc-localization-at-prime"
  ],
  "proof": [
@@ -137,5 +137,48 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-6dd25f751 (reviewer sub-agent of L); spot-checked: The theorem and both supporting nodes are mathematically correct, and the cited Stacks passages, hypotheses, dependencies, searches, route, and edge cases check out. The delivered Step 1 omitted the affine translation X=Spec(B), S=Spec(A), F=~N, x=q, the stalk/base-local-ring identifications, and localization of A-flatness to A_(q∩A)-flatness before applying Tag 05I6. I repaired the item proof in fixes/dag/nodes/sec-trace-formula/lem-trf-flat-finite-type-flat-point-local.json and documented all checks in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71c178911",
+  "group": "NC",
+  "result": "pass",
+  "note": "All audited clauses and dependencies match Tag 05I7; exact statement and canonical Mathlib declarations verified; scompile.py passed cleanly.",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FlatFiniteTypeFlatPointLocal",
+  "declaration": "Module.finitePresentation_localizedModule_atPrime_of_flat",
+  "statement": "theorem finitePresentation_localizedModule_atPrime_of_flat {A : Type u} {B : Type v} {N : Type w} [CommRing A] [CommRing B] [AddCommGroup N] [Algebra A B] [Module B N] [Module.Finite B N] [Algebra.FinitePresentation A B] (q : Ideal B) [q.IsPrime] (hflat : @Module.Flat A (LocalizedModule q.primeCompl N) _ _ (Module.compHom (LocalizedModule q.primeCompl N) (algebraMap A B))) : Module.FinitePresentation (Localization.AtPrime q) (LocalizedModule q.primeCompl N)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/FlatFiniteTypeFlatPointLocal.lean"
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "NC stage 2",
+  "old_statement": "Let $A\\to B$ be a finitely presented homomorphism of commutative rings [def-weil-pbc-finitely-presented-algebra], let $N$ be a finite $B$-module [def-weil-pbc-finite-type-algebra], and let $\\mathfrak q$ be a prime of $B$ [def-weil-pbc-localization-at-prime]. If the localization $N_{\\mathfrak q}$ is flat as an $A$-module [def-weil-pbc-flat-ring-map], then $N_{\\mathfrak q}$ is a finitely presented $B_{\\mathfrak q}$-module [def-weil-pbc-module-finite-type-presentation].",
+  "what": "The finite B-module hypothesis cited a definition of finite-type algebras (polynomial generation), and the ordinary B_q-module conclusion cited finite presentation of sheaves on a ringed space. Replace only these two definition citations by the existing ordinary-module nodes. The mathematical statement is unchanged.",
+  "source": {
+   "document": "literature/stacks-project/flat.tex",
+   "place": "Tag 05I7, lemma-finite-type-flat-at-point-local, affine translation."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-flat-finite-type-dense-presentation",
+    "holds": true,
+    "note": "Only definition citations are corrected: the affine stalk theorem and every hypothesis and conclusion are unchanged; its use of finite presentation of N_q in the Tag 081N proof remains valid."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-finitely-presented-algebra",
+   "def-weil-pbc-finite-type-algebra",
+   "def-weil-pbc-flat-ring-map",
+   "def-weil-pbc-module-finite-type-presentation",
+   "def-weil-pbc-localization-at-prime"
+  ]
  }
 }

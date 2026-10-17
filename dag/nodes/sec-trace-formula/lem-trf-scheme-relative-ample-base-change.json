@@ -2,7 +2,7 @@
  "id": "lem-trf-scheme-relative-ample-base-change",
  "kind": "statement",
  "title": "Relative ampleness for schemes survives arbitrary base change",
- "statement": "Let $f:X\\to T$ and $g:T'\\to T$ be morphisms of schemes [def-pc-scheme], let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and put $X'=X\\times_TT'$ [def-pc-fibre-product], with projections $g':X'\\to X$ and $f':X'\\to T'$. Suppose that for every affine open $V\\subseteq T$, $L|_{f^{-1}(V)}$ is ample [def-weil-pbc-ample-invertible-module]. Then for every affine open $V'\\subseteq T'$, $(g'^*L)|_{(f')^{-1}(V')}$ is ample, where pullback is [def-pc-module-pullback].",
+ "statement": "Let $u$ be an arbitrary universe. Let $f:X\\to T$ and $g:T'\\to T$ be morphisms of schemes represented in the common universe $u$ (the universe is arbitrary) [def-pc-scheme], let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and put $X'=X\\times_TT'$ [def-pc-fibre-product], with projections $g':X'\\to X$ and $f':X'\\to T'$. Suppose that for every affine open $V\\subseteq T$, $L|_{f^{-1}(V)}$ is ample [def-weil-pbc-ample-invertible-module]. Then for every affine open $V'\\subseteq T'$, $(g'^*L)|_{(f')^{-1}(V')}$ is ample, where pullback is [def-pc-module-pullback].",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 0893 (lemma-ample-base-change), with relative ampleness as in Tag 01VH (definition-relatively-ample). The affine-open hypothesis already implies quasi-compactness of f."
@@ -179,5 +179,41 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-bceada0d2 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements; verified Stacks 0893, 01VH, 01VJ and supporting sources. All five steps and the new locality lemma are correct; no duplicate, cycle, hidden hypothesis or long-step fault found. Added only omitted lean_audit and merged_into metadata to the new node under fixes/. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeRelativeAmpleBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_on_affineOpens_tensorPullback_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeRelativeAmpleBaseChange.lean",
+  "statement": "theorem isAmple_on_affineOpens_tensorPullback_baseChange {X T T' : Scheme.{u}} (f : X ⟶ T) (g : T' ⟶ T) (L : X.Modules) [L.IsInvertible] (hL : ∀ V : T.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (f ⁻¹ᵁ V).ι).obj L).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj L) h) : ∀ V' : T'.Opens, IsAffineOpen V' → ∃ h : ((tensorPullback ((pullback.snd f g) ⁻¹ᵁ V').ι).obj ((tensorPullback (pullback.fst f g)).obj L)).IsInvertible, @IsAmple ((pullback.snd f g) ⁻¹ᵁ V').toScheme ((tensorPullback ((pullback.snd f g) ⁻¹ᵁ V').ι).obj ((tensorPullback (pullback.fst f g)).obj L)) h",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q87 stage 2",
+  "old_statement": "Let $f:X\\to T$ and $g:T'\\to T$ be morphisms of schemes [def-pc-scheme], let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and put $X'=X\\times_TT'$ [def-pc-fibre-product], with projections $g':X'\\to X$ and $f':X'\\to T'$. Suppose that for every affine open $V\\subseteq T$, $L|_{f^{-1}(V)}$ is ample [def-weil-pbc-ample-invertible-module]. Then for every affine open $V'\\subseteq T'$, $(g'^*L)|_{(f')^{-1}(V')}$ is ample, where pullback is [def-pc-module-pullback].",
+  "what": "The source quantifies over arbitrary schemes, while Mathlib’s Scheme category is homogeneous: a morphism X ⟶ T requires X and T (and hence the pullback data) to inhabit one Scheme.{u}. The corrected statement makes the arbitrary universe-polymorphic common-u encoding explicit; every triple of schemes can be represented in a common universe, so this is a size correction, not a geometric restriction.",
+  "source": {
+   "document": "literature/stacks-project/morphisms.tex",
+   "place": "Tag 0893 (lemma-ample-base-change), with relative ampleness as in Tag 01VH (definition-relatively-ample). The affine-open hypothesis already implies quasi-compactness of f."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-algebraic-space-ample-local",
+    "holds": true,
+    "note": "Its scheme test objects are represented in a common arbitrary universe, so the base-change lemma remains applicable."
+   }
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7f0824a63",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, universe correction and sole citer, edge cases, docstrings, signature equality, and route-pivot exclusions. Immutable Lean module compiled through scompile.py with exit code 0 and no diagnostics. No fixes needed; branch head unchanged.",
+  "statement_corrected": true
  }
 }
