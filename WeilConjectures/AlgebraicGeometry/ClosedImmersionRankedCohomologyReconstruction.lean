@@ -88,7 +88,7 @@ theorem closedImmersion_rankedCohomology_reconstruction
       DerivedCategory.Q.obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj C) :=
     F.rightDerivedFunctorIsoMapDerivedCategory.app (DerivedCategory.Q.obj C) ≪≫
       F.mapDerivedCategoryFactors.app C
-  let E (n : ℕ) := Scheme.Modules.exteriorSheaf
+  let E (n : ℕ) := Scheme.Modules.exteriorPower
     ((Scheme.Modules.restrictFunctor (Scheme.Modules.exteriorRankOpen r n).ι).obj M) n
   obtain ⟨eK⟩ := clopenRankStrata_formality i r hfinite E
     (Scheme.Modules.locallyRankedExteriorTerm M r) (fun _ => rfl) K hK

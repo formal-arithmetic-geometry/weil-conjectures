@@ -99,7 +99,7 @@ theorem isConstructibleSheaf_integral_forward {X : Scheme.{u}}
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (u + 1))
         (d.cover.etalePrecoverageToEtale i)).mapIso es.symm)
-  · intro Ω _ _ t
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ t ↦ ?_
     let P := pointSmallEtale t
     let M := (P.sheafFiber (A := ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj G
     let : Module.Finite (ULift.{u + 1} ℤ) M := (ModuleCat.isFinitelyGenerated_iff M).mp
