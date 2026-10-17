@@ -209,7 +209,7 @@ theorem qcqsProjectionMate_shiftedUnit_isIso (X Y : Scheme.{u})
     Functor.isEquivalence_of_iso ((curriedTensor _).mapIso eM).symm
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hε, ⟨s, htri⟩, hεflat⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    derivedPullback_spec f
   let : (derivedPullback f).CommShift ℤ := s
   obtain ⟨eU⟩ := nonempty_derivedPullback_structureSheaf_iso f
   let UY := (DerivedCategory.singleFunctor

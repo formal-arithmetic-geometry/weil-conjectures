@@ -61,7 +61,7 @@ private theorem kFlat_pullback_stalk_cohomology
   let A := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)
   let B := SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, _, _, hcompute⟩ :=
-    Classical.choose_spec (exists_derivedPullback k)
+    derivedPullback_spec k
   have hF' : F = Scheme.Modules.tensorPullback k :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
   subst F

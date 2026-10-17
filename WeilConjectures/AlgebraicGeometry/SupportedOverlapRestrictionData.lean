@@ -180,7 +180,7 @@ theorem exists_supported_overlap_restriction_data
     let P : B ⥤ C := Modules.tensorPullback j
     obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       L, hLobj, hLmap, hLadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback j)
+      derivedPullback_spec j
     have h : L = P := CategoryTheory.Functor.ext hLobj (fun M N a ↦ hLmap a)
     subst L
     let θ : R ≅ P := Modules.restrictFunctorIsoPullback j ≪≫

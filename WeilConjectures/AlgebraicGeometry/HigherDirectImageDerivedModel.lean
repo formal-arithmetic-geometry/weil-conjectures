@@ -62,7 +62,7 @@ theorem exists_derived_model_higherDirectImage
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f g → ∀ q : ℕ,
         Nonempty ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) q).obj
-            ((derivedPullback g).obj E) ≅
+            ((AlgebraicGeometry.derivedPullback g).obj E) ≅
               (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by
   let E : schemeDerivedCategory T := (schemeDerivedDirectImage f).obj
     ((DerivedCategory.singleFunctor

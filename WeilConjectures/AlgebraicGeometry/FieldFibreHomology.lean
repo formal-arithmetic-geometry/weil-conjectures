@@ -44,7 +44,7 @@ private theorem flat_complex_pullback_iso {T S : Scheme.{u}} (g : T ⟶ S)
     (hf : ∀ n : ℤ, SheafOfModules.IsFlat (K.X n)) :
     Nonempty ((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj
       (((pullback g).mapHomologicalComplex _).obj K) ≅
-      (derivedPullback g).obj (DerivedCategory.Q.obj K)) := by
+      (AlgebraicGeometry.derivedPullback g).obj (DerivedCategory.Q.obj K)) := by
   let A := SheafOfModules.{u} (moduleRings S.toRingedSpace)
   let B := SheafOfModules.{u} (moduleRings T.toRingedSpace)
   obtain ⟨F, hF, hFmap, hFadd, _, _, ⟨e, _⟩⟩ :=
@@ -60,7 +60,7 @@ private theorem flat_complex_pullback_iso {T S : Scheme.{u}} (g : T ⟶ S)
     ((DerivedCategory.quotientCompQhIso B).app _).symm ≪≫
     ((DerivedCategory.Qh (C := B)).mapIso
       (((tensorPullback g).mapHomotopyCategoryFactors (ComplexShape.up ℤ)).app K)).symm ≪≫
-    e ≪≫ (derivedPullback g).mapIso ((DerivedCategory.quotientCompQhIso A).app K)⟩
+    e ≪≫ (AlgebraicGeometry.derivedPullback g).mapIso ((DerivedCategory.quotientCompQhIso A).app K)⟩
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -69,7 +69,7 @@ private theorem flat_single_pullback_iso {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
     (M : SheafOfModules.{u} (moduleRings S.toRingedSpace)) (n : ℤ)
     (hM : SheafOfModules.IsFlat M) :
-    Nonempty ((derivedPullback g).obj
+    Nonempty ((AlgebraicGeometry.derivedPullback g).obj
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings S.toRingedSpace)) n).obj M) ≅
       (DerivedCategory.singleFunctor
@@ -94,7 +94,7 @@ private theorem flat_single_pullback_iso {T S : Scheme.{u}} (g : T ⟶ S)
     · exact (ObjectProperty.flat_of_isZero
         (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)).2
   obtain ⟨e⟩ := flat_complex_pullback_iso g K hb hf
-  refine ⟨(derivedPullback g).mapIso
+  refine ⟨(AlgebraicGeometry.derivedPullback g).mapIso
     ((DerivedCategory.singleFunctorIsoCompQ A n).app M) ≪≫ e.symm ≪≫
     (DerivedCategory.Q (C := B)).mapIso
       ((HomologicalComplex.singleMapHomologicalComplex (pullback g)
@@ -169,7 +169,7 @@ theorem single_field_fibre_homology
   obtain ⟨eS⟩ := flat_single_pullback_iso f M (i : ℤ) (flat_of_finiteLocallyFree M)
   let eQ : (DerivedCategory.Q (C := B)).obj Q ≅
       (DerivedCategory.singleFunctor B (i : ℤ)).obj ((pullback f).obj M) :=
-    eP ≪≫ (derivedPullback f).mapIso e ≪≫ eS
+    eP ≪≫ (AlgebraicGeometry.derivedPullback f).mapIso e ≪≫ eS
   let eH (n : ℤ) : Q.homology n ≅
       (((CochainComplex.singleFunctor B (i : ℤ)).obj ((pullback f).obj M)).homology n) :=
     ((DerivedCategory.homologyFunctorFactors B n).app Q).symm ≪≫

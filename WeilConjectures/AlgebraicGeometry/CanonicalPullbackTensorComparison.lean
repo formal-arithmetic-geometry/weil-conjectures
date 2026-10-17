@@ -221,7 +221,7 @@ private theorem counit_isIso {T X : Scheme.{uTC}} (g : T ⟶ X)
     IsIso ((SingleComplexBaseChange.counit g).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, hε, _, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback.{uTC, wTC} g)
+    derivedPullback_spec.{uTC, wTC} g
   have hF' : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
   subst F

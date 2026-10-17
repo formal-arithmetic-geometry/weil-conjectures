@@ -58,7 +58,7 @@ private theorem counit_isIso
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    derivedPullback_spec f
   have h : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun _ _ a ↦ hEmap a)
   subst E
