@@ -85,16 +85,14 @@
    }
   },
   {
-   "text": "Under the restriction equivalence in step 5, the full subcategories inverting FFES and $W_\\Delta$ correspond. One direction follows from $W_\\Delta=(j')^{-1}(\\mathrm{FFES})$. Conversely let $H:E\\to\\mathcal T$ have $Hj'$ invert $W_\\Delta$, and let $F:A\\to B$ be FFES in $E$. Use [lem-coef-cosimplicial-frame-mapping] for the model structure of [lem-coef-kan-quillen-right-proper]. Every simplicial set is cofibrant (its initial map is a monomorphism); fibrant objects are Kan complexes. The object-representation clause gives Kan complexes $K,L$ with $jK\\simeq pA$, $jL\\simeq pB$, because step 1 identifies the model localization with $\\mathcal S$. Restrict $A,B$ along these equivalences using [lem-coef-algebroid-object-space-fibration]; restriction along an inverse space equivalence supplies the inverse algebra map, and the two identities follow from coherent restriction. Thus this replaces them and $F$ by equivalent objects and an equivalent arrow. For these $K,L$, the actual-map clause of [lem-coef-cosimplicial-frame-mapping] represents the component of the resulting object-space map by an actual simplicial map $f:K\\to L$. Write $F':A'\\to B'$ for the replaced arrow and choose the resulting path $h:pF'\\simeq jf$ in $\\operatorname{Map}_{\\mathcal S}(jK,jL)$. The pullback defining $E_\\Delta$ gives\n$$\\operatorname{Map}_{E_\\Delta}((K,A'),(L,B'))\\simeq\\operatorname{Hom}_{\\mathrm{sSet}}(K,L)\\times^h_{\\operatorname{Map}_{\\mathcal S}(jK,jL)}\\operatorname{Map}_E(A',B').$$\nThus the triple $(f,F',h)$ is a point of this mapping space and defines the required arrow $\\widetilde F$ over $f$ whose image is $F'$. Equivalently, the homotopy-fibre formula of [lem-coef-algebroid-object-space-fibration] identifies this triple with a fibrewise algebra map $A'\\to(jf)^*B'$. Its image is equivalent to $F$, so is FFES (inverse enriched functors induce equivalences on mapping objects and on underlying objects, and composition preserves both conditions). Thus $\\widetilde F\\in W_\\Delta$ and $H(F)$ is an equivalence. This proves the correspondence for every $\\mathcal T$; the subcategories are full and inherit their mapping spaces. The universal property yields\n$$E_\\Delta[W_\\Delta^{-1}]_\\infty\\simeq E[\\mathrm{FFES}^{-1}]_\\infty.$$\nComposing with step 4 gives the equivalence induced by the original inclusion.",
+   "text": "Under the restriction equivalence of step 5, functors inverting FFES correspond to functors inverting $W_\\Delta$. The forward implication is immediate from $W_\\Delta=(j')^{-1}(\\mathrm{FFES})$. Conversely let $H:E\\to\\mathcal T$ have $Hj'$ invert $W_\\Delta$, and let $F:A\\to B$ be FFES in $E$. Apply [lem-coef-simplicial-model-arrow-lifting] to the functor $p:E\\to\\mathcal S$ and to the passage-to-spaces functor $j$ of step 1. It gives an arrow $\\widetilde F$ of $E_\\Delta$ whose image under $j'$ is equivalent to $F$. FFES is unchanged by equivalence of arrows: inverse enriched functors induce inverse mapping-object maps and inverse equivalences on underlying objects, and the same is true after composition. Thus $\\widetilde F\\in W_\\Delta$, so $H(F)$ is an equivalence. This identifies the full subcategories of functors inverting the two indicated classes for every $\\mathcal T$, including their mapping spaces. By the homotopy coherent localization universal property it proves\n$$E_\\Delta[W_\\Delta^{-1}]_\\infty\\simeq E[\\mathrm{FFES}^{-1}]_\\infty.$$\nComposing with step 4 yields the equivalence induced by the original inclusion.",
    "uses": [
-    "lem-coef-cosimplicial-frame-mapping",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-algebroid-object-space-fibration"
+    "lem-coef-simplicial-model-arrow-lifting"
    ],
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/html/1312.3178v4",
-    "place": "Theorem 5.3.17 proof, last localization and composition; actual-map representatives supplied by the existing model-localization mapping-space theorem"
+    "place": "Theorem 5.3.17 proof, last localization comparison and composition; model-arrow representation isolated in the cited supporting node."
    }
   },
   {
@@ -115,8 +113,7 @@
   "def-coef-complete-algebroid",
   "lem-coef-infinity-pointwise-adjoint-criterion",
   "lem-coef-localization-cartesian-pullback",
-  "lem-coef-cosimplicial-frame-mapping",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-simplicial-model-arrow-lifting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -287,7 +284,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-enrichment-rectification",
   "by": "worker",
@@ -296,20 +293,20 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-enriched-completion-localization",
   "worker": "stage1",
-  "summary": "Expanded Gepner–Haugseng Theorem 5.3.17 into seven steps with two statement-only supporting nodes. Second reading removed the simplicial-set localization duplicate, specializing the existing simplicial-presheaf comparison at a point and using existing Kan–Quillen and cosimplicial-frame statements for actual map representatives. Arbitrary monoidal enrichment, both comparisons and naturality retained.",
-  "blueprint": "Proof paragraph 2, coherent finite coefficient adjunction before R lim: interpretation of relative dg categories in the derived enrichment. Sublemma: replace variable object spaces by discrete object sets before localizing at fully faithful essentially surjective functors (Gepner–Haugseng Theorem 5.3.17).",
+  "summary": "Repaired the dedicated return concerning former step 6 (2309 characters). Kept the statement and the seven-step route unchanged; extracted the hidden Kan-model arrow-representation argument as the generic statement-only node lem-coef-simplicial-model-arrow-lifting. Step 6 now cites that result and carries the FFES/localization argument itself. Other proof steps, inherited Mathlib searches and blueprint ancestry retained. One new node, no Mathlib leaves.",
+  "blueprint": "Proof paragraph 2, coherent finite coefficient adjunction before R lim: interpretation of relative dg categories in the derived enrichment. Sublemma: replace variable object spaces by discrete object sets before localizing at fully faithful essentially surjective functors (Gepner–Haugseng Theorem 5.3.17). The repair makes explicit the arrow representation underlying the last localization comparison of Theorem 5.3.17.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NX-5bdaf12ea",
-  "group": "NX",
+  "reviewer": "NT-cc-Q74-7363dad26",
+  "group": "Q74",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-5bdaf12ea (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus the statement of every cited node. Gepner–Haugseng arXiv:1312.3178v4 has no local copy and this service blocks network access, so I checked each step mathematically rather than at the cited GH places; the precedent in the same unit is GH online-only sources, and the WANTED request for an archive stands. The item keeps GH Thm 5.3.17's hypothesis (arbitrary monoidal V, no presentability). The item statement is true on the small cases I tried: V terminal gives [1] on both sides; V = spaces is the Segal-space case; an empty object space works throughout. Steps 1 and 3–7 check out. Step 1 applies the presheaf comparison at D = {*} with S = ∅. Step 3: the counit is FF because Cartesian = FF, and ES because every component of |K| contains a vertex; s preserves FFES; tested with K = ∅ and a circle. Step 4 is a few lines from the localization universal property, so marking it elementary is accepted. Step 5: every hypothesis of the Cartesian-pullback node holds, and T ⊆ W_Δ. Step 6 uses the Kan–Quillen and frame nodes for fibrant objects and actual-map representatives. Step 7: naturality from the fibration node's postcomposition clause, true for strong and for lax monoidal functors. New node lem-coef-algebroid-object-space-fibration is true for arbitrary monoidal V: Cartesian iff FF, the fibre formula, ι_0A ≃ X_A, the π0ι/object-equivalence comparison, and change of enrichment. New node lem-coef-localization-cartesian-pullback is true (GH Prop 5.3.16 / Hinich base change), tested on p = id, a terminal base with C = [1], W = equivalences, and an empty E. Neither new node restates a clause of the item; neither duplicates an existing node (checked against the cartesian-fibration and 1312.3178 hits and the presentable algebroid nodes); neither is a Mathlib leaf. Every citation is in unit sk-prop-sf-biduality-general, with no tool_uses, no SGA and no target involvement. One fault, C1/C2: step 2 builds i' ⊣ s from pointwise representability, which is exactly the existing same-unit node lem-coef-infinity-pointwise-adjoint-criterion, but the step was marked elementary and did not cite it. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-enriched-completion-localization.json: step 2 now cites the node, is marked non-elementary, and proof_deps is updated; no statement changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-7363dad26 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all seven steps, the new node lem-coef-simplicial-model-arrow-lifting, every cited node's statement and unit sk-prop-sf-biduality-general. Gepner-Haugseng arXiv:1312.3178v4 Thm 5.3.17 / Lemma 5.3.14 / Prop 5.3.16 is not archived locally and this machine has no network, so I checked each step mathematically; the WANTED request stands. What changed: only step 6 was re-split, now 1133 characters and citing just the new node. It uses only that node's stated conclusion: an arrow F~ of E_Delta whose image is equivalent to F, so F~ is in W_Delta because FFES is invariant under equivalence of arrows. Combined with step 5 (T contained in W_Delta, restriction along j') this gives the equivalence of localizations. No proof text is used (C3 holds). Steps 1-5 and 7, re-read: every hypothesis of the Cartesian-pullback and pointwise-adjoint nodes holds, and the elementary steps 3, 4 and 7 are acceptable. The new node is true. The homotopy-pullback mapping space is the set Hom(K,L) pulled back over Map_S(jK,pB) against Map_E(A,B), and for Kan L every component of Map(jK,jL) comes from an actual simplicial map. I tested empty pA and pB, p = id on S, a terminal E and identity arrows. It is statement-only, self-contained and searched with three tools. Its blueprint from/via are correct, it is not a clause of the item (D1), and an rg search of the DAG found no duplicate; the frame-mapping, Kan-Cartesian-localization and Kan-pullback-invariance nodes differ. proof_deps equals the union of uses, there is no cycle, no TeX is doubled, all citations are in the unit, there are no tool_uses and no SGA. Minor, not faults: the report mentions a citations.json that is not in the commit, and the new node describes j informally as 'passage to the homotopy type'. No fixes were written and no nodes were dropped."
  },
  "lean_audit": {
   "master": {
