@@ -45,17 +45,43 @@
    }
   },
   {
-   "text": "Put $T=\\Delta^{\\{0,\\ldots,n-1\\}}$, $I=\\Delta^{\\{n-1,n\\}}$, $K=T\\amalg_{\\{n-1\\}}I$, $M_-=M(A_0\\leftarrow\\cdots\\leftarrow A_{n-1})$, and $D=\\mathfrak C[M_-]$. The inclusion $K\\hookrightarrow\\Delta^n$ is inner anodyne already in the weak-saturation convention: attach every pair of missing faces $\\sigma$ and $\\sigma\\cup\\{n-1\\}$, where $n\\in\\sigma$, $n-1\\notin\\sigma$, and $\\sigma$ contains an earlier vertex, in increasing order of $|\\sigma|$. Each attachment is an inner horn missing the face opposite $n-1$: deleting $n$ leaves a face of $T$, and deleting any earlier vertex leaves a previously attached face or a face of $I$. Every missing simplex occurs in exactly one such pair. For $n=1$ the inclusion is the identity. Since a left lifting class is closed under pushouts and finite composites, it also has the left lifting property against every inner fibration. Apply the inner-anodyne pushout-product node with $\\varnothing\\hookrightarrow A_n$ to obtain an inner anodyne monomorphism $u:A_n\\times K\\hookrightarrow A_n\\times\\Delta^n$. To pass from the lifting convention of the pushout-product node to the weak-saturation convention of the coherent-inner-anodyne node, apply [lem-coef-small-object-cell-factorization] to the small set of inner horns and $\\kappa=\\aleph_0$. Simplicial colimits are degreewise, and each horn has finitely many nondegenerate simplices: a map into an increasing union factors through one finite stage, and equality of two such maps is detected at a later stage. This checks the required smallness. The factorization node identifies the left lifting class with arrow retracts of inner-horn cell maps, which belong to the weakly saturated class. Thus $u$ has the weak-saturation meaning as well. Its realization is Dwyer--Kan by the coherent-inner-anodyne node and a Bergner cofibration by the left Quillen functor $\\mathfrak C$, hence a trivial cofibration.\nThe defining simplex formula gives $M=M_-\\amalg_{A_n\\times T}(A_n\\times\\Delta^n)$: a simplex whose last base vertex is $n$ occurs uniquely in the second part, and a simplex whose last vertex is less than $n$ is identified with its transitioned image in $M_-$. Since $\\mathfrak C$ is a left adjoint, it preserves this pushout. Set $C_0=D\\amalg_{\\mathfrak C[A_n\\times T]}\\mathfrak C[A_n\\times K]$ and $C=\\mathfrak C[M]$. Then $C=C_0\\amalg_{\\mathfrak C[A_n\\times K]}\\mathfrak C[A_n\\times\\Delta^n]$. Thus $j:C_0\\to C$ is a pushout of the trivial cofibration $\\mathfrak C[u]$ and is itself a trivial cofibration. Indeed a lifting problem against any fibration pulls back to one for $\\mathfrak C[u]$, and its filler descends through the pushout. This argument needs no cofibration hypothesis on $\\mathfrak C[A_n\\times T]\\to D$.",
+   "text": "Put $T=\\Delta^{\\{0,\\ldots,n-1\\}}$, $I=\\Delta^{\\{n-1,n\\}}$, $K=T\\amalg_{\\{n-1\\}}I$, $M_-=M(A_0\\leftarrow\\cdots\\leftarrow A_{n-1})$, and $D=\\mathfrak C[M_-]$. The face and edge intersect exactly in $\\{n-1\\}$, so this pushout is their union. Apply the finite-filtration lemma to $K\\hookrightarrow\\Delta^n$. Each inner horn lifts against any inner fibration by definition, and left-lifting classes are closed under pushouts and finite composition. Hence $K\\hookrightarrow\\Delta^n$ has the left lifting property against every inner fibration, including when $n=1$ and it is an identity.",
    "uses": [
-    "lem-coef-inner-anodyne-pushout-product",
-    "lem-coef-coherent-inner-anodyne-equivalences",
-    "lem-coef-coherent-nerve-comparison",
-    "lem-coef-small-object-cell-factorization"
+    "lem-coef-final-face-edge-horn-filtration",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-inner-horn-cell-generation"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Lemma 3.2.2.9, first two pushout diagrams, pp. 182–183; expanded inner-horn filtration argument."
+    "place": "Lemma 3.2.2.9, pp.182–183: initial face plus final edge."
+   }
+  },
+  {
+   "text": "Apply the inner-anodyne pushout-product lemma to $K\\hookrightarrow\\Delta^n$ and $\\varnothing\\hookrightarrow A_n$. Its source reduces to $A_n\\times K$, giving an inner anodyne monomorphism $u:A_n\\times K\\hookrightarrow A_n\\times\\Delta^n$ in the lifting convention. The inner-horn cell-generation theorem identifies this class with arrow retracts of inner-horn cell maps. These lie in the weakly saturated class used by the coherent-inner-anodyne theorem. Thus $\\mathfrak C[u]$ is Dwyer--Kan. The coherent-nerve comparison makes $\\mathfrak C$ left Quillen and Joyal cofibrations monomorphisms, so $\\mathfrak C[u]$ is also a Bergner cofibration, hence a trivial cofibration.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-inner-horn-cell-generation",
+    "lem-coef-coherent-inner-anodyne-equivalences",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.2.9, pp.182–183: first comparison; Mathlib inner-horn cell generation replaces the inline small-object smallness proof."
+   }
+  },
+  {
+   "text": "The mapping-simplex pushout lemma gives $M=M_-\\amalg_{A_n\\times T}(A_n\\times\\Delta^n)$, with the displayed transition maps, even without injectivity of earlier transitions. Since $\\mathfrak C$ is a left adjoint, applying it preserves this pushout. Set $C_0=D\\amalg_{\\mathfrak C[A_n\\times T]}\\mathfrak C[A_n\\times K]$ and $C=\\mathfrak C[M]$. Pushout associativity, checked by giving compatible functors out of these diagrams, identifies $C$ with $C_0\\amalg_{\\mathfrak C[A_n\\times K]}\\mathfrak C[A_n\\times\\Delta^n]$. Therefore $j:C_0\\to C$ is a pushout of $\\mathfrak C[u]$. Trivial cofibrations in a model category have the left lifting property against fibrations, so their pushouts are trivial cofibrations by lifting-class closure. In particular $j$ is Dwyer--Kan. No cofibration condition on $\\mathfrak C[A_n\\times T]\\to D$ is needed.",
+   "uses": [
+    "lem-coef-mapping-simplex-last-fiber-pushout",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.2.9, first two pushout diagrams, pp.182–183."
    }
   },
   {
@@ -83,7 +109,7 @@
    }
   },
   {
-   "text": "Let $e_0$ be the final edge in $C_0$. The two functors $j:C_0\\to C$ and $F:C_0\\to C_0'$ carry $e_0$ respectively to $[e]$ and the interval edge, and preserve composition strictly. For $F$ this gives a commutative square whose top row is $e_0\\circ-:C_0(x,y')\\to C_0(x,y)$, bottom row is the isomorphism in Step 4, and both vertical maps are weak homotopy equivalences by the definition of Dwyer--Kan equivalence. Two-out-of-three makes the top row weak. The analogous square for $j$ has the same top row, the desired composition map in $C=\\mathfrak C[M]$ as bottom row, and both vertical maps weak. Two-out-of-three now gives the claim. In particular there is no map $C_0'\\to C$ being assumed. Step 1 transports the result to the original chain with exactly its chosen vertices and edge. All constructions allowed arbitrary small simplicial sets and used no fibrancy hypothesis.",
+   "text": "Let $e_0$ be the final edge in $C_0$. The two functors $j:C_0\\to C$ and $F:C_0\\to C_0'$ carry $e_0$ respectively to $[e]$ and the interval edge, and preserve composition strictly. For $F$ this gives a commutative square whose top row is $e_0\\circ-:C_0(x,y')\\to C_0(x,y)$, bottom row is the isomorphism in Step 6, and both vertical maps are weak homotopy equivalences by the definition of Dwyer--Kan equivalence. Two-out-of-three makes the top row weak. The analogous square for $j$ has the same top row, the desired composition map in $C=\\mathfrak C[M]$ as bottom row, and both vertical maps weak. Two-out-of-three now gives the claim. In particular there is no map $C_0'\\to C$ being assumed. Step 1 transports the result to the original chain with exactly its chosen vertices and edge. All constructions allowed arbitrary small simplicial sets and used no fibrancy hypothesis.",
    "uses": [
     "lem-coef-coherent-nerve-comparison"
    ],
@@ -97,12 +123,15 @@
  "proof_deps": [
   "lem-coef-coherent-inner-anodyne-equivalences",
   "lem-coef-coherent-nerve-comparison",
+  "lem-coef-final-face-edge-horn-filtration",
   "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-inner-horn-cell-generation",
   "lem-coef-joyal-homotopy-exponentials",
   "lem-coef-joyal-model-structure",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-mapping-simplex-last-fiber-pushout",
   "lem-coef-mapping-simplex-termwise-equivalence",
-  "lem-coef-scat-bergner-left-proper-pushouts",
-  "lem-coef-small-object-cell-factorization"
+  "lem-coef-scat-bergner-left-proper-pushouts"
  ],
  "proof_origin": {
   "by": "agent",
@@ -175,7 +204,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-mapping-simplex-presentation",
@@ -188,17 +217,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-mapping-simplex-final-edge",
   "worker": "stage1",
-  "summary": "Repair of the returned split: retained termwise mapping-simplex invariance; narrowed the Bergner node to left properness alone; removed the duplicate product-comparison node in favor of lem-coef-joyal-homotopy-exponentials; supplied the explicit inner-horn filtration, pushout-product and coherent-inner-anodyne proof of C_0→C, the actual interval cofibration, the vertex/edge lift and the explicit co-Yoneda/two-out-of-three calculations. The item statement is unchanged.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, descendant mapping-complex adjunction foundation: the final-transition mapping-simplex input HTT 3.2.2.9. The five steps realize its cofibration reduction, first pushout comparison, product pushout comparison, mapping isomorphism and transport.",
+  "summary": "Q120 repair of the human return: replaced only the 2712-character second step by three short steps. Extracted the finite initial-face/final-edge horn filtration and mapping-simplex last-fiber pushout identification as statement-only nodes. Reused the existing Mathlib inner-horn-cell-generation leaf for the convention/smallness bridge, and the lifting-class-closure leaf for pushout stability. Preserved the statement, Lean record and remaining proof route; adjusted the final step cross-reference from Step 4 to Step 6.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, descendant mapping-complex adjunction foundation: the final-transition mapping-simplex input HTT 3.2.2.9. The five steps realize its cofibration reduction, first pushout comparison, product pushout comparison, mapping isomorphism and transport. The former second step is now steps 2–4: horn filtration, product/convention comparison, and last-fiber pushout. Former steps 3–5 become 5–7.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NK-306d44c98",
-  "group": "NK",
+  "reviewer": "NT-cc-Q120-1486c50df",
+  "group": "Q120",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-306d44c98 (reviewer sub-agent of L); spot-checked: I read all of it against the HTT text extraction: the item, all 5 steps, both new nodes and every cited node's statement. Sources were HTT Lemma 3.2.2.9 and Remark 3.2.2.5 (pp. 179–183), Cor. 2.2.5.6 and Prop. A.3.2.4. The item statement matches Lemma 3.2.2.9: the simplex formula, the transition direction, e=((n-1≤n),s_0y):y'→y, x over an index <n, n>0, and no fibrancy. I tested n=1 with point fibres, a disconnected A_0, and A_n empty. Step 1's vertex lift, edge transport and ladder are correct. In Step 2 I checked the inner-horn filtration of K⊂Δ^n myself (each missing simplex appears in exactly one pair, n-1 is inner, the faces are already present). The pushout-product with ∅→A_n, the small-object change of convention, the degreewise identity M=M_-∐(A_n×Δ^n) and the trivial cofibration C_0→C are also correct. Step 3 is exactly HTT's second square: E→D is a cofibration because the transition is a monomorphism, and Bergner left properness applies. Steps 4 and 5 are elementary and correct: a co-Yoneda computation of the mixed hom and two two-out-of-three squares. Step 2 is long but is one argument with every part written out; I found no hidden lemma and no existing node for it. Both new nodes are true, self-contained, statement-only and strictly smaller than the item, and neither is a duplicate. The termwise node is HTT Remark 3.2.2.5, distinct from the Cartesian mapping-simplex nodes. The Bergner node is A.3.2.4 for S = simplicial sets with the Kan–Quillen structure, distinct from the fixed-object left-proper node and not covered by the all-cofibrant node. The blueprint searches found 0 nodes. FIX: in Step 2 I removed the spine-lemma argument (an off-unit tool use from sk-prop-sf-cbc). It only proved a categorical equivalence that the explicit filtration already gives in stronger form. I removed lem-cbc-spine-inner-anodyne from the step's uses, proof_deps and tool_uses, and Step 2's Joyal use (Step 1 still cites that node). I added one sentence: inner-horn pushouts and composites lift against inner fibrations, which is the hypothesis the pushout-product node needs. No tool_uses remain.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-1486c50df (reviewer sub-agent of L); spot-checked: I read all seven steps of the item, both new nodes, every cited node's statement, and HTT §3.2.2 from a local text extraction: the mapping-simplex definition, Rem. 3.2.2.1–3.2.2.5, Lemma 3.2.2.9 with its proof on pp.182–183, and the proof of Prop. 3.2.2.10 on p.183. The item matches HTT 3.2.2.9: n>0, edge e=((n-1≤n),s_0y):y'→y, x over an index <n, no fibrancy hypothesis. Its statement and Lean record are unchanged. Step 1: the Joyal factorization, the commuting ladder and the vertex and edge transport are correct, and the termwise node gives the Dwyer–Kan map. Steps 2–3: inner-horn pushouts and composites lift against inner fibrations, so the pushout-product with ∅→A_n gives A_n×K→A_n×Δ^n. Cell generation together with the fact that pushouts of coproducts of horns are transfinite composites of single-horn pushouts puts this map in the coherent-inner-anodyne class, so applying C gives a trivial Bergner cofibration. Step 4: C preserves the pushout, pushouts paste, and a pushout of a trivial cofibration is trivial. Step 5: C_0=D⊔_E H; E→D is a cofibration because t_{n,n-1} is mono; the product clause gives Cor. 2.2.5.6; Bergner left properness applies. Step 6: I checked the coend/co-Yoneda mixed hom, including variance and both composites, and tested it on E=[1]. Step 7: two two-out-of-three squares finish the proof. proof_deps equals the union of the uses, every step is at most 1247 characters (which repairs the human return), everything stays inside unit sk-prop-sf-biduality-general, there are no tool_uses, no SGA citation and no cycle. Filtration node: tested for n=1 (N=0), n=2 (Λ^2_1) and n=3 (three inner attachments); the general σ↔σ∪{n-1} pairing ordered by cardinality works. It is true, smaller than the item, and not a duplicate of the gapped-face, spine or spine-cancellation nodes. Last-fibre node: the degreewise bijection holds, g and h are simplicial, and it needs neither injectivity nor nonempty A_n. It is not a duplicate of the marked initial-horn pushout or of def-coef-mapping-simplex-functor. FIX: the last-fibre node's source.place now adds HTT Prop. 3.2.2.10 proof, p.183, where M(φ)=M(φ0)⊔_{A_n×T}(A_n×Δ^n) is stated verbatim; no other field changed.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.MappingSimplexFinalEdge",
