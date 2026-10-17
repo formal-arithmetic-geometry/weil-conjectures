@@ -10,9 +10,142 @@
  "stmt_deps": [
   "lem-coef-model-infinity-derived-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathscr C=C^{\\mathrm{obj}}$, $\\mathscr A=(C\\cap W)^{\\mathrm{obj}}$, $\\mathscr W=W^{\\mathrm{obj}}$, $\\mathscr F=\\{p:\\rho_\\alpha(p)\\in F\\text{ for all }\\alpha\\}$ and $\\mathscr T=\\{p:\\rho_\\alpha(p)\\in F\\cap W\\text{ for all }\\alpha\\}$. These are classes in $\\operatorname{Fun}(I,\\mathcal M)$. Limits mean the opposite of the cocone universal property in [def-weil-pbc-category-colimit]. This functor category is complete and cocomplete: for a small diagram of functors take its limit separately at each $\\alpha$, and define each transition by its composites with the limit projections. Uniqueness in the universal property gives composition and identities; a cone of natural transformations induces a natural mediating map because its two composites with every projection agree. Reverse arrows for colimits. All these constructions are in the enlarged universes allowed in the statement. The two-out-of-three property and retract closure of $\\mathscr W$ follow by evaluation from those of $W$ in the model-category conventions of [lem-coef-model-infinity-derived-adjunction].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.9.19, printed pp.841-844, model-category axioms; bicompleteness expanded directly using universal properties."
+   }
+  },
+  {
+   "text": "For $f:D\\to E$, construct $D\\xrightarrow{a}Z\\xrightarrow{b}E$ by extending initial segments. Suppose $Z_\\beta$, its transitions, and $a_\\beta,b_\\beta$ have been fixed for all $\\beta<\\alpha$, with $b_\\beta a_\\beta=f_\\beta$ and both transformations natural there. Let $Q_\\alpha=E_\\alpha\\times_{M_\\alpha E}M_\\alpha Z$. The maps $f_\\alpha:D_\\alpha\\to E_\\alpha$ and $D_\\alpha\\to M_\\alpha D\\xrightarrow{M_\\alpha a}M_\\alpha Z$ have equal composites to $M_\\alpha E$ by the partial factorization and naturality of $f$. Factor their induced map $g_\\alpha:D_\\alpha\\to Q_\\alpha$ by either of the ground functorial weak factorization systems of [lem-coef-model-infinity-derived-adjunction], as $D_\\alpha\\xrightarrow{a_\\alpha}Z_\\alpha\\xrightarrow{r_\\alpha}Q_\\alpha$. Define $b_\\alpha$ by the first projection; define $Z_\\alpha\\to Z_\\beta$ for $\\beta<\\alpha$ by the second projection and the limit projections. Their transitivity is the cone equation. The equality $r_\\alpha a_\\alpha=g_\\alpha$ gives naturality of $a$, and the pullback equation gives naturality of $b$. By these definitions $r_\\alpha=\\rho_\\alpha(b)$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.2.9.19, printed pp.842-843: factorization at a new object; inverse-ordinal specialization with empty latching category."
+   }
+  },
+  {
+   "text": "Choose the ground system $(C,F\\cap W)$ throughout Step 2 to obtain $a\\in\\mathscr C$, $b\\in\\mathscr T$, or choose $(C\\cap W,F)$ throughout to obtain $a\\in\\mathscr A$, $b\\in\\mathscr F$. The recursion theorem [lem-weil-pbc-transfinite-recursion] applies to the rule extending the already compatible segment. The empty segment starts the recursion; at a limit stage the old data are simply retained, and the component at that limit ordinal is constructed by the same rule as any other component. In particular no equality $Z_\\lambda=M_\\lambda Z$ is imposed. For functoriality, a square $(u,v):f\\to f'$ and the previously constructed maps $Z_\\beta\\to Z'_\\beta$ induce $Q_\\alpha\\to Q'_\\alpha$. Ground functorial factorization gives $Z_\\alpha\\to Z'_\\alpha$, commuting with both factors and every old transition. Induction gives the whole natural transformation. Identity squares and composites give identity maps and composite maps at every component, by functoriality of limits, pullbacks and the ground factorization. Thus both diagram factorizations are functorial, including when $\\theta=0$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.2.9.19, printed pp.842-843, compatible initial-segment factorizations; functoriality and limit stages written explicitly."
+   }
+  },
+  {
+   "text": "For natural transformations $i:A\\to B$ and $p:X\\to Y$, suppose $i_\\alpha$ lifts against $\\rho_\\alpha(p)$ for every $\\alpha$. Apply [lem-coef-ordinal-latching-diagram-lifting] in $\\mathcal B=\\mathcal M^{\\mathrm{op}}$ to its left map $p^{\\mathrm{op}}:Y^{\\mathrm{op}}\\to X^{\\mathrm{op}}$ and right map $i^{\\mathrm{op}}:B^{\\mathrm{op}}\\to A^{\\mathrm{op}}$, both indexed by the direct ordinal $\\theta$. Completeness of $\\mathcal M$ is exactly cocompleteness of $\\mathcal B$. Colimits and pushouts in $\\mathcal B$ are limits and pullbacks in $\\mathcal M$, so $\\lambda_\\alpha(p^{\\mathrm{op}})=\\rho_\\alpha(p)^{\\mathrm{op}}$ under the universal-property identifications. Its asserted component lifting is precisely the assumed ground lifting with arrows reversed. The resulting natural diagonal reverses to a diagonal from $i$ to $p$. The two ground lifting axioms therefore give $\\mathscr C\\perp\\mathscr T$ and $\\mathscr A\\perp\\mathscr F$. The cited lemma applies to arbitrary small ordinals and imposes no continuity condition.",
+   "uses": [
+    "lem-coef-ordinal-latching-diagram-lifting",
+    "lem-coef-model-infinity-derived-adjunction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.2.9.19, printed p.844: lifting by initial segments, realized by the dual of the existing ordinal latching lifting lemma."
+   }
+  },
+  {
+   "text": "The four classes $\\mathscr C,\\mathscr A,\\mathscr F,\\mathscr T$ are retract closed. For the first two evaluate an arrow retract at each component and use retract closure of the two ground left lifting classes from [lem-coef-lifting-class-closure]. For the latter two, the assignment $p\\mapsto\\rho_\\alpha(p)$ is a functor between arrow categories: a commutative square between diagram maps induces a commutative square between relative matching maps by the limit and pullback universal properties; uniqueness makes this preserve identities and composition. It therefore preserves a retract equation. Use retract closure of the ground right lifting classes $F=(C\\cap W)^{\\square}$ and $F\\cap W=C^{\\square}$, again given by [lem-coef-lifting-class-closure].",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-model-infinity-derived-adjunction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.9.19, printed pp.841-844: retract axiom; explicit application of arrow functoriality and ground lifting-class retract closure."
+   }
+  },
+  {
+   "text": "Steps 3-5 make $(\\mathscr C,\\mathscr T)$ and $(\\mathscr A,\\mathscr F)$ weak factorization systems. Indeed consider either pair $(\\mathscr L,\\mathscr R)$. If $f$ lifts on the left against all of $\\mathscr R$, factor $f=ba$ as in Step 3; [lem-coef-factorization-lifting-retracts] makes $f$ an arrow retract of $a\\in\\mathscr L$, hence $f\\in\\mathscr L$. If $f$ lifts on the right against all of $\\mathscr L$, the other half of that same lemma makes $f$ an arrow retract of $b\\in\\mathscr R$, hence $f\\in\\mathscr R$. The reverse inclusions are Step 4. These are exactly both mutual lifting characterizations, and Step 3 supplies their functorial factorizations.",
+   "uses": [
+    "lem-coef-factorization-lifting-retracts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.2.9.19, printed pp.842-844: factorizations and lifting; mutual class characterizations expanded by the retract argument."
+   }
+  },
+  {
+   "text": "Let $q:D\\to E$ lie in $\\mathscr T$, and fix $\\gamma\\leq\\theta$. For any ground cofibration $j:U\\to V$, a square from $j$ to $\\lim_{\\beta<\\gamma}q_\\beta$ is the same as a square of diagrams from the constant transformation $\\operatorname{const}(j)$ to $q|_{\\gamma^{\\mathrm{op}}}$: its top and bottom maps are exactly the compatible cones given by the limit universal property. Restriction to this initial segment does not change any relative matching map at $\\beta<\\gamma$. Each $j$ lifts against each $\\rho_\\beta(q)\\in F\\cap W$, so the dual application of [lem-coef-ordinal-latching-diagram-lifting] in Step 4 supplies a natural lift. Its compatible components induce the required map $V\\to\\lim_{\\beta<\\gamma}D_\\beta$. Thus $\\lim_{\\beta<\\gamma}q_\\beta$ is in $C^{\\square}=F\\cap W$. This also covers $\\gamma=0$, where this limit map is the identity of the terminal object. No closure of weak equivalences under arbitrary limits is invoked.",
+   "uses": [
+    "lem-coef-ordinal-latching-diagram-lifting",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual of Lemma A.2.9.20, printed pp.841-842: the matching-limit trivial-fibration assertion, here derived in a few lines from ordinal diagram lifting and the cone universal property."
+   }
+  },
+  {
+   "text": "For $q\\in\\mathscr T$, its component $q_\\alpha$ is the composite of $\\rho_\\alpha(q)$ and the projection $E_\\alpha\\times_{M_\\alpha E}M_\\alpha D\\to E_\\alpha$. This projection is the pullback of $M_\\alpha q$, which is a ground trivial fibration by Step 7 with $\\gamma=\\alpha$. The closure statement [lem-coef-lifting-class-closure] applied in $\\mathcal M^{\\mathrm{op}}$ says that right lifting classes in $\\mathcal M$ are closed under pullback and binary composition. Apply it to $C^{\\square}=F\\cap W$. Both factors, and hence $q_\\alpha$, are in $F\\cap W$. Consequently $\\mathscr T\\subseteq\\mathscr F\\cap\\mathscr W$.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual of Lemma A.2.9.20 and proof of Proposition A.2.9.19, printed pp.841-844: matching trivial fibrations are objectwise trivial fibrations."
+   }
+  },
+  {
+   "text": "Conversely, let $f:D\\to E$ lie in $\\mathscr F\\cap\\mathscr W$. Use the first factorization $f=ba$ with $a\\in\\mathscr C$ and $b\\in\\mathscr T$. Step 8 puts $b$ in $\\mathscr W$, so two-out-of-three gives $a\\in\\mathscr W$. Thus $a\\in\\mathscr A$ component by component. Step 4 gives a lift from $a$ to $f$, and [lem-coef-factorization-lifting-retracts] makes $f$ an arrow retract of $b$. Step 5 gives $f\\in\\mathscr T$. We have proved $\\mathscr F\\cap\\mathscr W=\\mathscr T$ without assuming properness or continuity. Also $\\mathscr C\\cap\\mathscr W=\\mathscr A$ is the literal componentwise intersection.",
+   "uses": [
+    "lem-coef-factorization-lifting-retracts",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.2.9.19, printed pp.843-844: identification of trivial classes; retract argument replaces the general Reedy induction in this inverse case."
+   }
+  },
+  {
+   "text": "The category is complete and cocomplete by Step 1, $\\mathscr W$ is retract closed and has two-out-of-three, and Steps 6 and 9 provide the two functorial weak factorization systems $(\\mathscr C,\\mathscr F\\cap\\mathscr W)$ and $(\\mathscr C\\cap\\mathscr W,\\mathscr F)$. These are precisely the model-category axioms specified in [lem-coef-model-infinity-derived-adjunction]. By definition its fibrations are the relative matching fibrations; Step 9 identifies its trivial fibrations, and its trivial cofibrations are objectwise trivial cofibrations. For the terminal diagram $1$, its matching object is terminal, including the empty matching index, so $\\rho_\\alpha(D\\to1)$ identifies with $D_\\alpha\\to M_\\alpha D$. This proves the claimed fibrancy test. If $\\theta=0$ the functor category is terminal and every condition is vacuous; if $\\theta=1$ the construction recovers the ground model structure. Every recursion used the given ordinal itself as degree and the specified small limits; no finite-degree, combinatorial, enrichment or properness assumption has entered.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.2.9.22 and Corollary A.2.9.24(ii), printed pp.845-846; final assembly of the model axioms and the fibrant-object test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-factorization-lifting-retracts",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-ordinal-latching-diagram-lifting",
+  "lem-weil-pbc-transfinite-recursion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit inverse-ordinal construction following HTT Proposition A.2.9.19 and Corollary A.2.9.24(ii), printed pp.841-846, read online 2026-10-18 but not archived in literature/ (WANTED in report). Lifting is supplied by the dual of the existing ordinal latching lemma; the trivial-class comparison is written using the retract argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +188,45 @@
    "results": "{\"t\": \"2026-10-17T16:09:45Z\", \"tool\": \"grep\", \"query\": \"Reedy|matching|injective\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\"], \"digest\": \"507b1c3d4fd4eb63\"}",
    "date": "2026-10-17",
    "verdict": "no match: model-category axioms, ordinary fibrant/cofibrant homotopy-category localizations, and relative cell complexes do not construct an inverse diagram model structure. Read Mathlib/AlgebraicTopology/Reedy/Basic.lean:14-24,38-52: ordinal-valued Reedy structures are defined, but the functor model structure is explicitly TODO. Read ModelCategory/Basic.lean:44-71 and CofibrantObjectHomotopy.lean:180-205; these do not provide it."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|[Ii]njective[Mm]odel|[Mm]atching[Oo]bject|[Oo]rdinal.*[Mm]odel",
+   "results": "{\"t\": \"2026-10-17T16:26:04Z\", \"tool\": \"grep\", \"query\": \"Reedy|[Ii]njective[Mm]odel|[Mm]atching[Oo]bject|[Oo]rdinal.*[Mm]odel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Linarith/Oracle/SimplexAlgorithm/PositiveVector.lean\", \"Mathlib/Tactic/Linarith/Frontend.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"40fcc89fec56f640\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ground model-category axioms, lifting tricks, ordinary localization functors or relative cell complexes, not an ordinal diagram model structure. The grep hits Reedy/Basic.lean:14-24 explicitly list diagram model structures as TODO; its ReedyStructure at lines 38-52 only defines index-category data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The injective model structure for an inverse well ordered diagram category is constructed using relative matching objects",
+   "results": "{\"t\": \"2026-10-17T16:26:04Z\", \"tool\": \"leansearch\", \"query\": \"The injective model structure for an inverse well ordered diagram category is constructed using relative matching objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"CategoryTheory.Injective.mk\", \"HomotopicalAlgebra.RelativeCellComplex.mk.injEq\", \"CategoryTheory.InjectivePresentation.f\", \"CategoryTheory.Injective.casesOn\", \"HomotopicalAlgebra.RelativeCellComplex.mk.inj\", \"CategoryTheory.injective_iff_rlp_monomorphisms_zero\", \"CategoryTheory.Injective.recOn\"], \"digest\": \"6ad4a32537c3cc5b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ground model-category axioms, lifting tricks, ordinary localization functors or relative cell complexes, not an ordinal diagram model structure. The grep hits Reedy/Basic.lean:14-24 explicitly list diagram model structures as TODO; its ReedyStructure at lines 38-52 only defines index-category data."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-17T16:26:05Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.FibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.FibrantObject.toHoCat\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.FibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.FibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.FibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.FibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"b2402eefb745318c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ground model-category axioms, lifting tricks, ordinary localization functors or relative cell complexes, not an ordinal diagram model structure. The grep hits Reedy/Basic.lean:14-24 explicitly list diagram model structures as TODO; its ReedyStructure at lines 38-52 only defines index-category data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse diagrams indexed by any small ordinal admit a model structure with objectwise weak equivalences and cofibrations and relative matching fibrations",
+   "results": "{\"t\": \"2026-10-17T16:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse diagrams indexed by any small ordinal admit a model structure with objectwise weak equivalences and cofibrations and relative matching fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\"], \"digest\": \"a92bdc223819e5fe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ground model-category axioms, lifting tricks, ordinary localization functors or relative cell complexes, not an ordinal diagram model structure. The grep hits Reedy/Basic.lean:14-24 explicitly list diagram model structures as TODO; its ReedyStructure at lines 38-52 only defines index-category data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A well founded inverse Reedy functor category inherits a model structure by factoring maps into relative matching objects",
+   "results": "{\"t\": \"2026-10-17T16:26:21Z\", \"tool\": \"leanfinder\", \"query\": \"A well founded inverse Reedy functor category inherits a model structure by factoring maps into relative matching objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.PathObject.instIsVeryGoodOfFactorizationData\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\"], \"digest\": \"66d878de315b817e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ground model-category axioms, lifting tricks, ordinary localization functors or relative cell complexes, not an ordinal diagram model structure. The grep hits Reedy/Basic.lean:14-24 explicitly list diagram model structures as TODO; its ReedyStructure at lines 38-52 only defines index-category data."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-transfinite-isofibration-limit",
@@ -70,7 +238,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, displayed derived inverse-limit adjunction: the general inverse-ordinal diagram model structure underlying the cellular inverse-tower comparison.",
+   "place": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: displayed derived inverse-limit adjunction. The ordinal diagram model structure is an auxiliary foundation introduced through lem-coef-transfinite-isofibration-limit; the blueprint paragraph does not itself state or prove it.",
    "via": [
     "lem-coef-transfinite-isofibration-limit",
     "lem-coef-flexible-weight-enriched-lift",
@@ -82,5 +250,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-ordinal-inverse-diagram-model",
+  "worker": "stage1",
+  "summary": "Preserved the statement; supplied the two explicit transfinite functorial factorizations, dualized the existing ordinal latching lifting lemma, verified retract closure and both weak factorization systems, and identified matching trivial fibrations using constant-diagram lifting and a retract. No new nodes. Checked empty and singleton ordinals and a first limit stage. No exact project Lean declaration or Mathlib model-structure theorem was found.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed inverse-limit adjunction; the present auxiliary construction supports the comparison through lem-coef-transfinite-isofibration-limit. That paragraph has no ordinal model-structure argument. Steps 1-10 provide that missing foundation from the cited external model-category source without changing the blueprint route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-b74e0f268",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-b74e0f268 (reviewer sub-agent of L); spot-checked: I read the item and all ten proof steps in full and checked each step myself. The proof is complete and correct, the statement is unchanged, and I made no repairs. Shape: one commit touching only the item and its report; no new nodes. Compared with the live side DAG and weil-conjectures-sheaf, the statement, stmt_deps and source are byte-identical, so the statement was not weakened. Cited statements read in full: def-weil-pbc-category-colimit; lem-coef-model-infinity-derived-adjunction (only its first paragraph of model and weak-factorization conventions is used); lem-weil-pbc-transfinite-recursion (Mathlib leaf); lem-coef-ordinal-latching-diagram-lifting (any small ordinal, no continuity condition); lem-coef-lifting-class-closure (applied in the opposite category for pullback and composition closure of right classes); lem-coef-factorization-lifting-retracts (both halves). Step checks: Step 2's pullback equations, naturality of a and b, and r_alpha=rho_alpha(b) all hold. In Step 4 the dualization to M^op over theta is correctly oriented: lambda_alpha(p^op)=rho_alpha(p)^op, and the hypothesis is i_alpha lifting against rho_alpha(p). Step 7 is the limit lifting via const(j) over the initial segment gamma, including gamma=0. Step 8 writes q_alpha as the base change of M_alpha q composed with rho_alpha(q). Step 9 is the retract argument giving F∩W = T. Small cases checked: theta=0, 1, 2 and omega+1 (no continuity at the limit stage). Minor wording point, harmless and unchanged: the recursion rule in Step 3 also needs a default value on non-compatible families. Route: every cited statement node is in unit sk-prop-sf-biduality-general; the others are a definition and a Mathlib leaf, so no tool_uses are needed. A transitive-closure check over 642 nodes found no cycle. Blueprint: the ancestor prop-coef-integral-exceptional-adjoint matches; its proof paragraph 2 really is only the derived inverse-limit adjunction, as the new place text says; same_as=[] agrees with my grep. Duplicates: lem-coef-reedy-model-structure (natural-number degrees), lem-coef-direct-wfs-extension (finite direct categories) and lem-coef-combinatorial-injective-diagram-model (combinatorial, no matching description) do not cover the item. Source: HTT A.2.9.1, A.2.9.19, A.2.9.22 and A.2.9.24(ii) is not archived under literature/; it is correctly marked WANTED with proof_origin=agent. I could not open the PDF, so I did not check the page numbers; the statement agrees with the standard Reedy structure on theta^op (objectwise cofibrations, relative matching fibrations), and I checked the proof without relying on the source. No SGA source is used. This is not a target node, so no base-change morphism or coefficient category is involved."
  }
 }
