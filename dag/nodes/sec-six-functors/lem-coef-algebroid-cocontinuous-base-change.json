@@ -316,5 +316,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebroidCocontinuousBaseChange",
+  "declaration": "SSet.Enhanced.Algebroid.algebroid_cocontinuous_base_change",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.postcomposeTotalSimplex",
+   "SSet.Enhanced.Algebroid.postcomposeTotalAmbient",
+   "SSet.Enhanced.Algebroid.postcomposeFamily",
+   "SSet.Enhanced.Algebroid.underlyingChange",
+   "SSet.Enhanced.Algebroid.algebroid_cocontinuous_base_change"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebroidCocontinuousBaseChange.lean",
+  "statement": "theorem algebroid_cocontinuous_base_change {E D : SSet.{max (u + 1) v}} [Quasicategory E] [Quasicategory D] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (r : D ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsMonoidalInfinityCategory p) (hr : IsMonoidalInfinityCategory r) (hV : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (monoidalUnderlying p)) (hW : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (monoidalUnderlying r)) (hVtensor : ∀ (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying p)) ⟶ monoidalUnderlying p), IsMonoidalTensorOperation p 2 tensor → ∀ (x : (monoidalUnderlying p) _⦋0⦌) (i : Fin 2), SSet.Presentability.PreservesColimitsIn (tensorWith tensor x i) (fun K _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} K)) (hWtensor : ∀ (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying r)) ⟶ monoidalUnderlying r), IsMonoidalTensorOperation r 2 tensor → ∀ (x : (monoidalUnderlying r) _⦋0⦌) (i : Fin 2), SSet.Presentability.PreservesColimitsIn (tensorWith tensor x i) (fun K _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} K)) : Quasicategory (total.{u, v} p) ∧ SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (total.{u, v} p) ∧ Quasicategory (total.{u, v} r) ∧ SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (total.{u, v} r) ∧ ∀ (F : E ⟶ D) (hF : IsStrongMonoidalInfinityFunctor p r F), SSet.Presentability.PreservesColimitsIn (underlyingChange F hF) (fun K _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} K) → SSet.Presentability.PreservesColimitsIn (postcomposeFamily universalFamily.{u, v}.hom F hF) (fun K _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} K)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded total category of operadic algebroids. Literal postcomposition on the full universal family supplies the induced functor, and restriction to the actual fiber at [1] supplies its underlying functor. Cocompleteness and tensor cocontinuity are explicit hypotheses with no presentability assumption. Preservation is expressed on every actual colimit cocone, equivalently invertibility of the canonical colimit comparison, including the empty shape. The existing Q48 seven-step re-split, already on current newtargets-dag, is preserved verbatim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8e37f907d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Audited statement, dependencies, helper constructions, docstrings, edge cases, report sections, and source alignment. Both modules passed scompile.py and deliver2.py --no-push with no fixes needed.; reverted the delivery's change of existing node(s) lem-coef-cartesian-left-adjoint-transport (--revert-nodes; kept as on newtargets-dag)"
  }
 }

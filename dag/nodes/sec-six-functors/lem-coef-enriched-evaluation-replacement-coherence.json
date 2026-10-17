@@ -97,7 +97,8 @@
   "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-coherent-nerve-comparison",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-marked-cone-external-product"
  ],
  "mathlib_searches": [
   {
@@ -222,5 +223,23 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-710a62dad (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all six steps and its metadata. It adds no new nodes. I read the statement of each of the seven cited nodes, the unit sk-prop-sf-biduality-general, and the ancestor's main-20261015 blueprint proof (prop-coef-integral-exceptional-adjoint, paragraph 2). I also read the only node that cites the item, lem-coef-enriched-diagram-rectification step 8, and its hypotheses match what the item assumes. Steps 1-3 are elementary and I checked each. Step 1: an n-simplex of the enriched end satisfies the interchange equation, so e_j is functorial on B x I. Step 2: r e_0 = e_1 r holds on full mapping simplicial sets, by naturality of q in B and of q_b in I. Step 3: I checked the interval functor J for the level cases 000, 001, 011 and 111, and the 1-to-0 mapping set is empty. Step 4: N_hc preserves the product degree by degree, N_hc[1] is Delta^1 by the discrete clause of coherent-nerve-comparison, and currying gives an edge of Fun(X,Fun(K,Q)) whose component at (b,k) is exactly q_b(a(k)). Step 5: this rests on the reading that the comparison of nerve-localization agrees with inclusion followed by localization on the ordinary nerve of the bifibrant objects. That is a fair reading of the cited statement (HA 1.3.4.20), and equivalences of quasicategories reflect equivalence edges. Step 6: Fun(K,Q) is a quasicategory by the pushout-product of an inner horn with the empty set into K, and the pointwise criterion is then applied twice, each time to a quasicategory target. Edge cases tested: K=Delta^0, I with one object, identity q, and empty B, I or K; all hold. All cited statements are in the item's own unit or are definitions, so no tool_uses are needed. There is no cycle. No duplicate: lem-coef-enriched-nerve-transformation only handles Kan-valued targets, and the cone-straightening, model-weak-equivalence-nerve and bifibrant-common-replacement nodes state other things. This is not a target node, so no base-change morphism applies. HTT is not in literature/; it is recorded as WANTED and the proof is marked agent-written. No SGA is used. The delivery blocker in the report concerns another base node, which parses in my snapshot. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedEvaluationReplacementCoherence",
+  "declaration": "CategoryTheory.enriched_evaluation_replacement_coherence",
+  "file": "lean/Sheaf/CategoryTheory/EnrichedEvaluationReplacementCoherence.lean",
+  "statement": "theorem enriched_evaluation_replacement_coherence (A : Type u) [Category.{u} A] [ModelCategory A] [SimplicialCategory A] (B I : CoherentNerve.SCat.{u}) (_hB : CoherentNerve.IsLocallyKan B) [EnrichedOrdinaryCategory SSet.{u} (EnrichedFunctor SSet.{u} I A)] (H₀ H₁ : EnrichedFunctor SSet.{u} B (EnrichedFunctor SSet.{u} I A)) (q : H₀ ⟶ H₁) (h₀ : ∀ (b : B) (i : I), IsCofibrant ((H₀.obj b).obj i) ∧ IsFibrant ((H₀.obj b).obj i)) (h₁ : ∀ (b : B) (i : I), IsCofibrant ((H₁.obj b).obj i) ∧ IsFibrant ((H₁.obj b).obj i)) (hq : ∀ (b : B) (i : I), WeakEquivalence (enrichedEvaluationComponent q b i)) (K : SSet.{u}) (a : K ⟶ CoherentNerve.nerveFunctor.obj I) : ∃ e₀ e₁ : EnrichedFunctor SSet.{u} (SSet.MarkedCone.productIndex B I) (SimplicialModelLocalization.Bif A), (∀ (b : B) (i : I), (e₀.obj (b, i)).obj = (H₀.obj b).obj i) ∧ (∀ (b : B) (i : I), (e₁.obj (b, i)).obj = (H₁.obj b).obj i) ∧ ∃ E₀ E₁ : CoherentNerve.nerveFunctor.obj B ⟶ (ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)), (∀ (b : (CoherentNerve.nerveFunctor.obj B) _⦋0⦌) (k : K _⦋0⦌), (((SSet.Enhanced.evaluation K (SimplicialNerve (SimplicialModelLocalization.Bif A)) k).app _ (E₀.app _ b)).obj (.mk (ULift.up (0 : Fin 1)))).obj = (e₀.obj (b.obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))), (a.app _ k).obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))))).obj) ∧ (∀ (b : (CoherentNerve.nerveFunctor.obj B) _⦋0⦌) (k : K _⦋0⦌), (((SSet.Enhanced.evaluation K (SimplicialNerve (SimplicialModelLocalization.Bif A)) k).app _ (E₁.app _ b)).obj (.mk (ULift.up (0 : Fin 1)))).obj = (e₁.obj (b.obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))), (a.app _ k).obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))))).obj) ∧ ∃ η : ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))) _⦋1⦌, ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))).δ 1 η = SSet.Enhanced.diagramVertex E₀ ∧ ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))).δ 0 η = SSet.Enhanced.diagramVertex E₁ ∧ SSet.Enhanced.IsEquivalenceEdge ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))) η ∧ (∀ (b : (CoherentNerve.nerveFunctor.obj B) _⦋0⦌) (k : K _⦋0⦌), HEq (coherentNerveEdgeArrow (twiceCurriedEvaluationEdge η b k)) (enrichedEvaluationComponent q (b.obj (SimplicialThickening.mk (ULift.up (0 : Fin 1)))) ((a.app _ k).obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))))))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-442f71936",
+  "group": "NS",
+  "result": "pass",
+  "note": "All node clauses match Lean; dependencies and source checked; helpers are non-hollow; report sections present; repeated scompile.py compiles cleanly; no fixes needed."
  }
 }
