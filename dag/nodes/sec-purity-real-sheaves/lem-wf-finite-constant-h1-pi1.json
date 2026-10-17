@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-finite-constant-h1-pi1",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite constant torsors and the etale fundamental group",
@@ -14,63 +14,161 @@
  },
  "stmt_deps": [
   "def-wf-weil-group",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-finite-field-fiber",
+  "def-galois-fibre-functor"
  ],
  "proof": [
   {
-   "text": "By [thm-galois-torsor-h1], the left side of (3.1) classifies\ntorsors under the constant group $M$. By\n[thm-galois-lc-etale], their underlying sheaves\nare finite etale covers. The finite-etale fibre-functor equivalence of\n[thm-galois-fundamental] sends a torsor $P$\nto a finite set $P_{\\bar u}$ with commuting actions of\n$\\pi_1(U,\\bar u)$ and $M$,\nthe latter simply transitive. Choose $p\\in P_{\\bar u}$. For every\n$g\\in\\pi_1(U,\\bar u)$, there is a unique $f_P(g)\\in M$ such that\n\n$$\ng(p)=p+f_P(g).\n$$",
+   "text": "Put $\\Pi=\\pi_1(U,\\bar u)$; $U$ is connected by geometric connectedness. The natural bijection of [thm-galois-torsor-h1] represents a class $c\\in H^1(U,M)$ by an $M$-torsor $P$. Its finite locally constant underlying sheaf is a finite etale cover by [thm-galois-lc-etale]. The torsor conditions of [def-weil-pbc-finite-torsors] give a nonempty fibre $P_{\\bar u}$ and a simply transitive $M$-action: a local section gives a point after choosing a lift of the geometric point to a trivializing etale cover. By [thm-galois-fundamental], $P_{\\bar u}$ is a finite continuous $\\Pi$-set. Each translation by $m\\in M$ is a morphism of covers, so its fibre map commutes with the $\\Pi$-action. Choose $p\\in P_{\\bar u}$ and define $f_P(g)$ uniquely by $g\\cdot p=p+f_P(g)$.",
    "uses": [
     "thm-galois-torsor-h1",
     "thm-galois-lc-etale",
+    "def-weil-pbc-finite-torsors",
     "thm-galois-fundamental"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+    "place": "First paragraph, torsor, finite cover and fibre equivalence"
+   }
   },
   {
-   "text": "The two actions commute, so\n$f_P(gh)=f_P(g)+f_P(h)$. The homomorphism is continuous because the\nstabilizer of every point in the finite fiber is open. Replacing $p$ by\n$p+a$ does not change $f_P$, since $M$ is abelian; the resulting\nbijection with the continuous homomorphisms is\n[cor-galois-abelian-h1].",
+   "text": "Commutation gives $(gh)\\cdot p=g\\cdot(p+f_P(h))=p+f_P(g)+f_P(h)$, so $f_P(gh)=f_P(g)+f_P(h)$. Replacing $p$ by $p+a$ gives $g\\cdot(p+a)=p+a+f_P(g)$, using that $M$ is abelian; thus $f_P$ is unchanged. An equivariant torsor isomorphism carries this identity to the other torsor, so $f_P$ depends only on its isomorphism class. The bijection $M\\to P_{\\bar u}$, $a\\mapsto p+a$, identifies $f_P$ with the orbit map $g\\mapsto g\\cdot p$. This orbit map is continuous by the finite continuous action in [def-galois-fibre-functor], and $M$ has the discrete topology; equivalently its fibres are cosets of the open stabilizer of $p$.",
    "uses": [
-    "cor-galois-abelian-h1"
+    "def-galois-fibre-functor"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+    "place": "Second paragraph, homomorphism, continuity and independence"
+   }
   },
   {
-   "text": "Conversely, a continuous homomorphism $f:\\pi_1(U,\\bar u)\\to M$ gives the\nfinite $\\pi_1(U,\\bar u)$-set $M$, on which\n\n$$\ng\\cdot a=f(g)+a.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "It commutes with translations by $M$, and the finite-etale\nfibre-functor equivalence of [thm-galois-fundamental] therefore gives\nan $M$-torsor. The two constructions are inverse, and they are the two\nsides of the bijection [cor-galois-abelian-h1]. Each construction is\ndefined by transporting fibers, so it\ncommutes with an automorphism of the pointed scheme.",
+   "text": "Conversely let $f:\\Pi\\to M$ be a continuous homomorphism and give the finite set $M$ the action $g\\cdot a=f(g)+a$. The identity and multiplication laws follow from those of $f$, continuity follows from continuity of $f$, and this action commutes with translations. By [thm-galois-fundamental], the finite $\\Pi$-set is the fibre of a finite etale cover; full faithfulness transports the translations and their action identities to the cover. The map $M\\times M\\to M\\times M$, $(m,a)\\mapsto(a+m,a)$, is a bijection, and the finite-limit-compatible equivalence reflects this isomorphism. To verify local nonemptiness without assuming the cover is connected, take the preimage of $f$ under the already-existing bijection [cor-galois-abelian-h1]. Its torsor fibre is equivariantly identified with this $M$-set by $a\\mapsto p+a$. Full faithfulness identifies its finite etale cover with the one constructed here, and [thm-galois-lc-etale] identifies the underlying sheaves. Thus the constructed cover carries an $M$-torsor in the sense of [def-weil-pbc-finite-torsors], including local nonemptiness. Starting with $P$, the map $a\\mapsto p+a$ is both $M$-equivariant and $\\Pi$-equivariant, hence recovers $P$ up to isomorphism. Starting with $f$, use $p=0$ to recover $f$. This proves the bijection and is precisely the canonical torsor description of [cor-galois-abelian-h1].",
    "uses": [
     "thm-galois-fundamental",
+    "thm-galois-lc-etale",
+    "def-weil-pbc-finite-torsors",
     "cor-galois-abelian-h1"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+    "place": "Third and fourth paragraphs, inverse construction"
+   }
   },
   {
-   "text": "For completeness, consider the descent transport associated with\n$s\\in W(U_0,\\bar u)$. On the fiber functor it replaces the geometric\nmonodromy element $g$ by $s^{-1}gs$. Therefore a torsor represented by\n$f_P$ is pulled back to the torsor represented by\n\n$$\ng\\longmapsto f_P(s^{-1}gs).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "The bijection is an isomorphism of abelian groups. By [lem-sc-torsor-h1], the canonical class of an $M$-torsor is its usual cohomology class, and addition in $H^1(U,M)$ is represented by the contracted product $P\\wedge Q=(P\\times Q)/M$ for the antidiagonal action $a\\cdot(p,q)=(p+a,q-a)$. The equivalence of [thm-galois-fundamental], compatible with finite limits and colimits, identifies its fibre with $(P_{\\bar u}\\times Q_{\\bar u})/M$. If $r=[p,q]$, then $g\\cdot r=[p+f_P(g),q+f_Q(g)]=r+f_P(g)+f_Q(g)$, where the residual $M$-action translates either factor. Hence $f_{P\\wedge Q}=f_P+f_Q$. The trivial torsor has a fixed fibre point and gives $f=0$. The canonical torsor classification used here is the same as [thm-galois-torsor-h1], whose lifting-torsor construction is the inverse of the canonical class map.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "thm-galois-fundamental",
+    "thm-galois-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+    "place": "Fourth paragraph, the isomorphism assertion (additivity made explicit)"
+   }
   },
   {
-   "text": "This computation is unaffected by the choice of a point in the torsor\nfiber, by the abelian argument above. It proves both (3.1) and the stated\nWeil-descent equivariance.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $a:(U,\\bar u)\\to(U,\\bar u)$ be a pointed automorphism. The base-change compatibility of [thm-galois-fundamental] identifies the fibre of $a^*P$ with $P_{\\bar u}$, with $g\\in\\Pi$ acting as $a_*(g)$ on the latter. This identification preserves the translations by $M$. Thus $g\\cdot p'=p'+f_P(a_*(g))$ for the point $p'$ corresponding to $p$, so $f_{a^*P}=f_P\\circ a_*$. Naturality of [thm-galois-torsor-h1] identifies the class of $a^*P$ with $a^*c$. This is the commutative naturality square for (3.1).",
+   "uses": [
+    "thm-galois-fundamental",
+    "thm-galois-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+    "place": "Fourth paragraph, naturality for pointed automorphisms"
+   }
+  },
+  {
+   "text": "Now let $s\\in W(U_0,\\bar u)$ and $n=\\deg(s)$. Apply [lem-wf-finite-etale-weil-transport] to the finite etale cover $P$, using its pullback fibre bijection $\\lambda_{s,P}:((\\Phi_U^n)^*P)_{\\bar u}\\to P_{\\bar u}$. Its naturality with respect to each translation $t_m:P\\to P$ implies $\\lambda_{s,P}(x+m)=\\lambda_{s,P}(x)+m$. Choose $p'$ mapping to $p$. For every $g\\in\\Pi$, the asserted intertwining identity gives\n$$\n\\lambda_{s,P}(g\\cdot p')=(s^{-1}gs)\\cdot p=p+f_P(s^{-1}gs)\n=\\lambda_{s,P}(p'+f_P(s^{-1}gs)).\n$$\nInjectivity gives $g\\cdot p'=p'+f_P(s^{-1}gs)$, so $f_{(\\Phi_U^n)^*P}(g)=f_P(s^{-1}gs)$. By the naturality of [thm-galois-torsor-h1], this torsor represents the pullback of $c$. The pushforward transport $P\\to U\\xrightarrow{\\Phi_U^n}U$ corresponds to conjugation by $s$; its inverse is the pullback in this calculation, which explains the inverse conjugation in the statement.",
+   "uses": [
+    "lem-wf-finite-etale-weil-transport",
+    "thm-galois-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+    "place": "Penultimate paragraph, Weil descent with the direction of transport explicit"
+   }
+  },
+  {
+   "text": "Step 2 already shows independence of the chosen point $p'$. The formula is a continuous homomorphism because it is the monodromy of the pullback torsor; alternatively conjugation by $s$ restricts to a continuous automorphism of $\\Pi$. If $s'$ is another lift of the same degree, [lem-wf-weil-group-exact-sequence] gives $s'=hs$ for $h\\in\\Pi$. Since $f_P(h^{-1}gh)=-f_P(h)+f_P(g)+f_P(h)=f_P(g)$, one has $f_P(s'^{-1}gs')=f_P(s^{-1}gs)$. Thus the action is independent of the auxiliary lift. Degree zero gives the identity, and the preceding calculation holds for every integer degree, including inverse powers. Together with Steps 3--5 it proves (3.1) with both stated naturalities.",
+   "uses": [
+    "lem-wf-weil-group-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+    "place": "Last paragraph, independence and the equivariance conclusion"
+   }
   }
  ],
  "proof_deps": [
   "thm-galois-torsor-h1",
   "thm-galois-lc-etale",
+  "def-weil-pbc-finite-torsors",
   "thm-galois-fundamental",
-  "cor-galois-abelian-h1"
+  "def-galois-fibre-functor",
+  "cor-galois-abelian-h1",
+  "lem-sc-torsor-h1",
+  "lem-wf-finite-etale-weil-transport",
+  "lem-wf-weil-group-exact-sequence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-finite-constant-h1-pi1.proof.md",
+  "place": "Full proof; additivity via Stacks 03AJ and the existing lem-sc-torsor-h1; the finite-cover transport identification isolated as lem-wf-finite-etale-weil-transport"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Etale.*(H1|H_one|torsor)|monodromy.*(torsor|cohomology)|sheafH.*ContinuousMonoidHom",
+   "results": "2 hits: Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Locus.lean. Abstract group cohomology is not etale sheaf cohomology, and abstract Galois-category actions do not give the torsor/cohomology and Weil transport comparison. No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First etale cohomology of a constant finite abelian sheaf as continuous characters of the fundamental group",
+   "results": "8 hits: CategoryTheory.Sheaf.H, groupCohomology.H1IsoOfIsTrivial_H1π_apply_apply, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.mk, groupCohomology.H1IsoOfIsTrivial_inv_apply, groupCohomology.H1IsoOfIsTrivial.congr_simp, groupCohomology.coboundaries₁_ext, groupCohomology.H1InfRes. Abstract group cohomology is not etale sheaf cohomology, and abstract Galois-category actions do not give the torsor/cohomology and Weil transport comparison. No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FundamentalGroup\"",
+   "results": "12 hits: FundamentalGroupoid.termπ, FundamentalGroupoid.termπₓ, FundamentalGroupoid.termπₘ, FundamentalGroupoid, FundamentalGroupoid.as, FundamentalGroupoid.mk, FundamentalGroupoid.equiv, FundamentalGroupoid.fundamentalGroupoidFunctor. Abstract group cohomology is not etale sheaf cohomology, and abstract Galois-category actions do not give the torsor/cohomology and Weil transport comparison. No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale torsors under an abelian group classify continuous characters of the automorphism group of the geometric fibre functor",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply, CategoryTheory.PreGaloisCategory.toAutHomeo, CategoryTheory.PreGaloisCategory.toAutMulEquiv. Abstract group cohomology is not etale sheaf cohomology, and abstract Galois-category actions do not give the torsor/cohomology and Weil transport comparison. No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First etale cohomology with a finite constant abelian group is naturally isomorphic to continuous homomorphisms from the etale fundamental group, equivariant for Weil descent",
+   "results": "8 hits: ContinuousCohomology.continuousCohomologyZeroIso, Rep.FiniteCyclicGroup.groupCohomologyIso₀, groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom, groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom_apply, groupCohomology.π_comp_H0IsoOfIsTrivial_hom_apply, groupCohomology.H1IsoOfIsTrivial_H1π_apply_apply, groupCohomology.π_comp_H0IsoOfIsTrivial_hom, groupCohomology.π_comp_H0Iso_hom_apply. Abstract group cohomology is not etale sheaf cohomology, and abstract Galois-category actions do not give the torsor/cohomology and Weil transport comparison. No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*fundamental|WeilGroup|H1IsoOfIsTrivial|torsor.*cohomology",
+   "results": "5 hits: Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean. Abstract group cohomology is not etale sheaf cohomology, and abstract Galois-category actions do not give the torsor/cohomology and Weil transport comparison. No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -97,5 +195,49 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-finite-constant-h1-pi1",
+  "worker": "stage1",
+  "summary": "Made the finite torsor fibre nonemptiness, inverse construction, group law, pointed pullback square and Weil inverse-conjugation calculation explicit. Reused the general torsor and finite-etale interfaces, and isolated only the missing scheme-theoretic Weil transport of finite etale fibres. No statement changed; k_0 is the globally fixed finite field. Lean tags found only partial clauses, not an attachment.",
+  "blueprint": "Steps 1--2 realize proof paragraphs 1--2; Step 3 paragraphs 3--4; Step 4 supplies additivity implicit in (3.1); Step 5 supplies the pointed naturality sentence of paragraph 4; Steps 6--7 realize the last two paragraphs.",
+  "tool_uses": [
+   {
+    "node": "thm-galois-torsor-h1",
+    "why": "Generic natural classification of finite constant torsors by H^1; the rank-one unit uses this dictionary and has no separate general-site theorem."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic finite-locally-constant/finite-etale equivalence, preserving torsors and fibres, exactly the first paragraph of the source."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite-etale fibre equivalence, finite limit/colimit preservation and base-change action; not a replacement for the rank-one route."
+   },
+   {
+    "node": "cor-galois-abelian-h1",
+    "why": "Identifies the explicit inverse constructions with the existing canonical torsor character bijection; the equivariance and group-law arguments stay in this item."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "General-site group law under the canonical torsor/H^1 dictionary; its contracted-product clause is absent from the unit-specific character bijection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-galois-torsor-h1",
+  "thm-galois-lc-etale",
+  "thm-galois-fundamental",
+  "cor-galois-abelian-h1",
+  "lem-sc-torsor-h1"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-9c850b77c",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-9c850b77c (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; all seven steps and the new finite-cover transport lemma are valid. Added missing new-node metadata in fixes/. Corrected the report’s reversed degree-zero test in review.md. Accepted all five declared tool_uses; no target weakened or SGA source used.; 1 file(s) fixed by the reviewer"
+ }
 }

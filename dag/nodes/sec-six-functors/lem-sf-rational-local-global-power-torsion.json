@@ -15,9 +15,52 @@
   "def-weil-abstract-derived-category",
   "def-weil-linear-scalar-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each member of the finite covering, choose an exponent $N_j$ supplied by the hypothesis. If $t>0$, let $N=\\max_{1\\le j\\le t}N_j$; if $t=0$, put $N=0$. For every $j$ we have $N\\ge N_j$, and the $\\mathcal O_E$-linear composition and scalar action in $D_j$ give $\\varpi_E^N\\operatorname{id}_{C|_{U_j}}=\\varpi_E^{N-N_j}(\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}})=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Local comparison motivating the ancestor prop-sf-dualizable-hom; elementary finite-maximum argument supplied by the agent (no such proof step is present in this blueprint section)."
+   }
+  },
+  {
+   "text": "Restriction of sheaves of modules to a localized site is exact, so it preserves kernels, images and cokernels. Applying this to the cohomology formula gives a natural identification $\\mathcal H^d(C|_{U_j})\\cong(\\mathcal H^d(C))|_{U_j}$. On complexes, the map induced by scalar multiplication on the quotient $\\ker d^d/\\operatorname{im}d^{d-1}$ is scalar multiplication by the same scalar. This identity persists on derived morphisms, since cohomology factors through quasi-isomorphism localization. Applying cohomology to Step 1 therefore gives $\\varpi_E^N\\operatorname{id}_{\\mathcal H^d(C|_{U_j})}=0$. Exact restriction also preserves the image of scalar multiplication; consequently the image sheaf $(\\varpi_E^N\\mathcal H^d(C))|_{U_j}$ is zero for every $d$ and $j$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site); derived.tex Section 05RR, Lemma 05RT (lemma-acyclic) and Definition 05RU (definition-unbounded-derived-category); scalar compatibility follows directly from the cohomology quotient formula."
+   }
+  },
+  {
+   "text": "Fix $d$ and set $H=\\operatorname{im}(\\varpi_E^N\\operatorname{id}_{\\mathcal H^d(C)})$, the image in the abelian category of module sheaves. Step 2 says $H|_{U_j}=0$. Apply the cited cover-local criterion to the underlying abelian sheaf of $H$ and the morphism $0\\to H$. Its covering hypothesis holds: for any object $V\\to X$, the pullback family $V\\times_X U_j\\to V$ is a covering, and every domain admits a map to $U_j$. Thus the sieve of arrows to $V$ whose domains map to some $U_j$ contains this covering family and is covering. The restrictions of $0\\to H$ are isomorphisms, so the criterion gives an isomorphism of underlying abelian sheaves globally. Hence $H$ is the zero module sheaf, which says $\\varpi_E^N\\mathcal H^d(C)=0$. The argument holds for every $d$ with the same $N$. If $t=0$, pullback stability gives the empty covering on every $V$, the same criterion applies, and $N=0$ works.",
+   "uses": [
+    "lem-sfb-sheaf-cover-local-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps, sites.tex lines 5638-5703 (glue the local inverses); the category-valued criterion is Mathlib/CategoryTheory/Sites/LocalProperties.lean:35-64, with CoversTop/Basic.lean:41-54."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-sheaf-cover-local-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+  "place": "Explicit local-to-global supplement to the ancestor prop-sf-dualizable-hom. The blueprint section states the comparison but contains no finite-cover uniform-power proof; the argument uses exact slice restriction, the cohomology quotient formula, and Stacks Tag 04TQ to glue local inverses."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +100,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +126,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-rational-local-global-power-torsion",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and all hypotheses unchanged. The proof takes the maximum of the finitely many local uniformizer exponents (with N=0 for the empty cover), uses exact restriction to identify restricted cohomology sheaves and cohomology functoriality to obtain local annihilation, then applies the existing cover-local isomorphism criterion to the zero-to-sheaf map. No new nodes were needed.",
+  "blueprint": "Realizes the ancestor prop-sf-dualizable-hom proof paragraph 'The finite-cover localization lemma gives N>=0 with varpi_E^N H^d(C)=0 for every d' (the finite-cover uniform-power argument in the rational supplement)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-553a14f08",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-553a14f08 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and unit/chapter route. Clarified scalar compatibility, the image sheaf and CoversTop application; corrected proof attribution. Statement unchanged. Corrected whole DAG JSON and concrete source, edge-case, dependency and target-category checks are recorded in fixes/ and review.md. No new nodes or accepted tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-affine-hc0",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vanishing of $H_c^0$ on a nonproper curve",
@@ -14,28 +14,126 @@
  },
  "stmt_deps": [
   "def-weil-ordinary-compact-cohomology",
-  "def-wf-weil-category"
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "d-real-setup"
  ],
  "proof": [
   {
-   "text": "A class in $H_c^0$ is a global section of $\\mathcal F$ whose support\nis proper over the base field. By lissity in\n[def-weil-pbc-constructible-complexes], a global section of\n$\\mathcal F$ is locally constant, so on the connected curve it is\ndetermined by its value at one geometric point: a section vanishing at\none point is zero; consequently the support of a nonzero global lisse\nsection is all of $U$, which is not proper. Hence only the zero\nsection has compact support, and $H_c^0=0$.",
+   "text": "Use the finite-field conventions [d-real-setup] and write $U_0=\\operatorname{Spec}B$, with $B$ a finitely generated $k_0$-algebra. Then $U=\\operatorname{Spec}(B\\otimes_{k_0}k)$: the tensor product has the universal property of this affine fibre product. The images of the finitely many generators of $B$ generate $B\\otimes_{k_0}k$ over $k$, so $U$ is affine of finite type. It is separated: its diagonal on rings is the surjection $(B\\otimes k)\\otimes_k(B\\otimes k)\\to B\\otimes k$, $b\\otimes b'\\mapsto bb'$. A field is Noetherian since its only ideals are zero and the unit ideal; [lem-weil-pbc-finite-type-algebra-noetherian] therefore makes $B\\otimes k$ Noetherian, hence its affine spectrum is a Noetherian scheme. Finally $U$ is nonempty and connected by geometric connectedness, which by [def-pc-geometrically-irreducible] tests all field extensions, in particular $k/k_0$.",
    "uses": [
-    "def-weil-pbc-constructible-complexes"
+    "d-real-setup",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-pc-geometrically-irreducible"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-a1-affine-hc0.md",
+    "place": "Proof: connected geometric curve; explicit affine scalar-extension and Noetherian checks"
+   }
+  },
+  {
+   "text": "The smooth curve hypothesis is smoothness of relative dimension one over $k_0$ in the curve convention [d-real-setup]. Apply clause (1) of [lem-sbc-smooth-relative-dimension-permanence] to $\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$; $U\\to\\operatorname{Spec}k$ is smooth of relative dimension one. Since $U$ is nonempty, [lem-sbc-smooth-fixed-dimension-over-field] gives $\\dim U=1$. Applied to this structure morphism, [sbc-lem-smooth-geometrically-reduced] says its fibre over the sole point of $\\operatorname{Spec}k$, namely $U$ itself, is geometrically reduced; in particular $U$ is reduced. If $U$ were proper, [lem-sc-proper-affine-finite] would make this affine curve finite over $k$, in particular of dimension zero, contrary to $\\dim U=1$. Thus $U$ is not proper.",
+   "uses": [
+    "d-real-setup",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sbc-smooth-fixed-dimension-over-field",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-proper-affine-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d); geometry underlying the blueprint support argument"
+   }
+  },
+  {
+   "text": "Let $c\\in H_c^0(U,\\mathcal F)$. Apply [lem-a1-degree-zero-compact-support-sections] with $X_0=U_0$; smoothness, separation and finite type were checked above, and $\\ell$ is different from the characteristic by the Weil coefficient conventions. It produces the ordinary lisse adic realization $\\mathcal L$ and its section $s=\\alpha_{U,\\mathcal F}(c)$, with $\\alpha$ injective. The set $Z$ of underlying points at which the geometric fibre map of $s$ is nonzero is closed, and $Z$ with its reduced induced structure is proper over $k$. This applies to the specified completed/rationalized cohomology, through the comparison asserted in that lemma.",
+   "uses": [
+    "lem-a1-degree-zero-compact-support-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Definition 18.1, pp. 118-119; Remark 29.7, p. 166; explicit coefficient comparison isolated as a dependency"
+   }
+  },
+  {
+   "text": "For any geometric point $\\bar u$ of $U$, use clause (2) of [cor-galois-lisse-representations]. Its hypotheses hold: $U$ is connected, Noetherian and separated, and $\\ell$ is invertible on $U$ because $\\ell\\ne\\operatorname{char}k$. This fibre functor on lisse $\\overline{\\mathbf Q}_\\ell$-sheaves is an equivalence and sends the unit to the trivial line. Consequently it is faithful. The section $s$ is a morphism from that unit to $\\mathcal L$, so if $s_{\\bar u}=0$, faithfulness gives $s=0$. If $s\\ne0$, its fibre map is therefore nonzero at every geometric point. Every scheme point admits a geometric point by choosing an algebraic closure of its residue field, so the closed set $Z$ in the preceding step is all of $U$.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.7, Remark 7.4.8 and Lemma 7.4.10; ordinary lisse fibre-equivalence argument, using the previously isolated realization comparison"
+   }
+  },
+  {
+   "text": "If $s\\ne0$, the proper reduced induced subscheme on $Z=U$ is $U$ itself, since $U$ is reduced. This contradicts the nonproperness proved in step 2. Hence $s=0$. Injectivity of $\\alpha_{U,\\mathcal F}$ now gives $c=0$. As $c$ was arbitrary, $H_c^0(U,\\mathcal F)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Remark 29.7, p. 166: conclude the support contradiction"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constructible-complexes"
+  "d-real-setup",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-pc-geometrically-irreducible",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-proper-affine-finite",
+  "lem-a1-degree-zero-compact-support-sections",
+  "cor-galois-lisse-representations"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-a1-affine-hc0.md",
-  "place": "## Proof"
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Remark 29.7, p. 166, expanded with the blueprint support argument and explicit coefficient-model comparison"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth compactly supported etale cohomology of a lisse sheaf on a connected nonproper affine curve vanishes",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern structure-sheaf sections, ordinary topological functions, or generic sheaf functors, not degree-zero compact-support comparison for adic Weil sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupportedCohomology|compactSupport.*lisse|[Hh]c0",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern structure-sheaf sections, ordinary topological functions, or generic sheaf functors, not degree-zero compact-support comparison for adic Weil sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse etale sheaf on a smooth connected affine curve has zero compactly supported cohomology in degree zero",
+   "results": "smoothSheafCommGroup, smoothSheafCommRing.nonunits_stalk, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Scheme.Etale, Algebra.formallyEtale_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern structure-sheaf sections, ordinary topological functions, or generic sheaf functors, not degree-zero compact-support comparison for adic Weil sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"compactlySupported\"",
+   "results": "No hits; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern structure-sheaf sections, ordinary topological functions, or generic sheaf functors, not degree-zero compact-support comparison for adic Weil sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"support\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern structure-sheaf sections, ordinary topological functions, or generic sheaf functors, not degree-zero compact-support comparison for adic Weil sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -99,5 +197,44 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankin"
+ "unit": "sk-p-real-rankin",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-affine-hc0",
+  "worker": "stage1",
+  "summary": "Expanded the one-paragraph support argument into geometry, degree-zero proper-support comparison, fibre-faithfulness, and contradiction. Reused the existing lisse fibre equivalence and proper-affine curve lemma; created only the coefficient-aware degree-zero support comparison. Removed the finite-coefficient-only constructibility definition as an invalid justification for adic rigidity. The current source has a direct sorry instead of the older audited declaration; no attachment claimed. Statement text and unit route retained.",
+  "blueprint": "The blueprint first sentence is step 3 and the one new comparison node; the lissity/connectedness sentence is step 4 via the existing equivalence; nonproperness is step 2 and the final conclusion is step 5. Step 1 verifies geometric and coefficient hypotheses.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Smooth relative dimension one survives geometric scalar extension; generic geometry, not a replacement for the Rankin unit route."
+   },
+   {
+    "node": "lem-sbc-smooth-fixed-dimension-over-field",
+    "why": "The nonempty geometric smooth curve has dimension one, needed for the nonproperness contradiction."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "The geometric smooth curve is reduced, so full reduced support equals the whole curve."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "The ordinary lisse adic fibre equivalence detects a section from its value at any geometric point; no node of this unit states this generic equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "sbc-lem-smooth-geometrically-reduced",
+  "cor-galois-lisse-representations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q128-246b2c54f",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q128-246b2c54f (reviewer sub-agent of L); spot-checked: Full source, DAG, route, hypothesis, coefficient-model, edge-case, duplicate, and cycle checks passed. Review written to review.md; no repairs needed."
+ }
 }

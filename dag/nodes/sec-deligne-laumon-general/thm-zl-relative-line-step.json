@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-zl-relative-line-step",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Relative affine-line weight step",
@@ -13,43 +13,83 @@
   "place": "node thm-zl-relative-line-step, order 2848"
  },
  "stmt_deps": [
-  "def-weil-complex-weights",
-  "def-weil-pbc-qbar-category"
+  "def-weil-complex-weights"
  ],
  "proof": [
   {
-   "text": "By [lem-zl-sheaves-to-complexes], it suffices to treat a mixed\nsheaf of weights at most $w$. Its finite weight filtration and the\nextension bounds of [lem-a1-extension-bounds]\n(propagated through the long exact sequences) reduce to a pure graded\npiece. Apply [thm-zl-relative-line-stratification]: on a\nrelative-curve stratum the assertion is\n[thm-zl-relative-affine-curve-core] (which gives the sheaf-level\nbound $R^ap_!\\mathcal F$ mixed of weights at most $w+a$, for pure\n$\\mathcal F$); on a quasi-finite stratum it is\n[lem-zl-quasi-finite]. The composition constraint\n[lem-zl-shriek-composition] identifies these stratumwise direct\nimages with the corresponding pieces of $Rp_!$. Noetherian induction,\nusing the one-way localization gluing rule [lem-zl-open-closed-weight]\nfor an open–closed decomposition of the strata, in the morphism-level\nform [lem-zl-morphism-open-closed-reduction], reassembles the source\nand target strata.",
+   "text": "Apply [lem-zl-sheaves-to-complexes]. It says that, for a separated finite-type map, the complex upper-weight assertion follows once every mixed Weil sheaf of weights at most $v$ has $R^a p_!$ mixed of weights at most $v+a$ for every $a$. Thus it is enough to prove this sheaf-level assertion for the relative affine-line projection $p$.",
    "uses": [
     "lem-zl-sheaves-to-complexes",
-    "lem-a1-extension-bounds",
+    "def-weil-complex-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-step.proof.md",
+    "place": "Proof, opening reduction to the sheaf assertion"
+   }
+  },
+  {
+   "text": "Let $\\mathcal F$ be mixed of weights at most $v$. By [def-weil-punctual-weights], it has a finite filtration by constructible Weil subsheaves whose successive quotients are punctually pure of weights at most $v$. The coefficient clause of [lem-zl-morphism-open-closed-reduction] propagates a direct-image bound through every finite filtration, and the extension estimate [lem-a1-extension-bounds] is the stalkwise weight step used in the long exact sequences. It therefore suffices to prove the sheaf bound for one punctually pure graded piece.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "lem-zl-morphism-open-closed-reduction",
+    "lem-a1-extension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-step.proof.md",
+    "place": "Proof, finite weight filtration and extension reduction"
+   }
+  },
+  {
+   "text": "For a punctually pure graded piece, apply [thm-zl-relative-line-stratification]. It gives finite source and target stratifications on which the sheaf is lisse and each induced map is either separated quasi-finite or smooth with one-dimensional affine geometric fibers. On a smooth relative-curve stratum, [thm-zl-relative-affine-curve-core] gives that $R^a p_!\\mathcal F$ is mixed of weights at most $v+a$; on a separated quasi-finite stratum, [lem-zl-quasi-finite] gives the same upper-weight bound. Restricting a punctually pure sheaf to a stratum preserves that purity by the definition in [def-weil-punctual-weights]. When a stratum map is viewed as a composite with its locally closed target immersion, [lem-zl-shriek-composition] identifies the resulting exceptional direct image with the corresponding stratumwise piece of $Rp_!$.",
+   "uses": [
     "thm-zl-relative-line-stratification",
     "thm-zl-relative-affine-curve-core",
     "lem-zl-quasi-finite",
-    "lem-zl-shriek-composition",
-    "lem-zl-open-closed-weight",
-    "lem-zl-morphism-open-closed-reduction"
+    "def-weil-punctual-weights",
+    "lem-zl-shriek-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-step.proof.md",
+    "place": "Proof, stratified pure graded piece"
+   }
+  },
+  {
+   "text": "The finite source and target stratifications can be ordered as successive open--closed decompositions. Apply the source and target clauses of [lem-zl-morphism-open-closed-reduction] inductively to reassemble the sheaf-level direct-image bounds from the stratumwise bounds. The corresponding localization triangles are glued at the complex level by [lem-zl-open-closed-weight]. Combining this reassembly with Step 1 yields $Rp_!K\\in D_{\\leq w}(Y_0)$ for every $K\\in D_{\\leq w}(\\mathbf A^1_{Y_0})$.",
+   "uses": [
+    "lem-zl-morphism-open-closed-reduction",
+    "lem-zl-open-closed-weight",
+    "lem-zl-sheaves-to-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-step.proof.md",
+    "place": "Proof, open--closed reassembly"
+   }
   }
  ],
  "proof_deps": [
-  "lem-zl-sheaves-to-complexes",
+  "def-weil-complex-weights",
+  "def-weil-punctual-weights",
   "lem-a1-extension-bounds",
-  "thm-zl-relative-line-stratification",
-  "thm-zl-relative-affine-curve-core",
-  "lem-zl-quasi-finite",
-  "lem-zl-shriek-composition",
+  "lem-zl-morphism-open-closed-reduction",
   "lem-zl-open-closed-weight",
-  "lem-zl-morphism-open-closed-reduction"
+  "lem-zl-quasi-finite",
+  "lem-zl-sheaves-to-complexes",
+  "lem-zl-shriek-composition",
+  "thm-zl-relative-affine-curve-core",
+  "thm-zl-relative-line-stratification"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-step.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/thm-zl-relative-line-step.proof.md",
+  "place": "Proof"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -701,5 +741,21 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-zl-relative-line-step",
+  "worker": "stage1",
+  "summary": "Audited the existing target against the current relative-line blueprint and the slopmaster2 source. No new DAG nodes were needed: the proof reduces complexes to sheaves, uses the mixed filtration and extension bound, applies the existing stratification, relative-curve and quasi-finite bounds, identifies stratumwise exceptional images by composition, and reassembles by open--closed reduction. The matching Lean declaration is syntactically sorry-free but rests transitively on the sorried stratification theorem, so it is not an attachment.",
+  "blueprint": "Realizes the single proof paragraph of thm-zl-relative-line-step.proof.md: reduction to the sheaf assertion; finite weight filtration and extension; pure-piece stratification and stratumwise bounds; composition and open--closed reassembly.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q117-25b2e61ec",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q117-25b2e61ec (reviewer sub-agent of L); spot-checked: Mathematics and all four proof steps pass. One metadata fault: `def-weil-pbc-qbar-category` was an unused statement dependency and is removed in `fixes/dag/nodes/sec-deligne-laumon-general/thm-zl-relative-line-step.json`; no node drop.; 1 file(s) fixed by the reviewer"
  }
 }

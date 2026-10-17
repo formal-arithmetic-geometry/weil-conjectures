@@ -12,9 +12,69 @@
   "def-weil-point-derived-complete-module-complex",
   "def-pc-perfect-ring-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal C$ be the full subcategory of $D(A)$ consisting of objects derived complete with respect to $I$. The hypothesis places $A[0]$ in $\\mathcal C$. Derived completeness is an object property defined by vanishing of the multiplication-tower derived limits, so it is invariant under isomorphism; hence $\\mathcal C$ is strictly full. The zero object is complete because every multiplication tower on it is zero.",
+   "uses": [
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091S, Definition 15.93.4 and the immediately following assertion that the derived-complete subcategory is strictly full"
+   }
+  },
+  {
+   "text": "The existing closure theorem [lem-weil-pbc-module-derived-complete-products-triangles] says that in any distinguished triangle, if two objects are derived $I$-complete then so is the third. Together with the distinguished triangle $X\\to0\\to X[1]\\to X[1]$ and its rotations supplied by the triangulated axioms [def-weil-triangulated-category], and the zero-object observation of Step 1, this makes $\\mathcal C$ closed under all shifts and under cones; thus $\\mathcal C$ is triangulated.",
+   "uses": [
+    "lem-weil-pbc-module-derived-complete-products-triangles",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091S, assertion that derived-complete objects form a triangulated subcategory"
+   }
+  },
+  {
+   "text": "Let $K\\in\\mathcal C$ and let $i:P\\to K$, $r:K\\to P$ satisfy $r\\circ i=\\mathrm{id}_P$. Fix $f\\in I$ and $q\\in\\mathbf Z$. By [lem-weil-pbc-module-localization-tower-vanishing] and [def-weil-point-derived-complete-module-complex], every morphism $A_f[0][q]\\to K$ is zero. For any $a:A_f[0][q]\\to P$, therefore $i\\circ a=0$ and $a=r\\circ i\\circ a=0$. Applying the same equivalence to every multiplication-tower derived limit of $P$ gives that $P$ is derived complete. Thus $\\mathcal C$ is closed under retracts and is saturated (Stacks Tag 091S).",
+   "uses": [
+    "lem-weil-pbc-module-localization-tower-vanishing",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P, lemma-hom-from-Af, (1) iff (3); Tag 091S, definition-derived-complete and following saturation assertion"
+   }
+  },
+  {
+   "text": "By [lem-sf-perfect-ring-classical-generator] (Tag 0ATI), the full subcategory of perfect objects is the smallest strictly full, saturated, triangulated subcategory of $D(A)$ containing $A[0]$. Since $\\mathcal C$ has these closure properties and contains $A[0]$ by hypothesis, every perfect object lies in $\\mathcal C$. Using [def-pc-perfect-ring-complex], this applies to every object isomorphic to a bounded complex of finitely generated projective $A$-modules, proving the claim.",
+   "uses": [
+    "lem-sf-perfect-ring-classical-generator",
+    "def-pc-perfect-ring-complex",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, Lemma perfect-ring-classical-generator"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-point-derived-complete-module-complex",
+  "def-weil-triangulated-category",
+  "lem-sf-perfect-ring-classical-generator",
+  "lem-weil-pbc-module-derived-complete-products-triangles",
+  "lem-weil-pbc-module-localization-tower-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 091S and 0ATI"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,7 +113,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pod-point-perfectness",
@@ -70,5 +130,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-perfect-over-derived-complete-ring",
+  "worker": "stage1",
+  "summary": "Derived-complete objects form a strictly full triangulated subcategory by the existing products-and-triangles theorem. Retract closure follows in the displayed elementary Hom-composition argument from the existing localization-tower vanishing criterion. Apply the independent Stacks 0ATI classical-generator theorem to obtain completeness of every perfect complex; statement and hypotheses unchanged.",
+  "blueprint": "Realizes thm-pod-point-perfectness, Proof Step 2, the hidden retract and finite-filtration argument for the bounded finite-projective dual complex.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-derived-complete-products-triangles",
+    "why": "Generic module-level derived-completeness closure under triangles is needed; this unit has no replacement for the Stacks 091S closure theorem."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "The proof uses shift, cone, and rotation axioms in the ambient derived category; these are generic category foundations outside this unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-localization-tower-vanishing",
+    "why": "Generic module-level orthogonality criterion (Stacks 091P) used only to prove retract closure; it replaces no geometric or coefficient-comparison step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-derived-complete-products-triangles",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-module-localization-tower-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-e48b351ef",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-e48b351ef (reviewer sub-agent of L); spot-checked: Read the item and both new nodes fully; checked Stacks 091S, 091P and 0ATI, dependencies, route, edge cases and archived target scope. Folded elementary retract closure into the proof using the existing vanishing criterion; repaired generator terminology and metadata. Corrected files and review.md written; corrected dependencies are acyclic.; 2 file(s) fixed by the reviewer"
  }
 }

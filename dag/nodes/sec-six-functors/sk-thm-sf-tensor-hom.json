@@ -47,20 +47,13 @@
    }
   },
   {
-   "text": "Check the domain for Yoneda first at $\\Lambda=A_{E,n}$. Write\n$$A_{M,N}=Rf_*H(M,f^!N),\\qquad B_{M,N}=H(Rf_!M,N).$$\nThe unconditional constructible adjunction [lem-sf-constructible-exceptional-adjunction-coefficients] preserves the finite-Tor subcategories, so $f^!N$ and $Rf_!M$ lie there. The dimension-finiteness lemma supplies nonnegative integer bounds $d_X,d_Y$ for $X,Y$ (take zero for an empty scheme). To apply finite constructible internal-Hom preservation without assuming that either scheme is separated over $k$, argue as follows for $W=X,Y$. The finite-type definition gives a finite affine cover $W=\\bigcup_{i=1}^tU_i$ by spectra of finitely generated $k$-algebras; these are Noetherian by the affine Noetherian lemma. Restriction to a slice is exact and the derived tensor-pullback comparison commutes with tensor, so restriction preserves the same Tor intervals directly from their definition: a module sheaf $F$ on $U_i$ in degree zero is the restriction of its extension by zero $j_{i,!}F$, so $(K\\otimes^L j_{i,!}F)|_{U_i}\\cong K|_{U_i}\\otimes^L F$. A finite union of the Noetherian affine opens is Noetherian: a descending chain of closed subsets stabilizes on each chart and hence globally after the maximum of the finitely many stabilization indices. Thus the opens and their finite differences used below are constructible. Each $U_i$ is separated over $k$. Apply the internal-Hom corollary on $U_i$, with the single bound $d_W$ (open-subspace dimension monotonicity gives $\\dim U_i\\le d_W$), and identify its output with the restriction of $H$ by the ringed-site internal-Hom restriction statement. The resulting Tor interval $[c-b-2d_W,e-a+2d_W]$ is independent of $i$. It holds globally: restriction is exact and commutes with tensor, and a cohomology sheaf vanishing on all $U_i$ vanishes. Constructibility also assembles explicitly: intersect each finite local stratification with $U_i\\setminus\\bigcup_{j<i}U_j$. These form a finite disjoint locally closed constructible stratification of $W$, with the same locally constant finite restrictions; the common Tor interval bounds the nonzero cohomology degrees. Thus the definitions give bounded constructible finite-Tor internal Homs globally. Apply this argument to $(M,f^!N)$ on $X$ and $(Rf_!M,N)$ on $Y$, and apply the pro-etale direct-image theorem to the first internal Hom. Both $A_{M,N}$ and $B_{M,N}$ therefore lie in the same full category $D^b_{ctf}(Y,A_{E,n})$. For an empty cover the objects are zero. No properness or site-perfectness hypothesis is used.",
+   "text": "At $\\Lambda=A_{E,n}$ put $A_{M,N}=Rf_*H(M,f^!N)$ and $B_{M,N}=H(Rf_!M,N)$. The unconditional constructible exceptional adjunction puts $f^!N$ and $Rf_!M$ in $D^b_{ctf}$. Choose nonnegative dimension bounds $d_X,d_Y$ using the finite-type dimension lemma (zero for an empty scheme). For $W=X,Y$, finite type gives a finite affine cover $W=\\bigcup_iU_i$ with $U_i=\\operatorname{Spec}C_i$ for finitely generated $k$-algebras $C_i$. Each chart is Noetherian by the affine Noetherian lemma. A descending chain of closed subsets of $W$ stabilizes on each chart, hence globally after the maximum of the finitely many stabilization indices. Thus $W$ meets the Noetherian hypothesis of the finite-cover locality lemma. An affine chart is separated over $k$, since its diagonal is defined by the surjection $C_i\\otimes_kC_i\\to C_i$, and its dimension is at most $d_W$ by open-subspace monotonicity.",
    "uses": [
     "lem-sf-constructible-exceptional-adjunction-coefficients",
-    "cor-weil-finite-constructible-hom",
-    "cor-sf-direct-image-ctf-proetale",
     "lem-kun-dimension-finite-type",
     "def-weil-finite-type-morphism",
     "lem-wf-affine-noetherian-components",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-open-subspace-dimension-monotone",
-    "def-weil-extension-by-zero"
+    "lem-weil-pbc-open-subspace-dimension-monotone"
    ],
    "elementary": false,
    "source": {
@@ -69,7 +62,38 @@
    }
   },
   {
-   "text": "For $\\Lambda=R=\\mathcal O_E$, the unconditional constructible adjunction puts $f^!N$ and $Rf_!M$ in $D^b_{ctf}$. For each of the two pairs $(M,f^!N)$ on $X$ and $(Rf_!M,N)$ on $Y$, restrict to a finite affine cover of the relevant scheme $W$. On an affine chart use the integral internal-Hom corollary and the finite-level uniform bounds of step 3; restriction of internal Hom is its ringed-site restriction comparison. Choose one dimension bound $d_W$ for all charts. The common finite-reduction Tor interval from that corollary bounds the nonzero cohomology on every chart. Global constructibility is obtained by the finite disjoint refinement $U_i\\setminus\\bigcup_{j<i}U_j$ as in step 3. Internal Hom into a derived-complete object is derived complete, and its integral reduction is the evaluation-defined comparison of the integral Hom-reduction lemma. Thus both internal Homs meet the integral definition globally, also when $W$ is not separated. Apply integral direct-image constructibility to $H=H(M,f^!N)$; its statement gives completeness, finite-reduction comparisons and a bound independent of $n$. Finally the residue-Tor theorem identifies $D^b_c(Y,R)$ with $D^b_{ctf}(Y,R)$. Consequently both $A_{M,N}$ and $B_{M,N}$ belong to the same full category used for Yoneda. This argument keeps completed coefficient sheaves distinct from constant integral or condensed coefficients.",
+   "text": "Apply the finite internal-Hom corollary on each separated affine chart to the pairs $(M,f^!N)$ and $(Rf_!M,N)$ on their respective schemes. Their input Tor intervals restrict unchanged: for a degree-zero module sheaf $F$ on $U_i$, extension by zero is degree zero and restricts back to $F$; exact restriction and the derived tensor-pullback comparison give $(K\\otimes^Lj_{i,!}F)|_{U_i}\\cong K|_{U_i}\\otimes^LF$. The same exact restriction preserves cohomology, and each finite constructible stratification restricts to its intersections with $U_i$. Thus the local inputs satisfy all hypotheses of the corollary. For input intervals $[a,b]$ and $[c,e]$ it gives bounded constructible internal Homs with the common interval $[c-b-2d_W,e-a+2d_W]$. The ringed-site internal-Hom restriction isomorphism identifies these outputs with the restrictions of the actual global internal Homs.",
+   "uses": [
+    "cor-weil-finite-constructible-hom",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "The displayed chain and Yoneda conclusion, refined using the named ringed-site, constructible-preservation and coefficient statements."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-finite-cover-ctf-locality] to each global internal Hom, with the Noetherian cover from step 3 and the common interval from step 4. Its statement gives bounded constructibility and that Tor interval globally, exactly the conditions of the finite constructibility and finite-Tor definitions. Apply [cor-sf-direct-image-ctf-proetale] to $H(M,f^!N)$, using the given separated finite-type $f$ and dimension bound $d_X$. Consequently both $A_{M,N}$ and $B_{M,N}$ lie in the full category $D^b_{ctf}(Y,A_{E,n})$. For an empty cover the locality lemma gives the zero object. No separatedness of $X$ or $Y$ over $k$, properness of $f$, or site-perfectness of the inputs is used.",
+   "uses": [
+    "lem-sf-finite-cover-ctf-locality",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "cor-sf-direct-image-ctf-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "The displayed chain and Yoneda conclusion, refined using the named ringed-site, constructible-preservation and coefficient statements."
+   }
+  },
+  {
+   "text": "For $\\Lambda=R=\\mathcal O_E$, the unconditional constructible adjunction puts $f^!N$ and $Rf_!M$ in $D^b_{ctf}$. For each of the two pairs $(M,f^!N)$ on $X$ and $(Rf_!M,N)$ on $Y$, restrict to a finite affine cover of the relevant scheme $W$. On an affine chart use the integral internal-Hom corollary and the finite-level uniform bounds of steps 3–5; restriction of internal Hom is its ringed-site restriction comparison. Choose one dimension bound $d_W$ for all charts. The common finite-reduction Tor interval from that corollary bounds the nonzero cohomology on every chart. Global constructibility is obtained by the finite disjoint refinement $U_i\\setminus\\bigcup_{j<i}U_j$ as in steps 3–5. Internal Hom into a derived-complete object is derived complete, and its integral reduction is the evaluation-defined comparison of the integral Hom-reduction lemma. Thus both internal Homs meet the integral definition globally, also when $W$ is not separated. Apply integral direct-image constructibility to $H=H(M,f^!N)$; its statement gives completeness, finite-reduction comparisons and a bound independent of $n$. Finally the residue-Tor theorem identifies $D^b_c(Y,R)$ with $D^b_{ctf}(Y,R)$. Consequently both $A_{M,N}$ and $B_{M,N}$ belong to the same full category used for Yoneda. This argument keeps completed coefficient sheaves distinct from constant integral or condensed coefficients.",
    "uses": [
     "lem-sf-constructible-exceptional-adjunction-coefficients",
     "cor-coef-integral-internal-hom",
@@ -77,7 +101,8 @@
     "lem-coef-integral-hom-reduction",
     "lem-sf-integral-direct-image-constructible",
     "def-weil-derived-complete-integral-detailed",
-    "lem-coef-integral-residue-tor"
+    "lem-coef-integral-residue-tor",
+    "lem-sf-finite-cover-ctf-locality"
    ],
    "elementary": false,
    "source": {
@@ -118,7 +143,7 @@
    }
   },
   {
-   "text": "Apply the fully faithful Yoneda embedding to the full category $\\mathcal C=D^b_{ctf}(Y,\\Lambda)$, which contains both objects by steps 3–4. The natural bijections $h_L$ identify $\\operatorname{Hom}_{\\mathcal C}(-,B_{M,N})$ with $\\operatorname{Hom}_{\\mathcal C}(-,A_{M,N})$. Explicitly set\n$$a=h_{B_{M,N}}(1_{B_{M,N}}):B_{M,N}\\to A_{M,N},\\qquad\nb=h_{A_{M,N}}^{-1}(1_{A_{M,N}}):A_{M,N}\\to B_{M,N}.$$\nNaturality in $L$ says $h_L(u)=a\\circ u$ and $h_L^{-1}(v)=b\\circ v$. Thus $ab=1_A$ and $ba=1_B$. The required canonical isomorphism has forward map $b$. Naturality of the five bijections in $M$ (contravariantly) and $N$ (covariantly) implies naturality of this isomorphism by the uniqueness part of Yoneda. In particular no extension-by-zero generator theorem, geometric-stalk detection, or unproved equivalence of whole sites is needed.",
+   "text": "Apply the fully faithful Yoneda embedding to the full category $\\mathcal C=D^b_{ctf}(Y,\\Lambda)$, which contains both objects by steps 3–6. The natural bijections $h_L$ identify $\\operatorname{Hom}_{\\mathcal C}(-,B_{M,N})$ with $\\operatorname{Hom}_{\\mathcal C}(-,A_{M,N})$. Explicitly set\n$$a=h_{B_{M,N}}(1_{B_{M,N}}):B_{M,N}\\to A_{M,N},\\qquad\nb=h_{A_{M,N}}^{-1}(1_{A_{M,N}}):A_{M,N}\\to B_{M,N}.$$\nNaturality in $L$ says $h_L(u)=a\\circ u$ and $h_L^{-1}(v)=b\\circ v$. Thus $ab=1_A$ and $ba=1_B$. The required canonical isomorphism has forward map $b$. Naturality of the five bijections in $M$ (contravariantly) and $N$ (covariantly) implies naturality of this isomorphism by the uniqueness part of Yoneda. In particular no extension-by-zero generator theorem, geometric-stalk detection, or unproved equivalence of whole sites is needed.",
    "uses": [
     "lem-galois-yoneda-fully-faithful"
    ],
@@ -129,28 +154,16 @@
    }
   },
   {
-   "text": "Check coefficient compatibility for the specified forward map $b:A\\to B$ by transposition. Its action on a test map $u:L\\to A$ is: transpose by $Lf^*\\dashv Rf_*$; transpose tensor--Hom to a map $M\\otimes^LLf^*L\\to f^!N$; transpose by the constructible exceptional adjunction; precompose with $\\operatorname{PF}_{f,M,L}$; transpose tensor--Hom again. For a coefficient functor $T$, insert the canonical comparisons at these five places. The operation-reduction statement identifies tensor, ordinary unit/counit and compact-support comparisons. The unconditional constructible-adjunction lemma gives the explicit unit/counit equations for the exceptional comparison. The projection-formula theorem gives its coefficient square. Internal-Hom comparisons are the transposes of coefficient change of evaluation; they therefore identify the two tensor--Hom transpositions, by their defining universal property. Thus the two composites from $T(A)$ to the new $B$ have the same tensor/evaluation/counit transpose and are equal. This is a global transposition calculation, not an inference that equality of derived maps can be checked on an open cover.\n\nFor finite quotients, invertibility of the internal-Hom comparison on an arbitrary finite-type scheme follows by restricting its evaluation-defined map to a finite affine cover and applying the finite-Tor Hom coefficient theorem there; restriction of internal Hom commutes with this construction. A cone is zero if its cohomology sheaves vanish on the cover. This use of locality proves invertibility only. Use the finite direct-image coefficient comparison for $Rf_*$; its pro-etale clause applies because the input has etale origin by the constructible-origin theorem, and the etale witness has the same finite Tor interval by the converse clause (ii) of the comparison Tor-amplitude lemma, as the etale hypothesis of that theorem requires. Integral reduction uses the arbitrary-first-variable integral Hom-reduction comparison, and integral direct image uses its finite-reduction theorem. Finite scalar extension of integral Hom uses its scalar-extension theorem. Hence every comparison invoked is invertible on the stated domains, and the calculation above proves the actual finite-reduction and scalar-extension squares. For field coefficients reduction is always understood on an integral representative before localization. For the ordinary direct-image scalar comparison at a finite extension $E\\subset L$, the completed coefficient comparison makes the extended coefficient sheaf finite free of rank $[L:E]$ and identifies integral scalar extension with ordinary tensor by that sheaf. Choose a basis. Tensor then becomes a finite direct sum; additive direct image, its derived functor and the strict-tower limit commute with this finite direct sum. Thus the canonical scalar map is an isomorphism. Its transpose is extension of the old counit, so the same five-arrow transposition calculation applies, independently of the chosen basis.\n\nAt a finite coefficient stage scalar extension is also explicit. For a finite extension $E\\subset E'$ put $A=A_n$ and $B=\\mathcal O_{E'}/\\varpi^n\\mathcal O_{E'}$; the coefficient-system adjoint statement records that $B$ is finite free over $A$. On each small ringed site choose a K-flat $P$ with flat terms representing $K$, a K-injective $I$ representing $L$, and a B-K-injective resolution $I\\otimes_A B\\to J$ of $L\\otimes_A^L B$. Extension by B is exact, since a choice of A-basis makes its underlying A-module functor a finite direct sum. On sheaves it is left adjoint to restriction: a B-linear map $B\\otimes_A F\\to G$ is sent to $x\\mapsto u(1\\otimes x)$, with inverse $b\\otimes x\\mapsto b v(x)$; the balancing relations and restriction maps give the adjunction directly. The right-adjoint K-injective lemma therefore makes $\\operatorname{Res}J$ A-K-injective. The underlying A-complex $I\\otimes_A B$ is a finite sum of I and hence A-K-injective, because its Hom complex from an acyclic complex is a finite sum of acyclic Hom complexes. Both represent $L\\otimes_A B$; the K-injective derived-Hom identification compares them by a homotopy equivalence. The derived tensor-pullback theorem makes $P\\otimes_A B$ K-flat. Consequently the representing internal-Hom complexes give, after restriction to A,\n$$\\mathcal Hom_B^\\bullet(P\\otimes_A B,J)=\\mathcal Hom_A^\\bullet(P,\\operatorname{Res}J)\\simeq\\mathcal Hom_A^\\bullet(P,I\\otimes_A B)\\cong\\mathcal Hom_A^\\bullet(P,I)\\otimes_A B.$$\nThe first equality is again evaluation on $1\\otimes p$ and its inverse $b\\otimes p\\mapsto b h(p)$. The last isomorphism uses a finite A-basis of B; finite sums commute with every product in the Hom complex, even for unbounded P. The K-flat/K-injective Hom theorem and the internal-Hom construction justify these representatives. The resulting map is the evaluation-defined scalar comparison, so is canonical and intertwines the transpositions above. Restriction of scalars reflects acyclicity, since it leaves the underlying sheaf complex unchanged, giving the required B-linear isomorphism. The finite direct-image coefficient theorem applies to this finite A-algebra B as written. A further quotient reduces to the finite-quotient case already checked, over $E'$, and the coefficient cocycles of the new exceptional-adjunction prerequisite identify the composite comparisons.",
+   "text": "For finite quotients, the internal-Hom comparison is evaluation-defined. Restrict it to the finite affine covers of step 3 and apply [thm-coef-finite-hom] to the restricted finite-Tor inputs. Internal-Hom restriction commutes with this construction. Exact restriction commutes with cohomology; if the cone restricts to zero on every member of the cover, each of its cohomology sheaves is zero by the sheaf axiom. This proves invertibility of the global comparison. For the ordinary direct-image comparison use [lem-coef-finite-direct-image]. Its pro-etale clause applies: [lem-sf-proetale-constructible-origin] gives an etale bounded constructible witness for $H(M,f^!N)$, and [lem-sf-comparison-tor-amplitude](ii) gives that witness the same finite Tor interval. Integral reduction of internal Hom is the evaluation-defined comparison of [lem-coef-integral-hom-reduction]; integral direct-image reduction is [lem-sf-integral-direct-image-constructible]. These are actual invertible comparisons on our domains. This locality argument checks invertibility, not equality of derived morphisms.",
    "uses": [
-    "lem-fix-operation-reduction",
-    "fix-prop-projection-formula",
-    "lem-sf-constructible-exceptional-adjunction-coefficients",
     "thm-coef-finite-hom",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
     "lem-coef-finite-direct-image",
     "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
     "lem-coef-integral-hom-reduction",
-    "lem-sf-integral-direct-image-constructible",
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-hom-kflat-into-kinjective",
-    "def-pur-derived-internal-hom",
-    "lem-sf-comparison-tor-amplitude"
+    "lem-sf-integral-direct-image-constructible"
    ],
    "elementary": false,
    "source": {
@@ -159,7 +172,49 @@
    }
   },
   {
-   "text": "The shift compatibility is checked on the same Hom bijection. Under the canonical shift identifications, for any integer $r$,\n$$\\operatorname{Hom}(L,A_{M,N[r]})\\cong\\operatorname{Hom}(L[-r],A_{M,N}),\\qquad\n\\operatorname{Hom}(L,B_{M,N[r]})\\cong\\operatorname{Hom}(L[-r],B_{M,N}).$$\nThe five arrows for $(L,N[r])$ identify with those for $(L[-r],N)$: a tensor factor shifted by $r$ shifts the tensor by $r$, and each exact right adjoint's shift comparison is the transpose of the corresponding comparison for its left adjoint. The tensor–Hom comparisons have the signs of the shifted Hom complex; shifting its first variable gives $H(M[r],Q)=H(M,Q)[-r]$, while shifting its second gives $H(M,Q[r])=H(M,Q)[r]$. Both transposition routes therefore use the same signed evaluation map. In the projection definition, the proper projection map is the transpose of $(\\varepsilon_p\\otimes1)\\circ\\mu_p$, and the compact-support map is its composite with $Rp_*(\\gamma)$, where $\\gamma$ is the extension-by-zero tensor comparison followed by pullback composition. Shifting either tensor factor shifts each of these composites by the total-tensor convention, using $d_{C[r]}=(-1)^rd_C$; the evaluation comparison uses that same convention. The shifted composite is therefore the specified shifted projection transformation. Thus $h$ for the shifted arguments is the shifted $h$. By uniqueness in step 7 this proves the shift square for the exchange, in the second variable and, with the negative shift, in the first. Completion commutes with these identifications since its Koszul-limit construction is exact and the completion unit is natural.",
+   "text": "For finite scalar extension $E\\subset E'$, put $A=A_n$ and $B=\\mathcal O_{E'}/\\varpi^n\\mathcal O_{E'}$. The coefficient-system adjoint lemma says $B$ is finite free over $A$. Apply [lem-sf-ringed-finite-free-hom-base-change] on each small ringed site to the constant ring sheaves $A\\to B$: its hypotheses require only finite freeness and its conclusion is precisely the evaluation-defined internal-Hom comparison, natural in both variables. Thus it intertwines tensor-Hom transposes, with no site-perfectness hypothesis. The finite direct-image coefficient lemma applies to this finite $A$-algebra $B$ and gives the counit-defined comparison. If $e=e(E'/E)$, then $B=A_{E',en}$ by the exceptional-adjunction coefficient statement. A further quotient is therefore the finite-quotient case of step 10 over $E'$. The coefficient cocycles in that statement identify the composite exceptional comparisons.",
+   "uses": [
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-coef-finite-direct-image",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "The displayed chain and Yoneda conclusion, refined using the named ringed-site, constructible-preservation and coefficient statements."
+   }
+  },
+  {
+   "text": "For integral scalar extension $E\\subset E'$, [lem-pur-integral-operations-scalar-extension] supplies the internal-Hom and tensor comparisons on the bounded constructible integral inputs. For ordinary direct image, [lem-weil-finite-free-completed-scalar-comparison] identifies scalar extension with ordinary tensor by the completed coefficient sheaf, finite free of rank $[E':E]$. Choose a basis. Under restriction of scalars this tensor is a finite direct sum. The ordinary direct-image functor is additive, hence carries a finite biproduct to the corresponding biproduct; the same holds for its derived functor, since a finite sum of K-injective resolutions is K-injective (the Hom complex from an acyclic complex is the finite sum of acyclic Hom complexes). The strict-tower derived limit also preserves finite biproducts, as an exact additive functor. Hence the canonical integral scalar/direct-image map is invertible. The basis tests invertibility only: the specified map is adjoint to extension of the old counit, so its normalization is basis independent. The finite-free internal-Hom lemma applied to the completed ring sheaves identifies the scalar Hom map with the evaluation transpose; the completed-scalar comparison identifies this with integral scalar extension.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "The displayed chain and Yoneda conclusion, refined using the named ringed-site, constructible-preservation and coefficient statements."
+   }
+  },
+  {
+   "text": "Check coefficient compatibility for the specified forward map $b:A\\to B$ by transposition. Its action on a test map $u:L\\to A$ is: transpose by $Lf^*\\dashv Rf_*$; transpose tensor--Hom to a map $M\\otimes^LLf^*L\\to f^!N$; transpose by the constructible exceptional adjunction; precompose with $\\operatorname{PF}_{f,M,L}$; transpose tensor--Hom again. For a coefficient functor $T$, insert the canonical comparisons at these five places. The operation-reduction statement identifies tensor, ordinary unit/counit and compact-support comparisons. The unconditional constructible-adjunction lemma gives the explicit unit/counit equations for the exceptional comparison. The projection-formula theorem gives its coefficient square. Internal-Hom comparisons are the transposes of coefficient change of evaluation; they therefore identify the two tensor--Hom transpositions, by their defining universal property. Thus the two composites from $T(A)$ to the new $B$ have the same tensor/evaluation/counit transpose and are equal. This is a global transposition calculation, not an inference that equality of derived maps can be checked on an open cover. The operation-reduction statement and the exceptional-adjunction statement supply their comparisons on these domains; steps 10–12 established invertibility of the Hom and ordinary direct-image comparisons in question. The two tensor-Hom comparisons are evaluation transposes, so the two coefficient-change paths have identical transposes at each of the five arrows. Injectivity of the adjunction bijections identifies their composite maps. This proves the finite-reduction and scalar-extension squares for $b$. Field reduction always refers to an integral representative before localization.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "fix-prop-projection-formula",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md",
+    "place": "The displayed chain and Yoneda conclusion, refined using the named ringed-site, constructible-preservation and coefficient statements."
+   }
+  },
+  {
+   "text": "The shift compatibility is checked on the same Hom bijection. Under the canonical shift identifications, for any integer $r$,\n$$\\operatorname{Hom}(L,A_{M,N[r]})\\cong\\operatorname{Hom}(L[-r],A_{M,N}),\\qquad\n\\operatorname{Hom}(L,B_{M,N[r]})\\cong\\operatorname{Hom}(L[-r],B_{M,N}).$$\nThe five arrows for $(L,N[r])$ identify with those for $(L[-r],N)$: a tensor factor shifted by $r$ shifts the tensor by $r$, and each exact right adjoint's shift comparison is the transpose of the corresponding comparison for its left adjoint. The tensor–Hom comparisons have the signs of the shifted Hom complex; shifting its first variable gives $H(M[r],Q)=H(M,Q)[-r]$, while shifting its second gives $H(M,Q[r])=H(M,Q)[r]$. Both transposition routes therefore use the same signed evaluation map. In the projection definition, the proper projection map is the transpose of $(\\varepsilon_p\\otimes1)\\circ\\mu_p$, and the compact-support map is its composite with $Rp_*(\\gamma)$, where $\\gamma$ is the extension-by-zero tensor comparison followed by pullback composition. Shifting either tensor factor shifts each of these composites by the total-tensor convention, using $d_{C[r]}=(-1)^rd_C$; the evaluation comparison uses that same convention. The shifted composite is therefore the specified shifted projection transformation. Thus $h$ for the shifted arguments is the shifted $h$. By uniqueness in step 9 this proves the shift square for the exchange, in the second variable and, with the negative shift, in the first. Completion commutes with these identifications since its Koszul-limit construction is exact and the completion unit is natural.",
    "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "lem-weil-pbc-ringed-koszul-completion-reflector",
@@ -176,7 +231,7 @@
    }
   },
   {
-   "text": "Pass to the two field stages using their actual definitions. Rationalization keeps the integral objects and replaces each Hom group by its tensor product with $E$. Send the inverse pair $(a,b)$ of step 7 to its images there; their composites remain identities. The integral tensor–Hom bijection and its naturality localize, and the prescribed operations on objects and morphisms are the ones of the datum, so this gives the displayed exchange over $E$. For $\\overline{\\mathbf Q}_\\ell$, represent the finitely many input objects and maps over a common finite extension $E$. Define the exchange by its $E$-stage map. Step 8 identifies this representative after any larger finite extension, so its class is independent of the representative. The inverse is represented by the inverse at that same stage; naturality and the coefficient and shift equations hold over a common stage and therefore in the directed colimit of Hom groups. This supplies every coefficient stage in the statement without using a theorem on integral or field exceptional adjoints that depends back on this item.",
+   "text": "Pass to the two field stages using their actual definitions. Rationalization keeps the integral objects and replaces each Hom group by its tensor product with $E$. Send the inverse pair $(a,b)$ of step 9 to its images there; their composites remain identities. The integral tensor–Hom bijection and its naturality localize, and the prescribed operations on objects and morphisms are the ones of the datum, so this gives the displayed exchange over $E$. For $\\overline{\\mathbf Q}_\\ell$, represent the finitely many input objects and maps over a common finite extension $E$. Define the exchange by its $E$-stage map. Steps 10–13 identifies this representative after any larger finite extension, so its class is independent of the representative. The inverse is represented by the inverse at that same stage; naturality and the coefficient and shift equations hold over a common stage and therefore in the directed colimit of Hom groups. This supplies every coefficient stage in the statement without using a theorem on integral or field exceptional adjoints that depends back on this item.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "def-weil-algebraically-closed-coefficients",
@@ -191,58 +246,56 @@
   }
  ],
  "proof_deps": [
-  "cor-coef-integral-internal-hom",
-  "cor-sf-direct-image-ctf-proetale",
-  "cor-weil-finite-constructible-hom",
-  "def-exchange-projection",
-  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "def-pur-integral-derived-operations",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-complete",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-kun-dimension-finite-type",
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "cor-weil-finite-constructible-hom",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "def-weil-extension-by-zero",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-finite-tor-amplitude",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-finite-type-morphism",
-  "def-weil-rationalization-karoubi",
+  "lem-sf-finite-cover-ctf-locality",
+  "cor-sf-direct-image-ctf-proetale",
+  "cor-coef-integral-internal-hom",
+  "lem-coef-integral-hom-reduction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-coef-integral-residue-tor",
   "fix-prop-adjunctions",
   "fix-prop-projection-formula",
-  "lem-coef-finite-direct-image",
-  "lem-coef-integral-hom-reduction",
-  "lem-coef-integral-residue-tor",
-  "lem-fix-operation-reduction",
-  "lem-galois-yoneda-fully-faithful",
-  "lem-kun-dimension-finite-type",
-  "lem-pc-kflat-resolution",
-  "lem-pur-etale-coefficient-system-adjoint",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pur-rhom-global-sections",
-  "lem-sf-comparison-tor-amplitude",
-  "lem-sf-constructible-exceptional-adjunction-coefficients",
-  "lem-sf-integral-direct-image-constructible",
-  "lem-sf-proetale-constructible-origin",
   "lem-sf-pullback-tor-amplitude",
   "lem-sf-tensor-ctf",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-open-subspace-dimension-monotone",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-wf-affine-noetherian-components",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-integral-operations-preserve-constructible",
   "sk-thm-sf-pf-finite",
   "sk-thm-sf-pf-proetale",
-  "thm-coef-finite-hom",
   "thm-sf-pf-adic",
-  "thm-sf-pf-field"
+  "thm-sf-pf-field",
+  "lem-galois-yoneda-fully-faithful",
+  "thm-coef-finite-hom",
+  "lem-coef-finite-direct-image",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-fix-operation-reduction",
+  "def-exchange-projection",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
@@ -291,10 +344,81 @@
    "results": "25 hits in CategoryTheory, including Adjunction.Unique, Adjunction.CompositionIso and Bicategory.Adjunction.Mate; these are formal mate tools, not the geometric coefficient-stage theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type scheme morphism compact support projection formula gives direct image of derived internal Hom into exceptional pullback isomorphic to derived internal Hom from compact support direct image",
+   "results": {
+    "top": [
+     "LightCondensed.ihomPoints_symm_comp",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "CategoryTheory.ExponentiableMorphism.coev_ev",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHomRightDerivedLowerShriek|lowerShriek.*[Hh]om|[Hh]om.*lowerShriek",
+   "results": {
+    "top": [],
+    "note": "",
+    "n_hits": 0
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck duality internal Hom exchange for exceptional inverse image and compact support direct image",
+   "results": {
+    "top": [
+     "LightCondensed.ihomPoints_symm_apply",
+     "BotHom.dual_symm_apply_apply",
+     "BotHom.symm_dual_comp",
+     "InfHom.dual_symm_apply_toFun",
+     "sInfHom.symm_dual_id",
+     "sInfHom.dual_symm_apply_toFun",
+     "CategoryTheory.Grothendieck.Hom",
+     "CategoryTheory.CostructuredArrow.ιCompGrothendieckProj_inv_app"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In closed monoidal derived categories projection formula together with pullback direct image and compact support exceptional adjunction yields tensor Hom exchange naturally and compatibly with coefficient change",
+   "results": {
+    "top": [
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "CategoryTheory.ExponentiableMorphism.coev_ev",
+     "CategoryTheory.ExponentiableMorphism.coev_naturality",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "CategoryTheory.ExponentiableMorphism.coev_ev_assoc"
+    ],
+    "note": "",
+    "n_hits": 8
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -426,8 +550,8 @@
   "date": "2026-10-17",
   "item": "sk-thm-sf-tensor-hom",
   "worker": "stage1",
-  "summary": "Expanded the adjunction chain into ten steps, proved the tensor-Hom bijections from ringed-site results, restricted Yoneda tests to the full finite-Tor category containing both outputs, and verified coefficients and shifts by transposition. Added one statement-only prerequisite for the unconditional constructible exceptional adjunction and its coefficient comparisons on general finite-type schemes; the conditional ambient adjunction and the condensed-module variant are not substituted. Statement unchanged.",
-  "blueprint": "The unit has one proof paragraph. Steps 1-6 justify and type all five Hom bijections; step 7 gives the inverse Yoneda maps; steps 8-10 verify coefficients, shifts and field/common-stage passage. The source error is the use of all bounded-below etale-origin tests despite the finite-Tor projection hypothesis, repaired by restricting tests after establishing closure.",
+  "summary": "Repair of the dedicated N1 handoff for long steps 3 and 8. Retained the statement, Lean record, proof route and all other arguments, updating numerical references. Replaced finite-cover gluing by the existing lem-sf-finite-cover-ctf-locality and finite-free derived Hom scalar change by the existing lem-sf-ringed-finite-free-hom-base-change. Expanded the two old steps into short applications and coefficient checks; no new nodes. Exact restriction is now cited explicitly. Every non-elementary step is at most 2000 characters.",
+  "blueprint": "The main-20261015 displayed adjunction/projection chain and Yoneda conclusion remain the route: steps 1–2 give tensor-Hom, 3–6 the finite-Tor test category, 7–9 the Hom chain and inverse Yoneda maps, 10–13 coefficient comparisons, 14 shifts, 15 field/common-stage passage. Repairs isolate the hidden arguments of former steps 3 and 8 by citing their now-existing supporting nodes.",
   "tool_uses": [
    {
     "node": "cor-coef-integral-internal-hom",
@@ -587,43 +711,35 @@
    },
    {
     "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "The ordinary direct-image coefficient square uses the finite-free completed coefficient sheaf; its additive finite-sum proof is written in step 8."
+    "why": "Step 12 identifies completed integral scalar extension with ordinary tensor by a finite free completed coefficient sheaf, then checks direct image by finite biproducts."
    },
    {
     "node": "lem-pur-etale-coefficient-system-adjoint",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
+    "why": "Step 11 uses finite freeness of B_n over A_n and the ramified cofinal levels for scalar change; no exceptional exchange conclusion is assumed."
    },
    {
     "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
-   },
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-hom-derived",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
-   },
-   {
-    "node": "lem-pur-hom-kflat-into-kinjective",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
-   },
-   {
-    "node": "def-pur-derived-internal-hom",
-    "why": "Finite-level scalar compatibility in step 8 is proved from finite freeness and explicit K-flat/K-injective Hom representatives; this node supplies the indicated general coefficient or resolution fact."
+    "why": "Step 12 uses K-injective representatives to check that derived ordinary direct image preserves finite biproducts."
    },
    {
     "node": "lem-sf-comparison-tor-amplitude",
-    "why": "Step 8 applies the etale finite-Tor direct-image coefficient theorem to the etale-origin witness of a pro-etale finite-Tor object; clause (ii) transfers the Tor interval to that witness, and no node of the unit states this comparison."
+    "why": "Step 10 uses clause (ii) to put the etale-origin witness in the Tor interval required by the direct-image coefficient theorem."
+   },
+   {
+    "node": "lem-sf-finite-cover-ctf-locality",
+    "why": "Steps 5–6 use the finite-open-cover bounded-constructibility and common-Tor-interval conclusion, isolating the returned inline locality argument."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Steps 11–12 use the evaluation-normalized derived Hom comparison for finite free ring sheaves, isolating the returned inline scalar-Hom argument."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Steps 4 and 10 need exact slice restriction and degree-zero extension by zero; this is a generic ringed-site tool, not a replacement route."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "Steps 3, 6, 7, 11, 13 and 14 use the unconditional constructible exceptional adjunction, preservation and normalized coefficient unit/counit identities. This is an adjunction prerequisite, not the tensor-Hom exchange being proved; the conditional datum adjunction is insufficient."
    }
   ]
  },
@@ -677,14 +793,17 @@
   "lem-pur-hom-kflat-into-kinjective",
   "def-pur-derived-internal-hom",
   "lem-sf-comparison-tor-amplitude",
-  "lem-sf-constructible-exceptional-adjunction-coefficients"
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-finite-cover-ctf-locality",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-pur-site-restriction-module-adjunction-exact"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q39-2993e86f1",
-  "group": "Q39",
+  "reviewer": "NT-Codex-N1-4683ac477",
+  "group": "N1",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-2993e86f1 (reviewer sub-agent of L); spot-checked: I read the full delivery and every source, and found two missing citations, both now repaired in fixes/dag/nodes/sec-six-functors/sk-thm-sf-tensor-hom.json. (1) Step 8 applies lem-coef-finite-direct-image, which needs the étale witness to have finite Tor amplitude, but the step only had the pro-étale bound; I added lem-sf-comparison-tor-amplitude (ii) to the step and declared it as a tool use. (2) In step 3, restricting Tor amplitude to the charts needs extension by zero; I added that sentence and a citation of def-weil-extension-by-zero. proof_deps was recomputed as the union of the step uses. The item statement is unchanged and matches main-20261015 _section.md. The reported source error is real: the blueprint tests over all bounded-below étale-origin L, but sk-thm-sf-pf-finite needs L finite-Tor. The repair tests only on Dctf(Y,Λ), as the newer lem-sf-tensor-hom proof also does. Steps 3–4 put both objects in Dctf: cor-weil-finite-constructible-hom and cor-coef-integral-internal-hom are applied on separated affine charts and glued; cor-sf-direct-image-ctf-proetale and lem-sf-integral-direct-image-constructible need no separatedness; lem-coef-integral-residue-tor gives D^b_c = D^b_ctf at R. Every arrow of the step 5 chain meets its hypotheses; only the unconditional clause (1) of fix-prop-adjunctions is used. Step 7 (Yoneda) is correct and the forward map has the right direction. Step 10 uses the raw localization and common-stage definitions. No cycle: no cited node reaches the item, fix-lem-tensor-adjunction or lem-sf-tensor-hom. Replacing sk-prop-sf-existence(c) is justified because it is the condensed adjoint for separated schemes only. New node lem-sf-constructible-exceptional-adjunction-coefficients: statement-only, self-contained, true on f=id, empty X, m=n and E'=E, and its unit/counit equations type-check against lem-coef-finite-exceptional. It is not a duplicate: existing nodes give only the finite stage (thm-sf-ambient-adjoint-class with cor-pur-general-admissibility-datum), only separated schemes (lem-coef-finite-exceptional, prop-coef-integral-exceptional-adjoint), or a conditional ambient datum (fix-prop-adjunctions (2)); fix-lem-tensor-adjunction is only the conditional form of the item. It has no internal Hom or exchange, so it does not restate the item. All declared tool uses are accepted: they are typing and coefficient tools that the unit's one paragraph does not supply, and the route (adjunction chain, inverse projection formula, Yoneda) is kept. No node is dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-4683ac477 (reviewer sub-agent of L); spot-checked: Read all fifteen steps, cited statements, source locations and unit/chapter route. Mathematics passes, including completed coefficients, finite-Tor Yoneda, evaluation-normalized comparisons and ramified levels. Corrected the missing unconditional-adjunction tool declaration and stale/duplicate tool entries; statement and proof unchanged. Full findings in review.md; corrected JSON under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

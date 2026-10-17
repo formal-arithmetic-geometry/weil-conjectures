@@ -17,9 +17,56 @@
   "thm-sf-comp-composition",
   "def-trf-coefficient-pushforward"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Specialize the exceptional-leg construction of [def-trf-coefficient-pushforward] to $f=a$, $g=q$, $b_1=\\operatorname{id}_Y$, $c_1=d$, so $b_1g=q=ad$. Put $M=Rd^!K$, $L=R(\\operatorname{id}_Y)_!$ and let $t:L\\xrightarrow{\\sim}\\operatorname{id}$ be the canonical identity comparison. The map whose transpose defines $\\delta$ is $\\beta:LRq_*M\\to K'=Ra_*K$. Proper coincidence in clause (3) of [prop-functor-package] and composition in [thm-sf-comp-composition] give it explicitly as\n$$\\beta=j_{a,K}^{-1}\\circ Ra_!(\\varepsilon_d)\\circ\\alpha_{a,d,M}^{-1}\\circ\\alpha_{\\operatorname{id}_Y,q,M}\\circ L(j_{q,M}).$$\nThe finite coefficient ring has $\\ell$ invertible in $k$; all maps are separated finite type. The retained bounded-below etale-origin witnesses [def-sf-etale-origin-subcategory] put $M$ in the domain of composition, and that theorem preserves this class. Identity normalization says $\\alpha_{\\operatorname{id}_Y,q,M}=t_{Rq_!M}$. Naturality of $t$ gives $t_{Rq_!M}\\circ L(j_{q,M})=j_{q,M}\\circ t_{Rq_*M}$. Consequently $\\beta\\circ t_{Rq_*M}^{-1}=j_{a,K}^{-1}\\circ Ra_!(\\varepsilon_d)\\circ\\alpha_{a,d,M}^{-1}\\circ j_{q,M}$.",
+   "uses": [
+    "def-trf-coefficient-pushforward",
+    "prop-functor-package",
+    "thm-sf-comp-composition",
+    "def-sf-etale-origin-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, The pushed coefficient map is the global operator: exceptional half for b_1 = identity, inverse composition followed by counit"
+   }
+  },
+  {
+   "text": "Use $L\\dashv R=R(\\operatorname{id}_Y)^!$ from [def-trf-admissibility], with unit $\\eta$ and counit $e$. Set $N=Rq_*Rd^!K$. The transpose definition in [def-trf-coefficient-pushforward] is $\\delta=R(\\beta)\\circ\\eta_N$. Counit naturality and the triangle identity give\n$$e_{K'}\\circ L(\\delta)=\\beta\\circ e_{LN}\\circ L(\\eta_N)=\\beta.$$\nAfter the canonical identity comparison $t:L\\xrightarrow{\\sim}\\operatorname{id}$ of [thm-sf-comp-composition], the counit in the statement is $\\epsilon_{\\mathrm{id},K'}=e_{K'}\\circ t_{RK'}^{-1}$. Naturality of $t$ at $\\delta:N\\to RK'$ therefore gives\n$$\\epsilon_{\\mathrm{id},K'}\\circ\\delta=e_{K'}\\circ L(\\delta)\\circ t_N^{-1}=\\beta\\circ t_N^{-1}.$$\nThus inverse transpose is counit followed by the displayed identity identification; all these maps have target $K'=Ra_*K$.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-trf-coefficient-pushforward",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, the pushed coefficient map is the global operator: exceptional half for b_1 = identity and the adjunction counit"
+   }
+  },
+  {
+   "text": "Substitute the expression for $\\beta\\circ t_N^{-1}$ from Step 1 into the equality in Step 2. This gives\n$$\\epsilon_{\\mathrm{id},K'}\\circ\\delta=j_{a,K}^{-1}\\circ Ra_!(\\varepsilon_d)\\circ\\alpha_{a,d,Rd^!K}^{-1}\\circ j_{q,Rd^!K}:Rq_*Rd^!K\\longrightarrow Ra_*K,$$\nwhich is the asserted equality. This step is only substitution and reassociation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+    "place": "Proof, the pushed coefficient map is the global operator: exceptional half for b_1 = identity, inverse composition followed by counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coefficient-pushforward",
+  "prop-functor-package",
+  "thm-sf-comp-composition",
+  "def-sf-etale-origin-subcategory",
+  "def-trf-admissibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-c-proper-global/thm-trf-fixed-point-localization.md",
+  "place": "Proof, the pushed coefficient map is the global operator: exceptional half for b_1 = identity, inverse composition followed by counit; the transpose/counit calculation is written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-fixed-point-localization",
@@ -82,5 +129,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proper-exceptional-half-normalization",
+  "worker": "stage1",
+  "summary": "Split the exceptional-half normalization into the specialization of coefficient pushforward, the adjunction transpose/counit triangle identity, and the final substitution. No auxiliary node is needed: proper coincidence and compact-support composition are supplied by the existing functor package and composition theorem, and the identity normalization is part of the latter. The statement and hypotheses are unchanged.",
+  "blueprint": "Realizes the parent blueprint proof sentence “For b_1 = identity the exceptional adjoint in the exceptional half is the identity, so delta is the composition isomorphism Xi_1 followed by Ra_{X!} epsilon_{c_1}.”",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-e22e84f7f",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-e22e84f7f (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route. Corrected Step 1’s β target from Ra_!K to K'=Ra_*K and made identity comparison and transpose/counit calculations explicit. Statement and hypotheses unchanged; small cases pass, no new nodes or circular dependencies. Corrected JSON is under fixes/dag/nodes/sec-trace-formula/; full findings are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

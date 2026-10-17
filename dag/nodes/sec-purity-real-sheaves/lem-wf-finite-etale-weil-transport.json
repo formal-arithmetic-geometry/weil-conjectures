@@ -1,0 +1,87 @@
+{
+ "id": "lem-wf-finite-etale-weil-transport",
+ "kind": "statement",
+ "title": "Weil transport on finite etale fibres before passage to torsors",
+ "statement": "Fix the global finite-field datum $k_0=\\mathbf F_q$ and $k=\\overline{k}_0$ of [def-weil-finite-field-fiber]. Let $U_0$ be a geometrically connected separated finite-type $k_0$-scheme, put $U=U_0\\times_{k_0}k$, and choose a geometric point $\\bar u\\to U$. Write $F=F_{\\bar u}:\\mathrm{F\\acute Et}(U)\\to\\mathbf{FinSets}$ and $\\Pi=\\operatorname{Aut}(F)=\\pi_1(U,\\bar u)$, with the categories and topology of [def-galois-categories] and [def-galois-fibre-functor]. Let $W=W(U_0,\\bar u)$ with its degree map be as in [def-wf-weil-group], and regard $\\Pi$ as its geometric subgroup. Write $\\Phi_U=\\operatorname{id}_{U_0}\\times\\operatorname{Spec}(\\gamma)$, where $\\gamma:z\\mapsto z^{1/q}$ is geometric Frobenius on $k$, with the convention of [def-weil-frobenius-detailed].\n\nFor $s\\in W$ and $n=\\deg(s)\\in\\mathbf Z$, define the covariant transport $T_n$ of finite etale covers by\n$$\nT_n(P\\xrightarrow{p}U)=(P\\xrightarrow{\\Phi_U^n\\circ p}U)\n$$\nand by leaving the underlying maps of covers unchanged. There exists an isomorphism of finite-set-valued functors $\\tau_s:F\\circ T_n\\xrightarrow{\\sim}F$ for which\n$$\n\\tau_{s,P}(g\\cdot x)=(sgs^{-1})\\cdot\\tau_{s,P}(x)\n\\quad(P\\in\\mathrm{F\\acute Et}(U),\\ g\\in\\Pi,\\ x\\in F(T_nP)).\n$$\nEquivalently, using $T_{-n}\\cong(\\Phi_U^n)^*$, there is a natural fibre bijection\n$$\n\\lambda_{s,P}:F((\\Phi_U^n)^*P)\\xrightarrow{\\sim}F(P),\\qquad\n\\lambda_{s,P}(g\\cdot x)=(s^{-1}gs)\\cdot\\lambda_{s,P}(x).\n$$\nNaturality here is with respect to every morphism of finite etale $U$-schemes, not only isomorphisms. No group action on $P$, coefficient group, or cohomology group is assumed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BN5 (pione-lemma-functoriality-galois), 0BND (pione-theorem-fundamental-group), 0BTV (pione-lemma-limit), 0BTX (pione-lemma-ses-field), their fibre-functor constructions; geometric Frobenius and pullback orientation as in the penultimate paragraph of the current blueprint proof of lem-wf-finite-constant-h1-pi1",
+  "note": "The explicit Weil-transport formulation is an agent-written consequence of these constructions, not a verbatim statement of a single Stacks tag."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-scheme-conventions",
+  "def-galois-categories",
+  "def-galois-fibre-functor",
+  "def-wf-weil-group",
+  "def-weil-frobenius-detailed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Galois|Weil|Etale).*(conjug|transport|pullback)|fundamentalGroupMap",
+   "results": "17 hits: Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/Analysis/Normed/Field/Dense.lean, Mathlib/Analysis/Normed/Field/Krasner.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean. The Galois-category hits concern abstract automorphisms and actions, and the grep hits concern ring conjugacy, etale base change or order-theoretic Galois connections; none identifies scheme Galois transport with an arithmetic lift.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric Galois pullback on finite etale covers corresponds to conjugation by an arithmetic fundamental group lift",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.autMap, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.mk, finGaloisGroupFunctor, galRestrict'_galLift, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois. The Galois-category hits concern abstract automorphisms and actions, and the grep hits concern ring conjugacy, etale base change or order-theoretic Galois connections; none identifies scheme Galois transport with an arithmetic lift.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Galois\", \"conjug\"",
+   "results": "0 hits: . The Galois-category hits concern abstract automorphisms and actions, and the grep hits concern ring conjugacy, etale base change or order-theoretic Galois connections; none identifies scheme Galois transport with an arithmetic lift.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometrically connected scheme over a finite field, Weil arithmetic fundamental group lifts induce geometric Galois pullback of finite etale covers with fibre action conjugated by the inverse lift",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.autMap, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.exists_autMap, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber, InfiniteGalois.toAlgEquivAux_eq_liftNormal, CategoryTheory.PreGaloisCategory.autMapHom_apply, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.comp_autMap_apply. The Galois-category hits concern abstract automorphisms and actions, and the grep hits concern ring conjugacy, etale base change or order-theoretic Galois connections; none identifies scheme Galois transport with an arithmetic lift.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The arithmetic fundamental group acts on the geometric finite etale fibre functor by Galois transport and its conjugation action on the geometric fundamental group",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois, CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.autMulFiber. The Galois-category hits concern abstract automorphisms and actions, and the grep hits concern ring conjugacy, etale base change or order-theoretic Galois connections; none identifies scheme Galois transport with an arithmetic lift.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-finite-constant-h1-pi1",
+  "date": "2026-10-17",
+  "group": "NA"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankone",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-finite-constant-h1-pi1",
+   "place": "Proof, penultimate paragraph: \"On the fiber functor it replaces the geometric monodromy element g by s^{-1}gs\"; the finite-cover transport underlying this assertion",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -18,63 +18,126 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a bounded sheaf complex B, the counit j_!j^{-1}B → B is natural in B, so its degreewise images form a subcomplex. Using the given exact localization sequence, define F^0B=B, F^1B=j_!j^{-1}B and F^2B=0 (with F^pB=B for p≤0 and F^pB=0 for p≥2). This is a finite decreasing filtration by subcomplexes, and its graded complexes are the quotient B/(j_!j^{-1}B) and j_!j^{-1}B.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-inverse-image",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3, construction of the section on C^b(Sh(X,Λ))"
+   }
+  },
+  {
+   "text": "A chain map f:B→C preserves the displayed filtration because the counit is natural, and identities and composites are preserved, so this assignment is a functor on filtered complexes. If f is a quasi-isomorphism, exactness of j^{-1} and j_! carries the induced map on F^1 to a quasi-isomorphism. The degreewise short exact localization sequences identify the map on the quotient graded complex with i_*i^{-1}f; exactness of i^{-1} and i_* makes this a quasi-isomorphism as well. Hence the filtered map is a filtered quasi-isomorphism. Indeed, an exact additive functor T preserves kernels, images and cokernels, so H^n(TB)=T(H^nB), naturally in chain maps; this proves both quasi-isomorphism assertions directly.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-abstract-derived-category",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3, exactness of j^* and j_! and descent"
+   }
+  },
+  {
+   "text": "First verify that forgetting filtration inverts every graded quasi-isomorphism w:K→L, not just maps produced by the section. Give M=Cone(w) the componentwise filtration F^pM=F^pL⊕F^pK[1]. Its grade is Cone(gr^p w), hence acyclic by the cone criterion. Choose common finite filtration bounds a,b for K,L. Starting with F^{b+1}M=0, the long exact cohomology sequences of 0→F^{p+1}M→F^pM→gr^pM→0 show by downward induction that each F^pM is acyclic; thus M=F^aM is acyclic and w is an ordinary quasi-isomorphism. The universal property of localization now gives the forgetful functor ω and, using Step 2, the section S. On complexes ωS is the identity, and the same holds on formal inverses of quasi-isomorphisms, so ωS=id in the formal-localization model. For other equivalent localization models this is the canonical natural isomorphism supplied by the universal property.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2(a)–(b) and Example 5.2.3; forgetful descent expanded as in Stacks derived.tex, lemma-filtered-derived-functors, using the finite-filtration cone argument, homology.tex Lemma 0117, and categories.tex Lemma 04VG"
+   }
+  },
+  {
+   "text": "Apply S to a specified derived isomorphism between two representatives. The factorization in Step 3 makes the resulting filtered isomorphism functorial in that specified isomorphism, with its underlying map the original one. Thus independence of representatives is relative to the chosen identifications with the derived object; no uniqueness of isomorphisms between unmarked representatives is asserted. On complexes the assumed short exact sequence identifies B/(j_!j^{-1}B) with i_*i^{-1}B naturally in B, and gr^1 is j_!j^{-1}B. Exactness shows these two termwise functors preserve quasi-isomorphisms (Step 2); grading also inverts graded quasi-isomorphisms by definition. The natural quotient identifications therefore descend by the localization universal property. Hence gr^0 S(B)≅i_*i^{-1}B and gr^1 S(B)≅j_!j^{-1}B naturally in the bounded derived category, with all other grades zero.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3, graded pieces and representative independence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Example 5.2.3, together with §5.1.2(a)–(b)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A general exact subfunctor of the identity on an abelian category induces a canonical two step filtration on bounded complexes and descends to the derived category",
-   "results": "8 hits: HasDerivedCategory.standard; DerivedCategory.Q; HasDerivedCategory; DerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "query": "A canonical two-step filtration of bounded complexes by an exact subfunctor descends to the filtered derived localization",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; HasDerivedCategory.standard; HomologicalComplexUpToQuasiIso.Q; CategoryTheory.Abelian.Ext.mapExactFunctor; no filtered open-closed section",
    "date": "2026-10-17",
-   "verdict": "no match: Mathlib has ordinary derived localization and exact functors but no canonical open-closed filtered section"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.ShortComplex.ShortExact.singleTriangle CategoryTheory.exactFunctor",
-   "results": "0 hits; application type mismatch in the Loogle pattern",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Functor.Exact",
+   "results": "0 hits; unknown identifier CategoryTheory.Functor.Exact",
    "date": "2026-10-17",
-   "verdict": "invalid pattern: Loogle returned an application type mismatch; not evidence of absence; use the successful quoted-name search below"
+   "verdict": "invalid pattern; no match established"
   },
   {
    "tool": "grep",
-   "query": "shortExact|exactFunctor|filtration.*derived|derived.*filtration",
-   "results": "25 hits including ShortExact and exactFunctor files, but no filtered derived localization construction",
+   "query": "filtered.*derived|quasi.*isomorphism.*graded|localization.*filtration [Mathlib]",
+   "results": "0 hits",
    "date": "2026-10-17",
-   "verdict": "no match: only ordinary exactness/short-complex infrastructure"
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "A short exact sequence of exact endofunctors gives a natural two step filtration on the bounded derived category",
-   "results": "8 hits: CategoryTheory.exactFunctor, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ExactFunctor, CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.ShortComplex.ShortExact.mk, CategoryTheory.ShortComplex.ShortExact.mk', CategoryTheory.Functor.exact_tfae, CategoryTheory.exactFunctor_le_leftExactFunctor",
+   "query": "Exact functors on an abelian category preserve quasi-isomorphisms of bounded complexes and induce a functor on filtered derived localization",
+   "results": "HomologicalComplex.quasiIso_map_of_preservesHomology; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.ExactFunctor.of; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; HasDerivedCategory.standard",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary exact-functor/localization or scheme/topological results do not state this filtered sheaf or invariant-support comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The termwise filtration by an exact subfunctor of identity descends under quasi isomorphisms to a canonical section of the forgetful functor on filtered derived categories",
-   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary exact-functor/localization or scheme/topological results do not state this filtered sheaf or invariant-support comparison"
-  },
-  {
-   "tool": "leansearch",
-   "query": "An exact subfunctor of the identity with exact quotient gives a canonical filtration on derived complexes",
-   "results": "8 hits: CategoryTheory.exactFunctor_le_leftExactFunctor, CategoryTheory.ExactFunctor.of, HomologicalComplexUpToQuasiIso.Q, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.LeftExactFunctor.ofExact, CategoryTheory.ShortComplex.exact_map_iff_of_faithful, CategoryTheory.ShortComplex.Exact.recOn, DerivedCategory.instFullSingleFunctor",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary exact-functor/localization or scheme/topological results do not state this filtered sheaf or invariant-support comparison"
+   "verdict": "no exact filtered localization match"
   },
   {
    "tool": "loogle",
-   "query": "\"Filtered\", \"ShortComplex\"",
-   "results": "0 hits: none",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactors and related derived-category factorization declarations",
    "date": "2026-10-17",
-   "verdict": "no match: no declaration combining filtered objects and short complexes"
+   "verdict": "general derived-category factorization only; no filtered section"
   }
  ],
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-invariant-localization-filtered-lift",
@@ -86,11 +149,38 @@
   "from": {
    "node": "lem-trf-local-term-locality",
    "place": "Proof paragraph (1): Example 5.2.3 canonical filtered origin of open--closed additivity",
-   "via": [
-    "lem-trf-invariant-localization-filtered-lift"
-   ]
+   "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-localization-filtration-descent",
+  "worker": "stage1",
+  "summary": "Read Varshavsky Example 5.2.3 and §5.1.2 against the imported statement. Added a four-step proof: construct the two-step filtration on complexes, verify functoriality and preservation of quasi-isomorphisms from the stated exactness hypotheses, descend through the two localizations, and identify representative-independent graded pieces. No new nodes were needed because the remaining arguments are direct from the cited definitions and the hypotheses in the item. Maintainer-reader repair: made filtration endpoints explicit, expanded exact-functor cohomology, verified forgetful descent by finite induction on the filtered cone, and specified natural representative and graded comparisons.",
+  "blueprint": "The steps realize the proof paragraph for the canonical filtered origin of open--closed additivity (Example 5.2.3) beneath lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone criterion in an arbitrary abelian category, used to verify that forgetting a finite filtration inverts graded quasi-isomorphisms; the localization-section construction does not replace this criterion."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic universal property including natural transformations, used for descent and representative-independent graded comparisons; no geometric comparison theorem is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-81b526581",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-81b526581 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, Varshavsky §§5.1–5.2 and relevant Stacks passages. Repaired ambiguous filtration endpoints and supplied the missing forgetful-descent argument using finite filtered cones and existing lemmas. Clarified natural representative comparisons. Statement unchanged; no new nodes or cycles. Corrected JSON and detailed source checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

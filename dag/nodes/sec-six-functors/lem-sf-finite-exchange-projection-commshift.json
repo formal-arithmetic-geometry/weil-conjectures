@@ -16,9 +16,186 @@
   "fix-lem-exchanges",
   "fix-prop-projection-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first with a chosen compactification $c=(j,p)$ and its base change. All calculations take place in the ambient constant-$A$ module derived categories, then restrict to the bounded constructible finite-Tor domain specified in the statement. By [lem-sf-proetale-constructible-origin](ii), each bounded constructible input admits a bounded constructible etale-origin witness; its shifts do as well. The canonical constant-ring maps are isomorphisms by [prop-weil-pbc-proetale-constant-ring-map]. Thus [def-weil-pbc-proetale-operations] identifies geometric pullback with exact termwise inverse image. Its shift comparison is the termwise identity. For every ordinary derived adjunction $Lu^*\\dashv Ru_*$, [lem-weil-pbc-derived-adjunction-shift] says that the actual unit and counit commute with these canonical integer shifts; in particular this identifies the shift on $Ru_*$ with the adjunction-compatible one required below. The pullback compositor of [lem-weil-pbc-proetale-derived-pullback-composition] is termwise on K-flat models. Its component on $P[m]$ in degree $r$ is its component on $P$ in degree $r+m$, so it commutes with every shift, as does the square comparison $\\theta$ assembled from it and its inverse.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05SU (lemma-derived-shift), 0A8D (lemma-adjoint-is-exact); sites-cohomology.tex Tag 0D6D (lemma-derived-pullback-composition)"
+   }
+  },
+  {
+   "text": "For any ordinary square, [def-exchange-projection] writes $\\operatorname{Ex}_*$ as the composite $\\eta_{f'}$, $Rf'_*(\\theta)$ and $Rf'_*Lg'^*(\\varepsilon_f)$ with the indicated whiskerings. Every factor has the shift equation by step 1. Composition and whiskering preserve that equation by [lem-weil-pbc-commshift-nattrans-comp-whisker]. Applying its four elementary identities to the shift $[m]$ gives the same rule for every fixed integer $m$; equivalently substitute $[m]$ for $[1]$ in its displayed equations. Consequently the ordinary exchange used for $p$ commutes with all integer shifts. This checks the specified mate, not an arbitrary isomorphism of its source and target.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V (definition-exact-functor-triangulated-categories), Tag 014Y (lemma-composition-exact); unit-square-counit formula of def-exchange-projection"
+   }
+  },
+  {
+   "text": "The open base-change factor $\\beta:L\\bar g'^*j_!\\to j'_!Lg'^*$ is the complex-level canonical comparison of [lem-cbc-proetale-extension-zero-base-change]. Here $j_!$ is exact and degreewise by [lem-cbc-proetale-extension-zero], and both pullbacks are degreewise by step 1. In degree $r$ at $K[m]$, its component is $\\beta_{K^{r+m}}$; the differentials on both sides are multiplied by the same $(-1)^m$. Hence its shift square is equality of these chain maps. The formula of [def-exchange-projection] is $\\operatorname{Ex}_!^c=Rp'_*(\\beta)\\circ\\operatorname{Ex}_{*,p}(j_!-)$. Step 2 and the composition/whiskering rule now give the exchange shift equation for these two compactification candidates.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero",
+    "def-exchange-projection",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Open-extension base-change factor in the compactification formula; degreewise calculation"
+   }
+  },
+  {
+   "text": "For the ordinary projection $\\pi_{p;M,L}$ of [def-exchange-projection], [lem-weil-pbc-ringed-projection-mate-exact] supplies the shift equation in $L$, including the canonical tensor-pullback and adjunction structures. [lem-sfb-ringed-projection-first-shift] supplies it in $M$. The hypotheses are met by the constant-$A$ ringed pro-etale topoi, small relative to the module universe; step 1 identifies their canonical direct-image shift with the unique unit/counit-compatible shift used in the latter node. Thus neither invocation changes a shift convention. These two cited equations are for $[1]$; they imply the corresponding equations for all integers by the iteration argument in step 11. Substituting $M=j_!K$ gives the first projection factor with its canonical composite shifts in either $K$ or $L$.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-ringed-projection-first-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), Tag 07A4 (lemma-pullback-tensor-product); first-input shift check in lem-sfb-ringed-projection-first-shift"
+   }
+  },
+  {
+   "text": "Check the open projection factor separately. Represent $L$ by a K-flat complex $P$ with flat terms, using [lem-weil-pbc-site-derived-tensor-descent]. The pullback of $P$ is again K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus the map of [lem-cbc-extension-zero-projection-formula] is computed by the total complex of the canonical sheaf maps $(j_!K^a)\\otimes P^b\\to j_!(K^a\\otimes j^{-1}P^b)$. Exact, degreewise $j_!$ is a left adjoint [lem-cbc-proetale-extension-zero], so commutes with the direct sums in this total complex. Use the differential $d_K\\otimes1+(-1)^a1\\otimes d_P$ of [def-pc-tensor-complex-sheaves]. The comparison $K[m]\\otimes P\\to(K\\otimes P)[m]$ is the identity on each summand; the comparison $K\\otimes P[m]\\to(K\\otimes P)[m]$ is multiplication by $(-1)^{ma}$ on degree-$a$ terms of $K$. The sheaf map above preserves both degrees and is $A$-linear, so commutes with each of these scalars. This proves both shift squares on total models. The same statement holds after derived localization by the cited tensor-descent equivalence; no assertion that geometric stalks detect arbitrary pro-etale morphisms is used.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-cbc-proetale-extension-zero",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), total K-flat construction; open-extension projection comparison"
+   }
+  },
+  {
+   "text": "In $\\gamma_{K,L}$ of [def-exchange-projection], the remaining comparison is $Lj^*Lp^*\\cong Lf^*$; it commutes with shifts by step 1. Tensoring its components with fixed $K$ commutes with the right-input shifts: on the signed total models of step 5 a degree-zero map preserves the degree $a$, hence the scalar $(-1)^{ma}$. It also respects first-input shifts, whose comparison is the identity on summands. Therefore $\\gamma$ has both required shift squares. The chosen-compactification projection is exactly $Rp_*(\\gamma)\\circ\\pi_{p;j_!K,L}$. Steps 4 and 5 and the composite-shift rule [lem-weil-pbc-commshift-nattrans-comp-whisker] give its equation in $K$ and in $L$ (first for $[1]$, and then by step 11 for all integers).",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), compactification composite specified in def-exchange-projection"
+   }
+  },
+  {
+   "text": "We must also check the canonical compactification comparisons; naturality alone would not give this. Put $H_T=\\nu_T^*$. It is exact termwise comparison pullback by [lem-sf-comparison-pullback-exact]. The pullback comparison $a_u:H_Uu_e^*\\cong u_p^*H_V$ of [lem-weil-pbc-comparison-pullback] and the sheaf open comparison $e_j:H j^e_!\\cong j^p_!H$ of [lem-cbc-proetale-extension-zero-comparison] commute with integer shifts: their degree-$r$ components on a shifted complex are their original degree-$(r+m)$ components. For proper $u$, the specified direct-image comparison $b_u$ is, by [lem-weil-pbc-comparison-direct-image-canonical-mate], the transpose of $H_U(\\varepsilon^e_u)\\circ a_u^{-1}$. Explicitly it is $Ru_{p,*}(H_U\\varepsilon^e_u\\circ a_u^{-1})\\circ\\eta^p_u H_VRu_{e,*}$. Step 1 applies also to the constant-ring etale adjunctions. Consequently every factor here has the shift square, so $b_u$ does too. Properness supplies the qcqs hypothesis of the named comparison.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05SU and 0A8D; canonical counit-mate site comparison"
+   }
+  },
+  {
+   "text": "For a refinement $u:c_1\\to c_2$, its etale proper/open map $\\alpha^e_u:j^e_{2!}\\to Ru_{e,*}j^e_{1!}$ is the specialization in [lem-cbc-proper-open-interchange-coherence]. On a K-injective representative $J$ it is $j^e_{2!}J\\cong u_*j^e_{1!}J\\to u_*I$ for a K-injective resolution $j^e_{1!}J\\to I$. For the shifted input choose $J[m]$ and the shifted resolution into $I[m]$; both are valid by [lem-weil-pbc-kinjective-shift]. The proper/open sheaf identification has degree zero; its degree-$r$ component is the original one in degree $r+m$. The resolution arrow also shifts termwise. The displayed representative is consequently exactly the shift of the unshifted representative. Under the canonical resolution identifications this proves the shift square for the named $\\alpha^e_u$, for all $m$, and does not assert that $j_!$ preserves K-injectives.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), first paragraph of proof; refinement specialization"
+   }
+  },
+  {
+   "text": "The pro-etale refinement map has the specified normalization [lem-sf-proper-open-comparison-site-normalization]: $\\alpha^p_u e_{j_2}=Ru_{p,*}(e_{j_1})\\,b_u j^e_{1!}\\,H(\\alpha^e_u)$. All factors on the right and $e_{j_2}$ have shift squares by steps 7 and 8; cancel the invertible $e_{j_2}$ to obtain the square for $\\alpha^p_u$ on $H_XL$. For a witness $w:H_XL\\cong K$, [def-sf-refinement-comparison-isomorphism](a) conjugates this map by $Ru_*j_{1!}(w)$ and $j_{2!}(w)^{-1}$. The shifted witness is $w[m]\\chi_H(L)$; naturality of the two composite shift comparisons cancels those witness factors, giving the equation at $K$. For the direct-image compositor in part (b), [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] specifies its representative $v_*t:v_*u_*I\\to v_*J$, for a resolution $t:u_*I\\to J$. Using $I[m],J[m],t[m]$ proves its shift equation in the same way as step 8. Thus $\\theta_u=Rv_*(\\alpha_u^{-1})\\circ\\kappa_{v,u}$ has the canonical shift equation. Inverses are justified by multiplying $\\chi_G\\tau_{[m]}=\\tau[m]\\chi_F$ by the two inverses of $\\tau$, which yields $\\chi_F\\tau_{[m]}^{-1}=\\tau[m]^{-1}\\chi_G$.",
+   "uses": [
+    "lem-sf-proper-open-comparison-site-normalization",
+    "def-sf-refinement-comparison-isomorphism",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B; pro-etale normalization and the explicit refinement-comparison formula"
+   }
+  },
+  {
+   "text": "By [prop-compactification-coherence-detailed], comparisons between any two candidates are composites of refinement maps and their inverses through a common refinement. Step 9 gives the shift equation for all of them. All witnesses remain bounded below after any integer shift; we use comparisons only on that domain. Clause (4) of [fix-lem-exchanges] intertwines the chosen-compactification exchange maps with these comparisons. [fix-prop-projection-formula] supplies the same compatibility for projection. Hence the actual transformations in the statement are obtained from the maps of steps 3 and 6 by pre- and postcomposing these comparison isomorphisms (and tensoring them with the fixed other input for projection). Their shift squares follow by composition; tensoring a degree-zero map preserves the signed comparisons of step 5. This proves the assertions for the named geometric maps, independently of the compactifications.",
+   "uses": [
+    "prop-compactification-coherence-detailed",
+    "fix-lem-exchanges",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B; compactification coherence and the specified exchange/projection comparison compatibilities"
+   }
+  },
+  {
+   "text": "For completeness, an equation for $[1]$ between coherent integer-shift functors implies every integer equation. The $m=0$ equation is the original transformation. Paste the squares for $m$ and $1$ and use the coherence $[m][1]\\cong[m+1]$ to obtain the square for $m+1$. From the square for $1$ at $M[-1]$, multiply by the invertible shift comparisons and identify $M[-1][1]\\cong M$; applying $[-1]$ gives the square for $-1$ at $M$. Repeating gives every negative integer. This applies to the first- and second-variable projection equations used above. Finally, wherever $\\tau$ is invertible, the inverse calculation in step 9 gives the same equation with source and target reversed for every $m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Coherent integer-shift comparisons; elementary pasting and cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-weil-pbc-proetale-operations",
+  "fix-lem-exchanges",
+  "fix-prop-projection-formula",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-compactification-coherence-detailed",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+  "place": "Paragraph 4: exactness in both coefficients; explicit geometric shift check from Stacks derived functor and projection constructions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +238,45 @@
    "results": "none; 0 hits",
    "date": "2026-10-17",
    "verdict": "no match: no hits in CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.CommShift\"",
+   "results": "CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.NatTrans.CommShiftCore; CategoryTheory.NatTrans.CommShiftCore.zero; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; 12 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift structures or underived sheaf comparisons do not state the finite-coefficient geometric exchange and both projection-input equations"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|projectionMap|projectionFormula",
+   "results": "none; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift structures or underived sheaf comparisons do not state the finite-coefficient geometric exchange and both projection-input equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sheaf compact support exchange and tensor projection formula commute with shifts",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Adjunction.RightAdjointCommShift.iso'; CategoryTheory.shiftFunctorComm; CochainComplex.shiftFunctorComm_hom_app_f; CategoryTheory.Equivalence.commShiftFunctor; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CochainComplex.isStrictlyGE_shift; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift structures or underived sheaf comparisons do not state the finite-coefficient geometric exchange and both projection-input equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support base change exchange and projection transformations for derived sheaves commute with integer shifts in either tensor variable",
+   "results": "SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.pushforwardNatIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforwardComp; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift structures or underived sheaf comparisons do not state the finite-coefficient geometric exchange and both projection-input equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley shriek base change and projection formula are morphisms of triangulated functors compatible with translation",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Functor.mapTriangleCompIso_hom_app_hom₁; CategoryTheory.Functor.isTriangulated_iff_comp_right; CategoryTheory.Functor.mapTriangleCompIso; CategoryTheory.Adjunction.IsTriangulated.comp; CategoryTheory.Functor.instCommShiftTriangleMapTriangleInt; CategoryTheory.Adjunction.IsTriangulated.mk''; CategoryTheory.Functor.mapTriangleCompIso_hom_app_hom₂; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift structures or underived sheaf comparisons do not state the finite-coefficient geometric exchange and both projection-input equations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-exceptional-kunneth",
@@ -81,5 +293,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-finite-exchange-projection-commshift",
+  "worker": "stage1",
+  "summary": "Checked the actual unit-square-counit and compactification formulas, used existing ringed projection shift lemmas for the two inputs, wrote the signed open-tensor check and the normalized refinement comparison calculation, and derived all integer and inverse equations. No new nodes and no statement change.",
+  "blueprint": "prop-trf-exceptional-kunneth.proof.md paragraph 4, General coefficients: both sides of alpha are exact in each coefficient; realizes the retained geometric exchange/projection shift check without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-sf-proper-open-comparison-site-normalization",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-first-shift",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-shift",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic operation/comparison infrastructure used for its stated formula or shift equation; the Kunneth-Verdier unit has no separate node providing this ingredient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-lem-exchanges",
+  "fix-prop-projection-formula",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-compactification-coherence-detailed",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-bdc0e43c0",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-bdc0e43c0 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all 11 steps, cited statements, source passages, and unit/chapter route. Canonical map normalizations and tensor shift signs check, including negative shifts. No cycles, duplicate splits, coefficient-category substitutions, or forbidden SGA route found. Accepted 23 tool uses; no repairs needed. Detailed checks are in review.md."
  }
 }

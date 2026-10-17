@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-wf-curve-kummer-jacobian-tate-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Kummer identifies curve cohomology with the Jacobian Tate module",
- "statement": "Let $C_0/k_0$ be a smooth projective geometrically connected curve, put\n$C=C_0\\times_{k_0}\\overline{k}_0$, and let $J$ be its\nJacobian, equipped with the canonical semilinear\n$\\operatorname{Gal}(\\overline{k}_0/k_0)$-action of\n[lem-wf-geometric-jacobian-galois-action]. For\n$\\ell\\ne\\operatorname{char}k_0$, the\nKummer twist gives natural\nGalois-equivariant isomorphisms\n\n$$\nH^1(C,A_n(1))\\xrightarrow{\\sim}J[\\ell^n](\\overline{k}_0).\n$$\n\nHere $A_n=\\mathbf Z/\\ell^n\\mathbf Z$, and these isomorphisms are\ncompatible with the transition maps.\nThe Jacobian, Tate module, and twist in this display are those of\n[def-sc-jacobian], [def-wf-abelian-tate-module], [def-coefficient-twists-detailed].",
+ "statement": "Let $C_0/k_0$ be a smooth projective geometrically connected curve, put\n$C=C_0\\times_{k_0}\\overline{k}_0$, and let $J$ be its\nJacobian, equipped with the canonical semilinear\n$\\operatorname{Gal}(\\overline{k}_0/k_0)$-action of\n[lem-wf-geometric-jacobian-galois-action]. For\n$\\ell\\ne\\operatorname{char}k_0$, the\nKummer twist gives natural\nGalois-equivariant isomorphisms\n\n$$\nH^1(C,A_n(1))\\xrightarrow{\\sim}J[\\ell^n](\\overline{k}_0).\n$$\n\nHere $A_n=\\mathbf Z/\\ell^n\\mathbf Z$, and these isomorphisms are\ncompatible with the transition maps.\nThe Jacobian, Tate module, and twist in this display are those of\n[def-sc-jacobian], [def-wf-abelian-tate-module], [def-coefficient-twists-detailed].\n\nHere $\\ell$ is prime and $n\\geq1$. More explicitly, write\n$\\nu_C:C_{\\mathrm{proet}}\\to C_{\\mathrm{et}}$ for\n[def-weil-pbc-site-comparison-morphism]. The finite coefficient sheaf\n$A_n(1)$ on $C_{\\mathrm{proet}}$ is canonically\n$\\nu_C^*\\mu_{\\ell^n,C}$ by [lem-amb-finite-tate-site-descent]\nwith $E=\\mathbf Q_\\ell$ and uniformizer $\\ell$.\nThe displayed $H^1$ can therefore be computed either on the pro-etale\nsite with this coefficient sheaf or on the etale site with\n$\\mu_{\\ell^n,C}$, via [lem-cbc-abelian-etale-proetale-cohomology-comparison].\nThe transition on cohomology is induced by $z\\mapsto z^\\ell$, and the\ntransition on Jacobian torsion is $[\\ell]$.\nFor $\\sigma\\in\\operatorname{Aut}(\\overline{k}_0/k_0)$, the action on\ncohomology is pullback along $t_\\sigma=\\mathrm{id}_{C_0}\\times\n\\operatorname{Spec}(\\sigma)$ with the canonical comparison of roots-of-unity\nsheaves; on $J(\\overline{k}_0)$ it is precisely the point action specified\nin [lem-wf-geometric-jacobian-galois-action].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
   "place": "node lem-wf-curve-kummer-jacobian-tate-module, order 2610"
@@ -16,61 +16,176 @@
   "lem-wf-geometric-jacobian-galois-action",
   "def-sc-jacobian",
   "def-wf-abelian-tate-module",
-  "def-coefficient-twists-detailed"
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-amb-finite-tate-site-descent",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison"
  ],
  "proof": [
   {
-   "text": "For every $n\\geq1$, the Kummer sequence of\n[def-sc-kummer-sequence] with exponent $\\ell^n$ is\n\n$$\n1\\longrightarrow\\mu_{\\ell^n}\\longrightarrow\\mathbf G_m\n\\xrightarrow{(\\cdot)^{\\ell^n}}\\mathbf G_m\\longrightarrow1.\n$$",
+   "text": "Put $K=\\overline{k}_0$, $m=\\ell^n$, and let $i_n:\\mu_{m,C}\\to\\mathbf G_{m,C}$ be the inclusion on the etale site. Specialize [lem-amb-finite-tate-site-descent] to $F=\\mathbf Q_\\ell$, $\\varpi_F=\\ell$, $A=A_n$, and annihilating exponent $r=n$. Its etale coefficient is $\\mu_{m,C}\\otimes_{A_n}A_n$, identified with $\\mu_{m,C}$ by $u\\otimes a\\mapsto a u$ and inverse $u\\mapsto u\\otimes1$ (write the power action additively). Thus it gives the specified comparison $\\nu_C^*\\mu_{m,C}\\cong A_n(1)$, commuting with scheme pullback and power transitions. By [lem-cbc-abelian-etale-proetale-cohomology-comparison], it suffices to construct the claimed maps on $H^1(C_{\\mathrm{et}},\\mu_{m,C})$. Both results apply since $\\ell$ is invertible on $C$; neither assumes that $k_0$ is finite.",
    "uses": [
-    "def-sc-kummer-sequence"
+    "lem-amb-finite-tate-site-descent",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099W, lemma-compare-cohomology (1); finite Tate descent as in the cited node"
+   }
   },
   {
-   "text": "It is exact by [lem-sc-kummer-exact]. The relevant beginning of its\nlong exact cohomology sequence is\n\n$$\nH^0(C,\\mathbf G_m)\\xrightarrow{\\ell^n}H^0(C,\\mathbf G_m)\n\\longrightarrow H^1(C,\\mu_{\\ell^n})\n\\longrightarrow H^1(C,\\mathbf G_m)\n\\xrightarrow{\\ell^n}H^1(C,\\mathbf G_m).\n$$",
+   "text": "The sequence $0\\to\\mu_{m,C}\\xrightarrow{i_n}\\mathbf G_{m,C}\\xrightarrow{[m]}\\mathbf G_{m,C}\\to0$ is the Kummer sequence [def-sc-kummer-sequence], exact by [lem-sc-kummer-exact]. Apply clause 2 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder] to this short exact sequence with $u=\\mathrm{id}_C$. It gives the exact segment\n$$H^0(C,\\mathbf G_m)\\xrightarrow{[m]}H^0(C,\\mathbf G_m)\\longrightarrow H^1(C,\\mu_m)\\xrightarrow{H^1(i_n)}H^1(C,\\mathbf G_m)\\xrightarrow{H^1([m])}H^1(C,\\mathbf G_m).$$\nThe $H^1$ arrow used here is induced by the inclusion, not a connecting map. Under [lem-sc-h1-gm-pic], $H^1(C,\\mathbf G_m)$ is $\\operatorname{Pic}(C)$. The power endomorphism is the sum of $m$ copies of the identity in the abelian-sheaf category, so on the complexes computing cohomology it induces the sum of $m$ identity maps, and on Picard classes it is $[L]\\mapsto[L^{\\otimes m}]$.",
    "uses": [
-    "lem-sc-kummer-exact"
+    "def-sc-kummer-sequence",
+    "lem-sc-kummer-exact",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-sc-h1-gm-pic",
+    "def-weil-pbc-etale-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence; following long exact sequence in Section 03PK"
+   }
   },
   {
-   "text": "By [lem-sc-global-functions],\n$H^0(C,\\mathbf G_m)=\\overline{k}_0^\\times$, and the first arrow is\nsurjective because $\\overline{k}_0$ is algebraically closed. The\nidentification $H^1(C,\\mathbf G_m)=\\operatorname{Pic}(C)$ of\n[lem-sc-h1-gm-pic] therefore gives\n\n$$\nH^1(C,\\mu_{\\ell^n})\\xrightarrow{\\sim}\n\\operatorname{Pic}(C)[\\ell^n].\n\\tag{1}\n$$\n\nIf $L^{\\otimes\\ell^n}\\cong\\mathcal O_C$, then\n$\\ell^n\\deg L=0$ in $\\mathbf Z$, hence $\\deg L=0$. By the\ndegree-zero definition in [def-sc-pic0], the right side of $(1)$ is\ntherefore $\\operatorname{Pic}^0(C)[\\ell^n]$. Since $J$ is the Jacobian of\nthe smooth projective curve $C$ over the separably closed field\n$\\overline{k}_0$, its points are the degree-zero invertible modules on\n$C$, so\n[thm-sc-jacobian-representability] identifies this group with\n$J[\\ell^n](\\overline{k}_0)$; the identification is induced by the\nrepresenting isomorphism and is therefore canonical, hence equivariant for the\nsemilinear action of [lem-wf-geometric-jacobian-galois-action].",
+   "text": "The geometric curve $C$ is smooth proper connected over the algebraically closed field $K$. By [lem-sc-global-functions], $\\Gamma(C,\\mathcal O_C)=K$. By the units-sheaf definition [def-sc-gm-torsor] and degree-zero cohomology [lem-weil-pbc-cohomology-pullback-degree-zero], this identifies $H^0(C,\\mathbf G_m)$ with $K^\\times$. For $a\\in K^\\times$, the polynomial $X^m-a$ has a root $b\\in K$; $b\\ne0$ because $a\\ne0$, so $[m]$ on $H^0$ is surjective. Exactness of Step 2 then says that $H^1(i_n)$ is injective and has image $\\operatorname{Pic}(C)[m]$. Denote the resulting group isomorphism by $\\beta_n:H^1(C,\\mu_m)\\xrightarrow{\\sim}\\operatorname{Pic}(C)[m]$.",
    "uses": [
     "lem-sc-global-functions",
-    "lem-sc-h1-gm-pic",
-    "def-sc-pic0",
-    "thm-sc-jacobian-representability",
-    "lem-wf-geometric-jacobian-galois-action"
+    "def-sc-gm-torsor",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03PK, long exact sequence after Lemma 03PL; blueprint proof paragraph 3"
+   }
   },
   {
-   "text": "The transition map on the Kummer side is induced by\n$\\mu_{\\ell^{n+1}}\\to\\mu_{\\ell^n}$, $z\\mapsto z^\\ell$; under $(1)$ it\nis multiplication by $\\ell$ on the torsion of the Jacobian. Thus the\nfinite-level isomorphisms form the compatible inverse system defining\n$T_\\ell J$ in [def-wf-abelian-tate-module]; no separate\n$\\mathbf Z_\\ell$-sheaf comparison is being assumed.\nAll arrows in the Kummer sequence, the connecting map to the Picard group,\nand the identification of the Jacobian are natural under automorphisms\nof $\\overline{k}_0/k_0$, the last one by\n[lem-wf-geometric-jacobian-galois-action]; hence the isomorphism is\nGalois equivariant.\nThe displayed finite-level identifications are compatible with reduction;\nwhenever rational or $E$-coefficients are used below, they mean the\ncorresponding scalar extension of this compatible system.",
+   "text": "The degree map of [def-sc-pic0] is a group homomorphism to $\\mathbf Z$. If $L\\in\\operatorname{Pic}(C)[m]$, then $0=\\deg(L^{\\otimes m})=m\\deg L$, whence $\\deg L=0$ since $m>0$ and $\\mathbf Z$ is torsion free. Conversely every $m$-torsion degree-zero class is $m$-torsion in $\\operatorname{Pic}(C)$. Thus the inclusion identifies $\\operatorname{Pic}^0(C)[m]$ with $\\operatorname{Pic}(C)[m]$. Compose $\\beta_n$ with the inverse of this inclusion and then the inverse of the point comparison $J(K)\\cong\\operatorname{Pic}^0(C)$ of [lem-wf-geometric-jacobian-galois-action], restricted to $m$-torsion. This defines the required group isomorphism $\\alpha_n:H^1(C,\\mu_m)\\xrightarrow{\\sim}J[m](K)$. The comparison respects torsion because it is a group isomorphism. No primitive root or basis of either group is chosen.",
    "uses": [
-    "def-wf-abelian-tate-module",
+    "def-sc-pic0",
     "lem-wf-geometric-jacobian-galois-action"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
+    "place": "Proof paragraph 3, degree-zero argument and the representing comparison"
+   }
+  },
+  {
+   "text": "Write $p_n:\\mu_{\\ell^{n+1}}\\to\\mu_{\\ell^n}$ for $z\\mapsto z^\\ell$. The Kummer sequences at levels $n+1$ and $n$ have vertical maps $(p_n,[\\ell],\\mathrm{id})$ on their three terms. The first square commutes because $i_n(z^\\ell)=i_{n+1}(z)^\\ell$; the second commutes because $(x^\\ell)^{\\ell^n}=x^{\\ell^{n+1}}$. Applying the cohomology functor [def-weil-pbc-etale-cohomology] to the first square yields\n$$H^1(i_n)\\,H^1(p_n)=H^1([\\ell])\\,H^1(i_{n+1}).$$\nAs in Step 2, $H^1([\\ell])$ is tensor power by $\\ell$ on Picard classes. Since $\\beta_n$ is the same inclusion map with its image restricted, this equality says $\\beta_n(H^1(p_n)x)=\\ell\\beta_{n+1}(x)$. The point comparison of [lem-wf-geometric-jacobian-galois-action] commutes with multiplication by $\\ell$. Restricting it to the degree-zero torsion groups therefore gives $\\alpha_n(H^1(p_n)x)=[\\ell]\\alpha_{n+1}(x)$, exactly the transition compatibility asserted.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "lem-wf-geometric-jacobian-galois-action"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
+    "place": "Proof paragraph 4, compatibility of the finite-level identifications; the two Kummer squares written explicitly"
+   }
+  },
+  {
+   "text": "For $\\sigma\\in\\Gamma=\\operatorname{Aut}(K/k_0)$ set $s_\\sigma=\\operatorname{Spec}(\\sigma)$ and $t_\\sigma=\\mathrm{id}_{C_0}\\times s_\\sigma$. By [lem-asd-etale-finite-twist-pullback], inverse image of $\\mu_m$ along $t_\\sigma$ is canonically $\\mu_m$; on local units the comparison is pullback of functions. Pullback preserves the equation $z^m=1$ and the inclusion into units. Naturality in the sheaf map $i_n$, clause 3 of [lem-weil-pbc-cohomology-pullback-functorial], therefore shows that $H^1(i_n)$ commutes with the induced actions on $H^1(C,\\mu_m)$ and $H^1(C,\\mathbf G_m)$. Under [lem-sc-h1-gm-pic-pullback], the latter action is $[L]\\mapsto[t_\\sigma^*L]$. Thus $\\beta_n(\\sigma x)=t_\\sigma^*\\beta_n(x)$. Restriction to degree-zero torsion and the equivariance of $J(K)\\cong\\operatorname{Pic}^0(C)$ in [lem-wf-geometric-jacobian-galois-action] give $\\alpha_n(\\sigma x)=\\sigma\\alpha_n(x)$. These are left actions: contravariance of Spec gives $t_{\\sigma\\tau}=t_\\tau\\circ t_\\sigma$, and contravariance of pullback gives $t_{\\sigma\\tau}^*=t_\\sigma^*t_\\tau^*$; composition of cohomology pullback is clause 4 of the same functoriality node.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-sc-h1-gm-pic-pullback",
+    "lem-wf-geometric-jacobian-galois-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
+    "place": "Proof paragraph 4, Galois equivariance; Stacks Tags 01F8 and 040E for functoriality and Picard pullback"
+   }
+  },
+  {
+   "text": "Transport $\\alpha_n$ back through the canonical coefficient and cohomology comparisons of Step 1. Their compatibility with scheme pullback and with power transitions preserves the equations of Steps 5 and 6. This gives the displayed natural Galois-equivariant isomorphisms with the coefficient $A_n(1)$ of the statement. Naturality here is the one furnished by the inclusion into the Picard group and the fixed representing comparison: a pullback of curves compatible with these data commutes with $i_n$ and with Picard pullback, so the same square in Step 6 commutes for that pullback. By [def-wf-abelian-tate-module], the transition $[\\ell]$ on $J[\\ell^n](K)$ is precisely its defining Tate-module system. The result asserts this compatible finite system; its proof requires no interchange of cohomology with an inverse limit.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "def-wf-abelian-tate-module",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-sc-h1-gm-pic-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
+    "place": "Proof paragraph 4, conclusion for the compatible finite system"
+   }
   }
  ],
  "proof_deps": [
+  "lem-amb-finite-tate-site-descent",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
   "def-sc-kummer-sequence",
   "lem-sc-kummer-exact",
-  "lem-sc-global-functions",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
   "lem-sc-h1-gm-pic",
+  "def-weil-pbc-etale-cohomology",
+  "lem-sc-global-functions",
+  "def-sc-gm-torsor",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
   "def-sc-pic0",
-  "thm-sc-jacobian-representability",
   "lem-wf-geometric-jacobian-galois-action",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-sc-h1-gm-pic-pullback",
   "def-wf-abelian-tate-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-jacobian/lem-wf-curve-kummer-jacobian-tate-module.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs 1–4, with the finite-site comparison, transition squares and corrected left-action convention made explicit; Stacks Tags 03PL, 040E, 099W, 01F8"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Kummer|Jacobian|etale.*cohomology",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/MeasureTheory/Function/JacobianOneDim.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned field-theoretic Kummer, ring Picard, group cohomology and elliptic-curve facts do not state this compatible Galois-equivariant etale cohomology comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First etale cohomology of a smooth projective curve with roots of unity coefficients is the torsion subgroup of the Jacobian",
+   "results": "8 hits: groupCohomology.H1, groupCohomology.H1IsoOfIsTrivial, groupCohomology.coboundaries₁_ext, groupCohomology.H1ofAutOnUnitsUnique, Algebra.FormallyEtale.subsingleton_h1Cotangent, groupCohomology.H1InfRes, groupCohomology.H1π_eq_zero_iff, groupCohomology.instFunLikeSubtypeForallCarrierVModuleCatMemSubmoduleCoboundaries₁",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned field-theoretic Kummer, ring Picard, group cohomology and elliptic-curve facts do not state this compatible Galois-equivariant etale cohomology comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "8 hits: KummerExtension.«termK[_√_]», KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.quotMapEquivQuotQuotMap, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned field-theoretic Kummer, ring Picard, group cohomology and elliptic-curve facts do not state this compatible Galois-equivariant etale cohomology comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer sequence identifies first etale cohomology of roots of unity on a smooth projective curve with prime power torsion of its Jacobian, equivariantly for Galois and compatibly with transition maps",
+   "results": "8 hits: IsDedekindDomain.selmerGroup.fromUnitLift, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, groupCohomology.H1ofAutOnUnitsUnique, IsDedekindDomain.selmerGroup.fromUnit, IsDedekindDomain.selmerGroup.fromUnit_ker, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, cyclotomicCharacter.toZModPow, cyclotomicCharacter.toZModPow_toFun",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned field-theoretic Kummer, ring Picard, group cohomology and elliptic-curve facts do not state this compatible Galois-equivariant etale cohomology comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|Picard|[Tt]ate[Mm]odule|[Kk]ummer",
+   "sub": "AlgebraicGeometry",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned field-theoretic Kummer, ring Picard, group cohomology and elliptic-curve facts do not state this compatible Galois-equivariant etale cohomology comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from first cohomology of the sheaf of roots of unity to the Picard group identifies it with torsion line bundles on a proper smooth connected curve over an algebraically closed field",
+   "results": "8 hits: groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, CommRing.relPic, WeierstrassCurve.Affine.Point.toClass_some, instCommGroupPic, WeierstrassCurve.Affine.Point.toClass_apply, Submodule.unitsQuotEquivRelPic, ClassGroup.mulEquivUnitsSubmoduleQuotRange",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned field-theoretic Kummer, ring Picard, group cohomology and elliptic-curve facts do not state this compatible Galois-equivariant etale cohomology comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -101,5 +216,74 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-jacobian"
+ "unit": "sk-d-real-jacobian",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-curve-kummer-jacobian-tate-module",
+  "worker": "stage1",
+  "summary": "No new nodes. Retain the finite Kummer–Picard–Jacobian route, add the exact-sequence and Picard-pullback tools actually needed, explicitly compare finite etale and pro-etale Tate coefficients, write both transition squares, and use the corrected semilinear-point action of the already reviewed neighboring node. Make the implicit prime, positive index, and cohomology-site conventions explicit.",
+  "blueprint": "Proof paragraphs 1–2 are Step 2; paragraph 3 is Steps 3–4; paragraph 4 is Steps 5–7; Step 1 supplies the finite-coefficient site comparison implicit in the display. The unit is a definition sketch with no proof steps and this item is not its statement node.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-finite-tate-site-descent",
+    "why": "Canonical comparison of finite Tate coefficients on the two sites, specialized to Q_l; the unit does not state this comparison."
+   },
+   {
+    "node": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "why": "General cohomology comparison for pulled-back abelian sheaves; needed only to interpret the specified finite pro-etale twist."
+   },
+   {
+    "node": "lem-sc-kummer-exact",
+    "why": "The original Kummer–Picard–Jacobian argument uses this standard curve/Picard interface; it supplies no alternate unit route."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Its exact-sequence clause at the identity morphism gives the Kummer cohomology segment; the unit has no general exact-sequence theorem."
+   },
+   {
+    "node": "lem-sc-h1-gm-pic",
+    "why": "The original Kummer–Picard–Jacobian argument uses this standard curve/Picard interface; it supplies no alternate unit route."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "The original Kummer–Picard–Jacobian argument uses this standard curve/Picard interface; it supplies no alternate unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "Generic H0=sections identification, used to identify Kummer global units."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic canonical roots-of-unity comparison for scheme pullback, with no smooth-purity result used."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic naturality and composition of cohomology pullback, needed for equivariance."
+   },
+   {
+    "node": "lem-sc-h1-gm-pic-pullback",
+    "why": "Generic compatibility of the canonical H1(Gm)-Pic isomorphism with scheme pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-finite-tate-site-descent",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-sc-kummer-exact",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-sc-h1-gm-pic",
+  "lem-sc-global-functions",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-sc-h1-gm-pic-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-d525db786",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-d525db786 (reviewer sub-agent of L); spot-checked: Reviewed the immutable item, current and master blueprint, unit/chapter route, all cited node statements, and source locations. All seven proof steps are valid with hypotheses checked; finite pro-etale coefficient descent, base-change morphism, Kummer exactness, Picard/Jacobian identification, transitions, and corrected semilinear Galois action are sound. Edge cases P^1, genus one, n=1, and positive characteristic were checked. No new nodes, duplicates, SGA citations, circularity, or repairs are needed. Detailed review written to review.md."
+ }
 }

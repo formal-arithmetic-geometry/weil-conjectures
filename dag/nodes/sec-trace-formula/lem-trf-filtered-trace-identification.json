@@ -1,11 +1,99 @@
 {
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first on the finite filtered complexes on the small étale sites, then transport the construction through the exact finite étale/pro-étale comparison. The filtered category, its forgetful functor, graded pieces and filtration truncations are those of [def-trf-bounded-filtered-derived-category]. By [lem-trf-filtered-operations-hom], all ordinary and exceptional adjunctions, evaluation, composition, base-change and internal-Hom transformations used below have filtered lifts, and forgetting filtration recovers the ordinary transformations. The finite constructible hypotheses and the exceptional admissibility assumptions in the statement therefore put every object and operation used in the two composites in its stated domain.",
+   "uses": [
+    "def-trf-bounded-filtered-derived-category",
+    "lem-trf-filtered-operations-hom",
+    "def-trf-coefficient-conventions",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.2.1–5.2.2, pp.41–42"
+   }
+  },
+  {
+   "text": "For independent filtered objects $P,Q$, apply [lem-trf-filtered-pre-evaluation]. It supplies the filtered natural transformation $T^{\\prime\\prime F}_{P,Q}$ from filtered global derived Hom to filtered sections on the fixed scheme, with the exceptional-Hom exchange, inverse Künneth comparison, diagonal unit, fixed-square base change and signed tensor symmetry in its defining composite. Its underlying transformation after forgetting filtration is exactly the ordinary $T^{\\prime\\prime}_{P,Q}$, and the construction is natural in both variables. This is the filtered lift called $\\operatorname{Tr}^{\\prime\\prime}_{\\widetilde F}$ in the source.",
+   "uses": [
+    "lem-trf-filtered-pre-evaluation",
+    "lem-trf-filtered-operations-hom",
+    "thm-trf-verdier-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, p.42, first displayed construction; §5.2.2"
+   }
+  },
+  {
+   "text": "Specialize $P=Q=\\widetilde K$ and compose $T^{\\prime\\prime F}_{\\widetilde K,\\widetilde K}$ with the filtered evaluation $D_X^F\\widetilde K\\otimes_A^L\\widetilde K\\to\\omega_{X,A}$, with $\\omega_{X,A}$ in filtration degree zero. Compose also with the filtered lift of $\\gamma:Rd^!\\omega_{X,A}\\simeq\\omega_{F,A}$ from [thm-trf-dualizing-complex-composition], supplied by [lem-trf-filtered-operations-hom]. The result is the stated filtered map $\\widetilde\\tau'$ with target $R\\Gamma^F(F,\\omega_{F,A})$, hence with the notation $[0]_{\\mathrm{fil}}$ used in the statement. By the underlying-transformation clause of [lem-trf-filtered-pre-evaluation] and the filtered-lift compatibility of [lem-trf-filtered-operations-hom], forgetting filtration gives the ordinary pre-evaluation followed by ordinary evaluation.",
+   "uses": [
+    "lem-trf-filtered-pre-evaluation",
+    "lem-trf-filtered-operations-hom",
+    "def-trf-dualizing-complex",
+    "def-trf-bounded-filtered-derived-category",
+    "thm-trf-dualizing-complex-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, pp.42–43, factorization through Tr′′ and evaluation"
+   }
+  },
+  {
+   "text": "Put $B=K\\boxtimes_A^LD_XK$ and let $s_B:L\\Delta^*B\\simeq D_XK\\otimes_A^LK$ be diagonal restriction followed by signed symmetry. Both cited composites start with the same $\\xi$, by [thm-trf-verdier-duality] and [lem-trf-filtered-pre-evaluation]. Set $e'=\\operatorname{ev}_K\\circ s_B$. The ordinary adjunction transpose in [lem-trf-trace-map-from-external-duality] is $e_K=R\\Delta_*e'\\circ\\eta_B$. Write $\\beta_N:Rc^!R\\Delta_*N\\to Ri_*Rd^!N$ for its fixed-square exchange. Naturality at $e':L\\Delta^*B\\to\\omega_{X,A}$ gives\n$$\\beta_{\\omega_X}\\circ Rc^!R\\Delta_*e'=Ri_*Rd^!e'\\circ\\beta_{L\\Delta^*B}.$$\nConsequently\n$$\\beta_{\\omega_X}\\circ Rc^!e_K=Ri_*Rd^!e'\\circ\\beta_{L\\Delta^*B}\\circ Rc^!\\eta_B.$$\nThe right side is precisely the pre-evaluation composite followed by $Rd^!\\operatorname{ev}_K$, since $e'=\\operatorname{ev}_K\\circ s_B$. The left side is precisely the external-duality trace composite before the common final dualizing isomorphism $\\gamma$ of [thm-trf-dualizing-complex-composition]. Apply $R\\Gamma$, its common direct-image compositor, and $\\gamma$ to obtain (a)=(b). This uses the same signed symmetry once on each side, so introduces no additional sign.",
+   "uses": [
+    "lem-trf-trace-map-from-external-duality",
+    "lem-trf-filtered-pre-evaluation",
+    "thm-trf-verdier-duality",
+    "def-trf-dualizing-complex",
+    "thm-trf-dualizing-complex-composition",
+    "def-trf-trace-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, pp.42–43, the claim that Tr′′ followed by evaluation is Tr′"
+   }
+  },
+  {
+   "text": "For any $\\widetilde K\\in D^bF_{ctf}(X,A)$, the same specialization is defined before forgetting filtration, so it gives $\\widetilde\\tau':R\\operatorname{Hom}^F_X(G\\widetilde K,\\widetilde K)\\to R\\Gamma^F(F,\\omega_{F,A})$. Since the target is concentrated in filtration degree zero, its underlying filtered object is exactly $R\\Gamma(F,\\omega_{F,A})[0]_{\\mathrm{fil}}$. The global filtered-Hom formula and its forgetful comparison in [lem-trf-filtered-operations-hom] show that the underlying map is the ordinary composite of step 3. Therefore it is (a), and by step 4 it is (b) for $K=\\omega\\widetilde K$. The filtration index is placed only on the target object; no cochain shift is introduced.",
+   "uses": [
+    "lem-trf-filtered-operations-hom",
+    "lem-trf-filtered-pre-evaluation",
+    "def-trf-bounded-filtered-derived-category",
+    "lem-trf-trace-map-from-external-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, p.43, passage through H⁰(gr⁰) and §5.1.5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "def-trf-bounded-filtered-derived-category",
+  "def-trf-coefficient-conventions",
+  "def-trf-dualizing-complex",
+  "def-trf-trace-class",
+  "lem-trf-filtered-operations-hom",
+  "lem-trf-filtered-pre-evaluation",
+  "lem-trf-trace-map-from-external-duality",
+  "thm-trf-dualizing-complex-composition",
+  "thm-trf-verdier-duality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Lemma 5.3.2 proof, pp.42–43, especially the factorization Tr′ = evaluation after Tr″; §§5.2.1–5.2.2 for filtered lifts and graded comparison"
+ },
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-trace-additivity",
@@ -33,45 +121,31 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Underlying map of filtered pre-evaluation followed by evaluation equals the Verdier trace map",
-   "results": "8 hits; top declarations/files: Profinite.NobelingProof.GoodProducts.square_commutes, HomologicalComplex.forgetEval, ComplexShape.Embedding.πTruncGENatTrans, ComplexShape.Embedding.restrictionToTruncGE'NatTrans, AdicCompletion.transitionMap_comp_eval, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.ι_d, ComplexShape.Embedding.ιTruncLENatTrans, ComplexShape.Embedding.restrictionToTruncGE'NatTrans_app",
+   "query": "Compatibility of filtered pre-evaluation with the external-duality Verdier trace map",
+   "results": "8 hits; top declarations/files: Profinite.NobelingProof.GoodProducts.square_commutes, LinearMap.trace_eq_contract', LinearMap.trace_eq_contract, localCohomology.diagram, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, FGModuleCat.FGModuleCatEvaluation, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.ι_d_assoc, LightCondensed.ihomPoints_symm_comp",
    "date": "2026-10-17",
-   "verdict": "no match: hits generic evaluation/truncation identities"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.NatTrans, Iso",
-   "results": "0 hits; top declarations/files: none; loogle: unknown identifier 'Iso'",
-   "date": "2026-10-17",
-   "verdict": "unavailable/invalid: unknown identifier Iso; no usable match"
-  },
-  {
-   "tool": "grep",
-   "query": "trace-map.*external-duality|external-duality.*trace|evaluation.*trace",
-   "results": "0 hits; top declarations/files: none",
-   "date": "2026-10-17",
-   "verdict": "no match: no Verdier trace compatibility declaration"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Compatibility of the pre-evaluation construction with the external-duality Verdier trace map",
-   "results": "8 hits; top declarations/files: prevD_comp_left, CategoryTheory.prod_map_pre_app_comp_ev, CategoryTheory.MonoidalClosed.coev_app_comp_pre_app, Module.Dual.eval_apply, map_equiv_traceDual, prevD_comp_right, Module.Dual.eval, DFinsupp.comul_comp_lapply",
-   "date": "2026-10-17",
-   "verdict": "no match: hits generic monoidal evaluation and chain-map identities"
+   "verdict": "no match: generic evaluation, ordinary module traces, local cohomology, and homological identities only"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.NatTrans, CategoryTheory.Iso",
    "results": "4 hits: CategoryTheory.Functor.mapActionCongr_hom, CategoryTheory.Functor.mapActionCongr_inv, CategoryTheory.Functor.mapContActionCongr_hom, CategoryTheory.Functor.mapContActionCongr_inv",
    "date": "2026-10-17",
-   "verdict": "no match: the hits describe generic natural transformations, evaluation of homological complexes or local cohomology, not the filtered Verdier trace comparison"
+   "verdict": "no match: generic natural-transformation congruence declarations"
   },
   {
-   "tool": "leanfinder",
-   "query": "The two-variable filtered pre-evaluation morphism followed by Verdier dual evaluation recovers the ordinary Lefschetz Verdier trace transformation after forgetting the filtration",
-   "results": "8 hits: HomologicalComplex.forgetEval, localCohomology.diagramComp, HomologicalComplex.singleCompEvalIsoSelf, Profinite.NobelingProof.GoodProducts.square_commutes, CategoryTheory.Functor.comp_homologySequenceδ, LightCondensed.ihomPoints_symm_comp, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Functor.homologySequence_comp",
+   "tool": "grep",
+   "query": "trace-map.*external-duality|external-duality.*trace|evaluation.*trace (Mathlib/)",
+   "results": "0 hits",
    "date": "2026-10-17",
-   "verdict": "no match: the hits describe generic natural transformations, evaluation of homological complexes or local cohomology, not the filtered Verdier trace comparison"
+   "verdict": "no match: no Verdier trace compatibility declaration in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the pre-evaluation construction with the external-duality Verdier trace map",
+   "results": "8 hits: prevD_comp_left, CategoryTheory.prod_map_pre_app_comp_ev, CategoryTheory.MonoidalClosed.coev_app_comp_pre_app, Module.Dual.eval_apply, map_equiv_traceDual, prevD_comp_right, Module.Dual.eval, DFinsupp.comul_comp_lapply",
+   "date": "2026-10-17",
+   "verdict": "no match: generic monoidal evaluation and chain-map identities only"
   }
  ],
  "source": {
@@ -84,9 +158,33 @@
    "via": [
     "lem-trf-filtered-trace-additivity"
    ],
-   "place": "Proof paragraphs (1)–(2): localization trace additivity, the general filtered trace input; Lemma 5.3.2 construction of Tr′ and Tr″ before taking graded pieces."
+   "place": "Proof paragraphs (1)–(2): the filtered trace input and the construction of Tr′ and Tr″ before taking graded pieces."
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-trace-identification",
+  "worker": "stage1",
+  "summary": "Read the imported target, its chapter and unit, Varshavsky Lemma 5.3.2 and §§5.2.1–5.2.2. No finished Lean declaration exists. The split expands the filtered lift, specialization to filtered evaluation, identification of the underlying ordinary composite with the external-duality trace map, and the filtration-degree-zero target convention. No new nodes were needed; all non-elementary inputs are existing DAG statements.",
+  "blueprint": "The five steps realize the imported ancestor proof paragraphs (1)–(2): filtered trace input, construction of Tr′ and Tr″, evaluation, and passage to the underlying map.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-filtered-operations-hom",
+    "why": "Generic finite filtered six-operation, transformation and global-Hom lifts, including the exact finite étale/pro-étale transport; sk-i-curve-zero has no replacement framework statement. This supplies tools for the Varshavsky filtered trace argument, without replacing the contracting-correspondence route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-filtered-operations-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-ff7006858",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-ff7006858 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired B4 TeX escaping, C8 undeclared filtered-framework tool use, and C1 missing dualizing-composition citation. Expanded the naturality identity identifying the trace composites. Review and corrected whole-node JSON are written; no new nodes, weakened statements, or dependency cycles.; 1 file(s) fixed by the reviewer"
  }
 }
