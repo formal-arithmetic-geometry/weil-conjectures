@@ -7,11 +7,127 @@
   "lem-coef-ind-kappa-presentability",
   "lem-coef-ind-right-adjoint-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-relative-cone-presheaf-fibers] to the small $p:E\\to A$. For any base presheaf $X$, let $Y_X\\to A$ be its small right fibration. A point of the fiber of $j^*$ is exactly a presheaf $\\Psi:E^{\\mathrm{op}}\\to\\mathcal S$ together with $\\Psi\\to p^*X$. It corresponds, naturally in $X$, to $\\widetilde\\Psi:(E\\times_A Y_X)^{\\mathrm{op}}\\to\\mathcal S$, with $\\widetilde\\Psi(e,x)=\\operatorname{fib}_x(\\Psi(e)\\to X(pe))$. All total categories here are small before taking presheaves: $A$, $E$ and $Y_X$ are small, so is their pullback. No colimit indexed by a large category is used.",
+   "uses": [
+    "lem-coef-relative-cone-presheaf-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN Proposition 9.6 and the fiber calculation in Proposition 9.12."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-relative-functor-cocartesian-classifier] with $B=A^{\\mathrm{op}}$, $Z=E^{\\mathrm{op}}$ and $C=\\mathcal S$. The opposite of $p$ is Cartesian, by the opposite convention of [def-coef-infinity-fibrations]. This gives $V\\to A^{\\mathrm{op}}$ with fiber $\\mathcal P(E_a)$ and transport $u^*$ given by presheaf precomposition with $u=\\alpha_!:E_a\\to E_b$. For $T=Y_X^{\\mathrm{op}}$ its equivalence identifies the presheaf $\\widetilde\\Psi$ of step 1 with a functor $s_X:Y_X^{\\mathrm{op}}\\to V$ over $A^{\\mathrm{op}}$. Its value at $(a,x)$ is the presheaf $e\\mapsto\\Psi(e)_x$. The opposite of a right fibration is a left fibration; every edge of it is cocartesian, since the left-fibration horn fillers include every outer horn used to test any specified edge for cocartesianness. This uses exactly the horn definitions of [def-coef-infinity-fibrations].",
+   "uses": [
+    "lem-coef-relative-functor-cocartesian-classifier",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN Corollary 9.9(2), using the dual of Proposition 7.3."
+   }
+  },
+  {
+   "text": "For a cocartesian edge $e\\to\\alpha_!e$ and a point $x\\in X(b)$, the corresponding map on fibers is\n$$\\Psi(\\alpha_!e)_x\\longrightarrow\\Psi(e)_{X(\\alpha)(x)}.$$\nThe square in (i) is a pullback precisely when all these maps are equivalences: apply the slice equivalence of [lem-coef-relative-cone-presheaf-fibers] with $E=A=*$ to the comparison $\\Psi(\\alpha_!e)\\to X(b)\\times_{X(a)}\\Psi(e)$. In this special case it identifies a space over $X(b)$ with its family of homotopy fibers, and detects equivalences pointwise. The edge criterion of [lem-coef-relative-functor-cocartesian-classifier] now says exactly that (i) holds if and only if $s_X$ preserves cocartesian edges. This argument retains the point $x$, its paths, and all higher simplices; there is no passage merely to components.",
+   "uses": [
+    "lem-coef-relative-cone-presheaf-fibers",
+    "lem-coef-relative-functor-cocartesian-classifier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN proof of Proposition 9.12, last two paragraphs."
+   }
+  },
+  {
+   "text": "Fix $a$ and let $B=X(a)$. The slice equivalence in [lem-coef-relative-cone-presheaf-fibers], again with $E=A=*$, identifies $\\mathcal S_{/B}$ with $\\operatorname{Fun}(B,\\mathcal S)$ by taking fibers. By [lem-coef-infinity-yoneda-presheaf-limits], limits in this functor category are pointwise. Consequently $e\\mapsto(\\Psi(e)\\to B)$ sends a fiber colimit cocone $q$ to a limit in the slice precisely when, for every $x\\in B$, the presheaf $e\\mapsto\\Psi(e)_x$ sends that cocone to a limit of spaces. The slice limit is the augmented limit in (ii): for a test $T\\to B$, a map to its candidate apex over $B$ is a coherent family of maps $T\\to\\Psi(q(k))$ compatible over that fixed map to $B$; the universal property of $\\lim D_q$ gives exactly these families. This verifies the assertion also for $K=\\varnothing$, where $\\lim D_q=B$ and its fiber is a terminal space. By [lem-coef-infinity-presheaf-ind-criterion] applied to the small category $E_a$ with its $\\lambda$-small colimits, (ii) is therefore equivalent to $s_X(a,x)\\in\\operatorname{Ind}_\\lambda(E_a)$ for every $(a,x)$.",
+   "uses": [
+    "lem-coef-relative-cone-presheaf-fibers",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-presheaf-ind-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN proof of Proposition 9.16 and Example 9.14; HTT Corollary 5.3.5.4."
+   }
+  },
+  {
+   "text": "Precomposition with $u:E_a\\to E_b$ preserves the full subcategories of presheaves taking $\\lambda$-small colimits to limits, since $u$ preserves those colimits. Thus these form a full cocartesian subfibration $V_{\\mathrm{Ind}}\\subset V$. Its transport is the right-adjoint Ind transport in $H$. To check this, use [lem-coef-ind-kappa-presentability] to write $M\\in\\operatorname{Ind}_\\lambda(E_a)$ as a small $\\lambda$-filtered colimit of $y_a(c_i)$. For $N\\in\\operatorname{Ind}_\\lambda(E_b)$, Yoneda evaluation [lem-coef-infinity-pointwise-yoneda-evaluation] gives\n$$\\operatorname{Map}(L_uM,N)\\simeq\\lim_i N(u(c_i))\\simeq\\operatorname{Map}(M,u^*N).$$\nHere $L_u$ preserves that filtered colimit and sends $y_a(c)$ to $y_b(u(c))$ by its defining extension property in [lem-coef-ind-right-adjoint-coherent]; the colimit-to-mapping-space equalities are [lem-coef-infinity-yoneda-presheaf-limits]. The presheaf criterion in step 4 ensures $u^*N$ is in Ind, so this adjunction is between the required full categories. These are natural equivalences in $M,N,u$ and in their coherent parameters. The coherent precomposition diagram therefore identifies with the coherent right-adjoint diagram $H$ of [lem-coef-ind-right-adjoint-coherent], by uniqueness of the adjoint with its mapping-space pairing. The full subfibration assertion requires no extra existence theorem: retain just the indicated vertices of $V$; inner-horn fillers stay in this full subcategory and the cocartesian lifts stay in it by the preservation just proved.",
+   "uses": [
+    "lem-coef-infinity-presheaf-ind-criterion",
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-ind-right-adjoint-coherent",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN Example 9.14 and Corollary 9.17; comparison with the explicit right adjoints used in the item."
+   }
+  },
+  {
+   "text": "Combining steps 1-5 gives, for each $X$, an equivalence from the full fiber cut out by (i),(ii) to\n$$\\operatorname{Fun}^{\\mathrm{cocart}}_{A^{\\mathrm{op}}}(Y_X^{\\mathrm{op}},V_{\\mathrm{Ind}}).$$\nThe conditions cut out full subcategories on both sides: (i) is exactly preservation of the distinguished edges by step 3, and (ii) exactly the vertex condition by step 4. For $h:X'\\to X$, step 1 identifies pullback transport with restriction along $Y_{X'}\\to Y_X$; step 2 is natural for this restriction by [lem-coef-relative-functor-cocartesian-classifier]. It preserves the two conditions because fiber values are unchanged at the corresponding point, and all edges of the opposite right fibrations are cocartesian. This proves naturality of the restricted fiber equivalences, including transformations and higher simplices.",
+   "uses": [
+    "lem-coef-relative-cone-presheaf-fibers",
+    "lem-coef-relative-functor-cocartesian-classifier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN proof of Proposition 9.16, full-subcategory identification and naturality."
+   }
+  },
+  {
+   "text": "Restriction $j^*:\\mathcal P(D)\\to\\mathcal P(A)$ is Cartesian by [lem-coef-relative-cone-presheaf-fibers]. Step 6 proves that its Cartesian transports retain the full subcategory satisfying (i),(ii). Its restriction is therefore a Cartesian fibration: an inner-horn filler in the ambient total category has the same vertices as its horn and hence lies in this full subcategory, while the ambient Cartesian lift into any retained target has retained source. It remains Cartesian since its mapping-space pullback test is the same test restricted to retained objects. These are exactly the horn and lift requirements of [def-coef-infinity-fibrations]. Thus we have verified fibration existence as well as equivalence of its fibers.",
+   "uses": [
+    "lem-coef-relative-cone-presheaf-fibers",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN Propositions 9.12 and 9.16, restriction of the ambient Cartesian fibration."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cartesian-maps-presheaf-extension] to $G=H$ and its cocartesian unstraightening $V_{\\mathrm{Ind}}\\to A^{\\mathrm{op}}$ from step 5. Its source $A$ and right fibrations $Y_X$ are small in the original universe, while its target categories fit in the containing universe; these are exactly the permitted size hypotheses of that node. The functor of the fibers in step 6 is the unique extension $\\widehat H$ sending small colimits of presheaves to limits. Steps 6-7 identify the actual Cartesian restriction with its unstraightening, not just its objectwise fibers: they give the equivalences and the pullback transports naturally with all coherences. The uniqueness and coherent classification of [lem-coef-cocartesian-straightening], applied with opposites and in the containing universe, therefore identify its classifying functor with $\\widehat H$. This is the claimed realization.",
+   "uses": [
+    "lem-coef-cartesian-maps-presheaf-extension",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "GHN Lemma 9.10(4), Proposition 9.16 and Corollary 9.17."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-relative-cone-presheaf-fibers",
+  "lem-coef-relative-functor-cocartesian-classifier",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-ind-right-adjoint-coherent",
+  "lem-coef-cartesian-maps-presheaf-extension",
+  "lem-coef-cocartesian-straightening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Expanded GHN Propositions 9.12 and 9.16 and Corollary 9.17; read online, archival copies unavailable in literature/. The natural-language steps and the intrinsic cone formulation are written by this worker."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-presheaf-fibration-accessibility",
@@ -22,7 +138,7 @@
  "unit": "sk-prop-sf-biduality-general",
  "id": "lem-coef-ghn-ind-presheaf-cartesian-realization",
  "title": "Relative-cone presheaf realization of the Ind Cartesian fibration",
- "statement": "Use small infinity categories and coherent functors from [def-cbc-enhanced-diagrams-cones], the filtered Ind construction from [def-coef-presentable-infinity-category] and [lem-coef-ind-kappa-presentability], the coherent right-adjoint Ind diagram from [lem-coef-ind-right-adjoint-coherent], and Cartesian and cocartesian fibrations from [def-coef-infinity-fibrations]. For a small simplicial set $D$, put $\\mathcal P(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$, where $\\mathcal S$ is the infinity category of small spaces. Let $A$ be a small infinity category, write $y:A\\to\\mathcal P(A)$ for the Yoneda functor $a\\mapsto\\operatorname{Map}_A(-,a)$, let $F_0:A\\to\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ be a coherent functor for an infinite regular cardinal $\\lambda$ in the smaller universe, and let $p:E\\to A$ be its associated cocartesian fibration. Define the relative left cone\n$$E_A^{\\triangleleft}:=A\\amalg_{E\\times\\{0\\}}(E\\times\\Delta^1),$$\nwhere $E\\times\\{0\\}\\to A$ is $p$ and $E\\times\\{0\\}\\hookrightarrow E\\times\\Delta^1$ is the inclusion at $0$; write $j:A\\hookrightarrow E_A^{\\triangleleft}$ for the other inclusion, and write $-\\infty_a$ for the image in $E_A^{\\triangleleft}$ of $a\\in A$. Let $H:A^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ be the coherent functor supplied by [lem-coef-ind-right-adjoint-coherent]: $H(a)=\\operatorname{Ind}_\\lambda(F_0(a))$, and for $f:a\\to a'$ the morphism $H(f^{\\mathrm{op}}):H(a')\\to H(a)$ is the right adjoint of the $\\lambda$-filtered-colimit-preserving extension of $F_0(f)$. Let $\\mathcal P^{\\mathrm{cocart}}_\\lambda(E_A^{\\triangleleft})$ be the full subcategory of $\\mathcal P(E_A^{\\triangleleft})$ spanned by presheaves $\\phi:(E_A^{\\triangleleft})^{\\mathrm{op}}\\to\\mathcal S$ satisfying both conditions below. (i) For every cocartesian edge $\\bar\\alpha:e\\to\\alpha_!e$ of $p$ over $\\alpha:a\\to b$ in $A$, the square\n$$\\begin{CD}\n\\phi(\\alpha_!e) @>>> \\phi(e)\\\\\n@VVV @VVV\\\\\n\\phi(-\\infty_b) @>>> \\phi(-\\infty_a)\n\\end{CD}$$\ninduced by $\\bar\\alpha$ and the cone arrows is a pullback square of spaces. (ii) For every $\\lambda$-small colimit diagram $\\bar q:K^{\\triangleright}\\to E_a$ in a fiber, with colimit vertex $q(\\infty)$, the composite\n$$(K^{\\triangleleft\\triangleright})^{\\mathrm{op}}\\to(E_a^{\\triangleleft})^{\\mathrm{op}}\\to(E_A^{\\triangleleft})^{\\mathrm{op}}\\xrightarrow{\\phi}\\mathcal S,$$\nwhere the initial cone point maps to $-\\infty_a$, the $K$-part maps by $q$, and the terminal cone point maps to $q(\\infty)$, is a limit diagram. Then restriction along $j$ is a Cartesian fibration\n$$j^*:\\mathcal P^{\\mathrm{cocart}}_\\lambda(E_A^{\\triangleleft})\\to\\mathcal P(A),$$\nwhose classifying functor is the unique limit-preserving extension $\\widehat H:\\mathcal P(A)^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ of the explicitly defined $H$ along $y^{\\mathrm{op}}$. The statement includes the coherent higher simplices and is relative to the fixed universe; $E$ and the presheaf categories may lie in a containing universe.",
+ "statement": "Use small infinity categories and coherent functors from [def-cbc-enhanced-diagrams-cones], the filtered Ind construction from [def-coef-presentable-infinity-category] and [lem-coef-ind-kappa-presentability], the coherent right-adjoint Ind diagram from [lem-coef-ind-right-adjoint-coherent], and Cartesian and cocartesian fibrations from [def-coef-infinity-fibrations]. For a small simplicial set $D$, put $\\mathcal P(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$, where $\\mathcal S$ is the infinity category of small spaces. Let $A$ be a small infinity category, write $y:A\\to\\mathcal P(A)$ for the Yoneda functor $a\\mapsto\\operatorname{Map}_A(-,a)$, let $F_0:A\\to\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ be a coherent functor for an infinite regular cardinal $\\lambda$ in the smaller universe, and let $p:E\\to A$ be its associated cocartesian fibration. Define the relative left cone\n$$E_A^{\\triangleleft}:=A\\amalg_{E\\times\\{0\\}}(E\\times\\Delta^1),$$\nwhere $E\\times\\{0\\}\\to A$ is $p$ and $E\\times\\{0\\}\\hookrightarrow E\\times\\Delta^1$ is the inclusion at $0$; write $j:A\\hookrightarrow E_A^{\\triangleleft}$ for the other inclusion, and write $-\\infty_a$ for the image in $E_A^{\\triangleleft}$ of $a\\in A$. Let $H:A^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ be the coherent functor supplied by [lem-coef-ind-right-adjoint-coherent]: $H(a)=\\operatorname{Ind}_\\lambda(F_0(a))$, and for $f:a\\to a'$ the morphism $H(f^{\\mathrm{op}}):H(a')\\to H(a)$ is the right adjoint of the $\\lambda$-filtered-colimit-preserving extension of $F_0(f)$. Let $\\mathcal P^{\\mathrm{cocart}}_\\lambda(E_A^{\\triangleleft})$ be the full subcategory of $\\mathcal P(E_A^{\\triangleleft})$ spanned by presheaves $\\phi:(E_A^{\\triangleleft})^{\\mathrm{op}}\\to\\mathcal S$ satisfying both conditions below. (i) For every cocartesian edge $\\bar\\alpha:e\\to\\alpha_!e$ of $p$ over $\\alpha:a\\to b$ in $A$, the square\n$$\\begin{CD}\n\\phi(\\alpha_!e) @>>> \\phi(e)\\\\\n@VVV @VVV\\\\\n\\phi(-\\infty_b) @>>> \\phi(-\\infty_a)\n\\end{CD}$$\ninduced by $\\bar\\alpha$ and the cone arrows is a pullback square of spaces. (ii) Put $X=j^*\\phi$ and $\\Psi=\\phi|_{E\\times\\{1\\}}$, with the coherent transformation $\\Psi\\to p^*X$ given by the relative-cylinder data. For every $\\lambda$-small colimit cocone $\\bar q:K^{\\triangleright}\\to E_a$, with colimit vertex $c=q(\\infty)$, form the diagram $D_q:(K^{\\triangleleft})^{\\mathrm{op}}\\to\\mathcal S$ with value $X(a)$ at the added cone point and value $\\Psi(q(k))$ at $k$, with all arrows $\\Psi(q(k))\\to X(a)$ induced by that transformation. Require the canonical cone with apex $\\Psi(c)$ to be limiting, that is,\n$$\\Psi(c)\\xrightarrow{\\sim}\\lim_{(K^{\\triangleleft})^{\\mathrm{op}}}D_q.$$\nThis is the coherent double-cone limit condition: equivalently the restriction $E_a^{\\mathrm{op}}\\to\\mathcal S_{/X(a)}$ sends the specified colimit cocone to a limit cone in the slice. For the empty $K$ it says $\\Psi(c)\\to X(a)$ is an equivalence. This intrinsic formulation uses the coherent cone data of the relative-cylinder pushout and does not require a literal inclusion of the ordinary join $E_a^{\\triangleleft}$ into that simplicial pushout. Then restriction along $j$ is a Cartesian fibration\n$$j^*:\\mathcal P^{\\mathrm{cocart}}_\\lambda(E_A^{\\triangleleft})\\to\\mathcal P(A),$$\nwhose classifying functor is the unique limit-preserving extension $\\widehat H:\\mathcal P(A)^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ of the explicitly defined $H$ along $y^{\\mathrm{op}}$. The statement includes the coherent higher simplices and is relative to the fixed universe; $E$ and the presheaf categories may lie in a containing universe.",
  "source": {
   "document": "https://arxiv.org/html/1501.02161v3",
   "place": "Definition 9.1 (relative cone), Proposition 9.12 (cocartesian-edge pullback squares), Proposition 9.16 (fiberwise relative-limit condition), and Corollary 9.17 (Ind Cartesian-fibration classification). Read online 2026-10-17; no Stacks tag states this infinity-categorical result."
@@ -76,6 +192,13 @@
    "results": "{\"t\": \"2026-10-17T03:34:58Z\", \"tool\": \"leanfinder\", \"query\": \"Presheaf model for Grothendieck construction of infinity categories satisfying relative finite limit and cocartesian descent conditions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\"], \"digest\": \"8d1987969c96ff22\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent reader inspected the returned types; they concern ordinary module or representation adjunctions and ordinary categorical stacks, not the coherent infinity-categorical Ind or relative-cone statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presheaves on a relative left cone satisfying cocartesian pullback squares and fiberwise colimit to limit conditions realize the Cartesian fibration of Ind completions",
+   "results": "{\"t\": \"2026-10-17T04:10:17Z\", \"tool\": \"leanfinder\", \"query\": \"Presheaves on a relative left cone satisfying cocartesian pullback squares and fiberwise colimit to limit conditions realize the Cartesian fibration of Ind completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.IndObjectPresentation.instFinalICostructuredArrowFunctorOppositeTypeYonedaToCostructuredArrow\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Limits.fiberwiseColimit_obj\", \"CategoryTheory.Limits.isIndObject_limit_comp_yoneda_comp_colim\"], \"digest\": \"a69585371ec45792\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned ordinary CategoryTheory Grothendieck fiberwise-colimit and IndObjectPresentation types; none states the quasicategorical relative-cone Ind classification. The inherited searches were read and retained."
   }
  ],
  "blueprint": {
@@ -96,5 +219,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ghn-ind-presheaf-cartesian-realization",
+  "worker": "stage1",
+  "summary": "Expanded the relative-cone fiber description, relative exponential, cocartesian-edge test, fiberwise Ind recognition, natural right-adjoint identification, Cartesian restriction and limit-extension classification. Three general structural lemmas are statement-only; reused the existing Ind recognition and coherent Ind transport. Clarified the ambiguous ordinary-join map into a raw fat cone by the intrinsic augmented limit formula, without changing the presheaf subcategory. No Lean attachment or Mathlib match.",
+  "blueprint": "Proof paragraph 2, the presentable Cartesian-fibration construction before the finite-coefficient mapping-complex adjunction: GHN Proposition 9.12/9.16 and Corollary 9.17 identify the relative-cone presheaf subcategory with the Ind extension. The eight steps supply the GHN relative-cone support of this existing ancestor chain; no unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-e18fa7bbb",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-e18fa7bbb (reviewer sub-agent of L); spot-checked: Read in full: the item (delivered and base versions), the three new nodes, every cited node statement, the parent lem-coef-ind-presheaf-fibration-accessibility, and GHN arXiv:1501.02161v3 (fetched as a PDF into /tmp) at Def 7.2/Prop 7.3, Def 9.1-Cor 9.17 with the proofs of 9.10, 9.12 and 9.16. Steps 1-8 match GHN Prop 9.6/Cor 9.9(ii) (with HTT 3.2.2.13 for the edge criterion) and the proofs of 9.12 and 9.16, plus 9.14 for the Ind criterion and 9.10 for the extension. The rewrite of condition (ii) changes the statement but does not weaken it, and the report names the change. The old composite needed a strict map from the ordinary join into the fat cone, which does not exist: checked on A=pt, E=Δ^1, as GHN Warning 9.2 also says. The new augmented-limit form is GHN's own condition in the proof of 9.16 (K^◁→C/x versus K^{◁▷}→C). Variance is checked, the parent's step 4 reads (ii) the same way, and it is not a target. The new nodes are true and general, not restated clauses of the item. Tests: E empty, A=E=pt and p=id for the fiber lemma; covariance of (-)∘f^* for the classifier; y(a) and constant G for the extension. The item was tested with A empty, A=pt (fiber Fun(X, Ind C)), K empty and X empty. Two points are noted but not changed. (1) Step 5 identifies the coherent precomposition diagram with H 'by uniqueness of the adjoint', which is imprecise at the coherent level; GHN 9.16→9.17 make the same identification, and lem-coef-ind-right-adjoint-coherent builds exactly this functor in its proof. (2) The report missed that lem-coef-relative-functor-cocartesian-classifier overlaps the existing lem-cbc-enhanced-relative-exponential (unit sk-prop-sf-cbc), which already gives the construction and the edge criterion. The new node adds the GHN 7.3 classification that steps 2, 5 and 8 need, so it is a generalization and is kept. No fixes, no tool_uses, no SGA."
  }
 }

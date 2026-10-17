@@ -1,0 +1,123 @@
+{
+ "id": "lem-coef-scat-arrow-cell-word-filtration",
+ "kind": "statement",
+ "title": "Word filtration for a free simplicial-category arrow attachment",
+ "statement": "Use small simplicial categories, simplicial sets and the two-object simplicial category $U(K)$ of [lem-coef-simplicial-interval-lifting]. Let $K\\hookrightarrow L$ be a degreewise injective map of small simplicial sets, let $C$ be a small simplicial category, and let $h:U(K)\\to C$ be an enriched functor selecting objects $x,y$ (possibly equal) and a simplicial map $K\\to C(x,y)$. Form $C^+=C\\amalg_{U(K)}U(L)$ in the category of simplicial categories with arbitrary object functions.\n\nThe objects of $C^+$ are the objects of $C$. For $w,z\\in C$, put $M_0=C(w,z)$ and, for $k\\geq1$, put\n$$H_k=C(y,z)\\times C(y,x)^{k-1}\\times C(w,x),\\qquad M_k=H_k\\times L^k.$$\nThe factors are ordered as alternating words $(a_0,t_1,a_1,\\ldots,t_k,a_k)$ from $w$ to $z$, with $a_0:y\\to z$, $a_k:w\\to x$, and the intermediate $a_i:y\\to x$. There is a natural isomorphism from $C^+(w,z)$ to the quotient of $\\coprod_{k\\geq0}M_k$ by the relations replacing any $t_j\\in K$ by $h(t_j)$ and composing the two adjacent $C$-arrows with it; composition concatenates words and composes the two adjacent old arrows.\n\nLet $P_k$ be the image of words of length at most $k$ in this quotient. Then $P_0=C(w,z)$, each $P_{k-1}\\to P_k$ is a monomorphism, and $C^+(w,z)=\\operatorname{colim}_{k\\geq0}P_k$. For $k\\geq1$, let $Q_k\\subseteq L^k$ be the simplicial subset consisting degreewise of tuples having at least one coordinate in $K$, and put $N_k=H_k\\times Q_k\\subseteq M_k$. The square with top map $N_k\\hookrightarrow M_k$, left map $N_k\\to P_{k-1}$ given by the stated reduction relations, and bottom map $P_{k-1}\\to P_k$ is a pushout of simplicial sets. These presentations and squares are natural under every simplicial functor $F:C\\to D$, using the attaching map $Fh$ on $D$, even when $F$ identifies objects. In particular $C\\to C^+$ is identity on objects and a monomorphism on every mapping simplicial set. Pushouts and colimits have the universal-property meaning of [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition A.3.2.4, proof, printed pp.859-860 (PDF pp.876-877): explicit words, reduction relations, and the filtration by their length. No Stacks tag states this enriched-category construction. Read online; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory, CategoryTheory.Limits.pushout",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:24:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory, CategoryTheory.Limits.pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialCategory/Basic.lean:47-61 (enrichment and mapping sets), SimplicialNerve.lean:125-159 (subset-poset thickening), CechNerve.lean:194-212 (wide-pushout conerve), and MorphismProperty/Ind.lean:175-183 (an assumed spreading property). None constructs mapping spaces of a free enriched-arrow pushout or their word filtration. Second semantic phrasing likewise returns conerves and monomorphism stability, not this construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping simplicial sets after freely adjoining an enriched arrow have a word length filtration with pushout stages indexed by the number of new arrows",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:24:54Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping simplicial sets after freely adjoining an enriched arrow have a word length filtration with pushout stages indexed by the number of new arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"CategoryTheory.Arrow.cechConerve_map\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.SimplicialThickening.functorMap\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Arrow.cechConerve\", \"CategoryTheory.Arrow.mapCechConerve_app\"], \"digest\": \"af8633e08589c43d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialCategory/Basic.lean:47-61 (enrichment and mapping sets), SimplicialNerve.lean:125-159 (subset-poset thickening), CechNerve.lean:194-212 (wide-pushout conerve), and MorphismProperty/Ind.lean:175-183 (an assumed spreading property). None constructs mapping spaces of a free enriched-arrow pushout or their word filtration. Second semantic phrasing likewise returns conerves and monomorphism stability, not this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer.?Kan|word.?length|enriched.*pushout",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-17T04:25:09Z\", \"tool\": \"grep\", \"query\": \"Bergner|Dwyer.?Kan|word.?length|enriched.*pushout\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialCategory/Basic.lean:47-61 (enrichment and mapping sets), SimplicialNerve.lean:125-159 (subset-poset thickening), CechNerve.lean:194-212 (wide-pushout conerve), and MorphismProperty/Ind.lean:175-183 (an assumed spreading property). None constructs mapping spaces of a free enriched-arrow pushout or their word filtration. Second semantic phrasing likewise returns conerves and monomorphism stability, not this construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces in a pushout of enriched categories adjoining morphisms are filtered by words in the new morphisms",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:25:10Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces in a pushout of enriched categories adjoining morphisms are filtered by words in the new morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.exists_isPushout_of_isFiltered\", \"CategoryTheory.Under.mapPushoutAdj\", \"CategoryTheory.Under.pushout\", \"CategoryTheory.MorphismProperty.pushouts\", \"CategoryTheory.Limits.Types.Pushout.cocone\", \"CategoryTheory.Under.pushout_map\", \"AddMonCat.FilteredColimits.M.map_mk\", \"CategoryTheory.Limits.pushoutComparison\"], \"digest\": \"297ffd3d5626c910\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialCategory/Basic.lean:47-61 (enrichment and mapping sets), SimplicialNerve.lean:125-159 (subset-poset thickening), CechNerve.lean:194-212 (wide-pushout conerve), and MorphismProperty/Ind.lean:175-183 (an assumed spreading property). None constructs mapping spaces of a free enriched-arrow pushout or their word filtration. Second semantic phrasing likewise returns conerves and monomorphism stability, not this construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free enriched category pushout by a monomorphism of simplicial sets has mapping objects built by successive pushouts of products with cubical boundaries",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:25:13Z\", \"tool\": \"leanfinder\", \"query\": \"The free enriched category pushout by a monomorphism of simplicial sets has mapping objects built by successive pushouts of products with cubical boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechConerve_map\", \"CategoryTheory.Arrow.cechConerve_obj\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"CategoryTheory.Arrow.cechConerve\", \"CategoryTheory.Arrow.mapCechConerve_app\", \"CategoryTheory.CosimplicialObject.cechConerve\", \"CategoryTheory.CosimplicialObject.cechConerve_obj\", \"SSet.horn₂₂.isPushout\"], \"digest\": \"755d2d6aaa6211e6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialCategory/Basic.lean:47-61 (enrichment and mapping sets), SimplicialNerve.lean:125-159 (subset-poset thickening), CechNerve.lean:194-212 (wide-pushout conerve), and MorphismProperty/Ind.lean:175-183 (an assumed spreading property). None constructs mapping spaces of a free enriched-arrow pushout or their word filtration. Second semantic phrasing likewise returns conerves and monomorphism stability, not this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer.?Kan|word.?length|enriched.*pushout",
+   "sub": "AlgebraicTopology",
+   "results": "{\"t\": \"2026-10-17T04:26:56Z\", \"tool\": \"grep\", \"query\": \"Bergner|Dwyer.?Kan|word.?length|enriched.*pushout\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialCategory/Basic.lean:47-61 (enrichment and mapping sets), SimplicialNerve.lean:125-159 (subset-poset thickening), CechNerve.lean:194-212 (wide-pushout conerve), and MorphismProperty/Ind.lean:175-183 (an assumed spreading property). None constructs mapping spaces of a free enriched-arrow pushout or their word filtration. Second semantic phrasing likewise returns conerves and monomorphism stability, not this construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The hom object of a pushout of enriched categories along a free functor is obtained by the tensor algebra filtration and pushout powers of the attaching map",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:47:53Z\", \"tool\": \"leanfinder\", \"query\": \"The hom object of a pushout of enriched categories along a free functor is obtained by the tensor algebra filtration and pushout powers of the attaching map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.enrichedHomπ\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom_obj\", \"CategoryTheory.eHomEquiv\", \"CategoryTheory.Enriched.FunctorCategory.instHasEnrichedHomUnderCompMapForget\"], \"digest\": \"568db0150af8f9b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read Enriched/FunctorCategory.lean:48-71 and Enriched/Ordinary/Basic.lean:38-67; these give enriched ends and ordinary hom equivalences, not free-arrow pushout filtrations."
+  },
+  {
+   "tool": "grep",
+   "query": "Free.*(pushout|filtration)|tensor.*algebra.*filtration|enriched.*colimit",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-17T04:48:12Z\", \"tool\": \"grep\", \"query\": \"Free.*(pushout|filtration)|tensor.*algebra.*filtration|enriched.*colimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a category enriched in simplicial sets adjoining an arrow along a subcomplex gives hom simplicial sets filtered by the number of occurrences of that arrow",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:48:58Z\", \"tool\": \"leansearch\", \"query\": \"In a category enriched in simplicial sets adjoining an arrow along a subcomplex gives hom simplicial sets filtered by the number of occurrences of that arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory\", \"SSet.RelativeMorphism.mk\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.Subcomplex.toSSetFunctor\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\"], \"digest\": \"65f5a68eb9c7bab7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialCategory/Basic.lean:47-75 and SimplicialSet/RelativeMorphism.lean:38-52; these give enrichment, mapping simplicial sets and maps of pairs, not the claimed free-arrow pushout filtration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-scat-bergner-left-proper-pushouts",
+  "date": "2026-10-17",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, mapping-complex adjunction; descendant mapping-simplex input HTT Lemma 3.2.2.9: left properness in its final product pushout. HTT A.3.2.4, proof pp.859-860: the word presentation and its mapping-set filtration for adjoining one enriched arrow.",
+   "via": [
+    "lem-coef-scat-bergner-left-proper-pushouts",
+    "lem-coef-mapping-simplex-final-edge",
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-monoidal-straightening",
+    "lem-coef-algebroid-external-product",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

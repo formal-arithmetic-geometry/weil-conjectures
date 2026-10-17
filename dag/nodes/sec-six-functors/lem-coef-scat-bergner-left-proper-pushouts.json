@@ -10,9 +10,135 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $I$ be the boundary-arrow and new-object generators in [lem-coef-simplicial-interval-lifting]. An $I$-injective functor is exactly a functor surjective on objects and a trivial Kan fibration on each mapping set: lifting against the new-object generator gives surjectivity, and lifting against $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ is precisely boundary lifting on a specified mapping set. These are exactly the Bergner trivial fibrations of [lem-coef-coherent-nerve-comparison]. In one direction, local trivial fibrations are local weak equivalences and induce bijections on mapping components. Surjectivity on objects then gives essential surjectivity and lifts an isomorphism in $\\pi_0$ by choosing an object over its target and its unique preimage class; full faithfulness makes that class invertible. Conversely, a Bergner trivial fibration is locally a trivial Kan fibration, and essential surjectivity followed by equivalence lifting makes its object function surjective. Thus Bergner cofibrations equal $I$-cofibrations. The cited small-object factorization writes the given $i:A\\to D$ as $A\\xrightarrow{j}E\\xrightarrow{p}D$ with $j$ an $I$-cell map and $p$ $I$-injective. Lifting $i$ against $p$ gives a section $s:D\\to E$ under $A$ with $ps=1_D$, so $i$ is a retract of $j$ under $A$.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "p.858, generators preceding A.3.2.4; generator lifting and the elementary retract argument"
+   }
+  },
+  {
+   "text": "It suffices first to treat $j$. Well-order the cells in every coproduct attachment and adjoin them successively. The resulting colimit equals the simultaneous attachment: functors out of either are exactly a functor out of the old category and a compatible extension for each cell. This also holds for every subsequent attachment by the same universal property [def-weil-pbc-category-colimit]. We can therefore use a small ordinal sequence $C_0=A$, $C_\\theta=E$, continuous at limits, with one generator pushed out at each successor. Set $B_\\alpha=B\\amalg_A C_\\alpha$ and let $u_\\alpha:C_\\alpha\\to B_\\alpha$ be the canonical functor, so $u_0=u$. The same colimit universal property identifies $B_{\\alpha+1}$ with the pushout attaching that same generator to $B_\\alpha$, and makes the $B$ sequence continuous. We prove by transfinite induction that $u_\\alpha$ is a Dwyer--Kan equivalence. Each successor transition in either sequence is injective on objects and on every old mapping set: for a new object this is its isolated-object description; for an arrow cell this follows from [lem-coef-scat-arrow-cell-word-filtration].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-scat-arrow-cell-word-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "pp.858-860, reduction to generating attachments, extended to relative cell maps by their colimit universal properties"
+   }
+  },
+  {
+   "text": "For the generator $\\varnothing\\to\\{0\\}$, the successor categories are $C_\\alpha\\amalg\\{*\\}$ and $B_\\alpha\\amalg\\{*\\}$, with $*$ a fresh isolated object. The new endomorphism set is $\\Delta^0$ and all mixed mapping sets are empty. The new comparison is $u_\\alpha$ on old mapping sets and the identity on the other ones. It is locally a weak equivalence. Essential surjectivity on old objects is the inductive hypothesis; the new object is its own image. Hence $u_{\\alpha+1}$ is a Dwyer--Kan equivalence, using exactly the criterion in [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "p.859, first case: adjoining a new isolated object"
+   }
+  },
+  {
+   "text": "Now attach $U(K)\\to U(L)$, with $K=\\partial\\Delta^n$, $L=\\Delta^n$. Fix $w,z$ in $C_\\alpha$. Apply [lem-coef-scat-arrow-cell-word-filtration] to $C_\\alpha$ and $B_\\alpha$, with the target coordinates the images of $w,z,x,y$. It gives natural filtrations $P_k,P'_k$ and pushout squares $N_k\\to M_k$, $N'_k\\to M'_k$. In its notation the maps of upper rows are $H_k\\times Q_k\\to H'_k\\times Q_k$ and $H_k\\times L^k\\to H'_k\\times L^k$. Both are weak homotopy equivalences. Indeed each mapping-set factor of $H_k\\to H'_k$ is one by induction. Realization preserves finite products by [lem-coef-realization-finite-limits]. For a finite product, paths, based maps of spheres and their based homotopies are tuples of those in the factors; thus components and homotopy groups are products. This proves directly, from the weak-equivalence definition in [lem-coef-kan-quillen-right-proper], that a finite product of weak equivalences, including multiplication by any fixed simplicial set, is a weak equivalence. Empty factors present no exception. Thus it applies with the same $Q_k$ or $L^k$ in source and target; no assertion about preservation of unions by weak equivalences is being assumed.",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "pp.859-860, mapping-word products and the two maps N_C to N_D and M_C to M_D"
+   }
+  },
+  {
+   "text": "Induct on $k$. At $k=0$, $P_0=C_\\alpha(w,z)\\to B_\\alpha(u_\\alpha w,u_\\alpha z)=P'_0$ is a weak equivalence. For $k\\geq1$, the two spans $P_{k-1}\\leftarrow N_k\\hookrightarrow M_k$ and $P'_{k-1}\\leftarrow N'_k\\hookrightarrow M'_k$ have all objects cofibrant in the Kan model structure: every simplicial set is cofibrant since its initial map is degreewise injective [lem-coef-kan-quillen-right-proper]. Their designated right legs are monomorphisms and hence cofibrations. Their three comparison maps are weak equivalences by the induction on $k$ and step 4. Clause (b) of [lem-coef-model-cofibrant-colimit-comparison] therefore gives $P_k\\to P'_k$ a weak equivalence. Crucially the other legs need not be cofibrations, and no mapping space is assumed Kan.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-model-cofibrant-colimit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "p.860, induction on the word filtration; cube-lemma formulation of the source homotopy-pushout comparison"
+   }
+  },
+  {
+   "text": "The word filtrations are continuous $\\omega$-sequences of monomorphisms, starting at cofibrant simplicial sets, by [lem-coef-scat-arrow-cell-word-filtration] and the Kan cofibration characterization [lem-coef-kan-quillen-right-proper]. Clause (c) of [lem-coef-model-cofibrant-colimit-comparison], with $\\theta=\\omega$, gives a weak equivalence on their colimits. These are precisely the successor mapping sets, so $u_{\\alpha+1}$ is locally a weak equivalence. Arrow attachments change no objects. For any object of $B_{\\alpha+1}$, the essential-surjectivity witness in $\\pi_0B_\\alpha$ maps to a witness in $\\pi_0B_{\\alpha+1}$, since a functor preserves an inverse and its two equations. Thus $u_{\\alpha+1}$ is essentially surjective and is a Dwyer--Kan equivalence by [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "p.860, passage from finite word stages to all words and essential surjectivity"
+   }
+  },
+  {
+   "text": "For completeness, the limit categories in these cell sequences are computed by unions of object sets and degreewise unions of mapping sets once their two objects have appeared. To verify this, represent each object or simplex at a stage; any finite list of representatives occurs at a common larger stage. Define a composition there. Its value is independent of that stage since all transition functors preserve composition. Associativity, units and commutation with simplicial operators hold there and hence in the union. Compatible functors from the stages give a unique functor from this union, on the represented objects and simplices. This is exactly the colimit universal property [def-weil-pbc-category-colimit]. Injectivity at successors was proved in step 2; the union construction preserves it at limits. Consequently every transition in either sequence is injective on objects and locally a monomorphism, and mapping-set diagrams on a tail containing a chosen pair are continuous at limit ordinals.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.2.3 and A.3.2.4; explicit finite-operation construction of the ordinal colimits used here"
+   }
+  },
+  {
+   "text": "Let $\\lambda\\leq\\theta$ be a nonzero limit ordinal and assume the comparison is a Dwyer--Kan equivalence at every earlier stage. Any pair of objects of $C_\\lambda$ appears in some $C_\\beta$, $\\beta<\\lambda$. On the tail $\\beta\\leq\\alpha<\\lambda$ their mapping sets and the mapping sets of their images form two continuous sequences of cofibrations between cofibrant simplicial sets by step 7 and [lem-coef-kan-quillen-right-proper]. Their component maps are weak equivalences by induction. This tail has small nonzero limit order type; clause (c) of [lem-coef-model-cofibrant-colimit-comparison] applies and gives a weak equivalence between the union mapping sets, which are the required mapping sets at $\\lambda$. Every object of $B_\\lambda$ appears at some earlier stage and has there an isomorphism in $\\pi_0$ to an image object. The functor to the union carries that isomorphism and its inverse to the same witness at $\\lambda$. Hence $u_\\lambda$ is essentially surjective, and the Dwyer--Kan criterion of [lem-coef-coherent-nerve-comparison] finishes the limit step. Along with steps 3-6 and the given $u_0$, transfinite induction proves $u_\\theta:E\\to B\\amalg_A E$ a weak equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.2.3 and A.3.2.4, closure along the continuous relative-cell sequence"
+   }
+  },
+  {
+   "text": "Finally use $s:D\\to E$ and $p:E\\to D$ under $A$ from step 1. The pushout universal property [def-weil-pbc-category-colimit] induces maps $B\\amalg_A D\\to B\\amalg_A E\\to B\\amalg_A D$ whose composite is the identity, since this is true after each coprojection. Together with $s,p$ these exhibit $D\\to B\\amalg_A D$ as a retract in the arrow category of $E\\to B\\amalg_A E$. Weak equivalences are retract closed in the model-category convention of [lem-coef-model-infinity-derived-adjunction], so the former is a weak equivalence too. In the Bergner structure this says exactly that the canonical map in the item is a Dwyer--Kan equivalence [lem-coef-coherent-nerve-comparison]. The proof made no fibrancy assumption on $A,B,D$ and allowed arbitrary object functions throughout.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "p.858, weakly saturated cofibration class; retract completion of the generating-cell argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-scat-arrow-cell-word-filtration",
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient-adjunction foundation, via the existing mapping-simplex ancestry. Agent-written expansion of HTT Proposition A.3.2.4, pp.858-860, read online but not archived locally: generator reduction, word filtration, cofibrant cube comparisons, continuous ordinal induction, retracts."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +202,42 @@
    "results": "{\"t\": \"2026-10-17T04:01:58Z\", \"tool\": \"leanfinder\", \"query\": \"Cobase change preserves weak equivalences in the model category of simplicially enriched small categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"51e073eb617cf1e2\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader query returns simplicial-set Quillen instances and generic stability of trivial cofibrations; Instances.lean:105-140 assumes a weak factorization system and does not assert left properness of Bergner simplicial categories."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer.?Kan|left.?proper",
+   "sub": "AlgebraicTopology",
+   "results": "{\"t\": \"2026-10-17T04:25:09Z\", \"tool\": \"grep\", \"query\": \"Bergner|Dwyer.?Kan|left.?proper\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial-set Kan instances and general pushout universal properties do not assert Bergner left properness. ModelCategory/Instances.lean:208-218 only treats a trivial-cofibration leg; SimplicialCategory/Basic.lean:47-61 defines enrichment, not its model structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory, HomotopicalAlgebra.Cofibration",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:25:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory, HomotopicalAlgebra.Cofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial-set Kan instances and general pushout universal properties do not assert Bergner left properness. ModelCategory/Instances.lean:208-218 only treats a trivial-cofibration leg; SimplicialCategory/Basic.lean:47-61 defines enrichment, not its model structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Bergner model structure on small simplicial categories is left proper for arbitrary Dwyer Kan equivalences",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:25:12Z\", \"tool\": \"leanfinder\", \"query\": \"The Bergner model structure on small simplicial categories is left proper for arbitrary Dwyer Kan equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.QCat\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"HomotopicalAlgebra.ModelCategory.cm1b\"], \"digest\": \"5669862b299c9657\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial-set Kan instances and general pushout universal properties do not assert Bergner left properness. ModelCategory/Instances.lean:208-218 only treats a trivial-cofibration leg; SimplicialCategory/Basic.lean:47-61 defines enrichment, not its model structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushouts of Dwyer Kan equivalences along cofibrations of simplicial categories are Dwyer Kan equivalences",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T04:26:23Z\", \"tool\": \"leansearch\", \"query\": \"Pushouts of Dwyer Kan equivalences along cofibrations of simplicial categories are Dwyer Kan equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.Limits.pullback.desc'\", \"CategoryTheory.Limits.pushoutComparison_map_desc_assoc\", \"CategoryTheory.Limits.PushoutCocone.mk\", \"CategoryTheory.Limits.PushoutCocone.IsColimit.desc'\", \"CategoryTheory.Limits.Types.Pushout.cocone\", \"CategoryTheory.MorphismProperty.isStableUnderCobaseChange_iff_pushouts_le\", \"CategoryTheory.Limits.pushoutAssocIsPushout\"], \"digest\": \"e03c2261b03a46c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial-set Kan instances and general pushout universal properties do not assert Bergner left properness. ModelCategory/Instances.lean:208-218 only treats a trivial-cofibration leg; SimplicialCategory/Basic.lean:47-61 defines enrichment, not its model structure."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-mapping-simplex-final-edge",
@@ -108,5 +266,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-scat-bergner-left-proper-pushouts",
+  "worker": "stage1",
+  "summary": "Statement retained without Kan or object-injectivity hypotheses. One new statement-only construction lemma supplies natural word filtrations for free enriched-arrow attachments; the item itself proves homotopy invariance using existing cofibrant-span and ordinal comparison clauses, then transfinite induction and a retract. Read every cited statement, searched the full DAG/blueprint/project source and Mathlib, and checked loop, empty, identity and object-identifying cases.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction calculation: retains the existing mapping-simplex ancestry in blueprint.from. HTT A.3.2.4 supplies the foundational pushout input for that descendant; no unit/chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-b6b680d19",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-b6b680d19 (reviewer sub-agent of L); spot-checked: I read HTT Prop. A.3.2.4 and its proof in a local text extraction (/tmp/q112htt/htt.txt, printed pp.858-860). It gives a left proper model structure on Cat_S when every object of S is cofibrant, which covers sSet. The item's DK-pushout statement (arbitrary object functions, no Kan hypothesis) is that left properness, not weakened. New node lem-coef-scat-arrow-cell-word-filtration matches HTT p.859-860 word by word: the words MC_k, the reduction relation, the length filtration and the N_k⊆M_k pushout. I checked it is true through unique normal forms (U(L) has no composable non-identity arrows), including the cases x=y, K empty, K=L, empty homs and functors that identify objects. It is statement-only and introduces its own objects, with searches of all three kinds and the correct blueprint from/via. It does not duplicate free-factor-normal-form, the signed-word nodes, the fixed-object free calculus or fixed-object left properness. Steps 1-9: I-inj equals the Bergner trivial fibrations under the coherent-nerve definitions, giving the retract under A; cells are serialized by the colimit universal property; the isolated-object case; finite products of weak equivalences through realization; clause (b) of the cofibrant colimit comparison (only the right legs need to be cofibrations); clause (c) for omega and for limit tails; unions at limit stages; the arrow-category retract. All hypotheses were checked against the cited statements. Every cited statement is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no SGA source. No fixes were made."
  }
 }

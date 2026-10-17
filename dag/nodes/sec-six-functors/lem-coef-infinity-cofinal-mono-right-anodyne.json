@@ -11,9 +11,93 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply (3)$\\Rightarrow$(1) of [lem-coef-infinity-cofinality-space-test] to $u=j$. Its comma is exactly the arrow-pullback comma in the hypothesis, including higher simplices. Both indexing quasicategories are small in the stipulated universe. Thus restriction along $j$ preserves every given colimiting cocone in every containing target quasicategory. We use this conclusion with the opposite of a sufficiently large category of spaces; no colimits in $A$ or $B$ are required.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NZ",
+    "place": "Remark 7.2.3.2 (02NZ), condition (2′), together with Proposition 7.4.3.11 (04K3), condition (2)."
+   }
+  },
+  {
+   "text": "Fix any small right fibration $q:Y\\to B$. For $H=B,A$ write $q_H:H\\times_B Y\\to H$ and $\\Gamma_H=\\operatorname{Fun}_{/B}(H,Y)$, with $H\\to B$ equal to the identity or $j$. Pullbacks preserve the right-horn lifting property: compose a proposed square with the projection to $Y$, lift it for $q$, and pair the lift with its prescribed base simplex. Hence both $q_H$ are right fibrations. Apply [lem-coef-right-fibration-section-limit]: $\\Gamma_B,\\Gamma_A$ are Kan, and their evaluation cones are limits of $m_q:B^{\\mathrm{op}}\\to\\mathcal S$ and $m_qj^{\\mathrm{op}}$, respectively. Choose one containing universe for $Y,B$ and these spaces. The theorem's naturality under base restriction identifies the restricted evaluation cone with the cone induced by the actual simplicial restriction $r:\\Gamma_B\\to\\Gamma_A$.",
+   "uses": [
+    "lem-coef-right-fibration-section-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02N3",
+    "place": "Proposition 7.2.1.3 (02N3), the section-space test; section/limit interpretation from HTT Corollary 3.3.3.4, opposite form."
+   }
+  },
+  {
+   "text": "Regard $D=m_q^{\\mathrm{op}}$ as a diagram $B\\to\\mathcal S^{\\mathrm{op}}$. Reversing simplices, with $\\operatorname{Fun}(K,\\mathscr C)^{\\mathrm{op}}\\cong\\operatorname{Fun}(K^{\\mathrm{op}},\\mathscr C^{\\mathrm{op}})$ and $\\operatorname{Fun}(\\Delta^1,X)^{\\mathrm{op}}\\cong\\operatorname{Fun}(\\Delta^1,X^{\\mathrm{op}})$ with endpoints exchanged, identifies the opposite of the cone category of $m_q$ in $\\mathcal S$ with the cocone category of $D$ in $\\mathcal S^{\\mathrm{op}}$. Terminal there is initial here: by [lem-coef-infinity-pinch-comparison] applied to $X$ and to $X^{\\mathrm{op}}$, $\\operatorname{Map}_X(y,t)\\simeq U_X(y,t)$ and $\\operatorname{Map}_{X^{\\mathrm{op}}}(t,y)\\simeq U_{X^{\\mathrm{op}}}(t,y)\\cong U_X(y,t)^{\\mathrm{op}}$, and $|K^{\\mathrm{op}}|\\cong|K|$, so one is contractible exactly when the other is. Hence the evaluation cone with vertex $\\Gamma_B$ from Step 2 becomes a colimiting cocone on $D$; the same identification is used when reversing again below. Step 1 makes its restriction colimiting on $Dj$. Reversing again, the restricted evaluation cone with vertex $\\Gamma_B$ is a limit of $m_qj^{\\mathrm{op}}$. It and the evaluation cone with vertex $\\Gamma_A$ are therefore terminal objects of the same coherent cone category of [def-cbc-enhanced-diagrams-cones]. There is a morphism in each direction; their composites and the identities lie in the respective contractible mapping spaces into these terminal objects, giving inverse homotopies. Evaluating at the vertex shows that the induced comparison is an equivalence edge of $\\mathcal S$; a $2$-simplex of the coherent nerve witnessing an inverse equation is an edge of $\\operatorname{Fun}(X,X)$, that is a simplicial homotopy, so the comparison is a simplicial homotopy equivalence of Kan complexes. By the restriction compatibility in Step 2 this comparison is $r$ itself, so $r$ is a weak homotopy equivalence. Empty section spaces cause no exception: if one has a vertex the equivalence forces the other to have one.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02N3",
+    "place": "Proposition 7.2.1.3 (02N3): cofinality gives a homotopy equivalence on sections; expanded using the universal-colimit test and uniqueness of terminal cones."
+   }
+  },
+  {
+   "text": "The monomorphism clause of [lem-coef-unstraightening-homotopy-descent-gluing] applied over $S=B$ makes the same $r$ a Kan fibration. Together with Step 3 it is a trivial fibration in [lem-coef-kan-quillen-right-proper], hence lifts every boundary, including $\\varnothing=\\partial\\Delta^0\\hookrightarrow\\Delta^0$. In particular every prescribed section over $A$ extends exactly over $B$.\n\nNow consider any lifting square with left edge $j$, right edge a small right fibration $p:X\\to S$, top $a:A\\to X$ and bottom $g:B\\to S$. Form $Y=B\\times_S X$. The elementary pullback argument of Step 2 makes $Y\\to B$ a right fibration; $B$ is a quasicategory, so its total space is also a quasicategory by filling an inner horn first in $B$ and then lifting it. The top map gives the section $(j,a)$ over $A$. Its exact extension, obtained above, projects to a map $B\\to X$ which restricts to $a$ and lies over $g$. Thus $j$ has the left lifting property against every small right fibration, with arbitrary simplicial base $S$.",
+   "uses": [
+    "lem-coef-unstraightening-homotopy-descent-gluing",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02N3",
+    "place": "Proposition 7.2.1.3 (02N3), final lifting-square argument; right-handed version. Kan-fibration input is HTT Lemma 2.2.3.4; weak equivalence plus Kan fibration is also Kerodon Proposition 3.2.7.2 (00X1)."
+   }
+  },
+  {
+   "text": "Let $I$ be the countable set of right horns $\\Lambda_i^n\\hookrightarrow\\Delta^n$, $n\\geq1$, $0<i\\leq n$. Apply [lem-coef-small-object-cell-factorization] to small simplicial sets with $\\kappa=\\aleph_0$. Here are the required hypotheses. Hom sets are small sets of compatible degreewise functions. Small colimits exist: take each degree's disjoint union modulo the diagram relations; operators descend, and compatible maps out are exactly a cocone, giving [def-weil-pbc-category-colimit]. Pushout along an injection adds its complement degreewise without identifying old elements, so an $I$-cell chain consists of injections. Each horn is the union of finitely many representable faces. A map from it into a sequential union is specified by finitely many face images and their overlap equalities. Choose a common stage containing those images; the equalities hold at a common later stage. Equality of two such maps is detected at a common stage by the same finite argument. Thus these horn domains preserve the sequential colimits in the small-object hypothesis. The theorem now gives $j=pi$ with $i:A\\to Z$ an $I$-cell map and $p:Z\\to B$ lifting every right horn, that is, a right fibration.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02N3",
+    "place": "Proposition 7.2.1.3 (02N3), reduction to lifting against right fibrations; small-object factorization expanded to verify the finite-domain hypothesis."
+   }
+  },
+  {
+   "text": "Use Step 4 on the square with top $i:A\\to Z$, bottom $\\operatorname{id}_B$ and right edge $p$. It supplies $s:B\\to Z$ with $sj=i$ and $ps=\\operatorname{id}_B$. Hence $(\\operatorname{id}_A,s):j\\to i$ and $(\\operatorname{id}_A,p):i\\to j$ are maps of arrows whose composite is the identity: $j$ is a retract of $i$.\n\nEvery $I$-cell map is right anodyne in the exact sense of [def-coef-infinity-right-anodyne]. Indeed, refine each pushout of a small coproduct of horns by well-ordering its indexing set and attaching the horns one at a time along their given maps; maps out of this successive attachment are exactly compatible maps out of the original coproduct pushout. At limit ordinals take the union. Concatenating these small refinements leaves a small continuous ordinal chain of pushouts of single right horns. Isomorphisms and transfinite-composition closure place its composite $i$ in the stated class, and retract closure then places $j$ in it. This proves the conclusion with the nonzero-index horn convention of the item.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02N3",
+    "place": "Proposition 7.2.1.3 (02N3), lifting characterization concluded by the small-object retract argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-right-fibration-section-limit",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-unstraightening-homotopy-descent-gluing",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-small-object-cell-factorization",
+  "def-weil-pbc-category-colimit",
+  "def-coef-infinity-right-anodyne"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent enhancement of the coefficient adjunction, through the recorded operadic join-slice ancestry. Agent-written expansion of Kerodon 02N3 after 02NZ and 04K3, read online; archival Kerodon and HTT copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +147,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "No match: the returned all-horn Kan-Quillen facts and inner-horn fillers do not assert that an inclusion with contractible coherent commas belongs to the class generated by right horns."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?anodyne|cofinal|final",
+   "results": "{\"t\": \"2026-10-17T04:25:54Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|cofinal|final\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searched signatures give ordinary all-horn Kan-Quillen classes, inner-horn fillers, or generic model/small-object lifting statements; none states the cofinal quasicategory monomorphism theorem. Read Quasicategory/Basic.lean:34–103 and SimplicialSet/CategoryWithFibrations.lean:35–114. Generic small-object results are already represented by the cited existing node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A final inclusion of infinity categories has the left lifting property against right fibrations",
+   "results": "{\"t\": \"2026-10-17T04:25:55Z\", \"tool\": \"leansearch\", \"query\": \"A final inclusion of infinity categories has the left lifting property against right fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument'\", \"HomotopicalAlgebra.ModelCategory.cm4b\", \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.fibrations_llp\", \"CategoryTheory.MorphismProperty.llp_eq_of_wfs\"], \"digest\": \"d2049ae8037cdf65\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searched signatures give ordinary all-horn Kan-Quillen classes, inner-horn fillers, or generic model/small-object lifting statements; none states the cofinal quasicategory monomorphism theorem. Read Quasicategory/Basic.lean:34–103 and SimplicialSet/CategoryWithFibrations.lean:35–114. Generic small-object results are already represented by the cited existing node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"anodyne\"",
+   "results": "{\"t\": \"2026-10-17T04:25:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searched signatures give ordinary all-horn Kan-Quillen classes, inner-horn fillers, or generic model/small-object lifting statements; none states the cofinal quasicategory monomorphism theorem. Read Quasicategory/Basic.lean:34–103 and SimplicialSet/CategoryWithFibrations.lean:35–114. Generic small-object results are already represented by the cited existing node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy final injective simplicial maps between infinity categories are generated by the nonzero index horn inclusions",
+   "results": "{\"t\": \"2026-10-17T04:26:00Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy final injective simplicial maps between infinity categories are generated by the nonzero index horn inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn.hom_ext\"], \"digest\": \"638acc871a540ee4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searched signatures give ordinary all-horn Kan-Quillen classes, inner-horn fillers, or generic model/small-object lifting statements; none states the cofinal quasicategory monomorphism theorem. Read Quasicategory/Basic.lean:34–103 and SimplicialSet/CategoryWithFibrations.lean:35–114. Generic small-object results are already represented by the cited existing node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of quasicategories with weakly contractible coherent comma categories is right anodyne",
+   "results": "{\"t\": \"2026-10-17T04:26:01Z\", \"tool\": \"leanfinder\", \"query\": \"A monomorphism of quasicategories with weakly contractible coherent comma categories is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.cofibration_iff\"], \"digest\": \"7d901e51dc7a5f53\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searched signatures give ordinary all-horn Kan-Quillen classes, inner-horn fillers, or generic model/small-object lifting statements; none states the cofinal quasicategory monomorphism theorem. Read Quasicategory/Basic.lean:34–103 and SimplicialSet/CategoryWithFibrations.lean:35–114. Generic small-object results are already represented by the cited existing node."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cofinal-relative-join-slice-restriction",
@@ -94,5 +213,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cofinal-mono-right-anodyne",
+  "worker": "stage1",
+  "summary": "Kept the statement exactly. Six steps use existing comma/finality, right-fibration section/limit, restriction Kan-fibration, Kan-model and small-object statements. The actual restriction map, exact section lifts, arbitrary simplicial bases, finite horn-domain smallness, coproduct refinement and retract are explicit. No new nodes, Mathlib leaves or Lean attachments. Checked B–E and edge cases, and no proof step exceeds 2000 characters.",
+  "blueprint": "Paragraph 2 of main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, the mapping-complex derived-limit adjunction, via the recorded operadic extension and cofinal relative join-slice ancestry. Steps 1–6 supply the right-anodyne inclusion used there; no unit/chapter route or statement is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-e03c64d2d",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e03c64d2d (reviewer sub-agent of L); spot-checked: I read the item, all six proof steps and every cited statement in full: cofinality-space-test, right-fibration-section-limit, def-cbc-enhanced-diagrams-cones, unstraightening-homotopy-descent-gluing, kan-quillen-right-proper, small-object-cell-factorization, category-colimit, right-anodyne, plus the fibrations and spaces definitions. I also read the unit sk-prop-sf-biduality-general, the main-20261015 ancestor proof (paragraph 2) and how the parent uses the item. The statement is unchanged and true, and matches HTT 4.1.3.1/4.1.1.3(4) and Kerodon 02NZ/02N3. The under-comma orientation is right: {1}->Delta^1 passes, {0}->Delta^1 fails at 1, and the empty cases behave. Steps 1, 2, 4, 5 and 6 are correct against the cited statements. Their hypotheses hold: the comma is literally the one in condition (3); E = S^op is allowed; base-restriction naturality is used; the restriction-is-Kan-fibration clause applies with S = B; trivial fibrations lift including dimension 0; the arbitrary base is handled by pullback; the horn domains are finite; the right-horn convention matches; and the retract and coproduct refinement check out. One gap (C1/C4) in Step 3: it turned a terminal cone in S into an initial cocone in S^op citing only the definition. Mapping spaces in the DAG are right-pinched only, and Map in X^op is the left-pinched space of X, so a comparison is needed. Fixed: Step 3 now cites lem-coef-infinity-pinch-comparison (same unit, no cycle) and writes out the reduction via U_X(y,t) and |K^op| = |K|. It also states that an equivalence edge in N_hc(Kan) is a simplicial homotopy equivalence. proof_deps updated; the step is 1998 characters. There are no new nodes. Near-duplicates checked and rejected: coinitial-monomorphism-left-anodyne (the dual), cofinal-comma-criterion, equivalence-section-restriction, cone-mono-right-anodyne and terminal-anodyne. No off-unit tool uses, no SGA, Mathlib searches present and correct.; 1 file(s) fixed by the reviewer"
  }
 }

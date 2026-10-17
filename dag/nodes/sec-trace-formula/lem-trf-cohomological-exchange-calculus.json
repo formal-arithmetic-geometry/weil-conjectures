@@ -13,9 +13,152 @@
   "def-trf-admissibility",
   "thm-trf-dualizing-complex-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L_g=Rg_!$, $R_g=g^!$, $P_g=Rg_*$, and put $A_g=\\alpha_{g,*}$ and $B_g=\\beta_{g,!}$. Composition identifications will always be the adjunction-compatible ones. By [def-trf-admissibility] these adjunctions are on the specified finite-Tor constructible categories, and exceptional composition is conjugate to compact-support composition. Clause (3) of [prop-functor-package] supplies the identity and associative compact-support compositors and $L_g=P_g$ for proper $g$. The formula defining $B_g$ in [def-trf-cohomological-comparison] says equivalently\n$$\\bar\\varepsilon_g\\circ\\bar L_g\\beta_g=f_V(\\varepsilon_g)\\circ B_g(R_g(-)).\\tag{1}$$\nIndeed both sides are the transpose defining the mate, with the unit followed by a triangle identity, as in [def-weil-pbc-adjunction-mate]. This identity does not require $g$ to be proper.",
+   "uses": [
+    "def-trf-admissibility",
+    "prop-functor-package",
+    "def-trf-cohomological-comparison",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1 proof; §4.1.1(c)(iv),(v) (mate definitions)"
+   }
+  },
+  {
+   "text": "First work on compactifications supplied by axiom (VII) of [def-trf-cohomological-comparison], denoting the extended data by a superscript $*$. All its objects are proper over $k$. Indeed $X^*,C^*$ are proper by (VII); $X^*\\times X^*$ is proper by base change and composition [lem-kun-proper-stability]. The diagonal is closed by separatedness [def-weil-proper-morphism], hence proper [lem-weil-pbc-closed-immersion-proper]. The fixed scheme is its base change to $C^*$ [def-trf-fixed-scheme], so it too is proper by [lem-kun-proper-stability]. The same holds barred. Every arrow $g^*$ between these objects is therefore proper by [lemma-nagata-proper-to-separated-target]. Axiom (III), followed by the mate-pasting law [lem-weil-pbc-mate-pasting], gives\n$$A^*_{hg}=(P_{\\bar h^*}A^*_g)\\circ(A^*_hP_{g^*}),\\qquad A^*_{\\mathrm{id}}=1.$$\nHere the adjunctions being pasted are $g^{**}\\dashv P_{g^*}$ and their barred versions; the ordinary mates are precisely the counit-defined maps of §4.1.1(c)(iv). Axiom (VI) identifies $B^*_g=(A^*_g)^{-1}$, and hence, by taking inverses of the displayed product,\n$$B^*_{hg}=(B^*_hL_{g^*})\\circ(\\bar L_{h^*}B^*_g),\\qquad B^*_{\\mathrm{id}}=1.$$\nTaking exceptional mates with [lem-weil-pbc-mate-pasting], clause (2), now proves $\\beta^*_{hg}=\\bar R_{g^*}(\\beta^*_h)\\circ\\beta^*_g(R_{h^*}(-))$ and $\\beta^*_{\\mathrm{id}}=1$.",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-mate-pasting",
+    "lem-kun-proper-stability",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-trf-fixed-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(a), proper-compactification argument"
+   }
+  },
+  {
+   "text": "Here are the restriction identifications needed to descend that equality, without restricting an ordinary pushforward across an arbitrary open. For an open inclusion $j_T:T\\hookrightarrow T^*$ write $J_T=j_{T!}$ and $Q_T=j_T^*$. The exact adjunction $J_T\\dashv Q_T$ is [lem-cbc-proetale-extension-zero]; it restricts to our categories by [lem-trf-open-ctf] and the pullback domains of [def-trf-admissibility]. The identity $Q_TJ_T=1$ is the degreewise identity $j^{-1}j_!=1$ in [lem-weil-pbc-proetale-ringed-open-closed]. For $g^*j_U=j_Vg$, compact-support composition gives $L_{g^*}J_U=J_VL_g$. Taking the right-adjoint conjugate [def-weil-pbc-adjunction-conjugate] gives the canonical identification\n$$Q_UR_{g^*}=R_gQ_V.$$\nThe analogous identifications hold in the barred diagram. For composable arrows their two iterated identifications agree: they are the conjugates of the same associative compact-support composition, by [prop-functor-package], clause (3), and the composition rule in [def-weil-pbc-adjunction-conjugate].",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "lem-trf-open-ctf",
+    "def-trf-admissibility",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-adjunction-conjugate",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(a), assertion is local; Notation 4.1.2 (extension); adjunction elaboration, Stacks Tags 0037, 0B65, 0DV0"
+   }
+  },
+  {
+   "text": "Let $N\\in D^b_{ctf}(W,A)$ be an arbitrary input for $g:U\\to V$, $h:V\\to W$. Extend it to $J_WN$, which is in the compactified constructible domain by [lem-trf-open-ctf]. Restrict the equality of Step 2 on this input to $\\bar U$. Axiom (VII)'s extension isomorphisms identify $\\bar Q_Tf_T^*$ with $f_TQ_T$ and identify the restricted exceptional comparisons with $\\beta_g,\\beta_h,\\beta_{hg}$ [def-trf-cohomological-comparison]. The identifications of Step 3 identify all the exceptional composites and their inputs, and $Q_WJ_WN=N$. The restricted equality is therefore\n$$\\beta_{hg}(N)=\\bar R_g(\\beta_h(N))\\circ\\beta_g(R_hN).$$\nFor the identity arrow the same restriction gives $\\beta_{\\mathrm{id}}=1$. This proves (a) on every object, rather than only on objects already presented as restrictions. Taking its exceptional mates using [lem-weil-pbc-mate-pasting], clause (2), also gives, now for all diagram arrows,\n$$B_{hg}=(B_hL_g)\\circ(\\bar L_hB_g).\\tag{2}$$",
+   "uses": [
+    "lem-trf-open-ctf",
+    "def-trf-cohomological-comparison",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(a), restriction from compactifications"
+   }
+  },
+  {
+   "text": "For (b), put $h=a_V$ in (a), so $a_U=a_Vg$. By [def-trf-cohomological-comparison], $\\delta_U=\\bar R_{a_U}(\\iota)\\circ\\beta_{a_U}(A_s)$. Substitution of (a) and functoriality of $\\bar R_g$ give\n$$\\delta_U=\\bar R_g\\bigl(\\bar R_{a_V}(\\iota)\\circ\\beta_{a_V}(A_s)\\bigr)\\circ\\beta_g(R_{a_V}A_s)=\\bar R_g(\\delta_V)\\circ\\beta_g(\\omega_V).$$\nThe identifications $R_g\\omega_V=\\omega_U$ and their barred counterparts are exactly [thm-trf-dualizing-complex-composition]; thus this is the claimed equality with its specified dualizing identifications.",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "thm-trf-dualizing-complex-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(b)"
+   }
+  },
+  {
+   "text": "For (c), use the proper identifications $L_h=P_h$ and $L_{h'}=P_{h'}$, and likewise barred. Write\n$$C:L_vL_{h'}\\xrightarrow{\\sim}L_hL_{v'},\\qquad \\bar C:\\bar L_v\\bar L_{h'}\\xrightarrow{\\sim}\\bar L_h\\bar L_{v'}$$\nfor the composition identifications from $vh'=hv'$, supplied by [prop-functor-package], clause (3). The last assertion of [lem-trf-trace-map-exchange] states precisely the normalization of the right-adjoint exchange used here: the $L_v\\dashv R_v$ transpose of $E_M$ is\n$$L_vL_{h'}R_{v'}M\\xrightarrow{C}L_hL_{v'}R_{v'}M\\xrightarrow{L_h\\varepsilon_{v'}}L_hM.\\tag{3}$$\nIt applies since our square is Cartesian, $h$ is proper and all its arrows have the constructible adjunctions of [def-trf-admissibility]. Applying that assertion to the barred Cartesian square gives the identical formula for $\\bar E$. Thus no claim that a general square mate preserves isomorphisms is being used.",
+   "uses": [
+    "prop-functor-package",
+    "lem-trf-trace-map-exchange",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(c2), and §4.4.6; right-adjoint exchange normalization"
+   }
+  },
+  {
+   "text": "Apply (2) to the two factorizations $vh'=hv'$. Associative composition identifies their common map $B_{vh'}=B_{hv'}$, and gives\n$$f_W(C)\\circ B_v(L_{h'}(-))\\circ\\bar L_vB_{h'}\n=B_h(L_{v'}(-))\\circ\\bar L_hB_{v'}\\circ\\bar C.\\tag{4}$$\nAxiom (VI) of [def-trf-cohomological-comparison] gives $B_h=A_h^{-1}$ and $B_{h'}=A_{h'}^{-1}$. Precompose (4) with $\\bar L_vA_{h'}$ and postcompose with $A_h(L_{v'}(-))$. The two inverse pairs cancel, yielding\n$$A_h(L_{v'}(-))\\circ f_W(C)\\circ B_v(L_{h'}(-))\n=\\bar L_hB_{v'}\\circ\\bar C\\circ\\bar L_vA_{h'}.\\tag{5}$$\nAll components in (4) and (5) are evaluated on a variable object of $D^b_{ctf}(U',A)$; we will use that object $R_{v'}M$. This is cancellation of the two proper comparison isomorphisms, with no inversion of $B_v$ or $B_{v'}$.",
+   "uses": [
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(c2), composition and adjointness; §4.4.6 use of axiom (VI)"
+   }
+  },
+  {
+   "text": "Transpose the left side of the equality in (c) under $\\bar L_v\\dashv\\bar R_v$. By naturality of its counit, equation (1) for $v$, naturality of $B_v$ with respect to $E_M$, and (3), the result is\n$$T_L=A_h(M)\\circ f_W(L_h\\varepsilon_{v',M})\\circ f_W(C_{R_{v'}M})\\circ B_v(L_{h'}R_{v'}M).\\tag{6}$$\nExplicitly, (1) replaces $\\bar\\varepsilon_v\\circ\\bar L_v\\beta_v$ by $f_W(\\varepsilon_v)\\circ B_vR_v$; naturality moves $\\bar L_vf_V(E_M)$ across $B_v$, leaving $f_W(\\varepsilon_v\\circ L_vE_M)$, which is (3). The same transpose of the right side, using the barred formula (3), naturality of $\\bar C$ and equation (1) for $v'$, is\n$$T_R=\\bar L_h(f_U\\varepsilon_{v',M})\\circ\\bar L_h(B_{v'}(R_{v'}M))\\circ\\bar C_{f_{U'}R_{v'}M}\\circ\\bar L_v(A_{h'}(R_{v'}M)).\\tag{7}$$\nThese computations use only the mate definition [def-weil-pbc-adjunction-mate] and the normalized exchange assertion [lem-trf-trace-map-exchange], with the adjunctions of [def-trf-admissibility].",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "def-weil-pbc-adjunction-mate",
+    "lem-trf-trace-map-exchange",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(c2), explicit counit calculation; §4.4.6"
+   }
+  },
+  {
+   "text": "Naturality of $A_h$ at $\\varepsilon_{v',M}:L_{v'}R_{v'}M\\to M$ gives\n$$A_h(M)\\circ f_W(L_h\\varepsilon_{v',M})=\\bar L_h(f_U\\varepsilon_{v',M})\\circ A_h(L_{v'}R_{v'}M).$$\nInsert this in (6), then substitute (5) evaluated at $R_{v'}M$. The resulting composite is exactly (7), so $T_L=T_R$. The Hom bijection for $\\bar L_v\\dashv\\bar R_v$ in [def-trf-admissibility] is injective, hence the original two maps agree. Replacing the four proper $L$'s by their specified $P$'s proves exactly the displayed equation (c), with source $f_VRh'_*v'^!M$ and target $\\bar v^!R\\bar h_*f_UM$.",
+   "uses": [
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.1(c2), equality after transposition; §4.4.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "prop-functor-package",
+  "def-trf-cohomological-comparison",
+  "def-weil-pbc-adjunction-mate",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-weil-pbc-mate-pasting",
+  "lem-kun-proper-stability",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-trf-fixed-scheme",
+  "lem-cbc-proetale-extension-zero",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-adjunction-conjugate",
+  "thm-trf-dualizing-complex-composition",
+  "lem-trf-trace-map-exchange"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Lemma 4.2.1(a),(b),(c2), Notation 4.1.2 and §4.4.6; adjunction calculations expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +194,45 @@
    "results": "8 hits: CategoryTheory.expComparison, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.conjugateEquiv_comm, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.coev_ev; full returned signatures saved in lem-trf-cohomological-exchange-calculus.search-output.txt",
    "date": "2026-10-17",
    "verdict": "no match: ordinary mates, over-category pushforwards and linear dual base change do not supply exceptional pullback and dualizing comparisons on constructible etale complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-17",
+   "verdict": "generic mate-pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no match for the geometric item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pullback comparison respects composition and proper Cartesian base change for compactifiable cohomological morphisms",
+   "results": "SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.comp; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; CategoryTheory.GrothendieckTopology.overMapPullbackComp; CategoryTheory.ExponentiableMorphism.pushforwardComp; CategoryTheory.ExponentiableMorphism.comp_pushforward",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary sheaf/composition comparisons do not state the exceptional geometric comparison and proper-square clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalMorphism|compactifiable|mateEquiv_hcomp|mateEquiv_vcomp",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-17",
+   "verdict": "generic mate-pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no match for the geometric item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A comparison between constructible six functor formalisms commutes with exceptional inverse image composition and proper exchange",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; CategoryTheory.CatCommSq.iso; SheafOfModules.pushforwardComp",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary sheaf/composition comparisons do not state the exceptional geometric comparison and proper-square clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of adjunction squares commute with horizontal pasting and with taking right mates",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv_square; CategoryTheory.mateEquiv_square; CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc; CategoryTheory.Bicategory.mateEquiv_hcomp; CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.mateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "generic mate-pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no match for the geometric item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-specialization",
@@ -73,5 +251,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-cohomological-exchange-calculus",
+  "worker": "stage1",
+  "summary": "Expanded the proper-compactification, restriction, and mate arguments of Varshavsky Lemma 4.2.1 into nine steps. Reused the existing mate-pasting Mathlib leaf, open extension facts, and the exact proper-square transpose normalization already stated by lem-trf-trace-map-exchange. Statement unchanged; no new nodes.",
+  "blueprint": "Nearest blueprint ancestor lem-trf-local-term-locality, proof of contracting local terms by normal-cone specialization (unit sk-i-curve-zero step 2): realizes the exceptional composition, dualizing and proper fixed-square comparison input used in lem-trf-trace-specialization, via the trace-specialization intermediate.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "The generic proper-source/separated-target criterion verifies properness of arrows in the compactified fixed diagrams."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Open extension preserves the finite-Tor constructible domain, allowing arbitrary inputs to be extended before restricting the compactified identity."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "The exact open-extension adjunction supplies the right-adjoint restriction calculation without an ambient exceptional adjoint."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Uses only the open localization identity j inverse-image j shriek = identity to recover arbitrary inputs from their extensions."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Uses only the existing compact-support composition, associativity, and proper-coincidence clause (3), as a geometric operation tool."
+   },
+   {
+    "node": "lem-trf-trace-map-exchange",
+    "why": "Uses solely its independent final assertion computing the exceptional transpose of normalized right-adjoint exchange for an arbitrary Cartesian square with proper horizontal map."
+   },
+   {
+    "node": "lem-kun-proper-stability",
+    "why": "Generic properness stability shows the compactified product and fixed scheme are proper, before applying axiom (VI)."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "The compactified diagonal is proper because it is a closed immersion; this verifies the compactification reduction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-proper-to-separated-target",
+  "lem-trf-open-ctf",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "prop-functor-package",
+  "lem-trf-trace-map-exchange",
+  "lem-kun-proper-stability",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-4e1a8cf2e",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-4e1a8cf2e (reviewer sub-agent of L); spot-checked: I read the whole delivery, and the mathematics holds up; no fixes needed. The item statement is unchanged from the base (compared against the side DAG), and it matches Varshavsky Lemma 4.2.1(a), 4.2.1(b) and (c2)+axiom (VI) as used in §4.4.6 (printed pp. 26-30 and 38), clause by clause. The mate types match §4.1.1(c)(iv),(v). E is the conjugate-of-Ex_! exchange of def-trf-admissibility on D^b_ctf(-,A). I checked every calculation by hand: equation (1) by triangle identity; Step 2 properness of the compactified objects and arrows (product, closed diagonal, Fix as base change, then nagata-proper-to-separated-target), then (III)->(VI)->mates via mate-pasting; Step 3 Q_U R_{g*}=R_g Q_V as the conjugate of L_{g*}J_U=J_V L_g, with no Cartesian square needed; Step 4 descent through J_W, with F=F*∩C; Step 5 (b) by substitution; Steps 7-9 type-checked, with only A_h and A_{h'} cancelled; transposes (6) and (7) recomputed and they agree. Each cited statement says what its step takes from it, and no SGA source is used. There is no cycle; the only citer is lem-trf-trace-specialization, which uses (c) with h=Δ, v=c, h'=i_F, v'=d, in the right orientation. There are no new nodes and no duplicates; lem-trf-cohomological-evaluation-calculus is different and is not used. On the unit route (sk-i-curve-zero), only lem-trf-open-ctf and the generic final clause of lem-trf-trace-map-exchange are off-route. Both are declared, generic, and not supplied by any node on the route, so I accept both tool uses. Minor point, not a fault: the hypotheses h', h̄' proper are redundant because they follow by base change."
  }
 }
