@@ -86,14 +86,22 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
  "lean": {
-  "module": "Sheaf.RingTheory.IsStrictHenselization",
-  "declaration": "Algebra.IsStrictHenselization",
-  "file": "lean/Sheaf/RingTheory/IsStrictHenselization.lean",
-  "statement": "def IsStrictHenselization (A K C : Type u) [CommRing A] [IsLocalRing A] [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing C] [Algebra A C] : Prop",
-  "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-11",
-  "existing": false
+  "module": "Sheaf.RingTheory.StrictHenselizationPresentation",
+  "declaration": "Algebra.StrictHenselizationPresentation",
+  "declarations": [
+   "Algebra.strictHenselizationPointedDiagram",
+   "Algebra.strictHenselizationPointingCocone",
+   "Algebra.StrictHenselizationPresentation",
+   "Algebra.StrictHenselizationPresentation.residueMap"
+  ],
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationPresentation.lean",
+  "statement": "structure StrictHenselizationPresentation (A K H : Type u) [CommRing A] [IsLocalRing A] [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing H] [Algebra A H]",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existing Algebra.IsStrictHenselization predicate is retained and imported. Its existential witnesses do not provide a specified presentation or the residue map belonging to that presentation in an interface usable by this consumer. This module exposes precisely its defining pointed-etale algebra diagram, universal cocone and chosen algebra identification as StrictHenselizationPresentation, and constructs its induced residueMap by colimit descent of the given pointings. Nonempty of this structure is exactly the existing predicate; no extra mathematical assumption is introduced.",
+  "fixed_by": "NT-stage2-Codex-1ace89902"
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -104,11 +112,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "R-shc1307",
-  "group": "F1",
-  "result": "pass",
-  "note": "A: CommRing+IsLocalRing+IsNoetherianRing; n=maximalIdeal A; K: IsSepClosure of ResidueField with A-action through k (IsScalarTower); A^sh: Algebra.IsStrictHenselization = colimit cocone of pointed etale A-algebras (S, S->K) in Over (CommAlgCat.of A K) = 04GW triples; T: AdicCompletion (n.map algebraMap A C) C; canonical map algebraMap A T = A->C->T (rfl); flat: RingHom.Flat; combined compile clean; no Mathlib/source strict henselization"
+  "reviewer": "NT-stage2-Codex-1ace89902",
+  "group": "Q97",
+  "result": "fix",
+  "note": "Mathematics, dependencies, edge cases and verbatim signatures pass. Complete fixes replace the placeholder second reading and remove the local naturality tactic block. Both final modules compile without warnings through scompile.py with server confirmation. Findings recorded in review.md; branch unchanged."
  }
 }

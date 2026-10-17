@@ -296,5 +296,27 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-2ebb83b09 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, all 17 cited node statements, Stacks Tags 04HX, 04GW, 04GP, 08HQ and supporting definitions, blueprint route, searches, hypotheses, base-change context, and edge cases. The ten-step residue-compatible comparison proof is valid; no new nodes, duplicates, circularity, weakened target, SGA citation, or repair is required. review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1ace89902",
+  "group": "Q97",
+  "result": "fix",
+  "note": "Mathematics, dependencies, edge cases and verbatim signatures pass. Complete fixes replace the placeholder second reading and remove the local naturality tactic block. Both final modules compile without warnings through scompile.py with server confirmation. Findings recorded in review.md; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison",
+  "declaration": "AlgebraicGeometry.Scheme.affine_strict_local_ring_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.affineStrictLocalChartMap",
+   "AlgebraicGeometry.Scheme.affine_strict_local_ring_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineStrictLocalRingComparison.lean",
+  "statement": "theorem affine_strict_local_ring_comparison {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (D : CommRingCat.{u}) (i : Spec D ⟶ X) [IsOpenImmersion i] (xD : Spec (.of Ω) ⟶ Spec D) (p : Spec D) [Algebra p.asIdeal.ResidueField Ω] (hxD : xD = Spec.map ((Spec.residueFieldIso D p).hom ≫ CommRingCat.ofHom (algebraMap p.asIdeal.ResidueField Ω)) ≫ (Spec D).fromSpecResidueField p) (H : Type u) [CommRing H] [Algebra (Localization.AtPrime p.asIdeal) H] [Algebra (Localization.AtPrime p.asIdeal) (separableClosure p.asIdeal.ResidueField Ω)] [IsScalarTower (Localization.AtPrime p.asIdeal) p.asIdeal.ResidueField (separableClosure p.asIdeal.ResidueField Ω)] (P : Algebra.StrictHenselizationPresentation (Localization.AtPrime p.asIdeal) (separableClosure p.asIdeal.ResidueField Ω) H) : ∃ θ : strictHenselizationRing (xD ≫ i) ≃+* H, θ.toRingHom.comp (affineStrictLocalChartMap D i xD) = (algebraMap (Localization.AtPrime p.asIdeal) H).comp (algebraMap D (Localization.AtPrime p.asIdeal)) ∧ Spec.map (CommRingCat.ofHom θ.toRingHom) ≫ strictHenselizationStructuralMap (xD ≫ i) = Spec.map (CommRingCat.ofHom ((algebraMap (Localization.AtPrime p.asIdeal) H).comp (algebraMap D (Localization.AtPrime p.asIdeal)))) ≫ i ∧ ∃ (_ : IsStrictlyHenselianLocalRing (strictHenselizationRing (xD ≫ i))) (_ : IsStrictlyHenselianLocalRing H), Function.Surjective P.residueMap ∧ RingHom.ker P.residueMap = IsLocalRing.maximalIdeal H ∧ (separableClosure p.asIdeal.ResidueField Ω).subtype.comp (P.residueMap.comp θ.toRingHom) = strictHenselizationPointEvaluation (xD ≫ i) ∧ Set.range (strictHenselizationPointEvaluation (xD ≫ i)) = (separableClosure p.asIdeal.ResidueField Ω : Set Ω) ∧ RingHom.ker (strictHenselizationPointEvaluation (xD ≫ i)) = IsLocalRing.maximalIdeal (strictHenselizationRing (xD ≫ i)) ∧ ∃ (eC : (strictHenselizationRing (xD ≫ i) ⧸ IsLocalRing.maximalIdeal (strictHenselizationRing (xD ≫ i))) ≃+* separableClosure p.asIdeal.ResidueField Ω) (eH : (H ⧸ IsLocalRing.maximalIdeal H) ≃+* separableClosure p.asIdeal.ResidueField Ω), eC.toRingHom.comp (Ideal.Quotient.mk (IsLocalRing.maximalIdeal (strictHenselizationRing (xD ≫ i)))) = P.residueMap.comp θ.toRingHom ∧ eH.toRingHom.comp (Ideal.Quotient.mk (IsLocalRing.maximalIdeal H)) = P.residueMap ∧ ∀ c : strictHenselizationRing (xD ≫ i), eH (Ideal.Quotient.mk (IsLocalRing.maximalIdeal H) (θ c)) = eC (Ideal.Quotient.mk (IsLocalRing.maximalIdeal (strictHenselizationRing (xD ≫ i))) c)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
