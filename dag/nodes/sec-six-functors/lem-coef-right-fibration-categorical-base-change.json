@@ -12,9 +12,86 @@
   "def-coef-infinity-fibrations",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first prove a limited assertion needed below. For any small $X$ and any map $c:RX\\to C$, use the explicit countable horn completion $X=X_0\\subseteq X_1\\subseteq\\cdots\\subseteq RX$ of [lem-coef-small-inner-horn-completion]. Put $T_r=X_r\\times_C E$ and $T_\\infty=RX\\times_C E$. Pulling each attaching pushout back to $E$ gives a pushout of the coproduct of the maps $\\Lambda_i^n\\times_{\\Delta^n}Z_a\\to Z_a$, where $Z_a=\\Delta^n\\times_C E$ uses the characteristic simplex of that attachment. Indeed in each degree, a set over $C_d$ is the disjoint union of its fibers; colimits over $C_d$ are computed separately in these fibers and pullback replaces each fiber by copies indexed by $E_d$. This also proves $T_\\infty=\\operatorname{colim}_rT_r$. Each $Z_a\\to\\Delta^n$ is a right fibration: a horn square projects to one for $q$ and its filler pairs with the prescribed base simplex. By [lem-coef-right-fibration-inner-horn-pullback], every attaching map is a categorical equivalence, and it is monic degreewise. Hence it is a Joyal trivial cofibration by [lem-coef-joyal-model-structure]. A lifting square for $T_0\\to T_\\infty$ against any Joyal fibration extends over every coproduct of attachments, then over its pushout, inductively for $r\\in\\mathbf N$; the compatible maps give a lift on the colimit. The weak factorization system therefore makes $T_0\\to T_\\infty$ a trivial cofibration, in particular a categorical equivalence.",
+   "uses": [
+    "lem-coef-small-inner-horn-completion",
+    "def-coef-infinity-fibrations",
+    "lem-coef-right-fibration-inner-horn-pullback",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/037W",
+    "place": "Lemma 5.3.6.6 (02RK), the horn-cell closure argument, restricted to the explicit countable completions."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-inner-horn-completion] to $A,B$ in a universe containing all the input. Its restriction map for $X=B$ and target $C$ lifts the monomorphism $\\varnothing\\hookrightarrow\\Delta^0$, so $b$ extends to $\\widehat b:RB\\to C$ with $\\widehat b j_B=b$ exactly. Functoriality gives $v=R(u):RA\\to RB$ with $vj_A=j_Bu$, so $\\widehat b v$ extends $bu$. Both $j_A,j_B$ are categorical equivalences: their horn-cell descriptions lift against any Joyal fibration by extending across the cells, since inner horns are trivial cofibrations; the weak factorization system of [lem-coef-joyal-model-structure] identifies these inclusions as trivial cofibrations. The equation $vj_A=j_Bu$, the hypothesis on $u$, and two-out-of-three show that $v$ is a categorical equivalence. The completions $RA,RB$ are quasicategories, so clause (2) of [lem-coef-joyal-quasicategory-characterizations] says $v$ is a functor equivalence.",
+   "uses": [
+    "lem-coef-small-inner-horn-completion",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/037W",
+    "place": "Proposition 5.3.6.1, reduction by inner-horn completion; here the existing functorial completion replaces the two relative factorizations."
+   }
+  },
+  {
+   "text": "Put $\\widehat E=RB\\times_{C,\\widehat b}E$ and let $\\widehat q:\\widehat E\\to RB$ be the projection. Pulling horn squares to $q$ shows directly from [def-coef-infinity-fibrations] that $\\widehat q$ is a right fibration. Its total space is a quasicategory: fill the projected inner horn in $RB$, then lift that simplex using $\\widehat q$. To check it is an isofibration, reverse all ordered simplices. The order involution sends a horn with index $i$ in dimension $n$ to the horn with index $n-i$, so $\\widehat q^{\\mathrm{op}}$ is a left fibration between quasicategories. For an equivalence $e:\\widehat q(x)\\to d$, its opposite ends at $\\widehat q^{\\mathrm{op}}(x)$. The prescribed-target clause of [lem-cbc-left-fibration-equivalence-lift] lifts $e^{\\mathrm{op}}$ to an equivalence ending at $x$. Taking opposites gives an equivalence starting at $x$ over exactly $e$. Reversing the inverse-triangle witnesses shows that these edges remain equivalences. Thus $\\widehat q$ lifts inner horns and equivalences with prescribed source, the isofibration hypothesis needed next.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-cbc-left-fibration-equivalence-lift",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/037W",
+    "place": "Proposition 5.3.6.1, isofibration of the fibration over the completed base; right-fibration specialization, proved by opposite left-fibration lifting."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-isofibration-pullback-equivalence] with $y=v:RA\\to RB$ and $\\pi=\\widehat q:\\widehat E\\to RB$. All three objects are small quasicategories, $v$ is a functor equivalence by Step 2, and $\\widehat q$ is an isofibration by Step 3. It gives that the actual projection $RA\\times_{RB}\\widehat E\\to\\widehat E$ is a functor equivalence. The simplicial bijection $(a,(v(a),e))\\mapsto(a,e)$ identifies its source with $RA\\times_C E$ and its map with $(a,e)\\mapsto(v(a),e)$ into $RB\\times_C E$. Clause (2) of [lem-coef-joyal-quasicategory-characterizations] makes this specified map a categorical equivalence.",
+   "uses": [
+    "lem-coef-infinity-isofibration-pullback-equivalence",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/037W",
+    "place": "Proposition 5.3.6.1, final equivalence between quasicategories, using the independent isofibration pullback theorem."
+   }
+  },
+  {
+   "text": "Step 1 applied to $X=A,c=\\widehat b v$ and $X=B,c=\\widehat b$ makes both vertical maps in the square with top $A\\times_C E\\to B\\times_C E$ and bottom $RA\\times_C E\\to RB\\times_C E$ categorical equivalences. The square commutes strictly: both composites send $(a,e)$ to $(j_Bu(a),e)=(vj_A(a),e)$. The bottom arrow is a categorical equivalence by Step 4. Two-out-of-three in [lem-coef-joyal-model-structure], first for the composite through the left vertical arrow and then for the composite through the right vertical arrow, gives that the original top arrow is a categorical equivalence. Neither its source nor its target was assumed fibrant.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/037W",
+    "place": "Proposition 5.3.6.1, two-out-of-three comparison; the exact original pullback map is retained."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-small-inner-horn-completion",
+  "def-coef-infinity-fibrations",
+  "lem-coef-right-fibration-inner-horn-pullback",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-pullback-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/037W",
+  "place": "Proposition 5.3.6.1 and Lemma 5.3.6.6 (02RK), right-fibration specialization. Online sources read; not archived in literature/. The reduction is written using the existing explicit functorial horn completion and independent isofibration pullback theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -43,10 +120,45 @@
    "results": "HasFibers.instIsEquivalenceFibFiberInducedFunctor; HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration; HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration; CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor; CategoryTheory.Limits.CategoricalPullback.functorEquiv; CategoryTheory.PreGaloisCategory.fiberPullbackEquiv; CategoryTheory.Functor.IsFibered.pullbackPullbackIso; CategoryTheory.Limits.CategoricalPullback.functorEquiv_functor_obj_iso_hom_app",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RightFibration|rightFibration|categoricalEquivalence|modelCategoryJoyal",
+   "results": "{\"t\": \"2026-10-17T18:19:13Z\", \"tool\": \"grep\", \"query\": \"RightFibration|rightFibration|categoricalEquivalence|modelCategoryJoyal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned signatures concern ordinary-category fibers, finite simplicial pullbacks, inner-horn fillers, or the Kan-Quillen model structure. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:139-145, Quasicategory/InnerFibration.lean:29-98 and ModelCategory/Instances.lean:110-150. The exponential inner-fibration corner is not a right-fibration pullback theorem; stability of trivial fibrations assumes the pulled-back arrow is a trivial fibration. There is no Joyal categorical-equivalence theorem here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback along a right fibration preserves categorical equivalences of arbitrary simplicial sets",
+   "results": "{\"t\": \"2026-10-17T18:19:14Z\", \"tool\": \"leansearch\", \"query\": \"Pullback along a right fibration preserves categorical equivalences of arbitrary simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"SSet.instFinitePullback\", \"CategoryTheory.MorphismProperty.rlp_isStableUnderBaseChange\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"CategoryTheory.Over.pullbackIsRightAdjoint\", \"CategoryTheory.Sieve.pullback.hcongr_6\"], \"digest\": \"31465599143df610\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned signatures concern ordinary-category fibers, finite simplicial pullbacks, inner-horn fillers, or the Kan-Quillen model structure. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:139-145, Quasicategory/InnerFibration.lean:29-98 and ModelCategory/Instances.lean:110-150. The exponential inner-fibration corner is not a right-fibration pullback theorem; stability of trivial fibrations assumes the pulled-back arrow is a trivial fibration. There is no Joyal categorical-equivalence theorem here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T18:19:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.innerFibration_pullbackObjObjπ\"], \"digest\": \"a84988be7f018462\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned signatures concern ordinary-category fibers, finite simplicial pullbacks, inner-horn fillers, or the Kan-Quillen model structure. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:139-145, Quasicategory/InnerFibration.lean:29-98 and ModelCategory/Instances.lean:110-150. The exponential inner-fibration corner is not a right-fibration pullback theorem; stability of trivial fibrations assumes the pulled-back arrow is a trivial fibration. There is no Joyal categorical-equivalence theorem here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right fibrations preserve weak categorical equivalences under base change in the Joyal model structure",
+   "results": "{\"t\": \"2026-10-17T18:19:15Z\", \"tool\": \"leanfinder\", \"query\": \"Right fibrations preserve weak categorical equivalences under base change in the Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"b7a45d9a0fa7b208\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned signatures concern ordinary-category fibers, finite simplicial pullbacks, inner-horn fillers, or the Kan-Quillen model structure. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:139-145, Quasicategory/InnerFibration.lean:29-98 and ModelCategory/Instances.lean:110-150. The exponential inner-fibration corner is not a right-fibration pullback theorem; stability of trivial fibrations assumes the pulled-back arrow is a trivial fibration. There is no Joyal categorical-equivalence theorem here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a categorical equivalence of simplicial sets along a right fibration is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T18:19:17Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of a categorical equivalence of simplicial sets along a right fibration is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"SSet.instFinitePullback\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\"], \"digest\": \"65d9a35142c07de2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned signatures concern ordinary-category fibers, finite simplicial pullbacks, inner-horn fillers, or the Kan-Quillen model structure. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:139-145, Quasicategory/InnerFibration.lean:29-98 and ModelCategory/Instances.lean:110-150. The exponential inner-fibration corner is not a right-fibration pullback theorem; stability of trivial fibrations assumes the pulled-back arrow is a trivial fibration. There is no Joyal categorical-equivalence theorem here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-inner-anodyne-slice-categorical-equivalence",
@@ -75,5 +187,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-right-fibration-categorical-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement. Added only the local inner-horn inverse-image lemma, and proved the arbitrary-base result by countable horn attachment, functorial quasicategory completion, opposite left-fibration equivalence lifting and the existing isofibration pullback-equivalence theorem. The general marked/cartesian/cocartesian base-change nodes cannot be cited because their dependency closures reach this item. No Lean attachment or Mathlib match was found.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the pointwise indexing-shape and slice comparison in the finite-coefficient mapping-complex adjunction. The single-horn lemma supplies the local completion step; Steps 1-5 prove invariance for the original arbitrary simplicial indexing shapes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Generic prescribed-target equivalence lifting for a left fibration, dualized to show the completed-base right fibration is an isofibration. No same-unit node supplies this independent lifting fact; the broader base-change nodes create a cycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-left-fibration-equivalence-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-5a4bc0924",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-5a4bc0924 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the full statements of all 7 cited nodes plus the isofibration definition, the citer, the unit, and Kerodon 029H and 02RK online (no local archive exists; WANTED is correct). Item: statement unchanged; it is the opposite of 029H restricted to right fibrations with C a quasicategory and arbitrary A,B, and it is exactly what inner-anodyne-slice-categorical-equivalence uses. Step 1: pullback along E->C commutes with the attaching pushouts and the countable colimit; Z_a->Delta^n is a right fibration; the new node plus monicity gives Joyal trivial cofibrations, which are closed under the cell operations by the lifting description of the weak factorization system. Step 2: the extension of b uses the completion lemma's lifting against the empty-to-Delta^0 inclusion; v j_A=j_B u, two-out-of-three, then clause (2). Step 3: Ehat is a quasicategory; the orientation of the prescribed-target clause under op is correct and gives lifts with prescribed source, which is the isofibration definition. Step 4: the isofibration pullback theorem applies, and the reassociation RA x_RB Ehat = RA x_C E is correct. Step 5: the square commutes because bhat v j_A=bu; two-out-of-three; elementary. Edge cases checked: empty E or A, non-injective u, non-quasicategory A and B. New node: it is the single-inner-horn case of 02RK (right fibrations are cartesian), tested on Lambda^2_1 with p=id, a vertex over 0 and empty Z; it is strictly smaller than the item and is a statement-only node with real searches. Duplicates: my own BFS confirms that cocartesian-categorical-base-change and cartesian-base-equivalence-invariance both reach the item, so citing them would make a cycle; left-fibration-right-anodyne-base-change only gives left anodyne. No cited node reaches the item. I accept the tool use lem-cbc-left-fibration-equivalence-lift. No changes made."
  }
 }
